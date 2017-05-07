@@ -1,0 +1,188 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * An example class
+ *
+ * The class is empty for the sake of this example.
+ *
+ * @package    Report
+ * @subpackage Controller
+ * @author     Lenin Luque <xleninx@gmail.com>
+*/
+class Report extends CI_Controller {
+
+/**
+ * [login description]
+ * @param  [type] $urlCountry
+ * @return [type]
+ */
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function index()
+	{
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('transfer_model', 'tran');
+		//INSTANCIA PARA TITULO DE PAGINA
+		$titlePage = 'Conexión Personas Online';
+		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
+		$styleSheets = array(
+			array('url' => 'base.css', 'media' => 'screen'),
+			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
+			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
+		);
+		//INSTANCIA GENERAR  HEADER
+		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array('pagina' => 'reportes'), true);
+		//INSTANCIA GENERAR  FOOTER
+		$menuFooter = $this->parser->parse('widgets/widget-menuFooter', array(), true);
+		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
+		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
+		//INSTANACIA DEL CONTENIDO PARA EL FOOTER
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js', 'jquery.ui.datepicker.validation.min.js');
+		//INSTANCIA DEL FOOTER
+		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
+		//INSTANCIA DE PARTE DE CUERPO
+		$content = $this->parser->parse('report/report-content', array('data' => serialize(json_decode($this->tran->ctasOrigen_load('RGR')))), true);
+		//INSTANCIA DE SIDERBAR
+		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
+
+		//DATA QUE SE PASA AL LAYOUT EN GENERAL
+		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
+		$data = array('header' => $header, 'content' => $content, 'footer' => $footer, 'sidebar' => $sidebarlogin);
+
+		$this->parser->parse('layouts/layout-b', $data);
+	}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function report_error()
+	{
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('transfer_model', 'tran');
+		//INSTANCIA PARA TITULO DE PAGINA
+		$titlePage = 'Conexión Personas Online';
+		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
+		$styleSheets = array(
+			array('url' => 'base.css', 'media' => 'screen'),
+			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
+			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
+		);
+		//INSTANCIA GENERAR  HEADER
+		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array('pagina' => 'reportes'), true);
+		//INSTANCIA GENERAR  FOOTER
+		$menuFooter = $this->parser->parse('widgets/widget-menuFooter', array(), true);
+		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
+		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
+		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js');
+		//INSTANCIA DEL FOOTER
+		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
+		//INSTANCIA DE PARTE DE CUERPO
+		$content = $this->parser->parse('report/report-content-error', array(), true);
+		//INSTANCIA DE SIDERBAR
+		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
+
+		//DATA QUE SE PASA AL LAYOUT EN GENERAL
+		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
+		$data = array('header' => $header, 'content' => $content, 'footer' => $footer, 'sidebar' => $sidebarlogin);
+
+		$this->parser->parse('layouts/layout-b', $data);
+	}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function CallWsGastos()
+	{
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('report_model', 'detail');
+		$tarjeta = $this->input->post('tarjeta');
+		$tipoConsulta = $this->input->post('tipo');
+		$producto = $this->input->post('producto');
+		$fechaIni = $this->input->post('fechaIni');
+		$fechaFin = $this->input->post('fechaFin');
+		$idpersona = $this->input->post('idpersona');
+
+		$this->output->set_content_type('application/json')->set_output($this->detail->gastos_model($tarjeta, $idpersona, $producto, $tipoConsulta, $fechaIni, $fechaFin));
+
+	}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function CallWsExpXLS()
+	{
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('report_model', 'detail');
+
+		$tarjeta = $this->input->post('tarjeta');
+		$producto = $this->input->post('producto');
+		$idpersona = $this->input->post('idpersona');
+		$tipoConsulta = $this->input->post('tipoConsulta');
+		$idExtEmp = $this->input->post('id_ext_emp');		
+		$fechaIni = $this->input->post('fechaIni');
+		$fechaFin = $this->input->post('fechaFin');
+		$response = $this->detail->exp_xls($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
+		$response = json_decode($response);
+
+		np_hoplite_byteArrayToFile($response->archivo, 'xls', 'Reporte');
+
+	}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function CallWsExpPDF()
+	{
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('report_model','detail');
+
+		$tarjeta = $this->input->post('tarjeta');
+		$producto = $this->input->post('producto');
+		$idpersona = $this->input->post('idpersona');
+		$tipoConsulta = $this->input->post('tipoConsulta');
+		$idExtEmp = $this->input->post('id_ext_emp');
+		$fechaIni = $this->input->post('fechaIni');
+		$fechaFin = $this->input->post('fechaFin');
+
+		$response = $this->detail->exp_pdf($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
+		$response = json_decode($response);
+
+		np_hoplite_byteArrayToFile($response->archivo, 'pdf', 'Reporte');
+
+	}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+} //FIN

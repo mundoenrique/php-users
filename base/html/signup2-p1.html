@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Conexión Personas Online</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="author" content="** Must be NovoPayment, Inc. Google+ link **" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="googlebot" content="none" />
+		<link href="../css/base.css" rel="stylesheet" />
+		<script src="../js/html5.js"></script>
+	</head>
+	<body>
+		<header id="head">
+			<div id="head-wrapper">
+				<a href="index.html" id="brand-id" rel="start">Tebca / Servitebca</a>
+				<div id="brand-app">Conexión Personas Online</div>
+			</div>
+		</header>
+		<div id="wrapper">
+			<div id="content">
+				<article>
+					<header>
+						<h1>Registro</h1>
+					</header>
+					<section>
+						<div id="progress">
+							<ul class="steps">
+								<li class="step-item completed-step-item"><span aria-hidden="true" class="icon-card"></span> Verificación de Cuenta</li>
+								<li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de Datos</li>
+								<li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
+							</ul>
+						</div>
+						<div id="content-holder">
+							<h2>Afiliación de Datos</h2>
+							<p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a continuación:</p>
+							<form accept-charset="utf-8" action="signup3.html" method="post">
+								<fieldset class="fieldset-column-left">
+									<label for="first-name">Nombre(s)</label>
+									<input class="field-large" id="first-name" name="first-name" type="text" />
+									<label for="last-name">Apellido(s)</label>
+									<input class="field-large" id="last-name" name="last-name" type="text" />
+									<ul class="field-group">
+										<li class="field-group-item">
+											<label>Sexo</label>
+											<label class="label-inline" for="gender-male"><input checked id="gender-male" name="gender" type="radio" value="M" /> Masculino</label>
+											<label class="label-inline" for="gender-female"><input id="gender-female" name="gender" type="radio" value="F" /> Femenino</label>
+										</li>
+										<li class="field-group-item">
+											<label for="birth-date">Fecha de Nacimiento</label>
+											<div class="field-prepend">
+												<span aria-hidden="true" class="icon-calendar"></span>
+												<input class="field-small" id="birth-date" name="birth-date" type="text" />
+											</div>
+										</li>
+									</ul>
+									<label for="email">Correo Electrónico</label>
+									<input class="field-large" id="email" name="email" placeholder="usuario@ejemplo.com" type="text" />
+									<label for="phone-1x">Teléfonos</label>
+									<div id="phone-1x">
+										<div class="field-category field-category-wide">
+											Habitación <span aria-hidden="true" class="icon-sort"></span>
+											<input id="phone-type-1x" name="phone-type-1x" type="hidden" value="home" />
+										</div>
+										<input class="field-medium" id="phone-number-1x" name="phone-number-1x" type="text" />
+									</div>
+									<div id="phone-2x">
+										<div class="field-category field-category-wide">
+											Móvil <span aria-hidden="true" class="icon-sort"></span>
+											<input id="phone-type-2x" name="phone-type-2x" type="hidden" value="mobile" />
+										</div>
+										<input class="field-medium" id="phone-number-2x" name="phone-number-2x" type="text" />
+									</div>
+									<div id="phone-3x">
+										<div class="field-category field-category-wide">
+											Fax <span aria-hidden="true" class="icon-sort"></span>
+											<input id="phone-type-3x" name="phone-type-3x" type="hidden" value="fax" />
+										</div>
+										<input class="field-medium" id="phone-number-3x" name="phone-number-3x" type="text" />
+									</div>
+									<div id="phone-4x">
+										<div class="field-category field-category-wide">
+											Oficina <span aria-hidden="true" class="icon-sort"></span>
+											<input id="phone-type-4x" name="phone-type-4x" type="hidden" value="office" />
+										</div>
+										<input class="field-medium" id="phone-number-4x" name="phone-number-4x" type="text" />
+									</div>
+									<ul class="field-category-actions">
+										<li class="disabled-group-action-item"><a href="#">+ Agregar teléfono</a></li>
+										<li><a href="signup2-p1.html">Remover</a></li>
+									</ul>
+								</fieldset>
+								<fieldset class="fieldset-column-right">
+									<label for="username">Usuario</label>
+									<input class="field-medium" id="username" name="username" type="text" />
+									<label for="userpwd">Contraseña</label>
+									<input class="field-medium" id="userpwd" name="userpwd" type="password" />
+									<div class="field-meter" id="password-strength-meter">
+										Espacio reservado para medidor de fortaleza de contraseña.
+										<p><strong>Recomendación:</strong> Combine números y letras para establecer una contraseña segura.</p>
+									</div>
+									<label for="confirm-userpwd">Confirmar Contraseña</label>
+									<input class="field-medium" id="confirm-userpwd" name="confirm-userpwd" type="password" />
+									<label>Notificaciones</label>
+									<label class="label-inline" for="notification-sms"><input checked id="notification-sms" name="notification-sms" type="checkbox" value="yes" /> Recibir por SMS</label>
+									<label class="label-inline" for="notification-email"><input checked id="notification-email" name="notification-email" type="checkbox" value="yes" /> Recibir por Correo Electrónico</label>
+								</fieldset>
+								<div class="form-actions">
+									<button type="reset">Cancelar</button>
+									<button type="submit">Continuar</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+		<footer id="foot">
+			<div id="foot-wrapper">
+				<div class="foot-wrapper-top">
+					<nav id="foot-menu">
+						<ul class="menu">
+							<li class="menu-item signin">
+								<a href="index.html" rel="start">Ingreso</a>
+							</li>
+							<li class="menu-item current-menu-item signup">
+								<a href="signup.html" rel="section">Registro</a>
+							</li>
+							<li class="menu-item mobile">
+								<a href="mobile.html" rel="section">Móvil</a>
+							</li>
+							<li class="menu-item support">
+								<a href="support.html" rel="section">Soporte</a>
+							</li>
+							<li class="menu-item terms">
+								<a href="terms.html" rel="section">Condiciones</a>
+							</li>
+							<li class="menu-item privacy">
+								<a href="privacy.html" rel="section">Privacidad</a>
+							</li>
+						</ul>
+					</nav>
+					<p id="app-engine">Powered by <a href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a></p>
+				</div>
+				<div class="foot-wrapper-bottom">
+					<ul id="networks">
+						<li class="network-item maestro">Maestro</li>
+						<li class="network-item mastercard">MasterCard</li>
+						<li class="network-item visa">Visa</li>
+						<li class="network-item visa-electron">Visa Electron</li>
+					</ul>
+					<ul id="certificates">
+						<li class="certificate-item norton-secured">Norton Secured</li>
+						<li class="certificate-item iso-9001">Fondonorma ISO 9001</li>
+						<li class="certificate-item pci">PCI Security Standards Council</li>
+					</ul>
+					<p id="app-copyright">© 2004-2013 Tebca / Servitebca. Conexión Personas Online v1.0.2 (build 45). Todos los derechos reservados.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

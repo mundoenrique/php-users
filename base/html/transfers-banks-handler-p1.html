@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Conexión Personas Online</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="author" content="** Must be NovoPayment, Inc. Google+ link **" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="googlebot" content="none" />
+		<link href="../css/base.css" rel="stylesheet" />
+		<script src="../js/html5.js"></script>
+	</head>
+	<body>
+		<header id="head">
+			<div id="head-wrapper">
+				<a href="index.html" id="brand-id" rel="start">Tebca / Servitebca</a>
+				<div id="brand-app">Conexión Personas Online</div>
+				<nav id="main-menu">
+					<ul class="menu">
+						<li class="menu-item products">
+							<a href="dashboard.html" rel="section">Vista Consolidada</a>
+						</li>
+						<li class="menu-item current-menu-item transfers">
+							<a href="transfers.html" rel="section">Transferencias <span aria-hidden="true" class="icon-chevron-down"></span></a>
+							<ul class="sub-menu">
+								<li class="sub-menu-item transfers-p2p">
+									<a href="transfers-p2p-add.html" rel="subsection">Plata a Plata</a>
+								</li>
+								<li class="sub-menu-item transfers-bank">
+									<a href="transfers-banks-add.html" rel="subsection">Cuentas Bancarias</a>
+								</li>
+							</ul>
+						</li>
+						<li class="menu-item payments">
+							<a href="payments.html" rel="section">Pagos</a>
+						</li>
+						<li class="menu-item reports">
+							<a href="reports.html" rel="section">Reportes</a>
+						</li>
+						<li class="menu-item account">
+							<a href="account-profile.html" rel="section">Miguel Palazzo <span aria-hidden="true" class="icon-chevron-down"></span></a>
+							<ul class="sub-menu">
+								<li class="sub-menu-item account-profile">
+									<a href="account-profile.html" rel="subsection">Perfil</a>
+								</li>
+								<li class="sub-menu-item account-settings">
+									<a href="account-settings.html" rel="subsection">Configuración</a>
+								</li>
+								<li class="sub-menu-item account-signout">
+									<a href="signout.html" rel="subsection">Cerrar Sesión</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div id="wrapper">
+			<nav id="tabs-menu">
+				<ul class="menu">
+					<li class="menu-item">
+						<a href="transfers-p2p-add.html" rel="section"><span aria-hidden="true" class="icon-card"></span> Plata a Plata</a>
+					</li>
+					<li class="menu-item current-menu-item">
+						<a href="transfers-banks-add.html" rel="section"><span aria-hidden="true" class="icon-bank"></span> Cuentas Bancarias</a>
+					</li>
+				</ul>
+			</nav>
+			<div id="content">
+				<article>
+					<header>
+						<h1>Transferencias a Cuentas Bancarias</h1>
+					</header>
+					<section>
+						<nav id="secondary-menu">
+							<ul class="menu">
+								<li class="menu-item add">
+									<a href="transfers-banks-add.html" rel="section">Afiliar</a>
+								</li>
+								<li class="menu-item current-menu-item handler">
+									<a href="transfers-banks-handler.html" rel="section">Administrar Afiliaciones</a>
+								</li>
+								<li class="menu-item manage">
+									<a href="transfers-banks-manage.html" rel="section">Transferir</a>
+								</li>
+								<li class="menu-item log">
+									<a href="transfers-banks-log.html" rel="section">Historial</a>
+								</li>
+							</ul>
+						</nav>
+						<form accept-charset="utf-8" action="transfers-banks-handler-p2.html" method="post">
+							<fieldset>
+								<div class="group" id="donor">
+									<div class="product-presentation">
+										<a class="button product-button" href="transfers-banks-handler-p1.html"><span aria-hidden="true" class="icon-find"></span></a>
+										<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="" />
+									</div>
+									<div class="product-info-full">
+										<p class="field-tip">Seleccione una cuenta propia para visualizar las afiliaciones asociadas.</p>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<h2>Administrar Afiliaciones</h2>
+						<nav id="filters-stack">
+							<ul class="stack disabled-stack">
+								<li class="stack-item">
+									<a href="#all" rel="subsection">Todas <span class="badge">0</span></a>
+								</li>
+								<li class="stack-item">
+									<a href="#personal" rel="subsection">Propias <span class="badge">0</span></a>
+								</li>
+								<li class="stack-item">
+									<a href="#others" rel="subsection">De Terceros <span class="badge">0</span></a>
+								</li>
+							</ul>
+							<ul class="stack stack-extra disabled-stack">
+								<li class="stack-item">
+									<a href="#search" rel="subsection" title="Buscar"><span aria-hidden="true" class="icon-find"></span></a>
+								</li>
+							</ul>
+						</nav>
+						<div id="empty-state">
+							<h2>Sin afiliaciones a mostrar</h2>
+							<p>Debe seleccionar una cuenta propia para visualizar las afiliaciones asociadas.</p>
+							<span aria-hidden="true" class="icon-bank"></span>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+		<footer id="foot">
+			<div id="foot-wrapper">
+				<div class="foot-wrapper-top">
+					<nav id="foot-menu">
+						<ul class="menu">
+							<li class="menu-item mobile">
+								<a href="mobile.html" rel="section">Móvil</a>
+							</li>
+							<li class="menu-item support">
+								<a href="support.html" rel="section">Soporte</a>
+							</li>
+							<li class="menu-item terms">
+								<a href="terms.html" rel="section">Condiciones</a>
+							</li>
+							<li class="menu-item privacy">
+								<a href="privacy.html" rel="section">Privacidad</a>
+							</li>
+						</ul>
+					</nav>
+					<p id="app-engine">Powered by <a href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a></p>
+				</div>
+				<div class="foot-wrapper-bottom">
+					<ul id="networks">
+						<li class="network-item maestro">Maestro</li>
+						<li class="network-item mastercard">MasterCard</li>
+						<li class="network-item visa">Visa</li>
+						<li class="network-item visa-electron">Visa Electron</li>
+					</ul>
+					<ul id="certificates">
+						<li class="certificate-item norton-secured">Norton Secured</li>
+						<li class="certificate-item iso-9001">Fondonorma ISO 9001</li>
+						<li class="certificate-item pci">PCI Security Standards Council</li>
+					</ul>
+					<p id="app-copyright">© 2004-2013 Tebca / Servitebca. Conexión Personas Online v1.0.2 (build 45). Todos los derechos reservados.</p>
+				</div>
+			</div>
+		</footer>
+		<div id="dialog-overlay">
+			<div id="dialog">
+				<a class="dialog-action-close" href="#close">
+					<span aria-hidden="true" class="icon-cancel"></span>
+				</a>
+				<h2>Selección de Cuenta de Origen</h2>
+				<nav id="filters-stack">
+					<ul class="stack stack-extra">
+						<li class="stack-item">
+							<a href="#search" rel="subsection" title="Buscar"><span aria-hidden="true" class="icon-find"></span></a>
+						</li>
+					</ul>
+				</nav>
+				<ul id="dashboard">
+					<li class="dashboard-item">
+						<a href="transfers-banks-handler-p2.html" rel="section">
+							<img src="img/products/plata.png" width="200" height="130" alt="" />
+							<div class="dashboard-item-network mastercard">MasterCard</div>
+							<div class="dashboard-item-info">
+								<p class="dashboard-item-cardholder">Miguel Palazzo</p>
+								<p class="dashboard-item-balance">Bs. 500,00</p>
+								<p class="dashboard-item-cardnumber">0000 15** **** 2233</p>
+								<p class="dashboard-item-category">Incentivos</p>
+							</div>
+						</a>
+					</li>
+					<li class="dashboard-item current-dashboard-item">
+						<a href="transfers-banks-handler-p2.html" rel="section">
+							<img src="img/products/plata-compras.png" width="200" height="130" alt="" />
+							<div class="dashboard-item-network mastercard">MasterCard</div>
+							<div class="dashboard-item-info">
+								<p class="dashboard-item-cardholder">Miguel Palazzo</p>
+								<p class="dashboard-item-balance">US$ 2,000.00</p>
+								<p class="dashboard-item-cardnumber">4011 15** **** 1190</p>
+								<p class="dashboard-item-category">Compras</p>
+							</div>
+						</a>
+					</li>
+					<li class="dashboard-item disabled-dashboard-item">
+						<a href="transfers-banks-handler-p2.html" rel="section">
+							<img src="img/products/plata-compras.png" width="200" height="130" alt="" />
+							<div class="dashboard-item-network mastercard">MasterCard</div>
+							<div class="dashboard-item-info">
+								<p class="dashboard-item-cardholder">Miguel Palazzo</p>
+								<p class="dashboard-item-balance">US$ 2,000.00</p>
+								<p class="dashboard-item-cardnumber">4011 15** **** 1190</p>
+								<p class="dashboard-item-category">Compras</p>
+							</div>
+						</a>
+					</li>
+					<li class="dashboard-item">
+						<a href="transfers-banks-handler-p2.html" rel="section">
+							<img src="img/products/plata-clasica.png" width="200" height="130" alt="" />
+							<div class="dashboard-item-network visa">Visa</div>
+							<div class="dashboard-item-info">
+								<p class="dashboard-item-cardholder">Miguel Palazzo</p>
+								<p class="dashboard-item-balance">S/. 50,000.00</p>
+								<p class="dashboard-item-cardnumber">4010 15** **** 0777</p>
+								<p class="dashboard-item-category">Todo Uso</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

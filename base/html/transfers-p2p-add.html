@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Conexión Personas Online</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="author" content="** Must be NovoPayment, Inc. Google+ link **" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="googlebot" content="none" />
+		<link href="../css/base.css" rel="stylesheet" />
+		<script src="../js/html5.js"></script>
+	</head>
+	<body>
+		<header id="head">
+			<div id="head-wrapper">
+				<a href="index.html" id="brand-id" rel="start">Tebca / Servitebca</a>
+				<div id="brand-app">Conexión Personas Online</div>
+				<nav id="main-menu">
+					<ul class="menu">
+						<li class="menu-item products">
+							<a href="dashboard.html" rel="section">Vista Consolidada</a>
+						</li>
+						<li class="menu-item current-menu-item transfers">
+							<a href="transfers.html" rel="section">Transferencias <span aria-hidden="true" class="icon-chevron-down"></span></a>
+							<ul class="sub-menu">
+								<li class="sub-menu-item transfers-p2p">
+									<a href="transfers-p2p-add.html" rel="subsection">Plata a Plata</a>
+								</li>
+								<li class="sub-menu-item transfers-bank">
+									<a href="transfers-banks-add.html" rel="subsection">Cuentas Bancarias</a>
+								</li>
+							</ul>
+						</li>
+						<li class="menu-item payments">
+							<a href="payments.html" rel="section">Pagos</a>
+						</li>
+						<li class="menu-item reports">
+							<a href="reports.html" rel="section">Reportes</a>
+						</li>
+						<li class="menu-item account">
+							<a href="account-profile.html" rel="section">Miguel Palazzo <span aria-hidden="true" class="icon-chevron-down"></span></a>
+							<ul class="sub-menu">
+								<li class="sub-menu-item account-profile">
+									<a href="account-profile.html" rel="subsection">Perfil</a>
+								</li>
+								<li class="sub-menu-item account-settings">
+									<a href="account-settings.html" rel="subsection">Configuración</a>
+								</li>
+								<li class="sub-menu-item account-signout">
+									<a href="signout.html" rel="subsection">Cerrar Sesión</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div id="wrapper">
+			<nav id="tabs-menu">
+				<ul class="menu">
+					<li class="menu-item current-menu-item">
+						<a href="transfers-p2p-add.html" rel="section"><span aria-hidden="true" class="icon-card"></span> Plata a Plata</a>
+					</li>
+					<li class="menu-item">
+						<a href="transfers-banks-add.html" rel="section"><span aria-hidden="true" class="icon-bank"></span> Cuentas Bancarias</a>
+					</li>
+				</ul>
+			</nav>
+			<div id="content">
+				<article>
+					<header>
+						<h1>Transferencias Plata a Plata</h1>
+					</header>
+					<section>
+						<nav id="secondary-menu">
+							<ul class="menu">
+								<li class="menu-item current-menu-item add">
+									<a href="transfers-p2p-add.html" rel="section">Afiliar</a>
+								</li>
+								<li class="menu-item handler">
+									<a href="transfers-p2p-handler.html" rel="section">Administrar Afiliaciones</a>
+								</li>
+								<li class="menu-item manage">
+									<a href="transfers-p2p-manage.html" rel="section">Transferir</a>
+								</li>
+								<li class="menu-item log">
+									<a href="transfers-p2p-log.html" rel="section">Historial</a>
+								</li>
+							</ul>
+						</nav>
+						<div id="progress">
+							<ul class="steps">
+								<li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Registro de Cuenta</li>
+								<li class="step-item"><span aria-hidden="true" class="icon-view"></span> Confirmación</li>
+								<li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
+							</ul>
+						</div>
+						<div id="content-holder">
+							<h2>Registro de Cuenta</h2>
+							<p>Ingrese los datos requeridos a continuación para afiliar una cuenta Plata a la cual desee transferir fondos en determinado momento.</p>
+							<form accept-charset="utf-8" action="transfers-p2p-add2.html" method="post">
+								<fieldset>
+									<label for="donor">Cuenta de Origen</label>
+									<div class="group" id="donor">
+										<div class="product-presentation">
+											<img src="img/products/plata.png" width="200" height="130" alt="" />
+											<div class="product-network visa-electron">Visa Electron</div>
+											<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="1045150000001976" />
+										</div>
+										<div class="product-info-full">
+											<p class="product-cardholder">Miguel Palazzo</p>
+											<p class="product-cardnumber">1045 15** **** 1976</p>
+											<p class="product-metadata">Visa Electron / Viáticos</p>
+											<nav class="product-stack">
+												<ul class="stack">
+													<li class="stack-item">
+														<a href="#" rel="section" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>
+													</li>
+												</ul>
+											</nav>
+										</div>
+									</div>
+									<ul class="field-group">
+										<li class="field-group-item">
+											<label for="card-number">N° de Cuenta Destino</label>
+											<input class="field-medium" id="card-number" name="card-number" type="text" />
+										</li>
+										<li class="field-group-item">
+											<label for="card-holder">Beneficiario</label>
+											<input class="field-large" id="card-holder" name="card-holder" type="text" />
+										</li>
+										<li class="field-group-item">
+											<label for="bank-account-holder-id">Documento de Identidad</label>
+											<input class="field-medium" id="bank-account-holder-id" name="bank-account-holder-id" type="text" />
+										</li>
+									</ul>
+									<ul class="field-group">
+										<li class="field-group-item">
+											<label for="card-holder-email">Correo Electrónico</label>
+											<input class="field-large" id="card-holder-email" name="card-holder-email" type="text" />
+										</li>
+									</ul>
+								</fieldset>
+								<div class="form-actions">
+									<button type="submit">Afiliar</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+		<footer id="foot">
+			<div id="foot-wrapper">
+				<div class="foot-wrapper-top">
+					<nav id="foot-menu">
+						<ul class="menu">
+							<li class="menu-item mobile">
+								<a href="mobile.html" rel="section">Móvil</a>
+							</li>
+							<li class="menu-item support">
+								<a href="support.html" rel="section">Soporte</a>
+							</li>
+							<li class="menu-item terms">
+								<a href="terms.html" rel="section">Condiciones</a>
+							</li>
+							<li class="menu-item privacy">
+								<a href="privacy.html" rel="section">Privacidad</a>
+							</li>
+						</ul>
+					</nav>
+					<p id="app-engine">Powered by <a href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a></p>
+				</div>
+				<div class="foot-wrapper-bottom">
+					<ul id="networks">
+						<li class="network-item maestro">Maestro</li>
+						<li class="network-item mastercard">MasterCard</li>
+						<li class="network-item visa">Visa</li>
+						<li class="network-item visa-electron">Visa Electron</li>
+					</ul>
+					<ul id="certificates">
+						<li class="certificate-item norton-secured">Norton Secured</li>
+						<li class="certificate-item iso-9001">Fondonorma ISO 9001</li>
+						<li class="certificate-item pci">PCI Security Standards Council</li>
+					</ul>
+					<p id="app-copyright">© 2004-2013 Tebca / Servitebca. Conexión Personas Online v1.0.2 (build 45). Todos los derechos reservados.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

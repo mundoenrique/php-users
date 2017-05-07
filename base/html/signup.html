@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Conexión Personas Online</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="author" content="** Must be NovoPayment, Inc. Google+ link **" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="googlebot" content="none" />
+		<link href="../css/base.css" rel="stylesheet" />
+		<script src="../js/html5.js"></script>
+	</head>
+	<body>
+		<header id="head">
+			<div id="head-wrapper">
+				<a href="index.html" id="brand-id" rel="start">Tebca / Servitebca</a>
+				<div id="brand-app">Conexión Personas Online</div>
+			</div>
+		</header>
+		<div id="wrapper">
+			<div id="content">
+				<article>
+					<header>
+						<h1>Registro</h1>
+					</header>
+					<section>
+						<div id="progress">
+							<ul class="steps">
+								<li class="step-item current-step-item"><span aria-hidden="true" class="icon-card"></span> Verificación de Cuenta</li>
+								<li class="step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de Datos</li>
+								<li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
+							</ul>
+						</div>
+						<div id="content-holder">
+							<h2>Verificación de Cuenta</h2>
+							<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe proporcionar los siguientes datos relacionados con su cuenta:</p>
+							<form accept-charset="utf-8" action="signup2.html" method="post">
+								<fieldset>
+									<ul class="field-group">
+										<li class="field-group-item">
+											<label for="country">País</label>
+											<select id="iso" name="iso">
+												<option selected value=""></option>
+												<option value="colombia" value="co">Colombia</option>
+												<option value="mexico" value="mx">México</option>
+												<option value="peru" value="pe">Perú</option>
+												<option class="venezuela" value="ve">Venezuela</option>
+											</select>
+										</li>
+										<li class="field-group-item">
+											<label for="card-number">6 últimos digitos de tarjeta</label>
+											<input class="field-medium" id="card-number" name="card-number" type="text" />
+										</li>
+										<li class="field-group-item">
+											<label for="card-holder-id">Documento de Identidad <abbr title="Texto de ayuda sobre este campo"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+											<input class="field-medium" id="card-holder-id" name="card-holder-id" type="text" />
+										</li>
+										<li class="field-group-item">
+											<label for="card-holder-pin">PIN de seguridad <abbr title="Texto de ayuda sobre este campo"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+											<input class="field-medium" id="card-holder-pin" name="card-holder-pin" type="password" />
+										</li>
+									</ul>
+									<label class="label-inline" for="accept-terms"><input id="accept-terms" name="accept-terms" type="checkbox" value="yes" /> Acepto las <a href="signup-p1.html" rel="section">condiciones de uso</a> de este sistema</label>
+								</fieldset>
+								<div class="form-actions">
+									<button type="reset">Cancelar</button>
+									<button type="submit">Continuar</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</article>
+			</div>
+		</div>
+		<footer id="foot">
+			<div id="foot-wrapper">
+				<div class="foot-wrapper-top">
+					<nav id="foot-menu">
+						<ul class="menu">
+							<li class="menu-item signin">
+								<a href="index.html" rel="start">Ingreso</a>
+							</li>
+							<li class="menu-item current-menu-item signup">
+								<a href="signup.html" rel="section">Registro</a>
+							</li>
+							<li class="menu-item mobile">
+								<a href="mobile.html" rel="section">Móvil</a>
+							</li>
+							<li class="menu-item support">
+								<a href="support.html" rel="section">Soporte</a>
+							</li>
+							<li class="menu-item terms">
+								<a href="terms.html" rel="section">Condiciones</a>
+							</li>
+							<li class="menu-item privacy">
+								<a href="privacy.html" rel="section">Privacidad</a>
+							</li>
+						</ul>
+					</nav>
+					<p id="app-engine">Powered by <a href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a></p>
+				</div>
+				<div class="foot-wrapper-bottom">
+					<ul id="networks">
+						<li class="network-item maestro">Maestro</li>
+						<li class="network-item mastercard">MasterCard</li>
+						<li class="network-item visa">Visa</li>
+						<li class="network-item visa-electron">Visa Electron</li>
+					</ul>
+					<ul id="certificates">
+						<li class="certificate-item norton-secured">Norton Secured</li>
+						<li class="certificate-item iso-9001">Fondonorma ISO 9001</li>
+						<li class="certificate-item pci">PCI Security Standards Council</li>
+					</ul>
+					<p id="app-copyright">© 2004-2013 Tebca / Servitebca. Conexión Personas Online v1.0.2 (build 45). Todos los derechos reservados.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
