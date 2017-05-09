@@ -1174,8 +1174,8 @@ $(function(){
 				"lugar_nac" : "El campo Lugar de Nacimiento debe contener solo letras.",													//7
 
 				"dia-nacimiento" : {																														//8
-					"required"	: "El campo Dia NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Dia NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Día NO puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Día NO puede estar vacío y debe contener solo números.",
 					"mayorEdadAnio"	: "Usted no es mayor de edad.",
 					"range":"El Día debe estar comprendido entre 1 y 31."
 				},
@@ -1189,24 +1189,24 @@ $(function(){
 					"required"	: "El campo Año NO puede estar vacío y debe contener solo números.",
 					"number"	: "El campo Año NO puede estar vacío y debe contener solo números.",
 					"mayorEdadAnio"	: "Usted no es mayor de edad.",
-					"min" : "Por favor ingrese un Año de nacimiento válido"
+					"min" : "Por favor ingrese un Año de nacimiento válido."
 				},
 				"nacionalidad" : {
 					"lettersonly"	: "El campo Nacionalidad NO puede contener números.",
 					"required"		: "El campo Nacionalidad NO puede estar vacío."
 				},																													//13
-				"tipo_direccion" : "El campo Tipo Dirección NO puede estar vacío",																//14
+				"tipo_direccion" : "El campo Tipo Dirección NO puede estar vacío.",																//14
 				"codepostal" : "El campo Código Postal debe contener solo números.",															//15
-				"pais_Residencia" : "El campo Pais de Residencia NO puede estar vacío y debe contener solo letras.",							//16
+				"pais_Residencia" : "El campo País de Residencia NO puede estar vacío y debe contener solo letras.",							//16
 				"departamento_residencia" : "El campo Departamento NO puede estar vacío.",																	//17
 				"provincia_residencia" : "El campo Provincia NO puede estar vacío.",																		//18
 				"distrito_residencia" : "El campo Distrito NO puede estar vacío.",																			//19
 				"direccion" : "El campo Dirección NO puede estar vacío.",																		//20
-				"email" : "El correo electrónico NO puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com)",
+				"email" : "El correo electrónico NO puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com).",
 				"telefono_hab" : {																												//23
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
-					"minlength": "El campo Teléfono Fijo debe contener minimo 7 caracteres númericos.",
+					"minlength": "El campo Teléfono Fijo debe contener mínimo 7 caracteres numéricos.",
 					"maxlength" : "El campo Teléfono Fijo debe contener máximo 11 caracteres númericos."
 				},
 				"telefono" : {																											//24
@@ -1214,27 +1214,27 @@ $(function(){
 					"number"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
 					"numberEqual3"	: "Teléfono Móvil está repetido.",
 					"minlength"		: "El campo Teléfono Móvil debe contener minimo 7 caracteres númericos.",
-					"maxlength"		: "El campo Teléfono Móvil debe contener máximo 11 caracteres númericos."
+					"maxlength"		: "El campo Teléfono Móvil debe contener máximo 11 caracteres numéricos."
 				},
 
 				"otro_telefono_num"	: {                                                                                                         //26
 					"number"		: "El campo Otro Teléfono debe contener solo números.",
 					"numberEqual1"	: "El campo Otro Teléfono está repetido.",
-					"minlength"		: "El campo Otro Teléfono  debe contener minimo 7 caracteres númericos.",
-					"maxlength"		: "El campo Otro Teléfono  debe contener máximo 11 caracteres númericos."
+					"minlength"		: "El campo Otro Teléfono  debe contener mínimo 7 caracteres numéricos.",
+					"maxlength"		: "El campo Otro Teléfono  debe contener máximo 11 caracteres numéricos."
 				},
 				"ruc_laboral" : "El campo Teléfono Móvil NO puede estar vacío.",																//27
 				"centro_laboral" : "El campo Centro Laboral NO puede estar vacío y NO puede contener caracteres especiales.",																//28
 
-				"profesion_labora" : "El campo Ocupación Laboral NO puede estar vacío y debe contener solo letras",
-				"profesion" : "Debe seleccionar una profesion.",							//31
+				"profesion_labora" : "El campo Ocupación Laboral NO puede estar vacío y debe contener solo letras.",
+				"profesion" : "Debe seleccionar una profesión.",							//31
 				"cargo" : "El campo Cargo no admite caracteres especiales.",															//32
-				"ingreso_promedio" : "El campo Ingreso promedio mensual debe contener solo numeros.",																												//33
+				"ingreso_promedio" : "El campo Ingreso promedio mensual debe contener solo números.",																												//33
 				"desem_publico" : "El campo ¿Desempeñó cargo público en últimos 2 años? NO puede estar vacío",									//34
-				"cargo_publico" : "El campo Cargo Público NO puede estar vacío y debe contener solo letras",									//35
-				"institucion_publica" : "El campo Institución publica NO puede estar vacío",																	//36
-				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Peru, conforme al artículo 3° de la Ley N° 29038? NO puede estar vacío",	//37
-				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico"
+				"cargo_publico" : "El campo Cargo Público NO puede estar vacío y debe contener solo letras.",									//35
+				"institucion_publica" : "El campo Institución pública NO puede estar vacío.",																	//36
+				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? NO puede estar vacío.",	//37
+				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico."
 			}
 		}); // VALIDATE
 	}

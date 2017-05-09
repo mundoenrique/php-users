@@ -194,13 +194,13 @@ if($skin == 'latodo'){
 								</select>
 							</li>
 							<li>
-								<label>Codigo postal</label>
+								<label>Código postal</label>
 								<input type="text" name="codigo_postal" id="codigoPostal" maxlength="8">
 							</li>
 						</ul>
 						<ul class="four-segments inline-list four-select remove-plata-sueldo">
 							<li class="li-contact-select">
-								<label>Pais de residencia</label>
+								<label>País de residencia</label>
 								<input  id="paisResidencia" name="pais_Residencia" type="text" readonly="readonly" class="field-disabled"/>
 								<input  id="paisResidenciaHidden" name="pais_Residencia_Hidden" type="hidden" class="field-disabled"/>
 							</li>
@@ -259,7 +259,7 @@ if($skin == 'latodo'){
 						</ul>
 						<ul class="inline-list two-segments">
 							<li>
-								<label class="phone-field phone-field-2">Otro telefono</label>
+								<label class="phone-field phone-field-2">Otro Teléfono (Tipo)</label>
 								<select class="otro-telefono-type" name="otro_tipo_telefono" id="otroTelefonoSelect" style="width:80%;">
 									<option value = "">Seleccione</option>
 									<option value = "OFC">Laboral</option>
@@ -268,7 +268,7 @@ if($skin == 'latodo'){
 								</select>
 							</li>
 							<li>
-								<label class="phone-field phone-field-2">Otro telefono</label>
+								<label class="phone-field phone-field-2">Otro Teléfono (Número)</label>
 								<input id="otroTelefonoNum" maxlength="11" name="otro_telefono_num" type="text" />
 							</li>
 						</ul>
@@ -337,7 +337,7 @@ if($skin == 'latodo'){
 								<input maxlength="15" id="institucion" name="institucion" type="text" />
 							</li>
 						</ul>
-						<label for="uif">¿Es sujeto obligado a informar  UIF-Peru, conforme al artículo 3° de la Ley N° 29038?</label>
+						<label for="uif">¿Es sujeto obligado a informar  UIF-Perú, conforme al artículo 3° de la Ley N° 29038?</label>
 
 						<ul class="inline-list four-segments">
 							<li class="field-group-item">
@@ -372,7 +372,7 @@ if($skin == 'latodo'){
 									<li id="number" class="pwd-rules-item rule-invalid">• Debe tener <strong>mínimo 1 y máximo 3 números consecutivos</strong></li>
 									<li id="length" class="pwd-rules-item rule-invalid">• Debe tener <strong>mínimo 8 y máximo 15 caracteres</strong></li>
 									<li id="consecutivo" class="pwd-rules-item rule-invalid">• No puede tener más de  <strong>3 caracteres</strong> iguales consecutivos</li>
-									<li id="especial" class="pwd-rules-item rule-invalid">• Tener al menos <strong>un caracter especial</strong><br />(ej: ! @ ? + - . , #)</li>
+									<li id="especial" class="pwd-rules-item rule-invalid">• Tener al menos <strong>un carácter especial</strong><br />(ej: ! @ ? + - . , #)</li>
 								</ul>
 							</div>
 						</div>
