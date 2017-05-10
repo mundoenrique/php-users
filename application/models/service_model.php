@@ -66,7 +66,7 @@ class Service_model extends CI_Model {
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
         // sleep(2);
-        // $response = '{"rc":-356,"msg":"Proceso OK"}';
+        // $response = '{"rc":-288,"msg":"Proceso OK"}';
         // $desdata = json_decode($response);
 
         if ($desdata) {
@@ -85,9 +85,26 @@ class Service_model extends CI_Model {
                         'msg' => 'Los campos introducidos son inválidos, verifique e intente nuevamente.'
                     ];
                     break;
-                case -130:
+                case -286:
+                    if($desdata->rc == -286) {
+                        $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                    }
+                case -287:
+                    if($desdata->rc == -287) {
+                        $msg = 'El código de seguridad introducido ya fue usado, verifique e intente nuevamente.';
+                    }
+                case -288:
+                    if($desdata->rc == -288) {
+                        $msg = 'El código de seguridad introducido ha expirado, solicítelo nuevamente.';
+                    }
+                case -301:
+                    if($desdata->rc == -301) {
+                        $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                    }
                 case -310:
-                    $msg = ($desdata->rc == -130) ? 'El código de seguridad introducido es inválido, verifique e intente nuevamente.' : 'La fecha de expiración introducida es inválida, verifique e intente de nuevo';
+                    if($desdata->rc == -310) {
+                        $msg = 'La fecha de expiración introducida es inválida, verifique e intente de nuevo.';
+                    }
                     $response = [
                         'code' => 1,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
