@@ -46,6 +46,7 @@ $(function(){
 
 	/*Ocultar o mostrar campos segun la condición aplica perfil N o S*/
 	function removeFieldperfil(){
+		console.log($('#content').attr('aplicaperfil'), $('#pais-residencia-value').val());
 		if($('#content').attr('aplicaperfil')=='N' || $('#pais-residencia-value').val() !='Pe'){
 			$('#contract').remove();
 			$('.dig-verificador').remove();

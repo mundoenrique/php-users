@@ -139,8 +139,6 @@ if(isset($data)){
 				$acZonaPostal=$datos->registro->afiliacion->cod_postal;
 				$acCodEstado=$datos->registro->afiliacion->departamento;
 				$acCodCiudad=$datos->registro->afiliacion->provincia;
-				$acProteccion=$datos->registro->afiliacion->acepta_proteccion;
-				$acContrato=$datos->registro->afiliacion->acepta_contrato;
 			}
 			else if($aplicaPerfil=='N' && $numDir > 0){
 				$acDir= $datos->direccion->acDir;
@@ -241,6 +239,8 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 			$nacionalidad=$datos->registro->afiliacion->nacionalidad;
 			$distrito=$datos->registro->afiliacion->distrito;
 			$notarjeta=$datos->registro->afiliacion->notarjeta;
+			$acProteccion=$datos->registro->afiliacion->acepta_proteccion;
+			$acContrato=$datos->registro->afiliacion->acepta_contrato;
 
 }else{
 			$estadocivil="";
@@ -264,6 +264,8 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 			$distrito="";
 			$departamento="";
 			$notarjeta="";
+			$acProteccion="";
+			$acContrato="";
 }
 			$tipo_id_ext_per=$datos->registro->user->tipo_id_ext_per;
 			$pais_residencia=$this->session->userdata('pais');
@@ -626,7 +628,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 									<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar" type="reset">Cancelar</button></a>
 									<button id="actualizar">Continuar</button>
 							</div>
-						</form>
+							</form>
 						</div>
 					</section>
 				</article>

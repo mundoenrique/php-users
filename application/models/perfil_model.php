@@ -257,6 +257,10 @@ class Perfil_model extends CI_Model {
 
         log_message("info", "RESPONSE DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".json_encode($desdata));
 
+        if($desdata->rc == 0 && $aplicaPerfil=='S') {
+            $this->session->set_userdata('afiliado', $contrato);
+        }
+
         return json_encode($desdata);
 
     }
