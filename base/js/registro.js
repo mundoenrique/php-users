@@ -948,7 +948,7 @@ $(function(){
 								$("#registrar").fadeIn();
 
 								$("#dialogo-movil").dialog({
-									title	:"Telefono móvil existente",
+									title	:"Teléfono móvil existente",
 									modal	:"true",
 									width	:"440px",
 									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }

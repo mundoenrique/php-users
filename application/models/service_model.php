@@ -37,8 +37,8 @@ class Service_model extends CI_Model {
         $prefix = $dataAccount['prefix-bloq'];
         $idUser = $this->session->userdata('idUsuario');
         $pais = $this->session->userdata('pais');
-        $msgLok = ($action == '00') ? 'Desbloqueda' : 'Bloqueda';
-        $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueda';
+        $msgLok = ($action == '00') ? 'Desbloqueada' : 'Bloqueada';
+        $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueada';
 
         $data = json_encode(array(
             "idOperation" => $idOperation,
