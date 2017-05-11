@@ -33,9 +33,9 @@
                                 </div>
                             <?php elseif($pais == 'Ve'): ?>
                                 <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para recibir su clave presione sobre Recuperar clave</p>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para recibir su PIN presione sobre Reposición de PIN</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
-                                        <li><span class="icon-key services-item"></span>Recuperar <br>clave</li>
+                                        <li><span class="icon-key services-item"></span>Reposición <br>de PIN</li>
                                     </ul>
                                 </div>
                             <?php endif; ?>
@@ -121,7 +121,7 @@
                             <div id="result-rec"></div>
                         </div>
                         <div id="rec-clave" class="msg-prevent" style="display: none">
-                            <h2>Si realmente desea recuperar su clave presione continuar</h2>
+                            <h2>Si realmente desea reponer su PIN presione continuar</h2>
                         </div>
                         <form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec" disabled>

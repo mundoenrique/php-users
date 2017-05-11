@@ -56,7 +56,7 @@ function viewSelect (id) {
             action = 'lockReplace';
             break;
         case 'recover':
-            $('#msg-rec h2').text('Recuperar clave');
+            $('#msg-rec h2').text('Reposición de PIN');
             into = $('#recover');
             leave = $('#key, #replace');
             conceal = $('#change-key, #reason-rep');
@@ -193,7 +193,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain).show();
 }
 
-function cleanComplete (msgMain) {    
+function cleanComplete (msgMain) {
     $('#msg-'+ msgMain +' h3').text('');
     $('#msg-'+ msgMain +' #result-'+ msgMain).html('');
 }

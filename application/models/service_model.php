@@ -448,19 +448,19 @@ class Service_model extends CI_Model {
             switch ($desdata->rc) {
                 case 0:
                     $code = 0;
-                    $title = 'Recuperar de clave';
+                    $title = 'Reposición de PIN';
                     $msg = 'Su clave ha sido recuperada exitosamente, le será enviada en los próximos días.';
                     break;
                 case -356:
                     $code = 2;
-                    $title = 'Recuperar de clave';
+                    $title = 'Reposición de PIN';
                     $msg = 'La tarjeta tiene una recuperación de clave pendiente, le será enviada en los próximos días.';
                     break;
                 case -264:
                 case -304:
                 case -911:
                     $code = 3;
-                    $title = 'Recuperar de clave';
+                    $title = 'Reposición de PIN';
                     $msg = 'Su solicitud no pudo ser procesada, intente más tarde.';
                     break;
                 case -35:
