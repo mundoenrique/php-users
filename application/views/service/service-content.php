@@ -33,7 +33,7 @@
                                 </div>
                             <?php elseif($pais == 'Ve'): ?>
                                 <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para recibir su PIN presione sobre Reposición de PIN</p>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para reponerr su PIN presione sobre Reposición de PIN</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
                                         <li><span class="icon-key services-item"></span>Reposición <br>de PIN</li>
                                     </ul>
