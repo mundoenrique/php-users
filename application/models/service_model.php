@@ -388,4 +388,113 @@ class Service_model extends CI_Model {
     }
     //FIN Solicitud de token
 
+    //Solicitud de recuperar clave
+    public function callWsrecoverKey ($dataRequest) {
+        //Datos de la cuenta
+        parse_str($dataRequest, $dataAccount);
+        //log de acceso
+        $session = $this->session->userdata("sessionId");
+        $user = $this->session->userdata('userName');
+        $token = $this->session->userdata("token");
+        $canal = "personasWeb";
+        $modulo = "reposicionClave";
+        $function = "reposicionClave";
+        $operation = "reposicionClave";
+        //Construccion de log de acceso
+        $logAcceso = np_hoplite_log($session, $user, $canal, $modulo, $function, $operation);
+
+        //parametros para la solicitud de bloq y desbloq
+        $idOperation = "117";
+        $cardNum = $dataAccount['card-rec'];
+        $fechaExp = $dataAccount['fecha-exp-rec'];
+        $prefix = $dataAccount['prefix-rec'];
+        $idUser = $this->session->userdata('idUsuario');
+        $pais = $this->session->userdata('pais');
+
+        $data = json_encode(array(
+            "idOperation" => $idOperation,
+            "className" => "com.novo.objects.TOs.TarjetaTO",
+            "noTarjeta" => $cardNum,
+            "accodUsuario" => $user,
+            "id_ext_per" => $idUser,
+            "prefix" => $prefix,
+            "fechaExp" => $fechaExp,
+            "tokenOperaciones" => '',
+            "token" => $token,
+            "logAccesoObject"=>$logAcceso,
+            "pais" => $pais
+        ));
+
+        log_message("info", "REQUEST Recuperación de clave=====>>>>> ".$data);
+
+        $dataEncry = np_Hoplite_Encryption($data,1);
+        $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
+        $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+        $data = json_decode(utf8_encode($response));
+        $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+
+        log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
+
+        // sleep(2);
+        // $response = '{"rc":-899,"msg":"Proceso OK"}';
+        // $desdata = json_decode($response);
+
+        //código, título y mensaje para la respuesta a la vista
+        $code = '';
+        $title = '';
+        $msg = '';
+
+        if ($desdata) {
+            switch ($desdata->rc) {
+                case 0:
+                    $code = 0;
+                    $title = 'Recuperar de clave';
+                    $msg = 'Su clave ha sido recuperada exitosamente, le será enviada en los próximos días.';
+                    break;
+                case -356:
+                    $code = 2;
+                    $title = 'Recuperar de clave';
+                    $msg = 'La tarjeta tiene una recuperación de clave pendiente, le será enviada en los próximos días.';
+                    break;
+                case -264:
+                case -304:
+                case -911:
+                    $code = 3;
+                    $title = 'Recuperar de clave';
+                    $msg = 'Su solicitud no pudo ser procesada, intente más tarde.';
+                    break;
+                case -35:
+                case -61:
+                    $code = 7;
+                    $title = 'Conexión Personas Online';
+                    $msg = ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.';
+                    break;
+                default:
+                    $code = 7;
+                    $title = 'Conexión Personas Online';
+                    $msg = 'Hubo un problema. Por favor intente más tarde.';
+
+            }
+        } else {
+            $code = 7;
+            $title = 'Conexión Personas Online';
+            $msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+        }
+
+        if ($code === 7){
+            $this->session->sess_destroy();
+            $this->session->unset_userdata($this->session->all_userdata());
+        }
+        $response = [
+            'code' => $code,
+            'title' => $title,
+            'msg' => $msg
+        ];
+        return $response;
+
+    }
+    //fin Solicitud recuperar clave
+
+
+
 } // FIN

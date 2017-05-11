@@ -9,21 +9,36 @@
                 <div>
                     <fieldset>
                         <div class='group' id='donor'>
-                            <div class='product-presentation'>
-                                <a class='dialog button product-button'><span aria-hidden='true' class='icon-find'></span></a>
-                                <input id='donor-cardnumber' name='donor-cardnumber' type='hidden' value='' />
-                            </div>
-                            <div class='product-info'>
-                                <p class='field-tip'>Seleccione una cuenta</p>
-                            </div>
-                            <div class='product-scheme'>
-                                <p class="field-tip" style="color: #eee; margin-left: 10px;">Indique la operación que desea realizar</p>
-                                <ul class='product-balance-group disabled-product-balance-group services-content'>
-                                    <li><span class="icon-lock services-item"></span>Bloquear <br>cuenta</li>
-                                    <li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
-                                    <li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
-                                </ul>
-                            </div>
+                            <?php if($pais == 'Co' || $pais == 'Ve'): ?>
+                                <div class='product-presentation'>
+                                    <a class='dialog button product-button'><span aria-hidden='true' class='icon-find'></span></a>
+                                    <input id='donor-cardnumber' name='donor-cardnumber' type='hidden' value='' />
+                                </div>
+                                <div class='product-info'>
+                                    <p class='field-tip'>Seleccione una cuenta</p>
+                                </div>
+                            <?php else: ?>
+                                <div class='product-info'>
+                                    <p class='field-tip'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opción no disponible para su país</p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if($pais == 'Co'): ?>
+                                <div class='product-scheme'>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Indique la operación que desea realizar</p>
+                                    <ul class='product-balance-group disabled-product-balance-group services-content'>
+                                        <li><span class="icon-lock services-item"></span>Bloquear <br>cuenta</li>
+                                        <li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
+                                        <li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
+                                    </ul>
+                                </div>
+                            <?php elseif($pais == 'Ve'): ?>
+                                <div class='product-scheme'>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para recibir su clave presione sobre Recuperar clave</p>
+                                    <ul class='product-balance-group disabled-product-balance-group services-content'>
+                                        <li><span class="icon-key services-item"></span>Recuperar <br>clave</li>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </fieldset>
 
@@ -97,6 +112,22 @@
                         </form>
 
                         <div id="msg2" style="clear:both;"></div>
+                    </div>
+
+                    <div id="rec-key" class="services-both" style="display: none">
+                        <div id="msg-rec" class="msg-prevent">
+                            <h2></h2>
+                            <h3></h3>
+                            <div id="result-rec"></div>
+                        </div>
+                        <div id="rec-clave" class="msg-prevent" style="display: none">
+                            <h2>Si realmente desea recuperar su clave presione continuar</h2>
+                        </div>
+                        <form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
+                            <input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec" disabled>
+                            <input type="hidden" id="card-rec" name="card-rec" disabled>
+                            <input type="hidden" id="prefix-rec" name="prefix-rec" disabled>
+                        </form>
                     </div>
 
                     <div class="form-actions">
@@ -182,7 +213,7 @@ if($datos->rc==0){
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
          <p class='dashboard-item-cardholder'>$value->nom_plastico</p>
-         
+
          <p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
          <p class='dashboard-item-category'>$value->nombre_producto</p>
          </div>

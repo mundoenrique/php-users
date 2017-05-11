@@ -18,6 +18,7 @@ class Service extends CI_Controller {
         np_hoplite_verificLogin();
         // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
         np_hoplite_countryCheck($this->session->userdata('pais'));
+        $pais = $this->session->userdata('pais');
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
         //$this->load->model('transfer_model', 'service');
@@ -40,7 +41,7 @@ class Service extends CI_Controller {
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
-        $content = $this->parser->parse('service/service-content', array('data' => serialize(json_decode($this->getCuentas->dashboard_load('P2P')))), true);
+        $content = $this->parser->parse('service/service-content', array('data' => serialize(json_decode($this->getCuentas->dashboard_load('P2P'))), 'pais'=>$pais), true);
         //INSTANCIA DE SIDERBAR
         $sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
 

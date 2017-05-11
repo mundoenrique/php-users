@@ -14,6 +14,11 @@ function viewSelect (id) {
         formData = $('#cambio-pin');
         clean = 'change';
     }
+    if(id == 'recover') {
+        disable = $("#rec-key input, #continuar");
+        formData = $('#recover-key');
+        clean = 'rec';
+    }
     if (viewControl != id) {
         disable.prop('disabled', false);
         resetForms(formData);
@@ -50,6 +55,14 @@ function viewSelect (id) {
             display = $('#lock-acount, #reason-rep');
             action = 'lockReplace';
             break;
+        case 'recover':
+            $('#msg-rec h2').text('Recuperar clave');
+            into = $('#recover');
+            leave = $('#key, #replace');
+            conceal = $('#change-key, #reason-rep');
+            display = $('#rec-key, #rec-clave');
+            action = 'recoverKey';
+            break;
     }
 
     into
@@ -58,6 +71,7 @@ function viewSelect (id) {
     leave
         .removeClass('service-item-select')
         .addClass('service-item-unselect');
+
 
     conceal.hide();
     display.show(950);
@@ -68,6 +82,10 @@ function viewSelect (id) {
 function lock_change (formData, model, form, action) {
     var msgMain = (model == 'LockAccount') ? 'block' : 'change';
     var msgSec = (model == 'LockAccount') ? 'lock-acount' : 'change-key';
+    if(action == 'recoverKey') {
+        msgMain = 'rec';
+        msgSec = 'recoverKey';
+    }
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
@@ -175,7 +193,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain).show();
 }
 
-function cleanComplete (msgMain) {
+function cleanComplete (msgMain) {    
     $('#msg-'+ msgMain +' h3').text('');
     $('#msg-'+ msgMain +' #result-'+ msgMain).html('');
 }
@@ -349,6 +367,15 @@ function validar_campos() {
                 pinNew1:"Debe ser igual a su nuevo PIN"
             }
         }
+    }); // VALIDATE
+
+    $("#recover-key").validate({
+        errorElement: "label",
+        ignore: "",
+        errorContainer: "",
+        errorClass: "field-error",
+        validClass: "field-success",
+        errorLabelContainer: ""
     }); // VALIDATE
 }
 

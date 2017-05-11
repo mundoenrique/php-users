@@ -10,25 +10,22 @@ base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 $(function(){
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Menu desplegable
+
+    // MENU WIDGET TRANSFERENCIAS
     $('.transfers').hover(function(){
         $('.submenu-transfer').attr("style","display:block")
     },function(){
-        $('.submenu-transfer').attr("style","display:none")
+      $('.submenu-transfer').attr("style","display:none")
     });
 
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //Menu desplegable usuario
+    // MENU WIDGET USUARIO
     $('.user').hover(function(){
+        $('.submenu-user').attr("style","display:block")
     },function(){
         $('.submenu-user').attr("style","display:none")
     });
 
-
-
- $(".label-inline").on("click", "a", function() {
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       dialogClass: "cond-serv",
@@ -44,7 +41,7 @@ $(function(){
 
     });
 
- 
+
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // CARGA MODAL CTA ORIGEN
     $(".dialog").click(function() {
@@ -103,12 +100,6 @@ $(function(){
         });          // FINALIZA CONFIGURACION DE FILTROS
     });		 // FIN DE CARGA MODAL CTAS ORIGEN
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // FUNCIONALIDAD DE FILTROS PARA CUENTAS
-    $('li.stack-item a').click(function(){
-        $('.stack').find('.current-stack-item').removeClass('current-stack-item');
-        $(this).parents('li').addClass('current-stack-item');
-    });
-// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
     $(".dashboard-item").click(function() {
@@ -128,33 +119,40 @@ $(function(){
             bloqHtml =  true,
             icon,
             options = '<p class="field-tip" style="margin-left: 10px;">Indique la operación que desea realizar</p>',
-            intoReplace = (condition == 0) ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '',
             cadena;
         pais  = $(this).attr("pais");
-
+        options = (pais == 'Ve') ? 'Para recibir su clave presione sobre Recuperar clave' : options;
+        var intoReplace = (condition == 0 && pais != 'Ve') ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '';
 
 
         options+= '<ul class="product-balance-group services-content">';
         switch  (bloqueo) {
             case 'N':
+                if(pais == 'Ve'){
+                    break;
+                }
                 bloqAction = 'Bloquear ';
                 icon = 'lock';
                 options+= '<li id="lock" class="service-item-unselect"><span class="icon-' + icon +' services-item"></span>Bloquear <br>cuenta</li>';
                 options+= '<li id="key" class="service-item-unselect"><span class="icon-key services-item"></span>Cambio <br>de PIN</span></li>';
-                options+= intoReplace;
-
                 break;
             case 'PB':
+                if(pais == 'Ve'){
+                    break;
+                }
                 bloqAction = 'Desbloquear ';
                 icon = 'unlock';
                 options+= '<li id="lock" class="service-item-unselect"><span class="icon-' + icon +' services-item"></span>Desbloquear <br>cuenta</li>';
-                options+= intoReplace;
                 break;
             default:
                 bloqHtml = false;
 
 
         }
+        if(pais == 'Ve') {
+            options+= '<li id="recover" class="service-item-unselect"><span class="icon-key services-item"></span>Recuperar <br>clave</span></li>';
+        }
+        options+= intoReplace;
         options+= '</ul>';
 
         if (bloqHtml == true) {
@@ -194,6 +192,7 @@ $(function(){
             viewControl = '';
             $('#lock-acount').hide();
             $('#change-key').hide();
+            $('#rec-key').hide();
             $('#tdestino').children().remove();
             $("#tdestino").append($("#removerDestino").html());
             $("#continuar").prop("disabled",true);
@@ -208,7 +207,7 @@ $(function(){
     });
 
     // --------------------------------------------------------------------------------------------------------------------------------------------------------------
-    $('#donor').on('click', '#lock, #key, #replace', function(e) {
+    $('#donor').on('click', '#lock, #key, #replace, #recover', function(e) {
         var thisId = e.target.id,
             parentId = e.target.parentNode.id,
             id;
@@ -224,6 +223,9 @@ $(function(){
                 break;
             case 'replace':
                 (viewControl != id && viewControl != '') ? notiSystem('Reposición de tarjeta', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
+                break;
+            case 'recover':
+                (viewControl != id && viewControl != '') ? notiSystem('Recuperar cuenta', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
                 break;
         }
 
@@ -277,6 +279,14 @@ $(function(){
 
                 $('#mot-sol-now').val(reasonRep);
                 model = 'LockAccount';
+                break;
+            case 'recoverKey':
+                $('#rec-clave').hide();
+                $('#fecha-exp-rec').val(fe);
+                $('#card-rec').val(cardAction);
+                $('#prefix-rec').val(prefix);
+                form = $('#recover-key');
+                model = 'recoverKey';
                 break;
         }
         validar_campos();
