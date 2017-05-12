@@ -112,7 +112,7 @@ $pais = $this->session->userdata('pais');
 		</li>
 		<?php if ($pais == 'Co' || $pais == 'Ve'): ?>
 			<li class="<?php echo $clase_service?> menu-item service">
-				<a href="<? echo $this->config->item("base_url"); ?>/servicios" rel="section">Servicios</a>
+				<a href="<? echo $this->config->item("base_url"); ?>/servicios" rel="section">Atención al cliente</a>
 			</li>
 			<?php endif; ?>
 		<li class="<?php echo $clase_perfil?> menu-item account user">
