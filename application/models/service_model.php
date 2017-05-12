@@ -453,7 +453,7 @@ class Service_model extends CI_Model {
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
         // sleep(2);
-        // $response = '{"rc":-899,"msg":"Proceso OK"}';
+        // $response = '{"rc":-356,"msg":"Proceso OK"}';
         // $desdata = json_decode($response);
 
         //código, título y mensaje para la respuesta a la vista
@@ -466,12 +466,12 @@ class Service_model extends CI_Model {
                 case 0:
                     $code = 0;
                     $title = 'Reposición de PIN';
-                    $msg = 'Su clave ha sido recuperada exitosamente, le será enviada en los próximos días.';
+                    $msg = 'Reposición de PIN exitosa, le será enviado en los próximos días.';
                     break;
                 case -356:
                     $code = 2;
                     $title = 'Reposición de PIN';
-                    $msg = 'La tarjeta tiene una recuperación de clave pendiente, le será enviada en los próximos días.';
+                    $msg = 'La tarjeta tiene una reposición de PIN pendiente, le será enviado en los próximos días.';
                     break;
                 case -264:
                 case -304:
