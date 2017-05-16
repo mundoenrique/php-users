@@ -85,7 +85,7 @@
                                 <div class="product-scheme">
                                     <fieldset class="form-inline">
                                         <label for="beneficiary-1x-description" title="Descripción de la transferencia">Concepto</label>
-                                        <input disabled class="field-large" id="beneficiary-1x-description" name="beneficiary-1x-description" type="text" />
+                                        <input disabled class="field-large" id="beneficiary-1x-description" name="beneficiary-1x-description" type="text" maxlength="20"/>
                                         <label for="beneficiary-1x-amount" title="Monto a transferir.">Importe</label>
                                         <div class="field-category">
                                             <?php echo lang("MONEDA"); ?>

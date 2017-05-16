@@ -226,6 +226,7 @@ $(function(){
             acumCantidadOperacionesSemanales =data.parametrosTransferencias[0].acumCantidadOperacionesSemanales;
             acumCantidadOperacionesMensual =data.parametrosTransferencias[0].acumCantidadOperacionesMensual;
 			dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
+			montoComision = data.parametrosTransferencias[0].montoComision;
 
 			$("#dashboard-beneficiary").empty();
 
@@ -306,8 +307,8 @@ $(function(){
 					cadena+=                        '</div>';
 					cadena+=                        '<div class="product-scheme">';
 					cadena+=                             '<fieldset class="form-inline">';
-					cadena+=                                    '<label for="beneficiary-1x-description" title="DescripciÃ³n de la transferencia.">Concepto</label>';
-					cadena+=                                    '<input class="field-large" id="beneficiary-'+number+'x-description" maxlength="60" name="beneficiary-'+number+'x-description" type="text" />';
+					cadena+=                                    '<label for="beneficiary-1x-description" title="Descripción del pago.">Concepto</label>';
+					cadena+=                                    '<input class="field-large" id="beneficiary-'+number+'x-description" maxlength="60" name="beneficiary-'+number+'x-description" type="text"/>';
 					cadena+=                                    '<label for="beneficiary-1x-amount" title="Monto a transferir.">Importe</label>';
 					cadena+=                                    '<div class="field-category"> '+moneda+' ';
 					cadena+=                                                    '<input id="beneficiary-1x-coin" name="beneficiary-1x-coin" type="hidden" value="'+moneda+'" />';
