@@ -6,8 +6,13 @@
 					</header>
 					<section>
 						<div id="content-holder">
-							<p>Ud. ha solicitado el restablecimiento de su contraseña recientemente y accedido a <strong>Conexión Personas</strong> por medio de una contraseña provisional la cual, por su seguridad, debe modificar de forma inmediata.</p>
-							<p>Para ello, por favor complete la información requerida a continuación para generar una nueva contraseña:</p>
+							<?php if($temporal == 't'): ?>
+								<p>Ud. ha solicitado el restablecimiento de su contraseña recientemente y accedido a <strong>Conexión Personas</strong> por medio de una contraseña provisional la cual, por su seguridad, debe modificar de forma inmediata.</p>
+							<?php endif; ?>
+							<?php if($temporal == 'v'): ?>
+								<p>Su contraseña ha vencido</p>
+							<?php endif; ?>
+							<p>Por favor complete la información requerida a continuación para generar una nueva contraseña:</p>
 							<form accept-charset="utf-8" method="post">
 								<fieldset class="fieldset-column-center">
 									<div class="field-meter" id="password-strength-meter">
@@ -32,7 +37,7 @@
 								</form>
 								<div class="form-actions">
 									<?php
-										if(isset($temporal)&&$temporal!='t'){
+										if(isset($temporal) && ($temporal == 'n')) {
 										echo '<button class="volver" type="reset">Cancelar</button>';
 										}
 									?>

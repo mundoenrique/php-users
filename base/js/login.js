@@ -67,7 +67,7 @@ $(function(){
 
 					} else if(data.passwordVencido==1) {
 
-						$(location).attr('href', base_url+'/dashboard?ps = 1');
+						$(location).attr('href', base_url+'/users/cambiarPassword?t=v');
 
 					} else {
 

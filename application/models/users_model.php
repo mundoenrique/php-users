@@ -150,6 +150,8 @@ class Users_model extends CI_Model {
 		$data = json_decode(utf8_encode($response));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data, 1)));
 
+		log_message('info', 'Response actualizar password:---->>>>>'. json_encode($desdata));
+
 		return json_encode($desdata);
 	}
 
