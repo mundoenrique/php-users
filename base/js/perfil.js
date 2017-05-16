@@ -1,5 +1,6 @@
 var path, base_cdn;
 var fecha=new Date();
+var controlValid = 0;
 path =window.location.href.split( '/' );
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
@@ -132,7 +133,7 @@ $(function(){
 	/*funcion tipo de direccion*/
 	function tipoDireccion_fun(){
 		var tipoDireccionval=$('#acTipo').val();
-		$('#tipo_direccion > option[value="'+tipoDireccionval+'"]').attr('selected', 'selected');
+		$('#tipo_direccion > option[value="'+tipoDireccionval+'"]').prop('selected', 'selected');
 	}
 	tipoDireccion_fun();
 	/*fin funcion tipo de direccion*/
@@ -348,6 +349,7 @@ $(function(){
 	/*Fin validacion nombres y apellidos*/
 	/********* Enviar formulario ******/
 	function enviarForm() {
+		controlValid = 1;
 		validar_campos();
 		formUpdate.submit();
 
@@ -925,6 +927,7 @@ $(function(){
 
 	$("#actualizar").click(function(e){
 		e.preventDefault();
+		$('#actualizar').css('display', 'none');
 		pais=$('#content').attr('accodpais');
 		email=$('#email').val();
 		userName=$('#content').attr('username');
@@ -941,14 +944,13 @@ $(function(){
 				response_email = JSON.parse(data);
 
 				//console.log(response_email);
-				if (response_email.rc == -238) {
+				if(response_email.rc == -238) {
 					$("#loading").hide();
 					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
 					enviarForm();
-				}
-				else if (response_email.rc == 0) {
+				} else if (response_email.rc == 0) {
 					$("#loading").hide();
 					//$('#msg-correo').show().text('El correo electrónico ya se encuentra registrado').css('color','#f04848;');
 					$('#email').removeClass('field-success').addClass('field-error');
@@ -965,8 +967,7 @@ $(function(){
 					$("#disp").click(function () {
 						$("#dialogo_disponible").dialog("close");
 					});
-				}
-				else {
+				} else {
 					$("#loading").hide();
 					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
@@ -1022,13 +1023,17 @@ $(function(){
 		}, "Usuario invalido. ");
 
 		jQuery.validator.addMethod("mayorEdadAnio", function(value,element){
-			var fecha_nacimiento = fechaNacimiento();
-			//console.log("fecha_nacimiento ---------> " + fecha_nacimiento);
-			if(fecha_nacimiento == true){
+			if(controlValid == 0) {
+				var fecha_nacimiento = fechaNacimiento();
+				if(fecha_nacimiento == true){
+					return true;
+				}else if(fecha_nacimiento == false) {
+					return false;
+				}
+			} else {
 				return true;
-			}else if(fecha_nacimiento == false) {
-				return false;
 			}
+
 		}, "Usted no es mayor de edad. ");
 
 		jQuery.validator.addMethod("validarFecha", function(value,element){
@@ -1108,8 +1113,6 @@ $(function(){
 			},
 			"Correo invalido. "
 		);
-
-
 
 		$("#form-perfil").validate({
 
@@ -1247,6 +1250,7 @@ function systemDialog(title, msg) {
 		}
 	});
 	$("#acept").click(function () {
+		$('#actualizar').fadeIn();
 		$("#completar-afiliacion").dialog("close");
 	});
 }

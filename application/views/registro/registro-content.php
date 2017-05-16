@@ -104,8 +104,8 @@ if($skin == 'latodo'){
 								<input  id="holder-id" value="" name="numero_identificacion" type="text" readonly="readonly" class="field-disabled"/>
 							</li>
 							<li class="dig-verificador">
-								<label title="Dígito verificador del DNI">Dígito verificador</label>
-								<input  title="Dígito verificador del DNI" id="dig-ver" name="dig-ver" type="text" class="field-disabled" maxlength="1"/>
+								<label title="Carácter verificador del DNI">Dígito verificador</label>
+								<input  title="Obtenga el carácter verificador de su DNI leyéndolo de su documento de identidad" id="dig-ver" name="dig-ver" type="text" class="field-disabled" maxlength="1"/>
 							</li>
 						</ul>
 						<ul class="inline-list four-segments">
@@ -394,6 +394,7 @@ if($skin == 'latodo'){
 					<div id="msg2"></div>
 					<a href="<? echo $homeLink; ?>"> <button type="reset">Cancelar</button> </a>
 					<button id="registrar"> Continuar </button>
+					<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
 				</div>
 			</div>
 		</section>

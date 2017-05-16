@@ -320,8 +320,8 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<input type="text" value="<?php echo ucwords($id_ext_per); ?>" id="id_ext_per" name="id_ext_per" readonly="readonly">
 										</li>
 										<li class="col-md-3-profile dig-verificador">
-										<label title="Dígito verificador del DNI">Dígito verificador</label>
-										<input title="Dígito verificador del DNI" type="text" value="<?php echo $acDigVerificador; ?>" id="dig-ver" name="dig-ver" <?php echo $acDigVerificador !== '' ? 'readonly' : ''; ?> maxlength="1">
+										<label title="Carácter verificador del DNI">Dígito verificador</label>
+										<input title="Obtenga el carácter verificador de su DNI leyéndolo de su documento de identidad" type="text" value="<?php echo $acDigVerificador; ?>" id="dig-ver" name="dig-ver" <?php echo $acDigVerificador !== '' ? 'readonly' : ''; ?> maxlength="1">
 										</li>
 									</ul>
 									<ul class="row-profile">
@@ -383,7 +383,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										</li>
 										<li class="col-md-3-profile remove-perfil-plata-sueldo">
 											<label>Estado Civil</label>
-											<select class="field-estado-civil" id="edocivil">
+											<select class="field-estado-civil" id="edocivil" name="edocivil">
 												<option value="">Seleccione</option>
 												<option value="S">Soltero</option>
 												<option value="C">Casado</option>
@@ -413,9 +413,9 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<label for="type-dir">Tipo de dirección</label>
 											<select class="field-select-medium listaDireccion" name="tipo_direccion" id="tipo_direccion">
 												<option value="">Seleccione</option>
-												<option value="1">Domicilio</option>
-												<option value="2">Laboral</option>
-												<option value="3">Comercial</option>
+												<option value="D">Domicilio</option>
+												<option value="L">Laboral</option>
+												<option value="C">Comercial</option>
 											</select>
 											<input type="hidden" value="<?php echo $acTipo; ?>" name="tipo_direccion" id="tipo_direccion_value">
 										</li>
@@ -445,9 +445,9 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 											<select  id="distrito" name="distrito_residencia">
 											</select>
 										</li>
-										<input type="hidden" id="departamento_data" value="<?php echo $acCodEstado; ?>">
-										<input type="hidden" id="provincia_data" value="<?php echo $acCodCiudad; ?>">
-										<input type="hidden" id="distrito_data" value="<?php echo $distrito; ?>">
+										<input type="hidden" id="departamento_data" name="departamento_data" value="<?php echo $acCodEstado; ?>">
+										<input type="hidden" id="provincia_data" name="provincia_data" value="<?php echo $acCodCiudad; ?>">
+										<input type="hidden" id="distrito_data" name="distrito_data" value="<?php echo $distrito; ?>">
 									</ul>
 									<ul class="row-profile">
 										<li class="col-md-full-profile">
@@ -472,7 +472,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 												<option value = "FAX">Fax</option>
 												<option value = "OTRO">Otro</option>
 											</select>
-											<input type="hidden" value="<?php echo $tipo_otr;?>" id="otro_telefono_tipo_value">
+											<input type="hidden" value="<?php echo $tipo_otr;?>" id="otro_telefono_tipo_value" name="otro_telefono_tipo_value">
 										</li>
 										<li class="col-md-4-profile">
 											<label>Otro Teléfono (Número)</label>
@@ -487,7 +487,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 											<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:7px; margin-right:620px; margin-bottom:0px;">
 												<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
 											</div>
-											<input id="verificar-email" type="hidden" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
+											<input id="verificar-email" name="verificar-email" type="hidden" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
 										</li>
 									</ul>
 									</fieldset>
@@ -511,7 +511,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 											<option value="1">Dependiente</option>
 											<option value="0">Independiente</option>
 										</select>
-										<input type="hidden" value="<?php echo $labora; ?>" id="situacion-laboral-value">
+										<input type="hidden" value="<?php echo $labora; ?>" id="situacion-laboral-value" name="situacion-laboral-value">
 									</li>
 								</ul>
 								<ul class="row-profile">
@@ -519,7 +519,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<label>Antiguedad Laboral</label>
 										<select class="antiguedad-laboral" id="antiguedad_laboral" name="antiguedad_laboral_value">
 										</select>
-										<input id="antiguedad" type="hidden" value="<?php echo $antiguedad_laboral;  ?>">
+										<input id="antiguedad" name="antiguedad" type="hidden" value="<?php echo $antiguedad_laboral;  ?>">
 									</li>
 									<li class="col-md-3-profile">
 										<label>Profesión</label>
@@ -543,7 +543,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<label>¿Desempeñó algun cargo público en los últimos 2 años?</label>
 										<label class="label-inline">
 										<input name="cargo_public" class="cargo-publico-radio" type="radio" value="1" id="cargo-publico-si"/> Si
-										<input type="hidden" value="<?php echo $cargo_publico_last2; ?>" id="cargo-publico">
+										<input type="hidden" value="<?php echo $cargo_publico_last2; ?>" id="cargo-publico" name="cargo-publico">
 										</label>
 										<label class="label-inline">
 										<input  name="cargo_public" class="cargo-publico-radio" type="radio" value="0" id="cargo-publico-no" /> No
@@ -565,7 +565,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<label>¿Es sujeto obligado a informar UIF-Peru, conforme al artículo 3° de la Ley N° 29038?</label>
 										<label class="label-inline">
 										<input id="sujeto-obligado-si" class="sujeto-obligado" name="sujeto_obligado" type="radio" value="1" /> Si
-										<input type="hidden" id="uif" value="<?php echo $uif; ?>">
+										<input type="hidden" id="uif" name="uif" value="<?php echo $uif; ?>">
 										</label>
 										<label class="label-inline">
 										<input  id="sujeto-obligado-no" class="sujeto-obligado" name="sujeto_obligado" type="radio" value="0" /> No

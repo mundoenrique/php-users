@@ -1,4 +1,4 @@
-var path, base_cdn, pais;
+var path, base_cdn, pais, digVer = '', aplicaPerfil = 0;
 path =window.location.href.split( '/' );
 var fecha = new Date();
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
@@ -118,8 +118,6 @@ $(function(){
 
 		var form	= $("#form-validar");
 
-		aplicaPerfil = 0;
-
 		if(form.valid() == true) {
 			var pais, cuenta, cedula, id_ext_per, pin, d, fecha, userName,claveWeb, anio;
 
@@ -159,6 +157,7 @@ $(function(){
 
 				if(data.rc == 0) {
 					aplicaPerfil = data.user.aplicaPerfil;
+					digVer = data.afiliacion.dig_verificador_aux;
 					if(pais == 'Pe') {
 
 						if (data.user.aplicaPerfil == 'N') {
@@ -821,7 +820,7 @@ $(function(){
 									$(location).attr('href', base_url);
 								});
 							}
-							if(data.rc == -271){
+							if(data.rc == -271 || data.rc == -335){
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
 
@@ -832,8 +831,6 @@ $(function(){
 
 							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
 							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								console.log('cualquier locura');
-								console.log(data.rc);
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
 
@@ -848,10 +845,6 @@ $(function(){
 							 msgService('Teléfono movil existente', 'El teléfono móvil ya se encuentra registrado.');
 							}
 
-							if(data.rc == -335) {
-								$('#dig-ver').focus();
-								msgService('Dígito verificador inválido', 'El dígito verificador introducido no es correcto.');
-							}
 						});	//POST
 
 				}else if(aplicaPerfil == 'N') {
@@ -1136,6 +1129,11 @@ $(function(){
 			"Correo invalido. "
 		);
 
+		jQuery.validator.addMethod("digValido",function(value, element, regex){
+				return value == digVer ? true : false;
+			}
+		);
+
 		$("#form-validar").validate({
 
 			errorElement		: "label",
@@ -1175,7 +1173,7 @@ $(function(){
 
 				"tipo_identificacion" : {"required":true},																	//1
 				"numero_identificacion" : {"required":true, "number":true},													//2
-				"dig-ver" : {"required":true, "digits":true, "maxlength":1},
+				"dig-ver" : {"required":true, "digits":true, "maxlength":1, "digValido": true},
 				"primer_nombre" : {"required":true, "expresionRegular":true},												//3
 				"segundo_nombre" : {"required":false, "expresionRegular":true},												//4
 				"primer_apellido" : {"required":true, "expresionRegular":true},												//5
@@ -1220,7 +1218,7 @@ $(function(){
 
 				"tipo_identificacion" : "Debe Seleccionar su Tipo de Identificación.",															//1
 				"numero_identificacion" : "El campo Número de identificación NO puede estar vacío y debe contener solo números.",				//2
-				"dig-ver": "El campo Dígito Verificador NO puede estar vacío y debe contener solo números.",
+				"dig-ver": "Dígito verificador inválido.",
 				"primer_nombre" : "El campo Primer Nombre NO puede estar vacío y debe contener solo letras.",									//3
 				"segundo_nombre" : "El campo Segundo Nombre debe contener solo letras.",														//4
 				"primer_apellido" : "El campo Apellido Paterno NO puede estar vacío y debe contener solo letras.",								//5
