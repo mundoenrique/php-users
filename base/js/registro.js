@@ -321,7 +321,7 @@ $(function(){
 
 				} else if(data.rc == -184) {
 					$("#dialogo-pin").dialog({
-						title	: "Error",
+						title	: "Validar cuenta",
 						modal	: "true",
 						width	: "440px",
 						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -844,20 +844,13 @@ $(function(){
 							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
 
 
-							if(data.rc == -284){
+							if(data.rc == -284) {
+							 msgService('Teléfono movil existente', 'El teléfono móvil ya se encuentra registrado.');
+							}
 
-								$("#registrar").fadeIn();
-
-								$("#dialogo-movil").dialog({
-									title	:"Telefono móvil existente",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva5").click(function(){
-									$("#dialogo-movil").dialog("close");
-								});
+							if(data.rc == -335) {
+								$('#dig-ver').focus();
+								msgService('Dígito verificador inválido', 'El dígito verificador introducido no es correcto.');
 							}
 						});	//POST
 
@@ -1381,3 +1374,20 @@ $(".label-inline").on("click", "a", function() {
 		},
 	}
 });  //FIN DE LA FUNCION GENERAL
+
+function msgService (title, msg) {
+	$("#registrar").fadeIn();
+	$("#dialogo-movil").dialog({
+		title	:title,
+		modal	:"true",
+		width	:"440px",
+		open	: function(event, ui) {
+			$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			$('#msgService').text(msg);
+		}
+
+	});
+	$("#inva5").click(function(){
+		$("#dialogo-movil").dialog("close");
+	});
+}

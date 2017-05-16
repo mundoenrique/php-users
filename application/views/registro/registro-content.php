@@ -619,9 +619,9 @@ if($skin == 'latodo'){
 <!-- ERROR telefono movil exixtente -->
 <div id="dialogo-movil" style='display:none'>
 	<div id="dialog-confirm">
-		<div class="alert-simple alert-error" id="message">
+		<div class="alert-simple alert-error">
 			<span aria-hidden="true" class="icon-cancel-sign"></span>
-			<p>Error, el teléfono móvil ya se encuentra registrado.</p>
+			<p id="msgService"></p>
 		</div>
 	</div>
 	<div class="form-actions">

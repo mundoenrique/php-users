@@ -1,5 +1,5 @@
 <?php
-	$datos = null;
+$datos = null;
 $afiliado = $this->session->userdata('afiliado');
 
 if(isset($data)){
@@ -155,7 +155,7 @@ if(isset($data)){
 
 			if($aplicaPerfil=='S'){
 				$tipo_profesion=$datos->registro->afiliacion->profesion;
-				$acDigVerificador=$datos->registro->afiliacion->dig_verificador;
+				$acDigVerificador = $afiliado != 0 ? $datos->registro->afiliacion->dig_verificador : '';
 			}
 			else if($aplicaPerfil=='N'){
 				$tipo_profesion=$datos->registro->user->tipo_profesion;
@@ -588,7 +588,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										</li>
 										<li class="col-md-3-profile">
 											<label for="transpwd" class="pass-2"> Notificaciones</label>
-											<label class="label-inline" for="notificacions-email"><input id="notificacions-email" name="email" type="checkbox" value=<?php echo $notEmail; ?>> Email</label>
+											<label class="label-inline" for="notificacions-email"><input id="notificacions-email" name="email" type="checkbox" value=<?php echo $notEmail; ?>> Correo electrónico</label>
 											<label class="label-inline" for="notificacions-sms"><input id="notificacions-sms" name="sms" type="checkbox" value=<?php echo $notSms; ?>> SMS</label>
 										</li>
 										</ul>
@@ -695,10 +695,10 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 
 <!-- MODAL DATOS DE AFILIACIÓN NO COMPLETADOS -->
 <div id="completar-afiliacion" style='display:none'>
-	<div id="dialog-confirm">
+	<div>
 		<div class="alert-simple alert-warning">
 			<span aria-hidden="true" class="icon-cancel-sign"></span>
-			<p>Completa el formulario.</p>
+			<p id="msgAfil"></p>
 		</div>
 		<div class="form-actions">
 			<button id="acept">Aceptar</button>

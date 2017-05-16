@@ -9,17 +9,8 @@ var aplicaperfil = $('#content').attr('aplicaperfil'),
 $(function(){
 
 	if(aplicaperfil == 'S' && afiliado == '0') {
-		$("#completar-afiliacion").dialog({
-			title: "Activa tu tarjeta plata beneficio",
-			modal: "true",
-			width: "440px",
-			open: function (event, ui) {
-				$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			}
-		});
-		$("#acept").click(function () {
-			$("#completar-afiliacion").dialog("close");
-		});
+		$('#widget-account').focus();
+		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
 	}
 
 	//Menu desplegable transferencia
@@ -46,7 +37,6 @@ $(function(){
 
 	/*Ocultar o mostrar campos segun la condición aplica perfil N o S*/
 	function removeFieldperfil(){
-		console.log($('#content').attr('aplicaperfil'), $('#pais-residencia-value').val());
 		if($('#content').attr('aplicaperfil')=='N' || $('#pais-residencia-value').val() !='Pe'){
 			$('#contract').remove();
 			$('.dig-verificador').remove();
@@ -839,6 +829,9 @@ $(function(){
 				}else if(data.rc==-271){
 					$('.overlay-modal').show();
 					$('#dialogo-actualizacion-incompleta').show();
+				} else if(data.rc == -335) {
+					$('#dig-ver').focus();
+					systemDialog('Pefil', 'Dígito verificador inválido');
 				}
 				if(data.rc == -61){
 					$(location).attr('href', base_url+'/users/error_gral');
@@ -1242,3 +1235,18 @@ $(function(){
 	/*********Fin validacion de formularios********/
 
 }); //FIN FUNCION GENERAL
+
+function systemDialog(title, msg) {
+	$("#completar-afiliacion").dialog({
+		title: title,
+		modal: "true",
+		width: "440px",
+		open: function (event, ui) {
+			$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			$('#msgAfil').text(msg);
+		}
+	});
+	$("#acept").click(function () {
+		$("#completar-afiliacion").dialog("close");
+	});
+}
