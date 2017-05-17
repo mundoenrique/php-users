@@ -1,5 +1,5 @@
 var path, base_cdn;
-path =window.location.href.split( '/' ); 
+path =window.location.href.split( '/' );
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
@@ -41,7 +41,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		        }
 
 		        //validate number
-		      
+
 		      if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
 		            $('#number').removeClass('rule-invalid').addClass('rule-valid');
 		            car=true;
@@ -49,7 +49,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		            $('#number').removeClass('rule-valid').addClass('rule-invalid');
 		            car=false;
 		        }
-		      
+
 		      	if (! pswd.match(/(.)\1{2,}/) ) {
 		            $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 		            cons=true;
@@ -57,7 +57,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		            $('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
 		            cons=false;
 		        }
-		      
+
 		      	if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
 		            $('#especial').removeClass('rule-invalid').addClass('rule-valid');
 		            esp=true;
@@ -70,26 +70,26 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		        }else{
 					$('#continuar').attr("disabled",true);
 		        }
-			    
+
 		    }).focus(function() {
-		    	
+
 		        $("#new").showBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').show();
 
 		    }).blur(function() {
-		    	
+
 		        $("#new").hideBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').hide();
 		    });
 
 
-			$("#cancelar").click(function(){ 
-				$(location).attr('href', base_url+'/perfil'); 
+			$("#cancelar").click(function(){
+				$(location).attr('href', base_url+'/perfil');
 			});
-			$(".volver").click(function(){ 
-				$(location).attr('href', base_url+'/perfil'); 
+			$(".volver").click(function(){
+				$(location).attr('href', base_url+'/perfil');
 			});
-			$("#continuar").click(function(){ 
+			$("#continuar").click(function(){
 				$("#continuar").hide();
 				$("#loading").show();
 				old =$('#old-userpwd').val();
@@ -98,7 +98,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				valor1=true;
 				valor2=true;
 				valor3=true;
-				if( old=="" || newC=="" || cNewC=="" ){	
+				if( old=="" || newC=="" || cNewC=="" ){
 					$("#continuar").show();
 					$("#loading").hide();
 					valor1=false;
@@ -106,10 +106,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido").click(function(){
-						$("#dialog-clave-inv").dialog("close"); 
+						$("#dialog-clave-inv").dialog("close");
 					});
 				}
 				if(newC == old){
@@ -120,10 +120,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido1").click(function(){
-						$("#dialog-clave-inv1").dialog("close"); 
+						$("#dialog-clave-inv1").dialog("close");
 					});
 
 				}
@@ -135,52 +135,66 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido2").click(function(){
-						$("#dialog-clave-inv2").dialog("close"); 
+						$("#dialog-clave-inv2").dialog("close");
 					});
 				}
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$("#continuar").hide();
-					$("#loading").show();		
-					$.post(base_url +"/users/actualizarPassword",{"passwordOld":old, "passwordNew":newC},function(data){  
+					$("#loading").show();
+					$.post(base_url +"/users/actualizarPassword",{"passwordOld":old, "passwordNew":newC},function(data){
 							if(data.rc == -61){
 								$(location).attr('href', base_url+'/users/error_gral');
-								
+
 							}
 							if(data.rc==0) {
-								
+
 								$("#content").children().remove();
 								$("#content").append($("#confirmacion").removeAttr('style')).html();
 
 					 			$("#aceptar").click(function(){
 
 					 				$(location).attr('href', base_url+'/dashboard');
-					 				
+
 								});
 							}
-							if(data.rc==-199){
-							
+							if(data.rc==-192) {
+
 								$("#content").children().remove();
+								$('#msg_pass').text('Contraseña actual incorrecta. Por favor verifique sus datos.')
 								$("#content").append($("#sinExito").removeAttr('style')).html();
 
 			 					$("#regresar").click(function(){
 
-			 					$(location).attr('href', base_url+'/users/cambiarPassword?t=t'); 
-			 				
+			 					$(location).attr('href', base_url+'/users/cambiarPassword?t=t');
+
 								});
 
-							}	
+							}
+							if(data.rc==-199) {
 
-						});	//POST	
+								$("#content").children().remove();
+								$('#msg_pass').text('Su contraseña no ha sido actualizada. Por favor verifique sus datos.')
+								$("#content").append($("#sinExito").removeAttr('style')).html();
+
+			 					$("#regresar").click(function(){
+
+			 					$(location).attr('href', base_url+'/users/cambiarPassword?t=t');
+
+								});
+
+							}
+
+						});	//POST
 				}
-			});	
+			});
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       modal:"true",
@@ -188,11 +202,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
 
-});  //FIN DE LA FUNCION GENERAL 
+});  //FIN DE LA FUNCION GENERAL

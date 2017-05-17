@@ -86,7 +86,7 @@
 					<div id="content-holder">
 							<div class="alert-error" id="message">
 								<span aria-hidden="true" class="icon-ok-sign"></span> Contraseña no actualizada
-								<p>Su contraseña no ha sido actualizada. Por favor verifique sus datos.</p>
+								<p id="msg_pass"></p>
 							</div>
 								<?php
 									if(isset($temporal)&&$temporal!='t'){
