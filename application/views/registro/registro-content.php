@@ -393,8 +393,7 @@ if($skin == 'latodo'){
 				<div class="form-actions">
 					<div id="msg2"></div>
 					<a href="<? echo $homeLink; ?>"> <button type="reset">Cancelar</button> </a>
-					<button id="registrar"> Continuar </button>
-					<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
+					<button id="registrar"> Continuar </button>					
 				</div>
 			</div>
 		</section>

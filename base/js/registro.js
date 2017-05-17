@@ -842,7 +842,7 @@ $(function(){
 
 
 							if(data.rc == -284) {
-							 msgService('Teléfono movil existente', 'El teléfono móvil ya se encuentra registrado.');
+							 msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
 							}
 
 						});	//POST

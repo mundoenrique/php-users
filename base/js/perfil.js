@@ -354,6 +354,7 @@ $(function(){
 		formUpdate.submit();
 
 		if(formUpdate.valid() == true){
+			$('#actualizar').css('display', 'none');
 			actualizarDatos();
 		}
 	}
@@ -927,7 +928,6 @@ $(function(){
 
 	$("#actualizar").click(function(e){
 		e.preventDefault();
-		$('#actualizar').css('display', 'none');
 		pais=$('#content').attr('accodpais');
 		email=$('#email').val();
 		userName=$('#content').attr('username');
@@ -1016,7 +1016,7 @@ $(function(){
 				return false;
 			else return true;
 
-		}, "Teléfono Movil está repetido");
+		}, "Teléfono Móvil está repetido");
 
 		jQuery.validator.addMethod("username", function(value,element,regex){
 			return regex.test(value);
@@ -1163,7 +1163,7 @@ $(function(){
 			},
 
 			messages: {
-				"dig-ver": "El campo Dígito Verificador NO puede estar vacío y debe contener solo números.",
+				"dig-ver": "Dígito verificador inválido.",
 				"primer_nombre" : "El campo Primer Nombre NO puede estar vacío y debe contener solo letras.",									//3
 				"segundo_nombre" : "El campo Segundo Nombre debe contener solo letras.",														//4
 				"primer_apellido" : "El campo Apellido Paterno NO puede estar vacío y debe contener solo letras.",								//5
