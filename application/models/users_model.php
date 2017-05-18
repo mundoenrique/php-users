@@ -34,6 +34,19 @@ class Users_model extends CI_Model {
 
   	log_message('info', 'Salida login usuario' . $salida);
 
+	$pais = json_decode($salida);
+	$pais = $pais->codPais;
+	log_message('info', 'PAIS --------------->>>>>' . $pais);
+	if ($pais == 'Ve') {
+		$mantURL = $this->config->item('base_url');
+		$mantURL = str_replace('personas', 'mantenimiento', $mantURL);
+		log_message('info', 'Redirect --------------->>>>>' . $mantURL);
+		return (true);
+		die;
+
+	};
+
+
   	if(isset($response) && $desdata->rc==0){
 	  	$newdata = array(
 				'idUsuario' => $desdata->idUsuario,
@@ -55,7 +68,7 @@ class Users_model extends CI_Model {
   	$salida = json_encode($desdata);
 
   	log_message('info', 'Salida INICIO DE SESION--->' . $salida);
-
+  	die;
   	return json_encode($desdata);
 	}
 
