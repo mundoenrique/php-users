@@ -565,7 +565,7 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 										<label>¿Es sujeto obligado a informar UIF-Peru, conforme al artículo 3° de la Ley N° 29038?</label>
 										<label class="label-inline">
 										<input id="sujeto-obligado-si" class="sujeto-obligado" name="sujeto_obligado" type="radio" value="1" /> Si
-										<input type="hidden" id="uif" name="uif" value="<?php echo $uif; ?>">
+										<input type="hidden" id="uif" name="uif" value="<?php echo $uif=='' ? 0 : $uif; ?>">
 										</label>
 										<label class="label-inline">
 										<input  id="sujeto-obligado-no" class="sujeto-obligado" name="sujeto_obligado" type="radio" value="0" /> No
