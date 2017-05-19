@@ -821,24 +821,34 @@ $(function(){
 				"acCodCiudad":acCodCiudad, "acCodEstado":acCodEstado, "acCodPais":acCodPais, "acTipo":acTipo,
 				"acZonaPostal":acZonaPostal, "disponeClaveSMS":disponeClaveSMS, "disponeClaveSMS":disponeClaveSMS,
 				"codigopais":codPaisresidencia, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
-			function(data){
-				if(data.rc==0){
-					$('#content-formulario-perfil').remove();
-					$('#exito').css('display','block');
-				}
-				else if(data.rc==-200){
-					$('.overlay-modal').show();
-					$('#dialogo-actualizacion-incompleta').show();
-				}else if(data.rc==-271){
-					$('.overlay-modal').show();
-					$('#dialogo-actualizacion-incompleta').show();
-				} else if(data.rc == -335) {
-					$('#dig-ver').focus();
-					systemDialog('Pefil', 'Dígito verificador inválido');
-				}
-				if(data.rc == -61){
-					$(location).attr('href', base_url+'/users/error_gral');
-				}
+			function(data) {
+				switch (data.rc) {
+					case 0:
+						$('#content-formulario-perfil').remove();
+						$('#exito').css('display','block');
+						break;
+					case -200:
+						$('.overlay-modal').show();
+						$('#dialogo-fallo-actualizacion').show();
+						break;
+					case -271:
+						$('.overlay-modal').show();
+						$('#dialogo-actualizacion-incompleta').show();
+						break;
+					case -335:
+						$('#dig-ver').focus();
+						systemDialog('Perfil', 'Dígito verificador inválido');
+						break;
+					case -317:
+					case -314:
+					case -313:
+					case -311:
+					case -21:
+						systemDialog('Activación Plata beneficios', 'El perfil se actualizó satisfactoriamente, pero no fue posible activar su tarjeta, comuníquese con el <strong>Centro de Contacto</strong>', 'dash');
+						break;						
+					default:
+						$(location).attr('href', base_url+'/users/error_gral');
+				}				
 			});
 	}
 
@@ -952,9 +962,7 @@ $(function(){
 					enviarForm();
 				} else if (response_email.rc == 0) {
 					$("#loading").hide();
-					//$('#msg-correo').show().text('El correo electrónico ya se encuentra registrado').css('color','#f04848;');
 					$('#email').removeClass('field-success').addClass('field-error');
-					//$('#actualizar').attr('disabled', 'disabled');
 
 					$("#dialogo_disponible").dialog({
 						title: "Correo no disponible",
@@ -1239,18 +1247,21 @@ $(function(){
 
 }); //FIN FUNCION GENERAL
 
-function systemDialog(title, msg) {
+function systemDialog(title, msg, action) {
 	$("#completar-afiliacion").dialog({
 		title: title,
 		modal: "true",
 		width: "440px",
 		open: function (event, ui) {
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			$('#msgAfil').text(msg);
+			$('#msgAfil').html(msg);
 		}
 	});
 	$("#acept").click(function () {
 		$('#actualizar').fadeIn();
 		$("#completar-afiliacion").dialog("close");
+		if(action == 'dash') {
+			$(location).attr('href', base_url+'/dashboard');
+		}		
 	});
 }

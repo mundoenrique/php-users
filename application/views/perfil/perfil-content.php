@@ -671,10 +671,11 @@ if(isset($numAfiliacion) || count($numAfiliacion)>0){
 				<div class="dialog-small" id="dialog">
 					<div class="alert-simple  alert-warning" id="message">
 						<span aria-hidden="true" class="icon-cancel-sign"></span>
-						<p>Los datos del perfil no fueron actualizados en su totalidad, por favor intente más tarde.</p>
+						<p>Los datos de la afiliación no fueron actualizados en su totalidad, por favor intente más tarde.</p>
 					</div>
 					<div class="form-actions">
-						<button id="invalido2">Aceptar</button>
+						<!-- <button id="invalido2">Aceptar</button> -->
+						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit">Aceptar</button> </a>
 					</div>
 				</div>
 			</div>

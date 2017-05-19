@@ -257,15 +257,23 @@ class Perfil_model extends CI_Model {
 
         log_message("info", "RESPONSE DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".json_encode($desdata));
 
-        if($desdata->rc == 0 && $aplicaPerfil=='S' && $verifyDigit != '') {
-            $this->session->set_userdata('afiliado', $contrato);
+        if($aplicaPerfil=='S' && $verifyDigit != '') {
+            switch ($desdata->rc) {
+                case -317:
+                case -314:
+                case -313:
+                case -311:
+                case -21:
+                case 0:
+                    $this->session->set_userdata('afiliado', $contrato);
+            }
         }
 
         return json_encode($desdata);
         // Simula respuesta de servicio
-        // $desdata = '{"rc":0,"msg":"Error cuenta invalida","className":"com.novo.objects.MO.RegistroUsuarioMO","bean":"{\"registroValido\":false,\"corporativa\":false,\"rc\":0}","logAcceso":"{\"sessionId\":\"17b85cb729c8fa03172ca6c2d9efd9fd\",\"userName\":\"40390499120517\",\"canal\":\"personasWeb\",\"modulo\":\"validar cuenta\",\"operacion\":\"validar cuenta\",\"RC\":-184,\"IP\":\"172.24.15.182\",\"dttimesstamp\":\"05\/12\/2017 17:21\",\"lenguaje\":\"ES\"}"}';
+        // $desdata = '{"rc":-317,"msg":"Error cuenta invalida"}';
         // $this->session->set_userdata('afiliado', $contrato);
-		// return $desdata;
+        // return $desdata;
 
     }
 
