@@ -68,7 +68,7 @@ class Users_model extends CI_Model {
   	$salida = json_encode($desdata);
 
   	log_message('info', 'Salida INICIO DE SESION--->' . $salida);
-  	die;
+  	
   	return json_encode($desdata);
 	}
 
