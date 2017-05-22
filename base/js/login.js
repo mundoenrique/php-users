@@ -132,14 +132,8 @@ $(function(){
 						habilitar();
 					});
 
-				}else if (data == 1) {
-					mantURL = base_url.replace('personas','mantenimiento');
-					window.location.replace(mantURL);
-					console.log(mantURL);
-				
 				}
-
-			else{
+				else{
 
 					$("#dialog-error").dialog({
 						title:"Error en el sistema",
