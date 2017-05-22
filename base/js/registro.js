@@ -687,6 +687,7 @@ $(function(){
 		form=$("#form-usuario");
 
 		if(form.valid() == true) {
+			$("#load_reg").show();
 
 			typeIdentifier		= $('#listaIdentificadores').val();					//1 N
 			nroDocument			= $('#holder-id').val();							//2 N
@@ -764,6 +765,7 @@ $(function(){
 					$.post(base_url + "/registro/registrar",
 						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
 						function(data) {
+							$("#load_reg").hide();
 							if(data.rc == 0) {
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
@@ -851,6 +853,7 @@ $(function(){
 					$.post(base_url + "/registro/registrar",
 						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence},
 						function(data) {
+							$("#load_reg").hide();
 							if(data.rc == 0) {
 
 								var cadena=		'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
@@ -935,7 +938,7 @@ $(function(){
 								
 							}
 						});	//POST
-				}
+				}				
 
 			} else { ///////////////////////////////////
 

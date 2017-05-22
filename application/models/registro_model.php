@@ -359,16 +359,18 @@ class Registro_model extends CI_Model {
 		log_message("info", "REQUEST DEL FORMULARIO LARGO ===> ".$data);
 
 		$dataEncry	= np_Hoplite_Encryption($data,1);
-		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName"))); //$this->session->userdata("userName")
-
+		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
+		
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data		= json_decode(utf8_encode($response));
-
+		
 		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 		log_message("info", "RESPONSE FINAL DEL REGISTRO ===>>> : ".json_encode($desdata));
 		return json_encode($desdata);
-
-		// $desdata = '{"rc":-284,"msg":"Error cuenta invalida","className":"com.novo.objects.MO.RegistroUsuarioMO","bean":"{\"registroValido\":false,\"corporativa\":false,\"rc\":0}","logAcceso":"{\"sessionId\":\"17b85cb729c8fa03172ca6c2d9efd9fd\",\"userName\":\"40390499120517\",\"canal\":\"personasWeb\",\"modulo\":\"validar cuenta\",\"operacion\":\"validar cuenta\",\"RC\":-184,\"IP\":\"172.24.15.182\",\"dttimesstamp\":\"05\/12\/2017 17:21\",\"lenguaje\":\"ES\"}"}';
+		
+		//Simula respuesta del servicio
+		// sleep(2);
+		// $desdata = '{"rc":0,"msg":"Error cuenta invalida"}';
 		// return $desdata;
 	}
 

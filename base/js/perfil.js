@@ -355,6 +355,7 @@ $(function(){
 
 		if(formUpdate.valid() == true){
 			$('#actualizar').css('display', 'none');
+			$("#load_reg").show();
 			actualizarDatos();
 		}
 	}
@@ -822,6 +823,7 @@ $(function(){
 				"acZonaPostal":acZonaPostal, "disponeClaveSMS":disponeClaveSMS, "disponeClaveSMS":disponeClaveSMS,
 				"codigopais":codPaisresidencia, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
 			function(data) {
+				$("#load_reg").hide();
 				switch (data.rc) {
 					case 0:
 						$('#content-formulario-perfil').remove();
