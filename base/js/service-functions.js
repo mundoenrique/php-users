@@ -56,7 +56,7 @@ function viewSelect (id) {
             action = 'lockReplace';
             break;
         case 'recover':
-            $('#msg-rec h2').text('Reposición de PIN');
+            $('#msg-rec h2').text('Solicitud de reposición de PIN');
             into = $('#recover');
             leave = $('#key, #replace');
             conceal = $('#change-key, #reason-rep');

@@ -121,7 +121,7 @@ $(function(){
             options = '<p class="field-tip" style="margin-left: 10px;">Indique la operación que desea realizar</p>',
             cadena;
         pais  = $(this).attr("pais");
-        options = (pais == 'Ve') ? 'Para reponer su PIN presione sobre Reposición de PIN' : options;
+        options = (pais == 'Ve') ? 'Haga clic aquí si requiere reponer su PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
         var intoReplace = (condition == 0 && pais != 'Ve') ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '';
 
 

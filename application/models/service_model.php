@@ -449,11 +449,11 @@ class Service_model extends CI_Model {
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode(utf8_encode($response));
         $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
+        
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
         // sleep(2);
-        // $response = '{"rc":-356,"msg":"Proceso OK"}';
+        // $response = '{"rc":2,"msg":"Proceso OK"}';
         // $desdata = json_decode($response);
 
         //código, título y mensaje para la respuesta a la vista
@@ -466,12 +466,12 @@ class Service_model extends CI_Model {
                 case 0:
                     $code = 0;
                     $title = 'Reposición de PIN';
-                    $msg = 'Reposición de PIN exitosa, le será enviado en los próximos días.';
+                    $msg = 'Solicitud procesada exitosamente. El PIN será enviado en sobre de seguridad a la dirección de su empresa en un máximo de 5 días hábiles.';
                     break;
                 case -356:
                     $code = 2;
                     $title = 'Reposición de PIN';
-                    $msg = 'La tarjeta tiene una reposición de PIN pendiente, le será enviado en los próximos días.';
+                    $msg = 'Su tarjeta ya posee una solicitud pendiente de reposición de PIN, que será enviado a la dirección de su empresa en los próximos días.';
                     break;
                 case -264:
                 case -304:
@@ -489,7 +489,7 @@ class Service_model extends CI_Model {
                 default:
                     $code = 7;
                     $title = 'Conexión Personas Online';
-                    $msg = 'Hubo un problema. Por favor intente más tarde.';
+                    $msg = 'Se ha presentado un problema en la gestión de su solicitud. Por favor inténtelo nuevamente más tarde.';
 
             }
         } else {

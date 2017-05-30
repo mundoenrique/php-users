@@ -33,7 +33,7 @@
                                 </div>
                             <?php elseif($pais == 'Ve'): ?>
                                 <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Para reponerr su PIN presione sobre Reposición de PIN</p>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Haga clic aquí si requiere reponer su PIN para acceso a operaciones en comercios y cajeros automáticos</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
                                         <li><span class="icon-key services-item"></span>Reposición <br>de PIN</li>
                                     </ul>
@@ -121,7 +121,8 @@
                             <div id="result-rec"></div>
                         </div>
                         <div id="rec-clave" class="msg-prevent" style="display: none">
-                            <h2>Si realmente desea reponer su PIN presione continuar</h2>
+                            <p class="msg-prin">Al confirmar esta solicitud, su PIN será enviado en sobre de seguridad a la dirección de su empresa, en un máximo de 5 días hábiles.</p>
+                            <p class="msg-sec">Si realmente desea solicitar la reposición de su PIN presione continuar.</p>
                         </div>
                         <form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec" disabled>
