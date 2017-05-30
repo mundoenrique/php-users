@@ -72,14 +72,7 @@
   color: #0e5b8c !important;
 }
 
-.msg-prin {
-    text-align: center;
-    color: #000;
-    font-size: 15px;
-    line-height: 20px;
-}
-
-.msg-sec {
+.msg-pin {
     text-align: center;
     color: #368db6;
     font-size: 18px;

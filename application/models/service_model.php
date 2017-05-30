@@ -443,7 +443,7 @@ class Service_model extends CI_Model {
         ));
 
         log_message("info", "REQUEST Recuperación de clave=====>>>>> ".$data);
-
+        
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
@@ -453,7 +453,7 @@ class Service_model extends CI_Model {
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
         // sleep(2);
-        // $response = '{"rc":2,"msg":"Proceso OK"}';
+        // $response = '{"rc":-264,"msg":"Proceso OK"}';
         // $desdata = json_decode($response);
 
         //código, título y mensaje para la respuesta a la vista
