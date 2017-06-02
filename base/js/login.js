@@ -3,7 +3,7 @@ path =window.location.href.split( '/' );
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
-$(function(){
+$(function() {
 
 	var user, pass;
 
@@ -58,8 +58,14 @@ $(function(){
 			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass) } );
 
 			$consulta.done(function(data){
-
-				if(data.rc==0){
+				
+				if (data == 1) {
+					$("#dialog-login-ve").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});					
+				} else if(data.rc==0) {
 
 					if(data.passwordTemp==1) {
 
@@ -75,7 +81,7 @@ $(function(){
 
 					}
 
-				}else if(data.rc==-1) {
+				} else if(data.rc==-1) {
 
 					$("#dialog-login").dialog({
 						modal:"true",
@@ -133,7 +139,7 @@ $(function(){
 					});
 
 				}
-				else{
+				else {
 
 					$("#dialog-error").dialog({
 						title:"Error en el sistema",

@@ -32,9 +32,15 @@ class Users_model extends CI_Model {
         $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data, 0)));
         $salida = json_encode($desdata);
 
-        log_message('info', 'Salida login usuario' . $salida);
+        log_message('info', 'Salida login usuario' . $salida);        
 
-        if(isset($response) && $desdata->rc==0){
+        // if(isset($response) && $desdata->rc==0){
+        //     $pais = $desdata->codPais;	    
+        //     
+        //     if($pais == 'Ve') {
+        //         return 1;
+        //     }
+            
             $newdata = array(
                 'idUsuario' => $desdata->idUsuario,
                 'userName' => $desdata->userName,
