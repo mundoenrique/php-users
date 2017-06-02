@@ -34,13 +34,12 @@ class Users_model extends CI_Model {
 
         log_message('info', 'Salida login usuario' . $salida);        
 
-        // if(isset($response) && $desdata->rc==0){
-        //     $pais = $desdata->codPais;	    
-        //     
-        //     if($pais == 'Ve') {
-        //         return 1;
-        //     }
-            
+        if(isset($response) && $desdata->rc==0){
+            // $pais = $desdata->codPais;	    
+            // 
+            // if($pais == 'Ve') {
+            //     return 1;
+            // }
             $newdata = array(
                 'idUsuario' => $desdata->idUsuario,
                 'userName' => $desdata->userName,
