@@ -83,6 +83,13 @@ if($skin == 'latodo'){
 	$closeLink = $this->config->item('base_url') . '/users/closeSess';
 }
 
+
+$fullname = ucwords($this->session->userdata('nombreCompleto'));
+if (strlen($fullname) >= 15) {
+	$fullname = substr($fullname, 0, 12) . '...';
+}
+
+
 //OBTIENE EL PAIS DEL USER
 $pais = $this->session->userdata('pais');
 
@@ -116,7 +123,8 @@ $pais = $this->session->userdata('pais');
 			</li>
 			<?php endif; ?>
 		<li class="<?php echo $clase_perfil?> menu-item account user">
-			<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><?php echo ucwords($this->session->userdata('nombreCompleto'));?><span aria-hidden="true" class="icon-chevron-down"></span></a>
+			<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><?php echo $fullname;?>
+			<span aria-hidden="true" class="icon-chevron-down"></span></a>
 			<ul class="submenu-user sub-menu">
 				<li class="sub-menu-item account-profile">
 					<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="subsection">Perfil</a>
