@@ -2,7 +2,7 @@
     <div id="content_plata">
         <article>
             <header>
-                <h1>Servicios</h1>
+                <h1>Atención al cliente</h1>
             </header>
 
             <section>
