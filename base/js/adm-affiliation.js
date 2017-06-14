@@ -1,5 +1,5 @@
 var path, base_cdn;
-path =window.location.href.split( '/' ); 
+path =window.location.href.split( '/' );
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 var pais;
@@ -19,21 +19,21 @@ var pais;
 		},function(){
 			$('.submenu-user').attr("style","display:none")
 	});
-	
-	// CARGA MODAL CTA ORIGEN 
-	$(".dialog").click(function(){                    
+
+	// CARGA MODAL CTA ORIGEN
+	$(".dialog").click(function(){
 		$("#content-product").dialog({
 			title:"Selección de Cuentas Origen",
 			modal:"true",
 			width:"940px",
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	}); 
-	$("#cerrar").click(function(){ 
+	});
+	$("#cerrar").click(function(){
   			$("#content-product").dialog("close");
 	});
 
 		// INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
-		var $container = $('#dashboard-donor');        
+		var $container = $('#dashboard-donor');
 
 		$container.isotope({
 			itemSelector : '.dashboard-item',
@@ -44,7 +44,7 @@ var pais;
 				queue: true
 			}
 		});
-		
+
 		var $optionSets = $('#filters-stack .option-set'),
 		$optionLinks = $optionSets.find('a');
 
@@ -72,13 +72,13 @@ var pais;
 		      // otherwise, apply new options
 		      $container.isotope( options );
 		  }
-		  
+
 		  return false;
 		});          // FINALIZA CONFIGURACION DE FILTROS
-	});		 // FIN DE CARGA MODAL CTAS ORIGEN									
-	
+	});		 // FIN DE CARGA MODAL CTAS ORIGEN
+
 	// FUNCIONALIDAD DE FILTROS CTAS ORIGEN
-	$('li.stack-item a').click(function(){                              
+	$('li.stack-item a').click(function(){
 		$('.stack').find('.current-stack-item').removeClass('current-stack-item');
 		$(this).parents('li').addClass('current-stack-item');
 	});
@@ -87,7 +87,7 @@ var pais;
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
-		$(".dashboard-item").click(function(){              
+		$(".dashboard-item").click(function(){
 
 			var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
 
@@ -156,14 +156,14 @@ var pais;
 		    		width:"940px",
 		    		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 		    	});
-			}); 
+			});
 
 		});//FIN
-	//$(".muestraDestino").click(function(){  
+	//$(".muestraDestino").click(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen){
 		var clase,clase1;
-		$.post("transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2P"},function(data) {  
+		$.post("transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2P"},function(data) {
 			if(data.rc == -61){
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
@@ -176,7 +176,7 @@ var pais;
 					imagen4=imagen3.replace(" ", "-");
 					imagen=imagen4.replace('/','-');
 						var cadena;
-						
+
 						cadena=  "<li class='dashboard-item "+item.nomEmp+" muestraDestino' card='"+item.noTarjeta+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.NombreCliente+"' emailCliente='"+item.emailCliente+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noTarjetaConMascara+"' empresa='"+item.nomEmp+"' producto='"+item.nombre_producto.replace(' ','-')+"'>";
 						cadena+=		"<div class='dashboard-item-box'>"
 						//cadena+=			"<img src='"+base_cdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />"
@@ -196,14 +196,14 @@ var pais;
 						cadena+=				"<p class='dashboard-item-category'>"+item.nombre_producto+"</p>"
 						cadena+=			"</div>"
 						cadena+=		"</div>"
-						cadena+=	"</li>"	
+						cadena+=	"</li>"
 
-					$("#dashboard").append(cadena);   
+					$("#dashboard").append(cadena);
 
-					});	
+					});
 
-				$('.muestraDestino').on('click',"#modificar",function(){ 
-		          
+				$('.muestraDestino').on('click',"#modificar",function(){
+
 					var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
 
 					tarjeta =$(this).parents(".dashboard-item").attr('card');
@@ -212,7 +212,7 @@ var pais;
 					emailCliente=$(this).parents(".dashboard-item").attr('emailCliente');
 					id_afiliacion=$(this).parents(".dashboard-item").attr('id_afiliacion');
 
-					
+
 					$('#selCtaOrigen').attr("style","display:none");
 
 					$("#content-holder").children().remove();
@@ -255,19 +255,19 @@ var pais;
 				      	ctaDestino+="</div>"
 				      	ctaDestino+="<div id='msg'></div>"
 
-				        $("#content-holder").append(ctaDestino); 
+				        $("#content-holder").append(ctaDestino);
 
 				        $("#cancelar1").click(function(){
-   
-   			 					$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 					$(location).attr('href', base_url+'/adm');
+
    							});
-				        
-				        $("#cambiar").click(function(){ 
+
+				        $("#cambiar").click(function(){
 
 
 							validar_campos();
-							
+
 							$("#datos").submit();
 
 							setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -275,7 +275,7 @@ var pais;
 							var form, notSms, notEmail;
 
 							form=$("#datos");
-				 		if(form.valid() == true) { 
+				 		if(form.valid() == true) {
 				        	var confirmacion;
 				        	var cDestino=$("#card-number").val();
 				        	var nombreDest=$("#card-holder").val();
@@ -310,16 +310,16 @@ var pais;
 							confirmacion+= 		"<button id='continuar'>Continuar</button>";
 							confirmacion+= 	"</div>";
 							confirmacion+=   "</div>";
-							$("#content-holder").append(confirmacion); 
-							
+							$("#content-holder").append(confirmacion);
+
 							$("#cancelar2").click(function(){
-   
-   			 					$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 					$(location).attr('href', base_url+'/adm');
+
    							});
 
-							$("#continuar").click(function(){ 
-								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":""},function(data) { 
+							$("#continuar").click(function(){
+								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":""},function(data) {
 				        			if(data.rc==0){
 				        				var exito;
 				        				$("#progress").attr('style','display:none');
@@ -337,9 +337,9 @@ var pais;
 										exito+= 	"<div class='form-actions'>";
 										exito+= 		"<button id='exit'>Finalizar</button>";
 										exito+= 	"</div>";
-										$("#content-holder").append(exito); 
+										$("#content-holder").append(exito);
 				        			}
-				        			
+
 				        			else{
 				        				var exito;
 				        				$("#progress").attr('style','display:none');
@@ -350,28 +350,28 @@ var pais;
 										exito+= 	"<div class='form-actions'>";
 										exito+= 		"<button id='exit'>Finalizar</button>";
 										exito+= 	"</div>";
-										$("#content-holder").append(exito); 
+										$("#content-holder").append(exito);
 				        			}
-				        			
+
 				        			$("#exit").click(function(){
-   
-   			 							$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 							$(location).attr('href', base_url+'/adm');
+
    									});
-								}); 
+								});
 							});
 						}
 							$("#cancelar").click(function(){
-   
-   			 					$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 					$(location).attr('href', base_url+'/adm');
+
    							});
-		 
+
 						});
 
 				});
-				
-				$('.muestraDestino').on('click',"#eliminar",function(){ 
+
+				$('.muestraDestino').on('click',"#eliminar",function(){
 
 					tarjeta =$(this).parents(".dashboard-item").attr('card');
 					id_ext_per=$(this).parents(".dashboard-item").attr('id_ext_per');
@@ -408,16 +408,16 @@ var pais;
 					eliminar+=				"<button id='cont'>Continuar</button>"
 					eliminar+=			"</div>"
 					eliminar+=	"</div>"
-					$("#content-holder").append(eliminar); 
+					$("#content-holder").append(eliminar);
 
-					$("#cont").click(function(){ 
+					$("#cont").click(function(){
 						$.ajaxSetup({async: false});
 						var ajax_data = {
-						  "noTarjeta":ctaOrigen, 
+						  "noTarjeta":ctaOrigen,
 						  "noCuentaDestino":tarjeta,
 						  "tipoOperacion":"P2P"
 						};
-		 
+
 						$.ajax({
 						  url: base_url +"/adm/eliminar",
 						  data: ajax_data,
@@ -440,7 +440,7 @@ var pais;
 								exito+= 	"<div class='form-actions'>";
 								exito+= 		"<button id='exit'>Finalizar</button>";
 								exito+= 	"</div>";
-								$("#content-holder").append(exito); 
+								$("#content-holder").append(exito);
 							}
 							else{
 								var exito;
@@ -454,18 +454,18 @@ var pais;
 								exito+= 	"</div>";
 								$("#content-holder").append(exito);
 							}
-							
+
 							$("#exit").click(function(){
-   
-   			 					$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 					$(location).attr('href', base_url+'/adm');
+
    							});
 
 						  }
 						});
-		
+
 						$.ajaxSetup({async: true});
-						//$.post("adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2P"},function(data) { 
+						//$.post("adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2P"},function(data) {
 							// if(data.rc==0){
 
 							// 	$("#progress").attr('style','display:none');
@@ -482,7 +482,7 @@ var pais;
 							// 	exito+= 	"<div class='form-actions'>";
 							// 	exito+= 		"<button id='exit'>Finalizar</button>";
 							// 	exito+= 	"</div>";
-							// 	$("#content-holder").append(exito); 
+							// 	$("#content-holder").append(exito);
 							// }
 							// if(data.rc == -61){
 							// 	$(location).attr('href', base_url+'/users/error_gral');
@@ -500,17 +500,17 @@ var pais;
 							// 	$("#content-holder").append(exito);
 							// }
 							// $("#exit").click(function(){
-   
-   			 // 					$(location).attr('href', base_url+'/adm'); 
-   			 				
+
+   			 // 					$(location).attr('href', base_url+'/adm');
+
    				// 			});
-						//});	
+						//});
 
 					});
 
 					$("#cancel").click(function(){
-   						$(location).attr('href', base_url+'/adm'); 
-   			 				
+   						$(location).attr('href', base_url+'/adm');
+
    					});
 				});
 
@@ -526,7 +526,7 @@ var pais;
 			}
 		});
 
-	}	
+	}
 
 // VALIDACIONES
 
@@ -537,26 +537,26 @@ function validar_campos(){
  		success: "valid"
  	});
 
-	
+
 		$("#datos").validate({
 
 			errorElement: "label",
 			ignore: "",
-			errorContainer: "#msg",	
+			errorContainer: "#msg",
 			errorClass: "field-error",
 			validClass: "field-success",
 			errorLabelContainer: "#msg",
 			rules: {
 				"card-number": {"required":true,"number": true},
 				"card-holder": {"required":true},
-				"bank-account-holder-id": {"required":true,"number": true},  
+				"bank-account-holder-id": {"required":true,"number": true},
 				"card-holder-email": {"required":true, "email": true}
 			},
 
 			messages: {
 				"card-number": "El n° de cuenta destino no puede estar vacío y debe contener solo números.",
 				"card-holder": "El beneficiario no puede estar vacío.",
-				"bank-account-holder-id": "El documento de identidad no puede estar vacío y debe contener solo números.", 
+				"bank-account-holder-id": "El documento de identidad no puede estar vacío y debe contener solo números.",
 				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)."
 			}
 		}); // VALIDATE
@@ -579,7 +579,7 @@ function normaliza(text) {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       modal:"true",
@@ -587,14 +587,14 @@ function normaliza(text) {
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
 
-});  //FIN DE LA FUNCION GENERAL 
+});  //FIN DE LA FUNCION GENERAL
 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

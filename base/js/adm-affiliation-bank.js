@@ -381,14 +381,31 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 										exito+= 		"<button id='exit'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
-				        			}
+				        			} else {
+				        				var exito,
+											msgAfiliation = '',
+											men = '(15)';
+										
+										switch (data.rc) {
+											case -340:
+												msgAfiliation = 'Cantidad de dígitos de la cuenta es invalida.';
+												break;
+											case -341:
+												msgAfiliation = 'El número de cuenta no corresponde al banco.';
+												break;
+											case -342:
+												msgAfiliation = 'Número de cuenta invalido';
+												break;
+											case -343:
+												msgAfiliation = 'Su tarjeta se encuentra bloqueda, código de bloqueo: (' + men.substr(1,2) + ')';
+												break;
+											default:
+										}
 
-				        			else{
-				        				var exito;
 										$("#progress").attr('style','display:none');
 						        		$("#content-holder").children().remove();
 										exito= "<div class='alert-error' id='message'>";
-										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada";
+										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada, " + msgAfiliation;
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
 										exito+= 		"<button id='exit'>Finalizar</button>";
