@@ -1236,7 +1236,7 @@ $(function(){
 					msgTranfer = 'Número de cuenta invalido.';
 					break;
 				case -343:
-					msgTranfer = 'Su tarjeta se encuentra bloqueda, código de bloqueo: ' + men.substr(34,35);
+					msgTranfer = 'Su tarjeta se encuentra bloqueada, código de bloqueo: ' + men.substr(34,35);
 					break;
 				default:
 					msgTranfer = 'Transacción fallida.'

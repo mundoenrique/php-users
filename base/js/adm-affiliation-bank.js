@@ -397,7 +397,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 												msgAfiliation = 'Número de cuenta invalido';
 												break;
 											case -343:
-												msgAfiliation = 'Su tarjeta se encuentra bloqueda, código de bloqueo: (' + men.substr(1,2) + ')';
+												msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
 												break;
 											default:
 										}
