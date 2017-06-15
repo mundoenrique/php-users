@@ -24,10 +24,6 @@ if($skin == 'latodo'){
             <div id="content-holder">
                 <h2>Verificación de Cuenta</h2>
                 <p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe proporcionar los siguientes datos relacionados con su cuenta:</p>
-                <div class="alert-warning" id="message">
-                    <span aria-hidden="true" class="icon-warning-sign"></span> Importante
-                    <p>Si es la primera vez que entras al nuevo sistema, ingresa la <strong>Clave Secreta</strong> (la que recibiste con tu tarjeta) o la <strong>Clave Web</strong> (la que creaste para consultar por Internet).</p>
-                </div>
                 <form accept-charset="utf-8" method="post" id="form-validar">
                     <fieldset>
                         <ul class="field-group">
@@ -46,7 +42,7 @@ if($skin == 'latodo'){
                                 <input class="field-medium" maxlength="12" id="card-holder-id" name="card-holder-id" type="text" value=""/>
                             </li>
                             <li class="field-group-item">
-                                <label for="card-holder-pin">Clave Secreta/Clave Web <abbr title="Si es la primera vez que entras al nuevo sistema, ingresa la Clave Secreta (la que recibiste con tu tarjeta) o la Clave Web (la que creaste para consultar por Internet)."><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+                                <label for="card-holder-pin">Clave Secreta (PIN) <abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
                                 <input class="field-medium" maxlength="15"  id="card-holder-pin" name="card-holder-pin" type="password" value=""/>
                             </li>
                         </ul>
