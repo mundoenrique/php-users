@@ -290,7 +290,7 @@ if(isset($data)){
 								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 								<div class='dashboard-item-network $marca'>$value->marca</div>
 								<div class='dashboard-item-info'>
-									<p class='dashboard-item-cardholder'>$value->nomPlastico</p>
+									<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
 									<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
 									<p class='dashboard-item-category'>$value->producto</p>
 								</div>
