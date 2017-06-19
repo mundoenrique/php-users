@@ -72,7 +72,7 @@
 
 			$salida = json_encode($desdata);
 
-			log_message("info", "Salida ctasDestino_load transferencia".$salida);
+			log_message("info", "Response ctasDestino_load transferencia====>>>>>".$salida);
 
 			return json_encode($desdata);
 
