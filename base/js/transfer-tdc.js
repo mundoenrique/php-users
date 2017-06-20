@@ -226,9 +226,7 @@ $(function(){
             acumCantidadOperacionesSemanales =data.parametrosTransferencias[0].acumCantidadOperacionesSemanales;
             acumCantidadOperacionesMensual =data.parametrosTransferencias[0].acumCantidadOperacionesMensual;
 			dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
-			montoComision = data.parametrosTransferencias[0].montoComision;
-			
-			console.log(montoComision);
+			montoComision = data.parametrosTransferencias[0].montoComision;			
 
 			$("#dashboard-beneficiary").empty();
 
