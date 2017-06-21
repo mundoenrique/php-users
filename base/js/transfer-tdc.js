@@ -915,7 +915,7 @@ $(function(){
 
 			cuentaDestino= $(item).attr("card");
 			id_afil_terceros= $(item).attr("id_afil");
-			monto=$(item).attr("monto");
+			monto=$(item).attr("monto").replace(',', '.');
 			descripcion=$(item).attr("concepto");
 			comision=$(item).attr("comision");
 
