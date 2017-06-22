@@ -1,7 +1,7 @@
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item">
-			<a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> Plata a Plata</a>
+			<a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> <?php echo lang("MENU_P2P");?></a>
 		</li>
 		<li class="menu-item  current-menu-item">
 			<a href="<? echo $this->config->item("base_url"); ?>/transfer/index_bank" rel="section"><span aria-hidden="true" class="icon-bank"></span> Cuentas Bancarias</a>

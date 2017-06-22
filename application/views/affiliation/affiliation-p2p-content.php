@@ -12,7 +12,7 @@
 <div id="content">
     <article>
         <header>
-            <!-- <h1>Afiliación Plata a Plata</h1> -->
+            <!-- <h1>Afiliación <?php echo lang("MENU_P2P");?></h1> -->
             <h1>Afiliación <?php echo lang("MENU_P2P");?></h1>
 
         </header>
@@ -211,7 +211,7 @@ foreach ($datos->cuentaOrigen as $value) {
             <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
             <!-- <a href="google.com"><button>No</button></a> -->
             <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button>Si</button> </a>
-            <!-- <p>¿Desea afiliar otra cuenta para transferencia Plata a Plata?</p> -->
+            <!-- <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p> -->
             <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p>
 
         </div>
@@ -246,7 +246,7 @@ foreach ($datos->cuentaOrigen as $value) {
             <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
             <!-- <a href="google.com"><button>No</button></a> -->
             <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button>Si</button> </a>
-            <!-- <p>¿Desea afiliar otra cuenta para transferencia Plata a Plata?</p> -->
+            <!-- <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p> -->
             <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p>
 
         </div>

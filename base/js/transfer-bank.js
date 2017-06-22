@@ -1,6 +1,6 @@
 var path, base_cdn;
 path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
+base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 var dobleAutenticacion,claveValida,claveC,confirpass,rpta1,montoMaxDiario,montoMaxMensual,montoMasComision,saldo_imp;
 

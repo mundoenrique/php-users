@@ -78,6 +78,18 @@ class Users extends CI_Controller {
 			redirect(current_url());
 		}
 
+		$baseCdnCookie = [
+			'name' => 'baseCdn',
+		    'value' => $this->config->item('base_url_cdn'),
+			'expire' => 0,
+			'domain' => $this->config->item('cookie_domain'),
+			'path' => $this->config->item('cookie_path'),
+			'prefix' => $this->config->item('cookie_prefix'),
+			'secure' => $this->config->item('cookie_secure')
+		];
+
+		$this->input->set_cookie($baseCdnCookie);
+
 		$styleSheets = array(
 			array('url' => 'signin.css', 'media' => 'screen'),
 			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
