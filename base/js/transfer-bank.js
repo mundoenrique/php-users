@@ -249,8 +249,8 @@ $(function(){
 					cadena+= "<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>";
 					cadena+=  "<p class='dashboard-item-cardnumber'>"+item.noCuentaConMascara+"</p>";
 					cadena+=  "<p class='dashboard-item-category'>"+item.banco+"</p>";
-					cadena+= "</div>"
-					cadena+= " </a>"
+					cadena+= "</div>";
+					cadena+= " </a>";
 					cadena+=  "</li>";
 
 					$("#dashboard-beneficiary").append(cadena);
@@ -455,11 +455,6 @@ $(function(){
 						$('#continuar').attr('disabled','');
 					}
 					dialogo();
-
-					// $( ".monto" ).focusout(function() {
-					// 	var moneda=$(".dashboard-item").attr("moneda");
-					// 	$("#balance-debit").html(moneda+sumar_saldo());
-					// });
 
 				}  //fin else
 
@@ -854,8 +849,6 @@ $(function(){
 
 										                                   $("#bodyConfirm").append(origen);
 
-
-
 										                                   $("#progress").children().remove();
 										                                   cabecera = "<ul class='steps'>";
 										                                   cabecera+=		"<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-exchange'></span> Transferir</li>";
@@ -884,6 +877,7 @@ $(function(){
 										                                   $("#confimacion_b").children().remove();
 										                                   completar1= 		'<button id="exit">Finalizar</button>';
 										                                   $("#confimacion_b").append(completar1).html();
+										                                   $('#transfer-success').show();
 										                                   $("#exit").click(function(){
 
 											                                   $(location).attr('href', base_url+'/dashboard');
@@ -906,8 +900,7 @@ $(function(){
 					                            open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				                            });//DIALOGO
 			} //IF CREAR CLAVE
-		} //DOBLE AUTENTIFICACION SI
-		else {
+		} else { //DOBLE AUTENTIFICACION SI
 			var cuentaOrigen = $("#nombreOrigenTransfer").attr("numeroCtaOrigen");
 			var idUsuario =  $("#nombreOrigenTransfer").attr("nombreCtaOrigen");
 			var cuentaDestino,id_afil_terceros,monto,descripcion, resultado;
@@ -963,6 +956,7 @@ $(function(){
 					$("#confimacion_b").children().remove();
 					completar1= 		'<button id="exit">Finalizar</button>';
 					$("#confimacion_b").append(completar1).html();
+					$('#transfer-success').show();
 					$("#exit").click(function(){
 						$(location).attr('href', base_url+'/dashboard');
 					}); //EXIT
@@ -1218,7 +1212,7 @@ $(function(){
 			$(item).find(".iconoTransferencia").removeClass("data-indicator icon-refresh icon-spin");
 			$(item).find(".iconoTransferencia").addClass('icon-ok-sign');
 			$(item).find("#estatus").empty();
-			$(item).find("#estatus").text("Transacción exitosa. Nro. Transacción: "+transferencia);
+			$(item).find("#estatus").text("Transacción exitosa. Nro. de Referencia: "+transferencia);
 
 			//$('#descripcion').text( $(this).val() );
 		}

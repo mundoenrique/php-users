@@ -211,6 +211,7 @@
 			$salida = json_encode($desdata);
 
 			/*$salida = '{"rc": -343, "msg": "La tarjeta se encuentra bloqueada (43).", "logAcceso": {"sessionId": "46485b5e1b4fc11fff7d768a8f543253", "userName": "TESTVZLA", "canal": "personasWeb", "modulo": "transferencia", "operacion": "procesar transferencia", "RC": 0, "IP": "172.24.15.182", "dttimesstamp": "06/14/2017 14:30", "lenguaje": "ES"}}';
+			$salida = '{"ctaOrigen":"5267491400303119","ctaDestino":"5267491200018313","monto":"7","descripcion":"prueba","tipoOpe":"P2C","idUsuario":"ANNY","id_afil_terceros":"74466","dataTransaccion":{"referencia":"101028","comision":"3","transferenciaRealizada":true},"rc":0,"msg":"Proceso OK","className":"com.novo.objects.MO.TransferenciaTarjetahabienteMO","token":"a6fbee02e833eb6f65336c3eec38a0b3","idOperation":"9","logAccesoObject":{"sessionId":"a969d785ba7c28c5bb230cb765e43814","userName":"ANNY","canal":"personasWeb","modulo":"transferencia","operacion":"procesar transferencia","RC":0,"IP":"172.24.15.162","dttimesstamp":"06\/20\/2017 11:18","lenguaje":"ES"}}';
 			$desdata = json_decode($salida);*/
 
 			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);

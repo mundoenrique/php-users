@@ -1,7 +1,7 @@
 <nav id="tabs-menu" style='display:none'>
     <ul class="menu">
         <li class="menu-item current-menu-item">
-            <!--  <a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> <?php echo lang("MENU_P2P");?></a> -->
+            <!--  <a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> Plata a Plata</a> -->
             <a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> <?php echo lang("MENU_P2P");?></a>
         </li>
         <li class="menu-item">
@@ -37,7 +37,7 @@
     <div id="content_plata" style='display:none'>
         <article>
             <header>
-                <!-- <h1>Transferencias <?php echo lang("MENU_P2P");?></h1> -->
+                <!-- <h1>Transferencias Plata a Plata</h1> -->
                 <h1>Transferencias <?php echo lang("MENU_P2P");?></h1>
 
             </header>
@@ -265,7 +265,7 @@ if($datos->rc==0){
 <div id="contentConfirmacion" style='display:none'>            <!--  INICIA VISTA DE CONFIRMACION-->
     <article>
         <header>
-            <!-- <h1>Transferencias <?php echo lang("MENU_P2P");?></h1> -->
+            <!-- <h1>Transferencias Plata a Plata</h1> -->
             <h1>Transferencias <?php echo lang("MENU_P2P");?></h1>
         </header>
         <section>
@@ -303,6 +303,9 @@ if($datos->rc==0){
                         </tbody>
                     </table>
                 </form>
+	            <div id="transfer-success" style="display: none">
+		            <p><?php echo lang('trans_card_confirm'); ?></p>
+	            </div>
                 <div class="form-actions" id="confimacion_t">
                     <a href="<? echo $this->config->item("base_url"); ?>/transferencia"><button type="reset">Cancelar</button></a>
                     <button id="confTransfer">Continuar</button>
@@ -321,7 +324,7 @@ if($datos->rc==0){
 <div id="finalizarTransferencia" style='display:none'>                  <!-- INICIA VISTA DE FINALIZACION DE TRANSFERENCIA -->
     <article>
         <header>
-            <!-- <h1>Transferencias <?php echo lang("MENU_P2P");?></h1> -->
+            <!-- <h1>Transferencias Plata a Plata</h1> -->
             <h1>Transferencias <?php echo lang("MENU_P2P");?></h1>
 
         </header>
@@ -401,7 +404,7 @@ if($datos->rc==0){
                 <div class="form-actions">
                     <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button>No</button></a>
                     <a href="<? echo $this->config->item("base_url"); ?>/transferencia"><button>Si</button></a>
-                    <!-- <p>¿Desea realizar otra transferencia <?php echo lang("MENU_P2P");?>?</p> -->
+                    <!-- <p>¿Desea realizar otra transferencia Plata a Plata?</p> -->
                     <p>¿Desea realizar otra transferencia <?php echo lang("MENU_P2P");?>?</p>
 
                 </div>
@@ -415,7 +418,7 @@ if($datos->rc==0){
 <div id="transferFinal" style='display:none'>
     <article>
         <header>
-            <!-- <h1>Transferencias <?php echo lang("MENU_P2P");?></h1> -->
+            <!-- <h1>Transferencias Plata a Plata</h1> -->
             <h1>Transferencias <?php echo lang("MENU_P2P");?></h1>
 
         </header>
@@ -460,7 +463,7 @@ if($datos->rc==0){
                 <div class="form-actions">
                     <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button>No</button></a>
                     <a href="<? echo $this->config->item("base_url"); ?>/transferencia"> <button>Si</button> </a>
-                    <!-- <p>¿Desea realizar otra transferencia <?php echo lang("MENU_P2P");?>?</p> -->
+                    <!-- <p>¿Desea realizar otra transferencia Plata a Plata?</p> -->
                     <p>¿Desea realizar otra transferencia <?php echo lang("MENU_P2P");?>?</p>
 
                 </div>
@@ -496,7 +499,7 @@ if($datos->rc==0){
     <div id="content">
         <article>
             <header>
-                <!-- <h1>Transferencias <?php echo lang("MENU_P2P");?></h1> -->
+                <!-- <h1>Transferencias Plata a Plata</h1> -->
                 <h1>Transferencias <?php echo lang("MENU_P2P");?></h1>
             </header>
             <section>

@@ -27,6 +27,7 @@ class Transfer extends CI_Controller {
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
 		$this->lang->load('format');
+		$this->lang->load('transfer');
 		$this->load->model('transfer_model', 'transfer');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -67,6 +68,7 @@ class Transfer extends CI_Controller {
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
 		$this->lang->load('format');
+		$this->lang->load('transfer');
 		$this->load->model('transfer_model', 'transfer');
 
 		$t=$this->session->userdata('transferir');

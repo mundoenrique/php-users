@@ -923,6 +923,7 @@ $(function(){
 												$("#confimacion_t").children().remove();
 												completar1= 		'<button id="exit">Finalizar</button>';
 												$("#confimacion_t").append(completar1).html();
+												$('#transfer-success').show();
 			            						$("#exit").click(function(){
 
 													$(location).attr('href', base_url+'/transferencia');
@@ -999,6 +1000,7 @@ $(function(){
 							$("#confimacion_t").children().remove();
 							completar1= 		'<button id="exit">Finalizar</button>';
 							$("#confimacion_t").append(completar1).html();
+							$('#transfer-success').show();
 							$("#exit").click(function(){
 
 								$(location).attr('href', base_url+'/dashboard');
@@ -1355,7 +1357,7 @@ function dialogo(){
 				$(item).find(".iconoTransferencia").removeClass("data-indicator icon-refresh icon-spin");
 				$(item).find(".iconoTransferencia").addClass('icon-ok-sign');
 				$(item).find("#estatus").empty();
-				$(item).find("#estatus").text("Transacción exitosa. Nro. Transacción: "+trans);
+				$(item).find("#estatus").text("Transacción exitosa. No. de Referencia: "+trans);
 
 			}else{
 

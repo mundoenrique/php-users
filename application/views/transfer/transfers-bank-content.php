@@ -297,6 +297,11 @@ if($datos->rc==0){
                         </tbody>
                     </table>
                 </form>
+	            <div id="transfer-success" style="display: none">
+		            <p><?php echo lang('trans_bank_confirm1'); ?></p>
+		            <p><?php echo lang('trans_bank_confirm2'); ?></p>
+		            <p><?php echo lang('trans_bank_confirm3'); ?></p>
+	            </div>
                 <div class="form-actions" id="confimacion_b">
                     <a href="<? echo $this->config->item("base_url"); ?>/transfer/index_bank"><button type="reset">Cancelar</button></a>
                     <button id="confirmacion_t">Continuar</button>
