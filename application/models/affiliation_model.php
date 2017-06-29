@@ -155,8 +155,10 @@ class Affiliation_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$data = json_decode(utf8_encode($response));		
+		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		
+		log_message('INFO', 'RESPONSE LISTA DE TARJETAS ORIGEN=====>>>>>'.json_encode($desdata));
 
 		return json_encode($desdata);
 
