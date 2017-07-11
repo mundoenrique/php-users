@@ -121,7 +121,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
 
-		$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
+		$(".product-button").removeClass("disabled-button");
+		$("#yearExp").attr("disabled",false);              // HABILITAR EDICION
+		$("#dayExp").attr("disabled",false);
 		$("#card-number").attr("disabled",false);
 		$("#card-holder").attr("disabled",false);
 		$("#bank-account-holder-id").attr("disabled",false);

@@ -55,6 +55,40 @@
                         </div>
                         <ul class="field-group">
                             <li class="field-group-item">
+								<label for="fechaExp">Fecha Expiracion</label>
+								<select id="dayExp" name="selectDay" disabled>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+								</select>
+                                <select id="yearExp" name="selectYear" disabled>
+                                    <?php
+                                        $actual = date('Y');
+                                        $anio = strtotime ( '-5 year' , strtotime ($actual ) ) ;
+                                        $anioFinal = strtotime ( '+5 year' , strtotime ($actual ) ) ;
+                                        $anio = date('Y', $anio);
+                                        $anioFinal = date('Y', $anioFinal);
+                                        for($i = $anio; $i<=$anioFinal; $i++):
+
+                                            $selected=" ";
+                                                if($i == $actual){
+                                                    $selected=" selected";
+                                                }
+                                    ?>
+                                    <option value="<?php echo substr($i, -2); ?>"<?php echo $selected; ?>><?php echo $i; ?></option>
+                                <?php endfor; ?>
+                                </select>
+                            </li>
+                            <li class="field-group-item">
                                 <label for="card-number">N° de Cuenta Destino</label>
                                 <input class="field-medium nrocta" disabled id="card-number" maxlength="16" name="card-number" type="text" />
                             </li>

@@ -217,7 +217,10 @@ var pais;
 
 					$("#content-holder").children().remove();
 
-						var ctaDestino;
+						var ctaDestino,
+								fechaExp = new Date();
+								console.log('fechaExp');
+
 						ctaDestino = "<div id='progress'>"
 						ctaDestino+= 	"<ul class='steps'>"
 						ctaDestino+= 		"<li class='step-item current-step-item'><span aria-hidden='true' class='icon-edit'></span> Modificación de Afiliación</li>"
@@ -228,6 +231,26 @@ var pais;
 						ctaDestino+= "<div id='content-holder'>"
 						ctaDestino+= "<form id='datos'>"
 						ctaDestino+= "<ul class='field-group'>"
+						ctaDestino+= 	"<li class='field-group-item'>"
+						ctaDestino+= 		"<label for='fechaExp'>Fecha Expiracion</label>"
+						ctaDestino+= 		"<select id='dayExp' name='selectDay'>"
+						ctaDestino+=			"<option value='01'>01</option>"
+						ctaDestino+=			"<option value='02'>02</option>"
+						ctaDestino+=			"<option value='03'>03</option>"
+						ctaDestino+=			"<option value='04'>04</option>"
+						ctaDestino+=			"<option value='05'>05</option>"
+						ctaDestino+=			"<option value='06'>06</option>"
+						ctaDestino+=			"<option value='07'>07</option>"
+						ctaDestino+=			"<option value='08'>08</option>"
+						ctaDestino+=			"<option value='09'>09</option>"
+						ctaDestino+=			"<option value='10'>10</option>"
+						ctaDestino+=			"<option value='11'>11</option>"
+						ctaDestino+=			"<option value='12'>12</option>"
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 		"<select id='yearExp' name='selectDay'>"
+						ctaDestino+=
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 	"</li>"
 				        ctaDestino+=    "<li class='field-group-item'>"
 				        ctaDestino+=       "<label for='card-number'>N° de Cuenta Destino</label>"
 				        ctaDestino+=       "<input class='field-medium' id='card-number' name='card-number' maxlength='16' type='text' value="+tarjeta+" />"
@@ -236,12 +259,12 @@ var pais;
 				        ctaDestino+=       "<label for='card-holder'>Beneficiario</label>"
 				        ctaDestino+=       "<input class='field-large' id='card-holder' name='card-holder' maxlength='30' type='text' value='"+nombre+"' />"
 				        ctaDestino+=    "</li>"
-				        ctaDestino+=    "<li class='field-group-item'>"
-				        ctaDestino+=       "<label for='bank-account-holder-id'>Documento de Identidad</label>"
-				        ctaDestino+=       "<input class='field-medium' id='bank-account-holder-id' name='bank-account-holder-id' maxlength='9' type='text' value="+id_ext_per+" />"
-				        ctaDestino+=    "</li>"
 				        ctaDestino+= "</ul>"
 				        ctaDestino+=  "<ul class='field-group'>"
+						ctaDestino+=    "<li class='field-group-item'>"
+						ctaDestino+=       "<label for='bank-account-holder-id'>Documento de Identidad</label>"
+						ctaDestino+=       "<input class='field-medium' id='bank-account-holder-id' name='bank-account-holder-id' maxlength='9' type='text' value="+id_ext_per+" />"
+						ctaDestino+=    "</li>"
 				        ctaDestino+=    "<li class='field-group-item'>"
 				        ctaDestino+=       "<label for='card-holder-email'>Correo Electrónico</label>"
 				        ctaDestino+=       "<input class='field-large' id='card-holder-email' name='card-holder-email' maxlength='30'  type='text' value="+emailCliente+" />"

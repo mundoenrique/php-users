@@ -151,8 +151,8 @@
 
 		$this->load->model('affiliation_model', 'cuentaP2P');
 		$noTarjeta =  $this->input->post('noTarjeta');
-
-		$this->output->set_content_type('application/json')->set_output($this->cuentaP2P->affiliationP2T_cuenta($noTarjeta));
+		$noTarjeta =  $this->input->post('fechaExp');
+		$this->output->set_content_type('application/json')->set_output($this->cuentaP2P->affiliationP2T_cuenta($noTarjeta, $fechaExp));
 
 	}
 

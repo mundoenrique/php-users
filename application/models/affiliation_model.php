@@ -5,7 +5,7 @@ class Affiliation_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ class Affiliation_model extends CI_Model {
 
 		return json_encode($desdata);
 
-	}		//FIN 
+	}		//FIN
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ class Affiliation_model extends CI_Model {
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			),JSON_UNESCAPED_UNICODE);
-		
+
 		log_message("info","JSON afiliacion P2T-C  json",$data);
 
 		$dataEncry = np_Hoplite_Encryption($data,1);
@@ -80,21 +80,22 @@ class Affiliation_model extends CI_Model {
 		log_message("info","JSON afiliacion P2T-C response----->>>>".json_encode($desdata));
 		return json_encode($desdata);
 
-	}		//FIN 
+	}		//FIN
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//CUENTAS
-	public function affiliationP2T_cuenta($noTarjeta) {
+	public function affiliationP2T_cuenta($noTarjeta, $fechaExp) {
 
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","afiliar","consultar tarjeta afiliacion");
 		$data = json_encode(array(
 			"idOperation"=>"45",
 			"className"=>"com.novo.objects.TOs.TarjetaTO",
 			"noTarjeta"=>$noTarjeta,
+			"validacionFechaExp"=>$fechaExp,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			),JSON_UNESCAPED_UNICODE);
-		
+
 		log_message("info","JSON tarjeta P2T-C 55 json".$data);
 
 		$dataEncry = np_Hoplite_Encryption($data,1);
@@ -107,7 +108,7 @@ class Affiliation_model extends CI_Model {
 		log_message("info","JSON tarjeta P2T-C response ".$response);
 		return json_encode($desdata);
 
-	}		//FIN 
+	}		//FIN
 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -125,7 +126,7 @@ class Affiliation_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 			));
 		//print_r($data);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
@@ -138,7 +139,7 @@ class Affiliation_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//LLAMADA A CARGAR CUENTAS ORIGEN
-	public function ctasOrigen_load($operacion)				
+	public function ctasOrigen_load($operacion)
 	{
 	    //PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas origen");
@@ -151,13 +152,13 @@ class Affiliation_model extends CI_Model {
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			));
-		
+
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));		
+		$data = json_decode(utf8_encode($response));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-		
+
 		log_message('INFO', 'RESPONSE LISTA DE TARJETAS ORIGEN=====>>>>>'.json_encode($desdata));
 
 		return json_encode($desdata);
