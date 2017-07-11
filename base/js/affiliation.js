@@ -123,7 +123,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 		$(".product-button").removeClass("disabled-button");
 		$("#yearExp").attr("disabled",false);              // HABILITAR EDICION
-		$("#dayExp").attr("disabled",false);
+		$("#MonthExp").attr("disabled",false);
 		$("#card-number").attr("disabled",false);
 		$("#card-holder").attr("disabled",false);
 		$("#bank-account-holder-id").attr("disabled",false);
@@ -160,7 +160,6 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		$("#validate_afiliacion").submit();
  		setTimeout(function(){$("#msg").fadeOut();},5000);
  		var form=$("#validate_afiliacion");
- 		//numeroCta=$("#cargarConfirmacion").find("#ctaAfiliar").attr("numeroCta");
  		numeroCta=$("#content-holder").find(".nrocta").val();
 
 		email=$("#cargarConfirmacion").find("#ctaAfiliar").attr("email");
@@ -177,6 +176,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 					nombreCtaOrigen=$("#donor").find("#nombreCtaOrigen").html();
 					marca=$("#donor").find("#donor-cardnumber-origen").attr("producto");
 					email=$("#content-holder").find("#card-holder-email").val();
+					expDate = $("#MonthExp").val() + $("#yearExp").val();
 					var today = new Date();
 					hora= (today.getHours())+':'+today.getMinutes()+':'+today.getSeconds();
 					var dd = today.getDate();
@@ -200,7 +200,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 					$("#content-holder").append($("#content-confirmacion").html());
 
 					$(".continuar").click(function(){
-						$.post(base_url +"/affiliation/affiliation",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2P","email":email,"cedula":cedula,"prefix":prefix},function(data){
+						$.post(base_url +"/affiliation/affiliation",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2P","email":email,"cedula":cedula,"prefix":prefix, "expDate":expDate},function(data){
 
 							if(data.rc==0||data.rc==-188){
 								datos_finalizacion= 			'<tr>';
@@ -328,16 +328,16 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 			validClass: "field-success",
 			errorLabelContainer: "#msg",
 			rules: {
-				//"card-holder": "required",
 				"card-number":{"required":true,"number":true,"minlength":16},
-				//"bank-account-holder-id": {"required":true,"number":true},
-				"card-holder-email": {"required":true, "email": true}
+				"card-holder-email": {"required":true, "email": true},
+				"MonthExp": {"required": true},
+				"yearExp": {"required": true}
 			},
 			messages: {
-				// "card-holder": "El nombre del beneficiario no puede estar vacío",
 				"card-number": "El número de cuenta no puede estar vacío y debe contener 16 números",
-				// "bank-account-holder-id": "El documento de identidad no puede estar vacío y debe contener solo números",
-				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)"
+				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

@@ -1205,7 +1205,7 @@ function validar_clave(claveConfir){
 			$(item).find(".iconoTransferencia").removeClass("data-indicator icon-refresh icon-spin");
 			$(item).find(".iconoTransferencia").addClass('icon-ok-sign');
 			$(item).find("#estatus").empty();
-			$(item).find("#estatus").text("Transacción exitosa. Nro. Transacción: "+transferencia);
+			$(item).find("#estatus").text("Transacción exitosa. Nro. de Referencia: "+transferencia);
 		}
 		else{
 			$(item).find(".data-resultado").addClass('data-error');

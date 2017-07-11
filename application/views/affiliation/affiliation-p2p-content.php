@@ -55,8 +55,9 @@
                         </div>
                         <ul class="field-group">
                             <li class="field-group-item">
-								<label for="fechaExp">Fecha Expiracion</label>
-								<select id="dayExp" name="selectDay" disabled>
+								<label for="dayExp">Vto cuenta origen</label>
+								<select id="MonthExp" name="MonthExp" disabled>
+                                    <option value="">Mes</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
                                     <option value="03">03</option>
@@ -70,7 +71,8 @@
                                     <option value="11">11</option>
                                     <option value="12">12</option>
 								</select>
-                                <select id="yearExp" name="selectYear" disabled>
+                                <select id="yearExp" name="yearExp" disabled>
+                                    <option value="">Año</option>
                                     <?php
                                         $actual = date('Y');
                                         $anio = strtotime ( '-5 year' , strtotime ($actual ) ) ;
@@ -78,13 +80,8 @@
                                         $anio = date('Y', $anio);
                                         $anioFinal = date('Y', $anioFinal);
                                         for($i = $anio; $i<=$anioFinal; $i++):
-
-                                            $selected=" ";
-                                                if($i == $actual){
-                                                    $selected=" selected";
-                                                }
                                     ?>
-                                    <option value="<?php echo substr($i, -2); ?>"<?php echo $selected; ?>><?php echo $i; ?></option>
+                                    <option value="<?php echo substr($i, -2); ?>"><?php echo $i; ?></option>
                                 <?php endfor; ?>
                                 </select>
                             </li>

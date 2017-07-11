@@ -11,7 +11,7 @@ class Affiliation_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//AFILIAR CUENTA PLATA PLATA
-	public function affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula,$prefix) {
+	public function affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula,$prefix, $expDate) {
 
 	    									                  //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","afiliar","procesar afiliacion");
@@ -27,6 +27,7 @@ class Affiliation_model extends CI_Model {
 			"canal"=> "CPO",
 			"id_ext_per"=>$cedula,
 			"prefix"=>$prefix,
+			"validacionFechaExp"=>$expDate,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			),JSON_UNESCAPED_UNICODE);
@@ -34,13 +35,13 @@ class Affiliation_model extends CI_Model {
 		//print_r($data);
 
 		log_message("info", "JSON afiliacion P2P : ".$data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
-		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
-		return json_encode($desdata);
+		// $dataEncry = np_Hoplite_Encryption($data,1);
+		// $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
+		// $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		// $data = json_decode(utf8_encode($response));
+		// $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		// 
+		// return json_encode($desdata);
 
 	}		//FIN
 
@@ -84,14 +85,13 @@ class Affiliation_model extends CI_Model {
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//CUENTAS
-	public function affiliationP2T_cuenta($noTarjeta, $fechaExp) {
+	public function affiliationP2T_cuenta($noTarjeta) {
 
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","afiliar","consultar tarjeta afiliacion");
 		$data = json_encode(array(
 			"idOperation"=>"45",
 			"className"=>"com.novo.objects.TOs.TarjetaTO",
 			"noTarjeta"=>$noTarjeta,
-			"validacionFechaExp"=>$fechaExp,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			),JSON_UNESCAPED_UNICODE);

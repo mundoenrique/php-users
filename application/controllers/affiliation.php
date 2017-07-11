@@ -151,8 +151,7 @@
 
 		$this->load->model('affiliation_model', 'cuentaP2P');
 		$noTarjeta =  $this->input->post('noTarjeta');
-		$noTarjeta =  $this->input->post('fechaExp');
-		$this->output->set_content_type('application/json')->set_output($this->cuentaP2P->affiliationP2T_cuenta($noTarjeta, $fechaExp));
+		$this->output->set_content_type('application/json')->set_output($this->cuentaP2P->affiliationP2T_cuenta($noTarjeta));
 
 	}
 
@@ -177,9 +176,10 @@
 		$email = $this->input->post('email');
 		$cedula = $this->input->post('cedula');
 		$prefix = $this->input->post('prefix');
+		$expDate = $this->input->post('expDate');
 
-		$this->output->set_content_type('application/json')->set_output($this->affiliation->affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula, $prefix));
 
+		$this->output->set_content_type('application/json')->set_output($this->affiliation->affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula, $prefix, $expDate));
 	}
 
 
