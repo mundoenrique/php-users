@@ -217,9 +217,15 @@ var pais;
 
 					$("#content-holder").children().remove();
 
-						var ctaDestino,
-								fechaExp = new Date();
-								console.log('fechaExp');
+						var ctaDestino, fechaExp,yearNow, fullYearDate,fiveyearLess, fiveYearMore, i, yearSelect = [];
+							yearNow = new Date();
+							fullYearDate = yearNow.getFullYear();
+							fiveyearLess = fullYearDate - 5;
+							fiveYearMore = fullYearDate +5;
+
+							for (i = fiveyearLess; i <= fiveYearMore; i++){
+								yearSelect.push(i);
+								}
 
 						ctaDestino = "<div id='progress'>"
 						ctaDestino+= 	"<ul class='steps'>"
@@ -232,8 +238,9 @@ var pais;
 						ctaDestino+= "<form id='datos'>"
 						ctaDestino+= "<ul class='field-group'>"
 						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='fechaExp'>Fecha Expiracion</label>"
-						ctaDestino+= 		"<select id='dayExp' name='selectDay'>"
+						ctaDestino+= 		"<label for='dayExp'>Vto cuenta origen</label>"
+						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+						ctaDestino+=            "<option value=''>Mes</option>"
 						ctaDestino+=			"<option value='01'>01</option>"
 						ctaDestino+=			"<option value='02'>02</option>"
 						ctaDestino+=			"<option value='03'>03</option>"
@@ -247,8 +254,8 @@ var pais;
 						ctaDestino+=			"<option value='11'>11</option>"
 						ctaDestino+=			"<option value='12'>12</option>"
 						ctaDestino+= 		"</select>"
-						ctaDestino+= 		"<select id='yearExp' name='selectDay'>"
-						ctaDestino+=
+						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+						ctaDestino+=			"<option value=''>Año</option>"
 						ctaDestino+= 		"</select>"
 						ctaDestino+= 	"</li>"
 				        ctaDestino+=    "<li class='field-group-item'>"
@@ -279,6 +286,12 @@ var pais;
 				      	ctaDestino+="<div id='msg'></div>"
 
 				        $("#content-holder").append(ctaDestino);
+
+						$.each(yearSelect,function(index,value){
+							var lastDigit = value.toString().substring(2,4);
+							var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
+							$("#yearExp").append(yearPrueba);
+						})
 
 				        $("#cancelar1").click(function(){
 
@@ -570,17 +583,21 @@ function validar_campos(){
 			validClass: "field-success",
 			errorLabelContainer: "#msg",
 			rules: {
-				"card-number": {"required":true,"number": true},
+				"card-number": {"required":true,"number": true, "minlength":16},
 				"card-holder": {"required":true},
 				"bank-account-holder-id": {"required":true,"number": true},
-				"card-holder-email": {"required":true, "email": true}
+				"card-holder-email": {"required":true, "email": true},
+				"MonthExp": {"required": true},
+				"yearExp": {"required": true}
 			},
 
 			messages: {
 				"card-number": "El n° de cuenta destino no puede estar vacío y debe contener solo números.",
 				"card-holder": "El beneficiario no puede estar vacío.",
 				"bank-account-holder-id": "El documento de identidad no puede estar vacío y debe contener solo números.",
-				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)."
+				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com).",
+				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

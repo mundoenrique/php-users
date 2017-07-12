@@ -82,6 +82,37 @@
 								<label for="bank-account-holder-email">Correo Electrónico</label>
 								<input class="field-large" id="bank-account-holder-email" maxlength="60" disabled  name="bank-account-holder-email" type="text" />
 							</li>
+							<li class="field-group-item">
+								<label for="dayExp">Vto cuenta origen</label>
+								<select id="MonthExp" name="MonthExp" disabled>
+									<option value="">Mes</option>
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								<select id="yearExp" name="yearExp" disabled>
+									<option value="">Año</option>
+									<?php
+										$actual = date('Y');
+										$anio = strtotime ( '-5 year' , strtotime ($actual ) ) ;
+										$anioFinal = strtotime ( '+5 year' , strtotime ($actual ) ) ;
+										$anio = date('Y', $anio);
+										$anioFinal = date('Y', $anioFinal);
+										for($i = $anio; $i<=$anioFinal; $i++):
+									?>
+									<option value="<?php echo substr($i, -2); ?>"><?php echo $i; ?></option>
+								<?php endfor; ?>
+								</select>
+							</li>
 						</ul>
 					</fieldset>
 				</form>

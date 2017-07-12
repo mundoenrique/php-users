@@ -5,7 +5,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
 $(function(){
-	
+
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 		$('.submenu-transfer').attr("style","display:block")
@@ -312,7 +312,7 @@ $(function(){
 				} else {
 					var msgAfiliation = '',
 						men = '(15)';
-					
+
 					switch (data.rc) {
 						case -340:
 							msgAfiliation = 'Cantidad de dígitos de la cuenta es invalida.';
@@ -327,7 +327,7 @@ $(function(){
 							msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
 							break;
 						default:
-							
+
 					}
 
 					datos_finalizacion =      '<tr>';
@@ -423,7 +423,9 @@ $(function(){
 				                                   "doc-name": {"required":true},
 				                                   "bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
 				                                   "bank-account-holder": {"required":true, "pattern":letter},
-				                                   "bank-account-holder-email": {"required":true, "email": true}
+				                                   "bank-account-holder-email": {"required":true, "email": true},
+												   "MonthExp": {"required": true},
+												   "yearExp": {"required": true}
 			                                   },
 			                                   messages: {
 
@@ -440,7 +442,9 @@ $(function(){
 					                                   required: "El beneficiario no puede estar vacío",
 					                                   pattern: "El beneficiario no debe tener caracteres especiales"
 				                                   },
-				                                   "bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)"
+				                                   "bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+												   "MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+												   "yearExp": "Seleccione el año de vencimiento de su tarjeta"
 			                                   }
 		                                   }); // VALIDATE
 	}
@@ -464,4 +468,3 @@ $(function(){
 
 
 });  //FIN DE LA FUNCION GENERAL
-
