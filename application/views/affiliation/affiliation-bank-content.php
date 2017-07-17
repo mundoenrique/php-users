@@ -52,38 +52,7 @@
 						</div>
 						<ul class="field-group">
 							<li class="field-group-item">
-								<label for="bank-name">Banco</label>
-								<select id="bank-name" name="bank-name">
-									<option selected value="">Seleccionar</option>
-								</select>
-							</li>
-							<li class="field-group-item">
-								<label for="card-number">N° de Cuenta Destino</label>
-								<input class="field-medium" id="card-number" maxlength="20" disabled name="card-number" type="text" />
-							</li>
-							<li class="field-group-item">
-								<label for="bank-account-holder">Beneficiario</label>
-								<input class="field-large" id="bank-account-holder" maxlength="35" disabled name="bank-account-holder" type="text" />
-							</li>
-						</ul>
-						<ul class="field-group">
-							<li class="field-group-item">
-								<label for="doc-name">Documento de Identidad</label>
-								<select id="doc-name" name="doc-name">
-									<option selected value="">Seleccionar</option>
-									<option value="V">V</option>
-									<option value="E">E</option>
-									<option value="J">J</option>
-									<option value="G">G</option>
-								</select>
-								<input class="field-medium" id="bank-account-holder-id" maxlength="14" minlength="5" disabled  name="bank-account-holder-id" type="text" />
-							</li>
-							<li class="field-group-item">
-								<label for="bank-account-holder-email">Correo Electrónico</label>
-								<input class="field-large" id="bank-account-holder-email" maxlength="60" disabled  name="bank-account-holder-email" type="text" />
-							</li>
-							<li class="field-group-item">
-								<label for="dayExp">Vto cuenta origen</label>
+								<label for="dayExp">Fecha de Vencimiento</label>
 								<select id="MonthExp" name="MonthExp" disabled>
 									<option value="">Mes</option>
 									<option value="01">01</option>
@@ -112,6 +81,39 @@
 									<option value="<?php echo substr($i, -2); ?>"><?php echo $i; ?></option>
 								<?php endfor; ?>
 								</select>
+							</li>
+							<li class="field-group-item">
+								<label for="bank-name">Banco</label>
+								<select id="bank-name" name="bank-name">
+									<option selected value="">Seleccionar</option>
+								</select>
+							</li>
+						</ul>
+						<ul class="field-group">
+							<li class="field-group-item">
+								<label for="card-number">N° de Cuenta Destino</label>
+								<input class="field-medium" id="card-number" maxlength="20" disabled name="card-number" type="text" />
+							</li>
+							<li class="field-group-item">
+								<label for="bank-account-holder">Beneficiario</label>
+								<input class="field-large" id="bank-account-holder" maxlength="35" disabled name="bank-account-holder" type="text" />
+							</li>
+						</ul>
+						<ul class="field-group">
+							<li class="field-group-item">
+								<label for="doc-name">Documento de Identidad</label>
+								<select id="doc-name" name="doc-name">
+									<option selected value="">Seleccionar</option>
+									<option value="V">V</option>
+									<option value="E">E</option>
+									<option value="J">J</option>
+									<option value="G">G</option>
+								</select>
+								<input class="field-medium" id="bank-account-holder-id" maxlength="14" minlength="5" disabled  name="bank-account-holder-id" type="text" />
+							</li>
+							<li class="field-group-item">
+								<label for="bank-account-holder-email">Correo Electrónico</label>
+								<input class="field-large" id="bank-account-holder-email" maxlength="60" disabled  name="bank-account-holder-email" type="text" />
 							</li>
 						</ul>
 					</fieldset>

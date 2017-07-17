@@ -147,7 +147,15 @@ $(function(){
 
 	$(".dashboard-item").click(function(){              // FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
 
-		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre, moneda;
+		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre, moneda, fechaExp, yearNow, fullYearDate, fiveyearLess, fiveYearMore, i, yearSelect = [];
+		yearNow = new Date();
+		fullYearDate = yearNow.getFullYear();
+		fiveyearLess = fullYearDate - 5;
+		fiveYearMore = fullYearDate +5;
+
+		for (i = fiveyearLess; i <= fiveYearMore; i++){
+			yearSelect.push(i);
+			}
 
 		imagen=$(this).find('img').attr('src');
 		tarjeta=$(this).attr('card');
@@ -179,13 +187,40 @@ $(function(){
 		cadena+=				'</nav>';
 		cadena+=			'</div>';
 		cadena+=	'<div class="product-scheme">';
-		cadena+=		'<ul class="product-balance-group">';
+		cadena+=		'<ul class="product-balance-group" style="margin: 10px 0">';
 		cadena+=			'<li>Disponible <span class="product-balance" id="balance-available">'+moneda+' 0.00</span></li>';
 		cadena+=			'<li>A debitar <span class="product-balance debitar" id="balance-debit">'+moneda+' 0.00</span></li>';
 		cadena+=		'</ul>';
+		cadena+= 	"<ul class='field-group'>";
+		cadena+= 		"<li class='field-group-item'>"
+		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>"
+		cadena+= 			"<select id='MonthExp' name='MonthExp'>"
+		cadena+=            	"<option value=''>Mes</option>"
+		cadena+=				"<option value='01'>01</option>"
+		cadena+=				"<option value='02'>02</option>"
+		cadena+=				"<option value='03'>03</option>"
+		cadena+=				"<option value='04'>04</option>"
+		cadena+=				"<option value='05'>05</option>"
+		cadena+=				"<option value='06'>06</option>"
+		cadena+=				"<option value='07'>07</option>"
+		cadena+=				"<option value='08'>08</option>"
+		cadena+=				"<option value='09'>09</option>"
+		cadena+=				"<option value='10'>10</option>"
+		cadena+=				"<option value='11'>11</option>"
+		cadena+=				"<option value='12'>12</option>"
+		cadena+= 			"</select>"
+		cadena+= 			"<select id='yearExp' name='yearExp'>"
+		cadena+=				"<option value=''>Año</option>"
+		cadena+= 			"</select>"
+		cadena+= 		"</li>"
 		cadena+=	'</div>';
 
 			$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
+			$.each(yearSelect,function(index,value){
+				var lastDigit = value.toString().substring(2,4);
+				var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
+				$("#yearExp").append(yearPrueba);
+			})
 
 			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(this).attr("card")},function(data){           // CARGAR SALDO CUENTAS ORIGEN
 				var saldo=data.disponible;
@@ -420,9 +455,9 @@ $(function(){
 					            });
 					            $(this).val("");
 					 		}
-					 		 if ( (parseFloat(montotr)) > parseFloat(montoMaxOperaciones)){
+								 if ( (parseFloat(montotr)) > parseFloat(montoMaxOperaciones)){
 
-					 			$("#dialog-max-monto").dialog({
+									$("#dialog-max-monto").dialog({
 				                title:"Monto no permitido",
 				                modal:"true",
 				                width:"440px",
@@ -433,7 +468,7 @@ $(function(){
 					              $("#dialog-max-monto").dialog("close");
 					            });
 					            $(this).val("");
-					 		}
+								}
 
 							if((parseFloat(montotr)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
 
@@ -560,7 +595,7 @@ $(function(){
 			$("#tdestino").append("<input id='montoTotal' name='montoTotal' type='hidden' class='checkTotal' value='' />");
 			$("#montoTotal").val(sumar_saldo());
 			total= sumar_saldo();
-			console.info(total);
+
 			//saldo = parseFloat($("#balance-available").attr("saldo"));
 			saldo= saldo_imp;
 			// saldo.toFixed(2);
@@ -569,33 +604,34 @@ $(function(){
 			valor_concepto3= $("#beneficiary-3x-description").val();
 
 
-			if((valor_concepto1=="")||(valor_concepto2=="")||(valor_concepto3=="")){
-				$("#campos_vacios").dialog({
-                title:"Error Campos",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
+			var errorResponse;
+			var errorSelection = [];
 
-	            $("#error_campos").click(function(){
-	              $("#campos_vacios").dialog("close");
-	            });
-	            confirmacion = false;
+			var errorsFormat = [ {
+				'1':'El campo concepto no debe estar vacío. Por favor, verifique e intente nuevamente.',
+				'2':'El monto total excede su saldo disponible. Por favor, verifique e intente nuevamente.',
+				'3':'La cantidad de operaciones no esta permitida. Usted excede el límite diario permitido. Por favor, verifique e intente nuevamente.',
+				'4':'La cantidad de operaciones no esta permitida. Usted excede el límite semanal permitido. Por favor, verifique e intente nuevamente.',
+				'5':'La cantidad de operaciones no esta permitida. Usted excede el límite mensual permitido.  Por favor, verifique e intente nuevamente.',
+				'6':'El monto a debitar es mayor al monto maximo semanal permitido. Por favor, verifique e intente nuevamente.',
+				'7':'El monto a total a debitar supera el monto máximo de operaciones . Por favor, verifique e intente nuevamente.',
+				'8':'El monto total a debitar es menor al monto mínimo de operaciones. Por favor, verifique e intente nuevamente.',
+				'9':'se requiere dia.',
+				'10':'se requiere año.',
+				'11':'El monto total a debitar es mayor al monto maximo diario permitido. Por favor, verifique e intente nuevamente.',
+				'12':'El monto total a debitar es mayor al monto maximo semanal permitido. Por favor, verifique e intente nuevamente.',
+				'13':'El monto total a debitar es mayor al monto maximo mensual permitido. Por favor, verifique e intente nuevamente.',
+				}];
+
+
+			if((valor_concepto1=="")||(valor_concepto2=="")||(valor_concepto3=="")){
+				errorResponse = 1;
+				errorSelection.push(errorResponse);
 			}
 
 			if(parseFloat(total)>saldo){
-
-				$("#dialog-error-monto9").dialog({
-                title:"Error Monto",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#error_monto9").click(function(){
-	              $("#dialog-error-monto9").dialog("close");
-	            });
-	            confirmacion = false;
+				errorResponse = 2;
+				errorSelection.push(errorResponse);
 			}
 
 			// alert(parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)+ " - " +parseFloat(cantidadOperacionesDiarias) );
@@ -603,140 +639,92 @@ $(function(){
 			// alert(parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)+ " - " +parseFloat(cantidadOperacionesMensual) );
 
 			if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
-
-	 			$("#dialog-cant-ope1").dialog({
-                title:"Cantidad de Operaciones",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#cant_ope1").click(function(){
-	              $("#dialog-cant-ope1").dialog("close");
-	            });
-	            confirmacion = false;
-
+				errorResponse = 3;
+				errorSelection.push(errorResponse);
 			}
 			if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
-	 			$("#dialog-cant-ope-sm").dialog({
-                title:"Cantidad de Operaciones",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#cant_ope_sm").click(function(){
-	              $("#dialog-cant-ope-sm").dialog("close");
-	            });
-	            confirmacion = false;
+				errorResponse = 4;
+				errorSelection.push(errorResponse);
 
 			}
 			if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
-
-	 			$("#dialog-cant-ope2").dialog({
-                title:"Cantidad de Operaciones",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#cant_ope2").click(function(){
-	              $("#dialog-cant-ope2").dialog("close");
-	            });
-	            confirmacion = false;
-
+				errorResponse = 5;
+				errorSelection.push(errorResponse);
 			}
 			valor_monto1= $("#beneficiary-1-amount").val();
 			valor_monto2= $("#beneficiary-2-amount").val();
 			valor_monto3= $("#beneficiary-3-amount").val();
 
 			if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
-
-	 			$("#dialog-min-monto").dialog({
-                title:"Monto no permitido",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#monto_invalido2").click(function(){
-	              $("#dialog-min-monto").dialog("close");
-	            });
-	            $(this).val("");
-	            confirmacion = false;
+				errorResponse = 6;
+				errorSelection.push(errorResponse);
 	 		}
-
 			if(parseFloat(total)>parseFloat(montoMaxOperaciones)){
-				$("#dialog-error-monto1").dialog({
-                title:"Error monto total",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#error_monto1").click(function(){
-	              $("#dialog-error-monto1").dialog("close");
-	            });
-	            confirmacion = false;
+				errorResponse = 7;
+				errorSelection.push(errorResponse);
 			}
 
 			if(parseFloat(total)<parseFloat(montoMinOperaciones)){
-				$("#dialog-error-monto2").dialog({
-                title:"Error monto total",
-                modal:"true",
-                width:"440px",
-                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-              });
-
-	            $("#error_monto2").click(function(){
-	              $("#dialog-error-monto2").dialog("close");
-	            });
-	            confirmacion = false;
+				errorResponse = 8;
+				errorSelection.push(errorResponse);
+			}
+/////////////PRUEBA DEL selected
+			if(parseFloat(total)<parseFloat(montoMinOperaciones)){
+					errorResponse = 9;
+					errorSelection.push(errorResponse);
+			}
+			if(parseFloat(total)<parseFloat(montoMinOperaciones)){
+					errorResponse = 10;
+					errorSelection.push(errorResponse);
 			}
 
-
 				if((parseFloat(total)+parseFloat(montoAcumDiario))>parseFloat(montoMaxDiario)){
-						$("#dialog-error-monto7").dialog({
-		                title:"Error monto total",
-		                modal:"true",
-		                width:"440px",
-		                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		              });
-
-			            $("#error_monto7").click(function(){
-			              $("#dialog-error-monto7").dialog("close");
-			            });
-			            confirmacion = false;
+					errorResponse = 11;
+					errorSelection.push(errorResponse);
 				}else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
-
-						$("#dialog-error-monto-sm").dialog({
-		                title:"Error monto total",
-		                modal:"true",
-		                width:"440px",
-		                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		              });
-
-			            $("#error_monto_sm").click(function(){
-			              $("#dialog-error-monto-sm").dialog("close");
-			            });
-			            confirmacion = false;
-				}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
-
-						$("#dialog-error-monto8").dialog({
-		                title:"Error monto total",
-		                modal:"true",
-		                width:"440px",
-		                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		              });
-
-			            $("#error_monto8").click(function(){
-			              $("#dialog-error-monto8").dialog("close");
-			            });
-			            confirmacion = false;
+					errorResponse = 12;
+					errorSelection.push(errorResponse);
+						}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
+						errorResponse = 13;
+						errorSelection.push(errorResponse);
 					}
 
-			totaldef=parseFloat(valor_monto1)+parseFloat(valor_monto2)+parseFloat(valor_monto3);
-			//var form=$("#validate");
+				console.log(errorSelection);
+
+		totaldef=parseFloat(valor_monto1)+parseFloat(valor_monto2)+parseFloat(valor_monto3);
+				if(errorSelection.length != ''){
+					console.log('hay errores');
+					//Modal de errores:
+					$("#errorsFormat").dialog({
+					title:"Error",
+					modal:"true",
+					width:"440px",
+					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				  });
+
+					$("#errorModal").click(function(){
+					  $("#errorsFormat").dialog("close");
+					});
+					confirmacion = false;
+
+					//Append error
+					$.each(errorSelection,function(index,value){ //recorre aarreglo de errores
+						console.log(value);
+
+							$.each(errorsFormat,function(index,value){ //recorre map de errores
+										if(value = index){
+											result = index;
+											console.log(index);
+										}
+
+										})
+						})
+
+
+				}
+
+
+			//var form=$("#validate");}
 
 			//if (form.valid() && confirmacion==true) {
 				if (confirmacion==true) {
@@ -1405,8 +1393,6 @@ function normaliza(text) {
     return text;
 
 }
-
-
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------

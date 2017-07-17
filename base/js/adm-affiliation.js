@@ -238,7 +238,7 @@ var pais;
 						ctaDestino+= "<form id='datos'>"
 						ctaDestino+= "<ul class='field-group'>"
 						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='dayExp'>Vto cuenta origen</label>"
+						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
 						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
 						ctaDestino+=            "<option value=''>Mes</option>"
 						ctaDestino+=			"<option value='01'>01</option>"

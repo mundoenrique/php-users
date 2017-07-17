@@ -126,7 +126,16 @@ $(function(){
 
 	$(".dashboard-item").click(function(){              // FUNCION PARA OBTENER DATOS DE TARJETA CTA ORIGEN
 
-		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre, prefix;
+		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre, prefix, fechaExp, yearNow, fullYearDate, fiveyearLess, fiveYearMore, i, yearSelect = [];
+		yearNow = new Date();
+		fullYearDate = yearNow.getFullYear();
+		fiveyearLess = fullYearDate - 5;
+		fiveYearMore = fullYearDate +5;
+
+		for (i = fiveyearLess; i <= fiveYearMore; i++){
+			yearSelect.push(i);
+			}
+
 
 		imagen=$(this).find('img').attr('src');
 		tarjeta=$(this).attr('card');
@@ -159,14 +168,42 @@ $(function(){
 		cadena+=				'</nav>';
 		cadena+=			'</div>';
 		cadena+=	'<div class="product-scheme">';
-		cadena+=		'<ul class="product-balance-group">';
+		cadena+=		'<ul class="product-balance-group" style="margin: 10px 0">';
 		cadena+=			'<li>Disponible <span class="product-balance" id="balance-available">'+moneda+' 0,00</span></li>';
-		cadena+=			'<li>A debitar <span class="product-balance debitar" id="balance-debit">'+moneda+' 0,00</span></li>';
+		cadena+=			'<li>A debitar  <span class="product-balance debitar" id="balance-debit">'+moneda+' 0,00</span></li>';
 		cadena+=		'</ul>';
+		cadena+= 	"<ul class='field-group'>";
+		cadena+= 		"<li class='field-group-item'>"
+		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>"
+		cadena+= 			"<select id='MonthExp' name='MonthExp'>"
+		cadena+=            	"<option value=''>Mes</option>"
+		cadena+=				"<option value='01'>01</option>"
+		cadena+=				"<option value='02'>02</option>"
+		cadena+=				"<option value='03'>03</option>"
+		cadena+=				"<option value='04'>04</option>"
+		cadena+=				"<option value='05'>05</option>"
+		cadena+=				"<option value='06'>06</option>"
+		cadena+=				"<option value='07'>07</option>"
+		cadena+=				"<option value='08'>08</option>"
+		cadena+=				"<option value='09'>09</option>"
+		cadena+=				"<option value='10'>10</option>"
+		cadena+=				"<option value='11'>11</option>"
+		cadena+=				"<option value='12'>12</option>"
+		cadena+= 			"</select>"
+		cadena+= 			"<select id='yearExp' name='yearExp'>"
+		cadena+=				"<option value=''>Año</option>"
+		cadena+= 			"</select>"
+		cadena+= 		"</li>"
 		cadena+=	'</div>';
 
 
 		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
+		$.each(yearSelect,function(index,value){
+			var lastDigit = value.toString().substring(2,4);
+			var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
+			$("#yearExp").append(yearPrueba);
+		})
+
 
 		$.post(base_url +"/dashboard/saldo",{"tarjeta":$(this).attr("card")},function(data){           // CARGAR SALDO CUENTAS ORIGEN
 			var saldo=data.disponible;
@@ -231,7 +268,7 @@ $(function(){
 				acumCantidadOperacionesMensual =data.parametrosTransferencias[0].acumCantidadOperacionesMensual;
 				montoComision = data.parametrosTransferencias[0].montoComision;
 				dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
-				console.info(montoAcumSemanal);
+				// console.info(montoAcumSemanal);
 				//validar_transferencia(data);
 
 				$("#dashboard-beneficiary").empty();
@@ -1261,6 +1298,31 @@ $(function(){
 		});
 
 	});
+
+// 	$("#continuar").validate({
+//
+// 		errorElement: "label",
+// 		ignore: "",
+// 		errorContainer: "#msg",
+// 		errorClass: "field-error",
+// 		validClass: "field-success",
+// 		errorLabelContainer: "#msg",
+// 		rules: {
+// 			"card-number": {"required":true,"number": true},
+// 			"card-holder": {"required":true, "pattern":letter},
+// 			"doc-name": {"required":true},
+// 			"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
+// 			"card-holder-email": {"required":true, "email": true},
+// 			"MonthExp": {"required": true},
+// 			"yearExp": {"required": true}
+// 		},
+//
+// 		messages: {
+// 			"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+// 			"yearExp": "Seleccione el año de vencimiento de su tarjeta"
+// 		}
+// 	}); // VALIDATE
+// }
 
 
 

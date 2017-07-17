@@ -123,6 +123,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
               $(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
               $("#card-number").attr("disabled",false);
+			  $("#yearExp").attr("disabled",false);
+			  $("#MonthExp").attr("disabled",false);
               $("#bank-account-holder").attr("disabled",false);
               $("#bank-account-holder-id").attr("disabled",false);
               $("#bank-account-holder-email").attr("disabled",false);
@@ -366,7 +368,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
         "doc-name": {"required":true},
         "card-number":{"required":true,"number":true, "minlength":16, "maxlength": 16},
         "bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
-        "bank-account-holder-email": {"required":true, "email": true}
+        "bank-account-holder-email": {"required":true, "email": true},
+		"MonthExp": {"required": true},
+		"yearExp": {"required": true}
       },
       messages: {
         "bank-name":"Debe seleccionar un banco",
@@ -382,7 +386,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 					minlength: "El documento de identidad debe tener un mínimo de 5 caracteres",
 					numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
 				},
-        "bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)"
+        "bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+		"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+		"yearExp": "Seleccione el año de vencimiento de su tarjeta"
       }
     }); // VALIDATE
   }

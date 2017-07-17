@@ -199,7 +199,15 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 				$('.muestraDestino').on('click',"#modificar",function(){
 
-					var imagen, tarjeta, marca, mascara, empresa, cadena, nombre;
+					var imagen, tarjeta, marca, mascara, empresa, cadena, nombre, fechaExp,yearNow, fullYearDate,fiveyearLess, fiveYearMore, i, yearSelect = [];
+					yearNow = new Date();
+					fullYearDate = yearNow.getFullYear();
+					fiveyearLess = fullYearDate - 5;
+					fiveYearMore = fullYearDate +5;
+
+					for (i = fiveyearLess; i <= fiveYearMore; i++){
+						yearSelect.push(i);
+						}
 
 					// imagen=$(this).find('img').attr('src');
 					// tarjeta=$(".muestraDestino").attr('card');
@@ -236,12 +244,35 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+= "<div id='content-holder'>";
 						ctaDestino+= "<form id='datos'>";
 						ctaDestino+= "<ul class='field-group'>";
-						ctaDestino+= 				"<li class='field-group-item'>";
-						ctaDestino+= 					"<label for='bank-name'>Banco</label>";
-						ctaDestino+= 					"<select id='bank-name' name='bank-name'>";
-						ctaDestino+= 						"<option selected value=''>"+banco+"</option>";
-						ctaDestino+= 					"</select>";
-						ctaDestino+= 				"</li>";
+						ctaDestino+= 	"<li class='field-group-item'>"
+						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
+						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+						ctaDestino+=            "<option value=''>Mes</option>"
+						ctaDestino+=			"<option value='01'>01</option>"
+						ctaDestino+=			"<option value='02'>02</option>"
+						ctaDestino+=			"<option value='03'>03</option>"
+						ctaDestino+=			"<option value='04'>04</option>"
+						ctaDestino+=			"<option value='05'>05</option>"
+						ctaDestino+=			"<option value='06'>06</option>"
+						ctaDestino+=			"<option value='07'>07</option>"
+						ctaDestino+=			"<option value='08'>08</option>"
+						ctaDestino+=			"<option value='09'>09</option>"
+						ctaDestino+=			"<option value='10'>10</option>"
+						ctaDestino+=			"<option value='11'>11</option>"
+						ctaDestino+=			"<option value='12'>12</option>"
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+						ctaDestino+=			"<option value=''>Año</option>"
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 	"</li>"
+						ctaDestino+= 	"<li class='field-group-item'>";
+						ctaDestino+=		"<label for='bank-name'>Banco</label>";
+						ctaDestino+= 		"<select id='bank-name' name='bank-name'>";
+						ctaDestino+= 			"<option selected value=''>"+banco+"</option>";
+						ctaDestino+= 		"</select>";
+						ctaDestino+= 	"</li>";
+						ctaDestino+= 	"</ul>";
+						ctaDestino+= "<ul class='field-group'>";
 				        ctaDestino+=    "<li class='field-group-item'>";
 				        ctaDestino+=       "<label for='card-number'>N° de Cuenta Destino</label>";
 				        ctaDestino+=       "<input class='field-medium' id='card-number' name='card-number' maxlength='16' value='"+tarjeta+"'/>";
@@ -269,7 +300,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				        ctaDestino+=    "</li>";
 				        ctaDestino+= "</ul>";
 				        ctaDestino+= "</form>";
-								ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
+						ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
 				        ctaDestino+="<div class='form-actions'>";
 				        ctaDestino+="<button id='cancelar1' type='reset'>Cancelar</button>";
 				        ctaDestino+="<button id='cambiar'>Modificar</button>";
@@ -278,6 +309,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				      	// ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
 
 				        $("#content-holder").append(ctaDestino);
+						$.each(yearSelect,function(index,value){
+							var lastDigit = value.toString().substring(2,4);
+							var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
+							$("#yearExp").append(yearPrueba);
+						})
 
 								//validar_campos();
 				        getBancos();
@@ -565,7 +601,9 @@ function validar_campos(){
 				"card-holder": {"required":true, "pattern":letter},
 				"doc-name": {"required":true},
 				"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
-				"card-holder-email": {"required":true, "email": true}
+				"card-holder-email": {"required":true, "email": true},
+				"MonthExp": {"required": true},
+				"yearExp": {"required": true}
 			},
 
 			messages: {
@@ -581,7 +619,9 @@ function validar_campos(){
 					minlength: "El documento de identidad debe tener un mínimo de 5 caracteres",
 					numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
 				},
-				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)."
+				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com).",
+				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
+				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

@@ -559,6 +559,21 @@ if($datos->rc==0){
         <button id="monto_invalido_vc">Aceptar</button>
     </div>
 </div>
+
+<!--ERRORSFORMAT-->
+<div class="dialog-small" id="errorsFormat" style='display:none'>
+    <div class="alert-simple alert-warning" id="message">
+        <span aria-hidden="true" class="icon-warning-sign"></span>
+                <p>sdadsdds</p>
+                    <p>sdadsdds</p>
+                        <p>sdadsdds</p>
+                        
+    </div>
+    <div class="form-actions">
+        <button id="errorModal">Aceptar</button>
+    </div>
+</div>
+
 <!-- ERROR FORMATO campos -->
 <div class="dialog-small" id="campos_vacios" style='display:none'>
     <div class="alert-simple alert-warning" id="message">
@@ -722,6 +737,26 @@ if($datos->rc==0){
     </div>
     <div class="form-actions">
         <button id="invalido">Aceptar</button>
+    </div>
+</div>
+
+<div class="dialog-small" id="MonthExp1" style='display:none'>
+    <div class="alert-simple alert-warning" id="message">
+        <span aria-hidden="true" class="icon-warning-sign"></span>
+        <p>se requiere dia </p>
+    </div>
+    <div class="form-actions">
+        <button id="prueba">Aceptar</button>
+    </div>
+</div>
+
+<div class="dialog-small" id="yearExp1" style='display:none'>
+    <div class="alert-simple alert-warning" id="message">
+        <span aria-hidden="true" class="icon-warning-sign"></span>
+        <p>se requiere año</p>
+    </div>
+    <div class="form-actions">
+        <button id="prueba1">Aceptar</button>
     </div>
 </div>
 

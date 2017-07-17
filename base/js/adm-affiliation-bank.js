@@ -242,12 +242,35 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+= "<div id='content-holder'>";
 						ctaDestino+= "<form id='datos'>";
 						ctaDestino+= "<ul class='field-group'>";
-						ctaDestino+= 				"<li class='field-group-item'>";
-						ctaDestino+= 					"<label for='bank-name'>Banco	</label>";
-						ctaDestino+= 					"<select id='bank-name' name='bank-name' banco='"+banco+"''>";
-						ctaDestino+= 						"<option selected value='"+codBanco+"'>"+banco+"</option>";
-						ctaDestino+= 					"</select>";
-						ctaDestino+= 				"</li>";
+						ctaDestino+= 	"<li class='field-group-item'>"
+						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
+						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+						ctaDestino+=            "<option value=''>Mes</option>"
+						ctaDestino+=			"<option value='01'>01</option>"
+						ctaDestino+=			"<option value='02'>02</option>"
+						ctaDestino+=			"<option value='03'>03</option>"
+						ctaDestino+=			"<option value='04'>04</option>"
+						ctaDestino+=			"<option value='05'>05</option>"
+						ctaDestino+=			"<option value='06'>06</option>"
+						ctaDestino+=			"<option value='07'>07</option>"
+						ctaDestino+=			"<option value='08'>08</option>"
+						ctaDestino+=			"<option value='09'>09</option>"
+						ctaDestino+=			"<option value='10'>10</option>"
+						ctaDestino+=			"<option value='11'>11</option>"
+						ctaDestino+=			"<option value='12'>12</option>"
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+						ctaDestino+=			"<option value=''>Año</option>"
+						ctaDestino+= 		"</select>"
+						ctaDestino+= 	"</li>"
+						ctaDestino+= 	"<li class='field-group-item'>";
+						ctaDestino+= 		"<label for='bank-name'>Banco	</label>";
+						ctaDestino+= 			"<select id='bank-name' name='bank-name' banco='"+banco+"''>";
+						ctaDestino+= 				"<option selected value='"+codBanco+"'>"+banco+"</option>";
+						ctaDestino+= 			"</select>";
+						ctaDestino+= 	"</li>";
+						ctaDestino+= 	"</ul>";
+						ctaDestino+= "<ul class='field-group'>";
 				        ctaDestino+=    "<li class='field-group-item'>";
 				        ctaDestino+=       "<label for='card-number'>N° de Cuenta Destino</label>";
 				        ctaDestino+=       "<input class='field-medium' id='card-number' name='card-number' maxlength='20' value='"+tarjeta+"'/>";
@@ -273,27 +296,6 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				        ctaDestino+=       "<label for='card-holder-email'>Correo Electrónico</label>";
 				        ctaDestino+=       "<input class='field-large' id='card-holder-email' name='card-holder-email' maxlength='30'  type='text' value="+emailCliente+" />";
 				        ctaDestino+=    "</li>";
-						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='dayExp'>Vto cuenta origen</label>"
-						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
-						ctaDestino+=            "<option value=''>Mes</option>"
-						ctaDestino+=			"<option value='01'>01</option>"
-						ctaDestino+=			"<option value='02'>02</option>"
-						ctaDestino+=			"<option value='03'>03</option>"
-						ctaDestino+=			"<option value='04'>04</option>"
-						ctaDestino+=			"<option value='05'>05</option>"
-						ctaDestino+=			"<option value='06'>06</option>"
-						ctaDestino+=			"<option value='07'>07</option>"
-						ctaDestino+=			"<option value='08'>08</option>"
-						ctaDestino+=			"<option value='09'>09</option>"
-						ctaDestino+=			"<option value='10'>10</option>"
-						ctaDestino+=			"<option value='11'>11</option>"
-						ctaDestino+=			"<option value='12'>12</option>"
-						ctaDestino+= 		"</select>"
-						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
-						ctaDestino+=			"<option value=''>Año</option>"
-						ctaDestino+= 		"</select>"
-						ctaDestino+= 	"</li>"
 				        ctaDestino+= "</ul>";
 				        ctaDestino+= "</form>";
 						ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
