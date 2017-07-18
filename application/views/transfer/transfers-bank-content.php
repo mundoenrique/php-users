@@ -80,9 +80,10 @@
                             <p class="field-tip">Seleccione una cuenta propia desde la cual desea transferir fondos.</p>
                         </div>
                         <div class="product-scheme">
-                            <ul class="product-balance-group disabled-product-balance-group">
+                            <ul class="product-balance-group disabled-product-balance-group" style="margin: 10px 0">
                                 <li>Disponible <span class="product-balance" id="balance-available"> <?php echo lang("MONEDA"); ?> 0,00</span></li>
                                 <li>A debitar <span class="product-balance" id="balance-debit"> <?php echo lang("MONEDA"); ?> 0,00</span></li>
+                                <li>Fecha de Vencimiento<span class='product-balance'><select disabled><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
                             </ul>
                         </div>
                     </div>

@@ -153,6 +153,7 @@ $(function(){
 		fiveyearLess = fullYearDate - 5;
 		fiveYearMore = fullYearDate +5;
 
+
 		for (i = fiveyearLess; i <= fiveYearMore; i++){
 			yearSelect.push(i);
 			}
@@ -213,6 +214,7 @@ $(function(){
 		cadena+=				"<option value=''>Año</option>"
 		cadena+= 			"</select>"
 		cadena+= 		"</li>"
+		cadena+=	"</ul>"
 		cadena+=	'</div>';
 
 			$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
