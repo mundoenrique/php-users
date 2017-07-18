@@ -154,9 +154,9 @@ $(function(){
 		fiveYearMore = fullYearDate +5;
 
 
-		for (i = fiveyearLess; i <= fiveYearMore; i++){
+		for (i = fiveyearLess; i <= fiveYearMore; i++) {
 			yearSelect.push(i);
-			}
+		}
 
 		imagen=$(this).find('img').attr('src');
 		tarjeta=$(this).attr('card');
@@ -293,17 +293,7 @@ $(function(){
 
 				$("#dashboard-beneficiary").empty();
 
-				$.each(data.cuentaDestinoPlata,function(pos,item){
-
-					// var cadena;
-					// $imagen1 = replace(" ", "-", $item.nombre_producto));
-					// $imagen2 = strtolower(str_replace("/", "-", $imagen1));
-					// $imagen= normaliza($imagen2);
-
-					// imagen1=item.nombre_producto.replace(' ', '-');
-					// imagen2=imagen1.replace('/','-');
-					// imagen=normaliza(imagen2);
-					// imagen = imagen.toLowerCase();
+				$.each(data.cuentaDestinoPlata,function(pos,item){					
 
 					imagen1=item.nombre_producto.toLowerCase();
 					imagen2=normaliza(imagen1);
@@ -313,7 +303,6 @@ $(function(){
 
 					cadena=" <li class='dashboard-item "+item.nomEmp+" muestraDestino' card='"+item.noTarjeta+"' nombre='"+item.NombreCliente+"' marca='"+item.marca+"' mascara='"+item.noTarjetaConMascara+"' empresa='"+item.nomEmp+"' producto='"+item.nombre_producto+"'>";
 					cadena+= "<a rel='section' class='escogerDestino'>";
-					//cadena+= "<img src='"+base_cdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />";
 					cadena+= "<img src='"+base_cdn+"/img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />";
 					cadena+=  "<div class='dashboard-item-network "+item.marca.toLowerCase()+"'>"+item.marca+"</div>";
 					cadena+= "<div class='dashboard-item-info'>";
@@ -591,22 +580,39 @@ $(function(){
 	$('#content_plata').on('click',".confir",function(){
 		var confirmacion = true;
 		var contador_trans=0;
+		var validateInput = [];
+		var sinImporte = false;
 		$("#validate").submit();
 		//setTimeout(function(){$("#msg").fadeOut();},5000);
 		$("#montoTotal").remove();
 		$("#tdestino").append("<input id='montoTotal' name='montoTotal' type='hidden' class='checkTotal' value='' />");
 		$("#montoTotal").val(sumar_saldo());
-		total= sumar_saldo();
-		console.info(total);
-		//saldo = parseFloat($("#balance-available").attr("saldo"));
+		total= sumar_saldo();		
 		saldo= saldo_imp;
-		// saldo.toFixed(2);
+		
+		//conceptos de las transferencias
 		valor_concepto1= $("#beneficiary-1x-description").val();
 		valor_concepto2= $("#beneficiary-2x-description").val();
 		valor_concepto3= $("#beneficiary-3x-description").val();
+		
+		//monto de las trnasferencias
+		valor_monto1= $("#beneficiary-1-amount").val();
+		valor_monto2= $("#beneficiary-2-amount").val();
+		valor_monto3= $("#beneficiary-3-amount").val();
+		
+		if($('#MonthExp').val() === '') {
+			validateInput['0'] = 'Seleccione el mes de vencimiento';
+			confirmacion = false;
+		}
+		
+		if($('#yearExp').val() === '') {
+			validateInput['1'] = 'Seleccione el año de vencimiento'
+			confirmacion = false;
+		}	
 
 
-		if((valor_concepto1=="")||(valor_concepto2=="")||(valor_concepto3=="")){
+		if((valor_concepto1 === '') || (valor_concepto2 === '') || (valor_concepto3 === '')) {
+			validateInput['2'] = 'El campo concepto no debe estar vacío.';
 			$("#campos_vacios").dialog({
 				                           title:"Error Campos",
 				                           modal:"true",
@@ -619,9 +625,16 @@ $(function(){
 			});
 			confirmacion = false;
 		}
+		
+		if((valor_monto1 === '') || (valor_monto2 === '') || (valor_monto3 === '')) {
+			validateInput['3'] = 'El campo importe no debe estar vacío.';
+			sinImporte = true;
+		} else {
+			sinImporte = false;
+		}
 
 		if(parseFloat(total)>saldo){
-
+			validateInput['4'] = 'El monto total excede su saldo disponible.';
 			$("#dialog-error-monto9").dialog({
 				                                 title:"Error Monto",
 				                                 modal:"true",
@@ -635,12 +648,8 @@ $(function(){
 			confirmacion = false;
 		}
 
-		// alert(parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)+ " - " +parseFloat(cantidadOperacionesDiarias) );
-		// alert(parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)+ " - " +parseFloat(cantidadOperacionesSemanales) );
-		// alert(parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)+ " - " +parseFloat(cantidadOperacionesMensual) );
-
 		if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
-
+			validateInput['5'] = 'Usted excede el límite diario permitido.';
 			$("#dialog-cant-ope1").dialog({
 				                              title:"Cantidad de Operaciones",
 				                              modal:"true",
@@ -655,6 +664,7 @@ $(function(){
 
 		}
 		if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
+			validateInput['6'] = 'Usted excede el límite semanal permitido.';
 			$("#dialog-cant-ope-sm").dialog({
 				                                title:"Cantidad de Operaciones",
 				                                modal:"true",
@@ -669,7 +679,7 @@ $(function(){
 
 		}
 		if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
-
+			validateInput['7'] = 'Usted excede el límite mensual permitido.';
 			$("#dialog-cant-ope2").dialog({
 				                              title:"Cantidad de Operaciones",
 				                              modal:"true",
@@ -682,13 +692,10 @@ $(function(){
 			});
 			confirmacion = false;
 
-		}
-		valor_monto1= $("#beneficiary-1-amount").val();
-		valor_monto2= $("#beneficiary-2-amount").val();
-		valor_monto3= $("#beneficiary-3-amount").val();
+		}		
 
 		if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
-
+			validateInput['8'] = 'El monto a debitar es menor al monto mínimo de operaciones.';
 			$("#dialog-min-monto").dialog({
 				                              title:"Monto no permitido",
 				                              modal:"true",
@@ -704,6 +711,7 @@ $(function(){
 		}
 
 		if(parseFloat(total)>parseFloat(montoMaxOperaciones)){
+			validateInput['9'] = 'El monto a total a debitar supera el monto máximo de operaciones.';
 			$("#dialog-error-monto1").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
@@ -717,7 +725,8 @@ $(function(){
 			confirmacion = false;
 		}
 
-		if(parseFloat(total)<parseFloat(montoMinOperaciones)){
+		if((parseFloat(total)<parseFloat(montoMinOperaciones)) && sinImporte == false){
+			validateInput['10'] = 'El monto total a debitar es menor al monto mínimo de operaciones.';
 			$("#dialog-error-monto2").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
@@ -733,6 +742,7 @@ $(function(){
 
 
 		if((parseFloat(total)+parseFloat(montoAcumDiario))>parseFloat(montoMaxDiario)){
+			validateInput['11'] = 'El monto total a debitar es mayor al monto maximo diario permitido.';
 			$("#dialog-error-monto7").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
@@ -745,7 +755,7 @@ $(function(){
 			});
 			confirmacion = false;
 		}else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
-
+			validateInput['12'] = 'El monto total a debitar es mayor al monto maximo diario permitido.';
 			$("#dialog-error-monto-sm").dialog({
 				                                   title:"Error monto total",
 				                                   modal:"true",
@@ -758,7 +768,7 @@ $(function(){
 			});
 			confirmacion = false;
 		}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
-
+			validateInput['13'] = 'El monto total a debitar es mayor al monto maximo mensual permitido.';
 			$("#dialog-error-monto8").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
@@ -771,12 +781,31 @@ $(function(){
 			});
 			confirmacion = false;
 		}
+		
 
 		totaldef=parseFloat(valor_monto1)+parseFloat(valor_monto2)+parseFloat(valor_monto3);
-		//var form=$("#validate");
-
-		//if (form.valid() && confirmacion==true) {
-		if (confirmacion==true) {
+		
+		if(confirmacion === false) {
+			console.log(validateInput);
+			$('#inputValid').dialog({
+				title: 'Transferencia entre tarjetas',
+				modal: 'true',
+				width: '440px',
+				open: function(event, ui) {					
+					$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					$.each(validateInput, function(index, value) {						
+						$('#contentValid').append('<p>' + value + '</p>');
+					});
+					
+				}
+			});
+			$('#closeValid').on('click', function(){
+				validateInput.length = 0;
+				$('#contentValid').children().not('span').remove();				
+				console.log(validateInput);
+				$('#inputValid').dialog('close');
+			});
+		} else if (confirmacion==true) {
 			var origen, nombre, mascara;
 
 			nombre=$("#donor").find(".product-cardholder").html();
@@ -796,10 +825,7 @@ $(function(){
 
 			var tr;
 
-			//tr= '<td class="data-label"><label>Cuentas Destino</label></td>';
-
-			//$("#cargarConfirmacion").append(tr);
-			//var contador_trans=0;
+			
 			var num=0;
 			montodef=0;
 			$.each($('#tdestino').children(':not(.obscure-group, .checkTotal)'), function(pos, item){
@@ -822,14 +848,7 @@ $(function(){
 					var total = $(".product-scheme").find(".debitar").html().replace(/S../g, "");
 					total1=total;
 				}
-
-				//alert("TOTAL: "+total1);
-				//var total=$(".product-scheme").find(".debitar").html();
-				// total1=totalt.replace('Bsf.', ' ');
-				// total2=total1.replace('.',',');
-				//alert(total);
-				//total=total.replace('.', ','); $(this).val().replace(',', '.');
-				//total=total.replace('Bsf,', ' ');
+				
 
 				moneda=$(".dashboard-item").attr("moneda");
 				contador_trans = contador_trans+1;
@@ -1105,51 +1124,7 @@ $(function(){
 		tarjetas = contar+1;
 		return tarjetas;
 
-	} 		//FIN FUNCION CONTAR TARJETAS
-
-
-	// // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-	// function validar_campos(){							//FUNCION VALIDAR CAMPOS
-
-
-	//  jQuery.validator.setDefaults({
-	// 	  debug: true,
-	// 	  success: "valid"
-	//  });
-
-	// 	$("#validate").validate({
-	// 		errorElement: "label",
-	// 		ignore: "",
-	// 		errorContainer: "#msg",
-	// 		errorClass: "field-error",
-	// 		validClass: "field-success",
-	// 		errorLabelContainer: "#msg",
-	// 		  rules: {
-	// 		    "beneficiary-1x-description": "required",
-	// 		    "beneficiary-1x-amount":{"required":true,"number":true},
-	// 		    "beneficiary-2x-description": "required",
-	// 		    "beneficiary-2x-amount":{"required":true,"number":true},
-	// 		    "beneficiary-3x-description": "required",
-	// 		    "beneficiary-3x-amount":{"required":true,"number":true}
-	// 		  },
-	// 		  messages: {
-	// 		    "beneficiary-1x-description": "Concepto de la tarjeta destino nro. 1 no puede estar vacÃ­o",
-	// 		    "beneficiary-1x-amount": "El Importe de la tarjeta destino nro. 1 no puede estar vacÃ­o y debe contener solo nÃºmeros",
-	// 		    "beneficiary-2x-description": "Concepto la tarjeta destino nro. 2 no puede estar vacÃ­o",
-	// 		    "beneficiary-2x-amount": "El Importe la tarjeta destino nro. 2 no puede estar vacÃ­o y debe contener solo nÃºmeros",
-	// 		    "beneficiary-3x-description": "Concepto la tarjeta destino nro. 3 no puede estar vacÃ­o",
-	// 		    "beneficiary-3x-amount": "El Importe de la tarjeta destino nro. 3 no puede estar vacÃ­o y debe contener solo nÃºmeros",
-
-	// 		  }
-
-	// 	});  //FIN FUNCION VALIDAR
-
-	// }		//FIN FUNCION VALIDAR CAMPOS
-
-
-	// // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	} 		//FIN FUNCION CONTAR TARJETAS	
 
 
 	function marcar_destino() 			//FUNCION PARA DESHABILITAR TARJETA DESTINO SELECCIONADA

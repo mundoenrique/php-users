@@ -562,16 +562,12 @@ if($datos->rc==0){
 </div>
 
 <!--ERRORSFORMAT-->
-<div class="dialog-small" id="errorsFormat" style='display:none'>
-    <div class="alert-simple alert-warning" id="message">
-        <span aria-hidden="true" class="icon-warning-sign"></span>
-                <p>sdadsdds</p>
-                    <p>sdadsdds</p>
-                        <p>sdadsdds</p>
-
+<div class="dialog-small" id="inputValid" style='display:none'>
+    <div class="alert-simple alert-warning" id="contentValid">
+        <span aria-hidden="true" class="icon-warning-sign"></span>        
     </div>
     <div class="form-actions">
-        <button id="errorModal">Aceptar</button>
+        <button id="closeValid">Aceptar</button>
     </div>
 </div>
 
