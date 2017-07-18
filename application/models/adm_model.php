@@ -11,7 +11,7 @@ class Adm_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//ADMINISTRACION CUENTAS AFILIADAS
-	public function adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email,$banco) {
+	public function adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email, $banco, $expDate) {
 
 	    									                  //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","gestion afiliacion","gestion afiliacion","actualizar afiliacion");
@@ -27,6 +27,7 @@ class Adm_model extends CI_Model {
 			"tipoOperacion"=> $tipoOperacion,
 			"email"=>$email,
 			"banco"=>$banco,
+			"validacionFechaExp" => $expDate,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			));
@@ -41,6 +42,10 @@ class Adm_model extends CI_Model {
 
 		$salida = json_encode($desdata);
 		log_message("info", "Salida MODIFICAR desencriptado".$salida);
+
+		//simulación respuesta del servicio
+		 /*$desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
+		 $desdata = json_decode($desdata);*/
 
 		return json_encode($desdata);
 

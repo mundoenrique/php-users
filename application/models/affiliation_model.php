@@ -34,14 +34,19 @@ class Affiliation_model extends CI_Model {
 
 		//print_r($data);
 
-		log_message("info", "JSON afiliacion P2P : ".$data);
-		// $dataEncry = np_Hoplite_Encryption($data,1);
-		// $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		// $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		// $data = json_decode(utf8_encode($response));
-		// $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-		// 
-		// return json_encode($desdata);
+		log_message("info", "REQUEST afiliacion P2P : ".$data);
+		$dataEncry = np_Hoplite_Encryption($data,1);
+		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
+		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$data = json_decode(utf8_encode($response));
+		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		log_message("info", "RESPONSE afiliacion P2P : ".json_encode($desdata));
+		
+		//simulación respuesta del servicio
+		// $desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
+		// $desdata = json_decode($desdata);
+		
+		return json_encode($desdata);
 
 	}		//FIN
 

@@ -353,7 +353,7 @@ foreach ($datos->cuentaOrigen as $value) {
 <div class="dialog-small" id="dialog-error-afil3" style='display:none'>
     <div class="alert-simple alert-warning" id="message">
         <span aria-hidden="true" class="icon-warning-sign"></span>
-        <p>No se puede realizar el registro. <strong>Cuenta ya afiliada.</strong></p>
+        <p id="msgNon"></p>
     </div>
     <div class="form-actions">
         <button id="invalido5">Aceptar</button>

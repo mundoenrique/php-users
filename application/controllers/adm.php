@@ -165,8 +165,9 @@
 		$tipoOperacion = $this->input->post('tipoOperacion');
 		$email = $this->input->post('email');
 		$banco = $this->input->post('banco');
+		$expDate = $this->input->post('expDate');
 
-		$this->output->set_content_type('application/json')->set_output($this->adm->adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email, $banco));
+		$this->output->set_content_type('application/json')->set_output($this->adm->adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email, $banco, $expDate));
 
 	}
 

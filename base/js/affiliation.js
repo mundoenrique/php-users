@@ -4,20 +4,19 @@ base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
-	$(function(){
-
+$(function() {
 	// MENU WIDGET TRANSFERENCIA
 	$('.transfers').hover(function(){
-    	$('.submenu-transfer').attr("style","display:block")
-		},function(){
-    	$('.submenu-transfer').attr("style","display:none")
+		$('.submenu-transfer').attr("style","display:block")
+	},function(){
+		$('.submenu-transfer').attr("style","display:none")
 	});
 
 	// MENU WIDGET USUARIO
 	$('.user').hover(function(){
-	   $('.submenu-user').attr("style","display:block")
+		$('.submenu-user').attr("style","display:block")
 	},function(){
-	   $('.submenu-user').attr("style","display:none")
+		$('.submenu-user').attr("style","display:none")
 	});
 
 	// CARGA MODAL CTA ORIGEN
@@ -27,54 +26,53 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 			modal:"true",
 			width:"940px",
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	});
-	$("#cerrar").click(function(){
-  			$("#content-product").dialog("close");
-	});
+		});
+		$("#cerrar").click(function(){
+			$("#content-product").dialog("close");
+		});
 
-	// INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
-	var $container = $('#dashboard-donor');
+		// INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
+		var $container = $('#dashboard-donor');
 
-	$container.isotope({
-		itemSelector : '.dashboard-item',
-		animationEngine :'jQuery',
-		animationOptions: {
-			duration: 800,
-			easing: 'easeOutBack',
-			queue: true
-		}
-	});
+		$container.isotope({
+			itemSelector : '.dashboard-item',
+			animationEngine :'jQuery',
+			animationOptions: {
+				duration: 800,
+				easing: 'easeOutBack',
+				queue: true
+			}
+		});
 
-	var $optionSets = $('#filters-stack .option-set'),
-	$optionLinks = $optionSets.find('a');
+		var $optionSets = $('#filters-stack .option-set'),
+			$optionLinks = $optionSets.find('a');
 
-	$optionLinks.click(function(){
-		var $this = $(this);
-	    // don't proceed if already selected
-	    if ( $this.hasClass('selected') ) {
-	    	return false;
-	    }
-	    var $optionSet = $this.parents('.option-set');
-	    $optionSet.find('.selected').removeClass('selected');
-	    $this.addClass('selected');
+		$optionLinks.click(function(){
+			var $this = $(this);
 
-	    // make option object dynamically, i.e. { filter: '.my-filter-class' }
-	    var options = {},
-	    key = $optionSet.attr('data-option-key'),
-	    value = $this.attr('data-option-value');
-	    // parse 'false' as false boolean
-	    value = value === 'false' ? false : value;
-	    options[ key ] = value;
-	    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-	      // changes in layout modes need extra logic
-	      changeLayoutMode( $this, options )
-	  } else {
-	      // otherwise, apply new options
-	      $container.isotope( options );
-	  }
+			if($this.hasClass('selected')) {
+				return false;
+			}
+			var $optionSet = $this.parents('.option-set');
+			$optionSet.find('.selected').removeClass('selected');
+			$this.addClass('selected');
 
-	  return false;
-	});          // FINALIZA CONFIGURACION DE FILTROS
+			var options = {},
+				key = $optionSet.attr('data-option-key'),
+				value = $this.attr('data-option-value');
+
+			value = value === 'false' ? false : value;
+			options[ key ] = value;
+			if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+				// changes in layout modes need extra logic
+				changeLayoutMode( $this, options )
+			} else {
+				// otherwise, apply new options
+				$container.isotope( options );
+			}
+
+			return false;
+		});          // FINALIZA CONFIGURACION DE FILTROS
 	});		 // FIN DE CARGA MODAL CTAS ORIGEN
 
 	$('li.stack-item a').click(function(){                              // FUNCIONALIDAD DE FILTROS CTAS ORIGEN
@@ -83,7 +81,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 	});
 
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
 	$(".dashboard-item").click(function(){
@@ -136,21 +134,21 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		$(this).addClass("current-dashboard-item");
 		$("#content-product").dialog("close");
 
-	    $('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
-	    	$('#tdestino').children().remove();
-	    	$("#tdestino").append($("#removerDestino").html());
-	    	$("#botonContinuar").attr("disabled",true);
-	    	$("#content-product").dialog({
-	    		title:"Selección de Cuentas Origen",
-	    		modal:"true",
-	    		width:"940px",
-	    		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	    	});
+		$('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
+			$('#tdestino').children().remove();
+			$("#tdestino").append($("#removerDestino").html());
+			$("#botonContinuar").attr("disabled",true);
+			$("#content-product").dialog({
+				title:"Selección de Cuentas Origen",
+				modal:"true",
+				width:"940px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 		});
 
 	}); //FIN DATOS CUENTA ORIGEN
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 	// BOTON AFILIAR USUARIO
@@ -158,16 +156,16 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 		validar_campos();
 		$("#validate_afiliacion").submit();
- 		setTimeout(function(){$("#msg").fadeOut();},5000);
- 		var form=$("#validate_afiliacion");
- 		numeroCta=$("#content-holder").find(".nrocta").val();
+		setTimeout(function(){$("#msg").fadeOut();},5000);
+		var form=$("#validate_afiliacion");
+		numeroCta=$("#content-holder").find(".nrocta").val();
 
 		email=$("#cargarConfirmacion").find("#ctaAfiliar").attr("email");
- 		if (form.valid() == true){
- 			$.post(base_url +"/affiliation/cuentasP2P",{"noTarjeta":numeroCta},function(data){
- 				if(data.rc == 0){
+		if (form.valid() == true){
+			$.post(base_url +"/affiliation/cuentasP2P",{"noTarjeta":numeroCta},function(data){
+				if(data.rc == 0){
 
- 					beneficiario = data.beneficiario;
+					beneficiario = data.beneficiario;
 					cedula = data.id_ext_per;
 					nombre=$("#donor").find(".product-cardholder").html();
 					mascara=$("#donor").find(".product-cardnumber").html();
@@ -190,19 +188,19 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 					datos_afiliacion +=        '<td class="data-label"><label>Cuenta Origen</label></td>';
 					datos_afiliacion +=        '<td class="data-reference" id="nombreOrigenTransfer" colspan="2" numeroCtaOrigen="'+numeroCtaOrigen+'" nombreCtaOrigen="'+nombre+'" prefix="'+prefix+'" mascara="'+mascara+'" marca="'+marca+'">'+nombre+'<br /><span class="highlight" id="mascaraOrigenTransfer">'+mascara+'</span><br /><span class="lighten"> '+marca+' </span></td>';
 					datos_afiliacion +=      '</tr>';
-	       			datos_afiliacion +=       '<tr>';
-	        		datos_afiliacion  +=       '<td class="data-label"><label>Cuenta Destino a Afiliar</label></td>';
-	        		datos_afiliacion  +=       '<td class="data-reference" id="ctaAfiliar" beneficiario="'+beneficiario+'" email="'+email+'" cedula="'+cedula+'" numeroCta="'+numeroCta+'">"'+beneficiario+'" <span class="lighten">("'+email+'")</span><br /> "'+cedula+'"<br /><span class="highlight">"'+numeroCta+'"</span></td>';
-	       			datos_afiliacion  +=    '</tr><tr>';
+					datos_afiliacion +=       '<tr>';
+					datos_afiliacion  +=       '<td class="data-label"><label>Cuenta Destino a Afiliar</label></td>';
+					datos_afiliacion  +=       '<td class="data-reference" id="ctaAfiliar" beneficiario="'+beneficiario+'" email="'+email+'" cedula="'+cedula+'" numeroCta="'+numeroCta+'">"'+beneficiario+'" <span class="lighten">("'+email+'")</span><br /> "'+cedula+'"<br /><span class="highlight">"'+numeroCta+'"</span></td>';
+					datos_afiliacion  +=    '</tr><tr>';
 
-			        $("#cargarConfirmacion").append(datos_afiliacion);
-			        $("#content-holder").children().remove();
+					$("#cargarConfirmacion").append(datos_afiliacion);
+					$("#content-holder").children().remove();
 					$("#content-holder").append($("#content-confirmacion").html());
 
 					$(".continuar").click(function(){
 						$.post(base_url +"/affiliation/affiliation",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2P","email":email,"cedula":cedula,"prefix":prefix, "expDate":expDate},function(data){
 
-							if(data.rc==0||data.rc==-188){
+							if(data.rc==0||data.rc==-188) {
 								datos_finalizacion= 			'<tr>';
 								datos_finalizacion+=				'<td class="data-label"><label>Fecha de Operación</label></td>';
 								datos_finalizacion+=				'<td class="data-reference">'+fecha+' '+hora+' </td>';
@@ -220,113 +218,111 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 								$("#content-holder").children().remove();
 								if(data.rc==0){
 									$("#content-holder").append($("#content-finalizar").html());
-								}
-								else{
+								} else {
 									$("#content-holder").append($("#content-finalizar2").html());
 									$("#cargarFinalizacion3").append(datos_finalizacion);
 								}
 
-				   		}
-				   		else if(data.rc==-178){
-                $("#dialog-error-afil3").dialog({
-                 title:"Error Afiliación",
-                  modal:"true",
-                  width:"440px",
-                  open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-                });
+							} else if(data.rc==-178 || data.rc==-344) {
+								var msg;
+								$("#dialog-error-afil3").dialog({
+									title:"Error Afiliación",
+									modal:"true",
+									width:"440px",
+									open: function(event, ui) {
+										$(".ui-dialog-titlebar-close", ui.dialog).hide();
+										msg = data.rc === -178 ? 'No se puede realizar el registro. <strong>Cuenta ya afiliada.</strong>' : 'La fecha de expiracion indicada es incorrecta';
+										$('#msgNon').html(msg);
+									}
+								});
 
-                $("#invalido5").click(function(){
-                  $("#dialog-error-afil3").dialog("close");
-                  $(location).attr('href', base_url+'/affiliation');
-                });
-        			}
-				   		else if(data.rc==-210){
-		                    $("#dialog-error-afil").dialog({
-		                     title:"Error Afiliación",
-		                      modal:"true",
-		                      width:"440px",
-		                      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		                    });
+								$("#invalido5").click(function(){
+									$("#dialog-error-afil3").dialog("close");
+									$(location).attr('href', base_url+'/affiliation');
+								});
+							} else if(data.rc==-210) {
+								$("#dialog-error-afil").dialog({
+									title:"Error Afiliación",
+									modal:"true",
+									width:"440px",
+									open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+								});
 
-		                    $("#invalido2").click(function(){
-		                      $("#dialog-error-afil").dialog("close");
-		                      $(location).attr('href', base_url+'/affiliation');
-		                    });
+								$("#invalido2").click(function() {
+									$("#dialog-error-afil").dialog("close");
+									$(location).attr('href', base_url+'/affiliation');
+								});
 
-            			}
-				   		else{
-				   			datos_finalizacion = 			'<tr>';
-							datos_finalizacion+=				'<td class="data-label"><label>Fecha de Operación</label></td>';
-							datos_finalizacion+=				'<td class="data-reference">'+fecha+' '+hora+' </td>';
-							datos_finalizacion+=			'</tr>';
-							datos_finalizacion+=			'<tr>';
-							datos_finalizacion+=				'<td class="data-label"><label>Cuenta de Origen</label></td>';
-							datos_finalizacion+=				'<td class="data-reference">"'+nombreCtaOrigen+'"<br /><span class="highlight">"'+mascara+'"</span><br/> <span class="lighten"> "'+marca+'" </span> </td>';
-							datos_finalizacion+=			'</tr>';
-							datos_finalizacion+=			'<tr>';
-							datos_finalizacion+=				'<td class="data-label"><label>Cuenta Destino Afiliada</label></td>';
-							datos_finalizacion+=				'<td class="data-reference">"'+beneficiario+'"<span class="lighten">("'+email+'")</span><br />Documento de Identidad "'+cedula+'"<br /><span class="highlight">"'+numeroCta+'"</span><br /></td>';
-							datos_finalizacion+=			'</tr>';
+							} else {
+								datos_finalizacion = 			'<tr>';
+								datos_finalizacion+=				'<td class="data-label"><label>Fecha de Operación</label></td>';
+								datos_finalizacion+=				'<td class="data-reference">'+fecha+' '+hora+' </td>';
+								datos_finalizacion+=			'</tr>';
+								datos_finalizacion+=			'<tr>';
+								datos_finalizacion+=				'<td class="data-label"><label>Cuenta de Origen</label></td>';
+								datos_finalizacion+=				'<td class="data-reference">"'+nombreCtaOrigen+'"<br /><span class="highlight">"'+mascara+'"</span><br/> <span class="lighten"> "'+marca+'" </span> </td>';
+								datos_finalizacion+=			'</tr>';
+								datos_finalizacion+=			'<tr>';
+								datos_finalizacion+=				'<td class="data-label"><label>Cuenta Destino Afiliada</label></td>';
+								datos_finalizacion+=				'<td class="data-reference">"'+beneficiario+'"<span class="lighten">("'+email+'")</span><br />Documento de Identidad "'+cedula+'"<br /><span class="highlight">"'+numeroCta+'"</span><br /></td>';
+								datos_finalizacion+=			'</tr>';
 
-							$("#cargarFinalizacion2").append(datos_finalizacion);
-							$("#content-holder").children().remove();
-							$("#content-holder").append($("#content-finalizar3").html());
+								$("#cargarFinalizacion2").append(datos_finalizacion);
+								$("#content-holder").children().remove();
+								$("#content-holder").append($("#content-finalizar3").html());
 
-				   		}
+							}
+						});
+
+					});//Boton Continuar
+
+				} else if(data.rc == -221 ) {
+					$("#dialog-error-afil1").dialog({
+						title:"Error Afiliación",
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 					});
 
-				});//Boton Continuar
+					$("#invalido3").click(function(){
+						$("#dialog-error-afil1").dialog("close");
+						$(location).attr('href', base_url+'/affiliation');
+					});
+				} else {
+					$("#dialog-error-afil2").dialog({
+						title:"Error Afiliación",
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
+					$("#invalido4").click(function(){
+						$("#dialog-error-afil2").dialog("close");
+						$(location).attr('href', base_url+'/dashboard');
+					});
+				}
+			});
 
- 				}
- 				else if(data.rc == -221 ){
- 					$("#dialog-error-afil1").dialog({
-	                     title:"Error Afiliación",
-	                      modal:"true",
-	                      width:"440px",
-	                      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	                    });
-
-	                    $("#invalido3").click(function(){
-	                      $("#dialog-error-afil1").dialog("close");
-	                      $(location).attr('href', base_url+'/affiliation');
-	                    });
- 				}
- 				else{
- 					$("#dialog-error-afil2").dialog({
-	                     title:"Error Afiliación",
-	                      modal:"true",
-	                      width:"440px",
-	                      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	                    });
-
-	                    $("#invalido4").click(function(){
-	                      $("#dialog-error-afil2").dialog("close");
-	                      $(location).attr('href', base_url+'/dashboard');
-	                    });
- 				}
- 			});
-
- 		}//IF FORM VALID
+		}//IF FORM VALID
 	});	//BOTON AFILIAR
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//ESPACIO DE FUNCIONES
+	//ESPACIO DE FUNCIONES
 
 	function validar_campos(){
 		jQuery.validator.setDefaults({
-	 		debug: true,
-	 		success: "valid"
-	 	});
+			debug: true,
+			success: "valid"
+		});
 
 		$("#validate_afiliacion").validate({
-
 			errorElement: "label",
 			ignore: "",
 			errorContainer: "#msg",
 			errorClass: "field-error",
 			validClass: "field-success",
 			errorLabelContainer: "#msg",
+
 			rules: {
 				"card-number":{"required":true,"number":true,"minlength":16},
 				"card-holder-email": {"required":true, "email": true},
@@ -343,19 +339,18 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 	}
 
 	// MODAL TERMINOS Y CONDICIONES
-	  $(".label-inline").on("click", "a", function() {
+	$(".label-inline").on("click", "a", function() {
 
 		$("#dialog-tc").dialog({
 			modal:"true",
 			width:"940px",
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 		});
-
 		$("#ok").click(function(){
 			$("#dialog-tc").dialog("close");
 		});
 
-	  });
+	});
 
 
 });  //FIN DE LA FUNCION GENERAL
