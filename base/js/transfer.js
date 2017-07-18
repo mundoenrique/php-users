@@ -188,7 +188,7 @@ $(function(){
 		cadena+=				'</nav>';
 		cadena+=			'</div>';
 		cadena+=	'<div class="product-scheme">';
-		cadena+=		'<ul class="product-balance-group">';
+		cadena+=		'<ul class="product-balance-group" style="margin: 10px 0">';
 		cadena+=			'<li>Disponible <span class="product-balance" id="balance-available">'+moneda+' 0.00</span></li>';
 		cadena+=			'<li>A debitar <span class="product-balance debitar" id="balance-debit">'+moneda+' 0.00</span></li>';
 		cadena+=		'</ul>';
