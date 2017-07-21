@@ -69,11 +69,11 @@ $(function(){
 	$(".dialog").click(function() {                    // CARGA MODAL CTA ORIGEN
 
 		$("#content-product").dialog({
-			                             title:"Selección de Cuentas Origen",
-			                             modal:"true",
-			                             width:"940px",
-			                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		                             });
+			title:"Selección de Cuentas Origen",
+			modal:"true",
+			width:"940px",
+			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		});
 		$("#cerrar").click(function(){
 			$("#content-product").dialog("close");
 		});
@@ -193,28 +193,28 @@ $(function(){
 		cadena+=			'<li>A debitar <span class="product-balance debitar" id="balance-debit">'+moneda+' 0.00</span></li>';
 		cadena+=		'</ul>';
 		cadena+= 	"<ul class='field-group'>";
-		cadena+= 		"<li class='field-group-item'>"
-		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>"
-		cadena+= 			"<select id='MonthExp' name='MonthExp'>"
-		cadena+=            	"<option value=''>Mes</option>"
-		cadena+=				"<option value='01'>01</option>"
-		cadena+=				"<option value='02'>02</option>"
-		cadena+=				"<option value='03'>03</option>"
-		cadena+=				"<option value='04'>04</option>"
-		cadena+=				"<option value='05'>05</option>"
-		cadena+=				"<option value='06'>06</option>"
-		cadena+=				"<option value='07'>07</option>"
-		cadena+=				"<option value='08'>08</option>"
-		cadena+=				"<option value='09'>09</option>"
-		cadena+=				"<option value='10'>10</option>"
-		cadena+=				"<option value='11'>11</option>"
-		cadena+=				"<option value='12'>12</option>"
-		cadena+= 			"</select>"
-		cadena+= 			"<select id='yearExp' name='yearExp'>"
-		cadena+=				"<option value=''>Año</option>"
-		cadena+= 			"</select>"
-		cadena+= 		"</li>"
-		cadena+=	"</ul>"
+		cadena+= 		"<li class='field-group-item'>";
+		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>";
+		cadena+= 			"<select id='MonthExp' name='MonthExp'>";
+		cadena+=            	"<option value=''>Mes</option>";
+		cadena+=				"<option value='01'>01</option>";
+		cadena+=				"<option value='02'>02</option>";
+		cadena+=				"<option value='03'>03</option>";
+		cadena+=				"<option value='04'>04</option>";
+		cadena+=				"<option value='05'>05</option>";
+		cadena+=				"<option value='06'>06</option>";
+		cadena+=				"<option value='07'>07</option>";
+		cadena+=				"<option value='08'>08</option>";
+		cadena+=				"<option value='09'>09</option>";
+		cadena+=				"<option value='10'>10</option>";
+		cadena+=				"<option value='11'>11</option>";
+		cadena+=				"<option value='12'>12</option>";
+		cadena+= 			"</select>";
+		cadena+= 			"<select id='yearExp' name='yearExp'>";
+		cadena+=				"<option value=''>Año</option>";
+		cadena+= 			"</select>";
+		cadena+= 		"</li>";
+		cadena+=	"</ul>";
 		cadena+=	'</div>';
 
 		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
@@ -222,7 +222,7 @@ $(function(){
 			var lastDigit = value.toString().substring(2,4);
 			var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
 			$("#yearExp").append(yearPrueba);
-		})
+		});
 
 		$.post(base_url+"/dashboard/saldo",{"tarjeta":$(this).attr("card")},function(data){           // CARGAR SALDO CUENTAS ORIGEN
 			var saldo=data.disponible;
@@ -290,10 +290,9 @@ $(function(){
 				acumCantidadOperacionesMensual =data.parametrosTransferencias[0].acumCantidadOperacionesMensual;
 				dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
 
-
 				$("#dashboard-beneficiary").empty();
 
-				$.each(data.cuentaDestinoPlata,function(pos,item){					
+				$.each(data.cuentaDestinoPlata,function(pos,item){
 
 					imagen1=item.nombre_producto.toLowerCase();
 					imagen2=normaliza(imagen1);
@@ -309,8 +308,8 @@ $(function(){
 					cadena+= "<p class='dashboard-item-cardholder'>"+item.NombreCliente+"</p>";
 					cadena+=  "<p class='dashboard-item-cardnumber'>"+item.noTarjetaConMascara+"</p>";
 					cadena+=  "<p class='dashboard-item-category'>"+item.nombre_producto+"</p>";
-					cadena+= "</div>"
-					cadena+= " </a>"
+					cadena+= "</div>";
+					cadena+= " </a>";
 					cadena+=  "</li>";
 
 					$("#dashboard-beneficiary").append(cadena);
@@ -318,17 +317,16 @@ $(function(){
 				});
 
 			}
-			if(data.rc == -61){
+			if(data.rc == -61) {
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
 			// -----------------------------------------------------  MUESTRA DESTINO  ------------------------------------------------------------------------------
 
 			// FUNCION PARA OBTENER DATOS DE LA CUENTA DESTINO
-			$(".muestraDestino").click(function(){
+			$(".muestraDestino").click(function() {
 
-				if ($(this).hasClass('disabled-dashboard-item')==true) {
+				if ($(this).hasClass('disabled-dashboard-item') == true) {
 					$("#content-destino").dialog("close");
-					//alert("Seleccion Invalida");
 
 				} else {
 
@@ -347,38 +345,40 @@ $(function(){
 					var number = contar_tarjetas();
 
 					cadena= '<div class="group"> ';
-					cadena+='<div class="product-presentation">';
-					cadena+=	'<img src="'+imagen+'" width="200" height="130" alt="" />';
-					cadena+=			'<div class="product-network '+marca.toLowerCase()+'"></div>';
-					cadena+=							'<input id="tarjetaDestino" name="tarjetaDestino" type="hidden" value="'+tarjeta+'" />';
-					cadena+=							'<input id="marcaDestino" name="marcaDestino" type="hidden" value="'+moneda+'" />';
-					cadena+=							'<input id="marca" name="marcaDestino" type="hidden" value="'+producto+'" />';
-					cadena+=						'</div>';
-					cadena+=						'<div class="product-info">';
-					cadena+=							'<p class="product-cardholder">'+nombre+'</p>';
-					cadena+=							'<p class="product-cardnumber">'+mascara+'</p>';
-					cadena+=							'<p class="product-metadata">'+producto+'</p>';
-					cadena+=							'<nav class="product-stack">';
-					cadena+=								'<ul class="stack">';
-					cadena+=									'<li class="stack-item modifica">';
-					cadena+=										'<a rel="section" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
-					cadena+=									'</li>';
-					cadena+=										'<li class="stack-item elimina">';
-					cadena+=										'<a rel="section" title="Remover"><span aria-hidden="true" class="icon-cancel"></span></a>';
-					cadena+=									'</li>';
-					cadena+=								'</ul>';
-					cadena+=							'</nav>';
-					cadena+=						'</div>';
-					cadena+=						'<div class="product-scheme">';
-					cadena+=                             '<fieldset class="form-inline">';
-					cadena+=                                    '<label for="beneficiary-1x-description" title="Descripción de la transferencia.">Concepto</label>';
-					cadena+=                                    '<input class="field-large mont" id="beneficiary-'+number+'x-description" maxlength="60" name="beneficiary-1x-description" type="text" />';
-					cadena+=                                    '<label for="beneficiary-1x-amount" title="Monto a transferir.">Importe</label>';
-					cadena+=                                    '<div class="field-category"> '+moneda+' ';
-					cadena+=                                                    '<input id="beneficiary-1x-coin" name="beneficiary-1x-coin" type="hidden" value="'+moneda+'."/>';
-					cadena+=                                    '</div>';
-					cadena+=                                    '<input class="field-small monto dinero" id="beneficiary-'+number+'-amount" maxlength="12" name="beneficiary-1x-amount"/> <br/>';
-					cadena+=                             '</fieldset></div></div>';
+					cadena+=    '<div class="product-presentation">';
+					cadena+=	    '<img src="'+imagen+'" width="200" height="130" alt="" />';
+					cadena+=		'<div class="product-network '+marca.toLowerCase()+'"></div>';
+					cadena+=		    '<input id="tarjetaDestino" name="tarjetaDestino" type="hidden" value="'+tarjeta+'" />';
+					cadena+=			'<input id="marcaDestino" name="marcaDestino" type="hidden" value="'+moneda+'" />';
+					cadena+=			'<input id="marca" name="marcaDestino" type="hidden" value="'+producto+'" />';
+					cadena+=        '</div>';
+					cadena+=		'<div class="product-info">';
+					cadena+=			'<p class="product-cardholder">'+nombre+'</p>';
+					cadena+=			'<p class="product-cardnumber">'+mascara+'</p>';
+					cadena+=			'<p class="product-metadata">'+producto+'</p>';
+					cadena+=			'<nav class="product-stack">';
+					cadena+=				'<ul class="stack">';
+					cadena+=					'<li class="stack-item modifica">';
+					cadena+=					    '<a rel="section" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
+					cadena+=					'</li>';
+					cadena+=					'<li class="stack-item elimina">';
+					cadena+=					   	'<a rel="section" title="Remover"><span aria-hidden="true" class="icon-cancel"></span></a>';
+					cadena+=					'</li>';
+					cadena+=				'</ul>';
+					cadena+=			'</nav>';
+					cadena+=		'</div>';
+					cadena+=		'<div class="product-scheme">';
+					cadena+=            '<fieldset class="form-inline">';
+					cadena+=                '<label for="beneficiary-1x-description" title="Descripción de la transferencia.">Concepto</label>';
+					cadena+=                '<input class="field-large mont" id="beneficiary-'+number+'x-description" maxlength="60" name="beneficiary-1x-description" type="text" />';
+					cadena+=                '<label for="beneficiary-1x-amount" title="Monto a transferir.">Importe</label>';
+					cadena+=                '<div class="field-category"> '+moneda+' ';
+					cadena+=                    '<input id="beneficiary-1x-coin" name="beneficiary-1x-coin" type="hidden" value="'+moneda+'."/>';
+					cadena+=                '</div>';
+					cadena+=                    '<input class="field-small monto dinero" id="beneficiary-'+number+'-amount" maxlength="12" name="beneficiary-1x-amount"/> <br/>';
+					cadena+=            '</fieldset>';
+					cadena+=        '</div>';
+					cadena+= '</div>';
 
 
 					$("#content_plata #tdestino").append(cadena);          // FUNCION PARA MOSTRAR LA TARJETA DESTINO SELECCIONADA
@@ -392,11 +392,11 @@ $(function(){
 					var montotr = $(".monto").val().replace(',', '.');
 					$('#content_plata').on('keyup','.monto',function() {
 						var montotr_exp = $(this).val();
-						if((pais=='Pe') || (pais=='Usd')){
+						if((pais=='Pe') || (pais=='Usd')) {
 							expr= /^-?[0-9]+([\.][0-9]{0,2})?$/;
 							saldo_imp= $("#balance-available").attr("saldo").replace(',', '');
 						}
-						if((pais=='Ve') || (pais=='Co')){
+						if((pais=='Ve') || (pais=='Co')) {
 							expr= /^-?[0-9]+([\,][0-9]{0,2})?$/;
 							saldo_imp1= $("#balance-available").attr("saldo").replace('.', '');
 							saldo_imp= saldo_imp1.replace(',', '.');
@@ -406,11 +406,11 @@ $(function(){
 
 							if((pais=='Pe') || (pais=='Usd')){
 								$("#dialog-error-monto").dialog({
-									                                title:"Monto no permitido",
-									                                modal:"true",
-									                                width:"440px",
-									                                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-								                                });
+									title:"Monto no permitido",
+									modal:"true",
+									width:"440px",
+									open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+								});
 
 								$("#monto_invalido").click(function(){
 									$("#dialog-error-monto").dialog("close");
@@ -533,7 +533,6 @@ $(function(){
 		}); // FIN MODIFICAR TARJETA
 
 		$('#content_plata').on('click',".elimina",function(){
-			//$('.elimina').click(function(){
 			m=$(".dashboard-item").attr('moneda');
 			suma=sumar_saldo();
 			if(suma!=0){
@@ -587,33 +586,33 @@ $(function(){
 		$("#montoTotal").remove();
 		$("#tdestino").append("<input id='montoTotal' name='montoTotal' type='hidden' class='checkTotal' value='' />");
 		$("#montoTotal").val(sumar_saldo());
-		total= sumar_saldo();		
+		total= sumar_saldo();
 		saldo= saldo_imp;
-		
+
 		//conceptos de las transferencias
 		valor_concepto1= $("#beneficiary-1x-description").val();
 		valor_concepto2= $("#beneficiary-2x-description").val();
 		valor_concepto3= $("#beneficiary-3x-description").val();
-		
+
 		//monto de las trnasferencias
 		valor_monto1= $("#beneficiary-1-amount").val();
 		valor_monto2= $("#beneficiary-2-amount").val();
 		valor_monto3= $("#beneficiary-3-amount").val();
-		
+
 		if($('#MonthExp').val() === '') {
-			validateInput['0'] = 'Seleccione el mes de vencimiento';
+			validateInput.push('Seleccione el mes de vencimiento');
 			confirmacion = false;
 		}
-		
+
 		if($('#yearExp').val() === '') {
-			validateInput['1'] = 'Seleccione el año de vencimiento'
+			validateInput.push('Seleccione el año de vencimiento');
 			confirmacion = false;
-		}	
+		}
 
 
 		if((valor_concepto1 === '') || (valor_concepto2 === '') || (valor_concepto3 === '')) {
-			validateInput['2'] = 'El campo concepto no debe estar vacío.';
-			$("#campos_vacios").dialog({
+			validateInput.push('El campo concepto no debe estar vacío.');
+			/*$("#campos_vacios").dialog({
 				                           title:"Error Campos",
 				                           modal:"true",
 				                           width:"440px",
@@ -622,20 +621,20 @@ $(function(){
 
 			$("#error_campos").click(function(){
 				$("#campos_vacios").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}
-		
+
 		if((valor_monto1 === '') || (valor_monto2 === '') || (valor_monto3 === '')) {
-			validateInput['3'] = 'El campo importe no debe estar vacío.';
+			validateInput.push('El campo importe no debe estar vacío.');
 			sinImporte = true;
 		} else {
 			sinImporte = false;
 		}
 
 		if(parseFloat(total)>saldo){
-			validateInput['4'] = 'El monto total excede su saldo disponible.';
-			$("#dialog-error-monto9").dialog({
+			validateInput.push('El monto total excede su saldo disponible.');
+			/*$("#dialog-error-monto9").dialog({
 				                                 title:"Error Monto",
 				                                 modal:"true",
 				                                 width:"440px",
@@ -644,13 +643,13 @@ $(function(){
 
 			$("#error_monto9").click(function(){
 				$("#dialog-error-monto9").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}
 
 		if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
-			validateInput['5'] = 'Usted excede el límite diario permitido.';
-			$("#dialog-cant-ope1").dialog({
+			validateInput.push('Usted excede el límite diario permitido.');
+			/*$("#dialog-cant-ope1").dialog({
 				                              title:"Cantidad de Operaciones",
 				                              modal:"true",
 				                              width:"440px",
@@ -659,13 +658,13 @@ $(function(){
 
 			$("#cant_ope1").click(function(){
 				$("#dialog-cant-ope1").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 
 		}
 		if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
-			validateInput['6'] = 'Usted excede el límite semanal permitido.';
-			$("#dialog-cant-ope-sm").dialog({
+			validateInput.push('Usted excede el límite semanal permitido.');
+			/*$("#dialog-cant-ope-sm").dialog({
 				                                title:"Cantidad de Operaciones",
 				                                modal:"true",
 				                                width:"440px",
@@ -674,13 +673,13 @@ $(function(){
 
 			$("#cant_ope_sm").click(function(){
 				$("#dialog-cant-ope-sm").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 
 		}
 		if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
-			validateInput['7'] = 'Usted excede el límite mensual permitido.';
-			$("#dialog-cant-ope2").dialog({
+			validateInput.push('Usted excede el límite mensual permitido.');
+			/*$("#dialog-cant-ope2").dialog({
 				                              title:"Cantidad de Operaciones",
 				                              modal:"true",
 				                              width:"440px",
@@ -689,30 +688,30 @@ $(function(){
 
 			$("#cant_ope2").click(function(){
 				$("#dialog-cant-ope2").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 
-		}		
-
-		if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
-			validateInput['8'] = 'El monto a debitar es menor al monto mínimo de operaciones.';
-			$("#dialog-min-monto").dialog({
-				                              title:"Monto no permitido",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
-
-			$("#monto_invalido2").click(function(){
-				$("#dialog-min-monto").dialog("close");
-			});
-			$(this).val("");
-			confirmacion = false;
 		}
 
+		// if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
+		// 	validateInput.push('El monto a debitar es menor al monto mínimo de operaciones.');
+		// 	$("#dialog-min-monto").dialog({
+		// 		                              title:"Monto no permitido",
+		// 		                              modal:"true",
+		// 		                              width:"440px",
+		// 		                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		// 	                              });
+		//
+		// 	$("#monto_invalido2").click(function(){
+		// 		$("#dialog-min-monto").dialog("close");
+		// 	});
+		// 	$(this).val("");
+		// 	confirmacion = false;
+		// }
+
 		if(parseFloat(total)>parseFloat(montoMaxOperaciones)){
-			validateInput['9'] = 'El monto a total a debitar supera el monto máximo de operaciones.';
-			$("#dialog-error-monto1").dialog({
+			validateInput.push('El monto a total a debitar supera el monto máximo de operaciones.');
+			/*$("#dialog-error-monto1").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
 				                                 width:"440px",
@@ -721,13 +720,13 @@ $(function(){
 
 			$("#error_monto1").click(function(){
 				$("#dialog-error-monto1").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}
 
 		if((parseFloat(total)<parseFloat(montoMinOperaciones)) && sinImporte == false){
-			validateInput['10'] = 'El monto total a debitar es menor al monto mínimo de operaciones.';
-			$("#dialog-error-monto2").dialog({
+			validateInput.push('El monto total a debitar es menor al monto mínimo de operaciones.');
+			/*$("#dialog-error-monto2").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
 				                                 width:"440px",
@@ -736,14 +735,14 @@ $(function(){
 
 			$("#error_monto2").click(function(){
 				$("#dialog-error-monto2").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}
 
 
 		if((parseFloat(total)+parseFloat(montoAcumDiario))>parseFloat(montoMaxDiario)){
-			validateInput['11'] = 'El monto total a debitar es mayor al monto maximo diario permitido.';
-			$("#dialog-error-monto7").dialog({
+			validateInput.push('El monto total a debitar es mayor al monto maximo diario permitido.');
+			/*$("#dialog-error-monto7").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
 				                                 width:"440px",
@@ -752,11 +751,12 @@ $(function(){
 
 			$("#error_monto7").click(function(){
 				$("#dialog-error-monto7").dialog("close");
-			});
+			});*/
 			confirmacion = false;
-		}else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
-			validateInput['12'] = 'El monto total a debitar es mayor al monto maximo diario permitido.';
-			$("#dialog-error-monto-sm").dialog({
+
+		} else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
+			validateInput.push('El monto total a debitar es mayor al monto maximo diario permitido.');
+			/*$("#dialog-error-monto-sm").dialog({
 				                                   title:"Error monto total",
 				                                   modal:"true",
 				                                   width:"440px",
@@ -765,11 +765,11 @@ $(function(){
 
 			$("#error_monto_sm").click(function(){
 				$("#dialog-error-monto-sm").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
-			validateInput['13'] = 'El monto total a debitar es mayor al monto maximo mensual permitido.';
-			$("#dialog-error-monto8").dialog({
+			validateInput.push('El monto total a debitar es mayor al monto maximo mensual permitido.');
+			/*$("#dialog-error-monto8").dialog({
 				                                 title:"Error monto total",
 				                                 modal:"true",
 				                                 width:"440px",
@@ -778,30 +778,31 @@ $(function(){
 
 			$("#error_monto8").click(function(){
 				$("#dialog-error-monto8").dialog("close");
-			});
+			});*/
 			confirmacion = false;
 		}
-		
+
 
 		totaldef=parseFloat(valor_monto1)+parseFloat(valor_monto2)+parseFloat(valor_monto3);
-		
+
 		if(confirmacion === false) {
-			console.log(validateInput);
 			$('#inputValid').dialog({
-				title: 'Transferencia entre tarjetas',
-				modal: 'true',
-				width: '440px',
-				open: function(event, ui) {					
-					$(".ui-dialog-titlebar-close", ui.dialog).hide();
-					$.each(validateInput, function(index, value) {						
-						$('#contentValid').append('<p>' + value + '</p>');
-					});
-					
-				}
-			});
+				                        title: 'Transferencia entre tarjetas',
+				                        modal: 'true',
+				                        width: '440px',
+				                        open: function(event, ui) {
+					                        $(".ui-dialog-titlebar-close", ui.dialog).hide();
+					                        console.log(validateInput);
+					                        $.each(validateInput, function(index, value) {
+						                        $('#contentValid').append('<p>' + value + '</p>');
+					                        });
+
+				                        }
+			                        });
 			$('#closeValid').on('click', function(){
-				validateInput.length = 0;
-				$('#contentValid').children().not('span').remove();				
+				$(this).off('click');
+				validateInput = [];
+				$('#contentValid').children().not('span').remove();
 				console.log(validateInput);
 				$('#inputValid').dialog('close');
 			});
@@ -814,7 +815,6 @@ $(function(){
 			nombreCtaOrigen=$("#donor").find("#nombreCtaOrigen").html();
 			banco=$("#donor").find(".banco").html();
 			marca=$("#donor").find(".product-metadata").html();
-			//comision=$("#donor").find(".comision").html();
 
 			origen=		  '<tr>';
 			origen+=        '<td class="data-label"><label>Cuenta Origen</label></td>';
@@ -825,7 +825,7 @@ $(function(){
 
 			var tr;
 
-			
+
 			var num=0;
 			montodef=0;
 			$.each($('#tdestino').children(':not(.obscure-group, .checkTotal)'), function(pos, item){
@@ -848,7 +848,7 @@ $(function(){
 					var total = $(".product-scheme").find(".debitar").html().replace(/S../g, "");
 					total1=total;
 				}
-				
+
 
 				moneda=$(".dashboard-item").attr("moneda");
 				contador_trans = contador_trans+1;
@@ -1124,7 +1124,7 @@ $(function(){
 		tarjetas = contar+1;
 		return tarjetas;
 
-	} 		//FIN FUNCION CONTAR TARJETAS	
+	} 		//FIN FUNCION CONTAR TARJETAS
 
 
 	function marcar_destino() 			//FUNCION PARA DESHABILITAR TARJETA DESTINO SELECCIONADA

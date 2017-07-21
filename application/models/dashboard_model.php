@@ -59,15 +59,15 @@ class Dashboard_model extends CI_Model {
 
 		log_message('info', $data);
 
-		$dataEncry = np_Hoplite_Encryption($data, 1);
-		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
-		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1));
-		
-		$salida = json_encode($desdata);
-		log_message('info', 'Salida SALDO desencriptado: ' . $salida);
-		//$desdata = json_decode('{"bloqueo":"0,00","disponible":"51000,00","actual":"51000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
+		 $dataEncry = np_Hoplite_Encryption($data, 1);
+		 $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
+		 $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		 $data = json_decode($response);
+		 $desdata = json_decode(np_Hoplite_Decrypt($data->data, 1));
+
+		 $salida = json_encode($desdata);
+		 log_message('info', 'Salida SALDO desencriptado: ' . $salida);
+		//$desdata = json_decode('{"bloqueo":"0,00","disponible":"51000,00","actual":"1300000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
 
 		
 
