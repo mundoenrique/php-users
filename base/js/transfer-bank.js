@@ -549,7 +549,8 @@ $(function(){
 
 	$("#continuar").click(function(){
 		var confirmacion = true;
-
+		var validateIpt = [];
+		var sinImport = false;
 		var contador_trans=0;
 		//$("#validate").submit();
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -565,165 +566,211 @@ $(function(){
 		valor_concepto2= $("#beneficiary-2x-description").val();
 		valor_concepto3= $("#beneficiary-3x-description").val();
 
-		if((valor_concepto1=="")||(valor_concepto2=="")||(valor_concepto3=="")){
-			$("#campos_vacios").dialog({
-				                           title:"Error Campos",
-				                           modal:"true",
-				                           width:"440px",
-				                           open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                           });
-			$("#error_campos").click(function(){
-				$("#campos_vacios").dialog("close");
-			});
-			confirmacion = false;
-		}
-
-		if((parseFloat(total)+parseFloat(montoComision))>saldo){
-
-			$("#dialog-error-monto9").dialog({
-				                                 title:"Error Monto",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
-
-			$("#error_monto9").click(function(){
-				$("#dialog-error-monto9").dialog("close");
-			});
-			confirmacion = false;
-		}
-
-		if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
-
-			$("#dialog-cant-ope1").dialog({
-				                              title:"Cantidad de Operaciones",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
-
-			$("#cant_ope1").click(function(){
-				$("#dialog-cant-ope1").dialog("close");
-			});
-			confirmacion = false;
-
-		} else if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
-			$("#dialog-cant-ope-sm").dialog({
-				                                title:"Cantidad de Operaciones",
-				                                modal:"true",
-				                                width:"440px",
-				                                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                });
-			$("#cant_ope_sm").click(function(){
-				$("#dialog-cant-ope-sm").dialog("close");
-			});
-			confirmacion = false;
-
-		} else if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
-
-			$("#dialog-cant-ope2").dialog({
-				                              title:"Cantidad de Operaciones",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
-			$("#cant_ope2").click(function(){
-				$("#dialog-cant-ope2").dialog("close");
-			});
-			confirmacion = false;
-
-		}
-
 		valor_monto1= $("#beneficiary-1-amount").val();
 		valor_monto2= $("#beneficiary-2-amount").val();
 		valor_monto3= $("#beneficiary-3-amount").val();
 
-		if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
-
-			$("#dialog-min-monto").dialog({
-				                              title:"Monto no permitido",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
-			$("#monto_invalido2").click(function(){
-				$("#dialog-min-monto").dialog("close");
-			});
-			$(this).val("");
+		if($('#MonthExp').val() === ''){
+			validateIpt.push('Seleccione el mes de vencimiento');
 			confirmacion = false;
 		}
+
+		if($('yearExp').val() === ''){
+			validateIpt.push('Seleccione el año de vencimiento.');
+			confirmacion = false;
+		}
+
+		if((valor_concepto1=="")||(valor_concepto2=="")||(valor_concepto3=="")){
+			validateIpt.push('El campo concepto no debe estar vacío.');
+			// $("#campos_vacios").dialog({
+			// 	                           title:"Error Campos",
+			// 	                           modal:"true",
+			// 	                           width:"440px",
+			// 	                           open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                            });
+			// $("#error_campos").click(function(){
+			// 	$("#campos_vacios").dialog("close");
+			// });
+			confirmacion = false;
+		}
+
+		if((valor_monto1 === '') || (valor_monto2 === '') || (valor_monto3 === '')) {
+			validateIpt.push('El campo importe no debe estar vacío.');
+			sinImport = true;
+		} else {
+			sinImport = false;
+		}
+
+
+		if((parseFloat(total)+parseFloat(montoComision))>saldo){
+			validateIpt.push('El monto total excede su saldo disponible.');
+			// $("#dialog-error-monto9").dialog({
+			// 	                                 title:"Error Monto",
+			// 	                                 modal:"true",
+			// 	                                 width:"440px",
+			// 	                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                  });
+			//
+			// $("#error_monto9").click(function(){
+			// 	$("#dialog-error-monto9").dialog("close");
+			// });
+			confirmacion = false;
+		}
+
+		if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
+			validateIpt.push('Usted excede el límite diario permitido.');
+			// $("#dialog-cant-ope1").dialog({
+			// 	                              title:"Cantidad de Operaciones",
+			// 	                              modal:"true",
+			// 	                              width:"440px",
+			// 	                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                               });
+			//
+			// $("#cant_ope1").click(function(){
+			// 	$("#dialog-cant-ope1").dialog("close");
+			// });
+			confirmacion = false;
+
+		} else if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
+			validateIpt.push('Usted excede el límite semanal permitido.');
+			// $("#dialog-cant-ope-sm").dialog({
+			// 	                                title:"Cantidad de Operaciones",
+			// 	                                modal:"true",
+			// 	                                width:"440px",
+			// 	                                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                 });
+			// $("#cant_ope_sm").click(function(){
+			// 	$("#dialog-cant-ope-sm").dialog("close");
+			// });
+			confirmacion = false;
+
+		} else if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
+			validateIpt.push('Usted excede el límite mensual permitido.');
+			// $("#dialog-cant-ope2").dialog({
+			// 	                              title:"Cantidad de Operaciones",
+			// 	                              modal:"true",
+			// 	                              width:"440px",
+			// 	                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                               });
+			// $("#cant_ope2").click(function(){
+			// 	$("#dialog-cant-ope2").dialog("close");
+			// });
+			confirmacion = false;
+
+		}
+
+
+
+		// if ( (parseFloat(valor_monto1)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto2)  < parseFloat(montoMinOperaciones)) || (parseFloat(valor_monto3)  < parseFloat(montoMinOperaciones)) ){
+		// 	validateIpt.push('El monto a debitar es menor al monto mínimo de operaciones.');
+		// 	$("#dialog-min-monto").dialog({
+		// 		                              title:"Monto no permitido",
+		// 		                              modal:"true",
+		// 		                              width:"440px",
+		// 		                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		// 	                              });
+		// 	$("#monto_invalido2").click(function(){
+		// 		$("#dialog-min-monto").dialog("close");
+		// 	});
+		// 	$(this).val("");
+		// 	confirmacion = false;
+		// }
 
 		if((parseFloat(total)+parseFloat(montoComision)+parseFloat(montoComision))>parseFloat(montoMaxOperaciones)){
-			$("#dialog-error-monto1").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
-
-			$("#error_monto1").click(function(){
-				$("#dialog-error-monto1").dialog("close");
-			});
+			validateIpt.push('El monto a total a debitar supera el monto máximo de operaciones.');
+			// $("#dialog-error-monto1").dialog({
+			// 	                                 title:"Error monto total",
+			// 	                                 modal:"true",
+			// 	                                 width:"440px",
+			// 	                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                  });
+			//
+			// $("#error_monto1").click(function(){
+			// 	$("#dialog-error-monto1").dialog("close");
+			// });
 			confirmacion = false;
 		}
 
-		if(parseFloat(total)<=0){
-			$("#dialog-error-monto2").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
-
-			$("#error_monto2").click(function(){
-				$("#dialog-error-monto2").dialog("close");
-			});
+		if(parseFloat(total)<=0 && sinImport == false){
+			validateIpt.push('El monto total a debitar es menor al monto mínimo de operaciones.');
+			// $("#dialog-error-monto2").dialog({
+			// 	                                 title:"Error monto total",
+			// 	                                 modal:"true",
+			// 	                                 width:"440px",
+			// 	                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                  });
+			//
+			// $("#error_monto2").click(function(){
+			// 	$("#dialog-error-monto2").dialog("close");
+			// });
 			confirmacion = false;
 		}
 
 		if((parseFloat(total)+parseFloat(montoAcumDiario))>parseFloat(montoMaxDiario)){
-			$("#dialog-error-monto7").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
-
-			$("#error_monto7").click(function(){
-				$("#dialog-error-monto7").dialog("close");
-			});
+			validateIpt.push('El monto total a debitar es mayor al monto maximo diario permitido.');
+			// $("#dialog-error-monto7").dialog({
+			// 	                                 title:"Error monto total",
+			// 	                                 modal:"true",
+			// 	                                 width:"440px",
+			// 	                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                  });
+			//
+			// $("#error_monto7").click(function(){
+			// 	$("#dialog-error-monto7").dialog("close");
+			// });
 			confirmacion = false;
+
 		}else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
-
-			$("#dialog-error-monto-sm").dialog({
-				                                   title:"Error monto total",
-				                                   modal:"true",
-				                                   width:"440px",
-				                                   open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                   });
-
-			$("#error_monto_sm").click(function(){
-				$("#dialog-error-monto-sm").dialog("close");
-			});
+			validateIpt.push('El monto total a debitar es mayor al monto maximo diario permitido.');
+			// $("#dialog-error-monto-sm").dialog({
+			// 	                                   title:"Error monto total",
+			// 	                                   modal:"true",
+			// 	                                   width:"440px",
+			// 	                                   open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                    });
+			//
+			// $("#error_monto_sm").click(function(){
+			// 	$("#dialog-error-monto-sm").dialog("close");
+			// });
 			confirmacion = false;
+
 		}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
-
-			$("#dialog-error-monto8").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
-
-			$("#error_monto8").click(function(){
-				$("#dialog-error-monto8").dialog("close");
-			});
+			validateIpt.push('El monto total a debitar es mayor al monto maximo mensual permitido.');
+			// $("#dialog-error-monto8").dialog({
+			// 	                                 title:"Error monto total",
+			// 	                                 modal:"true",
+			// 	                                 width:"440px",
+			// 	                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			//                                  });
+			//
+			// $("#error_monto8").click(function(){
+			// 	$("#dialog-error-monto8").dialog("close");
+			// });
 			confirmacion = false;
 		}
 
 
 		var totaldef=parseFloat(valor_monto1)+parseFloat(valor_monto2)+parseFloat(valor_monto3);
-		if (confirmacion==true) {
+
+		if(confirmacion === false){
+				$('#inputValid').dialog({
+					title: 'Transferencia de tarjetas',
+					modal: 'true',
+					width: '440px',
+					open: function(event, ui){
+						 $('.ui-dialog-titlebar-close', ui.dialog).hide();
+						 $.each(validateIpt, function(index, value){
+							 $('#contentValid').append('<p>' + value + '</p>');
+						 })
+					}
+				});
+				$('#closeValid').on('click', function(){
+					$(this).off('click');
+					validateIpt = [];
+					$('#contentValid').children().not('span').remove();
+					$('#inputValid').dialog('close');
+				});
+		}else if (confirmacion==true) {
 			var origen, nombre, mascara;
 
 			nombre=$("#donor").find(".product-cardholder").html();
@@ -1298,32 +1345,6 @@ $(function(){
 		});
 
 	});
-
-// 	$("#continuar").validate({
-//
-// 		errorElement: "label",
-// 		ignore: "",
-// 		errorContainer: "#msg",
-// 		errorClass: "field-error",
-// 		validClass: "field-success",
-// 		errorLabelContainer: "#msg",
-// 		rules: {
-// 			"card-number": {"required":true,"number": true},
-// 			"card-holder": {"required":true, "pattern":letter},
-// 			"doc-name": {"required":true},
-// 			"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
-// 			"card-holder-email": {"required":true, "email": true},
-// 			"MonthExp": {"required": true},
-// 			"yearExp": {"required": true}
-// 		},
-//
-// 		messages: {
-// 			"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-// 			"yearExp": "Seleccione el año de vencimiento de su tarjeta"
-// 		}
-// 	}); // VALIDATE
-// }
-
 
 
 });  // FIN FUNCION GENERAL

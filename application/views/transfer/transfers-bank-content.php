@@ -633,6 +633,16 @@ if($datos->rc==0){
     </div>
 </div>
 
+<!--ERRORSFORMAT-->
+<div class="dialog-small" id="inputValid" style='display:none'>
+	<div class="alert-simple alert-warning" id="contentValid">
+		<span aria-hidden="true" class="icon-warning-sign"></span>
+	</div>
+	<div class="form-actions">
+		<button id="closeValid">Aceptar</button>
+	</div>
+</div>
+
 <!-- ERROR CLAVE DE CONFIRMACION -->
 <div class="dialog-small" id="dialog-error-correo" style='display:none'>
     <div class="alert-simple alert-warning" id="message">
