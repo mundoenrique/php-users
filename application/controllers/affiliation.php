@@ -206,7 +206,7 @@
 
 		log_message('info', 'Beneficiario ', $beneficiario);
 
-		$this->output->set_content_type('application/json')->set_output($this->affiliationP2T->affiliationP2T_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $banco, $cedula, $prefix));
+		$this->output->set_content_type('application/json')->set_output($this->affiliationP2T->affiliationP2T_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $banco, $cedula, $prefix, $expDate));
 
 	}
 

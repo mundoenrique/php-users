@@ -397,7 +397,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 							$("#content-holder").append(confirmacion);
 
 							$("#continuar").click(function(){
-								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2C", "email":emailClienteD,"banco":bancoValor},function(data) {
+								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2C", "email":emailClienteD,"banco":bancoValor, "expDate":expDate},function(data) {
 				        			if(data.rc==0){
 				        				var exito;
 				        				$("#progress").attr('style','display:none');
@@ -421,10 +421,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 				        			else{
 				        				var exito;
+										var msg = data.rc === -344 ? 'la fecha de expiracion indicada es incorrecta' : '';
 				        				$("#progress").attr('style','display:none');
 				        				$("#content-holder").children().remove();
 										exito= "<div class='alert-error' id='message'>";
-										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada";
+										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada, " + msg;
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
 										exito+= 		"<button id='exit'>Finalizar</button>";

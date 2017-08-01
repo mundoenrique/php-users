@@ -5,7 +5,7 @@ class Adm_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class Adm_model extends CI_Model {
 
 		return json_encode($desdata);
 
-	}		//FIN 
+	}		//FIN
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ class Adm_model extends CI_Model {
 			));
 
 		//print_r($data);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
@@ -79,7 +79,7 @@ class Adm_model extends CI_Model {
 
 		return json_encode($desdata);
 
-	}		//FIN 
+	}		//FIN
 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@ class Adm_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 			));
 		//print_r($data);
-		
+
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
@@ -110,7 +110,7 @@ class Adm_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//LLAMADA A CARGAR CUENTAS ORIGEN
-	public function ctasOrigen_load($operacion)				
+	public function ctasOrigen_load($operacion)
 	{
 	    //PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas origen");
@@ -123,7 +123,7 @@ class Adm_model extends CI_Model {
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			));
-		
+
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
@@ -138,7 +138,7 @@ class Adm_model extends CI_Model {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//LLAMADA A CARGAR CUENTAS DESTINO
-	public function ctasDestino_load($tarjeta, $prefijo, $operacion)			
+	public function ctasDestino_load($tarjeta, $prefijo, $operacion)
 	{
 		//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas destino");

@@ -254,8 +254,9 @@ $(function(){
 			banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("codBanco");
 			nombre_banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("banco");
 			marca=$("#cargarConfirmacion").find("#nombreOrigenTransfer").attr("marca");
+			expDate=$("#cargarConfirmacion").find("#ctaAfiliar").attr("expDate");
 
-			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix},function(data){
+			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
 				if(data.rc == -61){
 					$(location).attr('href', base_url+'/users/error_gral');
 				} else if(data.rc==0 || data.rc==-188) {
@@ -325,6 +326,8 @@ $(function(){
 							break;
 						case -343:
 							msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
+						case -344:
+							msgAfiliation = 'la fecha de expiracion indicada es incorrecta';
 							break;
 						default:
 

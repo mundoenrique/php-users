@@ -398,7 +398,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
 							$("#continuar").click(function(){
-								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor},function(data) {
+								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor, "expDate":expDate },function(data) {
 				        			if(data.rc==0){
 				        				var exito;
 				        				$("#progress").attr('style','display:none');
@@ -434,6 +434,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 												break;
 											case -343:
 												msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
+											case -344:
+												msgAfiliation = 'la fecha de expiracion indicada es incorrecta';
 												break;
 											default:
 										}

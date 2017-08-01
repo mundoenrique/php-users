@@ -41,11 +41,11 @@ class Affiliation_model extends CI_Model {
 		$data = json_decode(utf8_encode($response));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 		log_message("info", "RESPONSE afiliacion P2P : ".json_encode($desdata));
-		
+
 		//simulación respuesta del servicio
 		// $desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
 		// $desdata = json_decode($desdata);
-		
+
 		return json_encode($desdata);
 
 	}		//FIN
@@ -53,7 +53,7 @@ class Affiliation_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//AFILIAR CUENTA TDC Y BANCOS
-	public function affiliationP2T_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $banco,$cedula,$prefix) {
+	public function affiliationP2T_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $banco,$cedula,$prefix,$expDate) {
 
 	    									                  //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","afiliar","procesar afiliacion");
@@ -67,13 +67,14 @@ class Affiliation_model extends CI_Model {
 			"email"=> $email,
 			"canal"=> "CPO",
 			"banco"=>$banco,
+			"validacionFechaExp" => $expDate,
 			"id_ext_per"=>$cedula,
 			"prefix"=>$prefix,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			),JSON_UNESCAPED_UNICODE);
 
-		log_message("info","JSON afiliacion P2T-C  json",$data);
+		log_message("info","JSON afiliacion P2T-C  json---------------------<<<<<<<<<<<<<".$data);
 
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
