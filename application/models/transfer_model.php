@@ -16,14 +16,16 @@
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas origen");
 
-			$data = json_encode(array(
-				                    "idOperation"=>"6",
-				                    "className"=>"com.novo.objects.TOs.TarjetaTO",
-				                    "tipoOperacion"=>$operacion,
-				                    "id_ext_per"=>$this->session->userdata("idUsuario"),
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"6",
+					"className"=>"com.novo.objects.TOs.TarjetaTO",
+					"tipoOperacion"=>$operacion,
+					"id_ext_per"=>$this->session->userdata("idUsuario"),
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 
 			log_message("info", "SALIDA ORIGEN : ".$data);
 
@@ -52,15 +54,17 @@
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas destino");
 
-			$data = json_encode(array(
-				                    "idOperation"=>"7",
-				                    "className"=>"com.novo.objects.TOs.TarjetaTO",
-				                    "tipoOperacion"=>$operacion,
-				                    "prefix"=>$prefijo,
-				                    "noTarjeta" => $tarjeta,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"7",
+					"className"=>"com.novo.objects.TOs.TarjetaTO",
+					"tipoOperacion"=>$operacion,
+					"prefix"=>$prefijo,
+					"noTarjeta" => $tarjeta,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 			//print_r($data);
 			log_message("info", "SALIDA DESTINO : ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
@@ -86,14 +90,16 @@
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave op");
 
-			$data = json_encode(array(
-				                    "idOperation"=>"10",
-				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "passwordOperaciones"=> $clave,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"10",
+					"className"=>"com.novo.objects.TOs.UsuarioTO",
+					"userName"=> $this->session->userdata("userName"),
+					"passwordOperaciones"=> $clave,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 
 			//print_r($data);
 			log_message("info", "Salida Validar Clave : ".$data);
@@ -120,13 +126,15 @@
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","crear clave auten");
 
-			$data = json_encode(array(
-				                    "idOperation"=>"11",
-				                    "className"=>".novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"11",
+					"className"=>".novo.objects.TOs.UsuarioTO",
+					"userName"=> $this->session->userdata("userName"),
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 
 
 			$dataEncry = np_Hoplite_Encryption($data,1);
@@ -152,14 +160,16 @@
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave auten");
 
-			$data = json_encode(array(
-				                    "idOperation"=>"12",
-				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "claveConfirmacion"=> $clave,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"12",
+					"className"=>"com.novo.objects.TOs.UsuarioTO",
+					"userName"=> $this->session->userdata("userName"),
+					"claveConfirmacion"=> $clave,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 
 			//print_r($data);
 
@@ -182,21 +192,23 @@
 
 		//REALIZAR TRANSFERENCIA
 		public function procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros){
-			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
+			//PARAMS $sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
-			$data = json_encode(array(
-				                    "idOperation"=>"9",
-				                    "className"=>"com.novo.objects.MO.TransferenciaTarjetahabienteMO",
-				                    "ctaOrigen"=> $cuentaOrigen,
-				                    "ctaDestino"=> $cuentaDestino,
-				                    "monto"=> $monto,
-				                    "descripcion" => $descripcion,
-				                    "tipoOpe" => $tipoOpe,
-				                    "idUsuario"=> $this->session->userdata("userName"),
-				                    "id_afil_terceros" => $id_afil_terceros,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
+			$data = json_encode(
+				array(
+					"idOperation"=>"9",
+					"className"=>"com.novo.objects.MO.TransferenciaTarjetahabienteMO",
+					"ctaOrigen"=> $cuentaOrigen,
+					"ctaDestino"=> $cuentaDestino,
+					"monto"=> $monto,
+					"descripcion" => $descripcion,
+					"tipoOpe" => $tipoOpe,
+					"idUsuario"=> $this->session->userdata("userName"),
+					"id_afil_terceros" => $id_afil_terceros,
+					"logAccesoObject"=>$logAcceso,
+					"token"=>$this->session->userdata("token")
+				)
+			);
 
 			//print_r($data);
 			log_message("info", "Request procesarTransferencia_load------>>>>>>".$data);

@@ -4,7 +4,7 @@
 $config['base_url_cdn'] = 'https://cdn.novopayment.dev/personas/';
 $config['base_path_cdn'] = '/opt/httpd-2.4.4/vhost/cdn/personas/';
 $config['keyNovo'] = '12345678';
-$config['urlWS']= "http://172.24.6.148:8015/NovoInterfaceMovilesWS/webresources/";
+$config['urlWS']= "http://172.24.6.148:8005/NovoInterfaceMovilesWS/webresources/";
 
 /*
 |--------------------------------------------------------------------------

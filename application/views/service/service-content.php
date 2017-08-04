@@ -63,10 +63,10 @@
                                         <label for="mot-sol">Motivo de la solicitud</label>
                                         <select id="mot-sol" name="mot-sol" disabled>
                                             <option value="">Seleccione</option>
-                                            <option value="41">Tarjeta perdida</option>
-                                            <option value="43">Tarjeta robada</option>
-                                            <option value="TD">Tarjeta deteriorada</option>
-                                            <option value="TR">Reemplazar tarjeta</option>
+	                                        <option value="41">Tarjeta perdida</option>
+	                                        <option value="43">Tarjeta robada</option>
+	                                        <option value="TD">Tarjeta deteriorada</option>
+	                                        <option value="TR">Reemplazar tarjeta</option>
                                         </select>
                                         <input type="hidden" id="mot-sol-now" name="mot-sol-now">
                                     </li>

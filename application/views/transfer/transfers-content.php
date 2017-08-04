@@ -1,7 +1,6 @@
 <nav id="tabs-menu" style='display:none'>
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
-			<!--  <a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> Plata a Plata</a> -->
 			<a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="section"><span aria-hidden="true" class="icon-card"></span> <?php echo lang("MENU_P2P");?></a>
 		</li>
 		<li class="menu-item">
@@ -84,11 +83,11 @@
 								<ul class='product-balance-group disabled-product-balance-group' style="margin: 10px 0">
 									<li>Disponible <span class='product-balance' id='balance-available'> <?php echo lang("MONEDA");?> </span></li>
 									<li>A debitar <span class='product-balance' id='balance-debit'> <?php echo lang("MONEDA");?> </span></li>
-									<li>Fecha de Vencimiento<span class='product-balance'><select disabled><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
+									<li>Fecha de Vencimiento<span class='product-balance'><select disabled style="margin-right: 5px;"><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
 								</ul>
 							</div>
 						</div>
-						<label for='beneficiary-1x'>Cuentas Destino <span class='field-instruction'>(máx. 3 simultáneas)</span></label>
+						<label for='beneficiary-1x'>Cuentas Destino <span class='field-instruction'>(máx. 3 simultáneas)</span><span id="wait" style="display: none"> <strong>Esperando cuentas destino...</strong></span></label>
 						<div id="tdestino">
 							<div class='group obscure-group' id='btn-destino'>
 								<div class='product-presentation'>
@@ -230,7 +229,9 @@
 </div>    <!-- DIV DE CUENTAS ORIGEN -->
 
 <div id='content-destino' style='display:none'>
-	<ul id="dashboard-beneficiary"> </ul>
+	<ul id="dashboard-beneficiary">
+
+	</ul>
 	<div class='form-actions'>
 		<button  id='close' type='reset'>Cancelar</button>
 	</div>
@@ -255,7 +256,8 @@
 					<input disabled id='beneficiary-1x-coin' name='beneficiary-1x-coin' type='hidden' value='<?php echo lang("MONEDA");?>' />
 				</div>
 				<input disabled class='field-small monto' id='beneficiary-1x-amount' maxlength="15" name='beneficiary-1x-amount' type='text' />
-			</fieldset></div>
+			</fieldset>
+		</div>
 	</div>
 </div>
 

@@ -3,21 +3,9 @@ path =window.location.href.split( '/' );
 base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
-var montoMaxOperaciones,montoMinOperaciones,dobleAutenticacion,claveValida,claveC,moneda,totaldef, pais,saldo_imp,trans;
+var montoMaxOperaciones, montoMinOperaciones, dobleAutenticacion, claveValida, claveC, moneda, totaldef, pais, saldo_imp, trans, numberBeneficiary = [3 , 2, 1];
 
 $(function(){
-
-	var confirmacion = $("#content").attr("confirmacion");
-	if(confirmacion== '1'){
-		$('#content-clave').hide();
-		$('#tabs-menu').show();
-		$('#content_plata').show();
-
-	}else{
-		$('#content-clave').show();
-	}
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//Menu desplegable
 
@@ -40,10 +28,22 @@ $(function(){
 
 	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	var confirmacion = $("#content").attr("confirmacion");
+	if(confirmacion== '1'){
+		$('#content-clave').hide();
+		$('#tabs-menu').show();
+		$('#content_plata').show();
+
+	}else{
+		$('#content-clave').show();
+	}
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	//Boton continuar clave
 
 	$("#continuar_transfer").click(function(){
-		var pass=$("#transpwd").val();
+		var pass = $("#transpwd").val();
 		if((confirmPassOperac(pass))){
 			$('#content-clave').hide();
 			$('#content_plata').show();
@@ -59,14 +59,10 @@ $(function(){
 			}, 3000);
 		}
 	});
+	// -----------------------------------------------------------------------------------------------------------------
 
-
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	//count=contar_tarjetas_destino();
-
-	$(".dialog").click(function() {                    // CARGA MODAL CTA ORIGEN
+	//CARGA MODAL CTA ORIGEN
+	$(".dialog").click(function() {
 
 		$("#content-product").dialog({
 			title:"Selección de Cuentas Origen",
@@ -78,95 +74,42 @@ $(function(){
 			$("#content-product").dialog("close");
 		});
 
-		$.each($(".dashboard-item"),function(pos,item){					// MUESTRA CTAS ORIGEN EN MODAL
-			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+		$.each($(".dashboard-item"), function(pos, item){					// MUESTRA CTAS ORIGEN EN MODAL
+			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")}, function(data) {
 				var moneda=$(".dashboard-item").attr("moneda");
 				var saldo=data.disponible;
 				if (typeof saldo!='string'){
 					saldo="---";
 				}
-
-				$(item).find(".dashboard-item-balance").html(moneda+saldo);
+				$(item).find(".dashboard-item-balance").html(moneda + saldo);
 			});
 		});
-
-		var $container = $('#dashboard-donor');        // INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
-
-		$container.isotope({
-			                   itemSelector : '.dashboard-item',
-			                   animationEngine :'jQuery',
-			                   animationOptions: {
-				                   duration: 800,
-				                   easing: 'easeOutBack',
-				                   queue: true
-			                   }
-		                   });
-
-		var $optionSets = $('#filters-stack .option-set'),
-			$optionLinks = $optionSets.find('a');
-
-		$optionLinks.click(function(){
-			var $this = $(this);
-			// don't proceed if already selected
-			if ( $this.hasClass('selected') ) {
-				return false;
-			}
-			var $optionSet = $this.parents('.option-set');
-			$optionSet.find('.selected').removeClass('selected');
-			$this.addClass('selected');
-
-			// make option object dynamically, i.e. { filter: '.my-filter-class' }
-			var options = {},
-				key = $optionSet.attr('data-option-key'),
-				value = $this.attr('data-option-value');
-			// parse 'false' as false boolean
-			value = value === 'false' ? false : value;
-			options[ key ] = value;
-			if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-				// changes in layout modes need extra logic
-				changeLayoutMode( $this, options )
-			} else {
-				// otherwise, apply new options
-				$container.isotope( options );
-			}
-
-			return false;
-		});          // FINALIZA CONFIGURACION DE FILTROS
-	});		 // FIN DE CARGA MODAL CTAS ORIGEN
-
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	$('li.stack-item a').click(function(){                              // FUNCIONALIDAD DE FILTROS CTAS ORIGEN
-		$('.stack').find('.current-stack-item').removeClass('current-stack-item');
-		$(this).parents('li').addClass('current-stack-item');
 	});
+	// FIN DE CARGA MODAL CTAS ORIGEN-----------------------------------------------------------------------------------
 
-
-	// -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	$(".dashboard-item").click(function(){              // FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
+	// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
+	$(".dashboard-item").click(function() {
 
 		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre, moneda, fechaExp, yearNow, fullYearDate, fiveyearLess, fiveYearMore, i, yearSelect = [];
 		yearNow = new Date();
 		fullYearDate = yearNow.getFullYear();
 		fiveyearLess = fullYearDate - 5;
-		fiveYearMore = fullYearDate +5;
+		fiveYearMore = fullYearDate + 5;
 
 
 		for (i = fiveyearLess; i <= fiveYearMore; i++) {
 			yearSelect.push(i);
 		}
 
-		imagen=$(this).find('img').attr('src');
-		tarjeta=$(this).attr('card');
-		marca=$(this).attr('marca').toLowerCase();
-		mascara=$(this).attr('mascara');
-		producto=$(this).attr('producto1');
-		empresa=$(this).attr('empresa');
-		nombre=$(this).attr('nombre');
-		moneda=$(this).attr("moneda");
-		pais=$(this).attr("pais");
+		imagen = $(this).find('img').attr('src');
+		tarjeta = $(this).attr('card');
+		marca = $(this).attr('marca').toLowerCase();
+		mascara = $(this).attr('mascara');
+		producto = $(this).attr('producto1');
+		empresa = $(this).attr('empresa');
+		nombre = $(this).attr('nombre');
+		moneda = $(this).attr("moneda");
+		pais = $(this).attr("pais");
 
 		$("#donor").children().remove();
 
@@ -195,7 +138,7 @@ $(function(){
 		cadena+= 	"<ul class='field-group'>";
 		cadena+= 		"<li class='field-group-item'>";
 		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>";
-		cadena+= 			"<select id='MonthExp' name='MonthExp'>";
+		cadena+= 			"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>";
 		cadena+=            	"<option value=''>Mes</option>";
 		cadena+=				"<option value='01'>01</option>";
 		cadena+=				"<option value='02'>02</option>";
@@ -224,17 +167,18 @@ $(function(){
 			$("#yearExp").append(yearPrueba);
 		});
 
-		$.post(base_url+"/dashboard/saldo",{"tarjeta":$(this).attr("card")},function(data){           // CARGAR SALDO CUENTAS ORIGEN
+		$('#wait').show();
+
+		$.post(base_url+"/dashboard/saldo",{"tarjeta":$(this).attr("card")}, function(data) {           // CARGAR SALDO CUENTAS ORIGEN
 			var saldo=data.disponible;
 			if (typeof saldo!='string'){
 				saldo="---";
 			}
 
-			$("#balance-available").html(moneda+saldo);
-			$("#balance-available").attr("saldo",saldo);
+			$("#balance-available").html(moneda + saldo);
+			$("#balance-available").attr("saldo", saldo);
 		});
 
-		$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION CUENTAS DESTINO
 		$("#agregarCuenta").attr("href","#");
 		$("#agregarCuenta").parents("li").removeClass("disabled-group-action-item");
 
@@ -250,19 +194,20 @@ $(function(){
 
 
 		$('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
+			$(".product-button").addClass("disabled-button");              // DESHABILITAR SELECCIÓN CUENTAS DESTINO
 			$('#tdestino').children().remove();
 			$("#tdestino").append($("#removerDestino").html());
 			$("#continuar").attr("disabled",true);
 			$("#content-product").dialog({
-				                             title:"Selección de Cuentas Origen",
-				                             modal:"true",
-				                             width:"940px",
-				                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                             });
+				title:"Selección de Cuentas Origen",
+				modal:"true",
+				width:"940px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 		});
 
-		$.post("transferencia/ctaDestino",{"nroTarjeta":$(this).attr("card"),"prefijo":$(this).attr("prefix"),"operacion":"P2P"},function(data) {  //FUNCION PARA CARGAR CUENTAS DESTINO
-			if(data.rc==-150){
+		$.post("transferencia/ctaDestino",{"nroTarjeta":$(this).attr("card"),"prefijo":$(this).attr("prefix"),"operacion":"P2P"}, function(data) {  //FUNCION PARA CARGAR CUENTAS DESTINO
+			if(data.rc == -150){
 
 				$("#content_plata").children().remove();
 				$("#tabs-menu").children().remove();
@@ -271,8 +216,10 @@ $(function(){
 				$("#content-destino").dialog("close");
 			}
 
-			//else{
-			if(data.rc==-0){
+			if(data.rc == 0) {
+
+				$('#wait').hide();
+				$(".product-button").removeClass("disabled-button");              // HABILITAR SELECCIÓN CUENTAS DESTINO
 
 				montoMaxOperaciones = data.parametrosTransferencias[0].montoMaxOperaciones;
 				montoMinOperaciones = data.parametrosTransferencias[0].montoMinOperaciones;
@@ -320,7 +267,7 @@ $(function(){
 			if(data.rc == -61) {
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
-			// -----------------------------------------------------  MUESTRA DESTINO  ------------------------------------------------------------------------------
+			// -----------------------------------------------------  MUESTRA DESTINO  ---------------------------------
 
 			// FUNCION PARA OBTENER DATOS DE LA CUENTA DESTINO
 			$(".muestraDestino").click(function() {
@@ -332,19 +279,20 @@ $(function(){
 
 					var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
 
-					imagen=$(this).find('img').attr('src');
-					tarjeta=$(this).attr('card');
-					marca=$(this).attr('marca');
-					mascara=$(this).attr('mascara');
-					producto=$(this).attr('producto');
-					empresa=$(this).attr('empresa');
-					nombre=$(this).attr('nombre');
+					imagen = $(this).find('img').attr('src');
+					tarjeta = $(this).attr('card');
+					marca = $(this).attr('marca');
+					mascara = $(this).attr('mascara');
+					producto = $(this).attr('producto');
+					empresa = $(this).attr('empresa');
+					nombre = $(this).attr('nombre');
 
 					$(".edit").remove();
 
-					var number = contar_tarjetas();
+					//var number = contar_tarjetas();
+					var number = countBeneficiary ('get');
 
-					cadena= '<div class="group"> ';
+					cadena= '<div class="group" count-Beneficiary = "' + number + '"> ';
 					cadena+=    '<div class="product-presentation">';
 					cadena+=	    '<img src="'+imagen+'" width="200" height="130" alt="" />';
 					cadena+=		'<div class="product-network '+marca.toLowerCase()+'"></div>';
@@ -391,45 +339,45 @@ $(function(){
 
 					var montotr = $(".monto").val().replace(',', '.');
 					$('#content_plata').on('keyup','.monto',function() {
-						var montotr_exp = $(this).val();
-						if((pais=='Pe') || (pais=='Usd')) {
-							expr= /^-?[0-9]+([\.][0-9]{0,2})?$/;
-							saldo_imp= $("#balance-available").attr("saldo").replace(',', '');
-						}
-						if((pais=='Ve') || (pais=='Co')) {
-							expr= /^-?[0-9]+([\,][0-9]{0,2})?$/;
-							saldo_imp1= $("#balance-available").attr("saldo").replace('.', '');
-							saldo_imp= saldo_imp1.replace(',', '.');
-						}
+						/*var montotr_exp = $(this).val();
+						 if((pais=='Pe') || (pais=='Usd')) {
+						 expr= /^-?[0-9]+([\.][0-9]{0,2})?$/;
+						 saldo_imp= $("#balance-available").attr("saldo").replace(',', '');
+						 }
+						 if((pais=='Ve') || (pais=='Co')) {
+						 expr= /^-?[0-9]+([\,][0-9]{0,2})?$/;
+						 saldo_imp1= $("#balance-available").attr("saldo").replace('.', '');
+						 saldo_imp= saldo_imp1.replace(',', '.');
+						 }*/
 
-						if(!expr.test(montotr_exp)) {
+						/*if(!expr.test(montotr_exp)) {
 
-							if((pais=='Pe') || (pais=='Usd')){
-								$("#dialog-error-monto").dialog({
-									title:"Monto no permitido",
-									modal:"true",
-									width:"440px",
-									open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-								});
+						 if((pais=='Pe') || (pais=='Usd')){
+						 $("#dialog-error-monto").dialog({
+						 title:"Monto no permitido",
+						 modal:"true",
+						 width:"440px",
+						 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+						 });
 
-								$("#monto_invalido").click(function(){
-									$("#dialog-error-monto").dialog("close");
-								});
-							}
-							if((pais=='Ve') || (pais=='Co')){
-								$("#dialog-error-monto-vc").dialog({
-									                                   title:"Monto no permitido",
-									                                   modal:"true",
-									                                   width:"440px",
-									                                   open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-								                                   });
+						 $("#monto_invalido").click(function(){
+						 $("#dialog-error-monto").dialog("close");
+						 });
+						 }
+						 if((pais=='Ve') || (pais=='Co')){
+						 $("#dialog-error-monto-vc").dialog({
+						 title:"Monto no permitido",
+						 modal:"true",
+						 width:"440px",
+						 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+						 });
 
-								$("#monto_invalido_vc").click(function(){
-									$("#dialog-error-monto-vc").dialog("close");
-								});
-							}
-							$(this).val("");
-						}
+						 $("#monto_invalido_vc").click(function(){
+						 $("#dialog-error-monto-vc").dialog("close");
+						 });
+						 }
+						 $(this).val("");
+						 }*/
 
 						montotr = $(this).val().replace(',', '.');
 
@@ -446,7 +394,7 @@ $(function(){
 							});
 							$(this).val("");
 						}
-						if ( (parseFloat(montotr)) > parseFloat(montoMaxOperaciones)){
+						if ((parseFloat(montotr)) > parseFloat(montoMaxOperaciones)){
 
 							$("#dialog-max-monto").dialog({
 								                              title:"Monto no permitido",
@@ -501,12 +449,11 @@ $(function(){
 
 
 					dialogo();
-					//alert(number);
-					if(number >=3){
+					if(contar_tarjetas() >=3) {
 						$("#tdestino").children("#btn-destino").remove();
 					}
 
-					if(number >= 1){
+					if(contar_tarjetas() >= 1){
 						$('#continuar').removeAttr("disabled");
 					}else{
 						$('#continuar').attr('disabled','');
@@ -519,30 +466,34 @@ $(function(){
 
 
 		});  //FIN EACH CUENTA DESTINO
-		$('.modifica').click(function(){       // FUNCION PARA MODIFICAR LA TARJETA DESTINO
+
+		// FUNCION PARA MODIFICAR LA TARJETA DESTINO
+		$('#content_plata').on('click',".modifica",function(){
 			$(this).parents('.group').addClass('edit');
 			$("#content-destino").dialog({
-				                             title:"Selección de Cuentas Destino",
-				                             modal:"true",
-				                             width:"940px",
-				                             beforeClose: function( event, ui ) {
-					                             $('.group').removeClass('edit');
-				                             },
-				                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                             }); //FIN DIALOG MODIFICA
+				title:"Selección de Cuentas Destino",
+				modal:"true",
+				width:"940px",
+				beforeClose: function( event, ui ) {
+					$('.group').removeClass('edit');
+				},
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			}); //FIN DIALOG MODIFICA
 		}); // FIN MODIFICAR TARJETA
 
+		// FUNCION PARA ELIMINAR UNA TARJETA DESTINO
 		$('#content_plata').on('click',".elimina",function(){
+			var numBen =  $(this).parents('.group').attr('count-beneficiary');
+
 			m=$(".dashboard-item").attr('moneda');
 			suma=sumar_saldo();
 			if(suma!=0){
-				montoR1=$(this).parents('.group').attr('montInput').replace(',', '.');
+				montoR1 = $(this).parents('.group').attr('montInput').replace(',', '.');
 				montoRestar=parseFloat(montoR1);
 			}
 			else{
 				montoRestar=0;
 			}
-			//montoRestar=parseFloat($(this).parents('.group').attr('montInput'));
 
 			saldo1=suma-montoRestar;
 			saldo=saldo1.toFixed(2);
@@ -553,6 +504,7 @@ $(function(){
 			else{
 				$("#balance-debit").html(m+saldo);
 			}
+			countBeneficiary ('set', numBen);
 			$(this).parents('.group').remove();
 			marcar_destino();
 			if($("#tdestino").find("#btn-destino").length == 0){
@@ -561,8 +513,8 @@ $(function(){
 			}
 			if(contar_tarjetas() > 1){
 				$('#continuar').removeAttr("disabled");
-			}else{
-				$('#continuar').attr('disabled','');
+			} else {
+				$('#continuar').attr('disabled', '');
 			}
 		});
 
@@ -571,10 +523,8 @@ $(function(){
 
 	}); //FIN FUNCION DE SELECCION DESTINO
 
-	//validar_campos();
+	// ------------------------------------------------------- BOTON CONTINUAR -----------------------------------------
 
-	// ------------------------------------------------------- BOTON CONTINUAR -------------------------------------------------------------------------------------
-	//$("#continuar").click(function(){
 
 	$('#content_plata').on('click',".confir",function(){
 		var confirmacion = true;
@@ -599,6 +549,7 @@ $(function(){
 		valor_monto2= $("#beneficiary-2-amount").val();
 		valor_monto3= $("#beneficiary-3-amount").val();
 
+
 		if($('#MonthExp').val() === '') {
 			validateInput.push('Seleccione el mes de vencimiento');
 			confirmacion = false;
@@ -613,15 +564,15 @@ $(function(){
 		if((valor_concepto1 === '') || (valor_concepto2 === '') || (valor_concepto3 === '')) {
 			validateInput.push('El campo concepto no debe estar vacío.');
 			/*$("#campos_vacios").dialog({
-				                           title:"Error Campos",
-				                           modal:"true",
-				                           width:"440px",
-				                           open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                           });
+			 title:"Error Campos",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_campos").click(function(){
-				$("#campos_vacios").dialog("close");
-			});*/
+			 $("#error_campos").click(function(){
+			 $("#campos_vacios").dialog("close");
+			 });*/
 			confirmacion = false;
 		}
 
@@ -632,63 +583,100 @@ $(function(){
 			sinImporte = false;
 		}
 
+		expr = (pais=='Pe') || (pais=='Usd') ? /^-?[0-9]+([\.][0-9]{0,2})?$/ : /^-?[0-9]+([\,][0-9]{0,2})?$/
+
+		if((!expr.test(valor_monto1) && valor_monto1 != undefined) || (!expr.test(valor_monto2) && valor_monto2 != undefined) || (!expr.test(valor_monto3) && valor_monto3 != undefined)) {
+
+			var decimal = (pais=='Pe') || (pais=='Usd') ? 'un punto' : 'una coma';
+			validateInput.push('Para indicar decimales debe usar ' + decimal + '.');
+			confirmacion = false;
+
+
+
+			/*if((pais=='Pe') || (pais=='Usd')){
+			 $("#dialog-error-monto").dialog({
+			 title:"Monto no permitido",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
+
+			 $("#monto_invalido").click(function(){
+			 $("#dialog-error-monto").dialog("close");
+			 });
+			 }
+			 if((pais=='Ve') || (pais=='Co')){
+			 $("#dialog-error-monto-vc").dialog({
+			 title:"Monto no permitido",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
+
+			 $("#monto_invalido_vc").click(function(){
+			 $("#dialog-error-monto-vc").dialog("close");
+			 });
+			 }
+			 $(this).val("");*/
+		}
+
 		if(parseFloat(total)>saldo){
 			validateInput.push('El monto total excede su saldo disponible.');
 			/*$("#dialog-error-monto9").dialog({
-				                                 title:"Error Monto",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
+			 title:"Error Monto",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto9").click(function(){
-				$("#dialog-error-monto9").dialog("close");
-			});*/
+			 $("#error_monto9").click(function(){
+			 $("#dialog-error-monto9").dialog("close");
+			 });*/
 			confirmacion = false;
 		}
 
 		if (parseFloat(acumCantidadOperacionesDiarias)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesDiarias)){
 			validateInput.push('Usted excede el límite diario permitido.');
 			/*$("#dialog-cant-ope1").dialog({
-				                              title:"Cantidad de Operaciones",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
+			 title:"Cantidad de Operaciones",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#cant_ope1").click(function(){
-				$("#dialog-cant-ope1").dialog("close");
-			});*/
+			 $("#cant_ope1").click(function(){
+			 $("#dialog-cant-ope1").dialog("close");
+			 });*/
 			confirmacion = false;
 
 		}
 		if (parseFloat(acumCantidadOperacionesSemanales)+parseFloat(contador_trans)>=parseFloat(cantidadOperacionesSemanales)){
 			validateInput.push('Usted excede el límite semanal permitido.');
 			/*$("#dialog-cant-ope-sm").dialog({
-				                                title:"Cantidad de Operaciones",
-				                                modal:"true",
-				                                width:"440px",
-				                                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                });
+			 title:"Cantidad de Operaciones",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#cant_ope_sm").click(function(){
-				$("#dialog-cant-ope-sm").dialog("close");
-			});*/
+			 $("#cant_ope_sm").click(function(){
+			 $("#dialog-cant-ope-sm").dialog("close");
+			 });*/
 			confirmacion = false;
 
 		}
 		if (parseFloat(acumCantidadOperacionesMensual)+parseFloat(contador_trans)>parseFloat(cantidadOperacionesMensual)){
 			validateInput.push('Usted excede el límite mensual permitido.');
 			/*$("#dialog-cant-ope2").dialog({
-				                              title:"Cantidad de Operaciones",
-				                              modal:"true",
-				                              width:"440px",
-				                              open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                              });
+			 title:"Cantidad de Operaciones",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#cant_ope2").click(function(){
-				$("#dialog-cant-ope2").dialog("close");
-			});*/
+			 $("#cant_ope2").click(function(){
+			 $("#dialog-cant-ope2").dialog("close");
+			 });*/
 			confirmacion = false;
 
 		}
@@ -712,30 +700,30 @@ $(function(){
 		if(parseFloat(total)>parseFloat(montoMaxOperaciones)){
 			validateInput.push('El monto a total a debitar supera el monto máximo de operaciones.');
 			/*$("#dialog-error-monto1").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
+			 title:"Error monto total",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto1").click(function(){
-				$("#dialog-error-monto1").dialog("close");
-			});*/
+			 $("#error_monto1").click(function(){
+			 $("#dialog-error-monto1").dialog("close");
+			 });*/
 			confirmacion = false;
 		}
 
 		if((parseFloat(total)<parseFloat(montoMinOperaciones)) && sinImporte == false){
 			validateInput.push('El monto total a debitar es menor al monto mínimo de operaciones.');
 			/*$("#dialog-error-monto2").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
+			 title:"Error monto total",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto2").click(function(){
-				$("#dialog-error-monto2").dialog("close");
-			});*/
+			 $("#error_monto2").click(function(){
+			 $("#dialog-error-monto2").dialog("close");
+			 });*/
 			confirmacion = false;
 		}
 
@@ -743,42 +731,42 @@ $(function(){
 		if((parseFloat(total)+parseFloat(montoAcumDiario))>parseFloat(montoMaxDiario)){
 			validateInput.push('El monto total a debitar es mayor al monto maximo diario permitido.');
 			/*$("#dialog-error-monto7").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
+			 title:"Error monto total",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto7").click(function(){
-				$("#dialog-error-monto7").dialog("close");
-			});*/
+			 $("#error_monto7").click(function(){
+			 $("#dialog-error-monto7").dialog("close");
+			 });*/
 			confirmacion = false;
 
 		} else if((parseFloat(total)+parseFloat(montoAcumSemanal))>parseFloat(montoMaxSemanal)){
 			validateInput.push('El monto total a debitar es mayor al monto maximo diario permitido.');
 			/*$("#dialog-error-monto-sm").dialog({
-				                                   title:"Error monto total",
-				                                   modal:"true",
-				                                   width:"440px",
-				                                   open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                   });
+			 title:"Error monto total",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto_sm").click(function(){
-				$("#dialog-error-monto-sm").dialog("close");
-			});*/
+			 $("#error_monto_sm").click(function(){
+			 $("#dialog-error-monto-sm").dialog("close");
+			 });*/
 			confirmacion = false;
 		}else if((parseFloat(total)+parseFloat(montoAcumMensual))>parseFloat(montoMaxMensual)){
 			validateInput.push('El monto total a debitar es mayor al monto maximo mensual permitido.');
 			/*$("#dialog-error-monto8").dialog({
-				                                 title:"Error monto total",
-				                                 modal:"true",
-				                                 width:"440px",
-				                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                                 });
+			 title:"Error monto total",
+			 modal:"true",
+			 width:"440px",
+			 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			 });
 
-			$("#error_monto8").click(function(){
-				$("#dialog-error-monto8").dialog("close");
-			});*/
+			 $("#error_monto8").click(function(){
+			 $("#dialog-error-monto8").dialog("close");
+			 });*/
 			confirmacion = false;
 		}
 
@@ -796,17 +784,15 @@ $(function(){
 					                        $.each(validateInput, function(index, value) {
 						                        $('#contentValid').append('<p>' + value + '</p>');
 					                        });
-
 				                        }
 			                        });
 			$('#closeValid').on('click', function(){
 				$(this).off('click');
 				validateInput = [];
 				$('#contentValid').children().not('span').remove();
-				console.log(validateInput);
 				$('#inputValid').dialog('close');
 			});
-		} else if (confirmacion==true) {
+		} else if (confirmacion == true) {
 			var origen, nombre, mascara;
 
 			nombre=$("#donor").find(".product-cardholder").html();
@@ -897,103 +883,104 @@ $(function(){
 		$('#confTransfer').prop('disabled', true);
 		var clave=$("#transpwd").val();
 		if(dobleAutenticacion=="S"){
-			if(crear_clave()){
-				$('#dialog-confirm').dialog({modal:true, title:"Verificación requerida.",
-					                            buttons: {
-						                            Cancelar: function() {
+			if(crear_clave()) {
+				$('#dialog-confirm').dialog({
+							modal:true, title:"Verificación requerida.",
+							buttons: {
+								Cancelar: function() {
 
-							                            $(this).dialog("close");
-						                            },
-						                            "Aceptar": function() {
-							                            var claveConfir=$("#transpwd_confirmacion").val();
+									$(this).dialog("close");
+								},
+								"Aceptar": function() {
+									var claveConfir=$("#transpwd_confirmacion").val();
 
-							                            if(validar_clave(claveConfir)){
-								                            $("#dialog-confirm").dialog( "close" );
+									if(validar_clave(claveConfir)){
+										$("#dialog-confirm").dialog( "close" );
 
-								                            var cuentaOrigen = $("#nombreOrigenTransfer").attr("numeroCtaOrigen");
-								                            var idUsuario =  $("#nombreOrigenTransfer").attr("nombreCtaOrigen");
-								                            var cuentaDestino,id_afil_terceros,monto,descripcion, resultado;
-								                            $(".data-indicator").show();
+										var cuentaOrigen = $("#nombreOrigenTransfer").attr("numeroCtaOrigen");
+										var idUsuario =  $("#nombreOrigenTransfer").attr("nombreCtaOrigen");
+										var cuentaDestino,id_afil_terceros,monto,descripcion, resultado;
+										$(".data-indicator").show();
 
-								                            $.each($('.trdestino'), function(pos, item){
+										$.each($('.trdestino'), function(pos, item){
 
-									                                   cuentaDestino= $(item).attr("card");
-									                                   id_afil_terceros= "";
-									                                   nombre1= $(item).attr("nombre");
-									                                   monto=$(item).attr("monto").replace(',', '.');
-									                                   descripcion=$(item).attr("concepto");
+											       cuentaDestino= $(item).attr("card");
+											       id_afil_terceros= "";
+											       nombre1= $(item).attr("nombre");
+											       monto=$(item).attr("monto").replace(',', '.');
+											       descripcion=$(item).attr("concepto");
 
-									                                   trans=realizar_transferencia(cuentaOrigen, cuentaDestino, monto, descripcion, idUsuario, id_afil_terceros);
-									                                   //trans = true;
+											       trans=realizar_transferencia(cuentaOrigen, cuentaDestino, monto, descripcion, idUsuario, id_afil_terceros);
+											       //trans = true;
 
-									                                   if(trans != false){
+											       if(trans != false){
 
-										                                   resultado = true;
-										                                   marcar_transferencia(resultado,item,trans);
+												       resultado = true;
+												       marcar_transferencia(resultado,item,trans);
 
-										                                   var origen, time;
+												       var origen, time;
 
-										                                   nombre=$("#nombreOrigenTransfer").html();
-										                                   mascara=$("#mascaraOrigenTransfer").html();
-										                                   var today = new Date();
-										                                   hora= (today.getHours())+':'+today.getMinutes()+':'+today.getSeconds();
-										                                   var dd = today.getDate();
-										                                   var mm = today.getMonth()+1;//January is 0!
-										                                   var yyyy = today.getFullYear();
-										                                   if(dd<10){dd='0'+dd}
-										                                   if(mm<10){mm='0'+mm}
-										                                   var fecha = dd+'/'+mm+'/'+yyyy;
+												       nombre=$("#nombreOrigenTransfer").html();
+												       mascara=$("#mascaraOrigenTransfer").html();
+												       var today = new Date();
+												       hora= (today.getHours())+':'+today.getMinutes()+':'+today.getSeconds();
+												       var dd = today.getDate();
+												       var mm = today.getMonth()+1;//January is 0!
+												       var yyyy = today.getFullYear();
+												       if(dd<10){dd='0'+dd}
+												       if(mm<10){mm='0'+mm}
+												       var fecha = dd+'/'+mm+'/'+yyyy;
 
-										                                   origen=		'<tr>';
-										                                   origen+=		'<td class="data-label"><label>Cuenta Origen</label></td>';
-										                                   origen+=		'<td class="data-reference" colspan="2"><br>'+nombre+'</td>';   // <span class="highlight">'+mascara+'</span><br><span class="lighten">Plata ClÃ¡sica / Visa Electron / ViÃ¡ticos</span>
-										                                   origen+=	'</tr>';
+												       origen=		'<tr>';
+												       origen+=		'<td class="data-label"><label>Cuenta Origen</label></td>';
+												       origen+=		'<td class="data-reference" colspan="2"><br>'+nombre+'</td>';   // <span class="highlight">'+mascara+'</span><br><span class="lighten">Plata ClÃ¡sica / Visa Electron / ViÃ¡ticos</span>
+												       origen+=	'</tr>';
 
 
 
-										                                   $("#progress").children().remove();
-										                                   cabecera = "<ul class='steps'>";
-										                                   cabecera+=		"<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-exchange'></span> Transferir</li>";
-										                                   cabecera+=      "<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-view'></span> Confirmación</li>";
-										                                   cabecera+=      "<li class='step-item current-step-item'><span aria-hidden='true' class='icon-thumbs-up'></span> Finalización</li>";
-										                                   cabecera+= "</ul>";
-										                                   $("#progress").append(cabecera).html();
+												       $("#progress").children().remove();
+												       cabecera = "<ul class='steps'>";
+												       cabecera+=		"<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-exchange'></span> Transferir</li>";
+												       cabecera+=      "<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-view'></span> Confirmación</li>";
+												       cabecera+=      "<li class='step-item current-step-item'><span aria-hidden='true' class='icon-thumbs-up'></span> Finalización</li>";
+												       cabecera+= "</ul>";
+												       $("#progress").append(cabecera).html();
 
-										                                   $("#titulo").children().remove();
-										                                   titulo = "<h2>Finalización</h2>"
-										                                   $("#titulo").append(titulo).html();
+												       $("#titulo").children().remove();
+												       titulo = "<h2>Finalización</h2>"
+												       $("#titulo").append(titulo).html();
 
-										                                   $("#confimacion_t").children().remove();
-										                                   completar1= 		'<button id="exit">Finalizar</button>';
-										                                   $("#confimacion_t").append(completar1).html();
-										                                   $("#exit").click(function(){
+												       $("#confimacion_t").children().remove();
+												       completar1= 		'<button id="exit">Finalizar</button>';
+												       $("#confimacion_t").append(completar1).html();
+												       $("#exit").click(function(){
 
-											                                   $(location).attr('href', base_url+'/dashboard');
-										                                   }); //EXIT
-									                                   }
-									                                   else{					//REALIZAR TRANSFERENCIA
+													       $(location).attr('href', base_url+'/dashboard');
+												       }); //EXIT
+											       }
+											       else{					//REALIZAR TRANSFERENCIA
 
-										                                   resultado=false;
-										                                   trans = "-"
-										                                   marcar_transferencia(resultado,item,trans);
-										                                   $("#confimacion_t").children().remove();
-										                                   completar1= 		'<button id="exit">Finalizar</button>';
-										                                   $("#confimacion_t").append(completar1).html();
-										                                   $('#transfer-success').show();
-										                                   $("#exit").click(function(){
+												       resultado=false;
+												       trans = "-"
+												       marcar_transferencia(resultado,item,trans);
+												       $("#confimacion_t").children().remove();
+												       completar1= 		'<button id="exit">Finalizar</button>';
+												       $("#confimacion_t").append(completar1).html();
+												       $('#transfer-success').show();
+												       $("#exit").click(function(){
 
-											                                   $(location).attr('href', base_url+'/transferencia');
+													       $(location).attr('href', base_url+'/transferencia');
 
-										                                   });
-									                                   }
+												       });
+											       }
 
-								                                   } //IF VALIDAR CLAVE
+										       } //IF VALIDAR CLAVE
 
-								                            )}; //EACH
-						                            }, //ACEPTAR
-					                            }, //BOTONES
-					                            open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-				                            });//DIALOGO
+										)} //EACH
+								} //ACEPTAR
+							}, //BOTONES
+							open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+						});//DIALOGO
 
 			} //IF CREAR CLAVE
 
@@ -1091,62 +1078,40 @@ $(function(){
 		$.each($('#tdestino').children(), function(pos,item) {
 			contar = pos;
 		});
-		return contar+1;
+		return contar;
 	} //FIN FUNCION CONTAR TARJETAS
 
 
 	// // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-	function dialogo(){
-
+	function dialogo()
+	{
 		$('.dialogDestino').click(function(){
 			$("#content-destino").dialog({
-				                             title:"Selección de Cuentas Destino",
-				                             modal:"true",
-				                             width:"940px",
-				                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                             });
+				title:"Selección de Cuentas Destino",
+				modal:"true",
+				width:"940px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 			$("#close").click(function(){
 				$("#content-destino").dialog("close");
 			});
 		});
 	}
-	// // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	function contar_tarjetas_destino(){		//FUNCION CONTAR TARJETAS
-		var contar;
-
-		$.each($(".dashboard-item"),function(pos,item){
-			contar = pos;
-		});
-
-		tarjetas = contar+1;
-		return tarjetas;
-
-	} 		//FIN FUNCION CONTAR TARJETAS
-
+	// -----------------------------------------------------------------------------------------------------------------
 
 	function marcar_destino() 			//FUNCION PARA DESHABILITAR TARJETA DESTINO SELECCIONADA
-
 	{
-
-		$.each($('#dashboard-beneficiary').children('.dashboard-item'), function(posd,itemd){		//EACH 1
-
+		$.each($('#dashboard-beneficiary').children('.dashboard-item'), function(posd,itemd) {		//EACH 1
 			$(itemd).removeClass("disabled-dashboard-item");
-
-			$.each($('#tdestino').children(':not(.obscure-group)'), function(pos, item){		//EACH 2
-
-				if($(item).find("#tarjetaDestino").val()==$(itemd).attr("card")){
-
+			$.each($('#tdestino').children(':not(.obscure-group)'), function(pos, item) {		//EACH 2
+				if($(item).find("#tarjetaDestino").val()==$(itemd).attr("card")) {
 					$(itemd).addClass("disabled-dashboard-item");
-
 				} 		//FIN IF
 
 			}); 	//FIN EACH 2
-
 		});		//FIN EACH 1
-
 	}		//FIN FUNCION PARA DESHABILITAR TARJETA DESTINO SELECCIONADA
 
 
@@ -1185,43 +1150,26 @@ $(function(){
 		};
 
 		$.ajax({
-			       url: base_url +"/transferencia/operaciones",
-			       data: ajax_data,
-			       type: "post",
-			       dataType: 'json',
-			       success: function(data) {
-				       rpta = $.parseJSON(data.response);
-				       rpta1 = $.parseJSON(data.transferir);
-				       if(rpta.rc == 0){
-					       response1 = true;
-				       }
-				       else {
-					       response1 = false;
-					       rpta1 = false;
-				       }
-				       if(rpta.rc == -61){
-					       $(location).attr('href', base_url+'/users/error_gral');
-				       }
-
-
-			       }
-		       });
+			url: base_url +"/transferencia/operaciones",
+			data: ajax_data,
+			type: "post",
+			dataType: 'json',
+			success: function(data) {
+				rpta = $.parseJSON(data.response);
+				rpta1 = $.parseJSON(data.transferir);
+				if(rpta.rc == 0){
+					response1 = true;
+				} else {
+					response1 = false;
+					rpta1 = false;
+				}
+				if(rpta.rc == -61){
+					$(location).attr('href', base_url+'/users/error_gral');
+				}
+			}
+		});
 
 		$.ajaxSetup({async: true});
-		// $.post(base_url+"/transferencia/operaciones",{"clave":hex_md5(clave)},function(data){
-		// 	rpta = $.parseJSON(data.response);
-		// 	rpta1 = $.parseJSON(data.transferir);
-		// 	if(rpta.rc == 0){
-		// 		response1 = true;
-		// 	}
-		// 	if(rpta.rc == -61){
-		//           	$(location).attr('href', base_url+'/users/error_gral');
-		//       	}
-		// 	else{
-		// 		response1 = false;
-		// 		rpta1 = false;
-		// 	}
-		// });
 
 		return rpta1;
 	}
@@ -1271,20 +1219,20 @@ $(function(){
 		$.ajaxSetup({async: false});
 
 		var claveValida;
-		$.post(base_url +"/transferencia/confirmacion",{'clave':hex_md5(claveConfir)},function(data){
+		$.post(base_url +"/transferencia/confirmacion",{'clave':hex_md5(claveConfir)}, function(data) {
 
-			if(data.rc==0){
+			if(data.rc == 0){
 				claveValida = true;
 			}
 
 			else {
 				claveValida = false;
 				$("#dialog-error-correo").dialog({
-					                                 title:"Contraseñas no coinciden",
-					                                 modal:"true",
-					                                 width:"440px",
-					                                 open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-				                                 });
+					title:"Contraseñas no coinciden",
+					modal:"true",
+					width:"440px",
+					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
 
 				$("#invalido").click(function(){
 					$("#dialog-error-correo").dialog("close");
@@ -1294,7 +1242,6 @@ $(function(){
 			if(data.rc == -61){
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
-
 		});
 
 		return claveValida;
@@ -1307,52 +1254,37 @@ $(function(){
 
 		var transferencia;
 		var idTransferencia;
-		//transferencia = 1111;
-		$.ajaxSetup({async: false});
-
-		// $.post(base_url +"/transferencia/procesar",{"cuentaOrigen":cuentaOrigen,"cuentaDestino":cuentaDestino,"monto":monto,"descripcion":descripcion,"tipoOpe":"P2P","idUsuario":idUsuario,"id_afil_terceros":id_afil_terceros},function(data){
-		// 	if(data.rc==0){
-
-		//   			idTransferencia= data.dataTransaccion.referencia;
-		//       		transferencia = idTransferencia;
-
-		//   		}else{
-
-		//   			transferencia = false;
-		//   		}
-		//   	});
 
 		var ajax_data = {
-			"cuentaOrigen"     : cuentaOrigen,
-			"cuentaDestino"   : cuentaDestino,
-			"monto"    : monto,
-			"descripcion" : descripcion,
-			"tipoOpe" : "P2P",
-			"idUsuario" : idUsuario,
-			"id_afil_terceros":id_afil_terceros
+			"cuentaOrigen": cuentaOrigen,
+			"cuentaDestino": cuentaDestino,
+			"monto": monto,
+			"descripcion": descripcion,
+			"tipoOpe": "P2P",
+			"idUsuario": idUsuario,
+			"id_afil_terceros": id_afil_terceros
 		};
 
 		$.ajax({
-			       url: base_url +"/transferencia/procesar",
-			       data: ajax_data,
-			       type: "post",
-			       dataType: 'json',
-			       success: function(data) {
-				       if(data.rc==0){
-					       idTransferencia= data.dataTransaccion.referencia;
-					       transferencia = idTransferencia;
-					       $("#confTransfer").prop("disabled", false);
-				       }else{
-					       transferencia = false;
-					       $("#confTransfer").prop("disabled", false);
-				       }
-				       if(data.rc == -61){
-					       $(location).attr('href', base_url+'/users/error_gral');
-					       $("#confTransfer").prop("disabled", false);
-				       }
-
-			       }
-		       });
+			url: base_url +"/transferencia/procesar",
+			data: ajax_data,
+			type: "post",
+			dataType: 'json',
+			success: function(data) {
+				if(data.rc==0){
+					idTransferencia= data.dataTransaccion.referencia;
+					transferencia = idTransferencia;
+					$("#confTransfer").prop("disabled", false);
+				} else {
+					transferencia = false;
+					$("#confTransfer").prop("disabled", false);
+				}
+				if(data.rc == -61) {
+					$(location).attr('href', base_url+'/users/error_gral');
+					$("#confTransfer").prop("disabled", false);
+				}
+			}
+	});
 
 		$.ajaxSetup({async: true});
 		return transferencia;
@@ -1361,9 +1293,9 @@ $(function(){
 
 	// // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	function marcar_transferencia(resultado,item,trans){
+	function marcar_transferencia(resultado, item, trans){
 
-		if(resultado==true){
+		if(resultado == true){
 
 			$(item).find(".data-resultado").addClass('data-success');
 			$(item).find(".iconoTransferencia").removeClass("data-indicator icon-refresh icon-spin");
@@ -1371,7 +1303,7 @@ $(function(){
 			$(item).find("#estatus").empty();
 			$(item).find("#estatus").text("Transacción exitosa. No. de Referencia: "+trans);
 
-		}else{
+		} else {
 
 			$(item).find(".data-resultado").addClass('data-error');
 			$(item).find(".iconoTransferencia").removeClass("data-indicator data-indicator icon-refresh icon-spin");
@@ -1440,3 +1372,27 @@ $(function(){
 
 
 });  //FIN DE LA FUNCION GENERAL
+
+function countBeneficiary (action, number) {
+	var length = numberBeneficiary.length,
+		numBen;
+
+	if(action == 'get') {
+		console.log('tamaño: ' + numberBeneficiary.length + ' Acción: ' + action);
+
+		console.log(numberBeneficiary);
+		numBen = numberBeneficiary[length - 1];
+		numberBeneficiary.pop();
+		console.log(numBen);
+		console.log(numberBeneficiary);
+		return numBen;
+
+	} else if(action == 'set') {
+		console.log('tamaño: ' + numberBeneficiary.length + ' Acción: ' + action + ' numero: ' + number);
+		numBen = parseInt(number);
+		numberBeneficiary.push(numBen);
+		console.log(numberBeneficiary);
+	}
+
+
+}
