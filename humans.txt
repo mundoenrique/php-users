@@ -1,0 +1,19 @@
+#
+# Conexión Personas Online
+# online.novopayment.net/personas
+# (c) 2017 NovoPayment Inc.
+#
+
+
+# TEAM
+	Miguel Palazzo -- Web Development Lead
+	Enrique Peñaloza -- Senior Web Developer
+	Luis Colina -- Senior Web Developer
+	Humberto Zapata -- Junior Web Developer
+	Hector Corredor -- Junior Web Developer
+
+
+# TECHNOLOGY COLOPHON
+	Standards -- HTML5, CSS3
+	Components -- jQuery, jQuery UI, jQuery Validate
+	Software -- Atom, Git, GitHub Enterprise, PHP, CodeIgniter
