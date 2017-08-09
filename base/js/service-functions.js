@@ -322,7 +322,7 @@ function validar_campos() {
         errorLabelContainer: "#msg1",
         rules: {
             "token": {"required":true, "tokenValid": true},
-            "mes-exp-bloq": {"required":true}
+            "mot-sol": {"required":true}
         },
         messages: {
             "token": {
