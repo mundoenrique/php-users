@@ -245,7 +245,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+= "<form id='datos'>";
 						ctaDestino+= "<ul class='field-group'>";
 						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
+						ctaDestino+= 		"<label for='dayExp'>Fecha de vto cta origen</label>"
 						ctaDestino+= 		"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>"
 						ctaDestino+=            "<option value=''>Mes</option>"
 						ctaDestino+=			"<option value='01'>01</option>"

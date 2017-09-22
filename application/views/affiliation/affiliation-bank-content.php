@@ -52,7 +52,7 @@
 						</div>
 						<ul class="field-group">
 							<li class="field-group-item">
-								<label for="expDate">Fecha de Vencimiento</label>
+								<label for="expDate">Fecha de vto cta origen</label>
 								<select id="month-exp" name="MonthExp" disabled>
 									<option value="">Mes</option>
 									<option value="01">01</option>
