@@ -136,9 +136,6 @@ $(function(){
 		var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("marcaCtaOrigen");
 		var nombreOrigen=$("#donor-cardnumber-origen").attr("nombreOrigen");
 		var prefijo = $(this).attr("prefix")
-		// d = new Date();
-		// var mes = 01;
-		// var anio = d.getFullYear();
 		mes = $("#filter-month").val();
 		anio = $("#filter-year").val();
 
@@ -241,7 +238,7 @@ $(function(){
 					ctaDestino+= "<ul class='field-group'>"
 					ctaDestino+= 	"<li class='field-group-item'>"
 					ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
-					ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+					ctaDestino+= 		"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>"
 					ctaDestino+=            "<option value=''>Mes</option>"
 					ctaDestino+=			"<option value='01'>01</option>"
 					ctaDestino+=			"<option value='02'>02</option>"

@@ -4,20 +4,20 @@ base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCd
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
-	$(function(){
+$(function(){
 
-	  // MENU WIDGET TRANSFERENCIAS
+	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
-    	$('.submenu-transfer').attr("style","display:block")
-		},function(){
-    	$('.submenu-transfer').attr("style","display:none")
+		$('.submenu-transfer').attr("style","display:block")
+	},function(){
+		$('.submenu-transfer').attr("style","display:none")
 	});
 
 	// MENU WIDGET USUARIO
 	$('.user').hover(function(){
 		$('.submenu-user').attr("style","display:block")
-		},function(){
-			$('.submenu-user').attr("style","display:none")
+	},function(){
+		$('.submenu-user').attr("style","display:none")
 	});
 
 	// CARGA MODAL CTA ORIGEN
@@ -27,10 +27,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 			modal:"true",
 			width:"940px",
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	});
-	$("#cerrar").click(function(){
-  			$("#content-product").dialog("close");
-	});
+		});
+		$("#cerrar").click(function(){
+			$("#content-product").dialog("close");
+		});
 
 		// INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
 		var $container = $('#dashboard-donor');
@@ -46,34 +46,34 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		});
 
 		var $optionSets = $('#filters-stack .option-set'),
-		$optionLinks = $optionSets.find('a');
+			$optionLinks = $optionSets.find('a');
 
 		$optionLinks.click(function(){
 			var $this = $(this);
-		    // don't proceed if already selected
-		    if ( $this.hasClass('selected') ) {
-		    	return false;
-		    }
-		    var $optionSet = $this.parents('.option-set');
-		    $optionSet.find('.selected').removeClass('selected');
-		    $this.addClass('selected');
+			// don't proceed if already selected
+			if ( $this.hasClass('selected') ) {
+				return false;
+			}
+			var $optionSet = $this.parents('.option-set');
+			$optionSet.find('.selected').removeClass('selected');
+			$this.addClass('selected');
 
-		    // make option object dynamically, i.e. { filter: '.my-filter-class' }
-		    var options = {},
-		    key = $optionSet.attr('data-option-key'),
-		    value = $this.attr('data-option-value');
-		    // parse 'false' as false boolean
-		    value = value === 'false' ? false : value;
-		    options[ key ] = value;
-		    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-		      // changes in layout modes need extra logic
-		      changeLayoutMode( $this, options )
-		  } else {
-		      // otherwise, apply new options
-		      $container.isotope( options );
-		  }
+			// make option object dynamically, i.e. { filter: '.my-filter-class' }
+			var options = {},
+				key = $optionSet.attr('data-option-key'),
+				value = $this.attr('data-option-value');
+			// parse 'false' as false boolean
+			value = value === 'false' ? false : value;
+			options[ key ] = value;
+			if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+				// changes in layout modes need extra logic
+				changeLayoutMode( $this, options )
+			} else {
+				// otherwise, apply new options
+				$container.isotope( options );
+			}
 
-		  return false;
+			return false;
 		});          // FINALIZA CONFIGURACION DE FILTROS
 	});		 // FIN DE CARGA MODAL CTAS ORIGEN
 
@@ -84,81 +84,79 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 	});
 
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
-		$(".dashboard-item").click(function(){
+	// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
+	$(".dashboard-item").click(function(){
 
-			var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
+		var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
 
-			imagen=$(this).find('img').attr('src');
-			tarjeta=$(this).attr('card');
-			marca=$(this).attr('marca');
-			mascara=$(this).attr('mascara');
-			producto=$(this).attr('producto1');
-			empresa=$(this).attr('empresa');
-			nombre=$(this).attr('nombre');
+		imagen=$(this).find('img').attr('src');
+		tarjeta=$(this).attr('card');
+		marca=$(this).attr('marca');
+		mascara=$(this).attr('mascara');
+		producto=$(this).attr('producto1');
+		empresa=$(this).attr('empresa');
+		nombre=$(this).attr('nombre');
 
-			$("#donor").children().remove();
+		$("#donor").children().remove();
 
-			cadena='<div class="product-presentation" producto="'+producto+'">';
-			cadena+=	'<img src="'+imagen+'" width="200" height="130" alt="" />';
-			cadena+=			'<div class="product-network '+marca.toLowerCase()+'"></div>';
-			cadena+=							'<input id="donor-cardnumber-origen" name="donor-cardnumber" type="hidden" producto="'+producto+'" nombreOrigen="'+nombre+'" cardOrigen="'+tarjeta+'" masCtaOrigen="'+masCtaOrigen+'" marcaCtaOrigen="'+marca+'"  />';
-			cadena+=			'</div>';
-			cadena+=			'<div class="product-info-full">';
-			cadena+=				'<p class="product-cardholder" id="nombreCtaOrigen">'+nombre+'</p>';
-			cadena+=				'<p class="product-cardnumber" id="mascara">'+mascara+'</p>';
-			cadena+=				'<p class="product-metadata" id="marca">'+producto+'</p>';
-			cadena+=				'<nav class="product-stack" id="selCtaOrigen">';
-			cadena+=					'<ul class="stack">';
-			cadena+=						'<li class="stack-item">';
-			cadena+=							'<a dialog button product-button rel="section" id="buscarCta" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
-			cadena+=						'</li>';
-			cadena+=					'</ul>';
-			cadena+=				'</nav>';
-			cadena+=			'</div>';
+		cadena='<div class="product-presentation" producto="'+producto+'">';
+		cadena+=	'<img src="'+imagen+'" width="200" height="130" alt="" />';
+		cadena+=			'<div class="product-network '+marca.toLowerCase()+'"></div>';
+		cadena+=							'<input id="donor-cardnumber-origen" name="donor-cardnumber" type="hidden" producto="'+producto+'" nombreOrigen="'+nombre+'" cardOrigen="'+tarjeta+'" masCtaOrigen="'+masCtaOrigen+'" marcaCtaOrigen="'+marca+'"  />';
+		cadena+=			'</div>';
+		cadena+=			'<div class="product-info-full">';
+		cadena+=				'<p class="product-cardholder" id="nombreCtaOrigen">'+nombre+'</p>';
+		cadena+=				'<p class="product-cardnumber" id="mascara">'+mascara+'</p>';
+		cadena+=				'<p class="product-metadata" id="marca">'+producto+'</p>';
+		cadena+=				'<nav class="product-stack" id="selCtaOrigen">';
+		cadena+=					'<ul class="stack">';
+		cadena+=						'<li class="stack-item">';
+		cadena+=							'<a dialog button product-button rel="section" id="buscarCta" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
+		cadena+=						'</li>';
+		cadena+=					'</ul>';
+		cadena+=				'</nav>';
+		cadena+=			'</div>';
 
-			$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
-			$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
-			$("#agregarCuenta").attr("href","#");
+		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
+		$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
+		$("#agregarCuenta").attr("href","#");
 
-			$("#agregarCuenta").parents("li").removeClass("disabled-group-action-item");
-			$(this).addClass("current-dashboard-item");
-			$("#content-product").dialog("close");
+		$("#agregarCuenta").parents("li").removeClass("disabled-group-action-item");
+		$(this).addClass("current-dashboard-item");
+		$("#content-product").dialog("close");
 
-			   // var ctaOrigen=$(this).attr("card");
-			var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
-			var masCtaOrigen=$("#donor-cardnumber-origen").attr("masCtaOrigen");
-			var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("producto");
-			var producto=$("#donor-cardnumber-origen").attr("producto");
-			var nombreOrigen=$("#donor-cardnumber-origen").attr("nombreOrigen");
-			var prefijo = $(this).attr("prefix")
-			// d = new Date();
-			// var mes = 01;
-			// var anio = d.getFullYear();
-			mes = $("#filter-month").val();
-			anio = $("#filter-year").val();
+		// var ctaOrigen=$(this).attr("card");
+		var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
+		var masCtaOrigen=$("#donor-cardnumber-origen").attr("masCtaOrigen");
+		var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("producto");
+		var producto=$("#donor-cardnumber-origen").attr("producto");
+		var nombreOrigen=$("#donor-cardnumber-origen").attr("nombreOrigen");
+		var prefijo = $(this).attr("prefix");
 
-			$("#buscar").removeClass("disabled-button");  //Habilita el boton buscar del filtro
+		mes = $("#filter-month").val();
+		anio = $("#filter-year").val();
 
-			$('#list-detail').children().remove();
-			buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto);
+		$("#buscar").removeClass("disabled-button");  //Habilita el boton buscar del filtro
+
+		$('#list-detail').children().remove();
+		buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto);
 
 
-		    $('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
-		    	$('#dashboard').children().remove();
-		    	//$("#tdestino").append($("#removerDestino").html());
-		    	$("#botonContinuar").attr("disabled",true);
-		    	$("#content-product").dialog({
-		    		title:"Selección de Cuentas Origen",
-		    		modal:"true",
-		    		width:"940px",
-		    		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		    	});
+		$('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
+			$('#dashboard').children().remove();
+			//$("#tdestino").append($("#removerDestino").html());
+			$("#botonContinuar").attr("disabled",true);
+			$("#content-product").dialog({
+				title:"Selección de Cuentas Origen",
+				modal:"true",
+				width:"940px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 			});
+		});
 
-		});//FIN
+	});//FIN
 	//$(".muestraDestino").click(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto){
@@ -170,32 +168,32 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 			if(data.rc==0){
 				$('#empty-state').remove();
 				$.each(data.cuentaDestinoTercero,function(pos,item){
-          var num = Math.floor(Math.random() * 5) + 1;
+					var num = Math.floor(Math.random() * 5) + 1;
 					var imagen = "bank-"+num;
-						var cadena;
+					var cadena;
 
-						cadena=  "<li class='dashboard-item "+item.beneficiario+" muestraDestino' card='"+item.noCuenta+"' banco='"+item.banco+"' codBanco='"+item.codBanco+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.beneficiario+"' emailCliente='"+item.email+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noCuentaConMascara+"'>";
-						cadena+=		"<div class='dashboard-item-box'>"
-						cadena+=			"<img src='"+base_cdn+"/img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
-						cadena+=			"<div class='dashboard-item-info'>"
-						cadena+=				"<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>"
-						cadena+=				"<ul class='dashboard-item-actions'>"
-						cadena+=					"<li class='actions-item'>"
-						cadena+=						"<a title='Modificar' id='modificar'><span aria-hidden='true' class='icon-edit'></span></a>"
-						cadena+=					"</li>"
-						cadena+=					"<li class='actions-item' id='eliminar'>"
-						cadena+=						"<a title='Remover'><span aria-hidden='true' class='icon-remove'></span></a>"
-						cadena+=					"</li>"
-						cadena+=				"</ul>"
-						cadena+=				"<p class='dashboard-item-cardnumber'>"+item.noCuentaConMascara+"</p>"
-						cadena+=				"<p class='dashboard-item-category'>"+item.banco+"</p>"
-						cadena+=			"</div>"
-						cadena+=		"</div>"
-						cadena+=	"</li>"
+					cadena=  "<li class='dashboard-item "+item.beneficiario+" muestraDestino' card='"+item.noCuenta+"' banco='"+item.banco+"' codBanco='"+item.codBanco+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.beneficiario+"' emailCliente='"+item.email+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noCuentaConMascara+"'>";
+					cadena+=		"<div class='dashboard-item-box'>"
+					cadena+=			"<img src='"+base_cdn+"/img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
+					cadena+=			"<div class='dashboard-item-info'>"
+					cadena+=				"<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>"
+					cadena+=				"<ul class='dashboard-item-actions'>"
+					cadena+=					"<li class='actions-item'>"
+					cadena+=						"<a title='Modificar' id='modificar'><span aria-hidden='true' class='icon-edit'></span></a>"
+					cadena+=					"</li>"
+					cadena+=					"<li class='actions-item' id='eliminar'>"
+					cadena+=						"<a title='Remover'><span aria-hidden='true' class='icon-remove'></span></a>"
+					cadena+=					"</li>"
+					cadena+=				"</ul>"
+					cadena+=				"<p class='dashboard-item-cardnumber'>"+item.noCuentaConMascara+"</p>"
+					cadena+=				"<p class='dashboard-item-category'>"+item.banco+"</p>"
+					cadena+=			"</div>"
+					cadena+=		"</div>"
+					cadena+=	"</li>"
 
 					$("#dashboard").append(cadena);
 
-					});
+				});
 
 				$('.muestraDestino').on('click',"#modificar",function(){
 
@@ -207,16 +205,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 					for (i = fiveyearLess; i <= fiveYearMore; i++){
 						yearSelect.push(i);
-						}
+					}
 
-					// imagen=$(this).find('img').attr('src');
-					// tarjeta=$(".muestraDestino").attr('card');
-					// id_ext_per=$(".muestraDestino").attr('id_ext_per');
-					// nombre=$(".muestraDestino").attr('nombre');
-					// emailCliente=$(".muestraDestino").attr('emailCliente');
-					// id_afiliacion=$(".muestraDestino").attr('id_afiliacion');
-					// banco=$(".muestraDestino").attr('banco');
-					// codBanco=$(".muestraDestino").attr('codBanco');
 					tarjeta =$(this).parents(".dashboard-item").attr('card');
 					id_ext_per_1=$(this).parents(".dashboard-item").attr('id_ext_per');
 					tipo_doc=id_ext_per_1.substr(0,1);
@@ -231,144 +221,145 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 					$('#selCtaOrigen').attr("style","display:none");
 					$("#content-holder").children().remove();
 
-						var ctaDestino;
-						ctaDestino = "<div id='progress'>";
-						ctaDestino+= 	"<ul class='steps'>";
-						ctaDestino+= 		"<li class='step-item current-step-item'><span aria-hidden='true' class='icon-edit'></span> Modificación de Afiliación</li>";
-						ctaDestino+= 		"<li class='step-item'><span aria-hidden='true' class='icon-view'></span> Confirmación</li>";
-						ctaDestino+= 		"<li class='step-item'><span aria-hidden='true' class='icon-thumbs-up'></span> Finalización</li>";
-						ctaDestino+= 	"</ul>";
-						ctaDestino+= "</div>";
-						ctaDestino+= "<div id='content-holder'>";
-						ctaDestino+= "<form id='datos'>";
-						ctaDestino+= "<ul class='field-group'>";
-						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
-						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
-						ctaDestino+=            "<option value=''>Mes</option>"
-						ctaDestino+=			"<option value='01'>01</option>"
-						ctaDestino+=			"<option value='02'>02</option>"
-						ctaDestino+=			"<option value='03'>03</option>"
-						ctaDestino+=			"<option value='04'>04</option>"
-						ctaDestino+=			"<option value='05'>05</option>"
-						ctaDestino+=			"<option value='06'>06</option>"
-						ctaDestino+=			"<option value='07'>07</option>"
-						ctaDestino+=			"<option value='08'>08</option>"
-						ctaDestino+=			"<option value='09'>09</option>"
-						ctaDestino+=			"<option value='10'>10</option>"
-						ctaDestino+=			"<option value='11'>11</option>"
-						ctaDestino+=			"<option value='12'>12</option>"
-						ctaDestino+= 		"</select>"
-						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
-						ctaDestino+=			"<option value=''>Año</option>"
-						ctaDestino+= 		"</select>"
-						ctaDestino+= 	"</li>"
-						ctaDestino+= 	"<li class='field-group-item'>";
-						ctaDestino+= 		"<label for='bank-name'>Banco	</label>";
-						ctaDestino+= 			"<select id='bank-name' name='bank-name' banco='"+banco+"''>";
-						ctaDestino+= 				"<option selected value='"+codBanco+"'>"+banco+"</option>";
-						ctaDestino+= 			"</select>";
-						ctaDestino+= 	"</li>";
-						ctaDestino+= 	"</ul>";
-						ctaDestino+= "<ul class='field-group'>";
-				        ctaDestino+=    "<li class='field-group-item'>";
-				        ctaDestino+=       "<label for='card-number'>N° de Cuenta Destino</label>";
-				        ctaDestino+=       "<input class='field-medium' id='card-number' name='card-number' maxlength='20' value='"+tarjeta+"'/>";
-				        ctaDestino+=    "</li>";
-				        ctaDestino+=   " <li class='field-group-item'>";
-				        ctaDestino+=       "<label for='card-holder'>Beneficiario</label>";
-				        ctaDestino+=       "<input class='field-large' id='card-holder' name='card-holder' maxlength='35' type='text' value='"+nombre+"' />";
-				        ctaDestino+=    "</li>";
-				        ctaDestino+= "</ul>";
-				        ctaDestino+=  "<ul class='field-group'>";
-				        ctaDestino+=    "<li class='field-group-item'>";
-				        ctaDestino+=       "<label for='bank-account-holder-id'>Documento de Identidad</label>";
-				        ctaDestino+=		"<select id='doc-name' name='doc-name'>"
-                        ctaDestino+=				"<option selected value='"+tipo_doc+"'>"+tipo_doc+"</option>"
-                        ctaDestino+=				"<option value='V'>V</option>"
-                        ctaDestino+=				"<option value='E'>E</option>"
-                        ctaDestino+=				"<option value='J'>J</option>"
-                        ctaDestino+=		 	"<option value='G'>G</option>"
-                       	ctaDestino+=	"</select>"
-				        ctaDestino+=       "<input class='field-medium' id='bank-account-holder-id' name='bank-account-holder-id' maxlength='14' minlength='5' type='text' value="+id_ext_per+" />";
-				        ctaDestino+=    "</li>";
-				        ctaDestino+=    "<li class='field-group-item'>";
-				        ctaDestino+=       "<label for='card-holder-email'>Correo Electrónico</label>";
-				        ctaDestino+=       "<input class='field-large' id='card-holder-email' name='card-holder-email' maxlength='30'  type='text' value="+emailCliente+" />";
-				        ctaDestino+=    "</li>";
-				        ctaDestino+= "</ul>";
-				        ctaDestino+= "</form>";
-						ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
-				        ctaDestino+="<div class='form-actions'>";
-				        ctaDestino+="<button id='cancelar1' type='reset'>Cancelar</button>";
-				        ctaDestino+="<button id='cambiar'>Modificar</button>";
-				      	ctaDestino+="</div>";
-				      	ctaDestino+="</div>";
+					var ctaDestino;
+					ctaDestino = "<div id='progress'>";
+					ctaDestino+= 	"<ul class='steps'>";
+					ctaDestino+= 		"<li class='step-item current-step-item'><span aria-hidden='true' class='icon-edit'></span> Modificación de Afiliación</li>";
+					ctaDestino+= 		"<li class='step-item'><span aria-hidden='true' class='icon-view'></span> Confirmación</li>";
+					ctaDestino+= 		"<li class='step-item'><span aria-hidden='true' class='icon-thumbs-up'></span> Finalización</li>";
+					ctaDestino+= 	"</ul>";
+					ctaDestino+= "</div>";
+					ctaDestino+= "<div id='content-holder'>";
+					ctaDestino+= "<form id='datos'>";
+					ctaDestino+= "<ul class='field-group'>";
+					ctaDestino+= 	"<li class='field-group-item'>"
+					ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
+					ctaDestino+= 		"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>"
+					ctaDestino+=            "<option value=''>Mes</option>"
+					ctaDestino+=			"<option value='01'>01</option>"
+					ctaDestino+=			"<option value='02'>02</option>"
+					ctaDestino+=			"<option value='03'>03</option>"
+					ctaDestino+=			"<option value='04'>04</option>"
+					ctaDestino+=			"<option value='05'>05</option>"
+					ctaDestino+=			"<option value='06'>06</option>"
+					ctaDestino+=			"<option value='07'>07</option>"
+					ctaDestino+=			"<option value='08'>08</option>"
+					ctaDestino+=			"<option value='09'>09</option>"
+					ctaDestino+=			"<option value='10'>10</option>"
+					ctaDestino+=			"<option value='11'>11</option>"
+					ctaDestino+=			"<option value='12'>12</option>"
+					ctaDestino+= 		"</select>"
+					ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+					ctaDestino+=			"<option value=''>Año</option>"
+					ctaDestino+= 		"</select>"
+					ctaDestino+= 	"</li>"
+					ctaDestino+= 	"<li class='field-group-item'>";
+					ctaDestino+= 		"<label for='bank-name'>Banco	</label>";
+					ctaDestino+= 			"<select id='bank-name' name='bank-name' banco='"+banco+"''>";
+					ctaDestino+= 				"<option selected value='"+codBanco+"'>"+banco+"</option>";
+					ctaDestino+= 			"</select>";
+					ctaDestino+= 	"</li>";
+					ctaDestino+= 	"</ul>";
+					ctaDestino+= "<ul class='field-group'>";
+					ctaDestino+=    "<li class='field-group-item'>";
+					ctaDestino+=       "<label for='card-number'>N° de Cuenta Destino</label>";
+					ctaDestino+=       "<input class='field-medium' id='card-number' name='card-number' maxlength='20' value='"+tarjeta+"'/>";
+					ctaDestino+=    "</li>";
+					ctaDestino+=   " <li class='field-group-item'>";
+					ctaDestino+=       "<label for='card-holder'>Beneficiario</label>";
+					ctaDestino+=       "<input class='field-large' id='card-holder' name='card-holder' maxlength='35' type='text' value='"+nombre+"' />";
+					ctaDestino+=    "</li>";
+					ctaDestino+= "</ul>";
+					ctaDestino+=  "<ul class='field-group'>";
+					ctaDestino+=    "<li class='field-group-item'>";
+					ctaDestino+=       "<label for='bank-account-holder-id'>Documento de Identidad</label>";
+					ctaDestino+=		"<select id='doc-name' name='doc-name'>"
+					ctaDestino+=				"<option selected value='"+tipo_doc+"'>"+tipo_doc+"</option>"
+					ctaDestino+=				"<option value='V'>V</option>"
+					ctaDestino+=				"<option value='E'>E</option>"
+					ctaDestino+=				"<option value='J'>J</option>"
+					ctaDestino+=		 	"<option value='G'>G</option>"
+					ctaDestino+=	"</select>"
+					ctaDestino+=       "<input class='field-medium' id='bank-account-holder-id' name='bank-account-holder-id' maxlength='14' minlength='5' type='text' value="+id_ext_per+" />";
+					ctaDestino+=    "</li>";
+					ctaDestino+=    "<li class='field-group-item'>";
+					ctaDestino+=       "<label for='card-holder-email'>Correo Electrónico</label>";
+					ctaDestino+=       "<input class='field-large' id='card-holder-email' name='card-holder-email' maxlength='30'  type='text' value="+emailCliente+" />";
+					ctaDestino+=    "</li>";
+					ctaDestino+= "</ul>";
+					ctaDestino+= "</form>";
+					ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
+					ctaDestino+="<div class='form-actions'>";
+					ctaDestino+="<button id='cancelar1' type='reset'>Cancelar</button>";
+					ctaDestino+="<button id='cambiar'>Modificar</button>";
+					ctaDestino+="</div>";
+					ctaDestino+="</div>";
 
 
-				        $("#content-holder").append(ctaDestino);
-						$.each(yearSelect,function(index,value){
-							var lastDigit = value.toString().substring(2,4);
-							var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
-							$("#yearExp").append(yearPrueba);
-						})
+					$("#content-holder").append(ctaDestino);
+					$.each(yearSelect,function(index,value){
+						var lastDigit = value.toString().substring(2,4);
+						var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
+						$("#yearExp").append(yearPrueba);
+					})
 
-				        						getBancos();
-				        $("#cancelar1").click(function(){
+					getBancos();
+					$("#cancelar1").click(function(){
 
-   			 					$(location).attr('href', base_url+'/adm/adm_bank');
+						$(location).attr('href', base_url+'/adm/adm_bank');
 
-   							});
+					});
 
-				        $("#cambiar").click(function(){
+					$("#cambiar").click(function(){
 
-							validar_campos();
+						validar_campos();
 
-							$("#datos").submit();
+						$("#datos").submit();
 
-							setTimeout(function(){$("#msg").fadeOut();},5000);
+						setTimeout(function(){$("#msg").fadeOut();},5000);
 
-							var form, notSms, notEmail;
+						var form, notSms, notEmail;
 
-							form=$("#datos");
+						form=$("#datos");
 
 						var cDestino=$("#card-number").val();
-				 		cod_ban=cDestino.substr(0,4);
+						cod_ban=cDestino.substr(0,4);
 						banc=true;
 						if (cod_ban!=codBanco){
 							banc=false;
-				 			$("#dialog-banco").dialog({
-			                title:"Cuenta inválida",
-			                modal:"true",
-			                width:"440px",
-			                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			              });
+							$("#dialog-banco").dialog({
+								title:"Cuenta inválida",
+								modal:"true",
+								width:"440px",
+								open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+							});
 
-				            $("#banco_inv").click(function(){
-				              $("#dialog-banco").dialog("close");
-				            });
-				            $(this).val("");
-				 		}
+							$("#banco_inv").click(function(){
+								$("#dialog-banco").dialog("close");
+							});
+							$(this).val("");
+						}
 
 
-				 if ((form.valid() == true) && (banc==true)){
-				        	var confirmacion;
-				        	var cDestino=$("#card-number").val();
-				        	var nombreDest=$("#card-holder").val();
-				        	var id_per1=$("#bank-account-holder-id").val();
-				        	var tipod=$('#doc-name option:selected').val();
-				        	var id_per = tipod+id_per1;
-				        	var emailClienteD=$("#card-holder-email").val();
-				        	//var bancoD=$("#bank-name").val();
-				        	var bancoValor=$("#msg").attr("banco");
-				        	var bancoD=$("#bank-name").attr('banco');
-				        	$('#selCtaOrigen').attr("style","display:none");
+						if ((form.valid() == true) && (banc==true)){
+							var confirmacion;
+							var cDestino=$("#card-number").val();
+							var nombreDest=$("#card-holder").val();
+							var id_per1=$("#bank-account-holder-id").val();
+							var tipod=$('#doc-name option:selected').val();
+							var id_per = tipod+id_per1;
+							var emailClienteD=$("#card-holder-email").val();
+							//var bancoD=$("#bank-name").val();
+							var bancoValor=$("#msg").attr("banco");
+							var bancoD=$("#bank-name").attr('banco');
+							var expDate = $('#MonthExp').val() + $('#yearExp').val();
+							$('#selCtaOrigen').attr("style","display:none");
 
-									mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
+							mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
 
-				        	$("#content-holder").children().remove();
+							$("#content-holder").children().remove();
 
-				        	confirmacion= "<div id='progress'>";
+							confirmacion= "<div id='progress'>";
 							confirmacion+= "<ul class='steps'>";
 							confirmacion+= 	"<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-edit'></span> Modificación de Afiliación</li>";
 							confirmacion+= 	"<li class='step-item current-step-item'><span aria-hidden='true' class='icon-view'></span> Confirmación</li>";
@@ -399,10 +390,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 							$("#continuar").click(function(){
 								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor, "expDate":expDate },function(data) {
-				        			if(data.rc==0){
-				        				var exito;
-				        				$("#progress").attr('style','display:none');
-						        		$("#content-holder").children().remove();
+									if(data.rc==0){
+										var exito;
+										$("#progress").attr('style','display:none');
+										$("#content-holder").children().remove();
 										exito= "<div id='progress'>";
 										exito+= "<ul class='steps'>";
 										exito+= 	"<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-edit'></span> Modificación de Afiliación</li>";
@@ -417,10 +408,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 										exito+= 		"<button id='exit'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
-				        			} else {
-				        				var exito,
-											msgAfiliation = '',
-											men = '(15)';
+									} else {
+										var exito,
+											msgAfiliation = '';
 
 										switch (data.rc) {
 											case -340:
@@ -433,7 +423,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 												msgAfiliation = 'Número de cuenta invalido';
 												break;
 											case -343:
+												var men = transferencia.msg;
 												msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
+												break;
 											case -344:
 												msgAfiliation = 'la fecha de expiracion indicada es incorrecta';
 												break;
@@ -441,7 +433,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 										}
 
 										$("#progress").attr('style','display:none');
-						        		$("#content-holder").children().remove();
+										$("#content-holder").children().remove();
 										exito= "<div class='alert-error' id='message'>";
 										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada, " + msgAfiliation;
 										exito+= "</div>";
@@ -449,22 +441,22 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 										exito+= 		"<button id='exit'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
-				        			}
-				        			$("#exit").click(function(){
+									}
+									$("#exit").click(function(){
 
-   			 							$(location).attr('href', base_url+'/adm/adm_bank');
+										$(location).attr('href', base_url+'/adm/adm_bank');
 
-   									});
+									});
 								});
 							});
 						}
-							$("#cancelar").click(function(){
+						$("#cancelar").click(function(){
 
-   			 					$(location).attr('href', base_url+'/adm/adm_bank');
-
-   							});
+							$(location).attr('href', base_url+'/adm/adm_bank');
 
 						});
+
+					});
 
 
 				});
@@ -517,7 +509,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						$.post(base_url +"/adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2T"},function(data) {
 							if(data.rc==0){
 								$("#progress").attr('style','display:none');
-				        		$("#content-holder").children().remove();
+								$("#content-holder").children().remove();
 								exito= "<div id='progress'>";
 								exito+= "<ul class='steps two-steps'>";
 								exito+= "<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-remove'></span> Eliminación de Afiliación</li>";
@@ -535,8 +527,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 							else{
 								var exito;
-				        		$("#progress").attr('style','display:none');
-				        		$("#content-holder").children().remove();
+								$("#progress").attr('style','display:none');
+								$("#content-holder").children().remove();
 								exito= "<div class='alert-error' id='message'>";
 								exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no eliminada";
 								exito+= "</div>";
@@ -547,56 +539,56 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 							}
 							$("#exit").click(function(){
 
-   			 					$(location).attr('href', base_url+'/adm/adm_bank');
+								$(location).attr('href', base_url+'/adm/adm_bank');
 
-   							});
+							});
 						});
 
 					});
 
 					$("#cancel").click(function(){
-   						$(location).attr('href', base_url+'/adm/adm_bank');
+						$(location).attr('href', base_url+'/adm/adm_bank');
 
-   					});
+					});
 				});
 
 			}else{
 				$('#empty-state').children().remove();
 				var cadena='<div id="empty-state" style="position: static;">';
-	            cadena+=                '<h2>No se encontraron tarjetas asociadas</h2>';
-	            cadena+=                 '<p>Vuelva a realizar la búsqueda con una tarjeta distinta.</p>';
-	            cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -415px;"></span>';
-	            cadena+=             '</div>';
-	            $("#empty-state").append(cadena);
+				cadena+=                '<h2>No se encontraron tarjetas asociadas</h2>';
+				cadena+=                 '<p>Vuelva a realizar la búsqueda con una tarjeta distinta.</p>';
+				cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -415px;"></span>';
+				cadena+=             '</div>';
+				$("#empty-state").append(cadena);
 
 			}
 		});
 
 	}
 
-// VALIDACIONES
+	// VALIDACIONES
 
-function validar_campos(){
+	function validar_campos(){
 
-	jQuery.validator.setDefaults({
- 		debug: true,
- 		success: "valid"
- 	});
+		jQuery.validator.setDefaults({
+			debug: true,
+			success: "valid"
+		});
 
-	jQuery.validator.addMethod("numOnly", function(value, element) {
+		jQuery.validator.addMethod("numOnly", function(value, element) {
 			var regEx = /^[a-zA-Z0-9]+$/,
-					token = element.value;
+				token = element.value;
 
 			if (regEx.test(token)) {
-					return true;
+				return true;
 			} else {
-					return false;
+				return false;
 			}
-	});
+		});
 
-	// jQuery.validator.addMethod("lettersonly", function(value, element){
-	// 	return this.optional(element) || /^[a-z," "]+$/i.test(value);
-	// });
+		// jQuery.validator.addMethod("lettersonly", function(value, element){
+		// 	return this.optional(element) || /^[a-z," "]+$/i.test(value);
+		// });
 
 		var letter = /^[a-zA-Z_áéíóúñ\s]*$/;
 
@@ -645,31 +637,31 @@ function validar_campos(){
 		$.post(base_url +"/affiliation/bancos",function(data){
 			$.each(data.lista,function(pos,item){
 
-			var lista;
+				var lista;
 
-			lista="<option value="+item.codBcv+"> "+item.nomBanco+" </option>";
-			$("#bank-name").append(lista);
+				lista="<option value="+item.codBcv+"> "+item.nomBanco+" </option>";
+				$("#bank-name").append(lista);
 
 			});
 
 		});
 	} //GET BANCOS
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-// MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// MODAL TERMINOS Y CONDICIONES
+	$(".label-inline").on("click", "a", function() {
 
-    $("#dialog-tc").dialog({
-      modal:"true",
-      width:"940px",
-      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
+		$("#dialog-tc").dialog({
+			modal:"true",
+			width:"940px",
+			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		});
 
-    $("#ok").click(function(){
-      $("#dialog-tc").dialog("close");
-    });
+		$("#ok").click(function(){
+			$("#dialog-tc").dialog("close");
+		});
 
-    });
+	});
 
 
 });  //FIN DE LA FUNCION GENERAL

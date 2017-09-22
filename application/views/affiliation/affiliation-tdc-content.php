@@ -392,7 +392,8 @@ foreach ($datos->cuentaOrigen as $value) {
             </div>
             <h2>Finalización</h2>
             <div class="alert-error" id="message">
-                <span aria-hidden="true" class="icon-cancel-sign"></span> Afiliación NO realizada
+	            <span aria-hidden="true" class="icon-cancel-sign"></span>
+	            Afiliación NO realizada <span id="nonAfiliation"></span>
             </div>
             <p>Los datos registrados durante la operación fueron los siguientes:</p>
             <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">

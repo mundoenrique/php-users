@@ -43,8 +43,8 @@ class Affiliation_model extends CI_Model {
 		log_message("info", "RESPONSE afiliacion P2P : ".json_encode($desdata));
 
 		//simulación respuesta del servicio
-		// $desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
-		// $desdata = json_decode($desdata);
+		//$desdata = json_decode('{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}');
+
 
 		return json_encode($desdata);
 
@@ -85,6 +85,8 @@ class Affiliation_model extends CI_Model {
 		log_message("info","RESPONSE ENCRIPTADO afiliacion P2T-C ----->>>>".json_encode($data));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 		log_message("info","JSON afiliacion P2T-C response----->>>>".json_encode($desdata));
+		//simulación respuesta del servicio
+		//$desdata = json_decode('{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}');
 		return json_encode($desdata);
 
 	}		//FIN
@@ -112,6 +114,8 @@ class Affiliation_model extends CI_Model {
 		$data = json_decode(utf8_encode($response));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 		log_message("info","JSON tarjeta P2T-C response ".$response);
+		//simulación respuesta del servicio
+		//$desdata = json_decode('{"rc":0,"msg":"Error cuenta destino ya esta afiliada"}');
 		return json_encode($desdata);
 
 	}		//FIN

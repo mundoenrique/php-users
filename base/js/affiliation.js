@@ -3,7 +3,6 @@ path =window.location.href.split( '/' );
 base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
-
 $(function() {
 	// MENU WIDGET TRANSFERENCIA
 	$('.transfers').hover(function(){

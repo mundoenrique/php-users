@@ -246,7 +246,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+= "<ul class='field-group'>";
 						ctaDestino+= 	"<li class='field-group-item'>"
 						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
-						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+						ctaDestino+= 		"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>"
 						ctaDestino+=            "<option value=''>Mes</option>"
 						ctaDestino+=			"<option value='01'>01</option>"
 						ctaDestino+=			"<option value='02'>02</option>"
@@ -365,7 +365,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				        	var bancoValor=$("#msg").attr("banco");
 				        	$('#selCtaOrigen').attr("style","display:none");
 				        	$("#content-holder").children().remove();
-									mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
+							mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
+						    var expDate = $('#MonthExp').val() + $('#yearExp').val();
 
 				        	confirmacion= "<div id='progress'>";
 							confirmacion+= "<ul class='steps'>";
