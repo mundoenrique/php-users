@@ -1,5 +1,5 @@
 $(function() {
-	operationType = 'PTP';
+	operationType = 'P2P';
 	//CARGA MODAL CTA ORIGEN------------------------------------------------------------------------
 	$(".dialog").on('click', function() {
 
