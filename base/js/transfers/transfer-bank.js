@@ -575,7 +575,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 					acumCantidadOperacionesDiarias = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesDiarias);
 					acumCantidadOperacionesSemanales = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesSemanales);
 					acumCantidadOperacionesMensual = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesMensual);
-					montoComision = parseInt(data.parametrosTransferencias[0].montoComision);
+					montoComision = parseFloat(data.parametrosTransferencias[0].montoComision);
 					dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
 
 					$("#dashboard-beneficiary").empty();
