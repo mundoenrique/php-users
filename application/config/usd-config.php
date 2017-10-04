@@ -251,7 +251,7 @@ $config['encryption_key'] = 'dsa';
 |
 */
 $config['sess_cookie_name']		= 'session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 0;
 $config['sess_expire_on_close']	= true;
 $config['sess_encrypt_cookie']	= false;
 $config['sess_use_database']	= false;
