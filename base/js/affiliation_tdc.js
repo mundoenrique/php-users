@@ -123,8 +123,8 @@ $(function(){
 
 		$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
 		$("#card-number").attr("disabled",false);
-		$("#yearExp").attr("disabled",false);
-		$("#MonthExp").attr("disabled",false);
+		$("#month-exp").attr("disabled",false);
+		$("#year-exp").attr("disabled",false);
 		$("#bank-account-holder").attr("disabled",false);
 		$("#bank-account-holder-id").attr("disabled",false);
 		$("#bank-account-holder-email").attr("disabled",false);
@@ -182,7 +182,7 @@ $(function(){
 		banco=$('#bank-name option:selected').val();
 		nombre_banco = $('#bank-name option:selected').text();
 		prefix=$("#donor").find("#donor-cardnumber-origen").attr("prefix");
-		expDate = $('#MonthExp').val() + $('#yearExp').val();
+		expDate = $('#month-exp').val() + $('#year-exp').val();
 		var tipo_doc=$('#doc-name option:selected').val();
 
 		var id_per_comp= tipo_doc+cedula;
@@ -245,6 +245,7 @@ $(function(){
 				cedula =$("#cargarConfirmacion").find("#ctaAfiliar").attr("cedula");
 				banco =$("#cargarConfirmacion").find("#ctaAfiliar").attr("banco");
 				nombre_banco = $("#cargarConfirmacion").find("#ctaAfiliar").attr("nombre_banco");
+
 
 				$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2C","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
 					if(data.rc == -61){
@@ -319,7 +320,7 @@ $(function(){
 								var men = transferencia.msg;
 								msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(34,35) + ')';
 							case -344:
-								msgAfiliation = 'la fecha de expiracion indicada es incorrecta';
+								msgAfiliation = 'la fecha de vencimiento indicada es incorrecta';
 								break;
 							default:
 
@@ -393,8 +394,8 @@ $(function(){
 				"card-number":{"required":true,"number":true, "minlength":16, "maxlength": 16},
 				"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
 				"bank-account-holder-email": {"required":true, "email": true},
-				"MonthExp": {"required": true},
-				"yearExp": {"required": true}
+				"month-exp": {"required": true},
+				"year-exp": {"required": true}
 			},
 			messages: {
 				"bank-name":"Debe seleccionar un banco",
@@ -411,8 +412,8 @@ $(function(){
 					numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
 				},
 				"bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
-				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
+				"month-exp": "Seleccione el mes de vencimiento de su tarjeta",
+				"year-exp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

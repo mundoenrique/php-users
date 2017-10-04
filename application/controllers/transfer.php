@@ -340,11 +340,11 @@ class Transfer extends CI_Controller {
 		$descripcion = $this->input->post('descripcion');
 		$tipoOpe = $this->input->post('tipoOpe');
 		$id_afil_terceros = $this->input->post('id_afil_terceros');
-		$expyritDate = $this->input->post('expyritDate');
+		$expDate = $this->input->post('expDate');
 
 		$this->output->set_content_type('application/json')->set_output(
 			$this->procesar->procesarTransferencia_load(
-				$cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expyritDate
+				$cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expDate
 			)
 		);
 

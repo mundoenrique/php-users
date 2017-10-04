@@ -69,7 +69,7 @@ $(function() {
 		cadena+= 	"<ul class='field-group'>";
 		cadena+= 		"<li class='field-group-item'>";
 		cadena+= 			"<label for='dayExp'>Fecha de Vencimiento</label>";
-		cadena+= 			"<select id='MonthExp' name='MonthExp' style='margin-right: 5px;'>";
+		cadena+= 			"<select id='month-exp' name='month-exp' style='margin-right: 5px;'>";
 		cadena+=            	"<option value=''>Mes</option>";
 		cadena+=				"<option value='01'>01</option>";
 		cadena+=				"<option value='02'>02</option>";
@@ -84,7 +84,7 @@ $(function() {
 		cadena+=				"<option value='11'>11</option>";
 		cadena+=				"<option value='12'>12</option>";
 		cadena+= 			"</select>";
-		cadena+= 			"<select id='yearExp' name='yearExp'>";
+		cadena+= 			"<select id='year-exp' name='year-exp'>";
 		cadena+=				"<option value=''>Año</option>";
 		cadena+= 			"</select>";
 		cadena+= 		"</li>";
@@ -96,7 +96,7 @@ $(function() {
 		$.each(yearSelect, function(index,value) {
 			var lastDigit = value.toString().substring(2,4);
 			var yearPrueba =  "<option value='" + lastDigit+"'>" + value + "</option>";
-			$("#yearExp").append(yearPrueba);
+			$("#year-exp").append(yearPrueba);
 		});
 
 		$('#wait').show();
@@ -270,20 +270,20 @@ $(function() {
 			expr= /^-?[0-9]+([\,\.][0-9]{0,2})?$/, validateInput = [], dif, msg;
 
 		//Validar campos input----------------------------------------------------------------------
-		if($('#MonthExp').val() === '') {
+		if($('#month-exp').val() === '') {
 			validateInput.push('Seleccione el mes de vencimiento');
-			$('#MonthExp').addClass('field-error');
+			$('#month-exp').addClass('field-error');
 			camposInput = false;
 		} else {
-			$('#MonthExp').removeClass('field-error');
+			$('#month-exp').removeClass('field-error');
 		}
 
-		if($('#yearExp').val() === '') {
+		if($('#year-exp').val() === '') {
 			validateInput.push('Seleccione el año de vencimiento');
-			$('#yearExp').addClass('field-error');
+			$('#year-exp').addClass('field-error');
 			camposInput = false;
 		} else {
-			$('#yearExp').removeClass('field-error');
+			$('#year-exp').removeClass('field-error');
 		}
 
 		var validConcept = 0,
@@ -454,7 +454,7 @@ $(function() {
 			maskSource = $('#donor').find('.product-cardnumber').html();
 			sourceNumber = $('#donor').find('#donor-cardnumber-origen').attr('cardOrigen');
 			brand = $('#donor').find('.product-metadata').html();
-			expyritDate = $('#MonthExp').val() + $('#yearExp').val();
+			expDate = $('#month-exp').val() + $('#year-exp').val();
 
 			appendDataTransfer =   '<tr>';
 			appendDataTransfer +=      '<td class="data-label"><label>Cuenta Origen</label></td>';
@@ -515,7 +515,7 @@ $(function() {
 			appendDataTransfer+= '<tr>';
 			appendDataTransfer+=    '<td colspan="2"></td>';
 			appendDataTransfer+=    '<td class="data-metadata">Total<br/>';
-			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + totalTrans + '</span>';
+			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + changeDecimals(totalTrans) + '</span>';
 			appendDataTransfer+= '</tr>';
 
 			$("#cargarConfirmacion").append(appendDataTransfer);

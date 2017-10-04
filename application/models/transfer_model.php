@@ -185,7 +185,7 @@
 		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//REALIZAR TRANSFERENCIA
-		public function procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expyritDate){
+		public function procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expDate){
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
 			$data = json_encode(array(
@@ -198,7 +198,7 @@
 				                    "tipoOpe" => $tipoOpe,
 				                    "idUsuario"=> $this->session->userdata("userName"),
 				                    "id_afil_terceros" => $id_afil_terceros,
-				                    "validacionFechaExp" => $expyritDate,
+				                    "validacionFechaExp" => $expDate,
 				                    "logAccesoObject"=>$logAcceso,
 				                    "token"=>$this->session->userdata("token")
 			                    ));

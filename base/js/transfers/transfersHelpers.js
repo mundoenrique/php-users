@@ -1,10 +1,10 @@
 var path, base_cdn, base_url, ctasDestino, moneda, pais, editCard, numberBeneficiary = [3 , 2, 1],
-	totalTrans, saldoDisp, montoMinOperaciones, montoMaxOperaciones, montoAcumMensual,
+	totalTrans, saldoDisp, transferNumber, montoMinOperaciones, montoMaxOperaciones, montoAcumMensual,
 	montoMaxMensual, montoAcumSemanal, montoMaxSemanal, montoAcumDiario, montoMaxDiario,
 	acumCantidadOperacionesMensual, cantidadOperacionesMensual, acumCantidadOperacionesSemanales,
 	cantidadOperacionesSemanales, acumCantidadOperacionesDiarias, cantidadOperacionesDiarias,
 	montoComision, nameSource, maskSource, sourceNumber, brand, destination = {}, dobleAutenticacion,
-	operationType;
+	operationType, expDate;
 
 path = window.location.href.split( '/' );
 base_cdn = decodeURIComponent(
@@ -332,7 +332,7 @@ function makeTransfer(type)
 			"tipoOpe" : type,
 			"idUsuario" : nameSource,
 			"id_afil_terceros": item.idAfil,
-			"expyritDate" : expyritDate
+			"expDate" : expDate
 		};
 
 		$.ajax({

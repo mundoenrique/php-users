@@ -52,8 +52,8 @@
 						</div>
 						<ul class="field-group">
 							<li class="field-group-item">
-								<label for="expDate">Fecha de vto cta origen</label>
-								<select id="month-exp" name="MonthExp" disabled>
+								<label for="expDate"><?php echo lang('DATE_EXPIRATION'); ?></label>
+								<select id="month-exp" name="month-exp" disabled>
 									<option value="">Mes</option>
 									<option value="01">01</option>
 									<option value="02">02</option>
@@ -68,7 +68,7 @@
 									<option value="11">11</option>
 									<option value="12">12</option>
 								</select>
-								<select id="year-exp" name="yearExp" disabled>
+								<select id="year-exp" name="year-exp" disabled>
 									<option value="">Año</option>
 									<?php
 										$actual = date('Y');
