@@ -393,9 +393,9 @@ $(function() {
 			         cantidadOperacionesMensual) {
 
 				dif = cantidadOperacionesMensual - acumCantidadOperacionesMensual;
-				msg = dif === 0 ? '.<br>No puede realizar otra opración este mes' : '';
+				msg = dif === 0 ? '.<br>No puede realizar otra operación este mes' : '';
 
-				validateInput.push('Puede ralizar: ' + cantidadOperacionesMensual +
+				validateInput.push('Puede realizar: ' + cantidadOperacionesMensual +
 				                   ' operaciones mensuales.<br>Este mes ha realizado: ' +
 				                   acumCantidadOperacionesMensual + msg);
 
@@ -404,9 +404,9 @@ $(function() {
 			          cantidadOperacionesSemanales) {
 
 				dif = cantidadOperacionesSemanales - acumCantidadOperacionesSemanales;
-				msg = dif === 0 ? '.<br>No puede realizar otra opración esta semana' : '';
+				msg = dif === 0 ? '.<br>No puede realizar otra operación esta semana' : '';
 
-				validateInput.push('Puede ralizar: ' + cantidadOperacionesSemanales +
+				validateInput.push('Puede realizar: ' + cantidadOperacionesSemanales +
 				                   ' operaciones semanales.<br>Esta semana ha realizado: ' +
 				                   acumCantidadOperacionesSemanales + msg);
 				validateTrans = false;
@@ -415,9 +415,9 @@ $(function() {
 			          cantidadOperacionesDiarias) {
 
 				dif = cantidadOperacionesDiarias - acumCantidadOperacionesDiarias;
-				msg = dif === 0 ? '.<br>No puede realizar otra opración hoy' : '';
+				msg = dif === 0 ? '.<br>No puede realizar otra operación hoy' : '';
 
-				validateInput.push('Puede ralizar: ' + cantidadOperacionesDiarias +
+				validateInput.push('Puede realizar: ' + cantidadOperacionesDiarias +
 				                   ' operaciones diarias.<br>Hoy ha realizado: ' +
 				                   acumCantidadOperacionesDiarias + msg);
 
