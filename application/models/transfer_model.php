@@ -187,6 +187,7 @@
 		//REALIZAR TRANSFERENCIA
 		public function procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expDate){
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
+			$monto = str_replace(',','.', $monto);
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
 			$data = json_encode(array(
 				                    "idOperation"=>"9",
