@@ -319,9 +319,9 @@ $(function() {
 		if(camposInput === true) {
 			transferNumber = contar_tarjetas();
 			if((pais ==='Pe') || (pais ==='Usd')) {
-				saldoDisp = $("#balance-available").attr("saldo").replace(',', '');
+				saldoDisp = $("#balance-available").attr("saldo").replace(/\,/g, '');
 			} else if ((pais === 'Ve') || (pais ==='Co')) {
-				saldoDisp = $("#balance-available").attr("saldo").replace('.', '');
+				saldoDisp = $("#balance-available").attr("saldo").replace(/\./g, '');
 				saldoDisp = saldoDisp.replace(',', '.');
 			}
 

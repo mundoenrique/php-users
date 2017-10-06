@@ -67,7 +67,7 @@ class Dashboard_model extends CI_Model {
 
 		 $salida = json_encode($desdata);
 		 log_message('info', 'Salida SALDO desencriptado: ' . $salida);
-		 //$desdata = json_decode('{"bloqueo":"0,00","disponible":"51.000,00","actual":"51.000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
+		 //$desdata = json_decode('{"bloqueo":"0,00","disponible":"5.000.000,00","actual":"51.000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
 
 
 
