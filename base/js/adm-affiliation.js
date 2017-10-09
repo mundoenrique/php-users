@@ -1,6 +1,8 @@
-var path, base_cdn, expDate;
+var path, baseCdn, expDate;
 path =window.location.href.split( '/' );
-base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+baseCdn = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 var pais;
 
@@ -178,8 +180,8 @@ $(function(){
 
 					cadena=  "<li class='dashboard-item "+item.nomEmp+" muestraDestino' card='"+item.noTarjeta+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.NombreCliente+"' emailCliente='"+item.emailCliente+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noTarjetaConMascara+"' empresa='"+item.nomEmp+"' producto='"+item.nombre_producto.replace(' ','-')+"'>";
 					cadena+=		"<div class='dashboard-item-box'>"
-					//cadena+=			"<img src='"+base_cdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />"
-					cadena+=			"<img src='"+base_cdn+"/img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />"
+					//cadena+=			"<img src='"+baseCdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />"
+					cadena+=			"<img src='"+baseCdn+"img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />"
 					cadena+=			"<div class='dashboard-item-network "+item.marca.toLowerCase()+"'>"+item.marca+"</div>"
 					cadena+=			"<div class='dashboard-item-info'>"
 					cadena+=				"<p class='dashboard-item-cardholder'>"+item.NombreCliente+"</p>"

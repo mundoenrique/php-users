@@ -602,7 +602,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 
 						cadena = "<li class='dashboard-item "+item.nomEmp+" muestraDestino' card='"+item.noTarjeta+"' nombre='"+item.NombreCliente+"' marca='"+item.marca+"' mascara='"+item.noTarjetaConMascara+"' empresa='"+item.nomEmp+"' producto='"+item.nombre_producto+"' id-afil='"+item.id_afiliacion+"'>";
 						cadena += "<a rel='section' class='escogerDestino'>";
-						cadena += "<img src='"+base_cdn+"/img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />";
+						cadena += "<img src='"+baseCdn+"img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />";
 						cadena +=  "<div class='dashboard-item-network "+item.marca.toLowerCase()+"'>"+item.marca+"</div>";
 						cadena += "<div class='dashboard-item-info'>";
 						cadena += "<p class='dashboard-item-cardholder'>"+item.NombreCliente+"</p>";
