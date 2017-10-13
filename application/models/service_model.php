@@ -245,6 +245,13 @@ class Service_model extends CI_Model {
                         'msg' => 'Los campos introducidos son inválidos, verifique intente nuevamente.'
                     ];
                     break;
+                case -345:
+                    $response = [
+                        'code' => 1,
+                        'title' => 'Cambio de PIN',
+                        'msg' => 'Ha superado la cantidad de intentos fallidos por el dia de hoy. Por favor intente mañana.'
+                    ];
+                    break;
                 case -286:
                         if($desdata->rc == -286) {
                             $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
@@ -443,13 +450,13 @@ class Service_model extends CI_Model {
         ));
 
         log_message("info", "REQUEST Recuperación de clave=====>>>>> ".$data);
-        
+
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode(utf8_encode($response));
         $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-        
+
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
         // sleep(2);

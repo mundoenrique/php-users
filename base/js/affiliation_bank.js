@@ -1,6 +1,5 @@
-var path, base_cdn;
+var path, expDate;
 path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
@@ -23,11 +22,11 @@ $(function(){
 	// CARGA MODAL CTA ORIGEN
 	$(".dialog").click(function(){
 		$("#content-product").dialog({
-			                             title:"Selección de Cuentas Origen",
-			                             modal:"true",
-			                             width:"940px",
-			                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		                             });
+			title:"Selección de Cuentas Origen",
+			modal:"true",
+			width:"940px",
+			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		});
 		$("#cerrar").click(function(){
 			$("#content-product").dialog("close");
 		});
@@ -36,14 +35,14 @@ $(function(){
 		var $container = $('#dashboard-donor');
 
 		$container.isotope({
-			                   itemSelector : '.dashboard-item',
-			                   animationEngine :'jQuery',
-			                   animationOptions: {
-				                   duration: 800,
-				                   easing: 'easeOutBack',
-				                   queue: true
-			                   }
-		                   });
+			itemSelector : '.dashboard-item',
+			animationEngine :'jQuery',
+			animationOptions: {
+				duration: 800,
+				easing: 'easeOutBack',
+				queue: true
+			}
+		});
 
 		var $optionSets = $('#filters-stack .option-set'),
 			$optionLinks = $optionSets.find('a');
@@ -122,6 +121,8 @@ $(function(){
 		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
 
 		$(".product-button").removeClass("disabled-button");              // HABILITAR EDICION
+		$("#year-exp").attr("disabled",false);              // HABILITAR EDICION
+		$("#month-exp").attr("disabled",false);
 		$("#card-number").attr("disabled",false);
 		$("#bank-account-holder").attr("disabled",false);
 		$("#bank-account-holder-id").attr("disabled",false);
@@ -147,11 +148,11 @@ $(function(){
 			$("#tdestino").append($("#removerDestino").html());
 			$("#botonContinuar").attr("disabled",true);
 			$("#content-product").dialog({
-				                             title:"Selección de Cuentas Origen",
-				                             modal:"true",
-				                             width:"940px",
-				                             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                             });
+				title:"Selección de Cuentas Origen",
+				modal:"true",
+				width:"940px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 		});
 
 		$("#afiliarBank").removeClass('disabled-button');
@@ -192,6 +193,7 @@ $(function(){
 		//marca=$("#donor").find("#marca").html();
 		marca=$("#donor").find("#donor-cardnumber-origen").attr("producto");
 		prefix=$("#donor").find("#donor-cardnumber-origen").attr("prefix");
+		expDate = $('#month-exp').val() + $('#year-exp').val();
 
 		datos_afiliacion=		 '<tr>';
 		datos_afiliacion+=        '<td class="data-label"><label>Cuenta Origen</label></td>';
@@ -208,11 +210,11 @@ $(function(){
 		if (cod_ban!=codBanco){
 			banc=false;
 			$("#dialog-banco").dialog({
-				                          title:"Cuenta inválida",
-				                          modal:"true",
-				                          width:"440px",
-				                          open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			                          });
+				title:"Cuenta inválida",
+				modal:"true",
+				width:"440px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 
 			$("#banco_inv").click(function(){
 				$("#dialog-banco").dialog("close");
@@ -254,7 +256,6 @@ $(function(){
 			banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("codBanco");
 			nombre_banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("banco");
 			marca=$("#cargarConfirmacion").find("#nombreOrigenTransfer").attr("marca");
-			expDate=$("#cargarConfirmacion").find("#ctaAfiliar").attr("expDate");
 
 			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
 				if(data.rc == -61){
@@ -282,15 +283,14 @@ $(function(){
 					}else{
 						$("#content").append($("#content-finalizar2").html());
 						$("#cargarFinalizacion3").append(datos_finalizacion);
-						// console.log("CONTENIDO2 "+data.rc + beneficiario);
 					}
 				} else if(data.rc==-195){
 					$("#dialog-error-afil2").dialog({
-						                                title:"Error Afiliación",
-						                                modal:"true",
-						                                width:"440px",
-						                                open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					                                });
+						title:"Error Afiliación",
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
 
 					$("#invalido3").click(function(){
 						$("#dialog-error-afil2").dialog("close");
@@ -299,11 +299,11 @@ $(function(){
 				}
 				else if(data.rc==-210){
 					$("#dialog-error-afil").dialog({
-						                               title:"Error Afiliación",
-						                               modal:"true",
-						                               width:"440px",
-						                               open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					                               });
+						title:"Error Afiliación",
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
 
 					$("#invalido2").click(function(){
 						$("#dialog-error-afil").dialog("close");
@@ -311,8 +311,8 @@ $(function(){
 					});
 
 				} else {
-					var msgAfiliation = '',
-						men = '(15)';
+					var msgAfiliation = '';
+
 
 					switch (data.rc) {
 						case -340:
@@ -325,9 +325,10 @@ $(function(){
 							msgAfiliation = 'Número de cuenta invalido';
 							break;
 						case -343:
-							msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(1,2) + ')';
+							var men = transferencia.msg;
+							msgAfiliation = 'Su tarjeta se encuentra bloqueada, código de bloqueo: (' + men.substr(34,35) + ')';
 						case -344:
-							msgAfiliation = 'la fecha de expiracion indicada es incorrecta';
+							msgAfiliation = 'la fecha de vencimiento indicada es incorrecta';
 							break;
 						default:
 
@@ -389,9 +390,9 @@ $(function(){
 	// FUNCION VALIDAR CAMPOS
 	function validar_campos(){
 		jQuery.validator.setDefaults({
-			                             debug: true,
-			                             success: "valid"
-		                             });
+			debug: true,
+			success: "valid"
+		});
 
 		jQuery.validator.addMethod("numOnly", function(value, element) {
 			var regEx = /^[a-zA-Z0-9]+$/,
@@ -413,43 +414,43 @@ $(function(){
 
 		$("#validate_afiliacion").validate({
 
-			                                   errorElement: "label",
-			                                   ignore: "",
-			                                   errorContainer: "#msg",
-			                                   errorClass: "field-error",
-			                                   validClass: "field-success",
-			                                   errorLabelContainer: "#msg",
-			                                   rules: {
+			errorElement: "label",
+			ignore: "",
+			errorContainer: "#msg",
+			errorClass: "field-error",
+			validClass: "field-success",
+			errorLabelContainer: "#msg",
+			rules: {
 
-				                                   "bank-name": "required",
-				                                   "card-number": {"required":true,"number":true, "minlength":20, "maxlength": 20},    //{"required":true,"number":true}
-				                                   "doc-name": {"required":true},
-				                                   "bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
-				                                   "bank-account-holder": {"required":true, "pattern":letter},
-				                                   "bank-account-holder-email": {"required":true, "email": true},
-												   "MonthExp": {"required": true},
-												   "yearExp": {"required": true}
-			                                   },
-			                                   messages: {
+				"bank-name": "required",
+				"card-number": {"required":true,"number":true, "minlength":20, "maxlength": 20},    //{"required":true,"number":true}
+				"doc-name": {"required":true},
+				"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
+				"bank-account-holder": {"required":true, "pattern":letter},
+				"bank-account-holder-email": {"required":true, "email": true},
+				"month-exp": {"required": true},
+				"year-exp": {"required": true}
+			},
+			messages: {
 
-				                                   "bank-name": "Debe seleccionar el banco",
-				                                   "card-number": "El número de cuenta no puede estar vacío y debe contener 20 dígitos",
-				                                   "doc-name": "El Tipo de Documento no puede estar vacío.",
-				                                   "bank-account-holder-id": {
-					                                   required: "El documento de identidad no puede estar vacío",
-					                                   number: "El documento de identidad debe ser numérico y no debe tener caracteres especiales",
-					                                   minlength: "El documento de identidad debe tener un mínimo de 5 caracteres",
-					                                   numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
-				                                   },
-				                                   "bank-account-holder": {
-					                                   required: "El beneficiario no puede estar vacío",
-					                                   pattern: "El beneficiario no debe tener caracteres especiales"
-				                                   },
-				                                   "bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
-												   "MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-												   "yearExp": "Seleccione el año de vencimiento de su tarjeta"
-			                                   }
-		                                   }); // VALIDATE
+				"bank-name": "Debe seleccionar el banco",
+				"card-number": "El número de cuenta no puede estar vacío y debe contener 20 dígitos",
+				"doc-name": "El Tipo de Documento no puede estar vacío.",
+				"bank-account-holder-id": {
+					required: "El documento de identidad no puede estar vacío",
+					number: "El documento de identidad debe ser numérico y no debe tener caracteres especiales",
+					minlength: "El documento de identidad debe tener un mínimo de 5 caracteres",
+					numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
+				},
+				"bank-account-holder": {
+					required: "El beneficiario no puede estar vacío",
+					pattern: "El beneficiario no debe tener caracteres especiales"
+				},
+				"bank-account-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+				"month-exp": "Seleccione el mes de vencimiento de su tarjeta",
+				"year-exp": "Seleccione el año de vencimiento de su tarjeta"
+			}
+		}); // VALIDATE
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -458,10 +459,10 @@ $(function(){
 	$(".label-inline").on("click", "a", function() {
 
 		$("#dialog-tc").dialog({
-			                       modal:"true",
-			                       width:"940px",
-			                       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		                       });
+			modal:"true",
+			width:"940px",
+			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+		});
 
 		$("#ok").click(function(){
 			$("#dialog-tc").dialog("close");

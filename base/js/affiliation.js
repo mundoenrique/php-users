@@ -1,8 +1,6 @@
-var path, base_cdn;
+var path, expDate;
 path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
-
 
 $(function() {
 	// MENU WIDGET TRANSFERENCIA
@@ -120,8 +118,8 @@ $(function() {
 		$("#donor").append(cadena);          // MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL
 
 		$(".product-button").removeClass("disabled-button");
-		$("#yearExp").attr("disabled",false);              // HABILITAR EDICION
-		$("#MonthExp").attr("disabled",false);
+		$("#month-exp").attr("disabled",false);              // HABILITAR EDICION
+		$("#year-exp").attr("disabled",false);
 		$("#card-number").attr("disabled",false);
 		$("#card-holder").attr("disabled",false);
 		$("#bank-account-holder-id").attr("disabled",false);
@@ -174,7 +172,7 @@ $(function() {
 					nombreCtaOrigen=$("#donor").find("#nombreCtaOrigen").html();
 					marca=$("#donor").find("#donor-cardnumber-origen").attr("producto");
 					email=$("#content-holder").find("#card-holder-email").val();
-					expDate = $("#MonthExp").val() + $("#yearExp").val();
+					expDate = $("#month-exp").val() + $("#year-exp").val();
 					var today = new Date();
 					hora= (today.getHours())+':'+today.getMinutes()+':'+today.getSeconds();
 					var dd = today.getDate();
@@ -231,7 +229,7 @@ $(function() {
 									width:"440px",
 									open: function(event, ui) {
 										$(".ui-dialog-titlebar-close", ui.dialog).hide();
-										msg = data.rc === -178 ? 'No se puede realizar el registro. <strong>Cuenta ya afiliada.</strong>' : 'La fecha de expiracion indicada es incorrecta';
+										msg = data.rc === -178 ? 'No se puede realizar el registro. <strong>Cuenta ya afiliada.</strong>' : 'La fecha de vencimiento indicada es incorrecta';
 										$('#msgNon').html(msg);
 									}
 								});
@@ -326,14 +324,14 @@ $(function() {
 			rules: {
 				"card-number":{"required":true,"number":true,"minlength":16},
 				"card-holder-email": {"required":true, "email": true},
-				"MonthExp": {"required": true},
-				"yearExp": {"required": true}
+				"month-exp": {"required": true},
+				"year-exp": {"required": true}
 			},
 			messages: {
 				"card-number": "El número de cuenta no puede estar vacío y debe contener 16 números",
 				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
-				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
+				"month-exp": "Seleccione el mes de vencimiento de su tarjeta",
+				"year-exp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

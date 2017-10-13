@@ -50,6 +50,7 @@ if ( ! function_exists('insert_js_cdn'))
             $version = '?v=' . date('Ymd-B', filemtime($filepath));
 
         $js='<script src="' . $fileurl . $version . '" type="text/javascript"></script>';
+		echo "\n";
         return $js;
     }
 }
@@ -125,8 +126,8 @@ if ( ! function_exists('insert_js_diesession'))
 	 * @param  string $filename
 	 * @return [type]
 	 */
-	
-	function insert_js_diesession()  // Function that call Die Session Function 
+
+	function insert_js_diesession()  // Function that call Die Session Function
 	{
 		$CI =& get_instance();
 		$url_cdn = $CI->config->item('base_url_cdn');

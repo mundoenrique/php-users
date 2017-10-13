@@ -1,6 +1,8 @@
-var path, base_cdn;
+var path, baseCdn, expDate;
 path =window.location.href.split( '/' );
-base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+baseCdn = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 var pais;
 
@@ -136,9 +138,6 @@ $(function(){
 		var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("marcaCtaOrigen");
 		var nombreOrigen=$("#donor-cardnumber-origen").attr("nombreOrigen");
 		var prefijo = $(this).attr("prefix")
-		// d = new Date();
-		// var mes = 01;
-		// var anio = d.getFullYear();
 		mes = $("#filter-month").val();
 		anio = $("#filter-year").val();
 
@@ -181,8 +180,8 @@ $(function(){
 
 					cadena=  "<li class='dashboard-item "+item.nomEmp+" muestraDestino' card='"+item.noTarjeta+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.NombreCliente+"' emailCliente='"+item.emailCliente+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noTarjetaConMascara+"' empresa='"+item.nomEmp+"' producto='"+item.nombre_producto.replace(' ','-')+"'>";
 					cadena+=		"<div class='dashboard-item-box'>"
-					//cadena+=			"<img src='"+base_cdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />"
-					cadena+=			"<img src='"+base_cdn+"/img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />"
+					//cadena+=			"<img src='"+baseCdn+"/img/products/"+item.imagen+".png' width='200' height='130' alt='' />"
+					cadena+=			"<img src='"+baseCdn+"img/products/"+pais+"/"+imagen+".png' width='200' height='130' alt='' />"
 					cadena+=			"<div class='dashboard-item-network "+item.marca.toLowerCase()+"'>"+item.marca+"</div>"
 					cadena+=			"<div class='dashboard-item-info'>"
 					cadena+=				"<p class='dashboard-item-cardholder'>"+item.NombreCliente+"</p>"
@@ -240,8 +239,8 @@ $(function(){
 					ctaDestino+= "<form id='datos'>"
 					ctaDestino+= "<ul class='field-group'>"
 					ctaDestino+= 	"<li class='field-group-item'>"
-					ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
-					ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+					ctaDestino+= 		"<label for='dayExp'>Fecha de vcto. cta. origen</label>"
+					ctaDestino+= 		"<select id='month-exp' name='month-exp' style='margin-right: 5px;'>"
 					ctaDestino+=            "<option value=''>Mes</option>"
 					ctaDestino+=			"<option value='01'>01</option>"
 					ctaDestino+=			"<option value='02'>02</option>"
@@ -256,7 +255,7 @@ $(function(){
 					ctaDestino+=			"<option value='11'>11</option>"
 					ctaDestino+=			"<option value='12'>12</option>"
 					ctaDestino+= 		"</select>"
-					ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+					ctaDestino+= 		"<select id='year-exp' name='year-exp'>"
 					ctaDestino+=			"<option value=''>Año</option>"
 					ctaDestino+= 		"</select>"
 					ctaDestino+= 	"</li>"
@@ -292,7 +291,7 @@ $(function(){
 					$.each(yearSelect,function(index,value){
 						var lastDigit = value.toString().substring(2,4);
 						var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
-						$("#yearExp").append(yearPrueba);
+						$("#year-exp").append(yearPrueba);
 					})
 
 					$("#cancelar1").click(function(){
@@ -319,7 +318,7 @@ $(function(){
 							var nombreDest=$("#card-holder").val();
 							var id_per=$("#bank-account-holder-id").val();
 							var emailClienteD=$("#card-holder-email").val();
-							var expDate = $('#MonthExp').val() + $('#yearExp').val();
+							expDate = $('#month-exp').val() + $('#year-exp').val();
 
 
 							$('#selCtaOrigen').attr("style","display:none");
@@ -593,8 +592,8 @@ $(function(){
 				                     "card-holder": {"required":true},
 				                     "bank-account-holder-id": {"required":true,"number": true},
 				                     "card-holder-email": {"required":true, "email": true},
-				                     "MonthExp": {"required": true},
-				                     "yearExp": {"required": true}
+				                     "month-exp": {"required": true},
+				                     "year-exp": {"required": true}
 			                     },
 
 			                     messages: {
@@ -602,8 +601,8 @@ $(function(){
 				                     "card-holder": "El beneficiario no puede estar vacío.",
 				                     "bank-account-holder-id": "El documento de identidad no puede estar vacío y debe contener solo números.",
 				                     "card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com).",
-				                     "MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-				                     "yearExp": "Seleccione el año de vencimiento de su tarjeta"
+				                     "month-exp": "Seleccione el mes de vencimiento de su tarjeta",
+				                     "year-exp": "Seleccione el año de vencimiento de su tarjeta"
 			                     }
 		                     }); // VALIDATE
 	}

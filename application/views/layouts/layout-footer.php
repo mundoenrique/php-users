@@ -39,7 +39,7 @@ if($skin == 'latodo'){
         echo "\n";
     }
     if ($this->session->userdata('nombreCompleto')) { // Die Session JS call
-        echo insert_js_diesession(); }
+        echo insert_js_cdn('diesession.js'); }
     ?>
 
 <?php };?>

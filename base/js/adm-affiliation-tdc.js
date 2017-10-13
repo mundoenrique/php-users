@@ -1,6 +1,8 @@
-var path, base_cdn;
+var path, baseCdn, expDate;
 path =window.location.href.split( '/' );
-base_cdn = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+baseCdn = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 
@@ -176,7 +178,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 						cadena=  "<li class='dashboard-item "+item.beneficiario+" muestraDestino' card='"+item.noCuenta+"' banco='"+item.banco+"' codBanco='"+item.codBanco+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.beneficiario+"' emailCliente='"+item.email+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noCuentaConMascara+"'>";
 						cadena+=		"<div class='dashboard-item-box'>"
-						cadena+=			"<img src='"+base_cdn+"/img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
+						cadena+=			"<img src='"+baseCdn+"img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
 						cadena+=			"<div class='dashboard-item-info'>"
 						cadena+=				"<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>"
 						cadena+=				"<ul class='dashboard-item-actions'>"
@@ -245,8 +247,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+= "<form id='datos'>";
 						ctaDestino+= "<ul class='field-group'>";
 						ctaDestino+= 	"<li class='field-group-item'>"
-						ctaDestino+= 		"<label for='dayExp'>Fecha de Vencimiento</label>"
-						ctaDestino+= 		"<select id='MonthExp' name='MonthExp'>"
+						ctaDestino+= 		"<label for='dayExp'>Fecha de vcto. cta. origen</label>"
+						ctaDestino+= 		"<select id='month-exp' name='month-exp' style='margin-right: 5px;'>"
 						ctaDestino+=            "<option value=''>Mes</option>"
 						ctaDestino+=			"<option value='01'>01</option>"
 						ctaDestino+=			"<option value='02'>02</option>"
@@ -261,7 +263,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						ctaDestino+=			"<option value='11'>11</option>"
 						ctaDestino+=			"<option value='12'>12</option>"
 						ctaDestino+= 		"</select>"
-						ctaDestino+= 		"<select id='yearExp' name='yearExp'>"
+						ctaDestino+= 		"<select id='year-exp' name='year-exp'>"
 						ctaDestino+=			"<option value=''>Año</option>"
 						ctaDestino+= 		"</select>"
 						ctaDestino+= 	"</li>"
@@ -312,7 +314,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						$.each(yearSelect,function(index,value){
 							var lastDigit = value.toString().substring(2,4);
 							var yearPrueba =  "<option value='"+lastDigit+"'>"+value+"</option>";
-							$("#yearExp").append(yearPrueba);
+							$("#year-exp").append(yearPrueba);
 						})
 
 								//validar_campos();
@@ -363,9 +365,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				        	var emailClienteD=$("#card-holder-email").val();
 				        	var bancoD=$("#bank-name").val();
 				        	var bancoValor=$("#msg").attr("banco");
-				        	$('#selCtaOrigen').attr("style","display:none");
+						    mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
+						    expDate = $('#month-exp').val() + $('#year-exp').val();
+						    $('#selCtaOrigen').attr("style","display:none");
 				        	$("#content-holder").children().remove();
-									mascara=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara de la cuenta origen
 
 				        	confirmacion= "<div id='progress'>";
 							confirmacion+= "<ul class='steps'>";
@@ -383,7 +386,8 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 							confirmacion+= 				"<td class='data-reference'>"+nombreOrigen+"<br /><span class='highlight'>"+mascara+"</span><br /><span class='lighten'>"+producto+"</span></td>";
 							confirmacion+= 			"</tr>";
 							confirmacion+= 			"<tr>";
-							confirmacion+= 				"<td class='data-label'><label>Cuenta Destino a Afiliar</label;></td>";
+							confirmacion+= 				"<td class='data-label'><label>Cuenta Destino a Afiliar</label></td>";
+							confirmacion+= 				"<td class='data-label'><label>Cuenta Destino a Afiliar</label></td>";
 							confirmacion+= 				"<td class='data-reference'>"+nombreDest+"<span class='lighten'>( "+emailClienteD+" )</span><br /> "+id_per+" <br /><span class='highlight'>"+cDestino+"</span><br /><span class='lighten'>"+banco+"</span></td>";
 							confirmacion+= 			"</tr>";
 							confirmacion+= 		"</tbody>";
@@ -603,8 +607,8 @@ function validar_campos(){
 				"doc-name": {"required":true},
 				"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
 				"card-holder-email": {"required":true, "email": true},
-				"MonthExp": {"required": true},
-				"yearExp": {"required": true}
+				"month-exp": {"required": true},
+				"year-exp": {"required": true}
 			},
 
 			messages: {
@@ -621,8 +625,8 @@ function validar_campos(){
 					numOnly: "El documento de identidad debe ser numérico y no debe tener caracteres especiales"
 				},
 				"card-holder-email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com).",
-				"MonthExp": "Seleccione el mes de vencimiento de su tarjeta",
-				"yearExp": "Seleccione el año de vencimiento de su tarjeta"
+				"month-exp": "Seleccione el mes de vencimiento de su tarjeta",
+				"year-exp": "Seleccione el año de vencimiento de su tarjeta"
 			}
 		}); // VALIDATE
 	}

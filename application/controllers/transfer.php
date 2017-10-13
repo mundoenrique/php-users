@@ -42,7 +42,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfer.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfers/transfersHelpers.js', 'transfers/transfer.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -85,7 +85,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfer-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfers/transfersHelpers.js', 'transfers/transfer-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO BANCO
@@ -110,6 +110,7 @@ class Transfer extends CI_Controller {
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
 		$this->lang->load('format');
+		$this->lang->load('transfer');
 		$this->load->model('transfer_model', 'transfer');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -124,7 +125,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'transfer-tdc.js', 'jquery-md5.js', 'jquery.ui.sliderbutton.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'transfers/transfersHelpers.js', 'transfers/transfer-tdc.js', 'jquery-md5.js', 'jquery.ui.sliderbutton.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO TDC
@@ -339,8 +340,13 @@ class Transfer extends CI_Controller {
 		$descripcion = $this->input->post('descripcion');
 		$tipoOpe = $this->input->post('tipoOpe');
 		$id_afil_terceros = $this->input->post('id_afil_terceros');
+		$expDate = $this->input->post('expDate');
 
-		$this->output->set_content_type('application/json')->set_output($this->procesar->procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros));
+		$this->output->set_content_type('application/json')->set_output(
+			$this->procesar->procesarTransferencia_load(
+				$cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expDate
+			)
+		);
 
 	}
 

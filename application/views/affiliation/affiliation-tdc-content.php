@@ -42,8 +42,8 @@
                         </div>
                         <ul class="field-group">
                             <li class="field-group-item">
-                                <label for="dayExp">Fecha de vencimiento</label>
-                                <select id="MonthExp" name="MonthExp" disabled>
+                                <label for="dayExp"><?php echo lang('DATE_EXPIRATION'); ?></label>
+                                <select id="month-exp" name="month-exp" disabled>
                                     <option value="">Mes</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
@@ -58,7 +58,7 @@
                                     <option value="11">11</option>
                                     <option value="12">12</option>
                                 </select>
-                                <select id="yearExp" name="yearExp" disabled>
+                                <select id="year-exp" name="year-exp" disabled>
                                     <option value="">Año</option>
                                     <?php
                                         $actual = date('Y');
@@ -392,7 +392,8 @@ foreach ($datos->cuentaOrigen as $value) {
             </div>
             <h2>Finalización</h2>
             <div class="alert-error" id="message">
-                <span aria-hidden="true" class="icon-cancel-sign"></span> Afiliación NO realizada
+	            <span aria-hidden="true" class="icon-cancel-sign"></span>
+	            Afiliación NO realizada <span id="nonAfiliation"></span>
             </div>
             <p>Los datos registrados durante la operación fueron los siguientes:</p>
             <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
