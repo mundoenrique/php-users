@@ -1,6 +1,13 @@
 .idea
-
-Thumbs.db
 .DS_Store
-sftp-config.json
+Thumbs.db
 *.log
+
+*/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+/vendor/
