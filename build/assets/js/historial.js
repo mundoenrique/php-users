@@ -1,8 +1,7 @@
-var path, base_cdn;
-path =window.location.href.split( '/' ); 
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
-
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 	$(function(){
 	  // MENU WIDGET TRANSFERENCIAS
@@ -18,22 +17,22 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		},function(){
 			$('.submenu-user').attr("style","display:none")
 	});
-	
-	// CARGA MODAL CTA ORIGEN 
-	$(".dialog").click(function(){                    
+
+	// CARGA MODAL CTA ORIGEN
+	$(".dialog").click(function(){
 		$("#content-product").dialog({
 			title:"Selección de Cuentas Origen",
 			modal:"true",
 			width:"940px",
 			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	}); 
+	});
 
-	$("#cerrar").click(function(){ 
+	$("#cerrar").click(function(){
       			$("#content-product").dialog("close");
     });
 
 		// INICIA CONFIGURACION DEL FILTRO TEBCA - SERVITEBCA
-		var $container = $('#dashboard-donor');        
+		var $container = $('#dashboard-donor');
 
 		$container.isotope({
 			itemSelector : '.dashboard-item',
@@ -44,7 +43,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				queue: true
 			}
 		});
-		
+
 		var $optionSets = $('#filters-stack .option-set'),
 		$optionLinks = $optionSets.find('a');
 
@@ -72,13 +71,13 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		      // otherwise, apply new options
 		      $container.isotope( options );
 		  }
-		  
+
 		  return false;
 		});          // FINALIZA CONFIGURACION DE FILTROS
-	});		 // FIN DE CARGA MODAL CTAS ORIGEN									
-	
+	});		 // FIN DE CARGA MODAL CTAS ORIGEN
+
 	// FUNCIONALIDAD DE FILTROS CTAS ORIGEN
-	$('li.stack-item a').click(function(){                              
+	$('li.stack-item a').click(function(){
 		$('.stack').find('.current-stack-item').removeClass('current-stack-item');
 		$(this).parents('li').addClass('current-stack-item');
 	});
@@ -87,7 +86,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		// FUNCION PARA OBTENER DATOS DE TARJETA CUENTA ORIGEN
-		$(".dashboard-item").click(function(){           
+		$(".dashboard-item").click(function(){
 			var imagen, tarjeta, marca, mascara, producto, empresa, cadena, nombre;
 
 			imagen=$(this).find('img').attr('src');
@@ -152,7 +151,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		    		width:"940px",
 		    		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 		    	});
-			}); 
+			});
 
 		});//FIN
 
@@ -160,19 +159,19 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 	// BOTON BUSCAR
 	$('#content').on('click',"#buscar",function(){
-		
+
 		var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
 		mes = $("#filter-month").val();
 		anio = $("#filter-year").val();
 		$('#list-detail').children().remove();
-		buscar_historial(ctaOrigen,mes,anio);	
+		buscar_historial(ctaOrigen,mes,anio);
 	});	//BOTON BUSCAR
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA TRAER LOS REGISTROS DE HISTORIAL
 	function buscar_historial(ctaOrigen,mes,anio){
-		
+
 		var status, tipo = "Transferencia realizada", clase, clase1, cargando;
 		cargando = '<div id ="loading" class="data-indicator" style="text-align: center;">';
         cargando +=     '<h3 style="border-bottom: 0px;">Cargando</h3>';
@@ -267,11 +266,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 			}
 		});
 
-	}	
+	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       modal:"true",
@@ -279,11 +278,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
 
-});  //FIN DE LA FUNCION GENERAL 
+});  //FIN DE LA FUNCION GENERAL

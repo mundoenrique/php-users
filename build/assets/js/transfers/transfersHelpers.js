@@ -1,4 +1,4 @@
-var path, baseCdn, base_url, ctasDestino, moneda, pais, editCard, numberBeneficiary = [3 , 2, 1],
+var path, base_cdn, base_url, ctasDestino, moneda, pais, editCard, numberBeneficiary = [3 , 2, 1],
 	totalTrans, saldoDisp, transferNumber, montoMinOperaciones, montoMaxOperaciones, montoAcumMensual,
 	montoMaxMensual, montoAcumSemanal, montoMaxSemanal, montoAcumDiario, montoMaxDiario,
 	acumCantidadOperacionesMensual, cantidadOperacionesMensual, acumCantidadOperacionesSemanales,
@@ -6,11 +6,10 @@ var path, baseCdn, base_url, ctasDestino, moneda, pais, editCard, numberBenefici
 	montoComision, nameSource, maskSource, sourceNumber, brand, destination = {}, dobleAutenticacion,
 	operationType, expDate;
 
-path = window.location.href.split( '/' );
-baseCdn = decodeURIComponent(
-	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-);
-base_url = path[0]+ "//" + path[2] + "/" + path[3];
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 $(function() {
 	ctasDestino = $('#tdestino').html();

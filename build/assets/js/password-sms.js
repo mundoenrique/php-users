@@ -1,7 +1,7 @@
-var path, base_cdn;
-path =window.location.href.split( '/' ); 
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 	$(function(){
 		var max = 4;
@@ -43,13 +43,13 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
             confirmacion1+=  "</div>";
 
 
-      $("#content-pass").append(cadena).html(); 
+      $("#content-pass").append(cadena).html();
 
       if(estatus==1){
-        $("#content-pass").append(confirmacion).html(); 
+        $("#content-pass").append(confirmacion).html();
       }
       else if(estatus==0){
-        $("#content-pass").append(confirmacion1).html(); 
+        $("#content-pass").append(confirmacion1).html();
       }
       // $('#userpwd').keyup(function() {
       //     var pswd = $(this).val();
@@ -61,22 +61,22 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
       //           cons=false;
       //       }
       // });
-$("#volver").click(function(){ 
-   $(location).attr('href', base_url+'/perfil'); 
+$("#volver").click(function(){
+   $(location).attr('href', base_url+'/perfil');
 });
 
 
-$("#actualizar").click(function(){ 
+$("#actualizar").click(function(){
 
     validar_campos();
-    
+
     $("#form-validar").submit();
     setTimeout(function(){$("#msg").fadeOut();},5000);
 
     var form=$("#form-validar");
 
 
-    if(form.valid() == true) { 
+    if(form.valid() == true) {
 
       $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 
@@ -91,120 +91,120 @@ $("#actualizar").click(function(){
 
       //console.log("clave "+claveSMS);
 
-       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){  
+       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
 
         if(data.rc==0) {
 
           $("#content-pass").children().remove();
           $("#content-pass").append($("#confirmaActualizar").removeAttr('style')).html();
-          
+
           $("#confirmar").click(function(){
 
             $(location).attr('href', base_url+'/dashboard');
-            
+
           });
         }
         if(data.rc==-217){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito").removeAttr('style')).html();
 
             $("#regresar").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
         }
         if(data.rc==-215){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito2").removeAttr('style')).html();
 
             $("#regresar2").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
           }
 
 
-    }); //POST         
+    }); //POST
 
-    } 
+    }
 });
 
-$("#eliminar").click(function(){ 
+$("#eliminar").click(function(){
       var claveSMS = "";
-      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){  
+      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
 
         if(data.rc==0) {
 
           $("#content-pass").children().remove();
           $("#content-pass").append($("#confirmaEliminar").removeAttr('style')).html();
-          
+
           $("#confirmar-eliminar").click(function(){
 
             $(location).attr('href', base_url+'/dashboard');
-            
+
           });
         }
         if(data.rc == -61){
               $(location).attr('href', base_url+'/users/error_gral');
           }
         if(data.rc==-214){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito3").removeAttr('style')).html();
 
             $("#regresar3").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
         }
          if(data.rc==-218){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito4").removeAttr('style')).html();
 
             $("#regresar4").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
         }
         if(data.rc==-215){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito2").removeAttr('style')).html();
 
             $("#regresar2").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
           }
 
 
-    }); //POST 
+    }); //POST
 
 
 });
-$("#afiliar").click(function(){ 
+$("#afiliar").click(function(){
       validar_campos();
-    
+
     $("#form-validar").submit();
     setTimeout(function(){$("#msg").fadeOut();},5000);
 
     var form=$("#form-validar");
 
 
-    if(form.valid() == true) { 
+    if(form.valid() == true) {
 
       $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 
@@ -217,75 +217,75 @@ $("#afiliar").click(function(){
         claveSMS = hex_md5(claveSMS);
       }
 
-       $.post(base_url +"/users/passwordSmsNew",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){  
+       $.post(base_url +"/users/passwordSmsNew",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
 
         if(data.rc==0) {
 
           $("#content-pass").children().remove();
           $("#content-pass").append($("#confirmaCrear").removeAttr('style')).html();
-          
+
           $("#continuar").click(function(){
 
             $(location).attr('href', base_url+'/dashboard');
-            
+
           });
         }
         if(data.rc == -61){
               $(location).attr('href', base_url+'/users/error_gral');
           }
         if(data.rc==-213){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito5").removeAttr('style')).html();
 
             $("#regresar5").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
         }
          if(data.rc==-216){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito6").removeAttr('style')).html();
 
             $("#regresar6").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
         }
         if(data.rc==-215){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito2").removeAttr('style')).html();
 
             $("#regresar2").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
           }
         if(data.rc==-20){
-            
+
             $("#content-pass").children().remove();
             $("#content-pass").append($("#sinExito7").removeAttr('style')).html();
 
             $("#regresar7").click(function(){
 
-              $(location).attr('href', base_url+'/perfil'); 
-              
+              $(location).attr('href', base_url+'/perfil');
+
             });
 
           }
 
 
-    }); //POST         
+    }); //POST
 
-    } 
+    }
 });
 
 
@@ -301,18 +301,18 @@ function validar_campos(){
 
       errorElement: "label",
       ignore: "",
-      errorContainer: "#msg", 
+      errorContainer: "#msg",
       errorClass: "field-error",
       validClass: "field-success",
       errorLabelContainer: "#msg",
-      rules: {  
+      rules: {
         "userpwd": {"required":true, "number": true},
         "confirm-userpwd":{"required":true,"number":true,"minlength":4, "maxlength": 4, "equalTo":"#userpwd"},
       },
 
       messages: {
         "userpwd": "El campo Clave SMS no puede estar vacío y debe contener 4 números",
-        "confirm-userpwd": "El campo Confirmación no puede estar vacío, debe contener 4 números y coincidir con el campo Clave SMS",    
+        "confirm-userpwd": "El campo Confirmación no puede estar vacío, debe contener 4 números y coincidir con el campo Clave SMS",
       }
     }); // VALIDATE
 
@@ -323,7 +323,7 @@ function validar_campos(){
 function getVarsUrl(){
     var url= location.search.replace("?", "");
     var arrUrl = url.split("&");
-    var urlObj={};   
+    var urlObj={};
     for(var i=0; i<arrUrl.length; i++){
         var x= arrUrl[i].split("=%20");
         urlObj[x[0]]=x[1]
@@ -340,7 +340,7 @@ function getVarsUrl(){
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       /**/
@@ -349,11 +349,11 @@ function getVarsUrl(){
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
 
-	});  //FIN DE LA FUNCION GENERAL 
+	});  //FIN DE LA FUNCION GENERAL

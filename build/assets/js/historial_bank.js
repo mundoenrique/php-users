@@ -1,8 +1,7 @@
-var path, base_cdn;
-path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
-
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 	$(function(){
 

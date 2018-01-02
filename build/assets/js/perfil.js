@@ -1,9 +1,9 @@
-var path, base_cdn;
+var path, base_cdn, base_url;
 var fecha=new Date();
 var controlValid = 0;
-path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 var aplicaperfil = $('#content').attr('aplicaperfil'),
 	afiliado = $('#content').attr('afiliado');
 
@@ -847,10 +847,10 @@ $(function(){
 					case -311:
 					case -21:
 						systemDialog('Activación Plata beneficios', 'El perfil se actualizó satisfactoriamente, pero no fue posible activar su tarjeta, comuníquese con el <strong>Centro de Contacto</strong>', 'dash');
-						break;						
+						break;
 					default:
 						$(location).attr('href', base_url+'/users/error_gral');
-				}				
+				}
 			});
 	}
 
@@ -1264,6 +1264,6 @@ function systemDialog(title, msg, action) {
 		$("#completar-afiliacion").dialog("close");
 		if(action == 'dash') {
 			$(location).attr('href', base_url+'/dashboard');
-		}		
+		}
 	});
 }

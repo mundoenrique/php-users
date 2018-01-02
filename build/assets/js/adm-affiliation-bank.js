@@ -1,10 +1,7 @@
-var path, baseCdn, expDate;
-path =window.location.href.split( '/' );
-baseCdn = decodeURIComponent(
-	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_baseCdn\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-);
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
-
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = path[0] + '//' + path[2] + '/assets';
 
 $(function(){
 

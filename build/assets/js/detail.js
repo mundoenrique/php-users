@@ -9,7 +9,7 @@ $(function(){
 
 //PERIOD SPAN TITLE
 $('#buscar').on('click',function(){
-  
+
   if ($('#filter-month').val() == "0") {
     $("#period").text("Reciente");
   }else if ($('#filter-month').val() == "1") {
@@ -43,16 +43,16 @@ $('#buscar').on('click',function(){
 
   // MENU WIDGET TRANSFERENCIA
   $('.transfers').hover(function(){
-    $('.submenu-transfer').attr('style', 'display: block')
+    $('.submenu-transfer').attr('style', 'display: block');
   }, function(){
-    $('.submenu-transfer').attr('style', 'display: none')
+    $('.submenu-transfer').attr('style', 'display: none');
   });
 
   // MENU WIDGET USUARIO
   $('.user').hover(function(){
-    $('.submenu-user').attr('style', 'display: block')
+    $('.submenu-user').attr('style', 'display: block');
   }, function(){
-    $('.submenu-user').attr('style', 'display: none')
+    $('.submenu-user').attr('style', 'display: none');
   });
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,8 +105,8 @@ $('#buscar').on('click',function(){
       else{
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
-      }    
-      document.getElementById("idOperation").value='5'; 
+      }
+      document.getElementById("idOperation").value='5';
       $("#form").submit();
     }
   });
@@ -123,7 +123,7 @@ $('#buscar').on('click',function(){
       $("#list-detail").append(cadena);
     }
     else{
-      $("#tarjeta").val($("#card").attr("card"));       
+      $("#tarjeta").val($("#card").attr("card"));
       if($("#filter-month").val()==0){
         $("#mes").val('');
         $("#anio").val('');
@@ -132,7 +132,7 @@ $('#buscar').on('click',function(){
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
       }
-      document.getElementById("idOperation").value="46";          
+      document.getElementById("idOperation").value="46";
      $("#form").submit();
     }
   });

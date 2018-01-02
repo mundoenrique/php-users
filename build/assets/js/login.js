@@ -1,7 +1,7 @@
-var path, base_cdn;
-path =window.location.href.split( '/' );
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 $(function() {
 
@@ -13,7 +13,6 @@ $(function() {
 		{
 			$('#username').removeAttr("class");
 			$('#userpwd').removeAttr("class");
-			// Reemplazo agregado por incidencia FP #37165
 			$('#username').val($('#username').val().replace(/[ ]/g, ''));
 			user = $('#username').val();
 			user = user.toUpperCase();
@@ -58,13 +57,13 @@ $(function() {
 			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass) } );
 
 			$consulta.done(function(data){
-				
+
 				if (data == 1) {
 					$("#dialog-login-ve").dialog({
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});					
+					});
 				} else if(data.rc==0) {
 
 					if(data.passwordTemp==1) {
@@ -127,7 +126,6 @@ $(function() {
 				else if((data.rc==-35)||(data.rc==-8)) {
 
 					$("#dialog-bloq").dialog({
-						//title:"Usuario Bloqueado",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -152,19 +150,6 @@ $(function() {
 						$("#dialog-error").dialog("close");
 						habilitar();
 					});
-
-					//habilitar();
-
-					//$(location).attr('href', base_url);
-
-		 			// $.balloon.defaults.classname = "field-error";
-		 			// $.balloon.defaults.css = null;
-		 			// $("#username").showBalloon({position: "left", contents: data.msg});
-	 				// setTimeout(function() {
-				    // $("#username").hideBalloon();
-				    // habilitar();
-				    // 	}, 3000);
-
 	}
 
 		 	});	//IF CONSULTA DONE

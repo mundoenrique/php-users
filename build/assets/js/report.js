@@ -2,11 +2,11 @@ var fecha = new Date();
 fecha = fecha.getFullYear();
 var i=0;
 var anio,fechaIni,fechaFin,tipoConsulta,producto,tipoConsulta,reporte;
-do{
+do {
 	anio= parseInt(fecha)-i;
     $(".sub-stack").append('<li class="sub-stack-item"><a href="#" rel="subsection" >'+anio.toString()+'</a></li>');
 	i=i+1;
-}while(i!=3);
+} while(i!=3);
 
 $(document).ready(function(){
 		$(".nodata-state").hide();
@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 $(function(){
 
-	
+
 
 	//Menu desplegable transferencia
 	$('.transfers').hover(function(){
@@ -143,13 +143,13 @@ $(function(){
 		fechaFin = "31/12/"+anio;
 		tipoConsulta = "0";
 		generar_info(tarjeta,tipoConsulta,producto,idexper, fechaIni,fechaFin,"anual");
-		
+
 		$("#filter-range-from").prop("disabled", false);
 		$("#filter-range-to").prop("disabled", false);
 
 		$(".nodata-state").show();
 
-		
+
 
 
 		$(".content-anio").show();
@@ -184,7 +184,7 @@ $(function(){
 				generar_info(tarjeta, tipoConsulta, producto, idexper, fechaIni, fechaFin, "mensual");
 				$(".content-mes").show();
 				$(".content-anio").hide();
-				
+
 			}
 		});
 
@@ -252,7 +252,7 @@ $(function(){
 			$("#chart").hide();
 			$("#results").show();
 			// $("#empty-state").hide();
-   
+
 	});
 
 
@@ -342,7 +342,7 @@ $(function(){
 							$("#dialog").css("display", "none");
 							$("#empty-state").hide();
 							$('[data-result="noresult"]').show();
-							
+
 
             	}else {
 							$("#report-detail").children().remove();
@@ -367,7 +367,7 @@ $(function(){
             }
         } else {
         		$("#download-boxes").show();
-            	
+
             	$(".nodata-state").hide();
             	$("#dialog").css("display", "none");
 				$("#chart").hide();

@@ -1,13 +1,14 @@
-var path = window.location.href.split( '/' ),
-    base_cdn,
-    base_url,
-    viewControl = '',
-    bloqAction,
-    moneda,
-    pais;
+var path,
+	base_cdn,
+	base_url,
+	viewControl = '',
+	bloqAction,
+	moneda,
+	pais;
 
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 $(function(){
 

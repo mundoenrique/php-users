@@ -1,7 +1,7 @@
-var path, base_cdn;
-path =window.location.href.split( '/' ); 
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 $(function(){
 
@@ -9,7 +9,7 @@ $(function(){
 			var old =$('#transpwd').val();
 			var newC =$('#new-transpwd').val();
 			var cNewC = $('confirm-new-transpwd').val();
-			
+
 		$('#new-transpwd').keyup(function() {
 		        // set password variable
 		        var pswd = $(this).val();
@@ -41,7 +41,7 @@ $(function(){
 		        }
 
 		        //validate number
-		      
+
 		      if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
 		            $('#number').removeClass('rule-invalid').addClass('rule-valid');
 		            car=true;
@@ -49,7 +49,7 @@ $(function(){
 		            $('#number').removeClass('rule-valid').addClass('rule-invalid');
 		            car=false;
 		        }
-		      
+
 		      	if (! pswd.match(/(.)\1{2,}/) ) {
 		            $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 		            cons=true;
@@ -57,7 +57,7 @@ $(function(){
 		            $('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
 		            cons=false;
 		        }
-		      
+
 		      	if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
 		            $('#especial').removeClass('rule-invalid').addClass('rule-valid');
 		            esp=true;
@@ -70,19 +70,19 @@ $(function(){
 		        }else{
 		        	$('#continuar').addClass('disabled-button');
 		        }
-			    
+
 		    }).focus(function() {
-		    	
+
 		        $("#new").showBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').show();
 
 		    }).blur(function() {
-		    	
+
 		        $("#new").hideBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').hide();
 		});
 
-		    $("#continuar").click(function(){ 
+		    $("#continuar").click(function(){
 				old =$('#transpwd').val();
 				newC =$('#new-transpwd').val();
 				cNewC = $('#confirm-new-transpwd').val();
@@ -92,7 +92,7 @@ $(function(){
 				// if((longitud==true)&& (mt==true) && (cap==true) && (car==true) &&  (cons==true) && (esp==true)){
 		  //       	$('#continuar').removeClass('disabled-button');
 		  //       }
-				if( old=="" || newC=="" || cNewC=="" ){			
+				if( old=="" || newC=="" || cNewC=="" ){
 					//$(this).find($('#vacio')).text('Todos los campos son obligatorios');
 					//$('#continuar').addClass('disabled-button');
 					//alert("Todos los campos son obligatorios");
@@ -102,10 +102,10 @@ $(function(){
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido").click(function(){
-						$("#dialog-clave-inv").dialog("close"); 
+						$("#dialog-clave-inv").dialog("close");
 					});
 				}
 				if(newC == old){
@@ -117,10 +117,10 @@ $(function(){
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido1").click(function(){
-						$("#dialog-clave-inv1").dialog("close"); 
+						$("#dialog-clave-inv1").dialog("close");
 					});
 				}
 				if(newC != cNewC){
@@ -132,60 +132,16 @@ $(function(){
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido2").click(function(){
-						$("#dialog-clave-inv2").dialog("close"); 
+						$("#dialog-clave-inv2").dialog("close");
 					});
 				}
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
-					// $.ajaxSetup({async: false});
-					// var ajax_data = {
-					//   "passwordOperacionesOld":old, 
-					//   "passwordOperaciones":newC
-					// };
-					 
-					// $.ajax({
-					//   url: base_url +"/users/passwordOperacionesActualizar",
-					//   data: ajax_data,
-					//   type: "post",
-					//   dataType: 'json',
-					//   success: function(data) {
-					//   	if(data.rc==0){
 
-				 //   			$("#content").children().remove();
-					// 		$("#content").append($("#confirmaActualizar").removeAttr('style')).html();
-
-				 // 			$("#confirmar").click(function(){
-
-				 // 				$(location).attr('href', base_url+'/perfil');
-				 				
-					// 		});
-
-				 //   		}
-				 //   			if(data.rc==-202){
-							
-					// 			$("#content").children().remove();
-					// 			$("#content").append($("#sinExito").removeAttr('style')).html();
-
-					//  			$("#regresar").click(function(){
-
-					//  				$(location).attr('href', base_url+'/users/actualizarPasswordOperaciones'); 
-					 				
-					// 			});
-
-					// 		}
-					// 	if(data.rc == -61){
-					// 		$(location).attr('href', base_url+'/users/error_gral');
-					// 	}
-
-					//   }
-					// });
-					
-					// $.ajaxSetup({async: true});
-
-					$.post(base_url +"/users/passwordOperacionesActualizar",{"passwordOperacionesOld":old, "passwordOperaciones":newC},function(data){  
+					$.post(base_url +"/users/passwordOperacionesActualizar",{"passwordOperacionesOld":old, "passwordOperaciones":newC},function(data){
 
 					if(data.rc==0) {
 
@@ -195,19 +151,19 @@ $(function(){
 			 			$("#confirmar").click(function(){
 
 			 				$(location).attr('href', base_url+'/perfil');
-			 				
+
 						});
 
 					}
 					if(data.rc==-202){
-						
+
 						$("#content").children().remove();
 						$("#content").append($("#sinExito").removeAttr('style')).html();
 
 			 			$("#regresar").click(function(){
 
-			 				$(location).attr('href', base_url+'/users/actualizarPasswordOperaciones'); 
-			 				
+			 				$(location).attr('href', base_url+'/users/actualizarPasswordOperaciones');
+
 						});
 
 					}
@@ -221,22 +177,22 @@ $(function(){
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido3").click(function(){
 						$("#transpwd").val("");
-						$("#dialog-clave-inv3").dialog("close"); 
+						$("#dialog-clave-inv3").dialog("close");
 
 					});
 
 					};
 
 				});	//POST
-				}	
+				}
 			});
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       modal:"true",
@@ -244,10 +200,10 @@ $(function(){
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
-});  //FIN DE LA FUNCION GENERAL 
+});  //FIN DE LA FUNCION GENERAL

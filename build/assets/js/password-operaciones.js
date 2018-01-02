@@ -1,14 +1,14 @@
-var path, base_cdn;
-path =window.location.href.split( '/' ); 
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+var path, base_cdn, base_url;
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 	$(function(){
 		var max = 15;
 			var old =$('#new-transpwd').val();
 			var newC =$('#confirm-new-transpwd').val();
 			//var cNewC = $('confirm-new-transpwd').val();
-			
+
 		$('#new-transpwd').keyup(function() {
 		        // set password variable
 		        var pswd = $(this).val();
@@ -40,7 +40,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		        }
 
 		        //validate number
-		      
+
 		      if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
 		            $('#number').removeClass('rule-invalid').addClass('rule-valid');
 		            car=true;
@@ -48,7 +48,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		            $('#number').removeClass('rule-valid').addClass('rule-invalid');
 		            car=false;
 		        }
-		      
+
 		      	if (! pswd.match(/(.)\1{2,}/) ) {
 		            $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 		            cons=true;
@@ -56,7 +56,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		            $('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
 		            cons=false;
 		        }
-		      
+
 		      	if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
 		            $('#especial').removeClass('rule-invalid').addClass('rule-valid');
 		            esp=true;
@@ -69,21 +69,21 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 		        }else{
 		        	$('#continuar').addClass('disabled-button');
 		        }
-			    
+
 		    }).focus(function() {
-		    	
+
 		        $("#new").showBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').show();
 
 		    }).blur(function() {
-		    	
+
 		        $("#new").hideBalloon({position: "right", contents: $('#psw_info')});
 		        $('#psw_info').hide();
 		});
 
-		    $("#continuar").click(function(){ 
+		    $("#continuar").click(function(){
 				old =$('#new-transpwd').val();
-				newC =$('#confirm-new-transpwd').val(); 
+				newC =$('#confirm-new-transpwd').val();
 
 				valor1=true;
 				valor2=true;
@@ -91,7 +91,7 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 				// if((longitud==true)&& (mt==true) && (cap==true) && (car==true) &&  (cons==true) && (esp==true)){
 		  //       	$('#continuar').removeClass('disabled-button');
 		  //       }
-				if( old=="" || newC==""){			
+				if( old=="" || newC==""){
 					//$(this).find($('#vacio')).text('Todos los campos son obligatorios');
 					//$('#continuar').addClass('disabled-button');
 					//alert("Todos los campos son obligatorios");
@@ -101,10 +101,10 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido").click(function(){
-						$("#dialog-clave-inv").dialog("close"); 
+						$("#dialog-clave-inv").dialog("close");
 					});
 				}
 				if(newC != old){
@@ -116,18 +116,18 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					}); 
+					});
 
 					$("#invalido2").click(function(){
-						$("#dialog-clave-inv2").dialog("close"); 
+						$("#dialog-clave-inv2").dialog("close");
 					});
 				}
 				if((valor1==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
-					
+
 				passwordOperaciones=$("#new-transpwd").val();
 
-				$.post(base_url +"/users/passwordOperaciones",{"passwordOperaciones":passwordOperaciones},function(data){  
+				$.post(base_url +"/users/passwordOperaciones",{"passwordOperaciones":passwordOperaciones},function(data){
 					if(data.rc == -61){
             			$(location).attr('href', base_url+'/users/error_gral');
         			}
@@ -135,22 +135,22 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 					$("#content").children().remove();
 					$("#content").append($("#confirmaCrear").removeAttr('style')).html();
-					
+
 		 			$("#continuar").click(function(){
 
 		 				$(location).attr('href', base_url+'/dashboard');
-		 				
+
 					});
 				}
 				if(data.rc==-202){
-						
+
 						$("#content").children().remove();
 						$("#content").append($("#sinExito").removeAttr('style')).html();
 
 			 			$("#regresar").click(function(){
 
-			 				$(location).attr('href', base_url+'/users/passwordOperaciones'); 
-			 				
+			 				$(location).attr('href', base_url+'/users/passwordOperaciones');
+
 						});
 
 					}
@@ -160,9 +160,9 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 			});	//POST
 
-					
 
-		}	
+
+		}
 			});
 
 
@@ -180,30 +180,30 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
 
 			errorElement: "label",
 			ignore: "",
-			errorContainer: "#msg",	
+			errorContainer: "#msg",
 			errorClass: "field-error",
 			validClass: "field-success",
 			errorLabelContainer: "#msg",
 			rules: {
-				
+
 				"transpwd": {"required":true},
 				"confirm-transpwd": {"required":true, "equalTo":"#transpwd"}
 			},
 
 			messages: {
-				
+
 				"transpwd": "El campo Clave de Operaciones NO puede estar vacío, y debe contener la estructura recomendada",
 				"confirm-transpwd": "El campo Confirmar Clave de Operaciones NO puede estar vacío, y debe ser igual a la Clave de Operaciones"
 
 			}
 		}); // VALIDATE
 
-	
+
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // MODAL TERMINOS Y CONDICIONES
-    $(".label-inline").on("click", "a", function() {               
+    $(".label-inline").on("click", "a", function() {
 
     $("#dialog-tc").dialog({
       /**/
@@ -212,11 +212,11 @@ base_url = path[0]+ "//" +path[2] + "/" + path[3];
       open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
     });
 
-    $("#ok").click(function(){ 
+    $("#ok").click(function(){
       $("#dialog-tc").dialog("close");
     });
 
     });
 
 
-	});  //FIN DE LA FUNCION GENERAL 
+	});  //FIN DE LA FUNCION GENERAL

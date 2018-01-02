@@ -1,8 +1,8 @@
-var path, base_cdn, pais, digVer = '', aplicaPerfil = 0;
-path =window.location.href.split( '/' );
+var path, base_cdn, base_url, pais, digVer = '', aplicaPerfil = 0;
 var fecha = new Date();
-base_cdn = path[0]+ "//" +path[2].replace('online','cdn')+'/'+path[3];
-base_url = path[0]+ "//" +path[2] + "/" + path[3];
+path = window.location.href.split('/');
+base_url = path[0] + '//' + path[2];
+base_cdn = base_url + '/assets';
 
 $(function(){
 
@@ -935,10 +935,10 @@ $(function(){
 							if(data.rc == -284) {
 
 								msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-								
+
 							}
 						});	//POST
-				}				
+				}
 
 			} else { ///////////////////////////////////
 
