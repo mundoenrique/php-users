@@ -5,9 +5,9 @@ Conexión Personas Online es un portal web orientado a proporcionar servicios pa
 
 ## Instalación
 
+- Docker
 - Apache HTTPD
-- OpenSSL
-- PHP 5.4
+- PHP 7.0
 
 
 ## Colaboración
@@ -20,4 +20,4 @@ Si deseas contribuir en el desarrollo y mejora de este producto, por favor consi
 
 ## Licencia
 
-© 2017 NovoPayment Inc. All rights reserved.
+© 2018 NovoPayment Inc. All rights reserved.
