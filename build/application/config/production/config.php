@@ -10,7 +10,3 @@ $config['log_threshold'] = 4;
 $config['encryption_key'] = 'n0v0p4ym3nt';
 $config['cookie_domain']	= 'personas.novopayment.com';
 $config['cookie_secure']	= TRUE;
-$config['proxy_ips'] = array(
-	'172.17.0.2',
-	'192.168.65.0/24'
-);
