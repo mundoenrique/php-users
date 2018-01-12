@@ -3,6 +3,7 @@
 .git*
 .DS_Store
 Thumbs.db
+*.log
 
 */cache/*
 !*/cache/index.html
