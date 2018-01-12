@@ -13,13 +13,16 @@
     }
     echo insert_js_cdn('html5.js');	?>
 </head>
-<body <?php if(isset($bodyclass)){echo 'class="'.$bodyclass.'"'; }?> >
+<?php
+$CI =& get_instance();
+$pageClass = isset($bodyclass) ? 'class="' . $bodyclass . '"' : '';
+$pageUrl = $CI->config->item('base_url');
+$pageCdn = $CI->config->item('base_url_cdn');
+$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . '_skin');
+?>
+<body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>">
 <header id="head">
     <div id="head-wrapper">
-        <?php
-        $CI =& get_instance();
-        $skin = $CI->input->cookie('cpo_skin');
-        ?>
         <a id="<?= ($skin === 'latodo') ? 'brand-id' : 'brand-app' ?>" rel="start">
         </a>
         <?php if($menuHeaderActive){?>

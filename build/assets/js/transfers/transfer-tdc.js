@@ -586,7 +586,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 
 						cadena = "<li class='dashboard-item muestraDestino' card='"+item.noCuenta+"' nombre='"+item.beneficiario+"' mascara='"+item.noCuentaConMascara+"' producto='"+item.banco.replace(' ','-')+"' id-afil='"+item.id_afiliacion+"'>";
 						cadena += "<a rel='section' class='escogerDestino'>";
-						cadena += "<img src='"+base_cdn+"/img/products/default/"+imagen+".png' width='200' height='130' alt='' />";
+						cadena += "<img src='"+base_cdn+"img/products/default/"+imagen+".png' width='200' height='130' alt='' />";
 						cadena+= "<div class='dashboard-item-info'>";
 						cadena+= "<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>";
 						cadena+=  "<p class='dashboard-item-cardnumber'>"+item.noCuentaConMascara+"</p>";
