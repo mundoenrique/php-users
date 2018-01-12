@@ -1,4 +1,4 @@
-var base_cdn, base_url, ctasDestino, moneda, pais, editCard, numberBeneficiary = [3 , 2, 1],
+var base_url, base_cdn, ctasDestino, moneda, pais, editCard, numberBeneficiary = [3 , 2, 1],
 	totalTrans, saldoDisp, transferNumber, montoMinOperaciones, montoMaxOperaciones, montoAcumMensual,
 	montoMaxMensual, montoAcumSemanal, montoMaxSemanal, montoAcumDiario, montoMaxDiario,
 	acumCantidadOperacionesMensual, cantidadOperacionesMensual, acumCantidadOperacionesSemanales,
@@ -6,9 +6,8 @@ var base_cdn, base_url, ctasDestino, moneda, pais, editCard, numberBeneficiary =
 	montoComision, nameSource, maskSource, sourceNumber, brand, destination = {}, dobleAutenticacion,
 	operationType, expDate;
 
-path = window.location.href.split('/');
-base_url = path[0] + '//' + path[2];
-base_cdn = base_url + '/assets';
+base_url = $('body').attr('data-app-url');
+base_cdn = $('body').attr('data-app-cdn');
 
 $(function() {
 	ctasDestino = $('#tdestino').html();

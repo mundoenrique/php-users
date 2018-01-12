@@ -1,7 +1,6 @@
-var path, base_cdn, base_url, expDate;
-path = window.location.href.split('/');
-base_url = path[0] + '//' + path[2];
-base_cdn = base_url + '/assets';
+var base_url, base_cdn, expDate;
+base_url = $('body').attr('data-app-url');
+base_cdn = $('body').attr('data-app-cdn');
 
 	$(function(){
 
@@ -175,7 +174,7 @@ base_cdn = base_url + '/assets';
 
 						cadena=  "<li class='dashboard-item "+item.beneficiario+" muestraDestino' card='"+item.noCuenta+"' banco='"+item.banco+"' codBanco='"+item.codBanco+"' id_ext_per='"+item.id_ext_per+"' nombre='"+item.beneficiario+"' emailCliente='"+item.email+"' id_afiliacion='"+item.id_afiliacion+"' marca='"+item.marca+"' mascara='"+item.noCuentaConMascara+"'>";
 						cadena+=		"<div class='dashboard-item-box'>"
-						cadena+=			"<img src='"+baseCdn+"img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
+						cadena+=			"<img src='"+base_cdn+"img/products/default/"+imagen+".png' width='200' height='130' alt='' />"
 						cadena+=			"<div class='dashboard-item-info'>"
 						cadena+=				"<p class='dashboard-item-cardholder'>"+item.beneficiario+"</p>"
 						cadena+=				"<ul class='dashboard-item-actions'>"
