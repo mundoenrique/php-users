@@ -2,15 +2,20 @@
 .vscode
 .DS_Store
 Thumbs.db
-*.log
 
-*/cache/*
-!*/cache/index.html
-!*/cache/.htaccess
+**/cache/*
+!**/cache/index.html
+!**/cache/.htaccess
 
-*/logs/*
-!*/logs/index.html
-!*/logs/.htaccess
+**/config/**/
+!**/config/development/
+!**/config/production/
+!**/config/testing/
+!**/config/user-testing/
 
-*/vendor/
-*/sessions/
+**/logs/*
+!**/logs/index.html
+!**/logs/.htaccess
+
+**/vendor/
+**/sessions/
