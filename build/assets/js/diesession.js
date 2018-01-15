@@ -1,7 +1,5 @@
-var path;
-path = window.location.href.split('/');
-base_url = path[0] + '//' + path[2];
-base_cdn = base_url + '/assets';
+base_url = $('body').attr('data-app-url');
+base_cdn = $('body').attr('data-app-cdn');
 
 $(document).ready(function(){
 	idleTime = 0;

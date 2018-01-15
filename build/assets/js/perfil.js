@@ -1,9 +1,8 @@
-var path, base_cdn, base_url;
+var base_url, base_cdn;
 var fecha=new Date();
 var controlValid = 0;
-path = window.location.href.split('/');
-base_url = path[0] + '//' + path[2];
-base_cdn = base_url + '/assets';
+base_url = $('body').attr('data-app-url');
+base_cdn = $('body').attr('data-app-cdn');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
 	afiliado = $('#content').attr('afiliado');
 

@@ -1,8 +1,8 @@
-var path, base_cdn, base_url, pais, digVer = '', aplicaPerfil = 0;
+var base_url, base_cdn, pais, digVer = '', aplicaPerfil = 0;
 var fecha = new Date();
-path = window.location.href.split('/');
-base_url = path[0] + '//' + path[2];
-base_cdn = base_url + '/assets';
+var base_url, base_cdn;
+base_url = $('body').attr('data-app-url');
+base_cdn = $('body').attr('data-app-cdn');
 
 $(function(){
 
