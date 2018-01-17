@@ -22,9 +22,9 @@ if ( ! function_exists('np_hoplite_Encryption'))
 		}
 
 		if ($keyId == 1) {
-			$cryptData = mcrypt_encrypt(MCRYPT_DES, base64_decode($CI->session->userdata('keyId')), $dataB, MCRYPT_MODE_CBC, $iv);
+			$cryptData = @mcrypt_encrypt(MCRYPT_DES, base64_decode($CI->session->userdata('keyId')), $dataB, MCRYPT_MODE_CBC, $iv);
 		} else {
-			$cryptData = mcrypt_encrypt(MCRYPT_DES, $CI->config->item('keyNovo'), $dataB, MCRYPT_MODE_CBC, $iv);
+			$cryptData = @mcrypt_encrypt(MCRYPT_DES, $CI->config->item('keyNovo'), $dataB, MCRYPT_MODE_CBC, $iv);
 		}
 
 		return base64_encode($cryptData);
