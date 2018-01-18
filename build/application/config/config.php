@@ -378,7 +378,7 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'cpo_';
+$config['sess_cookie_name'] = 'cpo_session';
 $config['sess_expiration'] = 0;
 $config['sess_save_path'] = '/var/www/sessions';
 $config['sess_match_ip'] = FALSE;

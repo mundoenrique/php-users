@@ -40,11 +40,9 @@ $(function() {
 	});
 
 	function login(user,pass){
+		var hasCookie = navigator.cookieEnabled;
 
-		document.cookie = 'cookie';
-		cookie = document.cookie;
-
-		if(user!='' && pass!='' && cookie!=''){
+		if(user!='' && pass!='' && hasCookie){
 
 			$('#username').attr('disabled','true');
 			$('#userpwd').attr('disabled','true');
@@ -153,7 +151,7 @@ $(function() {
 
 		 	});	//IF CONSULTA DONE
 
-}else if(cookie==''){
+}else if(!hasCookie){
 	$('<div><h5>La funcionalidad de cookies de su navegador se encuentra desactivada.</h5><h4>Por favor vuelva activarla.</h4></div>').dialog({
 		title: "Conexion personas Online",
 		modal: true,
