@@ -43,7 +43,8 @@ class Users_model extends CI_Model {
             // }
             $newdata = array(
                 'idUsuario' => $desdata->idUsuario,
-                'userName' => $desdata->userName,
+								'userName' => $desdata->userName,
+								'idPersona' => $desdata->idPersona,
                 'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
                 'token' => $desdata->token,
                 'sessionId' => $desdata->logAccesoObject->sessionId,

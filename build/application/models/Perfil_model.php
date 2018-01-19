@@ -72,7 +72,7 @@ class Perfil_model extends CI_Model {
             "segundoNombre"		=> $segundoNombre,
             "primerApellido"	=> $primerApellido,
             "segundoApellido"	=> $segundoApellido,
-            "email"				=> $email,
+            "email"				=> strtolower($email),
             "dtfechorcrea_usu" => $dtfechorcrea_usu,
             "passwordOperaciones" => "",
             "notEmail"			=> $notEmail,
@@ -85,7 +85,8 @@ class Perfil_model extends CI_Model {
             "tipo_id_ext_per"	=> $tipo_id_ext_per,
             "descripcion_tipo_id_ext_per" => $tipo_identificacion,
             "disponeClaveSMS" => "",
-            "aplicaPerfil"=> $aplicaPerfil,
+						"aplicaPerfil"=> $aplicaPerfil,
+						"idPersona" => $this->session->userdata('idPersona'),
             "rc"=> "0"
         );
 

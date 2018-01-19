@@ -710,7 +710,8 @@ $(function(){
 		primerApellido=$("#primer-apellido").val();//5
 		segundoApellido=$("#segundo-apellido").val();//6
 		lugarNacimiento=$("#lugar-nacimiento").val();//7
-		fechaNacimiento=$("#fecha-nacimiento-valor").val();//8
+		fechaNacimiento=$('#dia-nacimiento').val() + '/' + $('#mes-nacimiento').val() + '/' +
+										$('#anio-nacimiento').val();//8
 		sexo=$("input[name='gender']:checked").val();//9
 		edocivil=$("#edo-civil-value").val();//10
 		nacionalidad=$("#nacionalidad-valor").val();//11
@@ -828,9 +829,19 @@ $(function(){
 						$('#content-formulario-perfil').remove();
 						$('#exito').css('display','block');
 						break;
+					case -5:
+					case -20:
+					case -158:
+					case -162:
 					case -200:
-						$('.overlay-modal').show();
-						$('#dialogo-fallo-actualizacion').show();
+					case -374:
+					case -375:
+					case -377:
+						systemDialog('Perfil', 'En este momento no podemos atender sus solicitud, por favor intente más tarde', 'dash');
+						break;
+					case -284:
+						$('#telefono').focus();
+						systemDialog('Perfil', 'El teléfono móvil que intenta registrar está siendo usado por otro usuario, por favor pruebe con otro');
 						break;
 					case -271:
 						$('.overlay-modal').show();
