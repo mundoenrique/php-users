@@ -760,186 +760,71 @@ $(function(){
 					anotherPhone= "";
 				}
 
-				if(aplicaPerfil == 'S'){
-
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
+				$.post(base_url + "/registro/registrar", (aplicaPerfil == 'S' ?
+					{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato} :
+					{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence}),
+					function(data) {
+						$("#load_reg").hide();
+						switch(data.rc) {
+							case 0:
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
 
 								$("#content").children().remove();
 								$("#content").append($("#exito").removeAttr('style')).html();
 								$("#message").append(cadena);
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)){
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271 || data.rc == -335){
+								break;
+							case -271:
+							case -335:
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
 
 								$("#content").children().remove();
 								$("#content").append($("#exito2").removeAttr('style')).html();
 								$("#message2").append(cadena);
-							}
+								break;
+							case 206:
+								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
+								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero ha ocurrido un error al enviar el correo de confirmación.';
 
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
+								$("#content").children().remove();
+								$("#content").append($("#exito2").removeAttr('style')).html();
+								$("#message2").append(cadena);
+								break;
+							case -21:
+							case -311:
+							case -313:
+							case -314:
+							case -317:
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
 								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
 
 								$("#content").children().remove();
 								$("#content").append($("#exito2").removeAttr('style')).html();
 								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-
-
-							if(data.rc == -284) {
-							 msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-							}
-
-						});	//POST
-
-				}else if(aplicaPerfil == 'N') {
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
-
-								var cadena=		'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito").removeAttr('style')).html();
-								$("#message").append(cadena);
-
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)) {
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
+								break;
+							case -181:
+							case -376:
 								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
+								msgService('Registro',
+													'El correo electrónico que intenta registrar está siendo usado por otro' +
+													'usuario, por favor pruebe con otro.', 'warning');
+								break;
+							case -284:
 								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								console.log('cualquier locura');
-								console.log(data.rc);
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -284) {
-
-								msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-
-							}
-						});	//POST
-				}
-
+								msgService('Registro', 'El teléfono movil que intenta registrar está siendo usado por otro usuario, por favor pruebe con otro.', 'warning');
+								break;
+							case -3:
+							case -5:
+							case -20:
+							case -61:
+							case -230:
+							case -379:
+							case -380:
+							default:
+								msgService('Registro', 'En estos momentos no es posible realizar el registro, por favor intente de nuevo más tarde.', 'error');
+						}
+					});	//POST
 			} else { ///////////////////////////////////
 
 				$("#registrar").fadeIn();
@@ -1366,8 +1251,10 @@ $(".label-inline").on("click", "a", function() {
 	}
 });  //FIN DE LA FUNCION GENERAL
 
-function msgService (title, msg) {
+function msgService (title, msg, icon) {
 	$("#registrar").fadeIn();
+
+	$("#msg-dialog").addClass('alert-' + icon);
 	$("#dialogo-movil").dialog({
 		title	:title,
 		modal	:"true",
@@ -1380,5 +1267,8 @@ function msgService (title, msg) {
 	});
 	$("#inva5").click(function(){
 		$("#dialogo-movil").dialog("close");
+		if(icon === 'error') {
+			$(location).attr('href', base_url);
+		}
 	});
 }
