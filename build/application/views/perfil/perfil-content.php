@@ -482,7 +482,7 @@ $pais_residencia=$this->session->userdata('pais');
                         <fieldset class="col-md-12-profile">
                             <ul class="row-profile">
                                 <li class="col-md-full-profile">
-                                    <label for="email">Correo electrónico</label><span id="msg-correo" style="margin-left:30px; display:none;"></span>
+                                    <label for="email">Correo electrónico</label>
                                     <input class="email-profile" id="email" name="email" type="text" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
                                     <div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:7px; margin-right:620px; margin-bottom:0px;">
                                         <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
@@ -635,7 +635,7 @@ $pais_residencia=$this->session->userdata('pais');
             </div>
         </section>
     </article>
-    <!---Actualizacion exitosa del perfil--->
+    <!-- Actualizacion exitosa del perfil -->
     <div id="exito" style='display:none'>
         <article>
             <header>
@@ -687,8 +687,8 @@ $pais_residencia=$this->session->userdata('pais');
 <!-- MODAL CORREO NO DISPONIBLE -->
 <div id="dialogo_disponible" style='display:none'>
     <div id="dialog-confirm">
-        <div class="alert-simple alert-error" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
+        <div class="alert-simple alert-warning" id="message">
+            <span aria-hidden="true" class="icon-warning-sign"></span>
             <p>El correo indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor verifique e intente nuevamente.</p>
         </div>
         <div class="form-actions">

@@ -962,13 +962,11 @@ $(function(){
 				"email": email,
 				"username": userName
 			}, function (data) {
-				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
 
 				//console.log(response_email);
 				if(response_email.rc == -238) {
 					$("#loading").hide();
-					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
 					enviarForm();
@@ -989,14 +987,13 @@ $(function(){
 					});
 				} else {
 					$("#loading").hide();
-					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
-					enviarForm();
+					systemDialog('Perfil', 'En este momento no podemos atender sus solicitud, por favor intente más tarde', 'dash');
+					//enviarForm();
 				}
 			});
 		} else if (email == verificarMail) {
-			$('#msg-correo').css('display', 'none');
 			$('#email').removeClass('field-error').addClass('field-success');
 			$('#actualizar').removeAttr('disabled');
 			enviarForm();
