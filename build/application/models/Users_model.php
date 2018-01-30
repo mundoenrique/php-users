@@ -55,6 +55,7 @@ class Users_model extends CI_Model {
 									'userName' => $desdata->userName,
 									'idPersona' => $desdata->idPersona,
 									'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
+									'cantCorreos' => $desdata->cantCorreos,
 									'token' => $desdata->token,
 									'sessionId' => $desdata->logAccesoObject->sessionId,
 									'keyId' => $desdata->keyUpdate,
@@ -252,8 +253,6 @@ class Users_model extends CI_Model {
 			];
 
 			return json_encode($response);
-
-			//return json_encode($desdata);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

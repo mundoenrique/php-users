@@ -251,7 +251,7 @@ class Registro_model extends CI_Model {
 
 				"notarjeta"					=> $notarjeta,
 				"idpersona"					=> $numDoc,
-                "nombre1"					=> $primerNombre,
+				"nombre1"					=> $primerNombre,
 				"nombre2"					=> $segundoNombre,
 				"apellido1"					=> $primerApellido,
 				"apellido2"					=> $segundoApellido,

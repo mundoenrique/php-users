@@ -4,13 +4,16 @@ var controlValid = 0;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
-	afiliado = $('#content').attr('afiliado');
+		afiliado = $('#content').attr('afiliado'),
+		cantCorreos = $('#content').attr('cant-correos')
 
 $(function(){
 
 	if(aplicaperfil == 'S' && afiliado == '0') {
 		$('#widget-account').focus();
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
+	} else if (cantCorreos > 0) {
+		systemDialog('Perfil de Usuario', 'Debes cambiar el correo eléctronico, ya que pertenece a otro usuario.', 'mail');
 	}
 
 	//Menu desplegable transferencia
@@ -1269,8 +1272,13 @@ function systemDialog(title, msg, action) {
 	$("#acept").click(function () {
 		$('#actualizar').fadeIn();
 		$("#completar-afiliacion").dialog("close");
-		if(action == 'dash') {
+		switch(action) {
+			case 'dash':
 			$(location).attr('href', base_url+'/dashboard');
+				break;
+			case 'mail':
+				$('#email').focus();
+				breaK;
 		}
 	});
 }

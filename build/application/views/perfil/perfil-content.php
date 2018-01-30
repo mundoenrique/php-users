@@ -1,6 +1,7 @@
 <?php
 $datos = null;
 $afiliado = $this->session->userdata('afiliado');
+$cantCorreos = $this->session->userdata('cantCorreos');
 
 if(isset($data)){
 
@@ -279,7 +280,7 @@ $pais_residencia=$this->session->userdata('pais');
      acEstado="<?php echo $acEstado;?>" acDescTipo="<?php echo $acDescTipo;?>" acZonaPostal="<?php echo $acZonaPostal;?>" disponeClaveSMS="<?php echo $disponeClaveSMS;?>" email="<?php echo $email;?>" num="<?php echo $num;?>"  tipo="<?php echo $tipo;?>"  num_hab="<?php echo $num_hab;?>"  tipo_hab="<?php echo $tipo_hab;?>"
      num_otro="<?php echo $num_otr;?>" tipo_otr= "<?php echo $tipo_otr;?>" sexo= "<?php echo $sexo;?>" userName="<?php echo $userName;?>" dtfechorcrea_usu="<?php echo $dtfechorcrea_usu;?>"
      notEmail="<?php echo $notEmail;?>" notSms="<?php echo $notSms;?>" acCodPais="<?php echo $acCodPais;?>" acTipo="<?php echo $acTipo; ?>" acCodEstado="<?php echo $acCodEstado;?>" acCodCiudad="<?php echo $acCodCiudad;?>" tipo_profesion="<?php echo $tipo_profesion;?>"
-     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>">
+     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>" cant-correos="<?php echo $cantCorreos ?>">
     <article id="content-formulario-perfil">
         <header></header>
         <div id="widget-account" class="widget">
