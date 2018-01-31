@@ -992,7 +992,7 @@ $(function(){
 					$("#loading").hide();
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
-					systemDialog('Perfil', 'En este momento no podemos atender sus solicitud, por favor intente más tarde', 'dash');
+					systemDialog('Perfil', 'En este momento no podemos atender tu solicitud, por favor intente más tarde', 'dash');
 					//enviarForm();
 				}
 			});
@@ -1274,11 +1274,11 @@ function systemDialog(title, msg, action) {
 		$("#completar-afiliacion").dialog("close");
 		switch(action) {
 			case 'dash':
-			$(location).attr('href', base_url+'/dashboard');
+				$(location).attr('href', base_url+'/dashboard');
 				break;
 			case 'mail':
 				$('#email').focus();
-				breaK;
+				break;
 		}
 	});
 }

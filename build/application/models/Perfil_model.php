@@ -268,8 +268,9 @@ class Perfil_model extends CI_Model {
                 case -21:
                 case 0:
                     $this->session->set_userdata('afiliado', $contrato);
-                    $this->session->set_userdata('cantCorreos', 0);
             }
+        } elseif ($desdata->rc === 0) {
+        	$this->session->set_userdata('cantCorreos', 0);
         }
 
         return json_encode($desdata);
