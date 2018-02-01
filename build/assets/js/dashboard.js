@@ -1,7 +1,7 @@
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
-country = $('#content').data('pais');
+country = $('body').data('country');
 
   $(function(){
 
