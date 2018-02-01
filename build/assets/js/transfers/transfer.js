@@ -5,16 +5,21 @@ $(function() {
 
 		modalCtasOrigen();
 
-		//MOSTRAR CTAS ORIGEN EN EL MODAL
-		$.each($(".dashboard-item"), function(pos, item) {
-			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")}, function(data) {
-				var saldoModal = data.disponible;
-				if (typeof saldoModal !== 'string'){
-					saldoModal="---";
-				}
-				$(item).find(".dashboard-item-balance").html(moneda + saldoModal);
+		if(country !== 'Ve') {
+			// FUNCION LLAMAR SALDO
+			$.each($(".dashboard-item"),function(pos,item){
+				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+					var moneda=$(".dashboard-item").attr("moneda");
+					var id=$(".dashboard-item").attr("doc");
+					var saldo=data.disponible;
+					if (typeof saldo != 'string'){
+						saldo="---";
+					}
+
+					$(item).find(".dashboard-item-balance").html(moneda+saldo);
+				});
 			});
-		});
+		}
 	});
 	//----------------------------------------------------------------------------------------------
 
