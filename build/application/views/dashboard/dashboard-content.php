@@ -1,6 +1,4 @@
-<?php
-$country = $this->session->userdata('pais');
-?>
+<?php $country = $this->session->userdata('pais'); ?>
 <div id="content">
     <article>
         <header>
