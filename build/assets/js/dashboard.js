@@ -1,6 +1,7 @@
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+country = $('#content').data('pais');
 
   $(function(){
 
@@ -94,21 +95,23 @@ base_cdn = $('body').attr('data-app-cdn');
     $('#producto').val($(this).attr('producto'));
     $('#numt_mascara').val($(this).attr('numt_mascara'));
     $("#tarjeta").submit();
-  });
+	});
 
-  // FUNCION LLAMAR SALDO
-  $.each($(".dashboard-item"),function(pos,item){
-    $.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
-      var moneda=$(".dashboard-item").attr("moneda");
-      var id=$(".dashboard-item").attr("doc");
-      var saldo=data.disponible;
-      if (typeof saldo != 'string'){
-        saldo="---";
-      }
+	if(country !== 'Ve') {
+		// FUNCION LLAMAR SALDO
+		$.each($(".dashboard-item"),function(pos,item){
+			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+				var moneda=$(".dashboard-item").attr("moneda");
+				var id=$(".dashboard-item").attr("doc");
+				var saldo=data.disponible;
+				if (typeof saldo != 'string'){
+					saldo="---";
+				}
 
-      $(item).find(".dashboard-item-balance").html(moneda+saldo);
-    });
-  });
+				$(item).find(".dashboard-item-balance").html(moneda+saldo);
+			});
+		});
+	}
 
   $('li.stack-item a').click(function(){
     $('#filters').find('.current-stack-item').removeClass('current-stack-item');

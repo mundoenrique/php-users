@@ -1,4 +1,7 @@
-<div id="content">
+<?php
+$country = $this->session->userdata('pais');
+?>
+<div id="content" data-pais="<?php echo $country; ?>">
     <article>
         <header>
             <h1>Vista Consolidada</h1><?php
@@ -63,7 +66,7 @@
 						<div class='dashboard-item-network $marca'>$value->marca</div>
 						<div class='dashboard-item-info'>
 							<p class='dashboard-item-cardholder'>$nomPlastico</p>
-							<p class='dashboard-item-balance'>$moneda---</p>
+							<p class='dashboard-item-balance'><?php echo $country === '' ? $moneda--- : ''; ?></p>
 							<p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
 							<p class='dashboard-item-category'>$nomProducto</p>
 						</div>
