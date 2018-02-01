@@ -1,3 +1,4 @@
+<?php $country = $this->session->userdata('pais'); ?>
 <div id="content" confirmacion="<? echo $this->session->userdata("transferir") ?>">
 	<div id="content-clave" style='display:none'>
 		<article>
@@ -184,7 +185,7 @@
 	         			<div class='dashboard-item-network $marca'></div>
 	         			<div class='dashboard-item-info'>
 	         				<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
-	         				<p class='dashboard-item-balance'>$moneda---</p>
+	         				<p class='dashboard-item-balance'><?php echo $country !== 'Ve' ? $moneda --- : ''; ?></p>
 	         				<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
 	         				<p class='dashboard-item-category'>$value->producto</p>
 	         			</div>
