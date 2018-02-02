@@ -97,7 +97,7 @@ country = $('body').data('country');
     $("#tarjeta").submit();
 	});
 
-	if(country !== 'Ve') {
+	if(country !== 'Ve' || (country === 'Ve' && $(".dashboard-item").length <= 3)) {
 		// FUNCION LLAMAR SALDO
 		$.each($(".dashboard-item"),function(pos,item){
 			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){

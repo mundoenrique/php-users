@@ -7,11 +7,7 @@ Thumbs.db
 !**/cache/index.html
 !**/cache/.htaccess
 
-**/config/**/
-!**/config/development/
-!**/config/production/
-!**/config/testing/
-!**/config/user-testing/
+**/config/local/
 
 **/logs/*
 !**/logs/index.html
