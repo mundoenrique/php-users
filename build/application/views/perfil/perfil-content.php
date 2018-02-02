@@ -1,6 +1,7 @@
 <?php
 $datos = null;
 $afiliado = $this->session->userdata('afiliado');
+$cantCorreos = $this->session->userdata('cantCorreos');
 
 if(isset($data)){
 
@@ -279,7 +280,7 @@ $pais_residencia=$this->session->userdata('pais');
      acEstado="<?php echo $acEstado;?>" acDescTipo="<?php echo $acDescTipo;?>" acZonaPostal="<?php echo $acZonaPostal;?>" disponeClaveSMS="<?php echo $disponeClaveSMS;?>" email="<?php echo $email;?>" num="<?php echo $num;?>"  tipo="<?php echo $tipo;?>"  num_hab="<?php echo $num_hab;?>"  tipo_hab="<?php echo $tipo_hab;?>"
      num_otro="<?php echo $num_otr;?>" tipo_otr= "<?php echo $tipo_otr;?>" sexo= "<?php echo $sexo;?>" userName="<?php echo $userName;?>" dtfechorcrea_usu="<?php echo $dtfechorcrea_usu;?>"
      notEmail="<?php echo $notEmail;?>" notSms="<?php echo $notSms;?>" acCodPais="<?php echo $acCodPais;?>" acTipo="<?php echo $acTipo; ?>" acCodEstado="<?php echo $acCodEstado;?>" acCodCiudad="<?php echo $acCodCiudad;?>" tipo_profesion="<?php echo $tipo_profesion;?>"
-     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>">
+     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>" cant-correos="<?php echo $cantCorreos ?>">
     <article id="content-formulario-perfil">
         <header></header>
         <div id="widget-account" class="widget">
@@ -482,7 +483,7 @@ $pais_residencia=$this->session->userdata('pais');
                         <fieldset class="col-md-12-profile">
                             <ul class="row-profile">
                                 <li class="col-md-full-profile">
-                                    <label for="email">Correo electrónico</label><span id="msg-correo" style="margin-left:30px; display:none;"></span>
+                                    <label for="email">Correo electrónico</label>
                                     <input class="email-profile" id="email" name="email" type="text" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
                                     <div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:7px; margin-right:620px; margin-bottom:0px;">
                                         <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
@@ -635,7 +636,7 @@ $pais_residencia=$this->session->userdata('pais');
             </div>
         </section>
     </article>
-    <!---Actualizacion exitosa del perfil--->
+    <!-- Actualizacion exitosa del perfil -->
     <div id="exito" style='display:none'>
         <article>
             <header>
@@ -687,8 +688,8 @@ $pais_residencia=$this->session->userdata('pais');
 <!-- MODAL CORREO NO DISPONIBLE -->
 <div id="dialogo_disponible" style='display:none'>
     <div id="dialog-confirm">
-        <div class="alert-simple alert-error" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
+        <div class="alert-simple alert-warning" id="message">
+            <span aria-hidden="true" class="icon-warning-sign"></span>
             <p>El correo indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor verifique e intente nuevamente.</p>
         </div>
         <div class="form-actions">

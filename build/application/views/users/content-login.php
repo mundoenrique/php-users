@@ -10,7 +10,7 @@
     $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
   }
 ?>
-<div id="slideshow">
+<div id="slideshow" data-recover-user="<?php echo $recoverUserLink; ?>" data-recover-pwd="<?php echo $recoverPwdLink; ?>">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
       <p class="slide-title">Bienvenido a Conexión Personas Online</p>
@@ -118,6 +118,21 @@
     </div>
   </div>
 </div>
+
+<!--***************************************MODAL ERRORES*****************************************-->
+<div id="system-response" class="dialog-small" style='display:none'>
+	<header>
+    <h2 id="title-info"></h2>
+  </header>
+	<div class="alert-simple alert-warning skip" id="content-info">
+		<span aria-hidden="true" class="skip icon-warning-sign"></span>
+	</div>
+	<div id="content-input"></div>
+	<div id="button-action" class="form-actions skip">
+		<button id="close-info">Aceptar</button>
+	</div>
+</div>
+<!--*************************************FIN MODAL ERRORES***************************************-->
 
 <div id="dialog-login-ve" style='display:none'>
   <header>

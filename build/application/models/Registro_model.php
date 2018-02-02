@@ -210,8 +210,6 @@ class Registro_model extends CI_Model {
 			$otroTelefono=$otroTelefono;
 		}
 
-		$passwordMobile	= strtoupper($password); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
-
 		if($aplicaPerfil == 'S') {
 
 			$user = array(
@@ -228,8 +226,7 @@ class Registro_model extends CI_Model {
 				"notEmail"			=> "1",
 				"notSms"			=> "1",
 				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"password"			=> $password,
 			);
 
 			$tHabitacion = array(
@@ -251,7 +248,7 @@ class Registro_model extends CI_Model {
 
 				"notarjeta"					=> $notarjeta,
 				"idpersona"					=> $numDoc,
-                "nombre1"					=> $primerNombre,
+				"nombre1"					=> $primerNombre,
 				"nombre2"					=> $segundoNombre,
 				"apellido1"					=> $primerApellido,
 				"apellido2"					=> $segundoApellido,
@@ -315,8 +312,7 @@ class Registro_model extends CI_Model {
 				"notEmail"			=> "1",
 				"notSms"			=> "1",
 				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"password"			=> $password,
 			);
 
 			$tHabitacion = array(
