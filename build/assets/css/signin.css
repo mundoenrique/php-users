@@ -723,12 +723,11 @@ ul.stack.disabled-stack li.stack-item:first-child {
 }
 
 ul.pwd-rules {
-	margin-bottom: 10px;
-	width: 360px;
+  margin-bottom: 10px;
 }
 ul.pwd-rules li.pwd-rules-item {
-  font-size: 12px;
-  line-height: 25px;
+  font-size: 10px;
+  line-height: 15px;
 }
 ul.pwd-rules li.pwd-rules-item.rule-valid {
   color: #43b581;

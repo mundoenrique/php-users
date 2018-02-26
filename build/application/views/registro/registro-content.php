@@ -618,7 +618,7 @@ if($skin == 'latodo'){
 <!-- ERROR telefono movil exixtente -->
 <div id="dialogo-movil" style='display:none'>
     <div id="dialog-confirm">
-        <div id="msg-dialog" class="alert-simple">
+        <div class="alert-simple alert-error">
             <span aria-hidden="true" class="icon-cancel-sign"></span>
             <p id="msgService"></p>
         </div>

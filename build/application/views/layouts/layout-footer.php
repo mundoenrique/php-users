@@ -12,7 +12,7 @@ if($skin == 'latodo'){
         <div class="foot-wrapper-top">
             <nav id="foot-menu">
                 <ul class="menu">
-                    <?php if ($this->session->userdata('idUsuario')): ?>
+                    <?php if ($this->session->userdata('idUsuario') !== false): ?>
                         <li class="menu-item terms">
                             <label class="label-inline condiciones-g" id="condiciones-g" for="accept-terms"><a href="#" rel="section">Condiciones de Uso</a></label>
                         </li>
