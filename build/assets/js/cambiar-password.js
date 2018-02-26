@@ -1,158 +1,211 @@
-var base_url, base_cdn, temporary, uri, oldPwd, pwd, confirmPwd;
+var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
-temporary = $('#content').data('temporary');
-uri = temporary === 'n' ? '/dashboard' : '';
 
-$(function() {
-	var max = 15,
-			valid = 0;
+	$(function(){
+			var max = 15;
+			var old =$('#old-userpwd').val();
+			var newC =$('#userpwd').val();
+			var cNewC = $('#confirm-userpwd').val();
+			var $dialogo = $(this);
+			$("#continuar").attr('disabled','disabled');
+		$('#userpwd').keyup(function() {
+		        // set password variable
+		        var pswd = $(this).val();
+		        //validate the length
+		        if ( pswd.length < 8 || pswd.length > 15 ) {
+		            $('#length').removeClass('rule-valid').addClass('rule-invalid');
+		            longitud=false;
+		        } else {
+		            $('#length').removeClass('rule-invalid').addClass('rule-valid');
+		            longitud=true;
+		        }
 
-	//Valida que se indique la contraseña actual
-	$('#old-userpwd').on('keyup', function() {
-		oldPwd = $(this).val();
-		pwd = $('#userpwd').val();
+		        //validate letter
+		        if ( pswd.match(/[A-z]/) ) {
+		            $('#letter').removeClass('rule-invalid').addClass('rule-valid');
+		            mt=true;
+		        } else {
+		            $('#letter').removeClass('rule-valid').addClass('rule-invalid');
+		            mt=false;
+		        }
 
-		if(oldPwd != '' && oldPwd.length >= 4) {
-			$('#actual').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#actual').removeClass('rule-valid').addClass('rule-invalid');
-		}
-		//Valida que la contraseña sea diferente de la actual
-		if(oldPwd !== '' && pwd !== '' && oldPwd !== pwd) {
-			$('#diferente').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#diferente').removeClass('rule-valid').addClass('rule-invalid');
-		}
-	});
+		        //validate capital letter
+		        if ( pswd.match(/[A-Z]/) ) {
+		            $('#capital').removeClass('rule-invalid').addClass('rule-valid');
+		            cap=true;
+		        } else {
+		            $('#capital').removeClass('rule-valid').addClass('rule-invalid');
+		            cap=false;
+		        }
 
-	//Valida estructura de la Nuva contraseña
-	$('#userpwd').on('keyup', function() {
-		pwd = $(this).val();
-		oldPwd = $('#old-userpwd').val(),
-		confirmPwd = $('#confirm-userpwd').val();
+		        //validate number
+
+		      if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
+		            $('#number').removeClass('rule-invalid').addClass('rule-valid');
+		            car=true;
+		        } else {
+		            $('#number').removeClass('rule-valid').addClass('rule-invalid');
+		            car=false;
+		        }
+
+		      	if (! pswd.match(/(.)\1{2,}/) ) {
+		            $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
+		            cons=true;
+		        } else {
+		            $('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
+		            cons=false;
+		        }
+
+		      	if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
+		            $('#especial').removeClass('rule-invalid').addClass('rule-valid');
+		            esp=true;
+		        } else {
+		            $('#especial').removeClass('rule-valid').addClass('rule-invalid');
+		            esp=false;
+		        }
+		        if((longitud==true)&& (mt==true) && (cap==true) && (car==true) &&  (cons==true) && (esp==true)){
+		        	$('#continuar').removeAttr("disabled");
+		        }else{
+					$('#continuar').attr("disabled",true);
+		        }
+
+		    }).focus(function() {
+
+		        $("#new").showBalloon({position: "right", contents: $('#psw_info')});
+		        $('#psw_info').show();
+
+		    }).blur(function() {
+
+		        $("#new").hideBalloon({position: "right", contents: $('#psw_info')});
+		        $('#psw_info').hide();
+		    });
 
 
-		//Valida que la contraseña sea diferente de la actual
-		if(oldPwd !== '' && pwd !== '' && oldPwd !== pwd) {
-			$('#diferente').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#diferente').removeClass('rule-valid').addClass('rule-invalid');
-		}
+			$("#cancelar").click(function(){
+				$(location).attr('href', base_url+'/perfil');
+			});
+			$(".volver").click(function(){
+				$(location).attr('href', base_url+'/perfil');
+			});
+			$("#continuar").click(function(){
+				$("#continuar").hide();
+				$("#loading").show();
+				old =$('#old-userpwd').val();
+				newC =$('#userpwd').val();
+				cNewC = $('#confirm-userpwd').val();
+				valor1=true;
+				valor2=true;
+				valor3=true;
+				if( old=="" || newC=="" || cNewC=="" ){
+					$("#continuar").show();
+					$("#loading").hide();
+					valor1=false;
+					$("#dialog-clave-inv").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
 
-		//Valida longitud
-		if(pwd.length < 8 || pwd.length > 15) {
-			$('#length').removeClass('rule-valid').addClass('rule-invalid');
-		} else {
-			$('#length').removeClass('rule-invalid').addClass('rule-valid');
-		}
+					$("#invalido").click(function(){
+						$("#dialog-clave-inv").dialog("close");
+					});
+				}
+				if(newC == old){
+					$("#continuar").show();
+					$("#loading").hide();
+					valor2=false;
+					$("#dialog-clave-inv1").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
 
-		//Valida minúscula
-		if(pwd.match(/[a-z]/)) {
-			$('#letter').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#letter').removeClass('rule-valid').addClass('rule-invalid');
-		}
+					$("#invalido1").click(function(){
+						$("#dialog-clave-inv1").dialog("close");
+					});
 
-		//Valida mayúscula
-		if(pwd.match(/[A-Z]/)) {
-			$('#capital').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#capital').removeClass('rule-valid').addClass('rule-invalid');
-		}
+				}
+				if(newC != cNewC){
+					$("#continuar").show();
+					$("#loading").hide();
+					valor3=false;
+					$("#dialog-clave-inv2").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
 
-		//Valida números
-		if(!pwd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pwd.match(/\d{1}/) ) {
-			$('#number').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#number').removeClass('rule-valid').addClass('rule-invalid');
-		}
+					$("#invalido2").click(function(){
+						$("#dialog-clave-inv2").dialog("close");
+					});
+				}
+				if((valor1==true) && (valor2==true) && (valor3==true)){
+					$("#continuar").hide();
+					$("#loading").show();
+					$.post(base_url +"/users/actualizarPassword",{"passwordOld":old, "passwordNew":newC},function(data){
+							if(data.rc == -61){
+								$(location).attr('href', base_url+'/users/error_gral');
 
-		//Valida números consecutivos
-		if(!pwd.match(/(.)\1{2,}/) && pwd !== '') {
-			$('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
-		}
+							}
+							if(data.rc==0) {
 
-		///Valida caracter especial
-		if(pwd.match(/([!@\*\-\?¡¿+\/.,_#])/)) {
-			$('#especial').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#especial').removeClass('rule-valid').addClass('rule-invalid');
-		}
+								$("#content").children().remove();
+								$("#content").append($("#confirmacion").removeAttr('style')).html();
 
-		//Valida que la confirmación sea igual a la nueva contraseña
-		if(confirmPwd !== '' && confirmPwd === pwd) {
-			$('#igual').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#igual').removeClass('rule-valid').addClass('rule-invalid');
-		}
-	});
+					 			$("#aceptar").click(function(){
 
-	//Valida que la confirmación sea igual a la nueva contraseña
-	$('#confirm-userpwd').on('keyup', function() {
-		confirmPwd = $(this).val();
-		pwd = $('#userpwd').val();
+					 				$(location).attr('href', base_url+'/dashboard');
 
-		//Valida que la confirmación sea igual a la nueva contraseña
-		if(confirmPwd !== '' && confirmPwd === pwd) {
-			$('#igual').removeClass('rule-invalid').addClass('rule-valid');
-		} else {
-			$('#igual').removeClass('rule-valid').addClass('rule-invalid');
-		}
-	});
+								});
+							}
+							if(data.rc==-192) {
 
-	//Verifica que se cunplan los requerimientos de la contraseña
-	$('#pwd-in').on('keyup', function(){
-		valid = $('.rule-valid').length;
-		valid === 9 ? $('#continuar').removeAttr("disabled") : $('#continuar').attr("disabled", true);
-	});
+								$("#content").children().remove();
+								$('#msg_pass').text('Contraseña actual incorrecta. Por favor verifique sus datos.')
+								$("#content").append($("#sinExito").removeAttr('style')).html();
 
-	$('#continuar').on('click', function() {
-		oldPwd = hex_md5($('#old-userpwd').val());
-		pwd = hex_md5($('#userpwd').val());
-		$('#continuar').hide();
-		$('#loading').show();
+			 					$("#regresar").click(function(){
 
-		updatePasword(oldPwd, pwd);
-	});
-});
+			 					$(location).attr('href', base_url+'/users/cambiarPassword?t=t');
 
-//Actualizar contraseña
-function updatePasword(oldPwd, pwd)
-{
-	$.post(base_url + "/users/actualizarPassword",
-	{passwordOld: oldPwd, passwordNew: pwd, temporary: temporary})
-	.done(function(response) {
-		pwdResponse(response.title, response.msg, response.alert, response.action);
-		$('#loading').hide();
-		if(response.code !== 0) {
-			$('#continuar').show();
-		}
-	});
-}
+								});
 
-//Modal respuestas del servicio
-function pwdResponse(title, msg, alert, action)
-{
-	$('#response-pwd').dialog({
-		title: title,
-		modal: true,
-		width: '440px',
-		draggable: false,
-		resizable: false,
-		focus: false,
-		open: function(event, ui) {
-			$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			$('#title-pwd').text(title);
-			$('#alert-pwd').addClass(alert);
-			$('#content-pwd').empty().append('<p> ' + msg + '</p>');
-		}
-	});
-	$('#close-pwd').on('click', function() {
-		$('#response-pwd').dialog('close');
-		$('#alert-pwd').removeClass(alert);
-		action ? $(location).attr('href', base_url + uri) : '';
-	});
-}
+							}
+							if(data.rc==-199) {
+
+								$("#content").children().remove();
+								$('#msg_pass').text('Su contraseña no ha sido actualizada. Por favor verifique sus datos.')
+								$("#content").append($("#sinExito").removeAttr('style')).html();
+
+			 					$("#regresar").click(function(){
+
+			 					$(location).attr('href', base_url+'/users/cambiarPassword?t=t');
+
+								});
+
+							}
+
+						});	//POST
+				}
+			});
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// MODAL TERMINOS Y CONDICIONES
+    $(".label-inline").on("click", "a", function() {
+
+    $("#dialog-tc").dialog({
+      modal:"true",
+      width:"940px",
+      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+    });
+
+    $("#ok").click(function(){
+      $("#dialog-tc").dialog("close");
+    });
+
+    });
+
+
+});  //FIN DE LA FUNCION GENERAL

@@ -4,16 +4,13 @@ var controlValid = 0;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
-		afiliado = $('#content').attr('afiliado'),
-		cantCorreos = $('#content').attr('cant-correos')
+	afiliado = $('#content').attr('afiliado');
 
 $(function(){
 
 	if(aplicaperfil == 'S' && afiliado == '0') {
 		$('#widget-account').focus();
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
-	} else if (cantCorreos > 0) {
-		systemDialog('Perfil de Usuario', 'Debes cambiar el correo eléctronico, ya que pertenece a otro usuario.', 'mail');
 	}
 
 	//Menu desplegable transferencia
@@ -713,8 +710,7 @@ $(function(){
 		primerApellido=$("#primer-apellido").val();//5
 		segundoApellido=$("#segundo-apellido").val();//6
 		lugarNacimiento=$("#lugar-nacimiento").val();//7
-		fechaNacimiento=$('#dia-nacimiento').val() + '/' + $('#mes-nacimiento').val() + '/' +
-										$('#anio-nacimiento').val();//8
+		fechaNacimiento=$("#fecha-nacimiento-valor").val();//8
 		sexo=$("input[name='gender']:checked").val();//9
 		edocivil=$("#edo-civil-value").val();//10
 		nacionalidad=$("#nacionalidad-valor").val();//11
@@ -832,19 +828,9 @@ $(function(){
 						$('#content-formulario-perfil').remove();
 						$('#exito').css('display','block');
 						break;
-					case -5:
-					case -20:
-					case -158:
-					case -162:
 					case -200:
-					case -374:
-					case -375:
-					case -377:
-						systemDialog('Perfil', 'En este momento no podemos atender sus solicitud, por favor intente más tarde', 'dash');
-						break;
-					case -284:
-						$('#telefono').focus();
-						systemDialog('Perfil', 'El teléfono móvil que intenta registrar está siendo usado por otro usuario, por favor pruebe con otro');
+						$('.overlay-modal').show();
+						$('#dialogo-fallo-actualizacion').show();
 						break;
 					case -271:
 						$('.overlay-modal').show();
@@ -965,11 +951,13 @@ $(function(){
 				"email": email,
 				"username": userName
 			}, function (data) {
+				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
 
 				//console.log(response_email);
 				if(response_email.rc == -238) {
 					$("#loading").hide();
+					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
 					enviarForm();
@@ -990,13 +978,14 @@ $(function(){
 					});
 				} else {
 					$("#loading").hide();
+					$('#msg-correo').css('display', 'none');
 					$('#email').removeClass('field-error').addClass('field-success');
 					$('#actualizar').removeAttr('disabled');
-					systemDialog('Perfil', 'En este momento no podemos atender tu solicitud, por favor intente más tarde', 'dash');
-					//enviarForm();
+					enviarForm();
 				}
 			});
 		} else if (email == verificarMail) {
+			$('#msg-correo').css('display', 'none');
 			$('#email').removeClass('field-error').addClass('field-success');
 			$('#actualizar').removeAttr('disabled');
 			enviarForm();
@@ -1272,13 +1261,8 @@ function systemDialog(title, msg, action) {
 	$("#acept").click(function () {
 		$('#actualizar').fadeIn();
 		$("#completar-afiliacion").dialog("close");
-		switch(action) {
-			case 'dash':
-				$(location).attr('href', base_url+'/dashboard');
-				break;
-			case 'mail':
-				$('#email').focus();
-				break;
+		if(action == 'dash') {
+			$(location).attr('href', base_url+'/dashboard');
 		}
 	});
 }
