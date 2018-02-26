@@ -493,11 +493,10 @@ class Users extends CI_Controller {
 
 		$passwordOld = $this->input->post('passwordOld');
 		$passwordNew = $this->input->post('passwordNew');
-		$temporary = $this->input->post('temporary');
 
 		$this->load->model('users_model','actualizarPassword');
 
-		$this->output->set_content_type('application/json')->set_output($this->actualizarPassword->actualizar_password($passwordOld, $passwordNew, $temporary));
+		$this->output->set_content_type('application/json')->set_output($this->actualizarPassword->actualizar_password($passwordOld, $passwordNew));
 
 	}
 

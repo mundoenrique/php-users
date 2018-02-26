@@ -72,7 +72,7 @@ class Perfil_model extends CI_Model {
             "segundoNombre"		=> $segundoNombre,
             "primerApellido"	=> $primerApellido,
             "segundoApellido"	=> $segundoApellido,
-            "email"				=> strtolower($email),
+            "email"				=> $email,
             "dtfechorcrea_usu" => $dtfechorcrea_usu,
             "passwordOperaciones" => "",
             "notEmail"			=> $notEmail,
@@ -85,8 +85,7 @@ class Perfil_model extends CI_Model {
             "tipo_id_ext_per"	=> $tipo_id_ext_per,
             "descripcion_tipo_id_ext_per" => $tipo_identificacion,
             "disponeClaveSMS" => "",
-						"aplicaPerfil"=> $aplicaPerfil,
-						"idPersona" => $this->session->userdata('idPersona'),
+            "aplicaPerfil"=> $aplicaPerfil,
             "rc"=> "0"
         );
 
@@ -269,8 +268,6 @@ class Perfil_model extends CI_Model {
                 case 0:
                     $this->session->set_userdata('afiliado', $contrato);
             }
-        } elseif ($desdata->rc === 0) {
-        	$this->session->set_userdata('cantCorreos', 0);
         }
 
         return json_encode($desdata);
