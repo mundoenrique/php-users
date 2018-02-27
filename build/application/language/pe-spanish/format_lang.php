@@ -1,6 +1,6 @@
 <?php
 $lang['PAIS'] = "PERU";
-$lang['MONEDA'] = "S/. ";
+$lang['MONEDA'] = "S/ ";
 $lang['FOOTER'] = "";
 $lang['ID'] = "DNI.";
 $lang['MENU_P2P'] = "Entre Tarjetas";
