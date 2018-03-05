@@ -31,7 +31,7 @@ class Detail extends CI_Controller {
 		}
 
 		//INSTANCIA PARA TITULO DE PAGINA
- 		$titlePage = 'ConexiÃ³n Personas Online';
+ 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
 		$styleSheets = array(
 			array('url' => 'base.css', 'media' => 'screen'),
