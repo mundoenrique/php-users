@@ -4,13 +4,18 @@ var controlValid = 0;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
-	afiliado = $('#content').attr('afiliado');
+		afiliado = $('#content').attr('afiliado'),
+		tyc = $('#content').attr('tyc');
 
 $(function(){
 
 	if(aplicaperfil == 'S' && afiliado == '0') {
 		$('#widget-account').focus();
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
+	}
+
+	if(tyc == '0') {
+		systemDialog('Términos y condiciones', 'Debes aceptar los términos y condiciones.', 'tyc');
 	}
 
 	//Menu desplegable transferencia
@@ -750,6 +755,7 @@ $(function(){
 		acTipo=$('#tipo_direccion_value').val();//45
 		acZonaPostal=$('#codepostal').val();//46
 		disponeClaveSMS=$('#disponeClaveSMS').val();//47
+		tyc = $('#tyc').is(':checked') ? 1 : 0;
 
 
 		if(otro_telefono_num==""){
@@ -820,7 +826,7 @@ $(function(){
 				"id_ext_per":id_ext_per, "aplica":aplicaPerfil, "notarjeta":notarjeta,
 				"acCodCiudad":acCodCiudad, "acCodEstado":acCodEstado, "acCodPais":acCodPais, "acTipo":acTipo,
 				"acZonaPostal":acZonaPostal, "disponeClaveSMS":disponeClaveSMS, "disponeClaveSMS":disponeClaveSMS,
-				"codigopais":codPaisresidencia, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
+				"codigopais":codPaisresidencia, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato, "tyc": tyc},
 			function(data) {
 				$("#load_reg").hide();
 				switch (data.rc) {
@@ -861,26 +867,20 @@ $(function(){
 	$('#invalido2').on('click',function(){
 		$('#dialogo-actualizacion-incompleta').hide();
 		location.reload(true);
-		//$('.overlay-modal').hide();
 	});
 	/**************fin ocultar modales****************/
 
 	// MODAL TERMINOS Y CONDICIONES
-	$(".label-inline").on("click", "a", function() {
-
-		$("#dialog-tc").dialog({
-			dialogClass: "cond-serv",
-			modal:"true",
-			width:"940px",
-			draggable:false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		});
-		$(".cond-serv").css("top","50px");
-		$("#ok").click(function(){
-			$("#dialog-tc").dialog("close");
-		});
-
+	$(".label-inline").on("click", "a", tycModal);
+	$('#tyc').on('click', function(){
+		tycModal();
+		$('#tyc').off('click');
 	});
+	if($('#tyc').is(':checked')) {
+		$('#tyc')
+			.off('click')
+			.prop('disabled', true);
+	}
 
 	//Modal protección de datos personales
 	$('#proteccion').on('click', function(){
@@ -903,7 +903,6 @@ $(function(){
 		$('#proteccion')
 			.off('click')
 			.prop('disabled', true);
-
 	}
 
 	//Modal protección de datos personales
@@ -937,7 +936,7 @@ $(function(){
 	var formUpdate=$('#form-perfil');
 	validar_campos();
 
-	$("#actualizar").click(function(e){
+	$("#actualizar").on('click', function(e) {
 		e.preventDefault();
 		pais=$('#content').attr('accodpais');
 		email=$('#email').val();
@@ -1168,7 +1167,8 @@ $(function(){
 				"cargo_publico" : {"required":true},																		//35
 				"institucion_publica" : {"required":true},																			//36
 				"uif" : {"required":true},																					//37
-				"contrato": {"required": true}
+				"contrato": {"required": true},
+				"tyc": {"required": true}
 			},
 
 			messages: {
@@ -1240,7 +1240,8 @@ $(function(){
 				"cargo_publico" : "El campo Cargo Público NO puede estar vacío y debe contener solo letras.",									//35
 				"institucion_publica" : "El campo Institución pública NO puede estar vacío.",																	//36
 				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? NO puede estar vacío.",	//37
-				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico."
+				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
+				"tyc": "Debe aceptar los términos y condiciones."
 			}
 		}); // VALIDATE
 	}
@@ -1261,8 +1262,31 @@ function systemDialog(title, msg, action) {
 	$("#acept").click(function () {
 		$('#actualizar').fadeIn();
 		$("#completar-afiliacion").dialog("close");
-		if(action == 'dash') {
-			$(location).attr('href', base_url+'/dashboard');
+		switch(action) {
+			case 'dash':
+				$(location).attr('href', base_url+'/dashboard');
+				break;
+			case 'tyc':
+				$('#tyc').focus();
+				break;
+
 		}
+	});
+}
+
+function tycModal() {
+	$("#dialog-tc").dialog({
+		dialogClass: "cond-serv",
+		modal:"true",
+		width:"940px",
+		draggable:false,
+		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+	});
+	$('html, body').animate({
+		scrollTop: $('body').offset().top
+	}, 0);
+	$(".cond-serv").css("top","50px");
+	$("#ok").click(function(){
+		$("#dialog-tc").dialog("close");
 	});
 }

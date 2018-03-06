@@ -11,8 +11,9 @@ if(isset($pagina) ){
 	//Obtener si el usuario completó los campos de afiliación plata beneficios
 	$aplicaPerfil = $this->session->userdata('aplicaPerfil');
 	$afiliado = $this->session->userdata('afiliado');
+	$tyc = $this->session->userdata('tyc');
 	$current = @end(explode('/',base_url(uri_string())));
-	if ($aplicaPerfil === 'S' && $afiliado == 0 && $current !== 'perfil') {
+	if (($aplicaPerfil === 'S' && $afiliado == 0) || $tyc == 0 && $current !== 'perfil') {
 		redirect(base_url('perfil'), 'location');
 	}
 	switch ($pagina) {
