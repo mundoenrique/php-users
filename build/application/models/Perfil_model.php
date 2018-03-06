@@ -47,7 +47,7 @@ class Perfil_model extends CI_Model {
     public function perfil_update($userName, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $lugarNacimiento, $fechaNacimiento, $sexo, $edocivil, $nacionalidad, $profesion, $tipoDireccion,
                                   $codepostal, $paisResidencia, $departamento_residencia, $provincia_residencia, $distrito_residencia, $direccion, $telefono_hab, $telefono, $otro_telefono_tipo, $otro_telefono_num, $email, $ruc_cto_labora, $centro_laboral, $situacion_laboral, $antiguedad_laboral_value,
                                   $profesion_labora, $cargo, $ingreso_promedio, $cargo_public, $cargo_publico, $institucion_publica, $sujeto_obligado, $notEmail, $notSms, $dtfechorcrea_usu, $id_ext_per, $tipo_profesion, $tipo_identificacion, $tipo_id_ext_per, $aplicaPerfil,
-                                  $notarjeta, $acCodCiudad, $acCodEstado, $acCodPais, $acTipo, $acZonaPostal, $disponeClaveSMS, $codigopais, $verifyDigit = '', $proteccion = '', $contrato = '')
+                                  $notarjeta, $acCodCiudad, $acCodEstado, $acCodPais, $acTipo, $acZonaPostal, $disponeClaveSMS, $codigopais, $verifyDigit = '', $proteccion = '', $contrato = '', $tyc)
     {
         //PARAMS
         $logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","perfil","perfil","actualizar");
@@ -85,7 +85,8 @@ class Perfil_model extends CI_Model {
             "tipo_id_ext_per"	=> $tipo_id_ext_per,
             "descripcion_tipo_id_ext_per" => $tipo_identificacion,
             "disponeClaveSMS" => "",
-            "aplicaPerfil"=> $aplicaPerfil,
+						"aplicaPerfil"=> $aplicaPerfil,
+						"tyc" => $tyc,
             "rc"=> "0"
         );
 
@@ -268,7 +269,9 @@ class Perfil_model extends CI_Model {
                 case 0:
                     $this->session->set_userdata('afiliado', $contrato);
             }
-        }
+				}
+
+				$desdata->rc === 0 ? $this->session->set_userdata('tyc', $tyc) : '';
 
         return json_encode($desdata);
         // Simula respuesta de servicio

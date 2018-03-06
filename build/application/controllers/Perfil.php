@@ -223,7 +223,9 @@ class Perfil extends CI_Controller {
 
         $proteccion=$this->input->post('proteccion');
 
-        $contrato=$this->input->post('contrato');
+				$contrato=$this->input->post('contrato');
+
+        $tyc=$this->input->post('tyc');
 
 
         log_message("info", "COMPROBAR ACTUALIZAR PERFIL===> ".$userName);
@@ -233,7 +235,7 @@ class Perfil extends CI_Controller {
         $this->output->set_content_type('application/json')->set_output($this->actualizar->perfil_update($userName, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $lugarNacimiento, $fechaNacimiento, $sexo, $edocivil, $nacionalidad, $profesion, $tipoDireccion,
             $codepostal, $paisResidencia, $departamento_residencia, $provincia_residencia, $distrito_residencia, $direccion, $telefono_hab, $telefono, $otro_telefono_tipo, $otro_telefono_num, $email, $ruc_cto_labora, $centro_laboral, $situacion_laboral, $antiguedad_laboral_value,
             $profesion_labora, $cargo, $ingreso_promedio, $cargo_public, $cargo_publico, $institucion_publica, $sujeto_obligado, $notEmail, $notSms, $dtfechorcrea_usu, $id_ext_per, $tipo_profesion, $tipo_identificacion, $tipo_id_ext_per, $aplicaPerfil,
-            $notarjeta, $acCodCiudad, $acCodEstado, $acCodPais, $acTipo, $acZonaPostal, $disponeClaveSMS, $codigopais, $verifyDigit, $proteccion, $contrato));
+            $notarjeta, $acCodCiudad, $acCodEstado, $acCodPais, $acTipo, $acZonaPostal, $disponeClaveSMS, $codigopais, $verifyDigit, $proteccion, $contrato, $tyc));
 
     }
 
