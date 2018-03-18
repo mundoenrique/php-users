@@ -153,11 +153,13 @@ $(function(){
 			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(data){
 				$("#loading").hide();
 				$("button").attr("disabled",false);
+
 				pais	= data.pais;
 
 				if(data.rc == 0) {
 					aplicaPerfil = data.user.aplicaPerfil;
 					digVer = data.afiliacion.dig_verificador_aux;
+
 					if(pais == 'Pe') {
 
 						if (data.user.aplicaPerfil == 'N') {
@@ -190,8 +192,9 @@ $(function(){
 
 							$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
 								$("#departamento").empty().append("<option value=''>Cargando...</option>");
+
 								if(data.rc == 0) {
-                                    $("#departamento").empty().append("<option value=''>Seleccione</option>");
+                  $("#departamento").empty().append("<option value=''>Seleccione</option>");
 									$.each(data.listaSubRegiones, function (pos, item) {
 										var lista;
 										lista = "<option value="+item.codregion+"> "+item.region+" </option>";
@@ -306,44 +309,22 @@ $(function(){
 						$('#fecha-de-nacimiento').val(dia+'/'+mes+'/'+ano);
 					}
 
-				} else if(data.rc == -183) {
-					$("#dialogo-documento").dialog({
-						title	: "Error",
+				}
+				else if(data.code == 2) //Respuesta negativa muestra modal
+				{
+					$("#msnContent").html(data.msn);
+					$("#messageContent").addClass(data.modalType);
+					$("#dialogo-check-count").dialog({
+						title	: data.title,
 						modal	: "true",
 						width	: "440px",
 						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 					});
 
-					$("#ok2").click(function(){
-						$("#dialogo-documento").dialog("close");
+					$("#ok-check").click(function(){
+						$("#dialogo-check-count").dialog("close");
 					});
-
-				} else if(data.rc == -184) {
-					$("#dialogo-pin").dialog({
-						title	: "Validar cuenta",
-						modal	: "true",
-						width	: "440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#inva3").click(function(){
-						$("#dialogo-pin").dialog("close");
-					});
-
-				} else {
-
-					$("#dialogo_error").dialog({
-						title	:"Error",
-						modal	:"true",
-						width	:"440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#ok").click(function(){
-						$("#dialogo_error").dialog("close");
-					});
-
-				} // ELSE
+				}
 
 			});	// POST VALIDAR
 
@@ -760,185 +741,69 @@ $(function(){
 					anotherPhone= "";
 				}
 
-				if(aplicaPerfil == 'S'){
-
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito").removeAttr('style')).html();
-								$("#message").append(cadena);
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)){
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271 || data.rc == -335){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-
-
-							if(data.rc == -284) {
-							 msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-							}
-
-						});	//POST
-
-				}else if(aplicaPerfil == 'N') {
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
-
-								var cadena=		'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito").removeAttr('style')).html();
-								$("#message").append(cadena);
-
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)) {
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								console.log('cualquier locura');
-								console.log(data.rc);
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -284) {
-
-								msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-
-							}
-						});	//POST
+				//validar aplica perfil para validación de rc LMHL
+				if(aplicaPerfil == 'S')
+				{
+					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato};
 				}
+				else if(aplicaPerfil == 'N')
+				{
+					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence};
+				}
+
+				$.post(base_url + "/registro/registrar",dataUser,function(data){
+					switch(data.code){
+						case 0:
+							var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
+							cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
+
+							$("#content").children().remove();
+							$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
+							$("#message"+data.modalType).append(cadena);
+
+						case 2: //error general
+							$(location).attr('href', base_url+'/users/error_gral');
+						break;
+
+						case 3: //
+							$("#registrar").fadeIn();
+
+							$("#msnContent").html(data.msn);
+							$("#messageContent").addClass(data.modalType);
+							$("#dialogo-check-count").dialog({
+								title	: data.title,
+								modal	: "true",
+								width	: "440px",
+								open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+							});
+
+							$("#ok-check").click(function(){
+								$("#dialogo-check-count").dialog("close");
+							});
+						break;
+
+						case 4:
+							$("#registrar").fadeIn();
+
+							$("#msnContent").html(data.msn);
+							$("#messageContent").addClass(data.modalType);
+							$("#dialogo-check-count").dialog({
+								title	: data.title,
+								modal	: "true",
+								width	: "440px",
+								open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+							});
+
+							$("#ok-check").click(function(){
+								$(location).attr('href', base_url);
+							});
+						break;
+
+						case 5:
+							msgService(data.title, data.msn);
+						break;
+					}
+				})
 
 			} else { ///////////////////////////////////
 

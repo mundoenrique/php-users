@@ -159,7 +159,42 @@ class Registro_model extends CI_Model {
 		   	);
 			$this->session->set_userdata($newdata);
 	  	}
-	  	return json_encode($desdata);
+
+			//Valida RC
+		switch ($desdata->rc) {
+			case 0:
+				return json_encode($desdata); //falta por tener la descripción del servicio para completar esta funcionalidad-- Requiero unir el $desdata con el $this->code para validarlo en el registro.js
+				break;
+
+			case -183:
+				$this->title = 'Error';
+				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
+				break;
+
+			case -184:
+				$this->title = 'Validar Cuenta';
+				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
+				break;
+
+			default:
+				$this->title = 'Error';
+				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
+				break;
+		}
+
+		$this->code = 2;
+		$this->modalType = "alert-error";
+
+		//Crea respuesta de error
+		$this->response = [
+			"code" => $this->code,
+			"modal" => $this->modal,
+			"title" => $this->title,
+			"msn" => $this->msn,
+			"modalType" => $this->modalType
+		];
+
+			return json_encode($this->response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -186,11 +221,97 @@ class Registro_model extends CI_Model {
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
 		log_message("info", "Response validar_usuario -----> ".$response);
 
-	  	$data		= json_decode(utf8_encode($response));
-	  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$data		= json_decode(utf8_encode($response));
+		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 		log_message("info", "Response validar_usuario -->".json_encode($desdata));
 
-	  	return json_encode($desdata);
+
+		switch ($desdata->rc) {
+			case 0:
+				$this->title = "Usuario registrado exitosamente";
+				$this->msn = "se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong>";
+				$this->code = 0;
+				$this->modalType = "";
+			break;
+
+			case -61:
+			case -5:
+			case -3:
+				$this->title = "";
+				$this->msn = "";
+				$this->code = 2;
+				$this->modalType = "";
+			break;
+
+			case -181:
+				$this->title = "Correo Registrado";
+				$this->msn = "El correo indicado se encuentra registrado. Por favor verifique e intente nuevamente.";
+				$this->code = 3;
+				$this->modalType = "alert-error";
+
+			break;
+
+			case -206:
+				$this->title = "Correo Registrado";
+				$this->msn = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error enviándole el mail de confirmación";
+				$this->code = 4;
+				$this->modalType = "alert-warning";
+			break;
+
+			case -230:
+				$this->title = "Fallo en Registro";
+				$this->msn = "No se puede realizar el registro en estos momentos, por favor intente de nuevo más tarde.";
+				$this->code = 4;
+				$this->modalType = "alert-error";
+			break;
+
+			case -271:
+			case -335:
+
+				$this->title = "Usuario registrado";
+				$this->msn = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong>";
+				$this->code = 5;
+				$this->modalType = "";
+
+			break;
+
+			case -317:
+			case -314:
+			case -313:
+			case -311:
+			case -21:
+
+				$this->title = "Usuario registrado";
+				$this->msn = "se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong>";
+				$this->code = 0;
+				$this->modalType = "2";
+
+			break;
+
+			case -284:
+
+				$this->title = "Teléfono móvil existente";
+				$this->msn = "El teléfono móvil ya se encuentra registrado.";
+				$this->code = 5;
+				$this->modalType = "2";
+
+			break;
+		}
+
+
+
+		$this->response = [
+			"code" => $this->code,
+			"modal" => $this->modal,
+			"title" => $this->title,
+			"msn" => $this->msn,
+			"modalType" => $this->modalType
+		];
+
+			return json_encode($this->response);
+
+
+
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
