@@ -176,6 +176,24 @@ class Registro_model extends CI_Model {
 				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
 				break;
 
+			//verificacion de reniec ? grupo 1
+			case 5200:
+			case 5031:
+				$this->title = "Error";
+				$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde";
+				break;
+
+			// verificacion de reniec ? grupo 2
+			case 5032:
+			case 5033:
+			case 5034:
+			case 5036:
+			case 5037:
+			case 5114:
+				$this->title = "Error";
+				$this->msn = "Datos de afiliación inválidos, verifica tu DNI e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa";
+				break;
+
 			default:
 				$this->title = 'Error';
 				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
