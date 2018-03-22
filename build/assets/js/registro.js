@@ -312,18 +312,8 @@ $(function(){
 				}
 				else if(data.code == 2) //Respuesta negativa muestra modal
 				{
-					$("#msnContent").html(data.msn);
-					$("#messageContent").addClass(data.modalType);
-					$("#dialogo-check-count").dialog({
-						title	: data.title,
-						modal	: "true",
-						width	: "440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#ok-check").click(function(){
-						$("#dialogo-check-count").dialog("close");
-					});
+					//mensaje de error
+						msgService(data.title, data.msn, data.modalType, 0)
 				}
 
 			});	// POST VALIDAR
@@ -741,17 +731,13 @@ $(function(){
 					anotherPhone= "";
 				}
 
-				//validar aplica perfil para validación de rc LMHL
-				if(aplicaPerfil == 'S')
-				{
-					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato};
-				}
-				else if(aplicaPerfil == 'N')
-				{
-					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence};
-				}
+				//validar aplica perfil LMHL
+				$.post(base_url + "/registro/registrar",(aplicaPerfil == 'S' ?
+				{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password,"notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato}:
+				{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence}
 
-				$.post(base_url + "/registro/registrar",dataUser,function(data){
+		),function(data){
+
 					switch(data.code){
 						case 0:
 							var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
@@ -766,42 +752,13 @@ $(function(){
 						break;
 
 						case 3: //
-							$("#registrar").fadeIn();
-
-							$("#msnContent").html(data.msn);
-							$("#messageContent").addClass(data.modalType);
-							$("#dialogo-check-count").dialog({
-								title	: data.title,
-								modal	: "true",
-								width	: "440px",
-								open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-							});
-
-							$("#ok-check").click(function(){
-								$("#dialogo-check-count").dialog("close");
-							});
+							msgService(data.title, data.msn, data.modalType, 0)
 						break;
 
 						case 4:
-							$("#registrar").fadeIn();
-
-							$("#msnContent").html(data.msn);
-							$("#messageContent").addClass(data.modalType);
-							$("#dialogo-check-count").dialog({
-								title	: data.title,
-								modal	: "true",
-								width	: "440px",
-								open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-							});
-
-							$("#ok-check").click(function(){
-								$(location).attr('href', base_url);
-							});
+							msgService(data.title, data.msn, data.modalType, 1)
 						break;
 
-						case 5:
-							msgService(data.title, data.msn);
-						break;
 					}
 				})
 
@@ -1231,7 +1188,11 @@ $(".label-inline").on("click", "a", function() {
 	}
 });  //FIN DE LA FUNCION GENERAL
 
-function msgService (title, msg) {
+
+
+
+//Mensaje de error
+function msgService (title, msg, modalType, redirect) {
 	$("#registrar").fadeIn();
 	$("#dialogo-movil").dialog({
 		title	:title,
@@ -1239,11 +1200,16 @@ function msgService (title, msg) {
 		width	:"440px",
 		open	: function(event, ui) {
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			$('#msgService').text(msg);
+			//Cambia el tipo de alerta - warning - error - success
+		  $("#modalType").addClass(modalType);
+			$('#msgService').html(msg);
 		}
 
 	});
 	$("#inva5").click(function(){
 		$("#dialogo-movil").dialog("close");
+		if(redirect == 1){
+			$(location).attr('href', base_url);
+		}
 	});
 }

@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registro_model extends CI_Model {
 
+	protected $code;
+	protected $modal;
+	protected $title;
+	protected $msn;
+	protected $modalType;
+
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -161,6 +168,7 @@ class Registro_model extends CI_Model {
 	  	}
 
 			//Valida RC
+
 		switch ($desdata->rc) {
 			case 0:
 				return json_encode($desdata); //falta por tener la descripción del servicio para completar esta funcionalidad-- Requiero unir el $desdata con el $this->code para validarlo en el registro.js
@@ -176,23 +184,6 @@ class Registro_model extends CI_Model {
 				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
 				break;
 
-			//verificacion de reniec ? grupo 1
-			case 5200:
-			case 5031:
-				$this->title = "Error";
-				$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde";
-				break;
-
-			// verificacion de reniec ? grupo 2
-			case 5032:
-			case 5033:
-			case 5034:
-			case 5036:
-			case 5037:
-			case 5114:
-				$this->title = "Error";
-				$this->msn = "Datos de afiliación inválidos, verifica tu DNI e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa";
-				break;
 
 			default:
 				$this->title = 'Error';
@@ -230,6 +221,7 @@ class Registro_model extends CI_Model {
 			"logAccesoObject"	=> $logAcceso,
 			"token"				=> $this->session->userdata("token")
 		));
+
 		log_message("info", "validar_usuario ==>".$data);
 
 		$dataEncry	= np_Hoplite_Encryption($data,1);
@@ -247,7 +239,7 @@ class Registro_model extends CI_Model {
 		switch ($desdata->rc) {
 			case 0:
 				$this->title = "Usuario registrado exitosamente";
-				$this->msn = "se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong>";
+				$this->msn = "se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
 				$this->code = 0;
 				$this->modalType = "";
 			break;
@@ -264,6 +256,15 @@ class Registro_model extends CI_Model {
 			case -181:
 				$this->title = "Correo Registrado";
 				$this->msn = "El correo indicado se encuentra registrado. Por favor verifique e intente nuevamente.";
+				$this->code = 3;
+				$this->modalType = "alert-error";
+
+			break;
+
+			case -284:
+
+				$this->title = "Teléfono móvil existente";
+				$this->msn = "El teléfono móvil ya se encuentra registrado.";
 				$this->code = 3;
 				$this->modalType = "alert-error";
 
@@ -288,8 +289,8 @@ class Registro_model extends CI_Model {
 
 				$this->title = "Usuario registrado";
 				$this->msn = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong>";
-				$this->code = 5;
-				$this->modalType = "";
+				$this->code = 0;
+				$this->modalType = "2";
 
 			break;
 
@@ -306,17 +307,53 @@ class Registro_model extends CI_Model {
 
 			break;
 
-			case -284:
+			//verificacion de reniec grupo 1
+			case 5002:
+			case 5003:
+			case -102:
+			case -104:
+			case -118:
+			case 5004:
+			case 5008:
+			case 5009:
+			case 5010:
+			case 5011:
+			case 5020:
+			case 5021:
+			case 5030:
+			case 5100:
+			case 5104:
+			case 5101:
+			case 5102:
+			case 5103:
+			case 5104:
+			case 5105:
+			case 5111:
+			case 5112:
+			case 5113:
 
-				$this->title = "Teléfono móvil existente";
-				$this->msn = "El teléfono móvil ya se encuentra registrado.";
-				$this->code = 5;
-				$this->modalType = "2";
+				$this->title = "Error";
+				$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde";
+				$this->code = 3;
+				$this->modalType = "alert-error";
+				break;
 
-			break;
+			// verificacion de reniec  grupo 2
+			case 5200:
+			case 5031:
+			case 5032:
+			case 5033:
+			case 5034:
+			case 5036:
+			case 5037:
+			case 5114:
+				$this->title = "Error";
+				$this->msn = "Datos de afiliación inválidos, verifica tu DNI e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa";
+				$this->code = 3;
+				$this->modalType = "alert-error";
+				break;
+
 		}
-
-
 
 		$this->response = [
 			"code" => $this->code,
@@ -327,8 +364,6 @@ class Registro_model extends CI_Model {
 		];
 
 			return json_encode($this->response);
-
-
 
 	}
 
