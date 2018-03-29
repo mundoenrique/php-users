@@ -731,36 +731,47 @@ $(function(){
 					anotherPhone= "";
 				}
 
+
+				if(aplicaPerfil == 'S'){
+					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence,"departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico,"cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password,"notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato};
+				}else{
+					var dataUser =  {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence};
+				}
+
 				//validar aplica perfil LMHL
-				$.post(base_url + "/registro/registrar",(aplicaPerfil == 'S' ?
-				{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password,"notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato}:
-				{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence}
 
-		),function(data){
-
-					switch(data.code){
-						case 0:
-							var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
-							cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
-
-							$("#content").children().remove();
-							$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
-							$("#message"+data.modalType).append(cadena);
-
-						case 2: //error general
-							$(location).attr('href', base_url+'/users/error_gral');
-						break;
-
-						case 3: //
-							msgService(data.title, data.msn, data.modalType, 0)
-						break;
-
-						case 4:
-							msgService(data.title, data.msn, data.modalType, 1)
-						break;
-
-					}
+				$.ajax({
+				  method: "POST",
+				  url: base_url + "/registro/registrar",
+				  data: dataUser
 				})
+				  .done(function( data ) {
+
+						switch(data.code){
+							case 0:
+								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
+								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
+
+								$("#content").children().remove();
+								$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
+								$("#message"+data.modalType).append(cadena);
+
+							break;
+
+							case 2: //error general
+								$(location).attr('href', base_url+'/users/error_gral');
+							break;
+
+							case 3: //
+								msgService(data.title, data.msn, data.modalType, 0)
+							break;
+
+							case 4:
+								msgService(data.title, data.msn, data.modalType, 1)
+							break;
+
+						}
+				  })
 
 			} else { ///////////////////////////////////
 
