@@ -183,3 +183,26 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 
 	}
 }
+
+
+// ------------------------------------------------------------------------
+if ( ! function_exists('np_hoplite_decimals'))
+{
+	//AFILIACIÓN DE NÚMERO
+	/**
+	 * @access public
+	 * @params: $number
+	 * @info: Función para agregar decimales a valores según país
+	 * @autor: Alexander Cuestas
+	 * @date:  17/03/2018
+	 */
+	function np_hoplite_decimals($number,$pais)
+	{
+		if(($pais ==='Pe') || ($pais ==='Usd')) {
+      $result = number_format($number, 2, '.', ',');
+    } else if (($pais === 'Ve') || ($pais ==='Co')) {
+      $result = number_format($number, 2, ',', '.');
+    }
+	  return $result;
+	}
+}

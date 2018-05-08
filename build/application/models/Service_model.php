@@ -66,9 +66,10 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
-        // sleep(2);
-        // $response = '{"rc":-288,"msg":"Proceso OK"}';
-        // $desdata = json_decode($response);
+        /* sleep(2);
+         $response = '{"rc":-306,"msg":"Proceso OK","cost_repos_plas":10000}';
+         $desdata = json_decode($response);*/
+				 
 
         if ($desdata) {
             switch ($desdata->rc) {
@@ -126,8 +127,9 @@ class Service_model extends CI_Model {
                         'msg' => 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.'
                     ];
                     break;
-                case -306:
-                    $response = $this->callWsGetToken();
+                case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
+										$cost_repos_plas = (isset($desdata->cost_repos_plas) && $desdata->cost_repos_plas != '') ? $desdata->cost_repos_plas : NULL;
+                    $response = $this->callWsGetToken($cost_repos_plas);
                     break;
                 case -125:
                 case -304:
@@ -321,7 +323,7 @@ class Service_model extends CI_Model {
     // -----------------------------------------------------------------------------------------------------------------
 
     //Solicitud de Token
-    public function callWsGetToken()
+    public function callWsGetToken($cost_repos_plas=NULL)
     {
         //log de acceso
         $session = $this->session->userdata("sessionId");
@@ -358,18 +360,32 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
-        /*sleep(2);
-        $response = '{"rc":0,"msg":"Proceso OK","bean":"uh4sf2"}';
-        $desdata = json_decode($response);*/
+        //sleep(2);
+        //$response = '{"rc":0,"msg":"Proceso OK","bean":"uh4sf2"}';
+        //$desdata = json_decode($response);
 
         if ($desdata) {
             switch ($desdata->rc){
                 case 0:
-                    $response = [
-                        'code' => 4,
-                        'title' => 'Solicitud de token',
-                        'msg' => 'Hemos enviado el código de seguridad a su correo'
-                    ];
+
+										$response = [
+												'code' => 4,
+												'title' => 'Solicitud de token',
+												'msg' => 'Hemos enviado el código de seguridad a su correo'
+										];
+
+										//Si hay costo de reposición, se agreaga en la respuesta
+                    if($cost_repos_plas != NULL){
+											$cost_repos_plas_format =  np_hoplite_decimals($cost_repos_plas, 'Pe');
+											$response = [
+	                        'code' => 4,
+	                        'title' => 'Solicitud de token',
+	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
+													'cost_repos_plas' => $cost_repos_plas,
+													'cost_repos_plas_format' => $cost_repos_plas_format
+	                    ];
+										}
+
                     break;
                 case -173:
                     $response = [

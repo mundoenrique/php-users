@@ -86,6 +86,7 @@ function lock_change (formData, model, form, action) {
         msgMain = 'rec';
         msgSec = 'recoverKey';
     }
+
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
@@ -117,7 +118,10 @@ function lock_change (formData, model, form, action) {
                     notiSystem(data.title, data.msg, 'warning', 'out', form);
                     break;
                 case 4:
-                    viewToken(data.msg, msgMain);
+										console.log(data);
+										//Verifica si la transacción tiene costo
+										let costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? [data.cost_repos_plas, data.cost_repos_plas_format] : '';
+                    viewToken(data.msg, msgMain, costo);
                     break;
                 case 5:
                     notiService (data.msg, 'msg-lock-error', 'msg-lock-success', 'block');
@@ -154,7 +158,7 @@ function getToken (msgMain) {
             cleanComplete ('block');
             switch (data.code) {
                 case 4:
-                    viewToken (data.msg, msgMain);
+                    viewToken (data.msg, msgMain, '');
                     break;
                 case 5:
                     notiService (data.msg, 'msg-lock-error', 'msg-lock-success', 'block');
@@ -266,7 +270,8 @@ function notiSystem (title, message, type, action, param) {
     });
 };
 
-function viewToken (msg, msgMain) {
+//costoReposicion: Vector si no es vacio muestra al usuario el valor de la operación
+function viewToken (msg, msgMain, costoReposicion) {
     notiService (msg, 'msg-lock-success', 'msg-lock-error', msgMain);
     (msgMain == 'block') ?
         $("#lock-acount input, #lock-acount select, #continuar")
@@ -279,6 +284,13 @@ function viewToken (msg, msgMain) {
     sendToken+= '<label for="token">Código de seguridad</label>';
     sendToken+= '<input class="field-medium" id="token" name="token" type="text">';
     sendToken+= '</li>';
+
+		//Si tiene costo se define y muestra al usuario
+		if(costoReposicion !== undefined && Array.isArray(costoReposicion)){
+			$("#montoComisionTransaccion").val(costoReposicion[0]);
+			sendToken+= '<table class="receipt" cellspacing="0" cellpadding="0"><tr><td class="data-metadata">Comisión/Pago (S/. ' + costoReposicion[1] + ') <br><span class="money-amount">S/. ' + costoReposicion[1] + '</span></td></tr></table>';
+		}
+
     $('#'+ msgMain +'-ul').append(sendToken);
 }
 
