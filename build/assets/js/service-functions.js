@@ -121,7 +121,7 @@ function lock_change (formData, model, form, action) {
 										console.log(data);
 										//Verifica si la transacción tiene costo
 										let costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? [data.cost_repos_plas, data.cost_repos_plas_format] : '';
-                    viewToken(data.msg, msgMain, costo);
+                    viewToken(data.msg, msgMain, costo_repo);
                     break;
                 case 5:
                     notiService (data.msg, 'msg-lock-error', 'msg-lock-success', 'block');
