@@ -66,10 +66,10 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
-        /* sleep(2);
-         $response = '{"rc":-306,"msg":"Proceso OK","cost_repos_plas":10000}';
-         $desdata = json_decode($response);*/
-				 
+        /*sleep(2);
+         $response = '{"rc":-382,"msg":"Proceso OK","cost_repos_plas":8352}';
+         $desdata = json_decode($response);
+				 */
 
         if ($desdata) {
             switch ($desdata->rc) {
@@ -131,6 +131,32 @@ class Service_model extends CI_Model {
 										$cost_repos_plas = (isset($desdata->cost_repos_plas) && $desdata->cost_repos_plas != '') ? $desdata->cost_repos_plas : NULL;
                     $response = $this->callWsGetToken($cost_repos_plas);
                     break;
+
+								case -382: //Reposición con costo sin token
+
+										if((isset($desdata->cost_repos_plas) && $desdata->cost_repos_plas != '')) {
+
+												$cost_repos_plas = $desdata->cost_repos_plas;
+												$cost_repos_plas_format =  np_hoplite_decimals($cost_repos_plas, 'Pe');
+
+												$response = [
+														'code' => 6,
+														'title' => 'Solicitud Reposición',
+														'msg' => 'Costo de la transacción',
+														'cost_repos_plas' => $cost_repos_plas,
+														'cost_repos_plas_format' => $cost_repos_plas_format
+												];
+										}
+										else {
+											$response = [
+					                'title' => 'Conexión Personas Online',
+					                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+					            ];
+										}
+
+                    break;
+
+
                 case -125:
                 case -304:
                 case -911:
