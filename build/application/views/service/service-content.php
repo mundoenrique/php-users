@@ -57,7 +57,7 @@
                             <input type="hidden" id="status" name="status" disabled>
                             <input type="hidden" id="lock-type" name="lock-type" disabled>
                             <input type="hidden" id="prefix-bloq" name="prefix-bloq" disabled>
-														<input type="hidden" id="montoComisionTransaccion" name="montoComisionTransaccion" disabled>
+														<input type="hidden" id="montoComisionTransaccion" name="montoComisionTransaccion" value="0">
                             <fieldset class="col-md-12-profile">
                                 <ul id="block-ul" class="row-profile">
                                     <li id="reason-rep" class="col-md-3-profile" style="display: none">

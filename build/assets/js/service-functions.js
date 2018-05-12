@@ -89,6 +89,7 @@ function lock_change (formData, model, form, action) {
         msgSec = 'recoverKey';
     }
 
+
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
@@ -121,7 +122,7 @@ function lock_change (formData, model, form, action) {
                     break;
                 case 4:
 										//Verifica si la transacción tiene costo
-										let costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? [data.cost_repos_plas, data.cost_repos_plas_format] : '';
+										let costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
                     viewToken(data.msg, msgMain, costo_repo, token);
                     break;
                 case 5:
@@ -136,7 +137,7 @@ function lock_change (formData, model, form, action) {
 								case 6:
 										token = 0;//Operacion no requiere muestra token
 											//Verifica si llega el costo
-										let costo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? [data.cost_repos_plas, data.cost_repos_plas_format] : '';
+										let costo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
                     viewToken(data.msg, msgMain, costo, token);
                     break;
                 default:
@@ -300,9 +301,9 @@ function viewToken (msg, msgMain, costoReposicion, token) {
 		}
 
 		//Si tiene costo se define y muestra al usuario
-		if(costoReposicion !== undefined && Array.isArray(costoReposicion)){
-			$("#montoComisionTransaccion").val(costoReposicion[0]);
-			sendToken += '<table class="receipt" cellspacing="0" cellpadding="0"><tr><td class="data-metadata">Comisión/Pago (S/. ' + costoReposicion[1] + ') <br><span class="money-amount">S/. ' + costoReposicion[1] + '</span></td></tr></table>';
+		if(costoReposicion !== ''){
+			$("#montoComisionTransaccion").val(costoReposicion);
+			sendToken += '<table class="receipt" cellspacing="0" cellpadding="0"><tr><td class="data-metadata">Comisión/Pago (S/. ' + costoReposicion + ') <br><span class="money-amount">S/. ' + costoReposicion + '</span></td></tr></table>';
 		}
 
     $('#'+ msgMain +'-ul').append(sendToken);

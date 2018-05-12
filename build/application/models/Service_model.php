@@ -40,6 +40,7 @@ class Service_model extends CI_Model {
         $pais = $this->session->userdata('pais');
         $msgLok = ($action == '00') ? 'Desbloqueada' : 'Bloqueada';
         $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueada';
+				$montoComisionTransaccion = $dataAccount['montoComisionTransaccion'];
 
         $data = json_encode(array(
             "idOperation" => $idOperation,
@@ -53,7 +54,8 @@ class Service_model extends CI_Model {
             "codBloqueo" => $action,
             "token" => $token,
             "logAccesoObject"=>$logAcceso,
-            "pais" => $pais
+            "pais" => $pais,
+						"montoComisionTransaccion" => $montoComisionTransaccion
         ));
 
         log_message("info", "REQUEST Bloqueo desbloqueo=====>>>>> ".$data);
@@ -128,33 +130,32 @@ class Service_model extends CI_Model {
                     ];
                     break;
                 case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
-										$cost_repos_plas = (isset($desdata->cost_repos_plas) && $desdata->cost_repos_plas != '') ? $desdata->cost_repos_plas : NULL;
+										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										$cost_repos_plas = (isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '') ? $desdatacosto->cost_repos_plas : NULL;
                     $response = $this->callWsGetToken($cost_repos_plas);
                     break;
 
 								case -382: //Reposición con costo sin token
 
-										if((isset($desdata->cost_repos_plas) && $desdata->cost_repos_plas != '')) {
+									$desdatacosto = json_decode(utf8_encode($desdata->bean));
+									if((isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '')) {
 
-												$cost_repos_plas = $desdata->cost_repos_plas;
-												$cost_repos_plas_format =  np_hoplite_decimals($cost_repos_plas, 'Pe');
+										$cost_repos_plas = $desdatacosto->cost_repos_plas;
+										$response = [
+												'code' => 6,
+												'title' => 'Solicitud Reposición',
+												'msg' => 'Costo de la transacción',
+												'cost_repos_plas' => $cost_repos_plas,
+										];
+									}
+									else {
+										$response = [
+				                'title' => 'Conexión Personas Online',
+				                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+				            ];
+									}
 
-												$response = [
-														'code' => 6,
-														'title' => 'Solicitud Reposición',
-														'msg' => 'Costo de la transacción',
-														'cost_repos_plas' => $cost_repos_plas,
-														'cost_repos_plas_format' => $cost_repos_plas_format
-												];
-										}
-										else {
-											$response = [
-					                'title' => 'Conexión Personas Online',
-					                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
-					            ];
-										}
-
-                    break;
+                  break;
 
 
                 case -125:
@@ -174,6 +175,18 @@ class Service_model extends CI_Model {
                     ];
                     $this->session->sess_destroy();
                     break;
+
+								//Manejo de errores - se incluye error por falta de saldo
+								case -322:
+								case -21:
+									$response = [
+											'code' => 3,
+											'title' => 'Solicitud de reposición',
+											'msg' => 'Su solicitud no puede ser procesada por este canal. Solicite la reposición de su tarjeta a través del Centro de Contacto Tebca'
+									];
+
+									break;
+
                 default:
                     $response = [
                         'title' => 'Conexión Personas Online',
@@ -402,13 +415,11 @@ class Service_model extends CI_Model {
 
 										//Si hay costo de reposición, se agreaga en la respuesta
                     if($cost_repos_plas != NULL){
-											$cost_repos_plas_format =  np_hoplite_decimals($cost_repos_plas, 'Pe');
 											$response = [
 	                        'code' => 4,
 	                        'title' => 'Solicitud de token',
 	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
-													'cost_repos_plas' => $cost_repos_plas,
-													'cost_repos_plas_format' => $cost_repos_plas_format
+													'cost_repos_plas' => $cost_repos_plas
 	                    ];
 										}
 
