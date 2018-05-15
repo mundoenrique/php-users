@@ -81,9 +81,9 @@ function viewSelect (id) {
 
 function lock_change (formData, model, form, action) {
     var msgMain = (model == 'LockAccount') ? 'block' : 'change';
-		let token = 1; //Requiere token 1, no requiere 0
+		var token = 1;
     var msgSec = (model == 'LockAccount') ? 'lock-acount' : 'change-key';
-		let costo_repo
+		var costo_repo;
     if(action == 'recoverKey') {
         msgMain = 'rec';
         msgSec = 'recoverKey';
@@ -122,7 +122,7 @@ function lock_change (formData, model, form, action) {
                     break;
                 case 4:
 										//Verifica si la transacción tiene costo
-										let costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
+										costo_repo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
                     viewToken(data.msg, msgMain, costo_repo, token);
                     break;
                 case 5:
@@ -137,7 +137,7 @@ function lock_change (formData, model, form, action) {
 								case 6:
 										token = 0;//Operacion no requiere muestra token
 											//Verifica si llega el costo
-										let costo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
+										costo = (typeof data.cost_repos_plas !== 'undefined' && data.cost_repos_plas !== '') ? data.cost_repos_plas : '';
                     viewToken(data.msg, msgMain, costo, token);
                     break;
                 default:
@@ -153,7 +153,7 @@ function lock_change (formData, model, form, action) {
 }
 
 function getToken (msgMain) {
-	let token = 1; //Requiere token 1, no requiere 0
+	var token = 1; //Requiere token 1, no requiere 0
     $('#carry').remove();
     $.ajax({
         url: base_url + '/servicios/modelo',
