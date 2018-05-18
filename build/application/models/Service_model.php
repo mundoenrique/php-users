@@ -6,6 +6,7 @@ class Service_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
+				$this->lang->load('format');
 
     }
     // -----------------------------------------------------------------------------------------------------------------
@@ -76,11 +77,20 @@ class Service_model extends CI_Model {
         if ($desdata) {
             switch ($desdata->rc) {
                 case 0:
+
+										//para operaciones con costo, muestra el saldo actual
+										$saldo = "";
+										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										if(isset($desdatacosto->disponible))
+										{
+											$saldo = " Su saldo actual es ".lang('MONEDA').$desdatacosto->disponible;
+										}
                     $response = [
                         'code' => 0,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
-                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Su tarjeta será enviada en los próximos días'
+                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Su tarjeta será enviada en los próximos días'.$saldo,
                     ];
+
                     break;
                 case -241:
                     $response = [
