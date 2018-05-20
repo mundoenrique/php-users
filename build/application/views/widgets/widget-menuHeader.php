@@ -101,15 +101,30 @@ $pais = $this->session->userdata('pais');
 			<a href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Vista Consolidada</a>
 		</li>
 		<li class="<?php echo $clase_tranfer?> menu-item transfers">
-			<a href="<?php echo $this->config->item('base_url'); ?>/transferencia" rel="section">Transferencias <span aria-hidden="true" class="icon-chevron-down"></span></a>
-			<ul class="submenu-transfer sub-menu">
-				<li class="sub-menu-item transfers-p2p">
-					<a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="subsection"><?php echo lang("MENU_P2P");?></a>
-				</li>
-				<li class="sub-menu-item transfers-bank">
-					<a href="<? echo $this->config->item("base_url"); ?>/transfer/index_bank" rel="subsection">Cuentas Bancarias</a>
-				</li>
-			</ul>
+			<?php
+			//Verifica el pasi para asignar menu de transferencias
+			switch ($pais) {
+				case 'Pe':
+						?>
+							<a href="<?php echo $this->config->item('base_url'); ?>/transferencia/cg" rel="section">Transferencias</a>
+						<?php
+					break;
+
+				default:
+					?>
+						<a href="<?php echo $this->config->item('base_url'); ?>/transferencia" rel="section">Transferencias <span aria-hidden="true" class="icon-chevron-down"></span></a>
+						<ul class="submenu-transfer sub-menu">
+							<li class="sub-menu-item transfers-p2p">
+								<a href="<? echo $this->config->item("base_url"); ?>/transferencia" rel="subsection"><?php echo lang("MENU_P2P");?></a>
+							</li>
+							<li class="sub-menu-item transfers-bank">
+								<a href="<? echo $this->config->item("base_url"); ?>/transfer/index_bank" rel="subsection">Cuentas Bancarias</a>
+							</li>
+						</ul>
+					<?php
+					break;
+			}
+			?>
 		</li>
 		<li class="<?php echo $clase_pago?> menu-item payments">
 			<a href="<? echo $this->config->item("base_url"); ?>/transfer/index_tdc" rel="section">Pagos</a>
