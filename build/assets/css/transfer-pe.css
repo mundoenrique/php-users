@@ -43,3 +43,31 @@
   color: #f04848;
 	background:
 }
+
+.verified
+{
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+		color: #43b581;
+		float: left;
+		margin-right: 25px;
+		padding: 4px;
+		border-radius: 6px;
+		border: solid;
+		border-color: #F0DBD8;
+		border-width: 1px;
+		margin-top: 5px;
+
+}
+
+.verified:hover{
+	border-color: #43b581;
+	border: solid;
+	margin-right: 25px;
+	padding: 4px;
+	border-width: 1px;
+}
+
+.amount-history{
+	float: left;
+	margin-top: 8px;
+}
