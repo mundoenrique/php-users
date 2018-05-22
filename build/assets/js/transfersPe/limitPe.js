@@ -31,8 +31,7 @@ $(function() {
 			//data de envio
 				var ajax_data = {
 					'codigo': $("#amount").val(),
-					'monto':  $('select[name="amount"] option:selected').attr('monto'),
-					'codPais': $("#codPais").val(),
+					'monto':  $('select[name="amount"] option:selected').attr('monto')
 				};
 
 				//petición de setAmount

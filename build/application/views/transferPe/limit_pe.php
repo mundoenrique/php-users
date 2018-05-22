@@ -21,7 +21,7 @@
 						<a href="<? echo $this->config->item("base_url"); ?>/transferencia/pe" rel="section">Transferir</a>
 					</li>
 					<li class="menu-item log">
-						<a href="<? echo $this->config->item("base_url"); ?>/historial/pe" rel="section">Historial</a>
+						<a href="<? echo $this->config->item("base_url"); ?>/transferencia/HistorialPe" rel="section">Historial</a>
 					</li>
 				</ul>
 			</nav>
@@ -47,7 +47,6 @@
 						<div>
 							<ul class='product-balance-group' style="margin: 10px 0">
 								<li>Monto máximo actual <span class='product-balance' id='balance-available'> <?php echo lang("MONEDA").". ".$defaultAmount;?> </span></li>
-								<input type="hidden" value="<?php echo $this->session->userdata("pais") ?>" id="codPais" name="codPais">
 								<select class="field-medium skip" id="amount" name="amount">
 									<?php
 									if($baseAmounts->code == 0)
