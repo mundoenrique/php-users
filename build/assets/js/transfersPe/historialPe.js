@@ -183,104 +183,122 @@ base_cdn = $('body').attr('data-app-cdn');
         cargando +=     '<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>';
         cargando += '</div>';
         $('#carga').append(cargando);
-			$.post(base_url +"/transferencia/historialSearchPe",{"noTarjeta":ctaOrigen,"tipoOperacion":"P2P","mes":mes,"anio":anio},function(data){
-
-				switch(data.code){
-					case 0:
-						$('#carga').children().remove();
-						$('#list-detail').children().remove();
-
-						$.each(data.listaTransferenciasRealizadas,function(pos,item){
-
-							 if(item.estatusOperacion == '1'){
-								clase = 'icon-ok-sign';
-								clase1 = 'feed-success';
-								status = 'Procesado';
-								verified = '<div class="verified">Verificado</div>';
-							}else {
-								clase = 'icon-cancel-sign';
-								clase1 = 'feed-error';
-								status = 'Rechazado';
-								tipo = "Transferencia rechazada";
-							}
-
-							verified = (item.Autorizacion === true) ? '<div class="verified">Verificado</div>' : '';
-
-										var fecha = item.fechaTransferencia.split('/');
-										var dia = fecha[0];
-										var mes;
-										var moneda=$(".dashboard-item").attr("moneda");
 
 
-										switch (fecha[1]){
-											case "01":
-											 mes="Ene";
-												break;
-											case "02":
-												mes="Feb";
-												break;
-											case "03":
-												mes="Mar";
-												break;
-											case "04":
-												mes="Abr";
-												break;
-											case "05":
-												mes="May";
-												break;
-											case "06":
-												mes="Jun";
-												break;
-											case "07":
-												mes="Jul";
-												break;
-											case "08":
-												mes="Ago";
-												break;
-												case "09":
-												mes="Sep";
-												break;
-											case "10":
-												mes="Oct";
-												break;
-											case "11":
-												mes="Nov";
-												break;
-											case "12":
-												mes="Dic";
-												break;
+				var ajax_data = {
+						"noTarjeta":ctaOrigen,
+						"mes":mes,
+						"anio":anio
+				};
+
+				var data_seralize = $.param(ajax_data);
+
+
+				$.ajax({
+					url: base_url + '/transferencia/peGeneral',
+					type: "post",
+					data: {data : data_seralize, model : "historial_loadPe"},
+					datatype: 'JSON',
+					success: function(data) {
+
+						switch(data.code){
+								case 0:
+									$('#carga').children().remove();
+									$('#list-detail').children().remove();
+
+									$.each(data.listaTransferenciasRealizadas,function(pos,item){
+
+										 if(item.estatusOperacion == '1'){
+											clase = 'icon-ok-sign';
+											clase1 = 'feed-success';
+											status = 'Procesado';
+											verified = '<div class="verified">Verificado</div>';
+										}else {
+											clase = 'icon-cancel-sign';
+											clase1 = 'feed-error';
+											status = 'Rechazado';
+											tipo = "Transferencia rechazada";
 										}
 
-											var lista =  '<li class="feed-item '+clase1+'">';
-											lista+=				'<div class="feed-date">'+dia+'<span class="feed-date-month">'+mes+'</span></div>';
-											lista+=				'<div class="feed-status">';
-											lista+=					'<span aria-hidden="true" class="'+clase+'" title="'+status+'"></span>';
-											lista+=				'</div>';
-											lista+=				tipo + ': ' +item.beneficiario+'<span class="money-amount">'+ verified +'<div class="amount-history">'+moneda+' '+item.montoTransferencia+'</div> </span>'; //'+moneda+'
-											lista+=				'<ul class="feed-metadata">';
-											lista+=					'<li class="feed-metadata-item"><span aria-hidden="true" class="icon-mail"></span>   '+item.concepto+'</li>';
-											lista+=				'</ul>';
-											lista+=			'</li>';
-										$('#list-detail').append(lista);
-									});
+										verified = (item.Autorizacion === true) ? '<div class="verified">Verificado</div>' : '';
 
-							break;
-					case 1:
-						$(location).attr('href', base_url+'/users/error_gral');
-						break;
+													var fecha = item.fechaTransferencia.split('/');
+													var dia = fecha[0];
+													var mes;
+													var moneda=$(".dashboard-item").attr("moneda");
 
-					default:
-									$('#carga').children().remove();
-									var cadena='<div id="empty-state" style="position: static;">';
-									cadena+=                '<h2>No se encontraron movimientos</h2>';
-									cadena+=                 '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-									cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -415px;"></span>';
-									cadena+=             '</div>';
-									$("#list-detail").append(cadena);
-						break;
-				}
 
-			});
+													switch (fecha[1]){
+														case "01":
+														 mes="Ene";
+															break;
+														case "02":
+															mes="Feb";
+															break;
+														case "03":
+															mes="Mar";
+															break;
+														case "04":
+															mes="Abr";
+															break;
+														case "05":
+															mes="May";
+															break;
+														case "06":
+															mes="Jun";
+															break;
+														case "07":
+															mes="Jul";
+															break;
+														case "08":
+															mes="Ago";
+															break;
+															case "09":
+															mes="Sep";
+															break;
+														case "10":
+															mes="Oct";
+															break;
+														case "11":
+															mes="Nov";
+															break;
+														case "12":
+															mes="Dic";
+															break;
+													}
+
+														var lista =  '<li class="feed-item '+clase1+'">';
+														lista+=				'<div class="feed-date">'+dia+'<span class="feed-date-month">'+mes+'</span></div>';
+														lista+=				'<div class="feed-status">';
+														lista+=					'<span aria-hidden="true" class="'+clase+'" title="'+status+'"></span>';
+														lista+=				'</div>';
+														lista+=				tipo + ': ' +item.beneficiario+'<span class="money-amount">'+ verified +'<div class="amount-history">'+moneda+' '+item.montoTransferencia+'</div> </span>'; //'+moneda+'
+														lista+=				'<ul class="feed-metadata">';
+														lista+=					'<li class="feed-metadata-item"><span aria-hidden="true" class="icon-mail"></span>   '+item.concepto+'</li>';
+														lista+=				'</ul>';
+														lista+=			'</li>';
+													$('#list-detail').append(lista);
+												});
+
+										break;
+								case 1:
+									$(location).attr('href', base_url+'/users/error_gral');
+									break;
+
+								default:
+												$('#carga').children().remove();
+												var cadena='<div id="empty-state" style="position: static;">';
+												cadena+=                '<h2>No se encontraron movimientos</h2>';
+												cadena+=                 '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
+												cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -415px;"></span>';
+												cadena+=             '</div>';
+												$("#list-detail").append(cadena);
+									break;
+							}
+						}
+
+				});
+
 	}// FIN
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

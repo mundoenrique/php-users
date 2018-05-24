@@ -3,7 +3,7 @@
 .product-scheme
 {
 	padding: 0 24px;
-	height: 225px ;
+	height: 170px ;
 }
 
 .aling-right-form
@@ -22,7 +22,6 @@
 .group-short{
 	height: 130px;
 }
-
 
 /*Estilo para suplantar type reset*/
 .reset-button-trx{
@@ -70,4 +69,51 @@
 .amount-history{
 	float: left;
 	margin-top: 8px;
+}
+
+.confirmation-trx{
+	margin-left: 20%;
+}
+
+.trx-response{
+	color: #888888;
+	font-size: 16px;
+	line-height: 30px;
+	width: 60%: ;
+}
+
+.trx-left{
+	text-align: left;
+}
+
+.trx-right{
+	text-align: right;
+}
+
+.msnConfirm{
+	margin-left: 20px;
+}
+
+.dialog-confirm-transfer{
+	font-size: 14px !important;
+	font-weight: bold;
+}
+
+.dialog-confirm-mail{
+	font-size: 13px !important;
+}
+
+.col-md-6-transfer{
+  width:100%;
+	text-align: center;
+	float: left;
+	padding: 18px;
+}
+
+.msgr{
+	display: inline-block !important;
+}
+
+.form-actions{
+	text-align: right;
 }

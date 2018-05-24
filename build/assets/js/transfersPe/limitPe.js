@@ -3,6 +3,22 @@ $(function() {
 
 	$("#updateAmount").on('click', function() {
 
+		jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+
+    jQuery.validator.addMethod("tokenValid", function(value, element) {
+        var regEx = /^[a-zA-Z0-9]+$/,
+            token = element.value;
+
+        if (regEx.test(token)) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
 		$("#form-amount").validate({
 			errorElement: "label",
 			ignore: "",
@@ -12,7 +28,8 @@ $(function() {
 			errorLabelContainer: "#msg-history",
 			rules: {
 				"password": {
-					"required": true
+					"required": true,
+					"tokenValid":true,
 				},
 				"amount": {
 					"required": true
@@ -20,7 +37,8 @@ $(function() {
 			},
 			messages: {
 				"password": {
-					required: "La clave de acceso no puede estar vacia"
+					required: "La clave de acceso no puede estar vacia",
+					tokenValid: "El código de seguridad no puede tener caracteres especiales",
 				},
 				"amount": {
 					required: "Debe seleccionar un monto base"
@@ -30,16 +48,20 @@ $(function() {
 			submitHandler: function(form) {
 			//data de envio
 				var ajax_data = {
-					'codigo': $("#amount").val(),
-					'monto':  $('select[name="amount"] option:selected').attr('monto')
+						'codigo': $("#amount").val(),
+						'monto':  $('select[name="amount"] option:selected').attr('monto'),
+						'clave': $("#password").val(),
 				};
+
+				var data_seralize = $.param(ajax_data);
+
 
 				//petición de setAmount
 				$.ajax({
-					url: base_url + '/limit/setAmount',
+					url: base_url + '/transferencia/peGeneral',
 					type: "post",
-					data: ajax_data,
-					dataType: 'json',
+					data: {data : data_seralize, model : "setAmount"},
+					datatype: 'JSON',
 					success: function(data) {
 
 						switch (data.code) {

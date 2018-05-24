@@ -106,7 +106,7 @@ $pais = $this->session->userdata('pais');
 			switch ($pais) {
 				case 'Pe':
 						?>
-							<a href="<?php echo $this->config->item('base_url'); ?>/transferencia/cg" rel="section">Transferencias</a>
+							<a href="<?php echo $this->config->item('base_url'); ?>/transferencia/pe" rel="section">Transferencias</a>
 						<?php
 					break;
 

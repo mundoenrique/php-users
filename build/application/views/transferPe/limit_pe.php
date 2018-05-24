@@ -63,7 +63,7 @@
 						</div>
 						<div class="aling-right-form">
 							<label>Clave de inicio</label>
-							<input class='field-medium skip' id="password" name="password" maxlength="20" type='password' />
+							<input class='field-medium skip' id="password" name="password" maxlength="8" type='password' />
 						</div>
 					</fieldset>
 
