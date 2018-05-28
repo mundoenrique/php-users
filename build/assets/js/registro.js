@@ -277,6 +277,10 @@ $(function(){
 						lugar_nacimiento	= data.afiliacion.lugar_nacimiento;
 						estado_civil		= data.afiliacion.edocivil;
 						nacionalidad		= data.afiliacion.nacionalidad;
+						aceptaContrato		= data.afiliacion.acepta_contrato;
+						if(aceptaContrato === 'S') {
+							$('#contrato').off('click');
+						}
 						if(pais == 'Pe'){
 							$("#paisResidencia").val("Perú");
 						}
