@@ -101,9 +101,8 @@ country = $('body').data('country');
 		// FUNCION LLAMAR SALDO
 
 		$.each($(".dashboard-item"),function(pos,item){
-
 			//Si la tarjeta no esta activa no consulta el saldo
-			if(country !== 'Pe' && $(item).attr("activeurl") !== 'NE'){
+			if($(item).attr("activeurl") !== 'NE'){
 				//carga saldo tarjeta
 				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
 					var moneda=$(".dashboard-item").attr("moneda");
