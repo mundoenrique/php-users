@@ -95,6 +95,18 @@ function validar_campos(valida) {
         }
     });
 
+		//valida el monto minimo y maximo
+		jQuery.validator.addMethod("amountsValue", function(value, element) {
+				;
+        var amount = element.value;
+        if (amount < $("#limitAmount").attr('minAmount') || amount >= $("#limitAmount").attr('maxAmount')) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+
 		//Valida el formulario de busqueda de cuentas por telefono
 		$("#form-search").validate({
 			errorElement: "label",
@@ -128,7 +140,6 @@ function validar_campos(valida) {
 					data: {data : data_seralize, model : "AccountPhone"},
 					datatype: 'JSON',
 					success: function(data){
-						$("#form-search").validate().resetForm();
 						switch(data.code){
 							case 0:
 							$('select').empty();
@@ -140,6 +151,7 @@ function validar_campos(valida) {
 								}));
 							});
 							$('#form-trx').find('input, textarea, button, select').attr('disabled',false);
+							$("#continuar").attr('disabled',false);
 
 								break;
 							case 1:
@@ -150,8 +162,6 @@ function validar_campos(valida) {
 						}
 					}
 				});
-				return false;
-
 			}
 		});
 
@@ -269,9 +279,11 @@ function makeTransferPe(formData)
 					//Carga datos en la interfaz de confirmación
 					$("#confirmacion").show();
 					$("#fecha").html(data.fecha);
-					$("#origen").html(data.ctaOrigen);
-					$("#destino").html(data.ctaDestino);
+					$("#origen").html(data.ctaOrigenMascara);
+					$("#destino").html(data.ctaDestinoMascara);
 					$("#montoConfirm").html(data.monto);
+					$("#nomCuentaDestinoCon").html(data.nombreCuentaOrigen);
+					$("#nomCuentaOrigenCon").html(data.nombreCuentaDestino);
 
 					//botones
 					$("#finalTrx").show();

@@ -50,7 +50,7 @@ $(function() {
 				var ajax_data = {
 						'codigo': $("#amount").val(),
 						'monto':  $('select[name="amount"] option:selected').attr('monto'),
-						'clave': $("#password").val(),
+						'clave': hex_md5($("#password").val()),
 				};
 
 				var data_seralize = $.param(ajax_data);
@@ -63,27 +63,20 @@ $(function() {
 					data: {data : data_seralize, model : "setAmount"},
 					datatype: 'JSON',
 					success: function(data) {
-
 						switch (data.code) {
 							case 0:
-								notiSystem(data.title, data.msg, 'success', 'out');
+								msgService(data.title, data.msg, data.modalType, 1);
 							break;
 
 							default:
-								notiSystem(data.title, data.msg, 'error', 'out');
+								msgService(data.title, data.msg, data.modalType, 1);
 							break;
-
 						}
 					}
 				});
 				//fin de petición de montos
 				return false;
-			}
+			},
 		});
 	});
-
-	//REALIZAR TRANSACCION---------------------------------------------------------------------------------
-
-	$("#continuar").on("click", function() {});
-
 });

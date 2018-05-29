@@ -56,6 +56,7 @@
 								</div>
 								<label for='beneficiary-1x'>Destino<span class='field-instruction'></span></label>
 								<div id="tdestino">
+									<input type="hidden" id="typeCurrency" value="<?php echo lang("MONEDA");?>">
 									<div class='group' id='btn-destino'>
 										<div class='product-info product-scheme'>
 											<fieldset>
@@ -88,23 +89,25 @@
 										<div class='product-scheme'>
 											<form id="form-trx" method="post" name="form-trx">
 												<fieldset class='form-inline '>
-													<div id='cardSelect'>
-															<label for='beneficiary-1x-description'>Tarjetas</label>
-															<select class="field-large" id="ctaDestino" name="ctaDestino" disabled>
-															</select>
+													<div id="data-transfer">
+														<div id='cardSelect'>
+																<label for='beneficiary-1x-description'>Tarjetas</label>
+																<select class="field-large" id="ctaDestino" name="ctaDestino" disabled>
+																</select>
+														</div>
+														<div id="cardText" style="display:none">
+															<label for='beneficiary-1x-description'>Tarjeta</label>
+															<input disabled class='field-medium ignore' id='ctaDestinoText' maxlength="16" minlength="16" name='ctaDestinoText' type='text' />
+														</div>
+														<label for='beneficiary-1x-description'>Concepto</label>
+														<input disabled class='field-large skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
+														<label for='beneficiary-1x-amount'>Monto</label>
+														<div class='field-category'>
+															<?php echo lang("MONEDA"); ?>
+															<input disabled id='montoLabel' name='montoLabel' type='hidden' value='<?php echo lang("MONEDA");?>' />
+														</div>
+														<input disabled class='field-small monto skip' id='monto' maxlength="5" name='monto' type='text' />
 													</div>
-													<div id="cardText" style="display:none">
-														<label for='beneficiary-1x-description'>Tarjeta</label>
-														<input disabled class='field-medium ignore' id='ctaDestinoText' maxlength="16" minlength="16" name='ctaDestinoText' type='text' />
-													</div>
-													<label for='beneficiary-1x-description'>Concepto</label>
-													<input disabled class='field-large skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
-													<label for='beneficiary-1x-amount'>Monto</label>
-													<div class='field-category'>
-														<?php echo lang("MONEDA"); ?>
-														<input disabled id='montoLabel' name='montoLabel' type='hidden' value='<?php echo lang("MONEDA");?>' />
-													</div>
-													<input disabled class='field-small monto skip' id='monto' maxlength="5" name='monto' type='text' />
 												</fieldset>
 											</form>
 										</div>
@@ -139,7 +142,7 @@
 											<tr>
 												<td class="data-label"><label>Cuentas Destino</label></td>
 												<td class="data-reference"> <span class="highlight" id="conCtaDestino"></span></td>
-												<td class="data-metadata">Total<br><span class="money-amount"><?php echo lang("MONEDA"); ?>.</span><span id="conMonto2"></span></td>
+												<td class="data-metadata">Total <br><span class="money-amount"><?php echo lang("MONEDA"); ?></span><span id="conMonto2"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -170,7 +173,7 @@
 													<tr>
 														<td class="data-label"><label>Cuentas Destino</label></td>
 														<td class="data-reference"><span class="data-reference" id="conCtaOr">Nombre cuenta de destino</span><br><span class="highlight" id="conCtaDestino">cuenta de destnino</span></td>
-														<td class="data-metadata">Total<br><span class="money-amount"><?php echo lang("MONEDA"); ?>.</span><span id="conMonto2"></span></td>
+														<td class="data-metadata">Total<br><span class="money-amount"><?php echo lang("MONEDA"); ?></span><span id="conMonto2"></span></td>
 													</tr>
 												</tbody>
 											</table>

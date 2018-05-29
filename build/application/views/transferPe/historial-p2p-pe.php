@@ -84,6 +84,17 @@
 
 </div>
 
+<div id="dialogo-movil" style='display:none'>
+    <div id="dialog-confirm">
+        <div class="alert-simple" id="modalType">
+            <span aria-hidden="true" class="icon-cancel-sign"></span>
+            <p id="msgService"></p>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button id="inva5">Aceptar</button>
+    </div>
+</div>
 <?php
 
 $datos = null;

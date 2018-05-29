@@ -11,9 +11,14 @@ $(function() {
 
 
 	//CAMBIO DATA DE TRANSFERENCIA TEL-NUMERO CUENTA------------------------------------------------
-	$("input:radio[name=tipoRef]").on('click change', function(e){
+	$("input:radio[name=tipoRef]").on('change', function(e){
+		//validación
+		$("#msg-history").html("");
+		//Cambio
 		var tipo = $("input:radio[name=tipoRef]:checked").val();
+
 		if(tipo == 1){
+			//activa e inactiva elementos de transaccion
 			$("#cardSelect").hide();
 			$("#cardText").show();
 			$("#telefonoDestino").attr('disabled',true);
@@ -23,10 +28,13 @@ $(function() {
 			$("#telefonoDestino").val('');
 			$('#search-cards').attr('disabled',true);
 			$("#continuar").attr('disabled',false);
-			$('#form-search').validate().resetForm();
+
+			//limpia validaciones
+			$('#form-search').find('input, textarea, button, select').removeClass('field-error field-success');
 
 		}
 		else{
+			//activa e inactiva elementos de transaccion
 			$("#ctaDestino").removeClass('ignore');
 			$("#ctaDestinoText").addClass('ignore');
 			$("#cardSelect").show();
@@ -36,8 +44,10 @@ $(function() {
 			$("#ctaDestinoText").val('');
 			$('#search-cards').attr('disabled',false);
 			$("#continuar").attr('disabled',true);
-			$('#form-trx').validate().resetForm();
 
+			//limpia validaciones
+			$('#form-trx')[0].reset();
+			$('#form-trx').find('input, textarea, button, select').removeClass('field-error field-success');
 		}
 	})
 
@@ -166,16 +176,19 @@ $("#continuar").on('click',function(){
 				makeTransferPe(formData);
 				$('#progress > ul > li:nth-child(3)')
 					.addClass('current-step-item');
-				return false;
 			break;
 		case 'form-pin':
 				form = $("#form-pin");
 		break;
 	}
 
-	validar_campos();
-	form.submit();
-	form.valid();
+	if(form !== "")
+	{
+		validar_campos();
+		form.submit();
+		form.valid();
+	}
+
 });
 //FINALIZA TRANZACCION ---------------------------------------------------------------------------------
 

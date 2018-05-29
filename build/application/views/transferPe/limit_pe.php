@@ -9,7 +9,7 @@
 <div id="content">
 	<article>
 		<header>
-			<h1>Historial cuenta general</h1>
+			<h1>Configurar límites</h1>
 		</header>
 		<section>
 			<nav id="secondary-menu">
@@ -77,15 +77,15 @@
 	</article>
 
 	<!--***************************************MODAL ERRORES*****************************************-->
-	<div id="msg_system" style='display:none'>
+	<div id="dialogo-movil" style='display:none'>
 	    <div id="dialog-confirm">
-	        <div id="msg_info">
-	            <span aria-hidden="true"></span>
-	            <p></p>
+	        <div class="alert-simple" id="modalType">
+	            <span aria-hidden="true" class="icon-cancel-sign"></span>
+	            <p id="msgService"></p>
 	        </div>
-	        <div id="form-action" class="form-actions">
-	            <button id="close-info"></button>
-	        </div>
+	    </div>
+	    <div class="form-actions">
+	        <button id="inva5">Aceptar</button>
 	    </div>
 	</div>
 	<!--*************************************FIN MODAL ERRORES***************************************-->

@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	class TransferPe_model extends CI_Model {
 
+		protected $code;
+		protected $title;
+		protected $msg;
+		protected $modalType;
+		protected $listaTransferenciasRealizadas;
+		protected $amounts;
+
 		public function __construct()
 		{
 			parent::__construct();
@@ -45,154 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		}		//FIN LLAMADA A CARGAR CUENTAS ORIGEN
 
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-		//LLAMADA A VALIDAR CLAVE DE OPERACIONES
-		public function validarClave_load($clave)
-		{
-			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
-			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave op");
-
-			$data = json_encode(array(
-				                    "idOperation"=>"10",
-				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "passwordOperaciones"=> $clave,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
-
-			//print_r($data);
-			log_message("info", "Salida Validar Clave : ".$data);
-			$dataEncry = np_Hoplite_Encryption($data,1);
-			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-			log_message("info", "Salida encriptada Validar Clave : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
-
-			$salida = json_encode($desdata);
-
-			log_message("info", "Salida validarClave_load transferencia".$salida);
-
-			return json_encode($desdata);
-
-		}		//FIN LLAMADA A VALIDAR CLAVE DE OPERACIONES
 
 		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-		//LLAMADA A GENERAR CLAVE DE AUTENTICACION
-		public function claveAutenticacion_load()
-		{
-			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
-			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","crear clave auten");
-
-			$data = json_encode(array(
-				                    "idOperation"=>"11",
-				                    "className"=>".novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
-
-
-			$dataEncry = np_Hoplite_Encryption($data,1);
-			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-			log_message("info", "Salida encriptada claveAutenticacion_load : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
-
-			$salida = json_encode($desdata);
-
-			log_message("info", "Salida claveAutenticacion_load transferencia".$salida);
-
-			//$desdata = json_decode('{"rc":0,"msg":"Error al crear la clave de"}');
-
-			return json_encode($desdata);
-
-		}			//FIN LLAMADA A GENERAR CLAVE DE AUTENTICACION
-
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-		//LLAMADA A VALIDAR CLAVE DE AUTENTICACION
-		public function validarClaveAutenticacion_load($clave)
-		{
-			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
-			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave auten");
-
-			$data = json_encode(array(
-				                    "idOperation"=>"12",
-				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
-				                    "userName"=> $this->session->userdata("userName"),
-				                    "claveConfirmacion"=> $clave,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
-
-			//print_r($data);
-
-			$dataEncry = np_Hoplite_Encryption($data,1);
-				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-			log_message("info", "Salida encriptada validarClaveAutenticacion_load : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
-
-			$salida = json_encode($desdata);
-
-			log_message("info", "Salida validarClaveAutenticacion_load transferencia".$salida);
-
-			//$desdata = json_decode('{"rc":0,"msg":"Error al crear la clave de"}');
-
-			return json_encode($desdata);
-
-		}			//FIN LLAMADA A VALIDAR CLAVE DE AUTENTICACION
-
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-		//REALIZAR TRANSFERENCIA
-		public function procesarTransferencia_load($cuentaOrigen, $cuentaDestino, $monto, $descripcion, $tipoOpe, $id_afil_terceros, $expDate){
-			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
-			$monto = str_replace(',','.', $monto);
-			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
-			$data = json_encode(array(
-				                    "idOperation"=>"9",
-				                    "className"=>"com.novo.objects.MO.TransferenciaTarjetahabienteMO",
-				                    "ctaOrigen"=> $cuentaOrigen,
-				                    "ctaDestino"=> $cuentaDestino,
-				                    "monto"=> $monto,
-				                    "descripcion" => $descripcion,
-				                    "tipoOpe" => $tipoOpe,
-				                    "idUsuario"=> $this->session->userdata("userName"),
-				                    "id_afil_terceros" => $id_afil_terceros,
-				                    "validacionFechaExp" => $expDate,
-				                    "logAccesoObject"=>$logAcceso,
-				                    "token"=>$this->session->userdata("token")
-			                    ));
-
-			//print_r($data);
-			log_message("info", "Request procesarTransferencia_load------>>>>>>" . $data);
-			$dataEncry = np_Hoplite_Encryption($data,1);
-			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			log_message("info", "Response encriptado procesarTransferencia_load------>>>>>>".$response);
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
-			$salida = json_encode($desdata);
-
-			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
-
-			//$desdata = json_decode('{"rc":0,"dataTransaccion":{"referencia":"154548"}}');
-
-
-			return json_encode($desdata);
-		}
-
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 		//Busqueda de cuentas por telefono
 		public function accountPhone($telefonoDestino){
@@ -276,24 +137,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			if($desdata){
 				switch ($desdata->rc) {
+
 					case 0:
-						$response = [
-							'code' => 0,
-							'amounts' => $desdata->lista,
-							'title' => '',
-							'msg' => ''
-						];
+						$this->code = 0;
+						$this->amounts = $desdata->lista;
 						break;
 
 					default:
-						$response = [
-							'code' => 1,
-							'msg' => 'No hay montos base asociados',
-							'title' => 'Montos base',
-						];
+						$this->code = 1;
+						$this->msg = 'No hay montos base asociados';
+						$this->title = 'Conexión Personas Online';
+						$this->modalType = 'alert-error';
+
 						break;
 				}
 			}
+
+			$response = [
+				'code' => $this->code,
+				'amounts' => $this->amounts,
+				'title' => $this->title,
+				'msg' => $this->msg,
+				'modalType' => $this->modalType
+			];
 
 			//return json_encode($response);
 			return json_encode($response);
@@ -302,9 +168,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 		public function setAmount($dataRequest){
-
-			log_message("error", "Set amount verify" . $dataRequest);
-
 
 			parse_str($dataRequest, $dataAccount);
 
@@ -336,30 +199,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$salida = json_encode($desdata);
 			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
 
-			$desdata = json_decode('{"rc":0,"msg":"Proceso OK","idOperation":"0","className":"com.novo.objects.TOs.MontoBaseTO","token":"e7159e5a787ef254056e7c877870d89e","logAccesoObject":{"sessionId":"af7990ca8b4673ec123af41728610dc9","userName":"ANNY123","canal":"personasWeb","modulo":" actualiza monto base ","operacion":" actualiza monto base ","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 20:33","lenguaje":"ES"}}');
-
 			if($desdata){
 				switch ($desdata->rc) {
 					case 0:
-						$response = [
-							'code' => 0,
-							'title' => 'Actualizar Montos Base',
-							'msg' => 'El monto base se ha actualizado exitosamente'
-						];
+						$this->code = 0;
+						$this->title = 'Actualizar Montos Base';
+						$this->msg = 'El monto base se ha actualizado exitosamente';
+						$this->modalType = 'alert-success';
 						break;
 					default:
-						$response = [
-							'code' => 1,
-							'title' => 'Actualizar Montos Base',
-							'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.',
-						];
+						$this->code = 1;
+						$this->title = 'Actualizar Montos Base';
+						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+						$this->modalType = 'alert-error';
 						break;
 				}
 			}
+
+			$response = [
+				'code' => $this->code,
+				'title' => $this->title,
+				'msg' => $this->msg,
+				'modalType' => $this->modalType
+			];
 			//return json_encode($response);
 			return json_encode($response);
 		}
-
 
 		//HISTORIAL DE PARAMETROS MONTOS BASE
 		//CARGAR HISTORIAL
@@ -400,36 +265,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$salida = json_encode($desdata);
 			log_message("info", "Salida historial_load".$salida);
 
-			$desdata = json_decode('{"listaTransferenciasRealizadas":[{"referencia":"879008","fechaTransferencia":"05/01/2018 11:05:58","beneficiario":"ANNY CALDERA","montoTransferencia":"100.00","concepto":"Este es un concepto de transferencia","Autorizacion":true,"estatusOperacion":"1"},{"referencia":"879009","fechaTransferencia":"05/05/2018 11:05:58","beneficiario":"DANIEL GONZALES","montoTransferencia":"500.00","concepto":"Envio para pago de servicio","Autorizacion":false,"estatusOperacion":"9"},{"referencia":"879009","fechaTransferencia":"05/05/2018 11:05:58","beneficiario":"MARIANA CARDONA","montoTransferencia":"200.00","concepto":"Tranferencia para transporte","Autorizacion":false,"estatusOperacion":"1"}],"rc":0,"msg":"Proceso OK","logAccesoObject":{"sessionId":"af7990ca8b4673ec123af41728610dc9","userName":"ANNY123","canal":"personasWeb","modulo":"transferencias","operacion":"consultar","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 20:33","lenguaje":"ES"}}');
-
-				if($desdata){
+			if($desdata){
 				switch ($desdata->rc) {
 					case 0:
-							$response = [
-								'code' => 0,
-								'listaTransferenciasRealizadas'=>$desdata->listaTransferenciasRealizadas,
-								'title' => '',
-								'msg' => ''
-							];
+						$this->code = 0;
+						$this->listaTransferenciasRealizadas = $desdata->listaTransferenciasRealizadas;
 						break;
 
 					case -61:
-						$response = [
-							'code' => 1,
-						];
+					case -33:
+						$this->code = 1;
 					break;
+
+					case -150:
+							$this->code = 2;
+						break;
+
 					default:
-						$response = [
-							'code' => 2,
-						];
+						$this->code = 3;
+						$this->title = 'Conexión Personas Online';
+						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+						$this->modalType = 'alert-error';
 						break;
 				}
 			}
+
+				$response = [
+					'code' => $this->code,
+					'title' => $this->title,
+					'msg' => $this->msg,
+					'modalType' => $this->modalType,
+					'listaTransferenciasRealizadas' => $this->listaTransferenciasRealizadas,
+				];
+
 			return json_encode($response);
 		}
-
-
-
 
 		//HISTORIAL DE PARAMETROS MONTOS BASE
 		public function makeTransferPe($dataRequest) {
@@ -470,17 +340,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$salida = json_encode($desdata);
 				log_message("info", "Salida historial_load".$salida);
 
-				/* sin token
-				$desdata = json_decode('{"ctaOrigen":"6048427001614714","ctaDestino":"5267491200018313","monto":"1000","telefonoDestino":"5555","descripcion":"Prueba","tipoOpe":"P2P","idUsuario":"ANNY123","dataTransaccion":{"referencia":"891899","transferenciaRealizada":true},"rc":0,"msg":"Proceso OK","className":"com.novo.objects.MO.TransferenciaTarjetahabienteMO","token":"f76d8828c726d8cb148489f33bebb93e","idOperation":"303","logAccesoObject":{"sessionId":"9fadc0ada62ef0a84a3a54d7c9b1143e","userName":"ANNY123","canal":"personasWeb","modulo":"transferencia","operacion":"procesar transferencia","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 18:57","lenguaje":"ES"}}');
-				*/
-
-				$desdata = json_decode('{"ctaOrigen":"6048427001614714","ctaDestino":"5267491200018313","monto":"1000","telefonoDestino":"5555","descripcion":"Prueba","tipoOpe":"P2P","idUsuario":"ANNY123","rc":-394,"msg":"Necesita un Token de Acceso","className":"com.novo.objects.MO.TransferenciaTarjetahabienteMO","token":"f76d8828c726d8cb148489f33bebb93e","idOperation":"303","logAccesoObject":{"sessionId":"9fadc0ada62ef0a84a3a54d7c9b1143e","userName":"ANNY123","canal":"personasWeb","modulo":"transferencia","operacion":"procesar transferencia","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 18:57","lenguaje":"ES"}}');
-
-
-				 //respusta de cambio de pin
-				$desdata = json_decode('{"ctaOrigen":"6048427001614714","ctaDestino":"5267491200018313","monto":"1000","telefonoDestino":"5555","descripcion":"Prueba","tipoOpe":"P2P","idUsuario":"ANNY123","tokenTransferenciaP2P":"81dc9bdb52d04dc20036dbd8313ed055","dataTransaccion":{"referencia":"891899","transferenciaRealizada":true},"rc":0,"msg":"Proceso OK","className":"com.novo.objects.MO.TransferenciaTarjetahabienteMO","token":"f76d8828c726d8cb148489f33bebb93e","idOperation":"303","logAccesoObject":{"sessionId":"9fadc0ada62ef0a84a3a54d7c9b1143e","userName":"ANNY123","canal":"personasWeb","modulo":"transferencia","operacion":"procesar transferencia","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 18:57","lenguaje":"ES"}}');
-
-
 				if($desdata){
 				switch ($desdata->rc) {
 					case 0:
@@ -499,6 +358,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								'referencia'=>$transation->referencia,
 								'transferenciaRealizada'=>$transation->transferenciaRealizada,
 								'fecha'=>$date->dttimesstamp,
+								'nombreCuentaOrigen' => '',
+								'nombreCuentaDestino' => ''
 								];
 						break;
 
@@ -511,8 +372,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					default:
 						$response = [
 							'code' => 1,
-							'title' => "mal",
-							"msn" => "mal mal",
+							'title' => "Conexión Personas Online",
+							"msn" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
 						];
 						break;
 				}
@@ -520,6 +381,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return json_encode($response);
 
 		}
-
 
 	} // FIN

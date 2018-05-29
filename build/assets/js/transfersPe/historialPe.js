@@ -168,7 +168,6 @@ base_cdn = $('body').attr('data-app-cdn');
 				mes = $("#filter-month").val();
 				anio = $("#filter-year").val();
 				$('#list-detail').children().remove();
-				console.log(mes);
 				buscar_historial(ctaOrigen,mes,anio);
 
 	});	//BOTON BUSCAR
@@ -208,11 +207,10 @@ base_cdn = $('body').attr('data-app-cdn');
 
 									$.each(data.listaTransferenciasRealizadas,function(pos,item){
 
-										 if(item.estatusOperacion == '1'){
+										 if(item.estatusOperacion === '1'){
 											clase = 'icon-ok-sign';
 											clase1 = 'feed-success';
 											status = 'Procesado';
-											verified = '<div class="verified">Verificado</div>';
 										}else {
 											clase = 'icon-cancel-sign';
 											clase1 = 'feed-error';
@@ -220,13 +218,11 @@ base_cdn = $('body').attr('data-app-cdn');
 											tipo = "Transferencia rechazada";
 										}
 
-										verified = (item.Autorizacion === true) ? '<div class="verified">Verificado</div>' : '';
-
+										verified = (item.Autorizado === '1') ? '<div class="verified">Autorizada</div>' : '';
 													var fecha = item.fechaTransferencia.split('/');
 													var dia = fecha[0];
 													var mes;
 													var moneda=$(".dashboard-item").attr("moneda");
-
 
 													switch (fecha[1]){
 														case "01":
@@ -285,7 +281,7 @@ base_cdn = $('body').attr('data-app-cdn');
 									$(location).attr('href', base_url+'/users/error_gral');
 									break;
 
-								default:
+								case 2:
 												$('#carga').children().remove();
 												var cadena='<div id="empty-state" style="position: static;">';
 												cadena+=                '<h2>No se encontraron movimientos</h2>';
@@ -293,6 +289,10 @@ base_cdn = $('body').attr('data-app-cdn');
 												cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -415px;"></span>';
 												cadena+=             '</div>';
 												$("#list-detail").append(cadena);
+									break;
+
+								default:
+											msgService (data.title, data.msg, data.modalType, 1);
 									break;
 							}
 						}
@@ -319,3 +319,29 @@ base_cdn = $('body').attr('data-app-cdn');
 
 
 });  //FIN DE LA FUNCION GENERAL
+
+
+
+function msgService (title, msg, modalType, redirect) {
+	$("#registrar").fadeIn();
+	$("#dialogo-movil").dialog({
+		title	:title,
+		modal	:"true",
+		resizable: false,
+		closeOnEscape: false,
+		width	:"440px",
+		open	: function(event, ui) {
+			$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			//Cambia el tipo de alerta - warning - error - success
+		  $("#modalType").addClass(modalType);
+			$('#msgService').html(msg);
+		}
+
+	});
+	$("#inva5").click(function(){
+		$("#dialogo-movil").dialog("close");
+		if(redirect == 1){
+			$(location).attr('href', base_url + '/transferencia/HistorialPe');
+		}
+	});
+}
