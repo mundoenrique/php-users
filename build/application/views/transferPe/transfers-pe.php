@@ -222,17 +222,12 @@
 	$datos = null;
 	if(isset($data)) {
 		if($this->session->userdata("aplicaTransferencia")=='N') {
-			header("Location: transfer/error_transfer");
-		}
-		if(($this->session->userdata("aplicaTransferencia")=='S')&&($this->session->userdata("passwordOperaciones")=='')) {
-			$pass = '/users/crearPasswordOperaciones';
-			$ruta = $this->config->item("base_url").$pass;
-			header("Location: $ruta");
+			header("Location: ../transfer/error_transfer");
 		}
 		$datos = unserialize($data);
 
 		if($datos->rc==-150) {
-			$error = '/transfer/error_transfer';
+			$error = '../transfer/error_transfer';
 			$ruta = $this->config->item("base_url").$error;
 			header("Location: $ruta");
 		}

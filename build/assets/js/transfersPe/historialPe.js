@@ -206,11 +206,11 @@ base_cdn = $('body').attr('data-app-cdn');
 									$('#list-detail').children().remove();
 
 									$.each(data.listaTransferenciasRealizadas,function(pos,item){
-
 										 if(item.estatusOperacion === '1'){
 											clase = 'icon-ok-sign';
 											clase1 = 'feed-success';
 											status = 'Procesado';
+											tipo = "Transferencia realizada";
 										}else {
 											clase = 'icon-cancel-sign';
 											clase1 = 'feed-error';
@@ -218,9 +218,10 @@ base_cdn = $('body').attr('data-app-cdn');
 											tipo = "Transferencia rechazada";
 										}
 
-										verified = (item.Autorizado === '1') ? '<div class="verified">Autorizada</div>' : '';
-													var fecha = item.fechaTransferencia.split('/');
-													var dia = fecha[0];
+										verified = (item.autorizado === '1') ? '<div class="verified">Autorizada</div>' : '';
+													var fechaActual = item.fechaTransferencia.split(' ');
+													var fecha = fechaActual[0].split('-');
+													var dia = fecha[2];
 													var mes;
 													var moneda=$(".dashboard-item").attr("moneda");
 
@@ -270,6 +271,8 @@ base_cdn = $('body').attr('data-app-cdn');
 														lista+=				'</div>';
 														lista+=				tipo + ': ' +item.beneficiario+'<span class="money-amount">'+ verified +'<div class="amount-history">'+moneda+' '+item.montoTransferencia+'</div> </span>'; //'+moneda+'
 														lista+=				'<ul class="feed-metadata">';
+														lista+=					'<li class="feed-metadata-item"><span aria-hidden="true" class="icon-phone"></span>'+ item.telefonoDestino +'</li>';
+														lista+=					'<li class="feed-metadata-item"><span aria-hidden="true" class="icon-card"></span>'+ item.tarjetaDestinoMascara +'</li>';
 														lista+=					'<li class="feed-metadata-item"><span aria-hidden="true" class="icon-mail"></span>   '+item.concepto+'</li>';
 														lista+=				'</ul>';
 														lista+=			'</li>';
