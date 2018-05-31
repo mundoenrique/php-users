@@ -229,9 +229,8 @@ class Registro_model extends CI_Model {
 			case 5036:
 			case 5037:
 			case 5114:
-
 				$this->title = "Conexión Personas Online";
-				$this->msn = "Datos de afiliación inválidos, verifica tu DNI e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+				$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en Reniec e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
 				$this->code = 2;
 				$this->modalType = "alert-error";
 				break;
