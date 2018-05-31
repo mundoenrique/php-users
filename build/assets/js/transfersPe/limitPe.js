@@ -29,7 +29,6 @@ $(function() {
 			rules: {
 				"password": {
 					"required": true,
-					"tokenValid":true,
 				},
 				"amount": {
 					"required": true
@@ -38,7 +37,6 @@ $(function() {
 			messages: {
 				"password": {
 					required: "La clave de acceso no puede estar vacia",
-					tokenValid: "El código de seguridad no puede tener caracteres especiales",
 				},
 				"amount": {
 					required: "Debe seleccionar un monto base"
@@ -66,7 +64,11 @@ $(function() {
 						switch (data.code) {
 							case 0:
 								msgService(data.title, data.msg, data.modalType, 1);
-							break;
+								break;
+
+							case 2:
+								$(location).attr('href', base_url + '../users/error_gral');
+								break;
 
 							default:
 								msgService(data.title, data.msg, data.modalType, 1);

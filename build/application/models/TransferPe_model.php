@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas origen");
 
 			$data = json_encode(array(
-				                    "idOperation"=>"6",
+				                    "idOperation"=>"306",
 				                    "className"=>"com.novo.objects.TOs.TarjetaTO",
 				                    "tipoOperacion"=>$operacion,
 				                    "id_ext_per"=>$this->session->userdata("idUsuario"),
@@ -133,14 +133,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$salida = json_encode($desdata);
 			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
 
-			$desdata = json_decode('{"lista":[{"codigo":"A","monto":100.00,"default":0},{"codigo":"B","monto":200.00,"default":1},{"codigo":"C","monto":300.00,"default":0}],"rc":0,"msg":"Proceso OK","idOperation":"300","className":"com.novo.objects.TOs.MontoBaseTO","token":"e7159e5a787ef254056e7c877870d89e","logAccesoObject":{"sessionId":"af7990ca8b4673ec123af41728610dc9","userName":"ANNY123","canal":"personasWeb","modulo":"lista montos bases","operacion":"consultar","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 20:33","lenguaje":"ES"}}');
 
 			if($desdata){
 				switch ($desdata->rc) {
 
 					case 0:
 						$this->code = 0;
-						$this->amounts = $desdata->lista;
+						$this->amounts = $desdata->listaMontos;
 						break;
 
 					default:
@@ -171,20 +170,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			parse_str($dataRequest, $dataAccount);
 
-			$monto = $dataAccount['monto'];
+			$montoUser = intval($dataAccount['monto']);
 			$codigo = $dataAccount['codigo'];
-			$clave = $dataAccount['clave'];
+			$claveUser = $dataAccount['clave'];
 
+
+			log_message("info", "Request set amount" . $montoUser);
 			//$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","actualiza monto base","actualiza monto base","actualiza monto base");
 			$data = json_encode(array(
 														"idOperation"=>"301",
 														"className"=>"com.novo.objects.TOs.MontoBaseTO",
-														"monto"=> $monto,
 														"codigo"=> $codigo,
+														"clave"=> $claveUser,
 														"codPais"=> $this->session->userdata("pais"),
 														"logAccesoObject"=>$logAcceso,
-														"token"=>$this->session->userdata("token")
+														"token"=>$this->session->userdata("token"),
+														"monto"=> $montoUser,
 													));
 
 			//print_r($data);
@@ -207,6 +209,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$this->msg = 'El monto base se ha actualizado exitosamente';
 						$this->modalType = 'alert-success';
 						break;
+
+					case -391:
+						$this->code = 5;
+						$this->title = 'Actualizar Montos Base';
+						$this->msg = "Ha ingresado una clave incorrecta";
+						$this->modalType = 'alert-error';
+						break;
+
+					case -33:
+						case 2:
+							$this->code = 2;
+						break;
+
 					default:
 						$this->code = 1;
 						$this->title = 'Actualizar Montos Base';

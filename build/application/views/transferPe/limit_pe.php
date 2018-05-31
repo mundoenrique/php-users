@@ -31,12 +31,13 @@
 				<div id="transfer-date">
 					<?php
 						//consulta el monto actual
+
 						$baseAmounts = unserialize($amounts);
 						$defaultAmount = "";
 						if($baseAmounts->code == 0)
 						{
 							foreach ($baseAmounts->amounts as $key => $options) {
-							 if($options->default == 1){
+							 if($options->porDefecto == 1){
 								 $defaultAmount = $options->monto;
 								 break;
 							 }
@@ -53,7 +54,7 @@
 									{
 										//construyen listado de montos
 										foreach ($baseAmounts->amounts as $key => $options) {
-											$selected = ($options->default == 1) ? 'selected':'';
+											$selected = ($options->porDefecto == 1) ? 'selected':'';
 											echo "<option value=".$options->codigo." monto='".$options->monto."' ".$selected.">".lang("MONEDA").". ".$options->monto." </option>";
 										}
 									}
@@ -63,7 +64,7 @@
 						</div>
 						<div class="aling-right-form">
 							<label>Clave de inicio</label>
-							<input class='field-medium skip' id="password" name="password" maxlength="8" type='password' />
+							<input class='field-medium skip' id="password" name="password" maxlength="15" type='password' />
 						</div>
 					</fieldset>
 
