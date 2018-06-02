@@ -8,12 +8,12 @@ $(function() {
 	});
 	//----------------------------------------------------------------------------------------------
 
-
-
 	//CAMBIO DATA DE TRANSFERENCIA TEL-NUMERO CUENTA------------------------------------------------
 	$("input:radio[name=tipoRef]").on('change', function(e){
-		//validación
-		$("#msg-history").html("");
+
+		//limpia formulair
+		resetForms();
+
 		//Cambio
 		var tipo = $("input:radio[name=tipoRef]:checked").val();
 
@@ -28,10 +28,6 @@ $(function() {
 			$("#telefonoDestino").val('');
 			$('#search-cards').attr('disabled',true);
 			$("#continuar").attr('disabled',false);
-
-			//limpia validaciones
-			$('#form-search').find('input, textarea, button, select').removeClass('field-error field-success');
-
 		}
 		else{
 			//activa e inactiva elementos de transaccion
@@ -44,10 +40,8 @@ $(function() {
 			$("#ctaDestinoText").val('');
 			$('#search-cards').attr('disabled',false);
 			$("#continuar").attr('disabled',true);
-
 			//limpia validaciones
-			$('#form-trx')[0].reset();
-			$('#form-trx').find('input, textarea, button, select').removeClass('field-error field-success');
+
 		}
 	})
 
@@ -58,7 +52,7 @@ $(function() {
 		var imagen, tarjeta, marca, mascara, producto, empresa, montoDebitar, cadena, nombre,
 			saldoCero, i;
 
-
+		resetCard();
 		imagen = $(this).find('img').attr('src');
 		tarjeta = $(this).attr('card');
 		marca = $(this).attr('marca').toLowerCase();
@@ -67,6 +61,25 @@ $(function() {
 		empresa = $(this).attr('empresa');
 		nombre = $(this).attr('nombre');
 		pais = $(this).attr("pais");
+
+
+
+		montoMaxOperaciones = parseFloat($(this).attr('montoMaxOperaciones'));
+		montoMinOperaciones = parseFloat($(this).attr('montoMinOperaciones'));
+		montoMaxDiario = parseFloat($(this).attr('montoMaxDiario'));
+		montoMaxSemanal = parseFloat($(this).attr('montoMaxSemanal'));
+		montoMaxMensual = parseFloat($(this).attr('montoMaxMensual'));
+		cantidadOperacionesDiarias = parseInt($(this).attr('cantidadOperacionesDiarias'));
+		cantidadOperacionesSemanales = parseInt($(this).attr('cantidadOperacionesSemanales'));
+		cantidadOperacionesMensual = parseInt($(this).attr('cantidadOperacionesMensual'));
+		montoAcumDiario = parseFloat($(this).attr('montoAcumDiario'));
+		montoAcumSemanal = parseFloat($(this).attr('montoAcumSemanal'));
+		montoAcumMensual = parseFloat($(this).attr('montoAcumMensual'));
+		acumCantidadOperacionesDiarias = parseInt($(this).attr('acumCantidadOperacionesDiarias'));
+		acumCantidadOperacionesSemanales = parseInt($(this).attr('acumCantidadOperacionesSemanales'));
+		acumCantidadOperacionesMensual = parseInt($(this).attr('acumCantidadOperacionesMensual'));
+
+
 		montoDebitar = saldoCero = (pais == 'Pe' || pais == 'Usd') ? '0.00' : '0,00';
 		$("#ctaOrigen").val(tarjeta);
 
@@ -101,14 +114,10 @@ $(function() {
 		cadena+= '</div>';
 
 		// HABILITA CAMPOS DE TRANSACCIÓN ----------------------------------------------------------
-		$("#tipoRef").removeAttr('disabled');
-		$("#tipoRef2").removeAttr('disabled');
-		$("#telefonoDestino").removeAttr('disabled');
-		$('#search-cards').removeAttr('disabled');
+		$('#formTransferenciaDestino').show();
 
 		// MOSTRAR DATOS CUENTAS ORIGEN EN LA VISTA PRINCIPAL---------------------------------------
 		$("#donor").append(cadena);
-
 
 		// CARGAR SALDO CUENTAS ORIGEN--------------------------------------------------------------
 		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card")},
@@ -116,8 +125,9 @@ $(function() {
 				var saldoCtaOrigen = data.disponible;
 				if (typeof saldoCtaOrigen != 'string') {
 					saldoCtaOrigen = "---";
+					saldoVerifica = 0;
 				}
-
+				saldoVerifica = saldoCtaOrigen;
 				$("#balance-available").html(moneda + ' ' + saldoCtaOrigen);
 				$("#balance-available").attr("saldo", saldoCtaOrigen);
 			});
@@ -138,6 +148,8 @@ $(function() {
 
 	});
 
+	//FIN DE CUENTAS DE ORIGEN
+
 	//EDITAR CUENTAS ORIGEN-------------------------------------------------------------------------
 
 	$('#donor').on('click', '.stack-item', function() {
@@ -147,8 +159,6 @@ $(function() {
 	//BUSCAR LAS TARJETAS ASOCIADAS AL TELEFONO --------------------------------------------------------------
 	$("#search-cards").on('click',function(){
 		validar_campos();
-		$("#form-search").submit();
-		$("#form-search").valid();
 	});
 });
 
@@ -156,6 +166,7 @@ $(function() {
 $("#continuar").on('click',function(){
 	var form;
 	var action =  $("#continuar").attr('action');
+
 	//Selecciona el formulario a enviar
 
 	switch(action){
@@ -164,16 +175,19 @@ $("#continuar").on('click',function(){
 
 			break;
 		case 'form-trx':
+				form = "";
 				var cuentaDestino = ($("#ctaDestinoText").val() === '') ? $("#ctaDestino").val() : $("#ctaDestinoText").val();
 				var ajax_data = {
 						'ctaOrigen' : $("#donor-cardnumber-origen").attr('cardorigen'),
 						'ctaDestino' : cuentaDestino,
 						'monto' : $("#monto").val(),
 						'descripcion' : $("#descripcion").val(),
-						'pin' : ''
+						'pin' : '',
 				};
 				var formData = $.param(ajax_data);
-				makeTransferPe(formData);
+				makeTransferPe(formData, 0);
+				$('#progress > ul > li:nth-child(2)')
+					.addClass('completed-step-item');
 				$('#progress > ul > li:nth-child(3)')
 					.addClass('current-step-item');
 			break;
@@ -209,3 +223,21 @@ function modalCtasOrigen()
 }
 
 /*------------------------------------------------------------------------------------------------*/
+
+function resetCard(){
+
+	resetForms();
+	$('#form-trx').find('input, textarea, button, select').attr('disabled',true);
+	$('#form-search').find('input, textarea, button, select').attr('disabled',false);
+	$('#tipoRef2').prop('checked',true);
+	$('#tipoRef').prop('checked',false);
+
+}
+
+//RESETEAR LOS FORMULARIOS
+function resetForms(){
+		$('#form-trx')[0].reset();
+		$('#form-search')[0].reset();
+    $('#msg-history').children().remove();
+    $('#form-trx *, #form-search *').children().removeClass('field-success field-error');
+}

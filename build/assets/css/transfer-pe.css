@@ -117,3 +117,7 @@
 .form-actions{
 	text-align: right;
 }
+
+.pinError{
+	color: #f04848;
+}

@@ -56,14 +56,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Busqueda de cuentas por telefono
-		public function accountPhone($telefonoDestino){
+		public function accountPhone($dataPhone){
+
+			parse_str($dataPhone, $dataAccount);
+			$telefono = $dataAccount['telefonoDestino'];
 
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
 			$data = json_encode(array(
 				                    "idOperation"=>"302",
-				                    "className"=>"com.novo.objects.TOs.TarjetaTO",
-				                    "telefonoDestino"=> $telefonoDestino,
+				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
+				                    "telefono"=> $telefono,
 				                    "logAccesoObject"=>$logAcceso,
 				                    "token"=>$this->session->userdata("token")
 			                    ));
@@ -75,12 +78,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
-			log_message("info", "Response encriptado procesarTransferencia_load------>>>>>>".$response);
+			log_message("info", "Response encriptado acountphone------>>>>>>".$response);
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 			$salida = json_encode($desdata);
-			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
-
-			$desdata = json_decode('{"lista":[{"noTarjeta":"6048427001614714","noTarjetaConMascara":"604842******4714"},{"noTarjeta":"6048426500029317","noTarjetaConMascara":"604842******9317"}],"rc":0,"msg":"Proceso OK","logAccesoObject":{"sessionId":"9fadc0ada62ef0a84a3a54d7c9b1143e","userName":"ANNY123","canal":"personasWeb","modulo":"lista tarjetas","operacion":"consulta Lista Tarjeta por Telefono","RC":0,"IP":"172.17.0.4","dttimesstamp":"05/15/2018 19:46","lenguaje":"ES"}}');
+			log_message("info", "Response acountphone------>>>>>>".$salida);
 
 			if($desdata){
 				switch ($desdata->rc) {
@@ -175,7 +176,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$claveUser = $dataAccount['clave'];
 
 
-			log_message("info", "Request set amount" . $montoUser);
 			//$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","actualiza monto base","actualiza monto base","actualiza monto base");
 			$data = json_encode(array(
@@ -269,7 +269,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				));
 
 			//print_r($data);
-			log_message("info", "Salida HISTORIAL : ".$data);
+			log_message("info", "Salida HISTORIAL aqui esta haciendo mal: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada historial_load : ".$data);
@@ -316,18 +316,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			return json_encode($response);
 		}
 
-		//HISTORIAL DE PARAMETROS MONTOS BASE
+		//Transferencias
 		public function makeTransferPe($dataRequest) {
 
 			parse_str($dataRequest, $dataAccount);
 			//$sessionId - $username - $canal - $modulo - $function - $operacion
-			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencias","historial","consultar");
+			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
 
 			$ctaOrigen = $dataAccount['ctaOrigen'];
 			$ctaDestino = $dataAccount['ctaDestino'];
 			$monto = $dataAccount['monto'];
 			$descripcion = $dataAccount['descripcion'];
-			$pin = isset($dataAccount['pin']) ? $dataAccount['pin'] : '';
 
 			$data = json_encode(array(
 				"idOperation"=>"303",
@@ -341,19 +340,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				"idUsuario"=>$this->session->userdata("userName"),
 				"logAccesoObject"=>$logAcceso,
 				"token"=>$this->session->userdata("token"),
-				'tokenTransferenciaP2P' => $pin
 				));
 
-				log_message("info", "Salida HISTORIAL : ".$data);
+				log_message("info", "Request make transfer pin: ".$data);
 				$dataEncry = np_Hoplite_Encryption($data,1);
 				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-				log_message("info", "Salida encriptada historial_load : ".$data);
+				log_message("info", "Salida encriptada make transfer pin : ".$data);
 				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 				$data = json_decode(utf8_encode($response));
 				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 
 				$salida = json_encode($desdata);
-				log_message("info", "Salida historial_load".$salida);
+				log_message("info", "Salida make transfer pin".$salida);
 
 				if($desdata){
 				switch ($desdata->rc) {
@@ -366,15 +364,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								'code' => 0,
 								'ctaOrigen' => $desdata->ctaOrigen,
 								'ctaDestino'=>$desdata->ctaDestino,
-								'ctaOrigenMascara' => $desdata->ctaOrigen,
-								'ctaDestinoMascara'=>$desdata->ctaDestino,
+								'ctaOrigenMascara' => $desdata->ctaOrigenMask,
+								'ctaDestinoMascara'=>$desdata->ctaDestinoMask,
 								'monto'=>$desdata->monto,
 								'descripcion'=>$desdata->descripcion,
-								'referencia'=>$transation->referencia,
 								'transferenciaRealizada'=>$transation->transferenciaRealizada,
-								'fecha'=>$date->dttimesstamp,
-								'nombreCuentaOrigen' => '',
-								'nombreCuentaDestino' => ''
+								'nombreCuentaOrigen' => $desdata->tarjetahabienteOrigen,
+								'nombreCuentaDestino' => $desdata->nombreBeneficiario,
 								];
 						break;
 
@@ -384,11 +380,119 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							];
 						break;
 
+					case -343:
+						$response = [
+							'code' => 3,
+							'title' => "Conexión Personas Online",
+							"msg" => "No se puede realizar la transacción, la tarjeta se encuentra bloqueada.",
+						];
+
+						break;
+
+					case -33:
+						$response = [
+							'code' => 4,
+						];
+						break;
+
 					default:
 						$response = [
-							'code' => 1,
+							'code' => 5,
 							'title' => "Conexión Personas Online",
-							"msn" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
+							"msg" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
+						];
+						break;
+				}
+			}
+			return json_encode($response);
+
+		}
+
+
+		public function makeTransferPinPe($dataRequest) {
+
+			parse_str($dataRequest, $dataAccount);
+			//$sessionId - $username - $canal - $modulo - $function - $operacion
+			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","transferencia","procesar transferencia");
+
+			$ctaOrigen = $dataAccount['ctaOrigen'];
+			$ctaDestino = $dataAccount['ctaDestino'];
+			$monto = $dataAccount['monto'];
+			$descripcion = $dataAccount['descripcion'];
+			$pin = isset($dataAccount['pin']) ? $dataAccount['pin'] : '';
+
+			$data = json_encode(array(
+				"idOperation"=>"304",
+				"className"=>"com.novo.objects.MO.TransferenciaTarjetahabienteMO",
+				"idUsuario"=>$this->session->userdata("userName"),
+				"ctaOrigen"=>$ctaOrigen,
+				"ctaDestino"=>$ctaDestino,
+				"monto"=>$monto,
+				"descripcion"=>$descripcion,
+				"tipoOpe"=>"P2P",
+				"idUsuario"=>$this->session->userdata("userName"),
+				"logAccesoObject"=>$logAcceso,
+				"token"=>$this->session->userdata("token"),
+				'tokenTransferenciaP2P' => $pin
+				));
+
+				log_message("info", "Request make transfer : ".$data);
+				$dataEncry = np_Hoplite_Encryption($data,1);
+				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
+				log_message("info", "Salida encriptada make transfer : ".$data);
+				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+				$data = json_decode(utf8_encode($response));
+				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+
+				$salida = json_encode($desdata);
+				log_message("info", "Salida make transfer".$salida);
+
+				if($desdata){
+				switch ($desdata->rc) {
+					case 0:
+
+						$transation = $desdata->dataTransaccion;
+						$date = $desdata->logAccesoObject;
+
+							$response = [
+								'code' => 0,
+								'ctaOrigen' => $desdata->ctaOrigen,
+								'ctaDestino'=>$desdata->ctaDestino,
+								'ctaOrigenMascara' => $desdata->ctaOrigenMask,
+								'ctaDestinoMascara'=>$desdata->ctaDestinoMask,
+								'monto'=>$desdata->monto,
+								'descripcion'=>$desdata->descripcion,
+								'transferenciaRealizada'=>$transation->transferenciaRealizada,
+								'nombreCuentaOrigen' => $desdata->tarjetahabienteOrigen,
+								'nombreCuentaDestino' => $desdata->nombreBeneficiario,
+								];
+						break;
+
+					case -393:
+						$response = [
+							'code' => 2,
+						];
+						break;
+
+					case -343:
+						$response = [
+							'code' => 3,
+							'title' => "Conexión Personas Online",
+							"msg" => "No se puede realizar la transacción, la tarjeta se encuentra bloqueada.",
+						];
+						break;
+
+					case -33:
+						$response = [
+							'code' => 4,
+						];
+						break;
+
+					default:
+						$response = [
+							'code' => 5,
+							'title' => "Conexión Personas Online",
+							"msg" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
 						];
 						break;
 				}

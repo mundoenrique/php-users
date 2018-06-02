@@ -54,62 +54,65 @@
 										</ul>
 									</div>
 								</div>
-								<label for='beneficiary-1x'>Destino<span class='field-instruction'></span></label>
-								<div id="tdestino">
-									<input type="hidden" id="typeCurrency" value="<?php echo lang("MONEDA");?>">
-									<div class='group' id='btn-destino'>
-										<div class='product-info product-scheme'>
-											<fieldset>
-												<label for="">Seleccione dato de transferencia</label>
-												<div class="form-phone">
-													<input type="hidden" id="ctaOrigen" name="ctaOrigen" value="">
-													<label class="label-inline">
-				                            <input disabled class="label-inline skip" id="tipoRef2" name="tipoRef" value="2" type="radio" checked="checked">Teléfono</label>
-													<label class="label-inline">
-				                            <input disabled class="label-inline skip" id="tipoRef" name="tipoRef" value="1" type="radio" > Tarjeta </label>
+								<div id="formTransferenciaDestino" style="display:none">
+									<label for='beneficiary-1x'>Destino<span class='field-instruction'></span></label>
+									<div id="tdestino">
+										<input type="hidden" id="typeCurrency" value="<?php echo lang("MONEDA");?>">
+										<div class='group' id='btn-destino'>
+											<div class='product-info product-scheme'>
+												<fieldset>
+													<label for="">Seleccione dato de transferencia</label>
+													<div class="form-phone">
+														<input type="hidden" id="ctaOrigen" name="ctaOrigen" value="">
+														<label class="label-inline">
+					                            <input class="label-inline skip" id="tipoRef2" name="tipoRef" value="2" type="radio" checked="checked">Teléfono</label>
+														<label class="label-inline">
+					                            <input class="label-inline skip" id="tipoRef" name="tipoRef" value="1" type="radio" > Tarjeta </label>
 
-												</div>
-												<form id="form-search" method="post" name="form-search">
-													<div id='cardRef' style="display:none">
-														<fieldset class='form-inline'>
-															<label for='beneficiary-1x-description'>Tarjeta</label>
-															<input disabled class='field-medium ignore' id='ctaDestinoNot' maxlength="16" minlength="16" name='ctaDestinoNot' type='text' />
-														</fieldset>
 													</div>
-													<div id='phoneRef'>
-														<fieldset class='form-inline '>
-															<label for='beneficiary-1x-description'>Teléfono</label>
-															<input class='field-medium monto' name='telefonoDestino' id='telefonoDestino' type='text' value="" required minlength="9" maxlength="9" disabled />
-															<button id="search-cards" disabled class="mensual search-cards" type="submit"><span aria-hidden="true" class="icon-find"></span></button>
-														</fieldset>
-													</div>
-												</form>
-											</fieldset>
-										</div>
-										<div class='product-scheme'>
-											<form id="form-trx" method="post" name="form-trx">
-												<fieldset class='form-inline '>
-													<div id="data-transfer">
-														<div id='cardSelect'>
-																<label for='beneficiary-1x-description'>Tarjetas</label>
-																<select class="field-large" id="ctaDestino" name="ctaDestino" disabled>
-																</select>
+													<form id="form-search" method="post" name="form-search">
+														<div id='cardRef' style="display:none">
+															<fieldset class='form-inline'>
+																<label for='beneficiary-1x-description'>Tarjeta</label>
+																<input disabled class='field-medium ignore' id='ctaDestinoNot' maxlength="16" minlength="16" name='ctaDestinoNot' type='text' />
+															</fieldset>
 														</div>
-														<div id="cardText" style="display:none">
-															<label for='beneficiary-1x-description'>Tarjeta</label>
-															<input disabled class='field-medium ignore' id='ctaDestinoText' maxlength="16" minlength="16" name='ctaDestinoText' type='text' />
+														<div id='phoneRef'>
+															<fieldset class='form-inline '>
+																<label for='beneficiary-1x-description'>Teléfono</label>
+																<input class='field-medium monto' name='telefonoDestino' id='telefonoDestino' type='text' value="" required minlength="9" maxlength="9" />
+																<button id="search-cards"  class="mensual search-cards" type="submit"><span aria-hidden="true" class="icon-find"></span></button>
+															</fieldset>
 														</div>
-														<label for='beneficiary-1x-description'>Concepto</label>
-														<input disabled class='field-large skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
-														<label for='beneficiary-1x-amount'>Monto</label>
-														<div class='field-category'>
-															<?php echo lang("MONEDA"); ?>
-															<input disabled id='montoLabel' name='montoLabel' type='hidden' value='<?php echo lang("MONEDA");?>' />
-														</div>
-														<input disabled class='field-small monto skip' id='monto' maxlength="5" name='monto' type='text' />
-													</div>
+													</form>
 												</fieldset>
-											</form>
+											</div>
+											<div class='product-scheme'>
+												<form id="form-trx" method="post" name="form-trx">
+													<input type="hidden" id="opeMax" name="opeMax" value="1">
+													<fieldset class='form-inline '>
+														<div id="data-transfer">
+															<div id='cardSelect'>
+																	<label for='beneficiary-1x-description'>Tarjetas</label>
+																	<select class="field-large" id="ctaDestino" name="ctaDestino" disabled>
+																	</select>
+															</div>
+															<div id="cardText" style="display:none">
+																<label for='beneficiary-1x-description'>Tarjeta</label>
+																<input disabled class='field-medium ignore' id='ctaDestinoText' maxlength="16" minlength="16" name='ctaDestinoText' type='text' />
+															</div>
+															<label for='beneficiary-1x-description'>Concepto</label>
+															<input disabled class='field-large skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
+															<label for='beneficiary-1x-amount'>Monto</label>
+															<div class='field-category'>
+																<?php echo lang("MONEDA"); ?>
+																<input disabled id='montoLabel' name='montoLabel' type='hidden' value='<?php echo lang("MONEDA");?>' />
+															</div>
+															<input disabled class='field-small monto skip' id='monto' maxlength="5" name='monto' type='text' />
+														</div>
+													</fieldset>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -121,7 +124,7 @@
 						<div id="confirmTrxValues" style="display:none">
 								<div id="titulo">
 									<h2>Confirmación</h2>
-									<p>Por favor, verifique los datos de las siguientes operaciones de transferencia que solicita:</p>
+									<p>Por favor, verifique los datos de la siguiente operacione de transferencia que solicita:</p>
 								</div>
 
 									<input type="hidden" id="ctaOrigen" name="ctaOrigen" value="">
@@ -164,15 +167,15 @@
 												<tbody id="cargarConfirmacion">
 													<tr>
 														<td class="data-label"><label >Cuenta Origen</label></td>
-														<td class="data-reference"><span class="data-reference" id="nombreOrigen">Nombre</span><br><span class="highlight" id="conCtaOrigen">cuenta de origen</span><br></td>
+														<td class="data-reference"><span class="data-reference" id="conNombreOrigen"></span><br><span class="highlight" id="conCtaOrigenTrx"></span><br></td>
 														<td class="data-metadata data-resultado">
-															<strong>Concepto: </strong><span id="conDescripcion"></span>
+															<strong>Concepto: </strong><span id="conDescripcionTrx"></span>
 															<br><strong>Monto: </strong><span class="money-amount" ><?php echo lang("MONEDA"); ?></span><span id="conMonto"></span>
 														</td>
 													</tr>
 													<tr>
-														<td class="data-label"><label>Cuentas Destino</label></td>
-														<td class="data-reference"><span class="data-reference" id="conCtaOr">Nombre cuenta de destino</span><br><span class="highlight" id="conCtaDestino">cuenta de destnino</span></td>
+														<td class="data-label"><label>Cuenta Destino</label></td>
+														<td class="data-reference"><span class="data-reference" id="conNombreDestino"></span><br><span class="highlight" id="conCtaDestinoTrx"></span></td>
 														<td class="data-metadata">Total<br><span class="money-amount"><?php echo lang("MONEDA"); ?></span><span id="conMonto2"></span></td>
 													</tr>
 												</tbody>
@@ -192,7 +195,7 @@
 
 								<div id="msg-change" class="msg-prevent">
 										<h2>Confirmación</h2>
-										<h3>Por favor ingresa el código de seguridad que recibiste por SMS o correo electronico</h3>
+										<h3 id="msgInfoPin">Por favor ingresa el código de seguridad que recibiste por SMS o correo electronico</h3>
 										<div id="result-change"></div>
 								</div>
 								<div>
@@ -203,6 +206,7 @@
 						</div>
 
 						<div id="buttonTrx" class="form-actions">
+							<span aria-hidden="true" class="icon-refresh icon-spin" id="cargandoInfo" style="font-size:35px;"></span>
 							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">Cancelar</button></a>
 							<button disabled class="confir" id="continuar" type="submit" action='form-confirm'>Continuar</button>
 						</div>
@@ -276,9 +280,13 @@
 				$empresa = strtolower($value->nomEmp);
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
+				$paramTrx = $value->parametrosTransferencia;
 
 
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'>
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'
+				montoMaxOperaciones = '$paramTrx->montoMaxOperaciones' montoMinOperaciones='$paramTrx->montoMinOperaciones' montoMaxDiario='$paramTrx->montoMaxDiario' montoMaxSemanal='$paramTrx->montoMaxSemanal' montoMaxMensual='$paramTrx->montoMaxMensual' cantidadOperacionesDiarias='$paramTrx->cantidadOperacionesDiarias'
+				cantidadOperacionesSemanales = '$paramTrx->cantidadOperacionesSemanales' cantidadOperacionesMensual='$paramTrx->cantidadOperacionesMensual' montoAcumDiario = '$paramTrx->montoAcumDiario' montoAcumSemanal='$paramTrx->montoAcumSemanal' montoAcumMensual='$paramTrx->montoAcumMensual' acumCantidadOperacionesDiarias='$paramTrx->acumCantidadOperacionesDiarias'
+				acumCantidadOperacionesSemanales = '$paramTrx->acumCantidadOperacionesSemanales' acumCantidadOperacionesMensual = '$paramTrx->acumCantidadOperacionesMensual'>
 	         		<a rel='section'>
 	         			<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 	         			<div class='dashboard-item-network $marca'></div>
@@ -306,15 +314,16 @@
 <!--*********************************FIN MODAL CTAS DE ORIGEN************************************-->
 
 
-
 <!--***************************************MODAL ERRORES*****************************************-->
-<div id="info-system" class="dialog-small" style='display:none'>
-	<div class="alert-simple alert-warning skip" id="content-info">
-		<span aria-hidden="true" class="skip icon-warning-sign"></span>
-	</div>
-	<div id="content-input" class="skip"></div>
-	<div id="button-action" class="form-actions skip">
-		<button id="close-info" class="skip">Aceptar</button>
-	</div>
+<div id="dialogo-movil" style='display:none'>
+		<div id="dialog-confirm">
+				<div class="alert-simple" id="modalType">
+						<span aria-hidden="true" class="icon-cancel-sign"></span>
+						<p id="msgService"></p>
+				</div>
+		</div>
+		<div class="form-actions">
+				<button id="inva5">Aceptar</button>
+		</div>
 </div>
 <!--*************************************FIN MODAL ERRORES***************************************-->

@@ -6,6 +6,7 @@ var base_url, base_cdn, ctasDestino, moneda, pais, editCard, numberBeneficiary =
 	montoComision, nameSource, maskSource, sourceNumber, brand, destination = {}, dobleAutenticacion,
 	operationType, expDate, country;
 
+$("#cargandoInfo").hide();
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 country = $('body').data('country');
@@ -93,18 +94,111 @@ function validar_campos(valida) {
         } else {
             return false;
         }
-    });
+    });+
 
-		//valida el monto minimo y maximo
-		jQuery.validator.addMethod("amountsValue", function(value, element) {
-				;
-        var amount = element.value;
-        if (amount < $("#limitAmount").attr('minAmount') || amount >= $("#limitAmount").attr('maxAmount')) {
+		jQuery.validator.addMethod("onlyLetters", function(value, element) {
+        var regEx = /^[A-Za-z0-9\s]+$/,
+            token = element.value;
+
+        if (regEx.test(token)) {
             return true;
         } else {
             return false;
         }
     });
+
+		//valida el monto minimo y maximo
+		jQuery.validator.addMethod("amountAvailable", function(value, element) {
+        var amount = parseFloat(element.value);
+	        if (amount > saldoVerifica) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida el monto minimo y maximo
+		jQuery.validator.addMethod("amountsValue", function(value, element) {
+        var amount = parseFloat(element.value);
+        if (amount < montoMinOperaciones || amount >= montoMaxOperaciones) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+
+		//valida monto diario
+		jQuery.validator.addMethod("amountDay", function(value, element) {
+        var amount = parseFloat(element.value);
+				var compara = montoAcumDiario + amount;
+        if (compara >= montoMaxDiario) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida monto semanales
+		jQuery.validator.addMethod("amountWeek", function(value, element) {
+			 var amount = parseFloat(element.value);
+			 var compara = montoAcumSemanal + amount;
+
+	        if ( compara >= montoMaxSemanal) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida monto mensual
+		jQuery.validator.addMethod("amountMonth", function(value, element) {
+
+        var amount = parseFloat(element.value);
+				var compara = montoAcumMensual + amount;
+
+        if (compara >= montoMaxMensual) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida operacion Diaria
+		jQuery.validator.addMethod("trxDay", function(value, element) {
+				var compara = acumCantidadOperacionesDiarias + 1;
+
+        if (compara > cantidadOperacionesDiarias) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida operacion semanal
+		jQuery.validator.addMethod("trxWeek", function(value, element) {
+				var compara = acumCantidadOperacionesSemanales + 1;
+
+        if (compara > cantidadOperacionesSemanales) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+		//valida operacion mensual
+		jQuery.validator.addMethod("trxMonth", function(value, element) {
+
+        var count = element.value;
+				var compara = acumCantidadOperacionesMensual + 1;
+
+        if (compara > cantidadOperacionesMensual) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+
 
 
 		//Valida el formulario de busqueda de cuentas por telefono
@@ -131,6 +225,7 @@ function validar_campos(valida) {
 				var ajax_data = {
 						"telefonoDestino": $("#telefonoDestino").val()
 				};
+
 				var data_seralize = $.param(ajax_data);
 
 				//petición de tarjetas por telefono
@@ -156,7 +251,7 @@ function validar_campos(valida) {
 								break;
 							case 1:
 								$("#telefonoDestino").val('');
-								notiSystem('fail',data.title, data.msg)
+								msgService (data.title, data.msg, 'alert-warning', 0);
 								break;
 
 						}
@@ -174,23 +269,33 @@ function validar_campos(valida) {
 			validClass: "field-success",
 			errorLabelContainer: "#msg-history",
 			rules: {
-				"descripcion":{"required":true, "minlength":4, "maxlength": 30},
-				"monto":{"number":true, "required":true, "min":99, "max": 999},
+				"descripcion":{"required":true, "minlength":4, "maxlength": 30, 'onlyLetters':true},
+				"monto":{"number":true, "required":true, 'amountAvailable':true, 'amountsValue':true, 'amountDay':true, 'amountWeek':true, 'amountMonth':true},
 				"ctaDestinoText":{"number":true, "required":true, "minlength":16, "maxlength": 16},
 				"ctaDestino":{"required":true},
+				"opeMax":{required:true, 'trxDay':true, 'trxWeek':true, 'trxMonth':true },
 			},
 			messages: {
 				"descripcion": {
 					required: "El campo descripción no puede estar vacio",
 					minlength: "El campo descripción debe contener mínimo 4 caracteres",
 					maxlength: "El campo descripción debe contener máximo 30 caracteres",
+					onlyLetters : "Este campo no puede contener caracteres especiales."
+
+				},
+				"opeMax": {
+						trxDay : "Se ha superado la cantidad máxima de transacciones diarias, ha realizado: " + acumCantidadOperacionesDiarias + " transacciones",
+						trxWeek : "Se ha superado la cantidad máxima de transacciones semanales, ha realizado: " + acumCantidadOperacionesSemanales + " transacciones",
+						trxMonth : "Se ha superado la cantidad máxima de transacciones mensuales, ha realizado: " + acumCantidadOperacionesMensual + " transacciones",
 				},
 				"monto": {
 					required: "El campo monto no puede estar vacio",
+					amountAvailable : "El monto de la transferencia excede su saldo disponible",
 					number: "El campo monto debe ser numérico y no debe tener caracteres especiales",
-					min: "El campo monto mínimo debe ser 99 " + montoLabel + ".",
-					max: "El campo monto máximo debe ser 999 " + montoLabel + ".",
-
+					amountsValue: "El monto mínimo de la transacción debe ser "+ moneda +". "+ montoMinOperaciones + " y el máximo "+ moneda +". " + montoMaxOperaciones + "",
+					amountDay : "El monto máximo diario que puede transferir es: "+ moneda +". " + montoMaxDiario + ",  hoy a transferido: "+ moneda +". " + montoAcumDiario,
+					amountWeek: "El monto máximo semanal que puede transferir es: "+ moneda +". " + montoMaxSemanal + ", esta semana a transferido: "+ moneda +". " + montoAcumSemanal,
+					amountMonth : "El monto máximo mensual que puede transferir es: "+ moneda +". " + montoMaxMensual + ", este mes a transferido: "+ moneda +". " + montoAcumMensual,
 				},
 				"ctaDestinoText": {
 					required: "El campo tarjeta no puede estar vacio",
@@ -204,17 +309,22 @@ function validar_campos(valida) {
 			},
 			submitHandler: function(form) {
 
+					$('#progress > ul > li	:nth-child(2)')
+						.removeClass('current-step-item')
+						.addClass('completed-step-item');
 					//carga info en la vista de confirmación
 					var cuentaDestino = ($("#ctaDestinoText").val() === '') ? $("#ctaDestino").val() : $("#ctaDestinoText").val();
-					var ini = cuentaDestino.substring(0,8);
+					var ini = cuentaDestino.substring(0,6);
 					var fin = cuentaDestino.substring(12,16);
-					cuentaDestino = ini + "****" + fin;
+					cuentaDestino = ini + "******" + fin;
 
 					$("#conDescripcion").html($("#descripcion").val());
 					$("#conMonto, #conMonto2").html($("#monto").val());
 					$("#conCtaOrigen").html($('#donor').find('.product-cardnumber').html());
 					$("#conCtaDestino").html(cuentaDestino);
 
+					$('#progress > ul > li:nth-child(1)')
+						.addClass('completed-step-item');
 					$('#progress > ul > li:nth-child(2)')
 						.addClass('current-step-item');
 
@@ -248,10 +358,11 @@ function validar_campos(valida) {
 							'ctaDestino' :$("#ctaDestino").val(),
 							'monto' : $("#monto").val(),
 							'descripcion' : $("#descripcion").val(),
-							'pin' : hex_md5($("#pin").val())
+							'pin' : ($("#pin").val()) //hex_md5
 					};
+
 					var formData = $.param(ajax_data);
-					makeTransferPe(formData);
+					makeTransferPe(formData, 1);
 				},
 
     }); // VALIDATE
@@ -260,37 +371,46 @@ function validar_campos(valida) {
 
 
 //ENVIO DE INFORAMCIÓN AL CONTROLADOR ----------------------------------------------------
-function makeTransferPe(formData)
+function makeTransferPe(formData, token)
 {
+
 	$.ajax({
 		url: base_url + '/transfererencia/transferPe',
 		type: "post",
-		data: {data : formData},
+		data: {data : formData, token : token},
 		dataType: 'json',
+		beforeSend: function (xrh, status) {
+				cleanBefore ();
+		},
 		success: function(data) {
+			cleanComplete();
 			switch (data.code) {
 				case 0:
 
 					//carga datos en la vista de confirmación
+
+					$('#progress > ul > li:nth-child(3)')
+						.removeClass('current-step-item')
+						.addClass('completed-step-item');
+
 					$("#transfer-date").hide();
 					$("#confirmTrxValues").hide();
 					$("#pinDiv").hide();
 
 					//Carga datos en la interfaz de confirmación
 					$("#confirmacion").show();
-					$("#fecha").html(data.fecha);
-					$("#origen").html(data.ctaOrigenMascara);
-					$("#destino").html(data.ctaDestinoMascara);
+					$("#conCtaOrigenTrx").html(data.ctaOrigenMascara);
+					$("#conCtaDestinoTrx").html(data.ctaDestinoMascara);
 					$("#montoConfirm").html(data.monto);
-					$("#nomCuentaDestinoCon").html(data.nombreCuentaOrigen);
-					$("#nomCuentaOrigenCon").html(data.nombreCuentaDestino);
+					$("#conNombreOrigen").html(data.nombreCuentaOrigen);
+					$("#conNombreDestino").html(data.nombreCuentaDestino);
+					$("#conDescripcionTrx").html(data.descripcion);
 
 					//botones
 					$("#finalTrx").show();
 					$("#buttonTrx").hide();
 					//mueve el progress bar confirm operation
-					$('#progress > ul > li:nth-child(3)')
-						.addClass('current-step-item');
+
 				break;
 
 				case 1:
@@ -305,15 +425,28 @@ function makeTransferPe(formData)
 					$("#descripcion").val();
 
 					//mueve el progress bar a confirm pin
-					$('#progress > ul > li	:nth-child(2)')
-						.removeClass('current-step-item')
-						.addClass('completed-step-item');
+
 				break;
 
-				default:
+			case 2:
+				$("#msgInfoPin").addClass("pinError");
+				$("#msgInfoPin").html("El PIN ingresado no coincide o ha caducado, verifique e intente nuevamente.");
+				$("#pin").addClass("field-error").removeClass('field-success');
+				$("#pin").val("");
+				break;
+
+			case 3:
+				msgService (data.title, data.msg, 'alert-error', 1);
+				break;
+
+			case 4:
+				$(location).attr('href', base_url + '../users/error_gral');
+				break;
+
+			default:
 					//notifica errores
-					notiSystem(data.title, data.msg, 'error', 'out');
-				break;
+					msgService (data.title, data.msg, 'alert-error', 1);
+					break;
 
 			}
 		}
@@ -321,60 +454,42 @@ function makeTransferPe(formData)
 
 }
 
-
-/**
- * @function para el modal de respuestas del servicio
- * @param action
- * @param title
- * @param msg
- * @return void
- */
-function notiSystem(action, title, msg)
-{
-	$('#send-pass').remove();
-	$('#button-action').children().not('.skip').remove();
-	$('#content-info').children().not('.skip').remove();
-	$('#content-input').children().not('.skip').remove();
-	$('#close-info')
-		.text('Aceptar')
-		.removeAttr('type', 'reset');
-
-	$('#info-system').dialog({
-		title: title,
-		modal: 'true',
-		width: '440px',
-		draggable: false,
-		resizable: false,
-		focus: false,
-		open: function(event, ui) {
-			$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			switch(action) {
-				case 'passReq':
-					$('#button-action').append('<button id="send-pass">Aceptar</button>');
-					$('#close-info')
-						.text('Cancelar')
-						.attr('type', 'reset');
-					$('#content-info')
-						.removeClass('alert-warning')
-						.addClass('alert-info')
-						.append('<p>' + msg + '</p>');
-					$('#content-input')
-						.append('<input class="field-medium" id="input-pass" name="transpwd" placeholder="Código Aleatorio" type="password" />')
-					break;
-				case 'fail':
-					$('#content-info')
-						.removeClass('alert-info')
-						.addClass('alert-warning')
-						.append('<p>' + msg + '</p>');
-					break;
-			}
-		}
-
-	});
-	$('#close-info').on('click', function() {
-		$(this).off('click');
-		$('#info-system').dialog('close');
-		$('.sol-transfer').prop('disabled', false);
-	});
-}
 /*------------------------------------------------------------------------------------------------*/
+
+
+//Función para enviar mensajes del sistema al usuario
+function msgService (title, msg, modalType, redirect) {
+	$("#registrar").fadeIn();
+	$("#dialogo-movil").dialog({
+		title	:title,
+		modal	:"true",
+		resizable: false,
+		closeOnEscape: false,
+		draggable:false,
+		width	:"440px",
+		open	: function(event, ui) {
+			$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			//Cambia el tipo de alerta - warning - error - success
+		  $("#modalType").addClass(modalType);
+			$('#msgService').html(msg);
+		}
+
+	});
+	$("#inva5").click(function(){
+		$("#dialogo-movil").dialog("close");
+		if(redirect == 1){
+			$(location).attr('href', base_url + '/transferencia/pe');
+		}
+	});
+}
+
+
+function cleanBefore () {
+    $("#cargandoInfo").show();
+    $("#continuar").hide();
+}
+
+function cleanComplete () {
+    $("#cargandoInfo").hide();
+    $("#continuar").show();
+}

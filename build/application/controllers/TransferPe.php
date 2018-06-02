@@ -180,9 +180,17 @@ public function index()
 		$this->load->model('transferPe_model', 'transferPe');
 		//Get Data
 		$dataRequest = $this->input->post('data');
-		log_message("info", "Salida HISTORIAL sfASDFASDFASDFASDFASDFASDFDF 987654321 : ".$dataRequest);
-		//Call the method
-		$dataResponse = $this->transferPe->makeTransferPe($dataRequest);
+		$token = $this->input->post('token');
+
+		//Llama al metodo según sea necesario, con token o sin token
+		if($token === '1'){
+
+				$dataResponse = $this->transferPe->makeTransferPinPe($dataRequest);
+		}
+		else{
+				$dataResponse = $this->transferPe->makeTransferPe($dataRequest);
+		}
+
 		//Response to the js file
 		$this->output->set_content_type('application/json')->set_output(($dataResponse));
 
