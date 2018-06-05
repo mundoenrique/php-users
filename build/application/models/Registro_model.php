@@ -30,19 +30,17 @@ class Registro_model extends CI_Model {
 			"token"				=>""
 		));
 
+		log_message("info", "Request lista_paises: ".$data);
 		$dataEncry	= np_Hoplite_Encryption($data,0);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> 'CPONLINE'));
-		log_message("info", "JSONDATA LLAMADO AL SERVICIO LISTA PAISES==>: ".$data);
 
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		log_message("info", "RESPONSE DESPUES DEL LLAMADO AL WS LISTA PAISES===>: ".$response);
+	  $data		= json_decode(utf8_encode($response));
+	  $desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
 
-	  	$data		= json_decode(utf8_encode($response));
+		log_message("info", "Response lista_paises: ".json_encode($desdata));
 
-	  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
-		log_message("info", "Salida desencriptada LISTA PAISES : ".json_encode($desdata));
-
-	  	return json_encode($desdata);
+		return json_encode($desdata);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -68,17 +66,16 @@ class Registro_model extends CI_Model {
 			"logAccesoObject"	=> $logAcceso,
 			"pais"				=> $pais
 		));
-		log_message("info", "JSONData departamento==>: ".$data);
+
+		log_message("info", "Request lista_departamentos: ".$data);
 
 		$dataEncry	= np_Hoplite_Encryption($data,0);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId' => 'CPONLINE'));
-
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-
 		$data		= json_decode(utf8_encode($response));
-
 		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
-		log_message("info", "Salida desencriptada lista_departamento : ".json_encode($desdata));
+
+		log_message("info", "Response lista_departamentos: ".json_encode($desdata));
 
 		return json_encode($desdata);
 	}
@@ -106,20 +103,20 @@ class Registro_model extends CI_Model {
 			//"token"=>$this->session->userdata("token")  $this->session->userdata("pais")
 		));
 
+		log_message("info", "Request lista_profesiones: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,0);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> "CPONLINE"));
 		//log_message("info", "Salida encriptada lista_profesiones : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 		$data = json_decode(utf8_encode($response));
 		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
-		log_message("info", "Salida desencriptada lista_profesiones : ".json_encode($desdata));
+
+		log_message("info", "Response lista_profesiones: ".json_encode($desdata));
 
 		return json_encode($desdata);
 
 	}
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 	//VALIDAR EXISTENCIA DE LA TARJETA O CUENTA EN LA BD
 	public function validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin,$claveWeb)
@@ -140,21 +137,17 @@ class Registro_model extends CI_Model {
 			"logAccesoObject"	=> $logAcceso,
 			"token"				=> ""
 		));
-		log_message("info", "Salida validar cuenta ".$data);
 
+		log_message("info", "Request validar_cuenta: ".$data);
 		$dataEncry	= np_Hoplite_Encryption($data,0);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> 'CPONLINE'));
-		log_message("info", "Salida encriptada validar_cuenta : ".$data);
-
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		log_message("info", "RESPONSE DESPUES DEL LLAMADO AL WS validar_cuenta ---->: ".$data);
+		$data		= json_decode(utf8_encode($response));
+  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
+  	$salida		= json_encode($desdata);
+  	log_message("info", "Response validar_cuenta: ".$salida);
 
-	  	$data		= json_decode(utf8_encode($response));
-	  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
-	  	$salida		= json_encode($desdata);
-	  	log_message("info", "Salida Validar Cuentas".$salida);
-
-	  	if(isset($response) && $desdata->rc == 0){
+	  	if(isset($response) && isset($desdata->rc) && $desdata->rc == 0){
 		  	$newdata	= array(
 			   'userName'	=> $desdata->logAccesoObject->userName,
 			   'pais'		=> $pais,
@@ -167,93 +160,92 @@ class Registro_model extends CI_Model {
 			$this->session->set_userdata($newdata);
 	  	}
 
-			//Valida RC
-		switch ($desdata->rc) {
-
-			case 0:
-				$this->code = 0;
-				$this->dataUser = $desdata;
-
-				$response = [
-					'code' => $this->code,
-					'dataUser' => $this->dataUser
-				];
-				return json_encode($response);
-				break;
-
-			case -183:
-				$this->title = 'Conexión Personas Online';
-				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
-				break;
-
-			case -184:
-				$this->title = 'Validar Cuenta';
-				$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
-				break;
-
-			//verificacion de reniec grupo 1
-			case 5002:
-			case 5003:
-			case -102:
-			case -104:
-			case -118:
-			case 5004:
-			case 5008:
-			case 5009:
-			case 5010:
-			case 5011:
-			case 5020:
-			case 5021:
-			case 5030:
-			case 5100:
-			case 5104:
-			case -21: //Valida conexión fallida
-				$this->title = "Conexión Personas Online";
-				$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde";
-				$this->code = 2;
-				$this->modalType = "alert-error";
-				break;
-
-			// verificacion de reniec  grupo 2
-			case 5101:
-			case 5102:
-			case 5103:
-			case 5104:
-			case 5105:
-			case 5111:
-			case 5112:
-			case 5113:
-			case 5032:
-			case 5033:
-			case 5034:
-			case 5036:
-			case 5037:
-			case 5114:
-				$this->title = "Conexión Personas Online";
-				$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en Reniec e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
-				$this->code = 2;
-				$this->modalType = "alert-error";
-				break;
-
-			default:
-				$this->title = 'Conexión Personas Online';
-				$this->msn = "En estos momentos no es posible realizar el registro, por favor intente de nuevo más tarde.";
-				break;
-
-		}
-
 		$this->code = 2;
 		$this->modalType = "alert-error";
+		if(isset($desdata->rc) && $desdata->rc !== NULL){
+			switch ($desdata->rc) {
+
+				case 0:
+					$this->code = 0;
+					$this->dataUser = $desdata;
+					$this->modalType = "";
+
+					break;
+
+				case -183:
+					$this->title = 'Conexión Personas Online';
+					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
+					break;
+
+				case -184:
+					$this->title = 'Validar Cuenta';
+					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
+					break;
+
+				//verificacion de reniec grupo 1
+				case 5002:
+				case 5003:
+				case -102:
+				case -104:
+				case -118:
+				case 5004:
+				case 5008:
+				case 5009:
+				case 5010:
+				case 5011:
+				case 5020:
+				case 5021:
+				case 5030:
+				case 5100:
+				case 5104:
+				case 3000:
+				case -21: //Valida conexión fallida
+				//
+					$this->title = "Conexión Personas Online";
+					$this->msn = "No hemos podido validar tus datos por favor intenta más tarde, intenta nuevamente.";
+					break;
+
+				// verificacion de reniec  grupo 2
+				case 5101:
+				case 5102:
+				case 5103:
+				case 5104:
+				case 5105:
+				case 5111:
+				case 5112:
+				case 5113:
+				case 5032:
+				case 5033:
+				case 5034:
+				case 5036:
+				case 5037:
+				case 5114:
+					$this->title = "Conexión Personas Online";
+					$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en Reniec e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					break;
+
+				default:
+					$this->title = 'Conexión Personas Online';
+					$this->msn = "En estos momentos no es posible realizar el registro, por favor intente de nuevo más tarde.";
+					break;
+
+			}
+		}
+		else {
+			$this->title = "Conexión Personas Online";
+			$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde.";
+		}
 
 		//Crea respuesta de error
 		$this->response = [
 			"code" => $this->code,
 			"title" => $this->title,
 			"msn" => $this->msn,
-			"modalType" => $this->modalType
+			"modalType" => $this->modalType,
+			'dataUser' => $this->dataUser
 		];
 
-			return json_encode($this->response);
+		return json_encode($this->response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -270,16 +262,13 @@ class Registro_model extends CI_Model {
 			"logAccesoObject"	=> $logAcceso,
 			"token"				=> $this->session->userdata("token")
 		));
-		log_message("info", "validar_usuario ==>".$data);
+		log_message("info", "Request validar_usuario: ".$data);
 		$dataEncry	= np_Hoplite_Encryption($data,1);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
-		log_message("info", "Salida encriptada validar_usuario : ".$data);
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		log_message("info", "Response validar_usuario -----> ".$response);
-	  	$data		= json_decode(utf8_encode($response));
-	  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-		log_message("info", "Response validar_usuario -->".json_encode($desdata));
-		log_message("info", "Usuario a validar".$usuario);
+  	$data		= json_decode(utf8_encode($response));
+  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		log_message("info", "Response validar_usuario: ".json_encode($desdata));
 
 	  	return json_encode($desdata);
 	}
@@ -448,16 +437,16 @@ class Registro_model extends CI_Model {
 				"token"				=> $this->session->userdata("token")
 			));
 		}
-		log_message("info", "REQUEST DEL FORMULARIO LARGO ===> ".$data);
+
+		log_message("info", "Request registrar_usuario ".$data);
 
 		$dataEncry	= np_Hoplite_Encryption($data,1);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
-
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data		= json_decode(utf8_encode($response));
-
+  	$data		= json_decode(utf8_encode($response));
 		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-		log_message("info", "RESPONSE FINAL DEL REGISTRO ===>>> : ".json_encode($desdata));
+
+		log_message("info", "Response registrar_usuario: ".json_encode($desdata));
 
 				switch ($desdata->rc) {
 					case 0:
@@ -590,7 +579,7 @@ class Registro_model extends CI_Model {
 					"modalType" => $this->modalType
 				];
 
-			log_message("info", "Data de respuesta : ".json_encode($this->response));
+
 			return json_encode($this->response);
 
 
@@ -616,12 +605,13 @@ class Registro_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 
+		log_message("info", "Request lista_telefonos: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		log_message("info", "Salida encriptada lista_telefonos : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode(utf8_encode($response));
-	  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data = json_decode(utf8_encode($response));
+  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		log_message("info", "Response lista_telefonos : ".json_encode($desdata));
 
 	  	return json_encode($desdata);
 	}
@@ -643,12 +633,14 @@ class Registro_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 
+		log_message("info", "Request lista_telefonos: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada lista_identificadores : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode(utf8_encode($response));
-	  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data = json_decode(utf8_encode($response));
+  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		log_message("info", "Response lista_telefonos: ".json_encode($desdata));
 
 	  	return json_encode($desdata);
 	}
