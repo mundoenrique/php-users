@@ -7,6 +7,7 @@ var base_url, base_cdn, ctasDestino, moneda, pais, editCard, numberBeneficiary =
 	operationType, expDate, country;
 
 $("#cargandoInfo").hide();
+$("#cargandoPhone").hide();
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 country = $('body').data('country');
@@ -234,7 +235,11 @@ function validar_campos(valida) {
 					type: "post",
 					data: {data : data_seralize, model : "AccountPhone"},
 					datatype: 'JSON',
+					beforeSend: function (xrh, status) {
+							cleanBefore($("#cargandoPhone"),$("#search-cards"));
+					},
 					success: function(data){
+						cleanComplete($("#cargandoPhone"),$("#search-cards"));
 						switch(data.code){
 							case 0:
 							$('select').empty();
@@ -380,10 +385,10 @@ function makeTransferPe(formData, token)
 		data: {data : formData, token : token},
 		dataType: 'json',
 		beforeSend: function (xrh, status) {
-				cleanBefore ();
+				cleanBefore ($("#cargandoInfo"),$("#continuar"));
 		},
 		success: function(data) {
-			cleanComplete();
+			cleanComplete($("#cargandoInfo"),$("#continuar"));
 			switch (data.code) {
 				case 0:
 
@@ -430,7 +435,7 @@ function makeTransferPe(formData, token)
 
 			case 2:
 				$("#msgInfoPin").addClass("pinError");
-				$("#msgInfoPin").html("El PIN ingresado no coincide o ha caducado, verifique e intente nuevamente.");
+				$("#msgInfoPin").html("El PIN ingresado no coincide, verifique e intente nuevamente.");
 				$("#pin").addClass("field-error").removeClass('field-success');
 				$("#pin").val("");
 				break;
@@ -484,12 +489,12 @@ function msgService (title, msg, modalType, redirect) {
 }
 
 
-function cleanBefore () {
-    $("#cargandoInfo").show();
-    $("#continuar").hide();
+function cleanBefore (img, button) {
+    img.show();
+    button.hide();
 }
 
-function cleanComplete () {
-    $("#cargandoInfo").hide();
-    $("#continuar").show();
+function cleanComplete (img, button) {
+    img.hide();
+    button.show();
 }

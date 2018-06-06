@@ -33,20 +33,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				                    "token"=>$this->session->userdata("token")
 			                    ));
 
-			log_message("info", "SALIDA ORIGEN : ".$data);
-
+			log_message("info", "Request ctasOrigen_load: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
-			log_message("info", "SALIDA ENCRIPTADA ORIGEN : ".$data);
-
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
 			$salida = json_encode($desdata);
-
-			log_message("info", "Salida ctasOrigen_load transferencia".$salida);
+			log_message("info", "Response ctasOrigen_load: ".$salida);
 
 			return json_encode($desdata);
 
@@ -72,16 +66,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			                    ));
 
 			//print_r($data);
-			log_message("info", "Request accounts by phone" . $data);
+			log_message("info", "Request accountPhone: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
-			log_message("info", "Response encriptado acountphone------>>>>>>".$response);
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 			$salida = json_encode($desdata);
-			log_message("info", "Response acountphone------>>>>>>".$salida);
+			log_message("info", "Response accountPhone: ".$salida);
 
 			if($desdata){
 				switch ($desdata->rc) {
@@ -123,16 +115,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													));
 
 			//print_r($data);
-			log_message("info", "Request base amount operation" . $data);
+			log_message("info", "Request baseAmount: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
-			log_message("info", "Response encriptado procesarTransferencia_load------>>>>>>".$response);
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 			$salida = json_encode($desdata);
-			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
+			log_message("info", "Response baseAmount: ".$salida);
 
 
 			if($desdata){
@@ -190,16 +180,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													));
 
 			//print_r($data);
-			log_message("info", "Request set amount" . $data);
+			log_message("info", "Request setAmount: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
-			log_message("info", "Response encriptado procesarTransferencia_load------>>>>>>".$response);
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 			$salida = json_encode($desdata);
-			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
+			log_message("info", "Response setAmount: ".$salida);
 
 			if($desdata){
 				switch ($desdata->rc) {
@@ -213,7 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					case -391:
 						$this->code = 5;
 						$this->title = 'Actualizar Montos Base';
-						$this->msg = "Ha ingresado una clave incorrecta";
+						$this->msg = "Has ingresado una clave incorrecta";
 						$this->modalType = 'alert-error';
 						break;
 
@@ -225,7 +213,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					default:
 						$this->code = 1;
 						$this->title = 'Actualizar Montos Base';
-						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intenta nuevamente.';
 						$this->modalType = 'alert-error';
 						break;
 				}
@@ -260,7 +248,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'tarjeta'=>array(
 					"noTarjeta" => $tarjeta,
 					"tipoOperacion"=>$tipoOperacion
-				),
+					),
 				"mes"=>$mes,
 				"anio"=>$anio,
 				"pais"=> $this->session->userdata("pais"),
@@ -269,16 +257,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				));
 
 			//print_r($data);
-			log_message("info", "Salida HISTORIAL aqui esta haciendo mal: ".$data);
+			log_message("info", "Request historial_loadPe: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-			log_message("info", "Salida encriptada historial_load : ".$data);
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode(utf8_encode($response));
 			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
 			$salida = json_encode($desdata);
-			log_message("info", "Salida historial_load".$salida);
+			log_message("info", "Response historial_loadPe".$salida);
 
 			if($desdata){
 				switch ($desdata->rc) {
@@ -299,12 +285,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					default:
 						$this->code = 3;
 						$this->title = 'Conexión Personas Online';
-						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+						$this->msg = 'Ha ocurrido un error en el sistema. Por favor intenta nuevamente.';
 						$this->modalType = 'alert-error';
 						break;
 				}
 			}
-
 				$response = [
 					'code' => $this->code,
 					'title' => $this->title,
@@ -342,16 +327,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				"token"=>$this->session->userdata("token"),
 				));
 
-				log_message("info", "Request make transfer pin: ".$data);
+				log_message("info", "Request makeTransferPe: ".$data);
 				$dataEncry = np_Hoplite_Encryption($data,1);
 				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-				log_message("info", "Salida encriptada make transfer pin : ".$data);
 				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 				$data = json_decode(utf8_encode($response));
 				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
-
 				$salida = json_encode($desdata);
-				log_message("info", "Salida make transfer pin".$salida);
+				log_message("info", "Response makeTransferPe: ".$salida);
 
 				if($desdata){
 				switch ($desdata->rc) {
@@ -399,7 +382,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$response = [
 							'code' => 5,
 							'title' => "Conexión Personas Online",
-							"msg" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
+							"msg" => "Ha ocurrido un error en el sistema. Por favor intenta nuevamente.",
 						];
 						break;
 				}
@@ -436,16 +419,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'tokenTransferenciaP2P' => $pin
 				));
 
-				log_message("info", "Request make transfer : ".$data);
+				log_message("info", "Request makeTransferPinPe: ".$data);
 				$dataEncry = np_Hoplite_Encryption($data,1);
 				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-				log_message("info", "Salida encriptada make transfer : ".$data);
+				log_message("info", "Salida encriptada make transfer pin: ".$data);
 				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 				$data = json_decode(utf8_encode($response));
 				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
 
 				$salida = json_encode($desdata);
-				log_message("info", "Salida make transfer".$salida);
+				log_message("info", "Response makeTransferPinPe: ".$salida);
 
 				if($desdata){
 				switch ($desdata->rc) {
@@ -468,11 +451,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								];
 						break;
 
-					case -393:
+					case -286:
 						$response = [
 							'code' => 2,
 						];
 						break;
+
+
+					case -288:
+						$response = [
+							'code' => 3,
+							'title' => "Conexión Personas Online",
+							"msg" => "La vigencia del token ingresado ha vencido, intenta nuevamente",
+						];
+						break;
+
 
 					case -343:
 						$response = [
@@ -492,13 +485,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						$response = [
 							'code' => 5,
 							'title' => "Conexión Personas Online",
-							"msg" => "Ha ocurrido un error en el sistema. Por favor intente más tarde.",
+							"msg" => "Ha ocurrido un error en el sistema. Por favor intenta nuevamente.",
 						];
 						break;
 				}
 			}
 			return json_encode($response);
-
 		}
 
 	} // FIN

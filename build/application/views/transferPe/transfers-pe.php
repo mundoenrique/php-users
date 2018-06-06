@@ -82,6 +82,7 @@
 																<label for='beneficiary-1x-description'>Teléfono</label>
 																<input class='field-medium monto' name='telefonoDestino' id='telefonoDestino' type='text' value="" required minlength="9" maxlength="9" />
 																<button id="search-cards"  class="mensual search-cards" type="submit"><span aria-hidden="true" class="icon-find"></span></button>
+																<span class="icon-refresh icon-spin" id="cargandoPhone" style="font-size:25px;margin-left:10px"></span>
 															</fieldset>
 														</div>
 													</form>
@@ -231,7 +232,7 @@
 		$datos = unserialize($data);
 
 		if($datos->rc==-150) {
-			$error = '../transfer/error_transfer';
+			$error = '/transfer/error_transfer';
 			$ruta = $this->config->item("base_url").$error;
 			header("Location: $ruta");
 		}
