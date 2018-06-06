@@ -174,12 +174,12 @@ class Registro_model extends CI_Model {
 
 				case -183:
 					$this->title = 'Conexión Personas Online';
-					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.";
+					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o ya te encuentras <strong>registrado</strong>. Por favor verifica tus datos, e intenta nuevamente.";
 					break;
 
 				case -184:
 					$this->title = 'Validar Cuenta';
-					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.";
+					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifica tus datos, e intenta nuevamente.";
 					break;
 
 				//verificacion de reniec grupo 1
@@ -198,11 +198,11 @@ class Registro_model extends CI_Model {
 				case 5030:
 				case 5100:
 				case 5104:
-				case 3000:
+				case 6000:
 				case -21: //Valida conexión fallida
 				//
 					$this->title = "Conexión Personas Online";
-					$this->msn = "No hemos podido validar tus datos por favor intenta más tarde, intenta nuevamente.";
+					$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 					break;
 
 				// verificacion de reniec  grupo 2
@@ -221,19 +221,19 @@ class Registro_model extends CI_Model {
 				case 5037:
 				case 5114:
 					$this->title = "Conexión Personas Online";
-					$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en Reniec e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
 					break;
 
 				default:
 					$this->title = 'Conexión Personas Online';
-					$this->msn = "En estos momentos no es posible realizar el registro, por favor intente de nuevo más tarde.";
+					$this->msn = "No fue posible realizar el registro, por favor intenta nuevamente";
 					break;
 
 			}
 		}
 		else {
 			$this->title = "Conexión Personas Online";
-			$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde.";
+			$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta nuevamente.";
 		}
 
 		//Crea respuesta de error
@@ -451,7 +451,7 @@ class Registro_model extends CI_Model {
 				switch ($desdata->rc) {
 					case 0:
 						$this->title = "Usuario registrado exitosamente";
-						$this->msn = "se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
+						$this->msn = "Te has registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
 						$this->code = 0;
 						$this->modalType = "";
 					break;
@@ -466,8 +466,8 @@ class Registro_model extends CI_Model {
 					break;
 
 					case -181:
-						$this->title = "Correo Registrado";
-						$this->msn = "El correo indicado se encuentra registrado. Por favor verifique e intente nuevamente.";
+						$this->title = "Conexión Personas Online";
+						$this->msn = "El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.";
 						$this->code = 3;
 						$this->modalType = "alert-error";
 
@@ -475,7 +475,7 @@ class Registro_model extends CI_Model {
 
 					case -284:
 
-						$this->title = "Teléfono móvil existente";
+						$this->title = "Conexión Personas Online";
 						$this->msn = "El teléfono móvil ya se encuentra registrado.";
 						$this->code = 3;
 						$this->modalType = "alert-error";
@@ -483,15 +483,15 @@ class Registro_model extends CI_Model {
 					break;
 
 					case -206:
-						$this->title = "Correo Registrado";
-						$this->msn = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error enviándole el mail de confirmación";
+						$this->title = "Conexión Personas Online";
+						$this->msn = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación";
 						$this->code = 4;
 						$this->modalType = "alert-warning";
 					break;
 
 					case -230:
-						$this->title = "Fallo en Registro";
-						$this->msn = "No se puede realizar el registro en estos momentos, por favor intente de nuevo más tarde.";
+						$this->title = "Conexión Personas Online";
+						$this->msn = "No se puede realizar el registro en estos momentos, por favor intenta nuevamente.";
 						$this->code = 4;
 						$this->modalType = "alert-error";
 					break;
@@ -500,7 +500,7 @@ class Registro_model extends CI_Model {
 					case -335:
 
 						$this->title = "Usuario registrado";
-						$this->msn = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong>";
+						$this->msn = "Te has registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
 						$this->code = 0;
 						$this->modalType = "2";
 
@@ -513,7 +513,7 @@ class Registro_model extends CI_Model {
 					case -21:
 
 						$this->title = "Usuario registrado";
-						$this->msn = "se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong>";
+						$this->msn = "Te has registrado satisfactoriamente, pero tu tarjeta esta bloqueada, comunícate con el <strong>Centro de Contacto</strong>";
 						$this->code = 0;
 						$this->modalType = "2";
 
@@ -535,8 +535,10 @@ class Registro_model extends CI_Model {
 					case 5030:
 					case 5100:
 					case 5104:
+					case 6000:
+					case -21:
 						$this->title = "Conexión Personas Online";
-						$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta más tarde";
+						$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 						$this->code = 2;
 						$this->modalType = "alert-error";
 						break;
@@ -558,14 +560,14 @@ class Registro_model extends CI_Model {
 					case 5114:
 
 						$this->title = "Conexión Personas Online";
-						$this->msn = "Datos de afiliación inválidos, verifica tu DNI e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+						$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
 						$this->code = 2;
 						$this->modalType = "alert-error";
 						break;
 
 					default:
-						$this->title = "Registro";
-						$this->msn = "En estos momentos no es posible realizar el registro, por favor intente de nuevo más tarde.";
+						$this->title = "Conexión Personas Online";
+						$this->msn = "No fue posible realizar el registro, por favor intenta nuevamente.";
 						$this->code = 2;
 						$this->modalType = "alert-error";
 					break;
