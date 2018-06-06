@@ -22,6 +22,7 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $dataPost);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
@@ -29,8 +30,11 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if($response === FALSE) {
+			log_message("DEBUG","RESPONSE CURL TIMEOUT: " .json_encode(curl_error($ch)));
+		}
 		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
-		if($httpCode == 404 || curl_exec($ch) === FALSE){
+		if($httpCode == 404 || !$response){
 			return '{"data": false}';
 		} else {
 			return $response;
