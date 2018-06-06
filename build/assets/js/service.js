@@ -121,8 +121,7 @@ $(function(){
             cadena;
         pais  = $(this).attr("pais");
         options = (pais == 'Ve') ? 'Haga clic aquí para solicitar su reposición de PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
-        var intoReplace = (condition == 0 && pais != 'Ve') ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '';
-
+        var intoReplace = ((condition == 0 || condition == 2) && pais != 'Ve') ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '';
 
         options+= '<ul class="product-balance-group services-content">';
         switch  (bloqueo) {
