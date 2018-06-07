@@ -167,6 +167,13 @@ class Service_model extends CI_Model {
 
                   break;
 
+								case -114:
+										$response = [
+												'code' => 3,
+												'title' => 'Conexión Personas Online',
+												'msg' => 'No se pudo realizar la reposición de su tarjeta. Favor intente nuevamente.'
+										];
+									break;
 
                 case -125:
                 case -304:
