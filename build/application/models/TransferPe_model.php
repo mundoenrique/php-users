@@ -372,6 +372,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						break;
 
+					case -221:
+						$response = [
+							'code' => 3,
+							'title' => "Conexión Personas Online",
+							"msg" => "La cuenta de destino no existe, por favor verifica e intenta nuevamente.",
+						];
+
+						break;
+
 					case -33:
 						$response = [
 							'code' => 4,

@@ -358,9 +358,10 @@ function validar_campos(valida) {
         },
 				submitHandler: function(form) {
 
+					var cuentaDestino = ($("#ctaDestinoText").val() === '') ? $("#ctaDestino").val() : $("#ctaDestinoText").val();
 					var ajax_data = {
 							'ctaOrigen' : $("#ctaOrigen").val(),
-							'ctaDestino' :$("#ctaDestino").val(),
+							'ctaDestino' : cuentaDestino,
 							'monto' : $("#monto").val(),
 							'descripcion' : $("#descripcion").val(),
 							'pin' : ($("#pin").val()) //hex_md5

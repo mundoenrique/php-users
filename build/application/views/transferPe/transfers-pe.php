@@ -189,11 +189,6 @@
 						<div id="pinDiv" class="" style="display: none">
 							<fieldset>
 							<form id="form-pin" name="form-pin" method="post">
-								<input type="hidden" id="ctaOrigen" name="ctaOrigen" value="">
-								<input type="hidden" id="ctaDestino" name="ctaDestino" value="">
-								<input type="hidden" id="monto" name="monto" value="">
-								<input type="hidden" id="descripcion" name="descripcion" value="">
-
 								<div id="msg-change" class="msg-prevent">
 										<h2>Confirmación</h2>
 										<h3 id="msgInfoPin">Por favor ingresa el código de seguridad que recibiste por SMS o correo electronico</h3>
