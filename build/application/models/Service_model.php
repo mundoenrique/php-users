@@ -83,7 +83,7 @@ class Service_model extends CI_Model {
 										$desdatacosto = json_decode(utf8_encode($desdata->bean));
 										if(isset($desdatacosto->disponible))
 										{
-											$saldo = " Su saldo actual es ".lang('MONEDA').$desdatacosto->disponible;
+											$saldo = ". Su saldo actual es ".lang('MONEDA').$desdatacosto->disponible;
 										}
                     $response = [
                         'code' => 0,
