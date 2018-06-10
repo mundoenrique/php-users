@@ -519,7 +519,7 @@ $(function() {
 			appendDataTransfer+= '</tr>';
 			appendDataTransfer+= '<tr>';
 			appendDataTransfer+=    '<td colspan="2"></td>';
-			appendDataTransfer+=    '<td class="data-metadata">Total + Comisión/Transferencia (' + moneda + ' ' + montoComision + ') <br/>';
+			appendDataTransfer+=    '<td class="data-metadata">Total Transferencia + Comisión (' + moneda + ' ' + montoComision + ') = <br/>';
 			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + (changeDecimals(totalTrans + (montoComision * transferNumber))) + '</span>';
 			appendDataTransfer+= '</tr>';
 
