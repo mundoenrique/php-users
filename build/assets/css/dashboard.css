@@ -5567,3 +5567,32 @@ body .ui-tooltip {
 .ui-slider-vertical .ui-slider-range-max {
   top: 0;
 }
+
+/* CuentaGeneralPeru -- Tarjetas no activas  LMHL*/
+
+.inactive{
+
+	background-color: #f6f6f6 !important;
+}
+
+.inactive-image{
+	opacity: 0.6;
+}
+
+.round-label{
+	text-align: center;
+	width: 40%;
+	height: 35%;
+	color: white;
+	float: right;
+	background-color: #368DB6;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+}
+
+.text-label{
+	position: absolute;
+	top: 49%;
+	left: 65%;
+	text-align: center;s
+}
