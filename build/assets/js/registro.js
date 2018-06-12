@@ -150,17 +150,79 @@ $(function(){
 			cuenta		= Base64.encode(cuenta);
 			id_ext_per	= Base64.encode(id_ext_per);
 
-			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(data){
+			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(dataUser){
 				$("#loading").hide();
 				$("button").attr("disabled",false);
-				pais	= data.pais;
 
-				if(data.rc == 0) {
-					aplicaPerfil = data.user.aplicaPerfil;
-					digVer = data.afiliacion.dig_verificador_aux;
-					if(pais == 'Pe') {
+				switch(dataUser.code){
+					case 0:
+						var data = dataUser.dataUser;
+						var pais	= data.pais;
+						aplicaPerfil = data.user.aplicaPerfil;
+						digVer = data.afiliacion.dig_verificador_aux;
 
-						if (data.user.aplicaPerfil == 'N') {
+						if(pais == 'Pe') {
+
+							if (data.user.aplicaPerfil == 'N') {
+								$('.dig-verificador').remove();
+								$('#contract').remove();
+								$('.lugar-nacimiento').remove();
+								$('.verificacion-one').remove();
+								$('.segments-laborales').remove();
+								$('.separador-3').remove();
+								$('.remove-plata-sueldo').remove();
+								$('.area-telefonos').removeClass('four-segments');
+								$('.area-telefonos').addClass('two-segments');
+
+								$('.nacimiento-mitad').removeClass('inline-list four-segments field-plata');
+								$('.radio-sexo').removeClass('field-group four-segments');
+
+								$('.fecha-nacimiento li').removeClass('field-group-item');
+								$('.radio-sexo li').removeClass('select-group-item');
+
+								$('.fecha-nacimiento').addClass('ul-mitad');
+								$('.nacimiento-mitad').addClass('ul-mitad');
+								$('.radio-sexo').addClass('ul-mitad');
+
+								$('#content-registro').css('display', 'block');
+
+							}
+							else if (data.user.aplicaPerfil == 'S') {
+								$('.verificacion-one').remove();
+								$('#content-registro').css('display', 'block');
+
+								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
+									$("#departamento").empty().append("<option value=''>Cargando...</option>");
+
+									if(dataUser.code == 0) {
+	                  $("#departamento").empty().append("<option value=''>Seleccione</option>");
+										$.each(data.listaSubRegiones, function (pos, item) {
+											var lista;
+											lista = "<option value="+item.codregion+"> "+item.region+" </option>";
+											$("#departamento").append(lista);
+										});
+									}else{
+
+										$("#dialog-cargar-regiones").show(800);
+										$("#invalido3").click(function () {
+											$("#dialog-cargar-regiones").hide("slow");
+										});
+									}
+								});
+								$("#departamento").change(function () {
+									$("#provincia").empty().append("<option value=''>Cargando...</option>");
+									$("#distrito").empty().append("<option value=''>-</option>");
+									if( this.value != "" )
+									{
+										getProvincias(this.value, pais);
+									} else {
+										$("#provincia").empty().append("<option value=''>-</option>");
+									}
+								});
+
+								getProfesiones();
+							}
+						}else{
 							$('.dig-verificador').remove();
 							$('#contract').remove();
 							$('.lugar-nacimiento').remove();
@@ -182,168 +244,82 @@ $(function(){
 							$('.radio-sexo').addClass('ul-mitad');
 
 							$('#content-registro').css('display', 'block');
-
 						}
-						else if (data.user.aplicaPerfil == 'S') {
-							$('.verificacion-one').remove();
-							$('#content-registro').css('display', 'block');
-
-							$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
-								$("#departamento").empty().append("<option value=''>Cargando...</option>");
-								if(data.rc == 0) {
-                                    $("#departamento").empty().append("<option value=''>Seleccione</option>");
-									$.each(data.listaSubRegiones, function (pos, item) {
-										var lista;
-										lista = "<option value="+item.codregion+"> "+item.region+" </option>";
-										$("#departamento").append(lista);
-									});
-								}else{
-
-									$("#dialog-cargar-regiones").show(800);
-									$("#invalido3").click(function () {
-										$("#dialog-cargar-regiones").hide("slow");
-									});
-								}
-							});
-							$("#departamento").change(function () {
-								$("#provincia").empty().append("<option value=''>Cargando...</option>");
-								$("#distrito").empty().append("<option value=''>-</option>");
-								if( this.value != "" )
-								{
-									getProvincias(this.value, pais);
-								} else {
-									$("#provincia").empty().append("<option value=''>-</option>");
-								}
-							});
-
-							getProfesiones();
+						for(var antiguedad = 0; antiguedad < 51; antiguedad++){
+							$('.antiguedad-laboral').append('<option>'+antiguedad+'</option>');
 						}
-					}else{
-						$('.dig-verificador').remove();
-						$('#contract').remove();
-						$('.lugar-nacimiento').remove();
-						$('.verificacion-one').remove();
-						$('.segments-laborales').remove();
-						$('.separador-3').remove();
-						$('.remove-plata-sueldo').remove();
-						$('.area-telefonos').removeClass('four-segments');
-						$('.area-telefonos').addClass('two-segments');
 
-						$('.nacimiento-mitad').removeClass('inline-list four-segments field-plata');
-						$('.radio-sexo').removeClass('field-group four-segments');
-
-						$('.fecha-nacimiento li').removeClass('field-group-item');
-						$('.radio-sexo li').removeClass('select-group-item');
-
-						$('.fecha-nacimiento').addClass('ul-mitad');
-						$('.nacimiento-mitad').addClass('ul-mitad');
-						$('.radio-sexo').addClass('ul-mitad');
-
-						$('#content-registro').css('display', 'block');
-					}
-					for(var antiguedad = 0; antiguedad < 51; antiguedad++){
-						$('.antiguedad-laboral').append('<option>'+antiguedad+'</option>');
-					}
-
-					if((pais == 'Ve')||(pais == 'Co')){
-						$("#first-name").attr("disabled",false);
-						$("#first-nam").attr("disabled",false);
-						$("#first-ext-name").attr("disabled",false);
-						$("#last-name").attr("disabled",false);
-						$("#last-ext-name").attr("disabled",false);
-						$("#telefonoFijo").attr("disabled",false);
-						$("#birth-date").attr("disabled",false);
-					}
-
-					$("#content").children().remove();
-					$("#content").append($("#content-registro").removeAttr('style')).html();
-					pais 				= data.pais;
-					tipo_doc			= data.user.tipo_id_ext_per;
-					nro_doc				= data.user.id_ext_per;
-					primer_nombre		= data.user.primerNombre;
-					segundo_nombre		= data.user.segundoNombre;
-					primer_apellido		= data.user.primerApellido;
-					segundo_apellido	= data.user.segundoApellido;
-					sexo				= data.afiliacion.sexo;
-					fecha_nacimiento	= data.user.fechaNacimiento;
-					$('#dia').blur(fechaNacimiento);
-					$('#mes').change(fechaNacimiento);
-					$('#ano').blur(fechaNacimiento);
-
-					if(data.user.aplicaPerfil == 'S'){
-						lugar_nacimiento	= data.afiliacion.lugar_nacimiento;
-						estado_civil		= data.afiliacion.edocivil;
-						nacionalidad		= data.afiliacion.nacionalidad;
-						if(pais == 'Pe'){
-							$("#paisResidencia").val("Perú");
+						if((pais == 'Ve')||(pais == 'Co')){
+							$("#first-name").attr("disabled",false);
+							$("#first-nam").attr("disabled",false);
+							$("#first-ext-name").attr("disabled",false);
+							$("#last-name").attr("disabled",false);
+							$("#last-ext-name").attr("disabled",false);
+							$("#telefonoFijo").attr("disabled",false);
+							$("#birth-date").attr("disabled",false);
 						}
-						var ruc = data.afiliacion.ruc_cto_laboral;
-						$('#ruc').val(ruc);
-					}
-					$('#paisResidenciaHidden').val(pais);
+
+						$("#content").children().remove();
+						$("#content").append($("#content-registro").removeAttr('style')).html();
+						pais 				= data.pais;
+						tipo_doc			= data.user.tipo_id_ext_per;
+						nro_doc				= data.user.id_ext_per;
+						primer_nombre		= data.user.primerNombre;
+						segundo_nombre		= data.user.segundoNombre;
+						primer_apellido		= data.user.primerApellido;
+						segundo_apellido	= data.user.segundoApellido;
+						sexo				= data.afiliacion.sexo;
+						fecha_nacimiento	= data.user.fechaNacimiento;
+						$('#dia').blur(fechaNacimiento);
+						$('#mes').change(fechaNacimiento);
+						$('#ano').blur(fechaNacimiento);
+
+						if(data.user.aplicaPerfil == 'S'){
+							lugar_nacimiento	= data.afiliacion.lugar_nacimiento;
+							estado_civil		= data.afiliacion.edocivil;
+							nacionalidad		= data.afiliacion.nacionalidad;
+							aceptaContrato		= data.afiliacion.acepta_contrato;
+							if(aceptaContrato === 'S') {
+								$('#contrato').off('click');
+							}
+							if(pais == 'Pe'){
+								$("#paisResidencia").val("Perú");
+							}
+							var ruc = data.afiliacion.ruc_cto_laboral;
+							$('#ruc').val(ruc);
+						}
+						$('#paisResidenciaHidden').val(pais);
 
 
-					$("#listaIdentificadores").val(tipo_doc);
-					$("#holder-id").val(nro_doc);
-					$("#first-name").val(primer_nombre);
-					$("#first-ext-name").val(segundo_nombre);
-					$("#last-name").val(primer_apellido);
-					$("#last-ext-name").val(segundo_apellido);
+						$("#listaIdentificadores").val(tipo_doc);
+						$("#holder-id").val(nro_doc);
+						$("#first-name").val(primer_nombre);
+						$("#first-ext-name").val(segundo_nombre);
+						$("#last-name").val(primer_apellido);
+						$("#last-ext-name").val(segundo_apellido);
 
-					if(sexo == 'M'){
-						$("#gender-male").prop("checked", true);
-					}else if(sexo == 'F'){
-						$("#gender-female").prop("checked", true);
-					}
+						if(sexo == 'M'){
+							$("#gender-male").prop("checked", true);
+						}else if(sexo == 'F'){
+							$("#gender-female").prop("checked", true);
+						}
 
-					var dia		= fecha_nacimiento.substring(0,2);
-					var mes		= fecha_nacimiento.substring(3,5);
-					var ano		= fecha_nacimiento.substring(6,10);
-					$("#dia").val(dia);
-					$("#mes").val(mes);
-					$("#ano").val(ano);
-					if(dia!='' && mes!='' && ano!=''){
-						$('#fecha-de-nacimiento').val(dia+'/'+mes+'/'+ano);
-					}
+						var dia		= fecha_nacimiento.substring(0,2);
+						var mes		= fecha_nacimiento.substring(3,5);
+						var ano		= fecha_nacimiento.substring(6,10);
+						$("#dia").val(dia);
+						$("#mes").val(mes);
+						$("#ano").val(ano);
+						if(dia!='' && mes!='' && ano!=''){
+							$('#fecha-de-nacimiento').val(dia+'/'+mes+'/'+ano);
+						}
 
-				} else if(data.rc == -183) {
-					$("#dialogo-documento").dialog({
-						title	: "Error",
-						modal	: "true",
-						width	: "440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#ok2").click(function(){
-						$("#dialogo-documento").dialog("close");
-					});
-
-				} else if(data.rc == -184) {
-					$("#dialogo-pin").dialog({
-						title	: "Validar cuenta",
-						modal	: "true",
-						width	: "440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#inva3").click(function(){
-						$("#dialogo-pin").dialog("close");
-					});
-
-				} else {
-
-					$("#dialogo_error").dialog({
-						title	:"Error",
-						modal	:"true",
-						width	:"440px",
-						open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#ok").click(function(){
-						$("#dialogo_error").dialog("close");
-					});
-
-				} // ELSE
+						break;
+				case 2: //Respuesta negativa muestra modal
+					//mensaje de error
+						msgService(dataUser.title, dataUser.msn, dataUser.modalType, 0)
+						break;
+				}
 
 			});	// POST VALIDAR
 
@@ -760,185 +736,47 @@ $(function(){
 					anotherPhone= "";
 				}
 
+
 				if(aplicaPerfil == 'S'){
-
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence, "departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico, "cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password, "notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito").removeAttr('style')).html();
-								$("#message").append(cadena);
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)){
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271 || data.rc == -335){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-
-
-							if(data.rc == -284) {
-							 msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-							}
-
-						});	//POST
-
-				}else if(aplicaPerfil == 'N') {
-					$.post(base_url + "/registro/registrar",
-						{"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence},
-						function(data) {
-							$("#load_reg").hide();
-							if(data.rc == 0) {
-
-								var cadena=		'<span aria-hidden="true" class="icon-ok-sign"></span> Usuario registrado exitosamente';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado de forma correcta en el <strong>Sistema Conexión Personas Online.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito").removeAttr('style')).html();
-								$("#message").append(cadena);
-
-							}
-							if((data.rc == -61)||(data.rc == -5)||(data.rc == -3)) {
-								$(location).attr('href', base_url+'/users/error_gral');
-							}
-							if(data.rc == -181){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva").click(function(){
-									$("#dialogo_correo").dialog("close");
-								});
-							}
-							if(data.rc == -206){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo_correo_2").dialog({
-									title	:"Correo Registrado",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva2").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -230){
-
-								$("#registrar").fadeIn();
-
-								$("#dialogo-fallo").dialog({
-									title	:"Fallo en Registro",
-									modal	:"true",
-									width	:"440px",
-									open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-
-								});
-								$("#inva4").click(function(){
-									$(location).attr('href', base_url);
-								});
-							}
-							if(data.rc == -271){
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor completarlos en la sección de <strong>Perfíl.</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -317 || data.rc == -314 || data.rc == -313 || data.rc == -311 || data.rc == -21){
-								console.log('cualquier locura');
-								console.log(data.rc);
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>Usuario registrado';
-								cadena+=	'<p>El usuario "'+username+'" se ha registrado satisfactoriamente, pero su tarjeta esta bloqueada comuníquese con el <strong>Centro de Contacto</strong></p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito2").removeAttr('style')).html();
-								$("#message2").append(cadena);
-							}
-							//RC FIN ERRORES ACTIVACION TARJETA PLATA SUELDO
-							if(data.rc == -284) {
-
-								msgService('Teléfono móvil existente', 'El teléfono móvil ya se encuentra registrado.');
-
-							}
-						});	//POST
+					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence,"departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico,"cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password,"notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato};
+				}else{
+					var dataUser =  {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence};
 				}
+
+				//validar aplica perfil LMHL
+
+				$.ajax({
+				  method: "POST",
+				  url: base_url + "/registro/registrar",
+				  data: dataUser
+				})
+				  .done(function( data ) {
+
+						switch(data.code){
+							case 0:
+								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
+								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
+
+								$("#content").children().remove();
+								$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
+								$("#message"+data.modalType).append(cadena);
+
+							break;
+
+							case 2: //error general
+								$(location).attr('href', base_url+'/users/error_gral');
+							break;
+
+							case 3: //
+								msgService(data.title, data.msn, data.modalType, 0)
+							break;
+
+							case 4:
+								msgService(data.title, data.msn, data.modalType, 1)
+							break;
+
+						}
+				  })
 
 			} else { ///////////////////////////////////
 
@@ -1366,7 +1204,11 @@ $(".label-inline").on("click", "a", function() {
 	}
 });  //FIN DE LA FUNCION GENERAL
 
-function msgService (title, msg) {
+
+
+
+//Mensaje de error
+function msgService (title, msg, modalType, redirect) {
 	$("#registrar").fadeIn();
 	$("#dialogo-movil").dialog({
 		title	:title,
@@ -1374,11 +1216,16 @@ function msgService (title, msg) {
 		width	:"440px",
 		open	: function(event, ui) {
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			$('#msgService').text(msg);
+			//Cambia el tipo de alerta - warning - error - success
+		  $("#modalType").addClass(modalType);
+			$('#msgService').html(msg);
 		}
 
 	});
 	$("#inva5").click(function(){
 		$("#dialogo-movil").dialog("close");
+		if(redirect == 1){
+			$(location).attr('href', base_url);
+		}
 	});
 }

@@ -99,17 +99,21 @@ country = $('body').data('country');
 
 	if(country !== 'Ve' || (country === 'Ve' && $(".dashboard-item").length <= 3)) {
 		// FUNCION LLAMAR SALDO
-		$.each($(".dashboard-item"),function(pos,item){
-			$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
-				var moneda=$(".dashboard-item").attr("moneda");
-				var id=$(".dashboard-item").attr("doc");
-				var saldo=data.disponible;
-				if (typeof saldo != 'string'){
-					saldo="---";
-				}
 
-				$(item).find(".dashboard-item-balance").html(moneda+saldo);
-			});
+		$.each($(".dashboard-item"),function(pos,item){
+			//Si la tarjeta no esta activa no consulta el saldo
+			if($(item).attr("activeurl") !== 'NE'){
+				//carga saldo tarjeta
+				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+					var moneda=$(".dashboard-item").attr("moneda");
+					var id=$(".dashboard-item").attr("doc");
+					var saldo=data.disponible;
+					if (typeof saldo != 'string'){
+						saldo="---";
+					}
+					$(item).find(".dashboard-item-balance").html(moneda+saldo);
+				});
+			}
 		});
 	}
 
