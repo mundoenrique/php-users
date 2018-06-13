@@ -139,6 +139,13 @@ class Service_model extends CI_Model {
                         'msg' => 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.'
                     ];
                     break;
+								case -396:
+                    $response = [
+                        'code' => 2,
+                        'title' => 'Reposición de tarjeta',
+                        'msg' => 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.'
+                    ];
+                    break;
                 case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
 										$desdatacosto = json_decode(utf8_encode($desdata->bean));
 										$cost_repos_plas = (isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '') ? $desdatacosto->cost_repos_plas : NULL;
