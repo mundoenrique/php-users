@@ -132,7 +132,7 @@ class Service_model extends CI_Model {
                         'msg' => 'La tarjeta no pudo ser <strong>'. $msgLok . '</strong>, intente nuevamente.'
                     ];
                     break;
-                case -356:
+                case -395:
                     $response = [
                         'code' => 2,
                         'title' => 'Reposición de tarjeta',
