@@ -9,14 +9,14 @@ var aplicaperfil = $('#content').attr('aplicaperfil'),
 
 $(function(){
 
+	if(tyc == '0') {
+		systemDialog('Términos y condiciones', 'Debes aceptar los términos y condiciones.', 'tyc');
+	}
 	if(aplicaperfil == 'S' && afiliado == '0') {
 		$('#widget-account').focus();
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
 	}
 
-	if(tyc == '0') {
-		systemDialog('Términos y condiciones', 'Debes aceptar los términos y condiciones.', 'tyc');
-	}
 
 	//Menu desplegable transferencia
 	$('.transfers').hover(function(){
