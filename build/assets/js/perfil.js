@@ -10,7 +10,7 @@ var aplicaperfil = $('#content').attr('aplicaperfil'),
 $(function(){
 
 	if(tyc == '0') {
-		systemDialog('Términos y condiciones', 'Debes aceptar los términos y condiciones.', 'tyc');
+		systemDialog('Términos y condiciones', 'Debes aceptar los términos y Condiciones.', 'tyc');
 	}
 	if(aplicaperfil == 'S' && afiliado == '0') {
 		$('#widget-account').focus();
