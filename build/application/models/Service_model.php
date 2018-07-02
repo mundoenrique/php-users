@@ -6,6 +6,7 @@ class Service_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
+				$this->lang->load('format');
 
     }
     // -----------------------------------------------------------------------------------------------------------------
@@ -40,6 +41,7 @@ class Service_model extends CI_Model {
         $pais = $this->session->userdata('pais');
         $msgLok = ($action == '00') ? 'Desbloqueada' : 'Bloqueada';
         $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueada';
+				$montoComisionTransaccion = $dataAccount['montoComisionTransaccion'];
 
         $data = json_encode(array(
             "idOperation" => $idOperation,
@@ -53,7 +55,8 @@ class Service_model extends CI_Model {
             "codBloqueo" => $action,
             "token" => $token,
             "logAccesoObject"=>$logAcceso,
-            "pais" => $pais
+            "pais" => $pais,
+						"montoComisionTransaccion" => $montoComisionTransaccion
         ));
 
         log_message("info", "REQUEST Bloqueo desbloqueo=====>>>>> ".$data);
@@ -66,18 +69,28 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
-        // sleep(2);
-        // $response = '{"rc":-288,"msg":"Proceso OK"}';
-        // $desdata = json_decode($response);
+        /*sleep(2);
+         $response = '{"rc":-382,"msg":"Proceso OK","cost_repos_plas":8352}';
+         $desdata = json_decode($response);
+				 */
 
         if ($desdata) {
             switch ($desdata->rc) {
                 case 0:
+
+										//para operaciones con costo, muestra el saldo actual
+										$saldo = "";
+										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										if(isset($desdatacosto->disponible))
+										{
+											$saldo = ". Su saldo actual es ".lang('MONEDA').$desdatacosto->disponible;
+										}
                     $response = [
                         'code' => 0,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
-                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Su tarjeta será enviada en los próximos días'
+                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Su tarjeta será enviada en los próximos días'.$saldo,
                     ];
+
                     break;
                 case -241:
                     $response = [
@@ -126,9 +139,42 @@ class Service_model extends CI_Model {
                         'msg' => 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.'
                     ];
                     break;
-                case -306:
-                    $response = $this->callWsGetToken();
+                case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
+										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										$cost_repos_plas = (isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '') ? $desdatacosto->cost_repos_plas : NULL;
+                    $response = $this->callWsGetToken($cost_repos_plas);
                     break;
+
+								case -382: //Reposición con costo sin token
+
+									$desdatacosto = json_decode(utf8_encode($desdata->bean));
+									if((isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '')) {
+
+										$cost_repos_plas = $desdatacosto->cost_repos_plas;
+										$response = [
+												'code' => 6,
+												'title' => 'Solicitud Reposición',
+												'msg' => 'Costo de la transacción',
+												'cost_repos_plas' => $cost_repos_plas,
+										];
+									}
+									else {
+										$response = [
+				                'title' => 'Conexión Personas Online',
+				                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+				            ];
+									}
+
+                  break;
+
+								case -114:
+										$response = [
+												'code' => 3,
+												'title' => 'Conexión Personas Online',
+												'msg' => 'No se pudo realizar la reposición de su tarjeta. Favor intente nuevamente.'
+										];
+									break;
+
                 case -125:
                 case -304:
                 case -911:
@@ -146,6 +192,18 @@ class Service_model extends CI_Model {
                     ];
                     $this->session->sess_destroy();
                     break;
+
+								//Manejo de errores - se incluye error por falta de saldo
+								case -322:
+								case -21:
+									$response = [
+											'code' => 3,
+											'title' => 'Solicitud de reposición',
+											'msg' => 'Su solicitud no puede ser procesada por este canal. Solicite la reposición de su tarjeta a través del Centro de Contacto Tebca'
+									];
+
+									break;
+
                 default:
                     $response = [
                         'title' => 'Conexión Personas Online',
@@ -321,7 +379,7 @@ class Service_model extends CI_Model {
     // -----------------------------------------------------------------------------------------------------------------
 
     //Solicitud de Token
-    public function callWsGetToken()
+    public function callWsGetToken($cost_repos_plas=NULL)
     {
         //log de acceso
         $session = $this->session->userdata("sessionId");
@@ -358,18 +416,30 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
-        /*sleep(2);
-        $response = '{"rc":0,"msg":"Proceso OK","bean":"uh4sf2"}';
-        $desdata = json_decode($response);*/
+        //sleep(2);
+        //$response = '{"rc":0,"msg":"Proceso OK","bean":"uh4sf2"}';
+        //$desdata = json_decode($response);
 
         if ($desdata) {
             switch ($desdata->rc){
                 case 0:
-                    $response = [
-                        'code' => 4,
-                        'title' => 'Solicitud de token',
-                        'msg' => 'Hemos enviado el código de seguridad a su correo'
-                    ];
+
+										$response = [
+												'code' => 4,
+												'title' => 'Solicitud de token',
+												'msg' => 'Hemos enviado el código de seguridad a su correo'
+										];
+
+										//Si hay costo de reposición, se agreaga en la respuesta
+                    if($cost_repos_plas != NULL){
+											$response = [
+	                        'code' => 4,
+	                        'title' => 'Solicitud de token',
+	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
+													'cost_repos_plas' => $cost_repos_plas
+	                    ];
+										}
+
                     break;
                 case -173:
                     $response = [

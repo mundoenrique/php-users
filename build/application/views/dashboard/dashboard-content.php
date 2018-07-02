@@ -18,7 +18,8 @@
                 }
             }
 
-            else {
+            else
+						{
                 header("Location: users/error_gral");
             }
 
@@ -57,14 +58,32 @@
                     $nomProducto=ucwords(strtolower($value->nombre_producto));
                     $moneda=lang("MONEDA");
                     $id=lang("ID");
+										//estado de la tarjeta activa o inactiva(NE)
+										$activeCard = $value->bloque;
 
-                    echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' marca='$marca' empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
+
+										//Verifica si la tarjeta se encuentra inactiva - CuentaGeneralPeru
+										$inactiveImage = "";
+										$inactiveInfo = "";
+										$saldo = "";
+										//verifica mensaje de saldo inicial
+										if($country !== 'Ve'){
+											$saldo = $moneda." ---";
+										}
+
+										if($activeCard === "NE" && $pais === 'Pe'){
+											 $saldo = "<div class='round-label'><div class='text-label'> Activar &nbsp<span aria-hidden='true' class='icon-arrow-right'></span></div></div>";
+											 $inactiveInfo = "inactive" ;
+											 $inactiveImage = "inactive-image";
+										}
+
+          					echo "<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca' empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 					<a href='#' rel='section'>
-						<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
-						<div class='dashboard-item-network $marca'>$value->marca</div>
-						<div class='dashboard-item-info'>
+						<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
+						<div class='dashboard-item-network $marca $inactiveImage' >$value->marca</div>
+						<div class='dashboard-item-info $inactiveInfo'>
 							<p class='dashboard-item-cardholder'>$nomPlastico</p>
-							<p class='dashboard-item-balance'><?php echo $country !== 'Ve' ? $moneda --- : ''; ?></p>
+							<p class='dashboard-item-balance'>$saldo</p>
 							<p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
 							<p class='dashboard-item-category'>$nomProducto</p>
 						</div>

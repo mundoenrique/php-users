@@ -98,6 +98,12 @@ $route['transferencia/operaciones'] = 'transfer/CallWsValidarClave';
 $route['transferencia/crearClave'] = 'transfer/CallWsClaveAutenticacion';
 $route['transferencia/confirmacion'] = 'transfer/CallWsValidarClaveAutenticacion';
 $route['transferencia/procesar'] = 'transfer/CallWsProcesarTransferencia';
+$route['transferencia/pe'] = 'transferPe/index';
+$route['transferencia/HistorialPe'] = 'transferPe/historial_pe';
+$route['limit/pe'] = 'transferPe/limit';
+$route['transferencia/peGeneral'] = 'transferPe/CallModel';
+$route['transfererencia/transferPe'] = 'transferPe/maketransferPe';
+
 $route['affiliation'] = 'affiliation';
 $route['affiliation/cuentasP2P'] = 'affiliation/CallWstarjetasP2P';
 $route['affiliation/affiliation'] = 'affiliation/CallWsAffiliationP2P';

@@ -471,31 +471,16 @@ if($skin == 'latodo'){
     </div>
 </div>
 
-<!-- MODAL ERROR -->
-<div id="dialogo_error" style='display:none'>
+<!--- Modal Validación VERIFICACIÓN CUENTA - CUENTA GENERAL PERU -->
+<div id="dialogo-check-count" style='display:none'>
     <form accept-charset="utf-8" method="post">
         <div id="dialog-confirm">
-            <div class="alert-simple alert-error" id="message">
+            <div class="alert-simple" id="messageContent">
                 <span aria-hidden="true" class="icon-cancel-sign"></span>
-                <p>La tarjeta indicada <strong>NO es válida</strong> o usted ya se encuentra <strong>registrado</strong>. Por favor verifique sus datos, e intente nuevamente.</p>
+                <p id="msnContent"></p>
             </div>
             <div class="form-actions">
-                <button id="ok">Aceptar</button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<!-- MODAL ERROR -->
-<div id="dialogo-documento" style='display:none'>
-    <form accept-charset="utf-8" method="post">
-        <div id="dialog-confirm">
-            <div class="alert-simple alert-error" id="message">
-                <span aria-hidden="true" class="icon-cancel-sign"></span>
-                <p>El documento de identidad indicado <strong>ya se encuentra registrado</strong>.</p>
-            </div>
-            <div class="form-actions">
-                <button id="ok2">Aceptar</button>
+                <button id="ok-check">Aceptar</button>
             </div>
         </div>
     </form>
@@ -511,58 +496,6 @@ if($skin == 'latodo'){
         <div class="form-actions">
             <button id="disp">Aceptar</button>
         </div>
-    </div>
-</div>
-
-<!-- MODAL CORREO NO DISPONIBLE -->
-<div id="dialogo_correo" style='display:none'>
-    <div id="dialog-confirm">
-        <div class="alert-simple alert-error" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
-            <p>El correo indicado se encuentra registrado. Por favor verifique e intente nuevamente.</p>
-        </div>
-    </div>
-    <div class="form-actions">
-        <button id="inva">Aceptar</button>
-    </div>
-</div>
-
-<!-- MODAL CORREO NO DISPONIBLE -->
-<div id="dialogo_correo_2" style='display:none'>
-    <div id="dialog-confirm">
-        <div class="alert-simple alert-warning" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
-            <p>El usuario fue registrado satisfactoriamente. Ha ocurrido un error enviándole el mail de confirmación</p>
-        </div>
-    </div>
-    <div class="form-actions">
-        <button id="inva2">Aceptar</button>
-    </div>
-</div>
-
-<!-- MODAL PIN INVALIDO -->
-<div id="dialogo-pin" style='display:none'>
-    <div id="dialog-confirm">
-        <div class="alert-simple alert-error" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
-            <p>La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifique sus datos, e intente nuevamente.</p>
-        </div>
-    </div>
-    <div class="form-actions">
-        <button id="inva3">Aceptar</button>
-    </div>
-</div>
-
-<!-- MODAL FALLO EN REGISTRO -->
-<div id="dialogo-fallo" style='display:none'>
-    <div id="dialog-confirm">
-        <div class="alert-simple alert-error" id="message">
-            <span aria-hidden="true" class="icon-cancel-sign"></span>
-            <p>No se puede realizar el registro en estos momentos, por favor intente de nuevo más tarde.</p>
-        </div>
-    </div>
-    <div class="form-actions">
-        <button id="inva4">Aceptar</button>
     </div>
 </div>
 
@@ -618,7 +551,7 @@ if($skin == 'latodo'){
 <!-- ERROR telefono movil exixtente -->
 <div id="dialogo-movil" style='display:none'>
     <div id="dialog-confirm">
-        <div class="alert-simple alert-error">
+        <div class="alert-simple" id="modalType">
             <span aria-hidden="true" class="icon-cancel-sign"></span>
             <p id="msgService"></p>
         </div>
