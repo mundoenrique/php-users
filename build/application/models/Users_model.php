@@ -54,7 +54,8 @@ class Users_model extends CI_Model {
                 'passwordOperaciones' => $desdata->passwordOperaciones,
                 'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
                 'afiliado' => $desdata->afiliado,
-                'aplicaPerfil' => $desdata->aplicaPerfil
+								'aplicaPerfil' => $desdata->aplicaPerfil,
+								'tyc' => $desdata->tyc
             );
             $this->session->set_userdata($newdata);
         }
