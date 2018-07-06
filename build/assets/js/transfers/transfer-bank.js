@@ -502,7 +502,7 @@ $(function() {
 				appendDataTransfer +=        '<span class="data-metadata conceptoDestino"></span>';
 				appendDataTransfer +=        '<strong>Concepto: </strong>'+$(item).find('.field-large').val()+'<br />';
 				appendDataTransfer +=        '<strong>Monto: </strong>';
-				appendDataTransfer +=        '<span class="money-amount"> ' + moneda + ' '+$(item).find('.monto').val()+'<br /> </span>';
+				appendDataTransfer +=        '<span class="money-amount"> ' + moneda + ' '+changeDecimals(parseFloat($(item).find('.monto').val()))+'<br /> </span>';
 				appendDataTransfer +=        '<strong>Estatus: </strong>';
 				appendDataTransfer +=        '<span class="money-amount estatus">En espera por confirmación.</span>';
 				appendDataTransfer +=    '</td>';
