@@ -571,6 +571,16 @@ class Service_model extends CI_Model {
                     $title = 'Conexión Personas Online';
                     $msg = ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.';
                     break;
+								case -395:
+										$code = 3;
+										$title = 'Reposición de tarjeta';
+										$msg = 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.';
+                    break;
+								case -396:
+										$code = 3;
+										$title = 'Reposición de tarjeta';
+										$msg = 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.';
+                    break;
                 default:
                     $code = 7;
                     $title = 'Conexión Personas Online';
