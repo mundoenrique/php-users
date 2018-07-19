@@ -1,9 +1,16 @@
 var base_url,
 	base_cdn,
 	viewControl = '',
-	bloqAction,
+	bloqAction = 'Bloquear ',
 	moneda,
 	pais;
+
+const operaciones = {
+	'111' : {'id' : 'replace', 'icon' : 'spinner', 'msn' : 'Solicitud <br>de reposición'},
+	'112' : {'id': 'key', 'icon' : 'key', 'msn' : 'Cambio <br>de PIN'},
+	'117' : {'id' : 'recover', 'icon' : 'key', 'msn' : 'Solicitud <br>de PIN'},
+	'110' : {'id' : 'lock', 'icon' : 'lock', 'msn' : 'Bloquear <br>cuenta'}
+};
 
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
@@ -118,40 +125,34 @@ $(function(){
             bloqHtml =  true,
             icon,
             options = '<p class="field-tip" style="margin-left: 10px;">Indique la operación que desea realizar</p>',
-            cadena;
+            cadena,
+						permisos = $(this).attr("permisos").split(',');
+
+				bloqAction = "Bloquear ";
         pais  = $(this).attr("pais");
         options = (pais == 'Ve') ? 'Haga clic aquí para solicitar su reposición de PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
-        var intoReplace = ((condition == 0 || condition == 2) && pais != 'Ve') ? '<li id="replace" class="service-item-unselect"><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</span></li>' : '';
 
-        options+= '<ul class="product-balance-group services-content">';
-        switch  (bloqueo) {
-            case 'N':
-                if(pais == 'Ve'){
-                    break;
-                }
-                bloqAction = 'Bloquear ';
-                icon = 'lock';
-                options+= '<li id="lock" class="service-item-unselect"><span class="icon-' + icon +' services-item"></span>Bloquear <br>cuenta</li>';
-                options+= '<li id="key" class="service-item-unselect"><span class="icon-key services-item"></span>Cambio <br>de PIN</span></li>';
-                break;
-            case 'PB':
-                if(pais == 'Ve'){
-                    break;
-                }
-                bloqAction = 'Desbloquear ';
-                icon = 'unlock';
-                options+= '<li id="lock" class="service-item-unselect"><span class="icon-' + icon +' services-item"></span>Desbloquear <br>cuenta</li>';
-                break;
-            default:
-                bloqHtml = false;
-
-
-        }
-        if(pais == 'Ve') {
-            options+= '<li id="recover" class="service-item-unselect"><span class="icon-key services-item"></span>Solicitud <br>de PIN</span></li>';
-        }
-        options+= intoReplace;
-        options+= '</ul>';
+					//asignación de permisos
+					options+= '<ul class="product-balance-group services-content">';
+					permisos.sort();
+					for(var permiso in permisos){
+						var parametros = Object.assign({}, operaciones[permisos[permiso]]);
+						//si esta bloqueada se cambia label
+						if(permisos[permiso] == 110 && bloqueo == 'PB'){
+							parametros.icon = 'unlock';
+							parametros.msn = 'Desbloquear <br>cuenta';
+							bloqAction = 'Desbloquear ';
+							// Si la cuenta esta bloqueada, no se visualiza la operación de reposición
+							permisos.splice(permisos.indexOf('112'), 1);
+						}
+						else if(bloqueo != 'N' && bloqueo != 'PB')
+						{
+							bloqHtml = false;
+						}
+						options += '<li id="'+ parametros.id +'" class="service-item-unselect"><span class="icon-' + parametros.icon +' services-item"></span>'+ parametros.msn +'</li>';
+					}
+					options+= '</ul>';
+					//fin de asignacion de permisos
 
         if (bloqHtml == true) {
             $("#donor").children().remove();

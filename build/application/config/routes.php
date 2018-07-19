@@ -135,3 +135,4 @@ $route['perfil/direcciones'] = 'perfil/CallWsListaDirecciones';
 $route['perfil/actualizar'] = 'perfil/CallWsActualizar';
 $route['servicios'] = 'service/index';
 $route['servicios/modelo'] = 'service/CallModel';
+$route['servicios/error'] = 'service/error_services';
