@@ -105,7 +105,7 @@
 					</div>
 					<div id="next-step" class="form-actions">
 						<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset">Cancelar</button></a>
-						<button disabled class="confir" id="continuar">Continuar</button>
+						<button disabled class="confir" id="continuar">Confirmar</button>
 					</div>
 				</div>
 			</section>
