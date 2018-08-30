@@ -116,14 +116,14 @@
                     </div>
 
                     <div id="rec-key" class="services-both" style="display: none">
-                        <div id="msg-rec" class="msg-prevent">
+                        <div id="msg-rec" class="msg-prevent-pin" >
                             <h2></h2>
                             <h3></h3>
                             <div id="result-rec"></div>
                         </div>
                         <div id="rec-clave" class="msg-prevent" style="display: none">
-                            <p class="msg-pin">Al confirmar esta solicitud, su PIN será enviado en sobre de seguridad a la dirección de su empresa, en un máximo de 5 días hábiles.</p>
-                            <p class="msg-pin">Si realmente desea solicitar la reposición de su PIN presione continuar.</p>
+                            <p class="msg-pin">Esta solicitud genera un Lote de Reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
+                            <p class="msg-pin">Si realmente deseas solicitar la reposición de tu PIN, presiona continuar, el PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
                         </div>
                         <form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec" disabled>
