@@ -149,7 +149,7 @@ $datos = null;
 if(isset($data)) {
 
 $datos = unserialize($data);
-
+$serviciosActivos = false;
 if($datos->rc==0){
 
     if(count($datos->lista)==0) {
@@ -161,6 +161,15 @@ if($datos->rc==0){
         $nombre_empresa = $value->nomEmp;
         $cuenta = count(explode(" ", $nombre_empresa));
 
+        //Verifica permisos operaciones de Servicios
+				if(count($value->services) <= 0)
+				{
+					continue;
+				}
+				else {
+					$serviciosActivos = true;
+				}
+
         if($cuenta>1){
             $findspace = ' ';
             $posicion = strpos($nombre_empresa, $findspace);
@@ -170,6 +179,11 @@ if($datos->rc==0){
 
         $todos = $todos +1;
     }
+
+		if(!$serviciosActivos){
+			header("Location: servicios/error");
+		}
+
 } else {
     header("Location: users/error_gral");
 }
@@ -197,6 +211,12 @@ if($datos->rc==0){
         $base_cdn = $this->config->item('base_url_cdn');
 
         foreach ($datos->lista as $value) {
+						//Verifica permisos operaciones de Servicios
+		        if(count($value->services) <= 0)
+		        {
+		          continue;
+		        }
+
             $cadena = strtolower($value->nombre_producto);
             $producto1 = quitar_tildes($cadena);
             $img1=strtolower(str_replace(' ','-',$producto1));
@@ -207,9 +227,10 @@ if($datos->rc==0){
             $condition = $value->condicion;
             $fechaExp = $value->fechaExp;
             $pais=ucwords($this->session->userdata('pais'));
+						$permisos = implode(',',$value->services);
             $moneda=lang("MONEDA");
 
-            echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$value->nom_plastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$value->nombre_producto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp'>
+            echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$value->nom_plastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$value->nombre_producto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
