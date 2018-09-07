@@ -1068,7 +1068,8 @@ $(function(){
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
 				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
-				"contrato": {"required": true}
+				"contrato": {"required": true},
+				"proteccion": {"required": true}
 			},
 
 			messages: {
@@ -1141,7 +1142,8 @@ $(function(){
 				},
 				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
-				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico."
+				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
+				"proteccion": "Debe aceptar protección de datos personales."
 			}
 		}); // VALIDATE
 	}
@@ -1240,7 +1242,7 @@ function msgService (title, msg, modalType, redirect) {
 		title	:title,
 		modal	:"true",
 		width	:"440px",
-		open	: function(event, ui) {	
+		open	: function(event, ui) {
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
 			//Cambia el tipo de alerta - warning - error - success
 		  $("#modalType").addClass(modalType);
