@@ -419,10 +419,12 @@ function makeTransfer(type)
 function changeDecimals(amount)
 {
 	var amountDec;
-	amountDec =  amount.toFixed(2);
+	amountDec =  new Intl.NumberFormat(["en-US"],{maximumFractionDigits:2}).format(amount);
 
 	if(pais == 'Ve' || pais == 'Co') {
-		amountDec = amountDec.replace('.', ',')
+		amountDec = amountDec.replace(/\./g, 'p')
+		amountDec = amountDec.replace(/\,/g, '.');
+		amountDec = amountDec.replace(/\p/g, ',');
 	}
 
 	return amountDec;

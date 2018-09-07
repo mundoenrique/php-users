@@ -132,11 +132,18 @@ class Service_model extends CI_Model {
                         'msg' => 'La tarjeta no pudo ser <strong>'. $msgLok . '</strong>, intente nuevamente.'
                     ];
                     break;
-                case -356:
+                case -395:
                     $response = [
                         'code' => 2,
                         'title' => 'Reposición de tarjeta',
                         'msg' => 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.'
+                    ];
+                    break;
+								case -396:
+                    $response = [
+                        'code' => 2,
+                        'title' => 'Reposición de tarjeta',
+                        'msg' => 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.'
                     ];
                     break;
                 case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
@@ -563,6 +570,16 @@ class Service_model extends CI_Model {
                     $code = 7;
                     $title = 'Conexión Personas Online';
                     $msg = ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.';
+                    break;
+								case -395:
+										$code = 3;
+										$title = 'Reposición de tarjeta';
+										$msg = 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.';
+                    break;
+								case -396:
+										$code = 3;
+										$title = 'Reposición de tarjeta';
+										$msg = 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.';
                     break;
                 default:
                     $code = 7;
