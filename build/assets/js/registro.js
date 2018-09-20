@@ -768,11 +768,12 @@ $(function(){
 							break;
 
 							case 3: //
-								msgService(data.title, data.msn, data.modalType, 0)
+								msgService(data.title, data.msn, data.modalType, 0);
+								$("#load_reg").hide();
 							break;
 
 							case 4:
-								msgService(data.title, data.msn, data.modalType, 1)
+								msgService(data.title, data.msn, data.modalType, 1);
 							break;
 
 						}
@@ -1226,6 +1227,7 @@ function msgService (title, msg, modalType, redirect) {
 		$("#dialogo-movil").dialog("close");
 		if(redirect == 1){
 			$(location).attr('href', base_url);
+
 		}
 	});
 }
