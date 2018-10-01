@@ -71,11 +71,6 @@
 											$saldo = $moneda." ---";
 										}
 
-										if($activeCard === "NE" && $pais === 'Pe'){
-											 $saldo = "<div class='round-label'><div class='text-label'> Activar &nbsp<span aria-hidden='true' class='icon-arrow-right'></span></div></div>";
-											 $inactiveInfo = "inactive" ;
-											 $inactiveImage = "inactive-image";
-										}
 
           					echo "<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca' empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 					<a href='#' rel='section'>

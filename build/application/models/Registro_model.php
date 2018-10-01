@@ -182,48 +182,6 @@ class Registro_model extends CI_Model {
 					$this->msn = "La tarjeta indicada <strong>NO es válida</strong> o la <strong>Clave Secreta/Clave Web</strong> introducida es inválida. Por favor verifica tus datos, e intenta nuevamente.";
 					break;
 
-				//verificacion de reniec grupo 1
-				case 5002:
-				case 5003:
-				case -102:
-				case -104:
-				case -118:
-				case 5004:
-				case 5008:
-				case 5009:
-				case 5010:
-				case 5011:
-				case 5020:
-				case 5021:
-				case 5030:
-				case 5100:
-				case 5104:
-				case 6000:
-				case -21: //Valida conexión fallida
-				//
-					$this->title = "Conexión Personas Online";
-					$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
-					break;
-
-				// verificacion de reniec  grupo 2
-				case 5101:
-				case 5102:
-				case 5103:
-				case 5104:
-				case 5105:
-				case 5111:
-				case 5112:
-				case 5113:
-				case 5032:
-				case 5033:
-				case 5034:
-				case 5036:
-				case 5037:
-				case 5114:
-					$this->title = "Conexión Personas Online";
-					$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
-					break;
-
 				default:
 					$this->title = 'Conexión Personas Online';
 					$this->msn = "No fue posible realizar el registro, por favor intenta nuevamente";
@@ -448,6 +406,8 @@ class Registro_model extends CI_Model {
 
 		log_message("info", "Response registrar_usuario: ".json_encode($desdata));
 
+		$this->code = 3;
+		$this->modalType = "alert-error";
 				switch ($desdata->rc) {
 					case 0:
 						$this->title = "Usuario registrado exitosamente";
@@ -536,11 +496,9 @@ class Registro_model extends CI_Model {
 					case 5100:
 					case 5104:
 					case 6000:
-					case -21:
+					case -21: //Valida conexión fallida
 						$this->title = "Conexión Personas Online";
 						$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
-						$this->code = 2;
-						$this->modalType = "alert-error";
 						break;
 
 					// verificacion de reniec  grupo 2
@@ -558,11 +516,13 @@ class Registro_model extends CI_Model {
 					case 5036:
 					case 5037:
 					case 5114:
-
 						$this->title = "Conexión Personas Online";
 						$this->msn = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
-						$this->code = 2;
-						$this->modalType = "alert-error";
+						break;
+
+					case -397:
+						$this->title = "Conexión Personas Online";
+						$this->msn = "Datos de afiliación inválidos. Verifica tus datos e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
 						break;
 
 					default:
@@ -580,7 +540,6 @@ class Registro_model extends CI_Model {
 					"msn" => $this->msn,
 					"modalType" => $this->modalType
 				];
-
 
 			return json_encode($this->response);
 

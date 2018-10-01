@@ -279,9 +279,11 @@ $(function(){
 							estado_civil		= data.afiliacion.edocivil;
 							nacionalidad		= data.afiliacion.nacionalidad;
 							aceptaContrato		= data.afiliacion.acepta_contrato;
+
 							if(aceptaContrato === 'S') {
-								$('#contrato').off('click');
+									$("#modalContrato").html('pn cuenta general');
 							}
+
 							if(pais == 'Pe'){
 								$("#paisResidencia").val("Perú");
 							}
@@ -623,21 +625,45 @@ $(function(){
 	//Modal protección de datos personales
 	$('#contrato').on('click', function(){
 		$(this).off('click');
-		$('#contrato_cuenta').dialog({
-			title: 'CONTRATO DE CUENTA DINERO ELECTRÓNICO PLATA BENEFICIOS',
-			dialogClass: "contratos",
-			modal: true,
-			width:'940px',
-			draggable: false,
-			rezise: false,
-			open: function(event, ui) {
-				$(".ui-dialog-titlebar-close", ui.dialog).hide();
-			}
-		});
+		if(aceptaContrato == 'S')
+		{
+			$('#contrato_cuenta_general').dialog({
+				title: 'CONTRATO DE CUENTA DINERO ELECTRÓNICO PN CUENTA GENERAL',
+				dialogClass: "contratos",
+				modal: true,
+				width:'940px',
+				draggable: false,
+				rezise: false,
+				open: function(event, ui) {
+					$(".ui-dialog-titlebar-close", ui.dialog).hide();
+				}
+			});
+			$("#close-contrato-general").click(function(){
+				$("#contrato_cuenta_general").dialog("close");
+			});
+		}
+		else{
+			$('#contrato_cuenta').dialog({
+				title: 'CONTRATO DE CUENTA DINERO ELECTRÓNICO PLATA BENEFICIOS',
+				dialogClass: "contratos",
+				modal: true,
+				width:'940px',
+				draggable: false,
+				rezise: false,
+				open: function(event, ui) {
+					$(".ui-dialog-titlebar-close", ui.dialog).hide();
+				}
+			});
+			$("#close-contrato").click(function(){
+				$("#contrato_cuenta").dialog("close");
+			});
+		}
+
 		$(".contratos").css("top","50px");
-		$("#close-contrato").click(function(){
-			$("#contrato_cuenta").dialog("close");
-		});
+		$(".ui-dialog-title").css("width", "92%");
+
+
+
 		$('html, body').animate({
 			scrollTop: $('body').offset().top
 		}, 0);
@@ -768,11 +794,12 @@ $(function(){
 							break;
 
 							case 3: //
-								msgService(data.title, data.msn, data.modalType, 0)
+								msgService(data.title, data.msn, data.modalType, 0);
+								$("#load_reg").hide();
 							break;
 
 							case 4:
-								msgService(data.title, data.msn, data.modalType, 1)
+								msgService(data.title, data.msn, data.modalType, 1);
 							break;
 
 						}
@@ -1042,7 +1069,8 @@ $(function(){
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
 				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
-				"contrato": {"required": true}
+				"contrato": {"required": true},
+				"proteccion": {"required": true}
 			},
 
 			messages: {
@@ -1115,7 +1143,8 @@ $(function(){
 				},
 				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
-				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico."
+				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
+				"proteccion": "Debe aceptar protección de datos personales."
 			}
 		}); // VALIDATE
 	}
@@ -1226,6 +1255,7 @@ function msgService (title, msg, modalType, redirect) {
 		$("#dialogo-movil").dialog("close");
 		if(redirect == 1){
 			$(location).attr('href', base_url);
+
 		}
 	});
 }
