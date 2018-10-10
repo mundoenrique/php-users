@@ -470,7 +470,6 @@ class Registro_model extends CI_Model {
 					case -314:
 					case -313:
 					case -311:
-					case -21:
 
 						$this->title = "Usuario registrado";
 						$this->msn = "Te has registrado satisfactoriamente, pero tu tarjeta esta bloqueada, comunícate con el <strong>Centro de Contacto</strong>";
