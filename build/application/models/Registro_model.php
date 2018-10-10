@@ -494,8 +494,7 @@ class Registro_model extends CI_Model {
 					case 5030:
 					case 5100:
 					case 5104:
-					case 6000:
-					case -21: //Valida conexión fallida
+					case 6000: //Valida conexión fallida
 						$this->title = "Conexión Personas Online";
 						$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 						break;
