@@ -103,7 +103,7 @@
 																<input disabled class='field-medium ignore' id='ctaDestinoText' maxlength="16" minlength="16" name='ctaDestinoText' type='text' />
 															</div>
 															<label for='beneficiary-1x-description'>Concepto</label>
-															<input disabled class='field-large skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
+															<input disabled class='field-large-aling skip' id='descripcion' maxlength="50" name='descripcion' type='text' />
 															<label for='beneficiary-1x-amount'>Monto</label>
 															<div class='field-category'>
 																<?php echo lang("MONEDA"); ?>
