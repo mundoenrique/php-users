@@ -67,7 +67,7 @@ $(function() {
 								break;
 
 							case 2:
-								$(location).attr('href', base_url + '../users/error_gral');
+								$(location).attr('href', base_url + '/users/error_gral');
 								break;
 
 							default:

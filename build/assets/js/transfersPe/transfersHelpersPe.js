@@ -446,7 +446,7 @@ function makeTransferPe(formData, token)
 				break;
 
 			case 4:
-				$(location).attr('href', base_url + '../users/error_gral');
+				$(location).attr('href', base_url + '/users/error_gral');
 				break;
 
 			default:
