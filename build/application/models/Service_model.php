@@ -206,7 +206,7 @@ class Service_model extends CI_Model {
 									$response = [
 											'code' => 3,
 											'title' => 'Solicitud de reposición',
-											'msg' => 'Su solicitud no puede ser procesada por este canal. Solicite la reposición de su tarjeta a través del Centro de Contacto Tebca'
+											'msg' => 'Su solicitud no puede ser procesada por este canal, comuníquese al Centro de Contacto Tebca'
 									];
 
 									break;
