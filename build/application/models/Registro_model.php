@@ -411,7 +411,7 @@ class Registro_model extends CI_Model {
 				switch ($desdata->rc) {
 					case 0:
 						$this->title = "Usuario registrado exitosamente";
-						$this->msn = "Te has registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
+						$this->msn = "se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
 						$this->code = 0;
 						$this->modalType = "";
 					break;
@@ -460,7 +460,7 @@ class Registro_model extends CI_Model {
 					case -335:
 
 						$this->title = "Usuario registrado";
-						$this->msn = "Te has registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
+						$this->msn = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
 						$this->code = 0;
 						$this->modalType = "2";
 
@@ -470,10 +470,9 @@ class Registro_model extends CI_Model {
 					case -314:
 					case -313:
 					case -311:
-					case -21:
 
 						$this->title = "Usuario registrado";
-						$this->msn = "Te has registrado satisfactoriamente, pero tu tarjeta esta bloqueada, comunícate con el <strong>Centro de Contacto</strong>";
+						$this->msn = "se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
 						$this->code = 0;
 						$this->modalType = "2";
 
@@ -495,8 +494,7 @@ class Registro_model extends CI_Model {
 					case 5030:
 					case 5100:
 					case 5104:
-					case 6000:
-					case -21: //Valida conexión fallida
+					case 6000: //Valida conexión fallida
 						$this->title = "Conexión Personas Online";
 						$this->msn = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 						break;
