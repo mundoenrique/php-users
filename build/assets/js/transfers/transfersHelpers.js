@@ -4,7 +4,7 @@ var base_url, base_cdn, ctasDestino, moneda, pais, editCard, numberBeneficiary =
 	acumCantidadOperacionesMensual, cantidadOperacionesMensual, acumCantidadOperacionesSemanales,
 	cantidadOperacionesSemanales, acumCantidadOperacionesDiarias, cantidadOperacionesDiarias,
 	montoComision, nameSource, maskSource, sourceNumber, brand, destination = {}, dobleAutenticacion,
-	operationType, expDate, country;
+	operationType, expDate, country, porcentajeComision, totalComision;
 
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
