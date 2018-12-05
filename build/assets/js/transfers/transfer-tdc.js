@@ -312,7 +312,7 @@ $(function() {
 				$(this).addClass('field-error');
 				camposInput = false;
 				if(validStr === 0) {
-					validateInput.push('El campo importe solo admite números.');
+					validateInput.push('El campo importe solo admite números y máximo dos decimales.');
 					validStr = 1;
 				}
 			} else {
@@ -526,7 +526,7 @@ $(function() {
 			appendDataTransfer+= '</tr>';
 			appendDataTransfer+= '<tr>';
 			appendDataTransfer+=    '<td colspan="2"></td>';
-		appendDataTransfer+=    '<td class="data-metadata">Total (Pago + Comisión ' + moneda + ' ' + totalComision + ') = ';
+			appendDataTransfer+=    '<td class="data-metadata">Total (Pago + Comisión ' + moneda + ' ' + changeDecimals(totalComision) + ') = ';
 			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + (changeDecimals(totalTrans + totalComision)) + '</span>';
 			appendDataTransfer+= '</tr>';
 
