@@ -83,3 +83,45 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+|--------------------------------------------------------------------------
+| Environment variables
+|--------------------------------------------------------------------------
+|
+| Constants expected as environment variables on the instance to be used
+| as part of global configuration settings.
+|
+*/
+define('BASE_URL', $_SERVER['BASE_URL']);
+define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
+define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
+define('WS_URL', $_SERVER['WS_URL']);
+define('WS_KEY', $_SERVER['WS_KEY']);
+define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
+	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
+);
+define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
+	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
+);
+define('SESS_EXPIRATION', isset($_SERVER['SESS_EXPIRATION']) ?
+	$_SERVER['SESS_EXPIRATION'] : 0
+);
+define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
+	$_SERVER['SESS_SAVE_PATH'] : NULL
+);
+define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP']) ?
+	$_SERVER['SESS_MATCH_IP'] : FALSE
+);
+define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
+	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
+);
+define('COOKIE_DOMAIN', isset($_SERVER['COOKIE_DOMAIN']) ?
+	$_SERVER['COOKIE_DOMAIN'] : ''
+);
+define('COOKIE_PATH', isset($_SERVER['COOKIE_PATH']) ?
+	$_SERVER['COOKIE_PATH'] : '/'
+);
+define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE']) ?
+	$_SERVER['COOKIE_SECURE'] : FALSE
+);
