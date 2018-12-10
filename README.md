@@ -2,14 +2,33 @@
 
 Conexión Personas Online es un portal web orientado a proporcionar servicios para los usuarios finales de productos Tebca/Servitebca.
 
-
 ## Instalación
 
 ### Dependencias
 
 - **Apache HTTPD 2.4** o superior
-- **PHP 5.6 - 7.0**
+- **PHP 7.0** solamente
 
+### Variables de entorno
+
+Este proyecto depende de la definición de distintas variables de entorno para su funcionamiento correcto y seguro. La siguiente lista refleja todas aquellas que pueden ser especificadas:
+
+| Nombre             | Descripción                                  | Ejemplo                    |
+| ------------------ | -------------------------------------------- | -------------------------- |
+| `CI_ENV`           | Identificación de entorno.                   | `development`              |
+| `BASE_URL`         | URL base de aplicación.                      | `http://localhost`         |
+| `BASE_CDN_URL`     | URL de assets de aplicación.                 | `http://localhost/assets`  |
+| `BASE_CDN_PATH`    | Directorio de los assets.                    | `/var/www/html/assets/`    |
+| `WS_URL`           | URL de servicios web (WS).                   | `http://192.168.0.1:8080/` |
+| `WS_KEY`           | Llave de cifrado para los WS.                | `P455w0rd`                 |
+| `ENCRYPTION_KEY`   | Llave de cifrado para sesión.                | `n0v0p4ym3nt`              |
+| `SESS_COOKIE_NAME` | _(opcional)_ Nombre base de sesión.          | `cpo_session`              |
+| `SESS_EXPIRATION`  | _(opcional)_ Tiempo de expiración de sesión. | `300`                      |
+| `SESS_SAVE_PATH`   | _(opcional)_ Directorio para las sesiones.   | `/var/www/sessions`        |
+| `COOKIE_PREFIX`    | _(opcional)_ Prefijo de nombre de cookie.    | `cpo_`                     |
+| `COOKIE_DOMAIN`    | _(opcional)_ Dominio específico de cookie.   | `localhost`                |
+| `COOKIE_PATH`      | _(opcional)_ Ruta dependiente del cookie.    | `/`                        |
+| `COOKIE_SECURE`    | _(opcional)_ Seguridad de cookie (HTTPS).    | `FALSE`                    |
 
 ### Configuración
 
@@ -19,22 +38,36 @@ La aplicación puede ser configurada por medio de alguna de las siguientes tecno
 
 Puede instalarse por medio de Docker de forma sencilla ejecutando los siguientes comandos desde el directorio raíz del proyecto:
 
-```sh
+```bash
 $ docker build --no-cache -t site-conexionpersonas .
-$ docker run --name site-conexionpersonas -e 'CI_ENV=development' -d site-conexionpersonas
+$ docker run \
+    --name site-conexionpersonas \
+    --restart unless-stopped \
+    -e 'CI_ENV=development' \
+    -e 'BASE_URL=http://localhost' \
+    -e 'BASE_CDN_URL=http://localhost/assets/' \
+    -e 'BASE_CDN_PATH=/var/www/html/assets/' \
+    -e 'WS_URL=http://192.168.0.1:8080/' \
+    -e 'WS_KEY=P455w0rd' \
+    -e 'ENCRYPTION_KEY=n0v0p4ym3nt-D3V' \
+    -e 'SESS_SAVE_PATH=/var/www/sessions/' \
+    -p 80:80 \
+    -d site-conexionpersonas
 ```
-
 
 #### Apache HTTPD
 
 Para emplear Apache HTTPD como mecanismo de montaje, es necesario seguir estos pasos:
 
 1. Realizar el montaje de la carpeta `build` en una ubicación que pueda servirse desde Apache HTTPD
-2. Duplicar el directorio `development` ubicado en `build/application/config` y renombrar el nuevo directorio como `local`
-4. Modificar en el archivo `config.php` contenido en dicho directorio las definiciones que correspondan a URL y paths, según la configuración que haya proporcionado a su HTTPD
+2. Modificar el archivo `.htaccess` contenido en dicho directorio para incorporar las variables de entorno necesarias, siguiendo el patrón:
+  ```apache
+  SetEnv CI_ENV development
+  SetEnv BASE_URL http://localhost
+  SetEnv BASE_CDN_URL http://localhost/assets/
+  ```
 
-**Importante:** el directorio `local` y todas las configuraciones contenidas en éste son ignoradas por Git, de tal manera que permanezcan intactas en el ambiente de trabajo de cada colaborador.
-
+Recuerda agregar todas las variables de entorno que necesites para hacer que tu instalación local funcione correctamente.
 
 ## Colaboración
 
