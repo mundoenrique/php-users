@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = BASE_URL;
+$config['base_url_cdn'] = BASE_CDN_URL;
+$config['base_path_cdn'] = BASE_CDN_PATH;
+$config['urlWS'] = WS_URL;
+$config['keyNovo'] = WS_KEY;
 
 /*
 |--------------------------------------------------------------------------
@@ -223,7 +227,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -324,7 +328,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = ENCRYPTION_KEY;
 
 /*
 |--------------------------------------------------------------------------
@@ -378,10 +382,10 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'cpo_session';
-$config['sess_expiration'] = 0;
-$config['sess_save_path'] = '/var/www/sessions';
-$config['sess_match_ip'] = FALSE;
+$config['sess_cookie_name'] = SESS_COOKIE_NAME;
+$config['sess_expiration'] = SESS_EXPIRATION;
+$config['sess_save_path'] = SESS_SAVE_PATH;
+$config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = TRUE;
 
@@ -400,10 +404,10 @@ $config['sess_regenerate_destroy'] = TRUE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= 'cpo_';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
+$config['cookie_prefix']	= COOKIE_PREFIX;
+$config['cookie_domain']	= COOKIE_DOMAIN;
+$config['cookie_path']		= COOKIE_PATH;
+$config['cookie_secure']	= COOKIE_SECURE;
 $config['cookie_httponly'] 	= FALSE;
 
 /*
