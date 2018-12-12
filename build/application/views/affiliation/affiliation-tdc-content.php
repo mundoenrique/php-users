@@ -63,7 +63,7 @@
                                     <?php
                                         $actual = date('Y');
                                         $anio = strtotime ( '-5 year' , strtotime ($actual ) ) ;
-                                        $anioFinal = strtotime ( '+5 year' , strtotime ($actual ) ) ;
+                                        $anioFinal = strtotime ( '+10 year' , strtotime ($actual ) ) ;
                                         $anio = date('Y', $anio);
                                         $anioFinal = date('Y', $anioFinal);
                                         for($i = $anio; $i<=$anioFinal; $i++):
