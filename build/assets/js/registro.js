@@ -876,7 +876,7 @@ $(function(){
 		var dia		= $('#dia').val();
 		var mes		= $('#mes option:selected').val();
 
-		if((dia==31 && mes==02) || (dia==30 && mes==02) || (dia==29 && mes==02) || (dia==31 && mes==04) || (dia==31 && mes==06) || (dia==31 && mes==09) || (dia==31 && mes==11)){
+		if((dia==31 && mes==02) || (dia==30 && mes==02) || (dia==31 && mes==04) || (dia==31 && mes==06) || (dia==31 && mes==09) || (dia==31 && mes==11)){
 			$('#dia').removeClass('field-success').addClass('field-error');
 			$('#mes').removeClass('field-success').addClass('field-error');
 			return false;
