@@ -31,7 +31,7 @@ $(function() {
 		yearNow = new Date();
 		fullYearDate = yearNow.getFullYear();
 		fiveyearLess = fullYearDate - 5;
-		fiveYearMore = fullYearDate + 10;
+		fiveYearMore = fullYearDate + 5;
 
 		for (i = fiveyearLess; i <= fiveYearMore; i++) {
 			yearSelect.push(i);
@@ -312,7 +312,7 @@ $(function() {
 				$(this).addClass('field-error');
 				camposInput = false;
 				if(validStr === 0) {
-					validateInput.push('El campo importe solo admite números.');
+					validateInput.push('El campo importe solo admite números y máximo dos decimales.');
 					validStr = 1;
 				}
 			} else {

@@ -31,7 +31,7 @@ $(function() {
 		yearNow = new Date();
 		fullYearDate = yearNow.getFullYear();
 		fiveyearLess = fullYearDate - 5;
-		fiveYearMore = fullYearDate + 10;
+		fiveYearMore = fullYearDate + 5;
 
 		for (i = fiveyearLess; i <= fiveYearMore; i++) {
 			yearSelect.push(i);
@@ -312,7 +312,7 @@ $(function() {
 				$(this).addClass('field-error');
 				camposInput = false;
 				if(validStr === 0) {
-					validateInput.push('El campo importe solo admite números.');
+					validateInput.push('El campo importe solo admite números y máximo dos decimales.');
 					validStr = 1;
 				}
 			} else {
@@ -489,6 +489,11 @@ $(function() {
 					transfer : (transferNo + pos)
 				};
 
+				var concepto = $(item).find('.field-large').val();
+				var monto = parseFloat($(item).find('.monto').val());
+				var comision = (monto * porcentajeComision / 100 > montoComision) ? (monto * porcentajeComision / 100) : montoComision;
+				totalComision += comision;
+
 				appendDataTransfer = '<tr class="trdestino-' + (transferNo + pos) + '">';
 				appendDataTransfer +=    '<td class="data-label"> </td>';
 				appendDataTransfer +=    '<td class="data-reference">' + $(item).find('.product-cardholder').html() + '<br/>';
@@ -500,9 +505,11 @@ $(function() {
 				appendDataTransfer +=		    '<span aria-hidden="true" class="iconoTransferencia"></span>';
 				appendDataTransfer +=        '</div>';
 				appendDataTransfer +=        '<span class="data-metadata conceptoDestino"></span>';
-				appendDataTransfer +=        '<strong>Concepto: </strong>'+$(item).find('.field-large').val()+'<br />';
+				appendDataTransfer +=        '<strong>Concepto: </strong>'+ concepto +'<br />';
 				appendDataTransfer +=        '<strong>Monto: </strong>';
-				appendDataTransfer +=        '<span class="money-amount"> ' + moneda + ' '+changeDecimals(totalTrans)+'<br /> </span>';
+				appendDataTransfer +=        '<span class="money-amount"> ' + moneda + ' '+changeDecimals(monto)+'<br /> </span>';
+				appendDataTransfer +=        '<strong>Comisión: </strong>';
+				appendDataTransfer +=        '<span class="money-amount"> ' + moneda + ' '+changeDecimals(comision)+'<br /> </span>';
 				appendDataTransfer +=        '<strong>Estatus: </strong>';
 				appendDataTransfer +=        '<span class="money-amount estatus">En espera por confirmación.</span>';
 				appendDataTransfer +=    '</td>';
@@ -519,8 +526,8 @@ $(function() {
 			appendDataTransfer+= '</tr>';
 			appendDataTransfer+= '<tr>';
 			appendDataTransfer+=    '<td colspan="2"></td>';
-			appendDataTransfer+=    '<td class="data-metadata">Total Pago + Comisión (' + moneda + ' ' + montoComision + ') = <br/>';
-			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + (changeDecimals(totalTrans + (montoComision * transferNumber))) + '</span>';
+			appendDataTransfer+=    '<td class="data-metadata">Total (Pago + Comisión ' + moneda + ' ' + changeDecimals(totalComision) + ') = ';
+			appendDataTransfer+=        '<span class="money-amount">' + moneda + ' ' + (changeDecimals(totalTrans + totalComision)) + '</span>';
 			appendDataTransfer+= '</tr>';
 
 			$("#cargarConfirmacion").append(appendDataTransfer);
@@ -581,6 +588,8 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 					acumCantidadOperacionesSemanales = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesSemanales);
 					acumCantidadOperacionesMensual = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesMensual);
 					montoComision = parseFloat(data.parametrosTransferencias[0].montoComision);
+					porcentajeComision = parseFloat(data.parametrosTransferencias[0].porcentajeComision);
+					totalComision = 0;
 					dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
 
 					$("#dashboard-beneficiary").empty();
