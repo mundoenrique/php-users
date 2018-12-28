@@ -491,7 +491,7 @@ $(function() {
 
 				var concepto = $(item).find('.field-large').val();
 				var monto = parseFloat($(item).find('.monto').val());
-				var comision = (monto * porcentajeComision / 100 > montoComision) ? (monto * porcentajeComision / 100) : montoComision;
+				var comision = (monto <= montoBase) ? montoComision :  (monto * porcentajeComision / 100);
 				totalComision += comision;
 
 				appendDataTransfer = '<tr class="trdestino-' + (transferNo + pos) + '">';
@@ -587,11 +587,12 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 					acumCantidadOperacionesDiarias = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesDiarias);
 					acumCantidadOperacionesSemanales = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesSemanales);
 					acumCantidadOperacionesMensual = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesMensual);
+					montoBase = parseFloat(data.parametrosTransferencias[0].montoBaseTransferencia);
 					montoComision = parseFloat(data.parametrosTransferencias[0].montoComision);
 					porcentajeComision = parseFloat(data.parametrosTransferencias[0].porcentajeComision);
 					totalComision = 0;
 					dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
-
+					console.log(montoBase+"  probando");
 					$("#dashboard-beneficiary").empty();
 
 					$.each(data.cuentaDestinoTercero,function(pos,item){
@@ -623,7 +624,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 						.addClass('failed-step-item');
 					break;
 				default:
-					$(location).attr('href', base_url + '/users/error_gral');
+					$(location).attr('href', base_url + '/dashboard');
 			}
 
 		});

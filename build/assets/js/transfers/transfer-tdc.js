@@ -491,7 +491,7 @@ $(function() {
 
 				var concepto = $(item).find('.field-large').val();
 				var monto = parseFloat($(item).find('.monto').val());
-				var comision = (monto * porcentajeComision / 100 > montoComision) ? (monto * porcentajeComision / 100) : montoComision;
+				var comision = (monto <= montoBase) ? montoComision : (monto * porcentajeComision / 100);
 				totalComision += comision;
 
 				appendDataTransfer = '<tr class="trdestino-' + (transferNo + pos) + '">';
@@ -588,6 +588,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 					acumCantidadOperacionesSemanales = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesSemanales);
 					acumCantidadOperacionesMensual = parseInt(data.parametrosTransferencias[0].acumCantidadOperacionesMensual);
 					montoComision = parseFloat(data.parametrosTransferencias[0].montoComision);
+					montoBase = parseFloat(data.parametrosTransferencias[0].montoBaseTransferencia);
 					porcentajeComision = parseFloat(data.parametrosTransferencias[0].porcentajeComision);
 					totalComision = 0;
 					dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
@@ -623,7 +624,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 						.addClass('failed-step-item');
 					break;
 				default:
-					$(location).attr('href', base_url + '/users/error_gral');
+					$(location).attr('href', base_url + '/dashboard');
 			}
 
 		});
