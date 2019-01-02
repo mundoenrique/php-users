@@ -490,7 +490,7 @@ $(function() {
 				};
 
 				var concepto = $(item).find('.field-large').val();
-				var monto = parseFloat($(item).find('.monto').val());
+				var monto = parseFloat($(item).find('.monto').val().replace(',', '.'));
 				var comision = (monto <= montoBase) ? montoComision : (monto * porcentajeComision / 100);
 				totalComision += comision;
 
