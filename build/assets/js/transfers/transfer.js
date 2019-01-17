@@ -312,7 +312,7 @@ $(function() {
 				$(this).addClass('field-error');
 				camposInput = false;
 				if(validStr === 0) {
-					validateInput.push('El campo importe solo admite números.');
+					validateInput.push('El campo importe solo admite números y máximo dos decimales.');
 					validStr = 1;
 				}
 			} else {
