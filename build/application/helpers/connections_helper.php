@@ -42,7 +42,6 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 	}
 }
 
-//Saldos en transito
 if(!function_exists('getTokenOauth'))
 {
 	/**
@@ -87,7 +86,7 @@ if(!function_exists('getTokenOauth'))
 if(!function_exists('connectionAPI'))
 {
 	/**
-	 * @info: Función para conexión con el API de Transacciones en tránsito
+	 * @info: Función para conexión con API
 	 * @date: 30/08/2018
 	 * @author: J. Enrique Peñaloza
 	 * @author: Jhonatan Llerena
@@ -142,111 +141,6 @@ if(!function_exists('connectionAPI'))
 		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
 		log_message('DEBUG', 'RESPONSE API:===>>>>' . json_encode($response));
-		return $response;
-	}
-}
-//recarga digitel
-if(!function_exists('getTokenOauth'))
-{
-	/**
-	 * @function: GetTokenOauth
-	 * @access: public
-	 * @params: void
-	 * @info: Función para la obtención de token oauth
-	 * @author: J. Enrique Peñaloza
-	 * @date: 11/01/2018
-	*/
-	function getTokenOauth($clientId, $ClientSecret)
-	{
-		$CI = &get_instance();
-		$url = $CI->config->item('urlAPI') . ':8008/auth2/1.0/token';
-		log_message('INFO', '<===Iniciando llamado al API OAUTH===>' . $url);
-		log_message('DEBUG', 'ClientId: ==>' . $clientId . ', ClientSecret: ==>' . $ClientSecret);
-		$header = [
-			'Content-type: application/x-www-form-urlencoded; charset=utf-8',
-			'language: es',
-			'channel: web',
-			'accept: application/json; charset=utf-8'
-		];
-		$body = [
-			'grant_type' => 'client_credentials',
-			'client_id' => $clientId,
-			'client_secret' => $ClientSecret
-		];
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		$responseAPI = curl_exec($ch);
-		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		curl_close($ch);
-		$response = new stdClass();
-		$response->httpCode = $httpCode;
-		$response->respOauth = $responseAPI;
-		log_message('DEBUG', 'RESPONSE OAUTH====>>>>>>' . json_encode($response));
-		return $response;
-	}
-}
-
-if(!function_exists('APIbillPayment'))
-{
-	/**
-	 * @function: APIbillPayment
-	 * @access: public
-	 * @params: string $urlAPI
-	 * @params: string $headerAPI
-	 * @params: string $bodyAPI
-	 * @params: string $method
-	 * @info: Función para conexión con el API de recarga y pago de servicio
-	 * @author: J. Enrique Peñaloza
-	 * @date: 11/01/2018
-	*/
-	function APIbillPayments($urlAPI, $headerAPI, $bodyAPI, $method)
-	{
-		log_message('DEBUG', 'Iniciando el llamado al API billPayment por el metodo:==>> ' . $method);
-		$CI = &get_instance();
-		$clientId = $CI->config->item('clientId_billPayment');
-		$ClientSecret = $CI->config->item('clientSecret_billPaymet');
-		$responseOauth = getTokenOauth($clientId, $ClientSecret);
-		$httpCode = $responseOauth->httpCode;
-		$responseAPI = json_decode ($responseOauth->respOauth);
-		if($httpCode === 200) {
-			$token = trim($responseAPI->access_token);
-			$url = $CI->config->item('urlAPI') . ':8016/billpayments/1.0/' . $urlAPI;
-			log_message('DEBUG', 'URL API: ' . $url);
-			//Encabezado de la petición al API
-			$header = [
-				'Content-Type: application/json',
-				'Language: es',
-				'Channel: CPO',
-				'Accept: application/json',
-				'Authorization: Bearer ' . $token
-			];
-			//Completar el encabezado de la petición con los parámetros especificos
-			foreach($headerAPI as $item) {
-				$item = trim($item);
-				array_push($header, $item);
-			}
-			log_message('INFO', 'HEADER API billPayments' . json_encode($header));
-			log_message('INFO', 'BODY API billPayments' . $bodyAPI);
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-			$responseAPI = curl_exec($ch);
-			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			curl_close($ch);
-		} else {
-			$responseAPI = json_decode(responseOauth);
-		}
-		$response = new stdClass();
-		$response->httpCode = $httpCode;
-		$response->resAPI = $responseAPI;
-		log_message('DEBUG', 'RESPONSE API APIbillPayments:===>>>>' . json_encode($response));
 		return $response;
 	}
 }
