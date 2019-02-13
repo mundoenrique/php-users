@@ -28,6 +28,11 @@ $config['base_url_cdn'] = BASE_CDN_URL;
 $config['base_path_cdn'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
+//url API
+$config['urlAPI'] = URL_API;
+//Credenciales oauth billPayments
+$config['clientId_billPayment'] = CLIENT_ID;
+$config['clientSecret_billPaymet'] = CLIENT_SECRET;
 
 /*
 |--------------------------------------------------------------------------
