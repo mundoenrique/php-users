@@ -30,9 +30,9 @@ $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 //url API
 $config['urlAPI'] = URL_API;
-//Credenciales oauth billPayments
-$config['clientId_billPayment'] = CLIENT_ID;
-$config['clientSecret_billPaymet'] = CLIENT_SECRET;
+//Credenciales oauth
+$config['clientId'] = CLIENT_ID;
+$config['clientSecret'] = CLIENT_SECRET;
 
 /*
 |--------------------------------------------------------------------------
