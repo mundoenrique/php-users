@@ -128,3 +128,9 @@ define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
 && filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['COOKIE_SECURE']) : FALSE
 );
+define('URL_API', isset($_SERVER['URL_API']) ?
+	$_SERVER['URL_API'] : '');
+define('CLIENT_ID', isset($_SERVER['CLIENT_ID']) ?
+	$_SERVER['CLIENT_ID'] : '');
+define('CLIENT_SECRET', isset($_SERVER['CLIENT_SECRET']) ?
+	$_SERVER['CLIENT_SECRET'] : '');
