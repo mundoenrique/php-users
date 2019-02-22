@@ -4,7 +4,11 @@
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
 		$signupLink = $this->config->item('base_url') . '/registro/index_pe';
-	} else {
+	} else if($skin == 'pichincha'){
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pi';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pi';
+		$signupLink = $this->config->item('base_url') . '/registro/index_pi';
+	}else {
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
 		$signupLink = $this->config->item('base_url') . '/registro';

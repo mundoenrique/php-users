@@ -3,73 +3,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends CI_Controller {
 
-	public function index_pe($code)
-	{
-		//INSTANCIA PARA TITULO DE PAGINA
-		$titlePage = 'Conexión Personas Online';
-		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') !== 'latodo') {
-			$this->load->helper('url');
+	public function __construct()
+  {
+		parent::__construct();
+		$this->initCookie();
 
-			$cookie = array(
-				'name' => 'skin',
-				'value' => $this->uri->segment(1),
-				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
-
-		$styleSheets = array(
-			array('url' => 'signin.css', 'media' => 'screen'),
-			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
-			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
-		);
-		//INSTANCIA GENERAR  HEADER
-		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
-		//INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
-		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
-		//INSTANACIA DEL CONTENIDO PARA EL FOOTER
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.ui.sliderbutton.js', 'login.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js');
-		//INSTANCIA DEL FOOTER
-		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
-		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('users/content-login', array(), true);
-		//INSTANCIA DE SIDERBAR
-		$sidebarlogin= $this->parser->parse('users/widget-signin', array('sidebarActive' => true), true);
-
-		//DATA QUE SE PASA AL LAYOUT EN GENERAL
-		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
-		$data = array('header' => $header, 'content' => $content, 'footer' => $footer, 'sidebar' => $sidebarlogin);
-
-		$this->parser->parse('layouts/layout-a', $data);
 	}
 
+	private function initCookie() {
+		$requestMethod=$this->router->method;
+
+		if($requestMethod == 'index') {
+
+			switch($this->uri->segment(1)){
+				case 'latodo': 	$code='latodo'; break;
+				case 'pichincha': $code='pichincha'; break;
+				default: $code='default';
+			}
+
+			if($this->input->cookie( $this->config->item('cookie_prefix') . 'skin') !== $code ) {
+				$this->load->helper('url');
+
+				$cookie = array(
+					'name' => 'skin',
+					'value' => $code,
+					'expire' => 0,
+					'domain' => $this->config->item('cookie_domain'),
+					'path' => $this->config->item('cookie_path'),
+					'prefix' => $this->config->item('cookie_prefix'),
+					'secure' => $this->config->item('cookie_secure')
+				);
+				$this->input->set_cookie($cookie);
+				redirect(current_url());
+			}
+
+		}else {
+
+			switch($requestMethod){
+				case 'recoveryPassword_pe': 	$code='latodo'; break;
+				case 'recoveryPassword_pi': $code='pichincha'; break;
+				default: $code='default';
+			}
+
+			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
+				$this->load->helper('url');
+
+				$cookie = array(
+					'name' => 'skin',
+					'value' => $code,
+					'expire' => 0,
+					'domain' => $this->config->item('cookie_domain'),
+					'path' => $this->config->item('cookie_path'),
+					'prefix' => $this->config->item('cookie_prefix'),
+					'secure' => $this->config->item('cookie_secure')
+				);
+				$this->input->set_cookie($cookie);
+				redirect(current_url());
+			}
+		}
+	}
 
 	public function index()
 	{
 		//INSTANCIA PARA TITULO DE PAGINA
  		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') !== 'default') {
-			$this->load->helper('url');
 
-			$cookie = array(
-				'name' => 'skin',
-				'value' => 'default',
-				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
+		$styleSheets = array(
+			array('url' => 'signin.css', 'media' => 'screen'),
+			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
+			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
+		);
 
 		$baseCdnCookie = [
 			'name' => 'baseCdn',
@@ -81,13 +85,9 @@ class Users extends CI_Controller {
 			'secure' => $this->config->item('cookie_secure')
 		];
 
+
 		$this->input->set_cookie($baseCdnCookie);
 
-		$styleSheets = array(
-			array('url' => 'signin.css', 'media' => 'screen'),
-			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
-			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
-		);
 		//INSTANCIA GENERAR  HEADER
 		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
@@ -100,12 +100,14 @@ class Users extends CI_Controller {
 		$content = $this->parser->parse('users/content-login', array(), true);
 		//INSTANCIA DE SIDERBAR
 		$sidebarlogin = $this->parser->parse('users/widget-signin', array('sidebarActive' => true), true);
-
+		//INSTANCIA DE PARTE DE CUERPO
+		$content = $this->parser->parse('users/content-login', array(), true);
 		//DATA QUE SE PASA AL LAYOUT EN GENERAL
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
 		$data = array('header' => $header, 'content' => $content, 'footer' => $footer, 'sidebar' => $sidebarlogin);
 
 		$this->parser->parse('layouts/layout-a', $data);
+
 	}
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -142,24 +144,40 @@ class Users extends CI_Controller {
 
 	public function recoveryPassword_pe()
 	{
+			//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
+
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage='Conexión Personas Online';
-		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
-			$this->load->helper('url');
 
-			$cookie = array(
-				'name' => 'skin',
-				'value' => 'latodo',
-				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
+		$styleSheets = array(
+			array('url' => 'signin.css', 'media' => 'screen'),
+			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
+			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
+		);
+		//INSTANCIA GENERAR  HEADER
+		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
+		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
+		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
+		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.ui.sliderbutton.js', 'recovery-password.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+		//INSTANCIA DEL FOOTER
+		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
+		//INSTANCIA DE PARTE DE CUERPO
+		$content = $this->parser->parse('users/content-recovery', array(), true);
+
+		//DATA QUE SE PASA AL LAYOUT EN GENERAL
+		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
+		$data = array('header' => $header, 'content' => $content, 'footer' => $footer);
+
+		$this->parser->parse('layouts/layout-a', $data);
+	}
+
+	public function recoveryPassword_pi()
+	{
+			//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
+
+		//INSTANCIA PARA TITULO DE PAGINA
+		$titlePage='Conexión Personas Online';
 
 		$styleSheets = array(
 			array('url' => 'signin.css', 'media' => 'screen'),
@@ -190,22 +208,6 @@ class Users extends CI_Controller {
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
-			$this->load->helper('url');
-
-			$cookie = array(
-				'name' => 'skin',
-				'value' => 'default',
-				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
-
 		$styleSheets = array(
 			array('url' => 'signin.css', 'media' => 'screen'),
 			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),

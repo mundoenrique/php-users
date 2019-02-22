@@ -61,7 +61,7 @@ if ( ! function_exists('insert_css_cdn'))
         $path_cdn = $CI->config->item('base_path_cdn');
         $skin = $CI->input->cookie('cpo_skin');
         $skin_folder = '';
-				if ($skin === 'latodo') $skin_folder = $skin . '/';
+				if ($skin === 'latodo' || $skin === 'pichincha') $skin_folder = $skin . '/';
 				if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
 					$filename = str_replace('.css', '.min.css', $filename);
 				}
