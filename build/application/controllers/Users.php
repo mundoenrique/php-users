@@ -47,7 +47,7 @@ class Users extends CI_Controller {
 
 		} else {
 			$requestMod=$this->uri->segment(2); //Modo al cual el usuario desea ingresar (latodo, pichincha, default)
-			log_message('INFO',$requestMod);
+
 			switch($requestMod){
 				case 'recoveryPassword_pe' : $code='latodo'; break;
 				case 'recoveryPassword_pi' : $code='pichincha'; break;
@@ -55,7 +55,7 @@ class Users extends CI_Controller {
 				case 'obtenerLogin_pi': $code='pichincha'; break;
 				default: $code='default';
 			}
-			log_message('INFO',$code);
+			
 			$this->setCookie($code);
 		}
 	}
