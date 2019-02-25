@@ -229,7 +229,7 @@ html {
 }
 
 body {
-  background: white url('../../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
+  background: white;
   color: #555555;
   height: 100%;
   margin: 0;
@@ -585,7 +585,7 @@ span.lighten {
 }
 
 a {
-  color: #00ae29;
+  color: #033572;
   text-decoration: none;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -1939,7 +1939,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 }
 
 .screen-reader {
-  display: none;
+  display: block;
 }
 @media aural, braille, embossed {
   .screen-reader {
@@ -1948,7 +1948,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 }
 
 #head {
-  background: #343735;
+  background: #ffdd00;
   -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
   -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
   box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
@@ -1960,11 +1960,11 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 }
 
 #head-wrapper {
-  height: 60px;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0 10px;
-  width: 940px;
+	background:  transparent url('../../img/BP Personas azul.svg?v=1.1') scroll no-repeat 0px 2px;;
+	height: 29px;
+	margin: 12px auto;
+	overflow: hidden;
+	width: 940px;
 }
 
 #brand-id,
@@ -3182,22 +3182,19 @@ table.feed-table tfoot td.feed-category-10x {
   width: auto !important;
 }
 #slideshow ul.slides li.slide {
-  background: #333333;
-  background: rgba(51, 51, 51, 0.5);
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
   -o-border-radius: 2px;
   border-radius: 2px;
   clear: both;
-  color: white;
+  color: #033572;
   display: none;
   float: left;
-  margin: 130px 0 350px;
+  margin: 40px 0 350px;
   max-width: 650px;
   overflow: hidden;
   padding: 10px 15px;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 #slideshow ul.slides li.slide.current-slide {
   display: block;
@@ -3234,12 +3231,14 @@ table.feed-table tfoot td.feed-category-10x {
 }
 
 .widget-header h2 {
+	background: #033572;
   border-bottom: 1px solid #dddddd;
-  color: #343735;
+  color: #dddddd;
   font-size: 22px;
   line-height: 50px;
   margin: 0;
-  padding: 0 15px;
+	padding: 0 15px;
+	text-align: center;
 }
 
 .widget-section,
@@ -3409,8 +3408,32 @@ table.feed-table tfoot td.feed-category-10x {
   width: 145px;
 }
 #widget-signin button {
-  display: none;
+	display: block;
+	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	border: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	color: #10133f;
+	float: none;
+	line-height: 35px;
+	margin: 15px auto;
+	font-weight: bold;
+	outline: none;
+	font-size: 13px;
+	text-align: center;
+	width:188px;
 }
+
+#widget-signin button:hover {
+	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
+	}
+#widget-signin button:active {
+	background: none;
+	background-color: #ffd000;
+	}
 #widget-signin a {
   font-weight: bold;
 }
@@ -3419,18 +3442,21 @@ table.feed-table tfoot td.feed-category-10x {
   margin: 5px 0 0;
 }
 #widget-signin .unlock {
-  background: #eeeeee;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
-  -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
-  box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
-  height: 35px;
-  margin-bottom: 15px;
-  overflow: hidden;
+  background: url(../img/BackgroundButton.png) left center no-repeat #ffdd00;
+border: 0;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+-ms-border-radius: 3px;
+-o-border-radius: 3px;
+border-radius: 3px;
+color: #10133f;
+float: none;
+line-height: 35px;
+margin: 15px auto;
+font-weight: bold;
+outline: none;
+font-size: 13px;
+text-align: center
 }
 #widget-signin .unlock .unlock-wrapper {
   height: 35px;
@@ -3578,7 +3604,8 @@ ul#certificates {
   width: auto !important;
 }
 ul#certificates li.certificate-item {
-  background: transparent url('../../img/latodo-app-core-sprite.png?v=1.1') no-repeat scroll 0 -170px;
+	display: none;
+	background: transparent url('../../img/latodo-app-core-sprite.png?v=1.1') no-repeat scroll 0 -170px;
   float: right;
   height: 40px;
   margin-left: 15px;
@@ -3587,7 +3614,8 @@ ul#certificates li.certificate-item {
   white-space: nowrap;
 }
 ul#certificates li.certificate-item.pci {
-  width: 82px;
+
+	width: 82px;
 }
 ul#certificates li.certificate-item.iso-9001 {
   background-position: -83px -170px;
@@ -3599,7 +3627,7 @@ ul#certificates li.certificate-item.norton-secured {
 }
 
 a#app-engine {
-  background: transparent url('../../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
+  background: transparent url('../../img/Logo.svg?v=1.1') scroll no-repeat;
   display: block;
   float: right;
   height: 25px;
@@ -5554,10 +5582,51 @@ body .ui-tooltip {
   top: 0;
 }
 
-.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix, #slideUnlock {
   display: none;
 }
 
-#login {
-  display: none;
+
+
+
+@font-face {
+  font-family: "prelo";
+  font-style: normal;
+	font-weight: 500;
+	src: url('../fonts/prelo-medium-webfont.eot');
+	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+				url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
+				url('../fonts/prelo-medium-webfont.woff') format('woff'),
+				url('../fonts/prelo-medium-webfont.ttf') format('truetype');
+}
+@font-face {
+  font-family: "prelo";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/prelo-semibold-webfont.eot');
+	src: url('../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/prelo-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/prelo-semibold-webfont.woff') format('woff'),
+			 url('../fonts/prelo-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 500;
+	src: url('../fonts/preloslab-book-webfont.eot');
+	src: url('../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/preloslab-book-webfont.woff2') format('woff2'),
+			 url('../fonts/preloslab-book-webfont.woff') format('woff'),
+			 url('../fonts/preloslab-book-webfont.ttf') format('truetype');
+}
+@font-face {
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/preloslab-semibold-webfont.eot');
+	src: url('../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
+			 url('../fonts/preloslab-semibold-webfont.woff') format('woff'),
+			 url('../fonts/preloslab-semibold-webfont.ttf') format('truetype');
 }
