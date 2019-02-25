@@ -53,14 +53,15 @@ $route['default_controller'] = 'users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['(:any)/home'] = 'users/index'; // Perú LATODO
-$route['(:any)/home'] = 'users/index'; // Ecuador pichincha
+$route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
+
 $route['users'] = 'users/index'; // Otros paises
-$route['users/recoveryPassword'] = 'users/recoveryPassword_pe'; // Perú LATODO
-$route['users/recoveryPassword'] = 'users/recoveryPassword_pi'; // Ecuador pichincha
+$route['users/recoveryPassword_pe'] = 'users/recoveryPassword'; // Perú LATODO
+$route['users/recoveryPassword_pi'] = 'users/recoveryPassword'; // Ecuador pichincha
 $route['users/recoveryPassword'] = 'users/recoveryPassword'; // Otros paises
-$route['users/obtenerlogin'] = 'users/obtenerlogin_pe'; // Perú LATODO
-$route['users/obtenerlogin'] = 'users/obtenerlogin'; // Otros paises
+$route['users/obtenerLogin_pe'] = 'users/obtenerLogin'; // Perú LATODO
+$route['users/obtenerLogin_pi'] = 'users/obtenerLogin'; // Ecuador pichincha
+$route['users/obtenerLogin'] = 'users/obtenerLogin'; // Otros paises
 $route['users/login'] = 'users/CallWsLogin';
 $route['users/error'] = 'users/error_gral';
 $route['users/resetpassword'] = 'users/CallWsResetPassword';
