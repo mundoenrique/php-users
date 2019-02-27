@@ -202,19 +202,19 @@ table {
 }
 
 ::selection {
-  background: #00ae29;
+  background:#033572;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 
 ::-moz-selection {
-  background: #00ae29;
+  background: #033572;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 
 ::-webkit-selection {
-  background: #00ae29;
+  background: #033572;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
@@ -229,8 +229,7 @@ html {
 }
 
 body {
-  background: white url('../../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
-  color: #555555;
+  background: white;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -525,14 +524,14 @@ h6 {
 }
 
 h1 {
-  color: #343735;
+  color: #033572;
   font-size: 30px;
   line-height: 60px;
   margin: 0;
 }
 
 h2 {
-  color: #00ae29;
+  color: #033572;
   font-size: 24px;
   line-height: 30px;
   margin: 0 0 10px;
@@ -585,7 +584,7 @@ span.lighten {
 }
 
 a {
-  color: #00ae29;
+  color: #033572;
   text-decoration: none;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -1402,7 +1401,7 @@ a.button {
   margin-left: 20px;
   padding: 0 14px;
   text-align: center;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
+
 }
 button:hover,
 a.button:hover {
@@ -1436,17 +1435,72 @@ a.button.disabled-button {
 button[type="reset"], button.reset-button,
 a.button[type="reset"],
 a.button.reset-button {
-  background: transparent;
-  border: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #888888;
+
+	background: white;
+  border: solid 1px #E5E5E5;
+
+  color: #033572;
   font-size: 15px;
   line-height: 40px;
-  padding: 0;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
+  padding: 0px,20px,0px,20px ;
+
 }
+
+button[type="reset"]:hover{
+	background-color:#f3f4f9;
+}
+
+button[type="reset"]:active{
+	background-color: #e8e9ef;
+}
+
+
+
+
+#btn-modificar,
+#btn-cambioC,
+#btn-new-mas,
+#btn-new-suc,
+#modif,
+#mostrarContact,
+#agregarContact,
+/* #sProducto, */
+#btn-modif-suc {
+  float: right !important;
+  background: white;
+  border: solid 1px #E5E5E5;
+  margin-top: 0px !important;
+  font-size: 14px;
+}
+
+#btn-modificar:hover,
+#btn-cambioC:hover,
+#btn-new-mas:hover,
+#btn-new-suc:hover,
+#modif:hover,
+#mostrarContact:hover,
+#agregarContact:hover,
+/* #sProducto:hover, */
+#btn-modif-suc:hover {
+  background-color: #f3f4f9;
+}
+
+#btn-modificar:active,
+#btn-cambioC:active,
+#btn-new-mas:active,
+#btn-new-suc:active,
+#modif:active,
+#mostrarContact:active,
+#agregarContact:active,
+/* #sProducto:active, */
+#btn-modif-suc:active {
+  background-color: #e8e9ef;
+}
+
+
+
+
+
 button[type="reset"][disabled], button[type="reset"].disabled-button:hover, button[type="reset"].disabled-button:focus,
 a[type="reset"].button[disabled]:hover,
 a[type="reset"].button[disabled]:focus,
@@ -1460,27 +1514,10 @@ a.button[type="reset"][disabled],
 a.button.reset-button[disabled] {
   color: #dddddd;
 }
-button[type="reset"]:hover, button[type="reset"]:focus, button.reset-button:hover, button.reset-button:focus,
-a.button[type="reset"]:hover,
-a.button[type="reset"]:focus,
-a.button.reset-button:hover,
-a.button.reset-button:focus {
-  color: #f04848;
-}
-button.alternate-button,
-a.button.alternate-button {
-  background: #343735;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555), color-stop(100%, #343735)), #343735;
-  background: -webkit-linear-gradient(#555, #343735), #343735;
-  background: -moz-linear-gradient(#555, #343735), #343735;
-  background: -o-linear-gradient(#555, #343735), #343735;
-  background: linear-gradient(#555, #343735), #343735;
-  border: 1px solid #343735;
-}
-button.alternate-button:hover,
-a.button.alternate-button:hover {
-  background: #343735;
-}
+
+
+
+
 button.alternate-button:focus,
 a.button.alternate-button:focus {
   background: #343735;
@@ -1601,15 +1638,7 @@ textarea:hover,
 select:hover {
   border: 1px solid #888888;
 }
-input:focus,
-textarea:focus,
-select:focus {
-  border: 1px solid #e2e100;
-  outline: 0;
-  -webkit-box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-  -moz-box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-  box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-}
+
 input[disabled],
 textarea[disabled],
 select[disabled] {
@@ -1952,7 +1981,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 }
 
 #head {
-  background: #343735;
+  background: #ffdd00;
   -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
   -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
   box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
@@ -1963,12 +1992,28 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   z-index: 9;
 }
 
+.triangulo-pichincha {
+  position:absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 280px solid transparent;
+  border-bottom: 300px solid transparent;
+  border-right: 413px solid #F3F4F8;
+  border-top: 190px solid #F3F4F8;
+  z-index: -1;
+}
+
 #head-wrapper {
-  height: 60px;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0 10px;
-  width: 940px;
+	background:  transparent url('../../img/BP Personas azul.svg?v=1.1') scroll no-repeat 0px 2px;;
+	height: 29px;
+	margin: 12px auto;
+	overflow: hidden;
+	width: 940px;
+
+
+
 }
 
 #brand-id,
@@ -3250,6 +3295,7 @@ ul#networks li.network-item.visa-electron {
 }
 
 ul#certificates {
+	display: none;
   float: right;
   height: 40px;
   margin: 0 0 10px;
@@ -3278,7 +3324,7 @@ ul#certificates li.certificate-item.norton-secured {
 }
 
 a#app-engine {
-  background: transparent url('../../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
+	background: transparent url('../../img/Logo.svg?v=1.1') scroll no-repeat;
   display: block;
   float: right;
   height: 25px;
@@ -5281,3 +5327,31 @@ body .ui-tooltip {
 .ui-slider-vertical .ui-slider-range-max {
   top: 0;
 }
+
+
+
+#validar {
+  float: right !important;
+  background: white;
+	border: solid 1px #FFDD00;
+  margin-top: 0px !important;
+	font-size: 14px;
+	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	color: #10133f;
+
+
+}
+
+#validar:hover {
+	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
+	}
+#validar:active {
+	background: none;
+	background-color: #ffd000;
+	}
+
+

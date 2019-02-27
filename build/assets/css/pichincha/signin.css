@@ -202,19 +202,19 @@ table {
 }
 
 ::selection {
-  background: #00ae29;
+  background: #033572;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 
 ::-moz-selection {
-  background: #00ae29;
+  background: #033572;;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 
 ::-webkit-selection {
-  background: #00ae29;
+  background: #033572;;
   color: white;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
@@ -525,14 +525,14 @@ h6 {
 }
 
 h1 {
-  color: #343735;
+  color: #033572;
   font-size: 30px;
   line-height: 60px;
   margin: 0;
 }
 
 h2 {
-  color: #00ae29;
+  color: #033572;
   font-size: 24px;
   line-height: 30px;
   margin: 0 0 10px;
@@ -1379,22 +1379,21 @@ a.button {
 
 button,
 a.button {
-  background: #00ae29;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e2e100), color-stop(100%, #00ae29)), #00ae29;
-  background: -webkit-linear-gradient(#e2e100, #00ae29), #00ae29;
-  background: -moz-linear-gradient(#e2e100, #00ae29), #00ae29;
-  background: -o-linear-gradient(#e2e100, #00ae29), #00ae29;
-  background: linear-gradient(#e2e100, #00ae29), #00ae29;
-  border: 1px solid #00ae29;
+  background: white;
+  border: 1px solid #ffdd00;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.15) 0 2px 0;
-  -moz-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.15) 0 2px 0;
-  box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.15) 0 2px 0;
-  color: white;
+	border-radius: 4px;
+
+	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	color: #10133f;
+
   float: right;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 17px;
@@ -1402,15 +1401,14 @@ a.button {
   margin-left: 20px;
   padding: 0 14px;
   text-align: center;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 button:hover,
 a.button:hover {
-  background: #00ae29;
+	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
 }
-button:focus,
-a.button:focus {
-  background: #00ae29;
+button:active,
+a.button:active {
+  background-color: #ffd000;
 }
 button[disabled], button[disabled]:hover, button[disabled]:focus, button.disabled-button:hover, button.disabled-button:focus,
 a.button[disabled]:hover,
@@ -1436,37 +1434,23 @@ a.button.disabled-button {
 button[type="reset"], button.reset-button,
 a.button[type="reset"],
 a.button.reset-button {
-  background: transparent;
-  border: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  color: #888888;
+	background: white;
+  border: solid 1px #E5E5E5;
+
+  color: #033572;
   font-size: 15px;
   line-height: 40px;
-  padding: 0;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
+  padding: 0px,20px,0px,20px ;
 }
-button[type="reset"][disabled], button[type="reset"].disabled-button:hover, button[type="reset"].disabled-button:focus,
-a[type="reset"].button[disabled]:hover,
-a[type="reset"].button[disabled]:focus,
-a[type="reset"].button.disabled-button:hover,
-a[type="reset"].button.disabled-button:focus, button.reset-button[disabled], button.reset-button.disabled-button:hover, button.reset-button.disabled-button:focus,
-a.reset-button.button[disabled]:hover,
-a.reset-button.button[disabled]:focus,
-a.reset-button.button.disabled-button:hover,
-a.reset-button.button.disabled-button:focus,
-a.button[type="reset"][disabled],
-a.button.reset-button[disabled] {
-  color: #dddddd;
+
+button[type="reset"]:hover {
+	background-color:#f3f4f9;
 }
-button[type="reset"]:hover, button[type="reset"]:focus, button.reset-button:hover, button.reset-button:focus,
-a.button[type="reset"]:hover,
-a.button[type="reset"]:focus,
-a.button.reset-button:hover,
-a.button.reset-button:focus {
-  color: #f04848;
+
+button[type="reset"]:active {
+	background-color:#e8e9ef;
 }
+
 button.alternate-button,
 a.button.alternate-button {
   background: #343735;
@@ -1597,15 +1581,7 @@ textarea:hover,
 select:hover {
   border: 1px solid #888888;
 }
-input:focus,
-textarea:focus,
-select:focus {
-  border: 1px solid #e2e100;
-  outline: 0;
-  -webkit-box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-  -moz-box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-  box-shadow: 0 0 2px rgba(226, 225, 0, 0.85);
-}
+
 input[disabled],
 textarea[disabled],
 select[disabled] {
@@ -3188,7 +3164,7 @@ table.feed-table tfoot td.feed-category-10x {
   -o-border-radius: 2px;
   border-radius: 2px;
   clear: both;
-  color: #033572;
+  color: gray;
   display: none;
   float: left;
   margin: 40px 0 350px;
@@ -3196,6 +3172,11 @@ table.feed-table tfoot td.feed-category-10x {
   overflow: hidden;
   padding: 10px 15px;
 }
+
+p.slide-title{
+	color: #033572;
+}
+
 #slideshow ul.slides li.slide.current-slide {
   display: block;
 }
@@ -5587,46 +5568,37 @@ body .ui-tooltip {
 }
 
 
-
-
-@font-face {
-  font-family: "prelo";
-  font-style: normal;
-	font-weight: 500;
-	src: url('../fonts/prelo-medium-webfont.eot');
-	src: url('../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../fonts/prelo-medium-webfont.woff2') format('woff2'),
-				url('../fonts/prelo-medium-webfont.woff') format('woff'),
-				url('../fonts/prelo-medium-webfont.ttf') format('truetype');
-}
-@font-face {
-  font-family: "prelo";
-  font-style: normal;
-	font-weight: 700;
-	src: url('../fonts/prelo-semibold-webfont.eot');
-	src: url('../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/prelo-semibold-webfont.woff2') format('woff2'),
-			 url('../fonts/prelo-semibold-webfont.woff') format('woff'),
-			 url('../fonts/prelo-semibold-webfont.ttf') format('truetype');
+#continuar {
+  float: right !important;
+  background: white;
+	border: solid 1px #FFDD00;
+  margin-top: 0px !important;
+	font-size: 14px;
+	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	color: #10133f;
 }
 
-@font-face {
-  font-family: "preloslap";
-  font-style: normal;
-	font-weight: 500;
-	src: url('../fonts/preloslab-book-webfont.eot');
-	src: url('../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/preloslab-book-webfont.woff2') format('woff2'),
-			 url('../fonts/preloslab-book-webfont.woff') format('woff'),
-			 url('../fonts/preloslab-book-webfont.ttf') format('truetype');
-}
-@font-face {
-  font-family: "preloslap";
-  font-style: normal;
-	font-weight: 700;
-	src: url('../fonts/preloslab-semibold-webfont.eot');
-	src: url('../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
-			 url('../fonts/preloslab-semibold-webfont.woff') format('woff'),
-			 url('../fonts/preloslab-semibold-webfont.ttf') format('truetype');
-}
+#continuar:hover {
+	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
+	}
+#continuar:active {
+	background: none;
+	background-color: #ffd000;
+	}
+
+	.triangulo-pichincha {
+		position:absolute;
+		top: 0;
+		right: 0;
+		width: 0;
+		height: 0;
+		border-left: 280px solid transparent;
+		border-bottom: 300px solid transparent;
+		border-right: 413px solid #F3F4F8;
+		border-top: 190px solid #F3F4F8;
+		z-index: -1;
+	}
