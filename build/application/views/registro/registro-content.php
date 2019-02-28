@@ -2,10 +2,10 @@
 $pais = $this->session->userdata('pais');
 
 $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-if($skin == 'latodo'){
-    $homeLink = $this->config->item('base_url') . '/latodo/home';
-}else{
-    $homeLink = $this->config->item('base_url');
+switch($skin){
+	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
+	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;
+	default: $homeLink = $this->config->item('base_url'); break;
 }
 ?>
 <div id="content">
