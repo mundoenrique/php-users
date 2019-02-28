@@ -457,27 +457,20 @@ class Users extends CI_Controller {
 
 	public function closeSess(){
 
+		$valorCookie=$this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 		$this->load->model('users_model','logout');
 		$this->output->set_content_type('application/json')->set_output($this->logout->logout());
 
 		$this->session->unset_userdata($this->session->all_userdata());
 		$this->session->sess_destroy();
-
-		redirect($this->config->item('base_url'));
-
-	}
-
-	public function closeSess_pe(){
-
-		$this->load->model('users_model','logout');
-		$this->output->set_content_type('application/json')->set_output($this->logout->logout());
-
-		$this->session->unset_userdata($this->session->all_userdata());
-		$this->session->sess_destroy();
-
-		redirect($this->config->item('base_url') . '/latodo/home/');
+		switch($valorCookie){
+			case 'pichincha': redirect($this->config->item('base_url') . '/pichincha/home/'); break;
+			case 'latodo': redirect($this->config->item('base_url') . '/latodo/home/'); break;
+		  default: redirect($this->config->item('base_url')); break;
+		}
 
 	}
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }		//FIN GENERAL

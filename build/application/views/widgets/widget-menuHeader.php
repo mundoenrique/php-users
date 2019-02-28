@@ -78,12 +78,7 @@ if(isset($pagina) ){
 
 }
 
-$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-if($skin == 'latodo'){
-	$closeLink = $this->config->item('base_url') . '/users/closeSess_pe';
-}else{
-	$closeLink = $this->config->item('base_url') . '/users/closeSess';
-}
+$closeLink = $this->config->item('base_url') . '/users/closeSess';
 
 
 $fullname = ucwords($this->session->userdata('nombreCompleto'));
