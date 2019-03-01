@@ -39,8 +39,8 @@ class Affiliation_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "RESPONSE afiliacion P2P : ".json_encode($desdata));
 
 		//simulación respuesta del servicio
@@ -82,9 +82,9 @@ class Affiliation_model extends CI_Model {
 		log_message("info","JSON afiliacion P2T-C   todo".$data);
 		log_message("info","JSON afiliacion P2T-C encriptado ".$dataEncry);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
+		$data = json_decode($response);
 		log_message("info","RESPONSE ENCRIPTADO afiliacion P2T-C ----->>>>".json_encode($data));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info","JSON afiliacion P2T-C response----->>>>".json_encode($desdata));
 		//simulación respuesta del servicio
 		//$desdata = json_decode('{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}');
@@ -112,8 +112,8 @@ class Affiliation_model extends CI_Model {
 		log_message("info","JSON tarjeta P2T-C   todo".$data);
 		log_message("info","JSON tarjeta P2T-C encriptado ".$dataEncry);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info","JSON tarjeta P2T-C response ".$response);
 		//simulación respuesta del servicio
 		//$desdata = json_decode('{"rc":0,"msg":"Error cuenta destino ya esta afiliada"}');
@@ -141,8 +141,8 @@ class Affiliation_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 		return json_encode($desdata);
 	}
@@ -167,8 +167,8 @@ class Affiliation_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 		log_message('INFO', 'RESPONSE LISTA DE TARJETAS ORIGEN=====>>>>>'.json_encode($desdata));
 
