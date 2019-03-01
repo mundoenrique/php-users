@@ -186,13 +186,46 @@ table {
 }
 
 @font-face {
-  font-family: "Source Sans Pro";
-  src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix');
-  src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+  font-family: "prelo";
   font-style: normal;
-  font-weight: normal;
+	font-weight: 500;
+	src: url('../../fonts/prelo-medium-webfont.eot');
+	src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+				url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
+				url('../../fonts/prelo-medium-webfont.woff') format('woff'),
+				url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
+}
+@font-face {
+  font-family: "prelo";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/prelo-semibold-webfont.eot');
+	src: url('../../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../../fonts/prelo-semibold-webfont.woff2') format('woff2'),
+			 url('../../fonts/prelo-semibold-webfont.woff') format('woff'),
+			 url('../../fonts/prelo-semibold-webfont.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 500;
+	src: url('../../fonts/preloslab-book-webfont.eot');
+	src: url('../../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../../fonts/preloslab-book-webfont.woff2') format('woff2'),
+			 url('../../fonts/preloslab-book-webfont.woff') format('woff'),
+			 url('../../fonts/preloslab-book-webfont.ttf') format('truetype');
+}
+@font-face {
+  font-family: "preloslap";
+  font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/preloslab-semibold-webfont.eot');
+	src: url('../../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
+			 url('../../fonts/preloslab-semibold-webfont.woff') format('woff'),
+			 url('../../fonts/preloslab-semibold-webfont.ttf') format('truetype');
+}
 @font-face {
   font-family: "NovoPayment Glyphs";
   src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
@@ -220,7 +253,7 @@ table {
 }
 
 html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: normal;
@@ -519,7 +552,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
 }
@@ -745,7 +778,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 18px;
   margin: 0 0 20px;
   overflow: hidden;
@@ -755,7 +788,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .alert-error p,
 .alert-success p,
 .alert-info p {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   margin: 5px 0 0;
 }
@@ -1396,7 +1429,7 @@ a.button {
   box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.15) 0 2px 0;
   color: white;
   float: right;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 17px;
   line-height: 38px;
   margin-left: 20px;
@@ -1512,7 +1545,7 @@ a.button.product-button span[class*=" icon-"] {
 label {
   color: #333333;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 25px;
   margin-bottom: 5px;
@@ -1524,7 +1557,7 @@ label[for] {
 label.label-inline {
   color: #555555;
   display: inline-block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 35px;
   margin: 0 30px 10px 0;
@@ -1551,7 +1584,7 @@ label span[class^="icon-"], label span[class*=" icon-"] {
 }
 label span.field-instruction {
   color: #bbbbbb;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   padding-left: 5px;
 }
@@ -1586,7 +1619,7 @@ select {
   -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
   box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
   color: #888888;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: normal;
@@ -1855,7 +1888,7 @@ ul.field-category-actions li.disabled-group-action-item a:hover {
 }
 .form-actions p {
   color: #888888;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 40px;
   margin: 0 15px 0 0;
@@ -2010,7 +2043,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 #main-menu ul.menu li.menu-item a {
   color: #f9f86a;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 60px;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
@@ -2246,7 +2279,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 }
 
 .product-cardholder {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 25px;
   margin: 5px 0 0;
@@ -2256,14 +2289,14 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
 span.product-cardholder-id {
   color: #888888;
   display: inline-block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   margin-left: 20px;
 }
 
 .product-cardnumber {
   color: #00ae29;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 25px;
   margin: 0;
@@ -2301,7 +2334,7 @@ ul.product-balance-group li {
 ul.product-balance-group li span.product-balance {
   color: #555555;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 25px;
 }
@@ -2382,7 +2415,7 @@ ul.group-actions li.disabled-group-action-item a:hover {
   border-top: 2px solid #eeeeee;
   color: #888888;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 48px;
   padding: 0 25px;
@@ -2431,7 +2464,7 @@ ul.group-actions li.disabled-group-action-item a:hover {
 #secondary-menu ul.menu li.menu-item a {
   color: #f9f86a;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 45px;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
@@ -2464,7 +2497,7 @@ ul.group-actions li.disabled-group-action-item a:hover {
 }
 #progress ul.steps li.step-item {
   color: #bbbbbb;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 13px;
   float: left;
   list-style: none;
@@ -2594,7 +2627,7 @@ ul.group-actions li.disabled-group-action-item a:hover {
 }
 #filters-stack .stack-form label {
   color: #888888;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 30px;
   margin: 0 7px 0 10px;
@@ -2742,7 +2775,7 @@ ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-i
   -o-border-radius: 3px;
   border-radius: 3px;
   color: white;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   font-size: 10px;
   padding: 3px 5px;
   vertical-align: baseline;
@@ -2791,7 +2824,7 @@ ul#dashboard-donor li.dashboard-item .dashboard-item-box .dashboard-item-cardhol
 ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-cardholder,
 ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-cardholder {
   color: #555555;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 14px;
   text-transform: capitalize;
 }
@@ -2809,7 +2842,7 @@ ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-balance,
 ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-balance {
   color: #555555;
   float: right;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 13px;
 }
 ul#dashboard li.dashboard-item a .dashboard-item-category, ul#dashboard li.dashboard-item .dashboard-item-box .dashboard-item-category,
@@ -2967,7 +3000,7 @@ ul.feed li.feed-item .feed-date {
   border-right: 1px solid #dddddd;
   color: #888888;
   float: left;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 20px;
   height: 50px;
   line-height: 20px;
@@ -2980,7 +3013,7 @@ ul.feed li.feed-item .feed-date {
 ul.feed li.feed-item span.feed-date-month,
 ul.feed li.feed-item span.feed-date-year {
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "prelo", Helvetica, Arial, sans-serif;
   line-height: 15px;
 }
 ul.feed li.feed-item span.feed-date-month {
@@ -3062,7 +3095,7 @@ table.feed-table th span[class^="icon-"], table.feed-table th span[class*=" icon
   font-size: 26px;
 }
 table.feed-table th.feed-headline {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: normal;
@@ -3276,7 +3309,7 @@ table.feed-table tfoot td.feed-category-10x {
   margin: 0;
 }
 #widget-account .user-fullname {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: normal;
   line-height: 20px;
@@ -3340,7 +3373,7 @@ table.feed-table tfoot td.feed-category-10x {
   z-index: 1;
 }
 #widget-ads .widget-section a.ads-action .ads-info p.ads-title {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
   margin: 0 0 50px;
