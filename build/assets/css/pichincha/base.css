@@ -385,11 +385,11 @@
 	 background: #333333;
  }
  ul.stack li.stack-item.current-stack-item {
-	 background: #00ae29;
+	 background: #033572;
 	 border-left: 1px solid white;
-	 -webkit-box-shadow: inset 1px 0 0 #00ae29;
-	 -moz-box-shadow: inset 1px 0 0 #00ae29;
-	 box-shadow: inset 1px 0 0 #00ae29;
+	 -webkit-box-shadow: inset 1px 0 0 #033572;
+	 -moz-box-shadow: inset 1px 0 0 #033572;
+	 box-shadow: inset 1px 0 0 #033572;
  }
  ul.stack li.stack-item.current-stack-item a {
 	 color: white;
@@ -397,7 +397,7 @@
  }
  ul.stack li.stack-item.current-stack-item a span.badge {
 	 background: white;
-	 color: #00ae29;
+	 color: #033572;
  }
  ul.stack li.stack-item:first-child {
 	 border: 0;
@@ -1159,21 +1159,21 @@
 
  button.alternate-button,
  a.button.alternate-button {
-	 background: #343735;
-	 background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #555), color-stop(100%, #343735)), #343735;
-	 background: -webkit-linear-gradient(#555, #343735), #343735;
-	 background: -moz-linear-gradient(#555, #343735), #343735;
-	 background: -o-linear-gradient(#555, #343735), #343735;
-	 background: linear-gradient(#555, #343735), #343735;
-	 border: 1px solid #343735;
+	background: white;
+	border: solid 1px #E5E5E5;
+
+	color: #033572;
+	font-size: 15px;
+	line-height: 40px;
+	padding: 0px,20px,0px,20px ;
  }
  button.alternate-button:hover,
  a.button.alternate-button:hover {
-	 background: #343735;
+	background-color:#f3f4f9;
  }
- button.alternate-button:focus,
- a.button.alternate-button:focus {
-	 background: #343735;
+ button.alternate-button:active,
+ a.button.alternate-button:active {
+	background-color:#e8e9ef;
  }
  button.small-button,
  a.button.small-button {
@@ -1631,134 +1631,136 @@
  }
 
  #head {
-	 background: #ffdd00;
-	 -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
-	 -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
-	 box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
-	 height: 60px;
-	 position: fixed;
-	 top: 0;
-	 width: 100%;
-	 z-index: 9;
- }
+  background: #ffd000;
+  -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
+  -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
+  box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}
 
- #head-wrapper {
-	 background:  transparent url('../../img/BP Personas azul.svg?v=1.1') scroll no-repeat 0px 2px;;
-	 height: 29px;
-	 margin: 12px auto;
-	 overflow: hidden;
-	 width: 940px;
- }
+#head-wrapper {
+  height: 60px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 10px;
+  width: 940px;
+}
 
- #brand-id,
- #brand-app {
-	 background: transparent url('../../img/latodo-app-core-sprite.png?v=1.1') no-repeat scroll;
-	 float: left;
- }
+#brand-id,
+#brand-app {
+  background: transparent url('../../img/BP Personas azul.svg?v=1.1') no-repeat scroll;
+  float: left;
+}
 
- #brand-id {
-	 background-position: 0 0;
-	 display: block;
-	 height: 60px;
-	 margin-right: 20px;
-	 overflow: hidden;
-	 text-indent: 100%;
-	 white-space: nowrap;
-	 width: 180px;
- }
+#brand-id {
+	background-position: 0 12px;
+	/* display: block; */
+	height: 60px;
+	/* margin-right: 20px; */
+	overflow: hidden;
+	/* text-indent: 100%; */
+	/* white-space: nowrap; */
+	width: 400px;
+}
+.transfers,.payments{
+display: none;
+}
+#brand-app {
+  background-position: 0 -60px;
+  display: none;
+  height: 40px;
+  margin: 10px 0;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  width: 150px;
+}
 
- #brand-app {
-	 background-position: 0 -60px;
-	 display: none;
-	 height: 40px;
-	 margin: 10px 0;
-	 overflow: hidden;
-	 text-indent: 100%;
-	 white-space: nowrap;
-	 width: 150px;
- }
+#main-menu,
+#compact-menu {
+  float: right;
+  width: auto !important;
+}
+#main-menu ul.menu {
+  height: 60px;
+}
+#main-menu ul.menu li.menu-item {
+  height: 60px;
+  padding-left: 30px;
+}
+#main-menu ul.menu li.menu-item a {
+  color: #f9f86a;
+  display: block;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 60px;
+  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
+}
+#main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
+  margin: -2px 0 0 3px;
+}
+#main-menu ul.menu li.menu-item a:hover, #main-menu ul.menu li.menu-item.current-menu-item a {
+  color: #fff;
+}
+#main-menu ul.menu li.menu-item ul.sub-menu {
+  background: #343735;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
+  -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
+  box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
+  display: none;
+  margin-top: -10px;
+  position: absolute;
+  z-index: 3;
+}
+#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item {
+  padding: 0;
+}
+#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a {
+  color: #f9f86a;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 30px;
+  padding: 0 10px;
+}
+#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover, #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item.current-sub-menu-item a {
+  color: #fff;
+}
 
- #main-menu,
- #compact-menu {
-	 float: right;
-	 width: auto !important;
- }
- #main-menu ul.menu {
-	 height: 60px;
- }
- #main-menu ul.menu li.menu-item {
-	 height: 60px;
-	 padding-left: 30px;
- }
- #main-menu ul.menu li.menu-item a {
-	 color: #f9f86a;
-	 display: block;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
-	 font-size: 15px;
-	 line-height: 60px;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
- }
- #main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
-	 margin: -2px 0 0 3px;
- }
- #main-menu ul.menu li.menu-item a:hover, #main-menu ul.menu li.menu-item.current-menu-item a {
-	 color: #fff;
- }
- #main-menu ul.menu li.menu-item ul.sub-menu {
-	 background: #343735;
-	 -webkit-border-radius: 4px;
-	 -moz-border-radius: 4px;
-	 -ms-border-radius: 4px;
-	 -o-border-radius: 4px;
-	 border-radius: 4px;
-	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 display: none;
-	 margin-top: -10px;
-	 position: absolute;
-	 z-index: 3;
- }
- #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item {
-	 padding: 0;
- }
- #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a {
-	 color: #f9f86a;
-	 font-size: 13px;
-	 font-weight: normal;
-	 line-height: 30px;
-	 padding: 0 10px;
- }
- #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover, #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item.current-sub-menu-item a {
-	 color: #fff;
- }
+#compact-menu {
+  display: none;
+  padding: 15px 0;
+}
+#compact-menu ul.menu,
+#compact-menu ul.menu li.menu-item {
+  height: 30px;
+}
+#compact-menu ul.menu li.menu-item a {
+  color: #f9f86a;
+  display: block;
+  font-size: 15px;
+  line-height: 30px;
+  padding: 0 5px;
+  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
+}
+#compact-menu ul.menu li.menu-item a:hover {
+  color: #fff;
+}
 
- #compact-menu {
-	 display: none;
-	 padding: 15px 0;
- }
- #compact-menu ul.menu,
- #compact-menu ul.menu li.menu-item {
-	 height: 30px;
- }
- #compact-menu ul.menu li.menu-item a {
-	 color: #f9f86a;
-	 display: block;
-	 font-size: 15px;
-	 line-height: 30px;
-	 padding: 0 5px;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
- }
- #compact-menu ul.menu li.menu-item a:hover {
-	 color: #fff;
- }
-
- #wrapper {
-	 margin: 0 auto;
-	 overflow: hidden;
-	 padding: 100px 0 20px;
-	 width: 960px;
- }
+#wrapper {
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 100px 0 20px;
+  width: 960px;
+}
 
  #content {
 	 padding: 0 10px;
@@ -1945,7 +1947,7 @@
  }
 
  .product-cardnumber {
-	 color: #00ae29;
+	 color: #033572;
 	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
 	 font-size: 16px;
 	 line-height: 25px;
@@ -2483,7 +2485,7 @@
  ul#dashboard-donor li.dashboard-item .dashboard-item-box .dashboard-item-cardnumber,
  ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-cardnumber,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-cardnumber {
-	 color: #00ae29;
+	 color: #033572;
  }
  ul#dashboard li.dashboard-item a .dashboard-item-balance, ul#dashboard li.dashboard-item .dashboard-item-box .dashboard-item-balance,
  ul#dashboard-donor li.dashboard-item a .dashboard-item-balance,
@@ -2523,7 +2525,7 @@
  ul#dashboard-donor li.dashboard-item .dashboard-item-box:hover .dashboard-item-info,
  ul#dashboard-beneficiary li.dashboard-item a:hover .dashboard-item-info,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box:hover .dashboard-item-info {
-	 border-bottom-color: #00ae29;
+	 border-bottom-color: #033572;
 	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
 	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
 	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
@@ -2957,12 +2959,7 @@
  }
 
  #widget-account .widget-header {
-	 background: #00ae29;
-	 background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e2e100), color-stop(100%, #00ae29)), #00ae29;
-	 background: -webkit-linear-gradient(#e2e100, #00ae29), #00ae29;
-	 background: -moz-linear-gradient(#e2e100, #00ae29), #00ae29;
-	 background: -o-linear-gradient(#e2e100, #00ae29), #00ae29;
-	 background: linear-gradient(#e2e100, #00ae29), #00ae29;
+	 background: #033572;
 	 -webkit-border-radius: 3px 3px 0 0;
 	 -moz-border-radius: 3px 3px 0 0;
 	 -ms-border-radius: 3px 3px 0 0;
@@ -2980,7 +2977,7 @@
 	 padding: 30px 15px 15px;
  }
  #widget-account a.user-avatar {
-	 background: #00ae29;
+	 background: #033572;
 	 border: 3px solid white;
 	 -webkit-border-radius: 100%;
 	 -moz-border-radius: 100%;
@@ -3000,8 +2997,8 @@
  }
  #widget-account a.user-avatar:hover {
 	 background: white;
-	 border-color: #00ae29;
-	 color: #00ae29;
+	 border-color: #033572;
+	 color: #033572;
  }
  #widget-account a.user-avatar span[class^="icon-"], #widget-account a.user-avatar span[class*=" icon-"] {
 	 font-size: 20px;
@@ -5312,7 +5309,7 @@
 	background: none;
 	background-color: #ffd000;
 	}
-	
+
  @font-face {
 	 font-family: "NovoPayment Glyphs";
 	 src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
