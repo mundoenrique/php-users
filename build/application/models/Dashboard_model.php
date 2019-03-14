@@ -34,8 +34,8 @@ class Dashboard_model extends CI_Model {
 
 		log_message('info', 'Salida dashboard response: ' . $response);
 
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data, 1)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1));
 
 		$salida = json_encode($desdata);
 		log_message('info', 'Salida dashboard desencriptado: ' . $salida);
