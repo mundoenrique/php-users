@@ -64,8 +64,8 @@ class Service_model extends CI_Model {
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-        $data = json_decode(utf8_encode($response));
-        $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+        $data = json_decode($response);
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
@@ -80,7 +80,7 @@ class Service_model extends CI_Model {
 
 										//para operaciones con costo, muestra el saldo actual
 										$saldo = "";
-										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										$desdatacosto = json_decode($desdata->bean);
 										if(isset($desdatacosto->disponible))
 										{
 											$saldo = ". Su saldo actual es ".lang('MONEDA').$desdatacosto->disponible;
@@ -147,14 +147,14 @@ class Service_model extends CI_Model {
                     ];
                     break;
                 case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
-										$desdatacosto = json_decode(utf8_encode($desdata->bean));
+										$desdatacosto = json_decode($desdata->bean);
 										$cost_repos_plas = (isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '') ? $desdatacosto->cost_repos_plas : NULL;
                     $response = $this->callWsGetToken($cost_repos_plas);
                     break;
 
 								case -382: //Reposición con costo sin token
 
-									$desdatacosto = json_decode(utf8_encode($desdata->bean));
+									$desdatacosto = json_decode($desdata->bean);
 									if((isset($desdatacosto->cost_repos_plas) && $desdatacosto->cost_repos_plas != '')) {
 
 										$cost_repos_plas = $desdatacosto->cost_repos_plas;
@@ -279,8 +279,8 @@ class Service_model extends CI_Model {
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-        $data = json_decode(utf8_encode($response));
-        $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+        $data = json_decode($response);
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
         log_message("info", "RESPONSE Cambio de PIN=====>>>>> ".json_encode($desdata));
 
@@ -418,8 +418,8 @@ class Service_model extends CI_Model {
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-        $data = json_decode(utf8_encode($response));
-        $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+        $data = json_decode($response);
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
@@ -532,8 +532,8 @@ class Service_model extends CI_Model {
         $dataEncry = np_Hoplite_Encryption($data,1);
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-        $data = json_decode(utf8_encode($response));
-        $desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+        $data = json_decode($response);
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 

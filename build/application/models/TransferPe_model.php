@@ -37,8 +37,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+			$data = json_decode($response);
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 			$salida = json_encode($desdata);
 			log_message("info", "Response ctasOrigen_load: ".$salida);
 
@@ -70,8 +70,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+			$data = json_decode($response);
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 			$salida = json_encode($desdata);
 			log_message("info", "Response accountPhone: ".$salida);
 
@@ -119,8 +119,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+			$data = json_decode($response);
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 			$salida = json_encode($desdata);
 			log_message("info", "Response baseAmount: ".$salida);
 
@@ -184,8 +184,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+			$data = json_decode($response);
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 			$salida = json_encode($desdata);
 			log_message("info", "Response setAmount: ".$salida);
 
@@ -261,8 +261,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1);
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-			$data = json_decode(utf8_encode($response));
-			$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+			$data = json_decode($response);
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 			$salida = json_encode($desdata);
 			log_message("info", "Response historial_loadPe".$salida);
 
@@ -331,8 +331,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$dataEncry = np_Hoplite_Encryption($data,1);
 				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-				$data = json_decode(utf8_encode($response));
-				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+				$data = json_decode($response);
+				$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 				$salida = json_encode($desdata);
 				log_message("info", "Response makeTransferPe: ".$salida);
 
@@ -433,8 +433,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 				log_message("info", "Salida encriptada make transfer pin: ".$data);
 				$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-				$data = json_decode(utf8_encode($response));
-				$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+				$data = json_decode($response);
+				$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 				$salida = json_encode($desdata);
 				log_message("info", "Response makeTransferPinPe: ".$salida);

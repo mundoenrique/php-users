@@ -35,8 +35,8 @@ class Registro_model extends CI_Model {
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> 'CPONLINE'));
 
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  $data		= json_decode(utf8_encode($response));
-	  $desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
+	  $data		= json_decode($response);
+	  $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0));
 
 		log_message("info", "Response lista_paises: ".json_encode($desdata));
 
@@ -72,8 +72,8 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,0);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId' => 'CPONLINE'));
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data		= json_decode(utf8_encode($response));
-		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
+		$data		= json_decode($response);
+		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0));
 
 		log_message("info", "Response lista_departamentos: ".json_encode($desdata));
 
@@ -108,8 +108,8 @@ class Registro_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> "CPONLINE"));
 		//log_message("info", "Salida encriptada lista_profesiones : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data = json_decode(utf8_encode($response));
-		$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,0));
 
 		log_message("info", "Response lista_profesiones: ".json_encode($desdata));
 
@@ -142,8 +142,8 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,0);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> 'CPONLINE'));
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data		= json_decode(utf8_encode($response));
-  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,0)));
+		$data		= json_decode($response);
+  	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0));
   	$salida		= json_encode($desdata);
   	log_message("info", "Response validar_cuenta: ".$salida);
 
@@ -224,8 +224,8 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,1);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data		= json_decode(utf8_encode($response));
-  	$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data		= json_decode($response);
+  	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "Response validar_usuario: ".json_encode($desdata));
 
 	  	return json_encode($desdata);
@@ -401,8 +401,8 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,1);
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data		= json_decode(utf8_encode($response));
-		$desdata	= json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data		= json_decode($response);
+		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1));
 
 		log_message("info", "Response registrar_usuario: ".json_encode($desdata));
 
@@ -568,8 +568,8 @@ class Registro_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data = json_decode(utf8_encode($response));
-  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data = json_decode($response);
+  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "Response lista_telefonos : ".json_encode($desdata));
 
 	  	return json_encode($desdata);
@@ -597,8 +597,8 @@ class Registro_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada lista_identificadores : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data = json_decode(utf8_encode($response));
-  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+  	$data = json_decode($response);
+  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "Response lista_telefonos: ".json_encode($desdata));
 
 	  	return json_encode($desdata);
