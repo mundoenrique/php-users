@@ -37,8 +37,8 @@ class Report_model extends CI_Model {
 		log_message("info", "SALIDA ENCRIPTADA REPORTE : ".$data);
 
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode(utf8_encode($response));
-	  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+	  	$data = json_decode($response);
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 	  	$salida = json_encode($desdata);
 
@@ -75,8 +75,8 @@ log_message("info", "Salida  exp_xls : ".$data);
 	 	$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 	 	log_message("info", "Salida encriptada exp_xls : ".$data);
 	 	$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	   	$data = json_decode(utf8_encode($response));
-	   	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+	   	$data = json_decode($response);
+	   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
    		$salida = json_encode($desdata);
 
@@ -109,8 +109,8 @@ log_message("info", "Salida  exp_pdf : ".$data);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada exp_pdf : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode(utf8_encode($response));
-	  	$desdata = json_decode(utf8_encode(np_Hoplite_Decrypt($data->data,1)));
+	  	$data = json_decode($response);
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 	  	$salida = json_encode($desdata);
 
