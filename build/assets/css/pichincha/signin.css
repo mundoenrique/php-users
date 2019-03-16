@@ -1,20 +1,9 @@
 @charset "UTF-8";
 @import 'base.css';
-/**
- * Sign In stylesheet.
- *
- * @project Conexión Personas Online - Latodo skin
- * @version 1.0 (Poseidon)
- * @author Miguel Palazzo mpalazzo@novopayment.com
- * @copyright 2013-2015 NovoPayment, Inc.
- */
-
-
 
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix, #slideUnlock {
   display: none;
 }
-
 
 #continuar {
   float: right !important;
@@ -22,7 +11,7 @@
 	border: solid 1px #FFDD00;
   margin-top: 0px !important;
 	font-size: 14px;
-	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	background: #fd0 url('../../img/button-bg.png?rev20190316') left center no-repeat;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -32,10 +21,10 @@
 }
 
 #continuar:hover {
-	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
-	}
+	background: #fd0 url('../../img/button-hover-bg.png?rev20190316') left center no-repeat;
+}
 #continuar:active {
 	background: none;
 	background-color: #ffd000;
-	}
+}
 

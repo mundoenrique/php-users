@@ -1,28 +1,21 @@
 @charset "UTF-8";
-/**
- * Base stylesheet.
- *
- * @project Conexión Personas Online - Latodo skin
- * @version 1.0 (Poseidon)
- * @author Miguel Palazzo mpalazzo@novopayment.com
- * @copyright 2013-2015 NovoPayment, Inc.
- */
- article,
- aside,
- details,
- figcaption,
- figure,
- footer,
- header,
- hgroup,
- nav,
- section {
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
 	 display: block;
  }
 
- audio,
- canvas,
- video {
+audio,
+canvas,
+video {
 	 display: inline-block;
  }
 
@@ -59,7 +52,7 @@
  }
 
  strong {
-	 font-weight: bold;
+	 font-weight: 700;
  }
 
  del {
@@ -188,117 +181,166 @@
  ::selection {
 	 background: #033572;
 	 color: white;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
 
  ::-moz-selection {
 	 background: #033572;;
 	 color: white;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
 
  ::-webkit-selection {
 	 background: #033572;;
 	 color: white;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
- }
- html {
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
-	 font-size: 12px;
-	 font-style: normal;
-	 font-weight: normal;
-	 -ms-text-size-adjust: 12px;
-	 -webkit-text-size-adjust: 12px;
  }
 
- body {
-	 background: white;
-	 color: #555555;
-	 height: 100%;
-	 margin: 0;
-	 padding: 0;
-	 width: 100%;
- }
- h1,
- h2,
- h3,
- h4,
- h5,
- h6 {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
-	 -webkit-font-smoothing: antialiased;
-	 font-weight: normal;
- }
+@font-face {
+	font-family: 'NovoPayment Glyphs';
+	font-style: normal;
+	font-weight: normal;
+	src: url('../../fonts/novopayment-glyphs-webfont.eot');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+	     url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+	     url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+}
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 500;
+	src: url('../../fonts/prelo-medium-webfont.eot');
+	src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
+	     url('../../fonts/prelo-medium-webfont.woff') format('woff'),
+	     url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Prelo';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/prelo-semibold-webfont.eot');
+	src: url('../../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/prelo-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/prelo-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/prelo-semibold-webfont.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 500;
+	src: url('../../fonts/preloslab-book-webfont.eot');
+	src: url('../../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/preloslab-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/preloslab-book-webfont.woff') format('woff'),
+	     url('../../fonts/preloslab-book-webfont.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Prelo Slab';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../../fonts/preloslab-semibold-webfont.eot');
+	src: url('../../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
+	     url('../../fonts/preloslab-semibold-webfont.woff') format('woff'),
+	     url('../../fonts/preloslab-semibold-webfont.ttf') format('truetype');
+}
 
- h1 {
-	 color: #033572;
-	 font-size: 30px;
-	 line-height: 60px;
-	 margin: 0;
- }
+html {
+	font-family: 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	-ms-text-size-adjust: 12px;
+	-webkit-text-size-adjust: 12px;
+}
 
- h2 {
-	 color: #033572;
-	 font-size: 24px;
-	 line-height: 30px;
-	 margin: 0 0 10px;
- }
+body {
+	background: white;
+	color: #555555;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-weight: normal;
+}
 
- h3 {
-	 color: #888888;
-	 font-size: 16px;
-	 line-height: 30px;
-	 margin: 10px 0;
- }
+h1 {
+	color: #033572;
+	font-size: 30px;
+	line-height: 60px;
+	margin: 0;
+}
 
- h4 {
-	 color: #00ae29;
-	 font-size: 14px;
-	 line-height: 25px;
-	 margin: 0 0 5px;
- }
+h2 {
+	color: #033572;
+	font-size: 24px;
+	line-height: 30px;
+	margin: 0 0 10px;
+}
 
- h5 {
-	 color: #62bb46;
-	 font-size: 14px;
-	 line-height: 20px;
- }
+h3 {
+	color: #888888;
+	font-size: 16px;
+	line-height: 30px;
+	margin: 10px 0;
+}
 
- h6 {
-	 color: #62bb46;
-	 font-size: 13px;
-	 line-height: 20px;
- }
- p {
-	 line-height: 18px;
-	 margin: 2px 0 10px;
-	 padding: 0;
-	 text-align: left;
- }
- p.align-center {
-	 text-align: center;
- }
- p.align-right {
-	 text-align: right;
- }
+h4 {
+	color: #00ae29;
+	font-size: 14px;
+	line-height: 25px;
+	margin: 0 0 5px;
+}
 
- span.highlight {
-	 color: #00ae29;
- }
- span.lighten {
-	 color: #888888;
- }
- a {
-	 color: #033572;
-	 text-decoration: none;
-	 -webkit-transition: all 0.5s;
-	 -moz-transition: all 0.5s;
-	 -o-transition: all 0.5s;
-	 transition: all 0.5s;
- }
- a:hover {
-	 color: #343735;
- }
+h5 {
+	color: #62bb46;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+h6 {
+	color: #62bb46;
+	font-size: 13px;
+	line-height: 20px;
+}
+p {
+	line-height: 18px;
+	margin: 2px 0 10px;
+	padding: 0;
+	text-align: left;
+}
+p.align-center {
+	text-align: center;
+}
+p.align-right {
+	text-align: right;
+}
+
+span.highlight {
+	color: #00ae29;
+}
+span.lighten {
+	color: #888888;
+}
+a {
+	color: #033572;
+	text-decoration: none;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+a:hover {
+	color: #343735;
+}
 
  nav {
 	 margin: 0;
@@ -350,7 +392,6 @@
 	 line-height: 28px;
 	 padding: 0 9px;
 	 position: relative;
-	 text-shadow: 1px 1px 0 white;
  }
  ul.stack li.stack-item a span.badge {
 	 background: #888888;
@@ -362,11 +403,10 @@
 	 color: white;
 	 display: inline-block;
 	 font-size: 10px;
-	 font-weight: bold;
+	 font-weight: 700;
 	 line-height: 20px;
 	 margin-left: 3px;
 	 padding: 0 5px;
-	 text-shadow: none;
  }
  ul.stack li.stack-item a span[class^="icon-"], ul.stack li.stack-item a span[class*=" icon-"] {
 	 font-size: 15px;
@@ -393,7 +433,6 @@
  }
  ul.stack li.stack-item.current-stack-item a {
 	 color: white;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
  ul.stack li.stack-item.current-stack-item a span.badge {
 	 background: white;
@@ -420,7 +459,6 @@
  }
  ul.stack.disabled-stack li.stack-item.current-stack-item a {
 	 color: #dddddd;
-	 text-shadow: none;
  }
  ul.stack.disabled-stack li.stack-item:first-child {
 	 border: 0;
@@ -451,7 +489,7 @@
 	 -ms-border-radius: 4px;
 	 -o-border-radius: 4px;
 	 border-radius: 4px;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 18px;
 	 margin: 0 0 20px;
 	 overflow: hidden;
@@ -461,7 +499,7 @@
  .alert-error p,
  .alert-success p,
  .alert-info p {
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 12px;
 	 margin: 5px 0 0;
  }
@@ -478,10 +516,6 @@
 	 -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
 	 box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
 	 color: #555555;
-	 text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.35);
- }
- .alert-warning else {
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
 
  .alert-error {
@@ -491,9 +525,6 @@
 	 box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
 	 color: white;
  }
- .alert-error else {
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
- }
 
  .alert-success {
 	 background: #43b581;
@@ -502,9 +533,6 @@
 	 box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
 	 color: white;
  }
- .alert-success else {
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
- }
 
  .alert-info {
 	 background: #61badc;
@@ -512,9 +540,6 @@
 	 -moz-box-shadow: 0 0 2px rgba(97, 186, 220, 0.85);
 	 box-shadow: 0 0 2px rgba(97, 186, 220, 0.85);
 	 color: white;
- }
- .alert-info else {
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
 
  .alert-simple {
@@ -1083,39 +1108,37 @@
 	 display: block;
  }
 
- button,
- a.button {
-	 background: white;
-	 border: 1px solid #ffdd00;
-	 -webkit-border-radius: 4px;
-	 -moz-border-radius: 4px;
-	 -ms-border-radius: 4px;
-	 -o-border-radius: 4px;
-	 border-radius: 4px;
-
-	 background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
-	 -webkit-border-radius: 3px;
-	 -moz-border-radius: 3px;
-	 -ms-border-radius: 3px;
-	 -o-border-radius: 3px;
-	 color: #10133f;
-
-	 float: right;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
-	 font-size: 17px;
-	 line-height: 38px;
-	 margin-left: 20px;
-	 padding: 0 14px;
-	 text-align: center;
- }
- button:hover,
- a.button:hover {
-	 background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
- }
- button:active,
- a.button:active {
-	 background-color: #ffd000;
- }
+button,
+a.button {
+	background: white;
+	border: 1px solid #fd0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	color: #10133f;
+	float: right;
+	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	line-height: 38px;
+	margin-left: 20px;
+	padding: 0 14px;
+	text-align: center;
+}
+button:hover,
+a.button:hover {
+	background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat;
+}
+button:active,
+a.button:active {
+	background-color: #fd0;
+}
  button[disabled], button[disabled]:hover, button[disabled]:focus, button.disabled-button:hover, button.disabled-button:focus,
  a.button[disabled]:hover,
  a.button[disabled]:focus,
@@ -1135,7 +1158,6 @@
 	 -webkit-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
 	 -moz-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
 	 box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
-	 text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.85);
  }
  button[type="reset"], button.reset-button,
  a.button[type="reset"],
@@ -1153,74 +1175,73 @@
 	 background-color:#f3f4f9;
  }
 
- button[type="reset"]:active {
-	 background-color:#e8e9ef;
- }
+button[type="reset"]:active {
+	background-color:#e8e9ef;
+}
 
- button.alternate-button,
- a.button.alternate-button {
+button.alternate-button,
+a.button.alternate-button {
 	background: white;
 	border: solid 1px #E5E5E5;
-
 	color: #033572;
 	font-size: 15px;
 	line-height: 40px;
 	padding: 0px,20px,0px,20px ;
- }
- button.alternate-button:hover,
- a.button.alternate-button:hover {
+}
+button.alternate-button:hover,
+a.button.alternate-button:hover {
 	background-color:#f3f4f9;
- }
- button.alternate-button:active,
- a.button.alternate-button:active {
+}
+button.alternate-button:active,
+a.button.alternate-button:active {
 	background-color:#e8e9ef;
- }
- button.small-button,
- a.button.small-button {
-	 font-size: 15px;
-	 line-height: 28px;
- }
- button.product-button,
- a.button.product-button {
-	 -webkit-border-radius: 0 4px 4px 0;
-	 -moz-border-radius: 0 4px 4px 0;
-	 -ms-border-radius: 0 4px 4px 0;
-	 -o-border-radius: 0 4px 4px 0;
-	 border-radius: 0 4px 4px 0;
-	 float: none;
-	 font-size: 30px;
-	 line-height: 125px;
-	 margin: 0 30px 0 0;
-	 padding: 0;
- }
- button.product-button span[class^="icon-"], button.product-button span[class*=" icon-"],
- a.button.product-button span[class^="icon-"],
- a.button.product-button span[class*=" icon-"] {
-	 margin: 0;
- }
+}
+button.small-button,
+a.button.small-button {
+	font-size: 15px;
+	line-height: 28px;
+}
+button.product-button,
+a.button.product-button {
+	-webkit-border-radius: 0 4px 4px 0;
+	-moz-border-radius: 0 4px 4px 0;
+	-ms-border-radius: 0 4px 4px 0;
+	-o-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+	float: none;
+	font-size: 30px;
+	line-height: 125px;
+	margin: 0 30px 0 0;
+	padding: 0;
+}
+button.product-button span[class^="icon-"], button.product-button span[class*=" icon-"],
+a.button.product-button span[class^="icon-"],
+a.button.product-button span[class*=" icon-"] {
+	margin: 0;
+}
 
- label {
-	 color: #333333;
-	 display: block;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
-	 font-size: 14px;
-	 line-height: 25px;
-	 margin-bottom: 5px;
-	 overflow: hidden;
- }
- label[for] {
-	 cursor: pointer;
- }
- label.label-inline {
-	 color: #555555;
-	 display: inline-block;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
-	 font-size: 12px;
-	 line-height: 35px;
-	 margin: 0 30px 10px 0;
- }
+label {
+	color: #333333;
+	display: block;
+	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 25px;
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+label[for] {
+	cursor: pointer;
+}
+label.label-inline {
+	color: #555555;
+	display: inline-block;
+	font-family: 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 35px;
+	margin: 0 30px 10px 0;
+}
  label.label-inline a {
-	 font-weight: bold;
+	 font-weight: 700;
  }
  label.label-inline input {
 	 float: left;
@@ -1241,7 +1262,7 @@
  }
  label span.field-instruction {
 	 color: #bbbbbb;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 12px;
 	 padding-left: 5px;
  }
@@ -1276,7 +1297,7 @@
 	 -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
 	 box-shadow: 0 2px 0 rgba(51, 51, 51, 0.05);
 	 color: #888888;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 12px;
 	 font-style: normal;
 	 font-weight: normal;
@@ -1423,7 +1444,6 @@
 
  .field-warning {
 	 background: rgba(240, 193, 106, 0.1);
-	 /*border: 1px solid $color;*/
 	 -webkit-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
 	 -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
 	 box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
@@ -1438,7 +1458,6 @@
 
  .field-error {
 	 background: rgba(240, 72, 72, 0.1);
-	 /*border: 1px solid $color;*/
 	 -webkit-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
 	 -moz-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
 	 box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
@@ -1453,7 +1472,6 @@
 
  .field-success {
 	 background: rgba(67, 181, 129, 0.1);
-	 /*border: 1px solid $color;*/
 	 -webkit-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
 	 -moz-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
 	 box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
@@ -1518,7 +1536,7 @@
  ul.field-category-actions li a {
 	 display: block;
 	 font-size: 11px;
-	 font-weight: bold;
+	 font-weight: 700;
 	 line-height: 15px;
  }
  ul.field-category-actions li.disabled-group-action-item a {
@@ -1537,7 +1555,7 @@
  }
  .form-actions p {
 	 color: #888888;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 14px;
 	 line-height: 40px;
 	 margin: 0 15px 0 0;
@@ -1599,7 +1617,7 @@
 	 margin: 0;
  }
  table.receipt td.data-metadata span.money-amount {
-	 font-weight: bold;
+	 font-weight: 700;
  }
  table.receipt td.data-metadata.data-warning {
 	 border-right-color: #f0c16a;
@@ -1631,10 +1649,7 @@
  }
 
  #head {
-  background: #ffd000;
-  -webkit-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
-  -moz-box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
-  box-shadow: 0 2px 0 rgba(51, 51, 51, 0.15);
+  background-color: #fd0;
   height: 60px;
   position: fixed;
   top: 0;
@@ -1646,28 +1661,26 @@
   height: 60px;
   margin: 0 auto;
   overflow: hidden;
-  padding: 0 10px;
-  width: 940px;
+	padding: 0;
+	padding-left: 5px;
+  width: 955px;
 }
 
 #brand-id,
 #brand-app {
-  background: transparent url('../../img/BP Personas azul.svg?v=1.1') no-repeat scroll;
+  background: transparent url('../../img/logo-bp.svg?rev20190316') no-repeat scroll;
   float: left;
 }
 
 #brand-id {
 	background-position: 0 12px;
-	/* display: block; */
 	height: 60px;
-	/* margin-right: 20px; */
 	overflow: hidden;
-	/* text-indent: 100%; */
-	/* white-space: nowrap; */
 	width: 400px;
 }
-.transfers,.payments{
-display: none;
+.transfers,
+.payments{
+	display: none;
 }
 #brand-app {
   background-position: 0 -60px;
@@ -1685,29 +1698,33 @@ display: none;
   float: right;
   width: auto !important;
 }
-#main-menu ul.menu {
-  height: 60px;
-}
+#main-menu ul.menu,
 #main-menu ul.menu li.menu-item {
   height: 60px;
-  padding-left: 30px;
 }
 #main-menu ul.menu li.menu-item a {
-  color: #f9f86a;
+	background-color: transparent;
+  color: #033572;
   display: block;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 60px;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
+  font-family: 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 60px;
+	padding: 0 14px;
+	text-decoration: none;
+	transition-duration: .25s;
+	transition-property: background-color, font-weight;
 }
 #main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
   margin: -2px 0 0 3px;
 }
 #main-menu ul.menu li.menu-item a:hover, #main-menu ul.menu li.menu-item.current-menu-item a {
-  color: #fff;
+	background-color: #fc0;
+  font-weight: 600;
+	text-decoration: underline;
 }
 #main-menu ul.menu li.menu-item ul.sub-menu {
-  background: #343735;
+  background-color: #fc0;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -1725,14 +1742,13 @@ display: none;
   padding: 0;
 }
 #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a {
-  color: #f9f86a;
   font-size: 13px;
   font-weight: normal;
   line-height: 30px;
   padding: 0 10px;
 }
 #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover, #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item.current-sub-menu-item a {
-  color: #fff;
+  /* color: #fff; */
 }
 
 #compact-menu {
@@ -1749,7 +1765,6 @@ display: none;
   font-size: 15px;
   line-height: 30px;
   padding: 0 5px;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 #compact-menu ul.menu li.menu-item a:hover {
   color: #fff;
@@ -1878,7 +1893,7 @@ display: none;
 	 -o-animation: show 6s ease 0 1 normal;
 	 -webkit-animation: show 6s ease 0 1 normal;
 	 animation: show 6s ease 0 1 normal;
-	 background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+	 background: transparent url('../../img/product-networks-sprite.png?rev20190316') scroll no-repeat 0 0;
 	 height: 30px;
 	 margin: -45px 0 0 130px;
 	 overflow: hidden;
@@ -1931,7 +1946,7 @@ display: none;
  }
 
  .product-cardholder {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 18px;
 	 line-height: 25px;
 	 margin: 5px 0 0;
@@ -1941,14 +1956,14 @@ display: none;
  span.product-cardholder-id {
 	 color: #888888;
 	 display: inline-block;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 12px;
 	 margin-left: 20px;
  }
 
  .product-cardnumber {
 	 color: #033572;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 16px;
 	 line-height: 25px;
 	 margin: 0;
@@ -1986,7 +2001,7 @@ display: none;
  ul.product-balance-group li span.product-balance {
 	 color: #555555;
 	 display: block;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 18px;
 	 line-height: 25px;
  }
@@ -2026,7 +2041,7 @@ display: none;
  ul.group-actions li a {
 	 display: block;
 	 font-size: 11px;
-	 font-weight: bold;
+	 font-weight: 700;
 	 line-height: 15px;
  }
  ul.group-actions li.disabled-group-action-item a {
@@ -2067,11 +2082,10 @@ display: none;
 	 border-top: 2px solid #eeeeee;
 	 color: #888888;
 	 display: block;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 18px;
 	 line-height: 48px;
 	 padding: 0 25px;
-	 text-shadow: 1px 1px 0 white;
  }
  #tabs-menu ul.menu li.menu-item a:hover {
 	 border-top-color: #dddddd;
@@ -2116,10 +2130,9 @@ display: none;
  #secondary-menu ul.menu li.menu-item a {
 	 color: #f9f86a;
 	 display: block;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 15px;
 	 line-height: 45px;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
  }
  #secondary-menu ul.menu li.menu-item:first-child {
 	 padding: 0;
@@ -2149,14 +2162,13 @@ display: none;
  }
  #progress ul.steps li.step-item {
 	 color: #bbbbbb;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 13px;
 	 float: left;
 	 list-style: none;
 	 overflow: visible;
 	 position: relative;
 	 text-align: center;
-	 text-shadow: 1px 1px 0 white;
 	 width: 160px;
  }
  #progress ul.steps li.step-item:before {
@@ -2268,7 +2280,11 @@ display: none;
 	 margin: 0;
 	 padding: 0;
  }
- #filters-stack .stack-form button, #filters-stack .stack-form label, #filters-stack .stack-form input, #filters-stack .stack-form select, #filters-stack .stack-form .field-prepend {
+ #filters-stack .stack-form button,
+ #filters-stack .stack-form label,
+ #filters-stack .stack-form input,
+ #filters-stack .stack-form select,
+ #filters-stack .stack-form .field-prepend {
 	 float: left;
  }
  #filters-stack .stack-form button {
@@ -2279,7 +2295,7 @@ display: none;
  }
  #filters-stack .stack-form label {
 	 color: #888888;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 12px;
 	 line-height: 30px;
 	 margin: 0 7px 0 10px;
@@ -2351,7 +2367,7 @@ display: none;
  ul#dashboard-donor li.dashboard-item .dashboard-item-box .dashboard-item-network,
  ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-network,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-network {
-	 background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+	 background: transparent url('../../img/product-networks-sprite.png?rev20190316') scroll no-repeat 0 0;
 	 height: 30px;
 	 margin: 45px 85px 0;
 	 overflow: hidden;
@@ -2427,7 +2443,7 @@ display: none;
 	 -o-border-radius: 3px;
 	 border-radius: 3px;
 	 color: white;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 10px;
 	 padding: 3px 5px;
 	 vertical-align: baseline;
@@ -2476,7 +2492,7 @@ display: none;
  ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-cardholder,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-cardholder {
 	 color: #555555;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 14px;
 	 text-transform: capitalize;
  }
@@ -2494,7 +2510,7 @@ display: none;
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-balance {
 	 color: #555555;
 	 float: right;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 13px;
  }
  ul#dashboard li.dashboard-item a .dashboard-item-category, ul#dashboard li.dashboard-item .dashboard-item-box .dashboard-item-category,
@@ -2652,7 +2668,7 @@ display: none;
 	 border-right: 1px solid #dddddd;
 	 color: #888888;
 	 float: left;
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 20px;
 	 height: 50px;
 	 line-height: 20px;
@@ -2665,7 +2681,7 @@ display: none;
  ul.feed li.feed-item span.feed-date-month,
  ul.feed li.feed-item span.feed-date-year {
 	 display: block;
-	 font-family: "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	 line-height: 15px;
  }
  ul.feed li.feed-item span.feed-date-month {
@@ -2690,7 +2706,7 @@ display: none;
 	 color: #333333;
 	 display: inline-block;
 	 float: right;
-	 font-weight: bold;
+	 font-weight: 700;
  }
  ul.feed li.feed-item ul.feed-metadata {
 	 width: auto !important;
@@ -2747,7 +2763,7 @@ display: none;
 	 font-size: 26px;
  }
  table.feed-table th.feed-headline {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 15px;
 	 font-style: normal;
 	 font-weight: normal;
@@ -2820,7 +2836,7 @@ display: none;
 	 border-left: 0;
 	 border-top: 5px solid #dddddd;
 	 color: #333333;
-	 font-weight: bold;
+	 font-weight: 700;
 	 width: 55px;
  }
  table.feed-table tfoot td.feed-category-1x {
@@ -2895,7 +2911,7 @@ display: none;
 	 margin: 2px 0;
  }
  #slideshow ul.slides li.slide p.slide-title {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 30px;
 	 line-height: 36px;
  }
@@ -3006,7 +3022,7 @@ display: none;
 	 margin: 0;
  }
  #widget-account .user-fullname {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 18px;
 	 font-weight: normal;
 	 line-height: 20px;
@@ -3062,7 +3078,6 @@ display: none;
 	 color: white;
 	 float: left;
 	 padding: 10px 15px;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 	 -webkit-transition: all 0.5s;
 	 -moz-transition: all 0.5s;
 	 -o-transition: all 0.5s;
@@ -3071,7 +3086,7 @@ display: none;
 	 z-index: 1;
  }
  #widget-ads .widget-section a.ads-action .ads-info p.ads-title {
-	 font-family: "preloslap", "prelo", Helvetica, Arial, sans-serif;
+	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	 font-size: 16px;
 	 line-height: 20px;
 	 margin: 0 0 50px;
@@ -3098,7 +3113,7 @@ display: none;
 
  #widget-signin button {
 	 display: block;
-	 background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	 background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
 	 border: 0;
 	 -webkit-border-radius: 3px;
 	 -moz-border-radius: 3px;
@@ -3109,7 +3124,6 @@ display: none;
 	 float: none;
 	 line-height: 35px;
 	 margin: 15px auto;
-	 font-weight: bold;
 	 outline: none;
 	 font-size: 13px;
 	 text-align: center;
@@ -3117,35 +3131,35 @@ display: none;
  }
 
  #widget-signin button:hover {
-	 background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
+	 background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat;
 	 }
  #widget-signin button:active {
 	 background: none;
-	 background-color: #ffd000;
+	 background-color: #fd0;
 	 }
  #widget-signin a {
-	 font-weight: bold;
+	 font-weight: 700;
  }
  #widget-signin p {
 	 clear: both;
 	 margin: 5px 0 0;
  }
  #widget-signin .unlock {
-	 background: url(../img/BackgroundButton.png) left center no-repeat #ffdd00;
- border: 0;
- -webkit-border-radius: 3px;
- -moz-border-radius: 3px;
- -ms-border-radius: 3px;
- -o-border-radius: 3px;
- border-radius: 3px;
- color: #10133f;
- float: none;
- line-height: 35px;
- margin: 15px auto;
- font-weight: bold;
- outline: none;
- font-size: 13px;
- text-align: center
+	background: #fd0 url('../img/button-bg.png?rev20190316') center left no-repeat;
+	border: 0;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	color: #10133f;
+	float: none;
+	line-height: 35px;
+	margin: 15px auto;
+	font-weight: 700;
+	outline: none;
+	font-size: 13px;
+	text-align: center;
  }
  #widget-signin .unlock .unlock-wrapper {
 	 height: 35px;
@@ -3181,7 +3195,6 @@ display: none;
 	 font-size: 22px;
 	 line-height: 33px;
 	 text-align: center;
-	 text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 	 width: 48px;
  }
  #widget-signin .unlock a.unlock-knob:hover {
@@ -3194,7 +3207,6 @@ display: none;
 	 line-height: 35px;
 	 padding-left: 60px;
 	 position: absolute;
-	 text-shadow: 1px 1px 0 white;
  }
 
  #widget-support .field-prepend {
@@ -3247,7 +3259,7 @@ display: none;
  }
  #foot-menu ul.menu li.menu-item a {
 	 display: block;
-	 font-weight: bold;
+	 font-weight: 700;
 	 line-height: 25px;
  }
  #foot-menu ul.menu li.menu-item.current-menu-item a {
@@ -3262,7 +3274,7 @@ display: none;
 	 width: auto !important;
  }
  ul#networks li.network-item {
-	 background: transparent url('../../img/latodo-app-core-sprite.png?v=1.1') no-repeat scroll 0 -130px;
+	 background: transparent url('../../img/latodo-app-core-sprite.png?rev20190316') no-repeat scroll 0 -130px;
 	 float: left;
 	 height: 40px;
 	 margin-right: 15px;
@@ -3295,7 +3307,7 @@ display: none;
  }
  ul#certificates li.certificate-item {
 	 display: none;
-	 background: transparent url('../../img/latodo-app-core-sprite.png?v=1.1') no-repeat scroll 0 -170px;
+	 background: transparent url('../../img/latodo-app-core-sprite.png?rev20190316') no-repeat scroll 0 -170px;
 	 float: right;
 	 height: 40px;
 	 margin-left: 15px;
@@ -3318,7 +3330,7 @@ display: none;
  }
 
  a#app-engine {
-	 background: transparent url('../../img/Logo.svg?v=1.1') scroll no-repeat;
+	 background: transparent url('../../img/logo-novopayment.svg?rev20190316') scroll no-repeat;
 	 display: block;
 	 float: right;
 	 height: 25px;
@@ -3640,7 +3652,7 @@ display: none;
  .ui-datepicker th {
 	 padding: .7em .3em;
 	 text-align: center;
-	 font-weight: bold;
+	 font-weight: 700;
 	 border: 0;
  }
 
@@ -4242,7 +4254,6 @@ display: none;
 	 box-shadow: none;
 	 color: #bbbbbb;
 	 font-weight: normal;
-	 text-shadow: none;
  }
 
  .ui-state-default a,
@@ -4325,7 +4336,7 @@ display: none;
  .ui-priority-primary,
  .ui-widget-content .ui-priority-primary,
  .ui-widget-header .ui-priority-primary {
-	 font-weight: bold;
+	 font-weight: 700;
  }
 
  .ui-priority-secondary,
@@ -5293,7 +5304,7 @@ display: none;
 	border: solid 1px #FFDD00;
   margin-top: 0px !important;
 	font-size: 14px;
-	background: url('../../img/BackgroundButton.png?v=1.1') left center no-repeat #ffdd00;
+	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -5303,62 +5314,12 @@ display: none;
 }
 
 #validar:hover {
-	background: url('../../img/BackgroundButtonHover.png?v=1.1') left center no-repeat #ffdd00;
-	}
+	background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat;
+}
 #validar:active {
 	background: none;
-	background-color: #ffd000;
-	}
-
- @font-face {
-	 font-family: "NovoPayment Glyphs";
-	 src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-	 src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'), url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'), url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
-	 font-style: normal;
-	 font-weight: normal;
- }
-
- @font-face {
-	 font-family: "prelo";
-	 font-style: normal;
-	 font-weight: 500;
-	 src: url('../../fonts/prelo-medium-webfont.eot');
-	 src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-				 url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
-				 url('../../fonts/prelo-medium-webfont.woff') format('woff'),
-				 url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
- }
- @font-face {
-	 font-family: "prelo";
-	 font-style: normal;
-	 font-weight: 700;
-	 src: url('../../fonts/prelo-semibold-webfont.eot');
-	 src: url('../../fonts/prelo-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../../fonts/prelo-semibold-webfont.woff2') format('woff2'),
-				url('../../fonts/prelo-semibold-webfont.woff') format('woff'),
-				url('../../fonts/prelo-semibold-webfont.ttf') format('truetype');
- }
-
- @font-face {
-	 font-family: "preloslap";
-	 font-style: normal;
-	 font-weight: 500;
-	 src: url('../../fonts/preloslab-book-webfont.eot');
-	 src: url('../../fonts/preloslab-book-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../../fonts/preloslab-book-webfont.woff2') format('woff2'),
-				url('../../fonts/preloslab-book-webfont.woff') format('woff'),
-				url('../../fonts/preloslab-book-webfont.ttf') format('truetype');
- }
- @font-face {
-	 font-family: "preloslap";
-	 font-style: normal;
-	 font-weight: 700;
-	 src: url('../../fonts/preloslab-semibold-webfont.eot');
-	 src: url('../../fonts/preloslab-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-				url('../../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
-				url('../../fonts/preloslab-semibold-webfont.woff') format('woff'),
-				url('../../fonts/preloslab-semibold-webfont.ttf') format('truetype');
- }
+	background-color: #fd0;
+}
 
  @-moz-keyframes hide {
 	 0% {

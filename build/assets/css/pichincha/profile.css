@@ -1,13 +1,6 @@
 @charset "UTF-8";
 @import 'base.css';
-/**
- * Profile stylesheet.
- *
- * @project Conexión Personas Online
- * @version 1.0 (Poseidon)
- * @author Miguel Palazzo mpalazzo@novopayment.com
- * @copyright 2013-2015 NovoPayment, Inc.
- */
+
 ul {
   margin: 0;
   overflow: hidden;
@@ -26,106 +19,6 @@ ul.menu {
 ul.menu li.menu-item {
   background: none;
   float: left;
-}
-
-ul.stack {
-  border: 1px solid #dddddd;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  height: 28px;
-}
-ul.stack li.stack-item {
-  background: #f6f6f6;
-  border-left: 1px solid #dddddd;
-  -webkit-box-shadow: inset 1px 0 0 white;
-  -moz-box-shadow: inset 1px 0 0 white;
-  box-shadow: inset 1px 0 0 white;
-  float: left;
-  height: 28px;
-}
-ul.stack li.stack-item a {
-  color: #888888;
-  display: block;
-  line-height: 28px;
-  padding: 0 9px;
-  position: relative;
-  text-shadow: 1px 1px 0 white;
-}
-ul.stack li.stack-item a span.badge {
-  background: #888888;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  color: white;
-  display: inline-block;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 20px;
-  margin-left: 3px;
-  padding: 0 5px;
-  text-shadow: none;
-}
-ul.stack li.stack-item a span[class^="icon-"], ul.stack li.stack-item a span[class*=" icon-"] {
-  font-size: 15px;
-  line-height: inherit;
-  margin: 0;
-  width: 15px;
-}
-ul.stack li.stack-item a span[class^="icon-chevron-"], ul.stack li.stack-item a span[class*=" icon-chevron-"] {
-  font-size: 12px;
-  line-height: 1;
-}
-ul.stack li.stack-item a:hover {
-  color: #333333;
-}
-ul.stack li.stack-item a:hover span.badge {
-  background: #333333;
-}
-ul.stack li.stack-item.current-stack-item {
-  background: #368db6;
-  border-left: 1px solid white;
-  -webkit-box-shadow: inset 1px 0 0 #368db6;
-  -moz-box-shadow: inset 1px 0 0 #368db6;
-  box-shadow: inset 1px 0 0 #368db6;
-}
-ul.stack li.stack-item.current-stack-item a {
-  color: white;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
-}
-ul.stack li.stack-item.current-stack-item a span.badge {
-  background: white;
-  color: #368db6;
-}
-ul.stack li.stack-item:first-child {
-  border: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-ul.stack.disabled-stack li.stack-item a, ul.stack.disabled-stack li.stack-item a:hover {
-  color: #dddddd;
-}
-ul.stack.disabled-stack li.stack-item a span.badge, ul.stack.disabled-stack li.stack-item a:hover span.badge {
-  background: #dddddd;
-}
-ul.stack.disabled-stack li.stack-item.current-stack-item {
-  background: transparent;
-  border-left: 1px solid #dddddd;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-ul.stack.disabled-stack li.stack-item.current-stack-item a {
-  color: #dddddd;
-  text-shadow: none;
-}
-ul.stack.disabled-stack li.stack-item:first-child {
-  border: 0;
 }
 
 ul.pwd-rules {
