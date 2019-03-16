@@ -21,7 +21,6 @@ $pageCdn = $CI->config->item('base_url_cdn');
 $skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
 ?>
 <body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>" data-country="<?php echo $this->session->userdata('pais') ?>">
-  <div class="triangulo-pichincha"></div>
 <header id="head">
 
     <div id="head-wrapper">

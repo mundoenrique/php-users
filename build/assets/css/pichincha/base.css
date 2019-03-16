@@ -254,12 +254,26 @@ html {
 }
 
 body {
-	background: white;
+	background: #fff;
 	color: #555555;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	width: 100%;
+}
+body::before {
+	border-bottom: 300px solid transparent;
+	border-left: 280px solid transparent;
+	border-right: 413px solid #f3f4f8;
+	border-top: 190px solid #f3f4f8;
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	z-index: -1;
 }
 h1,
 h2,
@@ -5283,19 +5297,6 @@ label.label-inline {
 
  .ui-icon-grip-diagonal-se {
 	 background-position: -80px -224px;
- }
-
- .triangulo-pichincha {
-	 position:absolute;
-	 top: 0;
-	 right: 0;
-	 width: 0;
-	 height: 0;
-	 border-left: 280px solid transparent;
-	 border-bottom: 300px solid transparent;
-	 border-right: 413px solid #F3F4F8;
-	 border-top: 190px solid #F3F4F8;
-	 z-index: -1;
  }
 
 #validar {
