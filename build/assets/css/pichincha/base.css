@@ -3223,17 +3223,8 @@ label.label-inline {
 	 position: absolute;
  }
 
- #widget-support .field-prepend {
-	 margin: 10px 0 0;
- }
- #widget-support select {
-	 width: 190px;
- }
- #widget-support .dynamic-content p {
-	 text-align: right;
- }
- #widget-support .dynamic-content strong {
-	 float: left;
+ #widget-support {
+	 display: none;
  }
 
  #foot {
