@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import 'base.css';
+@import 'base.css?rev20190318';
 
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix, #slideUnlock {
   display: none;

@@ -1,14 +1,5 @@
 @charset "UTF-8";
-@import 'base.css';
-/**
- * Print stylesheet.
- *
- * @project Conexión Personas Online - Latodo skin
- * @version 1.0 (Poseidon)
- * @author Miguel Palazzo mpalazzo@novopayment.com
- * @copyright 2013-2015 NovoPayment, Inc.
- */
-
+@import 'base.css?rev20190318';
 
 #head,
 #filters-stack,
