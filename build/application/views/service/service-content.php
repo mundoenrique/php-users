@@ -228,17 +228,19 @@ if($datos->rc==0){
             $fechaExp = $value->fechaExp;
             $pais=ucwords($this->session->userdata('pais'));
 						$permisos = implode(',',$value->services);
-            $moneda=lang("MONEDA");
+						$moneda=lang("MONEDA");
+						$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));
+						$nomProducto=ucwords(mb_strtolower($value->nombre_producto, 'UTF-8'));
 
-            echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$value->nom_plastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$value->nombre_producto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
+            echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$nomPlastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$value->nom_plastico</p>
+         <p class='dashboard-item-cardholder'>$nomPlastico</p>
 
          <p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
-         <p class='dashboard-item-category'>$value->nombre_producto</p>
+         <p class='dashboard-item-category'>$nomProducto</p>
          </div>
          </a>
          </li>";
