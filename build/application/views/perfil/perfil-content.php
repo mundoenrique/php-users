@@ -223,7 +223,7 @@ if(isset($data)){
 
 $numAfiliacion=(array)$datos->registro->afiliacion;
 
-if(isset($numAfiliacion) || count($numAfiliacion)>0){
+	if((isset($numAfiliacion) || count($numAfiliacion)>0) && $aplicaPerfil=='S'){
     $estadocivil=$datos->registro->afiliacion->edocivil;
     $lugar_nacimiento=$datos->registro->afiliacion->lugar_nacimiento;
     $centro_laboral=$datos->registro->afiliacion->centrolab;
