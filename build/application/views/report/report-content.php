@@ -262,15 +262,17 @@
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$value->tarjetaHabiente' producto1='$value->producto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$tarjetaHabiente' producto1='$nomProducto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
 							<a href='#' rel='section'>
 								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 								<div class='dashboard-item-network $marca'>$value->marca</div>
 								<div class='dashboard-item-info'>
-									<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+									<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
 									<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-									<p class='dashboard-item-category'>$value->producto</p>
+									<p class='dashboard-item-category'>$nomProducto</p>
 								</div>
 							</a>
 						</li>";

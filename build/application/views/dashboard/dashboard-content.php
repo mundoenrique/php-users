@@ -54,8 +54,8 @@
                     $marca= strtolower(str_replace(" ", "-", $value->marca));
                     $empresa = strtolower($value->nomEmp);
                     $pais=ucwords($this->session->userdata('pais'));
-                    $nomPlastico=ucwords(strtolower($value->nom_plastico));
-                    $nomProducto=ucwords(strtolower($value->nombre_producto));
+										$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));
+										$nomProducto=ucwords(mb_strtolower($value->nombre_producto, 'UTF-8'));
                     $moneda=lang("MONEDA");
                     $id=lang("ID");
 										//estado de la tarjeta activa o inactiva(NE)
