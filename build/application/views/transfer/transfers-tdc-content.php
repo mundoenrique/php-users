@@ -73,7 +73,7 @@
 									<ul class='product-balance-group disabled-product-balance-group' style="margin: 10px 0">
 										<li>Disponible <span class='product-balance' id='balance-available'> <?php echo lang("MONEDA");?> </span></li>
 										<li>A debitar <span class='product-balance' id='balance-debit'> <?php echo lang("MONEDA");?> </span></li>
-										<li>Fecha de Vencimiento<span class='product-balance'><select disabled style="margin-right: 5px;"><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
+										<li style="width: 161px;">Fecha de Vencimiento<span class='product-balance'><select disabled style="margin-right: 5px;"><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
 									</ul>
 								</div>
 							</div>
