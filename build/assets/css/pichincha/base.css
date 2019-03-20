@@ -1772,10 +1772,9 @@ label.label-inline {
   line-height: 30px;
   padding: 0 10px;
 }
-#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover{
+#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover, #main-menu ul.menu li.current-menu-item.account ul.submenu-user li.account-profile a {
   text-decoration: underline;
 }
-
 #compact-menu {
   display: none;
   padding: 15px 0;
