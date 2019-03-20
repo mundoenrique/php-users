@@ -1896,7 +1896,7 @@ label.label-inline {
  .product-info-full,
  .product-scheme {
 	 float: left;
-	 height: 130px;
+	 height: 140px;
 	 overflow: hidden;
  }
 
@@ -2025,6 +2025,9 @@ label.label-inline {
 	 margin-right: 10px;
 	 width: 100px;
  }
+ ul.product-balance-group li span {
+	padding: 3px 0px;
+}
  ul.product-balance-group li span.product-balance {
 	 color: #555555;
 	 display: block;
@@ -2040,6 +2043,8 @@ label.label-inline {
  }
  .product-scheme ul.product-balance-group {
 	 margin: 45px 0;
+	 display: flex;
+	 justify-content: space-around;
  }
 
  ul.actions {
