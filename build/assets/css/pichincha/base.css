@@ -1726,9 +1726,18 @@ label.label-inline {
 	transition-duration: .25s;
 	transition-property: background-color, font-weight;
 }
+#main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
+  margin: -2px 0 0 3px;
+}
+#main-menu ul.menu li.menu-item > a:hover, #main-menu ul.menu li.menu-item.current-menu-item > a {
+	background-color: #fc0;
+  font-weight: 600;
+	text-decoration: underline;
+}
 #main-menu ul.menu li.menu-item a.account{
 	display: flex;
-  align-items: center;
+	align-items: center;
+	text-decoration: none;
 }
 #main-menu ul.menu li.menu-item a.account div{
 	max-width: 110px;
@@ -1736,15 +1745,9 @@ label.label-inline {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-#main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
-  margin: -2px 0 0 3px;
-}
-#main-menu ul.menu li.menu-item a:hover, #main-menu ul.menu li.menu-item.current-menu-item a {
-	background-color: #fc0;
-  font-weight: 600;
+#main-menu ul.menu li.menu-item a.account:hover div, #main-menu ul.menu li.menu-item.current-menu-item a.account div{
 	text-decoration: underline;
 }
-
 #main-menu ul.menu li.menu-item ul.sub-menu {
   background-color: #fc0;
   -webkit-border-radius: 4px;
@@ -1769,8 +1772,8 @@ label.label-inline {
   line-height: 30px;
   padding: 0 10px;
 }
-#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover, #main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item.current-sub-menu-item a {
-  /* color: #fff; */
+#main-menu ul.menu li.menu-item ul.sub-menu li.sub-menu-item a:hover{
+  text-decoration: underline;
 }
 
 #compact-menu {
