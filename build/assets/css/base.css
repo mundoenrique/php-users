@@ -2016,6 +2016,16 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   line-height: 40px;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
+#main-menu ul.menu li.menu-item a.account{
+	display: flex;
+  align-items: center;
+}
+#main-menu ul.menu li.menu-item a.account div{
+	max-width: 110px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 #main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
   margin: -2px 0 0 3px;
 }
