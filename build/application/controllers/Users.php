@@ -4,31 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Controller {
 
 	public function __construct()
-  	{
+	{
 		parent::__construct();
 		$this->initCookie();
 
-	}
-
-	private function setCookie($code) {
-
-		$cookie=$this->input->cookie( $this->config->item('cookie_prefix') . 'skin'); //Valor actual de la cookie
-
-		if( $cookie !== $code || $cookie === false) {
-			$this->load->helper('url');
-
-			$cookie = array(
-				'name' => 'skin',
-				'value' => $code,
-				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
 	}
 
 	private function initCookie() {
@@ -60,8 +39,30 @@ class Users extends CI_Controller {
 		}
 	}
 
+	private function setCookie($code) {
+		$cookie=$this->input->cookie( $this->config->item('cookie_prefix') . 'skin'); //Valor actual de la cookie
+
+		if( $cookie !== $code || $cookie === false) {
+			$this->load->helper('url');
+
+			$cookie = array(
+				'name' => 'skin',
+				'value' => $code,
+				'expire' => 0,
+				'domain' => $this->config->item('cookie_domain'),
+				'path' => $this->config->item('cookie_path'),
+				'prefix' => $this->config->item('cookie_prefix'),
+				'secure' => $this->config->item('cookie_secure')
+			);
+			$this->input->set_cookie($cookie);
+			redirect(current_url());
+		}
+	}
+
 	public function index()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		$this->lang->load('login', $skin);
 		//INSTANCIA PARA TITULO DE PAGINA
  		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS

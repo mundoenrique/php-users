@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import 'base.css?rev20190318';
+@import 'base.css?rev20190319-01';
 
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix, #slideUnlock {
   display: none;
@@ -26,5 +26,17 @@
 #continuar:active {
 	background: none;
 	background-color: #ffd000;
+}
+
+.img-back {
+	height: 120px;
+	width: 660px;
+	background-image: url('images/BannersCPOBancoPichincha.svg');
+	background-size: 100%;
+	background-repeat:no-repeat;
+	padding-top: 40px;
+	padding-right: 30px;
+	padding-left: 15px;
+	box-sizing: content-box;
 }
 

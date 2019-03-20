@@ -15,8 +15,10 @@
 <div id="slideshow">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
-      <p class="slide-title">Bienvenido a Conexión Personas Online</p>
-      <p>Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24</p>
+			<div class="img-back">
+				<p class="slide-title"><?= lang('WELCOME_TITLE'); ?></p>
+			</div>
+      <p><?= lang('WELCOME_TITLE'); ?></p>
     </li>
   </ul>
 </div>
