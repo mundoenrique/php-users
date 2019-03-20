@@ -18,7 +18,7 @@
 			<div class="img-back">
 				<p class="slide-title"><?= lang('WELCOME_TITLE'); ?></p>
 			</div>
-      <p><?= lang('WELCOME_TITLE'); ?></p>
+      <p><?= lang('WELCOME_MSG'); ?></p>
     </li>
   </ul>
 </div>

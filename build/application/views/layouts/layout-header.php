@@ -7,11 +7,16 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta name="googlebot" content="none" />
     <?php
-    foreach ($styleSheets as $css) {
-        echo insert_css_cdn($css['url'], $css['media']);
-        echo "\n";
-    }
-    echo insert_js_cdn('html5.js');	?>
+			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+			if($this->router->class != 'service' && $cookie == 'pichincha') {
+				echo insert_css_cdn('base.css', 'screen');
+			}
+			foreach ($styleSheets as $css) {
+					echo insert_css_cdn($css['url'], $css['media']);
+					echo "\n";
+			}
+			echo insert_js_cdn('html5.js');
+		?>
 </head>
 <?php
 $CI =& get_instance();
