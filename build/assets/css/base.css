@@ -823,6 +823,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
   margin: 0 0 0 25px;
 }
 
+ul.product-balance-group li span{
+	padding: 3px 0px;
+}
+
 span[class^="icon-"],
 span[class*=" icon-"] {
   display: inline-block;
@@ -2322,7 +2326,9 @@ ul.product-balance-group.disabled-product-balance-group li span.product-balance 
   color: #dddddd;
 }
 .product-scheme ul.product-balance-group {
-  margin: 45px 0;
+	margin: 45px 0;
+	display: flex;
+	justify-content: space-around;
 }
 
 ul.actions {

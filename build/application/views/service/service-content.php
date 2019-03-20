@@ -35,9 +35,6 @@
                                 <div class='product-scheme'>
                                     <p class="field-tip" style="color: #eee; margin-left: 10px;">Haga clic aquí para solicitar su reposición de PIN para acceso a operaciones en comercios y cajeros automáticos</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
-																				<li><span class="icon-lock services-item"></span>Bloquear <br>cuenta</li>
-																				<li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
-																				<li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
 																				<li><span class="icon-key services-item"></span>Solicitud <br>de PIN</li>
                                     </ul>
                                 </div>
