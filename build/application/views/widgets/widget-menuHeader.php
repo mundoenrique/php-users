@@ -135,7 +135,7 @@ $pais = $this->session->userdata('pais');
 			</li>
 			<?php endif; ?>
 		<li class="<?php echo $clase_perfil?> menu-item account user">
-			<a class="account" href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><?php echo $fullname;?>
+			<a class="account" href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><div><?php echo $fullname;?></div>
 			<span aria-hidden="true" class="icon-chevron-down"></span></a>
 			<ul class="submenu-user sub-menu">
 				<li class="sub-menu-item account-profile">
