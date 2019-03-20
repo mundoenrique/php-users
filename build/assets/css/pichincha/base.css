@@ -2384,7 +2384,7 @@ label.label-inline {
 }
 
 .field-options input:checked + label {
-    background: #368db6 !important;
+    background: #033572  !important;
     color: #fff !important;
     text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35) !important;
 }
