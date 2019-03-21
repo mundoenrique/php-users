@@ -1913,6 +1913,7 @@ label.label-inline {
 	 margin-left: -10px;
  }
  .product-presentation .product-network {
+	 display: none;
 	 -moz-animation: show 6s ease 0 1 normal;
 	 -o-animation: show 6s ease 0 1 normal;
 	 -webkit-animation: show 6s ease 0 1 normal;

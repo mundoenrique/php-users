@@ -208,7 +208,8 @@ if($datos->rc==0){
         <?php
         $datos = null;
         $datos = unserialize($data);
-        $base_cdn = $this->config->item('base_url_cdn');
+				$base_cdn = $this->config->item('base_url_cdn');
+				$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 
         foreach ($datos->lista as $value) {
 						//Verifica permisos operaciones de Servicios
@@ -220,13 +221,14 @@ if($datos->rc==0){
             $cadena = strtolower($value->nombre_producto);
             $producto1 = quitar_tildes($cadena);
             $img1=strtolower(str_replace(' ','-',$producto1));
-            $img=str_replace("/", "-", $img1);
+						$img=str_replace("/", "-", $img1);
+						$img=$cookie == 'pichincha' ? 'default' : $img;
             $marca= strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
             $accountBloq = ($value->bloque == '') ? 'N' : $value->bloque;
             $condition = $value->condicion;
             $fechaExp = $value->fechaExp;
-            $pais=ucwords($this->session->userdata('pais'));
+            $pais=$cookie == 'pichincha' ? 'Ec' : ucwords($this->session->userdata('pais'));
 						$permisos = implode(',',$value->services);
 						$moneda=lang("MONEDA");
 						$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));

@@ -250,6 +250,7 @@
 
 		<?php
 			$base_cdn = $this->config->item('base_url_cdn');
+			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 			foreach ($datos->cuentaOrigen as $value) {
 				// $img1=strtolower(str_replace(' ','-',$value->producto));
 				// $img=str_replace("/", "-", $img1);
@@ -257,9 +258,10 @@
 				$producto1 = quitar_tildes($cadena);
 				$img1=strtolower(str_replace(' ','-',$producto1));
 				$img=str_replace("/", "-", $img1);
+				$img=$cookie == 'pichincha' ? 'default' : $img;
 				$marca= strtolower(str_replace(" ", "-", $value->marca));
 				$empresa = strtolower($value->nomEmp);
-				$pais=ucwords($this->session->userdata('pais'));
+				$pais=$cookie == 'pichincha' ? 'Ec' : ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
 				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
