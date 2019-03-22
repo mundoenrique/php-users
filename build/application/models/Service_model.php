@@ -434,7 +434,7 @@ class Service_model extends CI_Model {
 										$response = [
 												'code' => 4,
 												'title' => 'Solicitud de token',
-												'msg' => 'Hemos enviado el código de seguridad a su correo'
+												'msg' => 'Hemos enviado el código de seguridad a tu correo'
 										];
 
 										//Si hay costo de reposición, se agreaga en la respuesta
@@ -442,7 +442,7 @@ class Service_model extends CI_Model {
 											$response = [
 	                        'code' => 4,
 	                        'title' => 'Solicitud de token',
-	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
+	                        'msg' => 'Hemos enviado el código de seguridad a tu correo',
 													'cost_repos_plas' => $cost_repos_plas
 	                    ];
 										}

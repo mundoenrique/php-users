@@ -1655,7 +1655,7 @@ label.label-inline {
 
  @media aural, braille, embossed {
 	 .screen-reader {
-		 display: block;
+		 display: none;
 	 }
  }
 

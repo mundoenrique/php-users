@@ -30,7 +30,7 @@ function viewSelect (id) {
 
     switch (id) {
         case 'lock':
-            $('#msg-block h2').text(bloqAction + 'cuenta');
+            //$('#msg-block h2').text(bloqAction + 'cuenta');
             into = $('#lock');
             leave = $('#key, #replace');
             conceal = $('#change-key, #reason-rep');
@@ -202,7 +202,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain +' #result-'+ msgMain)
         .html('')
         .append('<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>');
-    $('#msg-'+ msgMain +' h3').text('Estamos procesando su solicitud');
+    $('#msg-'+ msgMain +' h3').text('Estamos procesando tu solicitud');
     $('#msg-'+ msgMain).show();
 }
 

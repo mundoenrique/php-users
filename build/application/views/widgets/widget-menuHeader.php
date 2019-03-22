@@ -95,7 +95,7 @@ $pais = $this->session->userdata('pais');
 <nav id="main-menu">
 	<ul class="menu">
 		<li class="<?php echo $clase_dash?> menu-item products">
-			<a href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Vista Consolidada</a>
+			<a href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Vista consolidada</a>
 		</li>
 		<li class="<?php echo $clase_tranfer?> menu-item transfers">
 			<?php
@@ -142,7 +142,7 @@ $pais = $this->session->userdata('pais');
 					<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="subsection">Perfil</a>
 				</li>
 				<li class="sub-menu-item account-signout">
-					<a href="<? echo $closeLink; ?>" rel="subsection" id="cerrarSesion">Cerrar Sesión</a>
+					<a href="<? echo $closeLink; ?>" rel="subsection" id="cerrarSesion">Cerrar sesión</a>
 				</li>
 			</ul>
 		</li>
@@ -151,7 +151,7 @@ $pais = $this->session->userdata('pais');
 <nav id="compact-menu">
 	<ul class="menu">
 		<li class="menu-item account-signout">
-			<a href="<? echo $closeLink; ?>" rel="section" title="Cerrar Sesión" id="cerrarSesion"><span aria-hidden="true" class="icon-off"></span></a>
+			<a href="<? echo $closeLink; ?>" rel="section" title="Cerrar sesión" id="cerrarSesion"><span aria-hidden="true" class="icon-off"></span></a>
 		</li>
 	</ul>
 </nav>

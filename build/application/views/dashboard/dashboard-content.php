@@ -20,7 +20,7 @@
 <div id="content">
 	<article>
 		<header>
-			<h1>Vista Consolidada</h1>
+			<h1>Vista consolidada</h1>
 		</header>
 		<section>
 			<nav id="filters-stack">

@@ -34,7 +34,7 @@
 			<p class="align-center">¿Olvidaste tu<br><a href="<? echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<? echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
 	</div>
 	<div class="widget-footer">
-		<p>Si es la primera vez que entras al nuevo sistema, debes <a href="<? echo $signupLink; ?>" rel="section">registrarte</a> para crear tu usuario de acceso.</p>
+		<p>Si es la primera vez que entras al sistema, debes <a href="<? echo $signupLink; ?>" rel="section">registrarte</a> para crear tu usuario de acceso.</p>
 	</div>
 </div>
 <div class="widget" id="widget-support">

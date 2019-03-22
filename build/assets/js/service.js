@@ -9,7 +9,7 @@ const operaciones = {
 	'111' : {'id' : 'replace', 'icon' : 'spinner', 'msn' : 'Solicitud <br>de reposición'},
 	'112' : {'id': 'key', 'icon' : 'key', 'msn' : 'Cambio <br>de PIN'},
 	'117' : {'id' : 'recover', 'icon' : 'key', 'msn' : 'Solicitud <br>de PIN'},
-	'110' : {'id' : 'lock', 'icon' : 'lock', 'msn' : 'Bloquear <br>cuenta'}
+	'110' : {'id' : 'lock', 'icon' : 'lock', 'msn' : 'Bloqueo de <br>cuenta'}
 };
 
 base_url = $('body').attr('data-app-url');
@@ -53,7 +53,7 @@ $(function(){
     $(".dialog").click(function() {
 
         $("#content-product").dialog({
-            title:"Selección de Cuentas",
+            title:"Selección de cuenta",
             modal:"true",
             width:"940px",
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -124,13 +124,13 @@ $(function(){
             fe = $(this).attr("fe"),
             bloqHtml =  true,
             icon,
-            options = '<p class="field-tip" style="margin-left: 10px;">Indique la operación que desea realizar</p>',
+            options = '<p class="field-tip" style="margin-left: 10px;">Selecciona la operación que deseas realizar</p>',
             cadena,
 						permisos = $(this).attr("permisos").split(',');
 
 				bloqAction = "Bloquear ";
         pais  = $(this).attr("pais");
-        options = (pais == 'Ve') ? 'Haga clic aquí para solicitar su reposición de PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
+        options = (pais == 'Ve') ? 'Haz click aquí para solicitar la reposición de PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
 
 					//asignación de permisos
 					options+= '<ul class="product-balance-group services-content">';
@@ -169,7 +169,7 @@ $(function(){
             cadena+=	'<nav class="product-stack">';
             cadena+=	    '<ul class="stack">';
             cadena+=	        '<li class="stack-item">';
-            cadena+=		        '<a dialog button product-button rel="section" title="Seleccionar otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
+            cadena+=		        '<a dialog button product-button rel="section" title="Selecciona otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
             cadena+=		    '</li>';
             cadena+=	    '</ul>';
             cadena+=	'</nav>';
@@ -215,16 +215,16 @@ $(function(){
 
         switch (id) {
             case 'lock':
-                (viewControl != id && viewControl != '') ? notiSystem(bloqAction + 'cuenta', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
+                (viewControl != id && viewControl != '') ? notiSystem(bloqAction + 'cuenta', '¿Realmente deseas realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
                 break;
             case 'key':
-                (viewControl != id && viewControl != '') ? notiSystem('Cambio de PIN', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
+                (viewControl != id && viewControl != '') ? notiSystem('Cambio de PIN', '¿Realmente deseas realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
                 break;
             case 'replace':
-                (viewControl != id && viewControl != '') ? notiSystem('Reposición de tarjeta', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
+                (viewControl != id && viewControl != '') ? notiSystem('Reposición de tarjeta', '¿Realmente deseas realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
                 break;
             case 'recover':
-                (viewControl != id && viewControl != '') ? notiSystem('Recuperar cuenta', '¿Realmente desea realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
+                (viewControl != id && viewControl != '') ? notiSystem('Recuperar cuenta', '¿Realmente deseas realizar esta acción?', 'warning', 'carry', id): viewSelect(id);
                 break;
         }
 

@@ -15,25 +15,25 @@
                                     <input id='donor-cardnumber' name='donor-cardnumber' type='hidden' value='' />
                                 </div>
                                 <div class='product-info'>
-                                    <p class='field-tip'>Seleccione una cuenta</p>
+                                    <p class='field-tip'>Selecciona una cuenta</p>
                                 </div>
                             <?php else: ?>
                                 <div class='product-info'>
-                                    <p class='field-tip'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opción no disponible para su país</p>
+                                    <p class='field-tip'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opción no disponible para tu país</p>
                                 </div>
                             <?php endif; ?>
                             <?php if($pais == 'Co' || $pais == 'Pe'): ?>
                                 <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Indique la operación que desea realizar</p>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Selecciona la operación que deseas realizar</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
-                                        <li><span class="icon-lock services-item"></span>Bloquear <br>cuenta</li>
+                                        <li><span class="icon-lock services-item"></span>Bloqueo <br>de cuenta</li>
                                         <li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
                                         <li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
                                     </ul>
                                 </div>
                             <?php elseif($pais == 'Ve'): ?>
                                 <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Haga clic aquí para solicitar su reposición de PIN para acceso a operaciones en comercios y cajeros automáticos</p>
+                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Haz clic aquí para solicitar la reposición de PIN para acceso a operaciones en comercios y cajeros automáticos</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
 																				<li><span class="icon-key services-item"></span>Solicitud <br>de PIN</li>
                                     </ul>
@@ -49,7 +49,7 @@
                             <div id="result-block"></div>
                         </div>
                         <div id="prevent-bloq" class="msg-prevent" style="display: none;">
-                            <h2>Si realmente desea <span id="action"></span> su tarjeta presione continuar</h2>
+                            <h2>Si realmente deseas bloquear tu tarjeta, presiona continuar</h2>
                         </div>
                         <form id="bloqueo-cuenta" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-bloq" name="fecha-exp-bloq" disabled>
@@ -63,7 +63,7 @@
                                     <li id="reason-rep" class="col-md-3-profile" style="display: none">
                                         <label for="mot-sol">Motivo de la solicitud</label>
                                         <select id="mot-sol" name="mot-sol" disabled>
-                                            <option value="">Seleccione</option>
+                                            <option value="">Selecciona</option>
 	                                        <option value="41">Tarjeta perdida</option>
 	                                        <option value="43">Tarjeta robada</option>
 	                                        <option value="TD">Tarjeta deteriorada</option>
@@ -122,8 +122,8 @@
                             <div id="result-rec"></div>
                         </div>
                         <div id="rec-clave" class="msg-prevent" style="display: none">
-                            <p class="msg-pin">Esta solicitud genera un Lote de Reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
-                            <p class="msg-pin">Si realmente deseas solicitar la reposición de tu PIN, presiona continuar, el PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
+                            <p class="msg-pin">Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
+                            <p class="msg-pin">Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
                         </div>
                         <form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec" disabled>

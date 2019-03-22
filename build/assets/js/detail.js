@@ -4,7 +4,7 @@ $(function(){
   var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
  if ($('#filter-month').val() == "0") {
-    $("#period").text("Reciente");
+    $("#period").text("reciente");
   }
 
 //PERIOD SPAN TITLE
