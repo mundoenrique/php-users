@@ -1749,7 +1749,7 @@ label.label-inline {
 	text-decoration: underline;
 }
 #main-menu ul.menu li.menu-item ul.sub-menu {
-  background-color: #fc0;
+  background-color: white;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
