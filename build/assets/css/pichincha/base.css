@@ -1650,7 +1650,7 @@ label.label-inline {
  }
 
  .screen-reader {
-	 display: block;
+	 display: none;
  }
 
  @media aural, braille, embossed {
