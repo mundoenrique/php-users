@@ -236,7 +236,7 @@ if($datos->rc==0){
 
             echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$nomPlastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
          <a rel='section'>
-         <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
+         <img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
          <p class='dashboard-item-cardholder'>$nomPlastico</p>

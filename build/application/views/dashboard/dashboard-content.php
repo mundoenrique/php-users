@@ -66,7 +66,7 @@
 						<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca'
 							empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 							<a href='#' rel='section'>
-								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
+								<img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
 								<div class='dashboard-item-network $marca $inactiveImage' >$value->marca</div>
 								<div class='dashboard-item-info $inactiveInfo'>
 									<p class='dashboard-item-cardholder'>$nomPlastico</p>

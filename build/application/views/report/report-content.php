@@ -269,7 +269,7 @@
 
 				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$tarjetaHabiente' producto1='$nomProducto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
 							<a href='#' rel='section'>
-								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
+								<img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' />
 								<div class='dashboard-item-network $marca'>$value->marca</div>
 								<div class='dashboard-item-info'>
 									<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
