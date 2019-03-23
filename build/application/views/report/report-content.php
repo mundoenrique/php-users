@@ -250,7 +250,6 @@
 
 		<?php
 			$base_cdn = $this->config->item('base_url_cdn');
-			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 			foreach ($datos->cuentaOrigen as $value) {
 				// $img1=strtolower(str_replace(' ','-',$value->producto));
 				// $img=str_replace("/", "-", $img1);
@@ -258,10 +257,9 @@
 				$producto1 = quitar_tildes($cadena);
 				$img1=strtolower(str_replace(' ','-',$producto1));
 				$img=str_replace("/", "-", $img1);
-				$img=$cookie == 'pichincha' ? 'default' : $img;
 				$marca= strtolower(str_replace(" ", "-", $value->marca));
 				$empresa = strtolower($value->nomEmp);
-				$pais=$cookie == 'pichincha' ? 'Ec' : ucwords($this->session->userdata('pais'));
+				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
 				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
@@ -269,7 +267,7 @@
 
 				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$tarjetaHabiente' producto1='$nomProducto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
 							<a href='#' rel='section'>
-								<img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' />
+								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 								<div class='dashboard-item-network $marca'>$value->marca</div>
 								<div class='dashboard-item-info'>
 									<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>

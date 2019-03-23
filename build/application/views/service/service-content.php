@@ -222,13 +222,12 @@ if($datos->rc==0){
             $producto1 = quitar_tildes($cadena);
             $img1=strtolower(str_replace(' ','-',$producto1));
 						$img=str_replace("/", "-", $img1);
-						$img=$cookie == 'pichincha' ? 'default' : $img;
             $marca= strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
             $accountBloq = ($value->bloque == '') ? 'N' : $value->bloque;
             $condition = $value->condicion;
-            $fechaExp = $value->fechaExp;
-            $pais=$cookie == 'pichincha' ? 'Ec' : ucwords($this->session->userdata('pais'));
+						$fechaExp = $value->fechaExp;
+						$pais=ucwords($this->session->userdata('pais'));
 						$permisos = implode(',',$value->services);
 						$moneda=lang("MONEDA");
 						$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));
@@ -236,7 +235,7 @@ if($datos->rc==0){
 
             echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$nomPlastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
          <a rel='section'>
-         <img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' />
+         <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
          <p class='dashboard-item-cardholder'>$nomPlastico</p>

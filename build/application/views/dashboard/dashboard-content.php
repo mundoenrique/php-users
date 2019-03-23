@@ -44,10 +44,9 @@
 						$producto1 = quitar_tildes($cadena);
 						$img1=strtolower(str_replace(' ','-',$producto1));
 						$img=str_replace("/", "-", $img1);
-						$img=$cookie == 'pichincha' ? 'default' : $img;
 						$marca= strtolower(str_replace(" ", "-", $value->marca));
 						$empresa = strtolower($value->nomEmp);
-						$pais=$cookie == 'pichincha' ? 'Ec' : ucwords($this->session->userdata('pais'));
+						$pais=ucwords($this->session->userdata('pais'));
 						$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));
 						$nomProducto=ucwords(mb_strtolower($value->nombre_producto, 'UTF-8'));
 						$moneda=lang("MONEDA");
@@ -66,7 +65,7 @@
 						<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca'
 							empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 							<a href='#' rel='section'>
-								<img src='".$base_cdn."img/products/".$pais."/$img.svg' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
+								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
 								<div class='dashboard-item-network $marca $inactiveImage' >$value->marca</div>
 								<div class='dashboard-item-info $inactiveInfo'>
 									<p class='dashboard-item-cardholder'>$nomPlastico</p>
