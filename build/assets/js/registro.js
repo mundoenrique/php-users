@@ -741,7 +741,7 @@ $(function(){
 			contrato			= ($("#contrato").is(':checked')) ? 1 : 0;
 
 
-            if(countryResidence == 'Ve'){
+            if(countryResidence == 'Ve' || countryResidence == 'Ec-bp'){
                 tipoId = 3;
             }
             if(countryResidence == 'Co'){
