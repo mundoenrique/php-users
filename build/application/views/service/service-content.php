@@ -9,7 +9,7 @@
                 <div>
                     <fieldset>
                         <div class='group' id='donor'>
-                            <?php if($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe'): ?>
+                            <?php if($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe' || $pais == 'Ec-bp'): ?>
                                 <div class='product-presentation'>
                                     <a class='dialog button product-button'><span aria-hidden='true' class='icon-find'></span></a>
                                     <input id='donor-cardnumber' name='donor-cardnumber' type='hidden' value='' />
@@ -22,7 +22,7 @@
                                     <p class='field-tip'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opción no disponible para tu país</p>
                                 </div>
                             <?php endif; ?>
-                            <?php if($pais == 'Co' || $pais == 'Pe'): ?>
+                            <?php if($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec-bp'): ?>
                                 <div class='product-scheme'>
                                     <p class="field-tip" style="color: #eee; margin-left: 10px;">Selecciona la operación que deseas realizar</p>
                                     <ul class='product-balance-group disabled-product-balance-group services-content'>
