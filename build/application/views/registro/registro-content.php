@@ -27,13 +27,18 @@ switch($skin){
                 <form accept-charset="utf-8" method="post" id="form-validar">
                     <fieldset>
                         <ul class="field-group">
+													<?php if($skin == 'default'): ?>
                             <li class="field-group-item">
                                 <label for="country">País</label>
                                 <select id="iso" name="iso">
                                     <option selected value=""> Seleccione </option>
                                 </select>
                             </li>
+													<?php endif; ?>
                             <li class="field-group-item">
+													<?php if ($skin == 'pichincha'): ?>
+															<input type="hidden" id="iso" name="iso" value="Ec-bp"/>
+													<?php endif; ?>
                                 <label for="card-number">Número de Tarjeta</label>
                                 <input class="field-medium" maxlength="16" id="card-number" name="card-number" type="text" value=""/>
                             </li>

@@ -3,6 +3,9 @@ var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+var skin = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_skin\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 
 $(function(){
 
@@ -39,7 +42,7 @@ $(function(){
 	$("#condiciones").on("click", "a", function() {
 
 		if ($("#accept-terms").is("disabled") === false) {
-			if ($("#iso").val() == "Co") {
+			if ($("#iso").val() == "Co" || $("#iso").val() == "Ec-bp") {
 				$("#dialog-rg-Co").dialog({
 					modal:"true",
 					width:"940px",
@@ -121,7 +124,7 @@ $(function(){
 		if(form.valid() == true) {
 			var pais, cuenta, cedula, id_ext_per, pin, d, fecha, userName,claveWeb, anio;
 
-			pais		= $('#iso option:selected').val();
+			pais		= $('#iso').val();
 			cuenta		= $("#content-holder").find("#card-number").val();
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			pin			= $("#content-holder").find("#card-holder-pin").val();
@@ -829,13 +832,18 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		$.post(base_url +"/registro/listado",function(data){
-			$.each(data.listaPaises,function(pos,item){
-				var lista;
-				lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-				$("#iso").append(lista);
+		if(skin != 'pichincha') {
+			$.post(base_url +"/registro/listado",function(data){
+				$.each(data.listaPaises, function(pos,item){
+					var lista;
+					lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+					$("#iso").append(lista);
+				});
 			});
-		});
+		} else {
+			$('#condiciones').removeClass('label-disabled');
+			$("#accept-terms").prop('disabled', false)
+		}
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

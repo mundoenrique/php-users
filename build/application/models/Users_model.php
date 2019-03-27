@@ -23,11 +23,14 @@ class Users_model extends CI_Model {
             'password' => $password,
             'logAccesoObject' => $logAcceso,
             'token' => ''
-        ));
+				));
+
+				log_message('DEBUG', 'REQUEST login_user: ' . $data);
 
         $dataEncry = np_Hoplite_Encryption($data, 0);
-        $data = json_encode(array('data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'));
-        log_message('info', 'Salida encriptada login_user: ' . $data);
+				$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
+				log_message('DEBUG', 'REQUEST login_user país: ' . $data['pais'] . ' keId: ' . $data['keyId']);
+				$data = json_encode($data);
         $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
