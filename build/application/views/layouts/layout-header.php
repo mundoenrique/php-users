@@ -17,12 +17,19 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 		<link rel="icon" type="image/png"  href="<?php echo $pageCdn;?>img/favicon<?php echo $extension;?>" />
     <?php
 			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
-			if($this->router->class != 'service' && $cookie == 'pichincha') {
+			$sendBaseCss = true;
+			switch($this->router->class) {
+				case 'registro':
+				case 'service':
+					$sendBaseCss = false;
+					break;
+			}
+			if($sendBaseCss && $cookie == 'pichincha') {
 				echo insert_css_cdn('base.css', 'screen');
 			}
 			foreach ($styleSheets as $css) {
-					echo insert_css_cdn($css['url'], $css['media']);
-					echo "\n";
+				echo insert_css_cdn($css['url'], $css['media']);
+				echo "\n";
 			}
 			echo insert_js_cdn('html5.js');
 		?>
