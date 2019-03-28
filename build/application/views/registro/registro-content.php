@@ -27,7 +27,7 @@ switch($skin){
                 <form accept-charset="utf-8" method="post" id="form-validar">
                     <fieldset>
                         <ul class="field-group">
-													<?php if($skin == 'default'): ?>
+													<?php if($skin == 'default' || $skin == 'latodo'): ?>
                             <li class="field-group-item">
                                 <label for="country">País</label>
                                 <select id="iso" name="iso">
