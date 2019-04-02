@@ -580,9 +580,11 @@ a:hover {
 	 vertical-align: baseline;
 	 width: auto;
  }
- span[class^="icon-"]:before,
- span[class*=" icon-"]:before {
-	 speak: none;
+
+ span.icon-refresh{
+		background: transparent url('../../img/loading.gif?rev20190402');
+		height: 50px;
+		width: 50px;
  }
 
  .icon-view:before {
@@ -965,10 +967,6 @@ a:hover {
 	 content: "\e05e";
  }
 
- .icon-refresh:before {
-	 content: "\e05f";
- }
-
  .icon-spinner:before {
 	 content: "\e060";
  }
@@ -1078,13 +1076,6 @@ a:hover {
 	 -o-animation: blink 2s ease 0s infinite normal;
 	 -webkit-animation: blink 2s ease 0s infinite normal;
 	 animation: blink 2s ease 0s infinite normal;
- }
-
- .icon-spin {
-	 -moz-animation: spin 2s linear 0s infinite normal;
-	 -o-animation: spin 2s linear 0s infinite normal;
-	 -webkit-animation: spin 2s linear 0s infinite normal;
-	 animation: spin 2s linear 0s infinite normal;
  }
 
  form {
