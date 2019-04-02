@@ -2992,8 +2992,10 @@ label.label-inline {
  }
  #slideshow ul.slides li.slide p.slide-title {
 	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
-	 font-size: 30px;
+	 font-size: 32px;
 	 line-height: 36px;
+	 padding-left: 30px;
+	 color: #033572;
  }
 
  #sidebar {
