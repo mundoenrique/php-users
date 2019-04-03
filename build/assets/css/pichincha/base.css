@@ -580,9 +580,11 @@ a:hover {
 	 vertical-align: baseline;
 	 width: auto;
  }
- span[class^="icon-"]:before,
- span[class*=" icon-"]:before {
-	 speak: none;
+
+ span.icon-refresh{
+		background: transparent url('../../img/loading.gif?rev20190402');
+		height: 50px;
+		width: 50px;
  }
 
  .icon-view:before {
@@ -965,10 +967,6 @@ a:hover {
 	 content: "\e05e";
  }
 
- .icon-refresh:before {
-	 content: "\e05f";
- }
-
  .icon-spinner:before {
 	 content: "\e060";
  }
@@ -1080,13 +1078,6 @@ a:hover {
 	 animation: blink 2s ease 0s infinite normal;
  }
 
- .icon-spin {
-	 -moz-animation: spin 2s linear 0s infinite normal;
-	 -o-animation: spin 2s linear 0s infinite normal;
-	 -webkit-animation: spin 2s linear 0s infinite normal;
-	 animation: spin 2s linear 0s infinite normal;
- }
-
  form {
 	 margin: 0;
 	 padding: 0;
@@ -1121,26 +1112,23 @@ a:hover {
 
 button,
 a.button {
-	background: white;
 	border: 1px solid #fd0;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
 	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
+	border-radius: 3px;
 	color: #10133f;
 	float: right;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
-	font-size: 17px;
+	font-size: 15px;
 	line-height: 38px;
 	margin-left: 20px;
-	padding: 0 14px;
+	padding: 0 15px;
 	text-align: center;
+	min-width: 120px;
+	font-weight: bold;
 }
 button:hover,
 a.button:hover {
@@ -1157,19 +1145,30 @@ a.button:active {
  a.button.disabled-button:focus, button.disabled-button,
  a.button[disabled],
  a.button.disabled-button {
-	 background: #eeeeee;
-	 background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee)), #eeeeee;
-	 background: -webkit-linear-gradient(#ffffff, #eeeeee), #eeeeee;
-	 background: -moz-linear-gradient(#ffffff, #eeeeee), #eeeeee;
-	 background: -o-linear-gradient(#ffffff, #eeeeee), #eeeeee;
-	 background: linear-gradient(#ffffff, #eeeeee), #eeeeee;
-	 border: 1px solid #dddddd;
-	 color: #dddddd;
-	 cursor: default;
-	 -webkit-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
-	 -moz-box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
-	 box-shadow: rgba(255, 255, 255, 0.35) 0 1px 0 inset, rgba(136, 136, 136, 0.05) 0 2px 0;
+	border: 1px solid #fd0;
+	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	color: #10133f;
+	float: right;
+	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	line-height: 38px;
+	margin-left: 20px;
+	padding: 0 15px;
+	text-align: center;
+	opacity: 0.25;
+	min-width: 120px;
+	font-weight: bold;
  }
+
+ button.mensual, button.mensual:disabled, button.mensual:focus, button.mensual:hover {
+	 min-width: 0px;
+}
+
  button[type="reset"], button.reset-button,
  a.button[type="reset"],
  a.button.reset-button {
@@ -2992,8 +2991,10 @@ label.label-inline {
  }
  #slideshow ul.slides li.slide p.slide-title {
 	 font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
-	 font-size: 30px;
+	 font-size: 32px;
 	 line-height: 36px;
+	 padding-left: 30px;
+	 color: #033572;
  }
 
  #sidebar {
@@ -4299,7 +4300,9 @@ label.label-inline {
  .ui-widget select,
  .ui-widget textarea,
  .ui-widget button {
-	 font-size: 1em;
+	 font-size: 15px;
+	 font-weight: bold;
+	 color: #033572;
  }
 
  .ui-widget-content {

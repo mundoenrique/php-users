@@ -53,7 +53,7 @@
 										</select>
 									</fieldset>
 								</form>
-								<button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+								<button id="buscar" class="mensual"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 							</div>
 							<ul class="stack stack-extra">
 								<li class="stack-item">
