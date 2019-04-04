@@ -47,25 +47,32 @@ $(function() {
 				break;
 				case 'latodo': imagen = "loading-latodo.gif" ;
 				break;
-				default: imagen = "loading.gif";
 			}
 
 				$("#login").attr('disabled', 'true');
-				$("#login").html('<img src="'+base_cdn+'img/'+imagen+'">');
-				$("#login").css({
-					'position': 'relative',
-					'height': '35px',
-					'width': '100%',
-					'opacity': '1'
+				if (imagen == "") {
+					$("#login").html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">'
+					+'<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
+				} else {
+					$("#login").html('<img src="'+base_cdn+'img/'+imagen+'">');
+				}
+				if (skin == "pichincha") {
+					$("#login").css({
+						'position': 'relative',
+						'height': '35px',
+						'width': '100%',
+						'opacity': '1'
 					});
 
-				$("#login").children(0).css({
-					'position': 'absolute',
-					'top': '50%',
-					'left': '50%',
-					'transform': 'translate(-50%, -50%)',
-					'height': '25px'
-				});
+					$("#login").children(0).css({
+						'position': 'absolute',
+						'top': '50%',
+						'left': '50%',
+						'transform': 'translate(-50%, -50%)',
+						'height': '25px'
+					});
+				}
+
 
 		};
 
