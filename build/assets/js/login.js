@@ -1,6 +1,7 @@
-var base_url, base_cdn;
+var base_url, base_cdn, skin;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+skin = $('body').attr('data-app-skin');
 
 $(function() {
 
@@ -38,6 +39,40 @@ $(function() {
 
 		login(user, pass);
 	});
+	  function mostrarProcesando(skin){
+			var imagen="";
+
+			switch(skin){
+				case 'pichincha': imagen = "loading-pichincha.gif";
+				break;
+				case 'latodo': imagen = "loading-latodo.gif" ;
+				break;
+				default: imagen = "loading.gif";
+			}
+
+				$("#login").attr('disabled', 'true');
+				$("#login").html('<img src="'+base_cdn+'img/'+imagen+'">');
+				$("#login").css({
+					'position': 'relative',
+					'height': '35px',
+					'width': '100%',
+					'opacity': '1'
+					});
+
+				$("#login").children(0).css({
+					'position': 'absolute',
+					'top': '50%',
+					'left': '50%',
+					'transform': 'translate(-50%, -50%)',
+					'height': '25px'
+				});
+
+		};
+
+ 		function ocultarProcesando() {
+			$("#login").html('Ingresar');
+			$("#login").prop("disabled", false);
+		}
 
 	function login(user,pass){
 		var hasCookie = navigator.cookieEnabled;
@@ -50,6 +85,7 @@ $(function() {
 			$(".ju-sliderbutton-text").html("Verificando...");
 
 			$(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
+			mostrarProcesando(skin);
 
 			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass) } );
 
@@ -78,7 +114,7 @@ $(function() {
 					}
 
 				} else if(data.rc==-1) {
-
+					ocultarProcesando();
 					$("#dialog-login").dialog({
 						modal:"true",
 						width:"440px",
@@ -92,7 +128,7 @@ $(function() {
 
 
 				}else if(data.rc==-194) {
-
+					ocultarProcesando();
 					$("#dialog-overlay").dialog({
 						title:"Password Caducado",
 						modal:"true",
@@ -107,7 +143,7 @@ $(function() {
 
 				}
 				else if(data.rc==-205){
-
+					ocultarProcesando();
 					$("#dialog-voygo-error").dialog({
 						//title:"VOYGO ERROR",
 						modal:"true",
@@ -121,7 +157,7 @@ $(function() {
 
 				}
 				else if((data.rc==-35)||(data.rc==-8)) {
-
+					ocultarProcesando();
 					$("#dialog-bloq").dialog({
 						modal:"true",
 						width:"440px",
@@ -135,7 +171,7 @@ $(function() {
 
 				}
 				else {
-
+					ocultarProcesando();
 					$("#dialog-error").dialog({
 						title:"Error en el sistema",
 						modal:"true",
@@ -147,7 +183,7 @@ $(function() {
 						$("#dialog-error").dialog("close");
 						habilitar();
 					});
-	}
+				}
 
 		 	});	//IF CONSULTA DONE
 

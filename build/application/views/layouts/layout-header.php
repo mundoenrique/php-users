@@ -34,7 +34,7 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 			echo insert_js_cdn('html5.js');
 		?>
 </head>
-<body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>" data-country="<?php echo $this->session->userdata('pais') ?>">
+<body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>" data-app-skin="<?php echo $skin;?>" data-country="<?php echo $this->session->userdata('pais') ?>">
 <header id="head">
 
     <div id="head-wrapper">
