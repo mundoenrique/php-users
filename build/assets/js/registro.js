@@ -575,8 +575,17 @@ $(function(){
 	//Funcion que valida si existe el usuario en DB
 
     $("#username").blur(function(){
-        usuario     = $("#username").val();								//38 N
-        username    = usuario.toUpperCase();							//	 N
+				usuario     = $("#username").val();
+				console.log($('#iso').val())
+				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
+				}
+				username    = usuario.toUpperCase();
 		if(usuario.match(/[\s]/gi)){
 			$("#loading").hide();
 		}else{
