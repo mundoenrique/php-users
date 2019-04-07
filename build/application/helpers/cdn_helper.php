@@ -85,15 +85,22 @@ if ( ! function_exists('insert_image_cdn'))
 	 * @param  string $filename [description]
 	 * @return [type]           [description]
 	 */
-	function insert_image_cdn($filename = '')
+	function insert_image_cdn($filename = 'default.png', $dash = FALSE)
 	{
 		$CI =& get_instance();
 
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$full_url = $url_cdn . 'media/img/' . $filename;
-
-		$image = '<img src="' . $full_url . '" />';
-		return $image;
+		$cdnPath = $CI->config->item('base_path_cdn');
+		$country = $CI->config->item('country');
+		$filename = $filename.'.png';
+		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v='.date('Ymd-B', filemtime($filepath));
+		}
+		$dash = $dash ? 'class="'.$dash.'" id="cardImage"' : '';
+		$img='<img src="'.$url_cdn.'img/products/'.$country.'/'.$filename.$version.'"  width="200" height="130" alt="" '.$dash.'>';
+		return $img;
 	}
 }
 

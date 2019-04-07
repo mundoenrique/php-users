@@ -234,17 +234,16 @@ if($datos->rc==0){
 						$nomProducto=ucwords(mb_strtolower($value->nombre_producto, 'UTF-8'));
 
             echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' pais='$pais' moneda='$moneda' nombre='$nomPlastico' marca='$marca' mascara='$value->noTarjetaConMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix' bloqueo='$accountBloq' condition='$condition' fe='$fechaExp' permisos='$permisos'>
-         <a rel='section'>
-         <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
-         <div class='dashboard-item-network $marca'></div>
-         <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$nomPlastico</p>
-
-         <p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
-         <p class='dashboard-item-category'>$nomProducto</p>
-         </div>
-         </a>
-         </li>";
+						<a rel='section'>";
+						echo insert_image_cdn($img);
+						echo "<div class='dashboard-item-network $marca'></div>
+						<div class='dashboard-item-info'>
+						<p class='dashboard-item-cardholder'>$nomPlastico</p>
+						<p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
+						<p class='dashboard-item-category'>$nomProducto</p>
+						</div>
+						</a>
+						</li>";
         }
         function quitar_tildes($cadena) {
             $no_permitidas= array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");

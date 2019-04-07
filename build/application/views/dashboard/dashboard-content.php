@@ -54,19 +54,24 @@
 						$activeCard = $value->bloque;
 
 						//Verifica si la tarjeta se encuentra inactiva - CuentaGeneralPeru
-						$inactiveImage = "";
+						$inactiveImage = "active";
 						$inactiveInfo = "";
 						$saldo = "";
 						//verifica mensaje de saldo inicial
 						if($country !== 'Ve'){
 							$saldo = $moneda." ---";
 						}
+						if($activeCard === "NE" && $pais === 'Pe'){
+							$saldo = "<div class='round-label'><div class='text-label'> Activar &nbsp<span aria-hidden='true' class='icon-arrow-right'></span></div></div>";
+							$inactiveInfo = "inactive" ;
+							$inactiveImage = "inactive-image";
+					 }
 						echo"
 						<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca'
 							empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
-							<a href='#' rel='section'>
-								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' class='$inactiveImage' id='cardImage' />
-								<div class='dashboard-item-network $marca $inactiveImage' >$value->marca</div>
+							<a href='#' rel='section'>";
+								echo insert_image_cdn($img, $inactiveImage);
+								echo "<div class='dashboard-item-network $marca $inactiveImage' >$value->marca</div>
 								<div class='dashboard-item-info $inactiveInfo'>
 									<p class='dashboard-item-cardholder'>$nomPlastico</p>
 									<p class='dashboard-item-balance'>$saldo</p>

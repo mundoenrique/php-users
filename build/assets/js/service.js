@@ -140,7 +140,7 @@ $(function(){
 						//si esta bloqueada se cambia label
 						if(permisos[permiso] == 110 && bloqueo == 'PB'){
 							parametros.icon = 'unlock';
-							parametros.msn = 'Desbloquear <br>cuenta';
+							parametros.msn = 'Desbloqueo<br> de cuenta';
 							bloqAction = 'Desbloquear ';
 							// Si la cuenta esta bloqueada, no se visualiza la operación de reposición
 							permisos.splice(permisos.indexOf('112'), 1);

@@ -30,7 +30,7 @@ function viewSelect (id) {
 
     switch (id) {
         case 'lock':
-            //$('#msg-block h2').text(bloqAction + 'cuenta');
+            $('#msg-block h2').text(bloqAction + 'cuenta');
             into = $('#lock');
             leave = $('#key, #replace');
             conceal = $('#change-key, #reason-rep');
