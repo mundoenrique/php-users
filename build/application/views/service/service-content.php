@@ -49,7 +49,7 @@
                             <div id="result-block"></div>
                         </div>
                         <div id="prevent-bloq" class="msg-prevent" style="display: none;">
-                            <h2>Si realmente deseas bloquear tu tarjeta, presiona continuar</h2>
+                            <h2>Si realmente deseas <span id="action"></span> tu tarjeta, presiona continuar</h2>
                         </div>
                         <form id="bloqueo-cuenta" accept-charset="utf-8" method="post" class="profile-1">
                             <input type="hidden" id="fecha-exp-bloq" name="fecha-exp-bloq" disabled>
