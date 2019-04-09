@@ -587,6 +587,12 @@ a:hover {
 		width: 50px;
  }
 
+ #loading,
+ #load_reg {
+	margin-top: -4px !important;
+	margin-right: 17px !important;
+ }
+
  .icon-view:before {
 	 content: "\e000";
  }

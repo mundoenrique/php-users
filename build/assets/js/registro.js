@@ -576,7 +576,6 @@ $(function(){
 
     $("#username").blur(function(){
 				usuario     = $("#username").val();
-				console.log($('#iso').val())
 				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
 					var titleCI = 'Nombre de usuario',
 					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
