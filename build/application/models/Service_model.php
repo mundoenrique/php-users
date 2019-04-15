@@ -317,7 +317,14 @@ class Service_model extends CI_Model {
                         'title' => 'Cambio de PIN',
                         'msg' => 'Ha superado la cantidad de intentos fallidos por el dia de hoy. Por favor intente mañana.'
                     ];
-                    break;
+										break;
+								case -401:
+                    $response = [
+                        'code' => 1,
+                        'title' => 'Cambio de PIN',
+                        'msg' => 'No fue posible cambiar el PIN de tu tarjeta, intenta en unos minutos.'
+                    ];
+										break;
                 case -286:
                         if($desdata->rc == -286) {
                             $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
