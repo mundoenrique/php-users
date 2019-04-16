@@ -422,7 +422,7 @@ $pais_residencia=$this->session->userdata('pais');
                             </li>
                             <li class="col-md-4-profile">
                                 <label for="code">Código postal</label>
-                                <input class="field-medium" id="codepostal" name="codepostal" type="text" maxlength="10" value="<?php echo $acZonaPostal; ?>" >
+                                <input class="field-medium" id="codepostal" name="codepostal" type="text" maxlength="10" value="<?php echo trim($acZonaPostal); ?>" >
                             </li>
                         </ul>
                         <ul class="row-profile" >
