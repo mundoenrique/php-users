@@ -1,8 +1,9 @@
-var base_url, base_cdn;
+var base_url, base_cdn, skin;
 var fecha=new Date();
 var controlValid = 0;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+skin = $('body').attr('data-app-skin');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
 		afiliado = $('#content').attr('afiliado'),
 		tyc = $('#content').attr('tyc');
@@ -17,6 +18,8 @@ $(function(){
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
 	}
 
+	(skin == 'pichincha')? $('#codepostal').attr('maxlength','6'): '';
+	(skin == 'pichincha')? $('#telefono_hab').attr('maxlength','9'): '';
 
 	//Menu desplegable transferencia
 	$('.transfers').hover(function(){
