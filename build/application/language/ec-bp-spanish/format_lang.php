@@ -1,5 +1,5 @@
 <?php
-$lang['PAIS'] = "COLOMBIA";
+$lang['PAIS'] = "ECUADOR";
 $lang['MONEDA'] = "$ ";
 $lang['FOOTER'] = "";
 $lang['ID'] = "CC.";
