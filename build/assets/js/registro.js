@@ -9,6 +9,7 @@ var skin = decodeURIComponent(
 
 $(function(){
 
+	(skin == 'pichincha')? $('#telefonoFijo').attr('maxlength','9'): '' ;
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 
