@@ -584,6 +584,13 @@ $(function(){
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
 					return;
+				}else if(usuario == ""){
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'El campo usuario no puede estar vacío.',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
 				}
 				username    = usuario.toUpperCase();
 		if(usuario.match(/[\s]/gi)){
@@ -1004,6 +1011,10 @@ $(function(){
 			"Correo invalido. "
 		);
 
+		jQuery.validator.addMethod("validatePassword", function(value,element){
+			 return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
+		}, "El campo debe tener mínimo 1 y máximo 3 números consecutivos");
+
 		jQuery.validator.addMethod("digValido",function(value, element, regex){
 				return value == digVer ? true : false;
 			}
@@ -1084,7 +1095,7 @@ $(function(){
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
-				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
+				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
 				"proteccion": {"required": true}
