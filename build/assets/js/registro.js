@@ -584,9 +584,9 @@ $(function(){
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
 					return;
-				}else if(usuario == ""){
+				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
 					var titleCI = 'Nombre de usuario',
-					msgCI = 'El campo usuario no puede estar vacío.',
+					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato valido',
 					modalTypeCI = 'alert-warning';
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
