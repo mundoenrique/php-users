@@ -375,7 +375,7 @@ $(function(){
 
 	/*Funcion pais de residencia*/
 
-	var codPaisresidencia=$('#pais-residencia-value').val();
+	var codPaisresidencia=$('#pais-residencia-value').val().split("-")[0];
 
 	function paisdeResidencia(){
 		switch (codPaisresidencia) {
@@ -398,6 +398,11 @@ $(function(){
 				$('#pais-de-residencia').val('Venezuela');
 				$('#state').text('Estado');
 				$('#city').text('Ciudad');
+				break;
+				case 'Ec':
+				$('#pais-de-residencia').val('Ecuador');
+				$('#state').text('Departamento');
+				$('#city').text('Municipio');
 				break;
 			default:
 
