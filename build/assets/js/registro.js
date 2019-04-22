@@ -9,7 +9,11 @@ var skin = decodeURIComponent(
 
 $(function(){
 
-	(skin == 'pichincha')? $('#telefonoFijo').attr('maxlength','9'): '' ;
+	var tlfLength = "11";
+	if (skin == 'pichincha'){
+		$('#telefonoFijo').attr('maxlength','9');
+		tlfLength = "9";
+	}
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 
@@ -1080,7 +1084,7 @@ $(function(){
 				"direccion" : {"required" : true},																			//20
 				"correo" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
 				"confirm-correo": {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, "equalTo":"#email"},//22
-				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": 11},					//23
+				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": tlfLength},					//23
 				"telefono_movil": {"required":true, "number":true, "numberEqual3": true, "minlength": 7, "maxlength": 11},	//24
 				"otro_tipo_telefono" : {"required":false},																	//25
 				"otro_telefono_num" : {"number":true, "numberEqual1": true, "minlength": 7, "maxlength": 11},				//26
@@ -1140,7 +1144,7 @@ $(function(){
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
 					"minlength"		: "El campo Teléfono Fijo debe contener como mínimo 7 caracteres numéricos.",
-					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo 11 caracteres numéricos."
+					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres numéricos."
 				},
 				"telefono_movil" : {																											//24
 					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
@@ -1169,7 +1173,9 @@ $(function(){
 					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
-				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
+				"userpwd" : {
+					"required" :"El campo contraseña NO puede estar vacío."
+				},																			//39
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
 				"proteccion": "Debe aceptar protección de datos personales."
