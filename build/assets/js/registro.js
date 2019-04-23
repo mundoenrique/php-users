@@ -1173,9 +1173,7 @@ $(function(){
 					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
-				"userpwd" : {
-					"required" :"El campo contraseña NO puede estar vacío."
-				},																			//39
+				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
 				"proteccion": "Debe aceptar protección de datos personales."
