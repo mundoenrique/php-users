@@ -855,8 +855,8 @@ $(function(){
 		if(skin != 'pichincha') {
 			$.post(base_url +"/registro/listado",function(data){
 				$.each(data.listaPaises, function(pos,item){
-					var lista;
-					lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
+					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
 					$("#iso").append(lista);
 				});
 			});
