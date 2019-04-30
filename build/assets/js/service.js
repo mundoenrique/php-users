@@ -136,7 +136,7 @@ $(function(){
 					options+= '<ul class="product-balance-group services-content">';
 					permisos.sort();
 					for(var permiso in permisos){
-						var parametros = Object.assign({}, operaciones[permisos[permiso]]);
+						var parametros = $.extend({}, operaciones[permisos[permiso]])
 						//si esta bloqueada se cambia label
 						if(permisos[permiso] == 110 && bloqueo == 'PB'){
 							parametros.icon = 'unlock';
