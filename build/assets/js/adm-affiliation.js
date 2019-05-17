@@ -363,9 +363,9 @@ $(function(){
 
 								var cpo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								  );	
+								  );
 
-								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":"", "expDate":expDate, "cpo_name":cpo_name},function(data) {
+								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":"", "expDate":expDate, cpo_name: cpo_cook},function(data) {
 									if(data.rc==0){
 										var exito;
 										$("#progress").attr('style','display:none');

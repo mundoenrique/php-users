@@ -73,13 +73,13 @@ $(function() {
 function confirmPassOperac(clave)
 {
 	var response;
-	var ajax_data = {
-		"clave":hex_md5(clave)
-	};
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
 	$.ajax({
 		url: base_url +"/transferencia/operaciones",
-		data: ajax_data,
+		data: {"clave":hex_md5(clave), cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		async: false,
