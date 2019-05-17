@@ -1,8 +1,9 @@
-var base_url, base_cdn;
+var base_url, base_cdn, skin;
 var fecha=new Date();
 var controlValid = 0;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+skin = $('body').attr('data-app-skin');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
 		afiliado = $('#content').attr('afiliado'),
 		tyc = $('#content').attr('tyc');
@@ -17,6 +18,14 @@ $(function(){
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
 	}
 
+	var tlfLength = '11';
+	var codLength = '10';
+	if (skin == 'pichincha'){
+		$('#codepostal').attr('maxlength','6');
+		$('#telefono_hab').attr('maxlength','9');
+		tlfLength = '9';
+		codLength = '6'
+	}
 
 	//Menu desplegable transferencia
 	$('.transfers').hover(function(){
@@ -366,7 +375,7 @@ $(function(){
 
 	/*Funcion pais de residencia*/
 
-	var codPaisresidencia=$('#pais-residencia-value').val();
+	var codPaisresidencia=$('#pais-residencia-value').val().split("-")[0];
 
 	function paisdeResidencia(){
 		switch (codPaisresidencia) {
@@ -389,6 +398,11 @@ $(function(){
 				$('#pais-de-residencia').val('Venezuela');
 				$('#state').text('Estado');
 				$('#city').text('Ciudad');
+				break;
+				case 'Ec':
+				$('#pais-de-residencia').val('Ecuador');
+				$('#state').text('Departamento');
+				$('#city').text('Municipio');
 				break;
 			default:
 
@@ -1145,14 +1159,14 @@ $(function(){
 				"edo_civil" : {"required" : false},																			//12
 				"nacionalidad" : {"required" : true, "lettersonly": true},																		//13
 				"tipo_direccion" : {"required" : true},																	//14
-				"codepostal" : {"required" : false, digits: true},														//15
+				"codepostal" : {"required" : false, digits: true,"maxlength": codLength},														//15
 				"pais_Residencia" : {"required" : true},																	//16
 				"departamento_residencia" : {"required" : true},																		//17
 				"provincia_residencia" : {"required" : true},																			//18
 				"distrito_residencia" : {"required" : true},																			//19
 				"direccion" : {"required" : true},																			//20
 				"email" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
-				"telefono_hab": {"number":true, "numberEqual2": true, "maxlength": 11, "minlength":7},									//23
+				"telefono_hab": {"number":true, "numberEqual2": true, "maxlength": 11, "minlength": tlfLength},									//23
 				"telefono": {"required":true, "number":true, "numberEqual3": true, "maxlength": 11, "minlength":7},					//24
 				"otro_telefono_tipo" : {"required":false},																	//25
 				"otro_telefono_num" : {"number":true, "numberEqual1": true, "maxlength": 11, "minlength":7},								//26
@@ -1202,7 +1216,10 @@ $(function(){
 					"required"		: "El campo Nacionalidad NO puede estar vacío."
 				},																													//13
 				"tipo_direccion" : "El campo Tipo Dirección NO puede estar vacío.",																//14
-				"codepostal" : "El campo Código Postal debe contener solo números.",															//15
+				"codepostal" : {
+					"digits":"El campo Código Postal debe contener solo números.",
+					"maxlength" : "El campo Código postal debe contener máximo "+ codLength +" caracteres númericos."
+				},																																																						//15
 				"pais_Residencia" : "El campo País de Residencia NO puede estar vacío y debe contener solo letras.",							//16
 				"departamento_residencia" : "El campo Departamento NO puede estar vacío.",																	//17
 				"provincia_residencia" : "El campo Provincia NO puede estar vacío.",																		//18
@@ -1213,7 +1230,7 @@ $(function(){
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
 					"minlength": "El campo Teléfono Fijo debe contener mínimo 7 caracteres numéricos.",
-					"maxlength" : "El campo Teléfono Fijo debe contener máximo 11 caracteres númericos."
+					"maxlength" : "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres númericos."
 				},
 				"telefono" : {																											//24
 					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",

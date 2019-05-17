@@ -202,7 +202,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain +' #result-'+ msgMain)
         .html('')
         .append('<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>');
-    $('#msg-'+ msgMain +' h3').text('Estamos procesando su solicitud');
+    $('#msg-'+ msgMain +' h3').text('Estamos procesando tu solicitud');
     $('#msg-'+ msgMain).show();
 }
 

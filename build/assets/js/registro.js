@@ -3,9 +3,17 @@ var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+var skin = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_skin\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 
 $(function(){
 
+	var tlfLength = "11";
+	if (skin == 'pichincha'){
+		$('#telefonoFijo').attr('maxlength','9');
+		tlfLength = "9";
+	}
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 
@@ -39,7 +47,7 @@ $(function(){
 	$("#condiciones").on("click", "a", function() {
 
 		if ($("#accept-terms").is("disabled") === false) {
-			if ($("#iso").val() == "Co") {
+			if ($("#iso").val() == "Co" || $("#iso").val() == "Ec-bp") {
 				$("#dialog-rg-Co").dialog({
 					modal:"true",
 					width:"940px",
@@ -121,7 +129,7 @@ $(function(){
 		if(form.valid() == true) {
 			var pais, cuenta, cedula, id_ext_per, pin, d, fecha, userName,claveWeb, anio;
 
-			pais		= $('#iso option:selected').val();
+			pais		= $('#iso').val();
 			cuenta		= $("#content-holder").find("#card-number").val();
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			pin			= $("#content-holder").find("#card-holder-pin").val();
@@ -572,8 +580,23 @@ $(function(){
 	//Funcion que valida si existe el usuario en DB
 
     $("#username").blur(function(){
-        usuario     = $("#username").val();								//38 N
-        username    = usuario.toUpperCase();							//	 N
+				usuario     = $("#username").val();
+				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
+				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato valido',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
+				}
+				username    = usuario.toUpperCase();
 		if(usuario.match(/[\s]/gi)){
 			$("#loading").hide();
 		}else{
@@ -738,7 +761,7 @@ $(function(){
 			contrato			= ($("#contrato").is(':checked')) ? 1 : 0;
 
 
-            if(countryResidence == 'Ve'){
+            if(countryResidence == 'Ve' || countryResidence == 'Ec-bp'){
                 tipoId = 3;
             }
             if(countryResidence == 'Co'){
@@ -829,13 +852,18 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		$.post(base_url +"/registro/listado",function(data){
-			$.each(data.listaPaises,function(pos,item){
-				var lista;
-				lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-				$("#iso").append(lista);
+		if(skin != 'pichincha') {
+			$.post(base_url +"/registro/listado",function(data){
+				$.each(data.listaPaises, function(pos,item){
+					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
+					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+					$("#iso").append(lista);
+				});
 			});
-		});
+		} else {
+			$('#condiciones').removeClass('label-disabled');
+			$("#accept-terms").prop('disabled', false)
+		}
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -987,6 +1015,10 @@ $(function(){
 			"Correo invalido. "
 		);
 
+		jQuery.validator.addMethod("validatePassword", function(value,element){
+			 return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
+		}, "El campo debe tener mínimo 1 y máximo 3 números consecutivos");
+
 		jQuery.validator.addMethod("digValido",function(value, element, regex){
 				return value == digVer ? true : false;
 			}
@@ -1052,7 +1084,7 @@ $(function(){
 				"direccion" : {"required" : true},																			//20
 				"correo" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
 				"confirm-correo": {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, "equalTo":"#email"},//22
-				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": 11},					//23
+				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": tlfLength},					//23
 				"telefono_movil": {"required":true, "number":true, "numberEqual3": true, "minlength": 7, "maxlength": 11},	//24
 				"otro_tipo_telefono" : {"required":false},																	//25
 				"otro_telefono_num" : {"number":true, "numberEqual1": true, "minlength": 7, "maxlength": 11},				//26
@@ -1067,7 +1099,7 @@ $(function(){
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
-				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
+				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
 				"proteccion": {"required": true}
@@ -1112,7 +1144,7 @@ $(function(){
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
 					"minlength"		: "El campo Teléfono Fijo debe contener como mínimo 7 caracteres numéricos.",
-					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo 11 caracteres numéricos."
+					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres numéricos."
 				},
 				"telefono_movil" : {																											//24
 					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
@@ -1141,7 +1173,7 @@ $(function(){
 					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
-				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
+				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
 				"proteccion": "Debe aceptar protección de datos personales."

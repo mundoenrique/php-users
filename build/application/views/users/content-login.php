@@ -1,20 +1,24 @@
 <?php
   $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-  if ($skin == 'latodo') {
-    $signupLink = $this->config->item('base_url') . '/registro/index_pe';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
-  } else {
-    $signupLink = $this->config->item('base_url') . '/registro';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
-  }
+	if ($skin == 'latodo') {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
+	} else if($skin == 'pichincha'){
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pi';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pi';
+	}else {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
+	}
+	$signupLink = $this->config->item('base_url') . '/registro';
 ?>
 <div id="slideshow">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
-      <p class="slide-title">Bienvenido a Conexión Personas Online</p>
-      <p>Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24</p>
+			<div class="img-back">
+				<p class="slide-title"><?= lang('WELCOME_TITLE'); ?></p>
+			</div>
+      <p><?= lang('WELCOME_MSG'); ?></p>
     </li>
   </ul>
 </div>

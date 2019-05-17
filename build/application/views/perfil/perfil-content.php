@@ -223,7 +223,7 @@ if(isset($data)){
 
 $numAfiliacion=(array)$datos->registro->afiliacion;
 
-if(isset($numAfiliacion) || count($numAfiliacion)>0){
+	if((isset($numAfiliacion) || count($numAfiliacion)>0) && $aplicaPerfil=='S'){
     $estadocivil=$datos->registro->afiliacion->edocivil;
     $lugar_nacimiento=$datos->registro->afiliacion->lugar_nacimiento;
     $centro_laboral=$datos->registro->afiliacion->centrolab;
@@ -348,11 +348,11 @@ $pais_residencia=$this->session->userdata('pais');
 
                         <ul class="row-profile row-fecha-nacimiento">
                             <li class="col-md-3-profile remove-perfil-plata-sueldo">
-                                <label for="lugar-nac">Lugar de Nacimiento</label>
+                                <label for="lugar-nac">Lugar de nacimiento</label>
                                 <input class="field-small" id="lugar-nacimiento" maxlength="80"  name="lugar_nac" type="text" value="<?php echo $lugar_nacimiento; ?>"/>
                             </li>
                             <li class="col-profile-fecha-nac">
-                                <label for="fecha-nac">Fecha de Nacimiento</label>
+                                <label for="fecha-nac">Fecha de nacimiento</label>
                                 <input id="dia-nacimiento" name="dia-nacimiento" class="nac-input" maxlength="2" type="text"/>
                                 <select id="mes-nacimiento" name="mes-nacimiento">
                                     <option value="01">Enero</option>
@@ -383,7 +383,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 </label>
                             </li>
                             <li class="col-md-3-profile remove-perfil-plata-sueldo">
-                                <label>Estado Civil</label>
+                                <label>Estado civil</label>
                                 <select class="field-estado-civil" id="edocivil" name="edocivil">
                                     <option value="">Seleccione</option>
                                     <option value="S">Soltero</option>
@@ -422,7 +422,7 @@ $pais_residencia=$this->session->userdata('pais');
                             </li>
                             <li class="col-md-4-profile">
                                 <label for="code">Código postal</label>
-                                <input class="field-medium" id="codepostal" name="codepostal" type="text" maxlength="10" value="<?php echo $acZonaPostal; ?>" >
+                                <input class="field-medium" id="codepostal" name="codepostal" type="text" maxlength="10" value="<?php echo trim($acZonaPostal); ?>" >
                             </li>
                         </ul>
                         <ul class="row-profile" >
@@ -458,15 +458,15 @@ $pais_residencia=$this->session->userdata('pais');
                         </ul>
                         <ul class="row-profile">
                             <li class="col-md-4-profile">
-                                <label>Teléfono Fijo</label>
+                                <label>Teléfono fijo</label>
                                 <input maxlength="11" id="telefono_hab" name="telefono_hab" type="text" value=<?php echo $num_hab;?>>
                             </li>
                             <li class="col-md-4-profile">
-                                <label>Teléfono Móvil</label>
+                                <label>Teléfono móvil</label>
                                 <input id="telefono" maxlength="11" name="telefono" type="text" value=<?php echo $num; ?>>
                             </li>
                             <li class="col-md-4-profile">
-                                <label>Otro Teléfono (Tipo)</label>
+                                <label>Otro teléfono (Tipo)</label>
                                 <select id="otro_telefono_tipo" name="otro_telefono_tipo" type="text">
                                     <option value = "">Seleccione</option>
                                     <option value = "OFC">Laboral</option>
@@ -476,7 +476,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 <input type="hidden" value="<?php echo $tipo_otr;?>" id="otro_telefono_tipo_value" name="otro_telefono_tipo_value">
                             </li>
                             <li class="col-md-4-profile">
-                                <label>Otro Teléfono (Número)</label>
+                                <label>Otro teléfono (Número)</label>
                                 <input class="field-medium" id="otro_telefono_num" name="otro_telefono_num" maxlength="11" type="text" value=<?php echo $num_otr;?>>
                             </li>
                         </ul>
@@ -494,7 +494,7 @@ $pais_residencia=$this->session->userdata('pais');
                         </fieldset>
                         <hr class="separador-profile">
                         <div class="remove-perfil-plata-sueldo">
-                            <h2 class="profile-title-3">Datos Laborales</h2>
+                            <h2 class="profile-title-3">Datos laborales</h2>
                             <fieldset class="col-md-12-profile">
                                 <ul class="row-profile">
                                     <li class="col-md-3-profile">
@@ -502,11 +502,11 @@ $pais_residencia=$this->session->userdata('pais');
                                         <input type="text" name="ruc_cto_labora" id="ruc_cto_labora" value="<?php echo $ruc_cto_laboral; ?>" readonly="readonly">
                                     </li>
                                     <li class="col-md-3-profile">
-                                        <label>Centro Laboral</label>
+                                        <label>Centro laboral</label>
                                         <input type="text" maxlength="100" name="centro_laboral" id="centro_laboral" value="<?php echo $centro_laboral; ?>">
                                     </li>
                                     <li class="col-md-3-profile">
-                                        <label>Situación Laboral</label>
+                                        <label>Situación laboral</label>
                                         <select name="situacion_laboral" id="situacion_laboral">
                                             <option value="">Seleccione</option>
                                             <option value="1">Dependiente</option>
@@ -517,7 +517,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 </ul>
                                 <ul class="row-profile">
                                     <li class="col-md-3-profile">
-                                        <label>Antiguedad Laboral</label>
+                                        <label>Antiguedad laboral</label>
                                         <select class="antiguedad-laboral" id="antiguedad_laboral" name="antiguedad_laboral_value">
                                         </select>
                                         <input id="antiguedad" name="antiguedad" type="hidden" value="<?php echo $antiguedad_laboral;  ?>">
@@ -535,7 +535,7 @@ $pais_residencia=$this->session->userdata('pais');
                                         <input type="text" maxlength="40" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
                                     </li>
                                     <li class="col-md-3-profile">
-                                        <label>Ingreso Promedio Mensual</label>
+                                        <label>Ingreso promedio mensual</label>
                                         <input type="text" maxlength="12" name="ingreso_promedio" id="ingreso_promedio" value="<?php echo $ingreso_promedio_mensual; ?>">
                                     </li>
                                 </ul>
@@ -553,7 +553,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 </ul>
                                 <ul class="row-profile">
                                     <li class="col-md-3-profile">
-                                        <label>Cargo Publico</label>
+                                        <label>Cargo público</label>
                                         <input type="text" class="cargo_publico" maxlength="40" name="cargo_publico" id="cargo_publico" value="<?php echo $cargo_publico; ?>">
                                     </li>
                                     <li class="col-md-3-profile">

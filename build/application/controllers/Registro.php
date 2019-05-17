@@ -11,27 +11,81 @@ class Registro extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->initCookie();
+
+	}
+
+	private function initCookie() {
+		$requestMethod=$this->router->method;
+
+		if($requestMethod == 'index' || $requestMethod == 'index_pe' || $requestMethod == 'index_pi') {
+
+			switch($requestMethod){
+				case 'index_pe': 	$code='latodo'; break;
+				case 'index_pi': $code='pichincha'; break;
+				default: $code='default';
+			}
+
+			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
+				$this->load->helper('url');
+
+				$cookie = array(
+					'name' => 'skin',
+					'value' => $code,
+					'expire' => 0,
+					'domain' => $this->config->item('cookie_domain'),
+					'path' => $this->config->item('cookie_path'),
+					'prefix' => $this->config->item('cookie_prefix'),
+					'secure' => $this->config->item('cookie_secure')
+				);
+				$this->input->set_cookie($cookie);
+				redirect(current_url());
+			}
+		}
+	}
+
+	public function index_pi()
+	{
+		$this->load->model('registro_model', 'registro');
+		//INSTANCIA PARA TITULO DE PAGINA
+		$titlePage = 'Conexión Personas Online';
+		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
+
+		$styleSheets = array(
+			array('url' => 'base.css', 'media' => 'screen'),
+			array('url' => 'base-320.css', 'media' => 'screen and (max-width: 767px)'),
+			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)'),
+			array('url' => 'formulario-registro.css', 'media' => 'screen')
+		);
+		//INSTANCIA GENERAR  HEADER
+		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
+		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
+		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
+		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		//INSTANCIA DEL FOOTER
+		$footer = $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
+		//INSTANCIA DE PARTE DE CUERPO
+		$content = $this->parser->parse('registro/registro-content', array(), true);
+		//INSTANCIA DE SIDERBAR
+		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
+
+		//DATA QUE SE PASA AL LAYOUT EN GENERAL
+		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
+		$data = array('header'=>$header, 'content'=>$content, 'footer'=>$footer, 'sidebar'=>$sidebarlogin);
+
+		$this->parser->parse('layouts/layout-a', $data);
+	}
+
 	public function index_pe()
 	{
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
-			$this->load->helper('url');
-
-			$cookie = array(
-				'name'		=> 'skin',
-				'value'		=> 'latodo',
-				'expire'	=> 0,
-				'domain'	=> $this->config->item('cookie_domain'),
-				'path'		=> $this->config->item('cookie_path'),
-				'prefix'	=> $this->config->item('cookie_prefix'),
-				'secure'	=> $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
 
 		$styleSheets = array(
 			array('url' => 'base.css', 'media' => 'screen'),
@@ -67,21 +121,6 @@ class Registro extends CI_Controller {
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
-			$this->load->helper('url');
-
-			$cookie = array(
-				'name'		=> 'skin',
-				'value'		=> 'default',
-				'expire'	=> 0,
-				'domain'	=> $this->config->item('cookie_domain'),
-				'path'		=> $this->config->item('cookie_path'),
-				'prefix'	=> $this->config->item('cookie_prefix'),
-				'secure'	=> $this->config->item('cookie_secure')
-			);
-			$this->input->set_cookie($cookie);
-			redirect(current_url());
-		}
 
 		$styleSheets = array(
 			array('url' => 'base.css', 'media' => 'screen'),

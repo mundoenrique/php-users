@@ -2,10 +2,10 @@
 $pais = $this->session->userdata('pais');
 
 $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-if($skin == 'latodo'){
-    $homeLink = $this->config->item('base_url') . '/latodo/home';
-}else{
-    $homeLink = $this->config->item('base_url');
+switch($skin){
+	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
+	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;
+	default: $homeLink = $this->config->item('base_url'); break;
 }
 ?>
 <div id="content">
@@ -27,13 +27,18 @@ if($skin == 'latodo'){
                 <form accept-charset="utf-8" method="post" id="form-validar">
                     <fieldset>
                         <ul class="field-group">
+													<?php if($skin == 'default' || $skin == 'latodo'): ?>
                             <li class="field-group-item">
                                 <label for="country">País</label>
                                 <select id="iso" name="iso">
                                     <option selected value=""> Seleccione </option>
                                 </select>
                             </li>
+													<?php endif; ?>
                             <li class="field-group-item">
+													<?php if ($skin == 'pichincha'): ?>
+															<input type="hidden" id="iso" name="iso" value="Ec-bp"/>
+													<?php endif; ?>
                                 <label for="card-number">Número de Tarjeta</label>
                                 <input class="field-medium" maxlength="16" id="card-number" name="card-number" type="text" value=""/>
                             </li>

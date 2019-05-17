@@ -1,7 +1,8 @@
 var fecha = new Date();
 fecha = fecha.getFullYear();
 var i=0;
-var anio,fechaIni,fechaFin,tipoConsulta,producto,tipoConsulta,reporte;
+var anio,fechaIni,fechaFin,tipoConsulta,producto,tipoConsulta,reporte,skin;
+skin = $('body').attr('data-app-skin');
 do {
 	anio= parseInt(fecha)-i;
     $(".sub-stack").append('<li class="sub-stack-item"><a href="#" rel="subsection" >'+anio.toString()+'</a></li>');
@@ -147,14 +148,14 @@ $(function(){
 		$("#filter-range-from").prop("disabled", false);
 		$("#filter-range-to").prop("disabled", false);
 
-		$(".nodata-state").show();
+		(skin== "pichincha")? "" : $(".nodata-state").show() ;
 
 
 
 
 		$(".content-anio").show();
 		$(".content-mes").hide();
-		$("#empty-state").hide();
+		(skin== "pichincha")? "" : $("#empty-state").hide();
 
 		$(".anual").click(function(){
 			tipoConsulta = "0";
@@ -324,8 +325,14 @@ $(function(){
 	}
 
 	function generar_info(tarjeta, tipo, producto, idpersona, fechaIni, fechaFin, consulta){
+		if(skin=="pichincha"){
+			$("[id='empty-state']").hide();
+			$("#dialog").css({
+				"margin-top": "0px"
+			});
+		}
 		$("#dialog").show();
-		var moneda=$("#reporte").attr("moneda");
+			var moneda=$("#reporte").attr("moneda");
 		$.post(base_url + "/report/CallWsGastos", {"tarjeta":tarjeta,"idpersona":idpersona,"tipo":tipo, "producto":producto,"fechaIni":fechaIni,"fechaFin":fechaFin}, function(data){
 			if(data.rc == -61){
             	$(location).attr('href', base_url+'/users/error_gral');

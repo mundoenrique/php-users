@@ -3,12 +3,14 @@
 	if ($skin == 'latodo') {
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
-		$signupLink = $this->config->item('base_url') . '/registro/index_pe';
-	} else {
+	} else if($skin == 'pichincha'){
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pi';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pi';
+	}else {
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
-		$signupLink = $this->config->item('base_url') . '/registro';
 	}
+	$signupLink = $this->config->item('base_url') . '/registro';
 ?>
 <div class="widget" id="widget-signin">
 	<div class="widget-header">
@@ -32,7 +34,7 @@
 			<p class="align-center">¿Olvidaste tu<br><a href="<? echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<? echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
 	</div>
 	<div class="widget-footer">
-		<p>Si es la primera vez que entras al nuevo sistema, debes <a href="<? echo $signupLink; ?>" rel="section">registrarte</a> para crear tu usuario de acceso.</p>
+		<p>Si es la primera vez que entras al sistema, debes <a href="<? echo $signupLink; ?>" rel="section">registrarte</a> para crear tu usuario de acceso.</p>
 	</div>
 </div>
 <div class="widget" id="widget-support">

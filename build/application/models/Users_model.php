@@ -3,63 +3,86 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users_model extends CI_Model {
 
-    public function __construct()
-    {
-        parent::__construct();
-
-    }
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // FUNCION PARA HACER LOGIN
-    public function login_user($username, $password)
-    {
-        $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
+	// FUNCION PARA HACER LOGIN
+	public function login_user($username, $password)
+	{
+		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
-        $data = json_encode(array(
-            'idOperation' => '1',
-            'className' => 'com.novo.objects.TOs.UsuarioTO',
-            'userName' => $username,
-            'password' => $password,
-            'logAccesoObject' => $logAcceso,
-            'token' => ''
-        ));
+		$data = json_encode(array(
+			'idOperation' => '1',
+			'className' => 'com.novo.objects.TOs.UsuarioTO',
+			'userName' => $username,
+			'password' => $password,
+			'logAccesoObject' => $logAcceso,
+			'token' => ''
+		));
 
-        $dataEncry = np_Hoplite_Encryption($data, 0);
-        $data = json_encode(array('data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'));
-        log_message('info', 'Salida encriptada login_user: ' . $data);
-        $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
-        $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
-        $salida = json_encode($desdata);
+		log_message('DEBUG', 'REQUEST login_user: ' . $data);
 
-        log_message('info', 'Salida login usuario' . $salida);
+		$dataEncry = np_Hoplite_Encryption($data, 0);
+		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
+		log_message('DEBUG', 'REQUEST login_user país: ' . $data['pais'] . ' keId: ' . $data['keyId']);
+		$data = json_encode($data);
+		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
+		$salida = json_encode($desdata);
+		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
+		$putSession = FALSE;
 
-        if(isset($response) && $desdata->rc==0){
-            $newdata = array(
-                'idUsuario' => $desdata->idUsuario,
-                'userName' => $desdata->userName,
-                'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
-                'token' => $desdata->token,
-                'sessionId' => $desdata->logAccesoObject->sessionId,
-                'keyId' => $desdata->keyUpdate,
-                'logged_in' => true,
-                'pais' => $desdata->codPais,
-                'aplicaTransferencia' => $desdata->aplicaTransferencia,
-                'passwordOperaciones' => $desdata->passwordOperaciones,
-                'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
-                'afiliado' => $desdata->afiliado,
-								'aplicaPerfil' => $desdata->aplicaPerfil,
-								'tyc' => $desdata->tyc
-            );
-            $this->session->set_userdata($newdata);
-        }
-        $salida = json_encode($desdata);
+		log_message('info', 'Salida login usuario' . $salida);
 
-        log_message('info', 'Salida INICIO DE SESION--->' . $salida);
+		if(isset($response) && $desdata->rc == 0) {
+			if($desdata->codPais != 'Ec-bp' && $cookie == 'default') {
+				$putSession = TRUE;
+			}
+			if($desdata->codPais == 'Ec-bp' && $cookie == 'pichincha') {
+				$putSession = TRUE;
+			}
+			if($desdata->codPais == 'Pe' && $cookie == 'latodo') {
+				$putSession = TRUE;
+			}
+		}
 
-        return json_encode($desdata);
-    }
+		if(!$putSession && $desdata->rc == 0) {
+			$desdata = [
+				'rc'=> -1,
+				'msg'=> 'Usuario o Contraseña inválido'
+			];
+		}
+
+		if($putSession) {
+			$newdata = [
+				'idUsuario' => $desdata->idUsuario,
+				'userName' => $desdata->userName,
+				'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
+				'token' => $desdata->token,
+				'sessionId' => $desdata->logAccesoObject->sessionId,
+				'keyId' => $desdata->keyUpdate,
+				'logged_in' => true,
+				'pais' => $desdata->codPais,
+				'aplicaTransferencia' => $desdata->aplicaTransferencia,
+				'passwordOperaciones' => $desdata->passwordOperaciones,
+				'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
+				'afiliado' => $desdata->afiliado,
+				'aplicaPerfil' => $desdata->aplicaPerfil,
+				'tyc' => $desdata->tyc
+			];
+			$this->session->set_userdata($newdata);
+		}
+		$salida = json_encode($desdata);
+
+		log_message('info', 'Salida INICIO DE SESION--->' . $salida);
+
+		return json_encode($desdata);
+	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
