@@ -158,7 +158,11 @@ $(function(){
 			cuenta		= Base64.encode(cuenta);
 			id_ext_per	= Base64.encode(id_ext_per);
 
-			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(dataUser){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb, "cpo_name": cpo_cook},function(dataUser){
 				$("#loading").hide();
 				$("button").attr("disabled",false);
 
@@ -199,7 +203,11 @@ $(function(){
 								$('.verificacion-one').remove();
 								$('#content-registro').css('display', 'block');
 
-								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
+								var cpo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+
+								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
 									$("#departamento").empty().append("<option value=''>Cargando...</option>");
 
 									if(dataUser.code == 0) {
@@ -414,7 +422,12 @@ $(function(){
 	// Funcion que obtiene las Provincias
 
 	function getProvincias(subRegion, pais) {
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 			if(data.rc == 0) {
 				$("#provincia").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -439,7 +452,12 @@ $(function(){
 	// Funcion que obtiene los Distristos
 
 	function getDistritos(subRegion, pais) {
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -564,7 +582,12 @@ $(function(){
 
 	function getProfesiones(){
 		$("#ocupacion-laboral").empty().append("<option value=''>Cargando...</option>");
-		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country}, function(data){
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country, "cpo_name": cpo_cook}, function(data){
 			if(data.rc == 0) {
 				$("#ocupacion-laboral").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaProfesiones, function (pos, item) {
@@ -601,7 +624,12 @@ $(function(){
 			$("#loading").hide();
 		}else{
 			$("#loading").show();
-			$.post(base_url + "/registro/verificar",{"usuario":username},function(data){
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/registro/verificar",{"usuario":username, "cpo_name": cpo_cook},function(data){
 
 				if(data.rc == 0) {
 					$("#loading").hide();
@@ -793,11 +821,14 @@ $(function(){
 				}
 
 				//validar aplica perfil LMHL
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 
 				$.ajax({
 				  method: "POST",
 				  url: base_url + "/registro/registrar",
-				  data: dataUser
+				  data: dataUser.cpo_name = cpo_cook
 				})
 				  .done(function( data ) {
 
@@ -853,7 +884,12 @@ $(function(){
 
 	function getPaises() {
 		if(skin != 'pichincha') {
-			$.post(base_url +"/registro/listado",function(data){
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(data){
 				$.each(data.listaPaises, function(pos,item){
 					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
 					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
