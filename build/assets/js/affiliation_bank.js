@@ -256,7 +256,11 @@ $(function(){
 			nombre_banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("banco");
 			marca=$("#cargarConfirmacion").find("#nombreOrigenTransfer").attr("marca");
 
-			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			  );
+
+			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate, "cpo_name":cpo_cook},function(data){
 				if(data.rc == -61){
 					$(location).attr('href', base_url+'/users/error_gral');
 				} else if(data.rc==0 || data.rc==-188) {
@@ -370,7 +374,12 @@ $(function(){
 	function getBancos() {
 
 		$.ajaxSetup({async: false});
-		$.post(base_url +"/affiliation/bancos",function(data){
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		  );
+
+		$.post(base_url +"/affiliation/bancos", {"cpo_name":cpo_cook},function(data){
 			$.each(data.lista,function(pos,item){
 
 				var lista;
