@@ -89,11 +89,14 @@ function lock_change (formData, model, form, action) {
         msgSec = 'recoverKey';
     }
 
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {data: formData, model: model},
+        data: {data: formData, model: model, cpo_name: cpo_cook},
         datatype: 'JSON',
         beforeSend: function (xrh, status) {
             cleanBefore (msgMain, msgSec);
@@ -154,11 +157,16 @@ function lock_change (formData, model, form, action) {
 
 function getToken (msgMain) {
 	var token = 1; //Requiere token 1, no requiere 0
-    $('#carry').remove();
+		$('#carry').remove();
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {model: 'GetToken'},
+        data: {model: 'GetToken', cpo_name: cpo_cook},
         datatype: 'json',
         beforeSend: function (xrh, status) {
             cleanBefore ('block');
