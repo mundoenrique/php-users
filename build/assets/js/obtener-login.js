@@ -25,8 +25,10 @@ base_cdn = $('body').attr('data-app-cdn');
 
 			id_ext_per = Base64.encode(id_ext_per);
 			email = Base64.encode(email);
-
-			$.post(base_url +"/users/obtenerlogin_call",{"id_ext_per":id_ext_per, "email":email},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$.post(base_url +"/users/obtenerlogin_call",{"id_ext_per":id_ext_per, "email":email, cpo_name: cpo_cook},function(data){
         if(data.rc == -61){
               $(location).attr('href', base_url+'/users/error_gral');
           }

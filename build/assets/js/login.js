@@ -93,8 +93,11 @@ $(function() {
 
 			$(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
 			mostrarProcesando(skin);
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass) } );
+			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass), cpo_name: cpo_cook } );
 
 			$consulta.done(function(data){
 
