@@ -333,7 +333,12 @@ $(function(){
 		}
 		$("#dialog").show();
 			var moneda=$("#reporte").attr("moneda");
-		$.post(base_url + "/report/CallWsGastos", {"tarjeta":tarjeta,"idpersona":idpersona,"tipo":tipo, "producto":producto,"fechaIni":fechaIni,"fechaFin":fechaFin}, function(data){
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+		$.post(base_url + "/report/CallWsGastos", {"cpo_name": cpo_cook, "tarjeta":tarjeta,"idpersona":idpersona,"tipo":tipo, "producto":producto,"fechaIni":fechaIni,"fechaFin":fechaFin}, function(data){
 			if(data.rc == -61){
             	$(location).attr('href', base_url+'/users/error_gral');
             	$("#dialog").css("display", "none");

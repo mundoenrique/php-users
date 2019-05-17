@@ -89,8 +89,10 @@ $("#actualizar").click(function(){
       }
 
       //console.log("clave "+claveSMS);
-
-       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
 
         if(data.rc==0) {
 
@@ -135,8 +137,11 @@ $("#actualizar").click(function(){
 });
 
 $("#eliminar").click(function(){
-      var claveSMS = "";
-      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var claveSMS = "";
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
 
         if(data.rc==0) {
 
@@ -215,8 +220,10 @@ $("#afiliar").click(function(){
       if((pais=='Pe') || (pais=='Usd') || (pais=='Co')){
         claveSMS = hex_md5(claveSMS);
       }
-
-       $.post(base_url +"/users/passwordSmsNew",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+       $.post(base_url +"/users/passwordSmsNew",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
 
         if(data.rc==0) {
 

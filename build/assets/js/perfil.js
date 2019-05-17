@@ -448,7 +448,12 @@ $(function(){
 	function CargarRegionesPerfil(){
 		var aplicaPerfil=$('#aplicaPerfil').val();
 		if(aplicaPerfil=='S'){
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": 1}, function (data) {
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
@@ -473,7 +478,12 @@ $(function(){
 			});
 		}
 		else if(aplicaPerfil=='N'){
-			$.post(base_url + "/perfil/listaEstado", {"codPais": codPaisresidencia, "subRegion": 1}, function (data) {
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listaEstado", {"codPais": codPaisresidencia, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
@@ -505,7 +515,11 @@ $(function(){
 		var aplicaPerfil=$('#aplicaPerfil').val();
 		if(aplicaPerfil=='S'){
 			//console.log("Valor==> " + subRegion);
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion}, function (data) {
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -523,7 +537,11 @@ $(function(){
 		}
 		else if(aplicaPerfil=='N'){
 			//console.log("Valor==> " + subRegion);
-			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion}, function (data) {
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion ,"cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -544,7 +562,11 @@ $(function(){
 
 	function getDistritosGeo(subRegion, codPaisresidencia) {
 		//  console.log("Valor==> " + subRegion);
-		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion}, function (data) {
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 			// console.log(data);
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
@@ -579,7 +601,11 @@ $(function(){
 		var aplicaPerfil=$('#aplicaPerfil').val();
 		if(aplicaPerfil=='S'){
 			//console.log("Valor==> " + subRegion);
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion}, function (data) {
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -601,7 +627,12 @@ $(function(){
 				}
 			});
 		}else if(aplicaPerfil=='N'){
-			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion}, function (data) {
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion, "cpo_name": cpo_cook}, function (data) {
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -619,7 +650,11 @@ $(function(){
 
 	function getDistritos(subRegion, codPaisresidencia) {
 		//console.log("Valor==> " + subRegion);
-		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion}, function (data) {
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
 			//console.log(data);
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
@@ -652,7 +687,10 @@ $(function(){
 			lista_p='<option selected value="">Seleccione</option>';
 		}
 
-		$.post(base_url +"/perfil/profesiones",function(data){
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+		$.post(base_url +"/perfil/profesiones", {cpo_name: cpo_cook}, function(data){
 
 			$.each(data.listaProfesiones,function(pos,item){
 
@@ -822,8 +860,11 @@ $(function(){
 			$("#contrato").val("0");
 			contrato="0";
 		}
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-		$.post(base_url+"/perfil/actualizar",{"userName":userName, "tipo_identificacion":tipo_identificacion, "tipo":tipo_id_ext_per,
+		$.post(base_url+"/perfil/actualizar",{"cpo_name": cpo_cook, "userName":userName, "tipo_identificacion":tipo_identificacion, "tipo":tipo_id_ext_per,
 				"primer_nombre":primerNombre, "segundo_nombre":segundoNombre, "primer_apellido":primerApellido,
 				"segundo_apellido":segundoApellido, "lugar_nac":lugarNacimiento, "fecha_nacimiento":fechaNacimiento, "gender":sexo,
 				"edocivil":edocivil, "nacionalidad":nacionalidad, "profesion":profesion, "tipo_profesion":tipo_profesion,
@@ -959,10 +1000,16 @@ $(function(){
 
 		if (email != verificarMail && !email.match(/[\s]/gi)) {
 			$("#loading").show();
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
 			$.post(base_url + '/perfil/verificarEmail', {
 				"pais": pais,
 				"email": email,
-				"username": userName
+				"username": userName,
+				"cpo_name": cpo_cook
 			}, function (data) {
 				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
