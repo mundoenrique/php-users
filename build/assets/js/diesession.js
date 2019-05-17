@@ -32,9 +32,13 @@ $(document).ready(function(){
 		$("#diesession_modal #aceptar_diesession").click(function(){
 			$("#diesession_modal").dialog("close");
 		});
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 		$.ajax({
 			method: 'POST',
-			url: base_url+'/users/closeSess'
+			url: base_url+'/users/closeSess',
+			data: {cpo_name: cpo_cook}
 		});
 	}
 });

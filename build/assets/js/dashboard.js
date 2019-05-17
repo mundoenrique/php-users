@@ -104,7 +104,10 @@ country = $('body').data('country');
 			//Si la tarjeta no esta activa no consulta el saldo
 			if($(item).attr("activeurl") !== 'NE'){
 				//carga saldo tarjeta
-				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card"),cpo_name: cpo_cook},function(data){
 					var moneda=$(".dashboard-item").attr("moneda");
 					var id=$(".dashboard-item").attr("doc");
 					var saldo=data.disponible;
