@@ -10,7 +10,10 @@ base_cdn = $('body').attr('data-app-cdn');
     $("#loading").show();
 
 		validar_campos();
-
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$("#form-validar").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#form-validar").submit();
 		setTimeout(function(){$("#msg").fadeOut();},5000);
 

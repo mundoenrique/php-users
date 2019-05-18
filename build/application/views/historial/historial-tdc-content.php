@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <div id="content">
     <article>
         <header>
@@ -22,6 +26,7 @@
             </nav>
             <h2>Historial</h2>
             <form accept-charset="utf-8" action="transfers-banks-log.html" method="post">
+							<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                 <label for="donor">Cuenta de Origen</label>
                 <div class="group" id="donor">
                     <div class="group" id="donor">

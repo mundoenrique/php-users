@@ -166,7 +166,10 @@ $(function(){
 	$('#content-holder').on('click',"#afiliarBank",function(){
 
 		validar_campos();
-
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$("#validate_afiliacion").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#validate_afiliacion").submit();
 
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -258,7 +261,7 @@ $(function(){
 
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			  );
+			);
 
 			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate, "cpo_name":cpo_cook},function(data){
 				if(data.rc == -61){

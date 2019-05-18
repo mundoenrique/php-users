@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
     <ul class="menu">
         <li class="menu-item current-menu-item">
@@ -45,6 +49,7 @@
                 <h2>Registro de Cuenta</h2>
                 <p>Ingrese los datos requeridos a continuación para afiliar una cuenta a la cual desee transferir fondos en determinado momento.</p>
                 <form accept-charset="utf-8" id="validate_afiliacion">
+									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <fieldset>
                         <label for="donor">Cuenta de Origen</label>
                         <div class="group" id="donor">
@@ -203,6 +208,7 @@ foreach ($datos->cuentaOrigen as $value) {
     <h2>Confirmación</h2>
     <p>Por favor, verifique los datos de la afiliación que va a efectuar.</p>
     <form accept-charset="utf-8" method="post" id="confir">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarConfirmacion">
 
@@ -235,6 +241,7 @@ foreach ($datos->cuentaOrigen as $value) {
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
     <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion">
 
@@ -270,6 +277,7 @@ foreach ($datos->cuentaOrigen as $value) {
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
     <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion3">
 
@@ -304,6 +312,7 @@ foreach ($datos->cuentaOrigen as $value) {
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
     <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion2">
 

@@ -1,4 +1,8 @@
-<?php $country = $this->session->userdata('pais'); ?>
+<?php
+$country = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu" style='display:none'>
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -71,6 +75,7 @@
 
 													</div>
 													<form id="form-search" method="post" name="form-search">
+														<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 														<div id='cardRef' style="display:none">
 															<fieldset class='form-inline'>
 																<label for='beneficiary-1x-description'>Tarjeta</label>

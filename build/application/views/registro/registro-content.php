@@ -1,5 +1,7 @@
 <?php
 $pais = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
 
 $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 switch($skin){
@@ -421,6 +423,7 @@ switch($skin){
             <div id="content-holder">
                 <h2>Finalización</h2>
                 <form accept-charset="utf-8" action="index.html" method="post">
+									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <div class="alert-success" id="message">
 
                     </div>
@@ -450,6 +453,7 @@ switch($skin){
             <div id="content-holder">
                 <h2>Finalización</h2>
                 <form accept-charset="utf-8" action="index.html" method="post">
+									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <div class="alert-warning" id="message2">
 
                     </div>
@@ -479,6 +483,7 @@ switch($skin){
 <!--- Modal Validación VERIFICACIÓN CUENTA - CUENTA GENERAL PERU -->
 <div id="dialogo-check-count" style='display:none'>
     <form accept-charset="utf-8" method="post">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <div id="dialog-confirm">
             <div class="alert-simple" id="messageContent">
                 <span aria-hidden="true" class="icon-cancel-sign"></span>

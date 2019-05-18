@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <div id="content">
 	<article>
 		<header>
@@ -110,6 +114,7 @@
 	</section>
 
 	<form id='tarjeta' method='post' action="detalles">
+		<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 		<input id="numt" type="hidden" name="numt" value="" />
 		<input id="marca" type="hidden" name="marca" value="" />
 		<input id="empresa" type="hidden" name="empresa" value="" />

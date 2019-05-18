@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -29,6 +33,7 @@
 			</nav>
 			<h2>Historial</h2>
 			<form accept-charset="utf-8" action="transfers-banks-log.html" method="post">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<input type="hidden" id="pais" name="pais" value="<?php echo $this->session->userdata("pais"); ?>">
 				<label for="donor">Cuenta de Origen</label>
 				<div class="group" id="donor">
@@ -43,6 +48,7 @@
 			<nav id="filters-stack">
 				<div class="stack-form">
 					<form accept-charset="utf-8" class="stack-form" method="post">
+						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 						<fieldset>
 							<label for="filter-month">Mostrar:</label>
 							<select id="filter-month" name="filter-month">

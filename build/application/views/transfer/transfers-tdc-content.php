@@ -1,4 +1,8 @@
-<?php $country = $this->session->userdata('pais'); ?>
+<?php
+$country = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <div id="content" confirmacion="<? echo $this->session->userdata("transferir") ?>">
 	<div id="content-clave" style='display:none'>
 		<article>
@@ -236,6 +240,7 @@
 			<p>Por favor, verifique los datos de las siguientes operaciones de transferencia que solicita:</p>
 		</div>
 		<form accept-charset="utf-8" method="post" id="formConfirmTransferencia">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 			<table class="receipt" cellpadding="0" cellspacing="0" width="100%">
 				<tbody id="cargarConfirmacion">
 				</tbody>
