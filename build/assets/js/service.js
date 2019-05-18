@@ -288,7 +288,11 @@ $(function(){
                 model = 'recoverKey';
                 break;
         }
-        validar_campos();
+				validar_campos();
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				$(form).append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
         form.submit();
         if (form.valid() == true) {
             formData = form.serialize();

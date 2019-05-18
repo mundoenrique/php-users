@@ -172,7 +172,10 @@ $(function(){
 		});
 
 		$(".mensual").click(function(){
-
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$("#fechas").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 			$("#fechas").submit();
 			setTimeout(function(){$("#msg").fadeOut();},2000);
 
@@ -203,13 +206,14 @@ $(function(){
         	$("#chart").append(cadena);
         }
         else{
-			$("#tarjeta_pdf").val($("#donor-cardnumber").attr("tarjeta"));
+					$("#form_pdf").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
+					$("#tarjeta_pdf").val($("#donor-cardnumber").attr("tarjeta"));
         	$("#idpersona_pdf").val(idexper);
         	$("#producto_pdf").val($("#donor-cardnumber").attr("prefix"));
         	$("#tipoConsulta_pdf").val(tipoConsulta);
         	$("#fechaIni_pdf").val(fechaIni);
         	$("#fechaFin_pdf").val(fechaFin);
-			$("#form_pdf").submit();
+					$("#form_pdf").submit();
 		}
 
 	});
@@ -227,7 +231,11 @@ $(function(){
         	$("#chart").append(cadena);
         }
         else{
-			$("#tarjeta").val($("#donor-cardnumber").attr("tarjeta"));
+					var cpo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+					$("#form").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
+					$("#tarjeta").val($("#donor-cardnumber").attr("tarjeta"));
         	$("#idpersona").val(idexper);
         	$("#producto").val($("#donor-cardnumber").attr("prefix"));
         	$("#tipoConsulta").val(tipoConsulta);

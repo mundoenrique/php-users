@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -28,6 +32,7 @@
 			<h2>Montos personales para transferencias directas </h2>
 			<h3>Seleccione el monto máximo para transferencias sin autorización (código de seguridad)</h3>
 			<form id="form-amount" name="form-amount">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<div id="transfer-date">
 					<?php
 						//consulta el monto actual

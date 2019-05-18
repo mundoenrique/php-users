@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
     <ul class="menu">
         <li class="menu-item">
@@ -31,7 +35,9 @@
                     </li>
                 </ul>
             </nav>
+
             <form accept-charset="utf-8" action="transfers-p2p-handler-p2.html" method="post">
+							<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                 <fieldset>
                     <div class="group" id="donor">
                         <div class='product-presentation'>
@@ -112,6 +118,7 @@
         <h2>Eliminación de Afiliación</h2>
         <p>Por favor, verifique los datos de la afiliación que Ud. está a punto de remover. Introduzca su clave de operaciones si está de acuerdo con este cambio:</p>
         <form accept-charset="utf-8" action="transfers-banks-remove2.html" method="post">
+						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
             <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
                 <tbody>
                 <tr>

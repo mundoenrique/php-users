@@ -1,5 +1,7 @@
 <?php
 	$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+	$cpo_name = $this->security->get_csrf_token_name();
+	$cpo_cook = $this->security->get_csrf_hash();
 	if ($skin == 'latodo') {
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
@@ -44,6 +46,7 @@
 	<div class="widget-section">
 						<p>Comunícate con nuestro Centro de Contacto 24 horas en:</p>
 						<form accept-charset="utf-8" action="support.html" method="post">
+							<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 							<select onchange="val()" id="iso" name="iso">
 								<option selected value="sel">Seleccione país</option>
 								<option value="colombia" value="co">Colombia</option>
