@@ -227,8 +227,12 @@ function sumar_saldo()
 function requestPassword()
 {
 	var  msg;
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		url: base_url + '/transferencia/crearClave',
+		data: {cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -277,13 +281,12 @@ function requestPassword()
  */
 function validar_clave(claveConfir)
 {
-	var ajax_data = {
-		'clave':hex_md5(claveConfir)
-	};
-
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		url: base_url + '/transferencia/confirmacion',
-		data: ajax_data,
+		data: {"clave":hex_md5(claveConfir), cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -322,20 +325,20 @@ function makeTransfer(type)
 	var transfer = 1;
 	$.each(destination, function(pos, item) {
 
-		var dataRequest = {
-			"cuentaOrigen" : sourceNumber,
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$.ajax({
+			url: base_url + '/transferencia/procesar',
+			data: {"cuentaOrigen" : sourceNumber,
 			"cuentaDestino" : item.accountDes,
 			"monto" : item.amountDest,
 			"descripcion" : item.conceptDest,
 			"tipoOpe" : type,
 			"idUsuario" : nameSource,
 			"id_afil_terceros": item.idAfil,
-			"expDate" : expDate
-		};
-
-		$.ajax({
-			url: base_url + '/transferencia/procesar',
-			data: dataRequest,
+			"expDate" : expDate,
+			"cpo_name": cpo_cook},
 			type: "post",
 			dataType: 'json',
 			async: false,
