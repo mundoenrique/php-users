@@ -731,10 +731,6 @@ $(function(){
 		$("#registrar").css("display","none");
 
 		validar_campos();
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$("#form-usuario").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#form-usuario").submit();
 
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -832,10 +828,12 @@ $(function(){
 					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 					);
 
+					dataUser.cpo_name = cpo_cook;
+
 				$.ajax({
 				  method: "POST",
 				  url: base_url + "/registro/registrar",
-				  data: dataUser.cpo_name = cpo_cook
+				  data: dataUser
 				})
 				  .done(function( data ) {
 

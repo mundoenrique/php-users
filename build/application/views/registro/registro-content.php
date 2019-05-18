@@ -27,6 +27,7 @@ switch($skin){
                 <h2>Verificación de Cuenta</h2>
                 <p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe proporcionar los siguientes datos relacionados con su cuenta:</p>
                 <form accept-charset="utf-8" method="post" id="form-validar">
+									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <fieldset>
                         <ul class="field-group">
 													<?php if($skin == 'default' || $skin == 'latodo'): ?>
