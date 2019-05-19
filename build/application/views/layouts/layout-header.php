@@ -12,8 +12,9 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
     <meta charset="utf-8" />
     <title>{titlePage}</title>
     <meta name="viewport" content="width=device-width" />
-    <meta name="robots" content="noindex, nofollow" />
     <meta name="googlebot" content="none" />
+		<meta name="robots" content="noindex, nofollow" />
+		<link rel="profile" href="http://gmpg.org/xfn/11" />
 		<link rel="icon" type="image/png"  href="<?php echo $pageCdn;?>img/favicon<?php echo $extension;?>" />
     <?php
 			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
