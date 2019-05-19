@@ -8,6 +8,7 @@ var skin = decodeURIComponent(
 );
 
 $(function(){
+	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
 	var tlfLength = "11";
 	if (skin == 'pichincha'){
