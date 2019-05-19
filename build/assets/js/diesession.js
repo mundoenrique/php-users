@@ -3,6 +3,7 @@ base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 
 $(document).ready(function(){
+	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 	idleTime = 0;
 	//Increment the idle time counter every second.
 	var idleInterval = setInterval(timerIncrement, 120000);

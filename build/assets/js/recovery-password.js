@@ -3,7 +3,7 @@ base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 
 	$(function(){
-
+	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
 	$("#continuar").click(function(){
 
