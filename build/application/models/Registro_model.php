@@ -408,7 +408,8 @@ class Registro_model extends CI_Model {
 
 		$this->code = 3;
 		$this->modalType = "alert-error";
-				switch ($desdata->rc) {
+		$responseCode = isset($desdata->rc) ? $desdata->rc : '-9999';
+				switch ($responseCode) {
 					case 0:
 						$this->title = "Usuario registrado exitosamente";
 						$this->msn = "se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
