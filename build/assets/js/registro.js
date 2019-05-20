@@ -165,9 +165,23 @@ $(function(){
 
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			);
 
-			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb, "cpo_name": cpo_cook},function(dataUser){
+			var dataRequest = JSON.stringify ({
+				userName: userName,
+				pais: pais,
+				cuenta: cuenta,
+				id_ext_per: id_ext_per,
+				pin: pin_enc,
+				claveWeb: claveWeb
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/registro/validar", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				dataUser = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				$("#loading").hide();
 				$("button").attr("disabled",false);
 

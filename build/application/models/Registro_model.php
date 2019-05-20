@@ -202,8 +202,8 @@ class Registro_model extends CI_Model {
 			"modalType" => $this->modalType,
 			'dataUser' => $this->dataUser
 		];
-
-		return json_encode($this->response);
+		$response = $this->cryptography->encrypt($this->response);
+		return json_encode($response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
