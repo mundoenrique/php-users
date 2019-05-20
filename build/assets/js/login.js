@@ -97,9 +97,16 @@ $(function() {
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass), cpo_name: cpo_cook } );
+			var dataRequest = JSON.stringify ({
+				user_name: user,
+				user_pass: hex_md5(pass)
+			})
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(base_url+"/users/login", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)} );
 
-			$consulta.done(function(data){
+			$consulta.done(function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 				if (data == 1) {
 					$("#dialog-login-ve").dialog({
