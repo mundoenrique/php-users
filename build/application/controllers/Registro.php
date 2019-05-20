@@ -65,7 +65,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -133,7 +133,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header		= $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer		= $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -173,12 +173,22 @@ class Registro extends CI_Controller {
 
 		$this->load->model('registro_model','validar');
 
-		$pais		= $this->input->post('pais');
-		$cuenta		= $this->input->post('cuenta');
-		$id_ext_per	= $this->input->post('id_ext_per');
-		$pin		= $this->input->post('pin');
-		$claveWeb	= $this->input->post('claveWeb');
-		$userName	= $this->input->post('userName');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pais	= $dataRequest->pais;
+		$cuenta	= $dataRequest->cuenta;
+		$id_ext_per	= $dataRequest->id_ext_per;
+		$pin = $dataRequest->pin;
+		$claveWeb	= $dataRequest->claveWeb;
+		$userName	= $dataRequest->userName;
 
 		$this->output->set_content_type('application/json')->set_output($this->validar->validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin, $claveWeb));
 
