@@ -81,7 +81,9 @@ class Users_model extends CI_Model {
 
 		log_message('info', 'Salida INICIO DE SESION--->' . $salida);
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+
+		return json_encode($response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

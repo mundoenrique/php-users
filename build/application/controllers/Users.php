@@ -91,7 +91,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'login.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'login.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js','cypher/aes.min.js','cypher/aes-json-format.min.js',);
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -326,8 +326,18 @@ class Users extends CI_Controller {
 
 	public function CallWsLogin()
 	{
-		$user = $this->input->post('user_name');
-		$pass = $this->input->post('user_pass');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$user = $dataRequest->user_name;
+		$pass = $dataRequest->user_pass;
 
 		$this->load->model('users_model','user');
 
