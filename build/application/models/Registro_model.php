@@ -227,8 +227,8 @@ class Registro_model extends CI_Model {
   	$data		= json_decode($response);
   	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "Response validar_usuario: ".json_encode($desdata));
-
-	  	return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+	  return json_encode($response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -540,7 +540,8 @@ class Registro_model extends CI_Model {
 					"modalType" => $this->modalType
 				];
 
-			return json_encode($this->response);
+			$response = $this->cryptography->encrypt($this->response);
+			return json_encode($response);
 
 
 		//Simula respuesta del servicio
