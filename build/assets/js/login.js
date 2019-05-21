@@ -35,10 +35,13 @@ $(function() {
 		user = user.toUpperCase();
 		pass = $('#userpwd').val();
 
-		$("#userpwd").val('');
-
-		login(user, pass);
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'}).then(function(token) {
+					validateCaptcha(token,user,pass)
+			});;
+		});		
 	});
+
 	  function mostrarProcesando(skin){
 			var imagen="";
 
@@ -79,6 +82,45 @@ $(function() {
  		function ocultarProcesando() {
 			$("#login").html('Ingresar');
 			$("#login").prop("disabled", false);
+		}
+
+		function validateCaptcha(token,user,pass) {
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			var dataRequest = JSON.stringify ({
+				token: token,
+				user: user
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+			$consulta = $.post(base_url+"/users/validateRecaptcha", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)} );
+
+			$consulta.done(function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
+				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0.7')) )
+				{
+					login(user,pass)
+				}
+				else
+				{
+					ocultarProcesando();
+					$("#dialog-validate").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
+
+					$("#error-validate").click(function(){
+						$("#dialog-validate").dialog("close");
+						habilitar();
+					});
+				}
+			})
+
 		}
 
 	function login(user,pass){
