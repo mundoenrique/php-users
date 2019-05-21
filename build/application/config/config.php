@@ -33,6 +33,7 @@ $config['urlAPI'] = URL_API;
 //Credenciales oauth
 $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
+$config['cypher_base'] = CYPHER_BASE;
 
 /*
 |--------------------------------------------------------------------------
