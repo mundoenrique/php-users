@@ -107,7 +107,17 @@ country = $('body').data('country');
 				var cpo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card"),cpo_name: cpo_cook},function(data){
+
+				var dataRequest = JSON.stringify ({
+					tarjeta:$(item).attr("card")
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 					var moneda=$(".dashboard-item").attr("moneda");
 					var id=$(".dashboard-item").attr("doc");
 					var saldo=data.disponible;
