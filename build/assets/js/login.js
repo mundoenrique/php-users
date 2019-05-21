@@ -84,6 +84,21 @@ $(function() {
 	function login(user,pass){
 		var hasCookie = navigator.cookieEnabled;
 
+		if(!(/^[\wñ]+$/i.test(user)) || !(/^[\w!@\*\-\?¡¿+\/.,#]+$/i.test(pass))) {
+			ocultarProcesando();
+			$("#dialog-login").dialog({
+				modal:"true",
+				width:"440px",
+				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
+
+			$("#invalido").click(function(){
+				$("#dialog-login").dialog("close");
+				habilitar();
+			});
+			return
+		}
+
 		if(user!='' && pass!='' && hasCookie){
 
 			$('#username').attr('disabled','true');

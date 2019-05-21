@@ -173,6 +173,7 @@ $(function(){
 
 				switch(dataUser.code){
 					case 0:
+						$('#form-validar')[0].reset();
 						var data = dataUser.dataUser;
 						var pais	= data.pais;
 						aplicaPerfil = data.user.aplicaPerfil;
@@ -840,6 +841,7 @@ $(function(){
 
 						switch(data.code){
 							case 0:
+								$('#form-usuario')[0].reset();
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
 								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
 
@@ -850,6 +852,7 @@ $(function(){
 							break;
 
 							case 2: //error general
+							$('#form-usuario')[0].reset();
 								$(location).attr('href', base_url+'/users/error_gral');
 							break;
 
