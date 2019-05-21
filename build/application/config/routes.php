@@ -63,6 +63,7 @@ $route['users/obtenerLogin_pe'] = 'users/obtenerLogin'; // Perú LATODO
 $route['users/obtenerLogin_pi'] = 'users/obtenerLogin'; // Ecuador pichincha
 $route['users/obtenerLogin'] = 'users/obtenerLogin'; // Otros paises
 $route['users/login'] = 'users/CallWsLogin';
+$route['users/validateRecaptcha'] = 'users/validarCaptcha';
 $route['users/error'] = 'users/error_gral';
 $route['users/resetpassword'] = 'users/CallWsResetPassword';
 $route['users/obtenerlogin_call'] = 'users/CallWsObtenerLogin';
