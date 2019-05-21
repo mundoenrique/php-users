@@ -33,6 +33,7 @@ $config['urlAPI'] = URL_API;
 //Credenciales oauth
 $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
+$config['cypher_base'] = CYPHER_BASE;
 
 /*
 |--------------------------------------------------------------------------
@@ -232,7 +233,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+$config['log_threshold'] = THRESHOLD;
 
 /*
 |--------------------------------------------------------------------------
