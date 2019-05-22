@@ -272,8 +272,9 @@ class Perfil_model extends CI_Model {
 				}
 
 				$desdata->rc === 0 ? $this->session->set_userdata('tyc', $tyc) : '';
-
-        return json_encode($desdata);
+        
+        $response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
         // Simula respuesta de servicio
         // $desdata = '{"rc":-317,"msg":"Error cuenta invalida"}';
         // $this->session->set_userdata('afiliado', $contrato);
