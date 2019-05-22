@@ -36,6 +36,7 @@ $(function() {
 		pass = $('#userpwd').val();
 
 		grecaptcha.ready(function() {
+			mostrarProcesando(skin);
 			grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'}).then(function(token) {
 					validateCaptcha(token,user,pass)
 			});;
