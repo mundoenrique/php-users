@@ -65,7 +65,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -133,7 +133,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header		= $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer		= $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -173,12 +173,22 @@ class Registro extends CI_Controller {
 
 		$this->load->model('registro_model','validar');
 
-		$pais		= $this->input->post('pais');
-		$cuenta		= $this->input->post('cuenta');
-		$id_ext_per	= $this->input->post('id_ext_per');
-		$pin		= $this->input->post('pin');
-		$claveWeb	= $this->input->post('claveWeb');
-		$userName	= $this->input->post('userName');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pais	= $dataRequest->pais;
+		$cuenta	= $dataRequest->cuenta;
+		$id_ext_per	= $dataRequest->id_ext_per;
+		$pin = $dataRequest->pin;
+		$claveWeb	= $dataRequest->claveWeb;
+		$userName	= $dataRequest->userName;
 
 		$this->output->set_content_type('application/json')->set_output($this->validar->validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin, $claveWeb));
 
@@ -195,7 +205,17 @@ class Registro extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('registro_model', 'validar_usuario');
-		$usuario = $this->input->post('usuario');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$usuario = $dataRequest->usuario;
 
 		log_message('info', 'VALIDACION DEL USUARIO ---> ' . $usuario);
 
@@ -262,47 +282,58 @@ class Registro extends CI_Controller {
 
 		$this->load->model('registro_model', 'registrar');
 
-		$aplicaPerfil		= $this->input->post('aplicaPerfil');				//0
-		$primerNombre		= $this->input->post('primerNombre');				//1
-		$segundoNombre 		= $this->input->post('segundoNombre');				//2
-		$primerApellido 	= $this->input->post('primerApellido');				//3
-		$segundoApellido 	= $this->input->post('segundoApellido');			//4
-		$telefono 			= $this->input->post('telefono');					//5
-		$numDoc 			= $this->input->post('id_ext_per');					//6
-		$verifyDigit		= $this->input->post('verifyDigit');
-		$fechaNacimiento 	= $this->input->post('fechaNacimiento');			//7
-		$typeIdentifier 	= $this->input->post('tipo_id_ext_per');			//8
-		$lugarNacimiento 	= $this->input->post('lugar_nacimiento');			//9
-		$sexo 				= $this->input->post('sexo');						//10
-		$edocivil 			= $this->input->post('edocivil');					//11
-		$nacionalidad 		= $this->input->post('nacionalidad');				//12
-		$tipo_direccion 	= $this->input->post('tipo_direccion');				//13
-		$cod_postal 		= $this->input->post('cod_postal');					//14
-		$pais 				= $this->input->post('pais');						//15
-		$departamento 		= $this->input->post('departamento');				//16
-		$provincia 			= $this->input->post('provincia');					//17
-		$distrito 			= $this->input->post('distrito');					//18
-		$direccion 			= $this->input->post('direccion');					//19
-		$correo 			= $this->input->post('correo');						//20
-		$otroTelefono		= $this->input->post('otro_telefono');				//21
-		$telefono2 			= $this->input->post('telefono2');					//22
-		$telefono3 			= $this->input->post('telefono3');					//23
-		$ruc 				= $this->input->post('ruc_cto_laboral');			//24
-		$centrolab 			= $this->input->post('centrolab');					//25
-		$situacionLaboral 	= $this->input->post('situacionLaboral');			//26
-		$antiguedadLaboral 	= $this->input->post('antiguedad_laboral');			//27
-		$profesion 			= $this->input->post('profesion');					//28
-		$cargo 				= $this->input->post('cargo');						//29
-		$ingreso 			= $this->input->post('ingreso_promedio_mensual');	//30
-		$desemPublico 		= $this->input->post('cargo_publico_last2');		//31
-		$cargoPublico 		= $this->input->post('cargo_publico');				//32
-		$institucionPublica	= $this->input->post('institucion_publica');		//33
-		$uif 				= $this->input->post('uif');						//34
-		$userName 			= $this->input->post('userName');					//35
-		$password 			= $this->input->post('password');					//36
-		$notarjeta			= $this->input->post('notarjeta');
-		$proteccion			= $this->input->post('proteccion');
-		$contrato			= $this->input->post('contrato');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		log_message('info', 'dataRequest---> '.json_encode($dataRequest));
+		$aplicaPerfil		= $dataRequest->aplicaPerfil;				//0
+		$primerNombre		= $dataRequest->primerNombre;				//1
+		$segundoNombre 		= $dataRequest->segundoNombre;				//2
+		$primerApellido 	= $dataRequest->primerApellido;				//3
+		$segundoApellido 	= $dataRequest->segundoApellido;			//4
+		$telefono 			= $dataRequest->telefono;					//5
+		$numDoc 			= $dataRequest->id_ext_per;					//6
+		$verifyDigit		= isset($dataRequest->verifyDigit) ? $dataRequest->verifyDigit : '';
+		$fechaNacimiento 	= $dataRequest->fechaNacimiento;			//7
+		$typeIdentifier 	= $dataRequest->tipo_id_ext_per;			//8
+		$lugarNacimiento 	= isset($dataRequest->lugar_nacimiento) ? $dataRequest->lugar_nacimiento : '';			//9
+		$sexo 				= $dataRequest->sexo;						//10
+		$edocivil 			= isset($dataRequest->edocivil) ? $dataRequest->edocivil : '';					//11
+		$nacionalidad 		= isset($dataRequest->nacionalidad) ? $dataRequest->nacionalidad : '';				//12
+		$tipo_direccion 	= isset($dataRequest->tipo_direccion) ? $dataRequest->tipo_direccion : '';				//13
+		$cod_postal 		= isset($dataRequest->cod_postal) ? $dataRequest->cod_postal : '';					//14
+		$pais 				= $dataRequest->pais;						//15
+		$departamento 		= isset($dataRequest->departamento) ? $dataRequest->departamento : '';				//16
+		$provincia 			= isset($dataRequest->provincia) ? $dataRequest->provincia : '';					//17
+		$distrito 			= isset($dataRequest->distrito) ? $dataRequest->distrito : '';					//18
+		$direccion 			= isset($dataRequest->direccion) ? $dataRequest->direccion : '';					//19
+		$correo 			= $dataRequest->correo;						//20
+		$otroTelefono		= $dataRequest->otro_telefono;				//21
+		$telefono2 			= $dataRequest->telefono2;					//22
+		$telefono3 			= $dataRequest->telefono3;					//23
+		$ruc 				= isset($dataRequest->ruc_cto_laboral) ? $dataRequest->ruc_cto_laboral : '';		//24
+		$centrolab 			= isset($dataRequest->centrolab) ? $dataRequest->centrolab : '';					//25
+		$situacionLaboral 	= isset($dataRequest->situacionLaboral) ? $dataRequest->situacionLaboral : '';		//26
+		$antiguedadLaboral 	= isset($dataRequest->antiguedad_laboral) ? $dataRequest->antiguedad_laboral : '';			//27
+		$profesion 			= isset($dataRequest->profesion) ? $dataRequest->profesion : '';					//28
+		$cargo 				= isset($dataRequest->cargo) ? $dataRequest->cargo : '';						//29
+		$ingreso 			= isset($dataRequest->ingreso_promedio_mensual) ? $dataRequest->ingreso_promedio_mensual : '';	//30
+		$desemPublico 		= isset($dataRequest->cargo_publico_last2) ? $dataRequest->cargo_publico_last2 : '';		//31
+		$cargoPublico 		= isset($dataRequest->cargo_publico) ? $dataRequest->cargo_publico : '';				//32
+		$institucionPublica	= isset($dataRequest->institucion_publica) ? $dataRequest->institucion_publica : '';		//33
+		$uif 				= isset($dataRequest->uif) ? $dataRequest->uif : '';						//34
+		$userName 			= $dataRequest->userName;					//35
+		$password 			= $dataRequest->password;					//36
+		$notarjeta			= isset($dataRequest->notarjeta) ? $dataRequest->notarjeta : '';
+		$proteccion			= isset($dataRequest->proteccion) ? $dataRequest->proteccion : '';
+		$contrato			= isset($dataRequest->contrato) ? $dataRequest->contrato : '';
 
 		log_message('info', 'REGISTRO REGISTRAR ---> ' .$aplicaPerfil.'; '.$primerNombre.'; '.$segundoNombre.'; '.$primerApellido.'; '.$segundoApellido.'; '.$telefono.'; '.$numDoc.'; '.$verifyDigit.'; '.$fechaNacimiento.'; '.$typeIdentifier.'; '.$lugarNacimiento.'; '.$sexo.'; '.$edocivil.'; '.$nacionalidad.'; '.$tipo_direccion.'; '.$cod_postal.'; '.$pais.'; '.$departamento.'; '.$provincia.'; '.$distrito.'; '.$direccion.'; '.$correo.'; '.$telefono2.'; '.$telefono3.'; '.$ruc.'; '.$centrolab.'; '.$situacionLaboral.'; '.$antiguedadLaboral.'; '.$profesion.'; '.$cargo.'; '.$ingreso.'; '.$desemPublico.'; '.$cargoPublico.'; '.$institucionPublica.'; '.$uif.'; '.$userName.'; '.$password.'; '.$proteccion.'; '.$contrato.' FIN<--');
 
