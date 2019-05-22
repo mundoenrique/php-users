@@ -89,11 +89,16 @@ country = $('body').data('country');
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   $('.dashboard-item').click(function(){
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
     $('#numt').val($(this).attr('card'));
     $('#marca').val($(this).attr('marca'));
     $('#empresa').val($(this).attr('empresa'));
     $('#producto').val($(this).attr('producto'));
-    $('#numt_mascara').val($(this).attr('numt_mascara'));
+		$('#numt_mascara').val($(this).attr('numt_mascara'));
+		$('#tarjeta').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
     $("#tarjeta").submit();
 	});
 

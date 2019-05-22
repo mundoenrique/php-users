@@ -214,7 +214,7 @@ $('#buscar').on('click',function(){
 			var dataRequest = JSON.stringify ({
 				tarjeta:$("#card").attr("card"),
 				mes:mes,
-				anio:anio,
+				anio:anio
 			})
 
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();

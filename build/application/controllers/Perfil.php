@@ -38,7 +38,7 @@ class Perfil extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
         //INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js');
+        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js');
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DE CUERPO
@@ -285,7 +285,19 @@ class Perfil extends CI_Controller {
         $this->lang->load('format');
 
         $this->load->model('perfil_model', 'listaEstado');
-        $codPais = $this->input->post('codPais');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$codPais = $dataRequest->codPais;
+
         $this->output->set_content_type('application/json')->set_output($this->listaEstado->lista_estados($codPais));
 
     }
@@ -301,9 +313,21 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listaCiudad');
-        $codEstado = $this->input->post('codEstado');
-        $codPais = $this->input->post('codPais');
+				$this->load->model('perfil_model', 'listaCiudad');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $codEstado = $dataRequest->codEstado;
+        $codPais = $dataRequest->codPais;
 
         $this->output->set_content_type('application/json')->set_output($this->listaCiudad->lista_ciudad($codEstado,$codPais));
 
@@ -366,9 +390,21 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listadoDepartamento');
-        $pais		= $this->input->post('pais');
-        $subRegion	= $this->input->post('subRegion');
+				$this->load->model('perfil_model', 'listadoDepartamento');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $pais		= $dataRequest->pais;
+        $subRegion	= $dataRequest->subRegion;
         $this->output->set_content_type('application/json')->set_output($this->listadoDepartamento->lista_departamentos($pais, $subRegion));
 
     }

@@ -73,9 +73,10 @@ class Detail_model extends CI_Model {
 
 	  	$salida = json_encode($desdata);
 
-	  	log_message("info", "Salida exportar detalle desencriptado".$salida);
+			log_message("info", "Salida exportar detalle desencriptado".$salida);
+			$response = $this->cryptography->encrypt($desdata);
 
-	  	return json_encode($desdata);
+	  	return json_encode($response);
 
 	}
 

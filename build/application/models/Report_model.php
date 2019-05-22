@@ -33,18 +33,16 @@ class Report_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1);
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
-		log_message("info", "SALIDA ENCRIPTADA REPORTE : ".$data);
-
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  $data = json_decode($response);
+	  $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
-	  	$salida = json_encode($desdata);
+	  $salida = json_encode($desdata);
 
-	  	log_message("info", "Salida gastos_model reporte".$salida);
+	  log_message("info", "Salida gastos_model reporte".$salida);
 
-	  	return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+		return json_encode($response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
