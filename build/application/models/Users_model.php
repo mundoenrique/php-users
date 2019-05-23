@@ -24,15 +24,12 @@ class Users_model extends CI_Model {
 			'token' => ''
 		));
 
-		log_message('DEBUG', 'REQUEST login_user: ' . $data);
-
-		$dataEncry = np_Hoplite_Encryption($data, 0);
+		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
-		log_message('DEBUG', 'REQUEST login_user país: ' . $data['pais'] . ' keId: ' . $data['keyId']);
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'login_user'));
 		$salida = json_encode($desdata);
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
 		$putSession = FALSE;
@@ -85,7 +82,7 @@ class Users_model extends CI_Model {
 
 		return json_encode($response);
     }
-    
+
     public function validar_captcha($token,$user)
     {
         $this->load->library('recaptcha');

@@ -15,10 +15,13 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 	{
 		log_message("DEBUG","INICIANDO LLAMADO WS: ".$nameWS);
 		$CI =& get_instance();
+		$dataReq = json_decode($cryptDataBase64);
+		$pais = $dataReq->pais;
+		$keyID = $dataReq->keyId;
 		$cookie = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
 		$urlcurlWS = $cookie == 'pichincha' ? 'http://172.24.6.78:10003/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource/'
 		: $CI->config->item('urlWS').$nameWS;
-		log_message("INFO", $urlcurlWS);
+		log_message('DEBUG', 'BY COUNTRY: '.$pais.', KEYID: '.$keyID.' AND WEBSERVICE URL: '.$urlcurlWS);
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
