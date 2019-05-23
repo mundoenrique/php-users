@@ -61,11 +61,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Bloqueo desbloqueo=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsLockAccount');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsLockAccount'));
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
@@ -276,11 +276,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Cambio de PIN=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWschangePin');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWschangePin'));
 
         log_message("info", "RESPONSE Cambio de PIN=====>>>>> ".json_encode($desdata));
 
@@ -422,11 +422,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Generacion de Token=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsGetToken');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsGetToken'));
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
@@ -536,11 +536,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Recuperación de clave=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsrecoverKey');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsrecoverKey'));
 
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 

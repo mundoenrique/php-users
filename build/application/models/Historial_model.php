@@ -32,12 +32,12 @@ class Historial_model extends CI_Model {
 
 		//print_r($data);
 		log_message("info", "Salida HISTORIAL : ".$data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'historial_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada historial_load : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'historial_load'));
 
 		$salida = json_encode($desdata);
 
@@ -64,12 +64,12 @@ class Historial_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 			));
 
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'ctasOrigen_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada historial ctasOrigen_load : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasOrigen_load'));
 
 		$salida = json_encode($desdata);
 
