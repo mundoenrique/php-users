@@ -27,12 +27,12 @@ class Detail_model extends CI_Model {
 		));
 
 		//print_r($data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'detail_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada DETALLE : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'detail_load'));
 
 			$response = $this->cryptography->encrypt($desdata);
 			return json_encode($response);
@@ -63,13 +63,13 @@ class Detail_model extends CI_Model {
 
 		//print_r($data);
 		log_message("info", "Salida exportar detalle".$data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'exportar');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada exportar : ".$data);
 
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exportar'));
 
 	  	$salida = json_encode($desdata);
 
@@ -102,12 +102,12 @@ class Detail_model extends CI_Model {
 		));
 		log_message("info", "Salida movimientos detalle".$data);
 		//print_r($data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'movimientos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada movimientos_load : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'movimientos_load'));
 
 			$response = $this->cryptography->encrypt($desdata);
 			return json_encode($response);
