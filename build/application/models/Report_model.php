@@ -31,14 +31,14 @@ class Report_model extends CI_Model {
 
 		log_message("info", "SALIDA REPORTES : ".$data);
 
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'gastos_model');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 
 		log_message("info", "SALIDA ENCRIPTADA REPORTE : ".$data);
 
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'gastos_model'));
 
 	  	$salida = json_encode($desdata);
 
@@ -69,14 +69,14 @@ class Report_model extends CI_Model {
 	 	));
 	 	//print_r($data);
 log_message("info", "Salida  exp_xls : ".$data);
-	 	$dataEncry = np_Hoplite_Encryption($data,1);
+	 	$dataEncry = np_Hoplite_Encryption($data,1,'exp_xls');
 
 
 	 	$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 	 	log_message("info", "Salida encriptada exp_xls : ".$data);
 	 	$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	   	$data = json_decode($response);
-	   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exp_xls'));
 
    		$salida = json_encode($desdata);
 
@@ -105,12 +105,12 @@ log_message("info", "Salida  exp_xls : ".$data);
 			"token"=>$this->session->userdata("token")
 		));
 log_message("info", "Salida  exp_pdf : ".$data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'exp_pdf');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada exp_pdf : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exp_pdf'));
 
 	  	$salida = json_encode($desdata);
 
