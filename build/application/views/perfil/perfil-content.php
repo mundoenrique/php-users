@@ -705,7 +705,7 @@ $pais_residencia=$this->session->userdata('pais');
 <!-- MODAL DATOS DE AFILIACIÓN NO COMPLETADOS -->
 <div id="completar-afiliacion" style='display:none'>
     <div>
-        <div class="alert-simple alert-warning">
+        <div class="alert-simple ">
             <span aria-hidden="true" class="icon-cancel-sign"></span>
             <p id="msgAfil"></p>
         </div>

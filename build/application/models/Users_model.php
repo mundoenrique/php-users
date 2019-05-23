@@ -121,9 +121,10 @@ class Users_model extends CI_Model {
         log_message('info', 'Salida encriptada obtener_login: ' . $data);
         $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
+				$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -152,9 +153,11 @@ class Users_model extends CI_Model {
         log_message('info', 'Salida encriptada reset_password: ' . $data);
         $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
+				$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
+
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,16 @@ base_cdn = $('body').attr('data-app-cdn');
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url +"/users/resetpassword",{"id_ext_per":id_ext_per, "email":email, "cpo_name": cpo_cook},function(data){
+				var dataRequest = JSON.stringify ({
+					id_ext_per:id_ext_per,
+					email:email
+					});
+
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+					$.post(base_url+"/users/resetpassword", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 				if(data.rc==0) {
 

@@ -90,7 +90,6 @@
 	</article>
 </div>
 <form id='tarjeta' method='post' action="detalles">
-	<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 	<input id="numt" type="hidden" name="numt" value="" />
 	<input id="marca" type="hidden" name="marca" value="" />
 	<input id="empresa" type="hidden" name="empresa" value="" />

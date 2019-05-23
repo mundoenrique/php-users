@@ -31,7 +31,17 @@ base_cdn = $('body').attr('data-app-cdn');
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-			$.post(base_url +"/users/obtenerlogin_call",{"id_ext_per":id_ext_per, "email":email, cpo_name: cpo_cook},function(data){
+
+				var dataRequest = JSON.stringify ({
+					id_ext_per: id_ext_per,
+					email: email
+				});
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$consulta = $.post(base_url+"/users/obtenerlogin_call", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
         if(data.rc == -61){
               $(location).attr('href', base_url+'/users/error_gral');
           }
