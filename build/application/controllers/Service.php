@@ -52,14 +52,25 @@ class Service extends CI_Controller {
         np_hoplite_verificLogin();
         //VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
         np_hoplite_countryCheck($this->session->userdata('pais'));
-        //Load model file
+				//Get Data
+				$data = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$dataRequest = $data->formData;
+				//Load model file
         $this->load->model('service_model', 'service');
         //Get method
-        $method = 'callWs'.$this->input->post('model');
-        //Get Data
-        $dataRequest = $this->input->post('data');
+        $method = 'callWs'.$data->model;
         //Call the method
-        $dataResponse = $this->service->$method($dataRequest);
+				$dataResponse = $this->service->$method($dataRequest);
+				$dataResponse = $this->cryptography->encrypt($dataResponse);
         //Response to the js file
         $this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
     }

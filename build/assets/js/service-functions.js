@@ -92,16 +92,22 @@ function lock_change (formData, model, form, action) {
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
+			var dataRequest = JSON.stringify({
+				formData,
+				model: model,
+			});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {data: formData, model: model, cpo_name: cpo_cook},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'JSON',
         beforeSend: function (xrh, status) {
             cleanBefore (msgMain, msgSec);
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete (msgMain);
             switch (data.code) {
                 case 0:
@@ -162,16 +168,21 @@ function getToken (msgMain) {
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
+		var dataRequest = JSON.stringify({
+			model: 'GetToken'
+		});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {model: 'GetToken', cpo_name: cpo_cook},
+        data: {request: dataRequest, cpo_name: cpo_cook},
         datatype: 'json',
         beforeSend: function (xrh, status) {
             cleanBefore ('block');
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete ('block');
             switch (data.code) {
                 case 4:
