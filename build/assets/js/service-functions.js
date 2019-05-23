@@ -176,7 +176,7 @@ function getToken (msgMain) {
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {request: dataRequest, cpo_name: cpo_cook},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'json',
         beforeSend: function (xrh, status) {
             cleanBefore ('block');
