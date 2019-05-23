@@ -120,7 +120,10 @@ $(function() {
 		$("#donor").append(cadena);
 
 		// CARGAR SALDO CUENTAS ORIGEN--------------------------------------------------------------
-		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card")},
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card"), cpo_name: cpo_cook},
 			function(data) {
 				var saldoCtaOrigen = data.disponible;
 				if (typeof saldoCtaOrigen != 'string') {
@@ -199,6 +202,10 @@ $("#continuar").on('click',function(){
 	if(form !== "")
 	{
 		validar_campos();
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$(form).append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		form.submit();
 		form.valid();
 	}

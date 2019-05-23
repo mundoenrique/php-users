@@ -4,7 +4,7 @@ $(function(){
   var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
  if ($('#filter-month').val() == "0") {
-    $("#period").text("Reciente");
+    $("#period").text("reciente");
   }
 
 //PERIOD SPAN TITLE
@@ -56,13 +56,36 @@ $('#buscar').on('click',function(){
   });
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
-  $.post(base_url+"/detalles/load",{"tarjeta":$("#card").attr("card")},function(data){
+	var dataRequest = JSON.stringify ({
+		tarjeta:$("#card").attr("card")
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+	$.post(base_url+"/detalles/load", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
     $('#loading').hide();
     carga_lista(data);
   });
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
-  $.post(base_url+"/dashboard/saldo",{"tarjeta":$("#card").attr("card")},function(data){
+	var dataRequest = JSON.stringify ({
+		tarjeta:$("#card").attr("card")
+		})
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+	$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
     var moneda=$(".product-info-full").attr("moneda");
     var saldoAct=data.actual;
@@ -166,15 +189,39 @@ $('#buscar').on('click',function(){
     $('#estadisticas').children().remove();
     $('#loading').show();
     mes = $("#filter-month").val();
-    anio = $("#filter-year").val();
+		anio = $("#filter-year").val();
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     if(mes==0){
-      $.post(base_url+"/detalles/load",{"tarjeta":$("#card").attr("card")},function(data){
+
+			var dataRequest = JSON.stringify ({
+				tarjeta:$("#card").attr("card")
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/detalles/load", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
         $('#loading').hide();
         carga_lista(data);
       });
     }
     else{
-      $.post(base_url+"/detail/CallWsMovimientos", {"tarjeta":$("#card").attr("card"),"mes":mes,"anio":anio}, function(data){
+
+			var dataRequest = JSON.stringify ({
+				tarjeta:$("#card").attr("card"),
+				mes:mes,
+				anio:anio
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/detail/CallWsMovimientos", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
         $('#loading').hide();
         carga_lista(data);
       });

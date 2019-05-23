@@ -1,7 +1,8 @@
 var fecha = new Date();
 fecha = fecha.getFullYear();
 var i=0;
-var anio,fechaIni,fechaFin,tipoConsulta,producto,tipoConsulta,reporte;
+var anio,fechaIni,fechaFin,tipoConsulta,producto,tipoConsulta,reporte,skin;
+skin = $('body').attr('data-app-skin');
 do {
 	anio= parseInt(fecha)-i;
     $(".sub-stack").append('<li class="sub-stack-item"><a href="#" rel="subsection" >'+anio.toString()+'</a></li>');
@@ -147,14 +148,14 @@ $(function(){
 		$("#filter-range-from").prop("disabled", false);
 		$("#filter-range-to").prop("disabled", false);
 
-		$(".nodata-state").show();
+		(skin== "pichincha")? "" : $(".nodata-state").show() ;
 
 
 
 
 		$(".content-anio").show();
 		$(".content-mes").hide();
-		$("#empty-state").hide();
+		(skin== "pichincha")? "" : $("#empty-state").hide();
 
 		$(".anual").click(function(){
 			tipoConsulta = "0";
@@ -171,7 +172,10 @@ $(function(){
 		});
 
 		$(".mensual").click(function(){
-
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$("#fechas").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 			$("#fechas").submit();
 			setTimeout(function(){$("#msg").fadeOut();},2000);
 
@@ -202,13 +206,14 @@ $(function(){
         	$("#chart").append(cadena);
         }
         else{
-			$("#tarjeta_pdf").val($("#donor-cardnumber").attr("tarjeta"));
+					$("#form_pdf").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
+					$("#tarjeta_pdf").val($("#donor-cardnumber").attr("tarjeta"));
         	$("#idpersona_pdf").val(idexper);
         	$("#producto_pdf").val($("#donor-cardnumber").attr("prefix"));
         	$("#tipoConsulta_pdf").val(tipoConsulta);
         	$("#fechaIni_pdf").val(fechaIni);
         	$("#fechaFin_pdf").val(fechaFin);
-			$("#form_pdf").submit();
+					$("#form_pdf").submit();
 		}
 
 	});
@@ -226,7 +231,11 @@ $(function(){
         	$("#chart").append(cadena);
         }
         else{
-			$("#tarjeta").val($("#donor-cardnumber").attr("tarjeta"));
+					var cpo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+					$("#form").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
+					$("#tarjeta").val($("#donor-cardnumber").attr("tarjeta"));
         	$("#idpersona").val(idexper);
         	$("#producto").val($("#donor-cardnumber").attr("prefix"));
         	$("#tipoConsulta").val(tipoConsulta);
@@ -324,9 +333,34 @@ $(function(){
 	}
 
 	function generar_info(tarjeta, tipo, producto, idpersona, fechaIni, fechaFin, consulta){
+		if(skin=="pichincha"){
+			$("[id='empty-state']").hide();
+			$("#dialog").css({
+				"margin-top": "0px"
+			});
+		}
 		$("#dialog").show();
-		var moneda=$("#reporte").attr("moneda");
-		$.post(base_url + "/report/CallWsGastos", {"tarjeta":tarjeta,"idpersona":idpersona,"tipo":tipo, "producto":producto,"fechaIni":fechaIni,"fechaFin":fechaFin}, function(data){
+			var moneda=$("#reporte").attr("moneda");
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+				var dataRequest = JSON.stringify ({
+					tarjeta: tarjeta,
+					idpersona: idpersona,
+					tipo: tipo,
+					producto: producto,
+					fechaIni: fechaIni,
+					fechaFin: fechaFin
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url + "/report/CallWsGastos", {request: dataRequest, cpo_name: cpo_cook,plot: btoa(cpo_cook)}, function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			if(data.rc == -61){
             	$(location).attr('href', base_url+'/users/error_gral');
             	$("#dialog").css("display", "none");

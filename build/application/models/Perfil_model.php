@@ -272,8 +272,9 @@ class Perfil_model extends CI_Model {
 				}
 
 				$desdata->rc === 0 ? $this->session->set_userdata('tyc', $tyc) : '';
-
-        return json_encode($desdata);
+        
+        $response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
         // Simula respuesta de servicio
         // $desdata = '{"rc":-317,"msg":"Error cuenta invalida"}';
         // $this->session->set_userdata('afiliado', $contrato);
@@ -331,8 +332,10 @@ class Perfil_model extends CI_Model {
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
 
-        log_message("info", "Salida desencriptada lista_estados : ".json_encode($desdata));
-        return json_encode($desdata);
+				log_message("info", "Salida desencriptada lista_estados : ".json_encode($desdata));
+
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 
@@ -360,7 +363,8 @@ class Perfil_model extends CI_Model {
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -397,10 +401,10 @@ class Perfil_model extends CI_Model {
 
         $data		= json_decode($response);
 
-        $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0));
+        $desdata	= json_decode(np_Hoplite_Decrypt($data->data,1));
         log_message("info", "Salida desencriptada lista_departamento : ".json_encode($desdata));
-
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -424,7 +428,8 @@ class Perfil_model extends CI_Model {
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 

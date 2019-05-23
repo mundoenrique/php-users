@@ -174,8 +174,11 @@ base_cdn = $('body').attr('data-app-cdn');
         cargando +=     '<h3 style="border-bottom: 0px;">Cargando</h3>';
         cargando +=     '<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>';
         cargando += '</div>';
-        $('#carga').append(cargando);
-		$.post(base_url +"/historial/historial",{"noTarjeta":ctaOrigen,"tipoOperacion":"P2C","mes":mes,"anio":anio},function(data){
+				$('#carga').append(cargando);
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+		$.post(base_url +"/historial/historial",{"noTarjeta":ctaOrigen,"tipoOperacion":"P2C","mes":mes,"anio":anio, cpo_name: cpo_cook},function(data){
 			if(data.rc == -61){
             	$(location).attr('href', base_url+'/users/error_gral');
         	}

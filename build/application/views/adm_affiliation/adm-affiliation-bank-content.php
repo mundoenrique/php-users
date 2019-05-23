@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
     <ul class="menu">
         <li class="menu-item">
@@ -31,7 +35,9 @@
                     </li>
                 </ul>
             </nav>
+
             <form accept-charset="utf-8" action="transfers-p2p-handler-p2.html" method="post">
+							<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                 <fieldset>
                     <div class="group" id="donor">
                         <div class='product-presentation'>
@@ -76,16 +82,18 @@
             $marca= strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
             $pais=ucwords($this->session->userdata('pais'));
-            $moneda=lang("MONEDA");
+						$moneda=lang("MONEDA");
+						$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+						$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-            echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' moneda='$moneda' nombre='$value->tarjetaHabiente' producto1='$value->producto' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto='$img' prefix='$value->prefix'>
+            echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' moneda='$moneda' nombre='$tarjetaHabiente' producto1='$nomProducto' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto='$img' prefix='$value->prefix'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+         <p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
          <p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-         <p class='dashboard-item-category'>$value->producto</p>
+         <p class='dashboard-item-category'>$nomProducto</p>
          </div>
          </a>
          </li>";
@@ -110,6 +118,7 @@
         <h2>Eliminación de Afiliación</h2>
         <p>Por favor, verifique los datos de la afiliación que Ud. está a punto de remover. Introduzca su clave de operaciones si está de acuerdo con este cambio:</p>
         <form accept-charset="utf-8" action="transfers-banks-remove2.html" method="post">
+						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
             <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
                 <tbody>
                 <tr>

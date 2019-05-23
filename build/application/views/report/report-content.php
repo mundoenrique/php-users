@@ -10,24 +10,24 @@
 					<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="" />
 				</div>
 				<div class="product-info-full">
-					<p class="field-tip">Seleccione una cuenta asociada a visualizar.</p>
+					<p class="field-tip">Selecciona una cuenta asociada.</p>
 				</div>
 			</div>
-			<h2>Gastos por Categoría</h2>
+			<h2>Gastos por categoría</h2>
 			<nav id="filters-stack">
 
 				<div class="stack-form" id="reporte" moneda="<?php echo lang("MONEDA"); ?>" id="<?php echo lang("ID"); ?>">
 					<form accept-charset="utf-8" method="post" id="fechas">
 						<fieldset>
-							<label for="filter-range-from">Mostrar Desde</label>
+							<label for="filter-range-from">Mostrar desde</label>
 							<div class="field-prepend">
 								<span aria-hidden="true" class="icon-calendar"></span>
-								<input class="field-small" id="filter-range-from" name="filter-range-from" maxlength="10" placeholder="dd/mm/aaaa" disabled/>
+								<input class="field-small" id="filter-range-from" name="filter-range-from" maxlength="10" placeholder="DD/MM/AAAA" disabled/>
 							</div>
 							<label for="filter-range-to">Hasta</label>
 							<div class="field-prepend">
 								<span aria-hidden="true" class="icon-calendar"></span>
-								<input class="field-small" id="filter-range-to" name="filter-range-to" maxlength="10" placeholder="dd/mm/aaaa" disabled/>
+								<input class="field-small" id="filter-range-to" name="filter-range-to" maxlength="10" placeholder="DD/MM/AAAA" disabled/>
 							</div>
 						</fieldset>
 					</form>
@@ -39,7 +39,7 @@
 				<ul class="stack stack-extra" id="download-boxes">
 					<li class="stack-item">
 
-						<a href="#download-excel" id="export_excel" rel="subsection" title="Descargar EXCEL"><span aria-hidden="true" class="icon-file-excel"></span></a>
+						<a href="#download-excel" id="export_excel" rel="subsection" title="Descargar Excel"><span aria-hidden="true" class="icon-file-excel"></span></a>
 					</li><li class="stack-item">
 
 						<a href="#download-pdf" id="export_pdf" rel="subsection" title="Descargar PDF"><span aria-hidden="true" class="icon-file-pdf"></span></a>
@@ -60,12 +60,12 @@
 				</div>
 			</nav>
 			<div id="empty-state">
-				<h2>Sin resultados a mostrar</h2>
-				<p>Debe seleccionar una cuenta asociada a visualizar.</p>
+				<h2>Sin resultados para mostrar</h2>
+				<p>Debes seleccionar una cuenta asociada.</p>
 				<span aria-hidden="true" class="icon-chart-pie"></span>
 			</div>
 			<div id="empty-state" data-result="noresult" class="nodata-state" style="position: static;">
-				<h2>Sin resultados a mostrar</h2>
+				<h2>Sin resultados para mostrar</h2>
 				<p>Seleccione un rango de fecha a consultar</p>
 				<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -410px;"></span>
 			</div>
@@ -262,15 +262,17 @@
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$value->tarjetaHabiente' producto1='$value->producto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' id='$id' nombre='$tarjetaHabiente' producto1='$nomProducto' idpersona='$value->id_ext_per' marca='$marca' mascara='$value->nroTarjetaMascara' moneda='$moneda' empresa='$empresa' producto='$img' prefix='$value->prefix'>
 							<a href='#' rel='section'>
 								<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 								<div class='dashboard-item-network $marca'>$value->marca</div>
 								<div class='dashboard-item-info'>
-									<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+									<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
 									<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-									<p class='dashboard-item-category'>$value->producto</p>
+									<p class='dashboard-item-category'>$nomProducto</p>
 								</div>
 							</a>
 						</li>";

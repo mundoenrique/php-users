@@ -78,12 +78,7 @@ if(isset($pagina) ){
 
 }
 
-$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-if($skin == 'latodo'){
-	$closeLink = $this->config->item('base_url') . '/users/closeSess_pe';
-}else{
-	$closeLink = $this->config->item('base_url') . '/users/closeSess';
-}
+$closeLink = $this->config->item('base_url') . '/users/closeSess';
 
 
 $fullname = ucwords($this->session->userdata('nombreCompleto'));
@@ -100,7 +95,7 @@ $pais = $this->session->userdata('pais');
 <nav id="main-menu">
 	<ul class="menu">
 		<li class="<?php echo $clase_dash?> menu-item products">
-			<a href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Vista Consolidada</a>
+			<a href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Vista consolidada</a>
 		</li>
 		<li class="<?php echo $clase_tranfer?> menu-item transfers">
 			<?php
@@ -134,20 +129,20 @@ $pais = $this->session->userdata('pais');
 		<li class="<?php echo $clase_report?> menu-item reports">
 			<a href="<? echo $this->config->item("base_url"); ?>/report" rel="section">Reportes</a>
 		</li>
-		<?php if ($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe'): ?>
+		<?php if ($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe' || $pais == 'Ec-bp'): ?>
 			<li class="<?php echo $clase_service?> menu-item service">
 				<a href="<? echo $this->config->item("base_url"); ?>/servicios" rel="section">Atención al cliente</a>
 			</li>
 			<?php endif; ?>
 		<li class="<?php echo $clase_perfil?> menu-item account user">
-			<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><?php echo $fullname;?>
+			<a class="account" href="<? echo $this->config->item("base_url"); ?>/perfil" rel="section"><div><?php echo $fullname;?></div>
 			<span aria-hidden="true" class="icon-chevron-down"></span></a>
 			<ul class="submenu-user sub-menu">
 				<li class="sub-menu-item account-profile">
 					<a href="<? echo $this->config->item("base_url"); ?>/perfil" rel="subsection">Perfil</a>
 				</li>
 				<li class="sub-menu-item account-signout">
-					<a href="<? echo $closeLink; ?>" rel="subsection" id="cerrarSesion">Cerrar Sesión</a>
+					<a href="<? echo $closeLink; ?>" rel="subsection" id="cerrarSesion">Cerrar sesión</a>
 				</li>
 			</ul>
 		</li>
@@ -156,7 +151,7 @@ $pais = $this->session->userdata('pais');
 <nav id="compact-menu">
 	<ul class="menu">
 		<li class="menu-item account-signout">
-			<a href="<? echo $closeLink; ?>" rel="section" title="Cerrar Sesión" id="cerrarSesion"><span aria-hidden="true" class="icon-off"></span></a>
+			<a href="<? echo $closeLink; ?>" rel="section" title="Cerrar sesión" id="cerrarSesion"><span aria-hidden="true" class="icon-off"></span></a>
 		</li>
 	</ul>
 </nav>

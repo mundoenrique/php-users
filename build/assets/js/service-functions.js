@@ -89,16 +89,25 @@ function lock_change (formData, model, form, action) {
         msgSec = 'recoverKey';
     }
 
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({
+				formData,
+				model: model,
+			});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {data: formData, model: model},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'JSON',
         beforeSend: function (xrh, status) {
             cleanBefore (msgMain, msgSec);
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete (msgMain);
             switch (data.code) {
                 case 0:
@@ -154,16 +163,26 @@ function lock_change (formData, model, form, action) {
 
 function getToken (msgMain) {
 	var token = 1; //Requiere token 1, no requiere 0
-    $('#carry').remove();
+		$('#carry').remove();
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+		var dataRequest = JSON.stringify({
+			model: 'GetToken'
+		});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {model: 'GetToken'},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'json',
         beforeSend: function (xrh, status) {
             cleanBefore ('block');
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete ('block');
             switch (data.code) {
                 case 4:
@@ -202,7 +221,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain +' #result-'+ msgMain)
         .html('')
         .append('<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>');
-    $('#msg-'+ msgMain +' h3').text('Estamos procesando su solicitud');
+    $('#msg-'+ msgMain +' h3').text('Estamos procesando tu solicitud');
     $('#msg-'+ msgMain).show();
 }
 

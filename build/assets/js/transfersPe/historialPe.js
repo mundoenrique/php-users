@@ -191,12 +191,13 @@ base_cdn = $('body').attr('data-app-cdn');
 				};
 
 				var data_seralize = $.param(ajax_data);
-
-
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
 				$.ajax({
 					url: base_url + '/transferencia/peGeneral',
 					type: "post",
-					data: {data : data_seralize, model : "historial_loadPe"},
+					data: {data : data_seralize, model : "historial_loadPe", cpo_name: cpo_cook},
 					datatype: 'JSON',
 					success: function(data) {
 

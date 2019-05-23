@@ -1,20 +1,26 @@
 <?php
   $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-  if ($skin == 'latodo') {
-    $signupLink = $this->config->item('base_url') . '/registro/index_pe';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
-  } else {
-    $signupLink = $this->config->item('base_url') . '/registro';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
-  }
+	if ($skin == 'latodo') {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
+	} else if($skin == 'pichincha'){
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pi';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pi';
+	}else {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
+	}
+  $signupLink = $this->config->item('base_url') . '/registro';
+  
+  echo $insertRecaptcha;
 ?>
 <div id="slideshow">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
-      <p class="slide-title">Bienvenido a Conexión Personas Online</p>
-      <p>Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24</p>
+			<div class="img-back">
+				<p class="slide-title"><?= lang('WELCOME_TITLE'); ?></p>
+			</div>
+      <p><?= lang('WELCOME_MSG'); ?></p>
     </li>
   </ul>
 </div>
@@ -68,6 +74,25 @@
     </div>
   </div>
 </div>
+
+
+<!-- MODAL VALIDACION RECPATCHA-->
+
+<div id="dialog-validate" style='display:none'>
+  <header>
+    <h2>Validación de acceso</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+      <p>El sistema ha dectetado una actividad no autorizada, por favor intentar nuevamente </p>
+    </div>
+    <div class="form-actions">
+      <button id="error-validate">Aceptar</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- MODAL ERROR -->
 

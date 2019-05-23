@@ -1,4 +1,8 @@
-<?php $country = $this->session->userdata('pais'); ?>
+<?php
+$country = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu" style='display:none'>
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -71,6 +75,7 @@
 
 													</div>
 													<form id="form-search" method="post" name="form-search">
+														<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 														<div id='cardRef' style="display:none">
 															<fieldset class='form-inline'>
 																<label for='beneficiary-1x-description'>Tarjeta</label>
@@ -277,9 +282,10 @@
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$paramTrx = $value->parametrosTransferencia;
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'
 				montoMaxOperaciones = '$paramTrx->montoMaxOperaciones' montoMinOperaciones='$paramTrx->montoMinOperaciones' montoMaxDiario='$paramTrx->montoMaxDiario' montoMaxSemanal='$paramTrx->montoMaxSemanal' montoMaxMensual='$paramTrx->montoMaxMensual' cantidadOperacionesDiarias='$paramTrx->cantidadOperacionesDiarias'
 				cantidadOperacionesSemanales = '$paramTrx->cantidadOperacionesSemanales' cantidadOperacionesMensual='$paramTrx->cantidadOperacionesMensual' montoAcumDiario = '$paramTrx->montoAcumDiario' montoAcumSemanal='$paramTrx->montoAcumSemanal' montoAcumMensual='$paramTrx->montoAcumMensual' acumCantidadOperacionesDiarias='$paramTrx->acumCantidadOperacionesDiarias'
 				acumCantidadOperacionesSemanales = '$paramTrx->acumCantidadOperacionesSemanales' acumCantidadOperacionesMensual = '$paramTrx->acumCantidadOperacionesMensual'>
@@ -287,10 +293,10 @@
 	         			<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 	         			<div class='dashboard-item-network $marca'></div>
 	         			<div class='dashboard-item-info'>
-	         				<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+	         				<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
 	         				<p class='dashboard-item-balance'><?php echo $country !== 'Ve' ? $moneda --- : ''; ?></p>
 	         				<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-	         				<p class='dashboard-item-category'>$value->producto</p>
+	         				<p class='dashboard-item-category'>$nomProducto</p>
 	         			</div>
 	         		</a>
          		</li>";

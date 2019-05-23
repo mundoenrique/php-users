@@ -70,8 +70,7 @@ class Dashboard_model extends CI_Model {
 		 log_message('info', 'Salida SALDO desencriptado: ' . $salida);
 		 //$desdata = json_decode('{"bloqueo":"0,00","disponible":"5.000.000,00","actual":"51.000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
 
-
-
-		return json_encode($desdata);
+		 $response = $this->cryptography->encrypt($desdata);
+		 return json_encode($response);
 	}
 }

@@ -2019,6 +2019,16 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   line-height: 60px;
   text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
+#main-menu ul.menu li.menu-item a.account{
+	display: flex;
+  align-items: center;
+}
+#main-menu ul.menu li.menu-item a.account div{
+	max-width: 105px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 #main-menu ul.menu li.menu-item a span[class^="icon-"], #main-menu ul.menu li.menu-item a span[class*=" icon-"] {
   margin: -2px 0 0 3px;
 }
@@ -2302,6 +2312,11 @@ ul.product-balance-group li {
   margin-right: 10px;
   width: 140px;
 }
+
+ul.product-balance-group li span{
+	padding: 3px 0px;
+}
+
 ul.product-balance-group li span.product-balance {
   color: #555555;
   display: block;
@@ -2316,7 +2331,10 @@ ul.product-balance-group.disabled-product-balance-group li span.product-balance 
   color: #dddddd;
 }
 .product-scheme ul.product-balance-group {
-  margin: 45px 0;
+	margin: 45px 0;
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
 }
 
 ul.actions {

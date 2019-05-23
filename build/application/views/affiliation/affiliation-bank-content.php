@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item">
@@ -179,15 +183,17 @@
 				$marca= strtolower(str_replace(" ", "-", $value->marca));
 				$empresa = strtolower($value->nomEmp);
 				$pais=ucwords($this->session->userdata('pais'));
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' nombre='$value->tarjetaHabiente' marca='$marca' producto1='$value->producto' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto='$img' prefix='$value->prefix'>
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' nombre='$tarjetaHabiente' marca='$marca' producto1='$nomProducto' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto='$img' prefix='$value->prefix'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+         <p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
          <p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-         <p class='dashboard-item-category'>$value->producto</p>
+         <p class='dashboard-item-category'>$nomProducto</p>
          </div>
          </a>
          </li>";
@@ -296,6 +302,7 @@
 			</div>
 			<p>Los datos registrados durante la operación fueron los siguientes:</p>
 			<form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<table class="receipt" cellpadding="0" cellspacing="0" width="100%">
 					<tbody id="cargarFinalizacion">
 
@@ -351,6 +358,7 @@
 			</div>
 			<p>Los datos registrados durante la operación fueron los siguientes:</p>
 			<form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<table class="receipt" cellpadding="0" cellspacing="0" width="100%">
 					<tbody id="cargarFinalizacion3">
 
@@ -406,6 +414,7 @@
 			</div>
 			<p>Los datos registrados durante la operación fueron los siguientes:</p>
 			<form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<table class="receipt" cellpadding="0" cellspacing="0" width="100%">
 					<tbody id="cargarFinalizacion2">
 
