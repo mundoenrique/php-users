@@ -159,12 +159,7 @@ $(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto){
 		var clase,clase1;
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		  );
-
-		$.post(base_url +"/transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2T", "cpo_name":cpo_cook},function(data) {
+		$.post(base_url +"/transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2T"},function(data) {
 			if(data.rc == -61){
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
@@ -392,12 +387,7 @@ $(function(){
 
 
 							$("#continuar").click(function(){
-
-								var cpo_cook = decodeURIComponent(
-									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								  );
-
-								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor, "expDate":expDate, "cpo_name":cpo_cook },function(data) {
+								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor, "expDate":expDate },function(data) {
 									if(data.rc==0){
 										var exito;
 										$("#progress").attr('style','display:none');
@@ -514,12 +504,7 @@ $(function(){
 					$("#content-holder").append(eliminar);
 
 					$("#cont").click(function(){
-
-						var cpo_cook = decodeURIComponent(
-							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-						  );	
-
-						$.post(base_url +"/adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2T", "cpo_name":cpo_cook},function(data) {
+						$.post(base_url +"/adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2T"},function(data) {
 							if(data.rc==0){
 								$("#progress").attr('style','display:none');
 								$("#content-holder").children().remove();
@@ -647,12 +632,7 @@ $(function(){
 	function getBancos() {
 
 		$.ajaxSetup({async: false});
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		  );
-
-		$.post(base_url +"/affiliation/bancos", { "cpo_name":cpo_cook} ,function(data){
+		$.post(base_url +"/affiliation/bancos",function(data){
 			$.each(data.lista,function(pos,item){
 
 				var lista;

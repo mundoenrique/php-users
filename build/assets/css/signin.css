@@ -3405,7 +3405,9 @@ table.feed-table tfoot td.feed-category-10x {
 #widget-signin input {
   width: 145px;
 }
-
+#widget-signin button {
+  display: none;
+}
 #widget-signin a {
   font-weight: bold;
 }
@@ -5559,6 +5561,5 @@ body .ui-tooltip {
 }
 
 #login {
-  width: 190px;
-  margin-bottom: 1rem 
+  display: none;
 }

@@ -1,65 +1,64 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+<style type="text/css">
 
-define(ENVIRONMENT, $_SERVER['CI_ENV']);
-define(BASE_URL, $_SERVER['BASE_URL']);
-define(BASE_CDN_URL, $_SERVER['BASE_CDN_URL']);
-define(BASE_CDN_PATH, $_SERVER['BASE_CDN_PATH']);
-define(SKIN, isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
+::selection { background-color: #E13300; color: white; }
+::-moz-selection { background-color: #E13300; color: white; }
 
-require_once('error_helpers.php');
+body {
+	background-color: #fff;
+	margin: 40px;
+	font: 13px/20px normal Helvetica, Arial, sans-serif;
+	color: #4F5155;
+}
 
-$favicon_ext = (SKIN !== '') ? 'ico' : 'png';
-$favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
-?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>General Error</title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="googlebot" content="none">
-		<meta name="robots" content="noindex, nofollow">
-		<link href="http://gmpg.org/xfn/11" rel="profile">
-		<link href="<?php echo $favicon; ?>" rel="icon" type="image/png">
-		<?php
-		echo insert_css_cdn('errors.css');
-		echo insert_js_cdn('html5.js');
-		?>
-	</head>
-	<body>
-		<header id="head">
-			<div id="head-wrapper">
-				<a id="<?= (SKIN !== '') ? 'brand-id' : 'brand-app' ?>" rel="start">
-				</a>
-			</div>
-		</header>
-		<div id="wrapper">
-			<div id="content">
-				<h1><?php echo $heading; ?></h1>
-				<?php echo $message; ?>
-				<a class="button" href="#" id="history-back">Regresar</a>
-			</div>
-		</div>
-		<footer id="foot">
-			<div id="foot-wrapper">
-				<div class="foot-wrapper-top">
-					<a id="app-engine" href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a>
-				</div>
-				<div class="foot-wrapper-bottom">
-					<p id="app-copyright">© <?php echo date('Y'); ?> NovoPayment Inc. All rights reserved.</p>
-				</div>
-			</div>
-		</footer>
-		<?php
-		echo insert_js_cdn('jquery-3.4.0.min.js');
-		?>
-		<script>
-			$('#history-back').on('click', function(event) {
-				event.preventDefault();
+a {
+	color: #003399;
+	background-color: transparent;
+	font-weight: normal;
+}
 
-				window.history.back();
-			});
-		</script>
-	</body>
+h1 {
+	color: #444;
+	background-color: transparent;
+	border-bottom: 1px solid #D0D0D0;
+	font-size: 19px;
+	font-weight: normal;
+	margin: 0 0 14px 0;
+	padding: 14px 15px 10px 15px;
+}
+
+code {
+	font-family: Consolas, Monaco, Courier New, Courier, monospace;
+	font-size: 12px;
+	background-color: #f9f9f9;
+	border: 1px solid #D0D0D0;
+	color: #002166;
+	display: block;
+	margin: 14px 0 14px 0;
+	padding: 12px 10px 12px 10px;
+}
+
+#container {
+	margin: 10px;
+	border: 1px solid #D0D0D0;
+	box-shadow: 0 0 8px #D0D0D0;
+}
+
+p {
+	margin: 12px 15px 12px 15px;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<h1><?php echo $heading; ?></h1>
+		<?php echo $message; ?>
+	</div>
+</body>
 </html>

@@ -55,13 +55,10 @@ $(function() {
 
 
 				//petición de setAmount
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
 				$.ajax({
 					url: base_url + '/transferencia/peGeneral',
 					type: "post",
-					data: {data : data_seralize, model : "setAmount", cpo_name: cpo_cook},
+					data: {data : data_seralize, model : "setAmount"},
 					datatype: 'JSON',
 					success: function(data) {
 						switch (data.code) {

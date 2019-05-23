@@ -202,8 +202,8 @@ class Registro_model extends CI_Model {
 			"modalType" => $this->modalType,
 			'dataUser' => $this->dataUser
 		];
-		$response = $this->cryptography->encrypt($this->response);
-		return json_encode($response);
+
+		return json_encode($this->response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -227,8 +227,8 @@ class Registro_model extends CI_Model {
   	$data		= json_decode($response);
   	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1));
 		log_message("info", "Response validar_usuario: ".json_encode($desdata));
-		$response = $this->cryptography->encrypt($desdata);
-	  return json_encode($response);
+
+	  	return json_encode($desdata);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -408,8 +408,7 @@ class Registro_model extends CI_Model {
 
 		$this->code = 3;
 		$this->modalType = "alert-error";
-		$responseCode = isset($desdata->rc) ? $desdata->rc : '-9999';
-				switch ($responseCode) {
+				switch ($desdata->rc) {
 					case 0:
 						$this->title = "Usuario registrado exitosamente";
 						$this->msn = "se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
@@ -540,8 +539,7 @@ class Registro_model extends CI_Model {
 					"modalType" => $this->modalType
 				];
 
-			$response = $this->cryptography->encrypt($this->response);
-			return json_encode($response);
+			return json_encode($this->response);
 
 
 		//Simula respuesta del servicio

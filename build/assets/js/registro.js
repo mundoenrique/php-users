@@ -3,18 +3,9 @@ var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
-var skin = decodeURIComponent(
-	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_skin\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-);
 
 $(function(){
-	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
-	var tlfLength = "11";
-	if (skin == 'pichincha'){
-		$('#telefonoFijo').attr('maxlength','9');
-		tlfLength = "9";
-	}
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 
@@ -48,7 +39,7 @@ $(function(){
 	$("#condiciones").on("click", "a", function() {
 
 		if ($("#accept-terms").is("disabled") === false) {
-			if ($("#iso").val() == "Co" || $("#iso").val() == "Ec-bp") {
+			if ($("#iso").val() == "Co") {
 				$("#dialog-rg-Co").dialog({
 					modal:"true",
 					width:"940px",
@@ -122,10 +113,6 @@ $(function(){
 		$("button").attr("disabled",true);
 		validar_campos();
 
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$("#form-validar").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#form-validar").submit();
 		setTimeout(function(){$("#msg").fadeOut();},5000);
 
@@ -134,7 +121,7 @@ $(function(){
 		if(form.valid() == true) {
 			var pais, cuenta, cedula, id_ext_per, pin, d, fecha, userName,claveWeb, anio;
 
-			pais		= $('#iso').val();
+			pais		= $('#iso option:selected').val();
 			cuenta		= $("#content-holder").find("#card-number").val();
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			pin			= $("#content-holder").find("#card-holder-pin").val();
@@ -163,31 +150,12 @@ $(function(){
 			cuenta		= Base64.encode(cuenta);
 			id_ext_per	= Base64.encode(id_ext_per);
 
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-			var dataRequest = JSON.stringify ({
-				userName: userName,
-				pais: pais,
-				cuenta: cuenta,
-				id_ext_per: id_ext_per,
-				pin: pin_enc,
-				claveWeb: claveWeb
-			})
-
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-			$.post(base_url+"/registro/validar", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
-
-				dataUser = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-
+			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(dataUser){
 				$("#loading").hide();
 				$("button").attr("disabled",false);
 
 				switch(dataUser.code){
 					case 0:
-						$('#form-validar')[0].reset();
 						var data = dataUser.dataUser;
 						var pais	= data.pais;
 						aplicaPerfil = data.user.aplicaPerfil;
@@ -223,11 +191,7 @@ $(function(){
 								$('.verificacion-one').remove();
 								$('#content-registro').css('display', 'block');
 
-								var cpo_cook = decodeURIComponent(
-									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-									);
-
-								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
+								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
 									$("#departamento").empty().append("<option value=''>Cargando...</option>");
 
 									if(dataUser.code == 0) {
@@ -442,12 +406,7 @@ $(function(){
 	// Funcion que obtiene las Provincias
 
 	function getProvincias(subRegion, pais) {
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
 			if(data.rc == 0) {
 				$("#provincia").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -472,12 +431,7 @@ $(function(){
 	// Funcion que obtiene los Distristos
 
 	function getDistritos(subRegion, pais) {
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -602,12 +556,7 @@ $(function(){
 
 	function getProfesiones(){
 		$("#ocupacion-laboral").empty().append("<option value=''>Cargando...</option>");
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country, "cpo_name": cpo_cook}, function(data){
+		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country}, function(data){
 			if(data.rc == 0) {
 				$("#ocupacion-laboral").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaProfesiones, function (pos, item) {
@@ -623,41 +572,13 @@ $(function(){
 	//Funcion que valida si existe el usuario en DB
 
     $("#username").blur(function(){
-				usuario     = $("#username").val();
-				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
-					var titleCI = 'Nombre de usuario',
-					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
-					modalTypeCI = 'alert-warning';
-					msgService(titleCI, msgCI, modalTypeCI, 0);
-					$("#username").removeClass('field-success').addClass('field-error');
-					return;
-				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
-					var titleCI = 'Nombre de usuario',
-					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato valido',
-					modalTypeCI = 'alert-warning';
-					msgService(titleCI, msgCI, modalTypeCI, 0);
-					$("#username").removeClass('field-success').addClass('field-error');
-					return;
-				}
-				username    = usuario.toUpperCase();
+        usuario     = $("#username").val();								//38 N
+        username    = usuario.toUpperCase();							//	 N
 		if(usuario.match(/[\s]/gi)){
 			$("#loading").hide();
 		}else{
 			$("#loading").show();
-
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-			var dataRequest = JSON.stringify ({
-				usuario: username
-			})
-
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-			$.post(base_url+"/registro/verificar", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
-
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+			$.post(base_url + "/registro/verificar",{"usuario":username},function(data){
 
 				if(data.rc == 0) {
 					$("#loading").hide();
@@ -755,6 +676,7 @@ $(function(){
 		$("#registrar").css("display","none");
 
 		validar_campos();
+
 		$("#form-usuario").submit();
 
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -816,7 +738,7 @@ $(function(){
 			contrato			= ($("#contrato").is(':checked')) ? 1 : 0;
 
 
-            if(countryResidence == 'Ve' || countryResidence == 'Ec-bp'){
+            if(countryResidence == 'Ve'){
                 tipoId = 3;
             }
             if(countryResidence == 'Co'){
@@ -848,27 +770,16 @@ $(function(){
 				}
 
 				//validar aplica perfil LMHL
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
 
-					dataUser.cpo_name = cpo_cook;
+				$.ajax({
+				  method: "POST",
+				  url: base_url + "/registro/registrar",
+				  data: dataUser
+				})
+				  .done(function( data ) {
 
-					var dataRequest = JSON.stringify(dataUser);
-
-					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-					$.ajax({
-						method: "POST",
-						url: base_url + "/registro/registrar",
-						data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}
-					})
-				  .done(function( response ) {
-
-						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 						switch(data.code){
 							case 0:
-								$('#form-usuario')[0].reset();
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
 								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
 
@@ -879,7 +790,6 @@ $(function(){
 							break;
 
 							case 2: //error general
-							$('#form-usuario')[0].reset();
 								$(location).attr('href', base_url+'/users/error_gral');
 							break;
 
@@ -919,23 +829,13 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		if(skin != 'pichincha') {
-
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-
-			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(data){
-				$.each(data.listaPaises, function(pos,item){
-					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
-					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-					$("#iso").append(lista);
-				});
+		$.post(base_url +"/registro/listado",function(data){
+			$.each(data.listaPaises,function(pos,item){
+				var lista;
+				lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+				$("#iso").append(lista);
 			});
-		} else {
-			$('#condiciones').removeClass('label-disabled');
-			$("#accept-terms").prop('disabled', false)
-		}
+		});
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1087,10 +987,6 @@ $(function(){
 			"Correo invalido. "
 		);
 
-		jQuery.validator.addMethod("validatePassword", function(value,element){
-			 return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
-		}, "El campo debe tener mínimo 1 y máximo 3 números consecutivos");
-
 		jQuery.validator.addMethod("digValido",function(value, element, regex){
 				return value == digVer ? true : false;
 			}
@@ -1156,7 +1052,7 @@ $(function(){
 				"direccion" : {"required" : true},																			//20
 				"correo" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
 				"confirm-correo": {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, "equalTo":"#email"},//22
-				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": tlfLength},					//23
+				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": 11},					//23
 				"telefono_movil": {"required":true, "number":true, "numberEqual3": true, "minlength": 7, "maxlength": 11},	//24
 				"otro_tipo_telefono" : {"required":false},																	//25
 				"otro_telefono_num" : {"number":true, "numberEqual1": true, "minlength": 7, "maxlength": 11},				//26
@@ -1171,7 +1067,7 @@ $(function(){
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
-				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
+				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
 				"proteccion": {"required": true}
@@ -1216,7 +1112,7 @@ $(function(){
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
 					"minlength"		: "El campo Teléfono Fijo debe contener como mínimo 7 caracteres numéricos.",
-					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres numéricos."
+					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo 11 caracteres numéricos."
 				},
 				"telefono_movil" : {																											//24
 					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
@@ -1245,7 +1141,7 @@ $(function(){
 					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
-				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
+				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
 				"proteccion": "Debe aceptar protección de datos personales."

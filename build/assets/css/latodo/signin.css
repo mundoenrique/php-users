@@ -5557,3 +5557,7 @@ body .ui-tooltip {
 .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
   display: none;
 }
+
+#login {
+  display: none;
+}

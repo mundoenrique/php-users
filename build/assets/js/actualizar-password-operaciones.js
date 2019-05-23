@@ -140,11 +140,7 @@ $(function(){
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
 
-					var cpo_cook = decodeURIComponent(
-						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					  );
-
-					$.post(base_url +"/users/passwordOperacionesActualizar",{"passwordOperacionesOld":old, "passwordOperaciones":newC, "cpo_name":cpo_cook},function(data){
+					$.post(base_url +"/users/passwordOperacionesActualizar",{"passwordOperacionesOld":old, "passwordOperaciones":newC},function(data){
 
 					if(data.rc==0) {
 

@@ -37,7 +37,7 @@ class Report extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js', 'jquery.ui.datepicker.validation.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -80,7 +80,7 @@ class Report extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js','transfers/transfer-tdc.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'report.js', 'kendo.dataviz.min.js', 'jquery.validate.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -107,27 +107,15 @@ class Report extends CI_Controller {
 		// CARGO EL ARCHIVO DE LENGUAJE
 		$this->lang->load('format');
 
+		$this->load->model('report_model', 'detail');
+		$tarjeta = $this->input->post('tarjeta');
+		$tipoConsulta = $this->input->post('tipo');
+		$producto = $this->input->post('producto');
+		$fechaIni = $this->input->post('fechaIni');
+		$fechaFin = $this->input->post('fechaFin');
+		$idpersona = $this->input->post('idpersona');
 
-		$dataRequest = json_decode(
-			$this->security->xss_clean(
-				strip_tags(
-					$this->cryptography->decrypt(
-						base64_decode($this->input->get_post('plot')),
-						utf8_encode($this->input->get_post('request'))
-					)
-				)
-			)
-		);
-
-		$this->load->model('report_model', 'report');
-		$tarjeta = $dataRequest->tarjeta;
-		$tipoConsulta = $dataRequest->tipo;
-		$producto = $dataRequest->producto;
-		$fechaIni = $dataRequest->fechaIni;
-		$fechaFin = $dataRequest->fechaFin;
-		$idpersona = $dataRequest->idpersona;
-
-		$this->output->set_content_type('application/json')->set_output($this->report->gastos_model($tarjeta, $idpersona, $producto, $tipoConsulta, $fechaIni, $fechaFin));
+		$this->output->set_content_type('application/json')->set_output($this->detail->gastos_model($tarjeta, $idpersona, $producto, $tipoConsulta, $fechaIni, $fechaFin));
 
 	}
 

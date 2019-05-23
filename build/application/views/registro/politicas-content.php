@@ -1,5 +1,12 @@
 <?php
 $pais = $this->session->userdata('pais');
+
+$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+if($skin == 'latodo'){
+	$homeLink = $this->config->item('base_url') . '/latodo/home';
+}else{
+	$homeLink = $this->config->item('base_url');
+}
 ?>
 <div id="content">
 	<article>
@@ -7,9 +14,9 @@ $pais = $this->session->userdata('pais');
 			<h1>Condiciones de uso</h1>
 		</header>
 		<section>
-
+			
 			<div id="content-holder">
-
+				
 				<form accept-charset="utf-8" method="post" id="form-validar">
 					<fieldset>
 						<ul class="field-group">
@@ -19,7 +26,7 @@ $pais = $this->session->userdata('pais');
 									<option selected value=""> Seleccione </option>
 								</select>
 							</li>
-
+							
 						</ul>
 		<div id="dialog-rg-Co2" class="ocultar" hidden="hidden">
 			<div class="dialog-content">
@@ -39,7 +46,7 @@ $pais = $this->session->userdata('pais');
 				<p>En caso de cualquier violación a por parte de los Usuarios de las condiciones de seguridad y privacidad, de los sistemas que utilizan tecnología de la información, de la privacidad de las personas y comunicaciones y de la propiedad intelectual que estén vinculados a la plataforma tecnológica, se estará en incumplimiento de lo establecido por las distintas normas que regulan la materia.</p>
 				<p>Al seleccionar la opción “Acepto las Condiciones de Uso de este sistema”, El Usuario también está aceptando el Reglamento de Uso de las tarjetas prepago publicado en <a href="https://pichincha.miplata.com.co/reglamento" target="_blank">https://www.pichincha.miplata.com.co/reglamento/</a> y <a href="https://pichincha.mibonus.com.co/reglamento" target="_blank">https://www.pichincha.mibonus.com.co/reglamento/.</a></p>
 			</div>
-
+			
 		</div>
 
 		<div id="dialog-rg-Pe2" class="ocultar" hidden="hidden">
@@ -59,7 +66,7 @@ $pais = $this->session->userdata('pais');
 				<p>Igualmente, La Empresa, tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en La Plataforma  a los fines de notificar a sus Usuarios.</p>
 				<p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma , se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>
 			</div>
-
+			
 		</div>
 
 		<div id="dialog-rg-Ve2" class="ocultar" hidden="hidden">
@@ -80,13 +87,13 @@ $pais = $this->session->userdata('pais');
 				<p>La Empresa se reserva, a su total discreción, la posibilidad de emplear todos los medios necesarios a su alcance para retirar de forma inmediata al Usuario que infrinja cualquiera de las condiciones de seguridad  y privacidad de La Plataforma tecnológica, lo cual incluye que el Usuario haya enviado información falsa que no sea susceptible la verificación de su autenticidad. Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma, se aplicará lo dispuesto en la Ley Especial contra Delitos Informáticos vigente en la República Bolivariana de Venezuela así como, cualquier otra normativa que le aplique.</p>
 				<p>Igualmente, La Empresa tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en esta Plataforma  a los fines de notificar a sus Usuarios. </p>
 			</div>
-
+			
 		</div>
 					</fieldset>
 				</form>
 				<div id="msg"></div>
 				<div class="form-actions">
-
+				
 				</div>
 			</div>
 		</section>
@@ -95,10 +102,10 @@ $pais = $this->session->userdata('pais');
 <script type="text/javascript">
 
 
-
-/*var Co =
-var Mx =
-var Pe =
+   
+/*var Co = 
+var Mx = 
+var Pe = 
 var Usd =
 var USA =
 var Usa =

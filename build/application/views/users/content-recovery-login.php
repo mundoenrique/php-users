@@ -1,11 +1,9 @@
 <?php
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
 $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-switch($skin){
-	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
-	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;
-	default: $homeLink = $this->config->item('base_url'); break;
+if($skin == 'latodo'){
+	$homeLink = $this->config->item('base_url') . '/latodo/home';
+}else{
+	$homeLink = $this->config->item('base_url');
 }
 ?>
 <div id="content">
@@ -24,7 +22,6 @@ switch($skin){
 				<h2>Verificación de Datos</h2>
 				<p>Si ha olvidado su usuario de acceso a <strong>Conexión Personas</strong>, por favor ingrese los siguientes datos para validar su identidad:</p>
 				<form accept-charset="utf-8" id="form-validar" method="post">
-					<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 					<fieldset class="fieldset-column-center">
 						<label for="email">Correo Electrónico</label>
 						<input class="field-large" maxlength="64" id="email" name="email" placeholder="usuario@ejemplo.com" type="text" />
@@ -63,7 +60,6 @@ switch($skin){
 			<div id="content-holder">
 				<h2>Finalización</h2>
 				<form accept-charset="utf-8" method="post">
-					<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 					<div class="alert-success" id="message">
 						<span aria-hidden="true" class="icon-ok-sign"></span> Recuperación de usuario exitosa
 						<p>Se ha envíado un mensaje a su correo electrónico con sus datos de acceso al sistema <strong>Conexión Personas</strong>.</p>

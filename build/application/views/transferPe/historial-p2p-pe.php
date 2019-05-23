@@ -1,7 +1,3 @@
-<?php
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
-?>
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -33,7 +29,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 			</nav>
 			<h2>Historial</h2>
 			<form accept-charset="utf-8" action="transfers-banks-log.html" method="post">
-				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<input type="hidden" id="pais" name="pais" value="<?php echo $this->session->userdata("pais"); ?>">
 				<label for="donor">Cuenta de Origen</label>
 				<div class="group" id="donor">
@@ -48,7 +43,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 			<nav id="filters-stack">
 				<div class="stack-form">
 					<form accept-charset="utf-8" class="stack-form" method="post">
-						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 						<fieldset>
 							<label for="filter-month">Mostrar:</label>
 							<select id="filter-month" name="filter-month">
@@ -152,18 +146,16 @@ if(isset($data)){
             $marca=strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
             $pais=ucwords($this->session->userdata('pais'));
-						$moneda=lang("MONEDA");
-						$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
-						$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
+            $moneda=lang("MONEDA");
 
-            echo "<li class='dashboard-item $empresa' moneda='$moneda' card='$value->nroTarjeta' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'>
+            echo "<li class='dashboard-item $empresa' moneda='$moneda' card='$value->nroTarjeta' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
+         <p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
          <p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-         <p class='dashboard-item-category'>$nomProducto</p>
+         <p class='dashboard-item-category'>$value->producto</p>
          </div>
          </a>
          </li>";

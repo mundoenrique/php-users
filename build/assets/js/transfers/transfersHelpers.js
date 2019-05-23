@@ -73,13 +73,13 @@ $(function() {
 function confirmPassOperac(clave)
 {
 	var response;
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	var ajax_data = {
+		"clave":hex_md5(clave)
+	};
 
 	$.ajax({
 		url: base_url +"/transferencia/operaciones",
-		data: {"clave":hex_md5(clave), cpo_name: cpo_cook},
+		data: ajax_data,
 		type: "post",
 		dataType: 'json',
 		async: false,
@@ -227,12 +227,8 @@ function sumar_saldo()
 function requestPassword()
 {
 	var  msg;
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
 	$.ajax({
 		url: base_url + '/transferencia/crearClave',
-		data: {cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -281,12 +277,13 @@ function requestPassword()
  */
 function validar_clave(claveConfir)
 {
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	var ajax_data = {
+		'clave':hex_md5(claveConfir)
+	};
+
 	$.ajax({
 		url: base_url + '/transferencia/confirmacion',
-		data: {"clave":hex_md5(claveConfir), cpo_name: cpo_cook},
+		data: ajax_data,
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -325,20 +322,20 @@ function makeTransfer(type)
 	var transfer = 1;
 	$.each(destination, function(pos, item) {
 
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$.ajax({
-			url: base_url + '/transferencia/procesar',
-			data: {"cuentaOrigen" : sourceNumber,
+		var dataRequest = {
+			"cuentaOrigen" : sourceNumber,
 			"cuentaDestino" : item.accountDes,
 			"monto" : item.amountDest,
 			"descripcion" : item.conceptDest,
 			"tipoOpe" : type,
 			"idUsuario" : nameSource,
 			"id_afil_terceros": item.idAfil,
-			"expDate" : expDate,
-			"cpo_name": cpo_cook},
+			"expDate" : expDate
+		};
+
+		$.ajax({
+			url: base_url + '/transferencia/procesar',
+			data: dataRequest,
 			type: "post",
 			dataType: 'json',
 			async: false,

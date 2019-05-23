@@ -161,12 +161,7 @@ $(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen){
 		var clase,clase1;
-
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		  );
-
-		$.post("transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2P", "cpo_name":cpo_cook},function(data) {
+		$.post("transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2P"},function(data) {
 			if(data.rc == -61){
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
@@ -360,12 +355,7 @@ $(function(){
 							});
 
 							$("#continuar").click(function(){
-
-								var cpo_cook = decodeURIComponent(
-									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-								  );
-
-								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":"", "expDate":expDate, cpo_name: cpo_cook},function(data) {
+								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":"", "expDate":expDate},function(data) {
 									if(data.rc==0){
 										var exito;
 										$("#progress").attr('style','display:none');
@@ -459,16 +449,10 @@ $(function(){
 
 					$("#cont").click(function(){
 						$.ajaxSetup({async: false});
-
-						var cpo_cook = decodeURIComponent(
-							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-						  );
-
 						var ajax_data = {
 							"noTarjeta":ctaOrigen,
 							"noCuentaDestino":tarjeta,
-							"tipoOperacion":"P2P",
-							"cpo_name":cpo_cook
+							"tipoOperacion":"P2P"
 						};
 
 						$.ajax({

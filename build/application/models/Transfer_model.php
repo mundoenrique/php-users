@@ -53,15 +53,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","listados transferencia","consulta cuentas destino");
 
-			$data = json_encode([
-				"idOperation"=>"7",
-				"className"=>"com.novo.objects.TOs.TarjetaTO",
-				"tipoOperacion"=>$operacion,
-				"prefix"=>$prefijo,
-				"noTarjeta" => $tarjeta,
-				"logAccesoObject"=>$logAcceso,
-				"token"=>$this->session->userdata("token")
-			]);
+			$data = json_encode(array(
+				                    "idOperation"=>"7",
+				                    "className"=>"com.novo.objects.TOs.TarjetaTO",
+				                    "tipoOperacion"=>$operacion,
+				                    "prefix"=>$prefijo,
+				                    "noTarjeta" => $tarjeta,
+				                    "logAccesoObject"=>$logAcceso,
+				                    "token"=>$this->session->userdata("token")
+			                    ));
 			//print_r($data);
 			log_message("info", "Request ctasDestino_load transferencia====>>>>>: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1);
@@ -70,17 +70,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
-			if(isset($desdata->cuentaDestinoPlata)) {
-				foreach($desdata->cuentaDestinoPlata as $pos => $cta) {
-					$NombreCliente=ucwords(mb_strtolower($cta->NombreCliente, 'UTF-8'));
-					$nom_plastico=ucwords(mb_strtolower($cta->nom_plastico, 'UTF-8'));
-					$nomProducto=ucwords(mb_strtolower($cta->nombre_producto, 'UTF-8'));
-					$cta->NombreCliente = $NombreCliente;
-					$cta->nom_plastico = $nom_plastico;
-					$cta->nombre_producto = $nomProducto;
-				}
-			}
-
 
 			$salida = json_encode($desdata);
 

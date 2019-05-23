@@ -134,9 +134,3 @@ define('CLIENT_ID', isset($_SERVER['CLIENT_ID']) ?
 	$_SERVER['CLIENT_ID'] : '');
 define('CLIENT_SECRET', isset($_SERVER['CLIENT_SECRET']) ?
 	$_SERVER['CLIENT_SECRET'] : '');
-
-define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-
-define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
-	$_SERVER['CYPHER_BASE'] : ''
-);

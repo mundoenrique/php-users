@@ -1,7 +1,4 @@
-<?php
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
-?>
+	
 	<div id="content">
 		<article>
 			<header>
@@ -13,7 +10,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<!-- <p><strong>¡Su clave de operaciones ha caducado!</strong></p> -->
 					<p>Para realizar transacciones con sus cuentas desde <strong>Conexión Personas</strong> es necesario proporcione su clave de operaciones. Por favor, complete los campos a continuación para actualizar esta clave:</p>
 					<form accept-charset="utf-8" id="form-validar" method="post">
-						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 						<fieldset class="fieldset-column-center">
 							<div class="field-meter" id="password-strength-meter">
 								<h4>Requerimientos de contraseña:</h4>
@@ -42,9 +38,9 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</div>
 			</section>
 		</article>
-	</div>
+	</div>	
 
-<!-- CONFIRMAR ACTUALIZAR -->
+<!-- CONFIRMAR ACTUALIZAR -->	
 
 		<div id="confirmaActualizar" style='display:none'>
 			<article>
@@ -65,7 +61,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</section>
 			</article>
 		</div>
-<!-- error ACTUALIZAR -->
+<!-- error ACTUALIZAR -->	
 
 		<div id="sinExito" style='display:none'>
 			<article>
@@ -75,7 +71,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 				<section>
 					<div id="content-holder">
 							<div class="alert-error" id="message">
-								<span aria-hidden="true" class="icon-ok-sign"></span> Clave no actualizada
+								<span aria-hidden="true" class="icon-ok-sign"></span> Clave no actualizada 
 								<p>Su clave de operaciones no ha sido actualizada. Por favor verifique sus datos.</p>
 							</div>
 							<div class="form-actions">
@@ -100,7 +96,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<button id="invalido">Aceptar</button>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 <!-- ERROR 2 -->
 
@@ -117,7 +113,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<button id="invalido1">Aceptar</button>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 <!-- ERROR 3 -->
 
@@ -134,7 +130,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<button id="invalido2">Aceptar</button>
 				</div>
 			</div>
-		</div>
+		</div>	
 
 <!-- ERROR 4 -->
 
@@ -151,4 +147,4 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<button id="invalido3">Aceptar</button>
 				</div>
 			</div>
-		</div>
+		</div>	
