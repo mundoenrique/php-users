@@ -30,7 +30,7 @@
 					<input id="userpwd" maxlength="15" name="userpwd" placeholder="Contraseña" type="password" />
 				</div>
 			</fieldset>
-			<div id = "slideUnlock" class="unlock"></div>
+				
 		</form>
 		<button id="login">Ingresar</button>
 			<p class="align-center">¿Olvidaste tu<br><a href="<? echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<? echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>

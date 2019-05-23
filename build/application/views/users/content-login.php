@@ -10,7 +10,9 @@
 		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
 	}
-	$signupLink = $this->config->item('base_url') . '/registro';
+  $signupLink = $this->config->item('base_url') . '/registro';
+  
+  echo $insertRecaptcha;
 ?>
 <div id="slideshow">
   <ul class="slides">
@@ -72,6 +74,25 @@
     </div>
   </div>
 </div>
+
+
+<!-- MODAL VALIDACION RECPATCHA-->
+
+<div id="dialog-validate" style='display:none'>
+  <header>
+    <h2>Validación de acceso</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+      <p>El sistema ha dectetado una actividad no autorizada, por favor intentar nuevamente </p>
+    </div>
+    <div class="form-actions">
+      <button id="error-validate">Aceptar</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- MODAL ERROR -->
 

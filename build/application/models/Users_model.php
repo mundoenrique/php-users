@@ -84,7 +84,19 @@ class Users_model extends CI_Model {
 		$response = $this->cryptography->encrypt($desdata);
 
 		return json_encode($response);
-	}
+    }
+    
+    public function validar_captcha($token,$user)
+    {
+        $this->load->library('recaptcha');
+
+        $result = $this->recaptcha->verifyResponse($token);
+        log_message('info', 'Valida Score Recaptcha, Usuario:' .$user. ', salida:' .json_encode($result));
+        $response = $this->cryptography->encrypt($result);
+
+        return json_encode($response);
+
+    }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

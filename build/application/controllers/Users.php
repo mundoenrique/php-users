@@ -86,6 +86,9 @@ class Users extends CI_Controller {
 
 		$this->input->set_cookie($baseCdnCookie);
 
+		$this->load->library('recaptcha');
+		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
+
 		//INSTANCIA GENERAR  HEADER
 		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
@@ -95,7 +98,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('users/content-login', array(), true);
+		$content = $this->parser->parse('users/content-login', array('insertRecaptcha'=>$this->recaptcha->getScriptTag()), true);
 		//INSTANCIA DE SIDERBAR
 		$sidebarlogin = $this->parser->parse('users/widget-signin', array('sidebarActive' => true), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -323,6 +326,24 @@ class Users extends CI_Controller {
 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function validarCaptcha()
+	{
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$this->load->model('users_model','user');
+
+		$this->output->set_content_type('application/json')->set_output($this->user->validar_captcha($dataRequest->token,$dataRequest->user));
+	}
 
 	public function CallWsLogin()
 	{
