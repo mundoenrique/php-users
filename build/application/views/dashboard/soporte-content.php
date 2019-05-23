@@ -1,7 +1,3 @@
-<?php
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
-?>
 <div id="content">
 	<article>
 		<header>
@@ -38,7 +34,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 				}
 
 			?>
-
+			
 			</header>
 			<section>
 				<nav id="filters-stack">
@@ -73,8 +69,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 				$marca= strtolower(str_replace(" ", "-", $value->marca));
 				$empresa = strtolower($value->nomEmp);
 				$pais=ucwords($this->session->userdata('pais'));
-				$nomPlastico=ucwords(mb_strtolower($value->nom_plastico, 'UTF-8'));
-				$nomProducto=ucwords(mb_strtolower($value->nombre_producto, 'UTF-8'));
+				$nomPlastico=ucwords(strtolower($value->nom_plastico));
+				$nomProducto=ucwords(strtolower($value->nombre_producto));
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
 
@@ -96,7 +92,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 						<div class='dashboard-item-network $marca'>$value->marca</div>
 						<div class='dashboard-item-info'>
 							<p class='dashboard-item-cardholder'>$nomPlastico</p>
-
+							
 							<p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
 							<p class='dashboard-item-category'>$nomProducto</p>
 						</div>
@@ -114,7 +110,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 	</section>
 
 	<form id='tarjeta' method='post' action="detalles">
-		<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 		<input id="numt" type="hidden" name="numt" value="" />
 		<input id="marca" type="hidden" name="marca" value="" />
 		<input id="empresa" type="hidden" name="empresa" value="" />

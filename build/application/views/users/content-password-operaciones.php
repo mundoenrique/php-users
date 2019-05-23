@@ -1,7 +1,4 @@
-<?php
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
-?>
+
 	<div id="content">
 		<article>
 			<header>
@@ -12,7 +9,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<h2>Creación de Clave de Operaciones</h2>
 					<p>Para realizar transacciones con sus cuentas desde <strong>Conexión Personas</strong> es necesario proporcione su clave de operaciones. Por favor, complete los campos a continuación para generar esta clave:</p>
 					<form accept-charset="utf-8" id="form-validar" method="post">
-						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 						<fieldset class="fieldset-column-center">
 							<div class="field-meter" id="password-strength-meter">
 								<h4>Requerimientos de contraseña:</h4>

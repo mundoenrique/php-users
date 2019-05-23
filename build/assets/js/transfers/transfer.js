@@ -8,10 +8,7 @@ $(function() {
 		if(country !== 'Ve') {
 			// FUNCION LLAMAR SALDO
 			$.each($(".dashboard-item"),function(pos,item){
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card"), cpo_name: cpo_cook},function(data){
+				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
 					var moneda=$(".dashboard-item").attr("moneda");
 					var id=$(".dashboard-item").attr("doc");
 					var saldo=data.disponible;
@@ -111,10 +108,7 @@ $(function() {
 		//------------------------------------------------------------------------------------------
 
 		// CARGAR SALDO CUENTAS ORIGEN--------------------------------------------------------------
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card"), cpo_name: cpo_cook},
+		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card")},
 			function(data) {
 				var saldoCtaOrigen = data.disponible;
 				if (typeof saldoCtaOrigen != 'string') {
@@ -578,11 +572,8 @@ function modalCtasOrigen()
 //OBTENER CTAS DESTINO
 function getCtasDestino(nroTarjeta, prefijo, operacion)
 {
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
 	$.post(base_url + "/transferencia/ctaDestino",
-		{"nroTarjeta": nroTarjeta, "prefijo": prefijo,"operacion": operacion, cpo_name: cpo_cook},
+		{"nroTarjeta": nroTarjeta, "prefijo": prefijo,"operacion": operacion},
 		function(data) {
 			switch (data.rc) {
 				case 0:

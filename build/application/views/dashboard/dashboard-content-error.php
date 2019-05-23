@@ -1,7 +1,10 @@
 <?php
-
+$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+if ($skin == 'latodo') {
+  $ruta1 = $this->config->item('base_url') . '/users/closeSess_pe';
+} else {
   $ruta1 = $this->config->item('base_url') . '/users/closeSess';
-
+}
 ?>
 <div id="content">
       <article>

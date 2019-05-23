@@ -1,13 +1,11 @@
 <?php
 $pais = $this->session->userdata('pais');
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
 
 $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-switch($skin){
-	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
-	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;
-	default: $homeLink = $this->config->item('base_url'); break;
+if($skin == 'latodo'){
+    $homeLink = $this->config->item('base_url') . '/latodo/home';
+}else{
+    $homeLink = $this->config->item('base_url');
 }
 ?>
 <div id="content">
@@ -27,21 +25,15 @@ switch($skin){
                 <h2>Verificación de Cuenta</h2>
                 <p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe proporcionar los siguientes datos relacionados con su cuenta:</p>
                 <form accept-charset="utf-8" method="post" id="form-validar">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <fieldset>
                         <ul class="field-group">
-													<?php if($skin == 'default' || $skin == 'latodo'): ?>
                             <li class="field-group-item">
                                 <label for="country">País</label>
                                 <select id="iso" name="iso">
                                     <option selected value=""> Seleccione </option>
                                 </select>
                             </li>
-													<?php endif; ?>
                             <li class="field-group-item">
-													<?php if ($skin == 'pichincha'): ?>
-															<input type="hidden" id="iso" name="iso" value="Ec-bp"/>
-													<?php endif; ?>
                                 <label for="card-number">Número de Tarjeta</label>
                                 <input class="field-medium" maxlength="16" id="card-number" name="card-number" type="text" value=""/>
                             </li>
@@ -424,7 +416,6 @@ switch($skin){
             <div id="content-holder">
                 <h2>Finalización</h2>
                 <form accept-charset="utf-8" action="index.html" method="post">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <div class="alert-success" id="message">
 
                     </div>
@@ -454,7 +445,6 @@ switch($skin){
             <div id="content-holder">
                 <h2>Finalización</h2>
                 <form accept-charset="utf-8" action="index.html" method="post">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <div class="alert-warning" id="message2">
 
                     </div>
@@ -484,7 +474,6 @@ switch($skin){
 <!--- Modal Validación VERIFICACIÓN CUENTA - CUENTA GENERAL PERU -->
 <div id="dialogo-check-count" style='display:none'>
     <form accept-charset="utf-8" method="post">
-			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <div id="dialog-confirm">
             <div class="alert-simple" id="messageContent">
                 <span aria-hidden="true" class="icon-cancel-sign"></span>

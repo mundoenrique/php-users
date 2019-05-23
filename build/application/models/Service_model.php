@@ -39,8 +39,8 @@ class Service_model extends CI_Model {
         $prefix = $dataAccount['prefix-bloq'];
         $idUser = $this->session->userdata('idUsuario');
         $pais = $this->session->userdata('pais');
-        $msgLok = ($action == '00') ? 'desbloqueada' : 'bloqueada';
-        $msgLok = ($lockType == 'temporary') ? $msgLok : 'bloqueada';
+        $msgLok = ($action == '00') ? 'Desbloqueada' : 'Bloqueada';
+        $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueada';
 				$montoComisionTransaccion = $dataAccount['montoComisionTransaccion'];
 
         $data = json_encode(array(
@@ -317,14 +317,7 @@ class Service_model extends CI_Model {
                         'title' => 'Cambio de PIN',
                         'msg' => 'Ha superado la cantidad de intentos fallidos por el dia de hoy. Por favor intente mañana.'
                     ];
-										break;
-								case -401:
-                    $response = [
-                        'code' => 1,
-                        'title' => 'Cambio de PIN',
-                        'msg' => 'No fue posible cambiar el PIN de tu tarjeta, intenta en unos minutos.'
-                    ];
-										break;
+                    break;
                 case -286:
                         if($desdata->rc == -286) {
                             $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
@@ -441,7 +434,7 @@ class Service_model extends CI_Model {
 										$response = [
 												'code' => 4,
 												'title' => 'Solicitud de token',
-												'msg' => 'Hemos enviado el código de seguridad a tu correo'
+												'msg' => 'Hemos enviado el código de seguridad a su correo'
 										];
 
 										//Si hay costo de reposición, se agreaga en la respuesta
@@ -449,7 +442,7 @@ class Service_model extends CI_Model {
 											$response = [
 	                        'code' => 4,
 	                        'title' => 'Solicitud de token',
-	                        'msg' => 'Hemos enviado el código de seguridad a tu correo',
+	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
 													'cost_repos_plas' => $cost_repos_plas
 	                    ];
 										}

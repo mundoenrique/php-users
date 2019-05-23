@@ -126,11 +126,7 @@ base_cdn = $('body').attr('data-app-cdn');
 
 				passwordOperaciones=$("#new-transpwd").val();
 
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
-
-				$.post(base_url +"/users/passwordOperaciones",{"passwordOperaciones":passwordOperaciones, "cpo_name": cpo_cook},function(data){
+				$.post(base_url +"/users/passwordOperaciones",{"passwordOperaciones":passwordOperaciones},function(data){
 					if(data.rc == -61){
             			$(location).attr('href', base_url+'/users/error_gral');
         			}

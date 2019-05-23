@@ -34,8 +34,7 @@ class Detail_model extends CI_Model {
 	  	$data = json_decode($response);
 	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
-			$response = $this->cryptography->encrypt($desdata);
-			return json_encode($response);
+	  	return json_encode($desdata);
 
 	}
 
@@ -73,10 +72,9 @@ class Detail_model extends CI_Model {
 
 	  	$salida = json_encode($desdata);
 
-			log_message("info", "Salida exportar detalle desencriptado".$salida);
-			$response = $this->cryptography->encrypt($desdata);
+	  	log_message("info", "Salida exportar detalle desencriptado".$salida);
 
-	  	return json_encode($response);
+	  	return json_encode($desdata);
 
 	}
 
@@ -109,8 +107,7 @@ class Detail_model extends CI_Model {
 	  	$data = json_decode($response);
 	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
 
-			$response = $this->cryptography->encrypt($desdata);
-			return json_encode($response);
+	  	return json_encode($desdata);
 
 	}
 

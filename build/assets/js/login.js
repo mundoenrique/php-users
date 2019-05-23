@@ -1,7 +1,6 @@
-var base_url, base_cdn, skin;
+var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
-skin = $('body').attr('data-app-skin');
 
 $(function() {
 
@@ -35,112 +34,13 @@ $(function() {
 		user = user.toUpperCase();
 		pass = $('#userpwd').val();
 
-		grecaptcha.ready(function() {
-			mostrarProcesando(skin);
-			grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'}).then(function(token) {
-					validateCaptcha(token,user,pass)
-			});;
-		});		
+		$("#userpwd").val('');
+
+		login(user, pass);
 	});
-
-	  function mostrarProcesando(skin){
-			var imagen="";
-
-			switch(skin){
-				case 'pichincha': imagen = "loading-pichincha.gif";
-				break;
-				case 'latodo': imagen = "loading-latodo.gif" ;
-				break;
-			}
-
-				$("#login").attr('disabled', 'true');
-				if (imagen == "") {
-					$("#login").html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">'
-					+'<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
-				} else {
-					$("#login").html('<img src="'+base_cdn+'img/'+imagen+'">');
-				}
-				if (skin == "pichincha") {
-					$("#login").css({
-						'position': 'relative',
-						'height': '35px',
-						'width': '100%',
-						'opacity': '1'
-					});
-
-					$("#login").children(0).css({
-						'position': 'absolute',
-						'top': '50%',
-						'left': '50%',
-						'transform': 'translate(-50%, -50%)',
-						'height': '25px'
-					});
-				}
-
-
-		};
-
- 		function ocultarProcesando() {
-			$("#login").html('Ingresar');
-			$("#login").prop("disabled", false);
-		}
-
-		function validateCaptcha(token,user,pass) {
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
-
-			var dataRequest = JSON.stringify ({
-				token: token,
-				user: user
-			})
-
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-			$consulta = $.post(base_url+"/users/validateRecaptcha", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)} );
-
-			$consulta.done(function(response){
-
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-
-				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0.7')) )
-				{
-					login(user,pass)
-				}
-				else
-				{
-					ocultarProcesando();
-					$("#dialog-validate").dialog({
-						modal:"true",
-						width:"440px",
-						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-					});
-
-					$("#error-validate").click(function(){
-						$("#dialog-validate").dialog("close");
-						habilitar();
-					});
-				}
-			})
-
-		}
 
 	function login(user,pass){
 		var hasCookie = navigator.cookieEnabled;
-
-		if(!(/^[\wñ]+$/i.test(user)) || !(/^[\w!@\*\-\?¡¿+\/.,#]+$/i.test(pass))) {
-			ocultarProcesando();
-			$("#dialog-login").dialog({
-				modal:"true",
-				width:"440px",
-				open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-			});
-
-			$("#invalido").click(function(){
-				$("#dialog-login").dialog("close");
-				habilitar();
-			});
-			return
-		}
 
 		if(user!='' && pass!='' && hasCookie){
 
@@ -150,21 +50,10 @@ $(function() {
 			$(".ju-sliderbutton-text").html("Verificando...");
 
 			$(".ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle").hide();
-			mostrarProcesando(skin);
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
 
-			var dataRequest = JSON.stringify ({
-				user_name: user,
-				user_pass: hex_md5(pass)
-			})
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-			$consulta = $.post(base_url+"/users/login", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)} );
+			$consulta = $.post(base_url+"/users/login", { 'user_name': user, 'user_pass': hex_md5(pass) } );
 
-			$consulta.done(function(response){
-
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			$consulta.done(function(data){
 
 				if (data == 1) {
 					$("#dialog-login-ve").dialog({
@@ -189,7 +78,7 @@ $(function() {
 					}
 
 				} else if(data.rc==-1) {
-					ocultarProcesando();
+
 					$("#dialog-login").dialog({
 						modal:"true",
 						width:"440px",
@@ -203,7 +92,7 @@ $(function() {
 
 
 				}else if(data.rc==-194) {
-					ocultarProcesando();
+
 					$("#dialog-overlay").dialog({
 						title:"Password Caducado",
 						modal:"true",
@@ -218,7 +107,7 @@ $(function() {
 
 				}
 				else if(data.rc==-205){
-					ocultarProcesando();
+
 					$("#dialog-voygo-error").dialog({
 						//title:"VOYGO ERROR",
 						modal:"true",
@@ -232,7 +121,7 @@ $(function() {
 
 				}
 				else if((data.rc==-35)||(data.rc==-8)) {
-					ocultarProcesando();
+
 					$("#dialog-bloq").dialog({
 						modal:"true",
 						width:"440px",
@@ -246,7 +135,7 @@ $(function() {
 
 				}
 				else {
-					ocultarProcesando();
+
 					$("#dialog-error").dialog({
 						title:"Error en el sistema",
 						modal:"true",
@@ -258,7 +147,7 @@ $(function() {
 						$("#dialog-error").dialog("close");
 						habilitar();
 					});
-				}
+	}
 
 		 	});	//IF CONSULTA DONE
 

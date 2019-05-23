@@ -1,13 +1,7 @@
-<?php
-$country = $this->session->userdata('pais');
-$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
-$cpo_name = $this->security->get_csrf_token_name();
-$cpo_cook = $this->security->get_csrf_hash();
-?>
 			<div id="content">
 				<article>
 					<header>
-						<h1>Detalle de la cuenta</h1>
+						<h1>Detalle de Cuenta</h1>
 					</header>
 					<section>
 						<div class="group" id="balance">
@@ -34,7 +28,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 									<fieldset>
 										<label for="filter-month">Mostrar:</label>
 										<select id="filter-month" name="filter-month">
-											<option selected value="0">Más recientes</option>
+											<option selected value="0">Más Recientes</option>
 											<option value="1">Enero</option>
 											<option value="2">Febrero</option>
 											<option value="3">Marzo</option>
@@ -59,7 +53,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 										</select>
 									</fieldset>
 								</form>
-								<button id="buscar" class="mensual"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+								<button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 							</div>
 							<ul class="stack stack-extra">
 								<li class="stack-item">
@@ -67,12 +61,12 @@ $cpo_cook = $this->security->get_csrf_hash();
 								</li>
 								<li class="stack-item">
 									<a id="download"  href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download"></span></a>
-								</li>
+								</li>								
 								<li class="stack-item">
 									<a id="downloadxls"  href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel"></span></a>
 								</li>
 							</ul>
-
+							
 						</nav>
 						<div class="group" id="results">
 							<div class="group-main-view" id="transactions">
@@ -84,12 +78,11 @@ $cpo_cook = $this->security->get_csrf_hash();
 									</div>
 								</ul>
 								<form id='form' method='post' action="detalles/exportar">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 									<input id="tarjeta" type="hidden" name="tarjeta" value="" />
 									<input id="mes" type="hidden" name="mes" value="" />
 									<input id="anio" type="hidden" name="anio" value="" />
 									<input id="idOperation" type="hidden" name="idOperation" value="" />
-								</form>
+								</form>								
 							</div>
 							<div class="group-aside-view" id="stats">
 								<h3>Estadísticas</h3>

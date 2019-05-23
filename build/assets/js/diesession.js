@@ -3,7 +3,6 @@ base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 
 $(document).ready(function(){
-	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 	idleTime = 0;
 	//Increment the idle time counter every second.
 	var idleInterval = setInterval(timerIncrement, 120000);
@@ -33,13 +32,9 @@ $(document).ready(function(){
 		$("#diesession_modal #aceptar_diesession").click(function(){
 			$("#diesession_modal").dialog("close");
 		});
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
 		$.ajax({
 			method: 'POST',
-			url: base_url+'/users/closeSess',
-			data: {cpo_name: cpo_cook}
+			url: base_url+'/users/closeSess'
 		});
 	}
 });
