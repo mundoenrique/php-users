@@ -483,8 +483,19 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listaEstado", {"codPais": codPaisresidencia, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					codPais: codPaisresidencia,
+					subRegion: 1
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+
+			$.post(base_url + "/perfil/listaEstado", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				//console.log(data);
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
 
@@ -541,8 +552,16 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion ,"cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					codPais: codPaisresidencia,
+					codEstado: subRegion
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url + "/perfil/listaCiudad", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				//console.log(data);
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
 					$.each(data.listaCiudad, function (pos, item) {
@@ -566,8 +585,19 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+			var dataRequest = JSON.stringify ({
+				codPais: codPaisresidencia,
+				codEstado: subRegion
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+
+		$.post(base_url + "/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 			// console.log(data);
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -605,8 +635,17 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					codPais: codPaisresidencia,
+					codEstado: subRegion
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url + "/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				//console.log(data);
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
 					$.each(data.listaSubRegiones, function (pos, item) {
@@ -632,8 +671,18 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listaCiudad", {"codPais": codPaisresidencia, "codEstado": subRegion, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					codPais: codPaisresidencia,
+					codEstado: subRegion
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+
+			$.post(base_url + "/perfil/listaCiudad", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				//console.log(data);
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
 					$.each(data.listaCiudad, function (pos, item) {
@@ -690,7 +739,11 @@ $(function(){
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-		$.post(base_url +"/perfil/profesiones", {cpo_name: cpo_cook}, function(data){
+
+
+		$.post(base_url +"/perfil/profesiones", {cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 			$.each(data.listaProfesiones,function(pos,item){
 
@@ -759,130 +812,147 @@ $(function(){
 	/*Funcion actualizar datos del usuario*/
 	function actualizarDatos(){
 
-		userName=$("#content").attr("userName"); ///1
-		tipo_identificacion=$('#tipo_identificacion').val(); ///2
-		verifyDigit=$('#dig-ver').val();
-		primerNombre=$("#primer-nombre").val();//3
-		segundoNombre=$("#segundo-nombre").val();//4
-		primerApellido=$("#primer-apellido").val();//5
-		segundoApellido=$("#segundo-apellido").val();//6
-		lugarNacimiento=$("#lugar-nacimiento").val();//7
-		fechaNacimiento=$("#fecha-nacimiento-valor").val();//8
-		sexo=$("input[name='gender']:checked").val();//9
-		edocivil=$("#edo-civil-value").val();//10
-		nacionalidad=$("#nacionalidad-valor").val();//11
-		profesion=$("#listaProfesion").val();//12
-		tipo_profesion=$('#tipo_profesion_value').val();//13
-		tipo_direccion=$("#tipo_direccion_value").val();//14
-		codigoPostal=$("#codepostal").val();//15
-		paisResidencia=$("#pais-residencia-value").val();//16
-		departamento_residencia=$("#departamento").val();//17
-		provincia_residencia=$("#provincia").val();//18
-		distrito_residencia=$("#distrito").val();//19
-		direccion=$("#direccion").val();//20
-		telefono_hab=$("#telefono_hab").val();//21
-		telefono=$("#telefono").val();//22
-		otro_telefono_tipo=$("#otro_telefono_tipo").val();//23
-		otro_telefono_num=$("#otro_telefono_num").val();//24
-		email=$("#email").val();//25
-		ruc_cto_labora=$("#ruc_cto_labora").val();//26
-		centro_laboral=$("#centro_laboral").val();//27
-		situacion_laboral=$("#situacion_laboral").val();//28
-		antiguedad_laboral_value=$("#antiguedad_laboral").val();//29
-		profesion_labora=$(".profesion-labora").val();//30
-		cargo=$("#cargo").val();//31
-		ingreso_promedio=$("#ingreso_promedio").val();//32
-		cargo_publico_sino=$("input[class='cargo-publico-radio']:checked").val();//33
-		cargo_publico=$("#cargo_publico").val();//34
-		institucion_publica=$("#institucion_publica").val();//35
-		sujeto_obligado=$("input[class='sujeto-obligado']:checked").val();//36
-		dtfechorcrea_usu=$("#dtfechorcrea_usu").val();//37
-		id_ext_per=$('#id_ext_per').val();//38
-		tipo_id_ext_per=$('#tipo_id_ext_per').val();//39
-		aplicaPerfil=$('#aplicaPerfil').val();//40
-		notarjeta=$('#notarjeta').val();//41
-		acCodCiudad=$('#provincia').val();//42
-		acCodEstado=$('#departamento').val();//43
-		acCodPais=$('#acCodPais').val();//44
-		acTipo=$('#tipo_direccion_value').val();//45
-		acZonaPostal=$('#codepostal').val();//46
-		disponeClaveSMS=$('#disponeClaveSMS').val();//47
-		tyc = $('#tyc').is(':checked') ? 1 : 0;
-
-
-		if(otro_telefono_num==""){
-			otro_telefono_tipo="";
-			otro_telefono_num="";
-		}
-
-		if($("#notificacions-sms").is(':checked')) {
-
-			$("#notificacions-sms").val("1");
-			notSms="1";
-
-		}
-		else {
-
-			notSms=$("#notificacions-sms").val("0");
-			notSms="0";//48
-
-		}
-
-		if($("#notificacions-email").is(':checked')) {
-
-			$("#notificacions-email").val("1");
-			notEmail="1";
-
-		} else {
-
-			notEmail=$("#notificacions-email").val("0");
-			notEmail="0";//49
-		}
-
-		if($("#proteccion").is(':checked')) {
-
-			$("#proteccion").val("1");
-			proteccion="1";
-
-		} else {
-
-			$("#proteccion").val("0");
-			proteccion="0";
-		}
-
-		if($("#contrato").is(':checked')) {
-
-			$("#contrato").val("1");
-			contrato="1";
-
-		} else {
-
-			$("#contrato").val("0");
-			contrato="0";
-		}
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url+"/perfil/actualizar",{"cpo_name": cpo_cook, "userName":userName, "tipo_identificacion":tipo_identificacion, "tipo":tipo_id_ext_per,
-				"primer_nombre":primerNombre, "segundo_nombre":segundoNombre, "primer_apellido":primerApellido,
-				"segundo_apellido":segundoApellido, "lugar_nac":lugarNacimiento, "fecha_nacimiento":fechaNacimiento, "gender":sexo,
-				"edocivil":edocivil, "nacionalidad":nacionalidad, "profesion":profesion, "tipo_profesion":tipo_profesion,
-				"tipo_direccion":tipo_direccion, "codepostal":codigoPostal, "paisResidencia":paisResidencia,
-				"departamento_residencia":departamento_residencia, "provincia_residencia":provincia_residencia,
-				"distrito_residencia":distrito_residencia, "direccion":direccion, "telefono_hab":telefono_hab,
-				"telefono":telefono, "otro_telefono_tipo":otro_telefono_tipo, "otro_telefono_num":otro_telefono_num,
-				"email":email, "ruc_cto_labora":ruc_cto_labora, "centro_laboral":centro_laboral,
-				"situacion_laboral":situacion_laboral, "antiguedad_laboral_value":antiguedad_laboral_value,
-				"profesion_labora":profesion_labora, "cargo":cargo, "ingreso_promedio":ingreso_promedio,
-				"cargo_public":cargo_publico_sino, "cargo_publico":cargo_publico,
-				"institucion_publica":institucion_publica, "sujeto_obligado":sujeto_obligado,
-				"notEmail":notEmail, "notSms":notSms, "dtfechorcrea_usu":dtfechorcrea_usu,
-				"id_ext_per":id_ext_per, "aplica":aplicaPerfil, "notarjeta":notarjeta,
-				"acCodCiudad":acCodCiudad, "acCodEstado":acCodEstado, "acCodPais":acCodPais, "acTipo":acTipo,
-				"acZonaPostal":acZonaPostal, "disponeClaveSMS":disponeClaveSMS, "disponeClaveSMS":disponeClaveSMS,
-				"codigopais":codPaisresidencia, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato, "tyc": tyc},
-			function(data) {
+			var valuegender = "";
+			$("input[type='radio'][name='gender']").each(function(){
+			  if($(this).is(":checked"))
+				valuegender = $(this).val();
+			});
+			
+			var valueCargop = "";
+			$("input[type='radio'][name='cargo_public']").each(function(){
+				if($(this).is(":checked"))
+				  valueCargop = $(this).val();
+			});
+
+			var valueSujeto = "";
+			$("input[type='radio'][name='sujeto-obligado']").each(function(){
+				if($(this).is(":checked"))
+				  valueSujeto = $(this).val();
+			});
+
+			if(otro_telefono_num==""){
+				otro_telefono_tipo="";
+				otro_telefono_num="";
+			}
+			else
+			{
+				otro_telefono_tipo=$("#otro_telefono_tipo").val();
+				otro_telefono_num=$("#otro_telefono_num").val();
+			}
+	
+			if($("#notificacions-sms").is(':checked')) {
+	
+				$("#notificacions-sms").val("1");
+				notSms="1";
+	
+			}
+			else {
+	
+				notSms=$("#notificacions-sms").val("0");
+				notSms="0";//48
+	
+			}
+	
+			if($("#notificacions-email").is(':checked')) {
+	
+				$("#notificacions-email").val("1");
+				notEmail="1";
+	
+			} else {
+	
+				notEmail=$("#notificacions-email").val("0");
+				notEmail="0";//49
+			}
+	
+			if($("#proteccion").is(':checked')) {
+	
+				$("#proteccion").val("1");
+				proteccion="1";
+	
+			} else {
+	
+				$("#proteccion").val("0");
+				proteccion="0";
+			}
+	
+			if($("#contrato").is(':checked')) {
+	
+				$("#contrato").val("1");
+				contrato="1";
+	
+			} else {
+	
+				$("#contrato").val("0");
+				contrato="0";
+			}
+		
+			
+		var dataRequest = JSON.stringify ({
+		userName:$("#content").attr("userName"), ///1
+		tipo_identificacion:$('#tipo_identificacion').val(), ///2
+		verifyDigit:$('#dig-ver').val(),
+		primerNombre:$("#primer-nombre").val(),//3
+		segundoNombre:$("#segundo-nombre").val(),//4
+		primerApellido:$("#primer-apellido").val(),//5
+		segundoApellido:$("#segundo-apellido").val(),//6
+		lugarNacimiento:$("#lugar-nacimiento").val(),//7
+		fechaNacimiento:$("#fecha-nacimiento-valor").val(),//8
+		sexo:valuegender,//9
+		edocivil:$("#edo-civil-value").val(),//10
+		nacionalidad:$("#nacionalidad-valor").val(),//11
+		profesion:$("#listaProfesion").val(),//12
+		tipo_profesion:$('#tipo_profesion_value').val(),//13
+		tipo_direccion:$("#tipo_direccion_value").val(),//14
+		codigoPostal:$("#codepostal").val(),//15
+		paisResidencia:$("#pais-residencia-value").val(),//16
+		departamento_residencia:$("#departamento").val(),//17
+		provincia_residencia:$("#provincia").val(),//18
+		distrito_residencia:$("#distrito").val(),//19
+		direccion:$("#direccion").val(),//20
+		telefono_hab:$("#telefono_hab").val(),//21
+		telefono:$("#telefono").val(),//22
+		otro_telefono_tipo:otro_telefono_tipo,//23
+		otro_telefono_num:otro_telefono_num,//24
+		email:$("#email").val(),//25
+		ruc_cto_labora:$("#ruc_cto_labora").val(),//26
+		centro_laboral:$("#centro_laboral").val(),//27
+		situacion_laboral:$("#situacion_laboral").val(),//28
+		antiguedad_laboral_value:$("#antiguedad_laboral").val(),//29
+		profesion_labora:$(".profesion-labora").val(),//30
+		cargo:$("#cargo").val(),//31
+		ingreso_promedio:$("#ingreso_promedio").val(),//32
+		cargo_publico_sino:valueCargop,//33
+		cargo_publico:$("#cargo_publico").val(),//34
+		institucion_publica:$("#institucion_publica").val(),//35
+		sujeto_obligado:valueSujeto,//36
+		dtfechorcrea_usu:$("#dtfechorcrea_usu").val(),//37
+		id_ext_per:$('#id_ext_per').val(),//38
+		tipo_id_ext_per:$('#tipo_id_ext_per').val(),//39
+		aplicaPerfil:$('#aplicaPerfil').val(),//40
+		notarjeta:$('#notarjeta').val(),//41
+		acCodCiudad:$('#provincia').val(),//42
+		acCodEstado:$('#departamento').val(),//43
+		acCodPais:$('#acCodPais').val(),//44
+		acTipo:$('#tipo_direccion_value').val(),//45
+		acZonaPostal:$('#codepostal').val(),//46
+		disponeClaveSMS:$('#disponeClaveSMS').val(),//47
+		tyc : $('#tyc').is(':checked') ? "1" : "0",
+		notSms:notSms,
+		notEmail:notEmail,
+		proteccion:proteccion,
+		contrato:contrato
+		});		
+		
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/perfil/actualizar",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook) }, function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				$("#load_reg").hide();
 				switch (data.rc) {
 					case 0:
@@ -890,8 +960,8 @@ $(function(){
 						$('#exito').css('display','block');
 						break;
 					case -200:
-						$('.overlay-modal').show();
-						$('#dialogo-fallo-actualizacion').show();
+					systemDialog('Alerta', data.msg, 'dash');
+
 						break;
 					case -271:
 						$('.overlay-modal').show();

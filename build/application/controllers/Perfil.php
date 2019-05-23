@@ -38,7 +38,7 @@ class Perfil extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
         //INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js');
+        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js');
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DE CUERPO
@@ -117,117 +117,76 @@ class Perfil extends CI_Controller {
 
         $this->load->model('perfil_model', 'actualizar');
 
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
 
-
-        $userName = $this->input->post('userName'); // /1
-
-        $primerNombre = $this->input->post('primer_nombre'); // /2
-
-        $segundoNombre = $this->input->post('segundo_nombre'); // /3
-
-        $primerApellido = $this->input->post('primer_apellido'); // /4
-
-        $segundoApellido = $this->input->post('segundo_apellido'); // /5
-
-        $lugarNacimiento = $this->input->post('lugar_nac');// /6
-
-        $fechaNacimiento = $this->input->post('fecha_nacimiento'); // /7
-
-        $sexo = $this->input->post('gender'); // /8
-
-        $edocivil = $this->input->post('edocivil'); // /9
-
-        $nacionalidad = $this->input->post('nacionalidad'); // /10
-
-        $profesion = $this->input->post('profesion'); // /11
-
-        $tipoDireccion = $this->input->post('tipo_direccion'); // /12
-
-        $codepostal = $this->input->post('codepostal'); // /13
-
-        $paisResidencia = $this->input->post('paisResidencia'); // /14
-
-        $departamento_residencia = $this->input->post('departamento_residencia'); // /15
-
-        $provincia_residencia = $this->input->post('provincia_residencia'); // /16
-
-        $distrito_residencia = $this->input->post('distrito_residencia'); // /17
-
-        $direccion = $this->input->post('direccion'); // /18
-
-        $telefono_hab = $this->input->post('telefono_hab'); // /19
-
-        $telefono = $this->input->post('telefono'); // /20
-
-        $otro_telefono_tipo = $this->input->post('otro_telefono_tipo'); // /21
-
-        $otro_telefono_num = $this->input->post('otro_telefono_num'); // /22
-
-        $email = $this->input->post('email'); // /23
-
-        $ruc_cto_labora = $this->input->post('ruc_cto_labora'); // /24
-
-        $centro_laboral = $this->input->post('centro_laboral'); // /25
-
-        $situacion_laboral = $this->input->post('situacion_laboral'); // /26
-
-        $antiguedad_laboral_value = $this->input->post('antiguedad_laboral_value'); // /27
-
-        $profesion_labora = $this->input->post('profesion_labora'); // /28
-
-        $cargo = $this->input->post('cargo'); // /29
-
-        $ingreso_promedio = $this->input->post('ingreso_promedio'); // /30
-
-        $cargo_public = $this->input->post('cargo_public'); // /31
-
-        $cargo_publico = $this->input->post('cargo_publico'); // /32
-
-        $institucion_publica = $this->input->post('institucion_publica'); // /33
-
-        $sujeto_obligado = $this->input->post('sujeto_obligado'); // /34
-
-        $notEmail = $this->input->post('notEmail'); // /35
-
-        $notSms = $this->input->post('notSms'); // /36
-
-        $dtfechorcrea_usu = $this->input->post('dtfechorcrea_usu'); // /37
-
-        $id_ext_per= $this->input->post('id_ext_per'); // /38
-
-        $tipo_profesion= $this->input->post('tipo_profesion'); // /39
-
-        $tipo_identificacion= $this->input->post('tipo_identificacion'); // /40
-
-        $tipo_id_ext_per=$this->input->post('tipo'); // /41
-
-        $aplicaPerfil=$this->input->post('aplica'); // /42
-
-        $notarjeta=$this->input->post('notarjeta'); // /43
-
-        $acCodCiudad=$this->input->post('acCodCiudad');
-
-        $acCodEstado=$this->input->post('acCodEstado');
-
-        $acCodPais=$this->input->post('acCodPais');
-
-        $acTipo=$this->input->post('acTipo');
-
-        $acZonaPostal=$this->input->post('acZonaPostal');
-
-        $disponeClaveSMS=$this->input->post('disponeClaveSMS');
-
-        $codigopais=$this->input->post('codigopais');
-
-        $verifyDigit=$this->input->post('verifyDigit');
-
-        $proteccion=$this->input->post('proteccion');
-
-				$contrato=$this->input->post('contrato');
-
-        $tyc=$this->input->post('tyc');
-
-
+        //print_r($dataRequest);
+        $userName = (isset($dataRequest->userName))? $dataRequest->userName :""; // /1
+        $primerNombre = (isset($dataRequest->primerNombre))? $dataRequest->primerNombre : ""; // /2
+        $segundoNombre = (isset($dataRequest->segundoNombre))? $dataRequest->segundoNombre : ""; // /3
+        $primerApellido = (isset($dataRequest->primerApellido))? $dataRequest->primerApellido : ""; // /4
+        $segundoApellido = (isset($dataRequest->segundoApellido))? $dataRequest->segundoApellido : ""; // /5
+        $lugarNacimiento = (isset($dataRequest->lugar_nac))? $dataRequest->lugar_nac : "";// /6
+        $fechaNacimiento = (isset($dataRequest->fechaNacimiento))? $dataRequest->fechaNacimiento : ""; // /7
+        $sexo = (isset($dataRequest->sexo))? $dataRequest->sexo : ""; // /8
+        $edocivil = (isset($dataRequest->edocivil))? $dataRequest->edocivil : ""; // /9
+        $nacionalidad = (isset($dataRequest->nacionalidad))? $dataRequest->nacionalidad : ""; // /10
+        $profesion = (isset($dataRequest->profesion))? $dataRequest->profesion : ""; // /11
+        $tipoDireccion = (isset($dataRequest->tipo_direccion))? $dataRequest->tipo_direccion :""; // /12
+        $codepostal = (isset($dataRequest->acZonaPostal))? $dataRequest->acZonaPostal :""; // /13
+        $paisResidencia = (isset($dataRequest->paisResidencia))? $dataRequest->paisResidencia :""; // /14
+        $departamento_residencia = (isset($dataRequest->departamento_residencia))? $dataRequest->departamento_residencia :""; // /15
+        $provincia_residencia = (isset($dataRequest->provincia_residencia))? $dataRequest->provincia_residencia :""; // /16
+        $distrito_residencia = (isset($dataRequest->distrito_residencia))? $dataRequest->distrito_residencia :""; // /17
+        $direccion = (isset($dataRequest->direccion))? $dataRequest->direccion :""; // /18
+        $telefono_hab = (isset($dataRequest->telefono_hab))? $dataRequest->telefono_hab : ""; // /19
+        $telefono = (isset($dataRequest->telefono))? $dataRequest->telefono : ""; // /20
+        $otro_telefono_tipo = (isset($dataRequest->otro_telefono_tipo))? $dataRequest->otro_telefono_tipo: ""; // /21
+        $otro_telefono_num = (isset($dataRequest->otro_telefono_num))? $dataRequest->otro_telefono_num:""; // /22
+        $email = (isset($dataRequest->email))? $dataRequest->email:""; // /23
+        $ruc_cto_labora = (isset($dataRequest->ruc_cto_labora))? $dataRequest->ruc_cto_labora: ""; // /24
+        $centro_laboral = (isset($dataRequest->centro_laboral))? $dataRequest->centro_laboral: ""; // /25
+        $situacion_laboral = (isset($dataRequest->situacion_laboral))? $dataRequest->situacion_laboral: ""; // /26
+        $antiguedad_laboral_value = (isset($dataRequest->antiguedad_laboral_value))? $dataRequest->antiguedad_laboral_value: ""; // /27
+        $profesion_labora = (isset($dataRequest->profesion_labora))? $dataRequest->profesion_labora: ""; // /28
+        $cargo = (isset($dataRequest->cargo))? $dataRequest->cargo: ""; // /29
+        $ingreso_promedio = (isset($dataRequest->ingreso_promedio))? $dataRequest->ingreso_promedio: ""; // /30
+        $cargo_public = (isset($dataRequest->cargo_publico_sino))? $dataRequest->cargo_publico_sino: ""; // /31
+        $cargo_publico = (isset($dataRequest->cargo_publico))? $dataRequest->cargo_publico: ""; // /32
+        $institucion_publica = (isset($dataRequest->institucion_publica))? $dataRequest->institucion_publica: ""; // /33
+        $sujeto_obligado = (isset($dataRequest->sujeto_obligado))? $dataRequest->sujeto_obligado: ""; // /34
+        $notEmail = (isset($dataRequest->notEmail))? $dataRequest->notEmail: ""; // /35
+        $notSms = (isset($dataRequest->notSms))? $dataRequest->notSms: ""; // /36
+        $dtfechorcrea_usu = (isset($dataRequest->dtfechorcrea_usu))? $dataRequest->dtfechorcrea_usu: ""; // /37
+        $id_ext_per= (isset($dataRequest->id_ext_per))? $dataRequest->id_ext_per: ""; // /38
+        $tipo_profesion= (isset($dataRequest->tipo_profesion))? $dataRequest->tipo_profesion: ""; // /39
+        $tipo_identificacion= (isset($dataRequest->tipo_identificacion))? $dataRequest->tipo_identificacion: ""; // /40
+        $tipo_id_ext_per=(isset($dataRequest->tipo_id_ext_per))? $dataRequest->tipo_id_ext_per: ""; // /41
+        $aplicaPerfil=(isset($dataRequest->aplicaPerfil))? $dataRequest->aplicaPerfil: ""; // /42
+        $notarjeta=(isset($dataRequest->notarjeta))? $dataRequest->notarjeta: ""; // /43
+        $acCodCiudad=(isset($dataRequest->acCodCiudad))? $dataRequest->acCodCiudad: "";
+        $acCodEstado=(isset($dataRequest->acCodEstado))? $dataRequest->acCodEstado: "";
+        $acCodPais=(isset($dataRequest->acCodPais))? $dataRequest->acCodPais: "";
+        $acTipo=(isset($dataRequest->acTipo))? $dataRequest->acTipo: "";
+        $acZonaPostal=(isset($dataRequest->acZonaPostal))? $dataRequest->acZonaPostal: "";
+        $disponeClaveSMS=(isset($dataRequest->disponeClaveSMS))? $dataRequest->disponeClaveSMS: "";
+        $codigopais=(isset($dataRequest->acCodPais))? $dataRequest->acCodPais: "";
+        $verifyDigit=(isset($dataRequest->verifyDigit))? $dataRequest->verifyDigit: "";
+        $proteccion=(isset($dataRequest->proteccion))? $dataRequest->proteccion: "";
+        $contrato=(isset($dataRequest->contrato))? $dataRequest->contrato: "";
+        $tyc=(isset($dataRequest->tyc))? $dataRequest->tyc: "";
+        $notSms= (isset($dataRequest->notSms))? $dataRequest->notSms: "";
+		$notEmail= (isset($dataRequest->notEmail))? $dataRequest->notEmail: "";
+		$proteccion = (isset($dataRequest->proteccion))? $dataRequest->proteccion: "";
+		$contrato = (isset($dataRequest->contrato))? $dataRequest->contrato: "";
         log_message("info", "COMPROBAR ACTUALIZAR PERFIL===> ".$userName);
 
 
@@ -285,7 +244,19 @@ class Perfil extends CI_Controller {
         $this->lang->load('format');
 
         $this->load->model('perfil_model', 'listaEstado');
-        $codPais = $this->input->post('codPais');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+				$codPais = $dataRequest->codPais;
+
         $this->output->set_content_type('application/json')->set_output($this->listaEstado->lista_estados($codPais));
 
     }
@@ -301,9 +272,21 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listaCiudad');
-        $codEstado = $this->input->post('codEstado');
-        $codPais = $this->input->post('codPais');
+				$this->load->model('perfil_model', 'listaCiudad');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $codEstado = $dataRequest->codEstado;
+        $codPais = $dataRequest->codPais;
 
         $this->output->set_content_type('application/json')->set_output($this->listaCiudad->lista_ciudad($codEstado,$codPais));
 
@@ -366,9 +349,21 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listadoDepartamento');
-        $pais		= $this->input->post('pais');
-        $subRegion	= $this->input->post('subRegion');
+				$this->load->model('perfil_model', 'listadoDepartamento');
+
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $pais		= $dataRequest->pais;
+        $subRegion	= $dataRequest->subRegion;
         $this->output->set_content_type('application/json')->set_output($this->listadoDepartamento->lista_departamentos($pais, $subRegion));
 
     }

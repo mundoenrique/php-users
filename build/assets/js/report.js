@@ -346,7 +346,21 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-		$.post(base_url + "/report/CallWsGastos", {"cpo_name": cpo_cook, "tarjeta":tarjeta,"idpersona":idpersona,"tipo":tipo, "producto":producto,"fechaIni":fechaIni,"fechaFin":fechaFin}, function(data){
+				var dataRequest = JSON.stringify ({
+					tarjeta: tarjeta,
+					idpersona: idpersona,
+					tipo: tipo,
+					producto: producto,
+					fechaIni: fechaIni,
+					fechaFin: fechaFin
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url + "/report/CallWsGastos", {request: dataRequest, cpo_name: cpo_cook,plot: btoa(cpo_cook)}, function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 			if(data.rc == -61){
             	$(location).attr('href', base_url+'/users/error_gral');
             	$("#dialog").css("display", "none");
