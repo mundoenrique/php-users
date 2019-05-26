@@ -243,7 +243,8 @@ class Perfil_model extends CI_Model {
             "direccion"=>$direccion,
             "isParticular"=> true,
             "logAccesoObject"	=> $logAcceso,
-            "token"				=> $this->session->userdata("token")
+						"token"				=> $this->session->userdata("token"),
+						"country" => $this->session->userdata('pais')
         ));
 
 

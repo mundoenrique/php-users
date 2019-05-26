@@ -5802,6 +5802,11 @@ body .ui-tooltip {
   box-shadow: none;
   padding-left:0px;
 }
+.col-md-12-profile input[readonly]{
+  border:none;
+  box-shadow: none;
+  padding-left:0px;
+}
 .col-md-5-profile input[readonly]{
   border:none;
   box-shadow: none;

@@ -19,7 +19,10 @@ if(isset($data)){
             $ruta = '/users/actualizarPasswordOperaciones';
         }
         $userName = $datos->registro->user->userName;
-        $email= $datos->registro->user->email;
+				$email= $datos->registro->user->email;
+				if($country == 'Ec-bp') {
+					$emailCypher = $datos->registro->user->emailEnc;
+				}
         $particular= $datos->isParticular;
 
         if($datos->registro->user->primerNombre != null){
@@ -170,17 +173,14 @@ if(isset($data)){
         foreach ($datos->registro->listaTelefonos as $value) {
             if(strtolower($value->tipo) == 'cel'){
                 $tipo = $value->tipo;
-                $num = $value->numero;
+								$num = $value->numero;
+								$celCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
             if(strtolower($value->tipo) == 'hab'){
                 $tipo_hab = $value->tipo;
-                $num_hab = $value->numero;
-            }
-
-            if(strtolower($value->tipo) == 'hab'){
-                $tipo_hab = $value->tipo;
-                $num_hab = $value->numero;
+								$num_hab = $value->numero;
+								$habCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
             if(strtolower($value->tipo) == 'ofc'){
@@ -280,7 +280,7 @@ $pais_residencia=$this->session->userdata('pais');
      acEstado="<?php echo $acEstado;?>" acDescTipo="<?php echo $acDescTipo;?>" acZonaPostal="<?php echo $acZonaPostal;?>" disponeClaveSMS="<?php echo $disponeClaveSMS;?>" email="<?php echo $email;?>" num="<?php echo $num;?>"  tipo="<?php echo $tipo;?>"  num_hab="<?php echo $num_hab;?>"  tipo_hab="<?php echo $tipo_hab;?>"
      num_otro="<?php echo $num_otr;?>" tipo_otr= "<?php echo $tipo_otr;?>" sexo= "<?php echo $sexo;?>" userName="<?php echo $userName;?>" dtfechorcrea_usu="<?php echo $dtfechorcrea_usu;?>"
      notEmail="<?php echo $notEmail;?>" notSms="<?php echo $notSms;?>" acCodPais="<?php echo $acCodPais;?>" acTipo="<?php echo $acTipo; ?>" acCodEstado="<?php echo $acCodEstado;?>" acCodCiudad="<?php echo $acCodCiudad;?>" tipo_profesion="<?php echo $tipo_profesion;?>"
-     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>" tyc="<?php echo $tyc; ?>">
+     aplicaPerfil="<?php echo $aplicaPerfil; ?>" afiliado="<?php  echo $afiliado?>" tyc="<?php echo $tyc; ?>" country="<?= $country; ?>">
     <article id="content-formulario-perfil">
         <header></header>
         <div id="widget-account" class="widget">
@@ -457,40 +457,58 @@ $pais_residencia=$this->session->userdata('pais');
                             </li>
                         </ul>
                         <ul class="row-profile">
-                            <li class="col-md-4-profile">
-                                <label>Teléfono fijo</label>
-                                <input maxlength="11" id="telefono_hab" name="telefono_hab" type="text" value=<?php echo $num_hab;?>>
-                            </li>
-                            <li class="col-md-4-profile">
-                                <label>Teléfono móvil</label>
-                                <input id="telefono" maxlength="11" name="telefono" type="text" value=<?php echo $num; ?>>
-                            </li>
-                            <li class="col-md-4-profile">
-                                <label>Otro teléfono (Tipo)</label>
-                                <select id="otro_telefono_tipo" name="otro_telefono_tipo" type="text">
-                                    <option value = "">Seleccione</option>
-                                    <option value = "OFC">Laboral</option>
-                                    <option value = "FAX">Fax</option>
-                                    <option value = "OTRO">Otro</option>
-                                </select>
-                                <input type="hidden" value="<?php echo $tipo_otr;?>" id="otro_telefono_tipo_value" name="otro_telefono_tipo_value">
-                            </li>
-                            <li class="col-md-4-profile">
-                                <label>Otro teléfono (Número)</label>
-                                <input class="field-medium" id="otro_telefono_num" name="otro_telefono_num" maxlength="11" type="text" value=<?php echo $num_otr;?>>
-                            </li>
+													<li class="col-md-4-profile">
+														<label>Teléfono fijo</label>
+														<?php if($country === 'Ec-bp'): ?>
+															<input type="text" id="telefono_hab-bp" name="telefono_hab-bp" class="ignore" value=<?php echo $num_hab; ?> readonly>
+															<input type="hidden" id="hab_cypher" name="hab_cypher" value=<?= $habCypher; ?>>
+														<?php else: ?>
+															<input type="text" id="telefono_hab" name="telefono_hab" maxlength="11" value=<?php echo $num_hab; ?>>
+														<?php endif; ?>
+													</li>
+													<li class="col-md-4-profile">
+														<label>Teléfono móvil</label>
+														<?php if($country === 'Ec-bp'): ?>
+															<input type="text" id="telefono-bp" name="telefono-bp" class="ignore" value=<?php echo $num; ?> readonly>
+															<input type="hidden" id="cel_cypher" name="cel_cypher" value=<?= $celCypher; ?>>
+														<?php else: ?>
+															<input type="text" id="telefono" name="telefono"maxlength="11" value=<?php echo $num; ?>>
+														<?php endif; ?>
+													</li>
+													<?php if($country !== 'Ec-bp'): ?>
+													<li class="col-md-4-profile">
+														<label>Otro teléfono (Tipo)</label>
+														<select id="otro_telefono_tipo" name="otro_telefono_tipo" type="text">
+															<option value = "">Seleccione</option>
+															<option value = "OFC">Laboral</option>
+															<option value = "FAX">Fax</option>
+															<option value = "OTRO">Otro</option>
+														</select>
+														<input type="hidden" value="<?php echo $tipo_otr;?>" id="otro_telefono_tipo_value" name="otro_telefono_tipo_value">
+													</li>
+													<li class="col-md-4-profile">
+														<label>Otro teléfono (Número)</label>
+														<input class="field-medium" id="otro_telefono_num" name="otro_telefono_num" maxlength="11" type="text" value=<?php echo $num_otr;?>>
+													</li>
+													<?php endif; ?>
                         </ul>
                         <fieldset class="col-md-12-profile">
-                            <ul class="row-profile">
-                                <li class="col-md-full-profile">
-                                    <label for="email">Correo electrónico</label><span id="msg-correo" style="margin-left:30px; display:none;"></span>
-                                    <input class="email-profile" id="email" name="email" type="text" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
-                                    <div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:7px; margin-right:620px; margin-bottom:0px;">
-                                        <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
-                                    </div>
-                                    <input id="verificar-email" name="verificar-email" type="hidden" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
-                                </li>
-                            </ul>
+													<ul class="row-profile">
+														<li class="col-md-full-profile">
+															<label>Correo electrónico</label>
+															<?php if($country === 'Ec-bp'): ?>
+																<input type="text" id="email-bp" name="email-bp" class="ignore" value=<?php echo $email; ?> readonly>
+																<input type="hidden" id="email_cypher" name="email_cypher" value=<?= $emailCypher; ?>>
+															<?php else: ?>
+																<span id="msg-correo" style="margin-left:30px; display:none;"></span>
+																<input class="email-profile" id="email" name="email" type="text" maxlength="65" value="<?php echo $datos->registro->user->email; ?>" required>
+																<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:7px; margin-right:620px; margin-bottom:0px;">
+																	<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
+																</div>
+																<input id="verificar-email" name="verificar-email" type="hidden" maxlength="65" value="<?php echo $datos->registro->user->email; ?>">
+															<?php endif; ?>
+														</li>
+													</ul>
                         </fieldset>
                         <hr class="separador-profile">
                         <div class="remove-perfil-plata-sueldo">
@@ -589,7 +607,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 </li>
                                 <li class="col-md-3-profile">
                                     <label for="transpwd" class="pass-2"> Notificaciones</label>
-                                    <label class="label-inline" for="notificacions-email"><input id="notificacions-email" name="email" type="checkbox" value=<?php echo $notEmail; ?>> Correo electrónico</label>
+                                    <label class="label-inline" for="notificacions-email"><input id="notificacions-email" name="notificacions-email" type="checkbox" value=<?php echo $notEmail; ?>> Correo electrónico</label>
                                     <label class="label-inline" for="notificacions-sms"><input id="notificacions-sms" name="sms" type="checkbox" value=<?php echo $notSms; ?>> SMS</label>
                                 </li>
                             </ul>
