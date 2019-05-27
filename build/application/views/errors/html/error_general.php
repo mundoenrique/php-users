@@ -16,7 +16,7 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>General Error</title>
+		<title>Error General</title>
     <meta name="viewport" content="width=device-width">
     <meta name="googlebot" content="none">
 		<meta name="robots" content="noindex, nofollow">
@@ -36,8 +36,8 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 		</header>
 		<div id="wrapper">
 			<div id="content">
-				<h1><?php echo $heading; ?></h1>
-				<?php echo $message; ?>
+				<h1>Error General</h1>
+				<p>Ha ocurrido un problema técnico inesperado. Regrese a la página anterior e intente nuevamente.</p>
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>
