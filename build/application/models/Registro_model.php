@@ -78,7 +78,8 @@ class Registro_model extends CI_Model {
 
 		log_message("info", "Response lista_departamentos: ".json_encode($desdata));
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+		return json_encode($response);
 	}
 
 

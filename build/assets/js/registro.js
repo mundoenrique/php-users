@@ -227,7 +227,17 @@ $(function(){
 									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 									);
 
-								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
+								var dataRequest = JSON.stringify ({
+									pais: pais,
+									subRegion: 1
+								});
+
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+								$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 									$("#departamento").empty().append("<option value=''>Cargando...</option>");
 
 									if(dataUser.code == 0) {
@@ -447,7 +457,17 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+		var dataRequest = JSON.stringify ({
+			pais: pais,
+			subRegion: subRegion
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#provincia").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -477,7 +497,17 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+		var dataRequest = JSON.stringify ({
+			pais: pais,
+			subRegion: subRegion
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
