@@ -95,8 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
-
-			//return json_encode($response);
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 		}
 
@@ -396,6 +395,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 
 		}
@@ -499,6 +499,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 		}
 
