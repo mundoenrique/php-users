@@ -275,7 +275,17 @@ class Registro extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('registro_model', 'profesiones');
-		$pais		= $this->input->post('pais');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$pais = $dataRequest->pais;
 		$this->output->set_content_type('application/json')->set_output($this->profesiones->lista_profesiones($pais));
 
 	}

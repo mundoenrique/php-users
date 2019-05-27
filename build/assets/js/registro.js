@@ -637,7 +637,16 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country, "cpo_name": cpo_cook}, function(data){
+		var dataRequest = JSON.stringify ({
+			pais: country
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/ListadoProfesiones", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#ocupacion-laboral").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaProfesiones, function (pos, item) {
