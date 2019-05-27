@@ -925,7 +925,10 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(data){
+			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				$.each(data.listaPaises, function(pos,item){
 					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
 					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
