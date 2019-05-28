@@ -35,7 +35,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfers/transfersHelpers.js', 'transfers/transfer.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'transfers/transfersHelpers.js', 'transfers/transfer.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -78,7 +78,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'transfers/transfersHelpers.js', 'transfers/transfer-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'transfers/transfersHelpers.js', 'transfers/transfer-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO BANCO
@@ -118,7 +118,7 @@ class Transfer extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'transfers/transfersHelpers.js', 'transfers/transfer-tdc.js', 'jquery-md5.js', 'jquery.ui.sliderbutton.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'transfers/transfersHelpers.js', 'transfers/transfer-tdc.js', 'jquery-md5.js', 'jquery.ui.sliderbutton.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO TDC
@@ -236,11 +236,23 @@ class Transfer extends CI_Controller {
 		$this->lang->load('format');
 		$this->load->model('transfer_model', 'ctaDestino');
 
-		$tarjeta = $this->input->post('nroTarjeta');
-		$prefijo = $this->input->post('prefijo');
 		$pais = $this->session->userdata('pais');
 		log_message('info', 'PAIS Cta Destino Controller: ' . $pais);
-		$operacion = $this->input->post('operacion');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$tarjeta = $dataRequest->nroTarjeta;
+		$prefijo = $dataRequest->prefijo;
+		$operacion = $dataRequest->operacion;
 
 		$json = $this->ctaDestino->ctasDestino_load($tarjeta, $prefijo, $operacion);
 
@@ -260,7 +272,19 @@ class Transfer extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('transfer_model', 'operaciones');
-		$clave = $this->input->post('clave');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$clave = $dataRequest->clave;
 
 		$rpta['response']= $this->operaciones->validarClave_load($clave);
 		$rc = json_decode($rpta['response']);
@@ -276,7 +300,8 @@ class Transfer extends CI_Controller {
 
 		$rpta['transferir'] = $this->session->userdata('transferir');
 
-		$this->output->set_content_type('application/json')->set_output(json_encode($rpta));
+		$response = $this->cryptography->encrypt($rpta);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 	}
 
@@ -327,13 +352,24 @@ class Transfer extends CI_Controller {
 
 		$this->load->model('transfer_model', 'procesar');
 
-		$cuentaOrigen = $this->input->post('cuentaOrigen');
-		$cuentaDestino = $this->input->post('cuentaDestino');
-		$monto = $this->input->post('monto');
-		$descripcion = $this->input->post('descripcion');
-		$tipoOpe = $this->input->post('tipoOpe');
-		$id_afil_terceros = $this->input->post('id_afil_terceros');
-		$expDate = $this->input->post('expDate');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$cuentaOrigen = $dataRequest->cuentaOrigen;
+		$cuentaDestino = $dataRequest->cuentaDestino;
+		$monto = $dataRequest->monto;
+		$descripcion = $dataRequest->descripcion;
+		$tipoOpe = $dataRequest->tipoOpe;
+		$id_afil_terceros = $dataRequest->id_afil_terceros;
+		$expDate = $dataRequest->expDate;
 
 		$this->output->set_content_type('application/json')->set_output(
 			$this->procesar->procesarTransferencia_load(
