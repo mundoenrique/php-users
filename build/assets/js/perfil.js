@@ -1101,12 +1101,16 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + '/perfil/verificarEmail', {
-				"pais": pais,
-				"email": email,
-				"username": userName,
-				"cpo_name": cpo_cook
-			}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: pais,
+					email: email,
+					username: userName,
+					cpo_name: cpo_cook
+				});
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/perfil/verificarEmail", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
 

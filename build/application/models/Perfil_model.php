@@ -512,7 +512,8 @@ class Perfil_model extends CI_Model {
 
         log_message("info", "Salida Verificar email------------->".$desdata);
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
