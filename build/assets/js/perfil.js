@@ -453,7 +453,16 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: codPaisresidencia,
+					subRegion: 1
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				//console.log(data);
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
@@ -530,7 +539,15 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: codPaisresidencia,
+					subRegion: subRegion
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -586,8 +603,8 @@ $(function(){
 			);
 
 			var dataRequest = JSON.stringify ({
-				codPais: codPaisresidencia,
-				codEstado: subRegion
+				pais: codPaisresidencia,
+				subRegion: subRegion
 			});
 
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -636,8 +653,8 @@ $(function(){
 				);
 
 				var dataRequest = JSON.stringify ({
-					codPais: codPaisresidencia,
-					codEstado: subRegion
+					pais: codPaisresidencia,
+					subRegion: subRegion
 				});
 
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -703,7 +720,16 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+			var dataRequest = JSON.stringify ({
+				pais: codPaisresidencia,
+				subRegion: subRegion
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			//console.log(data);
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
@@ -821,7 +847,7 @@ $(function(){
 			  if($(this).is(":checked"))
 				valuegender = $(this).val();
 			});
-			
+
 			var valueCargop = "";
 			$("input[type='radio'][name='cargo_public']").each(function(){
 				if($(this).is(":checked"))
@@ -843,54 +869,54 @@ $(function(){
 				otro_telefono_tipo=$("#otro_telefono_tipo").val();
 				otro_telefono_num=$("#otro_telefono_num").val();
 			}
-	
+
 			if($("#notificacions-sms").is(':checked')) {
-	
+
 				$("#notificacions-sms").val("1");
 				notSms="1";
-	
+
 			}
 			else {
-	
+
 				notSms=$("#notificacions-sms").val("0");
 				notSms="0";//48
-	
+
 			}
-	
+
 			if($("#notificacions-email").is(':checked')) {
-	
+
 				$("#notificacions-email").val("1");
 				notEmail="1";
-	
+
 			} else {
-	
+
 				notEmail=$("#notificacions-email").val("0");
 				notEmail="0";//49
 			}
-	
+
 			if($("#proteccion").is(':checked')) {
-	
+
 				$("#proteccion").val("1");
 				proteccion="1";
-	
+
 			} else {
-	
+
 				$("#proteccion").val("0");
 				proteccion="0";
 			}
-	
+
 			if($("#contrato").is(':checked')) {
-	
+
 				$("#contrato").val("1");
 				contrato="1";
-	
+
 			} else {
-	
+
 				$("#contrato").val("0");
 				contrato="0";
 			}
-		
-			
+
+
 		var dataRequest = JSON.stringify ({
 		userName:$("#content").attr("userName"), ///1
 		tipo_identificacion:$('#tipo_identificacion').val(), ///2
@@ -945,8 +971,8 @@ $(function(){
 		notEmail:notEmail,
 		proteccion:proteccion,
 		contrato:contrato
-		});		
-		
+		});
+
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 		$.post(base_url+"/perfil/actualizar",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook) }, function(response) {

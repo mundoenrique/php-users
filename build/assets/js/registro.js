@@ -964,7 +964,7 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(response){
 
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
