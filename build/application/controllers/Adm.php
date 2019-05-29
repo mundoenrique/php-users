@@ -149,15 +149,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		$this->load->model('adm_model', 'adm');
 
-		$id_afiliacion = $this->input->post('id_afiliacion');
-		$nroPlasticoOrigen = $this->input->post('nroPlasticoOrigen');
-		$nroCuentaDestino = $this->input->post('nroCuentaDestino');
-		$id_ext_per = $this->input->post('id_ext_per');
-		$beneficiario = $this->input->post('beneficiario');
-		$tipoOperacion = $this->input->post('tipoOperacion');
-		$email = $this->input->post('email');
-		$banco = $this->input->post('banco');
-		$expDate = $this->input->post('expDate');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$id_afiliacion = $dataRequest->id_afiliacion;
+		$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
+		$nroCuentaDestino = $dataRequest->nroCuentaDestino;
+		$id_ext_per = $dataRequest->id_ext_per;
+		$beneficiario = $dataRequest->beneficiario;
+		$tipoOperacion = $dataRequest->tipoOperacion;
+		$email = $dataRequest->email;
+		$banco = $dataRequest->banco;
+		$expDate = $dataRequest->expDate;
 
 		$this->output->set_content_type('application/json')->set_output($this->adm->adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email, $banco, $expDate));
 
@@ -176,9 +187,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		$this->load->model('adm_model', 'adm');
 
-		$noTarjeta = $this->input->post('noTarjeta');
-		$noCuentaDestino = $this->input->post('noCuentaDestino');
-		$tipoOperacion = $this->input->post('tipoOperacion');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$noTarjeta = $dataRequest->noTarjeta;
+		$noCuentaDestino = $dataRequest->noCuentaDestino;
+		$tipoOperacion = $dataRequest->tipoOperacion;
 
 		$this->output->set_content_type('application/json')->set_output($this->adm->delete_load($noTarjeta,$noCuentaDestino,$tipoOperacion));
 

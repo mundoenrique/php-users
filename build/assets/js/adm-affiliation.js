@@ -375,7 +375,23 @@ $(function(){
 									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								  );
 
-								$.post("adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2P", "email":emailClienteD,"banco":"", "expDate":expDate, cpo_name: cpo_cook},function(data) {
+									var dataRequest = JSON.stringify ({
+										"id_afiliacion":id_afiliacion,
+										"nroPlasticoOrigen":ctaOrigen,
+										"nroCuentaDestino":cDestino,
+										"id_ext_per":id_per,
+										"beneficiario":nombreDest,
+										"tipoOperacion":"P2P",
+										"email":emailClienteD,
+										"banco":"",
+										"expDate":expDate
+									})
+
+									dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+								$.post("adm/modificar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 									if(data.rc==0){
 										var exito;
 										$("#progress").attr('style','display:none');
@@ -474,19 +490,23 @@ $(function(){
 							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						  );
 
-						var ajax_data = {
+							var dataRequest = JSON.stringify ({
 							"noTarjeta":ctaOrigen,
 							"noCuentaDestino":tarjeta,
 							"tipoOperacion":"P2P",
 							"cpo_name":cpo_cook
-						};
+							})
+
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 						$.ajax({
 							       url: base_url +"/adm/eliminar",
-							       data: ajax_data,
+							       data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 							       type: "post",
 							       dataType: 'json',
-							       success: function(data) {
+							       success: function(response) {
+											data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 								       if(data.rc==0){
 
 									       $("#progress").attr('style','display:none');

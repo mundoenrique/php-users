@@ -47,8 +47,8 @@ class Adm_model extends CI_Model {
 		//simulación respuesta del servicio
 		 /*$desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
 		 $desdata = json_decode($desdata);*/
-
-		return json_encode($desdata);
+		 $response = $this->cryptography->encrypt($desdata);
+		 return json_encode($response);
 
 	}		//FIN
 
@@ -78,7 +78,8 @@ class Adm_model extends CI_Model {
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'delete_load'));
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+		 return json_encode($response);
 
 	}		//FIN
 

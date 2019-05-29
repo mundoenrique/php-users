@@ -415,9 +415,25 @@ base_cdn = $('body').attr('data-app-cdn');
 								var cpo_cook = decodeURIComponent(
 									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 								);
+								var dataRequest = JSON.stringify ({
+									"id_afiliacion":id_afiliacion,
+									"nroPlasticoOrigen":ctaOrigen,
+									"nroCuentaDestino":cDestino,
+									"id_ext_per":id_per,
+									" beneficiario":nombreDest,
+									"tipoOperacion":"P2C",
+									"email":emailClienteD,
+									"banco":bancoValor,
+									"expDate":expDate
 
-								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2C", "email":emailClienteD,"banco":bancoValor, "expDate":expDate, "cpo_name":cpo_cook},function(data) {
-				        			if(data.rc==0){
+								})
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+								$.post(base_url +"/adm/modificar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
+									if(data.rc==0){
 				        				var exito;
 				        				$("#progress").attr('style','display:none');
 				        				$("#content-holder").children().remove();
@@ -525,8 +541,17 @@ base_cdn = $('body').attr('data-app-cdn');
 						var cpo_cook = decodeURIComponent(
 							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 						);
+						var dataRequest = JSON.stringify ({
+							"noTarjeta":ctaOrigen,
+							"noCuentaDestino":tarjeta,
+							"tipoOperacion":"P2C"
+						})
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
-						$.post(base_url +"/adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2C", "cpo_name":cpo_cook},function(data) {
+						$.post(base_url +"/adm/eliminar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 							if(data.rc==0){
 								$("#progress").attr('style','display:none');
 				        		$("#content-holder").children().remove();
