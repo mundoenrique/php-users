@@ -42,7 +42,14 @@ class Perfil extends CI_Controller {
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DE CUERPO
-        $content = $this->parser->parse('perfil/perfil-content', array('data' => serialize(json_decode($this->perfil->perfil_load($userName)))), true);
+				$content = $this->parser->parse(
+					'perfil/perfil-content',
+					[
+						'data' => serialize(json_decode($this->perfil->perfil_load($userName))),
+						'country' => $this->session->userdata('pais')
+					],
+					true
+				);
         //INSTANCIA DE SIDERBAR
         $sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
 

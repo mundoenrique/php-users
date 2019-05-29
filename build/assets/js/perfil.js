@@ -7,6 +7,7 @@ skin = $('body').attr('data-app-skin');
 var aplicaperfil = $('#content').attr('aplicaperfil'),
 		afiliado = $('#content').attr('afiliado'),
 		tyc = $('#content').attr('tyc');
+var country = $('#content').attr('country');
 
 $(function(){
 
@@ -22,8 +23,6 @@ $(function(){
 	var codLength = '10';
 	if (skin == 'pichincha'){
 		$('#codepostal').attr('maxlength','6');
-		$('#telefono_hab').attr('maxlength','9');
-		tlfLength = '9';
 		codLength = '6'
 	}
 
@@ -813,140 +812,149 @@ $(function(){
 	function actualizarDatos(){
 
 		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
-			var valuegender = "";
-			$("input[type='radio'][name='gender']").each(function(){
-			  if($(this).is(":checked"))
-				valuegender = $(this).val();
-			});
-			
-			var valueCargop = "";
-			$("input[type='radio'][name='cargo_public']").each(function(){
-				if($(this).is(":checked"))
-				  valueCargop = $(this).val();
-			});
+		var valuegender = "";
+		$("input[type='radio'][name='gender']").each(function(){
+			if($(this).is(":checked"))
+			valuegender = $(this).val();
+		});
 
-			var valueSujeto = "";
-			$("input[type='radio'][name='sujeto-obligado']").each(function(){
-				if($(this).is(":checked"))
-				  valueSujeto = $(this).val();
-			});
+		var valueCargop = "";
+		$("input[type='radio'][name='cargo_public']").each(function(){
+			if($(this).is(":checked"))
+				valueCargop = $(this).val();
+		});
 
-			if(otro_telefono_num==""){
-				otro_telefono_tipo="";
-				otro_telefono_num="";
-			}
-			else
-			{
-				otro_telefono_tipo=$("#otro_telefono_tipo").val();
-				otro_telefono_num=$("#otro_telefono_num").val();
-			}
-	
-			if($("#notificacions-sms").is(':checked')) {
-	
-				$("#notificacions-sms").val("1");
-				notSms="1";
-	
-			}
-			else {
-	
-				notSms=$("#notificacions-sms").val("0");
-				notSms="0";//48
-	
-			}
-	
-			if($("#notificacions-email").is(':checked')) {
-	
-				$("#notificacions-email").val("1");
-				notEmail="1";
-	
-			} else {
-	
-				notEmail=$("#notificacions-email").val("0");
-				notEmail="0";//49
-			}
-	
-			if($("#proteccion").is(':checked')) {
-	
-				$("#proteccion").val("1");
-				proteccion="1";
-	
-			} else {
-	
-				$("#proteccion").val("0");
-				proteccion="0";
-			}
-	
-			if($("#contrato").is(':checked')) {
-	
-				$("#contrato").val("1");
-				contrato="1";
-	
-			} else {
-	
-				$("#contrato").val("0");
-				contrato="0";
-			}
-		
-			
+		var valueSujeto = "";
+		$("input[type='radio'][name='sujeto-obligado']").each(function(){
+			if($(this).is(":checked"))
+				valueSujeto = $(this).val();
+		});
+
+		if(country == 'Ec-bp' || otro_telefono_num==""){
+			otro_telefono_tipo="";
+			otro_telefono_num="";
+		}
+		else
+		{
+			otro_telefono_tipo=$("#otro_telefono_tipo").val();
+			otro_telefono_num=$("#otro_telefono_num").val();
+		}
+
+		if($("#notificacions-sms").is(':checked')) {
+
+			$("#notificacions-sms").val("1");
+			notSms="1";
+
+		}
+		else {
+
+			notSms=$("#notificacions-sms").val("0");
+			notSms="0";//48
+
+		}
+
+		if($("#notificacions-email").is(':checked')) {
+
+			$("#notificacions-email").val("1");
+			notEmail="1";
+
+		} else {
+
+			notEmail=$("#notificacions-email").val("0");
+			notEmail="0";//49
+		}
+
+		if($("#proteccion").is(':checked')) {
+
+			$("#proteccion").val("1");
+			proteccion="1";
+
+		} else {
+
+			$("#proteccion").val("0");
+			proteccion="0";
+		}
+
+		if($("#contrato").is(':checked')) {
+
+			$("#contrato").val("1");
+			contrato="1";
+
+		} else {
+
+			$("#contrato").val("0");
+			contrato="0";
+		}
+
+		var telfHab = $("#telefono_hab").val();
+		var telfCel = $("#telefono").val();
+		var emailTrue = $("#email").val();
+		if(country == 'Ec-bp') {
+			telfHab = $("#hab_cypher").val();
+			telfCel = $("#cel_cypher").val();
+			emailTrue = $("#email_cypher").val();
+		}
+
+
 		var dataRequest = JSON.stringify ({
-		userName:$("#content").attr("userName"), ///1
-		tipo_identificacion:$('#tipo_identificacion').val(), ///2
-		verifyDigit:$('#dig-ver').val(),
-		primerNombre:$("#primer-nombre").val(),//3
-		segundoNombre:$("#segundo-nombre").val(),//4
-		primerApellido:$("#primer-apellido").val(),//5
-		segundoApellido:$("#segundo-apellido").val(),//6
-		lugarNacimiento:$("#lugar-nacimiento").val(),//7
-		fechaNacimiento:$("#fecha-nacimiento-valor").val(),//8
-		sexo:valuegender,//9
-		edocivil:$("#edo-civil-value").val(),//10
-		nacionalidad:$("#nacionalidad-valor").val(),//11
-		profesion:$("#listaProfesion").val(),//12
-		tipo_profesion:$('#tipo_profesion_value').val(),//13
-		tipo_direccion:$("#tipo_direccion_value").val(),//14
-		codigoPostal:$("#codepostal").val(),//15
-		paisResidencia:$("#pais-residencia-value").val(),//16
-		departamento_residencia:$("#departamento").val(),//17
-		provincia_residencia:$("#provincia").val(),//18
-		distrito_residencia:$("#distrito").val(),//19
-		direccion:$("#direccion").val(),//20
-		telefono_hab:$("#telefono_hab").val(),//21
-		telefono:$("#telefono").val(),//22
-		otro_telefono_tipo:otro_telefono_tipo,//23
-		otro_telefono_num:otro_telefono_num,//24
-		email:$("#email").val(),//25
-		ruc_cto_labora:$("#ruc_cto_labora").val(),//26
-		centro_laboral:$("#centro_laboral").val(),//27
-		situacion_laboral:$("#situacion_laboral").val(),//28
-		antiguedad_laboral_value:$("#antiguedad_laboral").val(),//29
-		profesion_labora:$(".profesion-labora").val(),//30
-		cargo:$("#cargo").val(),//31
-		ingreso_promedio:$("#ingreso_promedio").val(),//32
-		cargo_publico_sino:valueCargop,//33
-		cargo_publico:$("#cargo_publico").val(),//34
-		institucion_publica:$("#institucion_publica").val(),//35
-		sujeto_obligado:valueSujeto,//36
-		dtfechorcrea_usu:$("#dtfechorcrea_usu").val(),//37
-		id_ext_per:$('#id_ext_per').val(),//38
-		tipo_id_ext_per:$('#tipo_id_ext_per').val(),//39
-		aplicaPerfil:$('#aplicaPerfil').val(),//40
-		notarjeta:$('#notarjeta').val(),//41
-		acCodCiudad:$('#provincia').val(),//42
-		acCodEstado:$('#departamento').val(),//43
-		acCodPais:$('#acCodPais').val(),//44
-		acTipo:$('#tipo_direccion_value').val(),//45
-		acZonaPostal:$('#codepostal').val(),//46
-		disponeClaveSMS:$('#disponeClaveSMS').val(),//47
-		tyc : $('#tyc').is(':checked') ? "1" : "0",
-		notSms:notSms,
-		notEmail:notEmail,
-		proteccion:proteccion,
-		contrato:contrato
-		});		
-		
+			userName:$("#content").attr("userName"), ///1
+			tipo_identificacion:$('#tipo_identificacion').val(), ///2
+			verifyDigit:$('#dig-ver').val(),
+			primerNombre:$("#primer-nombre").val(),//3
+			segundoNombre:$("#segundo-nombre").val(),//4
+			primerApellido:$("#primer-apellido").val(),//5
+			segundoApellido:$("#segundo-apellido").val(),//6
+			lugarNacimiento:$("#lugar-nacimiento").val(),//7
+			fechaNacimiento:$("#fecha-nacimiento-valor").val(),//8
+			sexo:valuegender,//9
+			edocivil:$("#edo-civil-value").val(),//10
+			nacionalidad:$("#nacionalidad-valor").val(),//11
+			profesion:$("#listaProfesion").val(),//12
+			tipo_profesion:$('#tipo_profesion_value').val(),//13
+			tipo_direccion:$("#tipo_direccion_value").val(),//14
+			codigoPostal:$("#codepostal").val(),//15
+			paisResidencia:$("#pais-residencia-value").val(),//16
+			departamento_residencia:$("#departamento").val(),//17
+			provincia_residencia:$("#provincia").val(),//18
+			distrito_residencia:$("#distrito").val(),//19
+			direccion:$("#direccion").val(),//20
+			telefono_hab:telfHab,//21
+			telefono:telfCel,//22
+			otro_telefono_tipo:otro_telefono_tipo,//23
+			otro_telefono_num:otro_telefono_num,//24
+			email:emailTrue,//25
+			ruc_cto_labora:$("#ruc_cto_labora").val(),//26
+			centro_laboral:$("#centro_laboral").val(),//27
+			situacion_laboral:$("#situacion_laboral").val(),//28
+			antiguedad_laboral_value:$("#antiguedad_laboral").val(),//29
+			profesion_labora:$(".profesion-labora").val(),//30
+			cargo:$("#cargo").val(),//31
+			ingreso_promedio:$("#ingreso_promedio").val(),//32
+			cargo_publico_sino:valueCargop,//33
+			cargo_publico:$("#cargo_publico").val(),//34
+			institucion_publica:$("#institucion_publica").val(),//35
+			sujeto_obligado:valueSujeto,//36
+			dtfechorcrea_usu:$("#dtfechorcrea_usu").val(),//37
+			id_ext_per:$('#id_ext_per').val(),//38
+			tipo_id_ext_per:$('#tipo_id_ext_per').val(),//39
+			aplicaPerfil:$('#aplicaPerfil').val(),//40
+			notarjeta:$('#notarjeta').val(),//41
+			acCodCiudad:$('#provincia').val(),//42
+			acCodEstado:$('#departamento').val(),//43
+			acCodPais:$('#acCodPais').val(),//44
+			acTipo:$('#tipo_direccion_value').val(),//45
+			acZonaPostal:$('#codepostal').val(),//46
+			disponeClaveSMS:$('#disponeClaveSMS').val(),//47
+			tyc : $('#tyc').is(':checked') ? "1" : "0",
+			notSms:notSms,
+			notEmail:notEmail,
+			proteccion:proteccion,
+			contrato:contrato
+		});
+
 		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 		$.post(base_url+"/perfil/actualizar",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook) }, function(response) {
@@ -1067,8 +1075,12 @@ $(function(){
 		email=$('#email').val();
 		userName=$('#content').attr('username');
 		verificarMail=$('#verificar-email').val();
+		if(country === 'Ec-bp') {
+			email = $('#email_cypher').val();
+			verificarMail = $('#email_cypher').val();
+		}
 
-		if (email != verificarMail && !email.match(/[\s]/gi)) {
+		if (country != 'Ec-bp' && email != verificarMail && !email.match(/[\s]/gi)) {
 			$("#loading").show();
 
 			var cpo_cook = decodeURIComponent(
@@ -1256,7 +1268,7 @@ $(function(){
 		$("#form-perfil").validate({
 
 			errorElement		: "label",
-			ignore				: "",
+			ignore				: ".ignore",
 			errorContainer		: "#msg",
 			errorClass			: "field-error",
 			validClass			: "field-success",
@@ -1282,7 +1294,7 @@ $(function(){
 				"provincia_residencia" : {"required" : true},																			//18
 				"distrito_residencia" : {"required" : true},																			//19
 				"direccion" : {"required" : true},																			//20
-				"email" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
+				"email" : {"mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
 				"telefono_hab": {"number":true, "numberEqual2": true, "maxlength": 11, "minlength": tlfLength},									//23
 				"telefono": {"required":true, "number":true, "numberEqual3": true, "maxlength": 11, "minlength":7},					//24
 				"otro_telefono_tipo" : {"required":false},																	//25

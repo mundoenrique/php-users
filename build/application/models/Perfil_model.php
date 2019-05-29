@@ -35,7 +35,7 @@ class Perfil_model extends CI_Model {
 
         $salida = json_encode($desdata);
 
-        log_message("info", "Salida perfil model response".$salida);
+        log_message("DEBUG", '['.$this->session->userdata("userName").'] RESPONSE PEFIL' .$salida);
 
         return json_encode($desdata);
 
@@ -243,12 +243,10 @@ class Perfil_model extends CI_Model {
             "direccion"=>$direccion,
             "isParticular"=> true,
             "logAccesoObject"	=> $logAcceso,
-            "token"				=> $this->session->userdata("token")
+            "token"	=> $this->session->userdata("token"),
+            "country" => $this->session->userdata('pais')
         ));
 
-
-
-        log_message("info", "REQUEST DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".$data);
 
         $dataEncry = np_Hoplite_Encryption($data,1,'perfil_update');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -256,8 +254,6 @@ class Perfil_model extends CI_Model {
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'perfil_update'));
-
-        log_message("info", "RESPONSE DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".json_encode($desdata));
 
         if($aplicaPerfil=='S' && $verifyDigit != '') {
             switch ($desdata->rc) {

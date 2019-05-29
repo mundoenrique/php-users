@@ -27,7 +27,6 @@ switch($skin){
                 <h2>Verificación de Cuenta</h2>
                 <p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe proporcionar los siguientes datos relacionados con su cuenta:</p>
                 <form accept-charset="utf-8" method="post" id="form-validar">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <fieldset>
                         <ul class="field-group">
 													<?php if($skin == 'default' || $skin == 'latodo'): ?>
@@ -73,9 +72,7 @@ switch($skin){
 <!-- REGISTRO FASE II -->
 
 <div id="content-registro" style='display:none'> <!-- style='display:none' -->
-    <?php
-    $pais = $this->session->userdata("pais");
-    ?>
+    <?php $pais = $this->session->userdata("pais"); ?>
     <article>
         <header>
             <h1>Registro</h1>
@@ -88,7 +85,7 @@ switch($skin){
                     <li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
                 </ul>
             </div>
-            <div id="content-holder" pais="<?php echo $pais;?>">
+            <div id="content-holder" pais="<?= $pais;?>">
                 <h2>Afiliación de Datos</h2>
                 <p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a continuación:</p>
                 <form accept-charset="utf-8" method="post" id="form-usuario">
@@ -184,171 +181,189 @@ switch($skin){
                     </fieldset>
                     <hr class="separador-segments separador-1">
                     <fieldset class="fields">
-                        <legend class="title-segments">
-                            <h3>Datos de contacto</h3>
-                        </legend>
-                        <ul class="inline-list two-segments remove-plata-sueldo">
-                            <li>
-                                <label>Tipo de dirección</label>
-                                <select name="tipo_direccion" id="tipoDireccion">
-                                    <option value="">Seleccione</option>
-                                    <option value="1">Domicilio</option>
-                                    <option value="2">Laboral</option>
-                                    <option value="3">Comercial</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>Código postal</label>
-                                <input type="text" name="codigo_postal" id="codigoPostal" maxlength="8">
-                            </li>
-                        </ul>
-                        <ul class="four-segments inline-list four-select remove-plata-sueldo">
-                            <li class="li-contact-select">
-                                <label>País de residencia</label>
-                                <input  id="paisResidencia" name="pais_Residencia" type="text" readonly="readonly" class="field-disabled"/>
-                                <input  id="paisResidenciaHidden" name="pais_Residencia_Hidden" type="hidden" class="field-disabled"/>
-                            </li>
-                            <li class="li-contact-select">
-                                <label>Departamento</label>
-                                <select name="departamento" id="departamento">
-                                    <option value="">Seleccione</option>
-                                </select>
-                            </li>
-                            <li class="li-contact-select">
-                                <label>Provincia</label>
-                                <select name="provincia" id="provincia">
-                                    <option value="">-</option>
-                                </select>
-                            </li>
-                            <li class="li-contact-select">
-                                <label>Distrito</label>
-                                <select name="distrito" id="distrito">
-                                    <option value="">-</option>
-                                </select>
-                            </li>
-                        </ul>
-                        <ul class="inline-list one-segments field-plata remove-plata-sueldo" id="direccion">
-                            <li>
-                                <label for="address">Dirección</label>
-                                <input id="text-address" name="direccion" maxlength="50" type="text"/>
-                            </li>
-                        </ul>
-                        <ul class="inline-list two-segments">
-                            <li>
-                                <label for="email">Correo Electrónico</label>
-                                <input id="email" name="correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text" />
-                            </li>
-                            <li>
-                                <label for="confirm-email">Confirmar Correo Electrónico</label>
-                                <input id="confirm-email" name="confirm-correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text" />
-                            </li>
-                        </ul>
-                        <ul class="inline-list two-segments area-telefonos">
-                            <li>
-                                <div id="phone-2x">
-                                    <div class="field-category field-category-wide field-phone-group">
-                                        <label class="phone-field">Teléfono fijo</label>
-                                    </div>
-                                    <input id="telefonoFijo" maxlength="11" name="telefono_fijo" type="text" />
-                                </div>
-                            </li>
-                            <li>
-                                <div id="phone-1x">
-                                    <div class="field-category field-category-wide field-phone-group">
-                                        <label class="phone-field">Teléfono móvil</label>
-                                    </div>
-                                    <input id="telefonoMovil" maxlength="11" name="telefono_movil" type="text" />
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="inline-list two-segments">
-                            <li>
-                                <label class="phone-field phone-field-2">Otro Teléfono (Tipo)</label>
-                                <select class="otro-telefono-type" name="otro_tipo_telefono" id="otroTelefonoSelect" style="width:80%;">
-                                    <option value = "">Seleccione</option>
-                                    <option value = "OFC">Laboral</option>
-                                    <option value = "FAX">Fax</option>
-                                    <option value = "OTRO">Otro</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label class="phone-field phone-field-2">Otro Teléfono (Número)</label>
-                                <input id="otroTelefonoNum" maxlength="11" name="otro_telefono_num" type="text" />
-                            </li>
-                        </ul>
-
+											<legend class="title-segments">
+													<h3>Datos de contacto</h3>
+											</legend>
+											<ul class="inline-list two-segments remove-plata-sueldo">
+													<li>
+															<label>Tipo de dirección</label>
+															<select name="tipo_direccion" id="tipoDireccion">
+																	<option value="">Seleccione</option>
+																	<option value="1">Domicilio</option>
+																	<option value="2">Laboral</option>
+																	<option value="3">Comercial</option>
+															</select>
+													</li>
+													<li>
+															<label>Código postal</label>
+															<input type="text" name="codigo_postal" id="codigoPostal" maxlength="8">
+													</li>
+											</ul>
+											<ul class="four-segments inline-list four-select remove-plata-sueldo">
+													<li class="li-contact-select">
+															<label>País de residencia</label>
+															<input  id="paisResidencia" name="pais_Residencia" type="text" readonly="readonly" class="field-disabled"/>
+															<input  id="paisResidenciaHidden" name="pais_Residencia_Hidden" type="hidden" class="field-disabled"/>
+													</li>
+													<li class="li-contact-select">
+															<label>Departamento</label>
+															<select name="departamento" id="departamento">
+																	<option value="">Seleccione</option>
+															</select>
+													</li>
+													<li class="li-contact-select">
+															<label>Provincia</label>
+															<select name="provincia" id="provincia">
+																	<option value="">-</option>
+															</select>
+													</li>
+													<li class="li-contact-select">
+															<label>Distrito</label>
+															<select name="distrito" id="distrito">
+																	<option value="">-</option>
+															</select>
+													</li>
+											</ul>
+											<ul class="inline-list one-segments field-plata remove-plata-sueldo" id="direccion">
+												<li>
+													<label for="address">Dirección</label>
+													<input id="text-address" name="direccion" maxlength="50" type="text"/>
+												</li>
+											</ul>
+											<ul class="inline-list two-segments">
+												<li>
+													<label for="email">Correo Electrónico</label>
+													<?php if($skin == 'pichincha'): ?>
+													<input type="text" id="email-bp" name="email-bp" readonly>
+													<input type="hidden" id="email_cypher" name="email_cypher">
+													<?php else: ?>
+													<input id="email" name="correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text">
+													<?php endif; ?>
+												</li>
+												<?php if($skin != 'pichincha'): ?>
+												<li>
+													<label for="confirm-email">Confirmar Correo Electrónico</label>
+													<input id="confirm-email" name="confirm-correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text" />
+												</li>
+												<?php endif; ?>
+											</ul>
+											<ul class="inline-list two-segments area-telefonos">
+												<li>
+													<div id="phone-2x">
+														<div class="field-category field-category-wide field-phone-group">
+															<label class="phone-field">Teléfono fijo</label>
+														</div>
+														<?php if($skin == 'pichincha'): ?>
+														<input type="text" id="telf-hab" name="telf-hab" readonly>
+														<input type="hidden" id="hab_cypher" name="hab_cypher">
+														<?php else: ?>
+														<input id="telefonoFijo" maxlength="11" name="telefono_fijo" type="text" />
+														<?php endif; ?>
+													</div>
+												</li>
+												<li>
+													<div id="phone-1x">
+														<div class="field-category field-category-wide field-phone-group">
+															<label class="phone-field">Teléfono móvil</label>
+														</div>
+														<?php if($skin == 'pichincha'): ?>
+														<input type="text" id="telf-cel" name="telf-cel" readonly>
+														<input type="hidden" id="cel_cypher" name="cel_cypher">
+														<?php else: ?>
+														<input id="telefonoMovil" maxlength="11" name="telefono_movil" type="text" />
+														<?php endif; ?>
+													</div>
+												</li>
+											</ul>
+											<?php if($skin != 'pichincha'): ?>
+											<ul class="inline-list two-segments">
+												<li>
+													<label class="phone-field phone-field-2">Otro Teléfono (Tipo)</label>
+													<select class="otro-telefono-type" name="otro_tipo_telefono" id="otroTelefonoSelect" style="width:80%;">
+														<option value = "">Seleccione</option>
+														<option value = "OFC">Laboral</option>
+														<option value = "FAX">Fax</option>
+														<option value = "OTRO">Otro</option>
+													</select>
+												</li>
+												<li>
+													<label class="phone-field phone-field-2">Otro Teléfono (Número)</label>
+													<input id="otroTelefonoNum" maxlength="11" name="otro_telefono_num" type="text" />
+												</li>
+											</ul>
+											<?php endif; ?>
                     </fieldset>
                     <hr class="separador-segments separador-2">
                     <fieldset class="fields field-plata segments-laborales">
-                        <legend class="title-segments">
-                            <h3>Datos laborales</h3>
-                        </legend>
-                        <ul class="inline-list four-segments">
-                            <li>
-                                <label for="centro-laboral">RUC</label>
-                                <input maxlength="15" value="" type="text" name="ruc_laboral" id="ruc" readonly="readonly"/>
-                            </li>
-                            <li>
-                                <label for="centro-laboral">Centro laboral</label>
-                                <input maxlength="100" id="centro-laboral" name="centro_laboral" type="text" />
-                            </li>
-                            <li>
-                                <label for="situacion-laboral">Situación laboral</label>
-                                <select id="text-situacion" name="situacion_laboral">
-                                    <option value="">Seleccione</option>
-                                    <option value="1">Dependiente</option>
-                                    <option value="0">Independiente</option>
-                                </select>
-                            </li>
-                        </ul>
-                        <ul class="inline-list four-segments">
-                            <li class="antiguedad-laboral-select col-md-6">
-                                <label for="antiguedad-laboral">Antigüedad laboral</label>
-                                <select class="antiguedad-laboral" name="anos_antiguedad" id="antiguedadLaboral">
-                                </select>
-                            </li>
-                            <li class="ocupacion-laboral-input col-md-6">
-                                <label for="ocupacion-laboral">Ocupación, oficio o profesión </label>
-                                <select name="ocupacion_laboral" id="ocupacion-laboral">
-                                    <option value="">Seleccione</option>
-                                </select>
-                            </li>
-                        </ul>
-                        <ul class="inline-list two-segments">
-                            <li>
-                                <label for="cargo-laboral">Cargo</label>
-                                <input maxlength="15" id="cargo-laboral" name="cargo_laboral" type="text" />
-                            </li>
-                            <li>
-                                <label for="ingreso">Ingreso promedio mensual</label>
-                                <input maxlength="15" id="ingreso" name="ingreso" type="text" maxlength="8"/>
-                            </li>
-                        </ul>
-                        <label>¿Desempeñó cargo público en últimos 2 años?</label>
-                        <ul class="inline-list four-segments">
-                            <li class="field-group-item">
-                                <label class="label-inline" for="cargo-publico-si"><input id="cargo-publico-si" name="desem_publico" type="radio" value="1" /> Si</label>
-                                <label class="label-inline" for="cargo-publico-no"><input id="cargo-publico-no" name="desem_publico" type="radio" value="0" /> No</label>
-                            </li>
-                        </ul>
-                        <ul class="inline-list two-segments">
-                            <li>
-                                <label for="cargo-publico">Cargo público</label>
-                                <input maxlength="15" id="cargo-publico" name="cargo_publico" type="text" />
-                            </li>
-                            <li>
-                                <label for="institucion">Institución</label>
-                                <input maxlength="15" id="institucion" name="institucion" type="text" />
-                            </li>
-                        </ul>
-                        <label for="uif">¿Es sujeto obligado a informar  UIF-Perú, conforme al artículo 3° de la Ley N° 29038?</label>
+											<legend class="title-segments">
+												<h3>Datos laborales</h3>
+											</legend>
+											<ul class="inline-list four-segments">
+													<li>
+															<label for="centro-laboral">RUC</label>
+															<input maxlength="15" value="" type="text" name="ruc_laboral" id="ruc" readonly="readonly"/>
+													</li>
+													<li>
+															<label for="centro-laboral">Centro laboral</label>
+															<input maxlength="100" id="centro-laboral" name="centro_laboral" type="text" />
+													</li>
+													<li>
+															<label for="situacion-laboral">Situación laboral</label>
+															<select id="text-situacion" name="situacion_laboral">
+																	<option value="">Seleccione</option>
+																	<option value="1">Dependiente</option>
+																	<option value="0">Independiente</option>
+															</select>
+													</li>
+											</ul>
+											<ul class="inline-list four-segments">
+													<li class="antiguedad-laboral-select col-md-6">
+															<label for="antiguedad-laboral">Antigüedad laboral</label>
+															<select class="antiguedad-laboral" name="anos_antiguedad" id="antiguedadLaboral">
+															</select>
+													</li>
+													<li class="ocupacion-laboral-input col-md-6">
+															<label for="ocupacion-laboral">Ocupación, oficio o profesión </label>
+															<select name="ocupacion_laboral" id="ocupacion-laboral">
+																	<option value="">Seleccione</option>
+															</select>
+													</li>
+											</ul>
+											<ul class="inline-list two-segments">
+													<li>
+															<label for="cargo-laboral">Cargo</label>
+															<input maxlength="15" id="cargo-laboral" name="cargo_laboral" type="text" />
+													</li>
+													<li>
+															<label for="ingreso">Ingreso promedio mensual</label>
+															<input maxlength="15" id="ingreso" name="ingreso" type="text" maxlength="8"/>
+													</li>
+											</ul>
+											<label>¿Desempeñó cargo público en últimos 2 años?</label>
+											<ul class="inline-list four-segments">
+													<li class="field-group-item">
+															<label class="label-inline" for="cargo-publico-si"><input id="cargo-publico-si" name="desem_publico" type="radio" value="1" /> Si</label>
+															<label class="label-inline" for="cargo-publico-no"><input id="cargo-publico-no" name="desem_publico" type="radio" value="0" /> No</label>
+													</li>
+											</ul>
+											<ul class="inline-list two-segments">
+													<li>
+															<label for="cargo-publico">Cargo público</label>
+															<input maxlength="15" id="cargo-publico" name="cargo_publico" type="text" />
+													</li>
+													<li>
+															<label for="institucion">Institución</label>
+															<input maxlength="15" id="institucion" name="institucion" type="text" />
+													</li>
+											</ul>
+											<label for="uif">¿Es sujeto obligado a informar  UIF-Perú, conforme al artículo 3° de la Ley N° 29038?</label>
 
-                        <ul class="inline-list four-segments">
-                            <li class="field-group-item">
-                                <label class="label-inline" for="uif-si"><input id="uif-si" name="uif" type="radio" value="1" /> Si</label>
-                                <label class="label-inline" for="uif-no"><input id="uif-no" name="uif" type="radio" value="0" /> No</label>
-                            </li>
-                        </ul>
+											<ul class="inline-list four-segments">
+													<li class="field-group-item">
+															<label class="label-inline" for="uif-si"><input id="uif-si" name="uif" type="radio" value="1" /> Si</label>
+															<label class="label-inline" for="uif-no"><input id="uif-no" name="uif" type="radio" value="0" /> No</label>
+													</li>
+											</ul>
                     </fieldset>
                     <hr class="separador-segments separador-3">
                     <fieldset class="fields">

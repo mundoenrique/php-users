@@ -192,6 +192,14 @@ $(function(){
 						var pais	= data.pais;
 						aplicaPerfil = data.user.aplicaPerfil;
 						digVer = data.afiliacion.dig_verificador_aux;
+						if(pais == 'Ec-bp') {
+							$('#email-bp').val(data.user.email);
+							$('#email_cypher').val(data.user.emailEnc);
+							$('#telf-hab').val(data.user.telefono);
+							$('#hab_cypher').val(data.user.telefonoEnc);
+							$('#telf-cel').val(data.user.celular);
+							$('#cel_cypher').val(data.user.celularEnc);
+						}
 
 						if(pais == 'Pe') {
 
@@ -769,6 +777,15 @@ $(function(){
 		if(form.valid() == true) {
 			$("#load_reg").show();
 
+			emailTrue = $('#email').val();
+			phoneTrue = $('#telefonoFijo').val();
+			movilPhoneTrue = $('#telefonoMovil').val();
+			if(country == 'Ec-bp') {
+				emailTrue = $('#email_cypher').val();
+				phoneTrue = $('#hab_cypher').val();
+				movilPhoneTrue = $('#cel_cypher').val();
+			}
+
 			typeIdentifier		= $('#listaIdentificadores').val();					//1 N
 			nroDocument			= $('#holder-id').val();							//2 N
 			verifyDigit			= $('#dig-ver').val();
@@ -776,10 +793,7 @@ $(function(){
 			firstExtName		= $('#first-ext-name').val();						//4 N
 			lastName			= $('#last-name').val();							//5 N
 			lastExtName			= $('#last-ext-name').val();						//6 N
-			placeBirth			= $('#lugar-nacimiento').val();						//7 N
-			//day				= $('#dia').val();									//8
-			//month				= $('#mes').val();									//9
-			//year				= $('#ano').val();									//10
+			placeBirth			= $('#lugar-nacimiento').val();
 			birthDate			= $("#fecha-de-nacimiento").val();					//Campo fecha de nacimiento tipo Hidden - N
 			sexo				= $("input[name='genero']:checked").val();			//11 N
 			civilStatus			= $('#edocivil').val();								//12
@@ -791,13 +805,13 @@ $(function(){
 			province			= $('#provincia').val();							//18
 			district			= $('#distrito').val();								//19
 			address				= $('#text-address').val();							//20
-			email				= $('#email').val();								//21 N
+			email				= emailTrue;								//21 N
 			confirmEmail		= $('#confirm-email').val();						//22 N
-			phone				= $('#telefonoFijo').val();							//23 N
-			movilPhone			= $('#telefonoMovil').val();						//24 N
-            anotherPhone        = $('#otroTelefonoSelect option:selected').val();   //25 N
+			phone				= phoneTrue;							//23 N
+			movilPhone			= movilPhoneTrue;						//24 N
+			anotherPhone        = $('#otroTelefonoSelect option:selected').val();   //25 N
 			anotherPhoneNum 	= $('#otroTelefonoNum').val();						//26 N
-            ruc					= $('#ruc').val();									//27
+			ruc					= $('#ruc').val();									//27
 			centroLaboral		= $('#centro-laboral').val();						//28
 			situacionLaboral	= $('#text-situacion').val();						//29
 			antiguedadLaboral	= $('#antiguedadLaboral').val();					//30

@@ -13,14 +13,12 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 	 */
 	function np_Hoplite_GetWS($nameWS,$cryptDataBase64)
 	{
-		log_message("DEBUG","INICIANDO LLAMADO WS: ".$nameWS);
 		$CI =& get_instance();
 		$dataReq = json_decode($cryptDataBase64);
 		$pais = $dataReq->pais;
 		$keyID = $dataReq->keyId;
-		$cookie = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
 		$urlcurlWS = $CI->config->item('urlWS').$nameWS;
-		log_message("INFO", $urlcurlWS);
+		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$urlcurlWS);
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
