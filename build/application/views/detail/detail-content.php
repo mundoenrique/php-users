@@ -84,7 +84,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 									</div>
 								</ul>
 								<form id='form' method='post' action="detalles/exportar">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 									<input id="tarjeta" type="hidden" name="tarjeta" value="" />
 									<input id="mes" type="hidden" name="mes" value="" />
 									<input id="anio" type="hidden" name="anio" value="" />

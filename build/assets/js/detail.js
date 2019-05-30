@@ -129,7 +129,11 @@ $('#buscar').on('click',function(){
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
       }
-      document.getElementById("idOperation").value='5';
+			document.getElementById("idOperation").value='5';
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('#form').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
       $("#form").submit();
     }
   });
@@ -155,8 +159,12 @@ $('#buscar').on('click',function(){
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
       }
-      document.getElementById("idOperation").value="46";
-     $("#form").submit();
+			document.getElementById("idOperation").value="46";
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('#form').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
+     	$("#form").submit();
     }
   });
 

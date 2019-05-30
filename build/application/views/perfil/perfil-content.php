@@ -460,19 +460,19 @@ $pais_residencia=$this->session->userdata('pais');
 													<li class="col-md-4-profile">
 														<label>Teléfono fijo</label>
 														<?php if($country === 'Ec-bp'): ?>
-															<input type="text" id="telefono_hab-bp" name="telefono_hab-bp" class="ignore" value=<?php echo $num_hab; ?> readonly>
-															<input type="hidden" id="hab_cypher" name="hab_cypher" value=<?= $habCypher; ?>>
+															<input type="text" id="telefono_hab-bp" name="telefono_hab-bp" class="ignore" value="<?php echo $num_hab; ?>" readonly>
+															<input type="hidden" id="hab_cypher" name="hab_cypher" value="<?= $habCypher; ?>">
 														<?php else: ?>
-															<input type="text" id="telefono_hab" name="telefono_hab" maxlength="11" value=<?php echo $num_hab; ?>>
+															<input type="text" id="telefono_hab" name="telefono_hab" maxlength="11" value="<?php echo $num_hab; ?>">
 														<?php endif; ?>
 													</li>
 													<li class="col-md-4-profile">
 														<label>Teléfono móvil</label>
 														<?php if($country === 'Ec-bp'): ?>
-															<input type="text" id="telefono-bp" name="telefono-bp" class="ignore" value=<?php echo $num; ?> readonly>
-															<input type="hidden" id="cel_cypher" name="cel_cypher" value=<?= $celCypher; ?>>
+															<input type="text" id="telefono-bp" name="telefono-bp" class="ignore" value="<?php echo $num; ?>" readonly>
+															<input type="hidden" id="cel_cypher" name="cel_cypher" value="<?= $celCypher; ?>">
 														<?php else: ?>
-															<input type="text" id="telefono" name="telefono"maxlength="11" value=<?php echo $num; ?>>
+															<input type="text" id="telefono" name="telefono"maxlength="11" value="<?php echo $num; ?>">
 														<?php endif; ?>
 													</li>
 													<?php if($country !== 'Ec-bp'): ?>
