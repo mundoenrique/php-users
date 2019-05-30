@@ -47,7 +47,8 @@ class Affiliation_model extends CI_Model {
 		//$desdata = json_decode('{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}');
 
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+	  return json_encode($response);
 
 	}		//FIN
 

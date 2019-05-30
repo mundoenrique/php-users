@@ -173,14 +173,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->lang->load('format');
 
 			$this->load->model('affiliation_model', 'affiliation');
-			$nroPlasticoOrigen = $this->input->post('nroPlasticoOrigen');
-			$beneficiario = $this->input->post('beneficiario');
-			$nroCuentaDestino = $this->input->post('nroCuentaDestino');
-			$tipoOperacion = $this->input->post('tipoOperacion');
-			$email = $this->input->post('email');
-			$cedula = $this->input->post('cedula');
-			$prefix = $this->input->post('prefix');
-			$expDate = $this->input->post('expDate');
+
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
+			$beneficiario = $dataRequest->beneficiario;
+			$nroCuentaDestino = $dataRequest->nroCuentaDestino;
+			$tipoOperacion = $dataRequest->tipoOperacion;
+			$email = $dataRequest->email;
+			$cedula = $dataRequest->cedula;
+			$prefix = $dataRequest->prefix;
+			$expDate = $dataRequest->expDate;
 
 
 			$this->output->set_content_type('application/json')->set_output($this->affiliation->affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula, $prefix, $expDate));
