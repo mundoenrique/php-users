@@ -164,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
 		$nroCuentaDestino = $dataRequest->nroCuentaDestino;
 		$id_ext_per = $dataRequest->id_ext_per;
-		$beneficiario = $dataRequest->beneficiario;
+		$beneficiario = (isset($dataRequest->beneficiario)) ? $dataRequest->beneficiario :"";
 		$tipoOperacion = $dataRequest->tipoOperacion;
 		$email = $dataRequest->email;
 		$banco = $dataRequest->banco;
