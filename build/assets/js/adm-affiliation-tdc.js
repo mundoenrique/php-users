@@ -685,7 +685,10 @@ function validar_campos(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 
-		$.post(base_url +"/affiliation/bancos", {"cpo_name":cpo_cook},function(data){
+		$.post(base_url +"/affiliation/bancos", {"cpo_name":cpo_cook}, function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			$.each(data.lista,function(pos,item){
 
 			var lista;
