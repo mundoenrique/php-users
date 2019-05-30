@@ -389,8 +389,8 @@ function validar_campos() {
         errorLabelContainer: "#msg2",
         rules: {
             "token": {"required": true, "tokenValid": true},
-            "pin-current": {"required":true, "number":true},
-            "new-pin": {"number":true,  "pinNew2":true, "required":true},
+            "pin-current": {"required":true, "number":true, "minlength": 4},
+            "new-pin": {"number":true,  "pinNew2":true, "required":true, "minlength": 4},
             "confirm-pin": {"number":true, "pinNew1":true}
         },
 
@@ -401,12 +401,14 @@ function validar_campos() {
             },
             "pin-current":{
                 required:"Debe colocar su PIN actual",
-                number:"Debe ser numérico"
+								number:"Debe ser numérico",
+								minlength: "El PIN debe tener 4 digitos"
             },
             "new-pin": {
                 number:"Su nuevo PIN debe ser numérico",
                 pinNew2:"El nuevo PIN no debe ser igual a su PIN anterior",
-                required:"Debe colocar su nuevo PIN"
+                required:"Debe colocar su nuevo PIN",
+								minlength: "El nuevo PIN debe tener 4 digitos"
             },
             "confirm-pin": {
                 number:"La confirmación de su nuevo PIN debe ser numérico",

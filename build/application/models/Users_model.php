@@ -29,12 +29,15 @@ class Users_model extends CI_Model {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'login_user'));
-		$salida = json_encode($desdata);
+		$desdata = new stdClass();
+		if($data->data) {
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'login_user'));
+			$salida = json_encode($desdata);
+		} else {
+			$desdata->rc = -9999;
+		}
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
 		$putSession = FALSE;
-
-		log_message('info', 'Salida login usuario' . $salida);
 
 		if(isset($response) && $desdata->rc == 0) {
 			if($desdata->codPais != 'Ec-bp' && $cookie == 'default') {

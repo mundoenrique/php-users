@@ -335,9 +335,9 @@ class Registro extends CI_Controller {
 		$distrito 			= isset($dataRequest->distrito) ? $dataRequest->distrito : '';					//18
 		$direccion 			= isset($dataRequest->direccion) ? $dataRequest->direccion : '';					//19
 		$correo 			= $dataRequest->correo;						//20
-		$otroTelefono		= $dataRequest->otro_telefono;				//21
-		$telefono2 			= $dataRequest->telefono2;					//22
-		$telefono3 			= $dataRequest->telefono3;					//23
+		$otroTelefono		= isset($dataRequest->otro_telefono) ? $dataRequest->otro_telefono : '';				//21
+		$telefono2 			= isset($dataRequest->telefono2) ? $dataRequest->telefono2 : '';					//22
+		$telefono3 			= isset($dataRequest->telefono3) ? $dataRequest->telefono3 : '';					//23
 		$ruc 				= isset($dataRequest->ruc_cto_laboral) ? $dataRequest->ruc_cto_laboral : '';		//24
 		$centrolab 			= isset($dataRequest->centrolab) ? $dataRequest->centrolab : '';					//25
 		$situacionLaboral 	= isset($dataRequest->situacionLaboral) ? $dataRequest->situacionLaboral : '';		//26
