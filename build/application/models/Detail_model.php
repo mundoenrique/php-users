@@ -68,15 +68,10 @@ class Detail_model extends CI_Model {
 		log_message("info", "Salida encriptada exportar : ".$data);
 
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exportar'));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exportar'));
 
-	  	$salida = json_encode($desdata);
-
-			log_message("info", "Salida exportar detalle desencriptado".$salida);
-			$response = $this->cryptography->encrypt($desdata);
-
-	  	return json_encode($response);
+		return json_encode($desdata);
 
 	}
 
