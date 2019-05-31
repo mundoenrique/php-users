@@ -387,12 +387,12 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = SESS_TIME_TO_UPDATE;
 $config['sess_regenerate_destroy'] = TRUE;
 
 /*

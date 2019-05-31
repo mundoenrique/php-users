@@ -101,6 +101,10 @@ define('WS_KEY', $_SERVER['WS_KEY']);
 define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
 	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
 );
+define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER'])
+&& preg_match('/^(files|database|redis|memcached)$/i', $_SERVER['SESS_DRIVER']) ?
+	$_SERVER['SESS_DRIVER'] : NULL
+);
 define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
 	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
 );
@@ -114,6 +118,10 @@ define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
 define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 && filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['SESS_MATCH_IP']) : FALSE
+);
+define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
+&& filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 0
 );
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
 	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
