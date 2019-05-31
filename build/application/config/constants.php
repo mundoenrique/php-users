@@ -140,3 +140,7 @@ define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
 );
+
+define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
+	$_SERVER['PROXY_IPS'] : ''
+);
