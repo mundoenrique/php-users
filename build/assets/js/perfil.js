@@ -452,7 +452,16 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": 1, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: codPaisresidencia,
+					subRegion: 1
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				//console.log(data);
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
@@ -529,7 +538,15 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: codPaisresidencia,
+					subRegion: subRegion
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -585,8 +602,8 @@ $(function(){
 			);
 
 			var dataRequest = JSON.stringify ({
-				codPais: codPaisresidencia,
-				codEstado: subRegion
+				pais: codPaisresidencia,
+				subRegion: subRegion
 			});
 
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -635,8 +652,8 @@ $(function(){
 				);
 
 				var dataRequest = JSON.stringify ({
-					codPais: codPaisresidencia,
-					codEstado: subRegion
+					pais: codPaisresidencia,
+					subRegion: subRegion
 				});
 
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -702,7 +719,16 @@ $(function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-		$.post(base_url + "/perfil/listadoDepartamento", {"pais": codPaisresidencia, "subRegion": subRegion, "cpo_name": cpo_cook}, function (data) {
+			var dataRequest = JSON.stringify ({
+				pais: codPaisresidencia,
+				subRegion: subRegion
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			//console.log(data);
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
@@ -1087,12 +1113,16 @@ $(function(){
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
 
-			$.post(base_url + '/perfil/verificarEmail', {
-				"pais": pais,
-				"email": email,
-				"username": userName,
-				"cpo_name": cpo_cook
-			}, function (data) {
+				var dataRequest = JSON.stringify ({
+					pais: pais,
+					email: email,
+					username: userName,
+					cpo_name: cpo_cook
+				});
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/perfil/verificarEmail", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
 

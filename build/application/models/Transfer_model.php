@@ -86,7 +86,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			log_message("info", "Response ctasDestino_load transferencia====>>>>>: " . $salida);
 
-			return json_encode($desdata);
+			$response = $this->cryptography->encrypt($desdata);
+			return json_encode($response);
 
 		}		//FIN LLAMADA A CARGAR CUENTAS DESTINO
 
@@ -232,8 +233,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			//$desdata = json_decode('{"rc":0,"dataTransaccion":{"referencia":"154548"}}');
 
-
-			return json_encode($desdata);
+			$response = $this->cryptography->encrypt($desdata);
+			return json_encode($response);
 		}
 
 		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
