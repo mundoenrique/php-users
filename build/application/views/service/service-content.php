@@ -22,23 +22,15 @@
                                     <p class='field-tip'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opción no disponible para tu país</p>
                                 </div>
                             <?php endif; ?>
-                            <?php if($pais == 'Co' || $pais == 'Pe' || $pais == 'Ec-bp'): ?>
-                                <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Selecciona la operación que deseas realizar</p>
-                                    <ul class='product-balance-group disabled-product-balance-group services-content'>
-                                        <li><span class="icon-lock services-item"></span>Bloqueo <br>de cuenta</li>
-                                        <li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
-                                        <li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
-                                    </ul>
-                                </div>
-                            <?php elseif($pais == 'Ve'): ?>
-                                <div class='product-scheme'>
-                                    <p class="field-tip" style="color: #eee; margin-left: 10px;">Haz clic aquí para solicitar la reposición de PIN para acceso a operaciones en comercios y cajeros automáticos</p>
-                                    <ul class='product-balance-group disabled-product-balance-group services-content'>
-																				<li><span class="icon-key services-item"></span>Solicitud <br>de PIN</li>
-                                    </ul>
-                                </div>
-                            <?php endif; ?>
+															<div class='product-scheme'>
+																	<p class="field-tip" style="color: #eee; margin-left: 10px;">Selecciona la operación que deseas realizar</p>
+																	<ul class='product-balance-group disabled-product-balance-group services-content'>
+																			<li><span class="icon-lock services-item"></span>Bloqueo <br>de cuenta</li>
+																			<li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
+																			<li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
+																			<li><span class="icon-key services-item"></span>Solicitud <br>de PIN</li>
+																	</ul>
+															</div>
                         </div>
                     </fieldset>
 
