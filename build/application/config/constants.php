@@ -152,3 +152,29 @@ define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
 	$_SERVER['PROXY_IPS'] : ''
 );
+
+define('DB_HOSTNAME', isset($_SERVER['DB_HOSTNAME']) ?
+	$_SERVER['DB_HOSTNAME'] : 'localhost'
+);
+define('DB_PORT', isset($_SERVER['DB_PORT'])
+&& filter_var($_SERVER['DB_PORT'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['DB_PORT']) : NULL
+);
+define('DB_USERNAME', isset($_SERVER['DB_USERNAME']) ?
+	$_SERVER['DB_USERNAME'] : ''
+);
+define('DB_PASSWORD', isset($_SERVER['DB_PASSWORD']) ?
+	$_SERVER['DB_PASSWORD'] : ''
+);
+define('DB_NAME', isset($_SERVER['DB_NAME']) ?
+	$_SERVER['DB_NAME'] : ''
+);
+define('DB_DRIVER', isset($_SERVER['DB_DRIVER']) ?
+	$_SERVER['DB_DRIVER'] : 'mysqli'
+);
+define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
+	$_SERVER['DB_CHARSET'] : 'utf8'
+);
+define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
+	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
+);
