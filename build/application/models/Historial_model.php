@@ -28,7 +28,7 @@ class Historial_model extends CI_Model {
 			"anio"=>$anio,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
-			));
+		));
 
 		//print_r($data);
 		log_message("info", "Salida HISTORIAL : ".$data);
@@ -41,9 +41,10 @@ class Historial_model extends CI_Model {
 
 		$salida = json_encode($desdata);
 
-	  	log_message("info", "Salida historial_load".$salida);
+	  log_message("info", "Salida historial_load".$salida);
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+		return json_encode($response);
 
 	}
 

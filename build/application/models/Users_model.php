@@ -194,7 +194,8 @@ class Users_model extends CI_Model {
 
         log_message('info', 'Response actualizar password:---->>>>>'. json_encode($desdata));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,7 +252,8 @@ class Users_model extends CI_Model {
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_crear'));
 
-        return json_encode($desdata);
+        $response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -339,7 +341,8 @@ class Users_model extends CI_Model {
 
         log_message('info', 'Salida password_operaciones: ' . $salida);
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
