@@ -23,14 +23,14 @@
 			<fieldset>
 				<div class="field-prepend">
 					<span aria-hidden="true" class="icon-user"></span>
-					<input id="username" maxlength="15" name="username" placeholder="Usuario" type="text" />
+					<input type="text" id="username" name="username" maxlength="15" placeholder="Usuario" autocomplete="off">
 				</div>
 				<div class="field-prepend">
 					<span aria-hidden="true" class="icon-key"></span>
-					<input id="userpwd" maxlength="15" name="userpwd" placeholder="Contraseña" type="password" />
+					<input type="password" id="userpwd" name="userpwd" maxlength="15" placeholder="Contraseña" autocomplete="off">
 				</div>
 			</fieldset>
-				
+
 		</form>
 		<button id="login">Ingresar</button>
 			<p class="align-center">¿Olvidaste tu<br><a href="<? echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<? echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
