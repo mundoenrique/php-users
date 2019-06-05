@@ -40,7 +40,7 @@ $(function() {
 			grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'}).then(function(token) {
 					validateCaptcha(token,user,pass)
 			});;
-		});		
+		});
 	});
 
 	  function mostrarProcesando(skin){
@@ -102,7 +102,7 @@ $(function() {
 
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0.7')) )
+				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0')) )
 				{
 					login(user,pass)
 				}

@@ -11,7 +11,7 @@
 		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
 	}
   $signupLink = $this->config->item('base_url') . '/registro';
-  
+
   echo $insertRecaptcha;
 ?>
 <div id="slideshow">
@@ -85,7 +85,7 @@
   <div class="dialog-small" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>El sistema ha dectetado una actividad no autorizada, por favor intentar nuevamente </p>
+      <p>El sistema ha detectado una actividad no autorizada, por favor intentar nuevamente </p>
     </div>
     <div class="form-actions">
       <button id="error-validate">Aceptar</button>

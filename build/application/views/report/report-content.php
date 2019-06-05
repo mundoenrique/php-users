@@ -1,3 +1,7 @@
+<?php
+	$country = $this->session->userdata('pais');
+	$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+?>
 <div id="content">
 	<article>
 		<header>
@@ -38,12 +42,13 @@
 
 				<ul class="stack stack-extra" id="download-boxes">
 					<li class="stack-item">
-
 						<a href="#download-excel" id="export_excel" rel="subsection" title="Descargar Excel"><span aria-hidden="true" class="icon-file-excel"></span></a>
-					</li><li class="stack-item">
-
+					</li>
+					<?php if($country != 'Ec-bp'): ?>
+					<li class="stack-item">
 						<a href="#download-pdf" id="export_pdf" rel="subsection" title="Descargar PDF"><span aria-hidden="true" class="icon-file-pdf"></span></a>
 					</li>
+					<?php endif; ?>
 				</ul>
 				<div class="field-options">
 					<input id="detalle" name="toggle" type="radio" checked disabled>
