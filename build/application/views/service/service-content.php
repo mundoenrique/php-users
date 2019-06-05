@@ -28,7 +28,9 @@
 																			<li><span class="icon-lock services-item"></span>Bloqueo <br>de cuenta</li>
 																			<li><span class="icon-spinner services-item"></span>Solicitud <br>de reposición</li>
 																			<li><span class="icon-key services-item"></span>Cambio <br>de PIN</li>
+																			<?php if($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe'): ?>
 																			<li><span class="icon-key services-item"></span>Solicitud <br>de PIN</li>
+																			<?php endif; ?>
 																	</ul>
 															</div>
                         </div>
