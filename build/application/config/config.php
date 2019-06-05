@@ -34,6 +34,7 @@ $config['urlAPI'] = URL_API;
 $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
 $config['cypher_base'] = CYPHER_BASE;
+$config['oauth_url'] = OAUTH_URL;
 
 /*
 |--------------------------------------------------------------------------

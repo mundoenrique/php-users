@@ -140,3 +140,7 @@ define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
 );
+
+define('OAUTH_URL', isset($_SERVER['OAUTH_URL']) ?
+	$_SERVER['OAUTH_URL'] : ''
+);
