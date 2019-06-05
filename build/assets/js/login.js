@@ -102,7 +102,7 @@ $(function() {
 
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0.5')) )
+				if((data.success == true) && (parseFloat(data.score) >= parseFloat('0')) )
 				{
 					login(user,pass)
 				}
