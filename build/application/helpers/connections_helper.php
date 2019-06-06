@@ -54,7 +54,7 @@ if(!function_exists('getTokenOauth'))
 	function getTokenOauth($clientId, $ClientSecret)
 	{
 		$CI = &get_instance();
-		$url = $CI->config->item('urlAPI') . ':8008/auth2/1.0/token';
+		$url = $CI->config->item('oauth_url');
 		log_message('INFO', '<===Iniciando llamado al API OAUTH===>' . $url);
 		log_message('DEBUG', 'ClientId: ==>' . $clientId . ', ClientSecret: ==>' . $ClientSecret);
 		$header = [
