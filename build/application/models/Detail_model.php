@@ -110,5 +110,63 @@ class Detail_model extends CI_Model {
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	public function WSinTransit($data){
+		$country = $this->session->userdata("pais");
 
+		$urlAPI = ':8016/api-cardholder-account/1.0/balance';
+		$headerAPI = [
+			'x-country: ' . $country
+		];
+		$body = [
+			'idPrograma' => $data->idPrograma,
+			'noTarjetaConMascara' => $data->tarjeta
+		];
+		$bodyAPI = json_encode($body);
+		$method = 'POST';
+
+		$objectAPI = (object) [
+			'urlAPI' => $urlAPI,
+			'headerAPI' => $headerAPI,
+			'bodyAPI' => $bodyAPI,
+			'method' => $method
+		];
+		log_message("INFO", '['.$this->session->userdata("userName").']'." REQUEST WSinTransit objectAPI: ".json_encode($objectAPI));
+		$response = connectionAPI($objectAPI);
+
+		$httpCode = $response->httpCode;
+		$resAPI = $response->resAPI;
+
+		log_message('INFO', '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
+
+		$dataResponse = json_decode($resAPI);
+		switch ($httpCode) {
+			case 200:
+				$title = 'Mensaje';
+				$code = 0;
+				// Formato de moneda de acuerdo al país
+				$ledgerBalance = $dataResponse->balance->ledgerBalance;
+				$availableBalance = $dataResponse->balance->availableBalance;
+				$actualBalance = $ledgerBalance + $availableBalance;
+				$ledgerBalance = np_hoplite_decimals($ledgerBalance, $country);
+				$availableBalance = np_hoplite_decimals($availableBalance, $country);
+				$actualBalance = np_hoplite_decimals($actualBalance, $country);
+				$dataResponse->balance->ledgerBalance = $ledgerBalance;
+				$dataResponse->balance->availableBalance = $availableBalance;
+				$dataResponse->balance->actualBalance = $actualBalance;
+
+				$msg = json_encode($dataResponse);
+				break;
+			default:
+				$title = 'Mensaje';
+				$code = 3;
+				$msg = 'Error '+$httpCode;
+		}
+		$response = [
+			'code' => $code,
+			'title' => $title,
+			'msg' => json_decode($msg)
+		];
+
+		return json_encode($response);
+	}
 }

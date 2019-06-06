@@ -167,4 +167,24 @@ class Detail extends CI_Controller {
 
 	}
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function inTransit(){
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		$verificLogin = np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('detail_model', 'detail');
+		$data = (object) [
+			'idPrograma' => $this->input->post('idPrograma'),
+			'tarjeta' => $this->input->post('tarjeta')
+		];
+
+		$this->output->set_content_type('application/json')->set_output($this->detail->WSinTransit($data));
+
+	}
 }
