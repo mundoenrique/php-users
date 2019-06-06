@@ -21,6 +21,7 @@ class Detail extends CI_Controller {
 		$this->lang->load('format');
 
 		$tarjeta = $this->input->post('numt');
+		$prefix = $this->input->post('prefix');
 		$marca = $this->input->post('marca');
 		$empresa = $this->input->post('empresa');
 		$producto = $this->input->post('producto');
@@ -50,7 +51,7 @@ class Detail extends CI_Controller {
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'marca' => $marca, 'producto' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
+		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'prefix' => $prefix, 'marca' => $marca, 'producto' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
 		//INSTANCIA DE SIDERBAR
 		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
 
