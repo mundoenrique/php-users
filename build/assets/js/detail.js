@@ -1,11 +1,12 @@
 var reporte;
 
 $(function(){
+
   var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
- if ($('#filter-month').val() == "0") {
+	if ($('#filter-month').val() == "0") {
     $("#period").text("reciente");
-  }
+	}
 
 //PERIOD SPAN TITLE
 $('#buscar').on('click',function(){
@@ -72,14 +73,15 @@ $('#buscar').on('click',function(){
 
     $('#loading').hide();
     carga_lista(data);
-  });
+	});
+
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 
 	var dataRequest = JSON.stringify ({
 		tarjeta:$("#card").attr("card")
-		})
+	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
@@ -105,7 +107,7 @@ $('#buscar').on('click',function(){
     $("#bloqueado").html(moneda+saldoBloq);
     $("#disponible").html(moneda+saldoDisp);
 
-  });
+	});
 
   $("#download").click(function(event){
     event.preventDefault();
@@ -237,138 +239,6 @@ $('#buscar').on('click',function(){
 
   });
 
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  function carga_lista(data){
-    var clase, cadena;
-    if(data.rc == -61){
-      $(location).attr('href', base_url+'/users/error_gral');
-    }
-    if(data.rc != 0){
-      $("#list-detail").children().remove();
-      cadena='<div id="empty-state" style="position: static;">';
-      cadena+=                '<h2>No se encontraron movimientos</h2>';
-      cadena+=                 '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-      cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
-      cadena+=             '</div>';
-      $("#list-detail").append(cadena);
-      reporte = false;
-    }
-    else{
-      reporte = true;
-      $("#list-detail").children().remove();
-      $.each(data.movimientos,function(pos,item){
-
-        if(item.signo=='+'){
-
-          clase= 'feed-income';
-
-        } else {
-
-          clase='feed-expense';
-        }
-        var date = item.fecha.split('/');
-        var dia = date[0];
-        var mes;
-        var annio = date[2];
-        var moneda=$(".product-info-full").attr("moneda");
-
-        switch (date[1]){
-          case "01":
-            mes="Ene";
-            break;
-          case "02":
-            mes="Feb";
-            break;
-          case "03":
-            mes="Mar";
-            break;
-          case "04":
-            mes="Abr";
-            break;
-          case "05":
-            mes="May";
-            break;
-          case "06":
-            mes="Jun";
-            break;
-          case "07":
-            mes="Jul";
-            break;
-          case "08":
-            mes="Ago";
-            break;
-          case "09":
-            mes="Sep";
-            break;
-          case "10":
-            mes="Oct";
-            break;
-          case "11":
-            mes="Nov";
-            break;
-          case "12":
-            mes="Dic";
-            break;
-        }
-
-        var seccion;
-
-        seccion='<li class="feed-item '+clase+'">';
-        seccion+=   '<div class="feed-date">'+dia+'<span class="feed-date-month">'+mes+'</span><span class="feed-date-year">'+annio+'</span></div>';
-        if (item.signo == "-") {
-        seccion+= item.concepto+'<span class="money-amount"> '+'- '+moneda+' '+item.monto+'</span>';
-        }else{
-        seccion+= item.concepto+'<span class="money-amount"> '+moneda+' '+item.monto+'</span>';
-        }
-        seccion+= '<ul class="feed-metadata">'
-        seccion+= '<li class="feed-metadata-item"><span aria-hidden="true" class="icon-file-text"></span> '+item.referencia+'</li>'
-        seccion+= '</ul></li>';
-
-        $('#list-detail').append(seccion);
-
-
-      });
-
-      $("#estadisticas").kendoChart({
-
-        legend: {
-          position: "top",
-          visible: false
-        },
-        seriesDefaults: {
-          labels: {
-            template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-            position: "outsideEnd",
-            visible: false,
-            background: "transparent",
-          }
-        },
-        seriesColors: ["#E74C3C", "#2ECC71"],
-        series: [{
-          type: "donut",
-          overlay: {
-            gradient: "none"
-          },
-          data: [{
-            category: "Cargos",
-            value: parseFloat(parseFloat(data.totalCargos).toFixed(1))
-          }, {
-            category: "Abonos",
-            value: parseFloat(parseFloat(data.totalAbonos).toFixed(1))
-          }]
-        }],
-        tooltip: {
-          visible: true,
-          template: "#= category # - #= kendo.format('{0:P}', percentage) #"
-        }
-      });
-
-    }
-  }
-
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
   // MODAL TERMINOS Y CONDICIONES
   $(".label-inline").on("click", "a", function() {
 
@@ -384,4 +254,138 @@ $('#buscar').on('click',function(){
 
   });
 
-}); //FIN
+}); //FIN Document Load
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function carga_lista(data) {
+	var cadena, seccion;
+	if (data.rc == -61) {
+		$(location).attr('href', base_url + '/users/error_gral');
+	} if (data.rc != 0) {
+		$("#list-detail").children().remove();
+		cadena = '<div id="empty-state" style="position: static;">';
+		cadena += '<h2>No se encontraron movimientos</h2>';
+		cadena += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
+		cadena += '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+		cadena += '</div>';
+		$("#list-detail").append(cadena);
+		reporte = false;
+	} else {
+		reporte = true;
+		$("#list-detail").children().remove();
+
+		$.each(data.movimientos, function (pos, item) {
+			seccion = feed_item(item);
+			$('#list-detail').append(seccion);
+		});
+
+		$("#estadisticas").kendoChart({
+
+			legend: {
+				position: "top",
+				visible: false
+			},
+			seriesDefaults: {
+				labels: {
+					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+					position: "outsideEnd",
+					visible: false,
+					background: "transparent",
+				}
+			},
+			seriesColors: ["#E74C3C", "#2ECC71"],
+			series: [{
+				type: "donut",
+				overlay: {
+					gradient: "none"
+				},
+				data: [{
+					category: "Cargos",
+					value: parseFloat(parseFloat(data.totalCargos).toFixed(1))
+				}, {
+					category: "Abonos",
+					value: parseFloat(parseFloat(data.totalAbonos).toFixed(1))
+				}]
+			}],
+			tooltip: {
+				visible: true,
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+			}
+		});
+
+	}
+}
+
+function feed_item(item) {
+	var clase;
+
+	if (item.signo == '+') {
+
+		clase = 'feed-income';
+
+	} else {
+
+		clase = 'feed-expense';
+	}
+	var date = item.fecha.split('/');
+	var dia = date[0];
+	var mes;
+	var annio = date[2];
+	var moneda = $(".product-info-full").attr("moneda");
+
+	switch (date[1]) {
+		case "01":
+			mes = "Ene";
+			break;
+		case "02":
+			mes = "Feb";
+			break;
+		case "03":
+			mes = "Mar";
+			break;
+		case "04":
+			mes = "Abr";
+			break;
+		case "05":
+			mes = "May";
+			break;
+		case "06":
+			mes = "Jun";
+			break;
+		case "07":
+			mes = "Jul";
+			break;
+		case "08":
+			mes = "Ago";
+			break;
+		case "09":
+			mes = "Sep";
+			break;
+		case "10":
+			mes = "Oct";
+			break;
+		case "11":
+			mes = "Nov";
+			break;
+		case "12":
+			mes = "Dic";
+			break;
+	}
+
+	var seccion;
+
+	seccion = '<li class="feed-item ' + clase + '">';
+	seccion += '<div class="feed-date">' + dia + '<span class="feed-date-month">' + mes + '</span><span class="feed-date-year">' + annio + '</span></div>';
+	if (item.signo == "-") {
+		seccion += item.concepto + '<span class="money-amount"> ' + '- ' + moneda + ' ' + item.monto + '</span>';
+	} else {
+		seccion += item.concepto + '<span class="money-amount"> ' + moneda + ' ' + item.monto + '</span>';
+	}
+	seccion += '<ul class="feed-metadata">'
+	seccion += '<li class="feed-metadata-item"><span aria-hidden="true" class="icon-file-text"></span> ' + item.referencia + '</li>'
+	seccion += '</ul></li>';
+	return seccion;
+}
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
