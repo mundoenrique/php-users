@@ -76,6 +76,27 @@
 </div>
 
 
+<!-- MODAL SESION ACTIVA -->
+
+<div id="sesion-activa" style='display:none'>
+  <header>
+    <h2>Información</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+      <p>
+      Tienes una sesión activa en otra ubicación. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>Cerrar sesión</strong>.<br>
+      Pulsa <strong>Aceptar</strong> para cerrarla y continuar.
+      </p>
+    </div>
+    <div class="form-actions">
+      <button id="activa">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+
 <!-- MODAL VALIDACION RECPATCHA-->
 
 <div id="dialog-validate" style='display:none'>
