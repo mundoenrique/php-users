@@ -101,9 +101,8 @@ define('WS_KEY', $_SERVER['WS_KEY']);
 define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
 	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
 );
-define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER'])
-&& preg_match('/^(files|database|redis|memcached)$/i', $_SERVER['SESS_DRIVER']) ?
-	$_SERVER['SESS_DRIVER'] : NULL
+define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER']) ?
+	$_SERVER['SESS_DRIVER'] : 'files'
 );
 define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
 	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
