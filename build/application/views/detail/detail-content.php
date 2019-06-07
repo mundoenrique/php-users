@@ -65,9 +65,11 @@ $cpo_cook = $this->security->get_csrf_hash();
 								<li class="stack-item">
 									<a id="print_detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print"></span></a>
 								</li>
+								<?php if($country != 'Ec-bp'): ?>
 								<li class="stack-item">
 									<a id="download"  href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download"></span></a>
 								</li>
+								<?php endif; ?>
 								<li class="stack-item">
 									<a id="downloadxls"  href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel"></span></a>
 								</li>
@@ -84,7 +86,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 									</div>
 								</ul>
 								<form id='form' method='post' action="detalles/exportar">
-									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 									<input id="tarjeta" type="hidden" name="tarjeta" value="" />
 									<input id="mes" type="hidden" name="mes" value="" />
 									<input id="anio" type="hidden" name="anio" value="" />

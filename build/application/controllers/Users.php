@@ -417,8 +417,18 @@ class Users extends CI_Controller {
 	public function CallWsActualizarPassword()
 	{
 
-		$passwordOld = $this->input->post('passwordOld');
-		$passwordNew = $this->input->post('passwordNew');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$passwordOld = $dataRequest->passwordOld;
+		$passwordNew = $dataRequest->passwordNew;
 
 		$this->load->model('users_model','actualizarPassword');
 
@@ -445,9 +455,19 @@ class Users extends CI_Controller {
 	public function CallWsCrearPasswordSms()
 	{
 
-		$id_ext_per = $this->input->post('id_ext_per');
-		$claveSMS = $this->input->post('claveSMS');
-		$nroMovil = $this->input->post('nroMovil');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$id_ext_per = $dataRequest->id_ext_per;
+		$claveSMS = $dataRequest->claveSMS;
+		$nroMovil = $dataRequest->nroMovil;
 
 		$this->load->model('users_model','passwordSmsCrear');
 
@@ -487,8 +507,18 @@ class Users extends CI_Controller {
 	public function CallWsActualizarPasswordOperaciones()
 	{
 
-		$passwordOperacionesOld = $this->input->post('passwordOperacionesOld');
-		$passwordOperaciones = $this->input->post('passwordOperaciones');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$passwordOperacionesOld = $dataRequest->passwordOperacionesOld;
+		$passwordOperaciones = $dataRequest->passwordOperaciones;
 
 		$this->load->model('users_model','actualizarPasswordOperaciones');
 

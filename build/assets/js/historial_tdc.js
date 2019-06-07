@@ -171,17 +171,30 @@ base_cdn = $('body').attr('data-app-cdn');
 	function buscar_historial(ctaOrigen,mes,anio){
 		var status, clase,clase1, cargando, tipo = 'Transferencia realizada';
 		cargando = '<div id ="loading" class="data-indicator" style="text-align: center;">';
-        cargando +=     '<h3 style="border-bottom: 0px;">Cargando</h3>';
-        cargando +=     '<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>';
-        cargando += '</div>';
-				$('#carga').append(cargando);
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-		$.post(base_url +"/historial/historial",{"noTarjeta":ctaOrigen,"tipoOperacion":"P2C","mes":mes,"anio":anio, cpo_name: cpo_cook},function(data){
+		cargando +=     '<h3 style="border-bottom: 0px;">Cargando</h3>';
+		cargando +=     '<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>';
+		cargando += '</div>';
+		$('#carga').append(cargando);
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		var dataRequest = JSON.stringify ({
+			noTarjeta:ctaOrigen,
+			tipoOperacion:"P2C",
+			mes:mes,
+			anio:anio
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url +"/historial/historial", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == -61){
-            	$(location).attr('href', base_url+'/users/error_gral');
-        	}
+          $(location).attr('href', base_url+'/users/error_gral');
+      }
 			if(data.rc==0){
 				$('#carga').children().remove();
 				$('#list-detail').children().remove();

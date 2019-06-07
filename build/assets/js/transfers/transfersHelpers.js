@@ -77,13 +77,22 @@ function confirmPassOperac(clave)
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 
+	var dataRequest = JSON.stringify ({
+		clave:hex_md5(clave)
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
 	$.ajax({
 		url: base_url +"/transferencia/operaciones",
-		data: {"clave":hex_md5(clave), cpo_name: cpo_cook},
+		data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 		type: "post",
 		dataType: 'json',
 		async: false,
-		success: function(data) {
+		success: function(dataResponse) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(dataResponse.code, dataResponse.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			response = $.parseJSON(data.response);
 			switch (response.rc) {
 				case 0:
@@ -328,21 +337,30 @@ function makeTransfer(type)
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
+
+		var dataRequest = JSON.stringify ({
+			cuentaOrigen : sourceNumber,
+			cuentaDestino : item.accountDes,
+			monto : item.amountDest,
+			descripcion : item.conceptDest,
+			tipoOpe : type,
+			idUsuario : nameSource,
+			id_afil_terceros: item.idAfil,
+			expDate : expDate
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
 		$.ajax({
 			url: base_url + '/transferencia/procesar',
-			data: {"cuentaOrigen" : sourceNumber,
-			"cuentaDestino" : item.accountDes,
-			"monto" : item.amountDest,
-			"descripcion" : item.conceptDest,
-			"tipoOpe" : type,
-			"idUsuario" : nameSource,
-			"id_afil_terceros": item.idAfil,
-			"expDate" : expDate,
-			"cpo_name": cpo_cook},
+			data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 			type: "post",
 			dataType: 'json',
 			async: false,
-			success: function(data) {
+			success: function(response) {
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				var rc, classR = 'data-error', iconR = 'icon-cancel-sign', transferId = '', msg,
 					men = '';
 				$('#next-step span').remove();

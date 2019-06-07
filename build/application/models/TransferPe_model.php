@@ -95,8 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
-
-			//return json_encode($response);
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 		}
 
@@ -225,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'msg' => $this->msg,
 				'modalType' => $this->modalType
 			];
-			//return json_encode($response);
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 		}
 
@@ -298,7 +297,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					'listaTransferenciasRealizadas' => $this->listaTransferenciasRealizadas,
 				];
 
-			return json_encode($response);
+				$response = $this->cryptography->encrypt($response);
+				return json_encode($response);
 		}
 
 		//Transferencias
@@ -396,6 +396,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 
 		}
@@ -499,6 +500,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						break;
 				}
 			}
+			$response = $this->cryptography->encrypt($response);
 			return json_encode($response);
 		}
 
