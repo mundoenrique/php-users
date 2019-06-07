@@ -11,7 +11,17 @@ $(function() {
 				var cpo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
-				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card"), cpo_name: cpo_cook},function(data){
+
+				var dataRequest = JSON.stringify ({
+					tarjeta:$(item).attr("card")
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/dashboard/saldo",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 					var moneda=$(".dashboard-item").attr("moneda");
 					var id=$(".dashboard-item").attr("doc");
 					var saldo=data.disponible;
@@ -114,8 +124,17 @@ $(function() {
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
-		$.post(base_url + "/dashboard/saldo", {"tarjeta":$(this).attr("card"), cpo_name: cpo_cook},
-			function(data) {
+
+		var dataRequest = JSON.stringify ({
+			tarjeta:$(this).attr("card")
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/dashboard/saldo",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				var saldoCtaOrigen = data.disponible;
 				if (typeof saldoCtaOrigen != 'string') {
 					saldoCtaOrigen = "---";
@@ -123,7 +142,7 @@ $(function() {
 
 				$("#balance-available").html(moneda + ' ' + saldoCtaOrigen);
 				$("#balance-available").attr("saldo", saldoCtaOrigen);
-			});
+		});
 
 		$("#agregarCuenta").attr("href","#");
 		$("#agregarCuenta").parents("li").removeClass("disabled-group-action-item");
@@ -574,9 +593,19 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
-	$.post(base_url + "/transferencia/ctaDestino",
-		{"nroTarjeta": nroTarjeta, "prefijo": prefijo,"operacion": operacion, cpo_name: cpo_cook},
-		function(data) {
+
+	var dataRequest = JSON.stringify ({
+		nroTarjeta: nroTarjeta,
+		prefijo: prefijo,
+		operacion: operacion
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+	$.post(base_url + "/transferencia/ctaDestino", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			switch (data.rc) {
 				case 0:
 					$('#wait').hide();

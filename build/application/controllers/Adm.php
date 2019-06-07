@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'adm-affiliation.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'adm-affiliation.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 			//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'adm-affiliation-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js',  'jquery.validate.min.js',  'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'adm-affiliation-bank.js', 'jquery-md5.js', 'jquery.balloon.min.js',  'jquery.validate.min.js',  'additional-methods.min.js');
 			//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANCIA DEL CONTENIDO PARA EL FOOTER
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'adm-affiliation-tdc.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'adm-affiliation-tdc.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 			//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -149,15 +149,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		$this->load->model('adm_model', 'adm');
 
-		$id_afiliacion = $this->input->post('id_afiliacion');
-		$nroPlasticoOrigen = $this->input->post('nroPlasticoOrigen');
-		$nroCuentaDestino = $this->input->post('nroCuentaDestino');
-		$id_ext_per = $this->input->post('id_ext_per');
-		$beneficiario = $this->input->post('beneficiario');
-		$tipoOperacion = $this->input->post('tipoOperacion');
-		$email = $this->input->post('email');
-		$banco = $this->input->post('banco');
-		$expDate = $this->input->post('expDate');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$id_afiliacion = $dataRequest->id_afiliacion;
+		$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
+		$nroCuentaDestino = $dataRequest->nroCuentaDestino;
+		$id_ext_per = $dataRequest->id_ext_per;
+		$beneficiario = (isset($dataRequest->beneficiario)) ? $dataRequest->beneficiario :"";
+		$tipoOperacion = $dataRequest->tipoOperacion;
+		$email = $dataRequest->email;
+		$banco = $dataRequest->banco;
+		$expDate = $dataRequest->expDate;
 
 		$this->output->set_content_type('application/json')->set_output($this->adm->adm_load($id_afiliacion, $nroPlasticoOrigen, $nroCuentaDestino, $id_ext_per, $beneficiario, $tipoOperacion, $email, $banco, $expDate));
 
@@ -176,9 +187,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		$this->load->model('adm_model', 'adm');
 
-		$noTarjeta = $this->input->post('noTarjeta');
-		$noCuentaDestino = $this->input->post('noCuentaDestino');
-		$tipoOperacion = $this->input->post('tipoOperacion');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$noTarjeta = $dataRequest->noTarjeta;
+		$noCuentaDestino = $dataRequest->noCuentaDestino;
+		$tipoOperacion = $dataRequest->tipoOperacion;
 
 		$this->output->set_content_type('application/json')->set_output($this->adm->delete_load($noTarjeta,$noCuentaDestino,$tipoOperacion));
 

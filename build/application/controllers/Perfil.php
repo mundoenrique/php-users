@@ -231,9 +231,9 @@ class Perfil extends CI_Controller {
 
         $this->load->model('perfil_model','verificarEmail');
 
-        $pais		= $this->input->post('pais');
-        $email		= $this->input->post('email');
-        $username	= $this->input->post('username');
+        $pais		= $dataRequest->pais;
+        $email		= $dataRequest->email;
+        $username	= $dataRequest->username;
 
 
         $this->output->set_content_type('application/json')->set_output($this->verificarEmail->verificar_email($pais, $email, $username));
