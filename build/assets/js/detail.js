@@ -2,6 +2,10 @@ var reporte;
 
 $(function(){
 
+	$("#transit-datail-title").hide();
+	$("#list-transit-detail").hide();
+	$("#estadisticas-transit").css("visibility", "hidden");
+
   var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
 	if ($('#filter-month').val() == "0") {
@@ -56,7 +60,48 @@ $('#buscar').on('click',function(){
     $('.submenu-user').attr('style', 'display: none');
   });
 
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	$.ajax({
+		method: 'POST',
+		url: base_url + '/detalles/enTransito',
+		data: {
+			tarjeta: $("#card").text().trim(),
+			idPrograma: $("#card").attr("prefix"),
+			cpo_name: cpo_cook
+		},
+	}).done(function (response) {
+		if (response.code == 0) {
+			response = response.msg;
+			var
+				moneda = $(".product-info-full").attr("moneda"),
+				saldoDisp = response.balance.availableBalance,
+				saldoBloq = response.balance.ledgerBalance,
+				saldoAct = response.balance.actualBalance;
+
+			if (typeof saldoDisp != 'string') {
+				saldoDisp = "---";
+			}
+			if (typeof saldoBloq != 'string') {
+				saldoBloq = "---";
+			}
+			if (typeof saldoAct != 'string') {
+				saldoAct = "---";
+			}
+			$("#bloqueado").html(moneda + ' ' + saldoBloq);
+			$("#disponible").html(moneda + ' ' + saldoDisp);
+			$("#actual").html(moneda + ' ' + saldoAct);
+			console.log(response);
+
+			carga_lista_transito(response);
+		} else {
+			$('#estadisticas-transit').css("display", "none");
+		}
+	}).fail(function () {});
+
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -85,28 +130,53 @@ $('#buscar').on('click',function(){
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
-	$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+	// $.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 
-		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+	// 	data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-    var moneda=$(".product-info-full").attr("moneda");
-    var saldoAct=data.actual;
-    var saldoBloq=data.bloqueo;
-    var saldoDisp=data.disponible;
-    if (typeof saldoAct!='string'){
-      saldoAct="---";
-    }
-    if (typeof saldoBloq!='string'){
-      saldoBloq="---";
-    }
-    if (typeof saldoDisp!='string'){
-      saldoDisp="---";
-    }
+	// 	var moneda=$(".product-info-full").attr("moneda");
+	// 	var saldoAct=data.actual;
+	// 	var saldoBloq=data.bloqueo;
+	// 	var saldoDisp=data.disponible;
+	// 	if (typeof saldoAct!='string'){
+	// 		saldoAct="---";
+	// 	}
+	// 	if (typeof saldoBloq!='string'){
+	// 		saldoBloq="---";
+	// 	}
+	// 	if (typeof saldoDisp!='string'){
+	// 		saldoDisp="---";
+	// 	}
 
-    $("#actual").html(moneda+saldoAct);
-    $("#bloqueado").html(moneda+saldoBloq);
-    $("#disponible").html(moneda+saldoDisp);
+	// 	$("#actual").html(moneda+saldoAct);
+	// 	$("#bloqueado").html(moneda+saldoBloq);
+	// 	$("#disponible").html(moneda+saldoDisp);
 
+	// });
+
+	// Click on Toggle Buttons
+	$("#transitoToogle").click(function () {
+		$("#period-form").hide();
+		$("#download").parent().hide();
+		$("#downloadxls").parent().hide();
+		$("#period").hide();
+		$("#list-detail").hide();
+		$("#estadisticas").hide();
+		$("#transit-datail-title").show();
+		$("#list-transit-detail").fadeIn(1000);
+		$('#estadisticas-transit').css({opacity: 0.0, visibility: "visible", display: "block"}).animate({opacity: 1.0}, 1000);
+	});
+
+	$("#disponibleToogle").click(function () {
+		$("#transit-datail-title").hide();
+		$("#list-transit-detail").hide();
+		$("#estadisticas-transit").hide();
+		$("#period-form").show();
+		$("#download").parent().show();
+		$("#downloadxls").parent().show();
+		$("#period").show();
+		$("#list-detail").fadeIn(1000);
+		$("#estadisticas").fadeIn(1000);
 	});
 
   $("#download").click(function(event){
@@ -258,11 +328,73 @@ $('#buscar').on('click',function(){
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+function carga_lista_transito(data) {
+	var seccion, totalCargos = 0,
+		totalAbonos = 0;
+	if (data.pendingTransactions.length > 0) {
+		$.each(data.pendingTransactions, function (pos, item) {
+			seccion = feed_item(item);
+			$('#list-transit-detail').append(seccion);
+			if (item.signo == "-") {
+				totalCargos += parseFloat(item.monto.replace(".", "").replace(",", "."));
+			} else {
+				totalAbonos += parseFloat(item.monto.replace(".", "").replace(",", "."));
+			}
+		});
+
+		$("#estadisticas-transit").kendoChart({
+
+			legend: {
+				position: "top",
+				visible: false
+			},
+			seriesDefaults: {
+				labels: {
+					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+					position: "outsideEnd",
+					visible: false,
+					background: "transparent",
+				}
+			},
+			seriesColors: ["#E74C3C", "#2ECC71"],
+			series: [{
+				type: "donut",
+				overlay: {
+					gradient: "none"
+				},
+				data: [{
+					category: "Cargos",
+					value: parseFloat(parseFloat(totalCargos).toFixed(1))
+				}, {
+					category: "Abonos",
+					value: parseFloat(parseFloat(totalAbonos).toFixed(1))
+				}]
+			}],
+			tooltip: {
+				visible: true,
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+			}
+		});
+	} else {
+		$('#estadisticas-transit').css("display", "none");
+		cadena = '<div id="empty-state" style="position: static;">';
+		cadena += '<h2>No se encontraron movimientos en tránsito</h2>';
+		cadena += '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+		cadena += '</div>';
+		$("#list-transit-detail").append(cadena);
+	}
+	// habilito toggle button
+	$("#transitoToogle").prop("disabled", false);
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 function carga_lista(data) {
 	var cadena, seccion;
 	if (data.rc == -61) {
 		$(location).attr('href', base_url + '/users/error_gral');
 	} if (data.rc != 0) {
+		$('#estadisticas').css("display", "none");
 		$("#list-detail").children().remove();
 		cadena = '<div id="empty-state" style="position: static;">';
 		cadena += '<h2>No se encontraron movimientos</h2>';
