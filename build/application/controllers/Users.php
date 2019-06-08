@@ -61,6 +61,8 @@ class Users extends CI_Controller {
 
 	public function index()
 	{
+		//VALIDA SI EXISTE SESION
+		np_hoplite_verificSession();
 		$skin = $this->input->cookie('cpo_skin');
 		$this->lang->load('login', $skin);
 		//INSTANCIA PARA TITULO DE PAGINA

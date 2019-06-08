@@ -182,7 +182,22 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 		}
 
 	}
+
+	function np_hoplite_verificSession()
+	{
+
+		$CI =& get_instance();
+
+		if($CI->session->userdata('logged_in') === true){
+			$append = '/dashboard';
+
+			redirect($CI->config->item('base_url') . $append);
+		}
+
+	}
 }
+
+
 
 
 // ------------------------------------------------------------------------

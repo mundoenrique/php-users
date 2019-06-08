@@ -202,7 +202,22 @@ $(function() {
 					});
 
 
-				}else if(data.rc==-194) {
+				} else if(data.rc==-5) {
+					ocultarProcesando();
+					$("#sesion-activa").dialog({
+						modal:"true",
+						width:"440px",
+						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					});
+
+					$("#activa").click(function(){
+						$("#sesion-activa").dialog("close");
+						$(location).attr('href', base_url+'/users/closeSess');
+						habilitar();
+					});
+
+
+				} else if(data.rc==-194) {
 					ocultarProcesando();
 					$("#dialog-overlay").dialog({
 						title:"Password Caducado",

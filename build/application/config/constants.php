@@ -101,6 +101,9 @@ define('WS_KEY', $_SERVER['WS_KEY']);
 define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
 	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
 );
+define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER']) ?
+	$_SERVER['SESS_DRIVER'] : 'files'
+);
 define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
 	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
 );
@@ -114,6 +117,10 @@ define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
 define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 && filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['SESS_MATCH_IP']) : FALSE
+);
+define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
+&& filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 0
 );
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
 	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
@@ -139,4 +146,34 @@ define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
+);
+
+define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
+	$_SERVER['PROXY_IPS'] : ''
+);
+
+define('DB_HOSTNAME', isset($_SERVER['DB_HOSTNAME']) ?
+	$_SERVER['DB_HOSTNAME'] : 'localhost'
+);
+define('DB_PORT', isset($_SERVER['DB_PORT'])
+&& filter_var($_SERVER['DB_PORT'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['DB_PORT']) : NULL
+);
+define('DB_USERNAME', isset($_SERVER['DB_USERNAME']) ?
+	$_SERVER['DB_USERNAME'] : ''
+);
+define('DB_PASSWORD', isset($_SERVER['DB_PASSWORD']) ?
+	$_SERVER['DB_PASSWORD'] : ''
+);
+define('DB_NAME', isset($_SERVER['DB_NAME']) ?
+	$_SERVER['DB_NAME'] : ''
+);
+define('DB_DRIVER', isset($_SERVER['DB_DRIVER']) ?
+	$_SERVER['DB_DRIVER'] : 'mysqli'
+);
+define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
+	$_SERVER['DB_CHARSET'] : 'utf8'
+);
+define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
+	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
 );
