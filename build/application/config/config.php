@@ -387,12 +387,12 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = SESS_TIME_TO_UPDATE;
 $config['sess_regenerate_destroy'] = TRUE;
 
 /*
@@ -530,4 +530,4 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = '';
+$config['proxy_ips'] = PROXY_IPS;

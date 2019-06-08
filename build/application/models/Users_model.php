@@ -13,7 +13,12 @@ class Users_model extends CI_Model {
 	// FUNCION PARA HACER LOGIN
 	public function login_user($username, $password)
 	{
-		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
+        $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
+
+        $valida = $this->validar_session_user($username);
+
+        if($valida === true)
+        {
 
 		$data = json_encode(array(
 			'idOperation' => '1',
@@ -49,34 +54,45 @@ class Users_model extends CI_Model {
 			if($desdata->codPais == 'Pe' && $cookie == 'latodo') {
 				$putSession = TRUE;
 			}
-		}
+        }
 
 		if(!$putSession && $desdata->rc == 0) {
 			$desdata = [
 				'rc'=> -1,
 				'msg'=> 'Usuario o Contraseña inválido'
 			];
-		}
+        }
 
-		if($putSession) {
-			$newdata = [
-				'idUsuario' => $desdata->idUsuario,
-				'userName' => $desdata->userName,
-				'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
-				'token' => $desdata->token,
-				'sessionId' => $desdata->logAccesoObject->sessionId,
-				'keyId' => $desdata->keyUpdate,
-				'logged_in' => true,
-				'pais' => $desdata->codPais,
-				'aplicaTransferencia' => $desdata->aplicaTransferencia,
-				'passwordOperaciones' => $desdata->passwordOperaciones,
-				'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
-				'afiliado' => $desdata->afiliado,
-				'aplicaPerfil' => $desdata->aplicaPerfil,
-				'tyc' => $desdata->tyc
+            if($putSession) {
+                $newdata = [
+                    'idUsuario' => $desdata->idUsuario,
+                    'userName' => $desdata->userName,
+                    'nombreCompleto' => strtolower(substr($desdata->primerNombre, 0, 18)) . ' ' . strtolower(substr($desdata->primerApellido, 0, 18)),
+                    'token' => $desdata->token,
+                    'sessionId' => $desdata->logAccesoObject->sessionId,
+                    'keyId' => $desdata->keyUpdate,
+                    'logged_in' => true,
+                    'pais' => $desdata->codPais,
+                    'aplicaTransferencia' => $desdata->aplicaTransferencia,
+                    'passwordOperaciones' => $desdata->passwordOperaciones,
+                    'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
+                    'afiliado' => $desdata->afiliado,
+                    'aplicaPerfil' => $desdata->aplicaPerfil,
+                    'tyc' => $desdata->tyc
+                ];
+                $this->session->set_userdata($newdata);
+            }
+        }
+        else
+        {
+            $desdata = [
+				'rc'=> -5,
+				'msg'=> 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.'
 			];
-			$this->session->set_userdata($newdata);
-		}
+        }
+
+        //print_r($desdata);
+        //die();
 		$salida = json_encode($desdata);
 
 		log_message('info', 'Salida INICIO DE SESION--->' . $salida);
@@ -96,6 +112,34 @@ class Users_model extends CI_Model {
 
         return json_encode($response);
 
+    }
+
+    public function validar_session_user($username)
+    {
+        $sql = $this->db->select(array('id','username'))
+                                ->where('username',$username)
+                                ->get_compiled_select('cpo_sessions', FALSE);
+
+        $result = $this->db->get()->result_array();
+
+        if(!isset($result[0]['username']))
+        {
+            $data = array(
+                'username' => $username
+            );
+
+            $this->db->where('id', $this->session->session_id);
+            $this->db->update('cpo_sessions', $data);
+
+            return true;
+        }
+        else
+        {
+            $this->db->where('id',$result[0]['id']);
+            $this->db->delete('cpo_sessions');
+
+            return false;
+        }
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -232,7 +232,7 @@ $(function(){
     $('#continuar').on('click', function() {
         var action = $('#continuar').attr('data-action'),
             fe = $('#donor-cardnumber-origen').attr('fe'),
-            cardAction = $('#donor-cardnumber-origen').attr('cardorigen'),
+            cardAction = btoa($('#donor-cardnumber-origen').attr('cardorigen')),
             bloqueo,
             prefix = $('#donor-cardnumber-origen').attr('prefix'),
             form,
