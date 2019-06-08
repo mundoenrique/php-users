@@ -16,7 +16,7 @@ class Users_model extends CI_Model {
         $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
         $valida = $this->validar_session_user($username);
-    
+
         if($valida === true)
         {
 
@@ -55,13 +55,13 @@ class Users_model extends CI_Model {
 				$putSession = TRUE;
 			}
         }
-        
+
 		if(!$putSession && $desdata->rc == 0) {
 			$desdata = [
 				'rc'=> -1,
 				'msg'=> 'Usuario o Contraseña inválido'
 			];
-        } 
+        }
 
             if($putSession) {
                 $newdata = [
@@ -80,11 +80,11 @@ class Users_model extends CI_Model {
                     'aplicaPerfil' => $desdata->aplicaPerfil,
                     'tyc' => $desdata->tyc
                 ];
-                $this->session->set_userdata($newdata);                  
+                $this->session->set_userdata($newdata);
             }
         }
         else
-        {            
+        {
             $desdata = [
 				'rc'=> -5,
 				'msg'=> 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.'
@@ -118,10 +118,10 @@ class Users_model extends CI_Model {
     {
         $sql = $this->db->select(array('id','username'))
                                 ->where('username',$username)
-                                ->get_compiled_select('ci_sessions', FALSE);
-            
+                                ->get_compiled_select('cpo_sessions', FALSE);
+
         $result = $this->db->get()->result_array();
-        
+
         if(!isset($result[0]['username']))
         {
             $data = array(
@@ -129,14 +129,14 @@ class Users_model extends CI_Model {
             );
 
             $this->db->where('id', $this->session->session_id);
-            $this->db->update('ci_sessions', $data);
+            $this->db->update('cpo_sessions', $data);
 
             return true;
         }
         else
         {
             $this->db->where('id',$result[0]['id']);
-            $this->db->delete('ci_sessions');
+            $this->db->delete('cpo_sessions');
 
             return false;
         }
