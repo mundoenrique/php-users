@@ -19,7 +19,7 @@
 		<h2 class="screen-reader">Ingreso</h2>
 	</div>
 	<div class="widget-section">
-		<form accept-charset="utf-8" method="post">
+		<form id="form-login" name="form-login" accept-charset="utf-8" method="post">
 			<fieldset>
 				<div class="field-prepend">
 					<span aria-hidden="true" class="icon-user"></span>
