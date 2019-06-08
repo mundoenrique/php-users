@@ -32,7 +32,7 @@ class Service_model extends CI_Model {
         $idOperation = ($lockType == 'temporary') ? "110" : "111";
         $tokenOper = (isset($dataAccount['token'])) ? $dataAccount['token'] : '';
         $permanentLock = (isset($dataAccount['mot-sol-now'])) ? $dataAccount['mot-sol-now'] : '';
-        $cardNum = $dataAccount['card-bloq'];
+        $cardNum = base64_decode($dataAccount['card-bloq']);
         $fechaExp = $dataAccount['fecha-exp-bloq'];
         $action = ($dataAccount['status'] == 'N') ? 'PB' : '00';
         $action = ($lockType == 'temporary') ? $action : $permanentLock;
@@ -250,7 +250,7 @@ class Service_model extends CI_Model {
 
         //parametros para la solicitud de cambio de PIN
         $tokenOper = (isset($dataAccount['token'])) ? $dataAccount['token'] : '';
-        $cardNum = $dataAccount['card-cambio'];
+        $cardNum = base64_decode($dataAccount['card-cambio']);
         $pinCurrent = $dataAccount['pin-current-now'];
         $pinNew = $dataAccount['new-pin-now'];
         $fechaExp = $dataAccount['fecha-exp-cambio'];
@@ -514,7 +514,7 @@ class Service_model extends CI_Model {
 
         //parametros para la solicitud de bloq y desbloq
         $idOperation = "117";
-        $cardNum = $dataAccount['card-rec'];
+        $cardNum = base64_decode($dataAccount['card-rec']);
         $fechaExp = $dataAccount['fecha-exp-rec'];
         $prefix = $dataAccount['prefix-rec'];
         $idUser = $this->session->userdata('idUsuario');
