@@ -47,6 +47,23 @@
 </body>
 </html>
 
+<!-- MODAL VALIDACION RECPATCHA-->
+
+<div id="dialog-validate" style='display:none'>
+  <header>
+    <h2>Validación de acceso</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+      <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
+    </div>
+    <div class="form-actions">
+      <button id="error-validate">Aceptar</button>
+    </div>
+  </div>
+</div>
+
 <div id="diesession_modal" style='display:none;'>
     <article>
         <section>
