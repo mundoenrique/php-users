@@ -5,7 +5,7 @@ define(ENVIRONMENT, $_SERVER['CI_ENV']);
 define(BASE_URL, $_SERVER['BASE_URL']);
 define(BASE_CDN_URL, $_SERVER['BASE_CDN_URL']);
 define(BASE_CDN_PATH, $_SERVER['BASE_CDN_PATH']);
-define(SKIN, isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
+define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
 
 require_once('error_helpers.php');
 
