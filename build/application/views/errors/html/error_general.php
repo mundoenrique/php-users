@@ -23,8 +23,8 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 		<link href="http://gmpg.org/xfn/11" rel="profile">
 		<link href="<?php echo $favicon; ?>" rel="icon" type="image/png">
 		<?php
-		echo insert_css_cdn('errors.css');
-		echo insert_js_cdn('html5.js');
+		echo NOVO_insert_css_cdn('errors.css');
+		echo NOVO_insert_js_cdn('html5.js');
 		?>
 	</head>
 	<body>
@@ -52,7 +52,7 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 			</div>
 		</footer>
 		<?php
-		echo insert_js_cdn('jquery-3.4.0.min.js');
+		echo novo_insert_js_cdn('jquery-3.4.0.min.js');
 		?>
 		<script>
 			$('#history-back').on('click', function(event) {
