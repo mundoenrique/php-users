@@ -6,7 +6,9 @@ $(function(){
 	$("#list-transit-detail").hide();
 	$("#estadisticas-transit").css("visibility", "hidden");
 
-  var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+	var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+
+	var pais = $("body").attr("data-country");
 
 	if ($('#filter-month').val() == "0") {
     $("#period").text("reciente");
@@ -61,46 +63,86 @@ $('#buscar').on('click',function(){
   });
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
 
-	$.ajax({
-		method: 'POST',
-		url: base_url + '/detalles/enTransito',
-		data: {
-			tarjeta: $("#card").text().trim(),
-			idPrograma: $("#card").attr("prefix"),
-			cpo_name: cpo_cook
-		},
-	}).done(function (response) {
-		if (response.code == 0) {
-			response = response.msg;
-			var
-				moneda = $(".product-info-full").attr("moneda"),
-				saldoDisp = response.balance.availableBalance,
-				saldoBloq = response.balance.ledgerBalance,
-				saldoAct = response.balance.actualBalance;
+	if (pais == 'Ec-bp') {
 
-			if (typeof saldoDisp != 'string') {
-				saldoDisp = "---";
-			}
-			if (typeof saldoBloq != 'string') {
-				saldoBloq = "---";
-			}
-			if (typeof saldoAct != 'string') {
-				saldoAct = "---";
-			}
-			$("#bloqueado").html(moneda + ' ' + saldoBloq);
-			$("#disponible").html(moneda + ' ' + saldoDisp);
-			$("#actual").html(moneda + ' ' + saldoAct);
-			console.log(response);
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
 
-			carga_lista_transito(response);
-		} else {
-			$('#estadisticas-transit').css("display", "none");
-		}
-	}).fail(function () {});
+		var dataRequest = JSON.stringify ({
+			tarjeta:$("#card").attr("card")
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
+			var moneda=$(".product-info-full").attr("moneda");
+			var saldoAct=data.actual;
+			var saldoBloq=data.bloqueo;
+			var saldoDisp=data.disponible;
+			if (typeof saldoAct!='string'){
+				saldoAct="---";
+			}
+			if (typeof saldoBloq!='string'){
+				saldoBloq="---";
+			}
+			if (typeof saldoDisp!='string'){
+				saldoDisp="---";
+			}
+
+			$("#actual").html(moneda+saldoAct);
+			$("#bloqueado").html(moneda+saldoBloq);
+			$("#disponible").html(moneda+saldoDisp);
+
+		});
+
+	} else {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		$.ajax({
+			method: 'POST',
+			url: base_url + '/detalles/enTransito',
+			data: {
+				tarjeta: $("#card").text().trim(),
+				idPrograma: $("#card").attr("prefix"),
+				cpo_name: cpo_cook
+			},
+		}).done(function (response) {
+			if (response.code == 0) {
+				response = response.msg;
+				var
+					moneda = $(".product-info-full").attr("moneda"),
+					saldoDisp = response.balance.availableBalance,
+					saldoBloq = response.balance.ledgerBalance,
+					saldoAct = response.balance.actualBalance;
+
+				if (typeof saldoDisp != 'string') {
+					saldoDisp = "---";
+				}
+				if (typeof saldoBloq != 'string') {
+					saldoBloq = "---";
+				}
+				if (typeof saldoAct != 'string') {
+					saldoAct = "---";
+				}
+				$("#bloqueado").html(moneda + ' ' + saldoBloq);
+				$("#disponible").html(moneda + ' ' + saldoDisp);
+				$("#actual").html(moneda + ' ' + saldoAct);
+
+				carga_lista_transito(response);
+			} else {
+				$('#estadisticas-transit').css("display", "none");
+			}
+		}).fail(function () {});
+
+	}
 
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -119,40 +161,6 @@ $('#buscar').on('click',function(){
     $('#loading').hide();
     carga_lista(data);
 	});
-
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
-
-	var dataRequest = JSON.stringify ({
-		tarjeta:$("#card").attr("card")
-	});
-
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-	// $.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
-
-	// 	data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-
-	// 	var moneda=$(".product-info-full").attr("moneda");
-	// 	var saldoAct=data.actual;
-	// 	var saldoBloq=data.bloqueo;
-	// 	var saldoDisp=data.disponible;
-	// 	if (typeof saldoAct!='string'){
-	// 		saldoAct="---";
-	// 	}
-	// 	if (typeof saldoBloq!='string'){
-	// 		saldoBloq="---";
-	// 	}
-	// 	if (typeof saldoDisp!='string'){
-	// 		saldoDisp="---";
-	// 	}
-
-	// 	$("#actual").html(moneda+saldoAct);
-	// 	$("#bloqueado").html(moneda+saldoBloq);
-	// 	$("#disponible").html(moneda+saldoDisp);
-
-	// });
 
 	// Click on Toggle Buttons
 	$("#transitoToogle").click(function () {
