@@ -152,6 +152,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsLista()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -165,7 +169,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsValidarCuenta()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -198,7 +205,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsValidarUsuario()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -227,7 +237,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsListaTelefonos()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -242,7 +255,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsListaDepartamento()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -267,8 +283,12 @@ class Registro extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public function CallWsListaProfesiones(){
-
+	public function CallWsListaProfesiones()
+	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE
@@ -294,7 +314,10 @@ class Registro extends CI_Controller {
 
 	public function CallWsRegistrar()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
 		np_hoplite_countryCheck($this->session->userdata('pais'));
 		// CARGO EL ARCHIVO DE LENGUAJE

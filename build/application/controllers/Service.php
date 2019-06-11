@@ -47,32 +47,35 @@ class Service extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function CallModel() {
-
-        //VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        //VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-				//Get Data
-				$data = json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
+			//VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			//VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			//Get Data
+			$data = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
 						)
 					)
-				);
-				$dataRequest = $data->formData;
-				//Load model file
-        $this->load->model('service_model', 'service');
-        //Get method
-        $method = 'callWs'.$data->model;
-        //Call the method
-				$dataResponse = $this->service->$method($dataRequest);
-				$dataResponse = $this->cryptography->encrypt($dataResponse);
-        //Response to the js file
-        $this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
+				)
+			);
+			$dataRequest = $data->formData;
+			//Load model file
+			$this->load->model('service_model', 'service');
+			//Get method
+			$method = 'callWs'.$data->model;
+			//Call the method
+			$dataResponse = $this->service->$method($dataRequest);
+			$dataResponse = $this->cryptography->encrypt($dataResponse);
+			//Response to the js file
+			$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
     }
 
 		public function error_services()
