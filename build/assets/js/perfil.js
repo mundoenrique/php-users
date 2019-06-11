@@ -1116,8 +1116,7 @@ $(function(){
 				var dataRequest = JSON.stringify ({
 					pais: pais,
 					email: email,
-					username: userName,
-					cpo_name: cpo_cook
+					username: userName
 				});
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 

@@ -99,6 +99,10 @@ class Report extends CI_Controller {
 
 	public function CallWsGastos()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		// VERIFICA SI LA SESION ESTA ACTIVA
 		np_hoplite_verificLogin();
@@ -127,7 +131,25 @@ class Report extends CI_Controller {
 		$fechaFin = $dataRequest->fechaFin;
 		$idpersona = $dataRequest->idpersona;
 
-		$this->output->set_content_type('application/json')->set_output($this->report->gastos_model($tarjeta, $idpersona, $producto, $tipoConsulta, $fechaIni, $fechaFin));
+		$_POST['tarjeta'] = $tarjeta;
+		$_POST['tipo'] = $tipoConsulta;
+		$_POST['producto'] = $producto;
+		$_POST['fechaIni'] = $fechaIni;
+		$_POST['fechaFin'] = $fechaFin;
+		$_POST['idpersona'] = $idpersona;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('CallWsGastos');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->report->gastos_model($tarjeta, $idpersona, $producto, $tipoConsulta, $fechaIni, $fechaFin);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 
@@ -152,6 +174,17 @@ class Report extends CI_Controller {
 		$idExtEmp = $this->input->post('id_ext_emp');
 		$fechaIni = $this->input->post('fechaIni');
 		$fechaFin = $this->input->post('fechaFin');
+
+		log_message('DEBUG', 'NOVO DATA TO VALIDATE download-file: '.json_encode($_POST));
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('download-file');
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			redirect(base_url('dashboard'), 'location');
+			exi();
+		}
+
 		$response = $this->detail->exp_xls($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
 		$response = json_decode($response);
 
@@ -180,6 +213,16 @@ class Report extends CI_Controller {
 		$idExtEmp = $this->input->post('id_ext_emp');
 		$fechaIni = $this->input->post('fechaIni');
 		$fechaFin = $this->input->post('fechaFin');
+
+		log_message('DEBUG', 'NOVO DATA TO VALIDATE download-file: '.json_encode($_POST));
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('download-file');
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			redirect(base_url('dashboard'), 'location');
+			exi();
+		}
 
 		$response = $this->detail->exp_pdf($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
 		$response = json_decode($response);
