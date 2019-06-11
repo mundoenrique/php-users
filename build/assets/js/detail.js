@@ -240,17 +240,22 @@ $('#buscar').on('click',function(){
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   function carga_lista(data){
-    var clase, cadena;
+		var clase, cadena;
+		var result = '<h2>No se encontraron movimientos</h2>';
+		result += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
     if(data.rc == -61){
       $(location).attr('href', base_url+'/users/error_gral');
-    }
+		}
+		if (data.rc == -9999) {
+			result = '<h2>Atención</h2>';
+			result += '<p>Combinación de caracteres no válida.</p>';
+		}
     if(data.rc != 0){
       $("#list-detail").children().remove();
-      cadena='<div id="empty-state" style="position: static;">';
-      cadena+=                '<h2>No se encontraron movimientos</h2>';
-      cadena+=                 '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-      cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
-      cadena+=             '</div>';
+      cadena = '<div id="empty-state" style="position: static;">';
+      cadena+= result;
+      cadena+= '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+      cadena+= '</div>';
       $("#list-detail").append(cadena);
       reporte = false;
     }

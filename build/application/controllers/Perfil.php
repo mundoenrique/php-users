@@ -93,47 +93,55 @@ class Perfil extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public function CallWsPerfil(){
+    public function CallWsPerfil() {
+				if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
-        // VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        // CARGO EL ARCHIVO DE LENGUAJE
-        $this->lang->load('format');
+			// VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			// CARGO EL ARCHIVO DE LENGUAJE
+			$this->lang->load('format');
 
-        $userName = $this->input->post('userName');
-        $this->load->model('perfil_model', 'perfil');
+			$userName = $this->input->post('userName');
+			$this->load->model('perfil_model', 'perfil');
 
-        $this->output->set_content_type('application/json')->set_output($this->perfil->perfil_load($userName));
-        log_message('info', 'Salida cargar perfil ' . $this->perfil->perfil_load($userName));
+			$this->output->set_content_type('application/json')->set_output($this->perfil->perfil_load($userName));
+			log_message('info', 'Salida cargar perfil ' . $this->perfil->perfil_load($userName));
 
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public function CallWsActualizar(){
+				if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
-        // VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        // VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        // CARGO EL ARCHIVO DE LENGUAJE
-        $this->lang->load('format');
+			// VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			// VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			// CARGO EL ARCHIVO DE LENGUAJE
+			$this->lang->load('format');
 
 
-        $this->load->model('perfil_model', 'actualizar');
+			$this->load->model('perfil_model', 'actualizar');
 
-		$dataRequest = json_decode(
-			$this->security->xss_clean(
-				strip_tags(
-					$this->cryptography->decrypt(
-						base64_decode($this->input->get_post('plot')),
-						utf8_encode($this->input->get_post('request'))
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
 					)
 				)
-			)
-		);
+			);
 
         //print_r($dataRequest);
         $userName = (isset($dataRequest->userName))? $dataRequest->userName :""; // /1
@@ -208,16 +216,20 @@ class Perfil extends CI_Controller {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public function CallWsLista(){
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
-        // VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        // VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        // CARGO EL ARCHIVO DE LENGUAJE
-        $this->lang->load('format');
+			// VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			// VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			// CARGO EL ARCHIVO DE LENGUAJE
+			$this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listado');
-        $this->output->set_content_type('application/json')->set_output($this->listado->lista_paises());
+			$this->load->model('perfil_model', 'listado');
+			$this->output->set_content_type('application/json')->set_output($this->listado->lista_paises());
 
     }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -229,9 +241,20 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model','verificarEmail');
+				$this->load->model('perfil_model','verificarEmail');
 
-        $pais		= $dataRequest->pais;
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $pais			= $dataRequest->pais;
         $email		= $dataRequest->email;
         $username	= $dataRequest->username;
 
@@ -241,67 +264,82 @@ class Perfil extends CI_Controller {
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public function CallWsListaEstado(){
+		public function CallWsListaEstado()
+		{
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
-        // VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        // CARGO EL ARCHIVO DE LENGUAJE
-        $this->lang->load('format');
+			// VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			// CARGO EL ARCHIVO DE LENGUAJE
+			$this->lang->load('format');
 
-        $this->load->model('perfil_model', 'listaEstado');
+			$this->load->model('perfil_model', 'listaEstado');
 
-				$dataRequest = json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
 						)
 					)
-				);
-				$codPais = $dataRequest->codPais;
+				)
+			);
+			$codPais = $dataRequest->codPais;
 
-        $this->output->set_content_type('application/json')->set_output($this->listaEstado->lista_estados($codPais));
+			$this->output->set_content_type('application/json')->set_output($this->listaEstado->lista_estados($codPais));
 
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public function CallWsListaCiudad(){
+		public function CallWsListaCiudad()
+		{
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
-        // VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        // CARGO EL ARCHIVO DE LENGUAJE
-        $this->lang->load('format');
+			// VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			// CARGO EL ARCHIVO DE LENGUAJE
+			$this->lang->load('format');
 
-				$this->load->model('perfil_model', 'listaCiudad');
+			$this->load->model('perfil_model', 'listaCiudad');
 
-				$dataRequest = json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
 						)
 					)
-				);
+				)
+			);
 
-        $codEstado = $dataRequest->codEstado;
-        $codPais = $dataRequest->codPais;
+			$codEstado = $dataRequest->codEstado;
+			$codPais = $dataRequest->codPais;
 
-        $this->output->set_content_type('application/json')->set_output($this->listaCiudad->lista_ciudad($codEstado,$codPais));
+			$this->output->set_content_type('application/json')->set_output($this->listaCiudad->lista_ciudad($codEstado,$codPais));
 
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public function CallWsListaProfesiones(){
+		public function CallWsListaProfesiones()
+		{
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
 
         // VERIFICA SI LA SESION ESTA ACTIVA
         np_hoplite_verificLogin();

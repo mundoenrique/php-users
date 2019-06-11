@@ -96,35 +96,16 @@
   </div>
 </div>
 
-
-<!-- MODAL VALIDACION RECPATCHA-->
-
-<div id="dialog-validate" style='display:none'>
-  <header>
-    <h2>Validación de acceso</h2>
-  </header>
-  <div class="dialog-small" id="dialog">
-    <div class="alert-simple alert-warning" id="message">
-      <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>El sistema ha detectado una actividad no autorizada, por favor intentar nuevamente </p>
-    </div>
-    <div class="form-actions">
-      <button id="error-validate">Aceptar</button>
-    </div>
-  </div>
-</div>
-
-
 <!-- MODAL ERROR -->
 
 <div id="dialog-error" style='display:none'>
   <header>
-    <h2>Error en el sistema</h2>
+    <h2>Conexión Personas</h2>
   </header>
   <div class="dialog-small" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>Ha ocurrido un error en el sistema. Por favor <strong>inténtelo</strong> más tarde.</p>
+      <p>No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong></p>
     </div>
     <div class="form-actions">
       <button id="error">Aceptar</button>

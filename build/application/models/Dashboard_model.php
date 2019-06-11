@@ -24,21 +24,13 @@ class Dashboard_model extends CI_Model {
 			'token' => $this->session->userdata('token')
 		));
 
-		log_message('info', 'Salida dash uno: ' . $data);
-
 		$dataEncry = np_Hoplite_Encryption($data, 1,'dashboard_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
-
-		log_message('info', 'Salida encriptada Dashboard: ' . $data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
-
-		log_message('info', 'Salida dashboard response: ' . $response);
-
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1,'dashboard_load'));
-
-		$salida = json_encode($desdata);
-		log_message('info', 'Salida dashboard desencriptado: ' . $salida);
+		$username = $this->session->userdata('userName');
+		log_message('DEBUG', '['.$username.'] RESPONSE dashboard_load: '.json_encode($desdata->lista));
 
 		return json_encode($desdata);
 	}
