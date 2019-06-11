@@ -241,9 +241,20 @@ class Perfil extends CI_Controller {
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
 
-        $this->load->model('perfil_model','verificarEmail');
+				$this->load->model('perfil_model','verificarEmail');
 
-        $pais		= $dataRequest->pais;
+				$dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
+						)
+					)
+				);
+
+        $pais			= $dataRequest->pais;
         $email		= $dataRequest->email;
         $username	= $dataRequest->username;
 
