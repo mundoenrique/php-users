@@ -74,24 +74,32 @@ $cpo_cook = $this->security->get_csrf_hash();
 									<a id="downloadxls"  href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel"></span></a>
 								</li>
 							</ul>
-							<div class="field-options">
-  							<input id="disponibleToogle" name="toggle" type="radio" checked>
-  							<label for="disponibleToogle">Disponible</label>
+							<?php if($country != 'Ec-bp'): ?>
+								<div class="field-options">
+									<input id="disponibleToogle" name="toggle" type="radio" checked>
+									<label for="disponibleToogle">Disponible</label>
 
-  							<input id="transitoToogle" name="toggle" type="radio" disabled>
-  							<label for="transitoToogle">En tránsito</label>
-  						</div>
+									<input id="transitoToogle" name="toggle" type="radio" disabled>
+									<label for="transitoToogle">En tránsito</label>
+								</div>
+							<?php endif; ?>
 						</nav>
 						<div class="group" id="results">
 							<div class="group-main-view" id="transactions">
-								<h3>Actividad <span id="period"></span> <span id="transit-datail-title">Transacciones Pendientes</span></h3>
+								<h3>Actividad <span id="period"></span>
+								<?php if($country != 'Ec-bp'): ?>
+								<span id="transit-datail-title">Transacciones Pendientes</span>
+								<?php endif; ?>
+								</h3>
 								<ul id= "list-detail" class="feed">
 									<div id ="loading" class="data-indicator" style="text-align: center;">
 										<h3 style="border-bottom: 0px;">Cargando</h3>
 										<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>
 									</div>
 								</ul>
+								<?php if($country != 'Ec-bp'): ?>
 								<ul id="list-transit-detail" class="feed"></ul>
+								<?php endif; ?>
 								<form id='form' method='post' action="detalles/exportar">
 									<input id="tarjeta" type="hidden" name="tarjeta" value="" />
 									<input id="mes" type="hidden" name="mes" value="" />
@@ -102,7 +110,9 @@ $cpo_cook = $this->security->get_csrf_hash();
 							<div class="group-aside-view" id="stats">
 								<h3>Estadísticas</h3>
 								<div id="estadisticas" style="width:300px; height:250px"></div>
+								<?php if($country != 'Ec-bp'): ?>
 								<div id="estadisticas-transit" style="width:300px; height:250px">
+								<?php endif; ?>
 							</div>
 						</div>
 					</section>
