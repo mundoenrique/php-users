@@ -1,5 +1,5 @@
 <?php
-function insert_js_cdn($filename = '') {
+function NOVO_insert_js_cdn($filename = '') {
 	if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
 		$filename = str_replace('.js', '.min.js', $filename);
 	}
@@ -15,7 +15,7 @@ function insert_js_cdn($filename = '') {
 	return $js;
 }
 
-function insert_css_cdn($filename = '', $media = 'screen') {
+function NOVO_insert_css_cdn($filename = '', $media = 'screen') {
 	$skin_folder = '';
 	if (SKIN !== '') $skin_folder = SKIN . '/';
 	if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.css') === false) {

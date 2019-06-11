@@ -105,7 +105,11 @@ class Dashboard extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public function CallWsSaldo(){
+	public function CallWsSaldo() {
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		// VERIFICA SI LA SESION ESTA ACTIVA
 		np_hoplite_verificLogin();
@@ -125,9 +129,22 @@ class Dashboard extends CI_Controller {
 				)
 			)
 		);
-		
+
 		$tarjeta = $dataRequest->tarjeta;
-		$this->output->set_content_type('application/json')->set_output($this->saldo->saldo_load($tarjeta));
+		$_POST['card'] = $tarjeta;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('detail-card');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->saldo->saldo_load($tarjeta);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 

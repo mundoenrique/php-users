@@ -331,6 +331,10 @@ class Users extends CI_Controller {
 
 	public function validarCaptcha()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(
@@ -341,14 +345,35 @@ class Users extends CI_Controller {
 				)
 			)
 		);
+		$token = $dataRequest->token;
+		$user = $dataRequest->user;
 
-		$this->load->model('users_model','user');
+		$_POST['token'] = $token;
+		$_POST['user'] = $user;
 
-		$this->output->set_content_type('application/json')->set_output($this->user->validar_captcha($dataRequest->token,$dataRequest->user));
+		$result = $this->form_validation->run('validatecaptcha');
+
+		unset($_POST);
+
+		if($result) {
+			$this->load->model('users_model','user');
+
+			$this->output->set_content_type('application/json')->set_output($this->user->validar_captcha($dataRequest->token,$dataRequest->user));
+		} else {
+			$response = [
+				'rc'=> -9999
+			];
+			$response = $this->cryptography->encrypt($response);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
 	}
 
 	public function CallWsLogin()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(
@@ -362,15 +387,33 @@ class Users extends CI_Controller {
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
 
-		$this->load->model('users_model','user');
+		$_POST['user'] = $user;
+		$_POST['pass'] = $pass;
 
-		$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass));
+		$result = $this->form_validation->run('login');
+
+		unset($_POST);
+
+		if($result) {
+			$this->load->model('users_model','user');
+			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass));
+		} else {
+			$response = [
+				'rc'=> -9999
+			];
+			$response = $this->cryptography->encrypt($response);
+			$this->output->set_content_type('application/json')->set_output(json_encode($response));
+		}
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public function CallWsObtenerLogin()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(
@@ -394,6 +437,10 @@ class Users extends CI_Controller {
 
 	public function CallWsResetPassword()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(
@@ -418,7 +465,10 @@ class Users extends CI_Controller {
 
 	public function CallWsActualizarPassword()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(
@@ -442,6 +492,10 @@ class Users extends CI_Controller {
 
 	public function CallWsCrearPasswordOperaciones()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		$passwordOperaciones = $this->input->post('passwordOperaciones');
 
@@ -456,6 +510,10 @@ class Users extends CI_Controller {
 
 	public function CallWsCrearPasswordSms()
 	{
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
@@ -480,7 +538,10 @@ class Users extends CI_Controller {
 
 	public function CallWsActualizarPasswordSms()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$id_ext_per = $this->input->post('id_ext_per');
 		$claveSMS = $this->input->post('claveSMS');
 		$nroMovil = $this->input->post('nroMovil');
@@ -494,7 +555,10 @@ class Users extends CI_Controller {
 
 	public function CallWsEliminarPasswordSms()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$id_ext_per = $this->input->post('id_ext_per');
 		$claveSMS = $this->input->post('claveSMS');
 		$nroMovil = $this->input->post('nroMovil');
@@ -508,7 +572,10 @@ class Users extends CI_Controller {
 
 	public function CallWsActualizarPasswordOperaciones()
 	{
-
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 		$dataRequest = json_decode(
 			$this->security->xss_clean(
 				strip_tags(

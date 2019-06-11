@@ -50,9 +50,25 @@ $(function() {
 		if((/^[\wñ]+$/i.test(user)) && (/^[\w!@\*\-\?¡¿+\/.,#]+$/i.test(pass))) {
 			mostrarProcesando(skin);
 			grecaptcha.ready(function() {
-				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'}).then(function(token) {
+				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
+				.then(function(token) {
 					validateCaptcha(token, user, pass)
-				});;
+				}, function (token) {
+					if(!token) {
+						ocultarProcesando();
+						habilitar();
+						$("#dialog-error").dialog({
+							title: "Conexión Personas",
+							modal: "true",
+							width: "440px",
+							open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+						});
+
+						$("#error").click(function () {
+							$("#dialog-error").dialog("close");
+						});
+					}
+				});
 			});
 
 		} else {
@@ -298,7 +314,7 @@ function login(user, pass) {
 			else {
 				ocultarProcesando();
 				$("#dialog-error").dialog({
-					title: "Error en el sistema",
+					title: "Conexión Personas",
 					modal: "true",
 					width: "440px",
 					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }

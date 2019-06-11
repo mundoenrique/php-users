@@ -5,7 +5,7 @@ define(ENVIRONMENT, $_SERVER['CI_ENV']);
 define(BASE_URL, $_SERVER['BASE_URL']);
 define(BASE_CDN_URL, $_SERVER['BASE_CDN_URL']);
 define(BASE_CDN_PATH, $_SERVER['BASE_CDN_PATH']);
-define(SKIN, isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
+define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
 
 require_once('error_helpers.php');
 
@@ -23,8 +23,8 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 		<link href="http://gmpg.org/xfn/11" rel="profile">
 		<link href="<?php echo $favicon; ?>" rel="icon" type="image/png">
 		<?php
-		echo insert_css_cdn('errors.css');
-		echo insert_js_cdn('html5.js');
+		echo NOVO_insert_css_cdn('errors.css');
+		echo NOVO_insert_js_cdn('html5.js');
 		?>
 	</head>
 	<body>
@@ -52,7 +52,7 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 			</div>
 		</footer>
 		<?php
-		echo insert_js_cdn('jquery-3.4.0.min.js');
+		echo NOVO_insert_js_cdn('jquery-3.4.0.min.js');
 		?>
 		<script>
 			$('#history-back').on('click', function(event) {
