@@ -73,7 +73,6 @@ class Service_model extends CI_Model {
          $response = '{"rc":-382,"msg":"Proceso OK","cost_repos_plas":8352}';
          $desdata = json_decode($response);
 				 */
-
         if ($desdata) {
             switch ($desdata->rc) {
                 case 0:
@@ -213,17 +212,17 @@ class Service_model extends CI_Model {
 
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
                         'msg' => 'Hubo un problema. Por favor intente más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
                 'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -373,17 +372,17 @@ class Service_model extends CI_Model {
                     break;
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
                         'msg' => 'Hubo un problema. Por favor intente más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
                 'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -479,17 +478,17 @@ class Service_model extends CI_Model {
                     break;
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
                         'msg' => 'Hubo un problema. Por favor intente más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
                 'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -589,13 +588,13 @@ class Service_model extends CI_Model {
 										$msg = 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.';
                     break;
                 default:
-                    $code = 7;
+                    $code = 3;
                     $title = 'Conexión Personas Online';
                     $msg = 'Se ha presentado un problema en la gestión de su solicitud. Por favor inténtelo nuevamente más tarde.';
 
             }
         } else {
-            $code = 7;
+            $code = 3;
             $title = 'Conexión Personas Online';
             $msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
         }
