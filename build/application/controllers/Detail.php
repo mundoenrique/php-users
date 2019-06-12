@@ -259,7 +259,7 @@ class Detail extends CI_Controller {
 		if(!$result){
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 
-			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+			$response = json_encode($this->cryptography->encrypt(['code'=> 3]));
 		} else {
 			$response = $this->detail->WSinTransit($data);
 		}
