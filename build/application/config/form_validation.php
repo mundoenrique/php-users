@@ -171,6 +171,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
+	'inTransit' => [
+		[
+			'field' => 'idPrograma',
+			'label' => 'idPrograma',
+			'rules' => 'trim|regex_match[/^[\w-]+$/i]|required'
+		],
+		[
+			'field' => 'tarjeta',
+			'label' => 'tarjeta',
+			'rules' => 'trim|regex_match[/^[0-9\*]+$/]|required'
+		]
+	],
 	'download-file' => [
 		[
 			'field' => 'tarjeta',

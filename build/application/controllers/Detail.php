@@ -242,13 +242,29 @@ class Detail extends CI_Controller {
 				)
 			)
 		);
+		$idPrograma = $dataRequest->idPrograma;
+		$tarjeta = $dataRequest->tarjeta;
 
 		$data = (object) [
-			'idPrograma' => $dataRequest->idPrograma,
-			'tarjeta' => $dataRequest->tarjeta
+			'idPrograma' => $idPrograma,
+			'tarjeta' => $tarjeta
 		];
 
-		$this->output->set_content_type('application/json')->set_output($this->detail->WSinTransit($data));
+		$_POST['idPrograma'] = $idPrograma;
+		$_POST['tarjeta'] = $tarjeta;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('inTransit');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->detail->WSinTransit($data);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 }
