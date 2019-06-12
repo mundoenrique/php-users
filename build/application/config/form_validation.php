@@ -73,6 +73,11 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
 		],
 		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|regex_match[/^[\w-]+$/i]|required'
+		],
+		[
 			'field' => 'marca',
 			'label' => 'marca',
 			'rules' => 'trim|regex_match[/^([\w-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
