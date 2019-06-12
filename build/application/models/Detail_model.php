@@ -139,9 +139,9 @@ class Detail_model extends CI_Model {
 		log_message('INFO', '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
 
 		$dataResponse = json_decode($resAPI);
+		$title = 'Mensaje';
 		switch ($httpCode) {
 			case 200:
-				$title = 'Mensaje';
 				$code = 0;
 				// Formato de moneda de acuerdo al país
 				$ledgerBalance = $dataResponse->balance->ledgerBalance;
@@ -157,9 +157,8 @@ class Detail_model extends CI_Model {
 				$msg = json_encode($dataResponse);
 				break;
 			default:
-				$title = 'Mensaje';
 				$code = 3;
-				$msg = 'Error '+$httpCode;
+				$msg = json_encode('Error ' . $httpCode);
 		}
 		$response = [
 			'code' => $code,
@@ -167,6 +166,7 @@ class Detail_model extends CI_Model {
 			'msg' => json_decode($msg)
 		];
 
+		$response = $this->cryptography->encrypt($response);
 		return json_encode($response);
 	}
 }

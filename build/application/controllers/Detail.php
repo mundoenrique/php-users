@@ -231,9 +231,21 @@ class Detail extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('detail_model', 'detail');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
 		$data = (object) [
-			'idPrograma' => $this->input->post('idPrograma'),
-			'tarjeta' => $this->input->post('tarjeta')
+			'idPrograma' => $dataRequest->idPrograma,
+			'tarjeta' => $dataRequest->tarjeta
 		];
 
 		$this->output->set_content_type('application/json')->set_output($this->detail->WSinTransit($data));

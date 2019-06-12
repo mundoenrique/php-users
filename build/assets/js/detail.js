@@ -78,7 +78,7 @@ $('#buscar').on('click',function(){
 
 		$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 
-			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 			var moneda=$(".product-info-full").attr("moneda");
 			var saldoAct=data.actual;
@@ -106,22 +106,32 @@ $('#buscar').on('click',function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 
+		var dataRequest = JSON.stringify ({
+			tarjeta: $("#card").text().trim(),
+			idPrograma: $("#card").attr("prefix"),
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
 		$.ajax({
 			method: 'POST',
 			url: base_url + '/detalles/enTransito',
 			data: {
-				tarjeta: $("#card").text().trim(),
-				idPrograma: $("#card").attr("prefix"),
-				cpo_name: cpo_cook
+				request: dataRequest,
+				cpo_name: cpo_cook,
+				plot: btoa(cpo_cook)
 			},
 		}).done(function (response) {
-			if (response.code == 0) {
-				response = response.msg;
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
+			if (data.code == 0) {
+				data = data.msg;
 				var
 					moneda = $(".product-info-full").attr("moneda"),
-					saldoDisp = response.balance.availableBalance,
-					saldoBloq = response.balance.ledgerBalance,
-					saldoAct = response.balance.actualBalance;
+					saldoDisp = data.balance.availableBalance,
+					saldoBloq = data.balance.ledgerBalance,
+					saldoAct = data.balance.actualBalance;
 
 				if (typeof saldoDisp != 'string') {
 					saldoDisp = "---";
@@ -136,7 +146,7 @@ $('#buscar').on('click',function(){
 				$("#disponible").html(moneda + ' ' + saldoDisp);
 				$("#actual").html(moneda + ' ' + saldoAct);
 
-				carga_lista_transito(response);
+				carga_lista_transito(data);
 			} else {
 				$('#estadisticas-transit').css("display", "none");
 			}
