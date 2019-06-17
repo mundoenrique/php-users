@@ -48,19 +48,25 @@ $(function(){
 	$("#condiciones").on("click", "a", function() {
 
 		if ($("#accept-terms").is("disabled") === false) {
-			if ($("#iso").val() == "Co" || $("#iso").val() == "Ec-bp") {
+			if ($("#iso").val() == "Co") {
 				$("#dialog-rg-Co").dialog({
+					modal:"true",
+					width:"940px",
+					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
+			} else if ($("#iso").val() == "Ec-bp") {
+				$("#dialog-rg-Ec-bp").dialog({
 					modal:"true",
 					width:"940px",
 					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
 			} else if ($("#iso").val() == "Pe" || $("#iso").val() == "Usd") {
 				$("#dialog-rg-Pe").dialog({
-					modal:"true",
-					width:"940px",
-					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+					modal: "true",
+					width: "940px",
+					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
-			} else if ($("#iso").val() == "Ve") {
+			}else if ($("#iso").val() == "Ve") {
 				$("#dialog-rg-Ve").dialog({
 					modal:"true",
 					width:"940px",
@@ -576,7 +582,7 @@ $(function(){
 		}
 
 		//validate letter
-		if ( pswd.match(/[A-z]/) ) {
+		if ( pswd.match(/[a-z]/) ) {
 			$('#letter').removeClass('rule-invalid').addClass('rule-valid');
 			mt=true;
 		} else {
@@ -680,7 +686,7 @@ $(function(){
 					return;
 				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
 					var titleCI = 'Nombre de usuario',
-					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato valido',
+					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato válido.',
 					modalTypeCI = 'alert-warning';
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
@@ -879,13 +885,8 @@ $(function(){
                 tipoId = 1;
             }
 
-			empresa		= "tebca";
-			empresaU	= "TEBCA";
-			empresa2	= "servitebca";
-			empresa2U	= "SERVITEBCA";
-
 			//validate letter, capital letter, caracteres especiales
-			if (password.match(/[A-z]/) && password.match(/[A-Z]/) && password.match(/([!@\*\-\?¡¿+\/.,_#])/) && !password.match(/(.)\1{2,}/) && !password.match(empresa) && !password.match(empresaU) && !password.match(empresa2) && !password.match(empresa2U)) {
+			if (password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/([!@\*\-\?¡¿+\/.,_#])/) && !password.match(/(.)\1{2,}/)) {
 				if(anotherPhone==null || anotherPhone==false){
 					anotherPhone = "";
 				}
@@ -948,7 +949,8 @@ $(function(){
 						}
 				  })
 
-			} else { ///////////////////////////////////
+			} else {
+				$("#load_reg").hide();
 
 				$("#registrar").fadeIn();
 
@@ -958,6 +960,10 @@ $(function(){
 					width	:"440px",
 					open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
+
+				$('#close-nopass').on('click', function(){
+					$("#dialogo_oculto").dialog("close");
+				})
 
 			}	//ELSE
 		}//FORM VALID
@@ -1236,37 +1242,37 @@ $(function(){
 			messages: {
 
 				"tipo_identificacion" : "Debe Seleccionar su Tipo de Identificación.",															//1
-				"numero_identificacion" : "El campo Número de identificación NO puede estar vacío y debe contener solo números.",				//2
+				"numero_identificacion" : "El campo Número de identificación no puede estar vacío y debe contener solo números.",				//2
 				"dig-ver": "Dígito verificador inválido.",
-				"primer_nombre" : "El campo Primer Nombre NO puede estar vacío y debe contener solo letras.",									//3
+				"primer_nombre" : "El campo Primer Nombre no puede estar vacío y debe contener solo letras.",									//3
 				"segundo_nombre" : "El campo Segundo Nombre debe contener solo letras.",														//4
-				"primer_apellido" : "El campo Apellido Paterno NO puede estar vacío y debe contener solo letras.",								//5
+				"primer_apellido" : "El campo Apellido Paterno no puede estar vacío y debe contener solo letras.",								//5
 				"segundo_apellido" : "El campo Apellido Materno debe contener solo letras.",													//6
 				"lugar_nacimiento" : "El campo Lugar de Nacimiento debe contener solo letras.",													//7
 				"dia" : {																														//8
-					"required"	: "El campo Día NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Día NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Día no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Día no puede estar vacío y debe contener solo números.",
 					"range":"El Día debe estar comprendido entre 1 y 31."
 				},
 				"mes" : {																														//9
-					"required"	: "El campo Mes NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Mes NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Mes no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Mes no puede estar vacío y debe contener solo números.",
 					"fecha_invalida" : "Usted introdujo una fecha inválida.",
 				},
 				"ano" : {																														//10
-					"required"	: "El campo Año NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Año NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Año no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Año no puede estar vacío y debe contener solo números.",
 					"min" : "Por favor ingrese un Año de nacimiento válido."
 				},
-				"nacionalidad" : "El campo Nacionalidad NO puede estar vacío.",
-				"tipo_direccion" : "El campo Tipo Dirección NO puede estar vacío",																//14																									//14
+				"nacionalidad" : "El campo Nacionalidad no puede estar vacío.",
+				"tipo_direccion" : "El campo Tipo Dirección no puede estar vacío",																//14																									//14
 				"codigo_postal" : "El campo Código Postal debe contener solo números.",															//15
-				"pais_Residencia" : "El campo País de Residencia NO puede estar vacío y debe contener solo letras.",							//16
-				"departamento" : "El campo Departamento NO puede estar vacío.",																	//17
-				"provincia" : "El campo Provincia NO puede estar vacío.",																		//18
-				"distrito" : "El campo Distrito NO puede estar vacío.",																			//19
-				"direccion" : "El campo Dirección NO puede estar vacío.",																		//20
-				"correo" : "El correo electrónico NO puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com).",				//21
+				"pais_Residencia" : "El campo País de Residencia no puede estar vacío y debe contener solo letras.",							//16
+				"departamento" : "El campo Departamento no puede estar vacío.",																	//17
+				"provincia" : "El campo Provincia no puede estar vacío.",																		//18
+				"distrito" : "El campo Distrito no puede estar vacío.",																			//19
+				"direccion" : "El campo Dirección no puede estar vacío.",																		//20
+				"correo" : "El correo electrónico no puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com).",				//21
 				"confirm-correo" : "El campo confirmar correo electrónico debe coincidir con su correo electrónico.",							//22
 				"telefono_fijo" : {																												//23
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
@@ -1275,8 +1281,8 @@ $(function(){
 					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres numéricos."
 				},
 				"telefono_movil" : {																											//24
-					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
-                    "number"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
+					"required"		: "El campo Teléfono Móvil no puede estar vacío y debe contener solo números.",
+                    "number"		: "El campo Teléfono Móvil no puede estar vacío y debe contener solo números.",
                     "numberEqual3"	: "Teléfono Móvil está repetido.",
 					"minlength"		: "El campo Teléfono Móvil debe contener como mínimo 7 caracteres numéricos.",
 					"maxlength"		: "El campo Teléfono Móvil debe contener máximo 11 caracteres numéricos."
@@ -1287,17 +1293,17 @@ $(function(){
 					"minlength"		: "El campo Otro Teléfono debe contener como minímo 7 caracteres númericos.",
 					"maxlength"		: "El campo Otro Teléfono  debe contener máximo 11 caracteres númericos."
                 },
-				"ruc_laboral" : "El campo Teléfono Móvil NO puede estar vacío.",																//27
-				"centro_laboral" : "El campo Centro Laboral NO puede estar vacío.",
-				"ocupacion_laboral" : "El campo Ocupación Laboral NO puede estar vacío y debe contener solo letras.",							//31
+				"ruc_laboral" : "El campo Teléfono Móvil no puede estar vacío.",																//27
+				"centro_laboral" : "El campo Centro Laboral no puede estar vacío.",
+				"ocupacion_laboral" : "El campo Ocupación Laboral no puede estar vacío y debe contener solo letras.",							//31
 				"cargo_laboral" : "El campo Cargo Laboral debe contener solo letras.",															//32
 				"ingreso" : "El campo Ingreso promedio mensual debe contener solo números.",																												//33
-				"desem_publico" : "El campo ¿Desempeñó cargo público en últimos 2 años? NO puede estar vacío.",									//34
-				"cargo_publico" : "El campo Cargo Público NO puede estar vacío y debe contener solo letras.",									//35
-				"institucion" : "El campo Institución NO puede estar vacío.",																	//36
-				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? NO puede estar vacío.",	//37
+				"desem_publico" : "El campo ¿Desempeñó cargo público en últimos 2 años? no puede estar vacío.",									//34
+				"cargo_publico" : "El campo Cargo Público no puede estar vacío y debe contener solo letras.",									//35
+				"institucion" : "El campo Institución no puede estar vacío.",																	//36
+				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"username" : {																													//38
-					"required" : "El campo Usuario NO puede estar vacío.",
+					"required" : "El campo Usuario no puede estar vacío.",
 					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},

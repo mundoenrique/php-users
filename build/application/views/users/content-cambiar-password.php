@@ -130,7 +130,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 
 		<div id="dialog-clave-inv1" style='display:none'>
 			<header>
-				<h2>Error en campos</h2>
+				<h2>Cambio de contraseña</h2>
 			</header>
 			<div class="dialog-small" id="dialog">
 				<div class="alert-simple alert-warning" id="message">

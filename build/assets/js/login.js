@@ -27,6 +27,13 @@ $(function() {
 		});
 	}
 
+	$('#username, #userpwd').on('focus', function() {
+		$(this)
+		.removeAttr('class')
+		.attr('placeholder', '');
+	});
+
+
 	$("#login").click(function() {
 		$('#username').removeAttr("class");
 		$('#userpwd').removeAttr("class");
@@ -36,12 +43,16 @@ $(function() {
 		pass = $('#userpwd').val();
 
 		if (user == '' || pass == '') {
-
 			if (user == '') {
-				$('#username').addClass("field-error");
+				$('#username')
+				.addClass("field-error")
+				.attr('placeholder', 'Campo obligatorio')
 			}
 			if (pass == '') {
-				$('#userpwd').addClass("field-error");
+				$('#userpwd')
+				.addClass("field-error")
+				.attr('placeholder', 'Campo obligatorio')
+
 			}
 			return
 		}
