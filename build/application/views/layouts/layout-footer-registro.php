@@ -26,6 +26,18 @@
 			</div>
 		</div>
 
+		<div id="dialog-rg-Ec-bp" style='display:none'>
+			<div class="dialog-content">
+				<header>
+					<h2>Condiciones Generales, Términos de Uso y Confidencialidad</h2>
+				</header>
+				<p style="color:red; font-size: 60px; margin-top: 40px;"><strong>TEXTO NO SUMINISTRADO.</strong></p>
+			</div>
+			<div class="form-actions">
+				<button id="aceptar"> Aceptar </button>
+			</div>
+		</div>
+
 		<div id="dialog-rg-Pe" style="display:none">
 			<div class="dialog-content">
 				<header>
@@ -83,7 +95,7 @@
 				<p>Los Usuarios, de conformidad con las políticas de seguridad y privacidad de La Plataforma, podrán manifestar expresamente, por los mecanismos de comunicación que La Empresa ponga a su disposición, si no desea recibir mensajes electrónicos comerciales en sus diversas facetas, en cuyo caso La Empresa cesará dichos envíos y aplicará las medidas correctivas amigables correspondientes.</p>
 				<p>La Empresa se reserva, a su total discreción, la posibilidad de emplear todos los medios necesarios a su alcance para retirar de forma inmediata al Usuario que infrinja cualquiera de las condiciones de seguridad  y privacidad de La Plataforma tecnológica, lo cual incluye que el Usuario haya enviado información falsa que no sea susceptible la verificación de su autenticidad. Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma, se aplicará lo dispuesto en la Ley Especial contra Delitos Informáticos vigente en la República Bolivariana de Venezuela así como, cualquier otra normativa que le aplique.</p>
 				<p>Igualmente, La Empresa tiene el derecho de cambiar las políticas de seguridad y privacidad, siendo que todo cambio será publicado en esta Plataforma a los fines de notificar a sus Usuarios. </p>
-				
+
 			</div>
 			<div class="form-actions">
 				<button id="aceptar"> Aceptar </button>

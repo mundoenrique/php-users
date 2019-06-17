@@ -81,7 +81,7 @@ switch($skin){
 
 		 <div id="dialog-login-error" style='display:none'>
 		 	<header>
-				<h2>Error en campos</h2>
+				<h2>Campos inválidos</h2>
 			</header>
 			<div class="dialog-small" id="dialog">
 				<div class="alert-simple alert-error" id="message">
