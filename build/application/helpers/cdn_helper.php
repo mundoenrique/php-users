@@ -37,7 +37,7 @@ if ( ! function_exists('insert_js_cdn'))
         $fileurl = $url_cdn . 'js/' . $filename;
         $version = '';
         if (file_exists($filepath)) {
-					$version = '?v=' . date('Ymd-B', filemtime($filepath));
+					$version = '?v=' . date('Ymd-U', filemtime($filepath));
 				}
 
         $js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
@@ -70,7 +70,7 @@ if ( ! function_exists('insert_css_cdn'))
         $fileurl = $url_cdn . 'css/' . $skin_folder .  $filename;
         $version = '';
         if (file_exists($filepath)) {
-					$version = '?v=' . date('Ymd-B', filemtime($filepath));
+					$version = '?v=' . date('Ymd-U', filemtime($filepath));
 				}
 
         $css = '<link href="' . $fileurl . $version .  '" media="' . $media . '" rel="stylesheet" type="text/css" />' . "\n";
@@ -96,7 +96,7 @@ if ( ! function_exists('insert_image_cdn'))
 		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
 		$version = '';
 		if (file_exists($filepath)) {
-			$version = '?v='.date('Ymd-B', filemtime($filepath));
+			$version = '?v='.date('Ymd-U', filemtime($filepath));
 		}
 		$dash = $dash ? 'class="'.$dash.'" id="cardImage"' : '';
 		$img='<img src="'.$url_cdn.'img/products/'.$country.'/'.$filename.$version.'"  width="200" height="130" alt="" '.$dash.'>';
