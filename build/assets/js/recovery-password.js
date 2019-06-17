@@ -105,7 +105,7 @@ base_cdn = $('body').attr('data-app-cdn');
 
 			messages: {
 
-				"email": "El correo electrónico NO puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+				"email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
 				"card-holder-id": "Debe introducir su número de identidad"
 			}
 		}); // VALIDATE
