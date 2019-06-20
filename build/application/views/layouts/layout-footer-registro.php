@@ -121,7 +121,7 @@
 						<!-- <li class="certificate-item iso-9001">Fondonorma ISO 9001</li> -->
 						<li class="certificate-item pci">PCI Security Standards Council</li>
 					</ul>
-					<p id="app-copyright">© 2004-<?php echo date('Y'); ?> Todos los derechos reservados.</p>
+					<p id="app-copyright"><?php echo date('Y'); ?> Todos los derechos reservados.</p>
 				</div>
 			</div>
 		</footer>
