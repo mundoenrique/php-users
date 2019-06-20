@@ -1304,7 +1304,7 @@ $(function(){
 				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"username" : {																													//38
 					"required" : "El campo Usuario no puede estar vacío.",
-					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
+					"username": "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
 				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
