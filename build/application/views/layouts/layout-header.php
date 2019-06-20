@@ -22,6 +22,7 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 			switch($this->router->class) {
 				case 'registro':
 				case 'service':
+				case 'report':
 					$sendBaseCss = false;
 					break;
 			}
