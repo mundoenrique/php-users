@@ -46,9 +46,6 @@ class Users_model extends CI_Model {
 			if($desdata->codPais == 'Ec-bp' && $cookie == 'pichincha') {
 				$putSession = TRUE;
 			}
-			if($desdata->codPais == 'Pe' && $cookie == 'latodo') {
-				$putSession = TRUE;
-			}
 		}
 
 		if(!$putSession && $desdata->rc == 0) {

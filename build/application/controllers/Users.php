@@ -98,6 +98,13 @@ class Users extends CI_Controller {
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
 		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'login.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
+		$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+		if(ENVIRONMENT == 'production' && $cookie == 'pichincha') {
+			array_push(
+				$FooterCustomInsertJS,
+				'borders.js'
+			);
+		}
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
 		$content = $this->parser->parse('users/content-login', array('insertRecaptcha'=>$this->recaptcha->getScriptTag()), true);
