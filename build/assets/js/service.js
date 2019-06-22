@@ -129,8 +129,6 @@ $(function(){
 						permisos = $(this).attr("permisos").split(',');
 
 				bloqAction = "Bloquear ";
-        pais  = $(this).attr("pais");
-        options = (pais == 'Ve') ? 'Haz click aquí para solicitar la reposición de PIN para acceso a operaciones en comercios y cajeros automáticos' : options;
 
 					//asignación de permisos
 					options+= '<ul class="product-balance-group services-content">';

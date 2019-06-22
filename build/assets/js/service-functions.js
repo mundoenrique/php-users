@@ -32,8 +32,8 @@ function viewSelect (id) {
         case 'lock':
             $('#msg-block h2').text(bloqAction + 'cuenta');
             into = $('#lock');
-            leave = $('#key, #replace');
-            conceal = $('#change-key, #reason-rep');
+            leave = $('#key, #replace, #recover');
+            conceal = $('#change-key, #reason-rep, #rec-key');
             display = $('#lock-acount, #prevent-bloq');
             $('#mot-sol').prop('disabled', true);
             action = 'lockAccoun';
@@ -42,24 +42,24 @@ function viewSelect (id) {
         case 'key':
             $('#msg-change h2').text('Cambio de PIN');
             into = $('#key');
-            leave = $('#lock, #replace');
-            conceal = $('#lock-acount');
+            leave = $('#lock, #replace, #recover');
+            conceal = $('#lock-acount, #rec-key');
             display = $('#change-key');
             action = 'changePin';
             break;
         case 'replace':
             $('#msg-block h2').text('Solicitud de reposición');
             into = $('#replace');
-            leave = $('#key, #lock');
-            conceal = $('#change-key, #prevent-bloq');
+            leave = $('#lock, #key, #recover');
+            conceal = $('#change-key, #prevent-bloq, #rec-key');
             display = $('#lock-acount, #reason-rep');
             action = 'lockReplace';
             break;
         case 'recover':
             $('#msg-rec h2').text('Solicitud de reposición de PIN');
             into = $('#recover');
-            leave = $('#key, #replace');
-            conceal = $('#change-key, #reason-rep');
+            leave = $('#lock, #key, #replace');
+            conceal = $('#lock-acount, #change-key, #reason-rep');
             display = $('#rec-key, #rec-clave');
             action = 'recoverKey';
             break;
@@ -241,8 +241,8 @@ function notiService (msg, NewClass, oldClass, msgMain) {
 
 //Función para enviar mensajes del sistema al usuario
 function notiSystem (title, message, type, action, param) {
-    var id = (param === 'lock' || param === 'key' || param === 'replace') ? param : null,
-        form = (param != 'lock' && param != 'key' && param != 'replace') ? param : null;
+	var id = (param === 'lock' || param === 'key' || param === 'replace' || param === 'recover') ? param : null,
+	form = (param != 'lock' && param != 'key' && param != 'replace' && param != 'recover') ? param : null;
 
     resetForms(form);//reset de los formularios
     var icon =  (type == 'warning') ? 'warning' :

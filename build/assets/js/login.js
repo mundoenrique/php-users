@@ -337,5 +337,16 @@ function login(user, pass) {
 				});
 			}
 
+			if(skin == 'pichincha') {
+				$('#username')
+				.val('')
+				.attr('placeholder', 'Usuario');
+			}
+			$('#userpwd')
+			.val('')
+			.attr('placeholder', 'Contraseña');
+			user = '';
+			pass = '';
+
 		});
 }
