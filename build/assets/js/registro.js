@@ -1004,7 +1004,7 @@ $(function(){
 
 				"card-holder-pin": {"required":true},
 				"card-number": {"required":true,"number":true, "minlength":16, "maxlength": 16},
-				"card-holder-id": {"required":true,"number":true},
+				"card-holder-id": { "required": true, pattern: /^[a-z0-9]+$/i},
 				"iso": {"required":true},
 				"accept-terms": {"required":true}
 			},

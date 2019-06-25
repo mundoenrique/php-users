@@ -39,7 +39,7 @@ if($skin == 'latodo'){
                             </li>
                             <li class="field-group-item">
                                 <label for="card-holder-id">Documento de Identidad <abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
-                                <input class="field-medium" maxlength="16" id="card-holder-id" name="card-holder-id" type="text" value=""/>
+                                <input class="field-medium" maxlength="18" id="card-holder-id" name="card-holder-id" type="text" value=""/>
                             </li>
                             <li class="field-group-item">
                                 <label for="card-holder-pin">Clave Secreta (PIN) <abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
