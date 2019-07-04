@@ -62,10 +62,10 @@ $cpo_cook = $this->security->get_csrf_hash();
 								<button id="buscar" class="mensual"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 							</div>
 							<ul class="stack stack-extra">
+								<?php if($country != 'Ec-bp'): ?>
 								<li class="stack-item">
 									<a id="print_detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print"></span></a>
 								</li>
-								<?php if($country != 'Ec-bp'): ?>
 								<li class="stack-item">
 									<a id="download"  href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download"></span></a>
 								</li>
