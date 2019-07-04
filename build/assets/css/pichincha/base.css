@@ -1676,10 +1676,9 @@ label.label-inline {
 #head-wrapper {
   height: 60px;
   margin: 0 auto;
-  overflow: hidden;
 	padding: 0;
 	padding-left: 5px;
-  width: 955px;
+  max-width: 955px;
 }
 
 #brand-id,
