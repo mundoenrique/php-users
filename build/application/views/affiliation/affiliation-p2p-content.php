@@ -240,8 +240,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>Se ha enviado el comprobante de esta operación a su correo electrónico.</p>
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
-    <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
-			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
+    <form accept-charset="utf-8" method="GET"  id="formFinAfiliacion">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion">
 

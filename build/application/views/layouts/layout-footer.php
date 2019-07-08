@@ -73,7 +73,7 @@
                     <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p>Sesi&oacute;n pr&oacute;xima a expirar.</p>
                 </div>
                 <div class="form-actions">
-                    <a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Continuar</button></a>
+                    <a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
                 </div>
             </div>
         </section>
