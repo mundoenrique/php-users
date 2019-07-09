@@ -1,5 +1,6 @@
 <?php
 $pais = $this->session->userdata('pais');
+
 $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
 
@@ -14,6 +15,7 @@ switch($skin){
   <article>
     <header>
       <h1>Registro</h1>
+
     </header>
     <section>
       <div id="progress">
@@ -555,12 +557,15 @@ switch($skin){
 <div id="dialogo_disponible" style='display:none'>
   <div id="dialog-confirm">
     <div class="alert-simple alert-error" id="message">
+
+		<?php if ($skin != 'pichincha'): ?>
       <span aria-hidden="true" class="icon-cancel-sign"></span>
+			<?php endif ?>
       <p>El usuario indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor
         verifique e intente nuevamente.</p>
     </div>
     <div class="form-actions">
-      <button id="disp">Aceptar</button>
+      <button id="disp" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
