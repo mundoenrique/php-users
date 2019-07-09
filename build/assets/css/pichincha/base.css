@@ -206,12 +206,12 @@ video {
 @font-face {
 	font-family: 'Prelo';
 	font-style: normal;
-	font-weight: 500;
-	src: url('../../fonts/prelo-medium-webfont.eot');
-	src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-	     url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
-	     url('../../fonts/prelo-medium-webfont.woff') format('woff'),
-	     url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
+	font-weight: 400;
+	src: url('../../fonts/prelo-book-webfont.eot');
+	src: url('../../fonts/prelo-book-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/prelo-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/prelo-book-webfont.woff') format('woff'),
+	     url('../../fonts/prelo-book-webfont.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'Prelo';
@@ -287,21 +287,21 @@ h6 {
 }
 
 h1 {
-	color: #033572;
+	color: #0f265c;
 	font-size: 30px;
 	line-height: 60px;
 	margin: 0;
 }
 
 h2 {
-	color: #033572;
+	color: #0f265c;
 	font-size: 24px;
 	line-height: 30px;
 	margin: 0 0 10px;
 }
 
 h3 {
-	color: #888888;
+	color: #72787A;
 	font-size: 16px;
 	line-height: 30px;
 	margin: 10px 0;
@@ -345,7 +345,7 @@ span.lighten {
 	color: #888888;
 }
 a {
-	color: #033572;
+	color: #0f265c;
 	text-decoration: none;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -1238,7 +1238,7 @@ a.button.product-button span[class*=" icon-"] {
 }
 
 label {
-	color: #333333;
+	color: #72787A;
 	display: block;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -1485,6 +1485,7 @@ label.label-inline {
 	 -webkit-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
 	 -moz-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
 	 box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
+	 outline: none;
  }
 
  .field-success {
@@ -5384,7 +5385,7 @@ label.label-inline {
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	color: #10133f;
+	color: #0f265c;
 }
 
 #validar:hover {
