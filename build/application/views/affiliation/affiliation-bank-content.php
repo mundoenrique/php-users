@@ -124,7 +124,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</form>
 				<div id="msg"></div>
 				<div class="form-actions">
-					<button disabled id="afiliarBank">Afiliar</button>
+					<button disabled id="afiliarBank" class="novo-btn-primary">Afiliar</button>
 				</div>
 			</div>
 		</section>
@@ -208,7 +208,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		?>
 	</ul>
 	<?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
         </div>";
 	?>
 
@@ -256,8 +256,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 					</table>
 				</form>
 				<div class="form-actions">
-					<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button type="reset">Cancelar</button> </a>
-					<button class="continuar">Continuar</button>
+					<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
+					<button class="continuar" class="novo-btn-primary">Continuar</button>
 				</div>
 			</div>
 		</section>
@@ -309,8 +309,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</table>
 			</form>
 			<div class="form-actions">
-				<a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button>No</button> </a>
-				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button>Si</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button class="novo-btn-secondary">No</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button class="novo-btn-primary">Si</button> </a>
 				<p>¿Desea afiliar otra cuenta bancaria para transferencia?</p>
 			</div>
 		</section>
@@ -365,8 +365,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</table>
 			</form>
 			<div class="form-actions">
-				<a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button>No</button> </a>
-				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button>Si</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button class="novo-btn-secondary">No</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button class="novo-btn-primary">Si</button> </a>
 				<p>¿Desea afiliar otra cuenta bancaria para transferencia?</p>
 			</div>
 		</section>
@@ -421,8 +421,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</table>
 			</form>
 			<div class="form-actions">
-				<a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button>No</button> </a>
-				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button>Si</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button class="novo-btn-secondary">No</button> </a>
+				<a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_bank"> <button class="novo-btn-primary">Si</button> </a>
 				<p>¿Desea afiliar otra cuenta bancaria para transferencia?</p>
 			</div>
 		</section>
@@ -435,7 +435,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		<p>La tarjeta que desea afiliar <strong>no permite transferencias.</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 	</div>
 	<div class="form-actions">
-		<button id="invalido2">Aceptar</button>
+		<button id="invalido2" class="novo-btn-primary">Aceptar</button>
 	</div>
 </div>
 
@@ -446,7 +446,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		<p>No se puede realizar el registro. <strong>Cuenta ya afiliada.</strong></p>
 	</div>
 	<div class="form-actions">
-		<button id="invalido3">Aceptar</button>
+		<button id="invalido3" class="novo-btn-primary">Aceptar</button>
 	</div>
 </div>
 
@@ -458,6 +458,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 		<p>El número de cuenta que introdujo no coincide con el banco. Por favor, verifique e intente nuevamente. </p>
 	</div>
 	<div class="form-actions">
-		<button id="banco_inv">Aceptar</button>
+		<button id="banco_inv" class="novo-btn-primary">Aceptar</button>
 	</div>
 </div>

@@ -77,7 +77,7 @@ $cpo_cook = $this->security->get_csrf_hash();
                             </select>
                         </fieldset>
                     </form>
-                    <button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+                    <button id="buscar" class="novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
                 </div>
             </nav>
             <div class="group" id="results">

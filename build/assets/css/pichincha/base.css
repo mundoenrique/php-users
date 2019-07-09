@@ -368,7 +368,6 @@ a:hover {
 	 padding: 0;
  }
  ul li {
-	 line-height: 18px;
 	 list-style: none;
 	 overflow: hidden;
  }
@@ -1242,7 +1241,6 @@ label {
 	display: block;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 14px;
-	line-height: 25px;
 	margin-bottom: 5px;
 	overflow: hidden;
 }
@@ -1254,7 +1252,6 @@ label.label-inline {
 	display: inline-block;
 	font-family: 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 12px;
-	line-height: 35px;
 	margin: 0 30px 10px 0;
 }
  label.label-inline a {
@@ -3351,8 +3348,28 @@ opacity: 1.00 !important;
  #foot-menu ul.menu li.menu-item a {
 	 display: block;
 	 font-weight: 700;
-	 line-height: 25px;
+	 text-decoration:underline;
  }
+
+ #foot-menu ul.menu li.menu-item a:hover{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#f0f0f0;
+}
+#foot-menu ul.menu li.menu-item a:active{
+	display:inline;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#dddbdb;
+}
+
  #foot-menu ul.menu li.menu-item.current-menu-item a {
 	 color: #343735;
  }
@@ -3616,6 +3633,66 @@ opacity: 1.00 !important;
 	 padding-right: 2.1em;
  }
 
+
+/**Estilos de los botones NOVO NEW****/
+
+.novo-btn-primary,.novo-btn-secondary{
+	width:120px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary-modal,.novo-btn-secondary-modal{
+	width:68px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.novo-btn-primary,.novo-btn-primary-modal{
+	background: url('../../img/button-bg.png?rev20190316') left center no-repeat #ffdd00 !important;
+}
+
+.novo-btn-primary:hover{
+	background: url('../../img/button-hover-bg.png?rev20190316') left center no-repeat #ffdd00 !important;
+}
+.novo-btn-primary:active{
+	background: #ffd000;
+}
+.novo-btn-primary-modal:hover{
+	background: url('../../img/button-hover-bg.png?rev20190316') left center no-repeat #ffdd00 !important;
+}
+
+.novo-btn-secondary,.novo-btn-secondary-modal{
+	border: 1px solid #ffdd00 !important;
+	background:white !important;
+}
+/* .novo-btn-secondary-modal{
+	background:white;
+} */
+.novo-btn-secondary:hover{
+	border: 1px solid #ffdd00 !important;
+	background-color: #fffede !important;
+}
+.novo-btn-secondary:active{
+	border: 1px solid #ffdd00 !important;
+	color:#10133f;
+	background-color: #fdfbb5 !important;
+}
+
+.novo-btn-secondary-modal:hover{
+
+	background:#fffede !important;
+	border: 1px solid #ffdd00 !important;
+}
+.novo-btn-secondary-modal:active{
+
+	background:#fdfbb5 !important;
+	border: 1px solid #ffdd00 !important;
+}
+.btn-authorization{
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border: 1px solid #ffdd00;
+}
+/********************************************************/ !important
  input.ui-button {
 	 padding: .4em 1em;
  }

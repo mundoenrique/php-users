@@ -22,7 +22,7 @@
 				<p>Al seleccionar la opción “Acepto las Condiciones de Uso de este sistema”, El Usuario también está aceptando el Reglamento de Uso de las tarjetas prepago publicado en <a href="https://pichincha.miplata.com.co/reglamento" target="_blank">https://www.pichincha.miplata.com.co/reglamento/</a> y <a href="https://pichincha.mibonus.com.co/reglamento" target="_blank">https://www.pichincha.mibonus.com.co/reglamento/.</a></p>
 			</div>
 			<div class="form-actions">
-				<button id="aceptar"> Aceptar </button>
+				<button id="aceptar" class="novo-btn-primary"> Aceptar </button>
 			</div>
 		</div>
 
@@ -34,7 +34,7 @@
 				<p style="color:red; font-size: 60px; margin-top: 40px;"><strong>TEXTO NO SUMINISTRADO.</strong></p>
 			</div>
 			<div class="form-actions">
-				<button id="aceptar"> Aceptar </button>
+				<button id="aceptar" class="novo-btn-primary"> Aceptar </button>
 			</div>
 		</div>
 
@@ -71,7 +71,7 @@
 
 			</div>
 			<div class="form-actions">
-				<button id="aceptar"> Aceptar </button>
+				<button id="aceptar" class="novo-btn-primary"> Aceptar </button>
 			</div>
 		</div>
 
@@ -98,7 +98,7 @@
 
 			</div>
 			<div class="form-actions">
-				<button id="aceptar"> Aceptar </button>
+				<button id="aceptar" class="novo-btn-primary"> Aceptar </button>
 			</div>
 		</div>
 

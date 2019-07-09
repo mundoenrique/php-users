@@ -37,7 +37,7 @@
       <p>Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas. </p>
     </div>
     <div class="form-actions">
-      <button id="caducado">Aceptar</button>
+      <button id="caducado" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@
       <p>Su contraseña <strong>ha cadudado</strong>. </p>
     </div>
     <div class="form-actions">
-      <button id="caducado1">Aceptar</button>
+      <button id="caducado1" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -70,7 +70,7 @@
       <p>Usuario o Contraseña <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-      <button id="invalido">Aceptar</button>
+      <button id="invalido" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -91,7 +91,7 @@
       </p>
     </div>
     <div class="form-actions">
-      <button id="activa">Aceptar</button>
+      <button id="activa" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -108,7 +108,7 @@
       <p>No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong></p>
     </div>
     <div class="form-actions">
-      <button id="error">Aceptar</button>
+      <button id="error" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -123,7 +123,7 @@
       <p>Usted no posee un usuario del portal <strong>Voygo Usuarios</strong>.</p>
     </div>
     <div class="form-actions">
-      <button id="error-voygo">Aceptar</button>
+      <button id="error-voygo" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -141,7 +141,7 @@
       <p>¿Olvidate tu <a href="<?php echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<?php echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
     </div>
     <div class="form-actions">
-      <button id="aceptar">Aceptar</button>
+      <button id="aceptar" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -158,7 +158,7 @@
       </p>
     </div>
     <div class="form-actions">
-      <a href="https://online.tebca.com/personas/"><button>Continuar</button></a>
+      <a href="https://online.tebca.com/personas/"><button class="novo-btn-primary">Continuar</button></a>
     </div>
   </div>
 </div>

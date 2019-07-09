@@ -59,7 +59,7 @@
       <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
     </div>
     <div class="form-actions">
-      <button id="error-validate">Aceptar</button>
+      <button id="error-validate" class="novo-btn-primary">Aceptar</button>
     </div>
   </div>
 </div>
@@ -150,7 +150,7 @@
         <?php endif; ?>
     </div>
     <div class="form-actions">
-        <button id="ok"> Aceptar </button>
+        <button id="ok" class="novo-btn-primary"> Aceptar </button>
     </div>
 
 

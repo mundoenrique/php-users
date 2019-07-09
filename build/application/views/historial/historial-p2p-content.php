@@ -79,7 +79,7 @@ $cpo_cook = $this->security->get_csrf_hash();
                             </select>
                         </fieldset>
                     </form>
-                    <button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+                    <button id="buscar" class="novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
                 </div>
             </nav>
             <div class="group" id="results">
@@ -175,7 +175,7 @@ foreach ($datos->cuentaOrigen as $value) {
         ?>
     </ul>
     <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
         </div>";
     ?>
 
