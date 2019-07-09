@@ -648,8 +648,14 @@ $pais_residencia=$this->session->userdata('pais');
                         </fieldset>
                         <div id="msg" style="clear:both;"></div>
                         <div class="form-actions">
+												<?php 	if($country == 'Ec-bp'): 		?>
+													<center>
+												<?php 	endif; ?>
                             <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar" type="reset" class="novo-btn-secondary">Cancelar</button></a>
-                            <button id="actualizar" class="novo-btn-primary">Continuar</button>
+														<button id="actualizar" class="novo-btn-primary">Continuar</button>
+														<?php 	if($country == 'Ec-bp'): 		?>
+															</center>
+														<?php 	endif; ?>
                             <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
                                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                             </div>

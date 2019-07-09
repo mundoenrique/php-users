@@ -226,8 +226,23 @@ $cpo_cook = $this->security->get_csrf_hash();
 	<ul id="dashboard-beneficiary">
 
 	</ul>
+
 	<div class='form-actions'>
+	<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+	?>
 		<button  id='close' type='reset' class="novo-btn-primary">Cancelar</button>
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				</center>
+			<?php
+		}
+	?>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE DESTINO***********************************-->

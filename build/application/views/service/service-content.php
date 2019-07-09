@@ -127,8 +127,22 @@
                     </div>
 
                     <div class="form-actions">
+										<?php
+											if($pais == 'Ec-bp'){
+												?>
+													<center>
+												<?php
+											}
+										?>
                         <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
-                        <button disabled class="confir" id="continuar" data-action="none" class="novo-btn-primary">Continuar</button>
+												<button disabled class="confir" id="continuar" data-action="none" class="novo-btn-primary">Continuar</button>
+												<?php
+													if($pais == 'Ec-bp'){
+														?>
+															</center>
+														<?php
+													}
+												?>
                     </div>
                 </div>
             </section>
@@ -247,9 +261,20 @@ if($datos->rc==0){
         }
         ?>
     </ul>
-    <?php echo "<div class='form-actions'>
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+	echo "<div class='form-actions'>
            <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
-        </div>";
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
     ?>
 
 </div>
@@ -259,9 +284,16 @@ if($datos->rc==0){
         <div id="msg_info">
             <span aria-hidden="true"></span>
             <p></p>
-        </div>
+				</div>
+				<?php 	if($pais=='Ec-bp'): 		?>
+					<center>
+				<?php 	endif; ?>
         <div id="form-action" class="form-actions">
-            <button id="close-info" class="novo-btn-primary"></button>
-        </div>
+						<button id="close-info" class="novo-btn-primary"></button>
+
+				</div>
+				<?php 	if($pais=='Ec-bp'): 		?>
+							</center>
+						<?php 	endif; ?>
     </div>
 </div>

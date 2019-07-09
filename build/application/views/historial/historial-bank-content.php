@@ -172,8 +172,19 @@ foreach ($datos->cuentaOrigen as $value) {
         }
         ?>
     </ul>
-    <?php echo "<div class='form-actions'>
-                                    <button  id='cerrar' type='reset'>Cancelar</button>
-                              </div>";
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+		echo "<div class='form-actions'>
+						<button  id='cerrar' type='reset'>Cancelar</button>
+			</div>";
+			if($pais=='Ec-bp'){
+				?>
+					</center>
+				<?php
+			}
     ?>
 </div>    <!-- DIV DE CUENTAS ORIGEN -->

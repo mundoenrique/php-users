@@ -34,8 +34,22 @@ switch($skin){
 				</form>
 				<div id="msg"></div>
 					<div class="form-actions">
+					<?php
+						if($skin=='pichincha'){
+							?>
+								<center>
+							<?php
+						}
+					?>
 						<a href="<?php echo $homeLink; ?>"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
 						<button id="continuar" class="novo-btn-primary">Continuar</button>
+						<?php
+						if($skin=='pichincha'){
+							?>
+								</center>
+							<?php
+						}
+					?>
 						<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px; margin-right: 15px;">
 						<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
 					</div>

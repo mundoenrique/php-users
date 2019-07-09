@@ -1518,6 +1518,7 @@ label.label-inline {
 	 height: 15px;
 	 padding-right: 20px;
  }
+
  ul.field-category-actions li a {
 	 display: block;
 	 font-size: 11px;
@@ -3679,7 +3680,7 @@ opacity: 1.00 !important;
 	margin-top: 10px;
 	border: 1px solid #ffdd00;
 }
-/********************************************************/ !important
+
  input.ui-button {
 	 padding: .4em 1em;
  }
