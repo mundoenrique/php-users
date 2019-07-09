@@ -1660,6 +1660,11 @@ label.label-inline {
   z-index: 9;
 }
 
+.img-header {
+	height: 30px;
+	margin-top: 15px;
+}
+
 #head-wrapper {
   height: 60px;
   margin: 0 auto;
