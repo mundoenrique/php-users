@@ -41,6 +41,7 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>
+		<?php if(SKIN == 'pichincha'): ?>
 		<footer id="foot">
 			<div id="foot-wrapper">
 				<div class="foot-wrapper-top">
@@ -51,6 +52,7 @@ $favicon = BASE_CDN_URL . 'img/favicon.' . $favicon_ext;
 				</div>
 			</div>
 		</footer>
+		<?php endif; ?>
 		<?php
 		echo novo_insert_js_cdn('jquery-3.4.0.min.js');
 		?>
