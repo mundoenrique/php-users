@@ -14,6 +14,7 @@
 
   echo $insertRecaptcha;
 ?>
+<?php if($skin != 'pichincha'): ?>
 <div id="slideshow">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
@@ -24,7 +25,7 @@
     </li>
   </ul>
 </div>
-
+<?php endif; ?>
 <!-- MODAL -->
 
 <div id="dialog-overlay" style='display:none'>
