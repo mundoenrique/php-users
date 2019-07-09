@@ -258,7 +258,8 @@ function notiSystem (title, message, type, action, param) {
         open: function(event, ui) {
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
             if (action == 'carry') {
-                $('#form-action').append('<button id="carry">Si</button>');
+								$('#form-action').append('<button id="carry" class="novo-btn-primary">Si</button>');
+								$('#close-info').addClass('novo-btn-secondary-modal');
                 $('#carry').focus();
                 $('#close-info')
                     .text('No')

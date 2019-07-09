@@ -582,7 +582,7 @@ if ( ! function_exists('form_button'))
 			unset($data['content']); // content is not an attribute
 		}
 
-		return '<button '._parse_form_attributes($data, $defaults)._attributes_to_string($extra).'>'
+		return '<button '._parse_form_attributes($data, $defaults)._attributes_to_string($extra).' class="novo-btn-primary">'
 			.$content
 			."</button>\n";
 	}
