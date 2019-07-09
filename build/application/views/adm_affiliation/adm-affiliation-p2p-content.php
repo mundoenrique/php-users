@@ -153,7 +153,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		?>
 	</ul>
 	<?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
         </div>";
 	?>
 
@@ -188,8 +188,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</tbody>
 			</table>
 			<div class="form-actions">
-				<button type="reset">Cancelar</button>
-				<button type="submit">Continuar</button>
+				<button type="reset" class="novo-btn-secondary">Cancelar</button>
+				<button type="submit" class="novo-btn-primary">Continuar</button>
 			</div>
 		</form>
 	</div>

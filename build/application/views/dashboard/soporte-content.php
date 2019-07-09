@@ -136,7 +136,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		<p>Cordial Saludo.</p>
 		<p>Bogotá 23 de mayo de 2016.</p>
 		<div class="form-actions">
-			<button id="close-button">Cerrar</button>
+			<button id="close-button" class="novo-btn-primary">Cerrar</button>
 		</div>
 	</div>
 </div>

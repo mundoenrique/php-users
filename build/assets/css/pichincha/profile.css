@@ -400,7 +400,7 @@ ul.field-category-actions li.disabled-group-action-item a:hover {
 }
 
 .form-actions {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #dfe0e2 ;
   clear: both;
   margin: 15px -15px 0;
   overflow: hidden;
@@ -2928,7 +2928,7 @@ body .ui-tooltip {
 }
 
 hr{
-  border-color:#cecece;
+  border-color:#FFF;
   border-top:none;
 }
 .overlay-modal{
