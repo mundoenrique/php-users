@@ -245,6 +245,7 @@
 								<p>Su clave de operaciones no ha sido creada. Por favor verifique sus datos.</p>
 							</div>
 							<div class="form-actions">
+
 								<button id="regresar6" class="novo-btn-primary">Regresar</button>
 							</div>
 					</div>

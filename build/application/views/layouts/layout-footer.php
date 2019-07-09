@@ -1,5 +1,6 @@
 <?php
 	$closeLink = $this->config->item('base_url') . '/users/closeSess';
+	$pais= $this->session->userdata('pais');
 
 ?>
 
@@ -59,7 +60,13 @@
       <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
     </div>
     <div class="form-actions">
-      <button id="error-validate" class="novo-btn-primary">Aceptar</button>
+		<?php 	if($pais=='Ec-bp'): 		?>
+									<center>
+								<?php 	endif; ?>
+			<button id="error-validate" class="novo-btn-primary">Aceptar</button>
+			<?php 	if($pais=='Ec-bp'): 		?>
+									</center>
+								<?php 	endif; ?>
     </div>
   </div>
 </div>
@@ -68,12 +75,18 @@
     <article>
         <section>
             <div id="content-holder">
-                <h2>Desconexión automática</h2>
+								<h2>Desconexión automática</h2>
                 <div style="background: #03A9F4" class="alert-success" id="message">
                     <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p>Sesi&oacute;n pr&oacute;xima a expirar.</p>
                 </div>
                 <div class="form-actions">
-                    <a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
+								<?php 	if($pais=='Ec-bp'): 		?>
+									<center>
+								<?php 	endif; ?>
+										<a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
+										<?php 	if($pais=='Ec-bp'): 		?>
+										</center>
+									<?php 	endif; ?>
                 </div>
             </div>
         </section>
@@ -150,7 +163,13 @@
         <?php endif; ?>
     </div>
     <div class="form-actions">
-        <button id="ok" class="novo-btn-primary"> Aceptar </button>
+		<?php 	if($skin=='pichincha'): 		?>
+			</center>
+		<?php 	endif; ?>
+				<button id="ok" class="novo-btn-primary"> Aceptar</button>
+				<?php 	if($skin=='pichincha'): 		?>
+			</center>
+		<?php 	endif; ?>
     </div>
 
 

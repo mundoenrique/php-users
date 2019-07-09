@@ -26,7 +26,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 								</ul>
 							</div>
 						</div>
-						<a class="button alternate-button small-button novo-btn-secondary" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
+						<a class="button alternate-button small-button novo-btn-secondary volver" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
 						<h2>Movimientos</h2>
 						<nav id="filters-stack">
 							<div class="stack-form">

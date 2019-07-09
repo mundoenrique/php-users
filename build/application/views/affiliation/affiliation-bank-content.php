@@ -207,9 +207,20 @@ $cpo_cook = $this->security->get_csrf_hash();
 			}
 		?>
 	</ul>
-	<?php echo "<div class='form-actions'>
+	<?php
+	if($pais=='Ec-bp'){
+		?>
+			<center>
+		<?php
+	}
+	echo "<div class='form-actions'>
            <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
-        </div>";
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
 	?>
 
 </div>    <!-- DIV DE CUENTAS ORIGEN -->
