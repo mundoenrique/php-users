@@ -206,12 +206,12 @@ video {
 @font-face {
 	font-family: 'Prelo';
 	font-style: normal;
-	font-weight: 500;
-	src: url('../../fonts/prelo-medium-webfont.eot');
-	src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
-	     url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
-	     url('../../fonts/prelo-medium-webfont.woff') format('woff'),
-	     url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
+	font-weight: 400;
+	src: url('../../fonts/prelo-book-webfont.eot');
+	src: url('../../fonts/prelo-book-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/prelo-book-webfont.woff2') format('woff2'),
+	     url('../../fonts/prelo-book-webfont.woff') format('woff'),
+	     url('../../fonts/prelo-book-webfont.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'Prelo';
@@ -255,7 +255,7 @@ html {
 
 body {
 	background: #fff;
-	color: #555555;
+	color: #72787a;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -287,21 +287,21 @@ h6 {
 }
 
 h1 {
-	color: #033572;
+	color: #0f265c;
 	font-size: 30px;
 	line-height: 60px;
 	margin: 0;
 }
 
 h2 {
-	color: #033572;
+	color: #0f265c;
 	font-size: 24px;
 	line-height: 30px;
 	margin: 0 0 10px;
 }
 
 h3 {
-	color: #888888;
+	color: #72787A;
 	font-size: 16px;
 	line-height: 30px;
 	margin: 10px 0;
@@ -345,7 +345,7 @@ span.lighten {
 	color: #888888;
 }
 a {
-	color: #033572;
+	color: #0f265c;
 	text-decoration: none;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -525,10 +525,10 @@ a:hover {
  }
 
  .alert-warning {
-	 background: #f0c16a;
-	 -webkit-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
-	 -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
-	 box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
+	 background: #FFFADC;
+	 -webkit-box-shadow: 0 0 2px #EDCC5B;
+	 -moz-box-shadow: 0 0 2px #EDCC5B;
+	 box-shadow: 0 0 2px #EDCC5B;
 	 color: #555555;
  }
 
@@ -1118,8 +1118,8 @@ a:hover {
 
 button,
 a.button {
-	border: 1px solid #fd0;
-	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
+	border: 1px solid #dfe0e2;
+	/*background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat; */
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -1135,14 +1135,15 @@ a.button {
 	text-align: center;
 	min-width: 120px;
 	font-weight: bold;
+	cursor: pointer;
 }
 button:hover,
 a.button:hover {
-	background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat;
+	/* background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat; */
 }
 button:active,
 a.button:active {
-	background-color: #fd0;
+	/* background-color: #fd0; */
 }
  button[disabled], button[disabled]:hover, button[disabled]:focus, button.disabled-button:hover, button.disabled-button:focus,
  a.button[disabled]:hover,
@@ -1151,8 +1152,8 @@ a.button:active {
  a.button.disabled-button:focus, button.disabled-button,
  a.button[disabled],
  a.button.disabled-button {
-	border: 1px solid #fd0;
-	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat;
+	/* border: 1px solid #fd0;
+	background: #fd0 url('../../img/button-bg.png?rev20190316') center left no-repeat; */
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -1237,7 +1238,7 @@ a.button.product-button span[class*=" icon-"] {
 }
 
 label {
-	color: #333333;
+	color: #72787A;
 	display: block;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -1484,6 +1485,7 @@ label.label-inline {
 	 -webkit-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
 	 -moz-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
 	 box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
+	 outline: none;
  }
 
  .field-success {
@@ -1563,7 +1565,7 @@ label.label-inline {
  }
 
  .form-actions {
-	 border-top: 1px solid #dddddd;
+	 border-top: 1px solid #dfe0e2;
 	 clear: both;
 	 margin: 15px -15px 0;
 	 overflow: hidden;
@@ -1809,24 +1811,18 @@ label.label-inline {
 	 padding: 0 10px;
  }
  #content article {
-	 background: white;
-	 -webkit-border-radius: 4px;
-	 -moz-border-radius: 4px;
-	 -ms-border-radius: 4px;
-	 -o-border-radius: 4px;
-	 border-radius: 4px;
-	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 margin-bottom: 20px;
-	 overflow: hidden;
+		background: white;
+		border-bottom-left-radius: 30px;
+		border:1px solid #dfe0e2;
+		margin-bottom: 20px;
+		overflow: hidden;
  }
  #content article header, #content article footer {
 	 padding: 0 15px;
  }
  #content article section {
 	 overflow: hidden;
-	 padding: 0 15px 15px;
+	 padding: 0 12px 12px;
  }
 
  .nav-320 {
@@ -1905,9 +1901,9 @@ label.label-inline {
  }
 
  .product-presentation {
-	 padding: 0;
+	 padding: 0 0 0 25px;
 	 position: relative;
-	 width: 220px;
+	 width: 210px;
  }
  .product-presentation img {
 	 -moz-animation: slide-left 2s ease 0 1 normal;
@@ -1952,7 +1948,7 @@ label.label-inline {
 
  .product-info,
  .product-info-wide {
-	 border-right: 1px solid #dddddd;
+	 border-right: 1px solid #dfe0e2;
  }
 
  .product-info {
@@ -1964,7 +1960,7 @@ label.label-inline {
  }
 
  .product-info-full {
-	 width: 710px;
+	 width: 690px;
  }
 
  .product-info .field-tip,
@@ -2269,8 +2265,8 @@ label.label-inline {
 
  #filters-stack {
 	 background: #f6f6f6;
-	 border-bottom: 1px solid #eeeeee;
-	 border-top: 1px solid #eeeeee;
+	 border-bottom: 1px solid #dfe0e2;
+	 border-top: 1px solid #dfe0e2;
 	 margin: 0 -15px 10px;
 	 padding: 9px 15px;
  }
@@ -2441,7 +2437,7 @@ label.label-inline {
 	 float: left;
 	 line-height: 1;
 	 overflow: hidden;
-	 padding: 0 10px;
+	 padding: 0 27px;
 	 width: 220px;
  }
  ul#dashboard li.dashboard-item a, ul#dashboard li.dashboard-item .dashboard-item-box,
@@ -2519,7 +2515,6 @@ label.label-inline {
  ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-info,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-info {
 	 background: white;
-	 border-bottom: 2px solid #f6f6f6;
 	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
 	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
 	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
@@ -2645,7 +2640,7 @@ label.label-inline {
  ul#dashboard-donor li.dashboard-item .dashboard-item-box:hover .dashboard-item-info,
  ul#dashboard-beneficiary li.dashboard-item a:hover .dashboard-item-info,
  ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box:hover .dashboard-item-info {
-	 border-bottom-color: #033572;
+	 /* border-bottom-color: #033572; */
 	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
 	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
 	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
@@ -3030,11 +3025,6 @@ label.label-inline {
 
  .widget {
 	 background: white;
-	 -webkit-border-radius: 4px;
-	 -moz-border-radius: 4px;
-	 -ms-border-radius: 4px;
-	 -o-border-radius: 4px;
-	 border-radius: 4px;
 	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
 	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
 	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
@@ -3044,7 +3034,7 @@ label.label-inline {
 
  .widget-header h2 {
 	 background: #033572;
-	 border-bottom: 1px solid #dddddd;
+	 border-bottom: 1px solid #dfe0e2;
 	 color: #dddddd;
 	 font-size: 22px;
 	 line-height: 50px;
@@ -3067,7 +3057,7 @@ label.label-inline {
  }
 
  .widget-footer {
-	 border-top: 1px solid #dddddd;
+	 border-top: 1px solid #dfe0e2;
 	 padding-top: 8px;
  }
 
@@ -3081,7 +3071,6 @@ label.label-inline {
  }
 
  #widget-account .widget-header {
-	 background: #033572;
 	 -webkit-border-radius: 3px 3px 0 0;
 	 -moz-border-radius: 3px 3px 0 0;
 	 -ms-border-radius: 3px 3px 0 0;
@@ -4464,28 +4453,28 @@ label.label-inline {
  .ui-corner-top,
  .ui-corner-left,
  .ui-corner-tl {
-	 border-top-left-radius: 4px;
+	 border-top-left-radius: 0px;
  }
 
  .ui-corner-all,
  .ui-corner-top,
  .ui-corner-right,
  .ui-corner-tr {
-	 border-top-right-radius: 4px;
+	 border-top-right-radius: 0px;
  }
 
  .ui-corner-all,
  .ui-corner-bottom,
  .ui-corner-left,
  .ui-corner-bl {
-	 border-bottom-left-radius: 4px;
+	 border-bottom-left-radius: 30px;
  }
 
  .ui-corner-all,
  .ui-corner-bottom,
  .ui-corner-right,
  .ui-corner-br {
-	 border-bottom-right-radius: 4px;
+	 border-bottom-right-radius: 0px;
  }
 
  .ui-widget-overlay {
@@ -5396,7 +5385,7 @@ label.label-inline {
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
-	color: #10133f;
+	color: #0f265c;
 }
 
 #validar:hover {

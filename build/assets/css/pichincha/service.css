@@ -1,6 +1,6 @@
 .product-scheme {
 	padding: 0 5px;
-	width: 450px;
+	width: 440px;
 }
 
 .services-content {
@@ -31,18 +31,17 @@
 }
 
 .services-both {
-	border-top: 1px solid #dddddd;
+	border-top: 1px solid #dfe0e2;
 	clear: both;
 	margin: 15px -15px 0;
 	overflow: hidden;
 	padding: 15px 15px 0;
-	min-height: 308px;
+	min-height: 250px;
 }
 
 .msg-prevent {
 	text-align: center;
 	width: 390px;
-	height: 95px;
 	margin-top: 0;
 	margin-right: 260px;
 	margin-bottom: 25px;
