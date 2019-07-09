@@ -26,7 +26,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 								</ul>
 							</div>
 						</div>
-						<a class="button alternate-button small-button" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
+						<a class="button alternate-button small-button novo-btn-secondary" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
 						<h2>Movimientos</h2>
 						<nav id="filters-stack">
 							<div class="stack-form">
@@ -59,7 +59,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 										</select>
 									</fieldset>
 								</form>
-								<button id="buscar" class="mensual"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+								<button id="buscar" class="mensual novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 							</div>
 							<ul class="stack stack-extra">
 								<?php if($country != 'Ec-bp'): ?>

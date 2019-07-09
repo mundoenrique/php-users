@@ -31,14 +31,14 @@ base_cdn = $('body').attr('data-app-cdn');
              cadena+=   "</form>";
 
             confirmacion=  "<div class='form-actions'>";
-            confirmacion+=    "<button id='eliminar' type='reset'>Eliminar</button>";
-            confirmacion+=    "<button id='actualizar'>Actualizar</button>";
+            confirmacion+=    "<button id='eliminar' type='reset' class='novo-btn-secondary'>Eliminar</button>";
+            confirmacion+=    "<button id='actualizar' class='novo-btn-primary'>Actualizar</button>";
             confirmacion+=  "</div>";
 
 
             confirmacion1=  "<div class='form-actions'>";
-            confirmacion1+=    "<button id='volver' type='reset'>Volver</button>";
-            confirmacion1+=    "<button id='afiliar'>Afiliar</button>";
+            confirmacion1+=    "<button id='volver' type='reset' class='novo-btn-secondary'>Volver</button>";
+            confirmacion1+=    "<button id='afiliar' class='novo-btn-primary'>Afiliar</button>";
             confirmacion1+=  "</div>";
 
 

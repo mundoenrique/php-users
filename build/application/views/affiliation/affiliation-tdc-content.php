@@ -115,7 +115,7 @@ $cpo_cook = $this->security->get_csrf_hash();
                 </form>
                 <div id="msg"></div>
                 <div class="form-actions">
-                    <button id="afiliar" disabled >Afiliar</button>
+                    <button id="afiliar" class="novo-btn-primary" disabled >Afiliar</button>
                 </div>
             </div>
         </section>
@@ -198,7 +198,7 @@ foreach ($datos->cuentaOrigen as $value) {
         ?>
     </ul>
     <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
         </div>";
     ?>
 
@@ -248,8 +248,8 @@ foreach ($datos->cuentaOrigen as $value) {
                 </table>
             </form>
             <div class="form-actions">
-                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button type="reset">Cancelar</button> </a>
-                <button class="continuar">Continuar</button>
+                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
+                <button class="continuar" class="novo-btn-primary">Continuar</button>
             </div>
         </section>
     </article>
@@ -302,8 +302,8 @@ foreach ($datos->cuentaOrigen as $value) {
                 </table>
             </form>
             <div class="form-actions">
-                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
-                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button>Si</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button class="novo-btn-secondary">No</button></a>
+                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button class="novo-btn-primary">Si</button> </a>
                 <p>¿Desea afiliar otra tarjeta de crédito para pagos?</p>
             </div>
         </section>
@@ -358,8 +358,8 @@ foreach ($datos->cuentaOrigen as $value) {
                 </table>
             </form>
             <div class="form-actions">
-                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
-                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button>Si</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button class="novo-btn-secondary">No</button></a>
+                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"><button class="novo-btn-primary">Si</button> </a>
                 <p>¿Desea afiliar otra tarjeta de crédito para pagos?</p>
             </div>
         </section>
@@ -414,8 +414,8 @@ foreach ($datos->cuentaOrigen as $value) {
                 </table>
             </form>
             <div class="form-actions">
-                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button>No</button> </a>
-                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"> <button>Si</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"> <button class="novo-btn-secondary">No</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation_tdc"> <button class="novo-btn-primary">Si</button> </a>
                 <p>¿Desea afiliar otra tarjeta de crédito para pagos?</p>
             </div>
         </section>
@@ -428,7 +428,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>La tarjeta que desea afiliar <strong>no permite transferencias.</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="invalido2">Aceptar</button>
+        <button id="invalido2" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -439,7 +439,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>La tarjeta que desea afiliar <strong>ya se encuentra registrada.</strong> Por favor verifique sus datos, e intente nuevamente.</p>
     </div>
     <div class="form-actions">
-        <button id="invalido3">Aceptar</button>
+        <button id="invalido3" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -451,6 +451,6 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>El número de tarjeta que introdujo es incorrecto. Por favor, verifique e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="banco_inv">Aceptar</button>
+        <button id="banco_inv" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>

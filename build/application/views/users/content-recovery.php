@@ -34,8 +34,8 @@ switch($skin){
 					</form>
 						<div id="msg"></div>
 						<div class="form-actions">
-							<button type="reset" onclick="window.location.href='<?php echo $homeLink; ?>'">Cancelar</button>
-							<button id="continuar">Continuar</button>
+							<button type="reset" onclick="window.location.href='<?php echo $homeLink; ?>'" class="novo-btn-secondary">Cancelar</button>
+							<button id="continuar" class="novo-btn-primary">Continuar</button>
 							<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
 								<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
 							</div>
@@ -70,7 +70,7 @@ switch($skin){
 						</div>
 					</form>
 						<div class="form-actions">
-							<a href="<?php echo $homeLink; ?>"><button>Continuar</button></a>
+							<a href="<?php echo $homeLink; ?>"><button class="novo-btn-primary">Continuar</button></a>
 						</div>
 				</div>
 			</section>
@@ -89,7 +89,7 @@ switch($skin){
 					<p>Correo o Documento de identidad <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido">Aceptar</button>
+					<button id="invalido" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>

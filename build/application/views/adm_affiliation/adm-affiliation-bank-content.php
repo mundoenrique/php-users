@@ -107,7 +107,7 @@ $cpo_cook = $this->security->get_csrf_hash();
         ?>
     </ul>
     <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
         </div>";
     ?>
 
@@ -141,8 +141,8 @@ $cpo_cook = $this->security->get_csrf_hash();
                 </tbody>
             </table>
             <div class="form-actions">
-                <button type="reset">Cancelar</button>
-                <button type="submit">Continuar</button>
+                <button type="reset" class="novo-btn-secondary">Cancelar</button>
+                <button type="submit" class="novo-btn-primary">Continuar</button>
             </div>
         </form>
     </div>
@@ -158,6 +158,6 @@ $cpo_cook = $this->security->get_csrf_hash();
         <p>El número de cuenta que introdujo no coincide con el banco. Por favor, verifique e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="banco_inv">Aceptar</button>
+        <button id="banco_inv" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>

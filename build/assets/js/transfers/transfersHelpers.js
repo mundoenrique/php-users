@@ -480,7 +480,7 @@ function notiSystem(action, title, msg)
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
 			switch(action) {
 				case 'passReq':
-					$('#button-action').append('<button id="send-pass">Aceptar</button>');
+					$('#button-action').append('<button id="send-pass" class="novo-btn-primary">Aceptar</button>');
 					$('#close-info')
 						.text('Cancelar')
 						.attr('type', 'reset');
