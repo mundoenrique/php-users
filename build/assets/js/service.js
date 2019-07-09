@@ -14,6 +14,7 @@ const operaciones = {
 
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+skin = $('body').attr('data-app-skin');
 
 $(function(){
 
@@ -154,7 +155,7 @@ $(function(){
 
         if (bloqHtml == true) {
             $("#donor").children().remove();
-
+					console.log(skin)
             cadena= '<div class="product-presentation" producto="'+producto+'">';
             cadena+=	'<img src="'+imagen+'" width="200" height="130" alt="" />';
             cadena+=	'<div class="product-network '+marca+'"></div>';
@@ -166,8 +167,8 @@ $(function(){
             cadena+=	'<p class="product-metadata">'+producto+'</p>';
             cadena+=	'<nav class="product-stack">';
             cadena+=	    '<ul class="stack">';
-            cadena+=	        '<li class="stack-item">';
-            cadena+=		        '<a dialog button product-button rel="section" title="Selecciona otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>';
+						cadena+=	        '<li class="stack-item">';
+						cadena+=	(skin != 'pichincha')?'<a dialog button product-button rel="section" title="Selecciona otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>': '<a dialog>Selecciona otra cuenta</a>';
             cadena+=		    '</li>';
             cadena+=	    '</ul>';
             cadena+=	'</nav>';
