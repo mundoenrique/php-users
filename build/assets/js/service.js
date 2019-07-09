@@ -168,7 +168,7 @@ $(function(){
             cadena+=	'<nav class="product-stack">';
             cadena+=	    '<ul class="stack">';
 						cadena+=	        '<li class="stack-item">';
-						cadena+=	(skin != 'pichincha')?'<a dialog button product-button rel="section" title="Selecciona otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>': '<a dialog>Selecciona otra cuenta</a>';
+						cadena+=	(skin != 'pichincha')?'<a dialog button product-button rel="section" title="Selecciona otra cuenta"><span aria-hidden="true" class="icon-edit"></span></a>': '<a style="cursor:pointer;" dialog>Selecciona otra cuenta</a>';
             cadena+=		    '</li>';
             cadena+=	    '</ul>';
             cadena+=	'</nav>';
