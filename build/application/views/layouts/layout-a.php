@@ -1,23 +1,32 @@
-<?php if(isset($header)){ ?>
+<?php
+$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+if(isset($header)){
+?>
 {header}
 <?php } ?>
 
-	<div id="wrapper">
-		<!-- Begin: Content Area -->
+<div id="wrapper">
+  <!-- Begin: Content Area -->
+  {content}
+  <!-- End: Content Area -->
+  <?php if(isset($sidebarActive) && $sidebarActive){?>
+	<?php if($skin == 'pichincha'): ?>
+		<center class="margin-bottom">
+			<img src="<?= insertFile('logo-pichincha-azul.png'); ?>" alt="Banco PICHINCHA">
+		</center>
+		<h1 class="welcome-title-bp"><?= lang('WELCOME_TITLE'); ?></h1>
+	<?php endif; ?>
 
-					{content}
-
-		<!-- End: Content Area -->
-		<?php if(isset($sidebarActive) && $sidebarActive){?>
-		<!-- Begin: Sidebar -->
-		<div id="sidebar">
-
-					{sidebar}
-
-		</div>
-		<!-- End: Sidebar -->
-		<?php };?>
-	</div>
-	<?php if(isset($footer)){ ?>
+  <!-- Begin: Sidebar -->
+  <div id="sidebar" class="signin">
+    {sidebar}
+  </div>
+  <!-- End: Sidebar -->
+	<?php if($skin == 'pichincha'): ?>
+	<p class="align-center"><?= lang('WELCOME_MSG') ?></p>
+	<?php endif; ?>
+  <?php };?>
+</div>
+<?php if(isset($footer)){ ?>
 {footer}
 <?php } ?>

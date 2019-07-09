@@ -261,20 +261,7 @@ body {
 	padding: 0;
 	width: 100%;
 }
-body::before {
-	border-bottom: 300px solid transparent;
-	border-left: 280px solid transparent;
-	border-right: 413px solid #f3f4f8;
-	border-top: 190px solid #f3f4f8;
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 0;
-	height: 0;
-	z-index: -1;
-}
+
 h1,
 h2,
 h3,
@@ -1664,12 +1651,17 @@ label.label-inline {
  }
 
  #head {
-  background-color: #fd0;
+  background-color: #fff;
   height: 60px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 9;
+}
+
+.img-header {
+	height: 30px;
+	margin-top: 15px;
 }
 
 #head-wrapper {
@@ -1680,11 +1672,6 @@ label.label-inline {
   max-width: 955px;
 }
 
-#brand-id,
-#brand-app {
-  background: transparent url('../../img/logo-bp.svg?rev20190316') no-repeat scroll;
-  float: left;
-}
 
 #brand-id {
 	background-position: 0 12px;
@@ -2806,7 +2793,6 @@ opacity: 1.00 !important;
  ul.feed li.feed-item span.money-amount {
 	 color: #333333;
 	 display: inline-block;
-	 float: right;
 	 font-weight: 700;
  }
  ul.feed li.feed-item ul.feed-metadata {
@@ -3019,11 +3005,30 @@ opacity: 1.00 !important;
 	 color: #033572;
  }
 
- #sidebar {
-	 float: left;
-	 padding: 0 10px;
-	 width: 220px;
+.margin-bottom {
+	margin-bottom: 30px;
+}
+
+ .welcome-title-bp {
+	line-height: 0;
+	font-size: 20px;
+	text-align: center;
+	color: #033572;
  }
+
+#sidebar {
+	float: left;
+	padding: 0 10px;
+	width: 220px;
+}
+
+#sidebar.signin {
+	float: none;
+	padding: 0 10px;
+	width: 220px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
 
  .widget {
 	 background: white;
@@ -3446,7 +3451,6 @@ opacity: 1.00 !important;
 	 overflow: hidden;
 	 text-indent: 100%;
 	 white-space: nowrap;
-	 vertical-align: middle;
 	 width: 160px;
  }
 

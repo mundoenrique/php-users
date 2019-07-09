@@ -1,8 +1,8 @@
 <?php
 	$closeLink = $this->config->item('base_url') . '/users/closeSess';
-
+	$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 ?>
-
+<?php if($skin != 'pichincha'): ?>
 <footer id="foot">
     <div id="foot-wrapper">
         <div class="foot-wrapper-top">
@@ -26,6 +26,7 @@
         </div>
     </div>
 </footer>
+<?php endif; ?>
 <script type="text/javascript"> var base_url = "<?php echo $this->config->item("base_url"); ?>";</script>
 <?php if($FooterCustomInsertJSActive){?>
 
