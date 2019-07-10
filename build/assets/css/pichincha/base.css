@@ -621,7 +621,9 @@ a:hover {
  a.button {
 	 display: block;
  }
-
+.volver{
+	float:right;
+}
 button,
 a.button {
 	border: 1px solid #fd0;
@@ -632,7 +634,6 @@ a.button {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	color: #10133f;
-	float: right;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 38px;
@@ -659,7 +660,6 @@ a.button {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	color: #10133f;
-	float: right;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 38px;
