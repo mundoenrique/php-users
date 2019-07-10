@@ -83,7 +83,7 @@
 
 								<div style="background: #03A9F4" class="alert-success" id="message">
 								<?php endif;?>
-                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p>Sesi&oacute;n pr&oacute;xima a expirar.</p>
+                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p> La Sesi&oacute;n ha finalizado.</p>
                 </div>
                 <div class="form-actions">
 								<?php 	if($pais=='Ec-bp'): 		?>
