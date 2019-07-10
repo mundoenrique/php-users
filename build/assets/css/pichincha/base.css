@@ -177,7 +177,9 @@ video {
 	 border-collapse: collapse;
 	 border-spacing: 0;
  }
-
+ .box-term h4 {
+	color: #72787A;
+}
  ::selection {
 	 background: #033572;
 	 color: white;
@@ -656,6 +658,11 @@ a:hover {
 }
 .atc-form-action-child-validar {
 	width: 113px;
+}
+.product-presentation>a.button {
+	background: none;
+	border: 1px solid #dfe0e2;
+	border-radius: 0!important;
 }
 button,
 a.button {
@@ -1537,7 +1544,12 @@ opacity: 1.00 !important;
 	 float: left;
 	 width: auto !important;
  }
-
+ li#replace,
+ li#key,
+ li#lock {
+	border: 1px solid #dfe0e2;
+	padding-bottom: 20px;
+}
  ul.product-balance-group li {
 	 color: #888888;
 	 float: left;
@@ -3942,7 +3954,7 @@ opacity: 1.00 !important;
  }
 
  .ui-widget-content a {
-	 color: #222222;
+	 color: #0f265c;
  }
 
  .ui-widget-header a {

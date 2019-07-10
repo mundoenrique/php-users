@@ -20,12 +20,12 @@
 }
 
 .service-item-unselect:hover {
-	color: #033572 !important;
+	color: #0f265c!important;
 	cursor: pointer;
 }
 
 .service-item-select {
-	color: #033572 !important;
+	color: #0f265c!important;
 	border-bottom: solid 5px;
 	padding-bottom: 10px;
 }

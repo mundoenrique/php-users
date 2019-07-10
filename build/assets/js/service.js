@@ -155,7 +155,6 @@ $(function(){
 
         if (bloqHtml == true) {
             $("#donor").children().remove();
-					console.log(skin)
             cadena= '<div class="product-presentation" producto="'+producto+'">';
             cadena+=	'<img src="'+imagen+'" width="200" height="130" alt="" />';
             cadena+=	'<div class="product-network '+marca+'"></div>';
