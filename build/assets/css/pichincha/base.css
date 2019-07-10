@@ -511,14 +511,6 @@ a:hover {
 	 margin: 0;
  }
 
- .alert-warning {
-	 background: #f0c16a;
-	 -webkit-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
-	 -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
-	 box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
-	 color: #555555;
- }
-
  .alert-simple {
 	 font-size: 15px;
  }
