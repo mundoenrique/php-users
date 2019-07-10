@@ -131,6 +131,7 @@
 											if($pais == 'Ec-bp'){
 												?>
 													<center>
+														<div class="atc-form-action-child">
 												<?php
 											}
 										?>
@@ -138,7 +139,7 @@
 												<button disabled class="confir" id="continuar" data-action="none" class="novo-btn-primary">Continuar</button>
 												<?php
 													if($pais == 'Ec-bp'){
-														?>
+														?></div>
 															</center>
 														<?php
 													}
@@ -267,8 +268,20 @@ if($datos->rc==0){
 				<center>
 			<?php
 		}
-	echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+	echo "<div class='form-actions'>";
+	if($pais=='Ec-bp'){
+		?>
+			<div class="atc-form-action-child-2">
+		<?php
+	}
+	echo "
+					 <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>";
+					 if($pais=='Ec-bp'){
+						?>
+							</div>
+						<?php
+					}
+					 echo "
 				</div>";
 				if($pais=='Ec-bp'){
 					?>
@@ -279,21 +292,25 @@ if($datos->rc==0){
 
 </div>
 
-<div id="msg_system" style='display:none'>
-    <div id="dialog-confirm">
+<div id="msg_system" style='display:none;'>
+    <div id="dialog-confirm" >
         <div id="msg_info">
             <span aria-hidden="true"></span>
             <p></p>
 				</div>
+        <div id="form-action" class="form-actions">
 				<?php 	if($pais=='Ec-bp'): 		?>
 					<center>
-				<?php 	endif; ?>
-        <div id="form-action" class="form-actions">
+					<div class="atc-form-action-child-1">
+				<?php endif; ?>
+
 						<button id="close-info" class="novo-btn-primary"></button>
 
-				</div>
+
 				<?php 	if($pais=='Ec-bp'): 		?>
-							</center>
-						<?php 	endif; ?>
+					</div>
+					</center>
+				<?php 	endif; ?>
+				</div>
     </div>
 </div>
