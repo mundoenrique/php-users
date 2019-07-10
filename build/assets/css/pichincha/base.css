@@ -621,7 +621,11 @@ a:hover {
  a.button {
 	 display: block;
  }
-
+.product-presentation>a.button {
+	background: none;
+	border: 1px solid #dfe0e2;
+	border-radius: 0!important;
+}
 button,
 a.button {
 	border: 1px solid #fd0;
@@ -1503,7 +1507,12 @@ opacity: 1.00 !important;
 	 float: left;
 	 width: auto !important;
  }
-
+ li#replace,
+ li#key,
+ li#lock {
+	border: 1px solid #dfe0e2;
+	padding-bottom: 20px;
+}
  ul.product-balance-group li {
 	 color: #888888;
 	 float: left;
