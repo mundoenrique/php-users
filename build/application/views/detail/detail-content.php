@@ -27,7 +27,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 							</div>
 						</div>
 						<?php if($country != 'Ec-bp'): ?>
-						<a class="button alternate-button small-button novo-btn-secondary" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
+						<a class="button alternate-button small-button novo-btn-secondary volver" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
 						<?php endif;?>
 						<h2>Movimientos</h2>
 						<nav id="filters-stack">

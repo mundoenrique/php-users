@@ -39,8 +39,8 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 </head>
 
 <body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>"
-  data-app-skin="<?php echo $skin;?>" data-country="<?php echo $this->session->userdata('pais') ?>">
-	<?php if($skin == 'default' || $this->session->userdata('logged_in')): ?>
+  data-app-skin="<?php echo $skin;?>" data-country="<?php echo $this->session->userdata('pais') ?>">>
+	<?php if($skin == 'default' || !($this->router->class == 'users' && $this->router->method == 'index')): ?>
   <header id="head">
     <div id="head-wrapper">
 			<?php if($skin == 'pichincha'): ?>
