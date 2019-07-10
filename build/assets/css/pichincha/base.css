@@ -510,14 +510,6 @@ a:hover {
 	 margin: 0;
  }
 
- .alert-warning {
-	 background: #FFFADC;
-	 -webkit-box-shadow: 0 0 2px #EDCC5B;
-	 -moz-box-shadow: 0 0 2px #EDCC5B;
-	 box-shadow: 0 0 2px #EDCC5B;
-	 color: #555555;
- }
-
  .alert-simple {
 	 font-size: 15px;
  }
