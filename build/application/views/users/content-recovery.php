@@ -38,6 +38,7 @@ switch($skin){
 						if($skin=='pichincha'){
 							?>
 								<center>
+									<div class="atc-form-action-child-perfil-content">
 							<?php
 						}
 					?>
@@ -45,7 +46,7 @@ switch($skin){
 							<button id="continuar" class="novo-btn-primary">Continuar</button>
 							<?php
 						if($skin=='pichincha'){
-							?>
+							?></div>
 								</center>
 							<?php
 						}

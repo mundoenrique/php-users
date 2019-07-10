@@ -74,6 +74,7 @@ switch($skin){
 						if($skin=='pichincha'){
 							?>
 								<center>
+									<div class="atc-form-action-child-perfil-content">
 							<?php
 						}
 					?>
@@ -81,7 +82,7 @@ switch($skin){
 					<button id="validar" class="novo-btn-primary">Continuar</button>
 					<?php
 						if($skin=='pichincha'){
-							?>
+							?></div>
 								</center>
 							<?php
 						}
@@ -458,9 +459,26 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <div id="msg2"></div>
+					<div id="msg2"></div>
+
+					<?php
+						if($pais == 'Ec-bp'){
+							?>
+								<center>
+									<div class="atc-form-action-child-perfil-content">
+							<?php
+						}
+					?>
           <a href="<? echo $homeLink; ?>"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
-          <button id="registrar" class="novo-btn-primary"> Continuar </button>
+					<button id="registrar" class="novo-btn-primary"> Continuar</button>
+					<?php
+						if($pais == 'Ec-bp'){
+							?>
+								</div>
+								<center>
+							<?php
+						}
+					?>
           <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
             <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
           </div>
@@ -643,7 +661,16 @@ switch($skin){
     </div>
   </div>
   <div class="form-actions">
-    <button id="inva5" class="novo-btn-primary">Aceptar</button>
+	<?php 	if($skin=='pichincha'): 		?>
+					<center>
+					<div class="atc-form-action-child-validar">
+				<?php endif; ?>
+		<button id="inva5" class="novo-btn-primary">Aceptar</button>
+		<?php 	if($skin=='pichincha'): 		?>
+
+					</div>
+					<center>
+				<?php endif; ?>
   </div>
 </div>
 <!--Modal protección de datos-->

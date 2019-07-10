@@ -650,10 +650,14 @@ $pais_residencia=$this->session->userdata('pais');
                         <div class="form-actions">
 												<?php 	if($country == 'Ec-bp'): 		?>
 													<center>
+
+													<div class="atc-form-action-child-perfil-content">
 												<?php 	endif; ?>
                             <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar" type="reset" class="novo-btn-secondary">Cancelar</button></a>
 														<button id="actualizar" class="novo-btn-primary">Continuar</button>
 														<?php 	if($country == 'Ec-bp'): 		?>
+
+															</div>
 															</center>
 														<?php 	endif; ?>
                             <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">

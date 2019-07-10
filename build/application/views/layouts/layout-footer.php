@@ -77,15 +77,22 @@
         <section>
             <div id="content-holder">
 								<h2>Desconexión automática</h2>
-                <div style="background: #03A9F4" class="alert-success" id="message">
+								<?php 	if($pais=='Ec-bp'): 		?>
+									<div class="alert-success" id="message">
+								<?php else: ?>
+
+								<div style="background: #03A9F4" class="alert-success" id="message">
+								<?php endif;?>
                     <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p>Sesi&oacute;n pr&oacute;xima a expirar.</p>
                 </div>
                 <div class="form-actions">
 								<?php 	if($pais=='Ec-bp'): 		?>
 									<center>
+										<div class="atc-form-action-child-perfil-diesession">
 								<?php 	endif; ?>
 										<a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
 										<?php 	if($pais=='Ec-bp'): 		?>
+										</div>
 										</center>
 									<?php 	endif; ?>
                 </div>

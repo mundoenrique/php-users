@@ -624,6 +624,27 @@ a:hover {
 .volver{
 	float:right;
 }
+.atc-form-action-child{
+	width: 31%;
+}
+.atc-form-action-child-1{
+	width: 292px;
+}
+.atc-form-action-child-2{
+	width: 174px;
+}
+.atc-form-action-child-3{
+	width: 283px;
+}
+.atc-form-action-child-perfil-content{
+	width: 283px;
+}
+.atc-form-action-child-perfil-diesession{
+	width: 109px;
+}
+.atc-form-action-child-validar {
+	width: 113px;
+}
 button,
 a.button {
 	border: 1px solid #fd0;
@@ -634,6 +655,7 @@ a.button {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	color: #10133f;
+	float: right;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 38px;
