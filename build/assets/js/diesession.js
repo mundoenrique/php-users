@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 	idleTime = 0;
 	//Increment the idle time counter every second.
-	var idleInterval = setInterval(timerIncrement, 120000);
+	var idleInterval = setInterval(timerIncrement, 180000);
 	function timerIncrement()
 	{
 		idleTime++;
