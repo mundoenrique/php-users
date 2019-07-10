@@ -554,6 +554,10 @@ a:hover {
 	 content: "\e005";
  }
 
+.icon-arrow-right:before {
+	content: "\e03e";
+}
+
  .icon-file-blank:before {
 	 content: "\e057";
  }
@@ -639,14 +643,7 @@ a.button {
 	font-weight: bold;
 	cursor: pointer;
 }
-button:hover,
-a.button:hover {
-	/* background: #fd0 url('../../img/button-hover-bg.png?rev20190316') center left no-repeat; */
-}
-button:active,
-a.button:active {
-	/* background-color: #fd0; */
-}
+
  button[disabled], button[disabled]:hover, button[disabled]:focus, button.disabled-button:hover, button.disabled-button:focus,
  a.button[disabled]:hover,
  a.button[disabled]:focus,
