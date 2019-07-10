@@ -70,7 +70,7 @@
             <div id="content-holder">
                 <h2>Desconexión automática</h2>
                 <div style="background: #03A9F4" class="alert-success" id="message">
-                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p>Sesi&oacute;n pr&oacute;xima a expirar.</p>
+                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p> La Sesi&oacute;n ha finalizado.</p>
                 </div>
                 <div class="form-actions">
                     <a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
