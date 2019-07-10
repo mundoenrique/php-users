@@ -177,7 +177,9 @@ video {
 	 border-collapse: collapse;
 	 border-spacing: 0;
  }
-
+ .box-term h4 {
+	color: #72787A;
+}
  ::selection {
 	 background: #033572;
 	 color: white;
@@ -3917,7 +3919,7 @@ opacity: 1.00 !important;
  }
 
  .ui-widget-content a {
-	 color: #222222;
+	 color: #0f265c;
  }
 
  .ui-widget-header a {
