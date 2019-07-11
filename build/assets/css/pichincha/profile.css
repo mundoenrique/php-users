@@ -308,33 +308,13 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 }
 
 .field-error {
-  background: rgba(240, 72, 72, 0.1);
-  /*border: 1px solid $color;*/
+	border: 1px solid #f04848;
   -webkit-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   -moz-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
-  color: #f04848;
 }
 .field-error:hover, .field-error:focus {
   border: 1px solid #f04848;
-  -webkit-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
-  -moz-box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
-  box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
-}
-
-.field-success {
-  background: rgba(67, 181, 129, 0.1);
-  /*border: 1px solid $color;*/
-  -webkit-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
-  -moz-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
-  box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
-  color: #43b581;
-}
-.field-success:hover, .field-success:focus {
-  border: 1px solid #43b581;
-  -webkit-box-shadow: 0 0 6px rgba(67, 181, 129, 0.85);
-  -moz-box-shadow: 0 0 6px rgba(67, 181, 129, 0.85);
-  box-shadow: 0 0 6px rgba(67, 181, 129, 0.85);
 }
 
 .field-timer {
@@ -623,7 +603,6 @@ ul.feed li.feed-item .feed-status span[class^="icon-"], ul.feed li.feed-item .fe
 ul.feed li.feed-item span.money-amount {
   color: #333333;
   display: inline-block;
-  float: right;
   font-weight: bold;
 }
 ul.feed li.feed-item ul.feed-metadata {

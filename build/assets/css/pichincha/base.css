@@ -1015,6 +1015,7 @@ label.label-inline {
 	 -moz-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
 	 box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
 	 color: #f04848;
+	 outline: none;
  }
  .field-error:hover, .field-error:focus {
 	 border: 1px solid #f04848;
@@ -1023,6 +1024,10 @@ label.label-inline {
 	 box-shadow: 0 0 6px rgba(240, 72, 72, 0.85);
 	 outline: none;
  }
+
+ .valid {
+	border: none !important;
+}
   .field-timer {
 	 float: right;
 	 font-size: 11px;
