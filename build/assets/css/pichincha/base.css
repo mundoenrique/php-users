@@ -2370,12 +2370,14 @@ li#replace:hover {
  }
  ul.feed li.feed-item.feed-expense span.money-amount {
 	 color: #e74c3c;
+	 float: right;
  }
  ul.feed li.feed-item.feed-income {
 	 border-left-color: #2ecc71;
  }
  ul.feed li.feed-item.feed-income span.money-amount {
 	 color: #2ecc71;
+	 float: right;
  }
  ul.feed li.feed-item.feed-warning {
 	 border-left-color: #f0c16a;
