@@ -1555,6 +1555,15 @@ opacity: 1.00 !important;
 	border: 1px solid #dfe0e2;
 	padding-bottom: 20px;
 }
+li#lock:hover {
+	border: 1px solid #0f265c;
+}
+li#key:hover {
+	border: 1px solid #0f265c;
+}
+li#replace:hover {
+	border: 1px solid #0f265c;
+}
  ul.product-balance-group li {
 	 color: #888888;
 	 float: left;

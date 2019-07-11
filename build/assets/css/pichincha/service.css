@@ -26,8 +26,8 @@
 
 .service-item-select {
 	color: #0f265c!important;
-	border-bottom: solid 5px;
-	padding-bottom: 10px;
+	border: 1px solid #0f265c!important;
+
 }
 
 .services-both {
