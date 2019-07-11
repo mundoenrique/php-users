@@ -647,7 +647,6 @@ $pais_residencia=$this->session->userdata('pais');
                             </div>
                         </fieldset>
                         <div id="msg" style="clear:both;"></div>
-												<?php if($country != 'Ec-bp'): ?>
                         <div class="form-actions">
 												<?php 	if($country == 'Ec-bp'): 		?>
 													<center>
@@ -665,7 +664,6 @@ $pais_residencia=$this->session->userdata('pais');
                                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                             </div>
                         </div>
-												<?php endif; ?>
                 </form>
             </div>
         </section>
@@ -680,7 +678,7 @@ $pais_residencia=$this->session->userdata('pais');
                 <div id="content-clave">
                     <p>Sus datos han sido cargados exitosamente.</p>
                     <div class="empty-state-actions">
-                        <a class="button" href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Aceptar</a>
+                        <a class="button novo-btn-primary" href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Aceptar</a>
                     </div>
                 </div>
             </section>
