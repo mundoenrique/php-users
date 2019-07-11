@@ -11,6 +11,8 @@ var country = $('#content').attr('country');
 
 $(function(){
 
+	$('input[type=text], input[type=password], input[type=textarea]').prop('readonly', true);
+
 	if(tyc == '0') {
 		systemDialog('Términos y Condiciones', 'Debes aceptar los términos y condiciones.', 'tyc');
 	}

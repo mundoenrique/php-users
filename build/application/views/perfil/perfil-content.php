@@ -647,6 +647,7 @@ $pais_residencia=$this->session->userdata('pais');
                             </div>
                         </fieldset>
                         <div id="msg" style="clear:both;"></div>
+												<?php if($country != 'Ec-bp'): ?>
                         <div class="form-actions">
 												<?php 	if($country == 'Ec-bp'): 		?>
 													<center>
@@ -664,6 +665,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                             </div>
                         </div>
+												<?php endif; ?>
                 </form>
             </div>
         </section>
