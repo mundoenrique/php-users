@@ -19,8 +19,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 					</fieldset>
 					<p>En caso de haber olvidado su <strong>Clave de Operaciones</strong></strong>, comuníquese con el <strong>Centro de Contacto</strong>.</p>
 					<div class="form-actions">
-						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset">Cancelar</button></a>
-						<button id="continuar_transfer">Continuar</button>
+						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+						<button id="continuar_transfer" class="novo-btn-primary">Continuar</button>
 					</div>
 				</div>
 			</section>
@@ -108,8 +108,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 						</fieldset>
 					</div>
 					<div id="next-step" class="form-actions">
-						<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset">Cancelar</button></a>
-						<button disabled class="confir" id="continuar">Confirmar</button>
+						<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+						<button disabled class="confir" id="continuar" class="novo-btn-primary">Confirmar</button>
 					</div>
 				</div>
 			</section>
@@ -206,7 +206,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 		?>
 	</ul>
 	<div class="form-actions">
-		<button type="reset" id="cerrar">Cancelar</button>
+
+		<button type="reset" id="cerrar" class="novo-btn-primary">Cancelar</button>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE ORIGEN************************************-->
@@ -216,7 +217,21 @@ $cpo_cook = $this->security->get_csrf_hash();
 
 	</ul>
 	<div class='form-actions'>
-		<button  id='close' type='reset'>Cancelar</button>
+	<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+	?>
+		<button  id='close' type='reset' class="novo-btn-primary">Cancelar</button>
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				</center>
+			<?php
+		}
+	?>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE DESTINO***********************************-->
@@ -260,7 +275,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 	</div>
 	<div id="content-input" class="skip"></div>
 	<div id="button-action" class="form-actions skip">
-		<button id="close-info" class="skip">Aceptar</button>
+		<button id="close-info" class="skip" class="novo-btn-primary">Aceptar</button>
 	</div>
 </div>
 <!--*************************************FIN MODAL ERRORES***************************************-->

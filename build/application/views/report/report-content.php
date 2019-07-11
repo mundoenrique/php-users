@@ -35,7 +35,7 @@
                 <input id="filter-range-to" name="filter-range-to" class="field-small"maxlength="10"
                   placeholder="DD/MM/AAAA" autocomplete="off" disabled>
               </div>
-              <button id="mens" class="mensual disabled-button" disabled>
+              <button id="mens" class="mensual disabled-button novo-btn-primary" disabled>
                 <span aria-hidden="true" class="icon-arrow-right"></span>
               </button>
             </fieldset>
@@ -297,9 +297,20 @@
 			}
 		?>
   </ul>
-  <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
-        </div>";
+	<?php
+	if($pais=='Ec-bp'){
+		?>
+			<center>
+		<?php
+	}
+	echo "<div class='form-actions'>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
 	?>
 </div>
 

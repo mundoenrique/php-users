@@ -291,8 +291,8 @@ $(function(){
 					ctaDestino+= "</ul>"
 					ctaDestino+= "</form>"
 					ctaDestino+="<div class='form-actions'>"
-					ctaDestino+="<button id='cancelar1' type='reset'>Cancelar</button>";
-					ctaDestino+="<button id='cambiar'>Modificar</button>"
+					ctaDestino+="<button id='cancelar1' type='reset' class='novo-btn-secondary'>Cancelar</button>";
+					ctaDestino+="<button id='cambiar' class='novo-btn-primary'>Modificar</button>"
 					ctaDestino+="</div>"
 					ctaDestino+="</div>"
 					ctaDestino+="<div id='msg'></div>"
@@ -357,8 +357,8 @@ $(function(){
 							confirmacion+= 		"</tbody>";
 							confirmacion+= 	"</table>";
 							confirmacion+= 	"<div class='form-actions'>";
-							confirmacion+= 		"<button id='cancelar2' type='reset'>Cancelar</button>";
-							confirmacion+= 		"<button id='continuar'>Continuar</button>";
+							confirmacion+= 		"<button id='cancelar2' type='reset' class='novo-btn-secondary'>Cancelar</button>";
+							confirmacion+= 		"<button id='continuar' class='novo-btn-primary'>Continuar</button>";
 							confirmacion+= 	"</div>";
 							confirmacion+=   "</div>";
 							$("#content-holder").append(confirmacion);
@@ -407,7 +407,7 @@ $(function(){
 										exito+=	"<span aria-hidden='true' class='icon-ok-sign'></span> Afiliación modificada satisfactoriamente"
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
-										exito+= 		"<button id='exit'>Finalizar</button>";
+										exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
 									}
@@ -421,7 +421,7 @@ $(function(){
 										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada, " + msg;
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
-										exito+= 		"<button id='exit'>Finalizar</button>";
+										exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
 									}
@@ -477,8 +477,8 @@ $(function(){
 					eliminar+=				"</tbody>"
 					eliminar+=			"</table>"
 					eliminar+=			"<div class='form-actions'>"
-					eliminar+=				"<button id='cancel' type='reset'>Cancelar</button>"
-					eliminar+=				"<button id='cont'>Continuar</button>"
+					eliminar+=				"<button id='cancel' type='reset' class='novo-btn-secondary'>Cancelar</button>"
+					eliminar+=				"<button id='cont' class='novo-btn-primary'>Continuar</button>"
 					eliminar+=			"</div>"
 					eliminar+=	"</div>"
 					$("#content-holder").append(eliminar);
@@ -521,7 +521,7 @@ $(function(){
 									       exito+=	"<span aria-hidden='true' class='icon-ok-sign'></span> Afiliación eliminada satisfactoriamente";
 									       exito+= "</div>";
 									       exito+= 	"<div class='form-actions'>";
-									       exito+= 		"<button id='exit'>Finalizar</button>";
+									       exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 									       exito+= 	"</div>";
 									       $("#content-holder").append(exito);
 								       }
@@ -533,7 +533,7 @@ $(function(){
 									       exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no eliminada";
 									       exito+= "</div>";
 									       exito+= 	"<div class='form-actions'>";
-									       exito+= 		"<button id='exit'>Finalizar</button>";
+									       exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 									       exito+= 	"</div>";
 									       $("#content-holder").append(exito);
 								       }

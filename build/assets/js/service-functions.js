@@ -258,8 +258,11 @@ function notiSystem (title, message, type, action, param) {
         open: function(event, ui) {
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
             if (action == 'carry') {
-                $('#form-action').append('<button id="carry">Si</button>');
-                $('#carry').focus();
+
+							$('#form-action').append('<button id="carry" class="novo-btn-primary">Si</button>');
+
+								$('#close-info').addClass('novo-btn-secondary-modal');
+								$('#carry').focus();
                 $('#close-info')
                     .text('No')
                     .attr('type', 'reset');
@@ -268,12 +271,6 @@ function notiSystem (title, message, type, action, param) {
                     .text('Cerrar')
                     .removeAttr('type');
             }
-            $('#msg_info')
-                .removeAttr('class')
-                .addClass('alert-simple alert-' + type);
-            $('#msg_info span')
-                .removeAttr('class')
-                .addClass('icon-' + icon + '-sign');
             $('#msg_info p').empty().append(message);
         }
     });

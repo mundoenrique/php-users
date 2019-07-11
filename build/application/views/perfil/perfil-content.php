@@ -648,8 +648,18 @@ $pais_residencia=$this->session->userdata('pais');
                         </fieldset>
                         <div id="msg" style="clear:both;"></div>
                         <div class="form-actions">
-                            <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar" type="reset">Cancelar</button></a>
-                            <button id="actualizar">Continuar</button>
+												<?php 	if($country == 'Ec-bp'): 		?>
+													<center>
+
+													<div class="atc-form-action-child-perfil-content">
+												<?php 	endif; ?>
+                            <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar" type="reset" class="novo-btn-secondary">Cancelar</button></a>
+														<button id="actualizar" class="novo-btn-primary">Continuar</button>
+														<?php 	if($country == 'Ec-bp'): 		?>
+
+															</div>
+															</center>
+														<?php 	endif; ?>
                             <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
                                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                             </div>
@@ -687,7 +697,7 @@ $pais_residencia=$this->session->userdata('pais');
             </div>
             <div class="form-actions">
                 <!--<button id="invalido1">Aceptar</button>-->
-                <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit">Aceptar</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Aceptar</button> </a>
             </div>
         </div>
     </div>
@@ -701,7 +711,7 @@ $pais_residencia=$this->session->userdata('pais');
             </div>
             <div class="form-actions">
                 <!-- <button id="invalido2">Aceptar</button> -->
-                <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit">Aceptar</button> </a>
+                <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Aceptar</button> </a>
             </div>
         </div>
     </div>
@@ -715,7 +725,7 @@ $pais_residencia=$this->session->userdata('pais');
             <p>El correo indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor verifique e intente nuevamente.</p>
         </div>
         <div class="form-actions">
-            <button id="disp">Aceptar</button>
+            <button id="disp" class="novo-btn-primary">Aceptar</button>
         </div>
     </div>
 </div>
@@ -728,7 +738,7 @@ $pais_residencia=$this->session->userdata('pais');
             <p id="msgAfil"></p>
         </div>
         <div class="form-actions">
-            <button id="acept">Aceptar</button>
+            <button id="acept" class="novo-btn-primary">Aceptar</button>
         </div>
     </div>
 </div>
@@ -752,7 +762,7 @@ $pais_residencia=$this->session->userdata('pais');
         </p>
     </div>
     <div class="form-actions">
-        <button id="close-datos">Aceptar</button>
+        <button id="close-datos" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -863,6 +873,6 @@ $pais_residencia=$this->session->userdata('pais');
         </p>
     </div>
     <div class="form-actions">
-        <button id="close-contrato">Aceptar</button>
+        <button id="close-contrato" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>

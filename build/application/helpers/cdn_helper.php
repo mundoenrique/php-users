@@ -203,3 +203,29 @@ if ( ! function_exists('verify_img_ctaDestino'))
 	'aaaaaceeeeiiiinooooouuuu');
 	}
 }
+
+if ( !function_exists('insertFile'))
+{
+	function insertFile($fileName, $folder = 'img/')
+	{
+		$CI =& get_instance();
+		$url_cdn = $CI->config->item('base_url_cdn');
+		$path_cdn = $CI->config->item('base_path_cdn');
+
+		$filepath = $path_cdn . $folder . $fileName;
+		echo $fileurl = $url_cdn . $folder . $fileName;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v=' . date('Ymd-U', filemtime($filepath));
+		}
+
+		/* $js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
+
+
+		$country = $country ? $country.'/' : '';
+		$file = assetPath($folder.'/'.$country.$fileName);
+		$version = '?V'.date('Ymd-U', filemtime($file));
+		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
+		return $file_url; */
+	}
+}

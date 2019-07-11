@@ -75,7 +75,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 	            </select>
 						</fieldset>
 					</form>
-					<button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+					<button id="buscar" class="novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 				</div>
 			</nav>
 			<div class="group" id="results">
@@ -98,7 +98,7 @@ $cpo_cook = $this->security->get_csrf_hash();
         </div>
     </div>
     <div class="form-actions">
-        <button id="inva5">Aceptar</button>
+        <button id="inva5" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 <?php
@@ -176,9 +176,21 @@ if(isset($data)){
         }
         ?>
 			</ul>
-			<?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
-        </div>";
+			<?php
+				if($pais=='Ec-bp'){
+					?>
+						<center>
+					<?php
+				}
+			echo
+			"<div class='form-actions'>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
     ?>
 
 	</div>

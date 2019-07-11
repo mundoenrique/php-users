@@ -76,8 +76,8 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<div id='msg-history'></div>
 				</div>
 				<div class="form-actions">
-					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">Cancelar</button></a>
-					<button id="updateAmount" type="submit">Aplicar</button>
+					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">Cancelar</button></a>
+					<button id="updateAmount" type="submit" class="novo-btn-primary">Aplicar</button>
 				</div>
 			</form>
 	</article>
@@ -91,7 +91,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 	        </div>
 	    </div>
 	    <div class="form-actions">
-	        <button id="inva5">Aceptar</button>
+	        <button id="inva5" class="novo-btn-primary">Aceptar</button>
 	    </div>
 	</div>
 	<!--*************************************FIN MODAL ERRORES***************************************-->

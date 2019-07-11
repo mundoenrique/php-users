@@ -34,8 +34,23 @@ switch($skin){
 				</form>
 				<div id="msg"></div>
 					<div class="form-actions">
-						<a href="<?php echo $homeLink; ?>"><button type="reset">Cancelar</button></a>
-						<button id="continuar">Continuar</button>
+					<?php
+						if($skin=='pichincha'){
+							?>
+								<center>
+									<div class="atc-form-action-child-perfil-content">
+							<?php
+						}
+					?>
+						<a href="<?php echo $homeLink; ?>"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+						<button id="continuar" class="novo-btn-primary">Continuar</button>
+						<?php
+						if($skin=='pichincha'){
+							?></div>
+								</center>
+							<?php
+						}
+					?>
 						<div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px; margin-right: 15px;">
 						<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
 					</div>
@@ -70,7 +85,7 @@ switch($skin){
 					</div>
 				</form>
 					<div class="form-actions">
-						<a href="<?php echo $homeLink; ?>"><button>Continuar</button></a>
+						<a href="<?php echo $homeLink; ?>"><button class="novo-btn-primary">Continuar</button></a>
 					</div>
 			</div>
 		</section>
@@ -89,7 +104,7 @@ switch($skin){
 					<p>Correo o Documento de identidad <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido">Aceptar</button>
+					<button id="invalido" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>

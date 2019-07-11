@@ -43,7 +43,8 @@ class Dashboard extends CI_Controller {
 		//console.log("ENTRA AL CONTROLADOR DEL DASH");
 		$content = $this->parser->parse('dashboard/dashboard-content', array('data' => serialize(json_decode($this->dashboard->dashboard_load()))), true);
 		//INSTANCIA DE SIDERBAR
-		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => true), true);
+		$renderWidget = $this->session->userdata('pais') != 'Ec-bp';
+		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => $renderWidget), true);
 
 		//DATA QUE SE PASA AL LAYOUT EN GENERAL
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
@@ -75,7 +76,7 @@ class Dashboard extends CI_Controller {
 		//INSTANCIA DE PARTE DE CUERPO
 		$content = $this->parser->parse('dashboard/dashboard-content-error', array(), true);
 		//INSTANCIA DE SIDERBAR
-		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
+		$sidebarlogin= $this->parser->parse('dashboard/widget-account',  array('sidebarActive' => false), true);
 
 		//DATA QUE SE PASA AL LAYOUT EN GENERAL
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
