@@ -3374,6 +3374,7 @@ ul.feed li.feed-item.feed-expense {
 
 ul.feed li.feed-item.feed-expense span.money-amount {
 	color: #e74c3c;
+	float: right;
 }
 
 ul.feed li.feed-item.feed-income {
@@ -3382,6 +3383,7 @@ ul.feed li.feed-item.feed-income {
 
 ul.feed li.feed-item.feed-income span.money-amount {
 	color: #2ecc71;
+	float: right;
 }
 
 ul.feed li.feed-item.feed-warning {

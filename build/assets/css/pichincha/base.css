@@ -2576,7 +2576,9 @@ li#replace:hover {
 .margin-bottom {
 	margin-bottom: 30px;
 }
-
+#dialog-confirm #form-action>center {
+	width: 540px;
+}
  .welcome-title-bp {
 	line-height: 0;
 	font-size: 20px;

@@ -77,14 +77,14 @@
     <article>
         <section>
             <div id="content-holder">
-								<h2>Desconexión automática</h2>
+								<h2>Gracias por usar nuestros servicios</h2>
 								<?php 	if($skin=='pichincha'): 		?>
 									<div class="alert-success" id="message">
 								<?php else: ?>
 
 								<div style="background: #03A9F4" class="alert-success" id="message">
 								<?php endif;?>
-                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p> La Sesi&oacute;n ha finalizado.</p>
+                    <p style="line-height: 30px">Su sesión en Conexión Personas ha caducado</p>
                 </div>
                 <div class="form-actions">
 								<?php 	if($skin=='pichincha'): 		?>
