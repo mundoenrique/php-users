@@ -635,7 +635,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 <hr class="separador-profile"/>
                                 <ul class="row-profile">
                                     <li class="col-md-12-profile">
-                                        <label class="label-inline" for="tyc"><input id="tyc" name="tyc" type="checkbox" value=<?php echo $tyc; ?> <?php echo $tyc == 1 ? 'checked' : '' ?>> Aceptar Términos y Condiciones</label>
+                                        <label class="label-inline" for="tyc"><input id="tyc" name="tyc" type="checkbox" value=<?php echo $tyc; ?> <?php echo $tyc == 1 ? 'checked' : '' ?>> Aceptar Términos y condiciones</label>
 																				<span id="contract">
 																					&nbsp;&nbsp;&nbsp;
 																					<label class="label-inline" for="proteccion"><input id="proteccion" name="proteccion" type="checkbox" value=<?php echo $acProteccion; ?>> Aceptar protección de datos personales</label>
@@ -647,6 +647,7 @@ $pais_residencia=$this->session->userdata('pais');
                             </div>
                         </fieldset>
                         <div id="msg" style="clear:both;"></div>
+												<?php if($country != 'Ec-bp'): ?>
                         <div class="form-actions">
 												<?php 	if($country == 'Ec-bp'): 		?>
 													<center>
@@ -664,6 +665,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                             </div>
                         </div>
+												<?php endif; ?>
                 </form>
             </div>
         </section>

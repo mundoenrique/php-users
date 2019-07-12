@@ -552,6 +552,15 @@ a:hover {
 	margin-right: 17px !important;
  }
 
+#loading.first-request {
+	margin-top: -45px !important;
+	margin-right: 285px !important;
+}
+
+#load_reg.load_reg {
+	margin-right: 285px !important;
+ }
+
  .icon-find:before {
 	 content: "\e005";
  }
