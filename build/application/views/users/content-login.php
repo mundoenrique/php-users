@@ -39,20 +39,15 @@
     </div>
     <div class="form-actions">
 		<?php
-	if($skin=='pichincha'){
-		?>
+	if($skin=='pichincha'){ ?>
 			<center>
-		<?php
-	}
-?>
-			<button id="caducado" class="novo-btn-primary">Aceptar</button>
-			<?php
-	if($skin=='pichincha'){
-		?>
+				<div class="atc-form-action-child-perfil-content">
+	<?php } ?>
+					<button id="caducado" class="novo-btn-primary">Aceptar</button>
+	<?php	if($skin=='pichincha'){	?>
+				</div>
 			</center>
-		<?php
-	}
-?>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -68,21 +63,15 @@
       <p>Su contraseña <strong>ha cadudado</strong>. </p>
     </div>
     <div class="form-actions">
-		<?php
-	if($skin=='pichincha'){
-		?>
+		<?php	if($skin=='pichincha'){ ?>
 			<center>
-		<?php
-	}
-?>
-			<button id="caducado1" class="novo-btn-primary">Aceptar</button>
-			<?php
-	if($skin=='pichincha'){
-		?>
+				<div class="atc-form-action-child-perfil-content">
+					<?php	} ?>
+						<button id="caducado1" class="novo-btn-primary">Aceptar</button>
+					<?php if($skin=='pichincha'){ ?>
+				</div>
 			</center>
-		<?php
-	}
-?>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -99,21 +88,15 @@
       <p>Usuario o Contraseña <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-<?php
-	if($skin=='pichincha'){
-		?>
-			<center>
 		<?php
-	}
-?>
-			<button id="invalido" class="novo-btn-primary">Aceptar</button>
-			<?php
-	if($skin=='pichincha'){
-		?>
-			</center>
-		<?php
-	}
-?>
+			if($skin=='pichincha'){	?>
+					<center>
+						<div class="atc-form-action-child-2">	<?php } ?>
+							<button id="invalido" class="novo-btn-primary">Aceptar</button>
+								<?php if($skin=='pichincha'){	?>
+						</div>
+					</center>
+								<?php	} ?>
     </div>
   </div>
 </div>
@@ -134,21 +117,15 @@
       </p>
     </div>
     <div class="form-actions">
-		<?php
-	if($skin=='pichincha'){
-		?>
+		<?php if($skin=='pichincha'){ ?>
 			<center>
-		<?php
-	}
-?>
-			<button id="activa" class="novo-btn-primary">Aceptar</button>
-			<?php
-	if($skin=='pichincha'){
-		?>
+				<div class="atc-form-action-child-perfil-content">
+				<?php } ?>
+				<button id="activa" class="novo-btn-primary">Aceptar</button>
+				<?php if($skin=='pichincha'){ ?>
+				</div>
 			</center>
-		<?php
-	}
-?>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -166,20 +143,16 @@
     </div>
     <div class="form-actions">
 		<?php
-	if($skin=='pichincha'){
-		?>
-			<center>
-		<?php
-	}
-?>
-			<button id="error" class="novo-btn-primary">Aceptar</button>
-			<?php
-	if($skin=='pichincha'){
-		?>
-			</center>
-		<?php
-	}
-?>
+		if($skin=='pichincha'){ ?>
+				<center>
+
+				<div class="atc-form-action-child-perfil-content">
+					<?php } ?>
+							<button id="error" class="novo-btn-primary">Aceptar</button>
+					<?php if($skin=='pichincha'){ ?>
+				</div>
+				</center>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -195,20 +168,16 @@
     </div>
     <div class="form-actions">
 		<?php
-	if($skin=='pichincha'){
-		?>
+	if($skin=='pichincha'){ ?>
 			<center>
-		<?php
-	}
-?>
+			<div class="atc-form-action-child-perfil-content">
+		<?php	} ?>
 			<button id="error-voygo" class="novo-btn-primary">Aceptar</button>
 			<?php
-	if($skin=='pichincha'){
-		?>
+	if($skin=='pichincha'){	?>
+			</div>
 			<center>
-		<?php
-	}
-?>
+		<?php	} ?>
     </div>
   </div>
 </div>
@@ -228,9 +197,11 @@
     <div class="form-actions">
 		<?php 	if($skin=='pichincha'): 		?>
 			<center>
+				<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
 			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
 			<?php 	if($skin=='pichincha'): 		?>
+					</div>
 				</center>
 			<?php 	endif; ?>
     </div>
@@ -251,9 +222,11 @@
     <div class="form-actions">
 		<?php 	if($skin=='pichincha'): 		?>
 			<center>
+				<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
 			<a href="https://online.tebca.com/personas/"><button class="novo-btn-primary">Continuar</button></a>
 			<?php 	if($skin=='pichincha'): 		?>
+				</div>
 			</center>
 		<?php 	endif; ?>
     </div>

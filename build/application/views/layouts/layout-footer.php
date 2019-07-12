@@ -61,11 +61,12 @@
       <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
     </div>
     <div class="form-actions">
-		<?php 	if($pais=='Ec-bp'): 		?>
+		<?php 	if($skin=='pichincha'): 		?>
 									<center>
+									<div class="atc-form-action-child-perfil-content-modal">
 								<?php 	endif; ?>
 			<button id="error-validate" class="novo-btn-primary">Aceptar</button>
-			<?php 	if($pais=='Ec-bp'): 		?>
+			<?php 	if($skin=='pichincha'): 		?>
 									</center>
 								<?php 	endif; ?>
     </div>
@@ -77,7 +78,7 @@
         <section>
             <div id="content-holder">
 								<h2>Desconexión automática</h2>
-								<?php 	if($pais=='Ec-bp'): 		?>
+								<?php 	if($skin=='pichincha'): 		?>
 									<div class="alert-success" id="message">
 								<?php else: ?>
 
@@ -86,12 +87,12 @@
                     <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p> La Sesi&oacute;n ha finalizado.</p>
                 </div>
                 <div class="form-actions">
-								<?php 	if($pais=='Ec-bp'): 		?>
+								<?php 	if($skin=='pichincha'): 		?>
 									<center>
 										<div class="atc-form-action-child-perfil-diesession">
 								<?php 	endif; ?>
 										<a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
-										<?php 	if($pais=='Ec-bp'): 		?>
+										<?php 	if($skin=='pichincha'): 		?>
 										</div>
 										</center>
 									<?php 	endif; ?>
@@ -172,10 +173,12 @@
     </div>
     <div class="form-actions">
 		<?php 	if($skin=='pichincha'): 		?>
-			</center>
+			<center>
+			<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
 				<button id="ok" class="novo-btn-primary"> Aceptar</button>
 				<?php 	if($skin=='pichincha'): 		?>
+			</div>
 			</center>
 		<?php 	endif; ?>
     </div>

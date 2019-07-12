@@ -552,6 +552,15 @@ a:hover {
 	margin-right: 17px !important;
  }
 
+#loading.first-request {
+	margin-top: -45px !important;
+	margin-right: 285px !important;
+}
+
+#load_reg.load_reg {
+	margin-right: 285px !important;
+ }
+
  .icon-find:before {
 	 content: "\e005";
  }
@@ -674,7 +683,7 @@ a.button {
 	-o-border-radius: 3px;
 	border-radius: 3px;
 	color: #10133f;
-	float: right;
+	float: left;
 	font-family: 'Prelo Slab', 'Prelo', Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 38px;

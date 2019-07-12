@@ -635,7 +635,7 @@ $pais_residencia=$this->session->userdata('pais');
                                 <hr class="separador-profile"/>
                                 <ul class="row-profile">
                                     <li class="col-md-12-profile">
-                                        <label class="label-inline" for="tyc"><input id="tyc" name="tyc" type="checkbox" value=<?php echo $tyc; ?> <?php echo $tyc == 1 ? 'checked' : '' ?>> Aceptar Términos y Condiciones</label>
+                                        <label class="label-inline" for="tyc"><input id="tyc" name="tyc" type="checkbox" value=<?php echo $tyc; ?> <?php echo $tyc == 1 ? 'checked' : '' ?>> Aceptar Términos y condiciones</label>
 																				<span id="contract">
 																					&nbsp;&nbsp;&nbsp;
 																					<label class="label-inline" for="proteccion"><input id="proteccion" name="proteccion" type="checkbox" value=<?php echo $acProteccion; ?>> Aceptar protección de datos personales</label>
@@ -680,7 +680,7 @@ $pais_residencia=$this->session->userdata('pais');
                 <div id="content-clave">
                     <p>Sus datos han sido cargados exitosamente.</p>
                     <div class="empty-state-actions">
-                        <a class="button" href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Aceptar</a>
+                        <a class="button novo-btn-primary" href="<? echo $this->config->item("base_url"); ?>/dashboard" rel="section">Aceptar</a>
                     </div>
                 </div>
             </section>

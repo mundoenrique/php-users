@@ -103,8 +103,17 @@ switch($skin){
 					<span aria-hidden="true" class="icon-cancel-sign"></span>
 					<p>Correo o Documento de identidad <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
-				<div class="form-actions">
-					<button id="invalido" class="novo-btn-primary">Aceptar</button>
+				<div class="form-actions"><?php
+					if($skin=='pichincha'){
+					?> <center>
+					<div class="atc-form-action-child-validar"> <?php }?>
+
+
+					<button id="invalido" class="novo-btn-primary">Aceptar</button><?php
+					if($skin=='pichincha'){
+					?>
+					</div> </center> <?php }?>
+
 				</div>
 			</div>
 		</div>

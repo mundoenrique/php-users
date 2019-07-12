@@ -70,30 +70,30 @@ switch($skin){
         </form>
         <div id="msg"></div>
         <div class="form-actions">
-					<a href="<? echo $homeLink; ?>"><?php
+          <a href="<? echo $homeLink; ?>"><?php
 						if($skin=='pichincha'){
 							?>
-								<center>
-									<div class="atc-form-action-child-perfil-content">
-							<?php
+            <center>
+              <div class="atc-form-action-child-perfil-content">
+                <?php
 						}
 					?>
-					<button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
-					<button id="validar" class="novo-btn-primary">Continuar</button>
-					<?php
+                <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
+          <button id="validar" class="novo-btn-primary">Continuar</button>
+          <?php
 						if($skin=='pichincha'){
 							?></div>
-								</center>
-							<?php
+        </center>
+        <?php
 						}
 					?>
-          <div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
-            <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
-          </div>
+        <div id="loading" class="first-request" style="display:none; float:right; width:30px; margin-top:5px;">
+          <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
         </div>
       </div>
-    </section>
-  </article>
+</div>
+</section>
+</article>
 </div>
 
 <!-- REGISTRO FASE II -->
@@ -433,11 +433,15 @@ switch($skin){
                 <h4>Requerimientos de contraseña:</h4>
                 <ul class="pwd-rules">
                   <li id="length" class="pwd-rules-item rule-invalid">• De 8 a 15 <strong>Caracteres</strong></li>
-                  <li id="letter" class="pwd-rules-item rule-invalid">• Al menos una <strong>letra minúscula</strong></li>
-                  <li id="capital" class="pwd-rules-item rule-invalid">• Al menos una <strong>letra mayúscula</strong></li>
+                  <li id="letter" class="pwd-rules-item rule-invalid">• Al menos una <strong>letra minúscula</strong>
+                  </li>
+                  <li id="capital" class="pwd-rules-item rule-invalid">• Al menos una <strong>letra mayúscula</strong>
+                  </li>
                   <li id="number" class="pwd-rules-item rule-invalid">• De 1 a 3 <strong>números</strong></li>
-                  <li id="especial" class="pwd-rules-item rule-invalid">• Al menos un <strong>caracter especial</strong><br />(ej: ! @ ? + - . , #)</li>
-                  <li id="consecutivo" class="pwd-rules-item rule-invalid">• No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+                  <li id="especial" class="pwd-rules-item rule-invalid">• Al menos un <strong>caracter
+                      especial</strong><br />(ej: ! @ ? + - . , #)</li>
+                  <li id="consecutivo" class="pwd-rules-item rule-invalid">• No debe tener más de 2
+                    <strong>caracteres</strong> iguales consecutivos</li>
                 </ul>
               </div>
             </div>
@@ -459,29 +463,29 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-					<div id="msg2"></div>
+          <div id="msg2"></div>
 
-					<?php
-						if($pais == 'Ec-bp'){
+          <?php
+						if($skin == 'pichincha'){
 							?>
-								<center>
-									<div class="atc-form-action-child-perfil-content">
-							<?php
+          <center>
+            <div class="atc-form-action-child-perfil-content">
+              <?php
 						}
 					?>
-          <a href="<? echo $homeLink; ?>"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
-					<button id="registrar" class="novo-btn-primary"> Continuar</button>
-					<?php
-						if($pais == 'Ec-bp'){
+              <a href="<? echo $homeLink; ?>"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
+              <button id="registrar" class="novo-btn-primary"> Continuar</button>
+              <?php
+						if($skin == 'pichincha'){
 							?>
-								</div>
-								<center>
-							<?php
+            </div>
+            <center>
+              <?php
 						}
 					?>
-          <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
-            <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
-          </div>
+              <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
+                <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
+              </div>
         </div>
       </div>
     </section>
@@ -514,7 +518,8 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Continuar</button>
+          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+              class="novo-btn-primary">Continuar</button>
           </a>
         </div>
       </div>
@@ -548,7 +553,8 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Continuar</button>
+          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+              class="novo-btn-primary">Continuar</button>
           </a>
         </div>
       </div>
@@ -560,7 +566,8 @@ switch($skin){
   <div id="dialog-confirm">
     <div class="alert-simple alert-error" id="message">
       <span aria-hidden="true" class="icon-cancel-sign"></span>
-      <p>La clave <strong>no cumple</strong> con las recomendaciones. <strong>Por favor varificala y vuelve a intentarlo.</strong>
+      <p>La clave <strong>no cumple</strong> con las recomendaciones. <strong>Por favor varificala y vuelve a
+          intentarlo.</strong>
       </p>
     </div>
     <div class="form-actions">
@@ -590,9 +597,9 @@ switch($skin){
   <div id="dialog-confirm">
     <div class="alert-simple alert-error" id="message">
 
-		<?php if ($skin != 'pichincha'): ?>
+      <?php if ($skin != 'pichincha'): ?>
       <span aria-hidden="true" class="icon-cancel-sign"></span>
-			<?php endif ?>
+      <?php endif ?>
       <p>El usuario indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor
         verifique e intente nuevamente.</p>
     </div>
@@ -661,16 +668,16 @@ switch($skin){
     </div>
   </div>
   <div class="form-actions">
-	<?php 	if($skin=='pichincha'): 		?>
-					<center>
-					<div class="atc-form-action-child-validar">
-				<?php endif; ?>
-		<button id="inva5" class="novo-btn-primary">Aceptar</button>
-		<?php 	if($skin=='pichincha'): 		?>
+    <?php 	if($skin=='pichincha'): 		?>
+    <center>
+      <div class="atc-form-action-child-validar">
+        <?php endif; ?>
+        <button id="inva5" class="novo-btn-primary">Aceptar</button>
+        <?php 	if($skin=='pichincha'): 		?>
 
-					</div>
-					<center>
-				<?php endif; ?>
+      </div>
+      <center>
+        <?php endif; ?>
   </div>
 </div>
 <!--Modal protección de datos-->
