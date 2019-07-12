@@ -11,7 +11,8 @@ var country = $('#content').attr('country');
 
 $(function(){
 	if(skin == 'pichincha') {
-		$('input[type=text], input[type=password], input[type=textarea]').prop('readonly', true);
+		$('input[type=text], input[type=password]').prop('readonly', true);
+		$('input[type=radio], input[type=checkbox]').prop('disabled', true)
 	}
 
 	if(tyc == '0') {
@@ -45,7 +46,11 @@ $(function(){
 
 
 	checkeds();
-	getProfesiones();
+	if(skin != 'pichincha') {
+		getProfesiones();
+	} else {
+		$('#listaProfesion-bp').val($("#content").attr("profesion"));
+	}
 
 	setTimeout(function(){$("#msg").fadeOut();},5000);
 	$('#loading-first').remove();
@@ -169,7 +174,26 @@ $(function(){
 		var anio  =fecha_nacimiento.substring(6,10);
 
 		$('#dia-nacimiento').val(dia);
-		$('#mes-nacimiento > option[value="'+mes+'"]').attr('selected', 'selected');
+		if(skin != 'pichincha') {
+			$('#mes-nacimiento > option[value="'+mes+'"]').attr('selected', 'selected');
+		} else {
+			meses = [
+				'Enero',
+				'Febrero',
+				'Marzo',
+				'Abril',
+				'Mayo',
+				'Junio',
+				'Julio',
+				'Agosto',
+				'Septiempre',
+				'Octubre',
+				'Noviembre',
+				'Diciembre'
+			];
+			mes = mes - 1;
+			$('#mes-nacimiento-bp').val(meses[mes]);
+		}
 		$('#anio-nacimiento').val(anio);
 	}
 
@@ -488,19 +512,18 @@ $(function(){
 				}
 			});
 		}
-		else if(aplicaPerfil=='N'){
+		else if(aplicaPerfil=='N' && skin != 'pichincha'){
 
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+			);
 
-				var dataRequest = JSON.stringify ({
-					codPais: codPaisresidencia,
-					subRegion: 1
-				});
+			var dataRequest = JSON.stringify ({
+				codPais: codPaisresidencia,
+				subRegion: 1
+			});
 
-				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 			$.post(base_url + "/perfil/listaEstado", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				//console.log(data);
