@@ -23,11 +23,12 @@ $(function(){
 		systemDialog('Activa tu tarjeta plata beneficio', 'Completa el formulario.');
 	}
 
-	var tlfLength = '11';
+	var tlfLength = '7';
 	var codLength = '10';
 	if (skin == 'pichincha'){
 		$('#codepostal').attr('maxlength','6');
-		codLength = '6'
+		codLength = '6',
+		tlfLength = '11'
 	}
 
 	//Menu desplegable transferencia
