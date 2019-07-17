@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
     <ul class="menu">
         <li class="menu-item current-menu-item">
@@ -35,6 +39,7 @@
             </nav>
             <h2>Historial</h2>
             <form accept-charset="utf-8" action="transfers-banks-log.html" method="post">
+							<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                 <label for="donor">Cuenta de Origen</label>
                 <div class="group" id="donor">
                     <div class="group" id="donor">
@@ -74,7 +79,7 @@
                             </select>
                         </fieldset>
                     </form>
-                    <button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+                    <button id="buscar" class="novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
                 </div>
             </nav>
             <div class="group" id="results">
@@ -145,16 +150,18 @@ foreach ($datos->cuentaOrigen as $value) {
             $marca=strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
             $pais=ucwords($this->session->userdata('pais'));
-            $moneda=lang("MONEDA");
+						$moneda=lang("MONEDA");
+						$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+						$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-            echo "<li class='dashboard-item $empresa' moneda='$moneda' card='$value->nroTarjeta' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'>
+            echo "<li class='dashboard-item $empresa' moneda='$moneda' card='$value->nroTarjeta' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+         <p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
          <p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-         <p class='dashboard-item-category'>$value->producto</p>
+         <p class='dashboard-item-category'>$nomProducto</p>
          </div>
          </a>
          </li>";
@@ -167,9 +174,20 @@ foreach ($datos->cuentaOrigen as $value) {
         }
         ?>
     </ul>
-    <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
-        </div>";
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+		echo "<div class='form-actions'>
+				<button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+		</div>";
+		if($pais=='Ec-bp'){
+			?>
+				</center>
+			<?php
+		}
     ?>
 
 </div>    <!-- DIV DE CUENTAS ORIGEN -->

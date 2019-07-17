@@ -245,7 +245,26 @@ $(function(){
 				nombre_banco = $("#cargarConfirmacion").find("#ctaAfiliar").attr("nombre_banco");
 
 
-				$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2C","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+				var dataRequest = JSON.stringify ({
+					"nroPlasticoOrigen":numeroCtaOrigen,
+					"beneficiario":beneficiario,
+					"nroCuentaDestino":numeroCta,
+					"tipoOperacion":"P2C",
+					"email":email,
+					"cedula":cedula,
+					"banco":banco,
+					"prefix":prefix,
+					"expDate":expDate
+				})
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+				$.post(base_url +"/affiliation/affiliation_P2T",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 					if(data.rc == -61){
 						$(location).attr('href', base_url+'/users/error_gral');
 					}
@@ -423,8 +442,13 @@ $(function(){
 
 		$.ajaxSetup({async: false});
 
-		$.post(base_url +"/affiliation/bancos",function(data){
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		  );
 
+		$.post(base_url +"/affiliation/bancos",{"cpo_name":cpo_cook},function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$.each(data.lista,function(pos,item){
 
 				var lista;

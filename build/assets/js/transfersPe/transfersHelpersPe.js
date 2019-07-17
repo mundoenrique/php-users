@@ -230,15 +230,29 @@ function validar_campos(valida) {
 				var data_seralize = $.param(ajax_data);
 
 				//petición de tarjetas por telefono
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+				var dataRequest = JSON.stringify ({
+					data : data_seralize,
+					model : "AccountPhone"
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
 				$.ajax({
 					url: base_url + '/transferencia/peGeneral',
 					type: "post",
-					data: {data : data_seralize, model : "AccountPhone"},
+					data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 					datatype: 'JSON',
 					beforeSend: function (xrh, status) {
 							cleanBefore($("#cargandoPhone"),$("#search-cards"));
 					},
-					success: function(data){
+					success: function(response){
+
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 						cleanComplete($("#cargandoPhone"),$("#search-cards"));
 						switch(data.code){
 							case 0:
@@ -379,16 +393,29 @@ function validar_campos(valida) {
 //ENVIO DE INFORAMCIÓN AL CONTROLADOR ----------------------------------------------------
 function makeTransferPe(formData, token)
 {
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	var dataRequest = JSON.stringify ({
+		data : formData,
+		token : token
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 	$.ajax({
 		url: base_url + '/transfererencia/transferPe',
 		type: "post",
-		data: {data : formData, token : token},
+		data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 		dataType: 'json',
 		beforeSend: function (xrh, status) {
 				cleanBefore ($("#cargandoInfo"),$("#continuar"));
 		},
-		success: function(data) {
+		success: function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			cleanComplete($("#cargandoInfo"),$("#continuar"));
 			switch (data.code) {
 				case 0:

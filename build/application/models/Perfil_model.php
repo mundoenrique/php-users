@@ -26,16 +26,16 @@ class Perfil_model extends CI_Model {
         ));
 
         log_message("info", "Salida perfil_usuario ".$data);
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'perfil_load');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada perfil_load : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'perfil_load'));
 
         $salida = json_encode($desdata);
 
-        log_message("info", "Salida perfil model response".$salida);
+        log_message("DEBUG", '['.$this->session->userdata("userName").'] RESPONSE PEFIL' .$salida);
 
         return json_encode($desdata);
 
@@ -243,21 +243,17 @@ class Perfil_model extends CI_Model {
             "direccion"=>$direccion,
             "isParticular"=> true,
             "logAccesoObject"	=> $logAcceso,
-            "token"				=> $this->session->userdata("token")
+            "token"	=> $this->session->userdata("token"),
+            "country" => $this->session->userdata('pais')
         ));
 
 
-
-        log_message("info", "REQUEST DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".$data);
-
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'perfil_update');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada perfil_update : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
-
-        log_message("info", "RESPONSE DEL FORMULARIO LARGO ACTUALIZAR PERFIL===> ".json_encode($desdata));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'perfil_update'));
 
         if($aplicaPerfil=='S' && $verifyDigit != '') {
             switch ($desdata->rc) {
@@ -273,7 +269,8 @@ class Perfil_model extends CI_Model {
 
 				$desdata->rc === 0 ? $this->session->set_userdata('tyc', $tyc) : '';
 
-        return json_encode($desdata);
+        $response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
         // Simula respuesta de servicio
         // $desdata = '{"rc":-317,"msg":"Error cuenta invalida"}';
         // $this->session->set_userdata('afiliado', $contrato);
@@ -296,12 +293,12 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_paises');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_paises : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_paises'));
 
         return json_encode($desdata);
 
@@ -323,16 +320,18 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_estados');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_estados : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_estados'));
 
 
-        log_message("info", "Salida desencriptada lista_estados : ".json_encode($desdata));
-        return json_encode($desdata);
+				log_message("info", "Salida desencriptada lista_estados : ".json_encode($desdata));
+
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 
@@ -353,14 +352,15 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_ciudad');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_ciudad : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_ciudad'));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -385,7 +385,7 @@ class Perfil_model extends CI_Model {
         ));
         log_message("info", "JSONData departamento==>: ".$data);
 
-        $dataEncry	= np_Hoplite_Encryption($data,0);
+        $dataEncry = np_Hoplite_Encryption($data,0,'lista_departamentos');
         $data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId' => 'CPONLINE'));
         log_message("info", "JSONDATA LLAMADO AL SERVICIO==>: ".$data);
 
@@ -397,10 +397,10 @@ class Perfil_model extends CI_Model {
 
         $data		= json_decode($response);
 
-        $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0));
+        $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'lista_departamentos'));
         log_message("info", "Salida desencriptada lista_departamento : ".json_encode($desdata));
-
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -417,14 +417,15 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_profesiones');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_profesiones : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_profesiones'));
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+        return json_encode($response);
 
     }
 
@@ -443,12 +444,12 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_direcciones');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_direcciones : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_direcciones'));
 
         return json_encode($desdata);
 
@@ -469,12 +470,12 @@ class Perfil_model extends CI_Model {
             "token"=>$this->session->userdata("token")
         ));
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'lista_telefonos');
         $data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada lista_telefonos : ".$data);
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_telefonos'));
 
         return json_encode($desdata);
 
@@ -495,7 +496,7 @@ class Perfil_model extends CI_Model {
         ));
         log_message("info", "Salida verificar email---------> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'verificar_email');
         $data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
         log_message("info", "Salida encriptada verificar email------------> : ".$data);
 
@@ -503,11 +504,12 @@ class Perfil_model extends CI_Model {
 
         $data = json_decode($response);
 
-        $desdata = np_Hoplite_Decrypt($data->data,1);
+        $desdata = np_Hoplite_Decrypt($data->data,1,'verificar_email');
 
         log_message("info", "Salida Verificar email------------->".$desdata);
 
-        return json_encode($desdata);
+				$response = $this->cryptography->encrypt($desdata);
+				return json_encode($response);
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

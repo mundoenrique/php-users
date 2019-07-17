@@ -20,39 +20,32 @@ class Report_model extends CI_Model {
 			"className"=>"com.novo.objects.MO.GastosRepresentacionMO",
 			"idPersona"=> $idPersona,
 			"nroTarjeta"=> $tarjeta,
-		    "fechaIni"=> $fechaIni,
-		    "fechaFin"=> $fechaFin,
-		    "producto"=> $producto,
-		    "tipoConsulta"=> $tipoConsulta,
-		    //"tipoConsulta"=> "0",
+			"fechaIni"=> $fechaIni,
+			"fechaFin"=> $fechaFin,
+			"producto"=> $producto,
+			"tipoConsulta"=> $tipoConsulta,
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 		));
 
-		log_message("info", "SALIDA REPORTES : ".$data);
-
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		$dataEncry = np_Hoplite_Encryption($data,1,'gastos_model');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-
-		log_message("info", "SALIDA ENCRIPTADA REPORTE : ".$data);
-
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'gastos_model'));
 
-	  	$salida = json_encode($desdata);
+	  $salida = json_encode($desdata);
 
-	  	log_message("info", "Salida gastos_model reporte".$salida);
-
-	  	return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+		return json_encode($response);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//EXPORTAR REPORTES A EXCEL
 	//EXPORTAR REPORTES A EXCEL ELIMINADO POR REQUERIMIENTO DEL USUARIO
-	 public function exp_xls($idpersona,$tarjeta,$producto,$tipoConsulta,$id_ext_emp,$fechaIni, $fechaFin){
-	$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","reportes","gastos por categoria","generarArchivoXlsGastosRepresentacion");
+	public function exp_xls($idpersona,$tarjeta,$producto,$tipoConsulta,$id_ext_emp,$fechaIni, $fechaFin){
+		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","reportes","gastos por categoria","generarArchivoXlsGastosRepresentacion");
 
 	 	$data = json_encode(array(
 	 		"idOperation"=>"generarArchivoXlsGastosRepresentacion",
@@ -66,24 +59,18 @@ class Report_model extends CI_Model {
 		    "idExtEmp"=> $id_ext_emp,
 	 		"logAccesoObject"=>$logAcceso,
 	 		"token"=>$this->session->userdata("token")
-	 	));
-	 	//print_r($data);
-log_message("info", "Salida  exp_xls : ".$data);
-	 	$dataEncry = np_Hoplite_Encryption($data,1);
+		 ));
 
-
+	 	$dataEncry = np_Hoplite_Encryption($data,1,'exp_xls');
 	 	$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-	 	log_message("info", "Salida encriptada exp_xls : ".$data);
 	 	$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	   	$data = json_decode($response);
-	   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exp_xls'));
 
-   		$salida = json_encode($desdata);
+		$salida = json_encode($desdata);
 
-	   	log_message("info", "Salida exp_xls reporte".$salida);
-
-	   	return json_encode($desdata);
-	 }
+		return json_encode($desdata);
+	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,19 +91,19 @@ log_message("info", "Salida  exp_xls : ".$data);
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 		));
-log_message("info", "Salida  exp_pdf : ".$data);
-		$dataEncry = np_Hoplite_Encryption($data,1);
+		log_message("info", "Salida  exp_pdf : ".$data);
+		$dataEncry = np_Hoplite_Encryption($data,1,'exp_pdf');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada exp_pdf : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+		$data = json_decode($response);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exp_pdf'));
 
-	  	$salida = json_encode($desdata);
+		$salida = json_encode($desdata);
 
-	  	log_message("info", "Salida exp_pdf reporte".$salida);
+		log_message("info", "Salida exp_pdf reporte".$salida);
 
-	  	return json_encode($desdata);
+		return json_encode($desdata);
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

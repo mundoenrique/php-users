@@ -1,7 +1,13 @@
+<?php
+$country = $this->session->userdata('pais');
+$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 			<div id="content">
 				<article>
 					<header>
-						<h1>Detalle de Cuenta</h1>
+						<h1>Detalle de la cuenta</h1>
 					</header>
 					<section>
 						<div class="group" id="balance">
@@ -20,7 +26,9 @@
 								</ul>
 							</div>
 						</div>
-						<a class="button alternate-button small-button" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
+						<?php if($country != 'Ec-bp'): ?>
+						<a class="button alternate-button small-button novo-btn-secondary volver" href="<? echo $this->config->item("base_url"); ?>/dashboard">Volver atrás</a>
+						<?php endif;?>
 						<h2>Movimientos</h2>
 						<nav id="filters-stack">
 							<div class="stack-form">
@@ -28,7 +36,7 @@
 									<fieldset>
 										<label for="filter-month">Mostrar:</label>
 										<select id="filter-month" name="filter-month">
-											<option selected value="0">Más Recientes</option>
+											<option selected value="0">Más recientes</option>
 											<option value="1">Enero</option>
 											<option value="2">Febrero</option>
 											<option value="3">Marzo</option>
@@ -53,20 +61,22 @@
 										</select>
 									</fieldset>
 								</form>
-								<button id="buscar"><span aria-hidden="true" class="icon-arrow-right"></span></button>
+								<button id="buscar" class="mensual novo-btn-primary"><span aria-hidden="true" class="icon-arrow-right"></span></button>
 							</div>
 							<ul class="stack stack-extra">
+								<?php if($country != 'Ec-bp'): ?>
 								<li class="stack-item">
 									<a id="print_detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print"></span></a>
 								</li>
 								<li class="stack-item">
 									<a id="download"  href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download"></span></a>
-								</li>								
+								</li>
+								<?php endif; ?>
 								<li class="stack-item">
 									<a id="downloadxls"  href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel"></span></a>
 								</li>
 							</ul>
-							
+
 						</nav>
 						<div class="group" id="results">
 							<div class="group-main-view" id="transactions">
@@ -82,7 +92,7 @@
 									<input id="mes" type="hidden" name="mes" value="" />
 									<input id="anio" type="hidden" name="anio" value="" />
 									<input id="idOperation" type="hidden" name="idOperation" value="" />
-								</form>								
+								</form>
 							</div>
 							<div class="group-aside-view" id="stats">
 								<h3>Estadísticas</h3>

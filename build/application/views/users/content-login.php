@@ -1,24 +1,31 @@
 <?php
   $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
-  if ($skin == 'latodo') {
-    $signupLink = $this->config->item('base_url') . '/registro/index_pe';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
-  } else {
-    $signupLink = $this->config->item('base_url') . '/registro';
-    $recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
-    $recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
-  }
+	if ($skin == 'latodo') {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';
+	} else if($skin == 'pichincha'){
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pi';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pi';
+	}else {
+		$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin';
+		$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword';
+	}
+  $signupLink = $this->config->item('base_url') . '/registro';
+
+  echo $insertRecaptcha;
 ?>
+<?php if($skin != 'pichincha'): ?>
 <div id="slideshow">
   <ul class="slides">
     <li class="slide current-slide" data-slide="">
-      <p class="slide-title">Bienvenido a Conexión Personas Online</p>
-      <p>Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24</p>
+			<div class="img-back">
+				<p class="slide-title"><?= lang('WELCOME_TITLE'); ?></p>
+			</div>
+      <p><?= lang('WELCOME_MSG'); ?></p>
     </li>
   </ul>
 </div>
-
+<?php endif; ?>
 <!-- MODAL -->
 
 <div id="dialog-overlay" style='display:none'>
@@ -31,7 +38,16 @@
       <p>Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas. </p>
     </div>
     <div class="form-actions">
-      <button id="caducado">Aceptar</button>
+		<?php
+	if($skin=='pichincha'){ ?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+	<?php } ?>
+					<button id="caducado" class="novo-btn-primary">Aceptar</button>
+	<?php	if($skin=='pichincha'){	?>
+				</div>
+			</center>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -47,7 +63,15 @@
       <p>Su contraseña <strong>ha cadudado</strong>. </p>
     </div>
     <div class="form-actions">
-      <button id="caducado1">Aceptar</button>
+		<?php	if($skin=='pichincha'){ ?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+					<?php	} ?>
+						<button id="caducado1" class="novo-btn-primary">Aceptar</button>
+					<?php if($skin=='pichincha'){ ?>
+				</div>
+			</center>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -64,7 +88,44 @@
       <p>Usuario o Contraseña <strong>inválido</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-      <button id="invalido">Aceptar</button>
+		<?php
+			if($skin=='pichincha'){	?>
+					<center>
+						<div class="atc-form-action-child-2">	<?php } ?>
+							<button id="invalido" class="novo-btn-primary">Aceptar</button>
+								<?php if($skin=='pichincha'){	?>
+						</div>
+					</center>
+								<?php	} ?>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL SESION ACTIVA -->
+
+<div id="sesion-activa" style='display:none'>
+  <header>
+    <h2>Información</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+      <p>
+      Tienes una sesión activa en otra ubicación. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>Cerrar sesión</strong>.<br>
+      Pulsa <strong>Aceptar</strong> para cerrarla y continuar.
+      </p>
+    </div>
+    <div class="form-actions">
+		<?php if($skin=='pichincha'){ ?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+				<?php } ?>
+				<button id="activa" class="novo-btn-primary">Aceptar</button>
+				<?php if($skin=='pichincha'){ ?>
+				</div>
+			</center>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -73,15 +134,25 @@
 
 <div id="dialog-error" style='display:none'>
   <header>
-    <h2>Error en el sistema</h2>
+    <h2>Conexión Personas</h2>
   </header>
   <div class="dialog-small" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>Ha ocurrido un error en el sistema. Por favor <strong>inténtelo</strong> más tarde.</p>
+      <p>No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong></p>
     </div>
     <div class="form-actions">
-      <button id="error">Aceptar</button>
+		<?php
+		if($skin=='pichincha'){ ?>
+				<center>
+
+				<div class="atc-form-action-child-perfil-content">
+					<?php } ?>
+							<button id="error" class="novo-btn-primary">Aceptar</button>
+					<?php if($skin=='pichincha'){ ?>
+				</div>
+				</center>
+		<?php } ?>
     </div>
   </div>
 </div>
@@ -96,7 +167,17 @@
       <p>Usted no posee un usuario del portal <strong>Voygo Usuarios</strong>.</p>
     </div>
     <div class="form-actions">
-      <button id="error-voygo">Aceptar</button>
+		<?php
+	if($skin=='pichincha'){ ?>
+			<center>
+			<div class="atc-form-action-child-perfil-content">
+		<?php	} ?>
+			<button id="error-voygo" class="novo-btn-primary">Aceptar</button>
+			<?php
+	if($skin=='pichincha'){	?>
+			</div>
+			<center>
+		<?php	} ?>
     </div>
   </div>
 </div>
@@ -114,7 +195,15 @@
       <p>¿Olvidate tu <a href="<?php echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<?php echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
     </div>
     <div class="form-actions">
-      <button id="aceptar">Aceptar</button>
+		<?php 	if($skin=='pichincha'): 		?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+		<?php 	endif; ?>
+			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
+			<?php 	if($skin=='pichincha'): 		?>
+					</div>
+				</center>
+			<?php 	endif; ?>
     </div>
   </div>
 </div>
@@ -131,7 +220,15 @@
       </p>
     </div>
     <div class="form-actions">
-      <a href="https://online.tebca.com/personas/"><button>Continuar</button></a>
+		<?php 	if($skin=='pichincha'): 		?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+		<?php 	endif; ?>
+			<a href="https://online.tebca.com/personas/"><button class="novo-btn-primary">Continuar</button></a>
+			<?php 	if($skin=='pichincha'): 		?>
+				</div>
+			</center>
+		<?php 	endif; ?>
     </div>
   </div>
 </div>

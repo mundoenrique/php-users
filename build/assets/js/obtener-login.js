@@ -3,14 +3,17 @@ base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 
 	$(function(){
-
+	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
 	$("#continuar").click(function(){
     $("#continuar").attr('disabled',true );
     $("#loading").show();
 
 		validar_campos();
-
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$("#form-validar").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#form-validar").submit();
 		setTimeout(function(){$("#msg").fadeOut();},5000);
 
@@ -25,8 +28,20 @@ base_cdn = $('body').attr('data-app-cdn');
 
 			id_ext_per = Base64.encode(id_ext_per);
 			email = Base64.encode(email);
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-			$.post(base_url +"/users/obtenerlogin_call",{"id_ext_per":id_ext_per, "email":email},function(data){
+				var dataRequest = JSON.stringify ({
+					id_ext_per: id_ext_per,
+					email: email
+				});
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$consulta = $.post(base_url+"/users/obtenerlogin_call", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
         if(data.rc == -61){
               $(location).attr('href', base_url+'/users/error_gral');
           }
@@ -89,7 +104,7 @@ base_cdn = $('body').attr('data-app-cdn');
 
 			messages: {
 
-				"email": "El correo electrónico NO puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
+				"email": "El correo electrónico no puede estar vacío y debe contener formato correcto. (xxxxx@ejemplo.com)",
 				"card-holder-id": "Debe introducir su número de identidad"
 			}
 		}); // VALIDATE

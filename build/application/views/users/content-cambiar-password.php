@@ -1,4 +1,8 @@
 
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <div id="content">
 				<article>
 					<header>
@@ -14,6 +18,7 @@
 							<?php endif; ?>
 							<p>Por favor complete la información requerida a continuación para generar una nueva contraseña:</p>
 							<form accept-charset="utf-8" method="post">
+								<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 								<fieldset class="fieldset-column-center">
 									<div class="field-meter" id="password-strength-meter">
 										<h4>Requerimientos de contraseña:</h4>
@@ -38,13 +43,13 @@
 								<div class="form-actions">
 									<?php
 										if(isset($temporal) && ($temporal == 'n')) {
-										echo '<button class="volver" type="reset">Cancelar</button>';
+										echo '<button class="volver" type="reset" class="novo-btn-primary">Cancelar</button>';
 										}
 									?>
 									<div id="loading" class="icono-load" style="display: none; float:right; width:30px; margin-top:7px; margin-right:60px; margin-bottom:0px;">
 												<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
 									</div>
-									<button id="continuar" disabled>Continuar</button>
+									<button id="continuar" class="novo-btn-primary" disabled>Continuar</button>
 
 								</div>
 						</div>
@@ -68,7 +73,7 @@
 								<p>Su contraseña ha sido actualizada <strong>con éxito.</strong></p>
 							</div>
 							<div class="form-actions">
-								<button id="aceptar">Continuar</button>
+								<button id="aceptar" class="novo-btn-primary">Continuar</button>
 							</div>
 					</div>
 				</section>
@@ -90,11 +95,11 @@
 							</div>
 								<?php
 									if(isset($temporal)&&$temporal!='t'){
-										echo '<button class="volver" type="reset">Aceptar</button>';
+										echo '<button class="volver" type="reset" class="novo-btn-primary">Aceptar</button>';
 									}
 
 									else{
-									echo '<button id="regresar" type="reset">Regresar</button>';
+									echo '<button id="regresar" type="reset" class="novo-btn-secondary">Regresar</button>';
 
 									}
 
@@ -116,7 +121,7 @@
 					<p>Todos los campos son <strong>obligatorios</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido">Aceptar</button>
+					<button id="invalido" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>
@@ -125,7 +130,7 @@
 
 		<div id="dialog-clave-inv1" style='display:none'>
 			<header>
-				<h2>Error en campos</h2>
+				<h2>Cambio de contraseña</h2>
 			</header>
 			<div class="dialog-small" id="dialog">
 				<div class="alert-simple alert-warning" id="message">
@@ -133,7 +138,7 @@
 					<p>Su contraseña <strong>coincide</strong> con la anterior. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido1">Aceptar</button>
+					<button id="invalido1" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>
@@ -150,7 +155,7 @@
 					<p>Sus contraseñas <strong>no coinciden</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido2">Aceptar</button>
+					<button id="invalido2" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>

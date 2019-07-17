@@ -73,17 +73,26 @@ $(function() {
 function confirmPassOperac(clave)
 {
 	var response;
-	var ajax_data = {
-		"clave":hex_md5(clave)
-	};
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
+
+	var dataRequest = JSON.stringify ({
+		clave:hex_md5(clave)
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 	$.ajax({
 		url: base_url +"/transferencia/operaciones",
-		data: ajax_data,
+		data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 		type: "post",
 		dataType: 'json',
 		async: false,
-		success: function(data) {
+		success: function(dataResponse) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(dataResponse.code, dataResponse.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			response = $.parseJSON(data.response);
 			switch (response.rc) {
 				case 0:
@@ -227,8 +236,12 @@ function sumar_saldo()
 function requestPassword()
 {
 	var  msg;
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		url: base_url + '/transferencia/crearClave',
+		data: {cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -277,13 +290,12 @@ function requestPassword()
  */
 function validar_clave(claveConfir)
 {
-	var ajax_data = {
-		'clave':hex_md5(claveConfir)
-	};
-
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 	$.ajax({
 		url: base_url + '/transferencia/confirmacion',
-		data: ajax_data,
+		data: {"clave":hex_md5(claveConfir), cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
@@ -322,24 +334,33 @@ function makeTransfer(type)
 	var transfer = 1;
 	$.each(destination, function(pos, item) {
 
-		var dataRequest = {
-			"cuentaOrigen" : sourceNumber,
-			"cuentaDestino" : item.accountDes,
-			"monto" : item.amountDest,
-			"descripcion" : item.conceptDest,
-			"tipoOpe" : type,
-			"idUsuario" : nameSource,
-			"id_afil_terceros": item.idAfil,
-			"expDate" : expDate
-		};
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		var dataRequest = JSON.stringify ({
+			cuentaOrigen : sourceNumber,
+			cuentaDestino : item.accountDes,
+			monto : item.amountDest,
+			descripcion : item.conceptDest,
+			tipoOpe : type,
+			idUsuario : nameSource,
+			id_afil_terceros: item.idAfil,
+			expDate : expDate
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 		$.ajax({
 			url: base_url + '/transferencia/procesar',
-			data: dataRequest,
+			data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 			type: "post",
 			dataType: 'json',
 			async: false,
-			success: function(data) {
+			success: function(response) {
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				var rc, classR = 'data-error', iconR = 'icon-cancel-sign', transferId = '', msg,
 					men = '';
 				$('#next-step span').remove();
@@ -459,7 +480,7 @@ function notiSystem(action, title, msg)
 			$(".ui-dialog-titlebar-close", ui.dialog).hide();
 			switch(action) {
 				case 'passReq':
-					$('#button-action').append('<button id="send-pass">Aceptar</button>');
+					$('#button-action').append('<button id="send-pass" class="novo-btn-primary">Aceptar</button>');
 					$('#close-info')
 						.text('Cancelar')
 						.attr('type', 'reset');

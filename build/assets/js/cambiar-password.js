@@ -143,7 +143,22 @@ base_cdn = $('body').attr('data-app-cdn');
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$("#continuar").hide();
 					$("#loading").show();
-					$.post(base_url +"/users/actualizarPassword",{"passwordOld":old, "passwordNew":newC},function(data){
+
+					var cpo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+					var dataRequest = JSON.stringify ({
+						passwordOld:old,
+						passwordNew:newC
+					});
+
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+					$.post(base_url +"/users/actualizarPassword",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 							if(data.rc == -61){
 								$(location).attr('href', base_url+'/users/error_gral');
 

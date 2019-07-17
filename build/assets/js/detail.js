@@ -4,7 +4,7 @@ $(function(){
   var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
  if ($('#filter-month').val() == "0") {
-    $("#period").text("Reciente");
+    $("#period").text("reciente");
   }
 
 //PERIOD SPAN TITLE
@@ -56,13 +56,36 @@ $('#buscar').on('click',function(){
   });
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
-  $.post(base_url+"/detalles/load",{"tarjeta":$("#card").attr("card")},function(data){
+	var dataRequest = JSON.stringify ({
+		tarjeta:$("#card").attr("card")
+	});
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+	$.post(base_url+"/detalles/load", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
     $('#loading').hide();
     carga_lista(data);
   });
+	var cpo_cook = decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 
-  $.post(base_url+"/dashboard/saldo",{"tarjeta":$("#card").attr("card")},function(data){
+	var dataRequest = JSON.stringify ({
+		tarjeta:$("#card").attr("card")
+		})
+
+	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+	$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
     var moneda=$(".product-info-full").attr("moneda");
     var saldoAct=data.actual;
@@ -106,7 +129,11 @@ $('#buscar').on('click',function(){
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
       }
-      document.getElementById("idOperation").value='5';
+			document.getElementById("idOperation").value='5';
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('#form').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
       $("#form").submit();
     }
   });
@@ -132,8 +159,12 @@ $('#buscar').on('click',function(){
         $("#mes").val(("0"+$("#filter-month").val()).slice(-2));
         $("#anio").val($("#filter-year").val());
       }
-      document.getElementById("idOperation").value="46";
-     $("#form").submit();
+			document.getElementById("idOperation").value="46";
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			$('#form').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
+     	$("#form").submit();
     }
   });
 
@@ -166,15 +197,39 @@ $('#buscar').on('click',function(){
     $('#estadisticas').children().remove();
     $('#loading').show();
     mes = $("#filter-month").val();
-    anio = $("#filter-year").val();
+		anio = $("#filter-year").val();
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
     if(mes==0){
-      $.post(base_url+"/detalles/load",{"tarjeta":$("#card").attr("card")},function(data){
+
+			var dataRequest = JSON.stringify ({
+				tarjeta:$("#card").attr("card")
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/detalles/load", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
         $('#loading').hide();
         carga_lista(data);
       });
     }
     else{
-      $.post(base_url+"/detail/CallWsMovimientos", {"tarjeta":$("#card").attr("card"),"mes":mes,"anio":anio}, function(data){
+
+			var dataRequest = JSON.stringify ({
+				tarjeta:$("#card").attr("card"),
+				mes:mes,
+				anio:anio
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/detail/CallWsMovimientos", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
         $('#loading').hide();
         carga_lista(data);
       });
@@ -185,17 +240,22 @@ $('#buscar').on('click',function(){
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   function carga_lista(data){
-    var clase, cadena;
+		var clase, cadena;
+		var result = '<h2>No se encontraron movimientos</h2>';
+		result += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
     if(data.rc == -61){
       $(location).attr('href', base_url+'/users/error_gral');
-    }
+		}
+		if (data.rc == -9999) {
+			result = '<h2>Atención</h2>';
+			result += '<p>Combinación de caracteres no válida.</p>';
+		}
     if(data.rc != 0){
       $("#list-detail").children().remove();
-      cadena='<div id="empty-state" style="position: static;">';
-      cadena+=                '<h2>No se encontraron movimientos</h2>';
-      cadena+=                 '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-      cadena+=                '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
-      cadena+=             '</div>';
+      cadena = '<div id="empty-state" style="position: static;">';
+      cadena+= result;
+      cadena+= '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+      cadena+= '</div>';
       $("#list-detail").append(cadena);
       reporte = false;
     }

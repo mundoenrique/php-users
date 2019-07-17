@@ -1,4 +1,7 @@
-
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 	<div id="content">
 		<article>
 			<header>
@@ -9,6 +12,7 @@
 					<h2>Creación de Clave de Operaciones</h2>
 					<p>Para realizar transacciones con sus cuentas desde <strong>Conexión Personas</strong> es necesario proporcione su clave de operaciones. Por favor, complete los campos a continuación para generar esta clave:</p>
 					<form accept-charset="utf-8" id="form-validar" method="post">
+						<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 						<fieldset class="fieldset-column-center">
 							<div class="field-meter" id="password-strength-meter">
 								<h4>Requerimientos de contraseña:</h4>
@@ -29,8 +33,8 @@
 					</form>
 						<div class="form-actions">
 							<div id="msg"> </div>
-							<a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="reset">Cancelar</button> </a>
-							<button id="continuar">Continuar</button>
+							<a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
+							<button id="continuar" class="novo-btn-primary">Continuar</button>
 						</div>
 				</div>
 			</section>
@@ -52,7 +56,7 @@
 								<p>Su clave de operaciones ha sido creada <strong>con éxito.</strong></p>
 							</div>
 							<div class="form-actions">
-								<button id="continuar">Continuar</button>
+								<button id="continuar" class="novo-btn-primary">Continuar</button>
 							</div>
 					</div>
 				</section>
@@ -75,7 +79,7 @@
 								<p>Su clave de operaciones ha sido actualizada <strong>con éxito</strong>.</p>
 							</div>
 							<div class="form-actions">
-								<button id="confirmar">Continuar</button>
+								<button id="confirmar" class="novo-btn-primary">Continuar</button>
 							</div>
 					</div>
 				</section>
@@ -95,7 +99,7 @@
 								<p>Su clave de operaciones no ha sido actualizada. Por favor verifique sus datos.</p>
 							</div>
 							<div class="form-actions">
-								<button id="regresar">Regresar</button>
+								<button id="regresar" class="novo-btn-primary">Regresar</button>
 							</div>
 					</div>
 				</section>
@@ -113,7 +117,7 @@
 					<p>Todos los campos son <strong>obligatorios</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido">Aceptar</button>
+					<button id="invalido" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>
@@ -131,7 +135,7 @@
 					<p>Sus claves <strong>no coinciden</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
 				</div>
 				<div class="form-actions">
-					<button id="invalido2">Aceptar</button>
+					<button id="invalido2" class="novo-btn-primary">Aceptar</button>
 				</div>
 			</div>
 		</div>

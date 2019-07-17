@@ -1,4 +1,8 @@
-<?php $country = $this->session->userdata('pais'); ?>
+<?php
+$country = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu" style='display:none'>
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -71,6 +75,7 @@
 
 													</div>
 													<form id="form-search" method="post" name="form-search">
+														<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 														<div id='cardRef' style="display:none">
 															<fieldset class='form-inline'>
 																<label for='beneficiary-1x-description'>Tarjeta</label>
@@ -203,13 +208,13 @@
 
 						<div id="buttonTrx" class="form-actions">
 							<span aria-hidden="true" class="icon-refresh icon-spin" id="cargandoInfo" style="font-size:35px;"></span>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">Cancelar</button></a>
-							<button disabled class="confir" id="continuar" type="submit" action='form-confirm'>Continuar</button>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">Cancelar</button></a>
+							<button disabled class="confir" id="continuar" type="submit" action='form-confirm' class="novo-btn-primary">Continuar</button>
 						</div>
 						<div id="finalTrx" class="form-actions" style="display:none">
 							<p class="msgr">¿Desea realizar otra transferencia?</p>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">No</button></a>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/transferencia/pe"><button class="button" type="button">Si</button></a>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">No</button></a>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/transferencia/pe"><button class="button" type="button" class="novo-btn-primary">Si</button></a>
 						</div>
 				</div>
 			</section>
@@ -277,9 +282,10 @@
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
 				$paramTrx = $value->parametrosTransferencia;
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'
 				montoMaxOperaciones = '$paramTrx->montoMaxOperaciones' montoMinOperaciones='$paramTrx->montoMinOperaciones' montoMaxDiario='$paramTrx->montoMaxDiario' montoMaxSemanal='$paramTrx->montoMaxSemanal' montoMaxMensual='$paramTrx->montoMaxMensual' cantidadOperacionesDiarias='$paramTrx->cantidadOperacionesDiarias'
 				cantidadOperacionesSemanales = '$paramTrx->cantidadOperacionesSemanales' cantidadOperacionesMensual='$paramTrx->cantidadOperacionesMensual' montoAcumDiario = '$paramTrx->montoAcumDiario' montoAcumSemanal='$paramTrx->montoAcumSemanal' montoAcumMensual='$paramTrx->montoAcumMensual' acumCantidadOperacionesDiarias='$paramTrx->acumCantidadOperacionesDiarias'
 				acumCantidadOperacionesSemanales = '$paramTrx->acumCantidadOperacionesSemanales' acumCantidadOperacionesMensual = '$paramTrx->acumCantidadOperacionesMensual'>
@@ -287,10 +293,10 @@
 	         			<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 	         			<div class='dashboard-item-network $marca'></div>
 	         			<div class='dashboard-item-info'>
-	         				<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+	         				<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
 	         				<p class='dashboard-item-balance'><?php echo $country !== 'Ve' ? $moneda --- : ''; ?></p>
 	         				<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-	         				<p class='dashboard-item-category'>$value->producto</p>
+	         				<p class='dashboard-item-category'>$nomProducto</p>
 	         			</div>
 	         		</a>
          		</li>";
@@ -304,7 +310,7 @@
 		?>
 	</ul>
 	<div class="form-actions">
-		<button type="reset" id="cerrar">Cancelar</button>
+		<button type="reset" id="cerrar" class="novo-btn-primary">Cancelar</button>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE ORIGEN************************************-->
@@ -319,7 +325,7 @@
 				</div>
 		</div>
 		<div class="form-actions">
-				<button id="inva5">Aceptar</button>
+				<button id="inva5" class="novo-btn-primary">Aceptar</button>
 		</div>
 </div>
 <!--*************************************FIN MODAL ERRORES***************************************-->

@@ -140,7 +140,20 @@ $(function(){
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
 
-					$.post(base_url +"/users/passwordOperacionesActualizar",{"passwordOperacionesOld":old, "passwordOperaciones":newC},function(data){
+					var cpo_cook = decodeURIComponent(
+						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
+
+					var dataRequest = JSON.stringify ({
+						passwordOperacionesOld:old,
+						passwordOperaciones:newC
+					});
+
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+					$.post(base_url +"/users/passwordOperacionesActualizar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 					if(data.rc==0) {
 

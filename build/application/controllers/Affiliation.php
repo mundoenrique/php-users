@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 			$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 			//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-			$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'affiliation.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+			$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'affiliation.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 			//INSTANCIA DEL FOOTER
 			$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 			$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 			//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-			$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'affiliation.js', 'affiliation.js', 'affiliation_bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+			$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'affiliation.js', 'affiliation.js', 'affiliation_bank.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 			//INSTANCIA DEL FOOTER
 			$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -116,7 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
 			$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 			//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-			$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'affiliation_tdc.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+			$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'affiliation_tdc.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
 			//INSTANCIA DEL FOOTER
 			$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -142,7 +142,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->lang->load('format');
 
 			$this->load->model('affiliation_model', 'cuentaP2P');
-			$noTarjeta =  $this->input->post('noTarjeta');
+
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$noTarjeta =  $dataRequest->noTarjeta;
 			$this->output->set_content_type('application/json')->set_output($this->cuentaP2P->affiliationP2T_cuenta($noTarjeta));
 
 		}
@@ -161,14 +173,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->lang->load('format');
 
 			$this->load->model('affiliation_model', 'affiliation');
-			$nroPlasticoOrigen = $this->input->post('nroPlasticoOrigen');
-			$beneficiario = $this->input->post('beneficiario');
-			$nroCuentaDestino = $this->input->post('nroCuentaDestino');
-			$tipoOperacion = $this->input->post('tipoOperacion');
-			$email = $this->input->post('email');
-			$cedula = $this->input->post('cedula');
-			$prefix = $this->input->post('prefix');
-			$expDate = $this->input->post('expDate');
+
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
+			$beneficiario = $dataRequest->beneficiario;
+			$nroCuentaDestino = $dataRequest->nroCuentaDestino;
+			$tipoOperacion = $dataRequest->tipoOperacion;
+			$email = $dataRequest->email;
+			$cedula = $dataRequest->cedula;
+			$prefix = $dataRequest->prefix;
+			$expDate = $dataRequest->expDate;
 
 
 			$this->output->set_content_type('application/json')->set_output($this->affiliation->affiliation_load($nroPlasticoOrigen, $beneficiario, $nroCuentaDestino, $tipoOperacion, $email, $cedula, $prefix, $expDate));
@@ -187,15 +211,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->lang->load('format');
 
 			$this->load->model('affiliation_model', 'affiliationP2T');
-			$nroPlasticoOrigen = $this->input->post('nroPlasticoOrigen');
-			$beneficiario = $this->input->post('beneficiario');
-			$nroCuentaDestino = $this->input->post('nroCuentaDestino');
-			$tipoOperacion = $this->input->post('tipoOperacion');
-			$email = $this->input->post('email');
-			$cedula = $this->input->post('cedula');
-			$banco =  $this->input->post('banco');
-			$prefix = $this->input->post('prefix');
-			$expDate = $this->input->post('expDate');
+
+			$dataRequest = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+
+			$nroPlasticoOrigen = $dataRequest->nroPlasticoOrigen;
+			$beneficiario = $dataRequest->beneficiario;
+			$nroCuentaDestino = $dataRequest->nroCuentaDestino;
+			$tipoOperacion = $dataRequest->tipoOperacion;
+			$email = $dataRequest->email;
+			$cedula = $dataRequest->cedula;
+			$banco =  $dataRequest->banco;
+			$prefix = $dataRequest->prefix;
+			$expDate = $dataRequest->expDate;
 
 			log_message('info', 'Beneficiario ', $beneficiario);
 

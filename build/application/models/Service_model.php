@@ -32,15 +32,15 @@ class Service_model extends CI_Model {
         $idOperation = ($lockType == 'temporary') ? "110" : "111";
         $tokenOper = (isset($dataAccount['token'])) ? $dataAccount['token'] : '';
         $permanentLock = (isset($dataAccount['mot-sol-now'])) ? $dataAccount['mot-sol-now'] : '';
-        $cardNum = $dataAccount['card-bloq'];
+        $cardNum = base64_decode($dataAccount['card-bloq']);
         $fechaExp = $dataAccount['fecha-exp-bloq'];
         $action = ($dataAccount['status'] == 'N') ? 'PB' : '00';
         $action = ($lockType == 'temporary') ? $action : $permanentLock;
         $prefix = $dataAccount['prefix-bloq'];
         $idUser = $this->session->userdata('idUsuario');
         $pais = $this->session->userdata('pais');
-        $msgLok = ($action == '00') ? 'Desbloqueada' : 'Bloqueada';
-        $msgLok = ($lockType == 'temporary') ? $msgLok : 'Bloqueada';
+        $msgLok = ($action == '00') ? 'desbloqueada' : 'bloqueada';
+        $msgLok = ($lockType == 'temporary') ? $msgLok : 'bloqueada';
 				$montoComisionTransaccion = $dataAccount['montoComisionTransaccion'];
 
         $data = json_encode(array(
@@ -61,11 +61,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Bloqueo desbloqueo=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsLockAccount');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsLockAccount'));
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
@@ -73,7 +73,6 @@ class Service_model extends CI_Model {
          $response = '{"rc":-382,"msg":"Proceso OK","cost_repos_plas":8352}';
          $desdata = json_decode($response);
 				 */
-
         if ($desdata) {
             switch ($desdata->rc) {
                 case 0:
@@ -88,7 +87,7 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 0,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
-                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Su tarjeta será enviada en los próximos días'.$saldo,
+                        'msg' => ($lockType == 'temporary') ? 'La cuenta ha sido <strong>'. $msgLok . '</strong> exitosamente' : 'Tu tarjeta será enviada en los próximos días'.$saldo,
                     ];
 
                     break;
@@ -96,28 +95,28 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 1,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
-                        'msg' => 'Los campos introducidos son inválidos, verifique e intente nuevamente.'
+                        'msg' => 'Los campos introducidos son inválidos, verifica e intenta nuevamente.'
                     ];
                     break;
                 case -286:
                     if($desdata->rc == -286) {
-                        $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                        $msg = 'El código de seguridad introducido es inválido, verifica e intenta nuevamente.';
                     }
                 case -287:
                     if($desdata->rc == -287) {
-                        $msg = 'El código de seguridad introducido ya fue usado, verifique e intente nuevamente.';
+                        $msg = 'El código de seguridad introducido ya fue usado, verifica e intenta nuevamente.';
                     }
                 case -288:
                     if($desdata->rc == -288) {
-                        $msg = 'El código de seguridad introducido ha expirado, solicítelo nuevamente.';
+                        $msg = 'El código de seguridad introducido ha expirado, solicítalo nuevamente.';
                     }
                 case -301:
                     if($desdata->rc == -301) {
-                        $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                        $msg = 'El código de seguridad introducido es inválido, verifica e intenta nuevamente.';
                     }
                 case -310:
                     if($desdata->rc == -310) {
-                        $msg = 'La fecha de expiración introducida es inválida, verifique e intente de nuevo.';
+                        $msg = 'La fecha de expiración introducida es inválida, verifica e intenta de nuevo.';
                     }
                     $response = [
                         'code' => 1,
@@ -129,21 +128,21 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 2,
                         'title' => ($lockType == 'temporary') ? 'Bloqueo o Desbloqueo de cuenta' : 'Reposición de tarjeta',
-                        'msg' => 'La tarjeta no pudo ser <strong>'. $msgLok . '</strong>, intente nuevamente.'
+                        'msg' => 'La tarjeta no pudo ser <strong>'. $msgLok . '</strong>, intenta nuevamente.'
                     ];
                     break;
                 case -395:
                     $response = [
                         'code' => 2,
                         'title' => 'Reposición de tarjeta',
-                        'msg' => 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.'
+                        'msg' => 'La tarjeta tiene una reposición pendiente, comunícate con el centro de contacto.'
                     ];
                     break;
 								case -396:
                     $response = [
                         'code' => 2,
                         'title' => 'Reposición de tarjeta',
-                        'msg' => 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.'
+                        'msg' => 'La tarjeta tiene una renovación pendiente, comunícate con el centro de contacto.'
                     ];
                     break;
                 case -306: //Bloqueo por reposición, si viene o no viene solo peru por el momento, valor del bloqueo
@@ -168,7 +167,7 @@ class Service_model extends CI_Model {
 									else {
 										$response = [
 				                'title' => 'Conexión Personas Online',
-				                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+				                'msg' => 'Ha ocurrido un error en el sistema. Por favor intenta más tarde.'
 				            ];
 									}
 
@@ -178,7 +177,7 @@ class Service_model extends CI_Model {
 										$response = [
 												'code' => 3,
 												'title' => 'Conexión Personas Online',
-												'msg' => 'No se pudo realizar la reposición de su tarjeta. Favor intente nuevamente.'
+												'msg' => 'No se pudo realizar la reposición de tu tarjeta. Favor intente nuevamente.'
 										];
 									break;
 
@@ -188,14 +187,14 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 3,
                         'title' => 'Servicios',
-                        'msg' => ($desdata->rc == -125) ? 'No es posible realizar esta acción, la tarjeta está vencida' :'Su solicitud no pudo ser procesada, intente más tarde.'
+                        'msg' => ($desdata->rc == -125) ? 'No es posible realizar esta acción, la tarjeta está vencida' :'Tu solicitud no pudo ser procesada, intente más tarde.'
                     ];
                     break;
                 case -35:
                 case -61:
                     $response = [
                         'title' => 'Conexión Personas Online',
-                        'msg' => ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.'
+                        'msg' => ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Tu sesión ha expirado.'
                     ];
                     $this->session->sess_destroy();
                     break;
@@ -206,24 +205,24 @@ class Service_model extends CI_Model {
 									$response = [
 											'code' => 3,
 											'title' => 'Solicitud de reposición',
-											'msg' => 'Su solicitud no puede ser procesada por este canal, comuníquese al Centro de Contacto Tebca'
+											'msg' => 'Tu solicitud no puede ser procesada por este canal, comunícate al Centro de Contacto Tebca'
 									];
 
 									break;
 
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
-                        'msg' => 'Hubo un problema. Por favor intente más tarde.'
+                        'msg' => 'Hubo un problema. Por favor intenta más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
-                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+                'msg' => 'Ha ocurrido un error en el sistema. Por favor intenta más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -250,7 +249,7 @@ class Service_model extends CI_Model {
 
         //parametros para la solicitud de cambio de PIN
         $tokenOper = (isset($dataAccount['token'])) ? $dataAccount['token'] : '';
-        $cardNum = $dataAccount['card-cambio'];
+        $cardNum = base64_decode($dataAccount['card-cambio']);
         $pinCurrent = $dataAccount['pin-current-now'];
         $pinNew = $dataAccount['new-pin-now'];
         $fechaExp = $dataAccount['fecha-exp-cambio'];
@@ -276,11 +275,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Cambio de PIN=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWschangePin');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWschangePin'));
 
         log_message("info", "RESPONSE Cambio de PIN=====>>>>> ".json_encode($desdata));
 
@@ -301,42 +300,49 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 1,
                         'title' => 'Cambio de PIN',
-                        'msg' => 'El PIN actual no es válido, verifique e intente nuevamente.'
+                        'msg' => 'El PIN actual no es válido, verifica e intenta nuevamente.'
                     ];
                     break;
                 case -241:
                     $response = [
                         'code' => 1,
                         'title' => 'Cambio de PIN',
-                        'msg' => 'Los campos introducidos son inválidos, verifique intente nuevamente.'
+                        'msg' => 'Los campos introducidos son inválidos, verifica  e intenta nuevamente.'
                     ];
                     break;
                 case -345:
                     $response = [
                         'code' => 1,
                         'title' => 'Cambio de PIN',
-                        'msg' => 'Ha superado la cantidad de intentos fallidos por el dia de hoy. Por favor intente mañana.'
+                        'msg' => 'Has superado la cantidad de intentos fallidos por el dia de hoy. Por favor intenta mañana.'
                     ];
-                    break;
+										break;
+								case -401:
+                    $response = [
+                        'code' => 1,
+                        'title' => 'Cambio de PIN',
+                        'msg' => 'No fue posible cambiar el PIN de tu tarjeta, intenta en unos minutos.'
+                    ];
+										break;
                 case -286:
                         if($desdata->rc == -286) {
-                            $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                            $msg = 'El código de seguridad introducido es inválido, verifica e intenta nuevamente.';
                         }
                 case -287:
                         if($desdata->rc == -287) {
-                            $msg = 'El código de seguridad introducido ya fue usado, verifique e intente nuevamente.';
+                            $msg = 'El código de seguridad introducido ya fue usado, verifica e intenta nuevamente.';
                         }
                 case -288:
                         if($desdata->rc == -288) {
-                            $msg = 'El código de seguridad introducido ha expirado, solicítelo nuevamente.';
+                            $msg = 'El código de seguridad introducido ha expirado, solicítalo nuevamente.';
                         }
                 case -301:
                         if($desdata->rc == -301) {
-                            $msg = 'El código de seguridad introducido es inválido, verifique e intente nuevamente.';
+                            $msg = 'El código de seguridad introducido es inválido, verifica e intenta nuevamente.';
                         }
                 case -310:
                         if($desdata->rc == -310) {
-                            $msg = 'La fecha de expiración introducida es inválida, verifique e intente de nuevo.';
+                            $msg = 'La fecha de expiración introducida es inválida, verifica e intenta de nuevo.';
                         }
                         $response = [
                             'code' => 1,
@@ -353,7 +359,7 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 3,
                         'title' => 'Servicios',
-                        'msg' => ($desdata->rc == -125) ? 'No es posible realizar esta acción, la tarjeta está vencida' :'Su solicitud no pudo ser procesada, intente más tarde.'
+                        'msg' => ($desdata->rc == -125) ? 'No es posible realizar esta acción, la tarjeta está vencida' :'Tu solicitud no pudo ser procesada, intente más tarde.'
                     ];
                     break;
                 case -35:
@@ -366,17 +372,17 @@ class Service_model extends CI_Model {
                     break;
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
                         'msg' => 'Hubo un problema. Por favor intente más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
                 'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -415,11 +421,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Generacion de Token=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsGetToken');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsGetToken'));
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
@@ -434,7 +440,7 @@ class Service_model extends CI_Model {
 										$response = [
 												'code' => 4,
 												'title' => 'Solicitud de token',
-												'msg' => 'Hemos enviado el código de seguridad a su correo'
+												'msg' => 'Hemos enviado el código de seguridad a tu correo'
 										];
 
 										//Si hay costo de reposición, se agreaga en la respuesta
@@ -442,7 +448,7 @@ class Service_model extends CI_Model {
 											$response = [
 	                        'code' => 4,
 	                        'title' => 'Solicitud de token',
-	                        'msg' => 'Hemos enviado el código de seguridad a su correo',
+	                        'msg' => 'Hemos enviado el código de seguridad a tu correo',
 													'cost_repos_plas' => $cost_repos_plas
 	                    ];
 										}
@@ -452,37 +458,37 @@ class Service_model extends CI_Model {
                     $response = [
                         'code' => 5,
                         'title' => 'Solicitud de token',
-                        'msg' => 'El correo no pudo ser enviado, intente de nuevo.'
+                        'msg' => 'El correo no pudo ser enviado, intenta de nuevo.'
                     ];
                     break;
                 case -911:
                     $response = [
                         'code' => 3,
                         'title' => 'Servicios',
-                        'msg' => 'Su solicitud no pudo ser procesada, intente más tarde.'
+                        'msg' => 'Tu solicitud no pudo ser procesada, intenta más tarde.'
                     ];
                     break;
                 case -35:
                 case -61:
                     $response = [
                         'title' => 'Conexión Personas Online',
-                        'msg' => ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.'
+                        'msg' => ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Tu sesión ha expirado.'
                     ];
                     $this->session->sess_destroy();
                     break;
                 default:
                     $response = [
+                        'code' => 3,
                         'title' => 'Conexión Personas Online',
-                        'msg' => 'Hubo un problema. Por favor intente más tarde.'
+                        'msg' => 'Hubo un problema. Por favor intenta más tarde.'
                     ];
-                    $this->session->sess_destroy();
             }
         } else {
             $response = [
+                'code' => 3,
                 'title' => 'Conexión Personas Online',
-                'msg' => 'Ha ocurrido un error en el sistema. Por favor intente más tarde.'
+                'msg' => 'Ha ocurrido un error en el sistema. Por favor intenta más tarde.'
             ];
-            $this->session->sess_destroy();
         }
 
         return $response;
@@ -507,7 +513,7 @@ class Service_model extends CI_Model {
 
         //parametros para la solicitud de bloq y desbloq
         $idOperation = "117";
-        $cardNum = $dataAccount['card-rec'];
+        $cardNum = base64_decode($dataAccount['card-rec']);
         $fechaExp = $dataAccount['fecha-exp-rec'];
         $prefix = $dataAccount['prefix-rec'];
         $idUser = $this->session->userdata('idUsuario');
@@ -529,11 +535,11 @@ class Service_model extends CI_Model {
 
         log_message("info", "REQUEST Recuperación de clave=====>>>>> ".$data);
 
-        $dataEncry = np_Hoplite_Encryption($data,1);
+        $dataEncry = np_Hoplite_Encryption($data,1,'callWsrecoverKey');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
         $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
         $data = json_decode($response);
-        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1));
+        $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsrecoverKey'));
 
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
@@ -551,46 +557,46 @@ class Service_model extends CI_Model {
                 case 0:
                     $code = 0;
                     $title = 'Reposición de PIN';
-                    $msg = 'Solicitud procesada exitosamente. El PIN será enviado en sobre de seguridad a la dirección de su empresa en un máximo de 5 días hábiles.';
+                    $msg = 'Solicitud procesada exitosamente. El PIN será enviado en sobre de seguridad a la dirección de la empresa en un máximo de 5 días hábiles.';
                     break;
                 case -356:
                     $code = 2;
                     $title = 'Reposición de PIN';
-                    $msg = 'Su tarjeta ya posee una solicitud pendiente de reposición de PIN, que será enviado a la dirección de su empresa en los próximos días.';
+                    $msg = 'Tu tarjeta ya posee una solicitud pendiente de reposición de PIN, que será enviado a la dirección de la empresa en los próximos días.';
                     break;
                 case -264:
                 case -304:
                 case -911:
                     $code = 3;
                     $title = 'Reposición de PIN';
-                    $msg = 'Su solicitud no pudo ser procesada, intente más tarde.';
+                    $msg = 'Tu solicitud no pudo ser procesada, intenta más tarde.';
                     break;
                 case -35:
                 case -61:
                     $code = 7;
                     $title = 'Conexión Personas Online';
-                    $msg = ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Su sesión ha expirado.';
+                    $msg = ($desdata->rc == -35) ? 'El usuario se encuentra suspendido.'  : 'Tu sesión ha expirado.';
                     break;
 								case -395:
 										$code = 3;
 										$title = 'Reposición de tarjeta';
-										$msg = 'La tarjeta tiene una reposición pendiente, comuníquese con el centro de contacto.';
+										$msg = 'La tarjeta tiene una reposición pendiente, comunícate con el centro de contacto.';
                     break;
 								case -396:
 										$code = 3;
 										$title = 'Reposición de tarjeta';
-										$msg = 'La tarjeta tiene una renovación pendiente, comuníquese con el centro de contacto.';
+										$msg = 'La tarjeta tiene una renovación pendiente, comunícate con el centro de contacto.';
                     break;
                 default:
-                    $code = 7;
+                    $code = 3;
                     $title = 'Conexión Personas Online';
-                    $msg = 'Se ha presentado un problema en la gestión de su solicitud. Por favor inténtelo nuevamente más tarde.';
+                    $msg = 'Se ha presentado un problema en la gestión de tu solicitud. Por favor inténtelo nuevamente más tarde.';
 
             }
         } else {
-            $code = 7;
+            $code = 3;
             $title = 'Conexión Personas Online';
-            $msg = 'Ha ocurrido un error en el sistema. Por favor intente más tarde.';
+            $msg = 'Ha ocurrido un error en el sistema. Por favor intenta más tarde.';
         }
 
         if ($code === 7){

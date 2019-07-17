@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
 	<ul class="menu">
 		<li class="menu-item current-menu-item">
@@ -28,6 +32,7 @@
 			<h2>Montos personales para transferencias directas </h2>
 			<h3>Seleccione el monto máximo para transferencias sin autorización (código de seguridad)</h3>
 			<form id="form-amount" name="form-amount">
+				<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 				<div id="transfer-date">
 					<?php
 						//consulta el monto actual
@@ -71,8 +76,8 @@
 					<div id='msg-history'></div>
 				</div>
 				<div class="form-actions">
-					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">Cancelar</button></a>
-					<button id="updateAmount" type="submit">Aplicar</button>
+					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">Cancelar</button></a>
+					<button id="updateAmount" type="submit" class="novo-btn-primary">Aplicar</button>
 				</div>
 			</form>
 	</article>
@@ -86,7 +91,7 @@
 	        </div>
 	    </div>
 	    <div class="form-actions">
-	        <button id="inva5">Aceptar</button>
+	        <button id="inva5" class="novo-btn-primary">Aceptar</button>
 	    </div>
 	</div>
 	<!--*************************************FIN MODAL ERRORES***************************************-->

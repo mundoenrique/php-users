@@ -36,14 +36,15 @@ class Dashboard extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'dashboard.js',  'jquery.isotope.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'dashboard.js',  'jquery.isotope.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
 		//console.log("ENTRA AL CONTROLADOR DEL DASH");
 		$content = $this->parser->parse('dashboard/dashboard-content', array('data' => serialize(json_decode($this->dashboard->dashboard_load()))), true);
 		//INSTANCIA DE SIDERBAR
-		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => true), true);
+		$renderWidget = $this->session->userdata('pais') != 'Ec-bp';
+		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => $renderWidget), true);
 
 		//DATA QUE SE PASA AL LAYOUT EN GENERAL
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
@@ -69,13 +70,13 @@ class Dashboard extends CI_Controller {
 		//INSTANCIA GENERAR  FOOTER
 		$menuFooter = $this->parser->parse('widgets/widget-menuFooter', array(), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'dashboard.js',  'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'dashboard.js',  'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
 		$content = $this->parser->parse('dashboard/dashboard-content-error', array(), true);
 		//INSTANCIA DE SIDERBAR
-		$sidebarlogin= $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
+		$sidebarlogin= $this->parser->parse('dashboard/widget-account',  array('sidebarActive' => false), true);
 
 		//DATA QUE SE PASA AL LAYOUT EN GENERAL
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
@@ -105,7 +106,11 @@ class Dashboard extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public function CallWsSaldo(){
+	public function CallWsSaldo() {
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		// VERIFICA SI LA SESION ESTA ACTIVA
 		np_hoplite_verificLogin();
@@ -115,8 +120,32 @@ class Dashboard extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('dashboard_model', 'saldo');
-		$tarjeta = $this->input->post('tarjeta');
-		$this->output->set_content_type('application/json')->set_output($this->saldo->saldo_load($tarjeta));
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+
+		$tarjeta = $dataRequest->tarjeta;
+		$_POST['card'] = $tarjeta;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('detail-card');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->saldo->saldo_load($tarjeta);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 

@@ -32,8 +32,8 @@ function viewSelect (id) {
         case 'lock':
             $('#msg-block h2').text(bloqAction + 'cuenta');
             into = $('#lock');
-            leave = $('#key, #replace');
-            conceal = $('#change-key, #reason-rep');
+            leave = $('#key, #replace, #recover');
+            conceal = $('#change-key, #reason-rep, #rec-key');
             display = $('#lock-acount, #prevent-bloq');
             $('#mot-sol').prop('disabled', true);
             action = 'lockAccoun';
@@ -42,24 +42,24 @@ function viewSelect (id) {
         case 'key':
             $('#msg-change h2').text('Cambio de PIN');
             into = $('#key');
-            leave = $('#lock, #replace');
-            conceal = $('#lock-acount');
+            leave = $('#lock, #replace, #recover');
+            conceal = $('#lock-acount, #rec-key');
             display = $('#change-key');
             action = 'changePin';
             break;
         case 'replace':
             $('#msg-block h2').text('Solicitud de reposición');
             into = $('#replace');
-            leave = $('#key, #lock');
-            conceal = $('#change-key, #prevent-bloq');
+            leave = $('#lock, #key, #recover');
+            conceal = $('#change-key, #prevent-bloq, #rec-key');
             display = $('#lock-acount, #reason-rep');
             action = 'lockReplace';
             break;
         case 'recover':
             $('#msg-rec h2').text('Solicitud de reposición de PIN');
             into = $('#recover');
-            leave = $('#key, #replace');
-            conceal = $('#change-key, #reason-rep');
+            leave = $('#lock, #key, #replace');
+            conceal = $('#lock-acount, #change-key, #reason-rep');
             display = $('#rec-key, #rec-clave');
             action = 'recoverKey';
             break;
@@ -89,16 +89,25 @@ function lock_change (formData, model, form, action) {
         msgSec = 'recoverKey';
     }
 
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			var dataRequest = JSON.stringify({
+				formData,
+				model: model,
+			});
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {data: formData, model: model},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'JSON',
         beforeSend: function (xrh, status) {
             cleanBefore (msgMain, msgSec);
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete (msgMain);
             switch (data.code) {
                 case 0:
@@ -154,16 +163,26 @@ function lock_change (formData, model, form, action) {
 
 function getToken (msgMain) {
 	var token = 1; //Requiere token 1, no requiere 0
-    $('#carry').remove();
+		$('#carry').remove();
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+		var dataRequest = JSON.stringify({
+			model: 'GetToken'
+		});
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
     $.ajax({
         url: base_url + '/servicios/modelo',
         type: 'POST',
-        data: {model: 'GetToken'},
+        data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
         datatype: 'json',
         beforeSend: function (xrh, status) {
             cleanBefore ('block');
         },
-        success: function (data) {
+        success: function (response) {
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
             cleanComplete ('block');
             switch (data.code) {
                 case 4:
@@ -202,7 +221,7 @@ function cleanBefore (msgMain, msgSec) {
     $('#msg-'+ msgMain +' #result-'+ msgMain)
         .html('')
         .append('<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>');
-    $('#msg-'+ msgMain +' h3').text('Estamos procesando su solicitud');
+    $('#msg-'+ msgMain +' h3').text('Estamos procesando tu solicitud');
     $('#msg-'+ msgMain).show();
 }
 
@@ -222,8 +241,8 @@ function notiService (msg, NewClass, oldClass, msgMain) {
 
 //Función para enviar mensajes del sistema al usuario
 function notiSystem (title, message, type, action, param) {
-    var id = (param === 'lock' || param === 'key' || param === 'replace') ? param : null,
-        form = (param != 'lock' && param != 'key' && param != 'replace') ? param : null;
+	var id = (param === 'lock' || param === 'key' || param === 'replace' || param === 'recover') ? param : null,
+	form = (param != 'lock' && param != 'key' && param != 'replace' && param != 'recover') ? param : null;
 
     resetForms(form);//reset de los formularios
     var icon =  (type == 'warning') ? 'warning' :
@@ -239,8 +258,11 @@ function notiSystem (title, message, type, action, param) {
         open: function(event, ui) {
             $('.ui-dialog-titlebar-close', ui.dialog).hide();
             if (action == 'carry') {
-                $('#form-action').append('<button id="carry">Si</button>');
-                $('#carry').focus();
+
+							$('#form-action').append('<button id="carry" class="novo-btn-primary">Si</button>');
+
+								$('#close-info').addClass('novo-btn-secondary-modal');
+								$('#carry').focus();
                 $('#close-info')
                     .text('No')
                     .attr('type', 'reset');
@@ -249,12 +271,6 @@ function notiSystem (title, message, type, action, param) {
                     .text('Cerrar')
                     .removeAttr('type');
             }
-            $('#msg_info')
-                .removeAttr('class')
-                .addClass('alert-simple alert-' + type);
-            $('#msg_info span')
-                .removeAttr('class')
-                .addClass('icon-' + icon + '-sign');
             $('#msg_info p').empty().append(message);
         }
     });
@@ -370,8 +386,8 @@ function validar_campos() {
         errorLabelContainer: "#msg2",
         rules: {
             "token": {"required": true, "tokenValid": true},
-            "pin-current": {"required":true, "number":true},
-            "new-pin": {"number":true,  "pinNew2":true, "required":true},
+            "pin-current": {"required":true, "number":true, "minlength": 4},
+            "new-pin": {"number":true,  "pinNew2":true, "required":true, "minlength": 4},
             "confirm-pin": {"number":true, "pinNew1":true}
         },
 
@@ -382,12 +398,14 @@ function validar_campos() {
             },
             "pin-current":{
                 required:"Debe colocar su PIN actual",
-                number:"Debe ser numérico"
+								number:"Debe ser numérico",
+								minlength: "El PIN debe tener 4 digitos"
             },
             "new-pin": {
                 number:"Su nuevo PIN debe ser numérico",
                 pinNew2:"El nuevo PIN no debe ser igual a su PIN anterior",
-                required:"Debe colocar su nuevo PIN"
+                required:"Debe colocar su nuevo PIN",
+								minlength: "El nuevo PIN debe tener 4 digitos"
             },
             "confirm-pin": {
                 number:"La confirmación de su nuevo PIN debe ser numérico",

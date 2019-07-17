@@ -13,11 +13,13 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 	 */
 	function np_Hoplite_GetWS($nameWS,$cryptDataBase64)
 	{
-		log_message("DEBUG","INICIANDO LLAMADO WS: ".$nameWS);
 		$CI =& get_instance();
-		$urlcurlWS=$CI->config->item('urlWS').$nameWS;
-		log_message("INFO",$urlcurlWS);
-	    $ch = curl_init();
+		$dataReq = json_decode($cryptDataBase64);
+		$pais = $dataReq->pais;
+		$keyID = $dataReq->keyId;
+		$urlcurlWS = $CI->config->item('urlWS').$nameWS;
+		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$urlcurlWS);
+		$ch = curl_init();
 		$dataPost = $cryptDataBase64;
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -31,7 +33,7 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if($response === FALSE) {
-			log_message("DEBUG","RESPONSE CURL TIMEOUT: " .json_encode(curl_error($ch)));
+			log_message("DEBUG","RESPONSE CURL: " .json_encode(curl_error($ch)));
 		}
 		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
 		if($httpCode == 404 || !$response){

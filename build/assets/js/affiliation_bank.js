@@ -166,7 +166,10 @@ $(function(){
 	$('#content-holder').on('click',"#afiliarBank",function(){
 
 		validar_campos();
-
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$("#validate_afiliacion").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#validate_afiliacion").submit();
 
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -256,7 +259,28 @@ $(function(){
 			nombre_banco=$("#cargarConfirmacion").find("#ctaAfiliar").attr("banco");
 			marca=$("#cargarConfirmacion").find("#nombreOrigenTransfer").attr("marca");
 
-			$.post(base_url +"/affiliation/affiliation_P2T",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2T","email":email,"cedula":cedula,"banco":banco,"prefix":prefix, "expDate":expDate},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			var dataRequest = JSON.stringify ({
+				nroPlasticoOrigen :numeroCtaOrigen,
+				beneficiario :beneficiario,
+				nroCuentaDestino :numeroCta,
+				tipoOperacion :"P2T",
+				email:email,
+				cedula:cedula,
+				banco:banco,
+				prefix:prefix,
+				expDate:expDate
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url +"/affiliation/affiliation_P2T",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				if(data.rc == -61){
 					$(location).attr('href', base_url+'/users/error_gral');
 				} else if(data.rc==0 || data.rc==-188) {
@@ -370,7 +394,13 @@ $(function(){
 	function getBancos() {
 
 		$.ajaxSetup({async: false});
-		$.post(base_url +"/affiliation/bancos",function(data){
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		  );
+
+		$.post(base_url +"/affiliation/bancos", {"cpo_name":cpo_cook},function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			$.each(data.lista,function(pos,item){
 
 				var lista;

@@ -26,8 +26,13 @@ class Detail extends CI_Controller {
 		$producto = $this->input->post('producto');
 		$numt_mascara = $this->input->post('numt_mascara');
 
-		if(!isset($tarjeta)){
-			redirect($this->config->item('base_url'));
+		log_message('DEBUG', 'NOVO DATA TO VALIDATE detail-products: '.json_encode($_POST));
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('detail-products');
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			redirect(base_url('dashboard'), 'location');
 		}
 
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -46,7 +51,7 @@ class Detail extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANCIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'detail.js', 'kendo.dataviz.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'detail.js', 'kendo.dataviz.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -63,7 +68,11 @@ class Detail extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public function CallWsDetail(){
+	public function CallWsDetail() {
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		// VERIFICA SI LA SESION ESTA ACTIVA
 		np_hoplite_verificLogin();
@@ -73,14 +82,42 @@ class Detail extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('detail_model', 'detail');
-		$tarjeta = $this->input->post('tarjeta');
-		$this->output->set_content_type('application/json')->set_output($this->detail->detail_load($tarjeta));
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$tarjeta = $dataRequest->tarjeta;
+		$_POST['card'] = $tarjeta;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('detail-card');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->detail->detail_load($tarjeta);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	public function CallWsMovimientos(){
+		if(!$this->input->is_ajax_request()) {
+			redirect(base_url('dashboard'), 'location');
+			exit();
+		}
 
 		// VERIFICA SI LA SESION ESTA ACTIVA
 		np_hoplite_verificLogin();
@@ -90,11 +127,36 @@ class Detail extends CI_Controller {
 		$this->lang->load('format');
 
 		$this->load->model('detail_model', 'detail');
-		$tarjeta = $this->input->post('tarjeta');
-		$mes = $this->input->post('mes') !== '' ? sprintf("%02d", $this->input->post('mes')) : $this->input->post('mes');
-		$anio = $this->input->post('anio');
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$tarjeta = $dataRequest->tarjeta;
+		$mes = $dataRequest->mes !== '' ? sprintf("%02d", $dataRequest->mes) : $dataRequest->mes;
+		$anio = $dataRequest->anio;
 
-		$this->output->set_content_type('application/json')->set_output($this->detail->movimientos_load($tarjeta, $mes, $anio));
+		$_POST['card'] = $tarjeta;
+		$_POST['month'] = $mes;
+		$_POST['year'] = $anio;
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('movements');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+
+			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
+		} else {
+			$response = $this->detail->movimientos_load($tarjeta, $mes, $anio);
+		}
+
+		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
 
@@ -114,6 +176,17 @@ class Detail extends CI_Controller {
 		$mes = $this->input->post('mes') !== '' ? sprintf("%02d", $this->input->post('mes')) : $this->input->post('mes');
 		$anio = $this->input->post('anio');
 		$idOperation = $this->input->post('idOperation');
+
+		log_message('DEBUG', 'NOVO DATA TO VALIDATE CallWsExportar: '.json_encode($_POST));
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('CallWsExportar');
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			redirect(base_url('dashboard'), 'location');
+			exi();
+		}
+
 		$response = $this->detail->exportar($tarjeta, $mes, $anio, $idOperation);
 		$response = json_decode($response);
 		$file_ext = "pdf";

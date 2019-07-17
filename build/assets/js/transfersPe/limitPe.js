@@ -55,12 +55,25 @@ $(function() {
 
 
 				//petición de setAmount
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+				var dataRequest = JSON.stringify ({
+					data: data_seralize,
+					model: "setAmount"
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+
 				$.ajax({
 					url: base_url + '/transferencia/peGeneral',
 					type: "post",
-					data: {data : data_seralize, model : "setAmount"},
+					data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},
 					datatype: 'JSON',
-					success: function(data) {
+					success: function(response) {
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 						switch (data.code) {
 							case 0:
 								msgService(data.title, data.msg, data.modalType, 1);

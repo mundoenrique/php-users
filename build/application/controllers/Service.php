@@ -11,7 +11,10 @@ class Service extends CI_Controller {
         np_hoplite_verificLogin();
         // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
         np_hoplite_countryCheck($this->session->userdata('pais'));
-        $pais = $this->session->userdata('pais');
+				$pais = $this->session->userdata('pais');
+				if($pais == 'Usd') {
+					redirect($this->config->item('base_url') . '/dashboard');
+				}
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
         //$this->load->model('transfer_model', 'service');
@@ -30,7 +33,7 @@ class Service extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
         //INSTANACIA DEL CONTENIDO PARA EL FOOTER
-        $FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'service.js', 'service-functions.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
+        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js','service.js', 'service-functions.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'additional-methods.min.js');
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -47,21 +50,35 @@ class Service extends CI_Controller {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public function CallModel() {
-
-        //VERIFICA SI LA SESION ESTA ACTIVA
-        np_hoplite_verificLogin();
-        //VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-        np_hoplite_countryCheck($this->session->userdata('pais'));
-        //Load model file
-        $this->load->model('service_model', 'service');
-        //Get method
-        $method = 'callWs'.$this->input->post('model');
-        //Get Data
-        $dataRequest = $this->input->post('data');
-        //Call the method
-        $dataResponse = $this->service->$method($dataRequest);
-        //Response to the js file
-        $this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
+			if(!$this->input->is_ajax_request()) {
+				redirect(base_url('dashboard'), 'location');
+				exit();
+			}
+			//VERIFICA SI LA SESION ESTA ACTIVA
+			np_hoplite_verificLogin();
+			//VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+			np_hoplite_countryCheck($this->session->userdata('pais'));
+			//Get Data
+			$data = json_decode(
+				$this->security->xss_clean(
+					strip_tags(
+						$this->cryptography->decrypt(
+							base64_decode($this->input->get_post('plot')),
+							utf8_encode($this->input->get_post('request'))
+						)
+					)
+				)
+			);
+			$dataRequest = $data->formData;
+			//Load model file
+			$this->load->model('service_model', 'service');
+			//Get method
+			$method = 'callWs'.$data->model;
+			//Call the method
+			$dataResponse = $this->service->$method($dataRequest);
+			$dataResponse = $this->cryptography->encrypt($dataResponse);
+			//Response to the js file
+			$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse));
     }
 
 		public function error_services()
@@ -87,7 +104,7 @@ class Service extends CI_Controller {
 			//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 			$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 			//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-			$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.isotope.min.js', 'transfer-tdc.js', 'jquery-md5.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
+			$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'transfer-tdc.js', 'jquery-md5.js', 'jquery.validate.min.js', 'additional-methods.min.js', 'jquery.balloon.min.js');
 			//INSTANCIA DEL FOOTER
 			$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 			//INSTANCIA DE PARTE DEL CUERPO TDC

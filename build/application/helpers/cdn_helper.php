@@ -37,7 +37,7 @@ if ( ! function_exists('insert_js_cdn'))
         $fileurl = $url_cdn . 'js/' . $filename;
         $version = '';
         if (file_exists($filepath)) {
-					$version = '?v=' . date('Ymd-B', filemtime($filepath));
+					$version = '?v=' . date('Ymd-U', filemtime($filepath));
 				}
 
         $js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
@@ -61,7 +61,7 @@ if ( ! function_exists('insert_css_cdn'))
         $path_cdn = $CI->config->item('base_path_cdn');
         $skin = $CI->input->cookie('cpo_skin');
         $skin_folder = '';
-				if ($skin === 'latodo') $skin_folder = $skin . '/';
+				if ($skin === 'latodo' || $skin === 'pichincha') $skin_folder = $skin . '/';
 				if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
 					$filename = str_replace('.css', '.min.css', $filename);
 				}
@@ -70,7 +70,7 @@ if ( ! function_exists('insert_css_cdn'))
         $fileurl = $url_cdn . 'css/' . $skin_folder .  $filename;
         $version = '';
         if (file_exists($filepath)) {
-					$version = '?v=' . date('Ymd-B', filemtime($filepath));
+					$version = '?v=' . date('Ymd-U', filemtime($filepath));
 				}
 
         $css = '<link href="' . $fileurl . $version .  '" media="' . $media . '" rel="stylesheet" type="text/css" />' . "\n";
@@ -85,15 +85,22 @@ if ( ! function_exists('insert_image_cdn'))
 	 * @param  string $filename [description]
 	 * @return [type]           [description]
 	 */
-	function insert_image_cdn($filename = '')
+	function insert_image_cdn($filename = 'default.png', $dash = FALSE)
 	{
 		$CI =& get_instance();
 
 		$url_cdn = $CI->config->item('base_url_cdn');
-		$full_url = $url_cdn . 'media/img/' . $filename;
-
-		$image = '<img src="' . $full_url . '" />';
-		return $image;
+		$cdnPath = $CI->config->item('base_path_cdn');
+		$country = $CI->config->item('country');
+		$filename = $filename.'.png';
+		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v='.date('Ymd-U', filemtime($filepath));
+		}
+		$dash = $dash ? 'class="'.$dash.'" id="cardImage"' : '';
+		$img='<img src="'.$url_cdn.'img/products/'.$country.'/'.$filename.$version.'"  width="200" height="130" alt="" '.$dash.'>';
+		return $img;
 	}
 }
 
@@ -194,5 +201,31 @@ if ( ! function_exists('verify_img_ctaDestino'))
 	function stripAccents($string){
 		return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûü',
 	'aaaaaceeeeiiiinooooouuuu');
+	}
+}
+
+if ( !function_exists('insertFile'))
+{
+	function insertFile($fileName, $folder = 'img/')
+	{
+		$CI =& get_instance();
+		$url_cdn = $CI->config->item('base_url_cdn');
+		$path_cdn = $CI->config->item('base_path_cdn');
+
+		$filepath = $path_cdn . $folder . $fileName;
+		echo $fileurl = $url_cdn . $folder . $fileName;
+		$version = '';
+		if (file_exists($filepath)) {
+			$version = '?v=' . date('Ymd-U', filemtime($filepath));
+		}
+
+		/* $js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
+
+
+		$country = $country ? $country.'/' : '';
+		$file = assetPath($folder.'/'.$country.$fileName);
+		$version = '?V'.date('Ymd-U', filemtime($file));
+		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
+		return $file_url; */
 	}
 }

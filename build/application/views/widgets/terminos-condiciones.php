@@ -25,7 +25,7 @@ Así mismo, La Empresa declara que todas las creaciones intelectuales, marcas, s
 
 A su vez, queda expresamente entendido que entre La Empresa y los Usuarios de las bases de datos digitales, originales o no, que han sido creadas con ocasión de brindar servicios y productos con data e información personal, privada y confidencial de los Usuarios le pertenecen a La Empresa quien es la única titular de los derechos económicos sobre la misma. No obstante, La Empresa protegerá  y respetará los derechos de intimidad, honor y reputación de las personas establecidos en la Constitución de la República Bolivariana de Venezuela.<br>
 
-En tal sentido, La Empresa hará sus mejores esfuerzos para el mejor uso de sus plataformas tecnológicas, garantizando el honor y la intimidad personal y familiar de sus Usuarios, y así lo entienden estos últimos. No obstante, La Empresa se reserva el derecho de suspender el servicio temporalmente en cualquier momento, sin previa notificación a los Usuarios, siempre y cuando sea por razones de mantenimiento de la plataforma u otras razones de carácter técnico que se consideren necesarias y convenientes. En estos casos, no existirá ningún tipo de indemnización por parte de La Empresa a los Usuarios.<br>   
+En tal sentido, La Empresa hará sus mejores esfuerzos para el mejor uso de sus plataformas tecnológicas, garantizando el honor y la intimidad personal y familiar de sus Usuarios, y así lo entienden estos últimos. No obstante, La Empresa se reserva el derecho de suspender el servicio temporalmente en cualquier momento, sin previa notificación a los Usuarios, siempre y cuando sea por razones de mantenimiento de la plataforma u otras razones de carácter técnico que se consideren necesarias y convenientes. En estos casos, no existirá ningún tipo de indemnización por parte de La Empresa a los Usuarios.<br>
 
 Los Usuarios, de conformidad con las políticas de seguridad y privacidad de la plataforma tecnológica, deben manifestarle expresamente, por los mecanismos de comunicación acordados entre las partes, a La Empresa si no desea recibir mensajes electrónicos comerciales en sus diversas facetas, en cuyo caso La Empresa en un lapso no mayor de veinte y cuatro (24) horas, tendrá que cesar en dichos envíos y aplicar las medidas correctivas amigables correspondientes.<br>
 
@@ -37,6 +37,6 @@ Así pues, en caso de cualquier violación a las condiciones de seguridad y priv
 </p>
 				</div>
 				<div class="form-actions">
-					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button>Aceptar</button></a>
+					<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="novo-btn-primary">Aceptar</button></a>
 				</div>
-	</div>			
+	</div>

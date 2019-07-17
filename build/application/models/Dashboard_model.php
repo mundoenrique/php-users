@@ -24,21 +24,13 @@ class Dashboard_model extends CI_Model {
 			'token' => $this->session->userdata('token')
 		));
 
-		log_message('info', 'Salida dash uno: ' . $data);
-
-		$dataEncry = np_Hoplite_Encryption($data, 1);
+		$dataEncry = np_Hoplite_Encryption($data, 1,'dashboard_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
-
-		log_message('info', 'Salida encriptada Dashboard: ' . $data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
-
-		log_message('info', 'Salida dashboard response: ' . $response);
-
 		$data = json_decode($response);
-		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1));
-
-		$salida = json_encode($desdata);
-		log_message('info', 'Salida dashboard desencriptado: ' . $salida);
+		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1,'dashboard_load'));
+		$username = $this->session->userdata('userName');
+		log_message('DEBUG', '['.$username.'] RESPONSE dashboard_load: '.json_encode($desdata->lista));
 
 		return json_encode($desdata);
 	}
@@ -60,18 +52,17 @@ class Dashboard_model extends CI_Model {
 
 		log_message('info', $data);
 
-		 $dataEncry = np_Hoplite_Encryption($data, 1);
+		 $dataEncry = np_Hoplite_Encryption($data, 1, 'saldo_load');
 		 $data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		 $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		 $data = json_decode($response);
-		 $desdata = json_decode(np_Hoplite_Decrypt($data->data, 1));
+		 $desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'saldo_load'));
 
 		 $salida = json_encode($desdata);
 		 log_message('info', 'Salida SALDO desencriptado: ' . $salida);
 		 //$desdata = json_decode('{"bloqueo":"0,00","disponible":"5.000.000,00","actual":"51.000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
 
-
-
-		return json_encode($desdata);
+		 $response = $this->cryptography->encrypt($desdata);
+		 return json_encode($response);
 	}
 }

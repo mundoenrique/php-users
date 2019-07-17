@@ -159,7 +159,21 @@ $(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto){
 		var clase,clase1;
-		$.post(base_url +"/transferencia/ctaDestino",{"nroTarjeta":ctaOrigen,"prefijo":prefijo,"operacion":"P2T"},function(data) {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		  );
+			var dataRequest = JSON.stringify ({
+				"nroTarjeta":ctaOrigen,
+				"prefijo":prefijo,
+				"operacion":"P2T"
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url +"/transferencia/ctaDestino",{ request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 			if(data.rc == -61){
 				$(location).attr('href', base_url+'/users/error_gral');
 			}
@@ -288,8 +302,8 @@ $(function(){
 					ctaDestino+= "</form>";
 					ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
 					ctaDestino+="<div class='form-actions'>";
-					ctaDestino+="<button id='cancelar1' type='reset'>Cancelar</button>";
-					ctaDestino+="<button id='cambiar'>Modificar</button>";
+					ctaDestino+="<button id='cancelar1' type='reset' class='novo-btn-secondary'>Cancelar</button>";
+					ctaDestino+="<button id='cambiar' class='novo-btn-primary'>Modificar</button>";
 					ctaDestino+="</div>";
 					ctaDestino+="</div>";
 
@@ -379,15 +393,37 @@ $(function(){
 							confirmacion+= 		"</tbody>";
 							confirmacion+= 	"</table>";
 							confirmacion+= 	"<div class='form-actions'>";
-							confirmacion+= 		"<button id='cancelar' type='reset'>Cancelar</button>";
-							confirmacion+= 		"<button id='continuar'>Continuar</button>";
+							confirmacion+= 		"<button id='cancelar' type='reset' class='novo-btn-secondary'>Cancelar</button>";
+							confirmacion+= 		"<button id='continuar' class='novo-btn-primary'>Continuar</button>";
 							confirmacion+= 	"</div>";
 							confirmacion+=   "</div>";
 							$("#content-holder").append(confirmacion);
 
 
 							$("#continuar").click(function(){
-								$.post(base_url +"/adm/modificar",{"id_afiliacion":id_afiliacion, "nroPlasticoOrigen":ctaOrigen,"nroCuentaDestino":cDestino, "id_ext_per":id_per," beneficiario":nombreDest, "tipoOperacion":"P2T", "email":emailClienteD,"banco":bancoValor, "expDate":expDate },function(data) {
+
+								var cpo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+
+									var dataRequest = JSON.stringify ({
+										id_afiliacion :id_afiliacion,
+										nroPlasticoOrigen :ctaOrigen,
+										nroCuentaDestino :cDestino,
+										id_ext_per :id_per,
+										beneficiario :nombreDest,
+										tipoOperacion :"P2T",
+										email :emailClienteD,
+										banco :bancoValor,
+										expDate :expDate
+									})
+
+									dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+								$.post(base_url +"/adm/modificar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 									if(data.rc==0){
 										var exito;
 										$("#progress").attr('style','display:none');
@@ -403,7 +439,7 @@ $(function(){
 										exito+=	"<span aria-hidden='true' class='icon-ok-sign'></span> Afiliación modificada satisfactoriamente";
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
-										exito+= 		"<button id='exit'>Finalizar</button>";
+										exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
 									} else {
@@ -436,7 +472,7 @@ $(function(){
 										exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no modificada, " + msgAfiliation;
 										exito+= "</div>";
 										exito+= 	"<div class='form-actions'>";
-										exito+= 		"<button id='exit'>Finalizar</button>";
+										exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 										exito+= 	"</div>";
 										$("#content-holder").append(exito);
 									}
@@ -497,14 +533,29 @@ $(function(){
 					eliminar+=				"</tbody>";
 					eliminar+=			"</table>";
 					eliminar+=			"<div class='form-actions'>";
-					eliminar+=				"<button id='cancel' type='reset'>Cancelar</button>";
-					eliminar+=				"<button id='cont'>Continuar</button>";
+					eliminar+=				"<button id='cancel' type='reset' class='novo-btn-secondary'>Cancelar</button>";
+					eliminar+=				"<button id='cont' class='novo-btn-primary'>Continuar</button>";
 					eliminar+=			"</div>";
 					eliminar+=	"</div>";
 					$("#content-holder").append(eliminar);
 
 					$("#cont").click(function(){
-						$.post(base_url +"/adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2T"},function(data) {
+
+						var cpo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						  );
+
+							var dataRequest = JSON.stringify ({
+								"noTarjeta":ctaOrigen,
+								"noCuentaDestino":tarjeta,
+								"tipoOperacion":"P2T"
+							})
+
+							dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+						$.post(base_url +"/adm/eliminar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response) {
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 							if(data.rc==0){
 								$("#progress").attr('style','display:none');
 								$("#content-holder").children().remove();
@@ -518,7 +569,7 @@ $(function(){
 								exito+=	"<span aria-hidden='true' class='icon-ok-sign'></span> Afiliación eliminada satisfactoriamente";
 								exito+= "</div>";
 								exito+= 	"<div class='form-actions'>";
-								exito+= 		"<button id='exit'>Finalizar</button>";
+								exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 								exito+= 	"</div>";
 								$("#content-holder").append(exito);
 							}
@@ -531,7 +582,7 @@ $(function(){
 								exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no eliminada";
 								exito+= "</div>";
 								exito+= 	"<div class='form-actions'>";
-								exito+= 		"<button id='exit'>Finalizar</button>";
+								exito+= 		"<button id='exit' class='novo-btn-primary'>Finalizar</button>";
 								exito+= 	"</div>";
 								$("#content-holder").append(exito);
 							}
@@ -632,7 +683,15 @@ $(function(){
 	function getBancos() {
 
 		$.ajaxSetup({async: false});
-		$.post(base_url +"/affiliation/bancos",function(data){
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		  );
+
+		$.post(base_url +"/affiliation/bancos", {"cpo_name":cpo_cook}, function(response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			$.each(data.lista,function(pos,item){
 
 				var lista;

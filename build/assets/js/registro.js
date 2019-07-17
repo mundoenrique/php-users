@@ -3,9 +3,18 @@ var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
+var skin = decodeURIComponent(
+	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_skin\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+);
 
 $(function(){
+	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
+	var tlfLength = "11";
+	if (skin == 'pichincha'){
+		$('#telefonoFijo').attr('maxlength','9');
+		tlfLength = "9";
+	}
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
 
@@ -45,13 +54,19 @@ $(function(){
 					width:"940px",
 					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
-			} else if ($("#iso").val() == "Pe" || $("#iso").val() == "Usd") {
-				$("#dialog-rg-Pe").dialog({
+			} else if ($("#iso").val() == "Ec-bp") {
+				$("#dialog-rg-Ec-bp").dialog({
 					modal:"true",
 					width:"940px",
 					open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
-			} else if ($("#iso").val() == "Ve") {
+			} else if ($("#iso").val() == "Pe" || $("#iso").val() == "Usd") {
+				$("#dialog-rg-Pe").dialog({
+					modal: "true",
+					width: "940px",
+					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
+			}else if ($("#iso").val() == "Ve") {
 				$("#dialog-rg-Ve").dialog({
 					modal:"true",
 					width:"940px",
@@ -113,6 +128,10 @@ $(function(){
 		$("button").attr("disabled",true);
 		validar_campos();
 
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+		$("#form-validar").append('<input type="hidden" name="cpo_name" class="ignore" value="'+cpo_cook+'">');
 		$("#form-validar").submit();
 		setTimeout(function(){$("#msg").fadeOut();},5000);
 
@@ -121,7 +140,7 @@ $(function(){
 		if(form.valid() == true) {
 			var pais, cuenta, cedula, id_ext_per, pin, d, fecha, userName,claveWeb, anio;
 
-			pais		= $('#iso option:selected').val();
+			pais		= $('#iso').val();
 			cuenta		= $("#content-holder").find("#card-number").val();
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			pin			= $("#content-holder").find("#card-holder-pin").val();
@@ -150,16 +169,43 @@ $(function(){
 			cuenta		= Base64.encode(cuenta);
 			id_ext_per	= Base64.encode(id_ext_per);
 
-			$.post(base_url +"/registro/validar",{"userName":userName, "pais":pais ,"cuenta":cuenta,"id_ext_per":id_ext_per,"pin":pin_enc,"claveWeb":claveWeb},function(dataUser){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			var dataRequest = JSON.stringify ({
+				userName: userName,
+				pais: pais,
+				cuenta: cuenta,
+				id_ext_per: id_ext_per,
+				pin: pin_enc,
+				claveWeb: claveWeb
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/registro/validar", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				dataUser = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				$("#loading").hide();
 				$("button").attr("disabled",false);
 
 				switch(dataUser.code){
 					case 0:
+						$('#form-validar')[0].reset();
 						var data = dataUser.dataUser;
 						var pais	= data.pais;
 						aplicaPerfil = data.user.aplicaPerfil;
 						digVer = data.afiliacion.dig_verificador_aux;
+						if(pais == 'Ec-bp') {
+							$('#email-bp').val(data.user.email);
+							$('#email_cypher').val(data.user.emailEnc);
+							$('#telf-hab').val(data.user.telefono);
+							$('#hab_cypher').val(data.user.telefonoEnc);
+							$('#telf-cel').val(data.user.celular);
+							$('#cel_cypher').val(data.user.celularEnc);
+						}
 
 						if(pais == 'Pe') {
 
@@ -191,7 +237,21 @@ $(function(){
 								$('.verificacion-one').remove();
 								$('#content-registro').css('display', 'block');
 
-								$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": 1}, function (data) {
+								var cpo_cook = decodeURIComponent(
+									document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+									);
+
+								var dataRequest = JSON.stringify ({
+									pais: pais,
+									subRegion: 1
+								});
+
+								dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+								$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+									data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 									$("#departamento").empty().append("<option value=''>Cargando...</option>");
 
 									if(dataUser.code == 0) {
@@ -406,7 +466,22 @@ $(function(){
 	// Funcion que obtiene las Provincias
 
 	function getProvincias(subRegion, pais) {
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		var dataRequest = JSON.stringify ({
+			pais: pais,
+			subRegion: subRegion
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#provincia").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -431,7 +506,22 @@ $(function(){
 	// Funcion que obtiene los Distristos
 
 	function getDistritos(subRegion, pais) {
-		$.post(base_url + "/registro/listadoDepartamento", {"pais": pais, "subRegion": subRegion}, function (data) {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		var dataRequest = JSON.stringify ({
+			pais: pais,
+			subRegion: subRegion
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {
@@ -492,7 +582,7 @@ $(function(){
 		}
 
 		//validate letter
-		if ( pswd.match(/[A-z]/) ) {
+		if ( pswd.match(/[a-z]/) ) {
 			$('#letter').removeClass('rule-invalid').addClass('rule-valid');
 			mt=true;
 		} else {
@@ -556,7 +646,21 @@ $(function(){
 
 	function getProfesiones(){
 		$("#ocupacion-laboral").empty().append("<option value=''>Cargando...</option>");
-		$.post(base_url +"/registro/ListadoProfesiones",{"pais" : country}, function(data){
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+		var dataRequest = JSON.stringify ({
+			pais: country
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/registro/ListadoProfesiones", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 			if(data.rc == 0) {
 				$("#ocupacion-laboral").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaProfesiones, function (pos, item) {
@@ -572,13 +676,41 @@ $(function(){
 	//Funcion que valida si existe el usuario en DB
 
     $("#username").blur(function(){
-        usuario     = $("#username").val();								//38 N
-        username    = usuario.toUpperCase();							//	 N
+				usuario     = $("#username").val();
+				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
+				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
+					var titleCI = 'Nombre de usuario',
+					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato válido.',
+					modalTypeCI = 'alert-warning';
+					msgService(titleCI, msgCI, modalTypeCI, 0);
+					$("#username").removeClass('field-success').addClass('field-error');
+					return;
+				}
+				username    = usuario.toUpperCase();
 		if(usuario.match(/[\s]/gi)){
 			$("#loading").hide();
 		}else{
 			$("#loading").show();
-			$.post(base_url + "/registro/verificar",{"usuario":username},function(data){
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+
+			var dataRequest = JSON.stringify ({
+				usuario: username
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url+"/registro/verificar", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 				if(data.rc == 0) {
 					$("#loading").hide();
@@ -676,7 +808,6 @@ $(function(){
 		$("#registrar").css("display","none");
 
 		validar_campos();
-
 		$("#form-usuario").submit();
 
 		setTimeout(function(){$("#msg").fadeOut();},5000);
@@ -691,6 +822,15 @@ $(function(){
 		if(form.valid() == true) {
 			$("#load_reg").show();
 
+			emailTrue = $('#email').val();
+			phoneTrue = $('#telefonoFijo').val();
+			movilPhoneTrue = $('#telefonoMovil').val();
+			if(country == 'Ec-bp') {
+				emailTrue = $('#email_cypher').val();
+				phoneTrue = $('#hab_cypher').val();
+				movilPhoneTrue = $('#cel_cypher').val();
+			}
+
 			typeIdentifier		= $('#listaIdentificadores').val();					//1 N
 			nroDocument			= $('#holder-id').val();							//2 N
 			verifyDigit			= $('#dig-ver').val();
@@ -698,10 +838,7 @@ $(function(){
 			firstExtName		= $('#first-ext-name').val();						//4 N
 			lastName			= $('#last-name').val();							//5 N
 			lastExtName			= $('#last-ext-name').val();						//6 N
-			placeBirth			= $('#lugar-nacimiento').val();						//7 N
-			//day				= $('#dia').val();									//8
-			//month				= $('#mes').val();									//9
-			//year				= $('#ano').val();									//10
+			placeBirth			= $('#lugar-nacimiento').val();
 			birthDate			= $("#fecha-de-nacimiento").val();					//Campo fecha de nacimiento tipo Hidden - N
 			sexo				= $("input[name='genero']:checked").val();			//11 N
 			civilStatus			= $('#edocivil').val();								//12
@@ -713,13 +850,13 @@ $(function(){
 			province			= $('#provincia').val();							//18
 			district			= $('#distrito').val();								//19
 			address				= $('#text-address').val();							//20
-			email				= $('#email').val();								//21 N
+			email				= emailTrue;								//21 N
 			confirmEmail		= $('#confirm-email').val();						//22 N
-			phone				= $('#telefonoFijo').val();							//23 N
-			movilPhone			= $('#telefonoMovil').val();						//24 N
-            anotherPhone        = $('#otroTelefonoSelect option:selected').val();   //25 N
+			phone				= phoneTrue;							//23 N
+			movilPhone			= movilPhoneTrue;						//24 N
+			anotherPhone        = $('#otroTelefonoSelect option:selected').val();   //25 N
 			anotherPhoneNum 	= $('#otroTelefonoNum').val();						//26 N
-            ruc					= $('#ruc').val();									//27
+			ruc					= $('#ruc').val();									//27
 			centroLaboral		= $('#centro-laboral').val();						//28
 			situacionLaboral	= $('#text-situacion').val();						//29
 			antiguedadLaboral	= $('#antiguedadLaboral').val();					//30
@@ -738,7 +875,7 @@ $(function(){
 			contrato			= ($("#contrato").is(':checked')) ? 1 : 0;
 
 
-            if(countryResidence == 'Ve'){
+            if(countryResidence == 'Ve' || countryResidence == 'Ec-bp'){
                 tipoId = 3;
             }
             if(countryResidence == 'Co'){
@@ -748,13 +885,8 @@ $(function(){
                 tipoId = 1;
             }
 
-			empresa		= "tebca";
-			empresaU	= "TEBCA";
-			empresa2	= "servitebca";
-			empresa2U	= "SERVITEBCA";
-
 			//validate letter, capital letter, caracteres especiales
-			if (password.match(/[A-z]/) && password.match(/[A-Z]/) && password.match(/([!@\*\-\?¡¿+\/.,_#])/) && !password.match(/(.)\1{2,}/) && !password.match(empresa) && !password.match(empresaU) && !password.match(empresa2) && !password.match(empresa2U)) {
+			if (password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/([!@\*\-\?¡¿+\/.,_#])/) && !password.match(/(.)\1{2,}/)) {
 				if(anotherPhone==null || anotherPhone==false){
 					anotherPhone = "";
 				}
@@ -770,16 +902,27 @@ $(function(){
 				}
 
 				//validar aplica perfil LMHL
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+					);
 
-				$.ajax({
-				  method: "POST",
-				  url: base_url + "/registro/registrar",
-				  data: dataUser
-				})
-				  .done(function( data ) {
+					dataUser.cpo_name = cpo_cook;
 
+					var dataRequest = JSON.stringify(dataUser);
+
+					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+					$.ajax({
+						method: "POST",
+						url: base_url + "/registro/registrar",
+						data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}
+					})
+				  .done(function( response ) {
+
+						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 						switch(data.code){
 							case 0:
+								$('#form-usuario')[0].reset();
 								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
 								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
 
@@ -790,6 +933,7 @@ $(function(){
 							break;
 
 							case 2: //error general
+							$('#form-usuario')[0].reset();
 								$(location).attr('href', base_url+'/users/error_gral');
 							break;
 
@@ -805,7 +949,8 @@ $(function(){
 						}
 				  })
 
-			} else { ///////////////////////////////////
+			} else {
+				$("#load_reg").hide();
 
 				$("#registrar").fadeIn();
 
@@ -815,6 +960,10 @@ $(function(){
 					width	:"440px",
 					open	: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
+
+				$('#close-nopass').on('click', function(){
+					$("#dialogo_oculto").dialog("close");
+				})
 
 			}	//ELSE
 		}//FORM VALID
@@ -829,13 +978,26 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		$.post(base_url +"/registro/listado",function(data){
-			$.each(data.listaPaises,function(pos,item){
-				var lista;
-				lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-				$("#iso").append(lista);
+		if(skin != 'pichincha') {
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
+				$.each(data.listaPaises, function(pos,item){
+					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
+					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+					$("#iso").append(lista);
+				});
 			});
-		});
+		} else {
+			$('#condiciones').removeClass('label-disabled');
+			$("#accept-terms").prop('disabled', false)
+		}
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -987,6 +1149,10 @@ $(function(){
 			"Correo invalido. "
 		);
 
+		jQuery.validator.addMethod("validatePassword", function(value,element){
+			 return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
+		}, "El campo debe tener mínimo 1 y máximo 3 números consecutivos");
+
 		jQuery.validator.addMethod("digValido",function(value, element, regex){
 				return value == digVer ? true : false;
 			}
@@ -1004,7 +1170,7 @@ $(function(){
 
 				"card-holder-pin": {"required":true},
 				"card-number": {"required":true,"number":true, "minlength":16, "maxlength": 16},
-				"card-holder-id": { "required": true, pattern: /^[a-z0-9]+$/i},
+				"card-holder-id": {"required":true,"number":true},
 				"iso": {"required":true},
 				"accept-terms": {"required":true}
 			},
@@ -1052,7 +1218,7 @@ $(function(){
 				"direccion" : {"required" : true},																			//20
 				"correo" : {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/},																	//21
 				"confirm-correo": {"required":true, "mail": /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/, "equalTo":"#email"},//22
-				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": 11},					//23
+				"telefono_fijo": {"number":true, "numberEqual2": true, "minlength": 7, "maxlength": tlfLength},					//23
 				"telefono_movil": {"required":true, "number":true, "numberEqual3": true, "minlength": 7, "maxlength": 11},	//24
 				"otro_tipo_telefono" : {"required":false},																	//25
 				"otro_telefono_num" : {"number":true, "numberEqual1": true, "minlength": 7, "maxlength": 11},				//26
@@ -1067,7 +1233,7 @@ $(function(){
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
 				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
-				"userpwd": {"required":true, "minlength":8, "maxlength": 15},												//39
+				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
 				"proteccion": {"required": true}
@@ -1076,47 +1242,47 @@ $(function(){
 			messages: {
 
 				"tipo_identificacion" : "Debe Seleccionar su Tipo de Identificación.",															//1
-				"numero_identificacion" : "El campo Número de identificación NO puede estar vacío y debe contener solo números.",				//2
+				"numero_identificacion" : "El campo Número de identificación no puede estar vacío y debe contener solo números.",				//2
 				"dig-ver": "Dígito verificador inválido.",
-				"primer_nombre" : "El campo Primer Nombre NO puede estar vacío y debe contener solo letras.",									//3
+				"primer_nombre" : "El campo Primer Nombre no puede estar vacío y debe contener solo letras.",									//3
 				"segundo_nombre" : "El campo Segundo Nombre debe contener solo letras.",														//4
-				"primer_apellido" : "El campo Apellido Paterno NO puede estar vacío y debe contener solo letras.",								//5
+				"primer_apellido" : "El campo Apellido Paterno no puede estar vacío y debe contener solo letras.",								//5
 				"segundo_apellido" : "El campo Apellido Materno debe contener solo letras.",													//6
 				"lugar_nacimiento" : "El campo Lugar de Nacimiento debe contener solo letras.",													//7
 				"dia" : {																														//8
-					"required"	: "El campo Día NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Día NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Día no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Día no puede estar vacío y debe contener solo números.",
 					"range":"El Día debe estar comprendido entre 1 y 31."
 				},
 				"mes" : {																														//9
-					"required"	: "El campo Mes NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Mes NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Mes no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Mes no puede estar vacío y debe contener solo números.",
 					"fecha_invalida" : "Usted introdujo una fecha inválida.",
 				},
 				"ano" : {																														//10
-					"required"	: "El campo Año NO puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Año NO puede estar vacío y debe contener solo números.",
+					"required"	: "El campo Año no puede estar vacío y debe contener solo números.",
+					"number"	: "El campo Año no puede estar vacío y debe contener solo números.",
 					"min" : "Por favor ingrese un Año de nacimiento válido."
 				},
-				"nacionalidad" : "El campo Nacionalidad NO puede estar vacío.",
-				"tipo_direccion" : "El campo Tipo Dirección NO puede estar vacío",																//14																									//14
+				"nacionalidad" : "El campo Nacionalidad no puede estar vacío.",
+				"tipo_direccion" : "El campo Tipo Dirección no puede estar vacío",																//14																									//14
 				"codigo_postal" : "El campo Código Postal debe contener solo números.",															//15
-				"pais_Residencia" : "El campo País de Residencia NO puede estar vacío y debe contener solo letras.",							//16
-				"departamento" : "El campo Departamento NO puede estar vacío.",																	//17
-				"provincia" : "El campo Provincia NO puede estar vacío.",																		//18
-				"distrito" : "El campo Distrito NO puede estar vacío.",																			//19
-				"direccion" : "El campo Dirección NO puede estar vacío.",																		//20
-				"correo" : "El correo electrónico NO puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com).",				//21
+				"pais_Residencia" : "El campo País de Residencia no puede estar vacío y debe contener solo letras.",							//16
+				"departamento" : "El campo Departamento no puede estar vacío.",																	//17
+				"provincia" : "El campo Provincia no puede estar vacío.",																		//18
+				"distrito" : "El campo Distrito no puede estar vacío.",																			//19
+				"direccion" : "El campo Dirección no puede estar vacío.",																		//20
+				"correo" : "El correo electrónico no puede estar vacío y debe contener formato correcto. (usuario@ejemplo.com).",				//21
 				"confirm-correo" : "El campo confirmar correo electrónico debe coincidir con su correo electrónico.",							//22
 				"telefono_fijo" : {																												//23
 					"number"		: "El campo Teléfono Fijo debe contener solo números.",
 					"numberEqual2"	: "Teléfono Fijo está repetido.",
 					"minlength"		: "El campo Teléfono Fijo debe contener como mínimo 7 caracteres numéricos.",
-					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo 11 caracteres numéricos."
+					"maxlength" 	: "El campo Teléfono Fijo debe contener máximo "+ tlfLength +" caracteres numéricos."
 				},
 				"telefono_movil" : {																											//24
-					"required"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
-                    "number"		: "El campo Teléfono Móvil NO puede estar vacío y debe contener solo números.",
+					"required"		: "El campo Teléfono Móvil no puede estar vacío y debe contener solo números.",
+                    "number"		: "El campo Teléfono Móvil no puede estar vacío y debe contener solo números.",
                     "numberEqual3"	: "Teléfono Móvil está repetido.",
 					"minlength"		: "El campo Teléfono Móvil debe contener como mínimo 7 caracteres numéricos.",
 					"maxlength"		: "El campo Teléfono Móvil debe contener máximo 11 caracteres numéricos."
@@ -1127,21 +1293,21 @@ $(function(){
 					"minlength"		: "El campo Otro Teléfono debe contener como minímo 7 caracteres númericos.",
 					"maxlength"		: "El campo Otro Teléfono  debe contener máximo 11 caracteres númericos."
                 },
-				"ruc_laboral" : "El campo Teléfono Móvil NO puede estar vacío.",																//27
-				"centro_laboral" : "El campo Centro Laboral NO puede estar vacío.",
-				"ocupacion_laboral" : "El campo Ocupación Laboral NO puede estar vacío y debe contener solo letras.",							//31
+				"ruc_laboral" : "El campo Teléfono Móvil no puede estar vacío.",																//27
+				"centro_laboral" : "El campo Centro Laboral no puede estar vacío.",
+				"ocupacion_laboral" : "El campo Ocupación Laboral no puede estar vacío y debe contener solo letras.",							//31
 				"cargo_laboral" : "El campo Cargo Laboral debe contener solo letras.",															//32
 				"ingreso" : "El campo Ingreso promedio mensual debe contener solo números.",																												//33
-				"desem_publico" : "El campo ¿Desempeñó cargo público en últimos 2 años? NO puede estar vacío.",									//34
-				"cargo_publico" : "El campo Cargo Público NO puede estar vacío y debe contener solo letras.",									//35
-				"institucion" : "El campo Institución NO puede estar vacío.",																	//36
-				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? NO puede estar vacío.",	//37
+				"desem_publico" : "El campo ¿Desempeñó cargo público en últimos 2 años? no puede estar vacío.",									//34
+				"cargo_publico" : "El campo Cargo Público no puede estar vacío y debe contener solo letras.",									//35
+				"institucion" : "El campo Institución no puede estar vacío.",																	//36
+				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"username" : {																													//38
-					"required" : "El campo Usuario NO puede estar vacío.",
-					"username" : "El campo Usuario no tiene un formato valido. Permitido alfanumérico y underscore (barra_piso).",
+					"required" : "El campo Usuario no puede estar vacío.",
+					"username": "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
-				"userpwd" : "El campo contraseña NO puede estar vacío.",																			//39
+				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
 				"proteccion": "Debe aceptar protección de datos personales."

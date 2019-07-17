@@ -89,11 +89,16 @@ country = $('body').data('country');
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   $('.dashboard-item').click(function(){
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
     $('#numt').val($(this).attr('card'));
     $('#marca').val($(this).attr('marca'));
     $('#empresa').val($(this).attr('empresa'));
     $('#producto').val($(this).attr('producto'));
-    $('#numt_mascara').val($(this).attr('numt_mascara'));
+		$('#numt_mascara').val($(this).attr('numt_mascara'));
+		$('#tarjeta').append('<input type="hidden" name="cpo_name" value="'+cpo_cook+'">');
     $("#tarjeta").submit();
 	});
 
@@ -104,7 +109,20 @@ country = $('body').data('country');
 			//Si la tarjeta no esta activa no consulta el saldo
 			if($(item).attr("activeurl") !== 'NE'){
 				//carga saldo tarjeta
-				$.post(base_url+"/dashboard/saldo",{"tarjeta":$(item).attr("card")},function(data){
+				var cpo_cook = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+
+				var dataRequest = JSON.stringify ({
+					tarjeta:$(item).attr("card")
+				});
+
+				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+				$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
+
 					var moneda=$(".dashboard-item").attr("moneda");
 					var id=$(".dashboard-item").attr("doc");
 					var saldo=data.disponible;

@@ -31,14 +31,14 @@ base_cdn = $('body').attr('data-app-cdn');
              cadena+=   "</form>";
 
             confirmacion=  "<div class='form-actions'>";
-            confirmacion+=    "<button id='eliminar' type='reset'>Eliminar</button>";
-            confirmacion+=    "<button id='actualizar'>Actualizar</button>";
+            confirmacion+=    "<button id='eliminar' type='reset' class='novo-btn-secondary'>Eliminar</button>";
+            confirmacion+=    "<button id='actualizar' class='novo-btn-primary'>Actualizar</button>";
             confirmacion+=  "</div>";
 
 
             confirmacion1=  "<div class='form-actions'>";
-            confirmacion1+=    "<button id='volver' type='reset'>Volver</button>";
-            confirmacion1+=    "<button id='afiliar'>Afiliar</button>";
+            confirmacion1+=    "<button id='volver' type='reset' class='novo-btn-secondary'>Volver</button>";
+            confirmacion1+=    "<button id='afiliar' class='novo-btn-primary'>Afiliar</button>";
             confirmacion1+=  "</div>";
 
 
@@ -89,8 +89,10 @@ $("#actualizar").click(function(){
       }
 
       //console.log("clave "+claveSMS);
-
-       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
 
         if(data.rc==0) {
 
@@ -135,8 +137,11 @@ $("#actualizar").click(function(){
 });
 
 $("#eliminar").click(function(){
-      var claveSMS = "";
-      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var claveSMS = "";
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+      $.post(base_url +"/users/passwordSmsEliminar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
 
         if(data.rc==0) {
 
@@ -215,8 +220,21 @@ $("#afiliar").click(function(){
       if((pais=='Pe') || (pais=='Usd') || (pais=='Co')){
         claveSMS = hex_md5(claveSMS);
       }
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-       $.post(base_url +"/users/passwordSmsNew",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono},function(data){
+			var dataRequest = JSON.stringify ({
+				id_ext_per:id_ext_per,
+				claveSMS:claveSMS,
+				nroMovil:telefono
+			});
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url +"/users/passwordSmsNew",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
         if(data.rc==0) {
 

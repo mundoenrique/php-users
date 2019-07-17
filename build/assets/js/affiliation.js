@@ -160,7 +160,21 @@ $(function() {
 
 		email=$("#cargarConfirmacion").find("#ctaAfiliar").attr("email");
 		if (form.valid() == true){
-			$.post(base_url +"/affiliation/cuentasP2P",{"noTarjeta":numeroCta},function(data){
+
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			  );
+
+			var dataRequest = JSON.stringify ({
+				"noTarjeta":numeroCta
+			})
+
+			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+			$.post(base_url +"/affiliation/cuentasP2P",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
 				if(data.rc == 0){
 
 					beneficiario = data.beneficiario;
@@ -196,7 +210,27 @@ $(function() {
 					$("#content-holder").append($("#content-confirmacion").html());
 
 					$(".continuar").click(function(){
-						$.post(base_url +"/affiliation/affiliation",{"nroPlasticoOrigen":numeroCtaOrigen,"beneficiario":beneficiario,"nroCuentaDestino":numeroCta,"tipoOperacion":"P2P","email":email,"cedula":cedula,"prefix":prefix, "expDate":expDate},function(data){
+
+						var cpo_cook = decodeURIComponent(
+							document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+						  );
+
+						var dataRequest = JSON.stringify ({
+							"nroPlasticoOrigen":numeroCtaOrigen,
+							"beneficiario":beneficiario,
+							"nroCuentaDestino":numeroCta,
+							"tipoOperacion":"P2P",
+							"email":email,
+							"cedula":cedula,
+							"prefix":prefix,
+							"expDate":expDate
+						});
+
+						dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+						$.post(base_url +"/affiliation/affiliation",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(data){
+
+							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
 							if(data.rc==0||data.rc==-188) {
 								datos_finalizacion= 			'<tr>';

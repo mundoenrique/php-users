@@ -1,3 +1,7 @@
+<?php
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu">
     <ul class="menu">
         <li class="menu-item current-menu-item">
@@ -45,6 +49,7 @@
                 <h2>Registro de Cuenta</h2>
                 <p>Ingrese los datos requeridos a continuación para afiliar una cuenta a la cual desee transferir fondos en determinado momento.</p>
                 <form accept-charset="utf-8" id="validate_afiliacion">
+									<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
                     <fieldset>
                         <label for="donor">Cuenta de Origen</label>
                         <div class="group" id="donor">
@@ -98,7 +103,7 @@
                 </form>
                 <div id="msg"></div>
                 <div class="form-actions">
-                    <button id="afiliar" disabled>Afiliar</button>
+                    <button id="afiliar" class="novo-btn-primary" disabled>Afiliar</button>
                 </div>
             </div>
         </section>
@@ -156,16 +161,18 @@ foreach ($datos->cuentaOrigen as $value) {
             $img=str_replace("/", "-", $img1);
             $marca= strtolower(str_replace(" ", "-", $value->marca));
             $empresa = strtolower($value->nomEmp);
-            $pais=ucwords($this->session->userdata('pais'));
+						$pais=ucwords($this->session->userdata('pais'));
+						$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+						$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-            echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'>
+            echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'>
          <a rel='section'>
          <img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
          <div class='dashboard-item-network $marca'></div>
          <div class='dashboard-item-info'>
-         <p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+         <p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
          <p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-         <p class='dashboard-item-category'>$value->producto</p>
+         <p class='dashboard-item-category'>$nomProducto</p>
          </div>
          </a>
          </li>";
@@ -179,9 +186,20 @@ foreach ($datos->cuentaOrigen as $value) {
         }
         ?>
     </ul>
-    <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
-        </div>";
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+		echo "<div class='form-actions'>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
     ?>
 
 </div>    <!-- DIV DE CUENTAS ORIGEN -->
@@ -201,6 +219,7 @@ foreach ($datos->cuentaOrigen as $value) {
     <h2>Confirmación</h2>
     <p>Por favor, verifique los datos de la afiliación que va a efectuar.</p>
     <form accept-charset="utf-8" method="post" id="confir">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarConfirmacion">
 
@@ -208,8 +227,8 @@ foreach ($datos->cuentaOrigen as $value) {
         </table>
     </form>
     <div class="form-actions">
-        <a href="<? echo $this->config->item("base_url"); ?>/affiliation"><button type="reset">Cancelar</button></a>
-        <button class="continuar">Continuar</button>
+        <a href="<? echo $this->config->item("base_url"); ?>/affiliation"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+        <button class="continuar" class="novo-btn-primary">Continuar</button>
     </div>
 </div>
 <!-- FINALIZA VISTA DE CONFIRMACION -->
@@ -232,16 +251,16 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>Se ha enviado el comprobante de esta operación a su correo electrónico.</p>
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
-    <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+    <form accept-charset="utf-8" method="GET"  id="formFinAfiliacion">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion">
 
             </tbody>
         </table>
         <div class="form-actions">
-            <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
+            <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button class="novo-btn-secondary">No</button></a>
             <!-- <a href="google.com"><button>No</button></a> -->
-            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button>Si</button> </a>
+            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button class="novo-btn-primary">Si</button> </a>
             <!-- <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p> -->
             <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p>
 
@@ -268,15 +287,16 @@ foreach ($datos->cuentaOrigen as $value) {
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
     <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion3">
 
             </tbody>
         </table>
         <div class="form-actions">
-            <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button>No</button></a>
+            <a href="<? echo $this->config->item("base_url"); ?>/dashboard/"><button class="novo-btn-secondary">No</button></a>
             <!-- <a href="google.com"><button>No</button></a> -->
-            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button>Si</button> </a>
+            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"><button class="novo-btn-primary">Si</button> </a>
             <!-- <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p> -->
             <p>¿Desea afiliar otra cuenta para transferencia <?php echo lang("MENU_P2P");?>?</p>
 
@@ -302,13 +322,14 @@ foreach ($datos->cuentaOrigen as $value) {
     </div>
     <p>Los datos registrados durante la operación fueron los siguientes:</p>
     <form accept-charset="utf-8" method="post"  id="formFinAfiliacion">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
         <table class="receipt" cellpadding="0" cellspacing="0" width="100%">
             <tbody id="cargarFinalizacion2">
 
             </tbody>
         </table>
         <div class="form-actions">
-            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"> <button>Regresar</button> </a>
+            <a href="<? echo $this->config->item("base_url"); ?>/affiliation/affiliation"> <button class="novo-btn-secondary">Regresar</button> </a>
         </div>
     </form>
 </div>
@@ -323,7 +344,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>La tarjeta que desea afiliar <strong>no permite transferencias.</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="invalido2">Aceptar</button>
+        <button id="invalido2" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -334,7 +355,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>La tarjeta que desea afiliar <strong>no ha sido encontrada.</strong>. Por favor <strong>verifique</strong> sus datos, e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="invalido3">Aceptar</button>
+        <button id="invalido3" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -345,7 +366,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <p>Ha ocurrido un error en el sistema. Por favor <strong>intente</strong>mas tarde. </p>
     </div>
     <div class="form-actions">
-        <button id="invalido4">Aceptar</button>
+        <button id="invalido4" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>
 
@@ -356,6 +377,6 @@ foreach ($datos->cuentaOrigen as $value) {
         <p id="msgNon"></p>
     </div>
     <div class="form-actions">
-        <button id="invalido5">Aceptar</button>
+        <button id="invalido5" class="novo-btn-primary">Aceptar</button>
     </div>
 </div>

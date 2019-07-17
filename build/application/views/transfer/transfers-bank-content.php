@@ -1,4 +1,8 @@
-<?php $country = $this->session->userdata('pais'); ?>
+<?php
+$country = $this->session->userdata('pais');
+$cpo_name = $this->security->get_csrf_token_name();
+$cpo_cook = $this->security->get_csrf_hash();
+?>
 <nav id="tabs-menu" style='display:none'>
 	<ul class="menu">
 		<li class="menu-item">
@@ -26,8 +30,8 @@
 					</fieldset>
 					<p>En caso de haber olvidado su <strong>Clave de Operaciones</strong></strong>, comuníquese con el <strong>Centro de Contacto</strong>.</p>
 					<div class="form-actions">
-						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset">Cancelar</button></a>
-						<button id="continuar_transfer">Continuar</button>
+						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+						<button id="continuar_transfer" class="novo-btn-primary">Continuar</button>
 					</div>
 				</div>
 			</section>
@@ -84,7 +88,7 @@
 									<ul class='product-balance-group disabled-product-balance-group' style="margin: 10px 0">
 										<li>Disponible <span class='product-balance' id='balance-available'> <?php echo lang("MONEDA");?> </span></li>
 										<li>A debitar <span class='product-balance' id='balance-debit'> <?php echo lang("MONEDA");?> </span></li>
-										<li>Fecha de Vencimiento<span class='product-balance'><select disabled style="margin-right: 5px;"><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
+										<li style="width: 161px;">Fecha de Vencimiento<span class='product-balance'><select disabled style="margin-right: 5px;"><option value=''>Mes</option></select><select disabled><option value="">Año</option></select></span></li>
 									</ul>
 								</div>
 							</div>
@@ -115,8 +119,8 @@
 						</fieldset>
 					</div>
 					<div id="next-step" class="form-actions">
-						<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset">Cancelar</button></a>
-						<button disabled class="confir" id="continuar">Confirmar</button>
+						<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
+						<button disabled class="confir" id="continuar" class="novo-btn-primary">Confirmar</button>
 					</div>
 				</div>
 			</section>
@@ -188,17 +192,18 @@
 				$empresa = strtolower($value->nomEmp);
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");
+				$tarjetaHabiente=ucwords(mb_strtolower($value->tarjetaHabiente, 'UTF-8'));
+				$nomProducto=ucwords(mb_strtolower($value->producto, 'UTF-8'));
 
-
-				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$value->tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$value->producto' producto='$img' prefix='$value->prefix'>
+				echo "<li class='dashboard-item $empresa' card='$value->nroTarjeta' pais='$pais' moneda='$moneda' nombre='$tarjetaHabiente' marca='$marca' mascara='$value->nroTarjetaMascara' empresa='$empresa' producto1='$nomProducto' producto='$img' prefix='$value->prefix'>
 	         		<a rel='section'>
 	         			<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
 	         			<div class='dashboard-item-network $marca'></div>
 	         			<div class='dashboard-item-info'>
-	         				<p class='dashboard-item-cardholder'>$value->tarjetaHabiente</p>
+	         				<p class='dashboard-item-cardholder'>$tarjetaHabiente</p>
 	         				<p class='dashboard-item-balance'><?php echo $country !== 'Ve' ? $moneda --- : ''; ?></p>
 	         				<p class='dashboard-item-cardnumber'>$value->nroTarjetaMascara</p>
-	         				<p class='dashboard-item-category'>$value->producto</p>
+	         				<p class='dashboard-item-category'>$nomProducto</p>
 	         			</div>
 	         		</a>
          		</li>";
@@ -212,7 +217,7 @@
 		?>
 	</ul>
 	<div class="form-actions">
-		<button type="reset" id="cerrar">Cancelar</button>
+		<button type="reset" id="cerrar" class="novo-btn-primary">Cancelar</button>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE ORIGEN************************************-->
@@ -221,8 +226,23 @@
 	<ul id="dashboard-beneficiary">
 
 	</ul>
+
 	<div class='form-actions'>
-		<button  id='close' type='reset'>Cancelar</button>
+	<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+	?>
+		<button  id='close' type='reset' class="novo-btn-primary">Cancelar</button>
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				</center>
+			<?php
+		}
+	?>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE DESTINO***********************************-->
@@ -246,6 +266,7 @@
 			<p>Por favor, verifique los datos de las siguientes operaciones de transferencia que solicita:</p>
 		</div>
 		<form accept-charset="utf-8" method="post" id="formConfirmTransferencia">
+			<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
 			<table class="receipt" cellpadding="0" cellspacing="0" width="100%">
 				<tbody id="cargarConfirmacion">
 				</tbody>
@@ -267,7 +288,7 @@
 	</div>
 	<div id="content-input" class="skip"></div>
 	<div id="button-action" class="form-actions skip">
-		<button id="close-info" class="skip">Aceptar</button>
+		<button id="close-info" class="skip" class="novo-btn-primary">Aceptar</button>
 	</div>
 </div>
 <!--*************************************FIN MODAL ERRORES***************************************-->
