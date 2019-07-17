@@ -1,8 +1,9 @@
 <?php
 	$closeLink = $this->config->item('base_url') . '/users/closeSess';
-
+	$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+	$pais= $this->session->userdata('pais');
 ?>
-
+<?php if($skin != 'pichincha'): ?>
 <footer id="foot">
     <div id="foot-wrapper">
         <div class="foot-wrapper-top">
@@ -26,6 +27,7 @@
         </div>
     </div>
 </footer>
+<?php endif; ?>
 <script type="text/javascript"> var base_url = "<?php echo $this->config->item("base_url"); ?>";</script>
 <?php if($FooterCustomInsertJSActive){?>
 
@@ -59,7 +61,14 @@
       <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
     </div>
     <div class="form-actions">
-      <button id="error-validate">Aceptar</button>
+		<?php 	if($skin=='pichincha'): 		?>
+									<center>
+									<div class="atc-form-action-child-perfil-content-modal">
+								<?php 	endif; ?>
+			<button id="error-validate" class="novo-btn-primary">Aceptar</button>
+			<?php 	if($skin=='pichincha'): 		?>
+									</center>
+								<?php 	endif; ?>
     </div>
   </div>
 </div>
@@ -68,12 +77,25 @@
     <article>
         <section>
             <div id="content-holder">
-                <h2>Desconexión automática</h2>
-                <div style="background: #03A9F4" class="alert-success" id="message">
-                    <p style="line-height: 30px">No se ha detectado actividad en la p&aacute;gina.</p><p> La Sesi&oacute;n ha finalizado.</p>
+								<h2>Gracias por usar nuestros servicios</h2>
+								<?php 	if($skin=='pichincha'): 		?>
+									<div class="alert-success" id="message">
+								<?php else: ?>
+
+								<div style="background: #03A9F4" class="alert-success" id="message">
+								<?php endif;?>
+                    <p style="line-height: 30px">Su sesión en Conexión Personas ha caducado</p>
                 </div>
                 <div class="form-actions">
-                    <a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
+								<?php 	if($skin=='pichincha'): 		?>
+									<center>
+										<div class="atc-form-action-child-perfil-diesession">
+								<?php 	endif; ?>
+										<a href="<? echo $closeLink; ?>" id="aceptar_diesession"><button>Aceptar</button></a>
+										<?php 	if($skin=='pichincha'): 		?>
+										</div>
+										</center>
+									<?php 	endif; ?>
                 </div>
             </div>
         </section>
@@ -150,7 +172,15 @@
         <?php endif; ?>
     </div>
     <div class="form-actions">
-        <button id="ok"> Aceptar </button>
+		<?php 	if($skin=='pichincha'): 		?>
+			<center>
+			<div class="atc-form-action-child-perfil-content">
+		<?php 	endif; ?>
+				<button id="ok" class="novo-btn-primary"> Aceptar</button>
+				<?php 	if($skin=='pichincha'): 		?>
+			</div>
+			</center>
+		<?php 	endif; ?>
     </div>
 
 

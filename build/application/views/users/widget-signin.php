@@ -32,7 +32,7 @@
 			</fieldset>
 
 		</form>
-		<button id="login">Ingresar</button>
+		<button id="login" class="novo-btn-primary">Ingresar</button>
 			<p class="align-center">¿Olvidaste tu<br><a href="<? echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<? echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
 	</div>
 	<div class="widget-footer">

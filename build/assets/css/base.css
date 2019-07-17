@@ -887,11 +887,6 @@ span[class*=" icon-"] {
 	width: auto;
 }
 
-span[class^="icon-"]:before,
-span[class*=" icon-"]:before {
-	speak: none;
-}
-
 .icon-view:before {
 	content: "\e000";
 }
@@ -3355,7 +3350,6 @@ ul.feed li.feed-item .feed-status span[class*=" icon-"] {
 ul.feed li.feed-item span.money-amount {
 	color: #333333;
 	display: inline-block;
-	float: right;
 	font-weight: bold;
 }
 
@@ -3381,6 +3375,7 @@ ul.feed li.feed-item.feed-expense {
 
 ul.feed li.feed-item.feed-expense span.money-amount {
 	color: #e74c3c;
+	float: right;
 }
 
 ul.feed li.feed-item.feed-income {
@@ -3389,6 +3384,7 @@ ul.feed li.feed-item.feed-income {
 
 ul.feed li.feed-item.feed-income span.money-amount {
 	color: #2ecc71;
+	float: right;
 }
 
 ul.feed li.feed-item.feed-warning {
@@ -3695,7 +3691,6 @@ a#app-engine {
 	overflow: hidden;
 	text-indent: 100%;
 	white-space: nowrap;
-	vertical-align: middle;
 	width: 160px;
 }
 

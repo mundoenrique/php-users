@@ -106,9 +106,20 @@ $cpo_cook = $this->security->get_csrf_hash();
         }
         ?>
     </ul>
-    <?php echo "<div class='form-actions'>
-           <button  id='cerrar' type='reset'>Cancelar</button>
-        </div>";
+		<?php
+		if($pais=='Ec-bp'){
+			?>
+				<center>
+			<?php
+		}
+		echo "<div class='form-actions'>
+           <button  id='cerrar' type='reset' class='novo-btn-primary'>Cancelar</button>
+				</div>";
+				if($pais=='Ec-bp'){
+					?>
+						</center>
+					<?php
+				}
     ?>
 
 </div>    <!-- DIV DE CUENTAS ORIGEN -->
@@ -140,9 +151,22 @@ $cpo_cook = $this->security->get_csrf_hash();
                 </tr>
                 </tbody>
             </table>
-            <div class="form-actions">
-                <button type="reset">Cancelar</button>
-                <button type="submit">Continuar</button>
+            <div class="form-actions"><?php
+						if($pais=='Ec-bp'){
+							?>
+								<center>
+							<?php
+						}
+					?>
+                <button type="reset" class="novo-btn-secondary">Cancelar</button>
+								<button type="submit" class="novo-btn-primary">Continuar</button>
+								<?php
+						if($pais=='Ec-bp'){
+							?>
+								</center>
+							<?php
+						}
+					?>
             </div>
         </form>
     </div>
@@ -158,6 +182,20 @@ $cpo_cook = $this->security->get_csrf_hash();
         <p>El número de cuenta que introdujo no coincide con el banco. Por favor, verifique e intente nuevamente. </p>
     </div>
     <div class="form-actions">
-        <button id="banco_inv">Aceptar</button>
+		<?php
+						if($pais=='Ec-bp'){
+							?>
+								<center>
+							<?php
+						}
+					?>
+				<button id="banco_inv" class="novo-btn-primary">Aceptar</button>
+				<?php
+						if($pais=='Ec-bp'){
+							?>
+								</center>
+							<?php
+						}
+					?>
     </div>
 </div>

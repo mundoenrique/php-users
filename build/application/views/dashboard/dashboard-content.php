@@ -39,7 +39,7 @@
 				<?php
 					$base_cdn = $this->config->item('base_url_cdn');
 					if($datos->lista == 0) {
-						echo "Error cargando cuantas.";
+						echo "Error cargando cuentas.";
 					}
 					foreach ($datos->lista as $value) {
 						$cadena = strtolower($value->nombre_producto);

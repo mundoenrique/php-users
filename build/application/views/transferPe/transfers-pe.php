@@ -208,13 +208,13 @@ $cpo_cook = $this->security->get_csrf_hash();
 
 						<div id="buttonTrx" class="form-actions">
 							<span aria-hidden="true" class="icon-refresh icon-spin" id="cargandoInfo" style="font-size:35px;"></span>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">Cancelar</button></a>
-							<button disabled class="confir" id="continuar" type="submit" action='form-confirm'>Continuar</button>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">Cancelar</button></a>
+							<button disabled class="confir" id="continuar" type="submit" action='form-confirm' class="novo-btn-primary">Continuar</button>
 						</div>
 						<div id="finalTrx" class="form-actions" style="display:none">
 							<p class="msgr">¿Desea realizar otra transferencia?</p>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button">No</button></a>
-							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/transferencia/pe"><button class="button" type="button">Si</button></a>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/dashboard"><button class="reset-button-trx" type="button" class="novo-btn-secondary">No</button></a>
+							<a id="cancel" href="<? echo $this->config->item("base_url"); ?>/transferencia/pe"><button class="button" type="button" class="novo-btn-primary">Si</button></a>
 						</div>
 				</div>
 			</section>
@@ -310,7 +310,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		?>
 	</ul>
 	<div class="form-actions">
-		<button type="reset" id="cerrar">Cancelar</button>
+		<button type="reset" id="cerrar" class="novo-btn-primary">Cancelar</button>
 	</div>
 </div>
 <!--*********************************FIN MODAL CTAS DE ORIGEN************************************-->
@@ -325,7 +325,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 				</div>
 		</div>
 		<div class="form-actions">
-				<button id="inva5">Aceptar</button>
+				<button id="inva5" class="novo-btn-primary">Aceptar</button>
 		</div>
 </div>
 <!--*************************************FIN MODAL ERRORES***************************************-->

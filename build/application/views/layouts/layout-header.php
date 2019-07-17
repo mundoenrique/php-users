@@ -8,15 +8,16 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="es">
+
 <head>
-    <meta charset="utf-8" />
-    <title>{titlePage}</title>
-    <meta name="viewport" content="width=device-width" />
-    <meta name="googlebot" content="none" />
-		<meta name="robots" content="noindex, nofollow" />
-		<link rel="profile" href="http://gmpg.org/xfn/11" />
-		<link rel="icon" type="image/png"  href="<?php echo $pageCdn;?>img/favicon<?php echo $extension;?>" />
-    <?php
+  <meta charset="utf-8" />
+  <title>{titlePage}</title>
+  <meta name="viewport" content="width=device-width" />
+  <meta name="googlebot" content="none" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="profile" href="http://gmpg.org/xfn/11" />
+  <link rel="icon" type="image/png" href="<?php echo $pageCdn;?>img/favicon<?php echo $extension;?>" />
+  <?php
 			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 			$sendBaseCss = true;
 			switch($this->router->class) {
@@ -36,14 +37,20 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
 			echo insert_js_cdn('html5.js');
 		?>
 </head>
-<body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>" data-app-skin="<?php echo $skin;?>" data-country="<?php echo $this->session->userdata('pais') ?>">
-<header id="head">
 
+<body <?php echo $pageClass;?> data-app-url="<?php echo $pageUrl;?>" data-app-cdn="<?php echo $pageCdn;?>"
+  data-app-skin="<?php echo $skin;?>" data-country="<?php echo $this->session->userdata('pais') ?>">>
+	<?php if($skin == 'default' || !($this->router->class == 'users' && $this->router->method == 'index')): ?>
+  <header id="head">
     <div id="head-wrapper">
-        <a id="<?= ($skin === 'latodo' || $skin === 'pichincha') ? 'brand-id' : 'brand-app' ?>" rel="start">
-        </a>
-        <?php if($menuHeaderActive){?>
-            {menuHeader}
-        <?php };?>
-		</div>
-</header>
+			<?php if($skin == 'pichincha'): ?>
+			<img class="img-header" src="<?= insertFile('logo-pichincha-azul.png'); ?>" alt="Banco PICHINCHA">
+			<?php endif; ?>
+      <a id="<?= ($skin === 'latodo' || $skin === 'pichincha') ? 'brand-id' : 'brand-app' ?>" rel="start">
+      </a>
+      <?php if($menuHeaderActive){?>
+      {menuHeader}
+      <?php };?>
+    </div>
+  </header>
+	<?php endif; ?>
