@@ -62,7 +62,7 @@ $(function() {
 		if(skin == 'pichincha') {
 			passValid = (/^[\w!@\*\-\?¡¿+\/.,#]+$/i.test(pass))
 		}
-		if((/^[\wñÑ.-]+$/i.test(user)) && passValid) {
+		if((/^[\wñÑ*.-]+$/i.test(user)) && passValid) {
 			mostrarProcesando(skin);
 			grecaptcha.ready(function() {
 				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
