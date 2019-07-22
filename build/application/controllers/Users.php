@@ -400,12 +400,18 @@ class Users extends CI_Controller {
 		);
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
+		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
+		$result = TRUE;
 
 		$_POST['user'] = $user;
 		$_POST['pass'] = $pass;
 
 		$this->form_validation->set_error_delimiters('', '---');
-		$result = $this->form_validation->run('login');
+		if($cookie == 'pichincha') {
+			$result = $this->form_validation->run('login');
+			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
+		}
+
 
 		unset($_POST);
 
