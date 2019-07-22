@@ -59,10 +59,12 @@ $(function() {
 
 		$('#form-login input, #form-login button').attr('disabled', true);
 		var passValid = true;
+		var userValid = true;
 		if(skin == 'pichincha') {
 			passValid = (/^[\w!@\*\-\?¡¿+\/.,#]+$/i.test(pass))
+			userValid = (/^[\wñÑ*.-]+$/i.test(user))
 		}
-		if((/^[\wñÑ*.-]+$/i.test(user)) && passValid) {
+		if(userValid && passValid) {
 			mostrarProcesando(skin);
 			grecaptcha.ready(function() {
 				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})

@@ -354,11 +354,17 @@ class Users extends CI_Controller {
 		);
 		$token = $dataRequest->token;
 		$user = $dataRequest->user;
+		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
+		$result = TRUE;
 
 		$_POST['token'] = $token;
 		$_POST['user'] = $user;
 
-		$result = $this->form_validation->run('validatecaptcha');
+		$this->form_validation->set_error_delimiters('', '---');
+		if($cookie == 'pichincha') {
+			$result = $this->form_validation->run('validatecaptcha');
+			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
+		}
 
 		unset($_POST);
 
@@ -367,6 +373,7 @@ class Users extends CI_Controller {
 
 			$this->output->set_content_type('application/json')->set_output($this->user->validar_captcha($dataRequest->token,$dataRequest->user));
 		} else {
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			$response = [
 				'rc'=> -9999
 			];
@@ -393,11 +400,18 @@ class Users extends CI_Controller {
 		);
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
+		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
+		$result = TRUE;
 
 		$_POST['user'] = $user;
 		$_POST['pass'] = $pass;
 
-		$result = $this->form_validation->run('login');
+		$this->form_validation->set_error_delimiters('', '---');
+		if($cookie == 'pichincha') {
+			$result = $this->form_validation->run('login');
+			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
+		}
+
 
 		unset($_POST);
 
@@ -405,6 +419,7 @@ class Users extends CI_Controller {
 			$this->load->model('users_model','user');
 			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass));
 		} else {
+			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
 			$response = [
 				'rc'=> -9999
 			];
