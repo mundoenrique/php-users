@@ -109,10 +109,17 @@ class Users extends CI_Controller {
 		//INSTANCIA DE PARTE DE CUERPO
 		$content = $this->parser->parse('users/content-login', array('insertRecaptcha'=>$this->recaptcha->getScriptTag()), true);
 		//INSTANCIA DE SIDERBAR
-		$sidebarlogin = $this->parser->parse('users/widget-signin', array('sidebarActive' => true), true);
-		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('users/content-login', array(), true);
-		//DATA QUE SE PASA AL LAYOUT EN GENERAL
+		$placeHolderUser = 'Usuario';
+		$placeHolderPass = 'Contraseña';
+		if($cookie == 'pichincha') {
+			$placeHolderUser = '';
+			$placeHolderPass = '';
+		}
+		$sidebarlogin = $this->parser->parse('users/widget-signin', array(
+			'sidebarActive' => true,
+			'placeHolderUser' => $placeHolderUser,
+			'placeHolderPass' => $placeHolderPass
+		), true);
 		//ACA SE INSTANCIA EL HEADER FOOTER CONTENT Y SIDERBAR
 		$data = array('header' => $header, 'content' => $content, 'footer' => $footer, 'sidebar' => $sidebarlogin);
 
