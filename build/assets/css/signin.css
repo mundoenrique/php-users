@@ -1518,6 +1518,11 @@ label {
   margin-bottom: 5px;
   overflow: hidden;
 }
+
+label.label-login {
+	margin-bottom: 0;
+}
+
 label[for] {
   cursor: pointer;
 }
@@ -5560,5 +5565,5 @@ body .ui-tooltip {
 
 #login {
   width: 190px;
-  margin-bottom: 1rem 
+  margin-bottom: 1rem
 }
