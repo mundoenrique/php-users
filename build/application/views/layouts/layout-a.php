@@ -5,7 +5,7 @@ if(isset($header)){
 {header}
 <?php } ?>
 
-<div id="wrapper">
+<div id="wrapper" class="padding-top">
   <!-- Begin: Content Area -->
   {content}
   <!-- End: Content Area -->
