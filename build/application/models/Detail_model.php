@@ -119,7 +119,7 @@ class Detail_model extends CI_Model {
 		];
 		$body = [
 			'idPrograma' => $data->idPrograma,
-			'noTarjetaConMascara' => $data->tarjeta
+			'noTarjetaConMascara' => $data->tarjetaMascara
 		];
 		$bodyAPI = json_encode($body);
 		$method = 'POST';
@@ -155,6 +155,12 @@ class Detail_model extends CI_Model {
 				$dataResponse->balance->actualBalance = $actualBalance;
 
 				$msg = json_encode($dataResponse);
+				break;
+			case 503:
+				$tarjeta = $data->tarjeta;
+				$this->load->model('dashboard_model', 'getSaldo');
+				$code = 1;
+				$msg = $this->getSaldo->saldo_load($tarjeta);
 				break;
 			default:
 				$code = 3;

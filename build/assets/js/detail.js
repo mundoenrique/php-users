@@ -107,7 +107,8 @@ $('#buscar').on('click',function(){
 		);
 
 		var dataRequest = JSON.stringify ({
-			tarjeta: $("#card").text().trim(),
+			tarjeta: $("#card").attr("card"),
+			tarjetaMascara: $("#card").text().trim(),
 			idPrograma: $("#card").attr("prefix"),
 		});
 
@@ -125,31 +126,46 @@ $('#buscar').on('click',function(){
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
-			if (data.code == 0) {
-				data = data.msg;
-				var
-					moneda = $(".product-info-full").attr("moneda"),
-					saldoDisp = data.balance.availableBalance,
-					saldoBloq = data.balance.ledgerBalance,
-					saldoAct = data.balance.actualBalance;
+			switch (data.code) {
+				case 0:
+					data = data.msg;
+					var
+						moneda = $(".product-info-full").attr("moneda"),
+						saldoDisp = data.balance.availableBalance,
+						saldoBloq = data.balance.ledgerBalance,
+						saldoAct = data.balance.actualBalance;
+					carga_lista_transito(data);
+					break;
 
-				if (typeof saldoDisp != 'string') {
-					saldoDisp = "---";
-				}
-				if (typeof saldoBloq != 'string') {
-					saldoBloq = "---";
-				}
-				if (typeof saldoAct != 'string') {
-					saldoAct = "---";
-				}
-				$("#bloqueado").html(moneda + ' ' + saldoBloq);
-				$("#disponible").html(moneda + ' ' + saldoDisp);
-				$("#actual").html(moneda + ' ' + saldoAct);
+				case 1:
+					data = data.msg;
+					var moneda=$(".product-info-full").attr("moneda");
+					var saldoAct=data.actual;
+					var saldoBloq=data.bloqueo;
+					var saldoDisp=data.disponible;
+					$('#estadisticas-transit').css("display", "none");
+					break;
 
-				carga_lista_transito(data);
-			} else {
-				$('#estadisticas-transit').css("display", "none");
+				default:
+					$('#estadisticas-transit').css("display", "none");
+					break;
 			}
+
+			if (typeof saldoAct!='string'){
+				saldoAct="---";
+				console.log(saldoAct);
+			}
+			if (typeof saldoBloq!='string'){
+				saldoBloq="---";
+			}
+			if (typeof saldoDisp!='string'){
+				saldoDisp="---";
+			}
+
+			$("#actual").html(moneda+saldoAct);
+			$("#bloqueado").html(moneda+saldoBloq);
+			$("#disponible").html(moneda+saldoDisp);
+
 		}).fail(function () {});
 
 	}
