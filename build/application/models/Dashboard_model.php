@@ -57,11 +57,9 @@ class Dashboard_model extends CI_Model {
 		 $response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		 $data = json_decode($response);
 		 $desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'saldo_load'));
-
-		 $salida = json_encode($desdata);
-		 log_message('info', 'Salida SALDO desencriptado: ' . $salida);
+		 log_message('info', 'Salida SALDO desencriptado: ' . json_encode($desdata));
 		 //$desdata = json_decode('{"bloqueo":"0,00","disponible":"5.000.000,00","actual":"51.000,00","rc":0,"msg":"Saldo consultado satisfactoriamente"}');
 
-		 return $salida;
+		 return $desdata;
 	}
 }
