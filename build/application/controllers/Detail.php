@@ -244,14 +244,18 @@ class Detail extends CI_Controller {
 		);
 		$idPrograma = $dataRequest->idPrograma;
 		$tarjeta = $dataRequest->tarjeta;
+		$tarjetaMascara = $dataRequest->tarjetaMascara;
 
 		$data = (object) [
 			'idPrograma' => $idPrograma,
-			'tarjeta' => $tarjeta
+			'tarjeta' => $tarjeta,
+			'tarjetaMascara' => $tarjetaMascara
 		];
 
 		$_POST['idPrograma'] = $idPrograma;
 		$_POST['tarjeta'] = $tarjeta;
+		$_POST['tarjetaMascara'] = $tarjetaMascara;
+
 		$this->form_validation->set_error_delimiters('', '---');
 		$result = $this->form_validation->run('inTransit');
 		unset($_POST);

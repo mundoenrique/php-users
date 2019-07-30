@@ -185,6 +185,11 @@ $config = [
 		[
 			'field' => 'tarjeta',
 			'label' => 'tarjeta',
+			'rules' => 'trim|regex_match[/^[0-9]+$/]|required'
+		],
+		[
+			'field' => 'tarjetaMascara',
+			'label' => 'tarjetaMascara',
 			'rules' => 'trim|regex_match[/^[0-9\*]+$/]|required'
 		]
 	],
