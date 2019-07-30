@@ -196,6 +196,17 @@ video {
  }
 
 @font-face {
+	font-family: 'NovoPayment Glyphs';
+	font-style: normal;
+	font-weight: normal;
+	src: url('../../fonts/novopayment-glyphs-webfont.eot');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+	     url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+	     url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+}
+
+@font-face {
 	font-family: 'Prelo';
 	font-style: normal;
 	font-weight: 400;
