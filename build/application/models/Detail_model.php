@@ -160,7 +160,7 @@ class Detail_model extends CI_Model {
 				$tarjeta = $data->tarjeta;
 				$this->load->model('dashboard_model', 'getSaldo');
 				$code = 1;
-				$msg = $this->getSaldo->saldo_load($tarjeta);
+				$msg = json_encode($this->getSaldo->saldo_load($tarjeta));
 				break;
 			default:
 				$code = 3;

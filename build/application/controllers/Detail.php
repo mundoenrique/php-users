@@ -265,10 +265,10 @@ class Detail extends CI_Controller {
 
 			$response = json_encode($this->cryptography->encrypt(['code'=> 3]));
 		} else {
-			$response = json_encode($this->cryptography->encrypt($this->detail->WSinTransit($data)));
+			$response = $this->cryptography->encrypt($this->detail->WSinTransit($data));
 		}
 
-		$this->output->set_content_type('application/json')->set_output($response);
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 
 	}
 }
