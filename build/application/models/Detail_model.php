@@ -166,7 +166,6 @@ class Detail_model extends CI_Model {
 			'msg' => json_decode($msg)
 		];
 
-		$response = $this->cryptography->encrypt($response);
-		return json_encode($response);
+		return $response;
 	}
 }
