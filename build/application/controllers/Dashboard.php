@@ -142,9 +142,8 @@ class Dashboard extends CI_Controller {
 
 			$response = json_encode($this->cryptography->encrypt(['rc'=> -9999]));
 		} else {
-			$response = $this->saldo->saldo_load($tarjeta);
+			$response = json_encode($this->cryptography->encrypt($this->saldo->saldo_load($tarjeta)));
 		}
-
 		$this->output->set_content_type('application/json')->set_output($response);
 
 	}
