@@ -205,6 +205,7 @@ video {
 	     url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
 	     url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
 }
+
 @font-face {
 	font-family: 'Prelo';
 	font-style: normal;
@@ -244,6 +245,15 @@ video {
 	     url('../../fonts/preloslab-semibold-webfont.woff2') format('woff2'),
 	     url('../../fonts/preloslab-semibold-webfont.woff') format('woff'),
 	     url('../../fonts/preloslab-semibold-webfont.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "Prelo Medium";
+  src: url('../../fonts/prelo-medium-webfont.eot');
+  src: url('../../fonts/prelo-medium-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../../fonts/prelo-medium-webfont.woff2') format('woff2'),
+			 url('../../fonts/prelo-medium-webfont.woff') format('woff'),
+			 url('../../fonts/prelo-medium-webfont.ttf') format('truetype');
 }
 
 html {
@@ -795,9 +805,20 @@ label {
 	margin-bottom: 5px;
 	overflow: hidden;
 }
+
 label[for] {
 	cursor: pointer;
 }
+
+label.label-login {
+	margin-bottom: 0;
+	font-family: "Prelo Medium", sans-serif;
+	cursor: default;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+
 label.label-inline {
 	color: #555555;
 	display: inline-block;
@@ -917,6 +938,10 @@ label.label-inline {
 	 position: absolute;
 	 width: 35px;
 	 z-index: 1;
+ }
+
+ span.icon-user, span.icon-key {
+	 display: none;
  }
  .field-prepend input, .field-prepend select {
 	 padding: 6px 9px 7px 34px;
@@ -1347,6 +1372,10 @@ opacity: 1.00 !important;
   overflow: hidden;
   padding: 100px 0 20px;
   width: 960px;
+}
+
+#wrapper.padding-top {
+	padding-top: 90px;
 }
 
  #content {
@@ -2596,18 +2625,16 @@ li#replace:hover {
 #sidebar.signin {
 	float: none;
 	padding: 0 10px;
-	width: 220px;
+	width: 250px;
 	margin: 0 auto;
 	margin-top: 30px;
 }
 
  .widget {
-	 background: white;
-	 -webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 -moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
-	 box-shadow: 0 0 2px rgba(51, 51, 51, 0.35);
+	 background: #f3f3f3;
 	 margin-bottom: 20px;
 	 overflow: hidden;
+	 border-bottom-left-radius: 30px;
  }
 
  .widget-header h2 {
@@ -2781,7 +2808,11 @@ li#replace:hover {
 	 padding: 0;
  }
  #widget-signin input {
-	 width: 145px;
+	width: calc(100% - 22px);
+	width: stretch;
+	width: -webkit-fill-available;
+	width: -moz-available;
+	padding: 10px;
  }
 
  #widget-signin button {
@@ -2800,7 +2831,8 @@ li#replace:hover {
 	 outline: none;
 	 font-size: 13px;
 	 text-align: center;
-	 width:188px;
+	 width: 100%;
+	 height: 35px;
  }
 
  #widget-signin button:hover {
@@ -5341,4 +5373,12 @@ li#replace:hover {
     display: block !important;
     font-size: 30px !important;
     margin: 5px 0 10px !important;
+}
+
+input,
+textarea,
+select,
+button,
+a {
+	outline: none;
 }
