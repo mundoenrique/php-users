@@ -581,15 +581,15 @@ a:hover {
 }
 
 .icon-edit:before {
-	content: "\e001";
+	content: "";
 }
 
 .icon-thumbs-up:before {
-	content: "\e032";
+	content: "";
 }
 
 .icon-card:before {
-	content: "\e029";
+	content: "";
 }
 
  .icon-file-blank:before {
