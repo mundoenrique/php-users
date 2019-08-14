@@ -121,7 +121,7 @@ $('#buscar').on('click',function(){
 				request: dataRequest,
 				cpo_name: cpo_cook,
 				plot: btoa(cpo_cook)
-			},
+			}
 		}).done(function (response) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
@@ -300,6 +300,7 @@ $('#buscar').on('click',function(){
 
   $('#content').on('click',"#buscar",function(){
     $('#list-detail').children("li").remove();
+    $('#list-detail').children("#empty-state").remove();
     $('#estadisticas').children().remove();
     $('#loading').show();
     mes = $("#filter-month").val();
@@ -349,25 +350,33 @@ $('#buscar').on('click',function(){
 		var clase, cadena;
 		var result = '<h2>No se encontraron movimientos</h2>';
 		result += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-    if(data.rc == -61){
-      $(location).attr('href', base_url+'/users/error_gral');
+    switch (data.rc) {
+			case "unanswered":
+				result = '<h2>No fue posible consultar los movimientos</h2>';
+				result += '<p>Por favor intenta nuevamente.</p>';
+				break;
+			case -61:
+				$(location).attr('href', base_url+'/users/error_gral');
+				break;
+			case -9999:
+				result = '<h2>Atención</h2>';
+				result += '<p>Combinación de caracteres no válida.</p>';
+				break;
 		}
-		if (data.rc == -9999) {
-			result = '<h2>Atención</h2>';
-			result += '<p>Combinación de caracteres no válida.</p>';
-		}
-    if(data.rc != 0){
-      $("#list-detail").children().remove();
+
+		if(data.rc != 0){
+			$("#list-detail").children("#empty-state").remove();
+			$("#list-detail").children("ul").remove();
       cadena = '<div id="empty-state" style="position: static;">';
       cadena+= result;
       cadena+= '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
       cadena+= '</div>';
       $("#list-detail").append(cadena);
       reporte = false;
-    }
-    else{
+    } else {
       reporte = true;
-      $("#list-detail").children().remove();
+      $("#list-detail").children("#empty-state").remove();
+			$("#list-detail").children("ul").remove();
       $.each(data.movimientos,function(pos,item){
 
         if(item.signo=='+'){

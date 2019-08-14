@@ -24,7 +24,7 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 		curl_setopt($ch, CURLOPT_URL, $urlcurlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $dataPost);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
@@ -34,6 +34,11 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		if($response === FALSE) {
 			log_message("DEBUG","RESPONSE CURL: " .json_encode(curl_error($ch)));
+			$response = new stdClass();
+			$response->httpCode = $httpCode;
+			$response->msg = curl_error($ch);
+			$response->rc = 'unanswered';
+			return json_encode($response);
 		}
 		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
 		if($httpCode == 404 || !$response){
@@ -72,10 +77,18 @@ if(!function_exists('getTokenOauth'))
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		$responseAPI = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if($responseAPI === FALSE) {
+			$response = new stdClass();
+			$response->httpCode = $httpCode;
+			$response->respOauth = curl_error($ch);
+			log_message('DEBUG', 'RESPONSE OAUTH====>>>>>>' . json_encode($response));
+			return $response;
+		}
 		curl_close($ch);
 		$response = new stdClass();
 		$response->httpCode = $httpCode;
@@ -131,10 +144,18 @@ if(!function_exists('connectionAPI'))
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $bodyAPI);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 			$responseAPI = curl_exec($ch);
 			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			if($responseAPI === FALSE) {
+				$response = new stdClass();
+				$response->httpCode = $httpCode;
+				$response->resAPI = curl_error($ch);
+				log_message('DEBUG', 'RESPONSE API:===>>>>' . json_encode($response));
+				return $response;
+			}
 			curl_close($ch);
 		} else {
 			$responseAPI = json_decode(responseOauth);

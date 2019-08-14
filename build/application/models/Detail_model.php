@@ -31,11 +31,15 @@ class Detail_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada DETALLE : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
-	  	$data = json_decode($response);
-	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'detail_load'));
-
-			$response = $this->cryptography->encrypt($desdata);
-			return json_encode($response);
+		$data = json_decode($response);
+		if (isset($data->data)) {
+			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'detail_load'));
+		} else {
+			$desdata = $data;
+		}
+		log_message("info", "Salida desencriptada DETALLE: ".json_encode($desdata));
+		$response = $this->cryptography->encrypt($desdata);
+		return json_encode($response);
 
 	}
 
