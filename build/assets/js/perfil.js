@@ -950,8 +950,11 @@ $(function(){
 			telfCel = $("#cel_cypher").val();
 			emailTrue = $("#email_cypher").val();
 		}
-
-
+		var ingreso_promedio = $("#ingreso_promedio").val();
+		if(ingreso_promedio != undefined){
+			ingreso_promedio.replace(/,/g, "");
+			ingreso_promedio = parseFloat(ingreso_promedio);
+		}
 		var dataRequest = JSON.stringify ({
 			userName:$("#content").attr("userName"), ///1
 			tipo_identificacion:$('#tipo_identificacion').val(), ///2
@@ -985,7 +988,7 @@ $(function(){
 			antiguedad_laboral_value:$("#antiguedad_laboral").val(),//29
 			profesion_labora:$(".profesion-labora").val(),//30
 			cargo:$("#cargo").val(),//31
-			ingreso_promedio:$("#ingreso_promedio").val(),//32
+			ingreso_promedio:ingreso_promedio,//32
 			cargo_publico_sino:valueCargop,//33
 			cargo_publico:$("#cargo_publico").val(),//34
 			institucion_publica:$("#institucion_publica").val(),//35

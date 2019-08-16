@@ -862,7 +862,11 @@ $(function(){
 			antiguedadLaboral	= $('#antiguedadLaboral').val();					//30
 			ocupacionLaboral	= $('#ocupacion-laboral option:selected').val();	//31
 			cargoLaboral		= $('#cargo-laboral').val();						//32
-			ingreso				= $('#ingreso').val();								//33
+			ingreso				= $('#ingreso').val();
+			if(ingreso != undefined){			//33
+				ingreso				= ingreso.replace(/,/g, "");								//33
+				ingreso				= parseFloat(ingreso);
+			}							//33
 			desemPublico		= $("input[name='desem_publico']:checked").val();	//34
 			cargoPublico		= $('#cargo-publico').val();						//35
 			institucion			= $('#institucion').val();							//36
