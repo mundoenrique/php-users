@@ -990,7 +990,7 @@ $(function(){
 			antiguedad_laboral_value:$("#antiguedad_laboral").val(),//29
 			profesion_labora:$(".profesion-labora").val(),//30
 			cargo:$("#cargo").val(),//31
-			ingreso_promedio:$("#ingreso_promedio").val(),//32
+			ingreso_promedio:ingreso_promedio,//32
 			cargo_publico_sino:valueCargop,//33
 			cargo_publico:$("#cargo_publico").val(),//34
 			institucion_publica:$("#institucion_publica").val(),//35

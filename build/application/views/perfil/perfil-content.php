@@ -730,7 +730,7 @@ $pais_residencia=$this->session->userdata('pais');
 
                 <div class="atc-form-action-child-perfil-content">
                   <?php 	endif; ?>
-                  <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"><button id="perfil-cancelar"
+                  <a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button id="perfil-cancelar"
                       type="reset" class="novo-btn-secondary">Cancelar</button></a>
                   <button id="actualizar" class="novo-btn-primary">Continuar</button>
                   <?php 	if($country == 'Ec-bp'): 		?>
@@ -757,7 +757,7 @@ $pais_residencia=$this->session->userdata('pais');
         <div id="content-clave">
           <p>Sus datos han sido cargados exitosamente.</p>
           <div class="empty-state-actions">
-            <a class="button novo-btn-primary" href="<? echo $this->config->item(" base_url"); ?>/dashboard"
+            <a class="button novo-btn-primary" href="<? echo $this->config->item("base_url"); ?>/dashboard"
               rel="section">Aceptar</a>
           </div>
         </div>
@@ -777,7 +777,7 @@ $pais_residencia=$this->session->userdata('pais');
       </div>
       <div class="form-actions">
         <!--<button id="invalido1">Aceptar</button>-->
-        <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+        <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
             class="novo-btn-primary">Aceptar</button> </a>
       </div>
     </div>
@@ -792,7 +792,7 @@ $pais_residencia=$this->session->userdata('pais');
       </div>
       <div class="form-actions">
         <!-- <button id="invalido2">Aceptar</button> -->
-        <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+        <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
             class="novo-btn-primary">Aceptar</button> </a>
       </div>
     </div>
