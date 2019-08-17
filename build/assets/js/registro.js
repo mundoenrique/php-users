@@ -148,18 +148,18 @@ $(function(){
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			id_ext_per1	= $("#content-holder").find("#card-holder-id").val();
 			userName	= id_ext_per + '' + fecha;
-			pin 		= pin.toUpperCase();
 			claveWeb	= hex_md5(pin);
-			if(pais == 'Ve'){
-				pin_enc	= hex_md5(pin+cuenta);
-			}
-			else{
+			switch (pais) {
+				case 'Ve': pin_enc	= hex_md5(pin+cuenta);
+				break;
+				case 'Ec-bp': pin_enc	= pin;
+				break;
+			default:
 				cuentaP	= cuenta.substring(10,16);
 				pin_enc	= hex_md5(pin+cuentaP);
 			}
-
-            country			= pais;
-            noTarjerta		= cuenta;
+      country			= pais;
+      noTarjerta		= cuenta;
 			anio			= new Date();
 			anioActual		= anio.getFullYear();
 			mesActual		= anio.getMonth() + 1;
