@@ -518,7 +518,7 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
               class="novo-btn-primary">Continuar</button>
           </a>
         </div>
@@ -553,7 +553,7 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item(" base_url"); ?>/dashboard"> <button type="submit"
+          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
               class="novo-btn-primary">Continuar</button>
           </a>
         </div>

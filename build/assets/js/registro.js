@@ -148,18 +148,18 @@ $(function(){
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			id_ext_per1	= $("#content-holder").find("#card-holder-id").val();
 			userName	= id_ext_per + '' + fecha;
-			pin 		= pin.toUpperCase();
 			claveWeb	= hex_md5(pin);
-			if(pais == 'Ve'){
-				pin_enc	= hex_md5(pin+cuenta);
-			}
-			else{
+			switch (pais) {
+				case 'Ve': pin_enc	= hex_md5(pin+cuenta);
+				break;
+				case 'Ec-bp': pin_enc	= pin;
+				break;
+			default:
 				cuentaP	= cuenta.substring(10,16);
 				pin_enc	= hex_md5(pin+cuentaP);
 			}
-
-            country			= pais;
-            noTarjerta		= cuenta;
+      country			= pais;
+      noTarjerta		= cuenta;
 			anio			= new Date();
 			anioActual		= anio.getFullYear();
 			mesActual		= anio.getMonth() + 1;
@@ -862,7 +862,11 @@ $(function(){
 			antiguedadLaboral	= $('#antiguedadLaboral').val();					//30
 			ocupacionLaboral	= $('#ocupacion-laboral option:selected').val();	//31
 			cargoLaboral		= $('#cargo-laboral').val();						//32
-			ingreso				= $('#ingreso').val();								//33
+			ingreso				= $('#ingreso').val();
+			if(ingreso != undefined){			//33
+				ingreso				= ingreso.replace(/,/g, "");								//33
+				ingreso				= parseFloat(ingreso);
+			}							//33
 			desemPublico		= $("input[name='desem_publico']:checked").val();	//34
 			cargoPublico		= $('#cargo-publico').val();						//35
 			institucion			= $('#institucion').val();							//36
