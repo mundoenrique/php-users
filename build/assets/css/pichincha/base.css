@@ -3998,6 +3998,10 @@ li#replace:hover {
 	 border-width: 2px;
  }
 
+ body .k-tooltip {
+	color: #464848;
+}
+
  .ui-widget input,
  .ui-widget select,
  .ui-widget textarea,
