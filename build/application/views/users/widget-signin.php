@@ -35,7 +35,7 @@
 						<?php endif; ?>
 						<span aria-hidden="true" class="icon-key"></span>
 						<input type="password" id="userpwd" name="userpwd" maxlength="15" autocomplete="off"
-							placeholder="<?= $placeHolderUser ?>">
+							placeholder="<?= $placeHolderPass ?>">
 					</div>
 				</fieldset>
 			</form>
