@@ -298,7 +298,7 @@ $(function() {
 	//confirmar transferencia-----------------------------------------------------------------------
 	$('#content_plata').on('click',".confir", function() {
 		var camposInput = true, validateTrans = true,
-			expr= /^-?[0-9]+([\,\.][0-9]{0,2})?$/, validateInput = [], dif, msg;
+			expr= /^-?[0-9]+([0-9])?$/, validateInput = [], dif, msg;
 
 		//Validar campos input----------------------------------------------------------------------
 		if($('#month-exp').val() === '') {
@@ -338,7 +338,7 @@ $(function() {
 				$(this).addClass('field-error');
 				camposInput = false;
 				if(validStr === 0) {
-					validateInput.push('El campo importe solo admite números y máximo dos decimales.');
+					validateInput.push('El campo importe no admite decimales.');
 					validStr = 1;
 				}
 			} else {
