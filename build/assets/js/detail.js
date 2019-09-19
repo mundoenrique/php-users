@@ -130,7 +130,6 @@ $('#buscar').on('click',function(){
 				case 0:
 					data = data.msg;
 					var
-						moneda = $(".product-info-full").attr("moneda"),
 						saldoDisp = data.balance.availableBalance,
 						saldoBloq = data.balance.ledgerBalance,
 						saldoAct = data.balance.actualBalance;
@@ -139,7 +138,6 @@ $('#buscar').on('click',function(){
 
 				case 1:
 					data = data.msg;
-					var moneda=$(".product-info-full").attr("moneda");
 					var saldoAct=data.actual;
 					var saldoBloq=data.bloqueo;
 					var saldoDisp=data.disponible;
@@ -151,9 +149,10 @@ $('#buscar').on('click',function(){
 					break;
 			}
 
+			var moneda = $(".product-info-full").attr("moneda");
+
 			if (typeof saldoAct!='string'){
 				saldoAct="---";
-				console.log(saldoAct);
 			}
 			if (typeof saldoBloq!='string'){
 				saldoBloq="---";
