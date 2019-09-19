@@ -93,7 +93,8 @@ country = $('body').data('country');
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 
-    $('#numt').val($(this).attr('card'));
+		$('#numt').val($(this).attr('card'));
+		$('#prefix').val($(this).attr('prefix'));
     $('#marca').val($(this).attr('marca'));
     $('#empresa').val($(this).attr('empresa'));
     $('#producto').val($(this).attr('producto'));

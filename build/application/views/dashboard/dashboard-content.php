@@ -46,6 +46,7 @@
 						$producto1 = quitar_tildes($cadena);
 						$img1=strtolower(str_replace(' ','-',$producto1));
 						$img=str_replace("/", "-", $img1);
+						$prefix = $value->prefix;
 						$marca= strtolower(str_replace(" ", "-", $value->marca));
 						$empresa = strtolower($value->nomEmp);
 						$pais=ucwords($this->session->userdata('pais'));
@@ -69,7 +70,7 @@
 							$inactiveImage = "inactive-image";
 					 }
 						echo"
-						<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' marca='$marca'
+						<li class='dashboard-item $empresa' activeurl = '$activeCard' card='$value->noTarjeta' prefix='$prefix' marca='$marca'
 							empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 							<a href='#' rel='section'>";
 								echo insert_image_cdn($img, $inactiveImage);
@@ -91,6 +92,7 @@
 </div>
 <form id='tarjeta' method='post' action="detalles">
 	<input id="numt" type="hidden" name="numt" value="" />
+	<input id="prefix" type="hidden" name="prefix" value="" />
 	<input id="marca" type="hidden" name="marca" value="" />
 	<input id="empresa" type="hidden" name="empresa" value="" />
 	<input id="producto" type="hidden" name="producto" value="" />

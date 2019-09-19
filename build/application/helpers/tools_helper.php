@@ -213,7 +213,7 @@ if ( ! function_exists('np_hoplite_decimals'))
 	 */
 	function np_hoplite_decimals($number,$pais)
 	{
-		if(($pais ==='Pe') || ($pais ==='Usd')) {
+		if(($pais ==='Pe') || ($pais ==='Usd') || ($pais ==='Ec-bp')) {
       $result = number_format($number, 2, '.', ',');
     } else if (($pais === 'Ve') || ($pais ==='Co')) {
       $result = number_format($number, 2, ',', '.');

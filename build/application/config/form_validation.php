@@ -73,6 +73,11 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
 		],
 		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|regex_match[/^[\w-]+$/i]|required'
+		],
+		[
 			'field' => 'marca',
 			'label' => 'marca',
 			'rules' => 'trim|regex_match[/^([\w-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
@@ -169,6 +174,18 @@ $config = [
 			'field' => 'fechaFin',
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'inTransit' => [
+		[
+			'field' => 'idPrograma',
+			'label' => 'idPrograma',
+			'rules' => 'trim|regex_match[/^[\w-]+$/i]|required'
+		],
+		[
+			'field' => 'tarjetaMascara',
+			'label' => 'tarjetaMascara',
+			'rules' => 'trim|regex_match[/^[0-9\*]+$/]|required'
 		]
 	],
 	'download-file' => [
