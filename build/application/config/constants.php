@@ -148,6 +148,10 @@ define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
 );
 
+define('OAUTH_URL', isset($_SERVER['OAUTH_URL']) ?
+	$_SERVER['OAUTH_URL'] : ''
+);
+
 define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
 	$_SERVER['PROXY_IPS'] : ''
 );

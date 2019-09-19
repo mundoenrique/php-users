@@ -17,12 +17,12 @@ $cpo_cook = $this->security->get_csrf_hash();
 							</div>
 							<div class="product-info-full" moneda="<?php echo lang("MONEDA"); ?>">
 								<p class="product-cardholder"><?php echo ucwords($this->session->userdata('nombreCompleto')); ?><span class="product-cardholder-id"><?php echo lang("ID")." ".$this->session->userdata('idUsuario'); ?></span></p>
-								<p id="card" class="product-cardnumber" card='<?php echo $tarjeta; ?>'><?php echo $numt_mascara; ?></p>
+								<p id="card" class="product-cardnumber" card='<?php echo $tarjeta; ?>' prefix='<?php echo $prefix; ?>'><?php echo $numt_mascara; ?></p>
 								<p class="product-metadata"> <?php echo ucwords(strtolower(str_replace("-", " ",$producto)))." / ".ucwords(str_replace("-", " ", $marca))." / ".ucwords($empresa); ?></p>
 								<ul class="product-balance-group">
-									<li>Actual <span id="actual" class="product-balance"> <?php echo lang("MONEDA"); ?>--- </span></li>
-									<li>Bloqueado <span id="bloqueado" class="product-balance"> <?php echo lang("MONEDA"); ?>--- </span></li>
-									<li>Disponible <span id="disponible" class="product-balance"> <?php echo lang("MONEDA"); ?>--- </span></li>
+									<li>Actual <span id="actual" class="product-balance"> <?php echo lang("MONEDA"); ?> --- </span></li>
+									<li>En Tránsito <span id="bloqueado" class="product-balance"> <?php echo lang("MONEDA"); ?> --- </span></li>
+									<li>Disponible <span id="disponible" class="product-balance"> <?php echo lang("MONEDA"); ?> --- </span></li>
 								</ul>
 							</div>
 						</div>
@@ -31,7 +31,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 						<?php endif;?>
 						<h2>Movimientos</h2>
 						<nav id="filters-stack">
-							<div class="stack-form">
+							<div class="stack-form" id="period-form">
 								<form accept-charset="utf-8" class="stack-form" method="post">
 									<fieldset>
 										<label for="filter-month">Mostrar:</label>
@@ -66,7 +66,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 							<ul class="stack stack-extra">
 								<?php if($country != 'Ec-bp'): ?>
 								<li class="stack-item">
-									<a id="print_detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print"></span></a>
+									<a id="print-detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print"></span></a>
 								</li>
 								<li class="stack-item">
 									<a id="download"  href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download"></span></a>
@@ -76,17 +76,32 @@ $cpo_cook = $this->security->get_csrf_hash();
 									<a id="downloadxls"  href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel"></span></a>
 								</li>
 							</ul>
+							<?php if($country != 'Ec-bp'): ?>
+								<div class="field-options">
+									<input id="disponibleToogle" name="toggle" type="radio" checked>
+									<label for="disponibleToogle">Disponible</label>
 
+									<input id="transitoToogle" name="toggle" type="radio" disabled>
+									<label for="transitoToogle">En tránsito</label>
+								</div>
+							<?php endif; ?>
 						</nav>
 						<div class="group" id="results">
 							<div class="group-main-view" id="transactions">
-								<h3>Actividad <span id="period"></span></h3>
+								<h3>Actividad <span id="period"></span>
+								<?php if($country != 'Ec-bp'): ?>
+								<span id="transit-datail-title">Transacciones Pendientes</span>
+								<?php endif; ?>
+								</h3>
 								<ul id= "list-detail" class="feed">
 									<div id ="loading" class="data-indicator" style="text-align: center;">
 										<h3 style="border-bottom: 0px;">Cargando</h3>
 										<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 50px;"></span>
 									</div>
 								</ul>
+								<?php if($country != 'Ec-bp'): ?>
+								<ul id="list-transit-detail" class="feed"></ul>
+								<?php endif; ?>
 								<form id='form' method='post' action="detalles/exportar">
 									<input id="tarjeta" type="hidden" name="tarjeta" value="" />
 									<input id="mes" type="hidden" name="mes" value="" />
@@ -97,6 +112,9 @@ $cpo_cook = $this->security->get_csrf_hash();
 							<div class="group-aside-view" id="stats">
 								<h3>Estadísticas</h3>
 								<div id="estadisticas" style="width:300px; height:250px"></div>
+								<?php if($country != 'Ec-bp'): ?>
+								<div id="estadisticas-transit" style="width:300px; height:250px">
+								<?php endif; ?>
 							</div>
 						</div>
 					</section>

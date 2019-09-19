@@ -94,6 +94,7 @@ $route['detalles'] = 'detail';
 $route['detalles/load'] = 'detail/CallWsDetail';
 $route['detalles/movimientos'] = 'detail/CallWsMovimientos';
 $route['detalles/exportar'] = 'detail/CallWsExportar';
+$route['detalles/enTransito'] = 'detail/inTransit';
 $route['transferencia'] = 'transfer';
 $route['transferencia/error'] = 'transfer/error_transfer';
 $route['transferencia/error_pago'] = 'transfer/error_pago';

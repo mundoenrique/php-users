@@ -21,6 +21,7 @@ class Detail extends CI_Controller {
 		$this->lang->load('format');
 
 		$tarjeta = $this->input->post('numt');
+		$prefix = $this->input->post('prefix');
 		$marca = $this->input->post('marca');
 		$empresa = $this->input->post('empresa');
 		$producto = $this->input->post('producto');
@@ -55,7 +56,7 @@ class Detail extends CI_Controller {
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'marca' => $marca, 'producto' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
+		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'prefix' => $prefix, 'marca' => $marca, 'producto' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
 		//INSTANCIA DE SIDERBAR
 		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
 
@@ -218,4 +219,55 @@ class Detail extends CI_Controller {
 
 	}
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	public function inTransit(){
+
+		// VERIFICA SI LA SESION ESTA ACTIVA
+		$verificLogin = np_hoplite_verificLogin();
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTILIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($this->session->userdata('pais'));
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
+
+		$this->load->model('detail_model', 'detail');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$idPrograma = $dataRequest->idPrograma;
+		$tarjeta = $dataRequest->tarjeta;
+		$tarjetaMascara = $dataRequest->tarjetaMascara;
+
+		$data = (object) [
+			'idPrograma' => $idPrograma,
+			'tarjeta' => $tarjeta,
+			'tarjetaMascara' => $tarjetaMascara
+		];
+
+		$_POST['idPrograma'] = $idPrograma;
+		$_POST['tarjeta'] = $tarjeta;
+		$_POST['tarjetaMascara'] = $tarjetaMascara;
+
+		$this->form_validation->set_error_delimiters('', '---');
+		$result = $this->form_validation->run('inTransit');
+		unset($_POST);
+
+		if(!$result){
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+			$response = $this->cryptography->encrypt(['code'=> 3]);
+		} else {
+			$response = $this->cryptography->encrypt($this->detail->WSinTransit($data));
+		}
+
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
+
+	}
 }

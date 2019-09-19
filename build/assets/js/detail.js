@@ -1,11 +1,18 @@
 var reporte;
 
 $(function(){
-  var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
 
- if ($('#filter-month').val() == "0") {
+	$("#transit-datail-title").hide();
+	$("#list-transit-detail").hide();
+	$("#estadisticas-transit").css("visibility", "hidden");
+
+	var nombreMes = new Array ('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+
+	var pais = $("body").attr("data-country");
+
+	if ($('#filter-month').val() == "0") {
     $("#period").text("reciente");
-  }
+	}
 
 //PERIOD SPAN TITLE
 $('#buscar').on('click',function(){
@@ -55,7 +62,113 @@ $('#buscar').on('click',function(){
     $('.submenu-user').attr('style', 'display: none');
   });
 
-  // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	if (pais == 'Ec-bp') {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		var dataRequest = JSON.stringify ({
+			tarjeta:$("#card").attr("card")
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
+			var moneda=$(".product-info-full").attr("moneda");
+			var saldoAct=data.actual;
+			var saldoBloq=data.bloqueo;
+			var saldoDisp=data.disponible;
+			if (typeof saldoAct!='string'){
+				saldoAct="---";
+			}
+			if (typeof saldoBloq!='string'){
+				saldoBloq="---";
+			}
+			if (typeof saldoDisp!='string'){
+				saldoDisp="---";
+			}
+
+			$("#actual").html(moneda+saldoAct);
+			$("#bloqueado").html(moneda+saldoBloq);
+			$("#disponible").html(moneda+saldoDisp);
+
+		});
+
+	} else {
+
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		);
+
+		var dataRequest = JSON.stringify ({
+			tarjeta: $("#card").attr("card"),
+			tarjetaMascara: $("#card").text().trim(),
+			idPrograma: $("#card").attr("prefix"),
+		});
+
+		dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+
+		$.ajax({
+			method: 'POST',
+			url: base_url + '/detalles/enTransito',
+			data: {
+				request: dataRequest,
+				cpo_name: cpo_cook,
+				plot: btoa(cpo_cook)
+			}
+		}).done(function (response) {
+
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+
+			switch (data.code) {
+				case 0:
+					data = data.msg;
+					var
+						saldoDisp = data.balance.availableBalance,
+						saldoBloq = data.balance.ledgerBalance,
+						saldoAct = data.balance.actualBalance;
+					carga_lista_transito(data);
+					break;
+
+				case 1:
+					data = data.msg;
+					var saldoAct=data.actual;
+					var saldoBloq=data.bloqueo;
+					var saldoDisp=data.disponible;
+					$('#estadisticas-transit').css("display", "none");
+					break;
+
+				default:
+					$('#estadisticas-transit').css("display", "none");
+					break;
+			}
+
+			var moneda = $(".product-info-full").attr("moneda");
+
+			if (typeof saldoAct!='string'){
+				saldoAct="---";
+			}
+			if (typeof saldoBloq!='string'){
+				saldoBloq="---";
+			}
+			if (typeof saldoDisp!='string'){
+				saldoDisp="---";
+			}
+
+			$("#actual").html(moneda+saldoAct);
+			$("#bloqueado").html(moneda+saldoBloq);
+			$("#disponible").html(moneda+saldoDisp);
+
+		}).fail(function () {});
+
+	}
+
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -72,40 +185,32 @@ $('#buscar').on('click',function(){
 
     $('#loading').hide();
     carga_lista(data);
-  });
-	var cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	});
 
-	var dataRequest = JSON.stringify ({
-		tarjeta:$("#card").attr("card")
-		})
+	// Click on Toggle Buttons
+	$("#transitoToogle").click(function () {
+		$("#period-form").hide();
+		$("#download").parent().hide();
+		$("#downloadxls").parent().hide();
+		$("#period").hide();
+		$("#list-detail").hide();
+		$("#estadisticas").hide();
+		$("#transit-datail-title").show();
+		$("#list-transit-detail").fadeIn(1000);
+		$('#estadisticas-transit').css({opacity: 0.0, visibility: "visible", display: "block"}).animate({opacity: 1.0}, 1000);
+	});
 
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-	$.post(base_url+"/dashboard/saldo", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
-
-		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
-
-    var moneda=$(".product-info-full").attr("moneda");
-    var saldoAct=data.actual;
-    var saldoBloq=data.bloqueo;
-    var saldoDisp=data.disponible;
-    if (typeof saldoAct!='string'){
-      saldoAct="---";
-    }
-    if (typeof saldoBloq!='string'){
-      saldoBloq="---";
-    }
-    if (typeof saldoDisp!='string'){
-      saldoDisp="---";
-    }
-
-    $("#actual").html(moneda+saldoAct);
-    $("#bloqueado").html(moneda+saldoBloq);
-    $("#disponible").html(moneda+saldoDisp);
-
-  });
+	$("#disponibleToogle").click(function () {
+		$("#transit-datail-title").hide();
+		$("#list-transit-detail").hide();
+		$("#estadisticas-transit").hide();
+		$("#period-form").show();
+		$("#download").parent().show();
+		$("#downloadxls").parent().show();
+		$("#period").show();
+		$("#list-detail").fadeIn(1000);
+		$("#estadisticas").fadeIn(1000);
+	});
 
   $("#download").click(function(event){
     event.preventDefault();
@@ -194,6 +299,7 @@ $('#buscar').on('click',function(){
 
   $('#content').on('click',"#buscar",function(){
     $('#list-detail').children("li").remove();
+    $('#list-detail').children("#empty-state").remove();
     $('#estadisticas').children().remove();
     $('#loading').show();
     mes = $("#filter-month").val();
@@ -243,25 +349,33 @@ $('#buscar').on('click',function(){
 		var clase, cadena;
 		var result = '<h2>No se encontraron movimientos</h2>';
 		result += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
-    if(data.rc == -61){
-      $(location).attr('href', base_url+'/users/error_gral');
+    switch (data.rc) {
+			case "unanswered":
+				result = '<h2>No fue posible consultar los movimientos</h2>';
+				result += '<p>Por favor intenta nuevamente.</p>';
+				break;
+			case -61:
+				$(location).attr('href', base_url+'/users/error_gral');
+				break;
+			case -9999:
+				result = '<h2>Atención</h2>';
+				result += '<p>Combinación de caracteres no válida.</p>';
+				break;
 		}
-		if (data.rc == -9999) {
-			result = '<h2>Atención</h2>';
-			result += '<p>Combinación de caracteres no válida.</p>';
-		}
-    if(data.rc != 0){
-      $("#list-detail").children().remove();
+
+		if(data.rc != 0){
+			$("#list-detail").children("#empty-state").remove();
+			$("#list-detail").children("ul").remove();
       cadena = '<div id="empty-state" style="position: static;">';
       cadena+= result;
       cadena+= '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
       cadena+= '</div>';
       $("#list-detail").append(cadena);
       reporte = false;
-    }
-    else{
+    } else {
       reporte = true;
-      $("#list-detail").children().remove();
+      $("#list-detail").children("#empty-state").remove();
+			$("#list-detail").children("ul").remove();
       $.each(data.movimientos,function(pos,item){
 
         if(item.signo=='+'){
@@ -389,4 +503,200 @@ $('#buscar').on('click',function(){
 
   });
 
-}); //FIN
+}); //FIN Document Load
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function carga_lista_transito(data) {
+	var seccion, totalCargos = 0,
+		totalAbonos = 0;
+	if (data.pendingTransactions.length > 0) {
+		$.each(data.pendingTransactions, function (pos, item) {
+			seccion = feed_item(item);
+			$('#list-transit-detail').append(seccion);
+			if (item.signo == "-") {
+				totalCargos += parseFloat(item.monto.replace(".", "").replace(",", "."));
+			} else {
+				totalAbonos += parseFloat(item.monto.replace(".", "").replace(",", "."));
+			}
+		});
+
+		$("#estadisticas-transit").kendoChart({
+
+			legend: {
+				position: "top",
+				visible: false
+			},
+			seriesDefaults: {
+				labels: {
+					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+					position: "outsideEnd",
+					visible: false,
+					background: "transparent",
+				}
+			},
+			seriesColors: ["#E74C3C", "#2ECC71"],
+			series: [{
+				type: "donut",
+				overlay: {
+					gradient: "none"
+				},
+				data: [{
+					category: "Cargos",
+					value: parseFloat(parseFloat(totalCargos).toFixed(1))
+				}, {
+					category: "Abonos",
+					value: parseFloat(parseFloat(totalAbonos).toFixed(1))
+				}]
+			}],
+			tooltip: {
+				visible: true,
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+			}
+		});
+	} else {
+		$('#estadisticas-transit').css("display", "none");
+		cadena = '<div id="empty-state" style="position: static;">';
+		cadena += '<h2>No se encontraron movimientos en tránsito</h2>';
+		cadena += '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+		cadena += '</div>';
+		$("#list-transit-detail").append(cadena);
+	}
+	// habilito toggle button
+	$("#transitoToogle").prop("disabled", false);
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function carga_lista(data) {
+	var cadena, seccion;
+	if (data.rc == -61) {
+		$(location).attr('href', base_url + '/users/error_gral');
+	} if (data.rc != 0) {
+		$('#estadisticas').css("display", "none");
+		$("#list-detail").children().remove();
+		cadena = '<div id="empty-state" style="position: static;">';
+		cadena += '<h2>No se encontraron movimientos</h2>';
+		cadena += '<p>Vuelva a realizar la búsqueda con un filtro distinto para obtener resultados.</p>';
+		cadena += '<span aria-hidden="true" class="icon-cancel-sign" style="position: relative;right: -260px;"></span>';
+		cadena += '</div>';
+		$("#list-detail").append(cadena);
+		reporte = false;
+	} else {
+		reporte = true;
+		$("#list-detail").children().remove();
+
+		$.each(data.movimientos, function (pos, item) {
+			seccion = feed_item(item);
+			$('#list-detail').append(seccion);
+		});
+
+		$("#estadisticas").kendoChart({
+
+			legend: {
+				position: "top",
+				visible: false
+			},
+			seriesDefaults: {
+				labels: {
+					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+					position: "outsideEnd",
+					visible: false,
+					background: "transparent",
+				}
+			},
+			seriesColors: ["#E74C3C", "#2ECC71"],
+			series: [{
+				type: "donut",
+				overlay: {
+					gradient: "none"
+				},
+				data: [{
+					category: "Cargos",
+					value: parseFloat(parseFloat(data.totalCargos).toFixed(1))
+				}, {
+					category: "Abonos",
+					value: parseFloat(parseFloat(data.totalAbonos).toFixed(1))
+				}]
+			}],
+			tooltip: {
+				visible: true,
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+			}
+		});
+
+	}
+}
+
+function feed_item(item) {
+	var clase;
+
+	if (item.signo == '+') {
+
+		clase = 'feed-income';
+
+	} else {
+
+		clase = 'feed-expense';
+	}
+	var date = item.fecha.split('/');
+	var dia = date[0];
+	var mes;
+	var annio = date[2];
+	var moneda = $(".product-info-full").attr("moneda");
+
+	switch (date[1]) {
+		case "01":
+			mes = "Ene";
+			break;
+		case "02":
+			mes = "Feb";
+			break;
+		case "03":
+			mes = "Mar";
+			break;
+		case "04":
+			mes = "Abr";
+			break;
+		case "05":
+			mes = "May";
+			break;
+		case "06":
+			mes = "Jun";
+			break;
+		case "07":
+			mes = "Jul";
+			break;
+		case "08":
+			mes = "Ago";
+			break;
+		case "09":
+			mes = "Sep";
+			break;
+		case "10":
+			mes = "Oct";
+			break;
+		case "11":
+			mes = "Nov";
+			break;
+		case "12":
+			mes = "Dic";
+			break;
+	}
+
+	var seccion;
+
+	seccion = '<li class="feed-item ' + clase + '">';
+	seccion += '<div class="feed-date">' + dia + '<span class="feed-date-month">' + mes + '</span><span class="feed-date-year">' + annio + '</span></div>';
+	if (item.signo == "-") {
+		seccion += item.concepto + '<span class="money-amount"> ' + '- ' + moneda + ' ' + item.monto + '</span>';
+	} else {
+		seccion += item.concepto + '<span class="money-amount"> ' + moneda + ' ' + item.monto + '</span>';
+	}
+	seccion += '<ul class="feed-metadata">'
+	seccion += '<li class="feed-metadata-item"><span aria-hidden="true" class="icon-file-text"></span> ' + item.referencia + '</li>'
+	seccion += '</ul></li>';
+	return seccion;
+}
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+

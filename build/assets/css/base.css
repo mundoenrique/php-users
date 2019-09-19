@@ -655,6 +655,7 @@ ul.stack li.stack-item {
 
 ul.stack li.stack-item a {
 	color: #888888;
+	cursor: pointer;
 	display: block;
 	line-height: 28px;
 	padding: 0 9px;
