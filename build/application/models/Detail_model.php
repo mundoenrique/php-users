@@ -160,15 +160,11 @@ class Detail_model extends CI_Model {
 
 				$msg = json_encode($dataResponse);
 				break;
-			case 503:
+			default:
 				$tarjeta = $data->tarjeta;
 				$this->load->model('dashboard_model', 'getSaldo');
 				$code = 1;
 				$msg = json_encode($this->getSaldo->saldo_load($tarjeta));
-				break;
-			default:
-				$code = 3;
-				$msg = json_encode('Error ' . $httpCode);
 		}
 		$response = [
 			'code' => $code,
