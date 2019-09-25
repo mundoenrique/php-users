@@ -671,7 +671,7 @@ a:hover {
 	width: 283px;
 }
 .atc-form-action-child-perfil-content{
-	width: 283px;
+	width: 180px;
 }
 .atc-form-action-child-perfil-diesession{
 	width: 109px;
@@ -5386,4 +5386,13 @@ select,
 button,
 a {
 	outline: none;
+}
+
+#dialog-bloq header{
+	padding-left: 100px;
+}
+
+
+#dialog-bloq .alert-simple{
+	padding-left: 80px;
 }

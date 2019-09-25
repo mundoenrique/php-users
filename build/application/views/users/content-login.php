@@ -192,7 +192,7 @@
   <div class="dialog-small" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>¿Olvidate tu <a href="<?php echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<?php echo $recoverPwdLink; ?>" rel="section">contraseña</a>?</p>
+      <p>Recupera tu <a href="<?php echo $recoverUserLink; ?>" rel="section">usuario</a> o <a href="<?php echo $recoverPwdLink; ?>" rel="section">contraseña</a></p>
     </div>
     <div class="form-actions">
 		<?php 	if($skin=='pichincha'): 		?>
