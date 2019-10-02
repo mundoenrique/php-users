@@ -117,7 +117,7 @@ class Detail_model extends CI_Model {
 	public function WSinTransit($data){
 		$country = $this->session->userdata("pais");
 
-		$urlAPI = ':8016/api-cardholder-account/1.0/balance';
+		$urlAPI = '/api-cardholder-account/1.0/balance';
 		$headerAPI = [
 			'x-country: ' . $country
 		];
