@@ -181,3 +181,8 @@ define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
 define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
 	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
 );
+
+$arrayUri = explode('/', $_SERVER['REQUEST_URI']);
+$lang = end($arrayUri);
+define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
+unset($arrayUri, $lang);

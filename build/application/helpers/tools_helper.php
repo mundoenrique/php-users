@@ -189,12 +189,35 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 		$CI =& get_instance();
 
 		if($CI->session->userdata('logged_in') === true){
-			$append = '/dashboard';
-
-			redirect($CI->config->item('base_url') . $append);
+			redirect($CI->config->item('base_url') . '/dashboard');
 		}
 
 	}
+
+	if(!function_exists('getFaviconLoader')) {
+		function getFaviconLoader() {
+			$CI = &get_instance();
+			$favicon = $CI->config->item('favicon');
+			$loader = 'loading-';
+			switch($CI->config->item('country')) {
+				case 'Ec-bp':
+					$ext = 'ico';
+					$loader.= 'bp.gif';
+					break;
+				default:
+					$ext = 'png';
+					$loader.= 'novo.gif';
+			}
+
+			$faviconLoader = new stdClass();
+			$faviconLoader->favicon = $favicon;
+			$faviconLoader->ext = $ext;
+			$faviconLoader->loader = $loader;
+
+			return $faviconLoader;
+		}
+	}
+
 }
 
 
@@ -219,5 +242,50 @@ if ( ! function_exists('np_hoplite_decimals'))
       $result = number_format($number, 2, ',', '.');
     }
 	  return $result;
+	}
+}
+
+if(!function_exists('clientCheck')) {
+	function clientCheck($client) {
+		$CI = &get_instance();
+
+		switch ($client) {
+			case 'bdb':
+				$CI->config->load('config-'.$client);
+				break;
+			default:
+				redirect('/');
+		}
+	}
+}
+
+if(!function_exists('assetPath')) {
+	function assetPath($route = '') {
+		return get_instance()->config->item('base_path_cdn').$route;
+	}
+}
+
+if(!function_exists('assetUrl')) {
+	function assetUrl($route = '') {
+		return get_instance()->config->item('base_url_cdn').$route;
+	}
+}
+
+if(!function_exists('accessLog')) {
+	function accessLog($dataAccessLog) {
+		$CI = &get_instance();
+
+		return $accessLog = [
+			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
+			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
+			"canal" => $CI->config->item('channel'),
+			"modulo"=> $dataAccessLog->modulo,
+			"function"=> $dataAccessLog->function,
+			"operacion"=> $dataAccessLog->operation,
+			"RC"=> 0,
+			"IP"=> $CI->input->ip_address(),
+			"dttimesstamp"=> date('m/d/Y H:i'),
+			"lenguaje"=> strtoupper(LANGUAGE)
+		];
 	}
 }

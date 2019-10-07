@@ -49,10 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
 $route['default_controller'] = 'users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Novo Structure
+$route['(:any)/inicio'] = "user/login";
+$route['(:any)/registro'] = "user/registry";
+$route['(:any)/async-call'] = "callModels";
+
+
+
+//Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
 
 $route['users'] = 'users/index'; // Otros paises
