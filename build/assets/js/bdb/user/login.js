@@ -40,7 +40,7 @@
 					callNovoCore (verb, who, where, data);
 				});
 			}
-			restartFormLogin(textBtn);
+			restartForm(textBtn);
 		},
 		99: function(response, textBtn){
 			notiSystem(response.title, response.msg, response.icon, response.data);
@@ -103,7 +103,7 @@
 							}
 						};
 						notiSystem(title, msg, icon, data);
-						restartFormLogin(text);
+						restartForm(text);
 				});
 			});
 		}
@@ -131,7 +131,7 @@
 			if (response.code !== 0 && response.owner === 'captcha'){
 
 				notiSystem(response.title, response.msg, response.icon, response.data);
-				restartFormLogin(dataValidateLogin.text);
+				restartForm(dataValidateLogin.text);
 
 				setTimeout(function() {
 					$("#user_login").hideBalloon();
