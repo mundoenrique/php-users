@@ -118,12 +118,8 @@ function validateForms(form, options) {
 			},
 			'accept-terms': 'required'
 		},
-		messages: {
-			'username': 'Debe indicar su nombre de usuario',
-			'userpsw': 'Indique su contraseña',
-			'document-id': 'Debe indicar su número de documento de identidad',
-			'telephone-number': 'Debe indicar su número de teléfono',
-			'accept-terms': 'Debe aceptar las condiciones de uso para continuar',
+		errorPlacement: function(error, element) {
+				error.appendTo( element.parent("div") );
 		}
 	});
 

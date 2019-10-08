@@ -66,8 +66,15 @@ class User extends NOVO_Controller {
 			"validate-forms",
 			"third_party/additional-methods",
 			"$this->countryUri/user/login",
-			"$this->countryUri/clave"
+			"$this->countryUri/clave",
+			"localization/spanish-base/messages_base"
 		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
 		if($this->countryUri !== 'bp') {
 			array_push(
 				$this->includeAssets->jsFiles,
@@ -174,8 +181,15 @@ class User extends NOVO_Controller {
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
 			"validate-forms",
-			"third_party/additional-methods"
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
 		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
 		$this->views = ['user/'.$view];
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);

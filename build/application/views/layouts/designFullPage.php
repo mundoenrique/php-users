@@ -55,14 +55,6 @@
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
 	</script>
-
-	<!-- base-url="http://localhost/site-conexionempresas/build/co/"
-	asset-url="http://localhost/site-conexionempresas/build/assets/"
-	country="co"
-	pais="Co"
-	type-over-detail-companies="bottom"
-	show-razon-social-detail-companies="1" -->
-
 </body>
 
 </html>
