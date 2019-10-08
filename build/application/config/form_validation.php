@@ -14,6 +14,7 @@ $config = [
 		]
 	],
 	'login' => [
+
 		[
 			'field' => 'user',
 			'label' => 'user',
@@ -22,6 +23,16 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
+			'rules' => 'trim|required'
+		]
+	],
+	'registryvalidation' => [
+		[
+			'field' => 'plot',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'request',
 			'rules' => 'trim|required'
 		]
 	],

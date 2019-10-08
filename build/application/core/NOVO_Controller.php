@@ -117,6 +117,7 @@ class NOVO_Controller extends CI_Controller {
 		switch($module) {
 			case 'login':
 			case 'benefits':
+			case 'registry':
 			case 'terms':
 			case 'pass-recovery':
 			case 'rates':

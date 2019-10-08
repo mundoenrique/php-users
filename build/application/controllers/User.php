@@ -171,7 +171,7 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: registry Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/pass-recovery",
+			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
 			"validate-forms",
 			"third_party/additional-methods"

@@ -1,11 +1,8 @@
 "use strict";
 
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
 
-  var onloadCallback = function() {
-    alert("grecaptcha is ready!");
-  };
-
+	// vars
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -49,6 +46,43 @@
 		}
 	}
 
+	// core
+	document.getElementById('btn-login').addEventListener("click", function(e){
+		e.preventDefault();
+
+		document.getElementsByClassName('general-form-msg').innerHTML = '';
+
+		var form = $('#form-login');
+		validateForms(form, {handleMsg: false});
+		if(form.valid()) {
+			grecaptcha.ready(function() {
+				grecaptcha
+				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
+				.then(function(token) {
+					var text = document.getElementById('btn-login').innerHTML;
+					var credentialUser = getCredentialsUser();
+					validateLogin({token: token, user: credentialUser, text: text});
+				},function() {
+						title = prefixCountry + strCountry;
+						icon = iconWarning;
+						data = {
+							btn1: {
+								link: false,
+								action: 'close'
+							}
+						};
+						notiSystem(title, msg, icon, data);
+						restartForm(text);
+				});
+			});
+		}
+		else{
+			alert('no paso la validación...');
+		}
+	});
+
+	// Functions
+
 	function disableInputsForm(disable)
 	{
 		document.getElementById('username').disabled = disable;
@@ -77,47 +111,6 @@
 		}
 	};
 
-	document.getElementById('btn-login').addEventListener("click", function(e){
-
-		e.preventDefault();
-
-		document.getElementsByClassName('general-form-msg').innerHTML = '';
-		var form = $('#form-login');
-
-		validateForms(form, {handleMsg: false});
-		if(form.valid()) {
-			var text = document.getElementById('btn-login').innerHTML;
-			var credentialUser = getCredentialsUser();
-			grecaptcha.ready(function() {
-				grecaptcha
-				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
-				.then(function(token) {
-					validateLogin({token: token, user: credentialUser, text: text});
-				},function() {
-						title = prefixCountry + strCountry;
-						icon = iconWarning;
-						data = {
-							btn1: {
-								link: false,
-								action: 'close'
-							}
-						};
-						notiSystem(title, msg, icon, data);
-						restartForm(text);
-				});
-			});
-		}
-		else{
-			console.log('no paso la validación...');
-		}
-	});
-
-	function validateResponseLogin(response, textBtn)
-	{
-		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
-		responseCodeLogin[property](response, textBtn);
-	}
-
 	function validateLogin(dataValidateLogin){
 		var data = {
 			user: dataValidateLogin.user.user,
@@ -141,4 +134,11 @@
 			}
 		})
 	}
-})();
+
+	function validateResponseLogin(response, textBtn)
+	{
+		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
+		responseCodeLogin[property](response, textBtn);
+	}
+
+});

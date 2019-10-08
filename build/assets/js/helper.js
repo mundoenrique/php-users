@@ -48,7 +48,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, { format: CryptoJSAesJson }).toString();
 	$.ajax({
-		method: 'post',
+		method: verb,
 		url: urlBase + 'async-call',
 		data: { request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook) },
 		context: document.body,

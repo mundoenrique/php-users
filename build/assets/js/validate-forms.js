@@ -1,5 +1,6 @@
 'use strict'
 function validateForms(form, options) {
+	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var validCountry = typeof country!=='undefined'? country : isoPais;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
@@ -79,7 +80,7 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
-			"username":{
+			'username':{
 				required: {
         	depends:function(){
             $(this).val($.trim($(this).val()));
@@ -88,7 +89,7 @@ function validateForms(form, options) {
 				},
 				pattern: alphanumunder
 			},
-			"userpsw":{
+			'userpsw':{
 				required: {
         	depends:function(){
             $(this).val($.trim($(this).val()));
@@ -97,10 +98,32 @@ function validateForms(form, options) {
 				},
 				pattern: userPassword
 			},
+			'document-id':{
+				pattern: onlyNumber,
+				required: {
+        	depends:function(){
+            $(this).val($.trim($(this).val()));
+            	return true;
+        		}
+				},
+			},
+			'telephone-number':{
+				pattern: telephoneNumber,
+				required: {
+        	depends:function(){
+            $(this).val($.trim($(this).val()));
+            	return true;
+        		}
+				},
+			},
+			'accept-terms': 'required'
 		},
 		messages: {
-			'username': "Debe indicar su nombre de usuario",
-			'userpsw': "Indique su contraseña"
+			'username': 'Debe indicar su nombre de usuario',
+			'userpsw': 'Indique su contraseña',
+			'document-id': 'Debe indicar su número de documento de identidad',
+			'telephone-number': 'Debe indicar su número de teléfono',
+			'accept-terms': 'Debe aceptar las condiciones de uso para continuar',
 		}
 	});
 

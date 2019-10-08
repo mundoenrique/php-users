@@ -8,24 +8,20 @@
 			<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
 				proporcionar los siguientes datos relacionados con su cuenta:</p>
 			<div class="pt-3 pb-2 border-bottom">
-				<form method="post" id="form-validar">
+				<form method="post" id="form-verify-account">
 					<div class="row">
 						<div class="form-group col-lg-auto">
-							<label for="card-number">Número de Tarjeta</label>
-							<input id="card-number" class="form-control" maxlength="16" name="card-number" type="text" value="" autocomplete="off">
+							<label for="document-id">Documento de Identidad<abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+							<input id="document-id" class="form-control" maxlength="16" name="document-id" type="text" value="" autocomplete="off" requiered>
 						</div>
 						<div class="form-group col-lg-auto">
-							<label for="card-holder-id">Documento de Identidad <abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
-							<input id="card-holder-id" class="form-control" maxlength="16" name="card-holder-id" type="text" value="" autocomplete="off">
-						</div>
-						<div class="form-group col-lg-auto">
-							<label for="card-holder-pin">Clave Secreta (PIN) <abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
-							<input id="card-holder-pin" class="form-control" maxlength="15" name="card-holder-pin" type="password" value="" autocomplete="off">
+							<label for="telephone-number">Número de teléfono<abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+							<input id="telephone-number" class="form-control" maxlength="15" name="telephone-number" type="text" value="" autocomplete="off" required>
 						</div>
 					</div>
 					<div class="form-group my-4">
 						<div class="form-check">
-							<input id="accept-terms" class="form-check-input" type="checkbox" name="accept-terms" value="" required disabled>
+							<input id="accept-terms" class="form-check-input" type="checkbox" name="accept-terms" value="" required >
 							<label class="form-check-label" for="accept-terms">
 								Acepto las <a class="" href="#" rel="section">condiciones de uso</a> de este sistema
 							</label>
@@ -49,7 +45,7 @@
 					<div></div>
 				</div>
 				<a href="<?= base_url('inicio');?>"><input class="btn underline" type="reset" value="Cancelar"></a>
-				<button id="validar" class="btn btn-primary" type="submit">Continuar</button>
+				<button id="btn-validar" class="btn btn-primary" type="submit">Continuar</button>
 			</div>
 		</div>
 	</section>
