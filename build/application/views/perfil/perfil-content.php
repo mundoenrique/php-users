@@ -682,7 +682,7 @@ $pais_residencia=$this->session->userdata('pais');
               </ul>
               <ul class="row-profile">
                 <li class="col-md-3-profile">
-                  <label for="password" class="pass-2"> Contraseña </label>
+                  <label class="pass-2"> Contraseña </label>
                   <label for="password" class="link-config">
                     <a href="<?php echo $this->config->item("base_url"); ?>/users/cambiarPassword?t=n">Ir a la
                       configuración </a>
