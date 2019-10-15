@@ -87,10 +87,8 @@ class NOVO_Controller extends CI_Controller {
 			}
 			$this->includeAssets->cssFiles = [
 				"$this->countryUri/root",
-				"$this->countryUri/reboot",
-				"$this->countryUri/cpo_base",
-				"$this->countryUri/cpo",
-				"$this->countryUri/normalize" //minificar
+				"$this->countryUri/reboot", //minificar
+				"$this->countryUri/base"
 			];
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
