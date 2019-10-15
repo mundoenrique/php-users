@@ -532,7 +532,11 @@
 	.bg-gray   { background-color: var(--gray-color) !important }
 	.bg-silver { background-color: var(--silver-color) !important }
 	.bg-white  { background-color: var(--white-color) !important }
-	.bg-transparent { background-color: transparent !important }
+
+	.success { color: var(--success-color) !important }
+	.info    { color: var(--info-color) !important }
+	.warning { color: var(--warning-color) !important }
+	.danger  { color: var(--danger-color) !important }
 
 	.bg-pampas  { background-color: var(--pampas-color) !important }
 	.bg-yellow   { background-color: var(--yellow-color) !important }
@@ -540,6 +544,7 @@
 	.bg-trikemaster  { background-color: var(--trikemaster-color) !important }
 	.bg-pink-salmon   { background-color: var(--pink-salmon-color) !important }
 
+	.bg-transparent { background-color: transparent !important }
 
 	/* Borders
 		========================================================================== */
@@ -1091,6 +1096,11 @@
 	.secondary { color: var(--secondary-color) !important }
 	.tertiary  { color: var(--tertiary-color) !important }
 	.text      { color: var(--text-color) !important }
+
+	.bg-success { background-color: var(--success-color) !important }
+	.bg-info    { background-color: var(--info-color) !important }
+	.bg-warning { background-color: var(--warning-color) !important }
+	.bg-danger  { background-color: var(--danger-color) !important }
 
 	.pampas        { color: var(--pampas-color) !important }
 	.yellow        { color: var(--yellow-color) !important }

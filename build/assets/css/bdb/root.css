@@ -43,6 +43,11 @@
   --secondary-color: #ffffff;
   --tertiary-color: #435168;
 
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+	--danger-color: #dc3545;
+
   --pampas-color: #f6f3f1;
   --yellow-color: #FFB400;
   --vista-blue-color: #7ED3B2;
