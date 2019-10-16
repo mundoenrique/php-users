@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 // Novo Structure
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/registro'] = "user/registry";
+$route['(:any)/postregistro'] = "user/postregistry";
 $route['(:any)/async-call'] = "callModels";
 
 
