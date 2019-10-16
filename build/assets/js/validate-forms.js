@@ -41,11 +41,21 @@ function validateForms(form, options) {
 	};
 	var defaults = {
 		debug: true,
-		errorClass: "validate-error",
-		validClass: "success",
+		errorClass: "has-error",
+		validClass: "has-success",
 		success: " ",
 		ignore: ".ignore",
-		errorElement: 'label'
+		errorElement: 'div',
+		highlight: function(element, errorClass, validClass) {
+			$(element).closest('.form-group').find('.validation-spacing').addClass("none");
+			$(element).addClass(errorClass).removeClass(validClass);
+			$(element.form).find("label[for=" + element.id + "]").addClass(errorClass);
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).closest('.form-group').find('.validation-spacing').removeClass("none");
+			$(element).removeClass(errorClass).addClass(validClass);
+			$(element.form).find("label[for=" + element.id + "]").removeClass(errorClass);
+		}
 	};
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {
