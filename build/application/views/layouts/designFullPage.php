@@ -24,13 +24,13 @@
 		endif;
 	?>
 
-	<article class="main">
+	<main class="content">
 		<?php
 			foreach($viewPage as $views) {
 				$this->load->view($views . '_content');
 			}
 		?>
-  </article>
+  </main>
 
 	<footer class="main-footer">
 		<div class="flex pr-2 pr-lg-0">
