@@ -43,33 +43,33 @@
   --secondary-color: #ffffff;
   --tertiary-color: #435168;
 
-  --success-color: #28a745;
-  --info-color: #17a2b8;
-  --warning-color: #ffc107;
-	--danger-color: #dc3545;
+  --success-color: #007e33;
+  --info-color: #0099cc;
+  --warning-color: #ff8800;
+  --danger-color: #cc0000;
 
   --pampas-color: #f6f3f1;
-  --yellow-color: #FFB400;
-  --vista-blue-color: #7ED3B2;
-  --trikemaster-color: #8B4F80;
-  --pink-salmon-color: #FF8C94;
+  --yellow-color: #ffb400;
+  --vista-blue-color: #7ed3b2;
+  --trikemaster-color: #8b4f80;
+  --pink-salmon-color: #ff8c94;
 
-  --white-color:  #FFFFFF;
-  --silver-color: #DDDDDD;
-  --gray-color:   #AAAAAA;
+  --white-color:  #ffffff;
+  --silver-color: #dddddd;
+  --gray-color:   #aaaaaa;
   --black-color:  #111111;
 
-  --text-color: #7B7B7B;
+  --text-color: #7b7b7b;
   --bg-color: #f6f3f1;
   --placeholder-color: #828994;
-  --border-color:#B5BAC3;
-  --widget-color:#F4F4F4;
+  --border-color:#b5bac3;
+  --widget-color:#f4f4f4;
   --label-color: #012c71;
-  --shadows-color:#F2F2F2;
+  --shadows-color:#f2f2f2;
 
   --primary-shade: #012c71a6;
   --primary-tint: #1a417f;
-  --icon-table: #0072C0;
+  --icon-table: #0072c0;
 
   /* Type Scale */
   --h00: 2.5rem;
