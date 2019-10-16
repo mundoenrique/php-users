@@ -89,7 +89,7 @@ function validateForms(form, options) {
 				},
 				pattern: alphanumunder
 			},
-			'userpsw':{
+			'userpwd':{
 				required: {
         	depends:function(){
             $(this).val($.trim($(this).val()));

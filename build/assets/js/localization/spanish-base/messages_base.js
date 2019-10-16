@@ -11,7 +11,7 @@
 $.extend( $.validator.messages, {
 
 	'username': 'Debe indicar su nombre de usuario',
-	'userpsw': 'Indique su contraseña',
+	'userpwd': 'Indique su contraseña',
 	'document-id': 'Debe indicar su número de documento de identidad',
 	'telephone-number': 'Debe indicar su número de teléfono',
 	'accept-terms': 'Debe aceptar las condiciones de uso para continuar',
