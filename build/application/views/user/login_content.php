@@ -19,8 +19,8 @@
 					<span aria-hidden="true" class="icon-lock h3 yellow"></span>
 					Ingreso Seguro
 				</button>
-				<a href="recuperar-clave" class="block mb-1 h5">Olvidé mi usuario</a>
-				<a href="recuperar-clave" class="block mb-1 h5">Olvidé mi Contraseña</a>
+				<a href="recuperarClave" class="block mb-1 h5">Olvidé mi usuario</a>
+				<a href="recuperarClave" class="block mb-1 h5">Olvidé mi Contraseña</a>
 				<p class="mb-0 h5">¿No posees usuario? <a href="<?= base_url('registro');?>">Regístrate</a></p>
 			</form>
 		</div>

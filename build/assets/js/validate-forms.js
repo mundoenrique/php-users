@@ -91,23 +91,11 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
-			'username':{
-				required: true,
-				pattern: alphanumber
-			},
-			'userpwd':{
-				required: true,
-				pattern: userPassword
-			},
-			'document-id':{
-				pattern: onlyNumber,
-				required: true,
-			},
-			'telephone-number':{
-				pattern: telephoneNumber,
-				required: true,
-			},
-			'accept-terms': 'required'
+			username: { required: true, pattern: alphanumber },
+			userpwd: { required: true, pattern: userPassword },
+			documentID: { required: true, pattern: onlyNumber },
+			telephoneNumber:{ required: true, pattern: telephoneNumber },
+			acceptTerms: 'required'
 		},
 		errorPlacement: function(error, element) {
 				error.appendTo( element.parent("div") );
