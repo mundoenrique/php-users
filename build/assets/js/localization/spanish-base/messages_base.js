@@ -10,13 +10,6 @@
 
 $.extend( $.validator.messages, {
 
-	'username': 'Debe indicar su nombre de usuario',
-	'userpwd': 'Indique su contraseña',
-	'document-id': 'Debe indicar su número de documento de identidad',
-	'telephone-number': 'Debe indicar su número de teléfono',
-	'accept-terms': 'Debe aceptar las condiciones de uso para continuar',
-
-
 	required: "Este campo es obligatorio.",
 	remote: "Por favor, rellena este campo.",
 	email: "Por favor, escribe una dirección de correo válida.",
