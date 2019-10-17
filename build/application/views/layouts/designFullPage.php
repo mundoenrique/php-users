@@ -39,11 +39,15 @@
     <div class="flex flex-auto flex-wrap justify-between items-center">
 			<img class="order-first" src="<?= $this->asset->insertFile('img-bogota_white.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá">
 			<img class="order-1" src="<?= $this->asset->insertFile('img-pci_compliance.svg','img',$countryUri); ?>" alt="Logo PCI">
-			<img class="order-1" src="<?= $this->asset->insertFile('img-engine.svg','img',$countryUri); ?>assets/images/img-engine.svg" alt="Logo NovoPayment">
+			<img class="order-1" src="<?= $this->asset->insertFile('img-engine.svg','img',$countryUri); ?>" alt="Logo NovoPayment">
 
       <span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6">© Todos los derechos reservados. Banco de Bogotá - 2019.</span>
     </div>
 	</footer>
+
+	<div id="divSpinner" class="hidden">
+		<img id="imgSpinner" name="imgSpinner" src="<?= $this->asset->insertFile('loading.gif','img'); ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
+	</div>
 
 	<?php
 		if($module == 'login') {

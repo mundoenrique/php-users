@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function(){
 
 	// vars
+	var txtBtnLogin = document.getElementById('btn-login').innerText;
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -50,7 +51,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	document.getElementById('btn-login').addEventListener("click", function(e){
 		e.preventDefault();
 
+		document.getElementById('btn-login').disabled = true;
+		document.getElementById('divSpinner').classList.remove("hidden");
 		document.getElementsByClassName('general-form-msg').innerHTML = '';
+
+		$(this).html($('#divSpinner').html());
 
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
@@ -63,30 +68,31 @@ document.addEventListener('DOMContentLoaded', function(){
 					var credentialUser = getCredentialsUser();
 					validateLogin({token: token, user: credentialUser, text: text});
 				},function() {
-						title = prefixCountry + strCountry;
-						icon = iconWarning;
-						data = {
-							btn1: {
-								link: false,
-								action: 'close'
-							}
-						};
-						notiSystem(title, msg, icon, data);
-						restartForm(text);
+					title = prefixCountry + strCountry;
+					icon = iconWarning;
+					data = {
+						btn1: {
+							link: false,
+							action: 'close'
+						}
+					};
+					notiSystem(title, msg, icon, data);
+					restartForm(text);
 				});
 			});
 		}
 		else{
-			alert('no paso la validación...');
+			document.getElementById('btn-login').innerText = txtBtnLogin;
+			{}
 		}
 	});
 
 	// Functions
 
-	function disableInputsForm(disable)
+	function disableInputsForm(status)
 	{
-		document.getElementById('username').disabled = disable;
-		document.getElementById('userpwd').disabled = disable;
+		document.getElementById('username').disabled = status;
+		document.getElementById('userpwd').disabled = status;
 	}
 
 	function restartForm(textBtn)
@@ -137,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
+		document.getElementById('btn-login').innerText = txtBtnLogin;
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}

@@ -26,11 +26,15 @@ ul.steps li.step-item span[class*=" icon-"] {
 }
 
 .validate-error {
-	border-color: red;
+	font-size: 12px;
+	color: red;
 }
 
-#mensajeError {
-	float: left;
+.hidden {
 	display: none;
-	color: red;
+}
+
+#imgSpinner {
+	width: 25px;
+	height: 25px;
 }

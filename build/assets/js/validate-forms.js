@@ -45,7 +45,7 @@ function validateForms(form, options) {
 		validClass: "success",
 		success: " ",
 		ignore: ".ignore",
-		errorElement: 'label'
+		errorElement: 'div'
 	};
 
 	$.validator.methods.fiscalRegistry = function(value, element, param) {

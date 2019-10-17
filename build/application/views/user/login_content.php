@@ -2,7 +2,7 @@
 	<img class="logo-banco mb-2" src="<?= $this->asset->insertFile('img-banco_bogota.svg','img',$countryUri); ?>" alt="">
 	<span class="mb-2 secondary center h3">Personas</span>
 	<div class="login bg-widget rounded">
-		<form id="form-login" class="" action="">
+		<form id="form-login">
 			<div class="form-group">
 				<label for="username">Usuario</label>
 				<input id="username" name="username" class="form-control" type="text" placeholder="Usuario" required>
