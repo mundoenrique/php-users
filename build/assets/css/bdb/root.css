@@ -39,25 +39,26 @@
 
 :root {
   /* Colors */
-  --primary-color: #012c71;
-  --secondary-color: #ffffff;
-  --tertiary-color: #435168;
+  --primary: #012c71;
+  --secondary: #ffffff;
+  --tertiary: #435168;
 
-  --success-color: #007e33;
-  --info-color: #0099cc;
-  --warning-color: #ff8800;
-  --danger-color: #cc0000;
+  --success: #007e33;
+  --info: #0099cc;
+  --warning: #ff8800;
+  --danger: #cc0000;
 
-  --pampas-color: #f6f3f1;
-  --yellow-color: #ffb400;
-  --vista-blue-color: #7ed3b2;
-  --trikemaster-color: #8b4f80;
-  --pink-salmon-color: #ff8c94;
+  --pampas: #f6f3f1;
+  --yellow: #ffb400;
+  --gold: #dfb80e;
+  --vista-blue: #7ed3b2;
+  --trikemaster: #8b4f80;
+  --pink-salmon: #ff8c94;
 
-  --white-color:  #ffffff;
-  --silver-color: #dddddd;
-  --gray-color:   #aaaaaa;
-  --black-color:  #111111;
+  --white:  #ffffff;
+  --silver: #dddddd;
+  --gray:   #aaaaaa;
+  --black:  #111111;
 
   --text-color: #7b7b7b;
   --bg-color: #f6f3f1;
@@ -70,6 +71,8 @@
   --primary-shade: #012c71a6;
   --primary-tint: #1a417f;
   --icon-table: #0072c0;
+  --button-color: #ffffff;
+  --button-background-color: #012c71;
 
   /* Type Scale */
   --h00: 2.5rem;
@@ -126,8 +129,6 @@
   --button-line-height: 1.5rem;
   --button-padding-y: .375rem;
   --button-padding-x: 1.75rem;
-  --button-color: #ffffff;
-  --button-background-color: #012c71;
 
   --button-small-padding-y: .125rem;
   --button-small-padding-x: 1rem;
