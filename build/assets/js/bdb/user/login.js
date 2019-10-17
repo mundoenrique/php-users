@@ -3,7 +3,8 @@
 document.addEventListener('DOMContentLoaded', function(){
 
 	// vars
-	var txtBtnLogin = document.getElementById('btn-login').innerText;
+	var btnLogin = document.getElementById('btn-login');
+	var txtBtnLogin = btnLogin.innerHTML.trim();
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -48,24 +49,22 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// core
-	document.getElementById('btn-login').addEventListener("click", function(e){
+	btnLogin.addEventListener("click", function(e){
 		e.preventDefault();
 
-		$(this).disabled = true;
-		document.getElementsByClassName('general-form-msg').innerHTML = '';
-		var loading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
-		$(this).html(loading);
+		var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+		$(this).html(msgLoading);
 
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
+			disableInputsForm(true)
 			grecaptcha.ready(function() {
 				grecaptcha
 				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
 				.then(function(token) {
-					var text = document.getElementById('btn-login').innerHTML;
 					var credentialUser = getCredentialsUser();
-					validateLogin({token: token, user: credentialUser, text: text});
+					validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
 				},function() {
 					title = prefixCountry + strCountry;
 					icon = iconWarning;
@@ -81,8 +80,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			});
 		}
 		else{
-			document.getElementById('btn-login').innerText = txtBtnLogin;
-			{}
+			btnLogin.innerHTML = txtBtnLogin;
 		}
 	});
 
@@ -92,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	{
 		document.getElementById('username').disabled = status;
 		document.getElementById('userpwd').disabled = status;
+		btnLogin.disabled = status;
 	}
 
 	function restartForm(textBtn)
@@ -102,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(country == 'bp') {
 			document.getElementById("username").value = '';
 		}
-		setTimeout(function() {
+/*		setTimeout(function() {
 			$("#username").hideBalloon();
-		}, 2000);
+		}, 2000); */
 	}
 
 	function getCredentialsUser()

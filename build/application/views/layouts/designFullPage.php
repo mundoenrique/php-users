@@ -43,10 +43,6 @@
 		</div>
 	</footer>
 
-	<div id="divSpinner" class="hidden">
-		<img id="imgSpinner" name="imgSpinner" src="<?= $this->asset->insertFile('loading.gif','img'); ?>" class="requesting" alt="<?= lang('ALT_LOADER'); ?>">
-	</div>
-
 	<?php
 		if($module == 'login') {
 			echo 	$scriptCaptcha;

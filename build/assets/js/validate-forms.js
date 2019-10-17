@@ -11,7 +11,7 @@ function validateForms(form, options) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{15,45}$/i;
 	var longPhrase = /^['a-z0-9ñáéíóú ().']{10,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^([\w.\-+&ñÑ]+)+$/i;
+	var alphanumber = /^([\w.\-+&ñÑ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 	var numeric = /^[0-9]+$/;
@@ -92,40 +92,20 @@ function validateForms(form, options) {
 	form.validate({
 		rules: {
 			'username':{
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        		}
-				},
-				pattern: alphanumunder
+				required: true,
+				pattern: alphanumber
 			},
 			'userpwd':{
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        		}
-				},
+				required: true,
 				pattern: userPassword
 			},
 			'document-id':{
 				pattern: onlyNumber,
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        		}
-				},
+				required: true,
 			},
 			'telephone-number':{
 				pattern: telephoneNumber,
-				required: {
-        	depends:function(){
-            $(this).val($.trim($(this).val()));
-            	return true;
-        		}
-				},
+				required: true,
 			},
 			'accept-terms': 'required'
 		},
