@@ -15,7 +15,10 @@
 					<input id="userpwd" name="userpwd" class="form-control" type="password" placeholder="Contraseña">
 					<div class="validation-spacing"></div>
 				</div>
-				<button id="btn-login" class="btn btn-primary btn-icon icon-lock mx-auto mt-3 mb-5 flex">Ingreso Seguro</button>
+				<button id="btn-login" class="btn btn-primary w-100 mt-3 mb-5">
+					<span aria-hidden="true" class="icon-lock h3 yellow"></span>
+					Ingreso Seguro
+				</button>
 				<a href="recuperar-clave" class="block mb-1 h5">Olvidé mi usuario</a>
 				<a href="recuperar-clave" class="block mb-1 h5">Olvidé mi Contraseña</a>
 				<p class="mb-0 h5">¿No posees usuario? <a href="<?= base_url('registro');?>">Regístrate</a></p>

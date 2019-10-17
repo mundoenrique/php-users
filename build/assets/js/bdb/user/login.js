@@ -51,11 +51,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	document.getElementById('btn-login').addEventListener("click", function(e){
 		e.preventDefault();
 
-		document.getElementById('btn-login').disabled = true;
-		document.getElementById('divSpinner').classList.remove("hidden");
+		$(this).disabled = true;
 		document.getElementsByClassName('general-form-msg').innerHTML = '';
-
-		$(this).html($('#divSpinner').html());
+		var loading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+		$(this).html(loading);
 
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
