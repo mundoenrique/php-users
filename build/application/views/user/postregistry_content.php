@@ -1,13 +1,12 @@
-<div class="registro-content h-100 bg-white">
-	<div class="max-width-4 mx-auto p-responsive py-4">
+<div class="postregistro-content h-100 bg-white">
+	<div class="py-4">
 		<header class="">
 			<h1 class="primary h0">Registro</h1>
 		</header>
 		<section>
 			<div class="border-top pt-3">
-				<h2 class="tertiary h3">Verificación de Cuenta</h2>
-				<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
-					proporcionar los siguientes datos relacionados con su cuenta:</p>
+				<h2 class="tertiary h3">Afiliación de Datos</h2>
+				<p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a continuación:</p>
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="form-validar">
 						<div class="row">

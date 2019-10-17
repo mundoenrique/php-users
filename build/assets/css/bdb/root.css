@@ -2,39 +2,39 @@
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
-  src: url('../../fonts/bdb/Open_Sans/OpenSans-Light.ttf') format('truetype');
+  src: url('../fonts/Open_Sans/OpenSans-Light.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  src: url('../../fonts/bdb/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+  src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
-  src: url('../../fonts/bdb/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+  src: url('../fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  src: url('../../fonts/bdb/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+  src: url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: "NovoPayment Glyphs";
 	font-style: normal;
 	font-weight: normal;
-	src: url('../../fonts/bdb/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/bdb/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/bdb/Novopayments_Glyphs/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/bdb/Novopayments_Glyphs/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/bdb/Novopayments_Glyphs/novopayment-glyphs-webfont.svg') format('svg');
+	src: url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.woff') format('woff'),
+       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.ttf') format('truetype'),
+       url('../fonts/Novopayments_Glyphs/novopayment-glyphs-webfont.svg') format('svg');
 }
 
 :root {
@@ -43,27 +43,33 @@
   --secondary-color: #ffffff;
   --tertiary-color: #435168;
 
-  --pampas-color: #f6f3f1;
-  --yellow-color: #FFB400;
-  --vista-blue-color: #7ED3B2;
-  --trikemaster-color: #8B4F80;
-  --pink-salmon-color: #FF8C94;
+  --success-color: #007e33;
+  --info-color: #0099cc;
+  --warning-color: #ff8800;
+  --danger-color: #cc0000;
 
-  --white-color:  #FFFFFF;
-  --silver-color: #DDDDDD;
-  --gray-color:   #AAAAAA;
+  --pampas-color: #f6f3f1;
+  --yellow-color: #ffb400;
+  --vista-blue-color: #7ed3b2;
+  --trikemaster-color: #8b4f80;
+  --pink-salmon-color: #ff8c94;
+
+  --white-color:  #ffffff;
+  --silver-color: #dddddd;
+  --gray-color:   #aaaaaa;
   --black-color:  #111111;
 
-  --text-color: #7B7B7B;
+  --text-color: #7b7b7b;
   --bg-color: #f6f3f1;
   --placeholder-color: #828994;
-  --border-color:#B5BAC3;
-  --widget-color:#F4F4F4;
+  --border-color:#b5bac3;
+  --widget-color:#f4f4f4;
   --label-color: #012c71;
-  --shadows-color:#F2F2F2;
+  --shadows-color:#f2f2f2;
 
   --primary-shade: #012c71a6;
   --primary-tint: #1a417f;
+  --icon-table: #0072c0;
 
   /* Type Scale */
   --h00: 2.5rem;
@@ -76,10 +82,6 @@
   --h6: .75rem;
 
   /* Typography */
-  --line-height-1: 1;
-  --line-height-2: 1.125;
-  --line-height-3: 1.25;
-  --line-height-4: 1.5;
   --caps-letter-spacing: .2em;
 
   --light-font-weight: 300;

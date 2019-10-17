@@ -194,4 +194,28 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}
+
+	public function postregistry()
+	{
+		$view = 'postregistry';
+
+		log_message('INFO', 'NOVO User: postregistry Method Initialized');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->loadView($view);
+	}
 }
