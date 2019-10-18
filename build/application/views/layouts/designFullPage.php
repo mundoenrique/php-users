@@ -43,7 +43,7 @@
 		</div>
 	</footer>
 
-	<div id="system-info" class="hidden">
+	<!-- <div id="system-info" class="hidden">
 		<p>
 			<span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
 		</p>
@@ -53,7 +53,35 @@
 				<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons"><?= lang('BUTTON_ACCEPT'); ?></button>
 			</div>
 		</div>
-	</div>
+	</div> -->
+
+	<!-- Modal -->
+	<div id="system-info" class="modal show">
+      <div class="modal-dialog">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title primary" id="ModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+            <p>
+              <span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
+            </p>
+          </div>
+          <!--Footer-->
+          <div class="modal-footer">
+            <button id="cancel" type="button" class="btn underline" data-dismiss="modal"><?= lang('BUTTON_CANCEL'); ?></button>
+            <button id="accept" type="button" class="btn btn-primary"><?= lang('BUTTON_ACCEPT'); ?></button>
+          </div>
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
 
 	<?php
 		if($module == 'login') {
