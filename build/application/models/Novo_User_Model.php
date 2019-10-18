@@ -23,7 +23,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'login';
 		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = '1'; //'loginFull';
+		$this->dataAccessLog->operation = '1';
 		$this->dataAccessLog->userName = $dataRequest->user;
 
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
@@ -329,24 +329,55 @@ class Novo_User_Model extends NOVO_Model {
 
 	public function callWs_registryValidation_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: Login method Initialized');
+		log_message('INFO', 'NOVO User Model: Registry Validation method Initialized');
+
+		$date = new DateTime();
+		$fechaRegistro = $date->format('dmy');
+
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 
 		$this->dataAccessLog->modulo = 'login';
 		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = '18'; //'loginFull';
-		$this->dataAccessLog->userName = $dataRequest->user;
+		$this->dataAccessLog->operation = '18';
+		$this->dataAccessLog->userName = $dataRequest->documentID+$fechaRegistro;
 
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
-		$this->dataRequest->password = $dataRequest->pass;
-		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->id_ext_per = $dataRequest->userName;
+		$this->dataRequest->id_ext_per = $dataRequest->documentID;
+		$this->dataRequest->telephoneNumber = $dataRequest->telephoneNumber;
 
-		//$this->dataRequest->claveweb = ;
-		//$this->dataRequest->pais = ;
-		//$this->dataRequest->cuenta = ;
+/* fake data */
+		$this->dataRequest->cuenta = "6048411619458425";
+		$this->dataRequest->pin = "6e08dc8e4e3ac59d3c61dc0ff2f59c7c";
+		$this->dataRequest->claveWeb = "9d98257cef258260de0cf058ff3e93d7";
+		$this->dataRequest->id_ext_per = "15200249";
 
-		$response = $this->sendToService('Login');
+/* request valida
+"{
+	"idOperation":"18","className":"com.novo.objects.TOs.CuentaTO",
+	"pais":"Ve",
+	"cuenta":"6048411619458425", ----- NO LA TENGO
+	"id_ext_per":"15200249","pin":"6e08dc8e4e3ac59d3c61dc0ff2f59c7c", ???"claveWeb":"9d98257cef258260de0cf058ff3e93d7", ???"logAccesoObject":
+			{"sessionId":"",
+				"userName":"15200249181019",
+				"canal":"personasWeb",
+				"modulo":"validar cuenta",
+				"function":"validar cuenta",
+				"operacion":"validar cuenta",
+				"RC":0,
+				"IP":"::1",
+				"dttimesstamp":"10\/18\/2019 15:41",
+				"lenguaje":"ES"
+			},
+		"token":""
+	}"
+
+idOperation:"18"
+className:"com.novo.objects.TOs.CuentaTO"
+logAccesoObject:array(10)
+token:"6e8854e0a39ec243673a73bb0e466c9c"
+pais:"bdb"
+	*/
+
+		$response = $this->sendToService('User');
 		if($this->isResponseRc !== FALSE) {
 			switch($this->isResponseRc) {
 				case 0:

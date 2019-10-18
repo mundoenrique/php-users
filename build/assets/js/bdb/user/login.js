@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
-		document.getElementById('btn-login').innerText = txtBtnLogin;
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}
