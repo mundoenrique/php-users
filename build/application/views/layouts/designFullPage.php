@@ -56,13 +56,13 @@
 	</div> -->
 
 	<!-- Modal -->
-	<div id="system-info" class="modal show">
+	<div id="system-info" class="modal modal-warning show">
       <div class="modal-dialog">
         <!--Content-->
         <div class="modal-content">
           <!--Header-->
-          <div class="modal-header bg-warning">
-            <h5 class="modal-title primary" id="ModalLabel">Modal title</h5>
+          <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">CPO - Banco Bogotá</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>

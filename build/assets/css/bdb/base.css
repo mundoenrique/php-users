@@ -1546,16 +1546,26 @@ ul.steps li.step-item span[class*=" icon-"] {
 }
 
 .modal-header {
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: justify;
+  align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: .3rem;
   border-top-right-radius: .3rem;
+}
+
+.modal-success .modal-header {
+	background-color: var(--success);
+}
+.modal-info .modal-header {
+	background-color: var(--info);
+}
+.modal-warning .modal-header {
+	background-color: var(--warning);
+}
+.modal-danger .modal-header {
+	background-color: var(--danger);
 }
 
 .modal-header .close {
@@ -1565,7 +1575,11 @@ ul.steps li.step-item span[class*=" icon-"] {
 
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.5;
+	line-height: 1.5;
+	color: var(--white);
+}
+.modal-warning .modal-title {
+	color: var(--primary);
 }
 
 .modal-body {
