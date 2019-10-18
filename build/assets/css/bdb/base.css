@@ -303,11 +303,6 @@ textarea.form-control {
 	transition: all 375ms ease-in-out;
 }
 
-.custom-select-wrapper{
-	width: 200px;
-
-}
-
 .custom-select-trigger:after {
 	position: absolute;
 	display: block;
