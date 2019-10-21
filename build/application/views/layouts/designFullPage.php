@@ -56,7 +56,7 @@
 	</div> -->
 
 	<!-- Modal -->
-	<div id="system-info" class="modal modal-warning show">
+	<div id="system-info" class="modal modal-warning">
       <div class="modal-dialog">
         <!--Content-->
         <div class="modal-content">

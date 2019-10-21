@@ -370,11 +370,7 @@ textarea.form-control {
 	padding: 5px 10px;
 	position: relative;
 	transition: all 375ms ease-in-out;
-}
-
-.custom-select-wrapper{
-	width: 200px;
-
+	color: var(--placeholder-color);
 }
 
 .custom-select-trigger:after {
@@ -450,6 +446,99 @@ textarea.form-control {
 .custom-option:hover {
 	background-color: #eeeeee;
 }
+
+/* Radio */
+
+.custom-control {
+	position: relative;
+	display: block;
+	min-height: 1.5rem;
+	padding-left: 1.5rem;
+}
+
+.custom-control-inline {
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+.custom-control-input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #007bff;
+  background-color: #007bff;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: #80bdff;
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+.custom-control-input:disabled ~ .custom-control-label {
+  color: #6c757d;
+}
+
+.custom-control-input:disabled ~ .custom-control-label::before {
+  background-color: #e9ecef;
+}
+
+.custom-control-label {
+  position: relative;
+  margin-bottom: 0;
+	margin-top: .25rem;
+	font-weight: var(--font-weight-base);
+	color:var(--text-color);
+}
+
+.custom-control-label::before {
+  position: absolute;
+  top: 0.25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  content: "";
+  background-color: #fff;
+  border: #adb5bd solid 1px;
+}
+
+.custom-control-label::after {
+  position: absolute;
+  top: 0.25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+  background: no-repeat 50% / 50% 50%;
+}
+
+.custom-radio .custom-control-label::before {
+  border-radius: 50%;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
 
 /* Validator */
 
@@ -1735,7 +1824,9 @@ ul.steps li.step-item span[class*=" icon-"] {
   background-color: #fff;
   background-clip: padding-box;
   border: 0;
-  border-radius: .125rem;
+	border-radius: .125rem;
+	border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;
   outline: 0;
   box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
 }
@@ -1743,14 +1834,25 @@ ul.steps li.step-item span[class*=" icon-"] {
 .modal-header {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: justify;
+  align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: .3rem;
   border-top-right-radius: .3rem;
+}
+
+.modal-success .modal-header {
+  background-color: var(--success);
+}
+.modal-info .modal-header {
+  background-color: var(--info);
+}
+.modal-warning .modal-header {
+  background-color: var(--warning);
+}
+.modal-danger .modal-header {
+  background-color: var(--danger);
 }
 
 .modal-header .close {
@@ -1760,7 +1862,12 @@ ul.steps li.step-item span[class*=" icon-"] {
 
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.5;
+	line-height: 1.5;
+	color: var(--secondary);
+}
+
+.modal-warning .modal-title {
+  color: var(--primary);
 }
 
 .modal-body {
