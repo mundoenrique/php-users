@@ -56,6 +56,17 @@ class NOVO_Model extends CI_Model {
 		if(isset($responseDecrypt->rc)) {
 			$this->isResponseRc = $responseDecrypt->rc;
 			switch($this->isResponseRc) {
+				case -1:
+					$this->response->code = 303;
+					$this->response->msg = lang('ERROR_(-1)');
+					$this->response->data = base_url('inicio');
+					$this->response->icon = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_ACCEPT'),
+						]
+					];
+					break;
 				case -29:
 				case -61:
 					$this->response->code = 303;
@@ -74,11 +85,11 @@ class NOVO_Model extends CI_Model {
 				default:
 					$this->response->code = 303;
 					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->icon = 'ui-icon-alert';
+					$this->response->className = 'modal-error';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> base_url('empresas'),
+							'link'=> base_url('inicio'),
 							'action'=> 'redirect'
 						]
 					];
@@ -86,11 +97,11 @@ class NOVO_Model extends CI_Model {
 		} else {
 			$this->response->code = 303;
 			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->icon = 'ui-icon-alert';
+			$this->response->className = 'modal-error';
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> lang('BUTTON_ACCEPT'),
-					'link'=> base_url('empresas'),
+					'link'=> base_url('inicio'),
 					'action'=> 'redirect'
 				]
 			];

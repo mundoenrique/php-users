@@ -101,7 +101,7 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 	});
 }
 
-function notiSystem(title, message, icon, data) {
+function notiSystem(title, message, type = 'modal-warning', data) {
 
 	var btnAccept = $('#accept');
 	var btnCancel = $('#cancel');
@@ -111,15 +111,15 @@ function notiSystem(title, message, icon, data) {
 	var btn2 = data.btn2;
 
 	dialogMoldal.dialog({
-		title: title,
 		modal: 'true',
+		title: 'title',
 		minHeight: 100,
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close', ui.dialog).hide();
-			$('#system-type').addClass(icon);
+			//$('#system-type').addClass(icon);
 			$('#system-msg').html(message);
 
 			createButton(dialogMoldal, btnAccept, btn1);
