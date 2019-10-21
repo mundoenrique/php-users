@@ -3,7 +3,8 @@
 <html lang="<?= LANGUAGE ?>">
 
 <head>
-  <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/vnd.microsoft.icon" href="<?= $this->asset->insertFile('favicon.ico','img',$countryUri); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>CPO - Banco Bogota</title>
@@ -43,45 +44,28 @@
 		</div>
 	</footer>
 
-	<!-- <div id="system-info" class="hidden">
-		<p>
-			<span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
-		</p>
-		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-			<div class="ui-dialog-buttonset novo-dialog-buttonset">
-				<button type="button" id="cancel" class="cancel-button novo-btn-secondary-modal dialog-buttons"><?= lang('BUTTON_CANCEL'); ?></button>
-				<button type="button" id="accept" class="novo-btn-primary-modal dialog-buttons"><?= lang('BUTTON_ACCEPT'); ?></button>
-			</div>
-		</div>
-	</div> -->
-
-	<!-- Modal -->
-	<div id="system-info" class="modal modal-warning">
-      <div class="modal-dialog">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Header-->
-          <div class="modal-header">
-            <h5 class="modal-title" id="ModalLabel">CPO - Banco Bogotá</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <!--Body-->
-          <div class="modal-body">
-            <p>
-              <span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
-            </p>
-          </div>
-          <!--Footer-->
-          <div class="modal-footer">
-            <button id="cancel" type="button" class="btn underline" data-dismiss="modal"><?= lang('BUTTON_CANCEL'); ?></button>
-            <button id="accept" type="button" class="btn btn-primary"><?= lang('BUTTON_ACCEPT'); ?></button>
-          </div>
+	<div id="system-info" name="system-info" class="modal modal-warning">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
         </div>
-        <!--/.Content-->
-      </div>
+        <div class="modal-body">
+        <p>
+            <span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
+        </p>
+        </div>
+        <div class="modal-footer">
+        <button id="cancel" type="button" class="btn underline" data-dismiss="modal"><?= lang('BUTTON_CANCEL'); ?></button>
+        <button id="accept" type="button" class="btn btn-primary"><?= lang('BUTTON_ACCEPT'); ?></button>
+        </div>
     </div>
+    </div>
+</div>
+
 
 	<?php
 		if($module == 'login') {

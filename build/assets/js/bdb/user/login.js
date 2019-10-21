@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				position: "left",
 				contents: response.msg
 			});
-			alert(response.msg)
+			notiSystem(response.title, response.msg, response.className, response.data);
 			restartForm(textBtn);
 		},
 		2: function(){
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		},
 		3: function(response, textBtn){
 			var dataLogin = getCredentialsUser();
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			notiSystem(response.title, response.msg, response.className, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
 				$('#accept').on('click', function() {
@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			restartForm(textBtn);
 		},
 		99: function(response, textBtn){
-			notiSystem(response.title, response.msg, response.icon, response.data);
-			alert(response.msg);
+			notiSystem(response.title, response.msg, response.className, response.data);
 			restartForm(textBtn);
 		}
 	}
@@ -101,9 +100,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		if(country == 'bp') {
 			document.getElementById("username").value = '';
 		}
-/*		setTimeout(function() {
-			$("#username").hideBalloon();
-		}, 2000); */
 	}
 
 	function getCredentialsUser()
@@ -127,12 +123,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			if (response.code !== 0 && response.owner === 'captcha'){
 
-				notiSystem(response.title, response.msg, response.icon, response.data);
+				notiSystem(response.title, response.msg, response.callName, response.data);
 				restartForm(dataValidateLogin.text);
-
-				setTimeout(function() {
-					$("#user_login").hideBalloon();
-				}, 2000);
 			} else {
 				validateResponseLogin(response, dataValidateLogin.text);
 			}
