@@ -542,19 +542,16 @@ textarea.form-control {
 
 /* Validator */
 
-.validation-spacing {
-	height: 1.125rem;
-}
-
-.form-control.has-error {
-	border-color: var(--danger);
-}
-
-div.has-error, .otro {
+.help-block {
+	height: 1rem;
 	margin-left: 4px;
 	font-size: 11px;
 	letter-spacing: .016em;
 	color: var(--danger);
+}
+
+.form-control.has-error {
+	border-color: var(--danger);
 }
 
 
