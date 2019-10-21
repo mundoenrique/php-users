@@ -9,7 +9,7 @@
 				<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
 					proporcionar los siguientes datos relacionados con su cuenta:</p>
 				<div class="max-width-1 fit-lg mx-auto pt-3">
-					<form method="post" id="form-verify-account">
+					<form method="post" id="formVerifyAccount">
 						<div class="row">
 							<div class="form-group col-lg-auto">
 								<label for="documentID">Documento de Identidad <abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
@@ -21,7 +21,7 @@
 							</div>
 						</div>
 						<div class="form-group form-check mt-4 mb-3">
-							<input id="acceptTerms" class="form-check-input" type="checkbox" name="acceptTerms" value="" required disabled>
+							<input id="acceptTerms" class="form-check-input" type="checkbox" name="acceptTerms" value="" required >
 							<label class="form-check-label" for="acceptTerms">
 								Acepto las <a class="" href="#" rel="section">condiciones de uso</a> de este sistema
 							</label>

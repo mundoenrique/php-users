@@ -1,24 +1,21 @@
 'use strict';
-
 document.addEventListener('DOMContentLoaded', function(){
-
 	//vars
 
 	//core
-	document.getElementById('btn-validar').addEventListener('click',function(e){
+	document.getElementById('btnValidar').addEventListener('click',function(e){
 		e.preventDefault();
 
-		var form = $('#form-verify-account');
+		var form = $('#formVerifyAccount');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
-			var document_id = document.getElementById('document-id').val;
-			var telephone_number = document.getElementById('telephone-number').val;
+			var document_id = document.getElementById('documentID').val;
 
 			var data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
-				telephone_number: telephone_number
+				telephone_number: document.getElementById('telephoneNumber').val
 			}
 
 			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
