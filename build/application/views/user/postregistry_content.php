@@ -13,33 +13,33 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="IdType">Tipo de identificación</label>
-								<input id="IdType" class="form-control" name="IdType" type="text" value="" readonly="readonly">
+								<input id="IdType" class="form-control" name="IdType" type="text" readonly="readonly">
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="IdNumber">Número de identificación</label>
-								<input id="IdNumber" class="form-control" maxlength="16" name="IdNumber" type="text" value="" readonly="readonly"/>
+								<input id="IdNumber" class="form-control" name="IdNumber" type="text" readonly="readonly"/>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="firstName">Primer nombre</label>
-								<input id="firstName" maxlength="35" name="firstName" type="text" placeholder="Primer nombre" value="" class="form-control"/>
+								<input id="firstName" name="firstName" type="text" placeholder="Primer nombre" class="form-control"/>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Segundo nombre</label>
-                <input id="lastName" class="form-control" maxlength="35" name="lastName" type="text"/>
+                <input id="lastName" class="form-control" name="lastName" type="text"/>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-                <input id="lastName" maxlength="35" name="lastName" type="text" placeholder="Apellido paterno" value="" class="form-control"/>
+                <input id="lastName" name="lastName" type="text" placeholder="Apellido paterno" class="form-control"/>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido materno</label>
-                <input id="lastName" maxlength="35" name="segundo_apellido" type="text" class="form-control"/>
+                <input id="lastName" name="segundo_apellido" type="text" class="form-control"/>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label>Fecha de Nacimiento</label>
 								<div class="form-row align-items-center">
 									<div class="col-3">
-										<input maxlength="2" id="day" class="form-control" name="day" type="text" placeholder="Dia" autocomplete="off">
+										<input maxlength="2" id="day" class="form-control" name="day" type="text" placeholder="Dia">
 									</div>
 										<div class="col-6">
 											<select class="bg-secondary custom-select" placeholder="Mes" name="month" id="month">
@@ -58,7 +58,7 @@
 											</select>
 										</div>
 										<div class="col-3">
-											<input maxlength="4" id="year" name="year" type="text" placeholder="Año" autocomplete="off" class="form-control">
+											<input maxlength="4" id="year" name="year" type="text" placeholder="Año" class="form-control">
 										</div>
 								</div>
 							</div>
@@ -74,6 +74,55 @@
 								</div>
 							</div>
 						</div>
+
+						<h3 class="tertiary h4">Datos de contacto</h3>
+						<div class="row">
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="email">Correo Electrónico</label>
+								<input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com">
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="confirmEmail">Confirmar Correo Electrónico</label>
+								<input type="email" class="form-control" id="confirmEmail" name="confirmEmail" placeholder="usuario@ejemplo.com">
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="landLine">Teléfono fijo</label>
+								<input id="landLine" name="landLine" type="text" placeholder="Primer nombre" class="form-control"/>
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="mobilePhone">Teléfono móvil</label>
+                <input id="mobilePhone" class="form-control" name="mobilePhone" type="text"/>
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="otherPhone">Otro Teléfono (Tipo)</label>
+								<select class="bg-secondary custom-select" placeholder="Seleccione" name="otherPhone" id="otherPhone">
+									<option value="OFC">Laboral</option>
+									<option value="FAX">Fax</option>
+									<option value="OTRO">Otro</option>
+								</select>
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="otherPhoneNum">Otro Teléfono (Número)</label>
+                <input id="otherPhoneNum" name="otherPhoneNum" type="text" class="form-control"/>
+							</div>
+						</div>
+
+						<h3 class="tertiary h4">Datos de usuario</h3>
+						<div class="row">
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="username">Usuario</label>
+								<input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="userpwd">Contraseña</label>
+								<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Contraseña">
+							</div>
+							<div class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="confirmUserpwd">Confirmar Contraseña</label>
+								<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd" placeholder="Confirmar Contraseña">
+							</div>
+						</div>
+
 						<div class="flex items-center justify-end pt-3 border-top">
 							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
 							<button id="validar" class="btn btn-primary" type="submit">Continuar</button>
