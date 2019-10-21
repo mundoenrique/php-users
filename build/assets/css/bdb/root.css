@@ -136,8 +136,8 @@
   --button-large-padding-x: 1.75rem;
 
   /* Responsive breakpoints */
-  /* Medium: 768px -> 48em | Large: 992px -> 62em */
+  /* Medium: 768px -> 48em | Large: 992px -> 62em | Extra large: 1200px -> 75em */
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
-
+  --breakpoint-xl: 1200px;
 }
