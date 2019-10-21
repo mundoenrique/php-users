@@ -257,6 +257,17 @@ Normalize is licensed MIT. https://github.com/necolas/normalize.css */
 	 -webkit-appearance: button;
  }
 
+/**
+ * Opinionated: add "hand" cursor to non-disabled button elements.
+ */
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
+  cursor: pointer;
+}
+
  /**
 	* Remove the inner border and padding in Firefox.
 	*/
