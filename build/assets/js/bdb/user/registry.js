@@ -1,6 +1,8 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function(){
 	//vars
+	var fase1 = document.getElementById("preRegistry");
+	var fase2 = document.getElementById("postRegistry");
 
 	//core
 	document.getElementById('btnValidar').addEventListener('click',function(e){
@@ -20,7 +22,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
 				//TODO procesar response
-				console.log(response.data);
+				if (response.code == 0) {
+					console.log(response.data);
+					var  datosUsuario, primerNombre, segundoNombre, primerApellido, segundoApellido, telefono, id_ext_per,fechaNacimiento, tipo_id_ext_per, id_ext_emp, aplicaPerfil, isDriver;
+
+					datosUsuario = response.data.dataUser.user
+					primerNombre = datosUsuario.primerNombre;
+					segundoNombre = datosUsuario.segundoNombre;
+					primerApellido = datosUsuario.primerApellido;
+					segundoApellido = datosUsuario.segundoApellido;
+					telefono = datosUsuario.telefono;
+					id_ext_per = datosUsuario.id_ext_per;
+					fechaNacimiento = datosUsuario.fechaNacimiento;
+					tipo_id_ext_per = datosUsuario.tipo_id_ext_per;
+					id_ext_emp = datosUsuario.id_ext_emp;
+					aplicaPerfil = datosUsuario.aplicaPerfil;
+					isDriver = datosUsuario.isDriver;
+
+					document.getElementById('idType').value = tipo_id_ext_per;
+					document.getElementById('idNumber').value = id_ext_per;
+					document.getElementById('firstName').value = primerNombre;
+					document.getElementById('middleName').value = segundoNombre;
+					document.getElementById('lastName').value = primerApellido;
+					document.getElementById('secondSurname').value = segundoNombre;
+
+
+
+
+					fase1.classList.toggle("none");
+					fase2.classList.toggle("none");
+				}
 			});
 
 		}else{
