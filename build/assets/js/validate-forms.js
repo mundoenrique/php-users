@@ -48,12 +48,10 @@ function validateForms(form, options) {
 		ignore: ".ignore",
 		errorElement: 'div',
 		highlight: function(element, errorClass, validClass) {
-			$(element).closest('.form-group').find('.validation-spacing').addClass("none");
 			$(element).addClass(errorClass).removeClass(validClass);
 			$(element.form).find("label[for=" + element.id + "]").addClass(errorClass);
 		},
 		unhighlight: function(element, errorClass, validClass) {
-			$(element).closest('.form-group').find('.validation-spacing').removeClass("none");
 			$(element).removeClass(errorClass).addClass(validClass);
 			$(element.form).find("label[for=" + element.id + "]").removeClass(errorClass);
 		}
@@ -97,8 +95,11 @@ function validateForms(form, options) {
 			telephoneNumber: { required: true, pattern: telephoneNumber },
 			acceptTerms: 'required'
 		},
-		errorPlacement: function(error, element) {
-				error.appendTo( element.parent("div") );
+		// errorPlacement: function(error, element) {
+		// 		error.appendTo( element.parent("div") );
+		// }
+		errorPlacement : function(error, element) {
+			$(element).closest('.form-group').find('.help-block').html(error.html());
 		}
 	});
 
