@@ -336,13 +336,21 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 
-		$this->dataAccessLog->modulo = 'login';
-		$this->dataAccessLog->function = 'login';
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->canal = 'personasWeb';
+		$this->dataAccessLog->function = 'validar cuenta';
 		$this->dataAccessLog->operation = '18';
-		$this->dataAccessLog->userName = $dataRequest->documentID+$fechaRegistro;
+		$this->dataAccessLog->userName = $dataRequest->id_ext_per+$fechaRegistro;
+/* fake data */
+		$this->dataAccessLog->sessionId = "";
+		$this->dataAccessLog->canal = "personasWeb";
+		$this->dataAccessLog->RC = 0;
+		$this->dataAccessLog->IP = "::1";
+		$this->dataAccessLog->dttimesstamp = "10\/21\/2019 15:28";
+		$this->dataAccessLog->lenguaje = "ES"	;
 
-		$this->dataRequest->id_ext_per = $dataRequest->documentID;
-		$this->dataRequest->telephoneNumber = $dataRequest->telephoneNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
+		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 
 /* fake data */
 		$this->dataRequest->cuenta = "6048411619458425";
@@ -350,148 +358,31 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->claveWeb = "9d98257cef258260de0cf058ff3e93d7";
 		$this->dataRequest->id_ext_per = "15200249";
 
-/* request valida
-"{
-	"idOperation":"18","className":"com.novo.objects.TOs.CuentaTO",
-	"pais":"Ve",
-	"cuenta":"6048411619458425", ----- NO LA TENGO
-	"id_ext_per":"15200249","pin":"6e08dc8e4e3ac59d3c61dc0ff2f59c7c", ???"claveWeb":"9d98257cef258260de0cf058ff3e93d7", ???"logAccesoObject":
-			{"sessionId":"",
-				"userName":"15200249181019",
-				"canal":"personasWeb",
-				"modulo":"validar cuenta",
-				"function":"validar cuenta",
-				"operacion":"validar cuenta",
-				"RC":0,
-				"IP":"::1",
-				"dttimesstamp":"10\/18\/2019 15:41",
-				"lenguaje":"ES"
-			},
-		"token":""
-	}"
-
-idOperation:"18"
-className:"com.novo.objects.TOs.CuentaTO"
-logAccesoObject:array(10)
-token:"6e8854e0a39ec243673a73bb0e466c9c"
-pais:"bdb"
-	*/
-
 		$response = $this->sendToService('User');
 		if($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
 			switch($this->isResponseRc) {
 				case 0:
-					log_message('DEBUG', 'NOVO ['.$this->dataRequest->userName.'] RESPONSE: Login: ' . json_encode($response->userName));
-					if ($this->isUserLoggedIn($dataRequest->user)) {
+					$newdata	= array(
+						'userName'	=> $this->dataAccessLog->userName,
+						'pais'		=> $this->dataRequest->pais,
+						'id_ext_per'	=> $this->dataRequest->id_ext_per,
+							'token'		=> $this->token,
+							'sessionId'	=> "f98d07e6927f8f3ada10a909cca1dec7",
+							'keyId'		=> "MTgyNjcxMDg=",
+							'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
+						);
+					$this->session->set_userdata($newdata);
 
-						$userData = [
-							'idUsuario' => $response->idUsuario,
-							'userName' => $response->userName,
-							'nombreCompleto' => strtolower(substr($response->primerNombre, 0, 18)) . ' ' . strtolower(substr($response->primerApellido, 0, 18)),
-							'token' => $response->token,
-							'sessionId' => $response->logAccesoObject->sessionId,
-							'keyId' => $response->keyUpdate,
-							'logged_in' => true,
-							'pais' => $response->codPais,
-							'aplicaTransferencia' => $response->aplicaTransferencia,
-							'passwordOperaciones' => $response->passwordOperaciones,
-							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
-							'afiliado' => $response->afiliado,
-							'aplicaPerfil' => $response->aplicaPerfil,
-							'tyc' => $response->tyc
-						];
-						$this->session->set_userdata($userData);
-						$this->response->code = 0;
-						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = "http://localhost/site-conexionpersonas/build/dashboard";
-						//$this->response->data = base_url('empresas');
+					$desdata = json_decode('{"code":0,"title":null,"msn":null,"modalType":"","dataUser":{"user":{"primerNombre":"JULIO","segundoNombre":"","primerApellido":"VASQUEZ","segundoApellido":"","telefono":"","id_ext_per":"15200249","fechaNacimiento":"","tipo_id_ext_per":"CI","id_ext_emp":"J-00000002-2","aplicaPerfil":"N","isDriver":0,"rc":0},"registroValido":true,"corporativa":true,"pais":"Ve","afiliacion":{"notarjeta":"","idpersona":"15200249","nombre1":"","nombre2":"","apellido1":"","apellido2":"","fechanac":"","sexo":"","codarea1":"","telefono1":"","telefono2":"","correo":"","direccion":"","distrito":"","provincia":"","departamento":"","edocivil":"","labora":"","centrolab":"","fecha_reg":"","estatus":"","notifica":"","fecha_proc":"","fecha_afil":"","tipo_id":"","fecha_solicitud":"","antiguedad_laboral":"","profesion":"","cargo":"","ingreso_promedio_mensual":"","cargo_publico_last2":"","cargo_publico":"","institucion_publica":"","uif":"","lugar_nacimiento":"","nacionalidad":"","punto_venta":"","cod_vendedor":"","dni_vendedor":"","cod_ubigeo":"","dig_verificador":"","telefono3":"","tipo_direccion":"","cod_postal":"","ruc_cto_laboral":"J-00000002-2","aplicaPerfil":"","cod_miscelaneo2":"AF","afiliado":"","acepta_contrato":"N","dig_verificador_aux":"","rif":"","isTarjetaAdicional":false,"isContratoIndividual":false},"rc":0,"msg":"Proceso OK","token":"7b88426f16e6dc762a0603bf0bed8764","logAccesoObject":{"sessionId":"f98d07e6927f8f3ada10a909cca1dec7","userName":"15200249211019","canal":"personasWeb","modulo":"REGISTRO USUARIO","funcion":"REGISTRO USUARIO","operacion":"VERIFICAR CUENTA PRINCIPAL","RC":0,"OBS":"Proceso OK","IP":"::1","dttimesstamp":"10\/21\/2019 16:39","lenguaje":"ES"},"keyUpdate":"MTgyNjcxMDg="}}');
 
-						$data = ['username' => $dataRequest->user];
-						$this->db->where('id', $this->session->session_id);
-						$this->db->update('cpo_sessions', $data);
-
-					} else {
-						$this->response->code = -5;
-						$this->response->msg = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
-					}
-
-					break;
-				case -2:
-				case -185:
-					$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
-					$userData = [
-						'sessionId' => $response->logAccesoObject->sessionId,
-						'idUsuario' => $response->usuario->idUsuario,
-						'userName' => $response->usuario->userName,
-						'fullName' => $fullName,
-						'codigoGrupo' => $response->usuario->codigoGrupo,
-						'token' => $response->token,
-						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-						'countrySess' => $this->config->item('country')
-					];
-
-					$this->session->set_userdata($userData);
 
 					$this->response->code = 0;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->data = base_url('inf-condiciones');
-					$this->session->set_flashdata('changePassword', 'newUser');
-					$this->session->set_flashdata('userType', $response->usuario->ctipo);
+					$this->response->data = $desdata;
+					$this->response->title = '';
+					$this->response->msg = '';
+					$this->response->icon = '';
 
-					if($this->isResponseRc === -185) {
-						$this->response->code = 0;
-						$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = base_url('cambiar-clave');
-						$this->session->set_flashdata('changePassword', 'expiredPass');
-						break;
-					}
-					break;
-				case -1:
-				case -263:
-					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->className = 'error-login-2';
-					break;
-				case -8:
-				case -35:
-					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->className = 'login-inactive';
-					break;
-				case -229:
-					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					break;
-				case -262:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-info';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					break;
-				case -28:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> [
-								'who'=> 'User',
-								'where'=> 'FinishSession'
-							],
-							'action'=> 'logout'
-						]
-					];
 					break;
 			}
 		}

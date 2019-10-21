@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
-			var document_id = document.getElementById('documentID').val;
+			var document_id = document.getElementById('documentID').value;
 
 			var data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
-				telephone_number: document.getElementById('telephoneNumber').val
+				telephone_number: document.getElementById('telephoneNumber').value
 			}
 
 			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
 				//TODO procesar response
-				console.log(response);
+				console.log(response.data);
 			});
 
 		}else{
