@@ -171,11 +171,11 @@ class User extends NOVO_Controller {
 		redirect(base_url('inicio'), 'location');
 	}
 
-	public function registry()
+	public function preRegistry()
 	{
-		$view = 'registry';
+		$view = 'pre_registry';
 
-		log_message('INFO', 'NOVO User: registry Method Initialized');
+		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
@@ -195,11 +195,18 @@ class User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function postregistry()
+	public function registry()
 	{
-		$view = 'postregistry';
+		$view = 'registry';
+		if(!$this->session->flashdata('registryUser')) {
 
-		log_message('INFO', 'NOVO User: postregistry Method Initialized');
+			redirect(base_url('inicio'), 'location');
+			exit();
+		}
+		$this->session->set_flashdata('registryUserData', $this->session->flashdata('registryUserData'));
+		$this->session->set_flashdata('registryUser', $this->session->flashdata('registryUser'));
+
+		log_message('INFO', 'NOVO User: registry Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
@@ -215,6 +222,7 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
+		$this->render->data = $this->session->flashdata('registryUserData');
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}

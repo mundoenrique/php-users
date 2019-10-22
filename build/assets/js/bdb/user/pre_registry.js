@@ -21,8 +21,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 
 			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
+
 				if (response.code == 0) {
-					console.log(response);
+					$$.location.href = response.data;
 				}
 			});
 
@@ -30,25 +31,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			console.log('form no paso la validacion');
 		}
 	});
-
-	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
-		e.preventDefault();
-		var objFields = {};
-
-		this.querySelectorAll('input').forEach(
-			function(currentValue, currentIndex, listObj) {
-				objFields[currentValue.getAttribute('id')] = currentValue.getAttribute('id');
-			}
-		);
-
-		objFields.cpo_name = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-
-		dataRequest = CryptoJS.AES.encrypt(stringJSON.stringify(objFields), objFields.cpo_name, {format: CryptoJSAesJson}).toString();
-
-	});
-
 
 	//functions
 	function formatDate_ddmmy(dateToFormat)
@@ -70,6 +52,36 @@ $$.addEventListener('DOMContentLoaded', function(){
 				day = '0' + day;
 		}
 		return month + day + year;
+	}
+
+	function redirectPost(url, data, csrf) {
+
+		/* var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		); */
+		// call this function --> redirectPost(response.data, response.msg.dataUser.user, cpo_cook);
+
+    var form = $$.createElement('form');
+    $$.body.appendChild(form);
+    form.method = 'post';
+    form.action = url;
+    for (var name in data) {
+			var input = $$.createElement('input');
+			input.type = 'hidden';
+			input.name = name;
+			input.id = name;
+			input.value = data[name] || ' ';
+			form.appendChild(input);
+		}
+
+		var input = $$.createElement('input');
+		input.type = 'hidden';
+		input.name = 'cpo_name';
+		input.id = 'cpo_name';
+		input.value = csrf;
+		form.appendChild(input);
+
+    form.submit();
 	}
 
 });
