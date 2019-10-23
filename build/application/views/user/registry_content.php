@@ -4,9 +4,9 @@
 			<h1 class="primary h0">Registro</h1>
 		</header>
 		<section>
-			<pre>
-				<?php var_dump($data->dataUser); ?>
-			</pre>
+<!-- 			<pre>
+				<?php //var_dump($data->dataUser->logAccesoObject->userName); ?>
+			</pre> -->
 			<div class="border-top pt-3">
 				<h2 class="tertiary h3">Afiliación de Datos</h2>
 				<p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a continuación:</p>
@@ -31,7 +31,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="middleName">Segundo nombre</label>
-								<input id="middleName" class="form-control" name="middleName" type="text"  value="<?= $data->dataUser->user->segundoNombre;?>"/>
+								<input id="middleName" class="form-control" name="middleName" type="text" value="<?= $data->dataUser->user->segundoNombre;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -90,7 +90,7 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="email">Correo Electrónico</label>
-								<input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com">
+								<input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" value="<?= $data->dataUser->afiliacion->correo?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -100,12 +100,12 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="landLine">Teléfono fijo</label>
-								<input id="landLine" name="landLine" type="text" placeholder="Primer nombre" class="form-control"/>
+								<input id="landLine" name="landLine" type="text" class="form-control" value="<?= $data->dataUser->afiliacion->telefono1?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="mobilePhone">Teléfono móvil</label>
-								<input id="mobilePhone" class="form-control" name="mobilePhone" type="text"/>
+								<input id="mobilePhone" class="form-control" name="mobilePhone" type="text" value="<?= $data->dataUser->afiliacion->telefono2?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
