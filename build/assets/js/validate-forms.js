@@ -3,6 +3,7 @@
 function validateForms(form, options) {
 	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
+	var generalPhoneNumber = /^[0-9]{7,14}+$/;
 	var validCountry = typeof country!=='undefined'? country : isoPais;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
@@ -18,6 +19,7 @@ function validateForms(form, options) {
 	var numeric = /^[0-9]+$/;
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
+	var onlyAlphabetic = /^['a-zA-ZñÑáéíóúÁÉíÓÚ ']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
 	var fiscalReg = {
 		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,

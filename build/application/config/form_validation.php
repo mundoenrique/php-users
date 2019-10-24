@@ -1,18 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'validatecaptcha' => [
-		[
-			'field' => 'user',
-			'label' => 'user',
-			'rules' => 'trim|regex_match[/^([\wñÑ*.-]+)+$/i]|required'
-		],
-		[
-			'field' => 'token',
-			'label' => 'token',
-			'rules' => 'trim|required'
-		]
-	],
 	'login' => [
 
 		[
@@ -37,7 +25,26 @@ $config = [
 		]
 	],
 	'registry' => [
-
+		[
+			'field' => 'idType',
+			'label' => 'idType',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'firstName',
+			'label' => 'firstName',
+			'rules' => 'trim|alpha|required'
+		],
+		[
+			'field' => 'middleName',
+			'label' => 'middleName',
+			'rules' => 'trim|alpha'
+		],
 	],
 	'finishsession' => [
 		[
