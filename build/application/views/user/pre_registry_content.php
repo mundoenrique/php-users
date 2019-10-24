@@ -12,13 +12,13 @@
 					<form method="post" id="formVerifyAccount">
 						<div class="row">
 							<div class="form-group col-lg-auto">
-								<label for="documentID">Documento de Identidad <abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
-								<input id="documentID" class="form-control" name="documentID" type="text">
+								<label for="documentID">Documento de Identidad</label>
+								<input id="documentID" class="form-control" type="text" placeholder="12345678" name="documentID">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-auto">
-								<label for="telephoneNumber">Número de teléfono <abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
-								<input id="telephoneNumber" class="form-control" name="telephoneNumber" type="text">
+								<label for="telephoneNumber">Número de teléfono</label>
+								<input id="telephoneNumber" class="form-control" type="text"  placeholder="04161112233" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
 						</div>
