@@ -109,7 +109,7 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { class: 'btn btn-primary', link: false, action: 'close', text: msgAccept };
-	var btn2 = typeof data.btn2 === "undefined" || !data.btn2 ? { class: 'btn underline', link: false, action: 'close', text: msgCancel } : data.btn2;
+	var btn2 = data.btn2;
 	var btnAccept, btnCancel;
 
 	dialogMoldal.dialog({
@@ -128,13 +128,15 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 		},
 		buttons: [
 			{
-				text: btn2.text,
+				text: 'Cancelar',
 				id: 'cancel',
-				class: btn2.class,
+				class: 'btn underline',
 				type: 'button',
 				click: function() {
-					if (btn2.action === 'redirect') {
-						$(location).attr('href', btn2.link);
+					if (btn2) {
+						if (btn2.action === 'redirect') {
+							$(location).attr('href', btn2.link);
+						}
 					} else {
 						$( this ).dialog( "close" );
 					}
