@@ -8,6 +8,29 @@ $$.addEventListener('DOMContentLoaded', function(){
 	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
 		e.preventDefault();
 
+		var form = $('#formRegistry');
+		validateForms(form, {handleMsg: false});
+		if(form.valid()) {
+
+			var document_id = $$.getElementById('documentID').value;
+
+			var data = {
+				userName: document_id + '' + formatDate_ddmmy(new Date),
+				id_ext_per: document_id,
+				telephone_number: $$.getElementById('telephoneNumber').value
+			}
+
+			callNovoCore('POST', 'User', 'registry', data, function(response) {
+
+				if (response.code == 0) {
+					$$.location.href = response.data;
+				}
+			});
+
+		}else{
+			console.log('form no paso la validacion');
+		}
+
 
 
 

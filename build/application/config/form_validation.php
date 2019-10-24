@@ -26,7 +26,7 @@ $config = [
 			'rules' => 'trim|required'
 		]
 	],
-	'registryvalidation' => [
+	'verifyaccount' => [
 		[
 			'field' => 'plot',
 			'rules' => 'trim|required'
@@ -35,6 +35,9 @@ $config = [
 			'field' => 'request',
 			'rules' => 'trim|required'
 		]
+	],
+	'registry' => [
+
 	],
 	'finishsession' => [
 		[

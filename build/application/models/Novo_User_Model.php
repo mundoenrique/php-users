@@ -388,6 +388,15 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->response;
 	}
 
+
+	public function registry(){
+
+		$this->response->code = 0;
+		$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+
+		return $this->response;
+	}
+
 	public function isUserLoggedIn($username)
 	{
 		$sql = $this->db->select(array('id','username'))
