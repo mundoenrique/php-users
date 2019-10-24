@@ -20,7 +20,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				telephone_number: $$.getElementById('telephoneNumber').value
 			}
 
-			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
+			callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
 
 				if (response.code == 0) {
 					$$.location.href = response.data;

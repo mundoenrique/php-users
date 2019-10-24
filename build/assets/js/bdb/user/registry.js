@@ -5,34 +5,20 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 
 	//core
-	$$.getElementById('btnValidar').addEventListener('click',function(e){
-		e.preventDefault();
-
-		var form = $('#formVerifyAccount');
-		validateForms(form, {handleMsg: false});
-		if(form.valid()) {
-
-			var document_id = $$.getElementById('documentID').value;
-
-			var data = {
-				userName: document_id + '' + formatDate_ddmmy(new Date),
-				id_ext_per: document_id,
-				telephone_number: $$.getElementById('telephoneNumber').value
-			}
-
-			callNovoCore('POST', 'User', 'registryValidation', data, function(response) {
-				if (response.code == 0) {
-					console.log(response);
-				}
-			});
-
-		}else{
-			console.log('form no paso la validacion');
-		}
-	});
-
 	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
 		e.preventDefault();
+
+
+
+
+
+
+
+
+
+
+
+
 		var objFields = {};
 
 		this.querySelectorAll('input').forEach(
@@ -45,10 +31,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 		);
 
-		dataRequest = CryptoJS.AES.encrypt(stringJSON.stringify(objFields), objFields.cpo_name, {format: CryptoJSAesJson}).toString();
+		var dataRequest = CryptoJS.AES.encrypt(JSON.stringify(objFields), objFields.cpo_name, {format: CryptoJSAesJson}).toString();
 
 	});
-
 
 	//functions
 	function formatDate_ddmmy(dateToFormat)

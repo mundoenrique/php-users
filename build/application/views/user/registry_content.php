@@ -1,4 +1,4 @@
-<div id="postRegistry" class="registro-content h-100 bg-white">
+<div id="registry" class="registro-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="primary h0">Registro</h1>

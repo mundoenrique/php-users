@@ -173,7 +173,7 @@ class User extends NOVO_Controller {
 
 	public function preRegistry()
 	{
-		$view = 'pre_registry';
+		$view = 'validate';
 
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
 		array_push(

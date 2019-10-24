@@ -327,7 +327,7 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->response;
 	}
 
-	public function callWs_registryValidation_User($dataRequest)
+	public function callWs_verifyAccount_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registry Validation method Initialized');
 
@@ -381,7 +381,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_flashdata('registryUserData', $desdata);
 
 					$this->response->code = 0;
-					$this->response->data = base_url('postregistro');
+					$this->response->data = base_url('registro');
 					break;
 			}
 		}
