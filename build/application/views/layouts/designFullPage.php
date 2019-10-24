@@ -44,27 +44,9 @@
 		</div>
 	</footer>
 
-	<div id="system-info" name="system-info" class="modal modal-warning">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-        </div>
-        <div class="modal-body">
-        <p>
-            <span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span>
-        </p>
-        </div>
-        <div class="modal-footer">
-        <button id="cancel" type="button" class="btn underline" data-dismiss="modal"><?= lang('BUTTON_CANCEL'); ?></button>
-        <button id="accept" type="button" class="btn btn-primary"><?= lang('BUTTON_ACCEPT'); ?></button>
-        </div>
-    </div>
-    </div>
-</div>
+	<div id="system-info" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>" accept="<?= lang('BUTTON_ACCEPT'); ?>">
+		<p><span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span></p>
+	</div>
 
 
 	<?php

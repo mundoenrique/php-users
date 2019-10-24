@@ -69,9 +69,10 @@ function callNovoCore(verb, who, where, data, _response_) {
 		icon = iconWarning;
 		data = {
 			btn1: {
-				class: 'novo-btn-primary-modal',
+				class: 'btn btn-primary',
 				link: false,
-				action: 'close'
+				action: 'close',
+				text: 'Aceptar'
 			}
 		};
 		notiSystem(title, null, icon, data);
@@ -103,32 +104,63 @@ function createButton(dialogMoldal, elementBotton, valuesButton){
 
 function notiSystem(title, message, type = 'modal-warning', data) {
 
-	var btnAccept = $('#accept');
-	var btnCancel = $('#cancel');
+	var msgAccept = $('#system-info').attr("accept");
+	var msgCancel = $('#system-info').attr("cancel");
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
-	var btn1 = data.btn1 || { link: false, action: 'close', text: btnAccept.text()};
-	var btn2 = data.btn2;
+	var btn1 = data.btn1 || { class: 'btn btn-primary', link: false, action: 'close', text: msgAccept };
+	var btn2 = typeof data.btn2 === "undefined" || !data.btn2 ? { class: 'btn underline', link: false, action: 'close', text: msgCancel } : data.btn2;
+	var btnAccept, btnCancel;
 
 	dialogMoldal.dialog({
 		modal: 'true',
-		title: 'title',
-		minHeight: 100,
+		title: 'CPO - Banco Bogota',
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close', ui.dialog).hide();
-			//$('#system-type').addClass(icon);
-			$('#system-msg').html(message);
-
-			createButton(dialogMoldal, btnAccept, btn1);
+		height: "auto",
+		width: 400,
+		show: {
+			duration: 250
+		},
+		hide: {
+			duration: 250
+		},
+		buttons: [
+			{
+				text: btn2.text,
+				id: 'cancel',
+				class: btn2.class,
+				type: 'button',
+				click: function() {
+					if (btn2.action === 'redirect') {
+						$(location).attr('href', btn2.link);
+					} else {
+						$( this ).dialog( "close" );
+					}
+				}
+			},
+			{
+				text: btn1.text,
+				id: 'accept',
+				class: btn1.class,
+				type: 'button',
+				click: function() {
+					if (btn1.action === 'redirect') {
+						$(location).attr('href', btn1.link);
+					} else {
+						$( this ).dialog( "close" );
+					}
+				}
+			}
+		],
+		create: function( event, ui ) {
+			btnAccept = $('#accept');
+			btnCancel = $('#cancel');
+			btnAccept.removeClass("ui-button ui-corner-all ui-widget");
+			btnCancel.removeClass("ui-button ui-corner-all ui-widget");
 			if (!btn2) {
 				btnCancel.hide();
-				btnAccept.css('margin', '0');
-				$('.novo-dialog-buttonset').css('width', '80px');
-			}else{
-				createButton(dialogMoldal, btnCancel, btn2);
 			}
 		}
 	});
