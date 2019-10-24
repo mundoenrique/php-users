@@ -45,41 +45,18 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label>Fecha de Nacimiento</label>
-								<div class="form-row align-items-center">
-									<div class="col-3">
-										<input maxlength="2" id="day" class="form-control" name="day" type="text" placeholder="Dia">
-									</div>
-										<div class="col-6">
-											<select class="bg-secondary custom-select" placeholder="Mes" name="month" id="month">
-												<option value="01">Enero</option>
-												<option value="02">Febrero</option>
-												<option value="03">Marzo</option>
-												<option value="04">Abril</option>
-												<option value="05">Mayo</option>
-												<option value="06">Junio</option>
-												<option value="07">Julio</option>
-												<option value="08">Agosto</option>
-												<option value="09">Septiembre</option>
-												<option value="10">Octubre</option>
-												<option value="11">Noviembre</option>
-												<option value="12">Diciembre</option>
-											</select>
-										</div>
-										<div class="col-3">
-											<input maxlength="4" id="year" name="year" type="text" placeholder="Año" class="form-control">
-										</div>
-								</div>
+								<label for="birthDate">Fecha de Nacimiento</label>
+								<input type="text" id="birthDate" name="birthDate" class="form-control">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label class="block">Sexo</label>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="genderMale" name="gender" class="custom-control-input">
+									<input type="radio" id="genderMale" name="gender" class="custom-control-input" value="M">
 									<label class="custom-control-label" for="genderMale">Masculino</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="genderFemale" name="gender" class="custom-control-input">
+									<input type="radio" id="genderFemale" name="gender" class="custom-control-input" value="F">
 									<label class="custom-control-label" for="genderFemale">Femenino</label>
 								</div>
 								<div class="help-block"></div>
@@ -110,7 +87,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhone">Otro Teléfono (Tipo)</label>
-								<select class="bg-secondary custom-select" placeholder="Seleccione" name="otherPhone" id="otherPhone">
+								<select class="bg-secondary custom-select" placeholder="Seleccione" name="phoneType" id="phoneType">
 									<option value="OFC">Laboral</option>
 									<option value="FAX">Fax</option>
 									<option value="OTRO">Otro</option>

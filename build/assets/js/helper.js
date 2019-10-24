@@ -145,7 +145,7 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 			{
 				text: btn1.text,
 				id: 'accept',
-				class: btn1.class,
+				class: 'btn btn-primary',
 				type: 'button',
 				click: function() {
 					if (btn1.action === 'redirect') {
@@ -164,6 +164,7 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 			if (!btn2) {
 				btnCancel.hide();
 			}
+			dialogMoldal.removeClass("none");
 		}
 	});
 }

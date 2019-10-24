@@ -4,6 +4,10 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 
+	$( "#birthDate" ).datepicker( {
+		dateFormat: "dd/mm/yy"
+	});
+
 	//core
 	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
 		e.preventDefault();

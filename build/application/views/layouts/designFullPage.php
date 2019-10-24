@@ -44,7 +44,7 @@
 		</div>
 	</footer>
 
-	<div id="system-info" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>" accept="<?= lang('BUTTON_ACCEPT'); ?>">
+	<div id="system-info" class="none" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>" accept="<?= lang('BUTTON_ACCEPT'); ?>">
 		<p><span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span></p>
 	</div>
 

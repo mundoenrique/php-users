@@ -2,6 +2,7 @@
 'use strict'
 function validateForms(form, options) {
 	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
+	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var validCountry = typeof country!=='undefined'? country : isoPais;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
@@ -40,6 +41,8 @@ function validateForms(form, options) {
 		'us': 'RUC',
 		've': 'RIF'
 	};
+	var gender = /^[mfMF]$/;
+	var phoneType = /^(OFC|FAX|OTRO)$/;
 	var defaults = {
 		debug: true,
 		errorClass: "has-error",
@@ -91,13 +94,25 @@ function validateForms(form, options) {
 		rules: {
 			username: { required: true, pattern: alphanumber },
 			userpwd: { required: true, pattern: userPassword },
+			confirmUserpwd: { required: true, equalTo: "#userpwd" },
 			documentID: { required: true, pattern: onlyNumber },
 			telephoneNumber: { required: true, pattern: telephoneNumber },
-			acceptTerms: 'required'
+			acceptTerms: 'required',
+			idType: { required: true, pattern: alphabetical },
+			idNumber: { required: true, pattern: onlyNumber },
+			firstName: { required: true, pattern: alphabetical },
+			middleName: { pattern: alphabetical },
+			lastName: { required: true, pattern: alphabetical },
+			secondSurname: { pattern: alphabetical },
+			birthDate: { required: true, pattern: date.dmy },
+			gender: { required: true, pattern: gender },
+			email: { required: true, pattern: emailValid },
+			confirmEmail: { required: true, equalTo: "#email" },
+			landLine: { required: true, pattern: telephoneNumber },
+			mobilePhone: { pattern: telephoneNumber },
+			phoneType: { pattern: phoneType },
+			otherPhoneNum: { pattern: shortPhoneNumber }
 		},
-		// errorPlacement: function(error, element) {
-		// 		error.appendTo( element.parent("div") );
-		// }
 		errorPlacement : function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
 		}
