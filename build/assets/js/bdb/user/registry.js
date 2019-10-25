@@ -19,7 +19,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			$$.getElementById('formRegistry').querySelectorAll('input').forEach(
 				function(currentValue) {
-					data[currentValue.getAttribute('id')] = currentValue.value;
+					if (currentValue.type == 'radio') {
+						if (currentValue.checked) {
+							// currentValue = sexo[0].value
+							data[currentValue.getAttribute('name')] = currentValue.value;
+						}
+					} else {
+						data[currentValue.getAttribute('name')] = currentValue.value;
+					}
 				}
 			);
 			data['aplicaPerfil'] = aplicaPerfil;

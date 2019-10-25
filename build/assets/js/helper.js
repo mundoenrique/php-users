@@ -33,7 +33,7 @@ var strCountry = settingsCountry[country];
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
-$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete', 'off');
+$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
 function callNovoCore(verb, who, where, data, _response_) {
 	var cpo_cook = decodeURIComponent(
