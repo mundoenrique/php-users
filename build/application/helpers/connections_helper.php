@@ -149,21 +149,20 @@ if(!function_exists('connectionAPI'))
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 			$responseAPI = curl_exec($ch);
 			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			if($responseAPI === FALSE) {
-				$response = new stdClass();
-				$response->httpCode = $httpCode;
-				$response->resAPI = curl_error($ch);
-				log_message('DEBUG', 'RESPONSE API:===>>>>' . json_encode($response));
-				return $response;
-			}
 			curl_close($ch);
+			$response = new stdClass();
+			log_message("DEBUG", 'NOVO RESPONSE API HTTPCODE '.$httpCode);
+			$response->httpCode = $httpCode;
+			if($responseAPI === FALSE) {
+				$response->resAPI = curl_error($ch);
+				log_message("DEBUG", 'NOVO RESPONSE API '.json_encode($response));
+
+			}
 		} else {
 			$responseAPI = json_decode(responseOauth);
 		}
-		$response = new stdClass();
-		$response->httpCode = $httpCode;
+
 		$response->resAPI = $responseAPI;
-		log_message('DEBUG', 'RESPONSE API:===>>>>' . json_encode($response));
 		return $response;
 	}
 }

@@ -134,13 +134,13 @@ class Detail_model extends CI_Model {
 			'bodyAPI' => $bodyAPI,
 			'method' => $method
 		];
-		log_message("INFO", '['.$this->session->userdata("userName").']'." REQUEST WSinTransit objectAPI: ".json_encode($objectAPI));
+		log_message("DEBUG", '['.$this->session->userdata("userName").']'." REQUEST WSinTransit objectAPI: ".json_encode($objectAPI));
 		$response = connectionAPI($objectAPI);
 
 		$httpCode = $response->httpCode;
 		$resAPI = $response->resAPI;
 
-		log_message('INFO', '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
+		log_message("DEBUG", '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
 
 		$dataResponse = json_decode($resAPI);
 		$title = 'Mensaje';
@@ -149,7 +149,10 @@ class Detail_model extends CI_Model {
 				$code = 0;
 				// Formato de moneda de acuerdo al país
 				$ledgerBalance = $dataResponse->balance->ledgerBalance;
-				$availableBalance = $dataResponse->balance->availableBalance;
+				$availableBalance = (float) $dataResponse->balance->availableBalance;
+				if($availableBalance < 0) {
+					$availableBalance = $availableBalance/100;
+				}
 				$actualBalance = $ledgerBalance + $availableBalance;
 				$ledgerBalance = np_hoplite_decimals($ledgerBalance, $country);
 				$availableBalance = np_hoplite_decimals($availableBalance, $country);
