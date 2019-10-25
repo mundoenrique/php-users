@@ -3,7 +3,7 @@
 function validateForms(form, options) {
 	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
-	var generalPhoneNumber = /^[0-9]{7,14}+$/;
+	var generalPhoneNumber = /^([0-9]{7,14})+$/;
 	var validCountry = typeof country!=='undefined'? country : isoPais;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;

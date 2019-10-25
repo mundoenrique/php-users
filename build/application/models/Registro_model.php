@@ -403,11 +403,12 @@ class Registro_model extends CI_Model {
 
 		$dataEncry	= np_Hoplite_Encryption($data,1,'registrar_usuario');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data		= json_decode($response);
+		//$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+  	//$data		= json_decode($response);
 		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1,'registrar_usuario'));
 
 		log_message("info", "Response registrar_usuario: ".json_encode($desdata));
+		asdfasdfasd;
 
 		$this->code = 3;
 		$this->modalType = "alert-error";

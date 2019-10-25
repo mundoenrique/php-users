@@ -12,27 +12,31 @@ $$.addEventListener('DOMContentLoaded', function(){
 	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
 		e.preventDefault();
 
-		var form = $('#formRegistry');
+ 		var form = $('#formRegistry');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
+		var data = {};
 
-			var document_id = $$.getElementById('documentID').value;
-
-			var data = {
-				userName: document_id + '' + formatDate_ddmmy(new Date),
-				id_ext_per: document_id,
-				telephone_number: $$.getElementById('telephoneNumber').value
-			}
+			$$.getElementById('formRegistry').querySelectorAll('input').forEach(
+				function(currentValue) {
+					data[currentValue.getAttribute('id')] = currentValue.value;
+				}
+			);
+			data['aplicaPerfil'] = aplicaPerfil;
+			data['tipo_id_ext_per'] = tipo_id_ext_per;
+			data['pais'] = paisUser;
+			data['otro_telefono'] = $$.getElementById('phoneType').value;
+			data['cpo_name'] = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
+			//data['sexo'] = $$.getElementById('phoneType').value
 
 			callNovoCore('POST', 'User', 'registry', data, function(response) {
-
 				if (response.code == 0) {
-					$$.location.href = response.data;
+					console.log('form PASO la validacion y envié datos al servidor');
+					//$$.location.href = response.data;
 				}
 			});
-
-		}else{
-			console.log('form no paso la validacion');
 		}
 
 
@@ -46,19 +50,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 
 
-		var objFields = {};
 
-		this.querySelectorAll('input').forEach(
-			function(currentValue, currentIndex, listObj) {
-				objFields[currentValue.getAttribute('id')] = currentValue.getAttribute('id');
-			}
-		);
 
-		objFields.cpo_name = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		);
-
-		var dataRequest = CryptoJS.AES.encrypt(JSON.stringify(objFields), objFields.cpo_name, {format: CryptoJSAesJson}).toString();
 
 	});
 

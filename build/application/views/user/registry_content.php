@@ -4,8 +4,8 @@
 			<h1 class="primary h0">Registro</h1>
 		</header>
 		<section>
-<!-- 			<pre>
-				<?php //var_dump($data->dataUser->logAccesoObject->userName); ?>
+<!--  			<pre>
+				<?php var_dump($data->dataUser->pais); ?>
 			</pre> -->
 			<div class="border-top pt-3">
 				<h2 class="tertiary h3">Afiliación de Datos</h2>
@@ -130,3 +130,8 @@
 		</section>
 	</div>
 </div>
+<script>
+	var aplicaPerfil = '<?= $data->dataUser->user->aplicaPerfil ?>';
+	var tipo_id_ext_per = '<?= $data->dataUser->user->tipo_id_ext_per ?>';
+	var paisUser = '<?= $data->dataUser->pais ?>';
+</script>

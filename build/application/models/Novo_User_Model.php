@@ -329,7 +329,7 @@ class Novo_User_Model extends NOVO_Model {
 
 	public function callWs_verifyAccount_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: Registry Validation method Initialized');
+		log_message('INFO', 'NOVO User Model: verifyAccount  method Initialized');
 
 		$date = new DateTime();
 		$fechaRegistro = $date->format('dmy');
@@ -341,7 +341,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'validar cuenta';
 		$this->dataAccessLog->operation = '18';
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per+$fechaRegistro;
-/* fake data */
+
+		// fake data
 		$this->dataAccessLog->sessionId = "";
 		$this->dataAccessLog->canal = "personasWeb";
 		$this->dataAccessLog->RC = 0;
@@ -352,7 +353,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 
-/* fake data */
+		// fake data
 		$this->dataRequest->cuenta = "6048411619458425";
 		$this->dataRequest->pin = "6e08dc8e4e3ac59d3c61dc0ff2f59c7c";
 		$this->dataRequest->claveWeb = "9d98257cef258260de0cf058ff3e93d7";
@@ -389,7 +390,15 @@ class Novo_User_Model extends NOVO_Model {
 	}
 
 
-	public function registry(){
+	public function callWs_registry_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
+
+		$this->dataAccessLog->modulo = 'registro usuario';
+		$this->dataAccessLog->function = 'registro usuario';
+		$this->dataAccessLog->operation = '20';
+		$this->dataAccessLog->userName = $dataRequest->userName;
 
 		$this->response->code = 0;
 		$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);

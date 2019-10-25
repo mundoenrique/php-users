@@ -2,7 +2,6 @@
 
 $config = [
 	'login' => [
-
 		[
 			'field' => 'user',
 			'label' => 'user',
@@ -11,7 +10,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
 		]
 	],
 	'verifyaccount' => [
@@ -38,14 +37,70 @@ $config = [
 		[
 			'field' => 'firstName',
 			'label' => 'firstName',
-			'rules' => 'trim|alpha|required'
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
 		],
 		[
 			'field' => 'middleName',
 			'label' => 'middleName',
-			'rules' => 'trim|alpha'
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'lastName',
+			'label' => 'lastName',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+		],
+		[
+			'field' => 'secondSurname',
+			'label' => 'secondSurname',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'birthDate',
+			'label' => 'birthDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'landLine',
+			'label' => 'landLine',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'otherPhone',
+			'label' => 'otherPhone',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'label' => 'otherPhoneNum',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'username',
+			'label' => 'username',
+			'rules' => 'trim|regex_match[/^([\wñÑ*.-]+)+$/i]|required'
+		],
+		[
+			'field' => 'userpwd',
+			'label' => 'userpwd',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmUserpwd',
+			'label' => 'confirmUserpwd',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[userpwd]|required'
 		],
 	],
+
 	'finishsession' => [
 		[
 			'field' => 'user',
