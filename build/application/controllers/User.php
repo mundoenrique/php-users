@@ -211,6 +211,7 @@ class User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
+			"third_party/moment",
 			"validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
