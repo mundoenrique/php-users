@@ -363,7 +363,7 @@ textarea.form-control {
 .custom-select-trigger {
 	border-radius: 2.55px;
 	border: 0.85px solid #b5bac3;
-	box-shadow: 1px 1px 2px 0 var(--silver);
+	box-shadow: 1px 1px 2px 0 var(--shadows-color);
 	cursor: pointer;
 	display: block;
 	height: 30px;
@@ -554,7 +554,6 @@ textarea.form-control {
 	border-color: var(--danger);
 }
 
-
 /* Buttons
 	========================================================================== */
 
@@ -594,8 +593,8 @@ textarea.form-control {
 
 .btn-outline:hover {
 	border-color: transparent;
-	color: var(--button-color);
-	background-color: var(--button-background-color);
+	color: var(--secondary);
+	background-color: var(--primary);
 }
 
 .btn-outline:active {
@@ -610,8 +609,8 @@ textarea.form-control {
 /* primary */
 
 .btn-primary {
-	color: var(--button-color);
-	background-color: var(--button-background-color);
+	color: var(--secondary);
+	background-color: var(--primary);
 	border-radius: var(--btn-border-radius);
 }
 
@@ -680,7 +679,7 @@ textarea.form-control {
 	border-radius: var(--btn-border-radius) 0 0 var(--btn-border-radius);
 	background-color: var(--secondary);
 	border: .85px solid var(--primary);
-	box-shadow: 2px 2px 2px 0px var(--gray);
+	box-shadow: 2px 2px 2px 0px var(--shadows-color);
 }
 
 /* Close */
@@ -731,16 +730,14 @@ button.close {
 .bg-widget  { background-color: var(--widget-color) !important }
 
 .bg-black  { background-color: var(--black) !important }
-.bg-gray   { background-color: var(--gray) !important }
-.bg-silver { background-color: var(--silver) !important }
-.bg-white  { background-color: var(--white) !important }
+.bg-white  { background-color: rgba(255, 255, 255, 1) !important }
 
 .bg-success { background-color: var(--success) !important }
 .bg-info    { background-color: var(--info) !important }
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-pampas  { background-color: var(--pampas) !important }
+.bg-color  { background-color: var(--bg-color) !important }
 .bg-yellow   { background-color: var(--yellow) !important }
 .bg-vista-blue { background-color: var(--vista-blue) !important }
 .bg-trikemaster  { background-color: var(--trikemaster) !important }
@@ -1417,9 +1414,7 @@ button.close {
 /* Colors */
 
 .black  { color: var(--black) !important }
-.gray   { color: var(--gray) !important }
-.silver { color: var(--silver) !important }
-.white  { color: var(--white) !important }
+.white  { color: rgba(255, 255, 255, 1) !important }
 
 .primary   { color: var(--primary) !important }
 .secondary { color: var(--secondary) !important }
@@ -1431,12 +1426,7 @@ button.close {
 .warning { color: var(--warning) !important }
 .danger  { color: var(--danger) !important }
 
-.pampas        { color: var(--pampas) !important }
 .yellow        { color: var(--yellow) !important }
-.gold          { color: var(--gold) !important }
-.vista-blue    { color: var(--vista-blue) !important }
-.trikemaster   { color: var(--trikemaster) !important }
-.pink-salmon   { color: var(--pink-salmon) !important }
 .color-inherit { color: inherit !important }
 
 /* Decoration */
@@ -1447,7 +1437,9 @@ button.close {
 	========================================================================== */
 
 span[class^="icon-"],
-span[class*=" icon-"] {
+span[class*=" icon-"],
+i[class^="icon-"],
+i[class*=" icon-"] {
 	display: inline-block;
 	height: auto;
 	width: auto;
@@ -1458,6 +1450,13 @@ span[class*=" icon-"] {
 	font-weight: normal;
   text-align: center;
   line-height: auto;
+	vertical-align: middle;
+}
+
+span[class^="icon-"]:before,
+span[class*=" icon-"]:before,
+i[class^="icon-"]:before,
+i[class*=" icon-"]:before {
 	vertical-align: middle;
 }
 
@@ -1484,10 +1483,6 @@ span[class*=" icon-"] {
 .icon-thumbs-up:before {
 	content: "\e032";
 }
-
-/* .icon-lock {
-	background-image: url("../images/icon-lock.svg");
-} */
 
 .icon-circle {
 	height: 20px;
@@ -1659,14 +1654,14 @@ tr > td {
 }
 
 .dataTables_length > label{
-	background-color: var(--pampas);
+	background-color: var(--bg-color);
 	color: var(--text-color);
 	font-size: var(--h6);
 	font-weight: var(--regular-font-weight);
 }
 
 .dataTables_info{
-	background-color: var(--pampas);
+	background-color: var(--bg-color);
 	color: var(--text-color) !important;
 	font-size: var(--h6);
 	font-weight: var(--regular-font-weight);
@@ -1694,7 +1689,7 @@ tr > td {
 }
 
 td > button > i{
-	color: var(--icon-table);
+	color: var(--tertiary);
 	transition: .3s;
 }
 
@@ -1748,13 +1743,21 @@ ul.steps li.step-item {
 	width: 160px;
 }
 
-ul.steps li.step-item span[class^="icon-"],
-ul.steps li.step-item span[class*=" icon-"] {
+ul.steps li.step-item.current-step-item {
+	color: #555;
+}
+
+ul.steps li.step-item.completed-step-item {
+	color: #43b581;
+}
+
+ul.steps li.step-item i {
+	display: block;
 	width: 43px;
 	height: 43px;
 	margin: 0 auto 5px;
 	font-size: 20px;
-	border: 3px solid var(--border-color);
+	border: 3px solid currentColor;
 }
 
 
@@ -1889,6 +1892,28 @@ ul.steps li.step-item span[class*=" icon-"] {
 
 .modal-footer > :not(:last-child) {
   margin-right: .25rem;
+}
+
+/* HR - Separators */
+
+.separador-one {
+	height: 1px;
+	border: none;
+	background:var(--border-color);
+}
+
+.separador-two {
+	height: 1px;
+	border: none;
+	background: #333;
+	background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.separador-three {
+	height: 0;
+	border: none;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* jQuery UI
@@ -2137,3 +2162,16 @@ a:visited.ui-button,
 	padding: 60px 0;
 }
 
+ul.pwd-rules li.pwd-rules-item {
+	margin-bottom: .5rem;
+	font-size: 11px;
+	letter-spacing: .016em;
+}
+
+ul.pwd-rules li.pwd-rules-item.rule-valid {
+	color: #43b581;
+}
+
+ul.pwd-rules li.pwd-rules-item.rule-invalid {
+	color: var(--danger);
+}
