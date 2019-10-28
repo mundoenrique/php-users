@@ -37,18 +37,25 @@ class NOVO_Model extends CI_Model {
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->idOperation = $this->dataAccessLog->operation;
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = 'Ve'; //$this->country;
 
-		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
-
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> 'Global', 'keyId' => 'CPONLINE'];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName);
-		$response = json_decode($response);
+		$response = [];
+
+
+
+
+		// $response = $this->encrypt_connect->connectWs($request, $this->userName);
+		//$response = json_decode($response);
+
+
+
+
+
 		$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		$this->isResponseRc = FALSE;
 		$this->response->title = lang('SYSTEM_NAME');

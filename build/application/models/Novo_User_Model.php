@@ -26,6 +26,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = '1';
 		$this->dataAccessLog->userName = $dataRequest->user;
 
+		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
@@ -350,6 +351,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->dttimesstamp = "10\/21\/2019 15:28";
 		$this->dataAccessLog->lenguaje = "ES"	;
 
+		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 
@@ -393,16 +395,60 @@ class Novo_User_Model extends NOVO_Model {
 	public function callWs_registry_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
-		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
 
+		$user = array(
+			"userName" => $dataRequest->username,
+			"primerNombre" => $dataRequest->firstName,
+			"segundoNombre" => $dataRequest->middleName,
+			"primerApellido"	=> $dataRequest->lastName,
+			"segundoApellido"	=> $dataRequest->secondSurname,
+			"fechaNacimiento"	=> $dataRequest->birthDate,
+			"id_ext_per"		=> $dataRequest->idNumber,
+			"tipo_id_ext_per"	=> $dataRequest->tipo_id_ext_per,
+			"codPais"			=> $dataRequest->pais,
+			"sexo"				=> 'M',
+			"notEmail"			=> "1",
+			"notSms"			=> "1",
+			"email"				=> $dataRequest->email,
+			"password"			=> md5($dataRequest->userpwd),
+			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd))
+		);
+		$phones = array(
+			[
+				"tipo"	=> "HAB",
+				"numero"=> $dataRequest->landLine
+			],
+			[
+				"tipo"	=> "CEL",
+				"numero"=> $dataRequest->mobilePhone
+			],
+			[
+				"tipo"	=> $dataRequest->otro_telefono,
+				"numero"=> $dataRequest->otherPhoneNum
+			]
+		);
+
+		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
 		$this->dataAccessLog->modulo = 'registro usuario';
 		$this->dataAccessLog->function = 'registro usuario';
-		$this->dataAccessLog->operation = '20';
-		$this->dataAccessLog->userName = $dataRequest->userName;
+		$this->dataAccessLog->operation = 'registro usuario';
+		$this->dataAccessLog->canal = 'personasWeb';
+		$this->dataAccessLog->userName = $dataRequest->username;
 
-		$this->response->code = 0;
-		$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+		$this->dataRequest->idOperation = '20';
+		$this->dataRequest->user = $user;
+		$this->dataRequest->listaTelefonos = $phones;
 
+		$response = $this->sendToService('User');
+		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
+
+		if($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
+			switch($this->isResponseRc) {
+				case 0:
+				break;
+			}
+		}
 		return $this->response;
 	}
 

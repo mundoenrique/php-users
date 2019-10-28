@@ -21,7 +21,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 				function(currentValue) {
 					if (currentValue.type == 'radio') {
 						if (currentValue.checked) {
-							// currentValue = sexo[0].value
 							data[currentValue.getAttribute('name')] = currentValue.value;
 						}
 					} else {
