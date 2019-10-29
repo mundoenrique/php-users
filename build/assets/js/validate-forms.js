@@ -120,6 +120,8 @@ function validateForms(form, options) {
 		else return true;
 	}, "Teléfono Otro está repetido");
 
+
+
 	jQuery.validator.addMethod("numberEqual2", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#mobilePhone").val() || element.value == $("#otherPhoneNum").val()))
 			return false;

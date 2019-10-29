@@ -1,5 +1,5 @@
 'use strict'
-
+var $$ = document;
 /**
  * lee una propiedad especifica de un elemento html
  * de no indicarse el elemento se toma por defecto el body

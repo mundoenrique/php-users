@@ -13,6 +13,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
 		]
 	],
+	'validatecaptcha' => [
+		[
+			'field' => 'user',
+			'label' => 'user',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'token',
+			'label' => 'token',
+			'rules' => 'trim|required'
+		]
+	],
 	'verifyaccount' => [
 		[
 			'field' => 'plot',

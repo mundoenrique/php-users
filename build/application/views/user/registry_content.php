@@ -5,7 +5,7 @@
 		</header>
 		<section>
 <!--  			<pre>
-				<?php var_dump($data->dataUser->pais); ?>
+				<?php //var_dump($data); ?>
 			</pre> -->
 			<hr class="separador-one">
 			<div class="pt-3">
@@ -18,12 +18,12 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text" readonly="readonly"  value="<?= $data->dataUser->user->tipo_id_ext_per;?>">
+								<input id="idType" class="form-control" name="idType" type="text" readonly="readonly" value="<?= $data->dataUser->user->tipo_id_ext_per;?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idNumber">Número de identificación</label>
-								<input id="idNumber" class="form-control" name="idNumber" type="text" readonly="readonly"  value="<?= $data->dataUser->user->id_ext_per;?>"/>
+								<input id="idNumber" class="form-control" name="idNumber" type="text" readonly="readonly" value="<?= $data->dataUser->user->id_ext_per;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -38,12 +38,12 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-								<input id="lastName" name="lastName" type="text" placeholder="Apellido paterno" class="form-control"  value="<?= $data->dataUser->user->primerApellido;?>"/>
+								<input id="lastName" name="lastName" type="text" placeholder="Apellido paterno" class="form-control" value="<?= $data->dataUser->user->primerApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="secondSurname">Apellido materno</label>
-								<input id="secondSurname" name="secondSurname" type="text" class="form-control"  value="<?= $data->dataUser->user->segundoApellido;?>"/>
+								<input id="secondSurname" name="secondSurname" type="text" class="form-control" value="<?= $data->dataUser->user->segundoApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -99,7 +99,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhoneNum">Otro Teléfono (Número)</label>
-								<input id="otherPhoneNum" name="otherPhoneNum" type="text" class="form-control"/>
+								<input id="otherPhoneNum" name="otherPhoneNum" type="text" class="form-control" value="<?= $data->dataUser->afiliacion->telefono3?>"/>
 								<div class="help-block"></div>
 							</div>
 						</div>

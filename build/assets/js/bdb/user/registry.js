@@ -1,20 +1,27 @@
 'use strict';
 var $$ = document;
+var btnRegistry = $$.getElementById('btnRegistrar');
 
 $$.addEventListener('DOMContentLoaded', function(){
-	var fechaPrueba;//vars
-
+	//vars
 	$( "#birthDate" ).datepicker( {
 		dateFormat: "dd/mm/yy"
 	});
+
+
 	//core
-	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
+	btnRegistrar.addEventListener('click', function(e){
 		e.preventDefault();
 
- 		var form = $('#formRegistry');
+		var form = $('#formRegistry');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
-		var data = {};
+
+			var txtBtnRegistry = btnRegistry.innerHTML.trim();
+			var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+			btnRegistry.innerHTML = msgLoading;
+
+			var data = {};
 
 			$$.getElementById('formRegistry').querySelectorAll('input').forEach(
 				function(currentValue) {
@@ -37,6 +44,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'registry', data, function(response) {
 				notiSystem(response.title, response.msg, response.className, response.data);
+				btnRegistry.innerHTML = txtBtnRegistry;
 			});
 		}
 	});
@@ -51,7 +59,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			capital: pswd.match(/[A-Z]/),
 			number: !pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/),
 			consecutivo: !pswd.match(/(.)\1{2,}/),
-			especial: pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)
+			especial: !pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)
 		}
 
 		Object.keys(validations).forEach(function(rule){
@@ -69,9 +77,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}else{
 			$('#btnRegistrar').attr("disabled", true);
 		}
-
 	})
-
 });
 
 
