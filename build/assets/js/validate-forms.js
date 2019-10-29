@@ -99,21 +99,18 @@ function validateForms(form, options) {
 		if(element.value.length>0 && (element.value == $("#landLine").val() || element.value == $("#mobilePhone").val()))
 			return false;
 		else return true;
-
 	}, "Teléfono Otro está repetido");
 
 	jQuery.validator.addMethod("numberEqual2", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#mobilePhone").val() || element.value == $("#otherPhoneNum").val()))
 			return false;
 		else return true;
-
 	}, "Teléfono Fijo está repetido");
 
 	jQuery.validator.addMethod("numberEqual3", function(value, element) {
-			if(element.value.length>0 && (element.value == $("#otherPhoneNum").val() || element.value == $("#otherPhoneNum").val()))
-					return false;
-			else return true;
-
+		if(element.value.length>0 && (element.value == $("#otherPhoneNum").val() || element.value == $("#otherPhoneNum").val()))
+				return false;
+		else return true;
 	}, "Teléfono Movil está repetido");
 
 	// Metodo que valida si la fecha es invalida
