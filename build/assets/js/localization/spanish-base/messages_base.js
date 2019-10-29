@@ -30,6 +30,7 @@ $.extend( $.validator.messages, {
 	nifES: "Por favor, escribe un NIF válido.",
 	nieES: "Por favor, escribe un NIE válido.",
 	cifES: "Por favor, escribe un CIF válido.",
+	spanishAlphabetical: 'Debe contener solo letras.',
 
 
 	idType: "Debe Seleccionar su Tipo de Identificación.",															//1

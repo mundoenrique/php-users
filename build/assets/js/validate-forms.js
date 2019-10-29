@@ -140,23 +140,27 @@ function validateForms(form, options) {
 		return value == digVer ? true : false;
 	});
 
+	jQuery.validator.addMethod("spanishAlphabetical",function(v){
+		return v.match(/^[a-záéíóúüñ ]+$/i);
+	});
+
 	form.validate({
 		rules: {
 			documentID: { required: true, number: true },
 			telephoneNumber: { required: true, pattern: generalPhoneNumber },
 			acceptTerms: 'required',
-			idType: { required: true },	//1
-			idNumber: { required: true, pattern: onlyNumber },	//2
+			idType: { required: true },
+			idNumber: { required: true, pattern: onlyNumber },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
-			firstName: { required: true, pattern: alphabeticalEs },	//3
-			middleName: { pattern: alphabeticalEs }, //4
-			lastName: { required: true, pattern: alphabeticalEs }, //5
-			secondSurname: { pattern: alphabeticalEs },	//6
-			birthPlace: { pattern: alphabeticalEs },	//7
+			firstName: {required: true, "spanishAlphabetical": true},
+			middleName: { "spanishAlphabetical": true },
+			lastName: { required: true, "spanishAlphabetical": true }, //5
+			secondSurname: { "spanishAlphabetical": true },	//6
+			birthPlace: { "spanishAlphabetical": true },	//7
 			birthDate: { required: true, pattern: date.dmy, "fechaInvalida": true, "mayorEdad": true },	//8
 			gender: { pattern: gender },	//9
 			civilStatus: { pattern: civilStatus },	//10
-			nationality: { required: true, pattern: alphabeticalEs },	//11
+			nationality: { required: true, "spanishAlphabetical": true },	//11
 			addressType: { required: true },	//12
 			postalCode: { digits: true },	//13
 			country: { required: true },	//14
@@ -177,7 +181,7 @@ function validateForms(form, options) {
 			jobTitle: { pattern: alphanumEs },	//30
 			income: { required: true, number: true },	//31
 			publicPerformance: { required: true },	//32
-			publicOffice: { required: true, pattern: alphabeticalEs  },	//33
+			publicOffice: { required: true, "spanishAlphabetical": true  },	//33
 			institution: { required: true, pattern: alphanumEs },	//34
 			uif: { required: true },	//35
 			username: { required: true, pattern: username },
