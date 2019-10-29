@@ -67,7 +67,7 @@ $config = [
 		[
 			'field' => 'landLine',
 			'label' => 'landLine',
-			'rules' => 'trim|numeric|required'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',

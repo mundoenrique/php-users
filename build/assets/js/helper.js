@@ -120,6 +120,9 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 		closeOnEscape: false,
 		height: "auto",
 		width: 400,
+    open: function() {
+				$('.ui-dialog-titlebar-close').hide()
+    },
 		show: {
 			duration: 250
 		},

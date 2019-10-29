@@ -45,23 +45,14 @@ class NOVO_Model extends CI_Model {
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> 'Global', 'keyId' => 'CPONLINE'];
 		$response = [];
-
-
-
-
-		// $response = $this->encrypt_connect->connectWs($request, $this->userName);
-		//$response = json_decode($response);
-
-
-
-
-
+		$response = $this->encrypt_connect->connectWs($request, $this->userName);
+		$response = json_decode($response);
 		$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		$this->isResponseRc = FALSE;
 		$this->response->title = lang('SYSTEM_NAME');
 
 		if(isset($responseDecrypt->rc)) {
-			$this->isResponseRc = $responseDecrypt->rc;
+		$this->isResponseRc = $responseDecrypt->rc;
 			switch($this->isResponseRc) {
 				case -1:
 					$this->response->code = 303;

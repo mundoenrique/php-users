@@ -7,21 +7,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 	$( "#birthDate" ).datepicker( {
 		dateFormat: "dd/mm/yy"
 	});
-
-
-	fechaPrueba = moment("20111031", "YYYYMMDD"); // hace 8 años
-	console.log("fecha: " + fechaPrueba);
-	fechaPrueba = moment("20111031", "YYYYMMDD").fromNow(); // hace 8 años
-	console.log(fechaPrueba);
-	fechaPrueba = moment("20120620", "YYYYMMDD").fromNow(); // hace 7 años
-	console.log(fechaPrueba);
-	fechaPrueba = moment().startOf('day').fromNow();        // hace 10 horas
-	console.log(fechaPrueba);
-	fechaPrueba = moment().endOf('day').fromNow();          // en 14 horas
-	console.log(fechaPrueba);
-	fechaPrueba = moment().startOf('hour').fromNow();
-	console.log(fechaPrueba);
-
 	//core
 	$$.getElementById('btnRegistrar').addEventListener('click', function(e){
 		e.preventDefault();
@@ -52,27 +37,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 			//data['sexo'] = $$.getElementById('phoneType').value
 
 			callNovoCore('POST', 'User', 'registry', data, function(response) {
-				if (response.code == 0) {
-					console.log('form PASO la validacion y envié datos al servidor');
-					//$$.location.href = response.data;
-				}
+				notiSystem(response.title, response.msg, response.className, response.data);
+				//if (response.code == 0) {}
 			});
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	});
 
 	//functions

@@ -439,13 +439,141 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->user = $user;
 		$this->dataRequest->listaTelefonos = $phones;
 
-		$response = $this->sendToService('User');
-		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
+		//$response = $this->sendToService('User');
+		//log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
 
-		if($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
-			switch($this->isResponseRc) {
+		$this->response->code = 3;
+
+		// if($this->isResponseRc !== FALSE) {
+		// 	$this->isResponseRc = 0;
+		// 	switch($this->isResponseRc) {
+		if(true) {
+			$isResponseRc = 0;
+			switch($isResponseRc) {
 				case 0:
+					$this->response->code = 0;
+					$this->response->title = "Usuario registrado exitosamente";
+					$this->response->msg = "Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+				break;
+				case -61:
+				case -5:
+				case -3:
+					$this->response->title = "";
+					$this->response->msg = "";
+					$this->response->code = 2;
+					$this->modalType = "";
+				break;
+
+				case -181:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.";
+					$this->response->code = 3;
+					$this->modalType = "alert-error";
+
+				break;
+
+				case -284:
+
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "El teléfono móvil ya se encuentra registrado.";
+					$this->response->code = 3;
+					$this->modalType = "alert-error";
+
+				break;
+
+				case -206:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación";
+					$this->response->code = 4;
+					$this->modalType = "alert-warning";
+				break;
+
+				case -230:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "No se puede realizar el registro en estos momentos, por favor intenta nuevamente.";
+					$this->response->code = 4;
+					$this->modalType = "alert-error";
+				break;
+
+				case -271:
+				case -335:
+
+					$this->response->title = "Usuario registrado";
+					$this->response->msg = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
+					$this->response->code = 0;
+					$this->modalType = "2";
+
+				break;
+
+				case -317:
+				case -314:
+				case -313:
+				case -311:
+
+					$this->response->title = "Usuario registrado";
+					$this->response->msg = "se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
+					$this->response->code = 0;
+					$this->modalType = "2";
+
+				break;
+
+				//verificacion de reniec grupo 1
+				case 5002:
+				case 5003:
+				case -102:
+				case -104:
+				case -118:
+				case 5004:
+				case 5008:
+				case 5009:
+				case 5010:
+				case 5011:
+				case 5020:
+				case 5021:
+				case 5030:
+				case 5100:
+				case 5104:
+				case 6000: //Valida conexión fallida
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "No hemos podido validar tus datos, por favor intenta nuevamente.";
+					break;
+
+				// verificacion de reniec  grupo 2
+				case 5101:
+				case 5102:
+				case 5103:
+				case 5104:
+				case 5105:
+				case 5111:
+				case 5112:
+				case 5113:
+				case 5032:
+				case 5033:
+				case 5034:
+				case 5036:
+				case 5037:
+				case 5114:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					break;
+
+				case -397:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "Datos de afiliación inválidos. Verifica tus datos e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					break;
+
+				default:
+					$this->response->title = "Conexión Personas Online";
+					$this->response->msg = "No fue posible realizar el registro, por favor intenta nuevamente.";
+					$this->response->code = 2;
+					$this->modalType = "alert-error";
 				break;
 			}
 		}
