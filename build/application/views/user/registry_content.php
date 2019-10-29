@@ -103,20 +103,38 @@
 
 						<h3 class="tertiary h4">Datos de usuario</h3>
 						<div class="row">
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="username">Usuario</label>
-								<input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
-								<div class="help-block"></div>
+							<div class="col-6">
+								<div class="form-group">
+									<label for="username">Usuario</label>
+									<input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
+									<div class="help-block"></div>
+								</div>
+								<div class="form-group">
+									<label for="userpwd">Contraseña</label>
+									<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Contraseña">
+									<div class="help-block"></div>
+								</div>
+								<div class="form-group">
+									<label for="confirmUserpwd">Confirmar Contraseña</label>
+									<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd" placeholder="Confirmar Contraseña">
+									<div class="help-block"></div>
+								</div>
 							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="userpwd">Contraseña</label>
-								<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Contraseña">
-								<div class="help-block"></div>
-							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="confirmUserpwd">Confirmar Contraseña</label>
-								<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd" placeholder="Confirmar Contraseña">
-								<div class="help-block"></div>
+
+							<div class="col-6">
+								<div class="field-meter" id="password-strength-meter">
+									<h4>Requerimientos de contraseña:</h4>
+									<ul class="pwd-rules">
+										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>Caracteres</strong></li>
+										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula</strong>
+										</li>
+										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula</strong>
+										</li>
+										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números</strong></li>
+										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>caracter especial</strong><br />(ej: ! @ ? + - . , #)</li>
+										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 
