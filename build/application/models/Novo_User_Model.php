@@ -447,8 +447,14 @@ class Novo_User_Model extends NOVO_Model {
 		// if($this->isResponseRc !== FALSE) {
 		// 	$this->isResponseRc = 0;
 		// 	switch($this->isResponseRc) {
+
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('BUTTON_CONTINUE')
+			]
+		];
 		if(true) {
-			$isResponseRc = 0;
+			$isResponseRc = -181;
 			switch($isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -461,7 +467,8 @@ class Novo_User_Model extends NOVO_Model {
 							'action'=> 'redirect'
 						]
 					];
-				break;
+					break;
+
 				case -61:
 				case -5:
 				case -3:
@@ -469,15 +476,14 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "";
 					$this->response->code = 2;
 					$this->modalType = "";
-				break;
+					break;
 
 				case -181:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.";
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
-
-				break;
+					break;
 
 				case -284:
 
@@ -485,32 +491,42 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "El teléfono móvil ya se encuentra registrado.";
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
-
-				break;
+					break;
 
 				case -206:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación";
 					$this->response->code = 4;
-					$this->modalType = "alert-warning";
-				break;
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
 
 				case -230:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "No se puede realizar el registro en estos momentos, por favor intenta nuevamente.";
 					$this->response->code = 4;
 					$this->modalType = "alert-error";
-				break;
+					break;
 
 				case -271:
 				case -335:
 
 					$this->response->title = "Usuario registrado";
-					$this->response->msg = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
+					$this->response->msg = "Se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
 					$this->response->code = 0;
-					$this->modalType = "2";
-
-				break;
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
 
 				case -317:
 				case -314:
@@ -518,13 +534,17 @@ class Novo_User_Model extends NOVO_Model {
 				case -311:
 
 					$this->response->title = "Usuario registrado";
-					$this->response->msg = "se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
+					$this->response->msg = "Se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
 					$this->response->code = 0;
-					$this->modalType = "2";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
 
-				break;
-
-				//verificacion de reniec grupo 1
 				case 5002:
 				case 5003:
 				case -102:
@@ -540,12 +560,11 @@ class Novo_User_Model extends NOVO_Model {
 				case 5030:
 				case 5100:
 				case 5104:
-				case 6000: //Valida conexión fallida
+				case 6000:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 					break;
 
-				// verificacion de reniec  grupo 2
 				case 5101:
 				case 5102:
 				case 5103:
@@ -574,7 +593,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "No fue posible realizar el registro, por favor intenta nuevamente.";
 					$this->response->code = 2;
 					$this->modalType = "alert-error";
-				break;
+					break;
 			}
 		}
 		return $this->response;

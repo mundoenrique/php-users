@@ -64,63 +64,63 @@ $$.addEventListener('DOMContentLoaded', function(){
 		return month + day + year;
 	}
 
-	$('#userpwd').keyup(function() {
-		var longitud, mt, cap, car, cons, esp;
-		// set password variable
-		var pswd = $(this).val();
+
+	$$.getElementById('userpwd').addEventListener('keyup',function() {
+		var resultValidate = false;
+		var pswd = $$.getElementById('userpwd').value;
 		//validate the length
 		if ( pswd.length < 8 || pswd.length > 15 ) {
 			$('#length').removeClass('rule-valid').addClass('rule-invalid');
-			longitud = false;
+			resultValidate = true;
 		} else {
 			$('#length').removeClass('rule-invalid').addClass('rule-valid');
-			longitud = true;
+			resultValidate = false;
 		}
 
 		//validate letter
 		if ( pswd.match(/[a-z]/) ) {
 			$('#letter').removeClass('rule-invalid').addClass('rule-valid');
-			mt = true;
+			resultValidate = true;
 		} else {
 			$('#letter').removeClass('rule-valid').addClass('rule-invalid');
-			mt = false;
+			resultValidate = false;
 		}
 
 		//validate capital letter
 		if ( pswd.match(/[A-Z]/) ) {
 			$('#capital').removeClass('rule-invalid').addClass('rule-valid');
-			cap = true;
+			resultValidate = true;
 		} else {
 			$('#capital').removeClass('rule-valid').addClass('rule-invalid');
-			cap = false;
+			resultValidate = false;
 		}
 
 		//validate number
-
 		if (!pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/) ) {
 			$('#number').removeClass('rule-invalid').addClass('rule-valid');
-			car = true;
+			resultValidate = true;
 		} else {
 			$('#number').removeClass('rule-valid').addClass('rule-invalid');
-			car = false;
+			resultValidate = false;
 		}
 
 		if (! pswd.match(/(.)\1{2,}/) ) {
 			$('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
-			cons = true;
+			resultValidate = true;
 		} else {
 			$('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
-			cons = false;
+			resultValidate = false;
 		}
 
 		if ( pswd.match(/([!@\*\-\?¡¿+\/.,_#])/ )) {
 			$('#especial').removeClass('rule-invalid').addClass('rule-valid');
-			esp = true;
+			resultValidate = true;
 		} else {
 			$('#especial').removeClass('rule-valid').addClass('rule-invalid');
-			esp = false;
+			resultValidate = false;
 		}
-		if((longitud == true)&& (mt == true) && (cap == true) && (car == true) &&  (cons == true) && (esp == true)){
+
+		if(resultValidate){
 			$('#btnRegistrar').removeAttr("disabled");
 		}else{
 			$('#btnRegistrar').attr("disabled", true);

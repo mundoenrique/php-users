@@ -139,16 +139,12 @@ function validateForms(form, options) {
 	});
 
 	// Metodo que valida si el usuario es mayor de edad
-	jQuery.validator.addMethod("mayorEdad", function(value, element) {
+	jQuery.validator.addMethod("mayorEdad", function(value, element){
 		var hoy, fechanacimiento, years
 		hoy = moment();
-		console.log("fecha hoy: " + hoy);
 		fechanacimiento = moment(value, "DD/MM/YYYY");
-		console.log("fecha nac: " + fechanacimiento);
 		years = hoy.diff(fechanacimiento, 'years');
-		console.log(years);
-
-    return years >= 18;
+		return years >= 18;
 	}, "Usted no es mayor de edad");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
