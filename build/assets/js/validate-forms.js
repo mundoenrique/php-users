@@ -69,7 +69,7 @@ function validateForms(form, options) {
 		return fiscalReg[validCountry].test(value);
 	}
 
-	$.validator.methods.validatePass	= function(value, element, param) {
+	$.validator.methods.validatePass = function(value, element, param) {
 		return passStrength(value);
 	}
 
@@ -95,6 +95,25 @@ function validateForms(form, options) {
 
 	jQuery.validator.setDefaults(defaults);
 
+
+	// Letras alfabéticas con acentos, ñ y espacio en blanco
+	jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
+		return this.optional( element ) || /^[a-záéíóúüñ ]+$/i.test( value );
+	});
+
+	// Números y Letras alfabéticas con acentos, ñ y espacio en blanco
+	jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
+		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
+	});
+
+	jQuery.validator.addMethod("emailValid",function(value, element) {
+		return /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
+	});
+
+	jQuery.validator.addMethod("username",function(value, element) {
+		return /^[a-z0-9_-]+$/i.test(value);
+	});
+
 	jQuery.validator.addMethod("numberEqual1", function(value,element) {
 		if(element.value.length>0 && (element.value == $("#landLine").val() || element.value == $("#mobilePhone").val()))
 			return false;
@@ -111,13 +130,13 @@ function validateForms(form, options) {
 		if(element.value.length>0 && (element.value == $("#otherPhoneNum").val() || element.value == $("#otherPhoneNum").val()))
 				return false;
 		else return true;
-	}, "Teléfono Movil está repetido");
+	}, "Teléfono Móvil está repetido");
 
 	// Metodo que valida si la fecha es invalida
 	jQuery.validator.addMethod("fechaInvalida", function(value, element) {
 		var fecha = moment(value, "DD/MM/YYYY");
 		return fecha.isValid();
-	}, "Fecha invalida");
+	});
 
 	// Metodo que valida si el usuario es mayor de edad
 	jQuery.validator.addMethod("mayorEdad", function(value, element){
@@ -130,32 +149,25 @@ function validateForms(form, options) {
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
 		return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
-	 }, "El campo debe tener mínimo 1 y máximo 3 números consecutivos");
+	 });
 
 	jQuery.validator.addMethod("digValido",function(value, element, regex){
 		return value == digVer ? true : false;
 	});
 
-	jQuery.validator.addMethod("spanishAlphabetical",function(v){
-		return v.match(/^[a-záéíóúüñ ]+$/i);
-	});
-
 	form.validate({
 		rules: {
-			documentID: { required: true, number: true },
-			telephoneNumber: { required: true, pattern: generalPhoneNumber },
+			idNumber: { required: true, number: true },
+			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
 			acceptTerms: 'required',
 			idType: { required: true },
-			idNumber: { required: true, pattern: onlyNumber },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
 			firstName: {required: true, "spanishAlphabetical": true},
 			middleName: { "spanishAlphabetical": true },
 			lastName: { required: true, "spanishAlphabetical": true },
 			secondSurname: { "spanishAlphabetical": true },
 			birthPlace: { "spanishAlphabetical": true },
-			birthDate: { required: true, pattern: date.dmy, "fechaInvalida": true, "mayorEdad": true },
-			gender: { pattern: gender },
-			civilStatus: { pattern: civilStatus },
+			birthDate: { required: true, "fechaInvalida": true, "mayorEdad": true },
 			nationality: { required: true, "spanishAlphabetical": true },
 			addressType: { required: true },
 			postalCode: { digits: true },
@@ -164,24 +176,23 @@ function validateForms(form, options) {
 			province: { required: true },
 			district: { required: true },
 			address: { required: true },
-			email: { required: true, pattern: emailValid },
+			email: { required: true, emailValid: true },
 			confirmEmail: { required: true, equalTo: "#email" },
-			landLine: { minlength: 7, maxlength: 11, number: true, "numberEqual2": true },
-			mobilePhone: { required: true, minlength: 7, maxlength: 11, number: true, "numberEqual3": true },
-			phoneType: { pattern: phoneType },
-			otherPhoneNum: {  minlength: 7, maxlength: 11, number: true, "numberEqual1": true },
+			landLine: { number: true, minlength: 7, maxlength: 11, "numberEqual2": true },
+			mobilePhone: { required: true, number: true, minlength: 7, maxlength: 11, "numberEqual3": true },
+			otherPhoneNum: { number: true, minlength: 7, maxlength: 11, "numberEqual1": true },
 			rucLaboral: { required: true },
 			jobCenter: { required: true },
 			employmentSituation: { required: false },
 			jobOccupation: { required: true },
-			jobTitle: { pattern: alphanumEs },
+			jobTitle: { "spanishAlphabetical": true },
 			income: { required: true, number: true },
 			publicPerformance: { required: true },
 			publicOffice: { required: true, "spanishAlphabetical": true  },
-			institution: { required: true, pattern: alphanumEs },
+			institution: { required: true, "spanishAlphanum": true },
 			uif: { required: true },
-			username: { required: true, pattern: username },
-			userpwd: { required: true, pattern: userPassword, minlength:8, maxlength: 15,"validatePassword": true },
+			username: { required: true, username: true, nowhitespace: true, rangelength: [6, 16] },
+			userpwd: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
 			confirmUserpwd: { required: true, equalTo: "#userpwd" },
 			contract: { required: true },
 			protection: { required: true }
