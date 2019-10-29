@@ -1,15 +1,15 @@
 'use strict';
 var $$ = document;
-var btnRegistry = $$.getElementById('btnRegistrar');
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
+	var btnRegistry = $$.getElementById('btnRegistrar');
+
+	//core
 	$( "#birthDate" ).datepicker( {
 		dateFormat: "dd/mm/yy"
 	});
 
-
-	//core
 	btnRegistrar.addEventListener('click', function(e){
 		e.preventDefault();
 

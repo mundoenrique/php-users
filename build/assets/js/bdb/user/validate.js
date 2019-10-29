@@ -3,6 +3,7 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
+	var btnRegistry = $$.getElementById('btnValidar');
 
 	//core
 	$$.getElementById('btnValidar').addEventListener('click',function(e){
@@ -11,6 +12,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var form = $('#formVerifyAccount');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
+
+			var txtBtnRegistry = btnRegistry.innerHTML.trim();
+			var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+			btnRegistry.innerHTML = msgLoading;
 
 			var document_id = $$.getElementById('idNumber').value;
 
@@ -26,9 +31,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.location.href = response.data;
 				}
 			});
-
-		}else{
-			console.log('form no paso la validacion');
 		}
 	});
 
