@@ -447,8 +447,14 @@ class Novo_User_Model extends NOVO_Model {
 		// if($this->isResponseRc !== FALSE) {
 		// 	$this->isResponseRc = 0;
 		// 	switch($this->isResponseRc) {
+
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('BUTTON_CONTINUE')
+			]
+		];
 		if(true) {
-			$isResponseRc = 0;
+			$isResponseRc = -181;
 			switch($isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -492,7 +498,13 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación";
 					$this->response->code = 4;
-					$this->modalType = "alert-warning";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
 				break;
 
 				case -230:
@@ -506,9 +518,15 @@ class Novo_User_Model extends NOVO_Model {
 				case -335:
 
 					$this->response->title = "Usuario registrado";
-					$this->response->msg = "se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
+					$this->response->msg = "Se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
 					$this->response->code = 0;
-					$this->modalType = "2";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
 
 				break;
 
@@ -518,9 +536,15 @@ class Novo_User_Model extends NOVO_Model {
 				case -311:
 
 					$this->response->title = "Usuario registrado";
-					$this->response->msg = "se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
+					$this->response->msg = "Se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
 					$this->response->code = 0;
-					$this->modalType = "2";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
 
 				break;
 

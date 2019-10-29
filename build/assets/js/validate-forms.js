@@ -154,36 +154,36 @@ function validateForms(form, options) {
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
 			firstName: {required: true, "spanishAlphabetical": true},
 			middleName: { "spanishAlphabetical": true },
-			lastName: { required: true, "spanishAlphabetical": true }, //5
-			secondSurname: { "spanishAlphabetical": true },	//6
-			birthPlace: { "spanishAlphabetical": true },	//7
+			lastName: { required: true, "spanishAlphabetical": true },
+			secondSurname: { "spanishAlphabetical": true },
+			birthPlace: { "spanishAlphabetical": true },
 			birthDate: { required: true, pattern: date.dmy, "fechaInvalida": true, "mayorEdad": true },	//8
-			gender: { pattern: gender },	//9
-			civilStatus: { pattern: civilStatus },	//10
-			nationality: { required: true, "spanishAlphabetical": true },	//11
-			addressType: { required: true },	//12
-			postalCode: { digits: true },	//13
-			country: { required: true },	//14
-			departament: { required: true },	//15
-			province: { required: true },	//16
-			district: { required: true },	//17
-			address: { required: true },	//18
-			email: { required: true, pattern: emailValid },	//19
-			confirmEmail: { required: true, equalTo: "#email" },	//20
-			landLine: { minlength: 7, maxlength: 11, number: true, "numberEqual2": true },	//21
-			mobilePhone: { required: true, minlength: 7, maxlength: 11, number: true, "numberEqual3": true },	//22
-			phoneType: { pattern: phoneType },	//23
-			otherPhoneNum: {  minlength: 7, maxlength: 11, number: true, "numberEqual1": true },	//24
-			rucLaboral: { required: true },	//25
-			jobCenter: { required: true },	//26
-			employmentSituation: { required: false },	//28
-			jobOccupation: { required: true },	//29
-			jobTitle: { pattern: alphanumEs },	//30
-			income: { required: true, number: true },	//31
-			publicPerformance: { required: true },	//32
-			publicOffice: { required: true, "spanishAlphabetical": true  },	//33
-			institution: { required: true, pattern: alphanumEs },	//34
-			uif: { required: true },	//35
+			gender: { pattern: gender },
+			civilStatus: { pattern: civilStatus },
+			nationality: { required: true, "spanishAlphabetical": true },
+			addressType: { required: true },
+			postalCode: { digits: true },
+			country: { required: true },
+			departament: { required: true },
+			province: { required: true },
+			district: { required: true },
+			address: { required: true },
+			email: { required: true, pattern: emailValid },
+			confirmEmail: { required: true, equalTo: "#email" },
+			landLine: { minlength: 7, maxlength: 11, number: true, "numberEqual2": true },
+			mobilePhone: { required: true, minlength: 7, maxlength: 11, number: true, "numberEqual3": true },
+			phoneType: { pattern: phoneType },
+			otherPhoneNum: {  minlength: 7, maxlength: 11, number: true, "numberEqual1": true },
+			rucLaboral: { required: true },
+			jobCenter: { required: true },
+			employmentSituation: { required: false },
+			jobOccupation: { required: true },
+			jobTitle: { pattern: alphanumEs },
+			income: { required: true, number: true },
+			publicPerformance: { required: true },
+			publicOffice: { required: true, "spanishAlphabetical": true  },
+			institution: { required: true, pattern: alphanumEs },
+			uif: { required: true },
 			username: { required: true, pattern: username },
 			userpwd: { required: true, pattern: userPassword, minlength:8, maxlength: 15,"validatePassword": true },
 			confirmUserpwd: { required: true, equalTo: "#userpwd" },
