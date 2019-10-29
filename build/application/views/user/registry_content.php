@@ -7,10 +7,12 @@
 <!--  			<pre>
 				<?php var_dump($data->dataUser->pais); ?>
 			</pre> -->
-			<div class="border-top pt-3">
+			<hr class="separador-one">
+			<div class="pt-3">
 				<h2 class="tertiary h3">Afiliación de Datos</h2>
 				<p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a continuación:</p>
-				<div class="border-top pt-4">
+				<hr class="separador-one">
+				<div class="pt-4">
 					<form method="post" id="formRegistry">
 						<h3 class="tertiary h4">Datos personales</h3>
 						<div class="row">
@@ -63,6 +65,7 @@
 							</div>
 						</div>
 
+						<hr class="separador-one mt-2 mb-4">
 						<h3 class="tertiary h4">Datos de contacto</h3>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -101,27 +104,32 @@
 							</div>
 						</div>
 
+						<hr class="separador-one mt-2 mb-4">
 						<h3 class="tertiary h4">Datos de usuario</h3>
 						<div class="row">
-							<div class="col-6">
-								<div class="form-group">
-									<label for="username">Usuario</label>
-									<input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
-									<div class="help-block"></div>
+							<div class="col-6 col-lg-8 col-xl-6">
+								<div class="row">
+									<div class="form-group col-12 col-lg-6">
+										<label for="username">Usuario</label>
+										<input type="text" class="form-control" id="username" name="username" placeholder="Usuario">
+										<div class="help-block"></div>
+									</div>
 								</div>
-								<div class="form-group">
-									<label for="userpwd">Contraseña</label>
-									<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Contraseña">
-									<div class="help-block"></div>
-								</div>
-								<div class="form-group">
-									<label for="confirmUserpwd">Confirmar Contraseña</label>
-									<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd" placeholder="Confirmar Contraseña">
-									<div class="help-block"></div>
-								</div>
+							<div class="row">
+									<div class="form-group col-12 col-lg-6">
+										<label for="userpwd">Contraseña</label>
+										<input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Contraseña">
+										<div class="help-block"></div>
+									</div>
+									<div class="form-group col-12 col-lg-6">
+										<label for="confirmUserpwd">Confirmar Contraseña</label>
+										<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd" placeholder="Confirmar Contraseña">
+										<div class="help-block"></div>
+									</div>
 							</div>
+						</div>
 
-							<div class="col-6">
+							<div class="col-6 col-lg-4 col-xl-6">
 								<div class="field-meter" id="password-strength-meter">
 									<h4>Requerimientos de contraseña:</h4>
 									<ul class="pwd-rules">
@@ -137,8 +145,8 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="flex items-center justify-end pt-3 border-top">
+						<hr class="separador-one mt-2 mb-4">
+						<div class="flex items-center justify-end">
 							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
 							<button id="btnRegistrar" name="btnRegistrar" class="btn btn-primary" type="submit">Continuar</button>
 						</div>
