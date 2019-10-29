@@ -12,8 +12,8 @@
 					<form method="post" id="formVerifyAccount">
 						<div class="row">
 							<div class="form-group col-lg-auto">
-								<label for="documentID">Documento de Identidad</label>
-								<input id="documentID" class="form-control" type="text" placeholder="12345678" name="documentID">
+								<label for="idNumber">Documento de Identidad</label>
+								<input id="idNumber" class="form-control" type="text" placeholder="12345678" name="idNumber">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-auto">

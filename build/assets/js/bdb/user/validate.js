@@ -12,7 +12,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
-			var document_id = $$.getElementById('documentID').value;
+			var document_id = $$.getElementById('idNumber').value;
 
 			var data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
