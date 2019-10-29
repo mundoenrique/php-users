@@ -467,7 +467,8 @@ class Novo_User_Model extends NOVO_Model {
 							'action'=> 'redirect'
 						]
 					];
-				break;
+					break;
+
 				case -61:
 				case -5:
 				case -3:
@@ -475,15 +476,14 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "";
 					$this->response->code = 2;
 					$this->modalType = "";
-				break;
+					break;
 
 				case -181:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.";
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
-
-				break;
+					break;
 
 				case -284:
 
@@ -491,8 +491,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "El teléfono móvil ya se encuentra registrado.";
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
-
-				break;
+					break;
 
 				case -206:
 					$this->response->title = "Conexión Personas Online";
@@ -505,14 +504,14 @@ class Novo_User_Model extends NOVO_Model {
 							'action'=> 'redirect'
 						]
 					];
-				break;
+					break;
 
 				case -230:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "No se puede realizar el registro en estos momentos, por favor intenta nuevamente.";
 					$this->response->code = 4;
 					$this->modalType = "alert-error";
-				break;
+					break;
 
 				case -271:
 				case -335:
@@ -527,8 +526,7 @@ class Novo_User_Model extends NOVO_Model {
 							'action'=> 'redirect'
 						]
 					];
-
-				break;
+					break;
 
 				case -317:
 				case -314:
@@ -545,10 +543,8 @@ class Novo_User_Model extends NOVO_Model {
 							'action'=> 'redirect'
 						]
 					];
+					break;
 
-				break;
-
-				//verificacion de reniec grupo 1
 				case 5002:
 				case 5003:
 				case -102:
@@ -564,12 +560,11 @@ class Novo_User_Model extends NOVO_Model {
 				case 5030:
 				case 5100:
 				case 5104:
-				case 6000: //Valida conexión fallida
+				case 6000:
 					$this->response->title = "Conexión Personas Online";
 					$this->response->msg = "No hemos podido validar tus datos, por favor intenta nuevamente.";
 					break;
 
-				// verificacion de reniec  grupo 2
 				case 5101:
 				case 5102:
 				case 5103:
@@ -598,7 +593,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->msg = "No fue posible realizar el registro, por favor intenta nuevamente.";
 					$this->response->code = 2;
 					$this->modalType = "alert-error";
-				break;
+					break;
 			}
 		}
 		return $this->response;

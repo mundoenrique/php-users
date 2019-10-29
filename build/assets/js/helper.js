@@ -55,7 +55,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 	}).done(function (response) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if(response.code === 303){
+		if (response.code === 303) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
 			response.code = 'unanswered';
 		}
@@ -90,7 +90,7 @@ function formatterDate(date) {
 	return new Date(dateStr);
 }
 
-function createButton(dialogMoldal, elementBotton, valuesButton){
+function createButton(dialogMoldal, elementBotton, valuesButton) {
 	valuesButton.text && elementBotton.text(valuesButton.text);
 	elementBotton.show();
 	elementBotton.on('click', function (e) {
@@ -120,9 +120,8 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 		closeOnEscape: false,
 		height: "auto",
 		width: 400,
-    open: function() {
-				$('.ui-dialog-titlebar-close').hide()
-    },
+		open: function () {
+		},
 		show: {
 			duration: 250
 		},
@@ -135,14 +134,14 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 				id: 'cancel',
 				class: 'btn underline',
 				type: 'button',
-				click: function() {
+				click: function () {
 					if (btn2) {
 						if (btn2.action === 'redirect') {
 							$(location).attr('href', btn2.link);
 						}
-					} else {
-						$( this ).dialog( "close" );
 					}
+					$(this).off('click');
+					$(this).dialog("close");
 				}
 			},
 			{
@@ -150,22 +149,24 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 				id: 'accept',
 				class: 'btn btn-primary',
 				type: 'button',
-				click: function() {
+				click: function () {
 					if (btn1.action === 'redirect') {
 						$(location).attr('href', btn1.link);
-					} else {
-						$( this ).dialog( "close" );
 					}
+					$(this).off('click');
+					$(this).dialog("close");
 				}
 			}
 		],
-		create: function( event, ui ) {
+		open: function (event, ui) {
+			$('.ui-dialog-titlebar-close').hide();
+			$$.getElementById('system-msg').innerHTML = message;
+
 			btnAccept = $('#accept');
 			btnCancel = $('#cancel');
 			btnAccept.removeClass("ui-button ui-corner-all ui-widget");
 			btnCancel.removeClass("ui-button ui-corner-all ui-widget");
 
-			$$.getElementById('system-msg').innerHTML = message;
 
 			if (!btn2) {
 				btnCancel.hide();
@@ -180,84 +181,84 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 
 // Custom Select
 $(".custom-select").each(function () {
-  var classes = $(this).attr("class"),
-    id = $(this).attr("id"),
-    name = $(this).attr("name");
-  var template = '<div class="' + classes + '">';
-  template +=
-    '<span class="custom-select-trigger">' +
-    $(this).attr("placeholder") +
-    "</span>";
-  template += '<div class="custom-options">';
-  $(this)
-    .find("option")
-    .each(function () {
-      template +=
-        '<span class="custom-option ' +
-        $(this).attr("class") +
-        '" data-value="' +
-        $(this).attr("value") +
-        '">' +
-        $(this).html() +
-        "</span>";
-    });
-  template += "</div></div>";
+	var classes = $(this).attr("class"),
+		id = $(this).attr("id"),
+		name = $(this).attr("name");
+	var template = '<div class="' + classes + '">';
+	template +=
+		'<span class="custom-select-trigger">' +
+		$(this).attr("placeholder") +
+		"</span>";
+	template += '<div class="custom-options">';
+	$(this)
+		.find("option")
+		.each(function () {
+			template +=
+				'<span class="custom-option ' +
+				$(this).attr("class") +
+				'" data-value="' +
+				$(this).attr("value") +
+				'">' +
+				$(this).html() +
+				"</span>";
+		});
+	template += "</div></div>";
 
-  $(this).wrap('<div class="custom-select-wrapper"></div>');
-  $(this).hide();
-  $(this).after(template);
+	$(this).wrap('<div class="custom-select-wrapper"></div>');
+	$(this).hide();
+	$(this).after(template);
 });
 
 // Custom Option Hover
 $(".custom-option:first-of-type").hover(
-  function () {
-    $(this)
-      .parents(".custom-options")
-      .addClass("option-hover");
-  },
-  function () {
-    $(this)
-      .parents(".custom-options")
-      .removeClass("option-hover");
-  }
+	function () {
+		$(this)
+			.parents(".custom-options")
+			.addClass("option-hover");
+	},
+	function () {
+		$(this)
+			.parents(".custom-options")
+			.removeClass("option-hover");
+	}
 );
 
 // Custom Select Trigger
 $(".custom-select-trigger").on("click", function () {
-  $("html").on("click", function () {
-    $(".custom-select").removeClass("opened");
+	$("html").on("click", function () {
+		$(".custom-select").removeClass("opened");
 	});
 	$(".custom-select-trigger").not(this)
-    .parents(".custom-select")
+		.parents(".custom-select")
 		.removeClass("opened");
-  $(this)
-    .parents(".custom-select")
-    .toggleClass("opened");
-  event.stopPropagation();
+	$(this)
+		.parents(".custom-select")
+		.toggleClass("opened");
+	event.stopPropagation();
 });
 
-$(".custom-select option[value='X']").each(function() {
-  $(this).remove();
+$(".custom-select option[value='X']").each(function () {
+	$(this).remove();
 });
 
 // Custom Option
 $(".custom-option").on("click", function () {
-  $(this)
-    .parents(".custom-select-wrapper")
-    .find("select")
-    .val($(this).data("value"));
-  $(this)
-    .parents(".custom-options")
-    .find(".custom-option")
-    .removeClass("selection");
-  $(this).addClass("selection");
-  $(this)
-    .parents(".custom-select")
-    .removeClass("opened");
-  $(this)
-    .parents(".custom-select")
-    .find(".custom-select-trigger")
-    .text($(this).text());
+	$(this)
+		.parents(".custom-select-wrapper")
+		.find("select")
+		.val($(this).data("value"));
+	$(this)
+		.parents(".custom-options")
+		.find(".custom-option")
+		.removeClass("selection");
+	$(this).addClass("selection");
+	$(this)
+		.parents(".custom-select")
+		.removeClass("opened");
+	$(this)
+		.parents(".custom-select")
+		.find(".custom-select-trigger")
+		.text($(this).text());
 });
 
 /* Fin Funciones para Custom Select

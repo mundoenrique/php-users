@@ -120,16 +120,12 @@ function validateForms(form, options) {
 	}, "Fecha invalida");
 
 	// Metodo que valida si el usuario es mayor de edad
-	jQuery.validator.addMethod("mayorEdad", function(value, element) {
+	jQuery.validator.addMethod("mayorEdad", function(value, element){
 		var hoy, fechanacimiento, years
 		hoy = moment();
-		console.log("fecha hoy: " + hoy);
 		fechanacimiento = moment(value, "DD/MM/YYYY");
-		console.log("fecha nac: " + fechanacimiento);
 		years = hoy.diff(fechanacimiento, 'years');
-		console.log(years);
-
-    return years >= 18;
+		return years >= 18;
 	}, "Usted no es mayor de edad");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
@@ -157,7 +153,7 @@ function validateForms(form, options) {
 			lastName: { required: true, "spanishAlphabetical": true },
 			secondSurname: { "spanishAlphabetical": true },
 			birthPlace: { "spanishAlphabetical": true },
-			birthDate: { required: true, pattern: date.dmy, "fechaInvalida": true, "mayorEdad": true },	//8
+			birthDate: { required: true, pattern: date.dmy, "fechaInvalida": true, "mayorEdad": true },
 			gender: { pattern: gender },
 			civilStatus: { pattern: civilStatus },
 			nationality: { required: true, "spanishAlphabetical": true },
