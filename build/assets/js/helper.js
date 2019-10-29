@@ -114,7 +114,7 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 
 	dialogMoldal.dialog({
 		modal: 'true',
-		title: 'CPO - Banco Bogota',
+		title: title,
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
@@ -164,6 +164,9 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 			btnCancel = $('#cancel');
 			btnAccept.removeClass("ui-button ui-corner-all ui-widget");
 			btnCancel.removeClass("ui-button ui-corner-all ui-widget");
+
+			$$.getElementById('system-msg').innerHTML = message;
+
 			if (!btn2) {
 				btnCancel.hide();
 			}
