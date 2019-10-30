@@ -57,8 +57,7 @@ class Novo_User_Model extends NOVO_Model {
 						$this->session->set_userdata($userData);
 						$this->response->code = 0;
 						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = "http://localhost/site-conexionpersonas/build/dashboard";
-						//$this->response->data = base_url('empresas');
+						$this->response->data = base_url('dashboard');
 
 						$data = ['username' => $dataRequest->user];
 						$this->db->where('id', $this->session->session_id);
@@ -323,7 +322,6 @@ class Novo_User_Model extends NOVO_Model {
 		} else {
 			$this->callWs_Login_User($dataRequest->dataLogin[0]);
 			$this->response->owner = 'login';
-
 		}
 		return $this->response;
 	}
