@@ -14,12 +14,12 @@
 						<div class="row">
 							<div class="form-group col-lg-auto">
 								<label for="idNumber">Documento de Identidad</label>
-								<input id="idNumber" class="form-control" type="text" placeholder="12345678" name="idNumber">
+								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-auto">
 								<label for="telephoneNumber">Número de teléfono</label>
-								<input id="telephoneNumber" class="form-control" type="text"  placeholder="04161112233" name="telephoneNumber">
+								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
 						</div>
