@@ -4,15 +4,36 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnRegistry = $$.getElementById('btnRegistrar');
+	var maxBirthdayDate = new Date();
+  maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
+	console.log(maxBirthdayDate);
 
 	//core
+
+	$.datepicker.regional['es'] = {
+    closeText: 'Cerrar',
+    prevText: '<Ant',
+    nextText: 'Sig>',
+    currentText: 'Hoy',
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+    weekHeader: 'Sm',
+    dateFormat: 'dd/mm/yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+  };
+	$.datepicker.setDefaults($.datepicker.regional['es']);
+
 	$( "#birthDate" ).datepicker( {
-		dateFormat: "dd/mm/yy",
-		showOtherMonths: true,
-    selectOtherMonths: true,
     changeMonth: true,
-    changeYear: true,
-    yearRange: "-99:-18",
+		changeYear: true,
+		maxDate: maxBirthdayDate,
+    yearRange: "-99:"+maxBirthdayDate,
 		defaultDate: "-30y",
 		showAnim: "slideDown",
 	});
