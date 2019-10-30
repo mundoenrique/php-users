@@ -301,11 +301,6 @@ main.content {
 	box-shadow: 0 0 2px var(--primary-shade);
 }
 
-.form-control::placeholder {
-	color: var(--placeholder-color);
-	/* opacity: 1; */
-}
-
 .form-control:disabled, .form-control[readonly] {
 	background-color: #e9ecef;
 	opacity: 1;
