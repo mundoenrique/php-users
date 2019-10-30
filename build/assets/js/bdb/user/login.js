@@ -51,13 +51,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	btnLogin.addEventListener("click", function(e){
 		e.preventDefault();
 
-		var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
-		$(this).html(msgLoading);
-
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
+
 		if(form.valid()) {
+
+			var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+			$(this).html(msgLoading);
 			disableInputsForm(true)
+
 			grecaptcha.ready(function() {
 				grecaptcha
 				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
@@ -65,16 +67,17 @@ document.addEventListener('DOMContentLoaded', function(){
 					var credentialUser = getCredentialsUser();
 					validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
 				},function() {
-					title = prefixCountry + strCountry;
+					title = 'Conexión Personas Online';
 					icon = iconWarning;
 					data = {
 						btn1: {
 							link: false,
-							action: 'close'
+							action: 'close',
+							text: 'Continuar'
 						}
 					};
-					notiSystem(title, msg, icon, data);
-					restartForm(text);
+					notiSystem(title, '', icon, data);
+					restartForm(txtBtnLogin);
 				});
 			});
 		}
