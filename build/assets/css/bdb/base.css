@@ -301,11 +301,6 @@ main.content {
 	box-shadow: 0 0 2px var(--primary-shade);
 }
 
-.form-control::placeholder {
-	color: var(--placeholder-color);
-	/* opacity: 1; */
-}
-
 .form-control:disabled, .form-control[readonly] {
 	background-color: #e9ecef;
 	opacity: 1;
@@ -370,7 +365,6 @@ textarea.form-control {
 	padding: 5px 10px;
 	position: relative;
 	transition: all 375ms ease-in-out;
-	color: var(--placeholder-color);
 }
 
 .custom-select-trigger:after {
@@ -538,7 +532,6 @@ textarea.form-control {
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
 }
-
 
 /* Validator */
 
@@ -2149,6 +2142,139 @@ a:visited.ui-button,
 .ui-button {
 	color: #454545;
 	text-decoration: none;
+}
+
+
+/* DatePicker */
+
+.ui-datepicker {
+  padding: 0 !important;
+  background: var(--secondary) !important;
+  border: solid 1px var(--border-color);
+  box-shadow: 1px 1px 2px 0 var(--shadows-color);
+}
+
+.ui-datepicker .ui-datepicker-prev {
+  left: 2px !important;
+  top: 3px !important;
+}
+
+.ui-datepicker .ui-datepicker-next {
+  top: 3px !important;
+  right: 2px !important;
+}
+
+.ui-datepicker td {
+  padding: 2px !important;
+}
+
+.ui-widget-header {
+  background-color: var(--primary) !important;
+  border: none !important;
+  color: var(--secondary) !important;
+  border-radius: 0 !important;
+}
+
+.ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary {
+  opacity: 0.2 !important;
+}
+
+.ui-widget-content {
+  color: var(--primary) !important;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+  background: none;
+  border: 0;
+  color: var(--secondary);
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+  width: 45%;
+  text-align: center;
+}
+
+.ui-datepicker-title {
+  position: relative;
+  background-color: var(--primary);
+  width: 140px;
+}
+.ui-datepicker-title::before {
+  content: '';
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 5px 0 5px;
+  border-color: var(--secondary) transparent transparent transparent;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.ui-datepicker-title  > select  {
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+  text-align: center;
+  background: var(--secondary) !important;
+  border: 1px solid var(--secondary) !important;
+  border-radius: var(--btn-border-radius) !important;
+  color:  var(--tertiary) !important;
+  padding: 5px 6px !important;
+  line-height: 15px;
+}
+
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+  border: transparent !important;
+  border-radius: var(--btn-border-radius) !important;
+	background: var(--primary) !important;
+  color: var(--secondary) !important;
+}
+
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus {
+  border-radius: var(--btn-border-radius) !important;
+  border: 1px solid var(--primary) !important;
+  color: var(--tertiary) !important;
+  transition: .3s;
+}
+
+.ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {
+  border-radius: var(--btn-border-radius) !important;
+  border: 0px solid var(--primary) !important;
+  color: var(--tertiary) !important;
+  transition: .3s;
+  background-color: var(--primary-tint) !important;
+}
+
+.ui-datepicker-current-day > .ui-state-active:hover{
+  background-color: var(--secondary) !important;
+  border-radius: var(--btn-border-radius) !important;
+  border: 1.4px solid var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+  background:var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight:active {
+  border-radius: var(--btn-border-radius) !important;
+  color: var(--tertiary) !important;
 }
 
 /* Fin Estilos Base
