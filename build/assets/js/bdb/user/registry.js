@@ -59,7 +59,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			capital: pswd.match(/[A-Z]/),
 			number: !pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/),
 			consecutivo: !pswd.match(/(.)\1{2,}/),
-			especial: !pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)
+			especial: pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)
 		}
 
 		Object.keys(validations).forEach(function(rule){
