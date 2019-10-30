@@ -2,6 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Novo_User_Model
+$lang['RESP_DEFAULT_CODE'] = 4;
+$lang['RESP_RC_DEFAULT'] = -9999;
+$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
+$lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
+$lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
+
+
+
+
+$lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
+
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_TITLE-1']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-1']= "Usuario o contraseña inválido";

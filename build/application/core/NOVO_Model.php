@@ -45,65 +45,38 @@ class NOVO_Model extends CI_Model {
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> 'Global', 'keyId' => 'CPONLINE'];
 		$response = [];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName);
-		$response = json_decode($response);
-		$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
-		$this->isResponseRc = FALSE;
-		$this->response->title = lang('SYSTEM_NAME');
+		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
-		if(isset($responseDecrypt->rc)) {
-		$this->isResponseRc = $responseDecrypt->rc;
-			switch($this->isResponseRc) {
-				case -1:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_(-1)');
-					$this->response->data = base_url('inicio');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-						]
-					];
-					break;
-				case -29:
-				case -61:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_(-29)');
-					$this->response->data = base_url('inicio');
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-					$this->session->sess_destroy();
-					break;
-				default:
-					$this->response->code = 303;
-					$this->response->msg = lang('ERROR_GENERAL');
-					$this->response->className = 'modal-error';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
-						]
-					];
-			}
-		} else {
-			$this->response->code = 303;
-			$this->response->msg = lang('ERROR_GENERAL');
-			$this->response->className = 'modal-error';
-			$this->response->data = [
-				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
-					'link'=> base_url('inicio'),
-					'action'=> 'redirect'
-				]
-			];
+		if(isset($response->rc)){
+			$responseDecrypt = $response;
+		}else{
+			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		}
+
+		$this->isResponseRc = (int) $responseDecrypt->rc;
+		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = '';
+		$this->response->icon = 'ui-icon-alert';
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> FALSE,
+				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
+				'action'=> 'redirect'
+			]
+		];
+
+		switch($this->isResponseRc) {
+			case -61:
+
+				$this->response->msg = lang('RES_DUPLICATED_SESSION');
+				$this->session->sess_destroy();
+				break;
+
+			default:
+				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+		}
+		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
 
 		return $responseDecrypt;
 	}

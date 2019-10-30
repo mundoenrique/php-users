@@ -61,7 +61,6 @@ $route['(:any)/registro'] = "user/registry";
 $route['(:any)/async-call'] = "callModels";
 
 
-
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
 

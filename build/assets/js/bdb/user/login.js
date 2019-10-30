@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	disableInputsForm(false);
 
 	const responseCodeLogin = {
-		0: function(response){
+		0: function(response)
+		{
 			$(location).attr('href', response.data);
 		},
-		1: function(response, textBtn){
+		1: function(response, textBtn)
+		{
 			$('#user_login').showBalloon({
 				html: true,
 				classname: response.className,
@@ -20,16 +22,17 @@ document.addEventListener('DOMContentLoaded', function(){
 				contents: response.msg
 			});
 			notiSystem(response.title, response.msg, response.className, response.data);
-			restartForm(textBtn);
 		},
-		2: function(){
+		2: function()
+		{
 			user.active = 1;
 			verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
 			callNovoCore(verb, who, where, data, function(response) {
 				validateResponseLogin(response);
 			})
 		},
-		3: function(response, textBtn){
+		3: function(response, textBtn)
+		{
 			var dataLogin = getCredentialsUser();
 			notiSystem(response.title, response.msg, response.className, response.data);
 			var btn = response.data.btn1;
@@ -39,11 +42,10 @@ document.addEventListener('DOMContentLoaded', function(){
 					callNovoCore (verb, who, where, data);
 				});
 			}
-			restartForm(textBtn);
 		},
-		99: function(response, textBtn){
+		99: function(response, textBtn)
+		{
 			notiSystem(response.title, response.msg, response.className, response.data);
-			restartForm(textBtn);
 		}
 	}
 
@@ -64,9 +66,11 @@ document.addEventListener('DOMContentLoaded', function(){
 				grecaptcha
 				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
 				.then(function(token) {
+
 					var credentialUser = getCredentialsUser();
 					validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
 				},function() {
+
 					title = 'Conexión Personas Online';
 					icon = iconWarning;
 					data = {
@@ -87,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	});
 
 	// Functions
-
 	function disableInputsForm(status)
 	{
 		document.getElementById('username').disabled = status;
@@ -98,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	function restartForm(textBtn)
 	{
 		disableInputsForm(false);
+
 		document.getElementById('btn-login').innerHTML = textBtn;
 		document.getElementById("userpwd").value = '';
 		if(country == 'bp') {
@@ -114,14 +118,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 	};
 
-	function validateLogin(dataValidateLogin){
+	function validateLogin(dataValidateLogin)
+	{
 		var data = {
 			user: dataValidateLogin.user.user,
 			token: dataValidateLogin.token,
 			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
 		}
 		verb = "POST"; who = 'User'; where = 'validateCaptcha';
-		// verb = "POST"; who = 'User'; where = 'Login'; data = user; // llama al login
 		callNovoCore(verb, who, where, data, function(response) {
 
 			if (response.code !== 0 && response.owner === 'captcha'){
@@ -136,8 +140,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
+		restartForm(txtBtnLogin);
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}
-
 });

@@ -54,50 +54,96 @@ class Encrypt_Connect {
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
-		$response = $response == '' ? ' unanswered' : $response;
 
-		$rc = isset($response->rc) ? ' RC: '.$response->rc : '';
-		$msg = isset($response->msg) ? ' MSG: '.$response->msg : '';
-		$country = isset($response->pais) ? ' COUNTRY: '.$response->pais : '';
-		$unAnswered = $response === ' unanswered' ? $response : '';
+		if(!$response) {
+			log_message('ERROR', 'NOVO ['.$userName.'] Sin respuesta del servicio');
+			$response = new stdClass();
+			$response->rc = lang('RESP_RC_DEFAULT');
+			$response->msg = lang('RESP_MESSAGE_SYSTEM');
+		}
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model . '=' . $rc . $msg . $country . $unAnswered);
+		if(!isset($response->pais)) {
+				log_message('DEBUG', 'NOVO ['.$userName.'] Insertando pais al RESPONSE');
+				$response->pais = $this->CI->config->item('country');
+		}
+
+		$this->logMessage = $response;
+		$this->logMessage->model = $model;
+		$this->logMessage->userName = $userName;
+		$this->writeLog($this->logMessage);
 
 		return $response;
-
 	}
 	/**
 	 * @info método para realizar la petición al servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 */
-	public function connectWs($request, $userName)
+	public function connectWs($request, $userName, $model)
 	{
+		$fail = FALSE;
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$urlWS = $this->CI->config->item('urlWS').'movilsInterfaceResource';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
 
-		$request = json_encode($request);
+		$requestSerV = json_encode($request);
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			               'Content-Type: text/plain',
-			               'Content-Length: ' . strlen($request))
+			               'Content-Length: ' . strlen($requestSerV))
 		);
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curlError = curl_error($ch);
+		curl_close($ch);
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
-		if(!$httpCode || $httpCode != 200) {
-			return FALSE;
-		} else {
-			return $response;
+		$failResponse = json_decode($response);
+		if(is_object($failResponse->data)){
+			$response = $failResponse;
+			$fail = TRUE;
 		}
+
+		if ($httpCode !== 200 || !$response){
+			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError));
+			$failResponse = new stdClass();
+			$failResponse->rc = lang('RESP_RC_DEFAULT');
+			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+			$response = $failResponse;
+			$fail = TRUE;
+		}
+
+		if ($fail){
+			$this->logMessage = $failResponse;
+			$this->logMessage->userName = $userName;
+			$this->logMessage->model = $model;
+			$this->logMessage->pais = $request['pais'];
+
+			$this->writeLog($this->logMessage);
+		}
+
+		return json_decode($response);
+	}
+
+	/**
+	 * @info Método para es cribir el log de la respuesta del servicio
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date October 25th, 2019
+	 */
+	private function writeLog($logMessage)
+	{
+		$userName = $logMessage->userName;
+		$model = $logMessage->model;
+		$msg = $logMessage->msg || '';
+		$rc = $logMessage->rc;
+		$country = $logMessage->pais;
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 	}
 }

@@ -111,9 +111,16 @@ class Novo_User_Model extends NOVO_Model {
 				case -8:
 				case -35:
 					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_SUSPENDED_USER');
 					$this->response->className = 'login-inactive';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 				case -229:
 					$this->response->code = 2;
