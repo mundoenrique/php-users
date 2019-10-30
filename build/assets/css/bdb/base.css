@@ -365,7 +365,6 @@ textarea.form-control {
 	padding: 5px 10px;
 	position: relative;
 	transition: all 375ms ease-in-out;
-	color: var(--placeholder-color);
 }
 
 .custom-select-trigger:after {

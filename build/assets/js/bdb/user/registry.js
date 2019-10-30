@@ -7,7 +7,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	//core
 	$( "#birthDate" ).datepicker( {
-		dateFormat: "dd/mm/yy"
+		dateFormat: "dd/mm/yy",
+		showOtherMonths: true,
+    selectOtherMonths: true,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "-99:-18",
+		defaultDate: "-30y",
+		showAnim: "slideDown",
 	});
 
 	btnRegistrar.addEventListener('click', function(e){
