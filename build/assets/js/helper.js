@@ -64,7 +64,6 @@ function callNovoCore(verb, who, where, data, _response_) {
 			_response_(response);
 		}
 	}).fail(function (xhr) {
-		console.log(xhr.responseText);
 		title = prefixCountry + strCountry;
 		icon = iconWarning;
 		data = {
