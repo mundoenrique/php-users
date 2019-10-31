@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(form.valid()) {
 
-			var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
 			$(this).html(msgLoading);
 			disableInputsForm(true)
 
@@ -84,10 +83,13 @@ document.addEventListener('DOMContentLoaded', function(){
 					restartForm(txtBtnLogin);
 				});
 			});
+
 		}
 		else{
-			btnLogin.innerHTML = txtBtnLogin;
+			var credentialUser = getCredentialsUser();
+			validateLogin({token: '', user: credentialUser, text: txtBtnLogin});
 		}
+
 	});
 
 	// Functions
@@ -125,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			token: dataValidateLogin.token,
 			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
 		}
-		verb = "POST"; who = 'User'; where = 'validateCaptcha';
+		verb = "POST"; who = 'User'; where = data.token == '' ? 'login': 'validateCaptcha';
+
 		callNovoCore(verb, who, where, data, function(response) {
 
 			if (response.code !== 0 && response.owner === 'captcha'){

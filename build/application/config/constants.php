@@ -186,3 +186,8 @@ $arrayUri = explode('/', $_SERVER['REQUEST_URI']);
 $lang = end($arrayUri);
 define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
 unset($arrayUri, $lang);
+
+define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
+&& filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
+);

@@ -28,6 +28,7 @@ $config['base_url_cdn'] = BASE_CDN_URL;
 $config['base_path_cdn'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
+$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 //url API
 $config['urlAPI'] = URL_API;
 //Credenciales oauth

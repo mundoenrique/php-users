@@ -39,6 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->logged = $this->session->userdata('logged');
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
+		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->lang->load(['general', 'error', 'response'], 'base-spanish');
 
 		$this->optionsCheck();

@@ -46,7 +46,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		if(form.valid()) {
 
 			var txtBtnRegistry = btnRegistry.innerHTML.trim();
-			var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
 			btnRegistry.innerHTML = msgLoading;
 
 			var data = {};

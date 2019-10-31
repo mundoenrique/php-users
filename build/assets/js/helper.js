@@ -14,6 +14,8 @@ function getPropertyOfElement(property, element) {
 	return $(element).attr(property);
 }
 
+
+
 //icons
 var iconSuccess = 'ui-icon-circle-check';
 var iconInfo = 'ui-icon-info';
@@ -30,6 +32,7 @@ var isoPais = pais;
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
+var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
@@ -55,30 +58,25 @@ function callNovoCore(verb, who, where, data, _response_) {
 	}).done(function (response) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-		if (response.code === 303) {
+		if (response.code === codeResp) {
 			notiSystem(response.title, response.msg, response.icon, response.data);
-			response.code = 'unanswered';
 		}
 
-		if (response.data !== 'finishSession') {
-			_response_(response);
-		}
+		_response_(response);
+
 	}).fail(function (xhr) {
-		title = prefixCountry + strCountry;
+		title = titleNotiSystem;
 		icon = iconWarning;
 		data = {
 			btn1: {
 				class: 'btn btn-primary',
-				link: false,
-				action: 'close',
-				text: 'Aceptar'
+				action: 'redirect',
+				link: uriRedirecTarget,
+				text: textBtnNotiSystem
 			}
 		};
 		notiSystem(title, null, icon, data);
-		var resp = {
-			code: 'unanswered'
-		}
-		_response_(resp);
+		_response_(data);
 	});
 }
 

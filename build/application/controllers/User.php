@@ -88,6 +88,13 @@ class User extends NOVO_Controller {
 				"third_party/borders"
 			);
 		}
+
+		if($this->render->activeRecaptcha) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+			$this->render->loginUri = 'validateCaptcha';
+		}
+
 		$this->views = $views;
 		$this->render->titlePage = lang('SYSTEM_NAME');
 

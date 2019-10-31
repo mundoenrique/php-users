@@ -48,17 +48,24 @@
 		<p><span id="system-msg" class="system-msg"><?= lang('MESSAGE_SYSTEM'); ?></span></p>
 	</div>
 
-
-	<?php
-		if($module == 'login') {
-			echo 	$scriptCaptcha;
-		}
-		echo $this->asset->insertJs($countryUri);
-	?>
 	<script>
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
+		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
+		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
+		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
+		var textBtnNotiSystem = '<?= lang('BUTTON_ACCEPT'); ?>';
+		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
+
 	</script>
+
+	<?php
+		if($module == 'login' && $activeRecaptcha) {
+			echo 	$scriptCaptcha;
+		}
+
+		echo $this->asset->insertJs($countryUri);
+	?>
 </body>
 
 </html>
