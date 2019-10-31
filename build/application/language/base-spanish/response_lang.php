@@ -7,6 +7,7 @@ $lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
 $lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
+$lang['RES_BAD_USER_PASSWORD']= "Usuario o contraseña inválido";
 
 
 
@@ -14,8 +15,8 @@ $lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
 $lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
 
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
-$lang['LOGIN_TITLE-1']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-1']= "Usuario o contraseña inválido";
+$lang['LOGIN_TITLE-1']= 'Usuario incorrecto';
 $lang['LOGIN_TITLE-2'] = 'Usuario nuevo';
 $lang['LOGIN_MSG-2'] = 'Usuario ingresando en la aplicación por primera vez';
 $lang['LOGIN_TITLE-8'] = 'Usuario suspendido';

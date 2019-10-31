@@ -32,6 +32,15 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
+
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('BUTTON_ACCEPT'),
+				'link'=> FALSE,
+				'action'=> 'close'
+			]
+		];
+
 		if($this->isResponseRc !== FALSE) {
 			switch($this->isResponseRc) {
 				case 0:
@@ -57,7 +66,8 @@ class Novo_User_Model extends NOVO_Model {
 						$this->session->set_userdata($userData);
 						$this->response->code = 0;
 						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = base_url('dashboard');
+						$this->response->data = str_replace('/'.'bdb'.'/', '/', base_url('dashboard'));
+						//$this->response->data = base_url('dashboard');
 
 						$data = ['username' => $dataRequest->user];
 						$this->db->where('id', $this->session->session_id);
@@ -104,8 +114,8 @@ class Novo_User_Model extends NOVO_Model {
 				case -1:
 				case -263:
 					$this->response->code = 1;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_BAD_USER_PASSWORD');
 					$this->response->className = 'modal-error';
 					break;
 				case -8:
@@ -114,13 +124,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_SUSPENDED_USER');
 					$this->response->className = 'login-inactive';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+
 					break;
 				case -229:
 					$this->response->code = 2;
@@ -455,7 +459,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->response->data = [
 			'btn1'=> [
-				'text'=> lang('BUTTON_CONTINUE')
+				'text'=> lang('BUTTON_ACCEPT'),
+				'link' => false,
+				'action' => close
 			]
 		];
 		if(true) {
