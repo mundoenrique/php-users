@@ -53,43 +53,42 @@ document.addEventListener('DOMContentLoaded', function(){
 	btnLogin.addEventListener("click", function(e){
 		e.preventDefault();
 
+		var credentialUser = getCredentialsUser();
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
 
-		if(form.valid()) {
+		if (activatedCaptcha) {
 
-			$(this).html(msgLoading);
-			disableInputsForm(true)
+			if(form.valid()) {
 
-			grecaptcha.ready(function() {
-				grecaptcha
-				.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
-				.then(function(token) {
+				$(this).html(msgLoading);
+				disableInputsForm(true)
 
-					var credentialUser = getCredentialsUser();
-					validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
-				},function() {
+				grecaptcha.ready(function() {
+					grecaptcha
+					.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
+					.then(function(token) {
+						validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
+					},function() {
 
-					title = 'Conexión Personas Online';
-					icon = iconWarning;
-					data = {
-						btn1: {
-							link: false,
-							action: 'close',
-							text: 'Continuar'
-						}
-					};
-					notiSystem(title, '', icon, data);
-					restartForm(txtBtnLogin);
+						title = 'Conexión Personas Online';
+						icon = iconWarning;
+						data = {
+							btn1: {
+								link: false,
+								action: 'close',
+								text: 'Continuar'
+							}
+						};
+						notiSystem(title, '', icon, data);
+						restartForm(txtBtnLogin);
+					});
 				});
-			});
-
+			}
 		}
 		else{
-			var credentialUser = getCredentialsUser();
 			validateLogin({token: '', user: credentialUser, text: txtBtnLogin});
 		}
-
 	});
 
 	// Functions
@@ -122,12 +121,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function validateLogin(dataValidateLogin)
 	{
-		var data = {
-			user: dataValidateLogin.user.user,
-			token: dataValidateLogin.token,
-			dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
+		verb = "POST"; who = 'User'; where = dataValidateLogin.token ? 'validateCaptcha' : 'login';
+
+		if (dataValidateLogin.token){
+			var data = {
+				user: dataValidateLogin.user.user,
+				token: dataValidateLogin.token,
+				dataLogin: [dataValidateLogin.user, dataValidateLogin.text]
+			}
+		}else{
+			var data = dataValidateLogin.user;
 		}
-		verb = "POST"; who = 'User'; where = data.token == '' ? 'login': 'validateCaptcha';
 
 		callNovoCore(verb, who, where, data, function(response) {
 
