@@ -2283,8 +2283,12 @@ a.ui-button:active,
 	width: 45%;
   text-align: center;
 	color: var(--secondary);
-	background: none;
 	border: 0;
+  background-color: transparent;
+}
+.ui-datepicker select.ui-datepicker-month option,
+.ui-datepicker select.ui-datepicker-year option {
+	color: var(--text-color);
 }
 .ui-datepicker table {
 	width: 100%;
