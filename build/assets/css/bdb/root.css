@@ -56,10 +56,10 @@
   --bg-color: #f6f3f1;
 
   --widget-color:#f4f4f4;
-  --shadows-color:#f2f2f2;
   --border-color:#b5bac3;
   --text-color: #7b7b7b;
   --placeholder-color: #bcc0c6;
+	--disabled-color:#ececec;
 
   --label-color: #012c71;
   --primary-shade: #012c71a6;
