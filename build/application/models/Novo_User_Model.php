@@ -461,7 +461,7 @@ class Novo_User_Model extends NOVO_Model {
 			'btn1'=> [
 				'text'=> lang('BUTTON_ACCEPT'),
 				'link' => false,
-				'action' => close
+				'action' => 'close'
 			]
 		];
 		if(true) {
