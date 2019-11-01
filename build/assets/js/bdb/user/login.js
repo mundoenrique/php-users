@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
 						validateLogin({token: token, user: credentialUser, text: txtBtnLogin});
 					},function() {
 
-						title = 'Conexión Personas Online';
+						title = titleNotiSystem;
 						icon = iconWarning;
 						data = {
 							btn1: {
