@@ -23,9 +23,9 @@
 								<div class="help-block"></div>
 							</div>
 						</div>
-						<div class="form-group form-check my-3">
-							<input id="acceptTerms" class="form-check-input" type="checkbox" name="acceptTerms">
-							<label class="form-check-label" for="acceptTerms">
+						<div class="form-group custom-control custom-checkbox my-3">
+							<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
+							<label class="custom-control-label" for="acceptTerms">
 								Acepto las <a class="" href="#" rel="section">condiciones de uso</a> de este sistema
 							</label>
 							<div class="help-block"></div>
