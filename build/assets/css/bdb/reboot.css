@@ -246,31 +246,6 @@ select { /* 1 */
   text-transform: none;
 }
 
-::-webkit-input-placeholder {
-	color: var(--placeholder-color);
-	opacity: 1;
-}
-
-::-moz-placeholder {
-  color: var(--placeholder-color);
-	opacity: 1;
-}
-
-:-ms-input-placeholder {
-  color: var(--placeholder-color);
-	opacity: 1;
-}
-
-::-ms-input-placeholder {
-  color: var(--placeholder-color);
-	opacity: 1;
-}
-
-::placeholder {
-  color: var(--placeholder-color);
-	opacity: 1;
-}
-
 /**
  * Correct the inability to style clickable types in iOS and Safari.
  */

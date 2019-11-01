@@ -299,6 +299,31 @@ main.content {
 	box-shadow: 0 0 2px var(--primary-shade);
 }
 
+.form-control::-webkit-input-placeholder {
+	color: var(--placeholder-color);
+	opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: var(--placeholder-color);
+	opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: var(--placeholder-color);
+	opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: var(--placeholder-color);
+	opacity: 1;
+}
+
+.form-control::placeholder {
+  color: var(--placeholder-color);
+	opacity: 1;
+}
+
 .form-control:disabled, .form-control[readonly] {
 	background-color: var(--disabled-color);
 	opacity: 1;
