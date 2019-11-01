@@ -419,6 +419,13 @@ class Novo_User_Model extends NOVO_Model {
 		// 	$this->isResponseRc = 0;
 		// 	switch($this->isResponseRc) {
 
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('BUTTON_ACCEPT'),
+				'link' => false,
+				'action' => 'close'
+			]
+		];
 		if(true) {
 			$isResponseRc = -181;
 			switch($isResponseRc) {
