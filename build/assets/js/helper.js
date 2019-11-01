@@ -72,7 +72,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 				class: 'btn btn-primary',
 				action: 'redirect',
 				link: uriRedirecTarget,
-				text: textBtnNotiSystem
+				text: txtBtnAcceptNotiSystem
 			}
 		};
 		notiSystem(title, null, icon, data);
@@ -99,15 +99,12 @@ function createButton(dialogMoldal, elementBotton, valuesButton) {
 	});
 }
 
-function notiSystem(title, message, type = 'modal-warning', data) {
+function notiSystem(title, message, data) {
 
-	var msgAccept = $('#system-info').attr("accept");
-	var msgCancel = $('#system-info').attr("cancel");
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
-	var btn1 = data.btn1 || { class: 'btn btn-primary', link: false, action: 'close', text: msgAccept };
+	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
 	var btn2 = data.btn2;
-	var btnAccept, btnCancel;
 
 	dialogMoldal.dialog({
 		modal: 'true',
@@ -127,7 +124,7 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 		},
 		buttons: [
 			{
-				text: 'Cancelar',
+				text: txtBtnCancelNotiSystem,
 				id: 'cancel',
 				class: 'btn underline',
 				type: 'button',
@@ -159,14 +156,11 @@ function notiSystem(title, message, type = 'modal-warning', data) {
 			$('.ui-dialog-titlebar-close').hide();
 			$$.getElementById('system-msg').innerHTML = message;
 
-			btnAccept = $('#accept');
-			btnCancel = $('#cancel');
-			btnAccept.removeClass("ui-button ui-corner-all ui-widget");
-			btnCancel.removeClass("ui-button ui-corner-all ui-widget");
-
+			$('#accept').removeClass("ui-button ui-corner-all ui-widget");
+			$('#cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			if (!btn2) {
-				btnCancel.hide();
+				$('#cancel').hide();
 			}
 			dialogMoldal.removeClass("none");
 		}

@@ -44,18 +44,19 @@
 		</div>
 	</footer>
 
-	<div id="system-info" class="none" name="system-info" cancel="<?= lang('BUTTON_CANCEL'); ?>" accept="<?= lang('BUTTON_ACCEPT'); ?>">
+	<div id="system-info" class="none" name="system-info">
 		<p><span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span></p>
 	</div>
 
 	<script>
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
-		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
-		var textBtnNotiSystem = '<?= lang('GEN_BTN_ACCEPT'); ?>';
 		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
+		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
+		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
+		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 
 	</script>
 
