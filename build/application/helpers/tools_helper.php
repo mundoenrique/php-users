@@ -289,3 +289,68 @@ if(!function_exists('accessLog')) {
 		];
 	}
 }
+
+
+if(!function_exists('languajeLoad')) {
+	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+		$CI = &get_instance();
+		$langFiles = $langFiles ?: $CI->router->fetch_method();
+		$languages = [];
+		$lanGeneral = ['bp', 'co', 've'];
+		$loadlanguages = FALSE;
+		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
+
+		switch($client) {
+			case 'bp':
+				$languages = [];
+				break;
+			case 'bdb':
+				$languages = [];
+				break;
+			case 'co':
+				$languages = [];
+				break;
+			case 'pe':
+				$languages = [];
+				break;
+			case 'us':
+				$languages = [];
+				break;
+			case 've':
+				$languages = [];
+				break;
+			default:
+				$languages = [
+					'login' => ['login', 'signin'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover'],
+					'changePassword'	=> ['password-change'],
+					'benefits'	=> ['benefits'],
+					'terms'	=> ['terms'],
+					'rates'	=> ['rates'],
+					'getEnterprises'	=> ['enterprise'],
+					'getProducts'	=> ['enterprise'],
+				];
+		}
+
+		if(array_key_exists($langFiles, $languages)) {
+			$languages = $languages[$langFiles];
+			$loadlanguages = TRUE;
+		}
+		if(in_array($client, $lanGeneral)) {
+			array_unshift($languages, 'general');
+			$loadlanguages = TRUE;
+		}
+		if($loadlanguages) {
+			$CI->lang->load($languages);
+		}
+	}
+}
+
+
+if(!function_exists('countryCheck')) {
+	function countryCheck($country) {
+		$CI = &get_instance();
+		$CI->config->load('config-'.$country);
+	}
+}

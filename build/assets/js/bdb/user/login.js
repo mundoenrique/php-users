@@ -136,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		callNovoCore(verb, who, where, data, function(response) {
 
 			if (response.code !== 0 && response.owner === 'captcha'){
-
 				notiSystem(response.title, response.msg, response.callName, response.data);
 				restartForm(dataValidateLogin.text);
 			} else {

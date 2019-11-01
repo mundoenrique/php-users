@@ -32,15 +32,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		$response = $this->sendToService('Login');
-
-		$this->response->data = [
-			'btn1'=> [
-				'text'=> lang('BUTTON_ACCEPT'),
-				'link'=> FALSE,
-				'action'=> 'close'
-			]
-		];
-
 		if($this->isResponseRc !== FALSE) {
 			switch($this->isResponseRc) {
 				case 0:
@@ -75,41 +66,18 @@ class Novo_User_Model extends NOVO_Model {
 
 					} else {
 						$this->response->code = -5;
-						$this->response->msg = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
+						$this->response->title = lang('GEN_SYSTEM_NAME');
+						$this->response->msg = lang('RES_OWN_ANOTHER_SESSION');
+						$this->response->className = 'modal-error';
+						$this->response->data = [
+							'btn1'=> [
+								'text'=> lang('GEN_BTN_ACCEPT'),
+								'link'=> FALSE,
+								'action'=> 'close'
+							]
+						];
 					}
 
-					break;
-				case -2:
-				case -185:
-					$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
-					$userData = [
-						'sessionId' => $response->logAccesoObject->sessionId,
-						'idUsuario' => $response->usuario->idUsuario,
-						'userName' => $response->usuario->userName,
-						'fullName' => $fullName,
-						'codigoGrupo' => $response->usuario->codigoGrupo,
-						'token' => $response->token,
-						'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-						'countrySess' => $this->config->item('country')
-					];
-
-					$this->session->set_userdata($userData);
-
-					$this->response->code = 0;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->data = base_url('inf-condiciones');
-					$this->session->set_flashdata('changePassword', 'newUser');
-					$this->session->set_flashdata('userType', $response->usuario->ctipo);
-
-					if($this->isResponseRc === -185) {
-						$this->response->code = 0;
-						$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-						$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-						$this->response->data = base_url('cambiar-clave');
-						$this->session->set_flashdata('changePassword', 'expiredPass');
-						break;
-					}
 					break;
 				case -1:
 				case -263:
@@ -117,6 +85,13 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_BAD_USER_PASSWORD');
 					$this->response->className = 'modal-error';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 				case -8:
 				case -35:
@@ -124,40 +99,28 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_SUSPENDED_USER');
 					$this->response->className = 'login-inactive';
-
-					break;
-				case -229:
-					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_TITLE'.$this->isResponseRc);
-					break;
-				case -262:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
+							'text'=> lang('GEN_BTN_ACCEPT'),
 							'link'=> FALSE,
 							'action'=> 'close'
 						]
 					];
 					break;
-				case -28:
-					$this->response->code = 3;
-					$this->response->msg = lang('LOGIN_MSG'.$this->isResponseRc);
-					$this->response->icon = 'ui-icon-alert';
+				case -194:
+					$this->response->code = 1;
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_EXPIRED_TEMPORARY_KEY');
+					$this->response->className = 'login-inactive';
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> lang('BUTTON_ACCEPT'),
-							'link'=> [
-								'who'=> 'User',
-								'where'=> 'FinishSession'
-							],
-							'action'=> 'logout'
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
 						]
 					];
 					break;
-			}
+				}
 		}
 		return $this->response;
 	}
@@ -400,7 +363,6 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->response;
 	}
 
-
 	public function callWs_registry_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
@@ -465,12 +427,12 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 		if(true) {
-			$isResponseRc = 0;
+			$isResponseRc = -181;
 			switch($isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->title = "Usuario registrado exitosamente";
-					$this->response->msg = "Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -483,30 +445,51 @@ class Novo_User_Model extends NOVO_Model {
 				case -61:
 				case -5:
 				case -3:
-					$this->response->title = "";
-					$this->response->msg = "";
-					$this->response->code = 2;
-					$this->modalType = "";
-					break;
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = lang('RES_ERROR_SERVER');
+				$this->response->code = 4;
+				$this->modalType = "alert-error";
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('BUTTON_CONTINUE'),
+						'link'=> base_url('inicio'),
+						'action'=> 'redirect'
+					]
+				];
+				break;
 
 				case -181:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_REGISTERED_MAIL');
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				case -284:
 
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "El teléfono móvil ya se encuentra registrado.";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_REGISTERED_CELLPHONE');
 					$this->response->code = 3;
 					$this->modalType = "alert-error";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				case -206:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_CONFIRMATION_MAIL_NOT_SENT');
 					$this->response->code = 4;
 					$this->response->data = [
 						'btn1'=> [
@@ -518,17 +501,24 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 
 				case -230:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "No se puede realizar el registro en estos momentos, por favor intenta nuevamente.";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_ERROR_SERVER');
 					$this->response->code = 4;
 					$this->modalType = "alert-error";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				case -271:
 				case -335:
 
-					$this->response->title = "Usuario registrado";
-					$this->response->msg = "Se ha registrado, pero algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_PARTIAL_REGISTRATION');
 					$this->response->code = 0;
 					$this->response->data = [
 						'btn1'=> [
@@ -544,8 +534,8 @@ class Novo_User_Model extends NOVO_Model {
 				case -313:
 				case -311:
 
-					$this->response->title = "Usuario registrado";
-					$this->response->msg = "Se registró satisfactoriamente, aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_CARD_NOT_ACTIVATED');
 					$this->response->code = 0;
 					$this->response->data = [
 						'btn1'=> [
@@ -572,8 +562,16 @@ class Novo_User_Model extends NOVO_Model {
 				case 5100:
 				case 5104:
 				case 6000:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "No hemos podido validar tus datos, por favor intenta nuevamente.";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->code = 0;
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				case 5101:
@@ -590,20 +588,41 @@ class Novo_User_Model extends NOVO_Model {
 				case 5036:
 				case 5037:
 				case 5114:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "Datos de afiliación inválidos. Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_ERROR_DNI');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				case -397:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "Datos de afiliación inválidos. Verifica tus datos e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_WRONG_MEMBERSHIP_DATA');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 
 				default:
-					$this->response->title = "Conexión Personas Online";
-					$this->response->msg = "No fue posible realizar el registro, por favor intenta nuevamente.";
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_ERROR_SERVER');
 					$this->response->code = 2;
 					$this->modalType = "alert-error";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
 					break;
 			}
 		}
