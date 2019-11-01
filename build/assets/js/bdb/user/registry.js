@@ -6,7 +6,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnRegistry = $$.getElementById('btnRegistrar');
 	var maxBirthdayDate = new Date();
   maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
-	console.log(maxBirthdayDate);
 
 	//core
 

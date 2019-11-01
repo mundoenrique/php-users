@@ -40,7 +40,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
-		$this->lang->load(['general', 'error', 'response'], 'base-spanish');
+		$this->lang->load(['general', 'error', 'response'], 'spanish-base');
 
 		$this->optionsCheck();
 	}
@@ -49,7 +49,12 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 
-		clientCheck($this->countryUri);
+		languageLoad();
+		countryCheck($this->countryUri);
+		languageLoad($this->countryUri);
+
+		$this->form_validation->set_error_delimiters('', '---');
+		$this->config->set_item('language', 'spanish-base');
 
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(
