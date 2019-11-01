@@ -7,12 +7,12 @@
 			<form id="form-login" class="" action="">
 				<div class="form-group">
 					<label for="username">Usuario</label>
-					<input id="username" name="username" class="form-control" type="text">
+					<input id="username" name="loginUsername" class="form-control" type="text">
 					<div class="help-block"></div>
 				</div>
 				<div class="form-group">
 					<label for="userpwd">Contraseña</label>
-					<input id="userpwd" name="userpwd" class="form-control" type="password">
+					<input id="userpwd" name="loginUserpwd" class="form-control" type="password">
 					<div class="help-block"></div>
 				</div>
 				<button id="btn-login" class="btn btn-primary w-100 mt-3 mb-5">

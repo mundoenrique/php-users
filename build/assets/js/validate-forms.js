@@ -197,7 +197,9 @@ function validateForms(form, options) {
 			userpwd: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
 			confirmUserpwd: { required: true, equalTo: "#userpwd" },
 			contract: { required: true },
-			protection: { required: true }
+			protection: { required: true },
+			loginUsername: { required: true },
+			loginUserpwd: { required: true },
 		},
 		errorPlacement : function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
