@@ -21,7 +21,7 @@
 				</button>
 				<a href="recuperarClave" class="block mb-1 h5">Olvidé mi usuario</a>
 				<a href="recuperarClave" class="block mb-1 h5">Olvidé mi Contraseña</a>
-				<p class="mb-0 h5">¿No posees usuario? <a href="<?= base_url('valida');?>">Regístrate</a></p>
+				<p class="mb-0 h5">¿No posees usuario? <a href="<?= base_url('preregistro');?>">Regístrate</a></p>
 			</form>
 		</div>
 	</div>
