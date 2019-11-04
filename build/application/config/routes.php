@@ -58,8 +58,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/preregistro'] = "user/preRegistry";
 $route['(:any)/registro'] = "user/registry";
+$route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/async-call'] = "callModels";
-
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha

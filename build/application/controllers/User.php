@@ -100,26 +100,7 @@ class User extends NOVO_Controller {
 
 		$this->loadView($view);
 	}
-	/**
-	 * @info Método que renderiza la vista para recuperar la contraseña
-	 * @author J. Enrique Peñaloza P.
-	 */
-	public function recoveryPass()
-	{
-		$view = 'pass-recovery';
 
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/pass-recovery",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods"
-		);
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
-		$this->loadView($view);
-	}
 	/**
 	 * @info Método que renderiza la vista para cambiar la contraseña
 	 * @author J. Enrique Peñaloza P.
@@ -183,6 +164,30 @@ class User extends NOVO_Controller {
 		$view = 'preregistry';
 
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->views = ['user/'.$view];
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->loadView($view);
+	}
+
+	public function recoveryAccess()
+	{
+		$view = 'recoveryaccess';
+
+		log_message('INFO', 'NOVO User: recoveryAccess Method Initialized');
 		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
