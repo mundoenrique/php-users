@@ -69,7 +69,6 @@ function callNovoCore(verb, who, where, data, _response_) {
 		icon = iconWarning;
 		data = {
 			btn1: {
-				class: 'btn btn-primary',
 				action: 'redirect',
 				link: uriRedirecTarget,
 				text: txtBtnAcceptNotiSystem
@@ -107,13 +106,19 @@ function notiSystem(title, message, data) {
 	var btn2 = data.btn2;
 
 	dialogMoldal.dialog({
-		modal: 'true',
 		title: title,
+		modal: true,
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		height: "auto",
+		height: 'auto',
 		width: 400,
+		minHeight: 100,
+		dialogClass: "border-none",
+		// dialogClass: 'rounded',
+    classes: {
+      "ui-dialog-titlebar": "border-none",
+    },
 		open: function () {
 		},
 		show: {
@@ -126,7 +131,7 @@ function notiSystem(title, message, data) {
 			{
 				text: txtBtnCancelNotiSystem,
 				id: 'cancel',
-				class: 'btn underline',
+				class: 'btn btn-small underline',
 				type: 'button',
 				click: function () {
 					if (btn2) {
@@ -141,7 +146,7 @@ function notiSystem(title, message, data) {
 			{
 				text: btn1.text || txtBtnAcceptNotiSystem,
 				id: 'accept',
-				class: 'btn btn-primary',
+				class: 'btn btn-small btn-primary',
 				type: 'button',
 				click: function () {
 					if (btn1.action === 'redirect') {
@@ -163,8 +168,18 @@ function notiSystem(title, message, data) {
 				$('#cancel').hide();
 			}
 			dialogMoldal.removeClass("none");
+
+			// $('#system-type').addClass(icon);
+
 		}
 	});
+
+
+
+
+
+
+
 }
 
 /* Inicio Funciones para Custom Select
