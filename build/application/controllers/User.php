@@ -183,30 +183,6 @@ class User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function recoveryAccess()
-	{
-		$view = 'recoveryaccess';
-
-		log_message('INFO', 'NOVO User: recoveryAccess Method Initialized');
-		array_push(
-			$this->includeAssets->jsFiles,
-			"$this->countryUri/user/$view",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
-		);
-		if($this->config->item('language_form_validate')) {
-			array_push(
-				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
-			);
-		}
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
-		$this->loadView($view);
-	}
-
 	public function registry()
 	{
 		$view = 'registry';
@@ -236,6 +212,30 @@ class User extends NOVO_Controller {
 		}
 		$this->views = ['user/'.$view];
 		$this->render->data = $this->session->flashdata('registryUserData');
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->loadView($view);
+	}
+
+	public function recoveryAccess()
+	{
+		$view = 'recoveryaccess';
+
+		log_message('INFO', 'NOVO User: recoveryAccess Method Initialized');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->views = ['user/'.$view];
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}

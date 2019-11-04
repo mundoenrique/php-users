@@ -10,7 +10,7 @@
 				<p>Para recuperar su usuario o restablecer su contraseña de acceso a <strong>Conexión Personas</strong>, debe seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
-					<form method="post" action="/registry_content.php" id="formVerifyAccount">
+					<form method="post" id="formRecoveryAccess">
 						<div class="form-group">
 							<label class="mr-2">Necesito recuperar mi</label>
 							<div class="custom-control custom-radio custom-control-inline">
@@ -37,8 +37,8 @@
 						</div>
 						<hr class="separador-one mt-3">
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn underline" href="registry_content.php">Cancelar</a>
-							<button id="btnValidar" class="btn btn-primary" type="submit">Continuar</button>
+							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
+							<button id="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
 						</div>
 					</form>
 				</div>

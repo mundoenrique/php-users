@@ -14,8 +14,6 @@ function getPropertyOfElement(property, element) {
 	return $(element).attr(property);
 }
 
-
-
 //icons
 var iconSuccess = 'ui-icon-circle-check';
 var iconInfo = 'ui-icon-info';
@@ -39,9 +37,11 @@ var verb, who, where, data, title, msg, icon, data, dataResponse;
 $('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
 function callNovoCore(verb, who, where, data, _response_) {
+
 	var cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
+
 	var dataRequest = JSON.stringify({
 		who: who,
 		where: where,
@@ -56,10 +56,10 @@ function callNovoCore(verb, who, where, data, _response_) {
 		context: document.body,
 		dataType: 'json'
 	}).done(function (response) {
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 
 		if (response.code === codeResp) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			notiSystem(response.title, response.msg, response.data);
 		}
 
 		_response_(response);
@@ -75,7 +75,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 				text: txtBtnAcceptNotiSystem
 			}
 		};
-		notiSystem(title, null, icon, data);
+		notiSystem(title, null, data);
 		_response_(data);
 	});
 }
@@ -139,7 +139,7 @@ function notiSystem(title, message, data) {
 				}
 			},
 			{
-				text: btn1.text,
+				text: btn1.text || txtBtnAcceptNotiSystem,
 				id: 'accept',
 				class: 'btn btn-primary',
 				type: 'button',

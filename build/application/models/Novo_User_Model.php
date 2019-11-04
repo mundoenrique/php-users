@@ -629,6 +629,62 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->response;
 	}
 
+	public function callWs_recoveryAccess_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
+		$this->dataAccessLog->modulo = 'registro usuario';
+		$this->dataAccessLog->function = 'registro usuario';
+		$this->dataAccessLog->operation = 'registro usuario';
+		$this->dataAccessLog->canal = 'personasWeb';
+
+		$this->dataRequest->idOperation = '20';
+
+		//$response = $this->sendToService('User');
+		//log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
+
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('BUTTON_ACCEPT'),
+				'link' => false,
+				'action' => 'close'
+			]
+		];
+		if($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
+			switch($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
+
+				default:
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->code = 2;
+					$this->modalType = "alert-error";
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;
+			}
+		}
+		return $this->response;
+	}
+
 	public function isUserLoggedIn($username)
 	{
 		$sql = $this->db->select(array('id','username'))

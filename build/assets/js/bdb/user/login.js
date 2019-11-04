@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				position: "left",
 				contents: response.msg
 			});
-			notiSystem(response.title, response.msg, response.className, response.data);
+			notiSystem(response.title, response.msg, response.data);
 		},
 		2: function()
 		{
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		3: function(response, textBtn)
 		{
 			var dataLogin = getCredentialsUser();
-			notiSystem(response.title, response.msg, response.className, response.data);
+			notiSystem(response.title, response.msg, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
 				$('#accept').on('click', function() {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		},
 		99: function(response, textBtn)
 		{
-			notiSystem(response.title, response.msg, response.className, response.data);
+			notiSystem(response.title, response.msg, response.data);
 		}
 	}
 
@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function(){
 								text: 'Continuar'
 							}
 						};
-						notiSystem(title, '', icon, data);
 						restartForm(txtBtnLogin);
+						notiSystem(title, '', data);
 					});
 				});
 			}
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		callNovoCore(verb, who, where, data, function(response) {
 
 			if (response.code !== 0 && response.owner === 'captcha'){
-				notiSystem(response.title, response.msg, response.callName, response.data);
 				restartForm(dataValidateLogin.text);
+				notiSystem(response.title, response.msg, response.data);
 			} else {
 				validateResponseLogin(response, dataValidateLogin.text);
 			}

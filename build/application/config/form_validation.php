@@ -112,6 +112,23 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[userpwd]|required'
 		],
 	],
+	'recoveryaccess' => [
+		[
+			'field' => 'recovery',
+			'label' => 'recovery',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'email',
+			'email' => 'email',
+			'rules' => 'trim|required|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|required|numeric'
+		],
+	],
 
 	'finishsession' => [
 		[
