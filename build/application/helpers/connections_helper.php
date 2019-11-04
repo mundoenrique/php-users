@@ -38,9 +38,11 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 			$response->httpCode = $httpCode;
 			$response->msg = curl_error($ch);
 			$response->rc = 'unanswered';
+			curl_close($ch);
 			return json_encode($response);
 		}
 		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
+		curl_close($ch);
 		if($httpCode == 404 || !$response){
 			return '{"data": false}';
 		} else {
@@ -149,20 +151,18 @@ if(!function_exists('connectionAPI'))
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 			$responseAPI = curl_exec($ch);
 			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			curl_close($ch);
 			$response = new stdClass();
 			log_message("DEBUG", 'NOVO RESPONSE API HTTPCODE '.$httpCode);
 			$response->httpCode = $httpCode;
 			if($responseAPI === FALSE) {
 				$response->resAPI = curl_error($ch);
 				log_message("DEBUG", 'NOVO RESPONSE API '.json_encode($response));
-
 			}
 		} else {
 			$responseAPI = json_decode(responseOauth);
 		}
-
 		$response->resAPI = $responseAPI;
+		curl_close($ch);
 		return $response;
 	}
 }
