@@ -633,16 +633,17 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
 
-		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
-		$this->dataAccessLog->modulo = 'registro usuario';
-		$this->dataAccessLog->function = 'registro usuario';
-		$this->dataAccessLog->operation = 'registro usuario';
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'reset password';
+		$this->dataAccessLog->function = 'reset password';
+		$this->dataAccessLog->operation = 'reset password';
 		$this->dataAccessLog->canal = 'personasWeb';
 
-		$this->dataRequest->idOperation = '20';
-
+		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ?'23':'24';
+		$this->dataRequest->id_ext_per = $dataRequest->idNumber;
+		$this->dataRequest->email = $dataRequest->email;
 		//$response = $this->sendToService('User');
-		//log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
+		log_message("info", "Request recovery_access:". json_encode($this->dataRequest));
 
 		$this->response->data = [
 			'btn1'=> [
@@ -652,12 +653,12 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 		if($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
+			$this->isResponseRc = -61;
 			switch($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
+					$this->response->msg = lang('RES_ACCESS_RECOVERED');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -666,10 +667,27 @@ class Novo_User_Model extends NOVO_Model {
 						]
 					];
 					break;
-
+				case -61:
+					$this->response->code = 0;
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
+						]
+					];
+					break;
+				case -187:
+				case -186:
+					$this->response->code = 0;
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					break;
 				default:
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->code = 2;
 					$this->modalType = "alert-error";
 					$this->response->data = [
