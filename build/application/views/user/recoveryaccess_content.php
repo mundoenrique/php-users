@@ -26,7 +26,7 @@
 						<div class="row">
 							<div class="form-group col-lg-4">
 								<label for="email">Correo Electrónico</label>
-								<input id="email" class="form-control" type="text" name="email"  placeholder="usuario@ejemplo.com">
+								<input id="email" class="form-control" type="email" name="email"  placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-4">
