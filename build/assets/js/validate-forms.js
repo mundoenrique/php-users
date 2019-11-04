@@ -200,6 +200,7 @@ function validateForms(form, options) {
 			protection: { required: true },
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
+			recovery: { required: true }
 		},
 		errorPlacement : function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
