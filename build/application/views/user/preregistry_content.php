@@ -3,12 +3,13 @@
 		<header class="">
 			<h1 class="primary h0">Registro</h1>
 		</header>
-		<hr class="separador-one">
 		<section>
+			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de Cuenta</h2>
 				<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
-					proporcionar los siguientes datos relacionados con su cuenta:</p>
+				proporcionar los siguientes datos relacionados con su cuenta:</p>
+				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="formVerifyAccount">
 						<div class="row">
