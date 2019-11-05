@@ -305,19 +305,18 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: verifyAccount  method Initialized');
 
 		$date = new DateTime();
-		$fechaRegistro = $date->format('dmy');
+		$fechaRegistro = $date->format('mdy');
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 
 		$this->dataAccessLog->modulo = 'validar cuenta';
 		$this->dataAccessLog->canal = 'personasWeb';
 		$this->dataAccessLog->function = 'validar cuenta';
-		$this->dataAccessLog->operation = '18';
-		$this->dataAccessLog->userName = $dataRequest->id_ext_per+$fechaRegistro;
+		$this->dataAccessLog->operation = 'validar cuenta';
+		$this->dataAccessLog->userName = $dataRequest->id_ext_per.$fechaRegistro;
 
 		// fake data
 		$this->dataAccessLog->sessionId = "";
-		$this->dataAccessLog->canal = "personasWeb";
 		$this->dataAccessLog->RC = 0;
 		$this->dataAccessLog->IP = "::1";
 		$this->dataAccessLog->dttimesstamp = "10\/21\/2019 15:28";
@@ -331,7 +330,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->cuenta = "6048411619458425";
 		$this->dataRequest->pin = "6e08dc8e4e3ac59d3c61dc0ff2f59c7c";
 		$this->dataRequest->claveWeb = "9d98257cef258260de0cf058ff3e93d7";
-		$this->dataRequest->id_ext_per = "15200249";
 
 		$response = $this->sendToService('User');
 		if($this->isResponseRc !== FALSE) {
@@ -346,14 +344,12 @@ class Novo_User_Model extends NOVO_Model {
 							'sessionId'	=> "f98d07e6927f8f3ada10a909cca1dec7",
 							'keyId'		=> "MTgyNjcxMDg=",
 							'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
-						);
+					);
 					$this->session->set_userdata($newdata);
-
-					$desdata = json_decode('{"code":0,"title":null,"msn":null,"modalType":"","dataUser":{"user":{"primerNombre":"JULIO","segundoNombre":"","primerApellido":"VASQUEZ","segundoApellido":"","telefono":"","id_ext_per":"15200249","fechaNacimiento":"","tipo_id_ext_per":"CI","id_ext_emp":"J-00000002-2","aplicaPerfil":"N","isDriver":0,"rc":0},"registroValido":true,"corporativa":true,"pais":"Ve","afiliacion":{"notarjeta":"","idpersona":"15200249","nombre1":"","nombre2":"","apellido1":"","apellido2":"","fechanac":"","sexo":"","codarea1":"","telefono1":"","telefono2":"","correo":"","direccion":"","distrito":"","provincia":"","departamento":"","edocivil":"","labora":"","centrolab":"","fecha_reg":"","estatus":"","notifica":"","fecha_proc":"","fecha_afil":"","tipo_id":"","fecha_solicitud":"","antiguedad_laboral":"","profesion":"","cargo":"","ingreso_promedio_mensual":"","cargo_publico_last2":"","cargo_publico":"","institucion_publica":"","uif":"","lugar_nacimiento":"","nacionalidad":"","punto_venta":"","cod_vendedor":"","dni_vendedor":"","cod_ubigeo":"","dig_verificador":"","telefono3":"","tipo_direccion":"","cod_postal":"","ruc_cto_laboral":"J-00000002-2","aplicaPerfil":"","cod_miscelaneo2":"AF","afiliado":"","acepta_contrato":"N","dig_verificador_aux":"","rif":"","isTarjetaAdicional":false,"isContratoIndividual":false},"rc":0,"msg":"Proceso OK","token":"7b88426f16e6dc762a0603bf0bed8764","logAccesoObject":{"sessionId":"f98d07e6927f8f3ada10a909cca1dec7","userName":"15200249211019","canal":"personasWeb","modulo":"REGISTRO USUARIO","funcion":"REGISTRO USUARIO","operacion":"VERIFICAR CUENTA PRINCIPAL","RC":0,"OBS":"Proceso OK","IP":"::1","dttimesstamp":"10\/21\/2019 16:39","lenguaje":"ES"},"keyUpdate":"MTgyNjcxMDg="}}');
 
 					$this->session->set_flashdata('registryUser', 'TRUE');
 
-					$this->session->set_flashdata('registryUserData', $desdata);
+					$this->session->set_flashdata('registryUserData', $response);
 
 					$this->response->code = 0;
 					$this->response->data = base_url('registro');
@@ -658,7 +654,7 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->msg = lang('RESP_ACCESS_RECOVERED');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -683,7 +679,7 @@ class Novo_User_Model extends NOVO_Model {
 				case -186:
 					$this->response->code = 0;
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					break;
 				default:
 					$this->response->title = lang('GEN_SYSTEM_NAME');

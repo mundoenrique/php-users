@@ -28,7 +28,7 @@ class Encrypt_Connect {
 		if($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.': '.$data);
+		log_message('DEBUG', 'NOVO encode ['.$userName.'] REQUEST '.$model.': '.$data);
 
 		$dataB = base64_encode($data);
 		while((strlen($dataB)%8) != 0) {
@@ -56,7 +56,7 @@ class Encrypt_Connect {
 		$response = json_decode($decryptData);
 
 		if(!$response) {
-			log_message('ERROR', 'NOVO ['.$userName.'] Sin respuesta del servicio');
+			log_message('ERROR', 'NOVO decode ['.$userName.'] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');
 			$response->msg = lang('RESP_MESSAGE_SYSTEM');
@@ -112,7 +112,7 @@ class Encrypt_Connect {
 		}
 
 		if ($httpCode !== 200 || !$response){
-			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError));
+			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError)?:'none');
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_RC_DEFAULT');
 			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');

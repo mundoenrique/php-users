@@ -43,8 +43,29 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = 'Ve'; //$this->country;
 
+/*
+	Actual
+	{"idOperation":"18","className":"com.novo.objects.TOs.CuentaTO","pais":"Ve","cuenta":"6048411619458425","id_ext_per":"15200249","pin":"6e08dc8e4e3ac59d3c61dc0ff2f59c7c","claveWeb":"9d98257cef258260de0cf058ff3e93d7","logAccesoObject":{"sessionId":"","userName":"15200249051119","canal":"personasWeb","modulo":"validar cuenta","function":"validar cuenta","operacion":"validar cuenta","RC":0,"IP":"::1","dttimesstamp":"11\/05\/2019 23:30","lenguaje":"ES"},"token":""
+
+	$data		= json_encode(array(
+		"idOperation"		=> "18",
+		"className"			=> "com.novo.objects.TOs.CuentaTO",
+		"pais"				=> $pais,
+		"cuenta"			=> $cuenta,
+		"id_ext_per"		=> $id_ext_per,
+		"pin"				=> $pin,
+		"claveWeb"			=> $claveWeb,
+		"logAccesoObject"	=> $logAcceso,
+		"token"				=> ""
+	));
+
+	Propuesto
+	{"idOperation":"18","id_ext_per":"15200249","telephoneNumber":"04142279441","cuenta":"6048411619458425","pin":"6e08dc8e4e3ac59d3c61dc0ff2f59c7c","claveWeb":"9d98257cef258260de0cf058ff3e93d7","className":"com.novo.objects.TOs.CuentaTO","logAccesoObject":{"sessionId":"","userName":"15200249110519","canal":null,"modulo":"validar cuenta","function":"validar cuenta","operacion":"validar
+	cuenta","RC":0,"IP":"::1","dttimesstamp":"11\/05\/2019 23:21","lenguaje":"ES"},"token":"","pais":"Ve","userName":"15200249051119"}
+*/
+
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['data'=> $encryptData, 'pais'=> 'Global', 'keyId' => 'CPONLINE'];
+		$request = ['data'=> $encryptData, 'pais'=> 'Ve', 'keyId' => 'CPONLINE'];
 		$response = [];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 

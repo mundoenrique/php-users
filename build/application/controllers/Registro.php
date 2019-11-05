@@ -156,11 +156,6 @@ class Registro extends CI_Controller {
 			redirect(base_url('dashboard'), 'location');
 			exit();
 		}
-		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-		np_hoplite_countryCheck($this->session->userdata('pais'));
-		// CARGO EL ARCHIVO DE LENGUAJE
-		$this->lang->load('format');
-
 		$this->load->model('registro_model', 'listado');
 		$this->output->set_content_type('application/json')->set_output($this->listado->lista_paises());
 	}
