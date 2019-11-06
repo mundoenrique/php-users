@@ -22,11 +22,10 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
 
-		$this->country = $this->session->userdata('countrySess') ? $this->session->userdata('countrySess')
-			: $this->config->item('country');
+		$this->country = $this->session->userdata('countrySess') ?: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
 		$this->isResponseRc = 'No web service';
-		$this->token = $this->session->userdata('token') ? $this->session->userdata('token') : '';
+		$this->token = $this->session->userdata('token') ?: '';
 		$this->userName = $this->session->userdata('userName');
 		$this->lang->load(['error','general', 'response'], 'base-spanish' );
 	}
