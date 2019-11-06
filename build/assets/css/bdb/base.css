@@ -2332,11 +2332,13 @@ a.ui-button:active,
 	overflow: auto;
 }
 .ui-dialog .ui-dialog-content p {
+	display: flex;
+	align-items: center;
 	padding: .6em 1em 0;
 	min-height: 44px;
 }
-.ui-dialog-content .ui-icon {
-	margin:12px 12px 20px 0;
+.ui-dialog-content .dialog-icon {
+	margin-right: 12px;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
