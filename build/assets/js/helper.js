@@ -103,7 +103,8 @@ function notiSystem(title, message, data) {
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
-	var btn2 = data.btn2;
+	// var btn2 = data.btn2;
+	var btn2 = { link: false, action: 'close', text: txtBtnCancelNotiSystem };
 
 	dialogMoldal.dialog({
 		title: title,
@@ -111,67 +112,49 @@ function notiSystem(title, message, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		height: 'auto',
-		width: 400,
-		minHeight: 100,
+		minWidth: 370,
 		dialogClass: "border-none",
-		// dialogClass: 'rounded',
     classes: {
       "ui-dialog-titlebar": "border-none",
     },
-		open: function () {
-		},
 		show: {
 			duration: 250
 		},
 		hide: {
 			duration: 250
 		},
-		buttons: [
-			{
-				text: txtBtnCancelNotiSystem,
-				id: 'cancel',
-				class: 'btn btn-small underline',
-				type: 'button',
-				click: function () {
-					if (btn2) {
-						if (btn2.action === 'redirect') {
-							$(location).attr('href', btn2.link);
-						}
-					}
-					$(this).off('click');
-					$(this).dialog("close");
-				}
-			},
-			{
-				text: btn1.text || txtBtnAcceptNotiSystem,
-				id: 'accept',
-				class: 'btn btn-small btn-primary',
-				type: 'button',
-				click: function () {
-					if (btn1.action === 'redirect') {
-						$(location).attr('href', btn1.link);
-					}
-					$(this).off('click');
-					$(this).dialog("close");
-				}
-			}
-		],
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
-			$$.getElementById('system-msg').innerHTML = message;
+			$('#system-msg').html(message);
+			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
-			$('#accept').removeClass("ui-button ui-corner-all ui-widget");
-			$('#cancel').removeClass("ui-button ui-corner-all ui-widget");
+			$('#accept')
+			.text(btn1.text)
+			.on('click', function(e) {
+				dialogMoldal.dialog('close');
+				if(btn1.action === 'redirect') {
+					$(location).attr('href', btn1.link);
+				}
+				$(this).off('click');
+			});
 
-			if (!btn2) {
-				$('#cancel').hide();
+			$('#cancel').hide();
+			if (btn2) {
+				$('#cancel')
+				.text(btn2.text)
+				.on('click', function(e) {
+					dialogMoldal.dialog('close');
+					if(btn2.action === 'redirect') {
+						$(location).attr('href', btn2.link);
+					}
+					$(this).off('click');
+				})
+				.show();
 			}
+
 			dialogMoldal.removeClass("none");
-
-			// $('#system-type').addClass(icon);
-
 		}
+
 	});
 
 

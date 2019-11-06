@@ -1982,9 +1982,15 @@ ul.steps li.step-item i {
 .ui-button .ui-icon {
 	background-image: url("../images/ui-icons_777777_256x240.png");
 }
+.ui-icon-alert { background-position: 0 -144px; }
+.ui-icon-info { background-position: -16px -144px; }
+.ui-icon-notice { background-position: -32px -144px; }
+.ui-icon-help { background-position: -48px -144px; }
+.ui-icon-check { background-position: -64px -144px; }
 .ui-icon-closethick { background-position: -96px -128px; }
 .ui-icon-circle-triangle-w { background-position: -80px -192px; }
 .ui-icon-circle-triangle-e { background-position: -48px -192px; }
+.ui-icon-circle-check { background-position: -208px -192px; }
 
 /* Misc visuals
 ----------------------------------*/
@@ -1995,8 +2001,8 @@ ul.steps li.step-item i {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #aaaaaa;
-	opacity: .3;
+	background: var(--text-color);
+	opacity: .6;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-button {
@@ -2320,9 +2326,13 @@ a.ui-button:active,
 .ui-dialog .ui-dialog-content {
 	position: relative;
 	border-bottom: var(--border-width) solid var(--border-color) !important;
-	padding: .6em 1em;
+	padding: 0;
 	background: none;
 	overflow: auto;
+}
+.ui-dialog .ui-dialog-content p {
+	padding: .6em 1em 0;
+	min-height: 44px;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;

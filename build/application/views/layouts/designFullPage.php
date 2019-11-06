@@ -45,7 +45,16 @@
 	</footer>
 
 	<div id="system-info" class="none" name="system-info">
-		<p><span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span></p>
+		<p>
+			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
+		</p>
+		<hr class="separador-one m-0">
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <div class="ui-dialog-buttonset novo-dialog-buttonset">
+				<button type="button" id="cancel" class="btn btn-small underline"></button>
+				<button type="button" id="accept" class="btn btn-small btn-primary"></button>
+      </div>
+    </div>
 	</div>
 
 	<script>
