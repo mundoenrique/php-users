@@ -552,7 +552,6 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 		if($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
