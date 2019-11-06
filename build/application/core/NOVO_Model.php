@@ -20,7 +20,19 @@ class NOVO_Model extends CI_Model {
 
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
+
 		$this->response = new stdClass();
+		$this->response->code = lang('RES_DEFAULT_CODE');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+		$this->response->classIconName = 'ui-icon-closethick';
+		$this->response->data = [
+			'btn1'=> [
+				'text'=> lang('GEN_BTN_ACCEPT'),
+				'link'=> FALSE,
+				'action'=> 'close'
+			]
+		];
 
 		$this->country = $this->session->userdata('countrySess') ?: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
@@ -54,18 +66,6 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->isResponseRc = (int) $responseDecrypt->rc;
-		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = '';
-		$this->response->icon = 'ui-icon-alert';
-		$this->response->data = [
-			'btn1'=> [
-				'text'=> FALSE,
-				'link'=> base_url(lang('GEN_ENTERPRISE_LIST')),
-				'action'=> 'redirect'
-			]
-		];
-
 		switch($this->isResponseRc) {
 			case -61:
 

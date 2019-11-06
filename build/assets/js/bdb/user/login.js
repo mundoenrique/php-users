@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
 				position: "left",
 				contents: response.msg
 			});
-			notiSystem(response.title, response.msg, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		},
 		2: function()
 		{
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		3: function(response, textBtn)
 		{
 			var dataLogin = getCredentialsUser();
-			notiSystem(response.title, response.msg, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
 				$('#accept').on('click', function() {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		},
 		99: function(response, textBtn)
 		{
-			notiSystem(response.title, response.msg, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		}
 	}
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function(){
 							}
 						};
 						restartForm(txtBtnLogin);
-						notiSystem(title, '', data);
+						notiSystem(title, '', icon, data);
 					});
 				});
 			}
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 			if (response.code !== 0 && response.owner === 'captcha'){
 				restartForm(dataValidateLogin.text);
-				notiSystem(response.title, response.msg, response.data);
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			} else {
 				validateResponseLogin(response, dataValidateLogin.text);
 			}

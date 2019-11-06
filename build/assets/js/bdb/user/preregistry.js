@@ -29,6 +29,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				if (response.code == 0) {
 					$$.location.href = response.data;
 				}
+				else{
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
+				}
 				btnRegistry.innerHTML = txtBtnRegistry;
 			});
 		}

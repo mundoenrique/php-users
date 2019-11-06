@@ -10,7 +10,11 @@ $lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
 $lang['RES_BAD_USER_PASSWORD'] = "Usuario o contraseña inválido";
 $lang['RES_ACCESS_RECOVERED'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
 $lang['RES_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
-
+$lang['RES_ERROR_CAPTCHA'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente.';
+$lang['RES_UNREGISTRED_USER'] = 'El Usuario no está registrado en el sistema.';
+$lang['RES_USER_WITHOUT_COMPANY'] = 'El usuario indicado no posee empresa asignada.';
+$lang['RES_ERROR_RUC'] = 'Por favor verifique el No. de RUC de la empresa.';
+$lang['RES_SENDING_ERROR'] = 'No fue posible enviar el correo.<br>Verifícalo e intenta nuevamente.';
 
 
 $lang['RES_RC_0'] = 'Proceso ejecutado exitosamente';
@@ -31,14 +35,6 @@ $lang['LOGIN_TITLE-229'] = 'Usuario aplicación anterior';
 $lang['LOGIN_MSG-262'] = 'Estimado usuario no tienes permisos para la aplicación, por favor comunícate con el administrador';
 $lang['LOGIN_TITLE-263']= 'Usuario incorrecto';
 $lang['LOGIN_MSG-263']= "Usuario o contraseña inválido";
-
-$lang['RECOVERYPASS_TITLE'] = 'Restablecer contraseña';
-$lang['RECOVERYPASS_MSG-0'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
-$lang['RECOVERYPASS_MSG-6'] = 'El usuario indicado no posee empresa asignada.';
-$lang['RECOVERYPASS_MSG-150'] = 'Por favor verifique el No. de RUC de la empresa.';
-$lang['RECOVERYPASS_MSG-159'] = 'El correo indicado no corresponde, por favor verifíquelo e inténtelo de nuevo.';
-$lang['RECOVERYPASS_MSG-173'] = 'No fue posible enviar el correo.<br>Verifícalo e intenta nuevamente.';
-$lang['RECOVERYPASS_MSG-205'] = 'El Usuario no está registrado en el sistema.';
 
 $lang['CHANGEPASSWORD_MSG-0'] = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['CHANGEPASSWORD_MSG-4'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco utilizadas</strong>.';

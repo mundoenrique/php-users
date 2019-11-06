@@ -65,60 +65,28 @@ class Novo_User_Model extends NOVO_Model {
 						$this->db->update('cpo_sessions', $data);
 
 					} else {
-						$this->response->code = -5;
-						$this->response->title = lang('GEN_SYSTEM_NAME');
+						$this->response->code = 1;
 						$this->response->msg = lang('RES_OWN_ANOTHER_SESSION');
-						$this->response->className = 'modal-error';
-						$this->response->data = [
-							'btn1'=> [
-								'text'=> lang('GEN_BTN_ACCEPT'),
-								'link'=> FALSE,
-								'action'=> 'close'
-							]
-						];
+						$this->response->classIconName = 'ui-icon-alert';
 					}
 
 					break;
 				case -1:
 				case -263:
 					$this->response->code = 1;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_BAD_USER_PASSWORD');
-					$this->response->className = 'modal-error';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_SUSPENDED_USER');
-					$this->response->className = 'login-inactive';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -194:
 					$this->response->code = 1;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_EXPIRED_TEMPORARY_KEY');
-					$this->response->className = 'login-inactive';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				}
 		}
@@ -150,8 +118,8 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 					$this->response->code = 0;
-					$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RECOVERYPASS_MSG-'.$this->isResponseRc));
-					$this->response->icon = 'ui-icon-circle-check';
+					$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RES_ACCESS_RECOVERED'));
+					$this->response->icon = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -160,28 +128,33 @@ class Novo_User_Model extends NOVO_Model {
 						]
 					];
 					break;
+				case -6:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_USER_WITHOUT_COMPANY');
+					$this->response->icon = 'ui-icon-alert';
+					break;
+				case -150:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_ERROR_RUC');
+					$this->response->icon = 'ui-icon-alert';
+					break;
+				case -159:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->icon = 'ui-icon-alert';
+					break;
+				case -173:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_SENDING_ERROR');
+					$this->response->icon = 'ui-icon-alert';
+					break;
 				case -205:
-					$msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
-					if($this->countryUri == 've') {
-						$msg.= '<br>'.lang('ERROR_SUPPORT');
-					}
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_UNREGISTRED_USER');
+					$this->response->icon = 'ui-icon-alert';
 					break;
 			}
-
-			if($this->isResponseRc != 0) {
-				$this->response->code = 1;
-				$this->response->msg = lang('RECOVERYPASS_MSG-'.$this->isResponseRc);
-				$this->response->icon = 'ui-icon-info';
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('BUTTON_ACCEPT'),
-						'link'=> FALSE,
-						'action'=> 'close'
-					]
-				];
-			}
 		}
-
 		return $this->response;
 	}
 	/**
@@ -279,13 +252,12 @@ class Novo_User_Model extends NOVO_Model {
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 		log_message('DEBUG', $logMessage);
 
-		$this->response->title = lang('SYSTEM_NAME');
 		if($result["score"] <= 0) {
 
 			$this->response->owner = 'captcha';
-			$this->response->code = 1;
+			$this->response->code = 4;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = lang('VALIDATECAPTCHA_MSG-0');
+			$this->response->msg = lang('RES_ERROR_CAPTCHA');
 			$this->response->data = [
 				'btn1'=> [
 					'text'=> lang('BUTTON_ACCEPT'),
@@ -348,34 +320,14 @@ class Novo_User_Model extends NOVO_Model {
 
 					$this->session->set_flashdata('registryUser', 'TRUE');
 					$this->session->set_flashdata('registryUserData', $response);
+
 					$this->response->code = 0;
 					$this->response->data = base_url('registro');
 					break;
 				case -184:
-					$this->response->code = lang('RES_DEFAULT_CODE');
-					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->code = 2;
 					$this->response->msg = lang('RES_DATA_INVALIDATED');
-					$this->response->className = 'modal-error';
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					break;
-				default:
-				$this->response->code = lang('RES_DEFAULT_CODE');
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = lang('RES_MESSAGE_SYSTEM');
-				$this->response->className = 'modal-error';
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> FALSE,
-						'action'=> 'close'
-					]
-				];
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 			}
 		}
@@ -432,26 +384,17 @@ class Novo_User_Model extends NOVO_Model {
 		//$response = $this->sendToService('User');
 		//log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
 
-		$this->response->code = 3;
-
 		// if($this->isResponseRc !== FALSE) {
 		// 	$this->isResponseRc = 0;
 		// 	switch($this->isResponseRc) {
 
-		$this->response->data = [
-			'btn1'=> [
-				'text'=> lang('BUTTON_ACCEPT'),
-				'link' => false,
-				'action' => 'close'
-			]
-		];
 		if(true) {
 			$isResponseRc = -181;
 			switch($isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
+					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -464,52 +407,32 @@ class Novo_User_Model extends NOVO_Model {
 				case -61:
 				case -5:
 				case -3:
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = lang('RES_ERROR_SERVER');
-				$this->response->code = 4;
-				$this->modalType = "alert-error";
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('BUTTON_CONTINUE'),
-						'link'=> base_url('inicio'),
-						'action'=> 'redirect'
-					]
-				];
-				break;
-
-				case -181:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_REGISTERED_MAIL');
-					$this->response->code = 3;
-					$this->modalType = "alert-error";
+					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
+							'text'=> lang('BUTTON_CONTINUE'),
+							'link'=> base_url('inicio'),
+							'action'=> 'redirect'
 						]
 					];
+					break;
+				case -181:
+					$this->response->msg = lang('RES_REGISTERED_MAIL');
+					$this->response->code = 3;
+					$this->response->classIconName = "ui-icon-alert";
 					break;
 
 				case -284:
-
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_REGISTERED_CELLPHONE');
 					$this->response->code = 3;
-					$this->modalType = "alert-error";
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = "ui-icon-alert";
 					break;
 
 				case -206:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_CONFIRMATION_MAIL_NOT_SENT');
 					$this->response->code = 4;
+					$this->response->classIconName = "ui-icon-info";
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -520,23 +443,14 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 
 				case -230:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->code = 1;
 					$this->response->msg = lang('RES_ERROR_SERVER');
-					$this->response->code = 4;
+					$this->response->classIconName = "ui-icon-alert";
 					$this->modalType = "alert-error";
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
 					break;
 
 				case -271:
 				case -335:
-
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_PARTIAL_REGISTRATION');
 					$this->response->code = 0;
 					$this->response->data = [
@@ -552,10 +466,9 @@ class Novo_User_Model extends NOVO_Model {
 				case -314:
 				case -313:
 				case -311:
-
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_CARD_NOT_ACTIVATED');
 					$this->response->code = 0;
+					$this->response->classIconName = "ui-icon-info";
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -581,16 +494,9 @@ class Novo_User_Model extends NOVO_Model {
 				case 5100:
 				case 5104:
 				case 6000:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_ERROR_SERVER');
-					$this->response->code = 0;
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->code = 1;
+					$this->response->classIconName = "ui-icon-alert";
 					break;
 
 				case 5101:
@@ -607,41 +513,15 @@ class Novo_User_Model extends NOVO_Model {
 				case 5036:
 				case 5037:
 				case 5114:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_ERROR_DNI');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->code = 1;
 					break;
 
 				case -397:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->msg = lang('RES_WRONG_MEMBERSHIP_DATA');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					break;
-
-				default:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RES_ERROR_SERVER');
-					$this->response->code = 2;
-					$this->modalType = "alert-error";
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->code = 1;
 					break;
 			}
 		}
@@ -677,7 +557,7 @@ class Novo_User_Model extends NOVO_Model {
 				case 0:
 					$this->response->code = 0;
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RESP_ACCESS_RECOVERED');
+					$this->response->msg = lang('RES_ACCESS_RECOVERED');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -687,9 +567,9 @@ class Novo_User_Model extends NOVO_Model {
 					];
 					break;
 				case -61:
-					$this->response->code = 0;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('BUTTON_CONTINUE'),
@@ -700,23 +580,11 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				case -187:
 				case -186:
-					$this->response->code = 0;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
 					break;
-				default:
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
-					$this->response->code = 2;
-					$this->modalType = "alert-error";
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
-					break;
+
 			}
 		}
 		return $this->response;

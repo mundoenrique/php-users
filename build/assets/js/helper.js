@@ -15,8 +15,8 @@ function getPropertyOfElement(property, element) {
 }
 
 //icons
-var iconSuccess = 'ui-icon-circle-check';
 var iconInfo = 'ui-icon-info';
+var iconSuccess = 'ui-icon-circle-check';
 var iconWarning = 'ui-icon-alert';
 var iconDanger = 'ui-icon-closethick';
 //app
@@ -59,7 +59,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 
 		if (response.code == codeResp) {
-			notiSystem(response.title, response.msg, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		}
 
 		_response_(response);
@@ -74,7 +74,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 				text: txtBtnAcceptNotiSystem
 			}
 		};
-		notiSystem(title, null, data);
+		notiSystem(title, null, icon, data);
 		_response_(data);
 	});
 }
@@ -98,13 +98,12 @@ function createButton(dialogMoldal, elementBotton, valuesButton) {
 	});
 }
 
-function notiSystem(title, message, data) {
+function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
-	// var btn2 = data.btn2;
-	var btn2 = { link: false, action: 'close', text: txtBtnCancelNotiSystem };
+	var btn2 = data.btn2;
 
 	dialogMoldal.dialog({
 		title: title,
@@ -125,6 +124,7 @@ function notiSystem(title, message, data) {
 		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
+			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
