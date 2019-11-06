@@ -58,7 +58,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 	}).done(function (response) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8));
 
-		if (response.code === codeResp) {
+		if (response.code == codeResp) {
 			notiSystem(response.title, response.msg, response.data);
 		}
 

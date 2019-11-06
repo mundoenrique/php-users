@@ -333,7 +333,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('User');
 		if($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch($this->isResponseRc) {
 				case 0:
 					$newdata	= array(
@@ -348,11 +347,35 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata($newdata);
 
 					$this->session->set_flashdata('registryUser', 'TRUE');
-
 					$this->session->set_flashdata('registryUserData', $response);
-
 					$this->response->code = 0;
 					$this->response->data = base_url('registro');
+					break;
+				case -184:
+					$this->response->code = lang('RES_DEFAULT_CODE');
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->className = 'modal-error';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;
+				default:
+				$this->response->code = lang('RES_DEFAULT_CODE');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+				$this->response->className = 'modal-error';
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> FALSE,
+						'action'=> 'close'
+					]
+				];
 					break;
 			}
 		}
@@ -649,7 +672,7 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 		if($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = -61;
+			$this->isResponseRc = 0;
 			switch($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;

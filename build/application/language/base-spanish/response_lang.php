@@ -2,18 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Novo_User_Model
-$lang['RESP_DEFAULT_CODE'] = 4;
-$lang['RESP_RC_DEFAULT'] = -9999;
-$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
-$lang['RESP_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
-$lang['RESP_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
-$lang['RESP_BAD_USER_PASSWORD'] = "Usuario o contraseña inválido";
-$lang['RESP_ACCESS_RECOVERED'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
-$lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
+$lang['RES_DEFAULT_CODE'] = 4;
+$lang['RES_RC_DEFAULT'] = -9999;
+$lang['RES_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
+$lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
+$lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
+$lang['RES_BAD_USER_PASSWORD'] = "Usuario o contraseña inválido";
+$lang['RES_ACCESS_RECOVERED'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
+$lang['RES_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 
 
 
-$lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
+$lang['RES_RC_0'] = 'Proceso ejecutado exitosamente';
 
 $lang['LOGIN_MSG-0'] = 'Ingreso exitoso';
 $lang['LOGIN_MSG-1']= "Usuario o contraseña inválido";

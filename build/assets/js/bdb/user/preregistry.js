@@ -29,6 +29,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				if (response.code == 0) {
 					$$.location.href = response.data;
 				}
+				btnRegistry.innerHTML = txtBtnRegistry;
 			});
 		}
 	});
