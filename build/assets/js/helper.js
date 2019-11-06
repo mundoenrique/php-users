@@ -103,8 +103,7 @@ function notiSystem(title, message, data) {
 	var dialogMoldal = $('#system-info');
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
-	// var btn2 = data.btn2;
-	var btn2 = { link: false, action: 'close', text: txtBtnCancelNotiSystem };
+	var btn2 = data.btn2;
 
 	dialogMoldal.dialog({
 		title: title,
@@ -125,6 +124,7 @@ function notiSystem(title, message, data) {
 		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
+			$('#system-type').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 

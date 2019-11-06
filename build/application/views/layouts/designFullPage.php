@@ -45,8 +45,9 @@
 	</footer>
 
 	<div id="system-info" class="none" name="system-info">
-		<p>
-			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
+		<p class="">
+			<span class="ui-icon"></span>
+			<span id="system-msg" class="system-msg border"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 		</p>
 		<hr class="separador-one m-0">
 		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

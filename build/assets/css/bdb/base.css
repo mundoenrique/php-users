@@ -1977,10 +1977,13 @@ ul.steps li.step-item i {
 .ui-icon,
 .ui-widget-content .ui-icon,
 .ui-widget-header .ui-icon {
+	background-image: url("../../img/bdb/ui-icons_444444_256x240.png");
+}
+.ui-datepicker .ui-icon {
 	background-image: url("../../img/bdb/ui-icons_ffffff_256x240.png");
 }
 .ui-button .ui-icon {
-	background-image: url("../images/ui-icons_777777_256x240.png");
+	background-image: url("../../img/bdb/ui-icons_777777_256x240.png");
 }
 .ui-icon-alert { background-position: 0 -144px; }
 .ui-icon-info { background-position: -16px -144px; }
@@ -2043,14 +2046,12 @@ ul.steps li.step-item i {
 	margin-top: -8px;
 	margin-left: -8px;
 }
-
 /* workarounds */
 input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-
 /* Corner radius */
 .ui-corner-all,
 .ui-corner-top,
@@ -2333,6 +2334,9 @@ a.ui-button:active,
 .ui-dialog .ui-dialog-content p {
 	padding: .6em 1em 0;
 	min-height: 44px;
+}
+.ui-dialog-content .ui-icon {
+	margin:12px 12px 20px 0;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
