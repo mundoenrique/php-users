@@ -54,7 +54,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = $this->dataRequest->pais ?: $this->country;
 
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
+		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => 'CPONLINE'];
 		$response = [];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);

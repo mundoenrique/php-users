@@ -133,7 +133,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 
 		$this->dataAccessLog->modulo = 'validar cuenta';
-		$this->dataAccessLog->canal = 'personasWeb';
 		$this->dataAccessLog->function = 'validar cuenta';
 		$this->dataAccessLog->operation = 'validar cuenta';
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
@@ -226,7 +225,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->modulo = 'registro usuario';
 		$this->dataAccessLog->function = 'registro usuario';
 		$this->dataAccessLog->operation = 'registro usuario';
-		$this->dataAccessLog->canal = 'personasWeb';
 		$this->dataAccessLog->userName = $dataRequest->username;
 
 		$this->dataRequest->idOperation = '20';
@@ -389,7 +387,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->modulo = 'reset password';
 		$this->dataAccessLog->function = 'reset password';
 		$this->dataAccessLog->operation = 'reset password';
-		$this->dataAccessLog->canal = 'personasWeb';
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
