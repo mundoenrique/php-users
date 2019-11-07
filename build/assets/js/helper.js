@@ -66,7 +66,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 
 	}).fail(function (xhr) {
 		title = titleNotiSystem;
-		icon = iconWarning;
+		icon = iconDanger;
 		data = {
 			btn1: {
 				action: 'redirect',

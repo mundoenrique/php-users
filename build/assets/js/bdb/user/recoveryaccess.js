@@ -32,7 +32,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'recoveryAccess', data, function(response) {
 				btnTrigger.innerHTML = txtbtnTrigger;
-				notiSystem(response.title, response.msg, response.data);
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}
 	});
