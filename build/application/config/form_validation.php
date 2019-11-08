@@ -129,6 +129,23 @@ $config = [
 			'rules' => 'trim|required|numeric'
 		],
 	],
+	'changepassword' => [
+		[
+			'field' => 'currentPassword',
+			'label' => 'currentPassword',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPassword',
+			'label' => 'newPassword',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPassword]|required'
+		],
+		[
+			'field' => 'confirmPassword',
+			'label' => 'confirmPassword',
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPassword]|required'
+		]
+	],
 
 	'finishsession' => [
 		[
@@ -154,23 +171,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		]
 	],
-	'changepassword' => [
-		[
-			'field' => 'currentPass',
-			'label' => 'currentPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
-		],
-		[
-			'field' => 'newPass',
-			'label' => 'newPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPass]|required'
-		],
-		[
-			'field' => 'confirmPass',
-			'label' => 'confirmPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPass]|required'
-		]
-	],
+
 	'detail-products' => [
 		[
 			'field' => 'numt',

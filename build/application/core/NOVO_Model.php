@@ -40,6 +40,7 @@ class NOVO_Model extends CI_Model {
 		$this->token = $this->session->userdata('token') ?: '';
 		$this->userName = $this->session->userdata('userName');
 		$this->lang->load(['error','general', 'response'], 'base-spanish' );
+		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
 	}
 
 	public function sendToService($model)
@@ -55,9 +56,9 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->pais = $this->dataRequest->pais ?: $this->country;
 
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
-		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => 'CPONLINE'];
+		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = [];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
+		$response = $this->encrypt_connect->connectWs($request, $this->dataAccessLog->userName, $model);
 
 		if(isset($response->rc)){
 			$responseDecrypt = $response;
@@ -72,11 +73,8 @@ class NOVO_Model extends CI_Model {
 				$this->response->msg = lang('RES_DUPLICATED_SESSION');
 				$this->session->sess_destroy();
 				break;
-
-			default:
-				$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 		}
-		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc == 0 ? lang('RES_MESSAGE_SUCCESS') : $this->response->msg;
 
 		return $responseDecrypt;
 	}

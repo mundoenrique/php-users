@@ -38,8 +38,14 @@ class Novo_User_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
-					if ($this->isUserLoggedIn($dataRequest->user)) {
 
+					if ($this->isUserLoggedIn($dataRequest->user))
+					{
+						$this->response->code = 1;
+						$this->response->msg = lang('RES_OWN_ANOTHER_SESSION');
+						$this->response->classIconName = 'ui-icon-alert';
+					}else
+					{
 						$userData = [
 							'idUsuario' => $response->idUsuario,
 							'userName' => $response->userName,
@@ -57,20 +63,28 @@ class Novo_User_Model extends NOVO_Model
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
+
+						$target = 'cambiarclave';
+						$this->response->msg = lang('RES_SEND_EMAIL');
+						$response->passwordTemp = '1'; //TODO: ELIMINAR ESTA LINEA
+						if (intval($response->passwordTemp)) {
+							$reasonOperation = 't';
+						} elseif (intval($response->passwordVencido)) {
+							$reasonOperation = 'v';
+						}else{
+
+							$target = 'dashboard';
+							$reasonOperation = NULL;
+							$this->response->msg = '';
+
+							$this->db->where('id', $this->session->session_id);
+							$this->db->update('cpo_sessions', ['username' => $dataRequest->user]);
+						}
+						is_null($reasonOperation)? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
+
 						$this->response->code = 0;
-						$this->response->msg = lang('LOGIN_MSG' . $this->isResponseRc);
-						$this->response->data = str_replace('/' . 'bdb' . '/', '/', base_url('dashboard'));
-						//$this->response->data = base_url('dashboard');
-
-						$data = ['username' => $dataRequest->user];
-						$this->db->where('id', $this->session->session_id);
-						$this->db->update('cpo_sessions', $data);
-					} else {
-						$this->response->code = 1;
-						$this->response->msg = lang('RES_OWN_ANOTHER_SESSION');
-						$this->response->classIconName = 'ui-icon-alert';
+						$this->response->data = is_null($reasonOperation)? str_replace('/' . 'bdb' . '/', '/', base_url($target)) : base_url($target);
 					}
-
 					break;
 				case -1:
 				case -263:
@@ -440,6 +454,62 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
+	public function callWs_changePassword_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'password';
+		$this->dataAccessLog->function = 'password';
+		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->pais = 'Ve';
+		$this->dataRequest->idOperation = '25';
+		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		$this->dataRequest->password = md5($dataRequest->newPassword);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -61:
+					$this->response->code = 2;
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -187:
+				case -186:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+			}
+		}
+		return $this->response;
+	}
+
 	public function isUserLoggedIn($username)
 	{
 		$sql = $this->db->select(array('id', 'username'))
@@ -448,17 +518,21 @@ class Novo_User_Model extends NOVO_Model
 
 		$result = $this->db->get()->result_array();
 
-		if (!isset($result[0]['username'])) {
+		if (count($result) !== 0) {
 
-			return true;
-		} else {
 			$this->db->where('id', $result[0]['id']);
 			$this->db->delete('cpo_sessions');
-
-			return false;
+			return TRUE;
+		}
+		else {
+			return FALSE;
 		}
 	}
 
+	public function pad_key($key){
+		if(strlen($key) > 8) return substr($key, 0, 8);
+		return $key;
+	}
 	/**
 	 * @info Método para recuperar contraseña
 	 * @author J. Enrique Peñaloza Piñero

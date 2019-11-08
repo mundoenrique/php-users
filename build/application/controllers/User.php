@@ -101,48 +101,37 @@ class User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	/**
-	 * @info Método que renderiza la vista para cambiar la contraseña
-	 * @author J. Enrique Peñaloza P.
-	 */
 	public function changePassword()
 	{
-		$view = 'change-password';
-		log_message('INFO', 'NOVO User: changePassword Method Initialized');
-		if(!$this->session->flashdata('changePassword')) {
+		$view = 'changepassword';
+
+		log_message('INFO', 'NOVO User: Change Password Method Initialized');
+
+		if(!$reasonOperation = $this->session->flashdata('changePassword')) {
+			log_message('INFO', 'NOVO User: Change Password Redirect to Login');
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-		$this->lang->load([$view], 'base-spanish');
-		if(in_array($view, $this->config->item('language_file_specific')) ) {
-			$this->lang->load($view);
-		}
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/change-pass",
-			"third_party/jquery.md5",
-			"third_party/jquery.balloon",
+			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
 			"validate-forms",
-			"third_party/additional-methods"
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
 		);
-		switch($this->session->flashdata('changePassword')) {
-			case 'newUser':
-			$this->render->message = lang("MSG_NEW_PASS_USER");
-			break;
-			case 'expiredPass':
-			$this->render->message = lang("MSG_NEW_PASS_CADU");
-			break;
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
 		}
-
-		$this->render->fullName = $this->session->userdata('fullName');
-		$this->render->userType = $this->session->flashdata('userType');
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = LANG('CHANGEPASSWORD_TITLE');
-
-		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+		$this->session->set_flashdata('changePassword', $reasonOperation);
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
+		$this->views = ['user/'.$view];
+		$this->render->reason = $reasonOperation === 't'? lang('PASSWORD_TEMPORAl_KEY'): lang('PASSWORD_EXPIED_KEY');
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}
 	/**

@@ -25,6 +25,8 @@ class Encrypt_Connect {
 	public function encode($data, $userName, $model) {
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
 
+		$this->keyNovo = is_null($this->CI->session->userdata('userName'))? $this->keyNovo: base64_decode($this->CI->session->userdata('keyId'));
+
 		if($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
@@ -49,6 +51,9 @@ class Encrypt_Connect {
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
+
+		$this->keyNovo = is_null($this->CI->session->userdata('userName'))? $this->keyNovo: base64_decode($this->CI->session->userdata('keyId'));
+
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
 		);
@@ -114,7 +119,7 @@ class Encrypt_Connect {
 		if ($httpCode !== 200 || !$response){
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError)?:'none');
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('RESP_RC_DEFAULT');
+			$failResponse->rc = lang('RESP_RC_DEFAULTESP_RC_DEFAULT');
 			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
 			$response = $failResponse;
 			$fail = TRUE;

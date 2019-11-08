@@ -159,6 +159,9 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
+			currentPassword: {required: true},
+			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
+			confirmPassword: { required: true, equalTo: "#newPassword" },
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
 			acceptTerms: 'required',

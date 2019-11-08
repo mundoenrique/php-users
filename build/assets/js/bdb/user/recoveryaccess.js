@@ -15,6 +15,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			var txtbtnTrigger = btnTrigger.innerHTML.trim();
 			btnTrigger.innerHTML = msgLoading;
+			btnTrigger.disabled = true;
 
 			var data = {};
 
@@ -32,6 +33,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'recoveryAccess', data, function(response) {
 				btnTrigger.innerHTML = txtbtnTrigger;
+				btnTrigger.disabled = false;
 				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}

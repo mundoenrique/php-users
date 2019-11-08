@@ -3,7 +3,7 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
-	var btnRegistry = $$.getElementById('btnValidar');
+	var btnTrigger = $$.getElementById('btnValidar');
 
 	//core
 	$$.getElementById('btnValidar').addEventListener('click',function(e){
@@ -13,8 +13,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
-			var txtBtnRegistry = btnRegistry.innerHTML.trim();
-			btnRegistry.innerHTML = msgLoading;
+			var txtBtnTrigger = btnTrigger.innerHTML.trim();
+			btnTrigger.innerHTML = msgLoading;
+			btnTrigger.disabled = true;
 
 			var document_id = $$.getElementById('idNumber').value;
 
@@ -32,7 +33,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 				}
-				btnRegistry.innerHTML = txtBtnRegistry;
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 			});
 		}
 	});

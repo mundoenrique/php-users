@@ -4,11 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Novo_User_Model
 $lang['RES_DEFAULT_CODE'] = 4;
 $lang['RES_RC_DEFAULT'] = -9999;
+$lang['RES_MESSAGE_SUCCESS'] = 'Proceso exitoso';
 $lang['RES_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
 $lang['RES_SUSPENDED_USER'] = 'El usuario se encuentra inactivo';
 $lang['RES_BAD_USER_PASSWORD'] = "Usuario o contraseña inválido";
-$lang['RES_ACCESS_RECOVERED'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
+$lang['RES_SEND_EMAIL'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
+$lang['RES_ACCESS_RECOVERED'] = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['RES_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 $lang['RES_ERROR_CAPTCHA'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente.';
 $lang['RES_UNREGISTRED_USER'] = 'El Usuario no está registrado en el sistema.';
