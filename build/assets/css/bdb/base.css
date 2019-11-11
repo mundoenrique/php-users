@@ -2726,3 +2726,39 @@ ul.pwd-rules li.pwd-rules-item.rule-valid {
 ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	color: var(--danger);
 }
+
+.dashboard-item {
+	width: 240px;
+  height: 170px;
+	overflow: hidden;
+}
+
+.dashboard-item .item-img {
+	position: absolute;
+	width: 204px;
+	height: 132px;
+	margin-top: 20px;
+	margin-left: 10px;
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	-o-transition: all 0.25s;
+	transition: all 0.25s;
+	z-index: 0;
+}
+
+.dashboard-item:hover .item-img {
+	margin-top: 0;
+}
+
+.dashboard-item .item-info {
+	position: absolute;
+	width: 224px;
+	margin-top: 60px;
+	border: .5px solid #ececec;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+	z-index: 1;
+}

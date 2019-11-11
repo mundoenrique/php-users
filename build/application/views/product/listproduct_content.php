@@ -1,15 +1,33 @@
-<div id="registry" class="registro-content h-100 bg-white">
-	<div class="max-width-4 mx-auto p-responsive py-4">
+<div id="dashboard" class="dashboard-content h-100 bg-white">
+	<div class="py-4 px-5">
 		<header class="">
-			<h1 class="primary h0">Vista Consolidada</h1>
+			<h1 class="primary h0">Vista consolidada</h1>
 		</header>
 		<section>
-			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de Datos</h2>
-				<p>Para recuperar su usuario o restablecer su contraseña de acceso a <strong>Conexión Personas</strong>, debe seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
-				<hr class="separador-one">
-				<div class="max-width-1 fit-lg mx-auto pt-3">
+				<h2 class="tertiary h3">Mis cuentas</h2>
+				<div id="dashboard" class="dashboard-items flex justify-start my-5">
+
+					<div class="dashboard-item p-1 mx-1 bg-white">
+						<a href="#" rel="section">
+							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+							<div class="item-info p-1 h5 tertiary bg-white">
+								<p class="item-cardholder semibold primary">Elda Venezuela</p>
+								<p class="item-cardnumber mb-0">526749******9412</p>
+								<p class="item-category mb-0 h6 light text">Plata Incentivos Plus</p>
+							</div>
+						</a>
+					</div>
+					<div class="dashboard-item p-1 mx-1 bg-white">
+						<a href="#" rel="section">
+							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_blue.svg','img',$countryUri); ?>" alt="Tarjeta azul">
+							<div class="item-info p-1 h5 tertiary bg-white">
+								<p class="item-cardholder semibold primary">Elda Venezuela</p>
+								<p class="item-cardnumber mb-0">526749******9412</p>
+								<p class="item-category mb-0 h6 light text">Plata Incentivos Plus</p>
+							</div>
+						</a>
+					</div>
 
 				</div>
 			</div>
