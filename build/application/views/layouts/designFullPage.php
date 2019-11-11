@@ -14,15 +14,38 @@
 <body>
 
 	<?php
-		if($module !== 'login'):
+		if($module !== 'login'){
 	?>
-		<header class="main-head">
-			<div class="flex">
-				<img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá"/>
-			</div>
+
+		<header class="main-head ">
+			<nav class="navbar navbar-expand-lg bg-primary">
+				<a class="navbar-brand"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"  ref="<?=$rootHome;?>"></a>
+
+				<?php
+					if ($logged){
+				?>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarNav" class="collapse navbar-collapse">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item"><a class="nav-link semibold white" href="cpo_dashboard.html">Vista consolidada</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Reportes</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Atención al cliente</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Atención al cliente</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Mi perfil</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Cerrar sesión</a></li>
+							</ul>
+						</div>
+				<?php
+					}
+				?>
+			</nav>
 		</header>
+
+
 	<?php
-		endif;
+		}
 	?>
 
 	<main class="content">

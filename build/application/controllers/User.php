@@ -20,9 +20,9 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		$view = 'login';
 
-		if($this->session->userdata('logged')) {
+		if($this->session->userdata('logged_in')) {
 
-			redirect(base_url('empresas'), 'location');
+			redirect(base_url('vistaconsolidada'), 'location');
 			exit();
 		}
 

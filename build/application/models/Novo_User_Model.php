@@ -72,8 +72,8 @@ class Novo_User_Model extends NOVO_Model
 							$reasonOperation = 'v';
 						}else{
 
-							$target = 'dashboard';
-							$reasonOperation = NULL;
+							$target = 'vistaconsolidada';
+							$reasonOperation =  NULL;
 							$this->response->msg = '';
 
 							$this->db->where('id', $this->session->session_id);

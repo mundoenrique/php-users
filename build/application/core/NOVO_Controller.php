@@ -32,12 +32,15 @@ class NOVO_Controller extends CI_Controller {
 		$this->includeAssets = new stdClass();
 		$this->render = new stdClass();
 		$this->request = new stdClass();
+
 		$this->dataResponse = new stdClass();
 
+		$this->render->rootHome = $this->session->userdata('logged_in')? 'dashboard': 'inicio';
+		$this->render->logged = $this->session->userdata('logged_in');
+		$this->render->fullName = $this->session->userdata('fullName');
+		$this->render->rootHome = base_url($this->render->logged? 'dashboard': 'inicio');
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'default';
 		$this->countryConf = $this->config->item('country');
-		$this->render->logged = $this->session->userdata('logged');
-		$this->render->fullName = $this->session->userdata('fullName');
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->lang->load(['general', 'error', 'response'], 'spanish-base');
@@ -93,7 +96,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 			$this->includeAssets->cssFiles = [
 				"$this->countryUri/root",
-				"$this->countryUri/reboot", //minificar
+				"$this->countryUri/reboot",
 				"$this->countryUri/base"
 			];
 			$this->includeAssets->jsFiles = [
@@ -123,6 +126,9 @@ class NOVO_Controller extends CI_Controller {
 			case 'benefits':
 			case 'registry':
 			case 'terms':
+			case 'preregistry':
+			case 'registry':
+			case 'recoveryaccess':
 			case 'pass-recovery':
 			case 'rates':
 				$auth = TRUE;
@@ -132,14 +138,13 @@ class NOVO_Controller extends CI_Controller {
 				break;
 			case 'products':
 			case 'enterprise':
+			case 'listproduct':
 				$auth = ($this->render->logged);
 				break;
 			default:
-
+				$auth = TRUE;
 		}
-		$auth = TRUE;
 		if($auth) {
-			$this->render->goOut = ($this->render->logged) ? 'cerrar-sesion' : 'inicio';
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
 			$this->asset->initialize($this->includeAssets);
@@ -155,7 +160,8 @@ class NOVO_Controller extends CI_Controller {
 	 * @return void
 	 * @author Pedro Torres
 	 */
-	protected function loadLanguajes($views = [], $folder = 'base-spanish'){
+	protected function loadLanguajes($views = [], $folder = 'base-spanish')
+	{
 		$this->lang->load($views, $folder);
 
 		foreach ($views as $view) {

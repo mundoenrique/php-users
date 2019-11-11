@@ -60,6 +60,7 @@ $route['(:any)/preregistro'] = "user/preRegistry";
 $route['(:any)/registro'] = "user/registry";
 $route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/cambiarclave'] = "user/changePassword";
+$route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/async-call'] = "callModels";
 
 //Actual Structure
