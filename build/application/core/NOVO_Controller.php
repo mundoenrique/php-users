@@ -142,7 +142,7 @@ class NOVO_Controller extends CI_Controller {
 				$auth = ($this->render->logged);
 				break;
 			default:
-				$auth = TRUE;
+				$auth = FALSE;
 		}
 		if($auth) {
 			$this->render->module = $module;

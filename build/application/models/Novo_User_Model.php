@@ -505,6 +505,35 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
+	public function callWs_closeSession_User()
+	{
+		log_message('INFO', 'NOVO User Model: Close Session method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'logout';
+		$this->dataAccessLog->function = 'logout';
+		$this->dataAccessLog->operation = 'desconectarUsuario';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->idOperation = 'desconectarUsuario';
+		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->pais = 'Ve';
+
+		log_message("info", "Request Close Session:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					redirect($this->config->item('base_url').'inicio');
+					break;
+				default:
+					redirect('vistaconsolidada');
+			}
+		}
+	}
+
+
 	public function isUserLoggedIn($username)
 	{
 		$sql = $this->db->select(array('id', 'username'))
@@ -524,9 +553,12 @@ class Novo_User_Model extends NOVO_Model
 		}
 	}
 
-	public function pad_key($key){
+	public function pad_key($key)
+	{
 		if(strlen($key) > 8) return substr($key, 0, 8);
 		return $key;
 	}
+
+
 
 }

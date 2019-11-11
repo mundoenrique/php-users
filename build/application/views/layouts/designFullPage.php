@@ -34,7 +34,7 @@
 								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Atención al cliente</a></li>
 								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Atención al cliente</a></li>
 								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Mi perfil</a></li>
-								<li class="nav-item"><a class="nav-link semibold white" href="ceo_dashboard.html">Cerrar sesión</a></li>
+								<li class="nav-item"><a class="nav-link semibold white" href="<?= base_url('cerrarsesion') ?>">Cerrar sesión</a></li>
 							</ul>
 						</div>
 				<?php

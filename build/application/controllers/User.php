@@ -228,4 +228,17 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}
+
+	public function closeSession()
+	{
+		log_message('INFO', 'NOVO User: CloseSession Method Initialized');
+
+		$this->session->unset_userdata($this->session->all_userdata());
+		$this->session->sess_destroy();
+
+		$this->load->model('Novo_user_Model', 'modelLoad');
+		$method = $this->method;
+		$this->modelLoad->callWs_closeSession_User();
+
+	}
 }
