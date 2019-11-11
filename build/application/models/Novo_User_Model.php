@@ -65,8 +65,7 @@ class Novo_User_Model extends NOVO_Model
 						$this->session->set_userdata($userData);
 
 						$target = 'cambiarclave';
-						$this->response->msg = lang('RES_SEND_EMAIL');
-						$response->passwordTemp = '1'; //TODO: ELIMINAR ESTA LINEA
+						$this->response->msg = lang('RES_ACCESS_RECOVERED');
 						if (intval($response->passwordTemp)) {
 							$reasonOperation = 't';
 						} elseif (intval($response->passwordVencido)) {
@@ -421,8 +420,9 @@ class Novo_User_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
 					$this->response->code = 0;
-					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang('RES_SEND_EMAIL') );
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),

@@ -220,9 +220,6 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 
 }
 
-
-
-
 // ------------------------------------------------------------------------
 if ( ! function_exists('np_hoplite_decimals'))
 {
@@ -290,7 +287,6 @@ if(!function_exists('accessLog')) {
 	}
 }
 
-
 if(!function_exists('languajeLoad')) {
 	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
@@ -347,10 +343,16 @@ if(!function_exists('languajeLoad')) {
 	}
 }
 
-
 if(!function_exists('countryCheck')) {
 	function countryCheck($country) {
 		$CI = &get_instance();
 		$CI->config->load('config-'.$country);
+	}
+}
+
+if(!function_exists('mask_account')) {
+	function mask_account($account, $start = 4, $end = 6){
+		$len = strlen($account);
+		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
 	}
 }
