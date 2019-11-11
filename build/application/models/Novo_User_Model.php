@@ -420,7 +420,6 @@ class Novo_User_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-
 					$this->response->code = 0;
 					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang('RES_SEND_EMAIL') );
 					$this->response->data = [
@@ -479,6 +478,7 @@ class Novo_User_Model extends NOVO_Model
 				case 0:
 					$this->response->code = 0;
 					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->classIconName = "ui-icon-circle-check";
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),

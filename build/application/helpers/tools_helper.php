@@ -351,7 +351,7 @@ if(!function_exists('countryCheck')) {
 }
 
 if(!function_exists('mask_account')) {
-	function mask_account($account, $start = 4, $end = 6){
+	function mask_account($account, $start = 4, $end = 7){
 		$len = strlen($account);
 		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
 	}

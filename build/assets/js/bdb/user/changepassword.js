@@ -16,6 +16,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			var txtBtnTrigger = btnTrigger.innerHTML.trim();
 			btnTrigger.innerHTML = msgLoading;
+			btnTrigger.disabled = true;
 
 			var data = {};
 			$$.getElementById('formChangePassword').querySelectorAll('input').forEach(
@@ -32,7 +33,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			callNovoCore('POST', 'User', 'changePassword', data, function(response) {
 				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;
-				notiSystem(response.title, response.msg, response.data);
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}
 	});
