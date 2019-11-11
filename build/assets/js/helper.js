@@ -14,6 +14,9 @@ function getPropertyOfElement(property, element) {
 	return $(element).attr(property);
 }
 
+// Navbar
+var toggle = document.getElementsByClassName('navbar-toggler')[0],
+	collapse = document.getElementsByClassName('navbar-collapse')[0];
 //icons
 var iconInfo = 'ui-icon-info';
 var iconSuccess = 'ui-icon-circle-check';
@@ -164,6 +167,14 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 
 
 }
+
+// Toggle if navbar menu is open or closed
+function toggleMenu() {
+	collapse.classList.toggle('show');
+}
+
+// Event listeners
+toggle.addEventListener('click', toggleMenu, false);
 
 /* Inicio Funciones para Custom Select
 	========================================================================== */
