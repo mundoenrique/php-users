@@ -397,9 +397,11 @@ class Novo_User_Model extends NOVO_Model
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-		$this->dataAccessLog->modulo = 'reset password';
-		$this->dataAccessLog->function = 'reset password';
-		$this->dataAccessLog->operation = 'reset password';
+		$ubication = $dataRequest->recovery === 'C' ? 'reset password': 'obtener login';
+		$messageNotiSystem = $dataRequest->recovery === 'C' ? 'RES_SEND_EMAIL_PASSWORD': 'RES_SEND_EMAIL_LOGIN';
+		$this->dataAccessLog->modulo = $ubication;
+		$this->dataAccessLog->function = $ubication;
+		$this->dataAccessLog->operation = $ubication;
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
@@ -410,18 +412,11 @@ class Novo_User_Model extends NOVO_Model
 		$response = $this->sendToService('User');
 		log_message("info", "Request recovery_access:" . json_encode($this->dataRequest));
 
-		$this->response->data = [
-			'btn1' => [
-				'text' => lang('BUTTON_ACCEPT'),
-				'link' => false,
-				'action' => 'close'
-			]
-		];
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang('RES_SEND_EMAIL') );
+					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang($messageNotiSystem) );
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),
@@ -533,156 +528,5 @@ class Novo_User_Model extends NOVO_Model
 		if(strlen($key) > 8) return substr($key, 0, 8);
 		return $key;
 	}
-	/**
-	 * @info Método para recuperar contraseña
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	public function ccccccccccccallWs_RecoveryPass_User($dataRequest)
-	{
-		log_message('INFO', 'NOVO User Model: RecoveryPass method Initialized');
-		$this->className = 'com.novo.objects.TO.UsuarioTO';
-
-		$this->dataAccessLog->modulo = 'clave';
-		$this->dataAccessLog->function = 'recuperarClave';
-		$this->dataAccessLog->operation = 'olvidoClave';
-		$this->dataAccessLog->userName = $dataRequest->userName;
-
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->userName);
-		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
-		$this->dataRequest->email = $dataRequest->email;
-
-		$response = $this->sendToService('RecoveryPass');
-
-		if ($this->isResponseRc !== FALSE) {
-			$this->response->title = lang('RECOVERYPASS_TITLE');
-			switch ($this->isResponseRc) {
-				case 0:
-					$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-					$this->response->code = 0;
-					$this->response->msg = str_replace('{$maskMail$}', $maskMail, lang('RES_ACCESS_RECOVERED'));
-					$this->response->icon = 'ui-icon-info';
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('inicio'),
-							'action' => 'redirect'
-						]
-					];
-					break;
-				case -6:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_USER_WITHOUT_COMPANY');
-					$this->response->icon = 'ui-icon-alert';
-					break;
-				case -150:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_ERROR_RUC');
-					$this->response->icon = 'ui-icon-alert';
-					break;
-				case -159:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
-					$this->response->icon = 'ui-icon-alert';
-					break;
-				case -173:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_SENDING_ERROR');
-					$this->response->icon = 'ui-icon-alert';
-					break;
-				case -205:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_UNREGISTRED_USER');
-					$this->response->icon = 'ui-icon-alert';
-					break;
-			}
-		}
-		return $this->response;
-	}
-	/**
-	 * @info Método para el cambio de Contraseña
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	public function ccccccccccccccCallWs_ChangePassword_User($dataRequest)
-	{
-		log_message('INFO', 'NOVO User Model: ChangePassword Method Initialized');
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$this->dataAccessLog->modulo = 'login';
-		$this->dataAccessLog->function = 'login';
-		$this->dataAccessLog->operation = 'cambioClave';
-
-		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->passwordOld = $dataRequest->currentPass;
-		$this->dataRequest->password = $dataRequest->newPass;
-
-		$changePassType = $this->session->flashdata('changePassword');
-
-		$response = $this->sendToService('ChangePassword');
-
-		if ($this->isResponseRc !== FALSE) {
-			switch ($this->isResponseRc) {
-				case 0:
-					$this->callWs_FinishSession_User();
-					$this->response->code = 0;
-					$this->response->msg = lang('CHANGEPASSWORD_MSG-' . $this->isResponseRc);
-					$this->response->icon = 'ui-icon-circle-check';
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('inicio'),
-							'action' => 'redirect'
-						]
-					];
-					break;
-				case -4:
-				case -22:
-					$this->response->code = 1;
-					$this->response->icon = 'ui-icon-alert';
-					$this->response->msg = lang('CHANGEPASSWORD_MSG-' . $this->isResponseRc);
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_ACCEPT'),
-							'link' => FALSE,
-							'action' => 'close'
-						]
-					];
-					$this->session->set_flashdata('changePassword', $changePassType);
-					$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
-					break;
-			}
-		}
-
-		return $this->response;
-	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza Piñero
-	 */
-	public function ccccccccccccccccallWs_FinishSession_User($dataRequest = FALSE)
-	{
-		log_message('INFO', 'NOVO User Model: FinishSession method Initialized');
-		$user = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->session->userdata('userName');
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$this->dataAccessLog->userName = $user;
-		$this->dataAccessLog->modulo = 'logout';
-		$this->dataAccessLog->function = 'logout';
-		$this->dataAccessLog->operation = 'desconectarUsuario';
-
-		$this->dataRequest->idUsuario = $user;
-		$this->dataRequest->codigoGrupo = $this->session->userdata('codigoGrupo');
-
-		$response = $this->sendToService('FinishSession');
-
-		if ($this->isResponseRc !== FALSE) {
-			$this->response->code = 0;
-			$this->response->msg = lang('FINISHSESSION_MSG-' . $this->isResponseRc);
-			$this->response->data = 'finishSession';
-		}
-
-		$this->session->sess_destroy();
-		return $this->response;
-	}
-
 
 }
