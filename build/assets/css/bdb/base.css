@@ -3,7 +3,6 @@
 
 body {
 	display: flex;
-	height: 100vh;
 	flex-direction: column;
 }
 
@@ -25,7 +24,6 @@ header.main-head > div > img {
 /* Footer */
 footer.main-footer {
 	display: flex;
-	flex-shrink: 0;
 	padding: 2rem 2.5rem;
 	color: var(--secondary);
 	background-color: var(--primary);
@@ -33,7 +31,7 @@ footer.main-footer {
 
 /* Content */
 main.content {
-	flex: auto;
+	min-height: calc(100vh - 3.75rem - 2.75rem);
 	background-color: var(--bg-color);
 }
 
