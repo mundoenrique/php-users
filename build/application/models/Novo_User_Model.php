@@ -73,7 +73,7 @@ class Novo_User_Model extends NOVO_Model
 						}else{
 
 							$target = 'vistaconsolidada';
-							$reasonOperation =  NULL;
+							$reasonOperation =  'NULL';
 							$this->response->msg = '';
 
 							$this->db->where('id', $this->session->session_id);
@@ -82,7 +82,7 @@ class Novo_User_Model extends NOVO_Model
 						is_null($reasonOperation)? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
 
 						$this->response->code = 0;
-						$this->response->data = is_null($reasonOperation)? str_replace('/' . 'bdb' . '/', '/', base_url($target)) : base_url($target);
+						$this->response->data = is_null($reasonOperation)? str_replace('/' . 'bdb' . '/', '/', base_url($target)): base_url($target);
 					}
 					break;
 				case -1:

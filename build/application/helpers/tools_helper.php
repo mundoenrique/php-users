@@ -292,7 +292,7 @@ if(!function_exists('languajeLoad')) {
 		$CI = &get_instance();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
-		$lanGeneral = ['bp', 'co', 've'];
+		$lanGeneral = ['bp', 'co', 've', 'bdb'];
 		$loadlanguages = FALSE;
 		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
 
