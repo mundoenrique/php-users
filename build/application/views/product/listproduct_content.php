@@ -5,8 +5,9 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<h2 class="tertiary h3">Mis productos</h2>
-				<div id="dashboard" class="dashboard-items flex max-width-xl-5 flex-wrap justify-start my-5">
+				<h2 class="h4 regular tertiary">Mis productos</h2>
+				<div class="line mt-1"></div>
+				<div id="dashboard" class="dashboard-items flex max-width-xl-5 mt-3 mx-auto flex-wrap justify-center">
 
 					<?php
 					//var_dump($data);
@@ -72,28 +73,10 @@
 							</div>
 						</a>
 					</div>
-					<div class="dashboard-item p-1 mx-1 mb-1">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_blue.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.5,99</p>
-							</div>
-						</a>
-					</div>
-					<div class="dashboard-item p-1 mx-1 mb-1">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.240.818,21</p>
-							</div>
-						</a>
-					</div>
+
+					<div class="dashboard-item mx-1"></div>
+					<div class="dashboard-item mx-1"></div>
+					<div class="dashboard-item mx-1"></div>
 
 				</div>
 			</div>
