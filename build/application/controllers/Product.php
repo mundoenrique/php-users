@@ -33,10 +33,31 @@ class Product extends NOVO_Controller {
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
+
 		$this->views = ['product/'.$view];
+		$this->render->data =array_slice($this->loadDataProducts(), 0, 2);
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
+	public function loadDataProducts()
+	{
+		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$method = $this->method;
+		$data = $this->modelLoad->callWs_loadProducts_Product();
 
+		$dataRequeried = [];
+		foreach($data as $row){
+			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
+			array_push($dataRequeried, [
+					"noTarjeta" => $row->noTarjeta,
+					"noTarjetaConMascara" => $row->noTarjetaConMascara,
+					"nombre_producto" => $row->nombre_producto,
+					"id_ext_per" => $row->id_ext_per,
+					"nomEmp" => $row->nomEmp,
+					"productBalance" => $productBalance
+					]);
+		}
+		return $dataRequeried;
+	}
 }

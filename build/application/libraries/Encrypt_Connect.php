@@ -119,8 +119,8 @@ class Encrypt_Connect {
 		if ($httpCode !== 200 || !$response){
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError)?:'none');
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('RESP_RC_DEFAULTESP_RC_DEFAULT');
-			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+			$failResponse->rc = lang('RES_RC_DEFAULTESP_RC_DEFAULT');
+			$failResponse->msg = lang('RES_MESSAGE_SYSTEM');
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -146,7 +146,7 @@ class Encrypt_Connect {
 	{
 		$userName = $logMessage->userName;
 		$model = $logMessage->model;
-		$msg = $logMessage->msg || '';
+		$msg = @$logMessage->msg || '';
 		$rc = $logMessage->rc;
 		$country = $logMessage->pais;
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
