@@ -1139,6 +1139,7 @@ textarea.form-control {
 .max-width-2 { max-width: var(--width-2) }
 .max-width-3 { max-width: var(--width-3) }
 .max-width-4 { max-width: var(--width-4) }
+.max-width-5 { max-width: var(--width-5) }
 
 @media (min-width: 992px) {
 	.fit-lg { max-width: 100% }
@@ -1147,6 +1148,7 @@ textarea.form-control {
 	.max-width-lg-2 { max-width: var(--width-2) }
 	.max-width-lg-3 { max-width: var(--width-3) }
 	.max-width-lg-4 { max-width: var(--width-4) }
+	.max-width-lg-5 { max-width: var(--width-5) }
 }
 
 @media (min-width: 1200px) {
@@ -1156,6 +1158,7 @@ textarea.form-control {
 	.max-width-xl-2 { max-width: var(--width-2) }
 	.max-width-xl-3 { max-width: var(--width-3) }
 	.max-width-xl-4 { max-width: var(--width-4) }
+	.max-width-xl-5 { max-width: var(--width-5) }
 }
 
 /* Spacing

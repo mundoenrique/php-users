@@ -93,7 +93,8 @@
   --width-1: 24rem;
   --width-2: 32rem;
   --width-3: 48rem;
-  --width-4: 62rem;
+	--width-4: 62rem;
+	--width-5: 75rem;
 
   /* Margin - Padding */
   --space-1: .5rem;
