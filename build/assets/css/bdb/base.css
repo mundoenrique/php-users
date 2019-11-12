@@ -1792,7 +1792,7 @@ i[class*=" icon-"]:before {
 .nav-item::after {
 	position: absolute;
 	content: '';
-	bottom: -.75rem;
+	bottom: 0;
 	width: 0;
 	height: 3px;
 	background-color: var(--yellow);
@@ -1800,7 +1800,8 @@ i[class*=" icon-"]:before {
 	transition: all .3s ease;
 }
 
-.nav-item:hover::after {
+.nav-item:hover::after,
+.nav-item.active::after {
 	width: 100%;
 	-webkit-transition: all 1s ease;
 	transition: all 1s ease;
@@ -2757,11 +2758,28 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: absolute;
 	width: 224px;
 	margin-top: 60px;
-	border: .5px solid #ececec;
+	border-bottom: 2px solid var(--bg-color);
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
 	z-index: 1;
+}
+
+.dashboard-item:hover .item-info {
+	margin-top: 70px;
+	border-bottom: 2px solid var(--yellow);
+	-webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
+	-moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
+	box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
+}
+
+.dashboard-item .dashboard-item-network {
+	position: absolute;
+	right: 10px;
+	bottom: 16px;
+	z-index: 2;
+	width: 45px;
+	height: 15px;
 }
