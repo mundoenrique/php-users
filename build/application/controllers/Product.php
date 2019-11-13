@@ -68,4 +68,32 @@ class Product extends NOVO_Controller {
 		}
 		return $dataRequeried;
 	}
+
+	public function detailProduct()
+	{
+		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
+		$view = 'detailproduct';
+
+		if(!$this->session->userdata('logged_in')) {
+
+			redirect(base_url('inicio'), 'location');
+			exit();
+		}
+
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/product/$view"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+
+		$this->views = ['product/'.$view];
+		$this->render->data =array_slice($this->loadDataProducts(), 0, 2);
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->loadView($view);
+	}
 }

@@ -62,6 +62,7 @@ $route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/cerrarsesion'] = "user/closeSession";
 $route['(:any)/cambiarclave'] = "user/changePassword";
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
+$route['(:any)/detalle'] = "product/detailProduct";
 $route['(:any)/async-call'] = "callModels";
 
 //Actual Structure
