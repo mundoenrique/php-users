@@ -129,6 +129,13 @@ $config = [
 			'rules' => 'trim|required|numeric'
 		],
 	],
+	'closesession' => [
+		[
+			'field' => 'token',
+			'label' => 'token',
+			'rules' => 'trim|required'
+		],
+	],
 	'changepassword' => [
 		[
 			'field' => 'currentPassword',

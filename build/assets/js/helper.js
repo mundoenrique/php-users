@@ -104,6 +104,7 @@ function createButton(dialogMoldal, elementBotton, valuesButton) {
 function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 
 	var dialogMoldal = $('#system-info');
+	var title = title || titleNotiSystem;
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
 	var btn2 = data.btn2;
@@ -154,7 +155,6 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 				})
 				.show();
 			}
-
 			dialogMoldal.removeClass("none");
 		}
 

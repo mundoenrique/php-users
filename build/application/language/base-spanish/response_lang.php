@@ -18,7 +18,7 @@ $lang['RES_UNREGISTRED_USER'] = 'El Usuario no está registrado en el sistema.';
 $lang['RES_USER_WITHOUT_COMPANY'] = 'El usuario indicado no posee empresa asignada.';
 $lang['RES_ERROR_RUC'] = 'Por favor verifique el No. de RUC de la empresa.';
 $lang['RES_SENDING_ERROR'] = 'No fue posible enviar el correo.<br>Verifícalo e intenta nuevamente.';
-
+$lang['RES_CLOSE_SESSION'] = 'Gracias por usar nuestros servicios, su sesión en Conexión Personas ha caducado.';
 
 $lang['RES_RC_0'] = 'Proceso ejecutado exitosamente';
 

@@ -19,7 +19,7 @@
 
 		<header class="main-head ">
 			<nav class="navbar navbar-expand-lg bg-primary">
-				<a class="navbar-brand"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"  ref="<?=$rootHome;?>"></a>
+				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php
 					if ($logged){
@@ -42,8 +42,6 @@
 				?>
 			</nav>
 		</header>
-
-
 	<?php
 		}
 	?>
@@ -85,12 +83,12 @@
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
-		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
 		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
+		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
 		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
-
+		var idleSession = "<?= $idleSession;?>";
 	</script>
 
 	<?php

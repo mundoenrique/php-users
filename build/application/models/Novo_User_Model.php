@@ -76,8 +76,9 @@ class Novo_User_Model extends NOVO_Model
 							$reasonOperation =  'NULL';
 							$this->response->msg = '';
 
-							$this->db->where('id', $this->session->session_id);
-							$this->db->update('cpo_sessions', ['username' => $dataRequest->user]);
+							$this->db->select(array('id', 'username'))
+							->where('id', $this->session->session_id)
+							->update('cpo_sessions', ['username' => $dataRequest->user]);
 						}
 						is_null($reasonOperation)? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
 
@@ -524,19 +525,30 @@ class Novo_User_Model extends NOVO_Model
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
-				case 0:
-					redirect($this->config->item('base_url').'inicio');
-					break;
 				default:
-					redirect('vistaconsolidada');
+					$this->session->unset_userdata($this->session->all_userdata());
+					$this->session->sess_destroy();
+
+					$this->response->code = 0;
+					$this->response->msg = lang('RES_CLOSE_SESSION');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+				break;
 			}
 		}
+		return $this->response;
 	}
 
 
 	public function isUserLoggedIn($username)
 	{
-		$sql = $this->db->select(array('id', 'username'))
+		$this->db->select(array('id', 'username'))
 			->where('username', $username)
 			->get_compiled_select('cpo_sessions', FALSE);
 

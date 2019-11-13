@@ -27,6 +27,14 @@ class Product extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/product/$view"
 		);
+
+		if(!is_null($this->config->item('timeIdleSession'))){
+			array_push(
+				$this->includeAssets->jsFiles,
+				"$this->countryUri/watchsession"
+			);
+		}
+
 		if($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
@@ -35,7 +43,7 @@ class Product extends NOVO_Controller {
 		}
 
 		$this->views = ['product/'.$view];
-		$this->render->data =array_slice($this->loadDataProducts(), 0, 2);
+		$this->render->data = $this->loadDataProducts();
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
@@ -53,7 +61,7 @@ class Product extends NOVO_Controller {
 					"noTarjeta" => $row->noTarjeta,
 					"noTarjetaConMascara" => $row->noTarjetaConMascara,
 					"nombre_producto" => $row->nombre_producto,
-					"id_ext_per" => $row->id_ext_per,
+					"marca" => strtolower($row->marca),
 					"nomEmp" => $row->nomEmp,
 					"productBalance" => $productBalance
 					]);

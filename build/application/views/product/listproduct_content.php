@@ -29,51 +29,6 @@
 						}
 					?>
 
-					<div class="dashboard-item p-1 mx-1 mb-1 ">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_blue.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.5,99</p>
-							</div>
-						</a>
-					</div>
-					<div class="dashboard-item p-1 mx-1 mb-1">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.240.818,21</p>
-							</div>
-						</a>
-					</div>
-					<div class="dashboard-item p-1 mx-1 mb-1">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_blue.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.5,99</p>
-							</div>
-						</a>
-					</div>
-					<div class="dashboard-item p-1 mx-1 mb-1">
-						<a href="#" rel="section">
-							<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta azul">
-							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="dashboard-item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-								<p class="item-category semibold primary">Plata Incentivos Plus</p>
-								<p class="item-cardnumber mb-0">526749******9412</p>
-								<p class="item-balance mb-0 h6 light text">Bs.240.818,21</p>
-							</div>
-						</a>
-					</div>
-
 					<div class="dashboard-item mx-1"></div>
 					<div class="dashboard-item mx-1"></div>
 					<div class="dashboard-item mx-1"></div>

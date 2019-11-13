@@ -29,20 +29,21 @@ class NOVO_Controller extends CI_Controller {
 		parent:: __construct();
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
-		$this->includeAssets = new stdClass();
 		$this->render = new stdClass();
 		$this->request = new stdClass();
-
 		$this->dataResponse = new stdClass();
+		$this->includeAssets = new stdClass();
 
-		$this->render->rootHome = $this->session->userdata('logged_in')? 'dashboard': 'inicio';
+		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->logged = $this->session->userdata('logged_in');
 		$this->render->fullName = $this->session->userdata('fullName');
-		$this->render->rootHome = base_url($this->render->logged? 'dashboard': 'inicio');
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'default';
+
+		$this->countryUri = $this->uri->segment(1, 0) ?: 'default';
+		$this->render->rootHome = base_url($this->render->logged? 'bdb/vistaconsolidada': 'bdb/inicio');
+
 		$this->countryConf = $this->config->item('country');
-		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
+
 		$this->lang->load(['general', 'error', 'response'], 'spanish-base');
 
 		$this->optionsCheck();
@@ -55,6 +56,7 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad();
 		countryCheck($this->countryUri);
 		languageLoad($this->countryUri);
+		$this->render->idleSession = $this->session->userdata('logged_in')? $this->config->item('timeIdleSession'): 0;
 
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');

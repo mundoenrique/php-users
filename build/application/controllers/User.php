@@ -233,12 +233,10 @@ class User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: CloseSession Method Initialized');
 
-		$this->session->unset_userdata($this->session->all_userdata());
-		$this->session->sess_destroy();
-
 		$this->load->model('Novo_user_Model', 'modelLoad');
 		$method = $this->method;
 		$this->modelLoad->callWs_closeSession_User();
 
+		redirect($this->config->item('base_url').'inicio');
 	}
 }
