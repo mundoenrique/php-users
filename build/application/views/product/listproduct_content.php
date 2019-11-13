@@ -15,15 +15,13 @@
 
 					?>
 						<div class="dashboard-item p-1 mx-1 mb-1">
-							<a href="#" rel="section">
-								<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-								<div class="item-info p-1 h5 tertiary bg-white">
-									<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
-									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
-									<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
-									<p class="item-balance mb-0 h6 light text"><?= $row['productBalance'] == '--'? $row['productBalance']: lang('GEN_COIN').' '.$row['productBalance'];?></p>
-								</div>
-							</a>
+							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+							<div class="item-info p-1 h5 tertiary bg-white">
+								<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
+								<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
+								<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
+								<p class="item-balance mb-0 h6 light text"><?= $row['productBalance'] == '--'? $row['productBalance']: lang('GEN_COIN').' '.$row['productBalance'];?></p>
+							</div>
 						</div>
 					<?php
 						}
