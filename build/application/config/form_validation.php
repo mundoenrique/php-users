@@ -1,6 +1,13 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'detailproduct' => [
+		[
+			'field' => 'nroTarjeta',
+			'label' => 'nroTarjeta',
+			'rules' => 'trim|required'
+		],
+	],
 	'login' => [
 		[
 			'field' => 'user',

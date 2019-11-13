@@ -43,29 +43,34 @@ class Product extends NOVO_Controller {
 		}
 
 		$this->views = ['product/'.$view];
-		$this->render->data = $this->loadDataProducts();
+		$this->render->data = $this->loadDataProduct();
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
-	public function loadDataProducts()
+	public function loadDataProduct($operation = 'all', $card = '')
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$method = $this->method;
 		$data = $this->modelLoad->callWs_loadProducts_Product();
 
 		$dataRequeried = [];
 		foreach($data as $row){
 			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
+			if ( $operation === 'detail' && $card !== $row->noTarjeta ){
+				continue;
+			}
 			array_push($dataRequeried, [
-					"noTarjeta" => $row->noTarjeta,
-					"noTarjetaConMascara" => $row->noTarjetaConMascara,
-					"nombre_producto" => $row->nombre_producto,
-					"marca" => strtolower($row->marca),
-					"nomEmp" => $row->nomEmp,
-					"productBalance" => $productBalance
-					]);
+				"noTarjeta" => $row->noTarjeta,
+				"noTarjetaConMascara" => $row->noTarjetaConMascara,
+				"nombre_producto" => $row->nombre_producto,
+				"marca" => strtolower($row->marca),
+				"nomEmp" => ucwords(strtolower($row->nomEmp)),
+				"productBalance" => $productBalance,
+				"id_ext_per" => $row->id_ext_per,
+				"nom_plastico" => ucwords(strtolower($row->nom_plastico))
+			]);
 		}
+
 		return $dataRequeried;
 	}
 
@@ -92,8 +97,9 @@ class Product extends NOVO_Controller {
 		}
 
 		$this->views = ['product/'.$view];
-		$this->render->data =array_slice($this->loadDataProducts(), 0, 2);
+		$this->render->data = $this->loadDataProduct('detail', $_POST['nroTarjeta'])[0];
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
+
 }

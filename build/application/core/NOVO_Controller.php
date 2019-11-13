@@ -40,11 +40,13 @@ class NOVO_Controller extends CI_Controller {
 
 		$this->countryUri = $this->uri->segment(1, 0) ?: 'default';
 		$this->render->rootHome = base_url($this->render->logged? 'bdb/vistaconsolidada': 'bdb/inicio');
+		$this->render->pathViewPreview = base_url('bdb/vistaconsolidada');
 
 		$this->countryConf = $this->config->item('country');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 
 		$this->lang->load(['general', 'error', 'response'], 'spanish-base');
+		$this->rule = strtolower($this->router->fetch_method());
 
 		$this->optionsCheck();
 	}
@@ -81,8 +83,8 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->countryUri = $this->countryUri;
 			$this->render->settingContents = $this->config->item('settingContents');
 			$this->render->layoutView = $this->config->item('layout');
-			$this->render->novoName = $this->security->get_csrf_token_name();
-			$this->render->novoCook = $this->security->get_csrf_hash();
+			$this->render->novoName = $this->security->get_csrf_token_name(); // name
+			$this->render->novoCook = $this->security->get_csrf_hash(); // value
 			$this->session->set_userdata('countryUri', $this->countryUri);
 			switch($this->countryUri) {
 				case 'bp':
