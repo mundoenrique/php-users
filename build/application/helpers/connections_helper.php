@@ -115,7 +115,7 @@ if(!function_exists('connectionAPI'))
 		$bodyAPI = $objectAPI->bodyAPI;
 		$method = $objectAPI->method;
 		log_message('INFO', 'ConnectionAPI:==>> ' . json_encode($objectAPI));
-		log_message('DEBUG', 'Iniciando el llamado al API por el metodo: '.$method);
+		log_message('DEBUG', 'Iniciando el llamado al API por el metodo:==>> ' . $method);
 		$CI = &get_instance();
 		$clientId = $CI->config->item('clientId');
 		$ClientSecret = $CI->config->item('clientSecret');
@@ -124,7 +124,8 @@ if(!function_exists('connectionAPI'))
 		$responseAPI = json_decode ($responseOauth->respOauth);
 		if($httpCode === 200) {
 			$token = trim($responseAPI->access_token);
-			log_message('DEBUG', 'URL API: ' . $urlAPI);
+			$url = $CI->config->item('urlAPI') . $urlAPI;
+			log_message('DEBUG', 'URL API: ' . $url);
 			//Encabezado de la petición al API
 			$header = [
 				'Language: es',
@@ -139,10 +140,10 @@ if(!function_exists('connectionAPI'))
 				$item = trim($item);
 				array_unshift($header, $item);
 			}
-			log_message('INFO', 'HEADER API: ' . json_encode($header));
-			log_message('INFO', 'BODY API: ' . $bodyAPI);
+			log_message('INFO', 'HEADER API' . json_encode($header));
+			log_message('INFO', 'BODY API' . $bodyAPI);
 			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $urlAPI);
+			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 58);
@@ -152,15 +153,15 @@ if(!function_exists('connectionAPI'))
 			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			$response = new stdClass();
 			log_message("DEBUG", 'NOVO RESPONSE API HTTPCODE '.$httpCode);
+			$response->httpCode = $httpCode;
 			if($responseAPI === FALSE) {
-				$responseAPI = curl_error($ch);
+				$response->resAPI = curl_error($ch);
 				log_message("DEBUG", 'NOVO RESPONSE API '.json_encode($response));
 			}
 			curl_close($ch);
 		} else {
-			$responseAPI = json_decode($responseOauth);
+			$responseAPI = json_decode(responseOauth);
 		}
-		$response->httpCode = $httpCode;
 		$response->resAPI = $responseAPI;
 		return $response;
 	}
