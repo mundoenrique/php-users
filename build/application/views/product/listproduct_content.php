@@ -15,7 +15,7 @@
 					<?php
 						foreach($data as $row){
 					?>
-						<div class="dashboard-item p-1 mx-1 mb-1">
+						<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>">
 							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 							<div class="item-info p-1 h5 tertiary bg-white">
 								<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
