@@ -1732,6 +1732,12 @@ i[class*=" icon-"]:before {
 	padding: .75rem 2.5rem;
 }
 
+.detail-filters-nav {
+	background-color: var(--widget-color);
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+
 .navbar-brand {
   display: inline-block;
   margin-right: 1rem;

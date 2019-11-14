@@ -23,10 +23,10 @@
 				</div>
 
 				<h2 class="h4 regular tertiary">Mis movimientos</h2>
-				<nav id="filters-stack" class="navbar px-1 px-lg-5">
+				<nav id="filters-stack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 						<form accept-charset="utf-8" class="form-inline" method="post">
-							<label class="my-1 mr-1" for="filter-month">Mostrar:</label>
+							<label class="my-1 mr-1 text" for="filter-month">Mostrar:</label>
 							<select id="filter-month" class="custom-select form-control my-1 mr-1" name="filter-month">
 								<option selected="" value="0">Más recientes</option>
 								<option value="1">Enero</option>
@@ -54,14 +54,14 @@
 						<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
 					<ul class="list-inline mx-2 mb-0 flex items-center">
-						<li class="list-inline-item text border">
-							<a id="print-detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print mr-0"></span></a>
+						<li class="px-1 list-inline-item text border rounded">
+							<a id="print-detail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print h5 mr-0"></span></a>
 						</li>
-						<li class="list-inline-item text border">
-							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download mr-0"></span></a>
+						<li class="px-1 list-inline-item text border rounded">
+							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
-						<li class="list-inline-item text border">
-							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel mr-0"></span></a>
+						<li class="px-1 list-inline-item text border rounded">
+							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
 					<div class="custom-control custom-radio custom-control-inline mr-1">
