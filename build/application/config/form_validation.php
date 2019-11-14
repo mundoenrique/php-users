@@ -7,6 +7,16 @@ $config = [
 			'label' => 'nroTarjeta',
 			'rules' => 'trim|required'
 		],
+		[
+			'field' => 'noTarjetaConMascara',
+			'label' => 'noTarjetaConMascara',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|required'
+		],
 	],
 	'login' => [
 		[

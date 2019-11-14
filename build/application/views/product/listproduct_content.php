@@ -11,18 +11,21 @@
 					<form action="<?= base_url('detalle'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 						<input type='hidden' name='nroTarjeta' id='nroTarjeta' value=''>
+						<input type='hidden' name='noTarjetaConMascara' id='noTarjetaConMascara' value=''>
+						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
 					<?php
 						foreach($data as $row){
 					?>
-						<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>">
+						<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>" >
 							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 							<div class="item-info p-1 h5 tertiary bg-white">
-								<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
+								<img class="item-network" src="<?= $this->asset->insertFile('logo_'.$row['marca'].'.svg','img',$countryUri); ?>" alt="<?= $row['marca'];?>">
 								<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
 								<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 								<p class="item-balance mb-0 h6 light text">
-									<?= $row['productBalance'] == '--'?: lang('GEN_COIN').' '.$row['productBalance'];?>
+									<?= $row['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
+									<?= $row['availableBalance'];?>
 								</p>
 							</div>
 						</div>

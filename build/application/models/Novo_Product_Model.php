@@ -68,4 +68,56 @@ class Novo_Product_Model extends NOVO_Model
 			}
 		}
 	}
+
+	public function callWs_balanceInTransit_Product($dataRequest)
+	{
+		$country = $this->session->userdata("pais");
+
+		$urlAPI = '/api-cardholder-account/1.0/balance';
+		$headerAPI = [
+			'x-country: ' . $country
+		];
+		$body = [
+			'idPrograma' => $dataRequest['prefix'],
+			'noTarjetaConMascara' => $dataRequest['noTarjetaConMascara']
+		];
+		$bodyAPI = json_encode($body);
+		$method = 'POST';
+
+		$objectAPI = (object) [
+			'urlAPI' => $urlAPI,
+			'headerAPI' => $headerAPI,
+			'bodyAPI' => $bodyAPI,
+			'method' => $method
+		];
+		log_message("DEBUG", '['.$this->session->userdata("userName").']'." REQUEST WSinTransit objectAPI: ".json_encode($objectAPI));
+		$response = connectionAPI($objectAPI);
+
+		$httpCode = $response->httpCode;
+		$resAPI = $response->resAPI;
+
+		log_message("DEBUG", '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
+
+		$dataResponse = json_decode($resAPI);
+		$code = 1;
+		switch ($httpCode) {
+			case 200:
+				$code = 0;
+				// Formato de moneda de acuerdo al país
+				$ledgerBalance = $dataResponse->balance->ledgerBalance;
+				$availableBalance = (float) $dataResponse->balance->availableBalance;
+				if($availableBalance < 0) {
+					$availableBalance = $availableBalance/100;
+				}
+				$actualBalance = $ledgerBalance + $availableBalance;
+				$ledgerBalance = np_hoplite_decimals($ledgerBalance, $country);
+				$availableBalance = np_hoplite_decimals($availableBalance, $country);
+				$actualBalance = np_hoplite_decimals($actualBalance, $country);
+				$dataResponse->balance->ledgerBalance = $ledgerBalance;
+				$dataResponse->balance->availableBalance = $availableBalance;
+				$dataResponse->balance->actualBalance = $actualBalance;
+				break;
+		}
+		return $dataResponse;
+	}
 }

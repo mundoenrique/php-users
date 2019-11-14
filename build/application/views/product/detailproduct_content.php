@@ -15,9 +15,9 @@
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
 						<ul class="product-balance-group list-inline">
-							<li class="list-inline-item">Actual <span id="actual" class="product-balance block primary"><?= $data['productBalance'];?></span></li>
-							<li class="list-inline-item">En Tránsito <span id="bloqueado" class="product-balance block primary"><?= $data['productBalance'];?></span></li>
-							<li class="list-inline-item">Disponible <span id="disponible" class="product-balance block primary"><?= $data['productBalance'];?></span></li>
+							<li class="list-inline-item">Actual <span id="actual" class="product-balance block primary"><?= $data['actualBalance'];?></span></li>
+							<li class="list-inline-item">En Tránsito <span id="bloqueado" class="product-balance block primary"><?= $data['ledgerBalance'];?></span></li>
+							<li class="list-inline-item">Disponible <span id="disponible" class="product-balance block primary"><?= $data['availableBalance'];?></span></li>
 						</ul>
 					</div>
 				</div>
