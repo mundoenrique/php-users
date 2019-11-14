@@ -14,7 +14,7 @@
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
-						<ul class="product-balance-group list-inline">
+						<ul class="product-balance-group flex justify-between mb-0 list-inline">
 							<li class="list-inline-item">Actual <span id="actual" class="product-balance block primary"><?= $data['productBalance'];?></span></li>
 							<li class="list-inline-item">En Tránsito <span id="bloqueado" class="product-balance block primary"><?= $data['productBalance'];?></span></li>
 							<li class="list-inline-item">Disponible <span id="disponible" class="product-balance block primary"><?= $data['productBalance'];?></span></li>

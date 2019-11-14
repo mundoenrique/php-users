@@ -575,6 +575,40 @@ textarea.form-control {
 	opacity: .6;
 }
 
+/* Switch */
+
+.custom-switch {
+  padding-left: 2.25rem;
+}
+
+.custom-switch .custom-control-label::before {
+  left: -2.25rem;
+  width: 1.75rem;
+  pointer-events: all;
+  border-radius: .5rem;
+}
+
+.custom-switch .custom-control-label::after {
+  top: calc(.25rem + 1px);
+  left: calc(-2.25rem + 2px);
+  width: calc(1rem - 4px);
+  height: calc(1rem - 4px);
+  background-color: var(--border-color);
+  border-radius: .5rem;
+	transition: background-color, border-color, box-shadow, -webkit-transform .15s ease-in-out;
+	transition: background-color, border-color, box-shadow, transform .15s ease-in-out;
+}
+
+.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+  background-color: rgba(255,255,255,1);
+  -webkit-transform: translateX(.75rem);
+  transform: translateX(.75rem);
+}
+
+.custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: var(--primary);
+}
+
 /* Form inline */
 .form-inline {
 	display: flex;
