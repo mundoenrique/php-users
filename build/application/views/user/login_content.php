@@ -19,8 +19,8 @@
 					<span aria-hidden="true" class="icon-lock h3 yellow"></span>
 					Ingreso Seguro
 				</button>
-				<a href="<?= base_url('recuperaracceso');?>" class="block mb-1 h5">Recuperar Acceso</a>
-				<p class="mb-0 h5">¿No posees usuario? <a href="<?= base_url('preregistro');?>">Regístrate</a></p>
+				<a class="block mb-1 h5 primary" href="<?= base_url('recuperaracceso');?>">Recuperar Acceso</a>
+				<p class="mb-0 h5">¿No posees usuario? <a class="primary" href="<?= base_url('preregistro');?>">Regístrate</a></p>
 			</form>
 		</div>
 	</div>
