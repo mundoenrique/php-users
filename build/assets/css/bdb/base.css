@@ -274,42 +274,42 @@ main.content {
 	========================================================================== */
 
 
-	.form-control {
-		display: block;
-		width: 100%;
-		height: calc(1.15em + .75rem + 2px);
-		padding: .375rem .75rem;
-		font-size: .875rem;
-		font-weight: var(--font-weight-base);
-		line-height: 1.15;
-		color: var(--text-color);
-		border: 1px solid var(--border-color);
-		border-radius: .25rem;
-		transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-	}
+.form-control {
+	display: block;
+	width: 100%;
+	height: calc(1.15em + .75rem + 2px);
+	padding: .375rem .75rem;
+	font-size: .875rem;
+	font-weight: var(--font-weight-base);
+	line-height: 1.15;
+	color: var(--text-color);
+	border: 1px solid var(--border-color);
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
 
-	.form-control:focus {
-		border: 1px solid var(--border-color);
-		outline: 0;
-		-webkit-box-shadow: 0 0 2px var(--primary-shade);
-		-moz-box-shadow: 0 0 2px var(--primary-shade);
-		box-shadow: 0 0 2px var(--primary-shade);
-	}
+.form-control:focus:not([readonly]):not(:disabled) {
+	border: 1px solid var(--border-color);
+	outline: 0;
+	-webkit-box-shadow: 0 0 2px var(--primary-shade);
+	-moz-box-shadow: 0 0 2px var(--primary-shade);
+	box-shadow: 0 0 2px var(--primary-shade);
+}
 
-	.form-control::-webkit-input-placeholder {
-		color: var(--placeholder-color);
-		opacity: 1;
-	}
+.form-control::-webkit-input-placeholder {
+	color: var(--placeholder-color);
+	opacity: 1;
+}
 
-	.form-control::-moz-placeholder {
-		color: var(--placeholder-color);
-		opacity: 1;
-	}
+.form-control::-moz-placeholder {
+	color: var(--placeholder-color);
+	opacity: 1;
+}
 
-	.form-control:-ms-input-placeholder {
-		color: var(--placeholder-color);
-		opacity: 1;
-	}
+.form-control:-ms-input-placeholder {
+	color: var(--placeholder-color);
+	opacity: 1;
+}
 
 .form-control::-ms-input-placeholder {
   color: var(--placeholder-color);
@@ -321,9 +321,14 @@ main.content {
 	opacity: 1;
 }
 
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled {
 	background-color: var(--disabled-color);
 	opacity: 1;
+}
+
+.form-control[readonly] {
+	background-color: transparent;
+	border: none;
 }
 
 textarea.form-control {
@@ -1768,7 +1773,8 @@ i[class*=" icon-"]:before {
 
 .detail-filters-nav {
 	background-color: var(--widget-color);
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+	border-top: 1px var(--border-color-2) solid;
+	border-bottom: 1px var(--border-color-2) solid;
 }
 
 
@@ -2822,4 +2828,29 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .card-image {
   width: 210px;
+}
+
+.feed .feed-item {
+	border-top: 1px solid var(--border-color-2);
+	background-color: var(--widget-color);
+}
+
+.feed .feed-item:last-child {
+	border-bottom: 1px solid var(--border-color-2);
+}
+
+.feed .feed-item:nth-child(2n) {
+	background-color: var(--bg-color);
+}
+
+.feed .feed-item:last-child {
+	border-bottom: 1px solid var(--border-color-2);
+}
+
+.feed .feed-item.feed-income .feed-amount {
+	color: var(--success);
+}
+
+.feed .feed-item.feed-expense .feed-amount {
+	color: var(--danger);
 }
