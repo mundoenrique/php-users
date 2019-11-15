@@ -95,7 +95,8 @@ class Product extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"$this->countryUri/product/$view"
+			"$this->countryUri/product/$view",
+			"third_party/kendo.dataviz"
 		);
 
 		if ($this->config->item('language_form_validate')) {

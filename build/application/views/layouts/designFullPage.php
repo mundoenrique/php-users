@@ -17,8 +17,8 @@
 		if($module !== 'login'){
 	?>
 
-		<header class="main-head ">
-			<nav class="navbar navbar-expand-lg bg-primary">
+		<header class="main-head">
+			<nav class="navbar navbar-expand-lg flex-auto">
 				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php

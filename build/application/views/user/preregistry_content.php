@@ -27,7 +27,7 @@
 						<div class="custom-control custom-switch my-3">
 							<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
 							<label class="custom-control-label" for="acceptTerms">
-								Acepto las <a class="" href="#" rel="section">condiciones de uso</a> de este sistema
+								Acepto las <a class="primary" href="#" rel="section">condiciones de uso</a> de este sistema
 							</label>
 							<div class="help-block"></div>
 						</div>
