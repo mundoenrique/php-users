@@ -72,7 +72,7 @@ class Product extends NOVO_Controller {
 				"marca" => strtolower($row->marca),
 				"nomEmp" => ucwords(strtolower($row->nomEmp)),
 				"actualBalance" => $productBalance,
-				"ledgerBalance" => "0,00",
+				"ledgerBalance" => "--",
 				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico))
@@ -85,7 +85,7 @@ class Product extends NOVO_Controller {
 
 	public function detailProduct()
 	{
-		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
+		log_message('INFO', 'NOVO Consolidated: detailProduct Method Initialized');
 		$view = 'detailproduct';
 
 		if (!$this->session->userdata('logged_in')) {
