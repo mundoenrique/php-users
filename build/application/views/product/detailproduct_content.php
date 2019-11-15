@@ -154,7 +154,7 @@
 					<div id="stats" class="group-aside-view col-4">
 						<h3 class="h4 regular">Estadísticas</h3>
 						<div id="estadisticas" class="detail-stats"></div>
-						<div id="estadisticas-transit" class="detail-stats"></div>
+						<div id="estadisticas-transit" class="detail-stats none"></div>
 					</div>
 
 				</div>
