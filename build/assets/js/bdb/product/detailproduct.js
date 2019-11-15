@@ -39,7 +39,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}],
 			tooltip: {
 				visible: true,
-				template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+				template: "#= category #: #= kendo.format('{0:P}', percentage) #",
+				color: "#fff"
 			}
 		});
 
