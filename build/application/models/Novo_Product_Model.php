@@ -69,6 +69,35 @@ class Novo_Product_Model extends NOVO_Model
 		}
 	}
 
+	public function callWs_getTransactionHistory_Product($dataRequest)
+	{
+		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'tarjeta';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->operation = 'consulta';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = '3';
+		$this->dataRequest->noTarjeta = $dataRequest['noTarjeta'];
+		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
+		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->pais = $this->session->userdata('pais');
+
+		log_message("info", "Request Detail Product:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('Product');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					return $response->movimientos;
+					break;
+				default:
+					return '--';
+			}
+		}
+	}
+
 	public function callWs_balanceInTransit_Product($dataRequest)
 	{
 		$country = $this->session->userdata("pais");

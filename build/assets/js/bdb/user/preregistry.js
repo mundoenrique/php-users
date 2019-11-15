@@ -6,7 +6,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnTrigger = $$.getElementById('btnValidar');
 
 	//core
-	$$.getElementById('btnTrigger').addEventListener('click',function(e){
+	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 
 		var form = $('#formVerifyAccount');

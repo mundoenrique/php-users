@@ -120,3 +120,10 @@
 		</section>
 	</div>
 </div>
+<script>
+	var transactionsHistory = '<?= json_encode($data['movimientos']);?>';
+	<?php if(array_key_exists('pendingTransactions', $data)) {	?>
+		var pendingTransactions = '<?= json_encode($data['pendingTransactions']);?>';
+	<?php } ?>
+</script>
+<?= var_dump($data);?>

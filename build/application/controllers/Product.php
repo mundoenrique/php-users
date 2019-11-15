@@ -72,7 +72,7 @@ class Product extends NOVO_Controller {
 				"marca" => strtolower($row->marca),
 				"nomEmp" => ucwords(strtolower($row->nomEmp)),
 				"actualBalance" => $productBalance,
-				"ledgerBalance" => "--",
+				"ledgerBalance" => "0,00",
 				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico))
@@ -111,12 +111,14 @@ class Product extends NOVO_Controller {
 
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+		$dataProduct['movimientos'] = json_encode($this->modelLoad->callWs_getTransactionHistory_Product($dataProduct));
 
 		if ( $data->rc === "200" ) {
 
 			$dataProduct['actualBalance'] = $data->balance->actualBalance;
 			$dataProduct['ledgerBalance'] = $data->balance->ledgerBalance;
 			$dataProduct['availableBalance'] = $data->balance->availableBalance;
+			$dataProduct['pendingTransactions'] = json_encode($data->pendingTransactions);
 		}
 
 		$this->views = ['product/'.$view];
