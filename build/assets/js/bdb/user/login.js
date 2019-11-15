@@ -57,13 +57,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
 
-		if (activatedCaptcha) {
+		if(form.valid()) {
 
-			if(form.valid()) {
+			$(this).html(msgLoading);
+			disableInputsForm(true)
 
-				$(this).html(msgLoading);
-				disableInputsForm(true)
-
+			if (activatedCaptcha) {
 				grecaptcha.ready(function() {
 					grecaptcha
 					.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
@@ -84,10 +83,9 @@ document.addEventListener('DOMContentLoaded', function(){
 						notiSystem(title, '', icon, data);
 					});
 				});
+			}else{
+				validateLogin({user: credentialUser, text: txtBtnLogin});
 			}
-		}
-		else{
-			validateLogin({token: '', user: credentialUser, text: txtBtnLogin});
 		}
 	});
 
