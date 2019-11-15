@@ -111,14 +111,14 @@ class Product extends NOVO_Controller {
 
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-		$dataProduct['movimientos'] = json_encode($this->modelLoad->callWs_getTransactionHistory_Product($dataProduct));
+		$dataProduct['movimientos'] = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 
 		if ( $data->rc === "200" ) {
 
 			$dataProduct['actualBalance'] = $data->balance->actualBalance;
 			$dataProduct['ledgerBalance'] = $data->balance->ledgerBalance;
+			$dataProduct['pendingTransactions'] = $data->pendingTransactions;
 			$dataProduct['availableBalance'] = $data->balance->availableBalance;
-			$dataProduct['pendingTransactions'] = json_encode($data->pendingTransactions);
 		}
 
 		$this->views = ['product/'.$view];

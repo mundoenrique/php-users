@@ -1,3 +1,6 @@
+<?php
+	$months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+?>
 <div id="detail" class="detail-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -80,32 +83,52 @@
 							<span id="transit-datail-title" style="display: none;">Transacciones Pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
-						<ul id="list-detail" class="feed list-style-none mt-3 pl-0">
-							<li class="feed-item feed-income flex py-1 items-center">
-								<div class="flex px-2 border-right flex-column items-center feed-date">
-									<span class="h5 feed-date-day">08</span>
-									<span class="h6 uppercase feed-date-month">Nov</span>
-									<span class="h6 feed-date-year">2019</span>
-								</div>
-								<div class="flex px-2 flex-column mr-auto">
-									<span class="h5 uppercase semibold feed-product">BENEFICIO DE ALIMENTACION</span>
-									<span class="h6 feed-metadata">364271</span>
-								</div>
-								<span class="px-2 feed-amount items-center">Bs. 325.000,00</span>
-							</li>
-							<li class="feed-item feed-expense flex py-1 items-center">
-								<div class="flex px-2 border-right flex-column items-center feed-date">
-									<span class="h5 feed-date-day">08</span>
-									<span class="h6 uppercase feed-date-month">Nov</span>
-									<span class="h6 feed-date-year">2019</span>
-								</div>
-								<div class="flex px-2 flex-column mr-auto">
-									<span class="h5 uppercase semibold feed-product">BENEFICIO DE ALIMENTACION</span>
-									<span class="h6 feed-metadata">364271</span>
-								</div>
-								<span class="px-2 feed-amount items-center">Bs. -325.000,00</span>
-							</li>
+						<ul id="list-detail" class="feed list-style-none mt-3 pl-0 none">
+							<?php foreach($data['movimientos'] as $row){
+								$separedDate = explode('/',$row->fecha);
+								$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
+							?>
+								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
+									<div class="flex px-2 border-right flex-column items-center feed-date">
+										<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
+										<span class="h6 uppercase feed-date-month"><?= $spanishMonth;?></span>
+										<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
+									</div>
+									<div class="flex px-2 flex-column mr-auto">
+										<span class="h5 uppercase semibold feed-product"><?= $row->concepto;?></span>
+										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
+									</div>
+									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). $row->monto;?></span>
+								</li>
+							<?php }?>
 						</ul>
+
+						<?php
+							if (array_key_exists('pendingTransactions', $data)){
+						?>
+							<ul id="list-transit-detail" class="feed list-style-none mt-3 pl-0">
+								<?php foreach($data['pendingTransactions'] as $row){
+									$separedDate = explode('/',$row->fecha);
+									$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
+								?>
+									<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
+										<div class="flex px-2 border-right flex-column items-center feed-date">
+											<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
+											<span class="h6 uppercase feed-date-month"><?= $spanishMonth;?></span>
+											<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
+										</div>
+										<div class="flex px-2 flex-column mr-auto">
+											<span class="h5 uppercase semibold feed-product"><?= $row->concepto;?></span>
+											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
+										</div>
+										<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). number_format((float)$row->monto, 2,',','.');?></span>
+									</li>
+								<?php }?>
+							</ul>
+						<?php
+							}
+						?>
+
 					</div>
 					<div class="group-aside-view col-4" id="stats">
 						<h3 class="h4 regular">Estadísticas</h3>
@@ -120,10 +143,5 @@
 		</section>
 	</div>
 </div>
-<script>
-	var transactionsHistory = '<?= json_encode($data['movimientos']);?>';
-	<?php if(array_key_exists('pendingTransactions', $data)) {	?>
-		var pendingTransactions = '<?= json_encode($data['pendingTransactions']);?>';
-	<?php } ?>
-</script>
 <?= var_dump($data);?>
+
