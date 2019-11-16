@@ -44,6 +44,11 @@ class Product extends NOVO_Controller {
 
 		$this->views = ['product/'.$view];
 		$this->render->data = $this->loadDataProduct();
+
+		if (count($this->render->data) == 1){
+			$_POST['nroTarjeta'] = $this->render->data[0]['noTarjeta'];
+			$this->detailProduct();
+		}
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
@@ -80,19 +85,21 @@ class Product extends NOVO_Controller {
 
 	public function detailProduct()
 	{
-		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
+		log_message('INFO', 'NOVO Consolidated: detailProduct Method Initialized');
 		$view = 'detailproduct';
 
-		if(!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"$this->countryUri/product/$view"
+			"$this->countryUri/product/$view",
+			"third_party/kendo.dataviz"
 		);
-		if($this->config->item('language_form_validate')) {
+
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
@@ -105,11 +112,13 @@ class Product extends NOVO_Controller {
 
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+		$dataProduct['movimientos'] = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 
-		if ( $data->rc === "200" ){
+		if ( $data->rc === "200" ) {
 
 			$dataProduct['actualBalance'] = $data->balance->actualBalance;
 			$dataProduct['ledgerBalance'] = $data->balance->ledgerBalance;
+			$dataProduct['pendingTransactions'] = $data->pendingTransactions;
 			$dataProduct['availableBalance'] = $data->balance->availableBalance;
 		}
 

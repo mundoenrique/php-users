@@ -113,7 +113,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 								<h3>Estadísticas</h3>
 								<div id="estadisticas" style="width:300px; height:250px"></div>
 								<?php if($country != 'Ec-bp'): ?>
-								<div id="estadisticas-transit" style="width:300px; height:250px">
+								<div id="estadisticas-transit" style="width:300px; height:250px">*******
 								<?php endif; ?>
 							</div>
 						</div>
