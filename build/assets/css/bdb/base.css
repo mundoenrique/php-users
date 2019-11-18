@@ -358,14 +358,53 @@ textarea.form-control {
 .custom-select {
 	display: inline-block;
 	padding-right: 1.75rem;
-	background: rgba(255,255,255,1) url("../../img/bdb/icon-triangle-2-n-s.svg") right .75rem center/ 8px 10px no-repeat;
+	background: rgba(255,255,255,1) url("../../img/bdb/icon-chevron_down_gray.svg") right .75rem center/ 14px 14px no-repeat;
+	cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+	appearance: none;
+	transition: all .1s ease-in-out;
+}
+
+.custom-select:hover {
+	display: inline-block;
+	padding-right: 1.75rem;
+	background: rgba(255,255,255,1) url("../../img/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+	appearance: none;
+	transition: all .1s ease-in-out;
 }
 
 .custom-select:disabled {
   background-color: var(--disabled-color);
+}
+
+.select-box option {
+	background-color: var(--secondary);
+  border-bottom: 1px solid var(--border-color);
+	transition: all 0.1ms ease-in-out;
+	appearance: none;
+}
+
+.select-box option:first-child {
+	color: var(--placeholder-color) !important;
+}
+
+.select-box {
+	border-radius: 2.55px;
+	border: .85px solid var(--border-color);
+	box-shadow: 1px 1px 2px 0 var(--shadows-color);
+	color: rgba(0,0,0,0);
+	cursor: pointer;
+	height: calc(1.15em + .75rem + 4px);
+	line-height: 1.5;
+	margin: 0 2px;
+	padding-right: 1.9rem !important;
+	padding: 0rem .4rem;
+	position: relative;
+	text-shadow: 0 0 0 var(--text-color);
+	transition: all .1s ease-in-out;
 }
 
 /* Checkboxes and radios */
