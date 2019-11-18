@@ -87,7 +87,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhone">Otro Teléfono (Tipo)</label>
-								<select class="bg-secondary custom-select" placeholder="Seleccione" name="phoneType" id="phoneType">
+								<select class="custom-select form-control" placeholder="Seleccione" name="phoneType" id="phoneType">
 									<option value="OFC">Laboral</option>
 									<option value="FAX">Fax</option>
 									<option value="OTRO">Otro</option>

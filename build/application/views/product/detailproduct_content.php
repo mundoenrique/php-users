@@ -77,22 +77,19 @@
 					</div>
 					<ul class="list-inline mx-2 mb-0 flex items-center">
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="printDetail" rel="subsection" onclick="window.print();"><span aria-hidden="true" title="Imprimir" class="icon-print h5 mr-0"></span></a>
-						</li>
-						<li class="px-1 list-inline-item text border rounded">
 							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
 						<li class="px-1 list-inline-item text border rounded">
 							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
-					<div class="custom-control custom-radio custom-control-inline mr-1">
-						<input id="disponibleToogle" class="custom-control-input" type="radio" name="toggle" checked>
-						<label class="custom-control-label" for="disponibleToogle">Disponible</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline mr-0">
-						<input id="transitoToogle" class="custom-control-input" type="radio" name="toggle" disabled>
-						<label class="custom-control-label" for="transitoToogle">En tránsito</label>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn-small btn-options btn-rounded-left active">
+							<input type="radio" name="movimientos" id="option1" checked> Movimientos
+						</label>
+						<label class="btn-small btn-options btn-rounded-right">
+							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
+						</label>
 					</div>
 				</nav>
 
