@@ -1,7 +1,7 @@
 <?php
 	$months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 ?>
-<?php var_dump($data);?>
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
