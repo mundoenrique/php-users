@@ -60,7 +60,7 @@ class Product extends NOVO_Controller {
 
 		$dataRequeried = [];
 		foreach($data as $row){
-			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
+			$productBalance = $this->transforNumber ($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
 			if ( $operation === 'detail' && $card !== $row->noTarjeta ){
 				continue;
 			}
@@ -111,20 +111,53 @@ class Product extends NOVO_Controller {
 		$dataProduct = $listProducts[$posList];
 
 		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-		$dataProduct['movimientos'] = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+		$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+		$dataProduct['movements'] = $this->transforNumberInArray ($movements);
+		$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
 
+		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
 		if ( $data->rc === "200" ) {
 
-			$dataProduct['actualBalance'] = $data->balance->actualBalance;
-			$dataProduct['ledgerBalance'] = $data->balance->ledgerBalance;
-			$dataProduct['pendingTransactions'] = $data->pendingTransactions;
-			$dataProduct['availableBalance'] = $data->balance->availableBalance;
+			$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
+			$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
+			$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
+
+			$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
+			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
 		}
 
 		$this->views = ['product/'.$view];
 		$this->render->data = $dataProduct;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
+	}
+
+	function transforNumberInArray ($transforArray)
+	{
+		foreach ($transforArray as $clave => $valor)
+		{
+			$valor->monto = $this->transforNumber ($valor->monto);
+			$transforArray[$clave] = $valor;
+		}
+		return $transforArray;
+	}
+
+	function transforNumber ($transforNumber)
+	{
+		$transforNumber = str_replace('.',' ', $transforNumber);
+		$transforNumber = str_replace(',','.', $transforNumber);
+		return (float)str_replace(' ','', $transforNumber);
+	}
+
+	function totalInTransactions($transactions)
+	{
+		$totalIncome = 0;
+		$totalExpense = 0;
+		foreach ($transactions as $row) {
+
+			$totalIncome += $row->signo == '+'? $row->monto: 0;
+			$totalExpense += $row->signo == '-'? $row->monto: 0;
+		}
+		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
 	}
 }

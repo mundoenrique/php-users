@@ -25,7 +25,7 @@
 								<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 								<p class="item-balance mb-0 h6 light text">
 									<?= $row['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
-									<?= $row['availableBalance'];?>
+									<?= strval(number_format($row['availableBalance'],2,',','.'));?>
 								</p>
 							</div>
 						</div>

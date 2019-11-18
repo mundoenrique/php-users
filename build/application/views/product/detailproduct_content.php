@@ -1,6 +1,11 @@
 <?php
 	$months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 ?>
+
+<form method="post">
+	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+</form>
+
 <div id="detail" class="detail-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -20,20 +25,21 @@
 						<ul class="product-balance-group flex justify-between mb-0 list-inline">
 							<li class="list-inline-item">Actual
 								<span id="actual" class="product-balance block primary">
-									<?= $data['actualBalance'] !== '--'? lang('GEN_COIN'): '';?>
-									<?= $data['actualBalance'];?>
+									<?= $data['actualBalance'] !== '--'?
+										lang('GEN_COIN').' '.strval(number_format($data['actualBalance'],2,',','.')):
+										$data['actualBalance'];?>
 								</span>
 							</li>
 							<li class="list-inline-item">En Tránsito
 								<span id="bloqueado" class="product-balance block primary">
-									<?= $data['ledgerBalance'] !== '--'? lang('GEN_COIN'): '';?>
-									<?= $data['ledgerBalance'];?>
+									<?= $data['ledgerBalance'] !== '--'?
+									lang('GEN_COIN').' '.strval(number_format($data['ledgerBalance'],2,',','.')): $data['ledgerBalance'];?>
 								</span>
 							</li>
 							<li class="list-inline-item">Disponible
 								<span id="disponible" class="product-balance block primary">
-									<?= $data['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
-									<?= $data['availableBalance'];?>
+									<?= $data['availableBalance'] !== '--'?
+									lang('GEN_COIN').' '.strval(number_format($data['availableBalance'],2,',','.')): $data['ledgerBalance'];?>
 								</span>
 							</li>
 						</ul>
@@ -43,7 +49,6 @@
 				<h2 class="h4 regular tertiary">Mis movimientos</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
-							<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
 								<option selected="" value="0">Más recientes</option>
@@ -99,14 +104,12 @@
 						<div class="line mt-1"></div>
 						<ul id="listDetail" class="feed list-style-none mt-3 pl-0">
 							<?php
-								$totalIncome = 0;
-								$totalExpense = 0;
-								foreach($data['movimientos'] as $row){
+								$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
+								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
+
+								foreach($data['movements'] as $row){
 									$separedDate = explode('/',$row->fecha);
 									$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
-
-									$totalIncome += $row->signo == '+'? $row->monto: 0;
-									$totalExpense += $row->signo == '-'? $row->monto: 0;
 							?>
 								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
 									<div class="flex px-2 flex-column items-center feed-date">
@@ -118,18 +121,21 @@
 										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
 										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 									</div>
-									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). $row->monto;?></span>
+									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?></span>
 								</li>
 							<?php }?>
 						</ul>
 
 					<?php
 						if (array_key_exists('pendingTransactions', $data)){
+							$totalIncomePendingTransactions = $data['totalInPendingTransactions']["totalIncome"];
+							$totalExpensePendingTransactions = $data['totalInPendingTransactions']["totalExpense"];
 					?>
 						<ul id="listTransitDetail" class="feed none list-style-none mt-3 pl-0">
-							<?php foreach($data['pendingTransactions'] as $row){
-								$separedDate = explode('/',$row->fecha);
-								$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
+							<?php
+								foreach($data['pendingTransactions'] as $row){
+									$separedDate = explode('/',$row->fecha);
+									$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
 							?>
 								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
 									<div class="flex px-2 flex-column items-center feed-date">
@@ -141,7 +147,7 @@
 										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
 										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 									</div>
-									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). number_format((float)$row->monto, 2,',','.');?></span>
+									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?></span>
 								</li>
 							<?php }?>
 						</ul>
@@ -164,6 +170,8 @@
 	</div>
 </div>
 <script>
-	var totalIncome = <?= $totalIncome ?>;
-	var	totalExpense = <?= $totalExpense ?>;
+	var totalIncomeMovements = <?= $totalIncomeMovements ?>;
+	var	totalExpenseMovements = <?= $totalExpenseMovements ?>;
+	var totalIncomePendingTransactions = <?= $totalIncomePendingTransactions?>;
+	var totalExpensePendingTransactions = <?= $totalExpensePendingTransactions?>;
 </script>
