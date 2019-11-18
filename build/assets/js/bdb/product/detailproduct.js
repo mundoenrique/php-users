@@ -6,7 +6,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		//core
 
-		$("#estadisticas").kendoChart({
+		$("#detailStats").kendoChart({
 
 			chartArea: {
 				background:"transparent"

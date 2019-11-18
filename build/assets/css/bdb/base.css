@@ -2938,4 +2938,5 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .detail-stats {
 	width: 300px;
 	height: 250px;
+	margin: 0 auto;
 }
