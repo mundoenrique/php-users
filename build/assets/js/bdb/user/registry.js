@@ -3,6 +3,8 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
+	var inputConfirmEmail = $$.getElementById('confirmEmail');
+	var inputConfirmUserpwd = $$.getElementById('confirmUserpwd');
 	var btnRegistry = $$.getElementById('btnRegistrar');
 	var maxBirthdayDate = new Date();
   maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
@@ -81,7 +83,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}else{
 			$('#btnRegistrar').attr("disabled", true);
 		}
-	})
+	});
+
+	inputConfirmEmail.oncut = inputConfirmEmail.oncopy = inputConfirmEmail.onpaste = function(e) {
+		this.nextSibling.nextSibling.innerText = 'Operacion no válida.'
+    return false;
+	};
+
+	inputConfirmUserpwd.oncut = inputConfirmUserpwd.oncopy = inputConfirmUserpwd.onpaste = function(e) {
+		this.nextSibling.nextSibling.innerText = 'Operacion no válida.'
+    return false;
+	};
 });
 
 
