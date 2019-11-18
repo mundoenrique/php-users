@@ -1,11 +1,21 @@
 'use strict';
 var $$ = document;
+var btnGroupToggle = $('.btn-group-toggle');
+console.log(btnGroupToggle);
+
 
 $$.addEventListener('DOMContentLoaded', function(){
 		//vars
 
 		//core
 
+		// Botones para cambiar lista de movimientos o movimientos en tránsito
+		btnGroupToggle.on('click', '.btn-options', function(e) {
+			e.preventDefault();
+			$(this).parent().children('.btn-options').toggleClass('active');
+		});
+
+		// Gráfico de estadísticas total abonos y cargos
 		$("#detailStats").kendoChart({
 
 			chartArea: {
