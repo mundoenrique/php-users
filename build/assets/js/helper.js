@@ -37,7 +37,7 @@ var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="st
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
-$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
+$('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
 
 function callNovoCore(verb, who, where, data, _response_) {
 
