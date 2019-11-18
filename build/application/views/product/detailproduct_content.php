@@ -80,7 +80,7 @@
 							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar EXCEL" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -95,7 +95,7 @@
 
 				<div class="group row mt-3" id="results">
 					<div class="group-main-view col-8" id="transactions">
-						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
+						<h3 class="h4 regular">Actividad <span id="period">Reciente</span>
 							<span id="transitTitle" class="none">Transacciones Pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
