@@ -109,7 +109,7 @@
 									$totalExpense += $row->signo == '-'? $row->monto: 0;
 							?>
 								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
-									<div class="flex px-2 border-right flex-column items-center feed-date">
+									<div class="flex px-2 flex-column items-center feed-date">
 										<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
 										<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
 										<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
@@ -132,7 +132,7 @@
 								$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
 							?>
 								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
-									<div class="flex px-2 border-right flex-column items-center feed-date">
+									<div class="flex px-2 flex-column items-center feed-date">
 										<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
 										<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
 										<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
