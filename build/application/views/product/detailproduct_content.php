@@ -84,10 +84,10 @@
 						</li>
 					</ul>
 					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn-small btn-options btn-rounded-left active">
+						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">
 							<input type="radio" name="movimientos" id="option1" checked> Movimientos
 						</label>
-						<label class="btn-small btn-options btn-rounded-right">
+						<label class="btn-small btn-options btn-outline btn-rounded-right is-disabled" id="transitToogle">
 							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
 						</label>
 					</div>
@@ -96,10 +96,10 @@
 				<div class="group row mt-3" id="results">
 					<div class="group-main-view col-8" id="transactions">
 						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
-							<span id="transitDetailTitle" class="none">Transacciones Pendientes</span>
+							<span id="transitTitle" class="none">Transacciones Pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
-						<ul id="listDetail" class="feed list-style-none mt-3 pl-0">
+						<ul id="movementsList" class="feed list-style-none mt-3 pl-0">
 							<?php
 								$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
 								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
@@ -128,7 +128,7 @@
 							$totalIncomePendingTransactions = $data['totalInPendingTransactions']["totalIncome"];
 							$totalExpensePendingTransactions = $data['totalInPendingTransactions']["totalExpense"];
 					?>
-						<ul id="listTransitDetail" class="feed none list-style-none mt-3 pl-0">
+						<ul id="transitList" class="feed none list-style-none mt-3 pl-0">
 							<?php
 								foreach($data['pendingTransactions'] as $row){
 									$separedDate = explode('/',$row->fecha);
@@ -157,7 +157,7 @@
 					<div id="stats" class="group-aside-view col-4">
 						<h3 class="h4 regular">Estadísticas</h3>
 						<div class="line mt-1"></div>
-						<div id="detailStats" class="detail-stats"></div>
+						<div id="movementsStats" class="detail-stats"></div>
 						<div id="transitStats" class="detail-stats none"></div>
 					</div>
 				</div>
