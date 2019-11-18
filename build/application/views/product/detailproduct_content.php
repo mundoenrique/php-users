@@ -1,7 +1,7 @@
 <?php
 	$months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 ?>
-
+<?php var_dump($data);?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -118,7 +118,9 @@
 										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
 										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 									</div>
-									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?></span>
+									<span class="px-2 feed-amount items-center">
+										<?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?>
+									</span>
 								</li>
 							<?php }?>
 						</ul>
@@ -169,6 +171,10 @@
 <script>
 	var totalIncomeMovements = <?= $totalIncomeMovements ?>;
 	var	totalExpenseMovements = <?= $totalExpenseMovements ?>;
-	var totalIncomePendingTransactions = <?= $totalIncomePendingTransactions?>;
-	var totalExpensePendingTransactions = <?= $totalExpensePendingTransactions?>;
+	<?php if (isset($totalIncomePendingTransactions)){ ?>
+		var totalIncomePendingTransactions = <?= $totalIncomePendingTransactions?>;
+	<?php }	?>
+	<?php if (isset($totalExpensePendingTransactions)){	?>
+		var totalExpensePendingTransactions = <?= $totalExpensePendingTransactions?>;
+	<?php	} ?>
 </script>

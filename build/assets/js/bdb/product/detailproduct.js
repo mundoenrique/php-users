@@ -58,9 +58,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		if (transitList.length) {
-			console.log("si hay");
-
+		if (transitList.length)
+		{
 			transitToogle.removeClass('is-disabled');
 			transitToogle.children('input').prop( "disabled", false );
 
@@ -106,7 +105,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 				}
 			});
 		} else{
-			console.log("no hay");
 			transitToogle.addClass('is-disabled');
 		}
 
@@ -114,12 +112,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		transitToogle.click(function () {
 			if ( !$(this).hasClass('is-disabled') && !$(this).hasClass('active') ) {
 				$(this).parent().children('.btn-options').toggleClass('active');
-				// movementsTitle.hide();
-				// movementslist.hide();
-				// movementsStats.hide();
-				// transitTitle.show();
-				// transitList.show();
-				// transitStats.show();
 				movementsTitle.addClass('none');
 				movementslist.addClass('none');
 				movementsStats.addClass('none');
@@ -132,12 +124,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		movementsToogle.click(function () {
 			if ( !$(this).hasClass('active') ) {
 				$(this).parent().children('.btn-options').toggleClass('active');
-				// transitTitle.hide();
-				// transitList.hide();
-				// transitStats.hide();
-				// movementsTitle.show();
-				// movementslist.show();
-				// movementsStats.show();
 				transitTitle.addClass('none');
 				transitList.addClass('none');
 				transitStats.addClass('none');

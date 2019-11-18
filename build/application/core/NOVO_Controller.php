@@ -111,13 +111,6 @@ class NOVO_Controller extends CI_Controller {
 				"aes-json-format",
 				"helper"
 			];
-			if($this->render->logged) {
-				array_push(
-					$this->includeAssets->jsFiles,
-					"third_party/jquery.balloon",
-					"menu-datepicker"
-				);
-			}
 		}
 	}
 
