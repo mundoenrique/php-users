@@ -25,22 +25,22 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="firstName">Primer nombre</label>
-								<input id="firstName" name="firstName" type="text" class="form-control" value="<?= $data->user->primerNombre;?>"/>
+								<input id="firstName" name="firstName" type="text" readonly="readonly" class="form-control" value="<?= $data->user->primerNombre;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="middleName">Segundo nombre</label>
-								<input id="middleName" class="form-control" name="middleName" type="text" value="<?= $data->user->segundoNombre;?>"/>
+								<input id="middleName" class="form-control" readonly="readonly" name="middleName" type="text" value="<?= $data->user->segundoNombre;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-								<input id="lastName" name="lastName" type="text" class="form-control" value="<?= $data->user->primerApellido;?>"/>
+								<input id="lastName" name="lastName" readonly="readonly" type="text" class="form-control" value="<?= $data->user->primerApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="secondSurname">Apellido materno</label>
-								<input id="secondSurname" name="secondSurname" type="text" class="form-control" value="<?= $data->user->segundoApellido;?>"/>
+								<input id="secondSurname" name="secondSurname" readonly="readonly" type="text" class="form-control" value="<?= $data->user->segundoApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
