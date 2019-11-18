@@ -8,33 +8,31 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//core
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
+		var txtBtnTrigger = btnTrigger.innerHTML.trim();
+		btnTrigger.innerHTML = msgLoading;
+		disableInputsForm(true);
 
 		var form = $('#formVerifyAccount');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
-			var txtBtnTrigger = btnTrigger.innerHTML.trim();
-			btnTrigger.innerHTML = msgLoading;
-			btnTrigger.disabled = true;
-
 			var document_id = $$.getElementById('idNumber').value;
-
 			var data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
 				telephone_number: $$.getElementById('telephoneNumber').value
 			}
 
-			callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
-
+			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+			{
 				if (response.code == 0) {
 					$$.location.href = response.data;
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					btnTrigger.innerHTML = txtBtnTrigger;
+					disableInputsForm(false);
 				}
-				btnTrigger.innerHTML = txtBtnTrigger;
-				btnTrigger.disabled = false;
 			});
 		}
 	});
@@ -89,6 +87,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 		form.appendChild(input);
 
     form.submit();
+	}
+
+	function disableInputsForm(status)
+	{
+		document.getElementById('idNumber').disabled = status;
+		document.getElementById('telephoneNumber').disabled = status;
+		btnTrigger.disabled = status;
 	}
 
 });
