@@ -2887,7 +2887,12 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .feed .feed-item {
 	border-top: 1px solid var(--border-color-2);
+	border-left: 2px solid var(--border-color-2);
 	background-color: var(--widget-color);
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
 }
 
 .feed .feed-item:last-child {
@@ -2902,12 +2907,32 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border-bottom: 1px solid var(--border-color-2);
 }
 
+.feed .feed-item:hover {
+	border-left-width: 4px;
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+}
+
+.feed .feed-item.feed-income {
+	border-left-color: var(--success);
+}
+
+.feed .feed-item.feed-expense {
+	border-left-color: var(--danger);
+}
+
 .feed .feed-item.feed-income .feed-amount {
 	color: var(--success);
 }
 
 .feed .feed-item.feed-expense .feed-amount {
 	color: var(--danger);
+}
+
+.feed .feed-item .feed-date {
+	border-right: var(--border-width) solid var(--border-color-2);
 }
 
 .detail-stats {

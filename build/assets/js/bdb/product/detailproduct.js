@@ -23,7 +23,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					background: "transparent",
 				}
 			},
-			seriesColors: ["#E74C3C", "#2ECC71"],
+			seriesColors: ["#007e33", "#cc0000"],
 			series: [{
 				type: "donut",
 				overlay: {
@@ -39,8 +39,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}],
 			tooltip: {
 				visible: true,
-				template: "#= category #: #= kendo.format('{0:P}', percentage) #",
-				color: "#fff"
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #",
+				padding: {
+					right: 4,
+					left: 4
+				},
+				color: "#ffffff"
 			}
 		});
 
