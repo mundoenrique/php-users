@@ -48,7 +48,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'registry', data, function(response) {
 				btnRegistry.innerHTML = txtBtnRegistry;
-				notiSystem(response.title, response.msg, response.data);
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}
 	});
