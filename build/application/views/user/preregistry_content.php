@@ -19,6 +19,11 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-auto">
+								<label for="nitBussines">Nit de la Empresa</label>
+								<input id="nitBussines" class="form-control" type="text" name="nitBussines">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-lg-auto">
 								<label for="telephoneNumber">Número de teléfono</label>
 								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>

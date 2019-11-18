@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RESP_DEFAULT_CODE'] = 4;
 $lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente';
-$lang['RES_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
+$lang['RESP_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador';
 $lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
 $lang['RESP_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo.";
 $lang['RESP_VALIDATION_INPUT'] = "Combinación de caracteres no válida.";
@@ -26,6 +26,7 @@ $lang['RESP_EMAIL_NO_SENT'] = 'No fue posible enviar el correo de recuperación,
 $lang['RESP_PASSWORD_CHANGED'] = 'La contraseña fue cambiada exitosamente.<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
 $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
+$lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 
 
 $lang['RES_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';

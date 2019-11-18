@@ -50,7 +50,22 @@ $config = [
 		[
 			'field' => 'request',
 			'rules' => 'trim|required'
-		]
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'nitBussines',
+			'label' => 'nitBussines',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'telephoneNumber',
+			'label' => 'telephoneNumber',
+			'rules' => 'trim|numeric|required'
+		],
 	],
 	'registry' => [
 		[

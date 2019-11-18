@@ -153,20 +153,20 @@ class User extends NOVO_Controller {
 		$view = 'preregistry';
 
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
-		array_push(
-			$this->includeAssets->jsFiles,
-			"$this->countryUri/user/$view",
-			"third_party/jquery.validate",
-			"validate-forms",
-			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
-		);
 		if($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base",
+			"$this->countryUri/user/$view"
+		);
 		$this->views = ['user/'.$view];
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);

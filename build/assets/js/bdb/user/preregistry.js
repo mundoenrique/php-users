@@ -4,17 +4,16 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnValidar');
+	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
-		var txtBtnTrigger = btnTrigger.innerHTML.trim();
-		btnTrigger.innerHTML = msgLoading;
-		disableInputsForm(true);
-
 		var form = $('#formVerifyAccount');
-		validateForms(form, {handleMsg: false});
+		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
+
+			disableInputsForm(true, msgLoading);
 
 			var document_id = $$.getElementById('idNumber').value;
 			var data = {
@@ -30,10 +29,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					btnTrigger.innerHTML = txtBtnTrigger;
-					disableInputsForm(false);
+					disableInputsForm(false, txtBtnTrigger);
 				}
 			});
+		}else{
+			disableInputsForm(false, txtBtnTrigger);
 		}
 	});
 
@@ -89,13 +89,14 @@ $$.addEventListener('DOMContentLoaded', function(){
     form.submit();
 	}
 
-	function disableInputsForm(status)
+	function disableInputsForm(status, txtButton)
 	{
 		document.getElementById('idNumber').disabled = status;
 		document.getElementById('telephoneNumber').disabled = status;
+		document.getElementById('nitBussines').disabled = status;
+		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
 	}
-
 });
 
 

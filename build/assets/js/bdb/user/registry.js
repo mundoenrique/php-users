@@ -10,7 +10,6 @@ $$.addEventListener('DOMContentLoaded', function(){
   maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 
 	//core
-
 	$( "#birthDate" ).datepicker( {
 		maxDate: maxBirthdayDate,
     yearRange: "-99:"+maxBirthdayDate,
@@ -86,12 +85,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	inputConfirmEmail.oncut = inputConfirmEmail.oncopy = inputConfirmEmail.onpaste = function(e) {
-		this.nextSibling.nextSibling.innerText = 'Operacion no válida.'
+		this.nextSibling.nextSibling.innerText = 'Operación no válida.'
     return false;
 	};
 
 	inputConfirmUserpwd.oncut = inputConfirmUserpwd.oncopy = inputConfirmUserpwd.onpaste = function(e) {
-		this.nextSibling.nextSibling.innerText = 'Operacion no válida.'
+		this.nextSibling.nextSibling.innerText = 'Operación no válida.'
     return false;
 	};
 });

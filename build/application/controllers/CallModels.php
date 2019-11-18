@@ -61,15 +61,15 @@ class CallModels extends Novo_Controller {
 
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-			$this->dataResponse->code = lang('RESP_DEFAULT_CODE');
+			$this->dataResponse->code = 2;
 			$this->dataResponse->title = lang('GEN_SYSTEM_NAME');
-			$this->dataResponse->msg = lang('RESP_VALIDATION_INPUT');
+			$this->dataResponse->msg = lang('RESP_DATA_INVALIDATED');
 			$this->dataResponse->icon = 'ui-icon-alert';
 			$this->dataResponse->data = [
 				'btn1'=> [
-					'text'=> lang('BUTTON_ACCEPT'),
-					'link'=> base_url('inicio'),
-					'action'=> 'redirect'
+					'text'=> lang('GEN_BTN_ACCEPT'),
+					'link'=> FALSE,
+					'action'=> 'close'
 				]
 			];
 			$this->session->sess_destroy();
