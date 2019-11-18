@@ -52,8 +52,8 @@ $config = [
 			'rules' => 'trim|required'
 		],
 		[
-			'field' => 'idNumber',
-			'label' => 'idNumber',
+			'field' => 'userName',
+			'label' => 'userName',
 			'rules' => 'trim|numeric|required'
 		],
 		[
@@ -62,8 +62,8 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		],
 		[
-			'field' => 'telephoneNumber',
-			'label' => 'telephoneNumber',
+			'field' => 'telephone_number',
+			'label' => 'telephone_number',
 			'rules' => 'trim|numeric|required'
 		],
 	],
