@@ -136,7 +136,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 			.text(btn1.text)
 			.on('click', function(e) {
 				dialogMoldal.dialog('close');
-				if(btn1.action === 'redirect') {
+				if (btn1.action === 'redirect') {
 					$(location).attr('href', btn1.link);
 				}
 				$(this).off('click');
@@ -148,7 +148,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 				.text(btn2.text)
 				.on('click', function(e) {
 					dialogMoldal.dialog('close');
-					if(btn2.action === 'redirect') {
+					if (btn2.action === 'redirect') {
 						$(location).attr('href', btn2.link);
 					}
 					$(this).off('click');
@@ -162,8 +162,8 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 }
 
 // Toggle if navbar menu is open or closed
-if (toggleMenu){
-	toggleMenu.addEventListener('click', function (){
+if (toggleMenu) {
+	toggleMenu.addEventListener('click', function () {
 			collapseMenu.classList.toggle('show');
 	});
 }

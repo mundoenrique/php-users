@@ -6,7 +6,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var btnGroupToggle = $('.btn-group-toggle');
 		var movementsTitle = $('#period'),
 				movementslist = $('#movementsList'),
-				movementsStats = $('#transitList'),
+				movementsStats = $('#movementsStats'),
 				transitTitle = $('#transitTitle'),
 				transitList = $('#transitList'),
 				transitStats = $('#transitStats'),
@@ -14,6 +14,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				transitToogle = $('#transitToogle');
 
 		//core
+		transitTitle.hide();
+		transitList.hide();
+		transitStats.css("visibility", "hidden");
 
 		// Gráfico de estadísticas total abonos y cargos
 		$("#movementsStats").kendoChart({
@@ -58,8 +61,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		if (transitList.length)
-		{
+		if (transitList.length) {
 			transitToogle.removeClass('is-disabled');
 			transitToogle.children('input').prop( "disabled", false );
 
@@ -104,7 +106,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					color: "#ffffff"
 				}
 			});
-		} else{
+		} else {
 			transitToogle.addClass('is-disabled');
 		}
 
@@ -112,24 +114,36 @@ $$.addEventListener('DOMContentLoaded', function(){
 		transitToogle.click(function () {
 			if ( !$(this).hasClass('is-disabled') && !$(this).hasClass('active') ) {
 				$(this).parent().children('.btn-options').toggleClass('active');
-				movementsTitle.addClass('none');
-				movementslist.addClass('none');
-				movementsStats.addClass('none');
-				transitTitle.removeClass('none');
-				transitList.removeClass('none');
-				transitStats.removeClass('none');
+				movementsTitle.hide();
+				movementslist.hide();
+				movementsStats.hide();
+				transitTitle.show();
+				transitList.fadeIn(1000);
+				transitStats.css({opacity: 0.0, visibility: "visible", display: "block"}).animate({opacity: 1.0}, 1000);
+				// movementsTitle.addClass('none');
+				// movementslist.addClass('none');
+				// movementsStats.addClass('none');
+				// transitTitle.removeClass('none');
+				// transitList.removeClass('none');
+				// transitStats.removeClass('none');
 			}
 		})
 
 		movementsToogle.click(function () {
 			if ( !$(this).hasClass('active') ) {
 				$(this).parent().children('.btn-options').toggleClass('active');
-				transitTitle.addClass('none');
-				transitList.addClass('none');
-				transitStats.addClass('none');
-				movementsTitle.removeClass('none');
-				movementslist.removeClass('none');
-				movementsStats.removeClass('none');
+				transitTitle.hide();
+				transitList.hide();
+				transitStats.hide();
+				movementsTitle.show();
+				movementslist.fadeIn(1000);
+				movementsStats.fadeIn(1000);
+				// transitTitle.addClass('none');
+				// transitList.addClass('none');
+				// transitStats.addClass('none');
+				// movementsTitle.removeClass('none');
+				// movementslist.removeClass('none');
+				// movementsStats.removeClass('none');
 			}
 		})
 
