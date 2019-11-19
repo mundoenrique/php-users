@@ -151,22 +151,11 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->operation = 'validar cuenta';
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
-		// fake data
-		$this->dataAccessLog->sessionId = "";
-		$this->dataAccessLog->RC = 0;
-		$this->dataAccessLog->IP = "::1";
-		$this->dataAccessLog->dttimesstamp = "10\/21\/2019 15:28";
-		$this->dataAccessLog->lenguaje = "ES";
-
-		$this->dataRequest->idOperation = '18';
+		$this->dataRequest->idOperation = '118';
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->pais = 'Ve';
-
-		// fake data
-		$this->dataRequest->cuenta = "6048411619458425";
-		$this->dataRequest->pin = "6e08dc8e4e3ac59d3c61dc0ff2f59c7c";
-		$this->dataRequest->claveWeb = "9d98257cef258260de0cf058ff3e93d7";
+		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
+		$this->dataRequest->codigoOtp = $dataRequest->codigoOtp?: '';
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
@@ -177,8 +166,8 @@ class Novo_User_Model extends NOVO_Model
 						'pais'		=> $this->dataRequest->pais,
 						'id_ext_per'	=> $this->dataRequest->id_ext_per,
 						'token'		=> $this->token,
-						'sessionId'	=> "f98d07e6927f8f3ada10a909cca1dec7",
-						'keyId'		=> "MTgyNjcxMDg=",
+						'sessionId' => $response->logAccesoObject->sessionId,
+						'keyId' => $response->keyUpdate,
 						'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0)
 					);
 					$this->session->set_userdata($newdata);
@@ -246,16 +235,11 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->listaTelefonos = $phones;
 		$this->dataRequest->pais = 'Global';
 
-		//$response = $this->sendToService('User');
-		//log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
-		//
-		// if($this->isResponseRc !== FALSE) {
-		// 	$this->isResponseRc = 0;
-		// 	switch($this->isResponseRc) {
+		$response = $this->sendToService('User');
+		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
 
-		if (true) {
-			$isResponseRc = -181;
-			switch ($isResponseRc) {
+		 if($this->isResponseRc !== FALSE) {
+		 	switch($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
 					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
@@ -460,7 +444,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->pais = 'Ve';
 		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
 		$this->dataRequest->password = md5($dataRequest->newPassword);
