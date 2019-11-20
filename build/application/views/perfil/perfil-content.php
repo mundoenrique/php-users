@@ -294,7 +294,7 @@ $pais_residencia=$this->session->userdata('pais');
     <header></header>
     <div id="widget-account" class="widget">
       <div class="widget-header">
-        <p class="text-header">Perfil de Usuario</p><?php echo $num?>
+        <p class="text-header">Perfil de Usuario</p>
       </div>
     </div>
     <section>
