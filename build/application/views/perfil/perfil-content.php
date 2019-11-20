@@ -173,13 +173,13 @@ if(isset($data)){
         foreach ($datos->registro->listaTelefonos as $value) {
             if(strtolower($value->tipo) == 'cel'){
                 $tipo = $value->tipo;
-								$num = $value->numero;
+								$num = preg_replace('/^0+/', '',$value->numero);
 								$celCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
             if(strtolower($value->tipo) == 'hab'){
                 $tipo_hab = $value->tipo;
-								$num_hab = $value->numero;
+								$num_hab = preg_replace('/^0+/', '',$value->numero);
 								$habCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
@@ -294,7 +294,7 @@ $pais_residencia=$this->session->userdata('pais');
     <header></header>
     <div id="widget-account" class="widget">
       <div class="widget-header">
-        <p class="text-header">Perfil de Usuario</p>
+        <p class="text-header">Perfil de Usuario</p><?php echo $num?>
       </div>
     </div>
     <section>
