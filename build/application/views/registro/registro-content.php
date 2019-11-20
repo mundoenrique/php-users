@@ -21,13 +21,13 @@ switch($skin){
       <div id="progress">
         <ul class="steps">
           <li class="step-item current-step-item"><span aria-hidden="true" class="icon-card"></span> Verificación de
-            Cuenta</li>
-          <li class="step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de Datos</li>
+            cuenta</li>
+          <li class="step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de datos</li>
           <li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
         </ul>
       </div>
       <div id="content-holder">
-        <h2>Verificación de Cuenta</h2>
+        <h2>Verificación de cuenta</h2>
         <p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
           proporcionar los siguientes datos relacionados con su cuenta:</p>
         <form accept-charset="utf-8" method="post" id="form-validar">
@@ -45,18 +45,18 @@ switch($skin){
                 <?php if ($skin == 'pichincha'): ?>
                 <input type="hidden" id="iso" name="iso" value="Ec-bp" />
                 <?php endif; ?>
-                <label for="card-number">Número de Tarjeta</label>
+                <label for="card-number">Número de tarjeta</label>
                 <input class="field-medium" maxlength="16" id="card-number" name="card-number" type="text" value="" />
               </li>
               <li class="field-group-item">
-                <label for="card-holder-id">Documento de Identidad <abbr
+                <label for="card-holder-id">Documento de identidad <abbr
                     title="Número de identificación del tarjetahabiente"><span aria-hidden="true"
                       class="icon-question-sign"></span></abbr></label>
                 <input class="field-medium" maxlength="16" id="card-holder-id" name="card-holder-id" type="text"
                   value="" />
               </li>
               <li class="field-group-item">
-                <label for="card-holder-pin">Clave Secreta (PIN) <abbr
+                <label for="card-holder-pin">Clave secreta (PIN) <abbr
                     title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true"
                       class="icon-question-sign"></span></abbr></label>
                 <input class="field-medium" maxlength="15" id="card-holder-pin" name="card-holder-pin" type="password"
@@ -65,28 +65,32 @@ switch($skin){
             </ul>
             <label class="label-inline label-disabled" id="condiciones" for="accept-terms"><input id="accept-terms"
                 name="accept-terms" type="checkbox" value="yes" disabled /> Acepto las <a href="#"
-                rel="section">condiciones de uso</a> de este sistema</label>
+                rel="section">condiciones de uso</a> de este sistema.</label>
           </fieldset>
         </form>
         <div id="msg"></div>
         <div class="form-actions">
-          <a href="<? echo $homeLink; ?>"><?php
-						if($skin=='pichincha'){
-							?>
-            <center>
-              <div class="atc-form-action-child-perfil-content">
-                <?php
-						}
-					?>
-                <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
-          <button id="validar" class="novo-btn-primary">Continuar</button>
-          <?php
-						if($skin=='pichincha'){
-							?></div>
+
+			<?php
+			if($skin=='pichincha'){
+			?>
+        <center>
+        <div class="atc-form-action-child-perfil-content_2">
+        <?php
+			 }
+		  ?>
+      <a href="<? echo $homeLink; ?>">
+		  <button type="reset" class="novo-btn-secondary">Cancelar</button>
+		  </a>
+      <button id="validar" class="novo-btn-primary">Continuar</button>
+      <?php
+			  if($skin=='pichincha'){
+			?>
+			</div>
         </center>
         <?php
-						}
-					?>
+		}
+		?>
         <div id="loading" class="first-request" style="display:none; float:right; width:30px; margin-top:5px;">
           <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
         </div>
@@ -109,8 +113,8 @@ switch($skin){
       <div id="progress">
         <ul class="steps">
           <li class="step-item completed-step-item"><span aria-hidden="true" class="icon-card"></span> Verificación de
-            Cuenta</li>
-          <li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de Datos
+            cuenta</li>
+          <li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Afiliación de datos
           </li>
           <li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
         </ul>
@@ -469,7 +473,7 @@ switch($skin){
 						if($skin == 'pichincha'){
 							?>
           <center>
-            <div class="atc-form-action-child-perfil-content">
+            <div class="atc-form-action-child-perfil-content_2">
               <?php
 						}
 					?>
