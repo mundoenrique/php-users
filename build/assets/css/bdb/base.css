@@ -756,6 +756,74 @@ textarea.form-control {
   border: .85px solid var(--tertiary-color);
 }
 
+/* Input Group */
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group > .form-control,
+.input-group > .custom-select,
+.input-group > .custom-file {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0;
+}
+
+.input-group > .form-control:not(:last-child),
+.input-group > .custom-select:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-prepend,
+.input-group-append {
+  display: flex;
+}
+
+.input-group-prepend {
+  margin-right: -1px;
+}
+
+.input-group-append {
+  margin-left: -1px;
+}
+
+.input-group-text {
+	display: flex;
+	align-items: center;
+	padding: .375rem .75rem;
+	margin-bottom: 0;
+	font-size: .875rem;
+	font-weight: var(--font-weight-base);
+	line-height: 1.15;
+	color: var(--text-color);
+	text-align: center;
+	white-space: nowrap;
+	background-color: var(--disabled-color);
+	border: 1px solid var(--border-color);
+	border-radius: .25rem;
+}
+
+.input-group > .input-group-prepend > .input-group-text,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 /* Validator */
 
 .help-block {
@@ -774,7 +842,7 @@ textarea.form-control {
 	========================================================================== */
 
 .btn {
-	display: inline-block;
+	display: inline-flex;
 	height: auto;
 	margin: 0;
 	padding: var(--button-padding-y) var(--button-padding-x);
@@ -787,7 +855,8 @@ textarea.form-control {
 	color: var(--text-color);
 	text-decoration: none;
 	cursor: pointer;
-	vertical-align: middle;
+	align-items: center;
+	justify-content: center;
 	transition: .3s;
 	-webkit-appearance: none;
 }

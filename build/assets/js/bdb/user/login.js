@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// vars
 	var btnLogin = document.getElementById('btn-login');
 	var txtBtnLogin = btnLogin.innerHTML.trim();
+	var btnShowPwd = document.getElementById('pwd-addon');
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -50,7 +51,17 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// core
-	btnLogin.addEventListener("click", function(e){
+	btnShowPwd.style.cursor = "pointer";
+	btnShowPwd.addEventListener("click", function() {
+		var x = document.getElementById("userpwd");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	});
+
+	btnLogin.addEventListener("click", function(e) {
 		e.preventDefault();
 
 		var credentialUser = getCredentialsUser();

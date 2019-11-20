@@ -12,7 +12,12 @@
 				</div>
 				<div class="form-group">
 					<label for="userpwd">Contraseña</label>
-					<input id="userpwd" name="loginUserpwd" class="form-control" type="password">
+					<div class="input-group">
+						<input id="userpwd" name="loginUserpwd" class="form-control" type="password">
+						<div class="input-group-append">
+							<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+						</div>
+					</div>
 					<div class="help-block"></div>
 				</div>
 				<button id="btn-login" class="btn btn-primary w-100 mt-3 mb-5">

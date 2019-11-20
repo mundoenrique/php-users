@@ -7,6 +7,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var inputConfirmUserpwd = $$.getElementById('confirmUserpwd');
 	var btnRegistry = $$.getElementById('btnRegistrar');
 	var maxBirthdayDate = new Date();
+	var btnShowPwd = document.getElementById('pwd-addon');
   maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 
 	//core
@@ -14,6 +15,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 		maxDate: maxBirthdayDate,
     yearRange: "-99:"+maxBirthdayDate,
 		defaultDate: "-30y"
+	});
+
+	btnShowPwd.style.cursor = "pointer";
+	btnShowPwd.addEventListener("click", function() {
+		var x = document.getElementById("userpwd");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
 	});
 
 	btnRegistrar.addEventListener('click', function(e){
