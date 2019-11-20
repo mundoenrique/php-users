@@ -18,7 +18,7 @@
 						<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
-					<div class="product-info-full">
+					<div class="product-info-full mr-4">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
@@ -43,6 +43,10 @@
 								</span>
 							</li>
 						</ul>
+					</div>
+					<div class="product-specifications">
+						<h3 class="h4 regular">Especificaciones</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum molestias vitae consequatur quaerat, mollitia veritatis accusamus quo officia eaque obcaecati laudantium quasi sapiente harum reprehenderit dolorem dolores praesentium saepe perferendis.</p>
 					</div>
 				</div>
 

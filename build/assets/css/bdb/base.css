@@ -3021,7 +3021,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .product-info-full {
-	width: 400px;
+	min-width: 400px;
 }
 
 .card-image {
