@@ -151,11 +151,11 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->operation = 'validar cuenta';
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
-		$this->dataRequest->idOperation = '118';
+		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
-		$this->dataRequest->codigoOtp = $dataRequest->codigoOtp?: '';
+		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {

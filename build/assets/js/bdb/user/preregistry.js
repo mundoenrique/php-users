@@ -20,7 +20,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
 				nitBussines: $$.getElementById('nitBussines').value,
-				telephone_number: $$.getElementById('telephoneNumber').value
+				telephone_number: $$.getElementById('telephoneNumber').value,
+				codeOTP: $$.getElementById('codeOTP').value
 			}
 
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)

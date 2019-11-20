@@ -28,6 +28,11 @@
 								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
+							<div class="form-group col-lg-auto">
+								<label for="codeOTP">codeOtp -- prueba</label>
+								<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+								<div class="help-block"></div>
+							</div>
 						</div>
 						<div class="custom-control custom-switch my-3">
 							<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
