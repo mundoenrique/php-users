@@ -30,6 +30,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				if (response.code == 0) {
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					$("#footerSistemInfo").prepend(`<span>Tiempo restante<span class="ml-2 danger"></span></span>`);
+					var baseElement = $$.getElementById("footerSistemInfo");
+					var timer = baseElement.querySelector("span span");
+					startTimer(60, timer);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
