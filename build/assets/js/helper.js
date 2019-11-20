@@ -34,6 +34,14 @@ var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
 var msgLoading = '<span class="spinner-border spinner-border-sm yellow" role="status" aria-hidden="true"></span>Cargando...';
+var dialogValidation = [
+	{
+		id: 'verificator',
+		name: 'verificator',
+		label: 'Verificador',
+		typeElement: 'text',
+	}
+]
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
@@ -106,6 +114,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 	var dialogMoldal = $('#system-info');
 	var title = title || titleNotiSystem;
 	var message = message || $('#system-msg').text();
+	var message = 'Por favor introduzca el código verificador:';
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
 	var btn2 = data.btn2;
 
@@ -128,8 +137,14 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
-			$('#system-icon').addClass(icon);
-			$('#system-msg').html(message);
+			if (dialogValidation) {
+				dialogMoldal.find("p").addClass('none');
+				dialogMoldal.prepend(createFields(dialogValidation));
+				dialogMoldal.prepend(`<p class="mt-1">${message}</p>`);
+			} else {
+				dialogMoldal.find("p").removeClass('none');
+				$('#system-msg').html(message);
+			}
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			$('#accept')
@@ -159,6 +174,33 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 		}
 
 	});
+}
+
+// Crea campos para formularios en dialog
+function createFields(fields) {
+	var element, label, formGroup;
+	var dialogForm = $(`<form id="form-dialog" action="">`);
+	for (var field of fields) {
+		switch (field.typeElement) {
+			case 'text':
+				element = $(`<input id="${field.id}" class="form-control" type="text" name="${field.name}"></input>`);
+				break;
+
+			case 'password':
+				element = $(`<input id="${field.id}" class="form-control" type="password" name="${field.name}"></input>`);
+				break;
+
+			default:
+				break;
+		}
+		if (field.label !== '') {
+			label = $(`<label for="${field['id']}">${field.label}</label>`);
+			formGroup = $(`<div class="form-group px-3 pb-1"></div>`).append(label);
+		}
+		formGroup.append(element,`<div class="help-block"></div>`);
+		dialogForm.append(formGroup);
+	}
+	return dialogForm;
 }
 
 // Toggle if navbar menu is open or closed
