@@ -7,6 +7,26 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 	//core
+
+		var data = {
+			btn1: {
+				action: 'redirect',
+				link: uriRedirecTarget,
+				text: txtBtnAcceptNotiSystem
+			}
+		};
+
+		data.dialogForm = [
+			{
+				id: 'verificator',
+				name: 'verificator',
+				label: 'Verificador',
+				typeElement: 'text',
+			}
+		]
+		msg = 'Por favor introduzca el código verificador:';
+		notiSystem('Conexión Personas Online', msg, null, data);
+
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 		var form = $('#formVerifyAccount');
@@ -27,7 +47,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 			{
 				if (response.code == 0) {
-					$$.location.href = response.data;
+					// $$.location.href = response.data;
+					response.data.dialogForm = [
+						{
+							id: 'verificator',
+							name: 'verificator',
+							label: 'Verificador',
+							typeElement: 'text',
+						}
+					]
+					response.msg = 'Por favor introduzca el código verificador:';
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
@@ -99,6 +129,25 @@ $$.addEventListener('DOMContentLoaded', function(){
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
 	}
+
+	function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+            alert('finish countown...');
+        }
+    }, 1000);
+	}
+
 });
 
 
