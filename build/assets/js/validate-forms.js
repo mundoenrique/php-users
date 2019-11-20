@@ -159,6 +159,7 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
+			codeOTP: {required: true},
 			nitBussines: {required: true, number: true,},
 			currentPassword: {required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },

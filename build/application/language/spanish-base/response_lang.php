@@ -29,6 +29,7 @@ $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por 
 $lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 $lang['RESP_CODEOTP'] = 'Por favor introduzca el código verificador:';
 $lang['RESP_REGISTRED_USER'] = 'Usuario regsitrado.';
+$lang['RESP_CODEOTP_INVALID'] = 'Código de verificación inválido.';
 
 
 

@@ -27,7 +27,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 			{
-
 				if (response.code == 0) {
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					$("#footerSistemInfo").prepend(`<span>Tiempo restante<span class="ml-2 danger"></span></span>`);
@@ -36,7 +35,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					startTimer(60, timer);
 				}
 				else{
-					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					if (response.code == 3){
+						$$.getElementById('help-block').innerText = response.msg;
+					}else{
+						notiSystem(response.title, response.msg, response.classIconName, response.data);
+					}
 					disableInputsForm(false, txtBtnTrigger);
 				}
 			});
@@ -88,36 +91,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		return month + day + year;
 	}
 
-	function redirectPost(url, data, csrf) {
-
-		/* var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-		); */
-		// call this function --> redirectPost(response.data, response.msg.dataUser.user, cpo_cook);
-
-    var form = $$.createElement('form');
-    $$.body.appendChild(form);
-    form.method = 'post';
-    form.action = url;
-    for (var name in data) {
-			var input = $$.createElement('input');
-			input.type = 'hidden';
-			input.name = name;
-			input.id = name;
-			input.value = data[name] || ' ';
-			form.appendChild(input);
-		}
-
-		var input = $$.createElement('input');
-		input.type = 'hidden';
-		input.name = 'cpo_name';
-		input.id = 'cpo_name';
-		input.value = csrf;
-		form.appendChild(input);
-
-    form.submit();
-	}
-
 	function disableInputsForm(status, txtButton)
 	{
 		document.getElementById('idNumber').disabled = status;
@@ -125,24 +98,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		document.getElementById('nitBussines').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
-	}
-
-	function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = duration;
-            alert('finish countown...');
-        }
-    }, 1000);
 	}
 
 });

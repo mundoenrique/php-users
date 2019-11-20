@@ -67,6 +67,36 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		],
 	],
+	'verifyotp' => [
+		[
+			'field' => 'plot',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'request',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'nitBussines',
+			'label' => 'nitBussines',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'telephone_number',
+			'label' => 'telephone_number',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'trim|required'
+		]
+	],
 	'registry' => [
 		[
 			'field' => 'idType',
