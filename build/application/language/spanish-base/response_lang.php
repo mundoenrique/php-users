@@ -27,6 +27,10 @@ $lang['RESP_PASSWORD_CHANGED'] = 'La contraseña fue cambiada exitosamente.<br>P
 $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
 $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
 $lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
+$lang['RESP_CODEOTP'] = 'Por favor introduzca el código verificador:';
+$lang['RESP_REGISTRED_USER'] = 'Usuario regsitrado.';
+
+
 
 
 $lang['RES_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';

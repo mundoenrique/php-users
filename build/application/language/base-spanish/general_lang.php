@@ -4,6 +4,7 @@ $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
 $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
+$lang['GEN_BTN_VERIFY'] = 'Verificar';
 //ENTERPRISE WIDGET
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= 'Seleccionar otra empresa';
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= 'Conozca otros programas';
@@ -95,6 +96,7 @@ $lang['AYUDA'] = 'Ayuda';
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
 $lang['BUTTON_CANCEL']= 'Cancelar';
+
 $lang['BACK'] = 'Volver atrás';
 
 //MASTER_CONTENT

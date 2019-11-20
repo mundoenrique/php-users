@@ -128,9 +128,9 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 		},
 		open: function (event, ui) {
 			$('.ui-dialog-titlebar-close').hide();
-			if (data.dialogForm) {
+			if (data.formElements) {
 				dialogMoldal.find("p").addClass('none');
-				dialogMoldal.prepend(createFields(data.dialogForm));
+				dialogMoldal.prepend(createFields(data.formElements));
 				dialogMoldal.prepend(`<p class="mt-1">${message}</p>`);
 			} else {
 				dialogMoldal.find("p").removeClass('none');
@@ -141,11 +141,13 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 			$('#accept')
 			.text(btn1.text)
 			.on('click', function(e) {
-				dialogMoldal.dialog('close');
+				if (btn1.action !== 'wait') {
+					dialogMoldal.dialog('close');
+					$(this).off('click');
+				}
 				if (btn1.action === 'redirect') {
 					$(location).attr('href', btn1.link);
 				}
-				$(this).off('click');
 			});
 
 			$('#cancel').hide();
@@ -170,7 +172,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 // Crea campos para formularios en dialog
 function createFields(fields) {
 	var element, label, formGroup;
-	var dialogForm = $(`<form id="form-dialog" action="">`);
+	var dialogForm = $(`<form id="formNotiSystem" action="">`);
 	for (var field of fields) {
 		switch (field.typeElement) {
 			case 'text':

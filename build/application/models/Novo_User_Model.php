@@ -161,26 +161,43 @@ class Novo_User_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					$newdata	= array(
-						'userName'	=> $this->dataAccessLog->userName,
-						'pais'		=> $this->dataRequest->pais,
-						'id_ext_per'	=> $this->dataRequest->id_ext_per,
-						'token'		=> $this->token,
-						'sessionId' => $response->logAccesoObject->sessionId,
-						'keyId' => $response->keyUpdate,
-						'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0)
-					);
-					$this->session->set_userdata($newdata);
-
-					$this->session->set_flashdata('registryUser', 'TRUE');
-					$this->session->set_flashdata('registryUserData', $response);
-
 					$this->response->code = 0;
-					$this->response->data = base_url('registro');
+					if (!empty($dataRequest->codeOTP)){
+
+						$this->session->set_flashdata('registryUser', 'TRUE');
+						$this->session->set_flashdata('registryUserData', $response);
+						$this->response->data = base_url('registro');
+
+					}else{
+						$this->response->msg = lang('RESP_CODEOTP');
+						$this->response->classIconName = 'ui-icon-alert';
+
+						$this->response->data = [
+							'formElements' => [
+								[
+									'id' => 'codeOTP',
+									'name' => 'codeOTP',
+									'label' => 'Codigo de Validación',
+									'typeElement' => 'text',
+								]
+							],
+							'btn1'=> [
+								'text'=> lang('GEN_BTN_VERIFY'),
+								'link'=> FALSE,
+								'action'=> 'wait'
+							]
+						];
+					}
+					break;
+				case -183:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_REGISTRED_USER');
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -184:
+				case -5:
 					$this->response->code = 2;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 			}

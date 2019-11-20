@@ -1,5 +1,6 @@
 'use strict';
 var $$ = document;
+var data = {};
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
@@ -7,26 +8,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 	//core
-
-		var data = {
-			btn1: {
-				action: 'redirect',
-				link: uriRedirecTarget,
-				text: txtBtnAcceptNotiSystem
-			}
-		};
-
-		data.dialogForm = [
-			{
-				id: 'verificator',
-				name: 'verificator',
-				label: 'Verificador',
-				typeElement: 'text',
-			}
-		]
-		msg = 'Por favor introduzca el código verificador:';
-		notiSystem('Conexión Personas Online', msg, null, data);
-
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 		var form = $('#formVerifyAccount');
@@ -36,27 +17,18 @@ $$.addEventListener('DOMContentLoaded', function(){
 			disableInputsForm(true, msgLoading);
 
 			var document_id = $$.getElementById('idNumber').value;
-			var data = {
+			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
-				codeOTP: $$.getElementById('codeOTP').value
+				codeOTP: ''
 			}
 
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 			{
+
 				if (response.code == 0) {
-					// $$.location.href = response.data;
-					response.data.dialogForm = [
-						{
-							id: 'verificator',
-							name: 'verificator',
-							label: 'Verificador',
-							typeElement: 'text',
-						}
-					]
-					response.msg = 'Por favor introduzca el código verificador:';
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 				}
 				else{
@@ -66,6 +38,27 @@ $$.addEventListener('DOMContentLoaded', function(){
 			});
 		}else{
 			disableInputsForm(false, txtBtnTrigger);
+		}
+	});
+
+	$$.getElementById("accept").addEventListener('click', function(){
+
+		if ($$.getElementById('codeOTP')){
+
+			var form = $('#formNotiSystem');
+			validateForms(form, {handleMsg: true});
+			if(form.valid()) {
+				data['codeOTP'] = CryptoJS.MD5($$.getElementById('codeOTP').value).toString();
+				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+				{
+					if (response.code === 0){
+						$$.location.href = response.data;
+					}
+				});
+			}
+		}
+		else{
+			return false;
 		}
 	});
 
