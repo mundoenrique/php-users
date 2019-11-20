@@ -2889,12 +2889,11 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .item-network {
 	position: absolute;
 	z-index: 2;
-	width: 45px;
-	height: 15px;
+	width: 55px;
 }
 .dashboard-item .item-network {
-	right: 10px;
-	bottom: 16px;
+	right: 20px;
+	bottom: 20px;
 }
 .product-presentation .item-network {
 	right: 10px;
@@ -2957,7 +2956,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .card-image {
-  width: 210px;
+  width: 250px;
 }
 
 .feed .feed-item {
