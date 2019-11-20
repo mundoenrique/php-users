@@ -581,15 +581,15 @@ a:hover {
 }
 
 .icon-edit:before {
-	content: "";
+	content: "\e001";
 }
 
 .icon-thumbs-up:before {
-	content: "";
+	content: "\e032";
 }
 
 .icon-card:before {
-	content: "";
+	content: "\e029";
 }
 
  .icon-file-blank:before {
@@ -672,6 +672,9 @@ a:hover {
 }
 .atc-form-action-child-perfil-content{
 	width: 180px;
+}
+.atc-form-action-child-perfil-content_2{
+	width: 280px;
 }
 .atc-form-action-child-perfil-diesession{
 	width: 109px;
