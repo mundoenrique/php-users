@@ -1715,7 +1715,7 @@ span[class^="icon-"],
 span[class*=" icon-"],
 i[class^="icon-"],
 i[class*=" icon-"] {
-	display: inline-block;
+	display: inline-flex;
 	height: auto;
 	width: auto;
 	margin-right: .5rem;
@@ -1806,7 +1806,7 @@ i[class*=" icon-"]:before {
 }
 
 .spinner-border {
-  display: inline-block;
+  display: inline-flex;
   width: 2rem;
   height: 2rem;
   margin-right: .5rem;
@@ -1960,7 +1960,7 @@ i[class*=" icon-"]:before {
     flex-direction: row;
 	}
 	.navbar-expand-lg .nav-item::after {
-		bottom: calc(-.5rem - 3px);
+		bottom: calc(-3.5px - .5rem);
 	}
 	.navbar-expand-lg .nav-item:hover::after,
 	.navbar-expand-lg .nav-item.active::after {
@@ -2467,7 +2467,7 @@ ul.steps li.step-item i {
 	top: .3em;
 }
 .ui-icon {
-	display: inline-block;
+	display: inline-flex;
 	width: 16px;
 	height: 16px;
 	vertical-align: middle;
@@ -2512,11 +2512,11 @@ ul.steps li.step-item i {
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-button {
-	padding: .4em 1em;
-	display: inline-block;
+	display: inline-flex;
 	position: relative;
-	line-height: normal;
 	margin-right: .1em;
+	padding: .4em 1em;
+	line-height: normal;
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
