@@ -30,10 +30,10 @@
 						<div id="navbarNav" class="collapse navbar-collapse">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item active"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
-								<li class="nav-item"><a class="nav-link" href="ceo_dashboard.html">Reportes</a></li>
-								<li class="nav-item"><a class="nav-link" href="ceo_dashboard.html">Atención al cliente</a></li>
-								<li class="nav-item"><a class="nav-link" href="ceo_dashboard.html">Atención al cliente</a></li>
-								<li class="nav-item"><a class="nav-link" href="ceo_dashboard.html">Mi perfil</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Atención al cliente</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Atención al cliente</a></li>
+								<li class="nav-item"><a class="nav-link" href="#">Mi perfil</a></li>
 								<li class="nav-item"><a class="nav-link" href="<?= base_url('cerrarsesion') ?>">Cerrar sesión</a></li>
 							</ul>
 						</div>

@@ -32,8 +32,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					$("#footerSistemInfo").prepend(`<span class="align-middle">Tiempo restante:<span class="ml-1 danger"></span></span>`);
 					var baseElement = $$.getElementById("footerSistemInfo");
-					var countown = baseElement.querySelector("span span");
-					startTimer(setTimerOTP, countown);
+					var countdown = baseElement.querySelector("span span");
+					startTimer(setTimerOTP, countdown);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
@@ -131,7 +131,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			display.textContent = minutes + ":" + seconds;
 
 			if (--timer < 0) {
-					display.textContent = 'tiempo expirado'
+					display.textContent = 'tiempo expirado';
 					setTimeout(function(){
 
 						clearInterval(interval);

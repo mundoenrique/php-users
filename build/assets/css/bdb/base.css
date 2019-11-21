@@ -1876,26 +1876,20 @@ i[class*=" icon-"]:before {
 
 .spinner-border {
   display: inline-flex;
-  width: 2rem;
-  height: 2rem;
-  margin-right: .5rem;
-  vertical-align: middle;
-  border: .25em solid currentColor;
-      border-top-width: .25em;
-      border-right-color: currentcolor;
-      border-right-width: .25em;
-      border-bottom-width: .25em;
-      border-left-width: .25em;
+  width: 1.5rem;
+  height: 1.5rem;
+	vertical-align: middle;
+	color: var(--disabled-color);
+  border: .2em solid currentColor;
   border-right-color: transparent;
-  border-radius: 50%;
+	border-radius: 50%;
   -webkit-animation: spinner-border 1.8s linear infinite;
   animation: spinner-border 1.8s linear infinite;
 }
 
 .spinner-border-sm {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-width: .2em;
+  width: 1.3rem;
+  height: 1.3rem;
 }
 
 .spinner-border-lg {
