@@ -47,4 +47,7 @@
 		</section>
 	</div>
 </div>
+<script>
+	var setTimerOTP = <?= $setTimerOTP;?>;
+</script>
 

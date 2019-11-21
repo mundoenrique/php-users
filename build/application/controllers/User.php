@@ -168,6 +168,7 @@ class User extends NOVO_Controller {
 			"$this->countryUri/user/$view"
 		);
 		$this->views = ['user/'.$view];
+		$this->render->setTimerOTP = $this->config->item('setTimerOTP');
 		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
 		$this->loadView($view);
 	}

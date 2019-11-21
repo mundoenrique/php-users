@@ -159,7 +159,6 @@ class Novo_User_Model extends NOVO_Model
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc=0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -204,6 +203,7 @@ class Novo_User_Model extends NOVO_Model
 				case -402:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->data = base_url('inicio');
 					break;
 			}
 		}
