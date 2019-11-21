@@ -201,9 +201,9 @@ $(function(){
 						if(pais == 'Ec-bp') {
 							$('#email-bp').val(data.user.email);
 							$('#email_cypher').val(data.user.emailEnc);
-							$('#telf-hab').val(data.user.telefono);
+						  $('#telf-hab').val(data.user.telefono.replace(/^0+/, ''));
 							$('#hab_cypher').val(data.user.telefonoEnc);
-							$('#telf-cel').val(data.user.celular);
+							$('#telf-cel').val(data.user.celular.replace(/^0+/, ''));
 							$('#cel_cypher').val(data.user.celularEnc);
 						}
 
