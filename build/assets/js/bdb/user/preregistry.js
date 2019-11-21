@@ -29,10 +29,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 			{
 				if (response.code == 0) {
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					$("#footerSistemInfo").prepend(`<span>Tiempo restante<span class="ml-2 danger"></span></span>`);
+					$("#footerSistemInfo").prepend(`<span class="align-middle">Tiempo restante:<span class="ml-1 danger"></span></span>`);
 					var baseElement = $$.getElementById("footerSistemInfo");
-					var timer = baseElement.querySelector("span span");
-					startTimer(60, timer);
+					var countown = baseElement.querySelector("span span");
+					startTimer(60, countown);
 				}
 				else{
 					if (response.code == 3){
@@ -98,6 +98,31 @@ $$.addEventListener('DOMContentLoaded', function(){
 		document.getElementById('nitBussines').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
+	}
+
+	function startTimer(duration, display) {
+		var timer = duration, minutes, seconds;
+		var interval = setInterval(myTimer, 1000);
+
+		function myTimer() {
+			minutes = parseInt(timer / 60, 10)
+			seconds = parseInt(timer % 60, 10);
+
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			display.textContent = minutes + ":" + seconds;
+
+			if (--timer < 0) {
+					display.textContent = 'tiempo expirado'
+					myStopFunction();
+			}
+		}
+
+		function myStopFunction() {
+			clearInterval(interval);
+		}
+
 	}
 
 });
