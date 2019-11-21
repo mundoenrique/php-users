@@ -16,12 +16,12 @@ switch($skin){
 		<section>
 			<div id="progress">
 				<ul class="steps two-steps">
-					<li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Verificación de Datos</li>
+					<li class="step-item current-step-item"><span aria-hidden="true" class="icon-edit"></span> Verificación de datos</li>
 					<li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
 				</ul>
 			</div>
 			<div id="content-holder">
-				<h2>Verificación de Datos</h2>
+				<h2>Verificación de datos</h2>
 				<p>Si ha olvidado su usuario de acceso a <strong>Conexión Personas</strong>, por favor ingrese los siguientes datos para validar su identidad:</p>
 				<form accept-charset="utf-8" id="form-validar" method="post">
 					<input type="hidden" name="<?php echo $cpo_name ?>" class="ignore" value="<?php echo $cpo_cook ?>">
@@ -38,7 +38,7 @@ switch($skin){
 						if($skin=='pichincha'){
 							?>
 								<center>
-									<div class="atc-form-action-child-perfil-content">
+									<div class="atc-form-action-child-perfil-content_2">
 							<?php
 						}
 					?>
