@@ -3159,6 +3159,7 @@ a.ui-button:active,
 	margin-right: 12px;
 }
 .ui-dialog .ui-dialog-buttonpane {
+	min-height: 46px;
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;

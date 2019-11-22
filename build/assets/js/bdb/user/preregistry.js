@@ -6,6 +6,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
+	var validationMsg = $$.getElementById("validation");
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
@@ -30,10 +31,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				disableInputsForm(true, txtBtnTrigger);
 				if (response.code == 0) {
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					$("#footerSistemInfo").prepend(`<span class="align-middle">Tiempo restante:<span class="ml-1 danger"></span></span>`);
-					var baseElement = $$.getElementById("footerSistemInfo");
-					var countdown = baseElement.querySelector("span span");
-					startTimer(setTimerOTP, countdown);
+					validationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+					var countdown = validationMsg.querySelector("span");
+					startTimer(10, countdown);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
@@ -132,16 +132,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (--timer < 0) {
 					display.textContent = 'tiempo expirado';
-					setTimeout(function(){
+					clearInterval(interval);
 
-						clearInterval(interval);
+					// setTimeout(function(){
 
-						$$.getElementById('accept').disabled = true;
+						validationMsg.innerHTML = 'Tiempo expirado, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>';
+						$$.getElementById('accept').classList.add("none");
 						$$.getElementById('codeOTP').disabled = true;
 
-						$$.location.href = uriRedirecTarget;
+						// $$.location.href = uriRedirecTarget;
 
-					}, 2000);
+					// }, 2000);
 
 			}
 		}
