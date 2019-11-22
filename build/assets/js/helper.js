@@ -33,7 +33,7 @@ var isoPais = pais;
 var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
 var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
 var strCountry = settingsCountry[country];
-var msgLoading = '<span class="spinner-border white" role="status" aria-hidden="true"></span>';
+var msgLoading = '<span class="spinner-border spinner-border-sm white" role="status" aria-hidden="true"></span>';
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
@@ -116,6 +116,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 		resizable: false,
 		closeOnEscape: false,
 		minWidth: 370,
+		// minHeight: 170,
 		dialogClass: "border-none",
     classes: {
       "ui-dialog-titlebar": "border-none",
@@ -134,6 +135,7 @@ function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
 				dialogMoldal.prepend(`<p class="mt-1">${message}</p>`);
 			} else {
 				dialogMoldal.find("p").removeClass('none');
+				$('#system-icon').addClass(icon);
 				$('#system-msg').html(message);
 			}
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");

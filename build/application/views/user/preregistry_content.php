@@ -38,8 +38,8 @@
 						</div>
 						<hr class="separador-one">
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnValidar" class="btn btn-primary" type="submit">Continuar</button>
+							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
+							<button id="btnValidar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 						</div>
 					</form>
 				</div>
