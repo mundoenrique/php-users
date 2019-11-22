@@ -130,7 +130,8 @@
 						</ul>
 
 					<?php
-						if (array_key_exists('pendingTransactions', $data)){
+						if (array_key_exists('pendingTransactions', $data))
+						{
 							$totalIncomePendingTransactions = $data['totalInPendingTransactions']["totalIncome"];
 							$totalExpensePendingTransactions = $data['totalInPendingTransactions']["totalExpense"];
 					?>
@@ -172,13 +173,22 @@
 		</section>
 	</div>
 </div>
+<?php
+	$data = json_encode([
+		'noTarjeta' => $data['noTarjeta'],
+		'totalIncomeMovements' => $totalIncomeMovements,
+		'totalExpenseMovements' => $totalExpenseMovements
+	]);
+
+	if (isset($totalIncomePendingTransactions)) {
+		$data['totalIncomePendingTransactions'] = $totalIncomePendingTransactions;
+	}
+
+	if (isset($totalExpensePendingTransactions)) {
+		$data['totalExpensePendingTransactions'] = $totalExpensePendingTransactions;
+	}
+
+?>
 <script>
-	var totalIncomeMovements = <?= $totalIncomeMovements ?>;
-	var	totalExpenseMovements = <?= $totalExpenseMovements ?>;
-	<?php if (isset($totalIncomePendingTransactions)){ ?>
-		var totalIncomePendingTransactions = <?= $totalIncomePendingTransactions?>;
-	<?php }	?>
-	<?php if (isset($totalExpensePendingTransactions)){	?>
-		var totalExpensePendingTransactions = <?= $totalExpensePendingTransactions?>;
-	<?php	} ?>
+	var data = <?= $data;?>
 </script>

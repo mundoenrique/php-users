@@ -30,13 +30,13 @@ $lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 $lang['RESP_CODEOTP'] = 'Por favor introduzca el código verificador:';
 $lang['RESP_REGISTRED_USER'] = 'Usuario regsitrado.';
 $lang['RESP_CODEOTP_INVALID'] = 'Código de verificación inválido.';
-
+$lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Hemos registrado exitosamente sus datos. Puede acceder al sistema para disfrutar de nuestros servicios.';
 
 
 
 $lang['RES_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
 $lang['RES_EXPIRED_TEMPORARY_KEY'] = '<p>Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas. </p>';
-$lang['RES_SUCCESSFUL_REGISTRATION'] = 'Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>';
+$lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>';
 $lang['RES_REGISTERED_MAIL'] = 'El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.';
 $lang['RES_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';
 $lang['RES_CONFIRMATION_MAIL_NOT_SENT'] = 'El usuario fue registrado satisfactoriamente. Ha ocurrido un error al enviar el mail de confirmación.';

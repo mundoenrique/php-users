@@ -149,4 +149,37 @@ class Novo_Product_Model extends NOVO_Model
 		}
 		return $dataResponse;
 	}
+
+	public function callWs_loadMovements_Product($dataRequest)
+	{
+		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
+
+		$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
+		$this->dataAccessLog->modulo = 'tarjeta';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->operation = 'consultar movimientos';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = '13';
+		$this->dataRequest->tarjeta = array(
+			"noTarjeta" => $dataRequest->noTarjeta,
+			"id_ext_per"=>$this->session->userdata("idUsuario")
+		);
+		$this->dataRequest->mes = $dataRequest->month;
+		$this->dataRequest->anio = $dataRequest->year;
+		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->pais = $this->session->userdata('pais');
+
+		log_message("info", "Request loadMovement Product:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('Product');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					return $response->movimientos;
+					break;
+				default:
+					return '--';
+			}
+		}
+	}
 }

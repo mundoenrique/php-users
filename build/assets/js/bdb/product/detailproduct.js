@@ -44,10 +44,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 				},
 				data: [{
 					category: "Cargos",
-					value: parseFloat(parseFloat(totalIncomeMovements).toFixed(1))
+					value: parseFloat(parseFloat(data.totalIncomeMovements).toFixed(1))
 				}, {
 					category: "Abonos",
-					value: parseFloat(parseFloat(totalExpenseMovements).toFixed(1))
+					value: parseFloat(parseFloat(data.totalExpenseMovements).toFixed(1))
 				}]
 			}],
 			tooltip: {
@@ -90,10 +90,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 					},
 					data: [{
 						category: "Cargos",
-						value: parseFloat(parseFloat(totalIncomePendingTransactions).toFixed(1))
+						value: parseFloat(parseFloat(data.totalIncomePendingTransactions).toFixed(1))
 					}, {
 						category: "Abonos",
-						value: parseFloat(parseFloat(totalExpensePendingTransactions).toFixed(1))
+						value: parseFloat(parseFloat(data.totalExpensePendingTransactions).toFixed(1))
 					}]
 				}],
 				tooltip: {
@@ -120,12 +120,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 				transitTitle.show();
 				transitList.fadeIn(1000);
 				transitStats.css({opacity: 0.0, visibility: "visible", display: "block"}).animate({opacity: 1.0}, 1000);
-				// movementsTitle.addClass('none');
-				// movementslist.addClass('none');
-				// movementsStats.addClass('none');
-				// transitTitle.removeClass('none');
-				// transitList.removeClass('none');
-				// transitStats.removeClass('none');
 			}
 		})
 
@@ -138,14 +132,27 @@ $$.addEventListener('DOMContentLoaded', function(){
 				movementsTitle.show();
 				movementslist.fadeIn(1000);
 				movementsStats.fadeIn(1000);
-				// transitTitle.addClass('none');
-				// transitList.addClass('none');
-				// transitStats.addClass('none');
-				// movementsTitle.removeClass('none');
-				// movementslist.removeClass('none');
-				// movementsStats.removeClass('none');
 			}
 		})
+
+		$$.getElementById('buscar').addEventListener('click', function(){
+			var filterMonth = $$.getElementById('filterMonth');
+			var filterYear = $$.getElementById('filterYear');
+
+			var monthSelected = filterMonth.options[filterMonth.selectedIndex];
+			var yearSelected = filterYear.options[filterYear.selectedIndex];
+
+			var dataRequest = {
+				noTarjeta: data.noTarjeta,
+				month: parseInt(monthSelected.value),
+				year: parseInt(yearSelected.value),
+			}
+			callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response)
+			{
+				console.log(response);
+			})
+
+		});
 
 		//functions
 });

@@ -3,6 +3,7 @@
 		<header class="">
 			<h1 class="primary h0">Registro</h1>
 		</header>
+		<?php var_dump($data);?>
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
@@ -15,32 +16,32 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text" readonly="readonly" value="<?= $data->user->tipo_id_ext_per;?>">
+								<input id="idType" class="form-control" name="idType" type="text"  disabled value="<?= $data->user->tipo_id_ext_per;?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idNumber">Número de identificación</label>
-								<input id="idNumber" class="form-control" name="idNumber" type="text" readonly="readonly" value="<?= $data->user->id_ext_per;?>"/>
+								<input id="idNumber" class="form-control" name="idNumber" type="text"  disabled value="<?= $data->user->id_ext_per;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="firstName">Primer nombre</label>
-								<input id="firstName" name="firstName" type="text" readonly="readonly" class="form-control" value="<?= $data->user->primerNombre;?>"/>
+								<input id="firstName" name="firstName" type="text"  disabled class="form-control" value="<?= $data->user->primerNombre;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="middleName">Segundo nombre</label>
-								<input id="middleName" class="form-control" readonly="readonly" name="middleName" type="text" value="<?= $data->user->segundoNombre;?>"/>
+								<input id="middleName" class="form-control"  disabled name="middleName" type="text" value="<?= $data->user->segundoNombre;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-								<input id="lastName" name="lastName" readonly="readonly" type="text" class="form-control" value="<?= $data->user->primerApellido;?>"/>
+								<input id="lastName" name="lastName"  disabled type="text" class="form-control" value="<?= $data->user->primerApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="secondSurname">Apellido materno</label>
-								<input id="secondSurname" name="secondSurname" readonly="readonly" type="text" class="form-control" value="<?= $data->user->segundoApellido;?>"/>
+								<input id="secondSurname" name="secondSurname"  disabled type="text" class="form-control" value="<?= $data->user->segundoApellido;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -82,7 +83,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="mobilePhone">Teléfono móvil</label>
-								<input id="mobilePhone" class="form-control" name="mobilePhone" type="text" value="<?= $data->afiliacion->telefono2?>"/>
+								<input id="mobilePhone" class="form-control" name="mobilePhone" type="text" value="<?= $data->user->telefono?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -159,8 +160,12 @@
 		</section>
 	</div>
 </div>
+<?php
+	$data =json_encode([
+		'tipo_id_ext_per' => $data->user->tipo_id_ext_per,
+		'paisUser' => $data->pais
+	]);
+?>
 <script>
-	var aplicaPerfil = '<?= $data->user->aplicaPerfil ?>';
-	var tipo_id_ext_per = '<?= $data->user->tipo_id_ext_per ?>';
-	var paisUser = '<?= $data->pais ?>';
+	var data = <?= $data ?>;
 </script>

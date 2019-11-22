@@ -157,8 +157,13 @@ function validateForms(form, options) {
 		return value == digVer ? true : false;
 	});
 
+	$.validator.addMethod("selectRequired", function(value, element, arg){
+		return value !== '0';
+	 }, "Este campo es obligatorio.");
+
 	form.validate({
 		rules: {
+			typeDocument: {required: true, "selectRequired": true},
 			codeOTP: {required: true},
 			nitBussines: {required: true, number: true,},
 			currentPassword: {required: true},

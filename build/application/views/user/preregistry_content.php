@@ -7,12 +7,22 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de Cuenta</h2>
-				<p>Si usted aún no posee usuario para accesar al sistema <strong>Conexión Personas</strong>, a continuación debe
-				proporcionar los siguientes datos relacionados con su cuenta:</p>
+				<p>Si aún no posees usuario para acceder al sistema <strong><?= $nameAplication;?></strong>, a continuación debes
+				proporcionar los siguientes datos relacionados con tu cuenta:</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="formVerifyAccount">
 						<div class="row">
+							<div class="form-group col-lg-auto">
+								<label for="typeDocument">Tipo de Documento</label><br>
+								<select id="typeDocument" class="custom-select form-control w-auto my-1 mr-1" name="typeDocument">
+									<option selected="" value="0">Seleccione</option>
+									<?php foreach ($typeDocument as $row) {?>
+										<option value="<?= $row['cod'];?>"><?= $row['text'];?></option>
+									<?php }?>
+								</select>
+								<div class="help-block"></div>
+							</div>
 							<div class="form-group col-lg-auto">
 								<label for="idNumber">Documento de Identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">

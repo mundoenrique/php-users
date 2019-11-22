@@ -155,6 +155,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
+		$this->dataRequest->typeDocument = $dataRequest->typeDocument;
 		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 
 		$response = $this->sendToService('User');
@@ -167,6 +168,17 @@ class Novo_User_Model extends NOVO_Model
 						$this->session->set_flashdata('registryUser', 'TRUE');
 						$this->session->set_flashdata('registryUserData', $response);
 						$this->response->data = base_url('registro');
+
+						$newdata	= array(
+							'userName'	=> $response->logAccesoObject->userName,
+							'pais'		=> $response->pais,
+							'id_ext_per'	=> $response->user->id_ext_per,
+							'token'		=> $response->token,
+							'sessionId'	=> $response->logAccesoObject->sessionId,
+							'keyId'		=> $response->keyUpdate,
+							'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
+							);
+						$this->session->set_userdata($newdata);
 
 					}else{
 						$this->response->msg = lang('RESP_CODEOTP');
@@ -199,10 +211,11 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = 'ui-icon-alert';
-					break;
+				break;
 				case -402:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-alert';
 					$this->response->data = base_url('inicio');
 					break;
 			}
@@ -213,6 +226,7 @@ class Novo_User_Model extends NOVO_Model
 	public function callWs_registry_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+		$dataUser = $this->session->userdata;
 
 		$user = array(
 			"userName" => $dataRequest->username,
@@ -221,16 +235,17 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->idNumber,
-			"tipo_id_ext_per"	=> $dataRequest->tipo_id_ext_per,
-			"codPais"			=> $dataRequest->pais,
-			"sexo"				=> 'M',
+			"id_ext_per"		=> $dataUser['id_ext_per'],
+			"codPais"		=> $dataUser['pais'],
+			"tipo_id_ext_per"	=>"4", //$dataRequest->idType,
+			"sexo"				=> $dataRequest->gender,
 			"notEmail"			=> "1",
 			"notSms"			=> "1",
 			"email"				=> $dataRequest->email,
 			"password"			=> md5($dataRequest->userpwd),
 			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd))
 		);
+
 		$phones = array(
 			[
 				"tipo"	=> "HAB",
@@ -246,16 +261,22 @@ class Novo_User_Model extends NOVO_Model
 			]
 		);
 
+		$date = new DateTime();
+		$fechaRegistro = $date->format('mdy');
+
 		$this->className = 'com.novo.objects.MO.RegistroUsuarioMO';
 		$this->dataAccessLog->modulo = 'registro usuario';
 		$this->dataAccessLog->function = 'registro usuario';
 		$this->dataAccessLog->operation = 'registro usuario';
-		$this->dataAccessLog->userName = $dataRequest->username;
+		$this->dataAccessLog->userName = $dataRequest->idNumber. $fechaRegistro;
 
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = $user;
 		$this->dataRequest->listaTelefonos = $phones;
-		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->token = $this->session->userdata['token'];
+		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
+		$this->dataRequest->keyId = $this->session->userdata['keyId'];
+		$this->dataRequest->bean = "2";
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
@@ -263,8 +284,10 @@ class Novo_User_Model extends NOVO_Model
 		 if($this->isResponseRc !== FALSE) {
 		 	switch($this->isResponseRc) {
 				case 0:
+					$this->session->sess_destroy();
+
 					$this->response->code = 0;
-					$this->response->msg = lang('RES_SUCCESSFUL_REGISTRATION');
+					$this->response->msg = lang('RESP_SUCCESSFUL_REGISTRATION');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
@@ -318,11 +341,12 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->msg = lang('RES_ERROR_SERVER');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->modalType = "alert-error";
-					break;
+				break;
 
 				case -271:
-				case -335:
+					case -335:
 					$this->response->msg = lang('RES_PARTIAL_REGISTRATION');
+					$this->response->classIconName = "ui-icon-alert";
 					$this->response->code = 0;
 					$this->response->data = [
 						'btn1' => [
@@ -548,6 +572,11 @@ class Novo_User_Model extends NOVO_Model
 			}
 		}
 		return $this->response;
+	}
+
+	public function callWs_loadTypeDocument_User()
+	{
+		return [['cod' => 'CC', 'text' => 'Cédula1'],['cod' => 'CC', 'text' => 'Cédula2'],['cod' => 'CC', 'text' => 'Cédula3']];
 	}
 
 

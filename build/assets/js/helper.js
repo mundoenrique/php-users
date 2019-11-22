@@ -101,10 +101,11 @@ function createButton(dialogMoldal, elementBotton, valuesButton) {
 	});
 }
 
-function notiSystem(title, message, icon = 'ui-icon-closethick', data) {
+function notiSystem(title, message, icon, data) {
 
 	var dialogMoldal = $('#system-info');
 	var title = title || titleNotiSystem;
+	var icon = icon || 'ui-icon-closethick';
 	var message = message || $('#system-msg').text();
 	var btn1 = data.btn1 || { link: false, action: 'close', text: txtBtnAcceptNotiSystem };
 	var btn2 = data.btn2;
@@ -178,7 +179,7 @@ function createFields(fields) {
 	for (var field of fields) {
 		switch (field.typeElement) {
 			case 'text':
-				element = $(`<input id="${field.id}" class="form-control" type="text" name="${field.name}"></input>`);
+				element = $(`<input id="${field.id}" class="form-control" type="text" name="${field.name}" autocomplete="off"></input>`);
 				break;
 
 			case 'password':

@@ -50,9 +50,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 			);
-			data['aplicaPerfil'] = aplicaPerfil;
-			data['tipo_id_ext_per'] = tipo_id_ext_per;
-			data['pais'] = paisUser;
+			data['tipo_id_ext_per'] = data.tipo_id_ext_per;
+			data['pais'] = data.paisUser;
 			data['otro_telefono'] = $$.getElementById('phoneType').value;
 			data['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')

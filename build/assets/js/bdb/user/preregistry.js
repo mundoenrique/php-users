@@ -15,12 +15,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 
+
+			var typeDocument = $$.getElementById('typeDocument');
+			var document_id = $$.getElementById('idNumber').value;
 			disableInputsForm(true, msgLoading);
 
-			var document_id = $$.getElementById('idNumber').value;
 			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
+				typeDocument: typeDocument.options[typeDocument.selectedIndex].value,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
 				codeOTP: ''
@@ -33,7 +36,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					validationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 					var countdown = validationMsg.querySelector("span");
-					startTimer(10, countdown);
+					startTimer(setTimerOTP, countdown);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
@@ -65,16 +68,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 					else{
 						if (response.code === 3){
-							inpCodeOTP.disabled = true;
-							btnTrigger.disabled = false;
-							btnTrigger.innerHTML = txtBtnAcceptNotiSystem;
-							var lastPosition = $$.getElementsByClassName('help-block').length-1;
-							$$.getElementsByClassName('help-block').item(lastPosition).innerText = response.msg;
-
-							$('#accept')
-							.on('click', function() {
-								$$.location.href = response.data;
-							});
+							resendCodeOTP ('Codigo inválido');
 						}
 					}
 				});
@@ -112,6 +106,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$$.getElementById('idNumber').disabled = status;
 		$$.getElementById('telephoneNumber').disabled = status;
 		$$.getElementById('nitBussines').disabled = status;
+		$$.getElementById('typeDocument').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
 	}
@@ -131,20 +126,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 			display.textContent = minutes + ":" + seconds;
 
 			if (--timer < 0) {
-					display.textContent = 'tiempo expirado';
-					clearInterval(interval);
-
-					// setTimeout(function(){
-
-						validationMsg.innerHTML = 'Tiempo expirado, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>';
-						$$.getElementById('accept').classList.add("none");
-						$$.getElementById('codeOTP').disabled = true;
-
-						// $$.location.href = uriRedirecTarget;
-
-					// }, 2000);
-
+				clearInterval(interval);
+				resendCodeOTP ('Tiempo expirado');
 			}
+		}
+
+		function resendCodeOTP ($message) {
+			validationMsg.innerHTML = `$message, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+			$$.getElementById('accept').classList.add("none");
+			$$.getElementById('codeOTP').disabled = true;
+
+			$$.getElementById('resendCode').addEventListener('click', function(){
+				console.log('solicitando el nuevo código....');
+			});
 		}
 	}
 });

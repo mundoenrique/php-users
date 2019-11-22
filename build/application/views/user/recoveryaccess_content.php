@@ -7,7 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de Datos</h2>
-				<p>Para recuperar su usuario o restablecer su contraseña de acceso a <strong>Conexión Personas</strong>, debe seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
+				<p>Para recuperar tu usuario o restablecer tu contraseña de acceso a <strong><?= $nameAplication;?></strong>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="formRecoveryAccess">

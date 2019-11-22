@@ -96,7 +96,7 @@ class User extends NOVO_Controller {
 		}
 
 		$this->views = $views;
-		$this->render->titlePage = lang('SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 
 		$this->loadView($view);
 	}
@@ -151,7 +151,6 @@ class User extends NOVO_Controller {
 	public function preRegistry()
 	{
 		$view = 'preregistry';
-
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
 		if($this->config->item('language_form_validate')) {
 			array_push(
@@ -167,9 +166,14 @@ class User extends NOVO_Controller {
 			"localization/spanish-base/messages_base",
 			"$this->countryUri/user/$view"
 		);
+
+		$this->load->model('Novo_User_Model', 'modelLoad');
+
 		$this->views = ['user/'.$view];
 		$this->render->setTimerOTP = $this->config->item('setTimerOTP');
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
+		$this->render->typeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 		$this->loadView($view);
 	}
 
@@ -202,7 +206,7 @@ class User extends NOVO_Controller {
 		}
 		$this->views = ['user/'.$view];
 		$this->render->data = $this->session->flashdata('registryUserData');
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->render->titlePage = lang('GEN_REGISTRY_TITLE');
 		$this->loadView($view);
 	}
 
@@ -226,7 +230,8 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->render->titlePage = lang('GEN_RECOVER_ACCESS_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 

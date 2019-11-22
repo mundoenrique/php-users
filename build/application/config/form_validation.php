@@ -1,6 +1,23 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'loadmovements' => [
+		[
+			'field' => 'noTarjeta',
+			'label' => 'noTarjeta',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'month',
+			'label' => 'month',
+			'rules' => 'trim|required|numeric'
+		],
+		[
+			'field' => 'year',
+			'label' => 'year',
+			'rules' => 'trim|required|numeric'
+		]
+	],
 	'detailproduct' => [
 		[
 			'field' => 'nroTarjeta',
@@ -66,6 +83,12 @@ $config = [
 			'label' => 'telephone_number',
 			'rules' => 'trim|numeric|required'
 		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'trim|required'
+		],
+
 	],
 	'verifyotp' => [
 		[
