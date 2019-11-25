@@ -22,7 +22,7 @@
 				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php
-					if (!$logged){
+					if ($logged){
 				?>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
