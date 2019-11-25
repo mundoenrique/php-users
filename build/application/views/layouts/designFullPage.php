@@ -18,7 +18,7 @@
 	?>
 
 		<header class="main-head">
-			<nav class="navbar navbar-expand-lg flex-auto">
+			<nav class="navbar navbar-expand-lg flex-auto bg-primary">
 				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php
@@ -27,7 +27,7 @@
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div id="navbarNav" class="collapse navbar-collapse">
+						<div id="navbarNav" class="collapse navbar-collapse bg-primary">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item active"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
 								<li class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
