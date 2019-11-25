@@ -13,27 +13,27 @@
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="formVerifyAccount">
 						<div class="row">
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-3">
 								<label for="typeDocument">Tipo de Documento</label><br>
-								<select id="typeDocument" class="custom-select form-control w-auto my-1 mr-1" name="typeDocument">
+								<select id="typeDocument" class="custom-select form-control" name="typeDocument">
 									<option selected="" value="0">Seleccione</option>
 									<?php foreach ($typeDocument as $row) {?>
-										<option value="<?= $row['cod'];?>"><?= $row['text'];?></option>
+									<option value="<?= $row['cod'];?>"><?= $row['text'];?></option>
 									<?php }?>
 								</select>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-3">
 								<label for="idNumber">Documento de Identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-3">
 								<label for="nitBussines">Nit de la Empresa</label>
 								<input id="nitBussines" class="form-control" type="text" name="nitBussines">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-auto">
+							<div class="form-group col-lg-3">
 								<label for="telephoneNumber">Número de teléfono</label>
 								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
