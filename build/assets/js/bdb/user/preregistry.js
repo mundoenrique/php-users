@@ -38,8 +38,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(setTimerOTP, countdown);
-					btnTrigger.disabled = false;
+					startTimer(15, countdown);
+					btnTrigger.classList.add("none");
+					$$.getElementById('accept').classList.remove("none");
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
