@@ -6,7 +6,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
-	var validationMsg = $$.getElementById("validation");
+	var verificationMsg = $$.getElementById("verificationMsg");
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
@@ -33,9 +33,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 			{
 				disableInputsForm(true, txtBtnTrigger);
 				if (response.code == 0) {
-					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					validationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-					var countdown = validationMsg.querySelector("span");
+					// notiSystem(response.title, response.msg, response.classIconName, response.data);
+					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+					$$.getElementById("verification").classList.remove("none");
+					$$.getElementById('codeOTP').disabled = false;
+					var countdown = verificationMsg.querySelector("span");
 					startTimer(setTimerOTP, countdown);
 				}
 				else{
@@ -107,6 +109,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$$.getElementById('telephoneNumber').disabled = status;
 		$$.getElementById('nitBussines').disabled = status;
 		$$.getElementById('typeDocument').disabled = status;
+		$$.getElementById('acceptTerms').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
 	}

@@ -641,7 +641,8 @@ textarea.form-control {
 }
 
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: var(--primary);
+	background-color: var(--primary);
+	opacity: .5;
 }
 
 /* Form inline */
@@ -3246,6 +3247,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: absolute;
 	width: 254px;
 	margin-top: 70px;
+	background: rgb(255, 255, 255) url("../../img/bdb/logo_visa.svg") right 1.25rem bottom 1.25rem / 50px no-repeat;
 	border-bottom: 2px solid var(--bg-color);
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
 	-webkit-transition: all 0.5s;

@@ -46,11 +46,23 @@
 							</label>
 							<div class="help-block"></div>
 						</div>
+						<div id="verification" class="none">
+							<hr class="separador-one mb-3">
+							<p>Se ha envíado un código de verificación a su correo electrónico, por favor introduzca el código a continuación:</p>
+							<div class="row form-group col-lg-3">
+								<label for="codeOTP">Codigo de Validación</label>
+								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
+								<div class="help-block"></div>
+							</div>
+							<p id="verificationMsg" class="mb-3 h5"></p>
+						</div>
 						<hr class="separador-one">
 						<div class="flex items-center justify-end pt-3">
 							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
 							<button id="btnValidar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 						</div>
+
+
 					</form>
 				</div>
 			</div>

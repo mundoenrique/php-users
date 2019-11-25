@@ -22,7 +22,7 @@
 				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php
-					if ($logged){
+					if (!$logged){
 				?>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
@@ -72,7 +72,7 @@
 		</p>
 		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-			<span id="validation" class="h5 align-middle"></span>
+			<!-- <span id="validation" class="h5 align-middle"></span> -->
       <div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button type="button" id="cancel" class="btn btn-small btn-link"></button>
 				<button type="button" id="accept" class="btn btn-small btn-loading btn-primary"></button>
