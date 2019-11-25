@@ -11,14 +11,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//core
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
+		var md5CodeOTP = '';
+		var inpCodeOTP = $$.getElementById('codeOTP');
 		var form = $('#formVerifyAccount');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 
-
 			var typeDocument = $$.getElementById('typeDocument');
 			var document_id = $$.getElementById('idNumber').value;
 			disableInputsForm(true, msgLoading);
+
+			if (inpCodeOTP.value){
+				md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
+			}
 
 			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
@@ -26,25 +31,30 @@ $$.addEventListener('DOMContentLoaded', function(){
 				typeDocument: typeDocument.options[typeDocument.selectedIndex].value,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
-				codeOTP: ''
-			}
+				codeOTP: md5CodeOTP
+ 			}
 
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 			{
 				disableInputsForm(true, txtBtnTrigger);
 				if (response.code == 0) {
-					// notiSystem(response.title, response.msg, response.classIconName, response.data);
+
+					btnTrigger.disabled = false;
+
+					if (inpCodeOTP.value){
+						$$.location.href = response.data;
+					}
+
 					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
-					$$.getElementById('codeOTP').classList.remove("ignore");
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(15, countdown);
-					btnTrigger.classList.add("none");
-					$$.getElementById('btnVerifyOTP').classList.remove("none");
-					form.attr('id',)
+					startTimer(20, countdown);
+
 				}
-				else{
+				else if (response.code === 3){
+						resendCodeOTP (response.msg);
+				}else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					disableInputsForm(false, txtBtnTrigger);
 				}
@@ -73,9 +83,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 						$$.location.href = response.data;
 					}
 					else{
-						if (response.code === 3){
-							resendCodeOTP ('Codigo inválido');
-						}
 					}
 				});
 			}
@@ -140,11 +147,28 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		function resendCodeOTP (message) {
 			verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
-			$$.getElementById('btnVerifyOTP').classList.add("none");
+			btnTrigger.disabled = true;
 			$$.getElementById('codeOTP').disabled = true;
 
 			$$.getElementById('resendCode').addEventListener('click', function(){
 				console.log('solicitando el nuevo código....');
+				disableInputsForm(true, msgLoading);
+				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+				{
+					if (response.code == 0) {
+						btnTrigger.disabled = false;
+						btnTrigger.innerHTML = txtBtnTrigger;
+						// notiSystem(response.title, response.msg, response.classIconName, response.data);
+						verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+						$$.getElementById('codeOTP').disabled = false;
+						var countdown = verificationMsg.querySelector("span");
+						startTimer(15, countdown);
+					}
+					else{
+						notiSystem(response.title, response.msg, response.classIconName, response.data);
+						disableInputsForm(false, txtBtnTrigger);
+					}
+				});
 			});
 		}
 	}
