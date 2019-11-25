@@ -135,8 +135,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 		}
 
-		function resendCodeOTP ($message) {
-			validationMsg.innerHTML = `$message, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+		function resendCodeOTP (message) {
+			verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
 			$$.getElementById('accept').classList.add("none");
 			$$.getElementById('codeOTP').disabled = true;
 
