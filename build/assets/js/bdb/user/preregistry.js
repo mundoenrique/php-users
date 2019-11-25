@@ -39,6 +39,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(setTimerOTP, countdown);
+					btnTrigger.disabled = false;
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
