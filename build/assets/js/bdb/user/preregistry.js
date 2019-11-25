@@ -37,10 +37,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
+					$$.getElementById('codeOTP').classList.remove("ignore");
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(15, countdown);
 					btnTrigger.classList.add("none");
-					$$.getElementById('accept').classList.remove("none");
+					$$.getElementById('btnVerifyOTP').classList.remove("none");
+					form.attr('id',)
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
@@ -52,13 +54,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	$$.getElementById("accept").addEventListener('click', function(){
+	$$.getElementById("btnVerifyOTP").addEventListener('click', function(){
 
-		var btnTrigger = $$.getElementById('accept');
+		var btnTrigger = $$.getElementById('btnVerifyOTP');
 		var inpCodeOTP = $$.getElementById('codeOTP');
 		if (inpCodeOTP){
 
-			var form = $('#formNotiSystem');
+			var form = $('#formVerifyAccount');
 			validateForms(form, {handleMsg: true});
 			if(form.valid()) {
 				btnTrigger.disabled = true;
@@ -138,7 +140,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		function resendCodeOTP (message) {
 			verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
-			$$.getElementById('accept').classList.add("none");
+			$$.getElementById('btnVerifyOTP').classList.add("none");
 			$$.getElementById('codeOTP').disabled = true;
 
 			$$.getElementById('resendCode').addEventListener('click', function(){
