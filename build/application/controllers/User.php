@@ -96,7 +96,7 @@ class User extends NOVO_Controller {
 		}
 
 		$this->views = $views;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 
 		$this->loadView($view);
 	}
@@ -131,7 +131,7 @@ class User extends NOVO_Controller {
 
 		$this->views = ['user/'.$view];
 		$this->render->reason = $reasonOperation === 't'? lang('PASSWORD_TEMPORAl_KEY'): lang('PASSWORD_EXPIED_KEY');
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE');
+		$this->render->titlePage = lang('PASSRECOVERY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 	/**
@@ -206,7 +206,7 @@ class User extends NOVO_Controller {
 		}
 		$this->views = ['user/'.$view];
 		$this->render->data = $this->session->flashdata('registryUserData');
-		$this->render->titlePage = lang('GEN_REGISTRY_TITLE');
+		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 

@@ -1,14 +1,14 @@
+<?= var_dump($data);?>
 <div id="registry" class="registro-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="primary h0">Registro</h1>
 		</header>
-		<?php var_dump($data);?>
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Afiliación de Datos</h2>
-				<p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario que ingrese los datos requeridos a continuación:</p>
+				<p>Para obtener tu usuario de <strong>Conexión Personas</strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<form method="post" id="formRegistry">
@@ -162,6 +162,7 @@
 </div>
 <?php
 	$data =json_encode([
+		'code_tipo_id_ext_per' => $data->user->tipo_id_ext_per,
 		'tipo_id_ext_per' => $data->user->tipo_id_ext_per,
 		'paisUser' => $data->pais
 	]);

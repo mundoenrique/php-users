@@ -48,7 +48,7 @@
 						</div>
 						<div id="verification" class="none">
 							<hr class="separador-one mb-3">
-							<p>Se ha envíado un código de verificación a su correo electrónico, por favor introduzca el código a continuación:</p>
+							<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 							<div class="row form-group col-lg-3">
 								<label for="codeOTP">Codigo de Validación</label>
 								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
@@ -70,7 +70,13 @@
 		</section>
 	</div>
 </div>
+<?php
+	$data = json_encode([
+		'setTimerOTP' => $setTimerOTP,
+		'typeDocument' => $typeDocument
+	]);
+?>
 <script>
-	var setTimerOTP = <?= $setTimerOTP;?>;
+	var dataPreRegistry = <?= $data;?>;
 </script>
 

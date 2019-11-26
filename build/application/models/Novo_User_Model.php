@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
 							'afiliado' => $response->afiliado,
-							'aplicaPerfil' => $response->aplicaPerfil,
+
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
@@ -152,10 +152,10 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
-		$this->dataRequest->typeDocument = $dataRequest->typeDocument;
+		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocument;
 		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 
 		$response = $this->sendToService('User');
@@ -173,6 +173,7 @@ class Novo_User_Model extends NOVO_Model
 							'userName'	=> $response->logAccesoObject->userName,
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
+							'tipo_id_ext_per'	=> $dataRequest->codeTypeDocument,
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
@@ -235,9 +236,9 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataUser['id_ext_per'],
-			"codPais"		=> $dataUser['pais'],
-			"tipo_id_ext_per"	=>"4", //$dataRequest->idType,
+			"id_ext_per"		=> $dataRequest->idNumber,
+			"codPais"			=> $dataUser['pais'],
+			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
 			"notEmail"			=> "1",
 			"notSms"			=> "1",
@@ -548,7 +549,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->pais = 'Ve';
 
 		log_message("info", "Request Close Session:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('User');
@@ -576,7 +576,12 @@ class Novo_User_Model extends NOVO_Model
 
 	public function callWs_loadTypeDocument_User()
 	{
-		return [['cod' => 'CC', 'text' => 'Cédula1'],['cod' => 'CC', 'text' => 'Cédula2'],['cod' => 'CC', 'text' => 'Cédula3']];
+		return [
+			['cod' => '4', 'abbr' => 'CC', 'text' => 'Cédula de Ciudadanía'],
+			['cod' => '1', 'abbr' => 'CE', 'text' => 'Cédula de Extranjería'],
+			['cod' => '2', 'abbr' => 'P', 'text' => 'Pasaporte'],
+			['cod' => '3', 'abbr' => 'PEP', 'text' => 'Permiso Especial de Permanencia']
+		];
 	}
 
 

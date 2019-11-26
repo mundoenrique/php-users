@@ -28,7 +28,6 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idUsuario = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->pais = 'Ve';
 
 		log_message("info", "Request List Products:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');

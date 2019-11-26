@@ -53,6 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			data['tipo_id_ext_per'] = data.tipo_id_ext_per;
 			data['pais'] = data.paisUser;
 			data['otro_telefono'] = $$.getElementById('phoneType').value;
+			data['username'] = $$.getElementById('username').value.toUpperCase();
 			data['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);

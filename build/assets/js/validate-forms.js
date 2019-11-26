@@ -163,6 +163,7 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
+			gender: {required: true},
 			typeDocument: {required: true, "selectRequired": true},
 			codeOTP: {required: true},
 			nitBussines: {required: true, number: true,},

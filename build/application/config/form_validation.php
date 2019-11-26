@@ -84,39 +84,13 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		],
 		[
-			'field' => 'typeDocument',
-			'label' => 'typeDocument',
-			'rules' => 'trim|required'
-		],
-
-	],
-	'verifyotp' => [
-		[
-			'field' => 'plot',
+			'field' => 'codeTypeDocument',
+			'label' => 'codeTypeDocument',
 			'rules' => 'trim|required'
 		],
 		[
-			'field' => 'request',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'userName',
-			'label' => 'userName',
-			'rules' => 'trim|numeric|required'
-		],
-		[
-			'field' => 'nitBussines',
-			'label' => 'nitBussines',
-			'rules' => 'trim|numeric|required'
-		],
-		[
-			'field' => 'telephone_number',
-			'label' => 'telephone_number',
-			'rules' => 'trim|numeric|required'
-		],
-		[
-			'field' => 'codeOTP',
-			'label' => 'codeOTP',
+			'field' => 'abbrTypeDocument',
+			'label' => 'abbrTypeDocument',
 			'rules' => 'trim|required'
 		]
 	],
@@ -165,6 +139,11 @@ $config = [
 			'field' => 'landLine',
 			'label' => 'landLine',
 			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'gender',
+			'label' => 'gender',
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'mobilePhone',

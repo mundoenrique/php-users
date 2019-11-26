@@ -1,7 +1,3 @@
-<?php
-	$months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
-?>
-
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -56,18 +52,13 @@
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
 								<option selected="" value="0">Más recientes</option>
-								<option value="1">Enero</option>
-								<option value="2">Febrero</option>
-								<option value="3">Marzo</option>
-								<option value="4">Abril</option>
-								<option value="5">Mayo</option>
-								<option value="6">Junio</option>
-								<option value="7">Julio</option>
-								<option value="8">Agosto</option>
-								<option value="9">Septiembre</option>
-								<option value="10">Octubre</option>
-								<option value="11">Noviembre</option>
-								<option value="12">Diciembre</option>
+								<?php
+									foreach ($months as $nroMonths => $txtMonths){
+								?>
+									<option value="<?= $nroMonths+1;?>"><?= $txtMonths;?></option>
+								<?php
+									}
+								?>
 							</select>
 							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled="">
 								<option selected="" value="0">-</option>
@@ -108,27 +99,46 @@
 								$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
 								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
 
-								foreach($data['movements'] as $row){
-									$separedDate = explode('/',$row->fecha);
-									$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
-							?>
-								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
-									<div class="flex px-2 flex-column items-center feed-date">
-										<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
-										<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
-										<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
-									</div>
-									<div class="flex px-2 flex-column mr-auto">
-										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
-										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
-									</div>
-									<span class="px-2 feed-amount items-center">
-										<?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?>
-									</span>
-								</li>
-							<?php }?>
-						</ul>
+								if ($data['movements'] !== '--'){
 
+									foreach($data['movements'] as $row){
+										$separedDate = explode('/',$row->fecha);
+										$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
+								?>
+									<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
+										<div class="flex px-2 flex-column items-center feed-date">
+											<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
+											<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
+											<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
+										</div>
+										<div class="flex px-2 flex-column mr-auto">
+											<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
+											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
+										</div>
+										<span class="px-2 feed-amount items-center">
+											<?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?>
+										</span>
+									</li>
+								<?php
+										}
+								}else{
+							?>
+									<li class="feed-item feed-expense flex py-1 items-center">
+										<div class="flex px-2 flex-column items-center feed-date">
+											<span class="h5 feed-date-day"></span>
+											<span class="h6 feed-date-month"></span>
+											<span class="h6 feed-date-year"></span>
+										</div>
+										<div class="flex px-2 flex-column mr-auto">
+											<span class="h5 semibold feed-product">Este producto no posee movimientos</span>
+											<span class="h6 feed-metadata"></span>
+										</div>
+										<span class="px-2 feed-amount items-center"></span>
+									</li>
+							<?php
+								}
+							?>
+						</ul>
 					<?php
 						if (array_key_exists('pendingTransactions', $data))
 						{

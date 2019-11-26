@@ -19,6 +19,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			var typeDocument = $$.getElementById('typeDocument');
 			var document_id = $$.getElementById('idNumber').value;
+
+			var codeTypeDocument = typeDocument.options[typeDocument.selectedIndex].value;
+			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['cod'] == codeTypeDocument}).abbr
+
 			disableInputsForm(true, msgLoading);
 
 			if (inpCodeOTP.value){
@@ -28,7 +32,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
 				id_ext_per: document_id,
-				typeDocument: typeDocument.options[typeDocument.selectedIndex].value,
+				codeTypeDocument: codeTypeDocument,
+				abbrTypeDocument: abbrTypeDocument,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
 				codeOTP: md5CodeOTP
@@ -66,15 +71,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	$$.getElementById("btnVerifyOTP").addEventListener('click', function(){
 
-		var btnTrigger = $$.getElementById('btnVerifyOTP');
+		var btnTriggerOTP = $$.getElementById('btnVerifyOTP');
 		var inpCodeOTP = $$.getElementById('codeOTP');
 		if (inpCodeOTP){
 
 			var form = $('#formVerifyAccount');
 			validateForms(form, {handleMsg: true});
 			if(form.valid()) {
-				btnTrigger.disabled = true;
-				btnTrigger.innerHTML = msgLoading;
+				btnTriggerOTP.disabled = true;
+				btnTriggerOTP.innerHTML = msgLoading;
 
 				data['codeOTP'] = CryptoJS.MD5(inpCodeOTP.value).toString();
 				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
