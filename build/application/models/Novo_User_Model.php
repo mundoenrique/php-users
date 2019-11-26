@@ -576,12 +576,29 @@ class Novo_User_Model extends NOVO_Model
 
 	public function callWs_loadTypeDocument_User()
 	{
-		return [
-			['cod' => '4', 'abbr' => 'CC', 'text' => 'Cédula de Ciudadanía'],
-			['cod' => '1', 'abbr' => 'CE', 'text' => 'Cédula de Extranjería'],
-			['cod' => '2', 'abbr' => 'P', 'text' => 'Pasaporte'],
-			['cod' => '3', 'abbr' => 'PEP', 'text' => 'Permiso Especial de Permanencia']
-		];
+		log_message('INFO', 'NOVO User Model: loadTypeDocument method Initialized');
+
+
+		$this->className = 'com.novo.objects.MO.TipoDocumentoMO';
+
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'lista tipo de documento';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = '';
+
+		$this->dataRequest->idOperation = '119';
+		$this->dataRequest->pais = 'Global';
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
+			switch ($this->isResponseRc) {
+				case 0:
+					return $response->tipoDocumento;
+				break;
+			}
+		}
+		return '--';
 	}
 
 
