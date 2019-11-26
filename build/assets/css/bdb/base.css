@@ -1071,12 +1071,6 @@ textarea.form-control {
   font-size: var(--h5);
 }
 
-.ui-dialog-buttonpane .btn {
-	width: 5.75rem;
-	height: 2.5rem;
-	padding: var(--button-small-padding-y) var(--button-small-padding-x);
-}
-
 /* icon */
 
 .btn-icon {
@@ -1850,6 +1844,17 @@ textarea.form-control {
 	margin-right: .5rem;
 }
 
+.vinieta {
+	margin-bottom: 0;
+	padding-left: 1.5rem;
+	list-style-type: none;
+}
+.vinieta li:before {
+	font-family: "NovoPayment Glyphs";
+	content:"\2713\0020";
+	color: var(--primary);
+}
+
 /* Alignment */
 .justify      { text-align: justify !important }
 .text-left   { text-align: left !important }
@@ -1951,6 +1956,9 @@ i[class*=" icon-"]:before {
 .icon-hand-down:before     { content: "\e044"; }
 .icon-hand-left:before     { content: "\e045"; }
 .icon-hand-right:before    { content: "\e046"; }
+.icon-file-graph:before 	 { content: "\e058"; }
+.icon-file-pdf:before 		 { content: "\e059"; }
+.icon-file-word:before     { content: "\e05a"; }
 .icon-file-excel:before 	 { content: "\e05b"; }
 
 .icon-user{
@@ -3157,9 +3165,8 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	align-items: center;
-	padding: .6em 1em 0;
-	min-height: 44px;
+	padding: 1.6em 1em 1em;
+	min-height: 80px;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
@@ -3173,6 +3180,9 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
+}
+.ui-dialog-buttonpane .btn {
+	width: 5.75rem;
 }
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
@@ -3208,14 +3218,27 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: absolute;
 	z-index: 2;
 	width: 55px;
+	height: 18.6px;
 }
 .dashboard-item .item-network {
 	right: 20px;
 	bottom: 20px;
+	width: 50px;
+	height: 16.9px;
 }
 .product-presentation .item-network {
-	right: 10px;
+	right: 16px;
 	bottom: 16px;
+
+}
+.item-network.maestro {
+	background: transparent url("../../img/bdb/logo_maestro.svg") no-repeat center / cover;
+}
+.item-network.mastercard {
+	background: transparent url("../../img/bdb/logo_mastercard.svg") no-repeat center / cover;
+}
+.item-network.visa {
+	background: transparent url("../../img/bdb/logo_visa.svg") no-repeat center / cover;
 }
 
 .dashboard-item {
@@ -3252,7 +3275,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: absolute;
 	width: 254px;
 	margin-top: 70px;
-	background: rgb(255, 255, 255) url("../../img/bdb/logo_visa.svg") right 1.25rem bottom 1.25rem / 50px no-repeat;
 	border-bottom: 2px solid var(--bg-color);
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
 	-webkit-transition: all 0.5s;
@@ -3271,7 +3293,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .product-info-full {
-	min-width: 400px;
+	min-width: 320px;
 }
 
 .card-image {

@@ -9,9 +9,10 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="flex items-center mb-2">
+				<div class="flex items-center justify-between mb-2">
 					<div class="product-presentation relative mr-4">
-						<img class="item-network" src="<?= $this->asset->insertFile('logo_visa.svg','img',$countryUri); ?>" alt="Logo marca">
+						<? log_message("info", "prueba===> ". json_encode($data)); ?>
+						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
 					<div class="product-info-full mr-4">
@@ -41,8 +42,15 @@
 						</ul>
 					</div>
 					<div class="product-specifications">
-						<h3 class="h4 regular">Especificaciones</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum molestias vitae consequatur quaerat, mollitia veritatis accusamus quo officia eaque obcaecati laudantium quasi sapiente harum reprehenderit dolorem dolores praesentium saepe perferendis.</p>
+						<h3 class="h4 regular tertiary">Especificaciones</h3>
+						<ul class="vinieta">
+							<li>Aliquam tincidunt mauris eu risus.</li>
+							<li>Vestibulum auctor dapibus neque.</li>
+							<li>Nunc dignissim risus id metus.</li>
+							<li>Cras ornare tristique elit.</li>
+							<li>Ut aliquam sollicitudin leo.</li>
+							<li>Cras iaculis ultricies nulla.</li>
+						</ul>
 					</div>
 				</div>
 
@@ -123,18 +131,9 @@
 										}
 								}else{
 							?>
-									<li class="feed-item feed-expense flex py-1 items-center">
-										<div class="flex px-2 flex-column items-center feed-date">
-											<span class="h5 feed-date-day"></span>
-											<span class="h6 feed-date-month"></span>
-											<span class="h6 feed-date-year"></span>
-										</div>
-										<div class="flex px-2 flex-column mr-auto">
-											<span class="h5 semibold feed-product">Este producto no posee movimientos</span>
-											<span class="h6 feed-metadata"></span>
-										</div>
-										<span class="px-2 feed-amount items-center"></span>
-									</li>
+									<div class="my-5 py-4 center">
+										<span class="h4">No se encontraron movimientos</span>
+									</div>
 							<?php
 								}
 							?>
