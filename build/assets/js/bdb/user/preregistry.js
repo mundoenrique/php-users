@@ -21,7 +21,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var document_id = $$.getElementById('idNumber').value;
 
 			var codeTypeDocument = typeDocument.options[typeDocument.selectedIndex].value;
-			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocument}).descripcion
+			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocument}).abreviatura
 
 			disableInputsForm(true, msgLoading);
 

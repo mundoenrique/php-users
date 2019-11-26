@@ -24,7 +24,7 @@ class NOVO_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->response->code = lang('RES_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+		$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 		$this->response->classIconName = 'ui-icon-closethick';
 		$this->response->data = [
 			'btn1'=> [

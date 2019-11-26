@@ -236,7 +236,7 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->idNumber,
+			"id_ext_per"		=> $dataRequest->idType.$dataRequest->idNumber,
 			"codPais"			=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
@@ -277,7 +277,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->token = $this->session->userdata['token'];
 		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];
-		$this->dataRequest->bean = "2";
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
@@ -591,7 +590,6 @@ class Novo_User_Model extends NOVO_Model
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					return $response->tipoDocumento;
