@@ -20,11 +20,11 @@
 					</div>
 					<div class="help-block"></div>
 				</div>
-				<button id="btn-login" class="btn btn-primary w-100 mt-3 mb-5">
-					<span aria-hidden="true" class="icon-lock h3 yellow"></span>
+				<button id="btn-login" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
+					<span aria-hidden="true" class="icon-lock mr-1 h3 yellow"></span>
 					Ingreso Seguro
 				</button>
-				<a class="block mb-1 h5 primary" href="<?= base_url('recuperaracceso');?>">Recuperar Acceso</a>
+				<a class="block mb-1 h5 primary" href="<?= base_url('recuperaracceso');?>">Recuperar acceso</a>
 				<p class="mb-0 h5">¿No posees usuario? <a class="primary" href="<?= base_url('preregistro');?>">Regístrate</a></p>
 			</form>
 		</div>
