@@ -919,15 +919,8 @@ textarea.form-control {
 
 /* Validator */
 
-.help-block {
-	height: 1rem;
-	margin-left: 4px;
-	font-size: 11px;
-	letter-spacing: .016em;
-	color: var(--danger);
-}
-
-.form-msg{
+.help-block,
+.general-form-msg {
 	height: 1rem;
 	margin-left: 4px;
 	font-size: 11px;

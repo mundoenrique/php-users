@@ -18,7 +18,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-msg"></div>
+				<div id="formMsg" class="general-form-msg"></div>
 				<button id="btn-login" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
 					<span aria-hidden="true" class="icon-lock mr-1 h3 yellow"></span>
 					Ingreso Seguro
