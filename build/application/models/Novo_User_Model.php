@@ -591,11 +591,20 @@ class Novo_User_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->tipoDocumento;
-				break;
+					$this->response->code = 0;
+					$this->response->data = $response->tipoDocumento;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
 			}
 		}
-		return '--';
+		return $this->response;
 	}
 
 
@@ -623,7 +632,6 @@ class Novo_User_Model extends NOVO_Model
 		if(strlen($key) > 8) return substr($key, 0, 8);
 		return $key;
 	}
-
 
 
 }

@@ -168,12 +168,14 @@ class User extends NOVO_Controller {
 		);
 
 		$this->load->model('Novo_User_Model', 'modelLoad');
+		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
 		$this->views = ['user/'.$view];
 		$this->render->setTimerOTP = $this->config->item('setTimerOTP');
 		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
-		$this->render->typeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
+		$this->render->typeDocument = $listTypeDocument->data;
+		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0? 'disabled': '';
 		$this->loadView($view);
 	}
 
@@ -229,9 +231,14 @@ class User extends NOVO_Controller {
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
+		$this->load->model('Novo_User_Model', 'modelLoad');
+		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
+
 		$this->views = ['user/'.$view];
 		$this->render->titlePage = lang('GEN_RECOVER_ACCESS_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
+		$this->render->typeDocument = $listTypeDocument->data;
+		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0? 'disabled': '';
 		$this->loadView($view);
 	}
 
