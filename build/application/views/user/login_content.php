@@ -28,4 +28,50 @@
 			</form>
 		</div>
 	</div>
+
+	<!-- Widgets centro de contacto -->
+	<div id="widgetSupport" class="widget widget-support rounded-top">
+		<div class="widget-header">
+			<h2 class="mb-2 h3 regular center">¿Necesitas ayuda?</h2>
+		</div>
+		<div class="widget-section">
+			<p>Líneas de atención a nivel nacional</p>
+
+			<table class="w-100" cellspacing="0" cellpadding="15">
+				<thead>
+					<tr>
+						<th class="px-0">CIUDAD</th>
+						<th class="px-0 text-right">CONTACTO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Bogotá</td>
+						<td class="text-right">382 00 00</td>
+					</tr>
+					<tr>
+						<td>Barranquilla</td>
+						<td class="text-right"> 350 43 00</td>
+					</tr>
+					<tr>
+						<td>Bucaramanga</td>
+						<td class="text-right">652 55 00</td>
+					</tr>
+					<tr>
+						<td>Cali</td>
+						<td class="text-right">898 00 77</td>
+					</tr>
+					<tr>
+						<td>Medellín</td>
+						<td class="text-right">576 43 30 </td>
+					</tr>
+					<tr>
+						<td>Nivel Nacional </td>
+						<td class="text-right">018000 518 877 </td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
 </div>

@@ -3210,6 +3210,21 @@ a.ui-button:active,
 	min-height: calc(100vh - 2.75rem);
 }
 
+.widget-support {
+	position: fixed;
+	right: 20px;
+	bottom: -260px;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	overflow: hidden;
+	opacity: .3;
+	transition: all .3s ease 0s;
+}
+.widget-support:hover {
+	bottom: 0px;
+	opacity: 1;
+}
+
 ul.pwd-rules li.pwd-rules-item {
 	margin-bottom: .5rem;
 	font-size: 11px;
