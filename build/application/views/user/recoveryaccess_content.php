@@ -29,6 +29,16 @@
 								<input id="email" class="form-control" type="email" name="email"  placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
+							<div class="form-group col-lg-3">
+								<label for="typeDocument">Tipo de Documento</label><br>
+								<select id="typeDocument" class="custom-select form-control" name="typeDocument">
+									<option selected="" value="0">Seleccione</option>
+									<?php foreach ($typeDocument as $row) {?>
+									<option value="<?= $row->id;?>"><?= $row->descripcion;?></option>
+									<?php }?>
+								</select>
+								<div class="help-block"></div>
+							</div>
 							<div class="form-group col-lg-4">
 								<label for="idNumber">Documento de Identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
