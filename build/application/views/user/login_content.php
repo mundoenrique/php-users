@@ -35,9 +35,9 @@
 			<h2 class="mb-2 h3 regular center">¿Necesitas ayuda?</h2>
 		</div>
 		<div class="widget-section">
-			<p>Líneas de atención a nivel nacional</p>
+			<p class="mb-1">Líneas de atención a nivel nacional</p>
 
-			<table class="w-100" cellspacing="0" cellpadding="15">
+			<table class="w-100">
 				<thead>
 					<tr>
 						<th class="px-0">CIUDAD</th>
