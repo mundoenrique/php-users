@@ -149,7 +149,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 			callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response)
 			{
-				console.log(response);
 			})
 
 		});

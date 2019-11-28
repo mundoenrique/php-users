@@ -156,7 +156,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('codeOTP').disabled = true;
 
 			$$.getElementById('resendCode').addEventListener('click', function(){
-				console.log('solicitando el nuevo código....');
 				disableInputsForm(true, msgLoading);
 				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 				{

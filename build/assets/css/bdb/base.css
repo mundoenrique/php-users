@@ -354,7 +354,7 @@ textarea.form-control {
 	transition: all .1s ease-in-out;
 }
 
-.custom-select:hover {
+.custom-select:hover:not(:disabled) {
 	display: inline-block;
 	padding-right: 1.75rem;
 	background: rgba(255,255,255,1) url("../../img/bdb/icon-chevron_down_blue.svg") right .75rem center / 14px 14px no-repeat;
@@ -919,15 +919,8 @@ textarea.form-control {
 
 /* Validator */
 
-.help-block {
-	height: 1rem;
-	margin-left: 4px;
-	font-size: 11px;
-	letter-spacing: .016em;
-	color: var(--danger);
-}
-
-.form-msg{
+.help-block,
+.general-form-msg {
 	height: 1rem;
 	margin-left: 4px;
 	font-size: 11px;
@@ -3237,24 +3230,19 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	width: 55px;
 	height: 18.6px;
 }
-.dashboard-item .item-network {
-	right: 20px;
-	bottom: 20px;
-	width: 50px;
-	height: 16.9px;
-}
 .product-presentation .item-network {
 	right: 16px;
 	bottom: 16px;
 
 }
-.item-network.maestro {
+
+.maestro {
 	background: transparent url("../../img/bdb/logo_maestro.svg") no-repeat center / cover;
 }
-.item-network.mastercard {
+.mastercard {
 	background: transparent url("../../img/bdb/logo_mastercard.svg") no-repeat center / cover;
 }
-.item-network.visa {
+.visa {
 	background: transparent url("../../img/bdb/logo_visa.svg") no-repeat center / cover;
 }
 
@@ -3299,6 +3287,11 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
 	z-index: 1;
+}
+
+.item-info.maestro {
+	background-position: bottom 20px right 20px;
+	background-size: 55px;
 }
 
 .dashboard-item:hover .item-info {
