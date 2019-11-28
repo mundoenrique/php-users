@@ -71,7 +71,6 @@
 		</p>
 		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-			<!-- <span id="validation" class="h5 align-middle"></span> -->
       <div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button type="button" id="cancel" class="btn btn-small btn-link"></button>
 				<button type="button" id="accept" class="btn btn-small btn-loading btn-primary"></button>

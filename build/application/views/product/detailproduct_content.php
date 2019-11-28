@@ -11,7 +11,6 @@
 			<div class="pt-3">
 				<div class="flex items-center justify-between mb-2">
 					<div class="product-presentation relative mr-4">
-						<? log_message("info", "prueba===> ". json_encode($data)); ?>
 						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
