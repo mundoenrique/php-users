@@ -152,7 +152,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.$dataRequest->id_ext_per;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'-'.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
 		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocument;
@@ -577,8 +577,8 @@ class Novo_User_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO User Model: loadTypeDocument method Initialized');
 
-
-		$this->className = 'com.novo.objects.MO.TipoDocumentoMO';
+		//$this->className = 'com.novo.objects.MO.TipoDocumentoMO';
+		$this->className = 'String.class';
 
 		$this->dataAccessLog->modulo = 'validar cuenta';
 		$this->dataAccessLog->function = 'lista tipo de documento';
@@ -586,6 +586,8 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = '';
 
 		$this->dataRequest->idOperation = '119';
+		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->bean = ucwords($this->config->item('country'));
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {

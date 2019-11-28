@@ -31,6 +31,7 @@ $lang['RESP_CODEOTP'] = 'Por favor introduzca el código verificador:';
 $lang['RESP_REGISTRED_USER'] = 'Usuario regsitrado.';
 $lang['RESP_CODEOTP_INVALID'] = 'Código de verificación inválido.';
 $lang['RESP_EMPTY_LIST'] = 'No se obtuvo el listado.';
+$lang['RESP_EMPTY_LIST_PRODUCTS'] = 'No posee productos registrados.';
 $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Hemos registrado exitosamente sus datos. Puede acceder al sistema para disfrutar de nuestros servicios.';
 
 

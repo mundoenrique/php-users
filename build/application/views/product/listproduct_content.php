@@ -1,3 +1,4 @@
+
 <div id="dashboard" class="dashboard-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -15,28 +16,36 @@
 						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
 					<?php
-						foreach($data as $row){
+						if (count($data) > 0 and $data !== '--'){
 					?>
-						<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>" >
-							<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-							<div class="item-info p-2 h5 tertiary bg-white">
-								<div class="item-network <?= $row['marca'];?>"></div>
-								<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
-								<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
-								<p class="item-balance mb-0 h6 light text">
-									<?= $row['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
-									<?= strval(number_format($row['availableBalance'],2,',','.'));?>
-								</p>
+						<?php
+							foreach($data as $row){
+						?>
+							<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>" >
+								<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+								<div class="item-info p-2 h5 tertiary bg-white">
+									<div class="item-network <?= $row['marca'];?>"></div>
+									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
+									<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
+									<p class="item-balance mb-0 h6 light text">
+										<?= $row['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
+										<?= strval(number_format($row['availableBalance'],2,',','.'));?>
+									</p>
+								</div>
 							</div>
-						</div>
+						<?php
+							}
+						?>
+							<div class="dashboard-item mx-1"></div>
+							<div class="dashboard-item mx-1"></div>
+							<div class="dashboard-item mx-1"></div>
+					<?php
+						}else{
+					?>
+						<h3  class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS');?></h3>
 					<?php
 						}
 					?>
-
-					<div class="dashboard-item mx-1"></div>
-					<div class="dashboard-item mx-1"></div>
-					<div class="dashboard-item mx-1"></div>
-
 				</div>
 			</div>
 		</section>

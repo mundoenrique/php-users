@@ -18,7 +18,7 @@
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
-										<select id="typeDocument" class="custom-select form-control" name="typeDocument" >
+										<select id="typeDocument" class="custom-select form-control" name="typeDocument" <?=$statusListTypeDocument;?>>
 											<option selected="" value="0"><?= $typeDocument->descripcion;?></option>
 										</select>
 										<div class="help-block"></div>
@@ -43,7 +43,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="telephoneNumber">Número de teléfono</label>
+								<label for="telephoneNumber">Número de Teléfono</label>
 								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
@@ -68,7 +68,7 @@
 						<hr class="separador-one">
 						<div class="flex items-center justify-end pt-3">
 							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnValidar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+							<button id="btnValidar" class="btn btn-small btn-loading btn-primary" type="submit" <?=$statusListTypeDocument;?>>Continuar</button>
 							<button id="btnVerifyOTP" class="btn btn-small btn-loading btn-primary none" type="submit">Continuar</button>
 						</div>
 

@@ -24,7 +24,7 @@ class Product extends NOVO_Controller {
 		}
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1){
+		if (count($dataProduct) == 1 and $dataProduct !== '--'){
 			redirect("/detalle");
 		}
 
@@ -57,6 +57,10 @@ class Product extends NOVO_Controller {
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
+
+		if (count($data) < 1){
+			return '--';
+		}
 
 		$dataRequeried = [];
 		foreach($data as $row){
@@ -109,7 +113,7 @@ class Product extends NOVO_Controller {
 		$listProducts = $this->session->flashdata('listProducts');
 		$this->session->set_flashdata('listProducts', $listProducts);
 
-		if (count($listProducts == 1))
+		if (count($listProducts) == 1)
 		{
 			$dataProduct = $listProducts[0];
 		}else
@@ -155,9 +159,7 @@ class Product extends NOVO_Controller {
 
 	function transforNumber ($transforNumber)
 	{
-		$transforNumber = str_replace('.',' ', $transforNumber);
-		$transforNumber = str_replace(',','.', $transforNumber);
-		return (float)str_replace(' ','', $transforNumber);
+		return (float)str_replace(',','', $transforNumber);
 	}
 
 	function totalInTransactions($transactions)
