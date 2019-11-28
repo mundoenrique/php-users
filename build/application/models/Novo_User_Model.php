@@ -236,7 +236,7 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->idType.$dataRequest->idNumber,
+			"id_ext_per"		=> $dataRequest->idType.'-'.$dataRequest->idNumber,
 			"codPais"			=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
@@ -586,7 +586,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = '';
 
 		$this->dataRequest->idOperation = '119';
-		$this->dataRequest->pais = 'Global';
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {

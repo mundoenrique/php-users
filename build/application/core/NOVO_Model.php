@@ -34,7 +34,7 @@ class NOVO_Model extends CI_Model {
 			]
 		];
 
-		$this->country = $this->session->userdata('countrySess') ?: $this->config->item('country');
+		$this->country = $this->session->userdata('pais') ?: $this->config->item('country');
 		$this->countryUri = $this->session->userdata('countryUri');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ?: '';
