@@ -82,7 +82,6 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataRequest->noTarjeta = $dataRequest['noTarjeta'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->pais = $this->session->userdata('pais');
 
 		log_message("info", "Request Detail Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
