@@ -161,6 +161,18 @@ function validateForms(form, options) {
 		return value !== '0';
 	 }, "Este campo es obligatorio.");
 
+	jQuery.validator.addMethod("pinNew1", function(value,element){
+		if(element.value.length>0 && element.value == $("#newPin").val())
+			return true;
+		else return false;
+	}, "Debe ser igual al nuevo PIN");
+
+	jQuery.validator.addMethod("pinNew2", function(value, element) {
+		if(element.value.length>0 && element.value == $("#pinCurrent").val())
+			return false;
+		else return true;
+	}, "El nuevo PIN no debe ser igual a su PIN anterior");
+
 	form.validate({
 		rules: {
 			gender: {required: true},
@@ -211,7 +223,10 @@ function validateForms(form, options) {
 			protection: { required: true },
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
-			recovery: { required: true }
+			recovery: { required: true },
+			pinCurrent: { required: true, number: true, minlength: 4 },
+      newPin: { required: true, number: true, minlength: 4, "pinNew2": true },
+      confirmPin: { required: true, number: true, "pinNew1": true }
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

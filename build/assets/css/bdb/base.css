@@ -3365,7 +3365,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	margin: 0 auto;
 }
 
-.service-content {
+.services-content {
 	width: 480px;
 }
 
@@ -3376,4 +3376,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .services-item i{
 	font-size: 2rem !important;
+}
+
+.services-item:hover i,
+.services-item.active i {
+	color: var(--primary);
 }
