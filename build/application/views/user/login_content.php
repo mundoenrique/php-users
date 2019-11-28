@@ -8,7 +8,6 @@
 				<div class="form-group">
 					<label for="username">Usuario</label>
 					<input id="username" name="loginUsername" class="form-control" type="text">
-					<div class="help-block"></div>
 				</div>
 				<div class="form-group">
 					<label for="userpwd">Contraseña</label>
@@ -18,8 +17,8 @@
 							<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 						</div>
 					</div>
-					<div class="help-block"></div>
 				</div>
+				<div class="form-msg"></div>
 				<button id="btn-login" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
 					<span aria-hidden="true" class="icon-lock mr-1 h3 yellow"></span>
 					Ingreso Seguro

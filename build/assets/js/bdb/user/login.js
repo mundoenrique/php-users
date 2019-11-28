@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	btnLogin.addEventListener("click", function(e) {
 		e.preventDefault();
 
+		document.getElementById("userpwd").type = 'password';
+
 		var credentialUser = getCredentialsUser();
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
@@ -97,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function(){
 			}else{
 				validateLogin({user: credentialUser, text: txtBtnLogin});
 			}
+		} else {
+			$(".form-msg").html('Todos los campos son requeridos');
 		}
 	});
 

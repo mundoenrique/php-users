@@ -927,6 +927,14 @@ textarea.form-control {
 	color: var(--danger);
 }
 
+.form-msg{
+	height: 1rem;
+	margin-left: 4px;
+	font-size: 11px;
+	letter-spacing: .016em;
+	color: var(--danger);
+}
+
 .form-control.has-error {
 	border-color: var(--danger);
 }
