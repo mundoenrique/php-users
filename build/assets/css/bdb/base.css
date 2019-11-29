@@ -3252,13 +3252,16 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .maestro {
-	background: transparent url("../../img/bdb/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/maestro.png") no-repeat center / cover;
 }
 .mastercard {
-	background: transparent url("../../img/bdb/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/mastercard.png") no-repeat center / cover;
 }
 .visa {
-	background: transparent url("../../img/bdb/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/visa.png") no-repeat center / cover;
+}
+.visa-electron {
+	background: transparent url("../../img/bdb/marcas/visa-electron.png") no-repeat center / cover;
 }
 
 .dashboard-item {
@@ -3306,9 +3309,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .item-info.maestro,
 .item-info.mastercard,
-.item-info.visa {
-	background-position: bottom 20px right 20px;
-	background-size: 55px;
+.item-info.visa,
+.visa-electron {
+	background-position: bottom right;
+	background-size: 80px;
 }
 
 .dashboard-item:hover .item-info {
