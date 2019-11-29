@@ -182,21 +182,14 @@
 	</div>
 </div>
 <?php
-	$data = json_encode([
-		'noTarjeta' => $data['noTarjeta'],
-		'totalIncomeMovements' => $totalIncomeMovements,
-		'totalExpenseMovements' => $totalExpenseMovements
-	]);
-
-	if (isset($totalIncomePendingTransactions)) {
-		$data['totalIncomePendingTransactions'] = $totalIncomePendingTransactions;
-	}
-
-	if (isset($totalExpensePendingTransactions)) {
-		$data['totalExpensePendingTransactions'] = $totalExpensePendingTransactions;
-	}
+	$dataForm = new stdClass();
+	$dataForm->noTarjeta = $data['noTarjeta'];
+	$dataForm->totalIncomeMovements = $totalIncomeMovements;
+	$dataForm->totalExpenseMovements = $totalExpenseMovements;
+	$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions)? $totalIncomePendingTransactions: 0;
+	$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions)? $totalExpensePendingTransactions: 0;
 
 ?>
 <script>
-	var data = <?= $data;?>
+	var data = <?= json_encode((array)$dataForm);?>
 </script>
