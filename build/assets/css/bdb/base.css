@@ -3304,7 +3304,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	z-index: 1;
 }
 
-.item-info.maestro {
+.item-info.maestro,
+.item-info.mastercard,
+.item-info.visa {
 	background-position: bottom 20px right 20px;
 	background-size: 55px;
 }
