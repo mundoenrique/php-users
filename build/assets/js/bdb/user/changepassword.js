@@ -4,9 +4,31 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnChangePassword');
+	var btnShowPwd = document.getElementById('pwd-addon');
+	var btnShowNewPwd = document.getElementById('pwd-addon');
 	btnTrigger.disabled = true;
 
 	//core
+	btnShowPwd.style.cursor = "pointer";
+	btnShowPwd.addEventListener("click", function() {
+		var x = document.getElementById("currentPassword");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	});
+
+	btnShowNewPwd.style.cursor = "pointer";
+	btnShowNewPwd.addEventListener("click", function() {
+		var x = document.getElementById("newPassword");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	});
+
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 

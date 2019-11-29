@@ -17,14 +17,24 @@
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
 										<label for="currentPassword">Clave Actual</label>
-										<input type="password" class="form-control" id="currentPassword" name="currentPassword">
+										<div class="input-group">
+											<input type="password" class="form-control" id="currentPassword" name="currentPassword">
+											<div class="input-group-append">
+												<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+											</div>
+										</div>
 										<div class="help-block"></div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
 										<label for="newPassword">Contraseña</label>
-										<input type="password" class="form-control" id="newPassword" name="newPassword">
+										<div class="input-group">
+											<input type="password" class="form-control" id="newPassword" name="newPassword">
+											<div class="input-group-append">
+												<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+											</div>
+										</div>
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-6">
