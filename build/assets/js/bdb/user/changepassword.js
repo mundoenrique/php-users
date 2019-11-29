@@ -5,33 +5,23 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnChangePassword');
 	var btnShowPwd = document.getElementById('pwd-addon');
-	var btnShowNewPwd = document.getElementById('pwd-addon');
 	btnTrigger.disabled = true;
 
 	//core
-	btnShowPwd.style.cursor = "pointer";
 	btnShowPwd.addEventListener("click", function() {
-		var x = document.getElementById("currentPassword");
-		if (x.type === "password") {
-			x.type = "text";
+		var x = $(this).closest('.input-group').find('input');
+		if (x.prop("type") == 'password') {
+			x.prop("type", "text");
 		} else {
-			x.type = "password";
-		}
-	});
-
-	btnShowNewPwd.style.cursor = "pointer";
-	btnShowNewPwd.addEventListener("click", function() {
-		var x = document.getElementById("newPassword");
-		if (x.type === "password") {
-			x.type = "text";
-		} else {
-			x.type = "password";
+			x.prop("type", "password");
 		}
 	});
 
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 
+		document.getElementById("currentPassword").type = 'password';
+		document.getElementById("newPassword").type = 'password';
 		var form = $('#formChangePassword');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {

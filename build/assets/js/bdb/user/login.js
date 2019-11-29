@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	// core
 	btnShowPwd.style.cursor = "pointer";
 	btnShowPwd.addEventListener("click", function() {
-		var x = document.getElementById("userpwd");
-		if (x.type === "password") {
-			x.type = "text";
+		var x = $(this).closest('.input-group').find('input');
+		if (x.prop("type") == 'password') {
+			x.prop("type", "text");
 		} else {
-			x.type = "password";
+			x.prop("type", "password");
 		}
 	});
 
