@@ -34,7 +34,7 @@
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
-										<select id="typeDocument" class="custom-select form-control" name="typeDocument">
+										<select id="typeDocument" class="custom-select form-control" name="typeDocument" <?= $statusListTypeDocument;?>>
 											<option selected="" value="0"><?= $typeDocument->descripcion;?></option>
 										</select>
 										<div class="help-block"></div>
@@ -57,7 +57,7 @@
 						<hr class="separador-one mt-3">
 						<div class="flex items-center justify-end pt-3">
 							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+							<button id="btnContinuar" class="btn btn-primary" type="submit" <?= $statusListTypeDocument;?>>Continuar</button>
 						</div>
 					</form>
 				</div>

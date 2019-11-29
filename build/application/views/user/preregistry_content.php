@@ -18,7 +18,7 @@
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
-										<select id="typeDocument" class="custom-select form-control" name="typeDocument" <?=$statusListTypeDocument;?>>
+									<select id="typeDocument" class="custom-select form-control" name="typeDocument" <?=$statusListTypeDocument;?>>
 											<option selected="" value="0"><?= $typeDocument->descripcion;?></option>
 										</select>
 										<div class="help-block"></div>
@@ -71,8 +71,6 @@
 							<button id="btnValidar" class="btn btn-small btn-loading btn-primary" type="submit" <?=$statusListTypeDocument;?>>Continuar</button>
 							<button id="btnVerifyOTP" class="btn btn-small btn-loading btn-primary none" type="submit">Continuar</button>
 						</div>
-
-
 					</form>
 				</div>
 			</div>
