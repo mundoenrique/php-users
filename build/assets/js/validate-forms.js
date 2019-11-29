@@ -106,6 +106,10 @@ function validateForms(form, options) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
+	jQuery.validator.addMethod("exactlength", function(value, element, param) {
+		return this.optional(element) || value.length == param;
+	 });
+
 	jQuery.validator.addMethod("emailValid",function(value, element) {
 		return /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
 	});
@@ -119,8 +123,6 @@ function validateForms(form, options) {
 			return false;
 		else return true;
 	}, "Teléfono Otro está repetido");
-
-
 
 	jQuery.validator.addMethod("numberEqual2", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#mobilePhone").val() || element.value == $("#otherPhoneNum").val()))
@@ -175,11 +177,11 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
-			gender: {required: true},
-			typeDocument: {required: true, "selectRequired": true},
-			codeOTP: {required: true},
-			nitBussines: {required: true, number: true,},
-			currentPassword: {required: true},
+			gender: { required: true},
+			typeDocument: { required: true, "selectRequired": true},
+			codeOTP: { required: true, digits: true, exactlength: 5 },
+			nitBussines: { required: true, number: true,},
+			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
 			confirmPassword: { required: true, equalTo: "#newPassword" },
 			idNumber: { required: true, number: true },
@@ -187,7 +189,7 @@ function validateForms(form, options) {
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
-			firstName: {required: true, "spanishAlphabetical": true},
+			firstName: { required: true, "spanishAlphabetical": true},
 			middleName: { "spanishAlphabetical": true },
 			lastName: { required: true, "spanishAlphabetical": true },
 			secondSurname: { "spanishAlphabetical": true },

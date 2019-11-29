@@ -58,7 +58,7 @@
 						<div id="verification" class="none">
 							<hr class="separador-one mb-3">
 							<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
-							<div class="row form-group col-lg-3">
+							<div class="row form-group col-lg-4">
 								<label for="codeOTP">Codigo de Validación</label>
 								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 								<div class="help-block"></div>
