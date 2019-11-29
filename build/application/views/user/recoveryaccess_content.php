@@ -1,3 +1,4 @@
+
 <div id="registry" class="registro-content h-100 bg-white">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<header class="">
@@ -65,3 +66,11 @@
 		</section>
 	</div>
 </div>
+<?php
+	$data =json_encode([
+		'typeDocument' => $typeDocument
+	]);
+?>
+<script>
+	var dataForm = <?= $data;?>;
+</script>

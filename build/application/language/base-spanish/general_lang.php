@@ -5,6 +5,7 @@ $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_BTN_VERIFY'] = 'Verificar';
+$lang['GEN_PASSRECOVERY_TITLE'] = 'Cambio de contraseña';
 //ENTERPRISE WIDGET
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR']= 'Seleccionar otra empresa';
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS']= 'Conozca otros programas';

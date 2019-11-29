@@ -131,7 +131,7 @@ class User extends NOVO_Controller {
 
 		$this->views = ['user/'.$view];
 		$this->render->reason = $reasonOperation === 't'? lang('PASSWORD_TEMPORAl_KEY'): lang('PASSWORD_EXPIED_KEY');
-		$this->render->titlePage = lang('PASSRECOVERY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 	/**

@@ -130,7 +130,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'rates':
 				$auth = TRUE;
 				break;
-			case 'change-password':
+			case 'changepassword':
 				$auth = ($this->session->flashdata('changePassword'));
 				break;
 			case 'products':
