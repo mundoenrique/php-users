@@ -23,8 +23,7 @@
 						?>
 							<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['noTarjeta'];?>" >
 								<img class="item-img active" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-								<div class="item-info p-2 h5 tertiary bg-white">
-									<div class="item-network <?= $row['marca'];?>"></div>
+								<div class="item-info <?= $row['marca'];?> p-2 h5 tertiary bg-white">
 									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
 									<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 									<p class="item-balance mb-0 h6 light text">
