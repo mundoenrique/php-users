@@ -3239,18 +3239,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	color: var(--danger);
 }
 
-.item-network {
-	position: absolute;
-	z-index: 2;
-	width: 55px;
-	height: 18.6px;
-}
-.product-presentation .item-network {
-	right: 16px;
-	bottom: 16px;
-
-}
-
 .maestro {
 	background: transparent url("../../img/bdb/marcas/maestro.png") no-repeat center / cover;
 }
@@ -3262,6 +3250,26 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 .visa-electron {
 	background: transparent url("../../img/bdb/marcas/visa-electron.png") no-repeat center / cover;
+}
+
+.item-network {
+	position: absolute;
+	z-index: 2;
+	width: 80px;
+	height: 64px;
+}
+
+.product-presentation .item-network {
+	right: 0;
+	bottom: 4px;
+	background-size: 80px;
+}
+
+.product-presentation .item-network.visa {
+	bottom:  -8px;
+}
+.product-presentation .item-network.visa-electron {
+	bottom: -4px;
 }
 
 .dashboard-item {
@@ -3283,10 +3291,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	width: 234px;
 	margin-top: 20px;
 	margin-left: 10px;
-	-webkit-transition: all 0.25s;
-	-moz-transition: all 0.25s;
-	-o-transition: all 0.25s;
-	transition: all 0.25s;
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
 	z-index: 0;
 }
 
@@ -3300,10 +3308,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	margin-top: 70px;
 	border-bottom: 2px solid var(--bg-color);
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
 	z-index: 1;
 }
 
