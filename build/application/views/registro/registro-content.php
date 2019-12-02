@@ -175,27 +175,12 @@ switch($skin){
                   <label for="lugar-nacimiento">Lugar de Nacimiento</label>
                   <input maxlength="15" id="lugar-nacimiento" name="lugar_nacimiento" type="text" />
                 </li>
-                <li class="field-group-item fecha-nacimiento">
-                  <label>Fecha de Nacimiento</label>
-                  <input maxlength="2" id="dia" name="dia" type="text" placeholder="Dia" />
-                  <select name="mes" id="mes">
-                    <option value="">Seleccione</option>
-                    <option value="01">Enero</option>
-                    <option value="02">Febrero</option>
-                    <option value="03">Marzo</option>
-                    <option value="04">Abril</option>
-                    <option value="05">Mayo</option>
-                    <option value="06">Junio</option>
-                    <option value="07">Julio</option>
-                    <option value="08">Agosto</option>
-                    <option value="09">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
-                  </select>
-                  <input maxlength="4" id="ano" name="ano" type="text" placeholder="Año" />
-                  <input type="hidden" id="fecha-de-nacimiento" name="fecha_nacimiento">
-                </li>
+								<label for="filter-range-from">Fecha de Nacimiento</label>
+									<div class="field-prepend">
+									<span aria-hidden="true" class="icon-calendar"></span>
+									<input  id="fecha-de-nacimiento-new" name="fecha-de-nacimiento-new" class="field-small" maxlength="10"
+										placeholder="DD/MM/AAAA" autocomplete="off">
+									</div>
               </ul>
             </div>
             <ul class="field-group four-segments radio-sexo">
