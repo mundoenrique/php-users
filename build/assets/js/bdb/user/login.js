@@ -55,11 +55,11 @@ document.addEventListener('DOMContentLoaded', function(){
 	// Mostrar/Ocultar Contraseña
 	btnShowPwd.style.cursor = "pointer";
 	btnShowPwd.addEventListener("click", function() {
-		var x = $(this).closest('.input-group').find('input');
-		if (x.prop("type") == 'password') {
-			x.prop("type", "text");
+		var inputpwd = this.closest('.input-group').querySelector('input');
+		if (inputpwd.type == 'password') {
+			inputpwd.type = "text";
 		} else {
-			x.prop("type", "password");
+			inputpwd.type= "password";
 		}
 	});
 

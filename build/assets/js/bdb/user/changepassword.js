@@ -17,17 +17,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 	for (i = 0; i < btnShowPwd.length; i++) {
 		btnShowPwd[i].style.cursor = "pointer";
 		btnShowPwd[i].addEventListener("click", function() {
-			var x = $(this).closest('.input-group').find('input');
-			if (x.prop("type") == 'password') {
-				x.prop("type", "text");
+			var inputpwd = this.closest('.input-group').querySelector('input');
+			if (inputpwd.type == 'password') {
+				inputpwd.type = "text";
 			} else {
-				x.prop("type", "password");
+				inputpwd.type= "password";
 			}
 		});
 	}
 
 	// Deshabilita copiar, cortar y pegar en inputs
-	inputCurrentPassword.oncut = inputCurrentPassword.oncopy = inputCurrentPassword.onpaste =
 	inputNewPassword.oncut = inputNewPassword.oncopy = inputNewPassword.onpaste =
 	inputConfirmPassword.oncut = inputConfirmPassword.oncopy = inputConfirmPassword.onpaste = function(e) {
 		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
@@ -37,8 +36,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 
-		$$.getElementById("currentPassword").type = 'password';
-		$$.getElementById("newPassword").type = 'password';
+		inputCurrentPassword.type = 'password';
+    inputNewPassword.type = 'password';
 
 		var form = $('#formChangePassword');
 		validateForms(form, {handleMsg: false});
