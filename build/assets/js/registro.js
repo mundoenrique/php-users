@@ -799,7 +799,6 @@ $(function(){
 		form=$("#form-usuario");
 
 		birthDate			= $("#fecha-de-nacimiento-new").val();
-		console.log(birthDate);
 
 		if(form.valid() == true) {
 			$("#load_reg").show();
