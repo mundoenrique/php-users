@@ -79,7 +79,9 @@ class ServiceProduct extends NOVO_Controller {
 				"ledgerBalance" => "--",
 				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
-				"nom_plastico" => ucwords(strtolower($row->nom_plastico))
+				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
+				"availableServices" => $row->services,
+				"generatedPin" => $row->pinGeneradoUsuario
 			]);
 		}
 		$this->session->set_flashdata('listProducts', $dataRequeried);

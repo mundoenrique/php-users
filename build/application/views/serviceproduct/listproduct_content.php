@@ -1,4 +1,3 @@
-
 <div id="dashboard" class="dashboard-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">

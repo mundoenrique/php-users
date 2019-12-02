@@ -1,3 +1,6 @@
+
+<?= var_dump($data);?>
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -40,10 +43,7 @@
 							</li>
 						</ul>
 					</div>
-
 				</div>
-
-
 			</div>
 		</section>
 	</div>
