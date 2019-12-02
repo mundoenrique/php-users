@@ -5,10 +5,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
   //vars
   var options = $$.querySelectorAll(".services-item");
+  var generateOption = $$.getElementById('generate');
+  var changeOption = $$.getElementById('change');
   var lockOption = $$.getElementById('lock');
   var replaceOption = $$.getElementById('replace');
-  var keyOption = $$.getElementById('key');
-  var recoverOption = $$.getElementById('recover');
 
   var lockForm = $$.getElementById('lockAcount');
   var keyForm = $$.getElementById('changeKey');
@@ -55,7 +55,7 @@ $$.addEventListener('DOMContentLoaded', function(){
     bloqRepTitle.textContent = "Solicitud de reposición";
   });
 
-	keyOption.addEventListener('click',function(e){
+	changeOption.addEventListener('click',function(e){
     var i;
     for (i = 0; i < options.length; i++) {
       options[i].classList.remove("active");
@@ -68,7 +68,7 @@ $$.addEventListener('DOMContentLoaded', function(){
     keyForm.classList.remove("none");
   });
 
-	recoverOption.addEventListener('click',function(e){
+	generateOption.addEventListener('click',function(e){
     var i;
     for (i = 0; i < options.length; i++) {
       options[i].classList.remove("active");
