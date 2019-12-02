@@ -35,9 +35,28 @@ var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', u
 var strCountry = settingsCountry[country];
 var msgLoading = '<span class="spinner-border spinner-border-sm white" role="status" aria-hidden="true"></span>';
 
+
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
 $('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
+
+(function() {
+	var actualPage = window.location.pathname.split("/").pop();
+	var itemsMenu = $$.getElementsByClassName('nav-item');
+	var structureMenu = {
+		atencioncliente: 'customerSupport',
+		listaproducto: 'customerSupport',
+		vistaconsolidada: 'listProduct',
+		detalle: 'listProduct'
+	}
+
+	for (var i = 0; i < itemsMenu.length; i++) {
+		itemsMenu[i].classList.remove('active');
+	}
+
+	$$.getElementById(structureMenu[actualPage]).classList.add('active');
+
+})();
 
 function callNovoCore(verb, who, where, data, _response_) {
 

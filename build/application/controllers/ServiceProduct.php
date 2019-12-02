@@ -50,6 +50,7 @@ class ServiceProduct extends NOVO_Controller {
 		$this->views = ['serviceproduct/'.$view];
 		$this->render->data = $dataProduct;
 		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
