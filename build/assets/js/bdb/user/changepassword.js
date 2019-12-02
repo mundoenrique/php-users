@@ -3,12 +3,15 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
-	var btnTrigger = $$.getElementById('btnChangePassword');
-	var btnShowPwd = document.getElementsByClassName('input-group-text');
-	var i;
-	btnTrigger.disabled = true;
+	var btnTrigger = $$.getElementById('btnChangePassword'),
+	btnShowPwd = document.getElementsByClassName('input-group-text'),
+	inputCurrentPassword = $$.getElementById('currentPassword'),
+	inputNewPassword = $$.getElementById('newPassword'),
+	inputConfirmPassword = $$.getElementById('confirmPassword'),
+	i;
 
 	//core
+	btnTrigger.disabled = true;
 
 	// Mostrar/Ocultar Contraseña
 	for (i = 0; i < btnShowPwd.length; i++) {
@@ -22,6 +25,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 	}
+
+	// Deshabilita copiar, cortar y pegar en inputs
+	inputCurrentPassword.oncut = inputCurrentPassword.oncopy = inputCurrentPassword.onpaste =
+	inputNewPassword.oncut = inputNewPassword.oncopy = inputNewPassword.onpaste =
+	inputConfirmPassword.oncut = inputConfirmPassword.oncopy = inputConfirmPassword.onpaste = function(e) {
+		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
+		return false;
+	};
 
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
