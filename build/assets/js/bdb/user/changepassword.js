@@ -4,24 +4,31 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnTrigger = $$.getElementById('btnChangePassword');
-	var btnShowPwd = document.getElementById('pwd-addon');
+	var btnShowPwd = document.getElementsByClassName('input-group-text');
+	var i;
 	btnTrigger.disabled = true;
 
 	//core
-	btnShowPwd.addEventListener("click", function() {
-		var x = $(this).closest('.input-group').find('input');
-		if (x.prop("type") == 'password') {
-			x.prop("type", "text");
-		} else {
-			x.prop("type", "password");
-		}
-	});
+
+	// Mostrar/Ocultar Contraseña
+	for (i = 0; i < btnShowPwd.length; i++) {
+		btnShowPwd[i].style.cursor = "pointer";
+		btnShowPwd[i].addEventListener("click", function() {
+			var x = $(this).closest('.input-group').find('input');
+			if (x.prop("type") == 'password') {
+				x.prop("type", "text");
+			} else {
+				x.prop("type", "password");
+			}
+		});
+	}
 
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 
-		document.getElementById("currentPassword").type = 'password';
-		document.getElementById("newPassword").type = 'password';
+		$$.getElementById("currentPassword").type = 'password';
+		$$.getElementById("newPassword").type = 'password';
+
 		var form = $('#formChangePassword');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {

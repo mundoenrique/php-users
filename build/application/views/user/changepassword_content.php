@@ -1,5 +1,5 @@
 
-<div id="registry" class="registro-content h-100 bg-white">
+<div id="changepassword" class="changepassword-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="primary h0">Cambiar Clave</h1>
@@ -21,7 +21,7 @@
 										<div class="input-group">
 											<input type="password" class="form-control" id="currentPassword" name="currentPassword">
 											<div class="input-group-append">
-												<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+												<span id="pwdAddon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 											</div>
 										</div>
 										<div class="help-block"></div>
@@ -33,7 +33,7 @@
 										<div class="input-group">
 											<input type="password" class="form-control" id="newPassword" name="newPassword">
 											<div class="input-group-append">
-												<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+												<span id="pwdAddon2" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 											</div>
 										</div>
 										<div class="help-block"></div>
