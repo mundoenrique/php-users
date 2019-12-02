@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	// vars
 	var btnLogin = document.getElementById('btn-login');
 	var txtBtnLogin = btnLogin.innerHTML.trim();
-	var btnShowPwd = document.getElementById('pwd-addon');
+	var btnShowPwd = document.getElementById('pwdAddon');
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -51,13 +51,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 
 	// core
+
+	// Mostrar/Ocultar Contraseña
 	btnShowPwd.style.cursor = "pointer";
 	btnShowPwd.addEventListener("click", function() {
-		var x = $(this).closest('.input-group').find('input');
-		if (x.prop("type") == 'password') {
-			x.prop("type", "text");
+		var inputpwd = this.closest('.input-group').querySelector('input');
+		if (inputpwd.type == 'password') {
+			inputpwd.type = "text";
 		} else {
-			x.prop("type", "password");
+			inputpwd.type= "password";
 		}
 	});
 

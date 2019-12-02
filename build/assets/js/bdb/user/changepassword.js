@@ -3,25 +3,42 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
-	var btnTrigger = $$.getElementById('btnChangePassword');
-	var btnShowPwd = document.getElementById('pwd-addon');
-	btnTrigger.disabled = true;
+	var btnTrigger = $$.getElementById('btnChangePassword'),
+	btnShowPwd = document.getElementsByClassName('input-group-text'),
+	inputCurrentPassword = $$.getElementById('currentPassword'),
+	inputNewPassword = $$.getElementById('newPassword'),
+	inputConfirmPassword = $$.getElementById('confirmPassword'),
+	i;
 
 	//core
-	btnShowPwd.addEventListener("click", function() {
-		var x = $(this).closest('.input-group').find('input');
-		if (x.prop("type") == 'password') {
-			x.prop("type", "text");
-		} else {
-			x.prop("type", "password");
-		}
-	});
+	btnTrigger.disabled = true;
+
+	// Mostrar/Ocultar Contraseña
+	for (i = 0; i < btnShowPwd.length; i++) {
+		btnShowPwd[i].style.cursor = "pointer";
+		btnShowPwd[i].addEventListener("click", function() {
+			var inputpwd = this.closest('.input-group').querySelector('input');
+			if (inputpwd.type == 'password') {
+				inputpwd.type = "text";
+			} else {
+				inputpwd.type= "password";
+			}
+		});
+	}
+
+	// Deshabilita copiar, cortar y pegar en inputs
+	inputNewPassword.oncut = inputNewPassword.oncopy = inputNewPassword.onpaste =
+	inputConfirmPassword.oncut = inputConfirmPassword.oncopy = inputConfirmPassword.onpaste = function(e) {
+		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
+		return false;
+	};
 
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 
-		document.getElementById("currentPassword").type = 'password';
-		document.getElementById("newPassword").type = 'password';
+		inputCurrentPassword.type = 'password';
+    inputNewPassword.type = 'password';
+
 		var form = $('#formChangePassword');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {

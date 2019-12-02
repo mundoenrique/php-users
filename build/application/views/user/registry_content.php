@@ -119,7 +119,7 @@
 										<div class="input-group">
 											<input id="userpwd" class="form-control" type="password" name="userpwd">
 											<div class="input-group-append">
-												<span id="pwd-addon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+												<span id="pwdAddon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 											</div>
 										</div>
 										<div class="help-block"></div>

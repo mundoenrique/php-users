@@ -3396,11 +3396,11 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	cursor: pointer;
 }
 
-.services-item i{
-	font-size: 2rem !important;
+.services-item:hover,
+.services-item.active {
+	color: var(--primary);
 }
 
-.services-item:hover i,
-.services-item.active i {
-	color: var(--primary);
+.services-item i{
+	font-size: 2rem !important;
 }

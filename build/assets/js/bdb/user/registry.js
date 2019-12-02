@@ -7,7 +7,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var inputConfirmUserpwd = $$.getElementById('confirmUserpwd');
 	var btnRegistry = $$.getElementById('btnRegistrar');
 	var maxBirthdayDate = new Date();
-	var btnShowPwd = document.getElementById('pwd-addon');
+	var btnShowPwd = $$.getElementById('pwdAddon');
   maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 
 	//core
@@ -17,19 +17,21 @@ $$.addEventListener('DOMContentLoaded', function(){
 		defaultDate: "-30y"
 	});
 
+	// Mostrar/Ocultar Contraseña
 	btnShowPwd.style.cursor = "pointer";
 	btnShowPwd.addEventListener("click", function() {
-		var x = document.getElementById("userpwd");
-		if (x.type === "password") {
-			x.type = "text";
+		var inputpwd = this.closest('.input-group').querySelector('input');
+		if (inputpwd.type == 'password') {
+			inputpwd.type = "text";
 		} else {
-			x.type = "password";
+			inputpwd.type= "password";
 		}
 	});
 
 	btnRegistrar.addEventListener('click', function(e){
 		e.preventDefault();
 
+		document.getElementById("userpwd").type = 'password';
 		var form = $('#formRegistry');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
