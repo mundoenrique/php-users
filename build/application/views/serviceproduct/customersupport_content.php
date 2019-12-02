@@ -1,4 +1,3 @@
-
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -19,17 +18,17 @@
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata h6"><?= $data['nombre_producto'];?></p>
-						<p class="product-metadata mb-0 h6">NOVOPAYMENT TECNOLOGIA</p>
-						<p class="product-metadata mb-0 h6">EXP. 10/23</p>
+						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
 
 					</div>
 					<div class="product-info-full">
 						<p class="field-tip">Selecciona la operación que deseas realizar</p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
-							<li id="generate" class="list-inline-item services-item center"><i class="icon-key block"></i>Generar <br>PIN</li>
-							<li id="change" class="list-inline-item services-item center"><i class="icon-key block"></i>Cambio <br>de PIN</li>
-							<li id="lock" class="list-inline-item services-item center"><i class="icon-lock block"></i>Bloqueo <br>de cuenta</li>
-							<li id="replace" class="list-inline-item services-item center"><i class="icon-spinner block"></i>Solicitud <br>de reposición</li>
+							<?php
+								foreach ($menuOptionsProduct as $row) {
+									echo $row;
+								}
+							?>
 						</ul>
 					</div>
 				</div>

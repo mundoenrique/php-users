@@ -1,6 +1,11 @@
 /* Sections
 ========================================================================== */
 
+
+.is-disabled {
+	background-color: #555;
+}
+
 body {
 	display: flex;
 	flex-direction: column;

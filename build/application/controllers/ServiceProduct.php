@@ -139,9 +139,37 @@ class ServiceProduct extends NOVO_Controller {
 			$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
 			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
 		}
+		$dataProduct['availableServices'] = ['117'];
+		$optionsAvailables = [];
+		$menuOptionsProduct = [
+			'117' => [
+				'id' => 'generate',
+				'text' => "<i class='icon-key block'></i>Generar <br>PIN"
+			],
+			'112' => [
+				'id' => 'change',
+				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN" //llega si y solo si tiene PIN
+			],
+			'110' => [
+				'id' => 'lock',
+				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta" //o desbloqueo
+			],
+			'111' => [
+				'id' => 'replace',
+				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición" //en caso que esté habilitado
+			]
+		];
+
+		foreach ($menuOptionsProduct as $key => $value) {
+			$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
+			$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
+			array_push($optionsAvailables,$option);
+		}
 
 		$this->views = ['serviceproduct/'.$view];
+
 		$this->render->data = $dataProduct;
+		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);

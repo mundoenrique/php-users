@@ -469,6 +469,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'detalles',
 	'[\w\-]+/detalle',
+	'[\w\-]+/atencioncliente',
 );
 
 /*
