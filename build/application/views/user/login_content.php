@@ -1,6 +1,6 @@
 
 <div class="login-content flex items-center justify-center bg-primary">
-	<div class="flex flex-column items-center">
+	<div class="flex flex-column items-center z1">
 		<img class="logo-banco mb-2" src="<?= $this->asset->insertFile('img-banco_bogota.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá">
 		<span class="mb-2 secondary center h3">Personas</span>
 		<div class="widget rounded">
