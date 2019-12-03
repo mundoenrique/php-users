@@ -9,19 +9,19 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="flex items-center justify-between mb-2">
+				<div class="service-group flex max-width-4 items-center justify-between mb-2">
 					<div class="product-presentation relative mr-4">
 						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
-					<div class="product-info mr-4">
+					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata h6"><?= $data['nombre_producto'];?></p>
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
 
 					</div>
-					<div class="product-info-full">
+					<div class="product-scheme">
 						<p class="field-tip">Selecciona la operación que deseas realizar</p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
 							<?php
