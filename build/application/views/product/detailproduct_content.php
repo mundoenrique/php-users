@@ -9,12 +9,12 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="flex items-center justify-between mb-2">
+				<div class="flex max-width-4 flex-wrap items-center justify-between mb-2">
 					<div class="product-presentation relative mr-4">
 						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
-					<div class="product-info-full mr-4">
+					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
@@ -53,7 +53,10 @@
 					</div>
 				</div>
 
-				<h2 class="h4 regular tertiary">Mis movimientos</h2>
+				<div class="flex items-center justify-between pr-lg-3">
+					<h2 class="mb-0 h4 regular tertiary">Mis movimientos</h2>
+					<a class="btn btn-small btn-link" href="<?= base_url('vistaconsolidada');?>">Volver al inicio</a>
+				</div>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
@@ -77,7 +80,15 @@
 							</select>
 						<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
-					<ul class="list-inline mx-2 mb-0 flex items-center">
+					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">
+							<input type="radio" name="movimientos" id="option1" checked> Movimientos
+						</label>
+						<label class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" id="transitToogle">
+							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
+						</label>
+					</div>
+					<ul class="stack-extra list-inline mb-0 flex items-center">
 						<li class="px-1 list-inline-item text border rounded">
 							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
@@ -85,14 +96,6 @@
 							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">
-							<input type="radio" name="movimientos" id="option1" checked> Movimientos
-						</label>
-						<label class="btn-small btn-options btn-outline btn-rounded-right is-disabled" id="transitToogle">
-							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
-						</label>
-					</div>
 				</nav>
 
 				<div class="group row mt-3" id="results">

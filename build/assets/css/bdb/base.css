@@ -1,11 +1,6 @@
 /* Sections
 ========================================================================== */
 
-
-.is-disabled {
-	background-color: #555;
-}
-
 body {
 	display: flex;
 	flex-direction: column;
@@ -1954,6 +1949,7 @@ i[class*=" icon-"]:before {
 .icon-user:before          { content: "\e015"; }
 .icon-key:before 					 { content: "\e01a"; }
 .icon-lock:before 				 { content: "\e01b"; }
+.icon-unlock:before 			 { content: "\e01c"; }
 .icon-card:before          { content: "\e029"; }
 .icon-thumbs-up:before     { content: "\e032"; }
 .icon-arrow-up:before      { content: "\e03b"; }
@@ -3351,8 +3347,29 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	min-width: 320px;
 }
 
+.product-specifications {
+	min-width: 15rem;
+	margin-top: 1rem;
+}
+
+@media (min-width: 992px) {
+	.product-specifications {
+		margin-top: 0;
+	}
+}
+
 .card-image {
   width: 250px;
+}
+
+.field-options {
+	margin: 0 .5rem;
+}
+
+@media (min-width: 992px) {
+	.field-options {
+		margin: 0 1.5rem;
+	}
 }
 
 .feed .feed-item {
@@ -3412,7 +3429,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .services-content {
-	width: 480px;
+	width: 448px;
+	margin-bottom: 0;
 }
 
 .services-item {
@@ -3423,6 +3441,11 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .services-item:hover,
 .services-item.active {
 	color: var(--primary);
+}
+
+.services-item.is-disabled {
+	color: var(--disabled-color);
+	cursor: default;
 }
 
 .services-item i{

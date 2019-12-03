@@ -226,8 +226,8 @@ function validateForms(form, options) {
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
 			recovery: { required: true },
-			pinCurrent: { required: true, number: true, minlength: 4 },
-      newPin: { required: true, number: true, minlength: 4, "pinNew2": true },
+			pinCurrent: { required: true, number: true, exactlength: 4 },
+      newPin: { required: true, number: true, exactlength: 4, "pinNew2": true },
       confirmPin: { required: true, number: true, "pinNew1": true }
 		},
 		errorPlacement: function(error, element) {
