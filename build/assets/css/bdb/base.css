@@ -3351,8 +3351,29 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	min-width: 320px;
 }
 
+.product-specifications {
+	min-width: 15rem;
+	margin-top: 1rem;
+}
+
+@media (min-width: 992px) {
+	.product-specifications {
+		margin-top: 0;
+	}
+}
+
 .card-image {
   width: 250px;
+}
+
+.field-options {
+	margin: 0 .5rem;
+}
+
+@media (min-width: 992px) {
+	.field-options {
+		margin: 0 1.5rem;
+	}
 }
 
 .feed .feed-item {
