@@ -33,6 +33,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 			lockView.classList.add("none");
 			replacementView.classList.add("none");
 			generateView.classList.remove("none");
+
+			var form = $('#formGeneratePin');
+			validateForms(form, {handleMsg: false});
+			if(form.valid()) {
+				console.log("Válido");
+
+			} else {
+				console.log("No válido");
+			}
 		}
 	});
 
@@ -44,11 +53,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 			}
 			this.classList.add("active");
 
-
 			generateView.classList.add("none");
 			lockView.classList.add("none");
 			replacementView.classList.add("none");
 			changeView.classList.remove("none");
+
+			var form = $('#formChangePin');
+			validateForms(form, {handleMsg: false});
+			if(form.valid()) {
+				console.log("Válido");
+
+			} else {
+				console.log("No válido");
+			}
 		}
 	});
 
@@ -64,6 +81,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 			changeView.classList.add("none");
 			replacementView.classList.add("none");
 			lockView.classList.remove("none");
+
+			var form = $('#formLockAccount');
+			validateForms(form, {handleMsg: false});
+			if(form.valid()) {
+				console.log("Válido");
+
+			} else {
+				console.log("No válido");
+			}
 		}
   });
 
@@ -79,6 +105,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 			changeView.classList.add("none");
 			lockView.classList.add("none");
 			replacementView.classList.remove("none");
+
+			var form = $('#formReplacement');
+			validateForms(form, {handleMsg: false});
+			if(form.valid()) {
+				console.log("Válido");
+
+			} else {
+				console.log("No válido");
+			}
 		}
 	});
 

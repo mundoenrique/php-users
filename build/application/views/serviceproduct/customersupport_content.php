@@ -40,7 +40,7 @@
 						<div id="msgGen" class="msg-prevent-pin">
 							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
-						<form id="generatePinForm" accept-charset="utf-8" method="post">
+						<form id="formGeneratePin" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="newPin">Nuevo PIN</label>
@@ -65,7 +65,7 @@
 						<div id="msgChange" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
 						</div>
-						<form id="changePinForm" accept-charset="utf-8" method="post">
+						<form id="formChangePin" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="pinCurrent">PIN actual</label>
@@ -99,7 +99,7 @@
 						<div id="preventLock" class="msg-prevent">
 							<h3 class="h4 regular">Si realmente deseas <span id="action">Bloquear </span> tu tarjeta, presiona continuar</h3>
 						</div>
-						<form id="lockAccountForm" accept-charset="utf-8" method="post" class="profile-1">
+						<form id="formLockAccount" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
@@ -112,7 +112,7 @@
 						<div id="msgReplacement" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
-						<form id="replacementForm" accept-charset="utf-8" method="post" class="profile-1">
+						<form id="formReplacement" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="form-group col-lg-3">
 								<label for="motSol">Motivo de la solicitud</label>
 								<select id="motSol" class="custom-select form-control" name="motSol">
