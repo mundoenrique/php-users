@@ -2,7 +2,7 @@
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
-<div id="detail" class="detail-content h-100 bg-content">
+<div id="service" class="service-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="h3 semibold primary">Atención al Cliente</h1>
@@ -33,21 +33,14 @@
 					</div>
 				</div>
 				<div class="line mt-1"></div>
+
 				<div class="max-width-4 mx-auto pt-3 p-responsive py-4">
-					<!-- Reposición de PIN -->
-					<div id="recKey" class="services-both none">
-						<div id="msg-rec" class="msg-prevent-pin">
-							<h2 class="h4 regular tertiary">Generacíon de PIN</h2>
-							<h3></h3>
-							<div id="result-rec"></div>
+					<!-- Generacíon de PIN -->
+					<div id="generatePin" class="services-both none">
+						<div id="msgGen" class="msg-prevent-pin">
+							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
-						<div id="rec-clave" class="msg-prevent" style="">
-							<p class="msg-pin"></p>
-						</div>
-						<form id="recover-key" accept-charset="utf-8" method="post" class="profile-1">
-							<input type="hidden" id="fecha-exp-rec" name="fecha-exp-rec">
-							<input type="hidden" id="card-rec" name="card-rec">
-							<input type="hidden" id="prefix-rec" name="prefix-rec">
+						<form id="generatePinForm" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="newPin">Nuevo PIN</label>
@@ -60,26 +53,19 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-						</form>
-						<div class="flex items-center justify-end pt-3 border-top">
-								<a class="btn underline" href="cpo_login.php">Cancelar</a>
+							<div class="flex items-center justify-end pt-3 border-top">
+								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
+						</form>
 					</div>
 
 					<!-- Cambio de PIN -->
-					<div id="changeKey" class="services-both max-width-1 fit-lg mx-auto pt-3 none">
-
-						<div id="msg-change" class="msg-prevent">
+					<div id="changePin" class="services-both max-width-1 fit-lg mx-auto pt-3 none">
+						<div id="msgChange" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
-							<h3></h3>
-							<div id="result-change"></div>
 						</div>
-
-						<form id="cambioPin" accept-charset="utf-8" method="post" class="profile-1">
-							<input id="fechaExpCambio" type="hidden" name="fechaExpCambio">
-							<input id="cardCambio" type="hidden" name="cardCambio">
-							<input id="prefixCambio" type="hidden" name="prefixCambio">
+						<form id="changePinForm" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="pinCurrent">PIN actual</label>
@@ -99,53 +85,51 @@
 							</div>
 							<div class="line mt-1"></div>
 							<div class="flex items-center justify-end pt-3">
-								<a class="btn underline" href="cpo_login.php">Cancelar</a>
+								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
-
-						<div id="msg2" style="clear:both;"></div>
 					</div>
 
 					<!-- Bloqueo de tarjeta -->
-					<div id="lockAcount" class="services-both none">
-						<div id="msgBlock" class="msg-prevent">
-							<h2 class="h4 regular tertiary"></h2>
-							<h3></h3>
-							<div id="result-block"></div>
+					<div id="lockAccount" class="services-both none">
+						<div id="msgLock" class="msg-prevent">
+							<h2 class="h4 regular tertiary">Bloquear cuenta</h2>
 						</div>
-						<div id="preventBloq" class="msg-prevent none">
+						<div id="preventLock" class="msg-prevent">
 							<h3 class="h4 regular">Si realmente deseas <span id="action">Bloquear </span> tu tarjeta, presiona continuar</h3>
 						</div>
-						<form id="bloqueo-cuenta" accept-charset="utf-8" method="post" class="profile-1">
-							<input type="hidden" id="fechaExpBloq" name="fechaExpBloq">
-							<input type="hidden" id="cardBloq" name="cardBloq">
-							<input type="hidden" id="status" name="status">
-							<input type="hidden" id="lockType" name="lockType">
-							<input type="hidden" id="prefixBloq" name="prefixBloq">
-							<input type="hidden" id="montoComisionTransaccion" name="montoComisionTransaccion" value="0">
-							<div id="reasonRep" class="none">
-								<div class="form-group col-lg-3">
-									<label for="motSol">Motivo de la solicitud</label>
-									<select id="motSol" class="custom-select form-control" name="motSol">
-										<option value="">Selecciona</option>
-										<option value="41">Tarjeta perdida</option>
-										<option value="43">Tarjeta robada</option>
-										<option value="TD">Tarjeta deteriorada</option>
-										<option value="TR">Reemplazar tarjeta</option>
-									</select>
-									<div class="help-block"></div>
-								</div>
-								<input type="hidden" id="motSolNow" name="motSolNow">
-							</div>
-
+						<form id="lockAccountForm" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="flex items-center justify-end pt-3 border-top">
-								<a class="btn underline" href="cpo_login.php">Cancelar</a>
+								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
+					</div>
 
-						<div id="msg1" style="clear:both;"></div>
+					<!-- Solicitud de reposición de tarjeta -->
+					<div id="replacement" class="services-both none">
+						<div id="msgReplacement" class="msg-prevent">
+							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
+						</div>
+						<form id="replacementForm" accept-charset="utf-8" method="post" class="profile-1">
+							<div class="form-group col-lg-3">
+								<label for="motSol">Motivo de la solicitud</label>
+								<select id="motSol" class="custom-select form-control" name="motSol">
+									<option value="">Selecciona</option>
+									<option value="41">Tarjeta perdida</option>
+									<option value="43">Tarjeta robada</option>
+									<option value="TD">Tarjeta deteriorada</option>
+									<option value="TR">Reemplazar tarjeta</option>
+								</select>
+								<div class="help-block"></div>
+							</div>
+
+							<div class="flex items-center justify-end pt-3 border-top">
+								<a class="btn underline" href="">Cancelar</a>
+								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+							</div>
+						</form>
 					</div>
 
 				</div>

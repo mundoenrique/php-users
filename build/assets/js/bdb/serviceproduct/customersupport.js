@@ -10,77 +10,76 @@ $$.addEventListener('DOMContentLoaded', function(){
   var lockOption = $$.getElementById('lock');
   var replaceOption = $$.getElementById('replace');
 
-  var lockForm = $$.getElementById('lockAcount');
-  var keyForm = $$.getElementById('changeKey');
-  var recoverForm = $$.getElementById('recKey');
+	var generateView = $$.getElementById('generatePin');
+  var changeView = $$.getElementById('changePin');
+  var lockView = $$.getElementById('lockAccount');
+  var replacementView = $$.getElementById('replacement');
 
-  var preventBloq = $$.getElementById('preventBloq');
-  var reasonRep = $$.getElementById('reasonRep');
+	var generateForm = $$.getElementById('generatePinForm');
+  var changeForm = $$.getElementById('changePinForm');
+  var lockForm = $$.getElementById('lockAccountForm');
+	var replacementForm = $$.getElementById('replacementForm');
 
-  var bloqRepTitle = $$.getElementById('msgBlock').querySelector("h2");
+	//core
+	generateOption.addEventListener('click',function(e){
+		if (!this.classList.contains("is-disabled")) {
+			var i;
+			for (i = 0; i < options.length; i++) {
+				options[i].classList.remove("active");
+			}
+			this.classList.add("active");
 
-  //core
+			changeView.classList.add("none");
+			lockView.classList.add("none");
+			replacementView.classList.add("none");
+			generateView.classList.remove("none");
+		}
+	});
+
+	changeOption.addEventListener('click',function(e){
+		if (!this.classList.contains("is-disabled")) {
+			var i;
+			for (i = 0; i < options.length; i++) {
+				options[i].classList.remove("active");
+			}
+			this.classList.add("active");
+
+
+			generateView.classList.add("none");
+			lockView.classList.add("none");
+			replacementView.classList.add("none");
+			changeView.classList.remove("none");
+		}
+	});
+
 	lockOption.addEventListener('click',function(e){
-    var i;
-    for (i = 0; i < options.length; i++) {
-      options[i].classList.remove("active");
-    }
-    this.classList.add("active");
+		if (!this.classList.contains("is-disabled")) {
+			var i;
+			for (i = 0; i < options.length; i++) {
+				options[i].classList.remove("active");
+			}
+			this.classList.add("active");
 
-    keyForm.classList.add("none");
-    recoverForm.classList.add("none");
-    lockForm.classList.remove("none");
-
-    reasonRep.classList.add("none");
-    preventBloq.classList.remove("none");
-
-    bloqRepTitle.textContent = "Bloquear cuenta";
+			generateView.classList.add("none");
+			changeView.classList.add("none");
+			replacementView.classList.add("none");
+			lockView.classList.remove("none");
+		}
   });
 
 	replaceOption.addEventListener('click',function(e){
-    var i;
-    for (i = 0; i < options.length; i++) {
-      options[i].classList.remove("active");
-    }
-    this.classList.add("active");
+		if (!this.classList.contains("is-disabled")) {
+			var i;
+			for (i = 0; i < options.length; i++) {
+				options[i].classList.remove("active");
+			}
+			this.classList.add("active");
 
+			generateView.classList.add("none");
+			changeView.classList.add("none");
+			lockView.classList.add("none");
+			replacementView.classList.remove("none");
+		}
+	});
 
-    keyForm.classList.add("none");
-    recoverForm.classList.add("none");
-    lockForm.classList.remove("none");
-
-    preventBloq.classList.add("none");
-    reasonRep.classList.remove("none");
-
-    bloqRepTitle.textContent = "Solicitud de reposición";
-  });
-
-	changeOption.addEventListener('click',function(e){
-    var i;
-    for (i = 0; i < options.length; i++) {
-      options[i].classList.remove("active");
-    }
-    this.classList.add("active");
-
-
-    lockForm.classList.add("none");
-    recoverForm.classList.add("none");
-    keyForm.classList.remove("none");
-  });
-
-	generateOption.addEventListener('click',function(e){
-    var i;
-    for (i = 0; i < options.length; i++) {
-      options[i].classList.remove("active");
-    }
-    this.classList.add("active");
-
-
-    lockForm.classList.add("none");
-    keyForm.classList.add("none");
-    recoverForm.classList.remove("none");
-  });
-
-});
-
-
+})
