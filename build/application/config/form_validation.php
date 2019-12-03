@@ -1,6 +1,19 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'generate' => [
+		[
+			'field' => 'newPin',
+			'label' => 'newPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+		],
+		[
+			'field' => 'confirmPin',
+			'label' => 'confirmPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+		],
+
+	],
 	'loadmovements' => [
 		[
 			'field' => 'noTarjeta',

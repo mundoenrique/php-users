@@ -11,7 +11,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	for (i = 0; i < options.length; i++) {
 		options[i].addEventListener('click',function(e){
 			if (!this.classList.contains("is-disabled")) {
-				var j, idName = this.id;
+				var j, idNameCapitalize, idName = this.id;
 				for (j = 0; j < options.length; j++) {
 					options[j].classList.remove("active");
 					$$.getElementById(`${idName}View`).classList.add("none");
@@ -19,22 +19,51 @@ $$.addEventListener('DOMContentLoaded', function(){
 				this.classList.add("active");
 				$$.getElementById(`${idName}View`).classList.remove("none");
 
-				idName = idName.charAt(0).toUpperCase() + idName.slice(1);
-				form = $('#form'+idName);
-				btnTrigger = $$.getElementById(`btn${idName}`);
+				idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+				form = $('#form'+idNameCapitalize);
+				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
-					console.log('objaasdasdasdect');
+
 					// if(form.valid()) {
 					// 	console.log("Válido");
-
+					var data = new requestFactory(`fn${idNameCapitalize}`);
+					callNovoCore('POST', 'ServiceProduct', idName, data, function(response)
+					{
+						disableInputsForm(true, txtBtnTrigger);
+						if (response.code == 0) {
+							console.log('fino fino');
+						}
+					});
 					// } else {
 					// 	console.log("No válido");
 					// }
 				});
 			}
 		});
+	}
+
+	//functions
+	function requestFactory(optionMenu){
+
+		function fnGenerate(){
+			return {
+				newPin: $$.getElementById('newPin').value,
+				confirmPin: $$.getElementById('confirmPin').value,
+			};
+		}
+		function fnChange(){
+			return console.log('change function');
+		}
+		function fnLock(){
+			return console.log('lock function');
+		}
+		function fnReplace(){
+			return console.log('replace function');
+		}
+
+		return eval(`${optionMenu}`)();
 	}
 
 })

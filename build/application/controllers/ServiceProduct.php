@@ -80,6 +80,7 @@ class ServiceProduct extends NOVO_Controller {
 				"ledgerBalance" => "--",
 				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
+				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"generatedPin" => $row->pinGeneradoUsuario
