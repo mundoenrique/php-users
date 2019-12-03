@@ -175,6 +175,10 @@ function validateForms(form, options) {
 		else return true;
 	}, "El nuevo PIN no debe ser igual a su PIN anterior");
 
+	jQuery.validator.addMethod("fourConsecutivesDigits", function(value, element) {
+		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
+	}, "Los 4 dígitos no deben ser consecutivos");
+
 	form.validate({
 		rules: {
 			gender: { required: true},
@@ -227,7 +231,7 @@ function validateForms(form, options) {
 			loginUserpwd: { required: true },
 			recovery: { required: true },
 			pinCurrent: { required: true, number: true, exactlength: 4 },
-      newPin: { required: true, number: true, exactlength: 4, "pinNew2": true },
+      newPin: { required: true, number: true, exactlength: 4, "pinNew2": true, "fourConsecutivesDigits": true },
       confirmPin: { required: true, number: true, "pinNew1": true }
 		},
 		errorPlacement: function(error, element) {
