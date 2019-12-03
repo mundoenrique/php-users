@@ -38,7 +38,7 @@ class NOVO_Model extends CI_Model {
 		$this->countryUri = $this->session->userdata('countryUri');
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ?: '';
-		$this->userName = $this->session->userdata('userName');
+		$this->userName = mb_strtoupper($this->session->userdata('userName'));
 		$this->lang->load(['error','general', 'response'], 'base-spanish' );
 		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
 	}
