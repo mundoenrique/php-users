@@ -36,11 +36,11 @@
 
 				<div class="max-width-4 mx-auto pt-3 p-responsive py-4">
 					<!-- Generacíon de PIN -->
-					<div id="generatePin" class="services-both none">
+					<div id="generateView" class="services-both none">
 						<div id="msgGen" class="msg-prevent-pin">
 							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
-						<form id="formGeneratePin" accept-charset="utf-8" method="post">
+						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="newPin">Nuevo PIN</label>
@@ -55,17 +55,17 @@
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnGenerate" name="btnGenerate" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
 
 					<!-- Cambio de PIN -->
-					<div id="changePin" class="services-both max-width-1 fit-lg mx-auto pt-3 none">
+					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto pt-3 none">
 						<div id="msgChange" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
 						</div>
-						<form id="formChangePin" accept-charset="utf-8" method="post">
+						<form id="formChange" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="pinCurrent">PIN actual</label>
@@ -86,33 +86,33 @@
 							<div class="line mt-1"></div>
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnChange" name="btnChange" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
 
 					<!-- Bloqueo de tarjeta -->
-					<div id="lockAccount" class="services-both none">
+					<div id="lockView" class="services-both none">
 						<div id="msgLock" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Bloquear cuenta</h2>
 						</div>
 						<div id="preventLock" class="msg-prevent">
 							<h3 class="h4 regular">Si realmente deseas <span id="action">Bloquear </span> tu tarjeta, presiona continuar</h3>
 						</div>
-						<form id="formLockAccount" accept-charset="utf-8" method="post" class="profile-1">
+						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnLock" name="btnLock" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
 
 					<!-- Solicitud de reposición de tarjeta -->
-					<div id="replacement" class="services-both none">
+					<div id="replaceView" class="services-both none">
 						<div id="msgReplacement" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
-						<form id="formReplacement" accept-charset="utf-8" method="post" class="profile-1">
+						<form id="formReplace" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="form-group col-lg-3">
 								<label for="motSol">Motivo de la solicitud</label>
 								<select id="motSol" class="custom-select form-control" name="motSol">
@@ -127,7 +127,7 @@
 
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnContinuar" name="btnContinuar" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnReplace" name="btnReplace" class="btn btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
