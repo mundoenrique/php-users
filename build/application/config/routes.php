@@ -64,8 +64,8 @@ $route['(:any)/cambiarclave'] = "user/changePassword";
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/detalle'] = "product/detailProduct";
 $route['(:any)/async-call'] = "callModels";
-$route['(:any)/listaproducto'] = "serviceproduct/listProduct";
-$route['(:any)/atencioncliente'] = "serviceproduct/customerSupport";
+$route['(:any)/listaproducto'] = "serviceProduct/listProduct";
+$route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha

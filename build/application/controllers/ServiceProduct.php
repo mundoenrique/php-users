@@ -148,15 +148,15 @@ class ServiceProduct extends NOVO_Controller {
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN" //llega si y solo si tiene PIN
+				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN"
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta" //o desbloqueo
+				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta"
 			],
 			'111' => [
 				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición" //en caso que esté habilitado
+				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición"
 			]
 		];
 
