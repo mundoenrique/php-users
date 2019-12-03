@@ -53,10 +53,7 @@
 					</div>
 				</div>
 
-				<div class="flex items-center justify-between pr-lg-3">
-					<h2 class="mb-0 h4 regular tertiary">Mis movimientos</h2>
-					<a class="btn btn-small btn-link" href="<?= base_url('vistaconsolidada');?>">Volver al inicio</a>
-				</div>
+				<h2 class="h4 regular tertiary">Mis movimientos</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>

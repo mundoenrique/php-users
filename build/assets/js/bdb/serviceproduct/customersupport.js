@@ -25,13 +25,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
-					console.log('objaasdasdasdect');
-					// if(form.valid()) {
-					// 	console.log("Válido");
+					validateForms(form, {handleMsg: false});
+					if(form.valid()) {
+						console.log("Válido");
 
-					// } else {
-					// 	console.log("No válido");
-					// }
+					} else {
+						console.log("No válido");
+					}
 				});
 			}
 		});
