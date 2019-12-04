@@ -81,8 +81,7 @@ class Product extends NOVO_Controller {
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services,
-				"generatedPin" => $row->pinGeneradoUsuario
+				"availableServices" => $row->services
 			]);
 		}
 		$this->session->set_flashdata('listProducts', $dataRequeried);
@@ -125,7 +124,7 @@ class Product extends NOVO_Controller {
 			$dataProduct = $listProducts[$posList];
 		}
 
-		if (in_array("117",  $dataProduct['availableServices'])) {
+		if (in_array("117777",  $dataProduct['availableServices'])) {
 			redirect('atencioncliente');
 		}
 

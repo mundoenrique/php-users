@@ -24,7 +24,7 @@ class ServiceProduct extends NOVO_Controller {
 		}
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--'){
+		if (count($dataProduct) == 1 and $dataProduct !== '--') {
 			redirect("/atencioncliente");
 		}
 
@@ -33,7 +33,7 @@ class ServiceProduct extends NOVO_Controller {
 			"$this->countryUri/serviceproduct/$view"
 		);
 
-		if(!is_null($this->config->item('timeIdleSession'))){
+		if(!is_null($this->config->item('timeIdleSession'))) {
 			array_push (
 				$this->includeAssets->jsFiles,
 				"$this->countryUri/watchsession"
@@ -54,7 +54,7 @@ class ServiceProduct extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function loadDataProduct($operation = 'all', $card = '')
+	public function loadDataProduct()
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
@@ -75,8 +75,7 @@ class ServiceProduct extends NOVO_Controller {
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services,
-				"generatedPin" => $row->pinGeneradoUsuario
+				"availableServices" => $row->services
 			]);
 		}
 		$this->session->set_flashdata('listProducts', $dataRequeried);
@@ -118,21 +117,7 @@ class ServiceProduct extends NOVO_Controller {
 			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
 			$dataProduct = $listProducts[$posList];
 		}
-		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
-		$dataProduct['movements'] = $this->transforNumberInArray ($movements);
-		$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
 
-		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-		if ( $data->rc === "200" ) {
-
-			$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
-			$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
-			$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
-
-			$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
-			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
-		}
 		$dataProduct['availableServices'] = ['117'];
 		$optionsAvailables = [];
 		$menuOptionsProduct = [
@@ -167,38 +152,5 @@ class ServiceProduct extends NOVO_Controller {
 		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
-	}
-
-	function transforNumberInArray ($transforArray)
-	{
-		if ($transforArray !== '--')
-		{
-			foreach ($transforArray as $clave => $valor)
-			{
-				$valor->monto = $this->transforNumber ($valor->monto);
-				$transforArray[$clave] = $valor;
-			}
-		}
-		return $transforArray;
-	}
-
-	function transforNumber ($transforNumber)
-	{
-		return (float)str_replace(',','', $transforNumber);
-	}
-
-	function totalInTransactions($transactions)
-	{
-		$totalIncome = 0;
-		$totalExpense = 0;
-		if ($transactions !== '--')
-		{
-			foreach ($transactions as $row)
-			{
-				$totalIncome += $row->signo == '+'? $row->monto: 0;
-				$totalExpense += $row->signo == '-'? $row->monto: 0;
-			}
-		}
-		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
 	}
 }

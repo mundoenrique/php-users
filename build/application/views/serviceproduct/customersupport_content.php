@@ -53,7 +53,7 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div id="verification" class="none">
+							<div id="verificationOTP" class="none">
 								<hr class="separador-one mb-3">
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row form-group col-lg-4">

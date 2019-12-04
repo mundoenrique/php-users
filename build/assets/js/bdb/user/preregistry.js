@@ -162,7 +162,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 					if (response.code == 0) {
 						btnTrigger.disabled = false;
 						btnTrigger.innerHTML = txtBtnTrigger;
-						// notiSystem(response.title, response.msg, response.classIconName, response.data);
 						verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 						$$.getElementById('codeOTP').disabled = false;
 						var countdown = verificationMsg.querySelector("span");

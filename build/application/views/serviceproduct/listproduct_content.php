@@ -7,6 +7,7 @@
 			<div class="pt-3">
 				<h2 class="h4 regular tertiary">Seleccione un producto</h2>
 				<div class="line mt-1"></div>
+				<p>A continuación indica el producto al cual le deseas realizar una operación de Atención al Cliente:</p>
 				<div id="dashboard" class="dashboard-items flex max-width-xl-5 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('atencioncliente'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
@@ -26,8 +27,7 @@
 									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
 									<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 									<p class="item-balance mb-0 h6 light text">
-										<?= $row['availableBalance'] !== '--'? lang('GEN_COIN'): '';?>
-										<?= strval(number_format($row['availableBalance'],2,',','.'));?>
+										<?= strtoupper($row['nomEmp']);?>
 									</p>
 								</div>
 							</div>
