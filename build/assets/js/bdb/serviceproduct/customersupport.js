@@ -33,14 +33,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
 						var data = new requestFactory(`fn${idNameCapitalize}`);
-						disableInputsForm(true, txtBtnTrigger);
-						// callNovoCore('POST', 'ServiceProduct', idName, data, function(response) {
-							// if (response.code == 0) {
-								console.log('fino fino');
-								$$.getElementById("verification").classList.remove("none");
+						callNovoCore('POST', 'ServiceProduct', idName, data, function(response) {
+							if (response.code == 0) {
+								$$.getElementById("verificationOTP").classList.remove("none");
 								$$.getElementById('codeOTP').disabled = false;
-							// }
-						// });
+							}
+						});
 					}
 				});
 			}
@@ -54,9 +52,9 @@ function requestFactory(optionMenu) {
 
 	function fnGenerate(){
 		var md5CodeOTP = '';
-		var inpCodeOTP = $$.getElementById('codeOTP');
-		if (inpCodeOTP.value) {
-			md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
+		var inpCodeOTP = $$.getElementById('codeOTP').value;
+		if (inpCodeOTP) {
+			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
 		}
 		return {
 			newPin: $$.getElementById('newPin').value,
