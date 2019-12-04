@@ -7,6 +7,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 	var verificationMsg = $$.getElementById("verificationMsg");
+	var dialogConditions = $('#dialogConditions');
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
@@ -95,6 +96,43 @@ $$.addEventListener('DOMContentLoaded', function(){
 		else{
 			return false;
 		}
+	});
+
+	// MODAL TERMINOS Y CONDICIONES
+	dialogConditions.dialog({
+		autoOpen: false,
+		modal: true,
+		draggable: false,
+		resizable: false,
+		closeOnEscape: false,
+		position: { my: "center top", at: "center top", of:  '#preRegistry' },
+		width: 940,
+		dialogClass: "border-none",
+    classes: {
+      "ui-dialog-titlebar": "none",
+    },
+		show: {
+			duration: 250
+		},
+		hide: {
+			duration: 250
+		},
+		open: function (event, ui) {
+			$('#aceptar').on('click', function(e) {
+				$(this).dialog('close');
+				$(this).off('click');
+			});
+			$(this).removeClass("none");
+
+		}
+	});
+
+	$$.getElementById("termsConditions").addEventListener('click', function() {
+		dialogConditions.dialog("open");
+	});
+
+	$$.getElementById("aceptar").addEventListener('click', function() {
+		dialogConditions.dialog("close");
 	});
 
 	//functions
