@@ -100,30 +100,54 @@ function requestFactory(optionMenu) {
 	return eval(`${optionMenu}`)();
 }
 
+function responseFactory(optionMenu) {
+
+	function fnGenerate(){
+		var md5CodeOTP = '';
+		var inpCodeOTP = $$.getElementById('codeOTP').value;
+		if (inpCodeOTP) {
+			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
+		}
+		return {
+			newPin: $$.getElementById('newPin').value,
+			confirmPin: $$.getElementById('confirmPin').value,
+			codeOTP: md5CodeOTP
+		};
+	}
+	function fnChange(){
+		return console.log('change function');
+	}
+	function fnLock(){
+		return console.log('lock function');
+	}
+	function fnReplace(){
+		return console.log('replace function');
+	}
+
+	return eval(`${optionMenu}`)();
+}
+
 function disableInputsForm(optionMenu, status, txtButton) {
+	var elementsForm;
 	switch (optionMenu) {
 		case 'generate':
-			$$.getElementById('newPin').disabled = status;
-			$$.getElementById('confirmPin').disabled = status;
-			btnTrigger.innerHTML = txtButton;
-			btnTrigger.disabled = status;
+			elementsForm = ['newPin', 'confirmPin'];
 			break;
 
 		case 'change':
-			btnTrigger.innerHTML = txtButton;
-			btnTrigger.disabled = status;
 			break;
 
 		case 'lock':
-			btnTrigger.innerHTML = txtButton;
-			btnTrigger.disabled = status;
 			break;
 
 		case 'replace':
-			btnTrigger.innerHTML = txtButton;
-			btnTrigger.disabled = status;
 			break;
 	}
+	elementsForm.forEach(function (element) {
+		$$.getElementById(element).disabled = status;
+	});
+	btnTrigger.innerHTML = txtButton;
+	btnTrigger.disabled = status;
 }
 
 function resendCodeOTP () {
