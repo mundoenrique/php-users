@@ -65,10 +65,6 @@ class ServiceProduct extends NOVO_Controller {
 
 		$dataRequeried = [];
 		foreach($data as $row){
-			$productBalance = $this->transforNumber ($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
-			if ( $operation === 'detail' && $card !== $row->noTarjeta ){
-				continue;
-			}
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -76,9 +72,6 @@ class ServiceProduct extends NOVO_Controller {
 				"prefix" => $row->prefix,
 				"marca" => strtolower($row->marca),
 				"nomEmp" => ucwords(strtolower($row->nomEmp)),
-				"actualBalance" => $productBalance,
-				"ledgerBalance" => "--",
-				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
