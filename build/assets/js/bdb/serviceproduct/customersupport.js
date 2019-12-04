@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger;
+var form, btnTrigger, txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -27,17 +27,42 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
-					var txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 					form = $(`#form${idNameCapitalize}`);
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
+						disableInputsForm(idName, true, msgLoading);
 						var data = new requestFactory(`fn${idNameCapitalize}`);
 						callNovoCore('POST', 'ServiceProduct', idName, data, function(response) {
-							if (response.code == 0) {
-								$$.getElementById("verificationOTP").classList.remove("none");
-								$$.getElementById('codeOTP').disabled = false;
+
+							switch (response.code) {
+								case 0:
+									console.log('fino con OTP');
+									break;
+
+								case 1:
+									console.log('fino sin OTP');
+									btnTrigger.disabled = false;
+									btnTrigger.innerHTML = txtBtnTrigger;
+									$$.getElementById("verificationOTP").classList.remove("none");
+									$$.getElementById('codeOTP').disabled = false;
+									break;
+
+								case 3:
+									console.log('OTP inválido');
+									resendCodeOTP (response.msg);
+
+									break;
+
+								default:
+									disableInputsForm(idName, false, txtBtnTrigger);
+									break;
 							}
+
+							$$.getElementById('resendCode').addEventListener('click', function(){
+								resendCodeOTP();
+							})
+
 						});
 					}
 				});
@@ -75,3 +100,46 @@ function requestFactory(optionMenu) {
 	return eval(`${optionMenu}`)();
 }
 
+function disableInputsForm(optionMenu, status, txtButton) {
+	switch (optionMenu) {
+		case 'generate':
+			$$.getElementById('newPin').disabled = status;
+			$$.getElementById('confirmPin').disabled = status;
+			btnTrigger.innerHTML = txtButton;
+			btnTrigger.disabled = status;
+			break;
+
+		case 'change':
+			btnTrigger.innerHTML = txtButton;
+			btnTrigger.disabled = status;
+			break;
+
+		case 'lock':
+			btnTrigger.innerHTML = txtButton;
+			btnTrigger.disabled = status;
+			break;
+
+		case 'replace':
+			btnTrigger.innerHTML = txtButton;
+			btnTrigger.disabled = status;
+			break;
+	}
+}
+
+function resendCodeOTP () {
+	btnTrigger.disabled = true;
+	btnTrigger.innerHTML = msgLoading;
+	$$.getElementById('codeOTP').disabled = true;
+
+	callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
+		if (response.code == 0) {
+			btnTrigger.disabled = false;
+			btnTrigger.innerHTML = txtBtnTrigger;
+			$$.getElementById('codeOTP').disabled = true;
+		}
+		else{
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
+			disableInputsForm(false, txtBtnTrigger);
+		}
+	});
+}
