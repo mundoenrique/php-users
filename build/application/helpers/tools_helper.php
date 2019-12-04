@@ -274,7 +274,7 @@ if(!function_exists('accessLog')) {
 
 		return [
 			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
-			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
+			"userName" => strtoupper($CI->session->userdata('userName')) ?: strtoupper($dataAccessLog->userName),
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,

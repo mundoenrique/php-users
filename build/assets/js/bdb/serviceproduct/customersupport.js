@@ -4,7 +4,7 @@ var form, btnTrigger, txtBtnTrigger;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
-  //vars
+	//vars
   var options = $$.querySelectorAll(".services-item");
 	var i;
 
@@ -40,21 +40,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 								case 0:
 									console.log('fino con OTP');
 									break;
-
 								case 1:
-									console.log('fino sin OTP');
 									btnTrigger.disabled = false;
 									btnTrigger.innerHTML = txtBtnTrigger;
 									$$.getElementById("verificationOTP").classList.remove("none");
 									$$.getElementById('codeOTP').disabled = false;
 									break;
-
-								case 3:
-									console.log('OTP inválido');
-									resendCodeOTP (response.msg);
-
+								case 2:
+									notiSystem(response.title, response.msg, response.classIconName, response.data);
+									disableInputsForm(idName, false, txtBtnTrigger);
 									break;
-
+								case 3:
+									resendCodeOTP (response.msg);
+									break;
 								default:
 									disableInputsForm(idName, false, txtBtnTrigger);
 									break;
@@ -151,13 +149,14 @@ function disableInputsForm(optionMenu, status, txtButton) {
 	btnTrigger.disabled = status;
 }
 
-function resendCodeOTP () {
+function resendCodeOTP (msg) {
 	btnTrigger.disabled = true;
 	btnTrigger.innerHTML = msgLoading;
 	$$.getElementById('codeOTP').disabled = true;
+	$$.getElementById('help-block').innerHTML = msg;
 
-	callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
-		if (response.code == 0) {
+ 	callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
+		if (response.code == 1) {
 			btnTrigger.disabled = false;
 			btnTrigger.innerHTML = txtBtnTrigger;
 			$$.getElementById('codeOTP').disabled = true;

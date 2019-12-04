@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
 							'afiliado' => $response->afiliado,
-
+							'celular' => empty($response->celular)?'3152540141': $response->celular,
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);

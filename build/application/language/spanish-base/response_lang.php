@@ -33,6 +33,20 @@ $lang['RESP_CODEOTP_INVALID'] = 'Código de verificación inválido.';
 $lang['RESP_EMPTY_LIST'] = 'No se obtuvo el listado';
 $lang['RESP_EMPTY_LIST_PRODUCTS'] = 'No posee productos registrados.';
 $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Hemos registrado exitosamente sus datos. Puede acceder al sistema para disfrutar de nuestros servicios.';
+$lang['RESP_PIN_GENERATED'] = 'El PIN ha sido generado exitosamente.';
+$lang['RESP_PIN_NOT_VALID'] = 'El PIN actual no es válido, verifica e intenta nuevamente.';
+$lang['RESP_FAILED_ATTEMPTS'] = 'Has superado la cantidad de intentos fallidos por el dia de hoy. Por favor intenta mañana.';
+$lang['RESP_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de tu tarjeta, intenta en unos minutos.';
+$lang['RESP_CODEOTP_USED'] = 'El código de seguridad introducido ya fue usado, verifica e intenta nuevamente.';
+$lang['RESP_EXPIRED_CODEOTP'] = 'El código de seguridad introducido ha expirado, solicítalo nuevamente.';
+$lang['RESP_INVALID_EXPIRATION_DATE'] = 'La fecha de expiración introducida es inválida, verifica e intenta de nuevo.';
+$lang['RESP_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, intente más tarde.';
+$lang['RESP_EXPIRED_CARD'] = 'No es posible realizar esta acción, la tarjeta está vencida.';
+$lang['RESP_USER_SUSPENDED'] = 'El usuario se encuentra suspendido.';
+$lang['RESP_SESSION_EXPIRED'] = 'Su sesión ha expirado.';
+
+
+
 
 
 

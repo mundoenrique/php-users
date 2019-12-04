@@ -24,8 +24,14 @@ class Product extends NOVO_Controller {
 		}
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--'){
-			redirect("/detalle");
+		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+
+			if (in_array("117",  $dataProduct[0]['availableServices'])) {
+				redirect('/atencioncliente');
+			}
+			else{
+				redirect("/detalle");
+			}
 		}
 
 		array_push (

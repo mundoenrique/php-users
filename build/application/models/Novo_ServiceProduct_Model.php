@@ -18,7 +18,9 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Services Product method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		//pais, cuenta, id_ext_per, pinNuevo, fecExpTarjeta, telephoneNumber
+
+		$this->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataAccessLog->modulo = 'Cuentas';
 		$this->dataAccessLog->function = 'Generar PIN';
 		$this->dataAccessLog->operation = 'Generar PIN';
@@ -26,7 +28,8 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 
 		$this->dataRequest->idOperation = '120';
 		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->idUsuario = $this->session->userdata('idUsuario');
+		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
+		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		$listProducts = $this->session->flashdata('listProducts');
@@ -41,18 +44,72 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			$dataProduct = $listProducts[$posList];
 		}
 
-		$this->dataRequest->newPin = base64_encode($dataRequest->newPin);
-		$this->dataRequest->noTarjeta = base64_encode($dataProduct['noTarjeta']);
-		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
+		$this->dataRequest->pinNuevo = $dataRequest->newPin;
+		$this->dataRequest->codigoOtp = base64_encode($dataRequest->codeOTP);
+		$this->dataRequest->cuenta = $dataProduct['noTarjeta'];
+		$this->dataRequest->fecExpTarjeta = $dataProduct['fechaExp'];
 		$this->dataRequest->prefix = $dataProduct['prefix'];
 
-		log_message("info", "Request List Products:" . json_encode($this->dataRequest));
+		log_message("info", "Request ServiceProduct:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('ServiceProduct');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
+					$this->response->msg = lang('RESP_PIN_GENERATED');
+				break;
+				case 10:
+					$this->response->code = 1;
+					break;
+				case -308:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					break;
+				case -241:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					break;
+				case -345:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_FAILED_ATTEMPTS');
+					break;
+				case -401:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_PIN_NOT_CHANGED');
+					break;
+				case -286:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					break;
+				case -287:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_USED');
+					break;
+				case -288:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					break;
+				case -301:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					break;
+				case -310:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_INVALID_EXPIRATION_DATE');
+					break;
+				case -306:
+					break;
+				case -125:
+				case -304:
+				case -911:
+					$this->response->code = 2;
+					$this->response->msg = ($this->isResponseRc == -125)? lang('RESP_EXPIRED_CARD'): lang('RESP_NOT_PROCCESS');
+					break;
+				case -35:
+				case -61:
+					$this->response->code = 2;
+					$this->response->msg =  ($this->isResponseRc == -35)? lang('RESP_USER_SUSPENDED'): lang('RESP_SESSION_EXPIRED');
+					$this->session->sess_destroy();
 					break;
 			}
 		}

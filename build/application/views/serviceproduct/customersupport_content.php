@@ -57,11 +57,11 @@
 								<hr class="separador-one mb-3">
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row form-group col-lg-4">
-									<label for="codeOTP">Codigo de Validación</label>
+									<label for="codeOTP">Código de Validación</label>
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 									<div class="help-block"></div>
 								</div>
-								<p id="verificationMsg" class="mb-3 h5"><a id="resendCode" class="primary" href="#">Reenviar codigo</a></p>
+								<p id="verificationMsg" class="mb-3 h5"><a id="resendCode" class="primary" href="#">Reenviar código</a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
