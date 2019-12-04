@@ -96,7 +96,10 @@ class ServiceProduct extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/serviceproduct/$view",
-			"third_party/kendo.dataviz"
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
 		);
 
 		if ($this->config->item('language_form_validate')) {
