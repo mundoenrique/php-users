@@ -80,7 +80,9 @@ class Product extends NOVO_Controller {
 				"availableBalance" => $productBalance,
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
-				"nom_plastico" => ucwords(strtolower($row->nom_plastico))
+				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
+				"availableServices" => $row->services,
+				"generatedPin" => $row->pinGeneradoUsuario
 			]);
 		}
 		$this->session->set_flashdata('listProducts', $dataRequeried);
@@ -122,6 +124,11 @@ class Product extends NOVO_Controller {
 			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
 			$dataProduct = $listProducts[$posList];
 		}
+
+		if (in_array("117",  $dataProduct['availableServices'])) {
+			redirect('atencioncliente');
+		}
+
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 		$dataProduct['movements'] = $this->transforNumberInArray ($movements);

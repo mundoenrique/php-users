@@ -41,7 +41,6 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			$dataProduct = $listProducts[$posList];
 		}
 
-
 		$this->dataRequest->newPin = base64_encode($dataRequest->newPin);
 		$this->dataRequest->noTarjeta = base64_encode($dataProduct['noTarjeta']);
 		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
