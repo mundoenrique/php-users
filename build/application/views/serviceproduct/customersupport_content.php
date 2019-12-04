@@ -53,9 +53,20 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
+							<div id="verification" class="none">
+								<hr class="separador-one mb-3">
+								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+								<div class="row form-group col-lg-4">
+									<label for="codeOTP">Codigo de Validación</label>
+									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
+									<div class="help-block"></div>
+								</div>
+								<p id="verificationMsg" class="mb-3 h5"><a id="resendCode" class="primary" href="#">Reenviar codigo</a></p>
+							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnGenerate" name="btnGenerate" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnVerifyOTP" class="btn btn-small btn-loading btn-primary none" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
