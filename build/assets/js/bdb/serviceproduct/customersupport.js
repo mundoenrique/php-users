@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger = btnTrigger.innerHTML.trim();
+var form, btnTrigger, txtBtnTrigger;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -24,6 +24,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				$$.getElementById(`${idName}View`).classList.remove("none");
 
 				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
+				txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
