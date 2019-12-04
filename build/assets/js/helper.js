@@ -137,7 +137,7 @@ function notiSystem(title, message, icon, data) {
 		resizable: false,
 		closeOnEscape: false,
 		minWidth: 370,
-		// minHeight: 170,
+		position: { my: "center top+200", at: "center top", of:  window },
 		dialogClass: "border-none",
     classes: {
       "ui-dialog-titlebar": "border-none",
