@@ -124,7 +124,7 @@ class Product extends NOVO_Controller {
 			$dataProduct = $listProducts[$posList];
 		}
 
-		if (in_array("117777",  $dataProduct['availableServices'])) {
+		if (in_array("117",  $dataProduct['availableServices'])) {
 			redirect('atencioncliente');
 		}
 

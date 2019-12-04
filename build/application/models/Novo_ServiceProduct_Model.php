@@ -47,13 +47,15 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->prefix = $dataProduct['prefix'];
 
 		log_message("info", "Request List Products:" . json_encode($this->dataRequest));
-		$response = $this->sendToService('Product');
+		$response = $this->sendToService('ServiceProduct');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->lista;
+					$this->response->code = 0;
 					break;
 			}
 		}
+		return $this->response;
 	}
 }
