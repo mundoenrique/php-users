@@ -51,7 +51,6 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		log_message("info", "Request ServiceProduct:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('ServiceProduct');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc  = -308;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;

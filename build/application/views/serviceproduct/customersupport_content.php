@@ -60,7 +60,7 @@
 									<label for="codeOTP">Código de Validación</label>
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 									<div id="txtMsgErrorCodeOTP" class="help-block"></div>
-									<p id="verificationMsg" class="mb-3 h5 none"><a id="resendCode" class="primary" href="#">Solicitar nuevo código de seguridad</a></p>
+									<p id="verificationMsg" class="mb-3 h5 none"><a id="resendCode" class="primary"><?= lang('RESP_RESEEND_OTP');?></a></p>
 								</div>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
@@ -148,4 +148,14 @@
 		</section>
 	</div>
 </div>
+<?php
+	$dataForm = json_encode([
+		'msgResendOTP' => "<a id='resendCode' class='primary'>". lang('RESP_RESEEND_OTP')."</a>",
+	]);
+?>
+<script>
+	var dataCustomerProduct = <?= $dataForm;?>;
+</script>
+
+
 
