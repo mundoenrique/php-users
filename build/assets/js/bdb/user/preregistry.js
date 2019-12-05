@@ -7,7 +7,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 	var verificationMsg = $$.getElementById("verificationMsg");
-	var dialogConditions = $('#dialogConditions');
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
@@ -99,7 +98,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	$$.getElementById("termsConditions").addEventListener('click', function() {
-		// $("body").scrollTop();
+		var dialogConditions = $('#dialogConditions');
 		window.scrollTo(0,0);
 
 		// MODAL TERMINOS Y CONDICIONES
@@ -123,22 +122,20 @@ $$.addEventListener('DOMContentLoaded', function(){
 			},
 			open: function (event, ui) {
 				$('#aceptar').on('click', function(e) {
-					$(this).dialog('close');
+					dialogConditions.dialog('close');
 					$(this).off('click');
+					$("body").css("overflowY", "auto");
+					dialogConditions.dialog( "destroy" );
+					dialogConditions.addClass("none");
 				});
 				$("body").css("overflowY", "hidden");
 				$(this).css("overflowY", "scroll");
 				$(this).css("max-height", "calc(-20px - 3.75rem + 100vh)");
 				$(this).removeClass("none");
-
 			}
 		});
-		dialogConditions.dialog("open");
-	});
 
-	$$.getElementById("aceptar").addEventListener('click', function() {
-		dialogConditions.dialog("close");
-		$("body").css("overflowY", "auto");
+		dialogConditions.dialog("open");
 	});
 
 	//functions
