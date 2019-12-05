@@ -3251,37 +3251,41 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	color: var(--danger);
 }
 
+.maestro,
+.mastercard,
+.visa,
+.visa-electron {
+	background: transparent no-repeat center;
+}
 .maestro {
-	background: transparent url("../../img/bdb/marcas/maestro.svg") no-repeat center / cover;
+	background-image: url("../../img/bdb/marcas/maestro.svg");
 }
 .mastercard {
-	background: transparent url("../../img/bdb/marcas/mastercard.svg") no-repeat center / cover;
+	background-image: url("../../img/bdb/marcas/mastercard.svg");
 }
 .visa {
-	background: transparent url("../../img/bdb/marcas/visa.svg") no-repeat center / cover;
+	background-image: url("../../img/bdb/marcas/visa.svg");
 }
 .visa-electron {
-	background: transparent url("../../img/bdb/marcas/visa-electron.svg") no-repeat center / cover;
-}
-
-.item-network {
-	position: absolute;
-	z-index: 2;
-	width: 80px;
-	height: 64px;
+	background-image: url("../../img/bdb/marcas/visa-electron.svg");
 }
 
 .product-presentation .item-network {
-	right: 0;
-	bottom: 4px;
-	background-size: 80px;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	z-index: 2;
+	width: 55px;
+	height: 25px;
+	background-size: 55px;
+	background-position: bottom right;
 }
 
-.product-presentation .item-network.visa {
-	bottom:  -8px;
-}
-.product-presentation .item-network.visa-electron {
-	bottom: -4px;
+.product-presentation .item-network.maestro,
+.product-presentation .item-network.mastercard {
+	width: 45px;
+	height: 35.5px;
+	background-size: 45px;
 }
 
 .dashboard-item {
