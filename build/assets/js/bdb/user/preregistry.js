@@ -98,41 +98,47 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	// MODAL TERMINOS Y CONDICIONES
-	dialogConditions.dialog({
-		autoOpen: false,
-		modal: true,
-		draggable: false,
-		resizable: false,
-		closeOnEscape: false,
-		position: { my: "center top", at: "center top", of:  '#preRegistry' },
-		width: 940,
-		dialogClass: "border-none",
-    classes: {
-      "ui-dialog-titlebar": "none",
-    },
-		show: {
-			duration: 250
-		},
-		hide: {
-			duration: 250
-		},
-		open: function (event, ui) {
-			$('#aceptar').on('click', function(e) {
-				$(this).dialog('close');
-				$(this).off('click');
-			});
-			$(this).removeClass("none");
-
-		}
-	});
-
 	$$.getElementById("termsConditions").addEventListener('click', function() {
+		// $("body").scrollTop();
+		window.scrollTo(0,0);
+
+		// MODAL TERMINOS Y CONDICIONES
+		dialogConditions.dialog({
+			autoOpen: false,
+			modal: true,
+			draggable: false,
+			resizable: false,
+			closeOnEscape: false,
+			position: { my: "center top+5", at: "center top+5", of:  "#preRegistry" },
+			width: 940,
+			dialogClass: "border-none",
+			classes: {
+				"ui-dialog-titlebar": "none",
+			},
+			show: {
+				duration: 250
+			},
+			hide: {
+				duration: 250
+			},
+			open: function (event, ui) {
+				$('#aceptar').on('click', function(e) {
+					$(this).dialog('close');
+					$(this).off('click');
+				});
+				$("body").css("overflowY", "hidden");
+				$(this).css("overflowY", "scroll");
+				$(this).css("max-height", "calc(-20px - 3.75rem + 100vh)");
+				$(this).removeClass("none");
+
+			}
+		});
 		dialogConditions.dialog("open");
 	});
 
 	$$.getElementById("aceptar").addEventListener('click', function() {
 		dialogConditions.dialog("close");
+		$("body").css("overflowY", "auto");
 	});
 
 	//functions
