@@ -74,19 +74,28 @@ function operationFactory(optionMenu, response = null) {
 				btnTrigger.disabled = false;
 				btnTrigger.innerHTML = txtBtnTrigger;
 				$$.getElementById("verificationOTP").classList.remove("none");
+				$$.getElementById("verificationMsg").classList.add("none");
+				$$.getElementById('txtMsgErrorCodeOTP').innerText = '';
 				$$.getElementById('codeOTP').disabled = false;
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 			},
 			2: function(response){
 				notiSystem (response.title, response.msg, response.classIconName, response.data);
 				disableInputsForm (idName, false, txtBtnTrigger);
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 			},
 			3: function(response){
 				$$.getElementById('codeOTP').value = '';
-				$$.getElementById('msgErrorCodeOTP').classList.remove('none');
+				$$.getElementById('verificationMsg').classList.remove('none');
 				$$.getElementById('txtMsgErrorCodeOTP').innerText = response.msg;
+				btnTrigger.innerHTML =txtBtnTrigger;
 			},
 			99: function(response){
 				notiSystem (response.title, response.msg, response.classIconName, response.data);
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 			}
 		}
 		return {data: dataForm, response: respnseForm};
@@ -142,7 +151,5 @@ function proccessPetition(coreOperation, idName)
 
 		const responseCode = coreOperation.response.hasOwnProperty(response.code) ? response.code : 99
 		coreOperation.response[responseCode](response);
-		btnTrigger.innerHTML =txtBtnTrigger;
-		btnTrigger.disabled = false;
 	});
 }
