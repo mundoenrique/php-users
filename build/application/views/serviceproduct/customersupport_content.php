@@ -65,7 +65,7 @@
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnGenerate" name="btnGenerate" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnGenerate" name="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 								<button id="btnVerifyOTP" class="btn btn-small btn-loading btn-primary none" type="submit">Continuar</button>
 							</div>
 						</form>
@@ -97,7 +97,7 @@
 							<div class="line mt-1"></div>
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnChange" name="btnChange" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnChange" name="btnChange" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
@@ -113,7 +113,7 @@
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnLock" name="btnLock" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnLock" name="btnLock" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
@@ -138,7 +138,7 @@
 
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
-								<button id="btnReplace" name="btnReplace" class="btn btn-primary" type="submit">Continuar</button>
+								<button id="btnReplace" name="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
