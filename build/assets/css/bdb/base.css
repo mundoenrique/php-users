@@ -3252,16 +3252,16 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .maestro {
-	background: transparent url("../../img/bdb/marcas/maestro.png") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/maestro.svg") no-repeat center / cover;
 }
 .mastercard {
-	background: transparent url("../../img/bdb/marcas/mastercard.png") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/mastercard.svg") no-repeat center / cover;
 }
 .visa {
-	background: transparent url("../../img/bdb/marcas/visa.png") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/visa.svg") no-repeat center / cover;
 }
 .visa-electron {
-	background: transparent url("../../img/bdb/marcas/visa-electron.png") no-repeat center / cover;
+	background: transparent url("../../img/bdb/marcas/visa-electron.svg") no-repeat center / cover;
 }
 
 .item-network {
@@ -3310,6 +3310,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	z-index: 0;
 }
 
+.dashboard-item.inactive .item-img {
+	opacity: .4;
+}
+
+.dashboard-item.inactive .item-category,
+.dashboard-item.inactive .item-cardnumber {
+	opacity: .4;
+}
+
 .dashboard-item:hover .item-img {
 	margin-top: 0;
 }
@@ -3328,11 +3337,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .item-info.maestro,
-.item-info.mastercard,
+.item-info.mastercard {
+	background-position: bottom 20px right 20px;
+	background-size: 40px;
+}
+
 .item-info.visa,
 .visa-electron {
-	background-position: bottom right;
-	background-size: 80px;
+	background-position: bottom 20px right 20px;
+	background-size: 50px;
 }
 
 .dashboard-item:hover .item-info {
