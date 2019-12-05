@@ -18,8 +18,6 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Services Product method Initialized');
 
-		//pais, cuenta, id_ext_per, pinNuevo, fecExpTarjeta, telephoneNumber
-
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataAccessLog->modulo = 'Cuentas';
 		$this->dataAccessLog->function = 'Generar PIN';
@@ -53,10 +51,19 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		log_message("info", "Request ServiceProduct:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('ServiceProduct');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc  = -308;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
 					$this->response->msg = lang('RESP_PIN_GENERATED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('vistaconsolidada'),
+							'action' => 'redirect'
+						]
+					];
 				break;
 				case 10:
 					$this->response->code = 1;
@@ -68,14 +75,38 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -241:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -345:
-					$this->response->code = 3;
+					$this->response->code = 2;
 					$this->response->msg = lang('RESP_FAILED_ATTEMPTS');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -401:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_PIN_NOT_CHANGED');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -286:
 					$this->response->code = 3;
@@ -96,6 +127,14 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -310:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_INVALID_EXPIRATION_DATE');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -306:
 					break;
@@ -104,12 +143,38 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -911:
 					$this->response->code = 2;
 					$this->response->msg = ($this->isResponseRc == -125)? lang('RESP_EXPIRED_CARD'): lang('RESP_NOT_PROCCESS');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -35:
 				case -61:
 					$this->response->code = 2;
 					$this->response->msg =  ($this->isResponseRc == -35)? lang('RESP_USER_SUSPENDED'): lang('RESP_SESSION_EXPIRED');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					$this->session->sess_destroy();
+					break;
+				default:
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 			}
 		}

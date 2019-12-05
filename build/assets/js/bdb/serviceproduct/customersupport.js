@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -29,41 +29,20 @@ $$.addEventListener('DOMContentLoaded', function(){
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
 
+					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
+
 					form = $(`#form${idNameCapitalize}`);
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
+
 						disableInputsForm(idName, true, msgLoading);
-						var data = new requestFactory(`fn${idNameCapitalize}`);
-						callNovoCore('POST', 'ServiceProduct', idName, data, function(response) {
+						proccessPetition(coreOperation, idName);
 
-							switch (response.code) {
-								case 0:
-									console.log('fino con OTP');
-									break;
-								case 1:
-									btnTrigger.disabled = false;
-									btnTrigger.innerHTML = txtBtnTrigger;
-									$$.getElementById("verificationOTP").classList.remove("none");
-									$$.getElementById('codeOTP').disabled = false;
-									break;
-								case 2:
-									notiSystem(response.title, response.msg, response.classIconName, response.data);
-									disableInputsForm(idName, false, txtBtnTrigger);
-									break;
-								case 3:
-									resendCodeOTP (response.msg);
-									break;
-								default:
-									disableInputsForm(idName, false, txtBtnTrigger);
-									break;
-							}
-
-							$$.getElementById('resendCode').addEventListener('click', function(){
-								resendCodeOTP();
-							})
-
-						});
+					}else{
+						notiSystem (response.title, response.msg, response.classIconName, response.data);
+						disableInputsForm (idName, false, txtBtnTrigger);
 					}
+					$$.getElementById('resendCode').addEventListener('click', resendCodeOTP(coreOperation));
 				});
 			}
 		});
@@ -72,19 +51,45 @@ $$.addEventListener('DOMContentLoaded', function(){
 })
 
 //functions
-function requestFactory(optionMenu) {
+function operationFactory(optionMenu, response = null) {
 
-	function fnGenerate(){
+	function fnGenerate(response = null){
 		var md5CodeOTP = '';
 		var inpCodeOTP = $$.getElementById('codeOTP').value;
 		if (inpCodeOTP) {
 			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
 		}
-		return {
+
+		var dataForm = {
 			newPin: $$.getElementById('newPin').value,
 			confirmPin: $$.getElementById('confirmPin').value,
 			codeOTP: md5CodeOTP
-		};
+		}
+
+		var respnseForm = {
+			0: function (response){
+				notiSystem (response.title, response.msg, response.classIconName, response.data);
+			},
+			1: function(){
+				btnTrigger.disabled = false;
+				btnTrigger.innerHTML = txtBtnTrigger;
+				$$.getElementById("verificationOTP").classList.remove("none");
+				$$.getElementById('codeOTP').disabled = false;
+			},
+			2: function(response){
+				notiSystem (response.title, response.msg, response.classIconName, response.data);
+				disableInputsForm (idName, false, txtBtnTrigger);
+			},
+			3: function(response){
+				$$.getElementById('codeOTP').value = '';
+				$$.getElementById('msgErrorCodeOTP').classList.remove('none');
+				$$.getElementById('txtMsgErrorCodeOTP').innerText = response.msg;
+			},
+			99: function(response){
+				notiSystem (response.title, response.msg, response.classIconName, response.data);
+			}
+		}
+		return {data: dataForm, response: respnseForm};
 	}
 	function fnChange(){
 		return console.log('change function');
@@ -96,34 +101,7 @@ function requestFactory(optionMenu) {
 		return console.log('replace function');
 	}
 
-	return eval(`${optionMenu}`)();
-}
-
-function responseFactory(optionMenu) {
-
-	function fnGenerate(){
-		var md5CodeOTP = '';
-		var inpCodeOTP = $$.getElementById('codeOTP').value;
-		if (inpCodeOTP) {
-			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
-		}
-		return {
-			newPin: $$.getElementById('newPin').value,
-			confirmPin: $$.getElementById('confirmPin').value,
-			codeOTP: md5CodeOTP
-		};
-	}
-	function fnChange(){
-		return console.log('change function');
-	}
-	function fnLock(){
-		return console.log('lock function');
-	}
-	function fnReplace(){
-		return console.log('replace function');
-	}
-
-	return eval(`${optionMenu}`)();
+	return eval(`${optionMenu}`)(response);
 }
 
 function disableInputsForm(optionMenu, status, txtButton) {
@@ -149,21 +127,22 @@ function disableInputsForm(optionMenu, status, txtButton) {
 	btnTrigger.disabled = status;
 }
 
-function resendCodeOTP (msg) {
+function resendCodeOTP (coreOperation) {
 	btnTrigger.disabled = true;
 	btnTrigger.innerHTML = msgLoading;
-	$$.getElementById('codeOTP').disabled = true;
-	$$.getElementById('help-block').innerHTML = msg;
 
- 	callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
-		if (response.code == 1) {
-			btnTrigger.disabled = false;
-			btnTrigger.innerHTML = txtBtnTrigger;
-			$$.getElementById('codeOTP').disabled = true;
-		}
-		else{
-			notiSystem(response.title, response.msg, response.classIconName, response.data);
-			disableInputsForm(false, txtBtnTrigger);
-		}
+	$$.getElementById('codeOTP').disabled = true;
+	proccessPetition(coreOperation, 'generate');
+	//$$.getElementById('msgErrorCodeOTP').classList.add('none');
+}
+
+function proccessPetition(coreOperation, idName)
+{
+	callNovoCore('POST', 'ServiceProduct', idName, coreOperation.data, function(response) {
+
+		const responseCode = coreOperation.response.hasOwnProperty(response.code) ? response.code : 99
+		coreOperation.response[responseCode](response);
+		btnTrigger.innerHTML =txtBtnTrigger;
+		btnTrigger.disabled = false;
 	});
 }

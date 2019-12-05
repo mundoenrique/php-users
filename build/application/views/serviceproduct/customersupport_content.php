@@ -59,9 +59,11 @@
 								<div class="row form-group col-lg-4">
 									<label for="codeOTP">Código de Validación</label>
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
-									<div class="help-block"></div>
+									<div id="msgErrorCodeOTP" class="help-block none">
+										<div id="txtMsgErrorCodeOTP" class="help-block"></div>
+										<p id="verificationMsg" class="mb-3 h5"><a id="resendCode" class="primary" href="#">Solicitar nuevo código de seguridad</a></p>
+									</div>
 								</div>
-								<p id="verificationMsg" class="mb-3 h5"><a id="resendCode" class="primary" href="#">Reenviar código</a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
