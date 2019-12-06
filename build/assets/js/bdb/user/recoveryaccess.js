@@ -17,7 +17,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var typeDocument = $$.getElementById('typeDocument');
 			var data = {};
 
-			btnTrigger.innerHTML = msgLoading;
+			btnTrigger.innerHTML = msgLoadingWhite;
 			btnTrigger.disabled = true;
 
 			$$.getElementById('formRecoveryAccess').querySelectorAll('input').forEach(

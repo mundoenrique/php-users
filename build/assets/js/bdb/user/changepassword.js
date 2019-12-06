@@ -44,7 +44,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		if(form.valid()) {
 
 			var txtBtnTrigger = btnTrigger.innerHTML.trim();
-			btnTrigger.innerHTML = msgLoading;
+			btnTrigger.innerHTML = msgLoadingWhite;
 			btnTrigger.disabled = true;
 
 			var data = {};

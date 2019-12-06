@@ -23,7 +23,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var codeTypeDocument = typeDocument.options[typeDocument.selectedIndex].value;
 			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocument}).abreviatura
 
-			disableInputsForm(true, msgLoading);
+			disableInputsForm(true, msgLoadingWhite);
 
 			if (inpCodeOTP.value){
 				md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
@@ -79,7 +79,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			validateForms(form, {handleMsg: true});
 			if(form.valid()) {
 				btnTriggerOTP.disabled = true;
-				btnTriggerOTP.innerHTML = msgLoading;
+				btnTriggerOTP.innerHTML = msgLoadingWhite;
 
 				data['codeOTP'] = CryptoJS.MD5(inpCodeOTP.value).toString();
 				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
@@ -197,7 +197,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('codeOTP').disabled = true;
 
 			$$.getElementById('resendCode').addEventListener('click', function(){
-				disableInputsForm(true, msgLoading);
+				disableInputsForm(true, msgLoadingWhite);
 				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 				{
 					if (response.code == 0) {

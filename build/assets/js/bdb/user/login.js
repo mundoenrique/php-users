@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		if(form.valid()) {
 
-			$(this).html(msgLoading);
+			$(this).html(msgLoadingWhite);
 			disableInputsForm(true)
 
 			if (activatedCaptcha) {

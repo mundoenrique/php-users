@@ -37,7 +37,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		if(form.valid()) {
 
 			var txtBtnRegistry = btnRegistry.innerHTML.trim();
-			btnRegistry.innerHTML = msgLoading;
+			btnRegistry.innerHTML = msgLoadingWhite;
 
 			var data = {};
 
