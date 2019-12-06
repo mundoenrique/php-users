@@ -3599,9 +3599,9 @@ label.label-inline {
   float: left;
 }
 
-.icon-calendar:before {
+/*.icon-calendar:before {
   margin-left: -245px;
-}
+}*/
 
 .clear-text {
   clear: both;

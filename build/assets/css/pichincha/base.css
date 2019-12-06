@@ -624,6 +624,10 @@ a:hover {
 	 content: "\e05e";
  }
 
+ .icon-calendar:before {
+	content: "\e01e";
+}
+
  form {
 	 margin: 0;
 	 padding: 0;
@@ -672,6 +676,9 @@ a:hover {
 }
 .atc-form-action-child-perfil-content{
 	width: 180px;
+}
+.atc-form-action-child-perfil-content_2{
+	width: 280px;
 }
 .atc-form-action-child-perfil-diesession{
 	width: 109px;
