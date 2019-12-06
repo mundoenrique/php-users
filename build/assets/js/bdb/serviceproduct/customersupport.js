@@ -18,7 +18,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				for (j = 0; j < options.length; j++) {
 					options[j].classList.remove("active");
-					$$.getElementById(`${idName}View`).classList.add("none");
+					$$.getElementById(`${options[j].id}View`).classList.add("none");
 				}
 				this.classList.add("active");
 				$$.getElementById(`${idName}View`).classList.remove("none");

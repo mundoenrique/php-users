@@ -3233,7 +3233,7 @@ a.ui-button:active,
 	transition: all .3s ease 0s;
 }
 .widget-support:hover {
-	bottom: 0px;
+	bottom: 5px;
 	opacity: 1;
 }
 
