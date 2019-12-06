@@ -330,9 +330,6 @@ $(function(){
 						segundo_apellido	= data.user.segundoApellido;
 						sexo				= data.afiliacion.sexo;
 						fecha_nacimiento	= data.user.fechaNacimiento;
-						$('#dia').blur(fechaNacimiento);
-						$('#mes').change(fechaNacimiento);
-						$('#ano').blur(fechaNacimiento);
 
 						if(data.user.aplicaPerfil == 'S'){
 							lugar_nacimiento	= data.afiliacion.lugar_nacimiento;
@@ -366,15 +363,6 @@ $(function(){
 							$("#gender-female").prop("checked", true);
 						}
 
-						var dia		= fecha_nacimiento.substring(0,2);
-						var mes		= fecha_nacimiento.substring(3,5);
-						var ano		= fecha_nacimiento.substring(6,10);
-						$("#dia").val(dia);
-						$("#mes").val(mes);
-						$("#ano").val(ano);
-						if(dia!='' && mes!='' && ano!=''){
-							$('#fecha-de-nacimiento').val(dia+'/'+mes+'/'+ano);
-						}
 
 						break;
 				case 2: //Respuesta negativa muestra modal
@@ -396,65 +384,50 @@ $(function(){
 	//Funcion que valida si el usuario es mayor de edad.
 
 	function fechaNacimiento() {
-		var dia		= $('#dia').val();
-		var mes		= $('#mes option:selected').val();
-		var anio	= $('#ano').val();
+
+		var fecha_nac_nueva = $('#fecha-de-nacimiento-new').val().split('/');
+		var dia = fecha_nac_nueva[0];
+		var mes = fecha_nac_nueva[1];
+		var anio = fecha_nac_nueva[2];
 
 		if(dia != '' && mes != '' && anio != '') {
 			if (anio < anioMayorEdad) {
-				$('#fecha-de-nacimiento').val(dia + '/' + mes + '/' + anio);
-				$('#dia').removeClass('field-error').addClass('field-success');
-				$('#mes').removeClass('field-error').addClass('field-success');
-				$('#ano').removeClass('field-error').addClass('field-success');
+
 				return true;
 
 			} else {
 				if (anio == anioMayorEdad) {
 					if (mes < mesActual) {
-						$('#fecha-de-nacimiento').val(dia + '/' + mes + '/' + anio);
-						$('#dia').removeClass('field-error').addClass('field-success');
-						$('#mes').removeClass('field-error').addClass('field-success');
-						$('#ano').removeClass('field-error').addClass('field-success');
+
 						return true;
 
 					} else {
 						if (mes == mesActual) {
 							if (dia <= diaActual) {
-								$('#fecha-de-nacimiento').val(dia + '/' + mes + '/' + anio);
-								$('#dia').removeClass('field-error').addClass('field-success');
-								$('#mes').removeClass('field-error').addClass('field-success');
-								$('#ano').removeClass('field-error').addClass('field-success');
+
 								return true;
 
 							} else {
 								return false;
 							}
-							$('#dia').removeClass('field-error').addClass('field-success');
-							$('#mes').removeClass('field-error').addClass('field-success');
-							$('#ano').removeClass('field-error').addClass('field-success');
+
 							return true;
 						}
 						else {
 							return false;
 						}
-						$('#dia').removeClass('field-error').addClass('field-success');
-						$('#mes').removeClass('field-error').addClass('field-success');
-						$('#ano').removeClass('field-error').addClass('field-success');
+
 						return true;
 					}
 				} else {
 					return false;
 				}
-				$('#dia').removeClass('field-error').addClass('field-success');
-				$('#mes').removeClass('field-error').addClass('field-success');
-				$('#ano').removeClass('field-error').addClass('field-success');
+
 				return true;
 			}
 			return true;
 		}else if(dia != '' || mes != '' || anio != '') {
-			$('#dia').removeClass('field-error').addClass('field-success');
-			$('#mes').removeClass('field-error').addClass('field-success');
-			$('#ano').removeClass('field-error').addClass('field-success');
+
 			return true;
 		}
 		//
@@ -537,34 +510,27 @@ $(function(){
 // FUNCION PARA MOSTRAR EL WIDGET DEL CALENDARIO
 
 	$.datepicker.regional['es'] ={
-
 		closeText: 'Cerrar',
-
 		prevText: 'Previo',
-
 		nextText: 'Próximo',
-
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-
 		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
 			'Jul','Ago','Sep','Oct','Nov','Dic'],
-
 		monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
 		dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-
 		dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'],
-
 		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-
 		dateFormat: 'dd/mm/yy', firstDay: 0,
-
-		initStatus: 'Selecciona la fecha', isRTL: false
+		initStatus: 'Selecciona la fecha', isRTL: false,
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true
 	};
 
 	$.datepicker.setDefaults($.datepicker.regional['es']);
-
 	$("#birth-date").datepicker();
+	$("#fecha-de-nacimiento-new").datepicker();
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -819,6 +785,8 @@ $(function(){
 
 		form=$("#form-usuario");
 
+		birthDate			= $("#fecha-de-nacimiento-new").val();
+
 		if(form.valid() == true) {
 			$("#load_reg").show();
 
@@ -839,7 +807,7 @@ $(function(){
 			lastName			= $('#last-name').val();							//5 N
 			lastExtName			= $('#last-ext-name').val();						//6 N
 			placeBirth			= $('#lugar-nacimiento').val();
-			birthDate			= $("#fecha-de-nacimiento").val();					//Campo fecha de nacimiento tipo Hidden - N
+			birthDate			= $("#fecha-de-nacimiento-new").val();					//Campo fecha de nacimiento tipo Hidden - N
 			sexo				= $("input[name='genero']:checked").val();			//11 N
 			civilStatus			= $('#edocivil').val();								//12
 			nationality			= $('#nacionalidad').val();							//13
@@ -1116,7 +1084,7 @@ $(function(){
 			}else if(fecha_nacimiento == false) {
 				return false;
 			}
-		}, "Usted no es mayor de edad ");
+		}, "Usted no es mayor de edad. ");
 
 		// Metodo que valida si la fecha es invalida
 		jQuery.validator.addMethod("fecha_invalida", function(value,element){
@@ -1161,6 +1129,43 @@ $(function(){
 				return value == digVer ? true : false;
 			}
 		);
+
+		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
+		$.validator.addMethod("esBisiesto", function(value, element, regex){
+
+			var fecha_nac_nueva = $('#fecha-de-nacimiento-new').val().split('/');
+			var day = fecha_nac_nueva[0];
+			var month = fecha_nac_nueva[1];
+			var year = fecha_nac_nueva[2];
+
+			var date = new Date(month+"/"+day+"/"+year);
+
+			if(day == "29" && month == "02") {
+				if(year % 4 == 0 && ( year % 100 != 0 || year % 400 == 0)) {
+				return true
+				} else {
+					return false;
+				}
+			} else if(month == (date.getMonth()+1) && day == date.getDate() && year == date.getFullYear()) {
+				return true;
+			} else {
+				return false;
+			}
+		 }, "Usted introdujo una fecha inválida.");
+
+		// Metodo que valida el rango del dia insertado entre 1 y 31 días
+		jQuery.validator.addMethod("rangoDias", function(value,element){
+
+			var fecha_nac_nueva = $('#fecha-de-nacimiento-new').val().split('/');
+			var day = fecha_nac_nueva[0];
+
+			if(day > 31 || day <= 0){
+				return false;
+			}else{
+				return true;
+			}
+		}, "El Día debe estar comprendido entre 1 y 31.");
+
 
 		$("#form-validar").validate({
 
@@ -1207,9 +1212,6 @@ $(function(){
 				"primer_apellido" : {"required":true, "expresionRegular":true},												//5
 				"segundo_apellido": {"required":false, "expresionRegular":true},											//6
 				"lugar_nacimiento" : {"required":false, "expresionRegular":true},											//7
-				"dia" : {"required" : true, "number":true, range : [1,31]},													//8
-				"mes" : {"required" : true, "number":true, range : [1,12], "fecha_invalida": true},							//9
-				"ano" : {"required" : true, "number":true, min: 1900, "mayorEdadAnio" : true/*range : [1920,mesActual-18]*/},//10
 				"genero" : {"required" : false},																			//11
 				"edo_civil" : {"required" : false},																			//12
 				"nacionalidad" : {"required" : true, "expresionRegular":true},												//13
@@ -1240,7 +1242,8 @@ $(function(){
 				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
-				"proteccion": {"required": true}
+				"proteccion": {"required": true},
+				"fecha-de-nacimiento-new": {"required": true ,"rangoDias":true, "esBisiesto" : true , "mayorEdadAnio": true }
 			},
 
 			messages: {
@@ -1253,21 +1256,6 @@ $(function(){
 				"primer_apellido" : "El campo Apellido Paterno no puede estar vacío y debe contener solo letras.",								//5
 				"segundo_apellido" : "El campo Apellido Materno debe contener solo letras.",													//6
 				"lugar_nacimiento" : "El campo Lugar de Nacimiento debe contener solo letras.",													//7
-				"dia" : {																														//8
-					"required"	: "El campo Día no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Día no puede estar vacío y debe contener solo números.",
-					"range":"El Día debe estar comprendido entre 1 y 31."
-				},
-				"mes" : {																														//9
-					"required"	: "El campo Mes no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Mes no puede estar vacío y debe contener solo números.",
-					"fecha_invalida" : "Usted introdujo una fecha inválida.",
-				},
-				"ano" : {																														//10
-					"required"	: "El campo Año no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Año no puede estar vacío y debe contener solo números.",
-					"min" : "Por favor ingrese un Año de nacimiento válido."
-				},
 				"nacionalidad" : "El campo Nacionalidad no puede estar vacío.",
 				"tipo_direccion" : "El campo Tipo Dirección no puede estar vacío",																//14																									//14
 				"codigo_postal" : "El campo Código Postal debe contener solo números.",															//15
@@ -1314,7 +1302,10 @@ $(function(){
 				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
 				"confirm_userpwd" : "El campo confirmar contraseña debe coincidir con su contraseña.",											//40
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
-				"proteccion": "Debe aceptar protección de datos personales."
+				"proteccion": "Debe aceptar protección de datos personales.",
+				"fecha-de-nacimiento-new": {																														//10
+					"required"	: "El campo Fecha de nacimiento no puede estar vacío."
+				}
 			}
 		}); // VALIDATE
 	}
