@@ -35,7 +35,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
 
-						disableInputsForm(idName, true, msgLoading);
+						disableInputsForm(idName, true, msgLoadingWhite);
 						proccessPetition(coreOperation, idName);
 
 					}else{
@@ -73,7 +73,7 @@ function operationFactory(optionMenu, response = null) {
 				btnTrigger.disabled = false;
 				btnTrigger.innerHTML = txtBtnTrigger;
 				$$.getElementById("verificationOTP").classList.remove("none");
-				$$.getElementById("verificationMsg").classList.add("none");
+				$$.getElementById("verificationMsg").classList.add("visible");
 				$$.getElementById('txtMsgErrorCodeOTP').innerText = '';
 				$$.getElementById('codeOTP').disabled = false;
 				btnTrigger.innerHTML = txtBtnTrigger;
@@ -88,7 +88,7 @@ function operationFactory(optionMenu, response = null) {
 			3: function(response){
 				$$.getElementById('codeOTP').value = '';
 				$$.getElementById('codeOTP').disabled = true;
-				$$.getElementById('verificationMsg').classList.remove('none');
+				$$.getElementById('verificationMsg').classList.remove('visible');
 				$$.getElementById('txtMsgErrorCodeOTP').innerText = response.msg;
 				$$.getElementById('verificationMsg').innerHtml =  dataCustomerProduct.msgResendOTP;
 				btnTrigger.innerHTML =txtBtnTrigger;
@@ -138,8 +138,9 @@ function disableInputsForm(optionMenu, status, txtButton) {
 }
 
 function resendCodeOTP (coreOperation) {
+	event.preventDefault();
 	btnTrigger.disabled = true;
-	$$.getElementById('verificationMsg').innerHTML = msgLoadingBlue;
+	$$.getElementById('verificationMsg').innerHTML = msgLoading;
 	proccessPetition(coreOperation, 'generate');
 }
 

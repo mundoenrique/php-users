@@ -60,8 +60,8 @@
 									<label for="codeOTP">Código de Validación</label>
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 									<div id="txtMsgErrorCodeOTP" class="help-block"></div>
-									<p id="verificationMsg" class="mb-3 h5 none"><a id="resendCode" class="primary"><?= lang('RESP_RESEEND_OTP');?></a></p>
 								</div>
+								<p id="verificationMsg" class="mb-1 h5 visible"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
