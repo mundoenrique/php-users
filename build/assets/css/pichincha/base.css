@@ -624,6 +624,10 @@ a:hover {
 	 content: "\e05e";
  }
 
+ .icon-calendar:before {
+	content: "\e01e";
+}
+
  form {
 	 margin: 0;
 	 padding: 0;
