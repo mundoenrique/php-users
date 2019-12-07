@@ -45,6 +45,7 @@ $lang['RESP_EXPIRED_CARD'] = 'No es posible realizar esta acción, la tarjeta es
 $lang['RESP_USER_SUSPENDED'] = 'El usuario se encuentra suspendido.';
 $lang['RESP_SESSION_EXPIRED'] = 'Su sesión ha expirado.';
 $lang['RESP_RESEEND_OTP'] = 'Solicitar nuevo código de seguridad.';
+$lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas ha caducado.';
 
 
 

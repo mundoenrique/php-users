@@ -119,9 +119,12 @@ class ServiceProduct extends NOVO_Controller {
 		{
 			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
 			$dataProduct = $listProducts[$posList];
+
+			$dataRequeried = [];
+			array_push($dataRequeried, $dataProduct);
+			$this->session->set_flashdata('listProducts', $dataRequeried);
 		}
 
-		$dataProduct['availableServices'] = ['117'];
 		$optionsAvailables = [];
 		$menuOptionsProduct = [
 			'117' => [
@@ -142,7 +145,7 @@ class ServiceProduct extends NOVO_Controller {
 			]
 		];
 
-		foreach ($menuOptionsProduct as $key => $value) {
+ 		foreach ($menuOptionsProduct as $key => $value) {
 			$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
 			$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
 			array_push($optionsAvailables,$option);

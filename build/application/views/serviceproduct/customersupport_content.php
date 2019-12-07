@@ -61,7 +61,7 @@
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 									<div id="txtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
-								<p id="verificationMsg" class="mb-1 h5 visible"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="verificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
@@ -79,23 +79,32 @@
 						<form id="formChange" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="pinCurrent">PIN actual</label>
-									<input id="pinCurrent" class="form-control" type="password" name="pinCurrent">
+									<label for="changeCurrentPin">PIN actual</label>
+									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="newPin">Nuevo PIN</label>
-									<input id="newPin" class="form-control" type="password" name="newPin">
+									<label for="changeNewPin">Nuevo PIN</label>
+									<input id="changeNewPin" class="form-control" type="password" name="changeNewPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="confirmPin">Confirmar PIN</label>
-									<input id="confirmPin" class="form-control" type="password" name="confirmPin">
+									<label for="changeConfirmPin">Confirmar PIN</label>
+									<input id="changeConfirmPin" class="form-control" type="password" name="changeConfirmPin">
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="line mt-1"></div>
-							<div class="flex items-center justify-end pt-3">
+							<div id="changeVerificationOTP" class="none">
+								<hr class="separador-one mb-3">
+								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+								<div class="row form-group col-lg-4">
+									<label for="changeCodeOTP">Código de Validación</label>
+									<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
+									<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
+								</div>
+								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
+							</div>
+							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnChange" name="btnChange" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
@@ -150,7 +159,7 @@
 </div>
 <?php
 	$dataForm = json_encode([
-		'msgResendOTP' => "<a id='resendCode' class='primary'>". lang('RESP_RESEEND_OTP')."</a>",
+		'msgResendOTP' => "<a id='resendCode' class='primary' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
 	]);
 ?>
 <script>

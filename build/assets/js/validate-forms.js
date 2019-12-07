@@ -165,8 +165,8 @@ function validateForms(form, options) {
 
 	jQuery.validator.addMethod("pinNew1", function(value,element){
 		if(element.value.length>0 && element.value == $("#newPin").val())
-			return true;
-		else return false;
+			return false;
+		else return true;
 	}, "Debe ser igual al nuevo PIN");
 
 	jQuery.validator.addMethod("pinNew2", function(value, element) {
@@ -181,6 +181,9 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
+			pinCurrent: { required: true, number: true, exactlength: 4 },
+			newPin: { required: true, number: true, exactlength: 4, "pinNew2": true, "fourConsecutivesDigits": true },
+			confirmPin: { required: true, number: true, "pinNew1": true },
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
 			codeOTP: { required: true, digits: true, exactlength: 5 },
@@ -229,10 +232,7 @@ function validateForms(form, options) {
 			protection: { required: true },
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
-			recovery: { required: true },
-			pinCurrent: { required: true, number: true, exactlength: 4 },
-      newPin: { required: true, number: true, exactlength: 4, "pinNew2": true, "fourConsecutivesDigits": true },
-      confirmPin: { required: true, number: true, "pinNew1": true }
+			recovery: { required: true }
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

@@ -1,9 +1,9 @@
 'use strict';
-var $ = document;
+var $$ = document;
 
-$.addEventListener('DOMContentLoaded', function(){
+$$.addEventListener('DOMContentLoaded', function(){
 		//vars
-		var products = $.querySelectorAll('.dashboard-item');
+		var products = $$.querySelectorAll('.dashboard-item');
 
 		//core
 		for (var i = 0; i < products.length; i++) {

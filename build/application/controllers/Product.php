@@ -128,6 +128,10 @@ class Product extends NOVO_Controller {
 		{
 			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
 			$dataProduct = $listProducts[$posList];
+
+			$dataRequeried = [];
+			array_push($dataRequeried, $dataProduct);
+			$this->session->set_flashdata('listProducts', $dataRequeried);
 		}
 
 		if (in_array("117",  $dataProduct['availableServices'])) {

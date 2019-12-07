@@ -1,6 +1,24 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'change' => [
+		[
+			'field' => 'pinCurrent',
+			'label' => 'pinCurrent',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+		],
+
+		[
+			'field' => 'newPin',
+			'label' => 'newPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|differs[pinCurren]'
+		],
+		[
+			'field' => 'confirmPin',
+			'label' => 'confirmPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
+		],
+	],
 	'generate' => [
 		[
 			'field' => 'newPin',
@@ -10,7 +28,7 @@ $config = [
 		[
 			'field' => 'confirmPin',
 			'label' => 'confirmPin',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
 		],
 
 	],
