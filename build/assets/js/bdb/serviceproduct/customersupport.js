@@ -39,6 +39,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 						proccessPetition(coreOperation, idName);
 
 					}else{
+						notiSystem (response.title, response.msg, response.classIconName, response.data);
 						disableInputsForm (idName, false, txtBtnTrigger);
 					}
 
@@ -105,7 +106,6 @@ function operationFactory(optionMenu, response = null) {
 			codeOTP: md5CodeOTP
 		}
 
-
 		return {data: dataForm, response: responseForm};
 	}
 
@@ -122,47 +122,6 @@ function operationFactory(optionMenu, response = null) {
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
 		}
-
-		// var responseForm = {
-		// 	0: function (response){
-		// 		notiSystem (response.title, response.msg, response.classIconName, response.data);
-		// 	},
-		// 	1: function(){
-		// 		btnTrigger.disabled = false;
-		// 		btnTrigger.innerHTML = txtBtnTrigger;
-		// 		$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
-		// 		$$.getElementById(`${idName}VerificationMsg`).classList.add("none");
-		// 		$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
-		// 		$$.getElementById(`${idName}CodeOTP`).disabled = false;
-		// 		btnTrigger.innerHTML = txtBtnTrigger;
-		// 		btnTrigger.disabled = false;
-		// 	},
-		// 	2: function(response){
-		// 		notiSystem (response.title, response.msg, response.classIconName, response.data);
-		// 		disableInputsForm (idName, false, txtBtnTrigger);
-		// 		btnTrigger.innerHTML = txtBtnTrigger;
-		// 		btnTrigger.disabled = false;
-		// 	},
-		// 	3: function(response){
-		// 		$$.getElementById(`${idName}CodeOTP`).value = '';
-		// 		$$.getElementById(`${idName}CodeOTP`).disabled = true;
-		// 		$$.getElementById(`${idName}VerificationMsg`).innerHTML =  dataCustomerProduct.msgResendOTP;
-		// 		$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
-		// 		$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = response.msg;
-		// 		btnTrigger.innerHTML =txtBtnTrigger;
-				$$.getElementById(`${idName}VerificationMsg`).firstChild.setAttribute('name',`${idName}ResendCode`);
-
-		// 		$$.getElementsByName(`${idName}ResendCode`)[0].addEventListener('click', function(e){
-		// 			e.preventDefault();
-		// 			resendCodeOTP(coreOperation);
-		// 		});
-		// 	},
-		// 	99: function(response){
-		// 		notiSystem (response.title, response.msg, response.classIconName, response.data);
-		// 		btnTrigger.innerHTML = txtBtnTrigger;
-		// 		btnTrigger.disabled = false;
-		// 	}
-		// }
 
 		return {data: dataForm, response: responseForm};
 	}
@@ -205,7 +164,7 @@ function resendCodeOTP (coreOperation) {
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
 	$$.getElementById(`${idName}VerificationMsg`).innerHTML = msgLoading;
-	proccessPetition(coreOperation, idName);
+	proccessPetition(coreOperation, 'generate');
 }
 
 function proccessPetition(coreOperation, idName)
