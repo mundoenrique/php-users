@@ -75,7 +75,8 @@ class ServiceProduct extends NOVO_Controller {
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services
+				"availableServices" => $row->services,
+				"bloqueo" => $row->bloque
 			]);
 		}
 		$this->session->set_flashdata('listProducts', $dataRequeried);
@@ -145,8 +146,20 @@ class ServiceProduct extends NOVO_Controller {
 			]
 		];
 
+		if ( !empty($dataProduct['bloqueo']) ) {
+			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de cuenta";
+		}
+
  		foreach ($menuOptionsProduct as $key => $value) {
-			$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
+			 if (empty($dataProduct['bloqueo'])) {
+				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
+			 }
+			 else	{
+				$available = 'is-disabled';
+				if ($key == 110) {
+					$available = '';
+				}
+			 }
 			$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
 			array_push($optionsAvailables,$option);
 		}
