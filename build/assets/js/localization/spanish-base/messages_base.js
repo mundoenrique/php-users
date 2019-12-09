@@ -34,8 +34,8 @@ $.extend( $.validator.messages, {
 	spanishAlphabetical: "Debe contener solo letras.",
 	fechaInvalida: "Por favor, escribe una fecha válida.",
 	validatePassword: "El campo debe tener mínimo 1 y máximo 3 números consecutivos.",
-	username: "Solo letras, números y guiones",
-	nowhitespace: "Sin espacio en blanco",
+	username: "Solo letras, números y guiones.",
+	nowhitespace: "Sin espacio en blanco.",
 	emailValid: "Por favor, escribe una dirección de correo válida."
 
 } );

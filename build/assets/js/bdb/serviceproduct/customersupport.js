@@ -39,7 +39,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 						proccessPetition(coreOperation, idName);
 
 					}else{
-						notiSystem (response.title, response.msg, response.classIconName, response.data);
 						disableInputsForm (idName, false, txtBtnTrigger);
 					}
 
@@ -88,8 +87,8 @@ function operationFactory(optionMenu, response = null) {
 			3: function(response){
 				$$.getElementById('codeOTP').value = '';
 				$$.getElementById('codeOTP').disabled = true;
-				$$.getElementById('verificationMsg').innerHTML =  dataCustomerProduct.msgResendOTP;
-				$$.getElementById('verificationMsg').classList.remove('none');
+				$$.getElementById(`${idName}VerificationMsg`).innerHTML =  dataCustomerProduct.msgResendOTP;
+				$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
 				$$.getElementById('txtMsgErrorCodeOTP').innerText = response.msg;
 				btnTrigger.innerHTML =txtBtnTrigger;
 
@@ -202,7 +201,7 @@ function resendCodeOTP (coreOperation) {
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
 	$$.getElementById(`${idName}VerificationMsg`).innerHTML = msgLoading;
-	proccessPetition(coreOperation, 'generate');
+	proccessPetition(coreOperation, idName);
 }
 
 function proccessPetition(coreOperation, idName)

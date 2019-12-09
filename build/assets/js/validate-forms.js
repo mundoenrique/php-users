@@ -122,19 +122,19 @@ function validateForms(form, options) {
 		if(element.value.length>0 && (element.value == $("#landLine").val() || element.value == $("#mobilePhone").val()))
 			return false;
 		else return true;
-	}, "Teléfono Otro está repetido");
+	}, "Teléfono Otro está repetido.");
 
 	jQuery.validator.addMethod("numberEqual2", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#mobilePhone").val() || element.value == $("#otherPhoneNum").val()))
 			return false;
 		else return true;
-	}, "Teléfono Fijo está repetido");
+	}, "Teléfono Fijo está repetido.");
 
 	jQuery.validator.addMethod("numberEqual3", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#otherPhoneNum").val() || element.value == $("#otherPhoneNum").val()))
 				return false;
 		else return true;
-	}, "Teléfono Móvil está repetido");
+	}, "Teléfono Móvil está repetido.");
 
 	// Metodo que valida si la fecha es invalida
 	jQuery.validator.addMethod("fechaInvalida", function(value, element) {
@@ -149,7 +149,7 @@ function validateForms(form, options) {
 		fechanacimiento = moment(value, "DD/MM/YYYY");
 		years = hoy.diff(fechanacimiento, 'years');
 		return years >= 18;
-	}, "Usted no es mayor de edad");
+	}, "Usted no es mayor de edad.");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
 		return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
@@ -163,30 +163,41 @@ function validateForms(form, options) {
 		return value !== '0';
 	 }, "Este campo es obligatorio.");
 
-	jQuery.validator.addMethod("pinNew1", function(value,element){
-		if(element.value.length>0 && element.value == $("#newPin").val())
-			return false;
-		else return true;
-	}, "Debe ser igual al nuevo PIN");
+	jQuery.validator.addMethod("confirmPin", function(value,element){
+		if(element.value.length>0 && element.value == $("#newPin").val()) {
+			return true;
+		}
+		else return false;
+	}, "Debe ser igual al nuevo PIN.");
 
-	jQuery.validator.addMethod("pinNew2", function(value, element) {
-		if(element.value.length>0 && element.value == $("#pinCurrent").val())
+	jQuery.validator.addMethod("changeConfirmPin", function(value,element){
+		if(element.value.length>0 && element.value == $("#changeNewPin").val()) {
+			return true;
+		}
+		else return false;
+	}, "Debe ser igual al nuevo PIN.");
+
+	jQuery.validator.addMethod("changeNewPin", function(value, element) {
+		if(element.value.length>0 && element.value == $("#changeCurrentPin").val())
 			return false;
 		else return true;
-	}, "El nuevo PIN no debe ser igual a su PIN anterior");
+	}, "El nuevo PIN no debe ser igual a su PIN anterior.");
 
 	jQuery.validator.addMethod("fourConsecutivesDigits", function(value, element) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
-	}, "Los 4 dígitos no deben ser consecutivos");
+	}, "Los 4 dígitos no deben ser consecutivos.");
 
 	form.validate({
 		rules: {
-			pinCurrent: { required: true, number: true, exactlength: 4 },
-			newPin: { required: true, number: true, exactlength: 4, "pinNew2": true, "fourConsecutivesDigits": true },
-			confirmPin: { required: true, number: true, "pinNew1": true },
+			newPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
+			confirmPin: { required: true, number: true, "confirmPin": true },
+			changeCurrentPin: { required: true, number: true, exactlength: 4 },
+			changeNewPin: { required: true, number: true, exactlength: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
+			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
 			codeOTP: { required: true, digits: true, exactlength: 5 },
+			changeCodeOTP: { required: true, digits: true, exactlength: 5 },
 			nitBussines: { required: true, number: true,},
 			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
