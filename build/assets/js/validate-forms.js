@@ -196,7 +196,7 @@ function validateForms(form, options) {
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
-			codeOTP: { required: true, digits: true, exactlength: 5 },
+			generateCodeOTP: { required: true, digits: true, exactlength: 5 },
 			changeCodeOTP: { required: true, digits: true, exactlength: 5 },
 			nitBussines: { required: true, number: true,},
 			currentPassword: { required: true},

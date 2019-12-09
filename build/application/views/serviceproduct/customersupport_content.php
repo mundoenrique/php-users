@@ -53,15 +53,15 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div id="verificationOTP" class="none">
+							<div id="generateVerificationOTP" class="none">
 								<hr class="separador-one mb-3">
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row form-group col-lg-4">
-									<label for="codeOTP">Código de Validación</label>
-									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
-									<div id="txtMsgErrorCodeOTP" class="help-block"></div>
+									<label for="generateCodeOTP">Código de Validación</label>
+									<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
+									<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
-								<p id="verificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#" name="generateResendCode"><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="generateVerificationMsg" class="mb-1 h5 none"><a id="generateResendCode" class="primary" href="#" name="resendCode"><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
@@ -102,7 +102,7 @@
 									<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
 									<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
-								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#" name="changeResendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="changeResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
@@ -159,7 +159,7 @@
 </div>
 <?php
 	$dataForm = json_encode([
-		'msgResendOTP' => "<a id='resendCode' class='primary' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
+		'msgResendOTP' => "<a name='resendCode' class='primary' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
 	]);
 ?>
 <script>
