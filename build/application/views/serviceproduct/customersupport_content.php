@@ -61,7 +61,7 @@
 									<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 									<div id="txtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
-								<p id="verificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="verificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#" name="generateResendCode"><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
@@ -102,7 +102,7 @@
 									<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
 									<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
-								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#"><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="resendCode" class="primary" href="#" name="changeResendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>

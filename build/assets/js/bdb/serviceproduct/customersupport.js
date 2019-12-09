@@ -144,11 +144,12 @@ function operationFactory(optionMenu, response = null) {
 				$$.getElementById(`${idName}CodeOTP`).value = '';
 				$$.getElementById(`${idName}CodeOTP`).disabled = true;
 				$$.getElementById(`${idName}VerificationMsg`).innerHTML =  dataCustomerProduct.msgResendOTP;
+				$$.getElementById(`${idName}VerificationMsg`).firstChild.setAttribute('name',`${idName}ResendCode`);
 				$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
 				$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = response.msg;
 				btnTrigger.innerHTML =txtBtnTrigger;
 
-				$$.getElementById('resendCode').addEventListener('click', function(e){
+				$$.getElementsByName(`${idName}ResendCode`)[0].addEventListener('click', function(e){
 					e.preventDefault();
 					resendCodeOTP(coreOperation);
 				});
@@ -200,7 +201,7 @@ function resendCodeOTP (coreOperation) {
 
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
-	$$.getElementById('verificationMsg').innerHTML = msgLoading;
+	$$.getElementById(`${idName}VerificationMsg`).innerHTML = msgLoading;
 	proccessPetition(coreOperation, 'generate');
 }
 
