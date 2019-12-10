@@ -18,10 +18,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				for (j = 0; j < options.length; j++) {
 					options[j].classList.remove("active");
-					$$.getElementById(`${options[j].id}View`).classList.add("none");
+					$$.getElementById(`${options[j].id}View`).classList.remove("fade-in");
 				}
 				this.classList.add("active");
-				$$.getElementById(`${idName}View`).classList.remove("none");
+				$$.getElementById(`${idName}View`).classList.add("fade-in");
 
 				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
