@@ -2727,7 +2727,20 @@ ul.steps li.step-item i {
 }
 
 .fade:not(.show) {
-  opacity: 0;
+	opacity: 0;
+}
+
+.fade-in {
+	animation: fadein .7s linear;
+}
+
+@keyframes fadein {
+	from {
+			opacity:0;
+	}
+	to {
+			opacity:1;
+	}
 }
 
 .collapse:not(.show) {
@@ -3467,4 +3480,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .services-item i{
 	font-size: 2rem !important;
+}
+
+.services-both:not(.fade-in) {
+	display: none;
 }

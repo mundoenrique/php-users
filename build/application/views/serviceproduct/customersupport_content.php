@@ -36,7 +36,7 @@
 
 				<div class="max-width-4 mx-auto pt-3 p-responsive py-4">
 					<!-- Generacíon de PIN -->
-					<div id="generateView" class="services-both none">
+					<div id="generateView" class="services-both">
 						<div id="msgGen" class="msg-prevent-pin">
 							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
@@ -66,13 +66,12 @@
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnGenerate" name="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
-								<button id="btnVerifyOTP" class="btn btn-small btn-loading btn-primary none" type="submit">Continuar</button>
 							</div>
 						</form>
 					</div>
 
 					<!-- Cambio de PIN -->
-					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto pt-3 none">
+					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto pt-3">
 						<div id="msgChange" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
 						</div>
@@ -112,7 +111,7 @@
 					</div>
 
 					<!-- Bloqueo de tarjeta -->
-					<div id="lockView" class="services-both none">
+					<div id="lockView" class="services-both">
 						<div id="msgLock" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Bloquear cuenta</h2>
 						</div>
@@ -128,7 +127,7 @@
 					</div>
 
 					<!-- Solicitud de reposición de tarjeta -->
-					<div id="replaceView" class="services-both none">
+					<div id="replaceView" class="services-both">
 						<div id="msgReplacement" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
