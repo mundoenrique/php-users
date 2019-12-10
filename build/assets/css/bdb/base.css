@@ -1216,6 +1216,17 @@ textarea.form-control {
   background-size: contain;
 }
 
+.bg-content-config {
+	background: linear-gradient(
+      rgba(246,243,241,.6),
+      rgba(246,243,241,.6)
+    ),
+    url("../../img/bdb/bg-content.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 57em !important;
+
+}
+
 /* Borders
 ========================================================================== */
 
@@ -3327,10 +3338,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	z-index: 0;
 }
 
-.dashboard-item.inactive .item-img {
-	opacity: .4;
-}
-
+.dashboard-item.inactive .item-img,
 .dashboard-item.inactive .item-category,
 .dashboard-item.inactive .item-cardnumber {
 	opacity: .4;
