@@ -44,14 +44,15 @@ $('input[type=text], input[type=password], input[type=email], input[type=radio]'
 (function() {
 	var actualPage = window.location.pathname.split("/").pop();
 
-	if ( actualPage !== 'inicio'){
-		var itemsMenu = $$.getElementsByClassName('nav-item');
-		var structureMenu = {
-			atencioncliente: 'customerSupport',
-			listaproducto: 'customerSupport',
-			vistaconsolidada: 'listProduct',
-			detalle: 'listProduct'
-		}
+	var itemsMenu = $$.getElementsByClassName('nav-item');
+	var structureMenu = {
+		atencioncliente: 'customerSupport',
+		listaproducto: 'customerSupport',
+		vistaconsolidada: 'listProduct',
+		detalle: 'listProduct'
+	}
+
+	if (structureMenu.hasOwnProperty(actualPage)) {
 
 		for (var i = 0; i < itemsMenu.length; i++) {
 			itemsMenu[i].classList.remove('active');
