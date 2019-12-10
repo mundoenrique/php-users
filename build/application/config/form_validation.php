@@ -1,6 +1,25 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'replace' => [
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'regex_match[/^(\d{5})$/]|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'reasonRequest',
+			'label' => 'reasonRequest',
+			'rules' => 'required'
+		],
+	],
+	'lock' =>[
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'regex_match[/^(\d{5})$/]|regex_match[/^[0-9\/]+$/]'
+		],
+	],
 	'change' => [
 		[
 			'field' => 'pinCurrent',

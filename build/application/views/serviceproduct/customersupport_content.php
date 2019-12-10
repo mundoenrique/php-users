@@ -119,7 +119,20 @@
 						<div id="preventLock" class="msg-prevent">
 							<h3 class="h4 regular">Si realmente deseas <span id="action">Bloquear </span> tu tarjeta, presiona continuar</h3>
 						</div>
+
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
+							<div class="row">
+								<div id="lockVerificationOTP" class="none">
+									<hr class="separador-one mb-3">
+									<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+									<div class="row form-group col-lg-4">
+										<label for="lockCodeOTP">Código de Validación</label>
+										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
+										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
+									</div>
+									<p id="lockVerificationMsg" class="mb-1 h5 none"><a id="lockResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
+								</div>
+							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnLock" name="btnLock" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
@@ -134,8 +147,8 @@
 						</div>
 						<form id="formReplace" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="form-group col-lg-3">
-								<label for="motSol">Motivo de la solicitud</label>
-								<select id="motSol" class="custom-select form-control" name="motSol">
+								<label for="replaceMotSol">Motivo de la solicitud</label>
+								<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 									<option value="">Selecciona</option>
 									<option value="41">Tarjeta perdida</option>
 									<option value="43">Tarjeta robada</option>
@@ -144,7 +157,18 @@
 								</select>
 								<div class="help-block"></div>
 							</div>
-
+							<div class="row">
+								<div id="replaceVerificationOTP" class="none">
+									<hr class="separador-one mb-3">
+									<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+									<div class="row form-group col-lg-4">
+										<label for="replaceCodeOTP">Código de Validación</label>
+										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
+										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
+									</div>
+									<p id="replaceVerificationMsg" class="mb-1 h5 none"><a id="replaceResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
+								</div>
+							</div>
 							<div class="flex items-center justify-end pt-3 border-top">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnReplace" name="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>

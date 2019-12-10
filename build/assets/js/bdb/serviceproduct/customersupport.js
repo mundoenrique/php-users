@@ -10,7 +10,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	//core
 	for (i = 0; i < options.length; i++) {
-		options[i].addEventListener('click',function(e){
+		options[i].addEventListener('click',function(e) {
 			if (!this.classList.contains("is-disabled")) {
 				var j, idNameCapitalize
 				idName = this.id;
@@ -30,19 +30,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 					e.preventDefault();
 
 					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-
 					form = $(`#form${idNameCapitalize}`);
+
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
-
 						disableInputsForm(idName, true, msgLoadingWhite);
 						proccessPetition(coreOperation, idName);
-
 					}else{
 						notiSystem (response.title, response.msg, response.classIconName, response.data);
 						disableInputsForm (idName, false, txtBtnTrigger);
 					}
-
 				});
 			}
 		});
@@ -50,8 +47,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 })
 
 //functions
-function operationFactory(optionMenu, response = null) {
-
+function operationFactory(optionMenu, response = null)
+{
 	var responseForm = {
 		0: function (response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
@@ -93,7 +90,7 @@ function operationFactory(optionMenu, response = null) {
 		}
 	}
 
-	function fnGenerate(response = null){
+	function fnGenerate() {
 		var md5CodeOTP = '';
 		var inpCodeOTP = $$.getElementById('generateCodeOTP').value;
 		if (inpCodeOTP) {
@@ -109,7 +106,7 @@ function operationFactory(optionMenu, response = null) {
 		return {data: dataForm, response: responseForm};
 	}
 
-	function fnChange(response = null){
+	function fnChange() {
 		var md5CodeOTP = '';
 		var inpCodeOTP = $$.getElementById('changeCodeOTP').value;
 		if (inpCodeOTP) {
@@ -122,20 +119,27 @@ function operationFactory(optionMenu, response = null) {
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
 		}
-
 		return {data: dataForm, response: responseForm};
 	}
-	function fnLock(){
-		return console.log('lock function');
+	function fnLock() {
+		var dataForm = {
+			codeOTP: $$.getElementById('lockCodeOTP').value,
+		}
+		return {data: dataForm, response: responseForm};
 	}
-	function fnReplace(){
-		return console.log('replace function');
+	function fnReplace() {
+		var dataForm = {
+			reasonRequest: $$.getElementById('replaceMotSol').value,
+			codeOTP: $$.getElementById('replaceCodeOTP').value,
+		}
+		return {data: dataForm, response: responseForm};
 	}
 
 	return eval(`${optionMenu}`)(response);
 }
 
-function disableInputsForm(optionMenu, status, txtButton) {
+function disableInputsForm(optionMenu, status, txtButton)
+{
 	var elementsForm;
 	switch (optionMenu) {
 		case 'generate':
@@ -143,13 +147,15 @@ function disableInputsForm(optionMenu, status, txtButton) {
 			break;
 
 		case 'change':
-				elementsForm = ['changeCurrentPin','changeNewPin', 'changeConfirmPin'];
+			elementsForm = ['changeCurrentPin','changeNewPin', 'changeConfirmPin'];
 				break;
 
 		case 'lock':
+			elementsForm = [];
 			break;
 
 		case 'replace':
+			elementsForm = ['replaceMotSol'];
 			break;
 	}
 	elementsForm.forEach(function (element) {
@@ -159,12 +165,12 @@ function disableInputsForm(optionMenu, status, txtButton) {
 	btnTrigger.disabled = status;
 }
 
-function resendCodeOTP (coreOperation) {
-
+function resendCodeOTP (coreOperation)
+{
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
 	$$.getElementById(`${idName}VerificationMsg`).innerHTML = msgLoading;
-	proccessPetition(coreOperation, 'generate');
+	proccessPetition(coreOperation, idName);
 }
 
 function proccessPetition(coreOperation, idName)

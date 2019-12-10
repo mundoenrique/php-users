@@ -580,7 +580,6 @@ class Novo_User_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO User Model: loadTypeDocument method Initialized');
 
-		//$this->className = 'com.novo.objects.MO.TipoDocumentoMO';
 		$this->className = 'String.class';
 
 		$this->dataAccessLog->modulo = 'validar cuenta';
