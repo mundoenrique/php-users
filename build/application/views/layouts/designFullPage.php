@@ -29,10 +29,10 @@
 						</button>
 						<div id="navbarNav" class="collapse navbar-collapse bg-primary">
 							<ul class="navbar-nav ml-auto">
-								<li id='listProduct' class="nav-item active"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
+								<li id='listProduct' class="nav-item"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
 								<li id='reports' class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
 								<li id='customerSupport' class="nav-item"><a class="nav-link" href="<?= base_url('listaproducto') ?>">Atención al cliente</a></li>
-								<li id='profile' class="nav-item"><a class="nav-link" href="#">Mi perfil</a></li>
+								<li id='profile' class="nav-item"><a class="nav-link" href="<?= base_url('perfil') ?>">Mi perfil</a></li>
 								<li id='closeSession' class="nav-item"><a class="nav-link" href="<?= base_url('cerrarsesion') ?>">Cerrar sesión</a></li>
 							</ul>
 						</div>

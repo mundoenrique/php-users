@@ -58,6 +58,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/preregistro'] = "user/preRegistry";
 $route['(:any)/registro'] = "user/registry";
+$route['(:any)/perfil'] = "user/profile";
 $route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/cerrarsesion'] = "user/closeSession";
 $route['(:any)/cambiarclave'] = "user/changePassword";

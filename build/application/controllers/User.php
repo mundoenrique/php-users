@@ -212,6 +212,39 @@ class User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
+	public function profile()
+	{
+		$view = 'profile';
+		// if(!$this->session->flashdata('registryUser')) {
+
+		// 	redirect(base_url('inicio'), 'location');
+		// 	exit();
+		// }
+		// $this->session->set_flashdata('registryUserData', $this->session->flashdata('registryUserData'));
+		// $this->session->set_flashdata('registryUser', $this->session->flashdata('registryUser'));
+
+		log_message('INFO', 'NOVO User: profile Method Initialized');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"third_party/moment",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->views = ['user/'.$view];
+		// $this->render->data = $this->session->flashdata('registryUserData');
+		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->loadView($view);
+	}
+
 	public function recoveryAccess()
 	{
 		$view = 'recoveryaccess';

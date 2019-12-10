@@ -17,6 +17,7 @@ $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar Acceso';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar Contraseña';
 $lang['GEN_REGISTRY_TITLE'] = 'Registro';
+$lang['GEN_PROFILE_TITLE'] = 'Perfil';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';
 $lang['GEN_BTN_CANCEL']= 'Cancelar';
