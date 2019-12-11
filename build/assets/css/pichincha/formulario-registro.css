@@ -202,3 +202,30 @@
 .col-md-6{width:31% !important;}
 
 .col-md-6 select{width:90% !important;}
+
+
+.icon-calendar:before {
+	content: "\e01e";
+}
+
+.ui-icon-calendar {
+	background-position: -32px -112px;
+}
+
+.field-prepend {
+	overflow: hidden;
+	position: relative;
+}
+.field-prepend span[class^="icon-"], .field-prepend span[class*=" icon-"] {
+	color: #bbbbbb;
+	font-size: 15px;
+	line-height: 35px;
+	position: absolute;
+	width: 35px;
+	z-index: 1;
+}
+
+.field-prepend input, .field-prepend select {
+  padding: 6px 9px 7px 34px;
+  position: relative;
+}

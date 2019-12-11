@@ -169,43 +169,38 @@ $(function(){
 
 	/*Funcion rellenar fecha de nacimiento en 3 campos*/
 	function rellenarFecha(){
+
 		var fecha_nacimiento=$('#fecha-nacimiento-valor').val();
 		var dia =fecha_nacimiento.substring(0,2);
 		var mes = fecha_nacimiento.substring(3,5);
 		var anio  =fecha_nacimiento.substring(6,10);
 
 		$('#dia-nacimiento').val(dia);
-		if(skin != 'pichincha') {
-			$('#mes-nacimiento > option[value="'+mes+'"]').attr('selected', 'selected');
-		} else {
-			meses = [
-				'Enero',
-				'Febrero',
-				'Marzo',
-				'Abril',
-				'Mayo',
-				'Junio',
-				'Julio',
-				'Agosto',
-				'Septiempre',
-				'Octubre',
-				'Noviembre',
-				'Diciembre'
-			];
-			mes = mes - 1;
-			$('#mes-nacimiento-bp').val(meses[mes]);
-		}
+		meses = [
+			'Enero',
+			'Febrero',
+			'Marzo',
+			'Abril',
+			'Mayo',
+			'Junio',
+			'Julio',
+			'Agosto',
+			'Septiempre',
+			'Octubre',
+			'Noviembre',
+			'Diciembre'
+		];
+		mes = mes - 1;
+		$('#mes-nacimiento-bp').val(meses[mes]);
 		$('#anio-nacimiento').val(anio);
+
 	}
 
+	if (skin == 'pichincha'){
 
-	rellenarFecha();
-	$('#dia-nacimiento').blur(fechaNacimiento, fechaNacimientoInvalid);
-	$('#mes-nacimiento').change(fechaNacimiento, fechaNacimientoInvalid);
-	$('#anio-nacimiento').blur(fechaNacimiento, fechaNacimientoInvalid);
+		rellenarFecha();
 
-	$('#dia-nacimiento').blur(fechaNacimientoInvalid);
-	$('#mes-nacimiento').change(fechaNacimientoInvalid);
+	};
 
 	anio			= new Date();
 	anioActual		= anio.getFullYear();
@@ -214,89 +209,56 @@ $(function(){
 	anioMayorEdad	= parseInt(anioActual - 18);
 
 	function fechaNacimiento() {
-		var dia		= $('#dia-nacimiento').val();
-		var mes		= $('#mes-nacimiento option:selected').val();
-		var anio	= $('#anio-nacimiento').val();
+
+		var fecha_nacimiento=$('#fecha-nacimiento-valor').val();
+		var dia =fecha_nacimiento.substring(0,2);
+		var mes = fecha_nacimiento.substring(3,5);
+		var anio  =fecha_nacimiento.substring(6,10);
 
 		if(dia != '' && mes != '' && anio != '') {
 			if (anio < anioMayorEdad) {
-				$('#fecha-nacimiento-valor').val(dia + '/' + mes + '/' + anio);
-				//console.log("Fecha de nacimiento con evento: " + $('#fecha-nacimiento-valor').val() + " Prueba");
-				$('#dia').removeClass('field-error').addClass('field-success');
-				$('#mes').removeClass('field-error').addClass('field-success');
-				$('#ano').removeClass('field-error').addClass('field-success');
+
 				return true;
 
 			} else {
 				if (anio == anioMayorEdad) {
 					if (mes < mesActual) {
-						$('#fecha-nacimiento-valor').val(dia + '/' + mes + '/' + anio);
-						//console.log("Fecha de nacimiento con evento: " + $('fecha-nacimiento-valor').val() + " Prueba");
-						$('#dia').removeClass('field-error').addClass('field-success');
-						$('#mes').removeClass('field-error').addClass('field-success');
-						$('#ano').removeClass('field-error').addClass('field-success');
+
 						return true;
 
 					} else {
 						if (mes == mesActual) {
 							if (dia <= diaActual) {
-								$('#fecha-nacimiento-valor').val(dia + '/' + mes + '/' + anio);
-								//console.log("Fecha de nacimiento con evento: " + $('#fecha-nacimiento-valor').val() + " Prueba");
-								$('#dia').removeClass('field-error').addClass('field-success');
-								$('#mes').removeClass('field-error').addClass('field-success');
-								$('#ano').removeClass('field-error').addClass('field-success');
+
 								return true;
 
 							} else {
 								return false;
 							}
-							$('#dia').removeClass('field-error').addClass('field-success');
-							$('#mes').removeClass('field-error').addClass('field-success');
-							$('#ano').removeClass('field-error').addClass('field-success');
+
 							return true;
 						}
 						else {
 							return false;
 						}
-						$('#dia').removeClass('field-error').addClass('field-success');
-						$('#mes').removeClass('field-error').addClass('field-success');
-						$('#ano').removeClass('field-error').addClass('field-success');
+
 						return true;
 					}
 				} else {
 					return false;
 				}
-				$('#dia').removeClass('field-error').addClass('field-success');
-				$('#mes').removeClass('field-error').addClass('field-success');
-				$('#ano').removeClass('field-error').addClass('field-success');
+
 				return true;
 			}
 			return true;
 		}else if(dia != '' || mes != '' || anio != '') {
-			$('#dia').removeClass('field-error').addClass('field-success');
-			$('#mes').removeClass('field-error').addClass('field-success');
-			$('#ano').removeClass('field-error').addClass('field-success');
+
 			return true;
 		}
 
 	}
 
 
-	function fechaNacimientoInvalid() {
-		dia		= $('#dia-nacimiento').val();
-		mes		= $('#mes-nacimiento option:selected').val();
-
-		if(dia==31 && mes==02 || dia==30 && mes==02 || dia==31 && mes==4 || dia==31 && mes==6 || dia==31 && mes==9 || dia==31 && mes==11){
-			$('#dia-nacimiento').removeClass('field-success').addClass('field-error');
-			$('#mes-nacimiento').removeClass('field-success').addClass('field-error');
-			return false;
-		}
-		else{
-			$('#dia-nacimiento').removeClass('field-error').addClass('field-success');
-			$('#mes-nacimiento').removeClass('field-error').addClass('field-success');
-			return true;
-		}
-	}
 	/*Fin rellenar fecha de nacimiento*/
 
 	/*Validacion nombres y apellidos*/
@@ -1234,19 +1196,6 @@ $(function(){
 			return regex.test(value);
 		}, "Usuario invalido. ");
 
-		jQuery.validator.addMethod("mayorEdadAnio", function(value,element){
-			if(controlValid == 0) {
-				var fecha_nacimiento = fechaNacimiento();
-				if(fecha_nacimiento == true){
-					return true;
-				}else if(fecha_nacimiento == false) {
-					return false;
-				}
-			} else {
-				return true;
-			}
-
-		}, "Usted no es mayor de edad. ");
 
 		jQuery.validator.addMethod("validarFecha", function(value,element){
 			var fechadenacimeintovalida = fechaNacimientoInvalid();
@@ -1326,6 +1275,53 @@ $(function(){
 			"Correo invalido. "
 		);
 
+		// Metodo que valida si el usuario es mayor de edad
+		jQuery.validator.addMethod("mayorEdadAnio", function(value,element){
+					var fecha_nacimiento = fechaNacimiento();
+					if(fecha_nacimiento == true){
+						return true;
+					}else if(fecha_nacimiento == false) {
+						return false;
+					}
+				}, "Usted no es mayor de edad. ");
+
+		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
+		$.validator.addMethod("esBisiesto", function(value, element, regex){
+
+					var fecha_nac_nueva = $('#fecha-nacimiento-valor').val().split('/');
+					var day = fecha_nac_nueva[0];
+					var month = fecha_nac_nueva[1];
+					var year = fecha_nac_nueva[2];
+
+					var date = new Date(month+"/"+day+"/"+year);
+
+					if(day == "29" && month == "02") {
+						if(year % 4 == 0 && ( year % 100 != 0 || year % 400 == 0)) {
+						return true
+						} else {
+							return false;
+						}
+					} else if(month == (date.getMonth()+1) && day == date.getDate() && year == date.getFullYear()) {
+						return true;
+					} else {
+						return false;
+					}
+				 }, "Usted introdujo una fecha inválida.");
+
+
+		// Metodo que valida el rango del dia insertado entre 1 y 31 días
+		jQuery.validator.addMethod("rangoDias", function(value,element){
+
+					var fecha_nac_nueva = $('#fecha-nacimiento-valor').val().split('/');
+					var day = fecha_nac_nueva[0];
+
+					if(day > 31 || day <= 0){
+						return false;
+					}else{
+						return true;
+					}
+				}, "El Día debe estar comprendido entre 1 y 31.");
+
 		$("#form-perfil").validate({
 
 			errorElement		: "label",
@@ -1342,9 +1338,6 @@ $(function(){
 				"primer_apellido" : {"required":true, "validaApellido1":true},													//5
 				"segundo_apellido":{"required":false, "validaApellido2":true},													//6
 				"lugar_nac" : {"required":false, "validaLugarnac":true},												//7
-				"dia-nacimiento" : {"required" : true, "number":true, range : [1,31]},							//8
-				"mes-nacimiento" : {"required" : true, "number":true, range : [1,12], "validarFecha": true},							//9
-				"anio-nacimiento" : {"required" : true, "number":true, min: 1900, "mayorEdadAnio" : true},			//10
 				"genero" : {"required" : false},																			//11
 				"edo_civil" : {"required" : false},																			//12
 				"nacionalidad" : {"required" : true, "lettersonly": true},																		//13
@@ -1372,7 +1365,8 @@ $(function(){
 				"institucion_publica" : {"required":true},																			//36
 				"uif" : {"required":true},																					//37
 				"contrato": {"required": true},
-				"tyc": {"required": true}
+				"tyc": {"required": true},
+				"fecha-nacimiento-valor": {"required": true ,"rangoDias":true , "esBisiesto" : true , "mayorEdadAnio": true }
 			},
 
 			messages: {
@@ -1382,25 +1376,6 @@ $(function(){
 				"primer_apellido" : "El campo Apellido Paterno no puede estar vacío y debe contener solo letras.",								//5
 				"segundo_apellido" : "El campo Apellido Materno debe contener solo letras.",													//6
 				"lugar_nac" : "El campo Lugar de Nacimiento debe contener solo letras.",													//7
-
-				"dia-nacimiento" : {																														//8
-					"required"	: "El campo Día no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Día no puede estar vacío y debe contener solo números.",
-					"mayorEdadAnio"	: "Usted no es mayor de edad.",
-					"range":"El Día debe estar comprendido entre 1 y 31."
-				},
-				"mes-nacimiento" : {																														//9
-					"required"	: "El campo Mes no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Mes no puede estar vacío y debe contener solo números.",
-					"mayorEdadAnio"	: "Usted no es mayor de edad.",
-					"validarFecha" : "Fecha invalida.",
-				},
-				"anio-nacimiento" : {																														//10
-					"required"	: "El campo Año no puede estar vacío y debe contener solo números.",
-					"number"	: "El campo Año no puede estar vacío y debe contener solo números.",
-					"mayorEdadAnio"	: "Usted no es mayor de edad.",
-					"min" : "Por favor ingrese un Año de nacimiento válido."
-				},
 				"nacionalidad" : {
 					"lettersonly"	: "El campo Nacionalidad no puede contener números.",
 					"required"		: "El campo Nacionalidad no puede estar vacío."
@@ -1448,7 +1423,10 @@ $(function(){
 				"institucion_publica" : "El campo Institución pública no puede estar vacío.",																	//36
 				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"contrato": "Debe aceptar el contrato de cuenta dinero electrónico.",
-				"tyc": "Debe aceptar los términos y condiciones."
+				"tyc": "Debe aceptar los términos y condiciones.",
+				"fecha-nacimiento-valor": {																														//10
+					"required"	: "El campo Fecha de nacimiento no puede estar vacío."
+				}
 			}
 		}); // VALIDATE
 	}
@@ -1497,3 +1475,29 @@ function tycModal() {
 		$("#dialog-tc").dialog("close");
 	});
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------//
+// FUNCION PARA MOSTRAR EL WIDGET DEL CALENDARIO
+
+	$.datepicker.regional['es'] ={
+		closeText: 'Cerrar',
+		prevText: 'Previo',
+		nextText: 'Próximo',
+		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+		monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+			'Jul','Ago','Sep','Oct','Nov','Dic'],
+		monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+		dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+		dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		dateFormat: 'dd/mm/yy', firstDay: 0,
+		initStatus: 'Selecciona la fecha', isRTL: false,
+		maxDate: '+0d',
+		changeMonth: true,
+		changeYear: true
+	};
+
+	$.datepicker.setDefaults($.datepicker.regional['es']);
+	$("#fecha-nacimiento-valor").datepicker();
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------

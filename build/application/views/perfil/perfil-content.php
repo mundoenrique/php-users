@@ -173,13 +173,13 @@ if(isset($data)){
         foreach ($datos->registro->listaTelefonos as $value) {
             if(strtolower($value->tipo) == 'cel'){
                 $tipo = $value->tipo;
-								$num = $value->numero;
+								$num = preg_replace('/^0+/', '',$value->numero);
 								$celCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
             if(strtolower($value->tipo) == 'hab'){
                 $tipo_hab = $value->tipo;
-								$num_hab = $value->numero;
+								$num_hab = preg_replace('/^0+/', '',$value->numero);
 								$habCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
@@ -370,32 +370,25 @@ $pais_residencia=$this->session->userdata('pais');
                 <label for="lugar-nac">Lugar de nacimiento</label>
                 <input class="field-small" id="lugar-nacimiento" maxlength="80" name="lugar_nac" type="text"
                   value="<?php echo $lugar_nacimiento; ?>" />
-              </li>
+							</li>
+
+							<?php if($country == 'Ec-bp'): ?>
               <li class="col-profile-fecha-nac">
-                <label for="fecha-nac">Fecha de nacimiento</label>
+								<label for="fecha-nac">Fecha de nacimiento</label>
                 <input id="dia-nacimiento" name="dia-nacimiento" class="nac-input" maxlength="2" type="text" />
-                <?php if($country == 'Ec-bp'): ?>
-                <input id="mes-nacimiento-bp" name="mes-nacimiento-bp" class="ignore expand-row" type="text">
-                <?php else: ?>
-                <select id="mes-nacimiento" name="mes-nacimiento">
-                  <option value="01">Enero</option>
-                  <option value="02">Febrero</option>
-                  <option value="03">Marzo</option>
-                  <option value="04">Abril</option>
-                  <option value="05">Mayo</option>
-                  <option value="06">Junio</option>
-                  <option value="07">Julio</option>
-                  <option value="08">Agosto</option>
-                  <option value="09">Septiembre</option>
-                  <option value="10">Octubre</option>
-                  <option value="11">Noviembre</option>
-                  <option value="12">Diciembre</option>
-                </select>
-                <?php endif; ?>
-                <input id="anio-nacimiento" name="anio-nacimiento" class="nac-input" maxlength="4" type="text" />
+								<input id="mes-nacimiento-bp" name="mes-nacimiento-bp" class="ignore expand-row" type="text">
+								<input id="anio-nacimiento" name="anio-nacimiento" class="nac-input" maxlength="4" type="text" />
                 <input id="fecha-nacimiento-valor" type="hidden" value="<?php echo $fechaNacimiento; ?>"
-                  name="fecha_nacimiento" />
-              </li>
+									name="fecha_nacimiento" />
+								</li>
+								<?php else: ?>
+								<label for="filter-range-from">Fecha de Nacimiento</label>
+								<div class="field-prepend">
+								<span aria-hidden="true" class="icon-calendar"></span>
+								<input  id="fecha-nacimiento-valor" name="fecha-nacimiento-valor" class="field-small" maxlength="10"
+									placeholder="DD/MM/AAAA" autocomplete="off" value="<?php echo $fechaNacimiento; ?>">
+								</div>
+                <?php endif; ?>
             </ul>
 
             <ul class="row-profile row-modifica">
