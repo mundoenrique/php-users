@@ -145,16 +145,18 @@
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
 						<form id="formReplace" accept-charset="utf-8" method="post" class="profile-1">
-							<div class="form-group col-lg-3">
-								<label for="replaceMotSol">Motivo de la solicitud</label>
-								<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-									<option value="">Selecciona</option>
-									<option value="41">Tarjeta perdida</option>
-									<option value="43">Tarjeta robada</option>
-									<option value="TD">Tarjeta deteriorada</option>
-									<option value="TR">Reemplazar tarjeta</option>
-								</select>
-								<div class="help-block"></div>
+							<div class="row">
+								<div class="form-group col-lg-3">
+									<label for="replaceMotSol">Motivo de la solicitud</label>
+									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
+										<option value="">Selecciona</option>
+										<option value="41">Tarjeta perdida</option>
+										<option value="43">Tarjeta robada</option>
+										<option value="TD">Tarjeta deteriorada</option>
+										<option value="TR">Reemplazar tarjeta</option>
+									</select>
+									<div class="help-block"></div>
+								</div>
 							</div>
 							<div class="row">
 								<div id="replaceVerificationOTP" class="none">
