@@ -218,14 +218,5 @@ if ( !function_exists('insertFile'))
 		if (file_exists($filepath)) {
 			$version = '?v=' . date('Ymd-U', filemtime($filepath));
 		}
-
-		/* $js = '<script src="' . $fileurl . $version . '" type="text/javascript"></script>' . "\n";
-
-
-		$country = $country ? $country.'/' : '';
-		$file = assetPath($folder.'/'.$country.$fileName);
-		$version = '?V'.date('Ymd-U', filemtime($file));
-		$file_url = assetUrl($folder.'/'.$country.$fileName.$version);
-		return $file_url; */
 	}
 }
