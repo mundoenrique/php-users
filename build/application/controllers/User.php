@@ -134,19 +134,6 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza P.
-	 */
-	public function finishSession()
-	{
-		log_message('INFO', 'NOVO User: finishSession Method Initialized');
-		if($this->render->logged) {
-			$this->load->model('Novo_User_Model', 'finishSession');
-			$this->finishSession->callWs_FinishSession_User();
-		}
-		redirect(base_url('inicio'), 'location');
-	}
 
 	public function preRegistry()
 	{
@@ -215,13 +202,13 @@ class User extends NOVO_Controller {
 	public function profile()
 	{
 		$view = 'profile';
-		// if(!$this->session->flashdata('registryUser')) {
+		if(!$this->session->flashdata('registryUser')) {
 
-		// 	redirect(base_url('inicio'), 'location');
-		// 	exit();
-		// }
-		// $this->session->set_flashdata('registryUserData', $this->session->flashdata('registryUserData'));
-		// $this->session->set_flashdata('registryUser', $this->session->flashdata('registryUser'));
+		 	redirect(base_url('inicio'), 'location');
+		 	exit();
+		}
+		$this->load->model('Novo_User_Model', 'modelLoad');
+		$data = $this->modelLoad->callWs_profile_User();
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -240,7 +227,7 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
-		// $this->render->data = $this->session->flashdata('registryUserData');
+		$this->render->data = $data;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
