@@ -1,3 +1,9 @@
+<?php
+
+	$documentPersonal = explode('-', $data->registro->user->id_ext_per);
+	$typeDocument = $documentPersonal[0];
+	$id_ext_per = $documentPersonal[1];
+?>
 <div id="registry" class="registro-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
@@ -12,47 +18,47 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text" value="" disabled>
+								<input id="idType" class="form-control" name="idType" type="text" value="<?= $typeDocument;?>" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idNumber">Número de identificación</label>
-								<input id="idNumber" class="form-control" name="idNumber" type="text" value="" disabled/>
+								<input id="idNumber" class="form-control" name="idNumber" type="text" value="<?= $id_ext_per;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="firstName">Primer nombre</label>
-								<input id="firstName" class="form-control" name="firstName" type="text" value="" disabled/>
+								<input id="firstName" class="form-control" name="firstName" type="text" value="<?= ucfirst(strtolower($data->registro->user->primerNombre));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="middleName">Segundo nombre</label>
-								<input id="middleName" class="form-control"  name="middleName" type="text" value="" disabled/>
+								<input id="middleName" class="form-control"  name="middleName" type="text" value="<?= ucfirst(strtolower($data->registro->user->segundoNombre));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-								<input id="lastName" class="form-control" name="lastName" type="text" value="" disabled/>
+								<input id="lastName" class="form-control" name="lastName" type="text" value="<?= ucfirst(strtolower($data->registro->user->primerApellido));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="secondSurname">Apellido materno</label>
-								<input id="secondSurname" name="secondSurname" class="form-control" type="text" value="" disabled/>
+								<input id="secondSurname" name="secondSurname" class="form-control" type="text" value="<?= ucfirst(strtolower($data->registro->user->segundoApellido));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="birthDate">Fecha de Nacimiento</label>
-								<input id="birthDate" class="form-control" type="text" name="birthDate">
+								<input id="birthDate" class="form-control" type="text" name="birthDate" value="<?= $data->registro->user->fechaNacimiento;?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label class="block">Sexo</label>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M">
+									<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" <?= $data->registro->user->sexo === 'M'? 'checked':'';?> >
 									<label class="custom-control-label" for="genderMale">Masculino</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F">
+									<input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" <?= $data->registro->user->sexo !== 'M'? 'checked':'';?>>
 									<label class="custom-control-label" for="genderFemale">Femenino</label>
 								</div>
 								<div class="help-block"></div>

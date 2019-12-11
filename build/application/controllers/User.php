@@ -202,13 +202,13 @@ class User extends NOVO_Controller {
 	public function profile()
 	{
 		$view = 'profile';
-		if(!$this->session->flashdata('registryUser')) {
+		if(!$this->session->userdata('logged_in')) {
 
-		 	redirect(base_url('inicio'), 'location');
-		 	exit();
+			redirect(base_url('vistaconsolidada'), 'location');
+			exit();
 		}
 		$this->load->model('Novo_User_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_profile_User();
+		$dataProfileUser = $this->modelLoad->callWs_profile_User();
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -227,7 +227,7 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
-		$this->render->data = $data;
+		$this->render->data = $dataProfileUser->data;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
