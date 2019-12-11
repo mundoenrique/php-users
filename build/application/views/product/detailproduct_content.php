@@ -58,7 +58,7 @@
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option selected="" value="0">Más recientes</option>
+								<option selected="" value="<?= date("m");?>">Más recientes</option>
 								<?php
 									foreach ($months as $nroMonths => $txtMonths){
 								?>
@@ -67,15 +67,17 @@
 									}
 								?>
 							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled="">
-								<option selected="" value="0">-</option>
-								<option value="2019">2019</option>
-								<option value="2018">2018</option>
-								<option value="2017">2017</option>
-								<option value="2016">2016</option>
-								<option value="2015">2015</option>
+							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" disabled name="filterYear" >
+								<option value="<?= $years[0];?>">-</option>
+								<?php
+									foreach ($years as $year){
+								?>
+									<option value="<?= $year;?>"><?= $year;?></option>
+								<?php
+									}
+								?>
 							</select>
-						<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
 						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">

@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
 							'afiliado' => $response->afiliado,
-							'celular' => empty($response->celular)?'3152540141': $response->celular,
+							'celular' => $response->celular,
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
@@ -152,7 +152,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'-'.$dataRequest->id_ext_per;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
 		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocument;
@@ -236,7 +236,7 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->idType.'-'.$dataRequest->idNumber,
+			"id_ext_per"		=> $dataRequest->idType.'_'.$dataRequest->idNumber,
 			"codPais"			=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
@@ -436,7 +436,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'-'.$dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
 		$this->dataRequest->pais = 'Global';
 

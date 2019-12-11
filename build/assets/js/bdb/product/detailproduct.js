@@ -147,13 +147,26 @@ $$.addEventListener('DOMContentLoaded', function(){
 				month: parseInt(monthSelected.value),
 				year: parseInt(yearSelected.value),
 			}
-			callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response)
-			{
+			callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
+				response.forEach(function callback(currentValue, index, array) {
+					console.log(currentValue.monto);
+				});
 			})
 
 		});
 
 		//functions
+		$$.getElementById('filterMonth').addEventListener('change', function() {
+
+			if (this.value == 0) {
+
+				$$.getElementById('filterYear').disabled = true;
+			}else{
+
+				$$.getElementById('buscar').disabled = false;
+				$$.getElementById('filterYear').disabled = false;
+			}
+		});
 });
 
 

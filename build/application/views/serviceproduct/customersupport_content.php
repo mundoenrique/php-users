@@ -43,13 +43,13 @@
 						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="newPin">Nuevo PIN</label>
-									<input id="newPin" class="form-control" type="password" name="newPin">
+									<label for="generateNewPin">Nuevo PIN</label>
+									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="confirmPin">Confirmar PIN</label>
-									<input id="confirmPin" class="form-control" type="password" name="confirmPin">
+									<label for="generateConfirmPin">Confirmar PIN</label>
+									<input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin">
 									<div class="help-block"></div>
 								</div>
 							</div>

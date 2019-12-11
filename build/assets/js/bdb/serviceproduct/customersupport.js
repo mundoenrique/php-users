@@ -91,30 +91,19 @@ function operationFactory(optionMenu, response = null)
 	}
 
 	function fnGenerate() {
-		var md5CodeOTP = '';
-		var inpCodeOTP = $$.getElementById('generateCodeOTP').value;
-		if (inpCodeOTP) {
-			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
-		}
 
 		var dataForm = {
-			newPin: $$.getElementById('newPin').value,
-			confirmPin: $$.getElementById('confirmPin').value,
-			codeOTP: md5CodeOTP
+			newPin: $$.getElementById('generateNewPin').value,
+			confirmPin: $$.getElementById('generateConfirmPin').value,
+			codeOTP: $$.getElementById('generateCodeOTP').value
 		}
-
 		return {data: dataForm, response: responseForm};
 	}
 
 	function fnChange() {
-		var md5CodeOTP = '';
-		var inpCodeOTP = $$.getElementById('changeCodeOTP').value;
-		if (inpCodeOTP) {
-			md5CodeOTP = CryptoJS.MD5(inpCodeOTP).toString()
-		}
 
 		var dataForm = {
-			codeOTP: md5CodeOTP,
+			codeOTP: $$.getElementById('changeCodeOTP').value,
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
@@ -143,7 +132,7 @@ function disableInputsForm(optionMenu, status, txtButton)
 	var elementsForm;
 	switch (optionMenu) {
 		case 'generate':
-			elementsForm = ['newPin', 'confirmPin'];
+			elementsForm = ['generateNewPin', 'generateConfirmPin'];
 			break;
 
 		case 'change':

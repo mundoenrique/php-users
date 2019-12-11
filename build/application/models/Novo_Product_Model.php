@@ -161,12 +161,11 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '13';
 		$this->dataRequest->tarjeta = array(
 			"noTarjeta" => $dataRequest->noTarjeta,
-			"id_ext_per"=>$this->session->userdata("idUsuario")
+			"id_ext_per"=> $this->session->userdata("idUsuario")
 		);
 		$this->dataRequest->mes = $dataRequest->month;
 		$this->dataRequest->anio = $dataRequest->year;
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->pais = $this->session->userdata('pais');
 
 		log_message("info", "Request loadMovement Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');

@@ -18,8 +18,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Generate PIN method Initialized');
 
-		$nroTarjeta = empty($_POST['nroTarjeta'])? NULl: $_POST['nroTarjeta'];
-		$dataProduct = $this->getDataWorkingProduct($nroTarjeta);
+		$dataProduct = $this->getDataWorkingProduct();
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataRequest->idOperation = '121';
@@ -31,7 +30,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
 
-		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
+		$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 
@@ -39,7 +38,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
 			$this->dataRequest->idOperation = '120';
-
+			$this->dataRequest->accodUsuario = $this->session->userdata('userName');
 			$this->dataRequest->pinNuevo = $dataRequest->newPin;
 			$this->dataRequest->prefix = $dataProduct['prefix'];
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
@@ -181,8 +180,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Change PIN method Initialized');
 
-		$nroTarjeta = empty($_POST['nroTarjeta'])? NULl: $_POST['nroTarjeta'];
-		$dataProduct = $this->getDataWorkingProduct($nroTarjeta);
+		$dataProduct = $this->getDataWorkingProduct();
 
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Cuentas';
@@ -192,7 +190,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		$this->dataRequest->idOperation = '122';
-		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
+		$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
 		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
@@ -342,8 +340,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Lock Product method Initialized');
 
-		$nroTarjeta = empty($_POST['nroTarjeta'])? NULl: $_POST['nroTarjeta'];
-		$dataProduct = $this->getDataWorkingProduct($nroTarjeta);
+		$dataProduct = $this->getDataWorkingProduct();
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataAccessLog->modulo = 'bloquearTarjeta';
@@ -361,10 +358,10 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
 			$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
-			('idUsuario');
 			$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
 			$this->dataRequest->prefix = $dataProduct['prefix'];
 			$this->dataRequest->codBloqueo = 'PB';
+			$this->dataRequest->accodUsuario = $this->session->userdata('userName');
 		}
 
 		log_message("info", "Request Change ServiceProduct:" . json_encode($this->dataRequest));
@@ -503,8 +500,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Service Product Model: Replace Product method Initialized');
 
-		$nroTarjeta = empty($_POST['nroTarjeta'])? NULl: $_POST['nroTarjeta'];
-		$dataProduct = $this->getDataWorkingProduct($nroTarjeta);
+		$dataProduct = $this->getDataWorkingProduct();
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataAccessLog->modulo = 'bloqueoReposicion';
@@ -522,10 +518,10 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
 			$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
-			('idUsuario');
 			$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
 			$this->dataRequest->prefix = $dataProduct['prefix'];
 			$this->dataRequest->codBloqueo = $dataRequest->reasonRequest;
+			$this->dataRequest->accodUsuario = $this->session->userdata('userName');
 		}
 
 		log_message("info", "Request Change ServiceProduct:" . json_encode($this->dataRequest));
@@ -660,20 +656,8 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		return $this->response;
 	}
 
-	function getDataWorkingProduct($nroTarjeta = NULL) {
-		$dataProduct = [];
-		$listProducts = $this->session->flashdata('listProducts');
-		$this->session->set_flashdata('listProducts', $listProducts);
-
-		if (count($listProducts) == 1)
-		{
-			$dataProduct = $listProducts[0];
-		}else
-		{
-			$posList = array_search($nroTarjeta, array_column($listProducts,'noTarjeta'));
-			$dataProduct = $listProducts[$posList];
-		}
-		return $dataProduct;
+	function getDataWorkingProduct() {
+		return $this->session->userdata('setProduct');
 	}
 
 }
