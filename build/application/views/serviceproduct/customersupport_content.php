@@ -34,7 +34,7 @@
 				</div>
 				<div class="line mt-1"></div>
 
-				<div class="max-width-4 mx-auto pt-3 p-responsive py-4">
+				<div class="max-width-4 mx-auto pt-3 p-responsive">
 					<!-- Generacíon de PIN -->
 					<div id="generateView" class="services-both">
 						<div id="msgGen" class="msg-prevent-pin">
@@ -56,14 +56,17 @@
 							<div id="generateVerificationOTP" class="none">
 								<hr class="separador-one mb-3">
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
-								<div class="row form-group col-lg-4">
-									<label for="generateCodeOTP">Código de Validación</label>
-									<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
-									<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
+								<div class="row">
+									<div class="form-group col-lg-4">
+										<label for="generateCodeOTP">Código de Validación</label>
+										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
+										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
+									</div>
 								</div>
 								<p id="generateVerificationMsg" class="mb-1 h5 none"><a id="generateResendCode" class="primary" href="#" name="resendCode"><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
-							<div class="flex items-center justify-end pt-3 border-top">
+							<hr class="separador-one">
+							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnGenerate" name="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
@@ -96,14 +99,17 @@
 							<div id="changeVerificationOTP" class="none">
 								<hr class="separador-one mb-3">
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
-								<div class="row form-group col-lg-4">
-									<label for="changeCodeOTP">Código de Validación</label>
-									<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
-									<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
+								<div class="row">
+									<div class="form-group col-lg-4">
+										<label for="changeCodeOTP">Código de Validación</label>
+										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
+										<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
+									</div>
 								</div>
 								<p id="changeVerificationMsg" class="mb-1 h5 none"><a id="changeResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
-							<div class="flex items-center justify-end pt-3 border-top">
+							<hr class="separador-one">
+							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnChange" name="btnChange" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
@@ -120,19 +126,20 @@
 						</div>
 
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
-							<div class="row">
-								<div id="lockVerificationOTP" class="none">
-									<hr class="separador-one mb-3">
-									<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
-									<div class="row form-group col-lg-4">
+							<div id="lockVerificationOTP" class="none">
+								<hr class="separador-one mb-3">
+								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+								<div class="row">
+									<div class="form-group col-lg-4">
 										<label for="lockCodeOTP">Código de Validación</label>
 										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
 										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
-									<p id="lockVerificationMsg" class="mb-1 h5 none"><a id="lockResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 								</div>
+								<p id="lockVerificationMsg" class="mb-1 h5 none"><a id="lockResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
-							<div class="flex items-center justify-end pt-3 border-top">
+							<hr class="separador-one">
+							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnLock" name="btnLock" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
@@ -158,19 +165,20 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div class="row">
-								<div id="replaceVerificationOTP" class="none">
-									<hr class="separador-one mb-3">
-									<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
-									<div class="row form-group col-lg-4">
+							<div id="replaceVerificationOTP" class="none">
+								<hr class="separador-one mb-3">
+								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
+								<div class="row">
+									<div class="form-group col-lg-4">
 										<label for="replaceCodeOTP">Código de Validación</label>
 										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
 										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
-									<p id="replaceVerificationMsg" class="mb-1 h5 none"><a id="replaceResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 								</div>
+								<p id="replaceVerificationMsg" class="mb-1 h5 none"><a id="replaceResendCode" class="primary" href="#" name="resendCode" ><?= lang('RESP_RESEEND_OTP');?></a></p>
 							</div>
-							<div class="flex items-center justify-end pt-3 border-top">
+							<hr class="separador-one">
+							<div class="flex items-center justify-end pt-3">
 								<a class="btn underline" href="">Cancelar</a>
 								<button id="btnReplace" name="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>

@@ -163,7 +163,7 @@ function validateForms(form, options) {
 		return value !== '0';
 	 }, "Este campo es obligatorio.");
 
-	jQuery.validator.addMethod("confirmPin", function(value,element){
+	jQuery.validator.addMethod("generateConfirmPin", function(value,element){
 		if(element.value.length>0 && element.value == $("#newPin").val()) {
 			return true;
 		}
@@ -189,11 +189,12 @@ function validateForms(form, options) {
 
 	form.validate({
 		rules: {
-			newPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
-			confirmPin: { required: true, number: true, "confirmPin": true },
+			generateNewPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
+			generateConfirmPin: { required: true, number: true, "generateConfirmPin": true },
 			changeCurrentPin: { required: true, number: true, exactlength: 4 },
 			changeNewPin: { required: true, number: true, exactlength: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
+			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
 			generateCodeOTP: { required: true, digits: true, exactlength: 5 },
