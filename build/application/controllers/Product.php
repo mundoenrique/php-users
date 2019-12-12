@@ -23,9 +23,12 @@ class Product extends NOVO_Controller {
 			exit();
 		}
 
+		$this->session->unset_userdata('setProduct');
+
 		$dataProduct = $this->loadDataProduct();
  		if (count($dataProduct) == 1 and $dataProduct !== '--') {
 
+			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			if (in_array("117",  $dataProduct[0]['availableServices'])) {
 				redirect('/atencioncliente');
 			}
@@ -102,7 +105,6 @@ class Product extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-		$this->session->unset_userdata('setProduct');
 		$dataProduct = [];
 
 		array_push(

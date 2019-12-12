@@ -23,8 +23,11 @@ class ServiceProduct extends NOVO_Controller {
 			exit();
 		}
 
+		$this->session->unset_userdata('setProduct');
+
 		$dataProduct = $this->loadDataProduct();
 		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			redirect("/atencioncliente");
 		}
 
@@ -54,7 +57,7 @@ class ServiceProduct extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function loadDataProduct()
+	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
@@ -65,6 +68,9 @@ class ServiceProduct extends NOVO_Controller {
 
 		$dataRequeried = [];
 		foreach($data as $row) {
+			if (!empty($card) && $card !== $row->noTarjeta) {
+				continue;
+			}
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
