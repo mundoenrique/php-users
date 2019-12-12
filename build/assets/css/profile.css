@@ -1741,7 +1741,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-warning {
   background: rgba(240, 193, 106, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
   -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
   box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
@@ -1756,7 +1755,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-error {
   background: rgba(240, 72, 72, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   -moz-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
@@ -1771,7 +1769,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-success {
   background: rgba(67, 181, 129, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
   -moz-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
   box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
@@ -3473,14 +3470,8 @@ table.feed-table tfoot td.feed-category-10x {
   overflow: visible !important;
 }
 
-/*p{
-	float:left;
-	margin-top:20px;
-	margin-left:150px;
-}*/
 .text-header {
   color: #fff;
-  /*font-weight:bold;*/
   font-size: 24px;
   float: left;
   margin-top: 40px;
@@ -3505,7 +3496,6 @@ table.feed-table tfoot td.feed-category-10x {
 
 .profile-1 {
   float: left;
-  /* border-left: 3px solid #0e5b8c;*/
   padding: 5px;
   margin-bottom: 20px;
 }
@@ -3524,7 +3514,6 @@ table.feed-table tfoot td.feed-category-10x {
 
 .profile-2 {
   float: left;
-  /*border-left: 3px solid #368db6;*/
   padding: 5px;
   margin-bottom: 20px;
 }
@@ -3598,10 +3587,6 @@ label.label-inline {
 .field-prepend {
   float: left;
 }
-
-/*.icon-calendar:before {
-  margin-left: -245px;
-}*/
 
 .clear-text {
   clear: both;
@@ -5630,8 +5615,7 @@ body .ui-tooltip {
   font-size: 12px;
   font-family: "Helvetica", "Arial", sans-serif;
   width: 200px;
-  /* font-style: italic; */
-  -webkit-touch-callout: none;
+   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
