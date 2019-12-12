@@ -62,8 +62,8 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="profesion">Profesión</label>
-								<select id="profesion" class="custom-select form-control" name="profesion" placeholder="Seleccione">
+								<label for="profession">Profesión</label>
+								<select id="profession" class="custom-select form-control" name="profession" placeholder="Seleccione">
 								<option selected="" value="63">Licenciado</option><option value="3"> Agente
 									</option><option value="1"> Abogado
 									</option><option value="2"> Actor
@@ -114,7 +114,7 @@
 						<div class="row">
 							<div class="form-group col-12 col-lg-8 col-xl-6">
 								<label for="address">Dirección</label>
-								<textarea id="address" class="form-control"><?= $data->registro->afiliacion->direccion;?></textarea>
+								<textarea id="address" name="address" class="form-control"><?= $data->registro->afiliacion->direccion;?></textarea>
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -201,7 +201,7 @@
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
 							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnRegistrar" name="btnRegistrar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+							<button id="btnActualizar" name="btnActualizar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 						</div>
 					</form>
 				</div>
