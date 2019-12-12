@@ -125,11 +125,7 @@ base_cdn = $('body').attr('data-app-cdn');
 			$(this).addClass("current-dashboard-item");
 			$("#content-product").dialog("close");
 
-			   // var ctaOrigen=$(this).attr("card");
 			var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
-			// d = new Date();
-			// var mes = d.getMonth()+1;
-			// var anio = d.getFullYear();
 			mes = $("#filter-month").val();
 			anio = $("#filter-year").val();
 
@@ -156,7 +152,6 @@ base_cdn = $('body').attr('data-app-cdn');
 
 	// BOTON BUSCAR
 	$('#content').on('click',"#buscar",function(){
-			//$("#buscar").click(function(){
 				var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
 				mes = $("#filter-month").val();
 				anio = $("#filter-year").val();

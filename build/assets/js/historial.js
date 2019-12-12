@@ -125,11 +125,7 @@ base_cdn = $('body').attr('data-app-cdn');
 			$(this).addClass("current-dashboard-item");
 			$("#content-product").dialog("close");
 
-			   // var ctaOrigen=$(this).attr("card");
 			var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
-			// d = new Date();
-			// var mes = 01;
-			// var anio = d.getFullYear();
 			mes = $("#filter-month").val();
 			anio = $("#filter-year").val();
 

@@ -1391,9 +1391,6 @@ $(".label-inline").on("click", "a", function() {
 	}
 });  //FIN DE LA FUNCION GENERAL
 
-
-
-
 //Mensaje de error
 function msgService (title, msg, modalType, redirect) {
 	$("#registrar").fadeIn();

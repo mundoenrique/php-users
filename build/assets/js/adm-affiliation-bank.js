@@ -144,7 +144,6 @@ $(function(){
 
 		$('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
 			$('#dashboard').children().remove();
-			//$("#tdestino").append($("#removerDestino").html());
 			$("#botonContinuar").attr("disabled",true);
 			$("#content-product").dialog({
 				title:"Selección de Cuentas Origen",
@@ -155,7 +154,6 @@ $(function(){
 		});
 
 	});//FIN
-	//$(".muestraDestino").click(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto){
 		var clase,clase1;
@@ -361,7 +359,6 @@ $(function(){
 							var tipod=$('#doc-name option:selected').val();
 							var id_per = tipod+id_per1;
 							var emailClienteD=$("#card-holder-email").val();
-							//var bancoD=$("#bank-name").val();
 							var bancoValor=$("#msg").attr("banco");
 							var bancoD=$("#bank-name").attr('banco');
 							expDate = $('#month-exp').val() + $('#year-exp').val();
@@ -634,10 +631,6 @@ $(function(){
 				return false;
 			}
 		});
-
-		// jQuery.validator.addMethod("lettersonly", function(value, element){
-		// 	return this.optional(element) || /^[a-z," "]+$/i.test(value);
-		// });
 
 		var letter = /^[a-zA-Z_áéíóúñ\s]*$/;
 

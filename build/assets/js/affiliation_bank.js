@@ -192,7 +192,6 @@ $(function(){
 		mascara=$("#donor").find(".product-cardnumber").html();
 		numeroCtaOrigen=$("#donor").find("#donor-cardnumber-origen").attr("cardOrigen");
 		nombreCtaOrigen=$("#donor").find("#nombreCtaOrigen").html();
-		//marca=$("#donor").find("#marca").html();
 		marca=$("#donor").find("#donor-cardnumber-origen").attr("producto");
 		prefix=$("#donor").find("#donor-cardnumber-origen").attr("prefix");
 		expDate = $('#month-exp').val() + $('#year-exp').val();
@@ -378,7 +377,7 @@ $(function(){
 
 
 				} //ELSE
-				//console.log("HOLA");
+
 			}); //POST
 
 		});	//BOTON CONTINUAR
@@ -434,10 +433,6 @@ $(function(){
 			}
 		});
 
-		// jQuery.validator.addMethod("lettersonly", function(value, element){
-		// 	//return this.optional(element) || /^[a-z\s]+$/i.test(value);
-		// 	console.log(value);
-		// });
 
 		var letter = /^[a-zA-Z_áéíóúñ\s]*$/;
 
@@ -452,7 +447,7 @@ $(function(){
 			rules: {
 
 				"bank-name": "required",
-				"card-number": {"required":true,"number":true, "minlength":20, "maxlength": 20},    //{"required":true,"number":true}
+				"card-number": {"required":true,"number":true, "minlength":20, "maxlength": 20},
 				"doc-name": {"required":true},
 				"bank-account-holder-id": {"number":true, "required":true, "maxlength": 14, "minlength":5, "numOnly":true},
 				"bank-account-holder": {"required":true, "pattern":letter},

@@ -5,7 +5,6 @@ base_cdn = $('body').attr('data-app-cdn');
 $(function(){
 	$("#continuar_transfer").click(function(){
 		var pass=$("#transpwd").val();
-		//alert("entro al click");
 		if(confirmPassOperac(pass)){
 			$('#content_bank').show();
 		}

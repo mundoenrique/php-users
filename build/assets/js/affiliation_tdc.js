@@ -170,8 +170,6 @@ $(function(){
 		numeroCtaOrigen=$("#donor").find("#donor-cardnumber-origen").attr("cardOrigen");
 		nombreCtaOrigen=$("#donor").find("#nombreCtaOrigen").html();
 		marca=$("#donor").find("#donor-cardnumber-origen").attr("producto");
-		//marca=$("#donor").find("#marca").html();
-		//banco=$("#donor").find(".banco").html();
 
 		numeroCta=$("#content-holder").find(".nrocta").val();
 		beneficiario=$("#content-holder").find("#bank-account-holder").val();
@@ -390,9 +388,6 @@ $(function(){
 			}
 		});
 
-		// jQuery.validator.addMethod("lettersonly", function(value, element){
-		// 	return this.optional(element) || /^[a-z," "]+$/i.test(value);
-		// });
 
 		var letter = /^[a-zA-Z_áéíóúñ\s]*$/;
 

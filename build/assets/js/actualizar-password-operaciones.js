@@ -88,16 +88,10 @@ $(function(){
 				valor1=true;
 				valor2=true;
 				valor3=true;
-				// if((longitud==true)&& (mt==true) && (cap==true) && (car==true) &&  (cons==true) && (esp==true)){
-		  //       	$('#continuar').removeClass('disabled-button');
-		  //       }
+
 				if( old=="" || newC=="" || cNewC=="" ){
-					//$(this).find($('#vacio')).text('Todos los campos son obligatorios');
-					//$('#continuar').addClass('disabled-button');
-					//alert("Todos los campos son obligatorios");
 					valor1=false;
 					$("#dialog-clave-inv").dialog({
-						//title:"Campos obligatorios",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -108,11 +102,8 @@ $(function(){
 					});
 				}
 				if(newC == old){
-					//$(this).find($('#vacio')).text('Su contraseña no puede ser igual a la anterior');
-					//alert("Su contraseña no puede ser igual a la anterior");
 					valor2=false;
 					$("#dialog-clave-inv1").dialog({
-						//title:"Error en campos",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -123,11 +114,8 @@ $(function(){
 					});
 				}
 				if(newC != cNewC){
-					//$(this).find($('#vacio')).text('Su contraseña no puede ser igual a la anterior');
-					//alert("Su contraseñas no coinciden");
 					valor3=false;
 					$("#dialog-clave-inv2").dialog({
-						//title:"Contraseñas no coinciden",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -185,7 +173,6 @@ $(function(){
 
 					if(data.rc== -22) {
 					$("#dialog-clave-inv3").dialog({
-						//title:"Error en campos",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
