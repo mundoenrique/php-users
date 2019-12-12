@@ -4,7 +4,7 @@
 	$typeDocument = $documentPersonal[0];
 	$id_ext_per = $documentPersonal[1];
 ?>
-<div id="registry" class="registro-content h-100 bg-white">
+<div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="primary h0">Perfil de Usuario</h1>
@@ -13,7 +13,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<div class="pt-3">
-					<form method="post" id="formRegistry">
+					<form method="post" id="formProfile">
 						<h3 class="tertiary h4">Datos personales</h3>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -180,17 +180,14 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label>Contraseña</label>
-								<p class="primary"><a href="<?= base_url('cambiarclave');?>">Ir a la configuración </a></p>
+							<div class="col-6 col-lg-4 col-xl-3">
+								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar contraseña</a>
 							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label>Clave de Operaciones</label>
-								<p class="primary"><a href="<?= base_url('cambiarclave');?>">Ir a la configuración </a></p>
+							<div class="col-6 col-lg-4 col-xl-3">
+								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar clave de operaciones</a>
 							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label>Clave SMS</label>
-								<p class="primary"><a href="<?= base_url('cambiarclave');?>">Ir a la configuración </a></p>
+							<div class="col-6 col-lg-4 col-xl-3">
+								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar clave SMS</a>
 							</div>
 						</div>
 
