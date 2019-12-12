@@ -611,4 +611,80 @@ class Novo_User_Model extends NOVO_Model
 	}
 
 
+	public function getListCitys()
+	{
+		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListaPaisMO';
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'lista pais';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = '22';
+		$this->dataRequest->token = $this->session->userdata("token");
+		$this->dataRequest->pais = $this->country;
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->tipoDocumento;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	public function getListStates()
+	{
+		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'lista pais';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = 'buscarRegiones';
+		$this->dataRequest->token = $this->session->userdata("token");
+		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->userName = 'REGISTROCPO';
+		$this->dataRequest->codigoGrupo = '1';
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->tipoDocumento;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+
+
+
+
+
+
 }

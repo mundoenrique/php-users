@@ -209,6 +209,8 @@ class User extends NOVO_Controller {
 		}
 		$this->load->model('Novo_User_Model', 'modelLoad');
 		$dataProfileUser = $this->modelLoad->callWs_profile_User();
+		//$listCitys = $this->modelLoad->getListStates();
+
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -227,6 +229,13 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
+
+		$listaTelefonos = [];
+		foreach ($dataProfileUser->data->registro->listaTelefonos as $row) {
+			$listaTelefonos[$row->tipo] = $row->numero;
+		}
+		$dataProfileUser->data->ownTelephones = $listaTelefonos;
+
 		$this->render->data = $dataProfileUser->data;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
@@ -271,4 +280,5 @@ class User extends NOVO_Controller {
 
 		redirect($this->config->item('base_url').'inicio');
 	}
+
 }

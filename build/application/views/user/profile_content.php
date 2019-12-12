@@ -1,8 +1,6 @@
 <?php
-
-	$documentPersonal = explode('-', $data->registro->user->id_ext_per);
-	$typeDocument = $documentPersonal[0];
-	$id_ext_per = $documentPersonal[1];
+	var_dump($data);
+	$id_ext_per = explode('_', $data->registro->user->id_ext_per)[1];
 ?>
 <div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
@@ -18,7 +16,7 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text" value="<?= $typeDocument;?>" disabled>
+								<input id="idType" class="form-control" name="idType" type="text" value="<?= $data->registro->user->descripcion_tipo_id_ext_per;?>" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -90,7 +88,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="postalCode">Código postal</label>
-								<input id="postalCode" class="form-control" type="text" name="postalCode" value=""/>
+								<input id="postalCode" class="form-control" type="text" name="postalCode" value="<?= $data->registro->afiliacion->cod_postal;?>"/>
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -116,38 +114,47 @@
 						<div class="row">
 							<div class="form-group col-12 col-lg-8 col-xl-6">
 								<label for="address">Dirección</label>
-								<textarea id="address" class="form-control"></textarea>
+								<textarea id="address" class="form-control"><?= $data->registro->afiliacion->direccion;?></textarea>
 								<div class="help-block"></div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="landLine">Teléfono fijo</label>
-								<input id="landLine" class="form-control" type="text" name="landLine" value=""/>
+								<input id="landLine" class="form-control" type="text" name="landLine" value="<?= array_key_exists('HAB', $data->ownTelephones)? $data->ownTelephones['HAB']: '';?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="mobilePhone">Teléfono móvil</label>
-								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="" disabled/>
+								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= array_key_exists('CEL', $data->ownTelephones)? $data->ownTelephones['CEL']: '';?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="state">Otro Teléfono (Tipo)</label>
 								<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
-									<option value="OFC">Laboral</option>
-									<option value="FAX">Fax</option>
-									<option value="OTRO">Otro</option>
+									<option <?= array_key_exists('OFC', $data->ownTelephones)? 'selected': '';?> value="OFC">Laboral</option>
+									<option <?= array_key_exists('FAX', $data->ownTelephones)? 'selected': '';?> value="FAX">Fax</option>
+									<option <?= array_key_exists('OTRO', $data->ownTelephones)? 'selected': '';?> value="OTRO">Otro</option>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhoneNum">Otro Teléfono (Número)</label>
-								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value=""/>
+								<?php
+									$nroOtherTelephone = '';
+									foreach ($data->ownTelephones as $key => $value) {
+										if ($key == 'CEL' || $key == 'HAB') {
+											continue;
+										}
+										$nroOtherTelephone = $value;
+								}
+								?>
+								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $nroOtherTelephone;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="email">Correo Electrónico</label>
-								<input id="email" class="form-control" type="email" name="email" value="" placeholder="usuario@ejemplo.com">
+								<input id="email" class="form-control" type="email" name="email" value="<?= $data->registro->user->email;?>" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -157,12 +164,12 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="username">Login</label>
-								<input id="username" class="form-control" type="text" name="username" value="" disabled>
+								<input id="username" class="form-control" type="text" name="username" value="<?= $data->registro->user->userName;?>" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="creationDate">Fecha de creación</label>
-								<input id="creationDate" class="form-control" type="text" name="creationDate" value="" disabled/>
+								<input id="creationDate" class="form-control" type="text" name="creationDate" value="<?= $data->registro->user->dtfechorcrea_usu;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
