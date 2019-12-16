@@ -14,6 +14,9 @@ $(function(){
 	if (skin == 'pichincha'){
 		$('#telefonoFijo').attr('maxlength','9');
 		tlfLength = "9";
+
+		$('#condiciones').removeClass('label-disabled');
+		$("#accept-terms").prop('disabled', false);
 	}
 	// MENU WIDGET TRANSFERENCIAS
 	$('.transfers').hover(function(){
@@ -950,26 +953,20 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		if(skin != 'pichincha') {
+		var cpo_cook = decodeURIComponent(
+			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
+		$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(response){
 
-			$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(response){
+			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
-				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-
-				$.each(data.listaPaises, function(pos,item){
-					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
-					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-					$("#iso").append(lista);
-				});
+			$.each(data.listaPaises, function(pos,item){
+				if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
+				var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+				$("#iso").append(lista);
 			});
-		} else {
-			$('#condiciones').removeClass('label-disabled');
-			$("#accept-terms").prop('disabled', false)
-		}
+		});
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1309,25 +1306,6 @@ $(function(){
 			}
 		}); // VALIDATE
 	}
-
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-//  MODAL TERMINOS Y CONDICIONES
-$(".label-inline").on("click", "a", function() {
-
-    $("#dialog-tc").dialog({
-      dialogClass: "cond-serv",
-      modal:"true",
-      width:"940px",
-      draggable:false,
-      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-    $(".cond-serv").css("top","50px");
-    $("#ok").click(function(){
-      $("#dialog-tc").dialog("close");
-    });
-
-    });
 
 	/*BASE 64*/
 
