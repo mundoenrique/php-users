@@ -148,7 +148,7 @@ $config = [
 		[
 			'field' => 'idType',
 			'label' => 'idType',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'idNumber',

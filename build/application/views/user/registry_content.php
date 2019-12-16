@@ -1,4 +1,4 @@
-
+<?php var_dump($data);?>
 <div id="registry" class="registro-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
@@ -16,7 +16,7 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text"  disabled value="<?= $data->user->tipo_id_ext_per;?>">
+								<input id="idType" class="form-control" name="idType" type="text"  disabled value="<?= $data->user->descripcion_tipo_id_ext_per;?>">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -168,5 +168,5 @@
 	]);
 ?>
 <script>
-	var data = <?= $data ?>;
+	var dataRegistryFrm = <?= $data ?>;
 </script>
