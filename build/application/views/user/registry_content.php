@@ -1,4 +1,3 @@
-<?php var_dump($data);?>
 <div id="registry" class="registro-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">

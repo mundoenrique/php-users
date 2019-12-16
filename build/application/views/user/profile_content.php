@@ -1,6 +1,5 @@
 <?php
 	var_dump($data);
-	$id_ext_per = explode('_', $data->registro->user->id_ext_per)[1];
 ?>
 <div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
@@ -21,7 +20,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idNumber">Número de identificación</label>
-								<input id="idNumber" class="form-control" name="idNumber" type="text" value="<?= $id_ext_per;?>" disabled/>
+								<input id="idNumber" class="form-control" name="idNumber" type="text" value="<?= $data->registro->user->id_ext_per;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">

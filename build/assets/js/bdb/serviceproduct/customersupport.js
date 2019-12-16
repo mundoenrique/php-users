@@ -37,7 +37,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 						disableInputsForm(idName, true, msgLoadingWhite);
 						proccessPetition(coreOperation, idName);
 					}else{
-						notiSystem (response.title, response.msg, response.classIconName, response.data);
 						disableInputsForm (idName, false, txtBtnTrigger);
 					}
 				});

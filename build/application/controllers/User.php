@@ -26,6 +26,11 @@ class User extends NOVO_Controller {
 			exit();
 		}
 
+
+		$this->load->model('Novo_User_Model', 'modelLoad');
+		$data = $this->modelLoad->getListStates();
+
+
 		$userData = [
 			'sessionId',
 			'idUsuario',

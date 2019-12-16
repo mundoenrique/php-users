@@ -59,8 +59,7 @@ class Novo_User_Model extends NOVO_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
 							'afiliado' => $response->afiliado,
-							//'celular' => empty($response->celular)?'3152540141': $response->celular,
-							'celular' => empty($response->celular)?'3152540141': $response->celular,
+							'celular' => $response->celular,
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
@@ -658,7 +657,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$this->dataRequest->idOperation = 'buscarRegiones';
 		$this->dataRequest->token = $this->session->userdata("token");
-		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->pais = 'Co';
 		$this->dataRequest->userName = 'REGISTROCPO';
 		$this->dataRequest->codigoGrupo = '1';
 
@@ -682,6 +681,64 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
+	public function callWs_changePassword_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'password';
+		$this->dataAccessLog->function = 'password';
+		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->idOperation = '25';
+		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		$this->dataRequest->password = md5($dataRequest->newPassword);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+
+					$this->session->sess_destroy();
+
+					$this->response->code = 0;
+					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->classIconName = "ui-icon-circle-check";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -61:
+					$this->response->code = 2;
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -187:
+				case -186:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+			}
+		}
+		return $this->response;
+	}
 
 
 

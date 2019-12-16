@@ -176,9 +176,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		movementsList.classList.remove('fade-in');
 		transactions.appendChild(loading);
 
-
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
-			if (Array.isArray(response)) {
+			if (response !== '--') {
 				console.log(response);
 
 				response.forEach(function callback(currentValue, index, array) {
@@ -191,7 +190,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 							sign = currentValue.signo,
 							amount = currentValue.monto;
 
-					var list, feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
+					var feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
 
 					feedItem = createElement('li', {class: 'feed-item ' + (sign === '+' ? "feed-income" : "feed-expense") + ' flex py-1 items-center'});
 
@@ -226,10 +225,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			} else {
 				movementsList.appendChild(noMovements);
 			}
-		})
-		transactions.removeChild(transactions.lastChild);
-		movementsList.classList.add('fade-in');
-
+			transactions.removeChild(transactions.lastChild);
+			movementsList.classList.add('fade-in');
+		});
 	});
 
 	//functions
