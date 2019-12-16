@@ -9,7 +9,7 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="service-group flex max-width-4 items-center justify-between mb-2">
+				<div class="service-group flex max-width-4 flex-wrap items-center mb-2">
 					<div class="product-presentation relative mr-4">
 						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
@@ -36,7 +36,7 @@
 
 				<div class="max-width-4 mx-auto pt-3 p-responsive">
 					<!-- Generacíon de PIN -->
-					<div id="generateView" class="services-both">
+					<div id="generateView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgGen" class="msg-prevent-pin">
 							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
@@ -74,7 +74,7 @@
 					</div>
 
 					<!-- Cambio de PIN -->
-					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto pt-3">
+					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgChange" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
 						</div>
@@ -147,13 +147,13 @@
 					</div>
 
 					<!-- Solicitud de reposición de tarjeta -->
-					<div id="replaceView" class="services-both">
+					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgReplacement" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
 						<form id="formReplace" accept-charset="utf-8" method="post" class="profile-1">
 							<div class="row">
-								<div class="form-group col-lg-3">
+								<div class="form-group col-lg-4">
 									<label for="replaceMotSol">Motivo de la solicitud</label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>

@@ -98,7 +98,7 @@
 				</nav>
 
 				<div class="group row mt-3" id="results">
-					<div class="group-main-view col-8" id="transactions">
+					<div class="group-main-view col-lg-8" id="transactions">
 						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
 							<span id="transitTitle" class="none">transacciones pendientes</span>
 						</h3>
@@ -170,7 +170,7 @@
 
 					</div>
 
-					<div id="stats" class="group-aside-view col-4">
+					<div id="stats" class="group-aside-view col-lg-4">
 						<h3 class="h4 regular">Estadísticas</h3>
 						<div class="line mt-1"></div>
 						<div id="movementsStats" class="detail-stats"></div>

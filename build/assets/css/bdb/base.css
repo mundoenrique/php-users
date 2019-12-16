@@ -3385,13 +3385,19 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	min-width: 320px;
 }
 
-.product-specifications {
+.product-info {
+	min-width: 160px;
+}
+
+.product-specifications,
+.product-scheme {
 	min-width: 15rem;
 	margin-top: 1rem;
 }
 
 @media (min-width: 992px) {
-	.product-specifications {
+	.product-specifications,
+	.product-scheme {
 		margin-top: 0;
 	}
 }
@@ -3478,6 +3484,16 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	width: 448px;
 	margin-bottom: 0;
 }
+
+.service-group {
+	justify-content: space-around;
+}
+@media (min-width: 992px) {
+	.service-group {
+		justify-content: space-between;
+	}
+}
+
 
 .services-item {
 	width: 90px;
