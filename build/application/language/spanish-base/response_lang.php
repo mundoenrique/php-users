@@ -57,6 +57,7 @@ $lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas ha caducado.';
 
 
 
+
 $lang['RES_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
 $lang['RES_EXPIRED_TEMPORARY_KEY'] = '<p>Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas. </p>';
 $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>';

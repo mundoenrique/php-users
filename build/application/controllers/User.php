@@ -140,6 +140,39 @@ class User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
+	public function changePasswordProfile()
+	{
+		$view = 'changepassword';
+
+		log_message('INFO', 'NOVO User: Change Password from profile Method Initialized');
+
+		if(!$this->session->userdata('logged_in')) {
+
+			redirect(base_url('inicio'), 'location');
+			exit();
+		}
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->session->set_flashdata('changePassword', 'changePaswordProfile');
+
+		$this->views = ['user/'.$view];
+		$this->render->reason = lang('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->loadView($view);
+	}
+
 	public function preRegistry()
 	{
 		$view = 'preregistry';

@@ -8,7 +8,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de Datos</h2>
-				<p><?= $reason; ?></p>
+				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<form method="post" id="formChangePassword">

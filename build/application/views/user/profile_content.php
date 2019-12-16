@@ -174,12 +174,12 @@
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label class="block">Notificaciones</label>
 								<div class="custom-control custom-switch custom-control-inline">
-									<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail">
+									<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail" <?= $data->registro->user->notEmail == 1? 'checked': '';?>>
 									<label class="custom-control-label" for="notificationsEmail">Correo electrónico
 									</label>
 								</div>
 								<div class="custom-control custom-switch custom-control-inline">
-									<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms">
+									<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms" <?= $data->registro->user->notSms == 1? 'checked': '';?>>
 									<label class="custom-control-label" for="notificationsSms">SMS
 									</label>
 								</div>
@@ -187,14 +187,33 @@
 						</div>
 						<div class="row">
 							<div class="col-6 col-lg-4 col-xl-3">
-								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar contraseña</a>
+								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclaveprofile');?>">Cambiar contraseña</a>
 							</div>
-							<div class="col-6 col-lg-4 col-xl-3">
-								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar clave de operaciones</a>
-							</div>
-							<div class="col-6 col-lg-4 col-xl-3">
-								<a class="btn btn-small btn-link px-0" href="<?= base_url('cambiarclave');?>">Cambiar clave SMS</a>
-							</div>
+							<?php
+								if ($this->session->userdata("aplicaTransferencia") === 'S') {
+									$urlPasswordSMS = 'creaclavesms';
+									$textPasswordSMS = 'Crear clave SMS';
+									if ($data->registro->user->disponeClaveSMS === '0') {
+										$urlPasswordSMS = 'cambiaclavesms';
+										$textPasswordSMS = 'Cambiar clave SMS';
+									}
+
+									$urlPasswordOperation = 'creaclaveoperaciones';
+									$textPasswordOperation = 'Crear clave Operaciones';
+									if (!empty($this->session->userdata('passwordOperaciones'))) {
+										$urlPasswordOperation = 'cambiarclaveoperaciones';
+										$textPasswordOperation = 'Cambiar clave Operaciones';
+									}
+							?>
+								<div class="col-6 col-lg-4 col-xl-3">
+									<a class="btn btn-small btn-link px-0" href="<?= base_url($urlPasswordOperation);?>"><?= $textPasswordOperation;?></a>
+								</div>
+								<div class="col-6 col-lg-4 col-xl-3">
+									<a class="btn btn-small btn-link px-0" href="<?= base_url($urlPasswordSMS);?>"><?= $textPasswordSMS;?></a>
+								</div>
+							<?php
+								}
+							?>
 						</div>
 
 						<hr class="separador-one mt-2 mb-4">

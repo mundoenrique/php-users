@@ -27,10 +27,10 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'Generar PIN';
 		$this->dataAccessLog->operation = 'Generar PIN';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
-
-		$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
+		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 
@@ -190,7 +190,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		$this->dataRequest->idOperation = '122';
-		$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
+		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
 		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];

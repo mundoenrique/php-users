@@ -164,7 +164,7 @@ function validateForms(form, options) {
 	 }, "Este campo es obligatorio.");
 
 	jQuery.validator.addMethod("generateConfirmPin", function(value,element){
-		if(element.value.length>0 && element.value == $("#newPin").val()) {
+		if(element.value.length>0 && element.value == $("#generateNewPin").val()) {
 			return true;
 		}
 		else return false;
