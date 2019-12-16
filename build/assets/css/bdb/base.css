@@ -3410,6 +3410,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	}
 }
 
+.feed:not(.fade-in) {
+	display: none;
+}
+
 .feed .feed-item {
 	border-top: 1px solid var(--border-color-2);
 	border-left: 2px solid var(--border-color-2);
@@ -3464,6 +3468,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	width: 300px;
 	height: 250px;
 	margin: 0 auto;
+}
+
+.detail-stats:not(.fade-in) {
+	display: none;
 }
 
 .services-content {

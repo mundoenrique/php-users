@@ -80,11 +80,11 @@
 						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">
-							<input type="radio" name="movimientos" id="option1" checked> Movimientos
+						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
+							<input id="optionMovements" type="radio" name="movimientos" checked> Movimientos
 						</label>
-						<label class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" id="transitToogle">
-							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
+						<label id="transitToogle" class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" >
+							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
 						</label>
 					</div>
 					<ul class="stack-extra list-inline mb-0 flex items-center">
@@ -100,7 +100,7 @@
 				<div class="group row mt-3" id="results">
 					<div class="group-main-view col-8" id="transactions">
 						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
-							<span id="transitTitle">transacciones pendientes</span>
+							<span id="transitTitle" class="none">transacciones pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
 						<ul id="movementsList" class="feed list-style-none mt-3 pl-0">
@@ -109,7 +109,6 @@
 								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
 
 								if ($data['movements'] !== '--'){
-
 									foreach($data['movements'] as $row){
 										$separedDate = explode('/',$row->fecha);
 										$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
@@ -190,7 +189,7 @@
 	$dataForm->totalExpenseMovements = $totalExpenseMovements;
 	$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions)? $totalIncomePendingTransactions: 0;
 	$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions)? $totalExpensePendingTransactions: 0;
-
+	$dataForm->currency = lang('GEN_COIN');
 ?>
 <script>
 	var data = <?= json_encode((array)$dataForm);?>
