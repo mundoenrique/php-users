@@ -26,11 +26,6 @@ class User extends NOVO_Controller {
 			exit();
 		}
 
-
-		$this->load->model('Novo_User_Model', 'modelLoad');
-		$data = $this->modelLoad->getListStates();
-
-
 		$userData = [
 			'sessionId',
 			'idUsuario',
@@ -247,8 +242,6 @@ class User extends NOVO_Controller {
 		}
 		$this->load->model('Novo_User_Model', 'modelLoad');
 		$dataProfileUser = $this->modelLoad->callWs_profile_User();
-		//$listCitys = $this->modelLoad->getListStates();
-
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -275,6 +268,9 @@ class User extends NOVO_Controller {
 		$dataProfileUser->data->ownTelephones = $listaTelefonos;
 
 		$this->render->data = $dataProfileUser->data;
+		$this->render->dataStates = $this->modelLoad->getListStates()->data;
+//		$this->render->dataCitys = $this->modelLoad->getListCitys()->data;
+		$this->render->dataProfessions = $this->modelLoad->getListProfessions()->data;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}

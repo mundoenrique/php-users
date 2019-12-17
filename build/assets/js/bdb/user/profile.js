@@ -4,10 +4,12 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var maxBirthdayDate = new Date();
-	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 	var btnTrigger = $$.getElementById('btnActualizar');
+	var listStates = $$.getElementById('department');
+	var listCity = $$.getElementById('ctrlCity');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 
+	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 	//core
 	$( "#birthDate" ).datepicker( {
 		maxDate: maxBirthdayDate,
@@ -30,4 +32,18 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	});
 
+	listStates.addEventListener('change', function(){
+		if (this.value !== '') {
+			listCity.classList.remove('none');
+			data = {
+				codState: this.value,
+			}
+
+			callNovoCore('POST', 'User', 'getListCitys', data, function(response) {
+				console.log(response.data);
+			});
+		}else{
+			listCity.classList.add('none');
+		}
+	});
 })

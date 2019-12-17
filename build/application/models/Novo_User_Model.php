@@ -610,27 +610,27 @@ class Novo_User_Model extends NOVO_Model
 		return $key;
 	}
 
-
-	public function getListCitys()
+	public function callWs_getListCitys_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
 
-		$this->className = 'com.novo.objects.MO.ListaPaisMO';
+		$this->className = 'com.novo.objects.MO.EstadoTO';
 		$this->dataAccessLog->modulo = 'validar cuenta';
-		$this->dataAccessLog->function = 'lista pais';
+		$this->dataAccessLog->function = 'lista ciudades';
 		$this->dataAccessLog->operation = 'consultar';
 		$this->dataAccessLog->userName = $this->session->userdata("userName");
 
-		$this->dataRequest->idOperation = '22';
+		$this->dataRequest->idOperation = '35';
 		$this->dataRequest->token = $this->session->userdata("token");
-		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->codEstado = $dataRequest->codState;
+		$this->dataRequest->codPais = $this->session->userdata("pais");
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response->tipoDocumento;
+					$this->response->data = $response->listaCiudad;
 					break;
 				default:
 					$messageError = new stdClass();
@@ -649,15 +649,15 @@ class Novo_User_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->className = 'com.novo.objects.TOs.PaisTO';
 		$this->dataAccessLog->modulo = 'validar cuenta';
 		$this->dataAccessLog->function = 'lista pais';
 		$this->dataAccessLog->operation = 'consultar';
 		$this->dataAccessLog->userName = $this->session->userdata("userName");
 
-		$this->dataRequest->idOperation = 'buscarRegiones';
+		$this->dataRequest->idOperation = '34';
 		$this->dataRequest->token = $this->session->userdata("token");
-		$this->dataRequest->pais = 'Co';
+		$this->dataRequest->codPais = $this->session->userdata('pais');
 		$this->dataRequest->userName = 'REGISTROCPO';
 		$this->dataRequest->codigoGrupo = '1';
 
@@ -666,7 +666,40 @@ class Novo_User_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response->tipoDocumento;
+					$this->response->data = $response->listaEstados;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	function getListProfessions () {
+
+		log_message('INFO', 'NOVO User Model: load List Professions method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListaTipoProfesionesMO';
+		$this->dataAccessLog->modulo = 'lista profesion';
+		$this->dataAccessLog->function = 'lista profesion';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = '37';
+		$this->dataRequest->token = $this->session->userdata("token");
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->listaProfesiones;
 					break;
 				default:
 					$messageError = new stdClass();

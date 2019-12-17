@@ -1,6 +1,13 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'getlistcitys' => [
+		[
+			'field' => 'codState',
+			'label' => 'codState',
+			'rules' => 'required|trim'
+		]
+	],
 	'replace' => [
 		[
 			'field' => 'codeOTP',
