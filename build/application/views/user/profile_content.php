@@ -1,5 +1,12 @@
 <?php
-	var_dump($data->registro);
+	echo '<pre>';
+	print_r($data);
+	echo '</pre>';
+
+	$id_ext_per = $data->registro->user->id_ext_per;
+	if (strpos($id_ext_per, '_') !== false) {
+		$id_ext_per = explode('_', $id_ext_per)[1];
+	}
 ?>
 <div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
@@ -122,15 +129,16 @@
 									<?php
 										}else{
 									?>
-										<input id="profession" name="profession" class="form-control" type="text" value="<?= $dataStates->descripcion;?>" disabled/>
+										<input id="department" name="department" class="form-control" type="text" value="<?= $dataStates->descripcion;?>" disabled/>
 									<?php
 										}
 									?>
 								<div class="help-block"></div>
 							</div>
-							<div id='ctrlCity' class="form-group col-6 col-lg-4 col-xl-3 none">
+							<div id='ctrlCity' class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="city">Ciudad</label>
-								<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
+								<select id="city" class="custom-select form-control" name="city" disabled>
+									<option value="">Seleccione</option>
 								</select>
 								<div class="help-block"></div>
 							</div>
