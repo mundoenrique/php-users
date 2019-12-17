@@ -67,7 +67,7 @@
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
-								<a class="btn underline" href="">Cancelar</a>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
 								<button id="btnGenerate" name="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
@@ -110,7 +110,7 @@
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
-								<a class="btn underline" href="">Cancelar</a>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
 								<button id="btnChange" name="btnChange" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
@@ -140,7 +140,7 @@
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
-								<a class="btn underline" href="">Cancelar</a>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
 								<button id="btnLock" name="btnLock" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>
@@ -179,7 +179,7 @@
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
-								<a class="btn underline" href="">Cancelar</a>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
 								<button id="btnReplace" name="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 							</div>
 						</form>

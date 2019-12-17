@@ -65,8 +65,8 @@
 
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
-							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnChangePassword" name="btnChangePassword" class="btn btn-primary" type="submit">Continuar</button>
+							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
+							<button id="btnChangePassword" name="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 						</div>
 					</form>
 				</div>
