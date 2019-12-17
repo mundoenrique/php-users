@@ -267,11 +267,16 @@ class User extends NOVO_Controller {
 		}
 		$dataProfileUser->data->ownTelephones = $listaTelefonos;
 
+		if (!empty($dataProfileUser->data->afiliacion->ciudad)) {
+
+		}
+
 		$this->render->data = $dataProfileUser->data;
+		//$this->render->dataCitys = $this->modelLoad->getListCitys()->data;
 		$this->render->dataStates = $this->modelLoad->getListStates()->data;
-//		$this->render->dataCitys = $this->modelLoad->getListCitys()->data;
 		$this->render->dataProfessions = $this->modelLoad->getListProfessions()->data;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+
 		$this->loadView($view);
 	}
 

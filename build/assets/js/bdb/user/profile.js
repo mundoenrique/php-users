@@ -19,17 +19,29 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	btnTrigger.addEventListener('click', function(){
 
-
 		var form = $('#formProfile');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
-			btnTriggerOTP.disabled = true;
-			console.log("todo bien");
+			$$.getElementById('formRegistry').querySelectorAll('input').forEach(
+				function(currentValue) {
+					if (currentValue.type == 'radio') {
+						if (currentValue.checked) {
+							data[currentValue.getAttribute('name')] = currentValue.value;
+						}
+					} else {
+						data[currentValue.getAttribute('name')] = currentValue.value;
+					}
+				}
+			);
+			data['cpo_name'] = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+			);
 
-		} else {
-			console.log("campos no válidos");
+			callNovoCore('POST', 'User', 'updateProfile', data, function(response) {
+				btnTrigger.innerHTML = txtBtnRegistry;
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
+			});
 		}
-
 	});
 
 	listStates.addEventListener('change', function(){
@@ -42,6 +54,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			callNovoCore('POST', 'User', 'getListCitys', data, function(response) {
 				console.log(response.data);
 			});
+
 		}else{
 			listCity.classList.add('none');
 		}

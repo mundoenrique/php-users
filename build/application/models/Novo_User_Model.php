@@ -681,7 +681,8 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
-	function getListProfessions () {
+	function getListProfessions ()
+	{
 
 		log_message('INFO', 'NOVO User Model: load List Professions method Initialized');
 
