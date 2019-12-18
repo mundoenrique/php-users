@@ -871,7 +871,7 @@ class Novo_User_Model extends NOVO_Model
 				"aplicaPerfil" => "",
 		);
 
-		$direccion= array(
+		$direccion = array(
 			"acCodCiudad"=> $dataRequest->city,
 			"acCodEstado"=> $dataRequest->department,
 			"acCodPais"=> $this->session->userdata('pais'),

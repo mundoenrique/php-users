@@ -59,8 +59,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				}
 			);
 
-			// var elPhoneType = $$.getElementById('phoneType');
-			// dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+			var elPhoneType = $$.getElementById('phoneType');
+			dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+			dataForm['address'] = $$.getElementById('address').value;
 
 			dataForm['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
