@@ -1,10 +1,3 @@
-<?php
-	var_dump( $data);
-	$id_ext_per = $data->registro->user->id_ext_per;
-	if (strpos($id_ext_per, '_') !== false) {
-		$id_ext_per = explode('_', $id_ext_per)[1];
-	}
-?>
 <div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
