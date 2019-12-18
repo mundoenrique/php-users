@@ -19,7 +19,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			transitStats = $('#transitStats'),
 			movementsToogle = $$.getElementById('movementsToogle'),
 			transitToogle = $$.getElementById('transitToogle'),
-			btnOptions = $$.querySelectorAll('.btn-options'), i;
+			btnOptions = $$.querySelectorAll('.btn-options');
+
+	var	i;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -50,7 +52,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					background: "transparent",
 				}
 			},
-			seriesColors: ["#007e33", "#cc0000"],
+			seriesColors: ["#cc0000", "#007e33"],
 			series: [{
 				type: "donut",
 				overlay: {
@@ -58,10 +60,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 				},
 				data: [{
 					category: "Cargos",
-					value: parseFloat(parseFloat(500).toFixed(1))
+					value: parseFloat(parseFloat(data.totalExpenseMovements).toFixed(1))
 				}, {
 					category: "Abonos",
-					value: parseFloat(parseFloat(1000).toFixed(1))
+					value: parseFloat(parseFloat(data.totalIncomeMovements).toFixed(1))
 				}]
 			}],
 			tooltip: {
@@ -99,7 +101,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					background: "transparent",
 				}
 			},
-			seriesColors: ["#007e33", "#cc0000"],
+			seriesColors: ["#cc0000", "#007e33"],
 			series: [{
 				type: "donut",
 				overlay: {
@@ -107,10 +109,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 				},
 				data: [{
 					category: "Cargos",
-					value: parseFloat(parseFloat(1000).toFixed(1))
+					value: parseFloat(parseFloat(data.totalExpensePendingTransactions).toFixed(1))
 				}, {
 					category: "Abonos",
-					value: parseFloat(parseFloat(500).toFixed(1))
+					value: parseFloat(parseFloat(data.totalIncomePendingTransactions).toFixed(1))
 				}]
 			}],
 			tooltip: {
@@ -164,6 +166,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var monthSelected = filterMonth.options[filterMonth.selectedIndex];
 		var yearSelected = filterYear.options[filterYear.selectedIndex];
 
+		var totalIncome = 0;
+		var totalExpense = 0;
+
 		var dataRequest = {
 			noTarjeta: data.noTarjeta,
 			month: parseInt(monthSelected.value),
@@ -174,11 +179,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsList.removeChild(movementsList.firstChild);
 		}
 		movementsList.classList.remove('fade-in');
+		movementsStats.removeClass('fade-in');
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
 			if (response !== '--') {
-				console.log(response);
 
 				response.forEach(function callback(currentValue, index, array) {
 					var date = moment(currentValue.fecha, "DD/MM/YYYY").format('DD/MMM/YYYY').split('/'),
@@ -188,7 +193,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 							concept = currentValue.concepto,
 							reference = currentValue.referencia,
 							sign = currentValue.signo,
-							amount = currentValue.monto;
+							amount = parseFloat(currentValue.monto.replace(",", "")),
+							formatterPeso = formatCurrency("es-CO", "currency", "COP", 2, amount);
 
 					var feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
 
@@ -214,7 +220,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 					feedConcept.appendChild(feedMeta);
 
 					feedAmount = createElement('span', {class: 'px-2 feed-amount items-center'});
-					feedAmount.textContent = data.currency + (sign === '-' ? " -" : " ") + amount;
+					if (sign === '-') {
+						totalExpense += amount;
+						sign = "- ";
+					} else {
+						totalIncome += amount;
+						sign = "";
+					}
+					feedAmount.textContent = sign + formatterPeso;
 
 					feedItem.appendChild(feedDate);
 					feedItem.appendChild(feedConcept);
@@ -222,6 +235,50 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 					movementsList.appendChild(feedItem);
 				});
+
+				movementsStats.kendoChart({
+					chartArea: {
+						background:"transparent",
+						width: 300,
+						height: 250
+					},
+					legend: {
+						position: "top",
+						visible: false
+					},
+					seriesDefaults: {
+						labels: {
+							template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+							position: "outsideEnd",
+							visible: false,
+							background: "transparent",
+						}
+					},
+					seriesColors: ["#cc0000", "#007e33"],
+					series: [{
+						type: "donut",
+						overlay: {
+							gradient: "none"
+						},
+						data: [{
+							category: "Cargos",
+							value: parseFloat(parseFloat(totalExpense).toFixed(1))
+						}, {
+							category: "Abonos",
+							value: parseFloat(parseFloat(totalIncome).toFixed(1))
+						}]
+					}],
+					tooltip: {
+						visible: true,
+						template: "#= category # - #= kendo.format('{0:P}', percentage) #",
+						padding: {
+							right: 4,
+							left: 4
+						},
+						color: "#ffffff"
+					}
+				});
+				movementsStats.addClass('fade-in');
 			} else {
 				movementsList.appendChild(noMovements);
 			}
@@ -255,4 +312,13 @@ var createElement = function (tagName, attrs) {
 	});
 
 	return el;
+}
+
+function formatCurrency(locales, style, currency, fractionDigits, number) {
+	var formatted = new Intl.NumberFormat(locales, {
+    style: style,
+    currency: currency,
+    minimumFractionDigits: fractionDigits
+	}).format(number);
+  return formatted;
 }
