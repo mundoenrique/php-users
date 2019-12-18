@@ -133,11 +133,30 @@
 								<div class="help-block"></div>
 							</div>
 							<div id='ctrlCity' class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="city">Ciudad</label>
-								<select id="city" class="custom-select form-control" name="city" disabled>
-									<option value="">Seleccione</option>
-								</select>
-								<div class="help-block"></div>
+								<?php
+									if (!empty($dataCitys) and gettype($dataCitys) === 'array') {
+								?>
+											<label for="city">Ciudad</label>
+											<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
+												<option value="">Seleccione</option>
+									<?php
+												foreach ($dataCitys as $row) {
+									?>
+													<option value="<?= $row->codCiudad;?>" <?= $data->direccion->acCodCiudad === $row->codCiudad? 'selected': '';?>><?= $row->ciudad;?></option>
+									<?php
+												}
+									?>
+											</select>
+
+									<?php
+										}else{
+									?>
+										<input id="city" name="city" class="form-control" type="text" value="<?= $dataCitys->descripcion;?>" disabled/>
+
+								<?php
+									}
+								?>
+
 							</div>
 						</div>
 						<div class="row">
@@ -176,7 +195,7 @@
 											continue;
 										}
 										$nroOtherTelephone = $value;
-								}
+									}
 								?>
 								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $nroOtherTelephone;?>"/>
 								<div class="help-block"></div>

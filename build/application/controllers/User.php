@@ -240,8 +240,11 @@ class User extends NOVO_Controller {
 			redirect(base_url('vistaconsolidada'), 'location');
 			exit();
 		}
+
 		$this->load->model('Novo_User_Model', 'modelLoad');
-		$dataProfileUser = $this->modelLoad->callWs_profile_User();
+
+		$objData = new stdClass();
+		$objData->profileUser = $this->modelLoad->callWs_profile_User()->data;
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -262,19 +265,24 @@ class User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 
 		$listaTelefonos = [];
-		foreach ($dataProfileUser->data->registro->listaTelefonos as $row) {
+		foreach ($objData->profileUser->registro->listaTelefonos as $row) {
 			$listaTelefonos[$row->tipo] = $row->numero;
 		}
-		$dataProfileUser->data->ownTelephones = $listaTelefonos;
+		$objData->profileUser->ownTelephones = $listaTelefonos;
 
-		if (!empty($dataProfileUser->data->afiliacion->ciudad)) {
+		if (!empty($objData->profileUser->direccion)) {
+
+			$codState = new stdClass;
+			$codState->codState = $objData->profileUser->direccion->acCodEstado;
+			$this->render->dataCitys = $this->modelLoad->callWs_getListCitys_User($codState)->data;
 
 		}
+		$objData->professions = $this->modelLoad->getListProfessions()->data;
+		$objData->states = $this->modelLoad->getListStates()->data;
 
-		$this->render->data = $dataProfileUser->data;
-		//$this->render->dataCitys = $this->modelLoad->getListCitys()->data;
-		$this->render->dataStates = $this->modelLoad->getListStates()->data;
-		$this->render->dataProfessions = $this->modelLoad->getListProfessions()->data;
+		$this->render->data = $objData->profileUser;
+		$this->render->dataProfessions = $objData->professions;
+		$this->render->dataStates = $objData->states;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 
 		$this->loadView($view);

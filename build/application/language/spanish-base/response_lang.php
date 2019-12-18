@@ -48,6 +48,7 @@ $lang['RESP_SESSION_EXPIRED'] = 'Su sesión ha expirado.';
 $lang['RESP_RESEEND_OTP'] = 'Solicitar nuevo código de seguridad';
 $lang['RESP_NOT_SEND_OTP'] = 'Cógido de seguridad no generado.';
 $lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas ha caducado.';
+$lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
 
 
 

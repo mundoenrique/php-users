@@ -622,8 +622,8 @@ class Novo_User_Model extends NOVO_Model
 
 		$this->dataRequest->idOperation = '35';
 		$this->dataRequest->token = $this->session->userdata("token");
-		$this->dataRequest->codEstado = $dataRequest->codState;
 		$this->dataRequest->codPais = $this->session->userdata("pais");
+		$this->dataRequest->codEstado = $dataRequest->codState;
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
@@ -909,12 +909,8 @@ class Novo_User_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response;
-					break;
-
-				default:
-					$this->response->data = "--";
-					break;
+					$this->response->msg = lang('RESP_SUCCESSFUL_PROFILE');
+					$this->response->classIconName = 'ui-icon-info';
 			}
 		}
 		return $this->response;
