@@ -77,7 +77,7 @@
 									<?php
 												foreach ($dataProfessions as $row) {
 									?>
-													<option value="<?= $row->idProfesion;?>"><?= $row->tipoProfesion;?></option>
+													<option value="<?= $row->idProfesion;?>" <?= $data->registro->user->tipo_profesion === $row->idProfesion? 'selected': '' ;?>   ><?= $row->tipoProfesion;?></option>
 									<?php
 												}
 									?>
@@ -99,16 +99,15 @@
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="addressType">Tipo de dirección</label>
 								<select id="addressType" class="custom-select form-control" name="addressType" placeholder="Seleccione">
-									<option value="">Seleccione</option>
-                  <option value="1">Domicilio</option>
-                  <option value="2">Laboral</option>
-									<option value="3">Comercial</option>
+									<option value="1" <?= $data->direccion->acTipo == '1'? 'selected': '' ;?>>Domicilio</option>
+                  <option value="2" <?= $data->direccion->acTipo == '2'? 'selected': '' ;?>>Laboral</option>
+									<option value="3" <?= $data->direccion->acTipo == '3'? 'selected': '' ;?>>Comercial</option>
 								</select>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="postalCode">Código postal</label>
-								<input id="postalCode" class="form-control" type="text" name="postalCode" value="<?= $data->registro->afiliacion->cod_postal;?>"/>
+								<input id="postalCode" class="form-control" type="text" name="postalCode" value="<?= $data->direccion->acZonaPostal;?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -117,15 +116,16 @@
 										if ( gettype($dataStates) === 'array' ) {
 									?>
 											<select id="department" class="custom-select form-control" name="department" placeholder="Seleccione">
-											<option value="">Seleccione</option>
+												<option value="">Seleccione</option>
 									<?php
 												foreach ($dataStates as $row) {
 									?>
-													<option value="<?= $row->codEstado;?>"><?= ucfirst(strtolower($row->estados));?></option>
+													<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= $row->estados;?></option>
 									<?php
 												}
 									?>
 											</select>
+
 									<?php
 										}else{
 									?>
@@ -146,7 +146,7 @@
 						<div class="row">
 							<div class="form-group col-12 col-lg-8 col-xl-6">
 								<label for="address">Dirección</label>
-								<textarea id="address" name="address" class="form-control"><?= $data->registro->afiliacion->direccion;?></textarea>
+								<textarea id="address" name="address" class="form-control"></textarea>
 								<div class="help-block"></div>
 							</div>
 						</div>

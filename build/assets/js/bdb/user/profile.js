@@ -27,32 +27,33 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var form = $('#formProfile');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
+			var dataForm;
 			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
 					if (currentValue.type == 'radio') {
 						if (currentValue.checked) {
-							data[currentValue.getAttribute('name')] = currentValue.value;
+							dataForm[currentValue.getAttribute('name')] = currentValue.value;
 						}
 					} else {
-						data[currentValue.getAttribute('name')] = currentValue.value;
+						dataForm[currentValue.getAttribute('name')] = currentValue.value;
 					}
 				}
 			);
-			data['profession'] = $$.getElementById('profession').value;
-			data['department'] = $$.getElementById('department').value;
-			data['city'] = $$.getElementById('city').value;
-			data['addressType'] = $$.getElementById('addressType').value;
-			data['address'] = $$.getElementById('address').value;
+			dataForm['profession'] = $$.getElementById('profession').value;
+			dataForm['department'] = $$.getElementById('department').value;
+			dataForm['city'] = $$.getElementById('city').value;
+			dataForm['addressType'] = $$.getElementById('addressType').value;
+			dataForm['address'] = $$.getElementById('address').value;
 
 			var elPhoneType = $$.getElementById('phoneType');
-			data['phoneType'] = elPhoneType.value;
-			data['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+			dataForm['phoneType'] = elPhoneType.value;
+			dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
 
-			data['cpo_name'] = decodeURIComponent(
+			dataForm['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
-			callNovoCore('POST', 'User', 'updateProfile', data, function(response) {
+			callNovoCore('POST', 'User', 'updateProfile', dataForm, function(response) {
 				btnTrigger.innerHTML = txtBtnTrigger;
 				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
