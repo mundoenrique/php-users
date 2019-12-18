@@ -54,8 +54,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('formProfile').querySelectorAll('select').forEach(
 				function(currentValue) {
 						dataForm[currentValue.getAttribute('name')] = currentValue.value;
-						console.log(currentValue.getAttribute('id'));
-
 				}
 			);
 
@@ -68,7 +66,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			);
 
 			callNovoCore('POST', 'User', 'updateProfile', dataForm, function(response) {
-				disableInputsForm(true, txtBtnTrigger);
+				disableInputsForm(false, txtBtnTrigger);
+				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}
 	});
