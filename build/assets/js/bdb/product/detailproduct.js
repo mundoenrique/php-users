@@ -36,46 +36,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		movementsList.classList.add('fade-in');
 		movementsStats.addClass('fade-in');
 
-		movementsStats.kendoChart({
-			chartArea: {
-				background:"transparent"
-			},
-			legend: {
-				position: "top",
-				visible: false
-			},
-			seriesDefaults: {
-				labels: {
-					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-					position: "outsideEnd",
-					visible: false,
-					background: "transparent",
-				}
-			},
-			seriesColors: ["#cc0000", "#007e33"],
-			series: [{
-				type: "donut",
-				overlay: {
-					gradient: "none"
-				},
-				data: [{
-					category: "Cargos",
-					value: parseFloat(parseFloat(data.totalExpenseMovements).toFixed(1))
-				}, {
-					category: "Abonos",
-					value: parseFloat(parseFloat(data.totalIncomeMovements).toFixed(1))
-				}]
-			}],
-			tooltip: {
-				visible: true,
-				template: "#= category # - #= kendo.format('{0:P}', percentage) #",
-				padding: {
-					right: 4,
-					left: 4
-				},
-				color: "#ffffff"
-			}
-		});
+		invokeChart(movementsStats);
 	}
 
 
@@ -83,48 +44,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		transitToogle.classList.remove('is-disabled');
 		transitToogle.querySelector('input').disabled = false;
 
-		transitStats.kendoChart({
-			chartArea: {
-				background:"transparent",
-				width: 300,
-				height: 250
-			},
-			legend: {
-				position: "top",
-				visible: false
-			},
-			seriesDefaults: {
-				labels: {
-					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-					position: "outsideEnd",
-					visible: false,
-					background: "transparent",
-				}
-			},
-			seriesColors: ["#cc0000", "#007e33"],
-			series: [{
-				type: "donut",
-				overlay: {
-					gradient: "none"
-				},
-				data: [{
-					category: "Cargos",
-					value: parseFloat(parseFloat(data.totalExpensePendingTransactions).toFixed(1))
-				}, {
-					category: "Abonos",
-					value: parseFloat(parseFloat(data.totalIncomePendingTransactions).toFixed(1))
-				}]
-			}],
-			tooltip: {
-				visible: true,
-				template: "#= category # - #= kendo.format('{0:P}', percentage) #",
-				padding: {
-					right: 4,
-					left: 4
-				},
-				color: "#ffffff"
-			}
-		});
+		invokeChart(transitStats);
 	}
 
 	// Botón para cambiar movimientos en tránsito
@@ -236,48 +156,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					movementsList.appendChild(feedItem);
 				});
 
-				movementsStats.kendoChart({
-					chartArea: {
-						background:"transparent",
-						width: 300,
-						height: 250
-					},
-					legend: {
-						position: "top",
-						visible: false
-					},
-					seriesDefaults: {
-						labels: {
-							template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-							position: "outsideEnd",
-							visible: false,
-							background: "transparent",
-						}
-					},
-					seriesColors: ["#cc0000", "#007e33"],
-					series: [{
-						type: "donut",
-						overlay: {
-							gradient: "none"
-						},
-						data: [{
-							category: "Cargos",
-							value: parseFloat(parseFloat(totalExpense).toFixed(1))
-						}, {
-							category: "Abonos",
-							value: parseFloat(parseFloat(totalIncome).toFixed(1))
-						}]
-					}],
-					tooltip: {
-						visible: true,
-						template: "#= category # - #= kendo.format('{0:P}', percentage) #",
-						padding: {
-							right: 4,
-							left: 4
-						},
-						color: "#ffffff"
-					}
-				});
+				invokeChart(movementsStats);
 				movementsStats.addClass('fade-in');
 			} else {
 				movementsList.appendChild(noMovements);
@@ -321,4 +200,49 @@ function formatCurrency(locales, style, currency, fractionDigits, number) {
     minimumFractionDigits: fractionDigits
 	}).format(number);
   return formatted;
+}
+
+function invokeChart(selector) {
+	selector.kendoChart({
+		chartArea: {
+			background:"transparent",
+			width: 300,
+			height: 250
+		},
+		legend: {
+			position: "top",
+			visible: false
+		},
+		seriesDefaults: {
+			labels: {
+				template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+				position: "outsideEnd",
+				visible: false,
+				background: "transparent",
+			}
+		},
+		seriesColors: ["#cc0000", "#007e33"],
+		series: [{
+			type: "donut",
+			overlay: {
+				gradient: "none"
+			},
+			data: [{
+				category: "Cargos",
+				value: parseFloat(parseFloat(data.totalExpenseMovements).toFixed(1))
+			}, {
+				category: "Abonos",
+				value: parseFloat(parseFloat(data.totalIncomeMovements).toFixed(1))
+			}]
+		}],
+		tooltip: {
+			visible: true,
+			template: "#= category # - #= kendo.format('{0:P}', percentage) #",
+			padding: {
+				right: 4,
+				left: 4
+			},
+			color: "#ffffff"
+		}
+	});
 }

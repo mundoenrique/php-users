@@ -372,7 +372,7 @@ textarea.form-control {
 	color: var(--text-color);
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
-	transition: all 0.1ms ease-in-out;
+	transition: all .1ms ease-in-out;
 }
 
 .select-box option:first-child {
@@ -388,7 +388,7 @@ textarea.form-control {
 	line-height: 1.5;
 	margin: 0 2px;
 	padding-right: 1.9rem !important;
-	padding: 0rem .4rem;
+	padding: 0 .4rem;
 	position: relative;
 	text-shadow: 0 0 0 var(--text-color);
 	transition: all .1s ease-in-out;
@@ -688,7 +688,7 @@ textarea.form-control {
 	position: relative;
 	flex-shrink: 0;
 	margin-top: 0;
-	margin-right: 0.25rem;
+	margin-right: .25rem;
 	margin-left: 0;
 }
 .form-inline .custom-control {
@@ -831,7 +831,7 @@ textarea.form-control {
 .sb-search-input {
 	position: absolute;
 	top: 0;
-	right: 0px;
+	right: 0;
 	outline: none;
 	width: 100%;
 	margin: 0;
@@ -2527,7 +2527,7 @@ td > button > i:hover{
 .dataTables_length select option {
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
-	transition: all 0.1ms ease-in-out;
+	transition: all .1ms ease-in-out;
 }
 
 .dataTables_length select  {
@@ -2540,7 +2540,7 @@ td > button > i:hover{
 	line-height: 1.5;
 	margin: 0 2px;
 	padding-right: 1.8rem !important;
-	padding: 0rem .4rem;
+	padding: 0 .4rem;
 	position: relative;
 	text-shadow: 0 0 0 var(--text-color);
 	transition: all .1s ease-in-out;
@@ -2688,7 +2688,7 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 }
 
 table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
-	padding-top: 0.5em !important;
+	padding-top: .5em !important;
 }
 
 table#resultsAccount thead th:nth-child(7){
@@ -3376,9 +3376,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .dashboard-item:hover .item-info {
 	margin-top: 80px;
 	border-bottom: 2px solid var(--yellow);
-	-webkit-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
-	-moz-box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
-	box-shadow: 0 0 2px rgba(51, 51, 51, 0.65);
+	-webkit-box-shadow: 0 0 2px rgba(51, 51, 51, .65);
+	-moz-box-shadow: 0 0 2px rgba(51, 51, 51, .65);
+	box-shadow: 0 0 2px rgba(51, 51, 51, .65);
 }
 
 .product-info-full {

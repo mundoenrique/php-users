@@ -124,7 +124,7 @@
 											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 										</div>
 										<span class="px-2 feed-amount items-center">
-										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. strval(number_format($row->monto,2,',','.'));?>
+										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. strval(number_format($row->monto,2,',','.')); ?>
 										</span>
 									</li>
 								<?php
