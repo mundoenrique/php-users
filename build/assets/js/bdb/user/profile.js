@@ -30,22 +30,32 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var dataForm = {};
 			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
-					if (currentValue.type == 'radio') {
-						dataForm[currentValue.getAttribute('name')] = currentValue.checked? '1': '0';
-					} else {
-						dataForm[currentValue.getAttribute('name')] = currentValue.value;
+					switch (currentValue.type) {
+						case 'radio':
+							if (currentValue.checked) {
+								dataForm[currentValue.getAttribute('name')] = currentValue.value;
+							}
+							break;
+
+						case 'checkbox':
+							dataForm[currentValue.getAttribute('name')] = currentValue.checked? '1': '0';
+							break;
+
+						default:
+							dataForm[currentValue.getAttribute('name')] = currentValue.value;
+							break;
 					}
 				}
 			);
-			dataForm['profession'] = $$.getElementById('profession').value;
-			dataForm['department'] = $$.getElementById('department').value;
-			dataForm['city'] = $$.getElementById('city').value;
-			dataForm['addressType'] = $$.getElementById('addressType').value;
-			dataForm['address'] = $$.getElementById('address').value;
 
-			var elPhoneType = $$.getElementById('phoneType');
-			dataForm['phoneType'] = elPhoneType.value;
-			dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+			$$.getElementById('formProfile').querySelectorAll('select').forEach(
+				function(currentValue) {
+						dataForm[currentValue.getAttribute('name')] = currentValue.value;
+				}
+			);
+
+			// var elPhoneType = $$.getElementById('phoneType');
+			// dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
 
 			dataForm['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
@@ -68,6 +78,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			data = {
 				codState: this.value,
 			}
+			listCity.disabled = true;
 
 			callNovoCore('POST', 'User', 'getListCitys', data, function(response) {
 
