@@ -1,8 +1,4 @@
 <?php
-	echo '<pre>';
-	print_r($data);
-	echo '</pre>';
-
 	$id_ext_per = $data->registro->user->id_ext_per;
 	if (strpos($id_ext_per, '_') !== false) {
 		$id_ext_per = explode('_', $id_ext_per)[1];
@@ -146,7 +142,7 @@
 						<div class="row">
 							<div class="form-group col-12 col-lg-8 col-xl-6">
 								<label for="address">Dirección</label>
-								<textarea id="address" name="address" class="form-control"></textarea>
+								<textarea id="address" name="address" class="form-control"><?= $data->direccion->acDir;?></textarea>
 								<div class="help-block"></div>
 							</div>
 						</div>

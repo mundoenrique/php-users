@@ -27,7 +27,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var form = $('#formProfile');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
-			var dataForm;
+			var dataForm = {};
 			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
 					if (currentValue.type == 'radio') {
