@@ -1,10 +1,10 @@
 'use strict';
 var $$ = document;
+var maxBirthdayDate = new Date();
+var btnTrigger = $$.getElementById('btnActualizar');
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
-	var maxBirthdayDate = new Date();
-	var btnTrigger = $$.getElementById('btnActualizar');
 	var listStates = $$.getElementById('department');
 	var listCity = $$.getElementById('city');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
@@ -28,32 +28,46 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 			var dataForm = {};
+
+			disableInputsForm(true, msgLoadingWhite);
+
 			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
-					if (currentValue.type == 'radio') {
-						dataForm[currentValue.getAttribute('name')] = currentValue.checked? '1': '0';
-					} else {
-						dataForm[currentValue.getAttribute('name')] = currentValue.value;
+					switch (currentValue.type) {
+						case 'radio':
+							if (currentValue.checked) {
+								dataForm[currentValue.getAttribute('name')] = currentValue.value;
+							}
+							break;
+
+						case 'checkbox':
+							dataForm[currentValue.getAttribute('name')] = currentValue.checked? '1': '0';
+							break;
+
+						default:
+							dataForm[currentValue.getAttribute('name')] = currentValue.value;
+							break;
 					}
 				}
 			);
-			dataForm['profession'] = $$.getElementById('profession').value;
-			dataForm['department'] = $$.getElementById('department').value;
-			dataForm['city'] = $$.getElementById('city').value;
-			dataForm['addressType'] = $$.getElementById('addressType').value;
-			dataForm['address'] = $$.getElementById('address').value;
 
-			var elPhoneType = $$.getElementById('phoneType');
-			dataForm['phoneType'] = elPhoneType.value;
-			dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+			$$.getElementById('formProfile').querySelectorAll('select').forEach(
+				function(currentValue) {
+						dataForm[currentValue.getAttribute('name')] = currentValue.value;
+						console.log(currentValue.getAttribute('id'));
+
+				}
+			);
+
+			// var elPhoneType = $$.getElementById('phoneType');
+			// dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
 
 			dataForm['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
 			callNovoCore('POST', 'User', 'updateProfile', dataForm, function(response) {
-				btnTrigger.innerHTML = txtBtnTrigger;
-				notiSystem(response.title, response.msg, response.classIconName, response.data);
+				disableInputsForm(true, txtBtnTrigger);
 			});
 		}
 	});
@@ -68,6 +82,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			data = {
 				codState: this.value,
 			}
+			listCity.disabled = true;
 
 			callNovoCore('POST', 'User', 'getListCitys', data, function(response) {
 
@@ -91,7 +106,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 })
 
 var createElement = function (tagName, attrs) {
-
 	var el = document.createElement(tagName);
 	Object.keys(attrs).forEach((key) => {
 		if (attrs [key] !== undefined) {
@@ -100,4 +114,34 @@ var createElement = function (tagName, attrs) {
 	});
 
 	return el;
+}
+
+function disableInputsForm(status, txtButton) {
+	$$.getElementById('idType').disabled = status;
+	$$.getElementById('idNumber').disabled = status;
+	$$.getElementById('firstName').disabled = status;
+	$$.getElementById('middleName').disabled = status;
+	$$.getElementById('lastName').disabled = status;
+	$$.getElementById('secondSurname').disabled = status;
+	$$.getElementById('birthDate').disabled = status;
+	$$.getElementById('genderMale').disabled = status;
+	$$.getElementById('genderFemale').disabled = status;
+	$$.getElementById('profession').disabled = status;
+	$$.getElementById('addressType').disabled = status;
+	$$.getElementById('postalCode').disabled = status;
+	$$.getElementById('department').disabled = status;
+	$$.getElementById('city').disabled = status;
+	$$.getElementById('address').disabled = status;
+	$$.getElementById('landLine').disabled = status;
+	$$.getElementById('mobilePhone').disabled = status;
+	$$.getElementById('phoneType').disabled = status;
+	$$.getElementById('otherPhoneNum').disabled = status;
+	$$.getElementById('email').disabled = status;
+	$$.getElementById('username').disabled = status;
+	$$.getElementById('creationDate').disabled = status;
+	$$.getElementById('notificationsEmail').disabled = status;
+	$$.getElementById('notificationsSms').disabled = status;
+
+	btnTrigger.innerHTML = txtButton;
+	btnTrigger.disabled = status;
 }
