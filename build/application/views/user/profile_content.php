@@ -1,5 +1,4 @@
 <?php
-
 	$id_ext_per = $data->registro->user->id_ext_per;
 	if (strpos($id_ext_per, '_') !== false) {
 		$id_ext_per = explode('_', $id_ext_per)[1];

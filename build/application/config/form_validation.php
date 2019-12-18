@@ -1,6 +1,123 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'updateprofile' => [
+		[
+			'field' => 'idType',
+			'label' => 'idType',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'firstName',
+			'label' => 'firstName',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'middleName',
+			'label' => 'middleName',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'lastName',
+			'label' => 'lastName',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'secondSurname',
+			'label' => 'secondSurname',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'birthDate',
+			'label' => 'birthDate',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'gender',
+			'label' => 'gender',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'postalCode',
+			'label' => 'postalCode',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'landLine',
+			'label' => 'landLine',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'label' => 'otherPhoneNum',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'username',
+			'label' => 'username',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'creationDate',
+			'label' => 'creationDate',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'notificationsEmail',
+			'label' => 'notificationsEmail',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'notificationsEmail',
+			'label' => 'notificationsEmail',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'profession',
+			'label' => 'profession',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'addressType',
+			'label' => 'addressType',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'department',
+			'label' => 'department',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'city',
+			'label' => 'city',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'phoneType',
+			'label' => 'phoneType',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'address',
+			'label' => 'address',
+			'rules' => 'required|trim'
+		]
+	],
 	'getlistcitys' => [
 		[
 			'field' => 'codState',
