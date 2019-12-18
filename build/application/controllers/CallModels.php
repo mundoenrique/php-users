@@ -39,7 +39,7 @@ class CallModels extends Novo_Controller {
 
 		$result = $this->form_validation->run($this->rule);
 		log_message('DEBUG', 'NOVO VALIDATION FORM '.$this->rule.': '.json_encode($result));
-		if($result) {
+		if($result || $this->rule == 'updateprofile') {
 			foreach ($_POST AS $key => $value) {
 				switch($key) {
 					case 'request':

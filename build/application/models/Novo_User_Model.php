@@ -774,9 +774,149 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
+	public function callWs_updateProfile_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
 
+		$user = array(
+			"userName" => $this->session->userdata('userName'),
+			"primerNombre" => $dataRequest->firstName,
+			"segundoNombre"	=> $dataRequest->middleName,
+			"primerApellido"	=> $dataRequest->lastName,
+			"segundoApellido"	=> $dataRequest->secondSurname,
+			"email"				=> $dataRequest->email,
+			"dtfechorcrea_usu" => $dataRequest->creationDate,
+			"passwordOperaciones" => "",
+			"notEmail" => $dataRequest->notificationsEmail == 'on'? '1': '0',
+			"notSms" => $dataRequest->notificationsSms == 'on'? '1': '0' ,
+			"sexo" => $dataRequest->gender,
+			"id_ext_per" => $this->session->userdata('idUsuario'),
+			"fechaNacimiento" => $dataRequest->birthDate,
+			"tipo_profesion" => $dataRequest->profession,
+			"profesion" => $dataRequest->profession,
+			"tipo_id_ext_per"	=> substr($this->session->userdata('idUsuario'), 0, 1),
+			"descripcion_tipo_id_ext_per" => $dataRequest->idType,
+			"disponeClaveSMS" => "",
+			"aplicaPerfil"=> 'N',
+			"tyc" => $this->session->userdata('tyc'),
+			"rc"=> "0"
+		);
 
+		$tHabitacion = array(
+				"tipo"	=> "HAB",
+				"numero"=> $dataRequest->landLine,
+				"descripcion"=> "HABITACION"
+		);
 
+		$tOtro = array(
+				"tipo"	=> $dataRequest->phoneType,
+				"numero" => $dataRequest->otherPhoneNum,
+				"descripcion" => $dataRequest->descriptionPhoneType
+		);
 
+		$tMobile = array(
+				"tipo"	=> "CEL",
+				"numero"=> $dataRequest->mobilePhone,
+				"descripcion"=> "MOVIL",
+				"aplicaClaveSMS"=> "No Aplica mensajes SMS"
+		);
+		$listaTelefonos = array($tHabitacion, $tOtro, $tMobile);
 
+		$afiliacion = array(
+				"notarjeta"=> "",
+				"idpersona"=> "",
+				"nombre1"=> "",
+				"nombre2"=> "",
+				"apellido1"=> "",
+				"apellido2"=> "",
+				"fechanac"=> "",
+				"sexo" => "",
+				"codarea1"=> "",
+				"telefono1"=> "",
+				"telefono2"=> "",
+				"correo"=> "",
+				"direccion"=> "",
+				"distrito"=> "",
+				"provincia"=> "",
+				"departamento" => "",
+				"edocivil"=> "",
+				"labora"=> "",
+				"centrolab"=> "",
+				"fecha_reg"=> "",
+				"estatus"=> "",
+				"notifica"=> "",
+				"fecha_proc" => "",
+				"fecha_afil" => "",
+				"tipo_id" => "",
+				"fecha_solicitud" => "",
+				"antiguedad_laboral" => "",
+				"profesion" => "",
+				"cargo" => "",
+				"ingreso_promedio_mensual" => "",
+				"cargo_publico_last2" => "",
+				"cargo_publico" => "",
+				"institucion_publica" => "",
+				"uif" => "",
+				"lugar_nacimiento" => "",
+				"nacionalidad" => "",
+				"punto_venta" => "",
+				"cod_vendedor" => "",
+				"dni_vendedor" => "",
+				"cod_ubigeo" => "",
+				"dig_verificador" => "",
+				"telefono3" => "",
+				"tipo_direccion" => "",
+				"cod_postal" => "",
+				"ruc_cto_laboral" => "",
+				"aplicaPerfil" => "",
+		);
+
+		$direccion= array(
+			"acCodCiudad"=> $dataRequest->city,
+			"acCodEstado"=> $dataRequest->department,
+			"acCodPais"=> $this->session->userdata('pais'),
+			"acTipo"=> $dataRequest->addressType,
+			"acZonaPostal"=> $dataRequest->postalCode,
+			"acDir"=> $dataRequest->address
+		);
+
+		$registro = [
+			"user" => $user,
+			"listaTelefonos"	=> $listaTelefonos,
+			"registroValido"=> false,
+			"corporativa"=> false,
+			"afiliacion"		=> $afiliacion
+		];
+
+		$this->className = 'com.novo.objects.MO.DatosPerfilMO';
+		$this->dataAccessLog->modulo = 'perfil';
+		$this->dataAccessLog->function = 'perfil';
+		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = '39';
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		$this->dataRequest->rc = 0;
+		$this->dataRequest->registro = $registro;
+		$this->dataRequest->direccion = $direccion;
+		$this->dataRequest->isParticular = true;
+
+		log_message("info", "Request User Profile:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response;
+					break;
+
+				default:
+					$this->response->data = "--";
+					break;
+			}
+		}
+		return $this->response;
+	}
 }

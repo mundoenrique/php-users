@@ -27,7 +27,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var form = $('#formProfile');
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
-			$$.getElementById('formRegistry').querySelectorAll('input').forEach(
+			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
 					if (currentValue.type == 'radio') {
 						if (currentValue.checked) {
@@ -38,12 +38,22 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 			);
+			data['profession'] = $$.getElementById('profession').value;
+			data['department'] = $$.getElementById('department').value;
+			data['city'] = $$.getElementById('city').value;
+			data['addressType'] = $$.getElementById('addressType').value;
+			data['address'] = $$.getElementById('address').value;
+
+			var elPhoneType = $$.getElementById('phoneType');
+			data['phoneType'] = elPhoneType.value;
+			data['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
+
 			data['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
 			callNovoCore('POST', 'User', 'updateProfile', data, function(response) {
-				btnTrigger.innerHTML = txtBtnRegistry;
+				btnTrigger.innerHTML = txtBtnTrigger;
 				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			});
 		}
@@ -51,7 +61,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	listStates.addEventListener('change', function(){
 		if (this.value !== '') {
-			// listCity.classList.remove('none');
+
 			while (listCity.firstChild) {
 				listCity.removeChild(listCity.firstChild);
 			}
@@ -65,7 +75,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				listCity.removeChild(listCity.firstChild);
 				if (response.code === 0) {
 					listCity.appendChild(selectOption);
-					response.data.forEach(function callback(currentValue, index, array) {
+					response.data.forEach(function callback(currentValue) {
 						var city = createElement('option', {value: currentValue.codCiudad});
 						city.textContent = currentValue.ciudad;
 						listCity.appendChild(city);
@@ -77,8 +87,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 					listCity.appendChild(noResponse);
 				}
 			});
-
-		}else{
 		}
 	});
 })
