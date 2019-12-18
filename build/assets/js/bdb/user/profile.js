@@ -31,9 +31,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('formProfile').querySelectorAll('input').forEach(
 				function(currentValue) {
 					if (currentValue.type == 'radio') {
-						if (currentValue.checked) {
-							dataForm[currentValue.getAttribute('name')] = currentValue.value;
-						}
+						dataForm[currentValue.getAttribute('name')] = currentValue.checked? '1': '0';
 					} else {
 						dataForm[currentValue.getAttribute('name')] = currentValue.value;
 					}
