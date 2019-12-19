@@ -117,12 +117,6 @@ var createElement = function (tagName, attrs) {
 }
 
 function disableInputsForm(status, txtButton) {
-	$$.getElementById('idType').disabled = status;
-	$$.getElementById('idNumber').disabled = status;
-	$$.getElementById('firstName').disabled = status;
-	$$.getElementById('middleName').disabled = status;
-	$$.getElementById('lastName').disabled = status;
-	$$.getElementById('secondSurname').disabled = status;
 	$$.getElementById('birthDate').disabled = status;
 	$$.getElementById('genderMale').disabled = status;
 	$$.getElementById('genderFemale').disabled = status;
@@ -133,12 +127,9 @@ function disableInputsForm(status, txtButton) {
 	$$.getElementById('city').disabled = status;
 	$$.getElementById('address').disabled = status;
 	$$.getElementById('landLine').disabled = status;
-	$$.getElementById('mobilePhone').disabled = status;
 	$$.getElementById('phoneType').disabled = status;
 	$$.getElementById('otherPhoneNum').disabled = status;
 	$$.getElementById('email').disabled = status;
-	$$.getElementById('username').disabled = status;
-	$$.getElementById('creationDate').disabled = status;
 	$$.getElementById('notificationsEmail').disabled = status;
 	$$.getElementById('notificationsSms').disabled = status;
 
