@@ -734,12 +734,13 @@ textarea.form-control {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	padding: 0 10px;
-  cursor: pointer;
+	cursor: pointer;
+	margin-top: 29px;
 }
 
 .input-file + .js-label-file.has-file{
-  color: var(--tertiary-color);
-  border: .85px solid var(--tertiary-color);
+  color: var(--tertiary);
+  border: .85px solid var(--tertiary);
 }
 
 .icon-upload::before {
@@ -828,6 +829,11 @@ textarea.form-control {
 	transition: .3s;
 }
 
+.sb-disabled {
+	opacity: .5;
+	pointer-events: none;
+}
+
 .sb-search-input {
 	position: absolute;
 	top: 0;
@@ -841,7 +847,6 @@ textarea.form-control {
 	font-weight: var(--semibold-font-weight);
 	background: var(--secondary);
 	border: .85px solid var(--border-color);
-
 }
 
 .sb-search-input:-moz-placeholder,
@@ -1427,6 +1432,7 @@ textarea.form-control {
 .max-width-3 { max-width: var(--width-3) }
 .max-width-4 { max-width: var(--width-4) }
 .max-width-5 { max-width: var(--width-5) }
+.max-width-6 { max-width: var(--width-6) }
 
 @media (min-width: 992px) {
 	.fit-lg { max-width: 100% }
@@ -1436,6 +1442,7 @@ textarea.form-control {
 	.max-width-lg-3 { max-width: var(--width-3) }
 	.max-width-lg-4 { max-width: var(--width-4) }
 	.max-width-lg-5 { max-width: var(--width-5) }
+	.max-width-lg-6 { max-width: var(--width-6) }
 }
 
 @media (min-width: 1200px) {
@@ -1446,6 +1453,7 @@ textarea.form-control {
 	.max-width-xl-3 { max-width: var(--width-3) }
 	.max-width-xl-4 { max-width: var(--width-4) }
 	.max-width-xl-5 { max-width: var(--width-5) }
+	.max-width-xl-6 { max-width: var(--width-6) }
 }
 
 /* Spacing
@@ -1919,6 +1927,8 @@ textarea.form-control {
 .yellow        { color: var(--yellow) !important }
 .color-inherit { color: inherit !important }
 
+.pink-salmon   { color: var(--pink-salmon) !important }
+
 /* Decoration */
 .text-decoration-none { text-decoration: none !important }
 .underline { text-decoration: underline !important }
@@ -2353,6 +2363,7 @@ i[class*=" icon-"]:before {
 
 .dropdown-user  li {
 	display: block;
+	position: relative;
 	line-height: 2.8em;
 	width: 13.1em !important;
 	font-size: var(--h6);
@@ -2382,9 +2393,23 @@ i[class*=" icon-"]:before {
 	color: var(--primary);
 }
 
-.dropdown-user li:hover:last-child {
+.dropdown-user ul,
+.dropdown-user li:hover:last-child,
+.dropdown-user ul li:hover:last-child {
   border-bottom-left-radius: 5px 5px;
   border-bottom-right-radius: 5px 5px;
+}
+
+.dropdown-user li ul {
+	display: none;
+	position: absolute;
+	right:-158px;
+	top: 0;
+	box-shadow: 1px 2px 5px -1px rgba(0,0,0,.15), 0 4px 14px -1px rgba(0,0,0,.1);
+}
+
+.dropdown-user li:hover > ul {
+	display: block;
 }
 
 /* Paginador y main-nav */
@@ -2525,6 +2550,7 @@ td > button > i:hover{
 }
 
 .dataTables_length select option {
+	color: var(--text-color);
 	background-color: var(--secondary);
   border-bottom: 1px solid var(--border-color);
 	transition: all .1ms ease-in-out;
@@ -2535,7 +2561,6 @@ td > button > i:hover{
 	border: .85px solid var(--border-color);
 	box-shadow: 1px 1px 2px 0 var(--shadows-color);
 	color: rgba(0,0,0,0);
-	cursor: pointer;
 	height: calc(1.15em + .75rem + 1px);
 	line-height: 1.5;
 	margin: 0 2px;
@@ -2568,6 +2593,11 @@ td > button > i:hover{
   color: var(--tertiary)!important;
   border: none !important;
   transition: .3s;
+	padding: var(--space-1) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	color: var(--tertiary);
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
@@ -2589,6 +2619,7 @@ td > button > i:hover{
   background: transparent;
   box-shadow: none;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   color: var(--primary) !important;
   font-weight: var(--semibold-font-weight) !important;
@@ -2658,7 +2689,7 @@ table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
 }
 
 table.dataTable tr.selected td.select-checkbox::after {
-	margin-top: -12px !important;
+	margin-top: -13px !important;
 	margin-left: -6px !important;
 	text-shadow: none !important;
 	color: var(--primary);
@@ -2702,6 +2733,12 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 	padding: 24px;
 	width: 255px;
+}
+
+@media (max-width: 1200px) {
+	.widget {
+		display: none;
+	}
 }
 
 /* Lista de pasos con iconos */
@@ -2964,9 +3001,9 @@ button.ui-button::-moz-focus-inner {
 	color: #333333;
 }
 .ui-widget-header {
-	background: var(--primary);
-	color: var(--secondary);
+	color: var(--primary);
 	font-weight: bold;
+	border-bottom: 2px solid var(--border-color-2) !important;
 }
 .ui-widget-header a {
 	color: #333333;
@@ -3170,6 +3207,7 @@ a.ui-button:active,
 	border: 0 transparent;
 	outline: 0;
 	box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+	border-radius: .3125rem !important;
 }
 .ui-dialog .ui-dialog-titlebar {
 	padding: .7em 1em;
@@ -3194,14 +3232,13 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content {
 	position: relative;
-	border-bottom: var(--border-width) solid var(--border-color) !important;
 	padding: 0;
 	background: none;
 	overflow: auto;
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	padding: 1.6em 1em 1em;
+	padding: 1.5em 1em;
 	min-height: 80px;
 }
 .ui-dialog-content .dialog-icon {
@@ -3211,7 +3248,7 @@ a.ui-button:active,
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
-	padding: .5em 1em;
+	padding: 0 1em .5em;
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
@@ -3493,7 +3530,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 		justify-content: space-between;
 	}
 }
-
 
 .services-item {
 	width: 90px;
