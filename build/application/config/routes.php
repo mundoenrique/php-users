@@ -69,7 +69,7 @@ $route['(:any)/async-call'] = "callModels";
 $route['(:any)/listaproducto'] = "serviceProduct/listProduct";
 $route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
 $route['(:any)/reporte'] = "expenseReport/listProduct";
-$route['(:any)/detallereporte'] = "expenseReport/detailtReport";
+$route['(:any)/detallereporte'] = "expenseReport/detailReport";
 
 
 

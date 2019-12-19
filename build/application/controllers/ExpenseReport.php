@@ -91,7 +91,7 @@ class ExpenseReport extends NOVO_Controller {
 	public function detailReport()
 	{
 		log_message('INFO', 'NOVO Consolidated: optionclient Method Initialized');
-		$view = 'customersupport';
+		$view = 'report';
 
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('inicio'), 'location');
