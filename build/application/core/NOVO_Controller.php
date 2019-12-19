@@ -139,7 +139,7 @@ class NOVO_Controller extends CI_Controller {
 			case 'listproduct':
 			case 'detailproduct':
 			case 'customersupport':
-			case 'report':
+			case 'detailreport':
 				$auth = ($this->render->logged);
 				break;
 			default:

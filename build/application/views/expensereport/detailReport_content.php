@@ -1,3 +1,6 @@
+<?php
+	var_dump($data);
+?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -24,11 +27,6 @@
 					<div class="product-scheme">
 						<p class="field-tip">Selecciona la operación que deseas realizar</p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
-							<?php
-								foreach ($menuOptionsProduct as $row) {
-									echo $row;
-								}
-							?>
 						</ul>
 					</div>
 				</div>
@@ -38,26 +36,6 @@
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
-							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option selected="" value="<?= date("m");?>">Más recientes</option>
-								<?php
-									foreach ($months as $nroMonths => $txtMonths){
-								?>
-									<option value="<?= $nroMonths+1;?>"><?= $txtMonths;?></option>
-								<?php
-									}
-								?>
-							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" disabled name="filterYear" >
-								<option value="<?= $years[0];?>">-</option>
-								<?php
-									foreach ($years as $year){
-								?>
-									<option value="<?= $year;?>"><?= $year;?></option>
-								<?php
-									}
-								?>
-							</select>
 						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">

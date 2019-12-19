@@ -277,6 +277,9 @@ class User extends NOVO_Controller {
 			$this->render->dataCitys = $this->modelLoad->callWs_getListCitys_User($codState)->data;
 
 		}
+		$codState = new stdClass;
+		$this->render->dataCitys = $codState;
+
 		$objData->professions = $this->modelLoad->getListProfessions()->data;
 		$objData->states = $this->modelLoad->getListStates()->data;
 

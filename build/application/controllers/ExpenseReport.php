@@ -28,7 +28,7 @@ class ExpenseReport extends NOVO_Controller {
 		$dataProduct = $this->loadDataProduct();
 		if (count($dataProduct) == 1 and $dataProduct !== '--') {
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
-		//	redirect("/atencioncliente");
+			redirect("/detallereporte");
 		}
 
 		array_push (
@@ -91,14 +91,13 @@ class ExpenseReport extends NOVO_Controller {
 	public function detailReport()
 	{
 		log_message('INFO', 'NOVO Consolidated: optionclient Method Initialized');
-		$view = 'report';
+		$view = 'detailreport';
 
 		if (!$this->session->userdata('logged_in')) {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
 		$dataProduct = [];
-		$optionsAvailables = [];
 
 		array_push (
 			$this->includeAssets->jsFiles,
@@ -122,48 +121,9 @@ class ExpenseReport extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		$menuOptionsProduct = [
-			'117' => [
-				'id' => 'generate',
-				'text' => "<i class='icon-key block'></i>Generar <br>PIN"
-			],
-			'112' => [
-				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN"
-			],
-			'110' => [
-				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta"
-			],
-			'111' => [
-				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición"
-			]
-		];
-
-		if ( !empty($dataProduct['bloqueo']) ) {
-			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de cuenta";
-		}
-
- 		foreach ($menuOptionsProduct as $key => $value) {
-			 if (empty($dataProduct['bloqueo'])) {
-				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-			 }
-			 else	{
-				$available = 'is-disabled';
-				if ($key == 110) {
-					$available = '';
-				}
-			 }
-			$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
-			array_push($optionsAvailables,$option);
-		}
-
-		$this->views = ['serviceproduct/'.$view];
+		$this->views = ['expensereport/'.$view];
 
 		$this->render->data = $dataProduct;
-		$this->render->menuOptionsProduct = $optionsAvailables;
-		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}

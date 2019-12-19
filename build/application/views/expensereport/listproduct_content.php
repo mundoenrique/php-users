@@ -8,7 +8,7 @@
 				<h2 class="h4 regular tertiary">Seleccione un producto</h2>
 				<div class="line mt-1"></div>
 				<div id="dashboard" class="dashboard-items flex max-width-xl-5 mt-3 mx-auto flex-wrap justify-center">
-					<form action="<?= base_url('atencioncliente'); ?>" id="frmProducto" method="post">
+					<form action="<?= base_url('detallereporte'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 						<input type='hidden' name='nroTarjeta' id='nroTarjeta' value=''>
 						<input type='hidden' name='noTarjetaConMascara' id='noTarjetaConMascara' value=''>

@@ -37,12 +37,12 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="lastName">Apellido paterno</label>
+								<label for="lastName">Primer Apellido</label>
 								<input id="lastName" class="form-control" name="lastName" type="text" value="<?= ucfirst(strtolower($data->registro->user->primerApellido));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="secondSurname">Apellido materno</label>
+								<label for="secondSurname">Segundo Apellido</label>
 								<input id="secondSurname" name="secondSurname" class="form-control" type="text" value="<?= ucfirst(strtolower($data->registro->user->segundoApellido));?>" disabled/>
 								<div class="help-block"></div>
 							</div>
@@ -112,7 +112,7 @@
 										if ( gettype($dataStates) === 'array' ) {
 									?>
 											<select id="department" class="custom-select form-control" name="department" placeholder="Seleccione">
-												<option value="">Seleccione</option>
+												<option value="">SELECCIONE</option>
 									<?php
 												foreach ($dataStates as $row) {
 									?>
@@ -132,10 +132,10 @@
 								<div class="help-block"></div>
 							</div>
 							<div id='ctrlCity' class="form-group col-6 col-lg-4 col-xl-3">
+								<label for="city">Ciudad</label>
 								<?php
 									if (!empty($dataCitys) and gettype($dataCitys) === 'array') {
 								?>
-											<label for="city">Ciudad</label>
 											<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
 												<option value="">Seleccione</option>
 									<?php
@@ -146,12 +146,16 @@
 												}
 									?>
 											</select>
-
 									<?php
-										}else{
+										}elseif($dataCitys === '--') {
 									?>
 										<input id="city" name="city" class="form-control" type="text" value="<?= $dataCitys->descripcion;?>" disabled/>
-
+									<?php
+									}else{
+									?>
+										<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
+											<option value="">SELECCIONE</option>
+										</select>
 								<?php
 									}
 								?>
