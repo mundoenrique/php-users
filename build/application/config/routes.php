@@ -68,6 +68,12 @@ $route['(:any)/detalle'] = "product/detailProduct";
 $route['(:any)/async-call'] = "callModels";
 $route['(:any)/listaproducto'] = "serviceProduct/listProduct";
 $route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
+$route['(:any)/reporte'] = "expenseReport/listProduct";
+$route['(:any)/detallereporte'] = "expenseReport/detailtReport";
+
+
+
+
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
