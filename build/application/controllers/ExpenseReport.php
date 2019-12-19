@@ -52,8 +52,8 @@ class ExpenseReport extends NOVO_Controller {
 
 		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
-		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
-		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->actualPage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
@@ -124,7 +124,7 @@ class ExpenseReport extends NOVO_Controller {
 		$this->views = ['expensereport/'.$view];
 
 		$this->render->data = $dataProduct;
-		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 }
