@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  *
  */
-class Novo_ServiceProduct_Model extends NOVO_Model
+class Novo_ExpenseReport_Model extends NOVO_Model
 {
 
 	public function __construct()
@@ -13,6 +13,43 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		parent::__construct();
 		log_message('INFO', 'NOVO User Model Class Initialized');
 	}
+
+	public function callWs_getExpenses_ExpenseReport ($dataRequest) {
+		log_message('INFO', 'NOVO ExpenseReport Model: get Expens  method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
+		$this->dataAccessLog->modulo = 'tarjeta';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->operation = 'consultar movimientos';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
+		$this->dataRequest->idPersona = $dataRequest->id_ext_per;
+		$this->dataRequest->nroTarjeta = $dataRequest->nroTarjeta;
+		$this->dataRequest->producto = $dataRequest->producto;
+		$this->dataRequest->fechaIni = $dataRequest->fechaInicial;
+		$this->dataRequest->fechaFin = $dataRequest->fechaFinal;
+		$this->dataRequest->tipoConsulta = '0';
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('Product');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					return $response; //->cuentaOrigen;
+					break;
+				default:
+					return '--';
+			}
+		}
+	}
+
+
+
+
+
+
 
 	public function callWs_generate_ServiceProduct($dataRequest)
 	{

@@ -77,7 +77,7 @@ class ExpenseReport extends NOVO_Controller {
 			array_push($dataRequeried, [
 				"nroTarjeta" => $row->nroTarjeta,
 				"nroTarjetaMascara" => $row->nroTarjetaMascara,
-				"producto" => $row->producto,
+				"producto" => $row->prefix,
 				"marca" => $row->marca,
 				"tarjetaHabiente" => $row->tarjetaHabiente,
 				"nomPlastico" => $row->nomPlastico,
@@ -125,9 +125,20 @@ class ExpenseReport extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		$this->views = ['expensereport/'.$view];
+		$dataRequest = new stdClass();
+		$dataRequest->tipoOperacion = '0';
+		$dataRequest->id_ext_per = $dataProduct['id_ext_per'];
+		$dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
+		$dataRequest->producto = $dataProduct['producto'];
+		$dataRequest->fechaInicial = '01/01/2019';
+		$dataRequest->fechaFinal = '31/12/2019';
 
+		$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
+		$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);
+
+		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
+		$this->render->expenses = $expenses;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}

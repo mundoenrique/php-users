@@ -1,5 +1,8 @@
 <?php
-	var_dump($data);
+	echo "<pre>";
+		print_r($data);
+		print_r($expenses);
+	echo "<pre>";
 ?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
@@ -18,9 +21,9 @@
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
 					<div class="product-info mr-5">
-						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
-						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
-						<p class="product-metadata h6"><?= $data['nombre_producto'];?></p>
+						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nomPlastico']; ?></p>
+						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['nroTarjetaMascara'];?></p>
+						<p class="product-metadata h6"><?= $data['marca'];?></p>
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
 
 					</div>
