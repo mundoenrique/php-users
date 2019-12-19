@@ -18,18 +18,8 @@ $config = [
 			'rules' => 'required|trim'
 		],
 		[
-			'field' => 'middleName',
-			'label' => 'middleName',
-			'rules' => 'required|trim'
-		],
-		[
 			'field' => 'lastName',
 			'label' => 'lastName',
-			'rules' => 'required|trim'
-		],
-		[
-			'field' => 'secondSurname',
-			'label' => 'secondSurname',
 			'rules' => 'required|trim'
 		],
 		[
@@ -45,12 +35,12 @@ $config = [
 		[
 			'field' => 'postalCode',
 			'label' => 'postalCode',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'landLine',
 			'label' => 'landLine',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',
@@ -60,7 +50,7 @@ $config = [
 		[
 			'field' => 'otherPhoneNum',
 			'label' => 'otherPhoneNum',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'numeric'
 		],
 		[
 			'field' => 'email',

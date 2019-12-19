@@ -179,4 +179,32 @@ class Novo_Product_Model extends NOVO_Model
 			}
 		}
 	}
+
+	public function callWs_dataReport_Product($dataRequest)
+	{
+		log_message('INFO', 'NOVO Product Model: get data expense report of Product method Initialized');
+
+		$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
+		$this->dataAccessLog->modulo = 'transferencia';
+		$this->dataAccessLog->function = 'listados transferencia';
+		$this->dataAccessLog->operation = 'consulta cuentas origen';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = '6';
+		$this->dataRequest->id_ext_per = $this->session->userdata("idUsuario");
+		$this->dataRequest->tipoOperacion = $dataRequest->tipoOperacion;
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('Product');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					return $response->cuentaOrigen;
+					break;
+				default:
+					return '--';
+			}
+		}
+	}
 }

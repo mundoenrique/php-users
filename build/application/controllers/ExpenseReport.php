@@ -59,8 +59,11 @@ class ExpenseReport extends NOVO_Controller {
 
 	public function loadDataProduct($card = '')
 	{
+		$dataRequest = new stdClass();
+		$dataRequest->tipoOperacion = 'RGR';
+
 		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_loadProducts_Product();
+		$data = $this->modelLoad->callWs_dataReport_Product($dataRequest);
 
 		if (count($data) < 1) {
 			return '--';
@@ -72,17 +75,18 @@ class ExpenseReport extends NOVO_Controller {
 				continue;
 			}
 			array_push($dataRequeried, [
-				"noTarjeta" => $row->noTarjeta,
-				"noTarjetaConMascara" => $row->noTarjetaConMascara,
-				"nombre_producto" => $row->nombre_producto,
-				"prefix" => $row->prefix,
-				"marca" => strtolower($row->marca),
-				"nomEmp" => ucwords(strtolower($row->nomEmp)),
+				"nroTarjeta" => $row->nroTarjeta,
+				"nroTarjetaMascara" => $row->nroTarjetaMascara,
+				"producto" => $row->producto,
+				"marca" => $row->marca,
+				"tarjetaHabiente" => $row->tarjetaHabiente,
+				"nomPlastico" => $row->nomPlastico,
+				"nomEmp" => $row->nomEmp,
+				"tipoTarjeta" => $row->tipoTarjeta,
 				"id_ext_per" => $row->id_ext_per,
-				"fechaExp" => $row->fechaExp,
-				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services,
-				"bloqueo" => $row->bloque
+				"prefix" => $row->prefix,
+				"id_ext_emp" => $row->id_ext_emp,
+				"bloque" => $row->bloque
 			]);
 		}
 		return $dataRequeried;
