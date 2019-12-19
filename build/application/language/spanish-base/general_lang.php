@@ -7,6 +7,7 @@ $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
 $lang['GEN_CONSOLIDATED_VIEW'] = 'Vista consolidada';
 $lang['GEN_DETAIL_VIEW'] = 'Detalle de cuenta';
+$lang['GEN_REPORT'] = 'Reportes';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
