@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, validator;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -11,10 +11,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//core
 	for (i = 0; i < options.length; i++) {
 		options[i].addEventListener('click',function(e) {
-			if (!this.classList.contains("is-disabled")) {
-				var j, idNameCapitalize
+			if (!this.classList.contains("is-disabled") && !this.classList.contains("active")) {
+				var j, idNameCapitalize;
+				resetForms(form);
 				idName = this.id;
 				idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+				form = $(`#form${idNameCapitalize}`);
 
 				for (j = 0; j < options.length; j++) {
 					options[j].classList.remove("active");
@@ -30,13 +32,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 					e.preventDefault();
 
 					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-					form = $(`#form${idNameCapitalize}`);
 
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
 						disableInputsForm(idName, true, msgLoadingWhite);
 						proccessPetition(coreOperation, idName);
-					}else{
+					} else {
 						disableInputsForm (idName, false, txtBtnTrigger);
 					}
 				});
@@ -168,4 +169,17 @@ function proccessPetition(coreOperation, idName)
 		const responseCode = coreOperation.response.hasOwnProperty(response.code) ? response.code : 99
 		coreOperation.response[responseCode](response);
 	});
+}
+
+function resetForms(formData){
+	if(formData) {
+		if (validator) {
+			formData.find(".has-error").each(function(){
+				validator.successList.push(this);//mark as error free
+			});
+			validator.showErrors();//remove error messages if present
+			validator.resetForm();//remove error class on name elements and clear history
+		}
+		formData[0].reset();
+	}
 }

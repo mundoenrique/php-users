@@ -1,5 +1,7 @@
 
 'use strict'
+var validator;
+
 function validateForms(form, options) {
 	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
@@ -187,7 +189,7 @@ function validateForms(form, options) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 dígitos no deben ser consecutivos.");
 
-	form.validate({
+	validator = form.validate({
 		rules: {
 			generateNewPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
 			generateConfirmPin: { required: true, number: true, "generateConfirmPin": true },
