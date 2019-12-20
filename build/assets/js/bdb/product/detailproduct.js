@@ -21,27 +21,32 @@ $$.addEventListener('DOMContentLoaded', function(){
 			transitToogle = $$.getElementById('transitToogle'),
 			btnOptions = $$.querySelectorAll('.btn-options');
 
-	var	i;
+	var	i, movementsPaginate, transitPaginate;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
 	var noMovements = createElement('div', {class: "my-5 py-4 center"});
 	noMovements.innerHTML = '<span class="h4">No se encontraron movimientos</span>';
 
-
 	//core
 
 	// Gráficas de estadísticas total abonos y cargos
 	if (movementsList.querySelector(".feed-item")) {
-		movementsList.easyPaginate({});
+		$('#movementsList').easyPaginate({});
+		movementsPaginate = movementsList.nextElementSibling;
+		movementsPaginate.id = 'movementsPaginate';
 		movementsList.classList.add('fade-in');
 		movementsStats.addClass('fade-in');
 
 		invokeChart(movementsStats);
 	}
 
-
 	if (transitList != null) {
+		$('#transitList').easyPaginate({});
+		transitPaginate = transitList.nextElementSibling;
+		transitPaginate.id = 'transitPaginate';
+		transitPaginate.classList.add('none');
+
 		transitToogle.classList.remove('is-disabled');
 		transitToogle.querySelector('input').disabled = false;
 
@@ -56,9 +61,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 			};
 
 			movementsTitle.classList.add('none');
+			movementsPaginate.classList.add('none');
 			movementsList.classList.remove('fade-in');
 			movementsStats.removeClass('fade-in');
 			transitTitle.classList.remove('none');
+			transitPaginate.classList.remove('none');
 			transitList.classList.add('fade-in');
 			transitStats.addClass('fade-in');
 		}
@@ -72,9 +79,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 			};
 
 			transitTitle.classList.add('none');
+			transitPaginate.classList.add('none');
 			transitList.classList.remove('fade-in');
 			transitStats.removeClass('fade-in');
 			movementsTitle.classList.remove('none');
+			movementsPaginate.classList.remove('none');
 			movementsList.classList.add('fade-in');
 			movementsStats.addClass('fade-in');
 		}
@@ -100,6 +109,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsList.removeChild(movementsList.firstChild);
 		}
 		movementsList.classList.remove('fade-in');
+		movementsPaginate.remove();
 		movementsStats.removeClass('fade-in');
 		transactions.appendChild(loading);
 
@@ -156,7 +166,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 					movementsList.appendChild(feedItem);
 				});
-
+				$('#movementsList').easyPaginate({});
+				movementsPaginate = movementsList.nextElementSibling;
+				movementsPaginate.id = 'movementsPaginate';
 				invokeChart(movementsStats);
 				movementsStats.addClass('fade-in');
 			} else {

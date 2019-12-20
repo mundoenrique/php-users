@@ -2471,6 +2471,14 @@ i[class*=" icon-"]:before {
 	width: 0;
 }
 
+.pagination a {
+	padding: 5px;
+}
+
+.pagination a.current {
+	font-weight: var(--bold-font-weight);
+}
+
 /* Table */
 
 tr > td {
