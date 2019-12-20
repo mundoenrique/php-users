@@ -43,7 +43,7 @@
 
 			var plugin = {};
 			plugin.el = $(this);
-			plugin.el.addClass('easyPaginateList');
+			plugin.el.addClass('paginateList');
 
 			plugin.settings = {
 				pages: 0,
@@ -119,23 +119,19 @@
 
 					plugin.nav.find('.current').removeClass('current');
 					plugin.nav.find('a.page:eq(' + (page - 1) + ')').addClass('current');
-
+          plugin.nav
 					switch (plugin.settings.currentPage) {
-						case 1:
-							$('.pagination a', plugin).removeClass('disabled');
-							$('.pagination a.first').addClass('disabled');
-							$('.pagination a.prev').addClass('disabled');
-							console.log('pág 1');
-
-							break;
-						case plugin.settings.pages:
-							$('.pagination a', plugin).removeClass('disabled');
-							$('.pagination a.last, .pagination a.next', plugin).addClass('disabled');
-							console.log('pág ultima');
-							break;
-						default:
-							$('.pagination a', plugin).removeClass('disabled');
-							break;
+            case 1:
+              $('a', plugin.nav).removeClass('disabled');
+              $('a.first, a.prev', plugin.nav).addClass('disabled');
+              break;
+            case plugin.settings.pages:
+                $('a', plugin.nav).removeClass('disabled');
+                $('a.last, a.next', plugin.nav).addClass('disabled');
+                break;
+            default:
+                $('a', plugin.nav).removeClass('disabled');
+                break;
 					}
 				}
 			};
