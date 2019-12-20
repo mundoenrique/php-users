@@ -69,7 +69,6 @@
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
 			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 		</p>
-		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button type="button" id="cancel" class="btn btn-small btn-link"></button>

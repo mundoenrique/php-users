@@ -2736,7 +2736,7 @@ table#resultsAccount thead th:nth-child(7){
 }
 
 @media (max-width: 1200px) {
-	.widget {
+	.widget.optional {
 		display: none;
 	}
 }
@@ -3238,17 +3238,19 @@ a.ui-button:active,
 }
 .ui-dialog .ui-dialog-content p {
 	display: flex;
-	padding: 1.5em 1em;
 	min-height: 80px;
+	margin-bottom: 0;
+	padding: 1.5em 1em;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
 }
 .ui-dialog .ui-dialog-buttonpane {
+	margin-bottom: 8px;
+	padding: 0 1em .5em;
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
-	padding: 0 1em .5em;
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
