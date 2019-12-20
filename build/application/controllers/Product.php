@@ -110,6 +110,7 @@ class Product extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/moment",
+			"third_party/jquery.easyPaginate",
 			"third_party/kendo.dataviz",
 			"$this->countryUri/product/$view"
 		);
