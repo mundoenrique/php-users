@@ -1,6 +1,18 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'getexpenses' => [
+		[
+			'field' => 'fechaInicial',
+			'label' => 'fechaInicial',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'fechaFinal',
+			'label' => 'fechaFinal',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		]
+	],
 	'updateprofile' => [
 		[
 			'field' => 'idType',

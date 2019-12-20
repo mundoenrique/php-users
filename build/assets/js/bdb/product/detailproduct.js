@@ -33,7 +33,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	// Gráficas de estadísticas total abonos y cargos
 	if (movementsList.querySelector(".feed-item")) {
-		movementsList.easyPaginate({});
+	//	movementsList.easyPaginate({});
 		movementsList.classList.add('fade-in');
 		movementsStats.addClass('fade-in');
 

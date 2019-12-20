@@ -17,6 +17,8 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 	public function callWs_getExpenses_ExpenseReport ($dataRequest) {
 		log_message('INFO', 'NOVO ExpenseReport Model: get Expens  method Initialized');
 
+		$dataProduct = $this->session->userdata('setProduct');
+
 		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataAccessLog->modulo = 'tarjeta';
 		$this->dataAccessLog->function = 'tarjeta';
@@ -24,12 +26,12 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
-		$this->dataRequest->idPersona = $dataRequest->id_ext_per;
-		$this->dataRequest->nroTarjeta = $dataRequest->nroTarjeta;
-		$this->dataRequest->producto = $dataRequest->producto;
+		$this->dataRequest->idPersona = $dataProduct['id_ext_per'];
+		$this->dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
+		$this->dataRequest->producto = $dataProduct['producto'];
 		$this->dataRequest->fechaIni = $dataRequest->fechaInicial;
 		$this->dataRequest->fechaFin = $dataRequest->fechaFinal;
-		$this->dataRequest->tipoConsulta = '0';
+		$this->dataRequest->tipoConsulta = !empty($dataRequest->tipoOperacion) ? $dataRequest->tipoOperacion: '1';
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
@@ -37,12 +39,18 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response; //->cuentaOrigen;
+					$this->response->code = 0;
+					$this->response->data = $response; //->cuentaOrigen;
 					break;
+
 				default:
-					return '--';
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = '--';
 			}
 		}
+		return $this->response;
 	}
 
 

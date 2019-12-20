@@ -105,7 +105,7 @@ class ExpenseReport extends NOVO_Controller {
 
 		array_push (
 			$this->includeAssets->jsFiles,
-			"$this->countryUri/serviceproduct/$view",
+			"$this->countryUri/expensereport/$view",
 			"third_party/jquery.validate",
 			"validate-forms",
 			"third_party/additional-methods",
@@ -130,8 +130,8 @@ class ExpenseReport extends NOVO_Controller {
 		$dataRequest->id_ext_per = $dataProduct['id_ext_per'];
 		$dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
 		$dataRequest->producto = $dataProduct['producto'];
-		$dataRequest->fechaInicial = '01/01/2019';
-		$dataRequest->fechaFinal = '31/12/2019';
+		$dataRequest->fechaInicial = '01/01/'.date("Y");
+		$dataRequest->fechaFinal = '31/12/'.date("Y");
 
 		$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
 		$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);

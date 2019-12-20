@@ -13,6 +13,7 @@
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="h3 semibold primary">Reportes</h1>
+			<a id="tryBuscar" href="#tryBuscar" rel="subsection"><span aria-hidden="true" title="tryBuscar" class="icon-file-excel h5 mr-0"></span>tryBuscar</a>
 		</header>
 		<section>
 			<div class="pt-3">
