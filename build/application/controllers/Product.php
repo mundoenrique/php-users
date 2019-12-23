@@ -128,7 +128,7 @@ class Product extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		if (in_array("117",  $dataProduct['availableServices'])) {
+ 		if (in_array("117",  $dataProduct['availableServices'])) {
 			redirect('atencioncliente');
 		}
 

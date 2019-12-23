@@ -1,10 +1,3 @@
-<?php
-	echo "<pre>";
-		print_r($data);
-		echo "-----------------------------------------------------------------";
-		print_r($expenses);
-	echo "</pre>";
-?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
