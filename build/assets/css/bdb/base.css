@@ -3295,7 +3295,7 @@ a.ui-button:active,
 
 .widget-support {
 	position: fixed;
-	right: 20px;
+	right: 85px;
 	bottom: -240px;
 	padding-top: 12px;
 	padding-bottom: 20px;
@@ -3304,7 +3304,7 @@ a.ui-button:active,
 	transition: all .3s ease 0s;
 }
 .widget-support:hover {
-	bottom: 5px;
+	bottom: 4px;
 	opacity: 1;
 }
 
