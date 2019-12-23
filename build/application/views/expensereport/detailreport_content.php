@@ -3,7 +3,7 @@
 		print_r($data);
 		echo "-----------------------------------------------------------------";
 		print_r($expenses);
-	echo "<pre>";
+	echo "</pre>";
 ?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
@@ -13,19 +13,18 @@
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="h3 semibold primary">Reportes</h1>
-			<a id="tryBuscar" href="#tryBuscar" rel="subsection"><span aria-hidden="true" title="tryBuscar" class="icon-file-excel h5 mr-0"></span>tryBuscar</a>
 		</header>
 		<section>
 			<div class="pt-3">
 				<div class="service-group flex max-width-4 flex-wrap items-center mb-2">
 					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= $data['marca']; ?>"></div>
+						<div class="item-network <?= strtolower($data['marca']); ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
 					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nomPlastico']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['nroTarjetaMascara'];?></p>
-						<p class="product-metadata h6"><?= $data['marca'];?></p>
+						<p class="product-metadata h6"><?= $data['producto'];?></p>
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
 
 					</div>
@@ -40,15 +39,20 @@
 				<h2 class="h4 regular tertiary">Gastos por categoría</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div class="stack-form mr-auto flex items-center" id="period-form">
-							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
-						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+						<div class="form-inline">
+							<label class="nowrap mb-0" for="fromDate">Mostrar desde</label>
+							<input type="text" id="fromDate" name="fromDate" class="mx-2 col-3 form-control">
+							<label class="nowrap mb-0" for="toDate">Hasta</label>
+							<input type="text" id="toDate" name="toDate" class="mx-2 col-3 form-control">
+							<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+						</div>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
 						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
-							<input id="optionMovements" type="radio" name="movimientos" checked> Movimientos
+							<input id="optionMovements" type="radio" name="movimientos" checked> Detalle
 						</label>
 						<label id="transitToogle" class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" >
-							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
+							<input id="optionTransit" type="radio" name="movimientos" disabled> Gráfico
 						</label>
 					</div>
 					<ul class="stack-extra list-inline mb-0 flex items-center">
