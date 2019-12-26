@@ -205,7 +205,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="email">Correo Electrónico</label>
-								<input id="email" class="form-control" type="email" name="email" value="<?= $data->registro->user->email;?>" placeholder="usuario@ejemplo.com">
+								<input id="email" class="form-control" type="email" name="email" value="<?= $data->registro->user->email;?>" placeholder="usuario@ejemplo.com" disabled>
 								<div class="help-block"></div>
 							</div>
 						</div>

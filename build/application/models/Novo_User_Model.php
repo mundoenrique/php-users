@@ -299,6 +299,12 @@ class Novo_User_Model extends NOVO_Model
 					];
 					break;
 
+				case -1:
+					$this->response->msg = lang('RESP_LOGIN_INVALID');
+					$this->response->code = 3;
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+
 				case -61:
 				case -5:
 				case -3:
@@ -319,7 +325,7 @@ class Novo_User_Model extends NOVO_Model
 					break;
 
 				case -284:
-					$this->response->msg = lang('RES_REGISTERED_CELLPHONE');
+					$this->response->msg = lang('RESP_CELLPHONE_USED');
 					$this->response->code = 3;
 					$this->response->classIconName = "ui-icon-alert";
 					break;
@@ -373,7 +379,6 @@ class Novo_User_Model extends NOVO_Model
 						]
 					];
 					break;
-
 				case 5002:
 				case 5003:
 				case -102:

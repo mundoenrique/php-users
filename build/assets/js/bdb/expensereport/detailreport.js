@@ -70,12 +70,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	//functions
 	function processForm() {
-		if (dataExpensesReport.listExpenses !== '' && dataExpensesReport.listExpenses !== '--') {
+
 			$$.getElementsByName("frmInitialDate")[0].value = $$.getElementById("fromDate").value;
 			$$.getElementsByName("frmFinalDate")[0].value = $$.getElementById("toDate").value;
 
 			$$.getElementsByTagName('form')[0].submit();
-		}
+
 	}
 })
 

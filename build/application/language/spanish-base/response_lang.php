@@ -28,7 +28,7 @@ $lang['RESP_PASSWORD_USED'] = 'La nueva contraseña no debe coincidir <strong>co
 $lang['RESP_PASSWORD_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifíquela e intente de nuevo.';
 $lang['RESP_DATA_INVALIDATED'] = 'Los datos suministrados no son válidos.';
 $lang['RESP_CODEOTP'] = 'Por favor introduzca el código verificador:';
-$lang['RESP_REGISTRED_USER'] = 'Usuario regsitrado.';
+$lang['RESP_REGISTRED_USER'] = 'Usuario registrado.';
 $lang['RESP_CODEOTP_INVALID'] = 'Código de verificación inválido.';
 $lang['RESP_EMPTY_LIST'] = 'No se obtuvo el listado';
 $lang['RESP_EMPTY_LIST_PRODUCTS'] = 'No posee productos registrados.';
@@ -49,8 +49,9 @@ $lang['RESP_RESEEND_OTP'] = 'Solicitar nuevo código de seguridad';
 $lang['RESP_NOT_SEND_OTP'] = 'Cógido de seguridad no generado.';
 $lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas ha caducado.';
 $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
-
-
+$lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
+$lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
+$lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
 
 
 
