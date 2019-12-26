@@ -4,6 +4,8 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
 	var btnGetMovementHistory = $$.getElementById('buscar');
+	var btnExportPDF = $$.getElementById('downloadPDF');
+	var btnExportXLS = $$.getElementById('downloadXLS');
 
 	//core
 	var fromDate, toDate, dateFormat = "dd/mm/yy",
@@ -34,7 +36,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		return date;
 	}
 
-	btnGetMovementHistory.addEventListener('click', (e) => {
+	btnGetMovementHistory.addEventListener('click', function(e){
 		e.preventDefault();
 
 		var data = {
@@ -52,6 +54,28 @@ $$.addEventListener('DOMContentLoaded', function(){
 		});
 	});
 
+	btnExportPDF.addEventListener('click', function(e){
+		e.preventDefault();
+		$$.getElementsByName("frmTypeFile")[0].value = 'pdf';
+		processForm();
+
+	});
+
+	btnExportXLS.addEventListener('click', function(e){
+		e.preventDefault();
+		$$.getElementsByName("frmTypeFile")[0].value = 'xls';
+		processForm();
+
+	});
+
 	//functions
+	function processForm() {
+		if (dataExpensesReport.listExpenses !== '' && dataExpensesReport.listExpenses !== '--') {
+			$$.getElementsByName("frmInitialDate")[0].value = $$.getElementById("fromDate").value;
+			$$.getElementsByName("frmFinalDate")[0].value = $$.getElementById("toDate").value;
+
+			$$.getElementsByTagName('form')[0].submit();
+		}
+	}
 })
 

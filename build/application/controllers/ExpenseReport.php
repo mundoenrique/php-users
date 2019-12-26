@@ -125,21 +125,47 @@ class ExpenseReport extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		$dataRequest = new stdClass();
-		$dataRequest->tipoOperacion = '0';
-		$dataRequest->id_ext_per = $dataProduct['id_ext_per'];
-		$dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
-		$dataRequest->producto = $dataProduct['producto'];
-		$dataRequest->fechaInicial = '01/01/'.date("Y");
-		$dataRequest->fechaFinal = '31/12/'.date("Y");
+		if (isset($_POST['frmInitialDate']) && isset($_POST['frmFinalDate'])){
 
-		$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
-		$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);
+			$dataRequest = new stdClass();
+			$dataRequest->initialDate = $_POST['frmInitialDate'];
+			$dataRequest->finalDate = $_POST['frmFinalDate'];
+			$dataRequest->typeFile = $_POST['frmTypeFile'];
 
+			$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
+			$response = $this->modelLoad->getFile_ExpenseReport ($dataRequest);
+			switch ($response->code) {
+				case 0:
+					$oDate = new DateTime();
+					$dateFile = $oDate->format("YmdHis");
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'reporte_'.$dateFile);
+					$expenses = 'ok';
+					break;
+
+				default:
+					$expenses = '';
+			}
+		}else{
+
+			$dataRequest = new stdClass();
+			$dataRequest->tipoOperacion = '0';
+			$dataRequest->id_ext_per = $dataProduct['id_ext_per'];
+			$dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
+			$dataRequest->producto = $dataProduct['producto'];
+			$dataRequest->fechaInicial = '01/01/'.date("Y");
+			$dataRequest->fechaFinal = '31/12/'.date("Y");
+
+			$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
+			$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);
+			if ($expenses->data === '--') {
+				$expenses = '';
+			}
+		}
 		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
 		$this->render->expenses = $expenses;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
+
 	}
 }

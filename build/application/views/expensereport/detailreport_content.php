@@ -1,5 +1,9 @@
+<?php $disabled = (empty($expenses) || $expenses === '--')? 'disabled': '';?>
 <form method="post">
-	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>' action=''>
+	<input type='hidden' name='frmInitialDate' value=''>
+	<input type='hidden' name='frmFinalDate' value=''>
+	<input type='hidden' name='frmTypeFile' value=''>
 </form>
 
 <div id="service" class="service-content h-100 bg-content">
@@ -21,11 +25,6 @@
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
 
 					</div>
-					<div class="product-scheme">
-						<p class="field-tip">Selecciona la operación que deseas realizar</p>
-						<ul class='services-content list-inline flex mx-auto justify-between'>
-						</ul>
-					</div>
 				</div>
 				<div class="line mt-1"></div>
 
@@ -34,10 +33,11 @@
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 						<div class="form-inline">
 							<label class="nowrap mb-0" for="fromDate">Mostrar desde</label>
-							<input type="text" id="fromDate" name="fromDate" class="mx-2 col-3 form-control">
-							<label class="nowrap mb-0" for="toDate">Hasta</label>
-							<input type="text" id="toDate" name="toDate" class="mx-2 col-3 form-control">
+							<input type="text" id="fromDate" name="fromDate" class="mx-2 col-3 form-control"  <?=$disabled;?>>
+							<label class="nowrap mb-0" for="toDate" >Hasta</label>
+							<input type="text" id="toDate" name="toDate" class="mx-2 col-3 form-control" <?=$disabled;?>>
 							<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+							<div class="help-block"></div>
 						</div>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
@@ -50,15 +50,30 @@
 					</div>
 					<ul class="stack-extra list-inline mb-0 flex items-center">
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+							<a id="downloadPDF" href="" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0" <?=$disabled;?>></span></a>
 						</li>
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadXLS" href="" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0" <?=$disabled;?>></span></a>
 						</li>
 					</ul>
 				</nav>
 
 				<div class="group row mt-3" id="results">
+					<?php
+						if (empty($expenses) || $expenses === '--') {
+					?>
+							<div class="my-5 py-4 center">
+								<span class="h4">No se encontraron movimientos.</span>
+							</div>
+					<?php
+						}else{
+					?>
+							<div class="my-5 py-4 center">
+								<span class="h4"></span>
+							</div>
+					<?php
+						}
+					?>
 				</div>
 
 			</div>

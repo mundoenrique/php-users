@@ -70,9 +70,7 @@ $route['(:any)/listaproducto'] = "serviceProduct/listProduct";
 $route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
 $route['(:any)/reporte'] = "expenseReport/listProduct";
 $route['(:any)/detallereporte'] = "expenseReport/detailReport";
-
-
-
+$route['(:any)/reporte/getpdf'] = "expenseReport/getPDF";
 
 
 //Actual Structure

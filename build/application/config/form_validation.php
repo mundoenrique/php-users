@@ -1,16 +1,28 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'exporttopdf' => [
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		]
+	],
 	'getexpenses' => [
 		[
 			'field' => 'fechaInicial',
 			'label' => 'fechaInicial',
-			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
 		],
 		[
 			'field' => 'fechaFinal',
 			'label' => 'fechaFinal',
-			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
 		]
 	],
 	'updateprofile' => [
