@@ -48,7 +48,7 @@
   --warning: #ff8800;
   --danger: #cc0000;
 
-	--yellow: #ffb400;
+  --yellow: #ffb400;
   --vista-blue: #7ed3b2;
   --trikemaster: #8b4f80;
   --pink-salmon: #ff8c94;
@@ -95,8 +95,9 @@
   --width-1: 24rem;
   --width-2: 32rem;
   --width-3: 48rem;
-	--width-4: 62rem;
-	--width-5: 75rem;
+  --width-4: 62rem;
+  --width-5: 64rem;
+  --width-6: 75rem;
 
   /* Margin - Padding */
   --space-1: .5rem;
