@@ -185,7 +185,7 @@ $(function(){
 			'Junio',
 			'Julio',
 			'Agosto',
-			'Septiempre',
+			'Septiembre',
 			'Octubre',
 			'Noviembre',
 			'Diciembre'
