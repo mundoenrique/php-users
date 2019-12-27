@@ -148,7 +148,7 @@ class ExpenseReport extends NOVO_Controller {
 		}else{
 
 			$dataRequest = new stdClass();
-			$dataRequest->tipoOperacion = '0';
+			$dataRequest->tipoOperacion = '99';
 			$dataRequest->id_ext_per = $dataProduct['id_ext_per'];
 			$dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
 			$dataRequest->producto = $dataProduct['producto'];

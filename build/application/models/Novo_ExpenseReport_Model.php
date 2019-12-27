@@ -31,7 +31,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 		$this->dataRequest->producto = $dataProduct['producto'];
 		$this->dataRequest->fechaIni = empty($dataRequest->fechaInicial)?'01/01/'.date("Y"): $dataRequest->fechaInicial;
 		$this->dataRequest->fechaFin = empty($dataRequest->fechaFinal)?'31/12/'.date("Y"): $dataRequest->fechaFinal;
-		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion)? '1': $dataRequest->tipoOperacion;
+		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion)? '1': '0';
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
