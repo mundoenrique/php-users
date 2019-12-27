@@ -2765,10 +2765,6 @@ table.feed-table th span[class*=" icon-"] {
 	font-size: 26px;
 }
 
-table.feed-table th.feed-headline {
-
-}
-
 table.feed-table th.feed-category {
 	padding: .25rem .75rem;
 	text-align: center;
@@ -2823,9 +2819,6 @@ table.feed-table td:last-child {
 	border-right: 0;
 }
 
-table.feed-table td.feed-headline {
-}
-
 table.feed-table td.feed-monetary,
 table.feed-table td.feed-total {
 	text-align: right;
@@ -2835,12 +2828,16 @@ table.feed-table td.feed-total {
 	color: var(--tertiary);
 }
 
-table.feed-table tbody tr td {
+table.feed-table tbody tr {
 	background: var(--widget-color);
 }
 
-table.feed-table tbody tr:nth-child(2n) td {
+table.feed-table tbody tr:nth-child(2n) {
 	background: var(--bg-color);
+}
+
+table.feed-table tbody tr:hover {
+	background: var(--disabled-color);
 }
 
 table.feed-table tfoot td {
