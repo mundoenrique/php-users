@@ -21,6 +21,7 @@ $lang['GEN_REGISTRY_TITLE'] = 'Registro';
 $lang['GEN_PROFILE_TITLE'] = 'Perfil';
 //BUTTONS
 $lang['GEN_BTN_ACCEPT']= 'Aceptar';
+$lang['GEN_BTN_CLOSE']= 'Cerrar';
 $lang['GEN_BTN_CANCEL']= 'Cancelar';
 $lang['GEN_BTN_CONTINUE']= 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';

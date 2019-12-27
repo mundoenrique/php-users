@@ -84,6 +84,7 @@
 		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
 		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
+		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>"
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"

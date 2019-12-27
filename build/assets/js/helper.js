@@ -91,17 +91,18 @@ function callNovoCore(verb, who, where, data, _response_) {
 		_response_(response);
 
 	}).fail(function (xhr) {
-		title = titleNotiSystem;
-		icon = iconDanger;
-		data = {
-			btn1: {
-				action: 'redirect',
-				link: uriRedirecTarget,
-				text: txtBtnAcceptNotiSystem
-			}
+		var response = {
+			title: titleNotiSystem,
+			data: {
+				btn1: {
+					action: 'close',
+					link: false,
+					text: txtBtnCloseNotiSystem
+				}
+			},
+			icon: iconDanger
 		};
-		notiSystem(title, null, icon, data);
-		_response_(data);
+		_response_(response);
 	});
 }
 
