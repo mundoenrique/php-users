@@ -1986,6 +1986,15 @@ i[class*=" icon-"]:before {
 .icon-hand-left:before     { content: "\e045"; }
 .icon-hand-right:before    { content: "\e046"; }
 .icon-chart-pie:before  	 { content: "\e04c"; }
+.icon-car:before					 { content: "\e04e"; }
+.icon-bag:before 					 { content: "\e04f"; }
+.icon-food:before 				 { content: "\e050"; }
+.icon-film:before 				 { content: "\e051"; }
+.icon-lab:before 					 { content: "\e052"; }
+.icon-suitcase:before 		 { content: "\e053"; }
+.icon-plane:before 				 { content: "\e054"; }
+.icon-medkit:before 			 { content: "\e055"; }
+.icon-asterisk:before 		 { content: "\e056"; }
 .icon-file-blank:before 	 { content: "\e057"; }
 .icon-file-graph:before 	 { content: "\e058"; }
 .icon-file-pdf:before 		 { content: "\e059"; }
@@ -2481,10 +2490,6 @@ i[class*=" icon-"]:before {
 
 /* Table */
 
-tr > td {
-  padding: 0 !important;
-}
-
 td > button > i{
 	color: var(--primary);
   transition: .5s;
@@ -2564,7 +2569,7 @@ td > button > i:hover{
 	transition: all .1ms ease-in-out;
 }
 
-.dataTables_length select  {
+.dataTables_length select {
 	border-radius: 2.55px;
 	border: .85px solid var(--border-color);
 	box-shadow: 1px 1px 2px 0 var(--shadows-color);
@@ -2732,6 +2737,155 @@ table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
 
 table#resultsAccount thead th:nth-child(7){
 	width: 170px !important;
+}
+
+
+/* Reportes - CPO */
+
+table.feed-table {
+	width: 100%;
+	margin-bottom: 1rem;
+	font-size: .75rem;
+	border-collapse: collapse;
+}
+
+table.feed-table td,
+table.feed-table th {
+	padding: .5rem .75rem;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+table.feed-table th {
+	font-weight: var(--bold-font-weight);
+}
+
+table.feed-table th span[class^="icon-"],
+table.feed-table th span[class*=" icon-"] {
+	font-size: 26px;
+}
+
+table.feed-table th.feed-headline {
+
+}
+
+table.feed-table th.feed-category {
+	padding: .25rem .75rem;
+	text-align: center;
+}
+
+table.feed-table th.feed-category-1x {
+	color: #1abc9c;
+}
+
+table.feed-table th.feed-category-2x {
+	color: #2ecc71;
+}
+
+table.feed-table th.feed-category-3x {
+	color: #3498db;
+}
+
+table.feed-table th.feed-category-4x {
+	color: #9b59b6;
+}
+
+table.feed-table th.feed-category-5x {
+	color: #f1c40f;
+}
+
+table.feed-table th.feed-category-6x {
+	color: #e67e22;
+}
+
+table.feed-table th.feed-category-7x {
+	color: #e74c3c;
+}
+
+table.feed-table th.feed-category-8x {
+	color: #16a085;
+}
+
+table.feed-table th.feed-category-9x {
+	color: #27ae60;
+}
+
+table.feed-table th.feed-category-10x {
+	color: #2980b9;
+}
+
+table.feed-table td {
+	border-top: 1px solid var(--border-color-2);
+	border-right: 1px solid var(--border-color-2);
+}
+
+table.feed-table td:last-child {
+	border-right: 0;
+}
+
+table.feed-table td.feed-headline {
+}
+
+table.feed-table td.feed-monetary,
+table.feed-table td.feed-total {
+	text-align: right;
+}
+
+table.feed-table td.feed-total {
+	color: var(--tertiary);
+}
+
+table.feed-table tbody tr td {
+	background: var(--widget-color);
+}
+
+table.feed-table tbody tr:nth-child(2n) td {
+	background: var(--bg-color);
+}
+
+table.feed-table tfoot td {
+	border-top: 5px solid var(--border-color-2);
+	font-weight: var(--bold-font-weight);
+}
+
+table.feed-table tfoot td.feed-category-1x {
+	border-top-color: #1abc9c;
+}
+
+table.feed-table tfoot td.feed-category-2x {
+	border-top-color: #2ecc71;
+}
+
+table.feed-table tfoot td.feed-category-3x {
+	border-top-color: #3498db;
+}
+
+table.feed-table tfoot td.feed-category-4x {
+	border-top-color: #9b59b6;
+}
+
+table.feed-table tfoot td.feed-category-5x {
+	border-top-color: #f1c40f;
+}
+
+table.feed-table tfoot td.feed-category-6x {
+	border-top-color: #e67e22;
+}
+
+table.feed-table tfoot td.feed-category-7x {
+	border-top-color: #e74c3c;
+}
+
+table.feed-table tfoot td.feed-category-8x {
+	border-top-color: #16a085;
+}
+
+table.feed-table tfoot td.feed-category-9x {
+	border-top-color: #27ae60;
+}
+
+table.feed-table tfoot td.feed-category-10x {
+	border-top-color: #2980b9;
 }
 
 /* Widgets */
