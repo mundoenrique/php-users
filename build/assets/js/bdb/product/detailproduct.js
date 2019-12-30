@@ -194,18 +194,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 });
 
-var createElement = function (tagName, attrs) {
-
-	var el = document.createElement(tagName);
-	Object.keys(attrs).forEach((key) => {
-		if (attrs [key] !== undefined) {
-			el.setAttribute(key, attrs [key]);
-		}
-	});
-
-	return el;
-}
-
 function formatCurrency(locales, style, currency, fractionDigits, number) {
 	var formatted = new Intl.NumberFormat(locales, {
     style: style,
@@ -215,7 +203,15 @@ function formatCurrency(locales, style, currency, fractionDigits, number) {
   return formatted;
 }
 
-function invokeChart(selector) {
+function invokeChart(selector, cargos, abonos) {
+	var cargos, abonos;
+	if (selector[0] === movementsStats) {
+		cargos = data.totalExpenseMovements;
+		abonos = data.totalIncomeMovements;
+	} else {
+		cargos = data.totalExpensePendingTransactions;
+		abonos = data.totalIncomePendingTransactions;
+	}
 	selector.kendoChart({
 		chartArea: {
 			background:"transparent",
@@ -242,10 +238,10 @@ function invokeChart(selector) {
 			},
 			data: [{
 				category: "Cargos",
-				value: parseFloat(parseFloat(data.totalExpenseMovements).toFixed(1))
+				value: parseFloat(parseFloat(cargos).toFixed(1))
 			}, {
 				category: "Abonos",
-				value: parseFloat(parseFloat(data.totalIncomeMovements).toFixed(1))
+				value: parseFloat(parseFloat(abonos).toFixed(1))
 			}]
 		}],
 		tooltip: {
