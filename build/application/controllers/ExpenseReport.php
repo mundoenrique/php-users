@@ -157,7 +157,7 @@ class ExpenseReport extends NOVO_Controller {
 
 			$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
 			$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);
-			if ($expenses->data === '--') {
+			if ($expenses->data === '--' || $expenses->code !== 0) {
 				$expenses = '';
 			}
 		}
