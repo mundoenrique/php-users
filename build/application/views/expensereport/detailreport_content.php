@@ -55,12 +55,8 @@
 				</nav>
 
 				<div class="group max-width-6 mt-3" id="results">
-				<?php if (empty($expenses) || $expenses === '--'): ?>
-					<div class="my-5 py-4 center">
-						<span class="h4">No se encontraron movimientos</span>
-					</div>
-				<?php else: ?>
-					<div id="report-annual" class="content-anio">
+					<div id="reportAnnual" class="content-anio">
+					<?php if (!empty($expenses) && $expenses !== '--'): ?>
 						<table class="feed-table">
 							<thead>
 								<tr>
@@ -99,8 +95,40 @@
 								</tr>
 							</tfoot>
 						</table>
+					<?php endif; ?>
 					</div>
-				<?php endif; ?>
+
+					<div id="reportMonthly" class="content-mes none">
+						<table class="feed-table">
+							<thead>
+								<tr>
+									<th class="feed-headline">Fecha</th>
+									<th class="feed-category feed-category-1x"><span aria-hidden="true" class="icon-car" title="Alquiler de vehículos"></span></th>
+									<th class="feed-category feed-category-2x"><span aria-hidden="true" class="icon-bag" title="Comercios y tiendas por departamento"></span></th>
+									<th class="feed-category feed-category-3x"><span aria-hidden="true" class="icon-food" title="Comida, despensa y restaurantes"></span></th>
+									<th class="feed-category feed-category-4x"><span aria-hidden="true" class="icon-film" title="Diversión y entretenimiento"></span></th>
+									<th class="feed-category feed-category-5x"><span aria-hidden="true" class="icon-lab" title="Farmacias"></span></th>
+									<th class="feed-category feed-category-6x"><span aria-hidden="true" class="icon-suitcase" title="Hoteles"></span></th>
+									<th class="feed-category feed-category-7x"><span aria-hidden="true" class="icon-plane" title="Líneas áereas y transporte"></span></th>
+									<th class="feed-category feed-category-8x"><span aria-hidden="true" class="icon-medkit" title="Servicios médicos"></span></th>
+									<th class="feed-category feed-category-9x"><span aria-hidden="true" class="icon-card" title="Cajeros automáticos"></span></th>
+									<th class="feed-category feed-category-10x"><span aria-hidden="true" class="icon-asterisk" title="Otros"></span></th>
+									<th class="feed-headline text-right">Total <?php echo lang("GEN_COIN"); ?></th>
+								</tr>
+							</thead>
+							<tbody id="tbodyMes">
+							</tbody>
+							<tfoot>
+								<tr id="totalesMes">
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+
+					<div id="noRecords" class="my-5 py-4 center none">
+						<span class="block mb-1 h4">No se encontraron registros</span>
+						<span>Seleccione un rango de fecha a consultar.</span>
+					</div>
 				</div>
 
 			</div>

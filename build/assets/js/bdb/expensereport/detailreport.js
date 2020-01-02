@@ -6,24 +6,32 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnGetMovementHistory = $$.getElementById('buscar');
 	var btnExportPDF = $$.getElementById('downloadPDF');
 	var btnExportXLS = $$.getElementById('downloadXLS');
+	var results = $$.getElementById('results');
+	var reportAnnual = $$.getElementById('reportAnnual');
+	var reportMonthly = $$.getElementById('reportMonthly');
+	var noRecords = $$.getElementById('noRecords');
+
+	var fromDate, toDate, dateFormat = "dd/mm/yy";
+
+	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
+	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
 
 	//core
-	var fromDate, toDate, dateFormat = "dd/mm/yy",
-		fromDate = $( "#fromDate" )
-			.datepicker({
-				maxDate: 0,
-				defaultDate: 0
-			})
-			.on( "change", function() {
-				toDate.datepicker( "option", "minDate", getDate( this ) );
-			}),
-		toDate = $( "#toDate" ).datepicker({
+	fromDate = $( "#fromDate" )
+		.datepicker({
 			maxDate: 0,
 			defaultDate: 0
 		})
 		.on( "change", function() {
-			fromDate.datepicker( "option", "maxDate", getDate( this ) );
-		});
+			toDate.datepicker( "option", "minDate", getDate( this ) );
+		}),
+	toDate = $( "#toDate" ).datepicker({
+		maxDate: 0,
+		defaultDate: 0
+	})
+	.on( "change", function() {
+		fromDate.datepicker( "option", "maxDate", getDate( this ) );
+	});
 
 	function getDate( element ) {
 		var date;
@@ -46,48 +54,65 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		var tr, td;
 
+		reportAnnual.classList.add('none');
+		reportMonthly.classList.add('none');
+		noRecords.classList.add('none');
+		results.appendChild(loading);
+
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
 
-			if (response.code === 0){
-				console.log(response.data);
-				var tbody = $$.getElementById('tbody-datos-mes');
-				var trTotales = $$.getElementById('totales-mes');
-				while (tbody.firstChild) {
-					tbody.removeChild(tbody.firstChild);
-				}
-				while (trTotales.firstChild) {
-					trTotales.removeChild(trTotales.firstChild);
-				}
-				response.data.totalesPorDia.forEach(function callback(total, index, array) {
-					tr = $$.createElement('tr');
-					td = createElement('td', {class: 'feed-headline'});
-					td.textContent = total.fechaDia;
-					tr.appendChild(td);
-					response.data.listaGrupo.forEach(function callback(day) {
-						td = createElement('td', {class: 'feed-monetary'});
-						td.textContent = day.gastoDiario[index].monto;
+			switch (response.code) {
+				case 0:
+					var tbody = $$.getElementById('tbodyMes');
+					var trTotales = $$.getElementById('totalesMes');
+					while (tbody.firstChild) {
+						tbody.removeChild(tbody.firstChild);
+					}
+					while (trTotales.firstChild) {
+						trTotales.removeChild(trTotales.firstChild);
+					}
+					response.data.totalesPorDia.forEach(function callback(total, index, array) {
+						tr = $$.createElement('tr');
+						td = createElement('td', {class: 'feed-headline'});
+						td.textContent = total.fechaDia;
 						tr.appendChild(td);
+						response.data.listaGrupo.forEach(function callback(day) {
+							td = createElement('td', {class: 'feed-monetary'});
+							td.textContent = day.gastoDiario[index].monto;
+							tr.appendChild(td);
+						});
+						td = createElement('td', {class: 'feed-total'});
+						td.textContent = total.monto;
+						tr.appendChild(td);
+						tbody.appendChild(tr);
+					});
+					td = createElement('td', {class: 'feed-headline'});
+					td.textContent = 'Total';
+					trTotales.appendChild(td);
+					response.data.listaGrupo.forEach(function callback(day, index, array) {
+						td = createElement('td', {class: 'feed-monetary feed-category-'+(index+1)+'x'});
+						td.textContent = day.totalCategoria;
+						trTotales.appendChild(td);
 					});
 					td = createElement('td', {class: 'feed-total'});
-					td.textContent = total.monto;
-					tr.appendChild(td);
-					tbody.appendChild(tr);
-				});
-				td = createElement('td', {class: 'feed-headline'});
-				td.textContent = 'Total';
-				trTotales.appendChild(td);
-				response.data.listaGrupo.forEach(function callback(day, index, array) {
-					td = createElement('td', {class: 'feed-monetary feed-category-'+(index+1)+'x'});
-					td.textContent = day.totalCategoria;
+					td.textContent = response.data.totalGeneral;
 					trTotales.appendChild(td);
-				});
-				td = createElement('td', {class: 'feed-total'});
-				td.textContent = response.data.totalGeneral;
-				trTotales.appendChild(td);
-			} else {
-				notiSystem(response.title, response.msg, response.classIconName, response.data);
+
+					reportMonthly.classList.remove('none');
+
+					break;
+
+				case 1:
+					noRecords.classList.remove('none');
+					break;
+
+				default:
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					break;
 			}
+			results.removeChild(results.lastChild);
 		});
+
 	});
 
 	btnExportPDF.addEventListener('click', function(e){
