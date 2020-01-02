@@ -3154,6 +3154,7 @@ a.ui-button:active,
 
 /* DatePicker */
 .ui-datepicker {
+	z-index: 3 !important;
 	display: none;
   width: 17em;
 	padding: 0;
