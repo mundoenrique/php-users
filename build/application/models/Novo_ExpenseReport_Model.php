@@ -46,6 +46,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 				case -150:
 					$this->response->code = 1;
 					$this->response->data = '--';
+					break;
 
 				default:
 					$this->response->code = 2;
@@ -58,6 +59,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 							'action' => 'redirect'
 						]
 					];
+					break;
 			}
 		}
 		return $this->response;
