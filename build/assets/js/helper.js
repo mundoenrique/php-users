@@ -226,27 +226,40 @@ if (toggleMenu) {
 /* Inicio Opciones por defecto para Datepicker
 	========================================================================== */
 
-	$.datepicker.regional['es'] = {
-    closeText: 'Cerrar',
-    prevText: '<Ant',
-    nextText: 'Sig>',
-    currentText: 'Hoy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-    dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-    weekHeader: 'Sm',
-    dateFormat: 'dd/mm/yy',
-    firstDay: 1,
-    isRTL: false,
-    showMonthAfterYear: false,
-		yearSuffix: '',
-		changeMonth: true,
-		changeYear: true,
-		showAnim: "slideDown"
-  };
-	$.datepicker.setDefaults($.datepicker.regional['es']);
+$.datepicker.regional['es'] = {
+	closeText: 'Cerrar',
+	prevText: '<Ant',
+	nextText: 'Sig>',
+	currentText: 'Hoy',
+	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+	dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+	weekHeader: 'Sm',
+	dateFormat: 'dd/mm/yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: '',
+	changeMonth: true,
+	changeYear: true,
+	showAnim: "slideDown"
+};
+$.datepicker.setDefaults($.datepicker.regional['es']);
 
-	/* Fin Opciones por defecto para Datepicker
-	========================================================================== */
+/* Fin Opciones por defecto para Datepicker
+========================================================================== */
+
+// Crea elementos html
+var createElement = function (tagName, attrs) {
+
+	var el = document.createElement(tagName);
+	Object.keys(attrs).forEach((key) => {
+		if (attrs [key] !== undefined) {
+			el.setAttribute(key, attrs [key]);
+		}
+	});
+
+	return el;
+}

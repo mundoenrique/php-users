@@ -105,17 +105,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 })
 
-var createElement = function (tagName, attrs) {
-	var el = document.createElement(tagName);
-	Object.keys(attrs).forEach((key) => {
-		if (attrs [key] !== undefined) {
-			el.setAttribute(key, attrs [key]);
-		}
-	});
-
-	return el;
-}
-
 function disableInputsForm(status, txtButton) {
 	$$.getElementById('birthDate').disabled = status;
 	$$.getElementById('genderMale').disabled = status;

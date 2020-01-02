@@ -44,10 +44,46 @@ $$.addEventListener('DOMContentLoaded', function(){
 			fechaFinal: $$.getElementById("toDate").value
 		};
 
+		var tr, td;
+
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
 
 			if (response.code === 0){
 				console.log(response.data);
+				var tbody = $$.getElementById('tbody-datos-mes');
+				var trTotales = $$.getElementById('totales-mes');
+				while (tbody.firstChild) {
+					tbody.removeChild(tbody.firstChild);
+				}
+				while (trTotales.firstChild) {
+					trTotales.removeChild(trTotales.firstChild);
+				}
+				response.data.totalesPorDia.forEach(function callback(total, index, array) {
+					tr = $$.createElement('tr');
+					td = createElement('td', {class: 'feed-headline'});
+					td.textContent = total.fechaDia;
+					tr.appendChild(td);
+					response.data.listaGrupo.forEach(function callback(day) {
+						td = createElement('td', {class: 'feed-monetary'});
+						td.textContent = day.gastoDiario[index].monto;
+						tr.appendChild(td);
+					});
+					td = createElement('td', {class: 'feed-total'});
+					td.textContent = total.monto;
+					tr.appendChild(td);
+					tbody.appendChild(tr);
+				});
+				td = createElement('td', {class: 'feed-headline'});
+				td.textContent = 'Total';
+				trTotales.appendChild(td);
+				response.data.listaGrupo.forEach(function callback(day, index, array) {
+					td = createElement('td', {class: 'feed-monetary feed-category-'+(index+1)+'x'});
+					td.textContent = day.totalCategoria;
+					trTotales.appendChild(td);
+				});
+				td = createElement('td', {class: 'feed-total'});
+				td.textContent = response.data.totalGeneral;
+				trTotales.appendChild(td);
 			} else {
 				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			}
