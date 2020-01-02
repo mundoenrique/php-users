@@ -55,6 +55,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // Novo Structure
+$route['(:any)/'] = "user/login";
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/preregistro'] = "user/preRegistry";
 $route['(:any)/registro'] = "user/registry";

@@ -54,11 +54,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(20, countdown);
+					startTimer(50, countdown);
 
 				}
 				else if (response.code === 3){
-						resendCodeOTP (response.msg);
+						resendCodeOTP(response.msg);
 				}else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					disableInputsForm(false, txtBtnTrigger);
@@ -190,31 +190,32 @@ $$.addEventListener('DOMContentLoaded', function(){
 				resendCodeOTP ('Tiempo expirado');
 			}
 		}
+	}
 
-		function resendCodeOTP (message) {
-			verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
-			btnTrigger.disabled = true;
-			$$.getElementById('codeOTP').disabled = true;
+	function resendCodeOTP (message) {
+		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+		btnTrigger.disabled = true;
+		$$.getElementById('codeOTP').disabled = true;
 
-			$$.getElementById('resendCode').addEventListener('click', function(){
-				disableInputsForm(true, msgLoadingWhite);
-				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-				{
-					if (response.code == 0) {
-						btnTrigger.disabled = false;
-						btnTrigger.innerHTML = txtBtnTrigger;
-						verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-						$$.getElementById('codeOTP').disabled = false;
-						var countdown = verificationMsg.querySelector("span");
-						startTimer(15, countdown);
-					}
-					else{
-						notiSystem(response.title, response.msg, response.classIconName, response.data);
-						disableInputsForm(false, txtBtnTrigger);
-					}
-				});
+		$$.getElementById('resendCode').addEventListener('click', function(){
+			disableInputsForm(true, msgLoadingWhite);
+			data.codeOTP = '';
+			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+			{
+				if (response.code == 0) {
+					btnTrigger.disabled = false;
+					btnTrigger.innerHTML = txtBtnTrigger;
+					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+					$$.getElementById('codeOTP').disabled = false;
+					var countdown = verificationMsg.querySelector("span");
+					startTimer(50, countdown);
+				}
+				else{
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					disableInputsForm(false, txtBtnTrigger);
+				}
 			});
-		}
+		});
 	}
 });
 

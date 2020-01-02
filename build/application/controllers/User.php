@@ -265,10 +265,12 @@ class User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 
 		$listaTelefonos = [];
-		foreach ($objData->profileUser->registro->listaTelefonos as $row) {
-			$listaTelefonos[$row->tipo] = $row->numero;
+		if ($objData->profileUser !== '--') {
+			foreach ($objData->profileUser->registro->listaTelefonos as $row) {
+				$listaTelefonos[$row->tipo] = $row->numero;
+			}
+			$objData->profileUser->ownTelephones = $listaTelefonos;
 		}
-		$objData->profileUser->ownTelephones = $listaTelefonos;
 
 		if (!empty($objData->profileUser->direccion)) {
 

@@ -40,14 +40,24 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response; //->cuentaOrigen;
+					$this->response->data = $response;
 					break;
 
-				default:
+				case -150:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
-					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = '--';
+
+				default:
+					$this->response->code = 2;
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
 			}
 		}
 		return $this->response;
