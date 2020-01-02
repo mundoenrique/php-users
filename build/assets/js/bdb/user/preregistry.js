@@ -1,6 +1,7 @@
 'use strict';
 var $$ = document;
 var data = {};
+var interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
@@ -54,7 +55,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(50, countdown);
+					startTimer(dataPreRegistry.setTimerOTP, countdown);
 
 				}
 				else if (response.code === 3){
@@ -174,7 +175,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	function startTimer(duration, display)
 	{
 		var timer = duration, minutes, seconds;
-		var interval = setInterval(myTimer, 1000);
+		interval = setInterval(myTimer, 1000);
 
 		function myTimer() {
 			minutes = parseInt(timer / 60, 10)
@@ -194,10 +195,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function resendCodeOTP (message) {
 		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+		clearInterval(interval);
 		btnTrigger.disabled = true;
 		$$.getElementById('codeOTP').disabled = true;
 
-		$$.getElementById('resendCode').addEventListener('click', function(){
+		$$.getElementById('resendCode').addEventListener('click', function(e){
+			e.preventDefault();
+
+			$$.getElementById('codeOTP').value = '';
 			disableInputsForm(true, msgLoadingWhite);
 			data.codeOTP = '';
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
@@ -208,7 +213,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(50, countdown);
+					startTimer(dataPreRegistry.setTimerOTP, countdown);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);

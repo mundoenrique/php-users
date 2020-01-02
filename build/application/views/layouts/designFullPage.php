@@ -88,7 +88,6 @@
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
-		var idleSession = "<?= $idleSession;?>";
 	</script>
 
 	<?php
