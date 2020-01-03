@@ -32,23 +32,6 @@ $(function(){
         $('.submenu-user').attr("style","display:none")
     });
 
-    $(".label-inline").on("click", "a", function() {
-
-    $("#dialog-tc").dialog({
-      dialogClass: "cond-serv",
-      modal:"true",
-      width:"940px",
-      draggable:false,
-      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-    $(".cond-serv").css("top","50px");
-    $("#ok").click(function(){
-      $("#dialog-tc").dialog("close");
-    });
-
-    });
-
-
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // CARGA MODAL CTA ORIGEN
     $(".dialog").click(function() {

@@ -477,22 +477,4 @@ $(function(){
 		}); // VALIDATE
 	}
 
-	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	// MODAL TERMINOS Y CONDICIONES
-	$(".label-inline").on("click", "a", function() {
-
-		$("#dialog-tc").dialog({
-			modal:"true",
-			width:"940px",
-			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-		});
-
-		$("#ok").click(function(){
-			$("#dialog-tc").dialog("close");
-		});
-
-	});
-
-
 });  //FIN DE LA FUNCION GENERAL
