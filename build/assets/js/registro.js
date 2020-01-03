@@ -1298,25 +1298,6 @@ $(function(){
 		}); // VALIDATE
 	}
 
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-//  MODAL TERMINOS Y CONDICIONES
-$(".label-inline").on("click", "a", function() {
-
-    $("#dialog-tc").dialog({
-      dialogClass: "cond-serv",
-      modal:"true",
-      width:"940px",
-      draggable:false,
-      open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-    });
-    $(".cond-serv").css("top","50px");
-    $("#ok").click(function(){
-      $("#dialog-tc").dialog("close");
-    });
-
-    });
-
 	/*BASE 64*/
 
 	var Base64 = {
