@@ -126,8 +126,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 							concept = currentValue.concepto,
 							reference = currentValue.referencia,
 							sign = currentValue.signo,
-							amount = parseFloat(currentValue.monto.replace(",", "")),
-							formatterPeso = formatCurrency("es-CO", "currency", "COP", 2, amount);
+							amount = parseFloat(currentValue.monto.replace(/\,/g, '')),
+							formatterPeso = formatCurrency("es-CO", currencyOptions, amount);
 
 					var feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
 

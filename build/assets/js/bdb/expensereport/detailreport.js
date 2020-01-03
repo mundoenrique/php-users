@@ -70,7 +70,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		},
 		tooltip: {
 			visible: true,
-      template: "#= category # - #= formatCurrency('es-CO', 'currency', 'COP', 2, value) #",
+      template: "#= category # - #= formatCurrency('es-CO', currencyOptions, value) #",
 			padding: {
 				right: 4,
 				left: 4
@@ -148,6 +148,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		results.appendChild(loading);
 
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
+			var monto, totalMonto, totalCategoria, totalGeneral;
+			var formatterMonto, formatterTotalMonto, formatterTotalCategoria, formatterTotalGeneral;
+
 			switch (response.code) {
 				case 0:
 					var tbody = $$.getElementById('tbodyMes');
@@ -164,12 +167,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 						td.textContent = total.fechaDia;
 						tr.appendChild(td);
 						response.data.listaGrupo.forEach(function callback(day) {
+							monto = parseFloat(day.gastoDiario[index].monto.replace(/\,/g, ''));
+							formatterMonto = formatCurrency("es-CO", decimalOptions, monto);
 							td = createElement('td', {class: 'feed-monetary'});
-							td.textContent = day.gastoDiario[index].monto;
+							td.textContent = formatterMonto;
 							tr.appendChild(td);
 						});
+						totalMonto = parseFloat(total.monto.replace(/\,/g, ''));
+						formatterTotalMonto = formatCurrency("es-CO", decimalOptions, totalMonto);
 						td = createElement('td', {class: 'feed-total'});
-						td.textContent = total.monto;
+						td.textContent = formatterTotalMonto;
 						tr.appendChild(td);
 						tbody.appendChild(tr);
 					});
@@ -177,12 +184,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = 'Total';
 					trTotales.appendChild(td);
 					response.data.listaGrupo.forEach(function callback(day, index, array) {
+						totalCategoria = parseFloat(day.totalCategoria.replace(/\,/g, ''));
+						formatterTotalCategoria = formatCurrency("es-CO", decimalOptions, totalCategoria);
 						td = createElement('td', {class: 'feed-monetary feed-category-'+(index+1)+'x'});
-						td.textContent = day.totalCategoria;
+						td.textContent = formatterTotalCategoria;
 						trTotales.appendChild(td);
 					});
+					totalGeneral = parseFloat(response.data.totalGeneral.replace(/\,/g, ''));
+					formatterTotalGeneral = formatCurrency("es-CO", decimalOptions, totalGeneral);
 					td = createElement('td', {class: 'feed-total'});
-					td.textContent = response.data.totalGeneral;
+					td.textContent = formatterTotalGeneral;
 					trTotales.appendChild(td);
 
 					reportMonthly.classList.add('fade-in');

@@ -39,6 +39,16 @@ var msgLoadingWhite = '<span class="spinner-border spinner-border-sm white" role
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
+var currencyOptions = {
+	style: "currency",
+	currency: "COP",
+	minimumFractionDigits: 2
+};
+
+var decimalOptions = {
+	minimumFractionDigits: 2
+};
+
 $('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
 
 (function() {
@@ -264,11 +274,7 @@ var createElement = function (tagName, attrs) {
 	return el;
 }
 
-function formatCurrency(locales, style, currency, fractionDigits, number) {
-	var formatted = new Intl.NumberFormat(locales, {
-    style: style,
-    currency: currency,
-    minimumFractionDigits: fractionDigits
-	}).format(number);
+function formatCurrency(locales, options, number) {
+	var formatted = new Intl.NumberFormat(locales, options).format(number);
   return formatted;
 }
