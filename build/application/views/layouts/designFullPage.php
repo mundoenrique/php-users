@@ -83,7 +83,7 @@
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
 		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
 		var idleSession = '<?= $this->config->item('timeIdleSession'); ?>';
-		var coinSimbol = '<?= $this->config->item('coin'); ?>';
+		var coinSimbol = '<?= lang("GEN_COIN"); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
 		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
 		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>"

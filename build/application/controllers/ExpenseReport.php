@@ -105,6 +105,7 @@ class ExpenseReport extends NOVO_Controller {
 
 		array_push (
 			$this->includeAssets->jsFiles,
+			"third_party/kendo.dataviz",
 			"$this->countryUri/expensereport/$view",
 			"third_party/jquery.validate",
 			"validate-forms",

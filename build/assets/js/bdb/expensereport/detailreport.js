@@ -3,28 +3,34 @@ var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
-	var btnGetMovementHistory = $$.getElementById('buscar');
-	var btnExportPDF = $$.getElementById('downloadPDF');
-	var btnExportXLS = $$.getElementById('downloadXLS');
-	var results = $$.getElementById('results');
-	var reportAnnual = $$.getElementById('reportAnnual');
-	var reportMonthly = $$.getElementById('reportMonthly');
-	var noRecords = $$.getElementById('noRecords');
+	var btnGetMovementHistory = $$.getElementById('buscar'),
+			btnExportPDF = $$.getElementById('downloadPDF'),
+			btnExportXLS = $$.getElementById('downloadXLS'),
+			results = $$.getElementById('results'),
+			reportAnnual = $$.getElementById('reportAnnual'),
+			reportMonthly = $$.getElementById('reportMonthly'),
+			chart = $('#chart'),
+			noRecords = $$.getElementById('noRecords'),
+			btnOptions = $$.querySelectorAll('.btn-options'),
+			detailToogle = $$.getElementById('detailToogle'),
+			statsToogle = $$.getElementById('statsToogle');
 
-	var fromDate, toDate, dateFormat = "dd/mm/yy";
+	var i, jsonChart, fromDate, toDate, dateFormat = "dd/mm/yy";
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
 
 	//core
-	fromDate = $( "#fromDate" )
-		.datepicker({
-			maxDate: 0,
-			defaultDate: 0
-		})
-		.on( "change", function() {
-			toDate.datepicker( "option", "minDate", getDate( this ) );
-		}),
+
+	// Da formato a rango de fechas
+	fromDate = $( "#fromDate" ).datepicker({
+		maxDate: 0,
+		defaultDate: 0
+	})
+	.on( "change", function() {
+		toDate.datepicker( "option", "minDate", getDate( this ) );
+	});
+
 	toDate = $( "#toDate" ).datepicker({
 		maxDate: 0,
 		defaultDate: 0
@@ -32,6 +38,82 @@ $$.addEventListener('DOMContentLoaded', function(){
 	.on( "change", function() {
 		fromDate.datepicker( "option", "maxDate", getDate( this ) );
 	});
+
+	jsonChart = {
+    chartArea: {
+      background:"transparent",
+      width: 640,
+			height: 320
+		},
+		seriesDefaults: {
+			labels: {
+				template: "#= category #  #= kendo.format('{0:P}')#",
+				position: "outsideEnd",
+				visible: false,
+				background: "transparent",
+				format: coinSimbol + " {0}"
+			}
+		},
+		seriesColors: ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f", "#e67e22", "#e74c3c", "#16a085", "#27ae60", "#2980b9"],
+		series: [{
+			type: "pie",
+			overlay: {
+				gradient: "none"
+			},
+			data: []
+		}],
+		legend: {
+			visible: true
+		},
+		categoryAxis: {
+			categories: []
+		},
+		tooltip: {
+			visible: true,
+      template: "#= category # - #= formatCurrency('es-CO', 'currency', 'COP', 2, value) #",
+			padding: {
+				right: 4,
+				left: 4
+			},
+      color: "#012c71",
+      background: "#d8d8d8"
+		}
+  }
+
+	// Muestra reportes y genera gráfica de estadísticas
+	if (reportAnnual.querySelector(".feed-table")) {
+		reportAnnual.classList.add('fade-in');
+
+		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.data.listaGrafico[0]);
+		statsToogle.classList.remove('is-disabled');
+		statsToogle.querySelector('input').disabled = false;
+	} else {
+		noRecords.classList.remove('none');
+	}
+
+	// Botón para cambiar a gráfica
+	statsToogle.addEventListener('click', function(){
+		if ( !this.classList.contains('is-disabled') && !this.classList.contains('active') ) {
+			for (i = 0; i < btnOptions.length; ++i) {
+				btnOptions[i].classList.toggle('active');
+			};
+
+			results.classList.add('none');
+			chart.addClass('fade-in');
+		}
+	})
+
+	// Botón para cambiar a detalles
+	detailToogle.addEventListener('click', function(){
+		if ( !this.classList.contains('active') ) {
+			for (i = 0; i < btnOptions.length; ++i) {
+				btnOptions[i].classList.toggle('active');
+			};
+
+			chart.removeClass('fade-in');
+			results.classList.remove('none');
+		}
+	})
 
 	function getDate( element ) {
 		var date;
@@ -54,13 +136,18 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		var tr, td;
 
-		reportAnnual.classList.add('none');
-		reportMonthly.classList.add('none');
+		reportAnnual.classList.remove('fade-in');
+		reportMonthly.classList.remove('fade-in');
+		chart.removeClass('fade-in');
 		noRecords.classList.add('none');
+		statsToogle.classList.add('is-disabled');
+		statsToogle.querySelector('input').disabled = true;
+		detailToogle.classList.add('active');
+		statsToogle.classList.remove('active');
+		results.classList.remove('none');
 		results.appendChild(loading);
 
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
-
 			switch (response.code) {
 				case 0:
 					var tbody = $$.getElementById('tbodyMes');
@@ -98,8 +185,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = response.data.totalGeneral;
 					trTotales.appendChild(td);
 
-					reportMonthly.classList.remove('none');
+					reportMonthly.classList.add('fade-in');
 
+					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
+					statsToogle.classList.remove('is-disabled');
+					statsToogle.querySelector('input').disabled = false;
 					break;
 
 				case 1:
@@ -140,3 +230,16 @@ $$.addEventListener('DOMContentLoaded', function(){
 	}
 })
 
+function invokeChart(selector, json, data) {
+	json.categoryAxis.categories = [];
+	json.series[0].data = [];
+	$.each(data.categorias, function (posLista, itemLista) {
+		json.categoryAxis.categories.push(itemLista.nombreCategoria);
+		var datos = {};
+		datos.category = itemLista.nombreCategoria;
+		datos.value = parseFloat(data.series[0].valores[posLista]);
+		json.series[0].data.push(datos);
+	});
+
+	selector.kendoChart(json);
+}

@@ -11,5 +11,3 @@ $config['layout'] = 'designFullPage';
 $config['setTimerOTP'] = 5*60;
 
 $config['timeIdleSession'] = 6*60000;
-$config['coin'] = '$';
-
