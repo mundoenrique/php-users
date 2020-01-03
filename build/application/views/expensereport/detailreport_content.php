@@ -54,81 +54,87 @@
 					</ul>
 				</nav>
 
-				<div class="group max-width-6 mt-3" id="results">
-					<div id="reportAnnual" class="content-anio">
-					<?php if (!empty($expenses) && $expenses !== '--'): ?>
-						<table class="feed-table">
-							<thead>
-								<tr>
-									<th class="feed-headline">Meses</th>
-									<th class="feed-category feed-category-1x"><span aria-hidden="true" class="icon-car" title="Alquiler de vehículos"></span></th>
-									<th class="feed-category feed-category-2x"><span aria-hidden="true" class="icon-bag" title="Comercios y tiendas por departamento"></span></th>
-									<th class="feed-category feed-category-3x"><span aria-hidden="true" class="icon-food" title="Comida, despensa y restaurantes"></span></th>
-									<th class="feed-category feed-category-4x"><span aria-hidden="true" class="icon-film" title="Diversión y entretenimiento"></span></th>
-									<th class="feed-category feed-category-5x"><span aria-hidden="true" class="icon-lab" title="Farmacias"></span></th>
-									<th class="feed-category feed-category-6x"><span aria-hidden="true" class="icon-suitcase" title="Hoteles"></span></th>
-									<th class="feed-category feed-category-7x"><span aria-hidden="true" class="icon-plane" title="Líneas áereas y transporte"></span></th>
-									<th class="feed-category feed-category-8x"><span aria-hidden="true" class="icon-medkit" title="Servicios médicos"></span></th>
-									<th class="feed-category feed-category-9x"><span aria-hidden="true" class="icon-card" title="Cajeros automáticos"></span></th>
-									<th class="feed-category feed-category-10x"><span aria-hidden="true" class="icon-asterisk" title="Otros"></span></th>
-									<th class="feed-headline text-right">Total <?php echo lang("GEN_COIN"); ?></th>
-								</tr>
-							</thead>
-							<tbody>
-							<?php foreach($expenses->data->totalesAlMes as $key => $value): ?>
-								<tr id="<?= strtolower($value->mes); ?>">
-									<td class="feed-headline"><?= ucfirst(strtolower($value->mes)); ?></td>
-								<?php foreach($expenses->data->listaGrupo as $col): ?>
-									<td class="feed-monetary"><?= number_format(str_replace(',','',$col->gastoMensual[$key]->monto),2,",","."); ?></td>
+				<div class="group max-width-6 mt-3">
+
+					<div id="results" class="">
+						<div id="noRecords" class="my-5 pt-4 center none">
+							<span class="block mb-1 h4">No se encontraron registros</span>
+							<span>Seleccione un rango de fecha a consultar.</span>
+						</div>
+
+						<div id="reportAnnual" class="feed content-anio">
+						<?php if (!empty($expenses) && $expenses !== ''): ?>
+							<table class="feed-table">
+								<thead>
+									<tr>
+										<th class="feed-headline">Meses</th>
+										<th class="feed-category feed-category-1x"><span aria-hidden="true" class="icon-car" title="Alquiler de vehículos"></span></th>
+										<th class="feed-category feed-category-2x"><span aria-hidden="true" class="icon-bag" title="Comercios y tiendas por departamento"></span></th>
+										<th class="feed-category feed-category-3x"><span aria-hidden="true" class="icon-food" title="Comida, despensa y restaurantes"></span></th>
+										<th class="feed-category feed-category-4x"><span aria-hidden="true" class="icon-film" title="Diversión y entretenimiento"></span></th>
+										<th class="feed-category feed-category-5x"><span aria-hidden="true" class="icon-lab" title="Farmacias"></span></th>
+										<th class="feed-category feed-category-6x"><span aria-hidden="true" class="icon-suitcase" title="Hoteles"></span></th>
+										<th class="feed-category feed-category-7x"><span aria-hidden="true" class="icon-plane" title="Líneas áereas y transporte"></span></th>
+										<th class="feed-category feed-category-8x"><span aria-hidden="true" class="icon-medkit" title="Servicios médicos"></span></th>
+										<th class="feed-category feed-category-9x"><span aria-hidden="true" class="icon-card" title="Cajeros automáticos"></span></th>
+										<th class="feed-category feed-category-10x"><span aria-hidden="true" class="icon-asterisk" title="Otros"></span></th>
+										<th class="feed-headline text-right">Total <?php echo lang("GEN_COIN"); ?></th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach($expenses->data->totalesAlMes as $key => $value): ?>
+									<tr id="<?= strtolower($value->mes); ?>">
+										<td class="feed-headline"><?= ucfirst(strtolower($value->mes)); ?></td>
+									<?php foreach($expenses->data->listaGrupo as $col): ?>
+										<td class="feed-monetary"><?= number_format(str_replace(',','',$col->gastoMensual[$key]->monto),2,",","."); ?></td>
+									<?php endforeach; ?>
+										<td class="feed-total"><?= number_format(str_replace(',','',$value->monto),2,",","."); ?></td>
+									</tr>
 								<?php endforeach; ?>
-									<td class="feed-total"><?= number_format(str_replace(',','',$value->monto),2,",","."); ?></td>
-								</tr>
-							<?php endforeach; ?>
-							</tbody>
-							<tfoot>
-								<tr id="totales">
-									<td class="feed-headline">Total</td>
-								<?php foreach($expenses->data->listaGrupo as $key => $value): ?>
-									<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= number_format(str_replace(',','',$value->totalCategoria),2,",","."); ?></td>
-								<?php endforeach; ?>
-									<td class="feed-total"><?= number_format(str_replace(',','',$expenses->data->totalGeneral),2,",","."); ?></td>
-								</tr>
-							</tfoot>
-						</table>
-					<?php endif; ?>
+								</tbody>
+								<tfoot>
+									<tr id="totales">
+										<td class="feed-headline">Total</td>
+									<?php foreach($expenses->data->listaGrupo as $key => $value): ?>
+										<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= number_format(str_replace(',','',$value->totalCategoria),2,",","."); ?></td>
+									<?php endforeach; ?>
+										<td class="feed-total"><?= number_format(str_replace(',','',$expenses->data->totalGeneral),2,",","."); ?></td>
+									</tr>
+								</tfoot>
+							</table>
+						<?php endif; ?>
+						</div>
+
+						<div id="reportMonthly" class="feed content-mes">
+							<table class="feed-table">
+								<thead>
+									<tr>
+										<th class="feed-headline">Fecha</th>
+										<th class="feed-category feed-category-1x"><span aria-hidden="true" class="icon-car" title="Alquiler de vehículos"></span></th>
+										<th class="feed-category feed-category-2x"><span aria-hidden="true" class="icon-bag" title="Comercios y tiendas por departamento"></span></th>
+										<th class="feed-category feed-category-3x"><span aria-hidden="true" class="icon-food" title="Comida, despensa y restaurantes"></span></th>
+										<th class="feed-category feed-category-4x"><span aria-hidden="true" class="icon-film" title="Diversión y entretenimiento"></span></th>
+										<th class="feed-category feed-category-5x"><span aria-hidden="true" class="icon-lab" title="Farmacias"></span></th>
+										<th class="feed-category feed-category-6x"><span aria-hidden="true" class="icon-suitcase" title="Hoteles"></span></th>
+										<th class="feed-category feed-category-7x"><span aria-hidden="true" class="icon-plane" title="Líneas áereas y transporte"></span></th>
+										<th class="feed-category feed-category-8x"><span aria-hidden="true" class="icon-medkit" title="Servicios médicos"></span></th>
+										<th class="feed-category feed-category-9x"><span aria-hidden="true" class="icon-card" title="Cajeros automáticos"></span></th>
+										<th class="feed-category feed-category-10x"><span aria-hidden="true" class="icon-asterisk" title="Otros"></span></th>
+										<th class="feed-headline text-right">Total <?php echo lang("GEN_COIN"); ?></th>
+									</tr>
+								</thead>
+								<tbody id="tbodyMes">
+								</tbody>
+								<tfoot>
+									<tr id="totalesMes">
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</div>
 
-					<div id="reportMonthly" class="content-mes none">
-						<table class="feed-table">
-							<thead>
-								<tr>
-									<th class="feed-headline">Fecha</th>
-									<th class="feed-category feed-category-1x"><span aria-hidden="true" class="icon-car" title="Alquiler de vehículos"></span></th>
-									<th class="feed-category feed-category-2x"><span aria-hidden="true" class="icon-bag" title="Comercios y tiendas por departamento"></span></th>
-									<th class="feed-category feed-category-3x"><span aria-hidden="true" class="icon-food" title="Comida, despensa y restaurantes"></span></th>
-									<th class="feed-category feed-category-4x"><span aria-hidden="true" class="icon-film" title="Diversión y entretenimiento"></span></th>
-									<th class="feed-category feed-category-5x"><span aria-hidden="true" class="icon-lab" title="Farmacias"></span></th>
-									<th class="feed-category feed-category-6x"><span aria-hidden="true" class="icon-suitcase" title="Hoteles"></span></th>
-									<th class="feed-category feed-category-7x"><span aria-hidden="true" class="icon-plane" title="Líneas áereas y transporte"></span></th>
-									<th class="feed-category feed-category-8x"><span aria-hidden="true" class="icon-medkit" title="Servicios médicos"></span></th>
-									<th class="feed-category feed-category-9x"><span aria-hidden="true" class="icon-card" title="Cajeros automáticos"></span></th>
-									<th class="feed-category feed-category-10x"><span aria-hidden="true" class="icon-asterisk" title="Otros"></span></th>
-									<th class="feed-headline text-right">Total <?php echo lang("GEN_COIN"); ?></th>
-								</tr>
-							</thead>
-							<tbody id="tbodyMes">
-							</tbody>
-							<tfoot>
-								<tr id="totalesMes">
-								</tr>
-							</tfoot>
-						</table>
-					</div>
+					<div id="chart" class="feed"></div>
 
-					<div id="noRecords" class="my-5 py-4 center none">
-						<span class="block mb-1 h4">No se encontraron registros</span>
-						<span>Seleccione un rango de fecha a consultar.</span>
-					</div>
 				</div>
 
 			</div>
