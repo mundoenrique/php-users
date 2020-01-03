@@ -213,8 +213,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var monthRequest = $$.getElementById('filterMonth').options[document.getElementById('filterMonth').selectedIndex].value
 			var yearRequest = $$.getElementById('filterYear').options[document.getElementById('filterYear').selectedIndex].value
 
-			$$.getElementsByName("frmMonth")[0].value = monthRequest == '0'? '': monthRequest;
-			$$.getElementsByName("frmYear")[0].value = yearRequest == '0'? '': yearRequest;
+			$$.getElementsByName("frmMonth")[0].value = monthRequest == '01'? '': monthRequest;
+			$$.getElementsByName("frmYear")[0].value = yearRequest == '2020'? '': yearRequest;
 
 			$$.getElementsByTagName('form')[1].submit();
 	}

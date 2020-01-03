@@ -81,6 +81,7 @@ if ( ! function_exists('np_hoplite_byteArrayToFile'))
 		foreach ($bytes as $chr) {
 			echo chr($chr);
 		}
+
 	}
 }
 

@@ -29,7 +29,7 @@ class Product extends NOVO_Controller {
  		if (count($dataProduct) == 1 and $dataProduct !== '--') {
 
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
-			if (in_array("117",  $dataProduct[0]['availableServices'])) {
+			if (in_array("120",  $dataProduct[0]['availableServices'])) {
 				redirect('/atencioncliente');
 			}
 			else{
@@ -128,6 +128,11 @@ class Product extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
+		if (in_array("120",  $dataProduct['availableServices'])) {
+
+			redirect('atencioncliente');
+		}
+
 		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
 			$dataRequest = new stdClass();
 			$dataRequest->month = $_POST['frmMonth'];
@@ -137,35 +142,32 @@ class Product extends NOVO_Controller {
 
 			$this->load->model('Novo_Product_Model', 'modelLoad');
 			$response = $this->modelLoad->getFile_Product ($dataRequest);
-			switch ($response->code) {
-				case 0:
+			if ( $response->code == 0) {
+
 					$oDate = new DateTime();
 					$dateFile = $oDate->format("YmdHis");
-					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'detalleMovimientos_'.$dateFile);
-					$expenses = 'ok';
-					break;
 
-				default:
-					redirect('detalle');
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_C_79944439');
+					$respuestaTal = 'ok';
 			}
-		}elseif(in_array("117",  $dataProduct['availableServices'])) {
-			redirect('atencioncliente');
-		}
+		}else{
 
-		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
-		$dataProduct['movements'] = $this->transforNumberInArray ($movements);
-		$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
+			$this->load->model('Novo_Product_Model', 'modelLoad');
+			$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+			$dataProduct['movements'] = $this->transforNumberInArray ($movements);
+			$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
 
-		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-		if ( $data->rc === "200" ) {
+			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+			if ( $data->rc === "200" ) {
 
-			$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
-			$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
-			$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
+				$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
+				$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
+				$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
 
-			$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
-			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
+				$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
+				$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
+			}
+
 		}
 
 		$year =  intval(date("Y"));

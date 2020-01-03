@@ -20,7 +20,7 @@
 					?>
 						<?php
 							foreach($data as $row){
-							$state = (in_array("117", $row['availableServices'])) ? ' inactive' : '';
+							$state = (in_array("120", $row['availableServices'])) ? ' inactive' : '';
 						?>
 							<div class="dashboard-item p-1 mx-1 mb-1<?= $state; ?>" id="<?= $row['noTarjeta'];?>" >
 								<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
@@ -28,7 +28,7 @@
 									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>
 									<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 								<?php
-									if (in_array("117", $row['availableServices'])){
+									if (in_array("120", $row['availableServices'])){
 								?>
 									<button id="generate" name="generate" class="btn btn-small btn-link" >Generar PIN </button>
 								<?php
