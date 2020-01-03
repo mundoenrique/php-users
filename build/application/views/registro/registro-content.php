@@ -36,8 +36,8 @@ switch($skin){
               <?php if($skin == 'default' || $skin == 'latodo'): ?>
               <li class="field-group-item">
                 <label for="country">País</label>
-                <select id="iso" name="iso">
-                  <option selected value=""> Seleccione </option>
+                <select id="iso" name="iso" disabled>
+                  <option id="def-country" selected value="" disabled> Cargando... </option>
                 </select>
               </li>
               <?php endif; ?>
