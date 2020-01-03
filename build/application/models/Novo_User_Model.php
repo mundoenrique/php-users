@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
 							'afiliado' => $response->afiliado,
-							'celular' => empty($response->celular)?'3152540141': $response->celular,
+							'celular' => $response->celular,
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
@@ -152,10 +152,10 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'-'.$dataRequest->id_ext_per;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->nitEmpresa = $dataRequest->nitBussines;
-		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocument;
+		$this->dataRequest->nitEmpresa = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
+		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocumentUser;
 		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 
 		$response = $this->sendToService('User');
@@ -174,6 +174,7 @@ class Novo_User_Model extends NOVO_Model
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
 							'tipo_id_ext_per'	=> $dataRequest->codeTypeDocument,
+							'descripcion_tipo_id_ext_per'	=> $response->user->descripcion_tipo_id_ext_per,
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
@@ -236,7 +237,7 @@ class Novo_User_Model extends NOVO_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->idType.'-'.$dataRequest->idNumber,
+			"id_ext_per"		=> $dataRequest->tipo_id_ext_per.'_'.$dataRequest->idNumber,
 			"codPais"			=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
@@ -298,6 +299,12 @@ class Novo_User_Model extends NOVO_Model
 					];
 					break;
 
+				case -1:
+					$this->response->msg = lang('RESP_LOGIN_INVALID');
+					$this->response->code = 3;
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+
 				case -61:
 				case -5:
 				case -3:
@@ -318,7 +325,7 @@ class Novo_User_Model extends NOVO_Model
 					break;
 
 				case -284:
-					$this->response->msg = lang('RES_REGISTERED_CELLPHONE');
+					$this->response->msg = lang('RESP_CELLPHONE_USED');
 					$this->response->code = 3;
 					$this->response->classIconName = "ui-icon-alert";
 					break;
@@ -372,7 +379,6 @@ class Novo_User_Model extends NOVO_Model
 						]
 					];
 					break;
-
 				case 5002:
 				case 5003:
 				case -102:
@@ -436,7 +442,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'-'.$dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
 		$this->dataRequest->pais = 'Global';
 
@@ -479,59 +485,31 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
-	public function callWs_changePassword_User($dataRequest)
+	public function callWs_profile_User()
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-		$this->dataAccessLog->modulo = 'password';
-		$this->dataAccessLog->function = 'password';
-		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->modulo = 'perfil';
+		$this->dataAccessLog->function = 'perfil';
+		$this->dataAccessLog->operation = 'consulta';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->userName = $this->session->userdata('userName');
-		$this->dataRequest->idOperation = '25';
-		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
-		$this->dataRequest->password = md5($dataRequest->newPassword);
-		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->idOperation = '30';
 		$this->dataRequest->token = $this->session->userdata('token');
 
-		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
+		log_message("info", "Request User Profile:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-
-					$this->session->sess_destroy();
-
 					$this->response->code = 0;
-					$this->response->msg = lang('RES_ACCESS_RECOVERED');
-					$this->response->classIconName = "ui-icon-circle-check";
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('inicio'),
-							'action' => 'redirect'
-						]
-					];
+					$this->response->data = $response;
 					break;
-				case -61:
-					$this->response->code = 2;
-					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
-					$this->response->classIconName = "ui-icon-alert";
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('inicio'),
-							'action' => 'redirect'
-						]
-					];
-					break;
-				case -187:
-				case -186:
-					$this->response->code = 1;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
-					$this->response->classIconName = "ui-icon-alert";
+
+				default:
+					$this->response->data = "--";
 					break;
 			}
 		}
@@ -637,5 +615,309 @@ class Novo_User_Model extends NOVO_Model
 		return $key;
 	}
 
+	public function callWs_getListCitys_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
 
+		$this->className = 'com.novo.objects.MO.EstadoTO';
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'lista ciudades';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = '35';
+		$this->dataRequest->token = $this->session->userdata("token");
+		$this->dataRequest->codPais = $this->session->userdata("pais");
+		$this->dataRequest->codEstado = $dataRequest->codState;
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->listaCiudad;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	public function getListStates()
+	{
+		log_message('INFO', 'NOVO User Model: load List Citys method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.PaisTO';
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'lista pais';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = '34';
+		$this->dataRequest->token = $this->session->userdata("token");
+		$this->dataRequest->codPais = $this->session->userdata('pais');
+		$this->dataRequest->userName = 'REGISTROCPO';
+		$this->dataRequest->codigoGrupo = '1';
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->listaEstados;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	function getListProfessions ()
+	{
+
+		log_message('INFO', 'NOVO User Model: load List Professions method Initialized');
+
+		$this->className = 'com.novo.objects.MO.ListaTipoProfesionesMO';
+		$this->dataAccessLog->modulo = 'lista profesion';
+		$this->dataAccessLog->function = 'lista profesion';
+		$this->dataAccessLog->operation = 'consultar';
+		$this->dataAccessLog->userName = $this->session->userdata("userName");
+
+		$this->dataRequest->idOperation = '37';
+		$this->dataRequest->token = $this->session->userdata("token");
+
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response->listaProfesiones;
+					break;
+				default:
+					$messageError = new stdClass();
+					$messageError->id = 0;
+					$messageError->descripcion = lang('RESP_EMPTY_LIST');
+
+					$this->response->code = 1;
+					$this->response->data = $messageError;
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	public function callWs_changePassword_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'password';
+		$this->dataAccessLog->function = 'password';
+		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->idOperation = '25';
+		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		$this->dataRequest->password = md5($dataRequest->newPassword);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+
+					$this->session->sess_destroy();
+
+					$this->response->code = 0;
+					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->classIconName = "ui-icon-circle-check";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -61:
+					$this->response->code = 2;
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -187:
+				case -186:
+					$this->response->code = 1;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+			}
+		}
+		return $this->response;
+	}
+
+	public function callWs_updateProfile_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$user = array(
+			"userName" => $this->session->userdata('userName'),
+			"primerNombre" => $dataRequest->firstName,
+			"segundoNombre"	=> $dataRequest->middleName,
+			"primerApellido"	=> $dataRequest->lastName,
+			"segundoApellido"	=> $dataRequest->secondSurname,
+			"email"				=> $dataRequest->email,
+			"dtfechorcrea_usu" => $dataRequest->creationDate,
+			"passwordOperaciones" => "",
+			"notEmail" => $dataRequest->notificationsEmail,
+			"notSms" => $dataRequest->notificationsSms ,
+			"sexo" => $dataRequest->gender,
+			"id_ext_per" => $this->session->userdata('idUsuario'),
+			"fechaNacimiento" => $dataRequest->birthDate,
+			"tipo_profesion" => $dataRequest->profession,
+			"profesion" => $dataRequest->profession,
+			"tipo_id_ext_per"	=> substr($this->session->userdata('idUsuario'), 0, 1),
+			"descripcion_tipo_id_ext_per" => $dataRequest->idType,
+			"disponeClaveSMS" => "",
+			"aplicaPerfil"=> 'N',
+			"tyc" => $this->session->userdata('tyc'),
+			"rc"=> "0"
+		);
+
+		$tHabitacion = array(
+				"tipo"	=> "HAB",
+				"numero"=> $dataRequest->landLine,
+				"descripcion"=> "HABITACION"
+		);
+
+		$tOtro = array(
+				"tipo"	=> $dataRequest->phoneType,
+				"numero" => $dataRequest->otherPhoneNum,
+				"descripcion" => $dataRequest->descriptionPhoneType
+		);
+
+		$tMobile = array(
+				"tipo"	=> "CEL",
+				"numero"=> $dataRequest->mobilePhone,
+				"descripcion"=> "MOVIL",
+				"aplicaClaveSMS"=> "No Aplica mensajes SMS"
+		);
+		$listaTelefonos = array($tHabitacion, $tOtro, $tMobile);
+
+		$afiliacion = array(
+				"notarjeta"=> "",
+				"idpersona"=> "",
+				"nombre1"=> "",
+				"nombre2"=> "",
+				"apellido1"=> "",
+				"apellido2"=> "",
+				"fechanac"=> "",
+				"sexo" => "",
+				"codarea1"=> "",
+				"telefono1"=> "",
+				"telefono2"=> "",
+				"correo"=> "",
+				"direccion"=> "",
+				"distrito"=> "",
+				"provincia"=> "",
+				"departamento" => "",
+				"edocivil"=> "",
+				"labora"=> "",
+				"centrolab"=> "",
+				"fecha_reg"=> "",
+				"estatus"=> "",
+				"notifica"=> "",
+				"fecha_proc" => "",
+				"fecha_afil" => "",
+				"tipo_id" => "",
+				"fecha_solicitud" => "",
+				"antiguedad_laboral" => "",
+				"profesion" => "",
+				"cargo" => "",
+				"ingreso_promedio_mensual" => "",
+				"cargo_publico_last2" => "",
+				"cargo_publico" => "",
+				"institucion_publica" => "",
+				"uif" => "",
+				"lugar_nacimiento" => "",
+				"nacionalidad" => "",
+				"punto_venta" => "",
+				"cod_vendedor" => "",
+				"dni_vendedor" => "",
+				"cod_ubigeo" => "",
+				"dig_verificador" => "",
+				"telefono3" => "",
+				"tipo_direccion" => "",
+				"cod_postal" => "",
+				"ruc_cto_laboral" => "",
+				"aplicaPerfil" => "",
+		);
+
+		$direccion = array(
+			"acCodCiudad"=> $dataRequest->city,
+			"acCodEstado"=> $dataRequest->department,
+			"acCodPais"=> $this->session->userdata('pais'),
+			"acTipo"=> $dataRequest->addressType,
+			"acZonaPostal"=> $dataRequest->postalCode,
+			"acDir"=> $dataRequest->address
+		);
+
+		$registro = [
+			"user" => $user,
+			"listaTelefonos"	=> $listaTelefonos,
+			"registroValido"=> false,
+			"corporativa"=> false,
+			"afiliacion"		=> $afiliacion
+		];
+
+		$this->className = 'com.novo.objects.MO.DatosPerfilMO';
+		$this->dataAccessLog->modulo = 'perfil';
+		$this->dataAccessLog->function = 'perfil';
+		$this->dataAccessLog->operation = 'actualizar';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = '39';
+		$this->dataRequest->userName = $this->session->userdata('userName');
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		$this->dataRequest->rc = 0;
+		$this->dataRequest->registro = $registro;
+		$this->dataRequest->direccion = $direccion;
+		$this->dataRequest->isParticular = true;
+
+		log_message("info", "Request User Profile:" . json_encode($this->dataRequest));
+		$response = $this->sendToService('User');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->msg = lang('RESP_SUCCESSFUL_PROFILE');
+					$this->response->classIconName = 'ui-icon-info';
+			}
+		}
+		return $this->response;
+	}
 }

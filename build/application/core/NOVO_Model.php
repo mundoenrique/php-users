@@ -66,6 +66,8 @@ class NOVO_Model extends CI_Model {
 			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		}
 
+		log_message("info", "Response: " . json_encode($responseDecrypt));
+
 		$this->isResponseRc = (int) $responseDecrypt->rc;
 		switch($this->isResponseRc) {
 			case -61:

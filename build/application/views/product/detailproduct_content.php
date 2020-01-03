@@ -2,6 +2,13 @@
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
+<form method="post" action=''>
+	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+	<input type='hidden' name='frmMonth' value=''>
+	<input type='hidden' name='frmYear' value=''>
+	<input type='hidden' name='frmTypeFile' value=''>
+</form>
+
 <div id="detail" class="detail-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -58,7 +65,7 @@
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option selected="" value="0">Más recientes</option>
+								<option selected="" value="<?= date("m");?>">Más recientes</option>
 								<?php
 									foreach ($months as $nroMonths => $txtMonths){
 								?>
@@ -67,38 +74,40 @@
 									}
 								?>
 							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled="">
-								<option selected="" value="0">-</option>
-								<option value="2019">2019</option>
-								<option value="2018">2018</option>
-								<option value="2017">2017</option>
-								<option value="2016">2016</option>
-								<option value="2015">2015</option>
+							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" disabled name="filterYear" >
+								<option value="<?= $years[0];?>">-</option>
+								<?php
+									foreach ($years as $year){
+								?>
+									<option value="<?= $year;?>"><?= $year;?></option>
+								<?php
+									}
+								?>
 							</select>
-						<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn-small btn-options btn-outline btn-rounded-left active" id="movementsToogle">
-							<input type="radio" name="movimientos" id="option1" checked> Movimientos
+						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
+							<input id="optionMovements" type="radio" name="movimientos" checked> Movimientos
 						</label>
-						<label class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" id="transitToogle">
-							<input type="radio" name="movimientos" id="option2" disabled> En tránsito
+						<label id="transitToogle" class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" >
+							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
 						</label>
 					</div>
 					<ul class="stack-extra list-inline mb-0 flex items-center">
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadXLS" href="#" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
 				</nav>
 
 				<div class="group row mt-3" id="results">
-					<div class="group-main-view col-8" id="transactions">
+					<div class="group-main-view col-lg-8" id="transactions">
 						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
-							<span id="transitTitle">transacciones pendientes</span>
+							<span id="transitTitle" class="none">transacciones pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
 						<ul id="movementsList" class="feed list-style-none mt-3 pl-0">
@@ -107,7 +116,6 @@
 								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
 
 								if ($data['movements'] !== '--'){
-
 									foreach($data['movements'] as $row){
 										$separedDate = explode('/',$row->fecha);
 										$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
@@ -123,7 +131,7 @@
 											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 										</div>
 										<span class="px-2 feed-amount items-center">
-											<?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?>
+										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. strval(number_format($row->monto,2,',','.')); ?>
 										</span>
 									</li>
 								<?php
@@ -169,7 +177,7 @@
 
 					</div>
 
-					<div id="stats" class="group-aside-view col-4">
+					<div id="stats" class="group-aside-view col-lg-4">
 						<h3 class="h4 regular">Estadísticas</h3>
 						<div class="line mt-1"></div>
 						<div id="movementsStats" class="detail-stats"></div>
@@ -188,7 +196,7 @@
 	$dataForm->totalExpenseMovements = $totalExpenseMovements;
 	$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions)? $totalIncomePendingTransactions: 0;
 	$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions)? $totalExpensePendingTransactions: 0;
-
+	$dataForm->currency = lang('GEN_COIN');
 ?>
 <script>
 	var data = <?= json_encode((array)$dataForm);?>

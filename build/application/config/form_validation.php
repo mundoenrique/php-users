@@ -1,6 +1,144 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'exporttopdf' => [
+		[
+			'field' => 'initialDate',
+			'label' => 'initialDate',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'finalDate',
+			'label' => 'finalDate',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		]
+	],
+	'getexpenses' => [
+		[
+			'field' => 'fechaInicial',
+			'label' => 'fechaInicial',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'fechaFinal',
+			'label' => 'fechaFinal',
+			'rules' => 'required|regex_match[/^[0-9\/]+$/]'
+		]
+	],
+	'updateprofile' => [
+		[
+			'field' => 'idType',
+			'label' => 'idType',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'firstName',
+			'label' => 'firstName',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'lastName',
+			'label' => 'lastName',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'birthDate',
+			'label' => 'birthDate',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'gender',
+			'label' => 'gender',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'postalCode',
+			'label' => 'postalCode',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'landLine',
+			'label' => 'landLine',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'label' => 'otherPhoneNum',
+			'rules' => 'numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'username',
+			'label' => 'username',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'creationDate',
+			'label' => 'creationDate',
+			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
+		],
+		[
+			'field' => 'notificationsEmail',
+			'label' => 'notificationsEmail',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'notificationsEmail',
+			'label' => 'notificationsEmail',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'profession',
+			'label' => 'profession',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'addressType',
+			'label' => 'addressType',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'department',
+			'label' => 'department',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'city',
+			'label' => 'city',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'phoneType',
+			'label' => 'phoneType',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'address',
+			'label' => 'address',
+			'rules' => 'required|trim'
+		]
+	],
+	'getlistcitys' => [
+		[
+			'field' => 'codState',
+			'label' => 'codState',
+			'rules' => 'required|trim'
+		]
+	],
 	'replace' => [
 		[
 			'field' => 'codeOTP',
@@ -134,13 +272,23 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		],
 		[
-			'field' => 'codeTypeDocument',
-			'label' => 'codeTypeDocument',
+			'field' => 'codeTypeDocumentUser',
+			'label' => 'codeTypeDocumentUser',
 			'rules' => 'trim|required'
 		],
 		[
-			'field' => 'abbrTypeDocument',
-			'label' => 'abbrTypeDocument',
+			'field' => 'abbrTypeDocumentUser',
+			'label' => 'abbrTypeDocumentUser',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeTypeDocumentBussines',
+			'label' => 'codeTypeDocumentBussines',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'abbrTypeDocumentBussines',
+			'label' => 'abbrTypeDocumentBussines',
 			'rules' => 'trim|required'
 		]
 	],
@@ -148,7 +296,7 @@ $config = [
 		[
 			'field' => 'idType',
 			'label' => 'idType',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'idNumber',

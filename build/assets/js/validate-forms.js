@@ -1,5 +1,7 @@
 
 'use strict'
+var validator;
+
 function validateForms(form, options) {
 	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
 	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
@@ -163,8 +165,8 @@ function validateForms(form, options) {
 		return value !== '0';
 	 }, "Este campo es obligatorio.");
 
-	jQuery.validator.addMethod("confirmPin", function(value,element){
-		if(element.value.length>0 && element.value == $("#newPin").val()) {
+	jQuery.validator.addMethod("generateConfirmPin", function(value,element){
+		if(element.value.length>0 && element.value == $("#generateNewPin").val()) {
 			return true;
 		}
 		else return false;
@@ -187,13 +189,14 @@ function validateForms(form, options) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 dígitos no deben ser consecutivos.");
 
-	form.validate({
+	validator = form.validate({
 		rules: {
-			newPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
-			confirmPin: { required: true, number: true, "confirmPin": true },
+			generateNewPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
+			generateConfirmPin: { required: true, number: true, "generateConfirmPin": true },
 			changeCurrentPin: { required: true, number: true, exactlength: 4 },
 			changeNewPin: { required: true, number: true, exactlength: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
+			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
 			generateCodeOTP: { required: true, digits: true, exactlength: 5 },
@@ -217,9 +220,10 @@ function validateForms(form, options) {
 			addressType: { required: true },
 			postalCode: { digits: true },
 			country: { required: true },
-			departament: { required: true },
-			province: { required: true },
-			district: { required: true },
+			department: { required: true, "selectRequired": true },
+			province: { required: true, "selectRequired": true },
+			district: { required: true, "selectRequired": true },
+			city: { required: true, "selectRequired": true },
 			address: { required: true },
 			email: { required: true, emailValid: true },
 			confirmEmail: { required: true, equalTo: "#email" },
@@ -230,10 +234,11 @@ function validateForms(form, options) {
 			jobCenter: { required: true },
 			employmentSituation: { required: false },
 			jobOccupation: { required: true },
+			profession: { required: true, "selectRequired": true },
 			jobTitle: { "spanishAlphabetical": true },
 			income: { required: true, number: true },
 			publicPerformance: { required: true },
-			publicOffice: { required: true, "spanishAlphabetical": true  },
+			publicOffice: { required: true, "spanishAlphabetical": true },
 			institution: { required: true, "spanishAlphanum": true },
 			uif: { required: true },
 			username: { required: true, username: true, nowhitespace: true, rangelength: [6, 16] },

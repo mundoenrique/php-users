@@ -134,18 +134,38 @@ class User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza P.
-	 */
-	public function finishSession()
+
+	public function changePasswordProfile()
 	{
-		log_message('INFO', 'NOVO User: finishSession Method Initialized');
-		if($this->render->logged) {
-			$this->load->model('Novo_User_Model', 'finishSession');
-			$this->finishSession->callWs_FinishSession_User();
+		$view = 'changepassword';
+
+		log_message('INFO', 'NOVO User: Change Password from profile Method Initialized');
+
+		if(!$this->session->userdata('logged_in')) {
+
+			redirect(base_url('inicio'), 'location');
+			exit();
 		}
-		redirect(base_url('inicio'), 'location');
+		array_push(
+			$this->includeAssets->jsFiles,
+			"$this->countryUri/user/$view",
+			"third_party/jquery.validate",
+			"validate-forms",
+			"third_party/additional-methods",
+			"localization/spanish-base/messages_base"
+		);
+		if($this->config->item('language_form_validate')) {
+			array_push(
+				$this->includeAssets->jsFiles,
+				"localization/spanish-base/messages_$this->countryUri"
+			);
+		}
+		$this->session->set_flashdata('changePassword', 'changePaswordProfile');
+
+		$this->views = ['user/'.$view];
+		$this->render->reason = lang('GEN_PASSWORD_CHANGE_TITLE');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->loadView($view);
 	}
 
 	public function preRegistry()
@@ -215,13 +235,16 @@ class User extends NOVO_Controller {
 	public function profile()
 	{
 		$view = 'profile';
-		// if(!$this->session->flashdata('registryUser')) {
+		if(!$this->session->userdata('logged_in')) {
 
-		// 	redirect(base_url('inicio'), 'location');
-		// 	exit();
-		// }
-		// $this->session->set_flashdata('registryUserData', $this->session->flashdata('registryUserData'));
-		// $this->session->set_flashdata('registryUser', $this->session->flashdata('registryUser'));
+			redirect(base_url('vistaconsolidada'), 'location');
+			exit();
+		}
+
+		$this->load->model('Novo_User_Model', 'modelLoad');
+
+		$objData = new stdClass();
+		$objData->profileUser = $this->modelLoad->callWs_profile_User()->data;
 
 		log_message('INFO', 'NOVO User: profile Method Initialized');
 		array_push(
@@ -240,8 +263,31 @@ class User extends NOVO_Controller {
 			);
 		}
 		$this->views = ['user/'.$view];
-		// $this->render->data = $this->session->flashdata('registryUserData');
+
+		$listaTelefonos = [];
+		if ($objData->profileUser !== '--') {
+			foreach ($objData->profileUser->registro->listaTelefonos as $row) {
+				$listaTelefonos[$row->tipo] = $row->numero;
+			}
+			$objData->profileUser->ownTelephones = $listaTelefonos;
+		}
+
+		if (!empty($objData->profileUser->direccion)) {
+
+			$codState = new stdClass;
+			$codState->codState = $objData->profileUser->direccion->acCodEstado;
+			$this->render->dataCitys = $this->modelLoad->callWs_getListCitys_User($codState)->data;
+
+		}
+
+		$objData->professions = $this->modelLoad->getListProfessions()->data;
+		$objData->states = $this->modelLoad->getListStates()->data;
+
+		$this->render->data = $objData->profileUser;
+		$this->render->dataProfessions = $objData->professions;
+		$this->render->dataStates = $objData->states;
 		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+
 		$this->loadView($view);
 	}
 
@@ -284,4 +330,5 @@ class User extends NOVO_Controller {
 
 		redirect($this->config->item('base_url').'inicio');
 	}
+
 }

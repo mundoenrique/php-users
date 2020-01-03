@@ -8,7 +8,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de Datos</h2>
-				<p><?= $reason; ?></p>
+				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<form method="post" id="formChangePassword">
@@ -65,8 +65,8 @@
 
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
-							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnChangePassword" name="btnChangePassword" class="btn btn-primary" type="submit">Continuar</button>
+							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
+							<button id="btnChangePassword" name="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
 						</div>
 					</form>
 				</div>

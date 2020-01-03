@@ -44,15 +44,16 @@ $('input[type=text], input[type=password], input[type=email], input[type=radio]'
 (function() {
 	var actualPage = window.location.pathname.split("/").pop();
 
-	if ( actualPage !== 'inicio'){
-		var itemsMenu = $$.getElementsByClassName('nav-item');
-		var structureMenu = {
-			atencioncliente: 'customerSupport',
-			listaproducto: 'customerSupport',
-			vistaconsolidada: 'listProduct',
-			detalle: 'listProduct',
-			perfil: 'profile'
-		}
+	var itemsMenu = $$.getElementsByClassName('nav-item');
+	var structureMenu = {
+		atencioncliente: 'customerSupport',
+		listaproducto: 'customerSupport',
+		vistaconsolidada: 'listProduct',
+		detalle: 'listProduct',
+		perfil: 'profile'
+	}
+
+	if ( actualPage !== 'inicio' && structureMenu.hasOwnProperty(actualPage)){
 
 		for (var i = 0; i < itemsMenu.length; i++) {
 			itemsMenu[i].classList.remove('active');
@@ -90,17 +91,18 @@ function callNovoCore(verb, who, where, data, _response_) {
 		_response_(response);
 
 	}).fail(function (xhr) {
-		title = titleNotiSystem;
-		icon = iconDanger;
-		data = {
-			btn1: {
-				action: 'redirect',
-				link: uriRedirecTarget,
-				text: txtBtnAcceptNotiSystem
-			}
+		var response = {
+			title: titleNotiSystem,
+			data: {
+				btn1: {
+					action: 'close',
+					link: false,
+					text: txtBtnCloseNotiSystem
+				}
+			},
+			icon: iconDanger
 		};
-		notiSystem(title, null, icon, data);
-		_response_(data);
+		_response_(response);
 	});
 }
 
@@ -224,27 +226,49 @@ if (toggleMenu) {
 /* Inicio Opciones por defecto para Datepicker
 	========================================================================== */
 
-	$.datepicker.regional['es'] = {
-    closeText: 'Cerrar',
-    prevText: '<Ant',
-    nextText: 'Sig>',
-    currentText: 'Hoy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-    dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-    weekHeader: 'Sm',
-    dateFormat: 'dd/mm/yy',
-    firstDay: 1,
-    isRTL: false,
-    showMonthAfterYear: false,
-		yearSuffix: '',
-		changeMonth: true,
-		changeYear: true,
-		showAnim: "slideDown"
-  };
-	$.datepicker.setDefaults($.datepicker.regional['es']);
+$.datepicker.regional['es'] = {
+	closeText: 'Cerrar',
+	prevText: '<Ant',
+	nextText: 'Sig>',
+	currentText: 'Hoy',
+	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+	dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+	weekHeader: 'Sm',
+	dateFormat: 'dd/mm/yy',
+	firstDay: 1,
+	isRTL: false,
+	showMonthAfterYear: false,
+	yearSuffix: '',
+	changeMonth: true,
+	changeYear: true,
+	showAnim: "slideDown"
+};
+$.datepicker.setDefaults($.datepicker.regional['es']);
 
-	/* Fin Opciones por defecto para Datepicker
-	========================================================================== */
+/* Fin Opciones por defecto para Datepicker
+========================================================================== */
+
+// Crea elementos html
+var createElement = function (tagName, attrs) {
+
+	var el = document.createElement(tagName);
+	Object.keys(attrs).forEach((key) => {
+		if (attrs [key] !== undefined) {
+			el.setAttribute(key, attrs [key]);
+		}
+	});
+
+	return el;
+}
+
+function formatCurrency(locales, style, currency, fractionDigits, number) {
+	var formatted = new Intl.NumberFormat(locales, {
+    style: style,
+    currency: currency,
+    minimumFractionDigits: fractionDigits
+	}).format(number);
+  return formatted;
+}

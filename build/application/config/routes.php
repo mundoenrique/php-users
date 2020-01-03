@@ -55,6 +55,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // Novo Structure
+$route['(:any)/'] = "user/login";
 $route['(:any)/inicio'] = "user/login";
 $route['(:any)/preregistro'] = "user/preRegistry";
 $route['(:any)/registro'] = "user/registry";
@@ -62,11 +63,16 @@ $route['(:any)/perfil'] = "user/profile";
 $route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/cerrarsesion'] = "user/closeSession";
 $route['(:any)/cambiarclave'] = "user/changePassword";
+$route['(:any)/cambiarclaveprofile'] = "user/changePasswordProfile";
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/detalle'] = "product/detailProduct";
 $route['(:any)/async-call'] = "callModels";
 $route['(:any)/listaproducto'] = "serviceProduct/listProduct";
 $route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
+$route['(:any)/reporte'] = "expenseReport/listProduct";
+$route['(:any)/detallereporte'] = "expenseReport/detailReport";
+$route['(:any)/reporte/getpdf'] = "expenseReport/getPDF";
+
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha

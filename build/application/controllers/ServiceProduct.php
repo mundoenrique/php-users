@@ -23,8 +23,11 @@ class ServiceProduct extends NOVO_Controller {
 			exit();
 		}
 
+		$this->session->unset_userdata('setProduct');
+
 		$dataProduct = $this->loadDataProduct();
 		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			redirect("/atencioncliente");
 		}
 
@@ -54,17 +57,20 @@ class ServiceProduct extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function loadDataProduct()
+	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
 
-		if (count($data) < 1){
+		if (count($data) < 1) {
 			return '--';
 		}
 
 		$dataRequeried = [];
-		foreach($data as $row){
+		foreach($data as $row) {
+			if (!empty($card) && $card !== $row->noTarjeta) {
+				continue;
+			}
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -79,8 +85,6 @@ class ServiceProduct extends NOVO_Controller {
 				"bloqueo" => $row->bloque
 			]);
 		}
-		$this->session->set_flashdata('listProducts', $dataRequeried);
-
 		return $dataRequeried;
 	}
 
@@ -93,8 +97,10 @@ class ServiceProduct extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
+		$dataProduct = [];
+		$optionsAvailables = [];
 
-		array_push(
+		array_push (
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/serviceproduct/$view",
 			"third_party/jquery.validate",
@@ -110,23 +116,12 @@ class ServiceProduct extends NOVO_Controller {
 			);
 		}
 
-		$listProducts = $this->session->flashdata('listProducts');
-		$this->session->set_flashdata('listProducts', $listProducts);
+		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-		if (count($listProducts) == 1)
-		{
-			$dataProduct = $listProducts[0];
-		}else
-		{
-			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
-			$dataProduct = $listProducts[$posList];
-
-			$dataRequeried = [];
-			array_push($dataRequeried, $dataProduct);
-			$this->session->set_flashdata('listProducts', $dataRequeried);
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		$optionsAvailables = [];
 		$menuOptionsProduct = [
 			'117' => [
 				'id' => 'generate',

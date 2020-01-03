@@ -6,13 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Product extends NOVO_Controller {
 
-	public function __construct()
+	public function __construct ()
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
 	}
 
-	public function listProduct()
+	public function listProduct ()
 	{
 		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
 		$view = 'listproduct';
@@ -23,9 +23,12 @@ class Product extends NOVO_Controller {
 			exit();
 		}
 
-		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+		$this->session->unset_userdata('setProduct');
 
+		$dataProduct = $this->loadDataProduct();
+ 		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+
+			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			if (in_array("117",  $dataProduct[0]['availableServices'])) {
 				redirect('/atencioncliente');
 			}
@@ -59,7 +62,7 @@ class Product extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	public function loadDataProduct($operation = 'all', $card = '')
+	public function loadDataProduct ($card = '')
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
@@ -70,10 +73,10 @@ class Product extends NOVO_Controller {
 
 		$dataRequeried = [];
 		foreach($data as $row){
-			$productBalance = $this->transforNumber ($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
-			if ( $operation === 'detail' && $card !== $row->noTarjeta ){
+			if (!empty($card) && $card !== $row->noTarjeta ){
 				continue;
 			}
+			$productBalance = $this->transforNumber ($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -90,12 +93,10 @@ class Product extends NOVO_Controller {
 				"availableServices" => $row->services
 			]);
 		}
-		$this->session->set_flashdata('listProducts', $dataRequeried);
-
 		return $dataRequeried;
 	}
 
-	public function detailProduct()
+	public function detailProduct ()
 	{
 		log_message('INFO', 'NOVO Consolidated: detailProduct Method Initialized');
 		$view = 'detailproduct';
@@ -104,11 +105,14 @@ class Product extends NOVO_Controller {
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
+		$dataProduct = [];
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"$this->countryUri/product/$view",
-			"third_party/kendo.dataviz"
+			"third_party/moment",
+			"third_party/jquery.easyPaginate",
+			"third_party/kendo.dataviz",
+			"$this->countryUri/product/$view"
 		);
 
 		if ($this->config->item('language_form_validate')) {
@@ -118,23 +122,33 @@ class Product extends NOVO_Controller {
 			);
 		}
 
-		$listProducts = $this->session->flashdata('listProducts');
-		$this->session->set_flashdata('listProducts', $listProducts);
+		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-		if (count($listProducts) == 1)
-		{
-			$dataProduct = $listProducts[0];
-		}else
-		{
-			$posList = array_search($_POST['nroTarjeta'], array_column($listProducts,'noTarjeta'));
-			$dataProduct = $listProducts[$posList];
-
-			$dataRequeried = [];
-			array_push($dataRequeried, $dataProduct);
-			$this->session->set_flashdata('listProducts', $dataRequeried);
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		if (in_array("117",  $dataProduct['availableServices'])) {
+		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
+			$dataRequest = new stdClass();
+			$dataRequest->month = $_POST['frmMonth'];
+			$dataRequest->year = $_POST['frmYear'];
+			$dataRequest->typeFile = $_POST['frmTypeFile'];
+			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+
+			$this->load->model('Novo_Product_Model', 'modelLoad');
+			$response = $this->modelLoad->getFile_Product ($dataRequest);
+			switch ($response->code) {
+				case 0:
+					$oDate = new DateTime();
+					$dateFile = $oDate->format("YmdHis");
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'detalleMovimientos_'.$dateFile);
+					$expenses = 'ok';
+					break;
+
+				default:
+					redirect('detalle');
+			}
+		}elseif(in_array("117",  $dataProduct['availableServices'])) {
 			redirect('atencioncliente');
 		}
 
@@ -154,9 +168,16 @@ class Product extends NOVO_Controller {
 			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
 		}
 
+		$year =  intval(date("Y"));
+		$years = [];
+		for($i = $year ; $i>$year-4; $i--) {
+			array_push($years, $i);
+		}
+
 		$this->views = ['product/'.$view];
 		$this->render->data = $dataProduct;
 		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+		$this->render->years = $years;
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
@@ -179,7 +200,7 @@ class Product extends NOVO_Controller {
 		return (float)str_replace(',','', $transforNumber);
 	}
 
-	function totalInTransactions($transactions)
+	function totalInTransactions ($transactions)
 	{
 		$totalIncome = 0;
 		$totalExpense = 0;

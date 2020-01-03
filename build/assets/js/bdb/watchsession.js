@@ -1,39 +1,48 @@
 'use strict';
-var $w = window;
+var $$ = document;
 
 $$.addEventListener('DOMContentLoaded', function() {
-	//vars
-	var active = true;
-	var timeout;
 
-	//core
-	$w.onload = resetTimer;
-	$w.onmousemove = resetTimer;
-	$w.onmousedown = resetTimer;
-	$w.ontouchstart = resetTimer;
-	$w.onclick = resetTimer;
-	$w.onkeypress = resetTimer;
-	$w.addEventListener('scroll', resetTimer, true);
+	var actualPage = window.location.pathname.split("/").pop();
+	var pageNoTObserved = ['inicio','preregistro','recuperaracceso','registro']
 
-	//functions
-	function resetTimer() {
-		if (active){
+	if (!pageNoTObserved.includes(actualPage)) {
+
+		//vars
+		var timeout;
+		var $w = window;
+		var active = true;
+
+		//core
+		$w.onload = resetTimer;
+		$w.onclick = resetTimer;
+		$w.onkeypress = resetTimer;
+		$w.onmousemove = resetTimer;
+		$w.onmousedown = resetTimer;
+		$w.ontouchstart = resetTimer;
+		$w.addEventListener('scroll', resetTimer, true);
+
+		//functions
+		function resetTimer() {
+			if (active){
+				clearTimeout(timeout);
+				timeout = setTimeout(closeSession, parseInt(idleSession));
+			}
+		}
+
+		function closeSession() {
 			clearTimeout(timeout);
-			timeout = setTimeout(closeSession, parseInt(idleSession));
+
+			callNovoCore('POST', 'User', 'closeSession', [], function(response) {
+				notiSystem(titleNotiSystem, txtCloseIdleSession, iconDanger, {
+					btn1: {
+						action: 'redirect',
+						link: 'cerrarsesion',
+						text: txtBtnAcceptNotiSystem
+					}
+				});
+			});
 		}
 	}
 
-	function closeSession() {
-		clearTimeout(timeout);
-
-		callNovoCore('POST', 'User', 'closeSession', [], function(response) {
-			notiSystem(titleNotiSystem, txtCloseIdleSession, iconDanger, {
-				btn1: {
-					action: 'redirect',
-					link: 'cerrarsesion',
-					text: txtBtnAcceptNotiSystem
-				}
-			});
-		});
-	}
 });

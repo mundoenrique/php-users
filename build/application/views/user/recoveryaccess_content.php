@@ -57,8 +57,8 @@
 						</div>
 						<hr class="separador-one mt-3">
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn underline" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnContinuar" class="btn btn-primary" type="submit" <?= $statusListTypeDocument;?>>Continuar</button>
+							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
+							<button id="btnContinuar" class="btn btn-small btn-loading btn-primary" type="submit" <?= $statusListTypeDocument;?>>Continuar</button>
 						</div>
 					</form>
 				</div>

@@ -30,7 +30,7 @@
 						<div id="navbarNav" class="collapse navbar-collapse bg-primary">
 							<ul class="navbar-nav ml-auto">
 								<li id='listProduct' class="nav-item"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
-								<li id='reports' class="nav-item"><a class="nav-link" href="#">Reportes</a></li>
+								<li id='reports' class="nav-item"><a class="nav-link" href="<?= base_url('reporte') ?>">Reportes</a></li>
 								<li id='customerSupport' class="nav-item"><a class="nav-link" href="<?= base_url('listaproducto') ?>">Atención al cliente</a></li>
 								<li id='profile' class="nav-item"><a class="nav-link" href="<?= base_url('perfil') ?>">Mi perfil</a></li>
 								<li id='closeSession' class="nav-item"><a class="nav-link" href="<?= base_url('cerrarsesion') ?>">Cerrar sesión</a></li>
@@ -69,7 +69,6 @@
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
 			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 		</p>
-		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button type="button" id="cancel" class="btn btn-small btn-link"></button>
@@ -83,12 +82,14 @@
 		var urlAsset = '<?= assetUrl(); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
 		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
+		var idleSession = '<?= $this->config->item('timeIdleSession'); ?>';
+		var coinSimbol = '<?= lang("GEN_COIN"); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
 		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
+		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>"
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
-		var idleSession = "<?= $idleSession;?>";
 	</script>
 
 	<?php

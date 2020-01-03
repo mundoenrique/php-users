@@ -470,6 +470,7 @@ $config['csrf_exclude_uris'] = array(
 	'detalles',
 	'[\w\-]+/detalle',
 	'[\w\-]+/atencioncliente',
+	'[\w\-]+/detallereporte',
 );
 
 /*

@@ -1,6 +1,7 @@
 'use strict';
 var $$ = document;
 var data = {};
+var interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
 	//vars
@@ -17,11 +18,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 
-			var typeDocument = $$.getElementById('typeDocument');
+			var typeDocumentUser = $$.getElementById('typeDocumentUser');
+			var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
 			var document_id = $$.getElementById('idNumber').value;
 
-			var codeTypeDocument = typeDocument.options[typeDocument.selectedIndex].value;
-			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocument}).abreviatura
+			var codeTypeDocumentUser = typeDocumentUser.options[typeDocumentUser.selectedIndex].value;
+			var abbrTypeDocumentUser = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentUser}).abreviatura
+
+			var codeTypeDocumentBussines = typeDocumentBussines.options[typeDocumentBussines.selectedIndex].value;
+			var abbrTypeDocumentBussines = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentBussines}).abreviatura
 
 			disableInputsForm(true, msgLoadingWhite);
 
@@ -31,9 +36,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
+				codeTypeDocumentUser: codeTypeDocumentUser,
+				abbrTypeDocumentUser: abbrTypeDocumentUser,
 				id_ext_per: document_id,
-				codeTypeDocument: codeTypeDocument,
-				abbrTypeDocument: abbrTypeDocument,
+				codeTypeDocumentBussines: codeTypeDocumentBussines,
+				abbrTypeDocumentBussines: abbrTypeDocumentBussines,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
 				codeOTP: md5CodeOTP
@@ -54,11 +61,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					$$.getElementById("verification").classList.remove("none");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(20, countdown);
+					startTimer(dataPreRegistry.setTimerOTP, countdown);
 
 				}
 				else if (response.code === 3){
-						resendCodeOTP (response.msg);
+						resendCodeOTP(response.msg);
 				}else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					disableInputsForm(false, txtBtnTrigger);
@@ -165,7 +172,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$$.getElementById('idNumber').disabled = status;
 		$$.getElementById('telephoneNumber').disabled = status;
 		$$.getElementById('nitBussines').disabled = status;
-		$$.getElementById('typeDocument').disabled = status;
+		$$.getElementById('typeDocumentUser').disabled = status;
+		$$.getElementById('typeDocumentBussines').disabled = status;
 		$$.getElementById('acceptTerms').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;
@@ -174,7 +182,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	function startTimer(duration, display)
 	{
 		var timer = duration, minutes, seconds;
-		var interval = setInterval(myTimer, 1000);
+		interval = setInterval(myTimer, 1000);
 
 		function myTimer() {
 			minutes = parseInt(timer / 60, 10)
@@ -190,31 +198,36 @@ $$.addEventListener('DOMContentLoaded', function(){
 				resendCodeOTP ('Tiempo expirado');
 			}
 		}
+	}
 
-		function resendCodeOTP (message) {
-			verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
-			btnTrigger.disabled = true;
-			$$.getElementById('codeOTP').disabled = true;
+	function resendCodeOTP (message) {
+		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+		clearInterval(interval);
+		btnTrigger.disabled = true;
+		$$.getElementById('codeOTP').disabled = true;
 
-			$$.getElementById('resendCode').addEventListener('click', function(){
-				disableInputsForm(true, msgLoadingWhite);
-				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-				{
-					if (response.code == 0) {
-						btnTrigger.disabled = false;
-						btnTrigger.innerHTML = txtBtnTrigger;
-						verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-						$$.getElementById('codeOTP').disabled = false;
-						var countdown = verificationMsg.querySelector("span");
-						startTimer(15, countdown);
-					}
-					else{
-						notiSystem(response.title, response.msg, response.classIconName, response.data);
-						disableInputsForm(false, txtBtnTrigger);
-					}
-				});
+		$$.getElementById('resendCode').addEventListener('click', function(e){
+			e.preventDefault();
+
+			$$.getElementById('codeOTP').value = '';
+			disableInputsForm(true, msgLoadingWhite);
+			data.codeOTP = '';
+			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+			{
+				if (response.code == 0) {
+					btnTrigger.disabled = false;
+					btnTrigger.innerHTML = txtBtnTrigger;
+					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+					$$.getElementById('codeOTP').disabled = false;
+					var countdown = verificationMsg.querySelector("span");
+					startTimer(dataPreRegistry.setTimerOTP, countdown);
+				}
+				else{
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					disableInputsForm(false, txtBtnTrigger);
+				}
 			});
-		}
+		});
 	}
 });
 
