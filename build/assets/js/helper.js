@@ -263,3 +263,12 @@ var createElement = function (tagName, attrs) {
 
 	return el;
 }
+
+function formatCurrency(locales, style, currency, fractionDigits, number) {
+	var formatted = new Intl.NumberFormat(locales, {
+    style: style,
+    currency: currency,
+    minimumFractionDigits: fractionDigits
+	}).format(number);
+  return formatted;
+}

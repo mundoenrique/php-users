@@ -222,15 +222,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 });
 
-function formatCurrency(locales, style, currency, fractionDigits, number) {
-	var formatted = new Intl.NumberFormat(locales, {
-    style: style,
-    currency: currency,
-    minimumFractionDigits: fractionDigits
-	}).format(number);
-  return formatted;
-}
-
 function invokeChart(selector, cargos, abonos) {
 	var cargos, abonos;
 	if (selector[0] === movementsStats) {
