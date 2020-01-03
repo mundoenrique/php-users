@@ -18,12 +18,12 @@
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
-									<select id="typeDocument" class="custom-select form-control" name="typeDocument" <?=$statusListTypeDocument;?>>
+									<select id="typeDocumentUser" class="custom-select form-control" name="typeDocumentUser" <?=$statusListTypeDocument;?>>
 											<option selected="" value="0"><?= $typeDocument->descripcion;?></option>
 										</select>
 										<div class="help-block"></div>
 								<?php }else{?>
-									<select id="typeDocument" class="custom-select form-control" name="typeDocument">
+									<select id="typeDocumentUser" class="custom-select form-control" name="typeDocumentUser">
 										<option selected="" value="0">Seleccione</option>
 										<?php foreach ($typeDocument as $row) {?>
 										<option value="<?= $row->id;?>"><?= $row->descripcion;?></option>
@@ -36,6 +36,25 @@
 								<label for="idNumber">Documento de Identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-lg-3">
+								<label for="typeDocument">Tipo de Documento</label>
+								<?php
+									if ($statusListTypeDocument == 'disabled'){
+								?>
+									<select id="typeDocumentBussines" class="custom-select form-control" name="typeDocumentBussines" <?=$statusListTypeDocument;?>>
+											<option selected="" value="0"><?= $typeDocument->descripcion;?></option>
+										</select>
+										<div class="help-block"></div>
+								<?php }else{?>
+									<select id="typeDocumentBussines" class="custom-select form-control" name="typeDocumentBussines">
+										<option selected="" value="0">Seleccione</option>
+										<?php foreach ($typeDocument as $row) {?>
+										<option value="<?= $row->id;?>"><?= $row->descripcion;?></option>
+										<?php }?>
+									</select>
+									<div class="help-block"></div>
+								<?php }?>
 							</div>
 							<div class="form-group col-lg-3">
 								<label for="nitBussines">Nit de la Empresa</label>

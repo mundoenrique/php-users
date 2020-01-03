@@ -207,4 +207,46 @@ class Novo_Product_Model extends NOVO_Model
 			}
 		}
 	}
+
+	public function getFile_Product ($dataRequest) {
+		log_message('INFO', 'NOVO ExpenseReport Model: getPDF  method Initialized');
+
+		$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->modulo = 'tarjeta';
+		$this->dataAccessLog->operation = 'exportar movimientos';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+		$this->dataRequest->idOperation = $dataRequest->typeFile == 'pdf'? 5: 46;
+		$this->dataRequest->tarjeta = array (
+			'noTarjeta' => $dataRequest->noTarjeta,
+			'id_ext_per' => $this->session->userdata("idUsuario")
+		);
+		$this->dataRequest->mes = $dataRequest->frmMonth;
+		$this->dataRequest->anio = $dataRequest->frmYear;
+
+		$this->dataRequest->token = $this->session->userdata('token');
+
+		log_message("info", "Request getFile Product: " . json_encode($this->dataRequest));
+		$response = $this->sendToService('Product');
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->data = $response;
+					break;
+				case -150:
+					$this->response->code = -150;
+					$this->response->msg = $response->msg;
+					break;
+
+				default:
+					$this->response->code = 150;
+					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = '--';
+			}
+		}
+		return $this->response;
+	}
 }

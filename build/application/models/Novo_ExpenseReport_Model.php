@@ -96,7 +96,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 
 		$this->dataRequest->token = $this->session->userdata('token');
 
-		log_message("info", "Request dataReport Product: " . json_encode($this->dataRequest));
+		log_message("info", "Request getFile Expenses: " . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {

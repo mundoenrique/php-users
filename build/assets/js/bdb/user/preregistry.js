@@ -18,11 +18,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 
-			var typeDocument = $$.getElementById('typeDocument');
+			var typeDocumentUser = $$.getElementById('typeDocumentUser');
+			var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
 			var document_id = $$.getElementById('idNumber').value;
 
-			var codeTypeDocument = typeDocument.options[typeDocument.selectedIndex].value;
-			var abbrTypeDocument = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocument}).abreviatura
+			var codeTypeDocumentUser = typeDocumentUser.options[typeDocumentUser.selectedIndex].value;
+			var abbrTypeDocumentUser = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentUser}).abreviatura
+
+			var codeTypeDocumentBussines = typeDocumentBussines.options[typeDocumentBussines.selectedIndex].value;
+			var abbrTypeDocumentBussines = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentBussines}).abreviatura
 
 			disableInputsForm(true, msgLoadingWhite);
 
@@ -32,9 +36,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			data = {
 				userName: document_id + '' + formatDate_ddmmy(new Date),
+				codeTypeDocumentUser: codeTypeDocumentUser,
+				abbrTypeDocumentUser: abbrTypeDocumentUser,
 				id_ext_per: document_id,
-				codeTypeDocument: codeTypeDocument,
-				abbrTypeDocument: abbrTypeDocument,
+				codeTypeDocumentBussines: codeTypeDocumentBussines,
+				abbrTypeDocumentBussines: abbrTypeDocumentBussines,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
 				codeOTP: md5CodeOTP
@@ -166,7 +172,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$$.getElementById('idNumber').disabled = status;
 		$$.getElementById('telephoneNumber').disabled = status;
 		$$.getElementById('nitBussines').disabled = status;
-		$$.getElementById('typeDocument').disabled = status;
+		$$.getElementById('typeDocumentUser').disabled = status;
+		$$.getElementById('typeDocumentBussines').disabled = status;
 		$$.getElementById('acceptTerms').disabled = status;
 		btnTrigger.innerHTML = txtButton;
 		btnTrigger.disabled = status;

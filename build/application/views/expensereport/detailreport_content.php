@@ -1,5 +1,5 @@
-<form method="post">
-	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>' action=''>
+<form method="post" action=''>
+	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>' >
 	<input type='hidden' name='frmInitialDate' value=''>
 	<input type='hidden' name='frmFinalDate' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>

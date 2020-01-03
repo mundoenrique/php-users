@@ -128,7 +128,27 @@ class Product extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
- 		if (in_array("117",  $dataProduct['availableServices'])) {
+		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
+			$dataRequest = new stdClass();
+			$dataRequest->month = $_POST['frmMonth'];
+			$dataRequest->year = $_POST['frmYear'];
+			$dataRequest->typeFile = $_POST['frmTypeFile'];
+			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+
+			$this->load->model('Novo_Product_Model', 'modelLoad');
+			$response = $this->modelLoad->getFile_Product ($dataRequest);
+			switch ($response->code) {
+				case 0:
+					$oDate = new DateTime();
+					$dateFile = $oDate->format("YmdHis");
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'detalleMovimientos_'.$dateFile);
+					$expenses = 'ok';
+					break;
+
+				default:
+					redirect('detalle');
+			}
+		}elseif(in_array("117",  $dataProduct['availableServices'])) {
 			redirect('atencioncliente');
 		}
 

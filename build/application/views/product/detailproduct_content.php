@@ -2,6 +2,13 @@
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
+<form method="post" action=''>
+	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+	<input type='hidden' name='frmMonth' value=''>
+	<input type='hidden' name='frmYear' value=''>
+	<input type='hidden' name='frmTypeFile' value=''>
+</form>
+
 <div id="detail" class="detail-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -89,10 +96,10 @@
 					</div>
 					<ul class="stack-extra list-inline mb-0 flex items-center">
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="download" href="#download" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
 						</li>
 						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadxls" href="#downloadxls" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadXLS" href="#" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
 				</nav>

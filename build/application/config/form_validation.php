@@ -272,13 +272,23 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		],
 		[
-			'field' => 'codeTypeDocument',
-			'label' => 'codeTypeDocument',
+			'field' => 'codeTypeDocumentUser',
+			'label' => 'codeTypeDocumentUser',
 			'rules' => 'trim|required'
 		],
 		[
-			'field' => 'abbrTypeDocument',
-			'label' => 'abbrTypeDocument',
+			'field' => 'abbrTypeDocumentUser',
+			'label' => 'abbrTypeDocumentUser',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeTypeDocumentBussines',
+			'label' => 'codeTypeDocumentBussines',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'abbrTypeDocumentBussines',
+			'label' => 'abbrTypeDocumentBussines',
 			'rules' => 'trim|required'
 		]
 	],

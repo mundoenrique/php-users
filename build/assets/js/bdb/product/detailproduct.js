@@ -19,7 +19,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			transitStats = $('#transitStats'),
 			movementsToogle = $$.getElementById('movementsToogle'),
 			transitToogle = $$.getElementById('transitToogle'),
-			btnOptions = $$.querySelectorAll('.btn-options');
+			btnOptions = $$.querySelectorAll('.btn-options'),
+			btnExportPDF = $$.getElementById('downloadPDF'),
+			btnExportXLS = $$.getElementById('downloadXLS');
 
 	var	i, movementsPaginate, transitPaginate;
 
@@ -191,6 +193,32 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('filterYear').disabled = false;
 		}
 	});
+
+	btnExportPDF.addEventListener('click', function(e){
+		e.preventDefault();
+		$$.getElementsByName("frmTypeFile")[0].value = 'pdf';
+		processForm();
+
+	});
+
+	btnExportXLS.addEventListener('click', function(e){
+		e.preventDefault();
+		$$.getElementsByName("frmTypeFile")[0].value = 'xls';
+		processForm();
+
+	});
+
+	function processForm() {
+
+			var monthRequest = $$.getElementById('filterMonth').options[document.getElementById('filterMonth').selectedIndex].value
+			var yearRequest = $$.getElementById('filterYear').options[document.getElementById('filterYear').selectedIndex].value
+
+			$$.getElementsByName("frmMonth")[0].value = monthRequest == '0'? '': monthRequest;
+			$$.getElementsByName("frmYear")[0].value = yearRequest == '0'? '': yearRequest;
+
+			$$.getElementsByTagName('form')[1].submit();
+	}
+
 
 });
 
