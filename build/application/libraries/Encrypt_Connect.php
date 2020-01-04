@@ -99,6 +99,7 @@ class Encrypt_Connect {
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			               'Content-Type: text/plain',
 			               'Content-Length: ' . strlen($requestSerV))
@@ -110,16 +111,10 @@ class Encrypt_Connect {
 
 		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
-		$failResponse = json_decode($response);
-		if(is_object($failResponse->data)){
-			$response = $failResponse;
-			$fail = TRUE;
-		}
-
 		if ($httpCode !== 200 || !$response){
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError)?:'none');
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('RES_RC_DEFAULTESP_RC_DEFAULT');
+			$failResponse->rc = lang('RESP_DEFAULT_CODE');
 			$failResponse->msg = lang('RES_MESSAGE_SYSTEM');
 			$response = $failResponse;
 			$fail = TRUE;

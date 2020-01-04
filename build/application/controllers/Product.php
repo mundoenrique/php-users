@@ -158,7 +158,7 @@ class Product extends NOVO_Controller {
 			$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-			if ( $data->rc === "200" ) {
+			if (is_object($data) && $data->rc === "200" ) {
 
 				$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
 				$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);

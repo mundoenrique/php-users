@@ -123,7 +123,7 @@ class ServiceProduct extends NOVO_Controller {
 		}
 
 		$menuOptionsProduct = [
-			'117' => [
+			'120' => [
 				'id' => 'generate',
 				'text' => "<i class='icon-key block'></i>Generar <br>PIN"
 			],

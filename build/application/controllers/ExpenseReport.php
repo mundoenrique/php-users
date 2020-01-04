@@ -62,8 +62,8 @@ class ExpenseReport extends NOVO_Controller {
 		$dataRequest = new stdClass();
 		$dataRequest->tipoOperacion = 'RGR';
 
-		$this->load->model('Novo_Product_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_dataReport_Product($dataRequest);
+		$this->load->model('Novo_Product_Model', 'loadData');
+		$data = $this->loadData->callWs_dataReport_Product($dataRequest);
 
 		if (count($data) < 1) {
 			return '--';
@@ -71,7 +71,7 @@ class ExpenseReport extends NOVO_Controller {
 
 		$dataRequeried = [];
 		foreach($data as $row) {
-			if (!empty($card) && $card !== $row->noTarjeta) {
+			if (!empty($card) && $card !== $row->nroTarjeta) {
 				continue;
 			}
 			array_push($dataRequeried, [
@@ -125,6 +125,7 @@ class ExpenseReport extends NOVO_Controller {
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
+		$this->load->model('Novo_ExpenseReport_Model', 'modelExpense');
 
 		if (isset($_POST['frmInitialDate']) && isset($_POST['frmFinalDate'])){
 
@@ -133,8 +134,7 @@ class ExpenseReport extends NOVO_Controller {
 			$dataRequest->finalDate = $_POST['frmFinalDate'];
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
 
-			$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
-			$response = $this->modelLoad->getFile_ExpenseReport ($dataRequest);
+			$response = $this->modelExpense->getFile_ExpenseReport($dataRequest);
 			switch ($response->code) {
 				case 0:
 					$oDate = new DateTime();
@@ -156,8 +156,7 @@ class ExpenseReport extends NOVO_Controller {
 			$dataRequest->fechaInicial = '01/01/'.date("Y");
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
-			$this->load->model('Novo_ExpenseReport_Model', 'modelLoad');
-			$expenses = $this->modelLoad->callWs_getExpenses_ExpenseReport ($dataRequest);
+			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
 			if ($expenses->data === '--' || $expenses->code !== 0) {
 				$expenses = '';
 			}
