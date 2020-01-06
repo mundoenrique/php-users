@@ -28,7 +28,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 		defaultDate: 0
 	})
 	.on( "change", function() {
-		toDate.datepicker( "option", "minDate", getDate( this ) );
+		var date = getDate( this );
+		var currentMonth = date.getMonth();
+		var currentDate = date.getDate();
+		var currentYear = date.getFullYear();
+		var limitDate = new Date(currentYear, currentMonth+3, currentDate);
+		limitDate = (limitDate > new Date()) ? 0 : limitDate;
+		toDate.datepicker( "option", "minDate", getDate(this) );
+		toDate.datepicker( "option", "maxDate", limitDate );
+		toDate.datepicker( "option", "defaultDate", limitDate );
 	});
 
 	toDate = $( "#toDate" ).datepicker({
