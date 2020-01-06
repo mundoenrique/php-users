@@ -2,7 +2,7 @@
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
-<form method="post" action='<?php $this->config->item('base_url').'/downloaddetalle';?>'>
+<form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 	<input type='hidden' name='frmMonth' value=''>
 	<input type='hidden' name='frmYear' value=''>

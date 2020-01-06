@@ -39,8 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 
 		$this->countryUri = $this->uri->segment(1, 0) ?: 'default';
-		$this->render->rootHome = base_url($this->render->logged? 'bdb/vistaconsolidada': 'bdb/inicio');
-		$this->render->pathViewPreview = base_url('bdb/vistaconsolidada');
+		$this->render->rootHome = $this->render->logged? 'vistaconsolidada': 'inicio';
 
 		$this->countryConf = $this->config->item('country');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');

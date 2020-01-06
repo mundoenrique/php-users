@@ -171,6 +171,13 @@ class User extends NOVO_Controller {
 	public function preRegistry()
 	{
 		$view = 'preregistry';
+
+		if(!$this->session->userdata('logged_in')) {
+
+			redirect(base_url('inicio'), 'location');
+			exit();
+		}
+
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
 		if($this->config->item('language_form_validate')) {
 			array_push(
