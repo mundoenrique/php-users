@@ -35,11 +35,12 @@
 									}else{
 								?>
 									<p class="item-balance mb-0 h6 light text">
-									<?php 
+									<?php
+											echo lang('GEN_COIN').' ';
 										if ($row['availableBalance'] !== '--') {
-											echo lang('GEN_COIN') . ' ' .strval(number_format($row['availableBalance'],2,',','.')); 
+											echo strval(number_format($row['availableBalance'],2,',','.'));
 										}else{
-											echo lang('GEN_COIN').' '.$row['availableBalance'];
+											echo '---';
 										}
 									?>
 									</p>

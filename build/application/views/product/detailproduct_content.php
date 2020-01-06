@@ -28,21 +28,23 @@
 						<ul class="product-balance-group flex justify-between mb-0 list-inline">
 							<li class="list-inline-item">Actual
 								<span id="actual" class="product-balance block primary">
+									<?= lang('GEN_COIN').' '; ?>
 									<?= $data['actualBalance'] !== '--'?
-										lang('GEN_COIN').' '.strval(number_format($data['actualBalance'],2,',','.')):
-										$data['actualBalance'];?>
+										strval(number_format($data['actualBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 							<li class="list-inline-item">En Tránsito
 								<span id="bloqueado" class="product-balance block primary">
+								<?= lang('GEN_COIN').' '; ?>
 									<?= $data['ledgerBalance'] !== '--'?
-									lang('GEN_COIN').' '.strval(number_format($data['ledgerBalance'],2,',','.')): $data['ledgerBalance'];?>
+									strval(number_format($data['ledgerBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 							<li class="list-inline-item">Disponible
 								<span id="disponible" class="product-balance block primary">
+									<?= lang('GEN_COIN').' '; ?>
 									<?= $data['availableBalance'] !== '--'?
-									lang('GEN_COIN').' '.strval(number_format($data['availableBalance'],2,',','.')): $data['ledgerBalance'];?>
+									strval(number_format($data['availableBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 						</ul>
