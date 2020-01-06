@@ -1,41 +1,15 @@
 'use strict'
 var $$ = document;
-/**
- * lee una propiedad especifica de un elemento html
- * de no indicarse el elemento se toma por defecto el body
- *
- * @param {*} element  elemento al cual quiero extraer su propiedad
- * @param {*} property  propiedad a leer
- * @author pedro torres
- * @date 27/08/2019
- */
-function getPropertyOfElement(property, element) {
-	var element = element || 'body';
-	return $(element).attr(property);
-}
-
-// Navbar
 var toggleMenu = document.getElementsByClassName('navbar-toggler')[0],
 	collapseMenu = document.getElementsByClassName('navbar-collapse')[0];
-//icons
+
 var iconInfo = 'ui-icon-info';
 var iconSuccess = 'ui-icon-circle-check';
 var iconWarning = 'ui-icon-alert';
 var iconDanger = 'ui-icon-closethick';
-//app
-var baseURL = getPropertyOfElement('base-url');
-var baseAssets = getPropertyOfElement('asset-url');
-var country = getPropertyOfElement('country');
-var pais = getPropertyOfElement('pais');
-var showDetailsCompanies = getPropertyOfElement('type-over-detail-companies');
-var showRazonSocial = getPropertyOfElement('show-razon-social-detail-companies');
-var isoPais = pais;
-var prefixCountry = country !== 'bp' ? 'Empresas Online ' : '';
-var settingsCountry = { bp: 'Conexión Empresas', co: 'Colombia', pe: 'Perú', us: 'Perú', ve: 'Venezuela' };
-var strCountry = settingsCountry[country];
+
 var msgLoading = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
 var msgLoadingWhite = '<span class="spinner-border spinner-border-sm white" role="status" aria-hidden="true"></span>';
-
 
 var verb, who, where, data, title, msg, icon, data, dataResponse;
 
