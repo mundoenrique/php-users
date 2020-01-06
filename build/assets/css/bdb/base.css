@@ -3390,17 +3390,17 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	right: 20px;
 	bottom: 20px;
 	z-index: 2;
-	width: 55px;
+	width: 40px;
 	height: 25px;
-	background-size: 55px;
+	background-size: 40px;
 	background-position: bottom right;
 }
 
-.product-presentation .item-network.maestro,
-.product-presentation .item-network.mastercard {
-	width: 45px;
-	height: 35.5px;
-	background-size: 45px;
+.product-presentation .item-network.visa,
+.product-presentation .item-network.visa-electron {
+	width: 50px;
+	height: 25px;
+	background-size: 50px;
 }
 
 .dashboard-item {
@@ -3494,7 +3494,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .card-image {
-  width: 250px;
+  width: 234px;
 }
 
 .field-options {

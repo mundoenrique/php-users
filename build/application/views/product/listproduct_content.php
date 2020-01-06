@@ -8,7 +8,7 @@
 			<div class="pt-3">
 				<h2 class="h4 regular tertiary">Mis productos</h2>
 				<div class="line mt-1"></div>
-				<div id="dashboard" class="dashboard-items flex max-width-xl-5 mt-3 mx-auto flex-wrap justify-center">
+				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('detalle'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 						<input type='hidden' name='nroTarjeta' id='nroTarjeta' value=''>
@@ -35,11 +35,12 @@
 									}else{
 								?>
 									<p class="item-balance mb-0 h6 light text">
-									<?php 
+									<?php
+											echo lang('GEN_COIN').' ';
 										if ($row['availableBalance'] !== '--') {
-											echo lang('GEN_COIN') . ' ' .strval(number_format($row['availableBalance'],2,',','.')); 
+											echo strval(number_format($row['availableBalance'],2,',','.'));
 										}else{
-											echo lang('GEN_COIN').' '.$row['availableBalance'];
+											echo '---';
 										}
 									?>
 									</p>
