@@ -25,6 +25,10 @@ var decimalOptions = {
 
 $('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
 
+$('.big-modal').on('click', function(){
+	$('.cover-spin').show(0)
+});
+
 (function() {
 	var actualPage = window.location.pathname.split("/").pop();
 

@@ -22,7 +22,7 @@
 							foreach($data as $row){
 							$state = (in_array("120", $row['availableServices'])) ? ' inactive' : '';
 						?>
-							<div class="dashboard-item p-1 mx-1 mb-1<?= $state; ?>" id="<?= $row['noTarjeta'];?>" >
+							<div class="dashboard-item big-modal p-1 mx-1 mb-1<?= $state; ?>" id="<?= $row['noTarjeta'];?>" >
 								<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 								<div class="item-info <?= $row['marca'];?> p-2 h5 tertiary bg-white">
 									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>

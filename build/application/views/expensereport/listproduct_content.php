@@ -20,14 +20,14 @@
 						<?php
 							foreach($data as $row){
 						?>
-								<div class="dashboard-item p-1 mx-1 mb-1" id="<?= $row['nroTarjeta'];?>" >
+								<div class="dashboard-item big-modal p-1 mx-1 mb-1" id="<?= $row['nroTarjeta'];?>" >
 									<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-									<div class="item-info <?= $row['marca'];?> p-2 h5 tertiary bg-white">
+									<div class="item-info <?= strtolower($row['marca']);?> p-2 h5 tertiary bg-white">
 										<p class="item-category semibold primary">
-											<?= strtoupper($row['nomEmp']);?>
+											<?= strtoupper($row['tarjetaHabiente']);?>
 										</p>
 										<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara'];?></p>
-										<p class="item-cardnumber mb-0"><?= $row['marca'];?></p>
+										<p class="item-cardnumber mb-0"><?= strtoupper($row['nomEmp']);?></p>
 									</div>
 								</div>
 						<?php

@@ -77,6 +77,8 @@
     </div>
 	</div>
 
+	<div class="cover-spin" id=""></div>
+
 	<script>
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
