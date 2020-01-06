@@ -38,7 +38,9 @@ $('.big-modal').on('click', function(){
 		listaproducto: 'customerSupport',
 		vistaconsolidada: 'listProduct',
 		detalle: 'listProduct',
-		perfil: 'profile'
+		perfil: 'profile',
+		reporte: 'reports',
+		detallereporte: 'reports'
 	}
 
 	if ( actualPage !== 'inicio' && structureMenu.hasOwnProperty(actualPage)){
