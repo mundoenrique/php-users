@@ -66,6 +66,7 @@ $route['(:any)/cambiarclave'] = "user/changePassword";
 $route['(:any)/cambiarclaveprofile'] = "user/changePasswordProfile";
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/detalle'] = "product/detailProduct";
+$route['(:any)/downloaddetalle'] = "product/getFile";
 $route['(:any)/async-call'] = "callModels";
 $route['(:any)/listaproducto'] = "serviceProduct/listProduct";
 $route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";

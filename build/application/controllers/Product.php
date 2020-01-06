@@ -133,41 +133,20 @@ class Product extends NOVO_Controller {
 			redirect('atencioncliente');
 		}
 
-		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
-			$dataRequest = new stdClass();
-			$dataRequest->month = $_POST['frmMonth'];
-			$dataRequest->year = $_POST['frmYear'];
-			$dataRequest->typeFile = $_POST['frmTypeFile'];
-			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+		$dataProduct['movements'] = $this->transforNumberInArray ($movements);
+		$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
 
-			$this->load->model('Novo_Product_Model', 'modelLoad');
-			$response = $this->modelLoad->getFile_Product ($dataRequest);
-			if ( $response->code == 0) {
+		$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+		if (is_object($data) && $data->rc === "200" ) {
 
-					$oDate = new DateTime();
-					$dateFile = $oDate->format("YmdHis");
+			$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
+			$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
+			$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
 
-					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_C_79944439');
-					$respuestaTal = 'ok';
-			}
-		}else{
-
-			$this->load->model('Novo_Product_Model', 'modelLoad');
-			$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
-			$dataProduct['movements'] = $this->transforNumberInArray ($movements);
-			$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
-
-			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-			if (is_object($data) && $data->rc === "200" ) {
-
-				$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
-				$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
-				$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
-
-				$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
-				$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
-			}
-
+			$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
+			$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
 		}
 
 		$year =  intval(date("Y"));
@@ -184,6 +163,27 @@ class Product extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
+	public function getFile () 
+	{
+		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
+			$dataRequest = new stdClass();
+			$dataRequest->month = $_POST['frmMonth'];
+			$dataRequest->year = $_POST['frmYear'];
+			$dataRequest->typeFile = $_POST['frmTypeFile'];
+			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+
+			$this->load->model('Novo_Product_Model', 'modelLoad');
+			$response = $this->modelLoad->getFile_Product ($dataRequest);
+			if ( $response->code == 0) {
+
+					$oDate = new DateTime();
+					$dateFile = $oDate->format("YmdHis");
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_' . $dateFile);
+			}
+		}
+	}
+	
+
 	function transforNumberInArray ($transforArray)
 	{
 		if ($transforArray !== '--')
@@ -199,7 +199,12 @@ class Product extends NOVO_Controller {
 
 	function transforNumber ($transforNumber)
 	{
-		return (float)str_replace(',','', $transforNumber);
+		
+		if ($transforNumber !== '--') {
+
+			$transforNumber = (float)str_replace(',','', $transforNumber);
+		}
+		return $transforNumber;
 	}
 
 	function totalInTransactions ($transactions)
@@ -216,4 +221,6 @@ class Product extends NOVO_Controller {
 		}
 		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
 	}
+
+
 }
