@@ -30,9 +30,9 @@
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 						<div class="form-inline">
 							<label class="nowrap mb-0" for="fromDate">Mostrar desde</label>
-							<input type="text" id="fromDate" name="fromDate" class="mx-2 form-control">
+							<input type="text" id="fromDate" name="fromDate" class="form-control">
 							<label class="nowrap mb-0" for="toDate">Hasta</label>
-							<input type="text" id="toDate" name="toDate" class="mx-2 form-control">
+							<input type="text" id="toDate" name="toDate" class="form-control">
 							<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 						</div>
 					</div>
@@ -44,11 +44,11 @@
 							<input id="optionStats" type="radio" name="reportes" disabled> Gráfico
 						</label>
 					</div>
-					<ul class="stack-extra list-inline mb-0 flex items-center">
-						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadPDF" href="" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+					<ul class="stack list-inline mb-0 flex items-center">
+						<li class="stack-item px-1 list-inline-item rounded is-disabled">
+							<a id="downloadPDF" href="" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-file-pdf h5 mr-0"></span></a>
 						</li>
-						<li class="px-1 list-inline-item text border rounded">
+						<li class="stack-item px-1 list-inline-item rounded is-disabled">
 							<a id="downloadXLS" href="" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>
@@ -62,7 +62,7 @@
 							<span>Seleccione un rango de fecha a consultar.</span>
 						</div>
 
-						<div id="reportAnnual" class="feed content-anio">
+						<div id="reportAnnual" class="feed overflow-auto">
 						<?php if (!empty($expenses) && $expenses !== ''): ?>
 							<table class="feed-table">
 								<thead>
@@ -105,7 +105,7 @@
 						<?php endif; ?>
 						</div>
 
-						<div id="reportMonthly" class="feed content-mes">
+						<div id="reportMonthly" class="feed overflow-auto">
 							<table class="feed-table">
 								<thead>
 									<tr>

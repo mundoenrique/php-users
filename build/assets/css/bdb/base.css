@@ -2283,6 +2283,22 @@ i[class*=" icon-"]:before {
   }
 }
 
+.stack .stack-item {
+	color: var(--text-color);
+	border: var(--border-width) solid var(--border-color);
+	transition: .3s;
+}
+.stack .stack-item.is-disabled {
+	opacity: .5;
+	pointer-events: none;
+	cursor: default;
+}
+.stack .stack-item:hover {
+	background-color: var(--primary);
+	border-color: var(--primary);
+	color: var(--secondary);
+}
+
 /* Dropdown */
 
 .main-nav > ul {
@@ -2698,6 +2714,7 @@ td > button > i:hover{
   border: 1px solid transparent;
   background: transparent;
   box-shadow: none;
+	padding-top: var(--space-3) !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
@@ -2764,8 +2781,19 @@ table.dataTable tbody td.select-checkbox::before {
 	border-radius: 3px;
 }
 
+table.dataTable thead th.no-select-checkbox:before,
+table.dataTable tbody td.no-select-checkbox:before {
+  content: none !important;
+}
+
+table.dataTable thead th.no-select-checkbox:after,
+table.dataTable tbody td.no-select-checkbox:after {
+  content: none !important;
+}
+
 table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
-	background-color: var(--disabled-color) !important;
+	background-color: var(--border-color-2) !important;
+	color: var(--tertiary);
 }
 
 table.dataTable tr.selected td.select-checkbox::after {
@@ -3321,14 +3349,14 @@ a.ui-button:active,
 	display: flex;
 	min-height: 80px;
 	margin-bottom: 0;
-	padding: 1.5em 1em;
+	padding: 1.2em 1em 1em;
 }
 .ui-dialog-content .dialog-icon {
 	margin-right: 12px;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	margin-bottom: 8px;
-	padding: 0 1em .5em;
+	padding: 0 1em .6em;
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
@@ -3638,6 +3666,26 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 /* Reportes - CPO */
+
+.stack-form .form-inline .form-control {
+	width: 100px;
+	margin-left: var(--space-1);
+	margin-right: var(--space-1);
+}
+
+@media (min-width: 992px) {
+	.stack-form .form-inline .form-control {
+		width: 150px;
+		margin-left: var(--space-2);
+		margin-right: var(--space-2);
+	}
+}
+@media (min-width: 1200px) {
+	.stack-form .form-inline .form-control {
+		width: auto;
+	}
+}
+
 
 table.feed-table {
 	width: 100%;
