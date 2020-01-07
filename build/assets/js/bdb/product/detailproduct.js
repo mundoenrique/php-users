@@ -55,7 +55,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		invokeChart(transitStats);
 	}
 
-	// Botón para cambiar movimientos en tránsito
 	transitToogle.addEventListener('click', function(){
 		if ( !this.classList.contains('is-disabled') && !this.classList.contains('active') ) {
 			for (i = 0; i < btnOptions.length; ++i) {
@@ -73,7 +72,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	})
 
-	// Botón para cambiar a lista de movimientos
 	movementsToogle.addEventListener('click', function(){
 		if ( !this.classList.contains('active') ) {
 			for (i = 0; i < btnOptions.length; ++i) {
@@ -97,9 +95,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		var monthSelected = filterMonth.options[filterMonth.selectedIndex];
 		var yearSelected = filterYear.options[filterYear.selectedIndex];
-
-		var totalIncome = 0;
-		var totalExpense = 0;
 
 		var dataRequest = {
 			noTarjeta: data.noTarjeta,

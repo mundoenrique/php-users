@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$lang['GEN_NOT_RENDER_MOBILE']= 'Para mejor experiencia descarga nuestra app';
+$lang['GEN_NOT_RENDER_BROWSER']= 'Actualiza tu browser por favor';
+
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
 $lang['GEN_CONTRACTED_SYSTEM_NAME']= 'CPO';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
