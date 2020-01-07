@@ -103,9 +103,14 @@ class ExpenseReport extends NOVO_Controller {
 		}
 		$dataProduct = [];
 
+		array_push(
+			$this->includeAssets->cssFiles,
+			"third_party/dataTables"
+		);
 		array_push (
 			$this->includeAssets->jsFiles,
 			"third_party/kendo.dataviz",
+			"third_party/dataTables-1.10.20",
 			"$this->countryUri/expensereport/$view",
 			"third_party/jquery.validate",
 			"validate-forms",
