@@ -92,16 +92,10 @@ $(function(){
 	// FUNCION PARA ACTIVAR CHECKBOX DE CONDICIONES DE ACUERDO A SELECCIÓN DE PAIS
 
 	$('#iso').on('change', function(evt) {
+		$(this).find('#def-country').remove();
+		$("#accept-terms").prop('checked', false).removeAttr('disabled');
+		$('#condiciones').removeClass('label-disabled');
 		pais = $('option:selected', this);
-		acceptance = $("#accept-terms");
-		acceptance.removeAttr('checked');
-
-		if (this.selectedIndex > 0) {
-			acceptance.prop('disabled', false);
-			$('#condiciones').removeClass('label-disabled');
-		} else {
-			acceptance.prop('disabled', true);
-		}
 	});
 
 	$('.iso2').on('change', function(evt) {
