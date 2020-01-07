@@ -2283,6 +2283,22 @@ i[class*=" icon-"]:before {
   }
 }
 
+.stack .stack-item {
+	color: var(--text-color);
+	border: var(--border-width) solid var(--border-color);
+	transition: .3s;
+}
+.stack .stack-item.is-disabled {
+	opacity: .5;
+	pointer-events: none;
+	cursor: default;
+}
+.stack .stack-item:hover {
+	background-color: var(--primary);
+	border-color: var(--primary);
+	color: var(--secondary);
+}
+
 /* Dropdown */
 
 .main-nav > ul {

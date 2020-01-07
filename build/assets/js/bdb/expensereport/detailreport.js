@@ -12,6 +12,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			chart = $('#chart'),
 			noRecords = $$.getElementById('noRecords'),
 			btnOptions = $$.querySelectorAll('.btn-options'),
+			stackItems = $$.querySelectorAll('.stack-item'),
 			detailToogle = $$.getElementById('detailToogle'),
 			statsToogle = $$.getElementById('statsToogle');
 
@@ -97,6 +98,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.data.listaGrafico[0]);
 		statsToogle.classList.remove('is-disabled');
 		statsToogle.querySelector('input').disabled = false;
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.remove('is-disabled');
+		}
 	} else {
 		noRecords.classList.remove('none');
 	}
@@ -152,6 +156,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		noRecords.classList.add('none');
 		statsToogle.classList.add('is-disabled');
 		statsToogle.querySelector('input').disabled = true;
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.add('is-disabled');
+		}
 		detailToogle.classList.add('active');
 		statsToogle.classList.remove('active');
 		results.classList.remove('none');
@@ -211,6 +218,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
 					statsToogle.classList.remove('is-disabled');
 					statsToogle.querySelector('input').disabled = false;
+					for (i = 0; i < stackItems.length; ++i) {
+						stackItems[i].classList.remove('is-disabled');
+					}
 					break;
 
 				case 1:
