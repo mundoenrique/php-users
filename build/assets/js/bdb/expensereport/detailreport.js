@@ -15,7 +15,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			detailToogle = $$.getElementById('detailToogle'),
 			statsToogle = $$.getElementById('statsToogle');
 
-	var i, jsonChart, fromDate, toDate, dateFormat = "dd/mm/yy";
+	var i, jsonChart, dateFormat = "dd/mm/yy";
+	var fromDate, toDate, startDate, endDate;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -25,26 +26,27 @@ $$.addEventListener('DOMContentLoaded', function(){
 	// Da formato a rango de fechas
 	fromDate = $( "#fromDate" ).datepicker({
 		maxDate: 0,
-		defaultDate: 0
-	})
-	.on( "change", function() {
-		var date = getDate( this );
-		var currentMonth = date.getMonth();
-		var currentDate = date.getDate();
-		var currentYear = date.getFullYear();
-		var limitDate = new Date(currentYear, currentMonth+3, currentDate);
-		limitDate = (limitDate > new Date()) ? 0 : limitDate;
-		toDate.datepicker( "option", "minDate", getDate(this) );
-		toDate.datepicker( "option", "maxDate", limitDate );
-		toDate.datepicker( "option", "defaultDate", limitDate );
+		defaultDate: 0,
+		onSelect: function() {
+			endDate = new Date(getDate(this).setMonth(getDate(this).getMonth() + 3));
+			endDate = (endDate > new Date()) ? 0 : endDate ;
+
+			toDate.datepicker( "option", "minDate", getDate(this) );
+			toDate.datepicker( "option", "maxDate", endDate );
+			toDate.datepicker( "option", "defaultDate", getDate(this) );
+		}
 	});
 
 	toDate = $( "#toDate" ).datepicker({
 		maxDate: 0,
-		defaultDate: 0
-	})
-	.on( "change", function() {
-		fromDate.datepicker( "option", "maxDate", getDate( this ) );
+		defaultDate: 0,
+		onSelect: function() {
+			startDate = new Date(getDate(this).setMonth(getDate(this).getMonth() - 3));
+
+			fromDate.datepicker( "option", "maxDate", getDate(this) );
+			fromDate.datepicker( "option", "minDate", startDate );
+			fromDate.datepicker( "option", "defaultDate", getDate(this) );
+		}
 	});
 
 	jsonChart = {
