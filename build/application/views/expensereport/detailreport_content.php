@@ -30,9 +30,9 @@
 					<div class="stack-form mr-auto flex items-center" id="period-form">
 						<div class="form-inline">
 							<label class="nowrap mb-0" for="fromDate">Mostrar desde</label>
-							<input type="text" id="fromDate" name="fromDate" class="mx-2 form-control">
+							<input type="text" id="fromDate" name="fromDate" class="form-control">
 							<label class="nowrap mb-0" for="toDate">Hasta</label>
-							<input type="text" id="toDate" name="toDate" class="mx-2 form-control">
+							<input type="text" id="toDate" name="toDate" class="form-control">
 							<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 							<span>Seleccione un rango de fecha a consultar.</span>
 						</div>
 
-						<div id="reportAnnual" class="feed content-anio">
+						<div id="reportAnnual" class="feed overflow-auto">
 						<?php if (!empty($expenses) && $expenses !== ''): ?>
 							<table class="feed-table">
 								<thead>
@@ -105,7 +105,7 @@
 						<?php endif; ?>
 						</div>
 
-						<div id="reportMonthly" class="feed content-mes">
+						<div id="reportMonthly" class="feed overflow-auto">
 							<table class="feed-table">
 								<thead>
 									<tr>

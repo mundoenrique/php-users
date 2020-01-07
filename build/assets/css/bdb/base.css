@@ -3667,6 +3667,26 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 /* Reportes - CPO */
 
+.stack-form .form-inline .form-control {
+	width: 100px;
+	margin-left: var(--space-1);
+	margin-right: var(--space-1);
+}
+
+@media (min-width: 992px) {
+	.stack-form .form-inline .form-control {
+		width: 150px;
+		margin-left: var(--space-2);
+		margin-right: var(--space-2);
+	}
+}
+@media (min-width: 1200px) {
+	.stack-form .form-inline .form-control {
+		width: auto;
+	}
+}
+
+
 table.feed-table {
 	width: 100%;
 	margin-bottom: 1rem;

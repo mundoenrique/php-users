@@ -96,9 +96,9 @@
 							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
 						</label>
 					</div>
-					<ul class="stack-extra list-inline mb-0 flex items-center">
-						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+					<ul class="stack list-inline mb-0 flex items-center">
+						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
+							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-file-pdf h5 mr-0"></span></a>
 						</li>
 						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
 							<a id="downloadXLS" href="#" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
