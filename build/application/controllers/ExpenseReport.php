@@ -103,10 +103,6 @@ class ExpenseReport extends NOVO_Controller {
 		}
 		$dataProduct = [];
 
-		array_push(
-			$this->includeAssets->cssFiles,
-			"third_party/dataTables"
-		);
 		array_push (
 			$this->includeAssets->jsFiles,
 			"third_party/kendo.dataviz",

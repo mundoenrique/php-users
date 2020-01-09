@@ -203,7 +203,7 @@ class Novo_Product_Model extends NOVO_Model
 					return $response->cuentaOrigen;
 					break;
 				default:
-					return '--';
+					return [];
 			}
 		}
 	}

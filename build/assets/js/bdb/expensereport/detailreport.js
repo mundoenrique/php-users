@@ -16,7 +16,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			detailToogle = $$.getElementById('detailToogle'),
 			statsToogle = $$.getElementById('statsToogle');
 
-	var i, jsonChart, dateFormat = "dd/mm/yy";
+	var i, jsonChart, jsonDataTables, dateFormat = "dd/mm/yy";
 	var fromDate, toDate, startDate, endDate;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
@@ -91,8 +91,44 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
   }
 
+	jsonDataTables = {
+		"ordering": false,
+		"pagingType": "full_numbers",
+		"autoWidth": false,
+		"language": {
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registros",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningún dato disponible en esta tabla",
+			"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"slengthMenu": "Mostrar _MENU_ registros por pagina",
+			"sSearch": "",
+			"sSearchPlaceholder": "Buscar...",
+			"sUrl": "",
+			"sInfoThousands": ",",
+			"sLoadingRecords": "Cargando...",
+			"sprocessing": "Procesando ...",
+			"oPaginate": {
+				"sFirst": "Primera",
+				"sLast": "Última",
+				"sNext": "»",
+				"sPrevious": "«"
+			},
+			"oAria": {
+				"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			},
+			"select": {
+				"rows": "%d Lote seleccionado"
+			}
+		}
+	}
 	// Muestra reportes y genera gráfica de estadísticas
 	if (reportAnnual.querySelector(".feed-table")) {
+		$('#reportAnnual table').DataTable(jsonDataTables);
 		reportAnnual.classList.add('fade-in');
 
 		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.data.listaGrafico[0]);
@@ -213,6 +249,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = formatterTotalGeneral;
 					trTotales.appendChild(td);
 
+					$('#reportMonthly table').DataTable(jsonDataTables);
 					reportMonthly.classList.add('fade-in');
 
 					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
