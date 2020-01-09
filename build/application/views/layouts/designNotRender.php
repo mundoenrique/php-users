@@ -14,7 +14,7 @@
 <body>
   <header class="main-head">
     <nav class="navbar">
-      <a class="navbar-brand"><img src="assets/img/bdb/img-logo.svg" alt="Logo Brand"></a>
+      <a class="navbar-brand"><img src="<?= base_url($rootHome);?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
     </nav>
   </header>
 
@@ -26,11 +26,11 @@
 
 	<footer class="main-footer">
     <div>
-      <img src="assets/images/bdb/img-mark.svg" alt="Logo Superintendencia">
+      <img src="<?= $this->asset->insertFile('img-mark.svg','img',$countryUri); ?>" alt="Logo Superintendencia">
     </div>
     <div>
-      <img src="assets/images/bdb/img-bogota_white.svg" alt="Logo Banco de Bogotá">
-      <img src="assets/images/bdb/img-pci_compliance.svg" alt="Logo PCI">
+      <img src="<?= $this->asset->insertFile('img-bogota_white.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá">
+      <img src="<?= $this->asset->insertFile('img-pci_compliance.svg','img',$countryUri); ?>" alt="Logo PCI">
       <span>© Todos los derechos reservados. Banco de Bogotá - 2019.</span>
     </div>
   </footer>

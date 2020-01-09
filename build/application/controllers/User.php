@@ -340,7 +340,7 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO Controller: notRender Method Initialized');
 
 		$this->includeAssets->cssFiles = [
-			"$this->countryUri/update"
+			"$this->countryUri/notrender"
 		];
 		$this->render->viewPage = [$view];
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
