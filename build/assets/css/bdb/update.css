@@ -1,0 +1,188 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../../fonts/bdb/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../fonts/bdb/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../../fonts/bdb/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../../fonts/bdb/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: "NovoPayment Glyphs";
+	font-style: normal;
+	font-weight: normal;
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #7b7b7b;
+  text-align: left;
+  background-color: #f6f3f1;
+}
+
+header.main-head {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 3.75rem;
+  background-color: #012c71;
+  font-weight: 300;
+}
+
+.navbar {
+	position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+	flex-wrap: wrap;
+  flex-flow: row nowrap;
+	align-items: center;
+  justify-content: flex-start;
+	padding: .5rem 2.5rem;
+}
+
+.navbar-brand {
+	display: inline-block;
+	margin-right: 1rem;
+	padding: .375rem 0;
+}
+
+.navbar-brand img {
+  height: 2rem;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.update-content {
+  min-height: calc(100vh - 3.75rem - 2.75rem);
+  display: flex;
+  padding: 3.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-content > div {
+  display: flex;
+  margin-bottom: 3.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-update {
+  display: inline-flex;
+	height: auto;
+	width: auto;
+	font-family: "NovoPayment Glyphs";
+	font-size: 5rem;
+	font-style: normal;
+	font-weight: normal;
+	text-align: center;
+	line-height: auto;
+	vertical-align: middle;
+}
+
+.icon-update::before { content: "\e00d"; }
+
+h1, h2 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 1.5rem;
+  color: #012c71;
+}
+
+h2 {
+  font-size: 1.25rem;
+  color: #435168;
+}
+
+footer.main-footer {
+	display: flex;
+	padding: 2rem 2.5rem;
+	color: #fff;
+	background-color: #012c71;
+}
+
+footer.main-footer div:nth-child(1) {
+  display: flex;
+  padding-right: 1rem;
+}
+
+footer.main-footer div:nth-child(2) {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer.main-footer div:nth-child(2) img:first-child {
+  order: -1;
+}
+
+footer.main-footer div:nth-child(2) img:nth-child(2) {
+  order: 1;
+}
+
+footer.main-footer div:nth-child(2) span {
+  min-width: 0;
+  min-height: 0;
+  margin-top: .5rem;
+  font-size: .75rem;
+  text-align: center;
+  white-space: nowrap;
+  order: 1;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 992px) {
+	footer.main-footer div:nth-child(1) {
+    padding-right: 0;
+  }
+
+  footer.main-footer div:nth-child(2) span {
+    order: 0;
+    flex: none;
+  }
+}
