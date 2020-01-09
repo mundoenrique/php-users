@@ -30,6 +30,19 @@ $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['channel'] = 'personasWeb';
+
+$config['scores_recapcha'] = [
+	'development' => [
+		'score' => 0.2
+	],
+	'testing' => [
+		'score' => 0.2
+	],
+	'production' => [
+		'score' => 0.2
+	],
+];
+
 //url API
 $config['urlAPI'] = URL_API;
 //Credenciales oauth

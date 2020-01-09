@@ -115,9 +115,12 @@ class Novo_User_Model extends NOVO_Model
 
 		$logMessage = 'NOVO [' . $dataRequest->user . '] RESPONSE: recaptcha: País: "' . $this->config->item('country');
 		$logMessage .= '", Score: "' . $result["score"] . '", Hostname: "' . $result["hostname"] . '"';
+		$logMessage .= '", Environment: "' . ENVIRONMENT . '"';
 		log_message('DEBUG', $logMessage);
 
-		if ($result["score"] <= 0) {
+		$configScoreReCaptcha = $this->config->item('scores_recapcha')[ENVIRONMENT];
+
+		if ($result["score"] <= $configScoreReCaptcha['score']) {
 
 			$this->response->owner = 'captcha';
 			$this->response->code = 4;

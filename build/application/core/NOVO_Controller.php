@@ -61,7 +61,11 @@ class NOVO_Controller extends CI_Controller {
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
 
-		$this->checkBrowser($class, $method);
+		$locationCheck = ['user/login', 'user/recoveryAccess', 'user/preRegistry'];
+
+		if (in_array($class.'/'.$method, $locationCheck)) {
+			$this->checkBrowser();
+		}
 
 		$this->render->idleSession = $this->session->userdata('logged_in')? $this->config->item('timeIdleSession'): 0;
 
@@ -179,19 +183,13 @@ class NOVO_Controller extends CI_Controller {
 		return $this->modelLoaded->$method($params);
 	}
 
-	protected function checkBrowser ($class, $method) {
+	protected function checkBrowser () {
 
-		$locationCheck = ['user/login', 'user/recoveryAccess', 'user/preRegistry'];
-
-		if (in_array($class.'/'.$method, $locationCheck)) {
-
-			$infoBrowser = $this->tool_browser->validateBrowser();
-			if ( $infoBrowser['platform'] === 'mobile') {
-				redirect(base_url().'sugerencia/m','location', 301);
-
-			}elseif (!$infoBrowser['valid']) {
-				redirect(base_url().'sugerencia/b','location', 301);
-			}
+		$infoBrowser = $this->tool_browser->validateBrowser();
+		if ( $infoBrowser['platform'] === 'mobile') {
+			redirect(base_url().'sugerencia/m','location', 301);
+		}elseif (!$infoBrowser['valid']) {
+			redirect(base_url().'sugerencia/b','location', 301);
 		}
 	}
 }

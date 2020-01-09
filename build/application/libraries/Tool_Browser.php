@@ -27,7 +27,7 @@ class Tool_Browser {
 			'Edge' => 14,
 			'Mozilla Firefox' => 30,
 			'Google Chrome' => 48,
-			'Apple Safari' => 4,
+			'Apple Safari' => 10,
 			'Opera' => 35
 		];
 
