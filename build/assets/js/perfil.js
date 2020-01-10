@@ -1012,10 +1012,12 @@ $(function(){
 
 	// MODAL TERMINOS Y CONDICIONES
 	$(".label-inline").on("click", "a", tycModal);
+
 	$('#tyc').on('click', function(){
 		tycModal();
 		$('#tyc').off('click');
 	});
+
 	if($('#tyc').is(':checked')) {
 		$('#tyc')
 			.off('click')

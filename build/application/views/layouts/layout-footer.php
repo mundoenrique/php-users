@@ -9,7 +9,7 @@
         <div class="foot-wrapper-top">
             <nav id="foot-menu">
                 <ul class="menu">
-                    <?php if ($this->session->userdata('idUsuario') !== false): ?>
+                    <?php if ($this->session->userdata('idUsuario') !== false && isset($pais)): ?>
                         <li class="menu-item terms">
                             <label class="label-inline condiciones-g" id="condiciones-g" for="accept-terms"><a href="#" rel="section">Condiciones de Uso</a></label>
                         </li>
@@ -185,3 +185,25 @@
 
 
 </div>
+
+<script>
+	function tycModal(){
+		$("#dialog-tc").dialog({
+			dialogClass: "cond-serv",
+			modal: "true",
+			width: "940px",
+			open: function(event, ui){
+				$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			},
+		});
+		$('html, body').animate({scrollTop: $('body').offset().top}, 0);
+		// $('contenedor').css({
+		// 	"position": "fixed"
+		// });
+		$(".cond-serv").css("top","50px");
+		$("#ok").click(function(){
+			$("#dialog-tc").dialog("close");
+		});
+	}
+	$('#condiciones-g').on('click', tycModal);
+</script>
