@@ -95,6 +95,11 @@ if ( ! function_exists('insert_image_cdn'))
 		$filename = $filename.'.png';
 		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
 		$version = '';
+		log_message('INFO', '----------------'.json_encode(file_exists($filepath)));
+		if (!file_exists($filepath)) {
+			$filename = 'default.png';
+			$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
+		}
 		if (file_exists($filepath)) {
 			$version = '?v='.date('Ymd-U', filemtime($filepath));
 		}

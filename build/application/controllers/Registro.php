@@ -29,7 +29,7 @@ class Registro extends CI_Controller {
 				default: $code='default';
 			}
 
-			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
+			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') == false) {
 				$this->load->helper('url');
 
 				$cookie = array(
