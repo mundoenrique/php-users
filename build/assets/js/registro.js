@@ -92,16 +92,10 @@ $(function(){
 	// FUNCION PARA ACTIVAR CHECKBOX DE CONDICIONES DE ACUERDO A SELECCIÓN DE PAIS
 
 	$('#iso').on('change', function(evt) {
+		$(this).find('#def-country').remove();
+		$("#accept-terms").prop('checked', false).removeAttr('disabled');
+		$('#condiciones').removeClass('label-disabled');
 		pais = $('option:selected', this);
-		acceptance = $("#accept-terms");
-		acceptance.removeAttr('checked');
-
-		if (this.selectedIndex > 0) {
-			acceptance.prop('disabled', false);
-			$('#condiciones').removeClass('label-disabled');
-		} else {
-			acceptance.prop('disabled', true);
-		}
 	});
 
 	$('.iso2').on('change', function(evt) {
@@ -953,20 +947,33 @@ $(function(){
 	// Funcion para obtener lista de paises
 
 	function getPaises() {
-		var cpo_cook = decodeURIComponent(
-			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		if(skin != 'pichincha') {
+			var cpo_cook = decodeURIComponent(
+				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
-
-		$.post(base_url +"/registro/listado",{cpo_name: cpo_cook},function(response){
-
-			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-
-			$.each(data.listaPaises, function(pos,item){
-				if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
-				var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-				$("#iso").append(lista);
+			var countries = $('#iso');
+			var defCountry = countries.find('#def-country');
+			$.post(base_url+"/registro/listado", {cpo_name: cpo_cook}, function(response){
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+				if(data.rc!=0){
+					defCountry.text('No se obtuvo la lista');
+					return;
+				}
+				$.each(data.listaPaises, function(pos,item){
+					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
+					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+					countries.append(lista);
+				});
+				countries.attr('disabled', false);
+				defCountry.text('Seleccione');
+			})
+			.fail(function() {
+				defCountry.text('No se obtuvo la lista');
 			});
-		});
+		} else {
+			$('#condiciones').removeClass('label-disabled');
+			$("#accept-terms").prop('disabled', false)
+		}
 	} //GET PAISES
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
