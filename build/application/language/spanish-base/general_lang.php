@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['GEN_NOT_RENDER_MOBILE']= 'Descarga la aplicación';
-$lang['GEN_NOT_RENDER_MOBILE_MSG']= 'Esta aplicación no es compatible con su dispositivo. <br>
-Por favor descargue nuestra app.';
+$lang['GEN_NOT_RENDER_MOBILE_MSG']= 'Esta aplicación no es compatible con tu dispositivo. <br>
+Por favor descarga nuestra app.';
 $lang['GEN_NOT_RENDER_BROWSER']= 'Actualiza tu navegador';
-$lang['GEN_NOT_RENDER_BROWSER_MSG']= 'Esta aplicación no es compatible con su versión del navegador. <br>
+$lang['GEN_NOT_RENDER_BROWSER_MSG']= 'Esta aplicación no es compatible con la versión de tu navegador. <br>
 Para una mejor experiencia utilice uno de estos navegadores:';
 
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
