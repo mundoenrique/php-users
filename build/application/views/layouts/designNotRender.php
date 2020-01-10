@@ -14,7 +14,7 @@
 <body>
   <header class="main-head">
     <nav class="navbar">
-      <a class="navbar-brand"><img src="<?= base_url($rootHome);?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
+      <a class="navbar-brand"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
     </nav>
   </header>
 
@@ -25,15 +25,15 @@
 	?>
 
 	<footer class="main-footer">
-    <div>
-      <img src="<?= $this->asset->insertFile('img-mark.svg','img',$countryUri); ?>" alt="Logo Superintendencia">
-    </div>
-    <div>
-      <img src="<?= $this->asset->insertFile('img-bogota_white.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá">
-      <img src="<?= $this->asset->insertFile('img-pci_compliance.svg','img',$countryUri); ?>" alt="Logo PCI">
-      <span>© Todos los derechos reservados. Banco de Bogotá - 2019.</span>
-    </div>
-  </footer>
+		<div class="flex">
+			<img src="<?= $this->asset->insertFile('img-mark.svg','img',$countryUri); ?>" alt="Logo Superintendencia">
+		</div>
+		<div class="flex flex-auto flex-wrap justify-around items-center">
+			<img class="order-first" src="<?= $this->asset->insertFile('img-bogota_white.svg','img',$countryUri); ?>" alt="Logo Banco de Bogotá">
+			<img class="order-1" src="<?= $this->asset->insertFile('img-pci_compliance.svg','img',$countryUri); ?>" alt="Logo PCI">
+			<span class="copyright-footer flex-auto order-1">© Todos los derechos reservados. Banco de Bogotá - 2019.</span>
+		</div>
+	</footer>
 </body>
 
 </html>
