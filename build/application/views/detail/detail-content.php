@@ -1,5 +1,7 @@
 <?php
 $country = $this->session->userdata('pais');
+$CI =& get_instance();
+$cdnPath = $CI->config->item('base_path_cdn');
 $cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
@@ -12,6 +14,13 @@ $cpo_cook = $this->security->get_csrf_hash();
 					<section>
 						<div class="group" id="balance">
 							<div class="product-presentation">
+							<?php
+								 $filepath = $cdnPath.'img/products/'.$country.'/'.$producto.'.png';
+								if(!file_exists($filepath))
+								$producto = 'default';
+								$filepath = $cdnPath.'img/products/'.$country.'/'.$producto.'.png';
+
+								?>
 								<img src="<?php echo $this->config->item('base_url_cdn').'img/products/'.$this->session->userdata('pais').'/'.$producto.'.png'; ?>" width="200" height="130" alt="" />
 								<div class="product-network <?php echo $marca; ?>"><?php echo $marca; ?></div>
 							</div>
