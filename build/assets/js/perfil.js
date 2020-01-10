@@ -185,7 +185,7 @@ $(function(){
 			'Junio',
 			'Julio',
 			'Agosto',
-			'Septiempre',
+			'Septiembre',
 			'Octubre',
 			'Noviembre',
 			'Diciembre'
@@ -1445,23 +1445,6 @@ function systemDialog(title, msg, action) {
 				break;
 
 		}
-	});
-}
-
-function tycModal() {
-	$("#dialog-tc").dialog({
-		dialogClass: "cond-serv",
-		modal:"true",
-		width:"940px",
-		draggable:false,
-		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
-	});
-	$('html, body').animate({
-		scrollTop: $('body').offset().top
-	}, 0);
-	$(".cond-serv").css("top","50px");
-	$("#ok").click(function(){
-		$("#dialog-tc").dialog("close");
 	});
 }
 
