@@ -5883,3 +5883,62 @@ hr{
   left:0;
   z-index:101;
 }
+
+/*ESTILOS NUEVO MENU L.M*/
+.nav {
+	float: right;
+	}
+
+	ul, ol{
+	 list-style:none;
+	}
+	.nav li a {
+		background-color:#0e5b8c;
+		color:#7eafcef2;
+		text-decoration:none;
+		padding:7px 8px;
+		display:block;
+		font-size: 13.6px;
+	}
+	.nav > li {
+		float:left;
+		padding-right: 11px;
+		line-height: initial;
+	}
+
+	.nav li a:hover {
+		background-color:#0e5b8c;
+	}
+	.nav li ul {
+		display:none;
+		position:absolute;
+		min-width:120px;
+		border-radius: 5px
+	}
+	.nav li:hover > ul {
+		display:block;
+	}
+	.nav li ul li{
+		position:relative;
+	}
+	.nav li ul li ul{
+		right:-140px;
+		top:0px;
+	}
+	.hover:hover {
+		color:#ffffff!important;
+	}
+	.hover2:hover {
+		color:#ffffff
+
+	}
+	.actual {
+		color:#ffffff!important;
+	}
+	.icon {
+		content: "\3b";
+	}
+
+	.div-large {
+		width: 330px;
+	}
