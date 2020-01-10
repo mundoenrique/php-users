@@ -344,7 +344,9 @@ class User extends NOVO_Controller {
 		];
 		$this->render->viewPage = [$view];
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
-		$this->render->reason = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
+		$this->render->reason = $reason;
+		$this->render->reasonTitle = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
+		$this->render->reasonMessage = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
 
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('layouts/designNotRender', $this->render);
