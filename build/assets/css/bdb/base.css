@@ -2850,8 +2850,8 @@ table.dataTable tr.selected td.select-checkbox::after {
 }
 
 table.dataTable tbody tr td {
-	padding-right:  4px !important;
-	padding-left:  4px !important;
+	padding-right: 4px !important;
+	padding-left: 4px !important;
 }
 
 table.dataTable, table.dataTable th, table.dataTable td {
@@ -3741,7 +3741,7 @@ table.feed-table {
 
 table.feed-table td,
 table.feed-table th {
-	padding: .5rem .75rem;
+	padding: .5rem .25rem;
 	white-space: nowrap;
 	vertical-align: middle;
 }

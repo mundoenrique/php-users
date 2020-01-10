@@ -93,6 +93,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	jsonDataTables = {
 		"ordering": false,
+		"searching": false,
 		"pagingType": "full_numbers",
 		"autoWidth": false,
 		"language": {
