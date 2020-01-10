@@ -12,10 +12,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 			chart = $('#chart'),
 			noRecords = $$.getElementById('noRecords'),
 			btnOptions = $$.querySelectorAll('.btn-options'),
+			stackItems = $$.querySelectorAll('.stack-item'),
 			detailToogle = $$.getElementById('detailToogle'),
 			statsToogle = $$.getElementById('statsToogle');
 
-	var i, jsonChart, fromDate, toDate, dateFormat = "dd/mm/yy";
+	var i, jsonChart, jsonDataTables, dateFormat = "dd/mm/yy";
+	var fromDate, toDate, startDate, endDate;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -25,18 +27,27 @@ $$.addEventListener('DOMContentLoaded', function(){
 	// Da formato a rango de fechas
 	fromDate = $( "#fromDate" ).datepicker({
 		maxDate: 0,
-		defaultDate: 0
-	})
-	.on( "change", function() {
-		toDate.datepicker( "option", "minDate", getDate( this ) );
+		defaultDate: 0,
+		onSelect: function() {
+			endDate = new Date(getDate(this).setMonth(getDate(this).getMonth() + 3));
+			endDate = (endDate > new Date()) ? 0 : endDate ;
+
+			toDate.datepicker( "option", "minDate", getDate(this) );
+			toDate.datepicker( "option", "maxDate", endDate );
+			toDate.datepicker( "option", "defaultDate", getDate(this) );
+		}
 	});
 
 	toDate = $( "#toDate" ).datepicker({
 		maxDate: 0,
-		defaultDate: 0
-	})
-	.on( "change", function() {
-		fromDate.datepicker( "option", "maxDate", getDate( this ) );
+		defaultDate: 0,
+		onSelect: function() {
+			startDate = new Date(getDate(this).setMonth(getDate(this).getMonth() - 3));
+
+			fromDate.datepicker( "option", "maxDate", getDate(this) );
+			fromDate.datepicker( "option", "minDate", startDate );
+			fromDate.datepicker( "option", "defaultDate", getDate(this) );
+		}
 	});
 
 	jsonChart = {
@@ -80,13 +91,53 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
   }
 
+	jsonDataTables = {
+		"ordering": false,
+		"searching": false,
+		"pagingType": "full_numbers",
+		"autoWidth": false,
+		"language": {
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registros",
+			"sZeroRecords": "No se encontraron resultados",
+			"sEmptyTable": "Ningún dato disponible en esta tabla",
+			"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sInfoPostFix": "",
+			"slengthMenu": "Mostrar _MENU_ registros por pagina",
+			"sSearch": "",
+			"sSearchPlaceholder": "Buscar...",
+			"sUrl": "",
+			"sInfoThousands": ",",
+			"sLoadingRecords": "Cargando...",
+			"sprocessing": "Procesando ...",
+			"oPaginate": {
+				"sFirst": "Primera",
+				"sLast": "Última",
+				"sNext": "»",
+				"sPrevious": "«"
+			},
+			"oAria": {
+				"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			},
+			"select": {
+				"rows": "%d Lote seleccionado"
+			}
+		}
+	}
 	// Muestra reportes y genera gráfica de estadísticas
 	if (reportAnnual.querySelector(".feed-table")) {
+		$('#reportAnnual table').DataTable(jsonDataTables);
 		reportAnnual.classList.add('fade-in');
 
 		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.data.listaGrafico[0]);
 		statsToogle.classList.remove('is-disabled');
 		statsToogle.querySelector('input').disabled = false;
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.remove('is-disabled');
+		}
 	} else {
 		noRecords.classList.remove('none');
 	}
@@ -142,6 +193,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		noRecords.classList.add('none');
 		statsToogle.classList.add('is-disabled');
 		statsToogle.querySelector('input').disabled = true;
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.add('is-disabled');
+		}
 		detailToogle.classList.add('active');
 		statsToogle.classList.remove('active');
 		results.classList.remove('none');
@@ -196,11 +250,15 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = formatterTotalGeneral;
 					trTotales.appendChild(td);
 
+					$('#reportMonthly table').DataTable(jsonDataTables);
 					reportMonthly.classList.add('fade-in');
 
 					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
 					statsToogle.classList.remove('is-disabled');
 					statsToogle.querySelector('input').disabled = false;
+					for (i = 0; i < stackItems.length; ++i) {
+						stackItems[i].classList.remove('is-disabled');
+					}
 					break;
 
 				case 1:

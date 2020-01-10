@@ -3,53 +3,7 @@
 var validator;
 
 function validateForms(form, options) {
-	var telephoneNumber = /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
-	var shortPhoneNumber = /^([0-9]{3})[-. ]?([0-9]{2})[-. ]?([0-9]{2})$/;
-	var generalPhoneNumber = /^([0-9]{7,14})+$/;
-	var validCountry = typeof country!=='undefined'? country : isoPais;
-	var onlyNumber = /^[0-9]{6,8}$/;
-	var namesValid = /^([a-záéíóúüñ.]+[\s]*)+$/i;
-	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
-	var regNumberValid = /^[a-z0-9]{6,45}$/i;
-	var shortPhrase = /^[a-z0-9áéíóúüñ ().]{4,25}$/i;
-	var middlePhrase = /^[a-z0-9áéíóúüñ ().]{15,45}$/i;
-	var longPhrase = /^[a-z0-9áéíóúüñ ().]{10,70}$/i;
-	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumber = /^([\w.\-+&áéíóúüñ]+)+$/i;
-	var alphanum = /^[a-z0-9]+$/i;
-	var alphanumEs = /^[a-z0-9áéíóúüñ ]+$/i;
-	var username = /^[a-z0-9_-]{6,16}$/i
-	var userPassword = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
-	var numeric = /^[0-9]+$/;
-	var alphabetical = /^[a-z]+$/i;
-	var alphabeticalEs = /^[a-záéíóúüñ ]+$/i;
-	var text = /^[a-z0-9áéíóúüñ ,.:()]+$/i;
-	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
-	var fiscalReg = {
-		'bp': /^(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24)+(6|9)[\d]{5,6}[\d]{3,4}$/,
-		'co': /^([0-9]{9,17})/,
-		'pe': /^(10|15|16|17|20)[\d]{8}[\d]{1}$/,
-		'us': /^(10|15|16|17|20)[\d]{8}[\d]{1}$/,
-		've': /^([VEJPGvejpg]{1})-([0-9]{8})-([0-9]{1}$)/
-	};
-	var date = {
-		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
-		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
-	};
-	var amount = {
-		'Ec-bp': usdAmount,
-		'bp': usdAmount
-	};
-	var fiscalRegMsg = {
-		'bp': 'RUC',
-		'co': 'NIT',
-		'pe': 'RUC',
-		'us': 'RUC',
-		've': 'RIF'
-	};
-	var gender = /^[MF]$/;
-	var civilStatus = /^[SCV]$/;
-	var phoneType = /^(OFC|FAX|OTRO)$/;
+
 	var defaults = {
 		debug: true,
 		errorClass: "has-error",
@@ -66,10 +20,6 @@ function validateForms(form, options) {
 			$(element.form).find("label[for=" + element.id + "]").removeClass(errorClass);
 		}
 	};
-
-	$.validator.methods.fiscalRegistry = function(value, element, param) {
-		return fiscalReg[validCountry].test(value);
-	}
 
 	$.validator.methods.validatePass = function(value, element, param) {
 		return passStrength(value);
@@ -98,13 +48,11 @@ function validateForms(form, options) {
 	jQuery.validator.setDefaults(defaults);
 
 
-	// Letras alfabéticas con acentos, ñ y espacio en blanco
-	jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
+		jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
 		return this.optional( element ) || /^[a-záéíóúüñ ]+$/i.test( value );
 	});
 
-	// Números y Letras alfabéticas con acentos, ñ y espacio en blanco
-	jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
+		jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
@@ -138,14 +86,12 @@ function validateForms(form, options) {
 		else return true;
 	}, "Teléfono Móvil está repetido.");
 
-	// Metodo que valida si la fecha es invalida
-	jQuery.validator.addMethod("fechaInvalida", function(value, element) {
+		jQuery.validator.addMethod("fechaInvalida", function(value, element) {
 		var fecha = moment(value, "DD/MM/YYYY");
 		return fecha.isValid();
 	});
 
-	// Metodo que valida si el usuario es mayor de edad
-	jQuery.validator.addMethod("mayorEdad", function(value, element){
+		jQuery.validator.addMethod("mayorEdad", function(value, element){
 		var hoy, fechanacimiento, years
 		hoy = moment();
 		fechanacimiento = moment(value, "DD/MM/YYYY");

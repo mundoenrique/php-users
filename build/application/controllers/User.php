@@ -11,6 +11,7 @@ class User extends NOVO_Controller {
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
 	}
+
 	/**
 	 * @info Método que renderiza la vista de login
 	 * @author J. Enrique Peñaloza P.
@@ -171,6 +172,7 @@ class User extends NOVO_Controller {
 	public function preRegistry()
 	{
 		$view = 'preregistry';
+
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
 		if($this->config->item('language_form_validate')) {
 			array_push(
@@ -329,6 +331,25 @@ class User extends NOVO_Controller {
 		$this->modelLoad->callWs_closeSession_User();
 
 		redirect($this->config->item('base_url').'inicio');
+	}
+
+	public function notRender($reason)
+	{
+		$view = 'notrender';
+
+		log_message('INFO', 'NOVO Controller: notRender Method Initialized');
+
+		$this->includeAssets->cssFiles = [
+			"$this->countryUri/notrender"
+		];
+		$this->render->viewPage = [$view];
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->reason = $reason;
+		$this->render->reasonTitle = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
+		$this->render->reasonMessage = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
+
+		$this->asset->initialize($this->includeAssets);
+		$this->load->view('layouts/designNotRender', $this->render);
 	}
 
 }

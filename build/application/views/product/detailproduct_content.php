@@ -2,7 +2,7 @@
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
-<form method="post" action=''>
+<form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 	<input type='hidden' name='frmMonth' value=''>
 	<input type='hidden' name='frmYear' value=''>
@@ -28,21 +28,23 @@
 						<ul class="product-balance-group flex justify-between mb-0 list-inline">
 							<li class="list-inline-item">Actual
 								<span id="actual" class="product-balance block primary">
+									<?= lang('GEN_COIN').' '; ?>
 									<?= $data['actualBalance'] !== '--'?
-										lang('GEN_COIN').' '.strval(number_format($data['actualBalance'],2,',','.')):
-										$data['actualBalance'];?>
+										strval(number_format($data['actualBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 							<li class="list-inline-item">En Tránsito
 								<span id="bloqueado" class="product-balance block primary">
+								<?= lang('GEN_COIN').' '; ?>
 									<?= $data['ledgerBalance'] !== '--'?
-									lang('GEN_COIN').' '.strval(number_format($data['ledgerBalance'],2,',','.')): $data['ledgerBalance'];?>
+									strval(number_format($data['ledgerBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 							<li class="list-inline-item">Disponible
 								<span id="disponible" class="product-balance block primary">
+									<?= lang('GEN_COIN').' '; ?>
 									<?= $data['availableBalance'] !== '--'?
-									lang('GEN_COIN').' '.strval(number_format($data['availableBalance'],2,',','.')): $data['ledgerBalance'];?>
+									strval(number_format($data['availableBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
 						</ul>
@@ -94,11 +96,11 @@
 							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
 						</label>
 					</div>
-					<ul class="stack-extra list-inline mb-0 flex items-center">
-						<li class="px-1 list-inline-item text border rounded">
-							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-download h5 mr-0"></span></a>
+					<ul class="stack list-inline mb-0 flex items-center">
+						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
+							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-file-pdf h5 mr-0"></span></a>
 						</li>
-						<li class="px-1 list-inline-item text border rounded">
+						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
 							<a id="downloadXLS" href="#" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
 						</li>
 					</ul>

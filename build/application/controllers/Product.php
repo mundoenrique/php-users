@@ -130,7 +130,7 @@ class Product extends NOVO_Controller {
 
 		if (in_array("120",  $dataProduct['availableServices'])) {
 
-			redirect('atencioncliente');
+			redirect('/atencioncliente');
 		}
 
 		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
@@ -146,9 +146,7 @@ class Product extends NOVO_Controller {
 
 					$oDate = new DateTime();
 					$dateFile = $oDate->format("YmdHis");
-
-					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_C_79944439');
-					$respuestaTal = 'ok';
+					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'movimientos_' . $dateFile);
 			}
 		}else{
 
@@ -167,8 +165,8 @@ class Product extends NOVO_Controller {
 				$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
 				$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
 			}
-
 		}
+
 
 		$year =  intval(date("Y"));
 		$years = [];
@@ -199,7 +197,12 @@ class Product extends NOVO_Controller {
 
 	function transforNumber ($transforNumber)
 	{
-		return (float)str_replace(',','', $transforNumber);
+
+		if ($transforNumber !== '--') {
+
+			$transforNumber = (float)str_replace(',','', $transforNumber);
+		}
+		return $transforNumber;
 	}
 
 	function totalInTransactions ($transactions)
@@ -216,4 +219,6 @@ class Product extends NOVO_Controller {
 		}
 		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
 	}
+
+
 }

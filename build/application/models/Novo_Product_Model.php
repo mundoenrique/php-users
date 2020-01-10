@@ -55,7 +55,7 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
 
-		log_message("info", "Request Detail Product:" . json_encode($this->dataRequest));
+		log_message("info", "Request getBalance Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
@@ -203,7 +203,7 @@ class Novo_Product_Model extends NOVO_Model
 					return $response->cuentaOrigen;
 					break;
 				default:
-					return '--';
+					return [];
 			}
 		}
 	}

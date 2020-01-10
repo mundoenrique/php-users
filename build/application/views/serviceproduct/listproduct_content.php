@@ -8,7 +8,7 @@
 				<h2 class="h4 regular tertiary">Seleccione un producto</h2>
 				<div class="line mt-1"></div>
 				<p class="mt-3">A continuación indica el producto al cual le deseas realizar una operación de Atención al Cliente:</p>
-				<div id="dashboard" class="dashboard-items flex max-width-xl-5 mt-3 mx-auto flex-wrap justify-center">
+				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('atencioncliente'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 						<input type='hidden' name='nroTarjeta' id='nroTarjeta' value=''>
@@ -22,7 +22,7 @@
 							foreach($data as $row){
 							$state = (in_array("120", $row['availableServices'])) ? ' inactive' : '';
 						?>
-							<div class="dashboard-item p-1 mx-1 mb-1<?= $state; ?>" id="<?= $row['noTarjeta'];?>" >
+							<div class="dashboard-item big-modal p-1 mx-1 mb-1<?= $state; ?>" id="<?= $row['noTarjeta'];?>" >
 								<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 								<div class="item-info <?= $row['marca'];?> p-2 h5 tertiary bg-white">
 									<p class="item-category semibold primary"><?= $row['nombre_producto'];?></p>

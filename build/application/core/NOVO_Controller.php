@@ -39,8 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->userdata('fullName');
 
 		$this->countryUri = $this->uri->segment(1, 0) ?: 'default';
-		$this->render->rootHome = base_url($this->render->logged? 'bdb/vistaconsolidada': 'bdb/inicio');
-		$this->render->pathViewPreview = base_url('bdb/vistaconsolidada');
+		$this->render->rootHome = $this->render->logged? 'vistaconsolidada': 'inicio';
 
 		$this->countryConf = $this->config->item('country');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
@@ -58,6 +57,16 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad();
 		countryCheck($this->countryUri);
 		languageLoad($this->countryUri);
+
+		$class = $this->router->fetch_class();
+		$method = $this->router->fetch_method();
+
+		$locationCheck = ['user/login', 'user/recoveryAccess', 'user/preRegistry'];
+
+		if (in_array($class.'/'.$method, $locationCheck)) {
+			$this->checkBrowser();
+		}
+
 		$this->render->idleSession = $this->session->userdata('logged_in')? $this->config->item('timeIdleSession'): 0;
 
 		$this->form_validation->set_error_delimiters('', '---');
@@ -156,12 +165,6 @@ class NOVO_Controller extends CI_Controller {
 		}
 	}
 
-	/**
-	 * Carga lenguajes especificos de las vistas y el de cada cliente definidos en el config
-	 *
-	 * @return void
-	 * @author Pedro Torres
-	 */
 	protected function loadLanguajes($views = [], $folder = 'base-spanish')
 	{
 		$this->lang->load($views, $folder);
@@ -173,17 +176,20 @@ class NOVO_Controller extends CI_Controller {
 		}
 	}
 
-
-	/**
-	 * Llama un metodo especifico de un modelo
-	 *
-	 * @return void
-	 * @author Pedro Torres
-	 */
 	protected function callMethodNotAsync($params = '')
 	{
 		$this->load->model($this->model,'modelLoaded');
 		$method = $this->method;
 		return $this->modelLoaded->$method($params);
+	}
+
+	protected function checkBrowser () {
+
+		$infoBrowser = $this->tool_browser->validateBrowser();
+		if ( $infoBrowser['platform'] === 'mobile') {
+			redirect(base_url().'sugerencia/m','location', 301);
+		}elseif (!$infoBrowser['valid']) {
+			redirect(base_url().'sugerencia/b','location', 301);
+		}
 	}
 }

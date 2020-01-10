@@ -19,7 +19,7 @@
 
 		<header class="main-head">
 			<nav class="navbar navbar-expand-lg flex-auto bg-primary">
-				<a class="navbar-brand" href="<?=$rootHome;?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
+				<a class="navbar-brand" href="<?= base_url($rootHome);?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
 
 				<?php
 					if ($logged){
@@ -29,7 +29,7 @@
 						</button>
 						<div id="navbarNav" class="collapse navbar-collapse bg-primary">
 							<ul class="navbar-nav ml-auto">
-								<li id='listProduct' class="nav-item"><a class="nav-link" href="<?= $pathViewPreview;?>">Vista consolidada</a></li>
+								<li id='listProduct' class="nav-item"><a class="nav-link" href="<?= base_url('vistaconsolidada');?>">Vista consolidada</a></li>
 								<li id='reports' class="nav-item"><a class="nav-link" href="<?= base_url('reporte') ?>">Reportes</a></li>
 								<li id='customerSupport' class="nav-item"><a class="nav-link" href="<?= base_url('listaproducto') ?>">Atención al cliente</a></li>
 								<li id='profile' class="nav-item"><a class="nav-link" href="<?= base_url('perfil') ?>">Mi perfil</a></li>
@@ -76,6 +76,8 @@
       </div>
     </div>
 	</div>
+
+	<div class="cover-spin" id=""></div>
 
 	<script>
 		var urlBase = '<?= base_url(); ?>';
