@@ -152,7 +152,6 @@ header.main-head {
 }
 
 .notrender-content > div {
-  margin-bottom: 3.5rem;
   -ms-flex-direction: column;
   flex-direction: column;
 }
