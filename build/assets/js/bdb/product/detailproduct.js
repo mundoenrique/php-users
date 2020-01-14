@@ -1,5 +1,7 @@
 'use strict';
-var $$ = document;
+var $$ = document,
+				totalExpense = 0,
+				totalIncome = 0;
 
 moment.updateLocale('en', {
   monthsShort : [
