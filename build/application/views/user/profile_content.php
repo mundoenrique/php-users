@@ -7,7 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<div class="pt-3">
-						<form method="post" id="formProfile">
+						<form id="formProfile" method="post">
 							<h3 class="tertiary h4">Datos personales</h3>
 								<?php
 									if ($data === '--') {
@@ -25,32 +25,32 @@
 									<div class="row">
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="idType">Tipo de identificación</label>
-											<input id="idType" class="form-control" name="idType" type="text" value="<?= $data->registro->user->descripcion_tipo_id_ext_per;?>" disabled>
+											<input id="idType" class="form-control" type="text" name="idType" value="<?= $data->registro->user->descripcion_tipo_id_ext_per;?>" disabled>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="idNumber">Número de identificación</label>
-											<input id="idNumber" class="form-control" name="idNumber" type="text" value="<?= $data->registro->user->id_ext_per;?>" disabled/>
+											<input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $data->registro->user->id_ext_per;?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="firstName">Primer nombre</label>
-											<input id="firstName" class="form-control" name="firstName" type="text" value="<?= ucfirst(strtolower($data->registro->user->primerNombre));?>" disabled/>
+											<input id="firstName" class="form-control" type="text" name="firstName" value="<?= ucfirst(strtolower($data->registro->user->primerNombre));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="middleName">Segundo nombre</label>
-											<input id="middleName" class="form-control"  name="middleName" type="text" value="<?= ucfirst(strtolower($data->registro->user->segundoNombre));?>" disabled/>
+											<input id="middleName" class="form-control" type="text"  name="middleName" value="<?= ucfirst(strtolower($data->registro->user->segundoNombre));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="lastName">Primer Apellido</label>
-											<input id="lastName" class="form-control" name="lastName" type="text" value="<?= ucfirst(strtolower($data->registro->user->primerApellido));?>" disabled/>
+											<input id="lastName" class="form-control" type="text" name="lastName" value="<?= ucfirst(strtolower($data->registro->user->primerApellido));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="secondSurname">Segundo Apellido</label>
-											<input id="secondSurname" name="secondSurname" class="form-control" type="text" value="<?= ucfirst(strtolower($data->registro->user->segundoApellido));?>" disabled/>
+											<input id="secondSurname" class="form-control" type="text" name="secondSurname" value="<?= ucfirst(strtolower($data->registro->user->segundoApellido));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -88,7 +88,7 @@
 												<?php
 													}else{
 												?>
-													<input id="profession" name="profession" class="form-control" type="text" value="<?= $dataProfessions->descripcion;?>" disabled/>
+													<input id="profession" class="form-control" type="text" name="profession" value="<?= $dataProfessions->descripcion;?>" disabled/>
 												<?php
 													}
 												?>
@@ -132,7 +132,7 @@
 												<?php
 													}else{
 												?>
-													<input id="department" name="department" class="form-control" type="text" value="<?= $dataStates->descripcion;?>" disabled/>
+													<input id="department" class="form-control" type="text" name="department" value="<?= $dataStates->descripcion;?>" disabled/>
 												<?php
 													}
 												?>
@@ -156,7 +156,7 @@
 												<?php
 													}elseif($dataCitys === '--') {
 												?>
-													<input id="city" name="city" class="form-control" type="text" value="<?= $dataCitys->descripcion;?>" disabled/>
+													<input id="city" class="form-control" type="text" name="city" value="<?= $dataCitys->descripcion;?>" disabled/>
 												<?php
 												}else{
 												?>
@@ -172,7 +172,7 @@
 									<div class="row">
 										<div class="form-group col-12 col-lg-8 col-xl-6">
 											<label for="address">Dirección</label>
-											<textarea id="address" name="address" class="form-control"><?= $data->direccion->acDir;?></textarea>
+											<textarea id="address" class="form-control" name="address"><?= $data->direccion->acDir;?></textarea>
 											<div class="help-block"></div>
 										</div>
 									</div>
@@ -281,7 +281,7 @@
 							<hr class="separador-one mt-2 mb-4">
 							<div class="flex items-center justify-end">
 								<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
-								<button id="btnActualizar" name="btnActualizar" class="btn btn-small btn-loading btn-primary" type="submit" <?php $data === '--'? 'disabled': '';?>>Continuar</button>
+								<button id="btnActualizar" class="btn btn-small btn-loading btn-primary" type="submit" name="btnActualizar" <?php $data === '--'? 'disabled': '';?>>Continuar</button>
 							</div>
 
 						</form>

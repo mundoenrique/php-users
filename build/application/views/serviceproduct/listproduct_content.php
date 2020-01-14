@@ -30,7 +30,7 @@
 								<?php
 									if (in_array("120", $row['availableServices'])){
 								?>
-									<button id="generate" name="generate" class="btn btn-small btn-link" >Generar PIN </button>
+									<button id="generate" class="btn btn-small btn-link" name="generate">Generar PIN </button>
 								<?php
 									}else{
 								?>

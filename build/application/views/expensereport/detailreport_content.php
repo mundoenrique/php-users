@@ -27,12 +27,12 @@
 
 				<h2 class="h4 regular tertiary">Gastos por categoría</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
-					<div class="stack-form mr-auto flex items-center" id="period-form">
+					<div id="period-form" class="stack-form mr-auto flex items-center">
 						<div class="form-inline">
 							<label class="nowrap mb-0" for="fromDate">Mostrar desde</label>
-							<input type="text" id="fromDate" name="fromDate" class="form-control">
+							<input id="fromDate" class="form-control" type="text" name="fromDate">
 							<label class="nowrap mb-0" for="toDate">Hasta</label>
-							<input type="text" id="toDate" name="toDate" class="form-control">
+							<input id="toDate" class="form-control" type="text" name="toDate">
 							<button id="buscar" class="btn btn-small btn-primary"><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
 						</div>
 					</div>
@@ -46,10 +46,10 @@
 					</div>
 					<ul class="stack list-inline mb-0 flex items-center">
 						<li class="stack-item px-1 list-inline-item rounded is-disabled">
-							<a id="downloadPDF" href="" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-file-pdf h5 mr-0"></span></a>
+							<a id="downloadPDF" href="" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
 						<li class="stack-item px-1 list-inline-item rounded is-disabled">
-							<a id="downloadXLS" href="" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadXLS" href="" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
 					</ul>
 				</nav>

@@ -15,11 +15,11 @@
 						<div class="form-group">
 							<label class="mr-2">Necesito recuperar mi</label>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="recoveryUser" name="recovery" class="custom-control-input" value="U">
+								<input id="recoveryUser" class="custom-control-input" type="radio" name="recovery" value="U">
 								<label class="custom-control-label" for="recoveryUser">Usuario</label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" id="recoveryPwd" name="recovery" class="custom-control-input" value="C">
+								<input id="recoveryPwd" class="custom-control-input" type="radio" name="recovery" value="C">
 								<label class="custom-control-label" for="recoveryPwd">Contraseña</label>
 							</div>
 							<div class="help-block"></div>

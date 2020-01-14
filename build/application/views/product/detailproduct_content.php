@@ -64,7 +64,7 @@
 
 				<h2 class="h4 regular tertiary">Mis movimientos</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
-					<div class="stack-form mr-auto flex items-center" id="period-form">
+					<div id="period-form" class="stack-form mr-auto flex items-center">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
 								<option selected="" value="<?= date("m");?>">Más recientes</option>
@@ -76,7 +76,7 @@
 									}
 								?>
 							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" disabled name="filterYear" >
+							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
 								<option value="<?= $years[0];?>">-</option>
 								<?php
 									foreach ($years as $year){
@@ -86,7 +86,7 @@
 									}
 								?>
 							</select>
-						<button id="buscar" class="btn btn-small btn-primary" disabled><span aria-hidden="true" class="icon-arrow-right mr-0"></span></button>
+						<button id="buscar" class="btn btn-small btn-primary" disabled><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
 						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
@@ -98,16 +98,16 @@
 					</div>
 					<ul class="stack list-inline mb-0 flex items-center">
 						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
-							<a id="downloadPDF" href="#" rel="subsection"><span aria-hidden="true" title="Descargar PDF" class="icon-file-pdf h5 mr-0"></span></a>
+							<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
 						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
-							<a id="downloadXLS" href="#" rel="subsection"><span aria-hidden="true" title="Descargar Excel" class="icon-file-excel h5 mr-0"></span></a>
+							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
 					</ul>
 				</nav>
 
-				<div class="group row mt-3" id="results">
-					<div class="group-main-view col-lg-8" id="transactions">
+				<div id="results" class="group row mt-3">
+					<div id="transactions" class="group-main-view col-lg-8">
 						<h3 class="h4 regular">Actividad <span id="period">reciente</span>
 							<span id="transitTitle" class="none">transacciones pendientes</span>
 						</h3>

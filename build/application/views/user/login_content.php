@@ -7,12 +7,12 @@
 			<form id="form-login" class="" action="">
 				<div class="form-group">
 					<label for="username">Usuario</label>
-					<input id="username" name="loginUsername" class="form-control" type="text">
+					<input id="username" class="form-control" type="text" name="loginUsername">
 				</div>
 				<div class="form-group">
 					<label for="userpwd">Contraseña</label>
 					<div class="input-group">
-						<input id="userpwd" name="loginUserpwd" class="form-control" type="password">
+						<input id="userpwd" class="form-control" type="password" name="loginUserpwd">
 						<div class="input-group-append">
 							<span id="pwdAddon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 						</div>
@@ -20,7 +20,7 @@
 				</div>
 				<div id="formMsg" class="general-form-msg"></div>
 				<button id="btn-login" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
-					<span aria-hidden="true" class="icon-lock mr-1 h3 yellow"></span>
+					<span class="icon-lock mr-1 h3 yellow" aria-hidden="true"></span>
 					Ingreso Seguro
 				</button>
 				<a class="block mb-1 h5 primary" href="<?= base_url('recuperaracceso');?>">Recuperar acceso</a>

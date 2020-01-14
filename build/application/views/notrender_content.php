@@ -1,7 +1,5 @@
 <div class="notrender-content flex items-center justify-center">
 	<div class="flex items-center">
-	<!-- <span class="icon-update" aria-hidden="true"></span> -->
-
 		<h1><?= $reasonTitle;?></h1>
 		<h2><?= $reasonMessage;?></h2>
 	<?php if ($reason === 'b'): ?>
