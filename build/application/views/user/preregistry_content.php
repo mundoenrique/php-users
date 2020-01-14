@@ -11,7 +11,7 @@
 				proporcionar los siguientes datos relacionados con tu cuenta:</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
-					<form method="post" id="formVerifyAccount">
+					<form id="formVerifyAccount" method="post">
 						<div class="row">
 							<div class="form-group col-lg-3">
 								<label for="typeDocument">Tipo de Documento</label>
@@ -126,7 +126,7 @@
 		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset">
-				<button type="button" id="aceptar" class="btn btn-small btn-loading btn-primary">Aceptar</button>
+				<button id="aceptar" class="btn btn-small btn-loading btn-primary" type="button">Aceptar</button>
 			</div>
 		</div>
 	</div>

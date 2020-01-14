@@ -15,47 +15,47 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idType">Tipo de identificación</label>
-								<input id="idType" class="form-control" name="idType" type="text"  disabled value="<?= $data->user->descripcion_tipo_id_ext_per;?>">
+								<input id="idType" class="form-control" type="text" name="idType" value="<?= $data->user->descripcion_tipo_id_ext_per;?>" disabled>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="idNumber">Número de identificación</label>
-								<input id="idNumber" class="form-control" name="idNumber" type="text"  disabled value="<?= $data->user->id_ext_per;?>"/>
+								<input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $data->user->id_ext_per;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="firstName">Primer nombre</label>
-								<input id="firstName" name="firstName" type="text"  disabled class="form-control" value="<?= $data->user->primerNombre;?>"/>
+								<input id="firstName" class="form-control" type="text" name="firstName" value="<?= $data->user->primerNombre;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="middleName">Segundo nombre</label>
-								<input id="middleName" class="form-control"  disabled name="middleName" type="text" value="<?= $data->user->segundoNombre;?>"/>
+								<input id="middleName" class="form-control" type="text" name="middleName" value="<?= $data->user->segundoNombre;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="lastName">Apellido paterno</label>
-								<input id="lastName" name="lastName"  disabled type="text" class="form-control" value="<?= $data->user->primerApellido;?>"/>
+								<input id="lastName" class="form-control" type="text" name="lastName" value="<?= $data->user->primerApellido;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="secondSurname">Apellido materno</label>
-								<input id="secondSurname" name="secondSurname"  disabled type="text" class="form-control" value="<?= $data->user->segundoApellido;?>"/>
+								<input id="secondSurname" class="form-control" type="text" name="secondSurname" value="<?= $data->user->segundoApellido;?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="birthDate">Fecha de Nacimiento</label>
-								<input type="text" id="birthDate" name="birthDate" class="form-control">
+								<input id="birthDate" class="form-control" name="birthDate" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label class="block">Sexo</label>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="genderMale" name="gender" class="custom-control-input" value="M">
+									<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M">
 									<label class="custom-control-label" for="genderMale">Masculino</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="genderFemale" name="gender" class="custom-control-input" value="F">
+									<input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F">
 									<label class="custom-control-label" for="genderFemale">Femenino</label>
 								</div>
 								<div class="help-block"></div>
@@ -67,27 +67,27 @@
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="email">Correo Electrónico</label>
-								<input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" value="<?= $data->afiliacion->correo?>">
+								<input id="email" class="form-control" type="email" name="email" value="<?= $data->afiliacion->correo?>" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="confirmEmail">Confirmar Correo Electrónico</label>
-								<input type="email" class="form-control" id="confirmEmail" name="confirmEmail" placeholder="usuario@ejemplo.com">
+								<input id="confirmEmail" class="form-control" type="email" name="confirmEmail" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="landLine">Teléfono fijo</label>
-								<input id="landLine" name="landLine" type="text" class="form-control" value="<?= $data->afiliacion->telefono1?>"/>
+								<input id="landLine" class="form-control" type="text" name="landLine" value="<?= $data->afiliacion->telefono1?>"/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="mobilePhone">Teléfono móvil</label>
-								<input id="mobilePhone" class="form-control" name="mobilePhone" type="text" value="<?= $data->user->telefono?>" disabled/>
+								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $data->user->telefono?>" disabled/>
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhone">Otro Teléfono (Tipo)</label>
-								<select class="custom-select form-control" placeholder="Seleccione" name="phoneType" id="phoneType">
+								<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
 									<option value="OFC">Laboral</option>
 									<option value="FAX">Fax</option>
 									<option value="OTRO">Otro</option>
@@ -96,7 +96,7 @@
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
 								<label for="otherPhoneNum">Otro Teléfono (Número)</label>
-								<input id="otherPhoneNum" name="otherPhoneNum" type="text" class="form-control" value="<?= $data->afiliacion->telefono3?>"/>
+								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -108,7 +108,7 @@
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
 										<label for="username">Usuario</label>
-										<input type="text" class="form-control" id="username" name="username">
+										<input id="username" class="form-control" type="text" name="username">
 										<div class="help-block"></div>
 									</div>
 								</div>
@@ -125,14 +125,14 @@
 									</div>
 									<div class="form-group col-12 col-lg-6">
 										<label for="confirmUserpwd">Confirmar Contraseña</label>
-										<input type="password" class="form-control" id="confirmUserpwd" name="confirmUserpwd">
+										<input id="confirmUserpwd" class="form-control" type="password" name="confirmUserpwd">
 										<div class="help-block"></div>
 									</div>
 								</div>
 							</div>
 
 							<div class="col-6 col-lg-4 col-xl-6">
-								<div class="field-meter" id="password-strength-meter">
+								<div id="password-strength-meter" class="field-meter">
 									<h4>Requerimientos de contraseña:</h4>
 									<ul class="pwd-rules">
 										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>Caracteres</strong></li>
@@ -151,7 +151,7 @@
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
 							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnRegistrar" name="btnRegistrar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+							<button id="btnRegistrar" class="btn btn-small btn-loading btn-primary" type="submit" name="btnRegistrar">Continuar</button>
 						</div>
 					</form>
 				</div>

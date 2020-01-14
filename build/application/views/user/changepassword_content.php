@@ -19,7 +19,7 @@
 									<div class="form-group col-12 col-lg-6">
 										<label for="currentPassword">Clave Actual</label>
 										<div class="input-group">
-											<input type="password" class="form-control" id="currentPassword" name="currentPassword">
+											<input id="currentPassword" class="form-control" type="password" name="currentPassword">
 											<div class="input-group-append">
 												<span id="pwdAddon" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 											</div>
@@ -31,7 +31,7 @@
 									<div class="form-group col-12 col-lg-6">
 										<label for="newPassword">Contraseña</label>
 										<div class="input-group">
-											<input type="password" class="form-control" id="newPassword" name="newPassword">
+											<input id="newPassword" class="form-control" type="password" name="newPassword">
 											<div class="input-group-append">
 												<span id="pwdAddon2" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
 											</div>
@@ -40,7 +40,7 @@
 									</div>
 									<div class="form-group col-12 col-lg-6">
 										<label for="confirmPassword">Confirmar Contraseña</label>
-										<input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+										<input id="confirmPassword" class="form-control" type="password" name="confirmPassword">
 										<div class="help-block"></div>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
 							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
-							<button id="btnChangePassword" name="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+							<button id="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChangePassword">Continuar</button>
 						</div>
 					</form>
 				</div>

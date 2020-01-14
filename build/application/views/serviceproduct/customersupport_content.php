@@ -68,7 +68,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link" href="">Cancelar</a>
-								<button id="btnGenerate" name="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+								<button id="btnGenerate" class="btn btn-small btn-loading btn-primary" type="submit" name="btnGenerate">Continuar</button>
 							</div>
 						</form>
 					</div>
@@ -111,7 +111,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link" href="">Cancelar</a>
-								<button id="btnChange" name="btnChange" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+								<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
 							</div>
 						</form>
 					</div>
@@ -141,7 +141,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link" href="">Cancelar</a>
-								<button id="btnLock" name="btnLock" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+								<button id="btnLock" class="btn btn-small btn-loading btn-primary" type="submit" name="btnLock">Continuar</button>
 							</div>
 						</form>
 					</div>
@@ -151,7 +151,7 @@
 						<div id="msgReplacement" class="msg-prevent">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
-						<form id="formReplace" accept-charset="utf-8" method="post" class="profile-1">
+						<form id="formReplace" class="profile-1" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="replaceMotSol">Motivo de la solicitud</label>
@@ -180,7 +180,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link" href="">Cancelar</a>
-								<button id="btnReplace" name="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+								<button id="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit" name="btnReplace">Continuar</button>
 							</div>
 						</form>
 					</div>
