@@ -1,11 +1,12 @@
 "use strict";
+var $$ = document;
 
-document.addEventListener('DOMContentLoaded', function(){
+$$.addEventListener('DOMContentLoaded', function(){
 
 	// vars
-	var btnLogin = document.getElementById('btn-login');
+	var btnLogin = $$.getElementById('btn-login');
 	var txtBtnLogin = btnLogin.innerHTML.trim();
-	var btnShowPwd = document.getElementById('pwdAddon');
+	var btnShowPwd = $$.getElementById('pwdAddon');
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -66,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function(){
 	btnLogin.addEventListener("click", function(e) {
 		e.preventDefault();
 
-		document.getElementById("userpwd").type = 'password';
-		document.getElementById("formMsg").innerHTML = '';
+		$$.getElementById("userpwd").type = 'password';
+		$$.getElementById("formMsg").innerHTML = '';
 
 		var credentialUser = getCredentialsUser();
 		var form = $('#form-login');
@@ -103,15 +104,15 @@ document.addEventListener('DOMContentLoaded', function(){
 				validateLogin({user: credentialUser, text: txtBtnLogin});
 			}
 		} else {
-			document.getElementById("formMsg").innerHTML = 'Todos los campos son requeridos';
+			$$.getElementById("formMsg").innerHTML = 'Todos los campos son requeridos';
 		}
 	});
 
 	// Functions
 	function disableInputsForm(status)
 	{
-		document.getElementById('username').disabled = status;
-		document.getElementById('userpwd').disabled = status;
+		$$.getElementById('username').disabled = status;
+		$$.getElementById('userpwd').disabled = status;
 		btnLogin.disabled = status;
 	}
 
@@ -119,18 +120,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	{
 		disableInputsForm(false);
 
-		document.getElementById('btn-login').innerHTML = textBtn;
-		document.getElementById("userpwd").value = '';
-		if(country == 'bp') {
-			document.getElementById("username").value = '';
-		}
+		$$.getElementById('btn-login').innerHTML = textBtn;
+		$$.getElementById("userpwd").value = '';
 	}
 
 	function getCredentialsUser()
 	{
 		return {
-			user: document.getElementById("username").value,
-			pass: $.md5(document.getElementById("userpwd").value),
+			user: $$.getElementById("username").value,
+			pass: $.md5($$.getElementById("userpwd").value),
 			active: ''
 		}
 	};
