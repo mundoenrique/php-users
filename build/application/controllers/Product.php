@@ -128,11 +128,12 @@ class Product extends NOVO_Controller {
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		if (in_array("120",  $dataProduct['availableServices'])) {
+		if (in_array("120", $dataProduct['availableServices'])) {
 
 			redirect('/atencioncliente');
 		}
 
+		$this->load->model('Novo_Product_Model', 'modelLoad');
 		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
 			$dataRequest = new stdClass();
 			$dataRequest->month = $_POST['frmMonth'];
@@ -140,7 +141,6 @@ class Product extends NOVO_Controller {
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
 			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
 
-			$this->load->model('Novo_Product_Model', 'modelLoad');
 			$response = $this->modelLoad->getFile_Product ($dataRequest);
 			if ( $response->code == 0) {
 
@@ -150,7 +150,6 @@ class Product extends NOVO_Controller {
 			}
 		}else{
 
-			$this->load->model('Novo_Product_Model', 'modelLoad');
 			$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 			$dataProduct['movements'] = $this->transforNumberInArray ($movements);
 			$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
@@ -218,6 +217,40 @@ class Product extends NOVO_Controller {
 			}
 		}
 		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
+	}
+
+	function downloadDetail()
+	{
+		log_message('INFO', 'NOVO Consolidated: downloadDetail Method Initialized');
+
+		if (!$this->session->userdata('logged_in')) {
+			redirect(base_url('inicio'), 'location');
+			exit();
+		}
+		$dataProduct = [];
+
+		if (!$dataProduct = $this->session->userdata('setProduct')) {
+
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$this->session->set_userdata('setProduct', $dataProduct);
+		}
+
+		$this->load->model('Novo_Product_Model', 'modelLoad');
+		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
+			$dataRequest = new stdClass();
+			$dataRequest->month = $_POST['frmMonth'];
+			$dataRequest->year = $_POST['frmYear'];
+			$dataRequest->typeFile = $_POST['frmTypeFile'];
+			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+
+			$response = $this->modelLoad->getFile_Product ($dataRequest);
+			if ( $response->code == 0) {
+
+				$oDate = new DateTime();
+				$dateFile = $oDate->format("YmdHis");
+				np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_' . $dateFile);
+			}
+		}
 	}
 
 

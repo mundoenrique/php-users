@@ -69,7 +69,7 @@ $route['(:any)/sugerencia/(:any)'] = "user/notRender/$2";
 
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/detalle'] = "product/detailProduct";
-$route['(:any)/downloaddetalle'] = "product/getFile";
+$route['(:any)/detalle/download'] = "product/downloadDetail";
 
 $route['(:any)/async-call'] = "callModels";
 
