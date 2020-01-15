@@ -112,7 +112,7 @@
 							<span id="transitTitle" class="none">transacciones pendientes</span>
 						</h3>
 						<div class="line mt-1"></div>
-						<ul id="movementsList" class="feed list-style-none mt-3 pl-0">
+						<ul id="movementsList" class="feed list-style-none fade-in mt-3 pl-0">
 							<?php
 								$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
 								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
