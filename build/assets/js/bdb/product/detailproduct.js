@@ -22,6 +22,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsToogle = $$.getElementById('movementsToogle'),
 			transitToogle = $$.getElementById('transitToogle'),
 			btnOptions = $$.querySelectorAll('.btn-options'),
+			stackItems = $$.querySelectorAll('.stack-item'),
 			btnExportPDF = $$.getElementById('downloadPDF'),
 			btnExportXLS = $$.getElementById('downloadXLS');
 
@@ -39,8 +40,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$('#movementsList').easyPaginate({});
 		movementsPaginate = movementsList.nextElementSibling;
 		movementsPaginate.id = 'movementsPaginate';
-		movementsList.classList.add('fade-in');
 		movementsStats.addClass('fade-in');
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.remove('is-disabled');
+		}
 
 		invokeChart(movementsStats);
 	}
@@ -108,8 +111,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsList.removeChild(movementsList.firstChild);
 		}
 		movementsList.classList.remove('fade-in');
-		movementsPaginate.remove();
+		if (movementsPaginate != null) {
+			movementsPaginate.remove();
+		}
 		movementsStats.removeClass('fade-in');
+		for (i = 0; i < stackItems.length; ++i) {
+			stackItems[i].classList.add('is-disabled');
+		}
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
@@ -170,6 +178,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				movementsPaginate.id = 'movementsPaginate';
 				invokeChart(movementsStats);
 				movementsStats.addClass('fade-in');
+				for (i = 0; i < stackItems.length; ++i) {
+					stackItems[i].classList.remove('is-disabled');
+				}
 			} else {
 				movementsList.appendChild(noMovements);
 			}
