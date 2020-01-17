@@ -150,24 +150,18 @@ class Product extends NOVO_Controller {
 			}
 		}else{
 
-			$movements = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
-			$dataProduct['movements'] = $this->transforNumberInArray ($movements);
-			$dataProduct['totalInMovements'] = $this->totalInTransactions ($dataProduct['movements']);
+			$dataProduct['movements'] = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+			$dataProduct['totalInMovements'] = $this->calculateTotalTransactions ($dataProduct['movements']);
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
 			if (is_object($data) && $data->rc === "200" ) {
 
-				$dataProduct['actualBalance'] = $this->transforNumber ($data->balance->actualBalance);
-				$dataProduct['ledgerBalance'] = $this->transforNumber ($data->balance->ledgerBalance);
-				$dataProduct['availableBalance'] = $this->transforNumber ($data->balance->availableBalance);
-
-				$dataProduct['pendingTransactions'] = $this->transforNumberInArray ($data->pendingTransactions);
-				$dataProduct['totalInPendingTransactions'] = $this->totalInTransactions ($dataProduct['pendingTransactions']);
+				$dataProduct['pendingTransactions'] = $data->pendingTransactions;
+				$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions ($dataProduct['pendingTransactions']);
 			}
 		}
 
-
-		$year =  intval(date("Y"));
+		$year = intval(date("Y"));
 		$years = [];
 		for($i = $year ; $i>$year-4; $i--) {
 			array_push($years, $i);
@@ -181,14 +175,13 @@ class Product extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	function transforNumberInArray ($transforArray)
+	function transforNumberIntoArray ($transforArray)
 	{
 		if ($transforArray !== '--')
 		{
 			foreach ($transforArray as $clave => $valor)
 			{
-				$valor->monto = $this->transforNumber ($valor->monto);
-				$transforArray[$clave] = $valor;
+				$transforArray[$clave] = $valor->monto ;
 			}
 		}
 		return $transforArray;
@@ -197,14 +190,14 @@ class Product extends NOVO_Controller {
 	function transforNumber ($transforNumber)
 	{
 
-		if ($transforNumber !== '--') {
+		if ($transforNumber !== '--' and is_string($transforNumber)) {
 
-			$transforNumber = (float)str_replace(',','', $transforNumber);
+			$transforNumber = (float)str_replace(',','.', str_replace('.','', $transforNumber));
 		}
 		return $transforNumber;
 	}
 
-	function totalInTransactions ($transactions)
+	function calculateTotalTransactions ($transactions)
 	{
 		$totalIncome = 0;
 		$totalExpense = 0;
@@ -212,6 +205,9 @@ class Product extends NOVO_Controller {
 		{
 			foreach ($transactions as $row)
 			{
+				if (is_string($row->monto)) {
+					$row->monto = $this->transforNumber($row->monto);
+				}
 				$totalIncome += $row->signo == '+'? $row->monto: 0;
 				$totalExpense += $row->signo == '-'? $row->monto: 0;
 			}
