@@ -222,8 +222,8 @@ class Novo_Product_Model extends NOVO_Model
 			'noTarjeta' => $dataRequest->noTarjeta,
 			'id_ext_per' => $this->session->userdata("idUsuario")
 		);
-		$this->dataRequest->mes = $dataRequest->frmMonth;
-		$this->dataRequest->anio = $dataRequest->frmYear;
+		$this->dataRequest->mes = $dataRequest->month;
+		$this->dataRequest->anio = $dataRequest->year;
 
 		$this->dataRequest->token = $this->session->userdata('token');
 
