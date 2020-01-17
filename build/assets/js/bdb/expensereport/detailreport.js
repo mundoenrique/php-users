@@ -221,16 +221,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 						td.textContent = total.fechaDia;
 						tr.appendChild(td);
 						response.data.listaGrupo.forEach(function callback(day) {
-							monto = parseFloat(day.gastoDiario[index].monto.replace(/\,/g, ''));
-							formatterMonto = formatCurrency("es-CO", decimalOptions, monto);
+							monto = day.gastoDiario[index].monto
 							td = createElement('td', {class: 'feed-monetary'});
-							td.textContent = formatterMonto;
+							td.textContent = monto;
 							tr.appendChild(td);
 						});
-						totalMonto = parseFloat(total.monto.replace(/\,/g, ''));
-						formatterTotalMonto = formatCurrency("es-CO", decimalOptions, totalMonto);
+						totalMonto = total.monto
 						td = createElement('td', {class: 'feed-total'});
-						td.textContent = formatterTotalMonto;
+						td.textContent = totalMonto;
 						tr.appendChild(td);
 						tbody.appendChild(tr);
 					});
@@ -238,16 +236,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = 'Total';
 					trTotales.appendChild(td);
 					response.data.listaGrupo.forEach(function callback(day, index, array) {
-						totalCategoria = parseFloat(day.totalCategoria.replace(/\,/g, ''));
-						formatterTotalCategoria = formatCurrency("es-CO", decimalOptions, totalCategoria);
+						totalCategoria = day.totalCategoria
 						td = createElement('td', {class: 'feed-monetary feed-category-'+(index+1)+'x'});
-						td.textContent = formatterTotalCategoria;
+						td.textContent = totalCategoria;
 						trTotales.appendChild(td);
 					});
-					totalGeneral = parseFloat(response.data.totalGeneral.replace(/\,/g, ''));
-					formatterTotalGeneral = formatCurrency("es-CO", decimalOptions, totalGeneral);
+					totalGeneral = response.data.totalGeneral
 					td = createElement('td', {class: 'feed-total'});
-					td.textContent = formatterTotalGeneral;
+					td.textContent = totalGeneral;
 					trTotales.appendChild(td);
 
 					$('#reportMonthly table').DataTable(jsonDataTables);

@@ -88,7 +88,7 @@ class Novo_Product_Model extends NOVO_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->movimientos;
+					return $response;
 					break;
 				default:
 					return '--';

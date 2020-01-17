@@ -86,9 +86,9 @@
 									<tr id="<?= strtolower($value->mes); ?>">
 										<td class="feed-headline"><?= ucfirst(strtolower($value->mes)); ?></td>
 									<?php foreach($expenses->data->listaGrupo as $col): ?>
-										<td class="feed-monetary"><?= number_format(str_replace(',','',$col->gastoMensual[$key]->monto),2,",","."); ?></td>
+										<td class="feed-monetary"><?= $col->gastoMensual[$key]->monto; ?></td>
 									<?php endforeach; ?>
-										<td class="feed-total"><?= number_format(str_replace(',','',$value->monto),2,",","."); ?></td>
+										<td class="feed-total"><?= $value->monto; ?></td>
 									</tr>
 								<?php endforeach; ?>
 								</tbody>
@@ -96,9 +96,9 @@
 									<tr id="totales">
 										<td class="feed-headline">Total</td>
 									<?php foreach($expenses->data->listaGrupo as $key => $value): ?>
-										<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= number_format(str_replace(',','',$value->totalCategoria),2,",","."); ?></td>
+										<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= $value->totalCategoria; ?></td>
 									<?php endforeach; ?>
-										<td class="feed-total"><?= number_format(str_replace(',','',$expenses->data->totalGeneral),2,",","."); ?></td>
+										<td class="feed-total"><?= $expenses->data->totalGeneral; ?></td>
 									</tr>
 								</tfoot>
 							</table>

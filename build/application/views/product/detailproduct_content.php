@@ -133,7 +133,7 @@
 											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 										</div>
 										<span class="px-2 feed-amount items-center">
-										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. number_format($row->monto,2,',','.'); ?>
+										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. $row->monto; ?>
 										</span>
 									</li>
 								<?php
@@ -169,7 +169,7 @@
 										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
 										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
 									</div>
-									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). strval(number_format($row->monto,2,',','.'));?></span>
+									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). $row->monto;?></span>
 								</li>
 							<?php }?>
 						</ul>
