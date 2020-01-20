@@ -152,8 +152,12 @@ class Product extends NOVO_Controller {
 
 			$data = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 
-			$dataProduct['movements'] = $data->movimientos;
-			$dataProduct['totalInMovements'] = ["totalIncome" => $data->totalAbonos, "totalExpense" => $data->totalCargos];
+			$dataProduct['movements'] = $data === '--'? '--': $data->movimientos;
+
+			$dataProduct['totalInMovements'] = ["totalIncome" => 0, "totalExpense" => 0];
+			if ($dataProduct['movements'] !== '--') {
+				$dataProduct['totalInMovements'] = ["totalIncome" => $data->totalAbonos, "totalExpense" => $data->totalCargos];
+			}
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
 			if (is_object($data) && $data->rc === "200" ) {
