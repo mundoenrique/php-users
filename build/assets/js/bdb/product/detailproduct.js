@@ -131,8 +131,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 							concept = currentValue.concepto,
 							reference = currentValue.referencia,
 							sign = currentValue.signo,
-							amount = parseFloat(currentValue.monto.replace(/\,/g, '')),
-							formatterPeso = formatCurrency("es-CO", currencyOptions, amount);
+							amount = currentValue.monto;
 
 					var feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
 
@@ -165,7 +164,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 						totalIncome += amount;
 						sign = "";
 					}
-					feedAmount.textContent = sign + formatterPeso;
+					feedAmount.textContent = sign + coinSimbol + ' ' + amount;
 
 					feedItem.appendChild(feedDate);
 					feedItem.appendChild(feedConcept);
