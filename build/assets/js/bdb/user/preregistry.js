@@ -15,17 +15,18 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var md5CodeOTP = '';
 		var inpCodeOTP = $$.getElementById('codeOTP');
 		var form = $('#formVerifyAccount');
+
+		var typeDocumentUser = $$.getElementById('typeDocumentUser');
+		var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
+		var document_id = $$.getElementById('idNumber').value;
+
+		var codeTypeDocumentUser = typeDocumentUser.options[typeDocumentUser.selectedIndex].value;
+		var codeTypeDocumentBussines = typeDocumentBussines.options[typeDocumentBussines.selectedIndex].value;
+
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 
-			var typeDocumentUser = $$.getElementById('typeDocumentUser');
-			var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
-			var document_id = $$.getElementById('idNumber').value;
-
-			var codeTypeDocumentUser = typeDocumentUser.options[typeDocumentUser.selectedIndex].value;
 			var abbrTypeDocumentUser = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentUser}).abreviatura
-
-			var codeTypeDocumentBussines = typeDocumentBussines.options[typeDocumentBussines.selectedIndex].value;
 			var abbrTypeDocumentBussines = dataPreRegistry.typeDocument.find(function(e){return e['id'] == codeTypeDocumentBussines}).abreviatura
 
 			disableInputsForm(true, msgLoadingWhite);

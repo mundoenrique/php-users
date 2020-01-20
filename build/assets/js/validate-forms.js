@@ -151,6 +151,8 @@ function validateForms(form, options) {
 			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
 			confirmPassword: { required: true, equalTo: "#newPassword" },
+			typeDocumentUser: { required: true, "selectRequired": true },
+			typeDocumentBussines: { required: true, "selectRequired": true },
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
 			acceptTerms: { required: true },
