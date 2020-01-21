@@ -150,7 +150,8 @@ if (!function_exists('propiedades_menu'))
 			"pagina_actual":"pago",
 			"titulo":"Pagos",
 			"link":"'.$CI->config->item('base_url').'/transfer/index_tdc'.'",
-			"submenu":[
+			"submenu":"",
+			"submenu_en_construccion":[
 				{
 				"titulo2":"Pago TDC",
 				"link2":"'.$CI->config->item('base_url').'/transfer/index_tdc'.'"
@@ -203,7 +204,7 @@ if (!function_exists('propiedades_menu'))
 			switch ($country) {
 
 				case 'Ve':
-					$opcion_menu='{"dashboard":true,"transfer":false,"pago_ve":true,"reportes":true,"service":true,"perfil":true}';
+					$opcion_menu='{"dashboard":true,"transfer":true,"pago_ve":true,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Co':
 					$opcion_menu='{"dashboard":true,"transfer":true,"pago":true,"reportes":true,"service":true,"perfil":true}';
