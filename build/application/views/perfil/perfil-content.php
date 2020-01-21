@@ -539,7 +539,7 @@ $pais_residencia=$this->session->userdata('pais');
                 <li class="col-md-full-profile">
                   <label>Correo electrónico</label>
                   <?php if($country === 'Ec-bp'): ?>
-                  <input type="text" id="email-bp" name="email-bp" class="ignore" value=<?php echo $email; ?> readonly>
+                  <input type="text" id="email-bp" name="email-bp" class="ignore width-input-bp" value=<?php echo $email; ?> readonly>
                   <input type="hidden" id="email_cypher" name="email_cypher" value=<?= $emailCypher; ?>>
                   <?php else: ?>
                   <span id="msg-correo" style="margin-left:30px; display:none;"></span>

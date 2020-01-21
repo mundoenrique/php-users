@@ -88,8 +88,6 @@ class Registro_model extends CI_Model {
 	//CARGAR LISTA DE PROFESIONES
 	public function lista_profesiones($pais){
 		//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
-		//$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","lista profesion","lista profesion","consultar");
-
 		$sessionId 	= "REGISTROCPO";
 		$username 	= "REGISTROCPO";
 		$canal 		= "personasWeb";
@@ -102,13 +100,11 @@ class Registro_model extends CI_Model {
 			"idOperation"=>"37",
 			"className"=>"com.novo.objects.MO.ListaTipoProfesionesMO",
 			"logAccesoObject"=>$logAcceso,
-			//"token"=>$this->session->userdata("token")  $this->session->userdata("pais")
 		));
 
 		log_message("info", "Request lista_profesiones: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,0,'lista_profesiones');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> "CPONLINE"));
-		//log_message("info", "Salida encriptada lista_profesiones : ".$data);
 		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,0,'lista_profesiones'));
@@ -546,11 +542,6 @@ class Registro_model extends CI_Model {
 			$response = $this->cryptography->encrypt($this->response);
 			return json_encode($response);
 
-
-		//Simula respuesta del servicio
-		// sleep(2);
-		// $desdata = '{"rc":0,"msg":"Error cuenta invalida"}';
-		// return $desdata;
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------

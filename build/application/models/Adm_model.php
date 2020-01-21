@@ -44,9 +44,6 @@ class Adm_model extends CI_Model {
 		$salida = json_encode($desdata);
 		log_message("info", "Salida MODIFICAR desencriptado".$salida);
 
-		//simulación respuesta del servicio
-		 /*$desdata = '{"rc":-344,"msg":"Error cuenta destino ya esta afiliada"}';
-		 $desdata = json_decode($desdata);*/
 		 $response = $this->cryptography->encrypt($desdata);
 		 return json_encode($response);
 
@@ -69,8 +66,6 @@ class Adm_model extends CI_Model {
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			));
-
-		//print_r($data);
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'delete_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -98,7 +93,6 @@ class Adm_model extends CI_Model {
 			"logAccesoObject"=>$logAcceso,
 			"token"=>$this->session->userdata("token")
 			));
-		//print_r($data);
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'consultarBancos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));

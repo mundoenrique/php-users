@@ -69,10 +69,6 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Bloqueo desbloqueo=====>>>>> ".json_encode($desdata));
 
-        /*sleep(2);
-         $response = '{"rc":-382,"msg":"Proceso OK","cost_repos_plas":8352}';
-         $desdata = json_decode($response);
-				 */
         if ($desdata) {
             switch ($desdata->rc) {
                 case 0:
@@ -283,10 +279,6 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Cambio de PIN=====>>>>> ".json_encode($desdata));
 
-        /*sleep(2);
-        $response = '{"rc":-306,"msg":"Proceso OK"}';
-        $desdata = json_decode($response);*/
-
         if ($desdata) {
             switch ($desdata->rc){
                 case 0:
@@ -429,10 +421,6 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Generacion de Token=====>>>>> ".json_encode($desdata));
 
-        //sleep(2);
-        //$response = '{"rc":0,"msg":"Proceso OK","bean":"uh4sf2"}';
-        //$desdata = json_decode($response);
-
         if ($desdata) {
             switch ($desdata->rc){
                 case 0:
@@ -543,10 +531,6 @@ class Service_model extends CI_Model {
 
         log_message("info", "RESPONSE Recuperación de clave=====>>>>> ".json_encode($desdata));
 
-        // sleep(2);
-        // $response = '{"rc":-264,"msg":"Proceso OK"}';
-        // $desdata = json_decode($response);
-
         //código, título y mensaje para la respuesta a la vista
         $code = '';
         $title = '';
@@ -612,7 +596,5 @@ class Service_model extends CI_Model {
 
     }
     //fin Solicitud recuperar clave
-
-
 
 } // FIN

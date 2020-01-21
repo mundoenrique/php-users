@@ -119,8 +119,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 			$base_cdn = $this->config->item('base_url_cdn');
 
 			foreach ($datos->cuentaOrigen as $value) {
-				//$img=strtolower(str_replace(' ','-',$value->producto));
-				//$img=str_replace("/", "-", $img1);
 				$cadena = strtolower($value->producto);
 				$producto1 = quitar_tildes($cadena);
 				$img1=strtolower(str_replace(' ','-',$producto1));

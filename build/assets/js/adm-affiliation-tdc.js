@@ -125,16 +125,13 @@ base_cdn = $('body').attr('data-app-cdn');
 			$(this).addClass("current-dashboard-item");
 			$("#content-product").dialog("close");
 
-			   // var ctaOrigen=$(this).attr("card");
 			var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
 			var masCtaOrigen=$("#donor-cardnumber-origen").attr("masCtaOrigen");
 			var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("marcaCtaOrigen");
 			var nombreOrigen=$("#donor-cardnumber-origen").attr("nombreOrigen");
 			var producto=$("#donor-cardnumber-origen").attr("producto");
 			var prefijo = $(this).attr("prefix")
-			// d = new Date();
-			// var mes = 01;
-			// var anio = d.getFullYear();
+
 			mes = $("#filter-month").val();
 			anio = $("#filter-year").val();
 
@@ -146,8 +143,7 @@ base_cdn = $('body').attr('data-app-cdn');
 
 		    $('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
 		    	$('#dashboard').children().remove();
-		    	//$("#tdestino").append($("#removerDestino").html());
-		    	$("#botonContinuar").attr("disabled",true);
+		     	$("#botonContinuar").attr("disabled",true);
 		    	$("#content-product").dialog({
 		    		title:"Selección de Cuentas Origen",
 		    		modal:"true",
@@ -157,7 +153,6 @@ base_cdn = $('body').attr('data-app-cdn');
 			});
 
 		});//FIN
-	//$(".muestraDestino").click(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen,producto){
 		var clase,clase1;
@@ -221,21 +216,11 @@ base_cdn = $('body').attr('data-app-cdn');
 						yearSelect.push(i);
 						}
 
-					// imagen=$(this).find('img').attr('src');
-					// tarjeta=$(".muestraDestino").attr('card');
-					// id_ext_per=$(".muestraDestino").attr('id_ext_per');
-					// nombre=$(".muestraDestino").attr('nombre');
-					// emailCliente=$(".muestraDestino").attr('emailCliente');
-					// id_afiliacion=$(".muestraDestino").attr('id_afiliacion');
-
 					tarjeta =$(this).parents(".dashboard-item").attr('card');
 					id_ext_per_1=$(this).parents(".dashboard-item").attr('id_ext_per');
 					tipo_doc=id_ext_per_1.substr(0,1);
 					id_ext_per=id_ext_per_1.substr(1,14);
 					nombre=$(this).parents(".dashboard-item").attr('nombre');
-
-					// mascara=$(this).parents(".dashboard-item").attr('mascara');
-					// mascara2=$("#donor").find(".product-cardnumber").html();//otra prueba para tomar la mascara hz
 
 					emailCliente=$(this).parents(".dashboard-item").attr('emailCliente');
 					id_afiliacion=$(this).parents(".dashboard-item").attr('id_afiliacion');
@@ -318,7 +303,6 @@ base_cdn = $('body').attr('data-app-cdn');
 				        ctaDestino+="<button id='cambiar' class='novo-btn-primary'>Modificar</button>";
 				        ctaDestino+="</div>";
 				      	ctaDestino+="</div>";
-				      	// ctaDestino+="<div id='msg' banco='"+codBanco+"''></div>";
 
 				        $("#content-holder").append(ctaDestino);
 						$.each(yearSelect,function(index,value){
@@ -402,7 +386,6 @@ base_cdn = $('body').attr('data-app-cdn');
 							confirmacion+= 			"</tr>";
 							confirmacion+= 		"</tbody>";
 							confirmacion+= 	"</table>";
-							// confirmacion+= 	"<div id='msg'></div>";
 							confirmacion+= 	"<div class='form-actions'>";
 							confirmacion+= 		"<button id='cancelar' type='reset' class='novo-btn-secondary'>Cancelar</button>";
 							confirmacion+= 		"<button id='continuar' class='novo-btn-primary'>Continuar</button>";
@@ -488,12 +471,6 @@ base_cdn = $('body').attr('data-app-cdn');
 
 
 				$('.muestraDestino').on('click',"#eliminar",function(){
-					// tarjeta=$(".muestraDestino").attr('card');
-					// id_ext_per=$(".muestraDestino").attr('id_ext_per');
-					// nombre=$(".muestraDestino").attr('nombre');
-					// emailCliente=$(".muestraDestino").attr('emailCliente');
-					// banco=$(".muestraDestino").attr('banco');
-					// codBanco=$(".muestraDestino").attr('codBanco');
 					tarjeta =$(this).parents(".dashboard-item").attr('card');
 					id_ext_per=$(this).parents(".dashboard-item").attr('id_ext_per');
 
@@ -630,10 +607,6 @@ function validar_campos(){
 					return false;
 			}
 	});
-
-	// jQuery.validator.addMethod("lettersonly", function(value, element){
-	// 	return this.optional(element) || /^[a-z," "]+$/i.test(value);
-	// });
 
 		var letter = /^[a-zA-Z_áéíóúñ\s]*$/;
 
