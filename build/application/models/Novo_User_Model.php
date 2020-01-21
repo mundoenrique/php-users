@@ -176,7 +176,7 @@ class Novo_User_Model extends NOVO_Model
 							'userName'	=> $response->logAccesoObject->userName,
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
-							'tipo_id_ext_per'	=> $dataRequest->codeTypeDocument,
+							'tipo_id_ext_per'	=> $dataRequest->codeTypeDocumentUser,
 							'descripcion_tipo_id_ext_per'	=> $response->user->descripcion_tipo_id_ext_per,
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,

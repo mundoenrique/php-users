@@ -28,7 +28,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	btnRegistrar.addEventListener('click', function(e){
+	btnRegistry.addEventListener('click', function(e){
 		e.preventDefault();
 
 		document.getElementById("userpwd").type = 'password';
@@ -51,13 +51,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 						data[currentValue.getAttribute('name')] = currentValue.value;
 					}
 				}
-			);
-			data['tipo_id_ext_per'] = dataRegistryFrm.code_tipo_id_ext_per;
-			data['pais'] = dataRegistryFrm.paisUser;
-			data['otro_telefono'] = $$.getElementById('phoneType').value;
-			data['username'] = $$.getElementById('username').value.toUpperCase();
-			data['cpo_name'] = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+				);
+				data['tipo_id_ext_per'] = dataRegistryFrm.code_tipo_id_ext_per;
+				data['pais'] = dataRegistryFrm.paisUser;
+				data['otro_telefono'] = $$.getElementById('phoneType').value;
+				data['username'] = $$.getElementById('username').value.toUpperCase();
+				data['cpo_name'] = decodeURIComponent(
+					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
 
 			callNovoCore('POST', 'User', 'registry', data, function(response) {
