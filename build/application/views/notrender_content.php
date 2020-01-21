@@ -19,6 +19,11 @@
 				<span class="browser-name">Apple Safari</span>
 				<span class="browser-version">Version 10+</span>
 			</li>
+			<li class="list-inline-item">
+				<img class="browser-img" src="<?= $this->asset->insertFile('icon-edge.svg','img',$countryUri); ?>" alt="Icono safari">
+				<span class="browser-name">Microsoft Edge</span>
+				<span class="browser-version">Version 14+</span>
+			</li>
 		</ul>
 	<? endif; ?>
 	</div>
