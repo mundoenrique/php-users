@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				"logAccesoObject"=>$logAcceso,
 				"token"=>$this->session->userdata("token")
 			]);
-			//print_r($data);
+
 			log_message("info", "Request ctasDestino_load transferencia====>>>>>: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'ctasDestino_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -108,7 +108,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				                    "token"=>$this->session->userdata("token")
 			                    ));
 
-			//print_r($data);
 			log_message("info", "Salida Validar Clave : ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'validarClave_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -153,8 +152,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			log_message("info", "Salida claveAutenticacion_load transferencia".$salida);
 
-			//$desdata = json_decode('{"rc":0,"msg":"Error al crear la clave de"}');
-
 			return json_encode($desdata);
 
 		}			//FIN LLAMADA A GENERAR CLAVE DE AUTENTICACION
@@ -176,8 +173,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				                    "token"=>$this->session->userdata("token")
 			                    ));
 
-			//print_r($data);
-
 			$dataEncry = np_Hoplite_Encryption($data,1,'validarClaveAutenticacion_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada validarClaveAutenticacion_load : ".$data);
@@ -188,8 +183,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$salida = json_encode($desdata);
 
 			log_message("info", "Salida validarClaveAutenticacion_load transferencia".$salida);
-
-			//$desdata = json_decode('{"rc":0,"msg":"Error al crear la clave de"}');
 
 			return json_encode($desdata);
 
@@ -217,7 +210,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				                    "token"=>$this->session->userdata("token")
 			                    ));
 
-			//print_r($data);
 			log_message("info", "Request procesarTransferencia_load------>>>>>>" . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'procesarTransferencia_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -230,8 +222,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$salida = json_encode($desdata);
 
 			log_message("info", "Response procesarTransferencia_load------>>>>>>".$salida);
-
-			//$desdata = json_decode('{"rc":0,"dataTransaccion":{"referencia":"154548"}}');
 
 			$response = $this->cryptography->encrypt($desdata);
 			return json_encode($response);

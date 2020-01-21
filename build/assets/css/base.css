@@ -1886,7 +1886,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-success {
 	background: rgba(67, 181, 129, 0.1);
-	/*border: 1px solid $color;*/
 	-webkit-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
 	-moz-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
 	box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
@@ -5611,7 +5610,6 @@ body .ui-tooltip {
 	font-size: 12px;
 	font-family: "Helvetica", "Arial", sans-serif;
 	width: 200px;
-	/* font-style: italic; */
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -5752,15 +5750,8 @@ body .ui-tooltip {
 .fields input[type="password"],
 .fields textarea,
 .fields select {
-	/*background-color: #fff;
-  border: 0.1rem solid #bcbcbc;
-  border-radius: .2rem;
-  box-shadow: none;
-  color: #888;*/
 	font-family: inherit;
 	font-size: inherit;
-	/*  height: 2rem;
-    padding: .6rem 1rem;*/
 	width: 100%;
 }
 
@@ -5880,3 +5871,62 @@ body .ui-tooltip {
 .fields .user-requerimientos {
 	padding-top: 1rem;
 }
+
+/*ESTILOS NUEVO MENU L.M*/
+.nav {
+	float: right;
+	}
+
+	ul, ol{
+	 list-style:none;
+	}
+	.nav li a {
+		background-color:#0e5b8c;
+		color:#7eafcef2;
+		text-decoration:none;
+		padding:7px 8px;
+		display:block;
+		font-size: 13.6px;
+	}
+	.nav > li {
+		float:left;
+		padding-right: 11px;
+		line-height: initial;
+	}
+
+	.nav li a:hover {
+		background-color:#0e5b8c;
+	}
+	.nav li ul {
+		display:none;
+		position:absolute;
+		min-width:120px;
+		border-radius: 5px
+	}
+	.nav li:hover > ul {
+		display:block;
+	}
+	.nav li ul li{
+		position:relative;
+	}
+	.nav li ul li ul{
+		right:-140px;
+		top:0px;
+	}
+	.hover:hover {
+		color:#ffffff!important;
+	}
+	.hover2:hover {
+		color:#ffffff
+
+	}
+	.actual {
+		color:#ffffff!important;
+	}
+	.icon {
+		content: "\3b";
+	}
+
+	.div-large {
+		width: 330px;
+	}

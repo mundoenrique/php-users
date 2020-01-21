@@ -3,16 +3,12 @@ base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
 
 	$(function(){
-		var max = 4;
-      // var misVariablesGet = getVarsUrl();
-      // telefono = misVariablesGet.num%20; // devuelve "dato1" y asi con los demas.
+		  var max = 4;
       var telefono = getVarsUrl()["num%20"];
       var estatus = getVarsUrl()["disponeClaveSMS%20"];
       var pais = getVarsUrl()["acCodPais%20"];
       var id_ext_per = getVarsUrl()["id_ext_per%20"];
 
-
-      //var nro_tlf = $("#num_tlf").val();
              cadena = "<form accept-charset='utf-8' method='post' id='form-validar'>" ;
              cadena+= "<fieldset class='fieldset-column-center'>";
              cadena+=     "<div class='field-meter' id='password-strength-meter'>";
@@ -50,16 +46,7 @@ base_cdn = $('body').attr('data-app-cdn');
       else if(estatus==0){
         $("#content-pass").append(confirmacion1).html();
       }
-      // $('#userpwd').keyup(function() {
-      //     var pswd = $(this).val();
-      //     if (! pswd.match() ) {
-      //           $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
-      //           cons=true;
-      //       } else {
-      //           $('#consecutivo').removeClass('rule-valid').addClass('rule-invalid');
-      //           cons=false;
-      //       }
-      // });
+
 $("#volver").click(function(){
    $(location).attr('href', base_url+'/perfil');
 });
@@ -88,7 +75,6 @@ $("#actualizar").click(function(){
         claveSMS = hex_md5(claveSMS);
       }
 
-      //console.log("clave "+claveSMS);
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -345,7 +331,6 @@ function getVarsUrl(){
         var x= arrUrl[i].split("=%20");
         urlObj[x[0]]=x[1]
     }
-    //console.log(urlObj);
     return urlObj;
 }
 

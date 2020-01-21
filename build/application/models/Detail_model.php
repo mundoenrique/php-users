@@ -26,7 +26,6 @@ class Detail_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 
-		//print_r($data);
 		$dataEncry = np_Hoplite_Encryption($data,1,'detail_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada DETALLE : ".$data);
@@ -65,7 +64,6 @@ class Detail_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 
-		//print_r($data);
 		log_message("info", "Salida exportar detalle".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1,'exportar');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -100,7 +98,7 @@ class Detail_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 		log_message("info", "Salida movimientos detalle".$data);
-		//print_r($data);
+
 		$dataEncry = np_Hoplite_Encryption($data,1,'movimientos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada movimientos_load : ".$data);

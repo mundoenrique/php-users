@@ -78,18 +78,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 				$moneda=lang("MONEDA");
 				$id=lang("ID");
 
-				/*echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' marca='$marca' empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
-					<a href='#' rel='section'>
-						<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />
-						<div class='dashboard-item-network $marca'>$value->marca</div>
-						<div class='dashboard-item-info'>
-							<p class='dashboard-item-cardholder'>$nomPlastico</p>
-							<p class='dashboard-item-balance'>$moneda---</p>
-							<p class='dashboard-item-cardnumber'>$value->noTarjetaConMascara</p>
-							<p class='dashboard-item-category'>$nomProducto</p>
-						</div>
-					</a>
-				</li>";*/
 				echo "<li class='dashboard-item $empresa' card='$value->noTarjeta' marca='$marca' empresa='$empresa' producto='$img' numt_mascara='$value->noTarjetaConMascara' moneda='$moneda' doc='$id'>
 					<a href='#' rel='section'>
 						<img src='".$base_cdn."img/products/".$pais."/$img.png' width='200' height='130' alt='' />

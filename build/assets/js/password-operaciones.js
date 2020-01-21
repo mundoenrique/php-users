@@ -6,7 +6,6 @@ base_cdn = $('body').attr('data-app-cdn');
 		var max = 15;
 			var old =$('#new-transpwd').val();
 			var newC =$('#confirm-new-transpwd').val();
-			//var cNewC = $('confirm-new-transpwd').val();
 
 		$('#new-transpwd').keyup(function() {
 		        // set password variable
@@ -87,16 +86,10 @@ base_cdn = $('body').attr('data-app-cdn');
 				valor1=true;
 				valor2=true;
 				valor3=true;
-				// if((longitud==true)&& (mt==true) && (cap==true) && (car==true) &&  (cons==true) && (esp==true)){
-		  //       	$('#continuar').removeClass('disabled-button');
-		  //       }
+
 				if( old=="" || newC==""){
-					//$(this).find($('#vacio')).text('Todos los campos son obligatorios');
-					//$('#continuar').addClass('disabled-button');
-					//alert("Todos los campos son obligatorios");
 					valor1=false;
 					$("#dialog-clave-inv").dialog({
-						//title:"Campos obligatorios",
 						modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
@@ -107,12 +100,9 @@ base_cdn = $('body').attr('data-app-cdn');
 					});
 				}
 				if(newC != old){
-					//$(this).find($('#vacio')).text('Su contraseña no puede ser igual a la anterior');
-					//alert("Su contraseñas no coinciden");
 					valor3=false;
 					$("#dialog-clave-inv2").dialog({
-						//title:"Contraseñas no coinciden",
-						modal:"true",
+							modal:"true",
 						width:"440px",
 						open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 					});
