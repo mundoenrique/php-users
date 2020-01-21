@@ -134,7 +134,15 @@ if (!function_exists('propiedades_menu'))
 			"pagina_actual":"transfer",
 			"titulo":"Transferencias",
 			"link":"'.$CI->config->item('base_url').'/transferencia/pe'.'",
-			"submenu":""
+			"submenu":[
+				{
+				"titulo2":"'.lang("MENU_P2P").'",
+				"link2":"'.$CI->config->item('base_url').'/transferencia'.'"
+				},
+				{
+				"titulo2":"Cuenta Bancaria",
+				"link2":"'.$CI->config->item('base_url').'/transfer/index_bank'.'"
+				}]
 			},
 			{
 			"id":"pago",
@@ -207,13 +215,13 @@ if (!function_exists('propiedades_menu'))
 					$opcion_menu='{"dashboard":true,"transfer":true,"pago_ve":true,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Co':
-					$opcion_menu='{"dashboard":true,"transfer":false,"pago":false,"reportes":true,"service":true,"perfil":true}';
+					$opcion_menu='{"dashboard":true,"transfer":true,"pago":true,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Pe':
-					$opcion_menu='{"dashboard":true,"transfer_pe":false,"pago":false,"reportes":true,"service":true,"perfil":true}';
+					$opcion_menu='{"dashboard":true,"transfer_pe":true,"pago":true,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Usd':
-					$opcion_menu='{"dashboard":true,"transfer_usd":false,"pago":false,"reportes":true,"service":false,"perfil":true}';
+					$opcion_menu='{"dashboard":true,"transfer_usd":true,"pago":true,"reportes":true,"service":false,"perfil":true}';
 						break;
 				case 'Ec-bp':
 					$opcion_menu='{"dashboard":true,"transfer":false,"pago":false,"reportes":false,"service":true,"perfil":true}';
