@@ -6,7 +6,7 @@
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de Cuenta</h2>
+				<h2 class="tertiary h3">Verificación de cuenta</h2>
 				<p>Si aún no posees usuario para acceder al sistema <strong><?= $nameAplication;?></strong>, a continuación debes
 				proporcionar los siguientes datos relacionados con tu cuenta:</p>
 				<hr class="separador-one">
@@ -14,7 +14,7 @@
 					<form id="formVerifyAccount" method="post">
 						<div class="row">
 							<div class="form-group col-lg-3">
-								<label for="typeDocument">Tipo de Documento</label>
+								<label for="typeDocument">Tipo de documento</label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -33,12 +33,12 @@
 								<?php }?>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="idNumber">Documento de Identidad</label>
+								<label for="idNumber">Documento de identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="typeDocument">Tipo de Documento</label>
+								<label for="typeDocument">Tipo de documento</label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -57,12 +57,12 @@
 								<?php }?>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="nitBussines">Nit de la Empresa</label>
+								<label for="nitBussines">Nit de la empresa</label>
 								<input id="nitBussines" class="form-control" type="text" name="nitBussines">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="telephoneNumber">Número de Teléfono</label>
+								<label for="telephoneNumber">Número de teléfono</label>
 								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
@@ -70,7 +70,7 @@
 						<div class="form-group custom-control custom-switch my-3">
 							<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
 							<label class="custom-control-label" for="acceptTerms">
-								Acepto las <a id="termsConditions" class="primary" href="#" rel="section">condiciones de uso</a> de este sistema
+								Acepto las <a id="termsConditions" class="primary" href="#" rel="section">condiciones de uso</a> de este sistema.
 							</label>
 							<div class="help-block"></div>
 						</div>
@@ -99,7 +99,7 @@
 	<div id="dialogConditions" class="none">
 		<div class="dialog-content p-3">
 			<header class="">
-				<h2 class="h2 primary">Condiciones Generales, Términos de Uso y Confidencialidad</h2>
+				<h2 class="h2 primary">Condiciones generales, términos de uso y confidencialidad</h2>
 			</header>
 			<p class="p-0">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam bibendum, purus sit amet venenatis laoreet, mi elit tempor turpis, et sagittis erat felis ac dui. Quisque leo enim, gravida consectetur odio quis, iaculis pharetra erat. Cras volutpat lacinia volutpat. In quis mauris enim. Suspendisse pharetra in libero nec vestibulum. Vestibulum tincidunt orci eget nisi lobortis, ut fringilla felis pellentesque. Aenean eget eros risus. Pellentesque ac nisi vehicula, lacinia ligula at, lacinia libero. Proin aliquet ligula ac ipsum laoreet convallis.

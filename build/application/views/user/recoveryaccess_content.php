@@ -2,12 +2,12 @@
 <div id="recovery" class="recovery-content h-content bg-white">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<header class="">
-			<h1 class="primary h0">Recuperar Acceso</h1>
+			<h1 class="primary h0">Recuperar acceso</h1>
 		</header>
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de Datos</h2>
+				<h2 class="tertiary h3">Verificación de datos</h2>
 				<p>Para recuperar tu usuario o restablecer tu contraseña de acceso a <strong><?= $nameAplication;?></strong>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
@@ -26,12 +26,12 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-lg-4">
-								<label for="email">Correo Electrónico</label>
+								<label for="email">Correo electrónico</label>
 								<input id="email" class="form-control" type="email" name="email"  placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-3">
-								<label for="typeDocument">Tipo de Documento</label>
+								<label for="typeDocument">Tipo de documento</label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -50,7 +50,7 @@
 								<?php }?>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="idNumber">Documento de Identidad</label>
+								<label for="idNumber">Documento de identidad</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
 							</div>

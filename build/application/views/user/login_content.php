@@ -21,7 +21,7 @@
 				<div id="formMsg" class="general-form-msg"></div>
 				<button id="btn-login" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5">
 					<span class="icon-lock mr-1 h3 yellow" aria-hidden="true"></span>
-					Ingreso Seguro
+					Ingreso seguro
 				</button>
 				<a class="block mb-1 h5 primary" href="<?= base_url('recuperaracceso');?>">Recuperar acceso</a>
 				<p class="mb-0 h5">¿No posees usuario? <a class="primary" href="<?= base_url('preregistro');?>">Regístrate</a></p>

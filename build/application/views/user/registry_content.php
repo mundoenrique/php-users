@@ -6,7 +6,7 @@
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Afiliación de Datos</h2>
+				<h2 class="tertiary h3">Afiliación de datos</h2>
 				<p>Para obtener tu usuario de <strong>Conexión Personas</strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
@@ -44,7 +44,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="birthDate">Fecha de Nacimiento</label>
+								<label for="birthDate">Fecha de nacimiento</label>
 								<input id="birthDate" class="form-control" name="birthDate" type="text">
 								<div class="help-block"></div>
 							</div>
@@ -66,12 +66,12 @@
 						<h3 class="tertiary h4">Datos de contacto</h3>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="email">Correo Electrónico</label>
+								<label for="email">Correo electrónico</label>
 								<input id="email" class="form-control" type="email" name="email" value="<?= $data->afiliacion->correo?>" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="confirmEmail">Confirmar Correo Electrónico</label>
+								<label for="confirmEmail">Confirmar correo electrónico</label>
 								<input id="confirmEmail" class="form-control" type="email" name="confirmEmail" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
@@ -86,7 +86,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhone">Otro Teléfono (Tipo)</label>
+								<label for="otherPhone">Otro teléfono (Tipo)</label>
 								<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
 									<option value="OFC">Laboral</option>
 									<option value="FAX">Fax</option>
@@ -95,7 +95,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhoneNum">Otro Teléfono (Número)</label>
+								<label for="otherPhoneNum">Otro teléfono (Número)</label>
 								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
 								<div class="help-block"></div>
 							</div>
@@ -124,7 +124,7 @@
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-6">
-										<label for="confirmUserpwd">Confirmar Contraseña</label>
+										<label for="confirmUserpwd">Confirmar contraseña</label>
 										<input id="confirmUserpwd" class="form-control" type="password" name="confirmUserpwd">
 										<div class="help-block"></div>
 									</div>
@@ -135,7 +135,7 @@
 								<div id="password-strength-meter" class="field-meter">
 									<h4>Requerimientos de contraseña:</h4>
 									<ul class="pwd-rules">
-										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>Caracteres</strong></li>
+										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>caracteres</strong></li>
 										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula</strong>
 										</li>
 										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula</strong>
