@@ -1,5 +1,5 @@
 
-<div id="registry" class="registro-content h-100 bg-white">
+<div id="recovery" class="recovery-content h-content bg-white">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<header class="">
 			<h1 class="primary h0">Recuperar Acceso</h1>

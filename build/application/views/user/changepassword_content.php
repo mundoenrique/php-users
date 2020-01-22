@@ -1,5 +1,5 @@
 
-<div id="changepassword" class="changepassword-content h-100 bg-white">
+<div id="changepassword" class="changepassword-content h-content bg-white">
 	<div class="py-4 px-5">
 		<header class="">
 			<h1 class="primary h0">Cambiar Clave</h1>

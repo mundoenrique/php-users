@@ -1,4 +1,4 @@
-<div id="preRegistry" class="registro-content h-100 bg-white">
+<div id="preRegistry" class="registro-content h-content bg-white">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<header class="">
 			<h1 class="primary h0">Registro</h1>
