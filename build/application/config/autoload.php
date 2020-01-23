@@ -103,7 +103,8 @@ $autoload['helper'] = array(
 	'connections',
 	'tools',
 	'form',
-	'cookie'
+	'cookie',
+	'menu'
 );
 
 /*
