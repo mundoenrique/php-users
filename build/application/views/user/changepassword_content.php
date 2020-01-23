@@ -2,12 +2,12 @@
 <div id="changepassword" class="changepassword-content h-content bg-white">
 	<div class="py-4 px-5">
 		<header class="">
-			<h1 class="primary h0">Cambiar Clave</h1>
+			<h1 class="primary h0">Cambiar clave</h1>
 		</header>
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de Datos</h2>
+				<h2 class="tertiary h3">Verificación de catos</h2>
 				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
@@ -17,7 +17,7 @@
 								<h3 class="tertiary h4">Datos de usuario</h3>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
-										<label for="currentPassword">Clave Actual</label>
+										<label for="currentPassword">Clave actual</label>
 										<div class="input-group">
 											<input id="currentPassword" class="form-control" type="password" name="currentPassword">
 											<div class="input-group-append">
@@ -39,7 +39,7 @@
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-6">
-										<label for="confirmPassword">Confirmar Contraseña</label>
+										<label for="confirmPassword">Confirmar contraseña</label>
 										<input id="confirmPassword" class="form-control" type="password" name="confirmPassword">
 										<div class="help-block"></div>
 									</div>
@@ -50,14 +50,14 @@
 								<div class="field-meter" id="password-strength-meter">
 									<h4>Requerimientos de contraseña:</h4>
 									<ul class="pwd-rules">
-										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>Caracteres</strong></li>
-										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula</strong>
+										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>caracteres.</strong></li>
+										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula.</strong>
 										</li>
-										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula</strong>
+										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula.</strong>
 										</li>
-										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números</strong></li>
-										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>caracter especial</strong><br />(ej: ! @ ? + - . , #)</li>
-										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números.</strong></li>
+										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>carácter especial </strong>(ej: ! @ ? + - . , #).</li>
+										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.</li>
 									</ul>
 								</div>
 							</div>

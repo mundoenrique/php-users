@@ -1,7 +1,7 @@
 <div id="profile" class="profile-content h-100 bg-white">
 	<div class="py-4 px-5">
 		<header class="">
-			<h1 class="primary h0">Perfil de Usuario</h1>
+			<h1 class="primary h0">Perfil de usuario</h1>
 		</header>
 		<section>
 			<hr class="separador-one">
@@ -44,17 +44,17 @@
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="lastName">Primer Apellido</label>
+											<label for="lastName">Primer apellido</label>
 											<input id="lastName" class="form-control" type="text" name="lastName" value="<?= ucfirst(strtolower($data->registro->user->primerApellido));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="secondSurname">Segundo Apellido</label>
+											<label for="secondSurname">Segundo apellido</label>
 											<input id="secondSurname" class="form-control" type="text" name="secondSurname" value="<?= ucfirst(strtolower($data->registro->user->segundoApellido));?>" disabled/>
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="birthDate">Fecha de Nacimiento</label>
+											<label for="birthDate">Fecha de nacimiento</label>
 											<input id="birthDate" class="form-control" type="text" name="birthDate" value="<?= $data->registro->user->fechaNacimiento;?>">
 											<div class="help-block"></div>
 										</div>
@@ -188,7 +188,7 @@
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="state">Otro Teléfono (Tipo)</label>
+											<label for="state">Otro teléfono (tipo)</label>
 											<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
 												<option <?= array_key_exists('OFC', $data->ownTelephones)? 'selected': '';?> value="OFC">Laboral</option>
 												<option <?= array_key_exists('FAX', $data->ownTelephones)? 'selected': '';?> value="FAX">Fax</option>
@@ -197,7 +197,7 @@
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="otherPhoneNum">Otro Teléfono (Número)</label>
+											<label for="otherPhoneNum">Otro teléfono (número)</label>
 											<?php
 												$nroOtherTelephone = '';
 												foreach ($data->ownTelephones as $key => $value) {
@@ -211,7 +211,7 @@
 											<div class="help-block"></div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="email">Correo Electrónico</label>
+											<label for="email">Correo electrónico</label>
 											<input id="email" class="form-control" type="email" name="email" value="<?= $data->registro->user->email;?>" placeholder="usuario@ejemplo.com" disabled>
 											<div class="help-block"></div>
 										</div>

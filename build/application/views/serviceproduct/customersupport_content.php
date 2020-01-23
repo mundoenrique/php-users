@@ -5,7 +5,7 @@
 <div id="service" class="service-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
-			<h1 class="h3 semibold primary">Atención al Cliente</h1>
+			<h1 class="h3 semibold primary">Atención al cliente</h1>
 		</header>
 		<section>
 			<div class="pt-3">
@@ -58,7 +58,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="generateCodeOTP">Código de Validación</label>
+										<label for="generateCodeOTP">Código de validación</label>
 										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
 										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -101,7 +101,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="changeCodeOTP">Código de Validación</label>
+										<label for="changeCodeOTP">Código de validación</label>
 										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
 										<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -122,7 +122,7 @@
 							<h2 class="h4 regular tertiary">Bloquear cuenta</h2>
 						</div>
 						<div id="preventLock" class="msg-prevent">
-							<h3 class="h4 regular">Si realmente deseas <span id="action">Bloquear </span> tu tarjeta, presiona continuar</h3>
+							<h3 class="h4 regular">Si realmente deseas <span id="action">bloquear </span> tu tarjeta, presiona continuar</h3>
 						</div>
 
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
@@ -131,7 +131,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="lockCodeOTP">Código de Validación</label>
+										<label for="lockCodeOTP">Código de validación</label>
 										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
 										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -170,7 +170,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="replaceCodeOTP">Código de Validación</label>
+										<label for="replaceCodeOTP">Código de validación</label>
 										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
 										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>

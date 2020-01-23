@@ -33,7 +33,7 @@
 										strval(number_format($data['actualBalance'],2,',','.')): '---';?>
 								</span>
 							</li>
-							<li class="list-inline-item">En Tránsito
+							<li class="list-inline-item">En tránsito
 								<span id="bloqueado" class="product-balance block primary">
 								<?= lang('GEN_COIN').' '; ?>
 									<?= $data['ledgerBalance'] !== '--'?

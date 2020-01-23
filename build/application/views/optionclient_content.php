@@ -26,7 +26,7 @@
 										$data['actualBalance'];?>
 								</span>
 							</li>
-							<li class="list-inline-item">En Tránsito
+							<li class="list-inline-item">En tránsito
 								<span id="bloqueado" class="product-balance block primary">
 									<?= $data['ledgerBalance'] !== '--'?
 									lang('GEN_COIN').' '.strval(number_format($data['ledgerBalance'],2,',','.')): $data['ledgerBalance'];?>
