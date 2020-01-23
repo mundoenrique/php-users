@@ -14,7 +14,7 @@ class Historial_model extends CI_Model {
 	//CARGAR HISTORIAL
 	public function historial_load($tarjeta,$tipoOperacion,$mes,$anio) {
 
-	    									                  //$sessionId - $username - $canal - $modulo - $function - $operacion
+	  //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencias","historial","consultar");
 
 		$data = json_encode(array(
@@ -30,7 +30,6 @@ class Historial_model extends CI_Model {
 			"token"=>$this->session->userdata("token")
 		));
 
-		//print_r($data);
 		log_message("info", "Salida HISTORIAL : ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1,'historial_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));

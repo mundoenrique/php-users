@@ -286,7 +286,6 @@ $(function(){
 			return true;
 		}
 	}
-	//$('#segundo-nombre').blur(validaNombre2);
 
 	function validaApellido1(){
 		primer_apellido=$('#primer-apellido').val();
@@ -452,7 +451,7 @@ $(function(){
 				$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-				//console.log(data);
+
 				$("#departamento").empty().append("<option value=''>Cargando...</option>");
 				if(data.rc == 0) {
 
@@ -489,7 +488,6 @@ $(function(){
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 			$.post(base_url + "/perfil/listaEstado", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
-				//console.log(data);
 
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
@@ -522,7 +520,6 @@ $(function(){
 	function getProvinciasGeo(subRegion, codPaisresidencia) {
 		var aplicaPerfil=$('#aplicaPerfil').val();
 		if(aplicaPerfil=='S'){
-			//console.log("Valor==> " + subRegion);
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -536,7 +533,6 @@ $(function(){
 
 			$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-				//console.log(data);
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
 					$.each(data.listaSubRegiones, function (pos, item) {
@@ -552,7 +548,6 @@ $(function(){
 			});
 		}
 		else if(aplicaPerfil=='N'){
-			//console.log("Valor==> " + subRegion);
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -565,7 +560,6 @@ $(function(){
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 			$.post(base_url + "/perfil/listaCiudad", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
-				//console.log(data);
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 				if(data.rc == 0) {
 					$("#provincia").empty().append("<option value=''>Seleccione</option>");
@@ -585,7 +579,6 @@ $(function(){
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 	function getDistritosGeo(subRegion, codPaisresidencia) {
-		//  console.log("Valor==> " + subRegion);
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -599,7 +592,6 @@ $(function(){
 
 
 		$.post(base_url + "/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
-			// console.log(data);
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
@@ -635,7 +627,6 @@ $(function(){
 	function getProvincias(subRegion, codPaisresidencia) {
 		var aplicaPerfil=$('#aplicaPerfil').val();
 		if(aplicaPerfil=='S'){
-			//console.log("Valor==> " + subRegion);
 			var cpo_cook = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 				);
@@ -648,7 +639,6 @@ $(function(){
 				dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
 			$.post(base_url + "/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
-				//console.log(data);
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 				if(data.rc == 0) {
@@ -685,7 +675,6 @@ $(function(){
 
 
 			$.post(base_url + "/perfil/listaCiudad", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
-				//console.log(data);
 				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
 				if(data.rc == 0) {
@@ -703,7 +692,6 @@ $(function(){
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 	function getDistritos(subRegion, codPaisresidencia) {
-		//console.log("Valor==> " + subRegion);
 		var cpo_cook = decodeURIComponent(
 			document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
@@ -718,7 +706,6 @@ $(function(){
 		$.post(base_url+"/perfil/listadoDepartamento", {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}, function (response) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-			//console.log(data);
 			if(data.rc == 0) {
 				$("#distrito").empty().append("<option value=''>Seleccione</option>");
 				$.each(data.listaSubRegiones, function (pos, item) {

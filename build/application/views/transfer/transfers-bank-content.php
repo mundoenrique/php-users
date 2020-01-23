@@ -188,7 +188,6 @@ $cpo_cook = $this->security->get_csrf_hash();
 				$img1=strtolower(str_replace(' ','-',$producto1));
 				$img=str_replace("/", "-", $img1);
 				$marca= strtolower(str_replace(" ", "-", $value->marca));
-				//$marca = strtolower($marca);
 				$empresa = strtolower($value->nomEmp);
 				$pais=ucwords($this->session->userdata('pais'));
 				$moneda=lang("MONEDA");

@@ -392,9 +392,6 @@ class Perfil_model extends CI_Model {
         $response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
         log_message("info", "RESPONSE DESPUES DEL LLAMADO AL WS ===>: ".$response);
 
-        /*$response	= np_Hoplite_GetWSdepartament("movilsInterfaceResource",$data);
-        log_message("info", "RESPONSE DESPUES DEL LLAMADO AL WS ===>: ".$response);*/
-
         $data		= json_decode($response);
 
         $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'lista_departamentos'));

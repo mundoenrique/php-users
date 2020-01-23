@@ -65,7 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				                    "token"=>$this->session->userdata("token")
 			                    ));
 
-			//print_r($data);
 			log_message("info", "Request accountPhone: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'accountPhone');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -113,7 +112,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														"token"=>$this->session->userdata("token")
 													));
 
-			//print_r($data);
 			log_message("info", "Request baseAmount: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'baseAmount');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -122,7 +120,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'baseAmount'));
 			$salida = json_encode($desdata);
 			log_message("info", "Response baseAmount: ".$salida);
-
 
 			if($desdata){
 				switch ($desdata->rc) {
@@ -150,11 +147,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				'modalType' => $this->modalType
 			];
 
-			//return json_encode($response);
 			return json_encode($response);
 
 		}
-
 
 		public function setAmount($dataRequest){
 
@@ -178,7 +173,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														"monto"=> $montoUser,
 													));
 
-			//print_r($data);
 			log_message("info", "Request setAmount: " . $data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'setAmount');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
@@ -255,7 +249,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				"token"=>$this->session->userdata("token")
 				));
 
-			//print_r($data);
 			log_message("info", "Request historial_loadPe: ".$data);
 			$dataEncry = np_Hoplite_Encryption($data,1,'historial_loadPe');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
