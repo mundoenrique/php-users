@@ -129,7 +129,6 @@ $(function(){
 		$(this).addClass("current-dashboard-item");
 		$("#content-product").dialog("close");
 
-		// var ctaOrigen=$(this).attr("card");
 		var ctaOrigen=$("#donor-cardnumber-origen").attr("cardorigen");
 		var masCtaOrigen=$("#donor-cardnumber-origen").attr("masCtaOrigen");
 		var marcaCtaOrigen=$("#donor-cardnumber-origen").attr("marcaCtaOrigen");
@@ -146,7 +145,6 @@ $(function(){
 
 		$('.stack-item').click(function(){       //FUNCION PARA MODIFICAR LA TARJETA ORIGEN
 			$('#dashboard').children().remove();
-			//$("#tdestino").append($("#removerDestino").html());
 			$("#botonContinuar").attr("disabled",true);
 			$("#content-product").dialog({
 				                             title:"Selección de Cuentas Origen",
@@ -157,7 +155,6 @@ $(function(){
 		});
 
 	});//FIN
-	//$(".muestraDestino").click(function(){
 
 	function buscar_ctaDestino(ctaOrigen,prefijo,masCtaOrigen,marcaCtaOrigen,nombreOrigen){
 		var clase,clase1;
@@ -548,46 +545,6 @@ $(function(){
 						       });
 
 						$.ajaxSetup({async: true});
-						//$.post("adm/eliminar",{"noTarjeta":ctaOrigen, "noCuentaDestino":tarjeta,"tipoOperacion":"P2P"},function(data) {
-						// if(data.rc==0){
-
-						// 	$("#progress").attr('style','display:none');
-						//      		$("#content-holder").children().remove();
-						// 	exito= "<div id='progress'>";
-						// 	exito+= "<ul class='steps two-steps'>";
-						// 	exito+= "<li class='step-item completed-step-item'><span aria-hidden='true' class='icon-remove'></span> Eliminación de Afiliación</li>";
-						// 	exito+= "<li class='step-item current-step-item'><span aria-hidden='true' class='icon-thumbs-up'></span> Finalización</li>";
-						// 	exito+= "</ul>";
-						// 	exito+= "</div>";
-						// 	exito+= "<div class='alert-success' id='message'>";
-						// 	exito+=	"<span aria-hidden='true' class='icon-ok-sign'></span> Afiliación eliminada satisfactoriamente";
-						// 	exito+= "</div>";
-						// 	exito+= 	"<div class='form-actions'>";
-						// 	exito+= 		"<button id='exit'>Finalizar</button>";
-						// 	exito+= 	"</div>";
-						// 	$("#content-holder").append(exito);
-						// }
-						// if(data.rc == -61){
-						// 	$(location).attr('href', base_url+'/users/error_gral');
-						// }
-						// else{
-						// 	var exito;
-						//      		$("#progress").attr('style','display:none');
-						//      		$("#content-holder").children().remove();
-						// 	exito= "<div class='alert-error' id='message'>";
-						// 	exito+=	"<span aria-hidden='true' class='icon-cancel-sign'></span> Afiliación no eliminada";
-						// 	exito+= "</div>";
-						// 	exito+= 	"<div class='form-actions'>";
-						// 	exito+= 		"<button id='exit'>Finalizar</button>";
-						// 	exito+= 	"</div>";
-						// 	$("#content-holder").append(exito);
-						// }
-						// $("#exit").click(function(){
-
-						// 					$(location).attr('href', base_url+'/adm');
-
-						// 			});
-						//});
 
 					});
 

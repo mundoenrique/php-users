@@ -93,16 +93,5 @@ $pais = $this->session->userdata('pais');
 	</article>
 </div>
 <script type="text/javascript">
-
-
-
-/*var Co =
-var Mx =
-var Pe =
-var Usd =
-var USA =
-var Usa =
-var Ve = */
 </script>
 <!-- REGISTRO FASE II -->
-

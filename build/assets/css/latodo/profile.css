@@ -1741,7 +1741,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-warning {
   background: rgba(240, 193, 106, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
   -moz-box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
   box-shadow: 0 0 2px rgba(240, 193, 106, 0.85);
@@ -1756,7 +1755,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-error {
   background: rgba(240, 72, 72, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   -moz-box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
   box-shadow: 0 0 2px rgba(240, 72, 72, 0.85);
@@ -1771,7 +1769,6 @@ ul.field-category-list li.field-category-list-item.current-field-category-list-i
 
 .field-success {
   background: rgba(67, 181, 129, 0.1);
-  /*border: 1px solid $color;*/
   -webkit-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
   -moz-box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
   box-shadow: 0 0 2px rgba(67, 181, 129, 0.85);
@@ -5630,7 +5627,6 @@ body .ui-tooltip {
   font-size: 12px;
   font-family: "Helvetica", "Arial", sans-serif;
   width: 200px;
-  /* font-style: italic; */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;

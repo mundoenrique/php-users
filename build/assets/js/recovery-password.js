@@ -100,7 +100,7 @@ base_cdn = $('body').attr('data-app-cdn');
 			rules: {
 
 				"email": {"required":true, "email": true},
-				"card-holder-id": {"required":true,"number":true},    //{"required":true,"number":true}
+				"card-holder-id": {"required":true,"number":true},
 			},
 
 			messages: {
