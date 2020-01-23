@@ -7,7 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Afiliación de datos</h2>
-				<p>Para obtener tu usuario de <strong>Conexión Personas</strong>, es necesario que ingreses los datos requeridos a continuación:</p>
+				<p>Para obtener tu usuario de <strong><?= $nameAplication; ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<form method="post" id="formRegistry">
@@ -86,7 +86,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhone">Otro teléfono (Tipo)</label>
+								<label for="otherPhone">Otro teléfono (tipo)</label>
 								<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
 									<option value="OFC">Laboral</option>
 									<option value="FAX">Fax</option>
@@ -95,7 +95,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhoneNum">Otro teléfono (Número)</label>
+								<label for="otherPhoneNum">Otro teléfono (número)</label>
 								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
 								<div class="help-block"></div>
 							</div>
@@ -135,14 +135,14 @@
 								<div id="password-strength-meter" class="field-meter">
 									<h4>Requerimientos de contraseña:</h4>
 									<ul class="pwd-rules">
-										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>caracteres</strong></li>
-										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula</strong>
+										<li id="length" class="pwd-rules-item rule-invalid">De 8 a 15 <strong>caracteres.</strong></li>
+										<li id="letter" class="pwd-rules-item rule-invalid">Al menos una <strong>letra minúscula.</strong>
 										</li>
-										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula</strong>
+										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula.</strong>
 										</li>
-										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números</strong></li>
-										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>caracter especial</strong><br />(ej: ! @ ? + - . , #)</li>
-										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos</li>
+										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números.</strong></li>
+										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>carácter especial </strong> (ej: ! @ ? + - . , #).</li>
+										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.</li>
 									</ul>
 								</div>
 							</div>

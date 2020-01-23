@@ -7,8 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de cuenta</h2>
-				<p>Si aún no posees usuario para acceder al sistema <strong><?= $nameAplication;?></strong>, a continuación debes
-				proporcionar los siguientes datos relacionados con tu cuenta:</p>
+				<p>Si aún no posees usuario para acceder al sistema <strong><?= $nameAplication; ?></strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form id="formVerifyAccount" method="post">
