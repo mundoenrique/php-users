@@ -153,7 +153,8 @@ header.main-head {
 
 .notrender-content > div {
   -ms-flex-direction: column;
-  flex-direction: column;
+	flex-direction: column;
+	text-align: center;
 }
 
 .icon-update {
@@ -174,7 +175,6 @@ header.main-head {
 
 h1, h2 {
   margin-top: 0;
-  margin-bottom: .5rem;
   font-weight: 400;
 }
 
@@ -184,7 +184,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #435168;
 }
 
