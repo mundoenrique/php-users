@@ -194,7 +194,7 @@ class Novo_User_Model extends NOVO_Model
 								[
 									'id' => 'codeOTP',
 									'name' => 'codeOTP',
-									'label' => 'Codigo de Validación',
+									'label' => 'Código de validación',
 									'typeElement' => 'text',
 								]
 							],
