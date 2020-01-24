@@ -8,7 +8,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de datos</h2>
-				<p>Para recuperar tu usuario o restablecer tu contraseña de acceso a <strong><?= $nameAplication;?></strong>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
+				<p>Para recuperar tu usuario o restablecer tu contraseña de acceso a <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form method="post" id="formRecoveryAccess">
