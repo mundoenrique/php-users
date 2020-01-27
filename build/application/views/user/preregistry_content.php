@@ -7,13 +7,18 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Verificación de cuenta</h2>
-				<p>Si aún no posees usuario para acceder al sistema <strong><?= $nameAplication; ?></strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>
+				<p>Si aún no posees usuario para acceder al sistema <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>
 				<hr class="separador-one">
 				<div class="max-width-1 fit-lg mx-auto pt-3">
 					<form id="formVerifyAccount" method="post">
 						<div class="row">
-							<div class="form-group col-lg-3">
-								<label for="typeDocument">Tipo de documento</label>
+							<div class="form-group col-lg-4">
+								<label for="telephoneNumber">Nro. de teléfono</label>
+								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-lg-4">
+								<label for="typeDocument">Tipo de documento (tarjetahabiente)</label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -31,13 +36,13 @@
 									<div class="help-block"></div>
 								<?php }?>
 							</div>
-							<div class="form-group col-lg-3">
-								<label for="idNumber">Documento de identidad</label>
+							<div class="form-group col-lg-4">
+								<label for="idNumber">Nro. de documento (tarjetahabiente)</label>
 								<input id="idNumber" class="form-control" type="text" name="idNumber">
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-lg-3">
-								<label for="typeDocument">Tipo de documento</label>
+							<div class="form-group col-lg-4">
+								<label for="typeDocument">Tipo de documento (empresa)</label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -55,14 +60,9 @@
 									<div class="help-block"></div>
 								<?php }?>
 							</div>
-							<div class="form-group col-lg-3">
-								<label for="nitBussines">Nit de la empresa</label>
+							<div class="form-group col-lg-4">
+								<label for="nitBussines">Nro. de documento (empresa)</label>
 								<input id="nitBussines" class="form-control" type="text" name="nitBussines">
-								<div class="help-block"></div>
-							</div>
-							<div class="form-group col-lg-3">
-								<label for="telephoneNumber">Número de teléfono</label>
-								<input id="telephoneNumber" class="form-control" type="text" name="telephoneNumber">
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -77,7 +77,7 @@
 							<hr class="separador-one mb-3">
 							<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 							<div class="row form-group col-lg-4">
-								<label for="codeOTP">Codigo de validación</label>
+								<label for="codeOTP">Código de validación</label>
 								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 								<div class="help-block"></div>
 							</div>

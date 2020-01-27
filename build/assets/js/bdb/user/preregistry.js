@@ -60,6 +60,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
 					$$.getElementById("verification").classList.remove("none");
+					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(dataPreRegistry.setTimerOTP, countdown);
@@ -202,7 +203,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function resendCodeOTP (message) {
-		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary" href="#">Reenviar codigo</a>`;
+		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary regular" href="#">Reenviar código</a>`;
+		verificationMsg.classList.add("semibold", "danger");
 		clearInterval(interval);
 		btnTrigger.disabled = true;
 		$$.getElementById('codeOTP').disabled = true;
@@ -219,6 +221,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					btnTrigger.disabled = false;
 					btnTrigger.innerHTML = txtBtnTrigger;
 					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(dataPreRegistry.setTimerOTP, countdown);

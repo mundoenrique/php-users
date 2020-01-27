@@ -7,7 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Afiliación de datos</h2>
-				<p>Para obtener tu usuario de <strong><?= $nameAplication; ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
+				<p>Para obtener tu usuario de <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<form method="post" id="formRegistry">

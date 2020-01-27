@@ -194,7 +194,7 @@ class Novo_User_Model extends NOVO_Model
 								[
 									'id' => 'codeOTP',
 									'name' => 'codeOTP',
-									'label' => 'Codigo de Validación',
+									'label' => 'Código de validación',
 									'typeElement' => 'text',
 								]
 							],
@@ -919,6 +919,13 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->code = 0;
 					$this->response->msg = lang('RESP_SUCCESSFUL_PROFILE');
 					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_ACCEPT'),
+							'link' => base_url('inicio'),
+							'action' => 'redirect'
+						]
+					];
 			}
 		}
 		return $this->response;

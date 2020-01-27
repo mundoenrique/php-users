@@ -47,7 +47,7 @@ $lang['RESP_USER_SUSPENDED'] = 'El usuario se encuentra suspendido.';
 $lang['RESP_SESSION_EXPIRED'] = 'Su sesión ha expirado.';
 $lang['RESP_RESEEND_OTP'] = 'Solicitar nuevo código de seguridad';
 $lang['RESP_NOT_SEND_OTP'] = 'Cógido de seguridad no generado.';
-$lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas ha caducado.';
+$lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas Online ha caducado.';
 $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
 $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
 $lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
@@ -61,7 +61,7 @@ $lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
 
 
 $lang['RES_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
-$lang['RES_EXPIRED_TEMPORARY_KEY'] = '<p>Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas. </p>';
+$lang['RES_EXPIRED_TEMPORARY_KEY'] = 'Su contraseña temporal <strong>ha cadudado</strong>. Dirijase al módulo "Olvidé mi Contraseña", para restaurarla. Recuerde cambiar su contraseña en un plazo <strong>menor</strong> de 24 horas.';
 $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>';
 $lang['RES_REGISTERED_MAIL'] = 'El correo indicado se encuentra registrado. Por favor verifica e intenta nuevamente.';
 $lang['RES_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';

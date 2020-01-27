@@ -3447,12 +3447,12 @@ a.ui-button:active,
 	padding-top: 12px;
 	padding-bottom: 20px;
 	overflow: hidden;
-	opacity: .3;
 	transition: all .3s ease 0s;
+	background-color: rgb(249, 249, 249);
 }
+
 .widget-support:hover {
 	bottom: 4px;
-	opacity: 1;
 }
 
 ul.pwd-rules li.pwd-rules-item {

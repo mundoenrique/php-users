@@ -155,6 +155,7 @@ function validateForms(form, options) {
 			typeDocumentBussines: { required: true, "selectRequired": true },
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
+			codeOTP: { required: true },
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
