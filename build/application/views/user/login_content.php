@@ -63,11 +63,11 @@
 					</tr>
 					<tr>
 						<td>Medellín</td>
-						<td class="text-right">576 43 30 </td>
+						<td class="text-right">576 43 30</td>
 					</tr>
 					<tr>
-						<td>Nivel Nacional </td>
-						<td class="text-right">018000 518 877 </td>
+						<td>Nivel nacional</td>
+						<td class="text-right">018000 518 877</td>
 					</tr>
 				</tbody>
 			</table>
