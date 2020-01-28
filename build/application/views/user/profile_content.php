@@ -80,7 +80,7 @@
 												<?php
 															foreach ($dataProfessions as $row) {
 												?>
-																<option value="<?= $row->idProfesion;?>" <?= $data->registro->user->tipo_profesion === $row->idProfesion? 'selected': '' ;?>   ><?= $row->tipoProfesion;?></option>
+																<option value="<?= $row->idProfesion;?>" <?= $data->registro->user->tipo_profesion === $row->idProfesion? 'selected': '' ;?>> <?= $row->tipoProfesion;?></option>
 												<?php
 															}
 												?>
@@ -119,11 +119,11 @@
 													if ( gettype($dataStates) === 'array' ) {
 												?>
 														<select id="department" class="custom-select form-control" name="department" placeholder="Seleccione">
-															<option value="">SELECCIONE</option>
+															<option value="">Seleccione</option>
 												<?php
 															foreach ($dataStates as $row) {
 												?>
-																<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= $row->estados;?></option>
+																<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= mb_convert_case($row->estados, MB_CASE_TITLE, "UTF-8");?></option>
 												<?php
 															}
 												?>
@@ -148,7 +148,7 @@
 												<?php
 															foreach ($dataCitys as $row) {
 												?>
-																<option value="<?= $row->codCiudad;?>" <?= $data->direccion->acCodCiudad === $row->codCiudad? 'selected': '';?>><?= $row->ciudad;?></option>
+																<option value="<?= $row->codCiudad;?>" <?= $data->direccion->acCodCiudad === $row->codCiudad? 'selected': '';?>><?=mb_convert_case($row->ciudad, MB_CASE_TITLE, "UTF-8");?></option>
 												<?php
 															}
 												?>
@@ -161,7 +161,7 @@
 												}else{
 												?>
 													<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
-														<option value="">SELECCIONE</option>
+														<option value="">Seleccione</option>
 													</select>
 											<?php
 												}
