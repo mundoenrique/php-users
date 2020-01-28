@@ -166,7 +166,7 @@ function validateForms(form, options) {
 			birthPlace: { "spanishAlphabetical": true },
 			birthDate: { required: true, "fechaInvalida": true, "mayorEdad": true },
 			nationality: { required: true, "spanishAlphabetical": true },
-			addressType: { required: true },
+			addressType: { required: true, "selectRequired": true },
 			postalCode: { digits: true },
 			country: { required: true },
 			department: { required: true, "selectRequired": true },

@@ -53,7 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	jsonChart = {
     chartArea: {
       background:"transparent",
-      width: 640,
+      width: 580,
 			height: 320
 		},
 		seriesDefaults: {
@@ -201,6 +201,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		results.classList.remove('none');
 		results.appendChild(loading);
 
+
+
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
 			var monto, totalMonto, totalCategoria, totalGeneral;
 			var formatterMonto, formatterTotalMonto, formatterTotalCategoria, formatterTotalGeneral;
@@ -246,7 +248,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = totalGeneral;
 					trTotales.appendChild(td);
 
-					$('#reportMonthly table').DataTable(jsonDataTables);
+					// table = $('#reportMonthly table').DataTable(jsonDataTables);
 					reportMonthly.classList.add('fade-in');
 
 					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
