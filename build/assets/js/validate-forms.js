@@ -108,7 +108,7 @@ function validateForms(form, options) {
 	});
 
 	$.validator.addMethod("selectRequired", function(value, element, arg){
-		return value !== '0';
+		return value !== '0' && value !== '';
 	 }, "Este campo es obligatorio.");
 
 	jQuery.validator.addMethod("generateConfirmPin", function(value,element){

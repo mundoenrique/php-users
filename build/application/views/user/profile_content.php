@@ -153,6 +153,7 @@
 															}
 												?>
 														</select>
+														<div class="help-block"></div>
 												<?php
 													}elseif($dataCitys === '--') {
 												?>
