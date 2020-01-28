@@ -24,7 +24,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			btnOptions = $$.querySelectorAll('.btn-options'),
 			stackItems = $$.querySelectorAll('.stack-item'),
 			btnExportPDF = $$.getElementById('downloadPDF'),
-			btnExportXLS = $$.getElementById('downloadXLS');
+			btnExportXLS = $$.getElementById('downloadXLS'),
+			btnExportExtract = $$.getElementById('downloadExtract');
 
 	var	i, movementsPaginate, transitPaginate;
 
@@ -103,9 +104,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		var dataRequest = {
 			noTarjeta: data.noTarjeta,
-			month: parseInt(monthSelected.value),
-			year: parseInt(yearSelected.value),
-		}
+			month: monthSelected.value,
+			year: yearSelected.value,
+		};
 
 		while (movementsList.firstChild) {
 			movementsList.removeChild(movementsList.firstChild);
@@ -194,6 +195,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		if (this.value == 0) {
 
 			$$.getElementById('filterYear').disabled = true;
+			$$.getElementById('filterYear').selectedIndex = 0;
 		}else{
 
 			$$.getElementById('buscar').disabled = false;
@@ -202,26 +204,35 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	btnExportPDF.addEventListener('click', function(e){
+
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'pdf';
 		processForm();
-
 	});
 
 	btnExportXLS.addEventListener('click', function(e){
+
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'xls';
 		processForm();
+	});
 
+	btnExportExtract.addEventListener('click', function(e){
+
+		e.preventDefault();
+		$$.getElementsByName("frmTypeFile")[0].value = 'ext';
+		processForm();
 	});
 
 	function processForm() {
 
-			var monthRequest = $$.getElementById('filterMonth').options[document.getElementById('filterMonth').selectedIndex].value
-			var yearRequest = $$.getElementById('filterYear').options[document.getElementById('filterYear').selectedIndex].value
+			var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
+					yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
+					objDate = new Date(),
+  				fullYear = objDate.getFullYear();
 
 			$$.getElementsByName("frmMonth")[0].value = monthRequest == '01'? '': monthRequest;
-			$$.getElementsByName("frmYear")[0].value = yearRequest == '2020'? '': yearRequest;
+			$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear? '': yearRequest;
 
 			$$.getElementsByTagName('form')[1].submit();
 	}

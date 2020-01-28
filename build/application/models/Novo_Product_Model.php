@@ -70,7 +70,10 @@ class Novo_Product_Model extends NOVO_Model
 
 	public function callWs_getTransactionHistory_Product($dataRequest)
 	{
-		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
+		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized')
+		;
+
+
 
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'tarjeta';
@@ -79,7 +82,7 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = '3';
-		$this->dataRequest->noTarjeta = $dataRequest['noTarjeta'];
+		$this->dataRequest->noTarjeta = gettype($dataRequest) === "object" ? $dataRequest->noTarjeta: $dataRequest['noTarjeta'];;
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
 
@@ -152,23 +155,31 @@ class Novo_Product_Model extends NOVO_Model
 	{
 		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
 
-		$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
-		$this->dataAccessLog->modulo = 'tarjeta';
-		$this->dataAccessLog->function = 'tarjeta';
-		$this->dataAccessLog->operation = 'consultar movimientos';
-		$this->dataAccessLog->userName = $this->session->userdata('userName');
+		if ($dataRequest->month == 0 ) {
 
-		$this->dataRequest->idOperation = '13';
-		$this->dataRequest->tarjeta = array(
-			"noTarjeta" => $dataRequest->noTarjeta,
-			"id_ext_per"=> $this->session->userdata("idUsuario")
-		);
-		$this->dataRequest->mes = $dataRequest->month;
-		$this->dataRequest->anio = $dataRequest->year;
-		$this->dataRequest->token = $this->session->userdata('token');
+			$response = $this->callWs_getTransactionHistory_Product($dataRequest);
+
+		}else{
+
+			$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
+			$this->dataAccessLog->modulo = 'tarjeta';
+			$this->dataAccessLog->function = 'tarjeta';
+			$this->dataAccessLog->operation = 'consultar movimientos';
+			$this->dataAccessLog->userName = $this->session->userdata('userName');
+
+			$this->dataRequest->idOperation = '13';
+			$this->dataRequest->tarjeta = array(
+				"noTarjeta" => $dataRequest->noTarjeta,
+				"id_ext_per"=> $this->session->userdata("idUsuario")
+			);
+			$this->dataRequest->mes = $dataRequest->month;
+			$this->dataRequest->anio = $dataRequest->year;
+			$this->dataRequest->token = $this->session->userdata('token');
+
+			$response = $this->sendToService('Product');
+		}
 
 		log_message("info", "Request loadMovement Product:" . json_encode($this->dataRequest));
-		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
@@ -217,7 +228,13 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->operation = 'exportar movimientos';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-		$this->dataRequest->idOperation = $dataRequest->typeFile == 'pdf'? 5: 46;
+		$idsOpereation = [
+			'pdf' => 5,
+			'xls' => 46,
+			'ext' => 125,
+		];
+
+		$this->dataRequest->idOperation = $idsOpereation[$dataRequest->typeFile];
 		$this->dataRequest->tarjeta = array (
 			'noTarjeta' => $dataRequest->noTarjeta,
 			'id_ext_per' => $this->session->userdata("idUsuario")
