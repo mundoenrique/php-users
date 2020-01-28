@@ -146,6 +146,7 @@ class Product extends NOVO_Controller {
 
 					$oDate = new DateTime();
 					$dateFile = $oDate->format("YmdHis");
+					$_POST['frmTypeFile'] = $_POST['frmTypeFile'] === 'ext'? 'pdf': $_POST['frmTypeFile'];
 					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'movimientos_' . $dateFile);
 			}
 		}else{
@@ -250,7 +251,7 @@ class Product extends NOVO_Controller {
 
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
-				np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'Movimientos_' . $dateFile);
+				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre.'_'.$dateFile);
 			}
 		}
 	}
