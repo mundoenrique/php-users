@@ -7,7 +7,7 @@
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de catos</h2>
+				<h2 class="tertiary h3">Verificación de datos</h2>
 				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
@@ -65,7 +65,7 @@
 
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
-							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
+							<a class="btn btn-small btn-link" href="<?= base_url('cerrarsesion');?>">Cancelar</a>
 							<button id="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChangePassword">Continuar</button>
 						</div>
 					</form>

@@ -46,6 +46,9 @@ class Novo_User_Model extends NOVO_Model
 						$this->response->classIconName = 'ui-icon-alert';
 					}else
 					{
+
+						$logged = !(intval($response->passwordTemp) || intval($response->passwordVencido));
+
 						$userData = [
 							'idUsuario' => $response->idUsuario,
 							'userName' => $response->userName,
@@ -53,7 +56,7 @@ class Novo_User_Model extends NOVO_Model
 							'token' => $response->token,
 							'sessionId' => $response->logAccesoObject->sessionId,
 							'keyId' => $response->keyUpdate,
-							'logged_in' => true,
+							'logged_in' => $logged,
 							'pais' => $response->codPais,
 							'aplicaTransferencia' => $response->aplicaTransferencia,
 							'passwordOperaciones' => $response->passwordOperaciones,
