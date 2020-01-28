@@ -17,7 +17,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			statsToogle = $$.getElementById('statsToogle');
 
 	var i, jsonChart, jsonDataTables, dateFormat = "dd/mm/yy";
-	var fromDate, toDate, startDate, endDate;
+	var fromDate, toDate, startDate, endDate, table;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -201,7 +201,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 		results.classList.remove('none');
 		results.appendChild(loading);
 
-
+		if (table != null) {
+			table.destroy();
+		}
 
 		callNovoCore('POST', 'ExpenseReport', 'getExpenses', data, function(response) {
 			var monto, totalMonto, totalCategoria, totalGeneral;
@@ -248,7 +250,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					td.textContent = totalGeneral;
 					trTotales.appendChild(td);
 
-					// table = $('#reportMonthly table').DataTable(jsonDataTables);
+					table = $('#reportMonthly table').DataTable(jsonDataTables);
 					reportMonthly.classList.add('fade-in');
 
 					invokeChart(chart, jsonChart, response.data.listaGrafico[0]);
