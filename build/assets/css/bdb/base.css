@@ -368,6 +368,10 @@ textarea.form-control {
   background-color: var(--disabled-color);
 }
 
+.custom-select option:disabled {
+  color: var(--placeholder-color);
+}
+
 .select-box option {
 	color: var(--text-color);
 	background-color: var(--secondary);

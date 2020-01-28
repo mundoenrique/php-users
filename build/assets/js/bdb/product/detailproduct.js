@@ -42,9 +42,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		movementsPaginate = movementsList.nextElementSibling;
 		movementsPaginate.id = 'movementsPaginate';
 		movementsStats.addClass('fade-in');
-		for (i = 0; i < stackItems.length; ++i) {
-			stackItems[i].classList.remove('is-disabled');
-		}
 
 		invokeChart(movementsStats);
 	}
@@ -197,7 +194,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 			$$.getElementById('filterYear').disabled = true;
 			$$.getElementById('filterYear').selectedIndex = 0;
 		}else{
-
+			$$.getElementById('filterYear').options[0].disabled = true;
+			if (parseInt(this.value) > new Date().getMonth()+1) {
+				$$.getElementById('filterYear').options[1].disabled = true;
+				$$.getElementById('filterYear').selectedIndex = 2;
+			}else{
+				$$.getElementById('filterYear').options[1].disabled = false;
+				$$.getElementById('filterYear').selectedIndex = 1;
+			}
 			$$.getElementById('buscar').disabled = false;
 			$$.getElementById('filterYear').disabled = false;
 		}
