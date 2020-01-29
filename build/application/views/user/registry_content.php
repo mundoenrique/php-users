@@ -10,7 +10,8 @@
 				<p>Para obtener tu usuario de <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
-					<form method="post" id="formRegistry">
+					<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+					<form id="formRegistry" class="mt-2" method="post">
 						<h3 class="tertiary h4">Datos personales</h3>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -44,12 +45,12 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="birthDate">Fecha de nacimiento</label>
+								<label for="birthDate">Fecha de nacimiento <span class="danger">*</span></label>
 								<input id="birthDate" class="form-control" name="birthDate" type="text">
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label class="block">Sexo</label>
+								<label class="block">Sexo <span class="danger">*</span></label>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M">
 									<label class="custom-control-label" for="genderMale">Masculino</label>
@@ -71,7 +72,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="confirmEmail">Confirmar correo electrónico</label>
+								<label for="confirmEmail">Confirmar correo electrónico <span class="danger">*</span></label>
 								<input id="confirmEmail" class="form-control" type="email" name="confirmEmail" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
@@ -107,14 +108,14 @@
 								<h3 class="tertiary h4">Datos de usuario</h3>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
-										<label for="username">Usuario</label>
+										<label for="username">Usuario <span class="danger">*</span></label>
 										<input id="username" class="form-control" type="text" name="username">
 										<div class="help-block"></div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
-										<label for="userpwd">Contraseña</label>
+										<label for="userpwd">Contraseña <span class="danger">*</span></label>
 										<div class="input-group">
 											<input id="userpwd" class="form-control" type="password" name="userpwd">
 											<div class="input-group-append">
@@ -124,7 +125,7 @@
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-6">
-										<label for="confirmUserpwd">Confirmar contraseña</label>
+										<label for="confirmUserpwd">Confirmar contraseña <span class="danger">*</span></label>
 										<input id="confirmUserpwd" class="form-control" type="password" name="confirmUserpwd">
 										<div class="input-group-append">
 											<span id="pwdAddon2" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
