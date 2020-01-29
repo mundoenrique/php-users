@@ -187,28 +187,31 @@
 											<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= array_key_exists('CEL', $data->ownTelephones)? $data->ownTelephones['CEL']: '';?>" disabled/>
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="state">Otro teléfono (tipo)</label>
-											<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
-												<option <?= array_key_exists('OFC', $data->ownTelephones)? 'selected': '';?> value="OFC">Laboral</option>
-												<option <?= array_key_exists('FAX', $data->ownTelephones)? 'selected': '';?> value="FAX">Fax</option>
-												<option <?= array_key_exists('OTRO', $data->ownTelephones)? 'selected': '';?> value="OTRO">Otro</option>
-											</select>
-											<div class="help-block"></div>
-										</div>
-										<div class="form-group col-6 col-lg-4 col-xl-3">
-											<label for="otherPhoneNum">Otro teléfono (número)</label>
-											<?php
-												$nroOtherTelephone = '';
-												foreach ($data->ownTelephones as $key => $value) {
-													if ($key == 'CEL' || $key == 'HAB') {
-														continue;
-													}
-													$nroOtherTelephone = $value;
-												}
-											?>
-											<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $nroOtherTelephone;?>"/>
-											<div class="help-block"></div>
+										<div class="col-6 col-lg-4 col-xl-3">
+											<label for="otherPhoneNum">Otro teléfono</label>
+											<div class="form-row">
+												<div class="form-group col-5">
+													<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
+														<option <?= array_key_exists('OFC', $data->ownTelephones)? 'selected': '';?> value="OFC">Laboral</option>
+														<option <?= array_key_exists('FAX', $data->ownTelephones)? 'selected': '';?> value="FAX">Fax</option>
+														<option <?= array_key_exists('OTRO', $data->ownTelephones)? 'selected': '';?> value="OTRO">Otro</option>
+													</select>
+													<div class="help-block"></div>
+												</div>
+												<div class="form-group col-7">
+													<?php
+														$nroOtherTelephone = '';
+														foreach ($data->ownTelephones as $key => $value) {
+															if ($key == 'CEL' || $key == 'HAB') {
+																continue;
+															}
+															$nroOtherTelephone = $value;
+														}
+													?>
+													<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $nroOtherTelephone;?>"/>
+													<div class="help-block"></div>
+												</div>
+											</div>
 										</div>
 										<div class="form-group col-6 col-lg-4 col-xl-3">
 											<label for="email">Correo electrónico</label>
