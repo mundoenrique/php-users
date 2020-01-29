@@ -166,11 +166,8 @@
 											<?php
 												}
 											?>
-
 										</div>
-									</div>
-									<div class="row">
-										<div class="form-group col-12 col-lg-8 col-xl-6">
+										<div class="form-group col-12 col-lg-8 col-xl-12">
 											<label for="address">Dirección</label>
 											<textarea id="address" class="form-control" name="address"><?= $data->direccion->acDir;?></textarea>
 											<div class="help-block"></div>
