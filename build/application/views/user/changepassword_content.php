@@ -7,7 +7,7 @@
 		<section>
 			<hr class="separador-one">
 			<div class="pt-3">
-				<h2 class="tertiary h3">Verificación de catos</h2>
+				<h2 class="tertiary h3">Verificación de datos</h2>
 				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
