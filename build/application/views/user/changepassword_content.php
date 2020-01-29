@@ -41,6 +41,9 @@
 									<div class="form-group col-12 col-lg-6">
 										<label for="confirmPassword">Confirmar contraseña</label>
 										<input id="confirmPassword" class="form-control" type="password" name="confirmPassword">
+										<div class="input-group-append">
+											<span id="pwdAddon3" class="input-group-text" title="Clic aquí para mostrar/ocultar contraseña"><i class="icon-view mr-0"></i></span>
+										</div>
 										<div class="help-block"></div>
 									</div>
 								</div>
