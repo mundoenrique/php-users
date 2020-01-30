@@ -11,13 +11,14 @@
 				<p><?= $reason?:''; ?></p>
 				<hr class="separador-one">
 				<div class="pt-3">
-					<form method="post" id="formChangePassword">
+					<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+					<form id="formChangePassword" class="mt-2" method="post">
 						<div class="row">
 							<div class="col-6 col-lg-8 col-xl-6">
 								<h3 class="tertiary h4">Datos de usuario</h3>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
-										<label for="currentPassword">Clave actual</label>
+										<label for="currentPassword">Clave actual <span class="danger">*</span></label>
 										<div class="input-group">
 											<input id="currentPassword" class="form-control" type="password" name="currentPassword">
 											<div class="input-group-append">
@@ -29,7 +30,7 @@
 								</div>
 								<div class="row">
 									<div class="form-group col-12 col-lg-6">
-										<label for="newPassword">Contraseña</label>
+										<label for="newPassword">Contraseña <span class="danger">*</span></label>
 										<div class="input-group">
 											<input id="newPassword" class="form-control" type="password" name="newPassword">
 											<div class="input-group-append">
@@ -39,7 +40,7 @@
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-6">
-										<label for="confirmPassword">Confirmar contraseña</label>
+										<label for="confirmPassword">Confirmar contraseña <span class="danger">*</span></label>
 										<div class="input-group">
 											<input id="confirmPassword" class="form-control" type="password" name="confirmPassword">
 											<div class="input-group-append">
