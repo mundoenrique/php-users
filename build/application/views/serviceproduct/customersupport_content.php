@@ -37,18 +37,19 @@
 				<div class="max-width-4 mx-auto pt-3 p-responsive">
 					<!-- Generacíon de PIN -->
 					<div id="generateView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgGen" class="msg-prevent-pin">
+						<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+						<div id="msgGen" class="msg-prevent-pin mt-2">
 							<h2 class="h4 regular tertiary">Generación de PIN</h2>
 						</div>
 						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="generateNewPin">Nuevo PIN</label>
-									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
+									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
+									<input id="generateNewPin" class="form-control" type="password" name="pform">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="generateConfirmPin">Confirmar PIN</label>
+									<label for="generateConfirmPin">Confirmar PIN <span class="danger">*</span></label>
 									<input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin">
 									<div class="help-block"></div>
 								</div>
@@ -58,7 +59,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="generateCodeOTP">Código de validación</label>
+										<label for="generateCodeOTP">Código de validación <span class="danger">*</span></label>
 										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
 										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -75,23 +76,24 @@
 
 					<!-- Cambio de PIN -->
 					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgChange" class="msg-prevent">
+						<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+						<div id="msgChange" class="msg-prevent mt-2">
 							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
 						</div>
 						<form id="formChange" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="changeCurrentPin">PIN actual</label>
+									<label for="changeCurrentPin">PIN actual <span class="danger">*</span></label>
 									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="changeNewPin">Nuevo PIN</label>
+									<label for="changeNewPin">Nuevo PIN <span class="danger">*</span></label>
 									<input id="changeNewPin" class="form-control" type="password" name="changeNewPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="changeConfirmPin">Confirmar PIN</label>
+									<label for="changeConfirmPin">Confirmar PIN <span class="danger">*</span></label>
 									<input id="changeConfirmPin" class="form-control" type="password" name="changeConfirmPin">
 									<div class="help-block"></div>
 								</div>
@@ -101,7 +103,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="changeCodeOTP">Código de validación</label>
+										<label for="changeCodeOTP">Código de validación <span class="danger">*</span></label>
 										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
 										<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -131,7 +133,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="lockCodeOTP">Código de validación</label>
+										<label for="lockCodeOTP">Código de validación <span class="danger">*</span></label>
 										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
 										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -148,13 +150,14 @@
 
 					<!-- Solicitud de reposición de tarjeta -->
 					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgReplacement" class="msg-prevent">
+						<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+						<div id="msgReplacement" class="msg-prevent mt-2">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 						</div>
 						<form id="formReplace" class="profile-1" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="replaceMotSol">Motivo de la solicitud</label>
+									<label for="replaceMotSol">Motivo de la solicitud <span class="danger">*</span></label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>
 										<option value="41">Tarjeta perdida</option>
@@ -170,7 +173,7 @@
 								<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="replaceCodeOTP">Código de validación</label>
+										<label for="replaceCodeOTP">Código de validación <span class="danger">*</span></label>
 										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
 										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
