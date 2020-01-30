@@ -27,14 +27,13 @@
 		</ul>
 	<?php else: ?>
 		<h2 class="msg"><?= $reasonMessage;?></h2>
-		<ul class="list-inline flex justify-center items-center	">
-			<li class="list-inline-item">
-				<img class="mobile-img" src="<?= $this->asset->insertFile('badge-googleplay.png','img',$countryUri); ?>" alt="Insignia Play Store">
-			</li>
-			<li class="list-inline-item">
-				<img src="<?= $this->asset->insertFile('badge-appstore.png','img',$countryUri); ?>" alt="Insignia App Store">
-			</li>
-		</ul>
+		<div class="flex items-center justify-center"><li class="list-inline-item">
+		<?php if ($reason === 'a'): ?>
+			<img class="mobile-img" src="<?= $this->asset->insertFile('badge-googleplay.png','img',$countryUri); ?>" alt="Insignia Play Store">
+		<?php else: ?>
+			<img src="<?= $this->asset->insertFile('badge-appstore.png','img',$countryUri); ?>" alt="Insignia App Store">
+		<? endif; ?>
+		</div>
 	<? endif; ?>
 	</div>
 </div>
