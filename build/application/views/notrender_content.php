@@ -1,9 +1,9 @@
 <div class="notrender-content flex items-center justify-center">
 	<div class="flex items-center">
 		<h1><?= $reasonTitle;?></h1>
-		<h2><?= $reasonMessage;?></h2>
 	<?php if ($reason === 'b'): ?>
-		<ul class="list-inline flex justify-between">
+		<h2><?= $reasonMessage;?></h2>
+		<ul class="list-inline w-list flex justify-between">
 			<li class="list-inline-item">
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-chrome.svg','img',$countryUri); ?>" alt="Icono chrome">
 				<span class="browser-name">Google Chrome</span>
@@ -23,6 +23,16 @@
 				<img class="browser-img" src="<?= $this->asset->insertFile('icon-edge.svg','img',$countryUri); ?>" alt="Icono safari">
 				<span class="browser-name">Microsoft Edge</span>
 				<span class="browser-version">Version 14+</span>
+			</li>
+		</ul>
+	<?php else: ?>
+		<h2 class="msg"><?= $reasonMessage;?></h2>
+		<ul class="list-inline flex justify-center items-center	">
+			<li class="list-inline-item">
+				<img class="mobile-img" src="<?= $this->asset->insertFile('badge-googleplay.png','img',$countryUri); ?>" alt="Insignia Play Store">
+			</li>
+			<li class="list-inline-item">
+				<img src="<?= $this->asset->insertFile('badge-appstore.png','img',$countryUri); ?>" alt="Insignia App Store">
 			</li>
 		</ul>
 	<? endif; ?>
