@@ -186,10 +186,18 @@ class NOVO_Controller extends CI_Controller {
 	protected function checkBrowser () {
 
 		$infoBrowser = $this->tool_browser->validateBrowser();
-		if ( $infoBrowser['platform'] === 'mobile') {
-			redirect(base_url().'sugerencia/m','location', 301);
-		}elseif (!$infoBrowser['valid']) {
-			redirect(base_url().'sugerencia/b','location', 301);
+		if ( $infoBrowser['platform'] !== 'ia' ) {
+
+			if (!$infoBrowser['valid']) {
+
+				$this->session->set_flashdata('checkBrowser', TRUE);
+				redirect(base_url().'sugerencia','location', 301);
+			}
+
+		}else{
+
+			$this->session->set_flashdata('checkBrowser', TRUE);
+			redirect(base_url().'app/'.$infoBrowser['platform'],'location', 301);
 		}
 	}
 }

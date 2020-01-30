@@ -63,23 +63,23 @@ class Tool_Browser {
 				break;
 
 			case preg_match('/iPod/i', $user_agent):
-				$platform = 'mobile';
+				$platform = 'i';
 				break;
 
 			case preg_match('/iPhone/i', $user_agent):
-				$platform = 'mobile';
+				$platform = 'i';
 				break;
 
 			case preg_match('/iPad/i', $user_agent):
-				$platform = 'mobile';
+				$platform = 'i';
 				break;
 
 			case preg_match('/Android/i', $user_agent):
-				$platform = 'mobile';
+				$platform = 'a';
 				break;
 
 			case preg_match('/webOS/i', $user_agent):
-				$platform = 'mobile';
+				$platform = 'webos';
 				break;
 		}
 		return $platform;
