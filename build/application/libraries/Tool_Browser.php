@@ -3,19 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Tool_Browser {
 
-	public function getInfo()
+	public function __construct()
 	{
-		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+		$this->CI =& get_instance();
+		$this->CI->load->library('user_agent');
+	}
 
-		$platform = $this->getNamePlataform ($user_agent);
-		$info_browser = $this->getInfoBrowser ($user_agent);
-		$version_browser = $this->getVersion($user_agent, $info_browser['ub']);
+	public function getInfo () {
 
-		return array(
-			'platform' => $platform,
-			'name' => $info_browser['browser_name'],
-			'version' => $version_browser
-		);
+		$responseInfoBrowse = new stdClass();
+
+		$responseInfoBrowse->platform = $this->CI->agent->platform;
+		$responseInfoBrowse->name = $this->CI->agent->browser;
+		$responseInfoBrowse->version = $this->CI->agent->version;
+		$responseInfoBrowse->isIE = !$this->CI->agent->browser === 'Internet Explorer';
+		$responseInfoBrowse->isBrowser = $this->CI->agent->is_browser;
+		$responseInfoBrowse->isRobot = $this->CI->agent->is_robot;
+		$responseInfoBrowse->isMobile = $this->CI->agent->is_mobile;
+
+		return $responseInfoBrowse;
 	}
 
 	public function validateBrowser () {
@@ -25,62 +31,71 @@ class Tool_Browser {
 		$validBrowser = [
 			'Internet Explorer' => 11,
 			'Edge' => 14,
-			'Mozilla Firefox' => 30,
-			'Google Chrome' => 48,
+			'Mozilla' => 30,
+			'Chrome' => 48,
 			'Apple Safari' => 10,
-			'Opera' => 35
+			'OPR' => 35
 		];
 
 		$getInfoBrowser = $this->getInfo();
 
-		if ($getInfoBrowser['platform'] !== 'mobile') {
+		if ($getInfoBrowser->isBrowser) {
 
-			if (intval($getInfoBrowser['version']) > $validBrowser[$getInfoBrowser['name']]) {
-				$resultValidation = TRUE;
+			if ($getInfoBrowser->notIsIE) {
+
+				if (intval($getInfoBrowser['version']) > $validBrowser[$getInfoBrowser['name']]) {
+					$resultValidation = TRUE;
+				}
 			}
 		}
+
+		$this->CI->session->set_flashdata('checkBrowser','pass');
+
 		return [
-			'platform' => $getInfoBrowser['platform'],
-			'valid' => $resultValidation
+			'valid' => $resultValidation,
+			'reason' => $getInfoBrowser->platform,
 		];
 	}
 
-	function getNamePlataform ($user_agent) {
-
-		$platform = 'Unknown';
+	function getNamePlatform ($user_agent) {
 
 		switch ($user_agent) {
-			case preg_match('/linux/i', $user_agent):
-				$platform = 'linux';
+
+			case preg_match('/windows/i', $user_agent):
+				$platform = ['type' => 'pc', 'name' => 'windows'];
 				break;
 
 			case preg_match('/macintosh/i', $user_agent):
-				$platform = 'mac';
+				$platform = ['type' => 'pc', 'name' => 'macintosh'];
+			break;
+
+			case preg_match('/linux/i', $user_agent):
+				$platform = ['type' => 'pc', 'name' => 'linux'];
 				break;
 
-			case preg_match('/windows/i', $user_agent):
-				$platform = 'windows';
-				break;
-
-			case preg_match('/iPod/i', $user_agent):
-				$platform = 'i';
+				case preg_match('/iPod/i', $user_agent):
+				$platform = ['type' => 'mobile', 'name' => 'ipod'];
 				break;
 
 			case preg_match('/iPhone/i', $user_agent):
-				$platform = 'i';
+				$platform = ['type' => 'mobile', 'name' => 'iphone'];
 				break;
 
 			case preg_match('/iPad/i', $user_agent):
-				$platform = 'i';
+				$platform = ['type' => 'mobile', 'name' => 'ipad'];
 				break;
 
 			case preg_match('/Android/i', $user_agent):
-				$platform = 'a';
+				$platform = ['type' => 'mobile', 'name' => 'android'];
 				break;
 
 			case preg_match('/webOS/i', $user_agent):
-				$platform = 'webos';
+				$platform = ['type' => 'smart', 'name' => 'webos'];
 				break;
+
+			default:
+				$platform = ['type' => 'unknown', 'name' => 'unknown'];
+
 		}
 		return $platform;
 	}

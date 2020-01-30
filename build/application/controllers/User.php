@@ -333,12 +333,12 @@ class User extends NOVO_Controller {
 		redirect($this->config->item('base_url').'inicio');
 	}
 
-	public function notRender($reason = 'b')
+	public function notRender()
 	{
-		$view = 'notrender';
+		$reason = $view = 'notrender';
  		if(!$this->session->flashdata('checkBrowser')) {
 
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url('inicio'), 'location', 301);
 			exit();
 		}
 
