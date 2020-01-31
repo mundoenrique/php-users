@@ -28,10 +28,12 @@
 	<?php else: ?>
 		<h2 class="msg"><?= $reasonMessage;?></h2>
 		<div class="flex items-center justify-center"><li class="list-inline-item">
-		<?php if ($reason === 'a'): ?>
-			<img class="mobile-img" src="<?= $this->asset->insertFile('badge-googleplay.png','img',$countryUri); ?>" alt="Insignia Play Store">
-		<?php else: ?>
+		<?php if ($reason === 'iOS'): ?>
+
 			<img src="<?= $this->asset->insertFile('badge-appstore.png','img',$countryUri); ?>" alt="Insignia App Store">
+		<?php else: ?>
+
+			<img class="mobile-img" src="<?= $this->asset->insertFile('badge-googleplay.png','img',$countryUri); ?>" alt="Insignia Play Store">
 		<? endif; ?>
 		</div>
 	<? endif; ?>
