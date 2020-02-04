@@ -67,11 +67,11 @@
 					<div id="period-form" class="stack-form mr-auto flex items-center">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option selected="" value="<?= date("m");?>">Más recientes</option>
+								<option selected="" value="0">Más recientes</option>
 								<?php
 									foreach ($months as $nroMonths => $txtMonths){
 								?>
-									<option value="<?= $nroMonths+1;?>"><?= $txtMonths;?></option>
+									<option value="<?= str_pad($nroMonths+1, 2, '0', STR_PAD_LEFT) ;?>"><?= $txtMonths;?></option>
 								<?php
 									}
 								?>
@@ -86,7 +86,7 @@
 									}
 								?>
 							</select>
-						<button id="buscar" class="btn btn-small btn-primary" disabled><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
+						<button id="buscar" class="btn btn-small btn-primary" ><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
 						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
@@ -97,11 +97,14 @@
 						</label>
 					</div>
 					<ul class="stack list-inline mb-0 flex items-center">
-						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
+						<li class="stack-item px-1 list-inline-item rounded is-disabled">
 							<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
-						<li class="stack-item px-1 list-inline-item text border rounded is-disabled">
+						<li class="stack-item px-1 list-inline-item rounded is-disabled">
 							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+						</li>
+						<li class="stack-item px-1 list-inline-item rounded is-disabled">
+							<a id="downloadExtract" href="#" rel="subsection"><span class="icon-download h5 mr-0" aria-hidden="true" title="Descargar Extracto"></span></a>
 						</li>
 					</ul>
 				</nav>

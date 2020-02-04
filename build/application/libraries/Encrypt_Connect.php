@@ -116,7 +116,7 @@ class Encrypt_Connect {
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_DEFAULT_CODE');
 			$failResponse->msg = lang('RES_MESSAGE_SYSTEM');
-			$response = $failResponse;
+			$response = json_encode($failResponse);
 			$fail = TRUE;
 		}
 

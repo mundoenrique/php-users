@@ -54,7 +54,7 @@
 					</ul>
 				</nav>
 
-				<div class="group max-width-6 mt-3">
+				<div class="group max-width-6 mt-3 mx-auto">
 
 					<div id="results" class="">
 						<div id="noRecords" class="my-5 pt-4 center none">
@@ -133,7 +133,7 @@
 						</div>
 					</div>
 
-					<div id="chart" class="feed"></div>
+					<div id="chart" class="feed mx-auto"></div>
 
 				</div>
 

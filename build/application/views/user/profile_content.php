@@ -123,7 +123,7 @@
 											<?php
 														foreach ($dataStates as $row) {
 											?>
-															<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= $row->estados;?></option>
+															<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= mb_convert_case($row->estados, MB_CASE_TITLE, "UTF-8");?></option>
 											<?php
 														}
 											?>
@@ -148,7 +148,7 @@
 											<?php
 														foreach ($dataCitys as $row) {
 											?>
-															<option value="<?= $row->codCiudad;?>" <?= $data->direccion->acCodCiudad === $row->codCiudad? 'selected': '';?>><?= $row->ciudad;?></option>
+															<option value="<?= $row->codCiudad;?>" <?= $data->direccion->acCodCiudad === $row->codCiudad? 'selected': '';?>><?= mb_convert_case($row->ciudad, MB_CASE_TITLE, "UTF-8");?></option>
 											<?php
 														}
 											?>

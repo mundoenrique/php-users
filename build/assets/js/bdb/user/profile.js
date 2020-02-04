@@ -91,7 +91,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					listCity.appendChild(selectOption);
 					response.data.forEach(function callback(currentValue) {
 						var city = createElement('option', {value: currentValue.codCiudad});
-						city.textContent = currentValue.ciudad;
+						city.textContent = titleCase(currentValue.ciudad);
 						listCity.appendChild(city);
 					});
 					listCity.disabled = false;
@@ -124,4 +124,12 @@ function disableInputsForm(status, txtButton) {
 
 	btnTrigger.innerHTML = txtButton;
 	btnTrigger.disabled = status;
+}
+
+function capitalizeFirstLetter(string) {
+	return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function titleCase(string) {
+	return string.split(" ").map(x => capitalizeFirstLetter(x)).join(" ");
 }

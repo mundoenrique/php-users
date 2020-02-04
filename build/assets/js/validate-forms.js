@@ -108,7 +108,7 @@ function validateForms(form, options) {
 	});
 
 	$.validator.addMethod("selectRequired", function(value, element, arg){
-		return value !== '0';
+		return value !== '0' && value !== '';
 	 }, "Este campo es obligatorio.");
 
 	jQuery.validator.addMethod("generateConfirmPin", function(value,element){
@@ -166,7 +166,7 @@ function validateForms(form, options) {
 			birthPlace: { "spanishAlphabetical": true },
 			birthDate: { required: true, "fechaInvalida": true, "mayorEdad": true },
 			nationality: { required: true, "spanishAlphabetical": true },
-			addressType: { required: true },
+			addressType: { required: true, "selectRequired": true },
 			postalCode: { digits: true },
 			country: { required: true },
 			department: { required: true, "selectRequired": true },

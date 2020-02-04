@@ -71,9 +71,13 @@ class NOVO_Model extends CI_Model {
 		$this->isResponseRc = (int) $responseDecrypt->rc;
 		switch($this->isResponseRc) {
 			case -61:
-
 				$this->response->msg = lang('RES_DUPLICATED_SESSION');
 				$this->session->sess_destroy();
+				break;
+
+			case -9999:
+			case 4:
+				$this->response->msg = $responseDecrypt->msg;
 				break;
 		}
 		$this->response->msg = $this->isResponseRc == 0 ? lang('RES_MESSAGE_SUCCESS') : $this->response->msg;

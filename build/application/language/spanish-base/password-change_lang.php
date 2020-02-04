@@ -14,5 +14,5 @@ $lang['PASSWORD_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> 
 $lang['MSG_NEW_PASS_USER'] = 'Por motivos de seguridad es necesario que cambie su contraseña la primera vez que ingresa a nuestro sistema "Conexión Empresas Online".';
 $lang['MSG_NEW_PASS_CADU'] = 'Clave vencida. Por motivos de seguridad es necesario que cambies tu contraseña antes de continuar en nuestro sistema "Conexión Empresas Online".';
 $lang['INFO_CHANGE_PASS'] = "Cambio de contraseña";
-$lang['PASSWORD_EXPIED_KEY'] = 'Su clave de acceso a <strong>Conexión Personas</strong> ha vencido, es necesario ingrese los datos requeridos a continuación:';
-$lang['PASSWORD_TEMPORAl_KEY'] = 'Para completar el proceso de recuperación de acceso en <strong>Conexión Personas Online</strong>, es necesario que ingrese los datos requeridos a continuación:';
+$lang['PASSWORD_EXPIED_KEY'] = 'Su clave de acceso a <strong>Conexión Personas Online</strong> ha vencido, es necesario ingrese los datos requeridos a continuación:';
+$lang['PASSWORD_TEMPORAl_KEY'] = 'Para completar el proceso de recuperación de acceso en <strong>Conexión Personas Online</strong>, es necesario ingrese los datos requeridos a continuación:';
