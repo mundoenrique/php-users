@@ -333,9 +333,14 @@ class User extends NOVO_Controller {
 		redirect($this->config->item('base_url').'inicio');
 	}
 
-	public function notRender($reason)
+	public function notRender($reason = 'b')
 	{
 		$view = 'notrender';
+ 		if(!$this->session->flashdata('checkBrowser')) {
+
+			redirect(base_url('inicio'), 'location', 301);
+			exit();
+		}
 
 		log_message('INFO', 'NOVO Controller: notRender Method Initialized');
 
@@ -345,8 +350,9 @@ class User extends NOVO_Controller {
 		$this->render->viewPage = [$view];
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->reason = $reason;
-		$this->render->reasonTitle = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
-		$this->render->reasonMessage = $reason === 'm'? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
+		$this->render->reasonTitle = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
+		$this->render->reasonMessage = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
+		log_message('INFO', '****** reason: ' . json_encode($this->render));
 
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('layouts/designNotRender', $this->render);

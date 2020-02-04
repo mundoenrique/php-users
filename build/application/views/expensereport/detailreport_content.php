@@ -18,7 +18,7 @@
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 					</div>
 					<div class="product-info mr-5">
-						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nomPlastico']; ?></p>
+						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['tarjetaHabiente']; ?></p>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['nroTarjetaMascara'];?></p>
 						<p class="product-metadata h6"><?= $data['producto'];?></p>
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
