@@ -323,7 +323,9 @@ footer.main-footer {
 }
 
 textarea.form-control {
-	height: auto;
+	height: calc(1.18em + .75rem + 2px);
+	resize: none;
+	overflow: hidden;
 }
 
 .form-group {

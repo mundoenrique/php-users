@@ -106,6 +106,11 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->msg = lang('RES_EXPIRED_TEMPORARY_KEY');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
+				case -422:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
+					$this->response->classIconName = 'ui-icon-alert';
+					break;
 			}
 		}
 		return $this->response;
@@ -220,7 +225,7 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = 'ui-icon-alert';
 				break;
-				case -402:
+				case -420:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-alert';

@@ -65,7 +65,8 @@ $route['(:any)/recuperaracceso'] = "user/recoveryAccess";
 $route['(:any)/cerrarsesion'] = "user/closeSession";
 $route['(:any)/cambiarclave'] = "user/changePassword";
 $route['(:any)/cambiarclaveprofile'] = "user/changePasswordProfile";
-$route['(:any)/sugerencia/(:any)'] = "user/notRender/$2";
+$route['(:any)/sugerencia'] = "user/notRender";
+$route['(:any)/app/(:any)'] = "user/notRender/$2";
 
 $route['(:any)/vistaconsolidada'] = "product/listProduct";
 $route['(:any)/detalle'] = "product/detailProduct";
