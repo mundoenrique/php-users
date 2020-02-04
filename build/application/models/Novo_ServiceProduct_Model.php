@@ -63,11 +63,18 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				break;
 				case 10:
 					$this->response->code = 1;
-					$this->response->validityTime = 2; //intval($response->bean);
+					$this->response->validityTime = intval($response->bean);
+					$this->response->msg = '';
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
 					break;
 				case -308:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
 					break;
 				case -241:
 					$this->response->code = 2;
@@ -108,18 +115,32 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -286:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
 					break;
 				case -287:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
+
 					break;
 				case -288:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
+
 					break;
 				case -301:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = '';
+					$this->response->data = [];
+					$this->response->title = '';
 					break;
 				case -310:
 					$this->response->code = 2;
