@@ -63,6 +63,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				break;
 				case 10:
 					$this->response->code = 1;
+					$this->response->validityTime = 2; //intval($response->bean);
 					break;
 				case -308:
 					$this->response->code = 3;
