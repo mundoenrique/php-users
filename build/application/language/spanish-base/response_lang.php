@@ -36,6 +36,7 @@ $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Hemos registrado exitosamente sus datos
 $lang['RESP_PIN_GENERATED'] = 'El PIN ha sido generado exitosamente.';
 $lang['RESP_PIN_CHANGED'] = 'El PIN ha sido cambiado exitosamente.';
 $lang['RESP_PIN_NOT_VALID'] = 'El PIN actual no es válido.';
+$lang['RESP_PIN_EXPIRED'] = 'Tiempo expirado';
 $lang['RESP_FAILED_ATTEMPTS'] = 'Has superado la cantidad de intentos fallidos por el dia de hoy. Por favor intenta mañana.';
 $lang['RESP_LIMIT_OF_ATTEMPTS_ALLOWED'] = 'Usuario o clave inválida, por favor verifique e intente de nuevo. Recuerde que al ingresar la clave errada en tres (3) intentos consecutivos, su acceso será bloqueado.';
 $lang['RESP_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de tu tarjeta, intenta en unos minutos.';

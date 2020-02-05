@@ -195,6 +195,7 @@ class Novo_User_Model extends NOVO_Model
 
 					}else{
 						$this->response->msg = lang('RESP_CODEOTP');
+						$this->response->validityTime = intval($response->bean) * 60;
 						$this->response->classIconName = 'ui-icon-alert';
 
 						$this->response->data = [
@@ -223,13 +224,15 @@ class Novo_User_Model extends NOVO_Model
 				case -5:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
-					$this->response->classIconName = 'ui-icon-alert';
 				break;
 				case -420:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
-					$this->response->classIconName = 'ui-icon-alert';
-					$this->response->data = base_url('inicio');
+					break;
+				case -421:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_PIN_EXPIRED');
+					$this->response->validityTime = intval($response->bean) * 60;
 					break;
 			}
 		}

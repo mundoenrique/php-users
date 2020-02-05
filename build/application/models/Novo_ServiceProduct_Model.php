@@ -64,17 +64,11 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case 10:
 					$this->response->code = 1;
 					$this->response->validityTime = intval($response->bean) * 60;
-					$this->response->msg = '';
-					$this->response->classIconName = '';
-					$this->response->data = [];
-					$this->response->title = '';
+					$this->response->msg = lang('RESP_PIN_EXPIRED');
 					break;
 				case -308:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
-					$this->response->classIconName = '';
-					$this->response->data = [];
-					$this->response->title = '';
 					break;
 				case -241:
 					$this->response->code = 2;
