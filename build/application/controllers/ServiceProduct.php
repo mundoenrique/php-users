@@ -163,6 +163,7 @@ class ServiceProduct extends NOVO_Controller {
 
 		$this->render->data = $dataProduct;
 		$this->render->menuOptionsProduct = $optionsAvailables;
+
 		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);

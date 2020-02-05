@@ -64,7 +64,7 @@
 										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
-								<p id="generateVerificationMsg" class="mb-1 h5 none"><a id="generateResendCode" class="primary" href="#" name="resendCode"><?= lang('RESP_RESEEND_OTP');?></a></p>
+								<p id="generateVerificationMsg" class="mb-1 h5"></p>
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">

@@ -193,7 +193,7 @@ class User extends NOVO_Controller {
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
 		$this->views = ['user/'.$view];
-		$this->render->setTimerOTP = $this->config->item('setTimerOTP');
+		//$this->render->setTimerOTP = $this->config->item('setTimerOTP');
 		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;

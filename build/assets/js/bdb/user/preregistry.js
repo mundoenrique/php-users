@@ -63,7 +63,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(dataPreRegistry.setTimerOTP, countdown);
+					startTimer(response.validityTime, countdown);
 
 				}
 				else if (response.code === 3){
@@ -224,7 +224,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
-					startTimer(dataPreRegistry.setTimerOTP, countdown);
+					startTimer(response.validityTime, countdown);
 				}
 				else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);

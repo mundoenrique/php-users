@@ -136,7 +136,7 @@
 
 <?php
 	$data = json_encode([
-		'setTimerOTP' => $setTimerOTP,
+		//'setTimerOTP' => $setTimerOTP,
 		'typeDocument' => $typeDocument
 	]);
 ?>
