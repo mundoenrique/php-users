@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, validator;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, validator, verificationMsg, interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -53,15 +53,21 @@ function operationFactory(optionMenu, response = null)
 		0: function (response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
 		},
-		1: function(){
+		1: function(response){
 			btnTrigger.disabled = false;
 			btnTrigger.innerHTML = txtBtnTrigger;
-			$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
-			$$.getElementById(`${idName}VerificationMsg`).classList.add("none");
 			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = false;
-			btnTrigger.innerHTML = txtBtnTrigger;
-			btnTrigger.disabled = false;
+			verificationMsg = $$.getElementById(`${idName}VerificationMsg`);
+			if (idName == "generate") {
+				verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
+				verificationMsg.classList.remove("semibold", "danger");
+				var countdown = verificationMsg.querySelector("span");
+				startTimer(response.validityTime, countdown);
+			} else {
+				verificationMsg.classList.add("none");
+			}
+			$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
 		},
 		2: function(response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
@@ -181,5 +187,37 @@ function resetForms(formData){
 			validator.resetForm();//remove error class on name elements and clear history
 		}
 		formData[0].reset();
+	}
+}
+
+function startTimer(duration, display)	{
+	var timer = duration, minutes, seconds;
+	interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		minutes = parseInt(timer / 60, 10)
+		seconds = parseInt(timer % 60, 10);
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.textContent = minutes + ":" + seconds;
+
+		if (--timer < 0) {
+			clearInterval(interval);
+
+			$$.getElementById(`${idName}CodeOTP`).value = '';
+			$$.getElementById(`${idName}CodeOTP`).disabled = true;
+			verificationMsg.innerHTML =  `Tiempo expirado, ${dataCustomerProduct.msgResendOTP}`;
+			verificationMsg.classList.add("semibold", "danger");
+			btnTrigger.disabled = true;
+
+			verificationMsg.querySelector("a").setAttribute('id',`${idName}ResendCode`);
+			$$.getElementById(`${idName}ResendCode`).classList.add("regular");
+			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
+				e.preventDefault();
+				resendCodeOTP(coreOperation);
+			});
+		}
 	}
 }
