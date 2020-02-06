@@ -45,7 +45,7 @@
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="generateNewPin" class="form-control" type="password" name="pform">
+									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">

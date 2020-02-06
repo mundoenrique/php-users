@@ -67,7 +67,7 @@
 						<h3 class="tertiary h4">Datos de contacto</h3>
 						<div class="row">
 							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="email">Correo electrónico</label>
+								<label for="email">Correo electrónico <span class="danger">*</span></label>
 								<input id="email" class="form-control" type="email" name="email" value="<?= $data->afiliacion->correo?>" placeholder="usuario@ejemplo.com">
 								<div class="help-block"></div>
 							</div>
@@ -86,19 +86,23 @@
 								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $data->user->telefono?>" disabled/>
 								<div class="help-block"></div>
 							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhone">Otro teléfono (tipo)</label>
-								<select id="phoneType" class="custom-select form-control" name="phoneType" placeholder="Seleccione">
-									<option value="OFC">Laboral</option>
-									<option value="FAX">Fax</option>
-									<option value="OTRO">Otro</option>
-								</select>
-								<div class="help-block"></div>
-							</div>
-							<div class="form-group col-6 col-lg-4 col-xl-3">
-								<label for="otherPhoneNum">Otro teléfono (número)</label>
-								<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
-								<div class="help-block"></div>
+							<div class="col-6 col-lg-4 col-xl-3">
+								<label for="otherPhoneNum">Otro teléfono</label>
+								<div class="form-row">
+									<div class="form-group col-5">
+										<select id="phoneType" class="custom-select form-control" name="phoneType">
+											<option value="">Seleccione</option>
+											<option>Laboral</option>
+											<option>Fax</option>
+											<option>Otro</option>
+										</select>
+										<div class="help-block"></div>
+									</div>
+									<div class="form-group col-7">
+										<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
+										<div class="help-block"></div>
+									</div>
+								</div>
 							</div>
 						</div>
 
