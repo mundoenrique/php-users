@@ -148,6 +148,9 @@ class ServiceProduct extends NOVO_Controller {
  		foreach ($menuOptionsProduct as $key => $value) {
 			 if (empty($dataProduct['bloqueo'])) {
 				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
+				if ( $key === 112 && in_array(120, $dataProduct['availableServices']) ) {
+					continue;
+				}
 			 }
 			 else	{
 				$available = 'is-disabled';
