@@ -230,15 +230,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function processForm() {
 
-			var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
-					yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
-					objDate = new Date(),
-  				fullYear = objDate.getFullYear();
+		var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
+		yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
+		objDate = new Date(),
+		fullYear = objDate.getFullYear();
 
-			$$.getElementsByName("frmMonth")[0].value = monthRequest == '01'? '': monthRequest;
-			$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear? '': yearRequest;
+		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0'? '': monthRequest;
+		$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear? '': yearRequest;
+		if ($$.getElementsByName("frmTypeFile")[0].value === 'ext') {
 
-			$$.getElementsByTagName('form')[1].submit();
+			$$.getElementsByName("frmYear")[0].value = yearRequest;
+		}
+
+		$$.getElementsByTagName('form')[1].submit();
 	}
 
 
