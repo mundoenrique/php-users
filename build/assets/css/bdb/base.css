@@ -2293,6 +2293,7 @@ i[class*=" icon-"]:before {
 .stack .stack-item {
 	color: var(--text-color);
 	border: var(--border-width) solid var(--border-color);
+	cursor: pointer;
 	transition: .3s;
 }
 .stack .stack-item.is-disabled {

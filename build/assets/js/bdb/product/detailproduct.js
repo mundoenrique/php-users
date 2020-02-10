@@ -1,7 +1,5 @@
 'use strict';
-var $$ = document,
-				totalExpense = 0,
-				totalIncome = 0;
+var $$ = document;
 
 moment.updateLocale('en', {
   monthsShort : [
@@ -43,7 +41,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		movementsPaginate.id = 'movementsPaginate';
 		movementsStats.addClass('fade-in');
 
-		invokeChart(movementsStats);
+		invokeChart(movementsStats, parseFloat(data.totalExpenseMovements), parseFloat(data.totalIncomeMovements));
 	}
 
 	if (transitList != null) {
@@ -55,7 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		transitToogle.classList.remove('is-disabled');
 		transitToogle.querySelector('input').disabled = false;
 
-		invokeChart(transitStats);
+		invokeChart(transitStats, parseFloat(data.totalExpensePendingTransactions), parseFloat(data.totalIncomePendingTransactions));
 	}
 
 	transitToogle.addEventListener('click', function(){
@@ -121,6 +119,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
 			if (response !== '--') {
 
+				var totalExpense = 0, totalIncome = 0;
+
 				response.forEach(function callback(currentValue, index, array) {
 					var date = moment(currentValue.fecha, "DD/MM/YYYY").format('DD/MMM/YYYY').split('/'),
 							day = date[0],
@@ -156,10 +156,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 					feedAmount = createElement('span', {class: 'px-2 feed-amount items-center'});
 					if (sign === '-') {
-						totalExpense += amount;
+						totalExpense += parseFloat(amount.replace(/\./g, "").replace(",", "."));
 						sign = "- ";
 					} else {
-						totalIncome += amount;
+						totalIncome += parseFloat(amount.replace(/\./g, "").replace(",", "."));
 						sign = "";
 					}
 					feedAmount.textContent = sign + coinSimbol + ' ' + amount;
@@ -173,7 +173,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				$('#movementsList').easyPaginate({});
 				movementsPaginate = movementsList.nextElementSibling;
 				movementsPaginate.id = 'movementsPaginate';
-				invokeChart(movementsStats);
+				invokeChart(movementsStats, totalExpense, totalIncome);
 				movementsStats.addClass('fade-in');
 				for (i = 0; i < stackItems.length; ++i) {
 					stackItems[i].classList.remove('is-disabled');
@@ -249,14 +249,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 });
 
 function invokeChart(selector, cargos, abonos) {
-	var cargos, abonos;
-	if (selector[0] === movementsStats) {
-		cargos = data.totalExpenseMovements;
-		abonos = data.totalIncomeMovements;
-	} else {
-		cargos = data.totalExpensePendingTransactions;
-		abonos = data.totalIncomePendingTransactions;
-	}
+	// var cargos, abonos;
+	// if (selector[0] === movementsStats) {
+	// 	cargos = data.totalExpenseMovements;
+	// 	abonos = data.totalIncomeMovements;
+	// } else {
+	// 	cargos = data.totalExpensePendingTransactions;
+	// 	abonos = data.totalIncomePendingTransactions;
+	// }
 	selector.kendoChart({
 		chartArea: {
 			background:"transparent",
@@ -283,10 +283,10 @@ function invokeChart(selector, cargos, abonos) {
 			},
 			data: [{
 				category: "Cargos",
-				value: parseFloat(parseFloat(cargos).toFixed(1))
+				value: parseFloat(cargos.toFixed(1))
 			}, {
 				category: "Abonos",
-				value: parseFloat(parseFloat(abonos).toFixed(1))
+				value: parseFloat(abonos.toFixed(1))
 			}]
 		}],
 		tooltip: {
