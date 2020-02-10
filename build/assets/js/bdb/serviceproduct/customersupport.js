@@ -53,6 +53,7 @@ function operationFactory(optionMenu, response = null)
 	var responseForm = {
 		0: function (response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
+			btnTrigger.innerHTML = txtBtnTrigger;
 		},
 		1: function(response){
 			btnTrigger.disabled = false;
