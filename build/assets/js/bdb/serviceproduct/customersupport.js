@@ -36,6 +36,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
 						disableInputsForm(idName, true, msgLoadingWhite);
+						clearInterval(interval);
 						proccessPetition(coreOperation, idName);
 					} else {
 						disableInputsForm (idName, false, txtBtnTrigger);
@@ -59,14 +60,10 @@ function operationFactory(optionMenu, response = null)
 			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = false;
 			verificationMsg = $$.getElementById(`${idName}VerificationMsg`);
-			if (idName == "generate") {
-				verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
-				verificationMsg.classList.remove("semibold", "danger");
-				var countdown = verificationMsg.querySelector("span");
-				startTimer(response.validityTime, countdown);
-			} else {
-				verificationMsg.classList.add("none");
-			}
+			verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
+			verificationMsg.classList.remove("semibold", "danger");
+			var countdown = verificationMsg.querySelector("span");
+			startTimer(response.validityTime, countdown);
 			$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
 		},
 		2: function(response){
