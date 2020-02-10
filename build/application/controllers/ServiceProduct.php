@@ -125,42 +125,53 @@ class ServiceProduct extends NOVO_Controller {
 		$menuOptionsProduct = [
 			'120' => [
 				'id' => 'generate',
-				'text' => "<i class='icon-key block'></i>Generar <br>PIN"
+				'text' => "<i class='icon-key block'></i>Generar <br>PIN",
+				'isVisible' => FALSE
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN"
+				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN",
+				'isVisible' => FALSE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta"
+				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta",
+				'isVisible' => TRUE
 			],
 			'111' => [
 				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición"
+				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición",
+				'isVisible' => TRUE
 			]
 		];
+
+		foreach ($dataProduct['availableServices'] as $value) {
+
+			$menuOptionsProduct[$value]['isVisible'] = TRUE;
+		}
 
 		if ( !empty($dataProduct['bloqueo']) ) {
 			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de cuenta";
 		}
 
- 		foreach ($menuOptionsProduct as $key => $value) {
-			 if (empty($dataProduct['bloqueo'])) {
+		foreach ($menuOptionsProduct as $key => $value) {
+
+			if (empty($dataProduct['bloqueo'])) {
 				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-				if ( $key === 112 && in_array(120, $dataProduct['availableServices']) ) {
-					continue;
-				}
-			 }
-			 else	{
+			}
+			else	{
 				$available = 'is-disabled';
 				if ($key == 110) {
 					$available = '';
 				}
-			 }
-			$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
-			array_push($optionsAvailables,$option);
-		}
+			}
+
+			if ($value['isVisible']) {
+				$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
+
+				array_push($optionsAvailables,$option);
+			}
+	 }
 
 		$this->views = ['serviceproduct/'.$view];
 
