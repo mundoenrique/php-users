@@ -225,6 +225,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				break;
 				case 10:
 					$this->response->code = 1;
+					$this->response->msg = lang('RESP_CODEOTP');
 					break;
 				case -308:
 					$this->response->code = 2;

@@ -135,6 +135,14 @@ function validateForms(form, options) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 dígitos no deben ser consecutivos.");
 
+	jQuery.validator.addMethod("onlyNumeric", function(value, element) {
+		if (Number.isInteger(value)) {
+			return true;
+		}else{
+			return false;
+		}
+	}, "Indique solo 5 números.");
+
 	validator = form.validate({
 		rules: {
 			generateNewPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
@@ -145,10 +153,10 @@ function validateForms(form, options) {
 			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
-			generateCodeOTP: { required: true, digits: true, exactlength: 5 },
-			changeCodeOTP: { required: true, digits: true, exactlength: 5 },
-			lockCodeOTP: { required: true, digits: true, exactlength: 5 },
-			replaceCodeOTP: { required: true, digits: true, exactlength: 5 },
+			generateCodeOTP: { required: true, 'onlyNumeric': true, exactlength: 5 },
+			changeCodeOTP: { required: true, 'onlyNumeric': true, exactlength: 5 },
+			lockCodeOTP: { required: true, 'onlyNumeric': true, exactlength: 5 },
+			replaceCodeOTP: { required: true, 'onlyNumeric': true, exactlength: 5 },
 			nitBussines: { required: true, number: true,},
 			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
