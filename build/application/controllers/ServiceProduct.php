@@ -147,6 +147,10 @@ class ServiceProduct extends NOVO_Controller {
 
 		foreach ($dataProduct['availableServices'] as $value) {
 
+			if (!array_key_exists($value, $menuOptionsProduct) ) {
+				continue;
+			}
+
 			$menuOptionsProduct[$value]['isVisible'] = TRUE;
 		}
 
