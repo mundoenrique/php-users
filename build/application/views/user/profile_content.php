@@ -75,8 +75,8 @@
 											<?php
 												if ( gettype($dataProfessions) === 'array' ) {
 											?>
-													<select id="profession" class="custom-select form-control" name="profession" placeholder="Seleccione">
-													<option value="">Seleccione</option>
+													<select id="profession" class="custom-select form-control" name="profession">
+													<option value="">Selecciona</option>
 											<?php
 														foreach ($dataProfessions as $row) {
 											?>
@@ -101,7 +101,8 @@
 								<div class="row">
 									<div class="form-group col-6 col-lg-4 col-xl-3">
 										<label for="addressType">Tipo de dirección</label>
-										<select id="addressType" class="custom-select form-control" name="addressType" placeholder="Seleccione">
+										<select id="addressType" class="custom-select form-control" name="addressType">
+											<option value="">Selecciona</option>
 											<option value="1" <?= $data->direccion->acTipo == '1'? 'selected': '' ;?>>Domicilio</option>
 											<option value="2" <?= $data->direccion->acTipo == '2'? 'selected': '' ;?>>Laboral</option>
 											<option value="3" <?= $data->direccion->acTipo == '3'? 'selected': '' ;?>>Comercial</option>
@@ -118,8 +119,8 @@
 										<?php
 												if ( gettype($dataStates) === 'array' ) {
 											?>
-													<select id="department" class="custom-select form-control" name="department" placeholder="Seleccione">
-														<option value="">Seleccione</option>
+													<select id="department" class="custom-select form-control" name="department">
+														<option value="">Selecciona</option>
 											<?php
 														foreach ($dataStates as $row) {
 											?>
@@ -143,8 +144,8 @@
 										<?php
 											if (!empty($dataCitys) and gettype($dataCitys) === 'array') {
 										?>
-													<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
-														<option value="">Seleccione</option>
+													<select id="city" class="custom-select form-control" name="city">
+														<option value="">Selecciona</option>
 											<?php
 														foreach ($dataCitys as $row) {
 											?>
@@ -160,8 +161,8 @@
 											<?php
 											}else{
 											?>
-												<select id="city" class="custom-select form-control" name="city" placeholder="Seleccione">
-													<option value="">SELECCIONE</option>
+												<select id="city" class="custom-select form-control" name="city">
+													<option value="">Selecciona</option>
 												</select>
 										<?php
 											}
@@ -187,16 +188,16 @@
 									<div class="col-6 col-lg-4 col-xl-3">
 										<label for="otherPhoneNum">Otro teléfono</label>
 										<div class="form-row">
-											<div class="form-group col-5">
+											<div class="form-group col-6">
 												<select id="phoneType" class="custom-select form-control" name="phoneType">
-													<option value="">Seleccione</option>
+													<option value="">Selecciona</option>
 													<option <?= array_key_exists('OFC', $data->ownTelephones)? 'selected': '';?> value="OFC">Laboral</option>
 													<option <?= array_key_exists('FAX', $data->ownTelephones)? 'selected': '';?> value="FAX">Fax</option>
 													<option <?= array_key_exists('OTRO', $data->ownTelephones)? 'selected': '';?> value="OTRO">Otro</option>
 												</select>
 												<div class="help-block"></div>
 											</div>
-											<div class="form-group col-7">
+											<div class="form-group col-6">
 												<?php
 													$nroOtherTelephone = '';
 													foreach ($data->ownTelephones as $key => $value) {
