@@ -25,6 +25,7 @@ $.extend( $.validator.messages, {
 	minlength: $.validator.format( "Debe contener mínimo {0} caracteres." ),
 	rangelength: $.validator.format( "Por favor, escribe un valor entre {0} y {1} caracteres." ),
 	exactlength: $.validator.format( "Debe contener exactamente {0} caracteres." ),
+	exactDigits: $.validator.format( "Debe contener exactamente {0} números." ),
 	range: $.validator.format( "Por favor, escribe un valor entre {0} y {1}." ),
 	max: $.validator.format( "Por favor, escribe un valor menor o igual a {0}." ),
 	min: $.validator.format( "Por favor, escribe un valor mayor o igual a {0}." ),

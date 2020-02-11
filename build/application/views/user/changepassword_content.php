@@ -71,7 +71,7 @@
 
 						<hr class="separador-one mt-2 mb-4">
 						<div class="flex items-center justify-end">
-							<a class="btn btn-small btn-link" href="<?= base_url('cerrarsesion');?>">Cancelar</a>
+							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>">Cancelar</a>
 							<button id="btnChangePassword" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChangePassword">Continuar</button>
 						</div>
 					</form>

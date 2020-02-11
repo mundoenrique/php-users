@@ -89,16 +89,16 @@
 							<div class="col-6 col-lg-4 col-xl-3">
 								<label for="otherPhoneNum">Otro teléfono</label>
 								<div class="form-row">
-									<div class="form-group col-5">
+									<div class="form-group col-6">
 										<select id="phoneType" class="custom-select form-control" name="phoneType">
-											<option value="">Seleccione</option>
+											<option value="">Selecciona</option>
 											<option>Laboral</option>
 											<option>Fax</option>
 											<option>Otro</option>
 										</select>
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-7">
+									<div class="form-group col-6">
 										<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $data->afiliacion->telefono3?>"/>
 										<div class="help-block"></div>
 									</div>

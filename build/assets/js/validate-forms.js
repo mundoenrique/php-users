@@ -48,17 +48,21 @@ function validateForms(form, options) {
 	jQuery.validator.setDefaults(defaults);
 
 
-		jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
+	jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
 		return this.optional( element ) || /^[a-záéíóúüñ ]+$/i.test( value );
 	});
 
-		jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
+	jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
 	jQuery.validator.addMethod("exactlength", function(value, element, param) {
 		return this.optional(element) || value.length == param;
-	 });
+	});
+
+	jQuery.validator.addMethod("exactDigits", function(value, element, param) {
+		return this.optional(element) || value.length == param;
+	});
 
 	jQuery.validator.addMethod("emailValid",function(value, element) {
 		return /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
@@ -86,12 +90,12 @@ function validateForms(form, options) {
 		else return true;
 	}, "Teléfono Móvil está repetido.");
 
-		jQuery.validator.addMethod("fechaInvalida", function(value, element) {
+	jQuery.validator.addMethod("fechaInvalida", function(value, element) {
 		var fecha = moment(value, "DD/MM/YYYY");
 		return fecha.isValid();
 	});
 
-		jQuery.validator.addMethod("mayorEdad", function(value, element){
+	jQuery.validator.addMethod("mayorEdad", function(value, element){
 		var hoy, fechanacimiento, years
 		hoy = moment();
 		fechanacimiento = moment(value, "DD/MM/YYYY");
@@ -133,22 +137,22 @@ function validateForms(form, options) {
 
 	jQuery.validator.addMethod("fourConsecutivesDigits", function(value, element) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
-	}, "Los 4 dígitos no deben ser consecutivos.");
+	}, "Los 4 números no deben ser consecutivos.");
 
 	validator = form.validate({
 		rules: {
-			generateNewPin: { required: true, number: true, exactlength: 4, "fourConsecutivesDigits": true },
-			generateConfirmPin: { required: true, number: true, "generateConfirmPin": true },
-			changeCurrentPin: { required: true, number: true, exactlength: 4 },
-			changeNewPin: { required: true, number: true, exactlength: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
+			generateNewPin: { required: true, number: true, exactDigits: 4, "fourConsecutivesDigits": true },
+			generateConfirmPin: { required: true, number: true, exactDigits: 4, "generateConfirmPin": true },
+			changeCurrentPin: { required: true, number: true, exactDigits: 4 },
+			changeNewPin: { required: true, number: true, exactDigits: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
 			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
-			generateCodeOTP: { required: true, digits: true, exactlength: 5 },
-			changeCodeOTP: { required: true, digits: true, exactlength: 5 },
-			lockCodeOTP: { required: true, digits: true, exactlength: 5 },
-			replaceCodeOTP: { required: true, digits: true, exactlength: 5 },
+			generateCodeOTP: { required: true, number: true, exactDigits: 5 },
+			changeCodeOTP: { required: true, number: true, exactDigits: 5 },
+			lockCodeOTP: { required: true, number: true, exactDigits: 5 },
+			replaceCodeOTP: { required: true, number: true, exactDigits: 5 },
 			nitBussines: { required: true, number: true,},
 			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
@@ -157,7 +161,7 @@ function validateForms(form, options) {
 			typeDocumentBussines: { required: true, "selectRequired": true },
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
-			codeOTP: { required: true, digits: true, exactlength: 5 },
+			codeOTP: { required: true, number: true, exactDigits: 5 },
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },

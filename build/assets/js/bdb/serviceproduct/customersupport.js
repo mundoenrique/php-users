@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, validator, verificationMsg, interval;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -27,6 +27,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
+				disableInputsForm(idName, false, txtBtnTrigger);
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
@@ -36,6 +37,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					validateForms(form, {handleMsg: true});
 					if(form.valid()) {
 						disableInputsForm(idName, true, msgLoadingWhite);
+						clearInterval(interval);
 						proccessPetition(coreOperation, idName);
 					} else {
 						disableInputsForm (idName, false, txtBtnTrigger);
@@ -52,6 +54,7 @@ function operationFactory(optionMenu, response = null)
 	var responseForm = {
 		0: function (response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
+			btnTrigger.innerHTML = txtBtnTrigger;
 		},
 		1: function(response){
 			btnTrigger.disabled = false;
@@ -59,14 +62,10 @@ function operationFactory(optionMenu, response = null)
 			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = false;
 			verificationMsg = $$.getElementById(`${idName}VerificationMsg`);
-			if (idName == "generate") {
-				verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
-				verificationMsg.classList.remove("semibold", "danger");
-				var countdown = verificationMsg.querySelector("span");
-				startTimer(response.validityTime, countdown);
-			} else {
-				verificationMsg.classList.add("none");
-			}
+			verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
+			verificationMsg.classList.remove("semibold", "danger");
+			var countdown = verificationMsg.querySelector("span");
+			startTimer(response.validityTime, countdown);
 			$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
 		},
 		2: function(response){
@@ -186,6 +185,10 @@ function resetForms(formData){
 			validator.showErrors();//remove error messages if present
 			validator.resetForm();//remove error class on name elements and clear history
 		}
+		clearInterval(interval);
+		$$.getElementById(`${idName}VerificationMsg`).innerHTML = '';
+		$$.getElementById(`${idName}CodeOTP`).disabled = true;
+		$$.getElementById(`${idName}VerificationOTP`).classList.add('none');
 		formData[0].reset();
 	}
 }
