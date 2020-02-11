@@ -59,7 +59,7 @@
 					<div id="results" class="">
 						<div id="noRecords" class="my-5 pt-4 center none">
 							<span class="block mb-1 h4">No se encontraron registros</span>
-							<span>Seleccione un rango de fecha a consultar.</span>
+							<span>Selecciona un rango de fecha a consultar.</span>
 						</div>
 
 						<div id="reportAnnual" class="feed overflow-auto">
