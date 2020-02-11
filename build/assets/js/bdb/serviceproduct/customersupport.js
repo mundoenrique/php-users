@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, validator, verificationMsg, interval;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -27,6 +27,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
+				disableInputsForm(idName, false, txtBtnTrigger);
 
 				btnTrigger.addEventListener('click',function(e){
 					e.preventDefault();
@@ -184,6 +185,10 @@ function resetForms(formData){
 			validator.showErrors();//remove error messages if present
 			validator.resetForm();//remove error class on name elements and clear history
 		}
+		clearInterval(interval);
+		$$.getElementById(`${idName}VerificationMsg`).innerHTML = '';
+		$$.getElementById(`${idName}CodeOTP`).disabled = true;
+		$$.getElementById(`${idName}VerificationOTP`).classList.add('none');
 		formData[0].reset();
 	}
 }
