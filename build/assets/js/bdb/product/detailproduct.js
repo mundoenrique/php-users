@@ -175,8 +175,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 				movementsPaginate.id = 'movementsPaginate';
 				invokeChart(movementsStats, totalExpense, totalIncome);
 				movementsStats.addClass('fade-in');
-				for (i = 0; i < stackItems.length; ++i) {
-					stackItems[i].classList.remove('is-disabled');
+
+				if (filterMonth.selectedIndex != 0) {
+					for (i = 0; i < stackItems.length; ++i) {
+						stackItems[i].classList.remove('is-disabled');
+					}
 				}
 			} else {
 				movementsList.appendChild(noMovements);
