@@ -167,6 +167,7 @@
 										<?php
 											}
 										?>
+										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-8 col-xl-12">
 										<label for="address">Dirección</label>
