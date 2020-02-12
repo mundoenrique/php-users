@@ -22,8 +22,8 @@ $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 //TITLES PAGES
-$lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar Acceso';
-$lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar Contraseña';
+$lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar acceso';
+$lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_REGISTRY_TITLE'] = 'Registro';
 $lang['GEN_PROFILE_TITLE'] = 'Perfil';
 //BUTTONS
@@ -49,7 +49,7 @@ $lang['BREADCRUMB_BENEFICIOS']= 'Beneficios';
 $lang['BREADCRUMB_CONDICIONES']= 'Condiciones de uso';
 $lang['BREADCRUMB_PRIVACIDAD']= 'Privacidad';
 $lang['BREADCRUMB_LOTES']= 'Lotes';
-$lang['BREADCRUMB_REPROCESO']= 'Reproceso de Datos';
+$lang['BREADCRUMB_REPROCESO']= 'Reproceso de datos';
 $lang['BREADCRUMB_CARGA']= 'Carga';
 $lang['BREADCRUMB_EMPRESAS']= 'Empresas';
 $lang['BREADCRUMB_PRODUCTOS']= 'Productos';

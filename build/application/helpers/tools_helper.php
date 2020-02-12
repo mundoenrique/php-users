@@ -322,6 +322,7 @@ if(!function_exists('languajeLoad')) {
 					'validatecaptcha' => ['login'],
 					'RecoverPass'	=> ['password-recover'],
 					'changePassword'	=> ['password-change'],
+					'changePasswordProfile'	=> ['password-change'],
 					'benefits'	=> ['benefits'],
 					'terms'	=> ['terms'],
 					'rates'	=> ['rates'],

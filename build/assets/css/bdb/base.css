@@ -1085,11 +1085,13 @@ textarea.form-control {
 /* Btn-Link */
 
 .btn-link {
+	color: var(--primary);
 	text-decoration: underline;
 }
 
 .btn-link:hover {
-	color: var(--tertiary);
+	color: var(--primary);
+	text-shadow: 0 0 var(--primary);
 	text-decoration: underline;
 }
 

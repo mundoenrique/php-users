@@ -211,7 +211,7 @@ function startTimer(duration, display)	{
 
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = true;
-			verificationMsg.innerHTML =  `Tiempo expirado, ${dataCustomerProduct.msgResendOTP}`;
+			verificationMsg.innerHTML =  `Tiempo expirado. ${dataCustomerProduct.msgResendOTP}`;
 			verificationMsg.classList.add("semibold", "danger");
 			btnTrigger.disabled = true;
 

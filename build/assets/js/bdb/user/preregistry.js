@@ -197,13 +197,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (--timer < 0) {
 				clearInterval(interval);
-				resendCodeOTP ('Tiempo expirado');
+				resendCodeOTP ('Tiempo expirado.');
 			}
 		}
 	}
 
 	function resendCodeOTP (message) {
-		verificationMsg.innerHTML = `${message}, <a id="resendCode" class="primary regular" href="#">Reenviar código</a>`;
+		verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
 		verificationMsg.classList.add("semibold", "danger");
 		clearInterval(interval);
 		btnTrigger.disabled = true;

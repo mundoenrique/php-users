@@ -69,6 +69,14 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -308:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -241:
 					$this->response->code = 2;
@@ -109,18 +117,50 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -286:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -287:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -288:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -301:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -310:
 					$this->response->code = 2;
@@ -231,6 +271,14 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -308:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -241:
 					$this->response->code = 2;
@@ -271,18 +319,50 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -286:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -287:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -288:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -301:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -310:
 					$this->response->code = 2;
@@ -392,6 +472,14 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -308:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -241:
 					$this->response->code = 2;
@@ -432,18 +520,50 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -286:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -287:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -288:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -301:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -310:
 					$this->response->code = 2;
@@ -554,6 +674,14 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -308:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_NOT_VALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -241:
 					$this->response->code = 2;
@@ -594,18 +722,50 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 				case -286:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -287:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -288:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -301:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
 					break;
 				case -310:
 					$this->response->code = 2;
