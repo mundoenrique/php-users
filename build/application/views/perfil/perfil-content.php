@@ -5,7 +5,7 @@ $tyc = $this->session->userdata('tyc');
 
 if(isset($data)){
 
-    $datos = unserialize($data);
+		$datos = unserialize($data);
 
     if($datos->rc==0){
         $base_cdn = $this->config->item('base_url_cdn');
@@ -173,13 +173,13 @@ if(isset($data)){
         foreach ($datos->registro->listaTelefonos as $value) {
             if(strtolower($value->tipo) == 'cel'){
                 $tipo = $value->tipo;
-								$num = preg_replace('/^0+/', '',$value->numero);
+								$num = preg_replace('/^000+/', '',$value->numero);
 								$celCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
             if(strtolower($value->tipo) == 'hab'){
                 $tipo_hab = $value->tipo;
-								$num_hab = preg_replace('/^0+/', '',$value->numero);
+								$num_hab = preg_replace('/^000+/', '',$value->numero);
 								$habCypher = $country === 'Ec-bp' ? $value->numeroEnc : '';
             }
 
