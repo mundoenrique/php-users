@@ -14,7 +14,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//core
 	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
 	loadingOption.textContent = 'Cargando...';
-	selectOption.textContent = 'Seleccione';
+	selectOption.textContent = 'Selecciona';
 
 	$( "#birthDate" ).datepicker( {
 		maxDate: maxBirthdayDate,

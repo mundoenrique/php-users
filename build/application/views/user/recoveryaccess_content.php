@@ -42,7 +42,7 @@
 										<div class="help-block"></div>
 								<?php }else{?>
 									<select id="typeDocument" class="custom-select form-control" name="typeDocument">
-										<option selected="" value="0">Seleccione</option>
+										<option selected="" value="0">Selecciona</option>
 										<?php foreach ($typeDocument as $row) {?>
 										<option value="<?= $row->id;?>"><?= ucfirst(mb_convert_case($row->descripcion, MB_CASE_LOWER, "UTF-8"));?></option>
 										<?php }?>
