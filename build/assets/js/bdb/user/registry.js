@@ -7,10 +7,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var inputConfirmUserpwd = $$.getElementById('confirmUserpwd');
 	var btnRegistry = $$.getElementById('btnRegistrar');
 	var maxBirthdayDate = new Date();
-	var btnShowPwd = $$.getElementById('pwdAddon');
-  maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
+	var btnShowPwd = document.getElementsByClassName('input-group-text');
+	var i;
 
 	//core
+	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
+
 	$( "#birthDate" ).datepicker( {
 		maxDate: maxBirthdayDate,
     yearRange: "-99:"+maxBirthdayDate,
@@ -18,20 +20,23 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	// Mostrar/Ocultar Contraseña
-	btnShowPwd.style.cursor = "pointer";
-	btnShowPwd.addEventListener("click", function() {
-		var inputpwd = this.closest('.input-group').querySelector('input');
-		if (inputpwd.type == 'password') {
-			inputpwd.type = "text";
-		} else {
-			inputpwd.type= "password";
-		}
-	});
+	for (i = 0; i < btnShowPwd.length; i++) {
+		btnShowPwd[i].style.cursor = "pointer";
+		btnShowPwd[i].addEventListener("click", function() {
+			var inputpwd = this.closest('.input-group').querySelector('input');
+			if (inputpwd.type == 'password') {
+				inputpwd.type = "text";
+			} else {
+				inputpwd.type= "password";
+			}
+		});
+	}
 
 	btnRegistry.addEventListener('click', function(e){
 		e.preventDefault();
-
-		document.getElementById("userpwd").type = 'password';
+		for (i = 0; i < btnShowPwd.length; i++) {
+			btnShowPwd[i].closest('.input-group').querySelector('input').type = "password";
+		}
 		var form = $('#formRegistry');
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {

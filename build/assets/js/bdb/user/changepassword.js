@@ -36,8 +36,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 	btnTrigger.addEventListener('click', function(e){
 		e.preventDefault();
 
-		inputCurrentPassword.type = 'password';
-    inputNewPassword.type = 'password';
+		for (i = 0; i < btnShowPwd.length; i++) {
+			btnShowPwd[i].closest('.input-group').querySelector('input').type = "password";
+		}
 
 		var form = $('#formChangePassword');
 		validateForms(form, {handleMsg: false});
