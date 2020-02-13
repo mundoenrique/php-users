@@ -23,7 +23,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			stackItems = $$.querySelectorAll('.stack-item'),
 			btnExportPDF = $$.getElementById('downloadPDF'),
 			btnExportXLS = $$.getElementById('downloadXLS'),
-			btnExportExtract = $$.getElementById('downloadExtract');
+			btnExportExtract = $$.getElementById('downloadExtract'),
+			openCardDetails = $$.getElementById('open-card-details');
 
 	var	i, movementsPaginate, transitPaginate;
 
@@ -229,6 +230,30 @@ $$.addEventListener('DOMContentLoaded', function(){
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'ext';
 		processForm();
+	});
+
+	openCardDetails.addEventListener('click', function(e){
+		var modalCardTitle, modalCardBody, modalData;
+		modalCardTitle = 'Detalles de tarjeta';
+		modalCardBody =
+		'<div id="generateVerificationOTP">'+
+			'<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>'+
+			'<div class="row">'+
+				'<div class="form-group col-lg-4">'+
+					'<label for="generateCodeOTP">Código de validación <span class="danger">*</span></label>'+
+					'<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>'+
+					'<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>'+
+				'</div>'+
+			'</div>'+
+			'<p id="generateVerificationMsg" class="mb-1 h5"></p>'+
+		'</div>';
+		modalData = {
+			width: 600,
+			height: 500,
+			btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
+			btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
+		};
+		notiSystem(modalCardTitle, modalCardBody, null, modalData);
 	});
 
 	function processForm() {
