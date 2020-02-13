@@ -77,12 +77,12 @@ function operationFactory(optionMenu, response = null)
 		3: function(response){
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = true;
-			$$.getElementById(`${idName}VerificationMsg`).innerHTML =  dataCustomerProduct.msgResendOTP;
+			$$.getElementById(`${idName}VerificationMsg`).innerHTML =  response.msg+' '+dataCustomerProduct.msgResendOTP;
+			$$.getElementById(`${idName}VerificationMsg`).classList.add("semibold", "danger");
 			$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
-			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = response.msg;
 			btnTrigger.innerHTML =txtBtnTrigger;
 
-			$$.getElementById(`${idName}VerificationMsg`).firstChild.setAttribute('id',`${idName}ResendCode`)
+			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id',`${idName}ResendCode`)
 			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
 				e.preventDefault();
 				resendCodeOTP(coreOperation);

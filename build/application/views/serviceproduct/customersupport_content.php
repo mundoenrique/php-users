@@ -195,7 +195,7 @@
 </div>
 <?php
 	$dataForm = json_encode([
-		'msgResendOTP' => "<a name='resendCode' class='primary' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
+		'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
 	]);
 ?>
 <script>

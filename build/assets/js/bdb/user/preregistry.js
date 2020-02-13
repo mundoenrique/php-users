@@ -33,6 +33,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (inpCodeOTP.value){
 				md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
+				clearInterval(interval);
 			}
 
 			data = {
@@ -53,8 +54,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 				if (response.code == 0) {
 
 					btnTrigger.disabled = false;
+					btnTrigger.innerHTML = txtBtnTrigger;
 
 					if (inpCodeOTP.value){
+						verificationMsg.classList.add("none");
 						$$.location.href = response.data;
 					}
 
@@ -75,34 +78,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			});
 		}else{
 			disableInputsForm(false, txtBtnTrigger);
-		}
-	});
-
-	$$.getElementById("btnVerifyOTP").addEventListener('click', function(){
-
-		var btnTriggerOTP = $$.getElementById('btnVerifyOTP');
-		var inpCodeOTP = $$.getElementById('codeOTP');
-		if (inpCodeOTP){
-
-			var form = $('#formVerifyAccount');
-			validateForms(form, {handleMsg: true});
-			if(form.valid()) {
-				btnTriggerOTP.disabled = true;
-				btnTriggerOTP.innerHTML = msgLoadingWhite;
-
-				data['codeOTP'] = CryptoJS.MD5(inpCodeOTP.value).toString();
-				callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-				{
-					if (response.code === 0){
-						$$.location.href = response.data;
-					}
-					else{
-					}
-				});
-			}
-		}
-		else{
-			return false;
 		}
 	});
 
@@ -203,7 +178,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	}
 
 	function resendCodeOTP (message) {
-		verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
+		verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Solicitar nuevo código.</a>`;
 		verificationMsg.classList.add("semibold", "danger");
 		clearInterval(interval);
 		btnTrigger.disabled = true;
