@@ -73,8 +73,6 @@ class Novo_Product_Model extends NOVO_Model
 		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized')
 		;
 
-
-
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'tarjeta';
 		$this->dataAccessLog->function = 'tarjeta';
@@ -262,6 +260,44 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->msg = lang('RES_DATA_INVALIDATED');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = '--';
+			}
+		}
+		return $this->response;
+	}
+
+	public function getDetail_Product ($dataRequest) {
+		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.CuentaTO';
+
+		$this->dataAccessLog->modulo = 'validar cuenta';
+		$this->dataAccessLog->function = 'validar cuenta';
+		$this->dataAccessLog->operation = 'validar cuenta';
+
+		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
+		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
+		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
+
+		//$response = $this->sendToService('Product');
+		$response = new stdClass();
+		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
+			switch ($this->isResponseRc) {
+				case 0:
+					$this->response->code = 0;
+					$this->response->validityTime = intval($response->bean) * 60 || 2*60;
+					$this->response->data = $response->data || [""];
+					break;
+				case -420:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					break;
+				case -421:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_PIN_EXPIRED');
+					$this->response->validityTime = intval($response->bean) * 60 || 2*60;
+					break;
 			}
 		}
 		return $this->response;

@@ -603,7 +603,6 @@ class Novo_User_Model extends NOVO_Model
 		return $this->response;
 	}
 
-
 	public function isUserLoggedIn($username)
 	{
 		$this->db->select(array('id', 'username'))

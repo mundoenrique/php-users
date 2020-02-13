@@ -90,7 +90,8 @@ class Product extends NOVO_Controller {
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services
+				"availableServices" => $row->services,
+				"vc" => TRUE
 			]);
 		}
 		return $dataRequeried;

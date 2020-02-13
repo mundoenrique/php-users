@@ -1,4 +1,4 @@
-<?php $data['type'] = true ?>
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -23,7 +23,7 @@
 							<div class="item-network <?= $data['marca']; ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 						</div>
-						<?php if ($data['type']): ?>
+						<?php if ($data['vc']): ?>
 						<a id="open-card-details" class="btn btn-small btn-link" href="#">Ver detalles</a>
 						<?php endif; ?>
 					</div>
