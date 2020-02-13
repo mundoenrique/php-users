@@ -233,27 +233,68 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	openCardDetails.addEventListener('click', function(e){
-		var modalCardTitle, modalCardBody, modalData;
+		var modalCardTitle, modalCardBody, modalData, btnTrigger, txtBtnTrigger, data;
 		modalCardTitle = 'Detalles de tarjeta';
 		modalCardBody =
-		'<div id="generateVerificationOTP">'+
-			'<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>'+
-			'<div class="row">'+
-				'<div class="form-group col-lg-4">'+
-					'<label for="generateCodeOTP">Código de validación <span class="danger">*</span></label>'+
-					'<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>'+
-					'<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>'+
-				'</div>'+
-			'</div>'+
-			'<p id="generateVerificationMsg" class="mb-1 h5"></p>'+
-		'</div>';
+		`<form id="formGetDetail" class="dialog-form mr-2" method="post">
+			<div id="verificationOTP">
+				<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+				<div class="row">
+					<div class="form-group col-lg-4">
+						<label for="codeOTP">Código de validación <span class="danger">*</span></label>
+						<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+						<div class="help-block"></div>
+					</div>
+				</div>
+				<p id="verificationMsg" class="mb-1 h5"></p>
+			</div>
+		</form>`;
+
 		modalData = {
-			width: 600,
-			height: 500,
 			btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
 			btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
 		};
-		notiSystem(modalCardTitle, modalCardBody, null, modalData);
+
+		notiSystem(modalCardTitle, modalCardBody, 'ui-icon-info', modalData);
+
+		$( "#system-info" ).dialog( "option", "minWidth", 600 );
+
+		btnTrigger = $$.getElementById('accept');
+		txtBtnTrigger = btnTrigger.innerHTML.trim();
+
+		btnTrigger.addEventListener('click',function(e){
+			e.preventDefault();
+
+			var form = $('#formGetDetail');
+			var inpCodeOTP = $$.getElementById('codeOTP');
+			var md5CodeOTP = '';
+
+			validateForms(form, {handleMsg: true});
+			if(form.valid()) {
+				inpCodeOTP.disabled = true;
+				btnTrigger.innerHTML = msgLoadingWhite;
+				btnTrigger.disabled = true;
+				data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
+				console.log(data);
+
+				// callNovoCore('POST', 'Product', 'getDetail', data, function(response)
+				// {
+				// 	console.log(response.data);
+
+				// 	if (response.code === 0){
+				// 		var cardNumber, cardholderName, expirationDate, securityCode;
+				// 		cardNumber = response.data.cardNumber;
+				// 		cardholderName = response.data.cardholderName;
+				// 		expirationDate = response.data.expirationDate;
+				// 		securityCode = response.data.securityCode;
+				// 	}
+				// 	else{
+				// 	}
+				// });
+			}
+
+		});
+
 	});
 
 	function processForm() {

@@ -3400,7 +3400,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content > p {
 	display: flex;
 	min-height: 80px;
 	margin-bottom: 0;
@@ -3682,6 +3682,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .detail-stats:not(.fade-in) {
 	display: none;
+}
+
+.dialog-form {
+	height: 200px;
 }
 
 .services-content {

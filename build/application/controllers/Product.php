@@ -113,7 +113,10 @@ class Product extends NOVO_Controller {
 			"third_party/moment",
 			"third_party/jquery.easyPaginate",
 			"third_party/kendo.dataviz",
-			"$this->countryUri/product/$view"
+			"third_party/jquery.validate",
+			"validate-forms",
+			"$this->countryUri/product/$view",
+			"localization/spanish-base/messages_base"
 		);
 
 		if ($this->config->item('language_form_validate')) {
