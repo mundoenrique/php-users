@@ -59,7 +59,7 @@
 								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="generateCodeOTP">Código de validación <span class="danger">*</span></label>
+										<label for="generateCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
 										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -103,7 +103,7 @@
 								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="changeCodeOTP">Código de validación <span class="danger">*</span></label>
+										<label for="changeCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
 										<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -133,7 +133,7 @@
 								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="lockCodeOTP">Código de validación <span class="danger">*</span></label>
+										<label for="lockCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
 										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -173,7 +173,7 @@
 								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
-										<label for="replaceCodeOTP">Código de validación <span class="danger">*</span></label>
+										<label for="replaceCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
 										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
@@ -196,6 +196,7 @@
 <?php
 	$dataForm = json_encode([
 		'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
+		'availableServices' => $data['availableServices']
 	]);
 ?>
 <script>

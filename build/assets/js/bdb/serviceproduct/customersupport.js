@@ -112,20 +112,21 @@ function operationFactory(optionMenu, response = null)
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
-		}
+		};
 		return {data: dataForm, response: responseForm};
 	}
 	function fnLock() {
 		var dataForm = {
 			codeOTP: $$.getElementById('lockCodeOTP').value,
-		}
+			unlock: !dataCustomerProduct.availableServices.includes("111"),
+		};
 		return {data: dataForm, response: responseForm};
 	}
 	function fnReplace() {
 		var dataForm = {
 			reasonRequest: $$.getElementById('replaceMotSol').value,
 			codeOTP: $$.getElementById('replaceCodeOTP').value,
-		}
+		};
 		return {data: dataForm, response: responseForm};
 	}
 
