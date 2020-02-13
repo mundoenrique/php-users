@@ -77,12 +77,12 @@ function operationFactory(optionMenu, response = null)
 		3: function(response){
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = true;
-			$$.getElementById(`${idName}VerificationMsg`).innerHTML =  dataCustomerProduct.msgResendOTP;
+			$$.getElementById(`${idName}VerificationMsg`).innerHTML =  response.msg+' '+dataCustomerProduct.msgResendOTP;
+			$$.getElementById(`${idName}VerificationMsg`).classList.add("semibold", "danger");
 			$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
-			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = response.msg;
 			btnTrigger.innerHTML =txtBtnTrigger;
 
-			$$.getElementById(`${idName}VerificationMsg`).firstChild.setAttribute('id',`${idName}ResendCode`)
+			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id',`${idName}ResendCode`)
 			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
 				e.preventDefault();
 				resendCodeOTP(coreOperation);
@@ -112,20 +112,21 @@ function operationFactory(optionMenu, response = null)
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
-		}
+		};
 		return {data: dataForm, response: responseForm};
 	}
 	function fnLock() {
 		var dataForm = {
 			codeOTP: $$.getElementById('lockCodeOTP').value,
-		}
+			unlock: !dataCustomerProduct.availableServices.includes("111"),
+		};
 		return {data: dataForm, response: responseForm};
 	}
 	function fnReplace() {
 		var dataForm = {
 			reasonRequest: $$.getElementById('replaceMotSol').value,
 			codeOTP: $$.getElementById('replaceCodeOTP').value,
-		}
+		};
 		return {data: dataForm, response: responseForm};
 	}
 
