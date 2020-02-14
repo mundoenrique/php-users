@@ -1,5 +1,7 @@
 'use strict';
 var $$ = document;
+var interval;
+var btnTrigger, txtBtnTrigger;
 
 moment.updateLocale('en', {
   monthsShort : [
@@ -26,7 +28,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			btnExportExtract = $$.getElementById('downloadExtract'),
 			openCardDetails = $$.getElementById('open-card-details');
 
-	var	i, movementsPaginate, transitPaginate;
+	var	i, movementsPaginate, transitPaginate, verificationMsg;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -233,14 +235,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	openCardDetails.addEventListener('click', function(e){
-		var modalCardTitle, modalCardBody, modalData, btnTrigger, txtBtnTrigger, data;
+		var modalCardTitle, modalCardBody, modalData, data, cardDetails;
 		modalCardTitle = 'Detalles de tarjeta';
 		modalCardBody =
-		`<form id="formGetDetail" class="dialog-form mr-2" method="post">
+		`<form id="formGetDetail" class="dialog-detail-card mr-2" method="post">
 			<div id="verificationOTP">
 				<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 				<div class="row">
-					<div class="form-group col-lg-4">
+					<div class="form-group col-lg-6">
 						<label for="codeOTP">Código de validación <span class="danger">*</span></label>
 						<input id="codeOTP" class="form-control" type="text" name="codeOTP">
 						<div class="help-block"></div>
@@ -257,7 +259,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		notiSystem(modalCardTitle, modalCardBody, 'ui-icon-info', modalData);
 
-		$( "#system-info" ).dialog( "option", "minWidth", 600 );
+		$( "#system-info" ).dialog( "option", "minWidth", 480 );
+
+		verificationMsg = $$.getElementById("verificationMsg");
+		verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+		var countdown = verificationMsg.querySelector("span");
+		startTimer(10, countdown);
+
+		$$.getElementById('codeOTP').disabled = false;
 
 		btnTrigger = $$.getElementById('accept');
 		txtBtnTrigger = btnTrigger.innerHTML.trim();
@@ -276,6 +285,31 @@ $$.addEventListener('DOMContentLoaded', function(){
 				btnTrigger.disabled = true;
 				data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
 				console.log(data);
+				cardDetails =
+				`<div class="dialog-detail-card">
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
+							<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="4193280000300080" readonly>
+						</div>
+						<div class="form-group col-lg-6">
+							<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
+							<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="SERGIO QUIJANO" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
+							<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="19/20" readonly>
+						</div>
+						<div class="form-group col-lg-6">
+							<label class="nowrap" for="securityCode">Código de seguridad</label>
+							<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="837" readonly>
+						</div>
+					</div>
+				</div>`;
+
+				$('#system-msg').html(cardDetails);
 
 				// callNovoCore('POST', 'Product', 'getDetail', data, function(response)
 				// {
@@ -368,4 +402,36 @@ function invokeChart(selector, cargos, abonos) {
 			color: "#ffffff"
 		}
 	});
+}
+
+function startTimer(duration, display) {
+	var timer = duration, minutes, seconds;
+	interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		minutes = parseInt(timer / 60, 10)
+		seconds = parseInt(timer % 60, 10);
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.textContent = minutes + ":" + seconds;
+
+		if (--timer < 0) {
+			clearInterval(interval);
+
+			$$.getElementById('codeOTP').value = '';
+			$$.getElementById('codeOTP').disabled = true;
+			verificationMsg.innerHTML =  `Tiempo expirado. <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
+			verificationMsg.classList.add("semibold", "danger");
+			btnTrigger.disabled = true;
+
+			verificationMsg.querySelector("a").setAttribute('id','resendCode');
+			$$.getElementById('resendCode').classList.add("regular");
+			$$.getElementById('resendCode').addEventListener('click', function(e){
+				e.preventDefault();
+				resendCodeOTP(coreOperation);
+			});
+		}
+	}
 }
