@@ -274,29 +274,43 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'validar cuenta';
 		$this->dataAccessLog->operation = 'validar cuenta';
 
-		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
+/* 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
 		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
+		$this->dataRequest->codigoOtp = $dataRequest->codeOTP; */
 
 		//$response = $this->sendToService('Product');
 		$response = new stdClass();
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
+			$this->isResponseRc = 10;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->validityTime = intval($response->bean) * 60 || 2*60;
+					$this->response->timeLiveModal = intval($response->bean) * 60 || 25;
+					$this->response->dataDetailCard = json_encode(
+						[
+							'cardholderName'=>'Sergio Quijano Try',
+							'cardNumber'=>'4193280000300080',
+							'expirationDate'=>'19/20',
+							'securityCode'=>'837',
+							]);
+					$this->response->data = $response->data || [""];
+					break;
+				case 10:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_CODEOTP');
+					$this->response->validityTime = intval($response->bean) * 60 || 25;
 					$this->response->data = $response->data || [""];
 					break;
 				case -420:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->validityTime = intval($response->bean) * 60 || 25;
 					break;
 				case -421:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_EXPIRED');
-					$this->response->validityTime = intval($response->bean) * 60 || 2*60;
+					$this->response->validityTime = intval($response->bean) * 60 || 25;
 					break;
 			}
 		}

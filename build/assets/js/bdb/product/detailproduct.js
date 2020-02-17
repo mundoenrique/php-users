@@ -352,14 +352,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 });
 
 function invokeChart(selector, cargos, abonos) {
-	// var cargos, abonos;
-	// if (selector[0] === movementsStats) {
-	// 	cargos = data.totalExpenseMovements;
-	// 	abonos = data.totalIncomeMovements;
-	// } else {
-	// 	cargos = data.totalExpensePendingTransactions;
-	// 	abonos = data.totalIncomePendingTransactions;
-	// }
 	selector.kendoChart({
 		chartArea: {
 			background:"transparent",
