@@ -1,3 +1,8 @@
+<?php
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
+?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -121,10 +126,22 @@
 					<!-- Bloqueo de tarjeta -->
 					<div id="lockView" class="services-both">
 						<div id="msgLock" class="msg-prevent">
-							<h2 class="h4 regular tertiary">Bloquear cuenta</h2>
+							<?php
+								if (in_array('111',$data['availableServices'])) {
+
+									$title = 'Bloquear cuenta';
+									$textDescription = 'bloquear';
+								}
+								else{
+
+									$title = 'Desbloquear cuenta';
+									$textDescription = 'desbloquear';
+								}
+							?>
+							<h2 class="h4 regular tertiary"><?= $title;?></h2>
 						</div>
 						<div id="preventLock" class="msg-prevent">
-							<h3 class="h4 regular">Si realmente deseas <span id="action">bloquear </span> tu tarjeta, presiona continuar</h3>
+							<h3 class="h4 regular">Si realmente deseas <span id="action"><?= $textDescription;?> </span> tu tarjeta, presiona continuar</h3>
 						</div>
 
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
