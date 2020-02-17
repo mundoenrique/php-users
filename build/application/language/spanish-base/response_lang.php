@@ -53,6 +53,7 @@ $lang['RESP_EXPIRED_SESSION'] = 'Su sesión en Conexión Personas Online ha cadu
 $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos de tu perfil.';
 $lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
 $lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
+$lang['RESP_FAIL_DONWLOAD_FILE'] = 'No fue posible descargar el archivo que has solicitado, por favor intentalo más tarde.';
 
 
 

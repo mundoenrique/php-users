@@ -12,10 +12,6 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User Controller class Initialized');
 	}
 
-	/**
-	 * @info Método que renderiza la vista de login
-	 * @author J. Enrique Peñaloza P.
-	 */
 	public function login()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
