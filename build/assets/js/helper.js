@@ -41,7 +41,7 @@ $('.big-modal').on('click', function(){
 		perfil: 'profile',
 		reporte: 'reports',
 		detallereporte: 'reports'
-	}
+	};
 
 	if ( actualPage !== 'inicio' && structureMenu.hasOwnProperty(actualPage)){
 
@@ -52,7 +52,7 @@ $('.big-modal').on('click', function(){
 	}
 
 	if (isLoadNotiSystem) {
-		notiSystem(titleNotiSystem, txtMessageNotiSystem, iconDanger, {})
+		notiSystem(titleNotiSystem, txtMessageNotiSystem, iconDanger, {});
 	}
 
 })();
