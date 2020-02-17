@@ -1,8 +1,4 @@
-<?php
-	echo "<pre>";
-	print_r($data);
-	echo "</pre>";
-?>
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
