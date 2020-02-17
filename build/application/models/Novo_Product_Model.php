@@ -252,9 +252,17 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->code = 0;
 					$this->response->data = $response;
 					break;
+
 				case -150:
 					$this->response->code = -150;
 					$this->response->msg = $response->msg;
+					break;
+
+				case -423:
+					$this->response->code = -150;
+					$this->response->msg = $response->msg;
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = '--';
 					break;
 
 				default:

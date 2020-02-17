@@ -79,7 +79,7 @@
 
 	<div class="cover-spin" id=""></div>
 
-	<script>
+<script>
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
@@ -91,6 +91,8 @@
 		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>"
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>"
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
+		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>"
+		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>"
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
 	</script>
 

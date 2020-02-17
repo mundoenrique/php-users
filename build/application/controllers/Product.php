@@ -175,10 +175,19 @@ class Product extends NOVO_Controller {
 		}
 
 		$this->views = ['product/'.$view];
+
 		$this->render->data = $dataProduct;
 		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 		$this->render->years = $years;
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->booLoadNotiSystem = '';
+
+		if ($this->session->flashdata('showAlert')) {
+
+			$this->render->loadAlert = '1';
+			$this->render->msgAlert = lang('RESP_FAIL_DONWLOAD_FILE');
+		}
+
 		$this->loadView($view);
 	}
 
@@ -252,6 +261,13 @@ class Product extends NOVO_Controller {
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
 				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre.'_'.$dateFile);
+			}
+			elseif ($response->code = -150) {
+
+				unset($_POST['frmMonth']);
+				unset($_POST['frmYear']);
+				$this->session->set_flashdata('showAlert', lang('RESP_FAIL_DONWLOAD_FILE'));
+				redirect(base_url().'detalle','location', 301);
 			}
 		}
 	}
