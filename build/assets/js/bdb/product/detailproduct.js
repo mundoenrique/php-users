@@ -1,7 +1,10 @@
 'use strict';
 var $$ = document;
+var data = {};
 var interval;
 var btnTrigger, txtBtnTrigger;
+var arrDialogContent = [];
+var systemMSg = $$.getElementById('system-msg');
 
 moment.updateLocale('en', {
   monthsShort : [
@@ -36,6 +39,51 @@ $$.addEventListener('DOMContentLoaded', function(){
 	noMovements.innerHTML = '<span class="h4">No se encontraron movimientos</span>';
 
 	//core
+
+	arrDialogContent = [
+		{ id: 'notice',
+			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
+		},
+		{ id: 'otpRequest',
+			body:
+			`<form id="formGetDetail" class="mr-2" method="post">
+				<div id="verificationOTP">
+					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label for="codeOTP">Código de validación <span class="danger">*</span></label>
+							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+							<div class="help-block"></div>
+						</div>
+					</div>
+					<p id="verificationMsg" class="mb-1 h5"></p>
+				</div>
+			</form>`
+		},
+		{ id: 'cardDetails',
+			body:
+			`<div class="row">
+					<div class="form-group col-lg-6">
+						<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
+						<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="4193280000300080" readonly>
+					</div>
+					<div class="form-group col-lg-6">
+						<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
+						<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="SERGIO QUIJANO" readonly>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-lg-6">
+						<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
+						<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="19/20" readonly>
+					</div>
+					<div class="form-group col-lg-6">
+						<label class="nowrap" for="securityCode">Código de seguridad</label>
+						<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="837" readonly>
+					</div>
+				</div>`
+		}
+	];
 
 	// Gráficas de estadísticas total abonos y cargos
 	if (movementsList.querySelector(".feed-item")) {
@@ -235,97 +283,83 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	openCardDetails.addEventListener('click', function(e){
-		var modalCardTitle, modalCardBody, modalData, data, cardDetails;
-		modalCardTitle = 'Detalles de tarjeta';
-		modalCardBody =
-		`<form id="formGetDetail" class="dialog-detail-card mr-2" method="post">
-			<div id="verificationOTP">
-				<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
-				<div class="row">
-					<div class="form-group col-lg-6">
-						<label for="codeOTP">Código de validación <span class="danger">*</span></label>
-						<input id="codeOTP" class="form-control" type="text" name="codeOTP">
-						<div class="help-block"></div>
-					</div>
-				</div>
-				<p id="verificationMsg" class="mb-1 h5"></p>
-			</div>
-		</form>`;
+		var dialogCardTitle, dialogCardBody, dialogData, data, cardDetails, idContentDialog;
+		dialogCardTitle = 'Detalles de tarjeta';
+		dialogCardBody = createElement('div', { id: arrDialogContent[0].id, class: 'dialog-detail-card'});
+		dialogCardBody.innerHTML = arrDialogContent[0].body;
 
-		modalData = {
+		dialogData = {
 			btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
 			btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
 		};
 
-		notiSystem(modalCardTitle, modalCardBody, 'ui-icon-info', modalData);
+		notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
 
 		$( "#system-info" ).dialog( "option", "minWidth", 480 );
 
-		verificationMsg = $$.getElementById("verificationMsg");
-		verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-		var countdown = verificationMsg.querySelector("span");
-		startTimer(10, countdown);
+		// verificationMsg = $$.getElementById("verificationMsg");
+		// verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+		// var countdown = verificationMsg.querySelector("span");
+		// startTimer(10, countdown);
 
-		$$.getElementById('codeOTP').disabled = false;
+		// $$.getElementById('codeOTP').disabled = false;
 
 		btnTrigger = $$.getElementById('accept');
 		txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 		btnTrigger.addEventListener('click',function(e){
 			e.preventDefault();
+			idContentDialog = systemMSg.querySelector("div").id;
 
-			var form = $('#formGetDetail');
-			var inpCodeOTP = $$.getElementById('codeOTP');
-			var md5CodeOTP = '';
+			switch (idContentDialog) {
+				case 'notice':
+					btnTrigger.innerHTML = msgLoadingWhite;
+					btnTrigger.disabled = true;
+					systemMSg.querySelector("div").innerHTML = "loading";
+					proccessPetition({});
+					break;
+				case 'otpRequest':
 
-			validateForms(form, {handleMsg: true});
-			if(form.valid()) {
-				inpCodeOTP.disabled = true;
-				btnTrigger.innerHTML = msgLoadingWhite;
-				btnTrigger.disabled = true;
-				data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
-				console.log(data);
-				cardDetails =
-				`<div class="dialog-detail-card">
-					<div class="row">
-						<div class="form-group col-lg-6">
-							<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
-							<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="4193280000300080" readonly>
-						</div>
-						<div class="form-group col-lg-6">
-							<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
-							<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="SERGIO QUIJANO" readonly>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-lg-6">
-							<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
-							<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="19/20" readonly>
-						</div>
-						<div class="form-group col-lg-6">
-							<label class="nowrap" for="securityCode">Código de seguridad</label>
-							<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="837" readonly>
-						</div>
-					</div>
-				</div>`;
+					break;
+				case 'cardDetails':
 
-				$('#system-msg').html(cardDetails);
+					break;
 
-				// callNovoCore('POST', 'Product', 'getDetail', data, function(response)
-				// {
-				// 	console.log(response.data);
-
-				// 	if (response.code === 0){
-				// 		var cardNumber, cardholderName, expirationDate, securityCode;
-				// 		cardNumber = response.data.cardNumber;
-				// 		cardholderName = response.data.cardholderName;
-				// 		expirationDate = response.data.expirationDate;
-				// 		securityCode = response.data.securityCode;
-				// 	}
-				// 	else{
-				// 	}
-				// });
+				default:
+					break;
 			}
+
+			// var form = $('#formGetDetail');
+			// var inpCodeOTP = $$.getElementById('codeOTP');
+			// var md5CodeOTP = '';
+
+			// validateForms(form, {handleMsg: true});
+			// if(form.valid()) {
+			// 	inpCodeOTP.disabled = true;
+			// 	btnTrigger.innerHTML = msgLoadingWhite;
+			// 	btnTrigger.disabled = true;
+			// 	data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
+			// 	console.log(data);
+			// 	cardDetails = null;
+
+
+			// 	// $$.getElementById('system-msg').innerHTML = ;
+
+			// 	callNovoCore('POST', 'Product', 'getDetail', data, function(response)
+			// 	{
+			// 		console.log(response.data);
+
+			// 		if (response.code === 0){
+			// 			var cardNumber, cardholderName, expirationDate, securityCode;
+			// 			cardNumber = response.data.cardNumber;
+			// 			cardholderName = response.data.cardholderName;
+			// 			expirationDate = response.data.expirationDate;
+			// 			securityCode = response.data.securityCode;
+			// 		}
+			// 		else{
+			// 		}
+			// 	});
+			// }
 
 		});
 
@@ -350,6 +384,31 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 
 });
+
+function proccessPetition(data)
+{
+	callNovoCore('POST', 'Product', 'getDetail_Product', data, function(response) {
+
+		switch (response.code) {
+			case 0:
+
+				break;
+			case 1:
+				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
+				systemMSg.querySelector("div").id = arrDialogContent[1].id;
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+
+			default:
+				break;
+		}
+	});
+}
 
 function invokeChart(selector, cargos, abonos) {
 	selector.kendoChart({
@@ -422,8 +481,40 @@ function startTimer(duration, display) {
 			$$.getElementById('resendCode').classList.add("regular");
 			$$.getElementById('resendCode').addEventListener('click', function(e){
 				e.preventDefault();
-				resendCodeOTP(coreOperation);
+				// resendCodeOTP(coreOperation);
 			});
 		}
 	}
 }
+
+// function resendCodeOTP (message) {
+// 	verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
+// 	verificationMsg.classList.add("semibold", "danger");
+// 	clearInterval(interval);
+// 	btnTrigger.disabled = true;
+// 	$$.getElementById('codeOTP').disabled = true;
+
+// 	$$.getElementById('resendCode').addEventListener('click', function(e){
+// 		e.preventDefault();
+
+// 		$$.getElementById('codeOTP').value = '';
+// 		disableInputsForm(true, msgLoadingWhite);
+// 		data.codeOTP = '';
+// 		callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
+// 		{
+// 			if (response.code == 0) {
+// 				btnTrigger.disabled = false;
+// 				btnTrigger.innerHTML = txtBtnTrigger;
+// 				verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+// 				verificationMsg.classList.remove("semibold", "danger");
+// 				$$.getElementById('codeOTP').disabled = false;
+// 				var countdown = verificationMsg.querySelector("span");
+// 				startTimer(response.validityTime, countdown);
+// 			}
+// 			else{
+// 				notiSystem(response.title, response.msg, response.classIconName, response.data);
+// 				disableInputsForm(false, txtBtnTrigger);
+// 			}
+// 		});
+// 	});
+// }
