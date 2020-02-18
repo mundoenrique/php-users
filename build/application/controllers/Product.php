@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * @info Controlador para la vista principal de la aplicación
- * @author J. Enrique Peñaloza P
-*/
+
 class Product extends NOVO_Controller {
 
 	public function __construct ()
@@ -182,10 +179,13 @@ class Product extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->booLoadNotiSystem = '';
 
-		if ($this->session->flashdata('showAlert')) {
+		if ($dataAlert = $this->session->flashdata('showAlert')) {
+
 
 			$this->render->loadAlert = '1';
-			$this->render->msgAlert = lang('RESP_FAIL_DONWLOAD_FILE');
+			$this->render->msgAlert = $dataAlert->message;
+			$this->render->monthSelected = $dataAlert->monthSelected;
+			$this->render->yearSelected = $dataAlert->yearSelected;
 		}
 
 		$this->loadView($view);
@@ -264,13 +264,17 @@ class Product extends NOVO_Controller {
 			}
 			elseif ($response->code = -150) {
 
+				$dataForAlert = new stdClass();
+				$dataForAlert->message = lang('RESP_FAIL_DONWLOAD_FILE');
+				$dataForAlert->monthSelected = $_POST['frmMonth'];
+				$dataForAlert->yearSelected = $_POST['frmYear'];
+
 				unset($_POST['frmMonth']);
 				unset($_POST['frmYear']);
-				$this->session->set_flashdata('showAlert', lang('RESP_FAIL_DONWLOAD_FILE'));
+
+				$this->session->set_flashdata('showAlert', $dataForAlert );
 				redirect(base_url().'detalle','location', 301);
 			}
 		}
 	}
-
-
 }

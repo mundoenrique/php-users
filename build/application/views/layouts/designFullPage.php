@@ -80,6 +80,9 @@
 	<div class="cover-spin" id=""></div>
 
 <script>
+
+
+
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
@@ -93,6 +96,7 @@
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>"
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>"
+
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
 	</script>
 
