@@ -131,11 +131,11 @@ class ServiceProduct extends NOVO_Controller {
 			'112' => [
 				'id' => 'change',
 				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN",
-				'isVisible' => FALSE
+				'isVisible' => TRUE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta",
+				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de tarjeta",
 				'isVisible' => TRUE
 			],
 			'111' => [
@@ -155,14 +155,14 @@ class ServiceProduct extends NOVO_Controller {
 		}
 
 		if ( !empty($dataProduct['bloqueo']) ) {
-			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de cuenta";
+			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de tarjeta";
 		}
 
 		foreach ($menuOptionsProduct as $key => $value) {
 
 			if (empty($dataProduct['bloqueo'])) {
 				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-				if ( $key === 112 && in_array(120, $dataProduct['availableServices']) ) {
+				if ( in_array(120, $dataProduct['availableServices']) ) {
 					continue;
 				}
 			}

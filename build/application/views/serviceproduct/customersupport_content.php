@@ -1,4 +1,3 @@
-
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -125,12 +124,12 @@
 							<?php
 								if (in_array('111',$data['availableServices'])) {
 
-									$title = 'Bloquear cuenta';
+									$title = 'Bloquear tarjeta';
 									$textDescription = 'bloquear';
 								}
 								else{
 
-									$title = 'Desbloquear cuenta';
+									$title = 'Desbloquear tarjeta';
 									$textDescription = 'desbloquear';
 								}
 							?>
