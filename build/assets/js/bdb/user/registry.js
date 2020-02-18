@@ -77,7 +77,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var pswd = $$.getElementById('userpwd').value;
 		var resultValidate = false;
 		var validations = {
-			length: pswd.length > 8 && pswd.length < 15,
+			length: pswd.length >= 8 && pswd.length <= 15,
 			letter: pswd.match(/[a-z]/),
 			capital: pswd.match(/[A-Z]/),
 			number: !pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/),
