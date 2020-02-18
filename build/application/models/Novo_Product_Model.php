@@ -265,7 +265,7 @@ class Novo_Product_Model extends NOVO_Model
 		return $this->response;
 	}
 
-	public function getDetail_Product ($dataRequest) {
+	public function callWs_getDetail_Product ($dataRequest) {
 		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.CuentaTO';

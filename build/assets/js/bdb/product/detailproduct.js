@@ -387,7 +387,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 function proccessPetition(data)
 {
-	callNovoCore('POST', 'Product', 'getDetail_Product', data, function(response) {
+	callNovoCore('POST', 'Product', 'getDetail', data, function(response) {
 
 		switch (response.code) {
 			case 0:
