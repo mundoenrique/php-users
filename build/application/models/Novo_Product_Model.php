@@ -281,6 +281,9 @@ class Novo_Product_Model extends NOVO_Model
 
 		//$response = $this->sendToService('Product');
 		$response = new stdClass();
+		$response->bean = 2;
+		$response->data = [''];
+		$this->isResponseRc = TRUE;
 		if ($this->isResponseRc !== FALSE) {
 			$this->isResponseRc = 10;
 			switch ($this->isResponseRc) {
