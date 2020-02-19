@@ -1,9 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * @info Controlador para la vista principal de la aplicación
- * @author J. Enrique Peñaloza P
-*/
 class ServiceProduct extends NOVO_Controller {
 
 	public function __construct()
@@ -162,9 +158,6 @@ class ServiceProduct extends NOVO_Controller {
 
 			if (empty($dataProduct['bloqueo'])) {
 				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-				if ( in_array(120, $dataProduct['availableServices']) ) {
-					continue;
-				}
 			}
 			else	{
 				$available = 'is-disabled';
