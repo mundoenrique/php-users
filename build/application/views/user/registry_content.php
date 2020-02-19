@@ -174,7 +174,7 @@
 		'code_tipo_id_ext_per' => $data->user->tipo_id_ext_per,
 		'tipo_id_ext_per' => $data->user->tipo_id_ext_per,
 		'paisUser' => $data->pais,
-		'acceptTerms' => $data->acceptTerms
+		'acceptTerms' => $data->user->tyc
 	]);
 ?>
 <script>

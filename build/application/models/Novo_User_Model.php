@@ -261,7 +261,8 @@ class Novo_User_Model extends NOVO_Model
 			"notSms"			=> "1",
 			"email"				=> $dataRequest->email,
 			"password"			=> md5($dataRequest->userpwd),
-			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd))
+			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
+			"tyc" => $dataRequest->acceptTerms
 		);
 
 		$phones = array(
@@ -291,7 +292,6 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = $user;
 		$this->dataRequest->listaTelefonos = $phones;
-		$this->dataRequest->acceptTerms = $dataRequest->acceptTerms;
 		$this->dataRequest->token = $this->session->userdata['token'];
 		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];
