@@ -31,7 +31,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			btnExportExtract = $$.getElementById('downloadExtract'),
 			openCardDetails = $$.getElementById('open-card-details');
 
-	var	i, movementsPaginate, transitPaginate, verificationMsg;
+	var	i, movementsPaginate, transitPaginate, verificationMsg, timeLiveModal;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
@@ -50,7 +50,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<div id="verificationOTP">
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 					<div class="row">
-						<div class="form-group col-lg-6">
+						<div class="form-group col-lg-7">
 							<label for="codeOTP">Código de validación <span class="danger">*</span></label>
 							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
 							<div class="help-block"></div>
@@ -63,25 +63,26 @@ $$.addEventListener('DOMContentLoaded', function(){
 		{ id: 'cardDetails',
 			body:
 			`<div class="row">
-					<div class="form-group col-lg-6">
-						<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
-						<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="4193280000300080" readonly>
-					</div>
-					<div class="form-group col-lg-6">
-						<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
-						<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="SERGIO QUIJANO" readonly>
-					</div>
+				<div class="form-group col-lg-6">
+					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
+					<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="" readonly>
 				</div>
-				<div class="row">
-					<div class="form-group col-lg-6">
-						<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
-						<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="19/20" readonly>
-					</div>
-					<div class="form-group col-lg-6">
-						<label class="nowrap" for="securityCode">Código de seguridad</label>
-						<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="837" readonly>
-					</div>
-				</div>`
+				<div class="form-group col-lg-6">
+					<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
+					<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-lg-6">
+					<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
+					<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+				<div class="form-group col-lg-6">
+					<label class="nowrap" for="securityCode">Código de seguridad</label>
+					<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+			</div>
+			<p class="mb-1 h5">Tiempo restante:<span id="timeLiveModal" class="ml-1 danger"></span></p>`
 		}
 	];
 
@@ -294,18 +295,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 		};
 
 		notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
-
-		$( "#system-info" ).dialog( "option", "minWidth", 480 );
-
-		// verificationMsg = $$.getElementById("verificationMsg");
-		// verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-		// var countdown = verificationMsg.querySelector("span");
-		// startTimer(10, countdown);
-
-		// $$.getElementById('codeOTP').disabled = false;
+		$("#system-info").dialog( "option", "minWidth", 480 );
+		$("#system-info").dialog( "option", "position", { my: "center top+100", at: "center top", of:  window } );
 
 		btnTrigger = $$.getElementById('accept');
 		txtBtnTrigger = btnTrigger.innerHTML.trim();
+
+		$$.getElementById("cancel").addEventListener('click',function(e){
+			e.preventDefault();
+			$("#system-info").dialog("close");
+			$("#system-info").dialog("destroy");
+			systemMSg.innerHTML = "";
+			$(this).off('click');
+		})
 
 		btnTrigger.addEventListener('click',function(e){
 			e.preventDefault();
@@ -318,49 +320,28 @@ $$.addEventListener('DOMContentLoaded', function(){
 					systemMSg.querySelector("div").innerHTML = "loading";
 					proccessPetition({});
 					break;
+
 				case 'otpRequest':
-
+					var form = $('#formGetDetail');
+					var inpCodeOTP = $$.getElementById('codeOTP');
+					validateForms(form, {handleMsg: true});
+					if(form.valid()) {
+						btnTrigger.innerHTML = msgLoadingWhite;
+						btnTrigger.disabled = true;
+						inpCodeOTP.disabled = true;
+						data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
+						clearInterval(interval);
+						proccessPetition(data);
+					}
 					break;
+
 				case 'cardDetails':
-
-					break;
-
-				default:
+					systemMSg.innerHTML = "";
+					$("#system-info").dialog('close');
+					$("#system-info").dialog("destroy");
+					$(this).off('click');
 					break;
 			}
-
-			// var form = $('#formGetDetail');
-			// var inpCodeOTP = $$.getElementById('codeOTP');
-			// var md5CodeOTP = '';
-
-			// validateForms(form, {handleMsg: true});
-			// if(form.valid()) {
-			// 	inpCodeOTP.disabled = true;
-			// 	btnTrigger.innerHTML = msgLoadingWhite;
-			// 	btnTrigger.disabled = true;
-			// 	data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
-			// 	console.log(data);
-			// 	cardDetails = null;
-
-
-			// 	// $$.getElementById('system-msg').innerHTML = ;
-
-			// 	callNovoCore('POST', 'Product', 'getDetail', data, function(response)
-			// 	{
-			// 		console.log(response.data);
-
-			// 		if (response.code === 0){
-			// 			var cardNumber, cardholderName, expirationDate, securityCode;
-			// 			cardNumber = response.data.cardNumber;
-			// 			cardholderName = response.data.cardholderName;
-			// 			expirationDate = response.data.expirationDate;
-			// 			securityCode = response.data.securityCode;
-			// 		}
-			// 		else{
-			// 		}
-			// 	});
-			// }
-
 		});
 
 	});
@@ -391,17 +372,38 @@ function proccessPetition(data)
 
 		switch (response.code) {
 			case 0:
-
+				var cardNumber, cardholderName, expirationDate, securityCode;
+				cardNumber = response.dataDetailCard.cardNumber;
+				cardholderName = response.dataDetailCard.cardholderName;
+				expirationDate = response.dataDetailCard.expirationDate;
+				securityCode = response.dataDetailCard.securityCode;
+				systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
+				systemMSg.querySelector("div").id = arrDialogContent[2].id;
+				$$.getElementById("cardNumber").value = cardNumber;
+				$$.getElementById("cardholderName").value = cardholderName;
+				$$.getElementById("expirationDate").value = expirationDate;
+				$$.getElementById("securityCode").value = securityCode;
+				timeLiveModal = $$.getElementById("timeLiveModal");
+				startTimer(response.timeLiveModal, timeLiveModal);
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 				break;
+
 			case 1:
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
 				systemMSg.querySelector("div").id = arrDialogContent[1].id;
+				verificationMsg = $$.getElementById("verificationMsg");
+				verificationMsg.innerHTML = 'Tiempo restante:<span id="validityTime" class="ml-1 danger"></span></span>';
+				var countdown = verificationMsg.querySelector("#validityTime");
+				startTimer(response.validityTime, countdown);
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
 				break;
 			case 2:
 
 				break;
 			case 3:
-
+				codeForwarding(response.msg);
 				break;
 
 			default:
@@ -470,51 +472,33 @@ function startTimer(duration, display) {
 
 		if (--timer < 0) {
 			clearInterval(interval);
+			if (display.id == "validityTime") {
+				codeForwarding('Tiempo expirado.');
+			} else {
+				$("#system-info").dialog('close');
+				$("#system-info").dialog("destroy");
+				btnTrigger.disabled = false;
+			}
 
-			$$.getElementById('codeOTP').value = '';
-			$$.getElementById('codeOTP').disabled = true;
-			verificationMsg.innerHTML =  `Tiempo expirado. <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
-			verificationMsg.classList.add("semibold", "danger");
-			btnTrigger.disabled = true;
 
-			verificationMsg.querySelector("a").setAttribute('id','resendCode');
-			$$.getElementById('resendCode').classList.add("regular");
-			$$.getElementById('resendCode').addEventListener('click', function(e){
-				e.preventDefault();
-				// resendCodeOTP(coreOperation);
-			});
+
+
 		}
 	}
 }
 
-// function resendCodeOTP (message) {
-// 	verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
-// 	verificationMsg.classList.add("semibold", "danger");
-// 	clearInterval(interval);
-// 	btnTrigger.disabled = true;
-// 	$$.getElementById('codeOTP').disabled = true;
+function codeForwarding  (message) {
+	clearInterval(interval);
+	verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
+	verificationMsg.classList.add("semibold", "danger");
 
-// 	$$.getElementById('resendCode').addEventListener('click', function(e){
-// 		e.preventDefault();
+	$$.getElementById('codeOTP').value = '';
+	$$.getElementById('codeOTP').disabled = true;
+	btnTrigger.innerHTML = txtBtnTrigger;
+	btnTrigger.disabled = true;
 
-// 		$$.getElementById('codeOTP').value = '';
-// 		disableInputsForm(true, msgLoadingWhite);
-// 		data.codeOTP = '';
-// 		callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-// 		{
-// 			if (response.code == 0) {
-// 				btnTrigger.disabled = false;
-// 				btnTrigger.innerHTML = txtBtnTrigger;
-// 				verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-// 				verificationMsg.classList.remove("semibold", "danger");
-// 				$$.getElementById('codeOTP').disabled = false;
-// 				var countdown = verificationMsg.querySelector("span");
-// 				startTimer(response.validityTime, countdown);
-// 			}
-// 			else{
-// 				notiSystem(response.title, response.msg, response.classIconName, response.data);
-// 				disableInputsForm(false, txtBtnTrigger);
-// 			}
-// 		});
-// 	});
-// }
+	$$.getElementById('resendCode').addEventListener('click', function(e){
+		e.preventDefault();
+		proccessPetition({});
+	});
+}

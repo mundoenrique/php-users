@@ -289,14 +289,13 @@ class Novo_Product_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->timeLiveModal = intval($response->bean) * 60 || 25;
-					$this->response->dataDetailCard = json_encode(
-						[
-							'cardholderName'=>'Sergio Quijano Try',
-							'cardNumber'=>'4193280000300080',
-							'expirationDate'=>'19/20',
-							'securityCode'=>'837',
-							]);
+					$this->response->timeLiveModal = intval($response->bean) * 60;
+					$this->response->dataDetailCard = [
+						'cardholderName'=>'Sergio Quijano Try',
+						'cardNumber'=>'4193280000300080',
+						'expirationDate'=>'19/20',
+						'securityCode'=>'837',
+					];
 					$this->response->data = $response->data || [""];
 					break;
 				case 10:
