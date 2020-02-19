@@ -285,7 +285,7 @@ class Novo_Product_Model extends NOVO_Model
 		$response->data = [''];
 		$this->isResponseRc = TRUE;
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
+			$this->isResponseRc = 10;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;

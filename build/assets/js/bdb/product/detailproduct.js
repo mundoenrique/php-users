@@ -5,6 +5,8 @@ var interval;
 var btnTrigger, txtBtnTrigger;
 var arrDialogContent = [];
 var systemMSg = $$.getElementById('system-msg');
+var verificationMsg;
+var timeLiveModal;
 
 moment.updateLocale('en', {
   monthsShort : [
@@ -31,7 +33,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			btnExportExtract = $$.getElementById('downloadExtract'),
 			openCardDetails = $$.getElementById('open-card-details');
 
-	var	i, movementsPaginate, transitPaginate, verificationMsg, timeLiveModal;
+	var	i, movementsPaginate, transitPaginate;
 
 	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
