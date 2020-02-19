@@ -57,6 +57,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 				);
+				data['acceptTerms'] = dataRegistryFrm.acceptTerms;
 				data['tipo_id_ext_per'] = dataRegistryFrm.code_tipo_id_ext_per;
 				data['pais'] = dataRegistryFrm.paisUser;
 				data['otro_telefono'] = $$.getElementById('phoneType').value;

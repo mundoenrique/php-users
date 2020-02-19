@@ -1,10 +1,5 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-/**
- * @info Módelo para la información del usuario
- * @author J. Enrique Peñaloza Piñero
- *
- */
 class Novo_User_Model extends NOVO_Model
 {
 
@@ -170,6 +165,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
 		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
+		$this->dataRequest->acceptTerms = $dataRequest->acceptTerms;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
 		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocumentUser;
@@ -295,6 +291,7 @@ class Novo_User_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = $user;
 		$this->dataRequest->listaTelefonos = $phones;
+		$this->dataRequest->acceptTerms = $dataRequest->acceptTerms;
 		$this->dataRequest->token = $this->session->userdata['token'];
 		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];

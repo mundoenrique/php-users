@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * @info Controlador para la vista principal de la aplicación
- * @author J. Enrique Peñaloza P
-*/
+
 class User extends NOVO_Controller {
 
 	public function __construct()
@@ -189,7 +186,6 @@ class User extends NOVO_Controller {
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
 		$this->views = ['user/'.$view];
-		//$this->render->setTimerOTP = $this->config->item('setTimerOTP');
 		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;

@@ -45,8 +45,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				abbrTypeDocumentBussines: abbrTypeDocumentBussines,
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
+				acceptTerms: $$.getElementById('acceptTerms').checked,
 				codeOTP: md5CodeOTP
- 			}
+ 			};
 
 			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
 			{
