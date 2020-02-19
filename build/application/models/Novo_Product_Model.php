@@ -285,7 +285,7 @@ class Novo_Product_Model extends NOVO_Model
 		$response->data = [''];
 		$this->isResponseRc = TRUE;
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 10;
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -301,18 +301,18 @@ class Novo_Product_Model extends NOVO_Model
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 60 || 25;
+					$this->response->validityTime = intval($response->bean) * 10;
 					$this->response->data = $response->data || [""];
 					break;
 				case -420:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
-					$this->response->validityTime = intval($response->bean) * 60 || 25;
+					$this->response->validityTime = intval($response->bean) * 10;
 					break;
 				case -421:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_EXPIRED');
-					$this->response->validityTime = intval($response->bean) * 60 || 25;
+					$this->response->validityTime = intval($response->bean) * 10;
 					break;
 			}
 		}
