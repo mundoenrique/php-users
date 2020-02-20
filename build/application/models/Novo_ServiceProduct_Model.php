@@ -317,7 +317,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 4;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
