@@ -319,7 +319,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 				case 'notice':
 					btnTrigger.innerHTML = msgLoadingWhite;
 					btnTrigger.disabled = true;
-					systemMSg.querySelector("div").innerHTML = "loading";
 					proccessPetition({});
 					break;
 
@@ -395,7 +394,6 @@ function proccessPetition(data)
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
 				systemMSg.querySelector("div").id = arrDialogContent[1].id;
 				verificationMsg = $$.getElementById("verificationMsg");
-				console.log(verificationMsg);
 				verificationMsg.innerHTML = 'Tiempo restante:<span id="validityTime" class="ml-1 danger"></span></span>';
 				var countdown = verificationMsg.querySelector("#validityTime");
 				startTimer(response.validityTime, countdown);
