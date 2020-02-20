@@ -115,14 +115,13 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
 					break;
@@ -317,14 +316,13 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 4;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
 					break;
@@ -518,14 +516,13 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
 					break;
@@ -720,14 +717,13 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
 					break;
