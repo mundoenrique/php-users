@@ -528,6 +528,17 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 							'action' => 'redirect'
 						]
 					];
+
+					if ($response->bean == "0") {
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS').' ( '.$response->bean.' )';
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;

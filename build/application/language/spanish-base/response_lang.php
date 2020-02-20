@@ -71,8 +71,9 @@ $lang['RESP_ERROR_DNI'] = 'Datos de afiliación inválidos. Verifica tu DNI en R
 $lang['RESP_WRONG_MEMBERSHIP_DATA'] = 'Datos de afiliación inválidos. Verifica tus datos e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta';
 $lang['RESP_SEND_EMAIL_PASSWORD'] = 'Proceso exitoso, se ha enviado un correo a {$maskMail$} con la contraseña temporal.';
 $lang['RESP_SEND_EMAIL_LOGIN'] = 'Se ha enviado un mensaje al correo electrónico {$maskMail$} con sus datos de acceso al sistema Conexión Personas Online.';
-$lang['RESP_CLOSE_SESSION'] = 'Gracias por usar nuestros servicios, su sesión en Conexión Personas ha caducado.';
-
+$lang['RESP_CLOSE_SESSION'] = 'Gracias por usar nuestros servicios, su sesión en Conexión Personas ha
+caducado.';
+$lang['RESP_OTP_FAILED_ATTEMPTS'] = 'Código de verificación vencido.';
 
 
 
