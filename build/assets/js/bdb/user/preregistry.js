@@ -107,6 +107,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			},
 			open: function (event, ui) {
 				$('#aceptar').on('click', function(e) {
+					$$.getElementById('acceptTerms').checked = true;
 					dialogConditions.dialog('close');
 					$(this).off('click');
 					$("body").css("overflowY", "auto");
