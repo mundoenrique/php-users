@@ -135,7 +135,7 @@
 
 <?php
 	$data = json_encode([
-		//'setTimerOTP' => $setTimerOTP,
+		'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
 		'typeDocument' => $typeDocument
 	]);
 ?>

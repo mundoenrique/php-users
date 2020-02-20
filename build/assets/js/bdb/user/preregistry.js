@@ -8,13 +8,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 	var verificationMsg = $$.getElementById("verificationMsg");
+	var inpCodeOTP = $$.getElementById('codeOTP');
+	var form = $('#formVerifyAccount');
 
 	//core
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 		var md5CodeOTP = '';
-		var inpCodeOTP = $$.getElementById('codeOTP');
-		var form = $('#formVerifyAccount');
 
 		var typeDocumentUser = $$.getElementById('typeDocumentUser');
 		var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
@@ -48,35 +48,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				codeOTP: md5CodeOTP
  			};
 
-			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-			{
-				disableInputsForm(true, txtBtnTrigger);
-				if (response.code == 0) {
+			proccessPetition(data);
 
-					btnTrigger.disabled = false;
-					btnTrigger.innerHTML = txtBtnTrigger;
-
-					if (inpCodeOTP.value){
-						verificationMsg.classList.add("none");
-						$$.location.href = response.data;
-					}
-
-					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
-					$$.getElementById("verification").classList.remove("none");
-					verificationMsg.classList.remove("semibold", "danger");
-					$$.getElementById('codeOTP').disabled = false;
-					var countdown = verificationMsg.querySelector("span");
-					startTimer(response.validityTime, countdown);
-
-				}else if (response.code === 3){
-					resendCodeOTP(response.msg, response.code);
-				}else{
-					inpCodeOTP.value = '';
-					btnTrigger.innerHTML = txtBtnTrigger;
-					btnTrigger.disabled = false;
-					notiSystem(response.title, response.msg, response.classIconName, response.data);
-				}
-			});
 		}else{
 			disableInputsForm(false, txtBtnTrigger);
 		}
@@ -174,42 +147,82 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (--timer < 0) {
 				clearInterval(interval);
-				resendCodeOTP ('Tiempo expirado.');
+				verificationMsg.innerHTML = `Tiempo expirado. ${dataPreRegistry.msgResendOTP}`;
+				verificationMsg.classList.add("semibold", "danger");
+				verificationMsg.querySelector("a").setAttribute('id','resendCode');
+
+				btnTrigger.disabled = true;
+				btnTrigger.innerHTML = txtBtnTrigger;
+				$$.getElementById('codeOTP').value = '';
+				$$.getElementById('codeOTP').disabled = true;
+
+				$$.getElementById('resendCode').addEventListener('click', function(e){
+					e.preventDefault();
+					data.codeOTP = '';
+					proccessPetition(data);
+				});
 			}
 		}
 	}
 
-	function resendCodeOTP (message) {
-		verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Solicitar nuevo código.</a>`;
-		verificationMsg.classList.add("semibold", "danger");
-		clearInterval(interval);
-		btnTrigger.disabled = true;
-		$$.getElementById('codeOTP').disabled = true;
-
-		$$.getElementById('resendCode').addEventListener('click', function(e){
-			e.preventDefault();
-
-			$$.getElementById('codeOTP').value = '';
-			disableInputsForm(true, msgLoadingWhite);
-			data.codeOTP = '';
-			callNovoCore('POST', 'User', 'verifyAccount', data, function(response)
-			{
-				if (response.code == 0) {
+	function proccessPetition(data)
+	{
+		callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
+			disableInputsForm(true, txtBtnTrigger);
+			switch (response.code) {
+				case 0:
 					btnTrigger.disabled = false;
 					btnTrigger.innerHTML = txtBtnTrigger;
-					verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span></span>';
+
+					if (inpCodeOTP.value){
+						verificationMsg.classList.add("none");
+						$$.location.href = response.data;
+					}
+
+					verificationMsg.innerHTML = `${dataPreRegistry.msgResendOTP} Tiempo restante:<span class="ml-1 danger"></span>`;
+					verificationMsg.querySelector("a").setAttribute('id','resendCode');
+					$$.getElementById('resendCode').addEventListener('click', function(e){
+						e.preventDefault();
+						codeForwarding();
+					});
+					$$.getElementById("verification").classList.remove("none");
 					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(response.validityTime, countdown);
-				}
-				else{
+					break;
+
+				case 3:
+					verificationMsg.innerHTML = `${response.msg} ${dataPreRegistry.msgResendOTP}`;
+					verificationMsg.classList.add("semibold", "danger");
+					verificationMsg.querySelector("a").setAttribute('id','resendCode');
+					$$.getElementById('resendCode').addEventListener('click', function(e){
+						e.preventDefault();
+						codeForwarding();
+					});
+					break;
+
+				default:
+					inpCodeOTP.value = '';
+					btnTrigger.innerHTML = txtBtnTrigger;
+					btnTrigger.disabled = false;
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					disableInputsForm(false, txtBtnTrigger);
-				}
-			});
+					break;
+			}
 		});
 	}
+
+	function codeForwarding  () {
+		clearInterval(interval);
+		btnTrigger.disabled = true;
+		btnTrigger.innerHTML = txtBtnTrigger;
+		$$.getElementById('codeOTP').value = '';
+		$$.getElementById('codeOTP').disabled = true;
+		verificationMsg.innerHTML = msgLoading;
+		data.codeOTP = '';
+		proccessPetition(data);
+	}
+
 });
 
 
