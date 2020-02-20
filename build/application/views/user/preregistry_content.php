@@ -123,7 +123,6 @@
 			Nullam tristique, felis at consectetur sodales, arcu odio varius urna, eu ullamcorper nulla lectus nec elit. Aliquam erat volutpat. Aenean auctor et nibh quis sagittis. Nullam fermentum sem id eros finibus tempor. Curabitur semper cursus libero ac suscipit. Sed et ligula orci. Donec at velit finibus, suscipit ante a, sodales odio. Nulla rutrum vitae leo vitae commodo. Aenean ac lorem massa.
 			</p>
 		</div>
-		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button id="aceptar" class="btn btn-small btn-loading btn-primary" type="button">Aceptar</button>
