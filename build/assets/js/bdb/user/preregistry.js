@@ -71,6 +71,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				}else if (response.code === 3){
 					resendCodeOTP(response.msg, response.code);
 				}else{
+					btnTrigger.innerHTML = txtBtnTrigger;
+					btnTrigger.disabled = false;
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
 				}
 			});
