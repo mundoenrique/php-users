@@ -88,10 +88,10 @@ function operationFactory(optionMenu, response = null)
 			});
 		},
 		5: function(response){
+			$$.getElementById(`${idName}CodeOTP`).value = '';
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
-			// disableInputsForm (idName, false, txtBtnTrigger);
 		},
 		99: function(response){
 			notiSystem (response.title, response.msg, response.classIconName, response.data);
