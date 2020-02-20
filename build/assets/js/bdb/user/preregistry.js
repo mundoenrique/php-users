@@ -4,14 +4,13 @@ var data = {};
 var interval;
 
 $$.addEventListener('DOMContentLoaded', function(){
-	//vars
+
 	var btnTrigger = $$.getElementById('btnValidar');
 	var txtBtnTrigger = btnTrigger.innerHTML.trim();
 	var verificationMsg = $$.getElementById("verificationMsg");
 	var inpCodeOTP = $$.getElementById('codeOTP');
 	var form = $('#formVerifyAccount');
 
-	//core
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 		var md5CodeOTP = '';
@@ -59,7 +58,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		var dialogConditions = $('#dialogConditions');
 		window.scrollTo(0,0);
 
-		// MODAL TERMINOS Y CONDICIONES
 		dialogConditions.dialog({
 			autoOpen: false,
 			modal: true,
@@ -97,7 +95,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 		dialogConditions.dialog("open");
 	});
 
-	//functions
 	function formatDate_ddmmy(dateToFormat)
 	{
 		var month = dateToFormat.getMonth();
@@ -147,20 +144,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (--timer < 0) {
 				clearInterval(interval);
-				verificationMsg.innerHTML = `Tiempo expirado. ${dataPreRegistry.msgResendOTP}`;
-				verificationMsg.classList.add("semibold", "danger");
-				verificationMsg.querySelector("a").setAttribute('id','resendCode');
 
-				btnTrigger.disabled = true;
-				btnTrigger.innerHTML = txtBtnTrigger;
-				$$.getElementById('codeOTP').value = '';
-				$$.getElementById('codeOTP').disabled = true;
+				clearOTPSection();
+				showVerificationMsg(`Tiempo expirado. ${dataPreRegistry.msgResendOTP}`)
 
-				$$.getElementById('resendCode').addEventListener('click', function(e){
-					e.preventDefault();
-					data.codeOTP = '';
+				let fnCall = () => {
 					proccessPetition(data);
-				});
+				};
+				interceptLinkResendCode(fnCall);
 			}
 		}
 	}
@@ -169,6 +160,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 	{
 		callNovoCore('POST', 'User', 'verifyAccount', data, function(response) {
 			disableInputsForm(true, txtBtnTrigger);
+			let fnCall = () => {
+				data.codeOTP = '';
+				proccessPetition(data);
+			};
+
 			switch (response.code) {
 				case 0:
 					btnTrigger.disabled = false;
@@ -179,30 +175,20 @@ $$.addEventListener('DOMContentLoaded', function(){
 						$$.location.href = response.data;
 					}
 
-					verificationMsg.innerHTML = `${dataPreRegistry.msgResendOTP} Tiempo restante:<span class="ml-1 danger"></span>`;
-					verificationMsg.querySelector("a").setAttribute('id','resendCode');
-					$$.getElementById('resendCode').addEventListener('click', function(e){
-						e.preventDefault();
-						codeForwarding();
-					});
+					showVerificationMsg(`${dataPreRegistry.msgResendOTP} Tiempo restante:<span class="ml-1 danger"></span>`, response.validityTime);
+					interceptLinkResendCode (fnCall);
+
 					$$.getElementById("verification").classList.remove("none");
-					verificationMsg.classList.remove("semibold", "danger");
 					$$.getElementById('codeOTP').disabled = false;
-					var countdown = verificationMsg.querySelector("span");
-					startTimer(response.validityTime, countdown);
 					break;
-
 				case 3:
-					verificationMsg.innerHTML = `${response.msg} ${dataPreRegistry.msgResendOTP}`;
-					verificationMsg.classList.add("semibold", "danger");
-					verificationMsg.querySelector("a").setAttribute('id','resendCode');
-					$$.getElementById('resendCode').addEventListener('click', function(e){
-						e.preventDefault();
-						codeForwarding();
-					});
-					break;
 
+					clearOTPSection();
+					showVerificationMsg(`${response.msg} ${dataPreRegistry.msgResendOTP}`);
+					interceptLinkResendCode (fnCall);
+					break;
 				default:
+
 					inpCodeOTP.value = '';
 					btnTrigger.innerHTML = txtBtnTrigger;
 					btnTrigger.disabled = false;
@@ -212,15 +198,37 @@ $$.addEventListener('DOMContentLoaded', function(){
 		});
 	}
 
-	function codeForwarding  () {
+	function interceptLinkResendCode (functionTarget) {
+
+		$$.getElementById('resendCode').addEventListener('click', function(e){
+			e.preventDefault();
+			functionTarget();
+		});
+	}
+
+	function showVerificationMsg (message, validityTime = false) {
+
+		verificationMsg.innerHTML = message;
+		verificationMsg.classList.add("semibold", "danger");
+		verificationMsg.querySelector("a").setAttribute('id','resendCode');
+
+		if (validityTime) {
+
+			startTimer(validityTime, verificationMsg.querySelector("span"));
+		}
+
+	}
+
+	function clearOTPSection  () {
 		clearInterval(interval);
+
 		btnTrigger.disabled = true;
 		btnTrigger.innerHTML = txtBtnTrigger;
+
 		$$.getElementById('codeOTP').value = '';
 		$$.getElementById('codeOTP').disabled = true;
+
 		verificationMsg.innerHTML = msgLoading;
-		data.codeOTP = '';
-		proccessPetition(data);
 	}
 
 });
