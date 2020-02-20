@@ -33,7 +33,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			if (inpCodeOTP.value){
 				md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
-				clearInterval(interval);
 			}
 
 			data = {
@@ -69,12 +68,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 					var countdown = verificationMsg.querySelector("span");
 					startTimer(response.validityTime, countdown);
 
-				}
-				else if (response.code === 3){
-						resendCodeOTP(response.msg);
+				}else if (response.code === 3){
+					resendCodeOTP(response.msg, response.code);
 				}else{
 					notiSystem(response.title, response.msg, response.classIconName, response.data);
-					disableInputsForm(false, txtBtnTrigger);
 				}
 			});
 		}else{
