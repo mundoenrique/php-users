@@ -115,7 +115,7 @@ class Encrypt_Connect {
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: ' . json_encode($curlError)?:'none');
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_DEFAULT_CODE');
-			$failResponse->msg = lang('RES_MESSAGE_SYSTEM');
+			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
 			$response = json_encode($failResponse);
 			$fail = TRUE;
 		}
