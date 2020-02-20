@@ -527,7 +527,8 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 
 					if ($response->bean == "0") {
-						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS').' ( '.$response->bean.' )';
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
 						$this->response->data = [
 							'btn1' => [
 								'text' => lang('BUTTON_ACCEPT'),
