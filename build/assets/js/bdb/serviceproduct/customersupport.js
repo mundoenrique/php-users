@@ -61,7 +61,12 @@ function operationFactory(optionMenu, response = null)
 			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = false;
 			verificationMsg = $$.getElementById(`${idName}VerificationMsg`);
-			verificationMsg.innerHTML = 'Tiempo restante:<span class="ml-1 danger"></span>';
+			verificationMsg.innerHTML = `${dataCustomerProduct.msgResendOTP} Tiempo restante:<span class="ml-1 danger"></span>`;
+			verificationMsg.querySelector("a").setAttribute('id',`${idName}ResendCode`);
+			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
+				e.preventDefault();
+				resendCodeOTP(coreOperation);
+			});
 			verificationMsg.classList.remove("semibold", "danger");
 			var countdown = verificationMsg.querySelector("span");
 			startTimer(response.validityTime, countdown);
@@ -81,7 +86,7 @@ function operationFactory(optionMenu, response = null)
 			$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
 			btnTrigger.innerHTML =txtBtnTrigger;
 
-			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id',`${idName}ResendCode`)
+			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id',`${idName}ResendCode`);
 			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
 				e.preventDefault();
 				resendCodeOTP(coreOperation);
@@ -167,6 +172,7 @@ function disableInputsForm(optionMenu, status, txtButton)
 
 function resendCodeOTP (coreOperation)
 {
+	clearInterval(interval);
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
 	$$.getElementById(`${idName}VerificationMsg`).innerHTML = msgLoading;
