@@ -124,6 +124,19 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
@@ -325,6 +338,19 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
@@ -739,6 +765,19 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
