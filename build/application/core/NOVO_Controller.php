@@ -30,6 +30,9 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO_Controller Class Initialized');
 
 		$this->render = new stdClass();
+		$this->render->loadAlert = '0';
+		$this->render->msgAlert = '';
+
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->includeAssets = new stdClass();

@@ -56,12 +56,20 @@ function validateForms(form, options) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
-	jQuery.validator.addMethod("exactlength", function(value, element, param) {
+	jQuery.validator.addMethod("exactLength", function(value, element, param) {
 		return this.optional(element) || value.length == param;
 	});
 
-	jQuery.validator.addMethod("exactDigits", function(value, element, param) {
+	jQuery.validator.addMethod("exactNumbers", function(value, element, param) {
 		return this.optional(element) || value.length == param;
+	});
+
+	jQuery.validator.addMethod("minNumLength", function(value, element, param) {
+		return this.optional(element) || value.length >= param;
+	});
+
+	jQuery.validator.addMethod("maxNumLength", function(value, element, param) {
+		return this.optional(element) || value.length <= param;
 	});
 
 	jQuery.validator.addMethod("emailValid",function(value, element) {
@@ -141,18 +149,18 @@ function validateForms(form, options) {
 
 	validator = form.validate({
 		rules: {
-			generateNewPin: { required: true, number: true, exactDigits: 4, "fourConsecutivesDigits": true },
-			generateConfirmPin: { required: true, number: true, exactDigits: 4, "generateConfirmPin": true },
-			changeCurrentPin: { required: true, number: true, exactDigits: 4 },
-			changeNewPin: { required: true, number: true, exactDigits: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
+			generateNewPin: { required: true, number: true, exactNumbers: 4, "fourConsecutivesDigits": true },
+			generateConfirmPin: { required: true, number: true, exactNumbers: 4, "generateConfirmPin": true },
+			changeCurrentPin: { required: true, number: true, exactNumbers: 4 },
+			changeNewPin: { required: true, number: true, exactNumbers: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
 			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
-			generateCodeOTP: { required: true, number: true, exactDigits: 5 },
-			changeCodeOTP: { required: true, number: true, exactDigits: 5 },
-			lockCodeOTP: { required: true, number: true, exactDigits: 5 },
-			replaceCodeOTP: { required: true, number: true, exactDigits: 5 },
+			generateCodeOTP: { required: true, number: true, exactNumbers: 5 },
+			changeCodeOTP: { required: true, number: true, exactNumbers: 5 },
+			lockCodeOTP: { required: true, number: true, exactNumbers: 5 },
+			replaceCodeOTP: { required: true, number: true, exactNumbers: 5 },
 			nitBussines: { required: true, number: true,},
 			currentPassword: { required: true},
 			newPassword: { required: true, minlength:8, maxlength: 15, "validatePassword": true },
@@ -160,8 +168,8 @@ function validateForms(form, options) {
 			typeDocumentUser: { required: true, "selectRequired": true },
 			typeDocumentBussines: { required: true, "selectRequired": true },
 			idNumber: { required: true, number: true },
-			telephoneNumber: { required: true, number: true, minlength: 7, maxlength: 11 },
-			codeOTP: { required: true, number: true, exactDigits: 5 },
+			telephoneNumber: { required: true, number: true, minNumLength: 7, maxNumLength: 11 },
+			codeOTP: { required: true, number: true, exactNumbers: 5 },
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
@@ -182,9 +190,9 @@ function validateForms(form, options) {
 			address: { required: true },
 			email: { required: true, emailValid: true },
 			confirmEmail: { required: true, equalTo: "#email" },
-			landLine: { number: true, minlength: 7, maxlength: 11, "numberEqual2": true },
-			mobilePhone: { required: true, number: true, minlength: 7, maxlength: 11, "numberEqual3": true },
-			otherPhoneNum: { number: true, minlength: 7, maxlength: 11, "numberEqual1": true },
+			landLine: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual2": true },
+			mobilePhone: { required: true, number: true, minNumLength: 7, maxNumLength: 11, "numberEqual3": true },
+			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true },
 			rucLaboral: { required: true },
 			jobCenter: { required: true },
 			employmentSituation: { required: false },

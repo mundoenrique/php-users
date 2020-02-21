@@ -41,7 +41,7 @@ $('.big-modal').on('click', function(){
 		perfil: 'profile',
 		reporte: 'reports',
 		detallereporte: 'reports'
-	}
+	};
 
 	if ( actualPage !== 'inicio' && structureMenu.hasOwnProperty(actualPage)){
 
@@ -50,6 +50,11 @@ $('.big-modal').on('click', function(){
 		}
 		$$.getElementById(structureMenu[actualPage]).classList.add('active');
 	}
+
+	if (isLoadNotiSystem) {
+		notiSystem(titleNotiSystem, txtMessageNotiSystem, iconDanger, {});
+	}
+
 })();
 
 function callNovoCore(verb, who, where, data, _response_) {

@@ -1,9 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * @info Controlador para la vista principal de la aplicación
- * @author J. Enrique Peñaloza P
-*/
 class ServiceProduct extends NOVO_Controller {
 
 	public function __construct()
@@ -131,11 +127,11 @@ class ServiceProduct extends NOVO_Controller {
 			'112' => [
 				'id' => 'change',
 				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN",
-				'isVisible' => FALSE
+				'isVisible' => TRUE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de cuenta",
+				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de tarjeta",
 				'isVisible' => TRUE
 			],
 			'111' => [
@@ -155,16 +151,13 @@ class ServiceProduct extends NOVO_Controller {
 		}
 
 		if ( !empty($dataProduct['bloqueo']) ) {
-			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de cuenta";
+			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de tarjeta";
 		}
 
 		foreach ($menuOptionsProduct as $key => $value) {
 
 			if (empty($dataProduct['bloqueo'])) {
 				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-				if ( $key === 112 && in_array(120, $dataProduct['availableServices']) ) {
-					continue;
-				}
 			}
 			else	{
 				$available = 'is-disabled';

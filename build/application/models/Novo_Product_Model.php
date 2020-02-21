@@ -250,14 +250,22 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->code = 0;
 					$this->response->data = $response;
 					break;
+
 				case -150:
 					$this->response->code = -150;
 					$this->response->msg = $response->msg;
 					break;
 
+				case -423:
+					$this->response->code = -150;
+					$this->response->msg = lang('RESP_FAIL_DONWLOAD_FILE');
+					$this->response->classIconName = "ui-icon-alert";
+					$this->response->data = '--';
+					break;
+
 				default:
 					$this->response->code = 150;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = '--';
 			}
@@ -301,18 +309,18 @@ class Novo_Product_Model extends NOVO_Model
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 10;
+					$this->response->validityTime = intval($response->bean) * 60;
 					$this->response->data = $response->data || [""];
 					break;
 				case -420:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
-					$this->response->validityTime = intval($response->bean) * 10;
+					$this->response->validityTime = intval($response->bean) * 60;
 					break;
 				case -421:
 					$this->response->code = 3;
 					$this->response->msg = lang('RESP_PIN_EXPIRED');
-					$this->response->validityTime = intval($response->bean) * 10;
+					$this->response->validityTime = intval($response->bean) * 60;
 					break;
 			}
 		}

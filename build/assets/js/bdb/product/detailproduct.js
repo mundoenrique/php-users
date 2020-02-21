@@ -165,9 +165,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsPaginate.remove();
 		}
 		movementsStats.removeClass('fade-in');
-		for (i = 0; i < stackItems.length; ++i) {
-			stackItems[i].classList.add('is-disabled');
-		}
+		stackItems[0].classList.add('is-disabled');
+		stackItems[1].classList.add('is-disabled');
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
@@ -229,11 +228,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				movementsPaginate.id = 'movementsPaginate';
 				invokeChart(movementsStats, totalExpense, totalIncome);
 				movementsStats.addClass('fade-in');
-
-				if (filterMonth.selectedIndex != 0) {
-					for (i = 0; i < stackItems.length; ++i) {
-						stackItems[i].classList.remove('is-disabled');
-					}
+				if ($$.getElementById('filterMonth').value != 0) {
+					stackItems[0].classList.remove('is-disabled');
+					stackItems[1].classList.remove('is-disabled');
 				}
 			} else {
 				movementsList.appendChild(noMovements);
@@ -247,10 +244,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 	$$.getElementById('filterMonth').addEventListener('change', function() {
 
 		if (this.value == 0) {
-
+			stackItems[2].classList.add('is-disabled');
 			$$.getElementById('filterYear').disabled = true;
 			$$.getElementById('filterYear').selectedIndex = 0;
 		}else{
+			stackItems[2].classList.remove('is-disabled');
 			$$.getElementById('filterYear').options[0].disabled = true;
 			if (parseInt(this.value) > new Date().getMonth()+1) {
 				$$.getElementById('filterYear').options[1].disabled = true;

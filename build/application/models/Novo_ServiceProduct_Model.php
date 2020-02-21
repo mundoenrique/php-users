@@ -115,16 +115,28 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
@@ -317,16 +329,28 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
@@ -444,7 +468,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 			$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
 			$this->dataRequest->prefix = $dataProduct['prefix'];
-			$this->dataRequest->codBloqueo = 'PB';
+			$this->dataRequest->codBloqueo = $dataRequest->unlock?'00': 'PB';
 			$this->dataRequest->accodUsuario = $this->session->userdata('userName');
 		}
 
@@ -454,7 +478,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_PIN_GENERATED');
+					$this->response->msg = lang('RESP_RC_0');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
@@ -518,16 +542,28 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;
@@ -720,16 +756,28 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 					];
 					break;
 				case -286:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('listaproducto'),
-							'action' => 'redirect'
+							'text' => lang('BUTTON_ACCEPT'),
+							'action' => 'close'
 						]
 					];
+
+					if ($response->bean == "0") {
+
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -287:
 					$this->response->code = 3;

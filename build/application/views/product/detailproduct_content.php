@@ -73,21 +73,22 @@
 					<div id="period-form" class="stack-form mr-auto flex items-center">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option selected="" value="0">Más recientes</option>
+								<option value="0">Más recientes</option>
 								<?php
 									foreach ($months as $nroMonths => $txtMonths){
+										$monthValue = str_pad($nroMonths+1, 2, '0', STR_PAD_LEFT);
 								?>
-									<option value="<?= str_pad($nroMonths+1, 2, '0', STR_PAD_LEFT) ;?>"><?= $txtMonths;?></option>
+									<option <?= @$monthSelected === $monthValue? 'selected': '';?> value="<?= $monthValue ;?>"><?= $txtMonths;?></option>
 								<?php
 									}
 								?>
 							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
+							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" <?= isset($yearSelected)?'':'disabled';?>>
 								<option value="<?= $years[0];?>">-</option>
 								<?php
 									foreach ($years as $year){
 								?>
-									<option value="<?= $year;?>"><?= $year;?></option>
+									<option <?= @$yearSelected == $year? 'selected': '';?> value="<?= $year;?>"><?= $year;?></option>
 								<?php
 									}
 								?>

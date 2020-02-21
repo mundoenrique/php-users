@@ -1,10 +1,5 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-/**
- * @info Módelo para la información del usuario
- * @author J. Enrique Peñaloza Piñero
- *
- */
 class Novo_User_Model extends NOVO_Model
 {
 
@@ -42,7 +37,7 @@ class Novo_User_Model extends NOVO_Model
 					if ($this->isUserLoggedIn($dataRequest->user))
 					{
 						$this->response->code = 1;
-						$this->response->msg = lang('RES_OWN_ANOTHER_SESSION');
+						$this->response->msg = lang('RESP_OWN_ANOTHER_SESSION');
 						$this->response->classIconName = 'ui-icon-alert';
 					}else
 					{
@@ -68,7 +63,7 @@ class Novo_User_Model extends NOVO_Model
 						$this->session->set_userdata($userData);
 
 						$target = 'cambiarclave';
-						$this->response->msg = lang('RES_ACCESS_RECOVERED');
+						$this->response->msg = lang('RESP_ACCESS_RECOVERED');
 						if (intval($response->passwordTemp)) {
 							$reasonOperation = 't';
 						} elseif (intval($response->passwordVencido)) {
@@ -92,18 +87,24 @@ class Novo_User_Model extends NOVO_Model
 				case -1:
 				case -263:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_BAD_USER_PASSWORD');
+					$this->response->msg = lang('RESP_BAD_USER_PASSWORD');
 					$this->response->classIconName = 'ui-icon-closethick';
+
+					$infoLogin = json_decode($response->bean);
+					if ($infoLogin->intentos == 2) {
+
+						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
+					}
 					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_SUSPENDED_USER');
+					$this->response->msg = lang('RESP_SUSPENDED_USER');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -194:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_EXPIRED_TEMPORARY_KEY');
+					$this->response->msg = lang('RESP_EXPIRED_TEMPORARY_KEY');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -422:
@@ -133,7 +134,7 @@ class Novo_User_Model extends NOVO_Model
 			$this->response->owner = 'captcha';
 			$this->response->code = 4;
 			$this->response->icon = 'ui-icon-closethick';
-			$this->response->msg = lang('RES_ERROR_CAPTCHA');
+			$this->response->msg = lang('RESP_ERROR_CAPTCHA');
 			$this->response->data = [
 				'btn1' => [
 					'text' => lang('BUTTON_ACCEPT'),
@@ -164,6 +165,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
 		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
+		$this->dataRequest->acceptTerms = $dataRequest->acceptTerms;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->nitEmpresa = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
 		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocumentUser;
@@ -226,8 +228,20 @@ class Novo_User_Model extends NOVO_Model
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 				break;
 				case -420:
-					$this->response->code = 3;
+					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+
+					if (json_decode($response->bean)->bean == "0") {
+						$this->response->code = 3;
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => FALSE,
+								'action' => 'close'
+							]
+						];
+					}
 					break;
 				case -421:
 					$this->response->code = 3;
@@ -259,7 +273,8 @@ class Novo_User_Model extends NOVO_Model
 			"notSms"			=> "1",
 			"email"				=> $dataRequest->email,
 			"password"			=> md5($dataRequest->userpwd),
-			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd))
+			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
+			"tyc" => $dataRequest->acceptTerms
 		);
 
 		$phones = array(
@@ -322,7 +337,7 @@ class Novo_User_Model extends NOVO_Model
 				case -61:
 				case -5:
 				case -3:
-					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->msg = lang('RESP_ERROR_SERVER');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -333,7 +348,7 @@ class Novo_User_Model extends NOVO_Model
 					];
 					break;
 				case -181:
-					$this->response->msg = lang('RES_REGISTERED_MAIL');
+					$this->response->msg = lang('RESP_REGISTERED_MAIL');
 					$this->response->code = 3;
 					$this->response->classIconName = "ui-icon-alert";
 					break;
@@ -345,7 +360,7 @@ class Novo_User_Model extends NOVO_Model
 					break;
 
 				case -206:
-					$this->response->msg = lang('RES_CONFIRMATION_MAIL_NOT_SENT');
+					$this->response->msg = lang('RESP_CONFIRMATION_MAIL_NOT_SENT');
 					$this->response->code = 4;
 					$this->response->classIconName = "ui-icon-info";
 					$this->response->data = [
@@ -359,14 +374,14 @@ class Novo_User_Model extends NOVO_Model
 
 				case -230:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->msg = lang('RESP_ERROR_SERVER');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->modalType = "alert-error";
 				break;
 
 				case -271:
 					case -335:
-					$this->response->msg = lang('RES_PARTIAL_REGISTRATION');
+					$this->response->msg = lang('RESP_PARTIAL_REGISTRATION');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->code = 0;
 					$this->response->data = [
@@ -382,7 +397,7 @@ class Novo_User_Model extends NOVO_Model
 				case -314:
 				case -313:
 				case -311:
-					$this->response->msg = lang('RES_CARD_NOT_ACTIVATED');
+					$this->response->msg = lang('RESP_CARD_NOT_ACTIVATED');
 					$this->response->code = 0;
 					$this->response->classIconName = "ui-icon-info";
 					$this->response->data = [
@@ -409,7 +424,7 @@ class Novo_User_Model extends NOVO_Model
 				case 5100:
 				case 5104:
 				case 6000:
-					$this->response->msg = lang('RES_ERROR_SERVER');
+					$this->response->msg = lang('RESP_ERROR_SERVER');
 					$this->response->code = 1;
 					$this->response->classIconName = "ui-icon-alert";
 					break;
@@ -428,13 +443,13 @@ class Novo_User_Model extends NOVO_Model
 				case 5036:
 				case 5037:
 				case 5114:
-					$this->response->msg = lang('RES_ERROR_DNI');
+					$this->response->msg = lang('RESP_ERROR_DNI');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->code = 1;
 					break;
 
 				case -397:
-					$this->response->msg = lang('RES_WRONG_MEMBERSHIP_DATA');
+					$this->response->msg = lang('RESP_WRONG_MEMBERSHIP_DATA');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->code = 1;
 					break;
@@ -449,7 +464,7 @@ class Novo_User_Model extends NOVO_Model
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$ubication = $dataRequest->recovery === 'C' ? 'reset password': 'obtener login';
-		$messageNotiSystem = $dataRequest->recovery === 'C' ? 'RES_SEND_EMAIL_PASSWORD': 'RES_SEND_EMAIL_LOGIN';
+		$messageNotiSystem = $dataRequest->recovery === 'C' ? 'RESP_SEND_EMAIL_PASSWORD': 'RESP_SEND_EMAIL_LOGIN';
 		$this->dataAccessLog->modulo = $ubication;
 		$this->dataAccessLog->function = $ubication;
 		$this->dataAccessLog->operation = $ubication;
@@ -478,7 +493,7 @@ class Novo_User_Model extends NOVO_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -491,7 +506,7 @@ class Novo_User_Model extends NOVO_Model
 				case -187:
 				case -186:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = "ui-icon-alert";
 					break;
 			}
@@ -553,7 +568,7 @@ class Novo_User_Model extends NOVO_Model
 					$this->session->sess_destroy();
 
 					$this->response->code = 0;
-					$this->response->msg = lang('RES_CLOSE_SESSION');
+					$this->response->msg = lang('RESP_CLOSE_SESSION');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -759,7 +774,7 @@ class Novo_User_Model extends NOVO_Model
 					$this->session->sess_destroy();
 
 					$this->response->code = 0;
-					$this->response->msg = lang('RES_ACCESS_RECOVERED');
+					$this->response->msg = lang('RESP_ACCESS_RECOVERED');
 					$this->response->classIconName = "ui-icon-circle-check";
 					$this->response->data = [
 						'btn1' => [
@@ -771,7 +786,7 @@ class Novo_User_Model extends NOVO_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -784,7 +799,7 @@ class Novo_User_Model extends NOVO_Model
 				case -187:
 				case -186:
 					$this->response->code = 1;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = "ui-icon-alert";
 					break;
 			}

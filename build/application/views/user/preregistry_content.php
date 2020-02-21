@@ -78,7 +78,7 @@
 							<hr class="separador-one mb-3">
 							<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 							<div class="row form-group col-lg-4">
-								<label for="codeOTP">Código de validación <span class="danger">*</span></label>
+								<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
 								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
 								<div class="help-block"></div>
 							</div>
@@ -123,7 +123,6 @@
 			Nullam tristique, felis at consectetur sodales, arcu odio varius urna, eu ullamcorper nulla lectus nec elit. Aliquam erat volutpat. Aenean auctor et nibh quis sagittis. Nullam fermentum sem id eros finibus tempor. Curabitur semper cursus libero ac suscipit. Sed et ligula orci. Donec at velit finibus, suscipit ante a, sodales odio. Nulla rutrum vitae leo vitae commodo. Aenean ac lorem massa.
 			</p>
 		</div>
-		<hr class="separador-one m-0">
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset">
 				<button id="aceptar" class="btn btn-small btn-loading btn-primary" type="button">Aceptar</button>
@@ -136,7 +135,7 @@
 
 <?php
 	$data = json_encode([
-		//'setTimerOTP' => $setTimerOTP,
+		'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
 		'typeDocument' => $typeDocument
 	]);
 ?>

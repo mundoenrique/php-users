@@ -2,14 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['ERROR_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde';
 $lang['ERROR_RC_DEFAULT'] = -9999;
-$lang['RES_DEFAULT_CODE'] = 4;
+$lang['RESP_DEFAULT_CODE'] = 4;
 $lang['ERROR_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo";
 $lang['ERROR_GENERICO_USER']= "Error en Sistema, por favor intente nuevamente.";
 $lang['ERROR_CAMBIO_CLAVE']= "Error en el formulario.";
 $lang['ERROR_NO_DATA'] = "No se encontraron datos";
 $lang['SIN_FUNCION'] = 'No tiene permisos para realizar esta operación';//'Operación no asignada';
 $lang['ERROR_(8)']= "El conductor ya posee una cuenta activa asociada a la empresa";
-$lang['ERROR_GENERAL']= "En estos momentos no podemos atender tu solicitud, por favor intenta en unos minutos";
+$lang['ERROR_GENERAL']= "En estos momentos no podemos atender tu solicitud, por favor intenta mas tarde";
 $lang['ERROR_(0)']= "Proceso OK";
 $lang['ERROR_(-1)']= "Usuario o contraseña inválido";
 $lang['ERROR_(-2)']= "Usuario ingresando en la aplicación por primera vez";

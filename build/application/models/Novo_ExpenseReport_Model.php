@@ -50,7 +50,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 
 				default:
 					$this->response->code = 2;
-					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -111,7 +111,7 @@ class Novo_ExpenseReport_Model extends NOVO_Model
 
 				default:
 					$this->response->code = 150;
-					$this->response->msg = lang('RES_DATA_INVALIDATED');
+					$this->response->msg = lang('RESP_DATA_INVALIDATED');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = '--';
 			}
