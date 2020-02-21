@@ -96,6 +96,7 @@
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>"
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>"
+		var msgResendOTP = "<a name='resendCode' class='primary regular' href='#'>"+"<?= lang('RESP_RESEEND_OTP') ?>"+"</a>"
 
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
 	</script>
