@@ -303,9 +303,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		$$.getElementById("cancel").addEventListener('click',function(e){
 			e.preventDefault();
+			clearInterval(interval);
 			$("#system-info").dialog("close");
 			$("#system-info").dialog("destroy");
 			systemMSg.innerHTML = "";
+			btnTrigger.innerHTML = txtBtnTrigger;
+			btnTrigger.disabled = false;
 			$(this).off('click');
 		})
 
@@ -368,7 +371,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 function proccessPetition(data)
 {
 	callNovoCore('POST', 'Product', 'getDetail', data, function(response) {
-
+		btnTrigger.innerHTML = txtBtnTrigger;
+		btnTrigger.disabled = false;
 		switch (response.code) {
 			case 0:
 				var cardNumber, cardholderName, expirationDate, securityCode;
@@ -384,8 +388,6 @@ function proccessPetition(data)
 				$$.getElementById("securityCode").value = securityCode;
 				timeLiveModal = $$.getElementById("timeLiveModal");
 				startTimer(response.timeLiveModal, timeLiveModal);
-				btnTrigger.innerHTML = txtBtnTrigger;
-				btnTrigger.disabled = false;
 				break;
 
 			case 1:
@@ -394,16 +396,11 @@ function proccessPetition(data)
 				verificationMsg = $$.getElementById("verificationMsg");
 				showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
 				interceptLinkResendCode();
-				btnTrigger.innerHTML = txtBtnTrigger;
-				btnTrigger.disabled = false;
 				break;
 			case 2:
-
+				showVerificationMsg(`${response.msg} ${msgResendOTP}`);
+				interceptLinkResendCode();
 				break;
-			case 3:
-				interceptLinkResendCode(`${response.msg} ${msgResendOTP}`);
-				break;
-
 			default:
 				break;
 		}
@@ -476,6 +473,7 @@ function startTimer(duration, display) {
 			} else {
 				$("#system-info").dialog('close');
 				$("#system-info").dialog("destroy");
+				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;
 			}
 

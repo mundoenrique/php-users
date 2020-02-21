@@ -282,7 +282,7 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'validar cuenta';
 		$this->dataAccessLog->operation = 'validar cuenta';
 
-/* 		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
+/*  $this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
 		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
 		$this->dataRequest->codigoOtp = $dataRequest->codeOTP; */
@@ -297,7 +297,7 @@ class Novo_Product_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->timeLiveModal = intval($response->bean) * 60;
+					$this->response->timeLiveModal = intval($response->bean) * 10;
 					$this->response->dataDetailCard = [
 						'cardholderName'=>'Sergio Quijano Try',
 						'cardNumber'=>'4193280000300080',
@@ -309,16 +309,20 @@ class Novo_Product_Model extends NOVO_Model
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 60;
+					$this->response->validityTime = intval($response->bean) * 10;
 					$this->response->data = $response->data || [""];
 					break;
 				case -420:
-					$this->response->code = 3;
-					$this->response->msg = lang('RESP_CODEOTP_INVALID');
-					$this->response->validityTime = intval($response->bean) * 60;
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
+
+					//if (json_decode($response->bean)->bean == "0") {
+					if (false) {
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+					}
 					break;
 				case -421:
-					$this->response->code = 3;
+					$this->response->code = 2;
 					$this->response->msg = lang('RESP_PIN_EXPIRED');
 					$this->response->validityTime = intval($response->bean) * 60;
 					break;
