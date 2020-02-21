@@ -52,7 +52,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<div id="verificationOTP">
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 					<div class="row">
-						<div class="form-group col-lg-7">
+						<div class="form-group col-7">
 							<label for="codeOTP">Código de validación <span class="danger">*</span></label>
 							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
 							<div class="help-block"></div>
@@ -65,21 +65,21 @@ $$.addEventListener('DOMContentLoaded', function(){
 		{ id: 'cardDetails',
 			body:
 			`<div class="row">
-				<div class="form-group col-lg-6">
+				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
 					<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="" readonly>
 				</div>
-				<div class="form-group col-lg-6">
+				<div class="form-group col-6">
 					<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
 					<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="" readonly>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-lg-6">
+				<div class="form-group col-6">
 					<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
 					<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="" readonly>
 				</div>
-				<div class="form-group col-lg-6">
+				<div class="form-group col-6">
 					<label class="nowrap" for="securityCode">Código de seguridad</label>
 					<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="" readonly>
 				</div>
@@ -392,9 +392,8 @@ function proccessPetition(data)
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
 				systemMSg.querySelector("div").id = arrDialogContent[1].id;
 				verificationMsg = $$.getElementById("verificationMsg");
-				verificationMsg.innerHTML = 'Tiempo restante:<span id="validityTime" class="ml-1 danger"></span></span>';
-				var countdown = verificationMsg.querySelector("#validityTime");
-				startTimer(response.validityTime, countdown);
+				showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
+				interceptLinkResendCode();
 				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;
 				break;
@@ -402,7 +401,7 @@ function proccessPetition(data)
 
 				break;
 			case 3:
-				codeForwarding(response.msg);
+				interceptLinkResendCode(`${response.msg} ${msgResendOTP}`);
 				break;
 
 			default:
@@ -470,9 +469,10 @@ function startTimer(duration, display) {
 		display.textContent = minutes + ":" + seconds;
 
 		if (--timer < 0) {
-			clearInterval(interval);
+			clearOTPSection();
 			if (display.id == "validityTime") {
-				codeForwarding('Tiempo expirado.');
+				showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
+				interceptLinkResendCode();
 			} else {
 				$("#system-info").dialog('close');
 				$("#system-info").dialog("destroy");
@@ -486,18 +486,37 @@ function startTimer(duration, display) {
 	}
 }
 
-function codeForwarding  (message) {
-	clearInterval(interval);
-	verificationMsg.innerHTML = `${message} <a id="resendCode" class="primary regular" href="#">Reenviar código.</a>`;
+
+function showVerificationMsg (message, validityTime = false) {
+
+	verificationMsg.innerHTML = message;
 	verificationMsg.classList.add("semibold", "danger");
+	verificationMsg.querySelector("a").setAttribute('id','resendCode');
+
+	if (validityTime) {
+		verificationMsg.classList.remove("semibold", "danger");
+		startTimer(validityTime, verificationMsg.querySelector("span"));
+	}
+
+}
+
+function interceptLinkResendCode () {
+	$$.getElementById('resendCode').addEventListener('click', function(e){
+		e.preventDefault();
+		clearOTPSection();
+		verificationMsg.innerHTML = msgLoading;
+		proccessPetition({});
+	});
+}
+
+
+function clearOTPSection () {
+	clearInterval(interval);
+	btnTrigger.disabled = true;
+	btnTrigger.innerHTML = txtBtnTrigger;
 
 	$$.getElementById('codeOTP').value = '';
 	$$.getElementById('codeOTP').disabled = true;
-	btnTrigger.innerHTML = txtBtnTrigger;
-	btnTrigger.disabled = true;
 
-	$$.getElementById('resendCode').addEventListener('click', function(e){
-		e.preventDefault();
-		proccessPetition({});
-	});
+	// verificationMsg.innerHTML = msgLoading;
 }
