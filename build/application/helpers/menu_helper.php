@@ -221,7 +221,7 @@ if (!function_exists('propiedades_menu'))
 					$opcion_menu='{"dashboard":true,"transfer_pe":true,"pago":true,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Usd':
-					$opcion_menu='{"dashboard":true,"transfer_usd":true,"pago":true,"reportes":true,"service":false,"perfil":true}';
+					$opcion_menu='{"dashboard":true,"transfer_usd":false,"pago":false,"reportes":true,"service":true,"perfil":true}';
 						break;
 				case 'Ec-bp':
 					$opcion_menu='{"dashboard":true,"transfer":false,"pago":false,"reportes":false,"service":true,"perfil":true}';
