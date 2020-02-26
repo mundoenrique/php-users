@@ -309,7 +309,7 @@ class Novo_Product_Model extends NOVO_Model
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 10;
+					$this->response->validityTime = intval($response->bean) * 20;
 					$this->response->data = $response->data || [""];
 					break;
 				case -420:
@@ -317,7 +317,8 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
 
 					//if (json_decode($response->bean)->bean == "0") {
-					if (false) {
+					if (true) {
+						$this->response->code = 3;
 						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
 					}
 					break;

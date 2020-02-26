@@ -53,9 +53,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 					<div class="row">
 						<div class="form-group col-7">
-							<label for="codeOTP">Código de validación <span class="danger">*</span></label>
+							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
 							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
-							<div class="help-block"></div>
+							<div id="msgErrorCodeOTP" class="help-block"></div>
 						</div>
 					</div>
 					<p id="verificationMsg" class="mb-1 h5"></p>
@@ -303,12 +303,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		$$.getElementById("cancel").addEventListener('click',function(e){
 			e.preventDefault();
-			clearInterval(interval);
-			$("#system-info").dialog("close");
-			$("#system-info").dialog("destroy");
 			systemMSg.innerHTML = "";
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
+			$("#system-info").dialog("close");
+			$("#system-info").dialog("destroy");
+			$("#system-info").addClass("none");
 			$(this).off('click');
 		})
 
@@ -332,7 +332,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 						btnTrigger.disabled = true;
 						inpCodeOTP.disabled = true;
 						data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
-						clearInterval(interval);
 						proccessPetition(data);
 					}
 					break;
@@ -341,6 +340,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					systemMSg.innerHTML = "";
 					$("#system-info").dialog('close');
 					$("#system-info").dialog("destroy");
+					$("#system-info").addClass("none");
 					$(this).off('click');
 					break;
 			}
@@ -375,6 +375,7 @@ function proccessPetition(data)
 		btnTrigger.disabled = false;
 		switch (response.code) {
 			case 0:
+				clearInterval(interval);
 				var cardNumber, cardholderName, expirationDate, securityCode;
 				cardNumber = response.dataDetailCard.cardNumber;
 				cardholderName = response.dataDetailCard.cardholderName;
@@ -391,6 +392,7 @@ function proccessPetition(data)
 				break;
 
 			case 1:
+				clearInterval(interval);
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
 				systemMSg.querySelector("div").id = arrDialogContent[1].id;
 				verificationMsg = $$.getElementById("verificationMsg");
@@ -398,9 +400,17 @@ function proccessPetition(data)
 				interceptLinkResendCode();
 				break;
 			case 2:
+				$$.getElementById('codeOTP').value = '';
+				$$.getElementById('codeOTP').disabled = false;
+				$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
+				break;
+
+			case 3:
+				clearOTPSection();
 				showVerificationMsg(`${response.msg} ${msgResendOTP}`);
 				interceptLinkResendCode();
 				break;
+
 			default:
 				break;
 		}
@@ -471,10 +481,12 @@ function startTimer(duration, display) {
 				showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
 				interceptLinkResendCode();
 			} else {
-				$("#system-info").dialog('close');
-				$("#system-info").dialog("destroy");
+				systemMSg.innerHTML = "";
 				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;
+				$("#system-info").dialog('close');
+				$("#system-info").dialog("destroy");
+				$("#system-info").addClass("none");
 			}
 
 
@@ -483,7 +495,6 @@ function startTimer(duration, display) {
 		}
 	}
 }
-
 
 function showVerificationMsg (message, validityTime = false) {
 
@@ -515,6 +526,7 @@ function clearOTPSection () {
 
 	$$.getElementById('codeOTP').value = '';
 	$$.getElementById('codeOTP').disabled = true;
+	$$.getElementById("msgErrorCodeOTP").innerHTML = '';
 
 	// verificationMsg.innerHTML = msgLoading;
 }
