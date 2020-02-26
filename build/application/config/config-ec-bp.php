@@ -7,7 +7,7 @@ $config['language'] = 'ec-bp-spanish';
 
 $config['scores_recapcha'] = [
 	'development' => [
-			'score' => 10
+			'score' => 0
 	],
 	'testing' => [
 			'score' => 0
