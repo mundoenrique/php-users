@@ -14,7 +14,7 @@
 	}
 	$signupLink = $this->config->item('base_url') . '/registro';
 ?>
-<div class="widget" id="widget-signin">
+<div class="widget" id="widget-signin" data-score-capcha="<?= $scoreRecapcha;?>" >
     <div class="widget-header">
 			<h2 class="screen-reader">Ingreso</h2>
     </div>
