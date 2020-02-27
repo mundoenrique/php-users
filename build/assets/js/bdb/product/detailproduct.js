@@ -303,6 +303,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		$$.getElementById("cancel").addEventListener('click',function(e){
 			e.preventDefault();
+			clearInterval(interval);
 			systemMSg.innerHTML = "";
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
@@ -337,6 +338,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					break;
 
 				case 'cardDetails':
+					clearInterval(interval);
 					systemMSg.innerHTML = "";
 					$("#system-info").dialog('close');
 					$("#system-info").dialog("destroy");
@@ -474,13 +476,15 @@ function startTimer(duration, display) {
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
 		display.textContent = minutes + ":" + seconds;
+		console.log(timer);
 
 		if (--timer < 0) {
-			clearOTPSection();
 			if (display.id == "validityTime") {
+				clearOTPSection();
 				showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
 				interceptLinkResendCode();
 			} else {
+				clearInterval(interval);
 				systemMSg.innerHTML = "";
 				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;

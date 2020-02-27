@@ -293,7 +293,7 @@ class Novo_Product_Model extends NOVO_Model
 		$response->data = [''];
 		$this->isResponseRc = TRUE;
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
+			$this->isResponseRc = 10;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -317,7 +317,7 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
 
 					//if (json_decode($response->bean)->bean == "0") {
-					if (true) {
+					if (false) {
 						$this->response->code = 3;
 						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
 					}
