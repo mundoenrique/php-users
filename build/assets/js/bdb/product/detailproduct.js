@@ -315,36 +315,41 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		btnTrigger.addEventListener('click',function(e){
 			e.preventDefault();
-			idContentDialog = systemMSg.querySelector("div").id;
 
-			switch (idContentDialog) {
-				case 'notice':
-					btnTrigger.innerHTML = msgLoadingWhite;
-					btnTrigger.disabled = true;
-					proccessPetition({});
-					break;
+			let divSectionView = systemMSg.querySelector("div");
 
-				case 'otpRequest':
-					var form = $('#formGetDetail');
-					var inpCodeOTP = $$.getElementById('codeOTP');
-					validateForms(form, {handleMsg: true});
-					if(form.valid()) {
+			if ( divSectionView != null ) {
+
+				switch (divSectionView.id) {
+					case 'notice':
 						btnTrigger.innerHTML = msgLoadingWhite;
 						btnTrigger.disabled = true;
-						inpCodeOTP.disabled = true;
-						data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
-						proccessPetition(data);
-					}
-					break;
+						proccessPetition({});
+						break;
 
-				case 'cardDetails':
-					clearInterval(interval);
-					systemMSg.innerHTML = "";
-					$("#system-info").dialog('close');
-					$("#system-info").dialog("destroy");
-					$("#system-info").addClass("none");
-					$(this).off('click');
-					break;
+					case 'otpRequest':
+						var form = $('#formGetDetail');
+						var inpCodeOTP = $$.getElementById('codeOTP');
+						validateForms(form, {handleMsg: true});
+
+						if(form.valid()) {
+							btnTrigger.innerHTML = msgLoadingWhite;
+							btnTrigger.disabled = true;
+							inpCodeOTP.disabled = true;
+							data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
+							proccessPetition(data);
+						}
+						break;
+
+					case 'cardDetails':
+						clearInterval(interval);
+						systemMSg.innerHTML = "";
+						$("#system-info").dialog('close');
+						$("#system-info").dialog("destroy");
+						$("#system-info").addClass("none");
+						//$(this).off('click');
+						break;
+				}
 			}
 		});
 
@@ -368,7 +373,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	}
 
 
-});
+
 
 function proccessPetition(data)
 {
@@ -378,29 +383,30 @@ function proccessPetition(data)
 		switch (response.code) {
 			case 0:
 				clearInterval(interval);
-				var cardNumber, cardholderName, expirationDate, securityCode;
-				cardNumber = response.dataDetailCard.cardNumber;
-				cardholderName = response.dataDetailCard.cardholderName;
-				expirationDate = response.dataDetailCard.expirationDate;
-				securityCode = response.dataDetailCard.securityCode;
+
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
 				systemMSg.querySelector("div").id = arrDialogContent[2].id;
-				$$.getElementById("cardNumber").value = cardNumber;
-				$$.getElementById("cardholderName").value = cardholderName;
-				$$.getElementById("expirationDate").value = expirationDate;
-				$$.getElementById("securityCode").value = securityCode;
+
+				$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
+				$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
+				$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
+				$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
+
 				timeLiveModal = $$.getElementById("timeLiveModal");
 				startTimer(response.timeLiveModal, timeLiveModal);
 				break;
 
 			case 1:
 				clearInterval(interval);
+
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
 				systemMSg.querySelector("div").id = arrDialogContent[1].id;
+
 				verificationMsg = $$.getElementById("verificationMsg");
 				showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
 				interceptLinkResendCode();
 				break;
+
 			case 2:
 				$$.getElementById('codeOTP').value = '';
 				$$.getElementById('codeOTP').disabled = false;
@@ -522,7 +528,6 @@ function interceptLinkResendCode () {
 	});
 }
 
-
 function clearOTPSection () {
 	clearInterval(interval);
 	btnTrigger.disabled = true;
@@ -534,3 +539,5 @@ function clearOTPSection () {
 
 	// verificationMsg.innerHTML = msgLoading;
 }
+
+});
