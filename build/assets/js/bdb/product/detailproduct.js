@@ -386,6 +386,7 @@ function proccessPetition(data)
 
 				systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
 				systemMSg.querySelector("div").id = arrDialogContent[2].id;
+				$$.getElementById("cancel").classList.add("none");
 
 				$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
 				$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
@@ -482,7 +483,6 @@ function startTimer(duration, display) {
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
 		display.textContent = minutes + ":" + seconds;
-		console.log(timer);
 
 		if (--timer < 0) {
 			if (display.id == "validityTime") {
