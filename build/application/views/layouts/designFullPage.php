@@ -64,7 +64,7 @@
 		</div>
 	</footer>
 
-	<div id="system-info" class="none" name="system-info">
+	<div id="system-info" class="none" name="system-info" oncopy="return false">
 		<p>
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
 			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
@@ -80,8 +80,6 @@
 	<div class="cover-spin" id=""></div>
 
 <script>
-
-
 
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
