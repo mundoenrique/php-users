@@ -24,7 +24,10 @@
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php if ($data['vc']): ?>
-						<a id="open-card-details" class="btn btn-small btn-link" href="#"><span class="icon-view" aria-hidden="true"></span>&nbsp Ver detalles</a>
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
+							<i aria-hidden="true" class="icon-view"></i>
+							&nbsp;Ver detalles
+						</button>
 						<?php endif; ?>
 					</div>
 					<div class="product-info-full mr-5">
