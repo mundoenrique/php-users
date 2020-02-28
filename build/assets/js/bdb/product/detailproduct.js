@@ -1,6 +1,5 @@
 'use strict';
 var $$ = document;
-var data = {};
 var interval;
 var btnTrigger, txtBtnTrigger;
 var arrDialogContent = [];
@@ -336,8 +335,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 							btnTrigger.innerHTML = msgLoadingWhite;
 							btnTrigger.disabled = true;
 							inpCodeOTP.disabled = true;
-							data = {'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()}
-							proccessPetition(data);
+							proccessPetition({'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()});
 						}
 						break;
 
