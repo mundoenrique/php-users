@@ -80,7 +80,7 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = '3';
-		$this->dataRequest->noTarjeta = gettype($dataRequest) === "object" ? $dataRequest->noTarjeta: $dataRequest['noTarjeta'];;
+		$this->dataRequest->noTarjeta = gettype($dataRequest) === "object" ? $dataRequest->noTarjeta: $dataRequest['noTarjeta'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
 
