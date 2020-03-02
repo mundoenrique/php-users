@@ -1,5 +1,11 @@
 'use strict';
 var $$ = document;
+var interval;
+var btnTrigger, txtBtnTrigger;
+var arrDialogContent = [];
+var systemMSg = $$.getElementById('system-msg');
+var verificationMsg;
+var timeLiveModal;
 
 moment.updateLocale('en', {
   monthsShort : [
@@ -23,7 +29,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 			stackItems = $$.querySelectorAll('.stack-item'),
 			btnExportPDF = $$.getElementById('downloadPDF'),
 			btnExportXLS = $$.getElementById('downloadXLS'),
-			btnExportExtract = $$.getElementById('downloadExtract');
+			btnExportExtract = $$.getElementById('downloadExtract'),
+			openCardDetails = $$.getElementById('open-card-details');
 
 	var	i, movementsPaginate, transitPaginate;
 
@@ -33,6 +40,52 @@ $$.addEventListener('DOMContentLoaded', function(){
 	noMovements.innerHTML = '<span class="h4">No se encontraron movimientos</span>';
 
 	//core
+
+	arrDialogContent = [
+		{ id: 'notice',
+			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
+		},
+		{ id: 'otpRequest',
+			body:
+			`<form id="formGetDetail" class="mr-2" method="post">
+				<div id="verificationOTP">
+					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+					<div class="row">
+						<div class="form-group col-7">
+							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
+							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+							<div id="msgErrorCodeOTP" class="help-block"></div>
+						</div>
+					</div>
+					<p id="verificationMsg" class="mb-1 h5"></p>
+				</div>
+			</form>`
+		},
+		{ id: 'cardDetails',
+			body:
+			`<div class="row">
+				<div class="form-group col-6">
+					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
+					<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+				<div class="form-group col-6">
+					<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
+					<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-6">
+					<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
+					<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+				<div class="form-group col-6">
+					<label class="nowrap" for="securityCode">Código de seguridad</label>
+					<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="" readonly>
+				</div>
+			</div>
+			<p class="mb-1 h5">Tiempo restante:<span id="timeLiveModal" class="ml-1 danger"></span></p>`
+		}
+	];
 
 	// Gráficas de estadísticas total abonos y cargos
 	if (movementsList.querySelector(".feed-item")) {
@@ -229,6 +282,77 @@ $$.addEventListener('DOMContentLoaded', function(){
 		processForm();
 	});
 
+	openCardDetails.addEventListener('click', function(e){
+		var dialogCardTitle, dialogCardBody, dialogData, data, cardDetails, idContentDialog;
+		dialogCardTitle = 'Detalles de tarjeta';
+		dialogCardBody = createElement('div', { id: arrDialogContent[0].id, class: 'dialog-detail-card'});
+		dialogCardBody.innerHTML = arrDialogContent[0].body;
+
+		dialogData = {
+			btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
+			btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
+		};
+
+		notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
+		$("#system-info").dialog( "option", "minWidth", 480 );
+		$("#system-info").dialog( "option", "position", { my: "center top+100", at: "center top", of:  window } );
+
+		btnTrigger = $$.getElementById('accept');
+		txtBtnTrigger = btnTrigger.innerHTML.trim();
+
+		$$.getElementById("cancel").addEventListener('click',function(e){
+			e.preventDefault();
+			clearInterval(interval);
+			systemMSg.innerHTML = "";
+			btnTrigger.innerHTML = txtBtnTrigger;
+			btnTrigger.disabled = false;
+			$("#system-info").dialog("close");
+			$("#system-info").dialog("destroy");
+			$("#system-info").addClass("none");
+			$(this).off('click');
+		})
+
+		btnTrigger.addEventListener('click',function(e){
+			e.preventDefault();
+
+			let divSectionView = systemMSg.querySelector("div");
+
+			if ( divSectionView != null ) {
+
+				switch (divSectionView.id) {
+					case 'notice':
+						btnTrigger.innerHTML = msgLoadingWhite;
+						btnTrigger.disabled = true;
+						proccessPetition({});
+						break;
+
+					case 'otpRequest':
+						var form = $('#formGetDetail');
+						var inpCodeOTP = $$.getElementById('codeOTP');
+						validateForms(form, {handleMsg: true});
+
+						if(form.valid()) {
+							btnTrigger.innerHTML = msgLoadingWhite;
+							btnTrigger.disabled = true;
+							inpCodeOTP.disabled = true;
+							proccessPetition({'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()});
+						}
+						break;
+
+					case 'cardDetails':
+						clearInterval(interval);
+						systemMSg.innerHTML = "";
+						$("#system-info").dialog('close');
+						$("#system-info").dialog("destroy");
+						$("#system-info").addClass("none");
+						//$(this).off('click');
+						break;
+				}
+			}
+		});
+
+	});
+
 	function processForm() {
 
 		var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
@@ -247,17 +371,60 @@ $$.addEventListener('DOMContentLoaded', function(){
 	}
 
 
-});
+
+
+function proccessPetition(data)
+{
+	callNovoCore('POST', 'Product', 'getDetail', data, function(response) {
+		btnTrigger.innerHTML = txtBtnTrigger;
+		btnTrigger.disabled = false;
+		switch (response.code) {
+			case 0:
+				clearInterval(interval);
+
+				systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
+				systemMSg.querySelector("div").id = arrDialogContent[2].id;
+				$$.getElementById("cancel").classList.add("none");
+
+				$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
+				$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
+				$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
+				$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
+
+				timeLiveModal = $$.getElementById("timeLiveModal");
+				startTimer(response.timeLiveModal, timeLiveModal);
+				break;
+
+			case 1:
+				clearInterval(interval);
+
+				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
+				systemMSg.querySelector("div").id = arrDialogContent[1].id;
+
+				verificationMsg = $$.getElementById("verificationMsg");
+				showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
+				interceptLinkResendCode();
+				break;
+
+			case 2:
+				$$.getElementById('codeOTP').value = '';
+				$$.getElementById('codeOTP').disabled = false;
+				$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
+				break;
+
+			case 3:
+				clearOTPSection();
+				showVerificationMsg(`${response.msg} ${msgResendOTP}`);
+				interceptLinkResendCode();
+				break;
+
+			default:
+				break;
+		}
+	});
+}
 
 function invokeChart(selector, cargos, abonos) {
-	// var cargos, abonos;
-	// if (selector[0] === movementsStats) {
-	// 	cargos = data.totalExpenseMovements;
-	// 	abonos = data.totalIncomeMovements;
-	// } else {
-	// 	cargos = data.totalExpensePendingTransactions;
-	// 	abonos = data.totalIncomePendingTransactions;
-	// }
 	selector.kendoChart({
 		chartArea: {
 			background:"transparent",
@@ -301,3 +468,74 @@ function invokeChart(selector, cargos, abonos) {
 		}
 	});
 }
+
+function startTimer(duration, display) {
+	var timer = duration, minutes, seconds;
+	interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		minutes = parseInt(timer / 60, 10)
+		seconds = parseInt(timer % 60, 10);
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.textContent = minutes + ":" + seconds;
+
+		if (--timer < 0) {
+			if (display.id == "validityTime") {
+				clearOTPSection();
+				showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
+				interceptLinkResendCode();
+			} else {
+				clearInterval(interval);
+				systemMSg.innerHTML = "";
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
+				$("#system-info").dialog('close');
+				$("#system-info").dialog("destroy");
+				$("#system-info").addClass("none");
+			}
+
+
+
+
+		}
+	}
+}
+
+function showVerificationMsg (message, validityTime = false) {
+
+	verificationMsg.innerHTML = message;
+	verificationMsg.classList.add("semibold", "danger");
+	verificationMsg.querySelector("a").setAttribute('id','resendCode');
+
+	if (validityTime) {
+		verificationMsg.classList.remove("semibold", "danger");
+		startTimer(validityTime, verificationMsg.querySelector("span"));
+	}
+
+}
+
+function interceptLinkResendCode () {
+	$$.getElementById('resendCode').addEventListener('click', function(e){
+		e.preventDefault();
+		clearOTPSection();
+		verificationMsg.innerHTML = msgLoading;
+		proccessPetition({});
+	});
+}
+
+function clearOTPSection () {
+	clearInterval(interval);
+	btnTrigger.disabled = true;
+	btnTrigger.innerHTML = txtBtnTrigger;
+
+	$$.getElementById('codeOTP').value = '';
+	$$.getElementById('codeOTP').disabled = true;
+	$$.getElementById("msgErrorCodeOTP").innerHTML = '';
+
+	// verificationMsg.innerHTML = msgLoading;
+}
+
+});

@@ -322,6 +322,21 @@ footer.main-footer {
 	border: none;
 }
 
+.form-control-plaintext {
+	display: block;
+	width: 100%;
+	padding-top: .375rem;
+	padding-bottom: .375rem;
+	margin-bottom: 0;
+	font-size: .875rem;
+	font-weight: var(--font-weight-base);
+	line-height: 1.15;
+	color: var(--text-color);
+	background-color: transparent;
+	border: solid transparent;
+	border-width: 1px 0;
+}
+
 textarea.form-control {
 	height: calc(1.18em + .75rem + 2px);
 	resize: none;
@@ -3400,7 +3415,7 @@ a.ui-button:active,
 	background: none;
 	overflow: auto;
 }
-.ui-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content > p {
 	display: flex;
 	min-height: 80px;
 	margin-bottom: 0;
@@ -3682,6 +3697,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .detail-stats:not(.fade-in) {
 	display: none;
+}
+
+.dialog-detail-card {
+	height: 180px;
 }
 
 .services-content {

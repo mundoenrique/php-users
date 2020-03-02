@@ -1,6 +1,18 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'getdetail' => [
+		[
+			'field' => 'request',
+			'label' => 'request',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'plot',
+			'label' => 'plot',
+			'rules' => 'trim|required'
+		]
+	],
 	'exporttopdf' => [
 		[
 			'field' => 'initialDate',

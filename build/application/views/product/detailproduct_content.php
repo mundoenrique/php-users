@@ -1,3 +1,4 @@
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -16,10 +17,18 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="flex max-width-4 flex-wrap items-center justify-between mb-2">
-					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= $data['marca']; ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+				<div class="flex max-width-4 flex-wrap items-start justify-between mb-2">
+					<div class="product-presentation flex flex-column items-end mr-4">
+						<div class="relative">
+							<div class="item-network <?= $data['marca']; ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+						</div>
+						<?php if ($data['vc']): ?>
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
+							<i aria-hidden="true" class="icon-view"></i>
+							&nbsp;Ver detalles
+						</button>
+						<?php endif; ?>
 					</div>
 					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>

@@ -87,7 +87,8 @@ class Product extends NOVO_Controller {
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
-				"availableServices" => $row->services
+				"availableServices" => $row->services,
+				"vc" => FALSE
 			]);
 		}
 		return $dataRequeried;
@@ -109,7 +110,10 @@ class Product extends NOVO_Controller {
 			"third_party/moment",
 			"third_party/jquery.easyPaginate",
 			"third_party/kendo.dataviz",
-			"$this->countryUri/product/$view"
+			"third_party/jquery.validate",
+			"validate-forms",
+			"$this->countryUri/product/$view",
+			"localization/spanish-base/messages_base"
 		);
 
 		if ($this->config->item('language_form_validate')) {

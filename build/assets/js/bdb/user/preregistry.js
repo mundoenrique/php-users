@@ -130,9 +130,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function startTimer(duration, display)
 	{
-		var timer = duration, minutes, seconds;
-		interval = setInterval(myTimer, 1000);
-
 		function myTimer() {
 			minutes = parseInt(timer / 60, 10)
 			seconds = parseInt(timer % 60, 10);
@@ -141,12 +138,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 			seconds = seconds < 10 ? "0" + seconds : seconds;
 
 			display.textContent = minutes + ":" + seconds;
+			console.log(timer);
 
 			if (--timer < 0) {
 				clearInterval(interval);
 
 				clearOTPSection();
-				showVerificationMsg(`Tiempo expirado. ${dataPreRegistry.msgResendOTP}`)
+				showVerificationMsg(`Tiempo expirado. ${dataPreRegistry.msgResendOTP}`);
 
 				let fnCall = () => {
 					proccessPetition(data);
@@ -154,6 +152,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				interceptLinkResendCode(fnCall);
 			}
 		}
+
+		var timer = duration, minutes, seconds;
+		interval = setInterval(myTimer, 1000);
 	}
 
 	function proccessPetition(data)
@@ -202,6 +203,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		$$.getElementById('resendCode').addEventListener('click', function(e){
 			e.preventDefault();
+			clearOTPSection();
 			functionTarget();
 		});
 	}
@@ -225,13 +227,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 		btnTrigger.disabled = true;
 		btnTrigger.innerHTML = txtBtnTrigger;
 
-		$$.getElementById('codeOTP').value = '';
-		$$.getElementById('codeOTP').disabled = true;
+		data.codeOTP = '';
+		inpCodeOTP.value = '';
+		inpCodeOTP.disabled = true;
 
 		verificationMsg.innerHTML = msgLoading;
 	}
-
 });
-
-
-

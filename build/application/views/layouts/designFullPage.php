@@ -64,13 +64,13 @@
 		</div>
 	</footer>
 
-	<div id="system-info" class="none" name="system-info">
+	<div id="system-info" class="none" name="system-info" oncopy="return false">
 		<p>
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
 			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
 		</p>
-		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-      <div class="ui-dialog-buttonset novo-dialog-buttonset">
+		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
+			<div class="ui-dialog-buttonset novo-dialog-buttonset flex modal-buttonset">
 				<button type="button" id="cancel" class="btn btn-small btn-link"></button>
 				<button type="button" id="accept" class="btn btn-small btn-loading btn-primary"></button>
       </div>
@@ -80,8 +80,6 @@
 	<div class="cover-spin" id=""></div>
 
 <script>
-
-
 
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
@@ -96,6 +94,7 @@
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>"
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>"
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>"
+		var msgResendOTP = "<a name='resendCode' class='primary regular' href='#'>"+"<?= lang('RESP_RESEEND_OTP') ?>"+"</a>"
 
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
 	</script>
