@@ -138,7 +138,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			seconds = seconds < 10 ? "0" + seconds : seconds;
 
 			display.textContent = minutes + ":" + seconds;
-			console.log(timer);
 
 			if (--timer < 0) {
 				clearInterval(interval);

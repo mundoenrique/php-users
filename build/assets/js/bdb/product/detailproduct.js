@@ -282,76 +282,78 @@ $$.addEventListener('DOMContentLoaded', function(){
 		processForm();
 	});
 
-	openCardDetails.addEventListener('click', function(e){
-		var dialogCardTitle, dialogCardBody, dialogData, data, cardDetails, idContentDialog;
-		dialogCardTitle = 'Detalles de tarjeta';
-		dialogCardBody = createElement('div', { id: arrDialogContent[0].id, class: 'dialog-detail-card'});
-		dialogCardBody.innerHTML = arrDialogContent[0].body;
+	if (openCardDetails != null ) {
+		openCardDetails.addEventListener('click', function(e){
+			var dialogCardTitle, dialogCardBody, dialogData, data, cardDetails, idContentDialog;
+			dialogCardTitle = 'Detalles de tarjeta';
+			dialogCardBody = createElement('div', { id: arrDialogContent[0].id, class: 'dialog-detail-card'});
+			dialogCardBody.innerHTML = arrDialogContent[0].body;
 
-		dialogData = {
-			btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
-			btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
-		};
+			dialogData = {
+				btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
+				btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
+			};
 
-		notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
-		$("#system-info").dialog( "option", "minWidth", 480 );
-		$("#system-info").dialog( "option", "position", { my: "center top+100", at: "center top", of:  window } );
+			notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
+			$("#system-info").dialog( "option", "minWidth", 480 );
+			$("#system-info").dialog( "option", "position", { my: "center top+100", at: "center top", of:  window } );
 
-		btnTrigger = $$.getElementById('accept');
-		txtBtnTrigger = btnTrigger.innerHTML.trim();
+			btnTrigger = $$.getElementById('accept');
+			txtBtnTrigger = btnTrigger.innerHTML.trim();
 
-		$$.getElementById("cancel").addEventListener('click',function(e){
-			e.preventDefault();
-			clearInterval(interval);
-			systemMSg.innerHTML = "";
-			btnTrigger.innerHTML = txtBtnTrigger;
-			btnTrigger.disabled = false;
-			$("#system-info").dialog("close");
-			$("#system-info").dialog("destroy");
-			$("#system-info").addClass("none");
-			$(this).off('click');
-		})
+			$$.getElementById("cancel").addEventListener('click',function(e){
+				e.preventDefault();
+				clearInterval(interval);
+				systemMSg.innerHTML = "";
+				btnTrigger.innerHTML = txtBtnTrigger;
+				btnTrigger.disabled = false;
+				$("#system-info").dialog("close");
+				$("#system-info").dialog("destroy");
+				$("#system-info").addClass("none");
+				$(this).off('click');
+			})
 
-		btnTrigger.addEventListener('click',function(e){
-			e.preventDefault();
+			btnTrigger.addEventListener('click',function(e){
+				e.preventDefault();
 
-			let divSectionView = systemMSg.querySelector("div");
+				let divSectionView = systemMSg.querySelector("div");
 
-			if ( divSectionView != null ) {
+				if ( divSectionView != null ) {
 
-				switch (divSectionView.id) {
-					case 'notice':
-						btnTrigger.innerHTML = msgLoadingWhite;
-						btnTrigger.disabled = true;
-						proccessPetition({});
-						break;
-
-					case 'otpRequest':
-						var form = $('#formGetDetail');
-						var inpCodeOTP = $$.getElementById('codeOTP');
-						validateForms(form, {handleMsg: true});
-
-						if(form.valid()) {
+					switch (divSectionView.id) {
+						case 'notice':
 							btnTrigger.innerHTML = msgLoadingWhite;
 							btnTrigger.disabled = true;
-							inpCodeOTP.disabled = true;
-							proccessPetition({'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()});
-						}
-						break;
+							proccessPetition({});
+							break;
 
-					case 'cardDetails':
-						clearInterval(interval);
-						systemMSg.innerHTML = "";
-						$("#system-info").dialog('close');
-						$("#system-info").dialog("destroy");
-						$("#system-info").addClass("none");
-						//$(this).off('click');
-						break;
+						case 'otpRequest':
+							var form = $('#formGetDetail');
+							var inpCodeOTP = $$.getElementById('codeOTP');
+							validateForms(form, {handleMsg: true});
+
+							if(form.valid()) {
+								btnTrigger.innerHTML = msgLoadingWhite;
+								btnTrigger.disabled = true;
+								inpCodeOTP.disabled = true;
+								proccessPetition({'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()});
+							}
+							break;
+
+						case 'cardDetails':
+							clearInterval(interval);
+							systemMSg.innerHTML = "";
+							$("#system-info").dialog('close');
+							$("#system-info").dialog("destroy");
+							$("#system-info").addClass("none");
+							break;
+					}
 				}
-			}
+			});
 		});
+	}
 
-	});
+
 
 	function processForm() {
 
