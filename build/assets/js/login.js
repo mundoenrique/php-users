@@ -183,7 +183,7 @@ function validateCaptcha(token, user, pass) {
 
 		score = $('.widget').attr('data-score-capcha');
 
-		if((data.success == true) && (parseFloat(data.score) >= parseFloat(score))) {
+		if((data.success == true) && (parseFloat(data.score) > parseFloat(score))) {
 			login(user, pass)
 
 		} else {
