@@ -38,10 +38,10 @@ $config['oauth_url'] = OAUTH_URL;
 
 $config['scores_recapcha'] = [
 	'development' => [
-			'score' => 0
+			'score' => 0.3
 	],
 	'testing' => [
-			'score' => 0.2
+			'score' => 0.3
 	],
 	'production' => [
 			'score' => 0.2
