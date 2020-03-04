@@ -124,7 +124,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			transitList.classList.add('fade-in');
 			transitStats.addClass('fade-in');
 		}
-	})
+	});
 
 	movementsToogle.addEventListener('click', function(){
 		if ( !this.classList.contains('active') ) {
@@ -141,7 +141,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			movementsList.classList.add('fade-in');
 			movementsStats.addClass('fade-in');
 		}
-	})
+	});
 
 	$$.getElementById('buscar').addEventListener('click', function(){
 		var filterMonth = $$.getElementById('filterMonth');
@@ -352,8 +352,6 @@ $$.addEventListener('DOMContentLoaded', function(){
 			});
 		});
 	}
-
-
 
 	function processForm() {
 
