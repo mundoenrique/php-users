@@ -58,7 +58,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="product-specifications">
+					<div class="product-specifications none">
 						<h3 class="h4 regular tertiary">Especificaciones</h3>
 						<ul class="vinieta">
 							<li>Aliquam tincidunt mauris eu risus.</li>
@@ -107,10 +107,10 @@
 						</label>
 					</div>
 					<ul class="stack list-inline mb-0 flex items-center">
-						<li class="stack-item px-1 list-inline-item rounded is-disabled">
+						<li class="stack-item px-1 list-inline-item rounded">
 							<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
-						<li class="stack-item px-1 list-inline-item rounded is-disabled">
+						<li class="stack-item px-1 list-inline-item rounded">
 							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
 						<li class="stack-item px-1 list-inline-item rounded is-disabled">
