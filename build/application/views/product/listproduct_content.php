@@ -25,7 +25,7 @@
 							<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara'];?></p>
 							<?php if ($state === ' inactive'): ?>
 							<button id="generate" class="btn btn-small btn-link" name="generate">Generar PIN </button>
-							<?php elseif ($row['bloque'] !== '00' && $row['bloque'] !== ''): ?>
+							<?php elseif ($row['bloqueo'] !== ''): ?>
 							<span class="semibold danger">Bloqueada</span>
 							<?php else: ?>
 							<p class="item-balance mb-0 h6 light text">
