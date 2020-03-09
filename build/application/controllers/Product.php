@@ -88,6 +88,7 @@ class Product extends NOVO_Controller {
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
+				"bloqueo" => $row->bloque,
 				"vc" => FALSE
 			]);
 		}

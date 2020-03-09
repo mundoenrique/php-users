@@ -14,35 +14,29 @@
 						<input id='noTarjetaConMascara' type='hidden' name='noTarjetaConMascara' value=''>
 						<input id='prefix' type='hidden' name='prefix' value=''>
 					</form>
-					<?php
-						if (count($data) > 0 and $data !== '--'){
-					?>
-						<?php
-							foreach($data as $row){
-						?>
-								<div id="<?= $row['nroTarjeta'];?>" class="dashboard-item big-modal p-1 mx-1 mb-1">
-									<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-									<div class="item-info <?= strtolower($row['marca']);?> p-2 h5 tertiary bg-white">
-										<p class="item-category semibold primary">
-											<?= strtoupper($row['tarjetaHabiente']);?>
-										</p>
-										<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara'];?></p>
-										<p class="item-cardnumber mb-0"><?= strtoupper($row['nomEmp']);?></p>
-									</div>
-								</div>
-						<?php
-							}
-						?>
-							<div class="dashboard-item mx-1"></div>
-							<div class="dashboard-item mx-1"></div>
-							<div class="dashboard-item mx-1"></div>
-					<?php
-						}else{
-					?>
-						<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS');?></h3>
-					<?php
-						}
-					?>
+					<?php if (count($data) > 0 and $data !== '--'): ?>
+					<?php foreach($data as $row): ?>
+					<div id="<?= $row['nroTarjeta'];?>" class="dashboard-item big-modal p-1 mx-1 mb-1">
+						<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+						<div class="item-info <?= strtolower($row['marca']);?> p-2 h5 tertiary bg-white">
+							<p class="item-category semibold primary">
+								<?= strtoupper($row['tarjetaHabiente']);?>
+							</p>
+							<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara'];?></p>
+							<?php if ($row['bloque'] === 'S'): ?>
+							<span class="semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></span>
+							<?php else: ?>
+							<p class="mb-0 h6 light text"><?= strtoupper($row['nomEmp']);?></p>
+							<?php endif; ?>
+						</div>
+					</div>
+					<?php endforeach; ?>
+					<div class="dashboard-item mx-1"></div>
+					<div class="dashboard-item mx-1"></div>
+					<div class="dashboard-item mx-1"></div>
+					<?php else: ?>
+					<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS');?></h3>
+					<?php endif; ?>
 				</div>
 			</div>
 		</section>

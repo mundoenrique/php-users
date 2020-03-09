@@ -344,8 +344,6 @@ class User extends NOVO_Controller {
 		$this->render->reason = $reason;
 		$this->render->reasonTitle = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
 		$this->render->reasonMessage = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
-		log_message('INFO', '****** reason: ' . json_encode($this->render));
-
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('layouts/designNotRender', $this->render);
 	}

@@ -32,7 +32,7 @@ $lang['GEN_BTN_CANCEL']= 'Cancelar';
 $lang['GEN_BTN_CONTINUE']= 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
 
-
+$lang['GEN_TEXT_BLOCK_PRODUCT'] = 'Tarjeta bloqueada';
 
 $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
