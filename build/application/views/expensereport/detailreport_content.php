@@ -19,6 +19,9 @@
 					</div>
 					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['tarjetaHabiente']; ?></p>
+						<?php if ($data['bloque'] === 'S'): ?>
+						<a class="btn btn-link btn-small px-0 pt-0 danger" href="<?= base_url('listaproducto');?>"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></a>
+						<?php endif; ?>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['nroTarjetaMascara'];?></p>
 						<p class="product-metadata h6"><?= $data['producto'];?></p>
 						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>

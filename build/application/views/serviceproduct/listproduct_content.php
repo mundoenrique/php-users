@@ -26,7 +26,7 @@
 							<?php if ($state === ' inactive'): ?>
 							<button id="generate" class="btn btn-small btn-link" name="generate">Generar PIN </button>
 							<?php elseif ($row['bloqueo'] !== ''): ?>
-							<span class="semibold danger"><?= LANG('GEN_TEXT_BLOCK_PRODUCT');?></span>
+							<span class="semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></span>
 							<?php else: ?>
 							<p class="mb-0 h6 light text"><?= strtoupper($row['nomEmp']);?></p>
 							<?php endif; ?>

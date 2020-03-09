@@ -32,6 +32,9 @@
 					</div>
 					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
+						<?php if ($data['bloqueo'] !== ''): ?>
+						<a class="btn btn-link btn-small px-0 pt-0 danger" href="<?= base_url('atencioncliente');?>"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></a>
+						<?php endif; ?>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
 						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
 						<ul class="product-balance-group flex justify-between mb-0 list-inline">
