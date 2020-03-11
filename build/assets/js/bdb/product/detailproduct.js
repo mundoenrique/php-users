@@ -89,19 +89,24 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	// Gráficas de estadísticas total abonos y cargos
 	if (movementsList.querySelector(".feed-item")) {
-		$('#movementsList').easyPaginate({});
-		movementsPaginate = movementsList.nextElementSibling;
-		movementsPaginate.id = 'movementsPaginate';
+		if (movementsList.querySelectorAll(".feed-item").length >= 10) {
+			$('#movementsList').easyPaginate({});
+			movementsPaginate = movementsList.nextElementSibling;
+			movementsPaginate.id = 'movementsPaginate';
+		}
+
 		movementsStats.addClass('fade-in');
 
 		invokeChart(movementsStats, parseFloat(data.totalExpenseMovements), parseFloat(data.totalIncomeMovements));
 	}
 
 	if (transitList != null) {
-		$('#transitList').easyPaginate({});
-		transitPaginate = transitList.nextElementSibling;
-		transitPaginate.id = 'transitPaginate';
-		transitPaginate.classList.add('none');
+		if (transitList.querySelectorAll(".feed-item").length >= 10) {
+			$('#transitList').easyPaginate({});
+			transitPaginate = transitList.nextElementSibling;
+			transitPaginate.id = 'transitPaginate';
+			transitPaginate.classList.add('none');
+		}
 
 		transitToogle.classList.remove('is-disabled');
 		transitToogle.querySelector('input').disabled = false;
@@ -222,9 +227,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 					movementsList.appendChild(feedItem);
 				});
-				$('#movementsList').easyPaginate({});
-				movementsPaginate = movementsList.nextElementSibling;
-				movementsPaginate.id = 'movementsPaginate';
+				if (movementsList.querySelectorAll(".feed-item").length >= 10) {
+					$('#movementsList').easyPaginate({});
+					movementsPaginate = movementsList.nextElementSibling;
+					movementsPaginate.id = 'movementsPaginate';
+				}
 				invokeChart(movementsStats, totalExpense, totalIncome);
 				movementsStats.addClass('fade-in');
 				if ($$.getElementById('filterMonth').value != 0) {
