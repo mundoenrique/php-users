@@ -196,6 +196,7 @@ function validateCaptcha(token, user, pass) {
 
 			$("#error-validate").click(function () {
 				$("#dialog-validate").dialog("close");
+				$("#userpwd").val('');
 				habilitar();
 			});
 		}
