@@ -227,7 +227,7 @@ if (!function_exists('propiedades_menu'))
 					$opcion_menu=(object)['dashboard'=>true,'transfer_pe'=>false,'pago'=>false,'reportes'=>true,'service'=>true,'perfil'=>true];
 						break;
 				case 'Usd':
-					$opcion_menu=(object)['dashboard'=>true,'transfer_usd'=>false,'pago'=>true,'reportes'=>true,'service'=>false,'perfil'=>true];
+					$opcion_menu=(object)['dashboard'=>true,'transfer_usd'=>false,'pago'=>false,'reportes'=>true,'service'=>false,'perfil'=>true];
 						break;
 				case 'Ec-bp':
 					$opcion_menu=(object)['dashboard'=>true,'transfer'=>false,'pago'=>false,'reportes'=>false,'service'=>true,'perfil'=>true];
