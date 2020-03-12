@@ -58,7 +58,7 @@
   <div class="dialog-small" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-      <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente </p>
+      <p>El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente.</p>
     </div>
     <div class="form-actions">
 		<?php 	if($skin=='pichincha'): 		?>

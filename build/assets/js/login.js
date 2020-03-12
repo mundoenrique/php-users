@@ -181,7 +181,9 @@ function validateCaptcha(token, user, pass) {
 	.done(function (response) {
 		data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8))
 
-		if((data.success == true) && (parseFloat(data.score) >= parseFloat('0'))) {
+		score = $('.widget').attr('data-score-capcha');
+
+		if((data.success == true) && (parseFloat(data.score) > parseFloat(score))) {
 			login(user, pass)
 
 		} else {
@@ -194,6 +196,7 @@ function validateCaptcha(token, user, pass) {
 
 			$("#error-validate").click(function () {
 				$("#dialog-validate").dialog("close");
+				$("#userpwd").val('').attr('placeholder','Contraseña');
 				habilitar();
 			});
 		}
