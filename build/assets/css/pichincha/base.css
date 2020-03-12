@@ -5455,8 +5455,6 @@ a {
 	}
 	.hover2:hover {
 		color:#033572;
-   	/*font-weight: bold;*/
-		/*text-decoration:underline;*/
 		position:relative;
 		border-left: 5px solid #FFDD00;
 	}
@@ -5471,4 +5469,7 @@ a {
 	.border{
 		border: 0.5px solid #b9b7b7;
 		border-bottom-left-radius: 15px;
+		}
+	.margin_hover{
+			margin-top: -1px;
 		}
