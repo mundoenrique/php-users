@@ -92,9 +92,9 @@
 									<div class="form-group col-6">
 										<select id="phoneType" class="custom-select form-control" name="phoneType">
 											<option value="">Selecciona</option>
-											<option>Laboral</option>
-											<option>Fax</option>
-											<option>Otro</option>
+											<option value="OFC">Laboral</option>
+											<option value="FAX">Fax</option>
+											<option value="OTRO">Otro</option>
 										</select>
 										<div class="help-block"></div>
 									</div>
