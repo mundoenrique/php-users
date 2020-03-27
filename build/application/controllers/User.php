@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends NOVO_Controller {
+class User extends NOVO_Controller
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
 	}
 
@@ -14,7 +15,7 @@ class User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: index Method Initialized');
 		$view = 'login';
 
-		if($this->session->userdata('logged_in')) {
+		if ($this->session->userdata('logged_in')) {
 
 			redirect(base_url('vistaconsolidada'), 'location');
 			exit();
@@ -37,19 +38,15 @@ class User extends NOVO_Controller {
 		$this->session->unset_userdata($userData);
 
 		$this->load->library('user_agent');
-		$this->load->library('recaptcha');
-
-		$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
 
 		$browser = strtolower($this->agent->browser());
 		$version = (float) $this->agent->version();
 		$noBrowser = "internet explorer";
-		$views = ['user/'.$view];
-		if($this->countryUri == 'bp') {
+		$views = ['user/' . $view];
+		if ($this->countryUri == 'bp') {
 			$views = ['user/signin'];
 		}
-		if($browser == $noBrowser && $version < 11.0) {
+		if ($browser == $noBrowser && $version < 11.0) {
 			$views = ['staticpages/content-browser'];
 		}
 		array_push(
@@ -63,34 +60,35 @@ class User extends NOVO_Controller {
 			"$this->countryUri/clave",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
-		if($this->countryUri !== 'bp') {
+		if ($this->countryUri !== 'bp') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/jquery.kwicks",
 				"$this->countryUri/user/kwicks"
 			);
 		}
-		if($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
+		if ($this->countryUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
 			);
 		}
 
-		if($this->render->activeRecaptcha) {
+		if ($this->render->activeRecaptcha) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 			$this->render->loginUri = 'validateCaptcha';
+			log_message('DEBUG', 'NOVO RESPONSE: script to load: ' . $this->recaptcha->getScriptTag());
 		}
 
 		$this->views = $views;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 
 		$this->loadView($view);
 	}
@@ -101,7 +99,7 @@ class User extends NOVO_Controller {
 
 		log_message('INFO', 'NOVO User: Change Password Method Initialized');
 
-		if(!$reasonOperation = $this->session->flashdata('changePassword')) {
+		if (!$reasonOperation = $this->session->flashdata('changePassword')) {
 			log_message('INFO', 'NOVO User: Change Password Redirect to Login');
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -114,7 +112,7 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
@@ -123,9 +121,9 @@ class User extends NOVO_Controller {
 		$this->session->set_flashdata('changePassword', $reasonOperation);
 		$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
-		$this->views = ['user/'.$view];
-		$this->render->reason = $reasonOperation === 't'? lang('PASSWORD_TEMPORAl_KEY'): lang('PASSWORD_EXPIED_KEY');
-		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->views = ['user/' . $view];
+		$this->render->reason = $reasonOperation === 't' ? lang('PASSWORD_TEMPORAl_KEY') : lang('PASSWORD_EXPIED_KEY');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
@@ -135,7 +133,7 @@ class User extends NOVO_Controller {
 
 		log_message('INFO', 'NOVO User: Change Password from profile Method Initialized');
 
-		if(!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in')) {
 
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -148,7 +146,7 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
@@ -156,9 +154,9 @@ class User extends NOVO_Controller {
 		}
 		$this->session->set_flashdata('changePassword', 'changePaswordProfile');
 
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->render->reason = lang('GEN_PASSWORD_CHANGE_TITLE');
-		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_PASSWORD_CHANGE_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
@@ -167,7 +165,7 @@ class User extends NOVO_Controller {
 		$view = 'preregistry';
 
 		log_message('INFO', 'NOVO User: preRegistry Method Initialized');
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
@@ -185,18 +183,18 @@ class User extends NOVO_Controller {
 		$this->load->model('Novo_User_Model', 'modelLoad');
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->views = ['user/' . $view];
+		$this->render->titlePage = lang('GEN_REGISTRY_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;
-		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0? 'disabled': '';
+		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0 ? 'disabled' : '';
 		$this->loadView($view);
 	}
 
 	public function registry()
 	{
 		$view = 'registry';
-		if(!$this->session->flashdata('registryUser')) {
+		if (!$this->session->flashdata('registryUser')) {
 
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -214,22 +212,22 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 		$this->render->data = $this->session->flashdata('registryUserData');
-		$this->render->titlePage = lang('GEN_REGISTRY_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_REGISTRY_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
 	public function profile()
 	{
 		$view = 'profile';
-		if(!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in')) {
 
 			redirect(base_url('vistaconsolidada'), 'location');
 			exit();
@@ -250,13 +248,13 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
-		$this->views = ['user/'.$view];
+		$this->views = ['user/' . $view];
 
 		$listaTelefonos = [];
 		if ($objData->profileUser !== '--') {
@@ -271,7 +269,6 @@ class User extends NOVO_Controller {
 			$codState = new stdClass;
 			$codState->codState = $objData->profileUser->direccion->acCodEstado;
 			$this->render->dataCitys = $this->modelLoad->callWs_getListCitys_User($codState)->data;
-
 		}
 
 		$objData->professions = $this->modelLoad->getListProfessions()->data;
@@ -280,7 +277,7 @@ class User extends NOVO_Controller {
 		$this->render->data = $objData->profileUser;
 		$this->render->dataProfessions = $objData->professions;
 		$this->render->dataStates = $objData->states;
-		$this->render->titlePage = lang('GEN_PROFILE_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_PROFILE_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 
 		$this->loadView($view);
 	}
@@ -298,7 +295,7 @@ class User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
-		if($this->config->item('language_form_validate')) {
+		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
@@ -307,11 +304,11 @@ class User extends NOVO_Controller {
 		$this->load->model('Novo_User_Model', 'modelLoad');
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
-		$this->views = ['user/'.$view];
-		$this->render->titlePage = lang('GEN_RECOVER_ACCESS_TITLE').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->views = ['user/' . $view];
+		$this->render->titlePage = lang('GEN_RECOVER_ACCESS_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;
-		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0? 'disabled': '';
+		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0 ? 'disabled' : '';
 		$this->loadView($view);
 	}
 
@@ -322,13 +319,13 @@ class User extends NOVO_Controller {
 		$this->load->model('Novo_User_Model', 'modelLoad');
 		$this->modelLoad->callWs_closeSession_User();
 
-		redirect($this->config->item('base_url').'inicio');
+		redirect($this->config->item('base_url') . 'inicio');
 	}
 
 	public function notRender($reason = 'b')
 	{
 		$view = 'notrender';
- 		if(!$this->session->flashdata('checkBrowser')) {
+		if (!$this->session->flashdata('checkBrowser')) {
 
 			redirect(base_url('inicio'), 'location', 301);
 			exit();
@@ -340,12 +337,11 @@ class User extends NOVO_Controller {
 			"$this->countryUri/notrender"
 		];
 		$this->render->viewPage = [$view];
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_SYSTEM_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->reason = $reason;
-		$this->render->reasonTitle = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE'): lang('GEN_NOT_RENDER_BROWSER');
-		$this->render->reasonMessage = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE_MSG'): lang('GEN_NOT_RENDER_BROWSER_MSG');
+		$this->render->reasonTitle = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE') : lang('GEN_NOT_RENDER_BROWSER');
+		$this->render->reasonMessage = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE_MSG') : lang('GEN_NOT_RENDER_BROWSER_MSG');
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('layouts/designNotRender', $this->render);
 	}
-
 }
