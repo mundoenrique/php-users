@@ -175,10 +175,11 @@
 									<label for="replaceMotSol">Motivo de la solicitud <span class="danger">*</span></label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>
-										<option value="41">Tarjeta perdida</option>
-										<option value="43">Tarjeta robada</option>
-										<option value="TD">Tarjeta deteriorada</option>
-										<option value="TR">Reemplazar tarjeta</option>
+										<option value="41"><?= lang('GENE_BLOCKING_REASONS_CANCELLED');?></option>
+										<option value="46"><?= lang('GENE_BLOCKING_REASONS_LOST');?></option>
+										<option value="43"><?= lang('GENE_BLOCKING_REASONS_DETERIORATED');?></option>
+										<option value="59"><?= lang('GENE_BLOCKING_REASONS_STOLE');?></option>
+										<option value="17"><?= lang('GENE_BLOCKING_REASONS_FRAUD');?></option>										
 									</select>
 									<div class="help-block"></div>
 								</div>
