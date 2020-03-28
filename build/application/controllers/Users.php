@@ -6,8 +6,9 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->initCookie();
 
+		$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
+		$this->initCookie();
 	}
 
 	private function initCookie() {
@@ -18,7 +19,11 @@ class Users extends CI_Controller {
 
 			switch($requestMod){
 				case 'latodo': 	$code='latodo'; break;
-				case 'pichincha': $code='pichincha'; break;
+				case 'pichincha':
+					$code='pichincha';
+					np_hoplite_countryCheck('ec-bp');
+					$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
+					break;
 				default: $code='default';
 			}
 
@@ -94,7 +99,7 @@ class Users extends CI_Controller {
 		//INSTANCIA GENERAR  HEADER
 		$menuHeader = $this->parser->parse('widgets/widget-menuHeader', array(), true);
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
-		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
+		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets, 'scoreRecapcha' => $this->scoreRecapcha), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
 		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'login.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
