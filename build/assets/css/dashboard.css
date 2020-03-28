@@ -5657,7 +5657,9 @@ body .ui-tooltip {
 	.icon {
 		content: "\3b";
 	}
-
 	.div-large {
 		width: 330px;
+	}
+	.margin_hover{
+		margin-top: -1px;
 	}
