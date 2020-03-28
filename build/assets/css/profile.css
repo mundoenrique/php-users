@@ -5942,3 +5942,7 @@ hr{
 	.div-large {
 		width: 330px;
 	}
+
+	.margin_hover{
+		margin-top: -1px;
+	}

@@ -29,9 +29,6 @@ if ( ! function_exists('insert_js_cdn'))
 
         $url_cdn = $CI->config->item('base_url_cdn');
         $path_cdn = $CI->config->item('base_path_cdn');
-        if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
-					$filename = str_replace('.js', '.min.js', $filename);
-				}
 
         $filepath = $path_cdn . 'js/' . $filename;
         $fileurl = $url_cdn . 'js/' . $filename;
@@ -62,9 +59,6 @@ if ( ! function_exists('insert_css_cdn'))
         $skin = $CI->input->cookie('cpo_skin');
         $skin_folder = '';
 				if ($skin === 'latodo' || $skin === 'pichincha') $skin_folder = $skin . '/';
-				if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
-					$filename = str_replace('.css', '.min.css', $filename);
-				}
 
         $filepath = $path_cdn . 'css/' . $filename;
         $fileurl = $url_cdn . 'css/' . $skin_folder .  $filename;

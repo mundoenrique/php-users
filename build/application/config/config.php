@@ -51,6 +51,18 @@ $config['clientSecret'] = CLIENT_SECRET;
 $config['cypher_base'] = CYPHER_BASE;
 $config['oauth_url'] = OAUTH_URL;
 
+$config['scores_recapcha'] = [
+	'development' => [
+			'score' => 0
+	],
+	'testing' => [
+			'score' => 0.3
+	],
+	'production' => [
+			'score' => 0.2
+	],
+];
+
 /*
 |--------------------------------------------------------------------------
 | Index File
