@@ -8,3 +8,4 @@ $lang['GENE_BLOCKING_REASONS_DETERIORATED'] = 'Tarjeta deteriorada';
 $lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada';
 $lang['GENE_BLOCKING_REASONS_FRAUD'] = 'Sospecha de fraude';
 $lang['GENE_BLOCKING_REASONS_CANCELLED'] = 'Tarjeta cancelada';
+

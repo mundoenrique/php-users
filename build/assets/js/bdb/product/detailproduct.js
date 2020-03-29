@@ -8,46 +8,54 @@ var verificationMsg;
 var timeLiveModal;
 
 moment.updateLocale('en', {
-  monthsShort : [
-    "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
-  ]
+	monthsShort: [
+		"Ene", "Feb", "Mar", "Abr", "May", "Jun",
+		"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+	]
 });
 
-$$.addEventListener('DOMContentLoaded', function(){
+$$.addEventListener('DOMContentLoaded', function () {
 	//vars
 	var transactions = $$.getElementById('transactions'),
-			movementsTitle = $$.getElementById('period'),
-			movementsList = $$.getElementById('movementsList'),
-			movementsStats = $('#movementsStats'),
-			transitTitle = $$.getElementById('transitTitle'),
-			transitList = $$.getElementById('transitList'),
-			transitStats = $('#transitStats'),
-			movementsToogle = $$.getElementById('movementsToogle'),
-			transitToogle = $$.getElementById('transitToogle'),
-			btnOptions = $$.querySelectorAll('.btn-options'),
-			stackItems = $$.querySelectorAll('.stack-item'),
-			btnExportPDF = $$.getElementById('downloadPDF'),
-			btnExportXLS = $$.getElementById('downloadXLS'),
-			btnExportExtract = $$.getElementById('downloadExtract'),
-			openCardDetails = $$.getElementById('open-card-details');
+		movementsTitle = $$.getElementById('period'),
+		movementsList = $$.getElementById('movementsList'),
+		movementsStats = $('#movementsStats'),
+		transitTitle = $$.getElementById('transitTitle'),
+		transitList = $$.getElementById('transitList'),
+		transitStats = $('#transitStats'),
+		movementsToogle = $$.getElementById('movementsToogle'),
+		transitToogle = $$.getElementById('transitToogle'),
+		btnOptions = $$.querySelectorAll('.btn-options'),
+		stackItems = $$.querySelectorAll('.stack-item'),
+		btnExportPDF = $$.getElementById('downloadPDF'),
+		btnExportXLS = $$.getElementById('downloadXLS'),
+		btnExportExtract = $$.getElementById('downloadExtract'),
+		openCardDetails = $$.getElementById('open-card-details');
 
-	var	i, movementsPaginate, transitPaginate;
+	var i, movementsPaginate, transitPaginate;
 
-	var loading = createElement('div', {id: "loading", class: "flex justify-center mt-5 py-4"});
+	var loading = createElement('div', {
+		id: "loading",
+		class: "flex justify-center mt-5 py-4"
+	});
 	loading.innerHTML = '<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>';
-	var noMovements = createElement('div', {class: "my-5 py-4 center"});
+	var noMovements = createElement('div', {
+		class: "my-5 py-4 center"
+	});
 	noMovements.innerHTML = '<span class="h4">No se encontraron movimientos</span>';
 
 	//core
+	if (data.numberProducts === 0) {
+		notiSystem('Detalle de tarjeta', data.textMessageNumberProducts, iconInfo, {});
+	}
 
-	arrDialogContent = [
-		{ id: 'notice',
+	arrDialogContent = [{
+			id: 'notice',
 			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
 		},
-		{ id: 'otpRequest',
-			body:
-			`<form id="formGetDetail" class="mr-2" method="post">
+		{
+			id: 'otpRequest',
+			body: `<form id="formGetDetail" class="mr-2" method="post">
 				<div id="verificationOTP">
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 					<div class="row">
@@ -61,9 +69,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 				</div>
 			</form>`
 		},
-		{ id: 'cardDetails',
-			body:
-			`<div class="row">
+		{
+			id: 'cardDetails',
+			body: `<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
 					<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="" readonly>
@@ -114,8 +122,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		invokeChart(transitStats, parseFloat(data.totalExpensePendingTransactions), parseFloat(data.totalIncomePendingTransactions));
 	}
 
-	transitToogle.addEventListener('click', function(){
-		if ( !this.classList.contains('is-disabled') && !this.classList.contains('active') ) {
+	transitToogle.addEventListener('click', function () {
+		if (!this.classList.contains('is-disabled') && !this.classList.contains('active')) {
 			for (i = 0; i < btnOptions.length; ++i) {
 				btnOptions[i].classList.toggle('active');
 			};
@@ -131,8 +139,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	movementsToogle.addEventListener('click', function(){
-		if ( !this.classList.contains('active') ) {
+	movementsToogle.addEventListener('click', function () {
+		if (!this.classList.contains('active')) {
 			for (i = 0; i < btnOptions.length; ++i) {
 				btnOptions[i].classList.toggle('active');
 			};
@@ -148,7 +156,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	$$.getElementById('buscar').addEventListener('click', function(){
+	$$.getElementById('buscar').addEventListener('click', function () {
 		var filterMonth = $$.getElementById('filterMonth');
 		var filterYear = $$.getElementById('filterYear');
 
@@ -173,45 +181,64 @@ $$.addEventListener('DOMContentLoaded', function(){
 		stackItems[1].classList.add('is-disabled');
 		transactions.appendChild(loading);
 
-		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function(response) {
+		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function (response) {
 			if (response !== '--') {
 
-				var totalExpense = 0, totalIncome = 0;
+				var totalExpense = 0,
+					totalIncome = 0;
 
 				response.forEach(function callback(currentValue, index, array) {
 					var date = moment(currentValue.fecha, "DD/MM/YYYY").format('DD/MMM/YYYY').split('/'),
-							day = date[0],
-							month = date[1],
-							year = date[2],
-							concept = currentValue.concepto,
-							reference = currentValue.referencia,
-							sign = currentValue.signo,
-							amount = currentValue.monto;
+						day = date[0],
+						month = date[1],
+						year = date[2],
+						concept = currentValue.concepto,
+						reference = currentValue.referencia,
+						sign = currentValue.signo,
+						amount = currentValue.monto;
 
 					var feedItem, feedDate, dateDay, dateMonth, dateYear, feedConcept, feedProduct, feedMeta, feedConcept, feedAmount;
 
-					feedItem = createElement('li', {class: 'feed-item ' + (sign === '+' ? "feed-income" : "feed-expense") + ' flex py-1 items-center'});
+					feedItem = createElement('li', {
+						class: 'feed-item ' + (sign === '+' ? "feed-income" : "feed-expense") + ' flex py-1 items-center'
+					});
 
-					feedDate = createElement('div', {class: 'flex px-2 flex-column items-center feed-date'});
-					dateDay = createElement('span', {class: 'h5 feed-date-day'});
+					feedDate = createElement('div', {
+						class: 'flex px-2 flex-column items-center feed-date'
+					});
+					dateDay = createElement('span', {
+						class: 'h5 feed-date-day'
+					});
 					dateDay.textContent = day;
-					dateMonth = createElement('span', {class: 'h5 feed-date-month'});
+					dateMonth = createElement('span', {
+						class: 'h5 feed-date-month'
+					});
 					dateMonth.textContent = month;
-					dateYear = createElement('span', {class: 'h5 feed-date-year'});
+					dateYear = createElement('span', {
+						class: 'h5 feed-date-year'
+					});
 					dateYear.textContent = year;
 					feedDate.appendChild(dateDay);
 					feedDate.appendChild(dateMonth);
 					feedDate.appendChild(dateYear);
 
-					feedConcept = createElement('div', {class: 'flex px-2 flex-column mr-auto'});
-					feedProduct = createElement('span', {class: 'h5 semibold feed-product'});
+					feedConcept = createElement('div', {
+						class: 'flex px-2 flex-column mr-auto'
+					});
+					feedProduct = createElement('span', {
+						class: 'h5 semibold feed-product'
+					});
 					feedProduct.textContent = concept;
-					feedMeta = createElement('span', {class: 'h6 feed-metadata'});
+					feedMeta = createElement('span', {
+						class: 'h6 feed-metadata'
+					});
 					feedMeta.textContent = reference;
 					feedConcept.appendChild(feedProduct);
 					feedConcept.appendChild(feedMeta);
 
-					feedAmount = createElement('span', {class: 'px-2 feed-amount items-center'});
+					feedAmount = createElement('span', {
+						class: 'px-2 feed-amount items-center'
+					});
 					if (sign === '-') {
 						totalExpense += parseFloat(amount.replace(/\./g, "").replace(",", "."));
 						sign = "- ";
@@ -247,19 +274,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	//functions
-	$$.getElementById('filterMonth').addEventListener('change', function() {
+	$$.getElementById('filterMonth').addEventListener('change', function () {
 
 		if (this.value == 0) {
 			stackItems[2].classList.add('is-disabled');
 			$$.getElementById('filterYear').disabled = true;
 			$$.getElementById('filterYear').selectedIndex = 0;
-		}else{
+		} else {
 			stackItems[2].classList.remove('is-disabled');
 			$$.getElementById('filterYear').options[0].disabled = true;
-			if (parseInt(this.value) > new Date().getMonth()+1) {
+			if (parseInt(this.value) > new Date().getMonth() + 1) {
 				$$.getElementById('filterYear').options[1].disabled = true;
 				$$.getElementById('filterYear').selectedIndex = 2;
-			}else{
+			} else {
 				$$.getElementById('filterYear').options[1].disabled = false;
 				$$.getElementById('filterYear').selectedIndex = 1;
 			}
@@ -268,47 +295,62 @@ $$.addEventListener('DOMContentLoaded', function(){
 		}
 	});
 
-	btnExportPDF.addEventListener('click', function(e){
+	btnExportPDF.addEventListener('click', function (e) {
 
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'pdf';
 		processForm();
 	});
 
-	btnExportXLS.addEventListener('click', function(e){
+	btnExportXLS.addEventListener('click', function (e) {
 
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'xls';
 		processForm();
 	});
 
-	btnExportExtract.addEventListener('click', function(e){
+	btnExportExtract.addEventListener('click', function (e) {
 
 		e.preventDefault();
 		$$.getElementsByName("frmTypeFile")[0].value = 'ext';
 		processForm();
 	});
 
-	if (openCardDetails != null ) {
-		openCardDetails.addEventListener('click', function(e){
+	if (openCardDetails != null) {
+		openCardDetails.addEventListener('click', function (e) {
 			var dialogCardTitle, dialogCardBody, dialogData, data, cardDetails, idContentDialog;
 			dialogCardTitle = 'Detalles de tarjeta';
-			dialogCardBody = createElement('div', { id: arrDialogContent[0].id, class: 'dialog-detail-card'});
+			dialogCardBody = createElement('div', {
+				id: arrDialogContent[0].id,
+				class: 'dialog-detail-card'
+			});
 			dialogCardBody.innerHTML = arrDialogContent[0].body;
 
 			dialogData = {
-				btn1: { link: false, action: 'wait', text: txtBtnAcceptNotiSystem },
-				btn2: { link: false, action: 'close', text: txtBtnCloseNotiSystem }
+				btn1: {
+					link: false,
+					action: 'wait',
+					text: txtBtnAcceptNotiSystem
+				},
+				btn2: {
+					link: false,
+					action: 'close',
+					text: txtBtnCloseNotiSystem
+				}
 			};
 
 			notiSystem(dialogCardTitle, dialogCardBody, iconInfo, dialogData);
-			$("#system-info").dialog( "option", "minWidth", 480 );
-			$("#system-info").dialog( "option", "position", { my: "center top+100", at: "center top", of:  window } );
+			$("#system-info").dialog("option", "minWidth", 480);
+			$("#system-info").dialog("option", "position", {
+				my: "center top+100",
+				at: "center top",
+				of: window
+			});
 
 			btnTrigger = $$.getElementById('accept');
 			txtBtnTrigger = btnTrigger.innerHTML.trim();
 
-			$$.getElementById("cancel").addEventListener('click',function(e){
+			$$.getElementById("cancel").addEventListener('click', function (e) {
 				e.preventDefault();
 				clearInterval(interval);
 				systemMSg.innerHTML = "";
@@ -320,12 +362,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 				$(this).off('click');
 			})
 
-			btnTrigger.addEventListener('click',function(e){
+			btnTrigger.addEventListener('click', function (e) {
 				e.preventDefault();
 
 				let divSectionView = systemMSg.querySelector("div");
 
-				if ( divSectionView != null ) {
+				if (divSectionView != null) {
 
 					switch (divSectionView.id) {
 						case 'notice':
@@ -337,13 +379,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 						case 'otpRequest':
 							var form = $('#formGetDetail');
 							var inpCodeOTP = $$.getElementById('codeOTP');
-							validateForms(form, {handleMsg: true});
+							validateForms(form, {
+								handleMsg: true
+							});
 
-							if(form.valid()) {
+							if (form.valid()) {
 								btnTrigger.innerHTML = msgLoadingWhite;
 								btnTrigger.disabled = true;
 								inpCodeOTP.disabled = true;
-								proccessPetition({'codeOTP':  CryptoJS.MD5(inpCodeOTP.value).toString()});
+								proccessPetition({
+									'codeOTP': CryptoJS.MD5(inpCodeOTP.value).toString()
+								});
 							}
 							break;
 
@@ -363,12 +409,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 	function processForm() {
 
 		var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
-		yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
-		objDate = new Date(),
-		fullYear = objDate.getFullYear();
+			yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
+			objDate = new Date(),
+			fullYear = objDate.getFullYear();
 
-		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0'? '': monthRequest;
-		$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear? '': yearRequest;
+		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
+		$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear ? '' : yearRequest;
 		if ($$.getElementsByName("frmTypeFile")[0].value === 'ext') {
 
 			$$.getElementsByName("frmYear")[0].value = yearRequest;
@@ -380,169 +426,169 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 
 
-function proccessPetition(data)
-{
-	callNovoCore('POST', 'Product', 'getDetail', data, function(response) {
-		btnTrigger.innerHTML = txtBtnTrigger;
-		btnTrigger.disabled = false;
-		switch (response.code) {
-			case 0:
-				clearInterval(interval);
+	function proccessPetition(data) {
+		callNovoCore('POST', 'Product', 'getDetail', data, function (response) {
+			btnTrigger.innerHTML = txtBtnTrigger;
+			btnTrigger.disabled = false;
+			switch (response.code) {
+				case 0:
+					clearInterval(interval);
 
-				systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
-				systemMSg.querySelector("div").id = arrDialogContent[2].id;
-				$$.getElementById("cancel").classList.add("none");
+					systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
+					systemMSg.querySelector("div").id = arrDialogContent[2].id;
+					$$.getElementById("cancel").classList.add("none");
 
-				$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
-				$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
-				$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
-				$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
+					$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
+					$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
+					$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
+					$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
 
-				timeLiveModal = $$.getElementById("timeLiveModal");
-				startTimer(response.timeLiveModal, timeLiveModal);
-				break;
+					timeLiveModal = $$.getElementById("timeLiveModal");
+					startTimer(response.timeLiveModal, timeLiveModal);
+					break;
 
-			case 1:
-				clearInterval(interval);
+				case 1:
+					clearInterval(interval);
 
-				systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
-				systemMSg.querySelector("div").id = arrDialogContent[1].id;
+					systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
+					systemMSg.querySelector("div").id = arrDialogContent[1].id;
 
-				verificationMsg = $$.getElementById("verificationMsg");
-				showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
-				interceptLinkResendCode();
-				break;
+					verificationMsg = $$.getElementById("verificationMsg");
+					showVerificationMsg(`${msgResendOTP} Tiempo restante:<span id="validityTime" class="ml-1 danger"></span>`, response.validityTime);
+					interceptLinkResendCode();
+					break;
 
-			case 2:
-				$$.getElementById('codeOTP').value = '';
-				$$.getElementById('codeOTP').disabled = false;
-				$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
-				break;
+				case 2:
+					$$.getElementById('codeOTP').value = '';
+					$$.getElementById('codeOTP').disabled = false;
+					$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
+					break;
 
-			case 3:
-				clearOTPSection();
-				showVerificationMsg(`${response.msg} ${msgResendOTP}`);
-				interceptLinkResendCode();
-				break;
+				case 3:
+					clearOTPSection();
+					showVerificationMsg(`${response.msg} ${msgResendOTP}`);
+					interceptLinkResendCode();
+					break;
 
-			default:
-				break;
-		}
-	});
-}
+				default:
+					break;
+			}
+		});
+	}
 
-function invokeChart(selector, cargos, abonos) {
-	selector.kendoChart({
-		chartArea: {
-			background:"transparent",
-			width: 300,
-			height: 250
-		},
-		legend: {
-			position: "top",
-			visible: false
-		},
-		seriesDefaults: {
-			labels: {
-				template: "#= category # - #= kendo.format('{0:P}', percentage)#",
-				position: "outsideEnd",
-				visible: false,
+	function invokeChart(selector, cargos, abonos) {
+		selector.kendoChart({
+			chartArea: {
 				background: "transparent",
-			}
-		},
-		seriesColors: ["#cc0000", "#007e33"],
-		series: [{
-			type: "donut",
-			overlay: {
-				gradient: "none"
+				width: 300,
+				height: 250
 			},
-			data: [{
-				category: "Cargos",
-				value: parseFloat(cargos.toFixed(1))
-			}, {
-				category: "Abonos",
-				value: parseFloat(abonos.toFixed(1))
-			}]
-		}],
-		tooltip: {
-			visible: true,
-			template: "#= category # - #= kendo.format('{0:P}', percentage) #",
-			padding: {
-				right: 4,
-				left: 4
+			legend: {
+				position: "top",
+				visible: false
 			},
-			color: "#ffffff"
-		}
-	});
-}
-
-function startTimer(duration, display) {
-	var timer = duration, minutes, seconds;
-	interval = setInterval(myTimer, 1000);
-
-	function myTimer() {
-		minutes = parseInt(timer / 60, 10)
-		seconds = parseInt(timer % 60, 10);
-
-		minutes = minutes < 10 ? "0" + minutes : minutes;
-		seconds = seconds < 10 ? "0" + seconds : seconds;
-
-		display.textContent = minutes + ":" + seconds;
-
-		if (--timer < 0) {
-			if (display.id == "validityTime") {
-				clearOTPSection();
-				showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
-				interceptLinkResendCode();
-			} else {
-				clearInterval(interval);
-				systemMSg.innerHTML = "";
-				btnTrigger.innerHTML = txtBtnTrigger;
-				btnTrigger.disabled = false;
-				$("#system-info").dialog('close');
-				$("#system-info").dialog("destroy");
-				$("#system-info").addClass("none");
+			seriesDefaults: {
+				labels: {
+					template: "#= category # - #= kendo.format('{0:P}', percentage)#",
+					position: "outsideEnd",
+					visible: false,
+					background: "transparent",
+				}
+			},
+			seriesColors: ["#cc0000", "#007e33"],
+			series: [{
+				type: "donut",
+				overlay: {
+					gradient: "none"
+				},
+				data: [{
+					category: "Cargos",
+					value: parseFloat(cargos.toFixed(1))
+				}, {
+					category: "Abonos",
+					value: parseFloat(abonos.toFixed(1))
+				}]
+			}],
+			tooltip: {
+				visible: true,
+				template: "#= category # - #= kendo.format('{0:P}', percentage) #",
+				padding: {
+					right: 4,
+					left: 4
+				},
+				color: "#ffffff"
 			}
-
-
-
-
-		}
-	}
-}
-
-function showVerificationMsg (message, validityTime = false) {
-
-	verificationMsg.innerHTML = message;
-	verificationMsg.classList.add("semibold", "danger");
-	verificationMsg.querySelector("a").setAttribute('id','resendCode');
-
-	if (validityTime) {
-		verificationMsg.classList.remove("semibold", "danger");
-		startTimer(validityTime, verificationMsg.querySelector("span"));
+		});
 	}
 
-}
+	function startTimer(duration, display) {
+		var timer = duration,
+			minutes, seconds;
+		interval = setInterval(myTimer, 1000);
 
-function interceptLinkResendCode () {
-	$$.getElementById('resendCode').addEventListener('click', function(e){
-		e.preventDefault();
-		clearOTPSection();
-		verificationMsg.innerHTML = msgLoading;
-		proccessPetition({});
-	});
-}
+		function myTimer() {
+			minutes = parseInt(timer / 60, 10)
+			seconds = parseInt(timer % 60, 10);
 
-function clearOTPSection () {
-	clearInterval(interval);
-	btnTrigger.disabled = true;
-	btnTrigger.innerHTML = txtBtnTrigger;
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
 
-	$$.getElementById('codeOTP').value = '';
-	$$.getElementById('codeOTP').disabled = true;
-	$$.getElementById("msgErrorCodeOTP").innerHTML = '';
+			display.textContent = minutes + ":" + seconds;
 
-	// verificationMsg.innerHTML = msgLoading;
-}
+			if (--timer < 0) {
+				if (display.id == "validityTime") {
+					clearOTPSection();
+					showVerificationMsg(`Tiempo expirado. ${msgResendOTP}`)
+					interceptLinkResendCode();
+				} else {
+					clearInterval(interval);
+					systemMSg.innerHTML = "";
+					btnTrigger.innerHTML = txtBtnTrigger;
+					btnTrigger.disabled = false;
+					$("#system-info").dialog('close');
+					$("#system-info").dialog("destroy");
+					$("#system-info").addClass("none");
+				}
+
+
+
+
+			}
+		}
+	}
+
+	function showVerificationMsg(message, validityTime = false) {
+
+		verificationMsg.innerHTML = message;
+		verificationMsg.classList.add("semibold", "danger");
+		verificationMsg.querySelector("a").setAttribute('id', 'resendCode');
+
+		if (validityTime) {
+			verificationMsg.classList.remove("semibold", "danger");
+			startTimer(validityTime, verificationMsg.querySelector("span"));
+		}
+
+	}
+
+	function interceptLinkResendCode() {
+		$$.getElementById('resendCode').addEventListener('click', function (e) {
+			e.preventDefault();
+			clearOTPSection();
+			verificationMsg.innerHTML = msgLoading;
+			proccessPetition({});
+		});
+	}
+
+	function clearOTPSection() {
+		clearInterval(interval);
+		btnTrigger.disabled = true;
+		btnTrigger.innerHTML = txtBtnTrigger;
+
+		$$.getElementById('codeOTP').value = '';
+		$$.getElementById('codeOTP').disabled = true;
+		$$.getElementById("msgErrorCodeOTP").innerHTML = '';
+
+		// verificationMsg.innerHTML = msgLoading;
+	}
 
 });

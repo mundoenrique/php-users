@@ -1,10 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-class ServiceProduct extends NOVO_Controller {
+defined('BASEPATH') or exit('No direct script access allowed');
+class ServiceProduct extends NOVO_Controller
+{
 
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		log_message('INFO', 'NOVO ServiceProduct Controller class Initialized');
 	}
 
@@ -13,7 +14,7 @@ class ServiceProduct extends NOVO_Controller {
 		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
 		$view = 'listproduct';
 
-		if(!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in')) {
 
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -27,29 +28,29 @@ class ServiceProduct extends NOVO_Controller {
 			redirect("/atencioncliente");
 		}
 
-		array_push (
+		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/serviceproduct/$view"
 		);
 
-		if(!is_null($this->config->item('timeIdleSession'))) {
-			array_push (
+		if (!is_null($this->config->item('timeIdleSession'))) {
+			array_push(
 				$this->includeAssets->jsFiles,
 				"$this->countryUri/watchsession"
 			);
 		}
 
-		if($this->config->item('language_form_validate')) {
-			array_push (
+		if ($this->config->item('language_form_validate')) {
+			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
 
-		$this->views = ['serviceproduct/'.$view];
+		$this->views = ['serviceproduct/' . $view];
 		$this->render->data = $dataProduct;
-		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
-		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
@@ -63,7 +64,7 @@ class ServiceProduct extends NOVO_Controller {
 		}
 
 		$dataRequeried = [];
-		foreach($data as $row) {
+		foreach ($data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
@@ -96,7 +97,7 @@ class ServiceProduct extends NOVO_Controller {
 		$dataProduct = [];
 		$optionsAvailables = [];
 
-		array_push (
+		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/serviceproduct/$view",
 			"third_party/jquery.validate",
@@ -114,7 +115,7 @@ class ServiceProduct extends NOVO_Controller {
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
@@ -143,43 +144,39 @@ class ServiceProduct extends NOVO_Controller {
 
 		foreach ($dataProduct['availableServices'] as $value) {
 
-			if (!array_key_exists($value, $menuOptionsProduct) ) {
+			if (!array_key_exists($value, $menuOptionsProduct)) {
 				continue;
 			}
 
 			$menuOptionsProduct[$value]['isVisible'] = TRUE;
 		}
 
-		if ( !empty($dataProduct['bloqueo']) ) {
+		if (!empty($dataProduct['bloqueo'])) {
 			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de tarjeta";
 		}
 
 		foreach ($menuOptionsProduct as $key => $value) {
 
-			if (empty($dataProduct['bloqueo'])) {
-				$available = array_search($key, $dataProduct['availableServices']) !== FALSE? '': 'is-disabled';
-			}
-			else	{
-				$available = 'is-disabled';
-				if ($key == 110) {
-					$available = '';
-				}
+			$available = 'is-disabled';
+
+			if (count($dataProduct['availableServices']) !== 0) {
+				$available = array_search($key, $dataProduct['availableServices']) !== FALSE ? '' : 'is-disabled';
 			}
 
 			if ($value['isVisible']) {
-				$option = "<li id='". $value['id'] . "' class='list-inline-item services-item center ". $available ."'>".$value['text']."</li>";
-
-				array_push($optionsAvailables,$option);
+				$option = "<li id='" . $value['id'] . "' class='list-inline-item services-item center " . $available . "'>" . $value['text'] . "</li>";
+				array_push($optionsAvailables, $option);
 			}
-	 }
+		}
 
-		$this->views = ['serviceproduct/'.$view];
+		$this->views = ['serviceproduct/' . $view];
 
 		$this->render->data = $dataProduct;
 		$this->render->menuOptionsProduct = $optionsAvailables;
+		$this->render->availableServices = count($dataProduct['availableServices']);
 
-		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+		$this->render->titlePage = lang('GEN_DETAIL_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 }

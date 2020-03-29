@@ -12,25 +12,25 @@
 				<div class="service-group flex max-width-4 flex-wrap items-center mb-2">
 					<div class="product-presentation relative mr-4">
 						<div class="item-network <?= $data['marca']; ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 					</div>
-					<div class="product-info mr-5">
+					<div class="product-info mr-2">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
-						<?php if ($data['bloqueo'] !== ''): ?>
-						<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></p>
+						<?php if ($data['bloqueo'] !== '') : ?>
+							<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
 						<?php endif; ?>
-						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
-						<p class="product-metadata h6"><?= $data['nombre_producto'];?></p>
-						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']);?></p>
+						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara']; ?></p>
+						<p class="product-metadata h6"><?= $data['nombre_producto']; ?></p>
+						<p class="product-metadata mb-0 h6"><?= strtoupper($data['nomEmp']); ?></p>
 
 					</div>
 					<div class="product-scheme">
-						<p class="field-tip">Selecciona la operación que deseas realizar</p>
+						<p class="field-tip"><?= $availableServices !== 0 ? lang('GEN_SERVICES_AVAILABLE') : lang('GEN_NOT_SERVICES_AVAILABLE'); ?></p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
 							<?php
-								foreach ($menuOptionsProduct as $row) {
-									echo $row;
-								}
+							foreach ($menuOptionsProduct as $row) {
+								echo $row;
+							}
 							?>
 						</ul>
 					</div>
@@ -125,21 +125,20 @@
 					<div id="lockView" class="services-both">
 						<div id="msgLock" class="msg-prevent">
 							<?php
-								if (in_array('111',$data['availableServices'])) {
+							if (in_array('111', $data['availableServices'])) {
 
-									$title = 'Bloquear tarjeta';
-									$textDescription = 'bloquear';
-								}
-								else{
+								$title = 'Bloquear tarjeta';
+								$textDescription = 'bloquear';
+							} else {
 
-									$title = 'Desbloquear tarjeta';
-									$textDescription = 'desbloquear';
-								}
+								$title = 'Desbloquear tarjeta';
+								$textDescription = 'desbloquear';
+							}
 							?>
-							<h2 class="h4 regular tertiary"><?= $title;?></h2>
+							<h2 class="h4 regular tertiary"><?= $title; ?></h2>
 						</div>
 						<div id="preventLock" class="msg-prevent">
-							<h3 class="h4 regular">Si realmente deseas <span id="action"><?= $textDescription;?> </span> tu tarjeta, presiona continuar</h3>
+							<h3 class="h4 regular">Si realmente deseas <span id="action"><?= $textDescription; ?> </span> tu tarjeta, presiona continuar</h3>
 						</div>
 
 						<form id="formLock" accept-charset="utf-8" method="post" class="profile-1">
@@ -167,7 +166,7 @@
 					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgReplacement" class="msg-prevent my-2">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
-							<span>Los campos con  <span class="danger">*</span> son requeridos.</span>
+							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formReplace" class="profile-1" accept-charset="utf-8" method="post">
 							<div class="row">
@@ -175,11 +174,11 @@
 									<label for="replaceMotSol">Motivo de la solicitud <span class="danger">*</span></label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>
-										<option value="41"><?= lang('GENE_BLOCKING_REASONS_CANCELLED');?></option>
-										<option value="46"><?= lang('GENE_BLOCKING_REASONS_LOST');?></option>
-										<option value="43"><?= lang('GENE_BLOCKING_REASONS_DETERIORATED');?></option>
-										<option value="59"><?= lang('GENE_BLOCKING_REASONS_STOLE');?></option>
-										<option value="17"><?= lang('GENE_BLOCKING_REASONS_FRAUD');?></option>										
+										<option value="41"><?= lang('GENE_BLOCKING_REASONS_CANCELLED'); ?></option>
+										<option value="46"><?= lang('GENE_BLOCKING_REASONS_LOST'); ?></option>
+										<option value="43"><?= lang('GENE_BLOCKING_REASONS_DETERIORATED'); ?></option>
+										<option value="59"><?= lang('GENE_BLOCKING_REASONS_STOLE'); ?></option>
+										<option value="17"><?= lang('GENE_BLOCKING_REASONS_FRAUD'); ?></option>
 									</select>
 									<div class="help-block"></div>
 								</div>
@@ -210,14 +209,11 @@
 	</div>
 </div>
 <?php
-	$dataForm = json_encode([
-		'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>". lang('RESP_RESEEND_OTP')."</a>",
-		'availableServices' => $data['availableServices']
-	]);
+$dataForm = json_encode([
+	'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>" . lang('RESP_RESEEND_OTP') . "</a>",
+	'availableServices' => $data['availableServices']
+]);
 ?>
 <script>
-	var dataCustomerProduct = <?= $dataForm;?>;
+	var dataCustomerProduct = <?= $dataForm; ?>;
 </script>
-
-
-

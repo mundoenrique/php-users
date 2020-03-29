@@ -692,7 +692,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg = lang('RESP_PIN_GENERATED');
+					$this->response->msg = lang('RESP_RC_0');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
 						'btn1' => [
