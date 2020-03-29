@@ -1,9 +1,8 @@
-
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
 
-<form method="post" action='<?= base_url('detalle/download');?>'>
+<form method="post" action='<?= base_url('detalle/download'); ?>'>
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 	<input type='hidden' name='frmMonth' value=''>
 	<input type='hidden' name='frmYear' value=''>
@@ -21,42 +20,42 @@
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
 							<div class="item-network <?= $data['marca']; ?>"></div>
-							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
-						<?php if ($data['vc']): ?>
-						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
-							<i aria-hidden="true" class="icon-view"></i>
-							&nbsp;Ver detalles
-						</button>
+						<?php if ($data['vc']) : ?>
+							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
+								<i aria-hidden="true" class="icon-view"></i>
+								&nbsp;Ver detalles
+							</button>
 						<?php endif; ?>
 					</div>
 					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
-						<?php if ($data['bloqueo'] !== ''): ?>
-						<a class="btn btn-link btn-small px-0 pt-0 danger" href="<?= base_url('atencioncliente');?>"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></a>
+						<?php if ($data['bloqueo'] !== '') : ?>
+							<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
 						<?php endif; ?>
-						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara'];?></p>
-						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto'];?></p>
+						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara']; ?></p>
+						<p class="product-metadata mb-2 h6"><?= $data['nombre_producto']; ?></p>
 						<ul class="product-balance-group flex justify-between mb-0 list-inline">
 							<li class="list-inline-item">Actual
 								<span id="actual" class="product-balance block primary">
-									<?= lang('GEN_COIN').' '; ?>
-									<?= $data['actualBalance'] !== '--'?
-										strval(number_format($data['actualBalance'],2,',','.')): '---';?>
+									<?= lang('GEN_COIN') . ' '; ?>
+									<?= $data['actualBalance'] !== '--' ?
+										strval(number_format($data['actualBalance'], 2, ',', '.')) : '---'; ?>
 								</span>
 							</li>
 							<li class="list-inline-item">En tránsito
 								<span id="bloqueado" class="product-balance block primary">
-								<?= lang('GEN_COIN').' '; ?>
-									<?= $data['ledgerBalance'] !== '--'?
-									strval(number_format($data['ledgerBalance'],2,',','.')): '---';?>
+									<?= lang('GEN_COIN') . ' '; ?>
+									<?= $data['ledgerBalance'] !== '--' ?
+										strval(number_format($data['ledgerBalance'], 2, ',', '.')) : '---'; ?>
 								</span>
 							</li>
 							<li class="list-inline-item">Disponible
 								<span id="disponible" class="product-balance block primary">
-									<?= lang('GEN_COIN').' '; ?>
-									<?= $data['availableBalance'] !== '--'?
-									strval(number_format($data['availableBalance'],2,',','.')): '---';?>
+									<?= lang('GEN_COIN') . ' '; ?>
+									<?= $data['availableBalance'] !== '--' ?
+										strval(number_format($data['availableBalance'], 2, ',', '.')) : '---'; ?>
 								</span>
 							</li>
 						</ul>
@@ -77,35 +76,35 @@
 				<h2 class="h4 regular tertiary">Mis movimientos</h2>
 				<nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
 					<div id="period-form" class="stack-form mr-auto flex items-center">
-							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
-							<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-								<option value="0">Más recientes</option>
-								<?php
-									foreach ($months as $nroMonths => $txtMonths){
-										$monthValue = str_pad($nroMonths+1, 2, '0', STR_PAD_LEFT);
-								?>
-									<option <?= @$monthSelected === $monthValue? 'selected': '';?> value="<?= $monthValue ;?>"><?= $txtMonths;?></option>
-								<?php
-									}
-								?>
-							</select>
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" <?= isset($yearSelected)?'':'disabled';?>>
-								<option value="<?= $years[0];?>">-</option>
-								<?php
-									foreach ($years as $year){
-								?>
-									<option <?= @$yearSelected == $year? 'selected': '';?> value="<?= $year;?>"><?= $year;?></option>
-								<?php
-									}
-								?>
-							</select>
-						<button id="buscar" class="btn btn-small btn-primary" ><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
+						<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
+						<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
+							<option value="0">Más recientes</option>
+							<?php
+							foreach ($months as $nroMonths => $txtMonths) {
+								$monthValue = str_pad($nroMonths + 1, 2, '0', STR_PAD_LEFT);
+							?>
+								<option <?= @$monthSelected === $monthValue ? 'selected' : ''; ?> value="<?= $monthValue; ?>"><?= $txtMonths; ?></option>
+							<?php
+							}
+							?>
+						</select>
+						<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" <?= isset($yearSelected) ? '' : 'disabled'; ?>>
+							<option value="<?= $years[0]; ?>">-</option>
+							<?php
+							foreach ($years as $year) {
+							?>
+								<option <?= @$yearSelected == $year ? 'selected' : ''; ?> value="<?= $year; ?>"><?= $year; ?></option>
+							<?php
+							}
+							?>
+						</select>
+						<button id="buscar" class="btn btn-small btn-primary"><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
 					</div>
 					<div class="field-options btn-group btn-group-toggle" data-toggle="buttons">
 						<label id="movementsToogle" class="btn-small btn-options btn-outline btn-rounded-left active">
 							<input id="optionMovements" type="radio" name="movimientos" checked> Movimientos
 						</label>
-						<label id="transitToogle" class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled" >
+						<label id="transitToogle" class="btn-small btn-options btn-outline btn-rounded-right nowrap is-disabled">
 							<input id="optionTransit" type="radio" name="movimientos" disabled> En tránsito
 						</label>
 					</div>
@@ -130,68 +129,67 @@
 						<div class="line mt-1"></div>
 						<ul id="movementsList" class="feed list-style-none fade-in mt-3 pl-0">
 							<?php
-								$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
-								$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
+							$totalIncomeMovements = $data['totalInMovements']["totalIncome"];
+							$totalExpenseMovements = $data['totalInMovements']["totalExpense"];
 
-								if ($data['movements'] !== '--'){
-									foreach($data['movements'] as $row){
-										$separedDate = explode('/',$row->fecha);
-										$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
-								?>
-									<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
+							if ($data['movements'] !== '--') {
+								foreach ($data['movements'] as $row) {
+									$separedDate = explode('/', $row->fecha);
+									$spanishMonth = substr($months[intval($separedDate[1]) - 1], 0, 3);
+							?>
+									<li class="feed-item <?= $row->signo == '+' ? 'feed-income' : 'feed-expense'; ?> flex py-1 items-center">
 										<div class="flex px-2 flex-column items-center feed-date">
-											<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
-											<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
-											<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
+											<span class="h5 feed-date-day"><?= $separedDate[0]; ?></span>
+											<span class="h6 feed-date-month"><?= $spanishMonth; ?></span>
+											<span class="h6 feed-date-year"><?= $separedDate[2]; ?></span>
 										</div>
 										<div class="flex px-2 flex-column mr-auto">
-											<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
-											<span class="h6 feed-metadata"><?= $row->referencia;?></span>
+											<span class="h5 semibold feed-product"><?= $row->concepto; ?></span>
+											<span class="h6 feed-metadata"><?= $row->referencia; ?></span>
 										</div>
 										<span class="px-2 feed-amount items-center">
-										<?= ($row->signo == '+'? '': $row->signo) .' '. lang('GEN_COIN') .' '. $row->monto; ?>
+											<?= ($row->signo == '+' ? '' : $row->signo) . ' ' . lang('GEN_COIN') . ' ' . $row->monto; ?>
 										</span>
 									</li>
 								<?php
-										}
-								}else{
-							?>
-									<div class="my-5 py-4 center">
-										<span class="h4">No se encontraron movimientos</span>
-									</div>
-							<?php
 								}
+							} else {
+								?>
+								<div class="my-5 py-4 center">
+									<span class="h4">No se encontraron movimientos</span>
+								</div>
+							<?php
+							}
 							?>
 						</ul>
-					<?php
-						if (array_key_exists('pendingTransactions', $data))
-						{
+						<?php
+						if (array_key_exists('pendingTransactions', $data)) {
 							$totalIncomePendingTransactions = $data['totalInPendingTransactions']["totalIncome"];
 							$totalExpensePendingTransactions = $data['totalInPendingTransactions']["totalExpense"];
-					?>
-						<ul id="transitList" class="feed list-style-none mt-3 pl-0">
-							<?php
-								foreach($data['pendingTransactions'] as $row){
-									$separedDate = explode('/',$row->fecha);
-									$spanishMonth = substr($months[intval($separedDate[1])-1],0,3);
-							?>
-								<li class="feed-item <?= $row->signo == '+'? 'feed-income': 'feed-expense';?> flex py-1 items-center">
-									<div class="flex px-2 flex-column items-center feed-date">
-										<span class="h5 feed-date-day"><?= $separedDate[0];?></span>
-										<span class="h6 feed-date-month"><?= $spanishMonth;?></span>
-										<span class="h6 feed-date-year"><?= $separedDate[2];?></span>
-									</div>
-									<div class="flex px-2 flex-column mr-auto">
-										<span class="h5 semibold feed-product"><?= $row->concepto;?></span>
-										<span class="h6 feed-metadata"><?= $row->referencia;?></span>
-									</div>
-									<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN').' '.($row->signo == '+'? '': $row->signo). $row->monto;?></span>
-								</li>
-							<?php }?>
-						</ul>
-					<?php
+						?>
+							<ul id="transitList" class="feed list-style-none mt-3 pl-0">
+								<?php
+								foreach ($data['pendingTransactions'] as $row) {
+									$separedDate = explode('/', $row->fecha);
+									$spanishMonth = substr($months[intval($separedDate[1]) - 1], 0, 3);
+								?>
+									<li class="feed-item <?= $row->signo == '+' ? 'feed-income' : 'feed-expense'; ?> flex py-1 items-center">
+										<div class="flex px-2 flex-column items-center feed-date">
+											<span class="h5 feed-date-day"><?= $separedDate[0]; ?></span>
+											<span class="h6 feed-date-month"><?= $spanishMonth; ?></span>
+											<span class="h6 feed-date-year"><?= $separedDate[2]; ?></span>
+										</div>
+										<div class="flex px-2 flex-column mr-auto">
+											<span class="h5 semibold feed-product"><?= $row->concepto; ?></span>
+											<span class="h6 feed-metadata"><?= $row->referencia; ?></span>
+										</div>
+										<span class="px-2 feed-amount items-center"><?= lang('GEN_COIN') . ' ' . ($row->signo == '+' ? '' : $row->signo) . $row->monto; ?></span>
+									</li>
+								<?php } ?>
+							</ul>
+						<?php
 						}
-					?>
+						?>
 
 					</div>
 
@@ -208,14 +206,16 @@
 	</div>
 </div>
 <?php
-	$dataForm = new stdClass();
-	$dataForm->noTarjeta = $data['noTarjeta'];
-	$dataForm->totalIncomeMovements = $totalIncomeMovements;
-	$dataForm->totalExpenseMovements = $totalExpenseMovements;
-	$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions)? $totalIncomePendingTransactions: 0;
-	$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions)? $totalExpensePendingTransactions: 0;
-	$dataForm->currency = lang('GEN_COIN');
+$dataForm = new stdClass();
+$dataForm->noTarjeta = $data['noTarjeta'];
+$dataForm->totalIncomeMovements = $totalIncomeMovements;
+$dataForm->totalExpenseMovements = $totalExpenseMovements;
+$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0;
+$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0;
+$dataForm->currency = lang('GEN_COIN');
+$dataForm->numberProducts = count($data['availableServices']);
+$dataForm->textMessageNumberProducts = lang('GEN_NOT_SERVICES_AVAILABLE');
 ?>
 <script>
-	var data = <?= json_encode((array)$dataForm);?>
+	var data = <?= json_encode((array) $dataForm); ?>
 </script>
