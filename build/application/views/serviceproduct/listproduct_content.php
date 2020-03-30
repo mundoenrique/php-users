@@ -17,8 +17,18 @@
 					</form>
 					<?php if (count($data) > 0 and $data !== '--') : ?>
 						<?php foreach ($data as $row) : ?>
-							<?php $state = (in_array("120", $row['availableServices']) || count($row['availableServices']) === 0) ? ' inactive' : ''; ?>
-							<?php $title = count($row['availableServices']) === 0 ? lang('GEN_NOT_SERVICES_AVAILABLE') : ''; ?>
+							<?php
+								if (count($row['availableServices']) === 0) {
+									$title = lang('GEN_NOT_SERVICES_AVAILABLE');
+									$state = 'inactive cursor-default';
+								} elseif (in_array("120", $row['availableServices'])) {
+									$title = '';
+									$state = 'inactive';
+								} else {
+									$title = '';
+									$state = '';
+								}
+							?>
 							<div class="dashboard-item big-modal p-1 mx-1 mb-1 <?= $state; ?>" id="<?= $row['noTarjeta']; ?>" title="<?= $title; ?>">
 								<img class=" item-img" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 								<div class="item-info <?= $row['marca']; ?> p-2 h5 tertiary bg-white">
