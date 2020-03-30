@@ -127,11 +127,11 @@
 							<?php
 							if (in_array('111', $data['availableServices'])) {
 
-								$title = 'Bloquear tarjeta';
+								$title = 'Bloqueo de tarjeta';
 								$textDescription = 'bloquear';
 							} else {
 
-								$title = 'Desbloquear tarjeta';
+								$title = 'Desbloqueo de tarjeta';
 								$textDescription = 'desbloquear';
 							}
 							?>
@@ -164,7 +164,7 @@
 
 					<!-- Solicitud de reposición de tarjeta -->
 					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgReplacement" class="msg-prevent my-2">
+						<div id="msgReplace" class="msg-prevent my-2">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
