@@ -119,19 +119,23 @@ $(function(){
 					permisos.sort();
 					for(var permiso in permisos){
 						var parametros = $.extend({}, operaciones[permisos[permiso]])
-						//si esta bloqueada se cambia label
-						if(permisos[permiso] == 110 && bloqueo == 'PB'){
-							parametros.icon = 'unlock';
-							parametros.msn = 'Desbloqueo<br> de cuenta';
-							bloqAction = 'Desbloquear ';
-							// Si la cuenta esta bloqueada, no se visualiza la operación de reposición
-							permisos.splice(permisos.indexOf('112'), 1);
-						}
-						else if(bloqueo != 'N' && bloqueo != 'PB')
-						{
-							bloqHtml = false;
-						}
-						options += '<li id="'+ parametros.id +'" class="service-item-unselect"><span class="icon-' + parametros.icon +' services-item"></span>'+ parametros.msn +'</li>';
+						// valido que objeto no este vacio
+						if(!$.isEmptyObject(parametros)){
+								//si esta bloqueada se cambia label
+								if(permisos[permiso] == 110 && bloqueo == 'PB'){
+									parametros.icon = 'unlock';
+									parametros.msn = 'Desbloqueo<br> de cuenta';
+									bloqAction = 'Desbloquear ';
+									// Si la cuenta esta bloqueada, no se visualiza la operación de reposición
+									permisos.splice(permisos.indexOf('112'), 1);
+								}
+								else if(bloqueo != 'N' && bloqueo != 'PB')
+								{
+									bloqHtml = false;
+								}
+								options += '<li id="'+ parametros.id +'" class="service-item-unselect"><span class="icon-' + parametros.icon +' services-item"></span>'+ parametros.msn +'</li>';
+						};
+
 					}
 					options+= '</ul>';
 					//fin de asignacion de permisos
