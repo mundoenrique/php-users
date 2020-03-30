@@ -9,7 +9,7 @@
                 <div>
                     <fieldset>
                         <div class='group' id='donor'>
-                            <?php if($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe' || $pais == 'Ec-bp'): ?>
+                            <?php if($pais == 'Co' || $pais == 'Ve' || $pais == 'Pe' || $pais == 'Ec-bp' || $pais == 'Usd'): ?>
                                 <div class='product-presentation'>
                                     <a class='dialog button product-button'><span aria-hidden='true' class='icon-find'></span></a>
                                     <input id='donor-cardnumber' name='donor-cardnumber' type='hidden' value='' />
