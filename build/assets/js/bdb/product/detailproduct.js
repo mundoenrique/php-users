@@ -45,10 +45,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 	noMovements.innerHTML = '<span class="h4">No se encontraron movimientos</span>';
 
 	//core
-	if (data.numberProducts === 0) {
-		notiSystem('Detalle de tarjeta', data.textMessageNumberProducts, iconInfo, {});
-	}
-
 	arrDialogContent = [{
 			id: 'notice',
 			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'

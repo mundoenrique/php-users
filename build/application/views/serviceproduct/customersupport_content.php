@@ -9,12 +9,12 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="service-group flex max-width-4 flex-wrap items-center mb-2">
+				<div class="service-group flex max-width-5 flex-wrap items-center mb-2">
 					<div class="product-presentation relative mr-4">
 						<div class="item-network <?= $data['marca']; ?>"></div>
 						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 					</div>
-					<div class="product-info mr-2">
+					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
 						<?php if ($data['bloqueo'] !== '') : ?>
 							<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
@@ -211,7 +211,9 @@
 <?php
 $dataForm = json_encode([
 	'msgResendOTP' => "<a name='resendCode' class='primary regular' href='#'>" . lang('RESP_RESEEND_OTP') . "</a>",
-	'availableServices' => $data['availableServices']
+	'availableServices' => $data['availableServices'],
+	'numberServiceProduct' => count($data['availableServices']),
+	'messageReposition' => lang('GEN_NOT_SERVICES_AVAILABLE')
 ]);
 ?>
 <script>

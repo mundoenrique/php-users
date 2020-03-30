@@ -213,8 +213,6 @@ $dataForm->totalExpenseMovements = $totalExpenseMovements;
 $dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0;
 $dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0;
 $dataForm->currency = lang('GEN_COIN');
-$dataForm->numberProducts = count($data['availableServices']);
-$dataForm->textMessageNumberProducts = lang('GEN_NOT_SERVICES_AVAILABLE');
 ?>
 <script>
 	var data = <?= json_encode((array) $dataForm); ?>
