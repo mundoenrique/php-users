@@ -12,9 +12,9 @@ class Service extends CI_Controller {
         // VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
         np_hoplite_countryCheck($this->session->userdata('pais'));
 				$pais = $this->session->userdata('pais');
-				if($pais == 'Usd') {
+				/* if($pais == 'Usd') {
 					redirect($this->config->item('base_url') . '/dashboard');
-				}
+				} */
         // CARGO EL ARCHIVO DE LENGUAJE
         $this->lang->load('format');
         //$this->load->model('transfer_model', 'service');
