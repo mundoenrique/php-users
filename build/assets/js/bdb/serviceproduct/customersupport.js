@@ -2,15 +2,25 @@
 var $$ = document;
 var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval;
 
-$$.addEventListener('DOMContentLoaded', function(){
+$$.addEventListener('DOMContentLoaded', function () {
 
 	//vars
-  var options = $$.querySelectorAll(".services-item");
+	var options = $$.querySelectorAll(".services-item");
 	var i;
 
 	//core
+	if (dataCustomerProduct.numberServiceProduct === 0) {
+		notiSystem('Atención al cliente', dataCustomerProduct.messageReposition, iconInfo, {
+			btn1: {
+				link: 'vistaconsolidada',
+				action: 'redirect',
+				text: txtBtnAcceptNotiSystem
+			}
+		});
+	}
+
 	for (i = 0; i < options.length; i++) {
-		options[i].addEventListener('click',function(e) {
+		options[i].addEventListener('click', function (e) {
 			if (!this.classList.contains("is-disabled") && !this.classList.contains("active")) {
 				var j, idNameCapitalize;
 				resetForms(form);
@@ -29,17 +39,19 @@ $$.addEventListener('DOMContentLoaded', function(){
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
 				disableInputsForm(idName, false, txtBtnTrigger);
 
-				btnTrigger.addEventListener('click',function(e){
+				btnTrigger.addEventListener('click', function (e) {
 					e.preventDefault();
 
 					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
 
-					validateForms(form, {handleMsg: true});
-					if(form.valid()) {
+					validateForms(form, {
+						handleMsg: true
+					});
+					if (form.valid()) {
 						disableInputsForm(idName, true, msgLoadingWhite);
 						proccessPetition(coreOperation, idName);
 					} else {
-						disableInputsForm (idName, false, txtBtnTrigger);
+						disableInputsForm(idName, false, txtBtnTrigger);
 					}
 				});
 			}
@@ -48,22 +60,21 @@ $$.addEventListener('DOMContentLoaded', function(){
 })
 
 //functions
-function operationFactory(optionMenu, response = null)
-{
+function operationFactory(optionMenu, response = null) {
 	var responseForm = {
-		0: function (response){
-			notiSystem (response.title, response.msg, response.classIconName, response.data);
+		0: function (response) {
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			btnTrigger.innerHTML = txtBtnTrigger;
 		},
-		1: function(response){
+		1: function (response) {
 			btnTrigger.disabled = false;
 			btnTrigger.innerHTML = txtBtnTrigger;
 			$$.getElementById(`${idName}TxtMsgErrorCodeOTP`).innerText = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = false;
 			verificationMsg = $$.getElementById(`${idName}VerificationMsg`);
 			verificationMsg.innerHTML = `${dataCustomerProduct.msgResendOTP} Tiempo restante:<span class="ml-1 danger"></span>`;
-			verificationMsg.querySelector("a").setAttribute('id',`${idName}ResendCode`);
-			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
+			verificationMsg.querySelector("a").setAttribute('id', `${idName}ResendCode`);
+			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function (e) {
 				e.preventDefault();
 				resendCodeOTP(coreOperation);
 			});
@@ -72,34 +83,34 @@ function operationFactory(optionMenu, response = null)
 			startTimer(response.validityTime, countdown);
 			$$.getElementById(`${idName}VerificationOTP`).classList.remove("none");
 		},
-		2: function(response){
+		2: function (response) {
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
-			notiSystem (response.title, response.msg, response.classIconName, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			// disableInputsForm (idName, false, txtBtnTrigger);
 		},
-		3: function(response){
+		3: function (response) {
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = true;
-			$$.getElementById(`${idName}VerificationMsg`).innerHTML =  response.msg+' '+dataCustomerProduct.msgResendOTP;
+			$$.getElementById(`${idName}VerificationMsg`).innerHTML = response.msg + ' ' + dataCustomerProduct.msgResendOTP;
 			$$.getElementById(`${idName}VerificationMsg`).classList.add("semibold", "danger");
 			$$.getElementById(`${idName}VerificationMsg`).classList.remove('none');
-			btnTrigger.innerHTML =txtBtnTrigger;
+			btnTrigger.innerHTML = txtBtnTrigger;
 
-			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id',`${idName}ResendCode`);
-			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
+			$$.getElementById(`${idName}VerificationMsg`).querySelector("a").setAttribute('id', `${idName}ResendCode`);
+			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function (e) {
 				e.preventDefault();
 				resendCodeOTP(coreOperation);
 			});
 		},
-		5: function(response){
+		5: function (response) {
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
-			notiSystem (response.title, response.msg, response.classIconName, response.data);
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		},
-		99: function(response){
-			notiSystem (response.title, response.msg, response.classIconName, response.data);
+		99: function (response) {
+			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 		}
@@ -112,7 +123,10 @@ function operationFactory(optionMenu, response = null)
 			confirmPin: $$.getElementById('generateConfirmPin').value,
 			codeOTP: $$.getElementById('generateCodeOTP').value
 		}
-		return {data: dataForm, response: responseForm};
+		return {
+			data: dataForm,
+			response: responseForm
+		};
 	}
 
 	function fnChange() {
@@ -123,28 +137,38 @@ function operationFactory(optionMenu, response = null)
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
 		};
-		return {data: dataForm, response: responseForm};
+		return {
+			data: dataForm,
+			response: responseForm
+		};
 	}
+
 	function fnLock() {
 		var dataForm = {
 			codeOTP: $$.getElementById('lockCodeOTP').value,
 			unlock: !dataCustomerProduct.availableServices.includes("111"),
 		};
-		return {data: dataForm, response: responseForm};
+		return {
+			data: dataForm,
+			response: responseForm
+		};
 	}
+
 	function fnReplace() {
 		var dataForm = {
 			reasonRequest: $$.getElementById('replaceMotSol').value,
 			codeOTP: $$.getElementById('replaceCodeOTP').value,
 		};
-		return {data: dataForm, response: responseForm};
+		return {
+			data: dataForm,
+			response: responseForm
+		};
 	}
 
 	return eval(`${optionMenu}`)(response);
 }
 
-function disableInputsForm(optionMenu, status, txtButton)
-{
+function disableInputsForm(optionMenu, status, txtButton) {
 	var elementsForm;
 	switch (optionMenu) {
 		case 'generate':
@@ -152,8 +176,8 @@ function disableInputsForm(optionMenu, status, txtButton)
 			break;
 
 		case 'change':
-			elementsForm = ['changeCurrentPin','changeNewPin', 'changeConfirmPin'];
-				break;
+			elementsForm = ['changeCurrentPin', 'changeNewPin', 'changeConfirmPin'];
+			break;
 
 		case 'lock':
 			elementsForm = [];
@@ -170,8 +194,7 @@ function disableInputsForm(optionMenu, status, txtButton)
 	btnTrigger.disabled = status;
 }
 
-function resendCodeOTP (coreOperation)
-{
+function resendCodeOTP(coreOperation) {
 	clearInterval(interval);
 	btnTrigger.disabled = true;
 	coreOperation.data.codeOTP = '';
@@ -179,23 +202,22 @@ function resendCodeOTP (coreOperation)
 	proccessPetition(coreOperation, idName);
 }
 
-function proccessPetition(coreOperation, idName)
-{
-	callNovoCore('POST', 'ServiceProduct', idName, coreOperation.data, function(response) {
+function proccessPetition(coreOperation, idName) {
+	callNovoCore('POST', 'ServiceProduct', idName, coreOperation.data, function (response) {
 
 		const responseCode = coreOperation.response.hasOwnProperty(response.code) ? response.code : 99
 		coreOperation.response[responseCode](response);
 	});
 }
 
-function resetForms(formData){
-	if(formData) {
+function resetForms(formData) {
+	if (formData) {
 		if (validator) {
-			formData.find(".has-error").each(function(){
-				validator.successList.push(this);//mark as error free
+			formData.find(".has-error").each(function () {
+				validator.successList.push(this); //mark as error free
 			});
-			validator.showErrors();//remove error messages if present
-			validator.resetForm();//remove error class on name elements and clear history
+			validator.showErrors(); //remove error messages if present
+			validator.resetForm(); //remove error class on name elements and clear history
 		}
 		clearInterval(interval);
 		$$.getElementById(`${idName}VerificationMsg`).innerHTML = '';
@@ -205,8 +227,9 @@ function resetForms(formData){
 	}
 }
 
-function startTimer(duration, display)	{
-	var timer = duration, minutes, seconds;
+function startTimer(duration, display) {
+	var timer = duration,
+		minutes, seconds;
 	interval = setInterval(myTimer, 1000);
 
 	function myTimer() {
@@ -223,13 +246,13 @@ function startTimer(duration, display)	{
 
 			$$.getElementById(`${idName}CodeOTP`).value = '';
 			$$.getElementById(`${idName}CodeOTP`).disabled = true;
-			verificationMsg.innerHTML =  `Tiempo expirado. ${dataCustomerProduct.msgResendOTP}`;
+			verificationMsg.innerHTML = `Tiempo expirado. ${dataCustomerProduct.msgResendOTP}`;
 			verificationMsg.classList.add("semibold", "danger");
 			btnTrigger.disabled = true;
 
-			verificationMsg.querySelector("a").setAttribute('id',`${idName}ResendCode`);
+			verificationMsg.querySelector("a").setAttribute('id', `${idName}ResendCode`);
 			$$.getElementById(`${idName}ResendCode`).classList.add("regular");
-			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function(e){
+			$$.getElementById(`${idName}ResendCode`).addEventListener('click', function (e) {
 				e.preventDefault();
 				resendCodeOTP(coreOperation);
 			});
