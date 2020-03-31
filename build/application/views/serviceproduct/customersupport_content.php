@@ -9,10 +9,15 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="service-group flex max-width-4 flex-wrap items-center mb-2">
-					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= $data['marca']; ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+				<div class="service-group flex max-width-5 flex-wrap items-start justify-between mb-2">
+					<div class="product-presentation flex flex-column items-end mr-4">
+						<div class="relative">
+							<div class="item-network <?= $data['marca']; ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+						</div>
+						<a id="open-card-details" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('listaproducto') ?>" >
+							<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+						</a>
 					</div>
 					<div class="product-info mr-2">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
