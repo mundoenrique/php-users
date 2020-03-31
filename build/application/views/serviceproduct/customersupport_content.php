@@ -9,10 +9,21 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<div class="service-group flex max-width-5 flex-wrap items-center mb-2">
-					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= $data['marca']; ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+				<div class="service-group flex max-width-5 flex-wrap items-start justify-between mb-2">
+					<div class="product-presentation flex flex-column items-end mr-4">
+						<div class="relative">
+							<div class="item-network <?= $data['marca']; ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+						</div>
+						<?php
+						if ($totalProducts > 1) {
+						?>
+							<a id="open-card-details" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('listaproducto') ?>">
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+							</a>
+						<?php
+						}
+						?>
 					</div>
 					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
@@ -127,11 +138,11 @@
 							<?php
 							if (in_array('111', $data['availableServices'])) {
 
-								$title = 'Bloquear tarjeta';
+								$title = 'Bloqueo de tarjeta';
 								$textDescription = 'bloquear';
 							} else {
 
-								$title = 'Desbloquear tarjeta';
+								$title = 'Desbloqueo de tarjeta';
 								$textDescription = 'desbloquear';
 							}
 							?>
@@ -164,7 +175,7 @@
 
 					<!-- Solicitud de reposición de tarjeta -->
 					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgReplacement" class="msg-prevent my-2">
+						<div id="msgReplace" class="msg-prevent my-2">
 							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>

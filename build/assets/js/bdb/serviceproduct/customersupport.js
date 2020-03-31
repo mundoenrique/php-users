@@ -22,15 +22,16 @@ $$.addEventListener('DOMContentLoaded', function () {
 	for (i = 0; i < options.length; i++) {
 		options[i].addEventListener('click', function (e) {
 			if (!this.classList.contains("is-disabled") && !this.classList.contains("active")) {
-				var j, idNameCapitalize;
-				resetForms(form);
-				idName = this.id;
-				idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
-				form = $(`#form${idNameCapitalize}`);
+				var optionSelected = this;
 
-				for (j = 0; j < options.length; j++) {
-					options[j].classList.remove("active");
-					$$.getElementById(`${options[j].id}View`).classList.remove("fade-in");
+				if (idName) {
+					showConfirmation(optionSelected.id);
+					$$.getElementById("accept").addEventListener('click', function (e) {
+						e.preventDefault();
+						showView(optionSelected, options);
+					});
+				} else {
+					showView(optionSelected, options);
 				}
 				this.classList.add("active");
 				$$.getElementById(`${idName}View`).classList.add("fade-in");
@@ -258,4 +259,52 @@ function startTimer(duration, display) {
 			});
 		}
 	}
+}
+
+function showConfirmation(id) {
+	var title = $$.getElementById('msg'+id.charAt(0).toUpperCase() + id.slice(1)).querySelector("h2").innerHTML;
+	var dataConfirm = {
+		"title":title,
+		"msg":"¿Realmente deseas realizar esta acción?",
+		"icon":"ui-icon-alert",
+		"data":{
+			"btn1":{"text":"Si","link":false,"action":"close"},
+			"btn2":{"text":"No","link":false,"action":"close"}
+		}
+	}
+
+	notiSystem (dataConfirm.title, dataConfirm.msg, dataConfirm.icon, dataConfirm.data);
+}
+
+function showView(option, options) {
+	var j, idNameCapitalize;
+	resetForms(form);
+	idName = option.id;
+	idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
+	form = $(`#form${idNameCapitalize}`);
+
+	for (j = 0; j < options.length; j++) {
+		options[j].classList.remove("active");
+		$$.getElementById(`${options[j].id}View`).classList.remove("fade-in");
+	}
+	option.classList.add("active");
+	$$.getElementById(`${idName}View`).classList.add("fade-in");
+
+	btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
+	txtBtnTrigger = btnTrigger.innerHTML.trim();
+	disableInputsForm(idName, false, txtBtnTrigger);
+
+	btnTrigger.addEventListener('click',function(e){
+		e.preventDefault();
+
+		coreOperation = new operationFactory(`fn${idNameCapitalize}`);
+
+		validateForms(form, {handleMsg: true});
+		if(form.valid()) {
+			disableInputsForm(idName, true, msgLoadingWhite);
+			proccessPetition(coreOperation, idName);
+		} else {
+			disableInputsForm (idName, false, txtBtnTrigger);
+		}
+	});
 }
