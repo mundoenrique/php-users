@@ -15,9 +15,15 @@
 							<div class="item-network <?= $data['marca']; ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
-						<a id="open-card-details" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('listaproducto') ?>" >
-							<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
-						</a>
+						<?php
+						if ($totalProducts > 1) {
+						?>
+							<a id="open-card-details" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('listaproducto') ?>">
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+							</a>
+						<?php
+						}
+						?>
 					</div>
 					<div class="product-info mr-2">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>

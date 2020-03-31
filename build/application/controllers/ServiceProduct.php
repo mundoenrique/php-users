@@ -63,6 +63,8 @@ class ServiceProduct extends NOVO_Controller
 			return '--';
 		}
 
+		$this->session->set_userdata("totalProducts", count($data));
+
 		$dataRequeried = [];
 		foreach ($data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
@@ -172,6 +174,7 @@ class ServiceProduct extends NOVO_Controller
 		$this->views = ['serviceproduct/' . $view];
 
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata('totalProducts');
 		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->availableServices = count($dataProduct['availableServices']);
 
