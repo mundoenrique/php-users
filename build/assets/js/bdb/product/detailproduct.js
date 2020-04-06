@@ -355,7 +355,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 							btnTrigger.disabled = true;
 							proccessPetition({
 								noTarjeta: window.data.noTarjeta,
-								id_ext_per: window.data.id_ext_per 
+								id_ext_per: window.data.id_ext_per
 							});
 							break;
 
@@ -379,6 +379,12 @@ $$.addEventListener('DOMContentLoaded', function () {
 						case 'cardDetails':
 							clearInterval(interval);
 							systemMSg.innerHTML = "";
+							$("#system-info").dialog('close');
+							$("#system-info").dialog("destroy");
+							$("#system-info").addClass("none");
+							break;
+
+						case 'notisystem':
 							$("#system-info").dialog('close');
 							$("#system-info").dialog("destroy");
 							$("#system-info").addClass("none");
@@ -440,8 +446,9 @@ $$.addEventListener('DOMContentLoaded', function () {
 					break;
 
 				case 2:
-					$('#system-info').dialog('close');
-					notiSystem(response.title, response.msg, response.classIconName, response.data);
+					systemMSg.querySelector("div").innerHTML = response.msg;
+					systemMSg.querySelector("div").id = 'notisystem';
+					$$.getElementById("cancel").classList.add("none");
 					break;
 
 				case 3:
