@@ -128,3 +128,7 @@ $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';
 $lang['ALT_LOADER'] = 'Verificando...';
 $lang['CALLMODELS_INDEX_MSG'] = 'Combinación de caracteres no válida, por favor verifique e intente de nuevo';
+//LIST REASON BLOCK
+$lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada';
+$lang['GENE_BLOCKING_REASONS_FRAUD'] = 'Sospecha de fraude';
+$lang['GENE_BLOCKING_REASONS_CANCELLED'] = 'Tarjeta cancelada';
