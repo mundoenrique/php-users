@@ -1,3 +1,5 @@
+
+
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -20,7 +22,7 @@
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
 							<div class="item-network <?= $data['marca']; ?>"></div>
-							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+			<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php if ($data['vc']) : ?>
 							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
@@ -206,14 +208,17 @@
 	</div>
 </div>
 <?php
-$dataForm = new stdClass();
-$dataForm->noTarjeta = $data['noTarjeta'];
-$dataForm->totalIncomeMovements = $totalIncomeMovements;
-$dataForm->totalExpenseMovements = $totalExpenseMovements;
-$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0;
-$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0;
-$dataForm->currency = lang('GEN_COIN');
+$dataForm = json_encode([
+	"noTarjeta" => $data['noTarjeta'],
+	"id_ext_per" => $data['id_ext_per'],
+	"totalIncomeMovements" => $totalIncomeMovements,
+	"totalExpenseMovements" => $totalExpenseMovements,
+	"totalIncomePendingTransactions" => isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0,
+	"totalExpensePendingTransactions" => isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0,
+	"currency" => lang('GEN_COIN')
+])
 ?>
 <script>
-	var data = <?= json_encode((array) $dataForm); ?>
+	var data = <?= $dataForm;?>
 </script>
+

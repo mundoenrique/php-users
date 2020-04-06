@@ -276,24 +276,42 @@ class Novo_Product_Model extends NOVO_Model
 	public function callWs_getDetail_Product ($dataRequest) {
 		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.CuentaTO';
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 
-		$this->dataAccessLog->modulo = 'validar cuenta';
-		$this->dataAccessLog->function = 'validar cuenta';
-		$this->dataAccessLog->operation = 'validar cuenta';
+		$this->dataAccessLog->modulo = 'personasweb';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->operation = 'consulta';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-/*  $this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
-		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->codigoOtp = $dataRequest->codeOTP; */
+		$bean = new stdClass();
+		$bean->id_ext_per = $dataRequest->id_ext_per;
+		$bean->noTarjeta = $dataRequest->noTarjeta;
+		// $bean->id_ext_per = '4875971301198715';
+		// $bean->noTarjeta = '1101035010';
+		// $bean->pais = 'Co';
+		
+		$this->dataRequest->idOperation = '214';
+		$this->dataRequest->bean = json_encode($bean);
+		//$this->dataRequest->pais = 'Co';
 
-		//$response = $this->sendToService('Product');
-		$response = new stdClass();
-		$response->bean = 2;
-		$response->data = [''];
-		$this->isResponseRc = TRUE;
+		// $this->dataRequest->bean->noTarjeta = '4875971301198715';
+		// $this->dataRequest->bean->id_ext_per = '1101035010';
+		// $this->dataRequest->bean->montoComisionTransaccion= 0.0;
+		// $this->dataRequest->bean->montoComisionThTransaccion= 0.0;
+		// $this->dataRequest->bean->numLote= 0;
+		// $this->dataRequest->bean->paginaActual= '1';
+		// $this->dataRequest->bean->tamanoPagina= '0';
+		// $this->dataRequest->bean->paginar= false;
+		// $this->dataRequest->bean->idAsignacion= 0;
+		// $this->dataRequest->bean->condicion= 0;
+		// $this->dataRequest->bean->pinGeneradoUsuario= false;
+		// $this->dataRequest->bean->rc= 0;
+		// $this->dataRequest->bean->className= 'com.novo.objects.TOs.TarjetaTO';
+		// $this->dataRequest->bean->token= 'ca4aa626e2d4e86623d45c770b1928be';
+		// $this->dataRequest->bean->idOperation= '214';
+
+		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -303,6 +321,7 @@ class Novo_Product_Model extends NOVO_Model
 						'cardNumber'=>'4193280000300080',
 						'expirationDate'=>'19/20',
 						'securityCode'=>'837',
+						'request'=>$this->session->userdata('setProduct')
 					];
 					$this->response->data = $response->data || [""];
 					break;
@@ -327,6 +346,8 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
 					$this->response->validityTime = intval($response->bean) * 60;
 					break;
+				default:
+					$this->response->code = 2;	
 			}
 		}
 		return $this->response;

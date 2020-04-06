@@ -50,22 +50,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
 		},
 		{
-			id: 'otpRequest',
-			body: `<form id="formGetDetail" class="mr-2" method="post">
-				<div id="verificationOTP">
-					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
-					<div class="row">
-						<div class="form-group col-7">
-							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
-							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
-							<div id="msgErrorCodeOTP" class="help-block"></div>
-						</div>
-					</div>
-					<p id="verificationMsg" class="mb-1 h5"></p>
-				</div>
-			</form>`
-		},
-		{
 			id: 'cardDetails',
 			body: `<div class="row">
 				<div class="form-group col-6">
@@ -369,7 +353,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 						case 'notice':
 							btnTrigger.innerHTML = msgLoadingWhite;
 							btnTrigger.disabled = true;
-							proccessPetition({});
+							proccessPetition({
+								noTarjeta: window.data.noTarjeta,
+								id_ext_per: window.data.id_ext_per 
+							});
 							break;
 
 						case 'otpRequest':
@@ -422,8 +409,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 
 
-	function proccessPetition(data) {
-		callNovoCore('POST', 'Product', 'getDetail', data, function (response) {
+	function proccessPetition(dataRequest) {
+		callNovoCore('POST', 'Product', 'getDetail', dataRequest, function (response) {
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 			switch (response.code) {
@@ -455,9 +442,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 					break;
 
 				case 2:
-					$$.getElementById('codeOTP').value = '';
-					$$.getElementById('codeOTP').disabled = false;
-					$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
+					$('#system-info').dialog('close');
+					notiSystem(response.title, response.msg, response.classIconName, response.data);
 					break;
 
 				case 3:
