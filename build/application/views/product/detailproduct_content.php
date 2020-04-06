@@ -1,5 +1,17 @@
+<?php 
 
+echo "-----------------------------<br/>";
+//Converting Array to bytes
+$iv = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+$chars = array_map("chr", $iv);
+$IVbytes = join($chars);
 
+$data = '7JFeEF3KLvwDGc1r+J4DLwu003du003d';
+$encrypted = openssl_encrypt($data, 'AES-256-CBC', 's81z+L8S847MD/RIl4rO9IZJIz8GETNao/4gXox7l5Q=', OPENSSL_RAW_DATA, $IVbytes);
+echo bin2hex($encrypted);
+echo "<br/>-----------------------------";
+exit();
+?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
 </form>
@@ -22,8 +34,17 @@
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
 							<div class="item-network <?= $data['marca']; ?>"></div>
-			<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
+						<?php
+						if (TRUE || $totalProducts > 1) {
+						?>
+							<a id="other-product" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('vistaconsolidada') ?>">
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+							</a>
+						<?php
+						}
+						?>
 						<?php if ($data['vc']) : ?>
 							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
 								<i aria-hidden="true" class="icon-view"></i>

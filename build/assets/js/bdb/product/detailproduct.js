@@ -407,8 +407,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-
-
 	function proccessPetition(dataRequest) {
 		callNovoCore('POST', 'Product', 'getDetail', dataRequest, function (response) {
 			btnTrigger.innerHTML = txtBtnTrigger;

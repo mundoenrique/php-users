@@ -286,29 +286,39 @@ class Novo_Product_Model extends NOVO_Model
 		$bean = new stdClass();
 		$bean->id_ext_per = $dataRequest->id_ext_per;
 		$bean->noTarjeta = $dataRequest->noTarjeta;
-		// $bean->id_ext_per = '4875971301198715';
-		// $bean->noTarjeta = '1101035010';
-		// $bean->pais = 'Co';
-		
+
+		// $logAccesoObject = new stdClass();
+		// $logAccesoObject->sessionId = '52d62faec782b0745d3e58763c55133b';
+		// $logAccesoObject->userName = 'BLANCO01';
+		// $logAccesoObject->canal = 'personasWeb';
+		// $logAccesoObject->modulo = 'tarjeta';
+		// $logAccesoObject->operacion = 'consulta';
+		// $logAccesoObject->RC = 0;
+		// $logAccesoObject->IP = '172.4.6.82';
+		// $logAccesoObject->lenguaje = 'ES';			
+		// $logAccesoObject->dttimesstamp = '03/05/2020 21:33';
+
+		// $bean->noTarjeta = '4875971301198715';
+		// $bean->id_ext_per = '1101035010';
+		// $bean->montoComisionTransaccion = 0.0;
+		// $bean->montoComisionThTransaccion = 0.0;
+		// $bean->numLote = 0;
+		// $bean->paginaActual = '1';
+		// $bean->tamanoPagina = '0';
+		// $bean->paginar = false;
+		// $bean->idAsignacion = 0;
+		// $bean->condicion = 0;
+		// $bean->pinGeneradoUsuario = false;
+		// $bean->rc = 0;
+		// $bean->className = 'com.novo.objects.TOs.TarjetaTO';
+		// $bean->token ='4aa626e2d4e86623d45c770b1928be';
+		// $bean->idOperation = '214';
+		// $bean->logAccesoObject = $logAccesoObject;
+
+
 		$this->dataRequest->idOperation = '214';
 		$this->dataRequest->bean = json_encode($bean);
-		//$this->dataRequest->pais = 'Co';
-
-		// $this->dataRequest->bean->noTarjeta = '4875971301198715';
-		// $this->dataRequest->bean->id_ext_per = '1101035010';
-		// $this->dataRequest->bean->montoComisionTransaccion= 0.0;
-		// $this->dataRequest->bean->montoComisionThTransaccion= 0.0;
-		// $this->dataRequest->bean->numLote= 0;
-		// $this->dataRequest->bean->paginaActual= '1';
-		// $this->dataRequest->bean->tamanoPagina= '0';
-		// $this->dataRequest->bean->paginar= false;
-		// $this->dataRequest->bean->idAsignacion= 0;
-		// $this->dataRequest->bean->condicion= 0;
-		// $this->dataRequest->bean->pinGeneradoUsuario= false;
-		// $this->dataRequest->bean->rc= 0;
-		// $this->dataRequest->bean->className= 'com.novo.objects.TOs.TarjetaTO';
-		// $this->dataRequest->bean->token= 'ca4aa626e2d4e86623d45c770b1928be';
-		// $this->dataRequest->bean->idOperation= '214';
+		// $this->dataRequest->pais = 'Co';
 
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
@@ -324,6 +334,7 @@ class Novo_Product_Model extends NOVO_Model
 						'request'=>$this->session->userdata('setProduct')
 					];
 					$this->response->data = $response->data || [""];
+					
 					break;
 				case 10:
 					$this->response->code = 1;
