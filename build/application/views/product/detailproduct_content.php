@@ -36,21 +36,20 @@ exit();
 							<div class="item-network <?= $data['marca']; ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
-						<?php
-						if (TRUE || $totalProducts > 1) {
-						?>
-							<a id="other-product" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('vistaconsolidada') ?>">
+						<div class="flex">
+						<?php if (TRUE || $totalProducts > 1) : ?>
+							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('vistaconsolidada') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
 							</a>
-						<?php
-						}
-						?>
+						<?= ($data['vc']) ? '<span class="primary mr-1">|</span>' : ''; ?>
+						<?php endif; ?>
 						<?php if ($data['vc']) : ?>
-							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
+							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small p-0">
 								<i aria-hidden="true" class="icon-view"></i>
 								&nbsp;Ver detalles
 							</button>
 						<?php endif; ?>
+						</div>
 					</div>
 					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
