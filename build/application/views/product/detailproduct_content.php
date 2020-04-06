@@ -1,16 +1,16 @@
 <?php 
 
 // echo "-----------------------------<br/>";
-//Converting Array to bytes
-$iv = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-$chars = array_map("chr", $iv);
-$IVbytes = join($chars);
+// Converting Array to bytes
+// $iv = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+// $chars = array_map("chr", $iv);
+// $IVbytes = join($chars);
 
-$data = '7JFeEF3KLvwDGc1r+J4DLwu003du003d';
-$encrypted = openssl_encrypt($data, 'AES-256-CBC', 's81z+L8S847MD/RIl4rO9IZJIz8GETNao/4gXox7l5Q=', OPENSSL_RAW_DATA, $IVbytes);
-echo bin2hex($encrypted);
-echo "<br/>-----------------------------";
-exit();
+// $data = '7JFeEF3KLvwDGc1r+J4DLwu003du003d';
+// $encrypted = openssl_encrypt($data, 'AES-256-CBC', 's81z+L8S847MD/RIl4rO9IZJIz8GETNao/4gXox7l5Q=', OPENSSL_RAW_DATA, $IVbytes);
+// echo bin2hex($encrypted);
+// echo "<br/>-----------------------------";
+// exit();
 ?>
 <form method="post">
 	<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
