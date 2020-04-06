@@ -185,9 +185,11 @@
 									<label for="replaceMotSol">Motivo de la solicitud <span class="danger">*</span></label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>
-										<option value="59"><?= lang('GENE_BLOCKING_REASONS_STOLE'); ?></option>
-										<option value="17"><?= lang('GENE_BLOCKING_REASONS_FRAUD'); ?></option>
-										<option value="41"><?= lang('GENE_BLOCKING_REASONS_CANCELLED'); ?></option>
+										<?php
+											foreach ($listReason as $row) {
+												echo '<option value="'.$row['value'].'">'.lang($row['tagTranslation']).'</option>';
+											}
+										?>
 									</select>
 									<div class="help-block"></div>
 								</div>

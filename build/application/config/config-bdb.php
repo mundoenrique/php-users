@@ -11,3 +11,9 @@ $config['layout'] = 'designFullPage';
 $config['setTimerOTP'] = 5*60;
 
 $config['timeIdleSession'] = 6*60000;
+
+$config['listReasonReposition'] = [
+	['value'=>'59','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE'],
+	['value'=>'17','tagTranslation'=>'GENE_BLOCKING_REASONS_FRAUD'],
+	['value'=>'41','tagTranslation'=>'GENE_BLOCKING_REASONS_CANCELLED'],
+];
