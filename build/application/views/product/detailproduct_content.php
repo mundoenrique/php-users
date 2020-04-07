@@ -37,7 +37,7 @@
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<div class="flex">
-						<?php if (TRUE || $totalProducts > 1) : ?>
+						<?php if ($totalProducts > 1) : ?>
 							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('vistaconsolidada') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
 							</a>

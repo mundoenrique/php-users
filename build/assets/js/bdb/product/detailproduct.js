@@ -47,7 +47,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	//core
 	arrDialogContent = [{
 			id: 'notice',
-			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
+			body: 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.'
 		},
 		{
 			id: 'cardDetails',

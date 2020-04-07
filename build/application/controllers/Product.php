@@ -68,6 +68,8 @@ class Product extends NOVO_Controller
 			return '--';
 		}
 
+		$this->session->set_userdata("totalProducts", count($data));
+
 		$dataRequeried = [];
 		foreach ($data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
@@ -89,7 +91,7 @@ class Product extends NOVO_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
-				"vc" => $row->tvirtual || TRUE
+				"vc" => $row->tvirtual
 			]);
 		}
 		return $dataRequeried;
@@ -180,13 +182,13 @@ class Product extends NOVO_Controller
 		$this->views = ['product/' . $view];
 
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts =  $this->session->userdata('totalProducts');
 		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 		$this->render->years = $years;
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->booLoadNotiSystem = '';
 
 		if ($dataAlert = $this->session->flashdata('showAlert')) {
-
 
 			$this->render->loadAlert = '1';
 			$this->render->msgAlert = $dataAlert->message;
