@@ -121,11 +121,18 @@ class ServiceProduct extends NOVO_Controller
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
+		array_push($dataProduct['availableServices'],'999'); // *******************
+
 		$menuOptionsProduct = [
 			'120' => [
 				'id' => 'generate',
 				'text' => "<i class='icon-key block'></i>Generar <br>PIN",
 				'isVisible' => FALSE
+			],
+			'999' => [
+				'id' => 'recovery',
+				'text' => "<i class='icon-spinner block'></i>Recuperar PIN",
+				'isVisible' => TRUE
 			],
 			'112' => [
 				'id' => 'change',
