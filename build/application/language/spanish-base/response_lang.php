@@ -55,6 +55,8 @@ $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos d
 $lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
 $lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
 $lang['RESP_FAIL_DONWLOAD_FILE'] = 'El extracto del mes seleccionado no está disponible.';
+$lang['RESP_FAIL_DONWLOAD_LAST_MOVEMENTS'] = 'No existen movimientos recientes.';
+
 
 $lang['RESP_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';
 $lang['RESP_SUCCESSFUL_REGISTRATION'] = 'Se ha registrado de forma correcta en el <strong> Sistema Conexión Personas Online. </strong>';

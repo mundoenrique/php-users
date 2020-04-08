@@ -270,7 +270,7 @@ class Product extends NOVO_Controller {
 			elseif ($response->code = -150) {
 
 				$dataForAlert = new stdClass();
-				$dataForAlert->message = lang('RESP_FAIL_DONWLOAD_FILE');
+				$dataForAlert->message = $response->msg;
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
 
