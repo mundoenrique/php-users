@@ -173,8 +173,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 			movementsPaginate.remove();
 		}
 		movementsStats.removeClass('fade-in');
-		stackItems[0].classList.add('is-disabled');
-		stackItems[1].classList.add('is-disabled');
+		stackItems[0].classList.remove('is-disabled');
+		stackItems[1].classList.remove('is-disabled');
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function (response) {
@@ -262,6 +262,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 					stackItems[1].classList.remove('is-disabled');
 				}
 			} else {
+				stackItems[0].classList.add('is-disabled');
+				stackItems[1].classList.add('is-disabled');				
 				movementsList.appendChild(noMovements);
 			}
 			transactions.removeChild(transactions.lastChild);
