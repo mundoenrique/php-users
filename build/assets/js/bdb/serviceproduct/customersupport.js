@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval, idNameCapitalize;
 
 $$.addEventListener('DOMContentLoaded', function () {
 
@@ -117,6 +117,19 @@ function operationFactory(optionMenu, response = null) {
 		}
 	}
 
+	function fnRecovery() {
+
+		var dataForm = {
+			newPin: $$.getElementById('recoveryNewPin').value,
+			confirmPin: $$.getElementById('recoveryConfirmPin').value,
+			codeOTP: $$.getElementById('recoveryCodeOTP').value
+		}
+		return {
+			data: dataForm,
+			response: responseForm
+		};
+	}
+
 	function fnGenerate() {
 
 		var dataForm = {
@@ -187,6 +200,11 @@ function disableInputsForm(optionMenu, status, txtButton) {
 		case 'replace':
 			elementsForm = ['replaceMotSol'];
 			break;
+
+		case 'recovery':
+			elementsForm = ['recoveryNewPin', 'recoveryConfirmPin'];
+			break;
+		
 	}
 	elementsForm.forEach(function (element) {
 		$$.getElementById(element).disabled = status;
@@ -277,7 +295,7 @@ function showConfirmation(id) {
 }
 
 function showView(option, options) {
-	var j, idNameCapitalize;
+	var j;
 	resetForms(form);
 	idName = option.id;
 	idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);

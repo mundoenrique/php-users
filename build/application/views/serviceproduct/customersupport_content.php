@@ -58,8 +58,8 @@
 						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
+									<label for="generatePin">Nuevo PIN <span class="danger">*</span></label>
+									<input id="generatePin" class="form-control" type="password" name="generatePin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
@@ -222,31 +222,28 @@
 						</div>
 						<form id="formRecovery" class="profile-1" accept-charset="utf-8" method="post">
 							<div class="row">
+							<div class="form-group col-lg-4">
+									<label for="recoveryNewPin">Nuevo PIN <span class="danger">*</span></label>
+									<input id="recoveryNewPin" class="form-control" type="password" name="recoveryNewPin">
+									<div class="help-block"></div>
+								</div>
 								<div class="form-group col-lg-4">
-									<p>Hemos enviado un código de seguridad a la siguiente dirección <?= mask_account('pedrotorres@hotmail.com');?>, por favor indícalo a continuación:</p>
-									<label for="recoveryMotSol">Motivo de la solicitud <span class="danger">*</span></label>
-									<select id="recoveryMotSol" class="custom-select form-control" name="recoveryMotSol">
-										<option value="">Selecciona</option>
-										<?php
-											foreach ($listReason as $row) {
-												echo '<option value="'.$row['value'].'">'.lang($row['tagTranslation']).'</option>';
-											}
-										?>
-									</select>
+									<label for="recoveryConfirmPin">Confirmar PIN <span class="danger">*</span></label>
+									<input id="recoveryConfirmPin" class="form-control" type="password" name="recoveryConfirmPin">
 									<div class="help-block"></div>
 								</div>
 							</div>
 							<div id="recoveryVerificationOTP" class="none">
 								<hr class="separador-one mb-3">
-								<p>Hemos enviado un código de seguridad a la siguiente dirección <?= mask_account('pedrotorres@hotmail.com');?>, por favor indícalo a continuación:</p>
+								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<label for="recoveryCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="recoveryCodeOTP" class="form-control" type="text" name="recoveryCodeOTP" disabled>
-										<div id="recoveryTxtMsgErrorCodeOTP" class="help-block"></div>
+										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
-								<p id="recoveryVerificationMsg" class="mb-1 h5"></p>
+								<p id="generateVerificationMsg" class="mb-1 h5"></p>
 							</div>
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
