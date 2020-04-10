@@ -276,6 +276,8 @@ class Novo_Product_Model extends NOVO_Model
 	public function callWs_getDetail_Product ($dataRequest) {
 		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
 
+		$model = ' Product';
+
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 
 		$this->dataAccessLog->modulo = 'personasweb';
@@ -287,15 +289,21 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
 		$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
 
-		$response = $this->sendToService('Product');
+		$response = $this->sendToService($model);
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
 					//$this->response->timeLiveModal = intval($response->bean) * 10;
 					$this->response->timeLiveModal = 20;
-					$this->response->dataDetailCard =  [
-						'cardNumber' => $response->noTarjeta,
+
+					echo "<pre>";
+					print_r($this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model));
+					echo "</pre>";
+					exit();
+
+					$this->response->dataDetailCard =  [						
+						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model),
 						'cardholderName' => $response->NombreCliente,
 						'expirationDate' => $response->fechaExp,
 						'securityCode' => $response->secureToken,
