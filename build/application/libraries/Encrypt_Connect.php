@@ -62,10 +62,7 @@ class Encrypt_Connect {
 		$response = json_decode($decryptData);
 		
 		if(!$response) {
-			echo "<pre>";
-			print_r($decryptData);
-			echo "</pre>";
-			exit();
+
 			log_message('ERROR', 'NOVO decode ['.$userName.'] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');

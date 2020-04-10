@@ -296,17 +296,11 @@ class Novo_Product_Model extends NOVO_Model
 					$this->response->code = 0;
 					//$this->response->timeLiveModal = intval($response->bean) * 10;
 					$this->response->timeLiveModal = 20;
-
-					echo "<pre>";
-					print_r($this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model));
-					echo "</pre>";
-					exit();
-
 					$this->response->dataDetailCard =  [						
-						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model),
-						'cardholderName' => $response->NombreCliente,
-						'expirationDate' => $response->fechaExp,
-						'securityCode' => $response->secureToken,
+						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model)->msg,
+						'cardholderName' => $this->encrypt_connect->decode($response->NombreCliente, $this->dataAccessLog->userName, $model)->msg,
+						'expirationDate' => $this->encrypt_connect->decode($response->fechaExp, $this->dataAccessLog->userName, $model)->msg,
+						'securityCode' => $this->encrypt_connect->decode($response->secureToken, $this->dataAccessLog->userName, $model)->msg,
 					];
 					break;
 				case 10:
