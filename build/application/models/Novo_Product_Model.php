@@ -283,58 +283,23 @@ class Novo_Product_Model extends NOVO_Model
 		$this->dataAccessLog->operation = 'consulta';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-		$bean = new stdClass();
-		$bean->id_ext_per = $dataRequest->id_ext_per;
-		$bean->noTarjeta = $dataRequest->noTarjeta;
-
-		// $logAccesoObject = new stdClass();
-		// $logAccesoObject->sessionId = '52d62faec782b0745d3e58763c55133b';
-		// $logAccesoObject->userName = 'BLANCO01';
-		// $logAccesoObject->canal = 'personasWeb';
-		// $logAccesoObject->modulo = 'tarjeta';
-		// $logAccesoObject->operacion = 'consulta';
-		// $logAccesoObject->RC = 0;
-		// $logAccesoObject->IP = '172.4.6.82';
-		// $logAccesoObject->lenguaje = 'ES';			
-		// $logAccesoObject->dttimesstamp = '03/05/2020 21:33';
-
-		// $bean->noTarjeta = '4875971301198715';
-		// $bean->id_ext_per = '1101035010';
-		// $bean->montoComisionTransaccion = 0.0;
-		// $bean->montoComisionThTransaccion = 0.0;
-		// $bean->numLote = 0;
-		// $bean->paginaActual = '1';
-		// $bean->tamanoPagina = '0';
-		// $bean->paginar = false;
-		// $bean->idAsignacion = 0;
-		// $bean->condicion = 0;
-		// $bean->pinGeneradoUsuario = false;
-		// $bean->rc = 0;
-		// $bean->className = 'com.novo.objects.TOs.TarjetaTO';
-		// $bean->token ='4aa626e2d4e86623d45c770b1928be';
-		// $bean->idOperation = '214';
-		// $bean->logAccesoObject = $logAccesoObject;
-
-
 		$this->dataRequest->idOperation = '214';
-		$this->dataRequest->bean = json_encode($bean);
-		// $this->dataRequest->pais = 'Co';
+		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
+		$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
 
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->timeLiveModal = intval($response->bean) * 10;
-					$this->response->dataDetailCard = [
-						'cardholderName'=>'Sergio Quijano Try',
-						'cardNumber'=>'4193280000300080',
-						'expirationDate'=>'19/20',
-						'securityCode'=>'837',
-						'request'=>$this->session->userdata('setProduct')
+					//$this->response->timeLiveModal = intval($response->bean) * 10;
+					$this->response->timeLiveModal = 20;
+					$this->response->dataDetailCard =  [
+						'cardNumber' => $response->noTarjeta,
+						'cardholderName' => $response->NombreCliente,
+						'expirationDate' => $response->fechaExp,
+						'securityCode' => $response->secureToken,
 					];
-					$this->response->data = $response->data || [""];
-					
 					break;
 				case 10:
 					$this->response->code = 1;

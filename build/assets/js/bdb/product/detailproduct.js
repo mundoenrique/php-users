@@ -421,8 +421,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 				case 0:
 					clearInterval(interval);
 
-					systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
-					systemMSg.querySelector("div").id = arrDialogContent[2].id;
+					systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
+					systemMSg.querySelector("div").id = arrDialogContent[1].id;
 					$$.getElementById("cancel").classList.add("none");
 
 					$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;

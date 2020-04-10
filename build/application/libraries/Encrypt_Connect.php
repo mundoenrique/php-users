@@ -28,7 +28,7 @@ class Encrypt_Connect {
 		$this->keyNovo = is_null($this->CI->session->userdata('userName'))? $this->keyNovo: base64_decode($this->CI->session->userdata('keyId'));
 
 		if($model !== 'REMOTE_ADDR') {
-			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+			$data = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_SLASHES ) ;
 		}
 		log_message('DEBUG', 'NOVO encode ['.$userName.'] REQUEST '.$model.': '.$data);
 
