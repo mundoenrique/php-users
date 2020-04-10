@@ -47,23 +47,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	//core
 	arrDialogContent = [{
 			id: 'notice',
-			body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem nec ipsum dictum blandit. Ut vel scelerisque eros. Sed vel aliquet mi, vitae interdum enim.'
-		},
-		{
-			id: 'otpRequest',
-			body: `<form id="formGetDetail" class="mr-2" method="post">
-				<div id="verificationOTP">
-					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
-					<div class="row">
-						<div class="form-group col-7">
-							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
-							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
-							<div id="msgErrorCodeOTP" class="help-block"></div>
-						</div>
-					</div>
-					<p id="verificationMsg" class="mb-1 h5"></p>
-				</div>
-			</form>`
+			body: 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.'
 		},
 		{
 			id: 'cardDetails',
@@ -173,8 +157,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 			movementsPaginate.remove();
 		}
 		movementsStats.removeClass('fade-in');
-		stackItems[0].classList.remove('is-disabled');
-		stackItems[1].classList.remove('is-disabled');
+		stackItems[0].classList.add('is-disabled');
+		stackItems[1].classList.add('is-disabled');
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function (response) {
@@ -262,8 +246,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 					stackItems[1].classList.remove('is-disabled');
 				}
 			} else {
-				stackItems[0].classList.add('is-disabled');
-				stackItems[1].classList.add('is-disabled');				
 				movementsList.appendChild(noMovements);
 			}
 			transactions.removeChild(transactions.lastChild);
@@ -371,7 +353,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 						case 'notice':
 							btnTrigger.innerHTML = msgLoadingWhite;
 							btnTrigger.disabled = true;
-							proccessPetition({});
+							proccessPetition({
+								noTarjeta: window.data.noTarjeta,
+								id_ext_per: window.data.id_ext_per
+							});
 							break;
 
 						case 'otpRequest':
@@ -394,6 +379,12 @@ $$.addEventListener('DOMContentLoaded', function () {
 						case 'cardDetails':
 							clearInterval(interval);
 							systemMSg.innerHTML = "";
+							$("#system-info").dialog('close');
+							$("#system-info").dialog("destroy");
+							$("#system-info").addClass("none");
+							break;
+
+						case 'notisystem':
 							$("#system-info").dialog('close');
 							$("#system-info").dialog("destroy");
 							$("#system-info").addClass("none");
@@ -422,18 +413,16 @@ $$.addEventListener('DOMContentLoaded', function () {
 	}
 
 
-
-
-	function proccessPetition(data) {
-		callNovoCore('POST', 'Product', 'getDetail', data, function (response) {
+	function proccessPetition(dataRequest) {
+		callNovoCore('POST', 'Product', 'getDetail', dataRequest, function (response) {
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 			switch (response.code) {
 				case 0:
 					clearInterval(interval);
 
-					systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
-					systemMSg.querySelector("div").id = arrDialogContent[2].id;
+					systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
+					systemMSg.querySelector("div").id = arrDialogContent[1].id;
 					$$.getElementById("cancel").classList.add("none");
 
 					$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;
@@ -457,9 +446,9 @@ $$.addEventListener('DOMContentLoaded', function () {
 					break;
 
 				case 2:
-					$$.getElementById('codeOTP').value = '';
-					$$.getElementById('codeOTP').disabled = false;
-					$$.getElementById("msgErrorCodeOTP").innerHTML = response.msg;
+					systemMSg.querySelector("div").innerHTML = response.msg;
+					systemMSg.querySelector("div").id = 'notisystem';
+					$$.getElementById("cancel").classList.add("none");
 					break;
 
 				case 3:

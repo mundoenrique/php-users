@@ -32,6 +32,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render = new stdClass();
 		$this->render->loadAlert = '0';
 		$this->render->msgAlert = '';
+		$this->render->redirectAlert ='';
 
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
