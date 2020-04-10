@@ -454,13 +454,11 @@ $$.addEventListener('DOMContentLoaded', function () {
 					var showCardInfo = $$.querySelectorAll('.show-card-info');
 					for (i = 0; i < showCardInfo.length; i++) {
 						showCardInfo[i].addEventListener('mouseenter', function (e) {
-							console.log("enter");
 							this.querySelector('button').classList.add("none");
 							this.querySelector('button').classList.remove("flex");
 							this.querySelector('input').classList.remove("none");
 						});
 						showCardInfo[i].addEventListener('mouseleave', function (e) {
-							console.log("fuera");
 							this.querySelector('input').classList.add("none");
 							this.querySelector('button').classList.add("flex");
 							this.querySelector('button').classList.remove("none");
