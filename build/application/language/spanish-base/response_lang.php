@@ -56,6 +56,7 @@ $lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
 $lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
 $lang['RESP_FAIL_DONWLOAD_FILE'] = 'El extracto del mes seleccionado no está disponible.';
 $lang['RESP_FAIL_DONWLOAD_LAST_MOVEMENTS'] = 'No existen movimientos recientes.';
+$lang['RESP_PROFILE_NOT_UPDATE'] = 'Para poder generar este archivo debes actualizar tu dirección de domicilio en el perfil.';
 
 
 $lang['RESP_OWN_ANOTHER_SESSION'] = 'El sistema ha identificado que cuenta con una sesión abierta, procederemos a cerrarla para continuar.';

@@ -103,15 +103,16 @@
 										<label for="addressType">Tipo de dirección</label>
 										<select id="addressType" class="custom-select form-control" name="addressType">
 											<option value="">Selecciona</option>
-											<option value="1" <?= $data->direccion->acTipo == '1'? 'selected': '' ;?>>Domicilio</option>
-											<option value="2" <?= $data->direccion->acTipo == '2'? 'selected': '' ;?>>Laboral</option>
-											<option value="3" <?= $data->direccion->acTipo == '3'? 'selected': '' ;?>>Comercial</option>
+											<?php $if_acTipo = property_exists($data->direccion, 'acTipo');?>
+											<option value="1" <?= $if_acTipo && $data->direccion->acTipo == '1'? 'selected': '' ;?>>Domicilio</option>
+											<option value="2" <?= $if_acTipo && $data->direccion->acTipo == '2'? 'selected': '' ;?>>Laboral</option>
+											<option value="3" <?= $if_acTipo && $data->direccion->acTipo == '3'? 'selected': '' ;?>>Comercial</option>
 										</select>
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-6 col-lg-4 col-xl-3">
 										<label for="postalCode">Código postal</label>
-										<input id="postalCode" class="form-control" type="text" name="postalCode" value="<?= $data->direccion->acZonaPostal;?>"/>
+										<input id="postalCode" class="form-control" type="text" name="postalCode" value="<?= property_exists($data->direccion, 'acZonaPostal')?$data->direccion->acZonaPostal:'';?>"/>
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -122,9 +123,9 @@
 													<select id="department" class="custom-select form-control" name="department">
 														<option value="">Selecciona</option>
 											<?php
-														foreach ($dataStates as $row) {
+														foreach ($dataStates as $row) {			
 											?>
-															<option value="<?= $row->codEstado;?>" <?= $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= mb_convert_case($row->estados, MB_CASE_TITLE, "UTF-8");?></option>
+															<option value="<?= $row->codEstado;?>" <?= property_exists($data->direccion, 'acCodEstado') && $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= mb_convert_case($row->estados, MB_CASE_TITLE, "UTF-8");?></option>
 											<?php
 														}
 											?>
@@ -142,6 +143,7 @@
 									<div id='ctrlCity' class="form-group col-6 col-lg-4 col-xl-3">
 										<label for="city">Ciudad <span class="danger">*</span></label>
 										<?php
+
 											if (!empty($dataCitys) and gettype($dataCitys) === 'array') {
 										?>
 													<select id="city" class="custom-select form-control" name="city">
@@ -155,7 +157,7 @@
 											?>
 													</select>
 											<?php
-												}elseif($dataCitys === '--') {
+												}elseif(isset($dataCitys) && $dataCitys === '--' ) {
 											?>
 												<input id="city" class="form-control" type="text" name="city" value="<?= $dataCitys->descripcion;?>" disabled/>
 											<?php
@@ -171,7 +173,7 @@
 									</div>
 									<div class="form-group col-12 col-lg-8 col-xl-12">
 										<label for="address">Dirección</label>
-										<textarea id="address" class="form-control" name="address"><?= $data->direccion->acDir;?></textarea>
+										<textarea id="address" class="form-control" name="address"><?= property_exists($data->direccion, 'acDir')?$data->direccion->acDir:'';?></textarea>
 										<div class="help-block"></div>
 									</div>
 								</div>
