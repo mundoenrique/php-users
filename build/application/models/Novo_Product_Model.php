@@ -283,57 +283,41 @@ class Novo_Product_Model extends NOVO_Model
 	public function callWs_getDetail_Product ($dataRequest) {
 		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.CuentaTO';
+		$model = ' Product';
 
-		$this->dataAccessLog->modulo = 'validar cuenta';
-		$this->dataAccessLog->function = 'validar cuenta';
-		$this->dataAccessLog->operation = 'validar cuenta';
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 
-/*  $this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
-		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->codigoOtp = $dataRequest->codeOTP; */
+		$this->dataAccessLog->modulo = 'personasweb';
+		$this->dataAccessLog->function = 'tarjeta';
+		$this->dataAccessLog->operation = 'consulta';
+		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-		//$response = $this->sendToService('Product');
-		$response = new stdClass();
-		$response->bean = 2;
-		$response->data = [''];
-		$this->isResponseRc = TRUE;
+		$this->dataRequest->idOperation = '214';
+		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
+		$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
+
+		$response = $this->sendToService($model);
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->timeLiveModal = intval($response->bean) * 10;
-					$this->response->dataDetailCard = [
-						'cardholderName'=>'Sergio Quijano Try',
-						'cardNumber'=>'4193280000300080',
-						'expirationDate'=>'19/20',
-						'securityCode'=>'837',
+					$this->response->timeLiveModal = $response->tiempoPantallaVirtual*10;
+					$this->response->dataDetailCard =  [						
+						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model)->msg,
+						'cardholderName' => $this->encrypt_connect->decode($response->NombreCliente, $this->dataAccessLog->userName, $model)->msg,
+						'expirationDate' => $this->encrypt_connect->decode($response->fechaExp, $this->dataAccessLog->userName, $model)->msg,
+						'securityCode' => $this->encrypt_connect->decode($response->secureToken, $this->dataAccessLog->userName, $model)->msg,
 					];
-					$this->response->data = $response->data || [""];
 					break;
-				case 10:
-					$this->response->code = 1;
-					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 20;
-					$this->response->data = $response->data || [""];
-					break;
-				case -420:
-					$this->response->code = 2;
-					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
 
-					//if (json_decode($response->bean)->bean == "0") {
-					if (false) {
-						$this->response->code = 3;
-						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
-					}
+				case -420:
+				case -20:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_NOT_FOUND_CARD');
 					break;
-				case -421:
-					$this->response->code = 3;
-					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 60;
-					break;
+
+				default:
+					$this->response->code = 2;	
 			}
 		}
 		return $this->response;

@@ -28,7 +28,7 @@ class Encrypt_Connect {
 		$this->keyNovo = is_null($this->CI->session->userdata('userName'))? $this->keyNovo: base64_decode($this->CI->session->userdata('keyId'));
 
 		if($model !== 'REMOTE_ADDR') {
-			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+			$data = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_SLASHES ) ;
 		}
 		log_message('DEBUG', 'NOVO encode ['.$userName.'] REQUEST '.$model.': '.$data);
 
@@ -58,9 +58,11 @@ class Encrypt_Connect {
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
-		$response = json_decode($decryptData);
 
+		$response = json_decode($decryptData);
+		
 		if(!$response) {
+
 			log_message('ERROR', 'NOVO decode ['.$userName.'] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');

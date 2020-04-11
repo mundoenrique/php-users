@@ -54,21 +54,41 @@ $$.addEventListener('DOMContentLoaded', function () {
 			body: `<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
-					<input id="cardNumber" class="form-control-plaintext nowrap" type="text" value="" readonly>
+					<div class="show-card-info">
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small px-0">
+							<i aria-hidden="true" class="icon-view"></i>&nbsp;Mostrar
+						</button>
+						<input id="cardNumber" class="form-control-plaintext nowrap none" type="text" value="" readonly>
+					</div>
 				</div>
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardholderName">Nombre del tarjetahabiente</label>
-					<input id="cardholderName" class="form-control-plaintext nowrap" type="text" value="" readonly>
+					<div class="show-card-info">
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small px-0">
+							<i aria-hidden="true" class="icon-view"></i>&nbsp;Mostrar
+						</button>
+						<input id="cardholderName" class="form-control-plaintext nowrap none" type="text" value="" readonly>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="expirationDate">Fecha de vencimiento</label>
-					<input id="expirationDate" class="form-control-plaintext nowrap" type="text" value="" readonly>
+					<div class="show-card-info">
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small px-0">
+							<i aria-hidden="true" class="icon-view"></i>&nbsp;Mostrar
+						</button>
+						<input id="expirationDate" class="form-control-plaintext nowrap none" type="text" value="" readonly>
+					</div>
 				</div>
 				<div class="form-group col-6">
 					<label class="nowrap" for="securityCode">Código de seguridad</label>
-					<input id="securityCode" class="form-control-plaintext nowrap" type="text" value="" readonly>
+					<div class="show-card-info">
+						<button id="open-card-details" class="flex items-baseline btn btn-link btn-small px-0">
+							<i aria-hidden="true" class="icon-view"></i>&nbsp;Mostrar
+						</button>
+						<input id="securityCode" class="form-control-plaintext nowrap none" type="text" value="" readonly>
+					</div>
 				</div>
 			</div>
 			<p class="mb-1 h5">Tiempo restante:<span id="timeLiveModal" class="ml-1 danger"></span></p>`
@@ -302,7 +322,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 			dialogCardTitle = 'Detalles de tarjeta';
 			dialogCardBody = createElement('div', {
 				id: arrDialogContent[0].id,
-				class: 'dialog-detail-card'
+				class: 'dialog-detail-card pr-1'
 			});
 			dialogCardBody.innerHTML = arrDialogContent[0].body;
 
@@ -329,6 +349,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 			btnTrigger = $$.getElementById('accept');
 			txtBtnTrigger = btnTrigger.innerHTML.trim();
+			systemMSg.classList.add("w-100");
 
 			$$.getElementById("cancel").addEventListener('click', function (e) {
 				e.preventDefault();
@@ -429,6 +450,26 @@ $$.addEventListener('DOMContentLoaded', function () {
 					$$.getElementById("cardholderName").value = response.dataDetailCard.cardholderName;
 					$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
 					$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
+
+					$$.getElementById("cardNumber").style.cursor = "default";
+					$$.getElementById("cardholderName").style.cursor = "default";
+					$$.getElementById("expirationDate").style.cursor = "default";
+					$$.getElementById("securityCode").style.cursor = "default";
+
+					var showCardInfo = $$.querySelectorAll('.show-card-info');
+					for (i = 0; i < showCardInfo.length; i++) {
+						showCardInfo[i].addEventListener('mouseenter', function (e) {
+							this.querySelector('button').classList.add("none");
+							this.querySelector('button').classList.remove("flex");
+							this.querySelector('input').classList.remove("none");
+						});
+						showCardInfo[i].addEventListener('mouseleave', function (e) {
+							this.querySelector('input').classList.add("none");
+							this.querySelector('button').classList.add("flex");
+							this.querySelector('button').classList.remove("none");
+
+						});
+					}
 
 					timeLiveModal = $$.getElementById("timeLiveModal");
 					startTimer(response.timeLiveModal, timeLiveModal);

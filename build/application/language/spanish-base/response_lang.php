@@ -55,6 +55,7 @@ $lang['RESP_SUCCESSFUL_PROFILE'] = 'Se han actualizado correctamente los datos d
 $lang['RESP_CELLPHONE_USED'] = 'Error el telefono movil ya esta registrado.';
 $lang['RESP_LOGIN_INVALID'] = 'Login o clave inválido.';
 $lang['RESP_FAIL_DONWLOAD_FILE'] = 'El extracto del mes seleccionado no está disponible.';
+$lang['RESP_NOT_FOUND_CARD'] = 'En este momento no podemos suministrar información sobre esta tarjeta.';
 $lang['RESP_FAIL_DONWLOAD_LAST_MOVEMENTS'] = 'No existen movimientos recientes.';
 $lang['RESP_PROFILE_NOT_UPDATE'] = 'Para poder generar este archivo debes actualizar tu dirección de domicilio en el perfil.';
 

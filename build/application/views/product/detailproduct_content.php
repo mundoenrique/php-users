@@ -22,12 +22,20 @@
 							<div class="item-network <?= $data['marca']; ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
+						<div class="flex">
+						<?php if ($totalProducts > 1) : ?>
+							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('vistaconsolidada') ?>">
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+							</a>
+						<?= ($data['vc']) ? '<span class="primary mr-1">|</span>' : ''; ?>
+						<?php endif; ?>
 						<?php if ($data['vc']) : ?>
-							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small">
+							<button id="open-card-details" class="flex items-baseline btn btn-link btn-small p-0">
 								<i aria-hidden="true" class="icon-view"></i>
 								&nbsp;Ver detalles
 							</button>
 						<?php endif; ?>
+						</div>
 					</div>
 					<div class="product-info-full mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
@@ -206,14 +214,17 @@
 	</div>
 </div>
 <?php
-$dataForm = new stdClass();
-$dataForm->noTarjeta = $data['noTarjeta'];
-$dataForm->totalIncomeMovements = $totalIncomeMovements;
-$dataForm->totalExpenseMovements = $totalExpenseMovements;
-$dataForm->totalIncomePendingTransactions = isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0;
-$dataForm->totalExpensePendingTransactions = isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0;
-$dataForm->currency = lang('GEN_COIN');
+$dataForm = json_encode([
+	"noTarjeta" => $data['noTarjeta'],
+	"id_ext_per" => $data['id_ext_per'],
+	"totalIncomeMovements" => $totalIncomeMovements,
+	"totalExpenseMovements" => $totalExpenseMovements,
+	"totalIncomePendingTransactions" => isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0,
+	"totalExpensePendingTransactions" => isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0,
+	"currency" => lang('GEN_COIN')
+])
 ?>
 <script>
-	var data = <?= json_encode((array) $dataForm); ?>
+	var data = <?= $dataForm;?>
 </script>
+

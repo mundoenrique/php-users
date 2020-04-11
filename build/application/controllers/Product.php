@@ -1,20 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends NOVO_Controller {
+class Product extends NOVO_Controller
+{
 
-	public function __construct ()
+	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
 	}
 
-	public function listProduct ()
+	public function listProduct()
 	{
 		log_message('INFO', 'NOVO Consolidated: listProduct Method Initialized');
 		$view = 'listproduct';
 
-		if(!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in')) {
 
 			redirect(base_url('inicio'), 'location');
 			exit();
@@ -23,57 +24,58 @@ class Product extends NOVO_Controller {
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
- 		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+		if (count($dataProduct) == 1 and $dataProduct !== '--') {
 
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			if (in_array("120",  $dataProduct[0]['availableServices'])) {
 				redirect('/atencioncliente');
-			}
-			else{
+			} else {
 				redirect("/detalle");
 			}
 		}
 
-		array_push (
+		array_push(
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/product/$view"
 		);
 
-		if(!is_null($this->config->item('timeIdleSession'))){
-			array_push (
+		if (!is_null($this->config->item('timeIdleSession'))) {
+			array_push(
 				$this->includeAssets->jsFiles,
 				"$this->countryUri/watchsession"
 			);
 		}
 
-		if($this->config->item('language_form_validate')) {
-			array_push (
+		if ($this->config->item('language_form_validate')) {
+			array_push(
 				$this->includeAssets->jsFiles,
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
 
-		$this->views = ['product/'.$view];
+		$this->views = ['product/' . $view];
 		$this->render->data = $dataProduct;
-		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
 
-	public function loadDataProduct ($card = '')
+	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Novo_Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
 
-		if (count($data) < 1){
+		if (count($data) < 1) {
 			return '--';
 		}
 
+		$this->session->set_userdata("totalProducts", count($data));
+
 		$dataRequeried = [];
-		foreach($data as $row){
-			if (!empty($card) && $card !== $row->noTarjeta ){
+		foreach ($data as $row) {
+			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
-			$productBalance = $this->transforNumber ($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
+			$productBalance = $this->transforNumber($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -89,13 +91,13 @@ class Product extends NOVO_Controller {
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
-				"vc" => FALSE
+				"vc" => $row->tvirtual
 			]);
 		}
 		return $dataRequeried;
 	}
 
-	public function detailProduct ()
+	public function detailProduct()
 	{
 		log_message('INFO', 'NOVO Consolidated: detailProduct Method Initialized');
 		$view = 'detailproduct';
@@ -126,9 +128,10 @@ class Product extends NOVO_Controller {
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
+
 
 		if (in_array("120", $dataProduct['availableServices'])) {
 
@@ -143,19 +146,19 @@ class Product extends NOVO_Controller {
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
 			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
 
-			$response = $this->modelLoad->getFile_Product ($dataRequest);
-			if ( $response->code == 0) {
+			$response = $this->modelLoad->getFile_Product($dataRequest);
+			if ($response->code == 0) {
 
-					$oDate = new DateTime();
-					$dateFile = $oDate->format("YmdHis");
-					$_POST['frmTypeFile'] = $_POST['frmTypeFile'] === 'ext'? 'pdf': $_POST['frmTypeFile'];
-					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'movimientos_' . $dateFile);
+				$oDate = new DateTime();
+				$dateFile = $oDate->format("YmdHis");
+				$_POST['frmTypeFile'] = $_POST['frmTypeFile'] === 'ext' ? 'pdf' : $_POST['frmTypeFile'];
+				np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'movimientos_' . $dateFile);
 			}
-		}else{
+		} else {
 
 			$data = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 
-			$dataProduct['movements'] = $data === '--'? '--': $data->movimientos;
+			$dataProduct['movements'] = $data === '--' ? '--' : $data->movimientos;
 
 			$dataProduct['totalInMovements'] = ["totalIncome" => 0, "totalExpense" => 0];
 			if ($dataProduct['movements'] !== '--') {
@@ -163,25 +166,26 @@ class Product extends NOVO_Controller {
 			}
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-			if (is_object($data) && $data->rc === "200" ) {
+			if (is_object($data) && $data->rc === "200") {
 
 				$dataProduct['pendingTransactions'] = $data->pendingTransactions;
-				$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions ($dataProduct['pendingTransactions']);
+				$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions($dataProduct['pendingTransactions']);
 			}
 		}
 
 		$year = intval(date("Y"));
 		$years = [];
-		for($i = $year ; $i>$year-4; $i--) {
+		for ($i = $year; $i > $year - 4; $i--) {
 			array_push($years, $i);
 		}
 
-		$this->views = ['product/'.$view];
+		$this->views = ['product/' . $view];
 
 		$this->render->data = $dataProduct;
-		$this->render->months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+		$this->render->totalProducts =  $this->session->userdata('totalProducts');
+		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 		$this->render->years = $years;
-		$this->render->titlePage = lang('GEN_DETAIL_VIEW').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_DETAIL_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->booLoadNotiSystem = '';
 
 		if ($dataAlert = $this->session->flashdata('showAlert')) {
@@ -196,41 +200,37 @@ class Product extends NOVO_Controller {
 		$this->loadView($view);
 	}
 
-	function transforNumberIntoArray ($transforArray)
+	function transforNumberIntoArray($transforArray)
 	{
-		if ($transforArray !== '--')
-		{
-			foreach ($transforArray as $clave => $valor)
-			{
-				$transforArray[$clave] = $valor->monto ;
+		if ($transforArray !== '--') {
+			foreach ($transforArray as $clave => $valor) {
+				$transforArray[$clave] = $valor->monto;
 			}
 		}
 		return $transforArray;
 	}
 
-	function transforNumber ($transforNumber)
+	function transforNumber($transforNumber)
 	{
 
 		if ($transforNumber !== '--' and is_string($transforNumber)) {
 
-			$transforNumber = (float)str_replace(',','.', str_replace('.','', $transforNumber));
+			$transforNumber = (float) str_replace(',', '.', str_replace('.', '', $transforNumber));
 		}
 		return $transforNumber;
 	}
 
-	function calculateTotalTransactions ($transactions)
+	function calculateTotalTransactions($transactions)
 	{
 		$totalIncome = 0;
 		$totalExpense = 0;
-		if ($transactions !== '--')
-		{
-			foreach ($transactions as $row)
-			{
+		if ($transactions !== '--') {
+			foreach ($transactions as $row) {
 				if (is_string($row->monto)) {
 					$row->monto = $this->transforNumber($row->monto);
 				}
-				$totalIncome += $row->signo == '+'? $row->monto: 0;
-				$totalExpense += $row->signo == '-'? $row->monto: 0;
+				$totalIncome += $row->signo == '+' ? $row->monto : 0;
+				$totalExpense += $row->signo == '-' ? $row->monto : 0;
 			}
 		}
 		return ["totalIncome" => $totalIncome, "totalExpense" => $totalExpense];
@@ -248,7 +248,7 @@ class Product extends NOVO_Controller {
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
@@ -260,8 +260,8 @@ class Product extends NOVO_Controller {
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
 			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
 
-			$response = $this->modelLoad->getFile_Product ($dataRequest);
-			if ( $response->code == 0) {
+			$response = $this->modelLoad->getFile_Product($dataRequest);
+			if ($response->code == 0) {
 
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
@@ -278,8 +278,8 @@ class Product extends NOVO_Controller {
 				unset($_POST['frmMonth']);
 				unset($_POST['frmYear']);
 
-				$this->session->set_flashdata('showAlert', $dataForAlert );
-				redirect(base_url().'detalle','location', 301);
+				$this->session->set_flashdata('showAlert', $dataForAlert);
+				redirect(base_url() . 'detalle', 'location', 301);
 			}
 		}
 	}
