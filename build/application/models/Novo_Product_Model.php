@@ -244,7 +244,12 @@ class Novo_Product_Model extends NOVO_Model
 
 		log_message("info", "Request getFile Product: " . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
+
 		if ($this->isResponseRc !== FALSE) {
+
+			$this->response->classIconName = "ui-icon-alert";
+			$this->response->data = '--';
+
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -253,21 +258,23 @@ class Novo_Product_Model extends NOVO_Model
 
 				case -150:
 					$this->response->code = -150;
-					$this->response->msg = $response->msg;
+					$this->response->msg = lang('RESP_FAIL_DONWLOAD_LAST_MOVEMENTS');
 					break;
 
 				case -423:
 					$this->response->code = -150;
 					$this->response->msg = lang('RESP_FAIL_DONWLOAD_FILE');
-					$this->response->classIconName = "ui-icon-alert";
-					$this->response->data = '--';
+					break;
+
+				case -407:
+					$this->response->code = -150;
+					$this->response->msg = lang('RESP_PROFILE_NOT_UPDATE');
+					$this->response->redirect = base_url('perfil');
 					break;
 
 				default:
 					$this->response->code = 150;
 					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
-					$this->response->classIconName = "ui-icon-alert";
-					$this->response->data = '--';
 			}
 		}
 		return $this->response;

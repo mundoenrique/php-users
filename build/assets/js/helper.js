@@ -56,7 +56,17 @@ $('.big-modal').on('click', function (e) {
 	}
 
 	if (isLoadNotiSystem) {
-		notiSystem(titleNotiSystem, txtMessageNotiSystem, iconDanger, {});
+		let dataNotiSystem = {};
+		if (redirectNotiSystem){
+			dataNotiSystem = {
+				btn1: {
+					link: redirectNotiSystem,
+					action: 'redirect',
+					text: txtBtnAcceptNotiSystem
+				}
+			};
+		}
+		notiSystem(titleNotiSystem, txtMessageNotiSystem, iconDanger, dataNotiSystem);
 	}
 
 })();

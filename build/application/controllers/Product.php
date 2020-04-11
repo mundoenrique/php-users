@@ -192,6 +192,7 @@ class Product extends NOVO_Controller
 
 			$this->render->loadAlert = '1';
 			$this->render->msgAlert = $dataAlert->message;
+			$this->render->redirectAlert = $dataAlert->redirect;
 			$this->render->monthSelected = $dataAlert->monthSelected;
 			$this->render->yearSelected = $dataAlert->yearSelected;
 		}
@@ -264,11 +265,13 @@ class Product extends NOVO_Controller
 
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
-				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre . '_' . $dateFile);
-			} elseif ($response->code = -150) {
+				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre.'_'.$dateFile);
+			}
+			elseif ($response->code == -150) {
 
 				$dataForAlert = new stdClass();
-				$dataForAlert->message = lang('RESP_FAIL_DONWLOAD_FILE');
+				$dataForAlert->message = $response->msg;
+				$dataForAlert->redirect = $response->redirect;				
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
 

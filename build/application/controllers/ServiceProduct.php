@@ -174,6 +174,7 @@ class ServiceProduct extends NOVO_Controller
 		$this->views = ['serviceproduct/' . $view];
 
 		$this->render->data = $dataProduct;
+		$this->render->listReason = $this->config->item('listReasonReposition');
 		$this->render->totalProducts = $this->session->userdata('totalProducts');
 		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->availableServices = count($dataProduct['availableServices']);

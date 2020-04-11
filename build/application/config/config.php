@@ -31,17 +31,14 @@ $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['channel'] = 'personasWeb';
 
-$config['scores_recapcha'] = [
-	'development' => [
-		'score' => 0.2
-	],
-	'testing' => [
-		'score' => 0.2
-	],
-	'production' => [
-		'score' => 0.2
-	],
+$config['listReasonReposition'] = [
+	['value'=>'41','tagTranslation'=>'GENE_BLOCKING_REASONS_CANCELLED'],
+	['value'=>'46','tagTranslation'=>'GENE_BLOCKING_REASONS_LOST'],
+	['value'=>'43','tagTranslation'=>'GENE_BLOCKING_REASONS_DETERIORATED'],
+	['value'=>'59','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE'],
+	['value'=>'17','tagTranslation'=>'GENE_BLOCKING_REASONS_FRAUD'],
 ];
+
 
 //url API
 $config['urlAPI'] = URL_API;

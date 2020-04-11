@@ -264,7 +264,7 @@ class User extends NOVO_Controller
 			$objData->profileUser->ownTelephones = $listaTelefonos;
 		}
 
-		if (!empty($objData->profileUser->direccion)) {
+		if (!empty((array) $objData->profileUser->direccion)) {
 
 			$codState = new stdClass;
 			$codState->codState = $objData->profileUser->direccion->acCodEstado;
