@@ -291,7 +291,6 @@ class Novo_Product_Model extends NOVO_Model
 
 		$response = $this->sendToService($model);
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = -420;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
