@@ -91,7 +91,7 @@ class Product extends NOVO_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
-				"vc" => $row->tvirtual || TRUE
+				"vc" => $row->tvirtual
 			]);
 		}
 		return $dataRequeried;
