@@ -451,6 +451,11 @@ $$.addEventListener('DOMContentLoaded', function () {
 					$$.getElementById("expirationDate").value = response.dataDetailCard.expirationDate;
 					$$.getElementById("securityCode").value = response.dataDetailCard.securityCode;
 
+					$$.getElementById("cardNumber").style.cursor = "default";
+					$$.getElementById("cardholderName").style.cursor = "default";
+					$$.getElementById("expirationDate").style.cursor = "default";
+					$$.getElementById("securityCode").style.cursor = "default";
+
 					var showCardInfo = $$.querySelectorAll('.show-card-info');
 					for (i = 0; i < showCardInfo.length; i++) {
 						showCardInfo[i].addEventListener('mouseenter', function (e) {
