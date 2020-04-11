@@ -294,8 +294,7 @@ class Novo_Product_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					//$this->response->timeLiveModal = intval($response->bean) * 10;
-					$this->response->timeLiveModal = 20;
+					$this->response->timeLiveModal = $response->tiempoPantallaVirtual*10;
 					$this->response->dataDetailCard =  [						
 						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model)->msg,
 						'cardholderName' => $this->encrypt_connect->decode($response->NombreCliente, $this->dataAccessLog->userName, $model)->msg,
@@ -303,27 +302,13 @@ class Novo_Product_Model extends NOVO_Model
 						'securityCode' => $this->encrypt_connect->decode($response->secureToken, $this->dataAccessLog->userName, $model)->msg,
 					];
 					break;
-				case 10:
-					$this->response->code = 1;
-					$this->response->msg = lang('RESP_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 20;
-					$this->response->data = $response->data || [""];
-					break;
-				case -420:
-					$this->response->code = 2;
-					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
 
-					//if (json_decode($response->bean)->bean == "0") {
-					if (false) {
-						$this->response->code = 3;
-						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
-					}
+				case -420:
+				case -20:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_NOT_FOUND_CARD');
 					break;
-				case -421:
-					$this->response->code = 3;
-					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
-					$this->response->validityTime = intval($response->bean) * 60;
-					break;
+
 				default:
 					$this->response->code = 2;	
 			}
