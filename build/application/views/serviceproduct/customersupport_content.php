@@ -228,11 +228,11 @@
 									<div class="form-group col-lg-4">
 										<label for="recoveryCodeOTP">Código de verificación <span class="danger">*</span></label>
 										<input id="recoveryCodeOTP" class="form-control" type="text" name="recoveryCodeOTP">
-										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
+										<div id="recoveryTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
-								<p id="generateVerificationMsg" class="mb-1 h5"></p>
-							</div>							
+								<p id="recoveryVerificationMsg" class="mb-1 h5"></p>
+							</div>
 							<div class="row none">
 								<div class="form-group col-lg-4">
 									<label for="recoveryNewPin">Nuevo PIN <span class="danger">*</span></label>

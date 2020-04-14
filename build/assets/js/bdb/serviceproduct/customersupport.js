@@ -33,29 +33,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 				} else {
 					showView(optionSelected, options);
 				}
-				this.classList.add("active");
-				$$.getElementById(`${idName}View`).classList.add("fade-in");
-
-				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
-				txtBtnTrigger = btnTrigger.innerHTML.trim();
-				disableInputsForm(idName, false, txtBtnTrigger);
-
-				btnTrigger.addEventListener('click', function (e) {
-					e.preventDefault();
-
-					validateForms(form, {
-						handleMsg: true
-					});
-
-					if (form.valid()) {
-						disableInputsForm(idName, true, msgLoadingWhite);
-
-						coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-						proccessPetition(coreOperation, idName);
-					} else {
-						disableInputsForm(idName, false, txtBtnTrigger);
-					}
-				});
 			}
 		});
 	}
@@ -205,7 +182,7 @@ function disableInputsForm(optionMenu, status, txtButton) {
 		case 'recovery':
 			elementsForm = ['recoveryNewPin', 'recoveryConfirmPin'];
 			break;
-		
+
 	}
 	elementsForm.forEach(function (element) {
 		$$.getElementById(element).disabled = status;
