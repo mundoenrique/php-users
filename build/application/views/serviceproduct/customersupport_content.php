@@ -91,12 +91,12 @@
 					<!-- Cambio de PIN -->
 					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgChange" class="msg-prevent my-2">
-							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
+							<h2 class="h4 regular tertiary">Gestión de PIN</h2>
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formChange" accept-charset="utf-8" method="post">
 							<div class="form-group">
-								<label class="mr-2">Necesito <span class="danger">*</span></label>
+								<label class="mr-2">Operación <span class="danger">*</span></label>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input id="change-pin" class="custom-control-input" type="radio" name="recovery" value="change" checked>
 									<label class="custom-control-label" for="change-pin">Cambiar PIN</label>

@@ -244,6 +244,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		$this->dataRequest->idOperation = '122';
+
 		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
 		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
@@ -254,9 +255,22 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->pinNuevo = $dataRequest->newPin;
 		$this->dataRequest->prefix = $dataProduct['prefix'];
 
+		
 		if (!empty($dataRequest->codeOTP)) {
+
 			$this->dataRequest->idOperation = '112';
 			$this->className = 'com.novo.objects.TOs.CuentaTO';
+
+			if ($dataRequest->operation === 'r'){
+				
+				$this->dataRequest->idOperation = '215';
+				$this->dataAccessLog->modulo = 'Cuentas';
+				$this->dataAccessLog->function = 'Recuperar PIN';
+				$this->dataAccessLog->operation = 'Recuperar PIN';
+		
+				$this->dataRequest->userName = $this->session->userdata('userName');
+				$this->dataRequest->token = $this->session->userdata('token');
+			}
 		}
 
 		log_message("info", "Request Change ServiceProduct:" . json_encode($this->dataRequest));
@@ -274,7 +288,7 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 							'action' => 'redirect'
 						]
 					];
-				break;
+					break;
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
@@ -871,22 +885,6 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		}
 		return $this->response;
 	}
-
-	public function callWs_recovery_ServiceProduct($dataRequest)
-	{
-		$this->response->code = 0;
-		$this->response->msg = "Procesando desde callWs_recovery_ServiceProduct()";
-		$this->response->classIconName = 'ui-icon-info';
-		$this->response->data = [
-			'btn1' => [
-				'text' => lang('BUTTON_CONTINUE'),
-				'link' => '',
-				'action' => 'close'
-			]
-		];
-		return $this->response;
-	}
-
 
 	function getDataWorkingProduct() {
 		return $this->session->userdata('setProduct');

@@ -129,7 +129,7 @@ class ServiceProduct extends NOVO_Controller
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio/Recuperación<br>de PIN",
+				'text' => "<i class='icon-key block'></i>Gestión<br>de PIN",
 				'isVisible' => TRUE
 			],
 			'110' => [

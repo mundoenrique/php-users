@@ -174,9 +174,8 @@ $config = [
 		[
 			'field' => 'pinCurrent',
 			'label' => 'pinCurrent',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
 		],
-
 		[
 			'field' => 'newPin',
 			'label' => 'newPin',
@@ -187,19 +186,6 @@ $config = [
 			'label' => 'confirmPin',
 			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
 		],
-	],
-	'recovery' => [
-		[
-			'field' => 'newPin',
-			'label' => 'newPin',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
-		],
-		[
-			'field' => 'confirmPin',
-			'label' => 'confirmPin',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
-		],
-
 	],
 	'generate' => [
 		[
