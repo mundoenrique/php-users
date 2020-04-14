@@ -214,45 +214,6 @@
 						</form>
 					</div>
 
-					<!-- Solicitud de recuperacion de pin -->
-					<div id="recoveryView" class="services-both max-width-1 fit-lg mx-auto">
-						<div id="msgRecovery" class="msg-prevent my-2">
-							<h2 class="h4 regular tertiary">Recuperación de PIN</h2>
-							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
-						</div>
-						<form id="formRecovery" class="profile-1" accept-charset="utf-8" method="post">
-							<div id="recoveryVerificationOTP">
-								<hr class="separador-one mb-3">
-								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
-								<div class="row">
-									<div class="form-group col-lg-4">
-										<label for="recoveryCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="recoveryCodeOTP" class="form-control" type="text" name="recoveryCodeOTP">
-										<div id="recoveryTxtMsgErrorCodeOTP" class="help-block"></div>
-									</div>
-								</div>
-								<p id="recoveryVerificationMsg" class="mb-1 h5"></p>
-							</div>
-							<div class="row none">
-								<div class="form-group col-lg-4">
-									<label for="recoveryNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="recoveryNewPin" class="form-control" type="password" name="recoveryNewPin">
-									<div class="help-block"></div>
-								</div>
-								<div class="form-group col-lg-4">
-									<label for="recoveryConfirmPin">Confirmar PIN <span class="danger">*</span></label>
-									<input id="recoveryConfirmPin" class="form-control" type="password" name="recoveryConfirmPin">
-									<div class="help-block"></div>
-								</div>
-							</div>
-
-							<hr class="separador-one">
-							<div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link" href="">Cancelar</a>
-								<button id="btnRecovery" class="btn btn-small btn-loading btn-primary" type="submit" name="btnRecovery">Continuar</button>
-							</div>
-						</form>
-					</div>
 				</div>
 			</div>
 		</section>

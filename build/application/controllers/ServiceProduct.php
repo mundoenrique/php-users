@@ -121,32 +121,25 @@ class ServiceProduct extends NOVO_Controller
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		array_push($dataProduct['availableServices'],'999'); // *******************
-
 		$menuOptionsProduct = [
 			'120' => [
 				'id' => 'generate',
-				'text' => "<i class='icon-key block'></i>Generar <br>PIN",
+				'text' => "<i class='icon-key block'></i>Generar<br>PIN",
 				'isVisible' => FALSE
-			],
-			'999' => [
-				'id' => 'recovery',
-				'text' => "<i class='icon-spinner block'></i>Recuperar PIN",
-				'isVisible' => TRUE
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN",
+				'text' => "<i class='icon-key block'></i>Cambio/Recuperación<br>de PIN",
 				'isVisible' => TRUE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de tarjeta",
+				'text' => "<i class='icon-lock block'></i>Bloqueo<br>de tarjeta",
 				'isVisible' => TRUE
 			],
 			'111' => [
 				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición",
+				'text' => "<i class='icon-spinner block'></i>Solicitud<br>de reposición",
 				'isVisible' => TRUE
 			]
 		];

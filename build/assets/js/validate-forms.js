@@ -143,12 +143,6 @@ function validateForms(form, options) {
 		else return true;
 	}, "El nuevo PIN no debe ser igual a su PIN anterior.");
 
-	jQuery.validator.addMethod("recoveryConfirmPin", function(value, element) {
-		if(element.value.length>0 && element.value == $("#recoveryNewPin").val())
-			return true;
-		else return false;
-	}, "Debe ser igual al nuevo PIN.");	
-
 	jQuery.validator.addMethod("fourConsecutivesDigits", function(value, element) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 números no deben ser consecutivos.");
@@ -160,8 +154,6 @@ function validateForms(form, options) {
 			changeCurrentPin: { required: true, number: true, exactNumbers: 4 },
 			changeNewPin: { required: true, number: true, exactNumbers: 4, "changeNewPin": true, "fourConsecutivesDigits": true },
 			changeConfirmPin: { required: true, number: true, "changeConfirmPin": true },
-			recoveryNewPin: { required: true, number: true, exactNumbers: 4, "fourConsecutivesDigits": true },
-			recoveryConfirmPin: { required: true, number: true, exactNumbers: 4, "recoveryConfirmPin": true },
 			replaceMotSol: { required: true, "selectRequired": true},
 			gender: { required: true},
 			typeDocument: { required: true, "selectRequired": true},
