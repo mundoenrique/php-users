@@ -43,13 +43,14 @@ $$.addEventListener('DOMContentLoaded', function () {
 				btnTrigger.addEventListener('click', function (e) {
 					e.preventDefault();
 
-					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-
 					validateForms(form, {
 						handleMsg: true
 					});
+
 					if (form.valid()) {
 						disableInputsForm(idName, true, msgLoadingWhite);
+
+						coreOperation = new operationFactory(`fn${idNameCapitalize}`);
 						proccessPetition(coreOperation, idName);
 					} else {
 						disableInputsForm(idName, false, txtBtnTrigger);
@@ -315,11 +316,10 @@ function showView(option, options) {
 	btnTrigger.addEventListener('click',function(e){
 		e.preventDefault();
 
-		coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-
 		validateForms(form, {handleMsg: true});
 		if(form.valid()) {
 			disableInputsForm(idName, true, msgLoadingWhite);
+			coreOperation = new operationFactory(`fn${idNameCapitalize}`);
 			proccessPetition(coreOperation, idName);
 		} else {
 			disableInputsForm (idName, false, txtBtnTrigger);

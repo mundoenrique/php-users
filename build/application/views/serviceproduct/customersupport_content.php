@@ -221,8 +221,20 @@
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formRecovery" class="profile-1" accept-charset="utf-8" method="post">
-							<div class="row">
-							<div class="form-group col-lg-4">
+							<div id="recoveryVerificationOTP">
+								<hr class="separador-one mb-3">
+								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+								<div class="row">
+									<div class="form-group col-lg-4">
+										<label for="recoveryCodeOTP">Código de verificación <span class="danger">*</span></label>
+										<input id="recoveryCodeOTP" class="form-control" type="text" name="recoveryCodeOTP">
+										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
+									</div>
+								</div>
+								<p id="generateVerificationMsg" class="mb-1 h5"></p>
+							</div>							
+							<div class="row none">
+								<div class="form-group col-lg-4">
 									<label for="recoveryNewPin">Nuevo PIN <span class="danger">*</span></label>
 									<input id="recoveryNewPin" class="form-control" type="password" name="recoveryNewPin">
 									<div class="help-block"></div>
@@ -233,18 +245,7 @@
 									<div class="help-block"></div>
 								</div>
 							</div>
-							<div id="recoveryVerificationOTP" class="none">
-								<hr class="separador-one mb-3">
-								<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
-								<div class="row">
-									<div class="form-group col-lg-4">
-										<label for="recoveryCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="recoveryCodeOTP" class="form-control" type="text" name="recoveryCodeOTP" disabled>
-										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
-									</div>
-								</div>
-								<p id="generateVerificationMsg" class="mb-1 h5"></p>
-							</div>
+
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link" href="">Cancelar</a>

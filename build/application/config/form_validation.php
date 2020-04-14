@@ -188,6 +188,19 @@ $config = [
 			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
 		],
 	],
+	'recovery' => [
+		[
+			'field' => 'newPin',
+			'label' => 'newPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+		],
+		[
+			'field' => 'confirmPin',
+			'label' => 'confirmPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|matches[newPin]'
+		],
+
+	],
 	'generate' => [
 		[
 			'field' => 'newPin',

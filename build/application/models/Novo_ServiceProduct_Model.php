@@ -872,6 +872,22 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		return $this->response;
 	}
 
+	public function callWs_recovery_ServiceProduct($dataRequest)
+	{
+		$this->response->code = 0;
+		$this->response->msg = "Procesando desde callWs_recovery_ServiceProduct()";
+		$this->response->classIconName = 'ui-icon-info';
+		$this->response->data = [
+			'btn1' => [
+				'text' => lang('BUTTON_CONTINUE'),
+				'link' => '',
+				'action' => 'close'
+			]
+		];
+		return $this->response;
+	}
+
+
 	function getDataWorkingProduct() {
 		return $this->session->userdata('setProduct');
 	}
