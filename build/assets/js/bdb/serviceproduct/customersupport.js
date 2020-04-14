@@ -126,7 +126,6 @@ function operationFactory(optionMenu, response = null) {
 	function fnChange() {
 		
 		var dataForm = {
-			operation: operationPin.value,
 			codeOTP: $$.getElementById('changeCodeOTP').value,
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,

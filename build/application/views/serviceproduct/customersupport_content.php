@@ -96,18 +96,14 @@
 						</div>
 						<form id="formChange" accept-charset="utf-8" method="post">
 							<div class="form-group">
-<<<<<<< HEAD
-								<label class="mr-2">Operación <span class="danger">*</span></label>
-=======
 								<label class="mr-2">Operación: <span class="danger">*</span></label>
->>>>>>> 681f89571b7d245ccb0674d9bde7246005876bd7
 								<div class="custom-control custom-radio custom-control-inline">
 									<input id="change-pin" class="custom-control-input" type="radio" name="recovery" value="change" checked>
 									<label class="custom-control-label" for="change-pin">Cambiar PIN</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input id="generate-pin" class="custom-control-input" type="radio" name="recovery" value="generate">
-									<label class="custom-control-label" for="generate-pin">Generar nuevo PIN</label>
+									<label class="custom-control-label" for="generate-pin">Recuperar PIN</label>
 								</div>
 								<div class="help-block"></div>
 							</div>
