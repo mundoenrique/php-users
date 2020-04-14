@@ -174,9 +174,8 @@ $config = [
 		[
 			'field' => 'pinCurrent',
 			'label' => 'pinCurrent',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]'
+			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
 		],
-
 		[
 			'field' => 'newPin',
 			'label' => 'newPin',

@@ -1,11 +1,12 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval, idNameCapitalize, operationPin;
 
 $$.addEventListener('DOMContentLoaded', function () {
 
 	//vars
 	var options = $$.querySelectorAll(".services-item");
+	var radios = $$.querySelectorAll('input[type=radio][name="recovery"]');
 	var i;
 
 	//core
@@ -33,28 +34,21 @@ $$.addEventListener('DOMContentLoaded', function () {
 				} else {
 					showView(optionSelected, options);
 				}
-				this.classList.add("active");
-				$$.getElementById(`${idName}View`).classList.add("fade-in");
+			}
+		});
+	}
 
-				btnTrigger = $$.getElementById(`btn${idNameCapitalize}`);
-				txtBtnTrigger = btnTrigger.innerHTML.trim();
-				disableInputsForm(idName, false, txtBtnTrigger);
-
-				btnTrigger.addEventListener('click', function (e) {
-					e.preventDefault();
-
-					coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-
-					validateForms(form, {
-						handleMsg: true
-					});
-					if (form.valid()) {
-						disableInputsForm(idName, true, msgLoadingWhite);
-						proccessPetition(coreOperation, idName);
-					} else {
-						disableInputsForm(idName, false, txtBtnTrigger);
-					}
-				});
+	for (i = 0; i < radios.length; i++) {
+		radios[i].addEventListener('change', function (e) {
+			if (this.checked) {
+				operationPin = this;
+				if (this.id == 'generate-pin') {
+					$$.getElementById("current-pin-field").classList.add('none');
+					$$.getElementById("changeCurrentPin").disabled = true;
+				} else {
+					$$.getElementById("changeCurrentPin").disabled = false;
+					$$.getElementById("current-pin-field").classList.remove('none');
+				}
 			}
 		});
 	}
@@ -88,7 +82,6 @@ function operationFactory(optionMenu, response = null) {
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
-			// disableInputsForm (idName, false, txtBtnTrigger);
 		},
 		3: function (response) {
 			$$.getElementById(`${idName}CodeOTP`).value = '';
@@ -122,7 +115,7 @@ function operationFactory(optionMenu, response = null) {
 		var dataForm = {
 			newPin: $$.getElementById('generateNewPin').value,
 			confirmPin: $$.getElementById('generateConfirmPin').value,
-			codeOTP: $$.getElementById('generateCodeOTP').value
+			codeOTP: $$.getElementById('generateCodeOTP').value,			
 		}
 		return {
 			data: dataForm,
@@ -131,12 +124,13 @@ function operationFactory(optionMenu, response = null) {
 	}
 
 	function fnChange() {
-
+		
 		var dataForm = {
 			codeOTP: $$.getElementById('changeCodeOTP').value,
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,
 			confirmPin: $$.getElementById('changeConfirmPin').value,
+			operation: $$.getElementById('change-pin').checked ? 'c' : 'r'
 		};
 		return {
 			data: dataForm,
@@ -177,7 +171,7 @@ function disableInputsForm(optionMenu, status, txtButton) {
 			break;
 
 		case 'change':
-			elementsForm = ['changeCurrentPin', 'changeNewPin', 'changeConfirmPin'];
+			elementsForm = ['change-pin', 'generate-pin', 'changeCurrentPin', 'changeNewPin', 'changeConfirmPin'];
 			break;
 
 		case 'lock':
@@ -262,22 +256,30 @@ function startTimer(duration, display) {
 }
 
 function showConfirmation(id) {
-	var title = $$.getElementById('msg'+id.charAt(0).toUpperCase() + id.slice(1)).querySelector("h2").innerHTML;
+	var title = $$.getElementById('msg' + id.charAt(0).toUpperCase() + id.slice(1)).querySelector("h2").innerHTML;
 	var dataConfirm = {
-		"title":title,
-		"msg":"¿Realmente deseas realizar esta acción?",
-		"icon":"ui-icon-alert",
-		"data":{
-			"btn1":{"text":"Si","link":false,"action":"close"},
-			"btn2":{"text":"No","link":false,"action":"close"}
+		"title": title,
+		"msg": "¿Realmente deseas realizar esta acción?",
+		"icon": "ui-icon-alert",
+		"data": {
+			"btn1": {
+				"text": "Si",
+				"link": false,
+				"action": "close"
+			},
+			"btn2": {
+				"text": "No",
+				"link": false,
+				"action": "close"
+			}
 		}
 	}
 
-	notiSystem (dataConfirm.title, dataConfirm.msg, dataConfirm.icon, dataConfirm.data);
+	notiSystem(dataConfirm.title, dataConfirm.msg, dataConfirm.icon, dataConfirm.data);
 }
 
 function showView(option, options) {
-	var j, idNameCapitalize;
+	var j;
 	resetForms(form);
 	idName = option.id;
 	idNameCapitalize = idName.charAt(0).toUpperCase() + idName.slice(1);
@@ -294,17 +296,18 @@ function showView(option, options) {
 	txtBtnTrigger = btnTrigger.innerHTML.trim();
 	disableInputsForm(idName, false, txtBtnTrigger);
 
-	btnTrigger.addEventListener('click',function(e){
+	btnTrigger.addEventListener('click', function (e) {
 		e.preventDefault();
 
-		coreOperation = new operationFactory(`fn${idNameCapitalize}`);
-
-		validateForms(form, {handleMsg: true});
-		if(form.valid()) {
+		validateForms(form, {
+			handleMsg: true
+		});
+		if (form.valid()) {
 			disableInputsForm(idName, true, msgLoadingWhite);
+			coreOperation = new operationFactory(`fn${idNameCapitalize}`);
 			proccessPetition(coreOperation, idName);
 		} else {
-			disableInputsForm (idName, false, txtBtnTrigger);
+			disableInputsForm(idName, false, txtBtnTrigger);
 		}
 	});
 }

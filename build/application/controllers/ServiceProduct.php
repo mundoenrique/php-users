@@ -124,22 +124,22 @@ class ServiceProduct extends NOVO_Controller
 		$menuOptionsProduct = [
 			'120' => [
 				'id' => 'generate',
-				'text' => "<i class='icon-key block'></i>Generar <br>PIN",
+				'text' => "<i class='icon-key block'></i>Generar<br>PIN",
 				'isVisible' => FALSE
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Cambio <br>de PIN",
+				'text' => "<i class='icon-key block'></i>Gestión<br>de PIN",
 				'isVisible' => TRUE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo <br>de tarjeta",
+				'text' => "<i class='icon-lock block'></i>Bloqueo<br>de tarjeta",
 				'isVisible' => TRUE
 			],
 			'111' => [
 				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud <br>de reposición",
+				'text' => "<i class='icon-spinner block'></i>Solicitud<br>de reposición",
 				'isVisible' => TRUE
 			]
 		];

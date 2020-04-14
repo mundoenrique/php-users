@@ -58,8 +58,8 @@
 						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
+									<label for="generatePin">Nuevo PIN <span class="danger">*</span></label>
+									<input id="generatePin" class="form-control" type="password" name="generatePin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
@@ -91,12 +91,24 @@
 					<!-- Cambio de PIN -->
 					<div id="changeView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgChange" class="msg-prevent my-2">
-							<h2 class="h4 regular tertiary">Cambio de PIN</h2>
+							<h2 class="h4 regular tertiary">Gestión de PIN</h2>
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formChange" accept-charset="utf-8" method="post">
+							<div class="form-group">
+								<label class="mr-2">Operación: <span class="danger">*</span></label>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input id="change-pin" class="custom-control-input" type="radio" name="recovery" value="change" checked>
+									<label class="custom-control-label" for="change-pin">Cambiar PIN</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input id="generate-pin" class="custom-control-input" type="radio" name="recovery" value="generate">
+									<label class="custom-control-label" for="generate-pin">Recuperar PIN</label>
+								</div>
+								<div class="help-block"></div>
+							</div>
 							<div class="row">
-								<div class="form-group col-lg-4">
+								<div id="current-pin-field" class="form-group col-lg-4">
 									<label for="changeCurrentPin">PIN actual <span class="danger">*</span></label>
 									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin">
 									<div class="help-block"></div>
