@@ -1,6 +1,6 @@
 'use strict';
 var $$ = document;
-var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval, idNameCapitalize;
+var form, btnTrigger, txtBtnTrigger, coreOperation, response, idName, verificationMsg, interval, idNameCapitalize, operationPin;
 
 $$.addEventListener('DOMContentLoaded', function () {
 
@@ -41,6 +41,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	for (i = 0; i < radios.length; i++) {
 		radios[i].addEventListener('change', function (e) {
 			if (this.checked) {
+				operationPin = this;
 				if (this.id == 'generate-pin') {
 					$$.getElementById("current-pin-field").classList.add('none');
 					$$.getElementById("changeCurrentPin").disabled = true;
@@ -81,7 +82,6 @@ function operationFactory(optionMenu, response = null) {
 			btnTrigger.innerHTML = txtBtnTrigger;
 			btnTrigger.disabled = false;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
-			// disableInputsForm (idName, false, txtBtnTrigger);
 		},
 		3: function (response) {
 			$$.getElementById(`${idName}CodeOTP`).value = '';
@@ -126,6 +126,7 @@ function operationFactory(optionMenu, response = null) {
 	function fnChange() {
 		
 		var dataForm = {
+			operation: operationPin.value,
 			codeOTP: $$.getElementById('changeCodeOTP').value,
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
 			newPin: $$.getElementById('changeNewPin').value,
@@ -171,7 +172,7 @@ function disableInputsForm(optionMenu, status, txtButton) {
 			break;
 
 		case 'change':
-			elementsForm = ['changeCurrentPin', 'changeNewPin', 'changeConfirmPin', 'change-pin', 'generate-pin'];
+			elementsForm = ['change-pin', 'generate-pin', 'changeCurrentPin', 'changeNewPin', 'changeConfirmPin'];
 			break;
 
 		case 'lock':
