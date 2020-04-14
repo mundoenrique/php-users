@@ -6,6 +6,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	//vars
 	var options = $$.querySelectorAll(".services-item");
+	var radios = $$.querySelectorAll('input[type=radio][name="recovery"]');
 	var i;
 
 	//core
@@ -32,6 +33,20 @@ $$.addEventListener('DOMContentLoaded', function () {
 					});
 				} else {
 					showView(optionSelected, options);
+				}
+			}
+		});
+	}
+
+	for (i = 0; i < radios.length; i++) {
+		radios[i].addEventListener('change', function (e) {
+			if (this.checked) {
+				if (this.id == 'generate-pin') {
+					$$.getElementById("current-pin-field").classList.add('none');
+					$$.getElementById("changeCurrentPin").disabled = true;
+				} else {
+					$$.getElementById("changeCurrentPin").disabled = false;
+					$$.getElementById("current-pin-field").classList.remove('none');
 				}
 			}
 		});

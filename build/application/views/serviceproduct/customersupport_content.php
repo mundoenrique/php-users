@@ -95,8 +95,20 @@
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formChange" accept-charset="utf-8" method="post">
+							<div class="form-group">
+								<label class="mr-2">Necesito <span class="danger">*</span></label>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input id="change-pin" class="custom-control-input" type="radio" name="recovery" value="change" checked>
+									<label class="custom-control-label" for="change-pin">Cambiar PIN</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input id="generate-pin" class="custom-control-input" type="radio" name="recovery" value="generate">
+									<label class="custom-control-label" for="generate-pin">Generar nuevo PIN</label>
+								</div>
+								<div class="help-block"></div>
+							</div>
 							<div class="row">
-								<div class="form-group col-lg-4">
+								<div id="current-pin-field" class="form-group col-lg-4">
 									<label for="changeCurrentPin">PIN actual <span class="danger">*</span></label>
 									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin">
 									<div class="help-block"></div>
