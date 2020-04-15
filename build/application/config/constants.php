@@ -193,7 +193,7 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 );
 
 $uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
-define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' ?
+define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' || $uriSegments[3] == 'bdb' ?
 	'BDB_' : 'NOVO_'
 );
 unset($uriSegments);
