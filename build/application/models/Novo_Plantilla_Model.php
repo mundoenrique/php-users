@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author
  *
  */
-class Novo_Plantilla_Model extends NOVO_Model {
+class Novo_Plantilla_Model extends BDB_Model {
 
 	public function __construct()
 	{

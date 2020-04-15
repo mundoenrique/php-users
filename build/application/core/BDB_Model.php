@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class NOVO_Model extends CI_Model {
+class BDB_Model extends CI_Model {
 	public $dataAccessLog;
 	public $className;
 	public $accessLog;
@@ -16,7 +16,7 @@ class NOVO_Model extends CI_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO_Model  Class Initialized');
+		log_message('INFO', 'BDB_Model  Class Initialized');
 
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
@@ -55,18 +55,18 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = empty($this->dataRequest->pais)? ucwords($this->country): $this->dataRequest->pais;
 
-		
+
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = [];
 		$response = $this->encrypt_connect->connectWs($request, $this->dataAccessLog->userName, $model);
-		
+
 		if(isset($response->rc)){
 			$responseDecrypt = $response;
 		}else{
 			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		}
-		
+
 		log_message("info", "Response: " . json_encode($responseDecrypt));
 
 		$this->isResponseRc = (int) $responseDecrypt->rc;

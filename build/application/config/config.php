@@ -149,7 +149,7 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'NOVO_';
+$config['subclass_prefix'] = SUBCLASS_PREFIX;
 
 /*
 |--------------------------------------------------------------------------

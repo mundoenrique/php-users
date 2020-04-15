@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Product extends NOVO_Controller
+class Product extends BDB_Controller
 {
 
 	public function __construct()

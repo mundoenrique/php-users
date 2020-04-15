@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Request_Data {
 	private $CI;
-	private $NOVO_Model;
+	private $BDB_Model;
 
 	public function __construct()
 	{
@@ -21,7 +21,7 @@ class Request_Data {
 	 */
 	public function getEnterprises($dataRequest)
 	{
-		$this->NOVO_Model = new NOVO_Model();
-		$this->NOVO_Model->className = "";
+		$this->BDB_Model = new BDB_Model();
+		$this->BDB_Model->className = "";
 	}
 }

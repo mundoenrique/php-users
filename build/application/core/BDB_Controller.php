@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @package controllers
  * @author J. Enrique Peñaloza P
  */
-class NOVO_Controller extends CI_Controller {
+class BDB_Controller extends CI_Controller {
 	protected $includeAssets;
 	protected $countryUri;
 	protected $skin;
@@ -27,7 +27,7 @@ class NOVO_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO_Controller Class Initialized');
+		log_message('INFO', 'BDB_Controller Class Initialized');
 
 		$this->render = new stdClass();
 		$this->render->loadAlert = '0';

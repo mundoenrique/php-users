@@ -191,3 +191,9 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 && filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
 );
+
+$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
+define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' ?
+	'BDB_' : 'NOVO_'
+);
+unset($uriSegments);

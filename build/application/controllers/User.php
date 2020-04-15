@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends NOVO_Controller
+class User extends BDB_Controller
 {
 
 	public function __construct()

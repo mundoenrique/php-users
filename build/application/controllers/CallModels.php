@@ -3,7 +3,7 @@
  * @info Controlador para las peticiones asíncronas de la aplicación
  * @author J. Enrique Peñaloza P
 */
-class CallModels extends Novo_Controller {
+class CallModels extends BDB_Controller {
 	protected $model;
 	protected $method;
 	protected $rule;

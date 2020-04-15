@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  *
  */
-class Product_Model extends NOVO_Model
+class Product_Model extends BDB_Model
 {
 
 	public function __construct()

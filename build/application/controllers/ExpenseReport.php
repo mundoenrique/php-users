@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @info Controlador para la vista principal de la aplicación
  * @author J. Enrique Peñaloza P
 */
-class ExpenseReport extends NOVO_Controller {
+class ExpenseReport extends BDB_Controller {
 
 	public function __construct()
 	{
