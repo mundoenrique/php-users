@@ -54,37 +54,30 @@ $route['default_controller'] = 'users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Novo Structure
-$route['(:any)/'] = "user/login";
-
-$route['(:any)/inicio'] = "user/login";
-$route['(:any)/preregistro'] = "user/preRegistry";
-$route['(:any)/registro'] = "user/registry";
-$route['(:any)/perfil'] = "user/profile";
-$route['(:any)/recuperaracceso'] = "user/recoveryAccess";
-$route['(:any)/cerrarsesion'] = "user/closeSession";
-$route['(:any)/cambiarclave'] = "user/changePassword";
-$route['(:any)/cambiarclaveprofile'] = "user/changePasswordProfile";
-$route['(:any)/sugerencia'] = "user/notRender";
-$route['(:any)/app/(:any)'] = "user/notRender/$2";
-
-$route['(:any)/vistaconsolidada'] = "product/listProduct";
-$route['(:any)/detalle'] = "product/detailProduct";
-$route['(:any)/detalle/download'] = "product/downloadDetail";
-
-$route['(:any)/async-call'] = "callModels";
-
-$route['(:any)/listaproducto'] = "serviceProduct/listProduct";
-$route['(:any)/atencioncliente'] = "serviceProduct/customerSupport";
-
-$route['(:any)/reporte'] = "expenseReport/listProduct";
-$route['(:any)/detallereporte'] = "expenseReport/detailReport";
-$route['(:any)/reporte/getpdf'] = "expenseReport/getPDF";
-
+//BDB ROUTES
+$route['bdb/'] = "user/login";
+$route['bdb/inicio'] = "user/login";
+$route['bdb/preregistro'] = "user/preRegistry";
+$route['bdb/registro'] = "user/registry";
+$route['bdb/perfil'] = "user/profile";
+$route['bdb/recuperaracceso'] = "user/recoveryAccess";
+$route['bdb/cerrarsesion'] = "user/closeSession";
+$route['bdb/cambiarclave'] = "user/changePassword";
+$route['bdb/cambiarclaveprofile'] = "user/changePasswordProfile";
+$route['bdb/sugerencia'] = "user/notRender";
+$route['bdb/app/(:any)'] = "user/notRender/$2";
+$route['bdb/vistaconsolidada'] = "product/listProduct";
+$route['bdb/detalle'] = "product/detailProduct";
+$route['bdb/detalle/download'] = "product/downloadDetail";
+$route['bdb/async-call'] = "callModels";
+$route['bdb/listaproducto'] = "serviceProduct/listProduct";
+$route['bdb/atencioncliente'] = "serviceProduct/customerSupport";
+$route['bdb/reporte'] = "expenseReport/listProduct";
+$route['bdb/detallereporte'] = "expenseReport/detailReport";
+$route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
-
 $route['users'] = 'users/index'; // Otros paises
 $route['users/recoveryPassword_pe'] = 'users/recoveryPassword'; // Perú LATODO
 $route['users/recoveryPassword_pi'] = 'users/recoveryPassword'; // Ecuador pichincha
@@ -139,7 +132,6 @@ $route['transferencia/HistorialPe'] = 'transferPe/historial_pe';
 $route['limit/pe'] = 'transferPe/limit';
 $route['transferencia/peGeneral'] = 'transferPe/CallModel';
 $route['transfererencia/transferPe'] = 'transferPe/maketransferPe';
-
 $route['affiliation'] = 'affiliation';
 $route['affiliation/cuentasP2P'] = 'affiliation/CallWstarjetasP2P';
 $route['affiliation/affiliation'] = 'affiliation/CallWsAffiliationP2P';
