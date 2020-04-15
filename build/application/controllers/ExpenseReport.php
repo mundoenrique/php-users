@@ -109,7 +109,7 @@ class ExpenseReport extends NOVO_Controller {
 			"third_party/dataTables-1.10.20",
 			"$this->countryUri/expensereport/$view",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);

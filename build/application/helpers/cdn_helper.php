@@ -30,8 +30,8 @@ if ( ! function_exists('insert_js_cdn'))
         $url_cdn = $CI->config->item('base_url_cdn');
         $path_cdn = $CI->config->item('base_path_cdn');
 
-        $filepath = $path_cdn . 'js/' . $filename;
-        $fileurl = $url_cdn . 'js/' . $filename;
+        $filepath = $path_cdn . 'js/default/' . $filename;
+        $fileurl = $url_cdn . 'js/default/' . $filename;
         $version = '';
         if (file_exists($filepath)) {
 					$version = '?v=' . date('Ymd-U', filemtime($filepath));
@@ -57,10 +57,8 @@ if ( ! function_exists('insert_css_cdn'))
         $url_cdn = $CI->config->item('base_url_cdn');
         $path_cdn = $CI->config->item('base_path_cdn');
         $skin = $CI->input->cookie('cpo_skin');
-        $skin_folder = '';
-				if ($skin === 'latodo' || $skin === 'pichincha') $skin_folder = $skin . '/';
-
-        $filepath = $path_cdn . 'css/' . $filename;
+        $skin_folder = $skin . '/';
+        $filepath = $path_cdn . 'css/' . $skin_folder . $filename;
         $fileurl = $url_cdn . 'css/' . $skin_folder .  $filename;
         $version = '';
         if (file_exists($filepath)) {

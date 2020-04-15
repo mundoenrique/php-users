@@ -192,16 +192,16 @@ table {
 
 @font-face {
 	font-family: "Source Sans Pro";
-	src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix');
-	src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
 	font-style: normal;
 	font-weight: normal;
 }
 
 @font-face {
 	font-family: "NovoPayment Glyphs";
-	src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix');
-	src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/novopayment-glyphs-webfont.woff') format('woff'), url('../fonts/novopayment-glyphs-webfont.ttf') format('truetype'), url('../fonts/novopayment-glyphs-webfont.svg') format('svg');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'), url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'), url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
 	font-style: normal;
 	font-weight: normal;
 }
@@ -234,7 +234,7 @@ html {
 }
 
 body {
-	background: white url('../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
+	background: white url('../../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
 	color: #555555;
 	height: 100%;
 	margin: 0;
@@ -2119,7 +2119,7 @@ embossed {
 }
 
 #brand-app {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll;
 	float: left;
 }
 
@@ -2379,7 +2379,7 @@ embossed {
 	-o-animation: show 6s ease 0 1 normal;
 	-webkit-animation: show 6s ease 0 1 normal;
 	animation: show 6s ease 0 1 normal;
-	background: transparent url('../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+	background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
 	height: 30px;
 	margin: -45px 0 0 130px;
 	overflow: hidden;
@@ -2942,7 +2942,7 @@ ul#dashboard-donor li.dashboard-item a .dashboard-item-network,
 ul#dashboard-donor li.dashboard-item .dashboard-item-box .dashboard-item-network,
 ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-network,
 ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-network {
-	background: transparent url('../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+	background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
 	height: 30px;
 	margin: 45px 85px 0;
 	overflow: hidden;
@@ -3621,7 +3621,7 @@ ul#networks {
 }
 
 ul#networks li.network-item {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -110px;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -110px;
 	float: left;
 	height: 40px;
 	margin-right: 15px;
@@ -3658,7 +3658,7 @@ ul#certificates {
 }
 
 ul#certificates li.certificate-item {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -150px;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -150px;
 	float: right;
 	height: 40px;
 	margin-left: 15px;
@@ -3682,7 +3682,7 @@ ul#certificates li.certificate-item.norton-secured {
 }
 
 a#app-engine {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
 	display: block;
 	float: right;
 	height: 25px;

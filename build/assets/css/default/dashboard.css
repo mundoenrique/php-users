@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Profile stylesheet.
+ * Dashboard stylesheet.
  *
  * @project Conexión Personas Online
  * @version 1.0 (Poseidon)
@@ -187,16 +187,16 @@ table {
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix');
-  src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+  src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix');
+  src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: "NovoPayment Glyphs";
-  src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/novopayment-glyphs-webfont.woff') format('woff'), url('../fonts/novopayment-glyphs-webfont.ttf') format('truetype'), url('../fonts/novopayment-glyphs-webfont.svg') format('svg');
+  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
+  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'), url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'), url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
   font-style: normal;
   font-weight: normal;
 }
@@ -229,7 +229,7 @@ html {
 }
 
 body {
-  background: white url('../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
+  background: white url('../../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
   color: #555555;
   height: 100%;
   margin: 0;
@@ -1964,9 +1964,8 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   width: 940px;
 }
 
-#brand-id,
 #brand-app {
-  background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll;
+  background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll;
   float: left;
 }
 
@@ -2008,7 +2007,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 40px;
-  text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
+	text-shadow: 1px 1px 0 rgba(51, 51, 51, 0.35);
 }
 #main-menu ul.menu li.menu-item a.account{
 	display: flex;
@@ -2197,7 +2196,7 @@ table.receipt td.data-metadata.data-success .data-indicator, table.receipt td.da
   -o-animation: show 6s ease 0 1 normal;
   -webkit-animation: show 6s ease 0 1 normal;
   animation: show 6s ease 0 1 normal;
-  background: transparent url('../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+  background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
   height: 30px;
   margin: -45px 0 0 130px;
   overflow: hidden;
@@ -2670,7 +2669,7 @@ ul#dashboard-donor li.dashboard-item a .dashboard-item-network,
 ul#dashboard-donor li.dashboard-item .dashboard-item-box .dashboard-item-network,
 ul#dashboard-beneficiary li.dashboard-item a .dashboard-item-network,
 ul#dashboard-beneficiary li.dashboard-item .dashboard-item-box .dashboard-item-network {
-  background: transparent url('../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
+  background: transparent url('../../img/product-networks-sprite.png?v=1.0') scroll no-repeat 0 0;
   height: 30px;
   margin: 45px 85px 0;
   overflow: hidden;
@@ -3456,180 +3455,10 @@ table.feed-table tfoot td.feed-category-10x {
 
 #content {
   float: left;
-  width: 100%;
+  width: 700px;
 }
 #content article section {
   min-height: 480px;
-}
-
-#widget-account .widget-header {
-  height: 70px;
-}
-
-.widget {
-  overflow: visible !important;
-}
-
-.text-header {
-  color: #fff;
-  font-size: 24px;
-  float: left;
-  margin-top: 40px;
-  margin-left: 120px;
-}
-
-#widget-account a.user-avatar {
-  margin: 40px 20px 0;
-  height: 70px;
-  width: 70px;
-  border-radius: 100%;
-}
-
-.icon-user-male {
-  font-size: 64px;
-}
-
-.user-avatar span {
-  font-size: 30px !important;
-  line-height: 60px !important;
-}
-
-.profile-1 {
-  float: left;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
-.profile-title-1 {
-  color: #0e5b8c;
-  position: inherit;
-  margin-top: 30px;
-  left: 80px;
-}
-
-.profile-title-1 span, .profile-title-1 a {
-  color: #0e5b8c !important;
-  font-size: 16px;
-}
-
-.profile-2 {
-  float: left;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
-.profile-title-2 {
-  color: #0E5B8C;
-  position: inherit;
-  margin-top: 15px;
-  left: 80px;
-  float: left;
-  width: 550px;
-}
-
-.profile-title-2 span, .profile-title-2 a {
-  color: #0e5b8c !important;
-  font-size: 16px;
-}
-
-.profile-3 {
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
-.profile-title-3 {
-  color: #0E5B8C;
-  position: inherit;
-  margin-top: 15px;
-  left: 80px;
-  float: left;
-}
-
-.profile-title-3 span, .profile-title-3 a {
-  color: #16a085 !important;
-  font-size: 16px;
-}
-
-.icon-edit-profile {
-  float: left;
-}
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 15px 0 0;
-}
-fieldset.fieldset-column-left-profile, fieldset.fieldset-column-right-profile {
-  float: left;
-  margin-bottom: 15px;
-}
-fieldset.fieldset-column-left-profile {
-  border-left: 3px solid #0E5B8C;
-  border-right: 1px solid #DDDDDD;
-  margin-right: 10px;
-  padding: 15px 25px 0 5px;
-  width: 430px;
-}
-
-fieldset.fieldset-column-right-profile {
-  padding: 15px 0 0 0;
-  width: 400px;
-}
-
-fieldset input {
-  float: left;
-}
-
-label.label-inline {
-  margin: 0 !important;
-}
-
-.field-prepend {
-  float: left;
-}
-
-.clear-text {
-  clear: both;
-  width: 100%;
-  float: left;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.float-right {
-  text-align: right;
-}
-
-.group-select {
-  width: 270px;
-  float: left;
-}
-.group-select select {
-  float: left;
-  margin-right: 10px;
-}
-
-.link-config {
-  color: #368db6;
-  text-decoration: underline;
-}
-
-#direccion {
-  height: 80px;
-  line-height: 16px;
-  resize: none;
-}
-
-#new-login, #personal-id {
-  width: 160px;
-}
-
-#birth-date {
-  width: 160px;
-}
-
-.pass-2 {
-  width: 200px;
 }
 
 #foot {
@@ -3684,7 +3513,7 @@ ul#networks {
   width: auto !important;
 }
 ul#networks li.network-item {
-  background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -110px;
+  background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -110px;
   float: left;
   height: 40px;
   margin-right: 15px;
@@ -3716,7 +3545,7 @@ ul#certificates {
   width: auto !important;
 }
 ul#certificates li.certificate-item {
-  background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -150px;
+  background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll 0 -150px;
   float: right;
   height: 40px;
   margin-left: 15px;
@@ -3737,7 +3566,7 @@ ul#certificates li.certificate-item.norton-secured {
 }
 
 a#app-engine {
-  background: transparent url('../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
+  background: transparent url('../../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
   display: block;
   float: right;
   height: 25px;
@@ -5615,7 +5444,7 @@ body .ui-tooltip {
   font-size: 12px;
   font-family: "Helvetica", "Arial", sans-serif;
   width: 200px;
-   -webkit-touch-callout: none;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -5745,143 +5574,33 @@ body .ui-tooltip {
   top: 0;
 }
 
-/*Grid formulario perfil de usuario */
+/* CuentaGeneralPeru -- Tarjetas no activas  LMHL*/
 
-.col-md-full-profile{
-  width:100%;
+.inactive{
+
+	background-color: #f6f6f6 !important;
 }
-.col-md-12-profile{
-  width:100%;
+
+.inactive-image{
+	opacity: 0.6;
 }
-.row-profile{
-  width:100%;
-  padding:3px;
+
+.round-label{
+	text-align: center;
+	width: 40%;
+	height: 35%;
+	color: white;
+	float: right;
+	background-color: #368DB6;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
 }
-.col-md-12-profile .row-profile li{
-  float:left;
-}
-.col-md-2-profile{
-  width:27%;
-  margin-right:10px;
-  padding-bottom:5px;
-}
-.col-md-2-profile input{
-  width:90%;
-}
-.col-md-2-profile input[readonly]{
-  border:none;
-  box-shadow: none;
-  padding-left:0px;
-}
-.col-md-2-profile .antiguedad-laboral{
-  width:60% !important;
-}
-.col-md-3-profile input[readonly]{
-  border:none;
-  box-shadow: none;
-  padding-left:0px;
-}
-.col-md-4-profile input[readonly]{
-  border:none;
-  box-shadow: none;
-  padding-left:0px;
-}
-.col-md-12-profile input[readonly]{
-  border:none;
-  box-shadow: none;
-  padding-left:0px;
-}
-.col-md-5-profile input[readonly]{
-  border:none;
-  box-shadow: none;
-  padding-left:0px;
-}
-.col-profile-fecha-nac .nac-input{
-  width:11%;
-  margin-right:7px;
-}
-.col-profile-fecha-nac select{
-  margin-right:7px;
-  float:left;
-  width:110px;
-}
-.col-md-3-profile{
-  width:31%;
-  margin-right:10px;
-  padding-bottom:5px;
-}
-.col-md-3-profile input[type="text"]{
-  width:90%;
-}
-.dig-verificador input{
-	width: 11% !important;
-}
-.col-md-3-profile select{
-  width:95% !important;
-}
-.col-md-4-profile{
-  width:25%;
-  padding-bottom:5px;
-}
-.col-md-4-profile select{
-  width:95%;
-}
-.col-md-4-profile input{
-  width:85%;
-}
-.col-md-5-profile{
-  width:20%;
-  margin:auto;
-}
-.col-md-8-profile{
-  width:70%;
-}
-.col-md-8-profile input{
-  width:90%;
-}
-.col-md-3-profile .field-estado-civil, .field-nacionalidad{
-  width:100%;
-}
-.col-divide-profile{
-  width:31%;
-  margin-right:7px;
-  padding:3px;
-}
-.col-divide-profile select{
-  width:100%;
-}
-#direccion{
-  height:50px !important;
-  width:70% !important;
-}
-.email-profile{
-  width:25% !important;
-}
-#widget-account .widget-header{
-  background:#ffffff;
-  box-shadow:none;
-}
-.text-header{
-  color:#0e5b8c;
-  line-height: 0px;
-  font-family:Helvetica, Arial, sans-serif;
-  margin-left:0px;
-  margin-top:37px;
-  width:100%;
-  padding:0px 15px 0px 15px;
-}
-hr{
-  border-color:#cecece;
-  border-top:none;
-}
-.overlay-modal{
-  width: 100%;
-  height:100%;
-  background-color:rgba(0,0,0,0.2);
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:101;
+
+.text-label{
+	position: absolute;
+	top: 49%;
+	left: 65%;
+	text-align: center;
 }
 
 /*ESTILOS NUEVO MENU L.M*/
@@ -5938,11 +5657,9 @@ hr{
 	.icon {
 		content: "\3b";
 	}
-
 	.div-large {
 		width: 330px;
 	}
-
 	.margin_hover{
 		margin-top: -1px;
 	}

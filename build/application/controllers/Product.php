@@ -91,7 +91,7 @@ class Product extends NOVO_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
-				"vc" => $row->tvirtual
+				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
 		}
 		return $dataRequeried;
@@ -114,7 +114,7 @@ class Product extends NOVO_Controller
 			"third_party/jquery.easyPaginate",
 			"third_party/kendo.dataviz",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"$this->countryUri/product/$view",
 			"localization/spanish-base/messages_base"
 		);
@@ -271,7 +271,7 @@ class Product extends NOVO_Controller
 
 				$dataForAlert = new stdClass();
 				$dataForAlert->message = $response->msg;
-				$dataForAlert->redirect = $response->redirect;				
+				$dataForAlert->redirect = $response->redirect;
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
 

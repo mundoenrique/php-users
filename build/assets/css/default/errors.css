@@ -186,22 +186,22 @@ table {
 	font-family: 'Source Sans Pro';
 	font-style: normal;
 	font-weight: normal;
-	src: url('../fonts/sourcesanspro-regular-webfont.eot');
-	src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
-			 url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
-			 url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
-			 url('../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+			 url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+			 url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
 }
 
 @font-face {
 	font-family: 'NovoPayment Glyphs';
 	font-style: normal;
 	font-weight: normal;
-	src: url('../fonts/novopayment-glyphs-webfont.eot');
-	src: url('../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-	     url('../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-	     url('../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-	     url('../fonts/novopayment-glyphs-webfont.svg') format('svg');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot');
+	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
+	     url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
+	     url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
 }
 
 ::selection {
@@ -229,7 +229,7 @@ html {
 }
 
 body {
-	background: #fff url('../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
+	background: #fff url('../../img/app-bg.jpg?v=1.0') no-repeat fixed top center;
 	color: #555555;
 	height: 100%;
 	margin: 0;
@@ -370,7 +370,7 @@ a.button.alternate-button:focus {
 }
 
 #brand-app {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') no-repeat scroll;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') no-repeat scroll;
 	float: left;
 }
 
@@ -440,7 +440,7 @@ a.button.alternate-button:focus {
 }
 
 a#app-engine {
-	background: transparent url('../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
+	background: transparent url('../../img/app-core-sprite.png?v=1.1') scroll no-repeat 0 -83px;
 	display: block;
 	float: right;
 	height: 25px;

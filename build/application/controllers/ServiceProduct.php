@@ -103,7 +103,7 @@ class ServiceProduct extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/serviceproduct/$view",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);

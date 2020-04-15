@@ -54,7 +54,7 @@ class User extends NOVO_Controller
 			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"$this->countryUri/user/login",
 			"$this->countryUri/clave",
@@ -108,7 +108,7 @@ class User extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
@@ -142,7 +142,7 @@ class User extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
@@ -174,7 +174,7 @@ class User extends NOVO_Controller
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base",
 			"$this->countryUri/user/$view"
@@ -208,7 +208,7 @@ class User extends NOVO_Controller
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
 			"third_party/moment",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
@@ -244,7 +244,7 @@ class User extends NOVO_Controller
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
 			"third_party/moment",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
@@ -291,7 +291,7 @@ class User extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/user/$view",
 			"third_party/jquery.validate",
-			"validate-forms",
+			"default/validate-forms",
 			"third_party/additional-methods",
 			"localization/spanish-base/messages_base"
 		);
