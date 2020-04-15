@@ -62,7 +62,7 @@ class ExpenseReport extends NOVO_Controller {
 		$dataRequest = new stdClass();
 		$dataRequest->tipoOperacion = 'RGR';
 
-		$this->load->model('Novo_Product_Model', 'loadData');
+		$this->load->model('Product_Model', 'loadData');
 		$data = $this->loadData->callWs_dataReport_Product($dataRequest);
 
 		if (count($data) < 1) {
@@ -126,7 +126,7 @@ class ExpenseReport extends NOVO_Controller {
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
-		$this->load->model('Novo_ExpenseReport_Model', 'modelExpense');
+		$this->load->model('ExpenseReport_Model', 'modelExpense');
 
 		if (isset($_POST['frmInitialDate']) && isset($_POST['frmFinalDate'])){
 

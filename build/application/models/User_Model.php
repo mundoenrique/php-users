@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Novo_User_Model extends NOVO_Model
+class User_Model extends NOVO_Model
 {
 
 	public function __construct()
@@ -482,7 +482,7 @@ class Novo_User_Model extends NOVO_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg = 
+					$this->response->msg =
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),

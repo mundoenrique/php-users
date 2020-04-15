@@ -56,7 +56,7 @@ class ServiceProduct extends NOVO_Controller
 
 	public function loadDataProduct($card = '')
 	{
-		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$this->load->model('Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
 
 		if (count($data) < 1) {

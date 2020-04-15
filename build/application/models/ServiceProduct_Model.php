@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  *
  */
-class Novo_ServiceProduct_Model extends NOVO_Model
+class ServiceProduct_Model extends NOVO_Model
 {
 
 	public function __construct()
@@ -255,19 +255,19 @@ class Novo_ServiceProduct_Model extends NOVO_Model
 		$this->dataRequest->pinNuevo = $dataRequest->newPin;
 		$this->dataRequest->prefix = $dataProduct['prefix'];
 
-		
+
 		if (!empty($dataRequest->codeOTP)) {
 
 			$this->dataRequest->idOperation = '112';
 			$this->className = 'com.novo.objects.TOs.CuentaTO';
 
 			if ($dataRequest->operation === 'r'){
-				
+
 				$this->dataRequest->idOperation = '215';
 				$this->dataAccessLog->modulo = 'Cuentas';
 				$this->dataAccessLog->function = 'Recuperar PIN';
 				$this->dataAccessLog->operation = 'Recuperar PIN';
-		
+
 				$this->dataRequest->userName = $this->session->userdata('userName');
 				$this->dataRequest->token = $this->session->userdata('token');
 			}

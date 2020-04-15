@@ -61,7 +61,7 @@ class Product extends NOVO_Controller
 
 	public function loadDataProduct($card = '')
 	{
-		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$this->load->model('Product_Model', 'modelLoad');
 		$data = $this->modelLoad->callWs_loadProducts_Product();
 
 		if (count($data) < 1) {
@@ -138,7 +138,7 @@ class Product extends NOVO_Controller
 			redirect('/atencioncliente');
 		}
 
-		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$this->load->model('Product_Model', 'modelLoad');
 		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
 			$dataRequest = new stdClass();
 			$dataRequest->month = $_POST['frmMonth'];
@@ -252,7 +252,7 @@ class Product extends NOVO_Controller
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
-		$this->load->model('Novo_Product_Model', 'modelLoad');
+		$this->load->model('Product_Model', 'modelLoad');
 		if (isset($_POST['frmMonth']) && isset($_POST['frmYear'])) {
 			$dataRequest = new stdClass();
 			$dataRequest->month = $_POST['frmMonth'];

@@ -180,7 +180,7 @@ class User extends NOVO_Controller
 			"$this->countryUri/user/$view"
 		);
 
-		$this->load->model('Novo_User_Model', 'modelLoad');
+		$this->load->model('User_Model', 'modelLoad');
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
 		$this->views = ['user/' . $view];
@@ -233,7 +233,7 @@ class User extends NOVO_Controller
 			exit();
 		}
 
-		$this->load->model('Novo_User_Model', 'modelLoad');
+		$this->load->model('User_Model', 'modelLoad');
 
 		$objData = new stdClass();
 		$objData->profileUser = $this->modelLoad->callWs_profile_User()->data;
@@ -301,7 +301,7 @@ class User extends NOVO_Controller
 				"localization/spanish-base/messages_$this->countryUri"
 			);
 		}
-		$this->load->model('Novo_User_Model', 'modelLoad');
+		$this->load->model('User_Model', 'modelLoad');
 		$listTypeDocument = $this->modelLoad->callWs_loadTypeDocument_User();
 
 		$this->views = ['user/' . $view];
@@ -316,7 +316,7 @@ class User extends NOVO_Controller
 	{
 		log_message('INFO', 'NOVO User: CloseSession Method Initialized');
 
-		$this->load->model('Novo_User_Model', 'modelLoad');
+		$this->load->model('User_Model', 'modelLoad');
 		$this->modelLoad->callWs_closeSession_User();
 
 		redirect($this->config->item('base_url') . 'inicio');

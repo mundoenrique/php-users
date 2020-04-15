@@ -15,7 +15,7 @@ class CallModels extends Novo_Controller {
 		parent:: __construct();
 		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
 		if($this->input->is_ajax_request()) {
-			$this->model = 'Novo_'.$this->dataRequest->who.'_Model';
+			$this->model = $this->dataRequest->who.'_Model';
 			$this->rule = strtolower($this->dataRequest->where);
 			$this->method = 'callWs_'.$this->dataRequest->where.'_'.$this->dataRequest->who;
 			$this->request = new stdClass();

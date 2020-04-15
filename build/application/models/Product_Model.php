@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  *
  */
-class Novo_Product_Model extends NOVO_Model
+class Product_Model extends NOVO_Model
 {
 
 	public function __construct()
@@ -302,7 +302,7 @@ class Novo_Product_Model extends NOVO_Model
 				case 0:
 					$this->response->code = 0;
 					$this->response->timeLiveModal = $response->tiempoPantallaVirtual*10;
-					$this->response->dataDetailCard =  [						
+					$this->response->dataDetailCard =  [
 						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model)->msg,
 						'cardholderName' => $this->encrypt_connect->decode($response->NombreCliente, $this->dataAccessLog->userName, $model)->msg,
 						'expirationDate' => $this->encrypt_connect->decode($response->fechaExp, $this->dataAccessLog->userName, $model)->msg,
@@ -317,7 +317,7 @@ class Novo_Product_Model extends NOVO_Model
 					break;
 
 				default:
-					$this->response->code = 2;	
+					$this->response->code = 2;
 			}
 		}
 		return $this->response;
