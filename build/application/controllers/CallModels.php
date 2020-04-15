@@ -52,7 +52,7 @@ class CallModels extends BDB_Controller {
 			unset($_POST);
 
 			languageLoad(NULL, $this->rule);
-			$this->config->set_item('language', 'spanish-'.$this->countryUri);
+			$this->config->set_item('language', 'core-'.$this->countryUri);
 			languageLoad($this->countryUri, $this->rule);
 
 			$this->load->model($this->model, 'modelLoad');

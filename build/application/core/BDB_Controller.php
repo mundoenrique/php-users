@@ -48,7 +48,7 @@ class BDB_Controller extends CI_Controller {
 		$this->countryConf = $this->config->item('country');
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 
-		$this->lang->load(['general', 'error', 'response'], 'spanish-base');
+		$this->lang->load(['general', 'error', 'response'], 'core-base');
 		$this->rule = strtolower($this->router->fetch_method());
 
 		$this->optionsCheck();
@@ -74,7 +74,7 @@ class BDB_Controller extends CI_Controller {
 		$this->render->idleSession = $this->session->userdata('logged_in')? $this->config->item('timeIdleSession'): 0;
 
 		$this->form_validation->set_error_delimiters('', '---');
-		$this->config->set_item('language', 'spanish-base');
+		$this->config->set_item('language', 'core-base');
 
 		if($this->input->is_ajax_request()) {
 			$this->dataRequest = json_decode(

@@ -46,7 +46,7 @@ class ExpenseReport extends BDB_Controller {
 		if($this->config->item('language_form_validate')) {
 			array_push (
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 
@@ -111,13 +111,13 @@ class ExpenseReport extends BDB_Controller {
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 

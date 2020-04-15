@@ -58,12 +58,12 @@ class User extends BDB_Controller
 			"third_party/additional-methods",
 			"$this->countryUri/user/login",
 			"$this->countryUri/clave",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		if ($this->countryUri !== 'bp') {
@@ -110,12 +110,12 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		$this->session->set_flashdata('changePassword', $reasonOperation);
@@ -144,12 +144,12 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		$this->session->set_flashdata('changePassword', 'changePaswordProfile');
@@ -168,7 +168,7 @@ class User extends BDB_Controller
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		array_push(
@@ -176,7 +176,7 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base",
+			"localization/core-base/messages_base",
 			"$this->countryUri/user/$view"
 		);
 
@@ -210,12 +210,12 @@ class User extends BDB_Controller
 			"third_party/moment",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		$this->views = ['user/' . $view];
@@ -246,12 +246,12 @@ class User extends BDB_Controller
 			"third_party/moment",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		$this->views = ['user/' . $view];
@@ -293,12 +293,12 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/spanish-base/messages_base"
+			"localization/core-base/messages_base"
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
 				$this->includeAssets->jsFiles,
-				"localization/spanish-base/messages_$this->countryUri"
+				"localization/core-base/messages_$this->countryUri"
 			);
 		}
 		$this->load->model('User_Model', 'modelLoad');
