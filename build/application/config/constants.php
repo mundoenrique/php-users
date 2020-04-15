@@ -197,3 +197,6 @@ define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' ?
 	'BDB_' : 'NOVO_'
 );
 unset($uriSegments);
+define('IP_PROXI', $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ?
+$_SERVER['REMOTE_ADDR'] : ''
+);
