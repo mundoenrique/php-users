@@ -56,7 +56,7 @@ class Detail extends CI_Controller {
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
-		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'prefix' => $prefix, 'marca' => $marca, 'producto' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
+		$content = $this->parser->parse('detail/detail-content', array('tarjeta' => $tarjeta, 'prefix' => $prefix, 'marca' => $marca, 'producto' => $producto, 'imgDetail' => $producto, 'empresa' => $empresa, 'numt_mascara' => $numt_mascara), true);
 		//INSTANCIA DE SIDERBAR
 		$sidebarlogin = $this->parser->parse('dashboard/widget-account', array('sidebarActive' => false), true);
 
