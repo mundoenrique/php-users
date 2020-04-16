@@ -15,13 +15,13 @@ $cpo_cook = $this->security->get_csrf_hash();
 						<div class="group" id="balance">
 							<div class="product-presentation">
 							<?php
-								 $filepath = $cdnPath.'img/products/'.$country.'/'.$producto.'.png';
+								 $filepath = $cdnPath.'img/products/'.$country.'/'.$imgDetail.'.png';
 								if(!file_exists($filepath))
-								$producto = 'default';
-								$filepath = $cdnPath.'img/products/'.$country.'/'.$producto.'.png';
+								$imgDetail = 'default';
+								$filepath = $cdnPath.'img/products/'.$country.'/'.$imgDetail.'.png';
 
 								?>
-								<img src="<?php echo $this->config->item('base_url_cdn').'img/products/'.$this->session->userdata('pais').'/'.$producto.'.png'; ?>" width="200" height="130" alt="" />
+								<img src="<?php echo $this->config->item('base_url_cdn').'img/products/'.$this->session->userdata('pais').'/'.$imgDetail.'.png'; ?>" width="200" height="130" alt="" />
 								<div class="product-network <?php echo $marca; ?>"><?php echo $marca; ?></div>
 							</div>
 							<div class="product-info-full" moneda="<?php echo lang("MONEDA"); ?>">
