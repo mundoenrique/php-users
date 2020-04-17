@@ -300,13 +300,14 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
 					$this->response->code = 0;
 					$this->response->timeLiveModal = $response->tiempoPantallaVirtual*10;
 					$this->response->dataDetailCard =  [
-						'cardNumber' => $this->encrypt_connect->decode($response->noTarjeta, $this->dataAccessLog->userName, $model)->msg,
-						'cardholderName' => $this->encrypt_connect->decode($response->NombreCliente, $this->dataAccessLog->userName, $model)->msg,
-						'expirationDate' => $this->encrypt_connect->decode($response->fechaExp, $this->dataAccessLog->userName, $model)->msg,
-						'securityCode' => $this->encrypt_connect->decode($response->secureToken, $this->dataAccessLog->userName, $model)->msg,
+						'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
+						'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
+						'expirationDate' => $this->encrypt_connect->cryptography($response->fechaExp, FALSE),
+						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
 					];
 					break;
 
