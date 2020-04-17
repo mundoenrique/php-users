@@ -365,6 +365,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 			btnTrigger.addEventListener('click', function (e) {
 				e.preventDefault();
+				e.stopImmediatePropagation();
 
 				let divSectionView = systemMSg.querySelector("div");
 
