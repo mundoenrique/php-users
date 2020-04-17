@@ -91,7 +91,7 @@ class Product extends BDB_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
-				"vc" =>  $row->tvirtual || TRUE
+				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
 		}
 		return $dataRequeried;
