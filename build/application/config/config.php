@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +30,15 @@ $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['channel'] = 'personasWeb';
+$config['keyAES256'] = KEY_AES256;
+$config['ivAES256'] = IV_AES256;
 
 $config['listReasonReposition'] = [
-	['value'=>'41','tagTranslation'=>'GENE_BLOCKING_REASONS_CANCELLED'],
-	['value'=>'46','tagTranslation'=>'GENE_BLOCKING_REASONS_LOST'],
-	['value'=>'43','tagTranslation'=>'GENE_BLOCKING_REASONS_DETERIORATED'],
-	['value'=>'59','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE'],
-	['value'=>'17','tagTranslation'=>'GENE_BLOCKING_REASONS_FRAUD'],
+	['value' => '41', 'tagTranslation' => 'GENE_BLOCKING_REASONS_CANCELLED'],
+	['value' => '46', 'tagTranslation' => 'GENE_BLOCKING_REASONS_LOST'],
+	['value' => '43', 'tagTranslation' => 'GENE_BLOCKING_REASONS_DETERIORATED'],
+	['value' => '59', 'tagTranslation' => 'GENE_BLOCKING_REASONS_STOLE'],
+	['value' => '17', 'tagTranslation' => 'GENE_BLOCKING_REASONS_FRAUD'],
 ];
 
 
@@ -50,13 +52,13 @@ $config['oauth_url'] = OAUTH_URL;
 
 $config['scores_recapcha'] = [
 	'development' => [
-			'score' => 0
+		'score' => 0
 	],
 	'testing' => [
-			'score' => 0.3
+		'score' => 0.3
 	],
 	'production' => [
-			'score' => 0.2
+		'score' => 0.2
 	],
 ];
 
