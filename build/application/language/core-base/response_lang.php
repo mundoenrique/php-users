@@ -82,10 +82,5 @@ $lang['RESP_OTP_FAILED_ATTEMPTS'] = 'Código de verificación vencido.';
 $lang['RESP_IP_DATA_INVALID'] = 'El código de seguridad que nos has indicado no es correcto, no podemos darte acceso a la plataforma por favor indica nuevamente tus credenciales de acceso.';
 
 
-
-
-
-
-
 $lang['RESP_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';
 

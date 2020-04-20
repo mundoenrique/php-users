@@ -27,10 +27,22 @@ class User_Model extends BDB_Model
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->guardaIp = FALSE;
+
+		$authToken = $this->session->flashdata('authToken')?: FALSE;
+
+		$this->dataRequest->codigoOtp = json_encode([
+			"tokenCliente" => isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"",
+			"authToken" => $authToken?:""
+		]);
+
+		if (@isset($dataRequest->assert)){ //TODO cambiar por nombre del checklist
+			$this->dataRequest->guardaIp = TRUE;
+		}
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = -5000;
+			$this->isResponseRc = -424;
 			switch ($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
@@ -113,9 +125,9 @@ class User_Model extends BDB_Model
 					$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
-				case -5000:
-					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_IP_TITLE');
+				case -424:
+					$this->response->code = 5;
+					$this->response->title = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_TITLE'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';
@@ -125,8 +137,9 @@ class User_Model extends BDB_Model
 							'link'=> base_url('login'),
 							'action'=> 'redirect'
 						]
-					];	
-					break;					
+					];
+					$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);
+				break;					
 				case -6000:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_IP_DATA_INVALID');
@@ -138,16 +151,9 @@ class User_Model extends BDB_Model
 						]
 					];
 					break;
-				case -7000:
-					$this->response->code = 1;
-					$this->response->msg = lang('RESP_IP_DATA_INVALID');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
+				case -286:
+					$this->response->code = 4;
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					break;				
 			}
 		}
