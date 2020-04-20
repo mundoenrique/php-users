@@ -69,6 +69,7 @@ class Users extends CI_Controller {
 		//VALIDA SI EXISTE SESION
 		np_hoplite_verificSession();
 		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->lang->load('login', $skin);
 		//INSTANCIA PARA TITULO DE PAGINA
  		$titlePage = 'Conexión Personas Online';
@@ -165,6 +166,8 @@ class Users extends CI_Controller {
 
 	public function recoveryPassword()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS
@@ -220,6 +223,8 @@ class Users extends CI_Controller {
 
 	public function obtenerLogin()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSETAR HOJAS DE ESTILOS

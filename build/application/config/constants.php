@@ -195,7 +195,16 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 && filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
 );
-
+define('RESPONSE_SERV_COMPLETE', isset($_SERVER['RESPONSE_SERV_COMPLETE'])
+&& filter_var($_SERVER['RESPONSE_SERV_COMPLETE'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['RESPONSE_SERV_COMPLETE']) : FALSE
+);
+define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
+	$_SERVER['DOWNLOAD_ROUTE'] : ''
+);
+define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
+	$_SERVER['ACCESS_URL'] : ''
+);
 $uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
 define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' || (count($uriSegments) > 3 && $uriSegments[3] == 'bdb') ?
 	'BDB_' : 'NOVO_'

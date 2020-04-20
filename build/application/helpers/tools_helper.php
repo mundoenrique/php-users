@@ -358,3 +358,34 @@ if(!function_exists('mask_account')) {
 		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
 	}
 }
+
+if(!function_exists('validateUrl')) {
+	function validateUrl($client) {
+		$CI = &get_instance();
+		$accessUrl = $CI->config->item('access_url');
+		array_walk($accessUrl, 'arrayTrim');
+		reset($accessUrl);
+		if(!in_array($client, $accessUrl)) {
+			$client = current($accessUrl);
+			switch ($client) {
+				case 'default':
+					redirect(base_url(), 'location', 301);
+					break;
+				case 'pichincha':
+					redirect(base_url('pichincha/home'), 'location', 301);
+					break;
+				case 'bdb':
+					redirect(base_url('bdb/inicio'), 'location', 301);
+					break;
+			}
+		}
+	}
+}
+
+if(!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
+
+		return $value;
+	}
+}
