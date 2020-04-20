@@ -119,7 +119,28 @@ class User_Model extends BDB_Model
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';
-				break;					
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> base_url('login'),
+							'action'=> 'redirect'
+						]
+					];					
+					break;					
+				case -6000:
+					$this->response->code = 2;
+					$this->response->title = lang('LOGIN_IP_TITLE');
+					$this->response->assert = lang('LOGIN_IP_ASSERT');
+					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;					
 			}
 		}
 		return $this->response;
