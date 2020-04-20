@@ -20,8 +20,5 @@ $lang['LOGIN_INFO-1'] = 'Teléfono: (51-1) 619-8900';
 $lang['LOGIN_INFO-2'] = 'Fax: (51-1) 619-8900 anexo 200';
 $lang['LOGIN_INFO-3'] = 'E-mail: ventas@tebca.com.pe';
 $lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
-$lang['LOGIN_IP_TITLE'] = 'Estas ingresando desde un lugar no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo micorr*********ail.com, por favor indicalo a continuación.';
-$lang['LOGIN_IP_ASSERT'] = 'Estoy accediendo desde un sitio de confianza';
-$lang['LOGIN_IP_LABEL_INPUT'] = 'Ingrese el código de seguridad';
-$lang['LOGIN_IP_DATA_INVALID'] = 'El código de seguridad que nos has indicado no es correcto, no podemos darte acceso a la plataforma por favor indica nuevamente tus credenciales de acceso.';
+
 

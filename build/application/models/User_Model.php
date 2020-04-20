@@ -129,7 +129,7 @@ class User_Model extends BDB_Model
 					break;					
 				case -6000:
 					$this->response->code = 1;
-					$this->response->msg = lang('LOGIN_IP_DATA_INVALID');
+					$this->response->msg = lang('RESP_IP_DATA_INVALID');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
@@ -137,7 +137,18 @@ class User_Model extends BDB_Model
 							'action'=> 'close'
 						]
 					];
-					break;					
+					break;
+				case -7000:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_IP_DATA_INVALID');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;				
 			}
 		}
 		return $this->response;
