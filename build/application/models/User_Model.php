@@ -125,14 +125,11 @@ class User_Model extends BDB_Model
 							'link'=> base_url('login'),
 							'action'=> 'redirect'
 						]
-					];					
+					];	
 					break;					
 				case -6000:
-					$this->response->code = 2;
-					$this->response->title = lang('LOGIN_IP_TITLE');
-					$this->response->assert = lang('LOGIN_IP_ASSERT');
-					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
-					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->code = 1;
+					$this->response->msg = lang('LOGIN_IP_DATA_INVALID');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
