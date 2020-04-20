@@ -49,6 +49,8 @@ class Registro extends CI_Controller {
 
 	public function index_pi()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -82,6 +84,8 @@ class Registro extends CI_Controller {
 
 	public function index_pe()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -117,6 +121,8 @@ class Registro extends CI_Controller {
 
 	public function index()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model','registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';

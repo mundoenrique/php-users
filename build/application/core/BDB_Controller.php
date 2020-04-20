@@ -51,6 +51,7 @@ class BDB_Controller extends CI_Controller {
 		$this->lang->load(['general', 'error', 'response'], 'core-base');
 		$this->rule = strtolower($this->router->fetch_method());
 
+		validateUrl($this->countryUri);
 		$this->optionsCheck();
 	}
 
