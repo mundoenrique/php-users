@@ -30,6 +30,7 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = -5000;
 			switch ($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
@@ -112,6 +113,13 @@ class User_Model extends BDB_Model
 					$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
+				case -5000:
+					$this->response->code = 2;
+					$this->response->title = lang('LOGIN_IP_TITLE');
+					$this->response->assert = lang('LOGIN_IP_ASSERT');
+					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
+					$this->response->classIconName = 'ui-icon-alert';
+				break;					
 			}
 		}
 		return $this->response;
