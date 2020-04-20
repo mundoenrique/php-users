@@ -127,7 +127,7 @@ class User_Model extends BDB_Model
 					break;
 				case -424:
 					$this->response->code = 5;
-					$this->response->title = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_TITLE'));
+					$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';
@@ -136,10 +136,15 @@ class User_Model extends BDB_Model
 							'text'=> lang('GEN_BTN_ACCEPT'),
 							'link'=> base_url('login'),
 							'action'=> 'redirect'
+						],
+						'btn2'=> [
+							'text'=> lang('GEN_BTN_CANCEL'),
+							'link'=> FALSE,
+							'action'=> 'close'
 						]
 					];
 					$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);
-				break;					
+				break;
 				case -6000:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_IP_DATA_INVALID');
@@ -154,7 +159,7 @@ class User_Model extends BDB_Model
 				case -286:
 					$this->response->code = 4;
 					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
-					break;				
+					break;
 			}
 		}
 		return $this->response;

@@ -45,6 +45,35 @@ $$.addEventListener('DOMContentLoaded', function(){
 				});
 			}
 		},
+		5: function(response, textBtn)
+		{
+			var dataLogin = getCredentialsUser();
+			var loginIpMsg =
+			`<form id="formVerificationOTP" class="mr-2" method="post">
+				<p>${response.msg}</p>
+				<div class="row">
+					<div class="form-group col-7">
+						<label for="codeOTP">${response.labelInput}<span class="danger">*</span></label>
+						<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+						<div id="msgErrorCodeOTP" class="help-block"></div>
+					</div>
+				</div>
+				<div class="form-group custom-control custom-switch my-3">
+					<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">
+					<label class="custom-control-label" for="acceptAssert">
+						${response.assert}
+					</label>
+					<div class="help-block"></div>
+				</div>
+			</form>`;
+			notiSystem(response.title, loginIpMsg, response.classIconName, response.data);
+			$("#system-info").dialog("option", "minWidth", 480);
+			$("#system-info").dialog("option", "position", {
+				my: "center top+100",
+				at: "center top",
+				of: window
+			});
+		},
 		99: function(response, textBtn)
 		{
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
