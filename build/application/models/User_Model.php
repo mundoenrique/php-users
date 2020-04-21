@@ -136,7 +136,7 @@ class User_Model extends BDB_Model
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> base_url('login'),
+							'link'=> base_url('inicio'),
 							'action'=> 'redirect'
 						],
 						'btn2'=> [

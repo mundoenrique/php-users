@@ -54,7 +54,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<div class="row">
 					<div class="form-group col-7">
 						<label for="codeOTP">${response.labelInput}<span class="danger">*</span></label>
-						<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+						<input id="codeOTP" class="form-control" type="text" name="codeOTP" value="">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
 				</div>
@@ -156,8 +156,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 	function getCredentialsUser()
 	{
 		return {
-			user: $$.getElementById("username").value,
-			pass: $.md5($$.getElementById("userpwd").value),
+			user: $$.getElementById('username').value,
+			pass: $.md5($$.getElementById('userpwd').value),
+			saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
+			codeOTP: $$.getElementById('codeOTP') == null? '': $$.getElementById('codeOTP').value,
 			active: ''
 		}
 	};
