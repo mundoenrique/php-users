@@ -42,7 +42,7 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = -424;
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
@@ -126,7 +126,6 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -424:
-
 					$this->response->email = 'info******mail.com';// TODO: eliminar
 					$this->response->code = 5;
 					$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_MSG'));
@@ -160,6 +159,7 @@ class User_Model extends BDB_Model
 					];
 					break;
 				case -286:
+					// TODO: No existe ningun token asociado, vuelva a realizar la operación
 					$this->response->code = 4;
 					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					break;

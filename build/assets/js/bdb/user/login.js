@@ -101,7 +101,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 						$("#system-info").dialog("destroy");
 						$("#system-info").addClass("none");
 
-						callNovoCore (verb, who, where, data);
+						callNovoCore (verb, who, where, data, function(response) {
+
+							if (response.code !== 0){
+								//restartForm(dataValidateLogin.text);
+								notiSystem(response.title, response.msg, response.classIconName, response.data);
+							}
+						});
 					} else {
 						btnTrigger.innerHTML = txtBtnTrigger;
 						btnTrigger.disabled = false;
