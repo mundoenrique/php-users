@@ -7,6 +7,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnLogin = $$.getElementById('btn-login');
 	var txtBtnLogin = btnLogin.innerHTML.trim();
 	var btnShowPwd = $$.getElementById('pwdAddon');
+	var btnTrigger, txtBtnTrigger;
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -47,7 +48,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		},
 		5: function(response, textBtn)
 		{
-			var dataLogin = getCredentialsUser();
+			var btn = response.data.btn1;
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
 				<p>${response.msg}</p>
@@ -58,7 +59,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
 				</div>
-				<div class="form-group custom-control custom-switch my-3">
+				<div class="form-group custom-control custom-switch">
 					<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">
 					<label class="custom-control-label" for="acceptAssert">
 						${response.assert}
@@ -66,6 +67,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					<div class="help-block"></div>
 				</div>
 			</form>`;
+
 			notiSystem(response.title, loginIpMsg, response.classIconName, response.data);
 			$("#system-info").dialog("option", "minWidth", 480);
 			$("#system-info").dialog("option", "position", {
@@ -73,6 +75,42 @@ $$.addEventListener('DOMContentLoaded', function(){
 				at: "center top",
 				of: window
 			});
+
+			if(btn.action == 'wait') {
+				btnTrigger = $$.getElementById('accept');
+				txtBtnTrigger = btnTrigger.innerHTML.trim();
+
+				btnTrigger.addEventListener('click', function (e) {
+					var form = $('#formVerificationOTP');
+					btnTrigger.innerHTML = msgLoadingWhite;
+					btnTrigger.disabled = true;
+
+					validateForms(form, {
+						handleMsg: true
+					});
+
+					if (form.valid()) {
+						var dataLogin = getCredentialsUser();
+
+						verb = "POST"; who = 'User'; where = 'Login'; data = dataLogin;
+
+						btnTrigger.innerHTML = txtBtnTrigger;
+						btnTrigger.disabled = false;
+
+						$("#system-info").dialog("close");
+						$("#system-info").dialog("destroy");
+						$("#system-info").addClass("none");
+
+						callNovoCore (verb, who, where, data);
+					} else {
+						btnTrigger.innerHTML = txtBtnTrigger;
+						btnTrigger.disabled = false;
+					}
+
+
+				});
+			}
+
 		},
 		99: function(response, textBtn)
 		{

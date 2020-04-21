@@ -127,7 +127,7 @@ class User_Model extends BDB_Model
 					break;
 				case -424:
 
-					$this->response->email = 'info******mail.com';// TODO: eliminar 
+					$this->response->email = 'info******mail.com';// TODO: eliminar
 					$this->response->code = 5;
 					$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
@@ -136,8 +136,8 @@ class User_Model extends BDB_Model
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> base_url('inicio'),
-							'action'=> 'redirect'
+							'link'=> FALSE,
+							'action'=> 'wait'
 						],
 						'btn2'=> [
 							'text'=> lang('GEN_BTN_CANCEL'),
