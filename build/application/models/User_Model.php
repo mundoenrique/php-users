@@ -126,6 +126,8 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -424:
+
+					$this->response->email = 'info******mail.com';// TODO: eliminar 
 					$this->response->code = 5;
 					$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
@@ -143,7 +145,8 @@ class User_Model extends BDB_Model
 							'action'=> 'close'
 						]
 					];
-					$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);
+					//$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
+					$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
 				break;
 				case -6000:
 					$this->response->code = 1;
