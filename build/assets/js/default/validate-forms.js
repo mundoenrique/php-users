@@ -56,6 +56,10 @@ function validateForms(form, options) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
+	jQuery.validator.addMethod("alphanum", function(value, element) {
+		return this.optional( element ) || /^[a-z0-9]+$/i.test( value );
+	});
+
 	jQuery.validator.addMethod("exactLength", function(value, element, param) {
 		return this.optional(element) || value.length == param;
 	});
@@ -170,6 +174,7 @@ function validateForms(form, options) {
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minNumLength: 7, maxNumLength: 11 },
 			codeOTP: { required: true, number: true, exactNumbers: 5 },
+			codeOTPLogin: { required: true, "alphanum": true, exactLength: 8 },
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
