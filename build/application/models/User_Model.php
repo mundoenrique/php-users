@@ -28,16 +28,15 @@ class User_Model extends BDB_Model
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->guardaIp = FALSE;
+		
+		$infoOTP = new stdClass();
+		$infoOTP->tokenCliente = isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"";
+		$infoOTP->authToken = $this->session->flashdata('authToken')?: FALSE;
 
-		$authToken = $this->session->flashdata('authToken')?: FALSE;
-
-		$this->dataRequest->codigoOtp = json_encode([
-			"tokenCliente" => isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"",
-			"authToken" => $authToken?:""
-		]);
+		$this->dataRequest->codigoOtp = $infoOTP ;
 
 		if (@isset($dataRequest->assert)){ //TODO cambiar por nombre del checklist
-			$this->dataRequest->guardaIp = TRUE;
+		 	$this->dataRequest->guardaIp = TRUE;
 		}
 
 		$response = $this->sendToService('Login');
