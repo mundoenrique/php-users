@@ -22,30 +22,38 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->operation = '1';
 		$this->dataAccessLog->userName = $dataRequest->user;
 
-		$this->dataRequest->idOperation = '1';
-		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
-		$this->dataRequest->password = $dataRequest->pass;
-		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->pais = 'Global';
-		$this->dataRequest->guardaIp = FALSE;
-		
 		$infoOTP = new stdClass();
 		$infoOTP->tokenCliente = isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"";
 		$infoOTP->authToken = $this->session->flashdata('authToken')?: FALSE;
-
+		
+		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL' ) {
+			$this->session->set_flashdata('firstDataRquest', $dataRequest);
+		}else{
+			$firstDataRequest = $this->session->flashdata('firstDataRquest');
+			$dataRequest->user = mb_strtoupper($firstDataRequest->user);
+			$dataRequest->pass = $firstDataRequest->pass;
+			$dataRequest->active = $firstDataRequest->active;			
+		}
+		
+		$this->dataRequest->idOperation = '1';
+		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->guardaIp = FALSE;
+		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
+		$this->dataRequest->password = $dataRequest->pass;
+		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp = $infoOTP ;
 
-		if (@isset($dataRequest->assert)){ //TODO cambiar por nombre del checklist
+		if (isset($dataRequest->saveIP)){
 		 	$this->dataRequest->guardaIp = TRUE;
 		}
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
 			$this->isResponseRc = 0;
-			// $this->isResponseRc = -424;
-			// $this->isResponseRc = -6000;
-			switch ($this->isResponseRc) {
-				case 0:
+			//$this->isResponseRc = -424;
+			//$this->isResponseRc = -6000;
+			switch ($this->isResponseRc ) {
+				case 0:				
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
 
 					if ($this->isUserLoggedIn($dataRequest->user))

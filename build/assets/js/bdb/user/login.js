@@ -91,6 +91,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 					});
 
 					if (form.valid()) {
+						verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
 						btnTrigger.innerHTML = txtBtnTrigger;
 						btnTrigger.disabled = false;
 						systemMSg.innerHTML = "";
@@ -98,9 +99,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 						$("#system-info").dialog("destroy");
 						$("#system-info").addClass("none");
 
-						verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
 						callNovoCore(verb, who, where, data, function(response) {
-							validateResponseLogin(response);
+							validateResponseLogin(response, msgLoadingWhite);
 						})
 					} else {
 						btnTrigger.innerHTML = txtBtnTrigger;
@@ -193,13 +193,22 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function getCredentialsUser()
 	{
-		return {
+		data = {
 			user: $$.getElementById('username').value,
 			pass: $.md5($$.getElementById('userpwd').value),
-			saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
-			codeOTP: $$.getElementById('codeOTP') == null? '': $$.getElementById('codeOTP').value,
 			active: ''
+		};
+
+		if ($$.getElementById('codeOTPLogin') != null){
+			data = {
+				user: 'NULL',
+				pass: 'NULL',
+				active: '',
+				saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
+				codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
+			};
 		}
+		return data;
 	};
 
 	function validateLogin(dataValidateLogin)
@@ -229,7 +238,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
-		response.code != 0 ? restartForm(txtBtnLogin): '';
+		response.code != 0 || response.code != 5? restartForm(txtBtnLogin): '';
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}
