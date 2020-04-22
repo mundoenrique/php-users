@@ -8,6 +8,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var txtBtnLogin = btnLogin.innerHTML.trim();
 	var btnShowPwd = $$.getElementById('pwdAddon');
 	var btnTrigger, txtBtnTrigger;
+	var systemMSg = $$.getElementById('system-msg');
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -54,8 +55,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<p>${response.msg}</p>
 				<div class="row">
 					<div class="form-group col-7">
-						<label for="codeOTP">${response.labelInput}<span class="danger">*</span></label>
-						<input id="codeOTP" class="form-control" type="text" name="codeOTP" value="">
+						<label for="codeOTPLogin">${response.labelInput}<span class="danger">*</span></label>
+						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
 				</div>
@@ -90,24 +91,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 					});
 
 					if (form.valid()) {
-						var dataLogin = getCredentialsUser();
-
-						verb = "POST"; who = 'User'; where = 'Login'; data = dataLogin;
-
 						btnTrigger.innerHTML = txtBtnTrigger;
 						btnTrigger.disabled = false;
-
-						$("#system-info").dialog("close");
+						systemMSg.innerHTML = "";
+						$("#system-info").dialog('close');
 						$("#system-info").dialog("destroy");
 						$("#system-info").addClass("none");
 
-						callNovoCore (verb, who, where, data, function(response) {
-
-							if (response.code !== 0){
-								//restartForm(dataValidateLogin.text);
-								notiSystem(response.title, response.msg, response.classIconName, response.data);
-							}
-						});
+						verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
+						callNovoCore(verb, who, where, data, function(response) {
+							validateResponseLogin(response);
+						})
 					} else {
 						btnTrigger.innerHTML = txtBtnTrigger;
 						btnTrigger.disabled = false;
