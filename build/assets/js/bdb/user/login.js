@@ -9,6 +9,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnShowPwd = $$.getElementById('pwdAddon');
 	var btnTrigger, txtBtnTrigger;
 	var systemMSg = $$.getElementById('system-msg');
+	var isModalConfirmIp;
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -25,6 +26,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				position: "left",
 				contents: response.msg
 			});
+			isModalConfirmIp = 0;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		},
 		2: function()
@@ -38,6 +40,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		3: function(response, textBtn)
 		{
 			var dataLogin = getCredentialsUser();
+			isModalConfirmIp = 0;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
@@ -78,39 +81,39 @@ $$.addEventListener('DOMContentLoaded', function(){
 			});
 
 			if(btn.action == 'wait') {
+				isModalConfirmIp = 1;
 				btnTrigger = $$.getElementById('accept');
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 				btnTrigger.addEventListener('click', function (e) {
-					var form = $('#formVerificationOTP');
-					btnTrigger.innerHTML = msgLoadingWhite;
-					btnTrigger.disabled = true;
+					if (isModalConfirmIp) {
+						var form = $('#formVerificationOTP');
+						btnTrigger.innerHTML = msgLoadingWhite;
+						btnTrigger.disabled = true;
 
-					validateForms(form, {
-						handleMsg: true
-					});
+						validateForms(form, {
+							handleMsg: true
+						});
 
-					if (form.valid()) {
-						verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
-						btnTrigger.innerHTML = txtBtnTrigger;
-						btnTrigger.disabled = false;
-						systemMSg.innerHTML = "";
-						$("#system-info").dialog('close');
-						$("#system-info").dialog("destroy");
-						$("#system-info").addClass("none");
+						if (form.valid()) {
+							verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
+							callNovoCore(verb, who, where, data, function(response) {
+								btnTrigger.innerHTML = txtBtnTrigger;
+								btnTrigger.disabled = false;
+								systemMSg.innerHTML = "";
+								$("#system-info").dialog('close');
+								$("#system-info").dialog("destroy");
+								$("#system-info").addClass("none");
 
-						callNovoCore(verb, who, where, data, function(response) {
-							validateResponseLogin(response, msgLoadingWhite);
-						})
-					} else {
-						btnTrigger.innerHTML = txtBtnTrigger;
-						btnTrigger.disabled = false;
+								validateResponseLogin(response, msgLoadingWhite);
+							})
+						} else {
+							btnTrigger.innerHTML = txtBtnTrigger;
+							btnTrigger.disabled = false;
+						}
 					}
-
-
 				});
 			}
-
 		},
 		99: function(response, textBtn)
 		{
