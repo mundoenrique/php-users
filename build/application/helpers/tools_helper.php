@@ -81,6 +81,7 @@ if ( ! function_exists('np_hoplite_byteArrayToFile'))
 		foreach ($bytes as $chr) {
 			echo chr($chr);
 		}
+
 	}
 }
 
@@ -189,16 +190,36 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 		$CI =& get_instance();
 
 		if($CI->session->userdata('logged_in') === true){
-			$append = '/dashboard';
-
-			redirect($CI->config->item('base_url') . $append);
+			redirect($CI->config->item('base_url') . '/dashboard');
 		}
 
 	}
+
+	if(!function_exists('getFaviconLoader')) {
+		function getFaviconLoader() {
+			$CI = &get_instance();
+			$favicon = $CI->config->item('favicon');
+			$loader = 'loading-';
+			switch($CI->config->item('country')) {
+				case 'Ec-bp':
+					$ext = 'ico';
+					$loader.= 'bp.gif';
+					break;
+				default:
+					$ext = 'png';
+					$loader.= 'novo.gif';
+			}
+
+			$faviconLoader = new stdClass();
+			$faviconLoader->favicon = $favicon;
+			$faviconLoader->ext = $ext;
+			$faviconLoader->loader = $loader;
+
+			return $faviconLoader;
+		}
+	}
+
 }
-
-
-
 
 // ------------------------------------------------------------------------
 if ( ! function_exists('np_hoplite_decimals'))
@@ -219,5 +240,152 @@ if ( ! function_exists('np_hoplite_decimals'))
       $result = number_format($number, 2, ',', '.');
     }
 	  return $result;
+	}
+}
+
+if(!function_exists('clientCheck')) {
+	function clientCheck($client) {
+		$CI = &get_instance();
+
+		switch ($client) {
+			case 'bdb':
+				$CI->config->load('config-'.$client);
+				break;
+			default:
+				redirect('/');
+		}
+	}
+}
+
+if(!function_exists('assetPath')) {
+	function assetPath($route = '') {
+		return get_instance()->config->item('base_path_cdn').$route;
+	}
+}
+
+if(!function_exists('assetUrl')) {
+	function assetUrl($route = '') {
+		return get_instance()->config->item('base_url_cdn').$route;
+	}
+}
+
+if(!function_exists('accessLog')) {
+	function accessLog($dataAccessLog) {
+		$CI = &get_instance();
+
+		return [
+			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
+			"userName" => strtoupper($CI->session->userdata('userName')) ?: strtoupper($dataAccessLog->userName),
+			"canal" => $CI->config->item('channel'),
+			"modulo"=> $dataAccessLog->modulo,
+			"function"=> $dataAccessLog->function,
+			"operacion"=> $dataAccessLog->operation,
+			"RC"=> 0,
+			"IP"=> $CI->input->ip_address(),
+			"dttimesstamp"=> date('m/d/Y H:i'),
+			"lenguaje"=> strtoupper(LANGUAGE)
+		];
+	}
+}
+
+if(!function_exists('languajeLoad')) {
+	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+		$CI = &get_instance();
+		$langFiles = $langFiles ?: $CI->router->fetch_method();
+		$languages = [];
+		$lanGeneral = ['bp', 'co', 've', 'bdb'];
+		$loadlanguages = FALSE;
+		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
+
+		switch($client) {
+			case 'bp':
+				$languages = [];
+				break;
+			case 'bdb':
+				$languages = [];
+				break;
+			case 'co':
+				$languages = [];
+				break;
+			case 'pe':
+				$languages = [];
+				break;
+			case 'us':
+				$languages = [];
+				break;
+			case 've':
+				$languages = [];
+				break;
+			default:
+				$languages = [
+					'login' => ['login', 'signin'],
+					'validatecaptcha' => ['login'],
+					'RecoverPass'	=> ['password-recover'],
+					'changePassword'	=> ['password-change'],
+					'changePasswordProfile'	=> ['password-change'],
+					'benefits'	=> ['benefits'],
+					'terms'	=> ['terms'],
+					'rates'	=> ['rates'],
+					'getEnterprises'	=> ['enterprise'],
+					'getProducts'	=> ['enterprise'],
+				];
+		}
+
+		if(array_key_exists($langFiles, $languages)) {
+			$languages = $languages[$langFiles];
+			$loadlanguages = TRUE;
+		}
+		if(in_array($client, $lanGeneral)) {
+			array_unshift($languages, 'general');
+			$loadlanguages = TRUE;
+		}
+		if($loadlanguages) {
+			$CI->lang->load($languages);
+		}
+	}
+}
+
+if(!function_exists('countryCheck')) {
+	function countryCheck($country) {
+		$CI = &get_instance();
+		$CI->config->load('config-'.$country);
+	}
+}
+
+if(!function_exists('mask_account')) {
+	function mask_account($account, $start = 4, $end = 7){
+		$len = strlen($account);
+		return substr($account, 0, $start).str_repeat('*', $len - ($start + $end)).substr($account, $len - $end, $end);
+	}
+}
+
+if(!function_exists('validateUrl')) {
+	function validateUrl($client) {
+		$CI = &get_instance();
+		$accessUrl = $CI->config->item('access_url');
+		array_walk($accessUrl, 'arrayTrim');
+		reset($accessUrl);
+		if(!in_array($client, $accessUrl)) {
+			$client = current($accessUrl);
+			switch ($client) {
+				case 'default':
+					redirect(base_url(), 'location', 301);
+					break;
+				case 'pichincha':
+					redirect(base_url('pichincha/home'), 'location', 301);
+					break;
+				case 'bdb':
+					redirect(base_url('bdb/inicio'), 'location', 301);
+					break;
+			}
+		}
+	}
+}
+
+if(!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
+
+		return $value;
 	}
 }

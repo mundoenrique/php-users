@@ -98,6 +98,10 @@ define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
 define('WS_URL', $_SERVER['WS_URL']);
 define('WS_KEY', $_SERVER['WS_KEY']);
+
+define('KEY_AES256', $_SERVER['KEY_AES256']);
+define('IV_AES256', $_SERVER['IV_AES256']);
+
 define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
 	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
 );
@@ -180,4 +184,32 @@ define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
 );
 define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
 	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
+);
+
+$arrayUri = explode('/', $_SERVER['REQUEST_URI']);
+$lang = end($arrayUri);
+define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
+unset($arrayUri, $lang);
+
+define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
+&& filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
+);
+define('RESPONSE_SERV_COMPLETE', isset($_SERVER['RESPONSE_SERV_COMPLETE'])
+&& filter_var($_SERVER['RESPONSE_SERV_COMPLETE'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['RESPONSE_SERV_COMPLETE']) : FALSE
+);
+define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
+	$_SERVER['DOWNLOAD_ROUTE'] : ''
+);
+define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
+	$_SERVER['ACCESS_URL'] : ''
+);
+$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
+define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' || (count($uriSegments) > 3 && $uriSegments[3] == 'bdb') ?
+	'BDB_' : 'NOVO_'
+);
+unset($uriSegments);
+define('IP_PROXI', $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ?
+$_SERVER['REMOTE_ADDR'] : ''
 );

@@ -278,7 +278,7 @@ class CI_Security {
 			$secure_cookie,
 			config_item('cookie_httponly')
 		);
-		log_message('info', 'CSRF cookie sent');
+		log_message('info', 'CSRF cookie sent', $this->_csrf_cookie_name, $expire);
 
 		return $this;
 	}
