@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,21 @@ $config['base_url_cdn'] = BASE_CDN_URL;
 $config['base_path_cdn'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
+$config['active_recaptcha'] = ACTIVE_RECAPTCHA;
+$config['access_url'] = explode(',', ACCESS_URL);
+$config['channel'] = 'personasWeb';
+$config['keyAES256'] = KEY_AES256;
+$config['ivAES256'] = IV_AES256;
+
+$config['listReasonReposition'] = [
+	['value' => '41', 'tagTranslation' => 'GENE_BLOCKING_REASONS_CANCELLED'],
+	['value' => '46', 'tagTranslation' => 'GENE_BLOCKING_REASONS_LOST'],
+	['value' => '43', 'tagTranslation' => 'GENE_BLOCKING_REASONS_DETERIORATED'],
+	['value' => '59', 'tagTranslation' => 'GENE_BLOCKING_REASONS_STOLE'],
+	['value' => '17', 'tagTranslation' => 'GENE_BLOCKING_REASONS_FRAUD'],
+];
+
+
 //url API
 $config['urlAPI'] = URL_API;
 //Credenciales oauth
@@ -38,13 +53,13 @@ $config['oauth_url'] = OAUTH_URL;
 
 $config['scores_recapcha'] = [
 	'development' => [
-			'score' => 0
+		'score' => 0
 	],
 	'testing' => [
-			'score' => 0.3
+		'score' => 0.3
 	],
 	'production' => [
-			'score' => 0.2
+		'score' => 0.2
 	],
 ];
 
@@ -99,7 +114,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'core-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -137,7 +152,7 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = SUBCLASS_PREFIX;
 
 /*
 |--------------------------------------------------------------------------
@@ -476,7 +491,13 @@ $config['csrf_token_name'] = 'cpo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array("detalles");
+$config['csrf_exclude_uris'] = array(
+	'detalles',
+	'[\w\-]+/detalle',
+	'[\w\-]+/detalle/download',
+	'[\w\-]+/atencioncliente',
+	'[\w\-]+/detallereporte',
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -543,4 +564,4 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = PROXY_IPS;
+$config['proxy_ips'] = IP_PROXI;

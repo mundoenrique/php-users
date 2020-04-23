@@ -49,6 +49,8 @@ class Registro extends CI_Controller {
 
 	public function index_pi()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -82,6 +84,8 @@ class Registro extends CI_Controller {
 
 	public function index_pe()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -117,6 +121,8 @@ class Registro extends CI_Controller {
 
 	public function index()
 	{
+		$skin = $this->input->cookie('cpo_skin');
+		validateUrl($skin);
 		$this->load->model('registro_model','registro');
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -156,11 +162,6 @@ class Registro extends CI_Controller {
 			redirect(base_url('dashboard'), 'location');
 			exit();
 		}
-		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-		np_hoplite_countryCheck($this->session->userdata('pais'));
-		// CARGO EL ARCHIVO DE LENGUAJE
-		$this->lang->load('format');
-
 		$this->load->model('registro_model', 'listado');
 		$this->output->set_content_type('application/json')->set_output($this->listado->lista_paises());
 	}

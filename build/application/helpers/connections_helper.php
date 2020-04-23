@@ -38,9 +38,11 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 			$response->httpCode = $httpCode;
 			$response->msg = curl_error($ch);
 			$response->rc = 'unanswered';
+			curl_close($ch);
 			return json_encode($response);
 		}
 		log_message("DEBUG","RESPONSE CURL HTTP CODE: ".$httpCode);
+		curl_close($ch);
 		if($httpCode == 404 || !$response){
 			return '{"data": false}';
 		} else {
@@ -97,7 +99,6 @@ if(!function_exists('getTokenOauth'))
 		return $response;
 	}
 }
-
 if(!function_exists('connectionAPI'))
 {
 	/**
@@ -156,12 +157,10 @@ if(!function_exists('connectionAPI'))
 			if($responseAPI === FALSE) {
 				$response->resAPI = curl_error($ch);
 				log_message("DEBUG", 'NOVO RESPONSE API '.json_encode($response));
-
 			}
 		} else {
-			$responseAPI = json_decode(responseOauth);
+			$responseAPI = json_decode($responseOauth);
 		}
-
 		$response->resAPI = $responseAPI;
 		return $response;
 	}

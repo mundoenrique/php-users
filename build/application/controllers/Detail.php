@@ -191,7 +191,7 @@ class Detail extends CI_Controller {
 		$response = $this->detail->exportar($tarjeta, $mes, $anio, $idOperation);
 		$response = json_decode($response);
 		$file_ext = "pdf";
-		$file_bytes;
+		$file_bytes = '';
 		if($idOperation != 46){
 			$file_bytes = $response->archivo;
 		}else{

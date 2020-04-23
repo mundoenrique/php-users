@@ -160,12 +160,12 @@ switch($skin){
             </ul>
             <ul class="inline-list four-segments">
               <li>
-                <label for="last-name">Apellido paterno</label>
+                <label for="last-name">Primer apellido</label>
                 <input id="last-name" maxlength="35" name="primer_apellido" type="text" placeholder="Apellido paterno"
                   value="" class="field-disabled" />
               </li>
               <li>
-                <label for="last-name">Apellido materno</label>
+                <label for="last-name">Segundo apellido</label>
                 <input id="last-ext-name" maxlength="35" name="segundo_apellido" type="text" />
               </li>
             </ul>
