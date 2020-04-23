@@ -49,8 +49,8 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
-			$this->isResponseRc = 0;
-			//$this->isResponseRc = -424;
+			//$this->isResponseRc = 0;
+			$this->isResponseRc = -286;
 			//$this->isResponseRc = -6000;
 			switch ($this->isResponseRc ) {
 				case 0:				
@@ -118,6 +118,24 @@ class User_Model extends BDB_Model
 						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					}
 					break;
+				case -3:
+				case -20:
+				case -33:
+				case -60:
+				case -61:
+				case -426:
+					$this->response->code = lang('RESP_DEFAULT_CODE');
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->classIconName = 'ui-icon-closethick';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
@@ -155,22 +173,13 @@ class User_Model extends BDB_Model
 					];
 					//$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
 					$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
-				break;
-				case -6000:
-					$this->response->code = 1;
-					$this->response->msg = lang('RESP_IP_DATA_INVALID');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
-						]
-					];
 					break;
 				case -286:
-					// TODO: No existe ningun token asociado, vuelva a realizar la operación
-					$this->response->code = 4;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+				case -287:
+				case -288:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_IP_TOKEN_AUTH');
+					$this->response->classIconName = 'ui-icon-alert';
 					break;
 			}
 		}
