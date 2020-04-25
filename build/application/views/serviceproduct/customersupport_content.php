@@ -58,8 +58,8 @@
 						<form id="formGenerate" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="generatePin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="generatePin" class="form-control" type="password" name="generatePin">
+									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
+									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
