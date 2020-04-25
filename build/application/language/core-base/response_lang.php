@@ -79,11 +79,8 @@ $lang['RESP_SEND_EMAIL_LOGIN'] = 'Se ha enviado un mensaje al correo electrónic
 $lang['RESP_CLOSE_SESSION'] = 'Gracias por usar nuestros servicios, su sesión en Conexión Personas ha
 caducado.';
 $lang['RESP_OTP_FAILED_ATTEMPTS'] = 'Código de verificación vencido.';
-
-
-
-
-
+$lang['RESP_IP_DATA_INVALID'] = 'El código de seguridad que nos has indicado no es correcto, no podemos darte acceso a la plataforma por favor indica nuevamente tus credenciales de acceso.';
+$lang['RESP_IP_TOKEN_AUTH'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 
 $lang['RESP_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';
 

@@ -7,6 +7,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var btnLogin = $$.getElementById('btn-login');
 	var txtBtnLogin = btnLogin.innerHTML.trim();
 	var btnShowPwd = $$.getElementById('pwdAddon');
+	var btnTrigger, txtBtnTrigger;
+	var systemMSg = $$.getElementById('system-msg');
+	var isModalConfirmIp;
 	$.balloon.defaults.css = null;
 	disableInputsForm(false);
 
@@ -23,6 +26,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				position: "left",
 				contents: response.msg
 			});
+			isModalConfirmIp = 0;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
 		},
 		2: function()
@@ -36,12 +40,78 @@ $$.addEventListener('DOMContentLoaded', function(){
 		3: function(response, textBtn)
 		{
 			var dataLogin = getCredentialsUser();
+			isModalConfirmIp = 0;
 			notiSystem(response.title, response.msg, response.classIconName, response.data);
 			var btn = response.data.btn1;
 			if(btn.action == 'logout') {
 				$('#accept').on('click', function() {
 					verb = 'POST'; who = btn.link.who; where = btn.link.where; data = dataLogin;
 					callNovoCore (verb, who, where, data);
+				});
+			}
+		},
+		5: function(response, textBtn)
+		{
+			var btn = response.data.btn1;
+			var loginIpMsg =
+			`<form id="formVerificationOTP" class="mr-2" method="post">
+				<p>${response.msg}</p>
+				<div class="row">
+					<div class="form-group col-7">
+						<label for="codeOTPLogin">${response.labelInput}<span class="danger">*</span></label>
+						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
+						<div id="msgErrorCodeOTP" class="help-block"></div>
+					</div>
+				</div>
+				<div class="form-group custom-control custom-switch">
+					<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">
+					<label class="custom-control-label" for="acceptAssert">
+						${response.assert}
+					</label>
+					<div class="help-block"></div>
+				</div>
+			</form>`;
+
+			notiSystem(response.title, loginIpMsg, response.classIconName, response.data);
+			$("#system-info").dialog("option", "minWidth", 480);
+			$("#system-info").dialog("option", "position", {
+				my: "center top+100",
+				at: "center top",
+				of: window
+			});
+
+			if(btn.action == 'wait') {
+				isModalConfirmIp = 1;
+				btnTrigger = $$.getElementById('accept');
+				txtBtnTrigger = btnTrigger.innerHTML.trim();
+
+				btnTrigger.addEventListener('click', function (e) {
+					if (isModalConfirmIp) {
+						var form = $('#formVerificationOTP');
+						btnTrigger.innerHTML = msgLoadingWhite;
+						btnTrigger.disabled = true;
+
+						validateForms(form, {
+							handleMsg: true
+						});
+
+						if (form.valid()) {
+							verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
+							callNovoCore(verb, who, where, data, function(response) {
+								btnTrigger.innerHTML = txtBtnTrigger;
+								btnTrigger.disabled = false;
+								systemMSg.innerHTML = "";
+								$("#system-info").dialog('close');
+								$("#system-info").dialog("destroy");
+								$("#system-info").addClass("none");
+
+								validateResponseLogin(response, msgLoadingWhite);
+							})
+						} else {
+							btnTrigger.innerHTML = txtBtnTrigger;
+							btnTrigger.disabled = false;
+						}
+					}
 				});
 			}
 		},
@@ -126,11 +196,22 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function getCredentialsUser()
 	{
-		return {
-			user: $$.getElementById("username").value,
-			pass: $.md5($$.getElementById("userpwd").value),
+		data = {
+			user: $$.getElementById('username').value,
+			pass: $.md5($$.getElementById('userpwd').value),
 			active: ''
+		};
+
+		if ($$.getElementById('codeOTPLogin') != null){
+			data = {
+				user: 'NULL',
+				pass: 'NULL',
+				active: '',
+				saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
+				codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
+			};
 		}
+		return data;
 	};
 
 	function validateLogin(dataValidateLogin)
@@ -149,7 +230,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		callNovoCore(verb, who, where, data, function(response) {
 
-			if (response.code !== 0 && response.owner === 'captcha'){
+			if ((response.code !== 0 && response.code !== 5) && response.owner === 'captcha'){
 				restartForm(dataValidateLogin.text);
 				notiSystem(response.title, response.msg, response.classIconName, response.data);
 			} else {
@@ -160,7 +241,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
-		response.code != 0 ? restartForm(txtBtnLogin): '';
+		response.code != 0 && response.code != 5? restartForm(txtBtnLogin): '';
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}
