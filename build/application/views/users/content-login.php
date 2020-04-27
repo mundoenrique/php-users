@@ -250,11 +250,11 @@
 			<center>
 				<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
-			<button id="error" class="novo-btn-primary">Continuar</button>
+			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
 			<?php 	if($skin=='pichincha'): 		?>
-				</div>
-			</center>
-		<?php 	endif; ?>
+					</div>
+				</center>
+			<?php 	endif; ?>
     </div>
   </div>
 </div>
@@ -275,11 +275,11 @@
 			<center>
 				<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
-			<button id="error" class="novo-btn-primary">Continuar</button>
+			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
 			<?php 	if($skin=='pichincha'): 		?>
-				</div>
-			</center>
-		<?php 	endif; ?>
+					</div>
+				</center>
+			<?php 	endif; ?>
     </div>
   </div>
 </div>

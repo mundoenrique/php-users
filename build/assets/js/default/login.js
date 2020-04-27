@@ -317,12 +317,12 @@ function login(user, pass) {
 				ocultarProcesando();
 				$("#novo-control-ip").dialog({
 					modal: "true",
-					width: "440px",
+					width: "640px",
 					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
 
 				$("#aceptar").click(function () {
-					$("#dialog-bloq").dialog("close");
+					$("#novo-control-ip").dialog("close");
 					habilitar();
 				});
 
@@ -336,7 +336,7 @@ function login(user, pass) {
 				});
 
 				$("#aceptar").click(function () {
-					$("#dialog-bloq").dialog("close");
+					$("#novo-control-ip-token-auth").dialog("close");
 					habilitar();
 				});
 

@@ -39,7 +39,7 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
         
-        $desdata->rc = -426;
+        $desdata->rc = -424;
 
 		if(isset($response) && $desdata->rc == 0) {
 			if($desdata->codPais != 'Ec-bp' && $cookie == 'default') {
