@@ -218,6 +218,7 @@ function login(user, pass) {
 		.done(function (response) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+			data.rc = -426;
 
 			if (data == 1) {
 				$("#dialog-login-ve").dialog({
@@ -313,6 +314,34 @@ function login(user, pass) {
 				});
 
 			}
+			else if (data.rc == -424) {
+				ocultarProcesando();
+				$("#novo-control-ip").dialog({
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
+
+				$("#aceptar").click(function () {
+					$("#dialog-bloq").dialog("close");
+					habilitar();
+				});
+
+			}
+			else if ((data.rc == -286) || (data.rc == -287) || (data.rc == -288) ) {
+				ocultarProcesando();
+				$("#novo-control-ip-token-auth").dialog({
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
+
+				$("#aceptar").click(function () {
+					$("#dialog-bloq").dialog("close");
+					habilitar();
+				});
+
+			} 		
 			else {
 				ocultarProcesando();
 				$("#dialog-error").dialog({

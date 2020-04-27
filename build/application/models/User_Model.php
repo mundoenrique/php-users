@@ -50,8 +50,8 @@ class User_Model extends BDB_Model
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
 			//$this->isResponseRc = 0;
-			// $this->isResponseRc = -286;
-			$this->isResponseRc = -424;
+			//$this->isResponseRc = -286;
+			//$this->isResponseRc = -424;
 			//$this->isResponseRc = -6000;
 			switch ($this->isResponseRc ) {
 				case 0:

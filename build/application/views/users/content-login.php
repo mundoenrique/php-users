@@ -232,3 +232,54 @@
     </div>
   </div>
 </div>
+
+<!-- Control IP -->
+<div id="novo-control-ip" style='display:none'>
+  <header>
+    <h2>Conexión Personas Online</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-info" id="message">
+      <span aria-hidden="true" class="icon-info-sign"></span>
+      <p>
+          Estas ingresando desde un equipo no habitual,<br> por seguridad vamos a enviarte un código de seguridad a la dirección de correo <strong>{$maskMail$}</strong>,<br> por favor indicalo a continuación.
+      </p>
+    </div>
+    <div class="form-actions">
+		<?php 	if($skin=='pichincha'): 		?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+		<?php 	endif; ?>
+			<button id="error" class="novo-btn-primary">Continuar</button>
+			<?php 	if($skin=='pichincha'): 		?>
+				</div>
+			</center>
+		<?php 	endif; ?>
+    </div>
+  </div>
+</div>
+
+<div id="novo-control-ip-token-auth" style='display:none'>
+  <header>
+    <h2>Conexión Personas Online</h2>
+  </header>
+  <div class="dialog-small" id="dialog">
+    <div class="alert-simple alert-info" id="message">
+      <span aria-hidden="true" class="icon-info-sign"></span>
+      <p>
+      No fue posible validar el código de seguridad, por favor vuelve a intentarlo.
+      </p>
+    </div>
+    <div class="form-actions">
+		<?php 	if($skin=='pichincha'): 		?>
+			<center>
+				<div class="atc-form-action-child-perfil-content">
+		<?php 	endif; ?>
+			<button id="error" class="novo-btn-primary">Continuar</button>
+			<?php 	if($skin=='pichincha'): 		?>
+				</div>
+			</center>
+		<?php 	endif; ?>
+    </div>
+  </div>
+</div>
