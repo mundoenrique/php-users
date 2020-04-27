@@ -218,7 +218,6 @@ function login(user, pass) {
 		.done(function (response) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-			data.rc = -426;
 
 			if (data == 1) {
 				$("#dialog-login-ve").dialog({
