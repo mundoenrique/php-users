@@ -236,25 +236,24 @@
 <!-- Control IP -->
 <div id="novo-control-ip" style='display:none'>
   <header>
-    <h2>Conexión Personas Online</h2>
+    <h2></h2>
   </header>
   <div class="dialog-small" id="dialog">
-    <div class="alert-simple alert-info" id="message">
-      <span aria-hidden="true" class="icon-info-sign"></span>
-      <p>
-          Estas ingresando desde un equipo no habitual,<br> por seguridad vamos a enviarte un código de seguridad a la dirección de correo <strong>{$maskMail$}</strong>,<br> por favor indicalo a continuación.
-      </p>
+    <div class="alert-simple alert-warning" id="message">
+      <span aria-hidden="true" class="icon-warning-sign"></span>
+			<p></p>
     </div>
     <div class="form-actions">
-		<?php 	if($skin=='pichincha'): 		?>
+		<?php if($skin=='pichincha'): ?>
 			<center>
-				<div class="atc-form-action-child-perfil-content">
-		<?php 	endif; ?>
+				<div class="atc-form-action-child-3">
+		<?php endif;?>
+			<button id="cancelar" class="novo-btn-secondary">Cancelar</button>
 			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
-			<?php 	if($skin=='pichincha'): 		?>
-					</div>
-				</center>
-			<?php 	endif; ?>
+		<?php if($skin=='pichincha'): ?>
+				</div>
+			</center>
+		<?php endif;?>
     </div>
   </div>
 </div>

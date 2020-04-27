@@ -113,6 +113,12 @@ $$.addEventListener('DOMContentLoaded', function(){
 						}
 					}
 				});
+
+				$$.getElementById("cancel").addEventListener('click', function (e) {
+					e.preventDefault();
+					restartForm(txtBtnLogin);
+
+				});
 			}
 		},
 		99: function(response, textBtn)
