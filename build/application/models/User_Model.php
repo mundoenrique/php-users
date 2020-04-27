@@ -482,7 +482,7 @@ class User_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg =
+					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang($messageNotiSystem) );
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),
