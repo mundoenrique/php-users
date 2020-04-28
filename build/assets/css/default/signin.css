@@ -5563,3 +5563,11 @@ body .ui-tooltip {
   width: 190px;
   margin-bottom: 1rem
 }
+
+.dialog-ip p {
+	text-align: justify;
+}
+
+.dialog-ip form {
+	padding: 0px 10px;
+}

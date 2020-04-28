@@ -219,30 +219,6 @@ function login(user, pass) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
-			// data cableada
-			data = {
-				"rc": -424,
-				"code": 5,
-				"title": "Conexión Personas Online",
-				"msg": "Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo info******mail.com, por favor indicalo a continuación.",
-				"classIconName": "ui-icon-alert",
-				"data": {
-					"btn1": {
-						"text": "Aceptar",
-						"link": false,
-						"action": "wait"
-					},
-					"btn2": {
-						"text": "Cancelar",
-						"link": false,
-						"action": "close"
-					}
-				},
-				"email": "info******mail.com",
-				"assert": "Estoy accediendo desde un equipo de confianza",
-				"labelInput": "Código recibido"
-			}
-
 			if (data == 1) {
 				$("#dialog-login-ve").dialog({
 					modal: "true",
@@ -339,31 +315,18 @@ function login(user, pass) {
 			}
 			else if (data.rc == -424) {
 				// ocultarProcesando();
-				$("#novo-control-ip h2").text(data.title);
-				var btn = data.data.btn1;
-				var loginIpForm =
-				`<form id="formVerificationOTP" method="post">
-					<div class="form-group">
-						<label for="codeOTPLogin">${data.labelInput}<span class="danger">*</span></label>
-						<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off">
-					</div>
-					<label class="label-inline" for="acceptAssert">
-						<input id="acceptAssert" type="checkbox" name="acceptAssert">
-						${data.assert}
-					</label>
-				</form>`;
-				$("#novo-control-ip #message p").text(data.msg).css("text-align", "justify");
-				$("#novo-control-ip #message").after(loginIpForm);
-				if(skin == 'pichincha') {
-					$("#novo-control-ip #formVerificationOTP").css("padding", "0 10px 0 35px");
-				} else {
-					$("#novo-control-ip #formVerificationOTP").css("padding", "0 10px");
-				}
+				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
 					title: "Conexión Personas",
 					modal: "true",
 					width: "440px",
 					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+				});
+
+				$("#cancelar").click(function () {
+					ocultarProcesando();
+					habilitar();
+					$("#novo-control-ip").dialog("close");
 				});
 
 				$("#aceptar").click(function () {

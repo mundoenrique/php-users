@@ -236,23 +236,31 @@
 <!-- Control IP -->
 <div id="novo-control-ip" style='display:none'>
   <header>
-    <h2></h2>
+    <h2>Conexión Personas Online</h2>
   </header>
-  <div class="dialog-small" id="dialog">
+  <div class="dialog-small dialog-ip" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-			<p></p>
-    </div>
+			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo <span id=email></span>, por favor indicalo a continuación.</p>
+		</div>
+		<form id="formVerificationOTP" method="post">
+			<div>
+				<label for="codeOTPLogin">Código recibido<span class="danger">*</span></label>
+				<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off">
+			</div>
+			<label class="label-inline" for="acceptAssert">
+				<input id="acceptAssert" type="checkbox" name="acceptAssert">
+				Estoy accediendo desde un equipo de confianza
+			</label>
+		</form>
     <div class="form-actions">
 		<?php if($skin=='pichincha'): ?>
-			<center>
-				<div class="atc-form-action-child-3">
+			<div class="atc-form-action-child-perfil-content_2">
 		<?php endif;?>
-			<button id="cancelar" class="novo-btn-secondary">Cancelar</button>
+			<button type="reset" class="novo-btn-secondary">Cancelar</button>
 			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
 		<?php if($skin=='pichincha'): ?>
-				</div>
-			</center>
+			</div>
 		<?php endif;?>
     </div>
   </div>

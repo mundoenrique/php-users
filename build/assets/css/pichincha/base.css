@@ -5409,67 +5409,84 @@ a {
 /*nuevo menu*/
 .nav {
 	float: right;
-	}
+}
 
-	ul, ol{
-	 list-style:none;
-	}
-	.nav li a {
-		background-color:transparent;
-		color:#033572;
-		text-decoration:none;
-		padding:7px 8px;
-		display:block;
-		font-size: 15px;
-		font-family: Prelo,Helvetica,Arial,sans-serif;
-	}
+ul, ol{
+	list-style:none;
+}
+.nav li a {
+	background-color:transparent;
+	color:#033572;
+	text-decoration:none;
+	padding:7px 8px;
+	display:block;
+	font-size: 15px;
+	font-family: Prelo,Helvetica,Arial,sans-serif;
+}
 
-	.nav > li {
-		float:left;
-		padding-right: 13px;
-	}
+.nav > li {
+	float:left;
+	padding-right: 13px;
+}
 
-	.nav li a:hover {
-		background-color:transparent;
-	}
-	.nav li ul {
-		display:none;
-		position:absolute;
-		min-width:110px
-	}
-	.nav li:hover > ul {
-		display:block;
-	}
-	.nav li ul li{
-		position:relative;
-	}
-	.nav li ul li ul{
-		right:-140px;
-		top:0px;
-	}
-	.hover:hover {
-		color:#033572!important;
-   	font-weight: bold;
-		text-decoration:underline;
-		position:relative;
-	}
-	.hover2:hover {
-		color:#033572;
-		position:relative;
-		border-left: 5px solid #FFDD00;
-	}
+.nav li a:hover {
+	background-color:transparent;
+}
+.nav li ul {
+	display:none;
+	position:absolute;
+	min-width:110px
+}
+.nav li:hover > ul {
+	display:block;
+}
+.nav li ul li{
+	position:relative;
+}
+.nav li ul li ul{
+	right:-140px;
+	top:0px;
+}
+.hover:hover {
+	color:#033572!important;
+	font-weight: bold;
+	text-decoration:underline;
+	position:relative;
+}
+.hover2:hover {
+	color:#033572;
+	position:relative;
+	border-left: 5px solid #FFDD00;
+}
 
-	.actual {
-		color:#033572!important;
-		font-weight: bold;
-	  text-decoration:underline;
-	  position:relative;
-	}
+.actual {
+	color:#033572!important;
+	font-weight: bold;
+	text-decoration:underline;
+	position:relative;
+}
 
-	.border{
-		border: 0.5px solid #b9b7b7;
-		border-bottom-left-radius: 15px;
-		}
-	.margin_hover{
-			margin-top: -1px;
-		}
+.border{
+	border: 0.5px solid #b9b7b7;
+	border-bottom-left-radius: 15px;
+}
+
+.margin_hover{
+	margin-top: -1px;
+}
+
+.dialog-ip p {
+	text-align: justify;
+}
+
+.dialog-ip form {
+	padding: 0 10px 0 35px;
+}
+
+.dialog-ip .atc-form-action-child-perfil-content_2{
+	margin: 0 auto;
+}
+
+.dialog-ip .novo-btn-secondary {
+	margin-left: 10px;
+}
