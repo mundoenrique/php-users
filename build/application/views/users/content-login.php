@@ -241,7 +241,7 @@
   <div class="dialog-small dialog-ip" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo <span id=email></span>, por favor indicalo a continuación.</p>
+			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo <strong><span id=email></span></strong>, por favor indicalo a continuación.</p>
 		</div>
 		<form id="formVerificationOTP" method="post">
 			<div>

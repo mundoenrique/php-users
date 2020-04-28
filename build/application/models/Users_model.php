@@ -41,6 +41,10 @@ class Users_model extends CI_Model {
         
         $desdata->rc = -424;
 
+        if ($desdata->rc === -424) {
+            $desdata->email = 'correo*******mail.com'; // TODO: cambiar por la propiedad que se indique desde servicio
+        }
+
 		if(isset($response) && $desdata->rc == 0) {
 			if($desdata->codPais != 'Ec-bp' && $cookie == 'default') {
 				$putSession = TRUE;
