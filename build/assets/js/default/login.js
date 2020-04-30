@@ -65,7 +65,7 @@ $(function() {
 			userValid = (/^[\wñÑ*.-]+$/i.test(user))
 		}
 		if(userValid && passValid) {
-			mostrarProcesando(skin);
+			mostrarProcesando(skin, $(this));
 			grecaptcha.ready(function() {
 				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {action: 'login'})
 				.then(function(token) {
@@ -119,7 +119,7 @@ $(function() {
 
 });
 
-function mostrarProcesando(skin) {
+function mostrarProcesando(skin, element) {
 	var imagen = "";
 
 	switch (skin) {
@@ -129,22 +129,22 @@ function mostrarProcesando(skin) {
 			break;
 	}
 
-	$("#login").attr('disabled', 'true');
+	element.attr('disabled', 'true');
 	if (imagen == "") {
-		$("#login").html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">'
+		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">'
 			+ '<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
 	} else {
-		$("#login").html('<img src="' + base_cdn + 'img/' + imagen + '">');
+		element.html('<img src="' + base_cdn + 'img/' + imagen + '">');
 	}
 	if (skin == "pichincha") {
-		$("#login").css({
+		element.css({
 			'position': 'relative',
 			'height': '35px',
 			'width': '100%',
 			'opacity': '1'
 		});
 
-		$("#login").children(0).css({
+		element.children(0).css({
 			'position': 'absolute',
 			'top': '50%',
 			'left': '50%',
@@ -314,7 +314,6 @@ function login(user, pass) {
 
 			}
 			else if (data.rc == -424) {
-				// ocultarProcesando();
 				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
 					title: "Conexión Personas",
@@ -323,15 +322,30 @@ function login(user, pass) {
 					open: function (event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
 				});
 
-				$("#cancelar").click(function () {
+				$("#cancel").click(function () {
+					$("#novo-control-ip").dialog("close");
 					ocultarProcesando();
 					habilitar();
-					$("#novo-control-ip").dialog("close");
 				});
 
-				$("#aceptar").click(function () {
-					$("#novo-control-ip").dialog("close");
-					habilitar();
+				$("#accept").click(function () {
+					$("#codeOTPLogin").prop("disabled", true);
+					mostrarProcesando(skin, $(this));
+
+					var form = $("#formVerificationOTP");
+					validar_campos(form);
+
+					$("#formVerificationOTP").submit();
+					setTimeout(function(){$("#msg").fadeOut();},5000);
+
+
+					if(form.valid()) {
+						console.log('is valid');
+					}else{
+						$("#codeOTPLogin").removeAttr('disabled');
+						$(this).html('Aceptar');
+						$(this).attr("disabled", false);
+					}
 				});
 
 			}
@@ -376,4 +390,35 @@ function login(user, pass) {
 			pass = '';
 
 		});
+}
+
+function validar_campos(form){
+	jQuery.validator.setDefaults({
+ 		debug: true,
+ 		success: "valid"
+	 });
+
+	jQuery.validator.addMethod("codeOTPLogin", function(value, element) {
+		if (/^[a-z0-9]+$/i.test(value) && value.length == 8)
+			return true;
+		else return false;
+	});
+
+	validator = form.validate({
+		errorElement: "label",
+		ignore: "",
+		errorContainer: "#msg",
+		errorClass: "field-error",
+		validClass: "field-success",
+		errorLabelContainer: "#msg",
+		rules: {
+			"codeOTPLogin": {"required":true, "codeOTPLogin": true}
+		},
+		messages: {
+			"codeOTPLogin" : {
+				"required" : "Debe introducir el código recibido.",
+				"codeOTPLogin": "El código no tiene un formato válido."
+			}
+		}
+	}); // VALIDATE
 }
