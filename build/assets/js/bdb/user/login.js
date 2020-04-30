@@ -55,9 +55,9 @@ $$.addEventListener('DOMContentLoaded', function(){
 			var btn = response.data.btn1;
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
-				<p>${response.msg}</p>
+				<p class="justify">${response.msg}</p>
 				<div class="row">
-					<div class="form-group col-7">
+					<div class="form-group col-6">
 						<label for="codeOTPLogin">${response.labelInput}<span class="danger">*</span></label>
 						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
