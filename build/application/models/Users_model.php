@@ -11,19 +11,24 @@ class Users_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA HACER LOGIN
-	public function login_user($username, $password)
+	public function login_user($username, $password, $codeOTP)
 	{
-		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
+        $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
-		$data = json_encode(array(
-			'idOperation' => '1',
-			'className' => 'com.novo.objects.TOs.UsuarioTO',
-			'userName' => $username,
-			'password' => $password,
-			'logAccesoObject' => $logAcceso,
-			'token' => ''
-		));
-
+        $infoOTP = new stdClass();
+        $infoOTP->tokenCliente = $codeOTP === '--'? "": $codeOTP;
+        $infoOTP->authToken = $this->session->flashdata('authToken')?: FALSE;
+        
+        $data = json_encode(array(
+            'idOperation' => '1',
+            'className' => 'com.novo.objects.TOs.UsuarioTO',
+            'userName' => $username,
+            'password' => $password,
+            'logAccesoObject' => $logAcceso,
+            'codigoOtp' => $infoOTP,
+            'token' => ''
+        ));
+       
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
 		$data = json_encode($data);
@@ -39,10 +44,13 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
         
-        //$desdata->rc = -424;
+        $desdata->rc = -424;
+        //$desdata->rc = -286;
 
         if ($desdata->rc === -424) {
             $desdata->email = 'correo*******mail.com'; // TODO: cambiar por la propiedad que se indique desde servicio
+            //$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
+			$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
         }
 
 		if(isset($response) && $desdata->rc == 0) {
@@ -94,8 +102,6 @@ class Users_model extends CI_Model {
 			}
 		}
 		$salida = json_encode($desdata);
-
-		log_message('info', 'Salida INICIO DE SESION--->' . $salida);
 
 		$response = $this->cryptography->encrypt($desdata);
 

@@ -415,13 +415,29 @@ class Users extends CI_Controller {
 				)
 			)
 		);
+		
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
+		$codeOTP = $dataRequest->codeOTP;
+
+		if (isset($codeOTP) && $codeOTP === '--') {
+			
+            $dataLogin = new stdClass();
+            $dataLogin->username = $user;
+            $dataLogin->password = $pass;
+            $this->session->set_flashdata('firstDataRquest', $dataLogin);
+		} else {
+            $firstDataRequest = $this->session->flashdata('firstDataRquest');
+			$user = $firstDataRequest->username;
+			$pass = $firstDataRequest->password;
+        }
+
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
 		$result = TRUE;
 
 		$_POST['user'] = $user;
 		$_POST['pass'] = $pass;
+		$_POST['codeOTP'] = $codeOTP;
 
 		$this->form_validation->set_error_delimiters('', '---');
 		if($cookie == 'pichincha') {
@@ -429,12 +445,11 @@ class Users extends CI_Controller {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
 		}
 
-
 		unset($_POST);
 
 		if($result) {
 			$this->load->model('users_model','user');
-			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass));
+			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass, $codeOTP));
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
 			$response = [
