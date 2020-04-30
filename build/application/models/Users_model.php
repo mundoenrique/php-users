@@ -39,7 +39,7 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
         
-        $desdata->rc = -424;
+        //$desdata->rc = -424;
 
         if ($desdata->rc === -424) {
             $desdata->email = 'correo*******mail.com'; // TODO: cambiar por la propiedad que se indique desde servicio
