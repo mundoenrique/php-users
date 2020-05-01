@@ -419,6 +419,7 @@ class Users extends CI_Controller {
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
 		$codeOTP = $dataRequest->codeOTP;
+		$saveIP = $dataRequest->saveIP;
 
 		if (isset($codeOTP) && $codeOTP === '--') {
 			
@@ -438,6 +439,7 @@ class Users extends CI_Controller {
 		$_POST['user'] = $user;
 		$_POST['pass'] = $pass;
 		$_POST['codeOTP'] = $codeOTP;
+		$_POST['saveIP'] = $saveIP;
 
 		$this->form_validation->set_error_delimiters('', '---');
 		if($cookie == 'pichincha') {
@@ -449,7 +451,7 @@ class Users extends CI_Controller {
 
 		if($result) {
 			$this->load->model('users_model','user');
-			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass, $codeOTP));
+			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass, $codeOTP, $saveIP));
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
 			$response = [

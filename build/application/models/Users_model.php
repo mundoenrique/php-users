@@ -11,7 +11,7 @@ class Users_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA HACER LOGIN
-	public function login_user($username, $password, $codeOTP)
+	public function login_user($username, $password, $codeOTP, $saveIP)
 	{
         $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
@@ -26,7 +26,8 @@ class Users_model extends CI_Model {
             'password' => $password,
             'logAccesoObject' => $logAcceso,
             'codigoOtp' => $infoOTP,
-            'token' => ''
+            'token' => '',
+            'saveIP' => $saveIP
         ));
        
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
@@ -44,8 +45,8 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
         
-        $desdata->rc = -424;
-        //$desdata->rc = -286;
+        //$desdata->rc = -424;
+        //$desdata->rc = -426;
 
         if ($desdata->rc === -424) {
             $desdata->email = 'correo*******mail.com'; // TODO: cambiar por la propiedad que se indique desde servicio

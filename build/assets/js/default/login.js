@@ -223,19 +223,23 @@ function validateCaptcha(token, user, pass) {
 		})
 }
 
-function login(user = null, pass = null, codeOTP = null) {
+function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 	
 	cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
+
 	dataRequest = JSON.stringify({
 		user_name: user === null ? 'NULL' : user,
 		user_pass: pass === null ? 'NULL' : hex_md5(pass),
-		codeOTP: codeOTP === null ? '--' : codeOTP
-	})
+		codeOTP: codeOTP === null ? '--' : codeOTP,
+		saveIP: saveIP? true: false,		
+	});
+
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
 		format: CryptoJSAesJson
 	}).toString();
+
 	$.post(base_url + "/users/login", {
 			request: dataRequest,
 			cpo_name: cpo_cook,
@@ -398,10 +402,11 @@ function login(user = null, pass = null, codeOTP = null) {
 					}
 				});
 
-				$("#aceptar").click(function () {
+				$("#aceptarIp").click(function () {
 					$("#novo-control-ip-token-auth").dialog("close");
+					ocultarProcesando();
 					habilitar();
-				});
+				});				
 
 			} else {
 				ocultarProcesando();

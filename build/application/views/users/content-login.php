@@ -283,7 +283,7 @@
 			<center>
 				<div class="atc-form-action-child-perfil-content">
 		<?php 	endif; ?>
-			<button id="aceptar" class="novo-btn-primary">Aceptar</button>
+			<button id="aceptarIp" name="aceptarIp" class="novo-btn-primary">Aceptar</button>
 			<?php 	if($skin=='pichincha'): 		?>
 					</div>
 				</center>
