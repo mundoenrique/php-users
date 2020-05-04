@@ -86,6 +86,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 				btnTrigger.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					if (isModalConfirmIp) {
 						var form = $('#formVerificationOTP');
 						btnTrigger.innerHTML = msgLoadingWhite;
@@ -111,11 +113,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 							btnTrigger.innerHTML = txtBtnTrigger;
 							btnTrigger.disabled = false;
 						}
+					} else {
+						$("#system-info").dialog('close');
 					}
 				});
 
 				$$.getElementById("cancel").addEventListener('click', function (e) {
-					e.preventDefault();
+					systemMSg.innerHTML = "";
 					restartForm(txtBtnLogin);
 
 				});
