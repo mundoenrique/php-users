@@ -53,6 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		5: function(response, textBtn)
 		{
 			var btn = response.data.btn1;
+			var inputOTP = document.getElementById("codeOTPLogin");
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
 				<p class="justify">${response.msg}</p>
@@ -123,10 +124,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					restartForm(txtBtnLogin);
 				});
 
-				$(document).on('keyup keypress','#formVerificationOTP', function(e) {
+				$$.getElementById("formVerificationOTP").addEventListener("keypress", function(e) {
 					var keyCode = e.keyCode || e.which;
 					if (keyCode === 13) {
 						e.preventDefault();
+						e.stopImmediatePropagation();
 						btnTrigger.click();
 					}
 				});
