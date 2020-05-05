@@ -121,7 +121,14 @@ $$.addEventListener('DOMContentLoaded', function(){
 				$$.getElementById("cancel").addEventListener('click', function (e) {
 					systemMSg.innerHTML = "";
 					restartForm(txtBtnLogin);
+				});
 
+				$(document).on('keyup keypress','#formVerificationOTP', function(e) {
+					var keyCode = e.keyCode || e.which;
+					if (keyCode === 13) {
+						e.preventDefault();
+						btnTrigger.click();
+					}
 				});
 			}
 		},
