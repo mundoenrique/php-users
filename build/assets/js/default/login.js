@@ -141,22 +141,22 @@ function mostrarProcesando(skin, element) {
 			break;
 	}
 
-	element.attr('disabled', 'true');
+	$("#login").attr('disabled', 'true');
 	if (imagen == "") {
-		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">' +
+		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto; padding: 0 9px;">' +
 			'<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
 	} else {
-		element.html('<img src="' + base_cdn + 'img/' + imagen + '">');
+		$("#login").html('<img src="' + base_cdn + 'img/' + imagen + '">');
 	}
 	if (skin == "pichincha") {
-		element.css({
+		$("#login").css({
 			'position': 'relative',
 			'height': '35px',
 			'width': '100%',
 			'opacity': '1'
 		});
 
-		element.children(0).css({
+		$("#login").children(0).css({
 			'position': 'absolute',
 			'top': '50%',
 			'left': '50%',
@@ -224,7 +224,7 @@ function validateCaptcha(token, user, pass) {
 }
 
 function login(user = null, pass = null, codeOTP = null, saveIP = false) {
-	
+
 	cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -233,7 +233,7 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 		user_name: user === null ? 'NULL' : user,
 		user_pass: pass === null ? 'NULL' : hex_md5(pass),
 		codeOTP: codeOTP === null ? '--' : codeOTP,
-		saveIP: saveIP? true: false,		
+		saveIP: saveIP? true: false,
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
@@ -355,6 +355,7 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 				});
 
 			} else if (data.rc == -424) {
+				ocultarProcesando();
 				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
 					title: "Conexión Personas",
@@ -367,26 +368,38 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 
 				$("#cancel").click(function () {
 					$("#novo-control-ip").dialog("close");
-					ocultarProcesando();
 					habilitar();
 				});
 
+				$(document).on('keypress','#novo-control-ip', function(e) {
+					var keyCode = e.keyCode || e.which;
+					if (keyCode === 13) {
+						e.preventDefault();
+						$("#accept").click();
+					}
+				});
+
 				$("#accept").click(function () {
-					$("#codeOTPLogin").prop("disabled", true);
+					var otp = $("#codeOTPLogin");
+					var otpValid = true;
+					otp.prop("disabled", true);
 					mostrarProcesando(skin, $(this));
+					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length == 8;
 
-					var form = $("#formVerificationOTP");
-					validar_campos(form);
-
-					$("#formVerificationOTP").submit();
-					setTimeout(function () {
-						$("#msg").fadeOut();
-					}, 5000);
-
-					if (form.valid()) {
-						login(null, null, $("#codeOTPLogin").val());
+					if (otpValid) {
+						login(null, null, otp.val());
 					} else {
-						$("#codeOTPLogin").removeAttr('disabled');
+						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
+
+						otp.removeAttr('disabled').addClass("field-error");
+						$("#msg label").text(validMsg);
+						$("#msg").fadeIn();
+
+						setTimeout(function(){
+							otp.removeClass("field-error");
+							$("#msg").fadeOut();
+						},5000);
+
 						$(this).html('Aceptar');
 						$(this).attr("disabled", false);
 					}
@@ -406,7 +419,7 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 					$("#novo-control-ip-token-auth").dialog("close");
 					ocultarProcesando();
 					habilitar();
-				});				
+				});
 
 			} else {
 				ocultarProcesando();
