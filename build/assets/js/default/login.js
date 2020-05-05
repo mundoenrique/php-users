@@ -390,9 +390,9 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 						login(null, null, otp.val());
 					} else {
 						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
-
+						var labelMsg = `<label for="codeOTPLogin" class="field-error">${validMsg}</label>`
 						otp.removeAttr('disabled').addClass("field-error");
-						$("#msg label").text(validMsg);
+						$("#msg").html(labelMsg);
 						$("#msg").fadeIn();
 
 						setTimeout(function(){
@@ -450,38 +450,4 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 			pass = '';
 
 		});
-}
-
-function validar_campos(form) {
-	jQuery.validator.setDefaults({
-		debug: true,
-		success: "valid"
-	});
-
-	jQuery.validator.addMethod("codeOTPLogin", function (value, element) {
-		if (/^[a-z0-9]+$/i.test(value) && value.length == 8)
-			return true;
-		else return false;
-	});
-
-	validator = form.validate({
-		errorElement: "label",
-		ignore: "",
-		errorContainer: "#msg",
-		errorClass: "field-error",
-		validClass: "field-success",
-		errorLabelContainer: "#msg",
-		rules: {
-			"codeOTPLogin": {
-				"required": true,
-				"codeOTPLogin": true
-			}
-		},
-		messages: {
-			"codeOTPLogin": {
-				"required": "Debe introducir el código recibido.",
-				"codeOTPLogin": "El código no tiene un formato válido."
-			}
-		}
-	}); // VALIDATE
 }

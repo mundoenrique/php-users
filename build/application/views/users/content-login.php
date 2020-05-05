@@ -252,9 +252,7 @@
 				<input id="acceptAssert" type="checkbox" name="acceptAssert">
 				Estoy accediendo desde un equipo de confianza
 			</label>
-			<div id="msg">
-				<label for="codeOTPLogin" class="field-error"></label>
-			</div>
+			<div id="msg"></div>
 		</form>
     <div class="form-actions">
 		<?php if($skin=='pichincha'): ?>
