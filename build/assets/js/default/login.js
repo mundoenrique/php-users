@@ -141,28 +141,39 @@ function mostrarProcesando(skin, element) {
 			break;
 	}
 
-	$("#login").attr('disabled', 'true');
+	element.attr('disabled', 'true');
 	if (imagen == "") {
 		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto; padding: 0 9px;">' +
 			'<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
 	} else {
-		$("#login").html('<img src="' + base_cdn + 'img/' + imagen + '">');
+		element.html('<img src="' + base_cdn + 'img/' + imagen + '">');
 	}
 	if (skin == "pichincha") {
-		$("#login").css({
+		element.css({
 			'position': 'relative',
 			'height': '35px',
 			'width': '100%',
 			'opacity': '1'
 		});
 
-		$("#login").children(0).css({
+		element.children(0).css({
 			'position': 'absolute',
 			'top': '50%',
 			'left': '50%',
 			'transform': 'translate(-50%, -50%)',
 			'height': '25px'
 		});
+
+		if (element.attr("id") == 'accept') {
+			element.css({
+				'height': '42px',
+				'width': 'auto'
+			});
+
+			element.children(0).css({
+				'height': '32px'
+			});
+		}
 	}
 };
 
@@ -224,7 +235,7 @@ function validateCaptcha(token, user, pass) {
 }
 
 function login(user = null, pass = null, dataOPT = {}) {
-	
+
 	cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
@@ -355,6 +366,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 				});
 
 			} else if (data.rc == -424) {
+				var auxUser = user, auxPass = pass;
 				ocultarProcesando();
 				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
@@ -389,11 +401,15 @@ function login(user = null, pass = null, dataOPT = {}) {
 
 					if (otpValid) {
 						var dataOTP = {
-							valueOPT: $("#codeOTPLogin").val(),
+							valueOPT: otp.val(),
 							saveIP: $('#acceptAssert').prop('checked')
 						};
-						login(null, null, dataOTP);
+						login(auxUser, auxPass, dataOTP);
 					} else {
+						otp.prop("disabled", false);
+						$(this).html('Aceptar');
+						$(this).attr("disabled", false);
+
 						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
 						var labelMsg = `<label for="codeOTPLogin" class="field-error">${validMsg}</label>`
 						otp.removeAttr('disabled').addClass("field-error");
@@ -404,20 +420,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 							otp.removeClass("field-error");
 							$("#msg").fadeOut();
 						},5000);
-
-						if (form.valid()) {
-							var dataOTP = {
-								valueOPT: $("#codeOTPLogin").val(),
-								saveIP: $('#acceptAssert').prop('checked')
-							}
-							login(null, null, dataOTP);
-						} else {
-							$("#codeOTPLogin").removeAttr('disabled');
-							$(this).html('Aceptar');
-							$(this).attr("disabled", false);
-						}
 					}
-
 				});
 
 			} else if ((data.rc == -286) || (data.rc == -287) || (data.rc == -288)) {
