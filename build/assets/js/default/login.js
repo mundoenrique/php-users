@@ -141,22 +141,22 @@ function mostrarProcesando(skin, element) {
 			break;
 	}
 
-	element.attr('disabled', 'true');
+	$("#login").attr('disabled', 'true');
 	if (imagen == "") {
-		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto;">' +
+		element.html('<div id="loading" class="icono-load" style="display:flex; width:20px; margin:0 auto; padding: 0 9px;">' +
 			'<span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 20px"></span></div>');
 	} else {
-		element.html('<img src="' + base_cdn + 'img/' + imagen + '">');
+		$("#login").html('<img src="' + base_cdn + 'img/' + imagen + '">');
 	}
 	if (skin == "pichincha") {
-		element.css({
+		$("#login").css({
 			'position': 'relative',
 			'height': '35px',
 			'width': '100%',
 			'opacity': '1'
 		});
 
-		element.children(0).css({
+		$("#login").children(0).css({
 			'position': 'absolute',
 			'top': '50%',
 			'left': '50%',
@@ -355,6 +355,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 				});
 
 			} else if (data.rc == -424) {
+				ocultarProcesando();
 				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
 					title: "Conexión Personas",
@@ -367,21 +368,37 @@ function login(user = null, pass = null, dataOPT = {}) {
 
 				$("#cancel").click(function () {
 					$("#novo-control-ip").dialog("close");
-					ocultarProcesando();
 					habilitar();
 				});
 
+				$(document).on('keypress','#novo-control-ip', function(e) {
+					var keyCode = e.keyCode || e.which;
+					if (keyCode === 13) {
+						e.preventDefault();
+						$("#accept").click();
+					}
+				});
+
 				$("#accept").click(function () {
-					$("#codeOTPLogin").prop("disabled", true);
+					var otp = $("#codeOTPLogin");
+					var otpValid = true;
+					otp.prop("disabled", true);
 					mostrarProcesando(skin, $(this));
+					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length == 8;
 
-					var form = $("#formVerificationOTP");
-					validar_campos(form);
+					if (otpValid) {
+						login(null, null, otp.val());
+					} else {
+						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
+						var labelMsg = `<label for="codeOTPLogin" class="field-error">${validMsg}</label>`
+						otp.removeAttr('disabled').addClass("field-error");
+						$("#msg").html(labelMsg);
+						$("#msg").fadeIn();
 
-					$("#formVerificationOTP").submit();
-					setTimeout(function () {
-						$("#msg").fadeOut();
-					}, 5000);
+						setTimeout(function(){
+							otp.removeClass("field-error");
+							$("#msg").fadeOut();
+						},5000);
 
 					if (form.valid()) {
 						var dataOTP = {
@@ -410,7 +427,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 					$("#novo-control-ip-token-auth").dialog("close");
 					ocultarProcesando();
 					habilitar();
-				});				
+				});
 
 			} else {
 				ocultarProcesando();
@@ -441,38 +458,4 @@ function login(user = null, pass = null, dataOPT = {}) {
 			pass = '';
 
 		});
-}
-
-function validar_campos(form) {
-	jQuery.validator.setDefaults({
-		debug: true,
-		success: "valid"
-	});
-
-	jQuery.validator.addMethod("codeOTPLogin", function (value, element) {
-		if (/^[a-z0-9]+$/i.test(value) && value.length == 8)
-			return true;
-		else return false;
-	});
-
-	validator = form.validate({
-		errorElement: "label",
-		ignore: "",
-		errorContainer: "#msg",
-		errorClass: "field-error",
-		validClass: "field-success",
-		errorLabelContainer: "#msg",
-		rules: {
-			"codeOTPLogin": {
-				"required": true,
-				"codeOTPLogin": true
-			}
-		},
-		messages: {
-			"codeOTPLogin": {
-				"required": "Debe introducir el código recibido.",
-				"codeOTPLogin": "El código no tiene un formato válido."
-			}
-		}
-	}); // VALIDATE
 }

@@ -53,6 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		5: function(response, textBtn)
 		{
 			var btn = response.data.btn1;
+			var inputOTP = document.getElementById("codeOTPLogin");
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
 				<p class="justify">${response.msg}</p>
@@ -86,6 +87,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 				btnTrigger.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					if (isModalConfirmIp) {
 						var form = $('#formVerificationOTP');
 						btnTrigger.innerHTML = msgLoadingWhite;
@@ -111,13 +114,23 @@ $$.addEventListener('DOMContentLoaded', function(){
 							btnTrigger.innerHTML = txtBtnTrigger;
 							btnTrigger.disabled = false;
 						}
+					} else {
+						$("#system-info").dialog('close');
 					}
 				});
 
 				$$.getElementById("cancel").addEventListener('click', function (e) {
-					e.preventDefault();
+					systemMSg.innerHTML = "";
 					restartForm(txtBtnLogin);
+				});
 
+				$$.getElementById("formVerificationOTP").addEventListener("keypress", function(e) {
+					var keyCode = e.keyCode || e.which;
+					if (keyCode === 13) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
+						btnTrigger.click();
+					}
 				});
 			}
 		},

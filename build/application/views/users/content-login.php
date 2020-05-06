@@ -243,7 +243,7 @@
       <span aria-hidden="true" class="icon-warning-sign"></span>
 			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo <strong><span id=email></span></strong>, por favor indicalo a continuación.</p>
 		</div>
-		<form accept-charset="utf-8" id="formVerificationOTP">
+		<form id="formVerificationOTP">
 			<div>
 				<label for="codeOTPLogin">Código recibido<span class="danger">*</span></label>
 				<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off" required>
@@ -252,8 +252,8 @@
 				<input id="acceptAssert" type="checkbox" name="acceptAssert">
 				Estoy accediendo desde un equipo de confianza
 			</label>
+			<div id="msg"></div>
 		</form>
-		<div id="msg"></div>
     <div class="form-actions">
 		<?php if($skin=='pichincha'): ?>
 			<div class="atc-form-action-child-perfil-content_2">
