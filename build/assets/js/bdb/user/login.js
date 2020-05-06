@@ -213,7 +213,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				user: 'NULL',
 				pass: 'NULL',
 				active: '',
-				saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
+				saveIP: $$.getElementById('acceptAssert') == null? false: $$.getElementById('acceptAssert').checked,
 				codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
 			};
 		}

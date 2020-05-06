@@ -223,17 +223,17 @@ function validateCaptcha(token, user, pass) {
 		})
 }
 
-function login(user = null, pass = null, codeOTP = null, saveIP = false) {
+function login(user = null, pass = null, dataOPT = {}) {
 	
 	cpo_cook = decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 
 	dataRequest = JSON.stringify({
-		user_name: user === null ? 'NULL' : user,
-		user_pass: pass === null ? 'NULL' : hex_md5(pass),
-		codeOTP: codeOTP === null ? '--' : codeOTP,
-		saveIP: saveIP? true: false,		
+		user_name: user === null ? '--' : user,
+		user_pass: pass === null ? '--' : hex_md5(pass),
+		codeOTP: dataOPT.valueOPT === undefined ? '--' : dataOPT.valueOPT,
+		saveIP: dataOPT.saveIP === undefined ? false: true
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
@@ -384,7 +384,11 @@ function login(user = null, pass = null, codeOTP = null, saveIP = false) {
 					}, 5000);
 
 					if (form.valid()) {
-						login(null, null, $("#codeOTPLogin").val());
+						var dataOTP = {
+							valueOPT: $("#codeOTPLogin").val(),
+							saveIP: $('#acceptAssert').prop('checked')
+						}
+						login(null, null, dataOTP);
 					} else {
 						$("#codeOTPLogin").removeAttr('disabled');
 						$(this).html('Aceptar');

@@ -246,7 +246,7 @@
 		<form accept-charset="utf-8" id="formVerificationOTP">
 			<div>
 				<label for="codeOTPLogin">Código recibido<span class="danger">*</span></label>
-				<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off">
+				<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off" required>
 			</div>
 			<label class="label-inline" for="acceptAssert">
 				<input id="acceptAssert" type="checkbox" name="acceptAssert">

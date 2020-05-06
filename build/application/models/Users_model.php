@@ -17,7 +17,7 @@ class Users_model extends CI_Model {
 
         $infoOTP = new stdClass();
         $infoOTP->tokenCliente = $codeOTP === '--'? "": $codeOTP;
-        $infoOTP->authToken = $this->session->flashdata('authToken')?: FALSE;
+        $infoOTP->authToken = $this->session->flashdata('authToken')?: '';
         
         $data = json_encode(array(
             'idOperation' => '1',
@@ -49,7 +49,7 @@ class Users_model extends CI_Model {
         //$desdata->rc = -426;
 
         if ($desdata->rc === -424) {
-            $desdata->email = 'correo*******mail.com'; // TODO: cambiar por la propiedad que se indique desde servicio
+            $desdata->email = $desdata->emailEnc = 'corr*****mail.com'; // TODO: Eliminar cable
             //$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
 			$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
         }
