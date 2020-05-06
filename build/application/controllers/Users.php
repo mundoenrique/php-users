@@ -421,7 +421,7 @@ class Users extends CI_Controller {
 		$codeOTP = $dataRequest->codeOTP;
 		$saveIP = $dataRequest->saveIP;
 
-		if (isset($codeOTP) && $codeOTP === '--') {
+		if (isset($codeOTP) && $codeOTP === '000') {
 			
             $dataLogin = new stdClass();
             $dataLogin->username = $user;
@@ -454,6 +454,7 @@ class Users extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass, $codeOTP, $saveIP));
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			$response = [
 				'rc'=> -9999
 			];

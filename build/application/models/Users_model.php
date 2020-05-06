@@ -45,8 +45,8 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
         
-        //$desdata->rc = -424;
-        //$desdata->rc = -426;
+        $desdata->rc = -424;
+        $desdata->rc = -426;
 
         if ($desdata->rc === -424) {
             $desdata->email = $desdata->emailEnc = 'corr*****mail.com'; // TODO: Eliminar cable

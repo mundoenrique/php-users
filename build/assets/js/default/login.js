@@ -232,7 +232,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 	dataRequest = JSON.stringify({
 		user_name: user === null ? '--' : user,
 		user_pass: pass === null ? '--' : hex_md5(pass),
-		codeOTP: dataOPT.valueOPT === undefined ? '--' : dataOPT.valueOPT,
+		codeOTP: dataOPT.valueOPT === undefined ? '000' : dataOPT.valueOPT,
 		saveIP: dataOPT.saveIP === undefined ? false: true
 	});
 
@@ -380,6 +380,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 				});
 
 				$("#accept").click(function () {
+
 					var otp = $("#codeOTPLogin");
 					var otpValid = true;
 					otp.prop("disabled", true);
@@ -387,7 +388,11 @@ function login(user = null, pass = null, dataOPT = {}) {
 					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length == 8;
 
 					if (otpValid) {
-						login(null, null, otp.val());
+						var dataOTP = {
+							valueOPT: $("#codeOTPLogin").val(),
+							saveIP: $('#acceptAssert').prop('checked')
+						};
+						login(null, null, dataOTP);
 					} else {
 						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
 						var labelMsg = `<label for="codeOTPLogin" class="field-error">${validMsg}</label>`
@@ -400,17 +405,19 @@ function login(user = null, pass = null, dataOPT = {}) {
 							$("#msg").fadeOut();
 						},5000);
 
-					if (form.valid()) {
-						var dataOTP = {
-							valueOPT: $("#codeOTPLogin").val(),
-							saveIP: $('#acceptAssert').prop('checked')
+						if (form.valid()) {
+							var dataOTP = {
+								valueOPT: $("#codeOTPLogin").val(),
+								saveIP: $('#acceptAssert').prop('checked')
+							}
+							login(null, null, dataOTP);
+						} else {
+							$("#codeOTPLogin").removeAttr('disabled');
+							$(this).html('Aceptar');
+							$(this).attr("disabled", false);
 						}
-						login(null, null, dataOTP);
-					} else {
-						$("#codeOTPLogin").removeAttr('disabled');
-						$(this).html('Aceptar');
-						$(this).attr("disabled", false);
 					}
+
 				});
 
 			} else if ((data.rc == -286) || (data.rc == -287) || (data.rc == -288)) {
