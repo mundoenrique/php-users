@@ -244,7 +244,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 		user_name: user === null ? '--' : user,
 		user_pass: pass === null ? '--' : hex_md5(pass),
 		codeOTP: dataOPT.valueOPT === undefined ? '000' : dataOPT.valueOPT,
-		saveIP: dataOPT.saveIP === undefined ? false: true
+		saveIP: (dataOPT.saveIP === undefined || dataOPT.saveIP === false) ? false: true
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
@@ -261,6 +261,16 @@ function login(user = null, pass = null, dataOPT = {}) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
+
+			if (!$.isEmptyObject(dataOPT)) {
+				$("#codeOTPLogin").prop("disabled", false);
+				$("#codeOTPLogin").val('');
+				$("#acceptAssert").prop("disabled", false);
+				$('#acceptAssert').prop('checked', false)
+				$("#accept").attr("disabled", false);
+				$("#accept").html('Aceptar');
+				$("#novo-control-ip").dialog("close");
+			}
 
 			if (data == 1) {
 				$("#dialog-login-ve").dialog({
@@ -379,6 +389,10 @@ function login(user = null, pass = null, dataOPT = {}) {
 				});
 
 				$("#cancel").click(function () {
+					$("#codeOTPLogin").prop("disabled", false);
+					$("#codeOTPLogin").val('');
+					$("#acceptAssert").prop("disabled", false);
+					$('#acceptAssert').prop('checked', false)
 					$("#novo-control-ip").dialog("close");
 					habilitar();
 				});
@@ -396,6 +410,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 					var otp = $("#codeOTPLogin");
 					var otpValid = true;
 					otp.prop("disabled", true);
+					$("#acceptAssert").prop("disabled", true);
 					mostrarProcesando(skin, $(this));
 					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length == 8;
 
@@ -407,6 +422,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 						login(auxUser, auxPass, dataOTP);
 					} else {
 						otp.prop("disabled", false);
+						$('#acceptAssert').prop('disabled', false)
 						$(this).html('Aceptar');
 						$(this).attr("disabled", false);
 
