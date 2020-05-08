@@ -241,16 +241,16 @@
   <div class="dialog-small dialog-ip" id="dialog">
     <div class="alert-simple alert-warning" id="message">
       <span aria-hidden="true" class="icon-warning-sign"></span>
-			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad vamos a enviarte un código de seguridad a la dirección de correo <strong><span id=email></span></strong>, por favor indicalo a continuación.</p>
+			<p style="text-align: justify;">Estas ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <strong><span id=email></span></strong>, por favor indícalo a continuación.</p>
 		</div>
 		<form id="formVerificationOTP">
 			<div>
-				<label for="codeOTPLogin">Código recibido<span class="danger">*</span></label>
+				<label for="codeOTPLogin">Código recibido</label>
 				<input class="field-medium" maxlength="15" id="codeOTPLogin" name="codeOTPLogin" value="" autocomplete="off" required>
 			</div>
 			<label class="label-inline" for="acceptAssert">
 				<input id="acceptAssert" type="checkbox" name="acceptAssert">
-				Estoy accediendo desde un equipo de confianza
+				Confirmo que estoy ingresando desde un equipo de uso frecuente.
 			</label>
 			<div id="msg"></div>
 		</form>

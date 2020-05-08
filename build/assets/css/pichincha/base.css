@@ -5480,7 +5480,7 @@ ul, ol{
 }
 
 .dialog-ip form {
-	padding: 0 10px 0 35px;
+	padding: 0 10px;
 }
 
 .dialog-ip .atc-form-action-child-perfil-content_2{
@@ -5489,4 +5489,8 @@ ul, ol{
 
 .dialog-ip .novo-btn-secondary {
 	margin-left: 10px;
+}
+
+.dialog-ip  .alert-simple p {
+	margin: 0;
 }

@@ -59,7 +59,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<p class="justify">${response.msg}</p>
 				<div class="row">
 					<div class="form-group col-6">
-						<label for="codeOTPLogin">${response.labelInput}<span class="danger">*</span></label>
+						<label for="codeOTPLogin">${response.labelInput}</label>
 						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
