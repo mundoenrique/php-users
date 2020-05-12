@@ -59,6 +59,16 @@ $config = [
 			'rules' => 'required|trim'
 		],
 		[
+			'field' => 'middleName',
+			'label' => 'middleName',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
+			'field' => 'secondSurname',
+			'label' => 'secondSurname',
+			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+		],
+		[
 			'field' => 'birthDate',
 			'label' => 'birthDate',
 			'rules' => 'required|trim|regex_match[/^[0-9\/]+$/]'
@@ -109,11 +119,6 @@ $config = [
 			'rules' => 'required|trim|numeric'
 		],
 		[
-			'field' => 'notificationsEmail',
-			'label' => 'notificationsEmail',
-			'rules' => 'required|trim|numeric'
-		],
-		[
 			'field' => 'profession',
 			'label' => 'profession',
 			'rules' => 'required|trim|numeric'
@@ -136,7 +141,7 @@ $config = [
 		[
 			'field' => 'phoneType',
 			'label' => 'phoneType',
-			'rules' => 'required|trim'
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'address',
