@@ -377,7 +377,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 
 			} else if (data.rc == -424) {
 				var auxUser = user, auxPass = pass;
-				ocultarProcesando();
+
 				$("#novo-control-ip #email").text(data.email);
 				$("#novo-control-ip").dialog({
 					title: "Conexión Personas",
@@ -394,6 +394,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 					$("#acceptAssert").prop("disabled", false);
 					$('#acceptAssert').prop('checked', false)
 					$("#novo-control-ip").dialog("close");
+					ocultarProcesando();
 					habilitar();
 				});
 
