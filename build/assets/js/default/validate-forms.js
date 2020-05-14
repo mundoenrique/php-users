@@ -192,6 +192,13 @@ function validateForms(form, options) {
 			confirmEmail: { required: true, equalTo: "#email" },
 			landLine: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual2": true },
 			mobilePhone: { required: true, number: true, minNumLength: 7, maxNumLength: 11, "numberEqual3": true },
+			phoneType: {
+				required: {
+						depends: function(element) {
+								return ($('#otherPhoneNum').val() != '');
+						}
+				}
+			},
 			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true },
 			rucLaboral: { required: true },
 			jobCenter: { required: true },
