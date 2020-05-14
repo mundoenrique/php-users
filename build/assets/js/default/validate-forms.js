@@ -199,7 +199,12 @@ function validateForms(form, options) {
 						}
 				}
 			},
-			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true },
+			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true,
+				required: {
+					depends: function(element) {
+							return ($('#phoneType').val() != '');
+					}
+			} },
 			rucLaboral: { required: true },
 			jobCenter: { required: true },
 			employmentSituation: { required: false },
