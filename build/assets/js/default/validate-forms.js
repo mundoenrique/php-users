@@ -147,6 +147,14 @@ function validateForms(form, options) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 números no deben ser consecutivos.");
 
+	jQuery.validator.addMethod("dependOtherPhoneNum", function(value, element) {
+		return ($('#otherPhoneNum').val() == '' || value != '');
+	}, "Selecciona una opción.");
+
+	jQuery.validator.addMethod("dependPhoneType", function(value, element) {
+		return ($('#phoneType').val() == '' || element.value != '');
+	}, "Introduce el número.");
+
 	validator = form.validate({
 		rules: {
 			generateNewPin: { required: true, number: true, exactNumbers: 4, "fourConsecutivesDigits": true },
@@ -192,19 +200,8 @@ function validateForms(form, options) {
 			confirmEmail: { required: true, equalTo: "#email" },
 			landLine: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual2": true },
 			mobilePhone: { required: true, number: true, minNumLength: 7, maxNumLength: 11, "numberEqual3": true },
-			phoneType: {
-				required: {
-						depends: function(element) {
-								return ($('#otherPhoneNum').val() != '');
-						}
-				}
-			},
-			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true,
-				required: {
-					depends: function(element) {
-							return ($('#phoneType').val() != '');
-					}
-			} },
+			phoneType: { "dependOtherPhoneNum": true },
+			otherPhoneNum: { number: true, minNumLength: 7, maxNumLength: 11, "numberEqual1": true, "dependPhoneType": true },
 			rucLaboral: { required: true },
 			jobCenter: { required: true },
 			employmentSituation: { required: false },
