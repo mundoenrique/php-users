@@ -190,8 +190,8 @@ class BDB_Controller extends CI_Controller {
 
 	protected function checkBrowser () {
 
-		$this->load->library('Tool_Browser');
-		$infoBrowser = $this->tool_browser->validateBrowser();
+		$this->load->library('BDB_Browser');
+		$infoBrowser = $this->bdb_browser->validateBrowser();
 
 		if ($infoBrowser['isMobile']) {
 

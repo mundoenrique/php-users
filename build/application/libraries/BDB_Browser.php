@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tool_Browser {
+class BDB_Browser {
 
 	public function __construct()
 	{
