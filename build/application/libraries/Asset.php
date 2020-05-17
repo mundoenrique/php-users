@@ -8,10 +8,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset {
 	private $cssFiles = [];
 	private $jsFiles = [];
+	private $CI = [];
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Assets Library Class Initialized');
+		$CI =& get_instance();
+		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
