@@ -11,19 +11,25 @@ class Users_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA HACER LOGIN
-	public function login_user($username, $password)
+	public function login_user($username, $password, $codeOTP, $saveIP)
 	{
-		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
+        $logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
-		$data = json_encode(array(
-			'idOperation' => '1',
-			'className' => 'com.novo.objects.TOs.UsuarioTO',
-			'userName' => $username,
-			'password' => $password,
-			'logAccesoObject' => $logAcceso,
-			'token' => ''
-		));
-
+        $infoOTP = new stdClass();
+        $infoOTP->tokenCliente = $codeOTP === '--'? "": $codeOTP;
+        $infoOTP->authToken = $this->session->flashdata('authToken')?: '';
+        
+        $data = json_encode(array(
+            'idOperation' => '1',
+            'className' => 'com.novo.objects.TOs.UsuarioTO',
+            'userName' => $username,
+            'password' => $password,
+            'logAccesoObject' => $logAcceso,
+            'codigoOtp' => $infoOTP,
+            'token' => '',
+            'saveIP' => $saveIP
+        ));
+       
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
 		$data = json_encode($data);
@@ -37,7 +43,16 @@ class Users_model extends CI_Model {
 			$desdata->rc = -9999;
 		}
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
-		$putSession = FALSE;
+        $putSession = FALSE;
+        
+        $desdata->rc = -424;
+        $desdata->rc = -426;
+
+        if ($desdata->rc === -424) {
+            $desdata->email = $desdata->emailEnc = 'corr*****mail.com'; // TODO: Eliminar cable
+            //$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
+			$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
+        }
 
 		if(isset($response) && $desdata->rc == 0) {
 			if($desdata->codPais != 'Ec-bp' && $cookie == 'default') {
@@ -88,8 +103,6 @@ class Users_model extends CI_Model {
 			}
 		}
 		$salida = json_encode($desdata);
-
-		log_message('info', 'Salida INICIO DE SESION--->' . $salida);
 
 		$response = $this->cryptography->encrypt($desdata);
 

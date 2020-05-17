@@ -53,12 +53,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 		5: function(response, textBtn)
 		{
 			var btn = response.data.btn1;
+			var inputOTP = document.getElementById("codeOTPLogin");
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
-				<p>${response.msg}</p>
+				<p class="justify">${response.msg}</p>
 				<div class="row">
-					<div class="form-group col-7">
-						<label for="codeOTPLogin">${response.labelInput}<span class="danger">*</span></label>
+					<div class="form-group col-6">
+						<label for="codeOTPLogin">${response.labelInput}</label>
 						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
@@ -86,6 +87,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 				txtBtnTrigger = btnTrigger.innerHTML.trim();
 
 				btnTrigger.addEventListener('click', function (e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					if (isModalConfirmIp) {
 						var form = $('#formVerificationOTP');
 						btnTrigger.innerHTML = msgLoadingWhite;
@@ -111,6 +114,22 @@ $$.addEventListener('DOMContentLoaded', function(){
 							btnTrigger.innerHTML = txtBtnTrigger;
 							btnTrigger.disabled = false;
 						}
+					} else {
+						$("#system-info").dialog('close');
+					}
+				});
+
+				$$.getElementById("cancel").addEventListener('click', function (e) {
+					systemMSg.innerHTML = "";
+					restartForm(txtBtnLogin);
+				});
+
+				$$.getElementById("formVerificationOTP").addEventListener("keypress", function(e) {
+					var keyCode = e.keyCode || e.which;
+					if (keyCode === 13) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
+						btnTrigger.click();
 					}
 				});
 			}
@@ -207,7 +226,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				user: 'NULL',
 				pass: 'NULL',
 				active: '',
-				saveIP: $$.getElementById('acceptAssert') == null? 'false': $$.getElementById('acceptAssert').checked,
+				saveIP: $$.getElementById('acceptAssert') == null? false: $$.getElementById('acceptAssert').checked,
 				codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
 			};
 		}

@@ -24,7 +24,7 @@ class User_Model extends BDB_Model
 
 		$infoOTP = new stdClass();
 		$infoOTP->tokenCliente = isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"";
-		$infoOTP->authToken = $this->session->flashdata('authToken')?: FALSE;
+		$infoOTP->authToken = $this->session->flashdata('authToken')?: '';
 
 		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL' ) {
 			$this->session->set_flashdata('firstDataRquest', $dataRequest);
@@ -44,16 +44,12 @@ class User_Model extends BDB_Model
 		$this->dataRequest->codigoOtp = $infoOTP ;
 
 		if (isset($dataRequest->saveIP)){
-		 	$this->dataRequest->guardaIp = TRUE;
+		 	$this->dataRequest->guardaIp = $dataRequest->saveIP;
 		}
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
-			//$this->isResponseRc = 0;
-			// $this->isResponseRc = -286;
-			$this->isResponseRc = -424;
-			//$this->isResponseRc = -6000;
-			switch ($this->isResponseRc ) {
+			switch ($this->isResponseRc) {
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
 
@@ -154,9 +150,9 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -424:
-					$this->response->email = 'info******mail.com';// TODO: eliminar
 					$this->response->code = 5;
-					$this->response->msg = str_replace('{$maskMail$}',$this->response->email,lang('LOGIN_IP_MSG'));
+					$response->emailEnc = 'corr****mail.com'; // TODO: Eliminar cable
+					$this->response->msg = str_replace('{$maskMail$}', $response->emailEnc, lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';

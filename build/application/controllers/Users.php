@@ -102,7 +102,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets, 'scoreRecapcha' => $this->scoreRecapcha), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'login.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js');
 		//INSTANCIA DEL FOOTER
 		$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 		if(ENVIRONMENT == 'production' && $cookie == 'pichincha') {
@@ -415,13 +415,31 @@ class Users extends CI_Controller {
 				)
 			)
 		);
+		
 		$user = $dataRequest->user_name;
 		$pass = $dataRequest->user_pass;
+		$codeOTP = $dataRequest->codeOTP;
+		$saveIP = $dataRequest->saveIP;
+
+		if (isset($codeOTP) && $codeOTP === '000') {
+			
+            $dataLogin = new stdClass();
+            $dataLogin->username = $user;
+            $dataLogin->password = $pass;
+            $this->session->set_flashdata('firstDataRquest', $dataLogin);
+		} else {
+            $firstDataRequest = $this->session->flashdata('firstDataRquest');
+			$user = $firstDataRequest->username;
+			$pass = $firstDataRequest->password;
+        }
+
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
 		$result = TRUE;
 
 		$_POST['user'] = $user;
 		$_POST['pass'] = $pass;
+		$_POST['codeOTP'] = $codeOTP;
+		$_POST['saveIP'] = $saveIP;
 
 		$this->form_validation->set_error_delimiters('', '---');
 		if($cookie == 'pichincha') {
@@ -429,14 +447,14 @@ class Users extends CI_Controller {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
 		}
 
-
 		unset($_POST);
 
 		if($result) {
 			$this->load->model('users_model','user');
-			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass));
+			$this->output->set_content_type('application/json')->set_output($this->user->login_user($user, $pass, $codeOTP, $saveIP));
 		} else {
 			log_message('DEBUG', 'NOVO VALIDATION FORM login: '.json_encode($result));
+			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			$response = [
 				'rc'=> -9999
 			];
