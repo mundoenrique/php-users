@@ -12,12 +12,15 @@ $cpo_cook = $this->security->get_csrf_hash();
 			<section>
 				<div id="content-holder">
 					<h2>Autenticación Requerida</h2>
-					<p>Para realizar transacciones con sus cuentas desde <strong>Conexión Personas</strong> es necesario proporcione su clave de operaciones. Esta clave le será solicitada solamente una vez durante su sesión actual.</p>
+					<p>Para realizar transacciones con tus cuentas desde <strong>Conexión Personas</strong> es necesario proporciones tu clave de operaciones. Esta clave te será solicitada solamente una vez durante tu sesión actual.</p>
 					<fieldset class="fieldset-column-center">
 						<label for="transpwd">Clave de Operaciones</label>
 						<input class="field-medium" id="transpwd" name="transpwd" type="password" />
 					</fieldset>
-					<p>En caso de haber olvidado su <strong>Clave de Operaciones</strong></strong>, comuníquese con el <strong>Centro de Contacto</strong>.</p>
+					<div id="warning">
+						<img src="../../assets/img/icon-warning.png" class="icon-warning" alt="warning">
+					</div>
+					<p class="text-warning"><strong class="forget-password">¿Olvidaste tu clave de operaciones especiales?.</strong> Escríbenos a <strong><a href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com</a></strong> y con gusto te ayudaremos.<br>Envía tu nombre, cédula, empresa en la que trabajas y los 4 últimos dígitos de tu tarjeta.</b></p>
 					<div class="form-actions">
 						<a href="<? echo $this->config->item("base_url"); ?>/dashboard"><button type="reset" class="novo-btn-secondary">Cancelar</button></a>
 						<button id="continuar_transfer" class="novo-btn-primary">Continuar</button>
