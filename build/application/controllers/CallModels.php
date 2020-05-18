@@ -51,9 +51,9 @@ class CallModels extends BDB_Controller {
 			}
 			unset($_POST);
 
-			languageLoad(NULL, $this->rule);
+			loadLanguage(NULL, $this->rule);
 			$this->config->set_item('language', 'core-'.$this->countryUri);
-			languageLoad($this->countryUri, $this->rule);
+			loadLanguage($this->countryUri, $this->rule);
 
 			$this->load->model($this->model, 'modelLoad');
 			$method = $this->method;
