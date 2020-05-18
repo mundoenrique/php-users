@@ -2,7 +2,7 @@
 $CI =& get_instance();
 $pageClass = isset($bodyclass) ? 'class="' . $bodyclass . '"' : '';
 $pageUrl = $CI->config->item('base_url');
-$pageCdn = $CI->config->item('base_url_cdn');
+$pageCdn = $CI->config->item('asset_url');
 $skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
 $extension = $skin != "pichincha" ? ".png": ".ico";
 ?>

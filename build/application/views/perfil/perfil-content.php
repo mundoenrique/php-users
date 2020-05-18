@@ -8,7 +8,7 @@ if(isset($data)){
 		$datos = unserialize($data);
 
     if($datos->rc==0){
-        $base_cdn = $this->config->item('base_url_cdn');
+        $base_cdn = $this->config->item('asset_url');
         $cant = count($datos->registro->listaTelefonos);
         $disponeClaveSMS= $datos->registro->user->disponeClaveSMS;
         $clave_ope =$this->session->userdata('passwordOperaciones');
