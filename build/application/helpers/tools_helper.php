@@ -269,8 +269,8 @@ if(!function_exists('assetUrl')) {
 	}
 }
 
-if(!function_exists('accessLog')) {
-	function accessLog($dataAccessLog) {
+if(!function_exists('logAccess')) {
+	function logAccess($dataAccessLog) {
 		$CI = &get_instance();
 
 		return [
