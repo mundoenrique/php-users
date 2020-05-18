@@ -259,13 +259,13 @@ if(!function_exists('clientCheck')) {
 
 if(!function_exists('assetPath')) {
 	function assetPath($route = '') {
-		return get_instance()->config->item('base_path_cdn').$route;
+		return get_instance()->config->item('asset_path').$route;
 	}
 }
 
 if(!function_exists('assetUrl')) {
 	function assetUrl($route = '') {
-		return get_instance()->config->item('base_url_cdn').$route;
+		return get_instance()->config->item('asset_url').$route;
 	}
 }
 
