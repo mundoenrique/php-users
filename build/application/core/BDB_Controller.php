@@ -59,9 +59,9 @@ class BDB_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 
-		languageLoad();
+		loadLanguage();
 		countryCheck($this->countryUri);
-		languageLoad($this->countryUri);
+		loadLanguage($this->countryUri);
 
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
