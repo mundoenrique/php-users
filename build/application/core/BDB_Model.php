@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class BDB_Model extends CI_Model {
 	public $dataAccessLog;
 	public $className;
-	public $accessLog;
+	public $logAccess;
 	public $token;
 	public $country;
 	public $countryUri;
@@ -47,11 +47,11 @@ class BDB_Model extends CI_Model {
 	{
 		log_message('INFO', 'NOVO sendToService Method Initialized');
 
-		$this->accessLog = accessLog($this->dataAccessLog);
+		$this->logAccess = logAccess($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
 		$this->dataRequest->className = $this->className;
-		$this->dataRequest->logAccesoObject = $this->accessLog;
+		$this->dataRequest->logAccesoObject = $this->logAccess;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = empty($this->dataRequest->pais)? ucwords($this->country): $this->dataRequest->pais;
 

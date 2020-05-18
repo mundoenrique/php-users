@@ -269,8 +269,8 @@ if(!function_exists('assetUrl')) {
 	}
 }
 
-if(!function_exists('accessLog')) {
-	function accessLog($dataAccessLog) {
+if(!function_exists('logAccess')) {
+	function logAccess($dataAccessLog) {
 		$CI = &get_instance();
 
 		return [
@@ -289,14 +289,14 @@ if(!function_exists('accessLog')) {
 	}
 }
 
-if(!function_exists('languajeLoad')) {
-	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+if(!function_exists('loadLanguage')) {
+	function loadLanguage($client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
 		$lanGeneral = ['bp', 'co', 've', 'bdb'];
 		$loadlanguages = FALSE;
-		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
+		log_message('INFO', 'NOVO HELPER loadLanguage Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
 
 		switch($client) {
 			case 'bp':
