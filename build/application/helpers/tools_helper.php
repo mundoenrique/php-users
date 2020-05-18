@@ -166,60 +166,61 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 		}
 
 	}
+}
 
-	function np_hoplite_verificLogin()
-	{
+function np_hoplite_verificLogin()
+{
 
-		$CI =& get_instance();
+	$CI =& get_instance();
 
-		if(!($CI->session->userdata('logged_in'))){
-			$append = '';
-			$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
-			if ($skin !== false && $skin !== 'default'){
-				$append = '/' . $skin . '/home';
-			}
-
-			redirect($CI->config->item('base_url') . $append);
+	if(!($CI->session->userdata('logged_in'))){
+		$append = '';
+		$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
+		if ($skin !== false && $skin !== 'default'){
+			$append = '/' . $skin . '/home';
 		}
 
-	}
-
-	function np_hoplite_verificSession()
-	{
-
-		$CI =& get_instance();
-
-		if($CI->session->userdata('logged_in') === true){
-			redirect($CI->config->item('base_url') . '/dashboard');
-		}
-
-	}
-
-	if(!function_exists('getFaviconLoader')) {
-		function getFaviconLoader() {
-			$CI = &get_instance();
-			$favicon = $CI->config->item('favicon');
-			$loader = 'loading-';
-			switch($CI->config->item('country')) {
-				case 'Ec-bp':
-					$ext = 'ico';
-					$loader.= 'bp.gif';
-					break;
-				default:
-					$ext = 'png';
-					$loader.= 'novo.gif';
-			}
-
-			$faviconLoader = new stdClass();
-			$faviconLoader->favicon = $favicon;
-			$faviconLoader->ext = $ext;
-			$faviconLoader->loader = $loader;
-
-			return $faviconLoader;
-		}
+		redirect($CI->config->item('base_url') . $append);
 	}
 
 }
+
+function np_hoplite_verificSession()
+{
+
+	$CI =& get_instance();
+
+	if($CI->session->userdata('logged_in') === true){
+		redirect($CI->config->item('base_url') . '/dashboard');
+	}
+
+}
+
+if(!function_exists('getFaviconLoader')) {
+	function getFaviconLoader() {
+		$CI = &get_instance();
+		$favicon = $CI->config->item('favicon');
+		$loader = 'loading-';
+		switch($CI->config->item('country')) {
+			case 'Ec-bp':
+				$ext = 'ico';
+				$loader.= 'bp.gif';
+				break;
+			default:
+				$ext = 'png';
+				$loader.= 'novo.gif';
+		}
+
+		$faviconLoader = new stdClass();
+		$faviconLoader->favicon = $favicon;
+		$faviconLoader->ext = $ext;
+		$faviconLoader->loader = $loader;
+
+		return $faviconLoader;
+	}
+}
+
+
 
 // ------------------------------------------------------------------------
 if ( ! function_exists('np_hoplite_decimals'))
