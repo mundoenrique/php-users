@@ -83,7 +83,7 @@ class Users extends CI_Controller {
 
 		$baseCdnCookie = [
 			'name' => 'baseCdn',
-			'value' => $this->config->item('base_url_cdn'),
+			'value' => $this->config->item('asset_url'),
 			'expire' => 0,
 			'domain' => $this->config->item('cookie_domain'),
 			'path' => $this->config->item('cookie_path'),

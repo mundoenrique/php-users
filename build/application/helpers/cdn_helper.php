@@ -12,7 +12,7 @@ if ( ! function_exists('base_cdn'))
 	function base_cdn($uri = '')
 	{
 		$CI =& get_instance();
-		return $CI->config->item('base_url_cdn');
+		return $CI->config->item('asset_url');
 	}
 }
 
@@ -27,8 +27,8 @@ if ( ! function_exists('insert_js_cdn'))
     {
 				$CI =& get_instance();
 
-        $url_cdn = $CI->config->item('base_url_cdn');
-        $path_cdn = $CI->config->item('base_path_cdn');
+        $url_cdn = $CI->config->item('asset_url');
+        $path_cdn = $CI->config->item('asset_path');
 
         $filepath = $path_cdn . 'js/default/' . $filename;
         $fileurl = $url_cdn . 'js/default/' . $filename;
@@ -54,8 +54,8 @@ if ( ! function_exists('insert_css_cdn'))
     {
 				$CI =& get_instance();
 
-        $url_cdn = $CI->config->item('base_url_cdn');
-        $path_cdn = $CI->config->item('base_path_cdn');
+        $url_cdn = $CI->config->item('asset_url');
+        $path_cdn = $CI->config->item('asset_path');
         $skin = $CI->input->cookie('cpo_skin');
         $skin_folder = $skin . '/';
         $filepath = $path_cdn . 'css/' . $skin_folder . $filename;
@@ -81,8 +81,8 @@ if ( ! function_exists('insert_image_cdn'))
 	{
 		$CI =& get_instance();
 
-		$url_cdn = $CI->config->item('base_url_cdn');
-		$cdnPath = $CI->config->item('base_path_cdn');
+		$url_cdn = $CI->config->item('asset_url');
+		$cdnPath = $CI->config->item('asset_path');
 		$country = $CI->config->item('country');
 		$filename = $filename.'.png';
 		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
@@ -111,7 +111,7 @@ if ( ! function_exists('get_cdn'))
 	{
 		$CI =& get_instance();
 
-		$url_cdn = $CI->config->item('base_url_cdn');
+		$url_cdn = $CI->config->item('asset_url');
 		return $url_cdn;
 	}
 }
@@ -129,7 +129,7 @@ if ( ! function_exists('insert_js_diesession'))
 	function insert_js_diesession()  // Function that call Die Session Function
 	{
 		$CI =& get_instance();
-		$url_cdn = $CI->config->item('base_url_cdn');
+		$url_cdn = $CI->config->item('asset_url');
  		$filename = "diesession.js";
 		$full_url = $url_cdn . 'js/' . $filename;
 
@@ -206,8 +206,8 @@ if ( !function_exists('insertFile'))
 	function insertFile($fileName, $folder = 'img/')
 	{
 		$CI =& get_instance();
-		$url_cdn = $CI->config->item('base_url_cdn');
-		$path_cdn = $CI->config->item('base_path_cdn');
+		$url_cdn = $CI->config->item('asset_url');
+		$path_cdn = $CI->config->item('asset_path');
 
 		$filepath = $path_cdn . $folder . $fileName;
 		echo $fileurl = $url_cdn . $folder . $fileName;

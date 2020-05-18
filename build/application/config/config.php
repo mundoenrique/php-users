@@ -24,8 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $config['base_url'] = BASE_URL;
-$config['base_url_cdn'] = BASE_CDN_URL;
-$config['base_path_cdn'] = BASE_CDN_PATH;
+$config['asset_url'] = BASE_CDN_URL;
+$config['asset_path'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
