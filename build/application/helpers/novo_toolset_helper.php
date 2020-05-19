@@ -77,34 +77,11 @@ if(!function_exists('accessLog')) {
 	}
 }
 
-if(!function_exists('urlReplace')) {
-	function urlReplace($countryUri, $countrySess, $url) {
-		$CI = &get_instance();
-		switch($countrySess) {
-			case 'Ec-bp':
-				$country = 'bp';
-				break;
-			case 'Co':
-				$country = 'co';
-				break;
-			case 'Pe':
-				$country = 'pe';
-				break;
-			case 'Usd':
-				$country = 'us';
-				break;
-			case 'Ve':
-				$country = 've';
-				break;
-		}
-		return str_replace($countryUri.'/', $country.'/', $url);
-	}
-}
-
 if(!function_exists('maskString')) {
 	function maskString($string, $start = 1, $end = 1, $type = NULL) {
 		$type = $type ? $type : '';
 		$length = strlen($string);
+
 		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
 	}
 }
