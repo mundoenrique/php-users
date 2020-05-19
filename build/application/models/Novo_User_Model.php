@@ -25,7 +25,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
-		$userName = mb_strtoupper($dataRequest->user);
+		$userName = mb_strtoupper($dataRequest->userName);
 		$this->dataAccessLog->userName = $userName;
 
 		$password = json_decode(base64_decode($dataRequest->userPass));
@@ -37,6 +37,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
+		$this->dataRequest->pais = 'Global';
 
 		if(ACTIVE_RECAPTCHA) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);

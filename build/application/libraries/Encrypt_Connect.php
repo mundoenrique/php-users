@@ -103,7 +103,7 @@ class Encrypt_Connect {
 			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL'.$subFix]);
 		}
 
-		$urlWS = $this->CI->config->item('urlWS').'eolwebInterfaceWS';
+		$urlWS = $this->CI->config->item('urlWS').'movilsInterfaceResource';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
 
@@ -128,16 +128,16 @@ class Encrypt_Connect {
 
 		$failResponse = json_decode($response);
 
-		if(is_object($failResponse)) {
+		/* if(is_object($failResponse)) {
 			$response = $failResponse;
 			$fail = TRUE;
-		}
+		} */
 
 		if($httpCode != 200 || !$response) {
 			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError, JSON_UNESCAPED_UNICODE));
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('RESP_RC_DEFAULT');
-			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+			$failResponse->rc = lang('GEN_DEFAULT_CODE');
+			$failResponse->msg = lang('GEN_SYSTEM_NAME');
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -150,7 +150,7 @@ class Encrypt_Connect {
 			$this->writeLog($this->logMessage);
 		}
 
-		return $response;
+		return json_decode($response);
 	}
 	/**
 	 * @info método para enviar archivos al servidor de backend
@@ -243,8 +243,8 @@ class Encrypt_Connect {
 						}
 						continue;
 					}
-			}
-				$wirteLog->$pos = $responseAttr;
+					$wirteLog->$pos = $responseAttr;
+				}
 			}
 
 			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));

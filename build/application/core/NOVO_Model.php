@@ -12,6 +12,7 @@ class NOVO_Model extends CI_Model {
 	public $isResponseRc;
 	public $response;
 	public $userName;
+	public $keyId;
 
 	public function __construct()
 	{
@@ -25,6 +26,7 @@ class NOVO_Model extends CI_Model {
 		$this->countryUri = $this->session->countryUri;
 		$this->token = $this->session->token ?: '';
 		$this->userName = $this->session->userName;
+		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -41,15 +43,15 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
-		$this->dataRequest->pais = $this->country;
+		$this->dataRequest->pais = isset($this->dataRequest->pais) ? $this->dataRequest->pais : $this->country;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['bean'=> $encryptData, 'pais'=> $this->country];
+		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
 
 		if(isset($response->rc)) {
 			$responseDecrypt = $response;
 		} else {
-			$responseDecrypt = $this->encrypt_connect->decode($response, $this->userName, $model);
+			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
 		}
 
 		return $this->makeAnswer($responseDecrypt);
