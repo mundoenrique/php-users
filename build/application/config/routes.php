@@ -76,6 +76,12 @@ $route['bdb/reporte'] = "expenseReport/listProduct";
 $route['bdb/detallereporte'] = "expenseReport/detailReport";
 $route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
 
+//Asynchronous
+$route['(:any)/async-call'] = "Novo_CallModels";
+//User
+$route['(:any)/sugerencia'] = "Novo_User/suggestion";
+$route['(:any)/inicio'] = "Novo_User/login";
+
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
 $route['users'] = 'users/index'; // Otros paises

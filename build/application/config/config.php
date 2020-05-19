@@ -30,18 +30,10 @@ $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
 $config['access_url'] = explode(',', ACCESS_URL);
+$config['client'] = 'novo';
 $config['channel'] = 'personasWeb';
 $config['keyAES256'] = KEY_AES256;
 $config['ivAES256'] = IV_AES256;
-
-$config['listReasonReposition'] = [
-	['value' => '41', 'tagTranslation' => 'GENE_BLOCKING_REASONS_CANCELLED'],
-	['value' => '46', 'tagTranslation' => 'GENE_BLOCKING_REASONS_LOST'],
-	['value' => '43', 'tagTranslation' => 'GENE_BLOCKING_REASONS_DETERIORATED'],
-	['value' => '59', 'tagTranslation' => 'GENE_BLOCKING_REASONS_STOLE'],
-	['value' => '17', 'tagTranslation' => 'GENE_BLOCKING_REASONS_FRAUD'],
-];
-
 
 //url API
 $config['urlAPI'] = URL_API;
@@ -50,7 +42,6 @@ $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
 $config['cypher_base'] = CYPHER_BASE;
 $config['oauth_url'] = OAUTH_URL;
-
 $config['scores_recapcha'] = [
 	'development' => [
 		'score' => 0
@@ -59,7 +50,7 @@ $config['scores_recapcha'] = [
 		'score' => 0.3
 	],
 	'production' => [
-		'score' => 0.2
+		'score' => 0.3
 	],
 ];
 
@@ -114,7 +105,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'core-base';
+$config['language']	= 'spanish-base';
 
 /*
 |--------------------------------------------------------------------------
@@ -417,11 +408,15 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 50 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
 $config['sess_time_to_update'] = SESS_TIME_TO_UPDATE;
 $config['sess_regenerate_destroy'] = TRUE;
+/*
+| Configura control de tiempo de sesión
+*/
+$config['session_time'] = SESS_EXPIRATION * 1000;
 
 /*
 |--------------------------------------------------------------------------

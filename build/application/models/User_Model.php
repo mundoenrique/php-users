@@ -493,7 +493,7 @@ class User_Model extends BDB_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -786,7 +786,7 @@ class User_Model extends BDB_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [

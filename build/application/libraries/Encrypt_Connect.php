@@ -79,7 +79,7 @@ class Encrypt_Connect
 			log_message('ERROR', 'NOVO decode [' . $userName . '] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');
-			$response->msg = lang('RESP_MESSAGE_SYSTEM');
+			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
 		if (!isset($response->pais)) {
@@ -134,7 +134,7 @@ class Encrypt_Connect
 			log_message('ERROR', 'NOVO [' . $userName . '] ERROR CURL: ' . json_encode($curlError) ?: 'none');
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_DEFAULT_CODE');
-			$failResponse->msg = lang('RESP_MESSAGE_SYSTEM');
+			$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
 			$response = json_encode($failResponse);
 			$fail = TRUE;
 		}
@@ -171,14 +171,14 @@ class Encrypt_Connect
 	 * @author Pedro Torres
 	 * @date Abril 16 2020
 	 * @parametros $data = string a cifrar/descrifrar
-	 * 
+	 *
 	 */
 	public function cryptography($data, $encrip = TRUE)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: cryptography Method Initialized');
 
 		$encrypt_method = "AES-256-CBC";
-		
+
 		if ($encrip) {
 			$output = openssl_encrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
 		} else {

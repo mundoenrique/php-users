@@ -24,7 +24,7 @@ class BDB_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->response->code = lang('RESP_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+		$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 		$this->response->classIconName = 'ui-icon-closethick';
 		$this->response->data = [
 			'btn1'=> [

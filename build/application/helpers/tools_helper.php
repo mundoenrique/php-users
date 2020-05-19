@@ -258,18 +258,6 @@ if(!function_exists('clientCheck')) {
 	}
 }
 
-if(!function_exists('assetPath')) {
-	function assetPath($route = '') {
-		return get_instance()->config->item('asset_path').$route;
-	}
-}
-
-if(!function_exists('assetUrl')) {
-	function assetUrl($route = '') {
-		return get_instance()->config->item('asset_url').$route;
-	}
-}
-
 if(!function_exists('logAccess')) {
 	function logAccess($dataAccessLog) {
 		$CI = &get_instance();
@@ -380,13 +368,5 @@ if(!function_exists('validateUrl')) {
 					break;
 			}
 		}
-	}
-}
-
-if(!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
 	}
 }

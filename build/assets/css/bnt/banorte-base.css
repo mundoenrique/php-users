@@ -1143,7 +1143,6 @@ textarea.form-control {
 
 .btn-loading-lg {
 	height: 45px;
-	text-transform: uppercase;
 }
 
 /* sizes */
@@ -2108,7 +2107,7 @@ i[class*=" icon-"].novoglyphs {
 
 .logo-banco {
 	width: 260px;
-	height: auto;
+	height: 70px;
 }
 
 /* Spinner */
