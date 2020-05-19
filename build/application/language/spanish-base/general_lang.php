@@ -7,13 +7,19 @@ $lang['GEN_LOGO_HEADER'] = 'logo.svg';
 
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
-
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
-
+//ICONS
+$lang['GEN_ICON'] = 'ui-icon';
+$lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
+$lang['GEN_ICON_INFO'] = 'ui-icon-info';
+$lang['GEN_ICON_WARNING'] = 'ui-icon-alert';
+$lang['GEN_ICON_DANGER'] = 'ui-icon-closethick';
 //GENERAL LANGUAGE
+$lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
+$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
@@ -36,7 +42,11 @@ $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no esposible atender tu solicitud, por favor intenta más tarde';
-
+$lang['GEN_RC_DEFAULT'] = -9999;
+$lang['GEN_DEFAULT_CODE'] = 4;
+$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
+$lang['GEN_VALIDATION_LOGGED'] = 'serás desconectado.';
+$lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 //DATATABLES
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';

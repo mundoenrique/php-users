@@ -2,7 +2,7 @@
 //app
 var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, ceo_cook, btnText, form, cypherPass;
+var verb, who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
 var searchEnterprise = $('#sb-search');
@@ -82,7 +82,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.RESP_DEFAULT_CODE);
+	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
 	var formData = new FormData();
 
 	dataRequest = cryptoPass(dataRequest, true);
@@ -92,8 +92,8 @@ function callNovoCore(verb, who, where, request, _response_) {
 		delete request.file;
 	}
 	formData.append('request', dataRequest);
-	formData.append('ceo_name', ceo_cook);
-	formData.append('plot', btoa(ceo_cook));
+	formData.append('cpo_name', cpo_cook);
+	formData.append('plot', btoa(cpo_cook));
 
 	if (logged) {
 		clearTimeout(resetTimesession);
@@ -102,7 +102,7 @@ function callNovoCore(verb, who, where, request, _response_) {
 	}
 
 	$.ajax({
-		method: verb,
+		method: 'POST',
 		url: baseURL + 'async-call',
 		data: formData,
 		context: document.body,
@@ -154,7 +154,7 @@ function callNovoCore(verb, who, where, request, _response_) {
  */
 function getCookieValue() {
 	return decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)ceo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 }
 /**
@@ -250,9 +250,9 @@ function insertFormInput(disabled, form) {
 		.prop('disabled', disabled);
 
 	if (form) {
-		ceo_cook = getCookieValue();
+		cpo_cook = getCookieValue();
 		screenSize = screen.width;
-		form.append('<input type="hidden" name="ceo_name" value="' + ceo_cook + '"></input>');
+		form.append('<input type="hidden" name="cpo_name" value="' + cpo_cook + '"></input>');
 		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
@@ -288,13 +288,13 @@ function formInputTrim(form) {
  */
 function cryptoPass(jsonObject, req) {
 	req = req == undefined ? false : req;
-	ceo_cook = getCookieValue();
-	var cipherObject = CryptoJS.AES.encrypt(jsonObject, ceo_cook, { format: CryptoJSAesJson }).toString();
+	cpo_cook = getCookieValue();
+	var cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
 
 	if(!req) {
 		cipherObject = btoa(JSON.stringify({
 			password: cipherObject,
-			plot: btoa(ceo_cook)
+			plot: btoa(cpo_cook)
 		}));
 	}
 

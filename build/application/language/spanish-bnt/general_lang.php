@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 // General lang app
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
-$lang['GEN_SYSTEM_NAME']= 'BEM/BEP';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 
 //GENERAL LANGUAGE

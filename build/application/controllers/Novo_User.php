@@ -15,11 +15,11 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método que renderiza la vista de login
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function login()
+	public function signin()
 	{
 		log_message('INFO', 'NOVO User: index Method Initialized');
 
-		$view = 'Login';
+		$view = 'signin';
 
 		if($this->session->has_userdata('logged')) {
 
@@ -32,8 +32,6 @@ class Novo_User extends NOVO_Controller {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
-
-		$views = ['user/signin'];
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -54,7 +52,7 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->views = $views;
+		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
 	/**

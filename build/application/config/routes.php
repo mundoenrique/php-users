@@ -80,7 +80,7 @@ $route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
 $route['(:any)/async-call'] = "Novo_CallModels";
 //User
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
-$route['(:any)/inicio'] = "Novo_User/login";
+$route['(:any)/inicio'] = "Novo_User/signin";
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha

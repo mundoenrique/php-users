@@ -1,6 +1,33 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'signin' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'userPass',
+			'label' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'active',
+			'label' => 'active',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'currentTime',
+			'label' => 'currentTime',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'token',
+			'label' => 'token',
+			'rules' => 'trim'
+		]
+	],
 	'getdetail' => [
 		[
 			'field' => 'request',

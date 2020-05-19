@@ -29,6 +29,7 @@ class BDB_Controller extends CI_Controller {
 		parent:: __construct();
 		log_message('INFO', 'BDB_Controller Class Initialized');
 		$this->config->set_item('language', 'core-base');
+		$this->load->library('BDB_Connect_Encrypt');
 
 		$this->render = new stdClass();
 		$this->render->loadAlert = '0';

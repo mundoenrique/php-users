@@ -109,7 +109,7 @@ if(!function_exists('languageLoad')) {
 				break;
 			case 'bnt':
 				$languages = [
-					'login' => ['login']
+					'signin' => ['login']
 				];
 				break;
 			case 'co':
@@ -134,7 +134,7 @@ if(!function_exists('languageLoad')) {
 				break;
 			default:
 				$languages = [
-					'login' => ['login']
+					'signin' => ['login']
 				];
 		}
 

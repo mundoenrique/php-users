@@ -56,15 +56,15 @@ class BDB_Model extends CI_Model {
 		$this->dataRequest->pais = empty($this->dataRequest->pais)? ucwords($this->country): $this->dataRequest->pais;
 
 
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
+		$encryptData = $this->bdb_connect_encrypt->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = [];
-		$response = $this->encrypt_connect->connectWs($request, $this->dataAccessLog->userName, $model);
+		$response = $this->bdb_connect_encrypt->connectWs($request, $this->dataAccessLog->userName, $model);
 
 		if(isset($response->rc)){
 			$responseDecrypt = $response;
 		}else{
-			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
+			$responseDecrypt = $this->bdb_connect_encrypt->decode($response->data, $this->userName, $model);
 		}
 
 		log_message("info", "Response: " . json_encode($responseDecrypt));

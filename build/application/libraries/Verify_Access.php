@@ -59,7 +59,7 @@ class Verify_Access {
 			switch($key) {
 				case 'request':
 				case 'plot':
-				case 'ceo_name':
+				case 'cpo_name':
 					continue;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
@@ -83,12 +83,14 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
+
+
 		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('RESP_DEFAULT_CODE');
+		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = lang('RESP_VALIDATION_INPUT');
+		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
 		$this->responseDefect->data = base_url('inicio');
-		$this->responseDefect->icon = lang('GEN_ICON_WARNING');
+		$this->responseDefect->icon = lang('GEN_ICON_DANGER');
 		$this->responseDefect->data = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -98,6 +100,7 @@ class Verify_Access {
 		];
 
 		if($this->CI->session->has_userdata('logged')) {
+			$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), lang('GEN_VALIDATION_LOGGED'));
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
@@ -117,13 +120,13 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['login', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignon', 'recoverPass'];
+		$freeAccess = ['signin', 'suggestion', 'validateCaptcha', 'finishSession', 'terms', 'singleSignon', 'recoverPass'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
 			switch($module) {
 				case 'changePassword':
-					$auth = ($this->CI->session->flashdata('changePassword') != NULL || ($this->CI->session->has_userdata('logged')));
+					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
 				break;
 			}
 		}
@@ -131,64 +134,5 @@ class Verify_Access {
 		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
-	}
-
-	/**
-	 * @info método que valida la autorización de acceso del usuario a las funcionalidades
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
-	 */
-	public function verifyAuthorization($moduleLink, $function = FALSE)
-	{
-		log_message('INFO', 'NOVO Verify_Access: verifyAuthorization method initialized');
-
-		$userAccess = $this->CI->session->user_access;
-		$items = [];
-		$auth = FALSE;
-
-		if($userAccess) {
-			foreach($userAccess AS $item) {
-				foreach($item->modulos AS $module) {
-					if(!$function) {
-						$items[] = $module->idModulo;
-					} else {
-						foreach($module->funciones AS $functions) {
-							if($module->idModulo != $moduleLink) {
-								continue;
-							}
-							$items[] = $functions->accodfuncion;
-						}
-					}
-				}
-			}
-
-			$access = $function ? $function : $moduleLink;
-			$prompter = $function ? '->'.$function : '';
-			$auth = in_array($access, $items);
-			log_message('INFO', 'NOVO ['.$this->user.'] verifyAuthorization '.$moduleLink.$prompter.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
-		}
-
-
-		return $auth;
-	}
-	/**
-	 * @info método que valida la redirección del core correcto
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
-	 */
-	public function validateRedirect($redirectUrl, $countryUri)
-	{
-		log_message('INFO', 'NOVO Verify_Access: validateRedirect method initialized');
-
-		$dataLink = isset($redirectUrl['btn1']['link']) ? $redirectUrl['btn1']['link'] : FALSE;
-
-		if(!is_array($redirectUrl) && strpos($redirectUrl, 'dashboard') !== FALSE) {
-			$redirectUrl = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $redirectUrl);
-		} elseif($dataLink && !is_array($dataLink) && strpos($dataLink, 'dashboard') !== FALSE) {
-			$dataLink = str_replace($countryUri.'/', $this->CI->config->item('country').'/', $dataLink);
-			$redirectUrl['btn1']['link'] =  $dataLink;
-		}
-
-		return $redirectUrl;
 	}
 }

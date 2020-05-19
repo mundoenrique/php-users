@@ -77,7 +77,7 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('RESP_DEFAULT_CODE');
+		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
@@ -99,7 +99,7 @@ class NOVO_Model extends CI_Model {
 		switch($this->isResponseRc) {
 			case -29:
 			case -61:
-				$this->response->msg = lang('RESP_DUPLICATED_SESSION');
+				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}
@@ -110,7 +110,7 @@ class NOVO_Model extends CI_Model {
 				break;
 		}
 
-		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
 
 		return $responseModel;
 	}
