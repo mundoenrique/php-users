@@ -42,7 +42,7 @@ class Novo_User_Model extends NOVO_Model {
 		if(ACTIVE_RECAPTCHA) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
 
-			if ($this->isResponseRc == 'done') {
+			if ($this->isResponseRc === 0) {
 				$response = $this->sendToService('callWs_Signin');
 			}
 		} else {
@@ -56,106 +56,90 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
-				$fullName.= mb_strtolower($response->usuario->primerApellido);
+				$this->validateUserLogged($userName);
+				$this->response->code = 0;
+				$this->response->data = base_url('tarjetas');
+				$fullSignin = TRUE;
+				$fullName = mb_strtolower($response->primerNombre).' ';
+				$fullName.= mb_strtolower($response->primerApellido);
 				$formatDate = $this->config->item('format_date');
 				$formatTime = $this->config->item('format_time');
 				$lastSession = date(
 					"$formatDate $formatTime", strtotime(
-						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
+						str_replace('/', '-', $response->fechaUltimaConexion)
 					)
 				);
-				$userData = [
+				/* $userData = [
 					'sessionId' => $response->logAccesoObject->sessionId,
 					'logged' => TRUE,
-					'userId' => $response->usuario->idUsuario,
-					'userName' => $response->usuario->userName,
+					'userId' => $response->idUsuario,
+					'userName' => $response->userName,
 					'fullName' => ucwords(mb_strtolower($fullName)),
-					'codigoGrupo' => $response->usuario->codigoGrupo,
 					'lastSession' => $lastSession,
 					'token' => $response->token,
+					'client' => $this->config->item('client'),
 					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $userName, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri'),
-					'idUsuario' => $response->usuario->idUsuario,
-					'pais' => $this->config->item('country'),
-					'nombreCompleto' => $fullName,
-					'logged_in' => TRUE
+					'countryUri' => $this->config->item('country-uri')
 				];
-				$this->session->set_userdata($userData);
-				$this->response->code = 0;
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
-				break;
-			case -2:
-			case -185:
-				$fullName = mb_strtolower($response->usuario->primerNombre.' '.$response->usuario->primerApellido);
-				$userData = [
-					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $response->usuario->idUsuario,
-					'userName' => $response->usuario->userName,
-					'fullName' => ucwords(mb_strtolower($fullName)),
-					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'token' => $response->token,
-					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $dataRequest->user, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country')
-				];
-				$this->session->set_userdata($userData);
-				$this->response->code = 0;
-				$this->response->data = base_url('inf-condiciones');
-				$this->session->set_flashdata('changePassword', 'newUser');
-				$this->session->set_flashdata('userType', $response->usuario->ctipo);
+				$this->session->set_userdata($userData); */
 
-				if($this->isResponseRc === -185) {
-					$this->response->data = base_url('cambiar-clave');
+				if ($response->passwordTemp == '1') {
+					$fullSignin = FALSE;
+					$this->session->set_flashdata('changePassword', 'TemporalPass');
+				}
+
+				if ($response->passwordVencido == '1') {
+					$fullSignin = FALSE;
 					$this->session->set_flashdata('changePassword', 'expiredPass');
+				}
+
+				if (!$fullSignin) {
+					$this->session->unset_userdata('logged');
+					$this->response->data = base_url('cambiar-clave');
 				}
 				break;
 			case -1:
-			case -263:
+			case -205:
 				$this->response->code = 1;
-				$this->response->msg = lang('RESP_INVALID_USER');
+				$this->response->msg = lang('LOGIN_INVALID_USER');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
+				if (isset($response->bean->intentos) && $response->bean->intentos == 2) {
+					$this->response->msg = lang('LOGIN_WILL_BLOKED');
+					$this->response->className = lang('CONF_VALID_INVALID_USER');
+					$this->response->position = lang('CONF_VALID_POSITION');
+				}
+				break;
+			case -194:
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = novoLang(lang('LOGIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
+					]
+				];
+				$this->session->set_flashdata('recoverAccess', 'temporalPass');
 				break;
 			case -8:
 			case -35:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_SUSPENDED_USER');
-				$this->response->className = lang('CONF_VALID_INACTIVE_USER');
-				$this->response->position = lang('CONF_VALID_POSITION');
-				break;
-			case -229:
-				$this->response->code = 2;
-				$this->response->msg = lang('RESP_OLD_USER');
-				break;
-			case -262:
-				$this->response->code = 3;
-				$this->response->msg = lang('RESP_NO_PERMISSIONS');
-				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->data = [
-					'btn1'=> [
-						'action'=> 'close'
-					]
-				];
-				break;
-			case -28:
-				$this->response->code = 3;
-				$this->response->msg = lang('RESP_INCORRECTLY_CLOSED');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('LOGIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
 				$this->response->data = [
 					'btn1'=> [
-						'link'=> [
-							'who'=> 'User',
-							'where'=> 'FinishSession'
-						],
-						'action'=> 'logout'
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> 'inicio',
+						'action'=> 'redirect'
 					]
 				];
+				$this->session->set_flashdata('recoverAccess', 'blockedPass');
 				break;
-			case 'fail':
-				$this->response->code = 3;
+			case 9999:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->msg = lang('LOGIN_RECAPTCHA_VALIDATE');
@@ -169,70 +153,33 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		return $this->responseToTheView(lang('GEN_LOGIN'));
+		return $this->responseToTheView('callWs_Signin');
 	}
 	/**
-	 * @info Método para el inicio de sesión único
+	 * @info Método para recuperar contraseña
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 14th, 2019
+	 * @date April 29th, 2019
 	 */
-	public function callWs_SingleSignon_User($dataRequest)
+	private function validateUserLogged($userName)
 	{
-		log_message('INFO', 'NOVO User Model: SingleSignon Method Initialized');
+		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
+		$logged = FALSE;
 
-		$this->className = 'com.novo.objects.TOs.RequestTO';
-		$this->dataAccessLog->modulo = 'Usuario';
-		$this->dataAccessLog->function = 'Ingreso al sistema';
-		$this->dataAccessLog->operation = 'Inicio de sesión único';
-		$this->dataAccessLog->userName = $this->country;
+		$this->db->select(['id', 'username'])
+			->where('username',  $userName)
+			->get_compiled_select('cpo_sessions', FALSE);
 
-		$this->dataRequest->idOperation = 'userByToken';
-		$this->token = $dataRequest->tokenId;
+		$result = $this->db->get()->result_array();
 
-		$response = $this->sendToService('callWs_SingleSignon');
-		$this->response->code = 0;
-
-		switch ($this->isResponseRc) {
-			case 0:
-			case -2:
-			case -185:
-				$fullName = mb_strtolower($response->usuario->primerNombre).' ';
-				$fullName.= mb_strtolower($response->usuario->primerApellido);
-				$formatDate = $this->config->item('format_date');
-				$formatTime = $this->config->item('format_time');
-				$lastSession = date(
-					"$formatDate $formatTime", strtotime(
-						str_replace('/', '-', $response->usuario->fechaUltimaConexion)
-					)
-				);
-				$time = (object) [
-					'customerTime' => (int) $dataRequest->currentTime,
-					'serverTime' => (int) date("H")
-				];
-				$userData = [
-					'sessionId' => $response->logAccesoObject->sessionId,
-					'logged' => TRUE,
-					'userId' => $response->usuario->idUsuario,
-					'userName' => $response->usuario->userName,
-					'fullName' => ucwords(mb_strtolower($fullName)),
-					'codigoGrupo' => $response->usuario->codigoGrupo,
-					'lastSession' => $lastSession,
-					'token' => $response->token,
-					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($_SERVER['REMOTE_ADDR'], $this->country, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri'),
-				];
-				$this->session->set_userdata($userData);
-				$this->response->code = 0;
-				$this->response->data = base_url(lang('GEN_ENTERPRISE_LIST'));
-				break;
-			default:
-				$this->response->data = base_url('ingresar/fin');
-				break;
+		if (count($result) > 0) {
+			$logged = TRUE;
+		} else {
+			/* $this->db->where('id', $result[0]['id']);
+			$this->db->delete('cpo_sessions'); */
+			$this->session->sess_destroy();
 		}
 
-		return $this->responseToTheView('callWs_SingleSignon');
+		return $logged;
 	}
 	/**
 	 * @info Método para recuperar contraseña
@@ -448,11 +395,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->load->library('recaptcha');
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$dataRequest->user.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$dataRequest->userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 'fail' : 'done';
+		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 9999 : 0;
 	}
 }

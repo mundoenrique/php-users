@@ -81,6 +81,10 @@ $route['(:any)/async-call'] = "Novo_CallModels";
 //User
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/signin";
+$route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
+$route['(:any)/recuperar-acceso'] = "Novo_User/accessRecover";
+//Business
+$route['(:any)/tarjetas'] = "Novo_Business/cardUserList";
 
 //Actual Structure
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha

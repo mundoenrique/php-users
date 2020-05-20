@@ -8,19 +8,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author			J. Enrique Peñaloza P
  * @date				Novembre 23th, 2019
  */
-if(!function_exists('assetPath')) {
+if (!function_exists('assetPath')) {
 	function assetPath($route = '') {
 		return get_instance()->config->item('asset_path').$route;
 	}
 }
 
-if(!function_exists('assetUrl')) {
+if (!function_exists('assetUrl')) {
 	function assetUrl($route = '') {
 		return get_instance()->config->item('asset_url').$route;
 	}
 }
 
-if(!function_exists('clientUrlValidate')) {
+if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($country) {
 		$CI = &get_instance();
 		$accessUrl = $CI->config->item('access_url');
@@ -35,7 +35,7 @@ if(!function_exists('clientUrlValidate')) {
 	}
 }
 
-if(!function_exists('getFavicon')) {
+if (!function_exists('getFavicon')) {
 	function getFavicon($countryUri) {
 		$CI = &get_instance();
 		$favicon = $CI->config->item('favicon');
@@ -58,7 +58,7 @@ if(!function_exists('getFavicon')) {
 	}
 }
 
-if(!function_exists('accessLog')) {
+if (!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
 		$CI = &get_instance();
 
@@ -77,7 +77,7 @@ if(!function_exists('accessLog')) {
 	}
 }
 
-if(!function_exists('maskString')) {
+if (!function_exists('maskString')) {
 	function maskString($string, $start = 1, $end = 1, $type = NULL) {
 		$type = $type ? $type : '';
 		$length = strlen($string);
@@ -86,7 +86,7 @@ if(!function_exists('maskString')) {
 	}
 }
 
-if(!function_exists('languageLoad')) {
+if (!function_exists('languageLoad')) {
 	function languageLoad($call, $client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$class = $CI->router->fetch_class();
@@ -138,28 +138,28 @@ if(!function_exists('languageLoad')) {
 				];
 		}
 
-		if(array_key_exists($langFiles, $languages)) {
+		if (array_key_exists($langFiles, $languages)) {
 			$languagesFile = $languages[$langFiles];
 			$loadLanguages = TRUE;
 		}
 
-		if(in_array($client, $lanGeneral)) {
+		if (in_array($client, $lanGeneral)) {
 			array_unshift($languagesFile, 'general');
 			$loadLanguages = TRUE;
 		}
 
-		if(in_array($client, $langConfig)) {
+		if (in_array($client, $langConfig)) {
 			array_unshift($languagesFile, 'config-core');
 			$loadLanguages = TRUE;
 		}
 
-		if($loadLanguages) {
+		if ($loadLanguages) {
 			$CI->lang->load($languagesFile);
 		}
 	}
 }
 
-if(!function_exists('setCurrentPage')) {
+if (!function_exists('setCurrentPage')) {
 	function setCurrentPage($currentClass, $menu) {
 		$cssClass = '';
 		switch ($currentClass) {
@@ -218,7 +218,7 @@ if (!function_exists('exportFile')) {
 				break;
 		}
 
-		if($bytes) {
+		if ($bytes) {
 			foreach ($file as $chr) {
 				echo chr($chr);
 			}
@@ -228,7 +228,7 @@ if (!function_exists('exportFile')) {
 	}
 }
 
-if(!function_exists('convertDate')) {
+if (!function_exists('convertDate')) {
 	function convertDate($date) {
 		$date = explode('/', $date);
 		$date = $date[2].'-'.$date[1].'-'.$date[0];
@@ -237,7 +237,7 @@ if(!function_exists('convertDate')) {
 	}
 }
 
-if(!function_exists('convertDateMDY')) {
+if (!function_exists('convertDateMDY')) {
 	function convertDateMDY($date) {
 		$date = explode('/', $date);
 		$date = $date[1].'/'.$date[0].'/'.$date[2];
@@ -246,7 +246,7 @@ if(!function_exists('convertDateMDY')) {
 	}
 }
 
-if(!function_exists('arrayTrim')) {
+if (!function_exists('arrayTrim')) {
 	function arrayTrim(&$value) {
 		$value = trim($value);
 

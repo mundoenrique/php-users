@@ -83,7 +83,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
-		$linkredirect = $this->session->has_userdata('productInf') ? 'detalle-producto' : lang('GEN_ENTERPRISE_LIST');
+		$linkredirect = 'detalle-tarjeta';
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> FALSE,

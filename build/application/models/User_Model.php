@@ -55,7 +55,7 @@ class User_Model extends BDB_Model
 							'pais' => $response->codPais,
 							'aplicaTransferencia' => $response->aplicaTransferencia,
 							'passwordOperaciones' => $response->passwordOperaciones,
-							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
+							'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 							'afiliado' => $response->afiliado,
 							'celular' => isset($response->celular)? $response->celular: '',
 							'tyc' => $response->tyc
@@ -191,7 +191,7 @@ class User_Model extends BDB_Model
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
-							'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
+							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
 							);
 						$this->session->set_userdata($newdata);
 

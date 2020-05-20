@@ -229,9 +229,9 @@ class Encrypt_Connect {
 			$wirteLog = new stdClass();
 			$isBean = '';
 
-			if (isset($response->bean) && is_object($response->bean)) {
+			if (isset($response->bean) && $response->bean != 'null') {
 				$isBean = 'IN BEAN ';
-				$response = json_decode($response->bean);
+				$response->bean = json_decode($response->bean);
 			}
 
 			if(is_object($response)) {

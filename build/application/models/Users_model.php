@@ -69,7 +69,7 @@ class Users_model extends CI_Model {
 					'pais' => $desdata->codPais,
 					'aplicaTransferencia' => $desdata->aplicaTransferencia,
 					'passwordOperaciones' => $desdata->passwordOperaciones,
-					'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
+					'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 					'afiliado' => $desdata->afiliado,
 					'aplicaPerfil' => $desdata->aplicaPerfil,
 					'tyc' => $desdata->tyc

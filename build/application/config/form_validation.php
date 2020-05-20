@@ -13,11 +13,6 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
-			'field' => 'active',
-			'label' => 'active',
-			'rules' => 'trim|integer'
-		],
-		[
 			'field' => 'currentTime',
 			'label' => 'currentTime',
 			'rules' => 'trim|integer|required'

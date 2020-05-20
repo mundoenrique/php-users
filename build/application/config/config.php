@@ -40,6 +40,8 @@ $config['urlAPI'] = URL_API;
 //Credenciales oauth
 $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
+$config['format_date'] = 'j/m/Y';
+$config['format_time'] = 'g:i A';
 $config['cypher_base'] = CYPHER_BASE;
 $config['oauth_url'] = OAUTH_URL;
 $config['scores_recapcha'] = [

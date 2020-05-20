@@ -27,6 +27,9 @@
 				</button>
 				<?php if(lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON'): ?>
 				<a class="block mb-1 h5 primary forgot-pass" href="<?= base_url('recuperar-clave');?>"><?= lang('LOGIN_RECOVER_PASS'); ?></a>
+				<p class="mb-0 h5"><?= lang('LOGIN_NO_USER') ?>
+					<a class="primary forgot-pass" href="<?= base_url('identificacion') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
+				</p>
 				<?php endif; ?>
 			</form>
 		</div>

@@ -21,10 +21,10 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'signin';
 
-		if($this->session->has_userdata('logged')) {
+		/* if($this->session->has_userdata('logged')) {
 
 			exit();
-		}
+		} */
 
 		$this->session->sess_destroy();
 
@@ -35,7 +35,6 @@ class Novo_User extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
 			"form_validation",
@@ -54,44 +53,6 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-	}
-	/**
-	 * @info Método para el cierre de sesión
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function singleSignon($tokenId = FALSE)
-	{
-		log_message('INFO', 'NOVO User: singleSignon Method Initialized');
-
-		$view = 'single-signin';
-		$this->render->send = FALSE;
-
-		if ($tokenId) {
-			$this->render->tokenId = $tokenId;
-			$this->render->send = TRUE;
-		} else {
-			$this->render->tokenId = $this->request->tokenId;
-		}
-
-		if ($tokenId != 'fin') {
-			array_push(
-				$this->includeAssets->jsFiles,
-				'user/single-signin'
-			);
-		}
-
-		if($tokenId == 'fin') {
-			$view = 'finish';
-			$this->render->activeHeader = TRUE;
-			$this->render->showBtn = FALSE;
-			$this->render->sessionEnd = lang('RESP_DUPLICATED_SESSION');
-		}
-
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
-		$this->render->skipProductInf = TRUE;
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-
 	}
 	/**
 	 * @info Método que renderiza la vista para recuperar la contraseña
@@ -134,10 +95,9 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/change_pass".$this->render->newViews,
 			"user/pass_validate",
-			"third_party/jquery.md5",
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
+			"form_validation",
 			"third_party/additional-methods"
 		);
 

@@ -1,11 +1,10 @@
 'use strict'
-$(function() {
+$(function () {
 	var signinBtn = $('#signin-btn');
-	var forWho, forWhere;
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
-	signinBtn.on('click', function(e) {
+	signinBtn.on('click', function (e) {
 		e.preventDefault();
 		var recaptcha = lang.GEN_ACTIVE_RECAPTCHA;
 		form = $('#signin-form');
@@ -16,7 +15,6 @@ $(function() {
 		if (form.valid()) {
 			data = getDataForm(form)
 			data.userPass = cryptoPass(data.userPass);
-			data.active = '';
 			$(this).html(loader);
 			insertFormInput(true);
 			where = 'signin';
@@ -24,7 +22,7 @@ $(function() {
 			if (recaptcha) {
 				grecaptcha.ready(function () {
 					grecaptcha
-						.execute('6Lejt6MUAAAAANd7KndpsZ2mRSQXuYHncIxFJDYf', { action: 'login' })
+						.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', { action: 'login' })
 						.then(function (token) {
 							if (token) {
 								validateSignin(token, signinBtn);
@@ -55,6 +53,8 @@ $(function() {
  * @date May 19th, 2020
  */
 function validateSignin(token, signinBtn) {
+	var userName = $('#userName');
+	var userPass = $('#userPass');
 	who = 'User';
 	data.currentTime = new Date().getHours()
 	data.token = token || ''
@@ -63,10 +63,24 @@ function validateSignin(token, signinBtn) {
 		switch (response.code) {
 			case 0:
 				break;
+			case 1:
+				userName.showBalloon({
+					html: true,
+					classname: response.className,
+					position: response.position,
+					contents: response.msg
+				});
 		}
 
 		insertFormInput(false);
-		signinBtn.html(btnText)
+		signinBtn.html(btnText);
+		setTimeout(function () {
+			userName.hideBalloon();
+		}, 2000);
+		userPass.val('')
 
+		if (client == 'pichincha') {
+			userName.val('')
+		}
 	})
 }
