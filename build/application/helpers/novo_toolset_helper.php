@@ -169,23 +169,18 @@ if (!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
-			case 'Novo_Bulk':
-				if($menu == lang('GEN_MENU_LOTS')) {
-					$cssClass = 'page-current';
-				}
-				break;
-			case 'Novo_Inquiries':
-				if($menu == lang('GEN_MENU_CONSULTATIONS')) {
-					$cssClass = 'page-current';
-				}
-				break;
-			case 'Novo_Services':
-				if($menu == lang('GEN_MENU_SERVICES')) {
+			case 'Novo_Payments':
+				if($menu == lang('GEN_MENU_PAYS_TRANSFER')) {
 					$cssClass = 'page-current';
 				}
 				break;
 			case 'Novo_Reports':
 				if($menu == lang('GEN_MENU_REPORTS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'Novo_CustomerSupport':
+				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
 				}
 				break;
@@ -252,5 +247,24 @@ if (!function_exists('arrayTrim')) {
 		$value = trim($value);
 
 		return $value;
+	}
+}
+
+if (!function_exists('mainMenu'))
+{
+	function mainMenu() {
+		return [
+			'CARDS_LIST' => [],
+			'PAYS_TRANSFER' => [
+				'BETWEEN_CARDS' => [],
+				'BANKS' => [],
+				'CREDIT_CARDS' => [],
+				'SERVICES' => [
+					'TELEPHONY' => []
+				]
+			],
+			'REPORTS' => [],
+			'CUSTOMER_SUPPORT' => []
+		];
 	}
 }

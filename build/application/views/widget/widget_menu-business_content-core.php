@@ -2,37 +2,62 @@
 <?php if($this->session->has_userdata('logged') || isset($activeMenuUser)): ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
-		<li class="nav-item mr-1 inline big-modal <?= setCurrentPage($currentClass, lang('GEN_MENU_CARDS_LIST')); ?>">
-			<a class="nav-link pr-2 semibold primary" href="<?= base_url('lista-de-tarjetas'); ?>">
-				<?= lang('GEN_MENU_CARDS_LIST') ?>
-			</a>
-		</li>
-		<?php if($this->session->has_userdata('user_access')): ?>
-		<?php foreach($userAccess AS $firstLevel): ?>
-		<?php $textMenu = $this->create_menu->mainMenu($firstLevel->idPerfil); ?>
-		<li class="nav-item mr-1 inline <?= setCurrentPage($currentClass, $textMenu); ?>">
-			<a class="nav-link px-2 semibold primary"><?= $textMenu; ?></a>
+		<?php foreach ($mainMenu AS $firstLevel => $menuLevel1): ?>
+		<?php if(lang('CONF_'.$firstLevel) == 'ON'): ?>
+		<?php $menuText1 = lang('GEN_MENU_'.$firstLevel); ?>
+		<?php $menuLink1 = lang('GEN_LINK_'.$firstLevel); ?>
+		<?php $menuLink1 = $menuLink1 != lang('GEN_NO_LINK') ? base_url($menuLink1) : lang('GEN_NO_LINK'); ?>
+		<li class="nav-item mr-1 inline <?= $menuLink1 != lang('GEN_NO_LINK') ? 'big-modal' : '' ?> <?= setCurrentPage($currentClass, $menuText1); ?>">
+			<a class="nav-link px-2 semibold primary" href="<?= $menuLink1 ?>"><?= $menuText1; ?></a>
 			<ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
-				<?php $secondLevel = $this->create_menu->secondaryMenu($firstLevel) ?>
-				<?php foreach($secondLevel->second AS $submenu): ?>
-				<li <?= $submenu->link != 'javascript:' ? 'class="big-modal"' : ''; ?>>
-					<a <?= $submenu->link ? 'href="'.$submenu->link.'"' : '';  ?>><?= $submenu->text ?></a>
-					<?php if(!empty($secondLevel->third) && $submenu->text == $secondLevel->third[0]->title): ?>
-					<?php unset($secondLevel->third[0]) ?>
+				<?php foreach ($menuLevel1 AS $secondLevel => $menuLevel2): ?>
+				<?php if(lang('CONF_'.$secondLevel) == 'ON'): ?>
+				<?php $menuText2 = lang('GEN_MENU_'.$secondLevel); ?>
+				<?php $menuLink2 = lang('GEN_LINK_'.$secondLevel); ?>
+				<?php $menuLink2 = $menuLink2 != lang('GEN_NO_LINK') ? base_url($menuLink2) : lang('GEN_NO_LINK'); ?>
+				<li <?= $menuLink2 != lang('GEN_NO_LINK') ? 'class="big-modal"' : '' ?>>
+					<a href="<?= $menuLink2; ?>"><?= $menuText2; ?></a>
 					<ul class="pl-0 regular tertiary bg-secondary list-style-none list-inline">
-						<?php foreach($secondLevel->third AS $levelThird): ?>
-						<li <?= $levelThird->link != 'javascript:' ? 'class="big-modal"' : ''; ?>>
-							<a href="<?= $levelThird->link ?>"><?= $levelThird->text ?></a>
+						<?php foreach ($menuLevel2 AS $thirdLevel => $menuLevel3): ?>
+						<?php if(lang('CONF_'.$thirdLevel) == 'ON'): ?>
+						<?php $menuText3 = lang('GEN_MENU_'.$thirdLevel); ?>
+						<?php $menuLink3 = lang('GEN_LINK_'.$thirdLevel); ?>
+						<?php $menuLink3 = $menuLink3 != lang('GEN_NO_LINK') ? base_url($menuLink3) : lang('GEN_NO_LINK'); ?>
+						<li <?= $menuLink2 != lang('GEN_NO_LINK') ? 'class="big-modal"' : '' ?>>
+							<a href="<?= $menuLink3; ?>"><?= $menuText3; ?></a>
 						</li>
+						<?php endif; ?>
 						<?php endforeach; ?>
 					</ul>
-					<?php endif; ?>
 				</li>
+				<?php endif; ?>
 				<?php endforeach; ?>
 			</ul>
 		</li>
-		<?php endforeach; ?>
 		<?php endif; ?>
+		<?php endforeach; ?>
 	</ul>
 </nav>
 <?php endif; ?>
+
+
+
+
+<?php
+log_message('INFO', '*************************'.json_encode($mainMenu));
+
+$menu = '';
+
+foreach($mainMenu AS $pos1 => $menuLevel1) {
+	log_message('INFO', '*************************$pos 1 '.json_encode($pos1));
+	log_message('INFO', '*************************$menuLevel 1 '.json_encode($menuLevel1));
+	foreach($menuLevel1 AS $pos2 => $menuLevel2) {
+		log_message('INFO', '*************************$pos 2 '.json_encode($pos2));
+		log_message('INFO', '*************************$menuLevel 2 '.json_encode($menuLevel2));
+		foreach($menuLevel2 AS $pos3 => $menuLevel3) {
+			log_message('INFO', '*************************$pos 3 '.json_encode($pos3));
+			log_message('INFO', '*************************$menuLevel 3 '.json_encode($menuLevel3));
+		}
+	}
+
+}

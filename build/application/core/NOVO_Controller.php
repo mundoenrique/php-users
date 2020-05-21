@@ -276,8 +276,7 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: '.$module);
 
 		$userMenu = new stdClass();
-		$userMenu->userAccess = $this->session->user_access;
-		$userMenu->enterpriseUrl = '';
+		$userMenu->mainMenu = mainMenu();
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))

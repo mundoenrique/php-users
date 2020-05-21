@@ -91,9 +91,10 @@ $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 //Business
 $route['(:any)/lista-de-tarjetas'] = "Novo_Business/userCardsList";
 $route['(:any)/detalle-de-tarjeta'] = "Novo_Business/cardDetail";
+//Resports
+$route['(:any)/reportes'] = "Novo_Reports/expensesCategory";
 //Custumer suppor
 $route['(:any)/atencion-al-cliente'] = "Novo_CustomerSupport/services";
-$route['(:any)/reportes'] = "Novo_Reports/expensesCategory";
 $route['(:any)/notificaciones'] = "Novo_CustomerSupport/notifications";
 
 //Actual Structure

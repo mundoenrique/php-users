@@ -8,7 +8,7 @@
 				<i class="ml-5 icon icon-chevron-down" aria-hidden="true"></i>
 			</a>
 			<ul class="dropdown regular tertiary bg-secondary">
-				<?php if(lang('CONFIG_SETTINGS_NOTI') == 'ON'): ?>
+				<?php if(lang('CONF_NOTIFICATIONS') == 'ON'): ?>
 				<li>
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('notificaciones') ?>"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></a>
 				</li>

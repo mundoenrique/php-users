@@ -9,13 +9,24 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
+//MENU
+$lang['CONF_CARDS_LIST'] = 'ON';
+$lang['CONF_CARD_DETAIL'] = 'ON';
+$lang['CONF_PAYS_TRANSFER'] = 'ON';
+$lang['CONF_BETWEEN_CARDS'] = 'ON';
+$lang['CONF_BANKS'] = 'ON';
+$lang['CONF_CREDIT_CARDS'] = 'ON';
+$lang['CONF_SERVICES'] = 'ON';
+$lang['CONF_TELEPHONY'] = 'ON';
+$lang['CONF_REPORTS'] = 'ON';
+$lang['CONF_CUSTOMER_SUPPORT'] = 'ON';
+$lang['CONF_PORFILE'] = 'ON';
+$lang['CONF_NOTIFICATIONS'] = 'ON';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
-//SETTINGS
-$lang['CONFIG_SETTINGS_NOTI'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';

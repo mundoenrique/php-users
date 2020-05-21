@@ -5,19 +5,35 @@ $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
 $lang['GEN_LOGO_HEADER'] = 'logo.svg';
 $lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
 //MENU
-$lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';//accessRecover
-$lang['GEN_MENU_USER_IDENTIFY'] = 'identificación de usuario';//userIdentify
-$lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';//changePassword
-$lang['GEN_MENU_CARDS_LIST'] = 'Lista de tarjetas';//changePassword
-$lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';//changePassword
-$lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';//changePassword
-$lang['GEN_MENU_REPORTS'] = 'Reportes';//changePassword
-$lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';//changePassword
-$lang['GEN_MENU_SIGNUP'] = 'Registro';//changePassword
-$lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';//changePassword
-$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';//changePassword
-//SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
+$lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
+$lang['GEN_MENU_USER_IDENTIFY'] = 'identificación de usuario';
+$lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
+$lang['GEN_MENU_CARDS_LIST'] = 'Lista de tarjetas';
+$lang['GEN_LINK_CARDS_LIST'] = 'lista-de-tarjetas';
+$lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';
+$lang['GEN_LINK_CARD_DETAIL'] = 'detalle-de-tarjeta';
+$lang['GEN_MENU_PAYS_TRANSFER'] = 'Pagos y transferencias';
+$lang['GEN_LINK_PAYS_TRANSFER'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_BETWEEN_CARDS'] = 'Entre tarjetas';
+$lang['GEN_LINK_BETWEEN_CARDS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_BANKS'] = 'Bancos';
+$lang['GEN_LINK_BANKS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_CREDIT_CARDS'] = 'Tarjetas de crédito';
+$lang['GEN_LINK_CREDIT_CARDS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_SERVICES'] = 'Servicios';
+$lang['GEN_LINK_SERVICES'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_TELEPHONY'] = 'Recarga digitel';
+$lang['GEN_LINK_TELEPHONY'] = $lang['GEN_NO_LINK'];
+$lang['GEN_MENU_REPORTS'] = 'Reportes';
+$lang['GEN_LINK_REPORTS'] = 'reportes';
+$lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
+$lang['GEN_LINK_CUSTOMER_SUPPORT'] = 'atencion-al-cliente';
+$lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
+$lang['GEN_MENU_SIGNUP'] = 'Registro';
+$lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
+$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';
+//SUBMENU
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
