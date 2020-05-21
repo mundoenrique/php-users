@@ -3,20 +3,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // General lang app
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
 $lang['GEN_LOGO_HEADER'] = 'logo.svg';
+$lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
 //MENU
-
+$lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';//accessRecover
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
+$lang['GEN_BTN_CONTINUE'] = 'Continuar';
+$lang['GEN_BTN_CONFIRM'] = 'Confirmar';
+$lang['GEN_BTN_SEND'] = 'Enviar';
+$lang['GEN_BTN_SEE'] = 'Ver';
 //ICONS
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['GEN_ICON_INFO'] = 'ui-icon-info';
 $lang['GEN_ICON_WARNING'] = 'ui-icon-alert';
 $lang['GEN_ICON_DANGER'] = 'ui-icon-closethick';
+//BROWSERS
+$lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
+$lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX_VERSION'] = 'Version 30+';
+$lang['GEN_BROWSER_APPLE_SAFARI'] = 'Apple Safari';
+$lang['GEN_BROWSER_APPLE_SAFARI_VERSION'] = 'Version 10+';
+$lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
+$lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
+$lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
+$lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -28,7 +44,9 @@ $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
-$lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
+$lang['GEN_DNI'] = 'Documento de identidad';
+$lang['GEN_EMAIL'] = 'Correo electrónico';
+$lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_FOOTER_IMG_FACEBOOK'] = $lang['GEN_DEFAULT_LOGO'];
 $lang['GEN_FOOTER_LINK_FACEBOOK'] = $lang['GEN_NO_LINK'];
 $lang['GEN_FOOTER_IMG_TWITTER'] = $lang['GEN_DEFAULT_LOGO'];

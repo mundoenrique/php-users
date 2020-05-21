@@ -134,7 +134,8 @@ if (!function_exists('languageLoad')) {
 				break;
 			default:
 				$languages = [
-					'signin' => ['login']
+					'signin' => ['login'],
+					'accessRecover' => ['recover']
 				];
 		}
 

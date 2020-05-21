@@ -51,7 +51,7 @@ class Tool_Browser {
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
 
-				if($valid && $client === 'banco-bog' && $browser === 'Internet Explorer') {
+				if($valid && $client === '*******' && $browser === 'Internet Explorer') {
 					$valid = 'ie11';
 				}
 			}

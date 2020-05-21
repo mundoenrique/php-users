@@ -17,7 +17,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function signin()
 	{
-		log_message('INFO', 'NOVO User: index Method Initialized');
+		log_message('INFO', 'NOVO User: signin Method Initialized');
 
 		$view = 'signin';
 
@@ -58,19 +58,19 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método que renderiza la vista para recuperar la contraseña
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function recoverPass()
+	public function accessRecover()
 	{
-		log_message('INFO', 'NOVO User: passwordRecovery Method Initialized');
+		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
 
-		$view = 'pass-recovery';
+		$view = 'accessRecover';
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/pass-recovery",
 			"third_party/jquery.validate",
-			"validate".$this->render->newViews."-forms",
-			"third_party/additional-methods"
+			"form_validation",
+			"third_party/additional-methods",
+			"user/access_recover"
 		);
-		$this->render->titlePage = lang('GEN_RECOVER_PASS_TITLE');
+		$this->render->titlePage = lang('GEN_MENU_ACCESS_RECOVER');
 		$this->render->activeHeader = TRUE;
 		$this->render->skipProductInf = TRUE;
 		$this->views = ['user/'.$view];
@@ -176,13 +176,9 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$views = ['staticpages/content-browser'];
-
-		if($this->render->newViews != '') {
-			$this->includeAssets->cssFiles = [
-				"$this->folder"."$this->skin-browser"
-			];
-		}
-
+		$this->includeAssets->cssFiles = [
+			"$this->folder/"."$this->skin-browser"
+		];
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;
 		$this->render->platform = $messageBrowser->platform;

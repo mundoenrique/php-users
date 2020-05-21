@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang['LOGIN_WIDGET_TITLE'] = 'Personas';
-$lang['LOGIN_RECOVER_PASS'] = '¿Olvidaste tu usuario o contraseña?';
+$lang['LOGIN_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['LOGIN_NO_USER'] = '¿No posees usuario?';
 $lang['LOGIN_SINGN_UP'] = 'Regístrate';
 $lang['LOGIN_LOGO_WIDGET'] = 'logo.svg';

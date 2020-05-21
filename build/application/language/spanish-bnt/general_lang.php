@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // General lang app
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
-
 //GENERAL LANGUAGE
+$lang['GEN_DNI'] = 'CURP';
 $lang['GEN_FOOTER_IMG_FACEBOOK'] = 'network_facebook.png';
 $lang['GEN_FOOTER_LINK_FACEBOOK'] = 'https://www.facebook.com/banorte';
 $lang['GEN_FOOTER_IMG_TWITTER'] = 'network_twitter.png';
