@@ -5,53 +5,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date May 21th, 2020
 */
-class Novo_CustomerSupport extends NOVO_Controller {
+class Novo_Reports extends NOVO_Controller {
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CustomerSupport Controller Class Initialized');
+		log_message('INFO', 'NOVO Reports Controller Class Initialized');
 	}
 	/**
 	 * @info Método para obtener las opciones de atención al cliente
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 21th, 2020
 	 */
-	public function services()
+	public function expensesCategory()
 	{
-		log_message('INFO', 'NOVO CustomerSupport: services Method Initialized');
+		log_message('INFO', 'NOVO Reports: expensesCategory Method Initialized');
 
-		$view = 'services';
+		$view = 'expensesCategory';
 		array_push(
 			$this->includeAssets->jsFiles,
-			"support/services"
-		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
-		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
-		$this->views = ['support/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para obtener las opciones de atención al cliente
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 21th, 2020
-	 */
-	public function reports()
-	{
-		log_message('INFO', 'NOVO CustomerSupport: reports Method Initialized');
-
-		$view = 'reports';
-		array_push(
-			$this->includeAssets->jsFiles,
-			"support/reports"
+			"reports/expensesCategory"
 		);
 
 		$this->render->activeHeader = TRUE;
 		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
-		$this->views = ['support/'.$view];
+		$this->views = ['reports/'.$view];
 		$this->loadView($view);
 	}
 	/**

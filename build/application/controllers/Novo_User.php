@@ -96,8 +96,8 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/accessRecover"
 		);
-		$this->render->titlePage = lang('GEN_MENU_ACCESS_RECOVER');
 		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = lang('GEN_MENU_ACCESS_RECOVER');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -118,8 +118,8 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/user_identify"
 		);
-		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
 		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -180,12 +180,12 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
+
 		if($redirect == 'fin') {
 			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
-
 
 			if($redirect == 'inicio') {
 				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
@@ -198,7 +198,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('GEN_LINK_LOGIN')), 'location');
+			redirect(base_url('inicio'), 'location');
 		}
 
 	}
@@ -248,6 +248,7 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		$this->render->activeHeader = TRUE;
+		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);

@@ -165,7 +165,7 @@ if (!function_exists('setCurrentPage')) {
 		$cssClass = '';
 		switch ($currentClass) {
 			case 'Novo_Business':
-				if($menu == lang('GEN_MENU_ENTERPRISE')) {
+				if($menu == lang('GEN_MENU_CARDS_LIST')) {
 					$cssClass = 'page-current';
 				}
 				break;

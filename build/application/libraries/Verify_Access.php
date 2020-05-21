@@ -122,7 +122,7 @@ class Verify_Access {
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
-			$temporalAccess = ['changePassword', 'userCardsList', 'cardDetail', 'services', 'profile', 'signup', 'reports', 'notifications'];
+			$temporalAccess = ['changePassword', 'userCardsList', 'cardDetail', 'services', 'profile', 'signup', 'expensesCategory', 'notifications'];
 			$auth = in_array($module, $temporalAccess);
 		}
 

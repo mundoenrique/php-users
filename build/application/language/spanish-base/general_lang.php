@@ -15,6 +15,7 @@ $lang['GEN_MENU_REPORTS'] = 'Reportes';//changePassword
 $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';//changePassword
 $lang['GEN_MENU_SIGNUP'] = 'Registro';//changePassword
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';//changePassword
+$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';//changePassword
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 //BUTTONS

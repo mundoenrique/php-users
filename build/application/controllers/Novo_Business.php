@@ -28,6 +28,7 @@ class Novo_Business extends NOVO_Controller {
 		);
 
 		$this->render->activeHeader = TRUE;
+		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_CARDS_LIST');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
@@ -48,6 +49,7 @@ class Novo_Business extends NOVO_Controller {
 		);
 
 		$this->render->activeHeader = TRUE;
+		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_CARD_DETAIL');
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
