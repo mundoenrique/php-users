@@ -1,13 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Clase contralador de Conexión Empresas Online (CEO)
+ * Clase contralador de Conexión Personas Online (CEO)
  *
  * Esta clase es la súper clase de la que heredarán todos los controladores
  * de la aplicación.
  *
  * @package controllers
  * @author J. Enrique Peñaloza Piñero
+ * @date May 16th, 2020
  */
 class NOVO_Controller extends CI_Controller {
 	protected $skin;
@@ -59,7 +60,7 @@ class NOVO_Controller extends CI_Controller {
 	/**
 	 * Método para varificar datos génericos de la solcitud
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 20th, 2019
+	 * @date May 16th, 2020
 	 */
 	private function optionsCheck()
 	{
@@ -137,7 +138,7 @@ class NOVO_Controller extends CI_Controller {
 	/**
 	 * Método para realizar la precarga de las vistas
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date May 16th, 2020
 	 */
 	protected function preloadView($auth)
 	{
@@ -189,10 +190,8 @@ class NOVO_Controller extends CI_Controller {
 	}
 	/**
 	 * Método para cargar un modelo especifico
-	 * @author Pedro Torres
-	 * @date Auguts 23rd, 2019
-	 * @modified J. Enrique Peñaloza Piñero
-	 * @date October 31st, 2019
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
 	 */
 	protected function loadModel($request = FALSE)
 	{
@@ -206,7 +205,7 @@ class NOVO_Controller extends CI_Controller {
 	/**
 	 * Método para extraer mensaje al usuario
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date Auguts 22nd, 2019
+	 * @date May 16th, 2020
 	 */
 	protected function responseAttr($responseView = 0, $active = TRUE)
 	{
@@ -251,7 +250,7 @@ class NOVO_Controller extends CI_Controller {
 	/**
 	 * Método para validar la versión de browser
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date January 23nd, 2019
+	 * @date May 16th, 2020
 	 */
 	protected function checkBrowser()
 	{
@@ -270,7 +269,7 @@ class NOVO_Controller extends CI_Controller {
 	/**
 	 * Método para renderizar una vista
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 14th, 2019
+	 * @date May 16th, 2020
 	 */
 	protected function loadView($module)
 	{

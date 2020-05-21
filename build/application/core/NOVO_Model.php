@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/**
+ * Clase Modelo de Conexión Personas Online (CEO)
+ *
+ * Esta clase es la súper clase de la que heredarán todos los modelos
+ * de la aplicación.
+ *
+ * @package models
+ * @author J. Enrique Peñaloza Piñero
+ * @date May 16th, 2020
+ */
 class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
 	public $className;
@@ -31,7 +40,7 @@ class NOVO_Model extends CI_Model {
 	/**
 	 * @info Método para comunicación con el servicio
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date April 20th, 2019
+	 * @date May 16th, 2020
 	 */
 	public function sendToService($model)
 	{
@@ -59,7 +68,7 @@ class NOVO_Model extends CI_Model {
 	/**
 	 * @info Método para comunicación con el servicio
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date April 20th, 2019
+	 * @date May 16th, 2020
 	 */
 	public function sendFile($file, $model)
 	{
@@ -71,8 +80,8 @@ class NOVO_Model extends CI_Model {
 	}
 	/**
 	 * @info Método armar la respuesta a los modelos
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date December 11th, 2019
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
 	 */
 	protected function makeAnswer($responseModel)
 	{
@@ -119,7 +128,7 @@ class NOVO_Model extends CI_Model {
 	/**
 	 * @info Método enviar el resultado de la consulta a la vista
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date November 21st, 2019
+	 * @date May 16th, 2020
 	 */
 	public function responseToTheView($model)
 	{

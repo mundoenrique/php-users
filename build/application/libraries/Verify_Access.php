@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Librería para validar el acceso del usuario a las funciones
  * @author J. Enrique Peñaloza Piñero
- * @date October 31th, 2019
+ * @date May 17th, 2020
  */
 class Verify_Access {
 	private $CI;
@@ -25,7 +25,7 @@ class Verify_Access {
 	/**
 	 * @info método que valida los datos de los formularios enviados
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date May 17th, 2020
 	 */
 	public function validateForm($rule, $countryUri, $user)
 	{
@@ -49,7 +49,7 @@ class Verify_Access {
 	/**
 	 * @info método para crear el request al modelo
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date May 17th, 2020
 	 */
 	public function createRequest($rule, $user)
 	{
@@ -77,13 +77,11 @@ class Verify_Access {
 	/**
 	 * @info método para crear el request al modelo
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date May 17th, 2020
 	 */
 	public function ResponseByDefect($user)
 	{
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
-
-
 
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
@@ -110,9 +108,9 @@ class Verify_Access {
 		return $this->responseDefect;
 	}
 	/**
-	 * @info método que valida la autorización de acceso del usuario a las vistas
+	 * @info método que valida la autorización de acceso del usuario a los módulos
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date October 31th, 2019
+	 * @date May 19th, 2020
 	 */
 	public function accessAuthorization($module, $countryUri, $user = FALSE)
 	{
@@ -120,8 +118,13 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession'];
+		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify'];
 		$auth = in_array($module, $freeAccess);
+
+		if(!$auth) {
+			$temporalAccess = ['changePassword', 'userCardsList', 'cardDetail', 'services', 'profile', 'signup', 'reports', 'notifications'];
+			$auth = in_array($module, $temporalAccess);
+		}
 
 		if(!$auth) {
 			switch($module) {

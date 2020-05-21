@@ -2,7 +2,7 @@
 /**
  * @info Controlador para las peticiones asíncronas de la aplicación
  * @author J. Enrique Peñaloza Piñero
- * @date April 20th, 2019
+ * @date May 18th, 2019
 */
 class Novo_CallModels extends Novo_Controller {
 
@@ -22,7 +22,7 @@ class Novo_CallModels extends Novo_Controller {
 	/**
 	 * @info Método que valida y maneja las peticiones asincornas de la aplicación
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 20th, 2019
+	 * @date May 18th, 2019
 	 */
 	public function index()
 	{
@@ -62,7 +62,7 @@ class Novo_CallModels extends Novo_Controller {
 	/**
 	 * @info Método que maneja los archivos enviados al servidor
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date December 11th, 2019
+	 * @date May 18th, 2019
 	 */
 	private function manageFile()
 	{

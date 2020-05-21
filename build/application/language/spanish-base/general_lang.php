@@ -6,6 +6,15 @@ $lang['GEN_LOGO_HEADER'] = 'logo.svg';
 $lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
 //MENU
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';//accessRecover
+$lang['GEN_MENU_USER_IDENTIFY'] = 'identificación de usuario';//userIdentify
+$lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';//changePassword
+$lang['GEN_MENU_CARDS_LIST'] = 'Lista de tarjetas';//changePassword
+$lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';//changePassword
+$lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';//changePassword
+$lang['GEN_MENU_REPORTS'] = 'Reportes';//changePassword
+$lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';//changePassword
+$lang['GEN_MENU_SIGNUP'] = 'Registro';//changePassword
+$lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';//changePassword
 //SUBMENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 //BUTTONS
@@ -47,6 +56,10 @@ $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
 $lang['GEN_DNI'] = 'Documento de identidad';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
+$lang['GEN_FINISH_TITLE']= 'Cierre de sesión';
+$lang['GEN_FINISH_TEXT']= 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.';
+$lang['GEN_EXPIRED_SESSION']= 'Tu sesión en %s ha caducado.';
+$lang['GEN_FINISHED_SESSION']= 'Tu sesión en %s ha sido cerrada exitosamente.';
 $lang['GEN_FOOTER_IMG_FACEBOOK'] = $lang['GEN_DEFAULT_LOGO'];
 $lang['GEN_FOOTER_LINK_FACEBOOK'] = $lang['GEN_NO_LINK'];
 $lang['GEN_FOOTER_IMG_TWITTER'] = $lang['GEN_DEFAULT_LOGO'];
