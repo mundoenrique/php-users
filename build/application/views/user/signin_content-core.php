@@ -27,8 +27,8 @@
 				</button>
 				<?php if(lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON'): ?>
 				<a class="block mb-1 h5 primary forgot-pass" href="<?= base_url('recuperar-acceso');?>"><?= lang('LOGIN_ACCESS_RECOVER'); ?></a>
-				<p class="mb-0 h5"><?= lang('LOGIN_NO_USER') ?>
-					<a class="primary forgot-pass" href="<?= base_url('identificar-usuario') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
+				<p class="mb-0 h5 center"><?= lang('LOGIN_NO_USER') ?>
+					<a class="forgot-pass" href="<?= base_url('identificar-usuario') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
 				</p>
 				<?php endif; ?>
 			</form>
@@ -39,4 +39,52 @@
 		<img src="<?= $this->asset->insertFile(lang('LOGIN_IMAGE'), 'images', $countryUri); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
 	</div>
 	<?php endif; ?>
+
+	<!-- Widgets centro de contacto -->
+	<div id="widgetSupport" class="widget widget-support rounded-top">
+		<div class="widget-header">
+			<h2 class="mb-2 h3 regular center">¿Necesitas ayuda?</h2>
+		</div>
+		<div class="widget-section">
+			<p class="mb-1">Líneas de atención a nivel nacional</p>
+
+			<table class="w-100">
+				<thead>
+					<tr>
+						<th class="px-0">CIUDAD</th>
+						<th class="px-0 text-right">CONTACTO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Bogotá</td>
+						<td class="text-right">382 00 00</td>
+					</tr>
+					<tr>
+						<td>Barranquilla</td>
+						<td class="text-right"> 350 43 00</td>
+					</tr>
+					<tr>
+						<td>Bucaramanga</td>
+						<td class="text-right">652 55 00</td>
+					</tr>
+					<tr>
+						<td>Cali</td>
+						<td class="text-right">898 00 77</td>
+					</tr>
+					<tr>
+						<td>Medellín</td>
+						<td class="text-right">576 43 30</td>
+					</tr>
+					<tr>
+						<td>Nivel nacional</td>
+						<td class="text-right">018000 518 877</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="widget-support-btn phone" aria-hidden="true">
+			<span class="icon-phone h00 px-2"></span>
+		</div>
+	</div>
 </div>
