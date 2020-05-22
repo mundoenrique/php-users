@@ -9,8 +9,8 @@
 			<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
-			<form id="" method="post">
-				<h3 class="mt-2 pb-2 h4 hide-out hide">Datos personales</h3>
+			<form id="" method="post" class ="hide-out hide">
+				<h3 class="mt-2 pb-2 h4">Datos personales</h3>
 					<div class="row">
 						<div class="form-group col-6 col-lg-4 col-xl-3">
 							<label for="idType">Tipo de identificación</label>
