@@ -57,23 +57,23 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>Bogotá</td>
+						<td>CDMX</td>
 						<td class="text-right">382 00 00</td>
 					</tr>
 					<tr>
-						<td>Barranquilla</td>
+						<td>GDL</td>
 						<td class="text-right"> 350 43 00</td>
 					</tr>
 					<tr>
-						<td>Bucaramanga</td>
+						<td>BCN</td>
 						<td class="text-right">652 55 00</td>
 					</tr>
 					<tr>
-						<td>Cali</td>
+						<td>CHIH</td>
 						<td class="text-right">898 00 77</td>
 					</tr>
 					<tr>
-						<td>Medellín</td>
+						<td>Edo.Méx</td>
 						<td class="text-right">576 43 30</td>
 					</tr>
 					<tr>
