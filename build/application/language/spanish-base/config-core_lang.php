@@ -12,7 +12,7 @@ $lang['CONF_VALID_POSITION'] = 'left';
 //MENU
 $lang['CONF_CARDS_LIST'] = 'ON';
 $lang['CONF_CARD_DETAIL'] = 'ON';
-$lang['CONF_PAYS_TRANSFER'] = 'ON';
+$lang['CONF_PAYS_TRANSFER'] = 'OFF';
 $lang['CONF_BETWEEN_CARDS'] = 'ON';
 $lang['CONF_BANKS'] = 'ON';
 $lang['CONF_CREDIT_CARDS'] = 'ON';
@@ -21,7 +21,7 @@ $lang['CONF_TELEPHONY'] = 'ON';
 $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_CUSTOMER_SUPPORT'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
-$lang['CONF_NOTIFICATIONS'] = 'ON';
+$lang['CONF_NOTIFICATIONS'] = 'OFF';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //SIGNIN

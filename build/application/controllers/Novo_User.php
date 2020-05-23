@@ -22,8 +22,10 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: signin Method Initialized');
 
 		$view = 'signin';
+		$userAgentReq = $this->agent->agent_string();
+		$userAgentSess = $this->session->client_agent;
 
-		if ($this->session->has_userdata('logged')) {
+		if ($this->session->has_userdata('logged') && $userAgentReq === $userAgentSess) {
 			redirect(base_url(lang('GEN_LINK_CARDS_LIST')), 'location', 301);
 			exit();
 		}
