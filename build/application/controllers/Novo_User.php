@@ -171,23 +171,20 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: finishSession Method Initialized');
 
-		$view = 'finish';
+		$view = 'finishSession';
 
 		if($this->render->userId || $this->render->logged) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
+		log_message('INFO', '*************************************    '.json_encode($this->session->all_userdata()));
 
 
 		if($redirect == 'fin') {
-			$pos = array_search('menu-datepicker', $this->includeAssets->jsFiles);
+			$pos = array_search('datepicker_options', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
-
-			if($redirect == 'inicio') {
-				$this->render->sessionEnd = novoLang(lang('GEN_FINISHED_SESSION'), lang('GEN_SYSTEM_NAME'));
-			}
 
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
@@ -195,6 +192,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
+			$this->session->sess_destroy();
 		} else {
 			redirect(base_url('inicio'), 'location');
 		}

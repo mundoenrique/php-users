@@ -92,11 +92,11 @@ function callNovoCore(who, where, request, _response_) {
 	formData.append('cpo_name', cpo_cook);
 	formData.append('plot', btoa(cpo_cook));
 
-	/* if (logged) {
+	if (logged) {
 		clearTimeout(resetTimesession);
 		clearTimeout(setTimesession);
 		sessionExpire();
-	} */
+	}
 
 	$.ajax({
 		method: 'POST',
@@ -109,7 +109,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (request.modalReq) {
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
@@ -124,7 +124,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if (request.modalReq) {
+		if ($('#system-info').parents('.ui-dialog:visible').length) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}

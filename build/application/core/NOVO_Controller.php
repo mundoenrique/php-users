@@ -176,12 +176,12 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			/* if($this->render->logged) {
+			if($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
-					"menu-datepicker"
+					"datepicker_options"
 				);
-			} */
+			}
 
 		} else {
 			redirect(base_url('inicio'), 'location');

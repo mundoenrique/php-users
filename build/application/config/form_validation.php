@@ -30,6 +30,13 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
+	'keepSession' => [
+		[
+			'field' => 'signout',
+			'label' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
 	'getdetail' => [
 		[
 			'field' => 'request',

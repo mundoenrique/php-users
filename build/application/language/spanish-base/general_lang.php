@@ -78,6 +78,7 @@ $lang['GEN_FINISH_TITLE'] = 'Cierre de sesión';
 $lang['GEN_FINISH_TEXT'] = 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.';
 $lang['GEN_EXPIRED_SESSION'] = 'Tu sesión en %s ha caducado.';
 $lang['GEN_FINISHED_SESSION'] = 'Tu sesión en %s ha sido cerrada exitosamente.';
+$lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['GEN_LAST_ACCESS'] = 'Último acceso';
 $lang['GEN_FOOTER_IMG_FACEBOOK'] = $lang['GEN_DEFAULT_LOGO'];
 $lang['GEN_FOOTER_LINK_FACEBOOK'] = $lang['GEN_NO_LINK'];

@@ -92,7 +92,7 @@ class Novo_User_Model extends NOVO_Model {
 						'client' => $this->config->item('client'),
 						'time' => $time,
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-						'countrySess' => $response->keyUpdate,
+						'countrySess' => $response->codPais,
 						'countryUri' => $this->config->item('country-uri')
 					];
 					$this->session->set_userdata($userData);
@@ -377,17 +377,17 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Cerrar sesion';
 
 		$this->dataRequest->idOperation = 'desconectarUsuario';
-		$this->dataRequest->idUsuario = $userName;
+		$this->dataRequest->userName = $userName;
 
-		$response = $this->sendToService(lang('GEN_FINISH_SESSION'));
+		$response = $this->sendToService('callWs_FinishSession');
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
+		$userData = ['logged', 'encryptKey', 'sessionId', 'token'];
+		$this->session->unset_userdata($userData);
 
-		$this->session->sess_destroy();
-
-		return $this->responseToTheView(lang('GEN_FINISH_SESSION'));
+		return $this->responseToTheView('callWs_FinishSession');
 	}
 	/**
 	 * @info Método validación recaptcha

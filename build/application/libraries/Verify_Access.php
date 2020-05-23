@@ -128,6 +128,11 @@ class Verify_Access {
 
 		if(!$auth) {
 			switch($module) {
+				case 'keepSession':
+				case 'userCardsList':
+				case 'profile':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
 				case 'changePassword':
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
 				break;
