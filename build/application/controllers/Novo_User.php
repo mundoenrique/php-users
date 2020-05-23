@@ -177,8 +177,7 @@ class Novo_User extends NOVO_Controller {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
-		log_message('INFO', '*************************************    '.json_encode($this->session->all_userdata()));
-
+		$this->session->sess_destroy();
 
 		if($redirect == 'fin') {
 			$pos = array_search('datepicker_options', $this->includeAssets->jsFiles);
@@ -192,7 +191,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->titlePage = LANG('GEN_FINISH_TITLE');
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
-			$this->session->sess_destroy();
 		} else {
 			redirect(base_url('inicio'), 'location');
 		}

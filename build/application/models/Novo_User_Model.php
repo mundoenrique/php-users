@@ -168,6 +168,9 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
+				default:
+					$this->session->sess_destroy();
+
 		}
 
 		return $this->responseToTheView('callWs_Signin');
