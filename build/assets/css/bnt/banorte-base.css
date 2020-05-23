@@ -3014,7 +3014,8 @@ ul.steps li.step-item i {
 .separador-one {
 	height: 1px;
 	border: none;
-	background:var(--color-eighth);
+	box-shadow: 0 1px 1px 1px rgba(78,64,68,.15),
+	inset 0 -3px 3px 0 rgba(78,64,68,.1);
 }
 
 .separador-two {
@@ -3978,4 +3979,113 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	transform: translate(-107px, -42.5px);
 	position: fixed;
 	color: var(--color-fifth);
+}
+
+
+/* Product Cards */
+
+.maestro,
+.mastercard,
+.visa,
+.visa-electron {
+	background: transparent no-repeat center;
+}
+.maestro {
+	background-image: url("../../images/branch/maestro.svg");
+}
+.mastercard {
+	background-image: url("../../images/branch/mastercard.svg");
+}
+.visa {
+	background-image: url("../../images/branch/visa.svg");
+}
+.visa-electron {
+	background-image: url("../../images/branch/visa-electron.svg");
+}
+
+.product-presentation .item-network {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	z-index: 2;
+	width: 40px;
+	height: 25px;
+	background-size: 40px;
+	background-position: bottom right;
+}
+
+.product-presentation .item-network.visa,
+.product-presentation .item-network.visa-electron {
+	width: 50px;
+	height: 25px;
+	background-size: 50px;
+}
+
+.dashboard-item {
+	width: 270px;
+  height: 200px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.dashboard-item:empty {
+	height: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	border: none;
+}
+
+.dashboard-item .item-img {
+	position: absolute;
+	width: 234px;
+	margin-top: 20px;
+	margin-left: 10px;
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+	z-index: 0;
+}
+
+.dashboard-item.inactive .item-img,
+.dashboard-item.inactive .item-category,
+.dashboard-item.inactive .item-cardnumber {
+	opacity: .4;
+}
+
+.dashboard-item:hover .item-img {
+	margin-top: 0;
+}
+
+.dashboard-item .item-info {
+	position: absolute;
+	width: 254px;
+	height: 122px;
+	margin-top: 70px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.2);
+	-webkit-transition: all .25s;
+	-moz-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+	z-index: 1;
+}
+
+.item-info.maestro,
+.item-info.mastercard {
+	background-position: bottom 20px right 20px;
+	background-size: 40px;
+}
+
+.item-info.visa,
+.visa-electron {
+	background-position: bottom 20px right 20px;
+	background-size: 50px;
+}
+
+.dashboard-item:hover .item-info {
+	margin-top: 80px;
+	border-bottom: 2px solid var(--color-primary);
+	-webkit-box-shadow: 0 0 2px rgba(51, 51, 51, .65);
+	-moz-box-shadow: 0 0 2px rgba(51, 51, 51, .65);
+	box-shadow: 0 0 2px rgba(51, 51, 51, .65);
 }
