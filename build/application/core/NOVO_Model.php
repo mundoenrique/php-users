@@ -92,11 +92,10 @@ class NOVO_Model extends CI_Model {
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->icon = lang('GEN_ICON_WARNING');
-		$linkredirect = 'detalle-tarjeta';
 		$arrayResponse = [
 			'btn1'=> [
-				'text'=> FALSE,
-				'link'=> $linkredirect,
+				'text'=> lang('GEN_BTN_ACCEPT'),
+				'link'=> lang('GEN_LINK_CARDS_LIST'),
 				'action'=> 'redirect'
 			]
 		];

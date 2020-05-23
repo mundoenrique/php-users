@@ -1,12 +1,9 @@
 'use strict'
 //app
-var currenTime;
 var screenSize;
-var verb, who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
+var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
-var searchEnterprise = $('#sb-search');
-var inputPass = $('#password');
 var dataTableLang;
 var validator;
 
@@ -75,7 +72,7 @@ $(function () {
  * @author J. Enrique Peñaloza Piñero
  * @date 15/04/2019
  */
-function callNovoCore(verb, who, where, request, _response_) {
+function callNovoCore(who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
 		who: who,
@@ -95,11 +92,11 @@ function callNovoCore(verb, who, where, request, _response_) {
 	formData.append('cpo_name', cpo_cook);
 	formData.append('plot', btoa(cpo_cook));
 
-	if (logged) {
+	/* if (logged) {
 		clearTimeout(resetTimesession);
 		clearTimeout(setTimesession);
 		sessionExpire();
-	}
+	} */
 
 	$.ajax({
 		method: 'POST',
@@ -216,7 +213,9 @@ function createButton(dialogMoldal, elementButton, valuesButton) {
 	elementButton.show();
 	elementButton.on('click', function (e) {
 		if (valuesButton.action === 'redirect') {
-			$(this).html(loader);
+			$(this)
+			.html(loader)
+			.attr('disabled', true);
 			$(this).children('span').addClass('spinner-border-sm');
 			if ($(this).attr('id') == 'cancel') {
 				$(this).children('span')

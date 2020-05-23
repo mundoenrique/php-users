@@ -1,6 +1,10 @@
 'use strict'
+var userName;
+var userPass;
 $(function () {
 	var signinBtn = $('#signin-btn');
+	userName = $('#userName');
+	userPass = $('#userPass');
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
@@ -37,7 +41,7 @@ $(function () {
 									}
 								};
 								notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, data);
-								insertFormInput(false);
+								validateSignin(signinBtn);
 							}
 						});
 				});
@@ -53,16 +57,15 @@ $(function () {
  * @date May 19th, 2020
  */
 function validateSignin(token, signinBtn) {
-	var userName = $('#userName');
-	var userPass = $('#userPass');
 	who = 'User';
 	data.currentTime = new Date().getHours()
 	data.token = token || ''
 
-	callNovoCore(verb, who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
 		switch (response.code) {
 			case 0:
-				break;
+				$(location).attr('href', response.data);
+			break;
 			case 1:
 				userName.showBalloon({
 					html: true,
@@ -70,17 +73,28 @@ function validateSignin(token, signinBtn) {
 					position: response.position,
 					contents: response.msg
 				});
+			break;
 		}
 
-		insertFormInput(false);
-		signinBtn.html(btnText);
-		setTimeout(function () {
-			userName.hideBalloon();
-		}, 2000);
-		userPass.val('')
-
-		if (client == 'pichincha') {
-			userName.val('')
+		if (response.code != 0) {
+			restarForm(signinBtn);
 		}
 	})
+}
+/**
+ * @info restaura el formulario
+ * @author J. Enrique Peñaloza Piñero
+ * @date May 22th, 2020
+ */
+function restarForm(signinBtn) {
+	insertFormInput(false);
+	signinBtn.html(btnText);
+	setTimeout(function () {
+		userName.hideBalloon();
+	}, 2000);
+	userPass.val('')
+
+	if (client == 'pichincha') {
+		userName.val('')
+	}
 }

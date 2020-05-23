@@ -3,8 +3,7 @@
 	<ul class="flex my-0 items-center list-style-none list-inline">
 		<li>
 			<a class="mt-1 mx-1 regular text-decoration-none white" href="<?= lang('GEN_NO_LINK') ?>">
-				Nombre completo
-				<!-- <?= $fullName ?> -->
+				<?= $fullName ?>
 				<i class="ml-5 icon icon-chevron-down" aria-hidden="true"></i>
 			</a>
 			<ul class="dropdown regular tertiary bg-secondary">

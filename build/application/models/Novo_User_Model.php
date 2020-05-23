@@ -56,48 +56,65 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->validateUserLogged($userName);
-				$this->response->code = 0;
-				$this->response->data = base_url('tarjetas');
-				$fullSignin = TRUE;
-				$fullName = mb_strtolower($response->primerNombre).' ';
-				$fullName.= mb_strtolower($response->primerApellido);
-				$formatDate = $this->config->item('format_date');
-				$formatTime = $this->config->item('format_time');
-				$lastSession = date(
-					"$formatDate $formatTime", strtotime(
-						str_replace('/', '-', $response->fechaUltimaConexion)
-					)
-				);
-				/* $userData = [
-					'sessionId' => $response->logAccesoObject->sessionId,
-					'logged' => TRUE,
-					'userId' => $response->idUsuario,
-					'userName' => $response->userName,
-					'fullName' => ucwords(mb_strtolower($fullName)),
-					'lastSession' => $lastSession,
-					'token' => $response->token,
-					'client' => $this->config->item('client'),
-					'time' => $time,
-					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-					'countrySess' => $this->config->item('country'),
-					'countryUri' => $this->config->item('country-uri')
-				];
-				$this->session->set_userdata($userData); */
+				if ($this->validateUserLogged($userName)) {
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->msg = lang('LOGIN_INCORRECTLY_CLOSED');
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> 'inicio',
+							'action'=> 'close'
+						]
+					];
+				} else {
+					$this->response->code = 0;
+					$this->response->data = base_url(lang('GEN_LINK_CARDS_LIST'));
+					$fullSignin = TRUE;
+					$fullName = mb_strtolower($response->primerNombre).' ';
+					$fullName.= mb_strtolower($response->primerApellido);
+					$formatDate = $this->config->item('format_date');
+					$formatTime = $this->config->item('format_time');
+					$lastSession = date(
+						"$formatDate $formatTime", strtotime(
+							str_replace('/', '-', $response->fechaUltimaConexion)
+						)
+					);
+					$userData = [
+						'logged' => TRUE,
+						'encryptKey' => $response->keyUpdate,
+						'sessionId' => $response->logAccesoObject->sessionId,
+						'userId' => $response->idUsuario,
+						'userName' => $response->userName,
+						'fullName' => ucwords(mb_strtolower($fullName)),
+						'lastSession' => $lastSession,
+						'token' => $response->token,
+						'client' => $this->config->item('client'),
+						'time' => $time,
+						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
+						'countrySess' => $response->keyUpdate,
+						'countryUri' => $this->config->item('country-uri')
+					];
+					$this->session->set_userdata($userData);
 
-				if ($response->passwordTemp == '1') {
-					$fullSignin = FALSE;
-					$this->session->set_flashdata('changePassword', 'TemporalPass');
-				}
+					$data = ['username' => $userName];
+					$this->db->where('id', $this->session->session_id)
+					->update('cpo_sessions', $data);
 
-				if ($response->passwordVencido == '1') {
-					$fullSignin = FALSE;
-					$this->session->set_flashdata('changePassword', 'expiredPass');
-				}
+					if ($response->passwordTemp == '1') {
+						$fullSignin = FALSE;
+						$this->session->set_flashdata('changePassword', 'TemporalPass');
+					}
 
-				if (!$fullSignin) {
-					$this->session->unset_userdata('logged');
-					$this->response->data = base_url('cambiar-clave');
+					if ($response->passwordVencido == '1') {
+						$fullSignin = FALSE;
+						$this->session->set_flashdata('changePassword', 'expiredPass');
+					}
+
+					if (!$fullSignin) {
+						$this->session->unset_userdata('logged');
+						$this->response->data = base_url(lang('GEN_LINK_CHANGE_PASS'));
+					}
 				}
 				break;
 			case -1:
@@ -156,7 +173,7 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_Signin');
 	}
 	/**
-	 * @info Método para recuperar contraseña
+	 * @info Método para validar si el usuariio esta logueado
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29th, 2019
 	 */
@@ -166,17 +183,15 @@ class Novo_User_Model extends NOVO_Model {
 		$logged = FALSE;
 
 		$this->db->select(['id', 'username'])
-			->where('username',  $userName)
-			->get_compiled_select('cpo_sessions', FALSE);
+		->where('username',  $userName)
+		->get_compiled_select('cpo_sessions', FALSE);
 
 		$result = $this->db->get()->result_array();
 
 		if (count($result) > 0) {
+			$this->db->where('id', $result[0]['id'])
+			->delete('cpo_sessions');
 			$logged = TRUE;
-		} else {
-			/* $this->db->where('id', $result[0]['id']);
-			$this->db->delete('cpo_sessions'); */
-			$this->session->sess_destroy();
 		}
 
 		return $logged;
@@ -354,7 +369,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
-		$userName = $dataRequest ? mb_strtoupper($dataRequest->user) : $this->userName;
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->userName;
 
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
@@ -363,7 +378,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->idUsuario = $userName;
-		$this->dataRequest->codigoGrupo = $this->session->codigoGrupo;
 
 		$response = $this->sendToService(lang('GEN_FINISH_SESSION'));
 
@@ -371,13 +385,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 
-		session_destroy();
-		$access = [
-			'user_access',
-			'logged',
-			'userId'
-		];
-		$this->session->unset_userdata($access);
+		$this->session->sess_destroy();
 
 		return $this->responseToTheView(lang('GEN_FINISH_SESSION'));
 	}

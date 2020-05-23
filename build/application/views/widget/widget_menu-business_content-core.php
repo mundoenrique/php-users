@@ -39,25 +39,3 @@
 	</ul>
 </nav>
 <?php endif; ?>
-
-
-
-
-<?php
-log_message('INFO', '*************************'.json_encode($mainMenu));
-
-$menu = '';
-
-foreach($mainMenu AS $pos1 => $menuLevel1) {
-	log_message('INFO', '*************************$pos 1 '.json_encode($pos1));
-	log_message('INFO', '*************************$menuLevel 1 '.json_encode($menuLevel1));
-	foreach($menuLevel1 AS $pos2 => $menuLevel2) {
-		log_message('INFO', '*************************$pos 2 '.json_encode($pos2));
-		log_message('INFO', '*************************$menuLevel 2 '.json_encode($menuLevel2));
-		foreach($menuLevel2 AS $pos3 => $menuLevel3) {
-			log_message('INFO', '*************************$pos 3 '.json_encode($pos3));
-			log_message('INFO', '*************************$menuLevel 3 '.json_encode($menuLevel3));
-		}
-	}
-
-}

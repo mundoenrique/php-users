@@ -23,6 +23,13 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'finishSession' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+		]
+	],
 	'getdetail' => [
 		[
 			'field' => 'request',

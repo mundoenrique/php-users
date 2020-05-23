@@ -23,12 +23,10 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'signin';
 
-		/* if($this->session->has_userdata('logged')) {
-
+		if ($this->session->has_userdata('logged')) {
+			redirect(base_url(lang('GEN_LINK_CARDS_LIST')), 'location', 301);
 			exit();
-		} */
-
-		$this->session->sess_destroy();
+		}
 
 		if($this->render->activeRecaptcha) {
 			$this->load->library('recaptcha');

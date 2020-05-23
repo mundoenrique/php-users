@@ -69,13 +69,13 @@ class NOVO_Controller extends CI_Controller {
 		languageLoad('generic');
 		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->countryUri);
-		if($this->session->has_userdata('userId')) {
+		/* if($this->session->has_userdata('userId')) {
 			if($this->session->countrySess !== $this->config->item('country')) {
 				$urlRedirect = str_replace($this->countryUri.'/', $this->session->countryUri.'/', base_url('cerrar-sesion/inicio'));
 				redirect($urlRedirect, 'location', 301);
 				exit();
 			}
-		}
+		} */
 		$this->skin = $this->config->item('client');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
@@ -176,12 +176,12 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			if($this->render->logged) {
+			/* if($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"menu-datepicker"
 				);
-			}
+			} */
 
 		} else {
 			redirect(base_url('inicio'), 'location');
