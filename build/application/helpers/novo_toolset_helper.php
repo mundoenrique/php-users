@@ -21,17 +21,30 @@ if (!function_exists('assetUrl')) {
 }
 
 if (!function_exists('clientUrlValidate')) {
-	function clientUrlValidate($country) {
+	function clientUrlValidate($client) {
+		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
-		if(!in_array($country, $accessUrl)) {
-			$country = current($accessUrl);
-			redirect(base_url($country.'/inicio'), 'location', 301);
+
+		if(!in_array($client, $accessUrl)) {
+			$client = current($accessUrl);
+			redirect(base_url($client.'/inicio'), 'location', 301);
 		}
 
-		$CI->config->load('config-'.$country);
+		if (in_array($client, $accessUrl)) {
+			switch ($client) {
+				case 'default':
+					redirect(base_url(), 'location', 301);
+				break;
+				case 'pichincha':
+					redirect(base_url('pichincha/home'), 'location', 301);
+				break;
+			}
+		}
+
+		$CI->config->load('config-'.$client);
 	}
 }
 
