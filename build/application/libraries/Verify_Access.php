@@ -133,6 +133,10 @@ class Verify_Access {
 				case 'profile':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
+				case 'getBalance':
+				case 'services':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
 				case 'changePassword':
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
 				break;

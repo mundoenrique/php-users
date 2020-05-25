@@ -37,6 +37,25 @@ $config = [
 			'rules' => 'trim|alpha|required'
 		]
 	],
+	'userCardsList' => [
+		[
+			'field' => 'cardList',
+			'label' => 'cardList',
+			'rules' => 'trim|regex_match[/getCardList/]|required'
+		]
+	],
+	'getBalance' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'userIdNumber',
+			'label' => 'userIdNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
 	'getdetail' => [
 		[
 			'field' => 'request',

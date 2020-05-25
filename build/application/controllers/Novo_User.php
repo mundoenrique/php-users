@@ -242,9 +242,6 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/profile"
 		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);

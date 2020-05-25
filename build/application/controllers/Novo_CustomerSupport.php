@@ -26,9 +26,6 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"support/services"
 		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);
@@ -47,9 +44,6 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"support/reports"
 		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);
@@ -68,9 +62,6 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"support/notifications"
 		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_NOTIFICATIONS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);

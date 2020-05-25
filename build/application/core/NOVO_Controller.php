@@ -123,7 +123,7 @@ class NOVO_Controller extends CI_Controller {
 			$valid = TRUE;
 
 			if ($_POST && $access) {
-				//log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+				log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
 				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
 
@@ -213,8 +213,8 @@ class NOVO_Controller extends CI_Controller {
 
 		$this->render->code = $responseView;
 		$download = FALSE;
-		$this->render->enterpriseList = $this->session->enterpriseSelect->list;
-		$this->render->enterpriseData =  $this->session->enterpriseInf;
+		/* $this->render->enterpriseList = $this->session->enterpriseSelect->list;
+		$this->render->enterpriseData =  $this->session->enterpriseInf; */
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
@@ -225,7 +225,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->prefix = $this->session->productInf->productPrefix;
 		}
 
-		if(($this->render->code == 0  && $active) || $download) {
+		/* if(($this->render->code == 0  && $active) || $download) {
 
 			if(count($this->render->enterpriseList) > 1 || $this->products) {
 				array_push(
@@ -238,7 +238,7 @@ class NOVO_Controller extends CI_Controller {
 				$this->render->widget->countProducts = $this->products;
 				$this->render->widget->actionForm = 'detalle-producto';
 			}
-		}
+		} */
 
 		if($this->render->code > 2) {
 			$this->render->title = $responseView->title;

@@ -148,7 +148,8 @@ if (!function_exists('languageLoad')) {
 			default:
 				$languages = [
 					'signin' => ['login'],
-					'accessRecover' => ['recover']
+					'accessRecover' => ['recover'],
+					'userCardsList' => ['cards']
 				];
 		}
 
@@ -279,5 +280,29 @@ if (!function_exists('mainMenu'))
 			'REPORTS' => [],
 			'CUSTOMER_SUPPORT' => []
 		];
+	}
+}
+
+if (!function_exists('normalizeName')) {
+	function normalizeName($name) {
+		$pattern = [
+			'/\s/',
+			'/á/', '/à/', '/ä/', '/â/', '/ª/', '/Á/', '/À/', '/Â/', '/Ä/',
+			'/é/', '/è/', '/ë/', '/ê/', '/É/', '/È/', '/Ê/', '/Ë/',
+			'/í/', '/ì/', '/ï/', '/î/', '/Í/', '/Ì/', '/Ï/', '/Î/',
+			'/ó/', '/ò/', '/ö/', '/ô/', '/Ó/', '/Ò/', '/Ö/', '/Ô/',
+			'/ú/', '/ù/', '/ü/', '/û/', '/Ú/', '/Ù/', '/Û/', '/Ü/',
+			'/ñ/', '/Ñ/', '/ç/', '/Ç/'
+		];
+		$replace = [
+			'_',
+			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
+			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
+			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
+			'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
+			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
+			'n', 'N', 'c', 'C'
+		];
+		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
 }

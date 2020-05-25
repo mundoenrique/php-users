@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info Módelo para la información del usuario
+ * @info Módelo para la información de las tarjetas del usuario
  * @author J. Enrique Peñaloza Piñero
- * @date May 14th, 2019
+ * @date May 14th, 2020
  */
 class Novo_User_Model extends NOVO_Model {
 
@@ -15,7 +15,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el inicio de sesión
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 14th, 2019
+	 * @date May 14th, 2020
 	 */
 	public function callWs_Signin_User($dataRequest)
 	{
@@ -179,7 +179,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para validar si el usuariio esta logueado
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
+	 * @date April 29th, 2020
 	 */
 	private function validateUserLogged($userName)
 	{
@@ -203,7 +203,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para recuperar contraseña
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
+	 * @date April 29th, 2020
 	 */
 	public function callWs_RecoverPass_User($dataRequest)
 	{
@@ -274,9 +274,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
-	 * @modified Diego Acosta García
-	 * @date April 29th, 2020
+	 * @date April 22th, 2020
 	 */
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
