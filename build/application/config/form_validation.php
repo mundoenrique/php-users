@@ -23,6 +23,28 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'accessRecover' => [
+		[
+			'field' => 'recoveryUser',
+			'label' => 'recoveryUser',
+			'rules' => 'trim|regex_match[/U/]'
+		],
+		[
+			'field' => 'recoveryPwd',
+			'label' => 'recoveryPwd',
+			'rules' => 'trim|regex_match[/C/]'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',

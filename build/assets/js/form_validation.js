@@ -37,13 +37,19 @@ function validateForms(form) {
 		rules: {
 			"userName":	{required: true, pattern: alphanumunder},
 			"userPass": 	{verifyRequired: '#userName', verifyPattern: '#userName'},
+			"recoveryAccess": 	{required: true},
+			"email": 	{required: true, pattern: emailValid},
+			"idNumber": 	{required: true, pattern: alphanum},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
 			"userPass": {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT,
-			}
+			},
+			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
+			"email": lang.VALIDATE_EMAIL,
+			"idNumber": lang.VALIDATE_ID_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

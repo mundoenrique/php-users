@@ -201,32 +201,33 @@ class Novo_User_Model extends NOVO_Model {
 		return $logged;
 	}
 	/**
-	 * @info Método para recuperar contraseña
+	 * @info Método para recuperar contraseña o usuario
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2020
+	 * @date May 24th, 2020
 	 */
-	public function callWs_RecoverPass_User($dataRequest)
+	public function callWs_AccessRecover_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: RecoverPass Method Initialized');
+		log_message('INFO', 'NOVO User Model: AccessRecover Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.UsuarioTO';
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
-		$this->dataAccessLog->function = 'Recuperar Clave';
-		$this->dataAccessLog->operation = 'Enviar Clave';
-		$userName = mb_strtoupper($dataRequest->user);
-		$this->dataAccessLog->userName = $userName;
+		$this->dataAccessLog->function = 'Recuperar acceso';
+		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
+		$this->dataAccessLog->userName = $dataRequest->email;;
 
-		$this->dataRequest->idOperation = 'olvidoClave';
-		$this->dataRequest->userName = $userName;
-		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
+		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
+		$this->dataRequest->id_ext_per = $dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->pais = 'Global';
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-		$response = $this->sendToService(lang('GEN_RECOVER_PASS'));
+		$msgGeneral = '0';
+
+		$response = $this->sendToService('callWs_AccessRecover');
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
+				$recover = isset($dataRequest->recoveryPwd) ? lang('RECOVER_PASS_TEMP') : lang('RECOVER_USERNAME');
+				$this->response->msg = novoLang(lang('RECOVER_SUCCESS'),  [$maskMail, $recover]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
@@ -236,31 +237,15 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
-			case -6:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_COMPANNY_NOT_ASSIGNED'), $this->dataRequest->userName);
-				break;
-			case -150:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('GEN_FISCAL_REGISTRY'));
-				break;
-			case -159:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_EMAIL_NO_FOUND'), $maskMail);
-				break;
-			case -173:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
-				break;
-			case -205:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_UNREGISTERED_USER');
-				$this->response->msg.= novoLang(lang('RESP_SUPPORT'), [lang('RESP_SUPPORT_MAIL'), lang('RESP_SUPPORT_TELF')]);
+			case -186:
+			case -187:
+				$msgGeneral = '1';
+				$this->response->msg = LANG('RECOVER_DATA_INVALID');
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
-			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+		if($this->isResponseRc != 0 && $msgGeneral == '1') {
+			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('GEN_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
@@ -269,7 +254,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
+		return $this->responseToTheView('callWs_AccessRecover');
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
