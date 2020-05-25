@@ -149,6 +149,7 @@ if (!function_exists('languageLoad')) {
 				$languages = [
 					'signin' => ['login'],
 					'accessRecover' => ['recover'],
+					'changePassword' => ['user'],
 					'userCardsList' => ['cards']
 				];
 		}

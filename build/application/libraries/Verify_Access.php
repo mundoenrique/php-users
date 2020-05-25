@@ -122,11 +122,6 @@ class Verify_Access {
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
-			$temporalAccess = ['changePassword', 'userCardsList', 'cardDetail', 'services', 'profile', 'signup', 'expensesCategory', 'notifications'];
-			$auth = in_array($module, $temporalAccess);
-		}
-
-		if(!$auth) {
 			switch($module) {
 				case 'keepSession':
 				case 'userCardsList':

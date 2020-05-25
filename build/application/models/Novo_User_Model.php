@@ -170,7 +170,9 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				break;
 				default:
+				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
+				}
 
 		}
 
@@ -281,44 +283,49 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($new->password)
 		);
 
-		$this->dataRequest->idOperation = 'cambioClave';
+		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($new));
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
 		$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
-				if(!$this->session->has_userdata('logged')) {
+				if($this->session->has_userdata('userId')) {
 					$this->callWs_FinishSession_User();
 				}
 				$this->response->code = 4;
-				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
-				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
+				$goLogin = $this->session->has_userdata('logged') ? '' : lang('USER_PASS_LOGIN');
+				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> $this->session->has_userdata('logged') ? 'close' :  'redirect'
+						'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') :'inicio',
+						'action'=> 'redirect'
 					]
 				];
 				break;
 			case -4:
 				$code = 1;
-				$this->response->msg = lang('RESP_PASSWORD_USED');
+				$this->response->msg = lang('USER_PASS_USED');
 				break;
-			case -22:
+			case -192:
 				$code = 1;
-				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
+				$this->response->msg = lang('USER_PASS_INCORRECT');
 				break;
+			break;
+			default:
+			if ($this->isResponseRc != -61) {
+				$this->session->sess_destroy();
+			}
 		}
 
 		if($this->isResponseRc != 0 && $code == 1) {
 			$this->session->set_flashdata('changePassword', $changePassType);
-			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
@@ -366,13 +373,16 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->userName = $userName;
 
-		$response = $this->sendToService('callWs_FinishSession');
+		if ($this->session->logged) {
+			$response = $this->sendToService('callWs_FinishSession');
+		}
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 		$userData = ['logged', 'encryptKey', 'sessionId', 'token'];
 		$this->session->unset_userdata($userData);
+		$this->session->sess_destroy();
 
 		return $this->responseToTheView('callWs_FinishSession');
 	}

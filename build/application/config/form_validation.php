@@ -45,6 +45,23 @@ $config = [
 			'rules' => 'trim|alpha_numeric|required'
 		]
 	],
+	'changePassword' => [
+		[
+			'field' => 'currentPass',
+			'label' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPass',
+			'label' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'label' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',

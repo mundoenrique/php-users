@@ -133,12 +133,6 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: changePassword Method Initialized');
 
 		$view = 'changePassword';
-
-		/* if(!$this->session->flashdata('changePassword')) {
-			redirect(base_url('inicio'), 'location');
-			exit();
-		} */
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
@@ -147,18 +141,16 @@ class Novo_User extends NOVO_Controller {
 			"user/changePassword"
 		);
 
-		/* switch($this->session->flashdata('changePassword')) {
-			case 'newUser':
-			$this->render->message = novoLang(lang("PASSWORD_NEWUSER"), lang('GEN_SYSTEM_NAME'));
+		switch($this->session->flashdata('changePassword')) {
+			case 'TemporalPass':
+				$this->render->message = novoLang(lang("USER_PASS_TEMPORAL"), lang('GEN_SYSTEM_NAME'));
 			break;
 			case 'expiredPass':
-			$this->render->message = novoLang(lang("PASSWORD_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+				$this->render->message = novoLang(lang("USER_PASS_EXPIRED"), lang('GEN_SYSTEM_NAME'));
 			break;
-		} */
+		}
 
-		/* $this->render->userType = $this->session->flashdata('userType');
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
-		$this->session->set_flashdata('userType', $this->session->flashdata('userType')); */
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_CHANGE_PASS');
 		$this->views = ['user/'.$view];
@@ -179,7 +171,6 @@ class Novo_User extends NOVO_Controller {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
-		$this->session->sess_destroy();
 
 		if($redirect == 'fin') {
 			$pos = array_search('datepicker_options', $this->includeAssets->jsFiles);

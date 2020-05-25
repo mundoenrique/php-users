@@ -135,7 +135,7 @@ function callNovoCore(who, where, request, _response_) {
 			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
-					link: lang.GEN_ENTERPRISE_LIST,
+					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
 					action: 'redirect'
 				}
 			}

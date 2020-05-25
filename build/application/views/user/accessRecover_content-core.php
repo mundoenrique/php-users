@@ -52,7 +52,7 @@
 						</div>
 						<div class="line my-2"></div>
 						<div class="flex items-center justify-end pt-3">
-							<a class="btn btn-small btn-link" href="<?= base_url('inicio');?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+							<a class="btn btn-small btn-link big-modal" href="<?= base_url('inicio');?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 							<button id="recoverAccessBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 						</div>
 					</form>

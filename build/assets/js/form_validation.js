@@ -40,6 +40,9 @@ function validateForms(form) {
 			"recoveryAccess": 	{required: true},
 			"email": 	{required: true, pattern: emailValid},
 			"idNumber": 	{required: true, pattern: alphanum},
+			"current-pass": {required: true},
+			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
+			"confirm-pass": {required: true, equalTo: "#newPass"},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -50,6 +53,16 @@ function validateForms(form) {
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"current-pass": lang.VALIDATE_CURRENT_PASS,
+			"new-pass": {
+				required: lang.VALIDATE_NEW_PASS,
+				differs: lang.VALIDATE_DIFFERS_PASS,
+				validatePass: lang.VALIDATE_REQUIREMENTS_PASS
+			},
+			"confirm-pass": {
+				required: lang.VALIDATE_CONFIRM_PASS,
+				equalTo: lang.VALIDATE_IQUAL_PASS
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -62,6 +75,15 @@ function validateForms(form) {
 
 	$.validator.methods.verifyPattern = function(value, element, param) {
 		return userPassword.test(value) && alphanumunder.test($(param).val());
+	}
+
+	$.validator.methods.differs = function(value, element, param) {
+		var target = $(param);
+		return value !== target.val();
+	}
+
+	$.validator.methods.validatePass = function(value, element, param) {
+		return passStrength(value);
 	}
 
 	form.validate().resetForm();
