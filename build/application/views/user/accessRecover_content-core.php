@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div id="recovery" class="recovery-content h-content">
+<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+</div>
+<div id="recovery" class="recovery-content h-content hide-out hide">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<header class="">
 			<h1 class="text regular inline"><?= lang('GEN_MENU_ACCESS_RECOVER'); ?></h1>
@@ -7,13 +10,10 @@
 		</header>
 		<section>
 			<div class="pt-3 regular">
-				<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
-					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-				</div>
 				<h2 class="text h3 mb-2"><?= lang('RECOVER_VERIFY_DATA'); ?></h2>
 				<p><?= novoLang(lang('RECOVER_USER_PASS'), lang('GEN_SYSTEM_NAME')); ?></p>
 				<div class="line my-4"></div>
-				<div class="max-width-1 fit-lg mx-auto pt-4 hide-out hide">
+				<div class="max-width-1 fit-lg mx-auto pt-4">
 					<form id="recoverAccessForm" class="mt-2" method="POST">
 						<div class="form-group">
 							<label class="mr-2"><?= lang('RECOVER_NEED') ?></label>
@@ -22,7 +22,7 @@
 								<label class="custom-control-label" for="recoveryUser"><?= lang('GEN_USER'); ?></label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline">
-								<input id="recoveryPwd" name="recoveryAccess" class="custom-control-input" type="radio"value="C" disabled>
+								<input id="recoveryPwd" name="recoveryAccess" class="custom-control-input" type="radio" value="C" disabled>
 								<label class="custom-control-label" for="recoveryPwd"><?= lang('GEN_PASSWORD'); ?></label>
 							</div>
 							<div class="help-block"></div>
@@ -46,7 +46,7 @@
 							<?php endif; ?>
 							<div class="form-group col-lg-4">
 								<label for="idNumber"><?= lang('GEN_DNI'); ?></label>
-								<input id="idNumber" name="idNumber" class="form-control" type="text"disabled>
+								<input id="idNumber" name="idNumber" class="form-control" type="text" disabled>
 								<div class="help-block"></div>
 							</div>
 						</div>
