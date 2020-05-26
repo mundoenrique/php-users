@@ -1,95 +1,51 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div id="dashboard" class="dashboard-content h-100 bg-content">
-	<div class="">
-		<header class="">
-			<h1 class="h3 semibold primary">Buenos días usuario</h1>
-		</header>
-		<section>
-			<div class="pt-3">
-				<div class="flex mt-3 light items-center">
-					<div class="flex col-3">
-						<h2 class="h4 regular tertiary mb-0">Mis productos</h2>
-					</div>
+	<header>
+		<h1 class="h3 semibold primary"><?= $greeting.' '.$fullName ?></h1>
+	</header>
+	<section>
+		<div class="pt-3">
+			<div class="flex mt-3 light items-center">
+				<div class="flex col-3">
+					<h2 class="h4 regular tertiary mb-0"><?= lang('CARDS_MY_PRODUCTS') ?></h2>
+					<form id="cardListForm" action="<?= base_url(lang('GEN_LINK_CARDS_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
+						<input type="hidden" name="cardList" value="getCardList">
+					</form>
+				</div>
+				<div class="flex h6 flex-auto justify-end">
 					<div class="flex h6 flex-auto justify-end">
-						<div class="flex h6 flex-auto justify-end">
-							<span><?= lang('GEN_LAST_ACCESS') ?>: : <?= $lastSession ?></span>
-						</div>
+						<span><?= lang('GEN_LAST_ACCESS') ?>: <?= $lastSession ?></span>
 					</div>
-				</div>
-				<div class="line mt-1"></div>
-				<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
-					<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-				</div>
-				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center hide-out hide">
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info maestro p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA VIÁTICOS</p>
-							<p class="item-cardnumber mb-0">604842******1511</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info visa p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA VIÁTICOS</p>
-							<p class="item-cardnumber mb-0">604842******4714</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info maestro p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA PROCURA</p>
-							<p class="item-cardnumber mb-0">604842******9317</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info maestro p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA NÓMINA</p>
-							<p class="item-cardnumber mb-0">604842******9217</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info maestro p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA PROMOCIONES</p>
-							<p class="item-cardnumber mb-0">604842******0216</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info visa-electron p-2 h5 bg-white">
-							<p class="item-category semibold">BONUS ALIMENTACIÓN</p>
-							<p class="item-cardnumber mb-0">604841******2716</p>
-							<span class="semibold danger">Tarjeta bloqueada</span>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info mastercard p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA RECARGA MASIVA</p>
-							<p class="item-cardnumber mb-0">526749******5015</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-					<div class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="../../../assets/images/bnt/bnt_default.svg" alt="Tarjeta Banorte" />
-						<div class="item-info mastercard p-2 h5 bg-white">
-							<p class="item-category semibold">PLATA SALUD</p>
-							<p class="item-cardnumber mb-0">526749******0124</p>
-							<p class="item-balance mb-0 h6 light text">$ ---</p>
-						</div>
-					</div>
-				</div>
-				<div class="flex flex-column items-center justify-center pt-5">
-					<h3 class="h4 regular mb-0">No posee productos registrados.</h3>
 				</div>
 			</div>
-		</section>
-	</div>
+			<div class="line mt-1"></div>
+			<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
+				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			</div>
+			<div class="hide-out hide">
+				<div id="cardList" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
+					<?php foreach ($cardsList AS $cards): ?>
+						<!-- big-modal -->
+					<div class="dashboard-item    p-1 mx-1 mb-1 get-detail">
+						<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
+						<div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
+							<p class="item-category semibold"><?= $cards->productName ?></p>
+							<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
+							<p class="item-balance mb-0 h6 light text"><?= lang('GEN_WAIT_BALANCE') ?></p>
+						</div>
+						<form action="<?= base_url(lang('GEN_LINK_CARD_DETAIL')); ?>"  method="POST">
+							<input type="text" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
+							<input type="text" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
+						</form>
+					</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<div id="no-products" class="hide">
+				<div class="flex flex-column items-center justify-center pt-5">
+					<h3 class="h4 regular mb-0"><?= lang('CARDS_NO_LIST'); ?></h3>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>

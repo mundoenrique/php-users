@@ -495,6 +495,7 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'detalles',
+	'[\w\-]+/lista-de-tarjetas',
 	'[\w\-]+/detalle',
 	'[\w\-]+/detalle/download',
 	'[\w\-]+/atencioncliente',

@@ -34,7 +34,6 @@ $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';
-//SUBMENU
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -67,6 +66,8 @@ $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
+$lang['GEN_WAIT_BALANCE'] = 'Esperando Saldo...';
+$lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';

@@ -23,6 +23,45 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'accessRecover' => [
+		[
+			'field' => 'recoveryUser',
+			'label' => 'recoveryUser',
+			'rules' => 'trim|regex_match[/U/]'
+		],
+		[
+			'field' => 'recoveryPwd',
+			'label' => 'recoveryPwd',
+			'rules' => 'trim|regex_match[/C/]'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
+	'changePassword' => [
+		[
+			'field' => 'currentPass',
+			'label' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPass',
+			'label' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'label' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',
@@ -35,6 +74,25 @@ $config = [
 			'field' => 'signout',
 			'label' => 'signout',
 			'rules' => 'trim|alpha|required'
+		]
+	],
+	'userCardsList' => [
+		[
+			'field' => 'cardList',
+			'label' => 'cardList',
+			'rules' => 'trim|regex_match[/getCardList/]|required'
+		]
+	],
+	'getBalance' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'userIdNumber',
+			'label' => 'userIdNumber',
+			'rules' => 'trim|alpha_numeric|required'
 		]
 	],
 	'getdetail' => [

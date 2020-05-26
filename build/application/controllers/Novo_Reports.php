@@ -26,9 +26,6 @@ class Novo_Reports extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"reports/expensesCategory"
 		);
-
-		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->views = ['reports/'.$view];
 		$this->loadView($view);
@@ -49,7 +46,6 @@ class Novo_Reports extends NOVO_Controller {
 		);
 
 		$this->render->activeHeader = TRUE;
-		$this->render->activeMenuUser = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_NOTIFICATIONS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);

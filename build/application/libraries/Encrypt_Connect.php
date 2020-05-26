@@ -41,7 +41,7 @@ class Encrypt_Connect {
 		while ((strlen($dataB) % 8) != 0) {
 			$dataB .= " ";
 		}
-		$this->keyNovo = $this->CI->session->has_userdata('logged') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
 		$cryptData = mcrypt_encrypt(
 			MCRYPT_DES, $this->keyNovo, $dataB, MCRYPT_MODE_CBC, $this->iv
 		);
@@ -57,7 +57,7 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 
 		$data = base64_decode($cryptData);
-		$this->keyNovo = $this->CI->session->has_userdata('logged') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
 		);

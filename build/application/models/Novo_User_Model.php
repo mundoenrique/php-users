@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info Módelo para la información del usuario
+ * @info Módelo para la información de las tarjetas del usuario
  * @author J. Enrique Peñaloza Piñero
- * @date May 14th, 2019
+ * @date May 14th, 2020
  */
 class Novo_User_Model extends NOVO_Model {
 
@@ -15,7 +15,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para el inicio de sesión
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 14th, 2019
+	 * @date May 14th, 2020
 	 */
 	public function callWs_Signin_User($dataRequest)
 	{
@@ -93,7 +93,8 @@ class Novo_User_Model extends NOVO_Model {
 						'time' => $time,
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'countrySess' => $response->codPais,
-						'countryUri' => $this->config->item('country-uri')
+						'countryUri' => $this->config->item('country-uri'),
+						'client_agent' => $this->agent->agent_string()
 					];
 					$this->session->set_userdata($userData);
 
@@ -169,7 +170,9 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				break;
 				default:
+				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
+				}
 
 		}
 
@@ -178,7 +181,7 @@ class Novo_User_Model extends NOVO_Model {
 	/**
 	 * @info Método para validar si el usuariio esta logueado
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
+	 * @date April 29th, 2020
 	 */
 	private function validateUserLogged($userName)
 	{
@@ -200,32 +203,33 @@ class Novo_User_Model extends NOVO_Model {
 		return $logged;
 	}
 	/**
-	 * @info Método para recuperar contraseña
+	 * @info Método para recuperar contraseña o usuario
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
+	 * @date May 24th, 2020
 	 */
-	public function callWs_RecoverPass_User($dataRequest)
+	public function callWs_AccessRecover_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: RecoverPass Method Initialized');
+		log_message('INFO', 'NOVO User Model: AccessRecover Method Initialized');
 
-		$this->className = 'com.novo.objects.TO.UsuarioTO';
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Usuario';
-		$this->dataAccessLog->function = 'Recuperar Clave';
-		$this->dataAccessLog->operation = 'Enviar Clave';
-		$userName = mb_strtoupper($dataRequest->user);
-		$this->dataAccessLog->userName = $userName;
+		$this->dataAccessLog->function = 'Recuperar acceso';
+		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
+		$this->dataAccessLog->userName = $dataRequest->email;;
 
-		$this->dataRequest->idOperation = 'olvidoClave';
-		$this->dataRequest->userName = $userName;
-		$this->dataRequest->idEmpresa = $dataRequest->idEmpresa;
+		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
+		$this->dataRequest->id_ext_per = $dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
+		$this->dataRequest->pais = 'Global';
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
-		$response = $this->sendToService(lang('GEN_RECOVER_PASS'));
+		$msgGeneral = '0';
+
+		$response = $this->sendToService('callWs_AccessRecover');
 
 		switch($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
-				$this->response->msg = novoLang(lang('RESP_TEMP_PASS'), [$this->dataRequest->userName, $maskMail]);
+				$recover = isset($dataRequest->recoveryPwd) ? lang('RECOVER_PASS_TEMP') : lang('RECOVER_USERNAME');
+				$this->response->msg = novoLang(lang('RECOVER_SUCCESS'),  [$maskMail, $recover]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
@@ -235,31 +239,15 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				break;
-			case -6:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_COMPANNY_NOT_ASSIGNED'), $this->dataRequest->userName);
-				break;
-			case -150:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_FISCAL_REGISTRY_NO_FOUND'), lang('GEN_FISCAL_REGISTRY'));
-				break;
-			case -159:
-				$this->response->code = 1;
-				$this->response->msg = novoLang(lang('RESP_EMAIL_NO_FOUND'), $maskMail);
-				break;
-			case -173:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_EMAIL_NO_SENT');
-				break;
-			case -205:
-				$this->response->code = 1;
-				$this->response->msg = lang('RESP_UNREGISTERED_USER');
-				$this->response->msg.= novoLang(lang('RESP_SUPPORT'), [lang('RESP_SUPPORT_MAIL'), lang('RESP_SUPPORT_TELF')]);
+			case -186:
+			case -187:
+				$msgGeneral = '1';
+				$this->response->msg = LANG('RECOVER_DATA_INVALID');
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $this->response->code == 1) {
-			$this->response->title = lang('GEN_RECOVER_PASS_TITLE');
+		if($this->isResponseRc != 0 && $msgGeneral == '1') {
+			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('GEN_ICON_INFO');
 			$this->response->data = [
 				'btn1'=> [
@@ -268,14 +256,12 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		return $this->responseToTheView(lang('GEN_RECOVER_PASS'));
+		return $this->responseToTheView('callWs_AccessRecover');
 	}
 	/**
 	 * @info Método para el cambio de Contraseña
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date April 29th, 2019
-	 * @modified Diego Acosta García
-	 * @date April 29th, 2020
+	 * @date April 22th, 2020
 	 */
 	public function CallWs_ChangePassword_User($dataRequest)
 	{
@@ -297,44 +283,49 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($new->password)
 		);
 
-		$this->dataRequest->idOperation = 'cambioClave';
+		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($new));
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
 		$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
-				if(!$this->session->has_userdata('logged')) {
+				if($this->session->has_userdata('userId')) {
 					$this->callWs_FinishSession_User();
 				}
 				$this->response->code = 4;
-				$goLogin = $this->session->has_userdata('logged') ? '' : lang('RESP_PASSWORD_LOGIN');
-				$this->response->msg = novoLang(lang('RESP_PASSWORD_CHANGED'), $goLogin);
+				$goLogin = $this->session->has_userdata('logged') ? '' : lang('USER_PASS_LOGIN');
+				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> $this->session->has_userdata('logged') ? 'close' :  'redirect'
+						'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') :'inicio',
+						'action'=> 'redirect'
 					]
 				];
 				break;
 			case -4:
 				$code = 1;
-				$this->response->msg = lang('RESP_PASSWORD_USED');
+				$this->response->msg = lang('USER_PASS_USED');
 				break;
-			case -22:
+			case -192:
 				$code = 1;
-				$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
+				$this->response->msg = lang('USER_PASS_INCORRECT');
 				break;
+			break;
+			default:
+			if ($this->isResponseRc != -61) {
+				$this->session->sess_destroy();
+			}
 		}
 
 		if($this->isResponseRc != 0 && $code == 1) {
 			$this->session->set_flashdata('changePassword', $changePassType);
-			$this->session->set_flashdata('userType', $this->session->flashdata('userType'));
 
 			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
@@ -382,13 +373,16 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = 'desconectarUsuario';
 		$this->dataRequest->userName = $userName;
 
-		$response = $this->sendToService('callWs_FinishSession');
+		if ($this->session->logged) {
+			$response = $this->sendToService('callWs_FinishSession');
+		}
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
 		$userData = ['logged', 'encryptKey', 'sessionId', 'token'];
 		$this->session->unset_userdata($userData);
+		$this->session->sess_destroy();
 
 		return $this->responseToTheView('callWs_FinishSession');
 	}

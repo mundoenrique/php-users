@@ -67,6 +67,7 @@ class Asset {
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
+
 		$country = !$country || $this->CI->config->item('client') == 'novo' ? '' : $country.'/';
 		$file = assetPath($folder.'/'.$country.$fileName);
 		if (!file_exists($file)) {

@@ -27,6 +27,10 @@ class Tool_Browser {
 		$platform = 'Unidentified';
 		$browsersIn = FALSE;
 
+		if ($this->CI->session->has_userdata('logged') && $this->CI->session->client_agent !== $this->CI->agent->agent_string()) {
+			redirect(base_url('inicio'), 'location', 301);
+		}
+
 		if($this->CI->agent->is_browser()) {
 			$platform = 'desktop';
 			$validBrowser = [

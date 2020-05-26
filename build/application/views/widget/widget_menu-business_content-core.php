@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if($this->session->has_userdata('logged') || isset($activeMenuUser)): ?>
+<?php if($this->session->has_userdata('logged')): ?>
 <nav class="navbar-secondary line-main-nav flex bg-secondary items-center">
 	<ul class="main-nav-user flex my-0 list-style-none">
 		<?php foreach ($mainMenu AS $firstLevel => $menuLevel1): ?>

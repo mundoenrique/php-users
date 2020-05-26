@@ -3981,9 +3981,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	color: var(--color-fifth);
 }
 
-.widget-support:hover .widget-support-btn{
-	opacity: 0;
-}
 
 /* Product Cards */
 

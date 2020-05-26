@@ -21,17 +21,30 @@ if (!function_exists('assetUrl')) {
 }
 
 if (!function_exists('clientUrlValidate')) {
-	function clientUrlValidate($country) {
+	function clientUrlValidate($client) {
+		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
-		if(!in_array($country, $accessUrl)) {
-			$country = current($accessUrl);
-			redirect(base_url($country.'/inicio'), 'location', 301);
+
+		if(!in_array($client, $accessUrl)) {
+			$client = current($accessUrl);
+			redirect(base_url($client.'/inicio'), 'location', 301);
 		}
 
-		$CI->config->load('config-'.$country);
+		if (in_array($client, $accessUrl)) {
+			switch ($client) {
+				case 'default':
+					redirect(base_url(), 'location', 301);
+				break;
+				case 'pichincha':
+					redirect(base_url('pichincha/home'), 'location', 301);
+				break;
+			}
+		}
+
+		$CI->config->load('config-'.$client);
 	}
 }
 
@@ -135,7 +148,9 @@ if (!function_exists('languageLoad')) {
 			default:
 				$languages = [
 					'signin' => ['login'],
-					'accessRecover' => ['recover']
+					'accessRecover' => ['recover'],
+					'changePassword' => ['user'],
+					'userCardsList' => ['cards']
 				];
 		}
 
@@ -266,5 +281,29 @@ if (!function_exists('mainMenu'))
 			'REPORTS' => [],
 			'CUSTOMER_SUPPORT' => []
 		];
+	}
+}
+
+if (!function_exists('normalizeName')) {
+	function normalizeName($name) {
+		$pattern = [
+			'/\s/',
+			'/á/', '/à/', '/ä/', '/â/', '/ª/', '/Á/', '/À/', '/Â/', '/Ä/',
+			'/é/', '/è/', '/ë/', '/ê/', '/É/', '/È/', '/Ê/', '/Ë/',
+			'/í/', '/ì/', '/ï/', '/î/', '/Í/', '/Ì/', '/Ï/', '/Î/',
+			'/ó/', '/ò/', '/ö/', '/ô/', '/Ó/', '/Ò/', '/Ö/', '/Ô/',
+			'/ú/', '/ù/', '/ü/', '/û/', '/Ú/', '/Ù/', '/Û/', '/Ü/',
+			'/ñ/', '/Ñ/', '/ç/', '/Ç/'
+		];
+		$replace = [
+			'_',
+			'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a',
+			'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e',
+			'i', 'i', 'i', 'i', 'i', 'i', 'i', 'i',
+			'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
+			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
+			'n', 'N', 'c', 'C'
+		];
+		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
 }
