@@ -96,7 +96,10 @@
 		</nav>
 		<div class="line mb-1"></div>
 		<div id="results" class="mt-3">
-			<ul id="movementsList" class="feed fade-in mt-3 pl-0">
+			<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
+				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+			</div>
+			<ul id="movementsList" class="feed fade-in mt-3 pl-0 hide-out hide">
 				<li class="feed-item feed-income flex py-2 items-center">
 					<div class="flex px-2 flex-column items-center feed-date">
 						<span class="h5">13 Oct 2017</span>
@@ -213,6 +216,11 @@
 						<a href="javascript:" position="next">»</a>
 						<a href="javascript:" position="last">Última</a>
 					</nav>
+				</div>
+			</div>
+			<div id="" class="hide">
+				<div class="flex flex-column items-center justify-center pt-5">
+					<h3 class="h4 regular mb-0">No se encontraron resultados</h3>
 				</div>
 			</div>
 		</div>
