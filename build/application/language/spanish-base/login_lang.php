@@ -12,5 +12,5 @@ $lang['LOGIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión
 $lang['LOGIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
 $lang['LOGIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['LOGIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
-$lang['LOGIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary forgot-pass" href="%s">aquí</a>';
-$lang['LOGIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary forgot-pass" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
+$lang['LOGIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
+$lang['LOGIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
