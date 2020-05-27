@@ -26,9 +26,9 @@
 					<?= lang('GEN_BTN_SIGNIN') ?>
 				</button>
 				<?php if(lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON'): ?>
-				<a class="block mb-1 h5 primary forgot-pass" href="<?= base_url('recuperar-acceso');?>"><?= lang('LOGIN_ACCESS_RECOVER'); ?></a>
+				<a class="block mb-1 h5 primary hyper-link" href="<?= base_url('recuperar-acceso');?>"><?= lang('LOGIN_ACCESS_RECOVER'); ?></a>
 				<p class="mb-0 h5 center"><?= lang('LOGIN_NO_USER') ?>
-					<a class="forgot-pass" href="<?= base_url('identificar-usuario') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
+					<a class="hyper-link" href="<?= base_url('identificar-usuario') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
 				</p>
 				<?php endif; ?>
 			</form>
