@@ -35,6 +35,9 @@
 				</form>
 			</div>
 			<?php endforeach; ?>
+			<div class="dashboard-item mx-1"></div>
+			<div class="dashboard-item mx-1"></div>
+			<div class="dashboard-item mx-1"></div>
 		</div>
 	</div>
 	<div id="no-products" class="hide">
