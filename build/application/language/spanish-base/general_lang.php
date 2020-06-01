@@ -7,7 +7,7 @@ $lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
 //MENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
-$lang['GEN_MENU_USER_IDENTIFY'] = 'identificación de usuario';
+$lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
 $lang['GEN_LINK_CHANGE_PASS'] = 'cambiar-clave';
 $lang['GEN_MENU_CARDS_LIST'] = 'Lista de tarjetas';
