@@ -448,6 +448,7 @@ class Users extends CI_Controller {
 		}
 
 		unset($_POST);
+		$codeOTP = $codeOTP == '000'? '': $codeOTP;
 
 		if($result) {
 			$this->load->model('users_model','user');

@@ -35,7 +35,6 @@ class Users_model extends CI_Model {
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		$data = json_decode($response);
-		$desdata = new stdClass();
 		if($data->data) {
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'login_user'));
 			$salida = json_encode($desdata);
@@ -44,14 +43,10 @@ class Users_model extends CI_Model {
 		}
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
-        
-        $desdata->rc = -424;
-        $desdata->rc = -426;
 
         if ($desdata->rc === -424) {
-            $desdata->email = $desdata->emailEnc = 'corr*****mail.com'; // TODO: Eliminar cable
-            //$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
-			$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
+            $desdata->email = $desdata->emailEnc;
+			$this->session->set_flashdata('authToken', json_decode($response->codigoOtp)->authToken);
         }
 
 		if(isset($response) && $desdata->rc == 0) {

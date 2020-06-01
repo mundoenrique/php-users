@@ -282,8 +282,7 @@ if(!function_exists('logAccess')) {
 			"function"=> $dataAccessLog->function,
 			"operacion"=> $dataAccessLog->operation,
 			"RC"=> 0,
-			// "IP"=> $CI->input->ip_address(), TODO: Descomentar
-			"IP"=> '8.8.8.8',
+			"IP"=> $CI->input->ip_address(),
 			"dttimesstamp"=> date('m/d/Y H:i'),
 			"lenguaje"=> strtoupper(LANGUAGE)
 		];
