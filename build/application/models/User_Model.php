@@ -151,7 +151,6 @@ class User_Model extends BDB_Model
 					break;
 				case -424:
 					$this->response->code = 5;
-					$response->emailEnc = 'corr****mail.com'; // TODO: Eliminar cable
 					$this->response->msg = str_replace('{$maskMail$}', $response->emailEnc, lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
@@ -168,8 +167,7 @@ class User_Model extends BDB_Model
 							'action'=> 'close'
 						]
 					];
-					//$this->session->set_flashdata('authToken', json_decode($response->codeOtp)->authToken);// TODO: descomentar
-					$this->session->set_flashdata('authToken', 'json_decode($response->codeOtp)->authToken');// TODO: eliminar linea
+					$this->session->set_flashdata('authToken', json_decode($response->codigoOtp)->authToken);
 					break;
 				case -286:
 				case -287:
