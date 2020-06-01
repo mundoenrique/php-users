@@ -573,7 +573,7 @@ label {
 }
 
 .custom-option-input:disabled ~ .custom-option-label {
-	color: var(--color-sixth)
+	color: var(--color-sixth);
 }
 
 .custom-option-input:disabled ~ .custom-option-label::before {
@@ -876,7 +876,7 @@ label {
   border-bottom-left-radius: 0;
 }
 
-.pwd-action .icon-view{
+.pwd-action .icon-view, .icon-book, .icon-notification {
 	color: var(--color-fifth);
 }
 /* Search input */
@@ -1282,7 +1282,7 @@ label {
 /* Backgrounds Colors
 ========================================================================== */
 
-/* .bg-primary   { background-color: var(--color-eighth) !important } */
+/* .bg-primary   { background-color: var(--color-primary) !important } */
 .bg-secondary { background-color: var(--color-secondary) !important }
 .bg-tertiary  { background-color: var(--color-tertiary) !important }
 
@@ -2054,6 +2054,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-download:before      { content: "\e008"; }
 .icon-upload:before        { content: "\e009"; }
 .icon-user:before          { content: "\e015"; }
+.icon-notification:before  { content: "\e025"; }
 .icon-card:before          { content: "\e029"; }
 .icon-credit-card:before	 { content: "\e031"; }
 .icon-thumbs-up:before     { content: "\e032"; }
@@ -2089,6 +2090,7 @@ i[class*=" icon-"].novoglyphs {
 .icon-card-fee:before			 { content: "\e08d"; }
 .icon-arrow-right:before   { content: "\e03e"; }
 .icon-car:before					 { content: "\e04e"; }
+.icon-book:before    			 { content: "\e02f"; }
 .icon-chevron-up:before    { content: "\e03f"; }
 .icon-bag:before 					 { content: "\e04f"; }
 .icon-email:before         { content: "\e007"; }
@@ -2789,7 +2791,7 @@ td > button > i:hover{
   padding-top: 0 !important;
 }
 
-.dataTable thead{
+.dataTable thead, .thead {
 	background-color: var(--color-primary) !important;
 }
 
@@ -4135,14 +4137,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border-bottom: 1px solid var(--color-eighth);
 }
 
-.feed .feed-item:hover {
-	border-left-width: 4px;
-	-webkit-transition: all .25s;
-	-moz-transition: all .25s;
-	-o-transition: all .25s;
-	transition: all .25s;
-}
-
 .feed .feed-item.feed-income {
 	border-left-color: var(--success);
 }
@@ -4160,7 +4154,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .feed .feed-item .feed-date {
-	border-right: 1px solid var(--color-fifth);
+	border-right: 1px solid var(--color-eighth);
 }
 
 .detail-stats {

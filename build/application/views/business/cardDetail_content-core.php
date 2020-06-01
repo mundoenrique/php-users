@@ -47,7 +47,7 @@
 	</div>
 
 	<div class="flex flex-column pt-3 col-lg-12 col-xl-8">
-		<h2 class="h4 regular tertiary">Mis movimientos</h2>
+		<h4 class="h4 regular tertiary">Mis movimientos</h4>
 		<nav id="filtersStack" class="navbar px-0">
 			<div id="period-form" class="stack-form mr-auto flex items-center">
 				<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>

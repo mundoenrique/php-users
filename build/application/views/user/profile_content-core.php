@@ -5,7 +5,7 @@
 	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 </div>
 <form id="" method="post" class ="hide-out hide bg-color">
-	<h3 class="mt-2 pb-2 h4">Datos personales</h3>
+	<h4 class="mt-2 pb-2 h4">Datos personales</h4>
 		<div class="row">
 			<div class="form-group col-6 col-lg-4 col-xl-3">
 				<label for="idType">Tipo de identificación</label>
@@ -136,7 +136,7 @@
 			</div>
 		</div>
 		<hr class="separador-one mt-2 mb-4">
-		<h3 class="pb-2 h4">Datos de contacto</h3>
+		<h4 class="pb-2 h4">Datos de contacto</h4>
 		<div class="row">
 			<div class="form-group col-6 col-lg-4 col-xl-3">
 				<label for="addressType">Tipo de dirección</label>
@@ -244,7 +244,7 @@
 			</div>
 		</div>
 		<hr class="separador-one mt-2 mb-4">
-		<h3 class="pb-2 h4">Datos de usuario</h3>
+		<h4 class="pb-2 h4">Datos de usuario</h4>
 		<div class="row">
 			<div class="form-group col-6 col-lg-4 col-xl-3">
 				<label for="username">Login</label>
