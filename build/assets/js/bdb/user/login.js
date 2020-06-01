@@ -64,12 +64,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
 				</div>
-				<div class="form-group custom-control custom-switch">
+				<div class="form-group custom-control custom-switch mb-0">
 					<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">
 					<label class="custom-control-label" for="acceptAssert">
 						${response.assert}
 					</label>
-					<div class="help-block"></div>
 				</div>
 			</form>`;
 
