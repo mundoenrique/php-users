@@ -4208,3 +4208,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .services-both:not(.fade-in) {
 	display: none;
 }
+
+.product-search {
+	height: 113px;
+	width: 152px;
+	color: var(--color-sixth);
+	border: 1px solid var(--color-sixth);
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 23px;
+}
