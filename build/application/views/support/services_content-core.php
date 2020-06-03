@@ -94,7 +94,7 @@
 			</div>
 		</div>
 
-		<div class="col-12 col-sm-12 col-lg-6 col-xl-8">
+		<div class="col-12 col-sm-12 col-lg-12 col-xl-8">
 			<div id="pinManagementView">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
@@ -161,49 +161,48 @@
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Bloqueo de tarjeta</h4>
 					<p>Si realmente deseas bloqueas tu tarjeta, presiona continuar</p>
-						<div class="flex items-center justify-end pt-3">
-							<a class="btn btn-small btn-link" href="">Cancelar</a>
-							<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
-						</div>
+					<div class="flex items-center justify-end pt-3">
+						<a class="btn btn-small btn-link" href="">Cancelar</a>
+						<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
 					</div>
 				</div>
 			</div>
 
-		<div id="replacementRequestView">
-			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text mb-2 semibold primary">Bloqueo de tarjeta</h4>
-				<p>Seleccione una motivo de la solicitud</p>
-				<form id="formReplace" class="profile-1" method="post">
-					<div class="row">
-						<div class="form-group col-lg-4">
-							<label for="replaceMotSol">Motivo de la solicitud</label>
-							<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-								<option value="">Selecciona</option>
-								<option value="59">Tarjeta robada</option>
-								<option value="17">Sospecha de fraude</option>
-								<option value="41">Tarjeta cancelada</option>
-							</select>
-							<div class="help-block"></div>
-						</div>
-					</div>
-					<div id="replaceVerificationOTP">
-						<hr class="separador-one mb-3">
-						<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+			<div id="replacementRequestView">
+				<div class="flex mb-1 mx-4 flex-column">
+					<h4 class="line-text mb-2 semibold primary">Solicitud de reposición</h4>
+					<p>Seleccione una motivo de la solicitud</p>
+					<form id="formReplace" class="profile-1" method="post">
 						<div class="row">
 							<div class="form-group col-lg-4">
-								<label for="replaceCodeOTP">Código de verificación</label>
-								<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled="" autocomplete="off">
-								<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
+								<label for="replaceMotSol">Motivo de la solicitud</label>
+								<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
+									<option value="">Selecciona</option>
+									<option value="59">Tarjeta robada</option>
+									<option value="17">Sospecha de fraude</option>
+									<option value="41">Tarjeta cancelada</option>
+								</select>
+								<div class="help-block"></div>
 							</div>
 						</div>
-						<p id="replaceVerificationMsg" class="mb-1 h5"></p>
-					</div>
-					<hr class="separador-one">
-					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link" href="">Cancelar</a>
-						<button id="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit" name="btnReplace">Continuar</button>
-					</div>
-				</form>
+						<div id="replaceVerificationOTP">
+							<hr class="separador-one mb-3">
+							<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+							<div class="row">
+								<div class="form-group col-lg-4">
+									<label for="replaceCodeOTP">Código de verificación</label>
+									<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled="" autocomplete="off">
+									<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
+								</div>
+							</div>
+							<p id="replaceVerificationMsg" class="mb-1 h5"></p>
+						</div>
+						<hr class="separador-one">
+						<div class="flex items-center justify-end pt-3">
+							<a class="btn btn-small btn-link" href="">Cancelar</a>
+							<button id="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit" name="btnReplace">Continuar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
