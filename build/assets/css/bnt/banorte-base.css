@@ -876,7 +876,7 @@ label {
   border-bottom-left-radius: 0;
 }
 
-.pwd-action .icon-view, .icon-book, .icon-notification {
+.pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
 	color: var(--color-fifth);
 }
 /* Search input */
@@ -4202,11 +4202,9 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .product-search {
 	height: 110px;
-	color: var(--color-sixth);
-	border: 1px solid var(--color-sixth);
+	border: 1.5px solid var(--color-eighth);
 	border-radius: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 23px;
 }
