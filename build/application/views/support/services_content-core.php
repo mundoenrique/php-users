@@ -94,7 +94,7 @@
 			</div>
 		</div>
 
-		<div class="col-12 col-sm-12 col-lg-12 col-xl-8">
+		<div class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
 			<div id="pinManagementView">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
