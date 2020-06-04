@@ -27,7 +27,7 @@
 					<div class="flex col-12 optional mt-4 px-0">
 						<nav class="nav-config">
 							<ul class="flex flex-wrap justify-between nav-config-box">
-								<li id="PinManagement" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="PinManagement" class="list-inline-item nav-item-config">
 									<a href="javascript:">
 									<span class="icon-config icon-key h1 icon-color"></span>
 									<h5 class="center">Gestión<br>de PIN</h5>
@@ -37,7 +37,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="CardLock" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="CardLock" class="list-inline-item nav-item-config">
 									<a href="javascript:">
 									<span class="icon-config icon-lock h1 icon-color"></span>
 									<h5 class="center">Bloqueo<br>de tarjeta</h5>
@@ -47,7 +47,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="replacementRequest" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="replacementRequest" class="list-inline-item nav-item-config">
 									<a href="javascript:">
 									<span class="icon-config icon-spinner h1 icon-color"></span>
 									<h5 class="center">Solicitud<br>de reposición</h5>
@@ -57,7 +57,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="" class="list-inline-item nav-item-config">
 									<a href="javascript:">
 									<span class="icon-config icon-spinner h1 icon-color"></span>
 									<h5 class="center">Solicitud<br>de reposición</h5>
@@ -67,7 +67,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="" class="list-inline-item nav-item-config">
 									<a href="javascript:">
 									<span class="icon-config icon-spinner h1 icon-color"></span>
 									<h5 class="center">Solicitud<br>de reposición</h5>
@@ -77,7 +77,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="" class="list-inline-item nav-item-config mr-0 px-1">
+								<li id="" class="list-inline-item nav-item-config mr-1">
 									<a href="javascript:">
 									<span class="icon-config icon-spinner h1 icon-color"></span>
 									<h5 class="center">Solicitud<br>de reposición</h5>
@@ -87,6 +87,7 @@
 									</div>
 									</a>
 								</li>
+
 							</ul>
 						</nav>
 					</div>
@@ -98,7 +99,7 @@
 			<div id="pinManagementView">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
-					<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
+					<div id="pre-loader" class="mt-2 mb-4 mx-auto flex justify-center">
 						<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 					</div>
 					<div class="hide-out hide">
