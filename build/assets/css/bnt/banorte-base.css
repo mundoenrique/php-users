@@ -876,7 +876,7 @@ label {
   border-bottom-left-radius: 0;
 }
 
-.pwd-action .icon-view, .icon-book, .icon-notification {
+.pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
 	color: var(--color-fifth);
 }
 /* Search input */
@@ -3705,13 +3705,16 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/bnt/logo_maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/branch/maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/bnt/logo_mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/branch/mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/bnt/logo_visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/branch/visa.svg") no-repeat center / cover;
+}
+.item-network.visa-electron {
+	background: transparent url("../../images/branch/visa-electron.svg") no-repeat center / cover;
 }
 
 .card-image {
@@ -3745,7 +3748,7 @@ a.ui-button:active,
 	list-style: none;
 }
 
-.nav-config .nav-config-box .nav-item-config  a {
+.nav-config .nav-config-box .nav-item-config a {
 	display: flex;
 	flex-direction: column;
   align-items: center;  /* Center vertical */
@@ -4001,27 +4004,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .visa-electron {
 	background: transparent no-repeat center;
 }
-.maestro {
-	background-image: url("../../images/branch/maestro.svg");
-}
-.mastercard {
-	background-image: url("../../images/branch/mastercard.svg");
-}
-.visa {
-	background-image: url("../../images/branch/visa.svg");
-}
-.visa-electron {
-	background-image: url("../../images/branch/visa-electron.svg");
-}
 
 .product-presentation .item-network {
 	position: absolute;
-	right: 20px;
-	bottom: 20px;
+	right: 15px;
+	bottom: 10px;
 	z-index: 2;
-	width: 40px;
-	height: 25px;
-	background-size: 40px;
+	width: 35px;
+	height: 20px;
+	background-size: 30px;
 	background-position: bottom right;
 }
 
@@ -4207,4 +4198,13 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .services-both:not(.fade-in) {
 	display: none;
+}
+
+.product-search {
+	height: 110px;
+	border: 1.5px solid var(--color-eighth);
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
