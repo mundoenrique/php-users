@@ -77,7 +77,7 @@
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
 			<label for="email">Confirmar correo electrónico</label>
-			<input id="email" class="form-control" type="email" name="email"
+			<input id="confirmEmail" class="form-control" type="email" name="email"
 				value="grobles@novopayment.com" placeholder="usuario@ejemplo.com"
 				autocomplete="off">
 			<div class="help-block"></div>
