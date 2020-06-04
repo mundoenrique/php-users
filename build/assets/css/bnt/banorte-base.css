@@ -4005,6 +4005,19 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	background: transparent no-repeat center;
 }
 
+.maestro {
+	background-image: url("../../images/branch/maestro.svg");
+}
+.mastercard {
+	background-image: url("../../images/branch/mastercard.svg");
+}
+.visa {
+	background-image: url("../../images/branch/visa.svg");
+}
+.visa-electron {
+	background-image: url("../../images/branch/visa-electron.svg");
+}
+
 .product-presentation .item-network {
 	position: absolute;
 	right: 15px;
