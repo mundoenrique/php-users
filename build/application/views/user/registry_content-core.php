@@ -120,7 +120,7 @@
 		<div class="col-6">
 			<div class="row">
 			<div class="form-group col-12 col-lg-12">
-				<div class="col-12 col-lg-6 pl-0">
+				<div class="col-lg-6 pl-lg-0 pr-lg-2 pl-0 pr-0">
 					<label for="currentPass">Usuario</label>
 					<div class="input-group">
 						<input id="currentPass" class="form-control pwd-input" type="password" name="current-pass" required>
