@@ -142,7 +142,6 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
 						$move->amount = lang('GEN_CURRENCY').' '.$moves->monto;
-						$move->classCss = $moves->signo == '-' ? 'feed-expense' : 'feed-income';
 						$movesList[] = $move;
 					}
 				}
