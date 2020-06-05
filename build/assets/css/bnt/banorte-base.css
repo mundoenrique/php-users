@@ -3705,16 +3705,16 @@ a.ui-button:active,
 	bottom: 20px;
 }
 .item-network.maestro {
-	background: transparent url("../../images/branch/maestro.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/maestro.svg") no-repeat center / cover;
 }
 .item-network.mastercard {
-	background: transparent url("../../images/branch/mastercard.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/mastercard.svg") no-repeat center / cover;
 }
 .item-network.visa {
-	background: transparent url("../../images/branch/visa.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/visa.svg") no-repeat center / cover;
 }
 .item-network.visa-electron {
-	background: transparent url("../../images/branch/visa-electron.svg") no-repeat center / cover;
+	background: transparent url("../../images/brands/visa-electron.svg") no-repeat center / cover;
 }
 
 .card-image {
@@ -4006,16 +4006,16 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .maestro {
-	background-image: url("../../images/branch/maestro.svg");
+	background-image: url("../../images/brands/maestro.svg");
 }
 .mastercard {
-	background-image: url("../../images/branch/mastercard.svg");
+	background-image: url("../../images/brands/mastercard.svg");
 }
 .visa {
-	background-image: url("../../images/branch/visa.svg");
+	background-image: url("../../images/brands/visa.svg");
 }
 .visa-electron {
-	background-image: url("../../images/branch/visa-electron.svg");
+	background-image: url("../../images/brands/visa-electron.svg");
 }
 
 .product-presentation .item-network {
