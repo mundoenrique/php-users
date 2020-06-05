@@ -148,7 +148,7 @@ function validateForms(form, options) {
 	}, "El nuevo PIN no debe ser igual a su PIN anterior.");
 
 	jQuery.validator.addMethod("codeOTPLogin", function(value, element) {
-		if (/^[a-z0-9]+$/i.test(value) && value.length == 8)
+		if (/^[a-z0-9]+$/i.test(value) && value.length < 16)
 			return true;
 		else return false;
 	}, "El formato de código es inválido.");

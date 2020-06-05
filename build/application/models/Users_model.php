@@ -44,9 +44,14 @@ class Users_model extends CI_Model {
 		$cookie = $this->input->cookie( $this->config->item('cookie_prefix').'skin');
         $putSession = FALSE;
 
+        log_message('info', 'Respuesta del server - login Usuario: ' .json_encode($desdata));
+
         if ($desdata->rc === -424) {
-            $desdata->email = $desdata->emailEnc;
-			$this->session->set_flashdata('authToken', json_decode($response->codigoOtp)->authToken);
+
+            $bean = json_decode($desdata->bean);
+
+            $desdata->email = $bean->emailEnc;
+			$this->session->set_flashdata('authToken', $bean->codigoOtp->authToken);
         }
 
 		if(isset($response) && $desdata->rc == 0) {

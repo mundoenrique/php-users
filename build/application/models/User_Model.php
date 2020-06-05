@@ -150,8 +150,11 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 				case -424:
+
+					$bean = json_decode($response->bean);
+
 					$this->response->code = 5;
-					$this->response->msg = str_replace('{$maskMail$}', $response->emailEnc, lang('LOGIN_IP_MSG'));
+					$this->response->msg = str_replace('{$maskMail$}', $bean->emailEnc, lang('LOGIN_IP_MSG'));
 					$this->response->assert = lang('LOGIN_IP_ASSERT');
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';
@@ -167,7 +170,7 @@ class User_Model extends BDB_Model
 							'action'=> 'close'
 						]
 					];
-					$this->session->set_flashdata('authToken', json_decode($response->codigoOtp)->authToken);
+					$this->session->set_flashdata('authToken', $bean->codigoOtp->authToken);
 					break;
 				case -286:
 				case -287:
