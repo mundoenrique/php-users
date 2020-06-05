@@ -2618,11 +2618,16 @@ i[class*=" icon-"].novoglyphs {
 	width: 0;
 }
 
-.pagination a {
+.easyPaginateNav {
+	font-size: var(--h4) !important;
+	justify-content: center !important;
+}
+
+.easyPaginateNav a {
 	padding: 5px;
 }
 
-.pagination a.current {
+.easyPaginateNav a.current {
 	font-weight: var(--bold-font-weight);
 }
 

@@ -129,8 +129,9 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
 				case 'getBalance':
+				case 'cardDetail':
 				case 'services':
-					$auth = $this->CI->session->has_userdata('logged');
+					$auth = $this->CI->session->has_userdata('products');
 				break;
 				case 'changePassword':
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));

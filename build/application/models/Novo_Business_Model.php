@@ -56,6 +56,7 @@ class Novo_Business_Model extends NOVO_Model {
 					}
 				}
 
+				$this->session->set_userdata('products', TRUE);
 				$this->response->code = isset($response->lista) && count($response->lista > 0) ? 0 : 1;
 			break;
 			default:
@@ -100,5 +101,60 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_GetBalance');
+	}
+	/**
+	 * @info Método para obtener el detalle de una tarjeta
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date Jun 04th, 2020
+	 */
+	public function callWs_CardDetail_Business($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CardDetail Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'Detalle de la tarjeta';
+
+		$this->dataRequest->idOperation = '3';
+		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->userIdNumber;
+
+		$response = $this->sendToService('callWs_CardDetail');
+		$movesList = [];
+		$balance = new stdClass();
+		$balance->currentBalance = '---';
+		$balance->inTransitBalance = '---';
+		$balance->availableBalance = '---';
+
+		switch ($this->isResponseRc) {
+			case 0:
+			case -150:
+				$this->response->code = 0;
+				$balance->currentBalance = lang('GEN_CURRENCY').' '.$response->saldos->actual;
+				$balance->inTransitBalance = lang('GEN_CURRENCY').' '.$response->saldos->bloqueo;
+				$balance->availableBalance = lang('GEN_CURRENCY').' '.$response->saldos->disponible;
+				if (count($response->movimientos) > 0) {
+					foreach($response->movimientos AS $pos => $moves) {
+						$move = new stdClass();
+						$move->date = transformDate($moves->fecha);
+						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
+						$move->ref = $moves->referencia;
+						$move->sign = $moves->signo;
+						$move->amount = lang('GEN_CURRENCY').' '.$moves->monto;
+						$move->classCss = $moves->signo == '-' ? 'feed-expense' : 'feed-income';
+						$movesList[] = $move;
+					}
+				}
+
+			break;
+			default:
+
+		}
+
+		$this->response->data->movesList = $movesList;
+		$this->response->data->balance = $balance;
+
+		return $this->responseToTheView('callWs_CardDetail');
 	}
 }

@@ -62,6 +62,18 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
+	'cardDetail' => [
+		[
+			'field' => 'userIdNumber',
+			'label' => 'userIdNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',

@@ -150,7 +150,8 @@ if (!function_exists('languageLoad')) {
 					'signin' => ['login'],
 					'accessRecover' => ['recover'],
 					'changePassword' => ['user'],
-					'userCardsList' => ['cards']
+					'userCardsList' => ['cards'],
+					'cardDetail' => ['business'],
 				];
 		}
 
@@ -305,5 +306,21 @@ if (!function_exists('normalizeName')) {
 			'n', 'N', 'c', 'C'
 		];
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
+	}
+}
+
+if (!function_exists('transformDate')) {
+	function transformDate($date) {
+		$date = explode('/', $date);
+		$date = implode(' ', $date);
+		$pattern = [
+			'/ 01/',	'/ 02/', '/ 03/', '/ 04/', '/ 05/', '/ 06/', '/ 07/', '/ 08/', '/ 09/', '/ 10/',	'/ 11/', '/ 12/'
+		];
+		$replace = [
+			' Ene', ' Feb', ' Mar', ' Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'
+		];
+
+
+		return preg_replace($pattern, $replace, mb_strtolower(trim($date)));
 	}
 }

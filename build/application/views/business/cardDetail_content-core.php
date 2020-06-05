@@ -7,42 +7,46 @@
 				<div class="flex inline-flex col-12 px-xl-2">
 					<div class="flex flex-colunm justify-center col-6 py-5">
 						<div class="product-presentation relative">
-							<div class="item-network maestro"></div>
-							<img class="card-image" src="../../../assets/images/default/bnt_default.svg" alt="Tarjeta Banorte">
+							<div class="item-network <?= $brand ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
 						</div>
 					</div>
 					<div class="flex flex-column items-start col-6 py-5">
-						<p class="semibold mb-0 h5">PLATA VIÁTICOS</p>
-						<p id="card" class="mb-2">604842******4714</p>
-						<a id="other-product" class="btn hyper-link btn-small p-0" href="">
-							<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto</a>
+						<p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
+						<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
+						<?php if ($cardsTotal > 1): ?>
+						<a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
+							<i aria-hidden="true" class="icon-find"></i>
+							&nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
+						</a>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
 			<div class="flex col-12 mt-2">
 				<ul class="flex flex-auto justify-between px-2">
 					<li class="list-inline-item">Actual
-						<span id="actual" class="product-balance block">$---</span>
+						<span id="actual" class="product-balance block"><?= $balance->currentBalance; ?></span>
 					</li>
 					<li class="list-inline-item">En tránsito
-						<span id="bloqueado" class="product-balance block">$---</span>
+						<span id="bloqueado" class="product-balance block"><?= $balance->inTransitBalance; ?></span>
 					</li>
 					<li class="list-inline-item">Disponible
-						<span id="disponible" class="product-balance block">$---</span>
+						<span id="disponible" class="product-balance block"><?= $balance->availableBalance; ?></span>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="flex optional widget-statistics p-3 mt-4">
 			<h3 class="h4 regular">Estadísticas</h3>
-				<div class="flex flex-column items-center">
-					<div class="flex flex-wrap items-center">
-						<div id="stats" class="group-aside-view">
-							<div id="movementsStats" class="detail-stats"></div>
-							<div id="transitStats" class="detail-stats"></div>
-						</div>
+			<div class="flex flex-column items-center">
+				<div class="flex flex-wrap items-center">
+					<div id="stats" class="group-aside-view">
+						<div id="movementsStats" class="detail-stats"></div>
+						<div id="transitStats" class="detail-stats"></div>
 					</div>
 				</div>
+			</div>
 		</div>
 	</div>
 
@@ -66,7 +70,7 @@
 					<option value="11">Noviembre</option>
 					<option value="12">Diciembre</option>
 				</select>
-				<select id="filterYear" class="custom-select form-control w-auto my-1" name="filterYear" disabled="">
+				<select id="filterYear" class="custom-select form-control w-auto my-1" name="filterYear" disabled>
 					<option value="2020">-</option>
 					<option value="2020">2020</option>
 					<option value="2019">2019</option>
@@ -77,8 +81,10 @@
 					<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 				</button>
 			</div>
-				<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset">Movimientos</button>
-				<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination" data-name="reset">En tránsito</button>
+			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
+				data-name="reset">Movimientos</button>
+			<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
+				data-name="reset">En tránsito</button>
 			<ul class="stack list-inline mb-0 flex items-center">
 				<li class="stack-item px-1 list-inline-item">
 					<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
@@ -100,108 +106,23 @@
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
 			<ul id="movementsList" class="feed fade-in mt-3 pl-0 hide-out hide">
-				<li class="feed-item feed-income flex py-2 items-center">
+				<?php if (count($movesList) > 0): ?>
+				<?php foreach ($movesList AS $moves): ?>
+				<?php $classCss = $moves->sign == '-' ? 'feed-expense' : 'feed-income' ?>
+				<li class="feed-item <?= $classCss; ?> flex py-2 items-center">
 					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
+						<span class="h5"><?= $moves->date; ?></span>
 					</div>
 					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA MOVIL VE</span>
-						<span class="h6 feed-metadata">864881220211</span>
+						<span class="h5 semibold feed-product"><?= $moves->desc; ?></span>
+						<span class="h6 feed-metadata"><?= $moves->ref; ?></span>
 					</div>
-					<span class="px-2 feed-amount items-center">$ 250,00</span>
+					<span class="px-2 feed-amount items-center"><?= $moves->sign.' '.$moves->amount; ?></span>
 				</li>
-				<li class="feed-item feed-income flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">863872141611</span>
-					</div>
-					<span class="px-2 feed-amount items-center">$ 1,00</span>
-				</li>
-				<li class="feed-item feed-income flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">863803130916</span>
-					</div>
-					<span class="px-2 feed-amount items-center">$ 1,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">Bank Name St Louis VE</span>
-						<span class="h6 feed-metadata">546506</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 10,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">Bank Name St Louis VE</span>
-						<span class="h6 feed-metadata">546506</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 10,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">Bank Name St Louis VE</span>
-						<span class="h6 feed-metadata">546500</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 10,00	</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">856181133624</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 100,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">853866164643</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 100,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">849992174402</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 100,00</span>
-				</li>
-				<li class="feed-item feed-expense flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5">13 Oct 2017</span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product">TRANSFERENCIA WEB VE</span>
-						<span class="h6 feed-metadata">849637155758</span>
-					</div>
-					<span class="px-2 feed-amount items-center">- $ 1.000,00</span>
-				</li>
+				<?php endforeach; ?>
+				<?php endif; ?>
 			</ul>
-			<div id="" class="visible">
+			<div class="visible">
 				<div class="pagination page-number flex mb-5 py-2 flex-auto justify-center">
 					<nav class="h4">
 						<a href="javascript:" position="first">Primera</a>
@@ -218,13 +139,13 @@
 					</nav>
 				</div>
 			</div>
-			<div id="" class="hide">
+			<?php if (count($movesList) == 0): ?>
+			<div>
 				<div class="flex flex-column items-center justify-center pt-5">
-					<h3 class="h4 regular mb-0">No se encontraron resultados</h3>
+					<h3 class="h4 regular mb-0"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h3>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
-
-

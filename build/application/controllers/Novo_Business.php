@@ -32,17 +32,20 @@ class Novo_Business extends NOVO_Controller {
 
 		$getList = 'obtain';
 		$cardsList = [];
+		$cardsTotal = 0;
 
 		if (!empty($request)) {
 			$userCardList = $this->loadModel();
 			$getList = 'obtained';
 			$this->responseAttr($userCardList);
 			$cardsList = $userCardList->data->cardsList;
+			$cardsTotal = count($cardsList);
 		}
 
 		$this->render->titlePage = lang('GEN_MENU_CARDS_LIST');
 		$this->render->lastSession = $this->session->lastSession;
 		$this->render->getList = $getList;
+		$this->render->cardsTotal = $cardsTotal;
 		$this->render->cardsList = $cardsList;
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
@@ -59,9 +62,27 @@ class Novo_Business extends NOVO_Controller {
 		$view = 'cardDetail';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.easyPaginate-1.2",
 			"business/cardDetail"
 		);
+
+		$detailCard = $this->loadModel($this->request);
+		$this->responseAttr($detailCard);
+
 		$this->render->titlePage = lang('GEN_MENU_CARD_DETAIL');
+
+		foreach($detailCard->data AS $index => $render) {
+			if($index !== 'resp') {
+				$this->render->$index = $render;
+			}
+		}
+
+		$this->render->cardsTotal = $this->request->cardsTotal;
+		$this->render->brand = $this->request->brand;
+		$this->render->productName = $this->request->productName;
+		$this->render->cardNumberMask = $this->request->cardNumberMask;
+		$this->render->productImg = $this->request->productImg;
+		$this->render->productUrl = $this->request->productUrl;
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
