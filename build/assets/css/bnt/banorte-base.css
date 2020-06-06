@@ -2621,13 +2621,19 @@ i[class*=" icon-"].novoglyphs {
 .easyPaginateNav {
 	font-size: var(--h4) !important;
 	justify-content: center !important;
+	text-align: center;
+	padding-top: 2rem;
 }
 
 .easyPaginateNav a {
 	padding: 5px;
 }
 
-.easyPaginateNav a.current {
+.easyPaginateNav a.current,
+.easyPaginateNav .first:hover,
+.easyPaginateNav .last:hover,
+.easyPaginateNav .prev:hover,
+.easyPaginateNav .next:hover {
 	font-weight: var(--bold-font-weight);
 }
 

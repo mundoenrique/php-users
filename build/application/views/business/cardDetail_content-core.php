@@ -52,28 +52,38 @@
 
 	<div class="flex flex-column pt-3 col-lg-12 col-xl-8">
 		<h4 class="h4 regular tertiary">Mis movimientos</h4>
-		<nav id="filtersStack" class="navbar px-0">
+		<nav id="filtersStack" class="navbar px-0 pb-0">
 			<div id="period-form" class="stack-form mr-auto flex items-center">
-				<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
+
 				<form id="movements">
-					<input type="hidden" id="userIdNumber" name="userIdNumber" value="<?= $userIdNumber ?>">
-					<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
-					<select id="filterMonth" class="custom-select form-control w-auto my-1" name="filterMonth">
-						<option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
-						<?php foreach (lang('GEN_SELECT_MONTH') AS $key => $month): ?>
-						<option value="<?= $key ?>"><?= $month ?></option>
-						<?php endforeach; ?>
-					</select>
-					<select id="filterYear" class="custom-select form-control w-auto my-1" name="filterYear" disabled>
-						<option value="default">--</option>
-						<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
-						<option value="<?= $i ?>"><?= $i ?></option>
-						<?php endfor; ?>
-					</select>
-					<button id="buscar" class="btn btn-small btn-rounded-right btn-primary">
-						<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
-					</button>
+					<div class="row items-center pl-2">
+						<input type="hidden" id="userIdNumber" name="userIdNumber" value="<?= $userIdNumber ?>">
+						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+						<div class="form-group">
+							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
+							<select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
+								<option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
+								<?php foreach (lang('GEN_SELECT_MONTH') AS $key => $month): ?>
+								<option value="<?= $key ?>"><?= $month ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<div class="form-group">
+							<select id="filterYear" class="form-group custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
+								<option value="default">--</option>
+								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
+								<option value="<?= $i ?>"><?= $i ?></option>
+								<?php endfor; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3">
+							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
+						</button>
+					</div>
 				</form>
+
 			</div>
 			<?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
@@ -81,7 +91,7 @@
 			<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
 				data-name="reset">En tránsito</button>
 			<?php endif; ?>
-			<ul class="stack list-inline mb-0 flex items-center">
+			<ul class="stack list-inline mb-0 flex items-center pb-2">
 				<li class="stack-item px-1 list-inline-item">
 					<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 				</li>
@@ -97,7 +107,7 @@
 			</ul>
 		</nav>
 		<div class="line mb-1"></div>
-		<div id="results" class="mt-3">
+		<div id="results" class="mt-1 justify-center">
 			<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
