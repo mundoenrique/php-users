@@ -2,9 +2,13 @@
 var reportsResults;
 $(function () {
 	$('#pre-loader')
-		.removeClass('flex')
+		.removeClass('mt-5 mx-auto flex justify-center')
 		.addClass('hide')
-	$('.hide-out').removeClass('hide');
+	if ($('#movementsList > li').length > 0) {
+		$('#movementsList').removeClass('hide');
+	} else {
+		$('#no-moves').removeClass('hide');
+	}
 
 	if ($('#movementsList > li').length > 10) {
 		$('#movementsList').easyPaginate({

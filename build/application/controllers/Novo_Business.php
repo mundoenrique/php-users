@@ -70,19 +70,18 @@ class Novo_Business extends NOVO_Controller {
 		$this->responseAttr($detailCard);
 
 		$this->render->titlePage = lang('GEN_MENU_CARD_DETAIL');
+		$this->render->currentYear = date('Y');
 
-		foreach($detailCard->data AS $index => $render) {
+		foreach ($detailCard->data AS $index => $render) {
 			if($index !== 'resp') {
 				$this->render->$index = $render;
 			}
 		}
 
-		$this->render->cardsTotal = $this->request->cardsTotal;
-		$this->render->brand = $this->request->brand;
-		$this->render->productName = $this->request->productName;
-		$this->render->cardNumberMask = $this->request->cardNumberMask;
-		$this->render->productImg = $this->request->productImg;
-		$this->render->productUrl = $this->request->productUrl;
+		foreach ($this->request AS $index => $render) {
+			$this->render->$index = $render;
+		}
+
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
 	}
