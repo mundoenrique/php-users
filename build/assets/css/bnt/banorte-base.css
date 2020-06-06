@@ -2966,6 +2966,10 @@ table#resultsAccount thead th:nth-child(7){
 	box-shadow: 3px 3px 10px 0px var(--color-eighth);
 }
 
+.widget-statistics{
+	height: 203px;
+}
+
 @media (max-width: 1200px) {
 	.widget.optional {
 		display: none;
