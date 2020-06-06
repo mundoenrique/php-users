@@ -63,6 +63,7 @@ class Novo_Business extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.easyPaginate-1.2",
+			"third_party/kendo.dataviz",
 			"business/cardDetail"
 		);
 

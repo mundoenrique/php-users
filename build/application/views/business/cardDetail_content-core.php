@@ -42,8 +42,8 @@
 			<div class="flex flex-column items-center">
 				<div class="flex flex-wrap items-center">
 					<div id="stats" class="group-aside-view">
-						<div id="movementsStats" class="detail-stats"></div>
-						<div id="transitStats" class="detail-stats"></div>
+						<div id="movementsStats" class="hide"></div>
+						<div id="transitStats" class="hide"></div>
 					</div>
 				</div>
 			</div>
@@ -59,6 +59,8 @@
 					<div class="row items-center pl-2">
 						<input type="hidden" id="userIdNumber" name="userIdNumber" value="<?= $userIdNumber ?>">
 						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+						<input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
+						<input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
 						<div class="form-group">
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
