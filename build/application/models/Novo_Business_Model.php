@@ -126,14 +126,21 @@ class Novo_Business_Model extends NOVO_Model {
 		$balance->currentBalance = '---';
 		$balance->inTransitBalance = '---';
 		$balance->availableBalance = '---';
+		$totalMoves = new stdClass();
+		$totalMoves->credit = '0';
+		$totalMoves->debit = '0';
 
 		switch ($this->isResponseRc) {
 			case 0:
 			case -150:
 				$this->response->code = 0;
-				$balance->currentBalance = lang('GEN_CURRENCY').' '.$response->saldos->actual;
-				$balance->inTransitBalance = lang('GEN_CURRENCY').' '.$response->saldos->bloqueo;
-				$balance->availableBalance = lang('GEN_CURRENCY').' '.$response->saldos->disponible;
+
+				if (isset($response->saldos)) {
+					$balance->currentBalance = lang('GEN_CURRENCY').' '.$response->saldos->actual;
+					$balance->inTransitBalance = lang('GEN_CURRENCY').' '.$response->saldos->bloqueo;
+					$balance->availableBalance = lang('GEN_CURRENCY').' '.$response->saldos->disponible;
+				}
+
 				if (count($response->movimientos) > 0) {
 					foreach($response->movimientos AS $pos => $moves) {
 						$move = new stdClass();
@@ -146,6 +153,8 @@ class Novo_Business_Model extends NOVO_Model {
 					}
 				}
 
+				$totalMoves->credit = isset($response->totalAbonos) ? $response->totalAbonos : $totalMoves->credit;
+				$totalMoves->debit = isset($response->totalCargos) ? $response->totalCargos : $totalMoves->debit;
 			break;
 			default:
 
@@ -153,6 +162,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->response->data->movesList = $movesList;
 		$this->response->data->balance = $balance;
+		$this->response->data->totalMoves = $totalMoves;
 
 		return $this->responseToTheView('callWs_CardDetail');
 	}

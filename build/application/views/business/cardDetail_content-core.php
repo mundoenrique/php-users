@@ -37,13 +37,13 @@
 				</ul>
 			</div>
 		</div>
-		<div class="flex optional widget-statistics p-3 mt-4">
-			<h3 class="h4 regular">Estadísticas</h3>
+		<div class="flex optional widget-statistics mt-4">
+			<h3 class="h4 regular py-3 pl-3">Estadísticas</h3>
 			<div class="flex flex-column items-center">
-				<div class="flex flex-wrap items-center">
-					<div id="stats" class="group-aside-view">
-						<div id="movementsStats" class="detail-stats"></div>
-						<div id="transitStats" class="detail-stats"></div>
+				<div class="flex flex-wrap items-center h-100 justify-center">
+					<div id="stats" class="group-aside-view w-100 h-100">
+						<div id="movementsStats" class="hide w-100 h-100"></div>
+						<div id="transitStats" class="hide"></div>
 					</div>
 				</div>
 			</div>
@@ -52,40 +52,48 @@
 
 	<div class="flex flex-column pt-3 col-lg-12 col-xl-8">
 		<h4 class="h4 regular tertiary">Mis movimientos</h4>
-		<nav id="filtersStack" class="navbar px-0">
+		<nav id="filtersStack" class="navbar px-0 pb-0">
 			<div id="period-form" class="stack-form mr-auto flex items-center">
-				<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
-				<select id="filterMonth" class="custom-select form-control w-auto my-1" name="filterMonth">
-					<option value="0">Más recientes</option>
-					<option value="01">Enero</option>
-					<option value="02">Febrero</option>
-					<option value="03">Marzo</option>
-					<option value="04">Abril</option>
-					<option value="05">Mayo</option>
-					<option value="06">Junio</option>
-					<option value="07">Julio</option>
-					<option value="08">Agosto</option>
-					<option value="09">Septiembre</option>
-					<option value="10">Octubre</option>
-					<option value="11">Noviembre</option>
-					<option value="12">Diciembre</option>
-				</select>
-				<select id="filterYear" class="custom-select form-control w-auto my-1" name="filterYear" disabled>
-					<option value="2020">-</option>
-					<option value="2020">2020</option>
-					<option value="2019">2019</option>
-					<option value="2018">2018</option>
-					<option value="2017">2017</option>
-				</select>
-				<button id="buscar" class="btn btn-small btn-rounded-right btn-primary">
-					<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
-				</button>
+
+				<form id="movements">
+					<div class="row items-center pl-2">
+						<input type="hidden" id="userIdNumber" name="userIdNumber" value="<?= $userIdNumber ?>">
+						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+						<input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
+						<input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
+						<div class="form-group">
+							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
+							<select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
+								<option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
+								<?php foreach (lang('GEN_SELECT_MONTH') AS $key => $month): ?>
+								<option value="<?= $key ?>"><?= $month ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<div class="form-group">
+							<select id="filterYear" class="form-group custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
+								<option value="default">--</option>
+								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
+								<option value="<?= $i ?>"><?= $i ?></option>
+								<?php endfor; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3">
+							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
+						</button>
+					</div>
+				</form>
+
 			</div>
+			<?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
 			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
 				data-name="reset">Movimientos</button>
 			<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
 				data-name="reset">En tránsito</button>
-			<ul class="stack list-inline mb-0 flex items-center">
+			<?php endif; ?>
+			<ul class="stack list-inline mb-0 flex items-center pb-2">
 				<li class="stack-item px-1 list-inline-item">
 					<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 				</li>
@@ -101,12 +109,11 @@
 			</ul>
 		</nav>
 		<div class="line mb-1"></div>
-		<div id="results" class="mt-3">
+		<div id="results" class="mt-1 justify-center">
 			<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
-			<ul id="movementsList" class="feed fade-in mt-3 pl-0 hide-out hide">
-				<?php if (count($movesList) > 0): ?>
+			<ul id="movementsList" class="feed fade-in mt-3 pl-0 hide">
 				<?php foreach ($movesList AS $moves): ?>
 				<?php $classCss = $moves->sign == '-' ? 'feed-expense' : 'feed-income' ?>
 				<li class="feed-item <?= $classCss; ?> flex py-2 items-center">
@@ -120,32 +127,12 @@
 					<span class="px-2 feed-amount items-center"><?= $moves->sign.' '.$moves->amount; ?></span>
 				</li>
 				<?php endforeach; ?>
-				<?php endif; ?>
 			</ul>
-			<div class="visible">
-				<div class="pagination page-number flex mb-5 py-2 flex-auto justify-center">
-					<nav class="h4">
-						<a href="javascript:" position="first">Primera</a>
-						<a href="javascript:" position="prev">«</a>
-					</nav>
-					<div id="show-page" class="h4 flex justify-center ">
-						<span class="mx-1 page-current">
-							<a href="javascript:" position="page" filter-page="page_">1</a>
-						</span>
-					</div>
-					<nav class="h4">
-						<a href="javascript:" position="next">»</a>
-						<a href="javascript:" position="last">Última</a>
-					</nav>
-				</div>
-			</div>
-			<?php if (count($movesList) == 0): ?>
-			<div>
+			<div id="no-moves" class="hide">
 				<div class="flex flex-column items-center justify-center pt-5">
 					<h3 class="h4 regular mb-0"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h3>
 				</div>
 			</div>
-			<?php endif; ?>
 		</div>
 	</div>
 </div>
