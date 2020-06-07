@@ -80,7 +80,7 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3">
+						<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
 							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 						</button>
 					</div>
