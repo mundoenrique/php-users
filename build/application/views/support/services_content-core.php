@@ -25,9 +25,9 @@
 						</div>
 					</div>
 					<div class="flex col-12 optional mt-4 px-0">
-						<nav class="nav-config">
-							<ul class="flex flex-wrap justify-between nav-config-box">
-								<li id="PinManagement" class="list-inline-item nav-item-config">
+						<nav class="nav-config w-100">
+							<ul class="flex flex-wrap justify-center nav-config-box">
+								<li id="PinManagement" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
 									<span class="icon-config icon-key h1 icon-color"></span>
 									<h5 class="center">Gestión<br>de PIN</h5>
@@ -37,7 +37,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="CardLock" class="list-inline-item nav-item-config">
+								<li id="CardLock" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
 									<span class="icon-config icon-lock h1 icon-color"></span>
 									<h5 class="center">Bloqueo<br>de tarjeta</h5>
@@ -57,37 +57,6 @@
 									</div>
 									</a>
 								</li>
-								<li id="" class="list-inline-item nav-item-config">
-									<a href="javascript:">
-									<span class="icon-config icon-spinner h1 icon-color"></span>
-									<h5 class="center">Solicitud<br>de reposición</h5>
-									<div class="box up left regular">
-										<span class="icon-spinner h1 icon-color"></span>
-										<h4 class="h5 center">Solicitud<br>de reposición</h4>
-									</div>
-									</a>
-								</li>
-								<li id="" class="list-inline-item nav-item-config">
-									<a href="javascript:">
-									<span class="icon-config icon-spinner h1 icon-color"></span>
-									<h5 class="center">Solicitud<br>de reposición</h5>
-									<div class="box up left regular">
-										<span class="icon-spinner h1 icon-color"></span>
-										<h4 class="h5 center">Solicitud<br>de reposición</h4>
-									</div>
-									</a>
-								</li>
-								<li id="" class="list-inline-item nav-item-config mr-1">
-									<a href="javascript:">
-									<span class="icon-config icon-spinner h1 icon-color"></span>
-									<h5 class="center">Solicitud<br>de reposición</h5>
-									<div class="box up left regular">
-										<span class="icon-spinner h1 icon-color"></span>
-										<h4 class="h5 center">Solicitud<br>de reposición</h4>
-									</div>
-									</a>
-								</li>
-
 							</ul>
 						</nav>
 					</div>
@@ -115,6 +84,10 @@
 									<div class="custom-control custom-radio custom-control-inline">
 										<input id="generate-pin" class="custom-control-input" type="radio" name="recovery" value="generate" autocomplete="off">
 										<label class="custom-control-label" for="generate-pin">Recuperar PIN</label>
+									</div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input id="pin-request" class="custom-control-input" type="radio" name="recovery" value="request" autocomplete="off">
+										<label class="custom-control-label" for="pin-request">Solicitud de PIN</label>
 									</div>
 									<div class="help-block"></div>
 								</div>
@@ -146,6 +119,17 @@
 										</div>
 									</div>
 									<p id="changeVerificationMsg" class="mb-1 h5"></p>
+								</div>
+								<hr class="separador-one">
+								<div class="flex items-center justify-end pt-3">
+									<a class="btn btn-small btn-link" href="">Cancelar</a>
+									<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
+								</div>
+
+								<div id="changeVerificationOTP">
+									<hr class="separador-one mb-3">
+									<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
+									<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
 								</div>
 								<hr class="separador-one">
 								<div class="flex items-center justify-end pt-3">
