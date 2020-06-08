@@ -85,7 +85,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Obtener Saldo';
 
 		$this->dataRequest->idOperation = '8';
-		$this->dataRequest->id_ext_per = $dataRequest->userIdNumber;
+		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
 		$response = $this->sendToService('callWs_GetBalance');
@@ -118,7 +118,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '3';
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
-		$this->dataRequest->id_ext_per = $dataRequest->userIdNumber;
+		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardDetail');
 		$movesList = [];
@@ -160,10 +160,122 @@ class Novo_Business_Model extends NOVO_Model {
 
 		}
 
-		$this->response->data->movesList = $movesList;
-		$this->response->data->balance = $balance;
-		$this->response->data->totalMoves = $totalMoves;
+		if ($this->input->is_ajax_request()) {
+			$this->response->data['movesList'] = $movesList;
+			$this->response->data['balance'] = $balance;
+			$this->response->data['totalMoves'] = $totalMoves;
+		} else {
+			$this->response->data->movesList = $movesList;
+			$this->response->data->balance = $balance;
+			$this->response->data->totalMoves = $totalMoves;
+		}
 
 		return $this->responseToTheView('callWs_CardDetail');
+	}
+	/**
+	 * @info Método para obtener los movimientos mensuales
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date Jun 06th, 2020
+	 */
+	public function callWs_MonthlyMovements_Business($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: MonthlyMovements Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'Movimientos mensuales';
+
+		$this->dataRequest->idOperation = '13';
+		$this->dataRequest->mes = $dataRequest->filterMonth;
+		$this->dataRequest->anio = $dataRequest->filterYear;
+		$this->dataRequest->tarjeta = [
+			'noTarjeta' => $dataRequest->cardNumber,
+			'id_ext_per' => $this->session->userId,
+		];
+
+		$response = $this->sendToService('callWs_MonthlyMovements');
+		$movesList = [];
+		$totalMoves = new stdClass();
+		$totalMoves->credit = '0';
+		$totalMoves->debit = '0';
+
+		switch ($this->isResponseRc) {
+			case 0:
+			case -150:
+				$this->response->code = 0;
+
+				if (isset($response->movimientos) && count($response->movimientos) > 0) {
+					foreach($response->movimientos AS $pos => $moves) {
+						$move = new stdClass();
+						$move->date = transformDate($moves->fecha);
+						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
+						$move->ref = $moves->referencia;
+						$move->sign = $moves->signo;
+						$move->amount = lang('GEN_CURRENCY').' '.$moves->monto;
+						$movesList[] = $move;
+					}
+				}
+
+				$totalMoves->credit = isset($response->totalAbonos) ? $response->totalAbonos : $totalMoves->credit;
+				$totalMoves->debit = isset($response->totalCargos) ? $response->totalCargos : $totalMoves->debit;
+			break;
+			default:
+
+		}
+		$this->response->data['movesList'] = $movesList;
+		$this->response->data['totalMoves'] = $totalMoves;
+
+		return $this->responseToTheView('callWs_MonthlyMovements');
+	}
+	/**
+	 * @info Método para obtener descargar xls o pdf de movimientos
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date Jun 06th, 2020
+	 */
+	public function callWs_DownloadMoves_Business($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: DownloadMoves Method Initialized');
+
+		$this->className = 'novo.objects.MO.MovimientosTarjetaSaldoMO';
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'Decargar archivos';
+
+		$this->dataRequest->idOperation = $dataRequest->id == 'downloadPDF' ||  $dataRequest->id == 'sendPDF' ? '5' : '46';
+		$this->dataRequest->mes = $dataRequest->month == '0' ? '' : $dataRequest->month;
+		$this->dataRequest->anio = $dataRequest->year  == '0' ? '' : $dataRequest->year;
+		$this->dataRequest->signo = '';
+		$this->dataRequest->mail = $dataRequest->action == 'send' ? TRUE : FALSE;
+		$this->dataRequest->tarjeta = [
+			'noTarjeta' => $dataRequest->cardNumber,
+			'id_ext_per' => $this->session->userId,
+		];
+
+		$response = $this->sendToService('callWs_DownloadMoves');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				switch ($dataRequest->action) {
+					case 'download':
+						$file = isset($response->bean->archivo) ? $response->bean->archivo : $response->archivo;
+						$name = isset($response->bean->nombre) ? $response->bean->nombre : $response->nombre;
+						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
+						$this->response->data['file'] = $file;
+						$this->response->data['name'] = $name.'.'.$ext;
+						$this->response->data['ext'] = $ext;
+						break;
+
+					default:
+						# code...
+						break;
+				}
+			break;
+			default:
+
+		}
+
+		return $this->responseToTheView('callWs_DownloadMoves');
 	}
 }

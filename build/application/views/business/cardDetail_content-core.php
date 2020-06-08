@@ -26,13 +26,13 @@
 			<div class="flex col-12 mt-2">
 				<ul class="flex flex-auto justify-between px-2">
 					<li class="list-inline-item">Actual
-						<span id="actual" class="product-balance block"><?= $balance->currentBalance; ?></span>
+						<span id="currentBalance" class="product-balance block"><?= $balance->currentBalance; ?></span>
 					</li>
 					<li class="list-inline-item">En tránsito
-						<span id="bloqueado" class="product-balance block"><?= $balance->inTransitBalance; ?></span>
+						<span id="inTransitBalance" class="product-balance block"><?= $balance->inTransitBalance; ?></span>
 					</li>
 					<li class="list-inline-item">Disponible
-						<span id="disponible" class="product-balance block"><?= $balance->availableBalance; ?></span>
+						<span id="availableBalance" class="product-balance block"><?= $balance->availableBalance; ?></span>
 					</li>
 				</ul>
 			</div>
@@ -57,7 +57,6 @@
 
 				<form id="movements">
 					<div class="row items-center pl-2">
-						<input type="hidden" id="userIdNumber" name="userIdNumber" value="<?= $userIdNumber ?>">
 						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
 						<input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
 						<input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
@@ -72,7 +71,7 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group">
-							<select id="filterYear" class="form-group custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
+							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
 								<option value="default">--</option>
 								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
 								<option value="<?= $i ?>"><?= $i ?></option>
@@ -80,7 +79,7 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
+						<button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
 							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 						</button>
 					</div>
@@ -93,20 +92,39 @@
 			<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
 				data-name="reset">En tránsito</button>
 			<?php endif; ?>
-			<ul class="stack list-inline mb-0 flex items-center pb-2">
-				<li class="stack-item px-1 list-inline-item">
-					<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
-				</li>
-				<li class="stack-item px-1 list-inline-item is-disabled">
-					<a id="" href="#"><span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span></a>
-				</li>
-				<li class="stack-item px-1 list-inline-item">
-					<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
-				</li>
-				<li class="stack-item px-1 list-inline-item is-disabled">
-					<a id="" href="#"><span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span></a>
-				</li>
-			</ul>
+			<div class="hide-downloads">
+				<ul id="downloadFiles" class="stack list-inline mb-0 flex items-center pb-2">
+					<li class="stack-item px-1 list-inline-item">
+						<a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+							<span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
+						</a>
+					</li>
+					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+					<li class="stack-item px-1 list-inline-item is-disabled">
+						<a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
+						</a>
+					</li>
+					<?php endif; ?>
+					<li class="stack-item px-1 list-inline-item">
+						<a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+							<span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
+						</a>
+					</li>
+					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+					<li class="stack-item px-1 list-inline-item is-disabled">
+						<a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
+						</a>
+					</li>
+					<?php endif; ?>
+					<form id="downd-send">
+						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+						<input type="hidden" id="month" name="filterMonth" value="0">
+						<input type="hidden" id="year" name="filterYear" value="0">
+					</form>
+				</ul>
+			</div>
 		</nav>
 		<div class="line mb-1"></div>
 		<div id="results" class="mt-1 justify-center">

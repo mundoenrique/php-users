@@ -236,18 +236,25 @@ class Encrypt_Connect {
 
 			if(is_object($response)) {
 				foreach ($response AS $pos => $responseAttr) {
-					if($pos == 'archivo') {
-						$wirteLog->archivo = 'OK';
-						if(!is_array($responseAttr)) {
-							$wirteLog->archivo = 'Sin arreglo binario';
+					if($pos == 'bean' || $pos == 'archivo') {
+						if (isset($responseAttr->archivo) || isset($response->archivo)) {
+							$wirteLog->archivo = 'OK';
+							$wirteLog->nombre = isset($responseAttr->nombre) ? $responseAttr->nombre : $response->nombre;
+							$wirteLog->formatoArchivo = isset($responseAttr->formatoArchivo) ? $responseAttr->formatoArchivo : $response->formatoArchivo;
+							$file = isset($responseAttr->archivo) ? $responseAttr->archivo : $response->archivo;
+							if(!is_array($file)) {
+								$wirteLog->archivo = FALSE;
+							}
+							continue;
 						}
-						continue;
 					}
 					$wirteLog->$pos = $responseAttr;
 				}
 			}
 
 			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
+
+			unset($wirteLog);
 		}
 	}
 }

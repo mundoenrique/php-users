@@ -36,3 +36,4 @@ $lang['CONF_FOOTER_LOGO'] = 'OFF';
 $lang['CONF_SUGGESTION_IE'] = 'OFF';
 //CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
+$lang['CONF_SEND_MOVEMENTS'] = 'OFF';

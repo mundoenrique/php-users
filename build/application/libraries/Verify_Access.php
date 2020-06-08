@@ -130,6 +130,8 @@ class Verify_Access {
 				break;
 				case 'getBalance':
 				case 'cardDetail':
+				case 'monthlyMovements':
+				case 'downloadMoves':
 				case 'services':
 					$auth = $this->CI->session->has_userdata('products');
 				break;

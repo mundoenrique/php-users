@@ -64,14 +64,43 @@ $config = [
 	],
 	'cardDetail' => [
 		[
-			'field' => 'userIdNumber',
-			'label' => 'userIdNumber',
-			'rules' => 'trim|alpha_numeric|required'
-		],
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		]
+	],
+	'monthlyMovements' => [
 		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'filterMonth',
+			'label' => 'filterMonth',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'filterYear',
+			'label' => 'filterYear',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'downloadMoves' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'month',
+			'label' => 'month',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'year',
+			'label' => 'year',
+			'rules' => 'trim|numeric|required'
 		]
 	],
 	'finishSession' => [

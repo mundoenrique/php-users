@@ -43,6 +43,9 @@ function validateForms(form) {
 			"current-pass": {required: true},
 			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
 			"confirm-pass": {required: true, equalTo: "#newPass"},
+			"confirm-pass": {required: true, equalTo: "#newPass"},
+			"filterMonth": {required: true, pattern: numeric},
+			"filterYear": {required: true, pattern: numeric},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
