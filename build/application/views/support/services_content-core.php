@@ -9,10 +9,10 @@
 						<div class="flex flex-colunm justify-center col-6 py-5">
 							<div class="product-presentation relative">
 								<div class="item-network maestro"></div>
-								<div class="product-search">
-									<a class="dialog button product-button btn"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
+								<!-- <div id="donor" class="product-search btn">
+									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
 									<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
-								</div>
+								</div> -->
 								<img class="card-image" src="../../../assets/images/default/bnt_default.svg" alt="Tarjeta Banorte">
 							</div>
 						</div>
@@ -27,7 +27,7 @@
 					<div class="flex col-12 optional mt-4 px-0">
 						<nav class="nav-config w-100">
 							<ul class="flex flex-wrap justify-center nav-config-box">
-								<li id="PinManagement" class="list-inline-item nav-item-config mr-2">
+								<li id="pinManagement" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
 									<span class="icon-config icon-key h1 icon-color"></span>
 									<h5 class="center">Gestión<br>de PIN</h5>
@@ -37,7 +37,7 @@
 									</div>
 									</a>
 								</li>
-								<li id="CardLock" class="list-inline-item nav-item-config mr-2">
+								<li id="cardLock" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
 									<span class="icon-config icon-lock h1 icon-color"></span>
 									<h5 class="center">Bloqueo<br>de tarjeta</h5>
@@ -65,7 +65,7 @@
 		</div>
 
 		<div class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-			<div id="pinManagementView">
+			<div id="pinManagementView" style="display:none">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
 					<div id="pre-loader" class="mt-2 mb-4 mx-auto flex justify-center">
@@ -108,7 +108,12 @@
 										<div class="help-block"></div>
 									</div>
 								</div>
-								<div id="changeVerificationOTP">
+								<div id="pinRequestOTP" class="none">
+									<hr class="separador-one mb-3">
+									<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
+									<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
+								</div>
+								<div id="changeVerificationOTP" class="none">
 									<hr class="separador-one mb-3">
 									<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 									<div class="row">
@@ -125,24 +130,13 @@
 									<a class="btn btn-small btn-link" href="">Cancelar</a>
 									<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
 								</div>
-
-								<div id="changeVerificationOTP">
-									<hr class="separador-one mb-3">
-									<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
-									<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
-								</div>
-								<hr class="separador-one">
-								<div class="flex items-center justify-end pt-3">
-									<a class="btn btn-small btn-link" href="">Cancelar</a>
-									<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
-								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div id="cardLockView">
+			<div id="cardLockView" style="display:none">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Bloqueo de tarjeta</h4>
 					<p>Si realmente deseas bloqueas tu tarjeta, presiona continuar</p>
@@ -153,7 +147,7 @@
 				</div>
 			</div>
 
-			<div id="replacementRequestView">
+			<div id="replacementRequestView" style="display:none">
 				<div class="flex mb-1 mx-4 flex-column">
 					<h4 class="line-text mb-2 semibold primary">Solicitud de reposición</h4>
 					<p>Seleccione una motivo de la solicitud</p>
@@ -170,7 +164,7 @@
 								<div class="help-block"></div>
 							</div>
 						</div>
-						<div id="replaceVerificationOTP">
+						<div id="replaceVerificationOTP" class="none">
 							<hr class="separador-one mb-3">
 							<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
 							<div class="row">
