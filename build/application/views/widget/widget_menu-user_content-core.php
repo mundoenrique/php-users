@@ -12,9 +12,11 @@
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('notificaciones') ?>"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></a>
 				</li>
 				<?php endif; ?>
+				<?php if(lang('CONF_PROFILE') == 'ON'): ?>
 				<li>
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('perfil') ?>"><?= lang('GEN_MENU_PORFILE'); ?></a>
 				</li>
+				<?php endif; ?>
 				<li>
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>"><?= lang('GEN_MENU_SIGNOUT'); ?></a>
 				</li>

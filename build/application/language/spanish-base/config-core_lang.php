@@ -12,6 +12,7 @@ $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //MENU
+$lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
 $lang['CONF_CARD_DETAIL'] = 'ON';
 $lang['CONF_PAYS_TRANSFER'] = 'OFF';
@@ -24,6 +25,7 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_CUSTOMER_SUPPORT'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
+$lang['CONF_PROFILE'] = 'ON';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
