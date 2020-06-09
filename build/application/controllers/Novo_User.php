@@ -116,7 +116,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"user/user_identify"
+			"user/userIdentify"
 		);
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');

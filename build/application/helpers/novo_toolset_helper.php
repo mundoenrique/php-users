@@ -122,7 +122,8 @@ if (!function_exists('languageLoad')) {
 				break;
 			case 'bnt':
 				$languages = [
-					'signin' => ['login']
+					'signin' => ['login'],
+					'userIdentify' => ['terms'],
 				];
 				break;
 			case 'co':
@@ -148,6 +149,7 @@ if (!function_exists('languageLoad')) {
 			default:
 				$languages = [
 					'signin' => ['login'],
+					'userIdentify' => ['terms'],
 					'accessRecover' => ['recover'],
 					'changePassword' => ['user'],
 					'userCardsList' => ['cards'],

@@ -46,6 +46,10 @@ function validateForms(form) {
 			"confirm-pass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
+			"numberCard": {required: true, pattern: numeric, maxlength: 16},
+			"docmentId": {required: true, pattern: numeric},
+			"secretPassword": {required: true, pattern: numeric},
+			"acceptTerms": {required: true},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
