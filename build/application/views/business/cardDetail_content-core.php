@@ -71,15 +71,15 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group">
-							<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" disabled>
+							<select id="filterYear" class="custom-select form-control w-100 my-1 mr-1" name="filterYear" disabled>
 								<option value="default">--</option>
 								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
 								<option value="<?= $i ?>"><?= $i ?></option>
 								<?php endfor; ?>
 							</select>
-							<div class="help-block"></div>
+							<div class="help-block mx-0"></div>
 						</div>
-						<button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
+						<button id="search" class="btn btn-small btn-rounded-right btn-primary ml-1 mb-3" disabled>
 							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 						</button>
 					</div>
