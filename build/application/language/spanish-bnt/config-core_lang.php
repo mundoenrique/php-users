@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //menu
-$lang['CONF_PROFILE'] = 'OFF';
 //signIn
 $lang['CONF_SIGNIN_IMG'] = 'ON';
 $lang['CONF_REPORTS'] = 'OFF';

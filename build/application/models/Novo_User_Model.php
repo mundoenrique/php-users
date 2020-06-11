@@ -535,6 +535,32 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('KeepSession');
 	}
 	/**
+	 * @info Método para obtener el perfil del usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Jun 11th, 2020
+	 */
+	public function callWs_ProfileUser_User()
+	{
+		log_message('INFO', 'NOVO User Model: ProfileUser Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Perfil';
+		$this->dataAccessLog->operation = 'datos del usuario';
+
+		$this->dataRequest->idOperation = '30';
+		$this->dataRequest->userName = $this->session->userName;
+
+		$response = $this->sendToService('callWs_ProfileUser');
+
+
+
+
+		return $this->responseToTheView('callWs_ProfileUser');
+	}
+
+	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 1st, 2019

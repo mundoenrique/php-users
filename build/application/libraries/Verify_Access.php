@@ -125,7 +125,7 @@ class Verify_Access {
 			switch($module) {
 				case 'keepSession':
 				case 'userCardsList':
-				case 'profile':
+				case 'profileUser':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
 				case 'getBalance':

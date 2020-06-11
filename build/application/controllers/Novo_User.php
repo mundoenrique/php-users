@@ -184,14 +184,14 @@ class Novo_User extends NOVO_Controller {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 21th, 2020
 	 */
-	public function profile()
+	public function profileUser()
 	{
-		log_message('INFO', 'NOVO User: profile Method Initialized');
+		log_message('INFO', 'NOVO User: profileUser Method Initialized');
 
-		$view = 'profile';
+		$view = 'profileUser';
 		array_push(
 			$this->includeAssets->jsFiles,
-			"user/profile"
+			"user/profileUser"
 		);
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
