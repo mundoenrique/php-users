@@ -69,9 +69,11 @@
 					<tr>
 						<td>GDL</td>
 						<td class="text-right">(33) 3669 9040</td>
+					<tr class="center bold">
+						<td colspan="2">RESTO DEL PAÍS</td>
 					</tr>
-						<td>Resto del País</td>
-						<td class="text-right">800 DIRECTA (3473282)</td>
+					<tr class="center">
+						<td colspan="2">800 DIRECTA (3473282)</td>
 					</tr>
 				</tbody>
 			</table>
