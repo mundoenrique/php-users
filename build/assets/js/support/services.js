@@ -57,5 +57,25 @@ $(function () {
 			}
 		});
 	}*/
+	$('#blockBtn').on('click', function(e) {
+		e.preventDefault();
+		form = $('#operation');
+		btnText = $(this).text().trim()
+		data = getDataForm(form);
+		insertFormInput(true);
+		$(this).html(loader);
+		who = 'CustomerSupport'; where = data.action
 
+		callNovoCore(who, where, data, function(response) {
+			if (data.action == 'TemporaryLock' && response.success) {
+				var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
+				$('.status-text1').text(statusText);
+				$('.status-text2').text(statusText.toLowerCase());
+				var status = $('#status').val() == '' ? 'PB' : ''
+				$('#status').val(status);
+				insertFormInput(false);
+				$('#blockBtn').html(btnText);
+			}
+		})
+	})
 });

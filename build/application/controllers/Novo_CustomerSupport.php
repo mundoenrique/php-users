@@ -26,7 +26,38 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"support/services"
 		);
+		$this->load->model('Novo_Business_Model', 'business');
+		$userCardList = $this->business->callWs_UserCardsList_Business();
+		$this->responseAttr($userCardList);
+		$cardsList = $userCardList->data->cardsList;
+		$cardsTotal = count($cardsList);
+
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
+		$this->render->cardsTotal = $cardsTotal;
+		$this->render->cardsList = $cardsList;
+		$this->render->brand = '';
+		$this->render->productImg = '';
+		$this->render->productUrl = '';
+		$this->render->productName = '';
+		$this->render->cardNumberMask = '';
+		$this->render->cardNumber = '';
+		$this->render->expireDate = '';
+		$this->render->prefix = '';
+		$this->render->status = '';
+		$this->render->statustext = '';
+
+		if ($cardsTotal == 1) {
+			$this->render->brand = $cardsList[0]->brand;
+			$this->render->productImg = $cardsList[0]->productImg;
+			$this->render->productUrl = $cardsList[0]->productUrl;
+			$this->render->productName = $cardsList[0]->productName;
+			$this->render->cardNumberMask = $cardsList[0]->cardNumberMask;
+			$this->render->cardNumber = $cardsList[0]->cardNumber;
+			$this->render->expireDate = $cardsList[0]->expireDate;
+			$this->render->prefix = $cardsList[0]->prefix;
+			$this->render->status = $cardsList[0]->status;
+			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquar';
+		}
 		$this->views = ['support/'.$view];
 		$this->loadView($view);
 	}

@@ -216,6 +216,28 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		]
 	],
+	'temporaryLock' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'label' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',

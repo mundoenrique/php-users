@@ -38,6 +38,9 @@ class Novo_Business_Model extends NOVO_Model {
 					foreach ($response->lista AS $pos => $cardsRecords) {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
+						$cardRecord->expireDate = $cardsRecords->fechaExp;
+						$cardRecord->prefix = $cardsRecords->prefix;
+						$cardRecord->status = $cardsRecords->bloque/*  == '' ? 'N' : $cardsRecords->bloque */;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;

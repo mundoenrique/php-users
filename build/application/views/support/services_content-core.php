@@ -8,58 +8,66 @@
 					<div class="flex inline-flex col-12 px-xl-2 widget-product">
 						<div class="flex flex-colunm justify-center col-6 py-5">
 							<div class="product-presentation relative">
-								<div class="item-network maestro"></div>
+								<div class="item-network <?= $brand; ?>"></div>
 								<!-- <div id="donor" class="product-search btn">
 									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
 									<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
 								</div> -->
-								<img class="card-image" src="../../../assets/images/default/bnt_default.svg" alt="Tarjeta Banorte">
+								<?php if ($cardsTotal == 1): ?>
+								<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+								<?php endif; ?>
 							</div>
 						</div>
 						<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+							<?php if ($cardsTotal > 1): ?>
 							<span>Seleccione una cuenta</span>
-							<p class="semibold mb-0 h5">PLATA VIÁTICOS</p>
-							<p id="card" class="mb-2">604842******4714</p>
+							<?php endif; ?>
+							<p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
+							<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
+							<?php if ($cardsTotal > 1): ?>
 							<a id="other-product" class="btn hyper-link btn-small p-0" href="">
-							<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto</a>
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto</a>
+							<?php endif; ?>
 						</div>
 					</div>
+					<?php if(FALSE): ?>
 					<div class="flex col-12 optional mt-4 px-0">
 						<nav class="nav-config w-100">
 							<ul class="flex flex-wrap justify-center nav-config-box">
 								<li id="pinManagement" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
-									<span class="icon-config icon-key h1 icon-color"></span>
-									<h5 class="center">Gestión<br>de PIN</h5>
-									<div class="box up left regular">
-										<span class="icon-key h1 icon-color"></span>
-										<h4 class="h5 center">Gestión<br>de PIN</h4>
-									</div>
+										<span class="icon-config icon-key h1 icon-color"></span>
+										<h5 class="center">Gestión<br>de PIN</h5>
+										<div class="box up left regular">
+											<span class="icon-key h1 icon-color"></span>
+											<h4 class="h5 center">Gestión<br>de PIN</h4>
+										</div>
 									</a>
 								</li>
 								<li id="cardLock" class="list-inline-item nav-item-config mr-2">
 									<a href="javascript:">
-									<span class="icon-config icon-lock h1 icon-color"></span>
-									<h5 class="center">Bloqueo<br>de tarjeta</h5>
-									<div class="box up left regular">
-										<span class="icon-lock h1 icon-color"></span>
-										<h4 class="h5 center">Bloqueo<br>de tarjeta</h4>
-									</div>
+										<span class="icon-config icon-lock h1 icon-color"></span>
+										<h5 class="center"><?= $statustext ?><br>de tarjeta</h5>
+										<div class="box up left regular">
+											<span class="icon-lock h1 icon-color"></span>
+											<h4 class="h5 center"><?= $statustext ?><br>de tarjeta</h4>
+										</div>
 									</a>
 								</li>
 								<li id="replacementRequest" class="list-inline-item nav-item-config">
 									<a href="javascript:">
-									<span class="icon-config icon-spinner h1 icon-color"></span>
-									<h5 class="center">Solicitud<br>de reposición</h5>
-									<div class="box up left regular">
-										<span class="icon-spinner h1 icon-color"></span>
-										<h4 class="h5 center">Solicitud<br>de reposición</h4>
-									</div>
+										<span class="icon-config icon-spinner h1 icon-color"></span>
+										<h5 class="center">Solicitud<br>de reposición</h5>
+										<div class="box up left regular">
+											<span class="icon-spinner h1 icon-color"></span>
+											<h4 class="h5 center">Solicitud<br>de reposición</h4>
+										</div>
 									</a>
 								</li>
 							</ul>
 						</nav>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -110,8 +118,10 @@
 								</div>
 								<div id="pinRequestOTP" class="none">
 									<hr class="separador-one mb-3">
-									<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
-									<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>
+									<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder
+										emitir el nuevo PIN.</p>
+									<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en
+										un sobre de seguridad a la dirección de tu empresa.</p>
 								</div>
 								<div id="changeVerificationOTP" class="none">
 									<hr class="separador-one mb-3">
@@ -119,7 +129,7 @@
 									<div class="row">
 										<div class="form-group col-lg-4">
 											<label for="changeCodeOTP">Código de verificación</label>
-											<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled="" autocomplete="off">
+											<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled autocomplete="off">
 											<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 										</div>
 									</div>
@@ -128,7 +138,7 @@
 								<hr class="separador-one">
 								<div class="flex items-center justify-end pt-3">
 									<a class="btn btn-small btn-link" href="">Cancelar</a>
-									<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
+									<button id="" class="btn btn-small btn-loading btn-primary" type="submit" >Continuar</button>
 								</div>
 							</form>
 						</div>
@@ -138,11 +148,11 @@
 
 			<div id="cardLockView" style="display:none">
 				<div class="flex mb-1 mx-4 flex-column">
-					<h4 class="line-text mb-2 semibold primary">Bloqueo de tarjeta</h4>
-					<p>Si realmente deseas bloqueas tu tarjeta, presiona continuar</p>
+					<h4 class="line-text mb-2 semibold primary"><span class="status-text1"><?= $statustext ?></span> tarjeta</h4>
+					<p>Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar</p>
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link" href="">Cancelar</a>
-						<button id="btnChange" class="btn btn-small btn-loading btn-primary" type="submit" name="btnChange">Continuar</button>
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
+						<button id="blockBtn" class="btn btn-small btn-loading btn-primary">Continuar</button>
 					</div>
 				</div>
 			</div>
@@ -170,7 +180,7 @@
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="replaceCodeOTP">Código de verificación</label>
-									<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled="" autocomplete="off">
+									<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled autocomplete="off">
 									<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 								</div>
 							</div>
@@ -188,4 +198,11 @@
 	</div>
 </div>
 
-
+<form id="operation">
+	<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber; ?>">
+	<input type="hidden" id="cardNumberMask" name="cardNumberMask" value="<?= $cardNumberMask; ?>">
+	<input type="hidden" id="expireDate" name="expireDate" value="<?= $expireDate; ?>">
+	<input type="hidden" id="prefix" name="prefix" value="<?= $prefix; ?>">
+	<input type="hidden" id="status" name="status" value="<?= $status; ?>">
+	<input type="hidden" id="action" name="action" value="TemporaryLock">
+</form>
