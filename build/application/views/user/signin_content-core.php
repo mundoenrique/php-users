@@ -60,27 +60,18 @@
 				<tbody>
 					<tr>
 						<td>CDMX</td>
-						<td class="text-right">382 00 00</td>
+						<td class="text-right">(55) 5140 5640</td>
+					</tr>
+					<tr>
+						<td>MTY</td>
+						<td class="text-right">(81) 8156 9640</td>
 					</tr>
 					<tr>
 						<td>GDL</td>
-						<td class="text-right"> 350 43 00</td>
+						<td class="text-right">(33) 3669 9040</td>
 					</tr>
-					<tr>
-						<td>BCN</td>
-						<td class="text-right">652 55 00</td>
-					</tr>
-					<tr>
-						<td>CHIH</td>
-						<td class="text-right">898 00 77</td>
-					</tr>
-					<tr>
-						<td>Edo.Méx</td>
-						<td class="text-right">576 43 30</td>
-					</tr>
-					<tr>
-						<td>Nivel nacional</td>
-						<td class="text-right">018000 518 877</td>
+						<td>Resto del País</td>
+						<td class="text-right">800 DIRECTA (3473282)</td>
 					</tr>
 				</tbody>
 			</table>

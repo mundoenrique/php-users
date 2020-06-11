@@ -89,7 +89,7 @@ function validateForms(form) {
 			},
 			"filterYear": 'Selecciona un año',
 			"numberCard": 'Indica el número de tu tarjeta',
-			"docmentId": 'Indica el número de tu CURO',
+			"docmentId": 'Indica el número de tu CURP',
 			"secretPassword": 'Indica el PIN de tu tarjeta',
 			"acceptTerms": 'Debes aceptar los términos de uso',
 			"nickName": {
