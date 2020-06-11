@@ -288,6 +288,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
 		$this->dataRequest->passwordOld4 = md5(strtoupper($new));
+
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
 		$code = 0;
@@ -336,6 +337,187 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 		return $this->responseToTheView('CallWs_ChangePassword');
+	}
+	/**
+	 * @info Método identificar al usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date jun 10th, 2020
+	 */
+	public function CallWs_UserIdentify_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: UserIdentify Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.CuentaTO';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Identificar usuario';
+		$this->dataAccessLog->operation = 'validar datos de registro';
+		$this->dataAccessLog->userName = $dataRequest->docmentId.date('dmy');
+
+		$this->dataRequest->idOperation = '18';
+		$this->dataRequest->cuenta = $dataRequest->numberCard;
+		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
+		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '3372';
+		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('3372');
+		$this->dataRequest->pais = isset($dataRequest->client) ? $dataRequest->client : $this->country;
+
+		$response = $this->sendToService('CallWs_UserIdentify');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$userData = new stdClass();
+				$userData->user = $response->user;
+				$userData->affiliation = $response->afiliacion;
+				$this->response->data = $userData;
+
+				$userSess = [
+					'userIdentity' => TRUE,
+					'encryptKey' => $response->keyUpdate,
+					'sessionId' => $response->logAccesoObject->sessionId,
+					'userId' => $dataRequest->docmentId,
+					'userName' => $response->logAccesoObject->userName,
+					'docmentId' => $dataRequest->docmentId,
+					'token' => $response->token,
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
+					'countrySess' => isset($dataRequest->client) ? $dataRequest->client : $this->country
+				];
+				$this->session->set_userdata($userSess);
+			break;
+			case -21:
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = 'No fue posible validar tus datos, por favor vuelve a intentarlo';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -183:
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = 'El número de tarjeta no es válido o ya fue registrada';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -184:
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = 'Alguno de los datos indicado no es válido';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_UserIdentify');
+
+	}
+	/**
+	 * @info Método validar la existencia delnombre de usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date jun 10th, 2020
+	 */
+	public function CallWs_ValidNickName_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ValidNickName Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Registro';
+		$this->dataAccessLog->operation = 'validar nombre de usuario';
+
+		$this->dataRequest->idOperation = '19';
+		$this->dataRequest->userName = mb_strtoupper($dataRequest->nickName);
+
+		$response = $this->sendToService('CallWs_ValidNickName');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->session->set_userdata('userNameValid', TRUE);
+			break;
+			case -193:
+				$this->response->code = 1;
+				$this->response->msg = 'Usuario no disponible, intenta con otro';
+			break;
+		}
+
+		return $this->responseToTheView('CallWs_ValidNickName');
+
+	}
+	/**
+	 * @info Método validar la el registro del usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date jun 10th, 2020
+	 */
+	public function CallWs_SignUpData_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: Signup Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Registro';
+		$this->dataAccessLog->operation = 'Registrar usuario';
+
+		$password = json_decode(base64_decode($dataRequest->newPass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$this->dataRequest->idOperation = '20';
+		$this->dataRequest->user = [
+			'userName' => mb_strtoupper($dataRequest->nickName),
+			'primerNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->firstName))))),
+			'segundoNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->middleName))))),
+			'primerApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->lastName))))),
+			'segundoApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->secondSurname))))),
+			'fechaNacimiento' => $dataRequest->birthDate,
+			'id_ext_per' => $dataRequest->idNumber,
+			'tipo_id_ext_per' => lang('CONF_COUNTRY_CODE')[$this->country],
+			'codPais' => isset($dataRequest->client) ? $dataRequest->client : $this->country,
+			'sexo' => $dataRequest->gender,
+			'sexo' => $dataRequest->gender,
+			'notEmail' => '1',
+			'notSms' => '1',
+			'email' => $dataRequest->email,
+			'password' => md5($password),
+			'passwordOld4' => md5(mb_strtoupper($password))
+		];
+		$this->dataRequest->listaTelefonos = [
+			[
+				'tipo' => 'HAB',
+				'numero' => $dataRequest->landLine
+			],
+			[
+				'tipo' => 'CEL',
+				'numero' => $dataRequest->mobilePhone
+			],
+			[
+				'tipo' => $dataRequest->phoneType == '' ? FALSE : $dataRequest->phoneType,
+				'numero' => $dataRequest->otherPhoneNum
+			]
+		];
+
+		$response = $this->sendToService('CallWs_Signup');
+
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->msg = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña';
+				$this->session->sess_destroy();
+			break;
+			case -181:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -284:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			default:
+				$this->session->sess_destroy();
+		}
+
+		return $this->responseToTheView('CallWs_Signup');
+
 	}
 	/**
 	 * @info Método para el cierre de sesión

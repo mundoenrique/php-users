@@ -25,7 +25,7 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-12 col-lg-6">
-								<label for="newPass"><?= lang('USER_PASS_CURRENT'); ?></label>
+								<label for="newPass"><?= lang('USER_PASS_NEW'); ?></label>
 								<div class="input-group">
 									<input id="newPass" class="form-control pwd-input" type="password" name="new-pass">
 									<div class="input-group-append">

@@ -41,3 +41,13 @@ $lang['CONF_SUGGESTION_IE'] = 'OFF';
 //CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
+//SIGNUP
+$lang['CONF_COUNTRY_CODE'] = [
+	'Pe' => 1,
+	'Usd' => 1,
+	'Ve' => 3,
+	'Ec-bp' => 3,
+	'Co' => 4,
+	'Mx-Bn' => 15,
+	'Ec-pb' => 16,
+];

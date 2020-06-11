@@ -1,6 +1,7 @@
 'use strict'
 var reportsResults;
 $(function () {
+	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
@@ -21,21 +22,36 @@ $(function () {
 		notiSystem(lang.TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 		$(this).off('click')
 	})
-	$('#signupBtn').on('click', function(e) {
+
+	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();
-		form = $('#signupForm')
+		form = $('#identityForm')
 		formInputTrim(form)
-		validateForms(form)
+		validateForms(form);
 
 		if (form.valid()) {
-
+			btnText = $(this).text().trim()
+			data = getDataForm(form);
+			insertFormInput(true)
+			who = 'user'; where = 'UserIdentify'
+			$(this).html(loader)
+			callNovoCore(who, where, data, function(response) {
+				if (response.code == 0) {
+					var dataUser = response.data;
+					dataUser = JSON.stringify({dataUser})
+					dataUser = cryptoPass(dataUser);
+					$('#signupForm')
+						.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
+						.submit()
+				} else {
+					insertFormInput(false)
+					$('#identityBtn').html(btnText)
+				}
+			})
 		}
 	})
+});
 
-
-
-	/* validator = $('#status-bulk-form').validate();
+/* validator = $('#signupForm').validate();
 validator.destroy();
 form.submit(); */
-
-});

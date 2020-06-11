@@ -109,7 +109,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		if ($('#system-info').parents('.ui-dialog').length) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
@@ -124,7 +124,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 
-		if ($('#system-info').parents('.ui-dialog:visible').length) {
+		if ($('#system-info').parents('.ui-dialog').length) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
@@ -160,6 +160,7 @@ function getCookieValue() {
  * @date 05/03/2019
  */
 function notiSystem(title, message, icon, data) {
+
 	var btnAccept = $('#accept');
 	var btnCancel = $('#cancel');
 	var dialogMoldal = $('#system-info');
@@ -173,7 +174,7 @@ function notiSystem(title, message, icon, data) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || 'auto',
+		width: data.width || 370,
 		minWidth: lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
 		maxHeight: data.maxHeight || 350,

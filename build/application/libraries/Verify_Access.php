@@ -135,6 +135,15 @@ class Verify_Access {
 				case 'services':
 					$auth = $this->CI->session->has_userdata('products');
 				break;
+				case 'signup':
+					$auth = $this->CI->agent->referrer() == base_url(lang('GEN_LINK_USER_IDENTITY')) && $this->CI->session->has_userdata('userIdentity');
+				break;
+				case 'signUpData':
+					$auth = $this->CI->session->has_userdata('userNameValid');
+				break;
+				case 'validNickName':
+					$auth = $this->CI->session->has_userdata('userName');
+				break;
 				case 'changePassword':
 					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
 				break;

@@ -30,7 +30,7 @@
 				<?php endif; ?>
 				<?php if(lang('CONIFG_SIGIN') == 'ON'): ?>
 				<p class="mb-0 h5 center"><?= lang('LOGIN_NO_USER') ?>
-					<a class="hyper-link" href="<?= base_url('identificar-usuario') ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
+					<a class="hyper-link" href="<?= base_url(lang('GEN_LINK_USER_IDENTITY')) ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
 				</p>
 				<?php endif; ?>
 			</form>

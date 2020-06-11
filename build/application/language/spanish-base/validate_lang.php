@@ -13,3 +13,6 @@ $lang['VALIDATE_DIFFERS_PASS'] = 'La nueva contraseña debe ser diferente a la a
 $lang['VALIDATE_REQUIREMENTS_PASS'] = 'La contraseña debe cumplir los requisitos';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_IQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';
+$lang['VALIDATE_NICK_REQ'] = 'Indica tu nombre de usuario min 6 max 16';
+$lang['VALIDATE_NICK_PATT'] = 'debe iniciar con dos letras, puede contener números y "_"';
+$lang['VALIDATE_NICK_DIFFER'] = 'No debe ser igual a tu documento de identidad';

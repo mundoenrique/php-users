@@ -23,6 +23,119 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'userIdentify' => [
+		[
+			'field' => 'numberCard',
+			'label' => 'numberCard',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'docmentId',
+			'label' => 'docmentId',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'secretPassword',
+			'label' => 'secretPassword',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'acceptTerms',
+			'label' => 'acceptTerms',
+			'rules' => 'trim|regex_match[/on/]|required'
+		]
+	],
+	'signup' => [
+		[
+			'field' => 'dataUser',
+			'label' => 'dataUser',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		]
+	],
+	'validNickName' => [
+		[
+			'field' => 'nickName',
+			'label' => 'nickName',
+			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+		]
+	],
+	'signUpData' => [
+		[
+			'field' => 'nickName',
+			'label' => 'nickName',
+			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+		],
+		[
+			'field' => 'idType',
+			'label' => 'idType',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'firstName',
+			'label' => 'firstName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'lastName',
+			'label' => 'lastName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'middleName',
+			'label' => 'middleName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'secondSurname',
+			'label' => 'secondSurname',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'gender',
+			'label' => 'gender',
+			'rules' => 'trim|regex_match[/^(M|F)/]|required'
+		],
+		[
+			'field' => 'birthDate',
+			'label' => 'birthDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'landLine',
+			'label' => 'landLine',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'phoneType',
+			'label' => 'phoneType',
+			'rules' => 'trim|alpha'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'label' => 'otherPhoneNum',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'newPass',
+			'label' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
 	'accessRecover' => [
 		[
 			'field' => 'recoveryUser',

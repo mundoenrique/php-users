@@ -30,6 +30,12 @@ class Novo_User extends NOVO_Controller {
 			exit();
 		}
 
+		$userSess = [
+			'logged', 'encryptKey', 'sessionId', 'userId', 'userName', 'fullName', 'lastSession', 'token', 'client', 'time', 'cl_addr', 'countrySess',
+			'countryUri', 'client_agent', 'userIdentity', 'userNameValid', 'docmentId', 'screenSize'
+		];
+		$this->session->unset_userdata($userSess);
+
 		if($this->render->activeRecaptcha) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
@@ -57,6 +63,28 @@ class Novo_User extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
+	 * @info Método que renderiza la vista la identificación positiva del usuario
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date May 20th, 2020
+	 */
+	public function userIdentify()
+	{
+		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
+
+		$view = 'userIdentify';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"user/userIdentify"
+		);
+		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/**
 	 * @info Método para el registro del usuario
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 21th, 2020
@@ -66,13 +94,30 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: signup Method Initialized');
 
 		$view = 'signup';
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"user/validPass",
 			"user/signup"
 		);
+
+		$dataUser = json_decode(base64_decode($this->request->dataUser));
+		$dataUser = json_decode($this->cryptography->decrypt(
+			base64_decode($dataUser->plot),
+			utf8_encode($dataUser->password)
+		));
+		$dataUser = $dataUser->dataUser;
+
+		foreach ($dataUser->user AS $index => $render) {
+			$this->render->$index = $render;
+		}
+
+		foreach ($dataUser->affiliation AS $index => $render) {
+			$this->render->$index = $render;
+		}
 
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
@@ -98,28 +143,6 @@ class Novo_User extends NOVO_Controller {
 		);
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_ACCESS_RECOVER');
-		$this->views = ['user/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método que renderiza la vista la identificación positiva del usuario
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 20th, 2020
-	 */
-	public function userIdentify()
-	{
-		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
-
-		$view = 'userIdentify';
-		array_push(
-			$this->includeAssets->jsFiles,
-			"third_party/jquery.validate",
-			"form_validation",
-			"third_party/additional-methods",
-			"user/userIdentify"
-		);
-		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -153,6 +176,24 @@ class Novo_User extends NOVO_Controller {
 		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_CHANGE_PASS');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para obtener el perfil del usuario
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date May 21th, 2020
+	 */
+	public function profile()
+	{
+		log_message('INFO', 'NOVO User: profile Method Initialized');
+
+		$view = 'profile';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"user/profile"
+		);
+		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -217,24 +258,6 @@ class Novo_User extends NOVO_Controller {
 		$this->render->msg2 = $messageBrowser->msg2;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = $views;
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para obtener el perfil del usuario
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 21th, 2020
-	 */
-	public function profile()
-	{
-		log_message('INFO', 'NOVO User: profile Method Initialized');
-
-		$view = 'profile';
-		array_push(
-			$this->includeAssets->jsFiles,
-			"user/profile"
-		);
-		$this->render->titlePage = lang('GEN_MENU_PORFILE');
-		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
 }

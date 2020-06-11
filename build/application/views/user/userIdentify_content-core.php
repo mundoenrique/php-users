@@ -12,22 +12,22 @@
 				siguientes datos relacionados con tu cuenta:</p>
 
 			<div class="max-width-1 fit-lg mx-auto pt-1">
-				<form id="signupForm" method="POST">
+				<form id="identityForm">
 					<div class="row">
 						<div class="form-group col-lg-4">
-							<label for="cardNumber" class="regular">Número de tarjeta</label>
-							<input id="cardNumber" class="form-control" type="text" name="numberCard" maxlength="16">
+							<label for="numberCard" class="regular">Número de tarjeta</label>
+							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4">
 							<label for="docmentId" class="regular"><?= lang('GEN_DNI'); ?></label>
-							<input id="docmentId" class="form-control" type="text" name="docmentId">
+							<input id="docmentId" class="form-control" type="text" name="docmentId"  maxlength="25">
 							<div class="help-block"></div>
 						</div>
 						<?php if(lang('CONF_SECRET_KEY') == 'ON'): ?>
 						<div class="form-group col-lg-4">
 							<label for="secretPassword" class="regular">Clave secreta (PIN)</label>
-							<input id="secretPassword" class="form-control" type="password" name="secretPassword" maxlength="15" value="">
+							<input id="secretPassword" class="form-control" type="password" name="secretPassword" maxlength="15">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
@@ -42,10 +42,11 @@
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
 						<a class="btn btn-small btn-link big-modal" href="<?= base_url('inicio');?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-						<button id="signupBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+						<button id="identityBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<form id="signupForm" action="<?= base_url(lang('GEN_LINK_USER_SIGNUP')); ?>" method="POST"></form>

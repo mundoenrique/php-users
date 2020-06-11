@@ -149,6 +149,7 @@ if (!function_exists('languageLoad')) {
 			default:
 				$languages = [
 					'signin' => ['login'],
+					'signup' => ['user'],
 					'userIdentify' => ['terms'],
 					'accessRecover' => ['recover'],
 					'changePassword' => ['user'],

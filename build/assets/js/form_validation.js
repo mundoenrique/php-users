@@ -3,16 +3,17 @@ function validateForms(form) {
 	var validCountry = country;
 	var onlyNumber = /^[0-9]{6,8}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-	var validNickName = /^([a-z]{2,}[0-9_]*)$/i;
+	var validNickName = /^(([a-z]{2,})+([a-z0-9_]){4,16})$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhrase = /^[a-z0-9ñáéíóú ().-]{8,70}$/i;
+	var longPhrase = /^[a-z0-9ñáéíóú ]{3,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
+	var phone = /^[0-9]{7,15}$/;
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
@@ -47,9 +48,25 @@ function validateForms(form) {
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
 			"numberCard": {required: true, pattern: numeric, maxlength: 16},
-			"docmentId": {required: true, pattern: numeric},
+			"docmentId": {required: true, pattern: alphanum},
 			"secretPassword": {required: true, pattern: numeric},
 			"acceptTerms": {required: true},
+			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
+			"middleName": {pattern: longPhrase},
+			"secondSurname": {pattern: longPhrase},
+			"birthDate": {required: true, pattern: date.dmy},
+			"gender": {required: true},
+			"confirmEmail": {required: true, equalTo: "#email"},
+			"landLine": {pattern: phone},
+			"mobilePhone": {required: true, pattern: phone},
+			"otherPhoneNum": {
+				required: {
+					depends: function (element) {
+						return $('#phoneType').val() != ''
+					}
+				},
+				pattern: phone
+			}
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -70,6 +87,25 @@ function validateForms(form) {
 				required: lang.VALIDATE_CONFIRM_PASS,
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
+			"filterYear": 'Selecciona un año',
+			"numberCard": 'Indica el número de tu tarjeta',
+			"docmentId": 'Indica el número de tu CURO',
+			"secretPassword": 'Indica el PIN de tu tarjeta',
+			"acceptTerms": 'Debes aceptar los términos de uso',
+			"nickName": {
+				required: lang.VALIDATE_NICK_REQ,
+				pattern: lang.VALIDATE_NICK_PATT,
+				differs: lang.VALIDATE_NICK_DIFFER,
+				dbAvailable: 'Usuario no disponible, intenta con otro',
+			},
+			"middleName": 'Indica tu segundo nombre',
+			"secondSurname": 'Indica tu segundo apellido',
+			"birthDate": 'Indica tu fecha de cunpleaños',
+			"gender": 'indica tu genero',
+			"confirmEmail": 'debe ser igual a tu correo',
+			"landLine": 'Indica un telefono válido min 7 max 15',
+			"mobilePhone": 'Indica un movil válido min 7 max 15',
+			"otherPhoneNum": 'Indica un telefono válido min 7 max 15',
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -91,6 +127,10 @@ function validateForms(form) {
 
 	$.validator.methods.validatePass = function(value, element, param) {
 		return passStrength(value);
+	}
+
+	$.validator.methods.dbAvailable = function(value, element, param) {
+		return $(element).hasClass('available');
 	}
 
 	form.validate().resetForm();
