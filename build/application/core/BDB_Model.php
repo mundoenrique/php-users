@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class BDB_Model extends CI_Model {
 	public $dataAccessLog;
 	public $className;
-	public $accessLog;
+	public $logAccess;
 	public $token;
 	public $country;
 	public $countryUri;
@@ -24,7 +24,7 @@ class BDB_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->response->code = lang('RESP_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+		$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 		$this->response->classIconName = 'ui-icon-closethick';
 		$this->response->data = [
 			'btn1'=> [
@@ -47,24 +47,24 @@ class BDB_Model extends CI_Model {
 	{
 		log_message('INFO', 'NOVO sendToService Method Initialized');
 
-		$this->accessLog = accessLog($this->dataAccessLog);
+		$this->logAccess = logAccess($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
 		$this->dataRequest->className = $this->className;
-		$this->dataRequest->logAccesoObject = $this->accessLog;
+		$this->dataRequest->logAccesoObject = $this->logAccess;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->pais = empty($this->dataRequest->pais)? ucwords($this->country): $this->dataRequest->pais;
 
 
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
+		$encryptData = $this->bdb_connect_encrypt->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = [];
-		$response = $this->encrypt_connect->connectWs($request, $this->dataAccessLog->userName, $model);
+		$response = $this->bdb_connect_encrypt->connectWs($request, $this->dataAccessLog->userName, $model);
 
 		if(isset($response->rc)){
 			$responseDecrypt = $response;
 		}else{
-			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
+			$responseDecrypt = $this->bdb_connect_encrypt->decode($response->data, $this->userName, $model);
 		}
 
 		log_message("info", "Response: " . json_encode($responseDecrypt));

@@ -138,7 +138,7 @@ foreach ($datos->cuentaOrigen as $value) {
         <?php
         $datos = null;
         $datos = unserialize($data);
-        $base_cdn = $this->config->item('base_url_cdn');
+        $base_cdn = $this->config->item('asset_url');
 
         foreach ($datos->cuentaOrigen as $value) {
             $cadena = strtolower($value->producto);

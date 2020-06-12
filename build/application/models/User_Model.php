@@ -55,7 +55,7 @@ class User_Model extends BDB_Model
 							'pais' => $response->codPais,
 							'aplicaTransferencia' => $response->aplicaTransferencia,
 							'passwordOperaciones' => $response->passwordOperaciones,
-							'cl_addr' => np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'], 0),
+							'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 							'afiliado' => $response->afiliado,
 							'celular' => isset($response->celular)? $response->celular: '',
 							'tyc' => $response->tyc
@@ -191,7 +191,7 @@ class User_Model extends BDB_Model
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
-							'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
+							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
 							);
 						$this->session->set_userdata($newdata);
 
@@ -482,7 +482,7 @@ class User_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg =
+					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang($messageNotiSystem) );
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),
@@ -493,7 +493,7 @@ class User_Model extends BDB_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [
@@ -786,7 +786,7 @@ class User_Model extends BDB_Model
 					break;
 				case -61:
 					$this->response->code = 2;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [

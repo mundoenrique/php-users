@@ -154,7 +154,7 @@ class Registro_model extends CI_Model {
 		       'token'		=> $desdata->token,
 		       'sessionId'	=> $desdata->logAccesoObject->sessionId,
 		       'keyId'		=> $desdata->keyUpdate,
-		       'cl_addr'	=> np_Hoplite_Encryption($_SERVER['REMOTE_ADDR'],0)
+		       'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
 		   	);
 			$this->session->set_userdata($newdata);
 	  	}

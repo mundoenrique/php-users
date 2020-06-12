@@ -61,7 +61,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 		<ul id="dashboard">
 
 			<?php
-			$base_cdn = $this->config->item('base_url_cdn');
+			$base_cdn = $this->config->item('asset_url');
 			if($datos->lista == 0){
 				echo "Error cargando cuantas.";
 			}

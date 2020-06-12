@@ -6,19 +6,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 class Asset {
-	private $cssFiles = [];
-	private $jsFiles = [];
-	private $CI = [];
+	private $cssFiles;
+	private $jsFiles;
+	private $CI;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Assets Library Class Initialized');
-		$CI =& get_instance();
-		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
+
+		$this->cssFiles = [];
+		$this->jsFiles = [];
+		$this->CI = &get_instance();
+		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function initialize($params = [])
 	{
@@ -27,14 +30,13 @@ class Asset {
 			isset($this->$arrayFiles) ? $this->$arrayFiles = $file : '';
 		}
 	}
-
 	/**
 	 * @info Método para insertar archivos css en el documento
-	 * @author: J. Enrique Peñaloza P.
+	 * @author: J. Enrique Peñaloza Piñero.
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Assets: insertCss method initialized');
+		log_message('INFO', 'NOVO Asset: insertCss method initialized');
 		$file_url = NULL;
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
@@ -45,11 +47,11 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Assets: insertJs method initialized');
+		log_message('INFO', 'NOVO Asset: insertJs method initialized');
 		$file_url = NULL;
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/'.$fileName.'.js');
@@ -60,20 +62,24 @@ class Asset {
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function insertFile($fileName, $folder = 'images', $client = FALSE)
+	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
-		log_message('INFO', 'NOVO Assets: insertFile method initialized');
-		$client = $client ? $client.'/' : '';
-		$file = assetPath($folder.'/'.$client.$fileName);
-		$version = '?V'.date('Ymd-U', filemtime($file));
-		return assetUrl($folder.'/'.$client.$fileName.$version);
-	}
+		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
+		$country = !$country || $this->CI->config->item('client') == 'novo' ? '' : $country.'/';
+		$file = assetPath($folder.'/'.$country.$fileName);
+		if (!file_exists($file)) {
+			$file = assetPath($folder.'/default/logo.svg');
+			$country = 'default/';
+		}
+		$version = '?V'.date('Ymd-U', filemtime($file));
+		return assetUrl($folder.'/'.$country.$fileName.$version);
+	}
 	/**
 	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza P.
+	 * @author J. Enrique Peñaloza Piñero.
 	 */
 	private function versionFiles($file, $fileName, $ext)
 	{
@@ -81,19 +87,9 @@ class Asset {
 		$thirdParty = strpos($fileName, 'third_party');
 		if($thirdParty === FALSE && file_exists($file)) {
 			$version = '?V'.date('Ymd-U', filemtime($file));
-			//$ext = (ENVIRONMENT === 'testing' || ENVIRONMENT === 'production') ? '.min'.$ext : $ext;
 		} else {
 			$ext = '.min'.$ext;
 		}
 		return $fileName.$ext.$version;
-	}
-	/**
-	 * @info Verifica la existencia de un archivo
-	 * @autor Pedro Torres
-	 * @date 23/09/2019
-	 */
-	public function verifyFileUrl($url)
-	{
-		return @get_headers($url)[0] === 'HTTP/1.1 200 OK';
 	}
 }
