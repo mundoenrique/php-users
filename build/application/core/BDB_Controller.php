@@ -28,6 +28,8 @@ class BDB_Controller extends CI_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'BDB_Controller Class Initialized');
+		$this->config->set_item('language', 'core-base');
+		$this->load->library('BDB_Connect_Encrypt');
 
 		$this->render = new stdClass();
 		$this->render->loadAlert = '0';
@@ -59,9 +61,9 @@ class BDB_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 
-		languageLoad();
+		loadLanguage();
 		countryCheck($this->countryUri);
-		languageLoad($this->countryUri);
+		loadLanguage($this->countryUri);
 
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
@@ -190,8 +192,8 @@ class BDB_Controller extends CI_Controller {
 
 	protected function checkBrowser () {
 
-		$this->load->library('Tool_Browser');
-		$infoBrowser = $this->tool_browser->validateBrowser();
+		$this->load->library('BDB_Browser');
+		$infoBrowser = $this->bdb_browser->validateBrowser();
 
 		if ($infoBrowser['isMobile']) {
 

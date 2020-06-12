@@ -67,7 +67,7 @@
 	<div id="system-info" class="none" name="system-info" oncopy="return false">
 		<p>
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
-			<span id="system-msg" class="system-msg"><?= lang('RESP_MESSAGE_SYSTEM'); ?></span>
+			<span id="system-msg" class="system-msg"><?= lang('GEN_SYSTEM_MESSAGE'); ?></span>
 		</p>
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset flex modal-buttonset">
@@ -95,7 +95,7 @@
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>";
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>";
 		var redirectNotiSystem = "<?= $redirectAlert?:''; ?>";
-		
+
 		var msgResendOTP = "<a name='resendCode' class='primary regular' href='#'>"+"<?= lang('RESP_RESEEND_OTP') ?>"+"</a>"
 
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"

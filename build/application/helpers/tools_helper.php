@@ -166,60 +166,61 @@ if ( ! function_exists('np_hoplite_modFunciones'))
 		}
 
 	}
+}
 
-	function np_hoplite_verificLogin()
-	{
+function np_hoplite_verificLogin()
+{
 
-		$CI =& get_instance();
+	$CI =& get_instance();
 
-		if(!($CI->session->userdata('logged_in'))){
-			$append = '';
-			$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
-			if ($skin !== false && $skin !== 'default'){
-				$append = '/' . $skin . '/home';
-			}
-
-			redirect($CI->config->item('base_url') . $append);
+	if(!($CI->session->userdata('logged_in'))){
+		$append = '';
+		$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
+		if ($skin !== false && $skin !== 'default'){
+			$append = '/' . $skin . '/home';
 		}
 
-	}
-
-	function np_hoplite_verificSession()
-	{
-
-		$CI =& get_instance();
-
-		if($CI->session->userdata('logged_in') === true){
-			redirect($CI->config->item('base_url') . '/dashboard');
-		}
-
-	}
-
-	if(!function_exists('getFaviconLoader')) {
-		function getFaviconLoader() {
-			$CI = &get_instance();
-			$favicon = $CI->config->item('favicon');
-			$loader = 'loading-';
-			switch($CI->config->item('country')) {
-				case 'Ec-bp':
-					$ext = 'ico';
-					$loader.= 'bp.gif';
-					break;
-				default:
-					$ext = 'png';
-					$loader.= 'novo.gif';
-			}
-
-			$faviconLoader = new stdClass();
-			$faviconLoader->favicon = $favicon;
-			$faviconLoader->ext = $ext;
-			$faviconLoader->loader = $loader;
-
-			return $faviconLoader;
-		}
+		redirect($CI->config->item('base_url') . $append);
 	}
 
 }
+
+function np_hoplite_verificSession()
+{
+
+	$CI =& get_instance();
+
+	if($CI->session->userdata('logged_in') === true){
+		redirect($CI->config->item('base_url') . '/dashboard');
+	}
+
+}
+
+if(!function_exists('getFaviconLoader')) {
+	function getFaviconLoader() {
+		$CI = &get_instance();
+		$favicon = $CI->config->item('favicon');
+		$loader = 'loading-';
+		switch($CI->config->item('country')) {
+			case 'Ec-bp':
+				$ext = 'ico';
+				$loader.= 'bp.gif';
+				break;
+			default:
+				$ext = 'png';
+				$loader.= 'novo.gif';
+		}
+
+		$faviconLoader = new stdClass();
+		$faviconLoader->favicon = $favicon;
+		$faviconLoader->ext = $ext;
+		$faviconLoader->loader = $loader;
+
+		return $faviconLoader;
+	}
+}
+
+
 
 // ------------------------------------------------------------------------
 if ( ! function_exists('np_hoplite_decimals'))
@@ -257,20 +258,8 @@ if(!function_exists('clientCheck')) {
 	}
 }
 
-if(!function_exists('assetPath')) {
-	function assetPath($route = '') {
-		return get_instance()->config->item('base_path_cdn').$route;
-	}
-}
-
-if(!function_exists('assetUrl')) {
-	function assetUrl($route = '') {
-		return get_instance()->config->item('base_url_cdn').$route;
-	}
-}
-
-if(!function_exists('accessLog')) {
-	function accessLog($dataAccessLog) {
+if(!function_exists('logAccess')) {
+	function logAccess($dataAccessLog) {
 		$CI = &get_instance();
 
 		return [
@@ -288,14 +277,14 @@ if(!function_exists('accessLog')) {
 	}
 }
 
-if(!function_exists('languajeLoad')) {
-	function languageLoad($client = 'default_lang', $langFiles = FALSE) {
+if(!function_exists('loadLanguage')) {
+	function loadLanguage($client = 'default_lang', $langFiles = FALSE) {
 		$CI = &get_instance();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
 		$lanGeneral = ['bp', 'co', 've', 'bdb'];
 		$loadlanguages = FALSE;
-		log_message('INFO', 'NOVO HELPER languajeLoad Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
+		log_message('INFO', 'NOVO HELPER loadLanguage Initialized for controller '.$CI->router->fetch_class(). ' and method '.$langFiles . ' for '. $client);
 
 		switch($client) {
 			case 'bp':
@@ -365,8 +354,10 @@ if(!function_exists('validateUrl')) {
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
+
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
+
 			switch ($client) {
 				case 'default':
 					redirect(base_url(), 'location', 301);
@@ -374,18 +365,9 @@ if(!function_exists('validateUrl')) {
 				case 'pichincha':
 					redirect(base_url('pichincha/home'), 'location', 301);
 					break;
-				case 'bdb':
-					redirect(base_url('bdb/inicio'), 'location', 301);
-					break;
+				default;
+					redirect(base_url($client.'/inicio'), 'location', 301);
 			}
 		}
-	}
-}
-
-if(!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
 	}
 }

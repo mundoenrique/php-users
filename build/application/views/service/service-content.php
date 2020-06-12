@@ -217,7 +217,7 @@ if($datos->rc==0){
         <?php
         $datos = null;
         $datos = unserialize($data);
-				$base_cdn = $this->config->item('base_url_cdn');
+				$base_cdn = $this->config->item('asset_url');
 				$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 
         foreach ($datos->lista as $value) {

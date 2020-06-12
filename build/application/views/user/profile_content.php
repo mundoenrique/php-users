@@ -100,7 +100,7 @@
 								<h3 class="tertiary h4">Datos de contacto</h3>
 								<div class="row">
 									<div class="form-group col-6 col-lg-4 col-xl-3">
-										<label for="addressType">Tipo de dirección</label>
+										<label for="addressType">Tipo de dirección <span class="danger">*</span></label>
 										<select id="addressType" class="custom-select form-control" name="addressType">
 											<option value="">Selecciona</option>
 											<?php $if_acTipo = property_exists($data->direccion, 'acTipo');?>
@@ -172,7 +172,7 @@
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-12 col-lg-8 col-xl-12">
-										<label for="address">Dirección</label>
+										<label for="address">Dirección <span class="danger">*</span></label>
 										<textarea id="address" class="form-control" name="address"><?= property_exists($data->direccion, 'acDir')?$data->direccion->acDir:'';?></textarea>
 										<div class="help-block"></div>
 									</div>

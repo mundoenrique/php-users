@@ -1,7 +1,7 @@
 <?php
 $country = $this->session->userdata('pais');
 $CI =& get_instance();
-$cdnPath = $CI->config->item('base_path_cdn');
+$cdnPath = $CI->config->item('asset_path');
 $cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
@@ -21,7 +21,7 @@ $cpo_cook = $this->security->get_csrf_hash();
 								$filepath = $cdnPath.'img/products/'.$country.'/'.$imgDetail.'.png';
 
 								?>
-								<img src="<?php echo $this->config->item('base_url_cdn').'img/products/'.$this->session->userdata('pais').'/'.$imgDetail.'.png'; ?>" width="200" height="130" alt="" />
+								<img src="<?php echo $this->config->item('asset_url').'img/products/'.$this->session->userdata('pais').'/'.$imgDetail.'.png'; ?>" width="200" height="130" alt="" />
 								<div class="product-network <?php echo $marca; ?>"><?php echo $marca; ?></div>
 							</div>
 							<div class="product-info-full" moneda="<?php echo lang("MONEDA"); ?>">

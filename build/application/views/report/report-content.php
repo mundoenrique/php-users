@@ -261,7 +261,7 @@
   <ul id='dashboard-donor'>
 
     <?php
-			$base_cdn = $this->config->item('base_url_cdn');
+			$base_cdn = $this->config->item('asset_url');
 			foreach ($datos->cuentaOrigen as $value) {
 				$cadena = strtolower($value->producto);
 				$producto1 = quitar_tildes($cadena);

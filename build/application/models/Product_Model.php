@@ -274,7 +274,7 @@ class Product_Model extends BDB_Model
 
 				default:
 					$this->response->code = 150;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 			}
 		}
 		return $this->response;
