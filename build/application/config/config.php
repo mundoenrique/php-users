@@ -52,13 +52,13 @@ $config['scores_recapcha'] = [
 		'score' => 0.3
 	],
 	'production' => [
-		'score' => 0.3
+		'score' => 0.4
 	],
 ];
 $config['score_recaptcha'] = [
 	'development' => 0,
 	'testing' => 0.2,
-	'production' => 0.3
+	'production' => 0.4
 ];
 
 /*
