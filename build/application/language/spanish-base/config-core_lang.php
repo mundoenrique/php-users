@@ -51,3 +51,11 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Mx-Bn' => 15,
 	'Ec-pb' => 16,
 ];
+//PORFILE
+$lang['CONF_PROFESSION'] = 'ON';
+$lang['CONF_CONTAC'] = 'ON';
+$lang['CONF_SELECT_OTHER_PHONE'] = 'ON';
+$lang['CONF_SELECT_NOTIFICATIONS'] = 'ON';
+$lang['CONF_OPER_KEY'] = 'ON';
+$lang['CONF_SMS_KEY'] = 'ON';
+$lang['CONF_UPDATE_USER'] = 'ON';

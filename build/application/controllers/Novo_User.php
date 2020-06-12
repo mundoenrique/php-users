@@ -164,18 +164,29 @@ class Novo_User extends NOVO_Controller {
 			"user/changePassword"
 		);
 
-		switch($this->session->flashdata('changePassword')) {
-			case 'TemporalPass':
-				$this->render->message = novoLang(lang("USER_PASS_TEMPORAL"), lang('GEN_SYSTEM_NAME'));
-			break;
-			case 'expiredPass':
-				$this->render->message = novoLang(lang("USER_PASS_EXPIRED"), lang('GEN_SYSTEM_NAME'));
-			break;
+		if ($this->session->logged) {
+			$cancelBtn = base_url('perfil-usuario');
+			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
-		$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+		if ($this->session->flashdata('changePassword') != NULL) {
+			$cancelBtn = base_url('cerrar-sesion/inicio');
+
+			switch($this->session->flashdata('changePassword')) {
+				case 'TemporalPass':
+					$this->render->message = novoLang(lang("USER_PASS_TEMPORAL"), lang('GEN_SYSTEM_NAME'));
+				break;
+				case 'expiredPass':
+					$this->render->message = novoLang(lang("USER_PASS_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+				break;
+			}
+
+			$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
+		}
+
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_CHANGE_PASS');
+		$this->render->cancelBtn = $cancelBtn;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -193,6 +204,21 @@ class Novo_User extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"user/profileUser"
 		);
+
+		$dataUser = $this->loadModel();
+
+		$this->responseAttr($dataUser);
+
+		foreach($dataUser->data->profileData AS $index => $render) {			;
+			$this->render->$index = $render;
+		}
+
+		foreach($dataUser->data->phonesList AS $index => $render) {			;
+			$this->render->$index = $render;
+		}
+
+		log_message('info', '************************************  '.json_encode($this->render));
+
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);

@@ -64,7 +64,7 @@
 
 				<hr class="separador-one mt-2 mb-4">
 				<div class="flex items-center justify-end">
-					<a class="btn btn-link btn-small big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+					<a class="btn btn-link btn-small big-modal" href="<?= $cancelBtn ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 					<button id="change-pass-btn" class="btn btn-small btn-loading btn-primary" type="submit">
 						<?= lang('GEN_BTN_ACCEPT'); ?>
 					</button>

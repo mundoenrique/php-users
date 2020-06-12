@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
+$lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraeña en "<strong>%s</strong>", por favor completa los siguientes datos.';
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
 $lang['USER_PASS_CONFIRM'] = 'Confirma la contraseña';

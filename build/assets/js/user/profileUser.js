@@ -1,6 +1,6 @@
 'use strict'
 var reportsResults;
 $(function () {
-	$('.pre-loader').remove();
+	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 });
