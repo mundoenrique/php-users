@@ -240,7 +240,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		if($redirect == 'fin') {
-			$pos = array_search('datepicker_options', $this->includeAssets->jsFiles);
+			$pos = array_search('options', $this->includeAssets->jsFiles);
 			$this->render->action = base_url('inicio');
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
