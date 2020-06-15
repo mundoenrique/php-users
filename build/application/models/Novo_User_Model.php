@@ -356,8 +356,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->cuenta = $dataRequest->numberCard;
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
-		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '3372';
-		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('3372');
+		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '1234';
+		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');
 		$this->dataRequest->pais = isset($dataRequest->client) ? $dataRequest->client : $this->country;
 
 		$response = $this->sendToService('CallWs_UserIdentify');
@@ -459,10 +459,10 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = [
 			'userName' => mb_strtoupper($dataRequest->nickName),
-			'primerNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->firstName))))),
-			'segundoNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->middleName))))),
-			'primerApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->lastName))))),
-			'segundoApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($dataRequest->secondSurname))))),
+			'primerNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->firstName))))),
+			'segundoNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->middleName))))),
+			'primerApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->lastName))))),
+			'segundoApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->secondSurname))))),
 			'fechaNacimiento' => $dataRequest->birthDate,
 			'id_ext_per' => $dataRequest->idNumber,
 			'tipo_id_ext_per' => lang('CONF_COUNTRY_CODE')[$this->country],

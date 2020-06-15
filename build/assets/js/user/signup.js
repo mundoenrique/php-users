@@ -25,7 +25,8 @@ $(function () {
 		passStrength(pswd);
 	})
 
-	$('.date-picker').datepicker({
+	$('#birthDate').datepicker({
+		yearRange: '-80:' + currentDate.getFullYear(),
 		maxDate: "-18y",
 		changeMonth: true,
 		changeYear: true

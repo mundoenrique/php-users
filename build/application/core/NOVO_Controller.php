@@ -172,7 +172,7 @@ class NOVO_Controller extends CI_Controller {
 			if($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
-					"datepicker_options"
+					"options"
 				);
 			}
 
