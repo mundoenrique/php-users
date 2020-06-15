@@ -69,7 +69,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	//functions
-	$$.getElementById('newPassword').addEventListener('keyup',function() {
+	$$.getElementById('newPassword').addEventListener('keyup',function(e) {;
 		var pswd = $$.getElementById('newPassword').value;
 		var resultValidate = false;
 		var validations = {
@@ -78,7 +78,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 			capital: pswd.match(/[A-Z]/),
 			number: !pswd.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && pswd.match(/\d{1}/),
 			consecutivo: !pswd.match(/(.)\1{2,}/),
-			especial: pswd.match(/([!@\*\-\?¡¿+\/.,_#])/)
+			especial: pswd.match(/([!@\*\-\?¡¿+\/.,_#])/) || e.which == 18 || e.keyCode == 18
 		}
 
 		Object.keys(validations).forEach(function(rule){
