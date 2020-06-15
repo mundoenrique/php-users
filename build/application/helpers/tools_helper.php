@@ -258,18 +258,6 @@ if(!function_exists('clientCheck')) {
 	}
 }
 
-if(!function_exists('assetPath')) {
-	function assetPath($route = '') {
-		return get_instance()->config->item('asset_path').$route;
-	}
-}
-
-if(!function_exists('assetUrl')) {
-	function assetUrl($route = '') {
-		return get_instance()->config->item('asset_url').$route;
-	}
-}
-
 if(!function_exists('logAccess')) {
 	function logAccess($dataAccessLog) {
 		$CI = &get_instance();
@@ -366,8 +354,10 @@ if(!function_exists('validateUrl')) {
 		$accessUrl = $CI->config->item('access_url');
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
+
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
+
 			switch ($client) {
 				case 'default':
 					redirect(base_url(), 'location', 301);
@@ -375,18 +365,9 @@ if(!function_exists('validateUrl')) {
 				case 'pichincha':
 					redirect(base_url('pichincha/home'), 'location', 301);
 					break;
-				case 'bdb':
-					redirect(base_url('bdb/inicio'), 'location', 301);
-					break;
+				default;
+					redirect(base_url($client.'/inicio'), 'location', 301);
 			}
 		}
-	}
-}
-
-if(!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
 	}
 }

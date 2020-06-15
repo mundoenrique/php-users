@@ -50,7 +50,7 @@ class ExpenseReport_Model extends BDB_Model
 
 				default:
 					$this->response->code = 2;
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [

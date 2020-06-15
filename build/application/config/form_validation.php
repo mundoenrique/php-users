@@ -1,6 +1,276 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'signin' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&]+)+$/i]|required'
+		],
+		[
+			'field' => 'userPass',
+			'label' => 'userPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'currentTime',
+			'label' => 'currentTime',
+			'rules' => 'trim|integer|required'
+		],
+		[
+			'field' => 'token',
+			'label' => 'token',
+			'rules' => 'trim'
+		]
+	],
+	'userIdentify' => [
+		[
+			'field' => 'numberCard',
+			'label' => 'numberCard',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'docmentId',
+			'label' => 'docmentId',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'secretPassword',
+			'label' => 'secretPassword',
+			'rules' => 'trim|integer'
+		],
+		[
+			'field' => 'acceptTerms',
+			'label' => 'acceptTerms',
+			'rules' => 'trim|regex_match[/on/]|required'
+		]
+	],
+	'signup' => [
+		[
+			'field' => 'dataUser',
+			'label' => 'dataUser',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		]
+	],
+	'validNickName' => [
+		[
+			'field' => 'nickName',
+			'label' => 'nickName',
+			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+		]
+	],
+	'signUpData' => [
+		[
+			'field' => 'nickName',
+			'label' => 'nickName',
+			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+		],
+		[
+			'field' => 'idType',
+			'label' => 'idType',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'firstName',
+			'label' => 'firstName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'lastName',
+			'label' => 'lastName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'middleName',
+			'label' => 'middleName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'secondSurname',
+			'label' => 'secondSurname',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'gender',
+			'label' => 'gender',
+			'rules' => 'trim|regex_match[/^(M|F)/]|required'
+		],
+		[
+			'field' => 'birthDate',
+			'label' => 'birthDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'landLine',
+			'label' => 'landLine',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'phoneType',
+			'label' => 'phoneType',
+			'rules' => 'trim|alpha'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'label' => 'otherPhoneNum',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'newPass',
+			'label' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'accessRecover' => [
+		[
+			'field' => 'recoveryUser',
+			'label' => 'recoveryUser',
+			'rules' => 'trim|regex_match[/U/]'
+		],
+		[
+			'field' => 'recoveryPwd',
+			'label' => 'recoveryPwd',
+			'rules' => 'trim|regex_match[/C/]'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
+	'changePassword' => [
+		[
+			'field' => 'currentPass',
+			'label' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPass',
+			'label' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'label' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'cardDetail' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		]
+	],
+	'monthlyMovements' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'filterMonth',
+			'label' => 'filterMonth',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'filterYear',
+			'label' => 'filterYear',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'downloadMoves' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'month',
+			'label' => 'month',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'year',
+			'label' => 'year',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'temporaryLock' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'label' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
+	'finishSession' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+		]
+	],
+	'keepSession' => [
+		[
+			'field' => 'signout',
+			'label' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
+	'userCardsList' => [
+		[
+			'field' => 'cardList',
+			'label' => 'cardList',
+			'rules' => 'trim|regex_match[/getCardList/]|required'
+		]
+	],
+	'getBalance' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'userIdNumber',
+			'label' => 'userIdNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
 	'getdetail' => [
 		[
 			'field' => 'request',

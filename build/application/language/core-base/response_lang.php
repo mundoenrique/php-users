@@ -5,7 +5,7 @@ $lang['RESP_RC_DEFAULT'] = -9999;
 $lang['RESP_DEFAULT_CODE'] = 4;
 $lang['RESP_RC_0'] = 'Proceso ejecutado exitosamente.';
 $lang['RESP_DUPLICATED_SESSION'] = 'Tu sesión ha sido abierta en otra ubicación, si no has sido tu comunícate con el administrador.';
-$lang['RESP_MESSAGE_SYSTEM'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no podemos atender tu solicitud, por favor intenta más tarde.';
 $lang['RESP_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder por favor intentalo de nuevo.";
 $lang['RESP_VALIDATION_INPUT'] = "Combinación de caracteres no válida.";
 $lang['RESP_RECAPTCHA_VALIDATION_FAILED'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente.';
@@ -83,4 +83,3 @@ $lang['RESP_IP_DATA_INVALID'] = 'El código de seguridad que nos has indicado no
 $lang['RESP_IP_TOKEN_AUTH'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 
 $lang['RESP_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';
-

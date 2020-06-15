@@ -9,6 +9,7 @@ class Users extends CI_Controller {
 
 		$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
 		$this->initCookie();
+		$this->config->set_item('language', 'core-base');
 	}
 
 	private function initCookie() {

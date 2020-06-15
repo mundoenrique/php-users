@@ -174,10 +174,7 @@ class Registro extends CI_Controller {
 			redirect(base_url('dashboard'), 'location');
 			exit();
 		}
-		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
-		np_hoplite_countryCheck($this->session->userdata('pais'));
-		// CARGO EL ARCHIVO DE LENGUAJE
-		$this->lang->load('format');
+
 
 		$this->load->model('registro_model','validar');
 
@@ -197,6 +194,11 @@ class Registro extends CI_Controller {
 		$pin = $dataRequest->pin;
 		$claveWeb	= $dataRequest->claveWeb;
 		$userName	= $dataRequest->userName;
+
+		// VERIFICA QUE ARCHIVO DE CONFIGURACION UTIRIZARA, SEGUN EL PAIS
+		np_hoplite_countryCheck($pais);
+		// CARGO EL ARCHIVO DE LENGUAJE
+		$this->lang->load('format');
 
 		$this->output->set_content_type('application/json')->set_output($this->validar->validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin, $claveWeb));
 

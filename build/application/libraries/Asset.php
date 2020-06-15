@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset {
 	private $cssFiles;
 	private $jsFiles;
+	private $CI;
 
 	public function __construct()
 	{
@@ -15,9 +16,8 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-
-		$CI =& get_instance();
-		$_SERVER['REMOTE_ADDR'] = $CI->input->ip_address();
+		$this->CI = &get_instance();
+		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
@@ -67,8 +67,13 @@ class Asset {
 	public function insertFile($fileName, $folder = 'images', $country = FALSE)
 	{
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
-		$country = $country ? $country.'/' : '';
+
+		$country = !$country || $this->CI->config->item('client') == 'novo' ? '' : $country.'/';
 		$file = assetPath($folder.'/'.$country.$fileName);
+		if (!file_exists($file)) {
+			$file = assetPath($folder.'/default/logo.svg');
+			$country = 'default/';
+		}
 		$version = '?V'.date('Ymd-U', filemtime($file));
 		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
