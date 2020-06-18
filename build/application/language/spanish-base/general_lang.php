@@ -94,6 +94,15 @@ $lang['GEN_FOOTER_LINK_INSTAGRAM'] = $lang['GEN_NO_LINK'];
 $lang['GEN_FOTTER_IMAGE_L'] = $lang['GEN_DEFAULT_LOGO'];
 $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
+$lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
+$lang['GEN_CONTACTS'] = [
+	'city' => '(XX) XXX XXXX',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no esposible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_RC_DEFAULT'] = -9999;
