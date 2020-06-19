@@ -42,44 +42,7 @@
 	</div>
 	<?php endif; ?>
 
-	<!-- Widgets centro de contacto -->
-	<div id="widgetSupport" class="widget widget-support rounded-top">
-		<div class="widget-header">
-			<h2 class="mb-2 h3 regular center">¿Necesitas ayuda?</h2>
-		</div>
-		<div class="widget-section">
-			<p class="mb-1">Líneas de atención a nivel nacional</p>
-
-			<table class="w-100">
-				<thead>
-					<tr>
-						<th class="px-0">CIUDAD</th>
-						<th class="px-0 text-right">CONTACTO</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>CDMX</td>
-						<td class="text-right">(55) 5140 5640</td>
-					</tr>
-					<tr>
-						<td>MTY</td>
-						<td class="text-right">(81) 8156 9640</td>
-					</tr>
-					<tr>
-						<td>GDL</td>
-						<td class="text-right">(33) 3669 9040</td>
-					<tr class="center bold">
-						<td colspan="2">RESTO DEL PAÍS</td>
-					</tr>
-					<tr class="center">
-						<td colspan="2">800 DIRECTA (3473282)</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="widget-support-btn phone" aria-hidden="true">
-			<span class="icon-phone h00 px-2"></span>
-		</div>
-	</div>
+	<?php if(lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON'): ?>
+	<?php $this->load->view('widget/widget_contacts_content-core') ?>
+	<?php endif; ?>
 </div>
