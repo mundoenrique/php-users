@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_SIGNUP'); ?></h1>
 <hr class="separador-one mb-2">
-<p>para obtener tu usuario de <span class="semibold">Conexión Personas Online,</span> es necesario que ingreses los datos requeridos a continuación:
+<p>Para obtener tu usuario de <span class="semibold">Conexión Personas Online,</span> es necesario que ingreses los datos requeridos a continuación:
 </p>
 <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
