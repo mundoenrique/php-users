@@ -42,7 +42,7 @@
 	</div>
 	<?php endif; ?>
 
-	<?php if(lang('CONF_SIGNIN_WIDGET') == 'ON'): ?>
+	<?php if(lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON'): ?>
 	<?php $this->load->view('widget/widget_contacts_content-core') ?>
 	<?php endif; ?>
 </div>
