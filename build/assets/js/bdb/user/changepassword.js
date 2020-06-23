@@ -71,7 +71,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//functions
 	$$.getElementById('newPassword').addEventListener('keyup',function(e) {;
 		var pswd = $$.getElementById('newPassword').value.trim();
-		if (e.which == 18 || e.keyCode == 18) {
+		if (e.key == '@') {
 			pswd += '@';
 		}
 		var resultValidate = false;
