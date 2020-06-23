@@ -413,7 +413,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 					otp.prop("disabled", true);
 					$("#acceptAssert").prop("disabled", true);
 					mostrarProcesando(skin, $(this));
-					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length == 8;
+					otpValid = /^[a-z0-9]+$/i.test(otp.val()) && otp.val().length < 16;
 
 					if (otpValid) {
 						var dataOTP = {
