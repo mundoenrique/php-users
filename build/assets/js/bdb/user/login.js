@@ -1,5 +1,5 @@
 "use strict";
-var $$ = document;
+var $$ = document, credentialUser = '';
 
 $$.addEventListener('DOMContentLoaded', function(){
 
@@ -53,6 +53,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		5: function(response, textBtn)
 		{
 			var btn = response.data.btn1;
+			credentialUser.pass = '';
 			var inputOTP = document.getElementById("codeOTPLogin");
 			var loginIpMsg =
 			`<form id="formVerificationOTP" class="mr-2" method="post">
@@ -158,7 +159,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$$.getElementById("userpwd").type = 'password';
 		$$.getElementById("formMsg").innerHTML = '';
 
-		var credentialUser = getCredentialsUser();
+		credentialUser = getCredentialsUser();
 		var form = $('#form-login');
 		validateForms(form, {handleMsg: false});
 
@@ -214,23 +215,29 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function getCredentialsUser()
 	{
-		data = {
+		if ($$.getElementById('codeOTPLogin') === null){
+			return getCredentialLogin();
+		}
+		return getCredentialOTPLogin();
+	};
+
+	function getCredentialLogin(){
+		return {
 			user: $$.getElementById('username').value,
 			pass: $.md5($$.getElementById('userpwd').value),
 			active: ''
 		};
+	}
 
-		if ($$.getElementById('codeOTPLogin') != null){
-			data = {
-				user: 'NULL',
-				pass: 'NULL',
-				active: '',
-				saveIP: $$.getElementById('acceptAssert') == null? false: $$.getElementById('acceptAssert').checked,
-				codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
-			};
-		}
-		return data;
-	};
+	function getCredentialOTPLogin(){
+		return {
+			user: credentialUser.user,
+			pass: 'NULL',
+			active: '',
+			saveIP: $$.getElementById('acceptAssert') == null? false: $$.getElementById('acceptAssert').checked,
+			codeOTP: $$.getElementById('codeOTPLogin') == null? '': $$.getElementById('codeOTPLogin').value,
+		};
+	}
 
 	function validateLogin(dataValidateLogin)
 	{
