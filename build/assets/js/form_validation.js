@@ -100,7 +100,7 @@ function validateForms(form) {
 			},
 			"middleName": 'Indica tu segundo nombre',
 			"secondSurname": 'Indica tu segundo apellido',
-			"birthDate": 'Indica tu fecha de cunpleaños',
+			"birthDate": 'Indica tu fecha de cumpleaños',
 			"gender": 'indica tu genero',
 			"confirmEmail": 'debe ser igual a tu correo',
 			"landLine": 'Indica un telefono válido min 7 max 15',
