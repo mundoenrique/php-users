@@ -100,76 +100,33 @@ if (!function_exists('maskString')) {
 }
 
 if (!function_exists('languageLoad')) {
-	function languageLoad($call, $client = 'default_lang', $langFiles = FALSE) {
+	function languageLoad($call, $class) {
 		$CI = &get_instance();
-		$class = $CI->router->fetch_class();
-		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languagesFile = [];
-		$lanGeneral = ['bnt'];
-		$langConfig = ['bnt'];
 		$loadLanguages = FALSE;
-		$client = !$client ? 'default_lang' : $client;
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for controller: '.$class. ' and method: '.$langFiles);
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$class = lcfirst(str_replace('Novo_', '', $class));
+		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
 
-		switch($client) {
-			case 'bp':
-				$languages = [
-				];
-				break;
-			case 'bdb':
-				$languages = [
-				];
-				break;
-			case 'bnt':
-				$languages = [
-					'signin' => ['login'],
-					'userIdentify' => ['terms'],
-				];
-				break;
-			case 'co':
-				$languages = [
-				];
-				break;
-			case 'pe':
-				$languages = [
-				];
-				break;
-			case 'us':
-				$languages = [
-				];
-				break;
-			case 've':
-				$languages = [
-				];
-				break;
-			case 'pb':
-				$languages = [
-				];
-				break;
-			default:
-				$languages = [
-					'signin' => ['login'],
-					'signup' => ['user'],
-					'userIdentify' => ['terms'],
-					'accessRecover' => ['recover'],
-					'changePassword' => ['user'],
-					'userCardsList' => ['cards'],
-					'cardDetail' => ['business'],
-				];
+		if ($call == 'specific') {
+			if (file_exists($pathLang.'general_lang.php')) {
+				array_push($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang.'validate_lang.php')) {
+				array_push($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang.'config-core_lang.php')) {
+				array_push($languagesFile, 'config-core');
+				$loadLanguages = TRUE;
+			}
 		}
 
-		if (array_key_exists($langFiles, $languages)) {
-			$languagesFile = $languages[$langFiles];
-			$loadLanguages = TRUE;
-		}
-
-		if (in_array($client, $lanGeneral)) {
-			array_unshift($languagesFile, 'general');
-			$loadLanguages = TRUE;
-		}
-
-		if (in_array($client, $langConfig)) {
-			array_unshift($languagesFile, 'config-core');
+		if (file_exists($pathLang.$class.'_lang.php')) {
+			array_push($languagesFile, $class);
 			$loadLanguages = TRUE;
 		}
 

@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'OFF';
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -28,6 +30,7 @@ $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 //SIGNUO
 $lang['CONF_SECRET_KEY'] = 'ON';

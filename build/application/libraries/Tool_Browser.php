@@ -46,7 +46,7 @@ class Tool_Browser {
 			$version = floatval($this->CI->agent->version());
 
 			if(array_key_exists($browser, $validBrowser)) {
-				if(in_array($client, ['novo', 'pichincha', 'banco-bog'])) {
+				if(lang('CONF_SUPPORT_IE') == 'ON') {
 					$validBrowser['Internet Explorer'] = 10;
 				}
 
@@ -55,7 +55,7 @@ class Tool_Browser {
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
 
-				if($valid && $client === '*******' && $browser === 'Internet Explorer') {
+				if($valid && $browser === 'Internet Explorer') {
 					$valid = 'ie11';
 				}
 			}
