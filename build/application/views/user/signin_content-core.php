@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="login-content flex items-center justify-center bg-primary">
 	<div class="flex flex-column items-center z1">
-		<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('LOGIN_LOGO_WIDGET'), 'images', $countryUri); ?>"
+		<img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('USER_SIGNIN_LOGO_WIDGET'), 'images', $countryUri); ?>"
 			alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
-		<span class="mb-2 secondary center h3"><?= lang('LOGIN_WIDGET_TITLE') ?></span>
+		<span class="mb-2 secondary center h3"><?= lang('USER_SIGNIN_TITLE') ?></span>
 		<div id="widget-signin" class="widget rounded">
 			<form id="signin-form">
 				<div class="form-group">
@@ -26,11 +26,11 @@
 					<?= lang('GEN_BTN_SIGNIN') ?>
 				</button>
 				<?php if(lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON'): ?>
-				<a class="block mb-1 h5 primary hyper-link" href="<?= base_url('recuperar-acceso');?>"><?= lang('LOGIN_ACCESS_RECOVER'); ?></a>
+				<a class="block mb-1 h5 primary hyper-link" href="<?= base_url('recuperar-acceso');?>"><?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?></a>
 				<?php endif; ?>
 				<?php if(lang('CONIFG_SIGIN') == 'ON'): ?>
-				<p class="mb-0 h5 center"><?= lang('LOGIN_NO_USER') ?>
-					<a class="hyper-link" href="<?= base_url(lang('GEN_LINK_USER_IDENTITY')) ?>"><?= lang('LOGIN_SINGN_UP') ?></a>
+				<p class="mb-0 h5 center"><?= lang('USER_SIGNIN_NO_USER') ?>
+					<a class="hyper-link" href="<?= base_url(lang('GEN_LINK_USER_IDENTITY')) ?>"><?= lang('USER_SIGNIN_SINGN_UP') ?></a>
 				</p>
 				<?php endif; ?>
 			</form>
@@ -38,7 +38,7 @@
 	</div>
 	<?php if(lang('CONF_SIGNIN_IMG') == 'ON'): ?>
 	<div class="flex pr-2 pr-lg-0 img-log">
-		<img src="<?= $this->asset->insertFile(lang('LOGIN_IMAGE'), 'images', $countryUri); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+		<img src="<?= $this->asset->insertFile(lang('USER_SIGNIN_IMAGE'), 'images', $countryUri); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
 	</div>
 	<?php endif; ?>
 

@@ -16,10 +16,10 @@ $(function () {
 			posMy: 'top',
 			posAt: 'top'
 		}
-		var inputModal = '<h1 class="h0">'+lang.TERMS_SUBTITLE+'</h1>';
-		inputModal+= lang.TERMS_CONTENT;
+		var inputModal = '<h1 class="h0">'+lang.USER_TERMS_SUBTITLE+'</h1>';
+		inputModal+= lang.USER_TERMS_CONTENT;
 
-		notiSystem(lang.TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+		notiSystem(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 		$(this).off('click')
 	})
 
