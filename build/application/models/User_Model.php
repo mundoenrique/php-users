@@ -37,14 +37,14 @@ class User_Model extends BDB_Model
 
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->pais = 'Global';
-		$this->dataRequest->guardaIp = FALSE;
+		$this->dataRequest->guardaIp = "false";
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp = $infoOTP ;
 
 		if (isset($dataRequest->saveIP)){
-		 	$this->dataRequest->guardaIp = $dataRequest->saveIP;
+		 	$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
 		}
 
 		$response = $this->sendToService('Login');
