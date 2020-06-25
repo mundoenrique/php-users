@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model {
 				if ($this->validateUserLogged($userName)) {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->icon = lang('GEN_ICON_WARNING');
-					$this->response->msg = lang('LOGIN_INCORRECTLY_CLOSED');
+					$this->response->msg = lang('USER_SIGNIN_INCORRECTLY_CLOSED');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
@@ -121,11 +121,11 @@ class Novo_User_Model extends NOVO_Model {
 			case -1:
 			case -205:
 				$this->response->code = 1;
-				$this->response->msg = lang('LOGIN_INVALID_USER');
+				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 				if (isset($response->bean->intentos) && $response->bean->intentos == 2) {
-					$this->response->msg = lang('LOGIN_WILL_BLOKED');
+					$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
 					$this->response->className = lang('CONF_VALID_INVALID_USER');
 					$this->response->position = lang('CONF_VALID_POSITION');
 				}
@@ -133,7 +133,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -194:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = novoLang(lang('LOGIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
+				$this->response->msg = novoLang(lang('USER_SIGNIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -147,7 +147,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -35:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('LOGIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
+				$this->response->msg = novoLang(lang('USER_SIGNIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -160,7 +160,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 9999:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->msg = lang('LOGIN_RECAPTCHA_VALIDATE');
+				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -228,8 +228,8 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$recover = isset($dataRequest->recoveryPwd) ? lang('RECOVER_PASS_TEMP') : lang('RECOVER_USERNAME');
-				$this->response->msg = novoLang(lang('RECOVER_SUCCESS'),  [$maskMail, $recover]);
+				$recover = isset($dataRequest->recoveryPwd) ? lang('USER_RECOVER_PASS_TEMP') : lang('USER_RECOVER_USERNAME');
+				$this->response->msg = novoLang(lang('USER_RECOVER_SUCCESS'),  [$maskMail, $recover]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
@@ -242,7 +242,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -186:
 			case -187:
 				$msgGeneral = '1';
-				$this->response->msg = LANG('RECOVER_DATA_INVALID');
+				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
 				break;
 		}
 

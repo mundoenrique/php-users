@@ -66,9 +66,9 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		languageLoad('generic');
+		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->countryUri);
-		languageLoad('specific', $this->countryUri);
+		languageLoad('specific', $this->router->fetch_class());
 		$this->skin = $this->config->item('client');
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
