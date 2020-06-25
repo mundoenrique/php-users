@@ -124,7 +124,7 @@
 							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
 						<li class="stack-item stack-item-primary px-1 list-inline-item rounded">
-							<a id="downloadExtract" href="#" title="Descargar Extracto" rel="subsection">Descargue su extracto</a>
+							<a id="downloadExtract" href="#" title="Descarga tu extracto" rel="subsection">Descarga tu extracto</a>
 						</li>
 					</ul>
 				</nav>
