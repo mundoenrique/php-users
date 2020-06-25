@@ -1,5 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['USER_SIGNIN_TITLE'] = 'Conexión Personas Online';
+$lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
+$lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
+$lang['USER_SIGNIN_SINGN_UP'] = 'Regístrate';
+$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo.svg';
+$lang['USER_SIGNIN_IMAGE'] = 'logo.svg';
+$lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
+$lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
+$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
+$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
+$lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
+$lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
@@ -18,7 +30,13 @@ $lang['USER_PASS_CHANGED'] = 'La contraseña fue cambiada exitosamente. %s';
 $lang['USER_PASS_LOGIN'] = '<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['USER_PASS_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
 $lang['USER_PASS_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifícala e intenta de nuevo.';
-//USER_TERMS_CONTENT
+$lang['USER_RECOVER_VERIFY_DATA'] = 'Verificación de datos';
+$lang['USER_RECOVER_PASS'] = 'Para recuperar tu usuario o restablecer tu contraseña de acceso a <span class="bold">%s</span>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.';
+$lang['USER_RECOVER_NEED'] = 'Necesito recuperar mi';
+$lang['USER_RECOVER_SUCCESS'] = 'Enviamos un correo a %s, %s';
+$lang['USER_RECOVER_PASS_TEMP'] = 'con una contraseña temporal.';
+$lang['USER_RECOVER_USERNAME'] = 'con tu usuario.';
+$lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido. Por favor verifica tus datos, e intenta nuevamente.';
 $lang["USER_TERMS_TITLE"]='Términos y condiciones.';
 $lang["USER_TERMS_SUBTITLE"]='Tarjetahabiente.';
 $lang["USER_TERMS_CONTENT"] = '
@@ -58,25 +76,3 @@ $lang["USER_TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
-$lang['USER_RECOVER_VERIFY_DATA'] = 'Verificación de datos';
-$lang['USER_RECOVER_PASS'] = 'Para recuperar tu usuario o restablecer tu contraseña de acceso a <span class="bold">%s</span>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.';
-$lang['USER_RECOVER_NEED'] = 'Necesito recuperar mi';
-//SiGNIN RESPONSE
-$lang['USER_RECOVER_SUCCESS'] = 'Enviamos un correo a %s, %s';
-$lang['USER_RECOVER_PASS_TEMP'] = 'con una contraseña temporal.';
-$lang['USER_RECOVER_USERNAME'] = 'con tu usuario.';
-$lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido. Por favor verifica tus datos, e intenta nuevamente.';
-//GENERAL LANGUAGE
-$lang['USER_SIGNIN_TITLE'] = 'Personas';
-$lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
-$lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
-$lang['USER_SIGNIN_SINGN_UP'] = 'Regístrate';
-$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo.svg';
-$lang['USER_SIGNIN_IMAGE'] = 'logo.svg';
-//SiGNIN RESPONSE
-$lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
-$lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
-$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
-$lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
-$lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
