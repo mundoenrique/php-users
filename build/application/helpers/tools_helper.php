@@ -270,8 +270,7 @@ if(!function_exists('logAccess')) {
 			"function"=> $dataAccessLog->function,
 			"operacion"=> $dataAccessLog->operation,
 			"RC"=> 0,
-			 //"IP"=> $CI->input->ip_address(),
-			"IP" => "9.9.9.11",
+			"IP"=> $CI->input->ip_address(),
 			"dttimesstamp"=> date('m/d/Y H:i'),
 			"lenguaje"=> strtoupper(LANGUAGE)
 		];
