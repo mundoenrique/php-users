@@ -47,11 +47,31 @@ $$.addEventListener('DOMContentLoaded', function () {
 	//core
 	arrDialogContent = [{
 			id: 'notice',
-			body: 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.'
+			body:
+			`<div class="justify">
+				Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.
+			</div>`
+		},
+		{ id: 'otpRequest',
+			body:
+			`<form id="formGetDetail" class="mr-2" method="post">
+				<div id="verificationOTP">
+					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
+					<div class="row">
+						<div class="form-group col-7">
+							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
+							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+							<div id="msgErrorCodeOTP" class="help-block"></div>
+						</div>
+					</div>
+					<p id="verificationMsg" class="mb-1 h5"></p>
+				</div>
+			</form>`
 		},
 		{
 			id: 'cardDetails',
-			body: `<div class="row">
+			body:
+			`<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
 					<div class="show-card-info">
@@ -375,10 +395,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 						case 'notice':
 							btnTrigger.innerHTML = msgLoadingWhite;
 							btnTrigger.disabled = true;
-							proccessPetition({
-								noTarjeta: window.data.noTarjeta,
-								id_ext_per: window.data.id_ext_per
-							});
+							proccessPetition({});
 							break;
 
 						case 'otpRequest':
@@ -393,7 +410,9 @@ $$.addEventListener('DOMContentLoaded', function () {
 								btnTrigger.disabled = true;
 								inpCodeOTP.disabled = true;
 								proccessPetition({
-									'codeOTP': CryptoJS.MD5(inpCodeOTP.value).toString()
+									'codeOTP': CryptoJS.MD5(inpCodeOTP.value).toString(),
+									noTarjeta: window.data.noTarjeta,
+									id_ext_per: window.data.id_ext_per
 								});
 							}
 							break;
@@ -443,8 +462,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 				case 0:
 					clearInterval(interval);
 
-					systemMSg.querySelector("div").innerHTML = arrDialogContent[1].body;
-					systemMSg.querySelector("div").id = arrDialogContent[1].id;
+					systemMSg.querySelector("div").innerHTML = arrDialogContent[2].body;
+					systemMSg.querySelector("div").id = arrDialogContent[2].id;
 					$$.getElementById("cancel").classList.add("none");
 
 					$$.getElementById("cardNumber").value = response.dataDetailCard.cardNumber;

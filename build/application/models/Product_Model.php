@@ -293,10 +293,17 @@ class Product_Model extends BDB_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = '214';
-		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
-		$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
+		if (isset($dataRequest->id_ext_per)) {
+			$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
+			$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
+			$response = $this->sendToService($model);
+		} else {
+			$response = new stdClass();
+			$response->bean = 2;
+			$response->data = [''];
+			$this->isResponseRc = 10;
+		}
 
-		$response = $this->sendToService($model);
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
@@ -310,7 +317,12 @@ class Product_Model extends BDB_Model
 						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
 					];
 					break;
-
+				case 10:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_CODEOTP');
+					$this->response->validityTime = intval($response->bean) * 20;
+					$this->response->data = $response->data || [""];
+					break;
 				case -420:
 				case -20:
 					$this->response->code = 2;
