@@ -560,69 +560,26 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$record = new stdClass();
 				$this->response->code = 0;
-				foreach ($response->registro->user AS $pos => $userData) {
-					switch ($pos) {
-						case 'userName':
-							$record->nickName = $userData;
-						break;
-						case 'primerNombre':
-							$record->firstName = $userData;
-						break;
-						case 'segundoNombre':
-							$record->middleName = $userData;
-						break;
-						case 'primerApellido':
-							$record->lastName = $userData;
-						break;
-						case 'segundoApellido':
-							$record->secondSurname = $userData;
-						break;
-						case 'email':
-							$record->email = $userData;
-						break;
-						case 'dtfechorcrea_usu':
-							$record->creationDate = $userData;
-						break;
-						case 'dtfechorcrea_usu':
-							$record->creationDate = $userData;
-						break;
-						case 'notEmail':
-							$record->emailNot = $userData;
-						break;
-						case 'notSms':
-							$record->smsNot = $userData;
-						break;
-						case 'sexo':
-							$record->gender = $userData;
-						break;
-						case 'id_ext_per':
-							$record->idNumber = $userData;
-						break;
-						case 'fechaNacimiento':
-							$record->birthday = $userData;
-						break;
-						case 'tipo_profesion':
-							$record->professionType = $userData;
-						break;
-						case 'profesion':
-							$record->profession = $userData;
-						break;
-						case 'tipo_id_ext_per':
-							$record->idTypeCode = $userData;
-						break;
-						case 'descripcion_tipo_id_ext_per':
-							$record->idTypeCodeText = $userData;
-						break;
-						case 'disponeClaveSMS':
-							$record->smsKey = $userData;
-						break;
-						case 'aplicaPerfil':
-							$record->longProfile = $userData;
-						break;
-					}
-
-					$profileData[] = $record;
-				}
+				$userData = $response->registro->user;
+				$record->nickName = isset($userData->userName) ? $userData->userName : '';
+				$record->firstName = isset($userData->primerNombre) ? $userData->primerNombre : '';
+				$record->middleName = isset($userData->segundoNombre) ? $userData->segundoNombre : '';
+				$record->lastName = isset($userData->primerApellido) ? $userData->primerApellido : '';
+				$record->secondSurname = isset($userData->segundoApellido) ? $userData->segundoApellido : '';
+				$record->email = isset($userData->email) ? $userData->email : '';
+				$record->creationDate = isset($userData->dtfechorcrea_usu) ? $userData->dtfechorcrea_usu : '';
+				$record->emailNot = isset($userData->notEmail) ? $userData->notEmail : '';
+				$record->smsNot = isset($userData->notSms) ? $userData->notSms : '';
+				$record->gender = isset($userData->sexo) ? $userData->sexo : '';
+				$record->idNumber = isset($userData->id_ext_per) ? $userData->id_ext_per : '';
+				$record->birthday = isset($userData->fechaNacimiento) ? $userData->fechaNacimiento : '';
+				$record->professionType = isset($userData->tipo_profesion) ? $userData->tipo_profesion : '';
+				$record->profession = isset($userData->profesion) ? $userData->profesion : '';
+				$record->idTypeCode = isset($userData->tipo_id_ext_per) ? $userData->tipo_id_ext_per : '';
+				$record->idTypeCodeText = isset($userData->descripcion_tipo_id_ext_per) ? $userData->descripcion_tipo_id_ext_per : '';
+				$record->smsKey = isset($userData->disponeClaveSMS) ? $userData->disponeClaveSMS : '';
+				$record->longProfile = isset($userData->aplicaPerfil) ? $userData->aplicaPerfil : '';
+				$profileData[] = $record;
 
 				foreach ($response->registro->listaTelefonos AS $pos => $phonesType) {
 					$phones = new stdClass();
@@ -635,18 +592,6 @@ class Novo_User_Model extends NOVO_Model {
 						break;
 						case 2:
 							$phonesList['mobilePhone'] = $phonesType->numero;
-						break;
-						case 0:
-							$phones->ofc =
-							$phonesList['ofc'] = $phones;
-						break;
-						case 1:
-							$phones->hab = $phonesType->numero;
-							$phonesList['hab'] = $phones;
-						break;
-						case 2:
-							$phones->cel = $phonesType->numero;
-							$phonesList['cel'] = $phones;
 						break;
 					}
 				}

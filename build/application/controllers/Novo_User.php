@@ -209,15 +209,13 @@ class Novo_User extends NOVO_Controller {
 
 		$this->responseAttr($dataUser);
 
-		foreach($dataUser->data->profileData AS $index => $render) {			;
+		foreach($dataUser->data->profileData AS $index => $render) {
 			$this->render->$index = $render;
 		}
 
-		foreach($dataUser->data->phonesList AS $index => $render) {			;
+		foreach($dataUser->data->phonesList AS $index => $render) {
 			$this->render->$index = $render;
 		}
-
-		log_message('info', '************************************  '.json_encode($this->render));
 
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->views = ['user/'.$view];
