@@ -325,7 +325,7 @@ class Product_Model extends BDB_Model
 					break;
 
 				case -286:
-					$this->response->code = 5;
+					$this->response->code = 2;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
 					$this->response->classIconName = 'ui-icon-info';
 					$this->response->data = [
