@@ -35,7 +35,7 @@ $lang['GEN_LINK_USER_SIGNUP'] = 'registro';
 $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
-$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';
+$lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -104,7 +104,7 @@ $lang['GEN_CONTACTS'] = [
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no esposible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
@@ -169,3 +169,34 @@ $lang['GEN_SELECT_MONTH'] = [
 	'11' => 'Noviembre',
 	'12' => 'Diciembre',
 ];
+//PROFILE
+$lang['GEN_PROFILE_TITLE'] = 'Perfil de usuario';
+$lang['GEN_PROFILE_DATA_PERSONAL'] = 'Datos personales';
+$lang['GEN_PROFILE_DATA_CONTACT'] = 'Datos de contacto';
+$lang['GEN_PROFILE_DATA_USER'] = 'Datos de usuario';
+$lang['GEN_PROFILE_ID_TYPE'] = 'Tipo de identificación';
+$lang['GEN_PROFILE_ID_NUMBER'] = 'Número de identificación';
+$lang['GEN_PROFILE_FIRSTNAME'] = 'Primer nombre';
+$lang['GEN_PROFILE_MIDDLENAME'] = 'Segundo nombre';
+$lang['GEN_PROFILE_LASTNAME'] = 'Primer apellido';
+$lang['GEN_PROFILE_SURNAME'] = 'Segundo apellido';
+$lang['GEN_PROFILE_BIRTHDATE'] = 'Fecha de nacimiento';
+$lang['GEN_PROFILE_SEX'] = 'Sexo';
+$lang['GEN_PROFILE_PROFESSION'] = 'Profesión';
+$lang['GEN_PROFILE_ADDRESS_TYPE'] = 'Tipo de dirección';
+$lang['GEN_PROFILE_POSTAL_CODE'] = 'Código postal';
+$lang['GEN_PROFILE_STATE'] = 'Estado';
+$lang['GEN_PROFILE_CITY'] = 'Ciudad';
+$lang['GEN_PROFILE_ADDRESS'] = 'Dirección';
+$lang['GEN_PROFILE_PHONE_LANDLINE'] = 'Teléfono fijo';
+$lang['GEN_PROFILE_PHONE_MOBILE'] = 'Teléfono móvil';
+$lang['GEN_PROFILE_PHONE_OTHER'] = 'Teléfono (otro)';
+$lang['GEN_PROFILE_EMAIL'] = 'Correo electrónico';
+$lang['GEN_PROFILE_USERNAME'] = 'Nombre de usuario';
+$lang['GEN_PROFILE_DATE_REGISTRY'] = 'Fecha de registro';
+$lang['GEN_PROFILE_NOTIFICATIONS'] = 'Notificaciones';
+$lang['GEN_PROFILE_NOTIFICATIONS_EMAIL'] = 'Correo electrónico';
+$lang['GEN_PROFILE_NOTIFICATIONS_SMS'] = 'SMS';
+$lang['GEN_PROFILE_CHANGE_PASSWORD'] = 'Cambiar clave';
+$lang['GEN_PROFILE_CHANGE_PASSWORD_OPERATIONS'] = 'Cambiar clave de operaciones';
+$lang['GEN_PROFILE_CHANGE_PASSWORD_SMS'] = 'Cambiar clave de SMS';

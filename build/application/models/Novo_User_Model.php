@@ -581,16 +581,19 @@ class Novo_User_Model extends NOVO_Model {
 				$record->longProfile = isset($userData->aplicaPerfil) ? $userData->aplicaPerfil : '';
 				$profileData[] = $record;
 
-				foreach ($response->registro->listaTelefonos AS $pos => $phonesType) {
-					$phones = new stdClass();
-					switch ($pos) {
-						case 0:
+				$phonesList['otherPhoneNum'] = '';
+				$phonesList['landLine'] = '';
+				$phonesList['mobilePhone'] = '';
+
+				foreach ($response->registro->listaTelefonos AS $phonesType) {
+					switch ($phonesType->tipo) {
+						case 'OTRO':
 							$phonesList['otherPhoneNum'] = $phonesType->numero;
 						break;
-						case 1:
+						case 'HAB':
 							$phonesList['landLine'] = $phonesType->numero;
 						break;
-						case 2:
+						case 'CEL':
 							$phonesList['mobilePhone'] = $phonesType->numero;
 						break;
 					}

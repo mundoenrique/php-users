@@ -16,15 +16,12 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
 }
 
 /* Content */
 main.content {
 	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
-	background-color: var(--color-eighth) !important;
+	background-color: var(--color-room) !important;
 }
 
 /* Footer */
@@ -1297,7 +1294,7 @@ label {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-color: var(--color-eighth) !important }
+.bg-color  { background-color: var(--color-room) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
@@ -2636,6 +2633,7 @@ i[class*=" icon-"].novoglyphs {
 .easyPaginateNav .prev:hover,
 .easyPaginateNav .next:hover {
 	font-weight: var(--bold-font-weight);
+	color: var(--color-primary)
 }
 
 /* Table */
@@ -3556,7 +3554,7 @@ a.ui-button:active,
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1.5px solid var(--color-primary);
+	border: 1px solid var(--color-primary);
 }
 
 .invalid-user {
