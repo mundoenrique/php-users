@@ -76,3 +76,34 @@ $lang["USER_TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
+//PROFILE
+$lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
+$lang['USER_PROFILE_DATA_PERSONAL'] = 'Datos personales';
+$lang['USER_PROFILE_DATA_CONTACT'] = 'Datos de contacto';
+$lang['USER_PROFILE_DATA_USER'] = 'Datos de usuario';
+$lang['USER_PROFILE_ID_TYPE'] = 'Tipo de identificación';
+$lang['USER_PROFILE_ID_NUMBER'] = 'Número de identificación';
+$lang['USER_PROFILE_FIRSTNAME'] = 'Primer nombre';
+$lang['USER_PROFILE_MIDDLENAME'] = 'Segundo nombre';
+$lang['USER_PROFILE_LASTNAME'] = 'Primer apellido';
+$lang['USER_PROFILE_SURNAME'] = 'Segundo apellido';
+$lang['USER_PROFILE_BIRTHDATE'] = 'Fecha de nacimiento';
+$lang['USER_PROFILE_SEX'] = 'Sexo';
+$lang['USER_PROFILE_PROFESSION'] = 'Profesión';
+$lang['USER_PROFILE_ADDRESS_TYPE'] = 'Tipo de dirección';
+$lang['USER_PROFILE_POSTAL_CODE'] = 'Código postal';
+$lang['USER_PROFILE_STATE'] = 'Estado';
+$lang['USER_PROFILE_CITY'] = 'Ciudad';
+$lang['USER_PROFILE_ADDRESS'] = 'Dirección';
+$lang['USER_PROFILE_PHONE_LANDLINE'] = 'Teléfono fijo';
+$lang['USER_PROFILE_PHONE_MOBILE'] = 'Teléfono móvil';
+$lang['USER_PROFILE_PHONE_OTHER'] = 'Teléfono (otro)';
+$lang['USER_PROFILE_EMAIL'] = 'Correo electrónico';
+$lang['USER_PROFILE_USERNAME'] = 'Nombre de usuario';
+$lang['USER_PROFILE_DATE_REGISTRY'] = 'Fecha de registro';
+$lang['USER_PROFILE_NOTIFICATIONS'] = 'Notificaciones';
+$lang['USER_PROFILE_NOTIFICATIONS_EMAIL'] = 'Correo electrónico';
+$lang['USER_PROFILE_NOTIFICATIONS_SMS'] = 'SMS';
+$lang['USER_PROFILE_CHANGE_PASSWORD'] = 'Cambiar clave';
+$lang['USER_PROFILE_CHANGE_PASSWORD_OPERATIONS'] = 'Cambiar clave de operaciones';
+$lang['USER_PROFILE_CHANGE_PASSWORD_SMS'] = 'Cambiar clave de SMS';

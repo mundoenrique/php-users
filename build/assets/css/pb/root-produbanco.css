@@ -29,14 +29,14 @@
 :root {
 
 	/*brand colors*/
-	--color-primary: #EB0029;
+	--color-primary: #006937;
 	--color-secondary: #ffffff;
 	--color-tertiary: #f1f1f1;
-	--color-room: #E1E1E1;
+	--color-room: #f0f0f0;
 	--color-fifth: #707070;
 	--color-sixth: #4E4044;
-	--color-seventh:#D10024;
-	--color-eighth: #DDDDDD;
+	--color-seventh:#76bc21;
+	--color-eighth: #D0D0D0;
 
 	/*status bulk*/
 	--will-processed: #7ed3b2;

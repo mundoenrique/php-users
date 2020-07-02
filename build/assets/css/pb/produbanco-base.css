@@ -16,23 +16,21 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
 }
 
 /* Content */
 main.content {
 	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
-	background-color: var(--color-eighth) !important;
+	background-color: var(--color-room) !important;
 }
 
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 2rem 2.5rem;
+	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
+	border-top: 3px solid #76bc21;
 }
 
 /* Type Scale
@@ -1297,19 +1295,13 @@ label {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-color: var(--color-eighth) !important }
+.bg-color  { background-color: var(--color-room) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
 .bg-being-validated { background-color: var(--being-validated) !important }
 
 .bg-transparent { background-color: transparent !important }
-
-.bg-content {
-  background: url("../../images/bnt/bg-content.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 /* Borders
 ========================================================================== */
@@ -2199,6 +2191,7 @@ i[class*=" icon-"].novoglyphs {
 	align-items: center;
 	justify-content: space-between;
 	padding: .5rem 2.5rem;
+	border-bottom: 3px solid #76bc21;
 }
 
 .navbar-secondary {
@@ -2636,6 +2629,7 @@ i[class*=" icon-"].novoglyphs {
 .easyPaginateNav .prev:hover,
 .easyPaginateNav .next:hover {
 	font-weight: var(--bold-font-weight);
+	color: var(--color-primary)
 }
 
 /* Table */
@@ -3549,14 +3543,11 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.svg");
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1.5px solid var(--color-primary);
+	border: 1px solid var(--color-primary);
 }
 
 .invalid-user {
