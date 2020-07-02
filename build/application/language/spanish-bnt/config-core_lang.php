@@ -10,7 +10,6 @@ $lang['CONF_REPORTS'] = 'OFF';
 $lang['CONF_SECRET_KEY'] = 'OFF';
 //PORFILE
 $lang['CONF_CONTAC'] = 'OFF';
-$lang['CONF_SELECT_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_OPER_KEY'] = 'OFF';
 $lang['CONF_SMS_KEY'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'OFF';

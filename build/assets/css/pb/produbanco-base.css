@@ -27,9 +27,10 @@ main.content {
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 2rem 2.5rem;
+	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
+	border-top: 3px solid #76bc21;
 }
 
 /* Type Scale
@@ -1302,12 +1303,6 @@ label {
 
 .bg-transparent { background-color: transparent !important }
 
-.bg-content {
-  background: url("../../images/bnt/bg-content.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /* Borders
 ========================================================================== */
 
@@ -2196,6 +2191,7 @@ i[class*=" icon-"].novoglyphs {
 	align-items: center;
 	justify-content: space-between;
 	padding: .5rem 2.5rem;
+	border-bottom: 3px solid #76bc21;
 }
 
 .navbar-secondary {
@@ -3547,9 +3543,6 @@ a.ui-button:active,
 	height: 100%;
 	z-index: 0;
 	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.svg");
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .login-content .z1{
