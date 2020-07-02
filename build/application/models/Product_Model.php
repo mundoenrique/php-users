@@ -325,27 +325,11 @@ class Product_Model extends BDB_Model
 					break;
 
 				case -286:
-					$this->response->code = 2;
-					$this->response->msg = lang('RESP_CODEOTP_INVALID');
-					$this->response->classIconName = 'ui-icon-info';
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_ACCEPT'),
-							'action' => 'close'
-						]
-					];
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
 
 					if ($response->bean == "0") {
-
-						$this->response->code = 3;
 						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
-						$this->response->data = [
-							'btn1' => [
-								'text' => lang('BUTTON_ACCEPT'),
-								'link' => FALSE,
-								'action' => 'close'
-							]
-						];
 					}
 					break;
 

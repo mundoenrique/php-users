@@ -514,6 +514,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 				case 3:
 					clearOTPSection();
+
 					showVerificationMsg(`${response.msg} ${msgResendOTP}`);
 					interceptLinkResendCode();
 					break;
