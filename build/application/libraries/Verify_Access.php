@@ -136,6 +136,7 @@ class Verify_Access {
 				case 'downloadMoves':
 				case 'services':
 				case 'temporaryLock':
+				case 'expensesCategory':
 					$auth = $this->CI->session->has_userdata('products');
 				break;
 				case 'signup':
