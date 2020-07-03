@@ -99,6 +99,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 						});
 
 						if (form.valid()) {
+							isModalConfirmIp = 0;
 							verb = "POST"; who = 'User'; where = 'Login'; data = getCredentialsUser();
 							callNovoCore(verb, who, where, data, function(response) {
 								btnTrigger.innerHTML = txtBtnTrigger;
@@ -107,7 +108,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 								$("#system-info").dialog('close');
 								$("#system-info").dialog("destroy");
 								$("#system-info").addClass("none");
-
+								window.scrollTo(0, 0);
 								validateResponseLogin(response, msgLoadingWhite);
 							})
 						} else {
