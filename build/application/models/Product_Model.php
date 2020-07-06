@@ -70,8 +70,7 @@ class Product_Model extends BDB_Model
 
 	public function callWs_getTransactionHistory_Product($dataRequest)
 	{
-		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized')
-		;
+		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'tarjeta';
@@ -80,7 +79,7 @@ class Product_Model extends BDB_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = '3';
-		$this->dataRequest->noTarjeta = gettype($dataRequest) === "object" ? $dataRequest->noTarjeta: $dataRequest['noTarjeta'];
+		$this->dataRequest->noTarjeta = gettype($dataRequest) === "object" ? $dataRequest->noTarjeta : $dataRequest['noTarjeta'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
 
@@ -118,13 +117,13 @@ class Product_Model extends BDB_Model
 			'bodyAPI' => $bodyAPI,
 			'method' => $method
 		];
-		log_message("DEBUG", '['.$this->session->userdata("userName").']'." REQUEST WSinTransit objectAPI: ".json_encode($objectAPI));
+		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . " REQUEST WSinTransit objectAPI: " . json_encode($objectAPI));
 		$response = connectionAPI($objectAPI);
 
 		$httpCode = $response->httpCode;
 		$resAPI = $response->resAPI;
 
-		log_message("DEBUG", '['.$this->session->userdata("userName").']'.' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
+		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . ' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
 
 		$dataResponse = json_decode($resAPI);
 		$code = 1;
@@ -134,8 +133,8 @@ class Product_Model extends BDB_Model
 				// Formato de moneda de acuerdo al país
 				$ledgerBalance = $dataResponse->balance->ledgerBalance;
 				$availableBalance = (float) $dataResponse->balance->availableBalance;
-				if($availableBalance < 0) {
-					$availableBalance = $availableBalance/100;
+				if ($availableBalance < 0) {
+					$availableBalance = $availableBalance / 100;
 				}
 				$actualBalance = $ledgerBalance + $availableBalance;
 				$ledgerBalance = np_hoplite_decimals($ledgerBalance, $country);
@@ -153,11 +152,10 @@ class Product_Model extends BDB_Model
 	{
 		log_message('INFO', 'NOVO Product Model: get Transaction History of Product method Initialized');
 
-		if ($dataRequest->month == 0 ) {
+		if ($dataRequest->month == 0) {
 
 			$response = $this->callWs_getTransactionHistory_Product($dataRequest);
-
-		}else{
+		} else {
 
 			$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
 			$this->dataAccessLog->modulo = 'tarjeta';
@@ -168,7 +166,7 @@ class Product_Model extends BDB_Model
 			$this->dataRequest->idOperation = '13';
 			$this->dataRequest->tarjeta = array(
 				"noTarjeta" => $dataRequest->noTarjeta,
-				"id_ext_per"=> $this->session->userdata("idUsuario")
+				"id_ext_per" => $this->session->userdata("idUsuario")
 			);
 			$this->dataRequest->mes = $dataRequest->month;
 			$this->dataRequest->anio = $dataRequest->year;
@@ -217,7 +215,8 @@ class Product_Model extends BDB_Model
 		}
 	}
 
-	public function getFile_Product ($dataRequest) {
+	public function getFile_Product($dataRequest)
+	{
 		log_message('INFO', 'NOVO ExpenseReport Model: getPDF  method Initialized');
 
 		$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
@@ -233,7 +232,7 @@ class Product_Model extends BDB_Model
 		];
 
 		$this->dataRequest->idOperation = $idsOpereation[$dataRequest->typeFile];
-		$this->dataRequest->tarjeta = array (
+		$this->dataRequest->tarjeta = array(
 			'noTarjeta' => $dataRequest->noTarjeta,
 			'id_ext_per' => $this->session->userdata("idUsuario")
 		);
@@ -280,21 +279,29 @@ class Product_Model extends BDB_Model
 		return $this->response;
 	}
 
-	public function callWs_getDetail_Product ($dataRequest) {
+	public function callWs_getDetail_Product($dataRequest)
+	{
 		log_message('INFO', 'NOVO Product Model: getDetail method Initialized');
 
-		$model = ' Product';
-
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$model = 'Product';
 
 		$this->dataAccessLog->modulo = 'personasweb';
 		$this->dataAccessLog->function = 'tarjeta';
 		$this->dataAccessLog->operation = 'consulta';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-		$this->dataRequest->idOperation = '214';
-		$this->dataRequest->id_ext_per = $dataRequest->id_ext_per;
-		$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
+		$this->dataRequest->idOperation = '121';
+		$this->className = 'com.novo.objects.TOs.CuentaTO';
+
+		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP) ? $dataRequest->codeOTP : '';
+		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
+		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
+
+		if (!empty($dataRequest->codeOTP)) {
+			$this->dataRequest->idOperation = '214';
+			$this->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->noTarjeta = $dataRequest->noTarjeta;
+		}
 
 		$response = $this->sendToService($model);
 		if ($this->isResponseRc !== FALSE) {
@@ -302,12 +309,66 @@ class Product_Model extends BDB_Model
 				case 0:
 
 					$this->response->code = 0;
-					$this->response->timeLiveModal = $response->tiempoPantallaVirtual*10;
+					$this->response->timeLiveModal = $response->tiempoPantallaVirtual * 10;
 					$this->response->dataDetailCard =  [
 						'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
 						'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
 						'expirationDate' => $this->encrypt_connect->cryptography($response->fechaExp, FALSE),
 						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+					];
+					break;
+
+				case 10:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_CODEOTP');
+					$this->response->validityTime = intval($response->bean) !== 0 ? intval($response->bean) * 60 : $this->defaultTimeOTP * 60;
+					break;
+
+				case -286:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_SHORT_CODEOTP_INVALID');
+
+					if ($response->bean == "0") {
+						$this->response->msg = lang('RESP_OTP_FAILED_ATTEMPTS');
+					}
+					break;
+
+				case -287:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_USED');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url(''),
+							'action' => 'redirect'
+						]
+					];
+					break;
+
+				case -288:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_EXPIRED_CODEOTP');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('vistaconsolidada'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+
+				case -301:
+					$this->response->code = 3;
+					$this->response->msg = lang('RESP_CODEOTP_INVALID');
+					$this->response->classIconName = 'ui-icon-info';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
 					];
 					break;
 
