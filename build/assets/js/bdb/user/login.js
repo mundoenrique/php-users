@@ -61,7 +61,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				<div class="row">
 					<div class="form-group col-6">
 						<label for="codeOTPLogin">${response.labelInput}</label>
-						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="">
+						<input id="codeOTPLogin" class="form-control" type="text" name="codeOTPLogin" value="" autocomplete="off">
 						<div id="msgErrorCodeOTP" class="help-block"></div>
 					</div>
 				</div>
