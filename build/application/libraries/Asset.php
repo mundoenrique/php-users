@@ -70,11 +70,14 @@ class Asset {
 
 		$country = !$country || $this->CI->config->item('client') == 'novo' ? '' : $country.'/';
 		$file = assetPath($folder.'/'.$country.$fileName);
+
 		if (!file_exists($file)) {
 			$file = assetPath($folder.'/default/logo.svg');
 			$country = 'default/';
 		}
+
 		$version = '?V'.date('Ymd-U', filemtime($file));
+
 		return assetUrl($folder.'/'.$country.$fileName.$version);
 	}
 	/**

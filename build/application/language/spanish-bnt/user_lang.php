@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['USER_SIGNIN_TITLE'] = 'Personas';
 $lang['USER_SIGNIN_LOGO_WIDGET'] = 'img-banorte.png';
-$lang['USER_SIGNIN_IMAGE'] = 'banorte-login.svg';
+$lang['USER_SIGNIN_IMAGE'] = 'banorte-login.jpg';
 $lang["USER_TERMS_TITLE"]='Términos y Condiciones de la Tarjeta de Débito Empresarial Banorte';
 $lang["USER_TERMS_SUBTITLE"]='Tarjetahabiente autorizado';
 $lang["USER_TERMS_CONTENT"] = '

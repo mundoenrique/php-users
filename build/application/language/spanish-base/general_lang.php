@@ -35,7 +35,7 @@ $lang['GEN_LINK_USER_SIGNUP'] = 'registro';
 $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
-$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';
+$lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -68,7 +68,7 @@ $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
-$lang['GEN_WAIT_BALANCE'] = 'Esperando Saldo...';
+$lang['GEN_WAIT_BALANCE'] = 'Esperando saldo...';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
@@ -104,7 +104,7 @@ $lang['GEN_CONTACTS'] = [
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no esposible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
@@ -169,3 +169,4 @@ $lang['GEN_SELECT_MONTH'] = [
 	'11' => 'Noviembre',
 	'12' => 'Diciembre',
 ];
+
