@@ -56,6 +56,10 @@ function validateForms(form, options) {
 		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
 	});
 
+	jQuery.validator.addMethod("alphanum", function(value, element) {
+		return this.optional( element ) || /^[a-z0-9]+$/i.test( value );
+	});
+
 	jQuery.validator.addMethod("exactLength", function(value, element, param) {
 		return this.optional(element) || value.length == param;
 	});
@@ -143,6 +147,12 @@ function validateForms(form, options) {
 		else return true;
 	}, "El nuevo PIN no debe ser igual a su PIN anterior.");
 
+	jQuery.validator.addMethod("codeOTPLogin", function(value, element) {
+		if (/^[a-z0-9]+$/i.test(value) && value.length < 16)
+			return true;
+		else return false;
+	}, "El formato de código es inválido.");
+
 	jQuery.validator.addMethod("fourConsecutivesDigits", function(value, element) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}, "Los 4 números no deben ser consecutivos.");
@@ -178,6 +188,7 @@ function validateForms(form, options) {
 			idNumber: { required: true, number: true },
 			telephoneNumber: { required: true, number: true, minNumLength: 7, maxNumLength: 11 },
 			codeOTP: { required: true, number: true, exactNumbers: 5 },
+			codeOTPLogin: { required: true, "codeOTPLogin": true },
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },

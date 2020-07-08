@@ -4,6 +4,7 @@
 	$cpo_name = $this->security->get_csrf_token_name();
 	$cpo_cook = $this->security->get_csrf_hash();
 	$datos = null;
+
 	if(isset($data)) {
 		$datos = unserialize($data);
 		if($datos->rc == 0) {
