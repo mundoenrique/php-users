@@ -74,7 +74,7 @@
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<label for="generateCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" disabled>
+										<input id="generateCodeOTP" class="form-control" type="text" name="generateCodeOTP" autocomplete="off" disabled>
 										<div id="generateTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
@@ -130,7 +130,7 @@
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<label for="changeCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" disabled>
+										<input id="changeCodeOTP" class="form-control" type="text" name="changeCodeOTP" autocomplete="off" disabled>
 										<div id="changeTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
@@ -171,7 +171,7 @@
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<label for="lockCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" disabled>
+										<input id="lockCodeOTP" class="form-control" type="text" name="lockCodeOTP" autocomplete="off" disabled>
 										<div id="lockTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
@@ -212,7 +212,7 @@
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<label for="replaceCodeOTP">Código de verificación <span class="danger">*</span></label>
-										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" disabled>
+										<input id="replaceCodeOTP" class="form-control" type="text" name="replaceCodeOTP" autocomplete="off" disabled>
 										<div id="replaceTxtMsgErrorCodeOTP" class="help-block"></div>
 									</div>
 								</div>
