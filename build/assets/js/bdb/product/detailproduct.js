@@ -60,7 +60,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 					<div class="row">
 						<div class="form-group col-7">
 							<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
-							<input id="codeOTP" class="form-control" type="text" name="codeOTP">
+							<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">
 							<div id="msgErrorCodeOTP" class="help-block"></div>
 						</div>
 					</div>
