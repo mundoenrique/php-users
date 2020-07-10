@@ -376,6 +376,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 				});
 
 			} else if (data.rc == -424) {
+				ocultarProcesando();
 				var auxUser = user, auxPass = pass;
 
 				$("#novo-control-ip #email").text(data.email);
@@ -394,7 +395,6 @@ function login(user = null, pass = null, dataOPT = {}) {
 					$("#acceptAssert").prop("disabled", false);
 					$('#acceptAssert').prop('checked', false)
 					$("#novo-control-ip").dialog("close");
-					ocultarProcesando();
 					habilitar();
 				});
 

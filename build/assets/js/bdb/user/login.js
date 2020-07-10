@@ -267,7 +267,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	function validateResponseLogin(response, textBtn)
 	{
-		response.code != 0 && response.code != 5? restartForm(txtBtnLogin): '';
+		response.code != 0 ? restartForm(txtBtnLogin): '';
 		const property = responseCodeLogin.hasOwnProperty(response.code) ? response.code : 99
 		responseCodeLogin[property](response, textBtn);
 	}
