@@ -3,16 +3,26 @@
 <div class="pt-3">
 	<div class="row">
 		<div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
-			<div class="flex flex-wrap">
+			<div class="flex flex-wrap widget-product">
 				<div class="w-100">
-					<div class="flex inline-flex col-12 px-xl-2 widget-product">
+					<!-- <div class="flex inline-flex col-12 px-xl-2">
+						<div class="flex flex-colunm justify-center col-6 py-5">
+							<div class="product-presentation relative">
+								<div class="item-network"></div>
+								<div id="donor" class="product-search btn">
+									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
+									<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
+								</div>
+							</div>
+						</div>
+						<div class="flex flex-column items-start self-center col-6 py-5">
+							<p class="mb-2">Seleccione una cuenta</p>
+						</div>
+					</div> -->
+					<div class="flex inline-flex col-12 px-xl-2">
 						<div class="flex flex-colunm justify-center col-6 py-5">
 							<div class="product-presentation relative">
 								<div class="item-network <?= $brand; ?>"></div>
-								<!-- <div id="donor" class="product-search btn">
-									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
-									<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
-								</div> -->
 								<?php if ($cardsTotal == 1): ?>
 								<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
 								<?php endif; ?>
