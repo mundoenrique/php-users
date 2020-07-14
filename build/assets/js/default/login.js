@@ -406,8 +406,9 @@ function login(user = null, pass = null, dataOPT = {}) {
 					}
 				});
 
-				$("#accept").click(function () {
-
+				$("#accept").click(function (e) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					var otp = $("#codeOTPLogin");
 					var otpValid = true;
 					otp.prop("disabled", true);
