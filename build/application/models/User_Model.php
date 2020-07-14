@@ -837,7 +837,6 @@ class User_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-
 					$this->session->sess_destroy();
 
 					$this->response->code = 0;
@@ -867,6 +866,11 @@ class User_Model extends BDB_Model
 				case -186:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+				case -192:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
 					$this->response->classIconName = "ui-icon-alert";
 					break;
 			}
