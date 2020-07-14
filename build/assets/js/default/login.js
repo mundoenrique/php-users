@@ -441,7 +441,23 @@ function login(user = null, pass = null, dataOPT = {}) {
 					}
 				});
 
-			} else if ((data.rc == -286) || (data.rc == -287) || (data.rc == -288)) {
+			} else if (data.rc == -286) {
+				ocultarProcesando();
+				$("#novo-control-code-invalid").dialog({
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) {
+						$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					}
+				});
+
+				$("#aceptarInvalid").click(function () {
+					$("#novo-control-code-invalid").dialog("close");
+					ocultarProcesando();
+					habilitar();
+				});
+
+			} else if ((data.rc == -287) || (data.rc == -288)) {
 				ocultarProcesando();
 				$("#novo-control-ip-token-auth").dialog({
 					modal: "true",
