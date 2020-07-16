@@ -120,9 +120,7 @@ $$.addEventListener("DOMContentLoaded", function () {
 							where = "Login";
 							data = getCredentialsUser();
 							callNovoCore(verb, who, where, data, function (response) {
-								if (response.code == "0") {
-									validateResponseLogin(response, msgLoadingWhite);
-								} else {
+								if (response.code != 0) {
 									btnTrigger.innerHTML = txtBtnTrigger;
 									btnTrigger.disabled = false;
 									systemMSg.innerHTML = "";
@@ -130,8 +128,8 @@ $$.addEventListener("DOMContentLoaded", function () {
 									$("#system-info").dialog("destroy");
 									$("#system-info").addClass("none");
 									window.scrollTo(0, 0);
-									validateResponseLogin(response, msgLoadingWhite);
 								}
+								validateResponseLogin(response, msgLoadingWhite);
 							});
 						} else {
 							btnTrigger.innerHTML = txtBtnTrigger;
