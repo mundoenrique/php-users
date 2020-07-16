@@ -18,7 +18,6 @@ class Asset {
 		$this->jsFiles = [];
 		$this->CI = &get_instance();
 		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
-		log_message('INFO', '***************************  '.json_encode($_SERVER));
 	}
 	/**
 	 * @info Método para inicializar los atributos de la librería
