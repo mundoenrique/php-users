@@ -262,7 +262,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 				format: CryptoJSAesJson
 			}).toString(CryptoJS.enc.Utf8))
 
-			if (!$.isEmptyObject(dataOPT)) {
+			if (!$.isEmptyObject(dataOPT) && data.rc != 0) {
 				$("#codeOTPLogin").prop("disabled", false);
 				$("#codeOTPLogin").val('');
 				$("#acceptAssert").prop("disabled", false);
