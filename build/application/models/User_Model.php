@@ -176,7 +176,7 @@ class User_Model extends BDB_Model
 				case -287:
 				case -288:
 					$this->response->code = 1;
-					$this->response->msg = lang('RESP_IP_TOKEN_AUTH');
+					$this->response->msg = $this->isResponseRc == -286 ? lang('RESP_CODE_INVALID') : lang('RESP_IP_TOKEN_AUTH');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 			}
@@ -978,6 +978,8 @@ class User_Model extends BDB_Model
 		$direccion = array(
 			"acCodCiudad"=> $dataRequest->city,
 			"acCodEstado"=> $dataRequest->department,
+			"acCiudad"=> $dataRequest->textCity,
+			"acEstado"=> $dataRequest->textDepartment,
 			"acCodPais"=> $this->session->userdata('pais'),
 			"acTipo"=> $dataRequest->addressType,
 			"acZonaPostal"=> $dataRequest->postalCode,
