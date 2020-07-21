@@ -284,4 +284,19 @@ class Novo_User extends NOVO_Controller {
 		$this->views = $views;
 		$this->loadView($view);
 	}
+		/**
+	 * @info Método que renderiza la vista de terminos y condiciones
+	 * @author Hector D Corredor.
+	 * @date Jul 21th, 2020
+	 */
+	public function termsConditions()
+	{
+		log_message('INFO', 'NOVO User: termsConditions Method Initialized');
+
+		$view = 'termsConditions';
+		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = lang('GEN_TERMS_TITLE');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
 }
