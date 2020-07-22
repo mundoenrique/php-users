@@ -61,6 +61,13 @@ $$.addEventListener('DOMContentLoaded', function(){
 			dataForm['descriptionPhoneType'] = elPhoneType.options[elPhoneType.selectedIndex].innerHTML;
 			dataForm['address'] = $$.getElementById('address').value;
 
+			var department = $$.getElementById("department");
+			dataForm["textDepartment"] =
+				department.options[department.selectedIndex].innerHTML;
+
+			var city = $$.getElementById("city");
+			dataForm["textCity"] = city.options[city.selectedIndex].innerHTML;
+
 			dataForm['cpo_name'] = decodeURIComponent(
 				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 			);
