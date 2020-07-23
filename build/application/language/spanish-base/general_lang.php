@@ -35,7 +35,7 @@ $lang['GEN_LINK_USER_SIGNUP'] = 'registro';
 $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
-$lang['GEN_MENU_SIGNOUT'] = 'Cerra sesión';
+$lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -62,13 +62,14 @@ $lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
 $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
+$lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
-$lang['GEN_WAIT_BALANCE'] = 'Esperando Saldo...';
+$lang['GEN_WAIT_BALANCE'] = 'Esperando saldo...';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
@@ -94,8 +95,17 @@ $lang['GEN_FOOTER_LINK_INSTAGRAM'] = $lang['GEN_NO_LINK'];
 $lang['GEN_FOTTER_IMAGE_L'] = $lang['GEN_DEFAULT_LOGO'];
 $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
+$lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
+$lang['GEN_CONTACTS'] = [
+	'city' => '(XX) XXX XXXX',
+];
+$lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no esposible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
@@ -160,3 +170,4 @@ $lang['GEN_SELECT_MONTH'] = [
 	'11' => 'Noviembre',
 	'12' => 'Diciembre',
 ];
+

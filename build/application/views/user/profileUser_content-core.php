@@ -1,49 +1,49 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="h3">Perfil de usuario</h1>
+<h1 class="h3 pl-2"><?= lang('USER_PROFILE_TITLE')?></h1>
 <hr class="separador-one">
 <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 </div>
-<form id="profileUser" method="post" class="hide-out hide bg-color">
-	<h4 class="mt-2 pb-2 h4">Datos personales</h4>
+<form id="profileUser" method="post" class="hide-out hide bg-color p-2">
+	<h4 class="mt-2 pb-2 h4"><?= lang('USER_PROFILE_DATA_PERSONAL')?></h4>
 	<div class="row">
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="idType">Tipo de identificación</label>
+			<label for="idType"><?= lang('USER_PROFILE_ID_TYPE')?></label>
 			<input id="idType" class="form-control" type="text" name="idType" value="<?= $idTypeCodeText; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="idNumber">Número de identificación</label>
+			<label for="idNumber"><?= lang('USER_PROFILE_ID_NUMBER')?></label>
 			<input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idNumber ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="firstName">Primer nombre</label>
+			<label for="firstName"><?= lang('USER_PROFILE_FIRSTNAME')?></label>
 			<input id="firstName" class="form-control" type="text" name="firstName" value="<?= $firstName; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="middleName">Segundo nombre</label>
+			<label for="middleName"><?= lang('USER_PROFILE_MIDDLENAME')?></label>
 			<input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="lastName">Primer apellido</label>
+			<label for="lastName"><?= lang('USER_PROFILE_LASTNAME')?></label>
 			<input id="lastName" class="form-control" type="text" name="lastName" value="<?= $lastName; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="secondSurname">Segundo apellido</label>
+			<label for="secondSurname"><?= lang('USER_PROFILE_SURNAME')?></label>
 			<input id="secondSurname" class="form-control" type="text" name="secondSurname" value="<?= $secondSurname; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="birthDate">Fecha de nacimiento</label>
+			<label for="birthDate"><?= lang('USER_PROFILE_BIRTHDATE')?></label>
 			<input id="birthDate" class="form-control" type="text" name="birthDate" value="<?= $birthday; ?>" readonly autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label class="block">Sexo</label>
+			<label class="block"><?= lang('USER_PROFILE_SEX')?></label>
 			<div class="custom-control custom-radio custom-control-inline">
 				<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off" <?= $gender == 'M' ? 'checked' :''; ?> disabled>
 				<label class="custom-control-label" for="genderMale">Masculino</label>
@@ -56,7 +56,7 @@
 		</div>
 		<?php if (lang('CONF_PROFESSION') == 'ON'):  ?>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="profession">Profesión</label>
+			<label for="profession"><?= lang('USER_PROFILE_PROFESSION')?></label>
 			<select id="profession" class="custom-select form-control" name="profession">
 				<option value="">Selecciona</option>
 				<option value="1">Abogado</option>
@@ -129,11 +129,11 @@
 		<?php endif; ?>
 	</div>
 	<hr class="separador-one mt-2 mb-4">
-	<h4 class="pb-2 h4">Datos de contacto</h4>
-	<?php if(lang('CONF_CONTAC') == 'on'): ?>
+	<h4 class="pb-2 h4"><?= lang('USER_PROFILE_DATA_CONTACT')?></h4>
+	<?php if(lang('CONF_CONTAC') == 'ON'): ?>
 	<div class="row">
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="addressType">Tipo de dirección</label>
+			<label for="addressType"><?= lang('USER_PROFILE_ADDRESS_TYPE')?></label>
 			<select id="addressType" class="custom-select form-control" name="addressType">
 				<option value="">Selecciona</option>
 				<option value="1" selected="">Domicilio</option>
@@ -143,12 +143,12 @@
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="postalCode">Código postal</label>
+			<label for="postalCode"><?= lang('USER_PROFILE_POSTAL_CODE')?></label>
 			<input id="postalCode" class="form-control" type="text" name="postalCode" value="102356" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="department">Departamento</label>
+			<label for="department"><?= lang('USER_PROFILE_STATE')?></label>
 			<select id="department" class="custom-select form-control" name="department">
 				<option value="">Selecciona</option>
 				<option value="100">Amazonas</option>
@@ -181,7 +181,7 @@
 			<div class="help-block"></div>
 		</div>
 		<div id="ctrlCity" class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="city">Ciudad</label>
+			<label for="city"><?= lang('USER_PROFILE_CITY')?></label>
 			<select id="city" class="custom-select form-control" name="city">
 				<option value="">Selecciona</option>
 				<option value="1001" selected="">Caracas</option>
@@ -190,7 +190,7 @@
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-12 col-lg-8 col-xl-12">
-			<label for="address">Dirección</label>
+			<label for="address"><?= lang('USER_PROFILE_ADDRESS')?></label>
 			<textarea id="address" class="form-control"
 				name="address">CENTRO COMERCIAL SANTA FÉ Locales 3-138, 3-139 y 3-140; 3er Piso-Plaza Italia</textarea>
 			<div class="help-block"></div>
@@ -199,92 +199,98 @@
 	<?php endif; ?>
 	<div class="row">
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="landLine">Teléfono fijo</label>
+			<label for="landLine"><?= lang('USER_PROFILE_PHONE_LANDLINE')?></label>
 			<input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine; ?>" readonly autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="mobilePhone">Teléfono móvil</label>
+			<label for="mobilePhone"><?= lang('USER_PROFILE_PHONE_MOBILE')?></label>
 			<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>" readonly autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="col-6 col-lg-4 col-xl-3">
-			<label for="otherPhoneNum">Oficina</label>
+			<label for="otherPhoneNum"><?= lang('USER_PROFILE_PHONE_OTHER')?></label>
 			<div class="form-row">
 				<?php if (lang('CONF_SELECT_OTHER_PHONE') == 'ON'): ?>
 				<div class="form-group col-6">
-					<select id="phoneType" class="custom-select form-control" name="phoneType">
-						<option value="">Selecciona</option>
-						<option value="OFC">Laboral</option>
-						<option value="FAX">Fax</option>
-						<option value="OTRO">Otro</option>
+					<select id="phoneType" class="custom-select form-control" name="phoneType" readonly disabled>
+						<option value=""></option>
+						<option value="fax" <?= $otherType == 'fax' ? 'selected' : ''; ?>>Fax</option>
+						<option value="office" <?= $otherType == 'other' ? 'selected' : ''; ?>>Laboral</option>
+						<option value="other"<?= $otherType == 'other' ? 'selected' : ''; ?>>Otro</option>
 					</select>
 					<div class="help-block"></div>
 				</div>
-				<?php endif; ?>
 				<div class="form-group col-6">
-					<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $otherPhoneNum; ?>" readonly autocomplete="off">
+					<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $otherPhoneNum; ?>" <?= $otherPhoneNum == '' ? '' : 'disabled' ?> autocomplete="off" readonly>
 					<div class="help-block"></div>
 				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="email">Correo electrónico</label>
+			<label for="email"><?= lang('USER_PROFILE_EMAIL')?></label>
 			<input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" readonly
 				autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 	</div>
 	<hr class="separador-one mt-2 mb-4">
-	<h4 class="pb-2 h4">Datos de usuario</h4>
+	<h4 class="pb-2 h4"><?= lang('USER_PROFILE_DATA_USER')?></h4>
 	<div class="row">
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="username">Nombre de usuario</label>
-			<input id="username" class="form-control" type="text" name="username" value="<?= $nickName; ?>" readonly="readonly" autocomplete="off">
+			<label for="username"><?= lang('USER_PROFILE_USERNAME')?></label>
+			<input id="username" class="form-control" type="text" name="username" value="<?= $nickName; ?>" readonly autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label for="creationDate">Fecha de creación</label>
+			<label for="creationDate"><?= lang('USER_PROFILE_DATE_REGISTRY')?></label>
 			<input id="creationDate" class="form-control" type="text" name="creationDate" value="<?= $creationDate; ?>" readonly="readonly" autocomplete="off">
 			<div class="help-block"></div>
 		</div>
-		<?php if (lang('CONF_SELECT_NOTIFICATIONS') == 'ON'): ?>
+
+		<?php if (lang('CONF_SELECT_NOTIFICATIONS_EMAIL') == 'ON' || lang('CONF_SELECT_NOTIFICATIONS_SMS') == 'ON' ): ?>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
-			<label class="block">Notificaciones</label>
+			<label class="block"><?= lang('USER_PROFILE_NOTIFICATIONS')?></label>
+
+			<?php if (lang('CONF_SELECT_NOTIFICATIONS_EMAIL') == 'ON'): ?>
 			<div class="custom-control custom-switch custom-control-inline">
-				<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail" checked="">
-				<label class="custom-control-label" for="notificationsEmail">Correo electrónico
-				</label>
+				<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail" <?= $emailNot == '1' ? 'checked' : '' ?> disabled>
+				<label class="custom-control-label" for="notificationsEmail"><?= lang('USER_PROFILE_NOTIFICATIONS_EMAIL')?></label>
 			</div>
+			<?php endif; ?>
+
+			<?php if (lang('CONF_SELECT_NOTIFICATIONS_SMS') == 'ON'): ?>
 			<div class="custom-control custom-switch custom-control-inline">
-				<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms" checked="">
-				<label class="custom-control-label" for="notificationsSms">SMS
-				</label>
+				<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms" <?= $smsNot == '1' ? 'checked' : '' ?> disabled>
+				<label class="custom-control-label" for="notificationsSms"><?= lang('USER_PROFILE_NOTIFICATIONS_SMS')?></label>
 			</div>
+			<?php endif; ?>
+
 		</div>
 		<?php endif; ?>
+
 	</div>
 	<div class="row">
 		<div class="col-6 col-lg-4 col-xl-3">
-			<a class="btn btn-small btn-link px-0 hyper-link big-modal" href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>">Cambiar contraseña</a>
+			<a class="btn btn-small btn-link px-0 hyper-link big-modal" href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PROFILE_CHANGE_PASSWORD')?></a>
 		</div>
 		<?php if (lang('CONF_OPER_KEY') == 'ON'): ?>
 		<div class="col-6 col-lg-4 col-xl-3">
-			<a class="btn btn-small btn-link px-0 hyper-link" href="">Cambiar clave
-				Operaciones</a>
+			<a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_PROFILE_CHANGE_PASSWORD_OPERATIONS')?></a>
 		</div>
 		<?php endif; ?>
 		<?php if (lang('CONF_SMS_KEY') == 'ON'): ?>
 		<div class="col-6 col-lg-4 col-xl-3">
-			<a class="btn btn-small btn-link px-0 hyper-link" href="">Cambiar clave SMS</a>
+			<a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_PROFILE_CHANGE_PASSWORD_SMS')?></a>
 		</div>
 		<?php endif; ?>
 	</div>
 	<hr class="separador-one mt-2 mb-4">
 	<?php if (lang('CONF_UPDATE_USER') == 'ON'): ?>
 	<div class="flex items-center justify-end">
-		<a class="btn btn-small btn-link" href="">Cancelar</a>
-		<button id="btnActualizar" class="btn btn-small btn-loading btn-primary" type="submit">Continuar</button>
+		<a class="btn btn-small btn-link" href=""><?= lang('GEN_BTN_CANCEL')?></a>
+		<button id="btnActualizar" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE')?></button>
 	</div>
 	<?php endif; ?>
 </form>

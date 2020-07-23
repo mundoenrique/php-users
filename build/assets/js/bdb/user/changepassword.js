@@ -69,8 +69,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	//functions
-	$$.getElementById('newPassword').addEventListener('keyup',function() {
-		var pswd = $$.getElementById('newPassword').value;
+	$$.getElementById('newPassword').addEventListener('keyup',function(e) {;
+		var pswd = $$.getElementById('newPassword').value.trim();
+		if (e.key == '@') {
+			pswd += '@';
+		}
 		var resultValidate = false;
 		var validations = {
 			length: pswd.length >= 8 && pswd.length <= 15,

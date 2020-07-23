@@ -59,7 +59,7 @@ class Novo_User_Model extends NOVO_Model {
 				if ($this->validateUserLogged($userName)) {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->icon = lang('GEN_ICON_WARNING');
-					$this->response->msg = lang('LOGIN_INCORRECTLY_CLOSED');
+					$this->response->msg = lang('USER_SIGNIN_INCORRECTLY_CLOSED');
 					$this->response->data = [
 						'btn1'=> [
 							'text'=> lang('GEN_BTN_ACCEPT'),
@@ -121,11 +121,11 @@ class Novo_User_Model extends NOVO_Model {
 			case -1:
 			case -205:
 				$this->response->code = 1;
-				$this->response->msg = lang('LOGIN_INVALID_USER');
+				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
 				if (isset($response->bean->intentos) && $response->bean->intentos == 2) {
-					$this->response->msg = lang('LOGIN_WILL_BLOKED');
+					$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
 					$this->response->className = lang('CONF_VALID_INVALID_USER');
 					$this->response->position = lang('CONF_VALID_POSITION');
 				}
@@ -133,7 +133,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -194:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_INFO');
-				$this->response->msg = novoLang(lang('LOGIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
+				$this->response->msg = novoLang(lang('USER_SIGNIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -147,7 +147,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -35:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('LOGIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
+				$this->response->msg = novoLang(lang('USER_SIGNIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -160,7 +160,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 9999:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-				$this->response->msg = lang('LOGIN_RECAPTCHA_VALIDATE');
+				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -228,8 +228,8 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				$recover = isset($dataRequest->recoveryPwd) ? lang('RECOVER_PASS_TEMP') : lang('RECOVER_USERNAME');
-				$this->response->msg = novoLang(lang('RECOVER_SUCCESS'),  [$maskMail, $recover]);
+				$recover = isset($dataRequest->recoveryPwd) ? lang('USER_RECOVER_PASS_TEMP') : lang('USER_RECOVER_USERNAME');
+				$this->response->msg = novoLang(lang('USER_RECOVER_SUCCESS'),  [$maskMail, $recover]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->data = [
 					'btn1'=> [
@@ -242,7 +242,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -186:
 			case -187:
 				$msgGeneral = '1';
-				$this->response->msg = LANG('RECOVER_DATA_INVALID');
+				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
 				break;
 		}
 
@@ -560,93 +560,51 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$record = new stdClass();
 				$this->response->code = 0;
-				foreach ($response->registro->user AS $pos => $userData) {
-					switch ($pos) {
-						case 'userName':
-							$record->nickName = $userData;
-						break;
-						case 'primerNombre':
-							$record->firstName = $userData;
-						break;
-						case 'segundoNombre':
-							$record->middleName = $userData;
-						break;
-						case 'primerApellido':
-							$record->lastName = $userData;
-						break;
-						case 'segundoApellido':
-							$record->secondSurname = $userData;
-						break;
-						case 'email':
-							$record->email = $userData;
-						break;
-						case 'dtfechorcrea_usu':
-							$record->creationDate = $userData;
-						break;
-						case 'dtfechorcrea_usu':
-							$record->creationDate = $userData;
-						break;
-						case 'notEmail':
-							$record->emailNot = $userData;
-						break;
-						case 'notSms':
-							$record->smsNot = $userData;
-						break;
-						case 'sexo':
-							$record->gender = $userData;
-						break;
-						case 'id_ext_per':
-							$record->idNumber = $userData;
-						break;
-						case 'fechaNacimiento':
-							$record->birthday = $userData;
-						break;
-						case 'tipo_profesion':
-							$record->professionType = $userData;
-						break;
-						case 'profesion':
-							$record->profession = $userData;
-						break;
-						case 'tipo_id_ext_per':
-							$record->idTypeCode = $userData;
-						break;
-						case 'descripcion_tipo_id_ext_per':
-							$record->idTypeCodeText = $userData;
-						break;
-						case 'disponeClaveSMS':
-							$record->smsKey = $userData;
-						break;
-						case 'aplicaPerfil':
-							$record->longProfile = $userData;
-						break;
-					}
+				$userData = $response->registro->user;
+				$record->nickName = isset($userData->userName) ? $userData->userName : '';
+				$record->firstName = isset($userData->primerNombre) ? $userData->primerNombre : '';
+				$record->middleName = isset($userData->segundoNombre) ? $userData->segundoNombre : '';
+				$record->lastName = isset($userData->primerApellido) ? $userData->primerApellido : '';
+				$record->secondSurname = isset($userData->segundoApellido) ? $userData->segundoApellido : '';
+				$record->email = isset($userData->email) ? $userData->email : '';
+				$record->creationDate = isset($userData->dtfechorcrea_usu) ? $userData->dtfechorcrea_usu : '';
+				$record->emailNot = isset($userData->notEmail) ? $userData->notEmail : '';
+				$record->smsNot = isset($userData->notSms) ? $userData->notSms : '';
+				$record->gender = isset($userData->sexo) ? $userData->sexo : '';
+				$record->idNumber = isset($userData->id_ext_per) ? $userData->id_ext_per : '';
+				$record->birthday = isset($userData->fechaNacimiento) ? $userData->fechaNacimiento : '';
+				$record->professionType = isset($userData->tipo_profesion) ? $userData->tipo_profesion : '';
+				$record->profession = isset($userData->profesion) ? $userData->profesion : '';
+				$record->idTypeCode = isset($userData->tipo_id_ext_per) ? $userData->tipo_id_ext_per : '';
+				$record->idTypeCodeText = isset($userData->descripcion_tipo_id_ext_per) ? $userData->descripcion_tipo_id_ext_per : '';
+				$record->smsKey = isset($userData->disponeClaveSMS) ? $userData->disponeClaveSMS : '';
+				$record->longProfile = isset($userData->aplicaPerfil) ? $userData->aplicaPerfil : '';
+				$profileData[] = $record;
 
-					$profileData[] = $record;
-				}
+				$phonesList['otherPhoneNum'] = '';
+				$phonesList['landLine'] = '';
+				$phonesList['mobilePhone'] = '';
+				$phonesList['otherType'] = '';
 
-				foreach ($response->registro->listaTelefonos AS $pos => $phonesType) {
-					$phones = new stdClass();
-					switch ($pos) {
-						case 0:
+				foreach ($response->registro->listaTelefonos AS $phonesType) {
+					switch ($phonesType->tipo) {
+						case 'FAX':
 							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'fax';
 						break;
-						case 1:
+						case 'OFC':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'office';
+						break;
+						case 'OTRO':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'other';
+						break;
+						case 'HAB':
 							$phonesList['landLine'] = $phonesType->numero;
 						break;
-						case 2:
+						case 'CEL':
 							$phonesList['mobilePhone'] = $phonesType->numero;
-						break;
-						case 0:
-							$phones->ofc =
-							$phonesList['ofc'] = $phones;
-						break;
-						case 1:
-							$phones->hab = $phonesType->numero;
-							$phonesList['hab'] = $phones;
-						break;
-						case 2:
-							$phones->cel = $phonesType->numero;
-							$phonesList['cel'] = $phones;
 						break;
 					}
 				}

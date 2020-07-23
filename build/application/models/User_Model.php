@@ -22,11 +22,30 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->operation = '1';
 		$this->dataAccessLog->userName = $dataRequest->user;
 
+		$infoOTP = new stdClass();
+		$infoOTP->tokenCliente = isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"";
+		$infoOTP->authToken = $this->session->flashdata('authToken')?: '';
+
+		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL' ) {
+			$this->session->set_flashdata('firstDataRquest', $dataRequest);
+		}else{
+			$firstDataRequest = $this->session->flashdata('firstDataRquest');
+			$dataRequest->user = mb_strtoupper($firstDataRequest->user);
+			$dataRequest->pass = $firstDataRequest->pass;
+			$dataRequest->active = $firstDataRequest->active;
+		}
+
 		$this->dataRequest->idOperation = '1';
+		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->guardaIp = "false";
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
 		$this->dataRequest->password = $dataRequest->pass;
 		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->codigoOtp = $infoOTP ;
+
+		if (isset($dataRequest->saveIP)){
+		 	$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
+		}
 
 		$response = $this->sendToService('Login');
 		if ($this->isResponseRc !== FALSE) {
@@ -96,6 +115,24 @@ class User_Model extends BDB_Model
 						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					}
 					break;
+				case -3:
+				case -20:
+				case -33:
+				case -60:
+				case -61:
+				case -426:
+					$this->response->code = lang('RESP_DEFAULT_CODE');
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->classIconName = 'ui-icon-closethick';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					break;
 				case -8:
 				case -35:
 					$this->response->code = 1;
@@ -110,6 +147,36 @@ class User_Model extends BDB_Model
 				case -422:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
+					$this->response->classIconName = 'ui-icon-alert';
+					break;
+				case -424:
+
+					$bean = json_decode($response->bean);
+
+					$this->response->code = 5;
+					$this->response->msg = str_replace('{$maskMail$}', $bean->emailEnc, lang('LOGIN_IP_MSG'));
+					$this->response->assert = lang('LOGIN_IP_ASSERT');
+					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1'=> [
+							'text'=> lang('GEN_BTN_ACCEPT'),
+							'link'=> FALSE,
+							'action'=> 'wait'
+						],
+						'btn2'=> [
+							'text'=> lang('GEN_BTN_CANCEL'),
+							'link'=> FALSE,
+							'action'=> 'close'
+						]
+					];
+					$this->session->set_flashdata('authToken', $bean->codigoOtp->authToken);
+					break;
+				case -286:
+				case -287:
+				case -288:
+					$this->response->code = 1;
+					$this->response->msg = $this->isResponseRc == -286 ? lang('RESP_CODE_INVALID') : lang('RESP_IP_TOKEN_AUTH');
 					$this->response->classIconName = 'ui-icon-alert';
 					break;
 			}
@@ -770,7 +837,6 @@ class User_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-
 					$this->session->sess_destroy();
 
 					$this->response->code = 0;
@@ -800,6 +866,11 @@ class User_Model extends BDB_Model
 				case -186:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->classIconName = "ui-icon-alert";
+					break;
+				case -192:
+					$this->response->code = 1;
+					$this->response->msg = lang('RESP_PASSWORD_INCORRECT');
 					$this->response->classIconName = "ui-icon-alert";
 					break;
 			}
@@ -907,6 +978,8 @@ class User_Model extends BDB_Model
 		$direccion = array(
 			"acCodCiudad"=> $dataRequest->city,
 			"acCodEstado"=> $dataRequest->department,
+			"acCiudad"=> $dataRequest->textCity,
+			"acEstado"=> $dataRequest->textDepartment,
 			"acCodPais"=> $this->session->userdata('pais'),
 			"acTipo"=> $dataRequest->addressType,
 			"acZonaPostal"=> $dataRequest->postalCode,

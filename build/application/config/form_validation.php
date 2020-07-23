@@ -438,7 +438,7 @@ $config = [
 			'rules' => 'required'
 		],
 	],
-	'lock' =>[
+	'lock' => [
 		[
 			'field' => 'codeOTP',
 			'label' => 'codeOTP',
@@ -519,6 +519,16 @@ $config = [
 			'field' => 'pass',
 			'label' => 'pass',
 			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'label' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		],
+		[
+			'field' => 'saveIP',
+			'label' => 'saveIP',
+			'rules' => 'trim|numeric'
 		]
 	],
 	'validatecaptcha' => [

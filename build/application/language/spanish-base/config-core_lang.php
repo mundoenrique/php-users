@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SUPPORT IE 11
+$lang['CONF_SUPPORT_IE'] = 'OFF';
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -28,6 +30,7 @@ $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 //SIGNUO
 $lang['CONF_SECRET_KEY'] = 'ON';
@@ -51,11 +54,12 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Mx-Bn' => 15,
 	'Ec-pb' => 16,
 ];
-//PORFILE
-$lang['CONF_PROFESSION'] = 'ON';
+//PROFILE
+$lang['CONF_PROFESSION'] = 'OFF';
 $lang['CONF_CONTAC'] = 'ON';
 $lang['CONF_SELECT_OTHER_PHONE'] = 'ON';
-$lang['CONF_SELECT_NOTIFICATIONS'] = 'ON';
-$lang['CONF_OPER_KEY'] = 'ON';
-$lang['CONF_SMS_KEY'] = 'ON';
+$lang['CONF_SELECT_NOTIFICATIONS_EMAIL'] = 'ON';
+$lang['CONF_SELECT_NOTIFICATIONS_SMS'] = 'OFF';
+$lang['CONF_OPER_KEY'] = 'OFF';
+$lang['CONF_SMS_KEY'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'ON';
