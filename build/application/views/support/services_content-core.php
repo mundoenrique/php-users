@@ -29,18 +29,18 @@
 							</div>
 						</div>
 						<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
-							<?php if ($cardsTotal > 1): ?>
+							<!-- <?php if ($cardsTotal > 1): ?> -->
 							<span>Seleccione una cuenta</span>
 							<?php endif; ?>
 							<p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
 							<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-							<?php if ($cardsTotal > 1): ?>
+							<!-- <?php if ($cardsTotal > 1): ?> -->
 							<a id="other-product" class="btn hyper-link btn-small p-0" href="">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto</a>
 							<?php endif; ?>
 						</div>
 					</div>
-					<?php if(FALSE): ?>
+					<?php if(TRUE): ?>
 					<div class="flex col-12 optional mt-4 px-0">
 						<nav class="nav-config w-100">
 							<ul class="flex flex-wrap justify-center nav-config-box">
@@ -71,6 +71,26 @@
 										<div class="box up left regular">
 											<span class="icon-spinner h1 icon-color"></span>
 											<h4 class="h5 center">Solicitud<br>de reposición</h4>
+										</div>
+									</a>
+								</li>
+								<li id="transactionalLimits" class="list-inline-item nav-item-config">
+									<a href="javascript:">
+										<span class="icon-config icon novoglyphs icon-spinner h1 icon-color"></span>
+										<h5 class="center">Limites<br>transaccionales</h5>
+										<div class="box up left regular">
+											<span class="icon novoglyphs icon-spinner h1 icon-color"></span>
+											<h4 class="h5 center">Limites<br>transaccionales</h4>
+										</div>
+									</a>
+								</li>
+								<li id="twirlsCommercial" class="list-inline-item nav-item-config">
+									<a href="javascript:">
+										<span class="icon-config icon novoglyphs icon-credit-card h1 icon-color"></span>
+										<h5 class="center">Giros<br>comerciales</h5>
+										<div class="box up left regular">
+											<span class="icon novoglyphs icon-credit-card h1 icon-color"></span>
+											<h4 class="h5 center">Giros<br>comerciales</h4>
 										</div>
 									</a>
 								</li>
@@ -202,6 +222,352 @@
 							<button id="btnReplace" class="btn btn-small btn-loading btn-primary" type="submit" name="btnReplace">Continuar</button>
 						</div>
 					</form>
+				</div>
+			</div>
+
+			<div id="transactionalLimitsView" style="display:none">
+				<div class="flex mb-1 mx-4 flex-column">
+
+					<div class="w-100 hide-out hide">
+						<div class="flex flex-auto flex-column">
+							<div class="search-criteria-order flex pb-3 flex-column w-100">
+								<span class="line-text mb-2 h4 semibold primary"><?= lang('GEN_SEARCH_CRITERIA'); ?></span>
+								<div class="flex my-2 px-5">
+									<form method="post" class="w-100">
+										<div class="row flex justify-between">
+											<div class="form-group col-4 col-xl-4">
+												<label for="idNumberP"><?= lang('GEN_TABLE_DNI'); ?></label>
+												<input id="idNumberP" name="idNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+												<div class="help-block"></div>
+											</div>
+											<div class="form-group col-4 col-xl-4">
+												<label for="cardNumberP"><?= lang('GEN_CARD_NUMBER'); ?></label>
+												<input id="cardNumberP" name="cardNumberP" class="form-control h5 select-group" type="text" autocomplete="off" disabled>
+												<div class="help-block"></div>
+											</div>
+											<div class="flex items-center justify-end col-3">
+												<button type="submit" id="card-holder-btn" class="btn btn-primary btn-small btn-loading">
+													<?= lang('GEN_BTN_SEARCH'); ?>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="line mb-2"></div>
+							</div>
+							<div class="flex pb-5 px-2 flex-column">
+								<div class="flex flex-column">
+									<div class="flex light items-center line-text mb-5">
+										<div class="flex tertiary">
+											<span class="inline h4 semibold primary">Resultados</span>
+										</div>
+										<div class="flex h6 flex-auto justify-end">
+											<span>Fecha de actualización: 3/07/2020 5:36 PM</span>
+										</div>
+									</div>
+									<div class="row flex justify-between my-3">
+										<div class="form-group col-4 center">
+											<p class="h5 semibold tertiary"><?= lang('GEN_CARD_NUMBER'); ?>: <span class="light text">**********270300</span></p>
+										</div>
+										<div class="form-group col-4 center">
+											<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_NAME'); ?>: <span class="light text">Jhonatan Ortiz</span></p>
+										</div>
+										<div class="form-group col-4 center">
+											<p class="h5 semibold tertiary"><?= lang('GEN_TABLE_DNI'); ?>: <span class="light text">1803752318</span></p>
+										</div>
+									</div>
+								</div>
+								<div class="flex mb-5 flex-column">
+									<span class="line-text slide-slow flex mb-2 h4 semibold primary">Con tarjeta presente
+										<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+									</span>
+									<div class="section my-2 px-5">
+										<form id="">
+											<div class="container">
+												<div class="row">
+													<div class="col-10 bolck mx-auto">
+														<div class="row">
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
+																<div class="input-group">
+																	<input id="numberDayPurchasesCtp" class="money form-control pwd-input text-right" value="" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="numberWeeklyPurchasesCtp">Número de compras semanales</label>
+																<div class="input-group">
+																	<input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="numberMonthlyPurchasesCtp">Número de compras mensuales</label>
+																<div class="input-group">
+																	<input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
+																<div class="input-group">
+																	<input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyAmountPurchasesCtp">Monto semanal de compras</label>
+																<div class="input-group">
+																	<input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyPurchasesAmountCtp">Monto mensual de compras</label>
+																<div class="input-group">
+																	<input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="purchaseTransactionCtp">Monto por transacción de compras</label>
+																<div class="input-group">
+																	<input id="purchaseTransactionCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="flex mb-5 flex-column">
+									<span class="line-text slide-slow flex mb-2 h4 semibold primary">Sin tarjeta presente
+										<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+									</span>
+									<div class="section my-2 px-5">
+										<form id="">
+											<div class="container">
+												<div class="row">
+													<div class="col-10 bolck mx-auto">
+														<div class="row">
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="numberDayPurchasesStp">Número de compras diarias</label>
+																<div class="input-group">
+																	<input id="numberDayPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="numberWeeklyPurchasesStp">Número de compras semanales</label>
+																<div class="input-group">
+																	<input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="numberMonthlyPurchasesStp">Número de compras mensuales</label>
+																<div class="input-group">
+																	<input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
+																<div class="input-group">
+																	<input id="dailyPurchaseamountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyAmountPurchasesStp">Monto semanal de compras</label>
+																<div class="input-group">
+																	<input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyPurchasesAmountStp">Monto mensual de compras</label>
+																<div class="input-group">
+																	<input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="purchaseTransactionStp">Monto por transacción de compras</label>
+																<div class="input-group">
+																	<input id="purchaseTransactionStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="flex mb-5 flex-column ">
+									<span class="line-text slide-slow flex mb-2 h4 semibold primary">Retiros
+										<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+									</span>
+									<div class="section my-2 px-5">
+										<form id="">
+											<div class="container">
+												<div class="row">
+													<div class="col-10 bolck mx-auto">
+														<div class="row">
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="dailyNumberWithdraw">Número diario de retiros</label>
+																<div class="input-group">
+																	<input id="dailyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyNumberWithdraw">Número semanal de retiros</label>
+																<div class="input-group">
+																	<input id="weeklyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyNumberWithdraw">Número mensual de retiros</label>
+																<div class="input-group">
+																	<input id="monthlyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label class ="pr-3" for="dailyAmountWithdraw">Monto diario de retiros</label>
+																<div class="input-group">
+																	<input id="dailyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
+																<div clxs="input-group">
+																	<input id="weeklyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyAmountwithdraw">Monto mensual de retiros</label>
+																<div class="input-group">
+																	<input id="monthlyAmountwithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="WithdrawTransaction">Monto por transacción de retiros</label>
+																<div class="input-group">
+																	<input id="WithdrawTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="flex mb-5 flex-column ">
+									<span class="line-text slide-slow flex mb-2 h4 semibold primary">Créditos
+										<i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
+									</span>
+									<div class="section my-2 px-5">
+										<form id="">
+											<div class="container">
+												<div class="row">
+													<div class="col-10 bolck mx-auto">
+														<div class="row">
+															<div class="form-group col-12 col-lg-4">
+																<label class="pr-3" for="dailyNumberCredit">Número diario de créditos</label>
+																<div class="input-group">
+																	<input id="dailyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyNumberCredit">Número semanal de créditos</label>
+																<div class="input-group">
+																	<input id="weeklyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyNumberCredit">Número mensual de créditos</label>
+																<div class="input-group">
+																	<input id="monthlyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label class="pr-3" for="dailyAmountCredit">Monto diario de créditos</label>
+																<div class="input-group">
+																	<input id="dailyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="weeklyAmountCredit">Monto semanal de créditos</label>
+																<div clxs="input-group">
+																	<input id="weeklyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="monthlyAmountCredit">Monto mensual de créditos</label>
+																<div class="input-group">
+																	<input id="monthlyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+															<div class="form-group col-12 col-lg-4">
+																<label for="CreditTransaction">Monto por transacción de créditos</label>
+																<div class="input-group">
+																	<input id="CreditTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name="" required disabled>
+																</div>
+																<div class="help-block"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<form id="" method="post">
+									<div class="flex row mt-3 mb-2 mx-2 justify-end">
+										<div class="col-5 col-lg-3 col-xl-3 form-group">
+											<div class="input-group">
+												<input id="password-sign" name="password" class="form-control pwd-input pr-0" type="password" autocomplete="off" placeholder="Contraseña">
+												<div class="input-group-append">
+													<span id="pwd_action" class="input-group-text pwd-action" title="Mostrar contraseña"><i class="icon-view mr-0"></i></span>
+												</div>
+											</div>
+											<div class="help-block bulk-select text-left"></div>
+										</div>
+										<div class="col-auto">
+											<button id="sign-bulk-btn" class="btn btn-primary btn-small btn-loading flex mx-auto">
+												Actualizar</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="twirlsCommercialView" style="display:none">
+				<div class="flex mb-1 mx-4 flex-column">
+					 aqui pegas las maqueta :)
 				</div>
 			</div>
 		</div>
