@@ -7,13 +7,13 @@
 		<h1 class="text regular inline"><?= lang('GEN_MENU_ACCESS_RECOVER'); ?></h1>
 		<div class="line mt-2 mb-3"></div>
 		<div class="pt-3 regular">
-			<h2 class="text h3 mb-2"><?= lang('RECOVER_VERIFY_DATA'); ?></h2>
-			<p><?= novoLang(lang('RECOVER_USER_PASS'), lang('GEN_SYSTEM_NAME')); ?></p>
+			<h2 class="text h3 mb-2"><?= lang('USER_RECOVER_VERIFY_DATA'); ?></h2>
+			<p><?= novoLang(lang('USER_RECOVER_PASS'), lang('GEN_SYSTEM_NAME')); ?></p>
 			<div class="line my-4"></div>
 			<div class="max-width-1 fit-lg mx-auto pt-4">
 				<form id="recoverAccessForm" class="mt-2" method="POST">
 					<div class="form-group">
-						<label class="mr-2"><?= lang('RECOVER_NEED') ?></label>
+						<label class="mr-2"><?= lang('USER_RECOVER_NEED') ?></label>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input id="recoveryUser" name="recoveryAccess" class="custom-control-input" type="radio" value="U" disabled>
 							<label class="custom-control-label" for="recoveryUser"><?= lang('GEN_USER'); ?></label>

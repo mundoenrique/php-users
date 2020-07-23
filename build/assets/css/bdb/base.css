@@ -1155,6 +1155,7 @@ textarea.form-control {
 }
 
 /* Border Rounded */
+.btn-rounded { border-radius: var(--btn-border-radius) }
 
 .btn-rounded-right  { border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0 }
 
@@ -2322,6 +2323,15 @@ i[class*=" icon-"]:before {
 	background-color: var(--primary);
 	border-color: var(--primary);
 	color: var(--secondary);
+}
+.stack-item.stack-item-primary {
+	font-weight: var(--semibold-font-weight);
+	color: var(--primary);
+	border-color: var(--primary);
+}
+.stack-item.stack-item-primary:hover {
+	color: var(--secondary);
+	background-color: var(--primary);
 }
 
 /* Dropdown */

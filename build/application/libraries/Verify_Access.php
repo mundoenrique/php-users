@@ -27,7 +27,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function validateForm($rule, $countryUri, $user)
+	public function validateForm($rule, $countryUri, $user, $class = FALSE)
 	{
 
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
@@ -40,9 +40,11 @@ class Verify_Access {
 			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
-		languageLoad('generic', NULL, $rule);
-		$this->CI->config->set_item('language', 'spanish-'.$countryUri);
-		languageLoad('specific', $countryUri, $rule);
+		if ($class) {
+			languageLoad('generic', $class);
+			$this->CI->config->set_item('language', 'spanish-'.$countryUri);
+			languageLoad('specific', $class);
+		}
 
 		return $result;
 	}
@@ -118,7 +120,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify'];
+		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -134,6 +136,7 @@ class Verify_Access {
 				case 'downloadMoves':
 				case 'services':
 				case 'temporaryLock':
+				case 'expensesCategory':
 					$auth = $this->CI->session->has_userdata('products');
 				break;
 				case 'signup':

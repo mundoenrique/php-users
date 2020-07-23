@@ -87,6 +87,7 @@ $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
 $route['(:any)/recuperar-acceso'] = "Novo_User/accessRecover";
 $route['(:any)/identificar-usuario'] = "Novo_User/userIdentify";
 $route['(:any)/perfil-usuario'] = "Novo_User/profileUser";
+$route['(:any)/terminos-condiciones'] = "Novo_User/termsConditions";
 //Business
 $route['(:any)/lista-de-tarjetas'] = "Novo_Business/userCardsList";
 $route['(:any)/detalle-de-tarjeta'] = "Novo_Business/cardDetail";

@@ -75,7 +75,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 	//functions
 	$$.getElementById('userpwd').addEventListener('keyup',function() {
-		var pswd = $$.getElementById('userpwd').value;
+		var pswd = $$.getElementById('userpwd').value.trim();
+		if (e.which == 18 || e.keyCode == 18) {
+			pswd += '@';
+		}
 		var resultValidate = false;
 		var validations = {
 			length: pswd.length >= 8 && pswd.length <= 15,
