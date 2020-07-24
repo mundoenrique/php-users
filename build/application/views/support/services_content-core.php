@@ -592,15 +592,13 @@
 												<span class="light text">1803752318</span></p>
 										</div>
 										<div class="form-group col-12 center">
-											<div class="form-group col-12 center">
-												<span class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el check se encuentra en color </span></span>
-												<div class="custom-control custom-switch custom-control-inline mx-0 ml-1">
-													<input class="custom-control-input" type="checkbox" disabled="disabled" checked>
-													<label class="custom-control-label"></label>
-												</div>
-												<span class="h6 light text">la opción esta activa.</span>
+											<span class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el check se encuentra en color </span></span>
+											<div class="custom-control custom-switch custom-control-inline mx-0 ml-1">
+												<input class="custom-control-input" type="checkbox" disabled="disabled" checked>
+												<label class="custom-control-label"></label>
 											</div>
-                    </div>
+											<span class="h6 light text">la opción esta activa.</span>
+										</div>
 									</div>
 								</div>
 								<form id="sign-bulk-form" method="post">
