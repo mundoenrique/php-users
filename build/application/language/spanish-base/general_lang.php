@@ -44,6 +44,7 @@ $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
+$lang['GEN_BTN_SEARCH'] = 'Buscar';
 //ICONS
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
