@@ -22,19 +22,6 @@ $(function () {
 			break;
 	}
 
-	$.each(options, function(key, val){
-		$('#'+options[key].id+'View').hide();
-		options[key].addEventListener('click', function(e) {
-				var idName = this.id;
-				$.each(options, function(key, val){
-						options[key].classList.remove("active");
-						$('#'+options[key].id+'View').hide();
-				})
-				this.classList.add("active");
-				$('#'+idName+'View').fadeIn(700, 'linear');
-		});
-	});
-
 	/* $('#resultsAccount').DataTable({
 		"ordering": false,
 		"responsive": true,
