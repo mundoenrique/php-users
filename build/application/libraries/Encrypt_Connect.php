@@ -24,6 +24,10 @@ class Encrypt_Connect {
 		$this->logMessage = new stdClass();
 		$this->keyAES256 = base64_decode($this->CI->config->item('keyAES256'));
 		$this->ivAES256 = base64_decode($this->CI->config->item('ivAES256'));
+
+		if (ENVIRONMENT == 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 	}
 	/**
 	 * @info método para cifrar las petiones al servicio

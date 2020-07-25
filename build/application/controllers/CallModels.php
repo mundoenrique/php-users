@@ -44,7 +44,7 @@ class CallModels extends BDB_Controller {
 				switch($key) {
 					case 'request':
 					case 'plot':
-						continue;
+					break;
 					default:
 					$this->request->$key = $value;
 				}

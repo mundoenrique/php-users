@@ -34,7 +34,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$cardsList = [];
 		switch ($this->isResponseRc) {
 			case 0:
-				if (isset($response->lista) && count($response->lista > 0)) {
+				if (isset($response->lista) && count($response->lista) > 0) {
 					foreach ($response->lista AS $pos => $cardsRecords) {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
@@ -60,7 +60,7 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 
 				$this->session->set_userdata('products', TRUE);
-				$this->response->code = isset($response->lista) && count($response->lista > 0) ? 0 : 1;
+				$this->response->code = isset($response->lista) && count($response->lista) > 0 ? 0 : 1;
 			break;
 			default:
 				if ($this->isResponseRc != -61) {
