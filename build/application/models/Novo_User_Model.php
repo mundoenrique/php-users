@@ -584,11 +584,21 @@ class Novo_User_Model extends NOVO_Model {
 				$phonesList['otherPhoneNum'] = '';
 				$phonesList['landLine'] = '';
 				$phonesList['mobilePhone'] = '';
+				$phonesList['otherType'] = '';
 
 				foreach ($response->registro->listaTelefonos AS $phonesType) {
 					switch ($phonesType->tipo) {
+						case 'FAX':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'fax';
+						break;
+						case 'OFC':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'office';
+						break;
 						case 'OTRO':
 							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'other';
 						break;
 						case 'HAB':
 							$phonesList['landLine'] = $phonesType->numero;

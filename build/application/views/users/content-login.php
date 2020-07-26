@@ -267,6 +267,29 @@ echo $insertRecaptcha;
 	</div>
 </div>
 
+<div id="novo-control-code-invalid" style='display:none'>
+	<header>
+		<h2>Conexión Personas Online</h2>
+	</header>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple alert-info" id="message">
+			<span aria-hidden="true" class="icon-info-sign"></span>
+			<p>El código de seguridad recibido es inválido, por favor vuelve a intentarlo.</p>
+		</div>
+		<div class="form-actions">
+			<?php if ($skin == 'pichincha') : 		?>
+				<center>
+					<div class="atc-form-action-child-perfil-content">
+					<?php endif; ?>
+					<button id="aceptarInvalid" name="aceptarInvalid" class="novo-btn-primary">Aceptar</button>
+					<?php if ($skin == 'pichincha') : 		?>
+					</div>
+				</center>
+			<?php endif; ?>
+		</div>
+	</div>
+</div>
+
 <div id="novo-control-ip-token-auth" style='display:none'>
 	<header>
 		<h2>Conexión Personas Online</h2>
@@ -274,9 +297,7 @@ echo $insertRecaptcha;
 	<div class="dialog-small" id="dialog">
 		<div class="alert-simple alert-info" id="message">
 			<span aria-hidden="true" class="icon-info-sign"></span>
-			<p>
-				No fue posible validar el código de seguridad, por favor vuelve a intentarlo.
-			</p>
+			<p>No fue posible validar el código de seguridad, por favor vuelve a intentarlo.</p>
 		</div>
 		<div class="form-actions">
 			<?php if ($skin == 'pichincha') : 		?>

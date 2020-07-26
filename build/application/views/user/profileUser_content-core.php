@@ -213,16 +213,16 @@
 			<div class="form-row">
 				<?php if (lang('CONF_SELECT_OTHER_PHONE') == 'ON'): ?>
 				<div class="form-group col-6">
-					<select id="phoneType" class="custom-select form-control" name="phoneType">
-						<option value="">Selecciona</option>
-						<option value="OFC">Laboral</option>
-						<option value="FAX">Fax</option>
-						<option value="OTRO">Otro</option>
+					<select id="phoneType" class="custom-select form-control" name="phoneType" readonly disabled>
+						<option value=""></option>
+						<option value="fax" <?= $otherType == 'fax' ? 'selected' : ''; ?>>Fax</option>
+						<option value="office" <?= $otherType == 'other' ? 'selected' : ''; ?>>Laboral</option>
+						<option value="other"<?= $otherType == 'other' ? 'selected' : ''; ?>>Otro</option>
 					</select>
 					<div class="help-block"></div>
 				</div>
 				<div class="form-group col-6">
-					<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $otherPhoneNum; ?>" <?= $otherPhoneNum == '' ? 'disabled' : '' ?> autocomplete="off">
+					<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="<?= $otherPhoneNum; ?>" <?= $otherPhoneNum == '' ? '' : 'disabled' ?> autocomplete="off" readonly>
 					<div class="help-block"></div>
 				</div>
 				<?php endif; ?>
@@ -240,7 +240,7 @@
 	<div class="row">
 		<div class="form-group col-6 col-lg-4 col-xl-3">
 			<label for="username"><?= lang('USER_PROFILE_USERNAME')?></label>
-			<input id="username" class="form-control" type="text" name="username" value="<?= $nickName; ?>" readonly="readonly" autocomplete="off">
+			<input id="username" class="form-control" type="text" name="username" value="<?= $nickName; ?>" readonly autocomplete="off">
 			<div class="help-block"></div>
 		</div>
 		<div class="form-group col-6 col-lg-4 col-xl-3">
@@ -255,14 +255,14 @@
 
 			<?php if (lang('CONF_SELECT_NOTIFICATIONS_EMAIL') == 'ON'): ?>
 			<div class="custom-control custom-switch custom-control-inline">
-				<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail" checked="">
+				<input id="notificationsEmail" class="custom-control-input" type="checkbox" name="notificationsEmail" <?= $emailNot == '1' ? 'checked' : '' ?> disabled>
 				<label class="custom-control-label" for="notificationsEmail"><?= lang('USER_PROFILE_NOTIFICATIONS_EMAIL')?></label>
 			</div>
 			<?php endif; ?>
 
 			<?php if (lang('CONF_SELECT_NOTIFICATIONS_SMS') == 'ON'): ?>
 			<div class="custom-control custom-switch custom-control-inline">
-				<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms" checked="">
+				<input id="notificationsSms" class="custom-control-input" type="checkbox" name="notificationsSms" <?= $smsNot == '1' ? 'checked' : '' ?> disabled>
 				<label class="custom-control-label" for="notificationsSms"><?= lang('USER_PROFILE_NOTIFICATIONS_SMS')?></label>
 			</div>
 			<?php endif; ?>
