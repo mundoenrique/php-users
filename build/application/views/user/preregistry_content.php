@@ -79,7 +79,7 @@
 							<p>Hemos envíado un código de verificación a tu teléfono móvil, por favor indicalo a continuación:</p>
 							<div class="row form-group col-lg-4">
 								<label for="codeOTP">Código de verificación <span class="danger">*</span></label>
-								<input id="codeOTP" class="form-control" type="text" name="codeOTP" disabled>
+								<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 							<p id="verificationMsg" class="mb-3 h5"></p>

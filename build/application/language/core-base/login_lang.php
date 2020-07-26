@@ -20,3 +20,6 @@ $lang['LOGIN_INFO-1'] = 'Teléfono: (51-1) 619-8900';
 $lang['LOGIN_INFO-2'] = 'Fax: (51-1) 619-8900 anexo 200';
 $lang['LOGIN_INFO-3'] = 'E-mail: ventas@tebca.com.pe';
 $lang['LOGIN_WIDGET_TITLE'] = 'Cliente afiliado Perú';
+$lang['LOGIN_IP_MSG'] = 'Estás ingresando desde un equipo no habitual, por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">{$maskMail$}</span>, por favor indícalo a continuación.';
+$lang['LOGIN_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
+$lang['LOGIN_IP_LABEL_INPUT'] = 'Código recibido';

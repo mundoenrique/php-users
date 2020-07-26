@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'cpo_name':
-					continue;
+				break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					continue;
+				break;
 				default:
 				$this->requestServ->$key = $value;
 			}
@@ -120,7 +120,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify'];
+		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {

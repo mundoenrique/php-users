@@ -35,6 +35,7 @@ $.extend( $.validator.messages, {
 	nieES: "Por favor, escribe un NIE válido.",
 	cifES: "Por favor, escribe un CIF válido.",
 	spanishAlphabetical: "Debe contener solo letras.",
+	alphanum: "Solo se permiten alfanuméricos.",
 	fechaInvalida: "Por favor, escribe una fecha válida.",
 	validatePassword: "El campo debe tener mínimo 1 y máximo 3 números consecutivos.",
 	username: "Solo letras, números y guiones.",
