@@ -8,7 +8,10 @@ var modalReq = {};
 $(function () {
 	$('.pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-
+	$('.slide-slow').click(function() {
+		$(this).next(".section").slideToggle("slow");
+		$(".help-block").text("");
+	});
 	switch (client) {
 		case 'banco-bog':
 		case 'pichincha':
@@ -18,6 +21,7 @@ $(function () {
 			$('#cardLockView').show();
 			break;
 	}
+
 	/* $('#resultsAccount').DataTable({
 		"ordering": false,
 		"responsive": true,
