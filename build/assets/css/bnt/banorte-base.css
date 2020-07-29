@@ -2889,6 +2889,10 @@ table.dataTable.display tbody tr.odd.no-select-checkbox {
 	background-color: rgba(249, 249, 249, 1) !important;
 }
 
+table.dataTable.display tbody tr:nth-child(2n+0) {
+	background-color: #f9f9f9 !important;
+}
+
 table.dataTable tbody tr td {
 	padding-right:  4px !important;
 	padding-left:  4px !important;

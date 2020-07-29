@@ -85,6 +85,7 @@
 			<div id="pre-loader" class="mt-3 mx-auto flex justify-center">
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
+
 			<table id="" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
 				<thead class="bg-primary secondary regular">
 					<tr>
@@ -103,22 +104,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="odd">
-						<td>Enero</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<?php foreach(lang('GEN_SELECT_MONTH') AS $key => $month): ?>
 					<tr>
-						<td>Febreros</td>
+						<td><?= $month ?></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -131,147 +119,8 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="odd">
-						<td>Marzo</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<?php endforeach; ?>
 					<tr>
-						<td>Abril</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="odd">
-						<td>Mayo</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Junio</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="odd">
-						<td>Julio</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Agosto</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="odd">
-						<td>Septiembre</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Octubre</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="odd">
-						<td>Noviembre</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Diciembre</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="odd">
 						<td class="bold">Total</td>
 						<td></td>
 						<td></td>
@@ -287,6 +136,56 @@
 					</tr>
 				</tbody>
 			</table>
+
+			<table id="" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
+				<thead class="bg-primary secondary regular">
+					<tr>
+						<th class="bold">Meses</th>
+						<th><span aria-hidden="true" class="icon-suitcase h3" title="Hoteles"></span></th>
+						<th><span aria-hidden="true" class="icon-card h3" title="Cajeros automáticos"></span></th>
+						<th><span aria-hidden="true" class="icon-bag h3" title="Comercios y tiendas por departamento"></span></th>
+						<th><span aria-hidden="true" class="icon-car h3" title="Alquiler de vehículos"></span></th>
+						<th><span aria-hidden="true" class="icon-food h3" title="Comida, despensa y restaurantes"></span></th>
+						<th><span aria-hidden="true" class="icon-plane h3" title="Líneas áereas y transporte"></span></th>
+						<th><span aria-hidden="true" class="icon-lab h3" title="Farmacias"></span></th>
+						<th><span aria-hidden="true" class="icon-film h3" title="Diversión y entretenimiento"></span></th>
+						<th><span aria-hidden="true" class="icon-medkit h3" title="Servicios médicos"></span></th>
+						<th><span aria-hidden="true" class="icon-asterisk h3" title="Otros"></span></th>
+						<th class="bold">Total ($)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>20/15/2020</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="bold">Total</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
 			<div id="" class="visible">
 				<div class="pagination page-number flex mb-5 py-2 flex-auto justify-center">
 					<nav class="h4">
@@ -302,6 +201,12 @@
 						<a href="javascript:" position="next">»</a>
 						<a href="javascript:" position="last">Última</a>
 					</nav>
+				</div>
+			</div>
+			<div id="" class="hide">
+				<div class="flex flex-column items-center justify-center pt-5">
+					<h2 class="h3 regular mb-1">No se encontraron registros.</h2>
+					<span class="h6 regular mb-0">Seleccione un rango de fecha a consultar.</span>
 				</div>
 			</div>
 		</div>
