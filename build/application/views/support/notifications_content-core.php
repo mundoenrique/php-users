@@ -39,40 +39,42 @@
 								<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 							</div>
 							<div class="hide-out hide">
-								<div class="form-group flex flex-wrap max-width-2">
-									<div class="flex flex-column col-6">
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyLogin" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyLogin">Iniciar sesión</label>
+								<form id="">
+									<div class="form-group flex flex-wrap max-width-2">
+										<div class="flex flex-column col-6">
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyLogin" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyLogin">Iniciar sesión</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyChangePin" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyChangePin">Cambio de PIN</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyTempLock" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyTempLock">Bloqueo temporal</label>
+											</div>
 										</div>
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyChangePin" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyChangePin">Cambio de PIN</label>
-										</div>
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyTempLock" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyTempLock">Bloqueo temporal</label>
+										<div class="flex flex-column col-6">
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyChangePass" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyChangePass">Cambio de contraseña</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyReplaceCard" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyReplaceCard">Reposición de tarjetas</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline mt-2">
+												<input id="notifyBlockCard" class="custom-control-input" type="checkbox">
+												<label class="custom-control-label" for="notifyBlockCard">Desbloqueo de tarjeta</label>
+											</div>
 										</div>
 									</div>
-									<div class="flex flex-column col-6">
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyChangePass" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyChangePass">Cambio de contraseña</label>
-										</div>
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyReplaceCard" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyReplaceCard">Reposición de tarjetas</label>
-										</div>
-										<div class="custom-control custom-radio custom-control-inline mt-2">
-											<input id="notifyBlockCard" class="custom-control-input" type="checkbox">
-											<label class="custom-control-label" for="notifyBlockCard">Desbloqueo de tarjeta</label>
-										</div>
+									<div class="flex items-center justify-end pt-3">
+										<a class="btn btn-link btn-small big-modal" href="">Cancelar</a>
+										<button class="btn btn-small btn-primary btn-loading" type="submit">Continuar</button>
 									</div>
-								</div>
-							</div>
-							<div class="flex items-center justify-end pt-3">
-								<a class="btn btn-link btn-small big-modal" href="">Cancelar</a>
-								<button class="btn btn-small btn-primary btn-loading" type="submit">Continuar</button>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -82,34 +84,36 @@
 					<div class="flex mb-1 mx-4 flex-column">
 						<h4 class="line-text semibold primary">Historial de notificaciones</h4>
 							<div class="form-group flex flex-wrap line-text">
-								<nav class="navbar px-0">
-									<div id="period-form" class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-										<label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
-										<input id="datepicker_start" name="datepicker_start" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA" readonly="" autocomplete="off">
-										<div class="help-block"></div>
-									</div>
-									<div id="period-form" class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-										<label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
-										<input id="datepicker_end" name="datepicker_end" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA" readonly="" autocomplete="off">
-										<div class="help-block "></div>
-									</div>
-									<div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
-										<label class="regular">Tipo de notificación</label>
-										<select id="status-order" name="status-order" class=" custom-select flex form-control ml-1">
-											<option value="" selected="" disabled="">Todas</option>
-											<option value="2">Login</option>
-											<option value="3">Login</option>
-											<option value="4">Login</option>
-											<option value="5">Login</option>
-											<option value="6">Login</option>
-										</select>
-										<div class="help-block"></div>
-										<button id="buscar" class="btn btn-small btn-rounded-right btn-primary">
-											<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
-										</button>
-									</div>
-								</nav>
-						</div>
+								<form id="">
+									<nav class="navbar px-0">
+										<div id="period-form" class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
+											<label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
+											<input id="datepicker_start" name="datepicker_start" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA" readonly="" autocomplete="off">
+											<div class="help-block"></div>
+										</div>
+										<div id="period-form" class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
+											<label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
+											<input id="datepicker_end" name="datepicker_end" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA" readonly="" autocomplete="off">
+											<div class="help-block "></div>
+										</div>
+										<div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
+											<label class="regular">Tipo de notificación</label>
+											<select id="status-order" name="status-order" class=" custom-select flex form-control ml-1">
+												<option value="" selected="" disabled="">Todas</option>
+												<option value="2">Login</option>
+												<option value="3">Login</option>
+												<option value="4">Login</option>
+												<option value="5">Login</option>
+												<option value="6">Login</option>
+											</select>
+											<div class="help-block"></div>
+											<button id="buscar" class="btn btn-small btn-rounded-right btn-primary">
+												<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
+											</button>
+										</div>
+									</nav>
+								</form>
+							</div>
 						<div>
 							<p>Notificaciones: Todo de: <span>01/05/2020 12:00 AM</span>  Hasta: <span>11/05/2020 11:59:59 PM</span></p>
 							<div class="mt-3">
