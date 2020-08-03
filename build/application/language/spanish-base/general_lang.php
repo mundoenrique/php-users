@@ -71,6 +71,7 @@ $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_WAIT_BALANCE'] = 'Esperando saldo...';
+$lang['GEN_ACCOUNT_SELECTION'] = 'Selección de cuenta';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';

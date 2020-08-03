@@ -6,7 +6,7 @@
 			<div class="flex flex-wrap">
 				<div class="w-100">
 					<div class="widget-product">
-						<!-- <div class="flex inline-flex col-12 px-xl-2">
+						<div class="flex inline-flex col-12 px-xl-2">
 							<div class="flex flex-colunm justify-center col-6 py-5">
 								<div class="product-presentation relative">
 									<div class="item-network"></div>
@@ -19,7 +19,7 @@
 							<div class="flex flex-column items-start self-center col-6 py-5">
 								<p class="mb-2">Seleccione una cuenta</p>
 							</div>
-						</div> -->
+						</div>
 						<div class="flex inline-flex col-12 px-xl-2">
 							<div class="flex flex-colunm justify-center col-6 py-5">
 								<div class="product-presentation relative">
