@@ -59,6 +59,7 @@ $(function () {
 		var prefix = $(event).find('input[type=hidden][name="prefix"]').val();
 		var status = $(event).find('input[type=hidden][name="status"]').val();
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
+		var statusText = status == '' ? 'Bloquear' : 'Desbloquear'
 
 		cardDetail =  '<div class="flex flex-colunm justify-center col-6 py-5">';
 		cardDetail += 	'<div class="product-presentation relative">';
@@ -73,33 +74,37 @@ $(function () {
 		cardDetail += 		'<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto';
 		cardDetail += 	'</a>';
 		cardDetail += '</div>';
+
+		$('.status-text1').text(statusText);
+		$('.status-text2').text(statusText.toLowerCase());
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);
-		$('#system-info').dialog('destroy');
 		$('.nav-config-box').removeClass('no-events');
 		$('#cardNumber').val(cardNumber);
 		$('#cardNumberMask').val(cardNumberMask);
 		$('#expireDate').val(expireDate);
 		$('#prefix').val(prefix);
 		$('#status').val(status);
+		$('#system-info').dialog('destroy');
 	})
 
 	$('.send').on('click', function(e) {
 		e.preventDefault();
 		var action = $(this).attr('action')
 		$('#action').val(action);
-	})
-
-	$('#blockBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#operation');
 		btnText = $(this).text().trim()
 		data = getDataForm(form);
 		insertFormInput(true);
-		$(this).html(loader);
+
+		if ($(this).hasClass('btn')) {
+			$(this).html(loader);
+		}
+
 		who = 'CustomerSupport'; where = data.action
 
-		callNovoCore(who, where, data, function (response) {
+		/* callNovoCore(who, where, data, function (response) {
 			if (data.action == 'TemporaryLock' && response.success) {
 				var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
 				$('.status-text1').text(statusText);
@@ -109,7 +114,7 @@ $(function () {
 				insertFormInput(false);
 				$('#blockBtn').html(btnText);
 			}
-		})
+		}) */
 	})
 })
 
@@ -122,8 +127,8 @@ function cardModal() {
 		},
 		maxHeight: 600,
 		width: 655,
-		posMy: 'top+60px',
-		posAt: 'top+60px',
+		posMy: 'top+50px',
+		posAt: 'top+50px',
 	}
 	notiSystem(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
 }
