@@ -32,6 +32,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_UserCardsList');
 		$cardsList = [];
+		$serviceList = [];
 		switch ($this->isResponseRc) {
 			case 0:
 				if (isset($response->lista) && count($response->lista) > 0) {
@@ -40,8 +41,14 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
 						$cardRecord->expireDate = $cardsRecords->fechaExp;
 						$cardRecord->prefix = $cardsRecords->prefix;
-						$cardRecord->status = $cardsRecords->bloque/*  == '' ? 'N' : $cardsRecords->bloque */;
+						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
+						$cardRecord->services = $cardsRecords->services;
+
+						foreach ($cardsRecords->services AS $service) {
+							array_push($serviceList, $service);
+						}
+
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
@@ -70,7 +77,7 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		$this->response->data->cardsList = $cardsList;
-
+		$this->response->data->serviceList = array_unique($serviceList);
 		return $this->responseToTheView('callWs_UserCardsList');
 	}
 	/**

@@ -890,6 +890,10 @@ label {
 	pointer-events: none;
 }
 
+.no-events {
+	pointer-events: none;
+}
+
 .sb-search-input {
 	position: inherit;
 	top: 0;
