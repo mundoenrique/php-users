@@ -8,7 +8,7 @@ $(function () {
 		$(element).val(cypher)
 	}) */
 
-	$('.pre-loader').remove();
+	$('#pre-loader-twins, #pre-loader-limit').remove();
 	$('.hide-out').removeClass('hide');
 
 	$.each(ulOptions, function (pos, liOption) {
