@@ -85,7 +85,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 
 		$response = $this->sendToService('callWs_CustomerSupport');
-		$response = json_decode('{"rc":0,"msg":"Proceso OK","bean":"{\"companyId\":\"1234567890\",\"product\":\"T1\",\"cards\":[{\"numberCard\":\"4189281080003016\",\"personName\":\"AL PORTADOR\",\"personId\":\"NOVO200618SGCTST10\",\"datetimeLastUpdate\":\"05\/08\/2020 07:52:09 PM\",\"mccItems\":{\"hoteles\":\"1\",\"supermercados\":\"1\",\"hospitales\":\"1\",\"gobiernos\":\"1\",\"entretenimiento\":\"1\",\"beneficencia\":\"1\",\"aseguradoras\":\"1\",\"rentaAuto\":\"1\",\"transporteAereo\":\"0\",\"peajes\":\"1\",\"colegios\":\"0\",\"estacionamientos\":\"1\",\"gasolineras\":\"1\",\"telecomunicaciones\":\"1\",\"agenciaViajes\":\"1\",\"ventasDetalle\":\"1\",\"restaurantes\":\"1\",\"transporteTerrestre\":\"1\"},\"rc\":0}],\"allRejected\":false,\"allSuccess\":true}","pais":"Mx-Bn"}');
+		//$response = json_decode('{"rc":0,"msg":"Proceso OK","bean":"{\"companyId\":\"1234567890\",\"product\":\"T1\",\"cards\":[{\"numberCard\":\"4189281080003016\",\"personName\":\"AL PORTADOR\",\"personId\":\"NOVO200618SGCTST10\",\"datetimeLastUpdate\":\"05\/08\/2020 07:52:09 PM\",\"mccItems\":{\"hoteles\":\"1\",\"supermercados\":\"1\",\"hospitales\":\"1\",\"gobiernos\":\"1\",\"entretenimiento\":\"1\",\"beneficencia\":\"1\",\"aseguradoras\":\"1\",\"rentaAuto\":\"1\",\"transporteAereo\":\"0\",\"peajes\":\"1\",\"colegios\":\"0\",\"estacionamientos\":\"1\",\"gasolineras\":\"1\",\"telecomunicaciones\":\"1\",\"agenciaViajes\":\"1\",\"ventasDetalle\":\"1\",\"restaurantes\":\"1\",\"transporteTerrestre\":\"1\"},\"rc\":0}],\"allRejected\":false,\"allSuccess\":true}","pais":"Mx-Bn"}');
 		$this->isResponseRc = 0;
 		switch ($this->isResponseRc) {
 			case 0:
