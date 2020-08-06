@@ -40,10 +40,15 @@ class Novo_CustomerSupport extends NOVO_Controller {
 				$pinManagement = TRUE;
 				continue;
 			}
+
+			if (in_array($service, ['130', '217']) && count($serviceList) == 1) {
+				$serviceTotal++;
+			}
+
 			$serviceTotal++;
 		}
-
 		$serviceTotal = $pinManagement ? $serviceTotal + 1: $serviceTotal;
+
 		$uniqueEvent = $cardsTotal == 1 && $serviceTotal == 1;
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
 		$this->render->serviceList = $serviceList;

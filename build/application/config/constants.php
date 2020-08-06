@@ -124,7 +124,7 @@ define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 );
 define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
 && filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 0
+	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 10
 );
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
 	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
