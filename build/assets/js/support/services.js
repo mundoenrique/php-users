@@ -94,13 +94,9 @@ $(function () {
 			$(element).hide();
 			$('#'+element.id+'View').hide();
 			$.each(services, function(pos, value) {
-				if ((lang.CONF_CUS_SERVICES[element.id]).indexOf(value, 0) != -1/*  && services.length > 1 */) {
+				if ((lang.CUS_SERVICES[element.id]).indexOf(value, 0) != -1) {
 					$(element).show();
 				}
-
-				/* if (services.length == 1 && ('130, 217').indexOf(value, 0) == -1) {
-					$('#' + element.id + 'View').show();
-				} */
 			})
 		})
 
@@ -108,9 +104,8 @@ $(function () {
 			$(element).parent().hide();
 			$('#'+element.id+'Input').addClass('hide');
 			$.each(services, function(pos, value) {
-				if ((lang.CONF_CUS_PIN[element.id]).indexOf(value, 0) != -1) {
+				if ((lang.CUS_MANAGE_PIN[element.id]).indexOf(value, 0) != -1) {
 					$(element).parent().show();
-					console.log(optionCheck)
 					if (!optionCheck) {
 						optionCheck = true;
 						$(element).prop('checked', true);
@@ -119,6 +114,23 @@ $(function () {
 				}
 			})
 		})
+
+		if (services.length == 1) {
+			if (('130, 217').indexOf(services, 0) == -1) {
+				$('.nav-config-box').addClass('no-events');
+			}
+
+			$('#activeServices > div').each(function(pos, element) {
+				$(element).hide();
+				$.each(services, function (pos, value) {
+					var currentServ = (element.id).slice(0, -4)
+					if ((lang.CUS_SERVICES[currentServ]).indexOf(value, 0) != -1) {
+						$('#' + currentServ).addClass('active')
+						$(element).show();
+					}
+				})
+			})
+		}
 
 		$('#system-info').dialog('destroy');
 	})
@@ -162,6 +174,8 @@ $(function () {
 					var markCheck = value == '1' ? true : false;
 					$('#' + key).prop('checked', markCheck)
 				})
+
+				$('.hide-out').removeClass('hide');
 			}
 
 			if (thisAction.hasClass('btn')) {
@@ -169,7 +183,6 @@ $(function () {
 				insertFormInput(false);
 			} else {
 				$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
-				$('.hide-out').removeClass('hide');
 			}
 			$('.nav-config-box').removeClass('no-events');
 
@@ -179,6 +192,7 @@ $(function () {
 
 function cardModal() {
 	var inputModal = $('#cardList').html();
+	$('.nav-config-box').removeClass('no-events');
 	data = {
 		btn1: {
 			text: lang.GEN_BTN_CANCEL,

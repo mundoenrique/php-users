@@ -36,7 +36,7 @@
             <?php endif; ?>
           </div>
         </div>
-        <?php if ($serviceTotal > 1): ?>
+        <?php if (!$uniqueEvent): ?>
         <div class="flex col-12 optional mt-4 px-0">
           <nav class="nav-config w-100">
             <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
@@ -108,11 +108,13 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
+  <div id="activeServices" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
     <div id="cardLockView" class="option-service"
       <?= $uniqueEvent && in_array('110', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
-        <h4 class="line-text mb-2 semibold primary"><span class="status-text1"><?= $statustext ?></span> tarjeta</h4>
+        <h4 class="line-text mb-2 semibold primary">
+					<span class="status-text1"><?= $statustext ?></span> tarjeta
+				</h4>
         <p>
           Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona
           continuar

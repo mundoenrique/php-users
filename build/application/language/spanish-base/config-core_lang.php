@@ -63,16 +63,3 @@ $lang['CONF_SELECT_NOTIFICATIONS_SMS'] = 'OFF';
 $lang['CONF_OPER_KEY'] = 'OFF';
 $lang['CONF_SMS_KEY'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'ON';
-//customer suppot
-$lang['CONF_CUS_SERVICES'] = [
-	'cardLock' => '110',
-	'replacementRequest' => '111',
-	'pinManagement' => '112, 117, 120',
-	'twirlsCommercial' => '130',
-	'transactionalLimits' => '217',
-];
-$lang['CONF_CUS_PIN'] = [
-	'changePin' => '112',
-	'generatePin' => '120',
-	'requestPin' => '117'
-];

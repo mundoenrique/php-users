@@ -93,7 +93,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$response = json_decode($response->bean);
 				$shops = new stdClass();
 				$dataTwirls = new stdClass();
-				$dataTwirls->updateDate = 'Fecha de actualización: '.$response->cards[0]->datetimeLastUpdate;
+				$dataTwirls->updateDate = lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->datetimeLastUpdate;
 				$dataTwirls->cardnumberT = maskString($response->cards[0]->numberCard, 4, 6);
 				$dataTwirls->customerName = $response->cards[0]->personName;
 				$dataTwirls->documentId = $response->cards[0]->personId;
@@ -107,10 +107,13 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->data['dataTwirls'] = $dataTwirls;
 			break;
 			case -438:
-
+				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+				$this->response->msg = lang('CUST_NON_TWIRLS');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
 			break;
 		}
 
-		return $this->responseToTheView('callWs_CustomerSupport');
+		return $this->responseToTheView('callWs_TwirlsCommercial');
 	}
 }
