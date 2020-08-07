@@ -179,7 +179,19 @@ $(function () {
 					$('#' + key).prop('checked', markCheck)
 				})
 
-				$('.hide-twirls').removeClass('hide');
+				$('.hide-out').removeClass('hide');
+			}
+
+			if (data.action == 'transactionalLimits' && response.code == 0) {
+				$.each(response.data.dataLimits, function(key, value) {
+					$('#'+key).text(value);
+				})
+
+				$.each(response.data.limits, function(key, value) {
+					$('#' + key).val(value)
+				})
+
+				$('.hide-out').removeClass('hide');
 			}
 
 			if (thisAction.hasClass('btn')) {

@@ -232,7 +232,7 @@
           <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
         </div>
       </div>
-      <div class="w-100 hide-twirls hide">
+      <div class="w-100 hide-out hide">
         <div class="flex flex-auto flex-column">
           <div class="flex pb-5 px-2 flex-column">
             <div class="flex flex-column">
@@ -410,7 +410,7 @@
           <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
         </div>
       </div>
-      <div class="w-100 hide-limits hide">
+      <div class="w-100 hide-out hide">
         <div class="flex flex-auto flex-column">
           <div class="flex pb-5 px-2 flex-column">
             <div class="flex flex-column">
@@ -419,19 +419,23 @@
                   <span class="inline h4 semibold primary"><?= lang('CUST_TRANS_LIMITS'); ?></span>
                 </div>
                 <div class="flex h6 flex-auto justify-end">
-                  <span>Fecha de actualización: 3/07/2020 5:36 PM</span>
+                  <span id="updateDateL"></span>
                 </div>
               </div>
               <div class="row flex justify-between my-3">
                 <div class="form-group col-4 center">
-                  <p class="h5 semibold tertiary"><?= lang('CUST_CARD_NUMBER'); ?>: <span class="light text">**********270300</span></p>
+                  <p class="h5 semibold tertiary"><?= lang('CUST_CARD_NUMBER'); ?>:
+										<span id="cardnumberL" class="light text"></span>
+									</p>
                 </div>
                 <div class="form-group col-4 center">
-                  <p class="h5 semibold tertiary"><?= lang('CUST_NAME'); ?>: <span class="light text">Jhonatan
-                      Ortiz</span></p>
+                  <p class="h5 semibold tertiary"><?= lang('CUST_NAME'); ?>:
+										<span id="customerNameL" class="light text"></span>
+									</p>
                 </div>
                 <div class="form-group col-4 center">
-                  <p class="h5 semibold tertiary"><?= lang('CUST_DNI'); ?>: <span class="light text">1803752318</span>
+                  <p class="h5 semibold tertiary"><?= lang('CUST_DNI'); ?>:
+										<span id="documentIdL" class="light text"></span>
                   </p>
                 </div>
                 <div class="form-group col-12 center">

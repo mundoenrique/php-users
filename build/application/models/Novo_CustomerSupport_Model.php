@@ -153,6 +153,20 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$response = json_decode($response->bean);
+				$limits = new stdClass();
+				$datalimits = new stdClass();
+				$datalimits->updateDateL = lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->datetimeLastUpdate;
+				$datalimits->cardnumberL = maskString($response->cards[0]->numberCard, 4, 6);
+				$datalimits->customerNameL = $response->cards[0]->personName;
+				$datalimits->documentIdL = $response->cards[0]->personId;
+
+				foreach ($response->cards[0]->parameters AS $key => $value) {
+					$name = lang('CUST_LIMITS')[$key];
+					$limits->$name = $value;
+				}
+
+				$this->response->data['limits'] = $limits;
+				$this->response->data['dataLimits'] = $datalimits;
 
 			break;
 			case -438:
