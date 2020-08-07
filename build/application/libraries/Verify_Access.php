@@ -137,6 +137,7 @@ class Verify_Access {
 				case 'services':
 				case 'temporaryLock':
 				case 'twirlsCommercial':
+				case 'transactionalLimits':
 				case 'expensesCategory':
 					$auth = $this->CI->session->has_userdata('products');
 				break;

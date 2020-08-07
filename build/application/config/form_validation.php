@@ -267,6 +267,35 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
+	'transactionalLimits' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'label' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
+	'finishSession' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',

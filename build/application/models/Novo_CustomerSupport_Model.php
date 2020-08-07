@@ -116,4 +116,53 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_TwirlsCommercial');
 	}
+	/**
+	 * @info Método para obtener la lista de límites transaccionales
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date Augusth 06th, 2020
+	 */
+	public function callWs_TransactionalLimits_CustomerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'atención al cliente';
+		$this->dataAccessLog->function = 'Limites transaccionales';
+		$this->dataAccessLog->operation = 'Consulta de limites';
+
+		$this->dataRequest->idOperation = '217';
+		$this->dataRequest->opcion = 'consultar';
+		$this->dataRequest->idEmpresa = '0';
+		$this->dataRequest->prefix = $dataRequest->prefix;
+		$this->dataRequest->cards = [
+			[
+				'card' => $dataRequest->cardNumber,
+				'personName' => $this->session->fullName,
+				'personId' => $this->session->userId,
+				'lastUpdate' => ''
+			]
+		];
+		$this->dataRequest->usuario = [
+			'userName' => $this->userName,
+			'idUsuario' => $this->session->userId
+		];
+
+		$response = $this->sendToService('callWs_TransactionalLimits');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$response = json_decode($response->bean);
+
+			break;
+			case -438:
+				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+				$this->response->msg = lang('CUST_NON_TWIRLS');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_TransactionalLimits');
+	}
 }
