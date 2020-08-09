@@ -63,7 +63,9 @@ class Tool_Browser {
 
 		if($this->CI->agent->is_mobile()) {
 			$platform = 'mobile';
-			$valid = $this->CI->router->fetch_method() == 'termsConditions';
+			if (!$valid) {
+				$valid = $this->CI->router->fetch_method() == 'termsConditions';
+			}
 		}
 
 		if($this->CI->agent->is_robot()) {
