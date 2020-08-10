@@ -261,4 +261,25 @@ class Encrypt_Connect {
 			unset($wirteLog);
 		}
 	}
+
+	/**
+	 * @info Genera hash Argon2 de un valor dado
+	 * @author Pedro Torres
+	 * @date Agosto 10th, 2020
+	 */
+	public function generateArgon2($string){
+
+		$options = [
+			'memory_cost' => ARGON2_MEMORY_COST,
+			'time_cost' => ARGON2_TIME_COST,
+			'threads' => ARGON2_THREADS,
+			'salt' => ARGON2_SALT,
+		];
+
+		$result = new stdClass();
+		$result->hashArgon2 = password_hash($string, ARGON2_TYPE_ALG, $options);
+		$result->hexArgon2 =  bin2hex($result->hashArgon2);
+
+		return $result;
+	}
 }

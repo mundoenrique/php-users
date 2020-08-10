@@ -43,6 +43,11 @@ class User_Model extends BDB_Model
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp = $infoOTP ;
 
+		$argon2 = $this->encrypt_connect->generateArgon2('123');
+
+		$this->dataRequest->hashArgon2 = $argon2->hashArgon2;
+		$this->dataRequest->hexArgon2 = $argon2->hexArgon2;
+
 		if (isset($dataRequest->saveIP)){
 		 	$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
 		}
