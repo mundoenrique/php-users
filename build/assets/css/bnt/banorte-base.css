@@ -395,7 +395,7 @@ textarea.form-control {
 }
 
 .custom-select:disabled {
-  background-color: var(--color-tertiary);
+  background: none;
 }
 
 .select-box option {
