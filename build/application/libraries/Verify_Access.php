@@ -62,10 +62,10 @@ class Verify_Access {
 				case 'request':
 				case 'plot':
 				case 'cpo_name':
-					continue;
+				break;
 				case 'screenSize':
 					$this->CI->session->set_userdata('screenSize', $value);
-					continue;
+				break;
 				default:
 				$this->requestServ->$key = $value;
 			}
@@ -136,6 +136,8 @@ class Verify_Access {
 				case 'downloadMoves':
 				case 'services':
 				case 'temporaryLock':
+				case 'twirlsCommercial':
+				case 'transactionalLimits':
 				case 'expensesCategory':
 					$auth = $this->CI->session->has_userdata('products');
 				break;

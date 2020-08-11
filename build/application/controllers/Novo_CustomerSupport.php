@@ -30,9 +30,29 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$userCardList = $this->business->callWs_UserCardsList_Business();
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
+		$serviceList = $userCardList->data->serviceList;
 		$cardsTotal = count($cardsList);
+		$serviceTotal = 0;
+		$pinManagement = FALSE;
 
+		foreach ($serviceList AS $service) {
+			if (in_array($service, ['112', '117', '120'])) {
+				$pinManagement = TRUE;
+				continue;
+			}
+
+			if (in_array($service, ['130', '217']) && count($serviceList) == 1) {
+				$serviceTotal++;
+			}
+
+			$serviceTotal++;
+		}
+
+		$serviceTotal = $pinManagement ? $serviceTotal + 1: $serviceTotal;
+		$uniqueEvent = $cardsTotal == 1 && $serviceTotal == 1;
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
+		$this->render->serviceList = $serviceList;
+		$this->render->serviceTotal = $serviceTotal;
 		$this->render->cardsTotal = $cardsTotal;
 		$this->render->cardsList = $cardsList;
 		$this->render->brand = '';
@@ -44,7 +64,10 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->expireDate = '';
 		$this->render->prefix = '';
 		$this->render->status = '';
-		$this->render->statustext = '';
+		$this->render->statustext = 'Bloquear';
+		$this->render->RecoverPinText = 'Recuperar PIN';
+		$this->render->activeEvents = 'no-events';
+		$this->render->uniqueEvent = $uniqueEvent;
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
@@ -57,7 +80,13 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
 			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquar';
+			$this->render->activeEvents = '';
 		}
+
+		if (count($serviceList) == 1 && $serviceList[0] == '120') {
+			$this->render->RecoverPinText = 'Generar PIN';
+		}
+
 		$this->views = ['support/'.$view];
 		$this->loadView($view);
 	}

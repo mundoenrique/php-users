@@ -49,7 +49,7 @@ $config = [
 		[
 			'field' => 'dataUser',
 			'label' => 'dataUser',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		]
 	],
 	'validNickName' => [
@@ -108,7 +108,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'landLine',
@@ -150,7 +150,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'idNumber',
@@ -179,14 +179,14 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		]
 	],
 	'monthlyMovements' => [
 		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'filterMonth',
@@ -203,7 +203,7 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'month',
@@ -220,7 +220,58 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'label' => 'cardNumber',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'label' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
+	'twirlsCommercial' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'label' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'label' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'label' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
+	'finishSession' => [
+		[
+			'field' => 'userName',
+			'label' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
+		]
+	],
+	'transactionalLimits' => [
+		[
+			'field' => 'cardNumber',
+			'label' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'expireDate',
@@ -371,7 +422,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'username',
@@ -513,7 +564,7 @@ $config = [
 		[
 			'field' => 'user',
 			'label' => 'user',
-			'rules' => 'trim|regex_match[/^([\wñÑ*.-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñÑ*.\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'pass',
@@ -602,22 +653,22 @@ $config = [
 		[
 			'field' => 'firstName',
 			'label' => 'firstName',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'middleName',
 			'label' => 'middleName',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
 		],
 		[
 			'field' => 'lastName',
 			'label' => 'lastName',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'secondSurname',
 			'label' => 'secondSurname',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
 		],
 		[
 			'field' => 'birthDate',
@@ -627,7 +678,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
 			'field' => 'landLine',
@@ -657,7 +708,7 @@ $config = [
 		[
 			'field' => 'username',
 			'label' => 'username',
-			'rules' => 'trim|regex_match[/^([\wñÑ*.-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñÑ*.\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'userpwd',
@@ -679,7 +730,7 @@ $config = [
 		[
 			'field' => 'email',
 			'email' => 'email',
-			'rules' => 'trim|required|regex_match[/^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+			'rules' => 'trim|required|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'idNumber',
@@ -741,27 +792,27 @@ $config = [
 		[
 			'field' => 'numt',
 			'label' => 'numt',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
 			'label' => 'prefix',
-			'rules' => 'trim|regex_match[/^[\w-]+$/i]|required'
+			'rules' => 'trim|regex_match[/^[\w\-]+$/i]|required'
 		],
 		[
 			'field' => 'marca',
 			'label' => 'marca',
-			'rules' => 'trim|regex_match[/^([\w-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'empresa',
 			'label' => 'empresa',
-			'rules' => 'trim|regex_match[/^([\w-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]|required'
 		],
 		[
 			'field' => 'producto',
 			'label' => 'producto',
-			'rules' => 'trim|regex_match[/^([\w-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
+			'rules' => 'trim|regex_match[/^([\w\-.,#ÑñáéíóúÑÁÉÍÓÚ]+[\s]*)+$/i]'
 		],
 		[
 			'field' => 'numt_mascara',
@@ -773,14 +824,14 @@ $config = [
 		[
 			'field' => 'card',
 			'label' => 'card',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 	],
 	'movements' => [
 		[
 			'field' => 'card',
 			'label' => 'card',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'month',
@@ -797,7 +848,7 @@ $config = [
 		[
 			'field' => 'tarjeta',
 			'label' => 'tarjeta',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'mes',
@@ -819,7 +870,7 @@ $config = [
 		[
 			'field' => 'tarjeta',
 			'label' => 'tarjeta',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'idpersona',
@@ -863,7 +914,7 @@ $config = [
 		[
 			'field' => 'tarjeta',
 			'label' => 'tarjeta',
-			'rules' => 'trim|regex_match[/^([\w=\/+-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'idpersona',
@@ -873,12 +924,12 @@ $config = [
 		[
 			'field' => 'tipoConsulta',
 			'label' => 'tipoConsulta',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'producto',
 			'label' => 'producto',
-			'rules' => 'trim|regex_match[/^([\w-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'fechaIni',
