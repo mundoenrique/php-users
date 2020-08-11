@@ -26,17 +26,6 @@
   src: url('../../fonts/bdb/OpenSans-Bold.ttf') format('truetype');
 }
 
-@font-face {
-	font-family: "NovoPayment Glyphs";
-	font-style: normal;
-	font-weight: normal;
-	src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix');
-  src: url('../../fonts/novopayment-glyphs-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/novopayment-glyphs-webfont.woff') format('woff'),
-       url('../../fonts/novopayment-glyphs-webfont.ttf') format('truetype'),
-       url('../../fonts/novopayment-glyphs-webfont.svg') format('svg');
-}
-
 :root {
   /* Colors */
   --primary: #012c71;
@@ -86,7 +75,8 @@
   --bold-font-weight: 700;
 
   --font-family-base: 'Open Sans', sans-serif;
-  --font-family-monospace: monospace, "Courier New";
+	--font-family-monospace: monospace, "Courier New";
+	--font-family-novoglyphs: 'novoglyphs';
   --font-size-base: .875rem;
   --font-weight-base: 400;
   --line-height-base: 1.5;

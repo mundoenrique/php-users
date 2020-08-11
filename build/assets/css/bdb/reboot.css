@@ -30,6 +30,20 @@ html {
   line-height: 1.15; /* 3 */
 }
 
+/*Icon font
+============================================================================= */
+
+@font-face {
+  font-family: "novoglyphs";
+  font-weight: normal;
+	font-style: normal;
+	src: url('../../fonts/novoglyphs-webicons.eot?#iefix');
+  src: url('../../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
+       url('../../fonts/novoglyphs-webicons.woff') format('woff'),
+       url('../../fonts/novoglyphs-webicons.ttf') format('truetype'),
+       url('../../fonts/novoglyphs-webicons.svg') format('svg');
+}
+
 /* Sections
    ========================================================================== */
 
