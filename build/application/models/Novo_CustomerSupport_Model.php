@@ -178,8 +178,9 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$response = $response->bean;
 				$limits = new stdClass();
 				$datalimits = new stdClass();
-				$datalimits->updateDateL = lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->datetimeLastUpdate;
-				$datalimits->cardnumberL = maskString($response->cards[0]->numberCard, 4, 6);
+				$datalimits->updateDateL = $response->cards[0]->lastUpdate != '' ?
+				lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->lastUpdate : '';
+				$datalimits->cardnumberL = maskString($response->cards[0]->card, 4, 6);
 				$datalimits->customerNameL = $response->cards[0]->personName;
 				$datalimits->documentIdL = $response->cards[0]->personId;
 
