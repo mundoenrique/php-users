@@ -77,10 +77,10 @@
               <?php if (in_array('130', $serviceList)): ?>
               <li id="twirlsCommercial" class="list-inline-item nav-item-config send" action="twirlsCommercial">
                 <a href="javascript:">
-                  <span class="icon-config icon novoglyphs icon-credit-card h1 icon-color"></span>
+                  <span class="icon-config icon icon icon-credit-card h1 icon-color"></span>
                   <h5 class="center">Giros<br>comerciales</h5>
                   <div class="box up left regular">
-                    <span class="icon novoglyphs icon-credit-card h1 icon-color"></span>
+                    <span class="icon icon icon-credit-card h1 icon-color"></span>
                     <h4 class="h5 center">Giros<br>comerciales</h4>
                   </div>
                 </a>
@@ -89,10 +89,10 @@
               <?php if (in_array('217', $serviceList)): ?>
               <li id="transactionalLimits" class="list-inline-item nav-item-config send" action="transactionalLimits">
                 <a href="javascript:">
-                  <span class="icon-config icon novoglyphs icon-spinner h1 icon-color"></span>
+                  <span class="icon-config icon icon-transactions h1 icon-color"></span>
                   <h5 class="center">Limites<br>transaccionales</h5>
                   <div class="box up left regular">
-                    <span class="icon novoglyphs icon-spinner h1 icon-color"></span>
+                    <span class="icon icon-transactions h1 icon-color"></span>
                     <h4 class="h5 center">Limites<br>transaccionales</h4>
                   </div>
                 </a>
@@ -457,7 +457,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
                             <div class="input-group">
-                              <input id="numberDayPurchasesCtp" class="money form-control pwd-input text-right" value="" type="text"
+                              <input id="numberDayPurchasesCtp" class="money form-control pwd-input text-left" value="" type="text"
                                 autocomplete="off" name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -465,7 +465,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="numberWeeklyPurchasesCtp">Número de compras semanales</label>
                             <div class="input-group">
-                              <input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -473,7 +473,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="numberMonthlyPurchasesCtp">Número de compras mensuales</label>
                             <div class="input-group">
-                              <input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -481,7 +481,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
                             <div class="input-group">
-                              <input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -489,7 +489,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="weeklyAmountPurchasesCtp">Monto semanal de compras</label>
                             <div class="input-group">
-                              <input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -497,7 +497,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="monthlyPurchasesAmountCtp">Monto mensual de compras</label>
                             <div class="input-group">
-                              <input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -505,7 +505,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="purchaseTransactionCtp">Monto por transacción de compras</label>
                             <div class="input-group">
-                              <input id="purchaseTransactionCtp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="purchaseTransactionCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -528,7 +528,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="numberDayPurchasesStp">Número de compras diarias</label>
                             <div class="input-group">
-                              <input id="numberDayPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="numberDayPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -536,7 +536,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="numberWeeklyPurchasesStp">Número de compras semanales</label>
                             <div class="input-group">
-                              <input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -544,7 +544,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="numberMonthlyPurchasesStp">Número de compras mensuales</label>
                             <div class="input-group">
-                              <input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -552,7 +552,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
                             <div class="input-group">
-                              <input id="dailyPurchaseamountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="dailyPurchaseamountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -560,7 +560,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="weeklyAmountPurchasesStp">Monto semanal de compras</label>
                             <div class="input-group">
-                              <input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -568,7 +568,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="monthlyPurchasesAmountStp">Monto mensual de compras</label>
                             <div class="input-group">
-                              <input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -576,7 +576,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="purchaseTransactionStp">Monto por transacción de compras</label>
                             <div class="input-group">
-                              <input id="purchaseTransactionStp" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                              <input id="purchaseTransactionStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
                             </div>
                             <div class="help-block"></div>
@@ -600,7 +600,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label class="pr-3" for="dailyNumberWithdraw">Número diario de retiros</label>
                               <div class="input-group">
-                                <input id="dailyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                                <input id="dailyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
                               </div>
                               <div class="help-block"></div>
@@ -608,7 +608,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="weeklyNumberWithdraw">Número semanal de retiros</label>
                               <div class="input-group">
-                                <input id="weeklyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                                <input id="weeklyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
                               </div>
                               <div class="help-block"></div>
@@ -616,7 +616,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="monthlyNumberWithdraw">Número mensual de retiros</label>
                               <div class="input-group">
-                                <input id="monthlyNumberWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                                <input id="monthlyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
                               </div>
                               <div class="help-block"></div>
@@ -624,7 +624,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label class="pr-3" for="dailyAmountWithdraw">Monto diario de retiros</label>
                               <div class="input-group">
-                                <input id="dailyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                                <input id="dailyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
                               </div>
                               <div class="help-block"></div>
@@ -632,7 +632,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
                               <div clxs="input-group">
-                                <input id="weeklyAmountWithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                                <input id="weeklyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
                               </div>
                               <div class="help-block"></div>
@@ -640,7 +640,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="monthlyAmountwithdraw">Monto mensual de retiros</label>
                               <div class="input-group">
-                                <input id="monthlyAmountwithdraw" class="money form-control pwd-input text-right" type="text" autocomplete="off"
+                                <input id="monthlyAmountwithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
                               </div>
                               <div class="help-block"></div>
@@ -648,7 +648,7 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="WithdrawTransaction">Monto por transacción de retiros</label>
                               <div class="input-group">
-                                <input id="WithdrawTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                                <input id="WithdrawTransaction" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
                               </div>
                               <div class="help-block"></div>
@@ -672,7 +672,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyNumberCredit">Número diario de abonos</label>
                             <div class="input-group">
-                              <input id="dailyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="dailyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -680,7 +680,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="weeklyNumberCredit">Número semanal de abonos</label>
                             <div class="input-group">
-                              <input id="weeklyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="weeklyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -688,7 +688,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="monthlyNumberCredit">Número mensual de abonos</label>
                             <div class="input-group">
-                              <input id="monthlyNumberCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="monthlyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -696,7 +696,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyAmountCredit">Monto diario de abonos</label>
                             <div class="input-group">
-                              <input id="dailyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="dailyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -704,7 +704,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="weeklyAmountCredit">Monto semanal de abonos</label>
                             <div clxs="input-group">
-                              <input id="weeklyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="weeklyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -712,7 +712,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="monthlyAmountCredit">Monto mensual de abonos</label>
                             <div class="input-group">
-                              <input id="monthlyAmountCredit" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="monthlyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
@@ -720,7 +720,7 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="CreditTransaction">Monto por transacción de abonos</label>
                             <div class="input-group">
-                              <input id="CreditTransaction" class="money form-control pwd-input text-right" type="text" autocomplete="off" name=""
+                              <input id="CreditTransaction" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
                             </div>
                             <div class="help-block"></div>
