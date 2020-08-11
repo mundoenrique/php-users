@@ -124,7 +124,7 @@ define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 );
 define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
 && filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 0
+	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 10
 );
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
 	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
@@ -206,15 +206,14 @@ define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 	$_SERVER['ACCESS_URL'] : ''
 );
 $uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
-define('SUBCLASS_PREFIX', $uriSegments[1] == 'bdb' || (count($uriSegments) > 3 && $uriSegments[3] == 'bdb') ?
-	'BDB_' : 'NOVO_'
+define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_'
 );
 unset($uriSegments);
 
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
 	$typeIP = 'public';
-} 
+}
 
 $ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
 define('IP_PROXI', $ipReal);

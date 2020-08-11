@@ -407,7 +407,6 @@ textarea.form-control {
 
 .select-box {
 	border: .85px solid var(--color-eighth);
-	/* box-shadow: 1px 1px 2px 0 var(--color-eighth); */
 	color: rgba(0,0,0,0);
 	height: calc(1.45em + .75rem + 4px);
 	line-height: 1.5;
@@ -764,7 +763,6 @@ label {
 	display: block;
   border: .85px solid var(--color-eighth);
   height: 33.4px;
-	/* box-shadow: 1px 1px 2px 0 var(--color-eighth); */
 	font-size: var(--button-font-size);
 	transition: .3s;
 	-webkit-appearance: none;
@@ -798,11 +796,6 @@ label {
 	cursor: pointer;
 	margin-top: 29px;
 }
-
-/* .input-file + .js-label-file.has-file{
-  color: var(--color-tertiary);
-  border: .85px solid var(--color-tertiary);
-} */
 
 .icon-upload::before {
 	margin-top: 2px !important;
@@ -896,6 +889,10 @@ label {
 
 .sb-disabled {
 	opacity: .5;
+	pointer-events: none;
+}
+
+.no-events {
 	pointer-events: none;
 }
 
@@ -1065,7 +1062,6 @@ label {
 .current-outline:hover:not(:disabled) {
 	color: var(--color-secondary) !important;
 	border-color: var(--color-primary) !important;
-	/* box-shadow: 1px 1px 2px 0 var(--color-eighth) !important; */
 }
 
 /* primary */
@@ -1079,12 +1075,10 @@ label {
 
 .btn-primary:hover {
 	background-color: var(--color-seventh);
-	/* box-shadow: inset 0 -2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-primary:active {
 	background-color: var(--color-seventh);
-	/* box-shadow: inset 0 2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-primary:disabled,
@@ -1105,12 +1099,10 @@ label {
 
 .btn-secondary:hover {
 	background-color: var(--color-tertiary);
-	/* box-shadow: inset 0 -2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-secondary:active {
 	background-color: var(--color-secondary);
-	/* box-shadow: inset 0 2px 0 rgba(31,45,61,.15); */
 }
 
 .btn-secondary:disabled {
@@ -1212,7 +1204,6 @@ label {
 	color: var(--color-primary) !important;
 	background-color: var(--color-secondary) !important;
   border-color: var(--color-primary) !important;
-	/* box-shadow: 1px 1px 2px 0 var(--color-eighth) !important; */
 }
 
 .btn-options:hover:not(:disabled):not(.is-disabled) {
@@ -1251,7 +1242,6 @@ label {
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
   border: .85px solid var(--color-eighth);
-  /* box-shadow: 1px 1px 2px 0 var(--color-eighth); */
   cursor: pointer;
   margin: 0 1px;
   transition: .3s;
@@ -1265,7 +1255,6 @@ label {
   background-repeat: no-repeat;
   border-radius: 0 20px 20px 0;
   border: .85px solid var(--color-primary);
-  /* box-shadow: 1px 1px 2px 0 var(--color-eighth); */
   cursor: pointer;
   margin: 0 1px;
   width: 44px;
@@ -1302,6 +1291,8 @@ label {
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
 .bg-being-validated { background-color: var(--being-validated) !important }
+.bg-option-active { background-color: var(--option-active) !important }
+.bg-option-not-active { background-color: var(--option-not-active) !important }
 
 .bg-transparent { background-color: transparent !important }
 
@@ -2660,14 +2651,12 @@ td > button > i:hover{
 }
 
 .dataTables_length > label{
-  /* background-color: var(--color-tertiary); */
   color: var(--color-sixth);
   font-size: var(--h6);
   font-weight: var(--light-font-weight);
 }
 
 .dataTables_info {
-  /* background-color: var(--color-tertiary); */
   color: var(--color-sixth) !important;
   font-size: var(--h6);
   font-weight: var(--light-font-weight);
@@ -2904,6 +2893,10 @@ table.dataTable.display tbody tr.odd.no-select-checkbox {
 	background-color: rgba(249, 249, 249, 1) !important;
 }
 
+table.dataTable.display tbody tr:nth-child(2n+0) {
+	background-color: #f9f9f9 !important;
+}
+
 table.dataTable tbody tr td {
 	padding-right:  4px !important;
 	padding-left:  4px !important;
@@ -2936,6 +2929,35 @@ table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
 
 table#resultsAccount thead th:nth-child(7){
 	width: 170px !important;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 18px;
+	border-bottom: 1px solid #111;
+	text-align: center;
+}
+
+table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	text-align: center;
+}
+
+table.dataTable tbody tr td {
+	padding-right: 4px;
+	padding-left: 4px;
+}
+
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+	background-color: #f9f9f9;
+}
+
+table.dataTable tbody tr {
+	background-color: #ffffff;
+}
+
+table.dataTable tr:last-child td{
+	border-right: none;
 }
 
 /* Widgets */
@@ -3578,7 +3600,6 @@ a.ui-button:active,
 	align-items: center;
 	background: var(--warning);
 	border: 1px solid var(--color-primary);
-	/* box-shadow: 2px 2px 3px 0px var(--warning); */
 	color: var(--color-sixth) !important;
 	display: flex;
 	font-size: 12px;
@@ -4049,7 +4070,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .product-presentation .item-network.visa-electron {
 	width: 50px;
 	height: 25px;
-	background-size: 50px;
+	background-size: 2.3rem;
 }
 
 .dashboard-item {
