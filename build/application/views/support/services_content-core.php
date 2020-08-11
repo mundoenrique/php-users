@@ -287,7 +287,7 @@
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Beneficiencia</label>
+                  <label class="block">Beneficencia</label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="charity" class="custom-control-input" type="checkbox" name="charity" disabled>
                     <label class="custom-control-label" for="charity"></label>
