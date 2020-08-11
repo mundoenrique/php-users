@@ -42,10 +42,10 @@
               <li id="cardLock" class="list-inline-item nav-item-config mr-1">
                 <a href="javascript:">
                   <span class="icon-config icon-lock h1 icon-color"></span>
-                  <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br>de tarjeta</h5>
+                  <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h5>
                   <div class="box up left regular">
                     <span class="icon-lock h1 icon-color"></span>
-                    <h4 class="h5 centers tatus-text1"><span class="status-text1"><?= $statustext ?></span><br>de tarjeta</h4>
+                    <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h4>
                   </div>
                 </a>
               </li>
