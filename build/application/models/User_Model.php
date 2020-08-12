@@ -17,6 +17,14 @@ class User_Model extends BDB_Model
 		log_message('INFO', 'NOVO User Model: Login method Initialized');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+
 		$this->dataAccessLog->modulo = 'login';
 		$this->dataAccessLog->function = 'login';
 		$this->dataAccessLog->operation = '1';
@@ -39,14 +47,10 @@ class User_Model extends BDB_Model
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->guardaIp = "false";
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
-		$this->dataRequest->password = $dataRequest->pass;
+		$this->dataRequest->password = $argon2->hexArgon2;
+		$this->dataRequest->hashMD5 = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp = $infoOTP ;
-
-		$argon2 = $this->encrypt_connect->generateArgon2('123');
-
-		$this->dataRequest->hashArgon2 = $argon2->hashArgon2;
-		$this->dataRequest->hexArgon2 = $argon2->hexArgon2;
 
 		if (isset($dataRequest->saveIP)){
 		 	$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
