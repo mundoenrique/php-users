@@ -34,10 +34,13 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->userName = $userName;
-		$this->dataRequest->password = md5($password);
 		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->password = $argon2->hexArgon2;
+		$this->dataRequest->hashMD5 = md5($password);
 
 		if(ACTIVE_RECAPTCHA) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
