@@ -159,83 +159,82 @@
 	<hr class="separador-one mt-2 mb-4">
 	<h4 class="pb-2 h4">Carga de documentos de identidad</h4>
 	<div class="row">
-		<div class="col-8">
+		<div class="col-7">
 			<div class="row">
-
-				<div class="row justify-center col-12 col-lg-3">
-					<div class="flex justify-center align-middle items-center">
+				<div class="col-4 flex items-center justify-center">
 						<div class="form-group bg-color px-1 mb-2">
-							<div class="drop-zone label-file">
-								<div class="drop-zone-prompt">
+							<div class="drop-zone drop-zone-selfie px-1 label-file flex flex-column">
+							<img class="card-image" src="../../../assets/images/img_avatar.png" alt="Tarjeta Banorte">
+							<div class="drop-zone-prompt mt-1 flex justify-between ">
 									<span class="js-file-name h5 regular">Agregar foto</span>
-									<i class="icon icon-upload mr-1 pr-3 right"></i>
-								</div>
-								<input type="file" name="myFile" class="drop-zone-input">
+									<i class="icon icon-upload ml-2"></i>
 							</div>
+							<input type="file" name="myFile" class="drop-zone-input">
+						</div>
+				</div>
+				<div class="help-block"></div>
+			</div>
+
+				<div class="col-8">
+					<div class="row">
+					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
+						<div class="drop-zone label-file p-1">
+							<div class="drop-zone-prompt flex flex-column items-center">
+								<i class="icon icon-upload h00"></i>
+								<span class="js-file-name h6 regular bold">Agregar parte frontal del INE</span>
+							</div>
+							<input type="file" name="myFile" class="drop-zone-input">
+						</div>
+						<div class="help-block"></div>
+					</div>
+
+					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
+						<div class="drop-zone label-file p-1">
+							<div class="drop-zone-prompt flex flex-column items-center">
+								<i class="icon icon-upload h00"></i>
+								<span class="js-file-name h6 regular bold drop-zone-prompt">Agregar parte trasera del INE</span>
+							</div>
+							<input type="file" name="myFile" class="drop-zone-input">
+						</div>
+						<div class="help-block"></div>
+					</div>
+
+					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
+						<div class="drop-zone label-file p-1">
+							<div class="drop-zone-prompt flex flex-column items-center">
+								<i class="icon icon-upload h00"></i>
+								<span class="js-file-name h6 regular bold drop-zone-prompt">Agregar parte frontal del pasaporte</span>
+							</div>
+							<input type="file" name="myFile" class="drop-zone-input">
+						</div>
+						<div class="help-block"></div>
+					</div>
+
+					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
+						<div class="drop-zone label-file p-1">
+							<div class="drop-zone-prompt flex flex-column items-center">
+								<i class="icon icon-upload h00"></i>
+								<span class="js-file-name h6 regular bold drop-zone-prompt">Agregar parte trasera del pasaporte</span>
+							</div>
+							<input type="file" name="myFile" class="drop-zone-input">
 						</div>
 					</div>
 					<div class="help-block"></div>
+					</div>
 				</div>
-
-				<div class="row col-12 col-lg-9 px-0">
-					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
-						<div class="drop-zone label-file">
-							<div class="drop-zone-prompt">
-								<i class="icon icon-upload"></i>
-								<span class="js-file-name h5 regular">Agregar parte frontal del INE</span>
-							</div>
-							<input type="file" name="myFile" class="drop-zone-input">
-						</div>
-						<div class="help-block"></div>
-					</div>
-
-					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
-						<div class="drop-zone label-file">
-							<div class="drop-zone-prompt">
-								<i class="icon icon-upload"></i>
-								<span class="js-file-name h5 regular drop-zone-prompt">Agregar parte trasera del INE</span>
-							</div>
-							<input type="file" name="myFile" class="drop-zone-input">
-						</div>
-						<div class="help-block"></div>
-					</div>
-
-					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
-						<div class="drop-zone label-file">
-							<div class="drop-zone-prompt">
-								<i class="icon icon-upload"></i>
-								<span class="js-file-name h5 regular drop-zone-prompt">Agregar parte frontal del pasaporte</span>
-							</div>
-							<input type="file" name="myFile" class="drop-zone-input">
-						</div>
-						<div class="help-block"></div>
-					</div>
-
-					<div class="form-group col-12 col-lg-6 bg-color px-1 mb-2">
-						<div class="drop-zone label-file">
-							<div class="drop-zone-prompt">
-								<i class="icon icon-upload"></i>
-								<span class="js-file-name h5 regular drop-zone-prompt">Agregar parte trasera del pasaporte</span>
-							</div>
-							<input type="file" name="myFile" class="drop-zone-input">
-						</div>
-					</div>
-					<div class="help-block"></div>
-				</div>
-
 			</div>
 		</div>
 		<div class="cover-spin" id=""></div>
-		<div class="col-4 flex justify-center">
+		<div class="col-4 flex justify-start">
 			<div class="field-meter">
 				<h4>Requisitos para el cargue de imagen:</h4>
 				<ul class="pwd-rules">
-					<li class="pwd-rules-item bold">Sólo se permiten archivos en formato PNG o JPEG.</li>
-					<li class="pwd-rules-item bold">Las imágenes deben ser en color, claras y legibles.</li>
-					<li class="pwd-rules-item bold">Es posible que se le soliciten documentos adicionales.</li>
-					<li class="pwd-rules-item bold">Su documento de Identidad debe encontrarse en vigencia.</li>
-					<li class="pwd-rules-item bold">El tamaño máximo por archivo debe ser de 6Mb.</li>
-					<li class="pwd-rules-item bold">Debe cargar el INE de manera obligatoria.</li>
+					<li class="pwd-rules-item">Sólo se permiten archivos en formato PNG o JPEG.</li>
+					<li class="pwd-rules-item">Las imágenes deben ser en color, claras y legibles.</li>
+					<li class="pwd-rules-item">Es posible que se le soliciten documentos adicionales.</li>
+					<li class="pwd-rules-item">Su documento de Identidad debe encontrarse en vigencia.</li>
+					<li class="pwd-rules-item">El tamaño máximo por archivo debe ser de 6Mb.</li>
+					<li class="pwd-rules-item">Debe cargar el INE de manera obligatoria.</li>
 				</ul>
 			</div>
 		</div>

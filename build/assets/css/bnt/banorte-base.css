@@ -3937,8 +3937,12 @@ a.ui-button:active,
 	border-radius: 5px;
 }
 
+.drop-zone-selfie {
+  height: 220px !important;
+}
+
 .drop-zone {
-  height: 200px;
+  height: 150px;
   align-items: center;
   justify-content: center;
 	text-align: center;
