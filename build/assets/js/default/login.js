@@ -2,7 +2,6 @@ var base_url, base_cdn, skin;
 var base_url = $('body').attr('data-app-url');
 var base_cdn = $('body').attr('data-app-cdn');
 var skin = $('body').attr('data-app-skin');
-var cpo_cook;
 var dataRequest;
 
 $(function () {
@@ -188,18 +187,23 @@ function habilitar() {
 }
 
 function validateCaptcha(token, user, pass) {
-	cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	// TODO: quitar comentarios
+	// cpo_cook = decodeURIComponent(
+	// 	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	// );
 
 	dataRequest = JSON.stringify({
 		token: token,
 		user: user
 	})
 
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
-		format: CryptoJSAesJson
-	}).toString();
+	// TODO: quitar comentarios
+	// dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
+	// 	format: CryptoJSAesJson
+	// }).toString();
+
+	dataRequest = novo_cryptoPass(dataRequest, true);
+
 	$.post(base_url + "/users/validateRecaptcha", {
 			request: dataRequest,
 			cpo_name: cpo_cook,
@@ -235,21 +239,25 @@ function validateCaptcha(token, user, pass) {
 }
 
 function login(user = null, pass = null, dataOPT = {}) {
-
-	cpo_cook = decodeURIComponent(
-		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	);
+	// TODO: quitar comentarios
+	// cpo_cook = decodeURIComponent(
+	// 	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	// );
 
 	dataRequest = JSON.stringify({
 		user_name: user === null ? '--' : user,
-		user_pass: pass === null ? '--' : hex_md5(pass),
+		// TODO: quitar comentarios
+		// user_pass: pass === null ? '--' : hex_md5(pass),
+		user_pass: pass === null ? '--' : novo_cryptoPass(pass),
 		codeOTP: dataOPT.valueOPT === undefined ? '000' : dataOPT.valueOPT,
 		saveIP: (dataOPT.saveIP === undefined || dataOPT.saveIP === false) ? false: true
 	});
+	// TODO: quitar comentarios
+	// dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
+	// 	format: CryptoJSAesJson
+	// }).toString();
 
-	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
-		format: CryptoJSAesJson
-	}).toString();
+	dataRequest = novo_cryptoPass(dataRequest, true);
 
 	$.post(base_url + "/users/login", {
 			request: dataRequest,
