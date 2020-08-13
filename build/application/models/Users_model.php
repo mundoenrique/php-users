@@ -12,7 +12,7 @@ class Users_model extends CI_Model
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA HACER LOGIN
-	public function login_user($username, $password, $codeOTP, $saveIP)
+	public function login_user($username, $userPass, $codeOTP, $saveIP)
 	{
 		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
@@ -20,11 +20,25 @@ class Users_model extends CI_Model
 		$infoOTP->tokenCliente = $codeOTP === '--' ? "" : $codeOTP;
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
+		$password = json_decode(base64_decode($userPass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		// TODO: quitar logs
+		log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
+		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2));
+
 		$data = json_encode(array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $username,
-			'password' => $password,
+			'password' => md5($password),
+			// TODO: Cambiar cuando servicio funcione
+			// 'password' => $argon2,
+			// 'hashMD5' => md5($password),
 			'logAccesoObject' => $logAcceso,
 			'codigoOtp' => $infoOTP,
 			'token' => '',
