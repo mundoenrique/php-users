@@ -79,7 +79,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->expireDate = $cardsList[0]->expireDate;
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
-			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquar';
+			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquear';
 			$this->render->activeEvents = '';
 		}
 
