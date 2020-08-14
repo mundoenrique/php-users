@@ -49,6 +49,9 @@ class User_Model extends BDB_Model
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
 		$this->dataRequest->password = $argon2->hexArgon2;
 		$this->dataRequest->hashMD5 = md5($password);
+		// TODO
+		// Descomentar la linea siguiente para peticiones reales al servicio
+		// $this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 		$this->dataRequest->codigoOtp = $infoOTP ;
 

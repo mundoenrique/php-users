@@ -1,6 +1,6 @@
-'use strict' 
+'use strict'
 
-var $$ = document;
+var $$ = document, cpo_cook;
 var toggleMenu = document.getElementsByClassName('navbar-toggler')[0],
     collapseMenu = document.getElementsByClassName('navbar-collapse')[0];
 
