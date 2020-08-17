@@ -77,7 +77,8 @@ class User_Model extends BDB_Model
 							'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 							'afiliado' => $response->afiliado,
 							'celular' => isset($response->celular)? $response->celular: '',
-							'tyc' => $response->tyc
+							'tyc' => $response->tyc,
+							'codCompania' => $response->acCodCia
 						];
 						$this->session->set_userdata($userData);
 
@@ -110,7 +111,7 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-closethick';
 
 					$infoLogin = json_decode($response->bean);
-					if (!is_null($infoLogin) && $infoLogin->intentos == 2) {
+					if (!is_null($infoLogin) && !property_exists($infoLogin, 'intentos') && $infoLogin->intentos == 2) {
 
 						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					}

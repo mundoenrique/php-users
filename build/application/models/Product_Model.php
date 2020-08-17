@@ -28,6 +28,7 @@ class Product_Model extends BDB_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idUsuario = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request List Products:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
@@ -201,6 +202,7 @@ class Product_Model extends BDB_Model
 		$this->dataRequest->id_ext_per = $this->session->userdata("idUsuario");
 		$this->dataRequest->tipoOperacion = $dataRequest->tipoOperacion;
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
