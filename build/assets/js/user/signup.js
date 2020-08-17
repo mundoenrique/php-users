@@ -53,6 +53,12 @@ $(function () {
 		}
 	})
 
+	$('#imageUpload').change(function () {
+    $('#imagePreviewContainer').hide();
+    $('#imagePreviewContainer').css("height", "0")
+    $('#imagePreviewContainer').fadeIn(650);
+  });
+
 	// Funtion drag and drop
 	document.querySelectorAll(".drop-zone-input").forEach((inputElement) => {
 		const dropZoneElement = inputElement.closest(".drop-zone");
