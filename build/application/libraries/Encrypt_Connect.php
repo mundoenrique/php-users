@@ -1,10 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Libreria para el cifrtado y descifrado de datos
  * @author J. Enrique Peñaloza Piñero
  */
-class Encrypt_Connect {
+class Encrypt_Connect
+{
 	private $CI;
 	private $userName;
 	private $countryConf;
@@ -33,13 +34,14 @@ class Encrypt_Connect {
 	 * @info método para cifrar las petiones al servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 */
-	public function encode($data, $userName, $model) {
+	public function encode($data, $userName, $model)
+	{
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
 
-		if($model !== 'REMOTE_ADDR') {
+		if ($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST '.$model.': '.$data);
+		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST ' . $model . ': ' . $data);
 
 		$dataB = base64_encode($data);
 		while ((strlen($dataB) % 8) != 0) {
@@ -47,7 +49,11 @@ class Encrypt_Connect {
 		}
 		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
 		$cryptData = mcrypt_encrypt(
-			MCRYPT_DES, $this->keyNovo, $dataB, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES,
+			$this->keyNovo,
+			$dataB,
+			MCRYPT_MODE_CBC,
+			$this->iv
 		);
 
 		return base64_encode($cryptData);
@@ -63,20 +69,24 @@ class Encrypt_Connect {
 		$data = base64_decode($cryptData);
 		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
 		$descryptData = mcrypt_decrypt(
-			MCRYPT_DES, $this->keyNovo, $data, MCRYPT_MODE_CBC, $this->iv
+			MCRYPT_DES,
+			$this->keyNovo,
+			$data,
+			MCRYPT_MODE_CBC,
+			$this->iv
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
 
-		if(!$response) {
-			log_message('ERROR', 'NOVO ['.$userName.'] NO SERVICE RESPONSE');
+		if (!$response) {
+			log_message('ERROR', 'NOVO [' . $userName . '] NO SERVICE RESPONSE');
 			$response = new stdClass();
 			$response->rc = lang('GEN_RC_DEFAULT');
 			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
-		if(!isset($response->pais)) {
-			log_message('INFO', 'NOVO ['.$userName.'] INSERTING COUNTRY TO THE RESPONSE');
+		if (!isset($response->pais)) {
+			log_message('INFO', 'NOVO [' . $userName . '] INSERTING COUNTRY TO THE RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
 
@@ -89,7 +99,6 @@ class Encrypt_Connect {
 		$this->writeLog($this->logMessage);
 
 		return $response;
-
 	}
 	/**
 	 * @info método para realizar la petición al servicio
@@ -101,15 +110,15 @@ class Encrypt_Connect {
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
 		$fail = FALSE;
-		$subFix = '_'.strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
 
-		if(isset($_SERVER['WS_URL'.$subFix])) {
-			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL'.$subFix]);
+		if (isset($_SERVER['WS_URL' . $subFix])) {
+			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL' . $subFix]);
 		}
 
-		$urlWS = $this->CI->config->item('urlWS').'movilsInterfaceResource';
+		$urlWS = $this->CI->config->item('urlWS') . 'movilsInterfaceResource';
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] REQUEST BY COUNTRY: '.$request['pais'].', AND WEBSERVICE URL: '.$urlWS);
+		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $urlWS);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 
@@ -121,14 +130,14 @@ class Encrypt_Connect {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
-			'Content-Length: ' . strlen($requestSerV))
-		);
+			'Content-Length: ' . strlen($requestSerV)
+		));
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
 		curl_close($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
+		log_message('DEBUG', 'NOVO [' . $userName . '] RESPONSE CURL HTTP CODE: ' . $httpCode);
 
 		$failResponse = json_decode($response);
 
@@ -137,8 +146,8 @@ class Encrypt_Connect {
 			$fail = TRUE;
 		} */
 
-		if($httpCode != 200 || !$response) {
-			log_message('ERROR','NOVO ['.$userName.'] ERROR CURL: '.json_encode($CurlError, JSON_UNESCAPED_UNICODE));
+		if ($httpCode != 200 || !$response) {
+			log_message('ERROR', 'NOVO [' . $userName . '] ERROR CURL: ' . json_encode($CurlError, JSON_UNESCAPED_UNICODE));
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('GEN_DEFAULT_CODE');
 			$failResponse->msg = lang('GEN_SYSTEM_NAME');
@@ -146,7 +155,7 @@ class Encrypt_Connect {
 			$fail = TRUE;
 		}
 
-		if($fail) {
+		if ($fail) {
 			$this->logMessage = $failResponse;
 			$this->logMessage->userName = $userName;
 			$this->logMessage->model = $model;
@@ -171,28 +180,28 @@ class Encrypt_Connect {
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
 
-		log_message('INFO', 'NOVO UPLOAD FILE BY: '.$urlBulkService.' AND: '.$userpassBulk);
+		log_message('INFO', 'NOVO UPLOAD FILE BY: ' . $urlBulkService . ' AND: ' . $userpassBulk);
 
 		$ch = curl_init();
-		$Fclose = $fOpen = fopen($uploadBulk.$file, 'r');
-		curl_setopt($ch, CURLOPT_URL, $urlBulkService.$file);
+		$Fclose = $fOpen = fopen($uploadBulk . $file, 'r');
+		curl_setopt($ch, CURLOPT_URL, $urlBulkService . $file);
 		curl_setopt($ch, CURLOPT_USERPWD, $userpassBulk);
 		curl_setopt($ch, CURLOPT_UPLOAD, 1);
 		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_SFTP);
 		curl_setopt($ch, CURLOPT_INFILE, $fOpen);
-		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk.$file));
-		curl_exec ($ch);
+		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk . $file));
+		curl_exec($ch);
 		$result = curl_errno($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] UPLOAD FILE BULK SFTP '.$model.': '.$result.' '.lang('RESP_UPLOAD_SFTP('.$result.')'));
+		log_message('DEBUG', 'NOVO [' . $userName . '] UPLOAD FILE BULK SFTP ' . $model . ': ' . $result . ' ' . lang('RESP_UPLOAD_SFTP(' . $result . ')'));
 
-		if($result != 0) {
+		if ($result != 0) {
 			$respUpload->rc = -105;
 		}
 
-		curl_close ($ch);
+		curl_close($ch);
 		fclose($Fclose);
-		unlink($uploadBulk.$file);
+		unlink($uploadBulk . $file);
 
 		return $respUpload;
 	}
@@ -227,9 +236,9 @@ class Encrypt_Connect {
 		$msg = $logMessage->msg;
 		$response = isset($logMessage->response) ? $logMessage->response : '';
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
+		log_message('DEBUG', 'NOVO [' . $userName . '] RESPONSE ' . $model . '= rc: ' . $rc . ', msg: ' . $msg . ', country: ' . $country);
 
-		if(RESPONSE_SERV_COMPLETE) {
+		if (RESPONSE_SERV_COMPLETE) {
 			$wirteLog = new stdClass();
 			$isBean = '';
 
@@ -238,15 +247,15 @@ class Encrypt_Connect {
 				$response->bean = json_decode($response->bean);
 			}
 
-			if(is_object($response)) {
-				foreach ($response AS $pos => $responseAttr) {
-					if($pos == 'bean' || $pos == 'archivo') {
+			if (is_object($response)) {
+				foreach ($response as $pos => $responseAttr) {
+					if ($pos == 'bean' || $pos == 'archivo') {
 						if (isset($responseAttr->archivo) || isset($response->archivo)) {
 							$wirteLog->archivo = 'OK';
 							$wirteLog->nombre = isset($responseAttr->nombre) ? $responseAttr->nombre : $response->nombre;
 							$wirteLog->formatoArchivo = isset($responseAttr->formatoArchivo) ? $responseAttr->formatoArchivo : $response->formatoArchivo;
 							$file = isset($responseAttr->archivo) ? $responseAttr->archivo : $response->archivo;
-							if(!is_array($file)) {
+							if (!is_array($file)) {
 								$wirteLog->archivo = FALSE;
 							}
 							continue;
@@ -256,7 +265,7 @@ class Encrypt_Connect {
 				}
 			}
 
-			log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
+			log_message('DEBUG', 'NOVO [' . $userName . '] COMPLETE RESPONSE ' . $isBean . $model . ': ' . json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
 
 			unset($wirteLog);
 		}
@@ -267,17 +276,17 @@ class Encrypt_Connect {
 	 * @author Pedro Torres
 	 * @date Agosto 10th, 2020
 	 */
-	public function generateArgon2($string){
-
-		$options = [
-			'memory_cost' => ARGON2_MEMORY_COST,
-			'time_cost' => ARGON2_TIME_COST,
-			'threads' => ARGON2_THREADS,
-			'salt' => ARGON2_SALT,
-		];
-
+	public function generateArgon2($string)
+	{
 		$result = new stdClass();
-		$result->hashArgon2 = password_hash($string, ARGON2_TYPE_ALG, $options);
+		$result->hashArgon2 = sodium_crypto_pwhash(
+			ARGON2_LENGTH,
+			$string,
+			hex2bin(ARGON2_SALT),
+			ARGON2_OPS_LIMIT,
+			ARGON2_MEMORY_LIMIT,
+			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
+		);
 		$result->hexArgon2 =  bin2hex($result->hashArgon2);
 
 		return $result;
