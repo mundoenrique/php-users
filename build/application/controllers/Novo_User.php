@@ -111,7 +111,7 @@ class Novo_User extends NOVO_Controller {
 		));
 		$dataUser = $dataUser->dataUser;
 
-		foreach ($dataUser->user AS $index => $render) {
+		foreach ($dataUser->signUpData AS $index => $render) {
 			$this->render->$index = $render;
 		}
 
@@ -202,6 +202,9 @@ class Novo_User extends NOVO_Controller {
 		$view = 'profileUser';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"user/profileUser"
 		);
 

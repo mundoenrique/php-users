@@ -5,7 +5,7 @@ $(function () {
 	who = 'User'
 
 	$('#nickName').on('blur', function() {
-		$(this).addClass('available')
+		$(this).addClass('available');
 		form = $('#signUpForm');
 		validateForms(form)
 		if ($(this).valid()) {
@@ -13,10 +13,10 @@ $(function () {
 			data = {
 				nickName: $(this).val().trim()
 			}
-			$(this).prop('disabled', true)
-			getResponseServ(where)
+			$(this).prop('disabled', true);
+			getResponseServ(where);
 		} else {
-			$(this).focus()
+			$(this).focus();
 		}
 	})
 
@@ -26,30 +26,34 @@ $(function () {
 	})
 
 	$('#birthDate').datepicker({
-		yearRange: '-80:' + currentDate.getFullYear(),
-		maxDate: "-18y",
+		yearRange: '-90:' + currentDate.getFullYear(),
+		maxDate: '-18y',
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		onSelect: function (selectedDate) {
+			$(this).focus();
+			$('#genderMale').focus();
+		}
 	})
 
-	$('#signUpbTN').on('click', function(e) {
+	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
 		form = $('#signUpForm');
-		formInputTrim(form)
-		validateForms(form)
+		formInputTrim(form);
+		validateForms(form);
 
 		if (form.valid()) {
-			btnText = $(this).text().trim()
+			btnText = $(this).text().trim();
 			data = getDataForm(form);
-			delete data.genderMale
-			delete data.genderFemale
-			data.gender = $('input[name=gender]:checked', '#signUpForm').val()
+			delete data.genderMale;
+			delete data.genderFemale;
+			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
-			$(this).html(loader)
-			insertFormInput(true)
-			where = 'SignUpData'
-			getResponseServ(where)
+			$(this).html(loader);
+			insertFormInput(true);
+			where = 'SignUpData';
+			getResponseServ(where);
 		}
 	})
 
@@ -154,7 +158,7 @@ function getResponseServ(currentaction) {
 		}
 
 		if (currentaction == 'SignUpData') {
-			$('#signUpbTN').html(btnText)
+			$('#signUpBtn').html(btnText)
 			insertFormInput(false)
 		}
 	})
