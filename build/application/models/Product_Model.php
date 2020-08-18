@@ -37,6 +37,8 @@ class Product_Model extends BDB_Model
 				case 0:
 					return $response->lista;
 					break;
+				default:
+					return [];
 			}
 		}
 	}

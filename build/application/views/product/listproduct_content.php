@@ -15,7 +15,7 @@
 						<input type='hidden' name='noTarjetaConMascara' id='noTarjetaConMascara' value=''>
 						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
-					<?php if (count($data) > 0 and $data !== '--'): ?>
+					<?php if (count($data) > 0 && $data !== '--'): ?>
 					<?php foreach($data as $row): ?>
 					<?php	$state = (in_array("120", $row['availableServices'])) ? ' inactive' : ''; ?>
 					<div id="<?= $row['noTarjeta'];?>" class="dashboard-item big-modal p-1 mx-1 mb-1<?= $state; ?>">

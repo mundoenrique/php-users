@@ -111,7 +111,7 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-closethick';
 
 					$infoLogin = json_decode($response->bean);
-					if (!is_null($infoLogin) && !property_exists($infoLogin, 'intentos') && $infoLogin->intentos == 2) {
+					if (!is_null($infoLogin) && property_exists($infoLogin, 'intentos') && $infoLogin->intentos == 2) {
 
 						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					}
