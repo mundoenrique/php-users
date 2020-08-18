@@ -15,7 +15,7 @@
 							<div class="form-group col-12 col-lg-6">
 								<label for="currentPass"><?= lang('USER_PASS_CURRENT');?></label>
 								<div class="input-group">
-									<input id="currentPass" class="form-control pwd-input" type="password" name="current-pass">
+									<input id="currentPass" class="form-control pwd-input" type="password" name="currentPass">
 									<div class="input-group-append">
 										<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 									</div>
@@ -27,7 +27,7 @@
 							<div class="form-group col-12 col-lg-6">
 								<label for="newPass"><?= lang('USER_PASS_NEW'); ?></label>
 								<div class="input-group">
-									<input id="newPass" class="form-control pwd-input" type="password" name="new-pass">
+									<input id="newPass" class="form-control pwd-input" type="password" name="newPass">
 									<div class="input-group-append">
 										<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 									</div>
@@ -37,7 +37,7 @@
 							<div class="form-group col-12 col-lg-6">
 								<label for="confirmPass"><?= lang('USER_PASS_CONFIRM'); ?></label>
 								<div class="input-group">
-									<input id="confirmPass" class="form-control pwd-input" type="password" name="confirm-pass">
+									<input id="confirmPass" class="form-control pwd-input" type="password" name="confirmPass">
 									<div class="input-group-append">
 										<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
 									</div>

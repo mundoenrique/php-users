@@ -94,6 +94,12 @@ class Novo_User_Model extends NOVO_Model {
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'countrySess' => $response->codPais,
 						'countryUri' => $this->config->item('country-uri'),
+						'canTransfer' => $response->aplicaTransferencia,
+						'operKey' => $response->passwordOperaciones,
+						'affiliate' => $response->afiliado,
+						'longProfile' => $response->aplicaPerfil,
+						'terms' => $response->tyc,
+						'mobilePhone' => $response->celular ?? '',
 						'client_agent' => $this->agent->agent_string()
 					];
 					$this->session->set_userdata($userData);
@@ -305,7 +311,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') :'inicio',
+						'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio',
 						'action'=> 'redirect'
 					]
 				];
@@ -356,9 +362,9 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->cuenta = $dataRequest->numberCard;
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
-		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '1234';
-		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');
-		$this->dataRequest->pais = isset($dataRequest->client) ? $dataRequest->client : $this->country;
+		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
+		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
+		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
@@ -366,9 +372,22 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$userData = new stdClass();
-				$userData->user = $response->user;
-				$userData->affiliation = $response->afiliacion;
-				$this->response->data = $userData;
+
+				$userData->idType = $response->user->tipo_id_ext_per ?? '';
+				$userData->idnumber = $response->user->id_ext_per ?? '';
+				$userData->idEnterprise = $response->user->id_ext_emp ?? '';
+				$userData->firstName = $response->user->primerNombre ?? '';
+				$userData->lastName = $response->user->primerApellido ?? '';
+				$userData->middleName = $response->user->segundoNombre ?? '';
+				$userData->surName = $response->user->segundoApellido ?? '';
+				$userData->birthDate = $response->user->fechaNacimiento ?? '';
+				$userData->email = $response->user->email ?? '';
+				$userData->landLine = $response->user->telefono ?? '';
+				$userData->mobilePhone = $response->user->celular ?? '';
+				$userData->longProfile = $response->user->aplicaPerfil ?? '';
+
+				$this->response->data['signUpData'] = $userData;
+				$this->response->data['affiliation'] = $response->afiliacion;
 
 				$userSess = [
 					'userIdentity' => TRUE,
@@ -429,7 +448,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -193:
 				$this->response->code = 1;
-				$this->response->msg = 'Usuario no disponible, intenta con otro';
+				$this->response->msg = lang('VALIDATE_AVAILABLE_NICKNAME');
 			break;
 		}
 
@@ -437,7 +456,7 @@ class Novo_User_Model extends NOVO_Model {
 
 	}
 	/**
-	 * @info Método validar la el registro del usuario
+	 * @info Método para registrar un usuario
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date jun 10th, 2020
 	 */
@@ -459,15 +478,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = [
 			'userName' => mb_strtoupper($dataRequest->nickName),
-			'primerNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->firstName))))),
-			'segundoNombre' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->middleName))))),
-			'primerApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->lastName))))),
-			'segundoApellido' => implode(' ',array_filter(explode(' ',ucfirst(mb_strtoupper($dataRequest->secondSurname))))),
+			'primerNombre' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
+			'segundoNombre' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->middleName)))),
+			'primerApellido' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->lastName)))),
+			'segundoApellido' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->surName)))),
 			'fechaNacimiento' => $dataRequest->birthDate,
 			'id_ext_per' => $dataRequest->idNumber,
 			'tipo_id_ext_per' => lang('CONF_COUNTRY_CODE')[$this->country],
-			'codPais' => isset($dataRequest->client) ? $dataRequest->client : $this->country,
-			'sexo' => $dataRequest->gender,
+			'codPais' => $dataRequest->client ?? $this->country,
 			'sexo' => $dataRequest->gender,
 			'notEmail' => '1',
 			'notSms' => '1',
@@ -520,6 +538,149 @@ class Novo_User_Model extends NOVO_Model {
 
 	}
 	/**
+	 * @info Método para obtener el perfil del usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Jun 11th, 2020
+	 */
+	public function callWs_ProfileUser_User()
+	{
+		log_message('INFO', 'NOVO User Model: ProfileUser Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.UsuarioTO';
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Perfil';
+		$this->dataAccessLog->operation = 'Datos del usuario';
+
+		$this->dataRequest->idOperation = '30';
+		$this->dataRequest->userName = $this->session->userName;
+
+		$response = $this->sendToService('callWs_ProfileUser');
+		$profileData = [];
+		$phonesList = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$profileData = new stdClass();
+				$this->response->code = 0;
+				$profileData->nickName = $response->registro->user->userName ?? '';
+				$profileData->firstName = $response->registro->user->primerNombre ?? '';
+				$profileData->middleName = $response->registro->user->segundoNombre ?? '';
+				$profileData->lastName = $response->registro->user->primerApellido ?? '';
+				$profileData->surName = $response->registro->user->segundoApellido ?? '';
+				$profileData->email = $response->registro->user->email ?? '';
+				$profileData->creationDate = $response->registro->user->dtfechorcrea_usu ?? '';
+				$profileData->emailNot = $response->registro->user->notEmail ?? '';
+				$profileData->smsNot = $response->registro->user->notSms ?? '';
+				$profileData->gender = $response->registro->user->sexo ?? '';
+				$profileData->idNumber = $response->registro->user->id_ext_per ?? '';
+				$profileData->birthday = $response->registro->user->fechaNacimiento ?? '';
+				$profileData->professionType = $response->registro->user->tipo_profesion ?? '';
+				$profileData->profession = $response->registro->user->profesion ?? '';
+				$profileData->idTypeCode = $response->registro->user->tipo_id_ext_per ?? '';
+				$profileData->idTypeText = $response->registro->user->descripcion_tipo_id_ext_per ?? '';
+				$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
+				$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
+				$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
+
+				$phonesList['otherPhoneNum'] = '';
+				$phonesList['landLine'] = '';
+				$phonesList['mobilePhone'] = '';
+				$phonesList['otherType'] = '';
+
+				foreach ($response->registro->listaTelefonos AS $phonesType) {
+					switch ($phonesType->tipo) {
+						case 'FAX':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'FAX';
+						break;
+						case 'OFC':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'OFC';
+						break;
+						case 'OTRO':
+							$phonesList['otherPhoneNum'] = $phonesType->numero;
+							$phonesList['otherType'] = 'OTRO';
+						break;
+						case 'HAB':
+							$phonesList['landLine'] = $phonesType->numero;
+						break;
+						case 'CEL':
+							$phonesList['mobilePhone'] = $phonesType->numero;
+						break;
+					}
+				}
+			break;
+		}
+
+		$this->response->data->profileData = $profileData;
+		$this->response->data->phonesList = (object) $phonesList;
+
+		return $this->responseToTheView('callWs_ProfileUser');
+	}
+	/**
+	 * @info Método para registrar un usuario
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date jun 10th, 2020
+	 */
+	public function CallWs_UpdateProfile_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: UpdateProfile Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.DatosPerfilMO';
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Perfil';
+		$this->dataAccessLog->operation = 'Actualizar usuario';
+
+		$this->dataRequest->idOperation = '39';
+		$this->dataRequest->registro = [
+			'user' => [
+				'userName' => $this->userName,
+				'primerNombre' => $dataRequest->firstName,
+				'segundoNombre' => $dataRequest->middleName,
+				'primerApellido' => $dataRequest->lastName,
+				'segundoApellido' => $dataRequest->surName,
+				'email' => $dataRequest->email,
+				'dtfechorcrea_usu' => $dataRequest->creationDate,
+				'passwordOperaciones' => '',
+				'notEmail' => $dataRequest->notEmail == 'on' ? '1' : '0',
+				'notSms' => $dataRequest->notSms == 'on' ? '1' : '0',
+				'sexo' => $dataRequest->gender,
+				'id_ext_per' => $dataRequest->idNumber,
+				'fechaNacimiento' => $dataRequest->birthDate,
+				'tipo_profesion' => $dataRequest->professionType,
+				'profesion' => $dataRequest->profession,
+				'tipo_id_ext_per' => $dataRequest->idTypeCode,
+				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
+				'disponeClaveSMS' => '',
+				'aplicaPerfil' => $this->session->longProfile,
+				'tyc' => $this->session->terms,
+			],
+			'listaTelefonos' => [
+				[
+					'tipo' => 'HAB',
+					'numero' => $dataRequest->landLine,
+					'descripcion' => 'HABITACION'
+				],
+				[
+					'tipo' => 'CEL',
+					'numero' => $dataRequest->mobilePhone,
+					'descripcion' => 'MOVIL',
+					'aplicaClaveSMS' => 'No Aplica mensajes SMS'
+				],
+				[
+					'tipo' => $dataRequest->phoneType == '' ? FALSE : $dataRequest->phoneType,
+					'numero' => $dataRequest->otherPhoneNum,
+					'descripcion' => $dataRequest->phoneType == '' ? FALSE : $dataRequest->phoneType
+				]
+			],
+			'registroValido' => FALSE,
+			'corporativa' => FALSE,
+			'afiliacion' => []
+		];
+		$this->dataRequest->direccion = [];
+	}
+	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 1st, 2019
@@ -534,89 +695,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		return $this->responseToTheView('KeepSession');
 	}
-	/**
-	 * @info Método para obtener el perfil del usuario
-	 * @author J. Enrique Peñaloza Piñero
-	 * @date Jun 11th, 2020
-	 */
-	public function callWs_ProfileUser_User()
-	{
-		log_message('INFO', 'NOVO User Model: ProfileUser Method Initialized');
-
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-
-		$this->dataAccessLog->modulo = 'Usuario';
-		$this->dataAccessLog->function = 'Perfil';
-		$this->dataAccessLog->operation = 'datos del usuario';
-
-		$this->dataRequest->idOperation = '30';
-		$this->dataRequest->userName = $this->session->userName;
-
-		$response = $this->sendToService('callWs_ProfileUser');
-		$profileData = [];
-		$phonesList = [];
-
-		switch ($this->isResponseRc) {
-			case 0:
-				$record = new stdClass();
-				$this->response->code = 0;
-				$userData = $response->registro->user;
-				$record->nickName = isset($userData->userName) ? $userData->userName : '';
-				$record->firstName = isset($userData->primerNombre) ? $userData->primerNombre : '';
-				$record->middleName = isset($userData->segundoNombre) ? $userData->segundoNombre : '';
-				$record->lastName = isset($userData->primerApellido) ? $userData->primerApellido : '';
-				$record->secondSurname = isset($userData->segundoApellido) ? $userData->segundoApellido : '';
-				$record->email = isset($userData->email) ? $userData->email : '';
-				$record->creationDate = isset($userData->dtfechorcrea_usu) ? $userData->dtfechorcrea_usu : '';
-				$record->emailNot = isset($userData->notEmail) ? $userData->notEmail : '';
-				$record->smsNot = isset($userData->notSms) ? $userData->notSms : '';
-				$record->gender = isset($userData->sexo) ? $userData->sexo : '';
-				$record->idNumber = isset($userData->id_ext_per) ? $userData->id_ext_per : '';
-				$record->birthday = isset($userData->fechaNacimiento) ? $userData->fechaNacimiento : '';
-				$record->professionType = isset($userData->tipo_profesion) ? $userData->tipo_profesion : '';
-				$record->profession = isset($userData->profesion) ? $userData->profesion : '';
-				$record->idTypeCode = isset($userData->tipo_id_ext_per) ? $userData->tipo_id_ext_per : '';
-				$record->idTypeCodeText = isset($userData->descripcion_tipo_id_ext_per) ? $userData->descripcion_tipo_id_ext_per : '';
-				$record->smsKey = isset($userData->disponeClaveSMS) ? $userData->disponeClaveSMS : '';
-				$record->longProfile = isset($userData->aplicaPerfil) ? $userData->aplicaPerfil : '';
-				$profileData[] = $record;
-
-				$phonesList['otherPhoneNum'] = '';
-				$phonesList['landLine'] = '';
-				$phonesList['mobilePhone'] = '';
-				$phonesList['otherType'] = '';
-
-				foreach ($response->registro->listaTelefonos AS $phonesType) {
-					switch ($phonesType->tipo) {
-						case 'FAX':
-							$phonesList['otherPhoneNum'] = $phonesType->numero;
-							$phonesList['otherType'] = 'fax';
-						break;
-						case 'OFC':
-							$phonesList['otherPhoneNum'] = $phonesType->numero;
-							$phonesList['otherType'] = 'office';
-						break;
-						case 'OTRO':
-							$phonesList['otherPhoneNum'] = $phonesType->numero;
-							$phonesList['otherType'] = 'other';
-						break;
-						case 'HAB':
-							$phonesList['landLine'] = $phonesType->numero;
-						break;
-						case 'CEL':
-							$phonesList['mobilePhone'] = $phonesType->numero;
-						break;
-					}
-				}
-			break;
-		}
-
-		$this->response->data->profileData = (object) $profileData[0];
-		$this->response->data->phonesList = (object) $phonesList;
-
-		return $this->responseToTheView('callWs_ProfileUser');
-	}
-
 	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero

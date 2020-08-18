@@ -26,8 +26,8 @@
 						</div>
 						<?php if(lang('CONF_SECRET_KEY') == 'ON'): ?>
 						<div class="form-group col-lg-4">
-							<label for="secretPassword" class="regular">Clave secreta (PIN)</label>
-							<input id="secretPassword" class="form-control" type="password" name="secretPassword" maxlength="15">
+							<label for="cardPIN" class="regular">Clave secreta (PIN)</label>
+							<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="15">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
