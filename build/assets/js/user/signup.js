@@ -64,57 +64,50 @@ $(function () {
   });
 
 	// Funtion drag and drop
-	document.querySelectorAll(".drop-zone-input").forEach((inputElement) => {
-		const dropZoneElement = inputElement.closest(".drop-zone");
+	var zoneInput = $(".drop-zone-input");
+	$.each (zoneInput, function(i, inputElement){
+		var dropZoneElement = inputElement.closest(".drop-zone");
 
-		dropZoneElement.addEventListener("click", (e) => {
+		$(dropZoneElement).on("click", function(e){
 			inputElement.click();
 		});
 
-		inputElement.addEventListener("change", (e) => {
+		$(inputElement).on("change", function(e){
 			if (inputElement.files.length) {
 				updateThumbnail(dropZoneElement, inputElement.files[0]);
 			}
 		});
 
-		dropZoneElement.addEventListener("dragover", (e) => {
+		$('.drop-zone').on('dragover', function(e) {
 			e.preventDefault();
-			dropZoneElement.classList.add("drop-zone-over");
+			e.stopPropagation();
+			$(this).addClass('drop-zone-over');
 		});
 
-		["dragleave", "dragend"].forEach((type) => {
-			dropZoneElement.addEventListener(type, (e) => {
-				dropZoneElement.classList.remove("drop-zone-over");
-			});
+		$('.dropzone-wrapper').on('dragleave', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$(this).removeClass('drop-zone-over');
 		});
 
-		dropZoneElement.addEventListener("drop", (e) => {
+		$(dropZoneElement).on("drop", function(e){
 			e.preventDefault();
-
-			if (e.dataTransfer.files.length) {
-				inputElement.files = e.dataTransfer.files;
-				updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+			if (e.originalEvent.dataTransfer.files.length) {
+				inputElement.files = e.originalEvent.dataTransfer.files;
+				updateThumbnail(dropZoneElement, e.originalEvent.dataTransfer.files[0]);
 			}
-
-			dropZoneElement.classList.remove("drop-zone-over");
+			$(this).removeClass('drop-zone-over');
 		});
+
 	});
 
-	/**
-	 * Updates the thumbnail on a drop zone element.
-	 *
-	 * @param {HTMLElement} dropZoneElement
-	 * @param {File} file
-	 */
 	function updateThumbnail(dropZoneElement, file) {
-		let thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
+		var thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
 
-		// First time - remove the prompt
 		if (dropZoneElement.querySelector(".drop-zone-prompt")) {
 			dropZoneElement.querySelector(".drop-zone-prompt").remove();
 		}
 
-		// First time - there is no thumbnail element, so lets create it
 		if (!thumbnailElement) {
 			thumbnailElement = document.createElement("div");
 			thumbnailElement.classList.add("drop-zone-thumb");
@@ -123,9 +116,8 @@ $(function () {
 
 		thumbnailElement.dataset.label = file.name;
 
-		// Show thumbnail for image files
 		if (file.type.startsWith("image/")) {
-			const reader = new FileReader();
+			var reader = new FileReader();
 
 			reader.readAsDataURL(file);
 			reader.onload = () => {

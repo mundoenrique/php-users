@@ -3982,20 +3982,6 @@ a.ui-button:active,
   position: relative;
 }
 
-/* .drop-zone-thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 5px 0;
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.75);
-  font-size: 14px;
-  text-align: center;
-} */
-
-
 .detail-lot tbody tr:first-child td {
 	border: 0 !important;
 	background-color: var(--color-secondary) !important;
