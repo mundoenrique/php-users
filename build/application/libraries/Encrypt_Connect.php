@@ -278,8 +278,8 @@ class Encrypt_Connect
 	 */
 	public function generateArgon2($string)
 	{
-		$result = new stdClass();
-		$result->hashArgon2 = sodium_crypto_pwhash(
+
+		$hash =sodium_crypto_pwhash(
 			ARGON2_LENGTH,
 			$string,
 			hex2bin(ARGON2_SALT),
@@ -287,7 +287,10 @@ class Encrypt_Connect
 			ARGON2_MEMORY_LIMIT,
 			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
 		);
-		$result->hexArgon2 =  bin2hex($result->hashArgon2);
+
+		$result = new stdClass();
+		$result->hashArgon2 =  unpack("C*", $hash);
+		$result->hexArgon2 =  bin2hex($hash);
 
 		return $result;
 	}
