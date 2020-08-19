@@ -88,6 +88,7 @@ $(function () {
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);
 		$('.nav-config-box').removeClass('no-events');
+		$('.nav-config-box > li').removeClass('active');
 		$('#cardNumber').val(cardNumber);
 		$('#cardNumberMask').val(cardNumberMask);
 		$('#expireDate').val(expireDate);

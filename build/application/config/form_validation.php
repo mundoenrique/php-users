@@ -111,6 +111,68 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
+	'updateProfile' => [
+		[
+			'field' => 'nickName',
+			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+		],
+		[
+			'field' => 'idTypeCode',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'idTypeText',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'firstName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'lastName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'middleName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'surName',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]'
+		],
+		[
+			'field' => 'gender',
+			'rules' => 'trim|regex_match[/^(M|F)/]|required'
+		],
+		[
+			'field' => 'birthDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'landLine',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'phoneType',
+			'rules' => 'trim|alpha'
+		],
+		[
+			'field' => 'otherPhoneNum',
+			'rules' => 'trim|numeric'
+		]
+	],
 	'accessRecover' => [
 		[
 			'field' => 'recoveryUser',
@@ -231,18 +293,6 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		]
 	],
-	'finishSession' => [
-		[
-			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
-		]
-	],
-	'keepSession' => [
-		[
-			'field' => 'signout',
-			'rules' => 'trim|alpha|required'
-		]
-	],
 	'userCardsList' => [
 		[
 			'field' => 'cardList',
@@ -257,6 +307,18 @@ $config = [
 		[
 			'field' => 'userIdNumber',
 			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
+	'keepSession' => [
+		[
+			'field' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
+	'finishSession' => [
+		[
+			'field' => 'userName',
+			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
 	'getdetail' => [

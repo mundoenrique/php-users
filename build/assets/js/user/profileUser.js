@@ -38,8 +38,17 @@ $(function () {
 			delete data.genderMale;
 			delete data.genderFemale;
 			data.gender = $('input[name=gender]:checked').val();
+			data.address = $('#address').val();
+			data.notEmail = $('#notEmail').is(':checked') ? '1' : '0';
+			data.notSms = $('#notSms').is(':checked') ? '1' : '0';
 			$(this).html(loader);
 			insertFormInput(true);
+			who = 'User'; where = 'updateProfile';
+
+			callNovoCore(who, where, data, function(response) {
+				$('#profileUserBtn').text(btnText);
+				insertFormInput(false);
+			})
 		}
 	})
 })
