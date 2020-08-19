@@ -29,7 +29,7 @@ class Users_model extends CI_Model
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 		// TODO: quitar logs
 		log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
-		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2));
+		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
 
 		$data = json_encode(array(
 			'idOperation' => '1',
@@ -37,7 +37,7 @@ class Users_model extends CI_Model
 			'userName' => $username,
 			'password' => md5($password),
 			// TODO: Cambiar cuando servicio funcione
-			// 'password' => $argon2,
+			// 'password' => $argon2->hexArgon2,
 			// 'hashMD5' => md5($password),
 			'logAccesoObject' => $logAcceso,
 			'codigoOtp' => $infoOTP,
