@@ -39,8 +39,9 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->pais = 'Global';
-		$this->dataRequest->password = $argon2->hexArgon2;
-		$this->dataRequest->hashMD5 = md5($password);
+		$this->dataRequest->password = md5($password);//BORRAR CUANDO ESTEN OK LOS SERVICIOS
+		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 
 		if(ACTIVE_RECAPTCHA) {
 			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
@@ -286,15 +287,19 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($new->password)
 		);
 
+		$argon2 = $this->encrypt_connect->generateArgon2($new);
+
 		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->userName = $this->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
 		$this->dataRequest->passwordOld4 = md5(strtoupper($new));
+		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		//$this->dataRequest->hashMD5 = md5($new);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
-		$code = 0;
+		//$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -356,12 +361,18 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'validar datos de registro';
 		$this->dataAccessLog->userName = $dataRequest->docmentId.date('dmy');
 
+    /*DESCOMENTAR y PROBAR CUANDO ESTEN OK LOS SERVICIOS*/
+		//$argon2 = isset($dataRequest->secretPassword) ? $this->encrypt_connect->generateArgon2($dataRequest->secretPassword) : $this->encrypt_connect->generateArgon2('1234') ;
+
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->cuenta = $dataRequest->numberCard;
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');
 		$this->dataRequest->pais = isset($dataRequest->client) ? $dataRequest->client : $this->country;
+		//$this->dataRequest->claveWeb = $argon2->hexArgon2;//DESCOMENTAR y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		//$this->dataRequest->hashMD5 = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
@@ -459,6 +470,8 @@ class Novo_User_Model extends NOVO_Model {
 			utf8_encode($password->password)
 		);
 
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = [
 			'userName' => mb_strtoupper($dataRequest->nickName),
@@ -477,6 +490,8 @@ class Novo_User_Model extends NOVO_Model {
 			'email' => $dataRequest->email,
 			'password' => md5($password),
 			'passwordOld4' => md5(mb_strtoupper($password))
+			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
+			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
 		$this->dataRequest->listaTelefonos = [
 			[
