@@ -31,12 +31,12 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->userName = $dataRequest->user;
 
 		$infoOTP = new stdClass();
-		$infoOTP->tokenCliente = isset($dataRequest->codeOTP)?$dataRequest->codeOTP:"";
-		$infoOTP->authToken = $this->session->flashdata('authToken')?: '';
+		$infoOTP->tokenCliente = isset($dataRequest->codeOTP) ? $dataRequest->codeOTP : "";
+		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
-		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL' ) {
+		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL') {
 			$this->session->set_flashdata('firstDataRquest', $dataRequest);
-		}else{
+		} else {
 			$firstDataRequest = $this->session->flashdata('firstDataRquest');
 			$dataRequest->user = mb_strtoupper($firstDataRequest->user);
 			$dataRequest->pass = $firstDataRequest->pass;
@@ -53,10 +53,10 @@ class User_Model extends BDB_Model
 		// Descomentar la linea siguiente para peticiones reales al servicio
 		// $this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->codigoOtp = $infoOTP ;
+		$this->dataRequest->codigoOtp = $infoOTP;
 
-		if (isset($dataRequest->saveIP)){
-		 	$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
+		if (isset($dataRequest->saveIP)) {
+			$this->dataRequest->guardaIp = $dataRequest->saveIP === "1" ? "true" : "false";
 		}
 
 		$response = $this->sendToService('Login');
@@ -65,13 +65,11 @@ class User_Model extends BDB_Model
 				case 0:
 					log_message('DEBUG', 'NOVO [' . $this->dataRequest->userName . '] RESPONSE: Login: ' . json_encode($response->userName));
 
-					if ($this->isUserLoggedIn($dataRequest->user))
-					{
+					if ($this->isUserLoggedIn($dataRequest->user)) {
 						$this->response->code = 1;
 						$this->response->msg = lang('RESP_OWN_ANOTHER_SESSION');
 						$this->response->classIconName = 'ui-icon-alert';
-					}else
-					{
+					} else {
 
 						$logged = !(intval($response->passwordTemp) || intval($response->passwordVencido));
 
@@ -88,7 +86,7 @@ class User_Model extends BDB_Model
 							'passwordOperaciones' => $response->passwordOperaciones,
 							'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 							'afiliado' => $response->afiliado,
-							'celular' => isset($response->celular)? $response->celular: '',
+							'celular' => isset($response->celular) ? $response->celular : '',
 							'tyc' => $response->tyc
 						];
 						$this->session->set_userdata($userData);
@@ -99,20 +97,20 @@ class User_Model extends BDB_Model
 							$reasonOperation = 't';
 						} elseif (intval($response->passwordVencido)) {
 							$reasonOperation = 'v';
-						}else{
+						} else {
 
 							$target = 'vistaconsolidada';
 							$reasonOperation =  'NULL';
 							$this->response->msg = '';
 
 							$this->db->select(array('id', 'username'))
-							->where('id', $this->session->session_id)
-							->update('cpo_sessions', ['username' => $dataRequest->user]);
+								->where('id', $this->session->session_id)
+								->update('cpo_sessions', ['username' => $dataRequest->user]);
 						}
-						is_null($reasonOperation)? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
+						is_null($reasonOperation) ? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
 
 						$this->response->code = 0;
-						$this->response->data = is_null($reasonOperation)? str_replace('/' . 'bdb' . '/', '/', base_url($target)): base_url($target);
+						$this->response->data = is_null($reasonOperation) ? str_replace('/' . 'bdb' . '/', '/', base_url($target)) : base_url($target);
 					}
 					break;
 				case -1:
@@ -138,10 +136,10 @@ class User_Model extends BDB_Model
 					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
 					$this->response->classIconName = 'ui-icon-closethick';
 					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'close'
+						'btn1' => [
+							'text' => lang('GEN_BTN_ACCEPT'),
+							'link' => FALSE,
+							'action' => 'close'
 						]
 					];
 					break;
@@ -171,15 +169,15 @@ class User_Model extends BDB_Model
 					$this->response->labelInput = lang('LOGIN_IP_LABEL_INPUT');
 					$this->response->classIconName = 'ui-icon-alert';
 					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> FALSE,
-							'action'=> 'wait'
+						'btn1' => [
+							'text' => lang('GEN_BTN_ACCEPT'),
+							'link' => FALSE,
+							'action' => 'wait'
 						],
-						'btn2'=> [
-							'text'=> lang('GEN_BTN_CANCEL'),
-							'link'=> FALSE,
-							'action'=> 'close'
+						'btn2' => [
+							'text' => lang('GEN_BTN_CANCEL'),
+							'link' => FALSE,
+							'action' => 'close'
 						]
 					];
 					$this->session->set_flashdata('authToken', $bean->codigoOtp->authToken);
@@ -242,11 +240,11 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->operation = 'validar cuenta';
 		$this->dataAccessLog->userName = $dataRequest->id_ext_per . $fechaRegistro;
 
-		$this->dataRequest->idOperation = empty($dataRequest->codeOTP)? '118': '18';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->id_ext_per;
+		$this->dataRequest->idOperation = empty($dataRequest->codeOTP) ? '118' : '18';
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser . '_' . $dataRequest->id_ext_per;
 		$this->dataRequest->acceptTerms = $dataRequest->acceptTerms;
 		$this->dataRequest->telephoneNumber = $dataRequest->telephone_number;
-		$this->dataRequest->nitEmpresa = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
+		$this->dataRequest->nitEmpresa = $dataRequest->abbrTypeDocumentBussines . '_' . $dataRequest->nitBussines;
 		$this->dataRequest->tipoDocumento = $dataRequest->codeTypeDocumentUser;
 		$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 
@@ -255,7 +253,7 @@ class User_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					if (!empty($dataRequest->codeOTP)){
+					if (!empty($dataRequest->codeOTP)) {
 
 						$this->session->set_flashdata('registryUser', 'TRUE');
 						$this->session->set_flashdata('registryUserData', $response);
@@ -270,11 +268,10 @@ class User_Model extends BDB_Model
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
-							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
-							);
+							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(), 0)
+						);
 						$this->session->set_userdata($newdata);
-
-					}else{
+					} else {
 						$this->response->msg = lang('RESP_CODEOTP');
 						$this->response->validityTime = intval($response->bean) * 60;
 						$this->response->classIconName = 'ui-icon-alert';
@@ -288,10 +285,10 @@ class User_Model extends BDB_Model
 									'typeElement' => 'text',
 								]
 							],
-							'btn1'=> [
-								'text'=> lang('GEN_BTN_VERIFY'),
-								'link'=> FALSE,
-								'action'=> 'wait'
+							'btn1' => [
+								'text' => lang('GEN_BTN_VERIFY'),
+								'link' => FALSE,
+								'action' => 'wait'
 							]
 						];
 					}
@@ -305,7 +302,7 @@ class User_Model extends BDB_Model
 				case -5:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
-				break;
+					break;
 				case -420:
 					$this->response->code = 5;
 					$this->response->msg = lang('RESP_CODEOTP_INVALID');
@@ -344,7 +341,7 @@ class User_Model extends BDB_Model
 			"primerApellido"	=> $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->tipo_id_ext_per.'_'.$dataRequest->idNumber,
+			"id_ext_per"		=> $dataRequest->tipo_id_ext_per . '_' . $dataRequest->idNumber,
 			"codPais"			=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
 			"sexo"				=> $dataRequest->gender,
@@ -378,7 +375,7 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->modulo = 'registro usuario';
 		$this->dataAccessLog->function = 'registro usuario';
 		$this->dataAccessLog->operation = 'registro usuario';
-		$this->dataAccessLog->userName = $dataRequest->idNumber. $fechaRegistro;
+		$this->dataAccessLog->userName = $dataRequest->idNumber . $fechaRegistro;
 
 		$this->dataRequest->idOperation = '20';
 		$this->dataRequest->user = $user;
@@ -388,10 +385,10 @@ class User_Model extends BDB_Model
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];
 
 		$response = $this->sendToService('User');
-		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
+		log_message("info", "Request validar_cuenta:" . json_encode($this->dataRequest));
 
-		 if($this->isResponseRc !== FALSE) {
-		 	switch($this->isResponseRc) {
+		if ($this->isResponseRc !== FALSE) {
+			switch ($this->isResponseRc) {
 				case 0:
 					$this->session->sess_destroy();
 
@@ -456,10 +453,10 @@ class User_Model extends BDB_Model
 					$this->response->msg = lang('RESP_ERROR_SERVER');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->modalType = "alert-error";
-				break;
+					break;
 
 				case -271:
-					case -335:
+				case -335:
 					$this->response->msg = lang('RESP_PARTIAL_REGISTRATION');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->code = 0;
@@ -542,15 +539,15 @@ class User_Model extends BDB_Model
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
-		$ubication = $dataRequest->recovery === 'C' ? 'reset password': 'obtener login';
-		$messageNotiSystem = $dataRequest->recovery === 'C' ? 'RESP_SEND_EMAIL_PASSWORD': 'RESP_SEND_EMAIL_LOGIN';
+		$ubication = $dataRequest->recovery === 'C' ? 'reset password' : 'obtener login';
+		$messageNotiSystem = $dataRequest->recovery === 'C' ? 'RESP_SEND_EMAIL_PASSWORD' : 'RESP_SEND_EMAIL_LOGIN';
 		$this->dataAccessLog->modulo = $ubication;
 		$this->dataAccessLog->function = $ubication;
 		$this->dataAccessLog->operation = $ubication;
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument . '_' . $dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
 		$this->dataRequest->pais = 'Global';
 
@@ -561,7 +558,7 @@ class User_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->msg = str_replace( '{$maskMail$}', mask_account($dataRequest->email), lang($messageNotiSystem) );
+					$this->response->msg = str_replace('{$maskMail$}', mask_account($dataRequest->email), lang($messageNotiSystem));
 					$this->response->data = [
 						'btn1' => [
 							'text' => lang('BUTTON_CONTINUE'),
@@ -656,7 +653,7 @@ class User_Model extends BDB_Model
 							'action' => 'redirect'
 						]
 					];
-				break;
+					break;
 			}
 		}
 		return $this->response;
@@ -710,15 +707,14 @@ class User_Model extends BDB_Model
 			$this->db->where('id', $result[0]['id']);
 			$this->db->delete('cpo_sessions');
 			return TRUE;
-		}
-		else {
+		} else {
 			return FALSE;
 		}
 	}
 
 	public function pad_key($key)
 	{
-		if(strlen($key) > 8) return substr($key, 0, 8);
+		if (strlen($key) > 8) return substr($key, 0, 8);
 		return $key;
 	}
 
@@ -793,7 +789,7 @@ class User_Model extends BDB_Model
 		return $this->response;
 	}
 
-	function getListProfessions ()
+	function getListProfessions()
 	{
 
 		log_message('INFO', 'NOVO User Model: load List Professions method Initialized');
@@ -904,7 +900,7 @@ class User_Model extends BDB_Model
 			"dtfechorcrea_usu" => $dataRequest->creationDate,
 			"passwordOperaciones" => "",
 			"notEmail" => $dataRequest->notificationsEmail,
-			"notSms" => $dataRequest->notificationsSms ,
+			"notSms" => $dataRequest->notificationsSms,
 			"sexo" => $dataRequest->gender,
 			"id_ext_per" => $this->session->userdata('idUsuario'),
 			"fechaNacimiento" => $dataRequest->birthDate,
@@ -913,96 +909,96 @@ class User_Model extends BDB_Model
 			"tipo_id_ext_per"	=> substr($this->session->userdata('idUsuario'), 0, 1),
 			"descripcion_tipo_id_ext_per" => $dataRequest->idType,
 			"disponeClaveSMS" => "",
-			"aplicaPerfil"=> 'N',
+			"aplicaPerfil" => 'N',
 			"tyc" => $this->session->userdata('tyc'),
-			"rc"=> "0"
+			"rc" => "0"
 		);
 
 		$tHabitacion = array(
-				"tipo"	=> "HAB",
-				"numero"=> $dataRequest->landLine,
-				"descripcion"=> "HABITACION"
+			"tipo"	=> "HAB",
+			"numero" => $dataRequest->landLine,
+			"descripcion" => "HABITACION"
 		);
 
 		$tOtro = array(
-				"tipo"	=> $dataRequest->phoneType,
-				"numero" => $dataRequest->otherPhoneNum,
-				"descripcion" => $dataRequest->descriptionPhoneType
+			"tipo"	=> $dataRequest->phoneType,
+			"numero" => $dataRequest->otherPhoneNum,
+			"descripcion" => $dataRequest->descriptionPhoneType
 		);
 
 		$tMobile = array(
-				"tipo"	=> "CEL",
-				"numero"=> $dataRequest->mobilePhone,
-				"descripcion"=> "MOVIL",
-				"aplicaClaveSMS"=> "No Aplica mensajes SMS"
+			"tipo"	=> "CEL",
+			"numero" => $dataRequest->mobilePhone,
+			"descripcion" => "MOVIL",
+			"aplicaClaveSMS" => "No Aplica mensajes SMS"
 		);
 		$listaTelefonos = array($tHabitacion, $tOtro, $tMobile);
 
 		$afiliacion = array(
-				"notarjeta"=> "",
-				"idpersona"=> "",
-				"nombre1"=> "",
-				"nombre2"=> "",
-				"apellido1"=> "",
-				"apellido2"=> "",
-				"fechanac"=> "",
-				"sexo" => "",
-				"codarea1"=> "",
-				"telefono1"=> "",
-				"telefono2"=> "",
-				"correo"=> "",
-				"direccion"=> "",
-				"distrito"=> "",
-				"provincia"=> "",
-				"departamento" => "",
-				"edocivil"=> "",
-				"labora"=> "",
-				"centrolab"=> "",
-				"fecha_reg"=> "",
-				"estatus"=> "",
-				"notifica"=> "",
-				"fecha_proc" => "",
-				"fecha_afil" => "",
-				"tipo_id" => "",
-				"fecha_solicitud" => "",
-				"antiguedad_laboral" => "",
-				"profesion" => "",
-				"cargo" => "",
-				"ingreso_promedio_mensual" => "",
-				"cargo_publico_last2" => "",
-				"cargo_publico" => "",
-				"institucion_publica" => "",
-				"uif" => "",
-				"lugar_nacimiento" => "",
-				"nacionalidad" => "",
-				"punto_venta" => "",
-				"cod_vendedor" => "",
-				"dni_vendedor" => "",
-				"cod_ubigeo" => "",
-				"dig_verificador" => "",
-				"telefono3" => "",
-				"tipo_direccion" => "",
-				"cod_postal" => "",
-				"ruc_cto_laboral" => "",
-				"aplicaPerfil" => "",
+			"notarjeta" => "",
+			"idpersona" => "",
+			"nombre1" => "",
+			"nombre2" => "",
+			"apellido1" => "",
+			"apellido2" => "",
+			"fechanac" => "",
+			"sexo" => "",
+			"codarea1" => "",
+			"telefono1" => "",
+			"telefono2" => "",
+			"correo" => "",
+			"direccion" => "",
+			"distrito" => "",
+			"provincia" => "",
+			"departamento" => "",
+			"edocivil" => "",
+			"labora" => "",
+			"centrolab" => "",
+			"fecha_reg" => "",
+			"estatus" => "",
+			"notifica" => "",
+			"fecha_proc" => "",
+			"fecha_afil" => "",
+			"tipo_id" => "",
+			"fecha_solicitud" => "",
+			"antiguedad_laboral" => "",
+			"profesion" => "",
+			"cargo" => "",
+			"ingreso_promedio_mensual" => "",
+			"cargo_publico_last2" => "",
+			"cargo_publico" => "",
+			"institucion_publica" => "",
+			"uif" => "",
+			"lugar_nacimiento" => "",
+			"nacionalidad" => "",
+			"punto_venta" => "",
+			"cod_vendedor" => "",
+			"dni_vendedor" => "",
+			"cod_ubigeo" => "",
+			"dig_verificador" => "",
+			"telefono3" => "",
+			"tipo_direccion" => "",
+			"cod_postal" => "",
+			"ruc_cto_laboral" => "",
+			"aplicaPerfil" => "",
 		);
 
 		$direccion = array(
-			"acCodCiudad"=> $dataRequest->city,
-			"acCodEstado"=> $dataRequest->department,
-			"acCiudad"=> $dataRequest->textCity,
-			"acEstado"=> $dataRequest->textDepartment,
-			"acCodPais"=> $this->session->userdata('pais'),
-			"acTipo"=> $dataRequest->addressType,
-			"acZonaPostal"=> $dataRequest->postalCode,
-			"acDir"=> $dataRequest->address
+			"acCodCiudad" => $dataRequest->city,
+			"acCodEstado" => $dataRequest->department,
+			"acCiudad" => $dataRequest->textCity,
+			"acEstado" => $dataRequest->textDepartment,
+			"acCodPais" => $this->session->userdata('pais'),
+			"acTipo" => $dataRequest->addressType,
+			"acZonaPostal" => $dataRequest->postalCode,
+			"acDir" => $dataRequest->address
 		);
 
 		$registro = [
 			"user" => $user,
 			"listaTelefonos"	=> $listaTelefonos,
-			"registroValido"=> false,
-			"corporativa"=> false,
+			"registroValido" => false,
+			"corporativa" => false,
 			"afiliacion"		=> $afiliacion
 		];
 

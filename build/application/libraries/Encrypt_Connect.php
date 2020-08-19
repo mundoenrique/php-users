@@ -274,12 +274,12 @@ class Encrypt_Connect
 	/**
 	 * @info Genera hash Argon2 de un valor dado
 	 * @author Pedro Torres
-	 * @date Agosto 10th, 2020
+	 * @date Agosto 18th, 2020
 	 */
 	public function generateArgon2($string)
 	{
 
-		$hash =sodium_crypto_pwhash(
+		$hash = sodium_crypto_pwhash(
 			ARGON2_LENGTH,
 			$string,
 			hex2bin(ARGON2_SALT),
@@ -293,5 +293,19 @@ class Encrypt_Connect
 		$result->hexArgon2 =  bin2hex($hash);
 
 		return $result;
+	}
+
+	/**
+	 * @info Genera hexadecimal partiendo de un array Binario
+	 * @author Pedro Torres
+	 * @date Agosto 19th, 2020
+	 * @param $binaryUnpack = array bin a empaquetar y convertir a hex
+	 */
+	function binary2Hexadecimal($binaryUnpack)
+	{
+
+		$chars = array_map("chr", $binaryUnpack);
+		$binary = join($chars);
+		return bin2hex($binary);
 	}
 }
