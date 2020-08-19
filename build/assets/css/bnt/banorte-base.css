@@ -1003,6 +1003,16 @@ label {
 	border-color: var(--danger) !important;
 }
 
+.no-write {
+	background-color: transparent;
+	border: none;
+	pointer-events: none;
+}
+
+.custom-select.no-write {
+	background: none;
+}
+
 /* Buttons
 ========================================================================== */
 
