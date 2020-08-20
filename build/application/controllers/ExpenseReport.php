@@ -26,7 +26,7 @@ class ExpenseReport extends BDB_Controller {
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+		if (is_array($dataProduct) && count($dataProduct) == 1) {
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			redirect("/detallereporte");
 		}
