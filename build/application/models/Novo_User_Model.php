@@ -361,18 +361,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'validar datos de registro';
 		$this->dataAccessLog->userName = $dataRequest->docmentId.date('dmy');
 
-    /*DESCOMENTAR y PROBAR CUANDO ESTEN OK LOS SERVICIOS*/
-		//$argon2 = isset($dataRequest->secretPassword) ? $this->encrypt_connect->generateArgon2($dataRequest->secretPassword) : $this->encrypt_connect->generateArgon2('1234') ;
-
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->cuenta = $dataRequest->numberCard;
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = isset($dataRequest->secretPassword) ? $dataRequest->secretPassword : '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');
 		$this->dataRequest->pais = isset($dataRequest->client) ? $dataRequest->client : $this->country;
-		//$this->dataRequest->claveWeb = $argon2->hexArgon2;//DESCOMENTAR y PROBAR CUANDO ESTEN OK LOS SERVICIOS
-		//$this->dataRequest->hashMD5 = isset($dataRequest->secretPassword) ? md5($dataRequest->secretPassword) : md5('1234');//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
-
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
