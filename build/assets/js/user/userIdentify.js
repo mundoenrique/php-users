@@ -20,7 +20,7 @@ $(function () {
 		inputModal+= lang.USER_TERMS_CONTENT;
 
 		notiSystem(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
-		$(this).off('click')
+		$(this).prop('disabled','disabled');
 	})
 
 	$('#identityBtn').on('click', function(e) {
