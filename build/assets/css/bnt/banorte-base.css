@@ -1004,7 +1004,7 @@ label {
 }
 
 .no-write {
-	background-color: transparent;
+	background-color: transparent !important;
 	border: none;
 	pointer-events: none;
 }
