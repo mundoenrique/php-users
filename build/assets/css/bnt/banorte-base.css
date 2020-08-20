@@ -395,7 +395,8 @@ textarea.form-control {
 }
 
 .custom-select:disabled {
-  background: none;
+  background-color: var(--color-tertiary) !;
+	opacity: 1;
 }
 
 .select-box option {
@@ -697,6 +698,7 @@ label {
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
 	background-color: var(--color-primary);
 	opacity: .5;
+	pointer-events: none;
 }
 
 /* Form inline */
