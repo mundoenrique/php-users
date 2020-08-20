@@ -191,6 +191,14 @@
     </div>
     <?php endif; ?>
   </div>
+	<hr class="separador-one mt-2 mb-4">
+	<div class="form-group custom-control custom-switch my-3">
+		<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
+		<label class="custom-control-label" for="acceptTerms">
+			Acepto las condiciones de uso de este sistema.
+		</label>
+		<div class="help-block"></div>
+	</div>
   <hr class="separador-one mt-2 mb-4">
   <?php if (lang('CONF_UPDATE_USER') == 'ON'): ?>
   <div class="flex items-center justify-end">
