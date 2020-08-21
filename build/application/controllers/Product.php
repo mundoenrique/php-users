@@ -72,6 +72,9 @@ class Product extends BDB_Controller
 
 		$dataRequeried = [];
 		foreach ($response->data as $row) {
+			if (!empty($card) && $card !== $row->noTarjeta) {
+				continue;
+			}
 			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
 			$productBalance = $this->transforNumber($productBalance->data);
 			array_push($dataRequeried, [
@@ -125,6 +128,10 @@ class Product extends BDB_Controller
 		}
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
+
+			if (is_null($_POST['nroTarjeta'])){
+				redirect('/vistaconsolidada');
+			}
 
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);

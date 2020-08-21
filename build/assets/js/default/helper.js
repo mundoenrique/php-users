@@ -31,6 +31,10 @@ var decimalOptions = {
     minimumFractionDigits: 2
 };
 
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+
 $('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
 
 $('.big-modal').on('click', function (e) {
