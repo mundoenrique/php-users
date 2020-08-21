@@ -241,6 +241,7 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -259,8 +260,9 @@ class User_Model extends BDB_Model
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
-							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
-							);
+							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0),
+							'acCodCia' => $response->user->acCodCia
+						);
 						$this->session->set_userdata($newdata);
 
 					}else{
@@ -342,7 +344,8 @@ class User_Model extends BDB_Model
 			"email"				=> $dataRequest->email,
 			"password"			=> md5($dataRequest->userpwd),
 			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
-			"tyc" => $dataRequest->acceptTerms
+			"tyc" => $dataRequest->acceptTerms,
+			"acCodCia" => $dataRequest->acCodCia,
 		);
 
 		$phones = array(
@@ -375,6 +378,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->token = $this->session->userdata['token'];
 		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];
+		$this->dataRequest->acCodCia = $this->session->userdata['acCodCia'];
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));

@@ -202,12 +202,12 @@ $$.addEventListener('DOMContentLoaded', function () {
 		transactions.appendChild(loading);
 
 		callNovoCore('post', 'Product', 'loadMovements', dataRequest, function (response) {
-			if (response !== '--') {
+			if (response.data.length > 0) {
 
 				var totalExpense = 0,
 					totalIncome = 0;
 
-				response.forEach(function callback(currentValue, index, array) {
+				response.data.forEach(function callback(currentValue, index, array) {
 					var date = moment(currentValue.fecha, "DD/MM/YYYY").format('DD/MMM/YYYY').split('/'),
 						day = date[0],
 						month = date[1],

@@ -35,12 +35,27 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->lista;
+					$this->response->data = $response->lista;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->dmsg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
 				default:
-					return [];
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_getBalance_Product($dataRequest)
@@ -63,12 +78,21 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->disponible;
+					$this->response->data = $response->disponible;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = '--';
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_getTransactionHistory_Product($dataRequest)
@@ -91,12 +115,28 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response;
+					$this->response->code = 1;
+					$this->response->data = $response;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->dmsg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->dmsg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_balanceInTransit_Product($dataRequest)
@@ -158,6 +198,7 @@ class Product_Model extends BDB_Model
 		if ($dataRequest->month == 0) {
 
 			$response = $this->callWs_getTransactionHistory_Product($dataRequest);
+			$response = $response->data->movimientos;
 		} else {
 
 			$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
@@ -176,18 +217,35 @@ class Product_Model extends BDB_Model
 			$this->dataRequest->token = $this->session->userdata('token');
 
 			$response = $this->sendToService('Product');
+			$response = $response->movimientos;
 		}
 
 		log_message("info", "Request loadMovement Product:" . json_encode($this->dataRequest));
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->movimientos;
+					$this->response->code = 1;
+					$this->response->data = $response;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCT');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_dataReport_Product($dataRequest)
@@ -211,12 +269,27 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->cuentaOrigen;
+					$this->response->data = $response->cuentaOrigen;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
 				default:
-					return [];
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function getFile_Product($dataRequest)

@@ -164,7 +164,7 @@
 							} else {
 								?>
 								<div class="my-5 py-4 center">
-									<span class="h4">No se encontraron movimientos</span>
+									<span class="h4"><?= lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCTS');?></span>
 								</div>
 							<?php
 							}

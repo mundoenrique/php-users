@@ -63,14 +63,14 @@ class ExpenseReport extends BDB_Controller {
 		$dataRequest->tipoOperacion = 'RGR';
 
 		$this->load->model('Product_Model', 'loadData');
-		$data = $this->loadData->callWs_dataReport_Product($dataRequest);
+		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
 
-		if (count($data) < 1) {
-			return '--';
+		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
+			return $listProducts->msg;
 		}
 
 		$dataRequeried = [];
-		foreach($data as $row) {
+		foreach($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->nroTarjeta) {
 				continue;
 			}

@@ -35,7 +35,7 @@
 					<div class="dashboard-item mx-1"></div>
 					<div class="dashboard-item mx-1"></div>
 					<?php else: ?>
-					<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS');?></h3>
+					<h3 class="h4 regular tertiary pt-3"><?= $data;?></h3>
 					<?php endif; ?>
 				</div>
 			</div>
