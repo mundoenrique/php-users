@@ -35,6 +35,7 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+					$this->response->code = 0;
 					$this->response->data = $response->lista;
 					$this->response->msg = lang('RESP_RC_0');
 					break;
@@ -48,7 +49,7 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->dmsg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					break;
 
 				default:
@@ -78,6 +79,7 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+					$this->response->code = 0;
 					$this->response->data = $response->disponible;
 					$this->response->msg = lang('RESP_RC_0');
 					break;
@@ -123,13 +125,13 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->dmsg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					break;
 
 				case -150:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->dmsg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
 					break;
 
 				default:
@@ -269,6 +271,7 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+					$this->response->code = 0;
 					$this->response->data = $response->cuentaOrigen;
 					$this->response->msg = lang('RESP_RC_0');
 					break;

@@ -48,6 +48,7 @@ class ExpenseReport_Model extends BDB_Model
 				case -150:
 					$this->response->code = 1;
 					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCTS');
 					break;
 
 				default:

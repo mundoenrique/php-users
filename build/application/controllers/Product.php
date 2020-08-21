@@ -68,14 +68,10 @@ class Product extends BDB_Controller
 			return $response->msg;
 		}
 
-
 		$this->session->set_userdata("totalProducts", count($response->data));
 
 		$dataRequeried = [];
 		foreach ($response->data as $row) {
-			// if (count($response->data) < 1 && $response->data !== $row->noTarjeta) {
-			// 	continue;
-			// }
 			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
 			$productBalance = $this->transforNumber($productBalance->data);
 			array_push($dataRequeried, [
@@ -163,8 +159,8 @@ class Product extends BDB_Controller
 			$dataProduct['movements'] = is_array($transactionsHistory->data) && count($transactionsHistory->data) == 0 ? '--' : $transactionsHistory->data->movimientos;
 
 			$dataProduct['totalInMovements'] = ["totalIncome" => 0, "totalExpense" => 0];
-			if (is_array($dataProduct['movements']) && count($dataProduct['movements']) < 1) {
-				$dataProduct['totalInMovements'] = ["totalIncome" => $dataProduct->totalAbonos, "totalExpense" => $dataProduct->totalCargos];
+			if (is_array($dataProduct['movements']) && count($dataProduct['movements']) > 0) {
+				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);

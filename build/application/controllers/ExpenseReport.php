@@ -31,6 +31,8 @@ class ExpenseReport extends BDB_Controller {
 			redirect("/detallereporte");
 		}
 
+		$this->session->set_userdata("totalProducts", count($dataProduct));
+
 		array_push (
 			$this->includeAssets->jsFiles,
 			"$this->countryUri/expensereport/$view"
@@ -158,12 +160,14 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
 			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
-			if ($expenses->data === '--' || $expenses->code !== 0) {
-				$expenses = '';
+			if ((is_array($expenses->data) && count($expenses->data) == 0) || $expenses->code !== 0) {
+				$expenses = $expenses->msg;
 			}
 		}
+
 		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->expenses = $expenses;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
