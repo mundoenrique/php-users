@@ -16,3 +16,6 @@ $lang['CONF_OPER_KEY'] = 'OFF';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
 $lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'OFF';
+$lang['CONF_LOADING_DOC'] = 'OFF';
+$lang['CONF_LOADING_DOC_F_ID'] = 'OFF';
+$lang['CONF_LOADING_DOC_B_ID'] = 'OFF';
