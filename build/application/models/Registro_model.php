@@ -247,26 +247,45 @@ class Registro_model extends CI_Model {
 			$otroTelefono=$otroTelefono;
 		}
 
+		$password = json_decode(base64_decode($password));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
 		$passwordMobile	= strtoupper($password); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
+		// TODO: quitar logs
+		log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
+		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
+		log_message('info', 'PRUEBA PASSWORD_MOBILE en plano: ' . json_encode($passwordMobile));
+		log_message('info', 'PRUEBA PASSWORD_MOBILE en Argon2: ' . json_encode($argon2Mobile->hexArgon2));
 
 		if($aplicaPerfil == 'S') {
 
 			$user = array(
-				"userName"			=> $userName,
+				"userName"				=> $userName,
 				"primerNombre"		=> $primerNombre,
 				"segundoNombre"		=> $segundoNombre,
 				"primerApellido"	=> $primerApellido,
 				"segundoApellido"	=> $segundoApellido,
 				"fechaNacimiento"	=> $fechaNacimiento,
-				"id_ext_per"		=> $numDoc,
+				"id_ext_per"			=> $numDoc,
 				"tipo_id_ext_per"	=> $typeIdentifier,
-				"codPais"			=> $pais,
-				"sexo"				=> $sexo,
-				"notEmail"			=> "1",
-				"notSms"			=> "1",
-				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"codPais"					=> $pais,
+				"sexo"						=> $sexo,
+				"notEmail"				=> "1",
+				"notSms"					=> "1",
+				"email"						=> $correo,
+				"password"				=> md5($password),
+				"passwordOld4"		=> md5($passwordMobile),
+				// TODO: Cambiar cuando servicio funcione
+				// 'password' => $argon2->hexArgon2,
+				// "passwordOld4"		=> $argon2Mobile->hexArgon2,
+				// 'hashMD5' => md5($password),
+				// 'hashMD5Old4' => md5($passwordMobile),
 			);
 
 			$tHabitacion = array(
@@ -288,7 +307,7 @@ class Registro_model extends CI_Model {
 
 				"notarjeta"					=> $notarjeta,
 				"idpersona"					=> $numDoc,
-                "nombre1"					=> $primerNombre,
+        "nombre1"					=> $primerNombre,
 				"nombre2"					=> $segundoNombre,
 				"apellido1"					=> $primerApellido,
 				"apellido2"					=> $segundoApellido,
@@ -345,15 +364,20 @@ class Registro_model extends CI_Model {
 				"primerApellido"	=> $primerApellido,
 				"segundoApellido"	=> $segundoApellido,
 				"fechaNacimiento"	=> $fechaNacimiento,
-				"id_ext_per"		=> $numDoc,
+				"id_ext_per"			=> $numDoc,
 				"tipo_id_ext_per"	=> $typeIdentifier,
-				"codPais"			=> $pais,
-				"sexo"				=> $sexo,
-				"notEmail"			=> "1",
-				"notSms"			=> "1",
-				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"codPais"					=> $pais,
+				"sexo"						=> $sexo,
+				"notEmail"				=> "1",
+				"notSms"					=> "1",
+				"email"						=> $correo,
+				"password"				=> md5($password),
+				"passwordOld4"		=> md5($passwordMobile),
+				// TODO: Cambiar cuando servicio funcione
+				// 'password' => $argon2->hexArgon2,
+				// "passwordOld4"		=> $argon2Mobile->hexArgon2,
+				// 'hashMD5' => md5($password),
+				// 'hashMD5Old4' => md5($passwordMobile),
 			);
 
 			$tHabitacion = array(

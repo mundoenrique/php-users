@@ -239,23 +239,13 @@ function validateCaptcha(token, user, pass) {
 }
 
 function login(user = null, pass = null, dataOPT = {}) {
-	// TODO: quitar comentarios
-	// cpo_cook = decodeURIComponent(
-	// 	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	// );
 
 	dataRequest = JSON.stringify({
 		user_name: user === null ? '--' : user,
-		// TODO: quitar comentarios
-		// user_pass: pass === null ? '--' : hex_md5(pass),
 		user_pass: pass === null ? '--' : novo_cryptoPass(pass),
 		codeOTP: dataOPT.valueOPT === undefined ? '000' : dataOPT.valueOPT,
 		saveIP: (dataOPT.saveIP === undefined || dataOPT.saveIP === false) ? false: true
 	});
-	// TODO: quitar comentarios
-	// dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
-	// 	format: CryptoJSAesJson
-	// }).toString();
 
 	dataRequest = novo_cryptoPass(dataRequest, true);
 
