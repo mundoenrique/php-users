@@ -145,7 +145,6 @@ $(function(){
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			id_ext_per1	= $("#content-holder").find("#card-holder-id").val();
 			userName	= id_ext_per + '' + fecha;
-			claveWeb	= hex_md5(pin);
       country			= pais;
       noTarjerta		= cuenta;
 			anio			= new Date();

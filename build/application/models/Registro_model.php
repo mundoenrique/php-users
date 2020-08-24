@@ -118,7 +118,7 @@ class Registro_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//VALIDAR EXISTENCIA DE LA TARJETA O CUENTA EN LA BD
-	public function validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin,$claveWeb)
+	public function validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin)
 	{
 	    //PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso	= np_hoplite_log("", $userName,"personasWeb","validar cuenta","validar cuenta","validar cuenta");
@@ -126,15 +126,15 @@ class Registro_model extends CI_Model {
 		$id_ext_per	= base64_decode($id_ext_per);
 
 		$data		= json_encode(array(
-			"idOperation"		=> "18",
-			"className"			=> "com.novo.objects.TOs.CuentaTO",
-			"pais"				=> $pais,
-			"cuenta"			=> $cuenta,
-			"id_ext_per"		=> $id_ext_per,
-			"pin"				=> $pin,
-			"claveWeb"			=> $claveWeb,
+			"idOperation"			=> "18",
+			"className"				=> "com.novo.objects.TOs.CuentaTO",
+			"pais"						=> $pais,
+			"cuenta"					=> $cuenta,
+			"id_ext_per"			=> $id_ext_per,
+			"pin"							=> $pin,
+			'claveWeb' 				=> md5($pin),
 			"logAccesoObject"	=> $logAcceso,
-			"token"				=> ""
+			"token"						=> ""
 		));
 
 		log_message("info", "Request validar_cuenta: ".$data);
