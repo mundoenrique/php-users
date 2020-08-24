@@ -72,7 +72,7 @@
         autocomplete="off" onpaste="return false">
       <div class="help-block"></div>
     </div>
-    <div class="form-group col-6 col-lg-4 col-xl-3">
+    <div class="form-group col-6 col-lg-4 col-xl-3 <?= $skipLandLine ?>">
       <label for="landLine"><?= lang('USER_PHONE_LANDLINE')?></label>
       <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
       <div class="help-block"></div>
@@ -82,7 +82,7 @@
       <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" autocomplete="off">
       <div class="help-block"></div>
     </div>
-    <div class="col-6 col-lg-4 col-xl-3">
+    <div class="col-6 col-lg-4 col-xl-3 <?= $skipOtherPhone ?>">
       <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER')?></label>
       <div class="form-row">
         <div class="form-group col-6">

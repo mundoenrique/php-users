@@ -55,11 +55,12 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Co' => 4,
 	'Mx-Bn' => 15,
 ];
-//PROFILE
+//SIGNUP-PROFILE
 $lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_LANDLINE'] = 'ON';
+$lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
 $lang['CONF_CONTAC_DATA'] = 'ON';
-$lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
 $lang['CONF_OPER_KEY'] = 'ON';

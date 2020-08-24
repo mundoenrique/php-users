@@ -51,12 +51,12 @@
       <label class="block"><?= lang('USER_GENDER')?></label>
       <div class="custom-control custom-radio custom-control-inline">
         <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off"
-          <?= $gender == 'M' ? 'checked' :''; ?>>
+          <?= $gender == 'M' ? 'checked' :''; ?>  <?= $disabled; ?>>
         <label class="custom-control-label <?= $updateUser; ?>" for="genderMale"><?= lang('USER_GENDER_MALE'); ?></label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
         <input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" autocomplete="off"
-          <?= $gender == 'F' ? 'checked' :''; ?>>
+          <?= $gender == 'F' ? 'checked' :''; ?>  <?= $disabled; ?>>
         <label class="custom-control-label <?= $updateUser; ?>" for="genderFemale"><?= lang('USER_GENDER_FEMALE'); ?></label>
       </div>
       <div class="help-block"></div>
@@ -121,7 +121,7 @@
       <div class="help-block"></div>
     </div>
     <?php endif; ?>
-    <div class="form-group col-6 col-lg-4 col-xl-3">
+    <div class="form-group col-6 col-lg-4 col-xl-3 <?= $skipLandLine; ?>">
       <label for="landLine"><?= lang('USER_PHONE_LANDLINE')?></label>
       <input id="landLine" class="form-control <?= $updateUser; ?>" type="text" name="landLine" value="<?= $landLine; ?>" autocomplete="off">
       <div class="help-block"></div>
@@ -163,14 +163,14 @@
       <input id="creationDate" class="form-control" type="text" name="creationDate" value="<?= $creationDate; ?>" readonly autocomplete="off">
       <div class="help-block"></div>
     </div>
-    <div class="form-group col-6 col-lg-4 col-xl-3 <?php $skipBoth; ?>">
+    <div class="form-group col-6 col-lg-4 col-xl-3 <?= $skipBoth; ?>">
       <label class="block"><?= lang('USER_NOTIFICATIONS')?></label>
       <div class="custom-control custom-switch custom-control-inline <?= $skipEmail; ?>">
-        <input id="notEmail" class="custom-control-input" type="checkbox" name="notEmail" <?= $emailNot == '1' ? 'checked' : '' ?>>
+        <input id="notEmail" class="custom-control-input" type="checkbox" name="notEmail" <?= $emailNot == '1' ? 'checked' : '' ?> <?= $disabled; ?>>
         <label class="custom-control-label <?= $updateUser; ?>" for="notEmail"><?= lang('USER_NOT_EMAIL')?></label>
       </div>
       <div class="custom-control custom-switch custom-control-inline <?= $skipSms ?>">
-        <input id="notSms" class="custom-control-input" type="checkbox" name="notSms" <?= $smsNot == '1' ? 'checked' : '' ?>>
+        <input id="notSms" class="custom-control-input" type="checkbox" name="notSms" <?= $smsNot == '1' ? 'checked' : '' ?> <?= $disabled; ?>>
         <label class="custom-control-label <?= $updateUser; ?>" for="notSms"><?= lang('USER_NOT_SMS')?></label>
       </div>
     </div>
