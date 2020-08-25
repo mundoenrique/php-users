@@ -58,7 +58,7 @@ $config['scores_recapcha'] = [
 $config['score_recaptcha'] = [
 	'development' => 0,
 	'testing' => 0.2,
-	'production' => 0.4
+	'production' => 0.5
 ];
 
 /*

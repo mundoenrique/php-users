@@ -1,5 +1,4 @@
 'use strict'
-var reportsResults;
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();

@@ -34,9 +34,7 @@
 					</div>
 					<div class="form-group custom-control custom-switch my-3">
 						<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
-						<label class="custom-control-label" for="acceptTerms">
-							Acepto las condiciones de uso de este sistema.
-						</label>
+						<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_TERMS'); ?></label>
 						<div class="help-block"></div>
 					</div>
 					<div class="line my-2"></div>

@@ -75,6 +75,7 @@ $lang['GEN_ACCOUNT_SELECTION'] = 'Selección de cuenta';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
+$lang['GEN_PASSWORD_CONFIRM'] = 'Confirmar Contraseña';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
 $lang['GEN_DNI'] = 'Documento de identidad';

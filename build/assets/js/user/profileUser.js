@@ -2,6 +2,7 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	$('.cover-spin').hide()
 
 	$('#acceptTerms').on('click', function() {
 		data = {

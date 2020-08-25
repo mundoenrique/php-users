@@ -150,8 +150,11 @@
       </div>
     </div>
   </div>
+	<?php if(lang('CONF_LOAD_DOCS') == 'ON'):?>
+	<?php $this->load->view('user/loadDocuments_content-core') ?>
+	<?php endif; ?>
   <hr class="separador-one mt-2 mb-4">
-  <h4 class="pb-2 h4"><?= lang('USER_PROFILE_DATA_USER')?></h4>
+  <h4 class="pb-2 h4"><?= lang('USER_DATA_USER')?></h4>
   <div class="row">
     <div class="form-group col-6 col-lg-4 col-xl-3">
       <label for="nickName"><?= lang('USER_NICK_NAME')?></label>
@@ -193,10 +196,8 @@
   </div>
 	<hr class="separador-one mt-2 mb-4">
 	<div class="form-group custom-control custom-switch my-3">
-		<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
-		<label class="custom-control-label" for="acceptTerms">
-			Acepto las condiciones de uso de este sistema.
-		</label>
+		<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms" <?= $terms == '1' ? 'checked disabled' : '' ?>>
+		<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_TERMS'); ?></label>
 		<div class="help-block"></div>
 	</div>
   <hr class="separador-one mt-2 mb-4">

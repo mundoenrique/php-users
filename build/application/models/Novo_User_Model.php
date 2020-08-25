@@ -664,7 +664,7 @@ class Novo_User_Model extends NOVO_Model {
 				'tipo_id_ext_per' => $dataRequest->idTypeCode,
 				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
 				'aplicaPerfil' => $this->session->longProfile,
-				'tyc' => $this->session->terms,
+				'tyc' => '1',
 				'rc' => '0',
 				'passwordOperaciones' => '',
 				'disponeClaveSMS' => ''
@@ -688,6 +688,7 @@ class Novo_User_Model extends NOVO_Model {
 				]
 			],
 			'afiliacion' => [
+				'aplicaPerfil' => $this->session->longProfile,
 				'idpersona' => $this->session->userId,
 				'nombre1' => $dataRequest->firstName,
 				'nombre2' => $dataRequest->middleName,
@@ -723,7 +724,6 @@ class Novo_User_Model extends NOVO_Model {
 				'dig_verificador' => $dataRequest->verifyDigit ?? '',
 				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
 				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
-				'aplicaPerfil' => $this->session->longProfile ?? '',
 				'acepta_contrato' => $dataRequest->contract ?? '',
 				'acepta_proteccion' => $dataRequest->protection ?? '',
 				'codarea1' => '',
@@ -757,9 +757,18 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
+				if ($this->session->terms == '0') {
+					$this->session->set_userdata('terms', '1');
+				}
+
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->msg = lang('USER_UPDATE_SUCCESS');
+				$this->response->data['btn1']['link'] = 'perfil-usuario';
+			break;
+			case -200:
+				$this->response->title = lang('USER_PROFILE_TITLE');
+				$this->response->msg = lang('USER_UPDATE_FAIL');
 				$this->response->data['btn1']['link'] = 'perfil-usuario';
 			break;
 		}

@@ -15,6 +15,7 @@ $lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicit
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
+$lang['USER_ACCEPT_TERMS'] = 'Acepto las condiciones de uso de este sistema.';
 $lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraeña en "<strong>%s</strong>", por favor completa los siguientes datos.';
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
@@ -76,11 +77,12 @@ $lang["USER_TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
-//PROFILE
+//SIGNUP-PROFILE
 $lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
+$lang['USER_SIGNUP_MSG'] = 'Para obtener tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
 $lang['USER_PERSONAL_DATA'] = 'Datos personales';
 $lang['USER_CONTACT_DATA'] = 'Datos de contacto';
-$lang['USER_PROFILE_DATA_USER'] = 'Datos de usuario';
+$lang['USER_DATA_USER'] = 'Datos de usuario';
 $lang['USER_ID_TYPE'] = 'Tipo de identificación';
 $lang['USER_ID_NUMBER'] = 'Número de identificación';
 $lang['USER_FIRSTNAME'] = 'Primer nombre';
@@ -122,4 +124,17 @@ $lang['USER_NOT_SMS'] = 'SMS';
 $lang['USER_PASSWORD_CHANGE'] = 'Cambiar contraseña';
 $lang['USER_OPER_PASS_CHANGE'] = 'Cambiar clave de operaciones';
 $lang['USER_SMS_PASSS_CHANGE'] = 'Cambiar clave de SMS';
-$lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente';
+$lang['USER_LOAD_DOCS'] = 'Carga de documentos de identidad';
+$lang['USER_ADD_PHOTO'] = 'Agregar foto';
+$lang['USER_ADD_F_DOC'] = 'Agregar anverso del documento de identidad';
+$lang['USER_ADD_B_DOC'] = 'Agregar reverso del documento de identidad';
+$lang['USER_ADD_F_PASSPORT'] = 'Agregar anverso del pasaporte';
+$lang['USER_ADD_B_PASSPORT'] = 'Agregar reverso del pasaporte';
+$lang['USER_LOAD_DOCS_TITLE'] = 'Requisitos para la carga de imágenes:';
+$lang['USER_LOAD_DOCS_INFO1'] = 'Es posible que se le soliciten documentos adicionales.';
+$lang['USER_LOAD_DOCS_INFO2'] = 'Sólo se permiten archivos en formato PNG o JPEG.';
+$lang['USER_LOAD_DOCS_INFO3'] = 'Las imágenes deben ser en color, claras y legibles.';
+$lang['USER_LOAD_DOCS_INFO4'] = 'El tamaño máximo por archivo debe ser de 6Mb.';
+$lang['USER_LOAD_DOCS_INFO5'] = 'Su documento de Identidad debe encontrarse en vigencia.';
+$lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
+$lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';

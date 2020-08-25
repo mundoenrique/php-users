@@ -112,6 +112,13 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
+			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+
+			if ($this->session->has_userdata('logged') && $accept && $module) {
+				redirect(base_url('perfil-usuario'), 'location', 301);
+			}
+
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
 
