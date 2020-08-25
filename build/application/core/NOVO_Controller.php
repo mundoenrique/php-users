@@ -112,6 +112,13 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
+			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+
+			if ($this->session->has_userdata('logged') && $accept && $module) {
+				redirect(base_url('perfil-usuario'), 'location', 301);
+			}
+
 			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
 			$valid = TRUE;
 
@@ -172,7 +179,7 @@ class NOVO_Controller extends CI_Controller {
 			if($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
-					"options"
+					"sessionControl"
 				);
 			}
 
@@ -200,38 +207,15 @@ class NOVO_Controller extends CI_Controller {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 16th, 2020
 	 */
-	protected function responseAttr($responseView = 0, $active = TRUE)
+	protected function responseAttr($responseView = 0)
 	{
 		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
-		$download = FALSE;
-		/* $this->render->enterpriseList = $this->session->enterpriseSelect->list;
-		$this->render->enterpriseData =  $this->session->enterpriseInf; */
 
 		if(is_object($responseView)) {
 			$this->render->code = $responseView->code;
-			$download = !isset($responseView->download) ? $download : $responseView->download;
 		}
-
-		if($this->session->has_userdata('productInf')) {
-			$this->render->prefix = $this->session->productInf->productPrefix;
-		}
-
-		/* if(($this->render->code == 0  && $active) || $download) {
-
-			if(count($this->render->enterpriseList) > 1 || $this->products) {
-				array_push(
-					$this->includeAssets->jsFiles,
-					"business/widget-enterprise"
-				);
-
-				$this->render->widget =  new stdClass();
-				$this->render->widget->widgetBtnTitle = lang('GEN_MUST_SELECT_ENTERPRISE');
-				$this->render->widget->countProducts = $this->products;
-				$this->render->widget->actionForm = 'detalle-producto';
-			}
-		} */
 
 		if($this->render->code > 2) {
 			$this->render->title = $responseView->title;

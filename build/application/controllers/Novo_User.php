@@ -111,7 +111,7 @@ class Novo_User extends NOVO_Controller {
 		));
 		$dataUser = $dataUser->dataUser;
 
-		foreach ($dataUser->user AS $index => $render) {
+		foreach ($dataUser->signUpData AS $index => $render) {
 			$this->render->$index = $render;
 		}
 
@@ -121,6 +121,9 @@ class Novo_User extends NOVO_Controller {
 
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
+		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
+		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -202,6 +205,9 @@ class Novo_User extends NOVO_Controller {
 		$view = 'profileUser';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"user/profileUser"
 		);
 
@@ -218,6 +224,17 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
+		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
+		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
+		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->skipProfession = lang('CONF_PROFESSION') == 'OFF' ? 'hide' : '';
+		$this->render->skipContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'hide' : '';
+		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
+		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->terms = $this->session->terms;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}

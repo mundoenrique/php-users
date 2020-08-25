@@ -2,6 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
+//SCORE RECAPTCHA
+$lang['CONF_SCORE_CAPTCHA'] = [
+	'development' => 0,
+	'testing' => 0,
+	'production' => 0
+];
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
@@ -50,16 +56,24 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Usd' => 1,
 	'Ve' => 3,
 	'Ec-bp' => 3,
+	'Ec-pb' => 3,
+	'Ec-bg' => 3,
 	'Co' => 4,
 	'Mx-Bn' => 15,
-	'Ec-pb' => 16,
 ];
-//PROFILE
-$lang['CONF_PROFESSION'] = 'OFF';
-$lang['CONF_CONTAC'] = 'ON';
-$lang['CONF_SELECT_OTHER_PHONE'] = 'ON';
-$lang['CONF_SELECT_NOTIFICATIONS_EMAIL'] = 'ON';
-$lang['CONF_SELECT_NOTIFICATIONS_SMS'] = 'OFF';
-$lang['CONF_OPER_KEY'] = 'OFF';
-$lang['CONF_SMS_KEY'] = 'OFF';
+//SIGNUP-PROFILE
+$lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_LANDLINE'] = 'ON';
+$lang['CONF_OTHER_PHONE'] = 'ON';
+$lang['CONF_PROFESSION'] = 'ON';
+$lang['CONF_CONTAC_DATA'] = 'ON';
+$lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
+$lang['CONF_CHECK_NOTI_SMS'] = 'ON';
+$lang['CONF_OPER_KEY'] = 'ON';
 $lang['CONF_UPDATE_USER'] = 'ON';
+$lang['CONF_LOAD_DOCS'] = 'OFF';
+$lang['CONF_LOAD_SELFIE'] = 'OFF';
+$lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
+$lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
+$lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
+$lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
