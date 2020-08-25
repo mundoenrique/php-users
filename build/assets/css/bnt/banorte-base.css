@@ -395,7 +395,8 @@ textarea.form-control {
 }
 
 .custom-select:disabled {
-  background: none;
+  background-color: var(--color-tertiary) !;
+	opacity: 1;
 }
 
 .select-box option {
@@ -697,6 +698,7 @@ label {
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
 	background-color: var(--color-primary);
 	opacity: .5;
+	pointer-events: none;
 }
 
 /* Form inline */
@@ -1001,6 +1003,16 @@ label {
 
 .form-control.has-error {
 	border-color: var(--danger) !important;
+}
+
+.no-write {
+	background-color: transparent !important;
+	border: none;
+	pointer-events: none;
+}
+
+.custom-select.no-write {
+	background: none;
 }
 
 /* Buttons
@@ -3935,6 +3947,41 @@ a.ui-button:active,
 	border: 2px solid var(--color-eighth);
 	left: 4px;
 	border-radius: 5px;
+}
+
+.drop-zone-selfie {
+  height: 220px !important;
+}
+
+.drop-zone-selfie img {
+	width: 10rem;
+}
+
+.drop-zone {
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	display: flex;
+}
+
+.drop-zone-over {
+  border-style: solid;
+}
+
+.drop-zone-input {
+  display: none;
+}
+
+.drop-zone-thumb {
+  width: 95%;
+  height: 95%;
+  border-radius: 10px;
+  overflow: hidden;
+	background-size: cover;
+	background-position: center;
+  position: relative;
 }
 
 .detail-lot tbody tr:first-child td {

@@ -271,7 +271,7 @@ function insertFormInput(disabled, form) {
 		notDisabled = false;
 	}
 
-	$('form button, form select, form input:not([type=hidden]), button')
+	$('form button, form select, form textarea, form input:not([type=hidden]), button')
 		.not(notDisabled)
 		.not('.btn-modal')
 		.prop('disabled', disabled);
@@ -299,7 +299,7 @@ function getPropertyOfElement(property, element) {
  * @date November 18th, 2019
  */
 function formInputTrim(form) {
-	form.find('input, select').each(function () {
+	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
 		if(thisValInput == null) {
 			return;
@@ -334,7 +334,7 @@ function cryptoPass(jsonObject, req) {
  */
 function getDataForm(form) {
 	var dataForm = {};
-	form.find('input, select').each(function (index, element) {
+	form.find('input, select, textarea').each(function (index, element) {
 		dataForm[$(element).attr('id')] = $(element).val().trim()
 	})
 
@@ -345,11 +345,11 @@ function downLoadfiles (data) {
 	var File = new Int8Array(data.file);
 	var blob = new Blob([File], {type: "application/"+data.ext});
 	var url = window.URL.createObjectURL(blob);
-	$('#download-file').attr('href', url)
-	$('#download-file').attr('download', data.name)
-	document.getElementById('download-file').click()
+	$('#download-file').attr('href', url);
+	$('#download-file').attr('download', data.name);
+	document.getElementById('download-file').click();
 	window.URL.revokeObjectURL(url);
-	$('#download-file').attr('href', lang.GEN_NO_LINK)
-	$('#download-file').attr('download', '')
-	$('.cover-spin').hide()
+	$('#download-file').attr('href', lang.GEN_NO_LINK);
+	$('#download-file').attr('download', '');
+	$('.cover-spin').hide();
 }
