@@ -109,6 +109,7 @@ if(!function_exists('connectionAPI'))
 	*/
 	function connectionAPI($objectAPI)
 	{
+		$response = new stdClass();
 		$urlAPI = $objectAPI->urlAPI;
 		$headerAPI = $objectAPI->headerAPI;
 		$bodyAPI = $objectAPI->bodyAPI;
@@ -151,7 +152,6 @@ if(!function_exists('connectionAPI'))
 			$responseAPI = curl_exec($ch);
 			$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 			curl_close($ch);
-			$response = new stdClass();
 			log_message("DEBUG", 'NOVO RESPONSE API HTTPCODE '.$httpCode);
 			$response->httpCode = $httpCode;
 			if($responseAPI === FALSE) {

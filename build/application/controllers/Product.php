@@ -138,7 +138,7 @@ class Product extends BDB_Controller
 		}
 
 
-		if (!is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
+		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
 			redirect('/atencioncliente');
 		}

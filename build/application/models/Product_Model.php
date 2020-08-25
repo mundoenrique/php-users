@@ -165,7 +165,7 @@ class Product_Model extends BDB_Model
 		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . " REQUEST WSinTransit objectAPI: " . json_encode($objectAPI));
 		$response = connectionAPI($objectAPI);
 
-		$httpCode = $response->httpCode;
+		$httpCode = $response->httpCode?: FALSE;
 		$resAPI = $response->resAPI;
 
 		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . ' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
