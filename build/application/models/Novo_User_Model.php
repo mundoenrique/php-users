@@ -843,6 +843,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= $this->config->item('score_recaptcha')[ENVIRONMENT] ? 9999 : 0;
+		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 	}
 }
