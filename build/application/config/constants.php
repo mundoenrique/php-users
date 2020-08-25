@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | of this setting
 |
 */
-defined('SHOW_DEBUG_BACKTRACE') or define('SHOW_DEBUG_BACKTRACE', TRUE);
+defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +26,10 @@ defined('SHOW_DEBUG_BACKTRACE') or define('SHOW_DEBUG_BACKTRACE', TRUE);
 | always be used to set the mode correctly.
 |
 */
-defined('FILE_READ_MODE')  or define('FILE_READ_MODE', 0644);
-defined('FILE_WRITE_MODE') or define('FILE_WRITE_MODE', 0666);
-defined('DIR_READ_MODE')   or define('DIR_READ_MODE', 0755);
-defined('DIR_WRITE_MODE')  or define('DIR_WRITE_MODE', 0755);
+defined('FILE_READ_MODE')  OR define('FILE_READ_MODE', 0644);
+defined('FILE_WRITE_MODE') OR define('FILE_WRITE_MODE', 0666);
+defined('DIR_READ_MODE')   OR define('DIR_READ_MODE', 0755);
+defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 
 /*
 |--------------------------------------------------------------------------
@@ -39,14 +39,14 @@ defined('DIR_WRITE_MODE')  or define('DIR_WRITE_MODE', 0755);
 | These modes are used when working with fopen()/popen()
 |
 */
-defined('FOPEN_READ')                           or define('FOPEN_READ', 'rb');
-defined('FOPEN_READ_WRITE')                     or define('FOPEN_READ_WRITE', 'r+b');
-defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       or define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
-defined('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE')  or define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
-defined('FOPEN_WRITE_CREATE')                   or define('FOPEN_WRITE_CREATE', 'ab');
-defined('FOPEN_READ_WRITE_CREATE')              or define('FOPEN_READ_WRITE_CREATE', 'a+b');
-defined('FOPEN_WRITE_CREATE_STRICT')            or define('FOPEN_WRITE_CREATE_STRICT', 'xb');
-defined('FOPEN_READ_WRITE_CREATE_STRICT')       or define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
+defined('FOPEN_READ')                           OR define('FOPEN_READ', 'rb');
+defined('FOPEN_READ_WRITE')                     OR define('FOPEN_READ_WRITE', 'r+b');
+defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       OR define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
+defined('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE')  OR define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
+defined('FOPEN_WRITE_CREATE')                   OR define('FOPEN_WRITE_CREATE', 'ab');
+defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREATE', 'a+b');
+defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
+defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 /*
 |--------------------------------------------------------------------------
@@ -73,16 +73,16 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       or define('FOPEN_READ_WRITE_CREA
 |       http://tldp.org/LDP/abs/html/exitcodes.html
 |
 */
-defined('EXIT_SUCCESS')        or define('EXIT_SUCCESS', 0); // no errors
-defined('EXIT_ERROR')          or define('EXIT_ERROR', 1); // generic error
-defined('EXIT_CONFIG')         or define('EXIT_CONFIG', 3); // configuration error
-defined('EXIT_UNKNOWN_FILE')   or define('EXIT_UNKNOWN_FILE', 4); // file not found
-defined('EXIT_UNKNOWN_CLASS')  or define('EXIT_UNKNOWN_CLASS', 5); // unknown class
-defined('EXIT_UNKNOWN_METHOD') or define('EXIT_UNKNOWN_METHOD', 6); // unknown class member
-defined('EXIT_USER_INPUT')     or define('EXIT_USER_INPUT', 7); // invalid user input
-defined('EXIT_DATABASE')       or define('EXIT_DATABASE', 8); // database error
-defined('EXIT__AUTO_MIN')      or define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
-defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+defined('EXIT_SUCCESS')        OR define('EXIT_SUCCESS', 0); // no errors
+defined('EXIT_ERROR')          OR define('EXIT_ERROR', 1); // generic error
+defined('EXIT_CONFIG')         OR define('EXIT_CONFIG', 3); // configuration error
+defined('EXIT_UNKNOWN_FILE')   OR define('EXIT_UNKNOWN_FILE', 4); // file not found
+defined('EXIT_UNKNOWN_CLASS')  OR define('EXIT_UNKNOWN_CLASS', 5); // unknown class
+defined('EXIT_UNKNOWN_METHOD') OR define('EXIT_UNKNOWN_METHOD', 6); // unknown class member
+defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user input
+defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
+defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
+defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 /*
 |--------------------------------------------------------------------------
@@ -103,93 +103,109 @@ define('KEY_AES256', $_SERVER['KEY_AES256']);
 define('IV_AES256', $_SERVER['IV_AES256']);
 
 define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ?
-	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt');
+	$_SERVER['ENCRYPTION_KEY'] : 'n0v0p4ym3nt'
+);
 define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER']) ?
-	$_SERVER['SESS_DRIVER'] : 'files');
+	$_SERVER['SESS_DRIVER'] : 'files'
+);
 define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
-	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session');
+	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
+);
 define('SESS_EXPIRATION', isset($_SERVER['SESS_EXPIRATION'])
-	&& filter_var($_SERVER['SESS_EXPIRATION'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['SESS_EXPIRATION']) : 0);
+&& filter_var($_SERVER['SESS_EXPIRATION'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['SESS_EXPIRATION']) : 0
+);
 define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
-	$_SERVER['SESS_SAVE_PATH'] : NULL);
+	$_SERVER['SESS_SAVE_PATH'] : NULL
+);
 define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
-	&& filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['SESS_MATCH_IP']) : FALSE);
+&& filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['SESS_MATCH_IP']) : FALSE
+);
 define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
-	&& filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 10);
+&& filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 10
+);
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
-	$_SERVER['COOKIE_PREFIX'] : 'cpo_');
+	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
+);
 define('COOKIE_DOMAIN', isset($_SERVER['COOKIE_DOMAIN']) ?
-	$_SERVER['COOKIE_DOMAIN'] : '');
+	$_SERVER['COOKIE_DOMAIN'] : ''
+);
 define('COOKIE_PATH', isset($_SERVER['COOKIE_PATH']) ?
-	$_SERVER['COOKIE_PATH'] : '/');
+	$_SERVER['COOKIE_PATH'] : '/'
+);
 define('COOKIE_SECURE', isset($_SERVER['COOKIE_SECURE'])
-	&& filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['COOKIE_SECURE']) : FALSE);
+&& filter_var($_SERVER['COOKIE_SECURE'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['COOKIE_SECURE']) : FALSE
+);
 define('URL_API', isset($_SERVER['URL_API']) ?
 	$_SERVER['URL_API'] : '');
 define('CLIENT_ID', isset($_SERVER['CLIENT_ID']) ?
 	$_SERVER['CLIENT_ID'] : '');
 define('CLIENT_SECRET', isset($_SERVER['CLIENT_SECRET']) ?
 	$_SERVER['CLIENT_SECRET'] : '');
-
 define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
-	$_SERVER['CYPHER_BASE'] : '');
-
+	$_SERVER['CYPHER_BASE'] : ''
+);
 define('OAUTH_URL', isset($_SERVER['OAUTH_URL']) ?
-	$_SERVER['OAUTH_URL'] : '');
-
+	$_SERVER['OAUTH_URL'] : ''
+);
 define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
-	$_SERVER['PROXY_IPS'] : '');
-
+	$_SERVER['PROXY_IPS'] : ''
+);
 define('DB_HOSTNAME', isset($_SERVER['DB_HOSTNAME']) ?
-	$_SERVER['DB_HOSTNAME'] : 'localhost');
+	$_SERVER['DB_HOSTNAME'] : 'localhost'
+);
 define('DB_PORT', isset($_SERVER['DB_PORT'])
-	&& filter_var($_SERVER['DB_PORT'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['DB_PORT']) : NULL);
+&& filter_var($_SERVER['DB_PORT'], FILTER_VALIDATE_INT) ?
+	intval($_SERVER['DB_PORT']) : NULL
+);
 define('DB_USERNAME', isset($_SERVER['DB_USERNAME']) ?
-	$_SERVER['DB_USERNAME'] : '');
+	$_SERVER['DB_USERNAME'] : ''
+);
 define('DB_PASSWORD', isset($_SERVER['DB_PASSWORD']) ?
-	$_SERVER['DB_PASSWORD'] : '');
+	$_SERVER['DB_PASSWORD'] : ''
+);
 define('DB_NAME', isset($_SERVER['DB_NAME']) ?
-	$_SERVER['DB_NAME'] : '');
+	$_SERVER['DB_NAME'] : ''
+);
 define('DB_DRIVER', isset($_SERVER['DB_DRIVER']) ?
-	$_SERVER['DB_DRIVER'] : 'mysqli');
+	$_SERVER['DB_DRIVER'] : 'mysqli'
+);
 define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
-	$_SERVER['DB_CHARSET'] : 'utf8');
+	$_SERVER['DB_CHARSET'] : 'utf8'
+);
 define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
-	$_SERVER['DB_COLLATION'] : 'utf8_general_ci');
-
+	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
+);
 $arrayUri = explode('/', $_SERVER['REQUEST_URI']);
 $lang = end($arrayUri);
 define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
 unset($arrayUri, $lang);
 
 define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
-	&& filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE);
+&& filter_var($_SERVER['ACTIVE_RECAPTCHA'], FILTER_VALIDATE_BOOLEAN) ?
+	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
+);
 define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-define('RESPONSE_SERV_COMPLETE', isset($_SERVER['RESPONSE_SERV_COMPLETE'])
-	&& filter_var($_SERVER['RESPONSE_SERV_COMPLETE'], FILTER_VALIDATE_BOOLEAN) ?
-	boolval($_SERVER['RESPONSE_SERV_COMPLETE']) : FALSE);
-define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
-	$_SERVER['DOWNLOAD_ROUTE'] : '');
-define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
-	$_SERVER['ACCESS_URL'] : '');
-$uriSegments  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
-unset($uriSegments);
 
+define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
+	$_SERVER['DOWNLOAD_ROUTE'] : ''
+);
+define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
+	$_SERVER['ACCESS_URL'] : ''
+);
+$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
+define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_'
+);
+unset($uriSegments);
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
 	$typeIP = 'public';
 }
-
-$ipReal = $typeIP == 'private' ? $_SERVER['REMOTE_ADDR'] : '';
+$ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
 define('IP_PROXI', $ipReal);
 unset($ipReal, $typeIP);
 
