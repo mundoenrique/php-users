@@ -236,41 +236,39 @@ class Encrypt_Connect
 		$msg = $logMessage->msg;
 		$response = isset($logMessage->response) ? $logMessage->response : '';
 		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO [' . $userName . '] RESPONSE ' . $model . '= rc: ' . $rc . ', msg: ' . $msg . ', country: ' . $country);
 
-		if (RESPONSE_SERV_COMPLETE) {
-			$wirteLog = new stdClass();
-			$isBean = '';
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
 
-			if (isset($response->bean) && $response->bean != 'null') {
-				$isBean = 'IN BEAN ';
-				$response->bean = json_decode($response->bean);
-			}
+		$wirteLog = new stdClass();
+		$isBean = '';
 
-			if (is_object($response)) {
-				foreach ($response as $pos => $responseAttr) {
-					if ($pos == 'bean' || $pos == 'archivo') {
-						if (isset($responseAttr->archivo) || isset($response->archivo)) {
-							$wirteLog->archivo = 'OK';
-							$wirteLog->nombre = isset($responseAttr->nombre) ? $responseAttr->nombre : $response->nombre;
-							$wirteLog->formatoArchivo = isset($responseAttr->formatoArchivo) ? $responseAttr->formatoArchivo : $response->formatoArchivo;
-							$file = isset($responseAttr->archivo) ? $responseAttr->archivo : $response->archivo;
-							if (!is_array($file)) {
-								$wirteLog->archivo = FALSE;
-							}
-							continue;
-						}
-					}
-					$wirteLog->$pos = $responseAttr;
-				}
-			}
-
-			log_message('DEBUG', 'NOVO [' . $userName . '] COMPLETE RESPONSE ' . $isBean . $model . ': ' . json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
-
-			unset($wirteLog);
+		if (isset($response->bean) && $response->bean != 'null') {
+			$isBean = 'IN BEAN ';
+			$response->bean = gettype($response->bean) != 'object' ? json_decode($response->bean) : $response->bean;
 		}
-	}
 
+		if(is_object($response)) {
+			foreach ($response AS $pos => $responseAttr) {
+				if($pos == 'bean' || $pos == 'archivo') {
+					if (isset($responseAttr->archivo) || isset($response->archivo)) {
+						$wirteLog->archivo = 'OK';
+						$wirteLog->nombre = isset($responseAttr->nombre) ? $responseAttr->nombre : $response->nombre;
+						$wirteLog->formatoArchivo = isset($responseAttr->formatoArchivo) ? $responseAttr->formatoArchivo : $response->formatoArchivo;
+						$file = isset($responseAttr->archivo) ? $responseAttr->archivo : $response->archivo;
+						if(!is_array($file)) {
+							$wirteLog->archivo = FALSE;
+						}
+						continue;
+					}
+				}
+				$wirteLog->$pos = $responseAttr;
+			}
+		}
+
+		log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
+
+		unset($wirteLog);
+	}
 	/**
 	 * @info Genera hash Argon2 de un valor dado
 	 * @author Pedro Torres

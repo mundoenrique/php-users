@@ -53,10 +53,13 @@ class User_Model extends BDB_Model
 		// Descomentar la linea siguiente para peticiones reales al servicio
 		// $this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
-		$this->dataRequest->codigoOtp = $infoOTP;
 
-		if (isset($dataRequest->saveIP)) {
-			$this->dataRequest->guardaIp = $dataRequest->saveIP === "1" ? "true" : "false";
+		if (IP_VERIFY == 'ON') {
+			$this->dataRequest->codigoOtp = $infoOTP ;
+
+			if (isset($dataRequest->saveIP)){
+				$this->dataRequest->guardaIp = $dataRequest->saveIP === "1"? "true": "false";
+			}
 		}
 
 		$response = $this->sendToService('Login');

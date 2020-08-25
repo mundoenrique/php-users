@@ -88,6 +88,7 @@ $(function () {
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);
 		$('.nav-config-box').removeClass('no-events');
+		$('.nav-config-box > li').removeClass('active');
 		$('#cardNumber').val(cardNumber);
 		$('#cardNumberMask').val(cardNumberMask);
 		$('#expireDate').val(expireDate);
@@ -176,7 +177,7 @@ $(function () {
 
 				$.each(response.data.shops, function(key, value) {
 					var markCheck = value == '1' ? true : false;
-					$('#' + key).prop('checked', markCheck)
+					$('#' + key).prop('checked', markCheck);
 				})
 
 				$('.hide-out').removeClass('hide');
@@ -188,10 +189,14 @@ $(function () {
 				})
 
 				$.each(response.data.limits, function(key, value) {
-					$('#' + key).val(value)
+					$('#' + key).val(value);
 				})
 
 				$('.hide-out').removeClass('hide');
+			}
+
+			if ((data.action == 'transactionalLimits' || data.action == 'twirlsCommercial') && response.code != 0) {
+				$('.nav-item-config').removeClass('active');
 			}
 
 			if (thisAction.hasClass('btn')) {

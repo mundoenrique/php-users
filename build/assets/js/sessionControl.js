@@ -19,7 +19,7 @@ function sessionExpire() {
 function finishSession() {
 	var btnKeepSession = $('#accept');
 
-	if ($('#system-info').parents('.ui-dialog:visible').length) {
+	if ($('#system-info').parents('.ui-dialog').length) {
 		$('#system-info').dialog('destroy');
 	}
 
@@ -51,7 +51,5 @@ function finishSession() {
 			.text(lang.GEN_BTN_ACCEPT)
 			.removeClass('btn-large-xl');
 		})
-
-
 	})
 }

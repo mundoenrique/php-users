@@ -128,6 +128,7 @@ class Verify_Access {
 				case 'keepSession':
 				case 'userCardsList':
 				case 'profileUser':
+				case 'updateProfile':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
 				case 'getBalance':

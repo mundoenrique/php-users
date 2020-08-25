@@ -31,7 +31,7 @@ class Users_model extends CI_Model
 		log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
 
-		$data = json_encode(array(
+		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $username,
@@ -40,10 +40,15 @@ class Users_model extends CI_Model
 			// 'password' => $argon2->hexArgon2,
 			// 'hashMD5' => md5($password),
 			'logAccesoObject' => $logAcceso,
-			'codigoOtp' => $infoOTP,
-			'token' => '',
-			'guardaIp' => $saveIP
-		));
+			'token' => ''
+		);
+
+		if (IP_VERIFY == 'ON') {
+			$data['codigoOtp'] = $infoOTP;
+			$data['guardaIp'] = $saveIP;
+		}
+
+		$data = json_encode($data);
 
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];

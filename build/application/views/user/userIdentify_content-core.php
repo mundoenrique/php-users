@@ -26,17 +26,15 @@
 						</div>
 						<?php if(lang('CONF_SECRET_KEY') == 'ON'): ?>
 						<div class="form-group col-lg-4">
-							<label for="secretPassword" class="regular">Clave secreta (PIN)</label>
-							<input id="secretPassword" class="form-control" type="password" name="secretPassword" maxlength="15">
+							<label for="cardPIN" class="regular">Clave secreta (PIN)</label>
+							<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="15">
 							<div class="help-block"></div>
 						</div>
 						<?php endif; ?>
 					</div>
 					<div class="form-group custom-control custom-switch my-3">
 						<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
-						<label class="custom-control-label" for="acceptTerms">
-							Acepto las condiciones de uso de este sistema.
-						</label>
+						<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_TERMS'); ?></label>
 						<div class="help-block"></div>
 					</div>
 					<div class="line my-2"></div>

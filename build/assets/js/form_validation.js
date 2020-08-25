@@ -8,6 +8,7 @@ function validateForms(form) {
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ]{3,70}$/i;
+	var alphaName = /^[a-zñáéíóú ]{1,70}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -41,19 +42,19 @@ function validateForms(form) {
 			"recoveryAccess": 	{required: true},
 			"email": 	{required: true, pattern: emailValid},
 			"idNumber": 	{required: true, pattern: alphanum},
-			"current-pass": {required: true},
-			"new-pass": {required: true, differs: "#currentPass", validatePass: true},
-			"confirm-pass": {required: true, equalTo: "#newPass"},
-			"confirm-pass": {required: true, equalTo: "#newPass"},
+			"currentPass": {required: true},
+			"newPass": {required: true, differs: "#currentPass", validatePass: true},
+			"confirmPass": {required: true, equalTo: "#newPass"},
+			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
 			"numberCard": {required: true, pattern: numeric, maxlength: 16},
 			"docmentId": {required: true, pattern: alphanum},
-			"secretPassword": {required: true, pattern: numeric},
+			"cardPIN": {required: true, pattern: numeric},
 			"acceptTerms": {required: true},
 			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
-			"middleName": {pattern: longPhrase},
-			"secondSurname": {pattern: longPhrase},
+			"middleName": {pattern: alphaName},
+			"surName": {pattern: alphaName},
 			"birthDate": {required: true, pattern: date.dmy},
 			"gender": {required: true},
 			"confirmEmail": {required: true, equalTo: "#email"},
@@ -77,35 +78,35 @@ function validateForms(form) {
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
-			"current-pass": lang.VALIDATE_CURRENT_PASS,
-			"new-pass": {
+			"currentPass": lang.VALIDATE_CURRENT_PASS,
+			"newPass": {
 				required: lang.VALIDATE_NEW_PASS,
 				differs: lang.VALIDATE_DIFFERS_PASS,
 				validatePass: lang.VALIDATE_REQUIREMENTS_PASS
 			},
-			"confirm-pass": {
+			"confirmPass": {
 				required: lang.VALIDATE_CONFIRM_PASS,
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
-			"filterYear": 'Selecciona un año',
-			"numberCard": 'Indica el número de tu tarjeta',
-			"docmentId": 'Indica el número de tu CURP',
-			"secretPassword": 'Indica el PIN de tu tarjeta',
-			"acceptTerms": 'Debes aceptar los términos de uso',
+			"filterYear": lang.VALIDATE_FILTER_YEAR,
+			"numberCard": lang.VALIDATE_NUMBER_CARD,
+			"docmentId": lang.VALIDATE_DOCUMENT_ID,
+			"cardPIN": lang.VALIDATE_CARD_PIN,
+			"acceptTerms": lang.VALIDATE_ACCEPT_TERMS,
 			"nickName": {
 				required: lang.VALIDATE_NICK_REQ,
 				pattern: lang.VALIDATE_NICK_PATT,
 				differs: lang.VALIDATE_NICK_DIFFER,
-				dbAvailable: 'Usuario no disponible, intenta con otro',
+				dbAvailable: lang.VALIDATE_AVAILABLE_NICKNAME,
 			},
-			"middleName": 'Indica tu segundo nombre',
-			"secondSurname": 'Indica tu segundo apellido',
-			"birthDate": 'Indica tu fecha de cumpleaños',
-			"gender": 'indica tu genero',
-			"confirmEmail": 'debe ser igual a tu correo',
-			"landLine": 'Indica un telefono válido min 7 max 15',
-			"mobilePhone": 'Indica un movil válido min 7 max 15',
-			"otherPhoneNum": 'Indica un telefono válido min 7 max 15',
+			"middleName": lang.VALIDATE_MIDDLE_NAME,
+			"surName": lang.VALIDATE_SUR_NAME,
+			"birthDate": lang.VALIDATE_BIRTHDATE,
+			"gender": lang.VALIDATE_GENDER,
+			"confirmEmail": lang.VALIDATE_CONFIRM_EMAIL,
+			"landLine": lang.VALIDATE_PHONE,
+			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
+			"otherPhoneNum": lang.VALIDATE_PHONE,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
