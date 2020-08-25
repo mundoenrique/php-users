@@ -908,7 +908,8 @@ class User_Model extends BDB_Model
 			"disponeClaveSMS" => "",
 			"aplicaPerfil"=> 'N',
 			"tyc" => $this->session->userdata('tyc'),
-			"rc"=> "0"
+			"rc"=> "0",
+			'acCodCia' => $this->session->userdata('codCompania'),
 		);
 
 		$tHabitacion = array(
@@ -1008,6 +1009,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		$this->dataRequest->rc = 0;
 		$this->dataRequest->registro = $registro;
