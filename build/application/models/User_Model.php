@@ -548,6 +548,10 @@ class User_Model extends BDB_Model
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
 		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
+		// TODO
+		// Datos cableados para integrar con servicios
+		// $this->dataRequest->id_ext_emp = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
+		$this->dataRequest->id_ext_emp = 'N_123456813';
 		$this->dataRequest->pais = 'Global';
 
 		$response = $this->sendToService('User');
@@ -839,6 +843,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->password = md5($dataRequest->newPassword);
 		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('User');
