@@ -13,11 +13,13 @@
 		<section>
 			<div class="pt-3">
 				<div class="flex max-width-4 flex-wrap items-center mb-2">
-					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= strtolower($data['marca']); ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-						<?php if ($totalProducts > 1000) : ?>
-							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('reporte') ?>">
+					<div class="product-presentation flex flex-column items-end mr-4">
+						<div class="relative">
+							<div class="item-network <?= strtolower($data['marca']); ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+						</div>
+						<?php if ($totalProducts > 1) : ?>
+							<a id="other-product" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('reporte') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
 							</a>
 						<?php endif; ?>
