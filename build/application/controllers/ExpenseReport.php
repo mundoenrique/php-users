@@ -123,7 +123,9 @@ class ExpenseReport extends BDB_Controller {
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$dataProduct = $this->session->userdata('setProduct');
+
+		if (is_null($dataProduct) || !array_key_exists('producto',$dataProduct)) {
 
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
