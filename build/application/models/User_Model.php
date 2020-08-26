@@ -546,13 +546,9 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
-		// TODO
-		// Datos cableados para integrar con servicios
-		// $this->dataRequest->id_ext_emp = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
-		$this->dataRequest->id_ext_emp = 'N_123456813';
-		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->id_ext_emp = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request recovery_access:" . json_encode($this->dataRequest));
