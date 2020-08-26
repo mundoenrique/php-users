@@ -56,8 +56,17 @@ if ( ! function_exists('insert_css_cdn'))
 
         $url_cdn = $CI->config->item('asset_url');
         $path_cdn = $CI->config->item('asset_path');
-        $skin = $CI->input->cookie('cpo_skin');
-        $skin_folder = $skin . '/';
+				$skin = $CI->input->cookie('cpo_skin');
+
+				switch ($skin) {
+					case 'default':
+						$skin_folder = 'tebca/';
+					break;
+					case 'pichincha':
+						$skin_folder = 'pichincha/';
+					break;
+				}
+
         $filepath = $path_cdn . 'css/' . $skin_folder . $filename;
         $fileurl = $url_cdn . 'css/' . $skin_folder .  $filename;
         $version = '';
@@ -87,7 +96,7 @@ if ( ! function_exists('insert_image_cdn'))
 		$filename = $filename.'.png';
 		$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
 		$version = '';
-		log_message('INFO', '----------------'.json_encode(file_exists($filepath)));
+
 		if (!file_exists($filepath)) {
 			$filename = 'default.png';
 			$filepath = $cdnPath.'img/products/'.$country.'/'.$filename;
