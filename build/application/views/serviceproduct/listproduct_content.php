@@ -23,9 +23,11 @@
 								$infoCard = '';
 								$title = '';
 								switch ($row) {
-									case ($row['bloqueo'] !== ''):
+									case ($row['bloqueo'] !== '' && $row['bloqueo'] !== 'NE'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
-										$state = 'inactive cursor-default';
+										if ($row['bloqueo'] !== 'PB') {
+											$state = 'inactive cursor-default';
+										}
 										break;
 
 									case (count($row['availableServices']) === 0):

@@ -27,7 +27,7 @@
 					</div>
 					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
-						<?php if ($data['bloqueo'] !== '') : ?>
+						<?php if ($data['bloqueo'] !== '' && $data['bloqueo'] !== 'NE') : ?>
 							<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
 						<?php endif; ?>
 						<p id="card" class="product-cardnumber mb-0 primary"><?= $data['noTarjetaConMascara']; ?></p>

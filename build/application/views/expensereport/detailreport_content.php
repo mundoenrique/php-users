@@ -13,9 +13,16 @@
 		<section>
 			<div class="pt-3">
 				<div class="flex max-width-4 flex-wrap items-center mb-2">
-					<div class="product-presentation relative mr-4">
-						<div class="item-network <?= strtolower($data['marca']); ?>"></div>
-						<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+					<div class="product-presentation flex flex-column items-end mr-4">
+						<div class="relative">
+							<div class="item-network <?= strtolower($data['marca']); ?>"></div>
+							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
+						</div>
+						<?php if ($totalProducts > 1) : ?>
+							<a id="other-product" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('reporte') ?>">
+								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+							</a>
+						<?php endif; ?>
 					</div>
 					<div class="product-info mr-5">
 						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['tarjetaHabiente']; ?></p>
@@ -66,7 +73,7 @@
 						</div>
 
 						<div id="reportAnnual" class="feed overflow-auto">
-						<?php if (!empty($expenses) && $expenses !== ''): ?>
+						<?php if (is_array($expenses) && count($expenses) > 0): ?>
 							<table class="feed-table">
 								<thead>
 									<tr>

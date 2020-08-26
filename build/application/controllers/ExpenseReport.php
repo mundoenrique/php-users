@@ -26,10 +26,12 @@ class ExpenseReport extends BDB_Controller {
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+		if (is_array($dataProduct) && count($dataProduct) == 1) {
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			redirect("/detallereporte");
 		}
+
+		$this->session->set_userdata("totalProducts", count($dataProduct));
 
 		array_push (
 			$this->includeAssets->jsFiles,
@@ -63,14 +65,14 @@ class ExpenseReport extends BDB_Controller {
 		$dataRequest->tipoOperacion = 'RGR';
 
 		$this->load->model('Product_Model', 'loadData');
-		$data = $this->loadData->callWs_dataReport_Product($dataRequest);
+		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
 
-		if (count($data) < 1) {
-			return '--';
+		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
+			return $listProducts->msg;
 		}
 
 		$dataRequeried = [];
-		foreach($data as $row) {
+		foreach($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->nroTarjeta) {
 				continue;
 			}
@@ -121,7 +123,9 @@ class ExpenseReport extends BDB_Controller {
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$dataProduct = $this->session->userdata('setProduct');
+
+		if (is_null($dataProduct) || !array_key_exists('producto',$dataProduct)) {
 
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
@@ -158,12 +162,14 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
 			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
-			if ($expenses->data === '--' || $expenses->code !== 0) {
-				$expenses = '';
+			if ((is_array($expenses->data) && count($expenses->data) == 0) || $expenses->code !== 0) {
+				$expenses = $expenses->msg;
 			}
 		}
+
 		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->expenses = $expenses;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);

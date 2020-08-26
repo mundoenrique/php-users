@@ -24,7 +24,7 @@ class Product extends BDB_Controller
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
+		if (is_array($dataProduct) && count($dataProduct) == 1) {
 
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			if (in_array("120",  $dataProduct[0]['availableServices'])) {
@@ -62,20 +62,21 @@ class Product extends BDB_Controller
 	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Product_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_loadProducts_Product();
+		$response = $this->modelLoad->callWs_loadProducts_Product();
 
-		if (count($data) < 1) {
-			return '--';
+		if (count($response->data) < 1) {
+			return $response->msg;
 		}
 
-		$this->session->set_userdata("totalProducts", count($data));
+		$this->session->set_userdata("totalProducts", count($response->data));
 
 		$dataRequeried = [];
-		foreach ($data as $row) {
+		foreach ($response->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
-			$productBalance = $this->transforNumber($this->modelLoad->callWs_getBalance_Product($row->noTarjeta));
+			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
+			$productBalance = $this->transforNumber($productBalance->data);
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -128,12 +129,16 @@ class Product extends BDB_Controller
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
+			if (is_null($_POST['nroTarjeta'])){
+				redirect('/vistaconsolidada');
+			}
+
 			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
 
-		if (in_array("120", $dataProduct['availableServices'])) {
+		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
 			redirect('/atencioncliente');
 		}
@@ -156,13 +161,13 @@ class Product extends BDB_Controller
 			}
 		} else {
 
-			$data = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
+			$transactionsHistory = $this->modelLoad->callWs_getTransactionHistory_Product($dataProduct);
 
-			$dataProduct['movements'] = $data === '--' ? '--' : $data->movimientos;
+			$dataProduct['movements'] = is_array($transactionsHistory->data) && count($transactionsHistory->data) == 0 ? '--' : $transactionsHistory->data->movimientos;
 
 			$dataProduct['totalInMovements'] = ["totalIncome" => 0, "totalExpense" => 0];
-			if ($dataProduct['movements'] !== '--') {
-				$dataProduct['totalInMovements'] = ["totalIncome" => $data->totalAbonos, "totalExpense" => $data->totalCargos];
+			if (is_array($dataProduct['movements']) && count($dataProduct['movements']) > 0) {
+				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
 			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
@@ -265,9 +270,8 @@ class Product extends BDB_Controller
 
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
-				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre.'_'.$dateFile);
-			}
-			elseif ($response->code == -150) {
+				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre . '_' . $dateFile);
+			} elseif ($response->code == -150) {
 
 				$dataForAlert = new stdClass();
 				$dataForAlert->message = $response->msg;

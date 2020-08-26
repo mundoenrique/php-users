@@ -80,7 +80,8 @@ class User_Model extends BDB_Model
 							'cl_addr' => np_Hoplite_Encryption($this->input->ip_address(), 0),
 							'afiliado' => $response->afiliado,
 							'celular' => isset($response->celular)? $response->celular: '',
-							'tyc' => $response->tyc
+							'tyc' => $response->tyc,
+							'codCompania' => $response->acCodCia
 						];
 						$this->session->set_userdata($userData);
 
@@ -113,7 +114,7 @@ class User_Model extends BDB_Model
 					$this->response->classIconName = 'ui-icon-closethick';
 
 					$infoLogin = json_decode($response->bean);
-					if (!is_null($infoLogin) && $infoLogin->intentos == 2) {
+					if (!is_null($infoLogin) && property_exists($infoLogin, 'intentos') && $infoLogin->intentos == 2) {
 
 						$this->response->msg = lang('RESP_LIMIT_OF_ATTEMPTS_ALLOWED');
 					}
@@ -243,6 +244,7 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
@@ -261,8 +263,9 @@ class User_Model extends BDB_Model
 							'token'		=> $response->token,
 							'sessionId'	=> $response->logAccesoObject->sessionId,
 							'keyId'		=> $response->keyUpdate,
-							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0)
-							);
+							'cl_addr'	=> np_Hoplite_Encryption($this->input->ip_address(),0),
+							'acCodCia' => $response->user->acCodCia
+						);
 						$this->session->set_userdata($newdata);
 
 					}else{
@@ -344,7 +347,8 @@ class User_Model extends BDB_Model
 			"email"				=> $dataRequest->email,
 			"password"			=> md5($dataRequest->userpwd),
 			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
-			"tyc" => $dataRequest->acceptTerms
+			"tyc" => $dataRequest->acceptTerms,
+			"acCodCia" => $dataRequest->acCodCia,
 		);
 
 		$phones = array(
@@ -377,6 +381,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->token = $this->session->userdata['token'];
 		$this->dataRequest->sessionId = $this->session->userdata['sessionId'];
 		$this->dataRequest->keyId = $this->session->userdata['keyId'];
+		$this->dataRequest->acCodCia = $this->session->userdata['acCodCia'];
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request validar_cuenta:". json_encode($this->dataRequest));
@@ -541,9 +546,9 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = $dataRequest->recovery === 'C' ? '23' : '24';
-		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocument.'_'.$dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->abbrTypeDocumentUser.'_'.$dataRequest->idNumber;
 		$this->dataRequest->email = $dataRequest->email;
-		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->id_ext_emp = $dataRequest->abbrTypeDocumentBussines.'_'.$dataRequest->nitBussines;
 
 		$response = $this->sendToService('User');
 		log_message("info", "Request recovery_access:" . json_encode($this->dataRequest));
@@ -834,6 +839,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->password = md5($dataRequest->newPassword);
 		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('User');
@@ -906,7 +912,8 @@ class User_Model extends BDB_Model
 			"disponeClaveSMS" => "",
 			"aplicaPerfil"=> 'N',
 			"tyc" => $this->session->userdata('tyc'),
-			"rc"=> "0"
+			"rc"=> "0",
+			'acCodCia' => $this->session->userdata('codCompania'),
 		);
 
 		$tHabitacion = array(
@@ -1006,6 +1013,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		$this->dataRequest->rc = 0;
 		$this->dataRequest->registro = $registro;
