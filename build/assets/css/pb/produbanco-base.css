@@ -2836,18 +2836,18 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
 	}
-	table.dataTable tr.selected th.sorting_disabled:after{
-		content: '' !important;
-		margin-top: 1px !important;
-		background-image: url("../../images/bnt/check-white_table.svg");
-		background-size: cover;
+	table.dataTable tr.selected th.sorting_disabled:nth-child(1):after{
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: 0 !important;
+		font-size: 11px;
 	}
 
 	table.dataTable tr.selected td.select-checkbox::after {
-		content: '' !important;
-		margin-top: -5px !important;
-		background-image: url("../../images/bnt/check_table.svg");
-		background-size: cover;
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: -1px !important;
+		font-size: 11px !important;
 	}
 }
 
