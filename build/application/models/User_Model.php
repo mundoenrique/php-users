@@ -244,6 +244,7 @@ class User_Model extends BDB_Model
 
 		$response = $this->sendToService('User');
 		if ($this->isResponseRc !== FALSE) {
+			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
