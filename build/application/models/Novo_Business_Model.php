@@ -52,11 +52,17 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
-						$productUrl = 'images/'.$this->countryUri;
-						if(!file_exists(assetPath('images/'.$this->countryUri.'/'.$produtImg))) {
+						$productUrl = 'images/programs/'.$this->countryUri;
+
+						if(!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';
-							$productUrl = 'images/default';
 						}
+
+						if(!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = 'default.svg';
+							$productUrl = 'images/programs';
+						}
+
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
