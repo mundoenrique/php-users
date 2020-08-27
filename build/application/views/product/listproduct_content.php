@@ -16,8 +16,8 @@
 						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
 					<?php
-						if (count($data->data) > 0 and $data !== '--') {
-							foreach ($data->data as $row) {
+						if (count($data) > 0 and $data !== '--') {
+							foreach ($data as $row) {
 								$state = '';
 								$infoCard = '';
 								$title = '';
