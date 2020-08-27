@@ -23,8 +23,8 @@ class ServiceProduct extends BDB_Controller
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
-			$this->session->set_userdata('setProduct', $dataProduct[0]);
+		if (count($dataProduct->data) == 1 and $dataProduct !== '--') {
+			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
 			redirect("/atencioncliente");
 		}
 
@@ -60,7 +60,7 @@ class ServiceProduct extends BDB_Controller
 		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
-			return $listProducts->msg;
+			return $listProducts;
 		}
 
 		$this->session->set_userdata("totalProducts", count($listProducts->data));

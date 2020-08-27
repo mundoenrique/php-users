@@ -24,7 +24,7 @@ class Product extends BDB_Controller
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (is_array($dataProduct) && count($dataProduct) == 1) {
+		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
 
 			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			if (in_array("120",  $dataProduct[0]['availableServices'])) {
@@ -65,7 +65,7 @@ class Product extends BDB_Controller
 		$response = $this->modelLoad->callWs_loadProducts_Product();
 
 		if (count($response->data) < 1) {
-			return $response->msg;
+			return $response;
 		}
 
 		$this->session->set_userdata("totalProducts", count($response->data));

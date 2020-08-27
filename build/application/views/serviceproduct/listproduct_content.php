@@ -17,8 +17,8 @@
 					</form>
 
 					<?php
-						if (count($data) > 0 and $data !== '--') {
-							foreach ($data as $row) {
+						if (count($data->data) > 0 and $data !== '--') {
+							foreach ($data->data as $row) {
 								$state = '';
 								$infoCard = '';
 								$title = '';
