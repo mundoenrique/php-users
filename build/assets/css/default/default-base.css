@@ -16,23 +16,22 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	background-repeat: repeat-x;
-	background-image: url(../../images/bnt/navigation.png);
-	background-size: 43.5px 64px;
+	border-bottom: 3px solid rgba(123, 193, 67, 1);
 }
 
 /* Content */
 main.content {
-	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
-	background-color: var(--color-eighth) !important;
+	min-height: calc(100vh - 3.75rem - 2.75rem - 30px);
+	background-color: var(--color-secondary);
 }
 
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 2rem 2.5rem;
+	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
+	border-top: 3px solid rgba(123, 193, 67, 1);
 }
 
 /* Type Scale
@@ -873,7 +872,7 @@ label {
 }
 
 .pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
-	color: var(--color-fifth);
+	color: var(--color-sixth);
 }
 /* Search input */
 
@@ -1298,7 +1297,7 @@ label {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-color: var(--color-eighth) !important }
+.bg-color  { background-image: linear-gradient(var(--color-tertiary), transparent) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
@@ -1309,9 +1308,8 @@ label {
 .bg-transparent { background-color: transparent !important }
 
 .bg-content {
-  background: url("../../images/bnt/bg-content.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url("../../images/default/bg-content.jpg");
+  background-repeat: repeat-x;
 }
 
 /* Borders
@@ -2122,8 +2120,9 @@ i[class*=" icon-"]:before {
 }
 
 .logo-banco {
-	width: 260px;
-	height: 70px;
+	width: 230px;
+	height: 111px;
+	padding: 2rem 0 1rem 0;
 }
 
 /* Spinner */
@@ -3587,15 +3586,14 @@ a.ui-button:active,
 	width: 100%;
 	height: 100%;
 	z-index: 0;
-	opacity: .4;
-	background-image: url("../../images/bnt/bg-content.png");
-	background-repeat: no-repeat;
-	background-size: cover;
+	background-image: url("../../images/default/bg-content.jpg");
+	background-repeat: repeat-x;
 }
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1.5px solid var(--color-primary);
+	border: .5px solid var(--color-primary);
+	border-radius: var(--border-radius);
 }
 
 .invalid-user {
@@ -4045,13 +4043,13 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 /* widget support login */
 
- .widget-support {
+.widget-support {
 	position: fixed;
 	bottom: 90px;
 	right: -255px;
 	padding-top: 12px;
 	padding-bottom: 20px;
-	overflow: hidden;
+	overflow: visible;
 	transition: all .3s ease 0s;
 	background-color: rgb(249, 249, 249);
 	z-index: 9;
@@ -4078,7 +4076,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border-radius: 3px 0 0 3px;
 	transform: translate(-107px, -42.5px);
 	position: fixed;
-	color: var(--color-fifth);
+	color: var(--color-sixth);
 }
 
 .widget-support:hover .widget-support-btn{
@@ -4223,7 +4221,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .feed .feed-item:nth-child(2n) {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 }
 
 .feed .feed-item:last-child {
