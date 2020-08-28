@@ -748,17 +748,17 @@ $config = [
 		[
 			'field' => 'currentPassword',
 			'label' => 'currentPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPassword',
 			'label' => 'newPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPassword]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmPassword',
 			'label' => 'confirmPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPassword]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 

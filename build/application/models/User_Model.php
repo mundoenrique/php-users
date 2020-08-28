@@ -51,7 +51,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->hashMD5 = md5($password);
 		// TODO
 		// Descomentar la linea siguiente para peticiones reales al servicio
-		// $this->dataRequest->password = md5($password);
+		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		if (IP_VERIFY == 'ON') {
@@ -826,9 +826,22 @@ class User_Model extends BDB_Model
 		return $this->response;
 	}
 
+	private function decryptData ($data) {
+		$data = json_decode(base64_decode($data));
+		return $this->cryptography->decrypt(
+			base64_decode($data->plot),
+			utf8_encode($data->password)
+		);
+	}
+
 	public function callWs_changePassword_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
+		$currentPassword = $this->decryptData($dataRequest->currentPassword);
+		$newPassword = $this->decryptData($dataRequest->newPassword);
+
+		$argon2NewPassword = $this->encrypt_connect->generateArgon2($newPassword);
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'password';
@@ -838,9 +851,20 @@ class User_Model extends BDB_Model
 
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idOperation = '25';
+
+		// TODO
+		// Eliminar comentarios
+		// $this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		// $this->dataRequest->password = md5($dataRequest->newPassword);
+		// $this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		// TODO
+		// averiguar para qué este campo?
+		$this->dataRequest->passwordOld4 = md5(strtoupper($currentPassword));
+
 		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
-		$this->dataRequest->password = md5($dataRequest->newPassword);
-		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->password = $argon2NewPassword->hexArgon2;
+		$this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
+
 		$this->dataRequest->token = $this->session->userdata('token');
 
 		log_message("info", "Request Change Password:" . json_encode($this->dataRequest));
