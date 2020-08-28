@@ -57,16 +57,16 @@ class ServiceProduct extends BDB_Controller
 	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Product_Model', 'modelLoad');
-		$data = $this->modelLoad->callWs_loadProducts_Product();
+		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
-		if (count($data) < 1) {
-			return '--';
+		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
+			return $listProducts->msg;
 		}
 
-		$this->session->set_userdata("totalProducts", count($data));
+		$this->session->set_userdata("totalProducts", count($listProducts->data));
 
 		$dataRequeried = [];
-		foreach ($data as $row) {
+		foreach ($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}

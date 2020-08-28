@@ -255,6 +255,15 @@ input { /* 1 */
 }
 
 /**
+ * Remove the password reveal button in Edge, and IE 11.
+ */
+
+ input::-ms-reveal,
+ input::-ms-clear {
+		 display: none;
+ }
+
+/**
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
  * 1. Remove the inheritance of text transform in Firefox.
  */
