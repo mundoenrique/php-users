@@ -16,8 +16,8 @@
 						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
 					<?php
-						if (count($data) > 0 and $data !== '--') {
-							foreach ($data as $row) {
+						if (count($data->data) > 0) {
+							foreach ($data->data as $row) {
 								$state = '';
 								$infoCard = '';
 								$title = '';
@@ -56,7 +56,7 @@
 						<?php
 						} else {
 						?>
-							<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS'); ?></h3>
+							<h3 class="h4 regular tertiary pt-3"><?= $data->msg; ?></h3>
 						<?php
 						}
 						?>

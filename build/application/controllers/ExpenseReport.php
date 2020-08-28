@@ -26,12 +26,12 @@ class ExpenseReport extends BDB_Controller {
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (is_array($dataProduct) && count($dataProduct) == 1) {
-			$this->session->set_userdata('setProduct', $dataProduct[0]);
+		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
+			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
 			redirect("/detallereporte");
 		}
 
-		$this->session->set_userdata("totalProducts", count($dataProduct));
+		$this->session->set_userdata("totalProducts", count($dataProduct->data));
 
 		array_push (
 			$this->includeAssets->jsFiles,
@@ -68,7 +68,7 @@ class ExpenseReport extends BDB_Controller {
 		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
 
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
-			return $listProducts->msg;
+			return $listProducts;
 		}
 
 		$dataRequeried = [];
