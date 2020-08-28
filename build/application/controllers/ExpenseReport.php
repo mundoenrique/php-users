@@ -127,8 +127,14 @@ class ExpenseReport extends BDB_Controller {
 
 		if (is_null($dataProduct) || !array_key_exists('producto',$dataProduct)) {
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta']?:'')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
+			// TODO
+			// Validar esta redirection cuando se tiene un solo producto
+
+			redirect('reporte');
+
+			// $cardToLocate = $_POST['nroTarjeta']?:'';
+			// $dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
+			// $this->session->set_userdata('setProduct', $dataProduct);
 		}
 		$this->load->model('ExpenseReport_Model', 'modelExpense');
 

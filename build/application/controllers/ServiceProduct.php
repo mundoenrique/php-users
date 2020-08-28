@@ -117,8 +117,14 @@ class ServiceProduct extends BDB_Controller
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
+
+			// TODO
+			// Validar esta redirection cuando se tiene un solo producto
+
+			redirect('listaproducto');
+
+			// $dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
+			// $this->session->set_userdata('setProduct', $dataProduct);
 		}
 
 		$menuOptionsProduct = [
