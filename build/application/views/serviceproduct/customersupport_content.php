@@ -59,12 +59,12 @@
 							<div class="row">
 								<div class="form-group col-lg-4">
 									<label for="generateNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin">
+									<input id="generateNewPin" class="form-control" type="password" name="generateNewPin" maxlength="4">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
 									<label for="generateConfirmPin">Confirmar PIN <span class="danger">*</span></label>
-									<input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin">
+									<input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin" maxlength="4">
 									<div class="help-block"></div>
 								</div>
 							</div>
@@ -110,17 +110,17 @@
 							<div class="row">
 								<div id="current-pin-field" class="form-group col-lg-4">
 									<label for="changeCurrentPin">PIN actual <span class="danger">*</span></label>
-									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin">
+									<input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin" maxlength="4">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
 									<label for="changeNewPin">Nuevo PIN <span class="danger">*</span></label>
-									<input id="changeNewPin" class="form-control" type="password" name="changeNewPin">
+									<input id="changeNewPin" class="form-control" type="password" name="changeNewPin" maxlength="4">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
 									<label for="changeConfirmPin">Confirmar PIN <span class="danger">*</span></label>
-									<input id="changeConfirmPin" class="form-control" type="password" name="changeConfirmPin">
+									<input id="changeConfirmPin" class="form-control" type="password" name="changeConfirmPin" maxlength="4">
 									<div class="help-block"></div>
 								</div>
 							</div>
