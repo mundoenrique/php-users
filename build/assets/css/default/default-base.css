@@ -16,12 +16,13 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
+	border-bottom: 3px solid rgba(123, 193, 67, 1);
 }
 
 /* Content */
 main.content {
-	min-height: calc(100vh - 3.75rem - 2.75rem - 45px);
-	background-color: var(--color-room) !important;
+	min-height: calc(100vh - 3.75rem - 2.75rem - 30px);
+	background-color: var(--color-secondary);
 }
 
 /* Footer */
@@ -30,7 +31,7 @@ footer.main-footer {
 	padding: 1rem 1rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
-	border-top: 3px solid #76bc21;
+	border-top: 3px solid rgba(123, 193, 67, 1);
 }
 
 /* Type Scale
@@ -393,7 +394,8 @@ textarea.form-control {
 }
 
 .custom-select:disabled {
-  background-color: var(--color-tertiary);
+  background-color: var(--color-tertiary) !;
+	opacity: 1;
 }
 
 .select-box option {
@@ -695,6 +697,7 @@ label {
 .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
 	background-color: var(--color-primary);
 	opacity: .5;
+	pointer-events: none;
 }
 
 /* Form inline */
@@ -869,7 +872,7 @@ label {
 }
 
 .pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
-	color: var(--color-fifth);
+	color: var(--color-sixth);
 }
 /* Search input */
 
@@ -1002,7 +1005,7 @@ label {
 }
 
 .no-write {
-	background-color: transparent;
+	background-color: transparent !important;
 	border: none;
 	pointer-events: none;
 }
@@ -1294,13 +1297,20 @@ label {
 .bg-warning { background-color: var(--warning) !important }
 .bg-danger  { background-color: var(--danger) !important }
 
-.bg-color  { background-color: var(--color-room) !important }
+.bg-color  { background-image: linear-gradient(var(--color-tertiary), transparent) !important }
 .bg-will-processed { background-color: var(--will-processed) !important }
 .bg-will-not-processed { background-color: var(--will-not-processed) !important }
 .bg-not-processed { background-color: var(--not-processed) !important }
 .bg-being-validated { background-color: var(--being-validated) !important }
+.bg-option-active { background-color: var(--option-active) !important }
+.bg-option-not-active { background-color: var(--option-not-active) !important }
 
 .bg-transparent { background-color: transparent !important }
+
+.bg-content {
+  background: url("../../images/default/bg-content.jpg");
+  background-repeat: repeat-x;
+}
 
 /* Borders
 ========================================================================== */
@@ -2110,8 +2120,9 @@ i[class*=" icon-"]:before {
 }
 
 .logo-banco {
-	width: 260px;
-	height: 70px;
+	width: 230px;
+	height: 111px;
+	padding: 2rem 0 1rem 0;
 }
 
 /* Spinner */
@@ -2195,7 +2206,6 @@ i[class*=" icon-"]:before {
 	align-items: center;
 	justify-content: space-between;
 	padding: .5rem 2.5rem;
-	border-bottom: 3px solid #76bc21;
 }
 
 .navbar-secondary {
@@ -2634,7 +2644,6 @@ i[class*=" icon-"]:before {
 .easyPaginateNav .prev:hover,
 .easyPaginateNav .next:hover {
 	font-weight: var(--bold-font-weight);
-	color: var(--color-primary)
 }
 
 /* Table */
@@ -2837,18 +2846,18 @@ table.dataTable thead th.select-checkbox:before {
 	table.dataTable thead th.select-checkbox:before {
 		margin-top: 2px;
 	}
-	table.dataTable tr.selected th.sorting_disabled:nth-child(1):after{
-		content: "\e900" !important;
-		font-family: "novoglyphs";
-		margin-top: 0 !important;
-		font-size: 11px;
+	table.dataTable tr.selected th.sorting_disabled:after{
+		content: '' !important;
+		margin-top: 1px !important;
+		background-image: url("../../images/bnt/check-white_table.svg");
+		background-size: cover;
 	}
 
 	table.dataTable tr.selected td.select-checkbox::after {
-		content: "\e900" !important;
-		font-family: "novoglyphs";
-		margin-top: -1px !important;
-		font-size: 11px !important;
+		content: '' !important;
+		margin-top: -5px !important;
+		background-image: url("../../images/bnt/check_table.svg");
+		background-size: cover;
 	}
 }
 
@@ -2899,6 +2908,10 @@ table.dataTable tbody tr.no-select-checkbox {
 
 table.dataTable.display tbody tr.odd.no-select-checkbox {
 	background-color: rgba(249, 249, 249, 1) !important;
+}
+
+table.dataTable.display tbody tr:nth-child(2n+0) {
+	background-color: #f9f9f9 !important;
 }
 
 table.dataTable tbody tr td {
@@ -3574,12 +3587,14 @@ a.ui-button:active,
 	width: 100%;
 	height: 100%;
 	z-index: 0;
-	opacity: .4;
+	background-image: url("../../images/default/bg-content.jpg");
+	background-repeat: repeat-x;
 }
 
 .login-content .z1{
 	background: var(--color-primary);
-	border: 1px solid var(--color-primary);
+	border: .5px solid var(--color-primary);
+	border-radius: var(--border-radius);
 }
 
 .invalid-user {
@@ -3933,6 +3948,41 @@ a.ui-button:active,
 	border-radius: 5px;
 }
 
+.drop-zone-selfie {
+  height: 220px !important;
+}
+
+.drop-zone-selfie img {
+	width: 10rem;
+}
+
+.drop-zone {
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	display: flex;
+}
+
+.drop-zone-over {
+  border-style: solid;
+}
+
+.drop-zone-input {
+  display: none;
+}
+
+.drop-zone-thumb {
+  width: 95%;
+  height: 95%;
+  border-radius: 10px;
+  overflow: hidden;
+	background-size: cover;
+	background-position: center;
+  position: relative;
+}
+
 .detail-lot tbody tr:first-child td {
 	border: 0 !important;
 	background-color: var(--color-secondary) !important;
@@ -3994,13 +4044,13 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 /* widget support login */
 
- .widget-support {
+.widget-support {
 	position: fixed;
 	bottom: 90px;
 	right: -255px;
 	padding-top: 12px;
 	padding-bottom: 20px;
-	overflow: hidden;
+	overflow: visible;
 	transition: all .3s ease 0s;
 	background-color: rgb(249, 249, 249);
 	z-index: 9;
@@ -4027,7 +4077,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border-radius: 3px 0 0 3px;
 	transform: translate(-107px, -42.5px);
 	position: fixed;
-	color: var(--color-fifth);
+	color: var(--color-sixth);
 }
 
 .widget-support:hover .widget-support-btn{
@@ -4071,7 +4121,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .product-presentation .item-network.visa-electron {
 	width: 50px;
 	height: 25px;
-	background-size: 50px;
+	background-size: 2.3rem;
 }
 
 .dashboard-item {
@@ -4172,7 +4222,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .feed .feed-item:nth-child(2n) {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 }
 
 .feed .feed-item:last-child {

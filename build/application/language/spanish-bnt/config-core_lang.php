@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_VALID_POSITION'] = 'right';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
+//FOOTER
+$lang['CONF_FOOTER_NETWORKS'] = 'ON';
+$lang['CONF_FOOTER_LOGO'] = 'OFF';
 //USER IDENTITY
 $lang['CONF_SECRET_KEY'] = 'OFF';
 //SIGNUP-PROFILE

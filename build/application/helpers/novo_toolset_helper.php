@@ -48,29 +48,6 @@ if (!function_exists('clientUrlValidate')) {
 	}
 }
 
-if (!function_exists('getFavicon')) {
-	function getFavicon($countryUri) {
-		$CI = &get_instance();
-		$favicon = $CI->config->item('favicon');
-		switch($countryUri) {
-			case 'bnt':
-				$ext = 'ico';
-			break;
-			case 'pb':
-				$ext = 'ico';
-			break;
-			default:
-				$ext = 'png';
-		}
-
-		$faviconLoader = new stdClass();
-		$faviconLoader->favicon = $favicon;
-		$faviconLoader->ext = $ext;
-
-		return $faviconLoader;
-	}
-}
-
 if (!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
 		$CI = &get_instance();

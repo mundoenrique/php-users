@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['USER_SIGNIN_TITLE'] = 'Conexión Personas Online';
+$lang['USER_SIGNIN_TITLE'] = '';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
 $lang['USER_SIGNIN_SINGN_UP'] = 'Regístrate';
-$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo.svg';
+$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo-signin.png';
 $lang['USER_SIGNIN_IMAGE'] = 'logo.svg';
 $lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
