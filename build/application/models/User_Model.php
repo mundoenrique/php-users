@@ -127,7 +127,7 @@ class User_Model extends BDB_Model
 				case -426:
 					$this->response->code = lang('RESP_DEFAULT_CODE');
 					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = lang('RESP_MESSAGE_SYSTEM');
+					$this->response->msg = lang('RES_MESSAGE_SYSTEM');
 					$this->response->classIconName = 'ui-icon-closethick';
 					$this->response->data = [
 						'btn1'=> [
