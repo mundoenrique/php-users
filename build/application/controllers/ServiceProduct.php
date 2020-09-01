@@ -84,7 +84,8 @@ class ServiceProduct extends BDB_Controller
 				"bloqueo" => $row->bloque
 			]);
 		}
-		return $dataRequeried;
+		$listProducts->data = $dataRequeried;
+		return $listProducts;
 	}
 
 	public function customerSupport()

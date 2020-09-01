@@ -91,6 +91,7 @@ class ExpenseReport extends BDB_Controller {
 				"bloque" => $row->bloque
 			]);
 		}
+		$listProducts->data = $dataRequeried;
 		return $dataRequeried;
 	}
 

@@ -95,7 +95,8 @@ class Product extends BDB_Controller
 				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
 		}
-		return $dataRequeried;
+		$response->data = $dataRequeried;
+		return $response;
 	}
 
 	public function detailProduct()
@@ -133,7 +134,7 @@ class Product extends BDB_Controller
 				redirect('/vistaconsolidada');
 			}
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
+			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')->data[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
