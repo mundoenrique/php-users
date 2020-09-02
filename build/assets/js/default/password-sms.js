@@ -66,19 +66,23 @@ $("#actualizar").click(function(){
 
       $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 
-      var claveSMS =$('#userpwd').val();
-      var newC =$('#confirm-userpwd').val();
-
+      var claveSMS = $('#userpwd').val();
 
       $("#actualizar").removeClass("disabled-button");
-      if((pais=='Pe') || (pais=='Usd') || (pais=='Co')){
-        claveSMS = hex_md5(claveSMS);
-      }
 
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-				);
-       $.post(base_url +"/users/passwordSmsActualizar",{"id_ext_per":id_ext_per,"claveSMS":claveSMS,"nroMovil":telefono, "cpo_name": cpo_cook},function(data){
+			var dataRequest = JSON.stringify ({
+				id_ext_per:id_ext_per,
+				claveSMS:novo_cryptoPass(claveSMS),
+				nroMovil:telefono
+			});
+
+			dataRequest = novo_cryptoPass(dataRequest, true);
+
+       $.post(base_url +"/users/passwordSmsActualizar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
+
+				data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
+					format: CryptoJSAesJson
+				}).toString(CryptoJS.enc.Utf8));
 
         if(data.rc==0) {
 
@@ -199,24 +203,16 @@ $("#afiliar").click(function(){
       $('#consecutivo').removeClass('rule-invalid').addClass('rule-valid');
 
       var claveSMS =$('#userpwd').val();
-      var newC =$('#confirm-userpwd').val();
-
 
       $("#actualizar").removeClass("disabled-button");
-      if((pais=='Pe') || (pais=='Usd') || (pais=='Co')){
-        claveSMS = hex_md5(claveSMS);
-      }
-			var cpo_cook = decodeURIComponent(
-				document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-			);
 
 			var dataRequest = JSON.stringify ({
 				id_ext_per:id_ext_per,
-				claveSMS:claveSMS,
+				claveSMS:novo_cryptoPass(claveSMS),
 				nroMovil:telefono
 			});
 
-			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+			dataRequest = novo_cryptoPass(dataRequest, true);
 
 			$.post(base_url +"/users/passwordSmsNew",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 

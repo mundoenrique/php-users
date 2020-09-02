@@ -601,9 +601,20 @@ class Users extends CI_Controller {
 			redirect(base_url('dashboard'), 'location');
 			exit();
 		}
-		$id_ext_per = $this->input->post('id_ext_per');
-		$claveSMS = $this->input->post('claveSMS');
-		$nroMovil = $this->input->post('nroMovil');
+
+		$dataRequest = json_decode(
+			$this->security->xss_clean(
+				strip_tags(
+					$this->cryptography->decrypt(
+						base64_decode($this->input->get_post('plot')),
+						utf8_encode($this->input->get_post('request'))
+					)
+				)
+			)
+		);
+		$id_ext_per = $dataRequest->id_ext_per;
+		$claveSMS = $dataRequest->claveSMS;
+		$nroMovil = $dataRequest->nroMovil;
 
 		$this->load->model('users_model','passwordSmsActualizar');
 

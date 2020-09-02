@@ -323,11 +323,28 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'perfil', 'clave sms', 'registrar clave');
 
+		$claveSMS = json_decode(base64_decode($claveSMS));
+		$claveSMS = $this->cryptography->decrypt(
+			base64_decode($claveSMS->plot),
+			utf8_encode($claveSMS->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		// TODO: quitar logs
+		log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
+		log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
+
+		$pais = $this->session->userdata('pais');
+		$md5 = (($pais=='Pe') || ($pais=='Usd') || ($pais=='Co')) ? 1 : 0;
+
 		$data = json_encode(array(
 			'idOperation' => '42',
 			'className' => 'com.novo.objects.TOs.TarjetaTO',
 			'id_ext_per' => $id_ext_per,
-			'claveSMS' => $claveSMS,
+			'claveSMS' => $md5 ? md5($claveSMS) : $claveSMS,
+			// TODO: Cambiar cuando servicio funcione
+			// 'claveSMS' => $argon2->hexArgon2,
+			// 'hashMD5' => $md5 ? md5($claveSMS) : $claveSMS,
 			'nroMovil' => $nroMovil,
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
@@ -352,11 +369,28 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'perfil', 'clave sms', 'actualizar clave');
 
+		$claveSMS = json_decode(base64_decode($claveSMS));
+		$claveSMS = $this->cryptography->decrypt(
+			base64_decode($claveSMS->plot),
+			utf8_encode($claveSMS->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		// TODO: quitar logs
+		log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
+		log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
+
+		$pais = $this->session->userdata('pais');
+		$md5 = (($pais=='Pe') || ($pais=='Usd') || ($pais=='Co')) ? 1 : 0;
+
 		$data = json_encode(array(
 			'idOperation' => '43',
 			'className' => 'com.novo.objects.TOs.TarjetaTO',
 			'id_ext_per' => $id_ext_per,
-			'claveSMS' => $claveSMS,
+			'claveSMS' => $md5 ? md5($claveSMS) : $claveSMS,
+			// TODO: Cambiar cuando servicio funcione
+			// 'claveSMS' => $argon2->hexArgon2,
+			// 'hashMD5' => $md5 ? md5($claveSMS) : $claveSMS,
 			'nroMovil' => $nroMovil,
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
@@ -371,7 +405,9 @@ class Users_model extends CI_Model
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_actualizar'));
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+
+		return json_encode($response);
 	}
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
