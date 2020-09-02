@@ -26,12 +26,12 @@ class ExpenseReport extends BDB_Controller {
 		$this->session->unset_userdata('setProduct');
 
 		$dataProduct = $this->loadDataProduct();
-		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
-			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
+		if (is_array($dataProduct) && count($dataProduct) == 1) {
+			$this->session->set_userdata('setProduct', $dataProduct[0]);
 			redirect("/detallereporte");
 		}
 
-		$this->session->set_userdata("totalProducts", count($dataProduct->data));
+		$this->session->set_userdata("totalProducts", count($dataProduct));
 
 		array_push (
 			$this->includeAssets->jsFiles,
@@ -136,7 +136,7 @@ class ExpenseReport extends BDB_Controller {
 			}
 
 			$cardToLocate = $_POST['nroTarjeta']?:'';
-			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
+			$dataProduct = $this->loadDataProduct($cardToLocate)[0];
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 		$this->load->model('ExpenseReport_Model', 'modelExpense');
@@ -154,7 +154,7 @@ class ExpenseReport extends BDB_Controller {
 					$oDate = new DateTime();
 					$dateFile = $oDate->format("YmdHis");
 					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'reporte_'.$dateFile);
-					$expenses = 'ok';
+					$expenses = (object)["data" => []];
 					break;
 
 				default:
@@ -171,7 +171,7 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
 			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
-			if ((is_array($expenses->data) && count($expenses->data) == 0) || $expenses->code !== 0) {
+			if ($expenses->code !== 0) {
 				$expenses = $expenses->msg;
 			}
 		}
@@ -179,7 +179,7 @@ class ExpenseReport extends BDB_Controller {
 		$this->views = ['expensereport/'.$view];
 		$this->render->data = $dataProduct;
 		$this->render->totalProducts = $this->session->userdata("totalProducts");
-		$this->render->expenses = $expenses;
+		$this->render->expenses = $expenses->data;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 

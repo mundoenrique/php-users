@@ -14,8 +14,8 @@
 						<input id='noTarjetaConMascara' type='hidden' name='noTarjetaConMascara' value=''>
 						<input id='prefix' type='hidden' name='prefix' value=''>
 					</form>
-					<?php if (is_array($data->data) && count($data->data) > 0): ?>
-					<?php foreach($data->data as $row): ?>
+					<?php if (is_array($data) && count($data) > 0): ?>
+					<?php foreach($data as $row): ?>
 					<div id="<?= $row['nroTarjeta'];?>" class="dashboard-item big-modal p-1 mx-1 mb-1">
 						<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 						<div class="item-info <?= strtolower($row['marca']);?> p-2 h5 tertiary bg-white">

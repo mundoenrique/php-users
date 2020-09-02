@@ -132,7 +132,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		$('#reportAnnual table').DataTable(jsonDataTables);
 		reportAnnual.classList.add('fade-in');
 
-		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.data.listaGrafico[0]);
+		invokeChart(chart, jsonChart, dataExpensesReport.listExpenses.listaGrafico[0]);
 		statsToogle.classList.remove('is-disabled');
 		statsToogle.querySelector('input').disabled = false;
 		for (i = 0; i < stackItems.length; ++i) {

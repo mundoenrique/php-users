@@ -108,16 +108,25 @@ class ExpenseReport_Model extends BDB_Model
 					$this->response->code = 0;
 					$this->response->data = $response;
 					break;
+
 				case -150:
-					$this->response->code = -150;
-					$this->response->msg = $response->msg;
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCTS');
 					break;
 
 				default:
-					$this->response->code = 150;
-					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->code = 2;
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
-					$this->response->data = '--';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url(''),
+							'action' => 'redirect'
+						]
+					];
+					break;
 			}
 		}
 		return $this->response;

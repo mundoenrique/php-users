@@ -73,7 +73,7 @@
 						</div>
 
 						<div id="reportAnnual" class="feed overflow-auto">
-						<?php if (is_array($expenses) && count($expenses) > 0): ?>
+						<?php if (is_array($expenses->listaGrupo) && count($expenses->listaGrupo) > 0): ?>
 							<table class="feed-table">
 								<thead>
 									<tr>
@@ -92,10 +92,10 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php foreach($expenses->data->totalesAlMes as $key => $value): ?>
+								<?php foreach($expenses->totalesAlMes as $key => $value): ?>
 									<tr id="<?= strtolower($value->mes); ?>">
 										<td class="feed-headline"><?= ucfirst(strtolower($value->mes)); ?></td>
-									<?php foreach($expenses->data->listaGrupo as $col): ?>
+									<?php foreach($expenses->listaGrupo as $col): ?>
 										<td class="feed-monetary"><?= $col->gastoMensual[$key]->monto; ?></td>
 									<?php endforeach; ?>
 										<td class="feed-total"><?= $value->monto; ?></td>
@@ -105,10 +105,10 @@
 								<tfoot>
 									<tr id="totales">
 										<td class="feed-headline">Total</td>
-									<?php foreach($expenses->data->listaGrupo as $key => $value): ?>
+									<?php foreach($expenses->listaGrupo as $key => $value): ?>
 										<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= $value->totalCategoria; ?></td>
 									<?php endforeach; ?>
-										<td class="feed-total"><?= $expenses->data->totalGeneral; ?></td>
+										<td class="feed-total"><?= $expenses->totalGeneral; ?></td>
 									</tr>
 								</tfoot>
 							</table>

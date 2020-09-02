@@ -444,7 +444,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 			fullYear = objDate.getFullYear();
 
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
-		$$.getElementsByName("frmYear")[0].value = yearRequest == fullYear ? '' : yearRequest;
+		$$.getElementsByName("frmYear")[0].value = yearRequest;
 		if ($$.getElementsByName("frmTypeFile")[0].value === 'ext') {
 
 			$$.getElementsByName("frmYear")[0].value = yearRequest;
