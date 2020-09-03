@@ -34,7 +34,7 @@ class ExpenseReport_Model extends BDB_Model
 		$this->dataRequest->fechaFin = empty($dataRequest->fechaFinal) ? '31/12/' . date("Y") : $dataRequest->fechaFinal;
 		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion) ? '1' : '0';
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
+		$this->dataRequest->idExtEmp = $this->session->userdata('codCompania');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');

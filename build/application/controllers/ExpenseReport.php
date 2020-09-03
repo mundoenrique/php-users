@@ -32,6 +32,7 @@ class ExpenseReport extends BDB_Controller {
 		}
 
 		$this->session->set_userdata("totalProducts", count($dataProduct));
+		$this->session->set_userdata("listProducts",$dataProduct);
 
 		array_push (
 			$this->includeAssets->jsFiles,
@@ -61,11 +62,9 @@ class ExpenseReport extends BDB_Controller {
 
 	public function loadDataProduct($card = '')
 	{
-		$dataRequest = new stdClass();
-		$dataRequest->tipoOperacion = 'RGR';
 
-		$this->load->model('Product_Model', 'loadData');
-		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
+		$this->load->model('Product_Model', 'modelLoad');
+		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
 			return $listProducts;
@@ -73,21 +72,22 @@ class ExpenseReport extends BDB_Controller {
 
 		$dataRequeried = [];
 		foreach($listProducts->data as $row) {
-			if (!empty($card) && $card !== $row->nroTarjeta) {
+			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
 			array_push($dataRequeried, [
-				"nroTarjeta" => $row->nroTarjeta,
-				"nroTarjetaMascara" => $row->nroTarjetaMascara,
+				"nroTarjeta" => $row->noTarjeta,
+				"nroTarjetaMascara" => $row->noTarjetaConMascara,
 				"producto" => $row->prefix,
 				"marca" => $row->marca,
-				"tarjetaHabiente" => $row->tarjetaHabiente,
-				"nomPlastico" => $row->nomPlastico,
+				"tarjetaHabiente" => $row->nom_plastico,
+				"nomPlastico" => $row->nom_plastico,
 				"nomEmp" => $row->nomEmp,
-				"tipoTarjeta" => $row->tipoTarjeta,
+				"tipoTarjeta" => $row->tipo,
 				"id_ext_per" => $row->id_ext_per,
+				"availableServices" => $row->services,
 				"prefix" => $row->prefix,
-				"id_ext_emp" => $row->id_ext_emp,
+				"id_ext_emp" => $row->rif,
 				"bloque" => $row->bloque
 			]);
 		}
@@ -132,8 +132,17 @@ class ExpenseReport extends BDB_Controller {
 				redirect('reporte');
 			}
 
+			$listProducts = $this->session->userdata('listProducts');
 			$cardToLocate = $_POST['nroTarjeta']?:'';
-			$dataProduct = $this->loadDataProduct($cardToLocate)[0];
+
+			if (is_null($listProducts)){
+
+				$dataProduct = $this->loadDataProduct($cardToLocate)[0];
+			}else{
+
+				$positionNumber = array_search($cardToLocate, array_column($listProducts, 'nroTarjeta'));
+				$dataProduct = $listProducts[$positionNumber];
+			}
 			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 		$this->load->model('ExpenseReport_Model', 'modelExpense');
