@@ -149,16 +149,31 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
 
 			$response = $this->modelExpense->getFile_ExpenseReport($dataRequest);
-			switch ($response->code) {
-				case 0:
-					$oDate = new DateTime();
-					$dateFile = $oDate->format("YmdHis");
-					np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'reporte_'.$dateFile);
-					$expenses = (object)["data" => []];
-					break;
+			if ($response->code == 0){
 
-				default:
-					$expenses = '';
+				$oDate = new DateTime();
+				$dateFile = $oDate->format("YmdHis");
+				np_hoplite_byteArrayToFile($response->data->archivo, $_POST['frmTypeFile'], 'reporte_'.$dateFile);
+
+				$expenses = (object)[];
+				$data = (object) ['listaGrupo'=>[]];
+				$expenses->data = $data;
+			}else{
+
+				$dataForAlert = new stdClass();
+				$dataForAlert->message = $response->msg;
+				$dataForAlert->redirect = $response->redirect;
+				// TODO
+				// validar como se van a cargar los meses enla vista de detalle de reporte
+				// cuando son indicados
+				$dataForAlert->monthSelected = $_POST['frmMonth'];
+				$dataForAlert->yearSelected = $_POST['frmYear'];
+
+				unset($_POST['frmMonth']);
+				unset($_POST['frmYear']);
+
+				$this->session->set_flashdata('showAlert', $dataForAlert);
+				redirect(base_url() . 'detallereporte', 'location', 301);
 			}
 		}else{
 
@@ -170,6 +185,8 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->fechaInicial = '01/01/'.date("Y");
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
+			// TODO
+			// hacer pruebas con code diferente a cero
 			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
 			if ($expenses->code !== 0) {
 				$expenses = $expenses->msg;
@@ -181,6 +198,16 @@ class ExpenseReport extends BDB_Controller {
 		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->expenses = $expenses->data;
 		$this->render->titlePage = lang('GEN_REPORT').' - '.lang('GEN_CONTRACTED_SYSTEM_NAME');
+
+		if ($dataAlert = $this->session->flashdata('showAlert')) {
+
+			$this->render->loadAlert = '1';
+			$this->render->msgAlert = $dataAlert->message;
+			$this->render->redirectAlert = $dataAlert->redirect;
+			$this->render->monthSelected = $dataAlert->monthSelected;
+			$this->render->yearSelected = $dataAlert->yearSelected;
+		}
+
 		$this->loadView($view);
 
 	}
