@@ -43,6 +43,7 @@ class ExpenseReport_Model extends BDB_Model
 				case 0:
 					$this->response->code = 0;
 					$this->response->data = $response;
+					$this->response->msg = $response->msg;
 					break;
 
 				case -150:

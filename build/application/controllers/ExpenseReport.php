@@ -128,9 +128,6 @@ class ExpenseReport extends BDB_Controller {
 
 		if (is_null($dataProduct) || !array_key_exists('producto',$dataProduct)) {
 
-			// TODO
-			// Validar esta redirection cuando se tiene un solo producto
-
 			if (is_null($_POST['nroTarjeta'])){
 				redirect('reporte');
 			}
@@ -163,9 +160,7 @@ class ExpenseReport extends BDB_Controller {
 				$dataForAlert = new stdClass();
 				$dataForAlert->message = $response->msg;
 				$dataForAlert->redirect = $response->redirect;
-				// TODO
-				// validar como se van a cargar los meses enla vista de detalle de reporte
-				// cuando son indicados
+
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
 
@@ -185,11 +180,15 @@ class ExpenseReport extends BDB_Controller {
 			$dataRequest->fechaInicial = '01/01/'.date("Y");
 			$dataRequest->fechaFinal = '31/12/'.date("Y");
 
-			// TODO
-			// hacer pruebas con code diferente a cero
 			$expenses = $this->modelExpense->callWs_getExpenses_ExpenseReport($dataRequest);
 			if ($expenses->code !== 0) {
-				$expenses = $expenses->msg;
+
+				$expensesMsg = $expenses->msg;
+
+				$expenses = (object)[];
+				$data = (object) ['listaGrupo'=>[]];
+				$expenses->data = $data;
+				$expenses->msg = $expensesMsg;
 			}
 		}
 

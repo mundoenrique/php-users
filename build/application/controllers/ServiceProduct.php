@@ -118,9 +118,6 @@ class ServiceProduct extends BDB_Controller
 
 		if (!$dataProduct = $this->session->userdata('setProduct')) {
 
-
-			// TODO
-			// Validar esta redirection cuando se tiene un solo producto
 			if (is_null($_POST['nroTarjeta'])){
 				redirect('listaproducto');
 			}
