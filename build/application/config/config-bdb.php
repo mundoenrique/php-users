@@ -18,3 +18,5 @@ $config['listReasonReposition'] = [
 	['value'=>'17','tagTranslation'=>'GENE_BLOCKING_REASONS_FRAUD'],
 	['value'=>'41','tagTranslation'=>'GENE_BLOCKING_REASONS_CANCELLED'],
 ];
+
+$config['laodBalanceInTransit'] = FALSE;

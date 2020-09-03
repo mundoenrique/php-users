@@ -171,11 +171,14 @@ class Product extends BDB_Controller
 				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
-			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-			if (is_object($data) && $data->rc === "200") {
+			if ($this->config->item('laodBalanceInTransit')){
 
-				$dataProduct['pendingTransactions'] = $data->pendingTransactions;
-				$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions($dataProduct['pendingTransactions']);
+				$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+				if (is_object($data) && $data->rc === "200") {
+
+					$dataProduct['pendingTransactions'] = $data->pendingTransactions;
+					$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions($dataProduct['pendingTransactions']);
+				}
 			}
 		}
 
