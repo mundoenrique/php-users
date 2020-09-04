@@ -18,8 +18,6 @@ class ExpenseReport_Model extends BDB_Model
 	{
 		log_message('INFO', 'NOVO ExpenseReport Model: get Expens  method Initialized');
 
-		$dataProduct = $this->session->userdata('setProduct');
-
 		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataAccessLog->modulo = 'tarjeta';
 		$this->dataAccessLog->function = 'tarjeta';
@@ -27,9 +25,9 @@ class ExpenseReport_Model extends BDB_Model
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
 		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
-		$this->dataRequest->idPersona = $dataProduct['id_ext_per'];
-		$this->dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
-		$this->dataRequest->producto = $dataProduct['producto'];
+		$this->dataRequest->idPersona = $dataRequest->id_ext_per;
+		$this->dataRequest->nroTarjeta = $dataRequest->nroTarjeta;
+		$this->dataRequest->producto = $dataRequest->producto;
 		$this->dataRequest->fechaIni = empty($dataRequest->fechaInicial) ? '01/01/' . date("Y") : $dataRequest->fechaInicial;
 		$this->dataRequest->fechaFin = empty($dataRequest->fechaFinal) ? '31/12/' . date("Y") : $dataRequest->fechaFinal;
 		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion) ? '1' : '0';
@@ -55,14 +53,6 @@ class ExpenseReport_Model extends BDB_Model
 				default:
 					$this->response->code = 2;
 					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-					$this->response->classIconName = "ui-icon-alert";
-					$this->response->data = [
-						'btn1' => [
-							'text' => lang('BUTTON_CONTINUE'),
-							'link' => base_url('inicio'),
-							'action' => 'redirect'
-						]
-					];
 					break;
 			}
 		}
@@ -72,8 +62,6 @@ class ExpenseReport_Model extends BDB_Model
 	public function getFile_ExpenseReport($dataRequest)
 	{
 		log_message('INFO', 'NOVO ExpenseReport Model: getPDF  method Initialized');
-
-		$dataProduct = $this->session->userdata('setProduct');
 
 		if ($dataRequest->typeFile == 'pdf') {
 
@@ -90,10 +78,10 @@ class ExpenseReport_Model extends BDB_Model
 		$this->dataAccessLog->modulo = 'reportes';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 
-		$this->dataRequest->idPersona = $dataProduct['id_ext_per'];
-		$this->dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
-		$this->dataRequest->producto = $dataProduct['producto'];
-		$this->dataRequest->idExtEmp = $dataProduct['id_ext_emp'];
+		$this->dataRequest->idPersona = $dataRequest->idPersona;
+		$this->dataRequest->nroTarjeta = $dataRequest->nroTarjeta;
+		$this->dataRequest->producto = $dataRequest->producto;
+		$this->dataRequest->idExtEmp = $dataRequest->idExtEmp;
 
 		$this->dataRequest->fechaIni = empty($dataRequest->initialDate) ? '01/01/' . date("Y") : $dataRequest->initialDate;
 		$this->dataRequest->fechaFin = empty($dataRequest->finalDate) ? '31/12/' . date("Y") : $dataRequest->finalDate;

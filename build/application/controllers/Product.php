@@ -8,6 +8,7 @@ class Product extends BDB_Controller
 	{
 		parent::__construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
+		$this->listProducts = 'muchos productos';
 	}
 
 	public function listProduct()
@@ -21,7 +22,7 @@ class Product extends BDB_Controller
 			exit();
 		}
 
-		$this->session->unset_userdata('setProduct');
+		$this->session->unset_userdata("listProducts");
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
@@ -33,6 +34,9 @@ class Product extends BDB_Controller
 				redirect("/detalle");
 			}
 		}
+
+		$this->session->set_userdata("totalProducts", count($dataProduct->data));
+		$this->session->set_userdata("listProducts", $dataProduct->data);
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -67,8 +71,6 @@ class Product extends BDB_Controller
 		if (count($response->data) < 1) {
 			return $response;
 		}
-
-		$this->session->set_userdata("totalProducts", count($response->data));
 
 		$dataRequeried = [];
 		foreach ($response->data as $row) {
@@ -128,16 +130,22 @@ class Product extends BDB_Controller
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$listProducts = $this->session->userdata('listProducts');
+		$showAlert = $this->session->userdata('showAlert');
+		$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : $showAlert->noTarjeta;
 
-			if (is_null($_POST['nroTarjeta'])){
+		if (is_null($listProducts)) {
+
+			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
+		}else{
+
+			if (is_null($cardToLocate) && is_null($showAlert)) {
 				redirect('/vistaconsolidada');
 			}
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')->data[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
+			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'noTarjeta'));
+			$dataProduct = $listProducts[$positionNumber];
 		}
-
 
 		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
@@ -171,7 +179,7 @@ class Product extends BDB_Controller
 				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
-			if ($this->config->item('laodBalanceInTransit')){
+			if ($this->config->item('laodBalanceInTransit')) {
 
 				$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
 				if (is_object($data) && $data->rc === "200") {
@@ -201,9 +209,11 @@ class Product extends BDB_Controller
 
 			$this->render->loadAlert = '1';
 			$this->render->msgAlert = $dataAlert->message;
-			$this->render->redirectAlert = $dataAlert->redirect;
+			$this->render->action = $dataAlert->action;
 			$this->render->monthSelected = $dataAlert->monthSelected;
 			$this->render->yearSelected = $dataAlert->yearSelected;
+
+			$this->session->unset_userdata('showAlert');
 		}
 
 		$this->loadView($view);
@@ -249,16 +259,9 @@ class Product extends BDB_Controller
 	{
 		log_message('INFO', 'NOVO Consolidated: downloadDetail Method Initialized');
 
-		if (!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in') && is_null($_POST['frmNoTarjeta'])) {
 			redirect(base_url('inicio'), 'location');
 			exit();
-		}
-		$dataProduct = [];
-
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
-
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
 		$this->load->model('Product_Model', 'modelLoad');
@@ -267,7 +270,7 @@ class Product extends BDB_Controller
 			$dataRequest->month = $_POST['frmMonth'];
 			$dataRequest->year = $_POST['frmYear'];
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
-			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+			$dataRequest->noTarjeta = $_POST['frmNoTarjeta'];
 
 			$response = $this->modelLoad->getFile_Product($dataRequest);
 			if ($response->code == 0) {
@@ -275,13 +278,14 @@ class Product extends BDB_Controller
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
 				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre . '_' . $dateFile);
-			} elseif ($response->code == -150) {
+			} else {
 
 				$dataForAlert = new stdClass();
 				$dataForAlert->message = $response->msg;
-				$dataForAlert->redirect = $response->redirect;
+				$dataForAlert->action = 'close';
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
+				$dataForAlert->noTarjeta = $_POST['frmNoTarjeta'];
 
 				unset($_POST['frmMonth']);
 				unset($_POST['frmYear']);

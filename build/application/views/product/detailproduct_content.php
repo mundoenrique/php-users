@@ -7,6 +7,7 @@
 	<input type='hidden' name='frmMonth' value=''>
 	<input type='hidden' name='frmYear' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>
+	<input type='hidden' name='frmNoTarjeta' value=''>
 </form>
 
 <div id="detail" class="detail-content h-100 bg-content">

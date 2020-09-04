@@ -443,8 +443,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 			objDate = new Date(),
 			fullYear = objDate.getFullYear();
 
+		$$.getElementsByName("frmNoTarjeta")[0].value = data.noTarjeta;
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
 		$$.getElementsByName("frmYear")[0].value = yearRequest;
+		
 		if ($$.getElementsByName("frmTypeFile")[0].value === 'ext') {
 
 			$$.getElementsByName("frmYear")[0].value = yearRequest;
