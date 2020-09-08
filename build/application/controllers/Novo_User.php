@@ -22,21 +22,17 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: signin Method Initialized');
 
 		$view = 'signin';
-		$userAgentReq = $this->agent->agent_string();
-		$userAgentSess = $this->session->client_agent;
 
-		if ($this->session->has_userdata('logged') && $userAgentReq === $userAgentSess) {
+		if ($this->session->has_userdata('logged')) {
 			redirect(base_url(lang('GEN_LINK_CARDS_LIST')), 'location', 301);
 			exit();
 		}
 
-		$userSess = [
-			'logged', 'encryptKey', 'sessionId', 'userId', 'userName', 'fullName', 'lastSession', 'token', 'client', 'time', 'cl_addr', 'countrySess',
-			'countryUri', 'client_agent', 'userIdentity', 'userNameValid', 'docmentId', 'screenSize'
-		];
-		$this->session->unset_userdata($userSess);
+		if ($this->session->has_userdata('userId')) {
+			clearSessionsVars();
+		}
 
-		if($this->render->activeRecaptcha) {
+		if ($this->render->activeRecaptcha) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}

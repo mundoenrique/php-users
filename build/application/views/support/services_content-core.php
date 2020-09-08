@@ -21,7 +21,7 @@
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2">Seleccione una cuenta</p>
+              <p class="mb-2">Selecciona una cuenta</p>
             </div>
             <?php else: ?>
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">

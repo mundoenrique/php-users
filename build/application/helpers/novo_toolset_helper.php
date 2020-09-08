@@ -48,6 +48,28 @@ if (!function_exists('clientUrlValidate')) {
 	}
 }
 
+if (!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
+
+		return $value;
+	}
+}
+
+if (!function_exists('clearSessionVars')) {
+	function clearSessionsVars() {
+		$CI = &get_instance();
+
+		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
+			if ($pos == '__ci_last_regenerate') {
+				continue;
+			}
+
+			$CI->session->unset_userdata($pos);
+		}
+	}
+}
+
 if (!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
 		$CI = &get_instance();
@@ -192,14 +214,6 @@ if (!function_exists('convertDateMDY')) {
 		$date = $date[1].'/'.$date[0].'/'.$date[2];
 
 		return $date;
-	}
-}
-
-if (!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
 	}
 }
 
