@@ -22,21 +22,17 @@ class Product extends BDB_Controller
 			exit();
 		}
 
-		$this->session->unset_userdata("listProducts");
+		$this->session->unset_userdata("detailProduct");
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
-
-			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
 			if (in_array("120",  $dataProduct->data[0]['availableServices'])) {
-				redirect('/atencioncliente');
-			} else {
-				redirect("/detalle");
-			}
-		}
 
-		$this->session->set_userdata("totalProducts", count($dataProduct->data));
-		$this->session->set_userdata("listProducts", $dataProduct->data);
+				$this->session->set_userdata('cardWorking', $dataProduct->data[0]['noTarjeta']);
+				redirect('/atencioncliente');
+			}
+			redirect("/detalle");
+		}
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -71,6 +67,8 @@ class Product extends BDB_Controller
 		if (count($response->data) < 1) {
 			return $response;
 		}
+
+		$this->session->set_userdata("totalProducts", count($response->data));
 
 		$dataRequeried = [];
 		foreach ($response->data as $row) {
@@ -130,25 +128,21 @@ class Product extends BDB_Controller
 			);
 		}
 
-		$listProducts = $this->session->userdata('listProducts');
-		$showAlert = $this->session->userdata('showAlert');
-		$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : $showAlert->noTarjeta;
+		$dataProduct = $this->session->userdata('dataProduct');
 
-		if (is_null($listProducts)) {
+		if (is_null($dataProduct)) {
+			$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : '';
 
-			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
-		}else{
-
-			if (is_null($cardToLocate) && is_null($showAlert)) {
+			if (is_null($cardToLocate)) {
 				redirect('/vistaconsolidada');
 			}
-
-			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'noTarjeta'));
-			$dataProduct = $listProducts[$positionNumber];
+			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
+			$this->session->set_userdata('dataProduct', $dataProduct);
 		}
 
 		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
+			$this->session->set_userdata('cardWorking', $dataProduct['noTarjeta']);
 			redirect('/atencioncliente');
 		}
 
@@ -179,7 +173,7 @@ class Product extends BDB_Controller
 				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
-			if ($this->config->item('laodBalanceInTransit')) {
+			if (lang('loadBalanceInTransit') === 'TRUE') {
 
 				$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
 				if (is_object($data) && $data->rc === "200") {
@@ -196,10 +190,14 @@ class Product extends BDB_Controller
 			array_push($years, $i);
 		}
 
+		$this->session->set_userdata('cardWorking', $dataProduct['noTarjeta']);
+
 		$this->views = ['product/' . $view];
 
-		$this->render->data = $dataProduct;
 		$this->render->totalProducts =  $this->session->userdata('totalProducts');
+		$this->session->unset_userdata("totalProducts");
+
+		$this->render->data = $dataProduct;
 		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 		$this->render->years = $years;
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');

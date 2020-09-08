@@ -55,7 +55,7 @@ $config['scores_recapcha'] = [
 		'score' => 0.4
 	],
 ];
-$config['laodBalanceInTransit'] = TRUE;
+
 /*
 |--------------------------------------------------------------------------
 | Index File

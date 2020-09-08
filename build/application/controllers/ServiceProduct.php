@@ -21,12 +21,14 @@ class ServiceProduct extends BDB_Controller
 		}
 
 		$this->session->unset_userdata('setProduct');
+		$this->session->unset_userdata('listProducts');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
 			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
 			redirect("/atencioncliente");
 		}
+		$this->session->set_userdata("listProducts", $dataProduct->data);
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -56,6 +58,8 @@ class ServiceProduct extends BDB_Controller
 
 	public function loadDataProduct($card = '')
 	{
+
+		$this->session->unset_userdata("totalProducts");
 		$this->load->model('Product_Model', 'modelLoad');
 		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
@@ -81,7 +85,7 @@ class ServiceProduct extends BDB_Controller
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
-				"bloqueo" => $row->bloque
+				"bloqueo" => $row->bloque,
 			]);
 		}
 		$listProducts->data = $dataRequeried;
@@ -116,16 +120,25 @@ class ServiceProduct extends BDB_Controller
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$this->session->unset_userdata('setProduct');
+		$listProducts = $this->session->userdata('listProducts');
+		$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] :  $this->session->userdata('cardWorking');
 
-			if (is_null($_POST['nroTarjeta'])){
+		if (is_null($listProducts)) {
+
+			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
+		}else{
+
+			if (is_null($cardToLocate)) {
 				redirect('listaproducto');
 			}
 
-			$cardToLocate = $_POST['nroTarjeta']?:'';
-			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
+			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'noTarjeta'));
+			$dataProduct = $listProducts[$positionNumber];
 		}
+
+		$this->session->set_userdata('setProduct', $dataProduct);
+		$this->session->set_userdata('cardWorking', $dataProduct['noTarjeta']);
 
 		$menuOptionsProduct = [
 			'120' => [
@@ -182,6 +195,8 @@ class ServiceProduct extends BDB_Controller
 		$this->render->data = $dataProduct;
 		$this->render->listReason = $this->config->item('listReasonReposition');
 		$this->render->totalProducts = $this->session->userdata('totalProducts');
+		$this->session->unset_userdata("totalProducts");
+
 		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->availableServices = count($dataProduct['availableServices']);
 

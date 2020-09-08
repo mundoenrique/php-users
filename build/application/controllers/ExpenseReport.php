@@ -28,11 +28,14 @@ class ExpenseReport extends BDB_Controller
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct) && count($dataProduct) == 1) {
-			$this->session->set_userdata('setProductExpenses', $dataProduct[0]);
+			if (in_array("120",  $dataProduct['availableServices'])) {
+
+				$this->session->set_userdata('cardWorking', $dataProduct['nroTarjeta']);
+				redirect('/atencioncliente');
+			}
 			redirect("/detallereporte");
 		}
 
-		$this->session->set_userdata("totalProducts", count($dataProduct));
 		$this->session->set_userdata("listProductsExpenses", $dataProduct);
 
 		array_push(
@@ -71,6 +74,8 @@ class ExpenseReport extends BDB_Controller
 			return $listProducts;
 		}
 
+		$this->session->set_userdata("totalProducts", count($listProducts->data));
+
 		$dataRequeried = [];
 		foreach ($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
@@ -80,6 +85,7 @@ class ExpenseReport extends BDB_Controller
 				"nroTarjeta" => $row->noTarjeta,
 				"nroTarjetaMascara" => $row->noTarjetaConMascara,
 				"producto" => $row->prefix,
+				"nombre_producto" => $row->nombre_producto,
 				"marca" => $row->marca,
 				"tarjetaHabiente" => $row->nom_plastico,
 				"nomPlastico" => $row->nom_plastico,
@@ -139,6 +145,12 @@ class ExpenseReport extends BDB_Controller
 
 			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'nroTarjeta'));
 			$dataProduct = $listProducts[$positionNumber];
+		}
+
+		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
+
+			$this->session->set_userdata('cardWorking', $dataProduct['nroTarjeta']);
+			redirect('/atencioncliente');
 		}
 
 		$this->load->model('ExpenseReport_Model', 'modelExpense');
@@ -202,8 +214,11 @@ class ExpenseReport extends BDB_Controller
 		}
 
 		$this->views = ['expensereport/' . $view];
-		$this->render->data = $dataProduct;
+
 		$this->render->totalProducts = $this->session->userdata("totalProducts");
+		$this->session->unset_userdata("totalProducts");
+
+		$this->render->data = $dataProduct;
 		$this->render->expenses = $expenses->data;
 		$this->render->titlePage = lang('GEN_REPORT') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 

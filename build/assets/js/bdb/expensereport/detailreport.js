@@ -182,7 +182,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 		var data = {
 			fechaInicial: $$.getElementById("fromDate").value,
-			fechaFinal: $$.getElementById("toDate").value
+			fechaFinal: $$.getElementById("toDate").value,
+			id_ext_per: dataExpensesReport.detailProduct.id_ext_per,
+			nroTarjeta: dataExpensesReport.detailProduct.nroTarjeta,
+			producto: dataExpensesReport.detailProduct.producto
 		};
 
 		var tr, td;
@@ -293,6 +296,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 
 			$$.getElementsByName("frmInitialDate")[0].value = $$.getElementById("fromDate").value;
 			$$.getElementsByName("frmFinalDate")[0].value = $$.getElementById("toDate").value;
+			$$.getElementsByName("nroTarjeta")[0].value = dataExpensesReport.detailProduct.nroTarjeta;
 
 			$$.getElementsByTagName('form')[0].submit();
 

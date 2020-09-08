@@ -3,6 +3,7 @@
 	<input type='hidden' name='frmInitialDate' value=''>
 	<input type='hidden' name='frmFinalDate' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>
+	<input type='hidden' name='nroTarjeta' value=''>
 </form>
 
 <div id="report" class="report-content h-100 bg-content">
