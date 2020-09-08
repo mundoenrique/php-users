@@ -21,14 +21,12 @@ class ServiceProduct extends BDB_Controller
 		}
 
 		$this->session->unset_userdata('setProduct');
-		$this->session->unset_userdata('listProducts');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
 			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
 			redirect("/atencioncliente");
 		}
-		$this->session->set_userdata("listProducts", $dataProduct->data);
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -120,25 +118,18 @@ class ServiceProduct extends BDB_Controller
 			);
 		}
 
-		$this->session->unset_userdata('setProduct');
-		$listProducts = $this->session->userdata('listProducts');
-		$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] :  $this->session->userdata('cardWorking');
+		$dataProduct = $this->session->userdata('serviceProduct');
 
-		if (is_null($listProducts)) {
-
-			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
-		}else{
+		if (is_null($dataProduct)) {
+			$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : '';
 
 			if (is_null($cardToLocate)) {
 				redirect('listaproducto');
 			}
-
-			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'noTarjeta'));
-			$dataProduct = $listProducts[$positionNumber];
+			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
 		}
 
-		$this->session->set_userdata('setProduct', $dataProduct);
-		$this->session->set_userdata('cardWorking', $dataProduct['noTarjeta']);
+		$this->session->set_userdata('serviceProduct', $dataProduct);
 
 		$menuOptionsProduct = [
 			'120' => [

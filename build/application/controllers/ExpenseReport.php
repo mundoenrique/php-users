@@ -23,20 +23,17 @@ class ExpenseReport extends BDB_Controller
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-
-		$this->session->unset_userdata('listProductsExpenses');
+		$this->session->unset_userdata('productExpense');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct) && count($dataProduct) == 1) {
-			if (in_array("120",  $dataProduct['availableServices'])) {
+			if (in_array("120",  $dataProduct[0]['availableServices'])) {
 
-				$this->session->set_userdata('cardWorking', $dataProduct['nroTarjeta']);
 				redirect('/atencioncliente');
 			}
 			redirect("/detallereporte");
 		}
 
-		$this->session->set_userdata("listProductsExpenses", $dataProduct);
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -131,25 +128,21 @@ class ExpenseReport extends BDB_Controller
 			);
 		}
 
-		$listProducts = $this->session->userdata('listProductsExpenses');
-		$cardToLocate = $_POST['nroTarjeta'] ?: '';
+		$dataProduct = $this->session->unset_userdata('productExpense');
 
-		if (is_null($listProducts)) {
+		if (is_null($dataProduct)) {
 
-			$dataProduct = $this->loadDataProduct($cardToLocate)[0];
-		} else {
-
-			if (is_null($_POST['nroTarjeta'])) {
+			$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : '';
+			if (is_null($cardToLocate)) {
 				redirect('reporte');
 			}
 
-			$positionNumber = array_search($cardToLocate, array_column($listProducts, 'nroTarjeta'));
-			$dataProduct = $listProducts[$positionNumber];
+			$dataProduct = $this->loadDataProduct($cardToLocate)[0];
+			$this->session->set_userdata('productExpense', $dataProduct);
 		}
 
 		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
-			$this->session->set_userdata('cardWorking', $dataProduct['nroTarjeta']);
 			redirect('/atencioncliente');
 		}
 

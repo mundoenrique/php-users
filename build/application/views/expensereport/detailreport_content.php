@@ -6,6 +6,7 @@
 	<input type='hidden' name='nroTarjeta' value=''>
 </form>
 
+
 <div id="report" class="report-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
