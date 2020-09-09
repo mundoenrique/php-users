@@ -33,6 +33,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_UserCardsList');
 		$cardsList = [];
 		$serviceList = [];
+
 		switch ($this->isResponseRc) {
 			case 0:
 				if (isset($response->lista) && count($response->lista) > 0) {
@@ -52,11 +53,17 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
-						$productUrl = 'images/'.$this->countryUri;
-						if(!file_exists(assetPath('images/'.$this->countryUri.'/'.$produtImg))) {
+						$productUrl = 'images/programs/'.$this->countryUri;
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';
-							$productUrl = 'images/default';
 						}
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = 'default.svg';
+							$productUrl = 'images/programs';
+						}
+
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
@@ -78,12 +85,13 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->response->data->cardsList = $cardsList;
 		$this->response->data->serviceList = array_unique($serviceList);
+
 		return $this->responseToTheView('callWs_UserCardsList');
 	}
 	/**
-	 * @info Método para obtener la lista de tarjetas de un usuario
+	 * @info Método para obtener el saldo de una tarjeta
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 14th, 2019
+	 * @date May 14th, 2020
 	 */
 	public function callWs_GetBalance_Business($dataRequest)
 	{
@@ -275,17 +283,71 @@ class Novo_Business_Model extends NOVO_Model {
 						$this->response->data['file'] = $file;
 						$this->response->data['name'] = $name.'.'.$ext;
 						$this->response->data['ext'] = $ext;
-						break;
-
-					default:
-						# code...
-						break;
+					break;
 				}
 			break;
-			default:
-
 		}
 
 		return $this->responseToTheView('callWs_DownloadMoves');
+	}
+	/**
+	 * @info Método para obtener lista de tarjetas para operaciones
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date Sep 08th, 2020
+	 */
+	public function callWs_CardListOperations_Business ($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CardListOperations Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'Lista de tarjetas para '.$dataRequest->operation;
+
+		$this->dataRequest->idOperation = '6';
+		$this->dataRequest->tipoOperacion = $dataRequest->operType;
+		$this->dataRequest->id_ext_per = $this->session->userId;
+
+		$response = $this->sendToService('callWs_CardListOperations');
+		$cardsList = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				if (isset($response->cuentaOrigen) && count($response->cuentaOrigen) > 0) {
+					foreach ($response->cuentaOrigen AS $pos => $cardsRecords) {
+						$cardRecord = new stdClass();
+						$cardRecord->cardNumber = $cardsRecords->nroTarjeta;
+						$cardRecord->prefix = $cardsRecords->prefix;
+						$cardRecord->status = $cardsRecords->bloque;
+						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
+						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
+						$produtImg = normalizeName($cardsRecords->producto).'.svg';
+						$productUrl = 'images/programs/'.$this->countryUri;
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = $this->countryUri.'_default.svg';
+						}
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = 'default.svg';
+							$productUrl = 'images/programs';
+						}
+
+						$cardRecord->productImg = $produtImg;
+						$cardRecord->productUrl = $productUrl;
+						$brand = normalizeName($cardsRecords->marca);
+						$brand = str_replace('_', '-', $brand);
+						$cardRecord->brand = $brand;
+						$cardsList[] = $cardRecord;
+					}
+				}
+			break;
+		}
+
+		$this->response->data->cardsList = $cardsList;
+
+		return $this->responseToTheView('callWs_CardListOperations');
 	}
 }

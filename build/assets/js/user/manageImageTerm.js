@@ -14,7 +14,7 @@ $(function () {
 		var inputModal = '<h1 class="h0">'+lang.USER_TERMS_SUBTITLE+'</h1>';
 		inputModal+= lang.USER_TERMS_CONTENT;
 
-		notiSystem(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
 		$(this).off('click');
 	})
 

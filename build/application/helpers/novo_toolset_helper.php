@@ -48,26 +48,25 @@ if (!function_exists('clientUrlValidate')) {
 	}
 }
 
-if (!function_exists('getFavicon')) {
-	function getFavicon($countryUri) {
+if (!function_exists('arrayTrim')) {
+	function arrayTrim(&$value) {
+		$value = trim($value);
+
+		return $value;
+	}
+}
+
+if (!function_exists('clearSessionVars')) {
+	function clearSessionsVars() {
 		$CI = &get_instance();
-		$favicon = $CI->config->item('favicon');
-		switch($countryUri) {
-			case 'bnt':
-				$ext = 'ico';
-			break;
-			case 'pb':
-				$ext = 'ico';
-			break;
-			default:
-				$ext = 'png';
+
+		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
+			if ($pos == '__ci_last_regenerate') {
+				continue;
+			}
+
+			$CI->session->unset_userdata($pos);
 		}
-
-		$faviconLoader = new stdClass();
-		$faviconLoader->favicon = $favicon;
-		$faviconLoader->ext = $ext;
-
-		return $faviconLoader;
 	}
 }
 
@@ -218,14 +217,6 @@ if (!function_exists('convertDateMDY')) {
 	}
 }
 
-if (!function_exists('arrayTrim')) {
-	function arrayTrim(&$value) {
-		$value = trim($value);
-
-		return $value;
-	}
-}
-
 if (!function_exists('mainMenu'))
 {
 	function mainMenu() {
@@ -239,8 +230,8 @@ if (!function_exists('mainMenu'))
 					'TELEPHONY' => []
 				]
 			],
-			'REPORTS' => [],
-			'CUSTOMER_SUPPORT' => []
+			'CUSTOMER_SUPPORT' => [],
+			'REPORTS' => []
 		];
 	}
 }
@@ -279,7 +270,6 @@ if (!function_exists('transformDate')) {
 		$replace = [
 			' Ene', ' Feb', ' Mar', ' Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'
 		];
-
 
 		return preg_replace($pattern, $replace, mb_strtolower(trim($date)));
 	}

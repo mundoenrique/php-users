@@ -40,7 +40,7 @@ $(function () {
 										action: 'redirect'
 									}
 								};
-								notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, data);
+								appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, data);
 								validateSignin(signinBtn);
 							}
 						});
