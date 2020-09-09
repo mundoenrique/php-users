@@ -21,7 +21,7 @@
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2">Seleccione una cuenta</p>
+              <p class="mb-2">Selecciona una cuenta</p>
             </div>
             <?php else: ?>
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
@@ -54,10 +54,10 @@
               <li id="replacementRequest" class="list-inline-item nav-item-config">
                 <a href="javascript:">
                   <span class="icon-config icon-spinner h1 icon-color"></span>
-                  <h5 class="center">Solicitud<br>de reposición</h5>
+                  <h5 class="center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h5>
                   <div class="box up left regular">
                     <span class="icon-spinner h1 icon-color"></span>
-                    <h4 class="h5 center">Solicitud<br>de reposición</h4>
+                    <h4 class="h5 center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h4>
                   </div>
                 </a>
               </li>
@@ -123,7 +123,7 @@
     </div>
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
-        <h4 class="line-text mb-2 semibold primary">Solicitud de reposición</h4>
+        <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
         <p>Seleccione una motivo de la solicitud</p>
         <div class="row">
           <div class="form-group col-lg-4">
@@ -738,36 +738,3 @@
     </div>
   </div>
 </div>
-<form id="operation">
-  <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber; ?>">
-  <input type="hidden" id="cardNumberMask" name="cardNumberMask" value="<?= $cardNumberMask; ?>">
-  <input type="hidden" id="expireDate" name="expireDate" value="<?= $expireDate; ?>">
-  <input type="hidden" id="prefix" name="prefix" value="<?= $prefix; ?>">
-  <input type="hidden" id="status" name="status" value="<?= $status; ?>">
-  <input type="hidden" id="action" name="action" value="">
-</form>
-<?php if ($cardsTotal > 1): ?>
-<section id="cardList" class="hide">
-  <h4 class="h4"><?= lang('GEN_ACCOUNT_SELECTION') ?></h4>
-  <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">
-    <?php foreach ($cardsList AS $cards): ?>
-    <div class="dashboard-item p-1 mx-1 mb-1">
-      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>">
-      <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
-        <p class="item-category semibold"><?= $cards->productName ?></p>
-        <p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
-      </div>
-      <form name="cardsListForm">
-        <input type="hidden" name="cardNumber" class="hidden" value="<?= $cards->cardNumber; ?>">
-        <input type="hidden" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask; ?>">
-        <input type="hidden" name="expireDate" class="hidden" value="<?= $cards->expireDate; ?>">
-        <input type="hidden" name="prefix" class="hidden" value="<?= $cards->prefix; ?>">
-        <input type="hidden" name="status" class="hidden" value="<?= $cards->status; ?>">
-        <input type="hidden" name="brand" class="hidden" value="<?= $cards->brand; ?>">
-        <input type="hidden" name="services" class="hidden" value="<?= htmlspecialchars(json_encode($cards->services), ENT_QUOTES, 'UTF-8'); ?>">
-      </form>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</section>
-<?php endif; ?>

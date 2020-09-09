@@ -100,7 +100,7 @@ class Novo_User_Model extends NOVO_Model {
 						'longProfile' => $response->aplicaPerfil,
 						'terms' => $response->tyc,
 						'mobilePhone' => $response->celular ?? '',
-						'client_agent' => $this->agent->agent_string()
+						'clientAgent' => $this->agent->agent_string()
 					];
 					$this->session->set_userdata($userData);
 
@@ -304,6 +304,7 @@ class Novo_User_Model extends NOVO_Model {
 				if($this->session->has_userdata('userId')) {
 					$this->callWs_FinishSession_User();
 				}
+
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('USER_PASS_LOGIN');
 				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
@@ -398,7 +399,8 @@ class Novo_User_Model extends NOVO_Model {
 					'docmentId' => $dataRequest->docmentId,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
-					'countrySess' => isset($dataRequest->client) ? $dataRequest->client : $this->country
+					'countrySess' => $dataRequest->client ?? $this->country,
+					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userSess);
 			break;
@@ -420,7 +422,6 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_UserIdentify');
-
 	}
 	/**
 	 * @info Método validar la existencia delnombre de usuario
