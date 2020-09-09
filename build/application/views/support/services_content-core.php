@@ -114,7 +114,7 @@
         <p>
           Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar
         </p>
-        <hr class="separador-one">
+        <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
           <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
           <button class="btn btn-small btn-loading btn-primary send" action="TemporaryLock">Continuar</button>
@@ -137,7 +137,7 @@
             <div class="help-block"></div>
           </div>
         </div>
-        <hr class="separador-one">
+        <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
           <a class="btn btn-small btn-link" href="">Cancelar</a>
           <button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
@@ -207,7 +207,7 @@
                   <div class="help-block"></div>
                 </div>
               </div>
-              <div id="requestPinInput" class="row hide">
+              <div id="requestPinInput" class="row hide ml-auto">
                 <hr class="separador-one mb-3">
                 <p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en
                   Conexión Empresas Online, para poder
