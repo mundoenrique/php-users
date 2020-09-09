@@ -26,7 +26,7 @@ $(function () {
 	});
 
 	if (code > 2) {
-		notiSystem(title, msg, icon, data)
+		appMessages(title, msg, icon, data)
 	}
 
 	$('.big-modal').on('click', function () {
@@ -142,7 +142,7 @@ function callNovoCore(who, where, request, _response_) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if (response.code === codeResp) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 		}
 
 		_response_(response);
@@ -165,7 +165,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		notiSystem(response.title, response.msg, response.icon, response.data);
+		appMessages(response.title, response.msg, response.icon, response.data);
 		_response_(response);
 	});
 }
@@ -184,7 +184,7 @@ function getCookieValue() {
  * @author J. Enrique Peñaloza Piñero
  * @date 05/03/2019
  */
-function notiSystem(title, message, icon, data) {
+function appMessages(title, message, icon, data) {
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
 	var maxHeight = data.maxHeight || 350;
