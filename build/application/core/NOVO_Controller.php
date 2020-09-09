@@ -112,8 +112,8 @@ class NOVO_Controller extends CI_Controller {
 				)
 			);
 		} else {
-			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 			if ($this->session->has_userdata('logged') && $accept && $module) {
 				redirect(base_url('perfil-usuario'), 'location', 301);
@@ -145,9 +145,8 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
 		if($auth) {
-			$faviconLoader = getFavicon($this->countryUri);
-			$this->render->favicon = $faviconLoader->favicon;
-			$this->render->ext = $faviconLoader->ext;
+			$this->render->favicon = lang('GEN_FAVICON');
+			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->countryConf = $this->config->item('country');
 			$this->render->countryUri = $this->countryUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();

@@ -60,6 +60,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 				data['acceptTerms'] = dataRegistryFrm.acceptTerms;
 				data['tipo_id_ext_per'] = dataRegistryFrm.code_tipo_id_ext_per;
 				data['pais'] = dataRegistryFrm.paisUser;
+				data['acCodCia'] = dataRegistryFrm.acCodCia;
 				data['otro_telefono'] = $$.getElementById('phoneType').value;
 				data['username'] = $$.getElementById('username').value.toUpperCase();
 				data['cpo_name'] = decodeURIComponent(

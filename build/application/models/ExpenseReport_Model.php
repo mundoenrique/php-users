@@ -14,7 +14,8 @@ class ExpenseReport_Model extends BDB_Model
 		log_message('INFO', 'NOVO User Model Class Initialized');
 	}
 
-	public function callWs_getExpenses_ExpenseReport ($dataRequest) {
+	public function callWs_getExpenses_ExpenseReport($dataRequest)
+	{
 		log_message('INFO', 'NOVO ExpenseReport Model: get Expens  method Initialized');
 
 		$dataProduct = $this->session->userdata('setProduct');
@@ -29,10 +30,11 @@ class ExpenseReport_Model extends BDB_Model
 		$this->dataRequest->idPersona = $dataProduct['id_ext_per'];
 		$this->dataRequest->nroTarjeta = $dataProduct['nroTarjeta'];
 		$this->dataRequest->producto = $dataProduct['producto'];
-		$this->dataRequest->fechaIni = empty($dataRequest->fechaInicial)?'01/01/'.date("Y"): $dataRequest->fechaInicial;
-		$this->dataRequest->fechaFin = empty($dataRequest->fechaFinal)?'31/12/'.date("Y"): $dataRequest->fechaFinal;
-		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion)? '1': '0';
+		$this->dataRequest->fechaIni = empty($dataRequest->fechaInicial) ? '01/01/' . date("Y") : $dataRequest->fechaInicial;
+		$this->dataRequest->fechaFin = empty($dataRequest->fechaFinal) ? '31/12/' . date("Y") : $dataRequest->fechaFinal;
+		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion) ? '1' : '0';
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
@@ -45,7 +47,8 @@ class ExpenseReport_Model extends BDB_Model
 
 				case -150:
 					$this->response->code = 1;
-					$this->response->data = '--';
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCTS');
 					break;
 
 				default:
@@ -65,16 +68,17 @@ class ExpenseReport_Model extends BDB_Model
 		return $this->response;
 	}
 
-	public function getFile_ExpenseReport ($dataRequest) {
+	public function getFile_ExpenseReport($dataRequest)
+	{
 		log_message('INFO', 'NOVO ExpenseReport Model: getPDF  method Initialized');
 
 		$dataProduct = $this->session->userdata('setProduct');
 
-		if ($dataRequest->typeFile == 'pdf'){
+		if ($dataRequest->typeFile == 'pdf') {
 
 			$this->dataAccessLog->operation = 'generarArchivoXlsGastosRepresentacion';
 			$this->dataRequest->idOperation = 'generarArchivoPDFGastosRepresentacion';
-		}else{
+		} else {
 
 			$this->dataAccessLog->operation = 'generarArchivoXlsGastosRepresentacion';
 			$this->dataRequest->idOperation = 'generarArchivoXlsGastosRepresentacion';
@@ -90,9 +94,9 @@ class ExpenseReport_Model extends BDB_Model
 		$this->dataRequest->producto = $dataProduct['producto'];
 		$this->dataRequest->idExtEmp = $dataProduct['id_ext_emp'];
 
-		$this->dataRequest->fechaIni = empty($dataRequest->initialDate)? '01/01/'.date("Y"): $dataRequest->initialDate;
-		$this->dataRequest->fechaFin = empty($dataRequest->finalDate)? '31/12/'.date("Y"): $dataRequest->finalDate;
-		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion)? '1': $dataRequest->tipoOperacion;
+		$this->dataRequest->fechaIni = empty($dataRequest->initialDate) ? '01/01/' . date("Y") : $dataRequest->initialDate;
+		$this->dataRequest->fechaFin = empty($dataRequest->finalDate) ? '31/12/' . date("Y") : $dataRequest->finalDate;
+		$this->dataRequest->tipoConsulta = empty($dataRequest->tipoOperacion) ? '1' : $dataRequest->tipoOperacion;
 
 		$this->dataRequest->token = $this->session->userdata('token');
 

@@ -646,6 +646,25 @@ textarea.form-control {
 	border-radius: 3px;
 }
 
+@supports (-ms-ime-align:auto) {
+	table.dataTable thead th.select-checkbox:before {
+		margin-top: 2px;
+	}
+	table.dataTable tr.selected th.sorting_disabled:nth-child(1):after{
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: 0 !important;
+		font-size: 11px;
+	}
+
+	table.dataTable tr.selected td.select-checkbox::after {
+		content: "\e900" !important;
+		font-family: "novoglyphs";
+		margin-top: -1px !important;
+		font-size: 11px !important;
+	}
+}
+
 .custom-control-input:checked ~ .checkbox-table::after {
 	transition: all .45s ease-out 0s;
 	content: '\2714';

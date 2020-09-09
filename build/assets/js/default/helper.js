@@ -32,6 +32,10 @@ var decimalOptions = {
     minimumFractionDigits: 2
 };
 
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+
 $('input[type=text], input[type=password], input[type=email], input[type=radio]').attr('autocomplete', 'off');
 
 $('.big-modal').on('click', function (e) {
@@ -106,7 +110,7 @@ function callNovoCore(verb, who, where, data, _response_) {
 
         _response_(response);
 
-    }).fail(function (xhr) {
+    }).fail(function (xhr, responseText) {
         var response = {
             title: titleNotiSystem,
             data: {
@@ -348,20 +352,4 @@ var createElement = function (tagName, attrs) {
 function formatCurrency(locales, options, number) {
     var formatted = new Intl.NumberFormat(locales, options).format(number);
     return formatted;
-}
-
-function bdb_getCookieValue() {
-    return decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
-}
-
-function bdb_cryptoPass(jsonObject, req) {
-    req = req == undefined ? false : req;
-    cpo_cook = bdb_getCookieValue();
-    var cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-    if (! req) {
-        cipherObject = btoa(JSON.stringify({password: cipherObject, plot: btoa(cpo_cook)}));
-    }
-
-    return cipherObject;
 }

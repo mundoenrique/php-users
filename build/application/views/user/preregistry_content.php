@@ -19,7 +19,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="typeDocument">Tipo de documento (tarjetahabiente) <span class="danger">*</span></label>
+								<label for="typeDocumentUser">Tipo de documento (tarjetahabiente) <span class="danger">*</span></label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>
@@ -43,7 +43,7 @@
 								<div class="help-block"></div>
 							</div>
 							<div class="form-group col-lg-4">
-								<label for="typeDocument">Tipo de documento (empresa) <span class="danger">*</span></label>
+								<label for="typeDocumentBussines">Tipo de documento (empresa) <span class="danger">*</span></label>
 								<?php
 									if ($statusListTypeDocument == 'disabled'){
 								?>

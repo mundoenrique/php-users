@@ -124,6 +124,11 @@ class Verify_Access {
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
+			if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
+				clearSessionsVars();
+				$module = 'noModule';
+			}
+
 			switch($module) {
 				case 'keepSession':
 				case 'userCardsList':

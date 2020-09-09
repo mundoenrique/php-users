@@ -736,6 +736,31 @@ $config = [
 			'label' => 'idNumber',
 			'rules' => 'trim|required|numeric'
 		],
+		[
+			'field' => 'nitBussines',
+			'label' => 'nitBussines',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'codeTypeDocumentUser',
+			'label' => 'codeTypeDocumentUser',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'abbrTypeDocumentUser',
+			'label' => 'abbrTypeDocumentUser',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeTypeDocumentBussines',
+			'label' => 'codeTypeDocumentBussines',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'abbrTypeDocumentBussines',
+			'label' => 'abbrTypeDocumentBussines',
+			'rules' => 'trim|required'
+		]
 	],
 	'closesession' => [
 		[

@@ -33,6 +33,7 @@ class ServiceProduct_Model extends BDB_Model
 		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		if (!empty($dataRequest->codeOTP)) {
 
@@ -242,6 +243,7 @@ class ServiceProduct_Model extends BDB_Model
 		$this->dataAccessLog->operation = 'cambio de PIN';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		$this->dataRequest->idOperation = '122';
 
@@ -474,6 +476,7 @@ class ServiceProduct_Model extends BDB_Model
 		$this->dataRequest->codigoOtp = '';
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		if (!empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '110';
@@ -688,6 +691,7 @@ class ServiceProduct_Model extends BDB_Model
 		$this->dataRequest->codigoOtp = '';
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		if (!empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '111';
