@@ -24,6 +24,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$view = 'services';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"modalCards",
 			"support/services"
 		);
 		$this->load->model('Novo_Business_Model', 'business');

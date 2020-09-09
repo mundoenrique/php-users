@@ -4,34 +4,36 @@
 	<div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
 		<div class="flex flex-wrap widget-product">
 			<div class="w-100">
-				<div class="flex inline-flex col-12 px-xl-2">
-					<div class="flex flex-colunm justify-center col-6 py-5">
-						<div class="product-presentation relative">
-							<div class="item-network"></div>
-							<div id="donor" class="product-search btn">
-								<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
-								<input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
-							</div>
-						</div>
-					</div>
-					<div class="flex flex-column items-start self-center col-6 py-5">
-						<p class="mb-2">Seleccione una cuenta</p>
-					</div>
-				</div>
-				<div class="flex inline-flex col-12 px-xl-2">
-					<div class="flex flex-colunm justify-center col-6 py-5">
-						<div class="product-presentation relative">
-							<div class="item-network maestro"></div>
-							<img class="card-image" src="../../../assets/images/default/bnt_default.svg" alt="Tarjeta Banorte">
-						</div>
-					</div>
-					<div class="flex flex-column items-start col-6 py-5">
-						<p class="semibold mb-0 h5">PLATA VIÁTICOS</p>
-						<p id="card" class="mb-2">604842******4714</p>
-						<a id="other-product" class="btn hyper-link btn-small p-0" href="">
-							<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto</a>
-					</div>
-				</div>
+				<div class="widget-product">
+          <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
+            <div class="flex flex-colunm justify-center col-6 py-5">
+              <div class="product-presentation relative">
+                <div class="item-network <?= $brand; ?>"></div>
+                <?php if ($cardsTotal > 1): ?>
+                <div id="donor" class="product-search btn">
+                  <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
+                  <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
+                </div>
+                <?php else: ?>
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+                <?php endif; ?>
+              </div>
+            </div>
+            <?php if ($cardsTotal > 1): ?>
+            <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
+              <p class="mb-2">Selecciona una cuenta</p>
+            </div>
+            <?php else: ?>
+            <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+              <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
+              <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
+                <i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+              </a>
+            </div>
+            <?php endif; ?>
+          </div>
+        </div>
 			</div>
 		</div>
 		<div class="flex optional widget-statistics p-3 mt-4">
@@ -212,3 +214,4 @@
 		</div>
 	</div>
 </div>
+

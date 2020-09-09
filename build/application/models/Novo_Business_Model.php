@@ -320,13 +320,33 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->nroTarjeta;
 						$cardRecord->prefix = $cardsRecords->prefix;
+						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
+						$produtImg = normalizeName($cardsRecords->producto).'.svg';
+						$productUrl = 'images/programs/'.$this->countryUri;
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = $this->countryUri.'_default.svg';
+						}
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
+							$produtImg = 'default.svg';
+							$productUrl = 'images/programs';
+						}
+
+						$cardRecord->productImg = $produtImg;
+						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
+						$brand = str_replace('_', '-', $brand);
+						$cardRecord->brand = $brand;
+						$cardsList[] = $cardRecord;
 					}
 				}
 			break;
 		}
+
+		$this->response->data->cardsList = $cardsList;
 
 		return $this->responseToTheView('callWs_CardListOperations');
 	}

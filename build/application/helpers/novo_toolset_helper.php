@@ -230,8 +230,8 @@ if (!function_exists('mainMenu'))
 					'TELEPHONY' => []
 				]
 			],
-			'REPORTS' => [],
-			'CUSTOMER_SUPPORT' => []
+			'CUSTOMER_SUPPORT' => [],
+			'REPORTS' => []
 		];
 	}
 }
@@ -270,7 +270,6 @@ if (!function_exists('transformDate')) {
 		$replace = [
 			' Ene', ' Feb', ' Mar', ' Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'
 		];
-
 
 		return preg_replace($pattern, $replace, mb_strtolower(trim($date)));
 	}
