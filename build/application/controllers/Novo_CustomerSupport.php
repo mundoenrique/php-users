@@ -51,6 +51,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$serviceTotal = $pinManagement ? $serviceTotal + 1 : $serviceTotal;
 		$uniqueEvent = $cardsTotal == 1 && $serviceTotal == 1;
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
+		$this->render->operations = TRUE;
 		$this->render->serviceList = $serviceList;
 		$this->render->serviceTotal = $serviceTotal;
 		$this->render->cardsTotal = $cardsTotal;
@@ -87,24 +88,6 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->RecoverPinText = 'Generar PIN';
 		}
 
-		$this->views = ['support/'.$view];
-		$this->loadView($view);
-	}
-	/**
-	 * @info Método para obtener las opciones de atención al cliente
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 21th, 2020
-	 */
-	public function reports()
-	{
-		log_message('INFO', 'NOVO CustomerSupport: reports Method Initialized');
-
-		$view = 'reports';
-		array_push(
-			$this->includeAssets->jsFiles,
-			"support/reports"
-		);
-		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);
 	}
