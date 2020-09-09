@@ -19,7 +19,7 @@ function sessionExpire() {
 function finishSession() {
 	var btnKeepSession = $('#accept');
 
-	if ($('#system-info').parents('.ui-dialog:visible').length) {
+	if ($('#system-info').parents('.ui-dialog').length) {
 		$('#system-info').dialog('destroy');
 	}
 
@@ -30,7 +30,7 @@ function finishSession() {
 			action: 'close'
 		}
 	}
-	notiSystem(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
 	btnKeepSession = $('.signout');
 
 	resetTimesession = setTimeout(function() {
@@ -51,7 +51,5 @@ function finishSession() {
 			.text(lang.GEN_BTN_ACCEPT)
 			.removeClass('btn-large-xl');
 		})
-
-
 	})
 }

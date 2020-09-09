@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="82" height="53.3" viewBox="0 0 82 53.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0aa4da"/>
+      <stop offset="1" stop-color="#005aa9"/>
+    </linearGradient>
+  </defs>
+  <g id="Private-CPO" transform="translate(-1 -1)">
+    <g id="_3-Card-Detail-CPO" data-name="3-Card-Detail-CPO" transform="translate(-774 -174)">
+      <g id="Content" transform="translate(39 80)">
+        <g id="Image" transform="translate(736 95)">
+          <path id="Mask" class="cls-1" d="M4.1,0H77.9A4.1,4.1,0,0,1,82,4.1V49.2a4.1,4.1,0,0,1-4.1,4.1H4.1A4.1,4.1,0,0,1,0,49.2V4.1A4.1,4.1,0,0,1,4.1,0Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

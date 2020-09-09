@@ -20,16 +20,21 @@ class Users_model extends CI_Model
 		$infoOTP->tokenCliente = $codeOTP === '--' ? "" : $codeOTP;
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
-		$data = json_encode(array(
+		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $username,
 			'password' => $password,
 			'logAccesoObject' => $logAcceso,
-			'codigoOtp' => $infoOTP,
-			'token' => '',
-			'guardaIp' => $saveIP
-		));
+			'token' => ''
+		);
+
+		if (IP_VERIFY == 'ON') {
+			$data['codigoOtp'] = $infoOTP;
+			$data['guardaIp'] = $saveIP;
+		}
+
+		$data = json_encode($data);
 
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];

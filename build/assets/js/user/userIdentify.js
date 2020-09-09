@@ -1,27 +1,8 @@
 'use strict'
-var reportsResults;
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-
-	$('#acceptTerms').on('click', function() {
-		data = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
-			},
-			maxHeight: 600,
-			width: 800,
-			posMy: 'top',
-			posAt: 'top'
-		}
-		var inputModal = '<h1 class="h0">'+lang.USER_TERMS_SUBTITLE+'</h1>';
-		inputModal+= lang.USER_TERMS_CONTENT;
-
-		notiSystem(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
-		$(this).off('click')
-	})
 
 	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();

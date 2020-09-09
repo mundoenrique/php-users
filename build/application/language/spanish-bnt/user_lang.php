@@ -109,3 +109,5 @@ $lang["USER_TERMS_CONTENT"] = '
 	</ol>
 </div>
 ';
+$lang['USER_ADD_F_DOC'] = 'Agregar anverso del INE';
+$lang['USER_ADD_B_DOC'] = 'Agregar reverso del INE';
