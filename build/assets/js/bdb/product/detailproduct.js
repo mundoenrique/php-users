@@ -446,7 +446,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 		$$.getElementsByName("frmNoTarjeta")[0].value = data.noTarjeta;
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
 		$$.getElementsByName("frmYear")[0].value = yearRequest;
-		
+		$$.getElementsByName("frmTotalProducts")[0].value = data.totalProducts !== 0 ? data.totalProducts : 1;
+
 		if ($$.getElementsByName("frmTypeFile")[0].value === 'ext') {
 
 			$$.getElementsByName("frmYear")[0].value = yearRequest;

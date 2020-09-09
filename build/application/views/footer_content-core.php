@@ -1,6 +1,6 @@
 
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<footer class="main-footer">
+<footer class="main-footer">sdfasdfasdfasdfasdfasdfasd
 	<? if ($countryUri == 'bdb'): ?>
 	<div class="flex pr-2 pr-lg-0">
 	<img  src="<?= $this->asset->insertFile($countryUri.'/'.lang('GEN_FOTTER_MARK')); ?> " alt="Logo Superintendencia">

@@ -8,6 +8,7 @@
 	<input type='hidden' name='frmYear' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>
 	<input type='hidden' name='frmNoTarjeta' value=''>
+	<input type='hidden' name='frmTotalProducts' value=''>
 </form>
 
 <div id="detail" class="detail-content h-100 bg-content">
@@ -24,7 +25,7 @@
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<div class="flex">
-						<?php if ($totalProducts > 1) : ?>
+						<?php if ($data['totalProducts'] > 1) : ?>
 							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('vistaconsolidada') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
 							</a>
@@ -222,7 +223,8 @@ $dataForm = json_encode([
 	"totalExpenseMovements" => $totalExpenseMovements,
 	"totalIncomePendingTransactions" => isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0,
 	"totalExpensePendingTransactions" => isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0,
-	"currency" => lang('GEN_COIN')
+	"currency" => lang('GEN_COIN'),
+	"totalProducts" => $data['totalProducts']
 ])
 ?>
 <script>
