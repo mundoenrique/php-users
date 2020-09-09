@@ -20,7 +20,7 @@ class ServiceProduct extends BDB_Controller
 			exit();
 		}
 
-		$this->session->unset_userdata('setProduct');
+		$this->session->unset_userdata('setProductServices');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
@@ -49,6 +49,7 @@ class ServiceProduct extends BDB_Controller
 
 		$this->views = ['serviceproduct/' . $view];
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
@@ -118,18 +119,23 @@ class ServiceProduct extends BDB_Controller
 			);
 		}
 
-		$dataProduct = $this->session->userdata('serviceProduct');
+		$dataProduct = $this->session->userdata('setProductServices');
 
-		if (is_null($dataProduct)) {
-			$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : '';
+		if (is_null($dataProduct)){
 
-			if (is_null($cardToLocate)) {
-				redirect('listaproducto');
+			$dataProduct = array_filter($_POST, function($k) {
+				return $k !== 'cpo_name';
+			}, ARRAY_FILTER_USE_KEY);
+
+			unset($_POST);
+
+			if (count($dataProduct) < 1) {
+				redirect('/listaproducto');
 			}
-			$dataProduct = $this->loadDataProduct($cardToLocate)->data[0];
-		}
 
-		$this->session->set_userdata('serviceProduct', $dataProduct);
+			$dataProduct['availableServices'] = json_decode($dataProduct['availableServices']);
+			$this->session->set_userdata('setProductServices', $dataProduct);
+		}
 
 		$menuOptionsProduct = [
 			'120' => [

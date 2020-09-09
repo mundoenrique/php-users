@@ -21,7 +21,7 @@ class Product extends BDB_Controller
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-		$this->session->unset_userdata("detailProduct");
+		$this->session->unset_userdata('setProductDetail');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
@@ -128,7 +128,7 @@ class Product extends BDB_Controller
 			);
 		}
 
-		$dataProduct = $this->session->userdata('detailProduct');
+		$dataProduct = $this->session->userdata('setProductDetail');
 
 		if (is_null($dataProduct)){
 
@@ -137,12 +137,12 @@ class Product extends BDB_Controller
 			}, ARRAY_FILTER_USE_KEY);
 
 			unset($_POST);
-		}
 
-		if (count($dataProduct) < 1) {
-			redirect('/vistaconsolidada');
-		}else{
-			$this->session->set_userdata('detailProduct', $dataProduct);
+			if (count($dataProduct) < 1) {
+				redirect('/vistaconsolidada');
+			}
+
+			$this->session->set_userdata('setProductDetail', $dataProduct);
 		}
 
 		$this->load->model('Product_Model', 'modelLoad');
@@ -209,6 +209,7 @@ class Product extends BDB_Controller
 			$this->session->unset_userdata('showAlert');
 		}
 
+		$this->session->unset_userdata("totalProducts");
 		$this->loadView($view);
 	}
 
