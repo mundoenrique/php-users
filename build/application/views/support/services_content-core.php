@@ -54,10 +54,10 @@
               <li id="replacementRequest" class="list-inline-item nav-item-config">
                 <a href="javascript:">
                   <span class="icon-config icon-spinner h1 icon-color"></span>
-                  <h5 class="center">Solicitud<br>de reposición</h5>
+                  <h5 class="center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h5>
                   <div class="box up left regular">
                     <span class="icon-spinner h1 icon-color"></span>
-                    <h4 class="h5 center">Solicitud<br>de reposición</h4>
+                    <h4 class="h5 center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h4>
                   </div>
                 </a>
               </li>
@@ -123,7 +123,7 @@
     </div>
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
-        <h4 class="line-text mb-2 semibold primary">Solicitud de reposición</h4>
+        <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
         <p>Seleccione una motivo de la solicitud</p>
         <div class="row">
           <div class="form-group col-lg-4">
