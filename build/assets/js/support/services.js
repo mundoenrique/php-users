@@ -215,7 +215,7 @@ function cardModal() {
 	var inputModal = $('#cardList').html();
 	$('.nav-config-box').removeClass('no-events');
 	data = {
-		btn1: {
+		btn2: {
 			text: lang.GEN_BTN_CANCEL,
 			action: 'close'
 		},
