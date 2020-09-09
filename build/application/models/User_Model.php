@@ -247,7 +247,6 @@ class User_Model extends BDB_Model
 			$this->isResponseRc = 0;
 			switch ($this->isResponseRc) {
 				case 0:
-					$this->response->code = 0;
 					if (!empty($dataRequest->codeOTP)){
 
 						$this->session->set_flashdata('registryUser', 'TRUE');
