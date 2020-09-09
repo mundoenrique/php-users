@@ -187,20 +187,10 @@ function habilitar() {
 }
 
 function validateCaptcha(token, user, pass) {
-	// TODO: quitar comentarios
-	// cpo_cook = decodeURIComponent(
-	// 	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-	// );
-
 	dataRequest = JSON.stringify({
 		token: token,
 		user: user
 	})
-
-	// TODO: quitar comentarios
-	// dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {
-	// 	format: CryptoJSAesJson
-	// }).toString();
 
 	dataRequest = novo_cryptoPass(dataRequest, true);
 

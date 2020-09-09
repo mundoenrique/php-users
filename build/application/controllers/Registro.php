@@ -435,7 +435,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
+		$FooterCustomInsertJS = array('jquery-1.9.1.min.js', 'jquery-ui-1.10.3.custom.min.js', 'jquery.ui.sliderbutton.js', 'jquery.isotope.min.js', 'novo_helper.js', 'registro.js', 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js',  'kendo.dataviz.min.js', 'additional-methods.min.js', 'jquery.ui.datepicker.validation.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer-registro', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
