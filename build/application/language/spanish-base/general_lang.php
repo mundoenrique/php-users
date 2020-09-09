@@ -1,9 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// General lang app
+
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
-$lang['GEN_LOGO_HEADER'] = 'logo.svg';
-$lang['GEN_DEFAULT_LOGO'] = 'logo.svg';
+$lang['GEN_FAVICON'] = 'favicon-novo';
+$lang['GEN_FAVICON_EXT'] = 'png';
+$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
+$lang['GEN_DEFAULT_LOGO'] = 'img-default_white.svg';
 //MENU
 $lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
@@ -75,6 +77,7 @@ $lang['GEN_ACCOUNT_SELECTION'] = 'Selección de cuenta';
 $lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
+$lang['GEN_PASSWORD_CONFIRM'] = 'Confirmar Contraseña';
 $lang['GEN_SHOW_PASS'] = 'Mostrar contraseña';
 $lang['GEN_HIDE_PASS'] = 'Ocultar contraseña';
 $lang['GEN_DNI'] = 'Documento de identidad';
@@ -86,15 +89,19 @@ $lang['GEN_EXPIRED_SESSION'] = 'Tu sesión en %s ha caducado.';
 $lang['GEN_FINISHED_SESSION'] = 'Tu sesión en %s ha sido cerrada exitosamente.';
 $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['GEN_LAST_ACCESS'] = 'Último acceso';
-$lang['GEN_FOOTER_IMG_FACEBOOK'] = $lang['GEN_DEFAULT_LOGO'];
-$lang['GEN_FOOTER_LINK_FACEBOOK'] = $lang['GEN_NO_LINK'];
-$lang['GEN_FOOTER_IMG_TWITTER'] = $lang['GEN_DEFAULT_LOGO'];
-$lang['GEN_FOOTER_LINK_TWITTER'] = $lang['GEN_NO_LINK'];
-$lang['GEN_FOOTER_IMG_YOUTUBE'] = $lang['GEN_DEFAULT_LOGO'];
-$lang['GEN_FOOTER_LINK_YOUTUBE'] = $lang['GEN_NO_LINK'];
-$lang['GEN_FOOTER_IMG_INSTAGRAM'] = $lang['GEN_DEFAULT_LOGO'];
-$lang['GEN_FOOTER_LINK_INSTAGRAM'] = $lang['GEN_NO_LINK'];
-$lang['GEN_FOTTER_IMAGE_L'] = $lang['GEN_DEFAULT_LOGO'];
+$lang['GEN_FOTTER_NETWORKS_IMG'] = [
+	'facebook' => 'facebook.png',
+	'twitter' => 'twitter.png',
+	'youtube' => 'youtube.png',
+	'instagram' => 'instagram.png',
+];
+$lang['GEN_FOTTER_NETWORKS_LINK'] = [
+	'facebook' => $lang['GEN_NO_LINK'],
+	'twitter' => $lang['GEN_NO_LINK'],
+	'youtube' => $lang['GEN_NO_LINK'],
+	'instagram' => $lang['GEN_NO_LINK'],
+];
+$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';

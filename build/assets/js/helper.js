@@ -26,7 +26,7 @@ $(function () {
 	});
 
 	if (code > 2) {
-		notiSystem(title, msg, icon, data)
+		appMessages(title, msg, icon, data)
 	}
 
 	$('.big-modal').on('click', function () {
@@ -142,7 +142,7 @@ function callNovoCore(who, where, request, _response_) {
 		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if (response.code === codeResp) {
-			notiSystem(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.data);
 		}
 
 		_response_(response);
@@ -165,7 +165,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		notiSystem(response.title, response.msg, response.icon, response.data);
+		appMessages(response.title, response.msg, response.icon, response.data);
 		_response_(response);
 	});
 }
@@ -184,25 +184,22 @@ function getCookieValue() {
  * @author J. Enrique Peñaloza Piñero
  * @date 05/03/2019
  */
-function notiSystem(title, message, icon, data) {
-
-	var btnAccept = $('#accept');
-	var btnCancel = $('#cancel');
-	var dialogMoldal = $('#system-info');
+function appMessages(title, message, icon, data) {
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
+	var maxHeight = data.maxHeight || 350;
 
-	dialogMoldal.dialog({
+	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center'},
+		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || 370,
-		minWidth: lang.CONF_MODAL_WIDTH,
+		width: data.width || lang.CONF_MODAL_WIDTH,
+		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
-		maxHeight: data.maxHeight || 350,
+		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
@@ -219,14 +216,19 @@ function notiSystem(title, message, icon, data) {
 			$('#system-icon').addClass(icon);
 			$('#system-msg').html(message);
 			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
-			createButton(dialogMoldal, btnAccept, btn1);
+
+			if (!btn1) {
+				$('#accept').hide();
+			} else {
+				createButton($('#accept'), btn1);
+			}
 
 			if (!btn2) {
-				btnCancel.hide();
-				btnAccept.addClass('modal-btn-primary');
+				$('#cancel').hide();
+				$('#accept').addClass('modal-btn-primary');
 				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
-				createButton(dialogMoldal, btnCancel, btn2);
+				createButton($('#cancel'), btn2);
 			}
 		}
 	});
@@ -236,25 +238,31 @@ function notiSystem(title, message, icon, data) {
  * @author Pedro Torres
  * @date 16/09/2019
  */
-function createButton(dialogMoldal, elementButton, valuesButton) {
-	valuesButton.text && elementButton.text(valuesButton.text);
+function createButton(elementButton, valuesButton) {
+	elementButton.text(valuesButton.text);
 	elementButton.show();
 	elementButton.on('click', function (e) {
-		if (valuesButton.action === 'redirect') {
-			$(this)
-			.html(loader)
-			.prop('disabled', true);
-			$(this).children('span').addClass('spinner-border-sm');
-			if ($(this).attr('id') == 'cancel') {
-				$(this).children('span')
-					.removeClass('secondary')
-					.addClass('primary');
-			}
-			$(location).attr('href', baseURL+valuesButton.link);
+		switch (valuesButton.action) {
+			case 'redirect':
+				$(this)
+					.html(loader)
+					.prop('disabled', true);
+				$(this).children('span').addClass('spinner-border-sm');
+				if ($(this).attr('id') == 'cancel') {
+					$(this).children('span')
+						.removeClass('secondary')
+						.addClass('primary');
+				}
+				$(location).attr('href', baseURL + valuesButton.link);
+				break;
+			case 'close':
+				$('#system-info').dialog('close');
+				break;
+			case 'destroy':
+				$('#system-info').dialog('destroy');
+				break;
 		}
-		if (valuesButton.action === 'close') {
-			dialogMoldal.dialog('close');
-		}
+
 		$(this).off('click');
 	});
 }
@@ -271,7 +279,7 @@ function insertFormInput(disabled, form) {
 		notDisabled = false;
 	}
 
-	$('form button, form select, form input:not([type=hidden]), button')
+	$('form button, form select, form textarea, form input:not([type=hidden]), button')
 		.not(notDisabled)
 		.not('.btn-modal')
 		.prop('disabled', disabled);
@@ -299,7 +307,7 @@ function getPropertyOfElement(property, element) {
  * @date November 18th, 2019
  */
 function formInputTrim(form) {
-	form.find('input, select').each(function () {
+	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
 		if(thisValInput == null) {
 			return;
@@ -334,7 +342,7 @@ function cryptoPass(jsonObject, req) {
  */
 function getDataForm(form) {
 	var dataForm = {};
-	form.find('input, select').each(function (index, element) {
+	form.find('input, select, textarea').each(function (index, element) {
 		dataForm[$(element).attr('id')] = $(element).val().trim()
 	})
 
@@ -345,11 +353,11 @@ function downLoadfiles (data) {
 	var File = new Int8Array(data.file);
 	var blob = new Blob([File], {type: "application/"+data.ext});
 	var url = window.URL.createObjectURL(blob);
-	$('#download-file').attr('href', url)
-	$('#download-file').attr('download', data.name)
-	document.getElementById('download-file').click()
+	$('#download-file').attr('href', url);
+	$('#download-file').attr('download', data.name);
+	document.getElementById('download-file').click();
 	window.URL.revokeObjectURL(url);
-	$('#download-file').attr('href', lang.GEN_NO_LINK)
-	$('#download-file').attr('download', '')
-	$('.cover-spin').hide()
+	$('#download-file').attr('href', lang.GEN_NO_LINK);
+	$('#download-file').attr('download', '');
+	$('.cover-spin').hide();
 }

@@ -28,16 +28,35 @@ class Product_Model extends BDB_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idUsuario = $this->session->userdata('idUsuario');
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request List Products:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->lista;
+					$this->response->code = 0;
+					$this->response->data = $response->lista;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				default:
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_getBalance_Product($dataRequest)
@@ -60,12 +79,22 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->disponible;
+					$this->response->code = 0;
+					$this->response->data = $response->disponible;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = '--';
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_getTransactionHistory_Product($dataRequest)
@@ -88,12 +117,28 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response;
+					$this->response->code = 1;
+					$this->response->data = $response;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_balanceInTransit_Product($dataRequest)
@@ -120,7 +165,7 @@ class Product_Model extends BDB_Model
 		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . " REQUEST WSinTransit objectAPI: " . json_encode($objectAPI));
 		$response = connectionAPI($objectAPI);
 
-		$httpCode = $response->httpCode;
+		$httpCode = $response->httpCode?: FALSE;
 		$resAPI = $response->resAPI;
 
 		log_message("DEBUG", '[' . $this->session->userdata("userName") . ']' . ' RESPONSE WSinTransit====>> httpCode: ' . $httpCode . ', resAPI: ' . $resAPI);
@@ -155,6 +200,7 @@ class Product_Model extends BDB_Model
 		if ($dataRequest->month == 0) {
 
 			$response = $this->callWs_getTransactionHistory_Product($dataRequest);
+			$response = $response->data->movimientos;
 		} else {
 
 			$this->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
@@ -173,18 +219,35 @@ class Product_Model extends BDB_Model
 			$this->dataRequest->token = $this->session->userdata('token');
 
 			$response = $this->sendToService('Product');
+			$response = $response->movimientos;
 		}
 
 		log_message("info", "Request loadMovement Product:" . json_encode($this->dataRequest));
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->movimientos;
+					$this->response->code = 1;
+					$this->response->data = $response;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_TRANSACTIONHISTORY_PRODUCT');
+					break;
+
 				default:
-					return '--';
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function callWs_dataReport_Product($dataRequest)
@@ -201,18 +264,35 @@ class Product_Model extends BDB_Model
 		$this->dataRequest->id_ext_per = $this->session->userdata("idUsuario");
 		$this->dataRequest->tipoOperacion = $dataRequest->tipoOperacion;
 		$this->dataRequest->token = $this->session->userdata('token');
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
 		log_message("info", "Request dataReport Product:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('Product');
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
-					return $response->cuentaOrigen;
+					$this->response->code = 0;
+					$this->response->data = $response->cuentaOrigen;
+					$this->response->msg = lang('RESP_RC_0');
 					break;
+
+				case -33:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					break;
+
+				case -150:
+					$this->response->code = 1;
+					$this->response->data = [];
+					$this->response->msg = lang('RESP_EMPTY_LIST_PRODUCTS');
+					break;
+
 				default:
-					return [];
+					$this->response->data = [];
 			}
 		}
+		return $this->response;
 	}
 
 	public function getFile_Product($dataRequest)

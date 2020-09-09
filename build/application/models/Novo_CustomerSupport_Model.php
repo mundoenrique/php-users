@@ -106,10 +106,34 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->data['dataTwirls'] = $dataTwirls;
 			break;
 			case -438:
-				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-				$this->response->msg = lang('CUST_NON_TWIRLS');
-				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'close';
+				$internalRc = $response->bean->cards[0]->rc ?? '';
+				$default = TRUE;
+
+				switch ($internalRc) {
+					case -266:
+						$this->response->msg = lang('CUST_CARD_TEMPORARY_LOCK');
+						$default = FALSE;
+					break;
+					case -307:
+						$this->response->msg = lang('CUST_CARD_CANCELED');
+						$default = FALSE;
+					break;
+					case -439:
+						$this->response->msg = lang('CUST_NON_RESULTS');
+						$default = FALSE;
+					break;
+					case -440:
+					case -441:
+						$this->response->msg = lang('CUST_CARD_UNAVAILABLE');
+						$default = FALSE;
+					break;
+				}
+
+				if (!$default) {
+					$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+					$this->response->icon = lang('GEN_ICON_WARNING');
+					$this->response->data['btn1']['action'] = 'close';
+				}
 			break;
 		}
 
@@ -154,8 +178,9 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$response = $response->bean;
 				$limits = new stdClass();
 				$datalimits = new stdClass();
-				$datalimits->updateDateL = lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->datetimeLastUpdate;
-				$datalimits->cardnumberL = maskString($response->cards[0]->numberCard, 4, 6);
+				$datalimits->updateDateL = $response->cards[0]->lastUpdate != '' ?
+				lang('CUST_UPDATE_CURRENT').' '.$response->cards[0]->lastUpdate : '';
+				$datalimits->cardnumberL = maskString($response->cards[0]->card, 4, 6);
 				$datalimits->customerNameL = $response->cards[0]->personName;
 				$datalimits->documentIdL = $response->cards[0]->personId;
 
@@ -168,9 +193,9 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->data['dataLimits'] = $datalimits;
 
 			break;
-			case -438:
+			case -447:
 				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-				$this->response->msg = lang('CUST_NON_TWIRLS');
+				$this->response->msg = lang('CUST_NON_RESULTS');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
