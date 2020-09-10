@@ -1,5 +1,4 @@
 'use strict'
-//app
 var screenSize;
 var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
@@ -92,11 +91,7 @@ $(function () {
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
-/**
- * @info Llama al core del servidor
- * @author J. Enrique Peñaloza Piñero
- * @date 15/04/2019
- */
+
 function callNovoCore(who, where, request, _response_) {
 	request.screenSize = screen.width;
 	var dataRequest = JSON.stringify({
@@ -169,21 +164,13 @@ function callNovoCore(who, where, request, _response_) {
 		_response_(response);
 	});
 }
-/**
- * @info Obtiene valor de cookie
- * @author J. Enrique Peñaloza Piñero
- * @date December 18th, 2019
- */
+
 function getCookieValue() {
 	return decodeURIComponent(
 		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 	);
 }
-/**
- * @info Uso del modal informativo
- * @author J. Enrique Peñaloza Piñero
- * @date 05/03/2019
- */
+
 function appMessages(title, message, icon, data) {
 	var btn1 = data.btn1;
 	var btn2 = data.btn2;
@@ -233,11 +220,7 @@ function appMessages(title, message, icon, data) {
 		}
 	});
 }
-/**
- * @info Crea botones para modal informativo
- * @author Pedro Torres
- * @date 16/09/2019
- */
+
 function createButton(elementButton, valuesButton) {
 	elementButton.text(valuesButton.text);
 	elementButton.show();
@@ -266,11 +249,7 @@ function createButton(elementButton, valuesButton) {
 		$(this).off('click');
 	});
 }
-/**
- * @info Incorpora inputs a formularios
- * @author J. Enrique Peñaloza
- * @date November 18th, 2019
- */
+
 function insertFormInput(disabled, form) {
 	form = form == undefined ? false : form;
 	var notDisabled = '#product-select, #enterprise-widget-btn'
@@ -291,21 +270,12 @@ function insertFormInput(disabled, form) {
 		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
-/**
- * @info lee una propiedad especifica de un elemento html,
- * de no indicarse el elemento se toma por defecto el body
- * @author Pedro Torres
- * @date 27/08/2019
- */
+
 function getPropertyOfElement(property, element) {
 	var element = element || 'body';
 	return $(element).attr(property);
 }
-/**
- * @info quita espacios en blanco de los campos input
- * @author J. Enrique Peñaloza Piñero
- * @date November 18th, 2019
- */
+
 function formInputTrim(form) {
 	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
@@ -316,11 +286,7 @@ function formInputTrim(form) {
 		$(this).val(trimVal)
 	});
 }
-/**
- * @info Cifra la contraseña del usuario
- * @author J. Enrique Peñaloza Piñero
- * @date December 27th, 2019
- */
+
 function cryptoPass(jsonObject, req) {
 	req = req == undefined ? false : req;
 	cpo_cook = getCookieValue();
@@ -335,11 +301,7 @@ function cryptoPass(jsonObject, req) {
 
 	return cipherObject;
 }
-/**
- * @info Obtiene datos para el request
- * @author J. Enrique Peñaloza Piñero
- * @date April 25th, 2020
- */
+
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
