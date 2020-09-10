@@ -53,20 +53,20 @@
 		<h2 class="h4 regular tertiary">Gastos por categoria</h2>
 		<nav id="filtersStack" class="navbar px-0">
 			<div class="flex mt-2">
-				<form id="service-orders-form" method="post" class="w-100">
+				<form id="monthtlyMovesForm" method="post" class="w-100">
 					<div class="row pl-2">
-						<label class="mt-1" for="datepicker_start">Mostrar desde</label>
+						<label class="mt-1" for="initDate">Mostrar desde</label>
 						<div class="form-group col-4 col-xl-auto">
-							<input id="datepicker_start" name="datepicker_start" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+							<input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
 							<div class="help-block"></div>
 						</div>
-						<label class="mt-1" for="datepicker_end">Hasta</label>
+						<label class="mt-1" for="finalDate">Hasta</label>
 						<div class="form-group col-4 col-xl-auto pr-1">
-							<input id="datepicker_end" name="datepicker_end" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+							<input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
 							<div class="help-block "></div>
 						</div>
 						<div class="col-xl-auto flex items-center ml-auto mr-2">
-							<button id="buscar" class="btn btn-small btn-rounded-right btn-primary mb-3">
+							<button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3">
 								<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 							</button>
 						</div>

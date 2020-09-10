@@ -67,7 +67,9 @@ function validateForms(form) {
 					}
 				},
 				pattern: phone
-			}
+			},
+			"initDate": { required: true, pattern: date.dmy },
+			"finalDate": { required: true, pattern: date.dmy },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -107,6 +109,8 @@ function validateForms(form) {
 			"landLine": lang.VALIDATE_PHONE,
 			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
 			"otherPhoneNum": lang.VALIDATE_PHONE,
+			"initDate": lang.VALIDATE_DATE_DMY,
+			"finalDate": lang.VALIDATE_DATE_DMY
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

@@ -312,19 +312,31 @@ $config = [
 	'getMovements' => [
 		[
 			'field' => 'cardNumber',
-			'rules' => 'trim|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'cardNumberMask',
+			'rules' => 'trim|regex_match[/^([0-9\*])+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
-			'rules' => 'trim|required'
+			'rules' => 'trim|alpha_numeric|required'
 		],
 		[
 			'field' => 'status',
-			'rules' => 'trim|required'
+			'rules' => 'trim|alpha|required'
 		],
 		[
 			'field' => 'action',
-			'rules' => 'trim|required'
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
 	'keepSession' => [

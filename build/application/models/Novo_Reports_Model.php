@@ -42,7 +42,7 @@ class Novo_Reports_Model extends NOVO_Model {
 
 		$reponse = $this->sendToService('GetMovements');
 
-		$this->response->data['btn1']['link'] = 'close';
+		$this->response->data['btn1']['action'] = 'close';
 
 		return $this->responseToTheView('GetMovements');
 	}
