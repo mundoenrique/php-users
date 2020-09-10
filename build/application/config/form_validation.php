@@ -309,6 +309,24 @@ $config = [
 			'rules' => 'trim|alpha_numeric|required'
 		]
 	],
+	'getMovements' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'action',
+			'rules' => 'trim|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',

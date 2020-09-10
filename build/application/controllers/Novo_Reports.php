@@ -46,6 +46,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->cardNumber = '';
 		$this->render->prefix = '';
 		$this->render->status = '';
+		$this->render->callMoves = '0';
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
@@ -56,6 +57,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->render->cardNumber = $cardsList[0]->cardNumber;
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
+			$this->render->callMoves = '1';
 		}
 
 		$this->views = ['reports/'.$view];

@@ -2,8 +2,8 @@
 <footer class="main-footer">
   <? if ($countryUri == 'bdb'): ?>
   <div class="flex pr-2 pr-lg-0">
-		<img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $countryUri); ?> " alt="Logo Superintendencia">
-	</div>
+    <img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $countryUri); ?> " alt="Logo Superintendencia">
+  </div>
   <? endif; ?>
   <div class="flex flex-auto flex-wrap justify-around items-center">
     <?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
@@ -49,9 +49,9 @@
 <form id="operation">
   <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber; ?>">
   <input type="hidden" id="cardNumberMask" name="cardNumberMask" value="<?= $cardNumberMask; ?>">
-	<?php if (isset($expireDate)): ?>
+  <?php if (isset($expireDate)): ?>
   <input type="hidden" id="expireDate" name="expireDate" value="<?= $expireDate; ?>">
-	<?php endif; ?>
+  <?php endif; ?>
   <input type="hidden" id="prefix" name="prefix" value="<?= $prefix; ?>">
   <input type="hidden" id="status" name="status" value="<?= $status; ?>">
   <input type="hidden" id="action" name="action" value="">
@@ -70,15 +70,15 @@
       <form name="cardsListForm">
         <input type="hidden" name="cardNumber" class="hidden" value="<?= $cards->cardNumber; ?>">
         <input type="hidden" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask; ?>">
-				<?php if (isset($expireDate)): ?>
+        <?php if (isset($expireDate)): ?>
         <input type="hidden" name="expireDate" class="hidden" value="<?= $cards->expireDate; ?>">
-				<?php endif; ?>
+        <?php endif; ?>
         <input type="hidden" name="prefix" class="hidden" value="<?= $cards->prefix; ?>">
         <input type="hidden" name="status" class="hidden" value="<?= $cards->status; ?>">
         <input type="hidden" name="brand" class="hidden" value="<?= $cards->brand; ?>">
-				<?php if (isset($cards->services)): ?>
+        <?php if (isset($cards->services)): ?>
         <input type="hidden" name="services" class="hidden" value="<?= htmlspecialchars(json_encode($cards->services), ENT_QUOTES, 'UTF-8'); ?>">
-				<?php endif; ?>
+        <?php endif; ?>
       </form>
     </div>
     <?php endforeach; ?>

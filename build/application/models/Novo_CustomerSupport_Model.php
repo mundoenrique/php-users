@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * @info Módelo para la información del usuario
+ * @info Clase para la la atención al cliente
  * @author J. Enrique Peñaloza Piñero
  * @date May 23th, 2020
  */

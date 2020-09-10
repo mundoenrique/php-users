@@ -146,6 +146,9 @@ class Verify_Access {
 				case 'transactionalLimits':
 				case 'expensesCategory':
 					$auth = $this->CI->session->has_userdata('products');
+				case 'expensesCategory':
+				case 'getMovements':
+					$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
 				break;
 				case 'signup':
 					$auth = $this->CI->agent->referrer() == base_url(lang('GEN_LINK_USER_IDENTITY')) && $this->CI->session->has_userdata('userIdentity');

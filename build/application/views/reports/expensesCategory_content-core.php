@@ -5,7 +5,7 @@
 		<div class="flex flex-wrap widget-product">
 			<div class="w-100">
 				<div class="widget-product">
-          <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
+          <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-colunm justify-center col-6 py-5">
               <div class="product-presentation relative">
                 <div class="item-network <?= $brand; ?>"></div>
