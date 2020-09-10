@@ -191,9 +191,6 @@ class ServiceProduct extends BDB_Controller
 
 		$this->render->data = $dataProduct;
 		$this->render->listReason = $this->config->item('listReasonReposition');
-		$this->render->totalProducts = $this->session->userdata('totalProducts');
-		$this->session->unset_userdata("totalProducts");
-
 		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->availableServices = count($dataProduct['availableServices']);
 

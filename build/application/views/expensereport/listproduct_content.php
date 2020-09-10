@@ -44,8 +44,24 @@
 									<div class="item-info <?= strtolower($row['marca']); ?> p-2 h5 tertiary bg-white">
 										<p class="item-category semibold primary"><?= $row['nombre_producto']; ?></p>
 										<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara']; ?></p>
-										<?= $infoCard ?>
+										<?= $infoCard; ?>
 									</div>
+									<form action="<?= base_url('detallereporte'); ?>" id="frmProduct-<?= $row['nroTarjeta']; ?>" method="post">
+										<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+										<input type='hidden' id='nroTarjeta' name='nroTarjeta' value='<?= $row['nroTarjeta']; ?>'>
+										<input type='hidden' id='producto' name='producto' value='<?= $row['prefix']; ?>'>
+										<input type='hidden' id='bloque' name='bloque' value='<?= $row['bloque']; ?>'>
+										<input type='hidden' id='nom_plastico' name='nom_plastico' value='<?= $row['nomPlastico']; ?>'>
+										<input type='hidden' id='nroTarjetaMascara' name='nroTarjetaMascara' value='<?= $row['nroTarjetaMascara']; ?>'>
+										<input type='hidden' id='nomEmp' name='nomEmp' value='<?= $row['nomEmp']; ?>'>
+										<input type='hidden' id='marca' name='marca' value='<?= $row['marca']; ?>'>
+										<input type='hidden' id='nombre_producto' name='nombre_producto' value='<?= $row['nombre_producto']; ?>'>
+										<input type='hidden' id='tarjetaHabiente' name='tarjetaHabiente' value='<?= $row['tarjetaHabiente']; ?>'>
+										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
+										<input type='hidden' id='id_ext_emp' name='id_ext_emp' value='<?= $row['id_ext_emp']; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
+										<input type='hidden' id='availableServices' name='availableServices' value='<?= htmlspecialchars(json_encode($row['availableServices']), ENT_QUOTES, 'UTF-8'); ?>'>
+									</form>
 								</div>
 							<?php
 							}

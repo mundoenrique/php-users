@@ -23,7 +23,7 @@ class ExpenseReport extends BDB_Controller
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-		$this->session->unset_userdata('productExpense');
+		$this->session->unset_userdata('setProductExpense');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct) && count($dataProduct) == 1) {
@@ -56,6 +56,7 @@ class ExpenseReport extends BDB_Controller
 
 		$this->views = ['expensereport/' . $view];
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->titlePage = lang('GEN_REPORT') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->actualPage = lang('GEN_REPORT') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
@@ -72,12 +73,17 @@ class ExpenseReport extends BDB_Controller
 		}
 
 		$this->session->set_userdata("totalProducts", count($listProducts->data));
+		$servicesAvailableCards = $this->session->userdata("servicesAvailableCards");
 
 		$dataRequeried = [];
 		foreach ($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
+
+			$indexServices = array_search($row->noTarjeta, array_column($servicesAvailableCards, 'noTarjeta'));
+			$services = json_decode($servicesAvailableCards[$indexServices]['availableService']);
+
 			array_push($dataRequeried, [
 				"nroTarjeta" => $row->noTarjeta,
 				"nroTarjetaMascara" => $row->noTarjetaConMascara,
@@ -89,7 +95,7 @@ class ExpenseReport extends BDB_Controller
 				"nomEmp" => $row->nomEmp,
 				"tipoTarjeta" => $row->tipo,
 				"id_ext_per" => $row->id_ext_per,
-				"availableServices" => $row->services,
+				"availableServices" => $services,
 				"prefix" => $row->prefix,
 				"id_ext_emp" => $row->rif,
 				"bloque" => $row->bloque
@@ -128,19 +134,23 @@ class ExpenseReport extends BDB_Controller
 			);
 		}
 
-		$dataProduct = $this->session->unset_userdata('productExpense');
+		$dataProduct = $this->session->userdata('setProductExpense');
 
-		if (is_null($dataProduct)) {
+		if (is_null($dataProduct)){
 
-			$cardToLocate = array_key_exists('nroTarjeta', $_POST) ? $_POST['nroTarjeta'] : '';
-			if (is_null($cardToLocate)) {
-				redirect('reporte');
+			$dataProduct = array_filter($_POST, function($k) {
+				return $k !== 'cpo_name';
+			}, ARRAY_FILTER_USE_KEY);
+
+			unset($_POST);
+
+			if (count($dataProduct) < 1) {
+				redirect('/reporte');
 			}
 
-			$dataProduct = $this->loadDataProduct($cardToLocate)[0];
-			$this->session->set_userdata('productExpense', $dataProduct);
+			$dataProduct['availableServices'] = json_decode($dataProduct['availableServices']);
+			$this->session->set_userdata('setProductExpense', $dataProduct);
 		}
-
 		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
 
 			redirect('/atencioncliente');

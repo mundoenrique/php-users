@@ -61,7 +61,7 @@
 										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
 										<input type='hidden' id='availableBalance' name='availableBalance' value='<?= $row['availableBalance']; ?>'>
 										<input type='hidden' id='vc' name='vc' value='<?= $row['vc']; ?>'>
-										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $row['totalProducts']; ?>'>
 									</form>
 								</div>
 							<?php

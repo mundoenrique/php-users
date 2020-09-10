@@ -22,14 +22,17 @@ class Product extends BDB_Controller
 			exit();
 		}
 		$this->session->unset_userdata('setProductDetail');
+		$this->session->unset_userdata('servicesAvailableCards');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
 			if (in_array("120",  $dataProduct->data[0]['availableServices'])) {
 
+				$this->session->set_userdata('setProductServices', $dataProduct->data[0]);
 				redirect('/atencioncliente');
 			}
 
+			$dataProduct = $this->session->set_userdata('setProductDetail',$dataProduct->data[0]);
 			redirect("/detalle");
 		}
 
@@ -54,7 +57,6 @@ class Product extends BDB_Controller
 
 		$this->views = ['product/' . $view];
 		$this->render->data = $dataProduct;
-		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
 	}
@@ -62,16 +64,16 @@ class Product extends BDB_Controller
 	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Product_Model', 'modelLoad');
-		$response = $this->modelLoad->callWs_loadProducts_Product();
+		$loadProducts = $this->modelLoad->callWs_loadProducts_Product();
+		$totalProducts = count($loadProducts->data);
 
-		if (count($response->data) < 1) {
-			return $response;
+		if ( $totalProducts < 1) {
+			return $loadProducts;
 		}
 
-		$this->session->set_userdata("totalProducts", count($response->data));
-
 		$dataRequeried = [];
-		foreach ($response->data as $row) {
+		$servicesExport = [];
+		foreach ($loadProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
@@ -92,11 +94,18 @@ class Product extends BDB_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
+				"totalProducts" => $totalProducts,
 				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
+
+			array_push($servicesExport, [
+				"noTarjeta" => $row->noTarjeta,
+				"availableService" => json_encode($row->services)
+			]);
 		}
-		$response->data = $dataRequeried;
-		return $response;
+		$loadProducts->data = $dataRequeried;
+		$this->session->set_userdata("servicesAvailableCards", $servicesExport);
+		return $loadProducts;
 	}
 
 	public function detailProduct()
@@ -204,12 +213,9 @@ class Product extends BDB_Controller
 			$this->render->action = $dataAlert->action;
 			$this->render->monthSelected = $dataAlert->monthSelected;
 			$this->render->yearSelected = $dataAlert->yearSelected;
-			$this->render->totalProducts = $dataAlert->totalProducts;
 
 			$this->session->unset_userdata('showAlert');
 		}
-
-		$this->session->unset_userdata("totalProducts");
 		$this->loadView($view);
 	}
 
@@ -280,7 +286,6 @@ class Product extends BDB_Controller
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
 				$dataForAlert->noTarjeta = $_POST['frmNoTarjeta'];
-				$dataForAlert->totalProducts = $_POST['totalProducts'];
 
 				unset($_POST['frmMonth']);
 				unset($_POST['frmYear']);

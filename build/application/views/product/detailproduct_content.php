@@ -223,8 +223,7 @@ $dataForm = json_encode([
 	"totalExpenseMovements" => $totalExpenseMovements,
 	"totalIncomePendingTransactions" => isset($totalIncomePendingTransactions) ? $totalIncomePendingTransactions : 0,
 	"totalExpensePendingTransactions" => isset($totalExpensePendingTransactions) ? $totalExpensePendingTransactions : 0,
-	"currency" => lang('GEN_COIN'),
-	"totalProducts" => $data['totalProducts']
+	"currency" => lang('GEN_COIN')
 ])
 ?>
 <script>
