@@ -52,28 +52,28 @@
 	<div class="flex flex-column pt-3 col-lg-12 col-xl-8">
 		<h2 class="h4 regular tertiary">Gastos por categoria</h2>
 		<nav id="filtersStack" class="navbar px-0">
-			<div class="flex mt-2">
-				<form id="monthtlyMovesForm" method="post" class="w-100">
+
+				<form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
 					<div class="row pl-2">
 						<label class="mt-1" for="initDate">Mostrar desde</label>
-						<div class="form-group col-4 col-xl-auto">
+						<div class="form-group col-4 px-1">
 							<input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
 							<div class="help-block"></div>
 						</div>
 						<label class="mt-1" for="finalDate">Hasta</label>
-						<div class="form-group col-4 col-xl-auto pr-1">
+						<div class="form-group col-4 px-1">
 							<input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
 							<div class="help-block "></div>
 						</div>
-						<div class="col-xl-auto flex items-center ml-auto mr-2">
+						<div class="flex items-center">
 							<button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3">
 								<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 							</button>
 						</div>
 					</div>
 				</form>
-			</div>
-			<ul class="stack list-inline mb-0 flex items-center">
+
+			<ul class="stack list-inline mb-0 flex items-center mb-3">
 				<li class="stack-item px-1 list-inline-item">
 					<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 				</li>
