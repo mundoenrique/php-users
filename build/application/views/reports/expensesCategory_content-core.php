@@ -57,16 +57,16 @@
 					<div class="row pl-2">
 						<label class="mt-1" for="initDate">Mostrar desde</label>
 						<div class="form-group col-4 col-xl-auto">
-							<input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+							<input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
 						<label class="mt-1" for="finalDate">Hasta</label>
 						<div class="form-group col-4 col-xl-auto pr-1">
-							<input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+							<input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
 							<div class="help-block "></div>
 						</div>
 						<div class="col-xl-auto flex items-center ml-auto mr-2">
-							<button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3">
+							<button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
 								<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 							</button>
 						</div>
