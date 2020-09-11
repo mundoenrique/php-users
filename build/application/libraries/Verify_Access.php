@@ -144,7 +144,7 @@ class Verify_Access {
 				case 'temporaryLock':
 				case 'twirlsCommercial':
 				case 'transactionalLimits':
-				case 'expensesCategory':
+				case 'replacement':
 					$auth = $this->CI->session->has_userdata('products');
 				case 'expensesCategory':
 				case 'getMovements':

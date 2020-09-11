@@ -30,3 +30,4 @@ $lang['VALIDATE_NICK_REQ'] = 'Indica tu nombre de usuario mín 6 máx 16';
 $lang['VALIDATE_NICK_PATT'] = 'debe iniciar con dos letras, puede contener números y "_"';
 $lang['VALIDATE_NICK_DIFFER'] = 'No debe ser igual a tu documento de identidad';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
+$lang['VALIDATE_REPLACE_REASON'] = 'Indica un motivo';

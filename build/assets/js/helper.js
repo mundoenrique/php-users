@@ -152,8 +152,6 @@ function callNovoCore(who, where, request, _response_) {
 
 		var response = {
 			code: codeResp,
-			title: lang.GEN_SYSTEM_NAME,
-			icon: lang.GEN_ICON_DANGER,
 			data: {
 				btn1: {
 					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
@@ -161,7 +159,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(response.title, response.msg, response.icon, response.data);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.data);
 		_response_(response);
 	});
 }

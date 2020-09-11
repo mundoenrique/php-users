@@ -293,6 +293,24 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		]
 	],
+	'replacement' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
 	'userCardsList' => [
 		[
 			'field' => 'cardList',

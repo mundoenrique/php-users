@@ -22,8 +22,8 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
 
 		$this->className = 'com.novo.objects.TOs.TarjetaTO';
-		$this->dataAccessLog->modulo = 'atención al cliente';
-		$this->dataAccessLog->function = 'Bloqueo temporal';
+		$this->dataAccessLog->modulo = 'Atención al cliente';
+		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de bloqueo o desbloqueo';
 
 		$this->dataRequest->idOperation = '110';
@@ -48,12 +48,74 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->success = TRUE;
 				$this->response->data['btn1']['link'] = 'atencion-al-cliente';
 			break;
+			case 7:
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+			case -125:
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_TemporaryLock');
 	}
 	/**
-	 * @info Método para obtener la lista de tarjetas de un usuario
+	 * @info Método para solictar el bloqueo y/o reposición de una tarjeta
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date Sep 11th, 2020
+	 */
+	public function callWs_Replacement_CustomerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+
+		$this->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataAccessLog->modulo = 'Atención al cliente';
+		$this->dataAccessLog->function = 'Servicios';
+		$this->dataAccessLog->operation = 'Solicitud de bloqueo permanente';
+
+		$this->dataRequest->idOperation = '111';
+		$this->dataRequest->accodUsuario = $this->session->userName;
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->prefix = $dataRequest->prefix;
+		$this->dataRequest->fechaExp = $dataRequest->expireDate;
+		$this->dataRequest->codBloqueo = $dataRequest->status;
+		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
+		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
+
+		$response = $this->sendToService('callWs_Replacement');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = 'Bloqueo permanente';
+				$this->response->msg = novoLang('La tarjeta %s, ha sido %s.', [$dataRequest->cardNumberMask, 'bloqueda de forma permanente']);
+				$this->response->success = TRUE;
+				$this->response->data['btn1']['link'] = 'atencion-al-cliente';
+			break;
+			case 7:
+				$this->response->title = 'Bloqueo permanente';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+			case -395:
+				$this->response->title = 'Bloqueo permanente';
+				$this->response->msg = novoLang('La tarjeta %s tiene una reposición pendiente', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+			case -125:
+				$this->response->title = 'Bloqueo permanente';
+				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_Replacement');
+	}
+	/**
+	 * @info Método para obtener la lista giros comerciales
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 14th, 2019
 	 */

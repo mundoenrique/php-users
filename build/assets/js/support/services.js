@@ -104,70 +104,82 @@ $(function () {
 	$('.send').on('click', function(e) {
 		e.preventDefault();
 		var thisAction = $(this);
-		var action = thisAction.attr('action')
+		var action = thisAction.attr('action');
+		var validForm = true;
 		$('#action').val(action);
-		e.preventDefault();
-		form = $('#operation');
-		data = getDataForm(form);
-		$('.nav-config-box').addClass('no-events');
 
-		if (thisAction.hasClass('btn')) {
-			insertFormInput(true);
-			btnText = thisAction.text().trim()
-			thisAction.html(loader);
-		} else {
-			$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
-			$('.hide-out').addClass('hide');
+		if (action == 'replacement') {
+			form = $('#replacementForm');
+			validateForms(form);
+			validForm = form.valid();
 		}
 
-		who = 'CustomerSupport'; where = data.action
-
-		callNovoCore(who, where, data, function (response) {
-			if (data.action == 'TemporaryLock' && response.success) {
-				var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
-				$('.status-text1').text(statusText);
-				$('.status-text2').text(statusText.toLowerCase());
-				var status = $('#status').val() == '' ? 'PB' : ''
-				$('#status').val(status);
-			}
-
-			if (data.action == 'twirlsCommercial' && response.code == 0) {
-				$.each(response.data.dataTwirls, function(key, value) {
-					$('#'+key).text(value);
-				})
-
-				$.each(response.data.shops, function(key, value) {
-					var markCheck = value == '1' ? true : false;
-					$('#' + key).prop('checked', markCheck);
-				})
-
-				$('.hide-out').removeClass('hide');
-			}
-
-			if (data.action == 'transactionalLimits' && response.code == 0) {
-				$.each(response.data.dataLimits, function(key, value) {
-					$('#'+key).text(value);
-				})
-
-				$.each(response.data.limits, function(key, value) {
-					$('#' + key).val(value);
-				})
-
-				$('.hide-out').removeClass('hide');
-			}
-
-			if ((data.action == 'transactionalLimits' || data.action == 'twirlsCommercial') && response.code != 0) {
-				$('.nav-item-config').removeClass('active');
-			}
+		if (validForm) {
+			form = $('#operation');
+			data = getDataForm(form);
+			$('.nav-config-box').addClass('no-events');
 
 			if (thisAction.hasClass('btn')) {
-				thisAction.html(btnText);
-				insertFormInput(false);
+				insertFormInput(true);
+				btnText = thisAction.text().trim()
+				thisAction.html(loader);
+
+				if (action == 'replacement') {
+					data.status = $('#replaceMotSol').val();
+				}
 			} else {
-				$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
+				$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
+				$('.hide-out').addClass('hide');
 			}
 
-			$('.nav-config-box').removeClass('no-events');
-		})
+			who = 'CustomerSupport'; where = data.action;
+			callNovoCore(who, where, data, function (response) {
+				if (data.action == 'TemporaryLock' && response.success) {
+					var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
+					$('.status-text1').text(statusText);
+					$('.status-text2').text(statusText.toLowerCase());
+					var status = $('#status').val() == '' ? 'PB' : ''
+					$('#status').val(status);
+				}
+
+				if (data.action == 'twirlsCommercial' && response.code == 0) {
+					$.each(response.data.dataTwirls, function(key, value) {
+						$('#'+key).text(value);
+					})
+
+					$.each(response.data.shops, function(key, value) {
+						var markCheck = value == '1' ? true : false;
+						$('#' + key).prop('checked', markCheck);
+					})
+
+					$('.hide-out').removeClass('hide');
+				}
+
+				if (data.action == 'transactionalLimits' && response.code == 0) {
+					$.each(response.data.dataLimits, function(key, value) {
+						$('#'+key).text(value);
+					})
+
+					$.each(response.data.limits, function(key, value) {
+						$('#' + key).val(value);
+					})
+
+					$('.hide-out').removeClass('hide');
+				}
+
+				if ((data.action == 'transactionalLimits' || data.action == 'twirlsCommercial') && response.code != 0) {
+					$('.nav-item-config').removeClass('active');
+				}
+
+				if (thisAction.hasClass('btn')) {
+					thisAction.html(btnText);
+					insertFormInput(false);
+				} else {
+					$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
+				}
+
+				$('.nav-config-box').removeClass('no-events');
+			})
+		}
 	});
 })

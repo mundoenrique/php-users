@@ -70,6 +70,7 @@ function validateForms(form) {
 			},
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
+			"replaceMotSol": { requiredSelect: true },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -110,7 +111,8 @@ function validateForms(form) {
 			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
 			"otherPhoneNum": lang.VALIDATE_PHONE,
 			"initDate": lang.VALIDATE_DATE_DMY,
-			"finalDate": lang.VALIDATE_DATE_DMY
+			"finalDate": lang.VALIDATE_DATE_DMY,
+			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -136,6 +138,16 @@ function validateForms(form) {
 
 	$.validator.methods.dbAvailable = function(value, element, param) {
 		return $(element).hasClass('available');
+	}
+
+	$.validator.methods.requiredSelect = function (value, element, param) {
+		var valid = true;
+
+		if ($(element).find('option').length > 0) {
+			valid = alphanumunder.test($(element).find('option:selected').val().trim());
+		}
+
+		return valid
 	}
 
 	form.validate().resetForm();
