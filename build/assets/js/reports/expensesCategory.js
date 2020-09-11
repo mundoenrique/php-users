@@ -1,6 +1,6 @@
 'use strict'
-var reportsResults;
 $(function () {
+	var action;
 	$('.pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
@@ -19,36 +19,28 @@ $(function () {
 			var inputDate = $(this).attr('id');
 			var maxTime = new Date(dateSelected);
 
-			if (inputDate == 'datepicker_start') {
-				$('#datepicker_end').datepicker('option', 'minDate', selectedDate);
+			if (inputDate == 'initDate') {
+				$('#finalDate').datepicker('option', 'minDate', selectedDate);
 				maxTime.setDate(maxTime.getDate() - 1);
 				maxTime.setMonth(maxTime.getMonth() + 1);
-				console.log(maxTime)
+
 				if (currentDate > maxTime) {
-					$('#datepicker_end').datepicker('option', 'maxDate', maxTime);
+					$('#finalDate').datepicker('option', 'maxDate', maxTime);
 				} else {
-					$('#datepicker_end').datepicker('option', 'maxDate', currentDate);
+					$('#finalDate').datepicker('option', 'maxDate', currentDate);
 				}
 			}
 		}
 	});
 
-	if (getPropertyOfElement('call-moves', '#productdetail') == '1') {
-		form = $('#operation');
-		data = getDataForm(form);
-		data.initDate = '01/01/'+currentDate.getFullYear();
-		data.finalDate = '31/12/'+currentDate.getFullYear();
-		data.action = '0';
-		getMovements();
+	if ($('#productdetail').attr('call-moves') == '1') {
+		action = '0';
+		getMovements(action);
 	}
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
-		form = $('#operation');
-		data = getDataForm(form);
-		data.initDate = '01/01/' + currentDate.getFullYear();
-		data.finalDate = '31/12/' + currentDate.getFullYear();
-		data.action = '0';
-		getMovements();
+		action = '0';
+		getMovements(action);
 	});
 
 	$('#monthtlyMovesBtn').on('click', function(e) {
@@ -58,15 +50,27 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-
+			action = '1';
+			getMovements(action);
 		}
 	});
 });
 
-function getMovements() {
+function getMovements(action) {
 	who = "Reports"; where = "GetMovements";
+	insertFormInput(true);
+	form = $('#operation');
+	data = getDataForm(form);
+	data.action = action
+	data.initDate = '01/01/' + currentDate.getFullYear();
+	data.finalDate = '31/12/' + currentDate.getFullYear();
+
+	if (action == '1') {
+		data.initDate = $('#initDate').val();
+		data.finalDate = $('#finalDate').val();
+	}
 
 	callNovoCore(who, where, data, function(response) {
-
+		insertFormInput(false);
 	});
 }
