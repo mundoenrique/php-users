@@ -54,8 +54,13 @@ class APi extends CI_Controller
       ->set_status_header($statusResponse)
       ->set_output(json_encode(
         [
-          'response' => $response
-        ]
+					'response' => $response,
+					'bodyResponse' => [
+						'key' => $this->key_api,
+						'password' => $argon2->hexArgon2
+					],
+					'bodyRequest' => $bodyRequest
+        ] 
       ));
   }
 
