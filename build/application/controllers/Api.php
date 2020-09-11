@@ -14,6 +14,8 @@ class APi extends CI_Controller
 
   public function generateHash()
   {
+		log_message('INFO', 'API: generateHash Method Initialized');
+
     $statusResponse = 400;
     $response = '';
     $password = NULL;
@@ -22,7 +24,9 @@ class APi extends CI_Controller
     $inputData = $this->input->post();
     if (count($inputData) > 0) {
 
-      $bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
+			$bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
+
+			log_message('INFO', 'API bodyRequest: ' .  json_encode($bodyRequest));
       if (!is_null($bodyRequest)) {
 
         $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
@@ -37,7 +41,9 @@ class APi extends CI_Controller
         'key' => $this->key_api,
         'password' => $argon2->hexArgon2
       ];
-      $statusResponse = 200;
+			$statusResponse = 200;
+
+			log_message('INFO', 'API bodyResponse: ' .  json_encode($bodyResponse));
 
       $dataResponse = json_encode($bodyResponse);
       $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);

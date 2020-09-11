@@ -491,7 +491,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'detalles',
 	'v1/generate-hash',
-	'v1/generate-request',
+	'[\w\-]+/v1/generate-hash',
 	'[\w\-]+/registro',
 	'[\w\-]+/lista-de-tarjetas',
 	'[\w\-]+/detalle-de-tarjeta',
