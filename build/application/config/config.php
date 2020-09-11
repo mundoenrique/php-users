@@ -34,6 +34,7 @@ $config['client'] = 'novo';
 $config['channel'] = 'personasWeb';
 $config['keyAES256'] = KEY_AES256;
 $config['ivAES256'] = IV_AES256;
+$config['key_api'] = KEY_API;
 
 //url API
 $config['urlAPI'] = URL_API;
@@ -489,13 +490,15 @@ $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'detalles',
+	'v1/generate-hash',
+	'v1/generate-request',
 	'[\w\-]+/registro',
 	'[\w\-]+/lista-de-tarjetas',
 	'[\w\-]+/detalle-de-tarjeta',
 	'[\w\-]+/detalle',
 	'[\w\-]+/detalle/download',
 	'[\w\-]+/atencioncliente',
-	'[\w\-]+/detallereporte',
+	'[\w\-]+/detallereporte'
 );
 
 /*
