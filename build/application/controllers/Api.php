@@ -54,13 +54,8 @@ class APi extends CI_Controller
       ->set_status_header($statusResponse)
       ->set_output(json_encode(
         [
-					'response' => $response,
-					'bodyResponse' => [
-						'key' => $this->key_api,
-						'password' => $argon2->hexArgon2
-					],
-					'bodyRequest' => $bodyRequest
-        ] 
+					'response' => $response
+        ]
       ));
   }
 
@@ -72,13 +67,14 @@ class APi extends CI_Controller
     $inputData = $this->input->post();
     if (count($inputData) > 0) {
 
-      $bodyRequest = [
-        'key' => $this->key_api,
+			$bodyRequest = [
+				'key' => '7ce7cfcd1b65b175c6131ec6c4e115e9',//$this->key_api,
         'password' => $inputData['password']
       ];
 
       $dataResponse = json_encode($bodyRequest);
       $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
+			$statusResponse = 200;
     }
 
     return $this->output
