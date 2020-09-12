@@ -57,155 +57,46 @@
         <div class="row pl-2">
           <label class="mt-1" for="initDate">Mostrar desde</label>
           <div class="form-group col-4 px-1">
-            <input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+            <input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
             <div class="help-block"></div>
           </div>
           <label class="mt-1" for="finalDate">Hasta</label>
           <div class="form-group col-4 px-1">
-            <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA">
+            <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
             <div class="help-block "></div>
           </div>
           <div class="flex items-center">
-            <button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3">
+            <button id="monthtlyMovesBtn" class="btn btn-small btn-rounded-right btn-primary mb-3" disabled>
               <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
             </button>
           </div>
         </div>
       </form>
 
-      <ul class="stack list-inline mb-0 flex items-center mb-3">
-        <li class="stack-item px-1 list-inline-item">
-          <a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
-        </li>
-        <li class="stack-item px-1 list-inline-item">
-          <a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
-        </li>
-      </ul>
+      <div id="downloads" class="hide">
+        <ul class="stack list-inline mb-0 flex items-center mb-3">
+          <li class="stack-item px-1 list-inline-item">
+            <a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
+          </li>
+          <li class="stack-item px-1 list-inline-item">
+            <a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+          </li>
+        </ul>
+      </div>
     </nav>
     <div class="line mb-1"></div>
     <div id="results" class="mt-3">
-      <div id="pre-loader" class="mt-3 mx-auto flex justify-center">
-        <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-      </div>
-
-      <table id="" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
-        <thead class="bg-primary secondary regular">
-          <tr>
-            <th class="bold">Meses</th>
-            <th><span aria-hidden="true" class="icon-suitcase h3" title="Hoteles"></span></th>
-            <th><span aria-hidden="true" class="icon-card h3" title="Cajeros automáticos"></span></th>
-            <th><span aria-hidden="true" class="icon-bag h3" title="Comercios y tiendas por departamento"></span></th>
-            <th><span aria-hidden="true" class="icon-car h3" title="Alquiler de vehículos"></span></th>
-            <th><span aria-hidden="true" class="icon-food h3" title="Comida, despensa y restaurantes"></span></th>
-            <th><span aria-hidden="true" class="icon-plane h3" title="Líneas áereas y transporte"></span></th>
-            <th><span aria-hidden="true" class="icon-lab h3" title="Farmacias"></span></th>
-            <th><span aria-hidden="true" class="icon-film h3" title="Diversión y entretenimiento"></span></th>
-            <th><span aria-hidden="true" class="icon-medkit h3" title="Servicios médicos"></span></th>
-            <th><span aria-hidden="true" class="icon-asterisk h3" title="Otros"></span></th>
-            <th class="bold">Total ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach(lang('GEN_SELECT_MONTH') AS $key => $month): ?>
-          <tr>
-            <td><?= $month ?></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <?php endforeach; ?>
-          <tr>
-            <td class="bold">Total</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table id="" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
-        <thead class="bg-primary secondary regular">
-          <tr>
-            <th class="bold">Meses</th>
-            <th><span aria-hidden="true" class="icon-suitcase h3" title="Hoteles"></span></th>
-            <th><span aria-hidden="true" class="icon-card h3" title="Cajeros automáticos"></span></th>
-            <th><span aria-hidden="true" class="icon-bag h3" title="Comercios y tiendas por departamento"></span></th>
-            <th><span aria-hidden="true" class="icon-car h3" title="Alquiler de vehículos"></span></th>
-            <th><span aria-hidden="true" class="icon-food h3" title="Comida, despensa y restaurantes"></span></th>
-            <th><span aria-hidden="true" class="icon-plane h3" title="Líneas áereas y transporte"></span></th>
-            <th><span aria-hidden="true" class="icon-lab h3" title="Farmacias"></span></th>
-            <th><span aria-hidden="true" class="icon-film h3" title="Diversión y entretenimiento"></span></th>
-            <th><span aria-hidden="true" class="icon-medkit h3" title="Servicios médicos"></span></th>
-            <th><span aria-hidden="true" class="icon-asterisk h3" title="Otros"></span></th>
-            <th class="bold">Total ($)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>20/15/2020</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="bold">Total</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div id="" class="visible">
-        <div class="pagination page-number flex mb-5 py-2 flex-auto justify-center">
-          <nav class="h4">
-            <a href="javascript:" position="first">Primera</a>
-            <a href="javascript:" position="prev">«</a>
-          </nav>
-          <div id="show-page" class="h4 flex justify-center ">
-            <span class="mx-1 page-current">
-              <a href="javascript:" position="page" filter-page="page_">1</a>
-            </span>
-          </div>
-          <nav class="h4">
-            <a href="javascript:" position="next">»</a>
-            <a href="javascript:" position="last">Última</a>
-          </nav>
+      <div id="pre-loader" class="w-100 hide">
+        <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center block">
+          <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
         </div>
       </div>
-      <div id="" class="hide">
+
+      <table id="movements" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline hide">
+        <thead class="bg-primary secondary regular"></thead>
+        <tbody></tbody>
+      </table>
+      <div id="no-result" class="hide">
         <div class="flex flex-column items-center justify-center pt-5">
           <h2 class="h3 regular mb-1">No se encontraron registros.</h2>
           <span class="h6 regular mb-0">Seleccione un rango de fecha a consultar.</span>

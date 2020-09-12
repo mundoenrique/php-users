@@ -1,8 +1,6 @@
 'use strict'
 $(function () {
 	var action;
-	$('.pre-loader').remove();
-	$('.hide-out').removeClass('hide');
 
 	$('input[type=hidden][name="cardNumber"]').each(function (pos, element) {
 		var cypher = cryptoPass($(element).val());
@@ -10,7 +8,7 @@ $(function () {
 	});
 
 	$('.date-picker').datepicker({
-		onSelect: function(selectedDate) {
+		onSelect: function (selectedDate) {
 			$(this)
 				.focus()
 				.blur();
@@ -43,7 +41,7 @@ $(function () {
 		getMovements(action);
 	});
 
-	$('#monthtlyMovesBtn').on('click', function(e) {
+	$('#monthtlyMovesBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#monthtlyMovesForm');
 		formInputTrim(form);
@@ -58,7 +56,10 @@ $(function () {
 
 function getMovements(action) {
 	who = "Reports"; where = "GetMovements";
-	insertFormInput(true);
+	$('#no-result').addClass('hide');
+	$('.movements').addClass('hide');
+	$('#pre-loader').removeClass('hide');
+	$('#movements thead, #movements tbody').empty();
 	form = $('#operation');
 	data = getDataForm(form);
 	data.action = action
@@ -68,9 +69,51 @@ function getMovements(action) {
 	if (action == '1') {
 		data.initDate = $('#initDate').val();
 		data.finalDate = $('#finalDate').val();
+	} else {
+		$('#monthtlyMovesForm')[0].reset();
 	}
 
-	callNovoCore(who, where, data, function(response) {
+	insertFormInput(true);
+
+	callNovoCore(who, where, data, function (response) {
+		$('#pre-loader').addClass('hide');
+
+		if (response.code == 0) {
+			var header = '';
+			var body = '';
+			var date = action == '0' ? 'Meses' : 'Días';
+
+			header += '<tr>';
+			header += '<th class="bold">' + date + '</th>';
+
+			$.each(response.data.headers, function (pos, value) {
+				header += '<th><span aria-hidden="true" class="' + pos + ' h3" title="' + value + '" data-toggle="tooltip"></span></th>';
+			});
+
+			header += '<th class="bold">Total (' + lang.GEN_CURRENCY + ')</th>'
+			header += '</tr>';
+			$('#movements thead').append(header);
+
+			$.each(response.data.body, function (key, amount) {
+				var bold = key == 'Total' ? 'class="bold"' : '';
+
+				body += '<tr>';
+				body += '<td ' + bold + '>' + key + '</td>';
+
+				$.each(amount, function (pos, value) {
+					body += '<td class="text-right">' + value + '</td>';
+				});
+				body += '</tr>';
+			});
+
+			$('#movements tbody').append(body);
+			$('#movements').removeClass('hide');
+		}
+
+		if (response.code == 1) {
+			$('#no-result').removeClass('hide');
+		}
+
 		insertFormInput(false);
 	});
 }

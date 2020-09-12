@@ -40,9 +40,62 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto = $dataRequest->prefix;
 		$this->dataRequest->tipoConsulta = $dataRequest->action;
 
-		$reponse = $this->sendToService('GetMovements');
+		$response = $this->sendToService('GetMovements');
+		$headers = [];
+		$body = [];
 
-		$this->response->data['btn1']['action'] = 'close';
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				switch ($dataRequest->action) {
+					case '0':
+						foreach (lang('GEN_SELECT_MONTH') AS $monthName) {
+							$body[$monthName] = [];
+						}
+
+						foreach ($response->listaGrupo AS $items) {
+							$headers[lang('REPORTS_CATEGORY_ICON')[$items->idGrupo]] = lang('REPORTS_CATEGORY_GROUP')[$items->idGrupo];
+
+							foreach ($items->gastoMensual AS $expense) {
+								$body[ucfirst(mb_strtolower($expense->mes))][] = $expense->monto;
+							}
+
+							$body['Total'][] = $items->totalCategoria;
+						}
+
+						foreach ($response->totalesAlMes AS $expense) {
+							$body[ucfirst(mb_strtolower($expense->mes))][] = $expense->monto;
+						}
+
+						$body['Total'][] = $response->totalGeneral;
+					break;
+					case '1':
+						foreach ($response->listaGrupo AS $items) {
+							$headers[lang('REPORTS_CATEGORY_ICON')[$items->idGrupo]] = lang('REPORTS_CATEGORY_GROUP')[$items->idGrupo];
+
+							foreach ($items->gastoDiario AS $expense) {
+								$body[$expense->fechaDia][] = $expense->monto;
+							}
+
+							$body['Total'][] = $items->totalCategoria;
+						}
+
+						foreach ($response->totalesPorDia AS $expense) {
+							$body[$expense->fechaDia][] = $expense->monto;
+						}
+
+						$body['Total'][] = $response->totalGeneral;
+					break;
+				}
+
+				$this->response->data['headers'] = $headers;
+				$this->response->data['body'] = $body;
+			break;
+			case -150:
+				$this->response->code = 1;
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+		}
 
 		return $this->responseToTheView('GetMovements');
 	}
