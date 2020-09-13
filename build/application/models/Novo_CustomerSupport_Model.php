@@ -36,7 +36,6 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 
-
 		$response = $this->sendToService('callWs_TemporaryLock');
 
 		switch ($this->isResponseRc) {

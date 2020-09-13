@@ -124,7 +124,6 @@
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
-        <p>Selecciona un motivo para solicitud</p>
 				<form id="replacementForm" >
 					<div class="row">
 						<div class="form-group col-lg-4">

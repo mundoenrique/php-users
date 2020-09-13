@@ -83,8 +83,14 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->data->resp['btn1']['link'] = 'inicio';
 		}
 
+		$serviceList = array_unique($serviceList);
+
+		if (count($serviceList) == 0) {
+			$this->session->set_userdata('noService', TRUE);
+		}
+
 		$this->response->data->cardsList = $cardsList;
-		$this->response->data->serviceList = array_unique($serviceList);
+		$this->response->data->serviceList = $serviceList;
 
 		return $this->responseToTheView('callWs_UserCardsList');
 	}

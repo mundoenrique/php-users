@@ -3,10 +3,10 @@ $(function () {
 	var ulOptions = $('.nav-item-config');
 	var pinManagement = $('input[type=radio][name="recovery"]');
 
-	/* $('input[type=hidden][name="expireDate"]').each(function(pos, element) {
+	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
 		$(element).val(cypher)
-	}) */
+	})
 
 	$.each(ulOptions, function (pos, liOption) {
 		$('#' + liOption.id).on('click', function (e) {
