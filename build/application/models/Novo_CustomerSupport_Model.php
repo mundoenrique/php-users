@@ -26,12 +26,18 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de bloqueo o desbloqueo';
 
+		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
+		$expireDate = $this->cryptography->decrypt(
+			base64_decode($expireDate->plot),
+			utf8_encode($expireDate->password)
+		);
+
 		$this->dataRequest->idOperation = '110';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->prefix = $dataRequest->prefix;
-		$this->dataRequest->fechaExp = $dataRequest->expireDate;
+		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->codBloqueo = $dataRequest->status == '' ? 'PB' : '00';
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
@@ -75,12 +81,18 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solicitud de bloqueo permanente';
 
+		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
+		$expireDate = $this->cryptography->decrypt(
+			base64_decode($expireDate->plot),
+			utf8_encode($expireDate->password)
+		);
+
 		$this->dataRequest->idOperation = '111';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->prefix = $dataRequest->prefix;
-		$this->dataRequest->fechaExp = $dataRequest->expireDate;
+		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->codBloqueo = $dataRequest->status;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';

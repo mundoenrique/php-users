@@ -246,7 +246,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -264,7 +264,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -282,7 +282,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -300,7 +300,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
