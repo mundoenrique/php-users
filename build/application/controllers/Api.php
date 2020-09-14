@@ -21,10 +21,13 @@ class APi extends CI_Controller
     $password = NULL;
     $key = FALSE;
 
-    $inputData = $this->input->post();
-    if (count($inputData) > 0) {
+		$streamClean = $this->security->xss_clean($this->input->raw_input_stream);
+		$dataRequest = json_decode($streamClean);
+		$inputData = property_exists($dataRequest, 'request') ? $dataRequest->request : NULL;
 
-			$bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
+    if (!is_null($inputData)) {
+
+			$bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData, FALSE));
 
 			log_message('INFO', 'API bodyRequest: ' .  json_encode($bodyRequest));
       if (!is_null($bodyRequest)) {

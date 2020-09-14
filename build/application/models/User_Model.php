@@ -17,13 +17,22 @@ class User_Model extends BDB_Model
 		log_message('INFO', 'NOVO User Model: Login method Initialized');
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 
-		// $password = json_decode(base64_decode($dataRequest->pass));
-		// $password = $this->cryptography->decrypt(
-		// 	base64_decode($password->plot),
-		// 	utf8_encode($password->password)
-		// );
+		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL') {
+			$this->session->set_flashdata('firstDataRquest', $dataRequest);
+		} else {
+			$firstDataRequest = $this->session->flashdata('firstDataRquest');
+			$dataRequest->user = mb_strtoupper($firstDataRequest->user);
+			$dataRequest->pass = $firstDataRequest->pass;
+			$dataRequest->active = $firstDataRequest->active;
+		}
 
-		// $argon2 = $this->encrypt_connect->generateArgon2($password);
+		$password = json_decode(base64_decode($dataRequest->pass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataAccessLog->modulo = 'login';
 		$this->dataAccessLog->function = 'login';
@@ -34,24 +43,19 @@ class User_Model extends BDB_Model
 		$infoOTP->tokenCliente = isset($dataRequest->codeOTP) ? $dataRequest->codeOTP : "";
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
-		if (isset($dataRequest->pass) && $dataRequest->pass !== 'NULL') {
-			$this->session->set_flashdata('firstDataRquest', $dataRequest);
-		} else {
-			$firstDataRequest = $this->session->flashdata('firstDataRquest');
-			$dataRequest->user = mb_strtoupper($firstDataRequest->user);
-			$dataRequest->pass = $firstDataRequest->pass;
-			$dataRequest->active = $firstDataRequest->active;
-		}
-
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->guardaIp = "false";
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
+
+		// TODO
+		// Descomentar para hacer pruebas de integración
 		// $this->dataRequest->password = $argon2->hexArgon2;
 		// $this->dataRequest->hashMD5 = md5($password);
+
 		// TODO
 		// Descomentar la linea siguiente para peticiones reales al servicio
-		$this->dataRequest->password = $dataRequest->pass; //md5($password);
+		$this->dataRequest->password = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		if (IP_VERIFY == 'ON') {
