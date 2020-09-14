@@ -68,7 +68,7 @@ class APi extends CI_Controller
     if (count($inputData) > 0) {
 
 			$bodyRequest = [
-				'key' => '7ce7cfcd1b65b175c6131ec6c4e115e9',//$this->key_api,
+				'key' => $inputData['key'],
         'password' => $inputData['password']
       ];
 

@@ -78,8 +78,6 @@ $route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
 
 // API
 $route['v1/generate-hash']['POST'] = "api/generateHash";
-$route['bdb/v1/generate-hash']['POST'] = "User/bdb_generateHash";
-$route['(:any)/v1/generate-hash']['POST'] = "Novo_User/generateHash";
 
 //Asynchronous
 $route['(:any)/async-call'] = "Novo_CallModels";

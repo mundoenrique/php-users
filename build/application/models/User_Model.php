@@ -856,18 +856,20 @@ class User_Model extends BDB_Model
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idOperation = '25';
 
-		// TODO
-		// Eliminar comentarios
-		// $this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
-		// $this->dataRequest->password = md5($dataRequest->newPassword);
-		// $this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
+		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		$this->dataRequest->password = md5($dataRequest->newPassword);
+		$this->dataRequest->passwordOld4 = md5(strtoupper($dataRequest->newPassword));
 		// TODO
 		// averiguar para qué este campo?
 		$this->dataRequest->passwordOld4 = md5(strtoupper($currentPassword));
 
-		$this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
-		$this->dataRequest->password = $argon2NewPassword->hexArgon2;
-		$this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
+		// TODO
+		// Petición para probar envío de peticion al servicio
+		// para integrar con Argon2
+
+		// $this->dataRequest->passwordOld = md5($dataRequest->currentPassword);
+		// $this->dataRequest->password = $argon2NewPassword->hexArgon2;
+		// $this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
 
 		$this->dataRequest->token = $this->session->userdata('token');
 		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
