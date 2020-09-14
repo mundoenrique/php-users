@@ -14,18 +14,15 @@ class Encrypt_Connect
 	private $logMessage;
 	private $keyAES256;
 	private $ivAES256;
-
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
-
 		$this->CI = &get_instance();
 		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
 		$this->keyAES256 = base64_decode($this->CI->config->item('keyAES256'));
 		$this->ivAES256 = base64_decode($this->CI->config->item('ivAES256'));
-
 		if (ENVIRONMENT == 'development') {
 			error_reporting(E_ALL & ~E_DEPRECATED);
 		}
@@ -37,12 +34,10 @@ class Encrypt_Connect
 	public function encode($data, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
-
 		if ($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
 		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST ' . $model . ': ' . $data);
-
 		$dataB = base64_encode($data);
 		while ((strlen($dataB) % 8) != 0) {
 			$dataB .= " ";
@@ -55,7 +50,6 @@ class Encrypt_Connect
 			MCRYPT_MODE_CBC,
 			$this->iv
 		);
-
 		return base64_encode($cryptData);
 	}
 	/**
@@ -65,7 +59,6 @@ class Encrypt_Connect
 	public function decode($cryptData, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
-
 		$data = base64_decode($cryptData);
 		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
 		$descryptData = mcrypt_decrypt(
@@ -77,19 +70,16 @@ class Encrypt_Connect
 		);
 		$decryptData = base64_decode(trim($descryptData));
 		$response = json_decode($decryptData);
-
 		if (!$response) {
 			log_message('ERROR', 'NOVO [' . $userName . '] NO SERVICE RESPONSE');
 			$response = new stdClass();
 			$response->rc = lang('GEN_RC_DEFAULT');
 			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
-
 		if (!isset($response->pais)) {
 			log_message('INFO', 'NOVO [' . $userName . '] INSERTING COUNTRY TO THE RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
-
 		$this->logMessage->rc = $response->rc;
 		$this->logMessage->msg = isset($response->msg) ? $response->msg : 'Sin mensaje del servicio';
 		$this->logMessage->response = $response;
@@ -97,7 +87,6 @@ class Encrypt_Connect
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
-
 		return $response;
 	}
 	/**
@@ -108,20 +97,14 @@ class Encrypt_Connect
 	public function connectWs($request, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
-
 		$fail = FALSE;
 		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
-
 		if (isset($_SERVER['WS_URL' . $subFix])) {
 			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL' . $subFix]);
 		}
-
 		$urlWS = $this->CI->config->item('urlWS') . 'movilsInterfaceResource';
-
 		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $urlWS);
-
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
-
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -136,16 +119,12 @@ class Encrypt_Connect
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
 		curl_close($ch);
-
 		log_message('DEBUG', 'NOVO [' . $userName . '] RESPONSE CURL HTTP CODE: ' . $httpCode);
-
 		$failResponse = json_decode($response);
-
 		/* if(is_object($failResponse)) {
 			$response = $failResponse;
 			$fail = TRUE;
 		} */
-
 		if ($httpCode != 200 || !$response) {
 			log_message('ERROR', 'NOVO [' . $userName . '] ERROR CURL: ' . json_encode($CurlError, JSON_UNESCAPED_UNICODE));
 			$failResponse = new stdClass();
@@ -154,7 +133,6 @@ class Encrypt_Connect
 			$response = $failResponse;
 			$fail = TRUE;
 		}
-
 		if ($fail) {
 			$this->logMessage = $failResponse;
 			$this->logMessage->userName = $userName;
@@ -162,7 +140,6 @@ class Encrypt_Connect
 			$this->logMessage->pais = $request['pais'];
 			$this->writeLog($this->logMessage);
 		}
-
 		return json_decode($response);
 	}
 	/**
@@ -173,15 +150,12 @@ class Encrypt_Connect
 	public function moveFile($file, $userName, $model)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: moveFile Method Initialized');
-
 		$urlBulkService = $this->CI->config->item('url_bulk_service');
 		$userpassBulk = $this->CI->config->item('userpass_bulk');
 		$uploadBulk = $this->CI->config->item('upload_bulk');
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
-
 		log_message('INFO', 'NOVO UPLOAD FILE BY: ' . $urlBulkService . ' AND: ' . $userpassBulk);
-
 		$ch = curl_init();
 		$Fclose = $fOpen = fopen($uploadBulk . $file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService . $file);
@@ -192,17 +166,13 @@ class Encrypt_Connect
 		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk . $file));
 		curl_exec($ch);
 		$result = curl_errno($ch);
-
 		log_message('DEBUG', 'NOVO [' . $userName . '] UPLOAD FILE BULK SFTP ' . $model . ': ' . $result . ' ' . lang('RESP_UPLOAD_SFTP(' . $result . ')'));
-
 		if ($result != 0) {
 			$respUpload->rc = -105;
 		}
-
 		curl_close($ch);
 		fclose($Fclose);
 		unlink($uploadBulk . $file);
-
 		return $respUpload;
 	}
 	/**
@@ -213,9 +183,7 @@ class Encrypt_Connect
 	public function cryptography($data, $encrip = TRUE)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: cryptography Method Initialized');
-
 		$encrypt_method = "AES-256-CBC";
-
 		if ($encrip) {
 			$output = openssl_encrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
 		} else {
@@ -236,17 +204,13 @@ class Encrypt_Connect
 		$msg = $logMessage->msg;
 		$response = isset($logMessage->response) ? $logMessage->response : '';
 		$country = $logMessage->pais;
-
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
-
 		$wirteLog = new stdClass();
 		$isBean = '';
-
 		if (isset($response->bean) && $response->bean != 'null') {
 			$isBean = 'IN BEAN ';
 			$response->bean = gettype($response->bean) != 'object' ? json_decode($response->bean) : $response->bean;
 		}
-
 		if(is_object($response)) {
 			foreach ($response AS $pos => $responseAttr) {
 				if($pos == 'bean' || $pos == 'archivo') {
@@ -264,9 +228,7 @@ class Encrypt_Connect
 				$wirteLog->$pos = $responseAttr;
 			}
 		}
-
 		log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
-
 		unset($wirteLog);
 	}
 	/**
@@ -276,7 +238,6 @@ class Encrypt_Connect
 	 */
 	public function generateArgon2($string)
 	{
-
 		$hash = sodium_crypto_pwhash(
 			ARGON2_LENGTH,
 			$string,
@@ -285,14 +246,11 @@ class Encrypt_Connect
 			ARGON2_MEMORY_LIMIT,
 			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
 		);
-
 		$result = new stdClass();
 		$result->hashArgon2 =  unpack("C*", $hash);
 		$result->hexArgon2 =  bin2hex($hash);
-
 		return $result;
 	}
-
 	/**
 	 * @info Genera hexadecimal partiendo de un array Binario
 	 * @author Pedro Torres
@@ -301,7 +259,6 @@ class Encrypt_Connect
 	 */
 	function binary2Hexadecimal($binaryUnpack)
 	{
-
 		$chars = array_map("chr", $binaryUnpack);
 		$binary = join($chars);
 		return bin2hex($binary);
