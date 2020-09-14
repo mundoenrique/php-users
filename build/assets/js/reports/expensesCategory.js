@@ -36,6 +36,12 @@ $(function () {
 		getMovements(action);
 	}
 
+	$('#annualMovesForm').on('click', 'input', function(e) {
+		$(this).prop('checked', true);
+		action = '0';
+		getMovements(action);
+	})
+
 	$('#system-info').on('click', '.dashboard-item', function (e) {
 		action = '0';
 		getMovements(action);
@@ -57,18 +63,20 @@ $(function () {
 function getMovements(action) {
 	who = "Reports"; where = "GetMovements";
 	$('#no-result').addClass('hide');
-	$('.movements').addClass('hide');
+	$('#movements').addClass('hide');
+	$('#downloads').addClass('hide');
 	$('#pre-loader').removeClass('hide');
 	$('#movements thead, #movements tbody').empty();
 	form = $('#operation');
 	data = getDataForm(form);
 	data.action = action
-	data.initDate = '01/01/' + currentDate.getFullYear();
-	data.finalDate = '31/12/' + currentDate.getFullYear();
+	data.initDate = '01/01/' + $('input[name="year"]:checked').val();
+	data.finalDate = '31/12/' + $('input[name="year"]:checked').val();
 
 	if (action == '1') {
 		data.initDate = $('#initDate').val();
 		data.finalDate = $('#finalDate').val();
+		$('input[type=radio]').prop('checked', false);
 	} else {
 		$('#monthtlyMovesForm')[0].reset();
 	}
@@ -108,6 +116,7 @@ function getMovements(action) {
 
 			$('#movements tbody').append(body);
 			$('#movements').removeClass('hide');
+			$('#downloads').removeClass('hide');
 		}
 
 		if (response.code == 1) {

@@ -46,6 +46,10 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 
+						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
+							$cardRecord->services = [];
+						}
+
 						foreach ($cardsRecords->services AS $service) {
 							array_push($serviceList, $service);
 						}
@@ -283,8 +287,8 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 				switch ($dataRequest->action) {
 					case 'download':
-						$file = isset($response->bean->archivo) ? $response->bean->archivo : $response->archivo;
-						$name = isset($response->bean->nombre) ? $response->bean->nombre : $response->nombre;
+						$file = $response->bean->archivo ?? $response->archivo;
+						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
 						$this->response->data['file'] = $file;
 						$this->response->data['name'] = $name.'.'.$ext;

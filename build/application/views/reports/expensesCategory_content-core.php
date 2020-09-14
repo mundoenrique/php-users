@@ -53,6 +53,20 @@
     <h2 class="h4 regular tertiary">Gastos por categoria</h2>
     <nav id="filtersStack" class="navbar px-0">
 
+      <form id="annualMovesForm" method="post" class="col-12 col-lg-9">
+        <div class="form-group col-12 col-lg-4 col-xl-3">
+          <label class="block">Anual</label>
+          <?php for ($years; $years <= $maxYear; $years++): ?>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input id="<?= $years; ?>" class="custom-control-input" type="radio" name="year" value="<?= $years; ?>" autocomplete="off"
+              <?= $years == $maxYear ? 'checked' : ''; ?> disabled>
+            <label class="custom-control-label" for="<?= $years; ?>"><?= $years; ?></label>
+          </div>
+          <?php endfor; ?>
+          <div class="help-block"></div>
+        </div>
+      </form>
+
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
         <div class="row pl-2">
           <label class="mt-1" for="initDate">Mostrar desde</label>

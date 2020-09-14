@@ -37,6 +37,16 @@ class Novo_Reports extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$cardsTotal = count($cardsList);
+		$yearTenant = (int) lang('GEN_PICKER_MINDATE');
+		$years = date('Y') - 2;
+		$maxYear = date('Y');
+
+		if (($yearTenant - $years) >= 0) {
+			$years = $yearTenant;
+		}
+
+		$this->render->years = $years;
+		$this->render->maxYear = $maxYear;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->render->operations = TRUE;
 		$this->render->cardsTotal = $cardsTotal;

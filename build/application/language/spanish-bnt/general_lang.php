@@ -6,7 +6,7 @@ $lang['GEN_FAVICON_EXT'] = 'ico';
 $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
 //DATEPICKER
-$lang['GEN_PICKER_MINDATE'] = 2020;
+$lang['GEN_PICKER_MINDATE'] = 2018;
 //GENERAL LANGUAGE
 $lang['GEN_DNI'] = 'CURP';
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
