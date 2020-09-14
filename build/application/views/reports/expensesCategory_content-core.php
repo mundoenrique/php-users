@@ -91,11 +91,29 @@
       <div id="downloads" class="hide pl-1">
         <ul class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
+            <a id="downloadPDF" href="#" rel="subsection">
+							<span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
+						</a>
           </li>
+					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+					<li class="stack-item px-1 list-inline-item is-disabled">
+						<a id="sendPDF" href="" action="send">
+							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
+						</a>
+					</li>
+					<?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+            <a id="downloadXLS" href="#" rel="subsection">
+							<span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
+						</a>
           </li>
+					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+					<li class="stack-item px-1 list-inline-item is-disabled">
+						<a id="sendXLS" href="" action="send">
+							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
+						</a>
+					</li>
+					<?php endif; ?>
         </ul>
       </div>
     </nav>
