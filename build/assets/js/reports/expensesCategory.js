@@ -94,6 +94,7 @@ function getMovements(typeInquiry) {
 	$('#movements').addClass('hide');
 	$('.hide-downloads').addClass('hide');
 	$('#pre-loader').removeClass('hide');
+	$('#movementsStats').addClass('hide');
 	$('#movements thead, #movements tbody').empty();
 	form = $('#operation');
 	data = getDataForm(form);
@@ -142,8 +143,42 @@ function getMovements(typeInquiry) {
 				body += '</tr>';
 			});
 
+			$("#movementsStats").kendoChart({
+				legend: {
+					position: "top",
+					visible: false
+				},
+				seriesDefaults: {
+					labels: {
+						template: "#= category # #= kendo.format('{0:P}', percentage)#",
+						position: "outsideEnd",
+						visible: false,
+						background: "transparent",
+					}
+				},
+				seriesColors: ["#E74C3C", "#2ECC71"],
+				series: [{
+					type: "donut",
+					overlay: {
+						gradient: "none"
+					},
+					data: [{
+						category: "Cargos",
+						value: parseFloat('100').toFixed(2)
+					}, {
+						category: "Abonos",
+						value: parseFloat('300').toFixed(2)
+					}]
+				}],
+				tooltip: {
+					visible: true,
+					template: "#= category # #= kendo.format('{0:P}', percentage) #"
+				}
+			});
+
 			$('#movements tbody').append(body);
 			$('#movements').removeClass('hide');
+			$('#movementsStats').removeClass('hide');
 			$('.hide-downloads').removeClass('hide');
 		}
 

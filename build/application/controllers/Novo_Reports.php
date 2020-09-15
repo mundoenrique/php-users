@@ -25,6 +25,7 @@ class Novo_Reports extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
+			"third_party/kendo.dataviz",
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",

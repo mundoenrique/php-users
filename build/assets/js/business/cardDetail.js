@@ -149,7 +149,7 @@ function displaymoves() {
 				visible: true,
 				template: "#= category # #= kendo.format('{0:P}', percentage) #"
 			}
-		})
+		});
 	} else {
 		$('#no-moves').removeClass('hide');
 		$('.hide-downloads').addClass('hide');
