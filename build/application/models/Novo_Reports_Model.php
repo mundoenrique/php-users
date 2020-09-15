@@ -43,6 +43,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_GetMovements');
 		$headers = [];
 		$body = [];
+		$grafic = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -86,6 +87,10 @@ class Novo_Reports_Model extends NOVO_Model {
 
 						$body['Total'][] = $response->totalGeneral;
 					break;
+				}
+
+				foreach ($response->listaGrafico[0] AS $grafic) {
+
 				}
 
 				$this->response->data['headers'] = $headers;

@@ -145,34 +145,36 @@ function getMovements(typeInquiry) {
 
 			$("#movementsStats").kendoChart({
 				legend: {
-					position: "top",
-					visible: false
+					position: "left",
+					visible: true
 				},
 				seriesDefaults: {
 					labels: {
-						template: "#= category # #= kendo.format('{0:P}', percentage)#",
+						template: "#= category #  #= kendo.format('{0:P}')#",
 						position: "outsideEnd",
 						visible: false,
 						background: "transparent",
+						format: lang.GEN_CURRENCY + " {0}"
 					}
 				},
-				seriesColors: ["#E74C3C", "#2ECC71"],
 				series: [{
-					type: "donut",
+					type: "pie",
 					overlay: {
 						gradient: "none"
 					},
 					data: [{
 						category: "Cargos",
-						value: parseFloat('100').toFixed(2)
+						value: parseFloat('100').toFixed(2),
+						color: "#E74C3C"
 					}, {
 						category: "Abonos",
-						value: parseFloat('300').toFixed(2)
+						value: parseFloat('50').toFixed(2),
+						color: "#2ECC71"
 					}]
 				}],
 				tooltip: {
 					visible: true,
-					template: "#= category # #= kendo.format('{0:P}', percentage) #"
+					template: "${category} - " + lang.GEN_CURRENCY + " ${value}"
 				}
 			});
 

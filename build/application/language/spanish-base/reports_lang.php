@@ -12,7 +12,18 @@ $lang['REPORTS_CATEGORY_GROUP'] = [
 	'W' => 'Comercios y Tiendas por Departamento',
 	'8' => 'Otros'
 ];
-
+$lang['REPORTS_CATEGORY_ICON'] = [
+	'1' => 'icon-suitcase',
+	'2' => 'icon-car',
+	'3' => 'icon-food',
+	'4' => 'icon-plane',
+	'5' => 'icon-lab',
+	'6' => 'icon-film',
+	'7' => 'icon-medkit',
+	'9' => 'icon-card',
+	'W' => 'icon-bag',
+	'8' => 'icon-asterisk'
+];
 $lang['REPORTS_CATEGORY_ICON'] = [
 	'1' => 'icon-suitcase',
 	'2' => 'icon-car',
