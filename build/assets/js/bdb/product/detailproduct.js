@@ -453,7 +453,13 @@ $$.addEventListener('DOMContentLoaded', function () {
 			$$.getElementsByName("frmYear")[0].value = yearRequest;
 		}
 
+		$('.cover-spin').show(0);
+
 		$$.getElementsByTagName('form')[1].submit();
+
+		var hideLoading = setTimeout(function () {
+			$('.cover-spin').hide(0);
+		}, 7000)
 	}
 
 

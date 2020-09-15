@@ -119,14 +119,14 @@
 						</label>
 					</div>
 					<ul class="stack list-inline mb-0 flex items-stretch">
-						<li class="stack-item px-1 list-inline-item rounded">
-							<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
+						<li class="stack-item list-inline-item rounded">
+							<a id="downloadPDF" class="block px-1" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
-						<li class="stack-item px-1 list-inline-item rounded">
-							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+						<li class="stack-item list-inline-item rounded">
+							<a id="downloadXLS" class="block px-1" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
-						<li class="stack-item stack-item-primary px-1 list-inline-item rounded">
-							<a id="downloadExtract" href="#" title="Descarga tu extracto" rel="subsection">Descarga tu extracto</a>
+						<li class="stack-item stack-item-primary list-inline-item rounded">
+							<a id="downloadExtract" class="block px-1" href="#" title="Descarga tu extracto" rel="subsection">Descarga tu extracto</a>
 						</li>
 					</ul>
 				</nav>
