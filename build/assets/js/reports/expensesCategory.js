@@ -142,11 +142,11 @@ function getMovements(typeInquiry) {
 				});
 				body += '</tr>';
 			});
-
+			console.log(response.data.grafic)
 			$("#movementsStats").kendoChart({
 				chartArea: {
 					width: 300,
-					height:200
+					height: 200
 				},
 				legend: {
 					position: "left",
@@ -166,15 +166,7 @@ function getMovements(typeInquiry) {
 					overlay: {
 						gradient: "none"
 					},
-					data: [{
-						category: "Cargos",
-						value: parseFloat('100').toFixed(2),
-						color: "#E74C3C"
-					}, {
-						category: "Abonos",
-						value: parseFloat('50').toFixed(2),
-						color: "#2ECC71"
-					}]
+					data: response.data.grafic
 				}],
 				tooltip: {
 					visible: true,

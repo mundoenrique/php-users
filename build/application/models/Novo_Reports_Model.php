@@ -89,12 +89,23 @@ class Novo_Reports_Model extends NOVO_Model {
 					break;
 				}
 
-				foreach ($response->listaGrafico[0] AS $grafic) {
+				foreach ($response->listaGrafico AS $items) {
+					foreach ($items->categorias AS $pos => $categories) {
+						$category = new stdClass();
+						$category->category = $categories->nombreCategoria;
+						$category->value = '';
+						$category->color = lang('REPORTS_CATEGORY_COLOR')[$pos];
+						array_push($grafic, $category);
+					}
 
+					foreach ($items->series[0]->valores AS $pos => $value) {
+						$grafic[$pos]->value = $value;
+					}
 				}
 
 				$this->response->data['headers'] = $headers;
 				$this->response->data['body'] = $body;
+				$this->response->data['grafic'] = $grafic;
 			break;
 			case -150:
 				$this->response->code = 1;
