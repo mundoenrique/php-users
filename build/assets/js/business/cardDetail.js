@@ -131,7 +131,6 @@ function displaymoves() {
 					background: "transparent",
 				}
 			},
-			seriesColors: ["#E74C3C", "#2ECC71"],
 			series: [{
 				type: "donut",
 				overlay: {
@@ -139,10 +138,12 @@ function displaymoves() {
 				},
 				data: [{
 					category: "Cargos",
-					value: parseFloat($('#debit').val()).toFixed(2)
+					value: parseFloat($('#debit').val()).toFixed(2),
+					color: "#E74C3C"
 				}, {
 					category: "Abonos",
-					value: parseFloat($('#credit').val()).toFixed(2)
+					value: parseFloat($('#credit').val()).toFixed(2),
+					color: "#2ECC71"
 				}]
 			}],
 			tooltip: {
