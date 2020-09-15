@@ -294,12 +294,17 @@ $$.addEventListener('DOMContentLoaded', function(){
 	//functions
 	function processForm() {
 
-			$$.getElementsByName("frmInitialDate")[0].value = $$.getElementById("fromDate").value;
-			$$.getElementsByName("frmFinalDate")[0].value = $$.getElementById("toDate").value;
-			$$.getElementsByName("nroTarjeta")[0].value = dataExpensesReport.detailProduct.nroTarjeta;
+		$$.getElementsByName("frmInitialDate")[0].value = $$.getElementById("fromDate").value;
+		$$.getElementsByName("frmFinalDate")[0].value = $$.getElementById("toDate").value;
+		$$.getElementsByName("nroTarjeta")[0].value = dataExpensesReport.detailProduct.nroTarjeta;
 
-			$$.getElementsByTagName('form')[0].submit();
+		$('.cover-spin').show(0);
 
+		$$.getElementsByTagName('form')[0].submit();
+
+		var hideLoading = setTimeout(function () {
+			$('.cover-spin').hide(0);
+		}, 7000)
 	}
 })
 
