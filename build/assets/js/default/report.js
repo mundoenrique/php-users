@@ -58,18 +58,15 @@ $(function () {
 		.blur();
 		var dateSelected = selectedDate.split('/');
 		dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
-		var inputDate = $(this).attr('id');
 		var maxTime = new Date(dateSelected);
 		var currentDate = new Date();
 
-			if (inputDate == 'filter-range-from') {
-				$('#filter-range-to').datepicker('option', 'minDate', selectedDate);
-				maxTime.setMonth(maxTime.getMonth() + 1);
-				if (currentDate > maxTime) {
-					$('#filter-range-to').datepicker('option', 'maxDate', maxTime);
-				} else {
-					$('#filter-range-to').datepicker('option', 'maxDate', currentDate);
-				}
+			$('#filter-range-to').datepicker('option', 'minDate', selectedDate);
+			maxTime.setMonth(maxTime.getMonth() + 1);
+			if (currentDate > maxTime) {
+				$('#filter-range-to').datepicker('option', 'maxDate', maxTime);
+			} else {
+				$('#filter-range-to').datepicker('option', 'maxDate', currentDate);
 			}
 		}
 	});
