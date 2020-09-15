@@ -83,7 +83,7 @@ $(function () {
     isRTL: lang.GEN_PICKER_ISRLT,
 		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
 		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: new Date(lang.GEN_PICKER_MINDATE, 1 - 1, 1),
+		minDate: new Date(lang.GEN_PICKER_MINDATE, 0, 1),
 		maxDate: currentDate,
 		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
     changeYear: lang.GEN_PICKER_CHANGEYEAR,

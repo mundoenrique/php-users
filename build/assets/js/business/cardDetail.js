@@ -1,5 +1,4 @@
 'use strict'
-var reportsResults;
 $(function () {
 	displaymoves()
 	who = 'Business';
@@ -8,13 +7,13 @@ $(function () {
 		$('#search').prop('disabled',false);
 		if ($(this).val() != '0') {
 			$('#filterYear')
-				.prop('disabled', false)
+				.prop('disabled', false);
 		} else {
 			$('#filterYear')
 				.prop('selectedIndex', 0)
 				.prop('disabled', true);
 		}
-	})
+	});
 
 	$('#search').on('click', function(e) {
 		e.preventDefault();
@@ -24,9 +23,9 @@ $(function () {
 			data = {
 				cardNumber: $('#cardNumber').val()
 			}
-			$('#month').val('0')
-			$('#year').val('0')
-			getMovements()
+			$('#month').val('0');
+			$('#year').val('0');
+			getMovements();
 		} else {
 			where = 'MonthlyMovements';
 			form = $('#movements');
@@ -35,26 +34,30 @@ $(function () {
 
 			if (form.valid()) {
 				data = getDataForm(form);
-				$('#month').val(data.filterMonth)
-				$('#year').val(data.filterYear)
-				getMovements()
+				$('#month').val(data.filterMonth);
+				$('#year').val(data.filterYear);
+				getMovements();
 			}
 		}
-	})
+	});
 
 	$('#downloadFiles').on('click', 'a', function(e) {
-		e.preventDefault()
+		e.preventDefault();
 		var event = $(e.currentTarget);
 		form = $('#downd-send')
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.action = event.attr('action')
-			data.id = event.attr('id')
+			data.action = event.attr('action');
+			data.id = event.attr('id');
 			where = 'DownloadMoves';
-			$('.cover-spin').show(0)
+			$('.cover-spin').show(0);
 			callNovoCore(who, where, data, function(response) {
-				filesAction(data.action, response)
+				if (data.action == 'download') {
+					filesAction(data.action, response);
+				} else {
+					$('.cover-spin').hide();
+				}
 			})
 		}
 	})
@@ -99,17 +102,17 @@ function getMovements() {
 				appendLi+=		'<span class="px-2 feed-amount items-center">'+moves.sign+' '+moves.amount+'</span>';
 				appendLi+=	'</li>';
 
-				$('#movementsList').append(appendLi)
+				$('#movementsList').append(appendLi);
 			})
 		}
-		displaymoves()
+		displaymoves();
 	})
 }
 
 function displaymoves() {
 	$('#pre-loader')
 		.removeClass('mt-5 mx-auto flex justify-center')
-		.addClass('hide')
+		.addClass('hide');
 
 	if ($('#movementsList > li').length > 0) {
 		$('.hide-downloads').removeClass('hide');
@@ -177,7 +180,7 @@ function displaymoves() {
 
 function filesAction(action, response) {
 	if (action == 'download' && response.code == 0) {
-		delete (response.data.btn1)
-		downLoadfiles(response.data)
+		delete (response.data.btn1);
+		downLoadfiles(response.data);
 	}
 }

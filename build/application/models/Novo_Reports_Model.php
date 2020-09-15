@@ -38,16 +38,16 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->fechaIni = $dataRequest->initDate;
 		$this->dataRequest->fechaFin = $dataRequest->finalDate;
 		$this->dataRequest->producto = $dataRequest->prefix;
-		$this->dataRequest->tipoConsulta = $dataRequest->action;
+		$this->dataRequest->tipoConsulta = $dataRequest->typeInquiry;
 
-		$response = $this->sendToService('GetMovements');
+		$response = $this->sendToService('callWs_GetMovements');
 		$headers = [];
 		$body = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				switch ($dataRequest->action) {
+				switch ($dataRequest->typeInquiry) {
 					case '0':
 						foreach (lang('GEN_SELECT_MONTH') AS $monthName) {
 							$body[$monthName] = [];
@@ -97,6 +97,65 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 		}
 
-		return $this->responseToTheView('GetMovements');
+		return $this->responseToTheView('callWs_GetMovements');
+	}
+	/**
+	 * @info Método para obtener la lista de tarjetas de un usuario
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date May 14th, 2019
+	 */
+	public function callWs_DownloadInquiry_Reports($dataRequest)
+	{
+		log_message('INFO', 'NOVO Reports Model: DownloadInquiry Method Initialized');
+
+		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
+		$this->dataAccessLog->modulo = 'Reportes';
+		$this->dataAccessLog->function = 'Gastos por categoría';
+		$this->dataAccessLog->operation = 'Movimientos';
+
+		$cardNumber = json_decode(base64_decode($dataRequest->cardNumber));
+		$cardNumber = $this->cryptography->decrypt(
+			base64_decode($cardNumber->plot),
+			utf8_encode($cardNumber->password)
+		);
+
+		$OperId = $dataRequest->id == 'downloadPDF' ||  $dataRequest->id == 'sendPDF' ? 'generarArchivoPDFGastosRepresentacion'
+			: 'generarArchivoXlsGastosRepresentacion';
+		$this->dataRequest->idOperation = $OperId;
+		$this->dataRequest->idPersona = $this->session->userId;
+		$this->dataRequest->nroTarjeta = $cardNumber;
+		$this->dataRequest->fechaIni = $dataRequest->initDate;
+		$this->dataRequest->fechaFin = $dataRequest->finalDate;
+		$this->dataRequest->producto = $dataRequest->prefix;
+		$this->dataRequest->tipoConsulta = $dataRequest->typeInquiry;
+		$this->dataRequest->mail = $dataRequest->action == 'send' ? TRUE : FALSE;
+
+		$response = $this->sendToService('callWs_DownloadInquiry');
+
+
+		switch ($this->isResponseRc) {
+			case 0:
+				switch ($dataRequest->action) {
+					case 'download':
+						$this->response->code = 0;
+						$file = $response->bean->archivo ?? $response->archivo;
+						$name = $response->bean->nombre ?? $response->nombre;
+						$ext = $fitype = $dataRequest->id == 'downloadPDF' ? 'pdf' : 'xls';
+						$this->response->data['file'] = $file;
+						$this->response->data['name'] = $name.'.'.$ext;
+						$this->response->data['ext'] = $ext;
+					break;
+					case 'send':
+						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
+						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
+						$this->response->icon = lang('GEN_ICON_SUCCESS');
+						$this->response->msg = lang('GEN_MAIL_SUCCESS');
+						$this->response->data['btn1']['action'] = 'destroy';
+					break;
+				}
+			break;
+		}
+
+		return $this->responseToTheView('callWs_DownloadInquiry');
 	}
 }

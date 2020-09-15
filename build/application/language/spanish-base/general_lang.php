@@ -181,4 +181,5 @@ $lang['GEN_SELECT_MONTH'] = [
 	'11' => 'Noviembre',
 	'12' => 'Diciembre',
 ];
-
+$lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
+$lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';

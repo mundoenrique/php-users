@@ -138,6 +138,7 @@ class NOVO_Model extends CI_Model {
 			if (is_array($response) && isset($response['file'])) {
 				continue;
 			}
+
 			$responsetoView->$pos = $response;
 		}
 

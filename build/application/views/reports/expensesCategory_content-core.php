@@ -88,32 +88,37 @@
         </div>
       </form>
 
-      <div id="downloads" class="hide pl-1">
-        <ul class="stack list-inline mb-0 flex items-center">
+      <div id="downloads" class="hide-downloads hide pl-1">
+        <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="#" rel="subsection">
+            <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
 							<span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
 						</a>
           </li>
 					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
 					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendPDF" href="" action="send">
+						<a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
 							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
 						</a>
 					</li>
 					<?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="#" rel="subsection">
+            <a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
 							<span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
 						</a>
           </li>
 					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
 					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendXLS" href="" action="send">
+						<a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
 							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
 						</a>
 					</li>
 					<?php endif; ?>
+					<form id="downd-send">
+						<input type="hidden" id="dType" name="Dtype">
+						<input type="hidden" id="dInitDate" name="DinitDate">
+						<input type="hidden" id="dFinalDate" name="DfinalDate">
+					</form>
         </ul>
       </div>
     </nav>

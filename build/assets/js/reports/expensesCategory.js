@@ -1,6 +1,8 @@
 'use strict'
+var dateFilter;
 $(function () {
 	var action;
+	var typeInquiry;
 
 	$('input[type=hidden][name="cardNumber"]').each(function (pos, element) {
 		var cypher = cryptoPass($(element).val());
@@ -9,6 +11,7 @@ $(function () {
 
 	$('.date-picker').datepicker({
 		onSelect: function (selectedDate) {
+			$('input[type=radio]').prop('checked', false);
 			$(this)
 				.focus()
 				.blur();
@@ -32,19 +35,20 @@ $(function () {
 	});
 
 	if ($('#productdetail').attr('call-moves') == '1') {
-		action = '0';
-		getMovements(action);
+		typeInquiry = '0';
+		getMovements(typeInquiry);
 	}
 
 	$('#annualMovesForm').on('click', 'input', function(e) {
+		$('#monthtlyMovesForm')[0].reset();
 		$(this).prop('checked', true);
-		action = '0';
-		getMovements(action);
+		typeInquiry = '0';
+		getMovements(typeInquiry);
 	})
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
-		action = '0';
-		getMovements(action);
+		typeInquiry = '0';
+		getMovements(typeInquiry);
 	});
 
 	$('#monthtlyMovesBtn').on('click', function (e) {
@@ -54,37 +58,61 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			action = '1';
-			getMovements(action);
+			typeInquiry = '1';
+			getMovements(typeInquiry);
 		}
+	});
+
+	$('#downloadFiles').on('click', 'a', function(e) {
+		e.preventDefault();
+		var event = $(e.currentTarget);
+		form = $('#operation');
+		data = getDataForm(form);
+		data.id = event.attr('id');
+		data.action = event.attr('action');
+		data.typeInquiry = $('#dType').val();
+		data.initDate = $('#dInitDate').val();
+		data.finalDate = $('#dFinalDate').val();
+		who = "Reports"; where = "DownloadInquiry";
+		$('.cover-spin').show(0);
+
+		callNovoCore(who, where, data, function (response) {
+			if (data.action == 'download' && response.code == 0) {
+				delete (response.data.btn1);
+				downLoadfiles(response.data);
+			} else {
+				$('.cover-spin').hide();
+			}
+		});
 	});
 });
 
-function getMovements(action) {
+function getMovements(typeInquiry) {
 	who = "Reports"; where = "GetMovements";
+	$('#downd-send input').val('');
 	$('#no-result').addClass('hide');
 	$('#movements').addClass('hide');
-	$('#downloads').addClass('hide');
+	$('.hide-downloads').addClass('hide');
 	$('#pre-loader').removeClass('hide');
 	$('#movements thead, #movements tbody').empty();
 	form = $('#operation');
 	data = getDataForm(form);
-	data.action = action
+	data.typeInquiry = typeInquiry
 	data.initDate = '01/01/' + $('input[name="year"]:checked').val();
 	data.finalDate = '31/12/' + $('input[name="year"]:checked').val();
 
-	if (action == '1') {
+	if (typeInquiry == '1') {
 		data.initDate = $('#initDate').val();
 		data.finalDate = $('#finalDate').val();
-		$('input[type=radio]').prop('checked', false);
-	} else {
-		$('#monthtlyMovesForm')[0].reset();
 	}
 
 	insertFormInput(true);
 
 	callNovoCore(who, where, data, function (response) {
 		$('#pre-loader').addClass('hide');
+		$('#dType').val(typeInquiry);
+		$('#dInitDate').val(data.initDate);
+		$('#dFinalDate').val(data.finalDate);
 
 		if (response.code == 0) {
 			var header = '';
@@ -116,7 +144,7 @@ function getMovements(action) {
 
 			$('#movements tbody').append(body);
 			$('#movements').removeClass('hide');
-			$('#downloads').removeClass('hide');
+			$('.hide-downloads').removeClass('hide');
 		}
 
 		if (response.code == 1) {

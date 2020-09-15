@@ -148,6 +148,7 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('products');
 				case 'expensesCategory':
 				case 'getMovements':
+				case 'downloadInquiry':
 					$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
 				break;
 				case 'signup':
