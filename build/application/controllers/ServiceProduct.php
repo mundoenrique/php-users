@@ -24,7 +24,7 @@ class ServiceProduct extends BDB_Controller
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
-			$this->session->set_userdata('setProduct', $dataProduct->data[0]);
+			$this->session->set_userdata('setProductServices', $dataProduct->data[0]);
 			redirect("/atencioncliente");
 		}
 
@@ -62,6 +62,9 @@ class ServiceProduct extends BDB_Controller
 		$this->load->model('Product_Model', 'modelLoad');
 		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
+		$loadProducts = $this->modelLoad->callWs_loadProducts_Product();
+		$totalProducts = count($loadProducts->data);
+
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
 			return $listProducts;
 		}
@@ -84,6 +87,7 @@ class ServiceProduct extends BDB_Controller
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
+				"totalProducts" => $totalProducts,
 				"bloqueo" => $row->bloque,
 			]);
 		}

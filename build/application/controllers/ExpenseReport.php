@@ -31,6 +31,8 @@ class ExpenseReport extends BDB_Controller
 
 				redirect('/atencioncliente');
 			}
+
+			$this->session->set_userdata('setProductExpense', $dataProduct[0]);
 			redirect("/detallereporte");
 		}
 
@@ -64,9 +66,12 @@ class ExpenseReport extends BDB_Controller
 
 	public function loadDataProduct($card = '')
 	{
+		$dataRequest = new stdClass();
+		$dataRequest->tipoOperacion = 'RGR';
 
-		$this->load->model('Product_Model', 'modelLoad');
-		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
+		$this->load->model('Product_Model', 'loadData');
+		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
+
 
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
 			return $listProducts;
@@ -81,23 +86,23 @@ class ExpenseReport extends BDB_Controller
 				continue;
 			}
 
-			$indexServices = array_search($row->noTarjeta, array_column($servicesAvailableCards, 'noTarjeta'));
+			$indexServices = array_search($row->nroTarjeta, array_column($servicesAvailableCards, 'noTarjeta'));
 			$services = json_decode($servicesAvailableCards[$indexServices]['availableService']);
 
 			array_push($dataRequeried, [
-				"nroTarjeta" => $row->noTarjeta,
-				"nroTarjetaMascara" => $row->noTarjetaConMascara,
+				"nroTarjeta" => $row->nroTarjeta,
+				"nroTarjetaMascara" => $row->nroTarjetaMascara,
 				"producto" => $row->prefix,
-				"nombre_producto" => $row->nombre_producto,
+				"nombre_producto" => $row->producto,
 				"marca" => $row->marca,
-				"tarjetaHabiente" => $row->nom_plastico,
-				"nomPlastico" => $row->nom_plastico,
+				"tarjetaHabiente" => $row->nomPlastico,
+				"nomPlastico" => $row->nomPlastico,
 				"nomEmp" => $row->nomEmp,
-				"tipoTarjeta" => $row->tipo,
+				"tipoTarjeta" => $row->tipoTarjeta,
 				"id_ext_per" => $row->id_ext_per,
 				"availableServices" => $services,
 				"prefix" => $row->prefix,
-				"id_ext_emp" => $row->rif,
+				"id_ext_emp" => $row->id_ext_emp,
 				"bloque" => $row->bloque
 			]);
 		}
