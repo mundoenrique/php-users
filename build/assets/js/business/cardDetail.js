@@ -119,6 +119,10 @@ function displaymoves() {
 		$('#movementsList').removeClass('hide');
 		$('#movementsStats').removeClass('hide');
 		$("#movementsStats").kendoChart({
+			chartArea: {
+				width: 300,
+				height:200
+			},
 			legend: {
 				position: "top",
 				visible: false

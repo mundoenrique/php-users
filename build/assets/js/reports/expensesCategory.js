@@ -144,6 +144,10 @@ function getMovements(typeInquiry) {
 			});
 
 			$("#movementsStats").kendoChart({
+				chartArea: {
+					width: 300,
+					height:200
+				},
 				legend: {
 					position: "left",
 					visible: true
