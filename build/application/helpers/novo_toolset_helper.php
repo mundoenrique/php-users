@@ -28,12 +28,6 @@ if (!function_exists('clientUrlValidate')) {
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 
-		$bodyResponse = [
-			'client' => $client,
-			'accessUrl' => $accessUrl
-		];
-		log_message('INFO', '*** clientUrlValidate: ' . json_encode($bodyResponse));
-
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
 			redirect(base_url($client.'/inicio'), 'location', 301);

@@ -67,15 +67,6 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		languageLoad('generic', $this->router->fetch_class());
-
-		$data = [
-			'uriString' => $this->uri->uri_string,
-			'rule' => $this->rule,
-			'ajax' => $this->input->is_ajax_request(),
-			'countryUri' => $this->countryUri
-		];
-
-		log_message('INFO', '**** Country: ' . json_encode($data));
 		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->router->fetch_class());
 		$this->skin = $this->config->item('client');
@@ -109,11 +100,8 @@ class NOVO_Controller extends CI_Controller {
 				break;
 		}
 
-		log_message('INFO', '*** NOVO Controller: validation AJAX');
-
 		if ($this->input->is_ajax_request()) {
 
-			log_message('INFO', '*** NOVO Controller: request is for API???????');
 			if ($this->countryUri === "api") {
 
 				$streamClean = $this->security->xss_clean($this->input->raw_input_stream);
