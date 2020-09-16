@@ -47,7 +47,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
+		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
 		$this->render->widget =  FALSE;
 		$this->render->prefix = '';
@@ -73,7 +73,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 
-		if ($this->rule !== 'suggestion') {
+		if ($this->rule !== 'suggestion' && $this->rule !== 'generateHash') {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
@@ -101,16 +101,24 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($this->input->is_ajax_request()) {
-			$this->dataRequest = json_decode(
-				$this->security->xss_clean(
-					strip_tags(
-						$this->cryptography->decrypt(
-							base64_decode($this->input->get_post('plot')),
-							utf8_encode($this->input->get_post('request'))
+			if ($this->countryUri === "api") {
+
+				$streamClean = $this->security->xss_clean($this->input->raw_input_stream);
+				$this->dataRequest = json_decode($streamClean);
+
+			} else {
+
+				$this->dataRequest = json_decode(
+					$this->security->xss_clean(
+						strip_tags(
+							$this->cryptography->decrypt(
+								base64_decode($this->input->get_post('plot')),
+								utf8_encode($this->input->get_post('request'))
+							)
 						)
 					)
-				)
-			);
+				);
+			}
 		} else {
 			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
 			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';

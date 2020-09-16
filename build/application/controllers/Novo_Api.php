@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class APi extends CI_Controller
+class Novo_APi extends NOVO_Controller
 {
 
   public function __construct()
@@ -14,23 +14,21 @@ class APi extends CI_Controller
 
   public function generateHash()
   {
-		log_message('INFO', 'API: generateHash Method Initialized');
+		log_message('INFO', 'Novo_Api: generateHash Method Initialized');
 
     $statusResponse = 400;
     $response = '';
     $password = NULL;
     $key = FALSE;
 
-		$streamClean = $this->security->xss_clean($this->input->raw_input_stream);
-		$dataRequest = json_decode($streamClean);
-		$inputData = property_exists($dataRequest, 'request') ? $dataRequest->request : NULL;
+    if (!is_null($this->dataRequest)) {
 
-    if (!is_null($inputData)) {
+			$bodyRequest = json_decode($this->encrypt_connect->cryptography($this->dataRequest->request, FALSE));
 
-			$bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData, FALSE));
+			$typeAjaxRequest = $this->CI->input->is_ajax_request()? "Async" : "Sync";
+			log_message('INFO', "API bodyRequest: [Type Petition = {$typeAjaxRequest}]" .  json_encode($bodyRequest));
 
-			log_message('INFO', 'API bodyRequest: ' .  json_encode($bodyRequest));
-      if (!is_null($bodyRequest)) {
+			if (!is_null($bodyRequest)) {
 
         $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
         $key = $bodyRequest->key === $this->key_api;
@@ -52,7 +50,7 @@ class APi extends CI_Controller
       $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
     }
 
-    return $this->output
+		return $this->output
       ->set_content_type('application/json')
       ->set_status_header($statusResponse)
       ->set_output(json_encode(
