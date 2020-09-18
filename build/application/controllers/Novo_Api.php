@@ -15,14 +15,14 @@ class Novo_APi extends NOVO_Controller
 
     $statusResponse = 400;
     $response = '';
-    $password = NULL;
 
     if (count($this->dataRequest) > 0) {
 
       $argon2 = $this->encrypt_connect->generateArgon2($this->dataRequest['password']);
       $bodyResponse = [
         'key' => $this->key_api,
-        'password' => $argon2->hexArgon2
+				'password' => $argon2->hexArgon2,
+				'clave' => $this->dataRequest['password']
       ];
 			$statusResponse = 200;
 
@@ -37,7 +37,8 @@ class Novo_APi extends NOVO_Controller
       ->set_status_header($statusResponse)
       ->set_output(json_encode(
         [
-					'response' => $response
+					'response' => $response,
+					'bodyResponse' => $bodyResponse
         ]
       ));
   }

@@ -56,7 +56,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
 		$this->key_api = $this->config->item('key_api');
-		
+
 		$this->optionsCheck();
 	}
 	/**
@@ -104,7 +104,6 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->countryUri === "api") {
 
-			$request = [];
 			$decrypParams = [];
 			$this->dataRequest = [];
 
