@@ -7,9 +7,6 @@ class Novo_APi extends NOVO_Controller
   public function __construct()
   {
     parent::__construct();
-
-    $this->CI = &get_instance();
-    $this->key_api = $this->CI->config->item('key_api');
   }
 
   public function generateHash()
@@ -19,25 +16,10 @@ class Novo_APi extends NOVO_Controller
     $statusResponse = 400;
     $response = '';
     $password = NULL;
-    $key = FALSE;
 
-    if (!is_null($this->dataRequest)) {
+    if (count($this->dataRequest) > 0) {
 
-			$bodyRequest = json_decode($this->encrypt_connect->cryptography($this->dataRequest->request, FALSE));
-
-			$typeAjaxRequest = $this->CI->input->is_ajax_request()? "Async" : "Sync";
-			log_message('INFO', "API bodyRequest: [Type Petition = {$typeAjaxRequest}]" .  json_encode($bodyRequest));
-
-			if (!is_null($bodyRequest)) {
-
-        $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
-        $key = $bodyRequest->key === $this->key_api;
-      }
-    }
-
-    if (!is_null($password) && $key) {
-
-      $argon2 = $this->encrypt_connect->generateArgon2($password);
+      $argon2 = $this->encrypt_connect->generateArgon2($this->dataRequest['password']);
       $bodyResponse = [
         'key' => $this->key_api,
         'password' => $argon2->hexArgon2

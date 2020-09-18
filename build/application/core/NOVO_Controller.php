@@ -55,6 +55,8 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
+		$this->key_api = $this->config->item('key_api');
+		
 		$this->optionsCheck();
 	}
 	/**
@@ -100,48 +102,71 @@ class NOVO_Controller extends CI_Controller {
 				break;
 		}
 
-		if ($this->input->is_ajax_request()) {
+		if ($this->countryUri === "api") {
 
-			if ($this->countryUri === "api") {
+			$request = [];
+			$decrypParams = [];
+			$this->dataRequest = [];
 
-				$streamClean = $this->security->xss_clean($this->input->raw_input_stream);
-				$this->dataRequest = json_decode($streamClean);
+			$objRequest = json_decode($this->input->raw_input_stream);
 
-			} else {
+			if (!is_null($objRequest) && count(get_object_vars($objRequest)) > 0) {
 
-				$this->dataRequest = json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
-						)
-					)
-				);
-			}
-		} else {
-			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
-			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+				$decrypParams = $this->tool_api->getPropertiesRequest($objRequest, $this->rule);
 
-			if ($this->session->has_userdata('logged') && $accept && $module) {
-				redirect(base_url('perfil-usuario'), 'location', 301);
-			}
+				if ( count($decrypParams) > 0 ) {
 
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
-			$valid = TRUE;
+					$_POST = $this->tool_api->getContentRequest($decrypParams, $this->rule);
 
-			if ($_POST && $access) {
-				log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+					if (!array_key_exists ('key', $_POST) || $_POST['key'] !== $this->key_api) {
+						$resultValidationParams = FALSE;
+					}else{
+						$resultValidationParams = $this->form_validation->run($this->rule);
+						log_message('DEBUG', 'NOVO VALIDATION PARAMS API: '.$this->rule.': '.json_encode($resultValidationParams));
+					}
 
-				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+					if ($resultValidationParams) {
 
-				if ($valid) {
-					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+						$this->dataRequest = $_POST;
+					}
 				}
 			}
+		} else {
+			if ($this->input->is_ajax_request()) {
 
-			$this->preloadView($access && $valid);
+					$this->dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
+			} else {
+				$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+				$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+
+				if ($this->session->has_userdata('logged') && $accept && $module) {
+					redirect(base_url('perfil-usuario'), 'location', 301);
+				}
+
+				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
+				$valid = TRUE;
+
+				if ($_POST && $access) {
+					log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+
+					$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+
+					if ($valid) {
+						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+					}
+				}
+
+				$this->preloadView($access && $valid);
+			}
 		}
 	}
 	/**
