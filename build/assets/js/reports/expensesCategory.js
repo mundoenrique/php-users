@@ -6,7 +6,7 @@ $(function () {
 
 	$('input[type=hidden][name="cardNumber"]').each(function (pos, element) {
 		var cypher = cryptoPass($(element).val());
-		$(element).val(cypher)
+		$(element).val(cypher);
 	});
 
 	$('.date-picker').datepicker({
@@ -150,7 +150,7 @@ function getMovements(typeInquiry) {
 				},
 				legend: {
 					position: "left",
-					visible: true
+					visible: false
 				},
 				seriesDefaults: {
 					labels: {
