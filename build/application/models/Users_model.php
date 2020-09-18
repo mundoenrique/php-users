@@ -445,12 +445,37 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'password operaciones', 'password operaciones', 'actualizar');
 
+		$passwordOperacionesOld = json_decode(base64_decode($passwordOperacionesOld));
+		$passwordOperacionesOld = $this->cryptography->decrypt(
+			base64_decode($passwordOperacionesOld->plot),
+			utf8_encode($passwordOperacionesOld->password)
+		);
+
+		$passwordOperaciones = json_decode(base64_decode($passwordOperaciones));
+		$passwordOperaciones = $this->cryptography->decrypt(
+			base64_decode($passwordOperaciones->plot),
+			utf8_encode($passwordOperaciones->password)
+		);
+
+		$argon2Old = $this->encrypt_connect->generateArgon2($passwordOperacionesOld);
+		$argon2New = $this->encrypt_connect->generateArgon2($passwordOperaciones);
+		// TODO: quitar logs
+		log_message('info', 'PRUEBA PASSWORD_OLD en plano: ' . json_encode($passwordOperacionesOld));
+		log_message('info', 'PRUEBA PASSWORD_OLD en Argon2: ' . json_encode($argon2Old->hexArgon2));
+		log_message('info', 'PRUEBA PASSWORD_NEW en plano: ' . json_encode($passwordOperaciones));
+		log_message('info', 'PRUEBA PASSWORD_NEW en Argon2: ' . json_encode($argon2New->hexArgon2));
+
 		$data = json_encode(array(
 			'idOperation' => '32',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $this->session->userdata('userName'),
 			'passwordOperacionesOld' => md5($passwordOperacionesOld),
 			'passwordOperaciones' => md5($passwordOperaciones),
+			// TODO: Cambiar cuando servicio funcione
+			// "passwordOperacionesOld"		=> $argon2Old->hexArgon2,
+			// 'passwordOperaciones' => $argon2New->hexArgon2,
+			// 'hashMD5Old' => md5($passwordOperacionesOld),
+			// 'hashMD5' => md5($passwordOperaciones),
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
 		));
