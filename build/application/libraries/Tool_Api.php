@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Tool_Api {
 	private $CI;
 
-
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
@@ -17,7 +16,7 @@ class Tool_Api {
 		$this->structureValidRequest = "";
 	}
 	/**
-	 * @info Método para extraer las propiedades de la petición API
+	 * @info Método que establece el contrato para el API solicitada
 	 * @author Pedro Torres
 	 * @date Septiembre 18th, 2020
 	 */
@@ -54,6 +53,7 @@ class Tool_Api {
 				}
 			}
 		}
+		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getPropertiesRequest " . json_encode($decrypParams));
 		return $decrypParams;
 	}
 	/**
@@ -87,6 +87,7 @@ class Tool_Api {
 
 			}
 		}
+		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getContentRequest " . json_encode($contentRequest));
 		return $contentRequest;
 	}
 }

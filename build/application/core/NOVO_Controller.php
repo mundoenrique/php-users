@@ -104,6 +104,8 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->countryUri === "api") {
 
+			log_message('INFO', 'NOVO Controller: optionsCheck control api petition.');
+
 			$decrypParams = [];
 			$this->dataRequest = [];
 

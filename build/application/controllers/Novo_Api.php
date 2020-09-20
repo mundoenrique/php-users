@@ -36,11 +36,7 @@ class Novo_APi extends NOVO_Controller
       ->set_status_header($statusResponse)
       ->set_output(json_encode(
         [
-					'response' => $response,
-					'bodyResponse' => $bodyResponse,
-					// TODO
-					// For loggins
-					'clave' => $this->dataRequest['password']
+					'response' => $response
         ]
       ));
   }
