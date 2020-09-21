@@ -114,7 +114,7 @@
         <p>
           Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar
         </p>
-        <hr class="separador-one">
+        <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
           <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
           <button class="btn btn-small btn-loading btn-primary send" action="TemporaryLock">Continuar</button>
@@ -124,24 +124,25 @@
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
-        <p>Seleccione una motivo de la solicitud</p>
-        <div class="row">
-          <div class="form-group col-lg-4">
-            <label for="replaceMotSol">Motivo de la solicitud</label>
-            <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-              <option value="">Selecciona</option>
-              <option value="59">Tarjeta robada</option>
-              <option value="17">Sospecha de fraude</option>
-              <option value="41">Tarjeta cancelada</option>
-            </select>
-            <div class="help-block"></div>
-          </div>
-        </div>
-        <hr class="separador-one">
-        <div class="flex items-center justify-end pt-3">
-          <a class="btn btn-small btn-link" href="">Cancelar</a>
-          <button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
-        </div>
+				<form id="replacementForm" >
+					<div class="row">
+						<div class="form-group col-lg-4">
+							<label for="replaceMotSol">Motivo de la solicitud</label>
+							<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
+								<option value="" selected disabled>Selecciona</option>
+								<?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
+								<option value="<?= $key ?>"><?= $value ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+					</div>
+					<hr class="separador-one w-100">
+					<div class="flex items-center justify-end pt-3">
+						<a class="btn btn-small btn-link" href="">Cancelar</a>
+						<button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
+					</div>
+				</form>
       </div>
     </div>
     <div id="pinManagementView" class="option-service"
@@ -207,7 +208,7 @@
                   <div class="help-block"></div>
                 </div>
               </div>
-              <div id="requestPinInput" class="row hide">
+              <div id="requestPinInput" class="row hide ml-auto">
                 <hr class="separador-one mb-3">
                 <p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en
                   Conexión Empresas Online, para poder

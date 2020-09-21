@@ -3,9 +3,10 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide()
-
+	console.log(currentDate.getFullYear())
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
+		minDate: '-90y',
 		maxDate: '-18y',
 		changeMonth: true,
 		changeYear: true,

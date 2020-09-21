@@ -46,6 +46,10 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 
+						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
+							$cardRecord->services = [];
+						}
+
 						foreach ($cardsRecords->services AS $service) {
 							array_push($serviceList, $service);
 						}
@@ -83,8 +87,14 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->data->resp['btn1']['link'] = 'inicio';
 		}
 
+		$serviceList = array_unique($serviceList);
+
+		if (count($serviceList) == 0) {
+			$this->session->set_userdata('noService', TRUE);
+		}
+
 		$this->response->data->cardsList = $cardsList;
-		$this->response->data->serviceList = array_unique($serviceList);
+		$this->response->data->serviceList = $serviceList;
 
 		return $this->responseToTheView('callWs_UserCardsList');
 	}
@@ -136,6 +146,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '3';
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->signo = $dataRequest->TransType ?? '';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardDetail');
@@ -274,15 +285,22 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
 				switch ($dataRequest->action) {
 					case 'download':
-						$file = isset($response->bean->archivo) ? $response->bean->archivo : $response->archivo;
-						$name = isset($response->bean->nombre) ? $response->bean->nombre : $response->nombre;
+						$this->response->code = 0;
+						$file = $response->bean->archivo ?? $response->archivo;
+						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
 						$this->response->data['file'] = $file;
 						$this->response->data['name'] = $name.'.'.$ext;
 						$this->response->data['ext'] = $ext;
+					break;
+					case 'send':
+						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
+						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
+						$this->response->icon = lang('GEN_ICON_SUCCESS');
+						$this->response->msg = lang('GEN_MAIL_SUCCESS');
+						$this->response->data['btn1']['action'] = 'destroy';
 					break;
 				}
 			break;

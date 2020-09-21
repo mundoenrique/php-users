@@ -65,6 +65,7 @@ $lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
 $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
+$lang['GEN_CURRENCY'] = '$';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -162,6 +163,7 @@ $lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
 $lang['GEN_PICKER_YEARRANGE'] = '-20:';
 $lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
 $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
+$lang['GEN_PICKER_MINDATE'] = 2001;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //GENERAL
@@ -179,4 +181,5 @@ $lang['GEN_SELECT_MONTH'] = [
 	'11' => 'Noviembre',
 	'12' => 'Diciembre',
 ];
-
+$lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
+$lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';

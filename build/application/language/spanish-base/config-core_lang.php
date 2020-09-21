@@ -5,8 +5,8 @@ $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
-	'testing' => 0,
-	'production' => 0
+	'testing' => 0.2,
+	'production' => 0.5
 ];
 //VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
@@ -29,8 +29,8 @@ $lang['CONF_BANKS'] = 'ON';
 $lang['CONF_CREDIT_CARDS'] = 'ON';
 $lang['CONF_SERVICES'] = 'ON';
 $lang['CONF_TELEPHONY'] = 'ON';
-$lang['CONF_REPORTS'] = 'OFF';
 $lang['CONF_CUSTOMER_SUPPORT'] = 'ON';
+$lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
@@ -45,8 +45,6 @@ $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
-//BROWSERS
-$lang['CONF_SUGGESTION_IE'] = 'OFF';
 //CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
