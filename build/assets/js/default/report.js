@@ -52,16 +52,26 @@ $(function () {
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
 	$("#filter-range-from").datepicker({
-		onSelect: function (selected) {
-			$("#filter-range-to").datepicker('option', 'minDate', selected)
+		onSelect: function (selectedDate) {
+		$(this)
+		.focus()
+		.blur();
+		var dateSelected = selectedDate.split('/');
+		dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+		var maxTime = new Date(dateSelected);
+		var currentDate = new Date();
+
+			$('#filter-range-to').datepicker('option', 'minDate', selectedDate);
+			maxTime.setMonth(maxTime.getMonth() + 1);
+			if (currentDate > maxTime) {
+				$('#filter-range-to').datepicker('option', 'maxDate', maxTime);
+			} else {
+				$('#filter-range-to').datepicker('option', 'maxDate', currentDate);
+			}
 		}
 	});
 
-	$("#filter-range-to").datepicker({
-		onSelect: function (selected) {
-			$("#filter-range-from").datepicker('option', 'maxDate', selected)
-		}
-	});
+	$("#filter-range-to").datepicker();
 
 	$(".dashboard-item").on('click', function (event) {
 		event.preventDefault();
