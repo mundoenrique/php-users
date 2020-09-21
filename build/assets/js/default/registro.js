@@ -943,9 +943,10 @@ $(function(){
 					return;
 				}
 				$.each(data.listaPaises, function(pos,item){
-					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
-					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-					countries.append(lista);
+					if(item.cod_pais == "Co" || item.cod_pais == "Pe" || item.cod_pais == "Usd" || item.cod_pais == "Ve"){
+						var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+						countries.append(lista);
+						}
 				});
 				countries.attr('disabled', false);
 				defCountry.text('Seleccione');
