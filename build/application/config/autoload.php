@@ -65,6 +65,7 @@ $autoload['libraries'] = array(
 	'parser',
 	'form_validation',
 	'Encrypt_Connect',
+	'Tool_Api',
 	'Cryptography',
 	'Verify_Access'
 );
@@ -109,7 +110,8 @@ $autoload['helper'] = array(
 	'cookie',
 	'menu',
 	'novo_language',
-	'novo_toolset'
+	'novo_toolset',
+	'contracts_api'
 );
 
 /*

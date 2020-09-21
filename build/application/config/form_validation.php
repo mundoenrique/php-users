@@ -1,6 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+	'generateHash' => [
+		[
+			'field' => 'key',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
 	'signin' => [
 		[
 			'field' => 'userName',
