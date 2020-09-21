@@ -25,6 +25,10 @@ class Novo_Reports extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
+			"third_party/kendo.dataviz",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"reports/expensesCategory"
 		);
 		$this->load->model('Novo_Business_Model', 'business');
@@ -34,6 +38,16 @@ class Novo_Reports extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$cardsTotal = count($cardsList);
+		$yearTenant = (int) lang('GEN_PICKER_MINDATE');
+		$years = date('Y') - 2;
+		$maxYear = date('Y');
+
+		if (($yearTenant - $years) >= 0) {
+			$years = $yearTenant;
+		}
+
+		$this->render->years = $years;
+		$this->render->maxYear = $maxYear;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->render->operations = TRUE;
 		$this->render->cardsTotal = $cardsTotal;
@@ -46,6 +60,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->cardNumber = '';
 		$this->render->prefix = '';
 		$this->render->status = '';
+		$this->render->callMoves = '0';
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
@@ -56,6 +71,7 @@ class Novo_Reports extends NOVO_Controller {
 			$this->render->cardNumber = $cardsList[0]->cardNumber;
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
+			$this->render->callMoves = '1';
 		}
 
 		$this->views = ['reports/'.$view];

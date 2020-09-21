@@ -25,6 +25,9 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"support/services"
 		);
 		$this->load->model('Novo_Business_Model', 'business');
