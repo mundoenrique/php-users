@@ -146,6 +146,7 @@ class Verify_Access {
 				case 'transactionalLimits':
 				case 'replacement':
 					$auth = $this->CI->session->has_userdata('products');
+				break;
 				case 'expensesCategory':
 				case 'getMovements':
 				case 'downloadInquiry':
