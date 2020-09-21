@@ -142,7 +142,7 @@ function getMovements(typeInquiry) {
 				});
 				body += '</tr>';
 			});
-			console.log(response.data.grafic)
+
 			$("#movementsStats").kendoChart({
 				chartArea: {
 					width: 300,
