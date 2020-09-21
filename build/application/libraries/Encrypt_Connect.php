@@ -80,10 +80,43 @@ class Encrypt_Connect
 			log_message('INFO', 'NOVO [' . $userName . '] INSERTING COUNTRY TO THE RESPONSE');
 			$response->pais = $this->CI->config->item('country');
 		}
-		$this->logMessage->rc = $response->rc;
-		$this->logMessage->msg = isset($response->msg) ? $response->msg : 'Sin mensaje del servicio';
-		$this->logMessage->response = $response;
-		$this->logMessage->pais = $this->CI->config->item('country');
+
+		if (isset($response->bean)) {
+			$response->bean = gettype(json_decode($response->bean)) == 'object' ? json_decode($response->bean) : $response->bean;
+			$this->logMessage->inBean = 'IN BEAN';
+		}
+
+		foreach ($response AS $pos => $responseAttr) {
+			switch ($pos) {
+				case 'archivo':
+					$this->logMessage->archivo = 'OK';
+
+					if(!is_array($responseAttr)) {
+						$this->logMessage->archivo = 'Sin arreglo binario';
+					}
+				break;
+				case 'bean':
+					$this->logMessage->bean = new stdClass();
+
+					if (isset($responseAttr->archivo)) {
+						$this->logMessage->bean->archivo = 'OK';
+
+						if(!is_array($responseAttr->archivo)) {
+							$this->logMessagebean->archivo = 'Sin arreglo binario';
+						}
+					} else {
+						$this->logMessage->bean = $responseAttr;
+					}
+				break;
+				case 'msg':
+					$this->logMessage->msg = $responseAttr;
+				break;
+				default:
+					$this->logMessage->$pos = $responseAttr;
+			}
+		}
+
+		$this->logMessage->msg = $this->logMessage->msg ?? 'Sin mensaje del servicio';
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
@@ -118,18 +151,26 @@ class Encrypt_Connect
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
+		$CurlErrorNo = curl_errno($ch);
 		curl_close($ch);
-		log_message('DEBUG', 'NOVO [' . $userName . '] RESPONSE CURL HTTP CODE: ' . $httpCode);
-		$failResponse = json_decode($response);
-		/* if(is_object($failResponse)) {
-			$response = $failResponse;
-			$fail = TRUE;
-		} */
-		if ($httpCode != 200 || !$response) {
-			log_message('ERROR', 'NOVO [' . $userName . '] ERROR CURL: ' . json_encode($CurlError, JSON_UNESCAPED_UNICODE));
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
+
+		if($httpCode != 200 || !$response) {
+			$CurlError = novoLang('ERROR CURL NUMBER: %s, MESSAGE: %s ', [$CurlErrorNo, json_encode($CurlError, JSON_UNESCAPED_UNICODE)]);
+
+			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
+
 			$failResponse = new stdClass();
-			$failResponse->rc = lang('GEN_DEFAULT_CODE');
-			$failResponse->msg = lang('GEN_SYSTEM_NAME');
+
+			if ($CurlErrorNo == 28) {
+				$failResponse->rc = 504;
+				$failResponse->msg = lang('GEN_TIMEOUT');
+			} else {
+				$failResponse->rc = lang('GEN_RC_DEFAULT');
+				$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
+			}
+
 			$response = $failResponse;
 			$fail = TRUE;
 		}
@@ -140,7 +181,8 @@ class Encrypt_Connect
 			$this->logMessage->pais = $request['pais'];
 			$this->writeLog($this->logMessage);
 		}
-		return json_decode($response);
+
+		return gettype($response) == 'object' ? $response : json_decode($response);
 	}
 	/**
 	 * @info método para enviar archivos al servidor de backend
@@ -198,38 +240,14 @@ class Encrypt_Connect
 	 */
 	private function writeLog($logMessage)
 	{
-		$userName = $logMessage->userName;
-		$model = $logMessage->model;
-		$rc = $logMessage->rc;
-		$msg = $logMessage->msg;
-		$response = isset($logMessage->response) ? $logMessage->response : '';
-		$country = $logMessage->pais;
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$model.'= rc: '.$rc.', msg: '.$msg.', country: '.$country);
-		$wirteLog = new stdClass();
-		$isBean = '';
-		if (isset($response->bean) && $response->bean != 'null') {
-			$isBean = 'IN BEAN ';
-			$response->bean = gettype($response->bean) != 'object' ? json_decode($response->bean) : $response->bean;
-		}
-		if(is_object($response)) {
-			foreach ($response AS $pos => $responseAttr) {
-				if($pos == 'bean' || $pos == 'archivo') {
-					if (isset($responseAttr->archivo) || isset($response->archivo)) {
-						$wirteLog->archivo = 'OK';
-						$wirteLog->nombre = isset($responseAttr->nombre) ? $responseAttr->nombre : $response->nombre;
-						$wirteLog->formatoArchivo = isset($responseAttr->formatoArchivo) ? $responseAttr->formatoArchivo : $response->formatoArchivo;
-						$file = isset($responseAttr->archivo) ? $responseAttr->archivo : $response->archivo;
-						if(!is_array($file)) {
-							$wirteLog->archivo = FALSE;
-						}
-						continue;
-					}
-				}
-				$wirteLog->$pos = $responseAttr;
-			}
-		}
-		log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE '.$isBean.$model.': '.json_encode($wirteLog, JSON_UNESCAPED_UNICODE));
-		unset($wirteLog);
+		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$logMessage->model, $logMessage->rc, $logMessage->msg, $logMessage->pais]);
+		$inBean = $logMessage->inBean ?? '';
+
+		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] RESPONSE '.$writeLog);
+
+		$writeLog = novoLang('%s %s: %s', [$inBean, $logMessage->model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
+
+		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] COMPLETE RESPONSE '.$writeLog);
 	}
 	/**
 	 * @info Genera hash Argon2 de un valor dado

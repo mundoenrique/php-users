@@ -49,7 +49,7 @@ function cardModal() {
 	data = {
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'close'
+			action: 'destroy'
 		},
 		maxHeight: 600,
 		width: 655,

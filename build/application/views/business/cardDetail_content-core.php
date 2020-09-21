@@ -53,9 +53,9 @@
 	<div class="flex flex-column pt-3 col-lg-12 col-xl-8">
 		<h4 class="h4 regular tertiary">Mis movimientos</h4>
 		<nav id="filtersStack" class="navbar px-0 pb-0">
-			<div id="period-form" class="stack-form mr-auto flex items-center">
+			<div id="period-form" class="stack-form mr-auto flex items-center col-8">
 
-				<form id="movements">
+				<form class="w-100" id="movements">
 					<div class="row items-center pl-2">
 						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
 						<input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
@@ -70,8 +70,8 @@
 							</select>
 							<div class="help-block"></div>
 						</div>
-						<div class="form-group">
-							<select id="filterYear" class="custom-select form-control w-100 my-1 mr-1" name="filterYear" disabled>
+						<div class="form-group col-3 px-0">
+							<select id="filterYear" class="custom-select form-control col-10 my-1 mr-1" name="filterYear" disabled>
 								<option value="default">--</option>
 								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
 								<option value="<?= $i ?>"><?= $i ?></option>
@@ -79,7 +79,7 @@
 							</select>
 							<div class="help-block mx-0"></div>
 						</div>
-						<button id="search" class="btn btn-small btn-rounded-right btn-primary ml-1 mb-3" disabled>
+						<button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3 left ml-2" disabled>
 							<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 						</button>
 					</div>
@@ -87,10 +87,12 @@
 
 			</div>
 			<?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
-			<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
-				data-name="reset">Movimientos</button>
-			<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
-				data-name="reset">En tránsito</button>
+			<div class="mb-3">
+				<button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
+					data-name="reset">Movimientos</button>
+				<button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset" data-group="group-filter-pagination"
+					data-name="reset">En tránsito</button>
+			</div>
 			<?php endif; ?>
 			<div class="hide-downloads">
 				<ul id="downloadFiles" class="stack list-inline mb-0 flex items-center pb-2">

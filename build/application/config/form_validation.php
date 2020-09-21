@@ -256,7 +256,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -274,7 +274,7 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -292,7 +292,25 @@ $config = [
 		],
 		[
 			'field' => 'expireDate',
-			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		]
+	],
+	'replacement' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'prefix',
@@ -317,6 +335,74 @@ $config = [
 		[
 			'field' => 'userIdNumber',
 			'rules' => 'trim|alpha_numeric|required'
+		]
+	],
+	'getMovements' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'cardNumberMask',
+			'rules' => 'trim|regex_match[/^([0-9\*])+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha|required'
+		],
+		[
+			'field' => 'typeInquiry',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		]
+	],
+	'downloadInquiry' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'cardNumberMask',
+			'rules' => 'trim|regex_match[/^([0-9\*])+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha|required'
+		],
+		[
+			'field' => 'typeInquiry',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'action',
+			'rules' => 'trim|alpha|required'
+		],
+		[
+			'field' => 'id',
+			'rules' => 'trim|alpha|required'
 		]
 	],
 	'keepSession' => [
