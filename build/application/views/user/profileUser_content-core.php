@@ -48,6 +48,32 @@
 						<input id="birthDate" class="form-control <?= $updateUser; ?>" type="text" name="birthDate" value="<?= $birthday; ?>" readonly autocomplete="off">
 						<div class="help-block"></div>
 					</div>
+					<?php if($longProfile == 'S'):?>
+					<div class="form-group col-3 col-lg-6">
+						<label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
+						<input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality" value="">
+						<div class="help-block"></div>
+					</div>
+					<div class="form-group col-3 col-lg-6">
+						<label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
+						<input id="placeBirth" class="form-control <?= $updateUser; ?>" type="text" name="placeBirth" value="">
+						<div class="help-block"></div>
+					</div>
+					<div class="form-group col-3 col-lg-6">
+						<label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
+						<select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
+							<?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
+								<option value="<?= $key; ?>"><?= $value; ?></option>
+							<?php endforeach; ?>
+						</select>
+						<div class="help-block"></div>
+					</div>
+					<div class="form-group col-3 col-lg-6">
+						<label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
+						<input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" value="">
+						<div class="help-block"></div>
+					</div>
+					<?php endif; ?>
 					<div class="form-group col-3 col-lg-6">
 						<label class="block"><?= lang('USER_GENDER') ?></label>
 						<div class="custom-control custom-radio custom-control-inline">
@@ -74,6 +100,7 @@
 		<div class="col-12 col-lg-6 pb-3">
 			<div class="bg-secondary p-2 h-100">
 				<h4 class="mt-1 pb-2 h4"><?= lang('USER_CONTACT_DATA') ?></h4>
+				<?php if($longProfile == 'S'):?>
 				<div class="row mx-1 <?= $skipContacData; ?>">
 					<div class="form-group col-3 col-lg-6">
 						<label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
@@ -109,6 +136,7 @@
 						<div class="help-block"></div>
 					</div>
 				</div>
+				<?php endif; ?>
 				<div class="row mx-1">
 					<div class="form-group col-6">
 						<label for="email"><?= lang('USER_EMAIL') ?></label>
@@ -152,8 +180,8 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="col-12 col-lg-6 pb-3">
+		<?php if($longProfile == 'S'):?>
+		<div class="col-12 pb-3 col-lg-6">
 			<div class="bg-secondary p-2 h-100">
 				<h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
 				<div class="row mx-1">
@@ -247,22 +275,22 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="col-12 col-lg-6 pb-3">
+		<?php endif; ?>
+		<div class="dataUser col-12 <?= $dataUser; ?> pb-3">
 			<div class="bg-secondary p-2 h-100">
 				<h4 class="mt-1 pb-2 h4"><?= lang('USER_DATA_USER') ?></h4>
 				<div class="row mx-1">
-					<div class="form-group form-group col-6">
+					<div class="form-group <?= $dataUserOptions; ?>">
 						<label for="nickName"><?= lang('USER_NICK_NAME') ?></label>
 						<input id="nickName" class="form-control available" type="text" name="nickName" value="<?= $nickName; ?>" readonly autocomplete="off">
 						<div class="help-block"></div>
 					</div>
-					<div class="form-group form-group col-6">
+					<div class="form-group <?= $dataUserOptions; ?>">
 						<label for="creationDate"><?= lang('USER_REGISTRY_DATE') ?></label>
 						<input id="creationDate" class="form-control" type="text" name="creationDate" value="<?= $creationDate; ?>" readonly autocomplete="off">
 						<div class="help-block"></div>
 					</div>
-					<div class="form-group form-group col-6 <?= $skipBoth; ?>">
+					<div class="form-group <?= $dataUserOptions; ?> <?= $skipBoth ?>">
 						<label class="block"><?= lang('USER_NOTIFICATIONS') ?></label>
 						<div class="custom-control custom-switch custom-control-inline <?= $skipEmail; ?>">
 							<input id="notEmail" class="custom-control-input" type="checkbox" name="notEmail" <?= $emailNot == '1' ? 'checked' : '' ?> <?= $disabled; ?>>
@@ -308,16 +336,18 @@
 						<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_TERMS'); ?></label>
 						<div class="help-block"></div>
 					</div>
+					<?php if($longProfile == 'S'):?>
 					<div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-						<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms" <?= $terms == '1' ? 'checked disabled' : '' ?>>
+						<input id="acceptTermsProtection" class="custom-control-input" type="checkbox" name="acceptTerms" <?= $terms == '1' ? 'checked disabled' : '' ?>>
 						<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
 						<div class="help-block"></div>
 					</div>
 					<div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-						<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms" <?= $terms == '1' ? 'checked disabled' : '' ?>>
+						<input id="acceptTermsContract" class="custom-control-input" type="checkbox" name="acceptTerms" <?= $terms == '1' ? 'checked disabled' : '' ?>>
 						<label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
 						<div class="help-block"></div>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

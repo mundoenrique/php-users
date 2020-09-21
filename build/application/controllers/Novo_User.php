@@ -233,6 +233,8 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
+		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);

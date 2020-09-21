@@ -93,6 +93,16 @@ $lang['USER_LASTNAME'] = 'Primer apellido';
 $lang['USER_SURNAME'] = 'Segundo apellido';
 $lang['USER_BIRTHDATE'] = 'Fecha de nacimiento';
 $lang['USER_GENDER'] = 'Sexo';
+$lang['USER_NATIONALITY'] = 'Nacionalidad';
+$lang['USER_PLACEBIRTH'] = 'Lugar de nacimiento';
+$lang['USER_CIVILSTATUS'] = 'Estado civil';
+$lang['USER_CIVILSTATUS_LIST'] = [
+	'' => 'Selecciona',
+	'1' => 'Soltero',
+	'2' => 'Casado',
+	'3' => 'Viudo'
+];
+$lang['USER_VERIFIERCODE'] = 'Digito verificador';
 $lang['USER_GENDER_MALE'] = 'Masculino';
 $lang['USER_GENDER_FEMALE'] = 'Femenino';
 $lang['USER_PROFESSION'] = 'Profesión';
