@@ -108,6 +108,7 @@ $lang['USER_GENDER_FEMALE'] = 'Femenino';
 $lang['USER_PROFESSION'] = 'Profesión';
 $lang['USER_ADDRESS_TYPE'] = 'Tipo de dirección';
 $lang['USER_ADDRESS'] = 'Dirección';
+$lang['USER_DISTRICT'] = 'Distrito';
 $lang['USER_ADDRESS_TYPE_LIST'] = [
 	'' => 'Selecciona',
 	'1' => 'Habitacional',
