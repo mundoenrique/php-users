@@ -1,4 +1,6 @@
 'use strict'
+var numberCard = 'label[for=numberCard]';
+var radioType = 'input:radio[name=cardType]';
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
@@ -31,6 +33,18 @@ $(function () {
 			})
 		}
 	})
+
+	$(radioType).change(function(){
+		if($(this).attr("value")=="virtual"){
+				$(numberCard).text("Correo electrónico");
+				$("#numberCard").attr( "maxlength", "32" );
+				$("#physicalCardPIN").fadeOut("fast").hide(300);
+		} else {
+				$(numberCard).text("Número de tarjeta");
+				$("#numberCard").attr( "maxlength", "16" );
+				$("#physicalCardPIN").fadeIn("fast").show(300);
+		}
+	});
 });
 
 /* validator = $('#signupForm').validate();
