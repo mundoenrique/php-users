@@ -1,24 +1,25 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_CARD_DETAIL'); ?></h1>
 <div class="flex justify-between row">
 	<div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
 		<div class="flex flex-wrap widget-product">
 			<div class="line-text w-100">
 				<div class="flex inline-flex col-12 px-xl-2">
-					<div class="flex flex-colunm justify-center col-6 py-5">
-						<div class="product-presentation relative">
+					<div class="col-6 py-4">
+						<div class="product-presentation relative w-100">
 							<div class="item-network <?= $brand ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
 						</div>
 					</div>
-					<div class="flex flex-column items-start col-6 py-5">
+					<div class="flex flex-column items-start col-6 py-4">
 						<p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
-						<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
+						<p id="card" class="mb-0"><?= $cardNumberMask; ?></p>
+						<p id="card" class="mb-0 none">08/23</p>
 						<?php if ($cardsTotal > 1): ?>
-						<a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
-							<i aria-hidden="true" class="icon-find"></i>
-							&nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
-						</a>
+							<a class="btn hyper-link btn-small mt-1 p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
+								<i aria-hidden="true" class="icon-find"></i>
+								&nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
+							</a>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -64,8 +65,8 @@
 							<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
 							<select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
 								<option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
-								<?php foreach (lang('GEN_SELECT_MONTH') AS $key => $month): ?>
-								<option value="<?= $key ?>"><?= $month ?></option>
+								<?php foreach (lang('GEN_SELECT_MONTH') as $key => $month) : ?>
+									<option value="<?= $key ?>"><?= $month ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div class="help-block"></div>
@@ -73,8 +74,8 @@
 						<div class="form-group col-3 px-0">
 							<select id="filterYear" class="custom-select form-control col-10 my-1 mr-1" name="filterYear" disabled>
 								<option value="default">--</option>
-								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--): ?>
-								<option value="<?= $i ?>"><?= $i ?></option>
+								<?php for ($i = $currentYear; $i > $currentYear - 5; $i--) : ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
 								<?php endfor; ?>
 							</select>
 							<div class="help-block mx-0"></div>
@@ -101,24 +102,24 @@
 							<span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
 						</a>
 					</li>
-					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
-					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
-						</a>
-					</li>
+					<?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
+						<li class="stack-item px-1 list-inline-item is-disabled">
+							<a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+								<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
+							</a>
+						</li>
 					<?php endif; ?>
 					<li class="stack-item px-1 list-inline-item">
 						<a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
 							<span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
 						</a>
 					</li>
-					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
-					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
-						</a>
-					</li>
+					<?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
+						<li class="stack-item px-1 list-inline-item is-disabled">
+							<a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+								<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
+							</a>
+						</li>
 					<?php endif; ?>
 					<form id="downd-send">
 						<input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
@@ -134,18 +135,18 @@
 				<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 			</div>
 			<ul id="movementsList" class="feed fade-in mt-3 pl-0 hide">
-				<?php foreach ($movesList AS $moves): ?>
-				<?php $classCss = $moves->sign == '-' ? 'feed-expense' : 'feed-income' ?>
-				<li class="feed-item <?= $classCss; ?> flex py-2 items-center">
-					<div class="flex px-2 flex-column items-center feed-date">
-						<span class="h5"><?= $moves->date; ?></span>
-					</div>
-					<div class="flex px-2 flex-column mr-auto">
-						<span class="h5 semibold feed-product"><?= $moves->desc; ?></span>
-						<span class="h6 feed-metadata"><?= $moves->ref; ?></span>
-					</div>
-					<span class="px-2 feed-amount items-center"><?= $moves->sign.' '.$moves->amount; ?></span>
-				</li>
+				<?php foreach ($movesList as $moves) : ?>
+					<?php $classCss = $moves->sign == '-' ? 'feed-expense' : 'feed-income' ?>
+					<li class="feed-item <?= $classCss; ?> flex py-2 items-center">
+						<div class="flex px-2 flex-column items-center feed-date">
+							<span class="h5"><?= $moves->date; ?></span>
+						</div>
+						<div class="flex px-2 flex-column mr-auto">
+							<span class="h5 semibold feed-product"><?= $moves->desc; ?></span>
+							<span class="h6 feed-metadata"><?= $moves->ref; ?></span>
+						</div>
+						<span class="px-2 feed-amount items-center"><?= $moves->sign . ' ' . $moves->amount; ?></span>
+					</li>
 				<?php endforeach; ?>
 			</ul>
 			<div id="no-moves" class="hide">
