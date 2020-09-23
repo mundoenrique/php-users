@@ -22,7 +22,7 @@
 								$infoCard = '';
 								$title = '';
 								switch ($row) {
-									case ($row['bloqueo'] !== '' && $row['bloqueo'] !== 'NE'):
+									case ($row['bloqueo'] !== '' && $row['bloqueo'] == 'PB'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
 										break;
 
