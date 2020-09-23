@@ -11,6 +11,7 @@ class Tool_Api {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
+
 		$this->CI = &get_instance();
 		$this->key_api = $this->CI->config->item('key_api');
 		$this->structureValidRequest = "";
@@ -20,9 +21,9 @@ class Tool_Api {
 	 * @author Pedro Torres
 	 * @date Septiembre 18th, 2020
 	 */
-	private function setContract($nameApi = NULL){
+	private function setContract($nameApi = NULL)
+	{
 		if (!is_null($nameApi)) {
-
 			$functionGetContract = "getContractApi_" . $nameApi;
 			$this->structureValidRequest = $functionGetContract();
 		}
@@ -54,6 +55,7 @@ class Tool_Api {
 			}
 		}
 		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getPropertiesRequest " . json_encode($decrypParams));
+
 		return $decrypParams;
 	}
 	/**
@@ -68,26 +70,24 @@ class Tool_Api {
 		$contentRequest = [];
 
 		if (!is_null($nameApi) && !is_null($decrypParams)) {
-
 			$whiteListNamePropRequest = array_keys($this->structureValidRequest[$nameApi]);
 			foreach ($whiteListNamePropRequest as $valueProp) {
 
 				$paramsBodyRequest = json_decode($decrypParams[$valueProp]);
 
 				if (!is_null($paramsBodyRequest )) {
-
 					$whiteListNameParamsBodyRequest = $this->structureValidRequest[$nameApi][$valueProp];
-					foreach ($whiteListNameParamsBodyRequest as $valor) {
 
+					foreach ($whiteListNameParamsBodyRequest as $valor) {
 						$contentRequest[$valor] = property_exists ($paramsBodyRequest, $valor) ?
 						$this->CI->security->xss_clean(strip_tags($paramsBodyRequest->{$valor})) :
 						NULL;
 					}
 				}
-
 			}
 		}
 		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getContentRequest " . json_encode($contentRequest));
+
 		return $contentRequest;
 	}
 }

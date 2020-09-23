@@ -225,12 +225,15 @@ class Encrypt_Connect
 	public function cryptography($data, $encrip = TRUE)
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: cryptography Method Initialized');
+
 		$encrypt_method = "AES-256-CBC";
+
 		if ($encrip) {
 			$output = openssl_encrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
 		} else {
 			$output = openssl_decrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
 		}
+
 		return $output;
 	}
 	/**
