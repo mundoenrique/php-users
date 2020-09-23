@@ -61,6 +61,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->prefix = '';
 		$this->render->status = '';
 		$this->render->callMoves = '0';
+		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
