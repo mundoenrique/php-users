@@ -100,7 +100,6 @@
 		<div class="col-12 col-lg-6 pb-3">
 			<div class="bg-secondary p-2 h-100">
 				<h4 class="mt-1 pb-2 h4"><?= lang('USER_CONTACT_DATA') ?></h4>
-				<?php if($longProfile == 'S'):?>
 				<div class="row mx-1 <?= $skipContacData; ?>">
 					<div class="form-group col-3 col-lg-6">
 						<label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
@@ -130,13 +129,21 @@
 						</select>
 						<div class="help-block"></div>
 					</div>
+					<?php if($longProfile == 'S'):?>
+					<div class="form-group col-3 col-lg-6">
+						<label for="district"><?= lang('USER_DISTRICT') ?></label>
+						<select id="district" class="custom-select form-control <?= $updateUser; ?>" name="district">
+							<option value=""></option>
+						</select>
+						<div class="help-block"></div>
+					</div>
+					<?php endif; ?>
 					<div class="form-group col-12 col-lg-8 col-xl-12">
 						<label for="address"><?= lang('USER_ADDRESS') ?></label>
 						<textarea id="address" class="form-control <?= $updateUser; ?>" name="address"><?= $address; ?></textarea>
 						<div class="help-block"></div>
 					</div>
 				</div>
-				<?php endif; ?>
 				<div class="row mx-1">
 					<div class="form-group col-6">
 						<label for="email"><?= lang('USER_EMAIL') ?></label>
@@ -303,16 +310,16 @@
 					</div>
 				</div>
 				<div class="row mx-1">
-					<div class="form-group col-6">
+					<div class="form-group col-6 col-lg-4">
 						<a class="btn btn-small btn-link px-0 hyper-link big-modal" href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
 					</div>
 					<?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
-						<div class="form-group col-6">
+						<div class="form-group col-6 col-lg-4">
 							<a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
 						</div>
 					<?php endif; ?>
 					<?php if (lang('CONF_CHECK_NOTI_SMS') == 'ON') : ?>
-						<div class="form-group col-6">
+						<div class="form-group col-6 col-lg-4">
 							<a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_SMS_PASSS_CHANGE') ?></a>
 						</div>
 					<?php endif; ?>
