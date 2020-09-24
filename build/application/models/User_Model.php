@@ -341,24 +341,44 @@ class User_Model extends BDB_Model
 	public function callWs_registry_User($dataRequest)
 	{
 		log_message('INFO', 'NOVO User Model: Registty method Initialized');
+
 		$dataUser = $this->session->userdata;
+
+		$password = json_decode(base64_decode($dataRequest->userpwd));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$user = array(
 			"userName" => $dataRequest->username,
 			"primerNombre" => $dataRequest->firstName,
 			"segundoNombre" => $dataRequest->middleName,
-			"primerApellido"	=> $dataRequest->lastName,
+			"primerApellido" => $dataRequest->lastName,
 			"segundoApellido"	=> $dataRequest->secondSurname,
 			"fechaNacimiento"	=> $dataRequest->birthDate,
-			"id_ext_per"		=> $dataRequest->tipo_id_ext_per . '_' . $dataRequest->idNumber,
-			"codPais"			=> $dataUser['pais'],
+			"id_ext_per" => $dataRequest->tipo_id_ext_per . '_' . $dataRequest->idNumber,
+			"codPais"	=> $dataUser['pais'],
 			"tipo_id_ext_per"	=> $dataUser['tipo_id_ext_per'],
-			"sexo"				=> $dataRequest->gender,
-			"notEmail"			=> "1",
-			"notSms"			=> "1",
-			"email"				=> $dataRequest->email,
-			"password"			=> md5($dataRequest->userpwd),
-			"passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
+			"sexo" => $dataRequest->gender,
+			"notEmail" => "1",
+			"notSms" => "1",
+			"email"	=> $dataRequest->email,
+
+			// TODO
+			// lineas originales
+			// "password"			=> md5($dataRequest->userpwd),
+			// "passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
+			"password"			=> md5($password),
+			"passwordOld4"		=> md5(strtoupper($password)),
+
+			// TODO
+			// Para las pruebas de integración con sevicios
+			// "password"			=> $argon2->hexArgon2,
+			// "passwordOld4"		=> $argon2->hexArgon2,
+
 			"tyc" => $dataRequest->acceptTerms,
 			"acCodCia" => $dataRequest->acCodCia,
 		);

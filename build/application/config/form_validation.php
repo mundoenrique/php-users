@@ -808,12 +808,12 @@ $config = [
 		[
 			'field' => 'userpwd',
 			'label' => 'userpwd',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmUserpwd',
 			'label' => 'confirmUserpwd',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[userpwd]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 	],
 	'recoveryaccess' => [
