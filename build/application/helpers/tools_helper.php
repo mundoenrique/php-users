@@ -46,7 +46,7 @@ if ( ! function_exists('np_hoplite_countryCheck'))
 
 		$iso = strtolower($countryISO);
 		if (strtolower($iso) !== '') {
-			$CI->config->load('config-' . $iso);
+			$CI->config->load('conf-' . $iso . '-config');
 		}
 	}
 }
