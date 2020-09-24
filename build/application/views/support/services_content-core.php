@@ -8,10 +8,11 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
             <div class="flex flex-colunm justify-center col-6 py-5">
               <div class="product-presentation relative">
-                <div class="item-network <?= $brand; ?>"></div>
+                <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
                 <div id="donor" class="product-search btn">
-                  <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
+									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
+									<div class="item-network"></div>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else: ?>
@@ -209,7 +210,6 @@
                 </div>
               </div>
               <div id="requestPinInput" class="row hide ml-auto">
-                <hr class="separador-one mb-3">
                 <p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en
                   Conexión Empresas Online, para poder
                   emitir el nuevo PIN.</p>
