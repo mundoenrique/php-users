@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$config['country'] = 'Co';
-$config['country-uri'] = 'co';
+$config['country'] = 'Usd';
+$config['country-uri'] = 'us';
 $config['base_url']	= BASE_URL.'/'.$config['country-uri'].'/';
-$config['language']	= 'spanish-ve';
+$config['language']	= 'spanish-pe';
