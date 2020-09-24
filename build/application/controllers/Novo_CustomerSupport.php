@@ -73,6 +73,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->RecoverPinText = 'Recuperar PIN';
 		$this->render->activeEvents = 'no-events';
 		$this->render->uniqueEvent = $uniqueEvent;
+		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
