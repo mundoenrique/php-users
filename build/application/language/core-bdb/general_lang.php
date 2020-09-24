@@ -4,3 +4,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $lang['GEN_COIN'] = '$';
 
 
+$lang['loadBalanceInTransit'] = 'FALSE';
