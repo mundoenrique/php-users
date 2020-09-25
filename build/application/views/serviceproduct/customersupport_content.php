@@ -16,7 +16,7 @@
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php
-						if ($totalProducts > 1) {
+						if ($data['totalProducts'] > 1) {
 						?>
 							<a id="open-card-details" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('listaproducto') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto

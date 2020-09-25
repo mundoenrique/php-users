@@ -3,7 +3,9 @@
 	<input type='hidden' name='frmInitialDate' value=''>
 	<input type='hidden' name='frmFinalDate' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>
+	<input type='hidden' name='nroTarjeta' value=''>
 </form>
+
 
 <div id="report" class="report-content h-100 bg-content">
 	<div class="py-4 px-5">
@@ -55,11 +57,11 @@
 						</label>
 					</div>
 					<ul class="stack list-inline mb-0 flex items-center">
-						<li class="stack-item px-1 list-inline-item rounded is-disabled">
-							<a id="downloadPDF" href="" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
+						<li class="stack-item list-inline-item rounded is-disabled">
+							<a id="downloadPDF" class="block px-1" href="" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
-						<li class="stack-item px-1 list-inline-item rounded is-disabled">
-							<a id="downloadXLS" href="" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+						<li class="stack-item list-inline-item rounded is-disabled">
+							<a id="downloadXLS" class="block px-1" href="" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
 					</ul>
 				</nav>
@@ -73,7 +75,7 @@
 						</div>
 
 						<div id="reportAnnual" class="feed overflow-auto">
-						<?php if (is_array($expenses) && count($expenses) > 0): ?>
+						<?php if (is_array($expenses->listaGrupo) && count($expenses->listaGrupo) > 0): ?>
 							<table class="feed-table">
 								<thead>
 									<tr>
@@ -92,10 +94,10 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php foreach($expenses->data->totalesAlMes as $key => $value): ?>
+								<?php foreach($expenses->totalesAlMes as $key => $value): ?>
 									<tr id="<?= strtolower($value->mes); ?>">
 										<td class="feed-headline"><?= ucfirst(strtolower($value->mes)); ?></td>
-									<?php foreach($expenses->data->listaGrupo as $col): ?>
+									<?php foreach($expenses->listaGrupo as $col): ?>
 										<td class="feed-monetary"><?= $col->gastoMensual[$key]->monto; ?></td>
 									<?php endforeach; ?>
 										<td class="feed-total"><?= $value->monto; ?></td>
@@ -105,10 +107,10 @@
 								<tfoot>
 									<tr id="totales">
 										<td class="feed-headline">Total</td>
-									<?php foreach($expenses->data->listaGrupo as $key => $value): ?>
+									<?php foreach($expenses->listaGrupo as $key => $value): ?>
 										<td class="feed-monetary feed-category-<?= $key+1; ?>x"><?= $value->totalCategoria; ?></td>
 									<?php endforeach; ?>
-										<td class="feed-total"><?= $expenses->data->totalGeneral; ?></td>
+										<td class="feed-total"><?= $expenses->totalGeneral; ?></td>
 									</tr>
 								</tfoot>
 							</table>
