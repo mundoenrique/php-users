@@ -20,6 +20,13 @@ class Users_model extends CI_Model
 		$infoOTP->tokenCliente = $codeOTP === '--' ? "" : $codeOTP;
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
+		$newCore = array (
+			'Usd',
+			'Pe',
+			'Co',
+			'Ve'
+		);
+
 		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
@@ -49,8 +56,7 @@ class Users_model extends CI_Model
 		}
 		$cookie = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 		$putSession = FALSE;
-
-		log_message('info', 'Respuesta del server - login Usuario: ' . json_encode($desdata));
+		$desdata->validateRedirect = FALSE;
 
 		if ($desdata->rc === -424) {
 
@@ -100,6 +106,17 @@ class Users_model extends CI_Model
 				$data = ['username' => $username];
 				$this->db->where('id', $this->session->session_id);
 				$this->db->update('cpo_sessions', $data);
+
+				if (!empty($newCore)){
+					$validateNewCore = in_array($desdata->codPais,$newCore);
+					if($validateNewCore){
+						$desdata->codPaisUrl = changeCoreUrl($desdata->codPais);
+						$desdata->validateRedirect = TRUE;
+						$this->logout();
+						$this->session->unset_userdata($this->session->all_userdata());
+						$this->session->sess_destroy();
+					}
+				}
 			} else {
 				$desdata = [
 					'rc' => -5,
@@ -108,6 +125,8 @@ class Users_model extends CI_Model
 			}
 		}
 		$salida = json_encode($desdata);
+
+		log_message('info', 'Respuesta del server - login Usuario2: ' . json_encode($desdata));
 
 		$response = $this->cryptography->encrypt($desdata);
 
