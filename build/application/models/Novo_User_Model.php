@@ -28,12 +28,7 @@ class Novo_User_Model extends NOVO_Model {
 		$userName = mb_strtoupper($dataRequest->userName);
 		$this->dataAccessLog->userName = $userName;
 
-		$password = json_decode(base64_decode($dataRequest->userPass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
-
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataRequest->idOperation = '1';
@@ -43,13 +38,11 @@ class Novo_User_Model extends NOVO_Model {
 		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 
-		if(ACTIVE_RECAPTCHA) {
-			$this->isResponseRc = $this->callWs_ValidateCaptcha_User($dataRequest);
+		$this->isResponseRc = ACTIVE_RECAPTCHA ?
+														$this->callWs_ValidateCaptcha_User($dataRequest) :
+														0;
 
-			if ($this->isResponseRc === 0) {
-				$response = $this->sendToService('callWs_Signin');
-			}
-		} else {
+		if ($this->isResponseRc === 0) {
 			$response = $this->sendToService('callWs_Signin');
 		}
 
@@ -282,16 +275,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
-		$current = json_decode(base64_decode($dataRequest->currentPass));
-		$current = $this->cryptography->decrypt(
-			base64_decode($current->plot),
-			utf8_encode($current->password)
-		);
-		$new = json_decode(base64_decode($dataRequest->newPass));
-		$new = $this->cryptography->decrypt(
-			base64_decode($new->plot),
-			utf8_encode($new->password)
-		);
+		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
+		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
 
 		$argon2 = $this->encrypt_connect->generateArgon2($new);
 
@@ -478,12 +463,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Registro';
 		$this->dataAccessLog->operation = 'Registrar usuario';
 
-		$password = json_decode(base64_decode($dataRequest->newPass));
-		$password = $this->cryptography->decrypt(
-			base64_decode($password->plot),
-			utf8_encode($password->password)
-		);
-
+		$password = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataRequest->idOperation = '20';
