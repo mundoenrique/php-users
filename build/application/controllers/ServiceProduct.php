@@ -20,11 +20,11 @@ class ServiceProduct extends BDB_Controller
 			exit();
 		}
 
-		$this->session->unset_userdata('setProduct');
+		$this->session->unset_userdata('setProductServices');
 
 		$dataProduct = $this->loadDataProduct();
-		if (count($dataProduct) == 1 and $dataProduct !== '--') {
-			$this->session->set_userdata('setProduct', $dataProduct[0]);
+		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
+			$this->session->set_userdata('setProductServices', $dataProduct->data[0]);
 			redirect("/atencioncliente");
 		}
 
@@ -49,6 +49,7 @@ class ServiceProduct extends BDB_Controller
 
 		$this->views = ['serviceproduct/' . $view];
 		$this->render->data = $dataProduct;
+		$this->render->totalProducts = $this->session->userdata("totalProducts");
 		$this->render->titlePage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->actualPage = lang('GEN_CONSOLIDATED_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->loadView($view);
@@ -56,11 +57,16 @@ class ServiceProduct extends BDB_Controller
 
 	public function loadDataProduct($card = '')
 	{
+
+		$this->session->unset_userdata("totalProducts");
 		$this->load->model('Product_Model', 'modelLoad');
 		$listProducts = $this->modelLoad->callWs_loadProducts_Product();
 
+		$loadProducts = $this->modelLoad->callWs_loadProducts_Product();
+		$totalProducts = count($loadProducts->data);
+
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
-			return $listProducts->msg;
+			return $listProducts;
 		}
 
 		$this->session->set_userdata("totalProducts", count($listProducts->data));
@@ -81,10 +87,12 @@ class ServiceProduct extends BDB_Controller
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
-				"bloqueo" => $row->bloque
+				"totalProducts" => $totalProducts,
+				"bloqueo" => $row->bloque,
 			]);
 		}
-		return $dataRequeried;
+		$listProducts->data = $dataRequeried;
+		return $listProducts;
 	}
 
 	public function customerSupport()
@@ -115,10 +123,22 @@ class ServiceProduct extends BDB_Controller
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$dataProduct = $this->session->userdata('setProductServices');
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
+		if (is_null($dataProduct)){
+
+			$dataProduct = array_filter($_POST, function($k) {
+				return $k !== 'cpo_name';
+			}, ARRAY_FILTER_USE_KEY);
+
+			unset($_POST);
+
+			if (count($dataProduct) < 1) {
+				redirect('/listaproducto');
+			}
+
+			$dataProduct['availableServices'] = json_decode($dataProduct['availableServices']);
+			$this->session->set_userdata('setProductServices', $dataProduct);
 		}
 
 		$menuOptionsProduct = [
@@ -175,7 +195,6 @@ class ServiceProduct extends BDB_Controller
 
 		$this->render->data = $dataProduct;
 		$this->render->listReason = $this->config->item('listReasonReposition');
-		$this->render->totalProducts = $this->session->userdata('totalProducts');
 		$this->render->menuOptionsProduct = $optionsAvailables;
 		$this->render->availableServices = count($dataProduct['availableServices']);
 

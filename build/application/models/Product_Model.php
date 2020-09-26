@@ -37,7 +37,7 @@ class Product_Model extends BDB_Model
 				case 0:
 					$this->response->code = 0;
 					$this->response->data = $response->lista;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = count($response->lista) > 0 ?lang('RESP_RC_0'):lang('GEN_SYSTEM_MESSAGE');
 					break;
 
 				case -150:
@@ -273,10 +273,11 @@ class Product_Model extends BDB_Model
 				case 0:
 					$this->response->code = 0;
 					$this->response->data = $response->cuentaOrigen;
-					$this->response->msg = lang('RESP_RC_0');
+					$this->response->msg = count($response->cuentaOrigen) > 0 ?lang('RESP_RC_0'):lang('GEN_SYSTEM_MESSAGE');
 					break;
 
 				case -33:
+				case -3:
 					$this->response->code = 1;
 					$this->response->data = [];
 					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
