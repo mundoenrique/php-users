@@ -106,12 +106,14 @@ $lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
-$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
-$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
-$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
+$lang['GEN_CONTACTS_TITLE'] = 'Comunícate con nuestro centro de contacto 24 horas en:';
+$lang['GEN_CONTACTS_CITY'] = '';
+$lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
 $lang['GEN_CONTACTS'] = [
-	'city' => '(XX) XXX XXXX',
+	'Provis Alimentación' => '6198930',
+	'Plata Servitebca' => '6198931',
+	'Tarjeta LATODO' => '6193500',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 //GENERAL ERROR RESPONSE
