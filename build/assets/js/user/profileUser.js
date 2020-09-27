@@ -11,8 +11,9 @@ $(function () {
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (selectedDate) {
-			$(this).focus();
-			$('#genderMale').focus();
+			$(this)
+				.focus()
+				.blur();
 		}
 	})
 
