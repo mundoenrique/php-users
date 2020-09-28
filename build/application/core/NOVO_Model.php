@@ -31,11 +31,11 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
+		$this->country = $this->session->countrySess ?? $this->config->item('country');
 		$this->countryUri = $this->session->countryUri;
-		$this->token = $this->session->token ?: '';
+		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
-		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
+		$this->keyId = $this->session->userName ?? 'CPONLINE';
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -52,7 +52,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$this->dataRequest->token = $this->token;
-		$this->dataRequest->pais = isset($this->dataRequest->pais) ? $this->dataRequest->pais : $this->country;
+		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);

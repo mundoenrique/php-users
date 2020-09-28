@@ -54,6 +54,28 @@ class Novo_User_Model extends NOVO_Model {
 			'serverTime' => (int) date("H")
 		];
 
+		$validateClient = $this->isResponseRc == 0 || $this->isResponseRc == -8 || $this->isResponseRc == -205;
+		$clientCod = $response->codPais ?? $response->bean->codPais;
+
+		if ($validateClient && $clientCod != $this->config->item('country') && COUNTRY_VERIFY == 'ON') {
+			if ($this->isResponseRc == 0) {
+				$userData = [
+					'logged' => TRUE,
+					'encryptKey' => $response->keyUpdate,
+					'sessionId' => $response->logAccesoObject->sessionId,
+					'userId' => $response->idUsuario,
+				];
+				$this->session->set_userdata($userData);
+				unset($this->dataRequest->password);
+				$this->dataRequest->pais = $clientCod;
+				$this->token = $response->token;
+				$this->keyId = $userName;
+				$this->callWs_FinishSession_User($this->dataRequest);
+			}
+
+			$this->isResponseRc = -1;
+		}
+
 		switch($this->isResponseRc) {
 			case 0:
 				if ($this->validateUserLogged($userName)) {
@@ -123,19 +145,20 @@ class Novo_User_Model extends NOVO_Model {
 						$this->response->data = base_url(lang('GEN_LINK_CHANGE_PASS'));
 					}
 				}
-				break;
+			break;
 			case -1:
 			case -205:
 				$this->response->code = 1;
 				$this->response->msg = lang('USER_SIGNIN_INVALID_USER');
 				$this->response->className = lang('CONF_VALID_INVALID_USER');
 				$this->response->position = lang('CONF_VALID_POSITION');
+
 				if (isset($response->bean->intentos) && $response->bean->intentos == 2) {
 					$this->response->msg = lang('USER_SIGNIN_WILL_BLOKED');
 					$this->response->className = lang('CONF_VALID_INVALID_USER');
 					$this->response->position = lang('CONF_VALID_POSITION');
 				}
-				break;
+			break;
 			case -194:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_INFO');
@@ -148,7 +171,7 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				$this->session->set_flashdata('recoverAccess', 'temporalPass');
-				break;
+			break;
 			case -8:
 			case -35:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
@@ -162,7 +185,7 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				$this->session->set_flashdata('recoverAccess', 'blockedPass');
-				break;
+			break;
 			case 9999:
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
@@ -174,12 +197,11 @@ class Novo_User_Model extends NOVO_Model {
 						'action'=> 'redirect'
 					]
 				];
-				break;
-				default:
+			break;
+			default:
 				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
 				}
-
 		}
 
 		return $this->responseToTheView('callWs_Signin');
@@ -596,6 +618,10 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? '';
 
+		if ($profileData->longProfile == 'S') {
+			$profileData->city = $response->afiliacion->afiliacion ?? '';
+		}
+
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
 		$phonesList['mobilePhone'] = '';
@@ -819,9 +845,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
-		$userData = ['logged', 'encryptKey', 'sessionId', 'token'];
-		$this->session->unset_userdata($userData);
-		$this->session->sess_destroy();
+
+		if (!$this->input->is_ajax_request()) {
+			$this->session->sess_destroy();
+		}
+
+		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');
 	}
