@@ -377,7 +377,8 @@ class Product_Model extends BDB_Model
 		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP) ? $dataRequest->codeOTP : '';
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
-
+		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
+		
 		if (!empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '214';
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
