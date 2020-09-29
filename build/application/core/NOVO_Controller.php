@@ -75,7 +75,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->form_validation->set_error_delimiters('', '---');
 		$this->config->set_item('language', 'spanish-base');
 
-		if ($this->rule !== 'suggestion' && $this->rule !== 'generateHash') {
+		if ($this->rule !== 'suggestion' && $this->countryUri !== "api") {
 			$this->ValidateBrowser = $this->checkBrowser();
 		}
 
