@@ -55,7 +55,8 @@ class Novo_User_Model extends NOVO_Model {
 		];
 
 		$validateClient = $this->isResponseRc == 0 || $this->isResponseRc == -8 || $this->isResponseRc == -205;
-		$clientCod = $response->codPais ?? $response->bean->codPais;
+		$clientCod = $response->codPais ?? '';
+		$clientCod = $response->bean->codPais ?? $clientCod;
 
 		if ($validateClient && $clientCod != $this->config->item('country') && COUNTRY_VERIFY == 'ON') {
 			if ($this->isResponseRc == 0) {
