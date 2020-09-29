@@ -39,8 +39,8 @@ class Novo_User_Model extends NOVO_Model {
 		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 
 		$this->isResponseRc = ACTIVE_RECAPTCHA ?
-														$this->callWs_ValidateCaptcha_User($dataRequest) :
-														0;
+			$this->callWs_ValidateCaptcha_User($dataRequest) :
+			0;
 
 		if ($this->isResponseRc === 0) {
 			$response = $this->sendToService('callWs_Signin');
