@@ -123,6 +123,7 @@ class Novo_User_Model extends NOVO_Model {
 						'longProfile' => $response->aplicaPerfil,
 						'terms' => $response->tyc,
 						'mobilePhone' => $response->celular ?? '',
+						'enterpriseCod' => $response->acCodCia ?? '',
 						'clientAgent' => $this->agent->agent_string()
 					];
 					$this->session->set_userdata($userData);
