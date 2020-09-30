@@ -73,7 +73,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->db->where('id', $this->session->session_id)
 			->update('cpo_sessions', $data);
 		}
-		
+
 		languageLoad('generic', $this->router->fetch_class());
 		clientUrlValidate($this->countryUri);
 		languageLoad('specific', $this->router->fetch_class());
@@ -138,7 +138,8 @@ class NOVO_Controller extends CI_Controller {
 					}
 				}
 			}
-		} else {
+		} else{
+
 			if ($this->input->is_ajax_request()) {
 
 					$this->dataRequest = json_decode(
