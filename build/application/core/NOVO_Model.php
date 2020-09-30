@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
-	public $className;
 	public $accessLog;
 	public $token;
 	public $country;
@@ -52,7 +51,6 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->acCodCia = $this->session->enterpriseCod ?? '';
 		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
 		$this->dataRequest->token = $this->token;
-		$this->dataRequest->className = $this->className;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
