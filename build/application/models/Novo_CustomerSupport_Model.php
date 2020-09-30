@@ -21,7 +21,6 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de bloqueo o desbloqueo';
@@ -33,6 +32,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		);
 
 		$this->dataRequest->idOperation = '110';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
@@ -76,7 +76,6 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solicitud de bloqueo permanente';
@@ -88,6 +87,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		);
 
 		$this->dataRequest->idOperation = '111';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
@@ -134,12 +134,12 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Giros comerciales';
 		$this->dataAccessLog->operation = 'Consulta de comercios';
 
 		$this->dataRequest->idOperation = '130';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->opcion = 'find_mcc';
 		$this->dataRequest->companyId = '0';
 		$this->dataRequest->product = $dataRequest->prefix;
@@ -221,12 +221,12 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Limites transaccionales';
 		$this->dataAccessLog->operation = 'Consulta de limites';
 
 		$this->dataRequest->idOperation = '217';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->opcion = 'consultar';
 		$this->dataRequest->idEmpresa = '0';
 		$this->dataRequest->prefix = $dataRequest->prefix;

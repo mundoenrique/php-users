@@ -32,7 +32,7 @@ class Novo_User extends NOVO_Controller {
 			clearSessionsVars();
 		}
 
-		if ($this->render->activeRecaptcha) {
+		if (ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}

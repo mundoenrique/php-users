@@ -324,7 +324,7 @@ $config = [
 		],
 		[
 			'field' => 'userIdNumber',
-			'rules' => 'trim|alpha_numeric|required'
+			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
 		]
 	],
 	'getMovements' => [

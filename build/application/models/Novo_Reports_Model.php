@@ -21,7 +21,6 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: GetMovements Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';
 		$this->dataAccessLog->operation = 'Movimientos';
@@ -33,6 +32,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		);
 
 		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
+		$this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataRequest->idPersona = $this->session->userId;
 		$this->dataRequest->nroTarjeta = $cardNumber;
 		$this->dataRequest->fechaIni = $dataRequest->initDate;
@@ -124,7 +124,6 @@ class Novo_Reports_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Reports Model: DownloadInquiry Method Initialized');
 
-		$this->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';
 		$this->dataAccessLog->operation = 'Movimientos';
@@ -138,6 +137,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$OperId = $dataRequest->id == 'downloadPDF' ||  $dataRequest->id == 'sendPDF' ? 'generarArchivoPDFGastosRepresentacion'
 			: 'generarArchivoXlsGastosRepresentacion';
 		$this->dataRequest->idOperation = $OperId;
+		$this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
 		$this->dataRequest->idPersona = $this->session->userId;
 		$this->dataRequest->nroTarjeta = $cardNumber;
 		$this->dataRequest->fechaIni = $dataRequest->initDate;
