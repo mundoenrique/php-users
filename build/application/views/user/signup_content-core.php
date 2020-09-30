@@ -150,7 +150,7 @@
 						<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" autocomplete="off">
 						<div class="help-block"></div>
 					</div>
-					<div class="form-group col-3 col-lg-6 <?= $skipOtherPhone ?>">
+					<div class="form-group col-12 <?= $skipOtherPhone ?>">
 						<label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER')?></label>
 						<div class="form-row">
 							<div class="form-group col-6">
