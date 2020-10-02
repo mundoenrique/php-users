@@ -26,7 +26,7 @@ class Tool_Api {
 
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 
-		return $this->getContentRequest($decrypParams);
+		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];
 	}
 	/**
 	 * @info Método que establece el contrato para el API solicitada
@@ -58,12 +58,14 @@ class Tool_Api {
 		if (!is_null($objRequest) || !is_null($nameApi)) {
 			$this->setContract($nameApi);
 
-			$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
+			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
+				$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
 
-			if (is_string($objRequest->{$this->namePropRequest})) {
-				$decrypParams[$this->namePropRequest] = json_decode(
-					$this->CI->encrypt_connect->cryptography($objRequest->{$this->namePropRequest}, FALSE)
-				);
+				if (is_string($objRequest->{$this->namePropRequest})) {
+					$decrypParams[$this->namePropRequest] = json_decode(
+						$this->CI->encrypt_connect->cryptography($objRequest->{$this->namePropRequest}, FALSE)
+					);
+				}
 			}
 		}
 
@@ -114,5 +116,20 @@ class Tool_Api {
 		}
 
 		return json_encode($arrayForDisplay);
+	}
+	/**
+	 * @info Método para armar respuesta a petición API en caso de no cumplir las validaciones
+	 * @author Pedro A. Torres F.
+	 * @date Oct 2, 2020
+	 */
+	public function setResponseNotValid($reason = '')
+	{
+		log_message('INFO', 'NOVO Tool_Api: setResponseNotValid method initialized');
+
+		$this->responseDefect = new stdClass();
+		$this->responseDefect->code = 400;
+		$this->responseDefect->data = '';
+
+		return $this->responseDefect;
 	}
 }

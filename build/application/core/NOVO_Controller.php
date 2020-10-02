@@ -26,6 +26,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $greeting;
 	protected $products;
 	protected $folder;
+	protected $nameApi;
 	private $ValidateBrowser;
 
 	public function __construct()
@@ -56,6 +57,9 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
 
+		$transforNameApi = explode("-", $this->uri->segment(4));
+		$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+
 		$this->optionsCheck();
 	}
 	/**
@@ -70,9 +74,6 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		if ($this->countryUri === "api") {
-
-			$nameApi = $this->rule;
-			$this->dataRequest = [];
 			$objRequest = new stdClass();
 
 			$typeResource = $this->input->get_request_header('Content-Type', TRUE);
@@ -82,29 +83,10 @@ class NOVO_Controller extends CI_Controller {
 
 			} elseif (strpos($typeResource, 'form') && count($_POST)>0) {
 
-				$objRequest = [
-					"request" => (object) $_POST,
-				];
+				$objRequest->request = (object) $_POST;
 			}
+			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
 
-			if (is_object($objRequest) && get_object_vars($objRequest)) {
-				$_POST = $this->tool_api->getContentAPI($objRequest, $nameApi);
-			}
-
-			if (!array_key_exists('key', $_POST) || $_POST['key'] !== KEY_API) {
-				$resultValidationParams = FALSE;
-			} else {
-				$resultValidationParams = $this->form_validation->run($this->rule);
-
-				log_message('DEBUG', 'NOVO VALIDATION PARAMS API: '.$nameApi.': '.json_encode($resultValidationParams));
-			}
-
-			if ($resultValidationParams) {
-				$this->dataRequest = (object) $_POST;
-				$_POST = [];
-			} else {
-				
-			}
 		} else {
 
 			if ($this->session->has_userdata('userName')) {
@@ -319,5 +301,28 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('master_content-core', $this->render);
+	}
+		/**
+	 * Método para cargar un modelo especifico
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
+	 */
+	protected function loadApiModel($request = FALSE)
+	{
+		log_message('INFO', 'NOVO Controller: loadApiModel Method Initialized');
+
+		$responseModel = $this->tool_api->setResponseNotValid();
+		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: '.$this->model.'/'.$this->method;
+
+		if (file_exists(APPPATH."models/{$this->model}.php")) {
+			$this->load->model($this->model,'modelLoaded');
+
+			$method = $this->method;
+			$responseModel = $this->modelLoaded->$method($request);
+			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: '.$this->model.'/'.$this->method;
+		}
+		log_message('DEBUG', $showMsgLog);
+
+		return $responseModel;
 	}
 }
