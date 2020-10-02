@@ -6,8 +6,8 @@
       <div class="w-100">
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
-            <div class="flex flex-colunm justify-center col-6 py-5">
-              <div class="product-presentation relative">
+            <div class="flex flex-column justify-center col-6 py-4">
+              <div class="product-presentation relative w-100">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
                 <div id="donor" class="product-search btn">
@@ -18,7 +18,8 @@
                 <?php else: ?>
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
-              </div>
+							</div>
+							<span class="warning semibold h6 mx-auto none">Tarjeta Virtual</span>
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">

@@ -19,11 +19,12 @@ $(function () {
 		var status = $(event).find('input[type=hidden][name="status"]').val();
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
 
-		cardDetail = '<div class="flex flex-colunm justify-center col-6 py-5">';
-		cardDetail += '<div class="product-presentation relative">';
+		cardDetail = '<div class="flex flex-column justify-center col-6 py-4">';
+		cardDetail += '<div class="product-presentation relative w-100">';
 		cardDetail += '<div class="item-network ' + brand + '"></div>';
 		cardDetail += '<img class="card-image" src="' + img + '">';
 		cardDetail += '</div>';
+		cardDetail += '<span class="warning semibold h6 mx-auto none">Tarjeta Virtual</span>';
 		cardDetail += '</div>';
 		cardDetail += '<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">';
 		cardDetail += '<p class="semibold mb-0 h5 truncate">' + productName + '</p>';

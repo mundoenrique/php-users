@@ -35,7 +35,7 @@ $(function () {
 					loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 					loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
 					loginIpMsg+='<div class="row">';
-					loginIpMsg+=	'<div class="form-group col-6">';
+					loginIpMsg+=	'<div class="form-group col-8">';
 					loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
 					loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
 					loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';

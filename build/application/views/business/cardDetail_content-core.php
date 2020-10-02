@@ -5,11 +5,14 @@
 		<div class="flex flex-wrap widget-product">
 			<div class="line-text w-100">
 				<div class="flex inline-flex col-12 px-xl-2">
-					<div class="col-6 py-4">
+					<div id="productdetail" class="flex flex-column justify-center col-6 py-4">
 						<div class="product-presentation relative w-100">
 							<div class="item-network <?= $brand ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
 						</div>
+						<a id="virtual-details" class="btn hyper-link btn-small p-0 none" href="<?= lang('GEN_NO_LINK'); ?>">
+							<i aria-hidden="true" class="icon-view"></i> &nbsp;Ver detalles
+						</a>
 					</div>
 					<div class="flex flex-column items-start col-6 py-4">
 						<p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
@@ -22,6 +25,10 @@
 							</a>
 						<?php endif; ?>
 					</div>
+					<input type="hidden" name="brand" class="hidden" id="brand" value="<?= $brand; ?>">
+					<input type="hidden" name="cardNumberMask" class="hidden" id="cardNumberMask" value="<?= $cardNumberMask; ?>">
+					<input type="hidden" name="fullName" class="hidden" id="fullName" value="<?= $fullName; ?>">
+					<input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, $productUrl); ?>">
 				</div>
 			</div>
 			<div class="flex col-12 mt-2">

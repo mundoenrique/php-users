@@ -42,6 +42,7 @@ class Novo_Business extends NOVO_Controller {
 			$cardsTotal = count($cardsList);
 		}
 
+ 		$this->render->virtualCard = $this->session->tvirtual == true ? ' ~Virtual' : '';
 		$this->render->titlePage = lang('GEN_MENU_CARDS_LIST');
 		$this->render->lastSession = $this->session->lastSession;
 		$this->render->getList = $getList;

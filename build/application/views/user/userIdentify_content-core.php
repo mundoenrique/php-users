@@ -32,7 +32,7 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4" id="divEmail" style="display: none;">
-							<label for="emailCard" class="regular">Correo electrónico Luis</label>
+							<label for="emailCard" class="regular">Correo electrónico</label>
 							<input id="emailCard" class="form-control required" type="text" name="emailCard" maxlength="32">
 							<div class="help-block"></div>
 						</div>

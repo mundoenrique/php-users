@@ -17,7 +17,8 @@
                 <?php else: ?>
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
-              </div>
+							</div>
+							<span class="warning semibold h6 mx-auto none">Tarjeta Virtual</span>
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
