@@ -91,7 +91,7 @@ class Tool_Api {
 				$this->CI->security->xss_clean(strip_tags($decrypParams[$this->namePropRequest]->{$valor})) :
 				NULL;
 			}
-			log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest, ['password']));
+			log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
 		}
 
 		return $contentRequest;
@@ -102,7 +102,7 @@ class Tool_Api {
 	 * @author Pedro Torres
 	 * @date Oct 1th, 2020
 	 */
-	private function prepareArrayForDisplay($arrayToWork = [], $protectedValues = [])
+	private function prepareArrayForDisplay($arrayToWork = [])
 	{
 		log_message('INFO', 'Novo Tool_Api: prepareArrayForDisplay Method Initialized');
 
@@ -110,7 +110,7 @@ class Tool_Api {
 
 		foreach ($arrayToWork as $key => $valor) {
 
-			$arrayForDisplay[$key] = in_array($key, $protectedValues) ?
+			$arrayForDisplay[$key] = in_array($key, lang('GEN_FILTER_ATTRIBUTES_LOG')) ?
 			"[Protected => ******** ]":
 			$valor;
 		}
