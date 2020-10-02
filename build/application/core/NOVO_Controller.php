@@ -57,8 +57,11 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
 
-		$transforNameApi = explode("-", $this->uri->segment(4));
-		$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+		$this->nameApi = '';
+		if ($this->countryUri === "api") {
+			$transforNameApi = explode("-", $this->uri->segment(4));
+			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+		}
 
 		$this->optionsCheck();
 	}
