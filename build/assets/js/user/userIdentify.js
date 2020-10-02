@@ -1,10 +1,13 @@
 'use strict'
 var numberCard = 'label[for=numberCard]';
 var radioType = 'input:radio[name=cardType]';
+var loginIpMsg;
+
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	$("#emailCard").removeClass( "required");
 
 	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();
@@ -26,6 +29,22 @@ $(function () {
 					$('#signupForm')
 						.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
 						.submit()
+				}	else if (response.code == 2) {
+					console.log(response);
+
+					loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+					loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
+					loginIpMsg+='<div class="row">';
+					loginIpMsg+=	'<div class="form-group col-6">';
+					loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
+					loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
+					loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
+					loginIpMsg+=	'</div>';
+					loginIpMsg+='</div>';
+					loginIpMsg+='</form>';
+
+					appMessages(response.title, loginIpMsg, response.icon,response.data);
+
 				} else {
 					insertFormInput(false)
 					$('#identityBtn').html(btnText)
@@ -36,17 +55,19 @@ $(function () {
 
 	$(radioType).change(function(){
 		if($(this).attr("value")=="virtual"){
-				$(numberCard).text("Correo electrónico");
-				$("#numberCard").attr( "maxlength", "32" );
-				$("#physicalCardPIN").fadeOut("fast").hide(300);
+				$("#divNumberCard").hide();
+				$("#physicalCardPIN").hide();
+				$("#divEmail").show();
+				$("#cardPIN").removeClass( "required")
+				$("#numberCard").removeClass( "required")
+				$("#emailCard").addClass( "required")
 		} else {
-				$(numberCard).text("Número de tarjeta");
-				$("#numberCard").attr( "maxlength", "16" );
-				$("#physicalCardPIN").fadeIn("fast").show(300);
+			  $("#divNumberCard").show();
+				$("#physicalCardPIN").show();
+				$("#divEmail").hide();
+				$("#emailCard").removeClass( "required")
+				$("#cardPIN").addClass( "required")
+				$("#numberCard").addClass( "required")
 		}
 	});
 });
-
-/* validator = $('#signupForm').validate();
-validator.destroy();
-form.submit(); */

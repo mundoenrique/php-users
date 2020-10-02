@@ -26,9 +26,14 @@
 							</div>
 							<div class="help-block"></div>
 						</div>
-						<div class="form-group col-lg-4">
+						<div class="form-group col-lg-4" id="divNumberCard">
 							<label for="numberCard" class="regular">Número de tarjeta</label>
-							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
+							<input id="numberCard" class="form-control required" type="text" name="numberCard" maxlength="16">
+							<div class="help-block"></div>
+						</div>
+						<div class="form-group col-lg-4" id="divEmail" style="display: none;">
+							<label for="emailCard" class="regular">Correo electrónico Luis</label>
+							<input id="emailCard" class="form-control required" type="text" name="emailCard" maxlength="32">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4">
@@ -39,7 +44,7 @@
 						<?php if (lang('CONF_SECRET_KEY') == 'ON') : ?>
 							<div class="form-group col-lg-4" id="physicalCardPIN">
 								<label for="cardPIN" class="regular">Clave secreta (PIN)</label>
-								<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="15">
+								<input id="cardPIN" class="form-control required type="password" name="cardPIN" maxlength="15">
 								<div class="help-block"></div>
 							</div>
 						<?php endif; ?>

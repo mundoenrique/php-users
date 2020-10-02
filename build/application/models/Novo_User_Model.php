@@ -368,7 +368,6 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
 
 		$response = $this->sendToService('CallWs_UserIdentify');
-
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -418,6 +417,40 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = 'Alguno de los datos indicado no es válido';
 				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -300://MENSAJE TARJETA VIRTUAL
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente';
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -424:
+				$this->response->code = 2;
+				$this->response->labelInput = "Código recibido";//lang('GEN_LOGIN_IP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->email = "moli********.com";//$response->usuario->emailEnc;
+				$this->response->msg = novoLang('Por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.',"moli********.com");
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> false,
+						'action'=> 'none'
+					],
+					'btn2'=> [
+						'text'=> lang('GEN_BTN_CANCEL'),
+						'link'=> false,
+						'action'=> 'close'
+					]
+				];
+				//$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
+			break;
+			case -286:
+					$this->response->code = 4;
+					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
+					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->data['btn1'] = [
+						'text' => lang('GEN_BTN_ACCEPT'),
+						'action' => 'close'
+					];
 			break;
 		}
 
