@@ -34,7 +34,6 @@ $config['client'] = 'novo';
 $config['channel'] = 'personasWeb';
 $config['keyAES256'] = KEY_AES256;
 $config['ivAES256'] = IV_AES256;
-$config['key_api'] = KEY_API;
 
 //url API
 $config['urlAPI'] = URL_API;

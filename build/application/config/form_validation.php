@@ -1,16 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-	'generateHash' => [
-		[
-			'field' => 'key',
-			'rules' => 'trim|required'
-		],
-		[
-			'field' => 'password',
-			'rules' => 'trim|required'
-		],
-	],
+
 	'signin' => [
 		[
 			'field' => 'userName',
@@ -417,6 +408,19 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
+	'generateHash' => [
+		[
+			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	'generateRequest' => [
+		[
+			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	// Old Arquitectures
 	'getdetail' => [
 		[
 			'field' => 'request',

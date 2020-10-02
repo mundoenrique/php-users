@@ -11,9 +11,6 @@ class Novo_User extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Controller Class Initialized');
-
-		$this->CI = &get_instance();
-    $this->key_api = $this->CI->config->item('key_api');
 	}
 	/**
 	 * @info Método para el inicio de sesión

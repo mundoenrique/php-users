@@ -1,73 +1,55 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
-class Novo_APi extends NOVO_Controller
+/**
+ * @info Controller que expone el método que atenderá la petición de un API
+ * @author Pedro A. Torres F.
+ * @date Sept. 30th 2020
+*/
+class Novo_Api extends NOVO_Controller
 {
 
   public function __construct()
   {
-    parent::__construct();
-  }
+		parent::__construct();
+		log_message('INFO', 'NOVO Api Controller Class Initialized');
+	}
 
+	/**
+	 * @info Método que atiende la petición para generar un hash de Argon2 para una clave dada
+	 * @author Pedro A. Torres F.
+	 * @date Sept 30th, 2020
+	 */
   public function generateHash()
   {
 		log_message('INFO', 'Novo_Api: generateHash Method Initialized');
 
-    $statusResponse = 400;
-    $response = '';
-
-    if (count($this->dataRequest) > 0) {
-
-      $argon2 = $this->encrypt_connect->generateArgon2($this->dataRequest['password']);
-      $bodyResponse = [
-        'key' => $this->key_api,
-				'password' => $argon2->hexArgon2
-      ];
-			$statusResponse = 200;
-
-			log_message('INFO', 'API bodyResponse: ' .  json_encode($bodyResponse));
-
-      $dataResponse = json_encode($bodyResponse);
-      $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
-    }
+		if (get_object_vars($this->dataRequest)) {
+			$this->response = $this->loadModel($this->dataRequest);
+		}
 
 		return $this->output
       ->set_content_type('application/json')
-      ->set_status_header($statusResponse)
+      ->set_status_header($this->response->code)
       ->set_output(json_encode(
         [
-					'response' => $response
+					'response' => $this->response->data
         ]
       ));
   }
 
   public function generateRequest()
   {
-    $statusResponse = 400;
-    $response = '';
+		log_message('INFO', 'Novo_Api: generateRequest Method Initialized');
 
-    $inputData = $this->input->post();
-    if (count($inputData) > 0) {
+		$this->response = $this->loadModel($this->dataRequest);
 
-			$bodyRequest = [
-				'key' => $inputData['key'],
-        'password' => $inputData['password']
-      ];
-
-      $dataResponse = json_encode($bodyRequest);
-      $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
-			$statusResponse = 200;
-    }
-
-    return $this->output
+		return $this->output
       ->set_content_type('application/json')
-      ->set_status_header($statusResponse)
+      ->set_status_header($this->response->code)
       ->set_output(json_encode(
         [
-          'response' => $response
+					'response' => $this->response->data
         ]
       ));
   }
-
-
 }

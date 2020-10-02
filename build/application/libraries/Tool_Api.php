@@ -6,35 +6,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date Septiembre 18th, 2020
  */
 class Tool_Api {
-	private $CI;
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
+		log_message('INFO', 'NOVO Tool_Api Library Class Initialized');
 
 		$this->CI = &get_instance();
-		$this->key_api = $this->CI->config->item('key_api');
+		$this->namePropRequest = "";
 		$this->structureValidRequest = "";
+	}
+	/**
+	 * @info Extrae el contenido del API
+	 * @author Pedro Torres
+	 * @date Oct 1th, 2020
+	 */
+	public function getContentAPI($objRequest = [], $nameApi = '')
+	{
+		log_message('INFO', 'Novo Tool_Api: getContentAPI Method Initialized');
+
+		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
+
+		return $this->getContentRequest($decrypParams);
 	}
 	/**
 	 * @info Método que establece el contrato para el API solicitada
 	 * @author Pedro Torres
 	 * @date Septiembre 18th, 2020
 	 */
-	private function setContract($nameApi = NULL)
+	private function setContract($nameApi)
 	{
-		if (!is_null($nameApi)) {
-			$functionGetContract = "getContractApi_" . $nameApi;
+		$this->CI->load->helper('contracts_api');
+
+		$functionGetContract = "getContractApi_" . $nameApi;
+		if (function_exists($functionGetContract)){
 			$this->structureValidRequest = $functionGetContract();
+			$this->namePropRequest = array_keys($this->structureValidRequest)[0];
 		}
 	}
-
 	/**
 	 * @info Método para extraer las propiedades de la petición API
 	 * @author Pedro Torres
 	 * @date Septiembre 18th, 2020
 	 */
-	public function getPropertiesRequest($objRequest = NULL, $nameApi = NULL)
+	private function getPropertiesRequest($objRequest, $nameApi)
 	{
 		log_message('INFO', 'Novo Tool_Api: getPropertiesRequest Method Initialized');
 
@@ -42,19 +56,16 @@ class Tool_Api {
 		$decrypParams = [];
 
 		if (!is_null($objRequest) || !is_null($nameApi)) {
-
 			$this->setContract($nameApi);
 
-			$whiteListNamePropRequest = array_keys($this->structureValidRequest[$nameApi]);
-			foreach ($whiteListNamePropRequest as $value) {
+			$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
 
-				if (property_exists ($objRequest, $value)) {
-					$request[$value] = $this->CI->security->xss_clean(strip_tags($objRequest->{$value}));
-					$decrypParams[$value] = $this->CI->encrypt_connect->cryptography($request[$value], FALSE);
-				}
+			if (is_string($objRequest->{$this->namePropRequest})) {
+				$decrypParams[$this->namePropRequest] = json_decode(
+					$this->CI->encrypt_connect->cryptography($objRequest->{$this->namePropRequest}, FALSE)
+				);
 			}
 		}
-		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getPropertiesRequest " . json_encode($decrypParams));
 
 		return $decrypParams;
 	}
@@ -63,31 +74,45 @@ class Tool_Api {
 	 * @author Pedro Torres
 	 * @date Septiembre 18th, 2020
 	 */
-	public function getContentRequest($decrypParams = NULL, $nameApi = NULL)
+	private function getContentRequest($decrypParams = NULL)
 	{
 		log_message('INFO', 'Novo Tool_Api: getContentRequest Method Initialized');
 
 		$contentRequest = [];
 
-		if (!is_null($nameApi) && !is_null($decrypParams)) {
-			$whiteListNamePropRequest = array_keys($this->structureValidRequest[$nameApi]);
-			foreach ($whiteListNamePropRequest as $valueProp) {
+		if (!is_null($decrypParams)) {
+			$paramsValidsBodyRequest = $this->structureValidRequest[$this->namePropRequest];
 
-				$paramsBodyRequest = json_decode($decrypParams[$valueProp]);
+			foreach ($paramsValidsBodyRequest as $valor) {
 
-				if (!is_null($paramsBodyRequest )) {
-					$whiteListNameParamsBodyRequest = $this->structureValidRequest[$nameApi][$valueProp];
-
-					foreach ($whiteListNameParamsBodyRequest as $valor) {
-						$contentRequest[$valor] = property_exists ($paramsBodyRequest, $valor) ?
-						$this->CI->security->xss_clean(strip_tags($paramsBodyRequest->{$valor})) :
-						NULL;
-					}
-				}
+				$contentRequest[$valor] = property_exists($decrypParams[$this->namePropRequest], $valor) ?
+				$this->CI->security->xss_clean(strip_tags($decrypParams[$this->namePropRequest]->{$valor})) :
+				NULL;
 			}
+			log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest, ['password']));
 		}
-		log_message('INFO', "[ {$nameApi} ] Novo Tool_Api: getContentRequest " . json_encode($contentRequest));
 
 		return $contentRequest;
+	}
+	/**
+	 * @info Genera un array con los datos a mostrarse en el log,
+	 * si se indica cual no puede ser visible aplica un hash al mismo
+	 * @author Pedro Torres
+	 * @date Oct 1th, 2020
+	 */
+	private function prepareArrayForDisplay($arrayToWork = [], $protectedValues = [])
+	{
+		log_message('INFO', 'Novo Tool_Api: prepareArrayForDisplay Method Initialized');
+
+		$arrayForDisplay = [];
+
+		foreach ($arrayToWork as $key => $valor) {
+
+			$arrayForDisplay[$key] = in_array($key, $protectedValues) ?
+			"[Protected => ******** ]":
+			$valor;
+		}
+
+		return json_encode($arrayForDisplay);
 	}
 }

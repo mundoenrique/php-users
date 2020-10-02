@@ -110,8 +110,7 @@ $autoload['helper'] = array(
 	'cookie',
 	'menu',
 	'novo_language',
-	'novo_toolset',
-	'contracts_api'
+	'novo_toolset'
 );
 
 /*

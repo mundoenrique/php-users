@@ -55,7 +55,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
-		$this->key_api = $this->config->item('key_api');
 
 		$this->optionsCheck();
 	}
@@ -63,85 +62,92 @@ class NOVO_Controller extends CI_Controller {
 	 * Método para varificar datos génericos de la solcitud
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 16th, 2020
+	 * @Modified Pedro A. Torres F.
+	 * @date Oct. 1th, 2020
 	 */
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		if ($this->session->has_userdata('userName')) {
-			$data = ['username' => $this->session->userName];
-			$this->db->where('id', $this->session->session_id)
-			->update('cpo_sessions', $data);
-		}
-
-		languageLoad('generic', $this->router->fetch_class());
-		clientUrlValidate($this->countryUri);
-		languageLoad('specific', $this->router->fetch_class());
-		$this->skin = $this->config->item('client');
-		$this->form_validation->set_error_delimiters('', '---');
-		$this->config->set_item('language', 'spanish-base');
-
-		if ($this->rule !== 'suggestion' && $this->countryUri !== "api") {
-			$this->ValidateBrowser = $this->checkBrowser();
-		}
-
-		if ($this->session->has_userdata('time')) {
-			$customerTime = $this->session->time->customerTime;
-			$serverTime = $this->session->time->serverTime;
-			$currentTime = (int) date("H");
-			$currentTime2 = date("Y-d-m H:i:s");
-			$serverelapsed = $currentTime - $serverTime;
-			$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
-			$elapsed = $customerTime + $serverelapsed;
-			$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
-		}
-
-		switch ($this->greeting) {
-			case $this->greeting >= 19 && $this->greeting <= 23:
-				$this->render->greeting = lang('GEN_EVENING');
-				break;
-			case $this->greeting >= 12 && $this->greeting < 19:
-				$this->render->greeting = lang('GEN_AFTERNOON');
-				break;
-			case $this->greeting >= 0 && $this->greeting < 12:
-				$this->render->greeting = lang('GEN_MORNING');
-				break;
-		}
-
 		if ($this->countryUri === "api") {
 
-			log_message('INFO', 'NOVO Controller: optionsCheck control api petition.');
-
-			$decrypParams = [];
+			$nameApi = $this->rule;
 			$this->dataRequest = [];
+			$objRequest = new stdClass();
 
-			$objRequest = json_decode($this->input->raw_input_stream);
+			$typeResource = $this->input->get_request_header('Content-Type', TRUE);
 
-			if (!is_null($objRequest) && count(get_object_vars($objRequest)) > 0) {
+			if (strpos($typeResource, 'json')) {
+				$objRequest = json_decode($this->input->raw_input_stream);
 
-				$decrypParams = $this->tool_api->getPropertiesRequest($objRequest, $this->rule);
+			} elseif (strpos($typeResource, 'form') && count($_POST)>0) {
 
-				if ( count($decrypParams) > 0 ) {
-
-					$_POST = $this->tool_api->getContentRequest($decrypParams, $this->rule);
-
-					if (!array_key_exists ('key', $_POST) || $_POST['key'] !== $this->key_api) {
-						$resultValidationParams = FALSE;
-					}else{
-						$resultValidationParams = $this->form_validation->run($this->rule);
-						log_message('DEBUG', 'NOVO VALIDATION PARAMS API: '.$this->rule.': '.json_encode($resultValidationParams));
-					}
-
-					if ($resultValidationParams) {
-
-						$this->dataRequest = $_POST;
-					}
-				}
+				$objRequest = [
+					"request" => (object) $_POST,
+				];
 			}
-		} else{
+
+			if (is_object($objRequest) && get_object_vars($objRequest)) {
+				$_POST = $this->tool_api->getContentAPI($objRequest, $nameApi);
+			}
+
+			if (!array_key_exists('key', $_POST) || $_POST['key'] !== KEY_API) {
+				$resultValidationParams = FALSE;
+			} else {
+				$resultValidationParams = $this->form_validation->run($this->rule);
+
+				log_message('DEBUG', 'NOVO VALIDATION PARAMS API: '.$nameApi.': '.json_encode($resultValidationParams));
+			}
+
+			if ($resultValidationParams) {
+				$this->dataRequest = (object) $_POST;
+				$_POST = [];
+			} else {
+				
+			}
+		} else {
+
+			if ($this->session->has_userdata('userName')) {
+				$data = ['username' => $this->session->userName];
+				$this->db->where('id', $this->session->session_id)
+				->update('cpo_sessions', $data);
+			}
+
+			languageLoad('generic', $this->router->fetch_class());
+			clientUrlValidate($this->countryUri);
+			languageLoad('specific', $this->router->fetch_class());
+			$this->skin = $this->config->item('client');
+			$this->form_validation->set_error_delimiters('', '---');
+			$this->config->set_item('language', 'spanish-base');
+
+			if ($this->rule !== 'suggestion') {
+				$this->ValidateBrowser = $this->checkBrowser();
+			}
+
+			if ($this->session->has_userdata('time')) {
+				$customerTime = $this->session->time->customerTime;
+				$serverTime = $this->session->time->serverTime;
+				$currentTime = (int) date("H");
+				$currentTime2 = date("Y-d-m H:i:s");
+				$serverelapsed = $currentTime - $serverTime;
+				$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
+				$elapsed = $customerTime + $serverelapsed;
+				$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
+			}
+
+			switch ($this->greeting) {
+				case $this->greeting >= 19 && $this->greeting <= 23:
+					$this->render->greeting = lang('GEN_EVENING');
+					break;
+				case $this->greeting >= 12 && $this->greeting < 19:
+					$this->render->greeting = lang('GEN_AFTERNOON');
+					break;
+				case $this->greeting >= 0 && $this->greeting < 12:
+					$this->render->greeting = lang('GEN_MORNING');
+					break;
+			}
 
 			if ($this->input->is_ajax_request()) {
-
 					$this->dataRequest = json_decode(
 						$this->security->xss_clean(
 							strip_tags(
