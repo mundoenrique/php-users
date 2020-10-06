@@ -235,4 +235,29 @@ function cardModal() {
 	inputModal += '</div>';
 
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
+
+	$('#accept').append( "<span id='countdownTimer'>30s</span>" );
+	startTimer(30, $('#countdownTimer'));
+}
+
+function startTimer(duration, display) {
+	var timer = duration,
+			minutes, seconds;
+
+	var interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		seconds = parseInt(timer % 60, 10);
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		// display.text("&nbsp;"+seconds+"s");
+		// display.text(`&nbsp;${seconds}s`);
+		display.text(" "+seconds+"s");
+
+		if (--timer < 0) {
+			console.log("tiempo agotado");
+			$('#system-info').dialog('destroy');
+			clearInterval(interval);
+		}
+	}
 }
