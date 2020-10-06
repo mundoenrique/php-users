@@ -8,7 +8,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	//core
 	for (var i = 0; i < products.length; i++) {
 		products[i].addEventListener('click', function (e) {
-			var formElement = $$.getElementById("frmProducto");
+			var formElement = $$.getElementById("frmProduct-"+e.currentTarget.id);
 			if (!this.classList.contains('inactive')) {
 				$$.getElementById("nroTarjeta").value = this.id;
 				formElement.submit();

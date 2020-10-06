@@ -48,9 +48,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
-		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
-		$this->render->widget =  FALSE;
+			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
@@ -84,7 +82,7 @@ class NOVO_Controller extends CI_Controller {
 			if (strpos($typeResource, 'json')) {
 				$objRequest = json_decode($this->input->raw_input_stream);
 
-			} elseif (strpos($typeResource, 'form') && count($_POST)>0) {
+			} elseif (strpos($typeResource, 'form') && count($_POST) > 0) {
 
 				$objRequest->request = (object) $_POST;
 			}

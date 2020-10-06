@@ -109,7 +109,7 @@ define('SESS_DRIVER', isset($_SERVER['SESS_DRIVER']) ?
 	$_SERVER['SESS_DRIVER'] : 'files'
 );
 define('SESS_COOKIE_NAME', isset($_SERVER['SESS_COOKIE_NAME']) ?
-	$_SERVER['SESS_COOKIE_NAME'] : 'cpo_session'
+	$_SERVER['SESS_COOKIE_NAME'] : 'personas'
 );
 define('SESS_EXPIRATION', isset($_SERVER['SESS_EXPIRATION'])
 && filter_var($_SERVER['SESS_EXPIRATION'], FILTER_VALIDATE_INT) ?
@@ -121,10 +121,6 @@ define('SESS_SAVE_PATH', isset($_SERVER['SESS_SAVE_PATH']) ?
 define('SESS_MATCH_IP', isset($_SERVER['SESS_MATCH_IP'])
 && filter_var($_SERVER['SESS_MATCH_IP'], FILTER_VALIDATE_BOOLEAN) ?
 	boolval($_SERVER['SESS_MATCH_IP']) : FALSE
-);
-define('SESS_TIME_TO_UPDATE', isset($_SERVER['SESS_TIME_TO_UPDATE'])
-&& filter_var($_SERVER['SESS_TIME_TO_UPDATE'], FILTER_VALIDATE_INT) ?
-	intval($_SERVER['SESS_TIME_TO_UPDATE']) : 10
 );
 define('COOKIE_PREFIX', isset($_SERVER['COOKIE_PREFIX']) ?
 	$_SERVER['COOKIE_PREFIX'] : 'cpo_'
@@ -190,10 +186,7 @@ define('ACTIVE_RECAPTCHA', isset($_SERVER['ACTIVE_RECAPTCHA'])
 	boolval($_SERVER['ACTIVE_RECAPTCHA']) : FALSE
 );
 define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-
-define('DOWNLOAD_ROUTE', isset($_SERVER['DOWNLOAD_ROUTE']) ?
-	$_SERVER['DOWNLOAD_ROUTE'] : ''
-);
+define('COUNTRY_VERIFY', $_SERVER['COUNTRY_VERIFY'] ?? 'ON');
 define('ACCESS_URL', isset($_SERVER['ACCESS_URL']) ?
 	$_SERVER['ACCESS_URL'] : ''
 );

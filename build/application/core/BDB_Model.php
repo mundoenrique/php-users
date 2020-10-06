@@ -76,6 +76,10 @@ class BDB_Model extends CI_Model {
 				$this->session->sess_destroy();
 				break;
 
+			case -3:
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				break;
+
 			case -9999:
 			case 4:
 				$this->response->msg = $responseDecrypt->msg;
