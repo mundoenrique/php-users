@@ -15,6 +15,5 @@ $config['timeIdleSession'] = 6*60000;
 
 $config['listReasonReposition'] = [
 	['value'=>'43','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE'],
-	['value'=>'59','tagTranslation'=>'GENE_BLOCKING_REASONS_FRAUD'],
 	['value'=>'17','tagTranslation'=>'GENE_BLOCKING_REASONS_CANCELLED'],
 ];
