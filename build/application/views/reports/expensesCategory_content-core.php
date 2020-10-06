@@ -49,7 +49,7 @@
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
-    <h2 class="h4 regular tertiary">Gastos por categoria</h2>
+    <h2 class="h4 regular tertiary">Gastos por categoría</h2>
     <nav id="filtersStack" class="navbar px-0">
 
       <form id="annualMovesForm" method="post" class="col-12">
