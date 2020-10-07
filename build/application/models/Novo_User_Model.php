@@ -385,7 +385,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
-		$this->dataRequest->cuenta = $dataRequest->numberCard;
+		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
@@ -439,22 +439,22 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'No fue posible validar tus datos, por favor vuelve a intentarlo';
+				$this->response->msg = lang('USER_INVALID_DATE');;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -183:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'El número de tarjeta no es válido o ya fue registrada';
+				$this->response->msg = lang('GEN_INVALID_CARD');;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -184:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'Alguno de los datos indicado no es válido';
+				$this->response->msg = lang('GEN_INVALID_DATA');;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('GEN_USER_IDENTIFY_EXIST');
+				$this->response->msg = lang('USER_IDENTIFY_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -424://MODAL OTP

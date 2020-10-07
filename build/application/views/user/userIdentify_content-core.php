@@ -15,24 +15,24 @@
 				<form id="identityForm">
 					<div class="row">
 						<div class="form-group col-12">
-							<label class="mr-2 regular">Tipo de tarjeta</label>
+							<label class="mr-2 regular"><?= lang('GEN_CARD_TYPE'); ?></label>
 							<div class="custom-control custom-radio custom-control-inline">
 								<input id="physicalCard" class="custom-control-input" type="radio" name="cardType" value="physical" checked>
-								<label class="custom-control-label" for="physicalCard">Física</label>
+								<label class="custom-control-label" for="physicalCard"><?= lang('GEN_PHYSICAL_CARD'); ?></label>
 							</div>
 							<div class="custom-control custom-radio custom-control-inline mr-0">
 								<input id="virtualCard" class="custom-control-input" type="radio" name="cardType" value="virtual">
-								<label class="custom-control-label" for="virtualCard">Virtual</label>
+								<label class="custom-control-label" for="virtualCard"><?= lang('GEN_VIRTUAL_CARD'); ?></label>
 							</div>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4" id="divNumberCard">
-							<label for="numberCard" class="regular">Número de tarjeta</label>
+							<label for="numberCard" class="regular"><?= lang('GEN_NUMBER_CARD'); ?></label>
 							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4" id="divEmail" style="display: none;">
-							<label for="emailCard" class="regular">Correo electrónico</label>
+							<label for="emailCard" class="regular"><?= lang('USER_EMAIL'); ?></label>
 							<input id="emailCard" class="form-control" type="text" name="emailCard" maxlength="32">
 							<div class="help-block"></div>
 						</div>
@@ -43,7 +43,7 @@
 						</div>
 						<?php if (lang('CONF_SECRET_KEY') == 'ON') : ?>
 							<div class="form-group col-lg-4" id="physicalCardPIN">
-								<label for="cardPIN" class="regular">Clave secreta (PIN)</label>
+								<label for="cardPIN" class="regular"><?= lang('GEN_SECRET_PASS_PIN'); ?></label>
 								<input id="cardPIN" class="form-control type="password" name="cardPIN" maxlength="15">
 								<div class="help-block"></div>
 							</div>

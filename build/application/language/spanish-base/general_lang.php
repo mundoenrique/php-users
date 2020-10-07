@@ -184,7 +184,13 @@ $lang['GEN_SELECT_MONTH'] = [
 ];
 $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
-$lang['GEN_USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente.';
 $lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido.';
 $lang['GEN_OTP_MSG'] = 'Por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_RESP_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
+$lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
+$lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
+$lang['GEN_PHYSICAL_CARD'] = 'Física';
+$lang['GEN_VIRTUAL_CARD'] = 'Virtual';
+$lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
+$lang['GEN_INVALID_CARD'] = 'El número de tarjeta no es válido o ya fue registrada.';
