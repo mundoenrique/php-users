@@ -39,6 +39,10 @@ $config = [
 		[
 			'field' => 'emailcard',
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'signup' => [

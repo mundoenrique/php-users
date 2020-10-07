@@ -1,36 +1,47 @@
 'use strict'
-var numberCard = 'label[for=numberCard]';
 var radioType = 'input:radio[name=cardType]';
-var loginIpMsg;
+var loginIpMsg,btnTex,formcodeOTP,btnTextOtp;
 
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$("#emailCard").removeClass( "required");
+	$("#emailCard").addClass('ignore');
+	$("#cardPIN").removeClass('ignore');
+	form = $('#identityForm');
 
 	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();
-		form = $('#identityForm')
 		formInputTrim(form)
 		validateForms(form);
-
+		btnText = $(this).html();
+		data = getDataForm(form);
 		if (form.valid()) {
-			btnText = $(this).text().trim()
-			data = getDataForm(form);
-			insertFormInput(true)
-			who = 'user'; where = 'UserIdentify'
 			$(this).html(loader)
-			callNovoCore(who, where, data, function(response) {
-				if (response.code == 0) {
+			insertFormInput(true)
+			validateIdentity(data);
+		}
+	})
+
+	function validateIdentity(data) {
+		who = 'user'; where = 'UserIdentify'
+		callNovoCore(who, where, data, function(response) {
+			switch (response.code) {
+				case 0:
+					if($('#emailCard').val().trim()!=''){
+						response.data.emailCard = $('#emailCard').val().trim();
+					}
 					var dataUser = response.data;
 					dataUser = JSON.stringify({dataUser})
 					dataUser = cryptoPass(dataUser);
 					$('#signupForm')
-						.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
-						.submit()
-				}	else if (response.code == 2) {
-					console.log(response);
+					.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
+					.submit()
+				break;
+				case 2:
+					$('#identityBtn').html(btnText);
+					var oldID = $('#accept').attr('id');
+					$('#accept').attr('id', 'send-otp-btn');
 
 					loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 					loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
@@ -45,29 +56,53 @@ $(function () {
 
 					appMessages(response.title, loginIpMsg, response.icon,response.data);
 
-				} else {
-					insertFormInput(false)
-					$('#identityBtn').html(btnText)
-				}
-			})
-		}
-	})
+					formcodeOTP = $('#formVerificationOTP');
+
+					$('#send-otp-btn').on('click', function(e) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
+						btnTextOtp = $('#send-otp-btn').html();
+						formInputTrim(formcodeOTP);
+						validateForms(formcodeOTP);
+						if(formcodeOTP.valid()){
+							$('#formVerificationOTP input').attr('disabled', true);
+							$(this)
+							.off('click')
+							.html(loader)
+							.attr('id', oldID);
+							data.codeOtp = $('#codeOTP').val();
+							validateIdentity(data);
+						}
+					});
+
+					$('#cancel').on('click', function() {
+						insertFormInput(false);
+					});
+					$('#send-otp-btn').html(btnTextOtp);
+				break;
+				default:
+					insertFormInput(false);
+					$('#identityBtn').html(btnText);
+				break;
+			}
+		})
+	}
 
 	$(radioType).change(function(){
 		if($(this).attr("value")=="virtual"){
 				$("#divNumberCard").hide();
 				$("#physicalCardPIN").hide();
 				$("#divEmail").show();
-				$("#cardPIN").removeClass( "required")
-				$("#numberCard").removeClass( "required")
-				$("#emailCard").addClass( "required")
+				$("#numberCard").addClass('ignore')
+				$("#cardPIN").addClass('ignore')
+				$("#emailCard").removeClass('ignore')
 		} else {
 			  $("#divNumberCard").show();
 				$("#physicalCardPIN").show();
 				$("#divEmail").hide();
-				$("#emailCard").removeClass( "required")
-				$("#cardPIN").addClass( "required")
-				$("#numberCard").addClass( "required")
+				$("#numberCard").removeClass('ignore')
+				$("#cardPIN").removeClass('ignore')
+				$("#emailCard").addClass('ignore')
 		}
 	});
 });

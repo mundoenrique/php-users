@@ -361,13 +361,22 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->userName = $dataRequest->docmentId.date('dmy');
 
 		$this->dataRequest->idOperation = '18';
-		$this->dataRequest->cuenta = $dataRequest->numberCard;
+		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
+		$this->dataRequest->email = $dataRequest->emailCard ?? '';
+		$maskMail = maskString($this->dataRequest->email, 4, $end = 6, '@');
+
+		$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
+		$this->dataRequest->codigoOtp =[
+			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
+			'authToken' => $authToken
+		];
 
 		$response = $this->sendToService('CallWs_UserIdentify');
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -388,6 +397,7 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->response->data['signUpData'] = $userData;
 				$this->response->data['affiliation'] = $response->afiliacion;
+				$this->response->modal = TRUE;
 
 				$userSess = [
 					'userIdentity' => TRUE,
@@ -420,15 +430,14 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente';
+				$this->response->msg = lang('GEN_USER_IDENTIFY_EXIST');
 				$this->response->data['btn1']['action'] = 'close';
 			break;
-			case -424:
+			case -424://MODAL OTP
 				$this->response->code = 2;
-				$this->response->labelInput = "Código recibido";//lang('GEN_LOGIN_IP_LABEL_INPUT');
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->email = "moli********.com";//$response->usuario->emailEnc;
-				$this->response->msg = novoLang('Por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.',"moli********.com");
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
 				$this->response->data = [
 					'btn1'=> [
 						'text'=> lang('GEN_BTN_ACCEPT'),
@@ -442,11 +451,11 @@ class Novo_User_Model extends NOVO_Model {
 					]
 				];
 				//$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
+				$this->session->set_flashdata('authToken','12346789abcdefg');
 			break;
-			case -286:
-					$this->response->code = 4;
-					$this->response->msg = lang('GEN_RESP_CODE_INVALID');
-					$this->response->icon = lang('CONF_ICON_WARNING');
+			case -286://OTP INVALIDO
+					$this->response->msg = lang('GEN_RESP_OTP_INVALID');
+					$this->response->icon = lang('GEN_ICON_WARNING');
 					$this->response->data['btn1'] = [
 						'text' => lang('GEN_BTN_ACCEPT'),
 						'action' => 'close'
