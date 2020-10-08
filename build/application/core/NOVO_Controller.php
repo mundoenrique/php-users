@@ -54,8 +54,8 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
-
 		$this->nameApi = '';
+
 		if ($this->countryUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
 			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
@@ -76,16 +76,14 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->countryUri === "api") {
 			$objRequest = new stdClass();
-
 			$typeResource = $this->input->get_request_header('Content-Type', TRUE);
 
 			if (strpos($typeResource, 'json')) {
 				$objRequest = json_decode($this->input->raw_input_stream);
-
 			} elseif (strpos($typeResource, 'form') && count($_POST) > 0) {
-
 				$objRequest->request = (object) $_POST;
 			}
+
 			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
 
 		} else {
