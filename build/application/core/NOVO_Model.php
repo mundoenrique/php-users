@@ -113,6 +113,10 @@ class NOVO_Model extends CI_Model {
 					$this->session->sess_destroy();
 				}
 			break;
+			case 502:
+				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
+				$this->session->sess_destroy();
+			break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
