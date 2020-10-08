@@ -114,7 +114,7 @@ class NOVO_Model extends CI_Model {
 				}
 			break;
 			case 502:
-				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->session->sess_destroy();
 			break;
 			case 504:
@@ -123,7 +123,6 @@ class NOVO_Model extends CI_Model {
 			default:
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-			break;
 		}
 
 		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;

@@ -4032,7 +4032,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border: 1px solid var(--color-primary);
 	border-right: 0px;
 	border-radius: 3px 0 0 3px;
-	transform: translate(-107px, -42.5px);
+	transform: translate(-97px, -42.5px);
 	position: fixed;
 	color: var(--color-fifth);
 }
