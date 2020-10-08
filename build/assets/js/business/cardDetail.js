@@ -62,7 +62,8 @@ $(function () {
 		}
 	})
 
-	$('#productdetail').on('click', '#virtual-details', function () {
+	$('#productdetail').on('click', '#virtual-details', function (e) {
+		e.preventDefault();
 		cardModal()
 	});
 
@@ -219,7 +220,7 @@ function cardModal() {
 	inputModal += 	'<div class="card-details row justify-center ml-4 mr-5">';
 	inputModal += 		'<div class="card-detail p-1 mx-1">';
 	inputModal += 			'<img class="item-img" src="' + img + '" alt="' + fullName + '">';
-	inputModal += 			'<div class="item-info ' + brand + ' p-2 h5">';
+	inputModal += 			'<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
 	inputModal += 				'<p class="item-cardnumber mb-0 h4">' + cardNumberMask + '</p>';
 	inputModal += 				'<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence 06/25</small></p>';
 	inputModal += 				'<p class="item-category uppercase">' + fullName + '</p>';
@@ -236,7 +237,7 @@ function cardModal() {
 
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
 
-	$('#accept').append( "<span id='countdownTimer'>30s</span>" );
+	$('#accept').append('&nbsp;<span id="countdownTimer">30s</span>');
 	startTimer(30, $('#countdownTimer'));
 }
 
@@ -250,14 +251,16 @@ function startTimer(duration, display) {
 		seconds = parseInt(timer % 60, 10);
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
-		// display.text("&nbsp;"+seconds+"s");
-		// display.text(`&nbsp;${seconds}s`);
-		display.text(" "+seconds+"s");
+		display.text(+seconds+"s");
 
 		if (--timer < 0) {
-			console.log("tiempo agotado");
 			$('#system-info').dialog('destroy');
 			clearInterval(interval);
 		}
 	}
+
+	$('#accept').on('click', function(e) {
+		clearInterval(interval);
+	});
+
 }
