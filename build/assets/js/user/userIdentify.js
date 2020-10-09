@@ -28,8 +28,8 @@ $(function () {
 		callNovoCore(who, where, data, function(response) {
 			switch (response.code) {
 				case 0:
-					if($('#emailCard').val().trim()!=''){
-						response.data.emailCard = $('#emailCard').val().trim();
+					if(lang.CONF_CHANGE_VIRTUAL == 'ON'){
+						response.data.signUpData.emailCard = $('#emailCard').val();
 					}
 					var dataUser = response.data;
 					dataUser = JSON.stringify({dataUser})
@@ -103,6 +103,9 @@ $(function () {
 				$("#numberCard").removeClass('ignore')
 				$("#cardPIN").removeClass('ignore')
 				$("#emailCard").addClass('ignore')
+				$("#numberCard").val("")
+				$("#emailCard").val("")
+				$("#cardPIN").val("")
 		}
 	});
 });

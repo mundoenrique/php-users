@@ -62,7 +62,7 @@
   <div class="row">
     <div class="form-group col-6 col-lg-4 col-xl-3">
       <label for="email"><?= lang('USER_EMAIL')?></label>
-      <input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
+      <input id="email" class="form-control" type="email" name="email" value="<?= (lang('CONF_CHANGE_VIRTUAL') == 'ON') ? $emailCard : $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
       <div class="help-block"></div>
     </div>
     <div class="form-group col-6 col-lg-4 col-xl-3">

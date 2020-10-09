@@ -50,7 +50,7 @@ function validateForms(form) {
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
 			"emailCard": {required: true, pattern: emailValid},
-			"numberCard": {required: true,maxlength: 16},
+			"numberCard": {required: true,pattern: numeric,maxlength: 16},
 			"docmentId": {required: true, pattern: alphanum},
 			"cardPIN": {required: true,pattern: numeric},
 			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
@@ -100,7 +100,7 @@ function validateForms(form) {
 			"docmentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
-				required: 'Este campo es obligatorio.',
+				required: 'Coloca el código recibido.',
 				pattern: 'El formato de código es inválido.',
 				maxlength: 'El formato de código es inválido.'
 			},
