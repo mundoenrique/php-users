@@ -14,6 +14,7 @@
 			<div class="max-width-1 fit-lg mx-auto pt-1">
 				<form id="identityForm">
 					<div class="row">
+						<?php if (lang('CONF_CHANGE_VIRTUAL') == 'ON'): ?>
 						<div class="form-group col-12">
 							<label class="mr-2 regular"><?= lang('GEN_CARD_TYPE'); ?></label>
 							<div class="custom-control custom-radio custom-control-inline">
@@ -26,6 +27,7 @@
 							</div>
 							<div class="help-block"></div>
 						</div>
+						<?php endif; ?>
 						<div class="form-group col-lg-4" id="divNumberCard">
 							<label for="numberCard" class="regular"><?= lang('GEN_NUMBER_CARD'); ?></label>
 							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
