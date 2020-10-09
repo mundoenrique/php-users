@@ -5,7 +5,7 @@
 		<div class="flex flex-wrap widget-product">
 			<div class="line-text w-100">
 				<div class="flex inline-flex col-12 px-xl-2">
-					<div id="productdetail" class="flex flex-column justify-center col-6 py-4">
+					<div id="productdetail" class="flex flex-column justify-center col-6 pt-4 pb-2">
 						<div class="product-presentation relative w-100">
 							<div class="item-network <?= $brand ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">

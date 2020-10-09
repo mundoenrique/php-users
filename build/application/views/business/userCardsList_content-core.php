@@ -25,7 +25,7 @@
 				<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
 				<div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
 					<p class="item-category semibold"><?= $cards->productName ?>
-						<span class="warning semibold h6"><br><?= $cards->virtualCard?></span>
+						<span class="warning semibold h6 capitalize"><br><?= $cards->virtualCard?></span>
 					</p>
 					<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
 					<p class="item-balance mb-0 h6 light text"><?= lang('GEN_WAIT_BALANCE') ?></p>
@@ -33,7 +33,7 @@
 				<form action="<?= base_url(lang('GEN_LINK_CARD_DETAIL')); ?>"  method="POST">
 					<input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
 					<input type="hidden" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
-					<input type="hidden" id="virtualCard" name="virtualCard" class="hidden" value="<?= $cards->isVirtual ?>">
+					<input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
 					<input type="hidden" id="cardNumberMask" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask ?>">
 					<input type="hidden" id="productName" name="productName" class="hidden" value="<?= $cards->productName ?>">
 					<input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">

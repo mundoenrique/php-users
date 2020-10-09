@@ -46,7 +46,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual;
-						$cardRecord->virtualCard = $cardsRecords->tvirtual ? '~ Virtual' : '';
+						$cardRecord->virtualCard = $cardsRecords->tvirtual ? '' : novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN'));
 
 						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
 							$cardRecord->services = [];
