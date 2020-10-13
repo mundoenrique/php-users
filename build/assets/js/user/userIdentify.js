@@ -17,6 +17,15 @@ $(function () {
 		validateForms(form);
 		btnText = $(this).html();
 		data = getDataForm(form);
+		delete data.physicalCard;
+		data.virtualCard = false;
+
+		if($('input:radio[name=cardType]:checked').val()=='virtual'){
+			delete data.cardPIN;
+			data.virtualCard = true;
+		}
+
+		console.log(data);
 		if (form.valid()) {
 			$(this).html(loader)
 			insertFormInput(true)
@@ -29,9 +38,6 @@ $(function () {
 		callNovoCore(who, where, data, function(response) {
 			switch (response.code) {
 				case 0:
-					if(lang.CONF_CHANGE_VIRTUAL == 'ON'){
-						response.data.signUpData.emailCard = $('#emailCard').val();
-					}
 					var dataUser = response.data;
 					dataUser = JSON.stringify({dataUser})
 					dataUser = cryptoPass(dataUser);

@@ -79,6 +79,8 @@ $lang["USER_TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
+$lang['USER_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
+$lang['USER_MSG_ACCESS_ACCOUNT'] = '<p>Si aún no posees usuario para acceder al sistema <strong>%s</strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>';
 //SIGNUP-PROFILE
 $lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
 $lang['USER_SIGNUP_MSG'] = 'Para obtener tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';

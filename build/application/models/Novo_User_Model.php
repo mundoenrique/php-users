@@ -385,13 +385,14 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
-		$this->dataRequest->cuenta = isset($dataRequest->numberCard) ?? '';
+		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
-		$this->dataRequest->pin = isset($dataRequest->cardPIN) ?? '1234';
+		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
-		$this->dataRequest->email = isset($dataRequest->emailCard) ?? '';
-		$maskMail = maskString($dataRequest->emailCard, 4, $end = 6, '@');
+		$this->dataRequest->email = $dataRequest->emailCard ?? '';
+
+		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
 
 		/*$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
 		$this->dataRequest->codigoOtp =[
@@ -415,6 +416,13 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
 				$userData->email = $response->user->email ?? '';
+				$userData->emailConfirm = $response->user->email ?? '';
+
+				if($userData->email == ''){
+					$userData->email = $dataRequest->emailCard ?? '';
+					$userData->emailConfirm  = '';
+				}
+
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';

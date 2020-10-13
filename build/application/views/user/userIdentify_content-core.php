@@ -7,10 +7,8 @@
 		<h1 class="text regular h3 inline"><?= lang('GEN_MENU_USER_IDENTIFY'); ?></h1>
 		<div class="line-text mt-2"></div>
 		<div class="pt-3 regular">
-			<h4 class="text">Verificación de cuenta</h4>
-			<p>Si aún no posees usuario para acceder al sistema <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, a continuación debes proporcionar los
-				siguientes datos relacionados con tu cuenta:</p>
-
+			<h4 class="text"><?= lang ('USER_ACCOUNT_VERIFICATION') ?></h4>
+			<?= novoLang(lang('USER_MSG_ACCESS_ACCOUNT'),lang('GEN_SYSTEM_NAME')) ?>
 			<div class="max-width-1 fit-lg mx-auto pt-1">
 				<form id="identityForm">
 					<div class="row">
