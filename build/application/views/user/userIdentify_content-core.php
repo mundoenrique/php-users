@@ -33,11 +33,6 @@
 							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
 							<div class="help-block"></div>
 						</div>
-						<div class="form-group col-lg-4" id="divEmail" style="display: none;">
-							<label for="emailCard" class="regular"><?= lang('USER_EMAIL'); ?></label>
-							<input id="emailCard" class="form-control" type="text" name="emailCard" maxlength="32">
-							<div class="help-block"></div>
-						</div>
 						<div class="form-group col-lg-4">
 							<label for="docmentId" class="regular"><?= lang('GEN_DNI'); ?></label>
 							<input id="docmentId" class="form-control" type="text" name="docmentId" maxlength="25">

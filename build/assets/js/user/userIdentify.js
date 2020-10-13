@@ -1,13 +1,14 @@
 'use strict'
 var radioType = 'input:radio[name=cardType]';
+var numberCard = 'label[for=numberCard]';
+var input = 'input[type="text"]';
 var loginIpMsg,btnTex,formcodeOTP,btnTextOtp;
 
 $(function () {
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$("#emailCard").addClass('ignore');
-	$("#cardPIN").removeClass('ignore');
+	$('#cardPIN').removeClass('ignore');
 	form = $('#identityForm');
 
 	$('#identityBtn').on('click', function(e) {
@@ -89,23 +90,26 @@ $(function () {
 	}
 
 	$(radioType).change(function(){
-		if($(this).attr("value")=="virtual"){
-				$("#divNumberCard").hide();
-				$("#physicalCardPIN").hide();
-				$("#divEmail").show();
-				$("#numberCard").addClass('ignore')
-				$("#cardPIN").addClass('ignore')
-				$("#emailCard").removeClass('ignore')
+		if($(this).attr('value')=='virtual'){
+				$('#physicalCardPIN').hide();
+				$('#cardPIN').addClass('ignore')
+				$(numberCard).text(lang.USER_EMAIL);
+				$('#numberCard').attr('id','emailCard');
+				$('#emailCard').attr('name','emailCard').attr('maxlength','32');
+				resetInput();
 		} else {
-			  $("#divNumberCard").show();
-				$("#physicalCardPIN").show();
-				$("#divEmail").hide();
-				$("#numberCard").removeClass('ignore')
-				$("#cardPIN").removeClass('ignore')
-				$("#emailCard").addClass('ignore')
-				$("#numberCard").val("")
-				$("#emailCard").val("")
-				$("#cardPIN").val("")
+				$('#physicalCardPIN').show();
+				$('#cardPIN').removeClass('ignore')
+				$(numberCard).text(lang.GEN_NUMBER_CARD);
+				$('#emailCard').attr('id','numberCard');
+				$('#numberCard').attr('name','numberCard').attr('maxlength','16');
+				resetInput();
 		}
 	});
+
+	function resetInput(){
+		form.find('input:text').val('').removeAttr('aria-describedby');
+		form.find('.help-block').text('');
+		form.find('.has-error').removeClass('has-error');
+	}
 });
