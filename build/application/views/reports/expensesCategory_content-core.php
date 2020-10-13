@@ -7,7 +7,7 @@
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-6 py-4">
-              <div class="product-presentation relative w-100">
+              <div class="product-presentation relative">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
                 <div id="donor" class="product-search btn">
@@ -19,7 +19,7 @@
                 <?php endif; ?>
               </div>
 							<?php if ($cardsTotal == 1 && $isVirtual): ?>
-              <span class="warning semibold h6 mx-auto">tarjeta virtual</span>
+							<span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
 							<?php endif; ?>
             </div>
             <?php if ($cardsTotal > 1): ?>

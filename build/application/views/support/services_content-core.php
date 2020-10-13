@@ -19,7 +19,7 @@
                 <?php endif; ?>
               </div>
 							<?php if ($cardsTotal == 1 && $isVirtual): ?>
-              <span class="warning semibold h6 mx-auto">tarjeta virtual</span>
+              <span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
 							<?php endif; ?>
             </div>
             <?php if ($cardsTotal > 1): ?>

@@ -1,4 +1,7 @@
 'use strict'
+
+var interval;
+
 $(function () {
 	displaymoves()
 	who = 'Business';
@@ -238,29 +241,36 @@ function cardModal() {
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
 
 	$('#accept').append('&nbsp;<span id="countdownTimer">30s</span>');
-	startTimer(30, $('#countdownTimer'));
+	startTimer(10, $('#countdownTimer'));
 }
 
 function startTimer(duration, display) {
 	var timer = duration,
 			minutes, seconds;
 
-	var interval = setInterval(myTimer, 1000);
+	interval = setInterval(myTimer, 1000);
 
 	function myTimer() {
 		seconds = parseInt(timer % 60, 10);
+		console.log(seconds);
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
 		display.text(+seconds+"s");
 
 		if (--timer < 0) {
-			$('#system-info').dialog('destroy');
-			clearInterval(interval);
+			$("#system-info").dialog("destroy");
+			stopInterval()
 		}
 	}
-
-	$('#accept').on('click', function(e) {
-		clearInterval(interval);
-	});
-
 }
+
+function stopInterval() {
+	clearInterval(interval);
+}
+
+$('#accept').on('click', function(e) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+	stopInterval();
+	$("#system-info").dialog("destroy");
+});
