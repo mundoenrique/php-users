@@ -46,7 +46,8 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual;
-						$cardRecord->virtualCard = $cardsRecords->tvirtual ? '' : novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN'));
+						$cardRecord->virtualCard = $cardsRecords->tvirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
+						$cardRecord->tittleVirtual = $cardsRecords->tvirtual ? lang('GEN_VIRTUAL_CARD') : '';
 
 						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
 							$cardRecord->services = [];
@@ -345,6 +346,9 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
+						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
+						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';

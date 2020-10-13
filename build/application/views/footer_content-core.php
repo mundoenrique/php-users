@@ -64,18 +64,19 @@
     <div class="dashboard-item p-1 mx-1 mb-1">
       <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>">
       <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
-        <p class="item-category semibold"><?= $cards->productName ?></p>
+        <p class="item-category semibold"><?= $cards->productName ?>
+					<span class="warning semibold h6 capitalize"><br><?= $cards->virtualCard?></span>
+				</p>
         <p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
       </div>
       <form name="cardsListForm">
         <input type="hidden" name="cardNumber" class="hidden" value="<?= $cards->cardNumber; ?>">
         <input type="hidden" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask; ?>">
-        <?php if (isset($expireDate)): ?>
-        <input type="hidden" name="expireDate" class="hidden" value="<?= $cards->expireDate; ?>">
-        <?php endif; ?>
         <input type="hidden" name="prefix" class="hidden" value="<?= $cards->prefix; ?>">
         <input type="hidden" name="status" class="hidden" value="<?= $cards->status; ?>">
         <input type="hidden" name="brand" class="hidden" value="<?= $cards->brand; ?>">
+				<input type="hidden" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
+				<input type="hidden" name="tittleVirtual" class="hidden" value="<?= $cards->tittleVirtual ?>">
         <?php if (isset($cards->services)): ?>
         <input type="hidden" name="services" class="hidden" value="<?= htmlspecialchars(json_encode($cards->services), ENT_QUOTES, 'UTF-8'); ?>">
         <?php endif; ?>

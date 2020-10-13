@@ -69,6 +69,8 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->expireDate = '';
 		$this->render->prefix = '';
 		$this->render->status = '';
+		$this->render->isVirtual = '';
+		$this->render->tittleVirtual = '';
 		$this->render->statustext = 'Bloquear';
 		$this->render->RecoverPinText = 'Recuperar PIN';
 		$this->render->activeEvents = 'no-events';
@@ -85,6 +87,8 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->expireDate = $cardsList[0]->expireDate;
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
+			$this->render->isVirtual = $cardsList[0]->isVirtual;
+			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
 			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquear';
 			$this->render->activeEvents = '';
 		}

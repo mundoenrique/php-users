@@ -33,12 +33,12 @@
 				<form action="<?= base_url(lang('GEN_LINK_CARD_DETAIL')); ?>"  method="POST">
 					<input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
 					<input type="hidden" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
-					<input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
 					<input type="hidden" id="cardNumberMask" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask ?>">
 					<input type="hidden" id="productName" name="productName" class="hidden" value="<?= $cards->productName ?>">
 					<input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">
 					<input type="hidden" id="productImg" name="productImg" class="hidden" value="<?= $cards->productImg ?>">
 					<input type="hidden" id="productUrl" name="productUrl" class="hidden" value="<?= $cards->productUrl ?>">
+					<input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
 					<input type="hidden" id="cardsTotal" name="cardsTotal" class="hidden" value="<?= $cardsTotal ?>">
 				</form>
 			</div>
