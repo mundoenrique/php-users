@@ -17,6 +17,9 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 ];
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte.';
 //CONTACT
+$lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
+$lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
+$lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [
 	'CDMX' => '(55) 5140 5640',
 	'MTY' => '(81) 8156 9640',

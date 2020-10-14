@@ -801,7 +801,6 @@ class Novo_User_Model extends NOVO_Model {
 				'nacionalidad' => $dataRequest->nationality ?? '',
 				'dig_verificador' => $dataRequest->verifyDigit ?? '',
 				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
-				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
 				'acepta_contrato' => $dataRequest->contract ?? '',
 				'acepta_proteccion' => $dataRequest->protection ?? '',
 				'codarea1' => '',

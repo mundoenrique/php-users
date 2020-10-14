@@ -91,6 +91,15 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
 			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquear';
 			$this->render->activeEvents = '';
+
+			if (!in_array($this->render->status, ['PB', ''])) {
+				$this->render->serviceList = [];
+				unset($userCardList->data->cardsList, $userCardList->data->serviceList);
+				$userCardList->code = 3;
+				$userCardList->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+				$userCardList->msg = lang('CUST_PERMANENT_LOCK');
+				$this->responseAttr($userCardList);
+			}
 		}
 
 		if (count($serviceList) == 1 && $serviceList[0] == '120') {
