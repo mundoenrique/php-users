@@ -99,6 +99,17 @@ $(function () {
 				})
 			})
 		}
+
+		if (services.length == 0) {
+			data = {
+				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					link: 'lista-de-tarjetas',
+					action: 'redirect'
+				}
+			}
+			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.GEN_ICON_DANGER, data);
+		}
 	});
 
 	$('.send').on('click', function(e) {

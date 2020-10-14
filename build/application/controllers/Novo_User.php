@@ -122,6 +122,8 @@ class Novo_User extends NOVO_Controller {
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
+		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}

@@ -142,7 +142,7 @@ class Encrypt_Connect
 		curl_setopt($ch, CURLOPT_URL, $urlWS);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 59);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			'Content-Type: text/plain',
@@ -162,13 +162,21 @@ class Encrypt_Connect
 			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
 
 			$failResponse = new stdClass();
+			$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
 
-			if ($CurlErrorNo == 28) {
-				$failResponse->rc = 504;
-				$failResponse->msg = lang('GEN_TIMEOUT');
-			} else {
-				$failResponse->rc = lang('GEN_RC_DEFAULT');
-				$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
+			switch ($CurlErrorNo) {
+				case 28:
+					$failResponse->rc = 504;
+					$failResponse->msg = lang('GEN_TIMEOUT');
+				break;
+				default:
+					$failResponse->rc = lang('GEN_RC_DEFAULT');
+			}
+
+			switch ($httpCode) {
+				case 502:
+					$failResponse->rc = 502;
+				break;
 			}
 
 			$response = $failResponse;
