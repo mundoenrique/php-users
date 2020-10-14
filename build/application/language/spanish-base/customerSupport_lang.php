@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CUST_REPLACE_REQUEST'] = 'Solicitud %s de reposición';
+$lang['CUST_PERMANENT_LOCK'] = 'Tu tarjeta tiene una reposición pendiente';
 $lang['CUST_TWIRLS_COMMERCIAL'] = 'Giros comerciales';
 $lang['CUST_TRANS_LIMITS'] = 'Limites transaccionales';
 $lang['CUST_CARD_NUMBER'] = 'Nro. de tarjeta';
