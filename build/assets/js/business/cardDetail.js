@@ -241,7 +241,7 @@ function cardModal() {
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
 
 	$('#accept').append('&nbsp;<span id="countdownTimer">30s</span>');
-	startTimer(10, $('#countdownTimer'));
+	startTimer(30, $('#countdownTimer'));
 }
 
 function startTimer(duration, display) {
