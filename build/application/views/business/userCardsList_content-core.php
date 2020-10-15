@@ -21,12 +21,18 @@
 	<div class="hide-out hide">
 		<div id="cardList" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 			<?php foreach ($cardsList AS $cards): ?>
-			<div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
+			<div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal <?= $cards->stateClasses ?>">
 				<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
 				<div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
 					<p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?></p>
 					<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
-					<p class="item-balance mb-0 h6 light text"><?= lang('GEN_WAIT_BALANCE') ?></p>
+					<p class="item-balance mb-0 h6 light text">
+						<?php if ($cards->status == '' || $cards->status == 'PB'): ?>
+						<?= lang('GEN_WAIT_BALANCE') ?>
+						<?php else: ?>
+						<span class="semibold danger"><?= $cards->stateMessage ?></span>
+						<?php endif; ?>
+					</p>
 				</div>
 				<form action="<?= base_url(lang('GEN_LINK_CARD_DETAIL')); ?>"  method="POST">
 					<input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
@@ -36,6 +42,7 @@
 					<input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">
 					<input type="hidden" id="productImg" name="productImg" class="hidden" value="<?= $cards->productImg ?>">
 					<input type="hidden" id="productUrl" name="productUrl" class="hidden" value="<?= $cards->productUrl ?>">
+					<input type="hidden" id="status" name="status" class="hidden" value="<?= $cards->status ?>">
 					<input type="hidden" id="cardsTotal" name="cardsTotal" class="hidden" value="<?= $cardsTotal ?>">
 				</form>
 			</div>

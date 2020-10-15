@@ -45,12 +45,16 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
+						$cardRecord->stateClasses = '';
+						$cardRecord->stateMessage = $cardsRecords->bloque == 'PB' ? lang('GEN_TEMPORARY_BLOCK_PRODUCT') : '';
 
 						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
 							$cardRecord->services = [];
+							$cardRecord->stateClasses = 'inactive cursor-default';
+							$cardRecord->stateMessage = $cardsRecords->bloque == 'NE' ? lang('GEN_INACTIVE_PRODUCT') : lang('GEN_DEFAULT_BLOCK_PRODUCT');
 						}
 
-						foreach ($cardsRecords->services AS $service) {
+						foreach ($cardRecord->services AS $service) {
 							array_push($serviceList, $service);
 						}
 
