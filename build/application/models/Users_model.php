@@ -339,8 +339,8 @@ class Users_model extends CI_Model
 
 		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
 		// TODO: quitar logs
-		log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
-		log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
+		// log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
+		// log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
 
 		$pais = $this->session->userdata('pais');
 		$md5 = (($pais=='Pe') || ($pais=='Usd') || ($pais=='Co')) ? 1 : 0;

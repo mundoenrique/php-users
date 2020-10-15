@@ -258,10 +258,10 @@ class Registro_model extends CI_Model {
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
 		// TODO: quitar logs
-		log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
-		log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
-		log_message('info', 'PRUEBA PASSWORD_MOBILE en plano: ' . json_encode($passwordMobile));
-		log_message('info', 'PRUEBA PASSWORD_MOBILE en Argon2: ' . json_encode($argon2Mobile->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
+		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en plano: ' . json_encode($passwordMobile));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en Argon2: ' . json_encode($argon2Mobile->hexArgon2));
 
 		if($aplicaPerfil == 'S') {
 
