@@ -114,7 +114,7 @@ base_cdn = $('body').attr('data-app-cdn');
 				if((valor1==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
 
-				passwordOperaciones=$("#new-transpwd").val();
+				passwordOperaciones=novo_cryptoPass($("#new-transpwd").val());
 
 				var cpo_cook = decodeURIComponent(
 					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')

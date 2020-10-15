@@ -295,6 +295,14 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'password op', 'password op', 'crear');
 
+		$passwordOperaciones = json_decode(base64_decode($passwordOperaciones));
+		$passwordOperaciones = $this->cryptography->decrypt(
+			base64_decode($passwordOperaciones->plot),
+			utf8_encode($passwordOperaciones->password)
+		);
+
+		$argon2passwordOperaciones= $this->encrypt_connect->generateArgon2($passwordOperaciones);
+
 		$data = json_encode(array(
 			'idOperation' => '31',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
