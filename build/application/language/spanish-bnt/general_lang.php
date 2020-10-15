@@ -26,3 +26,5 @@ $lang['GEN_CONTACTS'] = [
 	'GDL' => '(33) 3669 9040',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
+//PRODUCT STATUS
+$lang['GEN_DEFAULT_BLOCK_PRODUCT'] = 'Bloqueo permanente';
