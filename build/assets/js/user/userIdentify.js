@@ -17,11 +17,13 @@ $(function () {
 		validateForms(form);
 		btnText = $(this).html();
 		data = getDataForm(form);
-		delete data.physicalCard;
-		data.virtualCard = false;
-		if($('input:radio[name=cardType]:checked').val()=='virtual'){
-			delete data.cardPIN;
-			data.virtualCard = true;
+		if (lang.CONF_CHANGE_VIRTUAL == 'ON'){
+			if($('input:radio[name=cardType]:checked').val()=='virtual'){
+				delete data.cardPIN;
+				delete data.physicalCard;
+			}else{
+				delete data.virtualCard;
+			}
 		}
 		if (form.valid()) {
 			$(this).html(loader)
