@@ -188,5 +188,5 @@ $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
-$lang['GEN_TEMPORARY_BLOCK_PRODUCT'] = 'Bloqueo temporal';
-$lang['GEN_DEFAULT_BLOCK_PRODUCT'] = 'Reposición pendiente';
+$lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
+$lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';

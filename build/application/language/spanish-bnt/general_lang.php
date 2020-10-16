@@ -27,4 +27,4 @@ $lang['GEN_CONTACTS'] = [
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
 //PRODUCT STATUS
-$lang['GEN_DEFAULT_BLOCK_PRODUCT'] = 'Bloqueo permanente';
+$lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Bloqueo permanente';

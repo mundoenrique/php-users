@@ -21,7 +21,7 @@
 	<div class="hide-out hide">
 		<div id="cardList" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 			<?php foreach ($cardsList AS $cards): ?>
-			<div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal <?= $cards->stateClasses ?>">
+			<div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
 				<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
 				<div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
 					<p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?></p>
