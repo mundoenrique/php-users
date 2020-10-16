@@ -24,7 +24,7 @@ $(function () {
 			formBalance = $(element).find('form')
 			data = getDataForm(formBalance);
 			who = 'Business';  where = 'GetBalance'
-			if (data.status == '' || data.status == 'PB') {
+			if (data.status == '') {
 				callNovoCore(who, where, data, function(response) {
 					$(element).find('.item-info .item-balance').text(response.msg)
 				})
