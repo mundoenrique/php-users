@@ -339,7 +339,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->nroTarjeta;
 						$cardRecord->prefix = $cardsRecords->prefix;
-						$cardRecord->status = $cardsRecords->bloque;
+						$cardRecord->status = $cardsRecords->bloque == 'N' ? '' : $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
