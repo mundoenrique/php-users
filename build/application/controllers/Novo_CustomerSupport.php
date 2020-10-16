@@ -93,7 +93,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 				unset($userCardList->data->cardsList, $userCardList->data->serviceList);
 				$userCardList->code = 3;
 				$userCardList->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-				$userCardList->msg = lang('CUST_PERMANENT_LOCK');
+				$userCardList->msg = $this->render->status == 'NE' ? lang('CUST_INACTIVE_PRODUCT') : lang('CUST_PERMANENT_LOCK');
 				$this->responseAttr($userCardList);
 			}
 		}
