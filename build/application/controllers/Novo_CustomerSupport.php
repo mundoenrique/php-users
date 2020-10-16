@@ -31,7 +31,8 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			"support/services"
 		);
 		$this->load->model('Novo_Business_Model', 'business');
-		$userCardList = $this->business->callWs_UserCardsList_Business();
+		$this->request->module = $view;
+		$userCardList = $this->business->callWs_UserCardsList_Business($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$serviceList = $userCardList->data->serviceList;

@@ -17,7 +17,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 14th, 2019
 	 */
-	public function callWs_UserCardsList_Business()
+	public function callWs_UserCardsList_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
 
@@ -45,6 +45,11 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
+
+						if (isset($dataRequest->module)) {
+							$cardRecord->module = $dataRequest->module;
+							$cardRecord->statusClasses = $cardRecord->status != '' && $cardRecord->status != 'PB' ? 'inactive cursor-default' : '' ;
+						}
 
 						foreach ($cardRecord->services AS $service) {
 							array_push($serviceList, $service);
