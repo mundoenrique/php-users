@@ -57,7 +57,6 @@ class Users_model extends CI_Model
 		$cookie = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 		$putSession = FALSE;
 		$desdata->validateRedirect = FALSE;
-		log_message('info', 'DESDATA PRUEBA ' . json_encode($desdata));
 		if ($desdata->rc === -424) {
 
 			$bean = json_decode($desdata->bean);
@@ -68,7 +67,7 @@ class Users_model extends CI_Model
 			if (!empty($newCore)){
 				$validateNewCore = in_array($bean->codPais,$newCore);
 				if($validateNewCore){
-					$desdata->codPaisUrl = $this->redirectNewCore($desdata->codPais);
+					$desdata->codPaisUrl = $this->redirectNewCore($bean->codPais);
 					$desdata->validateRedirect = TRUE;
 				}
 			}
