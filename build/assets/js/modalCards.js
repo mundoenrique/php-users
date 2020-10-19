@@ -18,6 +18,11 @@ $(function () {
 		var prefix = $(event).find('input[type=hidden][name="prefix"]').val();
 		var status = $(event).find('input[type=hidden][name="status"]').val();
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
+		var module = $(event).find('input[type=hidden][name="module"]').val();
+
+		if (module == 'services' && status != '' && status != 'PB') {
+			return true;
+		}
 
 		cardDetail = '<div class="flex flex-colunm justify-center col-6 py-5">';
 		cardDetail += '<div class="product-presentation relative">';

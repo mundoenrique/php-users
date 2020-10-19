@@ -61,11 +61,14 @@
   <h4 class="h4"><?= lang('GEN_ACCOUNT_SELECTION') ?></h4>
   <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">
     <?php foreach ($cardsList AS $cards): ?>
-    <div class="dashboard-item p-1 mx-1 mb-1">
+    <div class="dashboard-item p-1 mx-1 mb-1 <?= $cards->statusClasses ?? '' ?>">
       <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>">
       <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?></p>
-        <p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
+				<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
+				<?php if (isset($cards->module) && $cards->statusMessage != ''): ?>
+				<span class="h6 semibold danger"><?= $cards->statusMessage ?></span>
+				<?php endif; ?>
       </div>
       <form name="cardsListForm">
         <input type="hidden" name="cardNumber" class="hidden" value="<?= $cards->cardNumber; ?>">
@@ -78,7 +81,8 @@
         <input type="hidden" name="brand" class="hidden" value="<?= $cards->brand; ?>">
         <?php if (isset($cards->services)): ?>
         <input type="hidden" name="services" class="hidden" value="<?= htmlspecialchars(json_encode($cards->services), ENT_QUOTES, 'UTF-8'); ?>">
-        <?php endif; ?>
+				<?php endif; ?>
+				<input type="hidden" id="module" name="module" class="hidden" value="<?= isset($cards->module)?$cards->module:'' ?>">
       </form>
     </div>
     <?php endforeach; ?>
