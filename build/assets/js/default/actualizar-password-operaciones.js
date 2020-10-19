@@ -128,16 +128,12 @@ $(function(){
 				if((valor1==true) && (valor2==true) && (valor3==true)){
 					$('#continuar').removeClass('disabled-button');
 
-					var cpo_cook = decodeURIComponent(
-						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
-
 					var dataRequest = JSON.stringify ({
-						passwordOperacionesOld:old,
-						passwordOperaciones:newC
+						passwordOperacionesOld:novo_cryptoPass(old),
+						passwordOperaciones:novo_cryptoPass(newC)
 					});
 
-					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+					dataRequest = novo_cryptoPass(dataRequest, true);
 
 					$.post(base_url +"/users/passwordOperacionesActualizar",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 

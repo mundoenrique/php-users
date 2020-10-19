@@ -186,6 +186,8 @@ $lang['GEN_SELECT_MONTH'] = [
 ];
 $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
+
+$lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

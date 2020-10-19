@@ -99,11 +99,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave op");
 
+			$clave = json_decode(base64_decode($clave));
+			$clave = $this->cryptography->decrypt(
+				base64_decode($clave->plot),
+				utf8_encode($clave->password)
+			);
+			// TODO
+			// Transferencia es usado sólo por Vzla
+			// Acordar con servicios su modificación
+			$argon2 = $this->encrypt_connect->generateArgon2($clave);
+
 			$data = json_encode(array(
 				                    "idOperation"=>"10",
 				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
 				                    "userName"=> $this->session->userdata("userName"),
-				                    "passwordOperaciones"=> $clave,
+				                    "passwordOperaciones"=> md5($clave),
 				                    "logAccesoObject"=>$logAcceso,
 				                    "token"=>$this->session->userdata("token")
 			                    ));
@@ -164,11 +174,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			//PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 			$logAcceso = np_hoplite_log($this->session->userdata("sessionId"),$this->session->userdata("userName"),"personasWeb","transferencia","realizar transferencia","validar clave auten");
 
+			$clave = json_decode(base64_decode($clave));
+			$clave = $this->cryptography->decrypt(
+				base64_decode($clave->plot),
+				utf8_encode($clave->password)
+			);
+
 			$data = json_encode(array(
 				                    "idOperation"=>"12",
 				                    "className"=>"com.novo.objects.TOs.UsuarioTO",
 				                    "userName"=> $this->session->userdata("userName"),
-				                    "claveConfirmacion"=> $clave,
+				                    "claveConfirmacion"=> md5($clave),
 				                    "logAccesoObject"=>$logAcceso,
 				                    "token"=>$this->session->userdata("token")
 			                    ));

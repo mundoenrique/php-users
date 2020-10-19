@@ -12,7 +12,7 @@ class Users_model extends CI_Model
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	// FUNCION PARA HACER LOGIN
-	public function login_user($username, $password, $codeOTP, $saveIP)
+	public function login_user($username, $userPass, $codeOTP, $saveIP)
 	{
 		$logAcceso = np_hoplite_log('', $username, 'personasWeb', 'login', 'login', 'Login');
 
@@ -20,11 +20,25 @@ class Users_model extends CI_Model
 		$infoOTP->tokenCliente = $codeOTP === '--' ? "" : $codeOTP;
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
+		$password = json_decode(base64_decode($userPass));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
+		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
+
 		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $username,
-			'password' => $password,
+			'password' => md5($password),
+			// TODO: Cambiar cuando servicio funcione
+			// 'password' => $argon2->hexArgon2,
+			// 'hashMD5' => md5($password),
 			'logAccesoObject' => $logAcceso,
 			'token' => ''
 		);
@@ -41,6 +55,7 @@ class Users_model extends CI_Model
 		$data = json_encode($data);
 		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
 		$data = json_decode($response);
+		$desdata = new stdClass();
 		if ($data->data) {
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'login_user'));
 			$salida = json_encode($desdata);
@@ -215,7 +230,30 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'password', 'password', 'actualizar');
 
+		$passwordOld = json_decode(base64_decode($passwordOld));
+		$passwordOld = $this->cryptography->decrypt(
+			base64_decode($passwordOld->plot),
+			utf8_encode($passwordOld->password)
+		);
+
+		$passwordNew = json_decode(base64_decode($passwordNew));
+		$passwordNew = $this->cryptography->decrypt(
+			base64_decode($passwordNew->plot),
+			utf8_encode($passwordNew->password)
+		);
+
 		$passwordMobile = strtoupper($passwordNew); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
+
+		$argon2Old = $this->encrypt_connect->generateArgon2($passwordOld);
+		$argon2New = $this->encrypt_connect->generateArgon2($passwordNew);
+		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA PASSWORD_OLD en plano: ' . json_encode($passwordOld));
+		// log_message('info', 'PRUEBA PASSWORD_OLD en Argon2: ' . json_encode($argon2Old->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD_NEW en plano: ' . json_encode($passwordNew));
+		// log_message('info', 'PRUEBA PASSWORD_NEW en Argon2: ' . json_encode($argon2New->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en plano: ' . json_encode($passwordMobile));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en Argon2: ' . json_encode($argon2Mobile->hexArgon2));
 
 		$data = json_encode(array(
 			'idOperation' => '25',
@@ -224,6 +262,13 @@ class Users_model extends CI_Model
 			'passwordOld' => md5($passwordOld),
 			'password' => md5($passwordNew),
 			'passwordOld4' => md5($passwordMobile),
+			// TODO: Cambiar cuando servicio funcione
+			// "passwordOld"		=> $argon2Old->hexArgon2,
+			// 'password' => $argon2New->hexArgon2,
+			// "passwordOld4"		=> $argon2Mobile->hexArgon2,
+			// 'hashMD5Old' => md5($passwordOld),
+			// 'hashMD5' => md5($passwordNew),
+			// 'hashMD5Old4' => md5($passwordMobile),
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
 		));
@@ -249,6 +294,14 @@ class Users_model extends CI_Model
 	public function password_operaciones($passwordOperaciones)
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'password op', 'password op', 'crear');
+
+		$passwordOperaciones = json_decode(base64_decode($passwordOperaciones));
+		$passwordOperaciones = $this->cryptography->decrypt(
+			base64_decode($passwordOperaciones->plot),
+			utf8_encode($passwordOperaciones->password)
+		);
+
+		$argon2passwordOperaciones= $this->encrypt_connect->generateArgon2($passwordOperaciones);
 
 		$data = json_encode(array(
 			'idOperation' => '31',
@@ -278,11 +331,28 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'perfil', 'clave sms', 'registrar clave');
 
+		$claveSMS = json_decode(base64_decode($claveSMS));
+		$claveSMS = $this->cryptography->decrypt(
+			base64_decode($claveSMS->plot),
+			utf8_encode($claveSMS->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
+		// log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
+
+		$pais = $this->session->userdata('pais');
+		$md5 = (($pais=='Pe') || ($pais=='Usd') || ($pais=='Co')) ? 1 : 0;
+
 		$data = json_encode(array(
 			'idOperation' => '42',
 			'className' => 'com.novo.objects.TOs.TarjetaTO',
 			'id_ext_per' => $id_ext_per,
-			'claveSMS' => $claveSMS,
+			'claveSMS' => $md5 ? md5($claveSMS) : $claveSMS,
+			// TODO: Cambiar cuando servicio funcione
+			// 'claveSMS' => $argon2->hexArgon2,
+			// 'hashMD5' => $md5 ? md5($claveSMS) : $claveSMS,
 			'nroMovil' => $nroMovil,
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
@@ -307,11 +377,28 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'perfil', 'clave sms', 'actualizar clave');
 
+		$claveSMS = json_decode(base64_decode($claveSMS));
+		$claveSMS = $this->cryptography->decrypt(
+			base64_decode($claveSMS->plot),
+			utf8_encode($claveSMS->password)
+		);
+
+		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
+		// log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
+
+		$pais = $this->session->userdata('pais');
+		$md5 = (($pais=='Pe') || ($pais=='Usd') || ($pais=='Co')) ? 1 : 0;
+
 		$data = json_encode(array(
 			'idOperation' => '43',
 			'className' => 'com.novo.objects.TOs.TarjetaTO',
 			'id_ext_per' => $id_ext_per,
-			'claveSMS' => $claveSMS,
+			'claveSMS' => $md5 ? md5($claveSMS) : $claveSMS,
+			// TODO: Cambiar cuando servicio funcione
+			// 'claveSMS' => $argon2->hexArgon2,
+			// 'hashMD5' => $md5 ? md5($claveSMS) : $claveSMS,
 			'nroMovil' => $nroMovil,
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
@@ -326,7 +413,9 @@ class Users_model extends CI_Model
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_actualizar'));
 
-		return json_encode($desdata);
+		$response = $this->cryptography->encrypt($desdata);
+
+		return json_encode($response);
 	}
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -364,12 +453,37 @@ class Users_model extends CI_Model
 	{
 		$logAcceso = np_hoplite_log($this->session->userdata('sessionId'), $this->session->userdata('userName'), 'personasWeb', 'password operaciones', 'password operaciones', 'actualizar');
 
+		$passwordOperacionesOld = json_decode(base64_decode($passwordOperacionesOld));
+		$passwordOperacionesOld = $this->cryptography->decrypt(
+			base64_decode($passwordOperacionesOld->plot),
+			utf8_encode($passwordOperacionesOld->password)
+		);
+
+		$passwordOperaciones = json_decode(base64_decode($passwordOperaciones));
+		$passwordOperaciones = $this->cryptography->decrypt(
+			base64_decode($passwordOperaciones->plot),
+			utf8_encode($passwordOperaciones->password)
+		);
+
+		$argon2Old = $this->encrypt_connect->generateArgon2($passwordOperacionesOld);
+		$argon2New = $this->encrypt_connect->generateArgon2($passwordOperaciones);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA PASSWORD_OLD en plano: ' . json_encode($passwordOperacionesOld));
+		// log_message('info', 'PRUEBA PASSWORD_OLD en Argon2: ' . json_encode($argon2Old->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD_NEW en plano: ' . json_encode($passwordOperaciones));
+		// log_message('info', 'PRUEBA PASSWORD_NEW en Argon2: ' . json_encode($argon2New->hexArgon2));
+
 		$data = json_encode(array(
 			'idOperation' => '32',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
 			'userName' => $this->session->userdata('userName'),
 			'passwordOperacionesOld' => md5($passwordOperacionesOld),
 			'passwordOperaciones' => md5($passwordOperaciones),
+			// TODO: Cambiar cuando servicio funcione
+			// "passwordOperacionesOld"		=> $argon2Old->hexArgon2,
+			// 'passwordOperaciones' => $argon2New->hexArgon2,
+			// 'hashMD5Old' => md5($passwordOperacionesOld),
+			// 'hashMD5' => md5($passwordOperaciones),
 			'logAccesoObject' => $logAcceso,
 			'token' => $this->session->userdata('token')
 		));

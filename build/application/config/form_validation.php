@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
+
 	'signin' => [
 		[
 			'field' => 'userName',
@@ -407,6 +408,19 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\wñÑ]+)+$/i]|required'
 		]
 	],
+	'generateHash' => [
+		[
+			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	'generateRequest' => [
+		[
+			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	// Old Arquitectures
 	'getdetail' => [
 		[
 			'field' => 'request',
@@ -654,7 +668,7 @@ $config = [
 		[
 			'field' => 'pass',
 			'label' => 'pass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'codeOTP',
@@ -798,12 +812,12 @@ $config = [
 		[
 			'field' => 'userpwd',
 			'label' => 'userpwd',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmUserpwd',
 			'label' => 'confirmUserpwd',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[userpwd]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 	],
 	'recoveryaccess' => [
@@ -859,17 +873,17 @@ $config = [
 		[
 			'field' => 'currentPassword',
 			'label' => 'currentPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPassword',
 			'label' => 'newPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|differs[currentPassword]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 		[
 			'field' => 'confirmPassword',
 			'label' => 'confirmPassword',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,#]+)+$/i]|matches[newPassword]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
 	],
 

@@ -78,7 +78,7 @@ function confirmPassOperac(clave)
 	);
 
 	var dataRequest = JSON.stringify ({
-		clave:hex_md5(clave)
+		clave: novo_cryptoPass(clave)
 	});
 
 	dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -295,7 +295,7 @@ function validar_clave(claveConfir)
 	);
 	$.ajax({
 		url: base_url + '/transferencia/confirmacion',
-		data: {"clave":hex_md5(claveConfir), cpo_name: cpo_cook},
+		data: {"clave":novo_cryptoPass(claveConfir), cpo_name: cpo_cook},
 		type: "post",
 		dataType: 'json',
 		success: function(data) {
