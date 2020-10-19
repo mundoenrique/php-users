@@ -66,12 +66,8 @@
       <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?></p>
 				<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
-				<?php if ($cards->status == 'PB'): ?>
-				<span class="h6 semibold danger"><?= lang('GEN_TEMPORARY_LOCK_PRODUCT') ?></span>
-				<?php elseif($cards->status == 'NE'): ?>
-				<span class="h6 semibold danger"><?= lang('GEN_INACTIVE_PRODUCT') ?></span>
-				<?php elseif($cards->status != ''): ?>
-				<span class="h6 semibold danger"><?= lang('GEN_PERMANENT_LOCK_PRODUCT') ?></span>
+				<?php if (isset($cards->module)): ?>
+				<span class="h6 semibold danger"><?= $cards->stateMessage ?></span>
 				<?php endif; ?>
       </div>
       <form name="cardsListForm">

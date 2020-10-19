@@ -28,13 +28,9 @@
 					<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
 					<p class="item-balance mb-0 h6 light text">
 						<?php if ($cards->status == ''): ?>
-						<?= lang('GEN_WAIT_BALANCE') ?>
-						<?php elseif ($cards->status == 'PB'): ?>
-						<span class="h6 semibold danger"><?= lang('GEN_TEMPORARY_LOCK_PRODUCT') ?></span>
-						<?php elseif ($cards->status == 'NE'): ?>
-						<span class="semibold danger"><?= lang('GEN_INACTIVE_PRODUCT') ?></span>
+						<?= $cards->stateMessage ?>
 						<?php else: ?>
-						<span class="semibold danger"><?= lang('GEN_PERMANENT_LOCK_PRODUCT') ?></span>
+						<span class="semibold danger"><?= $cards->stateMessage ?></span>
 						<?php endif; ?>
 					</p>
 				</div>

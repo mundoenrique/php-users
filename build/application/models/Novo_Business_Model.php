@@ -46,6 +46,24 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 
+						switch ($cardRecord->status) {
+							case '':
+								$cardRecord->stateMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
+								break;
+
+							case 'PB':
+								$cardRecord->stateMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
+								break;
+
+							case 'NE':
+								$cardRecord->stateMessage = lang('GEN_INACTIVE_PRODUCT');
+								break;
+
+							default:
+								$cardRecord->stateMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
+								break;
+						}
+
 						if (isset($dataRequest->module)) {
 							$cardRecord->module = $dataRequest->module;
 							$cardRecord->statusClasses = $cardRecord->status != '' && $cardRecord->status != 'PB' ? 'inactive cursor-default' : '' ;
@@ -339,7 +357,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->nroTarjeta;
 						$cardRecord->prefix = $cardsRecords->prefix;
-						$cardRecord->status = $cardsRecords->bloque == 'N' ? '' : $cardsRecords->bloque;
+						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
