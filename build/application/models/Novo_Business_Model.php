@@ -17,7 +17,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 14th, 2019
 	 */
-	public function callWs_UserCardsList_Business()
+	public function callWs_UserCardsList_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
 
@@ -49,11 +49,27 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->virtualCard = $cardsRecords->tvirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 						$cardRecord->tittleVirtual = $cardsRecords->tvirtual ? lang('GEN_VIRTUAL_CARD') : '';
 
-						if ($cardsRecords->bloque != '' && $cardsRecords->bloque != 'PB') {
-							$cardRecord->services = [];
+						switch ($cardRecord->status) {
+							case '':
+								$cardRecord->statusMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
+							break;
+							case 'PB':
+								$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
+							break;
+							case 'NE':
+								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
+							break;
+							default:
+								$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
+							break;
 						}
 
-						foreach ($cardsRecords->services AS $service) {
+						if (isset($dataRequest->module)) {
+							$cardRecord->module = $dataRequest->module;
+							$cardRecord->statusClasses = $cardRecord->status != '' && $cardRecord->status != 'PB' ? 'inactive cursor-default' : '' ;
+						}
+
+						foreach ($cardRecord->services AS $service) {
 							array_push($serviceList, $service);
 						}
 
