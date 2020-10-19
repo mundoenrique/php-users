@@ -21,10 +21,10 @@ class Users_model extends CI_Model
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
 		$newCore = array (
-			'Usd',
-			'Pe',
-			'Co',
-			'Ve'
+			//'Usd',
+			//'Pe',
+			//'Co',
+			//'Ve'
 		);
 
 		$data = array(
