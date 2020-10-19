@@ -66,7 +66,7 @@
       <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?></p>
 				<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
-				<?php if (isset($cards->module)): ?>
+				<?php if (isset($cards->module) && $cards->stateMessage != ''): ?>
 				<span class="h6 semibold danger"><?= $cards->stateMessage ?></span>
 				<?php endif; ?>
       </div>
