@@ -28,9 +28,9 @@
 					<p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
 					<p class="item-balance mb-0 h6 light text">
 						<?php if ($cards->status == ''): ?>
-						<?= $cards->stateMessage ?>
+						<?= $cards->statusMessage ?>
 						<?php else: ?>
-						<span class="semibold danger"><?= $cards->stateMessage ?></span>
+						<span class="semibold danger"><?= $cards->statusMessage ?></span>
 						<?php endif; ?>
 					</p>
 				</div>
