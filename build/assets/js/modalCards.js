@@ -19,6 +19,11 @@ $(function () {
 		var status = $(event).find('input[type=hidden][name="status"]').val();
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
 		var isVirtual = $(event).find('input[type=hidden][name="isVirtual"]').val();
+		var module = $(event).find('input[type=hidden][name="module"]').val();
+
+		if (module == 'services' && status != '' && status != 'PB') {
+			return true;
+		}
 
 		cardDetail = '<div class="flex flex-column justify-center col-6 py-4">';
 		cardDetail += '<div class="product-presentation relative w-100">';

@@ -31,7 +31,8 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			"support/services"
 		);
 		$this->load->model('Novo_Business_Model', 'business');
-		$userCardList = $this->business->callWs_UserCardsList_Business();
+		$this->request->module = $view;
+		$userCardList = $this->business->callWs_UserCardsList_Business($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$serviceList = $userCardList->data->serviceList;
@@ -97,7 +98,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 				unset($userCardList->data->cardsList, $userCardList->data->serviceList);
 				$userCardList->code = 3;
 				$userCardList->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-				$userCardList->msg = lang('CUST_PERMANENT_LOCK');
+				$userCardList->msg = $this->render->status == 'NE' ? lang('CUST_INACTIVE_PRODUCT') : lang('CUST_PERMANENT_LOCK');
 				$this->responseAttr($userCardList);
 			}
 		}

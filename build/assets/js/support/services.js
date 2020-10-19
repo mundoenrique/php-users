@@ -52,6 +52,12 @@ $(function () {
 		var expireDate = $(event).find('input[type=hidden][name="expireDate"]').val();
 		var services = JSON.parse($(event).find('input[type=hidden][name="services"]').val());
 		var statusText = status == '' ? 'Bloquear' : 'Desbloquear';
+		var statusCard = $(event).find('input[type=hidden][name="status"]').val();
+
+		if (statusCard != '' && statusCard != 'PB') {
+			return true;
+		}
+
 		$('.status-text1').text(statusText);
 		$('.status-text2').text(statusText.toLowerCase());
 		$('.nav-config-box').removeClass('no-events');
