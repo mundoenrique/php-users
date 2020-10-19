@@ -48,20 +48,17 @@ class Novo_Business_Model extends NOVO_Model {
 
 						switch ($cardRecord->status) {
 							case '':
-								$cardRecord->stateMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
-								break;
-
+								$cardRecord->statusMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
+							break;
 							case 'PB':
-								$cardRecord->stateMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
-								break;
-
+								$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
+							break;
 							case 'NE':
-								$cardRecord->stateMessage = lang('GEN_INACTIVE_PRODUCT');
-								break;
-
+								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
+							break;
 							default:
-								$cardRecord->stateMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
-								break;
+								$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
+							break;
 						}
 
 						if (isset($dataRequest->module)) {
