@@ -312,3 +312,21 @@ echo $insertRecaptcha;
 		</div>
 	</div>
 </div>
+
+<!-- MODAL REDIRECT NEW CORE -->
+<div id="dialog-new-core" style='display:none'>
+	<header>
+		<h2>Conexión Personas</h2>
+	</header>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple alert-warning" id="message">
+			<span aria-hidden="true" class="icon-warning-sign"></span>
+			<p>
+				Estimado usuario.<br> Esta página ha sido cambiada, para ingresar a <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder desde <strong><a id="link-href"></a></strong>
+			</p>
+		</div>
+		<div class="form-actions">
+					<button id="redirect-new-core" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>

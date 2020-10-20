@@ -130,12 +130,13 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if ($('#system-info').parents('.ui-dialog').length) {
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+		var modalClose = response.modal ? false : true;
+
+		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
-
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 
 		if (response.code === codeResp) {
 			appMessages(response.title, response.msg, response.icon, response.data);

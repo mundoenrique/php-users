@@ -378,11 +378,20 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
-		$this->dataRequest->cuenta = $dataRequest->numberCard;
+		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
+		$this->dataRequest->email = $dataRequest->emailCard ?? '';
+		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
+		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
+
+		/*$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
+		$this->dataRequest->codigoOtp =[
+			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
+			'authToken' => $authToken
+		];*/
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
@@ -400,12 +409,20 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
 				$userData->email = $response->user->email ?? '';
+				$userData->emailConfirm = $response->user->email ?? '';
+
+				if($userData->email == ''){
+					$userData->email = $dataRequest->emailCard ?? '';
+					$userData->emailConfirm  = '';
+				}
+
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
 
 				$this->response->data['signUpData'] = $userData;
 				$this->response->data['affiliation'] = $response->afiliacion;
+				$this->response->modal = TRUE;
 
 				$userSess = [
 					'userIdentity' => TRUE,
@@ -423,18 +440,51 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'No fue posible validar tus datos, por favor vuelve a intentarlo';
+				$this->response->msg = lang('USER_INVALID_DATE');;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -183:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'El número de tarjeta no es válido o ya fue registrada';
+				$this->response->msg = lang('GEN_INVALID_CARD');;
 				$this->response->data['btn1']['action'] = 'close';
 			break;
 			case -184:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'Alguno de los datos indicado no es válido';
+				$this->response->msg = lang('GEN_INVALID_DATA');;
 				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -286://OTP INVALIDO
+				$this->response->msg = lang('GEN_RESP_OTP_INVALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->data['btn1'] = [
+					'text' => lang('GEN_BTN_ACCEPT'),
+					'action' => 'close'
+				];
+			break;
+			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = lang('USER_IDENTIFY_EXIST');
+				$this->response->data['btn1']['action'] = 'close';
+			break;
+			case -424://MODAL OTP
+				$this->response->code = 2;
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
+				$this->response->data = [
+					'btn1'=> [
+						'text'=> lang('GEN_BTN_ACCEPT'),
+						'link'=> false,
+						'action'=> 'none'
+					],
+					'btn2'=> [
+						'text'=> lang('GEN_BTN_CANCEL'),
+						'link'=> false,
+						'action'=> 'close'
+					]
+				];
+				//$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
+				$this->session->set_flashdata('authToken','12346789abcdefg');
 			break;
 		}
 

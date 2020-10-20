@@ -73,7 +73,7 @@ class Novo_Business extends NOVO_Controller {
 		$detailCard = $this->loadModel($this->request);
 		$this->responseAttr($detailCard);
 
-		$this->render->titlePage = lang('GEN_MENU_CARD_DETAIL');
+		$this->render->titlePage = $this->request->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_MENU_CARD_DETAIL')) : lang('GEN_MENU_CARD_DETAIL');
 		$this->render->currentYear = date('Y');
 
 		foreach ($detailCard->data AS $index => $render) {

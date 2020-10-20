@@ -19,6 +19,8 @@ $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
+//CARD STYLES
+$lang['CONF_CARD_COLOR'] = 'white';
 //MENU
 $lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
@@ -43,6 +45,7 @@ $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['CONF_LONG_TEXT'] = '';
 //SIGNUO
 $lang['CONF_SECRET_KEY'] = 'ON';
+$lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
 //RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
 //FOOTER

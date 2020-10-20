@@ -18,6 +18,7 @@ function validateForms(form) {
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var usdAmount = /^[0-9]+(\.[0-9]*)?$/;
+	var validCode = /^[a-z0-9]+$/i;
 	var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -48,9 +49,11 @@ function validateForms(form) {
 			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
-			"numberCard": {required: true, pattern: numeric, maxlength: 16},
+			"emailCard": {required: true, pattern: emailValid},
+			"numberCard": {required: true,pattern: numeric,maxlength: 16},
 			"docmentId": {required: true, pattern: alphanum},
-			"cardPIN": {required: true, pattern: numeric},
+			"cardPIN": {required: true,pattern: numeric},
+			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"acceptTerms": {required: true},
 			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
 			"middleName": {pattern: alphaName},
@@ -92,9 +95,15 @@ function validateForms(form) {
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
+			"emailCard": lang.VALIDATE_EMAIL,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
 			"docmentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,
+			"codeOTP": {
+				required: 'Coloca el código recibido.',
+				pattern: 'El formato de código es inválido.',
+				maxlength: 'El formato de código es inválido.'
+			},
 			"acceptTerms": lang.VALIDATE_ACCEPT_TERMS,
 			"nickName": {
 				required: lang.VALIDATE_NICK_REQ,
