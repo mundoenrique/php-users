@@ -147,13 +147,13 @@
 				<div class="row mx-1">
 					<div class="form-group col-6">
 						<label for="email"><?= lang('USER_EMAIL') ?></label>
-						<input id="email" class="form-control <?= $updateUser; ?>" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
+						<input id="email" class="form-control <?= $updateUser; ?>" type="text" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
 						<div class="help-block"></div>
 					</div>
 					<?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
 						<div class="form-group col-6">
 							<label for="email"><?= lang('USER_CONFIRM_EMAIL') ?></label>
-							<input id="confirmEmail" class="form-control" type="email" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off" onpaste="return false">
+							<input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off" onpaste="return false">
 							<div class="help-block"></div>
 						</div>
 					<?php endif; ?>
