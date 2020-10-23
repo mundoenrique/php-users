@@ -320,6 +320,34 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		]
 	],
+	'changePin' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'currentPin',
+			'label' => 'currentPin',
+			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
+		],
+		[
+			'field' => 'newPin',
+			'label' => 'newPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|differs[currentPin]'
+		],
+	],
 	'userCardsList' => [
 		[
 			'field' => 'cardList',

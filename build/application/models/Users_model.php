@@ -20,13 +20,6 @@ class Users_model extends CI_Model
 		$infoOTP->tokenCliente = $codeOTP === '--' ? "" : $codeOTP;
 		$infoOTP->authToken = $this->session->flashdata('authToken') ?: '';
 
-		$newCore = array (
-			//'Usd',
-			//'Pe',
-			//'Co',
-			//'Ve'
-		);
-
 		$password = json_decode(base64_decode($userPass));
 		$password = $this->cryptography->decrypt(
 			base64_decode($password->plot),
@@ -37,6 +30,13 @@ class Users_model extends CI_Model
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
+
+		$newCore = array (
+			//'Usd',
+			//'Pe',
+			//'Co',
+			//'Ve'
+		);
 
 		$data = array(
 			'idOperation' => '1',
