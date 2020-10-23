@@ -175,7 +175,7 @@ $(function () {
 
 			who = 'CustomerSupport'; where = data.action;
 			callNovoCore(who, where, data, function (response) {
-				if (data.action == 'TemporaryLock' && response.success) {
+				if (data.action == 'temporaryLock' && response.success) {
 					var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
 					$('.status-text1').text(statusText);
 					$('.status-text2').text(statusText.toLowerCase());

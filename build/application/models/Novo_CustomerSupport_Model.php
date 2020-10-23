@@ -55,7 +55,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case 7:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
-				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
 				$this->response->data['btn1']['link'] = 'close';
 			break;
 			case -125:
@@ -108,7 +108,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case 7:
 				$this->response->title = 'Bloqueo permanente';
-				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
 				$this->response->data['btn1']['link'] = 'close';
 			break;
 			case -395:
@@ -275,5 +275,66 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('callWs_TransactionalLimits');
+	}
+	/**
+	 * @info Método para solictar el cambio de PIN de una tarjeta
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @author: Jhonatan Llerena
+	 * @date May 14th, 2019
+	 */
+	public function callWs_ChangePin_CustomerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Atención al cliente';
+		$this->dataAccessLog->function = 'Servicios';
+		$this->dataAccessLog->operation = 'Solictud de Cambio de Pin';
+
+		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
+		$expireDate = $this->cryptography->decrypt(
+			base64_decode($expireDate->plot),
+			utf8_encode($expireDate->password)
+		);
+
+		$this->dataRequest->idOperation = '110';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataRequest->accodUsuario = $this->session->userName;
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->prefix = $dataRequest->prefix;
+		$this->dataRequest->fechaExp = $dataRequest->expireDate;
+		$this->dataRequest->pin = $dataRequest->currentPin;
+		$this->dataRequest->pinNuevo = $dataRequest->newPin;
+		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
+		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
+
+		$response = $this->sendToService('callWs_TemporaryLock');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('El PIN de la tarjeta %s, ha sido cambiado exitosamente', [$dataRequest->cardNumberMask]);
+				$this->response->success = TRUE;
+				$this->response->data['btn1']['link'] = 'atencion-al-cliente';
+			break;
+			case 7:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+			case -395:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('La tarjeta %s tiene una reposición pendiente', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+			case -125:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
+				$this->response->data['btn1']['link'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_ChangePin');
 	}
 }
