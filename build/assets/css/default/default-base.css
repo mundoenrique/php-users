@@ -4364,6 +4364,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	background-size: 50px;
 }
 
+.left-virtual{
+	left: 15px;
+}
+
 .custom-switch-text::before {
 	top: 0.18rem;
 	width: 1rem;
