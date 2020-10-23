@@ -120,7 +120,7 @@
         <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
           <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
-          <button class="btn btn-small btn-loading btn-primary send" action="TemporaryLock">Continuar</button>
+          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
         </div>
       </div>
     </div>
@@ -181,16 +181,16 @@
                 <div class="help-block"></div>
               </div>
             </form>
-            <form id="PinManagementForm" name="PinManagementForm">
+            <form id="pinManagementForm" name="pinManagementForm">
               <div id="changePinInput" class="row hide">
                 <div class="form-group col-lg-4">
-                  <label for="changeCurrentPin">PIN actual</label>
-                  <input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin" autocomplete="off">
+                  <label for="currentPin">PIN actual</label>
+                  <input id="currentPin" class="form-control" type="password" name="currentPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
-                  <label for="changeNewPin">Nuevo PIN</label>
-                  <input id="changeNewPin" class="form-control" type="password" name="changeNewPin" autocomplete="off">
+                  <label for="newPin">Nuevo PIN</label>
+                  <input id="newPin" class="form-control" type="password" name="newPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
@@ -221,8 +221,8 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-                <a class="btn btn-small btn-link" href="<?= lang('GEN_NO_LINK'); ?>">Cancelar</a>
-                <button id="PinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
+                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
               </div>
             </form>
           </div>
