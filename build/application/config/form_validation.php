@@ -420,6 +420,32 @@ $config = [
 			'rules' => 'trim|required'
 		],
 	],
+	'uploadFile' => [
+		[
+			'field' => 'image[]',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'images[]',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'id_ext_per',
+			'rules' => 'trim|required|regex_match[/^[0-9\/]+$/]'
+		],
+	],
+	'requestFiles' => [
+		[
+			'field' => 'files',
+			'rules' => 'trim|required'
+		],
+	],
+	'eraseFiles' => [
+		[
+			'field' => 'files',
+			'rules' => 'trim|required'
+		],
+	],
 	// Old Arquitectures
 	'getdetail' => [
 		[

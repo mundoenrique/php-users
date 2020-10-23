@@ -192,3 +192,4 @@ $lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
+$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
