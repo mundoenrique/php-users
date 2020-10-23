@@ -46,7 +46,6 @@ function validateForms(form) {
 			"currentPass": {required: true},
 			"newPass": {required: true, differs: "#currentPass", validatePass: true},
 			"confirmPass": {required: true, equalTo: "#newPass"},
-			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
 			"emailCard": {required: true, pattern: emailValid},
@@ -74,6 +73,11 @@ function validateForms(form) {
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true },
+			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
+			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
+			"confirmPin": { required: true, equalTo: "#newPin" },
+			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
+			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -122,6 +126,33 @@ function validateForms(form) {
 			"initDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
+			"currentPin": {
+				required: lang.VALIDATE_CURRENT_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+			},
+			"newPin": {
+				required: lang.VALIDATE_NEW_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+				differs: lang.VALIDATE_DIFFERS_PIN,
+				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+			},
+			"confirmPin": {
+				required: lang.VALIDATE_CONFIRM_PIN,
+				equalTo: lang.VALIDATE_IQUAL_PIN
+			},
+			"generateNewPin": {
+				required: lang.VALIDATE_NEW_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+				differs: lang.VALIDATE_DIFFERS_PIN,
+				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+			},
+			"generateConfirmPin": {
+				required: lang.VALIDATE_CONFIRM_PIN,
+				equalTo: lang.VALIDATE_IQUAL_PIN
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -157,6 +188,10 @@ function validateForms(form) {
 		}
 
 		return valid
+	}
+
+	$.validator.methods.fourConsecutivesDigits = function(value, element, param) {
+		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
 
 	form.validate().resetForm();
