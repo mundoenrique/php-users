@@ -32,18 +32,24 @@ $(function () {
 		$(this).siblings('.section').addClass('current');
 	})
 
+	$('#pinManagementForm').find('input').prop('disabled', true);
+	$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
 	pinManagement.first().prop('checked', true);
 	$('#' + pinManagement.first().attr('id') + 'Input').removeClass('hide');
-	$('#PinManagementBtn').attr('action', pinManagement.first().attr('id'));
+	$('#pinManagementBtn').attr('action', pinManagement.first().attr('id'));
+	$('#' + pinManagement.first().attr('id') + 'Input').find('input').prop('disabled', false);
+	$('#' + pinManagement.first().attr('id') + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE);
 
 	pinManagement.on('change', function (e) {
 		var currentActions
 		currentActions = e.currentTarget.id;
-		$('#PinManagementForm').find('.row').addClass('hide');
-		$('#PinManagementForm').find('input').prop('disabled', true);
+		$('#pinManagementForm').find('.row').addClass('hide');
+		$('#pinManagementForm').find('input').prop('disabled', true);
+		$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
 		$('#' + currentActions + 'Input').removeClass('hide');
 		$('#' + currentActions + 'Input').find('input').prop('disabled', false);
-		$('#PinManagementBtn').attr('action', currentActions);
+		$('#' + currentActions + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE)
+		$('#pinManagementBtn').attr('action', currentActions);
 	})
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
@@ -123,10 +129,22 @@ $(function () {
 		var thisAction = $(this);
 		var action = thisAction.attr('action');
 		var validForm = true;
+		var dataFormAction = {};
 		$('#action').val(action);
 
-		if (action == 'replacement') {
-			form = $('#replacementForm');
+		switch (action) {
+			case 'replacement':
+				form = $('#replacementForm');
+				dataFormAction.status = $('#replaceMotSol').val();
+				break;
+			case 'changePin':
+			case 'generatePin':
+				form = $('#pinManagementForm');
+				dataFormAction = getDataForm(form);
+				break;
+		}
+
+		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
 			validateForms(form);
 			validForm = form.valid();
 		}
@@ -136,14 +154,20 @@ $(function () {
 			data = getDataForm(form);
 			$('.nav-config-box').addClass('no-events');
 
+			if (action == 'changePin') {
+				delete dataFormAction.confirmPin;
+			}
+
+			if (action == 'generatePin') {
+				delete dataFormAction.generateConfirmPin;
+			}
+
 			if (thisAction.hasClass('btn')) {
 				insertFormInput(true);
 				btnText = thisAction.text().trim()
 				thisAction.html(loader);
 
-				if (action == 'replacement') {
-					data.status = $('#replaceMotSol').val();
-				}
+				Object.assign(data, dataFormAction);
 			} else {
 				$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
 				$('.hide-out').addClass('hide');
