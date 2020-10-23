@@ -76,6 +76,9 @@
         <input type="hidden" name="cardNumber" class="hidden" value="<?= $cards->cardNumber; ?>">
         <input type="hidden" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask; ?>">
         <input type="hidden" name="prefix" class="hidden" value="<?= $cards->prefix; ?>">
+        <?php if (isset($expireDate)): ?>
+        <input type="hidden" name="expireDate" class="hidden" value="<?= $cards->expireDate; ?>">
+        <?php endif; ?>
         <input type="hidden" name="status" class="hidden" value="<?= $cards->status; ?>">
         <input type="hidden" name="brand" class="hidden" value="<?= $cards->brand; ?>">
 				<input type="hidden" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">

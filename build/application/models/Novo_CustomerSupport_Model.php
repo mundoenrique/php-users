@@ -302,7 +302,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->prefix = $dataRequest->prefix;
-		$this->dataRequest->fechaExp = $dataRequest->expireDate;
+		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->pin = $dataRequest->currentPin;
 		$this->dataRequest->pinNuevo = $dataRequest->newPin;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
