@@ -1474,6 +1474,10 @@ label {
 .right { float: right !important }
 .float-none { float: none !important }
 
+/* Coordinates */
+.l-0  { left: 0 !important }
+.r-0 { right: 0 !important }
+
 /* Overflow */
 .overflow-auto   { overflow: auto !important }
 .overflow-hidden { overflow: hidden !important }
@@ -4362,10 +4366,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .card-detail .visa-electron {
 	background-position: bottom 20px right 30px;
 	background-size: 50px;
-}
-
-.left-virtual{
-	left: 15px;
 }
 
 .custom-switch-text::before {

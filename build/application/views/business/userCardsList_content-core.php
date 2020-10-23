@@ -25,7 +25,7 @@
         <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
         <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
           <p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?>
-            <span class="warning semibold h6 capitalize absolute left-virtual"><br><?= $cards->virtualCard?></span>
+            <span class="warning semibold h6 capitalize absolute ml-2 l-0"><br><?= $cards->virtualCard?></span>
           </p>
           <p class="item-cardnumber mb-0"><?= $cards->cardNumberMask ?></p>
           <p class="item-balance mb-0 h6 light text">
