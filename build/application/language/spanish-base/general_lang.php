@@ -198,6 +198,8 @@ $lang['GEN_VIRTUAL'] = '%s virtual';
 $lang['GEN_VIRTUAL_DISJOIN'] = '~';
 $lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
 $lang['GEN_INVALID_CARD'] = 'El número de tarjeta no es válido o ya fue registrada.';
+
+$lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

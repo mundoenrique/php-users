@@ -44,6 +44,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		validateForms(form, {handleMsg: false});
 		if(form.valid()) {
 
+
 			var txtBtnTrigger = btnTrigger.innerHTML.trim();
 			btnTrigger.innerHTML = msgLoadingWhite;
 			btnTrigger.disabled = true;
@@ -60,6 +61,11 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 			);
+
+			data.currentPassword = bdb_cryptoPass(data.currentPassword);
+			data.newPassword = bdb_cryptoPass(data.newPassword);
+			data.confirmPassword = bdb_cryptoPass(data.confirmPassword);
+
 			callNovoCore('POST', 'User', 'changePassword', data, function(response) {
 				btnTrigger.innerHTML = txtBtnTrigger;
 				btnTrigger.disabled = false;

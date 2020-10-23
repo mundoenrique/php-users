@@ -118,7 +118,7 @@ class Registro_model extends CI_Model {
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	//VALIDAR EXISTENCIA DE LA TARJETA O CUENTA EN LA BD
-	public function validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin,$claveWeb)
+	public function validar_cuenta($userName, $pais, $cuenta, $id_ext_per, $pin)
 	{
 	    //PARAMS                    //$sessionId - $username - $canal - $modulo - $function - $operacion
 		$logAcceso	= np_hoplite_log("", $userName,"personasWeb","validar cuenta","validar cuenta","validar cuenta");
@@ -126,15 +126,15 @@ class Registro_model extends CI_Model {
 		$id_ext_per	= base64_decode($id_ext_per);
 
 		$data		= json_encode(array(
-			"idOperation"		=> "18",
-			"className"			=> "com.novo.objects.TOs.CuentaTO",
-			"pais"				=> $pais,
-			"cuenta"			=> $cuenta,
-			"id_ext_per"		=> $id_ext_per,
-			"pin"				=> $pin,
-			"claveWeb"			=> $claveWeb,
+			"idOperation"			=> "18",
+			"className"				=> "com.novo.objects.TOs.CuentaTO",
+			"pais"						=> $pais,
+			"cuenta"					=> $cuenta,
+			"id_ext_per"			=> $id_ext_per,
+			"pin"							=> $pin,
+			'claveWeb' 				=> md5($pin),
 			"logAccesoObject"	=> $logAcceso,
-			"token"				=> ""
+			"token"						=> ""
 		));
 
 		log_message("info", "Request validar_cuenta: ".$data);
@@ -247,26 +247,45 @@ class Registro_model extends CI_Model {
 			$otroTelefono=$otroTelefono;
 		}
 
+		$password = json_decode(base64_decode($password));
+		$password = $this->cryptography->decrypt(
+			base64_decode($password->plot),
+			utf8_encode($password->password)
+		);
+
 		$passwordMobile	= strtoupper($password); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
+
+		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
+		// TODO: quitar logs
+		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
+		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en plano: ' . json_encode($passwordMobile));
+		// log_message('info', 'PRUEBA PASSWORD_MOBILE en Argon2: ' . json_encode($argon2Mobile->hexArgon2));
 
 		if($aplicaPerfil == 'S') {
 
 			$user = array(
-				"userName"			=> $userName,
+				"userName"				=> $userName,
 				"primerNombre"		=> $primerNombre,
 				"segundoNombre"		=> $segundoNombre,
 				"primerApellido"	=> $primerApellido,
 				"segundoApellido"	=> $segundoApellido,
 				"fechaNacimiento"	=> $fechaNacimiento,
-				"id_ext_per"		=> $numDoc,
+				"id_ext_per"			=> $numDoc,
 				"tipo_id_ext_per"	=> $typeIdentifier,
-				"codPais"			=> $pais,
-				"sexo"				=> $sexo,
-				"notEmail"			=> "1",
-				"notSms"			=> "1",
-				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"codPais"					=> $pais,
+				"sexo"						=> $sexo,
+				"notEmail"				=> "1",
+				"notSms"					=> "1",
+				"email"						=> $correo,
+				"password"				=> md5($password),
+				"passwordOld4"		=> md5($passwordMobile),
+				// TODO: Cambiar cuando servicio funcione
+				// 'password' => $argon2->hexArgon2,
+				// "passwordOld4"		=> $argon2Mobile->hexArgon2,
+				// 'hashMD5' => md5($password),
+				// 'hashMD5Old4' => md5($passwordMobile),
 			);
 
 			$tHabitacion = array(
@@ -288,7 +307,7 @@ class Registro_model extends CI_Model {
 
 				"notarjeta"					=> $notarjeta,
 				"idpersona"					=> $numDoc,
-                "nombre1"					=> $primerNombre,
+        "nombre1"					=> $primerNombre,
 				"nombre2"					=> $segundoNombre,
 				"apellido1"					=> $primerApellido,
 				"apellido2"					=> $segundoApellido,
@@ -345,15 +364,20 @@ class Registro_model extends CI_Model {
 				"primerApellido"	=> $primerApellido,
 				"segundoApellido"	=> $segundoApellido,
 				"fechaNacimiento"	=> $fechaNacimiento,
-				"id_ext_per"		=> $numDoc,
+				"id_ext_per"			=> $numDoc,
 				"tipo_id_ext_per"	=> $typeIdentifier,
-				"codPais"			=> $pais,
-				"sexo"				=> $sexo,
-				"notEmail"			=> "1",
-				"notSms"			=> "1",
-				"email"				=> $correo,
-				"password"			=> md5($password),
-				"passwordOld4"		=> md5($passwordMobile)
+				"codPais"					=> $pais,
+				"sexo"						=> $sexo,
+				"notEmail"				=> "1",
+				"notSms"					=> "1",
+				"email"						=> $correo,
+				"password"				=> md5($password),
+				"passwordOld4"		=> md5($passwordMobile),
+				// TODO: Cambiar cuando servicio funcione
+				// 'password' => $argon2->hexArgon2,
+				// "passwordOld4"		=> $argon2Mobile->hexArgon2,
+				// 'hashMD5' => md5($password),
+				// 'hashMD5Old4' => md5($passwordMobile),
 			);
 
 			$tHabitacion = array(
@@ -400,8 +424,10 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,1,'registrar_usuario');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
 		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-  	$data		= json_decode($response);
-		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1,'registrar_usuario'));
+		// TODO: Comentado para no registrar tarjeta
+  	// $data		= json_decode($response);
+		// $desdata	= json_decode(np_Hoplite_Decrypt($data->data,1,'registrar_usuario'));
+		$desdata	= json_decode("{'rc': '-9999'}");
 
 		log_message("info", "Response registrar_usuario: ".json_encode($desdata));
 

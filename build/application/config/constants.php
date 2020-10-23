@@ -141,21 +141,16 @@ define('CLIENT_ID', isset($_SERVER['CLIENT_ID']) ?
 	$_SERVER['CLIENT_ID'] : '');
 define('CLIENT_SECRET', isset($_SERVER['CLIENT_SECRET']) ?
 	$_SERVER['CLIENT_SECRET'] : '');
-
 define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
-
 define('CYPHER_BASE', isset($_SERVER['CYPHER_BASE']) ?
 	$_SERVER['CYPHER_BASE'] : ''
 );
-
 define('OAUTH_URL', isset($_SERVER['OAUTH_URL']) ?
 	$_SERVER['OAUTH_URL'] : ''
 );
-
 define('PROXY_IPS', isset($_SERVER['PROXY_IPS']) ?
 	$_SERVER['PROXY_IPS'] : ''
 );
-
 define('DB_HOSTNAME', isset($_SERVER['DB_HOSTNAME']) ?
 	$_SERVER['DB_HOSTNAME'] : 'localhost'
 );
@@ -181,7 +176,6 @@ define('DB_CHARSET', isset($_SERVER['DB_CHARSET']) ?
 define('DB_COLLATION', isset($_SERVER['DB_COLLATION']) ?
 	$_SERVER['DB_COLLATION'] : 'utf8_general_ci'
 );
-
 $arrayUri = explode('/', $_SERVER['REQUEST_URI']);
 $lang = end($arrayUri);
 define('LANGUAGE', $lang === 'en' ? 'en' : 'es');
@@ -200,12 +194,17 @@ $uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH 
 define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_'
 );
 unset($uriSegments);
-
 $typeIP = 'private';
 if (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE)) {
 	$typeIP = 'public';
 }
-
 $ipReal = $typeIP == 'private'? $_SERVER['REMOTE_ADDR']: '';
 define('IP_PROXI', $ipReal);
 unset($ipReal, $typeIP);
+
+define('ARGON2_MEMORY_LIMIT', $_SERVER['ARGON2_MEMORY_LIMIT'] ?? 8192);
+define('ARGON2_OPS_LIMIT', $_SERVER['ARGON2_OPS_LIMIT'] ?? 4);
+define('ARGON2_TYPE_ALG', $_SERVER['ARGON2_TYPE_ALG'] ?? SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13);
+define('ARGON2_LENGTH', $_SERVER['ARGON2_LENGTH'] ?? 93);
+define('ARGON2_SALT', $_SERVER['ARGON2_SALT'] ?? 'fdcf2077639765bc3ccee10ffacefe88');
+define('KEY_API', $_SERVER['KEY_API'] ?? 'b4556ab03a8a120d1e77abfc55f515e3');

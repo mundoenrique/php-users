@@ -48,7 +48,10 @@ class NOVO_Model extends CI_Model {
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->acCodCia = $this->session->enterpriseCod ?? '';
+		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod != '') {
+			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
+		}
+
 		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
