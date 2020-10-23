@@ -39,7 +39,7 @@ if ( ! function_exists('getContractApi_uploadFile'))
 	function getContractApi_uploadFile()
 	{
 		return [
-			"request" => ["key", "image", "images"]
+			"request" => ["key", "anverso", "reverso", "client", "type_document", "nro_document", "user_name"]
 		];
 	}
 }

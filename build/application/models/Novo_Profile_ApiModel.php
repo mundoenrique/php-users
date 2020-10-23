@@ -29,15 +29,28 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$resultData = "";
 
+		$this->configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
+			array(BASE_CDN_PATH,
+				'upload',
+				'profile',
+				strtoupper($dataRequest->client),
+				strtoupper($dataRequest->user_name))
+		);
+
 		if (!is_dir($this->configUploadFile['upload_path'])) {
 			mkdir($this->configUploadFile['upload_path'], 0755, TRUE);
 		}
 
-		$this->load->library('upload', $this->configUploadFile);
-		$this->upload->initialize($this->configUploadFile);
-
 		foreach ($dataRequest as $key => $value) {
 			if (is_array($value)) {
+				$fileName = $dataRequest->type_document . "_" . strtoupper(substr($key,0,1)) . "_" . $dataRequest->nro_document;
+				$this->configUploadFile['file_name'] = $this->encrypt_connect->cryptography(
+					$fileName
+				);
+
+				$this->load->library('upload', $this->configUploadFile);
+				$this->upload->initialize($this->configUploadFile);
+
 				if (!$this->upload->do_upload($key)) {
 					$statusCodeResponse = 400;
 
@@ -45,7 +58,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				} else {
 					$statusCodeResponse = 200;
 
-					$resultData = $this->upload->data()['file_name'];
+					$resultData = $this->upload->data()['orig_name'];
 				}
 
 				$dataResponse[$key] = [

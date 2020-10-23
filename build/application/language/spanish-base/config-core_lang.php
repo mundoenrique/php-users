@@ -88,5 +88,5 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'max_size' => '1024',
 	'max_width' => '1024',
 	'max_height' => '1024',
-	'encrypt_name' => TRUE,
+	'encrypt_name' => FALSE,
 ];
