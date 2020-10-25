@@ -57,7 +57,7 @@ $(function () {
 function cardModal() {
 	var inputModal = $('#cardList').html();
 	$('.nav-config-box').removeClass('no-events');
-	data = {
+	modalBtn = {
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
 			action: 'destroy'
@@ -67,5 +67,5 @@ function cardModal() {
 		posMy: 'top+50px',
 		posAt: 'top+50px',
 	}
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
 }

@@ -60,7 +60,7 @@ $(function () {
 					loginIpMsg+='</div>';
 					loginIpMsg+='</form>';
 
-					appMessages(response.title, loginIpMsg, response.icon,response.data);
+					appMessages(response.title, loginIpMsg, response.icon, response.modalBtn);
 
 					formcodeOTP = $('#formVerificationOTP');
 
