@@ -207,7 +207,7 @@ function cardModal() {
 	var brand = $('#brand').val();
 
 	$('.nav-config-box').removeClass('no-events');
-	data = {
+	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
 			action: 'destroy'
@@ -238,7 +238,7 @@ function cardModal() {
 	inputModal += 	'</div>';
 	inputModal += '</div>';
 
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, data);
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
 
 	$('#accept').append('&nbsp;<span id="countdownTimer">30s</span>');
 	startTimer(30, $('#countdownTimer'));

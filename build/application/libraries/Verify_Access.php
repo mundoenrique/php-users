@@ -145,6 +145,7 @@ class Verify_Access {
 				case 'twirlsCommercial':
 				case 'transactionalLimits':
 				case 'replacement':
+				case 'changePin':
 					$auth = $this->CI->session->has_userdata('products');
 				break;
 				case 'expensesCategory':

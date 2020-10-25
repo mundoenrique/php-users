@@ -25,7 +25,7 @@ $(function () {
 	});
 
 	if (code > 2) {
-		appMessages(title, msg, icon, data)
+		appMessages(title, msg, icon, modalBtn)
 	}
 
 	$('.big-modal').on('click', function () {
@@ -139,7 +139,7 @@ function callNovoCore(who, where, request, _response_) {
 		}
 
 		if (response.code === codeResp) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 
 		_response_(response);
@@ -153,14 +153,14 @@ function callNovoCore(who, where, request, _response_) {
 
 		var response = {
 			code: codeResp,
-			data: {
+			modalBtn: {
 				btn1: {
 					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
 					action: 'redirect'
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.data);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -171,20 +171,20 @@ function getCookieValue() {
 	);
 }
 
-function appMessages(title, message, icon, data) {
-	var btn1 = data.btn1;
-	var btn2 = data.btn2;
-	var maxHeight = data.maxHeight || 350;
+function appMessages(title, message, icon, modalBtn) {
+	var btn1 = modalBtn.btn1;
+	var btn2 = modalBtn.btn2;
+	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
+		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || lang.CONF_MODAL_WIDTH,
-		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
+		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
 		minHeight: 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
@@ -305,7 +305,9 @@ function cryptoPass(jsonObject, req) {
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
-		dataForm[$(element).attr('id')] = $(element).val().trim()
+		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
+			dataForm[$(element).attr('id')] = $(element).val().trim()
+		}
 	})
 
 	return dataForm

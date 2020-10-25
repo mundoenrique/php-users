@@ -46,7 +46,6 @@ function validateForms(form) {
 			"currentPass": {required: true},
 			"newPass": {required: true, differs: "#currentPass", validatePass: true},
 			"confirmPass": {required: true, equalTo: "#newPass"},
-			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
 			"emailCard": {required: true, pattern: emailValid},
@@ -60,7 +59,7 @@ function validateForms(form) {
 			"surName": {pattern: alphaName},
 			"birthDate": {required: true, pattern: date.dmy},
 			"gender": {required: true},
-			"confirmEmail": {required: true, equalTo: "#email"},
+			"confirmEmail": {required: true, pattern: emailValid, equalTo: "#email"},
 			"landLine": {pattern: phone},
 			"mobilePhone": {required: true, pattern: phone},
 			"otherPhoneNum": {
@@ -74,6 +73,11 @@ function validateForms(form) {
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true },
+			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
+			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
+			"confirmPin": { required: true, equalTo: "#newPin" },
+			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
+			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -115,13 +119,44 @@ function validateForms(form) {
 			"surName": lang.VALIDATE_SUR_NAME,
 			"birthDate": lang.VALIDATE_BIRTHDATE,
 			"gender": lang.VALIDATE_GENDER,
-			"confirmEmail": lang.VALIDATE_CONFIRM_EMAIL,
+			"confirmEmail": {
+				required: lang.VALIDATE_EMAIL,
+				pattern: lang.VALIDATE_EMAIL,
+				equalTo: lang.VALIDATE_CONFIRM_EMAIL,
+			},
 			"landLine": lang.VALIDATE_PHONE,
 			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
 			"otherPhoneNum": lang.VALIDATE_PHONE,
 			"initDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
+			"currentPin": {
+				required: lang.VALIDATE_CURRENT_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+			},
+			"newPin": {
+				required: lang.VALIDATE_NEW_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+				differs: lang.VALIDATE_DIFFERS_PIN,
+				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+			},
+			"confirmPin": {
+				required: lang.VALIDATE_CONFIRM_PIN,
+				equalTo: lang.VALIDATE_IQUAL_PIN
+			},
+			"generateNewPin": {
+				required: lang.VALIDATE_NEW_PIN,
+				pattern: lang.VALIDATE_FORMAT_PIN,
+				maxlength: lang.VALIDATE_FORMAT_PIN,
+				differs: lang.VALIDATE_DIFFERS_PIN,
+				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+			},
+			"generateConfirmPin": {
+				required: lang.VALIDATE_CONFIRM_PIN,
+				equalTo: lang.VALIDATE_IQUAL_PIN
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -157,6 +192,10 @@ function validateForms(form) {
 		}
 
 		return valid
+	}
+
+	$.validator.methods.fourConsecutivesDigits = function(value, element, param) {
+		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
 
 	form.validate().resetForm();

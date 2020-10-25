@@ -24,13 +24,13 @@ function finishSession() {
 	}
 
 	btnKeepSession.addClass('btn-large-xl signout');
-	data = {
+	modalBtn = {
 		btn1: {
 			text: 'Mantener sesión',
 			action: 'close'
 		}
 	}
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, data);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, modalBtn);
 	btnKeepSession = $('.signout');
 
 	resetTimesession = setTimeout(function() {
