@@ -29,6 +29,9 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$resultData = "";
 
+		$filesToProcess = array_diff_key((array) $dataRequest, ["key" => "", "data" => ""]);
+		$dataRequest = json_decode($this->encrypt_connect->cryptography($dataRequest->data, FALSE));
+
 		$this->configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
 			array(BASE_CDN_PATH,
 				'upload',
@@ -41,7 +44,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 			mkdir($this->configUploadFile['upload_path'], 0755, TRUE);
 		}
 
-		foreach ($dataRequest as $key => $value) {
+		foreach ($filesToProcess as $key => $value) {
 			if (is_array($value)) {
 				$fileName = $dataRequest->type_document . "_" . strtoupper(substr($key,0,1)) . "_" . $dataRequest->nro_document;
 				$this->configUploadFile['file_name'] = $this->encrypt_connect->cryptography(
@@ -90,12 +93,22 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 
 		$dir = $this->configUploadFile['upload_path'];
-		$decryptDataRequest = $this->encrypt_connect->cryptography($dataRequest->files, FALSE);
-		$arrayFilesToDelete = explode(',', $decryptDataRequest);
+		$decryptDataRequest = $this->encrypt_connect->cryptography($dataRequest->data, FALSE);
+		$dataRequest = json_decode($decryptDataRequest);
+		$arrayFilesToDelete = explode(',', $dataRequest->files);
 
 		foreach ($arrayFilesToDelete as $fileName) {
 			$fileName = trim($fileName);
-			$fullPath = join(DIRECTORY_SEPARATOR, array($dir, $fileName));
+			$fullPath = join(DIRECTORY_SEPARATOR,
+				array(BASE_CDN_PATH,
+					'upload',
+					'profile',
+					strtoupper($dataRequest->client),
+					strtoupper($dataRequest->user_name),
+					$fileName
+				),
+			);
+
 			if (!file_exists($fullPath)) {
 				$statusCodeResponse = 400;
 
@@ -147,20 +160,52 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 	}
 
 	/**
-	 * @info Método para generar el request a enviar para la eliminación de archivos
+	 * @info Método para encriptar el contenido del campo data para las peticiones de imagenes
 	 * @author Pedro A. Torres F.
-	 * @date Oct. 18h, 2020
+	 * @date Oct. 24h, 2020
 	 */
-	public function requestFiles($dataRequest)
+	private function encryptFielData($dataRequest)
 	{
-		log_message('INFO', 'NOVO API Model: requestFiles Method Initialized');
+		log_message('INFO', 'NOVO API Model: createEncryptData Method Initialized');
 
-		$dataResponse = $this->encrypt_connect->cryptography($dataRequest->files);
+		$dataToEncrypt = array_diff_key((array) $dataRequest, ["key" => ""]);
+		$dataResponse = $this->encrypt_connect->cryptography(json_encode($dataToEncrypt));
 
 		$this->response->code = 200;
 		$this->response->data = $dataResponse;
 
+		log_message('DEBUG', 'API createEncryptData: ' . json_encode($this->response));
+		return $this->response;
+	}
+
+	/**
+	 * @info Método para generar el request a enviar para la eliminación de archivos
+	 * @author Pedro A. Torres F.
+	 * @date Oct. 18h, 2020
+	 */
+	public function dataErase($dataRequest)
+	{
+		log_message('INFO', 'NOVO API Model: dataErase Method Initialized');
+
+		$this->encryptFielData($dataRequest);
+
 		log_message('DEBUG', 'API requestFiles: ' . json_encode($this->response));
 		return $this->response;
 	}
+
+	/**
+	 * @info Método para generar el request a enviar para la eliminación de archivos
+	 * @author Pedro A. Torres F.
+	 * @date Oct. 24h, 2020
+	 */
+	public function dataUpload($dataRequest)
+	{
+		log_message('INFO', 'NOVO API Model: dataUpload Method Initialized');
+
+		$this->encryptFielData($dataRequest);
+
+		log_message('DEBUG', 'API dataUpload: ' . json_encode($this->response));
+		return $this->response;
+	}
+
 }
