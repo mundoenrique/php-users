@@ -12,5 +12,4 @@ RUN apt-get update -y \
 	&& docker-php-ext-enable mcrypt \
 	&& a2enmod headers rewrite \
 	&& a2ensite 000-default.conf \
-	&& chown -R www-data:www-data ../ \
-	&& apachectl restart
+	&& chown -R www-data:www-data ../

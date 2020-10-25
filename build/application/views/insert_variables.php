@@ -6,11 +6,12 @@
 	var country = '<?= $countryUri; ?>';
 	var client = '<?= $this->config->item('client'); ?>';
 	var newViews = '<?= $this->config->item('new-views'); ?>';
-	var code = <?= isset($code) ? $code : 0; ?> ;
-	var title = '<?= isset($title) ? $title: ' '; ?>';
-	var msg = '<?= isset($msg) ? $msg : ' '; ?>';
-	var icon = '<?= isset($icon) ? $icon : ' '; ?>';
-	var data = <?= isset($data) ? $data : 0; ?> ;
+	var code = <?= $code ?? 0; ?> ;
+	var title = '<?= $title ?? ' '; ?>';
+	var msg = '<?= $msg ?? ' '; ?>';
+	var icon = '<?= $icon ?? ' '; ?>';
+	var data = <?= $data ?? 0; ?> ;
+	var modalBtn = <?= $modalBtn ?? 0; ?> ;
 	var logged = <?= json_encode($this->session->has_userdata('logged')); ?> ;
 	var sessionTime = <?= $sessionTime; ?> ;
 	var callModal = <?= $callModal; ?> ;

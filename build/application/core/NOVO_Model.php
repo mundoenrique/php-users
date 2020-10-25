@@ -90,10 +90,11 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
+		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->data = new stdClass();
 		$this->response->msg = '';
-		$this->response->icon = lang('GEN_ICON_WARNING');
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -101,12 +102,6 @@ class NOVO_Model extends CI_Model {
 				'action'=> 'redirect'
 			]
 		];
-		$this->response->data = $arrayResponse;
-
-		if(!$this->input->is_ajax_request()) {
-			$this->response->data = new stdClass();
-			$this->response->data->resp = $arrayResponse;
-		}
 
 		switch($this->isResponseRc) {
 			case -29:
@@ -128,6 +123,7 @@ class NOVO_Model extends CI_Model {
 				$this->response->icon = lang('GEN_ICON_DANGER');
 		}
 
+		$this->response->modalBtn = $arrayResponse;
 		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
 
 		return $responseModel;

@@ -1,4 +1,7 @@
 'use strict'
+
+var interval;
+
 $(function () {
 	displaymoves()
 	who = 'Business';
@@ -61,6 +64,12 @@ $(function () {
 			})
 		}
 	})
+
+	$('#productdetail').on('click', '#virtual-details', function (e) {
+		e.preventDefault();
+		cardModal()
+	});
+
 })
 
 function getMovements() {
@@ -189,3 +198,79 @@ function filesAction(action, response) {
 		downLoadfiles(response.data);
 	}
 }
+
+function cardModal() {
+	var inputModal;
+	var img = $('#cardImage').val();
+	var fullName = $('#fullName').val();
+	var cardNumberMask = $('#cardNumberMask').val();
+	var brand = $('#brand').val();
+
+	$('.nav-config-box').removeClass('no-events');
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'destroy'
+		},
+		maxHeight: 600,
+		width: 530,
+		posMy: 'top+50px',
+		posAt: 'top+50px',
+	}
+
+	inputModal = '<h4 class="h5">' + lang.GEN_MENU_CARD_DETAIL + '</h4>';
+	inputModal += '<div class="flex mt-3 mx-auto flex-wrap justify-center">';
+	inputModal += 	'<div class="card-details row justify-center ml-4 mr-5">';
+	inputModal += 		'<div class="card-detail p-1 mx-1">';
+	inputModal += 			'<img class="item-img" src="' + img + '" alt="' + fullName + '">';
+	inputModal += 			'<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+	inputModal += 				'<p class="item-cardnumber mb-0 h4">' + cardNumberMask + '</p>';
+	inputModal += 				'<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence 06/25</small></p>';
+	inputModal += 				'<p class="item-category uppercase">' + fullName + '</p>';
+	inputModal += 			'</div>';
+	inputModal += 		'</div>';
+	inputModal += 		'<div id="checked-form" class="form-group col-12 py-1">';
+	inputModal += 			'<div class="custom-control custom-switch custom-control-inline flex justify-center">';
+	inputModal += 				'<input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency" >';
+	inputModal += 				'<label class="custom-control-label custom-switch-text" for="travelAgency" title="4555"></label>';
+	inputModal += 			'</div>';
+	inputModal += 		'</div>';
+	inputModal += 	'</div>';
+	inputModal += '</div>';
+
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
+
+	$('#accept').append('&nbsp;<span id="countdownTimer">30s</span>');
+	startTimer(30, $('#countdownTimer'));
+}
+
+function startTimer(duration, display) {
+	var timer = duration,
+			minutes, seconds;
+
+	interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		seconds = parseInt(timer % 60, 10);
+		console.log(seconds);
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.text(+seconds+"s");
+
+		if (--timer < 0) {
+			$("#system-info").dialog("destroy");
+			stopInterval()
+		}
+	}
+}
+
+function stopInterval() {
+	clearInterval(interval);
+}
+
+$('#accept').on('click', function(e) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+	stopInterval();
+	$("#system-info").dialog("destroy");
+});

@@ -60,6 +60,8 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->cardNumber = '';
 		$this->render->prefix = '';
 		$this->render->status = '';
+		$this->render->isVirtual = '';
+		$this->render->tittleVirtual = '';
 		$this->render->callMoves = '0';
 		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
 
@@ -72,6 +74,8 @@ class Novo_Reports extends NOVO_Controller {
 			$this->render->cardNumber = $cardsList[0]->cardNumber;
 			$this->render->prefix = $cardsList[0]->prefix;
 			$this->render->status = $cardsList[0]->status;
+			$this->render->isVirtual = $cardsList[0]->isVirtual;
+			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
 			$this->render->callMoves = '1';
 		}
 
