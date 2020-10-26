@@ -7,10 +7,6 @@ $(function () {
 	var cityCod = $('#city').val();
 	longProfile = $('#longProfile').val();
 
-	if (lang.CONF_CONTAC_DATA == 'OFF') {
-		$('select').find('option').prop('disabled', false)
-	}
-
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
 		minDate: '-90y',
@@ -56,6 +52,11 @@ $(function () {
 			updateProfile();
 		}
 	});
+
+	if (lang.CONF_PROFESSION == 'ON') {
+		getProfessions();
+	}
+
 	if (lang.CONF_CONTAC_DATA == 'ON') {
 		if (cityCod == '') {
 			$('#city')
@@ -80,8 +81,9 @@ $(function () {
 			});
 		}
 
-		getProfessions();
 		getStates();
+	} else {
+		$('select').find('option').prop('disabled', false)
 	}
 });
 
