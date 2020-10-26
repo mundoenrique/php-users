@@ -87,11 +87,11 @@ class Verify_Access {
 
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
+		$this->responseDefect->icon = lang('GEN_ICON_DANGER');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
 		$this->responseDefect->data = base_url('inicio');
-		$this->responseDefect->icon = lang('GEN_ICON_DANGER');
-		$this->responseDefect->data = [
+		$this->responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
 				'link'=> 'inicio',
@@ -99,7 +99,7 @@ class Verify_Access {
 			]
 		];
 
-		if($this->CI->session->has_userdata('logged')) {
+		if ($this->CI->session->has_userdata('logged')) {
 			$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), lang('GEN_VALIDATION_LOGGED'));
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
@@ -134,6 +134,10 @@ class Verify_Access {
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
+				case 'professionsList':
+				case 'statesList':
+				case 'cityList':
+				case 'regions':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
 				case 'getBalance':
