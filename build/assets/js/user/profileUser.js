@@ -7,6 +7,10 @@ $(function () {
 	var cityCod = $('#city').val();
 	longProfile = $('#longProfile').val();
 
+	if (lang.CONF_CONTAC_DATA == 'OFF') {
+		$('select').find('option').prop('disabled', false)
+	}
+
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
 		minDate: '-90y',
@@ -52,32 +56,33 @@ $(function () {
 			updateProfile();
 		}
 	});
+	if (lang.CONF_CONTAC_DATA == 'ON') {
+		if (cityCod == '') {
+			$('#city')
+				.prop('disabled', true)
+				.find('option:selected')
+				.text('Selecciona');
+		}
 
-	if (cityCod == '') {
-		$('#city')
-			.prop('disabled', true)
-			.find('option:selected')
-			.text('Selecciona');
-	}
-
-	$('#state').on('change', function () {
-		getCities(this.value)
-	});
-
-	if (longProfile == 'S') {
-		$('#district')
-			.prop('disabled', true)
-			.find('option:selected')
-			.prop('disabled', true)
-			.text('Selecciona');
-
-		$('#city').on('change', function () {
-			getdistrict(this.value)
+		$('#state').on('change', function () {
+			getCities(this.value)
 		});
-	}
 
-	getProfessions();
-	getStates();
+		if (longProfile == 'S') {
+			$('#district')
+				.prop('disabled', true)
+				.find('option:selected')
+				.prop('disabled', true)
+				.text('Selecciona');
+
+			$('#city').on('change', function () {
+				getdistrict(this.value)
+			});
+		}
+
+		getProfessions();
+		getStates();
+	}
 });
 
 function updateProfile() {

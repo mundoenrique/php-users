@@ -755,7 +755,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->countrySess,
-			'acCodEstado' => $dataRequest->department,
+			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address
