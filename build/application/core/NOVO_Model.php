@@ -93,8 +93,8 @@ class NOVO_Model extends CI_Model {
 		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->code = lang('GEN_DEFAULT_CODE');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->data = new stdClass();
 		$this->response->msg = '';
+		$this->response->data = new stdClass();
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -146,7 +146,7 @@ class NOVO_Model extends CI_Model {
 			$responsetoView->$pos = $response;
 		}
 
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView));
+		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
 
 		unset($responsetoView);
 
