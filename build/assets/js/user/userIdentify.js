@@ -28,71 +28,9 @@ $(function () {
 		if (form.valid()) {
 			$(this).html(loader)
 			insertFormInput(true)
-			validateIdentity(data);
+			validateIdentity();
 		}
 	})
-
-	function validateIdentity(data) {
-		who = 'user'; where = 'UserIdentify'
-		callNovoCore(who, where, data, function(response) {
-			switch (response.code) {
-				case 0:
-					var dataUser = response.data;
-					dataUser = JSON.stringify({dataUser})
-					dataUser = cryptoPass(dataUser);
-					$('#signupForm')
-					.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
-					.submit()
-				break;
-				case 2:
-					$('#identityBtn').html(btnText);
-					var oldID = $('#accept').attr('id');
-					$('#accept').attr('id', 'send-otp-btn');
-
-					loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
-					loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
-					loginIpMsg+='<div class="row">';
-					loginIpMsg+=	'<div class="form-group col-8">';
-					loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
-					loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
-					loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
-					loginIpMsg+=	'</div>';
-					loginIpMsg+='</div>';
-					loginIpMsg+='</form>';
-
-					appMessages(response.title, loginIpMsg, response.icon, response.modalBtn);
-
-					formcodeOTP = $('#formVerificationOTP');
-
-					$('#send-otp-btn').on('click', function(e) {
-						e.preventDefault();
-						e.stopImmediatePropagation();
-						btnTextOtp = $('#send-otp-btn').html();
-						formInputTrim(formcodeOTP);
-						validateForms(formcodeOTP);
-						if(formcodeOTP.valid()){
-							$('#formVerificationOTP input').attr('disabled', true);
-							$(this)
-							.off('click')
-							.html(loader)
-							.attr('id', oldID);
-							data.codeOtp = $('#codeOTP').val();
-							validateIdentity(data);
-						}
-					});
-
-					$('#cancel').on('click', function() {
-						insertFormInput(false);
-					});
-					$('#send-otp-btn').html(btnTextOtp);
-				break;
-				default:
-					insertFormInput(false);
-					$('#identityBtn').html(btnText);
-				break;
-			}
-		})
-	}
 
 	$(radioType).change(function(){
 		if($(this).attr('value')=='virtual'){
@@ -112,9 +50,71 @@ $(function () {
 		}
 	});
 
-	function resetInput(){
-		form.find('input:text').val('').removeAttr('aria-describedby');
-		form.find('.help-block').text('');
-		form.find('.has-error').removeClass('has-error');
-	}
+	$('#system-info').on('click', '.send-otp', function (e) {
+		formcodeOTP = $('#formVerificationOTP');
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		formInputTrim(formcodeOTP);
+		validateForms(formcodeOTP);
+		if(formcodeOTP.valid()){
+			$('#formVerificationOTP input').attr('disabled', true);
+			$(this)
+			.off('click')
+			.html(loader)
+			.removeClass('send-otp');
+			data.codeOtp = $('#codeOTP').val();
+			validateIdentity();
+		}
+	});
+
+	$('#system-info').on('click', '.cancel-send-otp', function () {
+		$(this).
+		removeClass('cancel-send-otp');
+		insertFormInput(false);
+	});
+
 });
+
+function validateIdentity() {
+	who = 'user'; where = 'UserIdentify'
+	callNovoCore(who, where, data, function(response) {
+		switch (response.code) {
+			case 0:
+				var dataUser = response.data;
+				dataUser = JSON.stringify({dataUser})
+				dataUser = cryptoPass(dataUser);
+				$('#signupForm')
+				.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
+				.submit()
+			break;
+			case 2:
+				$('#identityBtn').html(btnText);
+				$('#accept').addClass('send-otp');
+				$('#cancel').addClass('cancel-send-otp');
+
+				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
+				loginIpMsg+='<div class="row">';
+				loginIpMsg+=	'<div class="form-group col-8">';
+				loginIpMsg+=	'<label id="label_codeOTP" for="codeOTP">'+response.labelInput+'</label>';
+				loginIpMsg+=	'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
+				loginIpMsg+=    '<div id="msgErrorCodeOTP" class="help-block"></div>';
+				loginIpMsg+=	'</div>';
+				loginIpMsg+='</div>';
+				loginIpMsg+='</form>';
+
+				appMessages(response.title, loginIpMsg, response.icon, response.modalBtn);
+			break;
+			default:
+				insertFormInput(false);
+				$('#identityBtn').html(btnText);
+			break;
+		}
+	})
+}
+
+function resetInput(){
+	form.find('input:text').val('').removeAttr('aria-describedby');
+	form.find('.help-block').text('');
+	form.find('.has-error').removeClass('has-error');
+}
