@@ -121,8 +121,8 @@ $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitu
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
-$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
-$lang['GEN_VALIDATION_LOGGED'] = 'serás desconectado.';
+$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
+$lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 //DATATABLES
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';

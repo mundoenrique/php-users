@@ -595,13 +595,15 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
-		$profileData->departmentCod = $response->direccion->acCodEstado ?? '';
-		$profileData->department = $response->direccion->acEstado ?? '';
+		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
+		$profileData->state = $response->direccion->acEstado ?? '';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? '';
 
 		if ($profileData->longProfile == 'S') {
-			//$profileData->city = $response->afiliacion->afiliacion ?? '';
+			$profileData->district = $response->registro->afiliacion->distrito;
+			$profileData->civilStatus = $response->registro->afiliacion->edocivil;
+			$profileData->employee = $response->registro->afiliacion->labora;
 		}
 
 		$phonesList['otherPhoneNum'] = '';
@@ -753,7 +755,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->countrySess,
-			'acCodEstado' => $dataRequest->department,
+			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address

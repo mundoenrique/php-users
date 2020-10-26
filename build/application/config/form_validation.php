@@ -432,6 +432,30 @@ $config = [
 			'rules' => 'trim|alpha|required'
 		]
 	],
+	'professionsList' => [
+		[
+			'field' => 'prof',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'statesList' => [
+		[
+			'field' => 'state',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'cityList' => [
+		[
+			'field' => 'stateCode',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'regions' => [
+		[
+			'field' => 'groupCode',
+			'rules' => 'trim|numeric|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',
