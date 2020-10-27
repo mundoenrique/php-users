@@ -96,6 +96,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('BASE_URL', $_SERVER['BASE_URL']);
 define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
+define('BASE_UPLOAD_PATH', $_SERVER['BASE_UPLOAD_PATH']);
 define('WS_URL', $_SERVER['WS_URL']);
 define('WS_KEY', $_SERVER['WS_KEY']);
 

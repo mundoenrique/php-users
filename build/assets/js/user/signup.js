@@ -52,6 +52,20 @@ $(function () {
 			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
+
+			var inputFile = $('input[type="file"]');
+			var filesToUpload = [];
+
+			if (inputFile.length) {
+				inputFile.each(function(i,e){
+					filesToUpload.push(
+						{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
+					);
+				})
+			}
+
+			data.files = filesToUpload;
+
 			$(this).html(loader);
 			insertFormInput(true);
 			where = 'SignUpData';

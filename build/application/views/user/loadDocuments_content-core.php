@@ -27,7 +27,7 @@
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
               </div>
-              <input type="file" name="myFile" class="drop-zone-input" accept=".png, .jpg, .jpeg">
+							<input type="file" name="frontINE" id="frontINE" class="drop-zone-input">
             </div>
             <div class="help-block"></div>
           </div>
@@ -39,7 +39,7 @@
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_B_DOC'); ?></span>
               </div>
-              <input type="file" name="myFile" class="drop-zone-input" accept=".png, .jpg, .jpeg">
+              <input type="file" name="backINE" id="backINE" class="drop-zone-input">
             </div>
             <div class="help-block"></div>
           </div>

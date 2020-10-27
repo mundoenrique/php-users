@@ -48,6 +48,19 @@ $(function () {
 			insertFormInput(true);
 			who = 'User'; where = 'updateProfile';
 
+			var inputFile = $('input[type="file"]');
+			var filesToUpload = [];
+
+			if (inputFile.length) {
+				inputFile.each(function(i,e){
+					filesToUpload.push(
+						{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
+					);
+				})
+			}
+
+			data.files = filesToUpload;
+
 			callNovoCore(who, where, data, function(response) {
 				$('#profileUserBtn').text(btnText);
 				insertFormInput(false);
