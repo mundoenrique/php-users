@@ -8,8 +8,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 		//core
 		for (var i = 0; i < products.length; i++) {
 			products[i].addEventListener('click',function(e){
-				var formElement = $$.getElementById("frmProducto");
-				$$.getElementById("nroTarjeta").value = this.id;
+				var formElement = $$.getElementById("frmProduct-"+e.currentTarget.id);
 				formElement.submit();
 			});
 		}

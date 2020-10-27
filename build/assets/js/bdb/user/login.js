@@ -257,7 +257,7 @@ $$.addEventListener("DOMContentLoaded", function () {
 	function getCredentialLogin() {
 		return {
 			user: $$.getElementById("username").value,
-			pass: $.md5($$.getElementById("userpwd").value),
+			pass: bdb_cryptoPass($$.getElementById("userpwd").value),
 			active: "",
 		};
 	}
@@ -319,4 +319,6 @@ $$.addEventListener("DOMContentLoaded", function () {
 			: 99;
 		responseCodeLogin[property](response, textBtn);
 	}
+
+
 });

@@ -7,7 +7,7 @@
 			<div class="pt-3">
 				<h2 class="h4 regular tertiary">Selecciona un producto</h2>
 				<div class="line mt-1"></div>
-				<p class="mt-3">A continuación indica el producto al cual le deseas realizar una operación de Atención al cliente:</p>
+				<p class="mt-3"></p>
 				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('atencioncliente'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
@@ -17,13 +17,13 @@
 					</form>
 
 					<?php
-						if (count($data) > 0 and $data !== '--') {
-							foreach ($data as $row) {
+						if (count($data->data) > 0) {
+							foreach ($data->data as $row) {
 								$state = '';
 								$infoCard = '';
 								$title = '';
 								switch ($row) {
-									case ($row['bloqueo'] !== '' && $row['bloqueo'] !== 'NE'):
+									case ($row['bloqueo'] !== '' && $row['bloqueo'] == 'PB'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
 										if ($row['bloqueo'] !== 'PB') {
 											$state = 'inactive cursor-default';
@@ -51,6 +51,21 @@
 										<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara']; ?></p>
 										<?= $infoCard ?>
 									</div>
+									<form action="<?= base_url('atencioncliente'); ?>" id="frmProduct-<?= $row['noTarjeta']; ?>" method="post">
+										<input type='hidden' name='<?php echo $novoName; ?>' value='<?php echo $novoCook ?>'>
+										<input type='hidden' id='noTarjeta' name='noTarjeta' value='<?= $row['noTarjeta']; ?>'>
+										<input type='hidden' id='prefix' name='prefix' value='<?= $row['prefix']; ?>'>
+										<input type='hidden' id='noTarjetaConMascara' name='noTarjetaConMascara' value='<?= $row['noTarjetaConMascara']; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
+										<input type='hidden' id='bloqueo' name='bloqueo' value='<?= $row['bloqueo']; ?>'>
+										<input type='hidden' id='nom_plastico' name='nom_plastico' value='<?= $row['nom_plastico']; ?>'>
+										<input type='hidden' id='marca' name='marca' value='<?= $row['marca']; ?>'>
+										<input type='hidden' id='nombre_producto' name='nombre_producto' value='<?= $row['nombre_producto']; ?>'>
+										<input type='hidden' id='fechaExp' name='fechaExp' value='<?= $row['fechaExp']; ?>'>
+										<input type='hidden' id='nomEmp' name='nomEmp' value='<?= $row['nomEmp']; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
+										<input type='hidden' id='availableServices' name='availableServices' value='<?= htmlspecialchars(json_encode($row['availableServices']), ENT_QUOTES, 'UTF-8'); ?>'>
+									</form>
 								</div>
 							<?php
 							}
@@ -61,7 +76,7 @@
 						<?php
 						} else {
 						?>
-							<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS'); ?></h3>
+							<h3 class="h4 regular tertiary pt-3"><?= $data->msg; ?></h3>
 						<?php
 						}
 						?>

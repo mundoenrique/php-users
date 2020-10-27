@@ -25,10 +25,14 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"support/services"
 		);
 		$this->load->model('Novo_Business_Model', 'business');
-		$userCardList = $this->business->callWs_UserCardsList_Business();
+		$this->request->module = $view;
+		$userCardList = $this->business->callWs_UserCardsList_Business($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$serviceList = $userCardList->data->serviceList;
@@ -70,6 +74,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->RecoverPinText = 'Recuperar PIN';
 		$this->render->activeEvents = 'no-events';
 		$this->render->uniqueEvent = $uniqueEvent;
+		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
 
 		if ($cardsTotal == 1) {
 			$this->render->brand = $cardsList[0]->brand;
@@ -83,6 +88,15 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->status = $cardsList[0]->status;
 			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquear';
 			$this->render->activeEvents = '';
+
+			if (!in_array($this->render->status, ['PB', ''])) {
+				$this->render->serviceList = [];
+				unset($userCardList->data->cardsList, $userCardList->data->serviceList);
+				$userCardList->code = 3;
+				$userCardList->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+				$userCardList->msg = $this->render->status == 'NE' ? lang('CUST_INACTIVE_PRODUCT') : lang('CUST_PERMANENT_LOCK');
+				$this->responseAttr($userCardList);
+			}
 		}
 
 		if (count($serviceList) == 1 && $serviceList[0] == '120') {

@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CUST_REPLACE_REQUEST'] = 'Solicitud %s de reposición';
+$lang['CUST_INACTIVE_PRODUCT'] = 'Tu tarjeta se encuentra inactiva';
+$lang['CUST_PERMANENT_LOCK'] = 'Tu tarjeta tiene una reposición pendiente';
 $lang['CUST_TWIRLS_COMMERCIAL'] = 'Giros comerciales';
 $lang['CUST_TRANS_LIMITS'] = 'Limites transaccionales';
 $lang['CUST_CARD_NUMBER'] = 'Nro. de tarjeta';
@@ -73,3 +75,9 @@ $lang['CUST_NON_RESULTS'] = 'No fue posible encontrar los registros de tu tarjet
 $lang['CUST_CARD_TEMPORARY_LOCK'] = 'La tarjeta presenta un bloqueo temporal, para realizar esta consulta debes desbloquearla.';
 $lang['CUST_CARD_CANCELED'] = 'La tarjeta esta cancelada, no puedes hacer esta consulta.';
 $lang['CUST_CARD_UNAVAILABLE'] = 'La tarjeta no esta disponible para realizar esta consulta.';
+$lang['CUST_REPLACE_REASON'] = [
+	'41' => 'Tarjeta perdida',
+	'43' => 'Tarjeta robada',
+	'TD' => 'Tarjeta deteriorada',
+	'TR' => 'Reemplazar tarjeta',
+];

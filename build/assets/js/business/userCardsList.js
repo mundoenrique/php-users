@@ -24,11 +24,11 @@ $(function () {
 			formBalance = $(element).find('form')
 			data = getDataForm(formBalance);
 			who = 'Business';  where = 'GetBalance'
-
-			callNovoCore(who, where, data, function(response) {
-				$(element).find('.item-info .item-balance').text(response.msg)
-
-			})
+			if (data.status == '') {
+				callNovoCore(who, where, data, function(response) {
+					$(element).find('.item-info .item-balance').text(response.msg)
+				})
+			}
 		})
 	} else {
 		$('.get-detail').find('.item-balance').text('clic para consultar tu saldo')

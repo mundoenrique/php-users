@@ -1,5 +1,6 @@
 'use strict'
-var $$ = document;
+
+var $$ = document, cpo_cook;
 var toggleMenu = document.getElementsByClassName('navbar-toggler')[0],
     collapseMenu = document.getElementsByClassName('navbar-collapse')[0];
 
@@ -351,4 +352,38 @@ var createElement = function (tagName, attrs) {
 function formatCurrency(locales, options, number) {
     var formatted = new Intl.NumberFormat(locales, options).format(number);
     return formatted;
+}
+
+	/**
+ * @info Cifra la contraseña del usuario
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 27th, 2019
+ * @modifed Pedro Torres
+ */
+function bdb_cryptoPass(jsonObject, req) {
+
+	req = req == undefined ? false : req;
+	cpo_cook = bdb_getCookieValue();
+	var cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
+
+	if(!req) {
+		cipherObject = btoa(JSON.stringify({
+			password: cipherObject,
+			plot: btoa(cpo_cook)
+		}));
+	}
+
+	return cipherObject;
+}
+
+/**
+ * @info Obtiene valor de cookie
+ * @author J. Enrique Peñaloza Piñero
+ * @date December 18th, 2019
+ * @modifed Pedro Torres
+ */
+function bdb_getCookieValue() {
+	return decodeURIComponent(
+		document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+	);
 }

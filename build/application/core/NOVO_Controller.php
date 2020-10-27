@@ -26,6 +26,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $greeting;
 	protected $products;
 	protected $folder;
+	protected $nameApi;
 	private $ValidateBrowser;
 
 	public function __construct()
@@ -48,91 +49,119 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
 			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
-		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
-		$this->render->widget =  FALSE;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
 		$this->render->callServer = $this->render->callModal;
 		$this->ValidateBrowser = FALSE;
+		$this->nameApi = '';
+
+		if ($this->countryUri === "api") {
+			$transforNameApi = explode("-", $this->uri->segment(4));
+			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+		}
+
 		$this->optionsCheck();
 	}
 	/**
 	 * Método para varificar datos génericos de la solcitud
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 16th, 2020
+	 * @Modified Pedro A. Torres F.
+	 * @date Oct. 1th, 2020
 	 */
 	private function optionsCheck()
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		languageLoad('generic', $this->router->fetch_class());
-		clientUrlValidate($this->countryUri);
-		languageLoad('specific', $this->router->fetch_class());
-		$this->skin = $this->config->item('client');
-		$this->form_validation->set_error_delimiters('', '---');
-		$this->config->set_item('language', 'spanish-base');
+		if ($this->countryUri === "api") {
+			$objRequest = new stdClass();
+			$typeResource = $this->input->get_request_header('Content-Type', TRUE);
 
-		if ($this->rule !== 'suggestion') {
-			$this->ValidateBrowser = $this->checkBrowser();
-		}
+			if (strpos($typeResource, 'json')) {
+				$objRequest = json_decode($this->input->raw_input_stream);
+			} elseif (strpos($typeResource, 'form') && count($_POST) > 0) {
+				$objRequest->request = (object) $_POST;
+			}
 
-		if ($this->session->has_userdata('time')) {
-			$customerTime = $this->session->time->customerTime;
-			$serverTime = $this->session->time->serverTime;
-			$currentTime = (int) date("H");
-			$currentTime2 = date("Y-d-m H:i:s");
-			$serverelapsed = $currentTime - $serverTime;
-			$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
-			$elapsed = $customerTime + $serverelapsed;
-			$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
-		}
+			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
 
-		switch ($this->greeting) {
-			case $this->greeting >= 19 && $this->greeting <= 23:
-				$this->render->greeting = lang('GEN_EVENING');
-				break;
-			case $this->greeting >= 12 && $this->greeting < 19:
-				$this->render->greeting = lang('GEN_AFTERNOON');
-				break;
-			case $this->greeting >= 0 && $this->greeting < 12:
-				$this->render->greeting = lang('GEN_MORNING');
-				break;
-		}
-
-		if ($this->input->is_ajax_request()) {
-			$this->dataRequest = json_decode(
-				$this->security->xss_clean(
-					strip_tags(
-						$this->cryptography->decrypt(
-							base64_decode($this->input->get_post('plot')),
-							utf8_encode($this->input->get_post('request'))
-						)
-					)
-				)
-			);
 		} else {
-			$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
-			$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
-			if ($this->session->has_userdata('logged') && $accept && $module) {
-				redirect(base_url('perfil-usuario'), 'location', 301);
+			if ($this->session->has_userdata('userName')) {
+				$data = ['username' => $this->session->userName];
+				$this->db->where('id', $this->session->session_id)
+				->update('cpo_sessions', $data);
 			}
 
-			$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
-			$valid = TRUE;
+			languageLoad('generic', $this->router->fetch_class());
+			clientUrlValidate($this->countryUri);
+			languageLoad('specific', $this->router->fetch_class());
+			$this->skin = $this->config->item('client');
+			$this->form_validation->set_error_delimiters('', '---');
+			$this->config->set_item('language', 'spanish-base');
 
-			if ($_POST && $access) {
-				log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+			if ($this->rule !== 'suggestion') {
+				$this->ValidateBrowser = $this->checkBrowser();
+			}
 
-				$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+			if ($this->session->has_userdata('time')) {
+				$customerTime = $this->session->time->customerTime;
+				$serverTime = $this->session->time->serverTime;
+				$currentTime = (int) date("H");
+				$currentTime2 = date("Y-d-m H:i:s");
+				$serverelapsed = $currentTime - $serverTime;
+				$serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
+				$elapsed = $customerTime + $serverelapsed;
+				$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
+			}
 
-				if ($valid) {
-					$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+			switch ($this->greeting) {
+				case $this->greeting >= 19 && $this->greeting <= 23:
+					$this->render->greeting = lang('GEN_EVENING');
+					break;
+				case $this->greeting >= 12 && $this->greeting < 19:
+					$this->render->greeting = lang('GEN_AFTERNOON');
+					break;
+				case $this->greeting >= 0 && $this->greeting < 12:
+					$this->render->greeting = lang('GEN_MORNING');
+					break;
+			}
+
+			if ($this->input->is_ajax_request()) {
+					$this->dataRequest = json_decode(
+						$this->security->xss_clean(
+							strip_tags(
+								$this->cryptography->decrypt(
+									base64_decode($this->input->get_post('plot')),
+									utf8_encode($this->input->get_post('request'))
+								)
+							)
+						)
+					);
+			} else {
+				$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+				$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+
+				if ($this->session->has_userdata('logged') && $accept && $module) {
+					redirect(base_url('perfil-usuario'), 'location', 301);
 				}
-			}
 
-			$this->preloadView($access && $valid);
+				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
+				$valid = TRUE;
+
+				if ($_POST && $access) {
+					log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+
+					$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+
+					if ($valid) {
+						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+					}
+				}
+
+				$this->preloadView($access && $valid);
+			}
 		}
 	}
 	/**
@@ -252,7 +281,17 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: '.$module);
 
 		$userMenu = new stdClass();
-		$userMenu->mainMenu = mainMenu();
+		$mainMenu = mainMenu();
+
+		if ($this->session->has_userdata('noService')) {
+			unset($mainMenu['CUSTOMER_SUPPORT']);
+		}
+
+		if ($this->session->has_userdata('canTransfer') && $this->session->canTransfer == 'N') {
+			unset($mainMenu['PAYS_TRANSFER']);
+		}
+
+		$userMenu->mainMenu = $mainMenu;
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
@@ -261,5 +300,28 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
 		$this->load->view('master_content-core', $this->render);
+	}
+		/**
+	 * Método para cargar un modelo especifico
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 16th, 2020
+	 */
+	protected function loadApiModel($request = FALSE)
+	{
+		log_message('INFO', 'NOVO Controller: loadApiModel Method Initialized');
+
+		$responseModel = $this->tool_api->setResponseNotValid();
+		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: '.$this->model.'/'.$this->method;
+
+		if (file_exists(APPPATH."models/{$this->model}.php")) {
+			$this->load->model($this->model,'modelLoaded');
+
+			$method = $this->method;
+			$responseModel = $this->modelLoaded->$method($request);
+			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: '.$this->model.'/'.$this->method;
+		}
+		log_message('DEBUG', $showMsgLog);
+
+		return $responseModel;
 	}
 }

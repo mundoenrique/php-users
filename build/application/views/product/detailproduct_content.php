@@ -7,6 +7,8 @@
 	<input type='hidden' name='frmMonth' value=''>
 	<input type='hidden' name='frmYear' value=''>
 	<input type='hidden' name='frmTypeFile' value=''>
+	<input type='hidden' name='frmNoTarjeta' value=''>
+	<input type='hidden' name='frmTotalProducts' value=''>
 </form>
 
 <div id="detail" class="detail-content h-100 bg-content">
@@ -23,7 +25,7 @@
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<div class="flex">
-						<?php if ($totalProducts > 1) : ?>
+						<?php if ($data['totalProducts'] > 1) : ?>
 							<a id="other-product" class="flex items-baseline btn btn-link btn-small p-0 mr-1" href="<?= base_url('vistaconsolidada') ?>">
 								<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
 							</a>
@@ -117,14 +119,14 @@
 						</label>
 					</div>
 					<ul class="stack list-inline mb-0 flex items-stretch">
-						<li class="stack-item px-1 list-inline-item rounded">
-							<a id="downloadPDF" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
+						<li class="stack-item list-inline-item rounded">
+							<a id="downloadPDF" class="block px-1" href="#" rel="subsection"><span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span></a>
 						</li>
-						<li class="stack-item px-1 list-inline-item rounded">
-							<a id="downloadXLS" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
+						<li class="stack-item list-inline-item rounded">
+							<a id="downloadXLS" class="block px-1" href="#" rel="subsection"><span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span></a>
 						</li>
-						<li class="stack-item stack-item-primary px-1 list-inline-item rounded">
-							<a id="downloadExtract" href="#" title="Descarga tu extracto" rel="subsection">Descarga tu extracto</a>
+						<li class="stack-item stack-item-primary list-inline-item rounded">
+							<a id="downloadExtract" class="block px-1" href="#" title="Descarga tu extracto" rel="subsection">Descarga tu extracto</a>
 						</li>
 					</ul>
 				</nav>

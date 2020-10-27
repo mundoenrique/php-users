@@ -75,8 +75,8 @@ if (!function_exists('accessLog')) {
 		$CI = &get_instance();
 
 		return $accessLog = [
-			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
-			"userName" => $CI->session->userdata('userName') ?: $dataAccessLog->userName,
+			"sessionId"=> $CI->session->sessionId ?? '',
+			"userName" => $CI->session->userName ?? $dataAccessLog->userName,
 			"canal" => $CI->config->item('channel'),
 			"modulo"=> $dataAccessLog->modulo,
 			"function"=> $dataAccessLog->function,

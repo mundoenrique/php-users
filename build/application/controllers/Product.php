@@ -8,6 +8,7 @@ class Product extends BDB_Controller
 	{
 		parent::__construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
+		$this->listProducts = 'muchos productos';
 	}
 
 	public function listProduct()
@@ -20,18 +21,19 @@ class Product extends BDB_Controller
 			redirect(base_url('inicio'), 'location');
 			exit();
 		}
-
-		$this->session->unset_userdata('setProduct');
+		$this->session->unset_userdata('setProductDetail');
+		$this->session->unset_userdata('servicesAvailableCards');
 
 		$dataProduct = $this->loadDataProduct();
-		if (is_array($dataProduct) && count($dataProduct) == 1) {
+		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
+			if (in_array("120",  $dataProduct->data[0]['availableServices'])) {
 
-			$this->session->set_userdata('setProduct', $dataProduct[0]);
-			if (in_array("120",  $dataProduct[0]['availableServices'])) {
+				$this->session->set_userdata('setProductServices', $dataProduct->data[0]);
 				redirect('/atencioncliente');
-			} else {
-				redirect("/detalle");
 			}
+
+			$dataProduct = $this->session->set_userdata('setProductDetail',$dataProduct->data[0]);
+			redirect("/detalle");
 		}
 
 		array_push(
@@ -62,16 +64,16 @@ class Product extends BDB_Controller
 	public function loadDataProduct($card = '')
 	{
 		$this->load->model('Product_Model', 'modelLoad');
-		$response = $this->modelLoad->callWs_loadProducts_Product();
+		$loadProducts = $this->modelLoad->callWs_loadProducts_Product();
+		$totalProducts = count($loadProducts->data);
 
-		if (count($response->data) < 1) {
-			return $response->msg;
+		if ( $totalProducts < 1) {
+			return $loadProducts;
 		}
 
-		$this->session->set_userdata("totalProducts", count($response->data));
-
 		$dataRequeried = [];
-		foreach ($response->data as $row) {
+		$servicesExport = [];
+		foreach ($loadProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
@@ -92,10 +94,18 @@ class Product extends BDB_Controller
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
+				"totalProducts" => $totalProducts,
 				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
+
+			array_push($servicesExport, [
+				"noTarjeta" => $row->noTarjeta,
+				"availableService" => json_encode($row->services)
+			]);
 		}
-		return $dataRequeried;
+		$loadProducts->data = $dataRequeried;
+		$this->session->set_userdata("servicesAvailableCards", $servicesExport);
+		return $loadProducts;
 	}
 
 	public function detailProduct()
@@ -127,20 +137,21 @@ class Product extends BDB_Controller
 			);
 		}
 
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
+		$dataProduct = $this->session->userdata('setProductDetail');
 
-			if (is_null($_POST['nroTarjeta'])){
+		if (is_null($dataProduct)){
+
+			$dataProduct = array_filter($_POST, function($k) {
+				return $k !== 'cpo_name';
+			}, ARRAY_FILTER_USE_KEY);
+
+			unset($_POST);
+
+			if (count($dataProduct) < 1) {
 				redirect('/vistaconsolidada');
 			}
 
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
-		}
-
-
-		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
-
-			redirect('/atencioncliente');
+			$this->session->set_userdata('setProductDetail', $dataProduct);
 		}
 
 		$this->load->model('Product_Model', 'modelLoad');
@@ -170,11 +181,14 @@ class Product extends BDB_Controller
 				$dataProduct['totalInMovements'] = ["totalIncome" => $transactionsHistory->data->totalAbonos, "totalExpense" => $transactionsHistory->data->totalCargos];
 			}
 
-			$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
-			if (is_object($data) && $data->rc === "200") {
+			if (lang('loadBalanceInTransit') === 'TRUE') {
 
-				$dataProduct['pendingTransactions'] = $data->pendingTransactions;
-				$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions($dataProduct['pendingTransactions']);
+				$data = $this->modelLoad->callWs_balanceInTransit_Product($dataProduct);
+				if (is_object($data) && $data->rc === "200") {
+
+					$dataProduct['pendingTransactions'] = $data->pendingTransactions;
+					$dataProduct['totalInPendingTransactions'] = $this->calculateTotalTransactions($dataProduct['pendingTransactions']);
+				}
 			}
 		}
 
@@ -187,7 +201,6 @@ class Product extends BDB_Controller
 		$this->views = ['product/' . $view];
 
 		$this->render->data = $dataProduct;
-		$this->render->totalProducts =  $this->session->userdata('totalProducts');
 		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 		$this->render->years = $years;
 		$this->render->titlePage = lang('GEN_DETAIL_VIEW') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
@@ -197,11 +210,12 @@ class Product extends BDB_Controller
 
 			$this->render->loadAlert = '1';
 			$this->render->msgAlert = $dataAlert->message;
-			$this->render->redirectAlert = $dataAlert->redirect;
+			$this->render->action = $dataAlert->action;
 			$this->render->monthSelected = $dataAlert->monthSelected;
 			$this->render->yearSelected = $dataAlert->yearSelected;
-		}
 
+			$this->session->unset_userdata('showAlert');
+		}
 		$this->loadView($view);
 	}
 
@@ -245,16 +259,9 @@ class Product extends BDB_Controller
 	{
 		log_message('INFO', 'NOVO Consolidated: downloadDetail Method Initialized');
 
-		if (!$this->session->userdata('logged_in')) {
+		if (!$this->session->userdata('logged_in') && is_null($_POST['frmNoTarjeta'])) {
 			redirect(base_url('inicio'), 'location');
 			exit();
-		}
-		$dataProduct = [];
-
-		if (!$dataProduct = $this->session->userdata('setProduct')) {
-
-			$dataProduct = $this->loadDataProduct(@$_POST['nroTarjeta'] ?: '')[0];
-			$this->session->set_userdata('setProduct', $dataProduct);
 		}
 
 		$this->load->model('Product_Model', 'modelLoad');
@@ -263,7 +270,7 @@ class Product extends BDB_Controller
 			$dataRequest->month = $_POST['frmMonth'];
 			$dataRequest->year = $_POST['frmYear'];
 			$dataRequest->typeFile = $_POST['frmTypeFile'];
-			$dataRequest->noTarjeta = $dataProduct['noTarjeta'];
+			$dataRequest->noTarjeta = $_POST['frmNoTarjeta'];
 
 			$response = $this->modelLoad->getFile_Product($dataRequest);
 			if ($response->code == 0) {
@@ -271,13 +278,14 @@ class Product extends BDB_Controller
 				$oDate = new DateTime();
 				$dateFile = $oDate->format("YmdHis");
 				np_hoplite_byteArrayToFile($response->data->archivo, strtolower($response->data->formatoArchivo), $response->data->nombre . '_' . $dateFile);
-			} elseif ($response->code == -150) {
+			} else {
 
 				$dataForAlert = new stdClass();
 				$dataForAlert->message = $response->msg;
-				$dataForAlert->redirect = $response->redirect;
+				$dataForAlert->action = 'close';
 				$dataForAlert->monthSelected = $_POST['frmMonth'];
 				$dataForAlert->yearSelected = $_POST['frmYear'];
+				$dataForAlert->noTarjeta = $_POST['frmNoTarjeta'];
 
 				unset($_POST['frmMonth']);
 				unset($_POST['frmYear']);
