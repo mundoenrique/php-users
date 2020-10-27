@@ -2,7 +2,7 @@
 var screenSize;
 var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,_#]+$/;
 var dataTableLang;
 var validator;
 var currentDate;

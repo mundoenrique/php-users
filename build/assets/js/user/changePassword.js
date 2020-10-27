@@ -83,7 +83,7 @@ function passStrength(pswd) {
 		valid = false;
 	}
 
-	if (pswd.match(/^[\w!@\*\-\?¡¿+\/.,#]+$/)) {
+	if (pswd.match(/([!@\*\-\?¡¿+\/.,_#])/) && pswd.match(/^([a-z0-9!@\*\-\?¡¿+\/.,_#])+$/i)) {
 		$('.pwd-rules #special').removeClass('rule-invalid').addClass('rule-valid');
 		valid = !valid ? valid : true;
 	} else {
