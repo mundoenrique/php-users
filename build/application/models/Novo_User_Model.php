@@ -277,7 +277,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
-		//$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -388,6 +387,16 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userSess);
 			break;
+			case 200://MODAL OTP
+				$this->response->code = 2;
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
+			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('USER_INVALID_DATE');;
@@ -412,17 +421,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('USER_IDENTIFY_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-			case -424://MODAL OTP
-				$this->response->code = 2;
-				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
-				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
-				$this->response->modalBtn['btn1']['action'] = 'none';
-				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
-				$this->response->modalBtn['btn2']['action'] = 'destroy';
-				//$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
-				$this->session->set_flashdata('authToken','12346789abcdefg');
 			break;
 		}
 
