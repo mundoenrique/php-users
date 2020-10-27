@@ -45,6 +45,9 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
+						$cardRecord->isVirtual = $cardsRecords->tvirtual;
+						$cardRecord->virtualCard = $cardsRecords->tvirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
+						$cardRecord->tittleVirtual = $cardsRecords->tvirtual ? lang('GEN_VIRTUAL_CARD') : '';
 
 						switch ($cardRecord->status) {
 							case '':
@@ -100,7 +103,7 @@ class Novo_Business_Model extends NOVO_Model {
 				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
 				}
-				$this->response->data->resp['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 		}
 
 		$serviceList = array_unique($serviceList);
@@ -205,15 +208,9 @@ class Novo_Business_Model extends NOVO_Model {
 
 		}
 
-		if ($this->input->is_ajax_request()) {
-			$this->response->data['movesList'] = $movesList;
-			$this->response->data['balance'] = $balance;
-			$this->response->data['totalMoves'] = $totalMoves;
-		} else {
-			$this->response->data->movesList = $movesList;
-			$this->response->data->balance = $balance;
-			$this->response->data->totalMoves = $totalMoves;
-		}
+		$this->response->data->movesList = $movesList;
+		$this->response->data->balance = $balance;
+		$this->response->data->totalMoves = $totalMoves;
 
 		return $this->responseToTheView('callWs_CardDetail');
 	}
@@ -268,8 +265,8 @@ class Novo_Business_Model extends NOVO_Model {
 			default:
 
 		}
-		$this->response->data['movesList'] = $movesList;
-		$this->response->data['totalMoves'] = $totalMoves;
+		$this->response->data->movesList = $movesList;
+		$this->response->data->totalMoves = $totalMoves;
 
 		return $this->responseToTheView('callWs_MonthlyMovements');
 	}
@@ -307,16 +304,16 @@ class Novo_Business_Model extends NOVO_Model {
 						$file = $response->bean->archivo ?? $response->archivo;
 						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
-						$this->response->data['file'] = $file;
-						$this->response->data['name'] = $name.'.'.$ext;
-						$this->response->data['ext'] = $ext;
+						$this->response->data->file = $file;
+						$this->response->data->name = $name.'.'.$ext;
+						$this->response->data->ext = $ext;
 					break;
 					case 'send':
 						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
 						$this->response->icon = lang('GEN_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');
-						$this->response->data['btn1']['action'] = 'destroy';
+						$this->response->modalBtn['btn1']['action'] = 'destroy';
 					break;
 				}
 			break;
@@ -359,6 +356,9 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
+						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
+						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';

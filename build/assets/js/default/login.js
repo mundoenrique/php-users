@@ -1,4 +1,4 @@
-var base_url, base_cdn, skin;
+var base_url, base_cdn, skin, link;
 var base_url = $('body').attr('data-app-url');
 var base_cdn = $('body').attr('data-app-cdn');
 var skin = $('body').attr('data-app-skin');
@@ -260,7 +260,26 @@ function login(user = null, pass = null, dataOPT = {}) {
 				$("#novo-control-ip").dialog("close");
 			}
 
-			if (data == 1) {
+			  if (data.validateRedirect) {
+					link = base_url + '/' + data.codPaisUrl + '/inicio';
+					$("#dialog-new-core").dialog({
+						modal: "true",
+						width: "440px",
+						open: function (event, ui) {
+							$(".ui-dialog-titlebar-close", ui.dialog).hide();
+						},
+					});
+
+					$('#link-href').attr('href', link);
+					$('#link-href').text(link);
+					$("#login").html('Ingresar');
+
+					$("#redirect-new-core").click(function () {
+						$("#dialog-new-core").dialog("close");
+						$(location).attr('href', link);
+					});
+			}
+			  else if (data == 1) {
 				$("#dialog-login-ve").dialog({
 					modal: "true",
 					width: "440px",
