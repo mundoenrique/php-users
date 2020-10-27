@@ -336,13 +336,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
 		$this->dataRequest->email = $dataRequest->emailCard ?? '';
 		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
+		$authToken = $this->session->flashdata('authToken') ??  '';
 		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
-
-		/*$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
-		$this->dataRequest->codigoOtp =[
+		$this->dataRequest->otp =[
+			'authToken' => $authToken,
 			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
-			'authToken' => $authToken
-		];*/
+		];
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
