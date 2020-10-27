@@ -2,18 +2,20 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$('.cover-spin').hide()
+	$('.cover-spin').hide();
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
+		minDate: '-90y',
 		maxDate: '-18y',
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (selectedDate) {
-			$(this).focus();
-			$('#genderMale').focus();
+			$(this)
+				.focus()
+				.blur();
 		}
-	})
+	});
 
 	$('#phoneType').change(function () {
 		var selectedOption = $(this).children('option:selected').val();
@@ -25,7 +27,7 @@ $(function () {
 		}
 
 		$('#otherPhoneNum').prop('disabled', disableInput);
-	})
+	});
 
 	$('#profileUserBtn').on('click', function(e) {
 		e.preventDefault();
@@ -49,7 +51,7 @@ $(function () {
 			callNovoCore(who, where, data, function(response) {
 				$('#profileUserBtn').text(btnText);
 				insertFormInput(false);
-			})
+			});
 		}
-	})
-})
+	});
+});

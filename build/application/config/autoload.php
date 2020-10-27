@@ -65,6 +65,7 @@ $autoload['libraries'] = array(
 	'parser',
 	'form_validation',
 	'Encrypt_Connect',
+	'Tool_Api',
 	'Cryptography',
 	'Verify_Access'
 );

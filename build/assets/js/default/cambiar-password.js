@@ -144,16 +144,12 @@ base_cdn = $('body').attr('data-app-cdn');
 					$("#continuar").hide();
 					$("#loading").show();
 
-					var cpo_cook = decodeURIComponent(
-						document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
-
 					var dataRequest = JSON.stringify ({
-						passwordOld:old,
-						passwordNew:newC
+						passwordOld:novo_cryptoPass(old),
+						passwordNew:novo_cryptoPass(newC)
 					});
 
-					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
+					dataRequest = novo_cryptoPass(dataRequest, true);
 
 					$.post(base_url +"/users/actualizarPassword",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 

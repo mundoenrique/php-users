@@ -1,3 +1,4 @@
+
 <div id="dashboard" class="dashboard-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -10,33 +11,71 @@
 				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('detallereporte'); ?>" id="frmProducto" method="post">
 						<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
-						<input id='nroTarjeta' type='hidden' name='nroTarjeta' value=''>
-						<input id='noTarjetaConMascara' type='hidden' name='noTarjetaConMascara' value=''>
-						<input id='prefix' type='hidden' name='prefix' value=''>
+						<input type='hidden' name='nroTarjeta' id='nroTarjeta' value=''>
+						<input type='hidden' name='noTarjetaConMascara' id='noTarjetaConMascara' value=''>
+						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
-					<?php if (is_array($data) && count($data) > 0): ?>
-					<?php foreach($data as $row): ?>
-					<div id="<?= $row['nroTarjeta'];?>" class="dashboard-item big-modal p-1 mx-1 mb-1">
-						<img class="item-img" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
-						<div class="item-info <?= strtolower($row['marca']);?> p-2 h5 tertiary bg-white">
-							<p class="item-category semibold primary">
-								<?= strtoupper($row['tarjetaHabiente']);?>
-							</p>
-							<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara'];?></p>
-							<?php if ($row['bloque'] === 'S'): ?>
-							<span class="semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT');?></span>
-							<?php else: ?>
-							<p class="mb-0 h6 light text"><?= strtoupper($row['nomEmp']);?></p>
-							<?php endif; ?>
-						</div>
-					</div>
-					<?php endforeach; ?>
-					<div class="dashboard-item mx-1"></div>
-					<div class="dashboard-item mx-1"></div>
-					<div class="dashboard-item mx-1"></div>
-					<?php else: ?>
-					<h3 class="h4 regular tertiary pt-3"><?= $data;?></h3>
-					<?php endif; ?>
+					<?php
+						if (is_array($data) && count($data) > 0) {
+							foreach ($data as $row) {
+								$state = '';
+								$infoCard = '';
+								$title = '';
+								switch ($row) {
+									case ($row['bloque'] !== '' && $row['bloque'] == 'PB'):
+										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
+										break;
+
+									case (count($row['availableServices']) === 0):
+										$title = lang('GEN_NOT_SERVICES_AVAILABLE');
+										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_PENDING_REPLACEMENT') . '</span>';
+										break;
+
+									case (in_array("120", $row['availableServices'])):
+										$infoCard = '<button id="generate" class="btn btn-small btn-link" name="generate">Generar PIN </button>';
+										break;
+
+									default:
+										$infoCard = '<p class="mb-0 h6 light text">' . strtoupper($row['nomEmp']) . '</p>';
+								}
+					?>
+								<div class="dashboard-item big-modal p-1 mx-1 mb-1 <?= $state; ?>" id="<?= $row['nroTarjeta']; ?>" title="<?= $title; ?>">
+									<img class=" item-img" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+									<div class="item-info <?= strtolower($row['marca']); ?> p-2 h5 tertiary bg-white">
+										<p class="item-category semibold primary"><?= $row['nombre_producto']; ?></p>
+										<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara']; ?></p>
+										<?= $infoCard; ?>
+									</div>
+									<form action="<?= base_url('detallereporte'); ?>" id="frmProduct-<?= $row['nroTarjeta']; ?>" method="post">
+										<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+										<input type='hidden' id='nroTarjeta' name='nroTarjeta' value='<?= $row['nroTarjeta']; ?>'>
+										<input type='hidden' id='producto' name='producto' value='<?= $row['prefix']; ?>'>
+										<input type='hidden' id='bloque' name='bloque' value='<?= $row['bloque']; ?>'>
+										<input type='hidden' id='nom_plastico' name='nom_plastico' value='<?= $row['nomPlastico']; ?>'>
+										<input type='hidden' id='nroTarjetaMascara' name='nroTarjetaMascara' value='<?= $row['nroTarjetaMascara']; ?>'>
+										<input type='hidden' id='nomEmp' name='nomEmp' value='<?= $row['nomEmp']; ?>'>
+										<input type='hidden' id='marca' name='marca' value='<?= $row['marca']; ?>'>
+										<input type='hidden' id='nombre_producto' name='nombre_producto' value='<?= $row['nombre_producto']; ?>'>
+										<input type='hidden' id='tarjetaHabiente' name='tarjetaHabiente' value='<?= $row['tarjetaHabiente']; ?>'>
+										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
+										<input type='hidden' id='id_ext_emp' name='id_ext_emp' value='<?= $row['id_ext_emp']; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
+										<input type='hidden' id='availableServices' name='availableServices' value='<?= htmlspecialchars(json_encode($row['availableServices']), ENT_QUOTES, 'UTF-8'); ?>'>
+									</form>
+								</div>
+							<?php
+							}
+							?>
+							<div class="dashboard-item mx-1"></div>
+							<div class="dashboard-item mx-1"></div>
+							<div class="dashboard-item mx-1"></div>
+						<?php
+						} else {
+						?>
+							<h3 class="h4 regular tertiary pt-3"><?= $data->msg; ?></h3>
+						<?php
+						}
+						?>
 				</div>
 			</div>
 		</section>

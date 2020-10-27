@@ -32,7 +32,7 @@ class Novo_User extends NOVO_Controller {
 			clearSessionsVars();
 		}
 
-		if ($this->render->activeRecaptcha) {
+		if (ACTIVE_RECAPTCHA) {
 			$this->load->library('recaptcha');
 			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 		}
@@ -122,6 +122,8 @@ class Novo_User extends NOVO_Controller {
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
+		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -233,6 +235,8 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
+		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
@@ -315,4 +319,45 @@ class Novo_User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
+
+	public function generateHash()
+  {
+    $statusResponse = 400;
+    $response = '';
+    $password = NULL;
+    $key = FALSE;
+
+    $inputData = $this->input->post();
+    if (count($inputData) > 0) {
+
+      $bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
+      if (!is_null($bodyRequest)) {
+
+        $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
+        $key = $bodyRequest->key === $this->key_api;
+      }
+    }
+
+    if (!is_null($password) && $key) {
+
+      $argon2 = $this->encrypt_connect->generateArgon2($password);
+      $bodyResponse = [
+        'key' => $this->key_api,
+        'password' => $argon2->hexArgon2
+      ];
+      $statusResponse = 200;
+
+      $dataResponse = json_encode($bodyResponse);
+      $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
+    }
+
+    return $this->output
+      ->set_content_type('application/json')
+      ->set_status_header($statusResponse)
+      ->set_output(json_encode(
+        [
+          'response' => $response
+        ]
+      ));
+  }
 }

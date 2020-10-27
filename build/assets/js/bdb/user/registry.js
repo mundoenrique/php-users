@@ -57,6 +57,8 @@ $$.addEventListener('DOMContentLoaded', function(){
 					}
 				}
 				);
+				data['userpwd'] = bdb_cryptoPass($$.getElementById("userpwd").value);
+				data['confirmUserpwd'] = bdb_cryptoPass($$.getElementById("confirmUserpwd").value);
 				data['acceptTerms'] = dataRegistryFrm.acceptTerms;
 				data['tipo_id_ext_per'] = dataRegistryFrm.code_tipo_id_ext_per;
 				data['pais'] = dataRegistryFrm.paisUser;
@@ -75,7 +77,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	//functions
-	$$.getElementById('userpwd').addEventListener('keyup',function() {
+	$$.getElementById('userpwd').addEventListener('keyup',function(e) {
 		var pswd = $$.getElementById('userpwd').value.trim();
 		if (e.which == 18 || e.keyCode == 18) {
 			pswd += '@';

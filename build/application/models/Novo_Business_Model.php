@@ -17,16 +17,16 @@ class Novo_Business_Model extends NOVO_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 14th, 2019
 	 */
-	public function callWs_UserCardsList_Business()
+	public function callWs_UserCardsList_Business($dataRequest)
 	{
 		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
 		$this->dataAccessLog->operation = 'Obtener la lista de tarjetas';
 
 		$this->dataRequest->idOperation = '2';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->idUsuario = $this->session->userId;
 
@@ -46,7 +46,27 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
 
-						foreach ($cardsRecords->services AS $service) {
+						switch ($cardRecord->status) {
+							case '':
+								$cardRecord->statusMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
+							break;
+							case 'PB':
+								$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
+							break;
+							case 'NE':
+								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
+							break;
+							default:
+								$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
+							break;
+						}
+
+						if (isset($dataRequest->module)) {
+							$cardRecord->module = $dataRequest->module;
+							$cardRecord->statusClasses = $cardRecord->status != '' && $cardRecord->status != 'PB' ? 'inactive cursor-default' : '' ;
+						}
+
+						foreach ($cardRecord->services AS $service) {
 							array_push($serviceList, $service);
 						}
 
@@ -83,8 +103,14 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->data->resp['btn1']['link'] = 'inicio';
 		}
 
+		$serviceList = array_unique($serviceList);
+
+		if (count($serviceList) == 0) {
+			$this->session->set_userdata('noService', TRUE);
+		}
+
 		$this->response->data->cardsList = $cardsList;
-		$this->response->data->serviceList = array_unique($serviceList);
+		$this->response->data->serviceList = $serviceList;
 
 		return $this->responseToTheView('callWs_UserCardsList');
 	}
@@ -97,12 +123,12 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: GetBalance Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
 		$this->dataAccessLog->operation = 'Obtener Saldo';
 
 		$this->dataRequest->idOperation = '8';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
@@ -129,13 +155,14 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CardDetail Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
 		$this->dataAccessLog->operation = 'Detalle de la tarjeta';
 
 		$this->dataRequest->idOperation = '3';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->signo = $dataRequest->TransType ?? '';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardDetail');
@@ -199,12 +226,12 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: MonthlyMovements Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
 		$this->dataAccessLog->operation = 'Movimientos mensuales';
 
 		$this->dataRequest->idOperation = '13';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->mes = $dataRequest->filterMonth;
 		$this->dataRequest->anio = $dataRequest->filterYear;
 		$this->dataRequest->tarjeta = [
@@ -255,12 +282,12 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: DownloadMoves Method Initialized');
 
-		$this->className = 'novo.objects.MO.MovimientosTarjetaSaldoMO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
 		$this->dataAccessLog->operation = 'Decargar archivos';
 
 		$this->dataRequest->idOperation = $dataRequest->id == 'downloadPDF' ||  $dataRequest->id == 'sendPDF' ? '5' : '46';
+		$this->dataRequest->className = 'novo.objects.MO.MovimientosTarjetaSaldoMO';
 		$this->dataRequest->mes = $dataRequest->month == '0' ? '' : $dataRequest->month;
 		$this->dataRequest->anio = $dataRequest->year  == '0' ? '' : $dataRequest->year;
 		$this->dataRequest->signo = '';
@@ -274,15 +301,22 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
 				switch ($dataRequest->action) {
 					case 'download':
-						$file = isset($response->bean->archivo) ? $response->bean->archivo : $response->archivo;
-						$name = isset($response->bean->nombre) ? $response->bean->nombre : $response->nombre;
+						$this->response->code = 0;
+						$file = $response->bean->archivo ?? $response->archivo;
+						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
 						$this->response->data['file'] = $file;
 						$this->response->data['name'] = $name.'.'.$ext;
 						$this->response->data['ext'] = $ext;
+					break;
+					case 'send':
+						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
+						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
+						$this->response->icon = lang('GEN_ICON_SUCCESS');
+						$this->response->msg = lang('GEN_MAIL_SUCCESS');
+						$this->response->data['btn1']['action'] = 'destroy';
 					break;
 				}
 			break;
@@ -299,12 +333,12 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: CardListOperations Method Initialized');
 
-		$this->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
 		$this->dataAccessLog->operation = 'Lista de tarjetas para '.$dataRequest->operation;
 
 		$this->dataRequest->idOperation = '6';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operType;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 

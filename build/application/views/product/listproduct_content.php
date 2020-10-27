@@ -6,7 +6,7 @@
 		</header>
 		<section>
 			<div class="pt-3">
-				<h2 class="h4 regular tertiary">Mis productos</h2>
+				<h2 class="h4 regular tertiary">Selecciona un producto</h2>
 				<div class="line mt-1"></div>
 				<div id="dashboard" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
 					<form action="<?= base_url('detalle'); ?>" id="frmProducto" method="post">
@@ -16,13 +16,13 @@
 						<input type='hidden' name='prefix' id='prefix' value=''>
 					</form>
 					<?php
-						if (count($data) > 0 and $data !== '--') {
-							foreach ($data as $row) {
+						if (count($data->data) > 0) {
+							foreach ($data->data as $row) {
 								$state = '';
 								$infoCard = '';
 								$title = '';
 								switch ($row) {
-									case ($row['bloqueo'] !== '' && $row['bloqueo'] !== 'NE'):
+									case ($row['bloqueo'] !== '' && $row['bloqueo'] == 'PB'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
 										break;
 
@@ -46,6 +46,23 @@
 										<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara']; ?></p>
 										<?= $infoCard ?>
 									</div>
+
+									<form action="<?= base_url('detalle'); ?>" id="frmProduct-<?= $row['noTarjeta']; ?>" method="post">
+										<input type='hidden' name='<?php echo $novoName ?>' value='<?php echo $novoCook ?>'>
+										<input type='hidden' id='noTarjeta' name='noTarjeta' value='<?= $row['noTarjeta']; ?>'>
+										<input type='hidden' id='prefix' name='prefix' value='<?= $row['prefix']; ?>'>
+										<input type='hidden' id='bloqueo' name='bloqueo' value='<?= $row['bloqueo']; ?>'>
+										<input type='hidden' id='nom_plastico' name='nom_plastico' value='<?= $row['nom_plastico']; ?>'>
+										<input type='hidden' id='noTarjetaConMascara' name='noTarjetaConMascara' value='<?= $row['noTarjetaConMascara']; ?>'>
+										<input type='hidden' id='actualBalance' name='actualBalance' value='<?= $row['actualBalance']; ?>'>
+										<input type='hidden' id='ledgerBalance' name='ledgerBalance' value='<?= $row['ledgerBalance']; ?>'>
+										<input type='hidden' id='marca' name='marca' value='<?= $row['marca']; ?>'>
+										<input type='hidden' id='nombre_producto' name='nombre_producto' value='<?= $row['nombre_producto']; ?>'>
+										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
+										<input type='hidden' id='availableBalance' name='availableBalance' value='<?= $row['availableBalance']; ?>'>
+										<input type='hidden' id='vc' name='vc' value='<?= $row['vc']; ?>'>
+										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $row['totalProducts']; ?>'>
+									</form>
 								</div>
 							<?php
 							}
@@ -56,7 +73,7 @@
 						<?php
 						} else {
 						?>
-							<h3 class="h4 regular tertiary pt-3"><?= lang('RESP_EMPTY_LIST_PRODUCTS'); ?></h3>
+							<h3 class="h4 regular tertiary pt-3"><?= $data->msg; ?></h3>
 						<?php
 						}
 						?>

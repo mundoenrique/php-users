@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
-	public $className;
 	public $accessLog;
 	public $token;
 	public $country;
@@ -31,11 +30,11 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->has_userdata('countrySess') ? $this->session->countrySess : $this->config->item('country');
+		$this->country = $this->session->countrySess ?? $this->config->item('country');
 		$this->countryUri = $this->session->countryUri;
-		$this->token = $this->session->token ?: '';
+		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
-		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
+		$this->keyId = $this->session->userName ?? 'CPONLINE';
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -49,10 +48,13 @@ class NOVO_Model extends CI_Model {
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->className = $this->className;
-		$this->dataRequest->logAccesoObject = $this->accessLog;
+		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod != '') {
+			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
+		}
+
+		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
 		$this->dataRequest->token = $this->token;
-		$this->dataRequest->pais = isset($this->dataRequest->pais) ? $this->dataRequest->pais : $this->country;
+		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
 		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
 		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
@@ -113,11 +115,17 @@ class NOVO_Model extends CI_Model {
 				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 					$this->session->sess_destroy();
 				}
-				break;
+			break;
+			case 502:
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				$this->session->sess_destroy();
+			break;
+			case 504:
+				$this->response->msg = lang('GEN_TIMEOUT');
+			break;
 			default:
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->icon = lang('GEN_ICON_DANGER');
-				break;
 		}
 
 		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
@@ -138,6 +146,7 @@ class NOVO_Model extends CI_Model {
 			if (is_array($response) && isset($response['file'])) {
 				continue;
 			}
+
 			$responsetoView->$pos = $response;
 		}
 

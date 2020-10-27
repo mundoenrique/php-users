@@ -145,7 +145,6 @@ $(function(){
 			id_ext_per	= $("#content-holder").find("#card-holder-id").val();
 			id_ext_per1	= $("#content-holder").find("#card-holder-id").val();
 			userName	= id_ext_per + '' + fecha;
-			claveWeb	= hex_md5(pin);
       country			= pais;
       noTarjerta		= cuenta;
 			anio			= new Date();
@@ -167,7 +166,6 @@ $(function(){
 				cuenta: cuenta,
 				id_ext_per: id_ext_per,
 				pin: pin,
-				claveWeb: claveWeb
 			})
 
 			dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
@@ -854,6 +852,7 @@ $(function(){
 					anotherPhone= "";
 				}
 
+				password = novo_cryptoPass(password);
 
 				if(aplicaPerfil == 'S'){
 					var dataUser = {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "edocivil":civilStatus, "nacionalidad":nationality, "tipo_direccion":typeAddress, "cod_postal":postalCode, "pais":countryResidence,"departamento":departament, "provincia":province, "distrito":district, "direccion":address, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "ruc_cto_laboral":ruc, "centrolab":centroLaboral, "situacionLaboral":situacionLaboral, "antiguedad_laboral":antiguedadLaboral, "profesion":ocupacionLaboral, "cargo":cargoLaboral, "ingreso_promedio_mensual":ingreso, "cargo_publico_last2":desemPublico,"cargo_publico":cargoPublico, "institucion_publica":institucion, "uif":uif, "userName":username, "password":password,"notarjeta":noTarjerta, "verifyDigit": verifyDigit, "proteccion": proteccion, "contrato": contrato};
@@ -861,53 +860,46 @@ $(function(){
 					var dataUser =  {"aplicaPerfil":aplicaPerfil, "primerNombre":firstName, "segundoNombre":firstExtName, "primerApellido":lastName, "segundoApellido":lastExtName, "telefono":phone, "id_ext_per":nroDocument, "fechaNacimiento":birthDate, "tipo_id_ext_per":tipoId, "lugar_nacimiento":placeBirth, "sexo":sexo, "correo":email, "telefono2":movilPhone, "otro_telefono":anotherPhone, "telefono3":anotherPhoneNum, "userName":username, "password":password, "pais":countryResidence};
 				}
 
-				//validar aplica perfil LMHL
-				var cpo_cook = decodeURIComponent(
-					document.cookie.replace(/(?:(?:^|.*;\s*)cpo_cook\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-					);
+				var dataRequest = JSON.stringify(dataUser);
 
-					dataUser.cpo_name = cpo_cook;
+				dataRequest = novo_cryptoPass(dataRequest, true);
 
-					var dataRequest = JSON.stringify(dataUser);
+				$.ajax({
+					method: "POST",
+					url: base_url + "/registro/registrar",
+					data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}
+				})
+				.done(function( response ) {
 
-					dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
-
-					$.ajax({
-						method: "POST",
-						url: base_url + "/registro/registrar",
-						data: {request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)}
-					})
-				  .done(function( response ) {
-
-						data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-						switch(data.code){
-							case 0:
-								$('#form-usuario')[0].reset();
-								var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
-								cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
-
-								$("#content").children().remove();
-								$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
-								$("#message"+data.modalType).append(cadena);
-
-							break;
-
-							case 2: //error general
+					data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
+					switch(data.code){
+						case 0:
 							$('#form-usuario')[0].reset();
-								$(location).attr('href', base_url+'/users/error_gral');
-							break;
+							var cadena=	'<span aria-hidden="true" class="icon-ok-sign"></span>' + data.title;
+							cadena+=	'<p>El usuario "'+username+'" '+ data.msn +' </p>';
 
-							case 3: //
-								msgService(data.title, data.msn, data.modalType, 0);
-								$("#load_reg").hide();
-							break;
+							$("#content").children().remove();
+							$("#content").append($("#exito"+data.modalType).removeAttr('style')).html();
+							$("#message"+data.modalType).append(cadena);
 
-							case 4:
-								msgService(data.title, data.msn, data.modalType, 1);
-							break;
+						break;
 
-						}
-				  })
+						case 2: //error general
+						$('#form-usuario')[0].reset();
+							$(location).attr('href', base_url+'/users/error_gral');
+						break;
+
+						case 3: //
+							msgService(data.title, data.msn, data.modalType, 0);
+							$("#load_reg").hide();
+						break;
+
+						case 4:
+							msgService(data.title, data.msn, data.modalType, 1);
+						break;
+
+					}
+				})
 
 			} else {
 				$("#load_reg").hide();
@@ -951,9 +943,10 @@ $(function(){
 					return;
 				}
 				$.each(data.listaPaises, function(pos,item){
-					if( item.cod_pais == "Ec" || item.cod_pais == "Ec-bp" ) return;
-					var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
-					countries.append(lista);
+					if(item.cod_pais == "Co" || item.cod_pais == "Pe" || item.cod_pais == "Usd" || item.cod_pais == "Ve"){
+						var	lista	= "<option value="+item.cod_pais+"> "+item.nombre_pais+" </option>";
+						countries.append(lista);
+						}
 				});
 				countries.attr('disabled', false);
 				defCountry.text('Seleccione');

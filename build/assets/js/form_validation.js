@@ -57,7 +57,7 @@ function validateForms(form) {
 			"surName": {pattern: alphaName},
 			"birthDate": {required: true, pattern: date.dmy},
 			"gender": {required: true},
-			"confirmEmail": {required: true, equalTo: "#email"},
+			"confirmEmail": {required: true, pattern: emailValid, equalTo: "#email"},
 			"landLine": {pattern: phone},
 			"mobilePhone": {required: true, pattern: phone},
 			"otherPhoneNum": {
@@ -67,7 +67,10 @@ function validateForms(form) {
 					}
 				},
 				pattern: phone
-			}
+			},
+			"initDate": { required: true, pattern: date.dmy },
+			"finalDate": { required: true, pattern: date.dmy },
+			"replaceMotSol": { requiredSelect: true },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -103,10 +106,17 @@ function validateForms(form) {
 			"surName": lang.VALIDATE_SUR_NAME,
 			"birthDate": lang.VALIDATE_BIRTHDATE,
 			"gender": lang.VALIDATE_GENDER,
-			"confirmEmail": lang.VALIDATE_CONFIRM_EMAIL,
+			"confirmEmail": {
+				required: lang.VALIDATE_EMAIL,
+				pattern: lang.VALIDATE_EMAIL,
+				equalTo: lang.VALIDATE_CONFIRM_EMAIL,
+			},
 			"landLine": lang.VALIDATE_PHONE,
 			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
 			"otherPhoneNum": lang.VALIDATE_PHONE,
+			"initDate": lang.VALIDATE_DATE_DMY,
+			"finalDate": lang.VALIDATE_DATE_DMY,
+			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -132,6 +142,16 @@ function validateForms(form) {
 
 	$.validator.methods.dbAvailable = function(value, element, param) {
 		return $(element).hasClass('available');
+	}
+
+	$.validator.methods.requiredSelect = function (value, element, param) {
+		var valid = true;
+
+		if ($(element).find('option').length > 0) {
+			valid = alphanumunder.test($(element).find('option:selected').val().trim());
+		}
+
+		return valid
 	}
 
 	form.validate().resetForm();

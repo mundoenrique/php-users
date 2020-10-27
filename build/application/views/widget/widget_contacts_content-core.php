@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<div id="widgetSupport" class="widget widget-support rounded-top">
+<div id="widgetSupport" class="widget widget-support rounded-top px-3">
   <div class="widget-header">
     <h2 class="mb-2 h3 regular center"><?= lang('GEN_CONTACTS_TITLE_HELP'); ?></h2>
   </div>
@@ -11,20 +11,22 @@
           <th class="px-0"><?= lang('GEN_CONTACTS_CITY'); ?></th>
           <th class="px-0 text-right"><?= lang('GEN_CONTACTS_CONTACT'); ?></th>
         </tr>
-      </thead>
-      <tbody>
+			</thead>
+      <tbody class="<?= lang('CONF_LONG_TEXT') ?>">
         <?php foreach(lang('GEN_CONTACTS') AS $city => $number): ?>
         <tr>
           <td><?= $city ?></td>
           <td class="text-right"><?= $number ?></td>
         </tr>
-        <?php endforeach; ?>
+				<?php endforeach; ?>
+				<?php if(lang('CONF_WIDGET_REST_COUNTRY') == 'ON'): ?>
         <tr class="center bold">
           <td colspan="2"><?= lang('GEN_CONTACTS_REST_COUNTRY'); ?></td>
         </tr>
         <tr class="center">
           <td colspan="2"><?= lang('GEN_CONTACTS_REST_COUNTRY_NUMBER'); ?></td>
-        </tr>
+				</tr>
+				<?php endif; ?>
       </tbody>
     </table>
   </div>

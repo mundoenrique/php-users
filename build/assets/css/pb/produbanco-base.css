@@ -37,6 +37,7 @@ footer.main-footer {
 ========================================================================== */
 
 .h00    { font-size: var(--h00) !important }
+.h01    { font-size: var(--h01) !important }
 .h0     { font-size: var(--h0) !important }
 .h1, h1 { font-size: var(--h1) !important; font-weight: 700 !important; }
 .h2, h2 { font-size: var(--h2) !important }
@@ -2091,6 +2092,8 @@ i[class*=" icon-"]:before {
 .icon-book:before    			   { content: "\e0e2"; }
 .icon-email:before           { content: "\e0ba"; }
 .icon-transactions:before		 { content: "\e064"; }
+.icon-500:before           	 { content: "\e901"; }
+.icon-404:before           	 { content: "\e902"; }
 
 .icon-user{
 	padding-right: 0 !important;
@@ -2111,9 +2114,12 @@ i[class*=" icon-"]:before {
 
 .logo-banco {
 	width: 260px;
-	height: 70px;
 }
 
+.bug-view {
+	font-size: 4rem !important;
+	opacity: 0.2;
+}
 /* Spinner */
 
 @-webkit-keyframes spinner-border {
@@ -3098,6 +3104,15 @@ ul.steps li.step-item i {
   padding-bottom: 4px;
 }
 
+/* Cursors */
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.cursor-default {
+	cursor: default !important;
+}
+
 /* jQuery UI
 ========================================================================== */
 
@@ -3619,14 +3634,13 @@ a.ui-button:active,
 }
 
 .img-log{
-	margin-left: 10%;
-	width: 708.43px;
-	z-index: 1;
+  margin-left: 10%;
+  z-index: 1;
 }
 
 .img-log img{
-	width: 708.43px;
-	height: 475.44px;
+	width: 100%;
+  height: 100%;
 }
 
 .bg-img {
@@ -4025,7 +4039,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	border: 1px solid var(--color-primary);
 	border-right: 0px;
 	border-radius: 3px 0 0 3px;
-	transform: translate(-107px, -42.5px);
+	transform: translate(-97px, -42.5px);
 	position: fixed;
 	color: var(--color-fifth);
 }
@@ -4106,7 +4120,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	opacity: .4;
 }
 
-.dashboard-item:hover .item-img {
+.dashboard-item:not(.inactive):hover .item-img {
 	margin-top: 0;
 }
 
@@ -4135,7 +4149,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	background-size: 50px;
 }
 
-.dashboard-item:hover .item-info {
+.dashboard-item:not(.inactive):hover .item-info {
 	margin-top: 80px;
 	border-bottom: 2px solid var(--color-primary);
 	-webkit-box-shadow: 0 0 2px rgba(51, 51, 51, .65);

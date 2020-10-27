@@ -36,7 +36,7 @@ $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
 
 $lang['GEN_TEXT_BLOCK_PRODUCT'] = 'Tarjeta bloqueada';
-$lang['GEN_TEXT_BLOCK_TEMP_PRODUCT'] = 'Bloqueada te';
+$lang['GEN_TEXT_BLOCK_TEMP_PRODUCT'] = 'Bloqueada temporal';
 $lang['GEN_TEXT_PENDING_REPLACEMENT'] = 'Reposición pendiente';
 
 $lang['LAST_SESSION'] = 'Última sesión';

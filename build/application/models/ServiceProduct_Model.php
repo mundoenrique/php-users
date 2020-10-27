@@ -891,7 +891,7 @@ class ServiceProduct_Model extends BDB_Model
 	}
 
 	function getDataWorkingProduct() {
-		return $this->session->userdata('setProduct');
+		return $this->session->userdata('setProductServices');
 	}
 
 }

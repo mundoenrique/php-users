@@ -76,6 +76,9 @@ $route['bdb/reporte'] = "expenseReport/listProduct";
 $route['bdb/detallereporte'] = "expenseReport/detailReport";
 $route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
 
+// API
+$route['api/v1/(:any)/(:any)']['POST'] = "Novo_CallApi";
+
 //Asynchronous
 $route['(:any)/async-call'] = "Novo_CallModels";
 //User

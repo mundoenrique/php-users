@@ -30,8 +30,8 @@ class Novo_CallModels extends Novo_Controller {
 	{
 		log_message('INFO', 'NOVO CallModels: index Method Initialized');
 
-		if (!empty($this->dataRequest->data)){
-			foreach($this->dataRequest->data AS $item => $value) {
+		if (!empty($this->dataRequest->data)) {
+			foreach ($this->dataRequest->data AS $item => $value) {
 				$_POST[$item] = $value;
 			}
 		}
@@ -43,15 +43,15 @@ class Novo_CallModels extends Novo_Controller {
 		unset($this->dataRequest);
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
-		if(!empty($_FILES) && $valid) {
+		if (!empty($_FILES) && $valid) {
 			$valid = $this->manageFile();
 		}
 
-		if($valid) {
+		if ($valid) {
 			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
 		}
 
-		if($valid) {
+		if ($valid) {
 			$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {

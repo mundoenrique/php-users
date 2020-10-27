@@ -27,12 +27,14 @@ $(function () {
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
+		minDate: '-90y',
 		maxDate: '-18y',
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (selectedDate) {
-			$(this).focus();
-			$('#genderMale').focus();
+			$(this)
+				.focus()
+				.blur();
 		}
 	})
 
