@@ -213,7 +213,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar acceso';
 		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
-		$this->dataAccessLog->userName = $dataRequest->email;;
+		$this->dataAccessLog->userName = $dataRequest->email;
 
 		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -392,24 +392,31 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
-				$this->response->modalBtn['btn1']['action'] = 'none';
-				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
-				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->response->modalBtn = [
+					'btn1' => [
+						'action' => 'none'
+					],
+					'btn2' => [
+						'text' => lang('GEN_BTN_CANCEL'),
+						'link' => 'identificar-usuario',
+						'action' => 'redirect'
+					]
+				];
 				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
 			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('USER_INVALID_DATE');;
+				$this->response->msg = lang('USER_INVALID_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -183:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('GEN_INVALID_CARD');;
+				$this->response->msg = lang('GEN_INVALID_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -184:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('GEN_INVALID_DATA');;
+				$this->response->msg = lang('GEN_INVALID_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286://OTP INVALIDO
