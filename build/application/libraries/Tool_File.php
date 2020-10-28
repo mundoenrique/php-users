@@ -38,9 +38,18 @@ class Tool_File {
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
 				$fileName = $value['nameForUpload'];
-				$configToUploadFile['file_name'] = $this->CI->encrypt_connect->cryptography(
-					$fileName
-				);
+				$configToUploadFile['file_name'] = hash('ripemd160', $fileName);
+
+				$matchedFiles = glob(join(DIRECTORY_SEPARATOR,
+					[$configToUploadFile['upload_path'],
+					$configToUploadFile['file_name'].'.*']
+				));
+
+				if ($matchedFiles && count($matchedFiles) > 0) {
+					foreach ($matchedFiles as $fullPathFile) {
+						unlink($fullPathFile);
+					}
+				}
 
 				$this->CI->load->library('upload', $configToUploadFile);
 				$this->CI->upload->initialize($configToUploadFile);
@@ -53,6 +62,7 @@ class Tool_File {
 					$statusCodeResponse = 200;
 
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['orig_name'];
+					$_POST[$key] = $fileName.$this->CI->upload->data()['file_ext'];
 				}
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
@@ -68,7 +78,7 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function deleteFiles ($params)
+	public function deleteFiles ($params, $isForName = FALSE)
 	{
 		log_message('INFO', 'Novo Tool_File: deleteFiles Method Initialized');
 

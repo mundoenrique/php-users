@@ -86,11 +86,11 @@ $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
-	'upload_path' => join(DIRECTORY_SEPARATOR, array(BASE_CDN_PATH, 'uploads', 'profile')),
-	'allowed_types' => 'gif|jpg|png',
+	'allowed_types' => 'jpg|png|jpeg',
 	'detect_mime' => true,
 	'max_size' => '1024',
 	'max_width' => '1024',
 	'max_height' => '1024',
 	'encrypt_name' => FALSE,
+	'overwrite'=> TRUE,
 ];

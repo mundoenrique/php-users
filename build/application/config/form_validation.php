@@ -126,7 +126,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
 		],
 		[
-			'field' => 'idTypeCode',
+			'field' => 'idType',
 			'rules' => 'trim|alpha_numeric|required'
 		],
 		[

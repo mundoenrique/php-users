@@ -672,7 +672,7 @@ class Novo_User_Model extends NOVO_Model {
 				'fechaNacimiento' => $dataRequest->birthDate,
 				'tipo_profesion' => $dataRequest->profession,
 				'profesion' => $dataRequest->profession,
-				'tipo_id_ext_per' => $dataRequest->idTypeCode,
+				'tipo_id_ext_per' => $dataRequest->idType,
 				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
 				'aplicaPerfil' => $this->session->longProfile,
 				'tyc' => '1',
