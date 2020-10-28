@@ -67,12 +67,6 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.cancel-send-otp', function () {
-		$(this).
-		removeClass('cancel-send-otp');
-		insertFormInput(false);
-	});
-
 });
 
 function validateIdentity() {
@@ -90,7 +84,6 @@ function validateIdentity() {
 			case 2:
 				$('#identityBtn').html(btnText);
 				$('#accept').addClass('send-otp');
-				$('#cancel').addClass('cancel-send-otp');
 
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
