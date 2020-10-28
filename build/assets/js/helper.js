@@ -106,7 +106,7 @@ function callNovoCore(who, where, request, _response_) {
 	dataRequest = cryptoPass(dataRequest, true);
 
 	if (request.files) {
-		data.filesToUpload.forEach(function(element){
+		data.files.forEach(function(element){
 			formData.append(element.name, element.file);
 		});
 		delete request.files;

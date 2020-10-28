@@ -82,7 +82,6 @@ class Tool_File {
 
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
-
 				$fullPath = join(DIRECTORY_SEPARATOR,
 					array($dirUpload,
 						$value['resultUpload']
