@@ -200,6 +200,9 @@ $lang['GEN_VIRTUAL'] = '%s virtual';
 $lang['GEN_VIRTUAL_DISJOIN'] = '~';
 $lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
 $lang['GEN_INVALID_CARD'] = 'El número de tarjeta no es válido o ya fue registrada.';
+$lang['GEN_SENSITIVE_DATA'] = '<div>Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.</div>';
+$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
+$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

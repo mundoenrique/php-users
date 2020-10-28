@@ -136,7 +136,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
 		$response = $this->sendToService('callWs_GetBalance');
-
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -383,5 +382,52 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->cardsList = $cardsList;
 
 		return $this->responseToTheView('callWs_CardListOperations');
+	}
+
+	public function callWs_getVirtualDetail_Business($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: getVirtualDetail method Initialized');
+
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'obtener cvv2';
+
+		$this->dataRequest->idOperation = '121';
+		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
+
+		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP) ? $dataRequest->codeOTP : '';
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->telephoneNumber = $this->session->mobilePhone;
+
+		if (empty($dataRequest->codeOTP)) {
+			$this->dataRequest->idOperation = '214';
+			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		}
+		$response = $this->sendToService('callWs_getVirtualDetail');
+			switch ($this->isResponseRc) {
+				case 0:
+					$fechaExp = $this->encrypt_connect->cryptography($response->fechaExp, FALSE);
+					$left = substr($fechaExp,0,2);
+					$right = substr($fechaExp,2,2);
+					$expirationDate = $left.'/'.$right;
+
+					$this->response->code = 0;
+					$this->response->dataDetailCard =  [
+						'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
+						'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
+						'expirationDate' => $expirationDate,
+						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+					];
+					$this->response->modalBtn['btn1']['action'] = 'close';
+				break;
+				case -424://MODAL OTP
+					$this->response->code = 2;
+					$this->response->modalBtn['btn1']['action'] = 'none';
+					$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+					$this->response->modalBtn['btn2']['action'] = 'destroy';
+				break;
+			}
+		return $this->responseToTheView('callWs_getVirtualDetail');
 	}
 }

@@ -364,6 +364,16 @@ $config = [
 			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
 		]
 	],
+	'getVirtualDetail' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
+		]
+	],
 	'getMovements' => [
 		[
 			'field' => 'cardNumber',
