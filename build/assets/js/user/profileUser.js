@@ -22,35 +22,29 @@ $(function () {
 
 	var urlImage = $('#backImg').val();
 
-	// var urlImage = "http://personas.novopayment.lc/assets/images/bnt/banorte-login.jpg?V20201026-1603747753"
-
-	// convertImg(urlImage,  function( base64_data, idSrc ) {
-
-	// 	if ($(`#${idSrc}`).val() == 'true') {
-	// 		$(`.${idSrc}`).append('<img id="`frontImg-${idSrc}`" class="drop-zone-thumb" style="object-fit: cover;" src="'+ base64_data +'">')
-	// 		.find('.front span, .front i')
-	// 		.hide();
-	// 	}else{
-	// 		$(`.${idSrc}`).find('.front span, .front i').show();
-	// 	}
-	// 	$(`.${idSrc}`).on('click', function () {
-	// 		$('#frontImg').remove();
-	// 		$(`.${idSrc}`).find('.front span, .front i').show();
-	// 	});
-	// });
-
 	convertImg(urlImage, function( base64_data ) {
-		if ($('#loadImage').val() == 'true') {
-			$('.INE_R').append('<img id="backImg" class="drop-zone-thumb" style="object-fit: cover;" src="'+ base64_data +'">')
-			.find('.section-INE_R span, .section-INE_R i')
-			.hide();
+		var previewImages = ['INE_A', 'INE_R'];
+		var idSrc;
 
-		}else{
-			$('.INE_R').find('.section-INE_R span, .section-INE_R i').show();
-		}
-		$('.INE_R').on('click', function () {
-			$('#backImg').remove();
-			$('.INE_R').find('.section-INE_R span, .section-INE_R i').show();
+		$.each(previewImages, function(i, element){
+			idSrc = element;
+			if ($('#loadImage').val() == 'true') {
+				$(`.${idSrc}`).append(`<img id="backImg-${idSrc}" class="drop-zone-thumb" style="object-fit: cover;" src="${base64_data}">`)
+				.find(`.section-${idSrc} span, .section-${idSrc} i`)
+				.hide();
+
+				$(`#${idSrc}`).addClass('ignore');
+			}else{
+				$(`.${idSrc}`).find(`.section-${idSrc} span, .section-${idSrc} i`).show();
+			}
+			$(`.${idSrc}`).on('click', function (e) {
+				$(`#backImg-${e.target.id}`).remove();
+				$(`.${e.target.id}`).find(`.section-${e.target.id} span, .section-${e.target.id} i`).show();
+
+				if ($(`#${e.target.id}`).hasClass('ignore')) {
+					$(`#${e.target.id}`).removeClass('ignore');
+				}
+			});
 		});
 	});
 

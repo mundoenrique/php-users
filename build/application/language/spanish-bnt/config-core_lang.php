@@ -24,3 +24,11 @@ $lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
 $lang['CONF_LOAD_DOCS'] = 'ON';
 $lang['CONF_LOAD_DOC_F_ID'] = 'ON';
 $lang['CONF_LOAD_DOC_B_ID'] = 'ON';
+// UPLOAD FILES
+$lang['CONF_CONFIG_UPLOAD_FILE'] = [
+	'allowed_types' => 'jpg|png|jpeg',
+	'detect_mime' => true,
+	'max_size' => '6144', //6mb
+	'encrypt_name' => FALSE,
+	'overwrite'=> TRUE,
+];
