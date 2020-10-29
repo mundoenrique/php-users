@@ -12,6 +12,7 @@
               <span class="js-file-name h5 regular"><?= lang('USER_ADD_PHOTO'); ?></span>
               <i class="icon icon-upload ml-2"></i>
             </div>
+
             <input type="file" name="myFile" id="imageUpload" class="drop-zone-input" accept=".png, .jpg, .jpeg">
           </div>
         </div>
@@ -27,7 +28,7 @@
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
               </div>
-							<input type="file" name="frontINE" id="frontINE" class="drop-zone-input">
+							<input type="file" name="<?= 'INE'.'_A_'.$idNumber; ?>" id="<?= 'INE'.'_A_'.$idNumber; ?>" class="drop-zone-input">
             </div>
             <div class="help-block"></div>
           </div>
@@ -39,7 +40,7 @@
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_B_DOC'); ?></span>
               </div>
-              <input type="file" name="backINE" id="backINE" class="drop-zone-input">
+							<input type="file" name="<?= 'INE'.'_B_'.$idNumber; ?>" id="<?= 'INE'.'_B_'.$idNumber; ?>" class="drop-zone-input">
             </div>
             <div class="help-block"></div>
           </div>

@@ -19,15 +19,15 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function uploadFiles ($configToUploadFile, $params)
+	public function uploadFiles ($configToUploadFile)
 	{
 		log_message('INFO', 'Novo Tool_File: uploadFiles Method Initialized');
 
 		$resultUploadFiles = [];
 		$configToUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
 			array(BASE_UPLOAD_PATH,
-				strtoupper($params['client']),
-				strtoupper($params['nickName'])
+				strtoupper($configToUploadFile['client'] ),
+				strtoupper($configToUploadFile['appUserName'] )
 			),
 		);
 
@@ -128,23 +128,13 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function setNewNames ($params)
+	public function setNewNames ()
 	{
 		log_message('INFO', 'Novo Tool_File: setNewNames Method Initialized');
 
-		$rulesRename = [
-			'frontINE' => [
-				'pattern' => $params['idType'] . "_A_" . $params['idNumber']
-			],
-			'backINE' => [
-				'pattern' => $params['idType'] . "_R_" . $params['idNumber']
-			],
-		];
-
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
-				$rules = $rulesRename[$key];
-				$_FILES[$key]['nameForUpload'] = $rules['pattern'];
+				$_FILES[$key]['nameForUpload'] = $key;
 			}
 		}
 	}
