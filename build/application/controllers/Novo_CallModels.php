@@ -44,10 +44,11 @@ class Novo_CallModels extends Novo_Controller {
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
-			$this->tool_file->setNewNames();
+			$this->tool_file->setNewNames($_POST['idNumber']);
+
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 			$configUploadFile['client'] = $this->countryUri;
-			$configUploadFile['appUserName'] = $this->appUserName;
+			$configUploadFile['appUserName'] = $_POST['nickName'];
 
 			$valid = $this->tool_file->uploadFiles($configUploadFile);
 			if (!$valid) {

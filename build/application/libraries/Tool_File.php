@@ -128,13 +128,13 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function setNewNames ()
+	public function setNewNames ($params)
 	{
 		log_message('INFO', 'Novo Tool_File: setNewNames Method Initialized');
 
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
-				$_FILES[$key]['nameForUpload'] = $key;
+				$_FILES[$key]['nameForUpload'] = strtolower($key."_".$params);
 			}
 		}
 	}
