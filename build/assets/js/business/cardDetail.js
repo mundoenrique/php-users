@@ -66,7 +66,7 @@ $(function () {
 		}
 	})
 
-	$('#productdetail').on('click', '#virtual-details', function (e) {
+	$('#productdetail').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		sensitiveInformation();
@@ -245,6 +245,8 @@ function sensitiveInformation() {
 			text: lang.GEN_BTN_CANCEL,
 			action: 'close'
 		},
+		maxHeight : 600,
+		width : 430,
 		posMy: 'top+50px',
 		posAt: 'top+50px'
 	}

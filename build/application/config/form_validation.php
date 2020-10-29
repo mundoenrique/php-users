@@ -236,7 +236,7 @@ $config = [
 	],
 	'downloadMoves' => [
 		[
-			'field' => 'cardNumber',
+			'field' => 'cardNumberDownd',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
@@ -366,7 +366,7 @@ $config = [
 	],
 	'getVirtualDetail' => [
 		[
-			'field' => 'cardNumber',
+			'field' => 'cardNumberDownd',
 			'rules' => 'trim|required'
 		],
 		[

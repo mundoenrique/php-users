@@ -31,6 +31,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $this->session->userId;
 
 		$response = $this->sendToService('callWs_UserCardsList');
+
 		$cardsList = [];
 		$serviceList = [];
 
@@ -289,7 +290,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->signo = '';
 		$this->dataRequest->mail = $dataRequest->action == 'send' ? TRUE : FALSE;
 		$this->dataRequest->tarjeta = [
-			'noTarjeta' => $dataRequest->cardNumber,
+			'noTarjeta' => $dataRequest->cardNumberDownd,
 			'id_ext_per' => $this->session->userId,
 		];
 
@@ -402,7 +403,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if (empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '214';
 			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
-			$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 		$response = $this->sendToService('callWs_getVirtualDetail');
 			switch ($this->isResponseRc) {
