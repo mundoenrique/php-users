@@ -20,6 +20,40 @@ $(function () {
 		}
 	});
 
+	var urlImage = $('#backImg').val();
+
+	// var urlImage = "http://personas.novopayment.lc/assets/images/bnt/banorte-login.jpg?V20201026-1603747753"
+
+	// convertImg(urlImage,  function( base64_data, idSrc ) {
+
+	// 	if ($(`#${idSrc}`).val() == 'true') {
+	// 		$(`.${idSrc}`).append('<img id="`frontImg-${idSrc}`" class="drop-zone-thumb" style="object-fit: cover;" src="'+ base64_data +'">')
+	// 		.find('.front span, .front i')
+	// 		.hide();
+	// 	}else{
+	// 		$(`.${idSrc}`).find('.front span, .front i').show();
+	// 	}
+	// 	$(`.${idSrc}`).on('click', function () {
+	// 		$('#frontImg').remove();
+	// 		$(`.${idSrc}`).find('.front span, .front i').show();
+	// 	});
+	// });
+
+	convertImg(urlImage, function( base64_data ) {
+		if ($('#loadImage').val() == 'true') {
+			$('.INE_R').append('<img id="backImg" class="drop-zone-thumb" style="object-fit: cover;" src="'+ base64_data +'">')
+			.find('.section-INE_R span, .section-INE_R i')
+			.hide();
+
+		}else{
+			$('.INE_R').find('.section-INE_R span, .section-INE_R i').show();
+		}
+		$('.INE_R').on('click', function () {
+			$('#backImg').remove();
+			$('.INE_R').find('.section-INE_R span, .section-INE_R i').show();
+		});
+	});
+
 	$('#phoneType').change(function () {
 		var selectedOption = $(this).children('option:selected').val();
 		var disableInput = false;
@@ -226,7 +260,7 @@ function getCities(currentState) {
 function getdistrict(currentCity) {
 	var currentDistrict = $('#district').val();
 
-	$('#district').prepend('<option value="" selected disabled>Esperando Distrtos</option>');
+	$('#district').prepend('<option value="" selected disabled>Esperando Distritos</option>');
 
 	where = 'Regions';
 	data = {
@@ -248,3 +282,22 @@ function getdistrict(currentCity) {
 		$('#district').prop('disabled', false);
 	});
 }
+
+function convertImg(url, callback) {
+	var img = new Image();
+	img.crossOrigin = 'Anonymous';
+
+	img.onload = function() {
+		var canvas = document.createElement('CANVAS');
+		var ctx = canvas.getContext('2d');
+		var dataURL;
+		canvas.height = this.height;
+		canvas.width = this.width;
+		ctx.drawImage(this, 0, 0);
+		dataURL = canvas.toDataURL();
+		callback(dataURL);
+		canvas = null;
+	};
+
+	img.src = url;
+};

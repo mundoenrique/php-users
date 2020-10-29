@@ -19,7 +19,7 @@ $(function () {
 	})
 
 	// Funtion drag and drop
-	$('#imageUpload').change(function () {
+	$('#SEL_A').change(function () {
     $('#imagePreviewContainer').hide();
     $('#imagePreviewContainer').css("height", "0")
     $('#imagePreviewContainer').fadeIn(650);
@@ -69,7 +69,7 @@ $(function () {
 		}
 
 		if (!thumbnailElement) {
-			thumbnailElement = document.createElement("div");
+			thumbnailElement = document.createElement("img");
 			thumbnailElement.classList.add("drop-zone-thumb");
 			dropZoneElement.appendChild(thumbnailElement);
 		}

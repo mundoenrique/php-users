@@ -38,3 +38,6 @@ $lang['VALIDATE_CONFIRM_PIN'] = 'Confirma tu PIN';
 $lang['VALIDATE_IQUAL_PIN'] = 'Debe ser igual a el nuevo pin';
 $lang['VALIDATE_FORMAT_PIN'] = 'El formato de PIN es inválido.';
 $lang['VALIDATE_CONSECUTIVE_NUMS'] = 'Los 4 números no deben ser consecutivos.';
+$lang['VALIDATE_FILES_EXT'] = 'png|jpg|jpeg';
+$lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (png, jpg, jpeg)';
+$lang['VALIDATE_FILE_SIZE'] = 'El archivo supera el peso permitido';
