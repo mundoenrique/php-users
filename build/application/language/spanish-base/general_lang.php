@@ -205,3 +205,6 @@ $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
+// PROFILE
+$lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu documento de identificación a través de la opción Perfil de Usuario.';
+

@@ -61,7 +61,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $response->idUsuario,
+					'userId' => $response->idUsuario
 				];
 				$this->session->set_userdata($userData);
 				unset($this->dataRequest->password);
@@ -115,7 +115,8 @@ class Novo_User_Model extends NOVO_Model {
 						'terms' => $response->tyc,
 						'mobilePhone' => $response->celular ?? '',
 						'enterpriseCod' => $response->acCodCia ?? '',
-						'clientAgent' => $this->agent->agent_string()
+						'clientAgent' => $this->agent->agent_string(),
+						'isImagesNotLoaded' => $response->imageNotLoaded ?? TRUE,
 					];
 					$this->session->set_userdata($userData);
 
@@ -379,12 +380,14 @@ class Novo_User_Model extends NOVO_Model {
 					'userIdentity' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
+					'idType' => $response->user->tipo_id_ext_per,
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
+					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userSess);
@@ -516,6 +519,16 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_Signup');
 
+		if ($this->isResponseRc !== 0) {
+			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+			$configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
+				array(BASE_UPLOAD_PATH,
+					strtoupper($this->session->countryUri),
+					strtoupper($dataRequest->nickName ?? $this->session->userName),
+				),
+			);
+			$this->tool_file->deleteFiles($configUploadFile);
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:

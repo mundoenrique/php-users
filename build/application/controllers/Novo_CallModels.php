@@ -17,6 +17,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->rule = lcfirst($this->dataRequest->where);
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
+
 		} else {
 			show_404();
 		}
@@ -44,15 +45,20 @@ class Novo_CallModels extends Novo_Controller {
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
-			$this->tool_file->setNewNames($_POST['idNumber']);
+			$lastPartFileName = $this->session->idType.'_'.$this->session->docmentId;
+			$this->tool_file->setNewNames($lastPartFileName);
 
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-			$configUploadFile['client'] = $this->countryUri;
-			$configUploadFile['appUserName'] = $_POST['nickName'];
+			$configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
+				array(BASE_UPLOAD_PATH,
+					strtoupper($this->session->countryUri),
+					strtoupper($_POST['nickName'] ?? $this->session->userName),
+				),
+			);
 
 			$valid = $this->tool_file->uploadFiles($configUploadFile);
 			if (!$valid) {
-				$this->tool_file->deleteFiles($_POST);
+				$this->tool_file->deleteFiles($configUploadFile);
 			}
 		}
 

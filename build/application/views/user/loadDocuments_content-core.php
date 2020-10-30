@@ -71,8 +71,8 @@
           <?php endif; ?>
         </div>
       </div>
-			<input type="hidden" name="loadImage" id="loadImage" value="<?= $loadImage ?>">
-			<input type="hidden" name="backImg" id="backImg" value="<?= $backImg ?>">
+			<input type="hidden" name="loadImage" id="loadImage" value="<?= $loadImage??'' ?>">
+			<input type="hidden" name="backImg" id="backImg" value="<?= $backImg??'' ?>">
     </div>
   </div>
   <div class="col-12 col-lg-4 flex justify-start">

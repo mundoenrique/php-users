@@ -97,7 +97,17 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 
 				$this->session->set_userdata('products', TRUE);
-				$this->response->code = isset($response->lista) && count($response->lista) > 0 ? 0 : 1;
+				if (isset($response->lista) && count($response->lista) > 0) {
+					$this->response->code = 0;
+
+					if($this->session->isImagesNotLoaded) {
+						$this->response->code = 3;
+						$this->response->msg = lang('GEN_MISSING_IMAGES');
+						$this->response->modalBtn['btn1']['action'] = 'destroy';
+					}
+				} else{
+					$this->response->code = 1;
+				}
 			break;
 			default:
 				if ($this->isResponseRc != -61) {

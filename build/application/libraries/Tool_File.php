@@ -24,12 +24,6 @@ class Tool_File {
 		log_message('INFO', 'Novo Tool_File: uploadFiles Method Initialized');
 
 		$resultUploadFiles = [];
-		$configToUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
-			array(BASE_UPLOAD_PATH,
-				strtoupper($configToUploadFile['client'] ),
-				strtoupper($configToUploadFile['appUserName'] )
-			),
-		);
 
 		if (!is_dir($configToUploadFile['upload_path'])) {
 			mkdir($configToUploadFile['upload_path'], 0755, TRUE);
@@ -78,22 +72,15 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function deleteFiles ($params, $isForName = FALSE)
+	public function deleteFiles ($configUploadFile)
 	{
 		log_message('INFO', 'Novo Tool_File: deleteFiles Method Initialized');
 
 		$resultDeletingFiles = [];
-		$dirUpload = join(DIRECTORY_SEPARATOR,
-			array(BASE_UPLOAD_PATH,
-				strtoupper($params['client']),
-				strtoupper($params['nickName'])
-			),
-		);
-
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
 				$fullPath = join(DIRECTORY_SEPARATOR,
-					array($dirUpload,
+					array($configUploadFile['upload_path'],
 						$value['resultUpload']
 					),
 				);
@@ -128,13 +115,13 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function setNewNames ($params)
+	public function setNewNames ($lastPartFileName)
 	{
 		log_message('INFO', 'Novo Tool_File: setNewNames Method Initialized');
 
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
-				$_FILES[$key]['nameForUpload'] = strtolower($key."_".$params);
+				$_FILES[$key]['nameForUpload'] = strtolower($key."_".$lastPartFileName);
 			}
 		}
 	}
