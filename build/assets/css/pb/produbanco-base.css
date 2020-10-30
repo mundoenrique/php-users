@@ -3951,6 +3951,43 @@ a.ui-button:active,
 	border-radius: 5px;
 }
 
+
+.drop-zone-selfie {
+  height: 220px !important;
+}
+
+.drop-zone-selfie img {
+	width: 10rem;
+}
+
+.drop-zone {
+  height: 150px;
+  align-items: center;
+  justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	display: flex;
+}
+
+.drop-zone-over {
+  border-style: solid;
+}
+
+.drop-zone-input {
+  display: none;
+}
+
+.drop-zone-thumb {
+  width: 95%;
+  height: 95%;
+  border-radius: 10px;
+  overflow: hidden;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	object-fit: cover
+}
+
 .detail-lot tbody tr:first-child td {
 	border: 0 !important;
 	background-color: var(--color-secondary) !important;
