@@ -20,7 +20,7 @@ $(function () {
 		}
 	});
 
-	var urlImage = $('#backImg').val();
+	var urlImage = $('#loadImages').val();
 
 	convertImg(urlImage, function( base64_data ) {
 		var previewImages = ['INE_A', 'INE_R'];
@@ -28,18 +28,18 @@ $(function () {
 
 		$.each(previewImages, function(i, element){
 			idSrc = element;
-			if ($('#loadImage').val() == 'true') {
-				$(`.${idSrc}`).append(`<img id="backImg-${idSrc}" class="drop-zone-thumb" style="object-fit: cover;" src="${base64_data}">`)
-				.find(`.section-${idSrc} span, .section-${idSrc} i`)
+			if ($('#valImages').val() == 'true') {
+				$(`.${idSrc}`).append(`<img id="preview-${idSrc}" class="drop-zone-thumb" src="${base64_data}">`)
+				.find(`.hide-${idSrc} span, .hide-${idSrc} i`)
 				.hide();
 
 				$(`#${idSrc}`).addClass('ignore');
 			}else{
-				$(`.${idSrc}`).find(`.section-${idSrc} span, .section-${idSrc} i`).show();
+				$(`.${idSrc}`).find(`.hide-${idSrc} span, .hide-${idSrc} i`).show();
 			}
 			$(`.${idSrc}`).on('click', function (e) {
-				$(`#backImg-${e.target.id}`).remove();
-				$(`.${e.target.id}`).find(`.section-${e.target.id} span, .section-${e.target.id} i`).show();
+				$(`#preview-${e.target.id}`).remove();
+				$(`.${e.target.id}`).find(`.hide-${e.target.id} span, .hide-${e.target.id} i`).show();
 
 				if ($(`#${e.target.id}`).hasClass('ignore')) {
 					$(`#${e.target.id}`).removeClass('ignore');

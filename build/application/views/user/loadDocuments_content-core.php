@@ -24,7 +24,7 @@
           <?php if(lang('CONF_LOAD_DOC_F_ID') == 'ON'):?>
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone INE_A label-file p-1">
-              <div class="section-INE_A drop-zone-prompt flex flex-column items-center">
+              <div class="hide-INE_A drop-zone-prompt flex flex-column items-center">
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
               </div>
@@ -36,7 +36,7 @@
           <?php if(lang('CONF_LOAD_DOC_B_ID') == 'ON'):?>
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone INE_R label-file p-1">
-              <div class="section-INE_R drop-zone-prompt flex flex-column items-center">
+              <div class="hide-INE_R drop-zone-prompt flex flex-column items-center">
                 <i class="icon icon-upload h00"></i>
                 <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_B_DOC'); ?></span>
               </div>
@@ -70,9 +70,9 @@
           </div>
           <?php endif; ?>
         </div>
-      </div>
-			<input type="hidden" name="loadImage" id="loadImage" value="<?= $loadImage ?>">
-			<input type="hidden" name="backImg" id="backImg" value="<?= $backImg ?>">
+			</div>
+			<input type="hidden" name="valImages" id="valImages" value="<?= $valImages ?>">
+			<input type="hidden" name="loadImages" id="loadImages" value="<?= $loadImages ?>">
     </div>
   </div>
   <div class="col-12 col-lg-4 flex justify-start">

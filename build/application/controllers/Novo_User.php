@@ -224,10 +224,10 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		$amountImages = 'http://personas.novopayment.lc/assets/images/bnt/banorte-login.jpg?V20201026-1603747753';
+		$loadImages = 'http://personas.novopayment.lc/assets/images/bnt/banorte-login.jpg?V20201026-1603747753';
 		$valImages = 'true';
-		$this->render->backImg = $amountImages;
-		$this->render->loadImage = $valImages;
+		$this->render->loadImages = $loadImages;
+		$this->render->valImages = $valImages;
 
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';

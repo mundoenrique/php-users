@@ -3999,7 +3999,8 @@ a.ui-button:active,
   overflow: hidden;
 	background-size: cover;
 	background-position: center;
-  position: relative;
+	position: relative;
+	object-fit: cover
 }
 
 .detail-lot tbody tr:first-child td {
