@@ -156,10 +156,13 @@ $(function () {
 
 			if (action == 'changePin') {
 				delete dataFormAction.confirmPin;
+				dataFormAction.currentPin = cryptoPass(dataFormAction.currentPin);
+				dataFormAction.newPin = cryptoPass(dataFormAction.newPin);
 			}
 
 			if (action == 'generatePin') {
 				delete dataFormAction.generateConfirmPin;
+				dataFormAction.generateNewPin = cryptoPass(dataFormAction.generateNewPin);
 			}
 
 			if (thisAction.hasClass('btn')) {

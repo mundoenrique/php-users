@@ -25,11 +25,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de bloqueo o desbloqueo';
 
-		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
-		$expireDate = $this->cryptography->decrypt(
-			base64_decode($expireDate->plot),
-			utf8_encode($expireDate->password)
-		);
+		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
 
 		$this->dataRequest->idOperation = '110';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -80,11 +76,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solicitud de bloqueo permanente';
 
-		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
-		$expireDate = $this->cryptography->decrypt(
-			base64_decode($expireDate->plot),
-			utf8_encode($expireDate->password)
-		);
+		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
 
 		$this->dataRequest->idOperation = '111';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -290,25 +282,23 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de Cambio de Pin';
 
-		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
-		$expireDate = $this->cryptography->decrypt(
-			base64_decode($expireDate->plot),
-			utf8_encode($expireDate->password)
-		);
+		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
+		$currentPin = $this->cryptography->decryptOnlyOneData($dataRequest->currentPin);
+		$newPin = $this->cryptography->decryptOnlyOneData($dataRequest->newPin);
 
-		$this->dataRequest->idOperation = '110';
+		$this->dataRequest->idOperation = '112';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 		$this->dataRequest->prefix = $dataRequest->prefix;
 		$this->dataRequest->fechaExp = $expireDate;
-		$this->dataRequest->pin = $dataRequest->currentPin;
-		$this->dataRequest->pinNuevo = $dataRequest->newPin;
+		$this->dataRequest->pin = $currentPin;
+		$this->dataRequest->pinNuevo = $newPin;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 
-		$response = $this->sendToService('callWs_TemporaryLock');
+		$response = $this->sendToService('callWs_ChangePin');
 
 		switch ($this->isResponseRc) {
 			case 0:
