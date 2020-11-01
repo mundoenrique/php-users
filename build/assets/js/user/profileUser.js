@@ -20,34 +20,6 @@ $(function () {
 		}
 	});
 
-	var urlImage = $('#loadImages').val();
-
-	convertImg(urlImage, function( base64_data ) {
-		var previewImages = ['INE_A', 'INE_R'];
-		var idSrc;
-
-		$.each(previewImages, function(i, element){
-			idSrc = element;
-			if ($('#valImages').val() == 'true') {
-				$(`.${idSrc}`).append(`<img id="preview-${idSrc}" class="drop-zone-thumb" src="${base64_data}">`)
-				.find(`.hide-${idSrc} span, .hide-${idSrc} i`)
-				.hide();
-
-				$(`#${idSrc}`).addClass('ignore');
-			}else{
-				$(`.${idSrc}`).find(`.hide-${idSrc} span, .hide-${idSrc} i`).show();
-			}
-			$(`.${idSrc}`).on('click', function (e) {
-				$(`#preview-${e.target.id}`).remove();
-				$(`.${e.target.id}`).find(`.hide-${e.target.id} span, .hide-${e.target.id} i`).show();
-
-				if ($(`#${e.target.id}`).hasClass('ignore')) {
-					$(`#${e.target.id}`).removeClass('ignore');
-				}
-			});
-		});
-	});
-
 	$('#phoneType').change(function () {
 		var selectedOption = $(this).children('option:selected').val();
 		var disableInput = false;
@@ -276,22 +248,3 @@ function getdistrict(currentCity) {
 		$('#district').prop('disabled', false);
 	});
 }
-
-function convertImg(url, callback) {
-	var img = new Image();
-	img.crossOrigin = 'Anonymous';
-
-	img.onload = function() {
-		var canvas = document.createElement('CANVAS');
-		var ctx = canvas.getContext('2d');
-		var dataURL;
-		canvas.height = this.height;
-		canvas.width = this.width;
-		ctx.drawImage(this, 0, 0);
-		dataURL = canvas.toDataURL();
-		callback(dataURL);
-		canvas = null;
-	};
-
-	img.src = url;
-};

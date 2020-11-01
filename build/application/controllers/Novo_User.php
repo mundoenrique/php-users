@@ -224,10 +224,41 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		$loadImages = 'http://personas.novopayment.lc/assets/images/bnt/banorte-login.jpg?V20201026-1603747753';
-		$valImages = 'true';
-		$this->render->loadImages = $loadImages;
-		$this->render->valImages = $valImages;
+		$dirLoadImages = join(DIRECTORY_SEPARATOR,
+			[BASE_UPLOAD_PATH,
+				strtoupper($this->session->countryUri),
+				strtoupper($this->session->userName),
+			],
+		);
+
+		$matches = scandir($dirLoadImages);
+		// $imagesDocument = [ <------ lo que debo recibir del servicio
+		// 	'INE_A' => 'fabe3bf4622f3ae4bd58cefea204ed8149e9db0f.jpg',
+		// 	'INE_R' => '98c345iqxmY65AVKpxrSUCqexqfp9W6YWUQPe69d.jpg'
+		// ];
+
+		// TODO
+		// ELIMINAR SE USA SOLO PARA LA CARGA DEL NOMBRE DE LOS ARCHIVOS
+		$imagesDocument = [];
+		$ids = ['','','INE_A', 'INE_R'];
+		foreach ($matches as $k => $v) {
+			if (!is_dir($v)) {
+				$imagesDocument[$ids[$k]]['base64'] = $v;
+			}
+		}
+
+		foreach ($imagesDocument as $key => $value) {
+			$fullPathToImage = join(DIRECTORY_SEPARATOR,
+				[$dirLoadImages, $value]
+			);
+			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+			$data = file_get_contents($fullPathToImage);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			if (file_exists($fullPathToImage)) {
+				$imagesDocument[$key]['base64'] = $base64;
+				$imagesDocument[$key]['validate'] = 'ignore';
+			}
+		}
 
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
@@ -243,6 +274,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
+		$this->render->imagesLoaded = $imagesDocument;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}

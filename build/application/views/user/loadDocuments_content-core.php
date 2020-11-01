@@ -24,11 +24,15 @@
           <?php if(lang('CONF_LOAD_DOC_F_ID') == 'ON'):?>
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone INE_A label-file p-1">
-              <div class="hide-INE_A drop-zone-prompt flex flex-column items-center">
-                <i class="icon icon-upload h00"></i>
-                <span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
-              </div>
-							<input type="file" name="INE_A" id="INE_A" class="drop-zone-input">
+							<?php if(isset($imagesLoaded) && array_key_exists('INE_A', $imagesLoaded)):?>
+								<img id="preview-INE_A" class="drop-zone-thumb" style="background-image: url(<?= $imagesLoaded['INE_A'];?>)">
+							<?php else:?>
+								<div class="hide-INE_A drop-zone-prompt flex flex-column items-center">
+									<i class="icon icon-upload h00"></i>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
+								</div>
+							<?php endif; ?>
+							<input type="file" name="INE_A" id="INE_A" class="drop-zone-input <?= $imagesLoaded['INE_A']['validate'] ?? '';?>">
             </div>
             <div class="help-block"></div>
           </div>
@@ -36,11 +40,15 @@
           <?php if(lang('CONF_LOAD_DOC_B_ID') == 'ON'):?>
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone INE_R label-file p-1">
-              <div class="hide-INE_R drop-zone-prompt flex flex-column items-center">
-                <i class="icon icon-upload h00"></i>
-                <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_B_DOC'); ?></span>
-              </div>
-							<input type="file" name="INE_R" id="INE_R" class="drop-zone-input">
+							<?php if(isset($imagesLoaded) && array_key_exists('INE_R', $imagesLoaded)):?>
+								<img id="preview-INE_R" class="drop-zone-thumb" style="background-image: url(<?= $imagesLoaded['INE_R'];?>)">
+							<?php else:?>
+								<div class="hide-INE_R drop-zone-prompt flex flex-column items-center">
+									<i class="icon icon-upload h00"></i>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
+								</div>
+							<?php endif; ?>
+							<input type="file" name="INE_R" id="INE_R" class="drop-zone-input <?= $imagesLoaded['INE_B']['validate'] ?? '';?>">
             </div>
             <div class="help-block"></div>
           </div>
@@ -49,10 +57,14 @@
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone label-file p-1">
               <div class="drop-zone-prompt flex flex-column items-center">
-                <i class="icon icon-upload h00"></i>
-                <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_F_PASSPORT'); ?></span>
+								<?php if(isset($imagesLoaded) && array_key_exists('PASS_A', $imagesLoaded)):?>
+									<img id="preview-PASS_A" class="drop-zone-thumb" src="<?= $imagesLoaded['PASS_A'];?>">
+								<?php else:?>
+									<i class="icon icon-upload h00"></i>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_PASSPORT'); ?></span>
+								<?php endif; ?>
               </div>
-              <input type="file" name="PASS_A" id="PASS_A" class="drop-zone-input">
+              <input type="file" name="PASS_A" id="PASS_A" class="drop-zone-input <?= $imagesLoaded['PASS_A']['validate'] ?? '';?>">
             </div>
             <div class="help-block"></div>
           </div>
@@ -61,18 +73,20 @@
           <div class="form-group col-6 col-lg-6 px-1 mb-2">
             <div class="drop-zone label-file p-1">
               <div class="drop-zone-prompt flex flex-column items-center">
-                <i class="icon icon-upload h00"></i>
-                <span class="js-file-name h6 regular bold drop-zone-prompt"><?= lang('USER_ADD_B_PASSPORT'); ?></span>
+								<?php if(isset($imagesLoaded) && array_key_exists('PASS_R', $imagesLoaded)):?>
+									<img id="preview-PASS_R" class="drop-zone-thumb" src="<?= $imagesLoaded['PASS_R'];?>">
+								<?php else:?>
+									<i class="icon icon-upload h00"></i>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_PASSPORT'); ?></span>
+								<?php endif; ?>
               </div>
-              <input type="file" name="PASS_R" id="PASS_R" class="drop-zone-input">
+              <input type="file" name="PASS_R" id="PASS_R" class="drop-zone-input <?= $imagesLoaded['PASS_R']['validate'] ?? '';?>">
             </div>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
         </div>
 			</div>
-			<input type="hidden" name="valImages" id="valImages" value="<?= $valImages ?? '' ?>">
-			<input type="hidden" name="loadImages" id="loadImages" value="<?= $loadImages ?? '' ?>">
     </div>
   </div>
   <div class="col-12 col-lg-4 flex justify-start">

@@ -83,6 +83,10 @@ $(function () {
 			reader.onload = () => {
 				thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
 			};
+
+			if (thumbnailElement.classList.contains('ignore')) {
+				thumbnailElement.classList.remove('ignore');
+			}
 		} else {
 			thumbnailElement.style.backgroundImage = null;
 		}
