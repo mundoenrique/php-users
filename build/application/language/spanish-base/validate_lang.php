@@ -38,3 +38,5 @@ $lang['VALIDATE_CONFIRM_PIN'] = 'Confirma tu PIN';
 $lang['VALIDATE_IQUAL_PIN'] = 'Debe ser igual a el nuevo pin';
 $lang['VALIDATE_FORMAT_PIN'] = 'El formato de PIN es inválido.';
 $lang['VALIDATE_CONSECUTIVE_NUMS'] = 'Los 4 números no deben ser consecutivos.';
+$lang['VALIDATE_CODE_RECEIVED'] = 'Coloca el código recibido.';
+$lang['VALIDATE_INVALID_FORMAT'] = 'El formato de código es inválido.';

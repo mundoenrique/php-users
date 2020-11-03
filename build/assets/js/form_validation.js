@@ -102,9 +102,9 @@ function validateForms(form) {
 			"docmentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
-				required: 'Coloca el código recibido.',
-				pattern: 'El formato de código es inválido.',
-				maxlength: 'El formato de código es inválido.'
+				required: lang.VALIDATE_CODE_RECEIVED,
+				pattern: lang.VALIDATE_INVALID_FORMAT,
+				maxlength: lang.VALIDATE_INVALID_FORMAT
 			},
 			"acceptTerms": lang.VALIDATE_ACCEPT_TERMS,
 			"nickName": {
