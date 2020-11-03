@@ -100,10 +100,12 @@ class Novo_Business_Model extends NOVO_Model {
 				if (isset($response->lista) && count($response->lista) > 0) {
 					$this->response->code = 0;
 
-					if($this->session->isImagesNotLoaded) {
+					if($this->session->missingImages) {
 						$this->response->code = 3;
 						$this->response->msg = lang('GEN_MISSING_IMAGES');
-						$this->response->modalBtn['btn1']['action'] = 'destroy';
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
+						$this->response->modalBtn['btn2']['action'] = 'destroy';
 					}
 				} else{
 					$this->response->code = 1;

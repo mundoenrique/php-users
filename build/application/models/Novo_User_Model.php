@@ -94,6 +94,10 @@ class Novo_User_Model extends NOVO_Model {
 							str_replace('/', '-', $response->fechaUltimaConexion)
 						)
 					);
+					$statusImgValida = FALSE;
+					if (property_exists($response, 'img_valida')) {
+						$statusImgValida = strtoupper($response->img_valida) == 'FALSE'? TRUE: FALSE;
+					}
 					$userData = [
 						'logged' => TRUE,
 						'encryptKey' => $response->keyUpdate,
@@ -116,7 +120,7 @@ class Novo_User_Model extends NOVO_Model {
 						'mobilePhone' => $response->celular ?? '',
 						'enterpriseCod' => $response->acCodCia ?? '',
 						'clientAgent' => $this->agent->agent_string(),
-						'isImagesNotLoaded' => $response->imageNotLoaded ?? TRUE,
+						'missingImages' => $statusImgValida,
 					];
 					$this->session->set_userdata($userData);
 
