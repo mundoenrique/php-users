@@ -392,16 +392,11 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
-				$this->response->modalBtn = [
-					'btn1' => [
-						'action' => 'none'
-					],
-					'btn2' => [
-						'text' => lang('GEN_BTN_CANCEL'),
-						'link' => 'identificar-usuario',
-						'action' => 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['link']  = 'identificar-usuario';
+				$this->response->modalBtn['btn2']['action'] = 'redirect';
+
 				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
 			break;
 			case -21:
