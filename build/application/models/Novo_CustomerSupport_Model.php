@@ -96,6 +96,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->codBloqueo = $dataRequest->status;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
+		$this->dataRequest->tipoTarjeta = $dataRequest->isVirtual ? 'virtual' : 'fisica';
 
 		$response = $this->sendToService('callWs_Replacement');
 
