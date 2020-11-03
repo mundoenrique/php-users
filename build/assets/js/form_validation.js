@@ -48,7 +48,6 @@ function validateForms(form) {
 			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
-			"emailCard": {required: true, pattern: emailValid},
 			"numberCard": {required: true,pattern: numeric,maxlength: 16},
 			"docmentId": {required: true, pattern: alphanum},
 			"cardPIN": {required: true,pattern: numeric},
@@ -99,7 +98,6 @@ function validateForms(form) {
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
-			"emailCard": lang.VALIDATE_EMAIL,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
 			"docmentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,

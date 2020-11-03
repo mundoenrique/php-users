@@ -333,7 +333,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
-		$this->dataRequest->email = $dataRequest->emailCard ?? '';
+		$this->dataRequest->email = $dataRequest->email ?? '';
 		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
 		$authToken = $this->session->flashdata('authToken') ??  '';
 		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
@@ -361,7 +361,7 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->emailConfirm = $response->user->email ?? '';
 
 				if($userData->email == '') {
-					$userData->email = $dataRequest->emailCard ?? '';
+					$userData->email = $dataRequest->email ?? '';
 					$userData->emailConfirm  = '';
 				}
 

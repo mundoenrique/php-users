@@ -37,14 +37,14 @@ $(function () {
 				$('#physicalCardPIN').hide();
 				$('#cardPIN').addClass('ignore')
 				$(numberCard).text(lang.USER_EMAIL);
-				$('#numberCard').attr('id','emailCard');
-				$('#emailCard').attr('name','emailCard').attr('maxlength','32');
+				$('#numberCard').attr('id','email');
+				$('#email').attr('name','email').attr('maxlength','32');
 				resetInput();
 		} else {
 				$('#physicalCardPIN').show();
 				$('#cardPIN').removeClass('ignore')
 				$(numberCard).text(lang.GEN_NUMBER_CARD);
-				$('#emailCard').attr('id','numberCard');
+				$('#email').attr('id','numberCard');
 				$('#numberCard').attr('name','numberCard').attr('maxlength','16');
 				resetInput();
 		}
