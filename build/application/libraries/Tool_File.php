@@ -104,7 +104,6 @@ class Tool_File {
 				$resultDeletingFiles[] = $statusCodeResponse;
 			}
 		}
-
 		log_message('DEBUG', "Novo Tool_Api: deleteFiles " . json_encode($_FILES));
 
 		return !in_array(400, $resultDeletingFiles);
@@ -124,5 +123,115 @@ class Tool_File {
 				$_FILES[$key]['nameForUpload'] = strtolower($key."_".$lastPartFileName);
 			}
 		}
+	}
+
+	/**
+	 * @info Crea array con nombre de archivos a procesar, dependiendo del tipo de documento
+	 * @author Pedro Torres
+	 * @date Oct 27th, 2020
+	 */
+	public function convertBase64ToImage($imageData, $directoryToUpload, $fileName)
+	{
+		log_message('INFO', 'Novo Tool_File: convertBase64ToImage Method Initialized');
+
+		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$result = FALSE;
+		if (strpos($imageData, 'base64') > 0) {
+			if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
+				$data = substr($imageData, strpos($imageData, ',') + 1);
+				$type = strtolower($type[1]);
+
+				if (in_array($type, explode('|', $configToUploadFile['allowed_types']))) {
+					$data = str_replace( ' ', '+', $data );
+					$data = base64_decode($data);
+
+					if (strlen($data) <= $configToUploadFile['max_size']) {
+						$fullPathFile = join(DIRECTORY_SEPARATOR,
+							[$directoryToUpload, $fileName]
+						);
+						if (file_put_contents("$fullPathFile.{$type}", $data) > 0 ) {
+							$result = "$fileName.{$type}";
+						}
+					}
+				}
+			}
+		}
+		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($result));
+
+		return $result;
+	}
+
+	public function fakeDataUpload($userName)
+	{
+		$dirLoadImages = join(DIRECTORY_SEPARATOR,
+			['C:\Users',
+				'ptorres',
+				'Pictures',
+				'fakeData'
+			],
+		);
+
+		$matches = scandir($dirLoadImages);
+		$imagesDocument = [];
+		$ids = ['','','INE_A', 'INE_R'];
+		foreach ($matches as $k => $v) {
+			if (!is_dir($v)) {
+				$imagesDocument[$ids[$k]]['base64'] = $v;
+			}
+		}
+
+		foreach ($imagesDocument as $key => $value) {
+			$fullPathToImage = join(DIRECTORY_SEPARATOR,
+				[$dirLoadImages, $value['base64']	],
+			);
+			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+			$data = file_get_contents($fullPathToImage);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			if (file_exists($fullPathToImage)) {
+				$imagesDocument[$key]['base64'] = $base64;
+				$imagesDocument[$key]['validate'] = 'ignore';
+			}
+		}
+
+		$r = new stdClass();
+		$r->request = (object)
+		array (
+			'key' => 'b4556ab03a8a120d1e77abfc55f515e3',
+			'user_name' => $userName,
+			'client' => 'bnt',
+			'type_document' => '15',
+			'nro_document' => '1232352435',
+			'INE_A' => $imagesDocument['INE_A']['base64'],
+			'INE_R' => $imagesDocument['INE_R']['base64'],
+		);
+		return $this->CI->encrypt_connect->cryptography(json_encode($r->request));
+	}
+
+	public function fakeDataErase($userName)
+	{
+		$dirLoadImages = join(DIRECTORY_SEPARATOR,
+			[BASE_UPLOAD_PATH,
+				'BNT',
+				strtoupper($userName)
+			],
+		);
+
+		$matches = scandir($dirLoadImages);
+		$imagesDocument = [];
+		foreach ($matches as $k => $v) {
+			if (!is_dir($v)) {
+				$imagesDocument[] = $v;
+			}
+		}
+
+		$r = new stdClass();
+		$r->request = (object)
+		array (
+			'key' => 'b4556ab03a8a120d1e77abfc55f515e3',
+			'user_name' => $userName,
+			'client' => 'bnt',
+			'files' => implode ("; ", $imagesDocument),
+		);
+		return $this->CI->encrypt_connect->cryptography(json_encode($r->request));
 	}
 }

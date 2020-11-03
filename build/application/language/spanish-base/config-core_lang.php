@@ -88,9 +88,7 @@ $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpg|png|jpeg',
 	'detect_mime' => true,
-	'max_size' => '1024',
-	'max_width' => '1024',
-	'max_height' => '1024',
+	'max_size' => '6144', //6mb
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];

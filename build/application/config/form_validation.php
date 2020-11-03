@@ -480,21 +480,15 @@ $config = [
 			'rules' => 'trim|required'
 		],
 	],
-	'dataErase' => [
+	'uploadFile' => [
 		[
-			'field' => 'client',
-			'rules' => 'trim|required'
+			'field' => 'INE_A',
+			'rules' => 'required'
 		],
 		[
-			'field' => 'user_name',
-			'rules' => 'trim|required'
+			'field' => 'INE_R',
+			'rules' => 'required'
 		],
-		[
-			'field' => 'files',
-			'rules' => 'trim|required'
-		],
-	],
-	'dataUpload' => [
 		[
 			'field' => 'client',
 			'rules' => 'trim|required'
@@ -505,30 +499,24 @@ $config = [
 		],
 		[
 			'field' => 'type_document',
-			'rules' => 'trim|required|regex_match[/^[0-9\/]+$/]'
+			'rules' => 'trim|required'
 		],
 		[
 			'field' => 'nro_document',
-			'rules' => 'trim|required|regex_match[/^[0-9\/]+$/]'
-		],
-	],
-	'uploadFile' => [
-		[
-			'field' => 'image[]',
-			'rules' => 'required'
-		],
-		[
-			'field' => 'images[]',
-			'rules' => 'required'
-		],
-		[
-			'field' => 'data',
 			'rules' => 'trim|required'
 		],
 	],
 	'eraseFiles' => [
 		[
-			'field' => 'data',
+			'field' => 'client',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'user_name',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'files',
 			'rules' => 'trim|required'
 		],
 	],

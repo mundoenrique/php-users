@@ -61,6 +61,11 @@ class Tool_Api {
 		if (!is_null($objRequest) || !is_null($nameApi)) {
 			$this->setContract($nameApi);
 
+			// TODO
+			// Solo para generar datos en prueba
+			// $objRequest->request = $this->CI->tool_file->fakeDataUpload('torres');
+			// $objRequest->request = $this->CI->tool_file->fakeDataErase('torres');
+
 			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
 				$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
 
@@ -139,7 +144,7 @@ class Tool_Api {
 		return $this->responseDefect;
 	}
 
-		/**
+	/**
 	 * @info Método para securizar el contenido de los campos permitidos en la petición
 	 * @author Pedro A. Torres F.
 	 * @date Oct 16, 2020
@@ -147,7 +152,7 @@ class Tool_Api {
 	 */
 	private function clearProperty ($property = null)
 	{
-		return is_string($property) ?
+		return is_string($property) && !strpos($property, 'base64') ?
 			$this->CI->security->xss_clean(strip_tags($property)) :
 			$property;
 	}
