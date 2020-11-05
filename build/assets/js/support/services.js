@@ -2,6 +2,11 @@
 $(function () {
 	var ulOptions = $('.nav-item-config');
 	var pinManagement = $('input[type=radio][name="recovery"]');
+	var virtual = $('#isVirtual').val();
+
+	if (virtual){
+		$("#replaceMotSol option[value='43']").text(lang.CUST_REQUEST_REASON_43);
+	};
 
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
@@ -32,18 +37,24 @@ $(function () {
 		$(this).siblings('.section').addClass('current');
 	})
 
+	$('#pinManagementForm').find('input').prop('disabled', true);
+	$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
 	pinManagement.first().prop('checked', true);
 	$('#' + pinManagement.first().attr('id') + 'Input').removeClass('hide');
-	$('#PinManagementBtn').attr('action', pinManagement.first().attr('id'));
+	$('#pinManagementBtn').attr('action', pinManagement.first().attr('id'));
+	$('#' + pinManagement.first().attr('id') + 'Input').find('input').prop('disabled', false);
+	$('#' + pinManagement.first().attr('id') + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE);
 
 	pinManagement.on('change', function (e) {
 		var currentActions
 		currentActions = e.currentTarget.id;
-		$('#PinManagementForm').find('.row').addClass('hide');
-		$('#PinManagementForm').find('input').prop('disabled', true);
+		$('#pinManagementForm').find('.row').addClass('hide');
+		$('#pinManagementForm').find('input').prop('disabled', true);
+		$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
 		$('#' + currentActions + 'Input').removeClass('hide');
 		$('#' + currentActions + 'Input').find('input').prop('disabled', false);
-		$('#PinManagementBtn').attr('action', currentActions);
+		$('#' + currentActions + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE)
+		$('#pinManagementBtn').attr('action', currentActions);
 	})
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
@@ -107,14 +118,14 @@ $(function () {
 		}
 
 		if (services.length == 0) {
-			data = {
+			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
 					link: 'lista-de-tarjetas',
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.GEN_ICON_DANGER, data);
+			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.GEN_ICON_DANGER, modalBtn);
 		}
 	});
 
@@ -123,10 +134,22 @@ $(function () {
 		var thisAction = $(this);
 		var action = thisAction.attr('action');
 		var validForm = true;
+		var dataFormAction = {};
 		$('#action').val(action);
 
-		if (action == 'replacement') {
-			form = $('#replacementForm');
+		switch (action) {
+			case 'replacement':
+				form = $('#replacementForm');
+				dataFormAction.status = $('#replaceMotSol').val();
+				break;
+			case 'changePin':
+			case 'generatePin':
+				form = $('#pinManagementForm');
+				dataFormAction = getDataForm(form);
+				break;
+		}
+
+		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
 			validateForms(form);
 			validForm = form.valid();
 		}
@@ -136,14 +159,20 @@ $(function () {
 			data = getDataForm(form);
 			$('.nav-config-box').addClass('no-events');
 
+			if (action == 'changePin') {
+				delete dataFormAction.confirmPin;
+			}
+
+			if (action == 'generatePin') {
+				delete dataFormAction.generateConfirmPin;
+			}
+
 			if (thisAction.hasClass('btn')) {
 				insertFormInput(true);
 				btnText = thisAction.text().trim()
 				thisAction.html(loader);
 
-				if (action == 'replacement') {
-					data.status = $('#replaceMotSol').val();
-				}
+				Object.assign(data, dataFormAction);
 			} else {
 				$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
 				$('.hide-out').addClass('hide');
@@ -151,7 +180,7 @@ $(function () {
 
 			who = 'CustomerSupport'; where = data.action;
 			callNovoCore(who, where, data, function (response) {
-				if (data.action == 'TemporaryLock' && response.success) {
+				if (data.action == 'temporaryLock' && response.success) {
 					var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
 					$('.status-text1').text(statusText);
 					$('.status-text2').text(statusText.toLowerCase());
@@ -199,4 +228,5 @@ $(function () {
 			})
 		}
 	});
+
 })

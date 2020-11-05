@@ -23,7 +23,7 @@ $config = [
 	'userIdentify' => [
 		[
 			'field' => 'numberCard',
-			'rules' => 'trim|numeric|required'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'docmentId',
@@ -36,6 +36,14 @@ $config = [
 		[
 			'field' => 'acceptTerms',
 			'rules' => 'trim|regex_match[/on/]|required'
+		],
+		[
+			'field' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'signup' => [
@@ -228,7 +236,7 @@ $config = [
 	],
 	'downloadMoves' => [
 		[
-			'field' => 'cardNumber',
+			'field' => 'cardNumberDownd',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
@@ -312,6 +320,34 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		]
 	],
+	'changePin' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'currentPin',
+			'label' => 'currentPin',
+			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
+		],
+		[
+			'field' => 'newPin',
+			'label' => 'newPin',
+			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|differs[currentPin]'
+		],
+	],
 	'userCardsList' => [
 		[
 			'field' => 'cardList',
@@ -326,6 +362,16 @@ $config = [
 		[
 			'field' => 'userIdNumber',
 			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		]
+	],
+	'getVirtualDetail' => [
+		[
+			'field' => 'cardNumberDownd',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'getMovements' => [
@@ -394,6 +440,30 @@ $config = [
 		[
 			'field' => 'id',
 			'rules' => 'trim|alpha|required'
+		]
+	],
+	'professionsList' => [
+		[
+			'field' => 'prof',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'statesList' => [
+		[
+			'field' => 'state',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'cityList' => [
+		[
+			'field' => 'stateCode',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'regions' => [
+		[
+			'field' => 'groupCode',
+			'rules' => 'trim|numeric|required'
 		]
 	],
 	'keepSession' => [

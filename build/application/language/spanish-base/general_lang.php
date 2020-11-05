@@ -121,8 +121,8 @@ $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitu
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
-$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
-$lang['GEN_VALIDATION_LOGGED'] = 'serás desconectado.';
+$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
+$lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 //DATATABLES
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
@@ -188,6 +188,21 @@ $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
 
 $lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
+$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
+$lang['GEN_RESP_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
+$lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
+$lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
+$lang['GEN_PHYSICAL_CARD'] = 'Física';
+$lang['GEN_VIRTUAL_CARD'] = 'Tarjeta virtual';
+$lang['GEN_VIRTUAL'] = '%s virtual';
+$lang['GEN_VIRTUAL_DISJOIN'] = '~';
+$lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
+$lang['GEN_INVALID_CARD'] = 'El número de tarjeta no es válido o ya fue registrada.';
+$lang['GEN_SENSITIVE_DATA'] = '<div>Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.</div>';
+$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
+$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

@@ -51,17 +51,17 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang('La tarjeta %s, ha sido %s.', [$dataRequest->cardNumberMask, $responseAction]);
 				$this->response->success = TRUE;
-				$this->response->data['btn1']['link'] = 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
 			break;
 			case 7:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
-				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
-				$this->response->data['btn1']['link'] = 'close';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['link'] = 'close';
 			break;
 			case -125:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
-				$this->response->data['btn1']['link'] = 'close';
+				$this->response->modalBtn['btn1']['link'] = 'close';
 			break;
 		}
 
@@ -96,6 +96,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->codBloqueo = $dataRequest->status;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
+		$this->dataRequest->tipoTarjeta = $dataRequest->isVirtual ? 'virtual' : 'fisica';
 
 		$response = $this->sendToService('callWs_Replacement');
 
@@ -104,22 +105,22 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = 'Bloqueo permanente';
 				$this->response->msg = novoLang('La tarjeta %s, ha sido %s.', [$dataRequest->cardNumberMask, 'bloqueda de forma permanente']);
 				$this->response->success = TRUE;
-				$this->response->data['btn1']['link'] = 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
 			break;
 			case 7:
 				$this->response->title = 'Bloqueo permanente';
-				$this->response->msg = novoLang('La tarjeta %s se encuentra bleoqueda', $dataRequest->cardNumberMask);
-				$this->response->data['btn1']['link'] = 'close';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['link'] = 'close';
 			break;
 			case -395:
 				$this->response->title = 'Bloqueo permanente';
 				$this->response->msg = novoLang('La tarjeta %s tiene una reposición pendiente', $dataRequest->cardNumberMask);
-				$this->response->data['btn1']['link'] = 'close';
+				$this->response->modalBtn['btn1']['link'] = 'close';
 			break;
 			case -125:
 				$this->response->title = 'Bloqueo permanente';
 				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
-				$this->response->data['btn1']['link'] = 'close';
+				$this->response->modalBtn['btn1']['link'] = 'close';
 			break;
 		}
 
@@ -175,8 +176,8 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 					$shops->$name = $value;
 				}
 
-				$this->response->data['shops'] = $shops;
-				$this->response->data['dataTwirls'] = $dataTwirls;
+				$this->response->data->shops = $shops;
+				$this->response->data->dataTwirls = $dataTwirls;
 			break;
 			case -438:
 				$internalRc = $response->bean->cards[0]->rc ?? '';
@@ -205,7 +206,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				if (!$default) {
 					$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
 					$this->response->icon = lang('GEN_ICON_WARNING');
-					$this->response->data['btn1']['action'] = 'close';
+					$this->response->modalBtn['btn1']['action'] = 'close';
 				}
 			break;
 		}
@@ -262,18 +263,79 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 					$limits->$name = $value;
 				}
 
-				$this->response->data['limits'] = $limits;
-				$this->response->data['dataLimits'] = $datalimits;
+				$this->response->data->limits = $limits;
+				$this->response->data->dataLimits = $datalimits;
 
 			break;
 			case -447:
 				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
 				$this->response->msg = lang('CUST_NON_RESULTS');
 				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'close';
 			break;
 		}
 
 		return $this->responseToTheView('callWs_TransactionalLimits');
+	}
+	/**
+	 * @info Método para solictar el cambio de PIN de una tarjeta
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @author: Jhonatan Llerena
+	 * @date May 14th, 2019
+	 */
+	public function callWs_ChangePin_CustomerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Atención al cliente';
+		$this->dataAccessLog->function = 'Servicios';
+		$this->dataAccessLog->operation = 'Solictud de Cambio de Pin';
+
+		$expireDate = json_decode(base64_decode($dataRequest->expireDate));
+		$expireDate = $this->cryptography->decrypt(
+			base64_decode($expireDate->plot),
+			utf8_encode($expireDate->password)
+		);
+
+		$this->dataRequest->idOperation = '110';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataRequest->accodUsuario = $this->session->userName;
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
+		$this->dataRequest->prefix = $dataRequest->prefix;
+		$this->dataRequest->fechaExp = $expireDate;
+		$this->dataRequest->pin = $dataRequest->currentPin;
+		$this->dataRequest->pinNuevo = $dataRequest->newPin;
+		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
+		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
+
+		$response = $this->sendToService('callWs_TemporaryLock');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('El PIN de la tarjeta %s, ha sido cambiado exitosamente', [$dataRequest->cardNumberMask]);
+				$this->response->success = TRUE;
+				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
+			break;
+			case 7:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('La tarjeta %s se encuentra bloqueda', $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['link'] = 'close';
+			break;
+			case -395:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('La tarjeta %s tiene una reposición pendiente', $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['link'] = 'close';
+			break;
+			case -125:
+				$this->response->title = 'Cambio de PIN';
+				$this->response->msg = novoLang('No es posible realizar esta acción la tarjeta %s está vencida', $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['link'] = 'close';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_ChangePin');
 	}
 }

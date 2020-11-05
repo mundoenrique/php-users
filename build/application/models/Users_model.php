@@ -31,6 +31,13 @@ class Users_model extends CI_Model
 		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
 
+		$newCore = array (
+			'Usd',
+			'Pe'
+			//'Co',
+			//'Ve'
+		);
+
 		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
@@ -64,15 +71,21 @@ class Users_model extends CI_Model
 		}
 		$cookie = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
 		$putSession = FALSE;
-
-		log_message('info', 'Respuesta del server - login Usuario: ' . json_encode($desdata));
-
+		$desdata->validateRedirect = FALSE;
 		if ($desdata->rc === -424) {
 
 			$bean = json_decode($desdata->bean);
 
 			$desdata->email = $bean->emailEnc;
 			$this->session->set_flashdata('authToken', $bean->codigoOtp->authToken);
+
+			if (!empty($newCore)){
+				$validateNewCore = in_array($bean->codPais,$newCore);
+				if($validateNewCore){
+					$desdata->codPaisUrl = $this->redirectNewCore($bean->codPais);
+					$desdata->validateRedirect = TRUE;
+				}
+			}
 		}
 
 		if (isset($response) && $desdata->rc == 0) {
@@ -115,6 +128,14 @@ class Users_model extends CI_Model
 				$data = ['username' => $username];
 				$this->db->where('id', $this->session->session_id);
 				$this->db->update('cpo_sessions', $data);
+
+				if (!empty($newCore)){
+					$validateNewCore = in_array($desdata->codPais,$newCore);
+					if($validateNewCore){
+						$desdata->codPaisUrl = $this->redirectNewCore($desdata->codPais);
+						$desdata->validateRedirect = TRUE;
+					}
+				}
 			} else {
 				$desdata = [
 					'rc' => -5,
@@ -123,6 +144,8 @@ class Users_model extends CI_Model
 			}
 		}
 		$salida = json_encode($desdata);
+
+		log_message('info', 'Respuesta del server - login Usuario2: ' . json_encode($desdata));
 
 		$response = $this->cryptography->encrypt($desdata);
 
@@ -532,6 +555,16 @@ class Users_model extends CI_Model
 		return json_encode($desdata);
 	}
 
+	//FUNCION PARA VALIDAR REDIRECCIONAMIENTO A NUEVO CORE
+	public function redirectNewCore($codPais)
+	{
+		$codPaisUrl = changeCoreUrl($codPais);
+		$this->logout();
+		$this->session->unset_userdata($this->session->all_userdata());
+		$this->session->sess_destroy();
+
+		return $codPaisUrl;
+	}
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

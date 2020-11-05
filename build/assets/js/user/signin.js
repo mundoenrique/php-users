@@ -34,13 +34,13 @@ $(function () {
 						}, function (token) {
 							if (!token) {
 								icon = lan.GEN_ICON_WARNING;
-								data = {
+								modalBtn = {
 									btn1: {
 										link: 'inicio',
 										action: 'redirect'
 									}
 								};
-								appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, data);
+								appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, modalBtn);
 								validateSignin(signinBtn);
 							}
 						});

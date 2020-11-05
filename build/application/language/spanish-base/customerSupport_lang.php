@@ -81,3 +81,4 @@ $lang['CUST_REPLACE_REASON'] = [
 	'TD' => 'Tarjeta deteriorada',
 	'TR' => 'Reemplazar tarjeta',
 ];
+$lang['CUST_REQUEST_REASON_43'] = 'Fraude';
