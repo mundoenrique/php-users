@@ -95,7 +95,7 @@ class Novo_User_Model extends NOVO_Model {
 						)
 					);
 					$statusImgValida = FALSE;
-					if (property_exists($response, 'img_valida')) {
+					if (strtoupper($response->aplicaImgDoc) == 'S') {
 						$statusImgValida = strtoupper($response->img_valida) == 'FALSE'? TRUE: FALSE;
 					}
 					$userData = [

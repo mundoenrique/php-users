@@ -102,10 +102,15 @@ class Novo_Business_Model extends NOVO_Model {
 
 					if($this->session->missingImages) {
 						$this->response->code = 3;
+						$this->response->title = lang('GEN_TITLE_IMPORTANT');
+						$this->response->icon = lang('GEN_ICON_INFO');
 						$this->response->msg = lang('GEN_MISSING_IMAGES');
-						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
 						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
+						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
 						$this->response->modalBtn['btn2']['action'] = 'destroy';
+
+						$this->session->set_userdata('missingImages', FALSE);
 					}
 				} else{
 					$this->response->code = 1;
