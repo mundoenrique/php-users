@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['VALIDATE_USERLOGIN'] = '';
 $lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
 $lang['VALIDATE_USERPASS_PATT'] = 'Combinación incorrecta de usuario y contraseña';
+$lang['VALIDATE_OTP_CODE'] = 'Ingresa un código de seguridad válido (letras y números)';
 $lang['VALIDATE_RECOVER_OPTION'] = 'Selecciona una opción';
 $lang['VALIDATE_EMAIL'] = 'Indica un correo válido "usuario@ejemplo.com"';
 $lang['VALIDATE_ID_NUMBER'] = 'Se admiten números y letras';

@@ -40,6 +40,7 @@ function validateForms(form) {
 		rules: {
 			"userName":	{required: true, pattern: alphanumunder},
 			"userPass": 	{verifyRequired: '#userName', verifyPattern: '#userName'},
+			"otpCode": { required: true, pattern: alphanum },
 			"recoveryAccess": 	{required: true},
 			"email": 	{required: true, pattern: emailValid},
 			"idNumber": 	{required: true, pattern: alphanum},
@@ -84,6 +85,7 @@ function validateForms(form) {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT,
 			},
+			"otpCode": lang.VALIDATE_OTP_CODE,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,

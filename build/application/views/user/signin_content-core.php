@@ -7,7 +7,7 @@
           alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
         <span class="mb-2 secondary center h3"><?= lang('USER_SIGNIN_TITLE') ?></span>
         <div id="widget-signin" class="widget rounded h-100">
-          <form id="signin-form">
+          <form id="signInForm">
             <div class="form-group">
               <label for="userName"><?= lang('GEN_USER'); ?></label>
               <input id="userName" name="userName" class="form-control" type="text" autocomplete="off" disabled>
@@ -16,14 +16,14 @@
             <div class="form-group">
               <label for="userPass"><?= lang('GEN_PASSWORD'); ?></label>
               <div class="input-group">
-                <input id="userPass" name="userPass" class="form-control pwd-input" type="password" autocomplete="off" disabled>
+                <input id="userPass" name="userPass" class="form-control pwd-input" type="text" autocomplete="off" disabled>
                 <div class="input-group-append">
                   <span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
                 </div>
               </div>
               <div class="help-block"></div>
             </div>
-            <button id="signin-btn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5 login-btn">
+            <button id="signInBtn" class="btn btn-loading-lg btn-primary w-100 mt-3 mb-5 login-btn">
               <span class="icon-lock mr-1 h3 bg-items" aria-hidden="true"></span>
               <?= lang('GEN_BTN_SIGNIN') ?>
             </button>

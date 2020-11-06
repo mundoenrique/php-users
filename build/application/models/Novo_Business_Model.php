@@ -420,7 +420,7 @@ class Novo_Business_Model extends NOVO_Model {
 						'expirationDate' => $expirationDate,
 						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
 					];
-					$this->response->modalBtn['btn1']['action'] = 'close';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 				case -424://MODAL OTP
 					$this->response->code = 2;

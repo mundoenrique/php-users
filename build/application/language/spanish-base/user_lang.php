@@ -11,6 +11,7 @@ $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad
 $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
+$lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';

@@ -17,10 +17,13 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
+//VALIDATE IP
+$lang['CONF_VALIDATE_IP'] = 'ON';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
 //CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'white';
+$lang['CONF_RESTAR_USERNAME'] = 'OFF';
 //MENU
 $lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
