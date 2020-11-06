@@ -55,12 +55,12 @@
           <?php if($longProfile == 'S'):?>
           <div class="form-group col-3 col-lg-6">
             <label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
-            <input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality" value="">
+            <input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="placeBirth" class="form-control <?= $updateUser; ?>" type="text" name="placeBirth" value="">
+            <input id="placeBirth" class="form-control <?= $updateUser; ?>" type="text" name="placeBirth">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" value="">
+            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" maxlength="1" >
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
@@ -207,12 +207,12 @@
         <div class="row mx-1">
           <div class="form-group col-4 col-lg-6">
             <label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-            <input id="idRUCText" class="form-control" type="text" name="idRUCText" value="20000002" autocomplete="off">
+            <input id="idRUCText" class="form-control" type="text" name="idRUCText" autocomplete="off" onlyread>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
             <label for="idWorkplace"><?= lang('USER_WORK_CENTER') ?></label>
-            <input id="idWorkplace" class="form-control" type="text" name="idWorkplace" value="" autocomplete="off">
+            <input id="idWorkplace" class="form-control" type="text" name="idWorkplace" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
@@ -248,13 +248,13 @@
 
           <div class="form-group col-6 col-lg-12 col-xl-6">
             <label for="charge"><?= lang('USER_CHARGE') ?></label>
-            <input id="chargeText" class="form-control" type="text" name="chargeText" value="" autocomplete="off">
+            <input id="chargeText" class="form-control" type="text" name="chargeText" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-6">
             <label for="averageMonthly"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
-            <input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" value="" autocomplete="off">
+            <input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
@@ -272,12 +272,12 @@
           </div>
           <div class="form-group col-6">
             <label for="publicPosition"><?= lang('USER_PUBLIC_POSITION') ?></label>
-            <input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" value="" autocomplete="off">
+            <input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
             <label for="institution"><?= lang('USER_INSTITUTION') ?></label>
-            <input id="institution" class="form-control" disabled type="text" name="institution" value="" autocomplete="off">
+            <input id="institution" class="form-control" disabled type="text" name="institution" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 pt-2 center">

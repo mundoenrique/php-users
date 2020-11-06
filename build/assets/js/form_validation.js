@@ -2,13 +2,15 @@
 function validateForms(form) {
 	var validCountry = country;
 	var onlyNumber = /^[0-9]{6,8}$/;
+	var onlyOneNumber = /^[0-9]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = /^(([a-z]{2,})+([a-z0-9_]){4,16})$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ]{3,70}$/i;
-	var alphaName = /^[a-zñáéíóú ]{1,70}$/i;
+	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
+	var alphaLetter = /^[a-zñáéíóú]{4,50}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -57,7 +59,11 @@ function validateForms(form) {
 			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
 			"middleName": {pattern: alphaName},
 			"surName": {pattern: alphaName},
-			"birthDate": {required: true, pattern: date.dmy},
+			"birthDate": {required: true, pattern: date.dmy },
+			"nationality": { required: true, lettersonly: true, minlength: 4 },
+			"placeBirth": { pattern: alphaLetter },
+			"civilStatus": { requiredSelect: true },
+			"verifierCode": { required: true, pattern: onlyOneNumber },
 			"gender": {required: true},
 			"confirmEmail": {required: true, pattern: emailValid, equalTo: "#email"},
 			"landLine": {pattern: phone},
@@ -118,6 +124,10 @@ function validateForms(form) {
 			"middleName": lang.VALIDATE_MIDDLE_NAME,
 			"surName": lang.VALIDATE_SUR_NAME,
 			"birthDate": lang.VALIDATE_BIRTHDATE,
+			"nationality": lang.VALIDATE_NATIONALITY,
+			"placeBirth": lang.VALIDATE_BIRTHPLACE,
+			"civilStatus": lang.VALIDATE_RECOVER_OPTION,
+			"verifierCode": lang.VALIDATE_VERIFIER_CODE,
 			"gender": lang.VALIDATE_GENDER,
 			"confirmEmail": {
 				required: lang.VALIDATE_EMAIL,

@@ -243,7 +243,7 @@ function sensitiveInformation() {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'close'
+			action: 'destroy'
 		},
 		maxHeight : 600,
 		width : 430,
@@ -336,7 +336,7 @@ function startTimer(duration, display) {
 }
 
 function stopInterval() {
-	$("#system-info").dialog("close");
+	$("#system-info").dialog("destroy");
 	$('#accept').off('click');
 	clearInterval(interval);
 }

@@ -27,7 +27,7 @@ function finishSession() {
 	modalBtn = {
 		btn1: {
 			text: 'Mantener sesión',
-			action: 'close'
+			action: 'destroy'
 		}
 	}
 	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.GEN_ICON_INFO, modalBtn);

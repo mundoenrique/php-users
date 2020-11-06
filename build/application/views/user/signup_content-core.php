@@ -64,7 +64,7 @@
             <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
             <select id="civilStatus" class="custom-select form-control" name="civilStatus">
               <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>"><?= $value; ?></option>
+              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
@@ -122,6 +122,15 @@
             </select>
             <div class="help-block"></div>
           </div>
+					<?php if($longProfile == 'S'):?>
+          <div class="form-group col-3 col-lg-6">
+            <label for="district"><?= lang('USER_DISTRICT') ?></label>
+            <select id="district" class="custom-select form-control" name="district">
+              <option value=""></option>
+            </select>
+            <div class="help-block"></div>
+          </div>
+          <?php endif; ?>
           <div class="form-group col-12 col-lg-8 col-xl-12">
             <label for="address"><?= lang('USER_ADDRESS') ?></label>
             <textarea id="address" class="form-control" name="address"></textarea>
@@ -179,7 +188,7 @@
         <div class="row mx-1">
           <div class="form-group col-4 col-lg-6">
             <label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-            <input id="idRUCText" class="form-control" type="text" name="idRUCText" value="20000002" autocomplete="off">
+            <input id="idRUCText" class="form-control" type="text" name="idRUCText" autocomplete="off" readonly>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
@@ -190,10 +199,9 @@
           <div class="form-group col-4 col-lg-6">
             <label for="employmentStatus"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
             <select id="employmentStatus" class="custom-select form-control" name="employmentStatus">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              <?php foreach (lang('USER_EMPLOYMENT_STATUS_LIST') as $key => $value) : ?>
+              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
+              <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>

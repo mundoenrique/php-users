@@ -5,6 +5,7 @@ var input = 'input[type="text"]';
 var loginIpMsg,btnTex,formcodeOTP,btnTextOtp;
 
 $(function () {
+	insertFormInput(false);
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');

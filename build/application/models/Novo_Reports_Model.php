@@ -109,7 +109,7 @@ class Novo_Reports_Model extends NOVO_Model {
 			break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 

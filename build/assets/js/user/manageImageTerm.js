@@ -4,7 +4,7 @@ $(function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			},
 			maxHeight: 600,
 			width: 800,
