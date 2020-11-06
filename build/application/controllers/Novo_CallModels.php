@@ -45,16 +45,22 @@ class Novo_CallModels extends Novo_Controller {
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
-			$lastPartFileName = $this->session->idType.'_'.$this->session->docmentId;
-			$this->tool_file->setNewNames($lastPartFileName);
 
+			foreach ($_FILES as $key => $value) {
+				if (is_array($value)) {
+					$_FILES[$key]['nameForUpload'] = $this->tool_file->setNameToFile([
+						$key,
+						$this->session->idType,
+						$this->session->docmentId
+					]);
+				}
+			}
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-			$configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
-				array(BASE_UPLOAD_PATH,
-					strtoupper($this->session->countryUri),
-					strtoupper($_POST['nickName'] ?? $this->session->userName),
-				),
-			);
+			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
+				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				strtoupper($this->session->countryUri),
+				strtoupper($_POST['nickName'] ?? $this->session->userName),
+			]);
 
 			$valid = $this->tool_file->uploadFiles($configUploadFile);
 			if (!$valid) {

@@ -34,10 +34,10 @@ class Tool_File {
 				$fileName = $value['nameForUpload'];
 				$configToUploadFile['file_name'] = hash('ripemd160', $fileName);
 
-				$matchedFiles = glob(join(DIRECTORY_SEPARATOR,
-					[$configToUploadFile['upload_path'],
-					$configToUploadFile['file_name'].'.*']
-				));
+				$matchedFiles = $this->buildDirectoryPath([
+					$configToUploadFile['upload_path'],
+					$configToUploadFile['file_name'].'.*'
+				]);
 
 				if ($matchedFiles && count($matchedFiles) > 0) {
 					foreach ($matchedFiles as $fullPathFile) {
@@ -79,25 +79,24 @@ class Tool_File {
 		$resultDeletingFiles = [];
 		foreach ($_FILES as $key => $value) {
 			if (is_array($value)) {
-				$fullPath = join(DIRECTORY_SEPARATOR,
-					array($configUploadFile['upload_path'],
-						$value['resultUpload']
-					),
-				);
+				$fullPathFile = $this->buildDirectoryPath([
+					$configUploadFile['upload_path'],
+					$value['resultUpload']
+				]);
 
 				if (!file_exists($fullPath)) {
 					$statusCodeResponse = 400;
 
-					$_FILES[$key]['resultUpload'] = lang('GEN_SYSTEM_MESSAGE');;
+					$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');;
 				} else {
 					if (unlink($fullPath)) {
 						$statusCodeResponse = 200;
 
-						$_FILES[$key]['resultUpload'] = lang('GEN_SUCCESS_RESPONSE');
+						$_FILES[$key]['resultDelete'] = lang('GEN_SUCCESS_RESPONSE');
 					} else {
 						$statusCodeResponse = 400;
 
-						$_FILES[$key]['resultUpload'] = lang('GEN_SYSTEM_MESSAGE');
+						$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');
 					}
 				}
 
@@ -114,15 +113,15 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function setNewNames ($lastPartFileName)
+	public function setNameToFile ($partOfTheName = [])
 	{
-		log_message('INFO', 'Novo Tool_File: setNewNames Method Initialized');
+		log_message('INFO', 'Novo Tool_File: setNameToFile Method Initialized');
 
-		foreach ($_FILES as $key => $value) {
-			if (is_array($value)) {
-				$_FILES[$key]['nameForUpload'] = strtolower($key."_".$lastPartFileName);
-			}
-		}
+		$setName = strtolower(join('_', $partOfTheName));
+
+		log_message('DEBUG', "Novo Tool_Api: setNameToFile " . $setName);
+
+		return $setName;
 	}
 
 	/**
@@ -146,9 +145,11 @@ class Tool_File {
 					$data = base64_decode($data);
 
 					if (strlen($data) <= $configToUploadFile['max_size']) {
-						$fullPathFile = join(DIRECTORY_SEPARATOR,
-							[$directoryToUpload, $fileName]
-						);
+						$fullPathFile = $this->buildDirectoryPath([
+							$directoryToUpload,
+							$fileName
+						]);
+
 						if (file_put_contents("$fullPathFile.{$type}", $data) > 0 ) {
 							$result = "$fileName.{$type}";
 						}
@@ -161,15 +162,35 @@ class Tool_File {
 		return $result;
 	}
 
+	/**
+	 * @info Crea una cadena con la estructura de directorio indicada, según el S.O.
+	 * @author Pedro Torres
+	 * @date Nov 06th, 2020
+	 */
+	public function buildDirectoryPath ($structureDirectory = [])
+	{
+		log_message('INFO', 'Novo Tool_File: buildDirectoryPath Method Initialized');
+
+		$structure = join(DIRECTORY_SEPARATOR, $structureDirectory);
+
+		log_message('DEBUG', "Novo Tool_Api: buildDirectoryPath " . $structure);
+
+		return $structure;
+	}
+
+
+	// TODO
+	// Borrar
 	public function fakeDataUpload($userName)
 	{
-		$dirLoadImages = join(DIRECTORY_SEPARATOR,
-			['C:\Users',
+		$fullPathToImage =
+		$dirLoadImages = $this->buildDirectoryPath([
+				'C:\Users',
 				'ptorres',
 				'Pictures',
 				'fakeData'
-			],
-		);
+			]);
+
 
 		$matches = scandir($dirLoadImages);
 		$imagesDocument = [];
@@ -181,9 +202,10 @@ class Tool_File {
 		}
 
 		foreach ($imagesDocument as $key => $value) {
-			$fullPathToImage = join(DIRECTORY_SEPARATOR,
-				[$dirLoadImages, $value['base64']	],
-			);
+			$fullPathToImage = $this->buildDirectoryPath([
+				$dirLoadImages,
+				$value['base64']
+			]);
 			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
 			$data = file_get_contents($fullPathToImage);
 			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
@@ -207,14 +229,15 @@ class Tool_File {
 		return $this->CI->encrypt_connect->cryptography(json_encode($r->request));
 	}
 
+	// TODO
+	// Borrar
 	public function fakeDataErase($userName)
 	{
-		$dirLoadImages = join(DIRECTORY_SEPARATOR,
-			[BASE_UPLOAD_PATH,
-				'BNT',
-				strtoupper($userName)
-			],
-		);
+		$dirLoadImages  = $this->buildDirectoryPath([
+			$this->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			'BNT',
+			strtoupper($userName)
+		]);
 
 		$matches = scandir($dirLoadImages);
 		$imagesDocument = [];

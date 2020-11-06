@@ -421,7 +421,6 @@ class Novo_User_Model extends NOVO_Model {
 					'userIdentity' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'idType' => $response->user->tipo_id_ext_per,
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
@@ -563,12 +562,12 @@ class Novo_User_Model extends NOVO_Model {
 
 		if ($this->isResponseRc !== 0) {
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-			$configUploadFile['upload_path'] = join(DIRECTORY_SEPARATOR,
-				array(BASE_UPLOAD_PATH,
-					strtoupper($this->session->countryUri),
-					strtoupper($dataRequest->nickName ?? $this->session->userName),
-				),
-			);
+			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
+				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				strtoupper($this->session->countryUri),
+				strtoupper($dataRequest->nickName ?? $this->session->userName),
+			]);
+
 			$this->tool_file->deleteFiles($configUploadFile);
 		}
 

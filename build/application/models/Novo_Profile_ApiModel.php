@@ -27,12 +27,11 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$statusCodeResponse = 400;
 		$dataResponse = [];
 		$resultData = '';
-		$directoryToUpload = join(DIRECTORY_SEPARATOR,
-			array(BASE_UPLOAD_PATH,
-				strtoupper($dataRequest->client),
-				strtoupper($dataRequest->user_name),
-			),
-		);
+		$directoryToUpload = $this->tool_file->buildDirectoryPath([
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			strtoupper($dataRequest->client),
+			strtoupper($dataRequest->user_name),
+		]);
 
 		if (!is_dir($directoryToUpload)) {
 			mkdir($directoryToUpload, 0755, TRUE);
@@ -40,7 +39,12 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 
 		foreach($dataRequest as $property => $bodyBase64) {
 			if (strpos($bodyBase64, 'base64') > 0) {
-				$realFileName = $property.'_'.$dataRequest->type_document.'_'.$dataRequest->nro_document;
+
+				$realFileName = $this->tool_file->setNameToFile([
+					$property,
+					$dataRequest->type_document,
+					$dataRequest->nro_document
+				]);
 				$shortFileName = hash('ripemd160', $realFileName);
 
 				$uploadedFileName = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName);
@@ -81,13 +85,13 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 
 		foreach ($arrayFilesToDelete as $fileName) {
 			$fileName = trim($fileName);
-			$fullPath = join(DIRECTORY_SEPARATOR,
-				array(BASE_UPLOAD_PATH,
-					strtoupper($dataRequest->client),
-					strtoupper($dataRequest->user_name),
-					$fileName
-				),
-			);
+
+			$fullPath = $this->tool_file->buildDirectoryPath([
+				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				strtoupper($dataRequest->client),
+				strtoupper($dataRequest->user_name),
+				$fileName
+			]);
 
 			if (!file_exists($fullPath)) {
 				$statusCodeResponse = 400;
@@ -104,12 +108,12 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 			];
 			$resultUploadFiles[] = $statusCodeResponse;
 		}
-		$directory = join(DIRECTORY_SEPARATOR,
-			array(BASE_UPLOAD_PATH,
-				strtoupper($dataRequest->client),
-				strtoupper($dataRequest->user_name)
-			),
-		);
+		$directory = $this->tool_file->buildDirectoryPath([
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			strtoupper($dataRequest->client),
+			strtoupper($dataRequest->user_name)
+		]);
+
 		count(scandir($directory)) < 3 && rmdir($directory);
 
 		count(array_unique($resultUploadFiles)) > 1 && $statusCodeResponse = 206;

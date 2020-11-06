@@ -225,21 +225,16 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		$dirLoadImages = join(DIRECTORY_SEPARATOR,
-			[BASE_UPLOAD_PATH,
-				strtoupper($this->session->countryUri),
-				strtoupper($this->session->userName),
-			],
-		);
-
-		$matches = scandir($dirLoadImages);
-		// $imagesDocument = [ <------ lo que debo recibir del servicio
-		// 	'INE_A' => 'fabe3bf4622f3ae4bd58cefea204ed8149e9db0f.jpg',
-		// 	'INE_R' => '98c345iqxmY65AVKpxrSUCqexqfp9W6YWUQPe69d.jpg'
-		// ];
-
 		// TODO
 		// ELIMINAR SE USA SOLO PARA LA CARGA DEL NOMBRE DE LOS ARCHIVOS
+		$dirLoadImages = $this->tool_file->buildDirectoryPath([
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			strtoupper($this->session->countryUri),
+			strtoupper($this->session->userName)
+		]);
+
+		$matches = scandir($dirLoadImages);
+
 		$imagesDocument = [];
 		$ids = ['','','INE_A', 'INE_R'];
 		foreach ($matches as $k => $v) {
@@ -249,9 +244,11 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		foreach ($imagesDocument as $key => $value) {
-			$fullPathToImage = join(DIRECTORY_SEPARATOR,
-				[$dirLoadImages, $value]
-			);
+			$fullPathToImage = $this->tool_file->buildDirectoryPath([
+				$dirLoadImages,
+				$value
+			]);
+
 			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
 			$data = file_get_contents($fullPathToImage);
 			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
