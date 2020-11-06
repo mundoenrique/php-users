@@ -1,4 +1,8 @@
 'use strict'
+var interval,inputModal,inputModalCard,inputModalCardOtp;
+var img = $('#cardImage').val();
+var brand = $('#brand').val();
+
 $(function () {
 	displaymoves()
 	who = 'Business';
@@ -61,6 +65,44 @@ $(function () {
 			})
 		}
 	})
+
+	$('#productdetail').on('click', function (e) {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+		sensitiveInformation();
+	});
+
+	$('#system-info').on('click', '.sensitive-btn', function (e) {
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
+		form= $('#downd-send');
+
+		validateForms(form);
+		if (form.valid()) {
+			$(this)
+			.removeClass('sensitive-btn')
+			.html(loader)
+			.prop('disabled',true)
+			.off('click');
+
+			$('#cancel')
+			.prop('disabled',true);
+
+			data = getDataForm(form);
+			data.codeOTP = '';
+			delete data.month;
+			delete data.year;
+			validateCardDetail();
+		}
+	});
+
+	$('#system-info').on('click', '.virtualDetail-btn', function (e) {
+		$(this)
+		.removeClass('virtualDetail-btn');
+		stopInterval();
+	});
+
 })
 
 function getMovements() {
@@ -188,4 +230,113 @@ function filesAction(action, response) {
 		delete (response.data.btn1);
 		downLoadfiles(response.data);
 	}
+}
+
+function sensitiveInformation() {
+	$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
+	$('#cancel').prop('disabled',false);
+
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		},
+		maxHeight : 600,
+		width : 430,
+		posMy: 'top+50px',
+		posAt: 'top+50px'
+	}
+
+	inputModal = '<div class="justify">' + lang.GEN_SENSITIVE_DATA + '</div>';
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
+}
+
+function validateCardDetail() {
+	who = 'Business'; where = 'getVirtualDetail'
+	callNovoCore(who, where, data, function(response) {
+		switch (response.code) {
+			case 0:
+				$('#accept').addClass('virtualDetail-btn').removeClass('sensitive-btn');
+
+				response.modalBtn.maxHeight = 600;
+				response.modalBtn.width = 530;
+				response.modalBtn.posMy = 'top+50px';
+				response.modalBtn.posAt = 'top+50px';
+
+				inputModalCard = '<h4 class="h5">' + lang.GEN_MENU_CARD_DETAIL + '</h4>';
+				inputModalCard += '<div class="flex mt-3 mx-auto flex-wrap justify-center">';
+				inputModalCard += 	'<div class="card-details row justify-center ml-4 mr-5">';
+				inputModalCard += 		'<div class="card-detail p-1 mx-1">';
+				inputModalCard += 			'<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
+				inputModalCard += 			'<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+				inputModalCard += 				'<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
+				inputModalCard += 				'<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
+				inputModalCard += 				'<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';
+				inputModalCard += 			'</div>';
+				inputModalCard += 		'</div>';
+				inputModalCard += 		'<div id="checked-form" class="form-group col-12 py-1">';
+				inputModalCard += 			'<div class="custom-control custom-switch custom-control-inline flex justify-center">';
+				inputModalCard += 				'<input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency" >';
+				inputModalCard += 				'<label class="custom-control-label custom-switch-text" for="travelAgency" title="'+response.dataDetailCard.securityCode+'"></label>';
+				inputModalCard += 			'</div>';
+				inputModalCard += 		'</div>';
+				inputModalCard += 	'</div>';
+				inputModalCard += '</div>';
+
+				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.GEN_ICON_SUCCESS, response.modalBtn);
+
+				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.CONF_TIMER_MODAL_VIRTUAL+'s</span>');
+				startTimer(lang.CONF_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));
+			break;
+			case 2:
+				$('#accept').addClass('virtualOtp-btn');
+				$('#cancel').prop('disabled',false);
+
+				response.modalBtn.posMy = 'top+50px';
+				response.modalBtn.posAt = 'top+50px';
+
+				inputModalCardOtp = '<form id="formVirtualOtp" name="formVirtualOtp" class="mr-2" method="post" onsubmit="return false;">';
+				inputModalCardOtp+= 		'<p class="pt-0 p-0">'+ lang.GEN_MESSAGE_OTP +'</p>';
+				inputModalCardOtp+= 			'<div class="row">';
+				inputModalCardOtp+= 				'<div class="form-group col-8">';
+				inputModalCardOtp+= 					'<label for="codeOTP">'+ lang.GEN_VERIFICATION_COD +'<span class="danger">*</span></label>';
+				inputModalCardOtp+= 					'<input id="codeOTP" class="form-control" type="text" name="codeOTP" autocomplete="off">';
+				inputModalCardOtp+= 					'<div id="msgErrorCodeOTP" class="help-block"></div>';
+				inputModalCardOtp+= 				'</div>';
+				inputModalCardOtp+= 		'</div>';
+				inputModalCardOtp+= '</form>';
+
+				appMessages(response.title, inputModalCardOtp, response.icon, response.modalBtn);
+			break;
+		}
+	})
+}
+
+function startTimer(duration, display) {
+	var timer = duration,
+			minutes, seconds;
+
+	interval = setInterval(myTimer, 1000);
+
+	function myTimer() {
+		seconds = parseInt(timer % 61, 10);
+		//console.log(seconds);
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		display.text(+seconds+"s");
+
+		if (--timer < 0) {
+			stopInterval()
+		}
+	}
+}
+
+function stopInterval() {
+	$("#system-info").dialog("destroy");
+	$('#accept').off('click');
+	clearInterval(interval);
 }

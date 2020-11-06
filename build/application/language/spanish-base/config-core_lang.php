@@ -17,8 +17,13 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
+//VALIDATE IP
+$lang['CONF_VALIDATE_IP'] = 'ON';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
+//CARD STYLES
+$lang['CONF_CARD_COLOR'] = 'white';
+$lang['CONF_RESTAR_USERNAME'] = 'OFF';
 //MENU
 $lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
@@ -43,6 +48,8 @@ $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['CONF_LONG_TEXT'] = '';
 //SIGNUO
 $lang['CONF_SECRET_KEY'] = 'ON';
+$lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
+$lang['CONF_TIMER_MODAL_VIRTUAL'] = 60;
 //RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
 //FOOTER
@@ -70,7 +77,8 @@ $lang['CONF_PROFESSION'] = 'ON';
 $lang['CONF_CONTAC_DATA'] = 'ON';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
-$lang['CONF_OPER_KEY'] = 'ON';
+$lang['CONF_OPER_KEY'] = 'OFF';
+$lang['CONF_SMS_KEY'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_LOAD_DOCS'] = 'OFF';
 $lang['CONF_LOAD_SELFIE'] = 'OFF';

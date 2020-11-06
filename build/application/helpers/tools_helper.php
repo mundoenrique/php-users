@@ -371,3 +371,23 @@ if(!function_exists('validateUrl')) {
 		}
 	}
 }
+
+if(!function_exists('changeCoreUrl')) {
+	function changeCoreUrl($countryUri) {
+		switch ($countryUri) {
+			case "Usd":
+				$codCountryUri = "us";
+				break;
+			case "Pe":
+				$codCountryUri = "pe";
+				break;
+			case "Co":
+				$codCountryUri = "co";
+				break;
+			case "Ve":
+				$codCountryUri = "ve";
+				break;
+		}
+		return $codCountryUri;
+	}
+}

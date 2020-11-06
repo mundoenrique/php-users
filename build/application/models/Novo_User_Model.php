@@ -24,11 +24,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
+
 		$userName = mb_strtoupper($dataRequest->userName);
+
 		$this->dataAccessLog->userName = $userName;
 
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$authToken = $this->session->flashdata('authToken') ?? '';
 
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -37,13 +40,23 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);//BORRAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		if (IP_VERIFY == 'ON' && lang('CONF_VALIDATE_IP') == 'ON') {
+			$this->dataRequest->codigoOtp = [
+				'tokenCliente' => $dataRequest->OTPcode ?? '',
+				'authToken' => $authToken
+			];
 
-		$this->isResponseRc = ACTIVE_RECAPTCHA ?
-			$this->callWs_ValidateCaptcha_User($dataRequest) :
-			0;
+			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
+		}
 
-		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_Signin');
+		if (isset($dataRequest->OTPcode) && $authToken == '') {
+			$this->isResponseRc = 9998;
+		} else {
+			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+			if ($this->isResponseRc === 0) {
+				$response = $this->sendToService('callWs_Signin');
+			}
 		}
 
 		$time = (object) [
@@ -80,15 +93,10 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->title = lang('GEN_SYSTEM_NAME');
 					$this->response->icon = lang('GEN_ICON_WARNING');
 					$this->response->msg = lang('USER_SIGNIN_INCORRECTLY_CLOSED');
-					$this->response->data = [
-						'btn1'=> [
-							'text'=> lang('GEN_BTN_ACCEPT'),
-							'link'=> 'inicio',
-							'action'=> 'close'
-						]
-					];
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				} else {
 					$this->response->code = 0;
+					$this->response->modal = TRUE;
 					$this->response->data = base_url(lang('GEN_LINK_CARDS_LIST'));
 					$fullSignin = TRUE;
 					$fullName = mb_strtolower($response->primerNombre).' ';
@@ -162,13 +170,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = novoLang(lang('USER_SIGNIN_PASS_EXPIRED'), base_url('recuperar-acceso'));
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 				$this->session->set_flashdata('recoverAccess', 'temporalPass');
 			break;
 			case -8:
@@ -176,31 +178,40 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->msg = novoLang(lang('USER_SIGNIN_SUSPENDED_USER'), base_url('recuperar-acceso'));
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 				$this->session->set_flashdata('recoverAccess', 'blockedPass');
 			break;
+			case -286:
+			case -287:
+			case -288:
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = $this->isResponseRc == -286 ? lang('GEN_OTP_INVALID') : lang('GEN_OTP_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -424:
+				$this->response->code = 2;
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = novoLang(lang('GEN_IP_VERIFY'), $response->bean->emailEnc);
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->session->set_flashdata('authToken', $response->bean->codigoOtp->authToken);
+			break;
+			case 9998:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_EXPIRE_TIME');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case 9999:
+				$this->response->code = 4;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_ACCEPT'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 			break;
-			default:
-				if ($this->isResponseRc != -61) {
-					$this->session->sess_destroy();
-				}
 		}
 
 		return $this->responseToTheView('callWs_Signin');
@@ -241,7 +252,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar acceso';
 		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
-		$this->dataAccessLog->userName = $dataRequest->email;;
+		$this->dataAccessLog->userName = $dataRequest->email;
 
 		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -258,13 +269,8 @@ class Novo_User_Model extends NOVO_Model {
 				$recover = isset($dataRequest->recoveryPwd) ? lang('USER_RECOVER_PASS_TEMP') : lang('USER_RECOVER_USERNAME');
 				$this->response->msg = novoLang(lang('USER_RECOVER_SUCCESS'),  [$maskMail, $recover]);
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> 'inicio',
-						'action'=> 'redirect'
-					]
-				];
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 				break;
 			case -186:
 			case -187:
@@ -276,11 +282,7 @@ class Novo_User_Model extends NOVO_Model {
 		if($this->isResponseRc != 0 && $msgGeneral == '1') {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('GEN_ICON_INFO');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWs_AccessRecover');
@@ -314,7 +316,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
-		//$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -324,42 +325,30 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->response->code = 4;
 				$goLogin = $this->session->has_userdata('logged') ? '' : lang('USER_PASS_LOGIN');
-				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
+
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data = [
-					'btn1'=> [
-						'text'=> lang('GEN_BTN_CONTINUE'),
-						'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio',
-						'action'=> 'redirect'
-					]
-				];
-				break;
+				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
+				$this->response->modalBtn['btn1']['link'] = $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio';
+			break;
 			case -4:
 				$code = 1;
 				$this->response->msg = lang('USER_PASS_USED');
-				break;
+			break;
 			case -192:
 				$code = 1;
 				$this->response->msg = lang('USER_PASS_INCORRECT');
-				break;
 			break;
-			default:
-			if ($this->isResponseRc != -61) {
-				$this->session->sess_destroy();
-			}
 		}
 
 		if($this->isResponseRc != 0 && $code == 1) {
 			$this->session->set_flashdata('changePassword', $changePassType);
 
-			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
 			$this->response->icon = lang('GEN_ICON_WARNING');
-			$this->response->data = [
-				'btn1'=> [
-					'action'=> 'close'
-				]
-			];
+			$this->response->title = lang('GEN_PASSWORD_CHANGE_TITLE');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
+
 		return $this->responseToTheView('CallWs_ChangePassword');
 	}
 	/**
@@ -378,11 +367,19 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
-		$this->dataRequest->cuenta = $dataRequest->numberCard;
+		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
 		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
+		$this->dataRequest->email = $dataRequest->email ?? '';
+		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
+		$authToken = $this->session->flashdata('authToken') ??  '';
+		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
+		$this->dataRequest->otp =[
+			'authToken' => $authToken,
+			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
+		];
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
@@ -400,12 +397,20 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
 				$userData->email = $response->user->email ?? '';
+				$userData->emailConfirm = $response->user->email ?? '';
+
+				if($userData->email == '') {
+					$userData->email = $dataRequest->email ?? '';
+					$userData->emailConfirm  = '';
+				}
+
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
 
-				$this->response->data['signUpData'] = $userData;
-				$this->response->data['affiliation'] = $response->afiliacion;
+				$this->response->data->signUpData = $userData;
+				$this->response->data->affiliation = $response->afiliacion;
+				$this->response->modal = TRUE;
 
 				$userSess = [
 					'userIdentity' => TRUE,
@@ -421,20 +426,42 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userSess);
 			break;
+			case 200://MODAL OTP
+				$this->response->code = 2;
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['link']  = 'identificar-usuario';
+				$this->response->modalBtn['btn2']['action'] = 'redirect';
+
+				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
+			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'No fue posible validar tus datos, por favor vuelve a intentarlo';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->msg = lang('USER_INVALID_DATE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -183:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'El número de tarjeta no es válido o ya fue registrada';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->msg = lang('GEN_INVALID_CARD');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -184:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = 'Alguno de los datos indicado no es válido';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->msg = lang('GEN_INVALID_DATA');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -286://OTP INVALIDO
+				$this->response->msg = lang('GEN_OTP_INVALID');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = lang('USER_IDENTIFY_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -539,13 +566,13 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -284:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro';
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
 				$this->session->sess_destroy();
@@ -606,13 +633,15 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
-		$profileData->departmentCod = $response->direccion->acCodEstado ?? '';
-		$profileData->department = $response->direccion->acEstado ?? '';
+		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
+		$profileData->state = $response->direccion->acEstado ?? '';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? '';
 
 		if ($profileData->longProfile == 'S') {
-			$profileData->city = $response->afiliacion->afiliacion ?? '';
+			$profileData->district = $response->registro->afiliacion->distrito;
+			$profileData->civilStatus = $response->registro->afiliacion->edocivil;
+			$profileData->employee = $response->registro->afiliacion->labora;
 		}
 
 		$phonesList['otherPhoneNum'] = '';
@@ -764,7 +793,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->countrySess,
-			'acCodEstado' => $dataRequest->department,
+			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address
@@ -783,12 +812,12 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->msg = lang('USER_UPDATE_SUCCESS');
-				$this->response->data['btn1']['link'] = 'perfil-usuario';
+				$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
 			break;
 			case -200:
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->msg = lang('USER_UPDATE_FAIL');
-				$this->response->data['btn1']['link'] = 'perfil-usuario';
+				$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
 			break;
 		}
 

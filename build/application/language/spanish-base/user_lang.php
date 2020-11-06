@@ -11,6 +11,7 @@ $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad
 $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
+$lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
@@ -80,6 +81,8 @@ $lang["USER_TERMS_CONTENT"] = '
 	</li>
 </ol>
 ';
+$lang['USER_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
+$lang['USER_MSG_ACCESS_ACCOUNT'] = '<p>Si aún no posees usuario para acceder al sistema <strong>%s</strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>';
 $lang["USER_CONT_PROTECTION_TITLE"]='Contrato';
 $lang["USER_CONT_PROTECTION_SUBTITLE"]='Protección de datos personales';
 $lang["USER_CONT_PROTECTION_CONTENT"] = '
@@ -478,6 +481,7 @@ $lang['USER_ADDRESS_TYPE_LIST'] = [
 $lang['USER_POSTAL_CODE'] = 'Código postal';
 $lang['USER_STATE'] = 'Estado';
 $lang['USER_CITY'] = 'Ciudad';
+$lang['USER_DISTRICT'] = 'Distrito';
 $lang['USER_PHONE_LANDLINE'] = 'Teléfono fijo';
 $lang['USER_PHONE_MOBILE'] = 'Teléfono móvil';
 $lang['USER_PHONE_OTHER'] = 'Otro teléfono';
@@ -501,6 +505,11 @@ $lang['USER_LABOR_DATA'] = 'Datos laborales';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['USER_WORK_CENTER'] = 'Centro laboral';
 $lang['USER_EMPLOYMENT_STATUS'] = 'Situación laboral';
+$lang['USER_EMPLOYMENT_STATUS_LIST'] = [
+	'' => 'Selecciona',
+	'1' => 'Dependiente',
+	'0' => 'Independiente'
+];;
 $lang['USER_SENIORITY'] = 'Antigüedad laboral';
 $lang['USER_OCCUPATION'] = 'Ocupación, oficio o profesión';
 $lang['USER_CHARGE'] = 'Cargo';
@@ -523,3 +532,5 @@ $lang['USER_LOAD_DOCS_INFO4'] = 'El tamaño máximo por archivo debe ser de 6Mb.
 $lang['USER_LOAD_DOCS_INFO5'] = 'Su documento de Identidad debe encontrarse en vigencia.';
 $lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';
+$lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente.';
+$lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';

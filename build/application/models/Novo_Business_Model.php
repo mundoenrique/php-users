@@ -31,6 +31,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $this->session->userId;
 
 		$response = $this->sendToService('callWs_UserCardsList');
+
 		$cardsList = [];
 		$serviceList = [];
 
@@ -45,6 +46,9 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
 						$cardRecord->services = $cardsRecords->services;
+						$cardRecord->isVirtual = $cardsRecords->tvirtual;
+						$cardRecord->virtualCard = $cardsRecords->tvirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
+						$cardRecord->tittleVirtual = $cardsRecords->tvirtual ? lang('GEN_VIRTUAL_CARD') : '';
 
 						switch ($cardRecord->status) {
 							case '':
@@ -100,7 +104,7 @@ class Novo_Business_Model extends NOVO_Model {
 				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
 				}
-				$this->response->data->resp['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 		}
 
 		$serviceList = array_unique($serviceList);
@@ -133,7 +137,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
 		$response = $this->sendToService('callWs_GetBalance');
-
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -205,15 +208,9 @@ class Novo_Business_Model extends NOVO_Model {
 
 		}
 
-		if ($this->input->is_ajax_request()) {
-			$this->response->data['movesList'] = $movesList;
-			$this->response->data['balance'] = $balance;
-			$this->response->data['totalMoves'] = $totalMoves;
-		} else {
-			$this->response->data->movesList = $movesList;
-			$this->response->data->balance = $balance;
-			$this->response->data->totalMoves = $totalMoves;
-		}
+		$this->response->data->movesList = $movesList;
+		$this->response->data->balance = $balance;
+		$this->response->data->totalMoves = $totalMoves;
 
 		return $this->responseToTheView('callWs_CardDetail');
 	}
@@ -268,8 +265,8 @@ class Novo_Business_Model extends NOVO_Model {
 			default:
 
 		}
-		$this->response->data['movesList'] = $movesList;
-		$this->response->data['totalMoves'] = $totalMoves;
+		$this->response->data->movesList = $movesList;
+		$this->response->data->totalMoves = $totalMoves;
 
 		return $this->responseToTheView('callWs_MonthlyMovements');
 	}
@@ -293,7 +290,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->signo = '';
 		$this->dataRequest->mail = $dataRequest->action == 'send' ? TRUE : FALSE;
 		$this->dataRequest->tarjeta = [
-			'noTarjeta' => $dataRequest->cardNumber,
+			'noTarjeta' => $dataRequest->cardNumberDownd,
 			'id_ext_per' => $this->session->userId,
 		];
 
@@ -307,16 +304,16 @@ class Novo_Business_Model extends NOVO_Model {
 						$file = $response->bean->archivo ?? $response->archivo;
 						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = isset($response->bean->formatoArchivo) ? mb_strtolower($response->bean->formatoArchivo) : mb_strtolower($response->formatoArchivo);
-						$this->response->data['file'] = $file;
-						$this->response->data['name'] = $name.'.'.$ext;
-						$this->response->data['ext'] = $ext;
+						$this->response->data->file = $file;
+						$this->response->data->name = $name.'.'.$ext;
+						$this->response->data->ext = $ext;
 					break;
 					case 'send':
 						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
 						$this->response->icon = lang('GEN_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');
-						$this->response->data['btn1']['action'] = 'destroy';
+						$this->response->modalBtn['btn1']['action'] = 'destroy';
 					break;
 				}
 			break;
@@ -359,6 +356,9 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
+						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
+						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';
@@ -383,5 +383,52 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->cardsList = $cardsList;
 
 		return $this->responseToTheView('callWs_CardListOperations');
+	}
+
+	public function callWs_getVirtualDetail_Business($dataRequest)
+	{
+		log_message('INFO', 'NOVO Business Model: getVirtualDetail method Initialized');
+
+		$this->dataAccessLog->modulo = 'Tarjetas';
+		$this->dataAccessLog->function = 'Consulta';
+		$this->dataAccessLog->operation = 'obtener cvv2';
+
+		$this->dataRequest->idOperation = '121';
+		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
+
+		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP) ? $dataRequest->codeOTP : '';
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->telephoneNumber = $this->session->mobilePhone;
+
+		if (empty($dataRequest->codeOTP)) {
+			$this->dataRequest->idOperation = '214';
+			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
+		}
+		$response = $this->sendToService('callWs_getVirtualDetail');
+			switch ($this->isResponseRc) {
+				case 0:
+					$fechaExp = $this->encrypt_connect->cryptography($response->fechaExp, FALSE);
+					$left = substr($fechaExp,0,2);
+					$right = substr($fechaExp,2,2);
+					$expirationDate = $left.'/'.$right;
+
+					$this->response->code = 0;
+					$this->response->dataDetailCard =  [
+						'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
+						'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
+						'expirationDate' => $expirationDate,
+						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+					];
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+				case -424://MODAL OTP
+					$this->response->code = 2;
+					$this->response->modalBtn['btn1']['action'] = 'none';
+					$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+					$this->response->modalBtn['btn2']['action'] = 'destroy';
+				break;
+			}
+		return $this->responseToTheView('callWs_getVirtualDetail');
 	}
 }

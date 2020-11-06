@@ -228,7 +228,7 @@ $(function() {
 
 						dataRequest = CryptoJS.AES.encrypt(dataRequest, cpo_cook, {format: CryptoJSAesJson}).toString();
 
-						$.post(base_url +"/affiliation/affiliation",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(data){
+						$.post(base_url +"/affiliation/affiliation",{request: dataRequest, cpo_name: cpo_cook, plot: btoa(cpo_cook)},function(response){
 
 							data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
 
@@ -299,10 +299,15 @@ $(function() {
 								datos_finalizacion+=				'<td class="data-reference">"'+beneficiario+'"<span class="lighten">("'+email+'")</span><br />Documento de Identidad "'+cedula+'"<br /><span class="highlight">"'+numeroCta+'"</span><br /></td>';
 								datos_finalizacion+=			'</tr>';
 
+								if (data.rc==-179 || data.rc==-197) {
+									var msg = data.rc == -197? ": &nbsp;Cuenta destino expirada.": ": &nbsp;Cuenta destino invalida.";
+
+									$("#message-result").append(msg);
+								}
+
 								$("#cargarFinalizacion2").append(datos_finalizacion);
 								$("#content-holder").children().remove();
 								$("#content-holder").append($("#content-finalizar3").html());
-
 							}
 						});
 

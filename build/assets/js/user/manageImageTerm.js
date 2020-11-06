@@ -1,10 +1,10 @@
 'use strict'
 $(function () {
 	$('#acceptTerms').on('click', function() {
-		data = {
+		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			},
 			maxHeight: 600,
 			width: 800,
@@ -14,9 +14,9 @@ $(function () {
 		var inputModal = '<h1 class="h0">'+lang.USER_TERMS_SUBTITLE+'</h1>';
 		inputModal+= lang.USER_TERMS_CONTENT;
 
-		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, data);
+		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, modalBtn);
 		$(this).off('click');
-	})
+	});
 
 	// Funtion drag and drop
 	$('#imageUpload').change(function () {

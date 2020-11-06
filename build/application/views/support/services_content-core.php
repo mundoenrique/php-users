@@ -1,24 +1,26 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_CUSTOMER_SUPPORT'); ?></h1>
-<div class="pt-3 row">
+<div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
       <div class="w-100">
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
-            <div class="flex flex-colunm justify-center col-6 py-5">
-              <div class="product-presentation relative">
+            <div class="flex flex-column justify-center col-6 py-4">
+              <div class="product-presentation relative w-100">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
                 <div id="donor" class="product-search btn">
-									<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
-									<div class="item-network"></div>
+                  <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else: ?>
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
+							<?php if ($cardsTotal == 1 && $isVirtual): ?>
+              <span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
+							<?php endif; ?>
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
@@ -35,76 +37,76 @@
             <?php endif; ?>
           </div>
         </div>
-        <?php if (!$uniqueEvent): ?>
-        <div class="flex col-12 optional mt-4 px-0">
-          <nav class="nav-config w-100">
-            <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
-              <?php if (in_array('110', $serviceList)): ?>
-              <li id="cardLock" class="list-inline-item nav-item-config mr-1">
-                <a href="javascript:">
-                  <span class="icon-config icon-lock h1 icon-color"></span>
-                  <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h5>
-                  <div class="box up left regular">
-                    <span class="icon-lock h1 icon-color"></span>
-                    <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h4>
-                  </div>
-                </a>
-              </li>
-              <?php endif; ?>
-              <?php if (in_array('111', $serviceList)): ?>
-              <li id="replacementRequest" class="list-inline-item nav-item-config">
-                <a href="javascript:">
-                  <span class="icon-config icon-spinner h1 icon-color"></span>
-                  <h5 class="center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h5>
-                  <div class="box up left regular">
-                    <span class="icon-spinner h1 icon-color"></span>
-                    <h4 class="h5 center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h4>
-                  </div>
-                </a>
-              </li>
-              <?php endif; ?>
-              <?php if (count(array_diff(['112', '117', '120'], $serviceList)) < 3): ?>
-              <li id="pinManagement" class="list-inline-item nav-item-config mr-1">
-                <a href="javascript:">
-                  <span class="icon-config icon-key h1 icon-color"></span>
-                  <h5 class="center">Gestión<br>de PIN</h5>
-                  <div class="box up left regular">
-                    <span class="icon-key h1 icon-color"></span>
-                    <h4 class="h5 center">Gestión<br>de PIN</h4>
-                  </div>
-                </a>
-              </li>
-              <?php endif; ?>
-              <?php if (in_array('130', $serviceList)): ?>
-              <li id="twirlsCommercial" class="list-inline-item nav-item-config send" action="twirlsCommercial">
-                <a href="javascript:">
-                  <span class="icon-config icon icon icon-credit-card h1 icon-color"></span>
-                  <h5 class="center">Giros<br>comerciales</h5>
-                  <div class="box up left regular">
-                    <span class="icon icon icon-credit-card h1 icon-color"></span>
-                    <h4 class="h5 center">Giros<br>comerciales</h4>
-                  </div>
-                </a>
-              </li>
-              <?php endif; ?>
-              <?php if (in_array('217', $serviceList)): ?>
-              <li id="transactionalLimits" class="list-inline-item nav-item-config send" action="transactionalLimits">
-                <a href="javascript:">
-                  <span class="icon-config icon icon-transactions h1 icon-color"></span>
-                  <h5 class="center">Limites<br>transaccionales</h5>
-                  <div class="box up left regular">
-                    <span class="icon icon-transactions h1 icon-color"></span>
-                    <h4 class="h5 center">Limites<br>transaccionales</h4>
-                  </div>
-                </a>
-              </li>
-              <?php endif; ?>
-            </ul>
-          </nav>
-        </div>
-        <?php endif; ?>
       </div>
     </div>
+    <?php if (!$uniqueEvent): ?>
+    <div class="flex col-12 optional mt-4 px-0">
+      <nav class="nav-config w-100">
+        <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
+          <?php if (in_array('110', $serviceList)): ?>
+          <li id="cardLock" class="list-inline-item nav-item-config mr-1">
+            <a href="javascript:">
+              <span class="icon-config icon-lock h1 icon-color"></span>
+              <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h5>
+              <div class="box up left regular">
+                <span class="icon-lock h1 icon-color"></span>
+                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h4>
+              </div>
+            </a>
+          </li>
+          <?php endif; ?>
+          <?php if (in_array('111', $serviceList)): ?>
+          <li id="replacementRequest" class="list-inline-item nav-item-config">
+            <a href="javascript:">
+              <span class="icon-config icon-spinner h1 icon-color"></span>
+              <h5 class="center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h5>
+              <div class="box up left regular">
+                <span class="icon-spinner h1 icon-color"></span>
+                <h4 class="h5 center"><?= novoLang(lang('CUST_REPLACE_REQUEST'), '<br>'); ?></h4>
+              </div>
+            </a>
+          </li>
+          <?php endif; ?>
+          <?php if (count(array_diff(['112', '117', '120'], $serviceList)) < 3): ?>
+          <li id="pinManagement" class="list-inline-item nav-item-config mr-1">
+            <a href="javascript:">
+              <span class="icon-config icon-key h1 icon-color"></span>
+              <h5 class="center">Gestión<br>de PIN</h5>
+              <div class="box up left regular">
+                <span class="icon-key h1 icon-color"></span>
+                <h4 class="h5 center">Gestión<br>de PIN</h4>
+              </div>
+            </a>
+          </li>
+          <?php endif; ?>
+          <?php if (in_array('130', $serviceList)): ?>
+          <li id="twirlsCommercial" class="list-inline-item nav-item-config send" action="twirlsCommercial">
+            <a href="javascript:">
+              <span class="icon-config icon icon icon-credit-card h1 icon-color"></span>
+              <h5 class="center">Giros<br>comerciales</h5>
+              <div class="box up left regular">
+                <span class="icon icon icon-credit-card h1 icon-color"></span>
+                <h4 class="h5 center">Giros<br>comerciales</h4>
+              </div>
+            </a>
+          </li>
+          <?php endif; ?>
+          <?php if (in_array('217', $serviceList)): ?>
+          <li id="transactionalLimits" class="list-inline-item nav-item-config send" action="transactionalLimits">
+            <a href="javascript:">
+              <span class="icon-config icon icon-transactions h1 icon-color"></span>
+              <h5 class="center">Limites<br>transaccionales</h5>
+              <div class="box up left regular">
+                <span class="icon icon-transactions h1 icon-color"></span>
+                <h4 class="h5 center">Limites<br>transaccionales</h4>
+              </div>
+            </a>
+          </li>
+          <?php endif; ?>
+        </ul>
+      </nav>
+    </div>
+    <?php endif; ?>
   </div>
   <div id="activeServices" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
     <div id="cardLockView" class="option-service" <?= $uniqueEvent && in_array('110', $serviceList) ? '' : 'style="display:none"'; ?>>
@@ -118,32 +120,32 @@
         <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
           <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
-          <button class="btn btn-small btn-loading btn-primary send" action="TemporaryLock">Continuar</button>
+          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
         </div>
       </div>
     </div>
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
-				<form id="replacementForm" >
-					<div class="row">
-						<div class="form-group col-lg-4">
-							<label for="replaceMotSol">Motivo de la solicitud</label>
-							<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-								<option value="" selected disabled>Selecciona</option>
-								<?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
-								<option value="<?= $key ?>"><?= $value ?></option>
-								<?php endforeach; ?>
-							</select>
-							<div class="help-block"></div>
-						</div>
-					</div>
-					<hr class="separador-one w-100">
-					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link" href="">Cancelar</a>
-						<button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
-					</div>
-				</form>
+        <form id="replacementForm">
+          <div class="row">
+            <div class="form-group col-lg-4">
+              <label for="replaceMotSol">Motivo de la solicitud</label>
+              <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
+                <option value="" selected disabled>Selecciona</option>
+                <?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
+                <option value="<?= $key ?>"><?= $value ?></option>
+                <?php endforeach; ?>
+              </select>
+              <div class="help-block"></div>
+            </div>
+          </div>
+          <hr class="separador-one w-100">
+          <div class="flex items-center justify-end pt-3">
+            <a class="btn btn-small btn-link" href="">Cancelar</a>
+            <button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
+          </div>
+        </form>
       </div>
     </div>
     <div id="pinManagementView" class="option-service"
@@ -179,16 +181,16 @@
                 <div class="help-block"></div>
               </div>
             </form>
-            <form id="PinManagementForm" name="PinManagementForm">
+            <form id="pinManagementForm" name="pinManagementForm">
               <div id="changePinInput" class="row hide">
                 <div class="form-group col-lg-4">
-                  <label for="changeCurrentPin">PIN actual</label>
-                  <input id="changeCurrentPin" class="form-control" type="password" name="changeCurrentPin" autocomplete="off">
+                  <label for="currentPin">PIN actual</label>
+                  <input id="currentPin" class="form-control" type="password" name="currentPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
-                  <label for="changeNewPin">Nuevo PIN</label>
-                  <input id="changeNewPin" class="form-control" type="password" name="changeNewPin" autocomplete="off">
+                  <label for="newPin">Nuevo PIN</label>
+                  <input id="newPin" class="form-control" type="password" name="newPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
@@ -219,8 +221,8 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-                <a class="btn btn-small btn-link" href="<?= lang('GEN_NO_LINK'); ?>">Cancelar</a>
-                <button id="PinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
+								<a class="btn btn-small btn-link" href="">Cancelar</a>
+                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
               </div>
             </form>
           </div>
@@ -248,15 +250,18 @@
               <div class="row flex justify-between my-3">
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_CARD_NUMBER'); ?>:
-                    <span id="cardnumberT" class="light text"></span></p>
+                    <span id="cardnumberT" class="light text"></span>
+                  </p>
                 </div>
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_NAME'); ?>:
-                    <span id="customerName" class="light text"></span></p>
+                    <span id="customerName" class="light text"></span>
+                  </p>
                 </div>
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_DNI'); ?>:
-                    <span id="documentId" class="light text"></span></p>
+                    <span id="documentId" class="light text"></span>
+                  </p>
                 </div>
                 <div class="form-group col-12 center flex justify-center items-end">
                   <span class="h6 bold mb-0 mt-2">
@@ -426,17 +431,17 @@
               <div class="row flex justify-between my-3">
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_CARD_NUMBER'); ?>:
-										<span id="cardnumberL" class="light text"></span>
-									</p>
+                    <span id="cardnumberL" class="light text"></span>
+                  </p>
                 </div>
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_NAME'); ?>:
-										<span id="customerNameL" class="light text"></span>
-									</p>
+                    <span id="customerNameL" class="light text"></span>
+                  </p>
                 </div>
                 <div class="form-group col-4 center">
                   <p class="h5 semibold tertiary"><?= lang('CUST_DNI'); ?>:
-										<span id="documentIdL" class="light text"></span>
+                    <span id="documentIdL" class="light text"></span>
                   </p>
                 </div>
                 <div class="form-group col-12 center">
@@ -458,8 +463,8 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
                             <div class="input-group">
-                              <input id="numberDayPurchasesCtp" class="money form-control pwd-input text-left" value="" type="text"
-                                autocomplete="off" name="" readonly>
+                              <input id="numberDayPurchasesCtp" class="money form-control pwd-input text-left" value="" type="text" autocomplete="off"
+                                name="" readonly>
                             </div>
                             <div class="help-block"></div>
                           </div>
@@ -482,8 +487,8 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
                             <div class="input-group">
-                              <input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                name="" readonly>
+                              <input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                readonly>
                             </div>
                             <div class="help-block"></div>
                           </div>
@@ -506,8 +511,8 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="purchaseTransactionCtp">Monto por transacción de compras</label>
                             <div class="input-group">
-                              <input id="purchaseTransactionCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                name="" readonly>
+                              <input id="purchaseTransactionCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                readonly>
                             </div>
                             <div class="help-block"></div>
                           </div>
@@ -553,8 +558,8 @@
                           <div class="form-group col-12 col-lg-4">
                             <label class="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
                             <div class="input-group">
-                              <input id="dailyPurchaseamountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                name="" readonly>
+                              <input id="dailyPurchaseamountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                readonly>
                             </div>
                             <div class="help-block"></div>
                           </div>
@@ -577,8 +582,8 @@
                           <div class="form-group col-12 col-lg-4">
                             <label for="purchaseTransactionStp">Monto por transacción de compras</label>
                             <div class="input-group">
-                              <input id="purchaseTransactionStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                name="" readonly>
+                              <input id="purchaseTransactionStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                readonly>
                             </div>
                             <div class="help-block"></div>
                           </div>
@@ -609,8 +614,8 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="weeklyNumberWithdraw">Número semanal de retiros</label>
                               <div class="input-group">
-                                <input id="weeklyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                  name="" readonly>
+                                <input id="weeklyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                  readonly>
                               </div>
                               <div class="help-block"></div>
                             </div>
@@ -633,8 +638,8 @@
                             <div class="form-group col-12 col-lg-4">
                               <label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
                               <div clxs="input-group">
-                                <input id="weeklyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
-                                  name="" readonly>
+                                <input id="weeklyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
+                                  readonly>
                               </div>
                               <div class="help-block"></div>
                             </div>
