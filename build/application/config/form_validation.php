@@ -38,7 +38,7 @@ $config = [
 			'rules' => 'trim|regex_match[/on/]|required'
 		],
 		[
-			'field' => 'emailcard',
+			'field' => 'email',
 			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
@@ -236,7 +236,7 @@ $config = [
 	],
 	'downloadMoves' => [
 		[
-			'field' => 'cardNumber',
+			'field' => 'cardNumberDownd',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
@@ -362,6 +362,16 @@ $config = [
 		[
 			'field' => 'userIdNumber',
 			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		]
+	],
+	'getVirtualDetail' => [
+		[
+			'field' => 'cardNumberDownd',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'getMovements' => [

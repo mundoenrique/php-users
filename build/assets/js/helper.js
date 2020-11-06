@@ -1,8 +1,9 @@
 'use strict'
 var screenSize;
+var inputModal;
 var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#]+$/;
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,_#]+$/;
 var dataTableLang;
 var validator;
 var currentDate;
@@ -181,6 +182,7 @@ function appMessages(title, message, icon, modalBtn) {
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
+		closeText: '',
 		modal: 'true',
 		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
 		draggable: false,
@@ -188,24 +190,24 @@ function appMessages(title, message, icon, modalBtn) {
 		closeOnEscape: false,
 		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
 		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: 100,
+		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close').hide();
-			var classIcon = $('#system-icon').attr('class').split(' ');
-			classIcon = classIcon.pop();
-
-			if (classIcon != 'mt-0') {
-				$('#system-icon').removeClass(classIcon);
+			if (!modalBtn.close) {
+				$('.ui-dialog-titlebar-close').hide();
 			}
 
-			$('#system-icon').addClass(icon);
+			if (icon != '') {
+				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+			} else {
+				$('#system-icon').removeAttr('class');
+			}
+
 			$('#system-msg').html(message);
-			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			if (!btn1) {
 				$('#accept').hide();
@@ -215,8 +217,6 @@ function appMessages(title, message, icon, modalBtn) {
 
 			if (!btn2) {
 				$('#cancel').hide();
-				$('#accept').addClass('modal-btn-primary');
-				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
 				createButton($('#cancel'), btn2);
 			}
@@ -240,13 +240,10 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-				break;
-			case 'close':
-				$('#system-info').dialog('close');
-				break;
+			break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-				break;
+			break;
 		}
 
 		$(this).off('click');
@@ -309,7 +306,7 @@ function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
 		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
-			dataForm[$(element).attr('id')] = $(element).val().trim();
+			dataForm[$(element).attr('id')] = $(element).val();
 		}
 	})
 

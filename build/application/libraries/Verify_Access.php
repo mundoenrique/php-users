@@ -150,6 +150,7 @@ class Verify_Access {
 				case 'transactionalLimits':
 				case 'replacement':
 				case 'changePin':
+				case 'getVirtualDetail':
 					$auth = $this->CI->session->has_userdata('products');
 				break;
 				case 'expensesCategory':

@@ -4,7 +4,7 @@ $(function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'close'
+				action: 'destroy'
 			},
 			maxHeight: 600,
 			width: 800,
@@ -16,7 +16,7 @@ $(function () {
 
 		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, modalBtn);
 		$(this).off('click');
-	})
+	});
 
 	// Funtion drag and drop
 	$('#SEL_A').change(function () {

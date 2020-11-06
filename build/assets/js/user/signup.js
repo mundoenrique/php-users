@@ -2,12 +2,12 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	who = 'User'
 
 	$('#nickName').on('blur', function() {
 		$(this).addClass('available');
 		form = $('#signUpForm');
-		validateForms(form)
+		validateForms(form);
+
 		if ($(this).valid()) {
 			where = 'ValidNickName'
 			data = {
@@ -76,6 +76,8 @@ $(function () {
 })
 
 function getResponseServ(currentaction) {
+	who = 'User';
+
 	callNovoCore(who, where, data, function(response) {
 		if (currentaction == 'ValidNickName') {
 			$('#nickName').prop('disabled', false)

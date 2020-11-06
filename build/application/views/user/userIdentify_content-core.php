@@ -28,18 +28,18 @@
 						<?php endif; ?>
 						<div class="form-group col-lg-4" id="divNumberCard">
 							<label for="numberCard" class="regular"><?= lang('GEN_NUMBER_CARD'); ?></label>
-							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16">
+							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-lg-4">
 							<label for="docmentId" class="regular"><?= lang('GEN_DNI'); ?></label>
-							<input id="docmentId" class="form-control" type="text" name="docmentId" maxlength="25">
+							<input id="docmentId" class="form-control" type="text" name="docmentId" maxlength="25" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
 						<?php if (lang('CONF_SECRET_KEY') == 'ON') : ?>
 							<div class="form-group col-lg-4" id="physicalCardPIN">
 								<label for="cardPIN" class="regular"><?= lang('GEN_SECRET_PASS_PIN'); ?></label>
-								<input id="cardPIN" class="form-control type="password" name="cardPIN" maxlength="15">
+								<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="4" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
 						<?php endif; ?>

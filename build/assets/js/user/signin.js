@@ -1,65 +1,61 @@
 'use strict'
-var userName;
-var userPass;
 $(function () {
-	var signinBtn = $('#signin-btn');
-	userName = $('#userName');
-	userPass = $('#userPass');
 	$.balloon.defaults.css = null;
 	insertFormInput(false);
 
-	signinBtn.on('click', function (e) {
+	$('#userPass').on('keyup', function () {
+		$(this).attr('type', 'password');
+
+		if ($(this).val() == '') {
+			$(this).attr('type', 'text');
+		}
+	});
+
+	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
-		var recaptcha = lang.GEN_ACTIVE_RECAPTCHA;
-		form = $('#signin-form');
-		btnText = $(this).html().trim();
+		form = $('#signInForm');
 		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
-			data = getDataForm(form)
+			btnText = $(this).html();
+			data = getDataForm(form);
 			data.userPass = cryptoPass(data.userPass);
+			data.currentTime = new Date().getHours();
 			$(this).html(loader);
 			insertFormInput(true);
-			where = 'signin';
 
-			if (recaptcha) {
-				grecaptcha.ready(function () {
-					grecaptcha
-						.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', { action: 'login' })
-						.then(function (token) {
-							if (token) {
-								validateSignin(token, signinBtn);
-							}
-						}, function (token) {
-							if (!token) {
-								icon = lan.GEN_ICON_WARNING;
-								modalBtn = {
-									btn1: {
-										link: 'inicio',
-										action: 'redirect'
-									}
-								};
-								appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, icon, modalBtn);
-								validateSignin(signinBtn);
-							}
-						});
-				});
-			} else {
-				validateSignin(false, signinBtn);
-			}
+			getRecaptchaToken('SignIn', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				getSignIn();
+			});
 		}
-	})
-})
-/**
- * @info Valida credenciales de usuario
- * @author J. Enrique Peñaloza Piñero
- * @date May 19th, 2020
- */
-function validateSignin(token, signinBtn) {
-	who = 'User';
-	data.currentTime = new Date().getHours()
-	data.token = token || ''
+	});
+
+	$('#system-info').on('click', '.send-otp', function () {
+		form = $('#OTPcodeForm');
+		formInputTrim(form);
+		validateForms(form);
+
+		if (form.valid()) {
+			$(this)
+				.html(loader)
+				.prop('disabled', true)
+				.removeClass('send-otp');
+			insertFormInput(true);
+
+			getRecaptchaToken('verifyIP', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				data.OTPcode = $('#otpCode').val();
+				data.saveIP = $('#acceptAssert').is(':checked') ? true : false;
+				getSignIn();
+			});
+		}
+	});
+});
+
+function getSignIn() {
+	who = 'User'; where = 'signin';
 
 	callNovoCore(who, where, data, function (response) {
 		switch (response.code) {
@@ -67,34 +63,51 @@ function validateSignin(token, signinBtn) {
 				$(location).attr('href', response.data);
 			break;
 			case 1:
-				userName.showBalloon({
+				$('#userName').showBalloon({
 					html: true,
 					classname: response.className,
 					position: response.position,
 					contents: response.msg
 				});
 			break;
+			case 2:
+				$('#accept').addClass('send-otp');
+				response.modalBtn.minWidth = 480;
+				response.modalBtn.maxHeight = 'none';
+				response.modalBtn.posAt = 'center top';
+				response.modalBtn.posMy = 'center top+160';
+
+				inputModal = '<form id="OTPcodeForm" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+				inputModal += 	'<p class="pt-0 p-0">' + response.msg + '</p>';
+				inputModal += 	'<div class="row">';
+				inputModal += 		'<div class="form-group col-8">';
+				inputModal += 			'<label for="otpCode">' + lang.GEN_OTP_LABEL_INPUT + '</label>'
+				inputModal += 			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
+				inputModal += 			'<div class="help-block"></div>'
+				inputModal += 		'</div">';
+				inputModal += 	'</div>';
+				inputModal += 	'<div class="form-group custom-control custom-switch mb-0">'
+				inputModal += 		'<input id="acceptAssert" class="custom-control-input" type="checkbox" name="acceptAssert">'
+				inputModal += 		'<label class="custom-control-label" for="acceptAssert">' + lang.USER_IP_ASSERT + '</label>'
+				inputModal += 	'</div">'
+				inputModal += '</form>';
+
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
 		}
 
 		if (response.code != 0) {
-			restarForm(signinBtn);
-		}
-	})
-}
-/**
- * @info restaura el formulario
- * @author J. Enrique Peñaloza Piñero
- * @date May 22th, 2020
- */
-function restarForm(signinBtn) {
-	insertFormInput(false);
-	signinBtn.html(btnText);
-	setTimeout(function () {
-		userName.hideBalloon();
-	}, 2000);
-	userPass.val('')
+			$('#userPass').val('');
+			$('#signInBtn').html(btnText);
+			insertFormInput(false);
 
-	if (client == 'pichincha') {
-		userName.val('')
-	}
+			if (lang.CONF_RESTAR_USERNAME == 'ON') {
+				$('#userName').val('');
+			}
+
+			setTimeout(function () {
+				$("#userName").hideBalloon();
+			}, 2000);
+		}
+	});
 }

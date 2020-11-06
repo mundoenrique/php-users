@@ -73,6 +73,7 @@ $lang['GEN_CURRENCY'] = '$';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
@@ -190,11 +191,13 @@ $lang['GEN_SELECT_MONTH'] = [
 ];
 $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
-
 $lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
-$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido.';
-$lang['GEN_OTP_MSG'] = 'Por seguridad te enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
-$lang['GEN_RESP_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
+$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
+$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
 $lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
 $lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
@@ -204,6 +207,9 @@ $lang['GEN_VIRTUAL'] = '%s virtual';
 $lang['GEN_VIRTUAL_DISJOIN'] = '~';
 $lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
 $lang['GEN_INVALID_CARD'] = 'El número de tarjeta no es válido o ya fue registrada.';
+$lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
+$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
+$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

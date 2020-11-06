@@ -2,6 +2,11 @@
 $(function () {
 	var ulOptions = $('.nav-item-config');
 	var pinManagement = $('input[type=radio][name="recovery"]');
+	var virtual = $('#isVirtual').val();
+
+	if (virtual){
+		$("#replaceMotSol option[value='43']").text(lang.CUST_REQUEST_REASON_43);
+	};
 
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
@@ -223,4 +228,5 @@ $(function () {
 			})
 		}
 	});
+
 })

@@ -130,7 +130,7 @@
           </li>
           <?php endif; ?>
           <form id="downd-send">
-            <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+            <input type="hidden" id="cardNumberDownd" name="cardNumberDownd" value="<?= $cardNumber ?>">
             <input type="hidden" id="month" name="filterMonth" value="0">
             <input type="hidden" id="year" name="filterYear" value="0">
           </form>

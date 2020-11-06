@@ -1,14 +1,16 @@
 'use strict'
 function validateForms(form) {
 	var validCountry = country;
-	var onlyNumber = /^[0-9]{6,8}$/;
+	var onlyNumber = /^[0-9]{3,20}$/;
+	var onlyOneNumber = /^[0-9]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = /^(([a-z]{2,})+([a-z0-9_]){4,16})$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhrase = /^[a-z0-9ñáéíóú ]{3,70}$/i;
-	var alphaName = /^[a-zñáéíóú ]{1,70}$/i;
+	var longPhrase = /^[a-z0-9ñáéíóú ().;-]{5,150}$/i;
+	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
+	var alphaLetter = /^[a-zñáéíóú]{4,50}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -40,6 +42,7 @@ function validateForms(form) {
 		rules: {
 			"userName":	{required: true, pattern: alphanumunder},
 			"userPass": 	{verifyRequired: '#userName', verifyPattern: '#userName'},
+			"otpCode": { required: true, pattern: alphanum },
 			"recoveryAccess": 	{required: true},
 			"email": 	{required: true, pattern: emailValid},
 			"idNumber": 	{required: true, pattern: alphanum},
@@ -48,7 +51,6 @@ function validateForms(form) {
 			"confirmPass": {required: true, equalTo: "#newPass"},
 			"filterMonth": {required: true, pattern: numeric},
 			"filterYear": {required: true, pattern: numeric},
-			"emailCard": {required: true, pattern: emailValid},
 			"numberCard": {required: true,pattern: numeric,maxlength: 16},
 			"docmentId": {required: true, pattern: alphanum},
 			"cardPIN": {required: true,pattern: numeric},
@@ -57,7 +59,16 @@ function validateForms(form) {
 			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
 			"middleName": {pattern: alphaName},
 			"surName": {pattern: alphaName},
-			"birthDate": {required: true, pattern: date.dmy},
+			"birthDate": {required: true, pattern: date.dmy },
+			"nationality": { required: true, lettersonly: true, minlength: 4 },
+			"placeBirth": { pattern: alphaLetter },
+			"civilStatus": { requiredSelect: true },
+			"addressType": { required: true, requiredSelect: true },
+			"postalCode": { pattern: onlyNumber },
+			"state": { required: true, requiredSelect: true },
+			"city": { required: true, requiredSelect: true },
+			"address": { required: true, pattern: longPhrase},
+			"verifierCode": { required: true, pattern: onlyOneNumber },
 			"gender": {required: true},
 			"confirmEmail": {required: true, pattern: emailValid, equalTo: "#email"},
 			"landLine": {pattern: phone},
@@ -90,6 +101,7 @@ function validateForms(form) {
 				verifyRequired: lang.VALIDATE_USERPASS_REQ,
 				verifyPattern: lang.VALIDATE_USERPASS_PATT,
 			},
+			"otpCode": lang.VALIDATE_OTP_CODE,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
@@ -104,14 +116,13 @@ function validateForms(form) {
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
-			"emailCard": lang.VALIDATE_EMAIL,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
 			"docmentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
-				required: 'Coloca el código recibido.',
-				pattern: 'El formato de código es inválido.',
-				maxlength: 'El formato de código es inválido.'
+				required: lang.VALIDATE_CODE_RECEIVED,
+				pattern: lang.VALIDATE_INVALID_FORMAT,
+				maxlength: lang.VALIDATE_INVALID_FORMAT
 			},
 			"acceptTerms": lang.VALIDATE_ACCEPT_TERMS,
 			"nickName": {
@@ -123,6 +134,15 @@ function validateForms(form) {
 			"middleName": lang.VALIDATE_MIDDLE_NAME,
 			"surName": lang.VALIDATE_SUR_NAME,
 			"birthDate": lang.VALIDATE_BIRTHDATE,
+			"nationality": lang.VALIDATE_NATIONALITY,
+			"placeBirth": lang.VALIDATE_BIRTHPLACE,
+			"civilStatus": lang.VALIDATE_RECOVER_OPTION,
+			"addressType": lang.VALIDATE_RECOVER_OPTION,
+			"postalCode": lang.VALIDATE_POSTAL_CODE,
+			"state": lang.VALIDATE_RECOVER_OPTION,
+			"city": lang.VALIDATE_RECOVER_OPTION,
+			"address": lang.VALIDATE_ADDRESS,
+			"verifierCode": lang.VALIDATE_VERIFIER_CODE,
 			"gender": lang.VALIDATE_GENDER,
 			"confirmEmail": {
 				required: lang.VALIDATE_EMAIL,
