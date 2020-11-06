@@ -33,7 +33,7 @@ class Users_model extends CI_Model
 
 		$newCore = array (
 			'Usd',
-			'Pe'
+			//'Pe'
 			//'Co',
 			//'Ve'
 		);

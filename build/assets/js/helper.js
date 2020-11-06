@@ -303,7 +303,7 @@ function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
 		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
-			dataForm[$(element).attr('id')] = $(element).val().trim();
+			dataForm[$(element).attr('id')] = $(element).val();
 		}
 	})
 

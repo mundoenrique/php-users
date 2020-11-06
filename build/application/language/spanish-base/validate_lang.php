@@ -44,3 +44,5 @@ $lang['VALIDATE_FORMAT_PIN'] = 'El formato de PIN es inválido.';
 $lang['VALIDATE_CONSECUTIVE_NUMS'] = 'Los 4 números no deben ser consecutivos.';
 $lang['VALIDATE_CODE_RECEIVED'] = 'Coloca el código recibido.';
 $lang['VALIDATE_INVALID_FORMAT'] = 'El formato de código es inválido.';
+$lang['VALIDATE_ADDRESS'] = 'Índica una dirección válida (mín 5, máx 150, letras, números, -().;).';
+$lang['VALIDATE_POSTAL_CODE'] = 'Indica un código postal válido (solo números mín 3, máx 20).';

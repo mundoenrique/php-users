@@ -16,7 +16,7 @@ $(function () {
 
 		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_INFO, modalBtn);
 		$(this).off('click');
-	})
+	});
 
 	// Funtion drag and drop
 	$('#imageUpload').change(function () {
