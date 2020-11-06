@@ -89,6 +89,8 @@ function validateForms(form) {
 			"confirmPin": { required: true, equalTo: "#newPin" },
 			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
+			"typeDocument": { requiredSelect: true, },
+			"otpCode": { required: true, pattern: alphanum },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -177,6 +179,8 @@ function validateForms(form) {
 				required: lang.VALIDATE_CONFIRM_PIN,
 				equalTo: lang.VALIDATE_IQUAL_PIN
 			},
+			"typeDocument": lang.VALIDATE_RECOVER_OPTION,
+			"otpCode": lang.VALIDATE_ID_NUMBER,
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
