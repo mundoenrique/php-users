@@ -178,6 +178,32 @@ class Tool_File {
 		return $structure;
 	}
 
+	/**
+	 * @info cifra el contenido de un archivo indicado
+	 * @author Pedro Torres
+	 * @date Nov 07th, 2020
+	 */
+	public function cryptographyFile ($fileName = '', $encrypt = TRUE)
+	{
+		log_message('INFO', 'Novo Tool_File: cryptographyFile Method Initialized');
+
+		$result = FALSE;
+		$fileContent = file_get_contents($fileName);
+
+		if (is_string($fileContent)) {
+			$contentEncryt = $this->CI->encrypt_connect->cryptography($fileContent, $encrypt);
+
+			$file = fopen($fileName, "wb");
+			if ($file) {
+				fwrite($file, $contentEncryt);
+				fclose($file);
+				$result = TRUE;
+			}
+		}
+
+		log_message('DEBUG', "Novo Tool_Api: buildDirectoryPath " . strval($result));
+		return $result;
+	}
 
 	// TODO
 	// Borrar

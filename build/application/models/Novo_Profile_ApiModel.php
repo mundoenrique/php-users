@@ -12,7 +12,6 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		parent:: __construct();
 		log_message('INFO', 'NOVO Api Model Class Initialized');
 
-		$this->configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 	}
 
 	/**
@@ -20,7 +19,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 	 * @author Pedro A. Torres F.
 	 * @date Oct. 16h, 2020
 	 */
-	public function uploadFile($dataRequest)
+	public function uploadFile ($dataRequest)
 	{
 		log_message('INFO', 'NOVO API Model: uploadFile Method Initialized');
 
@@ -38,6 +37,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		}
 
 		foreach($dataRequest as $property => $bodyBase64) {
+			$resultEcryptFile = FALSE;
 			if (strpos($bodyBase64, 'base64') > 0) {
 
 				$realFileName = $this->tool_file->setNameToFile([
@@ -51,6 +51,18 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				if ($uploadedFileName) {
 					$statusCodeResponse = 200;
 
+					$fullPathName = $this->tool_file->buildDirectoryPath([
+						$directoryToUpload,
+						$uploadedFileName,
+					]);
+
+					$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
+					if (!$resultEcryptFile) {
+						if (unlink($fullPath)) {
+							$statusCodeResponse = 400;
+						}
+					}
+					
 					$resultData = $uploadedFileName;
 				};
 				$dataResponse[$property] = [
@@ -113,8 +125,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 			strtoupper($dataRequest->client),
 			strtoupper($dataRequest->user_name)
 		]);
-
-		count(scandir($directory)) < 3 && rmdir($directory);
+		count(scandir($directory )) < 3 && rmdir($directory );
 
 		count(array_unique($resultUploadFiles)) > 1 && $statusCodeResponse = 206;
 		$this->response->code = $statusCodeResponse;
