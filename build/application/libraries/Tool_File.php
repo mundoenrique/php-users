@@ -34,10 +34,10 @@ class Tool_File {
 				$fileName = $value['nameForUpload'];
 				$configToUploadFile['file_name'] = hash('ripemd160', $fileName);
 
-				$matchedFiles = $this->buildDirectoryPath([
+				$matchedFiles = glob($this->buildDirectoryPath([
 					$configToUploadFile['upload_path'],
 					$configToUploadFile['file_name'].'.*'
-				]);
+				]));
 
 				if ($matchedFiles && count($matchedFiles) > 0) {
 					foreach ($matchedFiles as $fullPathFile) {

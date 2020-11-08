@@ -65,6 +65,23 @@ class Novo_CallModels extends Novo_Controller {
 			$valid = $this->tool_file->uploadFiles($configUploadFile);
 			if (!$valid) {
 				$this->tool_file->deleteFiles($configUploadFile);
+			} else {
+				// TODO
+				// Encrypta el contenido de los archivos.
+				//
+				// foreach ($_FILES as $clave => $valor) {
+				// 	$fullPathName = $this->tool_file->buildDirectoryPath([
+				// 		$configUploadFile['upload_path'],
+				// 		$valor['resultUpload'],
+				// 	]);
+
+				// 	$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
+				// 	if (!$resultEcryptFile) {
+				// 		if (unlink($fullPath)) {
+				// 			$valid = FALSE;
+				// 		}
+				// 	}
+				// }
 			}
 		}
 

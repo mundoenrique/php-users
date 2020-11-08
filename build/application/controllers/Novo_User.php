@@ -227,36 +227,13 @@ class Novo_User extends NOVO_Controller {
 
 		// TODO
 		// ELIMINAR SE USA SOLO PARA LA CARGA DEL NOMBRE DE LOS ARCHIVOS
-		$dirLoadImages = $this->tool_file->buildDirectoryPath([
-			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
-			strtoupper($this->session->countryUri),
-			strtoupper($this->session->userName)
-		]);
+		// POSEE IMAGENES FAKES
 
-		$matches = scandir($dirLoadImages);
+		$this->cargarImagenesFakeBORRAR();
 
+		// TODO
+		// No posee imagenes registradas FAKE IMAGES
 		$imagesDocument = [];
-		$ids = ['','','INE_A', 'INE_R'];
-		foreach ($matches as $k => $v) {
-			if (!is_dir($v)) {
-				$imagesDocument[$ids[$k]]['base64'] = $v;
-			}
-		}
-
-		foreach ($imagesDocument as $key => $value) {
-			$fullPathToImage = $this->tool_file->buildDirectoryPath([
-				$dirLoadImages,
-				$value
-			]);
-
-			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-			$data = file_get_contents($fullPathToImage);
-			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-			if (file_exists($fullPathToImage)) {
-				$imagesDocument[$key]['base64'] = $base64;
-				$imagesDocument[$key]['validate'] = 'ignore';
-			}
-		}
 
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
@@ -353,5 +330,39 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_TERMS_TITLE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
+	}
+
+	public function cargarImagenesFakeBORRAR () {
+		$dirLoadImages = $this->tool_file->buildDirectoryPath([
+			'C:\Users',
+			'ptorres',
+			'Pictures',
+			'fakeData'
+		]);
+
+		$matches = scandir($dirLoadImages);
+
+		$imagesDocument = [];
+		$ids = ['','','INE_A', 'INE_R'];
+		foreach ($matches as $k => $v) {
+			if (!is_dir($v)) {
+				$imagesDocument[$ids[$k]]['base64'] = $v;
+			}
+		}
+
+		foreach ($imagesDocument as $key => $value) {
+			$fullPathToImage = $this->tool_file->buildDirectoryPath([
+				$dirLoadImages,
+				$value['base64']
+			]);
+
+			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+			$data = file_get_contents($fullPathToImage);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			if (file_exists($fullPathToImage)) {
+				$imagesDocument[$key]['base64'] = $base64;
+				$imagesDocument[$key]['validate'] = 'ignore';
+			}
+		}
 	}
 }
