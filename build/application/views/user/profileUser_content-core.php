@@ -74,7 +74,7 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" maxlength="1" >
+            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" maxlength="1">
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
@@ -94,7 +94,7 @@
           </div>
           <div class="form-group col-3 col-lg-6 <?= $skipProfession; ?>">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
-            <select id="profession" class="custom-select form-control <?= $updateUser; ?>" name="profession">
+            <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
               <option value="<?= $professionType; ?>" selected><?= $profession; ?></option>
             </select>
             <div class="help-block"></div>
@@ -109,7 +109,7 @@
         <div class="row mx-1 <?= $skipContacData; ?>">
           <div class="form-group col-3 col-lg-6">
             <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
-            <select id="addressType" class="custom-select form-control <?= $updateUser; ?>" name="addressType">
+            <select id="addressType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="addressType">
               <?php foreach (lang('USER_ADDRESS_TYPE_LIST') as $key => $value) : ?>
               <option value="<?= $key; ?>" <?= $addressType == $key ? 'selected' : ''; ?> <?= $key == '' ? 'disabled' : '';  ?>>
                 <?= $value; ?>
@@ -120,20 +120,20 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
-            <input id="postalCode" class="form-control <?= $updateUser; ?>" type="text" name="postalCode" value="<?= $postalCode; ?>"
-              autocomplete="off">
+            <input id="postalCode" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" type="text" name="postalCode"
+              value="<?= $postalCode; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="state"><?= lang('USER_STATE') ?></label>
-            <select id="state" class="custom-select form-control <?= $updateUser; ?>" name="state">
+            <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
               <option value="<?= $stateCode; ?>"><?= $state; ?></option>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="city"><?= lang('USER_CITY') ?></label>
-            <select id="city" class="custom-select form-control <?= $updateUser; ?>" name="city" disabled>
+            <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
               <option value="<?= $cityCod; ?>"><?= $city; ?></option>
             </select>
             <div class="help-block"></div>
@@ -141,7 +141,7 @@
           <?php if($longProfile == 'S'):?>
           <div class="form-group col-3 col-lg-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
-            <select id="district" class="custom-select form-control <?= $updateUser; ?>" name="district" disabled>
+            <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
               <option value="<?= $district ?>"></option>
             </select>
             <div class="help-block"></div>
@@ -149,7 +149,7 @@
           <?php endif; ?>
           <div class="form-group col-12 col-lg-8 col-xl-12">
             <label for="address"><?= lang('USER_ADDRESS') ?></label>
-            <textarea id="address" class="form-control <?= $updateUser; ?>" name="address"><?= $address; ?></textarea>
+            <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address"><?= $address; ?></textarea>
             <div class="help-block"></div>
           </div>
         </div>
@@ -158,6 +158,7 @@
             <label for="email"><?= lang('USER_EMAIL') ?></label>
             <input id="email" class="form-control <?= $updateUser; ?>" type="text" name="email" value="<?= $email; ?>"
               placeholder="usuario@ejemplo.com" autocomplete="off">
+            <input id="oldEmail" type="hidden" name="oldEmail" value="<?= $email; ?>">
             <div class="help-block"></div>
           </div>
           <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
@@ -170,7 +171,8 @@
           <?php endif; ?>
           <div class="form-group col-6 <?= $skipLandLine; ?>">
             <label for="landLine"><?= lang('USER_PHONE_LANDLINE') ?></label>
-            <input id="landLine" class="form-control <?= $updateUser; ?>" type="text" name="landLine" value="<?= $landLine; ?>" autocomplete="off">
+            <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine" value="<?= $landLine; ?>"
+              autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
@@ -183,7 +185,7 @@
             <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?></label>
             <div class="form-row">
               <div class="form-group col-6">
-                <select id="phoneType" class="custom-select form-control <?= $updateUser; ?>" name="phoneType">
+                <select id="phoneType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreOtherPhone; ?>" name="phoneType">
                   <?php foreach (lang('USER_OTHER_PHONE_LIST') as $key => $value) : ?>
                   <option value="<?= $key; ?>" <?= $otherType == $key ? 'selected' : ''; ?>><?= $value; ?></option>
                   <?php endforeach; ?>
