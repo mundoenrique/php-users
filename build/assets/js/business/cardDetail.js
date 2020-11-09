@@ -101,7 +101,7 @@ $(function () {
 	$('#system-info').on('click', '.virtualDetail-btn', function (e) {
 		$(this)
 		.removeClass('virtualDetail-btn');
-		stopInterval();
+		clearInterval(interval);
 	});
 
 })
@@ -340,7 +340,7 @@ function startTimer(duration, display) {
 }
 
 function stopInterval() {
-	$("#system-info").dialog("destroy");
-	$('#accept').off('click');
 	clearInterval(interval);
+	$('#accept').off('click');
+	$("#system-info").dialog("destroy");
 }
