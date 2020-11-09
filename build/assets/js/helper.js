@@ -303,7 +303,7 @@ function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
 		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
-			dataForm[$(element).attr('id')] = $(element).val().trim();
+			dataForm[$(element).attr('id')] = $(element).val();
 		}
 	})
 
@@ -321,4 +321,13 @@ function downLoadfiles (data) {
 	$('#download-file').attr('href', lang.GEN_NO_LINK);
 	$('#download-file').attr('download', '');
 	$('.cover-spin').hide();
+}
+
+function scrollTopPos(formValidate) {
+	var errorElements = $('.has-error');
+	var firstElement = $(errorElements[0]).offset().top;
+
+	$("html, body").animate({
+		scrollTop: firstElement - formValidate
+	}, 400);
 }

@@ -1,7 +1,6 @@
 'use strict'
 var dateFilter;
 $(function () {
-	var action;
 	var typeInquiry;
 
 	$('input[type=hidden][name="cardNumber"]').each(function (pos, element) {
