@@ -158,6 +158,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_CURRENCY').' '.$response->disponible;
+				$this->response->modal = TRUE;
 			break;
 			default:
 				$this->response->code = 1;
