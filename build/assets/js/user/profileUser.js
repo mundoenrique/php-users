@@ -4,7 +4,6 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide();
-	var cityCod = $('#city').val();
 	longProfile = $('#longProfile').val();
 
 	$('#birthDate').datepicker({
@@ -14,9 +13,7 @@ $(function () {
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function (selectedDate) {
-			$(this)
-				.focus()
-				.blur();
+			$(this).focus().blur();
 		}
 	});
 
@@ -44,7 +41,6 @@ $(function () {
 			delete data.genderMale;
 			delete data.genderFemale;
 			data.gender = $('input[name=gender]:checked').val();
-			data.address = $('#address').val();
 			data.notEmail = $('#notEmail').is(':checked') ? '1' : '0';
 			data.notSms = $('#notSms').is(':checked') ? '1' : '0';
 			$(this).html(loader);
@@ -65,6 +61,8 @@ $(function () {
 
 			insertFormInput(true);
 			updateProfile();
+		} else {
+			scrollTopPos($('#profileUserForm').offset().top);
 		}
 	});
 
@@ -73,32 +71,43 @@ $(function () {
 	}
 
 	if (lang.CONF_CONTAC_DATA == 'ON') {
-		if (cityCod == '') {
-			$('#city')
-				.prop('disabled', true)
-				.find('option:selected')
-				.text('Selecciona');
-		}
+		getStates();
 
 		$('#state').on('change', function () {
-			getCities(this.value)
-		});
+			if ($(this).find('option:first').val() == '') {
+				$(this).find('option').get(0).remove()
+			}
 
-		if (longProfile == 'S') {
+			$('#city').children().remove();
+			$('#city').prepend('<option value="" selected>Selecciona</option>');
+			$('#district').children().remove();
 			$('#district')
 				.prop('disabled', true)
-				.find('option:selected')
-				.prop('disabled', true)
-				.text('Selecciona');
+				.prepend('<option value="" selected>Selecciona</option>');
 
-			$('#city').on('change', function () {
+			getCities(this.value);
+		});
+
+		$('#city').on('change', function () {
+			if ($(this).find('option:first').val() == '') {
+				$(this).find('option').get(0).remove()
+			}
+
+			if (longProfile == 'S') {
+				$('#district').children().remove();
+				$('#district').prepend('<option value="" selected>Selecciona</option>');
+
 				getdistrict(this.value)
-			});
-		}
+			}
+		});
 
-		getStates();
+		$('#district').on('change', function () {
+			if ($(this).find('option:first').val() == '') {
+				$(this).find('option').get(0).remove()
+			}
+		});
 	} else {
-		$('select').find('option').prop('disabled', false)
+		$('select').find('option').prop('disabled', false);
 	}
 });
 
@@ -142,11 +151,14 @@ function getProfessions() {
 }
 
 function getStates() {
-	$('#state').prop('disabled', true)
 	var currentState = $('#state').val();
+	$('#state').prop('disabled', true);
 
-	$('#state').find('option').get(0).remove();
-	$('#state').append('<option value="" selected disabled>Esperando Estados</option>');
+	if (currentState != '') {
+		$('#state').find('option').get(0).remove();
+	}
+
+	$('#state').prepend('<option value="" selected disabled>Esperando Estados</option>');
 
 	who = 'Assets'; where = 'StatesList';
 	data = {
@@ -170,7 +182,9 @@ function getStates() {
 			$('#state').find('option').get(0).remove();
 
 			if (currentState == '') {
-				$('#state').prepend('<option value="" selected disabled>Selecciona</option>');
+				$('#state')
+					.find('option:selected')
+					.prop('disabled', true);
 			} else {
 				getCities(currentState);
 			}
@@ -182,13 +196,14 @@ function getStates() {
 
 function getCities(currentState) {
 	var currentCity = $('#city').val();
-	var cityName = $('#city').find('option:selected').text()
 
-	if (cityName != 'Selecciona') {
-		$('#city').find('option').get(0).remove();
+	if (currentCity != '') {
+		$('#city').find('option').get(0).remove()
 	}
 
-	$('#city').prepend('<option value="" selected disabled>Esperando Ciudades</option>');
+	$('#city')
+		.prop('disabled', true)
+		.prepend('<option value="" selected disabled>Esperando Ciudades</option>');
 
 	who = 'Assets'; where = 'CityList';
 	data = {
@@ -210,29 +225,35 @@ function getCities(currentState) {
 			});
 
 			$('#city').find('option').get(0).remove();
-			if (cityName == 'Selecciona') {
+
+			if (currentCity == '') {
 				$('#city').find('option:selected').prop('disabled', true);
 			}
 		}
 
-		$('#city').prop('disabled', false);
-
 		if (longProfile == 'S' && currentCity != '') {
 			getdistrict(currentCity)
 		}
+
+		$('#city').prop('disabled', false);
 	});
 }
 
 function getdistrict(currentCity) {
 	var currentDistrict = $('#district').val();
 
-	$('#district').prepend('<option value="" selected disabled>Esperando Distritos</option>');
+	if (currentDistrict != '') {
+		$('#district').find('option').get(0).remove();
+	}
+
+	$('#district')
+		.prop('disabled', true)
+		.prepend('<option value="" selected disabled>Esperando Distritos</option>');
 
 	where = 'Regions';
 	data = {
 		groupCode: currentCity
 	};
-
 
 	callNovoCore(who, where, data, function (response) {
 		if (response.code == 0) {
@@ -242,7 +263,12 @@ function getdistrict(currentCity) {
 			});
 
 			$('#district').find('option').get(0).remove();
-			$('#district').prop('disabled', false)
+
+			if (currentDistrict == '') {
+				$('#district')
+					.find('option:selected')
+					.prop('disabled', true);
+			}
 		}
 
 		$('#district').prop('disabled', false);

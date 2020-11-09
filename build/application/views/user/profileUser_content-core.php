@@ -55,26 +55,30 @@
           <?php if($longProfile == 'S'):?>
           <div class="form-group col-3 col-lg-6">
             <label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
-            <input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality">
+            <input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality" value="<?= $nationality; ?>"
+              autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="placeBirth" class="form-control <?= $updateUser; ?>" type="text" name="placeBirth">
+            <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+            <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" avlue="<?= $birthPlace; ?>">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
             <select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
               <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>"><?= $value; ?></option>
+              <option value="<?= $key; ?>" <?= $civilStatus == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
+                <?= $value; ?>
+              </option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" maxlength="1">
+            <label for="verifyDigit"><?= lang('USER_VERIFIERCODE') ?></label>
+            <input id="verifyDigit" class="form-control <?= $updateUser; ?>" type="text" name="verifyDigit" value="<?= $verifyDigit; ?>"
+              maxlength="1" <?= $verifyDigit != '' ? 'readonly' : ''; ?>>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
@@ -92,6 +96,7 @@
             </div>
             <div class="help-block"></div>
           </div>
+          <?php if ($longProfile == 'N'): ?>
           <div class="form-group col-3 col-lg-6 <?= $skipProfession; ?>">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
@@ -99,6 +104,7 @@
             </select>
             <div class="help-block"></div>
           </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>
@@ -138,11 +144,11 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <?php if($longProfile == 'S'):?>
+          <?php if($longProfile == 'S'): ?>
           <div class="form-group col-3 col-lg-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
             <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
-              <option value="<?= $district ?>"></option>
+              <option value="<?= $districtCod ?>"><?= $district ?></option>
             </select>
             <div class="help-block"></div>
           </div>
@@ -208,13 +214,13 @@
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
         <div class="row mx-1">
           <div class="form-group col-4 col-lg-6">
-            <label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-            <input id="idRUCText" class="form-control" type="text" name="idRUCText" autocomplete="off" onlyread>
+            <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+            <input id="fiscalId" class="form-control" type="text" name="fiscalId" autocomplete="off" value="<?= $fiscalId ?>" readonly>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="idWorkplace"><?= lang('USER_WORK_CENTER') ?></label>
-            <input id="idWorkplace" class="form-control" type="text" name="idWorkplace" autocomplete="off">
+            <label for="workplace"><?= lang('USER_WORK_CENTER') ?></label>
+            <input id="workplace" class="form-control" type="text" name="workplace" autocomplete="off" value="<?= $workplace; ?>">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
@@ -238,12 +244,9 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 col-lg-12 col-xl-6">
-            <label for="occupation"><?= lang('USER_OCCUPATION') ?></label>
-            <select id="occupation" class="custom-select form-control" name="occupation">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="profession"><?= lang('USER_PROFESSION') ?></label>
+            <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
+              <option value="<?= $professionType; ?>" selected><?= $profession; ?></option>
             </select>
             <div class="help-block"></div>
           </div>
