@@ -2,11 +2,13 @@
 $(function () {
 	var ulOptions = $('.nav-item-config');
 	var pinManagement = $('input[type=radio][name="recovery"]');
-	var virtual = $('#isVirtual').val();
+	var virtual = $('#operation').find('input[type=hidden][name="virtual"]').val();
 
-	if (virtual){
-		$("#replaceMotSol option[value='43']").text(lang.CUST_REQUEST_REASON_43);
-	};
+	if (virtual) {
+		$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
+		$('#selectReplacementCard').addClass('none');
+		$('#msgReplacementCard').removeClass('none');
+	}
 
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());

@@ -128,7 +128,7 @@
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary"><?= novoLang(lang('CUST_REPLACE_REQUEST'), ''); ?></h4>
         <form id="replacementForm">
-          <div class="row">
+          <div id="selectReplacementCard" class="row">
             <div class="form-group col-lg-4">
               <label for="replaceMotSol">Motivo de la solicitud</label>
               <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
@@ -140,6 +140,9 @@
               <div class="help-block"></div>
             </div>
           </div>
+					<div id="msgReplacementCard" class="row none">
+					<p><?= lang ('CUST_REPLACE_CARD') ?></p>
+					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
             <a class="btn btn-small btn-link" href="">Cancelar</a>

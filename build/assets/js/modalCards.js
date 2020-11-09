@@ -20,7 +20,6 @@ $(function () {
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
 		var isVirtual = $(event).find('input[type=hidden][name="isVirtual"]').val();
 		var module = $(event).find('input[type=hidden][name="module"]').val();
-		$("#replaceMotSol option[value='43']").text(lang.CUST_REPLACE_REASON['43']);
 
 		if (module == 'services' && status != '' && status != 'PB') {
 			return true;
@@ -34,6 +33,13 @@ $(function () {
 
 		if (isVirtual) {
 			cardDetail += '<span class="warning semibold h6 mx-auto">'+ lang.GEN_VIRTUAL_CARD +'</span>';
+			$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
+			$('#selectReplacementCard').addClass('none');
+			$('#msgReplacementCard').removeClass('none');
+		}else{
+			$('#replaceMotSol').val('');
+			$('#selectReplacementCard').removeClass('none');
+			$('#msgReplacementCard').addClass('none');
 		}
 
 		cardDetail += '</div>';
@@ -45,11 +51,7 @@ $(function () {
 		cardDetail += '</a>';
 		cardDetail += '</div>';
 
-		if (isVirtual){
-			$("#replaceMotSol option[value='43']").text(lang.CUST_REQUEST_REASON_43);
-		}
-
-		$('#isVirtual').val(isVirtual);
+		$('#virtual').val(isVirtual);
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);
 		$('#cardNumber').val(cardNumber);

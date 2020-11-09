@@ -75,6 +75,7 @@ $(function () {
 	$('#system-info').on('click', '.sensitive-btn', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
+		btnText = $(this).html();
 
 		form= $('#downd-send');
 
@@ -311,6 +312,9 @@ function validateCardDetail() {
 				inputModalCardOtp+= '</form>';
 
 				appMessages(response.title, inputModalCardOtp, response.icon, response.modalBtn);
+			break;
+			default:
+				$('#accept').html(btnText);
 			break;
 		}
 	})
