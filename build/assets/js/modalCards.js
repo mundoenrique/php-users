@@ -20,6 +20,7 @@ $(function () {
 		var brand = $(event).find('input[type=hidden][name="brand"]').val();
 		var isVirtual = $(event).find('input[type=hidden][name="isVirtual"]').val();
 		var module = $(event).find('input[type=hidden][name="module"]').val();
+		$("#replaceMotSol option[value='43']").text(lang.CUST_REPLACE_REASON['43']);
 
 		if (module == 'services' && status != '' && status != 'PB') {
 			return true;
@@ -44,6 +45,11 @@ $(function () {
 		cardDetail += '</a>';
 		cardDetail += '</div>';
 
+		if (isVirtual){
+			$("#replaceMotSol option[value='43']").text(lang.CUST_REQUEST_REASON_43);
+		}
+
+		$('#isVirtual').val(isVirtual);
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);
 		$('#cardNumber').val(cardNumber);

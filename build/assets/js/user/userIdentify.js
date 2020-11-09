@@ -5,6 +5,7 @@ var input = 'input[type="text"]';
 var loginIpMsg,btnTex,formcodeOTP,btnTextOtp;
 
 $(function () {
+	insertFormInput(false);
 	$('#identityForm')[0].reset();
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -37,14 +38,14 @@ $(function () {
 				$('#physicalCardPIN').hide();
 				$('#cardPIN').addClass('ignore')
 				$(numberCard).text(lang.USER_EMAIL);
-				$('#numberCard').attr('id','emailCard');
-				$('#emailCard').attr('name','emailCard').attr('maxlength','32');
+				$('#numberCard').attr('id','email');
+				$('#email').attr('name','email').attr('maxlength','32');
 				resetInput();
 		} else {
 				$('#physicalCardPIN').show();
 				$('#cardPIN').removeClass('ignore')
 				$(numberCard).text(lang.GEN_NUMBER_CARD);
-				$('#emailCard').attr('id','numberCard');
+				$('#email').attr('id','numberCard');
 				$('#numberCard').attr('name','numberCard').attr('maxlength','16');
 				resetInput();
 		}
@@ -67,12 +68,6 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.cancel-send-otp', function () {
-		$(this).
-		removeClass('cancel-send-otp');
-		insertFormInput(false);
-	});
-
 });
 
 function validateIdentity() {
@@ -90,7 +85,6 @@ function validateIdentity() {
 			case 2:
 				$('#identityBtn').html(btnText);
 				$('#accept').addClass('send-otp');
-				$('#cancel').addClass('cancel-send-otp');
 
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';

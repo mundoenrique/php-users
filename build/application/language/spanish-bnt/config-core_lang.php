@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
+//VALIDATE IP
+$lang['CONF_VALIDATE_IP'] = 'OFF';
 //CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'text';
 //SIGNIN

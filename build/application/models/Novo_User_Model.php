@@ -24,11 +24,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Ingreso al sistema';
 		$this->dataAccessLog->operation = 'Iniciar sesion';
+
 		$userName = mb_strtoupper($dataRequest->userName);
+
 		$this->dataAccessLog->userName = $userName;
 
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$authToken = $this->session->flashdata('authToken') ?? '';
 
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -37,13 +40,23 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->password = md5($password);//BORRAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		if (IP_VERIFY == 'ON' && lang('CONF_VALIDATE_IP') == 'ON') {
+			$this->dataRequest->codigoOtp = [
+				'tokenCliente' => $dataRequest->OTPcode ?? '',
+				'authToken' => $authToken
+			];
 
-		$this->isResponseRc = ACTIVE_RECAPTCHA ?
-			$this->callWs_ValidateCaptcha_User($dataRequest) :
-			0;
+			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
+		}
 
-		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_Signin');
+		if (isset($dataRequest->OTPcode) && $authToken == '') {
+			$this->isResponseRc = 9998;
+		} else {
+			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+			if ($this->isResponseRc === 0) {
+				$response = $this->sendToService('callWs_Signin');
+			}
 		}
 
 		$time = (object) [
@@ -83,6 +96,7 @@ class Novo_User_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				} else {
 					$this->response->code = 0;
+					$this->response->modal = TRUE;
 					$this->response->data = base_url(lang('GEN_LINK_CARDS_LIST'));
 					$fullSignin = TRUE;
 					$fullName = mb_strtolower($response->primerNombre).' ';
@@ -167,7 +181,32 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['link'] = 'inicio';
 				$this->session->set_flashdata('recoverAccess', 'blockedPass');
 			break;
+			case -286:
+			case -287:
+			case -288:
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = $this->isResponseRc == -286 ? lang('GEN_OTP_INVALID') : lang('GEN_OTP_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -424:
+				$this->response->code = 2;
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = novoLang(lang('GEN_IP_VERIFY'), $response->bean->emailEnc);
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->session->set_flashdata('authToken', $response->bean->codigoOtp->authToken);
+			break;
+			case 9998:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = lang('GEN_EXPIRE_TIME');
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case 9999:
+				$this->response->code = 4;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
 				$this->response->icon = lang('GEN_ICON_DANGER');
 				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
@@ -213,7 +252,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar acceso';
 		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
-		$this->dataAccessLog->userName = $dataRequest->email;;
+		$this->dataAccessLog->userName = $dataRequest->email;
 
 		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -277,7 +316,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$changePassType = $this->session->flashdata('changePassword');
 		$this->sendToService('CallWs_ChangePassword');
-		//$code = 0;
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -334,15 +372,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
-		$this->dataRequest->email = $dataRequest->emailCard ?? '';
+		$this->dataRequest->email = $dataRequest->email ?? '';
 		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
+		$authToken = $this->session->flashdata('authToken') ??  '';
 		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
-
-		/*$authToken = $this->session->flashdata('authToken') ? $this->session->flashdata('authToken') : '';
-		$this->dataRequest->codigoOtp =[
+		$this->dataRequest->otp =[
+			'authToken' => $authToken,
 			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
-			'authToken' => $authToken
-		];*/
+		];
 
 		$response = $this->sendToService('CallWs_UserIdentify');
 
@@ -360,13 +397,6 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
 				$userData->email = $response->user->email ?? '';
-				$userData->emailConfirm = $response->user->email ?? '';
-
-				if($userData->email == '') {
-					$userData->email = $dataRequest->emailCard ?? '';
-					$userData->emailConfirm  = '';
-				}
-
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
@@ -389,23 +419,35 @@ class Novo_User_Model extends NOVO_Model {
 				];
 				$this->session->set_userdata($userSess);
 			break;
+			case 200://MODAL OTP
+				$this->response->code = 2;
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
+				$this->response->icon = lang('GEN_ICON_WARNING');
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['link']  = 'identificar-usuario';
+				$this->response->modalBtn['btn2']['action'] = 'redirect';
+
+				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
+			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('USER_INVALID_DATE');;
+				$this->response->msg = lang('USER_INVALID_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -183:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('GEN_INVALID_CARD');;
+				$this->response->msg = lang('GEN_INVALID_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -184:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('GEN_INVALID_DATA');;
+				$this->response->msg = lang('GEN_INVALID_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286://OTP INVALIDO
-				$this->response->msg = lang('GEN_RESP_OTP_INVALID');
+				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->icon = lang('GEN_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -413,17 +455,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('USER_IDENTIFY_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-			case -424://MODAL OTP
-				$this->response->code = 2;
-				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
-				$this->response->icon = lang('GEN_ICON_WARNING');
-				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
-				$this->response->modalBtn['btn1']['action'] = 'none';
-				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
-				$this->response->modalBtn['btn2']['action'] = 'destroy';
-				//$this->session->set_flashdata('authToken',$response->usuario->codigoOtp->access_token);
-				$this->session->set_flashdata('authToken','12346789abcdefg');
 			break;
 		}
 
@@ -528,13 +559,13 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro';
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -284:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('GEN_ICON_INFO');
 				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro';
-				$this->response->modalBtn['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
 				$this->session->sess_destroy();
@@ -582,29 +613,22 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->gender = $response->registro->user->sexo ?? '';
 		$profileData->idNumber = $response->registro->user->id_ext_per ?? '';
 		$profileData->birthday = $response->registro->user->fechaNacimiento ?? '';
-		$profileData->professionType = $response->registro->user->tipo_profesion ?? '';
-		$profileData->profession = $response->registro->user->profesion ?? '';
+		$profileData->professionType = $response->registro->user->tipo_profesion ?? '1';
+		$profileData->profession = $response->registro->user->profesion ?? 'Abogado';
 		$profileData->idTypeCode = $response->registro->user->tipo_id_ext_per ?? '';
 		$profileData->idTypeText = $response->registro->user->descripcion_tipo_id_ext_per ?? '';
 		$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
-		$profileData->addressType = ucfirst(mb_strtolower($profileData->addressType));
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
-		$profileData->state = $response->direccion->acEstado ?? '';
+		$profileData->state = $response->direccion->acEstado ?? 'Selecciona';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
-		$profileData->city = $response->direccion->acCiudad ?? '';
-
-		if ($profileData->longProfile == 'S') {
-			$profileData->district = $response->registro->afiliacion->distrito;
-			$profileData->civilStatus = $response->registro->afiliacion->edocivil;
-			$profileData->employee = $response->registro->afiliacion->labora;
-		}
+		$profileData->city = $response->direccion->acCiudad ?? 'Selecciona';
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -634,6 +658,66 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				}
 			}
+		}
+
+		if ($profileData->longProfile == 'S') {
+			$profileData->firstName = isset($response->registro->afiliacion->nombre1) &&  $response->registro->afiliacion->nombre1 != ''
+				? $response->registro->afiliacion->nombre1 : $profileData->firstName;
+
+			$profileData->middleName = isset($response->registro->afiliacion->nombre2) &&  $response->registro->afiliacion->nombre2 != ''
+				? $response->registro->afiliacion->nombre2 : $profileData->middleName;
+
+			$profileData->lastName = isset($response->registro->afiliacion->apellido1) &&  $response->registro->afiliacion->apellido1 != ''
+				? $response->registro->afiliacion->apellido1 : $profileData->lastName;
+
+			$profileData->surName = isset($response->registro->afiliacion->apellido2) &&  $response->registro->afiliacion->apellido2 != ''
+				? $response->registro->afiliacion->apellido2 : $profileData->surName;
+
+			$profileData->gender = isset($response->registro->afiliacion->sexo) &&  $response->registro->afiliacion->sexo != ''
+				? $response->registro->afiliacion->sexo : $profileData->gender;
+
+			$profileData->professionType = isset($response->registro->afiliacion->profesion) &&  $response->registro->afiliacion->profesion != ''
+				? $response->registro->afiliacion->profesion : $profileData->professionType;
+
+			$profileData->addressType = isset($response->registro->afiliacion->tipo_direccion) &&  $response->registro->afiliacion->tipo_direccion != ''
+				? $response->registro->afiliacion->tipo_direccion : $profileData->addressType;
+
+			$profileData->stateCode = isset($response->registro->afiliacion->departamento) &&  $response->registro->afiliacion->departamento != ''
+				? $response->registro->afiliacion->departamento : $profileData->stateCode;
+
+			$profileData->cityCod = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
+				? $response->registro->afiliacion->provincia : $profileData->cityCod;
+
+			$profileData->districtCod = $response->registro->afiliacion->distrito ?? '';
+
+			$profileData->district = 'Selecciona';
+
+			$profileData->email = isset($response->registro->afiliacion->correo) &&  $response->registro->afiliacion->correo != ''
+				? $response->registro->afiliacion->correo : $profileData->email;
+
+			$profileData->address = isset($response->registro->afiliacion->direccion) &&  $response->registro->afiliacion->direccion != ''
+				? $response->registro->afiliacion->direccion : $profileData->address;
+
+			$phonesList['landLine'] = isset($response->registro->afiliacion->telefono1) &&  $response->registro->afiliacion->telefono1 != ''
+				? $response->registro->afiliacion->telefono1 : $phonesList['landLine'];
+
+			$phonesList['mobilePhone'] = isset($response->registro->afiliacion->telefono2) &&  $response->registro->afiliacion->telefono2 != ''
+				? $response->registro->afiliacion->telefono2 : $phonesList['mobilePhone'];
+
+			$phonesList['otherPhoneNum'] = isset($response->registro->afiliacion->telefono3) &&  $response->registro->afiliacion->telefono3 != ''
+				? $response->registro->afiliacion->telefono3 : $phonesList['otherPhoneNum'];
+
+			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
+				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;
+
+			$profileData->nationality = isset($response->registro->afiliacion->nacionalidad) &&  $response->registro->afiliacion->nacionalidad != ''
+				? $response->registro->afiliacion->nacionalidad : $profileData->nationality;
+
+			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
+			$profileData->civilStatus = $response->registro->afiliacion->edocivil ?? '';
+			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
+			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
+			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
 		}
 
 		$this->response->data->profileData = $profileData;
@@ -727,7 +811,6 @@ class Novo_User_Model extends NOVO_Model {
 				'ingreso_promedio_mensual' => $dataRequest->averageIncome ?? '',
 				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
 				'cargo_publico' => $dataRequest->publicOffice ?? '',
-				'institucion_publica' => $dataRequest->publicInst ?? '',
 				'institucion_publica' => $dataRequest->publicInst ?? '',
 				'uif' => $dataRequest->taxesObligated ?? '',
 				'lugar_nacimiento' => $dataRequest->birthPlace ?? '',

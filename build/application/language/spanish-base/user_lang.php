@@ -11,6 +11,7 @@ $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad
 $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
+$lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
@@ -460,9 +461,9 @@ $lang['USER_PLACEBIRTH'] = 'Lugar de nacimiento';
 $lang['USER_CIVILSTATUS'] = 'Estado civil';
 $lang['USER_CIVILSTATUS_LIST'] = [
 	'' => 'Selecciona',
-	'1' => 'Soltero',
-	'2' => 'Casado',
-	'3' => 'Viudo'
+	'S' => 'Soltero',
+	'C' => 'Casado',
+	'V' => 'Viudo'
 ];
 $lang['USER_VERIFIERCODE'] = 'Digito verificador';
 $lang['USER_GENDER_MALE'] = 'Masculino';
@@ -478,8 +479,9 @@ $lang['USER_ADDRESS_TYPE_LIST'] = [
 	'3' => 'Comercial'
 ];
 $lang['USER_POSTAL_CODE'] = 'Código postal';
-$lang['USER_STATE'] = 'Estado';
-$lang['USER_CITY'] = 'Ciudad';
+$lang['USER_STATE'] = 'Departamento';
+$lang['USER_CITY'] = 'Provincia';
+$lang['USER_DISTRICT'] = 'Distrito';
 $lang['USER_PHONE_LANDLINE'] = 'Teléfono fijo';
 $lang['USER_PHONE_MOBILE'] = 'Teléfono móvil';
 $lang['USER_PHONE_OTHER'] = 'Otro teléfono';
@@ -503,6 +505,11 @@ $lang['USER_LABOR_DATA'] = 'Datos laborales';
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['USER_WORK_CENTER'] = 'Centro laboral';
 $lang['USER_EMPLOYMENT_STATUS'] = 'Situación laboral';
+$lang['USER_EMPLOYMENT_STATUS_LIST'] = [
+	'' => 'Selecciona',
+	'1' => 'Dependiente',
+	'0' => 'Independiente'
+];;
 $lang['USER_SENIORITY'] = 'Antigüedad laboral';
 $lang['USER_OCCUPATION'] = 'Ocupación, oficio o profesión';
 $lang['USER_CHARGE'] = 'Cargo';

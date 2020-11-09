@@ -43,6 +43,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"googleRecaptcha",
 			"user/signin"
 		);
 
@@ -229,9 +230,13 @@ class Novo_User extends NOVO_Controller {
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
 		$this->render->skipProfession = lang('CONF_PROFESSION') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreProfession = lang('CONF_PROFESSION') == 'OFF' ? 'ignore' : '';
 		$this->render->skipContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'ignore' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'ignore' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'ignore' : '';
 		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
