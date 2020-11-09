@@ -229,7 +229,7 @@ class Novo_User extends NOVO_Controller {
 		// ELIMINAR SE USA SOLO PARA LA CARGA DEL NOMBRE DE LOS ARCHIVOS
 		// POSEE IMAGENES FAKES
 
-		$this->cargarImagenesFakeBORRAR();
+		// $this->cargarImagenesFakeBORRAR();
 
 		// TODO
 		// No posee imagenes registradas FAKE IMAGES
