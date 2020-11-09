@@ -521,13 +521,6 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
 				$userData->email = $response->user->email ?? '';
-				$userData->emailConfirm = $response->user->email ?? '';
-
-				if($userData->email == '') {
-					$userData->email = $dataRequest->email ?? '';
-					$userData->emailConfirm  = '';
-				}
-
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
@@ -744,29 +737,22 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->gender = $response->registro->user->sexo ?? '';
 		$profileData->idNumber = $response->registro->user->id_ext_per ?? '';
 		$profileData->birthday = $response->registro->user->fechaNacimiento ?? '';
-		$profileData->professionType = $response->registro->user->tipo_profesion ?? '';
-		$profileData->profession = $response->registro->user->profesion ?? '';
+		$profileData->professionType = $response->registro->user->tipo_profesion ?? '1';
+		$profileData->profession = $response->registro->user->profesion ?? 'Abogado';
 		$profileData->idTypeCode = $response->registro->user->tipo_id_ext_per ?? '';
 		$profileData->idTypeText = $response->registro->user->descripcion_tipo_id_ext_per ?? '';
 		$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
-		$profileData->addressType = ucfirst(mb_strtolower($profileData->addressType));
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
-		$profileData->state = $response->direccion->acEstado ?? '';
+		$profileData->state = $response->direccion->acEstado ?? 'Selecciona';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
-		$profileData->city = $response->direccion->acCiudad ?? '';
-
-		if ($profileData->longProfile == 'S') {
-			$profileData->district = $response->registro->afiliacion->distrito;
-			$profileData->civilStatus = $response->registro->afiliacion->edocivil;
-			$profileData->employee = $response->registro->afiliacion->labora;
-		}
+		$profileData->city = $response->direccion->acCiudad ?? 'Selecciona';
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -796,6 +782,66 @@ class Novo_User_Model extends NOVO_Model {
 					break;
 				}
 			}
+		}
+
+		if ($profileData->longProfile == 'S') {
+			$profileData->firstName = isset($response->registro->afiliacion->nombre1) &&  $response->registro->afiliacion->nombre1 != ''
+				? $response->registro->afiliacion->nombre1 : $profileData->firstName;
+
+			$profileData->middleName = isset($response->registro->afiliacion->nombre2) &&  $response->registro->afiliacion->nombre2 != ''
+				? $response->registro->afiliacion->nombre2 : $profileData->middleName;
+
+			$profileData->lastName = isset($response->registro->afiliacion->apellido1) &&  $response->registro->afiliacion->apellido1 != ''
+				? $response->registro->afiliacion->apellido1 : $profileData->lastName;
+
+			$profileData->surName = isset($response->registro->afiliacion->apellido2) &&  $response->registro->afiliacion->apellido2 != ''
+				? $response->registro->afiliacion->apellido2 : $profileData->surName;
+
+			$profileData->gender = isset($response->registro->afiliacion->sexo) &&  $response->registro->afiliacion->sexo != ''
+				? $response->registro->afiliacion->sexo : $profileData->gender;
+
+			$profileData->professionType = isset($response->registro->afiliacion->profesion) &&  $response->registro->afiliacion->profesion != ''
+				? $response->registro->afiliacion->profesion : $profileData->professionType;
+
+			$profileData->addressType = isset($response->registro->afiliacion->tipo_direccion) &&  $response->registro->afiliacion->tipo_direccion != ''
+				? $response->registro->afiliacion->tipo_direccion : $profileData->addressType;
+
+			$profileData->stateCode = isset($response->registro->afiliacion->departamento) &&  $response->registro->afiliacion->departamento != ''
+				? $response->registro->afiliacion->departamento : $profileData->stateCode;
+
+			$profileData->cityCod = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
+				? $response->registro->afiliacion->provincia : $profileData->cityCod;
+
+			$profileData->districtCod = $response->registro->afiliacion->distrito ?? '';
+
+			$profileData->district = 'Selecciona';
+
+			$profileData->email = isset($response->registro->afiliacion->correo) &&  $response->registro->afiliacion->correo != ''
+				? $response->registro->afiliacion->correo : $profileData->email;
+
+			$profileData->address = isset($response->registro->afiliacion->direccion) &&  $response->registro->afiliacion->direccion != ''
+				? $response->registro->afiliacion->direccion : $profileData->address;
+
+			$phonesList['landLine'] = isset($response->registro->afiliacion->telefono1) &&  $response->registro->afiliacion->telefono1 != ''
+				? $response->registro->afiliacion->telefono1 : $phonesList['landLine'];
+
+			$phonesList['mobilePhone'] = isset($response->registro->afiliacion->telefono2) &&  $response->registro->afiliacion->telefono2 != ''
+				? $response->registro->afiliacion->telefono2 : $phonesList['mobilePhone'];
+
+			$phonesList['otherPhoneNum'] = isset($response->registro->afiliacion->telefono3) &&  $response->registro->afiliacion->telefono3 != ''
+				? $response->registro->afiliacion->telefono3 : $phonesList['otherPhoneNum'];
+
+			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
+				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;
+
+			$profileData->nationality = isset($response->registro->afiliacion->nacionalidad) &&  $response->registro->afiliacion->nacionalidad != ''
+				? $response->registro->afiliacion->nacionalidad : $profileData->nationality;
+
+			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
+			$profileData->civilStatus = $response->registro->afiliacion->edocivil ?? '';
+			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
+			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
+			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
 		}
 
 		$this->response->data->profileData = $profileData;
@@ -889,7 +935,6 @@ class Novo_User_Model extends NOVO_Model {
 				'ingreso_promedio_mensual' => $dataRequest->averageIncome ?? '',
 				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
 				'cargo_publico' => $dataRequest->publicOffice ?? '',
-				'institucion_publica' => $dataRequest->publicInst ?? '',
 				'institucion_publica' => $dataRequest->publicInst ?? '',
 				'uif' => $dataRequest->taxesObligated ?? '',
 				'lugar_nacimiento' => $dataRequest->birthPlace ?? '',

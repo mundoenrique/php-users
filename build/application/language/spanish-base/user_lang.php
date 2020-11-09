@@ -461,9 +461,9 @@ $lang['USER_PLACEBIRTH'] = 'Lugar de nacimiento';
 $lang['USER_CIVILSTATUS'] = 'Estado civil';
 $lang['USER_CIVILSTATUS_LIST'] = [
 	'' => 'Selecciona',
-	'1' => 'Soltero',
-	'2' => 'Casado',
-	'3' => 'Viudo'
+	'S' => 'Soltero',
+	'C' => 'Casado',
+	'V' => 'Viudo'
 ];
 $lang['USER_VERIFIERCODE'] = 'Digito verificador';
 $lang['USER_GENDER_MALE'] = 'Masculino';
@@ -479,8 +479,8 @@ $lang['USER_ADDRESS_TYPE_LIST'] = [
 	'3' => 'Comercial'
 ];
 $lang['USER_POSTAL_CODE'] = 'Código postal';
-$lang['USER_STATE'] = 'Estado';
-$lang['USER_CITY'] = 'Ciudad';
+$lang['USER_STATE'] = 'Departamento';
+$lang['USER_CITY'] = 'Provincia';
 $lang['USER_DISTRICT'] = 'Distrito';
 $lang['USER_PHONE_LANDLINE'] = 'Teléfono fijo';
 $lang['USER_PHONE_MOBILE'] = 'Teléfono móvil';

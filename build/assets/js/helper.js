@@ -322,3 +322,12 @@ function downLoadfiles (data) {
 	$('#download-file').attr('download', '');
 	$('.cover-spin').hide();
 }
+
+function scrollTopPos(formValidate) {
+	var errorElements = $('.has-error');
+	var firstElement = $(errorElements[0]).offset().top;
+
+	$("html, body").animate({
+		scrollTop: firstElement - formValidate
+	}, 400);
+}

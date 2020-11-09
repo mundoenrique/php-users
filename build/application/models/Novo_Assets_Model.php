@@ -37,8 +37,8 @@ class Novo_Assets_Model extends NOVO_Model {
 			case 0:
 				foreach ($response->listaEstados as $pos => $state) {
 					$list = new stdClass();
-					$list->regId = $state->codEstado;
-					$list->regDesc = $state->estados;
+					$list->regId = trim($state->codEstado);
+					$list->regDesc = trim($state->estados);
 					$statesList[] = $list;
 				}
 			break;
@@ -74,8 +74,8 @@ class Novo_Assets_Model extends NOVO_Model {
 			case 0:
 				foreach ($response->listaCiudad as $pos => $city) {
 					$list = new stdClass();
-					$list->regId = $city->codCiudad;
-					$list->regDesc = $city->ciudad;
+					$list->regId = trim($city->codCiudad);
+					$list->regDesc = trim($city->ciudad);
 					$citiesList[] = $list;
 				}
 			break;
@@ -111,8 +111,8 @@ class Novo_Assets_Model extends NOVO_Model {
 			case 0:
 				foreach ($response->listaSubRegiones as $pos => $region) {
 					$list = new stdClass();
-					$list->regId = $region->codregion;
-					$list->regDesc = $region->region;
+					$list->regId = trim($region->codregion);
+					$list->regDesc = trim($region->region);
 					$regionsList[] = $list;
 				}
 			break;
