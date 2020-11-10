@@ -90,7 +90,7 @@ $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
-	'allowed_types' => 'jpg | png | jpeg ',
+	'allowed_types' => 'jpeg|png|jpg',
 	'detect_mime' => true,
 	'max_size' => '6144', //6mb
 	'encrypt_name' => FALSE,

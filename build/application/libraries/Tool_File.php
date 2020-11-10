@@ -143,7 +143,7 @@ class Tool_File {
 				$data = substr($imageData, strpos($imageData, ',') + 1);
 				$type = strtolower($type[1]);
 
-				if (in_array($type, explode('|', $configToUploadFile['allowed_types']))) {
+				if (strpos($configToUploadFile['allowed_types'], $type)) {
 					$data = str_replace( ' ', '+', $data );
 					$data = base64_decode($data);
 
@@ -162,6 +162,10 @@ class Tool_File {
 						$resultSize = "Size no permitido: $sizeImage de $limitImage de tope.";
 						log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resultSize);
 					}
+				} else {
+					$typesValids = $configToUploadFile['allowed_types'];
+					$resulType = "Tipo de archivo no permitido: $type de $typesValids de tope.";
+					log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resulType);
 				}
 			}
 		}
