@@ -239,12 +239,18 @@ class Novo_User extends NOVO_Controller {
 						$nameDocument['nameFile']
 					]);
 
-					$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
-					$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-					$data = file_get_contents($fullPathToImage);
-					$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
+					$base64 = '';
+					if (is_file($fullPathToImage)) {
+						$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+						if ($resultDecrypt) {
+							$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+							$data = file_get_contents($fullPathToImage);
+							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
+							$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+							$imagesDocument[$typeDocument]['base64'] = $base64;
+						}
+					}
 
-					$imagesDocument[$typeDocument]['base64'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
 					$imagesDocument[$typeDocument]['validate'] = 'ignore';
 				}
 			}

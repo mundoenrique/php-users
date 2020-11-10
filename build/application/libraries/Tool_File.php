@@ -201,16 +201,17 @@ class Tool_File {
 		log_message('INFO', 'Novo Tool_File: cryptographyFile Method Initialized');
 
 		$result = FALSE;
-		$fileContent = file_get_contents($fileName);
+		if (is_file($fileName)) {
+			$fileContent = file_get_contents($fileName);
+			if (is_string($fileContent)) {
+				$contentEncryt = $this->CI->encrypt_connect->cryptography($fileContent, $encrypt);
 
-		if (is_string($fileContent)) {
-			$contentEncryt = $this->CI->encrypt_connect->cryptography($fileContent, $encrypt);
-
-			$file = fopen($fileName, "wb");
-			if ($file) {
-				fwrite($file, $contentEncryt);
-				fclose($file);
-				$result = TRUE;
+				$file = fopen($fileName, "wb");
+				if ($file) {
+					fwrite($file, $contentEncryt);
+					fclose($file);
+					$result = TRUE;
+				}
 			}
 		}
 
