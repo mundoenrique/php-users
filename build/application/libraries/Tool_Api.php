@@ -25,6 +25,8 @@ class Tool_Api {
 	{
 		log_message('INFO', 'Novo Tool_Api: getContentAPI Method Initialized');
 
+		log_message('DEBUG', "Novo Tool_Api: getContentAPI " . json_encode($objRequest));
+
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 
 		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];
@@ -76,6 +78,7 @@ class Tool_Api {
 				}
 			}
 		}
+		log_message('DEBUG', "Novo Tool_Api: getPropertiesRequest " . json_encode($decrypParams));
 
 		return $decrypParams;
 	}
@@ -95,13 +98,12 @@ class Tool_Api {
 			$paramsValidsBodyRequest = $this->structureValidRequest[$this->namePropRequest];
 
 			foreach ($paramsValidsBodyRequest as $valor) {
-
 				$contentRequest[$valor] = property_exists($decrypParams[$this->namePropRequest], $valor) ?
 				 $this->clearProperty($decrypParams[$this->namePropRequest]->{$valor}) :
 				 NULL;
 			}
-			log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
 		}
+		log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
 
 		return $contentRequest;
 	}

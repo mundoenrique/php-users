@@ -417,6 +417,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
+					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
@@ -532,7 +533,16 @@ class Novo_User_Model extends NOVO_Model {
 			'notSms' => '1',
 			'email' => $dataRequest->email,
 			'password' => md5($password),
-			'passwordOld4' => md5(mb_strtoupper($password))
+			'passwordOld4' => md5(mb_strtoupper($password)),
+			'aplicaImgDoc' => 'S',
+			'img_valida' => 'FALSE',
+			'imagenes' => [
+				'id_ext_per' => $dataRequest->idNumber,
+				'tipoDocumento' => $dataRequest->countryDocument,
+				'rutaAnverso' => $dataRequest->INE_A,
+				'rutaReverso' => $dataRequest->INE_R,
+				'operacion' => 'insertar'
+			]
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
@@ -556,7 +566,7 @@ class Novo_User_Model extends NOVO_Model {
 		if ($this->isResponseRc !== 0) {
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
-				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
 				strtoupper($this->session->countryUri),
 				strtoupper($dataRequest->nickName ?? $this->session->userName),
 			]);
@@ -588,7 +598,6 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_Signup');
-
 	}
 	/**
 	 * @info Método para obtener el perfil del usuario
@@ -636,6 +645,7 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
+		$profileData->aplicaImgDoc = $response->registro->user->aplicaImgDoc ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
@@ -645,6 +655,16 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->state = $response->direccion->acEstado ?? 'Selecciona';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? 'Selecciona';
+
+		$profileData->imagenes = [];
+		if (property_exists($profileData, "aplicaImgDoc") && strtoupper($profileData->aplicaImgDoc) == 'S') {
+			$statusImgValida = strtoupper($response->registro->user->img_valida) == 'FALSE'? TRUE: FALSE;
+
+			$profileData->imagenes = [
+				'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso],
+				'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso]
+			];
+		}
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -778,7 +798,14 @@ class Novo_User_Model extends NOVO_Model {
 				'tyc' => '1',
 				'rc' => '0',
 				'passwordOperaciones' => '',
-				'disponeClaveSMS' => ''
+				'disponeClaveSMS' => '',
+				'imagenes' => [
+					'id_ext_per' => $dataRequest->idNumber,
+					'tipoDocumento' => $dataRequest->countryDocument,
+					'rutaAnverso' => $dataRequest->INE_A ?? '',
+					'rutaReverso' => $dataRequest->INE_R ?? '',
+					'operacion' => 'actualizar'
+				]
 			],
 			'listaTelefonos' => [
 				[

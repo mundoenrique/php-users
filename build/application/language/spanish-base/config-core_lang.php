@@ -96,3 +96,15 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];
+
+//REGITRY
+$lang['CONF_COUNTRY_DOCUMENT'] = [
+	'Pe' => '1',
+	'Usd' => '1',
+	'Ve' => '3',
+	'Ec-bp' => '3',
+	'Ec-pb' => '3',
+	'Ec-bg' => '3',
+	'Co' => '4',
+	'Mx-Bn' => '16',
+];

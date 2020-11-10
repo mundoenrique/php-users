@@ -89,6 +89,7 @@ class NOVO_Controller extends CI_Controller {
 			];
 
 			$objRequest = $typeContentValid[$typeResource];
+			log_message('DEBUG', 'NOVO Controller: typeResource: ' . json_endoce($objRequest));
 			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
 		} else {
 

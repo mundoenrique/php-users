@@ -55,8 +55,8 @@ class Tool_File {
 				} else {
 					$statusCodeResponse = 200;
 
-					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['orig_name'];
-					$_POST[$key] = $fileName.$this->CI->upload->data()['file_ext'];
+					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['file_name'];
+					$_POST[$key] = $this->CI->upload->data()['file_name'];
 				}
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
@@ -84,12 +84,12 @@ class Tool_File {
 					$value['resultUpload']
 				]);
 
-				if (!file_exists($fullPath)) {
+				if (!file_exists($fullPathFile)) {
 					$statusCodeResponse = 400;
 
 					$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');;
 				} else {
-					if (unlink($fullPath)) {
+					if (unlink($fullPathFile)) {
 						$statusCodeResponse = 200;
 
 						$_FILES[$key]['resultDelete'] = lang('GEN_SUCCESS_RESPONSE');

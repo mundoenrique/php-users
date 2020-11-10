@@ -118,6 +118,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
@@ -225,16 +226,29 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		// TODO
-		// ELIMINAR SE USA SOLO PARA LA CARGA DEL NOMBRE DE LOS ARCHIVOS
-		// POSEE IMAGENES FAKES
-
-		// $this->cargarImagenesFakeBORRAR();
-
-		// TODO
-		// No posee imagenes registradas FAKE IMAGES
 		$imagesDocument = [];
+		if (count($dataUser->data->profileData->imagenes)>0) {
+			$imagesDocument = $dataUser->data->profileData->imagenes;
 
+			foreach ($imagesDocument as $typeDocument => $nameDocument) {
+				$fullPathToImage = $this->tool_file->buildDirectoryPath([
+					$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+					strtoupper($this->session->countryUri),
+					strtoupper($this->session->userName),
+					$nameDocument['nameFile']
+				]);
+
+				$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+				$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+				$data = file_get_contents($fullPathToImage);
+				$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
+
+				$imagesDocument[$typeDocument]['base64'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+				$imagesDocument[$typeDocument]['validate'] = 'ignore';
+			}
+		}
+
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
@@ -320,7 +334,7 @@ class Novo_User extends NOVO_Controller {
 		$this->views = $views;
 		$this->loadView($view);
 	}
-		/**
+	/**
 	 * @info Método que renderiza la vista de terminos y condiciones
 	 * @author Hector D Corredor.
 	 * @date Jul 21th, 2020
@@ -334,39 +348,5 @@ class Novo_User extends NOVO_Controller {
 		$this->render->titlePage = lang('GEN_TERMS_TITLE');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
-	}
-
-	public function cargarImagenesFakeBORRAR () {
-		$dirLoadImages = $this->tool_file->buildDirectoryPath([
-			'C:\Users',
-			'ptorres',
-			'Pictures',
-			'fakeData'
-		]);
-
-		$matches = scandir($dirLoadImages);
-
-		$imagesDocument = [];
-		$ids = ['','','INE_A', 'INE_R'];
-		foreach ($matches as $k => $v) {
-			if (!is_dir($v)) {
-				$imagesDocument[$ids[$k]]['base64'] = $v;
-			}
-		}
-
-		foreach ($imagesDocument as $key => $value) {
-			$fullPathToImage = $this->tool_file->buildDirectoryPath([
-				$dirLoadImages,
-				$value['base64']
-			]);
-
-			$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-			$data = file_get_contents($fullPathToImage);
-			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-			if (file_exists($fullPathToImage)) {
-				$imagesDocument[$key]['base64'] = $base64;
-				$imagesDocument[$key]['validate'] = 'ignore';
-			}
-		}
 	}
 }
