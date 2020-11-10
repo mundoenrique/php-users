@@ -88,16 +88,16 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->codBloqueo = $dataRequest->status;
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
-		$this->dataRequest->tipoTarjeta = $dataRequest->isVirtual ? 'virtual' : 'fisica';
+		$this->dataRequest->tipoTarjeta = $dataRequest->virtual ? 'virtual' : 'fisica';
 
 		$response = $this->sendToService('callWs_Replacement');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = 'Bloqueo permanente';
-				$this->response->msg = novoLang('La tarjeta %s, ha sido %s.', [$dataRequest->cardNumberMask, 'bloqueda de forma permanente']);
+				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang('La tarjeta %s, ha sido %s.', [$dataRequest->cardNumberMask, 'bloqueda de forma permanente']);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? 'lista-de-tarjetas' : 'atencion-al-cliente';
 			break;
 			case 7:
 				$this->response->title = 'Bloqueo permanente';
