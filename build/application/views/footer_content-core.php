@@ -54,7 +54,7 @@
   <?php endif; ?>
   <input type="hidden" id="prefix" name="prefix" value="<?= $prefix; ?>">
 	<input type="hidden" id="status" name="status" value="<?= $status; ?>">
-	<input type="hidden" id="isVirtual" name="isVirtual" value="<?= $isVirtual; ?>">
+	<input type="hidden" id="virtual" name="virtual" value="<?= $isVirtual; ?>">
   <input type="hidden" id="action" name="action" value="">
 </form>
 <?php if ($cardsTotal > 1): ?>
