@@ -192,6 +192,7 @@ $lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seg
 $lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
 $lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
 $lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
 $lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
