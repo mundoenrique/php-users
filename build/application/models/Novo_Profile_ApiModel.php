@@ -24,6 +24,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		log_message('INFO', 'NOVO API Model: uploadFile Method Initialized');
 
 		$statusCodeResponse = 400;
+		$resultUploadFiles = [];
 		$dataResponse = [];
 		$resultData = '';
 		$directoryToUpload = $this->tool_file->buildDirectoryPath([
