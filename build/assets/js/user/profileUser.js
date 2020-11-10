@@ -44,6 +44,21 @@ $(function () {
 			data.notEmail = $('#notEmail').is(':checked') ? '1' : '0';
 			data.notSms = $('#notSms').is(':checked') ? '1' : '0';
 			$(this).html(loader);
+
+			if (lang.CONF_LOAD_DOCS == 'ON') {
+				var inputFile = $('input[type="file"]');
+				var filesToUpload = [];
+
+				if (inputFile.length) {
+					inputFile.each(function(i,e){
+						filesToUpload.push(
+							{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
+						);
+					})
+				}
+				data.files = filesToUpload;
+			}
+
 			insertFormInput(true);
 			updateProfile();
 		} else {

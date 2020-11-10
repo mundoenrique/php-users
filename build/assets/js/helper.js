@@ -106,10 +106,13 @@ function callNovoCore(who, where, request, _response_) {
 
 	dataRequest = cryptoPass(dataRequest, true);
 
-	if (request.file) {
-		formData.append('file', request.file);
-		delete request.file;
+	if (request.files) {
+		data.files.forEach(function(element){
+			formData.append(element.name, element.file);
+		});
+		delete request.files;
 	}
+
 	formData.append('request', dataRequest);
 	formData.append('cpo_name', cpo_cook);
 	formData.append('plot', btoa(cpo_cook));
@@ -276,7 +279,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null) {
+		if(thisValInput == null || $(this).attr('type') === 'file' ) {
 			return;
 		}
 		var trimVal = thisValInput.trim()

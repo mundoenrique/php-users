@@ -47,6 +47,10 @@ $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
+$lang['GEN_BTN_YES'] = 'Si';
+$lang['GEN_BTN_NO'] = 'No';
+//TITULOS
+$lang['GEN_TITLE_IMPORTANT'] = 'Importante';
 //ICONS
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -210,3 +214,7 @@ $lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu telé
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
+$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
+// PROFILE
+$lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
+

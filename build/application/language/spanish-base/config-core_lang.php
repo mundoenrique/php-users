@@ -86,3 +86,25 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
+
+// API
+$lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
+$lang['CONF_CONFIG_UPLOAD_FILE'] = [
+	'allowed_types' => 'jpeg|png|jpg',
+	'detect_mime' => true,
+	'max_size' => 6291456, //6291456 bytes son 6mb
+	'encrypt_name' => FALSE,
+	'overwrite'=> TRUE,
+];
+
+//REGITRY
+$lang['CONF_COUNTRY_DOCUMENT'] = [
+	'Pe' => '1',
+	'Usd' => '1',
+	'Ve' => '3',
+	'Ec-bp' => '3',
+	'Ec-pb' => '3',
+	'Ec-bg' => '3',
+	'Co' => '4',
+	'Mx-Bn' => '16',
+];

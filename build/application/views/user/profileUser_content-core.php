@@ -15,7 +15,7 @@
           <div class="form-group col-3 col-lg-6">
             <label for="idType"><?= lang('USER_ID_TYPE') ?></label>
             <input id="idTypeText" class="form-control" type="text" name="idTypeText" value="<?= $idTypeText; ?>" readonly autocomplete="off">
-            <input id="idTypeCode" type="hidden" name="idTypeCode" value="<?= $idTypeCode; ?>">
+            <input id="idType" type="hidden" name="idType" value="<?= $idTypeCode; ?>">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
