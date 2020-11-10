@@ -156,6 +156,11 @@ class Tool_File {
 						if (file_put_contents("$fullPathFile.{$type}", $data) > 0 ) {
 							$result = "$fileName.{$type}";
 						}
+					} else {
+						$sizeImage = strlen($data);
+						$limitImage = $configToUploadFile['max_size'];
+						$resultSize = "Size no permitido: $sizeImage de $limitImage de tope.";
+						log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resultSize);
 					}
 				}
 			}
