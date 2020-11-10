@@ -143,7 +143,7 @@ class Tool_File {
 				$data = substr($imageData, strpos($imageData, ',') + 1);
 				$type = strtolower($type[1]);
 
-				if (strpos($configToUploadFile['allowed_types'], $type)) {
+				if (strpos($configToUploadFile['allowed_types'], $type) >= 0) {
 					$data = str_replace( ' ', '+', $data );
 					$data = base64_decode($data);
 
