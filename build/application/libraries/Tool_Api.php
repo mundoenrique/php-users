@@ -76,7 +76,6 @@ class Tool_Api {
 				}
 			}
 		}
-		log_message('DEBUG', "Novo Tool_Api: getPropertiesRequest " . json_encode($decrypParams));
 
 		return $decrypParams;
 	}
