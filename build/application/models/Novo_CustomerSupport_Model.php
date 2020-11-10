@@ -297,7 +297,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			utf8_encode($expireDate->password)
 		);
 
-		$this->dataRequest->idOperation = '110';
+		$this->dataRequest->idOperation = '112';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->accodUsuario = $this->session->userName;
 		$this->dataRequest->id_ext_per = $this->session->userId;
