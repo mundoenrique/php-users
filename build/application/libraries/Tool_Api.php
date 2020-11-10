@@ -25,8 +25,6 @@ class Tool_Api {
 	{
 		log_message('INFO', 'Novo Tool_Api: getContentAPI Method Initialized');
 
-		log_message('DEBUG', "Novo Tool_Api: getContentAPI " . json_encode($objRequest));
-
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 
 		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];

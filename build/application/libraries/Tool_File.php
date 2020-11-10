@@ -24,6 +24,7 @@ class Tool_File {
 		log_message('INFO', 'Novo Tool_File: uploadFiles Method Initialized');
 
 		$resultUploadFiles = [];
+		$messageResult = [];
 
 		if (!is_dir($configToUploadFile['upload_path'])) {
 			mkdir($configToUploadFile['upload_path'], 0755, TRUE);
@@ -51,18 +52,20 @@ class Tool_File {
 				if (!$this->CI->upload->do_upload($key)) {
 					$statusCodeResponse = 400;
 
+					$messageResult[$key] = $this->CI->upload->display_errors('', '');
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->display_errors('', '');
 				} else {
 					$statusCodeResponse = 200;
 
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['file_name'];
 					$_POST[$key] = $this->CI->upload->data()['file_name'];
+					$messageResult[$key] = 'upload successfull!!!';
 				}
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
 		}
 
-		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($_FILES));
+		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($messageResult));
 
 		return !in_array(400, $resultUploadFiles);
 	}

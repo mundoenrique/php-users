@@ -799,6 +799,8 @@ class Novo_User_Model extends NOVO_Model {
 				'rc' => '0',
 				'passwordOperaciones' => '',
 				'disponeClaveSMS' => '',
+				'aplicaImgDoc' => 'S',
+				'img_valida' => 'TRUE',
 				'imagenes' => [
 					'id_ext_per' => $dataRequest->idNumber,
 					'tipoDocumento' => $dataRequest->countryDocument,
