@@ -75,6 +75,7 @@ $(function () {
 	$('#system-info').on('click', '.sensitive-btn', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
+		btnText = $(this).html();
 
 		form= $('#downd-send');
 
@@ -100,7 +101,7 @@ $(function () {
 	$('#system-info').on('click', '.virtualDetail-btn', function (e) {
 		$(this)
 		.removeClass('virtualDetail-btn');
-		stopInterval();
+		clearInterval(interval);
 	});
 
 })
@@ -312,6 +313,9 @@ function validateCardDetail() {
 
 				appMessages(response.title, inputModalCardOtp, response.icon, response.modalBtn);
 			break;
+			default:
+				$('#accept').html(btnText);
+			break;
 		}
 	})
 }
@@ -336,7 +340,7 @@ function startTimer(duration, display) {
 }
 
 function stopInterval() {
-	$("#system-info").dialog("destroy");
-	$('#accept').off('click');
 	clearInterval(interval);
+	$('#accept').off('click');
+	$("#system-info").dialog("destroy");
 }

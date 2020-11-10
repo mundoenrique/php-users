@@ -330,7 +330,9 @@ function scrollTopPos(formValidate) {
 	var errorElements = $('.has-error');
 	var firstElement = $(errorElements[0]).offset().top;
 
-	$("html, body").animate({
-		scrollTop: firstElement - formValidate
-	}, 400);
+	if (firstElement > 0) {
+		$("html, body").animate({
+			scrollTop: firstElement - formValidate
+		}, 400);
+	}
 }

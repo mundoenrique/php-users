@@ -71,6 +71,8 @@ $(function () {
 			insertFormInput(true);
 			where = 'SignUpData';
 			getResponseServ(where);
+		} else {
+			scrollTopPos($('#signUpForm').offset().top);
 		}
 	})
 })

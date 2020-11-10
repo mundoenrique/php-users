@@ -401,7 +401,7 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->middleName = $response->user->segundoNombre ?? '';
 				$userData->surName = $response->user->segundoApellido ?? '';
 				$userData->birthDate = $response->user->fechaNacimiento ?? '';
-				$userData->email = $response->user->email ?? '';
+				$userData->email = isset($dataRequest->virtualCard) ? '' : ($response->user->email ?? '');
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
