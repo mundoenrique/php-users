@@ -32,8 +32,8 @@ class Users_model extends CI_Model
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
 
 		$newCore = array (
-			'Usd',
-			'Pe'
+			//'Usd',
+			//'Pe'
 			//'Co',
 			//'Ve'
 		);
