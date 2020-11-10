@@ -718,6 +718,8 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
 			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
+			$profileData->employed = $response->registro->afiliacion->labora ?? '';
+			$profileData->laborOld = $response->registro->afiliacion->antiguedad_laboral ?? '';
 		}
 
 		$this->response->data->profileData = $profileData;
