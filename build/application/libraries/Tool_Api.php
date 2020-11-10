@@ -100,7 +100,7 @@ class Tool_Api {
 				 NULL;
 			}
 		}
-		log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
+		//log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
 
 		return $contentRequest;
 	}
