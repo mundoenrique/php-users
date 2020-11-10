@@ -661,8 +661,8 @@ class Novo_User_Model extends NOVO_Model {
 			$statusImgValida = strtoupper($response->registro->user->img_valida) == 'FALSE'? TRUE: FALSE;
 
 			$profileData->imagenes = [
-				'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso],
-				'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso]
+				'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
+				'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso ?? '']
 			];
 		}
 

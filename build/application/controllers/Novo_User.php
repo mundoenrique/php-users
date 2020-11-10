@@ -231,20 +231,22 @@ class Novo_User extends NOVO_Controller {
 			$imagesDocument = $dataUser->data->profileData->imagenes;
 
 			foreach ($imagesDocument as $typeDocument => $nameDocument) {
-				$fullPathToImage = $this->tool_file->buildDirectoryPath([
-					$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
-					strtoupper($this->session->countryUri),
-					strtoupper($this->session->userName),
-					$nameDocument['nameFile']
-				]);
+				if ($nameDocument['nameFile'] !== '') {
+					$fullPathToImage = $this->tool_file->buildDirectoryPath([
+						$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+						strtoupper($this->session->countryUri),
+						strtoupper($this->session->userName),
+						$nameDocument['nameFile']
+					]);
 
-				$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
-				$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-				$data = file_get_contents($fullPathToImage);
-				$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
+					$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+					$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+					$data = file_get_contents($fullPathToImage);
+					$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
 
-				$imagesDocument[$typeDocument]['base64'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
-				$imagesDocument[$typeDocument]['validate'] = 'ignore';
+					$imagesDocument[$typeDocument]['base64'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+					$imagesDocument[$typeDocument]['validate'] = 'ignore';
+				}
 			}
 		}
 
