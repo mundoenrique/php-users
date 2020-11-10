@@ -149,7 +149,7 @@ class Tool_File {
 					$data = str_replace( ' ', '+', $data );
 					$data = base64_decode($data);
 
-					if (strlen($data) <= 6291456) {
+					if (strlen($data) <= $configToUploadFile['max_size']) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName
