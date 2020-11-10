@@ -30,7 +30,7 @@ $lang['CONF_LOAD_DOC_B_ID'] = 'ON';
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
 	'detect_mime' => true,
-	'max_size' => '6291456', //6291456 bytes son 6mb
+	'max_size' => 6291456, //6291456 bytes son 6mb
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];

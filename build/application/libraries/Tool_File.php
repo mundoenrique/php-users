@@ -137,6 +137,8 @@ class Tool_File {
 		log_message('INFO', 'Novo Tool_File: convertBase64ToImage Method Initialized');
 
 		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		log_message('DEBUG', "Novo Tool_Api: CONFIG for uploadFiles " . json_encode($configToUploadFile));
+
 		$result = FALSE;
 		if (strpos($imageData, 'base64') > 0) {
 			if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
@@ -147,7 +149,7 @@ class Tool_File {
 					$data = str_replace( ' ', '+', $data );
 					$data = base64_decode($data);
 
-					if (strlen($data) <= $configToUploadFile['max_size']) {
+					if (strlen($data) <= 6291456) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName
@@ -156,17 +158,16 @@ class Tool_File {
 						if (file_put_contents("$fullPathFile.{$type}", $data) > 0 ) {
 							$result = "$fileName.{$type}";
 						}
-					} else {
-						$sizeImage = strlen($data);
-						$limitImage = $configToUploadFile['max_size'];
-						$resultSize = "Size no permitido: $sizeImage de $limitImage de tope.";
-						log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resultSize);
 					}
-				} else {
-					$typesValids = $configToUploadFile['allowed_types'];
-					$resulType = "Tipo de archivo no permitido: $type de $typesValids de tope.";
-					log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resulType);
 				}
+				$sizeImage = strlen($data);
+				$limitImage = $configToUploadFile['max_size'];
+				$resultSize = "++ Cargando: $sizeImage bytes del permtido de $limitImage bytes.";
+				log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resultSize);
+
+				$typesValids = $configToUploadFile['allowed_types'];
+				$resulType = "++ Tipo de archivo procesado: $type de los permitdos: $typesValids.";
+				log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resulType);
 			}
 		}
 		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($result));
