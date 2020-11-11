@@ -118,6 +118,7 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
@@ -225,6 +226,37 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
+		$imagesDocument = [];
+		if (count($dataUser->data->profileData->imagenes)>0) {
+			$imagesDocument = $dataUser->data->profileData->imagenes;
+
+			foreach ($imagesDocument as $typeDocument => $nameDocument) {
+				if ($nameDocument['nameFile'] !== '') {
+					$fullPathToImage = $this->tool_file->buildDirectoryPath([
+						$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+						strtoupper($this->session->countryUri),
+						strtoupper($this->session->userName),
+						$nameDocument['nameFile']
+					]);
+
+					$base64 = '';
+					if (is_file($fullPathToImage)) {
+						$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+						if ($resultDecrypt) {
+							$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+							$data = file_get_contents($fullPathToImage);
+							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
+							$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+							$imagesDocument[$typeDocument]['base64'] = $base64;
+						}
+					}
+
+					$imagesDocument[$typeDocument]['validate'] = 'ignore';
+				}
+			}
+		}
+
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
@@ -243,6 +275,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
+		$this->render->imagesLoaded = $imagesDocument;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -309,7 +342,7 @@ class Novo_User extends NOVO_Controller {
 		$this->views = $views;
 		$this->loadView($view);
 	}
-		/**
+	/**
 	 * @info Método que renderiza la vista de terminos y condiciones
 	 * @author Hector D Corredor.
 	 * @date Jul 21th, 2020
@@ -324,45 +357,4 @@ class Novo_User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
-
-	public function generateHash()
-  {
-    $statusResponse = 400;
-    $response = '';
-    $password = NULL;
-    $key = FALSE;
-
-    $inputData = $this->input->post();
-    if (count($inputData) > 0) {
-
-      $bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
-      if (!is_null($bodyRequest)) {
-
-        $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
-        $key = $bodyRequest->key === $this->key_api;
-      }
-    }
-
-    if (!is_null($password) && $key) {
-
-      $argon2 = $this->encrypt_connect->generateArgon2($password);
-      $bodyResponse = [
-        'key' => $this->key_api,
-        'password' => $argon2->hexArgon2
-      ];
-      $statusResponse = 200;
-
-      $dataResponse = json_encode($bodyResponse);
-      $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
-    }
-
-    return $this->output
-      ->set_content_type('application/json')
-      ->set_status_header($statusResponse)
-      ->set_output(json_encode(
-        [
-          'response' => $response
-        ]
-      ));
-  }
 }

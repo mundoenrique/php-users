@@ -11,7 +11,10 @@ class Novo_User_ApiModel extends NOVO_Model {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Api Model Class Initialized');
+
+		$this->configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 	}
+
 	/**
 	 * @info Método para generar hash
 	 * @author Pedro A. Torres F.
@@ -36,7 +39,8 @@ class Novo_User_ApiModel extends NOVO_Model {
 
 		return $this->response;
 	}
-		/**
+
+	/**
 	 * @info Método para generar Request
 	 * @author Pedro A. Torres F.
 	 * @date Oct. 1h, 2020

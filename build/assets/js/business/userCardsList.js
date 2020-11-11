@@ -10,6 +10,7 @@ $(function () {
 
 		switch (code) {
 			case 0:
+			case 3:
 				$('.hide-out').removeClass('hide');
 			break;
 			default:

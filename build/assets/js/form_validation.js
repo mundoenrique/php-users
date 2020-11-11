@@ -93,6 +93,11 @@ function validateForms(form) {
 			"confirmPin": { required: true, equalTo: "#newPin" },
 			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
+			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
+			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
+			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
+			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
+			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -183,6 +188,31 @@ function validateForms(form) {
 				required: lang.VALIDATE_CONFIRM_PIN,
 				equalTo: lang.VALIDATE_IQUAL_PIN
 			},
+			"SEL_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"INE_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"INE_R": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"PASS_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"PASS_R": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -223,6 +253,11 @@ function validateForms(form) {
 	$.validator.methods.fourConsecutivesDigits = function(value, element, param) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
+
+	$.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param * 1000000)
+		}
+	)
 
 	form.validate().resetForm();
 }

@@ -65,7 +65,7 @@ $(function () {
 		}
 	})
 
-	$('#productdetail').on('click', function (e) {
+	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		sensitiveInformation();

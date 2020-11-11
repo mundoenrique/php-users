@@ -465,6 +465,11 @@ $lang['USER_CIVILSTATUS_LIST'] = [
 	'C' => 'Casado',
 	'V' => 'Viudo'
 ];
+$lang['USER_EMPLOY_SITUATION_LIST'] = [
+	'' => 'Selecciona',
+	'0' => 'Independiente',
+	'1' => 'Dependiente'
+];
 $lang['USER_VERIFIERCODE'] = 'Digito verificador';
 $lang['USER_GENDER_MALE'] = 'Masculino';
 $lang['USER_GENDER_FEMALE'] = 'Femenino';

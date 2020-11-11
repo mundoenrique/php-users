@@ -15,6 +15,7 @@ class Tool_Api {
 		$this->namePropRequest = "";
 		$this->structureValidRequest = "";
 	}
+
 	/**
 	 * @info Extrae el contenido del API
 	 * @author Pedro Torres
@@ -28,6 +29,7 @@ class Tool_Api {
 
 		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];
 	}
+
 	/**
 	 * @info Método que establece el contrato para el API solicitada
 	 * @author Pedro Torres
@@ -43,6 +45,7 @@ class Tool_Api {
 			$this->namePropRequest = array_keys($this->structureValidRequest)[0];
 		}
 	}
+
 	/**
 	 * @info Método para extraer las propiedades de la petición API
 	 * @author Pedro Torres
@@ -58,6 +61,11 @@ class Tool_Api {
 		if (!is_null($objRequest) || !is_null($nameApi)) {
 			$this->setContract($nameApi);
 
+			// TODO
+			// Solo para generar datos en prueba
+		  // $objRequest->request = $this->CI->tool_file->fakeDataUpload('mrojas');
+			// $objRequest->request = $this->CI->tool_file->fakeDataErase('mrojas');
+
 			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
 				$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
 
@@ -71,6 +79,7 @@ class Tool_Api {
 
 		return $decrypParams;
 	}
+
 	/**
 	 * @info Método para extraer el contenido por cada propiedad de la petición
 	 * @author Pedro Torres
@@ -86,16 +95,14 @@ class Tool_Api {
 			$paramsValidsBodyRequest = $this->structureValidRequest[$this->namePropRequest];
 
 			foreach ($paramsValidsBodyRequest as $valor) {
-
 				$contentRequest[$valor] = property_exists($decrypParams[$this->namePropRequest], $valor) ?
-				$this->CI->security->xss_clean(strip_tags($decrypParams[$this->namePropRequest]->{$valor})) :
-				NULL;
+				 $this->clearProperty($decrypParams[$this->namePropRequest]->{$valor}) :
+				 NULL;
 			}
-			log_message('DEBUG', "Novo Tool_Api: getContentRequest " . $this->prepareArrayForDisplay($contentRequest));
 		}
-
 		return $contentRequest;
 	}
+
 	/**
 	 * @info Genera un array con los datos a mostrarse en el log,
 	 * si se indica cual no puede ser visible aplica un hash al mismo
@@ -110,19 +117,20 @@ class Tool_Api {
 
 		foreach ($arrayToWork as $key => $valor) {
 
-			$arrayForDisplay[$key] = in_array($key, lang('GEN_FILTER_ATTRIBUTES_LOG')) ?
+			$arrayForDisplay[$key] = in_array($key, lang('CONF_FILTER_ATTRIBUTES_LOG')) ?
 			"[Protected => ******** ]":
 			$valor;
 		}
 
 		return json_encode($arrayForDisplay);
 	}
+
 	/**
 	 * @info Método para armar respuesta a petición API en caso de no cumplir las validaciones
 	 * @author Pedro A. Torres F.
 	 * @date Oct 2, 2020
 	 */
-	public function setResponseNotValid($reason = '')
+	public function setResponseNotValid()
 	{
 		log_message('INFO', 'NOVO Tool_Api: setResponseNotValid method initialized');
 
@@ -131,5 +139,18 @@ class Tool_Api {
 		$this->responseDefect->data = '';
 
 		return $this->responseDefect;
+	}
+
+	/**
+	 * @info Método para securizar el contenido de los campos permitidos en la petición
+	 * @author Pedro A. Torres F.
+	 * @date Oct 16, 2020
+	 * @param: $property ==> dato a securizar
+	 */
+	private function clearProperty ($property = null)
+	{
+		return is_string($property) && !strpos($property, 'base64') ?
+			$this->CI->security->xss_clean(strip_tags($property)) :
+			$property;
 	}
 }

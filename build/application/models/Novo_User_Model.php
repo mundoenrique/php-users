@@ -74,7 +74,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $response->idUsuario,
+					'userId' => $response->idUsuario
 				];
 				$this->session->set_userdata($userData);
 				unset($this->dataRequest->password);
@@ -108,6 +108,10 @@ class Novo_User_Model extends NOVO_Model {
 							str_replace('/', '-', $response->fechaUltimaConexion)
 						)
 					);
+					$statusImgValida = FALSE;
+					if (property_exists($response, "aplicaImgDoc") && strtoupper($response->aplicaImgDoc) == 'S') {
+						$statusImgValida = strtoupper($response->img_valida) == 'FALSE'? TRUE: FALSE;
+					}
 					$userData = [
 						'logged' => TRUE,
 						'encryptKey' => $response->keyUpdate,
@@ -129,7 +133,8 @@ class Novo_User_Model extends NOVO_Model {
 						'terms' => $response->tyc,
 						'mobilePhone' => $response->celular ?? '',
 						'enterpriseCod' => $response->acCodCia ?? '',
-						'clientAgent' => $this->agent->agent_string()
+						'clientAgent' => $this->agent->agent_string(),
+						'missingImages' => $statusImgValida,
 					];
 					$this->session->set_userdata($userData);
 
@@ -412,9 +417,11 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
+					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per,
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
+					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userSess);
@@ -526,7 +533,16 @@ class Novo_User_Model extends NOVO_Model {
 			'notSms' => '1',
 			'email' => $dataRequest->email,
 			'password' => md5($password),
-			'passwordOld4' => md5(mb_strtoupper($password))
+			'passwordOld4' => md5(mb_strtoupper($password)),
+			'aplicaImgDoc' => 'S',
+			'img_valida' => 'FALSE',
+			'imagenes' => [
+				'id_ext_per' => $dataRequest->idNumber,
+				'tipoDocumento' => $dataRequest->countryDocument,
+				'rutaAnverso' => $dataRequest->INE_A,
+				'rutaReverso' => $dataRequest->INE_R,
+				'operacion' => 'insertar'
+			]
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
@@ -547,6 +563,16 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_Signup');
 
+		if ($this->isResponseRc !== 0) {
+			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				strtoupper($this->session->countryUri),
+				strtoupper($dataRequest->nickName ?? $this->session->userName),
+			]);
+
+			$this->tool_file->deleteFiles($configUploadFile);
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -572,7 +598,6 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_Signup');
-
 	}
 	/**
 	 * @info Método para obtener el perfil del usuario
@@ -620,6 +645,7 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
+		$profileData->aplicaImgDoc = $response->registro->user->aplicaImgDoc ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
@@ -629,6 +655,16 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->state = $response->direccion->acEstado ?? 'Selecciona';
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? 'Selecciona';
+
+		$profileData->imagenes = [];
+		if (property_exists($profileData, "aplicaImgDoc") && strtoupper($profileData->aplicaImgDoc) == 'S') {
+			$statusImgValida = strtoupper($response->registro->user->img_valida) == 'FALSE'? TRUE: FALSE;
+
+			$profileData->imagenes = [
+				'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
+				'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso ?? '']
+			];
+		}
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -718,6 +754,8 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
 			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
+			$profileData->employed = $response->registro->afiliacion->labora ?? '';
+			$profileData->laborOld = $response->registro->afiliacion->antiguedad_laboral ?? '';
 		}
 
 		$this->response->data->profileData = $profileData;
@@ -756,13 +794,22 @@ class Novo_User_Model extends NOVO_Model {
 				'fechaNacimiento' => $dataRequest->birthDate,
 				'tipo_profesion' => $dataRequest->profession,
 				'profesion' => $dataRequest->profession,
-				'tipo_id_ext_per' => $dataRequest->idTypeCode,
+				'tipo_id_ext_per' => $dataRequest->idType,
 				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
 				'aplicaPerfil' => $this->session->longProfile,
 				'tyc' => '1',
 				'rc' => '0',
 				'passwordOperaciones' => '',
-				'disponeClaveSMS' => ''
+				'disponeClaveSMS' => '',
+				'aplicaImgDoc' => 'S',
+				'img_valida' => 'TRUE',
+				'imagenes' => [
+					'id_ext_per' => $dataRequest->idNumber,
+					'tipoDocumento' => $dataRequest->countryDocument,
+					'rutaAnverso' => $dataRequest->INE_A ?? '',
+					'rutaReverso' => $dataRequest->INE_R ?? '',
+					'operacion' => 'actualizar'
+				]
 			],
 			'listaTelefonos' => [
 				[

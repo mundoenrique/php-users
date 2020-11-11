@@ -15,7 +15,7 @@
           <div class="form-group col-3 col-lg-6">
             <label for="idType"><?= lang('USER_ID_TYPE') ?></label>
             <input id="idTypeText" class="form-control" type="text" name="idTypeText" value="<?= $idTypeText; ?>" readonly autocomplete="off">
-            <input id="idTypeCode" type="hidden" name="idTypeCode" value="<?= $idTypeCode; ?>">
+            <input id="idType" type="hidden" name="idType" value="<?= $idTypeCode; ?>">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
@@ -77,8 +77,8 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="verifyDigit"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifyDigit" class="form-control <?= $updateUser; ?>" type="text" name="verifyDigit" value="<?= $verifyDigit; ?>"
-              maxlength="1" <?= $verifyDigit != '' ? 'readonly' : ''; ?>>
+            <input id="verifyDigit" class="form-control <?= $updateUser; ?>" type="text" name="verifyDigit" value="<?= $verifyDigit; ?>" maxlength="1"
+              <?= $verifyDigit != '' ? 'readonly' : ''; ?>>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
@@ -224,22 +224,25 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="employmentStatus"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
-            <select id="employmentStatus" class="custom-select form-control" name="employmentStatus">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
+            <select id="employed" class="custom-select form-control" name="employed">
+              <?php foreach (lang('USER_EMPLOY_SITUATION_LIST') as $key => $value) : ?>
+              <option value="<?= $key; ?>" <?= $employed == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
+                <?= $value; ?>
+              </option>
+              <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="Seniority"><?= lang('USER_SENIORITY') ?></label>
-            <select id="Seniority" class="custom-select form-control" name="Seniority">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
+            <select id="laborOld" class="custom-select form-control" name="laborOld">
+              <?php if ($laborOld == ''): ?>
+              <option selected disabled>Selecciona</option>
+              <?php endif; ?>
+              <?php for ($index = 0; $index <= 50; $index++): ?>
+              <option value="<?= $index; ?>" <?= $index == $laborOld ? 'selected' : ''; ?>><?= $index; ?></option>
+              <?php endfor; ?>
             </select>
             <div class="help-block"></div>
           </div>

@@ -98,7 +98,24 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 
 				$this->session->set_userdata('products', TRUE);
-				$this->response->code = isset($response->lista) && count($response->lista) > 0 ? 0 : 1;
+				if (isset($response->lista) && count($response->lista) > 0) {
+					$this->response->code = 0;
+
+					if($this->session->missingImages) {
+						$this->response->code = 3;
+						$this->response->title = lang('GEN_TITLE_IMPORTANT');
+						$this->response->icon = lang('GEN_ICON_INFO');
+						$this->response->msg = lang('GEN_MISSING_IMAGES');
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
+						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
+						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
+						$this->response->modalBtn['btn2']['action'] = 'destroy';
+
+						$this->session->set_userdata('missingImages', FALSE);
+					}
+				} else{
+					$this->response->code = 1;
+				}
 			break;
 			default:
 				if ($this->isResponseRc != -61) {
@@ -141,6 +158,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_CURRENCY').' '.$response->disponible;
+				$this->response->modal = TRUE;
 			break;
 			default:
 				$this->response->code = 1;
