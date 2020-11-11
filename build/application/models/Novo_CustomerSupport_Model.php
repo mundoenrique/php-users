@@ -35,7 +35,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->prefix = $dataRequest->prefix;
 		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->codBloqueo = $dataRequest->status == '' ? 'PB' : '00';
-		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
+		$this->dataRequest->tokenOperaciones = isset($dataRequest->otpCode) ? $dataRequest->otpCode : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 
 		$response = $this->sendToService('callWs_TemporaryLock');
@@ -57,6 +57,22 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case -125:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang(lang('CUST_EXPIRED_CARD'), $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -286:
+			case -301:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_OTP_INVALID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -287:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_OTP_USED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -288:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
@@ -91,7 +107,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->prefix = $dataRequest->prefix;
 		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->codBloqueo = $dataRequest->status;
-		$this->dataRequest->tokenOperaciones = isset($dataRequest->otp) ? $dataRequest->otp : '';
+		$this->dataRequest->tokenOperaciones = isset($dataRequest->otpCode) ? $dataRequest->otpCode : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 		$this->dataRequest->tipoTarjeta = $dataRequest->virtual ? 'virtual' : 'fisica';
 
@@ -122,6 +138,22 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case -125:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = novoLang(lang('CUST_EXPIRED_CARD'), $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -286:
+			case -301:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_OTP_INVALID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -287:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_OTP_USED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -288:
+				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
