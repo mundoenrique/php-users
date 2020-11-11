@@ -118,6 +118,11 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
+		$this->render->previewINE_A = FALSE;
+		$this->render->previewINE_R = FALSE;
+		$this->render->previewPASS_A = FALSE;
+		$this->render->previewPASS_R = FALSE;
+
 		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
@@ -224,6 +229,21 @@ class Novo_User extends NOVO_Controller {
 
 		foreach($dataUser->data->phonesList AS $index => $render) {
 			$this->render->$index = $render;
+		}
+
+		$this->render->previewINE_A = FALSE;
+		$this->render->previewINE_R = FALSE;
+		$this->render->previewPASS_A = FALSE;
+		$this->render->previewPASS_R = FALSE;
+
+		$inputPreviewImage = ['INE_A', 'INE_R'];
+		if (strtoupper($this->render->img_valida) == 'TRUE') {
+			foreach ($inputPreviewImage as $value) {
+				if (key_exists($value, $this->render->imagesLoaded)) {
+					$attributeInput = 'preview'.$value;
+					$this->render->$attributeInput = key_exists('base64', $this->render->imagesLoaded[$value]) ? TRUE : FALSE;
+				}
+			}
 		}
 
 		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];

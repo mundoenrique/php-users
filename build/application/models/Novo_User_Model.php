@@ -135,6 +135,7 @@ class Novo_User_Model extends NOVO_Model {
 						'enterpriseCod' => $response->acCodCia ?? '',
 						'clientAgent' => $this->agent->agent_string(),
 						'missingImages' => $statusImgValida,
+						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? ''
 					];
 					$this->session->set_userdata($userData);
 
@@ -622,13 +623,6 @@ class Novo_User_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$userSess = [
-					'docmentId' => $response->registro->user->id_ext_per ?? '',
-					// TODO
-					// QUITAR CABLE LUEGO DE INTEGRAR EN SERVICIO
-					'abbrTypeDocument' => $response->registro->user->abrev_tipo_id_ext_per ?? 'CU'
-				];
-				$this->session->set_userdata($userSess);
 			break;
 		}
 
@@ -654,6 +648,7 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
 		$profileData->aplicaImgDoc = $response->registro->user->aplicaImgDoc ?? '';
+		$profileData->img_valida = $response->registro->user->img_valida ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
@@ -759,31 +754,33 @@ class Novo_User_Model extends NOVO_Model {
 		$imagesDocument = [];
 		if (property_exists($profileData, "aplicaImgDoc") && strtoupper($profileData->aplicaImgDoc) == 'S') {
 
-			$imagesDocumentLoaded = [
-				'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
-				'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso ?? '']
-			];
+			if (strtoupper($profileData->img_valida) == 'TRUE') {
+				$imagesDocumentLoaded = [
+					'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
+					'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso ?? '']
+				];
 
-			foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
-				if ($nameDocument['nameFile'] !== '') {
-					$fullPathToImage = $this->tool_file->buildDirectoryPath([
-						$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
-						strtoupper($this->session->countryUri),
-						strtoupper($this->session->userName),
-						$nameDocument['nameFile']
-					]);
+				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
+					if ($nameDocument['nameFile'] !== '') {
+						$fullPathToImage = $this->tool_file->buildDirectoryPath([
+							$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+							strtoupper($this->session->countryUri),
+							strtoupper($this->session->userName),
+							$nameDocument['nameFile']
+						]);
 
-					if (is_file($fullPathToImage)) {
-						$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
-						if ($resultDecrypt) {
-							$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-							$data = file_get_contents($fullPathToImage);
+						if (is_file($fullPathToImage)) {
+							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+							if ($resultDecrypt) {
+								$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+								$data = file_get_contents($fullPathToImage);
 
-							$this->tool_file->cryptographyFile($fullPathToImage);
+								$this->tool_file->cryptographyFile($fullPathToImage);
 
-							$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-							$imagesDocument[$typeDocument]['base64'] = $base64;
-							$imagesDocument[$typeDocument]['validate'] = 'ignore';
+								$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+								$imagesDocument[$typeDocument]['base64'] = $base64;
+								$imagesDocument[$typeDocument]['validate'] = 'ignore';
+							}
 						}
 					}
 				}

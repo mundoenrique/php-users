@@ -51,7 +51,7 @@ class Novo_CallModels extends Novo_Controller {
 					$_FILES[$key]['nameForUpload'] = $this->tool_file->setNameToFile([
 						$key,
 						$this->session->abbrTypeDocument,
-						$this->session->docmentId
+						$this->session->userId
 					]);
 				}
 			}
