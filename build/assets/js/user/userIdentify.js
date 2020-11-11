@@ -14,7 +14,6 @@ $(function () {
 
 	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();
-		formInputTrim(form)
 		validateForms(form);
 		btnText = $(this).html();
 		data = getDataForm(form);
@@ -55,7 +54,6 @@ $(function () {
 		formcodeOTP = $('#formVerificationOTP');
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		formInputTrim(formcodeOTP);
 		validateForms(formcodeOTP);
 		if(formcodeOTP.valid()){
 			$('#formVerificationOTP input').attr('disabled', true);

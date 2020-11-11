@@ -36,7 +36,7 @@ $(function () {
 			$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
 			$('#selectReplacementCard').addClass('none');
 			$('#msgReplacementCard').removeClass('none');
-		}else{
+		} else {
 			$('#replaceMotSol').val('');
 			$('#selectReplacementCard').removeClass('none');
 			$('#msgReplacementCard').addClass('none');
@@ -60,15 +60,20 @@ $(function () {
 		$('#status').val(status);
 		$('#system-info').dialog('destroy');
 	});
+
+	$('#system-info').on('click', '.close-card-modal', function (e) {
+		$('#system-info').dialog('destroy');
+	});
 });
 
 function cardModal() {
 	var inputModal = $('#cardList').html();
 	$('.nav-config-box').removeClass('no-events');
+	$('#cancel').addClass('close-card-modal');
 	modalBtn = {
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'destroy'
+			action: 'none'
 		},
 		maxHeight: 600,
 		width: 655,

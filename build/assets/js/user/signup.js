@@ -41,7 +41,6 @@ $(function () {
 	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
 		form = $('#signUpForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

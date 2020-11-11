@@ -224,7 +224,7 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link" href="">Cancelar</a>
+								<a class="btn btn-small btn-link big-modal" href="">Cancelar</a>
                 <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
               </div>
             </form>
