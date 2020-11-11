@@ -33,9 +33,9 @@ $(function () {
 			inputElement.click();
 		});
 
-		$(inputElement).on("change", function(e){
+		$(inputElement).on("change", function(e, validIgnore){
 			if (inputElement.files.length) {
-				updateThumbnail(dropZoneElement, inputElement.files[0]);
+				updateThumbnail(dropZoneElement, inputElement.files[0], inputElement);
 			}
 		});
 
@@ -61,7 +61,7 @@ $(function () {
 		});
 	});
 
-	function updateThumbnail(dropZoneElement, file) {
+	function updateThumbnail(dropZoneElement, file, validIgnore) {
 		var thumbnailElement = dropZoneElement.querySelector(".drop-zone-thumb");
 
 		if (dropZoneElement.querySelector(".drop-zone-prompt")) {
@@ -84,8 +84,8 @@ $(function () {
 				thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
 			};
 
-			if (thumbnailElement.classList.contains('ignore')) {
-				thumbnailElement.classList.remove('ignore');
+			if (validIgnore.classList.contains('ignore')) {
+				validIgnore.classList.remove('ignore');
 			}
 		} else {
 			thumbnailElement.style.backgroundImage = null;
