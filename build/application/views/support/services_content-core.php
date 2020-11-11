@@ -115,7 +115,7 @@
           <span class="status-text1"><?= $statustext ?></span> tarjeta
         </h4>
         <p>
-          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar
+          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar.
         </p>
         <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
