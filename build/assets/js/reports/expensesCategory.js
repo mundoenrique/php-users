@@ -53,7 +53,6 @@ $(function () {
 	$('#monthtlyMovesBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#monthtlyMovesForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

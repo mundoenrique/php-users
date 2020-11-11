@@ -32,7 +32,6 @@ $(function () {
 	$('#profileUserBtn').on('click', function(e) {
 		e.preventDefault();
 		form = $('#profileUserForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

@@ -339,13 +339,11 @@ $config = [
 		],
 		[
 			'field' => 'currentPin',
-			'label' => 'currentPin',
-			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPin',
-			'label' => 'newPin',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|differs[currentPin]'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|differs[currentPin]|required'
 		],
 	],
 	'userCardsList' => [
