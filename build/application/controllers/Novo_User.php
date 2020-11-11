@@ -226,36 +226,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		$imagesDocument = [];
-		if (count($dataUser->data->profileData->imagenes)>0) {
-			$imagesDocument = $dataUser->data->profileData->imagenes;
-
-			foreach ($imagesDocument as $typeDocument => $nameDocument) {
-				if ($nameDocument['nameFile'] !== '') {
-					$fullPathToImage = $this->tool_file->buildDirectoryPath([
-						$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
-						strtoupper($this->session->countryUri),
-						strtoupper($this->session->userName),
-						$nameDocument['nameFile']
-					]);
-
-					$base64 = '';
-					if (is_file($fullPathToImage)) {
-						$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
-						if ($resultDecrypt) {
-							$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
-							$data = file_get_contents($fullPathToImage);
-							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage);
-							$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-							$imagesDocument[$typeDocument]['base64'] = $base64;
-						}
-					}
-
-					$imagesDocument[$typeDocument]['validate'] = 'ignore';
-				}
-			}
-		}
-
 		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
 		$this->render->titlePage = lang('GEN_MENU_PORFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
@@ -275,7 +245,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
-		$this->render->imagesLoaded = $imagesDocument;
+		$this->render->imagesLoaded = $this->render->imagesLoaded ?? [];
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}

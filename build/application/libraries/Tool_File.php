@@ -35,17 +35,6 @@ class Tool_File {
 				$fileName = $value['nameForUpload'];
 				$configToUploadFile['file_name'] = hash('ripemd160', $fileName);
 
-				$matchedFiles = glob($this->buildDirectoryPath([
-					$configToUploadFile['upload_path'],
-					$configToUploadFile['file_name'].'.*'
-				]));
-
-				if ($matchedFiles && count($matchedFiles) > 0) {
-					foreach ($matchedFiles as $fullPathFile) {
-						unlink($fullPathFile);
-					}
-				}
-
 				$this->CI->load->library('upload', $configToUploadFile);
 				$this->CI->upload->initialize($configToUploadFile);
 
@@ -54,18 +43,32 @@ class Tool_File {
 
 					$messageResult[$key] = $this->CI->upload->display_errors('', '');
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->display_errors('', '');
+					$_FILES[$key]['error'] = 1;
 				} else {
 					$statusCodeResponse = 200;
 
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['file_name'];
 					$_POST[$key] = $this->CI->upload->data()['file_name'];
 					$messageResult[$key] = 'upload successfull!!!';
+
+					$matchedFiles = glob($this->buildDirectoryPath([
+						$configToUploadFile['upload_path'],
+						$configToUploadFile['file_name'].'.*'
+					]));
+
+					if ($matchedFiles && count($matchedFiles) > 0) {
+						foreach ($matchedFiles as $fullPathFile) {
+							if (!strpos($fullPathFile, $_POST[$key])) {
+								unlink($fullPathFile);
+							}
+						}
+					}
 				}
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
 		}
 
-		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($messageResult));
+		log_message('DEBUG', "Novo Tool_File: uploadFiles " . json_encode($messageResult));
 
 		return !in_array(400, $resultUploadFiles);
 	}
@@ -90,7 +93,7 @@ class Tool_File {
 				if (!file_exists($fullPathFile)) {
 					$statusCodeResponse = 400;
 
-					$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');;
+					$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');
 				} else {
 					if (unlink($fullPathFile)) {
 						$statusCodeResponse = 200;
