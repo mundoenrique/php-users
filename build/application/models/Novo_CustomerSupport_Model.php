@@ -114,15 +114,30 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('CUST_SPECIFIC_PERMANENT_LOCK'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -396:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = novoLang(lang('CUST_SPECIFIC_REVEWAL_LOCK'), $dataRequest->cardNumberMask);
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -125:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = novoLang(lang('CUST_EXPIRED_CARD'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
-				$this->load->model('Novo_Assets_Model', 'getToken');
-				$this->response = $this->getToken->callWs_GetToken_Assets();
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+			case -382:
+				$this->response->code = 3;
+				if ($this->isResponseRc == -306) {
+					$this->load->model('Novo_Assets_Model', 'getToken');
+					$this->response = $this->getToken->callWs_GetToken_Assets();
+					$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				}
+
+				if (isset($reponse->bean->cost_repos_plas) && $reponse->bean->cost_repos_plas != '') {
+					$cost = currencyFormat($reponse->bean->cost_repos_plas);
+					$this->response->data->cost = TRUE;
+					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('GEN_CURRENCY'), $cost]);
+				}
 			break;
 		}
 

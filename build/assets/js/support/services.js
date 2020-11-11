@@ -193,7 +193,7 @@ $(function () {
 
 	$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
-		$('#accept').addClass('send-otp');
+		$('#accept').removeClass('send-otp');
 		thisAction = $(this);
 		form = $('#OTPcodeForm');
 		validateForms(form);
@@ -201,13 +201,24 @@ $(function () {
 		if (form.valid()) {
 			data.otpCode = $('#otpCode').val();
 			insertFormInput(true);
-			action = thisAction.attr('action');
 			btnText = thisAction.text().trim()
 			thisAction.html(loader);
 			$('#accept').removeAttr('action');
 
 			requestSupport(thisAction);
 		}
+	});
+
+	$('#system-info').on('click', '.resend', function(e) {
+		e.preventDefault();
+		$('#accept').removeClass('resend');
+		thisAction = $(this);
+		insertFormInput(true);
+		btnText = thisAction.text().trim()
+		thisAction.html(loader);
+		$('#accept').removeAttr('action');
+
+		requestSupport(thisAction);
 	});
 });
 
@@ -227,6 +238,11 @@ function requestSupport(thisAction) {
 			$('#accept').attr('action', data.action);
 
 			inputModal = '<form id="OTPcodeForm" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+
+			if (response.data.cost) {
+				inputModal += 	'<p class="pt-0 p-0">' + response.data.msg + '</p>';
+			}
+
 			inputModal += 	'<p class="pt-0 p-0">' + response.msg + '</p>';
 			inputModal += 	'<div class="row">';
 			inputModal += 		'<div class="form-group col-8">';
@@ -238,6 +254,10 @@ function requestSupport(thisAction) {
 			inputModal += '</form>';
 
 			appMessages(response.title, inputModal, response.icon, response.modalBtn);
+		} else if (response.code == 3) {
+			$('#accept').addClass('resend');
+			$('#accept').attr('action', data.action);
+			appMessages(response.title, response.data.msg, response.icon, response.modalBtn);
 		}
 
 		if (data.action == 'twirlsCommercial' && response.code == 0) {

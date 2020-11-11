@@ -89,6 +89,7 @@ $lang['CUST_SUCCESS_CHANGE_PIN'] = 'El PIN de la tarjeta %s, ha sido cambiado ex
 $lang['CUST_SUCCESS_OPERATION_RESPONSE'] = 'La tarjeta %s, ha sido %s.';
 $lang['CUST_SPECIFIC_INACTIVE_PRODUCT_'] = 'La tarjeta %s se encuentra inactiva';
 $lang['CUST_SPECIFIC_PERMANENT_LOCK'] = 'La tarjeta %s tiene una reposición pendiente';
+$lang['CUST_SPECIFIC_REVEWAL_LOCK'] = 'La tarjeta %s tiene una renovación pendiente';
 $lang['CUST_EXPIRED_CARD'] = 'No es posible realizar esta acción la tarjeta %s está vencida';
 $lang['CUST_LOCK_CARD'] = 'La tarjeta %s se encuentra bloqueda';
 $lang['CUST_PIN_NOT_VALID'] = 'El PIN actual no es válido, verifica e intenta nuevamente.';
