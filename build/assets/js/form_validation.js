@@ -93,11 +93,11 @@ function validateForms(form) {
 			"confirmPin": { required: true, equalTo: "#newPin" },
 			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
-			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
-			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
-			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
-			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
-			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: 6},
+			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -255,7 +255,7 @@ function validateForms(form) {
 	}
 
 	$.validator.addMethod('filesize', function (value, element, param) {
-    return this.optional(element) || (element.files[0].size <= param * 1000000)
+    return element.files[0].size <= 62914560 && element.files[0].size > 10240;
 		}
 	)
 

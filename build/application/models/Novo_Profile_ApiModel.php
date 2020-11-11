@@ -58,11 +58,6 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 					]);
 
 					$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
-					if (!$resultEcryptFile) {
-						if (unlink($fullPath)) {
-							$statusCodeResponse = 400;
-						}
-					}
 
 					$resultData = $uploadedFileName;
 				};

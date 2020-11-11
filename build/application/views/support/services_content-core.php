@@ -115,7 +115,7 @@
           <span class="status-text1"><?= $statustext ?></span> tarjeta
         </h4>
         <p>
-          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar
+          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar.
         </p>
         <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
@@ -140,7 +140,7 @@
               <div class="help-block"></div>
             </div>
           </div>
-					<div id="msgReplacementCard" class="row none">
+					<div id="msgReplacementCard" class="row none mx-0">
 					<p><?= lang ('CUST_REPLACE_CARD') ?></p>
 					</div>
           <hr class="separador-one w-100">
