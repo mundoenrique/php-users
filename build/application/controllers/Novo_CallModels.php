@@ -51,10 +51,11 @@ class Novo_CallModels extends Novo_Controller {
 					$_FILES[$key]['nameForUpload'] = $this->tool_file->setNameToFile([
 						$key,
 						$this->session->abbrTypeDocument,
-						$this->session->docmentId
+						$this->session->userId
 					]);
 				}
 			}
+
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
 				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
@@ -62,22 +63,17 @@ class Novo_CallModels extends Novo_Controller {
 				strtoupper($_POST['nickName'] ?? $this->session->userName),
 			]);
 
-			$valid = $this->tool_file->uploadFiles($configUploadFile);
-			if (!$valid) {
-				$this->tool_file->deleteFiles($configUploadFile);
-			} else {
-				foreach ($_FILES as $clave => $valor) {
+			$this->tool_file->uploadFiles($configUploadFile);
+			foreach ($_FILES as $clave => $valor) {
+				if ($valor['error'] == 0) {
 					$fullPathName = $this->tool_file->buildDirectoryPath([
 						$configUploadFile['upload_path'],
 						$valor['resultUpload'],
 					]);
 
 					$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
-					if (!$resultEcryptFile) {
-						if (unlink($fullPath)) {
-							$valid = FALSE;
-						}
-					}
+				} else {
+					$_POST[$clave] = '';
 				}
 			}
 		}
