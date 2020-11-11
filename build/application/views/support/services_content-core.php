@@ -140,7 +140,7 @@
               <div class="help-block"></div>
             </div>
           </div>
-					<div id="msgReplacementCard" class="row none">
+					<div id="msgReplacementCard" class="row none mx-0">
 					<p><?= lang ('CUST_REPLACE_CARD') ?></p>
 					</div>
           <hr class="separador-one w-100">
