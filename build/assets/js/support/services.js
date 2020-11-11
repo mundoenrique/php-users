@@ -201,7 +201,7 @@ $(function () {
 		if (form.valid()) {
 			data.otpCode = $('#otpCode').val();
 			insertFormInput(true);
-			btnText = thisAction.text().trim()
+			btnText = thisAction.text().trim();
 			thisAction.html(loader);
 			$('#accept').removeAttr('action');
 
