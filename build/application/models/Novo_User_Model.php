@@ -418,7 +418,7 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
-					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per,
+					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
