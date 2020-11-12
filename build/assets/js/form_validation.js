@@ -6,7 +6,7 @@ function validateForms(form) {
 	var onlyOneNumber = /^[0-9]{1}$/;
 	var onlyOneLetter = /^[SCV]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-	var validNickName = /^(([a-z]{2,})+([a-z0-9_]){4,16})$/i;
+	var validNickName = /^([a-z]{2}[a-z0-9_]{4,14})$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
@@ -58,7 +58,7 @@ function validateForms(form) {
 			"cardPIN": {required: true,pattern: numeric},
 			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"acceptTerms": {required: true},
-			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
+			"nickName": { required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true },
 			"firstName": { required: true, pattern: alphaName},
 			"middleName": {pattern: alphaName},
 			"lastName": { required: true, pattern: alphaName},
