@@ -45,7 +45,7 @@
 							<?php else:?>
 								<div class="hide-INE_R drop-zone-prompt flex flex-column items-center">
 									<i class="icon icon-upload h00"></i>
-									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_B_DOC'); ?></span>
 								</div>
 							<?php endif; ?>
 							<input type="file" name="INE_R" id="INE_R" class="drop-zone-input <?= $imagesLoaded['INE_R']['validate'] ?? '';?>">
@@ -77,7 +77,7 @@
 									<img id="preview-PASS_R" class="drop-zone-thumb" src="<?= $imagesLoaded['PASS_R']['base64'];?>">
 								<?php else:?>
 									<i class="icon icon-upload h00"></i>
-									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_PASSPORT'); ?></span>
+									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_B_PASSPORT'); ?></span>
 								<?php endif; ?>
               </div>
               <input type="file" name="PASS_R" id="PASS_R" class="drop-zone-input <?= $imagesLoaded['PASS_R']['validate'] ?? '';?>">
