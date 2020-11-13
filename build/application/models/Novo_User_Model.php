@@ -461,7 +461,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('USER_IDENTIFY_EXIST');
+				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
