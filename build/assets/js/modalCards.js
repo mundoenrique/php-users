@@ -30,18 +30,9 @@ $(function () {
 		cardDetail += '<div class="item-network ' + brand + '"></div>';
 		cardDetail += '<img class="card-image" src="' + img + '">';
 		cardDetail += '</div>';
-
 		if (isVirtual) {
 			cardDetail += '<span class="warning semibold h6 mx-auto">'+ lang.GEN_VIRTUAL_CARD +'</span>';
-			$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
-			$('#selectReplacementCard').addClass('none');
-			$('#msgReplacementCard').removeClass('none');
-		} else {
-			$('#replaceMotSol').val('');
-			$('#selectReplacementCard').removeClass('none');
-			$('#msgReplacementCard').addClass('none');
 		}
-
 		cardDetail += '</div>';
 		cardDetail += '<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">';
 		cardDetail += '<p class="semibold mb-0 h5 truncate">' + productName + '</p>';
@@ -50,6 +41,16 @@ $(function () {
 		cardDetail += '<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto';
 		cardDetail += '</a>';
 		cardDetail += '</div>';
+
+		if (isVirtual) {
+			$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
+			$('#selectReplacementCard').addClass('none');
+			$('#msgReplacementCard').removeClass('none');
+		} else {
+			$('#replaceMotSol').val('');
+			$('#selectReplacementCard').removeClass('none');
+			$('#msgReplacementCard').addClass('none');
+		}
 
 		$('#virtual').val(isVirtual);
 		$('#donor, #accountSelect').remove();
