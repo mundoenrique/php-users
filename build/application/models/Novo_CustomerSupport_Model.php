@@ -117,6 +117,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, 'bloqueda de forma permanente']);
+				$this->response->icon = lang('GEN_ICON_SUCCESS');
 				$this->response->success = TRUE;
 				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? 'lista-de-tarjetas' : 'atencion-al-cliente';
 			break;
@@ -154,6 +155,11 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case -288:
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -544:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = lang('CUST_LIMIT_REPLACEMENTS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
