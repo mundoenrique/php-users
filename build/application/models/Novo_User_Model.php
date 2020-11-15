@@ -450,6 +450,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -184:
+			case -308:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_INVALID_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -885,7 +886,7 @@ class Novo_User_Model extends NOVO_Model {
 				'uif' => $dataRequest->taxesObligated ?? '',
 				'lugar_nacimiento' => $dataRequest->birthPlace ?? '',
 				'nacionalidad' => $dataRequest->nationality ?? '',
-				'dig_verificador' => $dataRequest->verifyDigit ?? '',
+				'dig_verificador' => $dataRequest->verifierCode ?? '',
 				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
 				'acepta_contrato' => $dataRequest->contract ?? '',
 				'acepta_proteccion' => $dataRequest->protection ?? '',
