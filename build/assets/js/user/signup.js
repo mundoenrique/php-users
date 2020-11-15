@@ -2,12 +2,12 @@
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	who = 'User'
 
 	$('#nickName').on('blur', function() {
 		$(this).addClass('available');
 		form = $('#signUpForm');
-		validateForms(form)
+		validateForms(form);
+
 		if ($(this).valid()) {
 			where = 'ValidNickName'
 			data = {
@@ -41,7 +41,6 @@ $(function () {
 	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
 		form = $('#signUpForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -52,15 +51,34 @@ $(function () {
 			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
+
+			if (lang.CONF_LOAD_DOCS == 'ON') {
+				var inputFile = $('input[type="file"]');
+				var filesToUpload = [];
+
+				if (inputFile.length) {
+					inputFile.each(function(i,e){
+						filesToUpload.push(
+							{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
+						);
+					})
+				}
+				data.files = filesToUpload;
+			}
+
 			$(this).html(loader);
 			insertFormInput(true);
 			where = 'SignUpData';
 			getResponseServ(where);
+		} else {
+			scrollTopPos($('#signUpForm').offset().top);
 		}
 	})
 })
 
 function getResponseServ(currentaction) {
+	who = 'User';
+
 	callNovoCore(who, where, data, function(response) {
 		if (currentaction == 'ValidNickName') {
 			$('#nickName').prop('disabled', false)

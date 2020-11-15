@@ -103,13 +103,13 @@ class Novo_Reports_Model extends NOVO_Model {
 					}
 				}
 
-				$this->response->data['headers'] = $headers;
-				$this->response->data['body'] = $body;
-				$this->response->data['grafic'] = $grafic;
+				$this->response->data->headers = $headers;
+				$this->response->data->body = $body;
+				$this->response->data->grafic = $grafic;
 			break;
 			case -150:
 				$this->response->code = 1;
-				$this->response->data['btn1']['action'] = 'close';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -157,16 +157,16 @@ class Novo_Reports_Model extends NOVO_Model {
 						$file = $response->bean->archivo ?? $response->archivo;
 						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = $fitype = $dataRequest->id == 'downloadPDF' ? 'pdf' : 'xls';
-						$this->response->data['file'] = $file;
-						$this->response->data['name'] = $name.'.'.$ext;
-						$this->response->data['ext'] = $ext;
+						$this->response->data->file = $file;
+						$this->response->data->name = $name.'.'.$ext;
+						$this->response->data->ext = $ext;
 					break;
 					case 'send':
 						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
 						$this->response->icon = lang('GEN_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');
-						$this->response->data['btn1']['action'] = 'destroy';
+						$this->response->modalBtn['btn1']['action'] = 'destroy';
 					break;
 				}
 			break;

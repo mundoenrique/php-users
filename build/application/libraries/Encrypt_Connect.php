@@ -120,6 +120,7 @@ class Encrypt_Connect
 		$this->logMessage->model = $model;
 		$this->logMessage->userName = $userName;
 		$this->writeLog($this->logMessage);
+
 		return $response;
 	}
 	/**
@@ -251,14 +252,21 @@ class Encrypt_Connect
 	 */
 	private function writeLog($logMessage)
 	{
-		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$logMessage->model, $logMessage->rc, $logMessage->msg, $logMessage->pais]);
+		$model = &$logMessage->model;
+		$userName = &$logMessage->userName;
+		$country = &$logMessage->pais;
+		unset($logMessage->userName, $logMessage->model, $logMessage->pais);
+
+		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$model, $logMessage->rc, $logMessage->msg, $country]);
 		$inBean = $logMessage->inBean ?? '';
 
-		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] RESPONSE '.$writeLog);
+		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$writeLog);
 
-		$writeLog = novoLang('%s %s: %s', [$inBean, $logMessage->model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
+		$writeLog = novoLang('%s %s: %s', [$inBean, $model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
 
-		log_message('DEBUG', 'NOVO ['.$logMessage->userName.'] COMPLETE RESPONSE '.$writeLog);
+		log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE'.$writeLog);
+
+		unset($logMessage, $writeLog);
 	}
 	/**
 	 * @info Genera hash Argon2 de un valor dado

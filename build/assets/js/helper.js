@@ -1,5 +1,6 @@
 'use strict'
 var screenSize;
+var inputModal;
 var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
 var validatePass = /^[\w!@\*\-\?¡¿+\/.,_#]+$/;
@@ -25,7 +26,7 @@ $(function () {
 	});
 
 	if (code > 2) {
-		appMessages(title, msg, icon, data)
+		appMessages(title, msg, icon, modalBtn)
 	}
 
 	$('.big-modal').on('click', function () {
@@ -105,10 +106,13 @@ function callNovoCore(who, where, request, _response_) {
 
 	dataRequest = cryptoPass(dataRequest, true);
 
-	if (request.file) {
-		formData.append('file', request.file);
-		delete request.file;
+	if (request.files) {
+		data.files.forEach(function(element){
+			formData.append(element.name, element.file);
+		});
+		delete request.files;
 	}
+
 	formData.append('request', dataRequest);
 	formData.append('cpo_name', cpo_cook);
 	formData.append('plot', btoa(cpo_cook));
@@ -130,15 +134,16 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if ($('#system-info').parents('.ui-dialog').length) {
+		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
+		var modalClose = response.modal ? false : true;
+
+		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
 			$('#accept').prop('disabled', false)
 			$('#system-info').dialog('destroy');
 		}
 
-		response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-
 		if (response.code === codeResp) {
-			appMessages(response.title, response.msg, response.icon, response.data);
+			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 
 		_response_(response);
@@ -152,14 +157,14 @@ function callNovoCore(who, where, request, _response_) {
 
 		var response = {
 			code: codeResp,
-			data: {
+			modalBtn: {
 				btn1: {
 					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
 					action: 'redirect'
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.data);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -170,38 +175,39 @@ function getCookieValue() {
 	);
 }
 
-function appMessages(title, message, icon, data) {
-	var btn1 = data.btn1;
-	var btn2 = data.btn2;
-	var maxHeight = data.maxHeight || 350;
+function appMessages(title, message, icon, modalBtn) {
+	var btn1 = modalBtn.btn1;
+	var btn2 = modalBtn.btn2;
+	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
 		title: title || lang.GEN_SYSTEM_NAME,
+		closeText: '',
 		modal: 'true',
-		position: { my: data.posMy || 'center', at: data.posAt || 'center' },
+		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: data.width || lang.CONF_MODAL_WIDTH,
-		minWidth: data.minWidth || lang.CONF_MODAL_WIDTH,
-		minHeight: 100,
+		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
+		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
 		classes: {
 			"ui-dialog-titlebar": "border-none",
 		},
 		open: function (event, ui) {
-			$('.ui-dialog-titlebar-close').hide();
-			var classIcon = $('#system-icon').attr('class').split(' ');
-			classIcon = classIcon.pop();
-
-			if (classIcon != 'mt-0') {
-				$('#system-icon').removeClass(classIcon);
+			if (!modalBtn.close) {
+				$('.ui-dialog-titlebar-close').hide();
 			}
 
-			$('#system-icon').addClass(icon);
+			if (icon != '') {
+				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+			} else {
+				$('#system-icon').removeAttr('class');
+			}
+
 			$('#system-msg').html(message);
-			$('#accept, #cancel').removeClass("ui-button ui-corner-all ui-widget");
 
 			if (!btn1) {
 				$('#accept').hide();
@@ -211,8 +217,6 @@ function appMessages(title, message, icon, data) {
 
 			if (!btn2) {
 				$('#cancel').hide();
-				$('#accept').addClass('modal-btn-primary');
-				$('.novo-dialog-buttonset').addClass('modal-buttonset');
 			} else {
 				createButton($('#cancel'), btn2);
 			}
@@ -236,13 +240,10 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-				break;
-			case 'close':
-				$('#system-info').dialog('close');
-				break;
+			break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-				break;
+			break;
 		}
 
 		$(this).off('click');
@@ -278,7 +279,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null) {
+		if(thisValInput == null || $(this).attr('type') === 'file' ) {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -304,7 +305,9 @@ function cryptoPass(jsonObject, req) {
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
-		dataForm[$(element).attr('id')] = $(element).val().trim()
+		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
+			dataForm[$(element).attr('id')] = $(element).val();
+		}
 	})
 
 	return dataForm
@@ -321,4 +324,15 @@ function downLoadfiles (data) {
 	$('#download-file').attr('href', lang.GEN_NO_LINK);
 	$('#download-file').attr('download', '');
 	$('.cover-spin').hide();
+}
+
+function scrollTopPos(formValidate) {
+	var errorElements = $('.has-error');
+	var firstElement = $(errorElements[0]).offset().top;
+
+	if (firstElement > 0) {
+		$("html, body").animate({
+			scrollTop: firstElement - formValidate
+		}, 400);
+	}
 }

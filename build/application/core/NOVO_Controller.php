@@ -75,17 +75,22 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		if ($this->countryUri === "api") {
+
 			$objRequest = new stdClass();
-			$typeResource = $this->input->get_request_header('Content-Type', TRUE);
+			$typeHeader = $this->input->get_request_header('Content-Type', TRUE);
+			$typeResource = preg_split('/;/i', $typeHeader)[0];
 
-			if (strpos($typeResource, 'json')) {
-				$objRequest = json_decode($this->input->raw_input_stream);
-			} elseif (strpos($typeResource, 'form') && count($_POST) > 0) {
-				$objRequest->request = (object) $_POST;
-			}
+			$typeContentValid = [
+				'application/json' => json_decode($this->input->raw_input_stream),
+				'multipart/form-data' => count($_FILES) == 0 ?
+				 (object) ["request" => (object) $_POST] :
+				 (object) ["request" => (object) array_merge($_POST, $_FILES)],
+				'application/x-www-form-urlencoded' => (object) ["request" => (object) $_POST]
+			];
 
+			$objRequest = $typeContentValid[$typeResource];
+			log_message('DEBUG', 'NOVO Controller: typeResource: ' . json_encode($typeResource));
 			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
-
 		} else {
 
 			if ($this->session->has_userdata('userName')) {
@@ -230,6 +235,7 @@ class NOVO_Controller extends CI_Controller {
 
 		return $this->modelLoaded->$method($request);
 	}
+
 	/**
 	 * Método para extraer mensaje al usuario
 	 * @author J. Enrique Peñaloza Piñero
@@ -249,9 +255,10 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->data = json_encode($responseView->data->resp);
+			$this->render->modalBtn = json_encode($responseView->modalBtn);
 		}
 	}
+
 	/**
 	 * Método para validar la versión de browser
 	 * @author J. Enrique Peñaloza Piñero
