@@ -1,4 +1,4 @@
-var base_url, base_cdn, pais, digVer = '', aplicaPerfil = 0;
+var base_url, base_cdn, pais, digVer = '', aplicaPerfil = 0, link;
 var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
@@ -348,12 +348,13 @@ $(function(){
 						}else if(sexo == 'F'){
 							$("#gender-female").prop("checked", true);
 						}
-
-
 						break;
 				case 2: //Respuesta negativa muestra modal
 					//mensaje de error
 						msgService(dataUser.title, dataUser.msn, dataUser.modalType, 0)
+						break;
+				case 5: //Muestra modal redireccionamiento nuevo core
+						msgModalNewCore(dataUser.title, dataUser.msn, dataUser.modalType, dataUser.codPaisUrl)
 						break;
 				}
 
@@ -1384,5 +1385,28 @@ function msgService (title, msg, modalType, redirect) {
 			$(location).attr('href', base_url);
 
 		}
+	});
+}
+
+function msgModalNewCore (title, msg, modalType, codPaisUrl) {
+	var title = 'Conexion Personas'
+	$("#dialog-new-core-registry").dialog({
+		modal: "true",
+		width: "440px",
+		title:title,
+		open: function (event, ui) {
+			$(".ui-dialog-titlebar-close", ui.dialog).hide();
+			$("#modalTypeNewCore").addClass(modalType);
+			$('#msgNewCore').html(msg);
+		},
+	});
+
+	link = base_url + '/' + codPaisUrl + '/inicio';
+	$('#link-href').attr('href', link);
+	$('#link-href').text(link);
+
+	$("#redirect-new-core").click(function () {
+		$("#dialog-new-core").dialog("close");
+		$(location).attr('href', link);
 	});
 }

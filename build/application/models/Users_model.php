@@ -31,13 +31,6 @@ class Users_model extends CI_Model
 		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
 
-		$newCore = array (
-			'Usd',
-			'Pe'
-			//'Co',
-			//'Ve'
-		);
-
 		$data = array(
 			'idOperation' => '1',
 			'className' => 'com.novo.objects.TOs.UsuarioTO',
@@ -48,6 +41,14 @@ class Users_model extends CI_Model
 			// 'hashMD5' => md5($password),
 			'logAccesoObject' => $logAcceso,
 			'token' => ''
+		);
+
+		$newCore = array (
+			'Usd',
+			'Pe',
+			'Ec-bp'
+			//'Co',
+			//'Ve'
 		);
 
 		if (IP_VERIFY == 'ON') {
