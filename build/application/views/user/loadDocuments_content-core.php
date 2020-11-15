@@ -31,7 +31,6 @@
 									<span class="js-file-name h6 regular bold"><?= lang('USER_ADD_F_DOC'); ?></span>
 								</div>
 							<?php endif; ?>
-							<input id="countryDocument" type="hidden" name="countryDocument" value="<?= $countryDocument; ?>">
 							<input type="file" name="INE_A" id="INE_A" class="drop-zone-input <?= $imagesLoaded['INE_A']['validate'] ?? '';?>">
             </div>
             <div class="help-block"></div>
@@ -108,3 +107,8 @@
     </div>
   </div>
 </div>
+<input id="countryDocument" type="hidden" name="countryDocument" value="<?= $countryDocument ?? ''; ?>">
+<input id="img_valida" type="hidden" name="img_valida" value="<?= $img_valida ?? ''; ?>">
+<input id="aplicaImgDoc" type="hidden" name="aplicaImgDoc" value="<?= $aplicaImgDoc ?? ''; ?>">
+
+
