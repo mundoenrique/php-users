@@ -71,7 +71,7 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifierCode" class="form-control" type="text" name="verifierCode" value="">
+            <input id="verifierCode" class="form-control" type="text" name="verifierCode">
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
