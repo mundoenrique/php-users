@@ -164,7 +164,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.GEN_ICON_DANGER, response.modalBtn);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -201,10 +201,10 @@ function appMessages(title, message, icon, modalBtn) {
 				$('.ui-dialog-titlebar-close').hide();
 			}
 
+			$('#system-icon').removeAttr('class');
+
 			if (icon != '') {
 				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
-			} else {
-				$('#system-icon').removeAttr('class');
 			}
 
 			$('#system-msg').html(message);

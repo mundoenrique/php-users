@@ -53,12 +53,6 @@ $lang['GEN_BTN_YES'] = 'Si';
 $lang['GEN_BTN_NO'] = 'No';
 //TITULOS
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
-//ICONS
-$lang['GEN_ICON'] = 'ui-icon';
-$lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
-$lang['GEN_ICON_INFO'] = 'ui-icon-info';
-$lang['GEN_ICON_WARNING'] = 'ui-icon-alert';
-$lang['GEN_ICON_DANGER'] = 'ui-icon-closethick';
 //BROWSERS
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
 $lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
