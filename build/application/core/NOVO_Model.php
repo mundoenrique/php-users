@@ -91,7 +91,7 @@ class NOVO_Model extends CI_Model {
 
 		$this->isResponseRc = (int) $responseModel->rc;
 		$this->response->code = lang('GEN_DEFAULT_CODE');
-		$this->response->icon = lang('GEN_ICON_WARNING');
+		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->data = new stdClass();
 		$this->response->msg = '';
@@ -120,7 +120,7 @@ class NOVO_Model extends CI_Model {
 			break;
 			default:
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->response->icon = lang('GEN_ICON_DANGER');
+				$this->response->icon = lang('CONF_ICON_DANGER');
 		}
 
 		$this->response->modalBtn = $arrayResponse;

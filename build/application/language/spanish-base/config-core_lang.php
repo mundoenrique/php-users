@@ -21,6 +21,12 @@ $lang['CONF_VALID_POSITION'] = 'left';
 $lang['CONF_VALIDATE_IP'] = 'ON';
 //MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
+//ICONS MODALS
+$lang['CONF_ICON'] = 'mt-0 ui-icon';
+$lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
+$lang['CONF_ICON_INFO'] = 'ui-icon-info';
+$lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
+$lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
 //CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'white';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';

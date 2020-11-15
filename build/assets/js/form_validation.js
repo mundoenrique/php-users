@@ -6,7 +6,7 @@ function validateForms(form) {
 	var onlyOneNumber = /^[0-9]{1}$/;
 	var onlyOneLetter = /^[SCV]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-	var validNickName = /^([a-z]{2}[a-z0-9_]{4,14})$/i;
+	var validNickName = new RegExp(lang.VALIDATE_REGEX_NICKNAME, 'i');
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;

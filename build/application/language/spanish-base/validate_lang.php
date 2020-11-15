@@ -33,6 +33,7 @@ $lang['VALIDATE_CONFIRM_EMAIL'] = 'Debe ser igual a tu correo';
 $lang['VALIDATE_PHONE'] = 'Indica un teléfono válido mín 7 máx 15 (solo números)';
 $lang['VALIDATE_MOBIL'] = '^[0-9]{7,15}$';
 $lang['VALIDATE_MOBIL_PHONE'] = 'Indica un móvil válido mín 7 máx 15 (solo números)';
+$lang['VALIDATE_REGEX_NICKNAME'] = '^([a-z]{2}[a-z0-9_]{4,14})$';
 $lang['VALIDATE_NICK_REQ'] = 'Indica tu nombre de usuario mín 6 máx 16';
 $lang['VALIDATE_NICK_PATT'] = 'debe iniciar con dos letras, puede contener números y "_", mín 6 máx 16';
 $lang['VALIDATE_NICK_DIFFER'] = 'No debe ser igual a tu documento de identidad';
