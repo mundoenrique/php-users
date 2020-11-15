@@ -137,14 +137,28 @@ class Registro_model extends CI_Model {
 			"token"						=> ""
 		));
 
+		$newCore = array (
+			'Usd',
+			'Pe',
+			'Ec-bp'
+			//'Co',
+			//'Ve'
+		);
+
+		if (!empty($newCore)){
+			$validateNewCore = in_array($pais,$newCore);
+		}
+
 		log_message("info", "Request validar_cuenta: ".$data);
 		$dataEncry	= np_Hoplite_Encryption($data,0,'validar_cuenta');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> 'CPONLINE'));
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
-		$data		= json_decode($response);
-  	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'validar_cuenta'));
-  	$salida		= json_encode($desdata);
-  	log_message("info", "Response validar_cuenta: ".$salida);
+		if(!$validateNewCore){
+			$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$data		= json_decode($response);
+			$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'validar_cuenta'));
+			$salida		= json_encode($desdata);
+			log_message("info", "Response validar_cuenta: ".$salida);
+		}
 
 	  	if(isset($response) && isset($desdata->rc) && $desdata->rc == 0){
 		  	$newdata	= array(
@@ -161,6 +175,8 @@ class Registro_model extends CI_Model {
 
 		$this->code = 2;
 		$this->modalType = "alert-error";
+		$this->codPaisUrl = '';
+
 		if(isset($desdata->rc) && $desdata->rc !== NULL){
 			switch ($desdata->rc) {
 
@@ -189,8 +205,16 @@ class Registro_model extends CI_Model {
 			}
 		}
 		else {
-			$this->title = "Conexión Personas Online";
-			$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta nuevamente.";
+			if($validateNewCore){
+				$this->code = 5;
+				$this->title = 'Conexión Personas';
+				$this->msn = 'Estimado usuario.<br> Esta página ha sido cambiada, para ingresar a <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder desde <strong><a id="link-href"></a></strong>';
+				$this->codPaisUrl = changeCoreUrl($pais);
+				$this->modalType = "alert-warning";
+			}else{
+				$this->title = "Conexión Personas Online";
+				$this->msn = "En estos momentos no podemos procesar tu solicitud, por favor intenta nuevamente.";
+			}
 		}
 
 		//Crea respuesta de error
@@ -199,9 +223,11 @@ class Registro_model extends CI_Model {
 			"title" => $this->title,
 			"msn" => $this->msn,
 			"modalType" => $this->modalType,
-			'dataUser' => $this->dataUser
+			'dataUser' => $this->dataUser,
+			'codPaisUrl' => $this->codPaisUrl
 		];
 		$response = $this->cryptography->encrypt($this->response);
+		log_message("info", "RESPONSE: ".json_encode($response));
 		return json_encode($response);
 	}
 

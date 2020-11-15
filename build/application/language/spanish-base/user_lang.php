@@ -537,5 +537,5 @@ $lang['USER_LOAD_DOCS_INFO4'] = 'El tamaño del archivo debe ser mayor a 10 kb y
 $lang['USER_LOAD_DOCS_INFO5'] = 'Su documento de Identidad debe encontrarse en vigencia.';
 $lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';
-$lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente.';
+$lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de %s con los datos ingresados. Verifica tu información e intenta nuevamente.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';

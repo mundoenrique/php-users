@@ -461,7 +461,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('USER_IDENTIFY_EXIST');
+				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -831,8 +831,8 @@ class Novo_User_Model extends NOVO_Model {
 				'rc' => '0',
 				'passwordOperaciones' => '',
 				'disponeClaveSMS' => '',
-				'aplicaImgDoc' => 'S',
-				'img_valida' => 'TRUE',
+				'aplicaImgDoc' => $dataRequest->aplicaImgDoc ?? '',
+				'img_valida' => $dataRequest->img_valida ?? ''
 			],
 			'listaTelefonos' => [
 				[
@@ -905,14 +905,18 @@ class Novo_User_Model extends NOVO_Model {
 			'registroValido' => FALSE,
 			'corporativa' => FALSE
 		];
-		if ($dataRequest->INE_A !== '' || $dataRequest->INE_R !== '') {
-			$this->dataRequest->registro['user']['imagenes'] = [
-				'id_ext_per' => $dataRequest->idNumber,
-				'tipoDocumento' => $dataRequest->countryDocument,
-				'rutaAnverso' => $dataRequest->INE_A ?? '',
-				'rutaReverso' => $dataRequest->INE_R ?? '',
-				'operacion' => 'actualizar'
-			];
+		if (property_exists($dataRequest, "aplicaImgDoc") && strtoupper($dataRequest->aplicaImgDoc) == 'S') {
+			if (strtoupper($dataRequest->img_valida) == 'TRUE') {
+				if ($dataRequest->INE_A !== '' || $dataRequest->INE_R !== '') {
+					$this->dataRequest->registro['user']['imagenes'] = [
+						'id_ext_per' => $dataRequest->idNumber,
+						'tipoDocumento' => $dataRequest->countryDocument ?? '',
+						'rutaAnverso' => $dataRequest->INE_A ?? '',
+						'rutaReverso' => $dataRequest->INE_R ?? '',
+						'operacion' => 'actualizar'
+					];
+				}
+			}
 		}
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,

@@ -98,3 +98,4 @@ $lang['CUST_FAILED_ATTEMPTS'] = 'Has superado la cantidad de intentos fallidos p
 $lang['CUST_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_INVALID_EXPIRATION_DATE'] = 'No fue posible obtener la fecha de vencimiento de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, por favor vuelve a intentarlo';
+$lang['CUST_LIMIT_REPLACEMENTS'] = 'Has alcanzado el limite de reposiciones.';

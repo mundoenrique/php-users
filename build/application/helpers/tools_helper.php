@@ -387,6 +387,9 @@ if(!function_exists('changeCoreUrl')) {
 			case "Ve":
 				$codCountryUri = "ve";
 				break;
+			case "Ec-bp":
+				$codCountryUri = "bp";
+				break;
 		}
 		return $codCountryUri;
 	}
