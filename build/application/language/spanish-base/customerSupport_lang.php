@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CUST_CHANGE_PIN_TITLE'] = 'Cambio de PIN';
 $lang['CUST_REPLACE_REQUEST'] = 'Solicitud %s de reposición';
 $lang['CUST_INACTIVE_PRODUCT'] = 'Tu tarjeta se encuentra inactiva';
 $lang['CUST_PERMANENT_LOCK'] = 'Tu tarjeta tiene una reposición pendiente';
@@ -84,3 +85,17 @@ $lang['CUST_REPLACE_REASON'] = [
 $lang['CUST_REPLACE_MSG'] = 'Se ha generado una nueva tarjeta, la puede ver en la lista consolidada.';
 $lang['CUST_STOLEN_CARD'] = '43';
 $lang['CUST_REPLACE_CARD'] = ' Si realmente deseas reponer tu tarjeta, presiona continuar para asignar una nueva.';
+$lang['CUST_SUCCESS_CHANGE_PIN'] = 'El PIN de la tarjeta %s, ha sido cambiado exitosamente';
+$lang['CUST_SUCCESS_OPERATION_RESPONSE'] = 'La tarjeta %s, ha sido %s.';
+$lang['CUST_SPECIFIC_INACTIVE_PRODUCT_'] = 'La tarjeta %s se encuentra inactiva';
+$lang['CUST_SPECIFIC_PERMANENT_LOCK'] = 'La tarjeta %s tiene una reposición pendiente';
+$lang['CUST_SPECIFIC_REVEWAL_LOCK'] = 'La tarjeta %s tiene una renovación pendiente';
+$lang['CUST_EXPIRED_CARD'] = 'No es posible realizar esta acción la tarjeta %s está vencida';
+$lang['CUST_LOCK_CARD'] = 'La tarjeta %s se encuentra bloqueda';
+$lang['CUST_PIN_NOT_VALID'] = 'El PIN actual no es válido, verifica e intenta nuevamente.';
+$lang['CUST_DATA_INVALIDATED'] = 'Los campos introducidos son inválidos, verifica e intenta nuevamente.';
+$lang['CUST_FAILED_ATTEMPTS'] = 'Has superado la cantidad de intentos fallidos por el día de hoy, por favor intenta mañana.';
+$lang['CUST_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de la tarjeta %s, por favor vuelve a intentarlo';
+$lang['CUST_INVALID_EXPIRATION_DATE'] = 'No fue posible obtener la fecha de vencimiento de la tarjeta %s, por favor vuelve a intentarlo';
+$lang['CUST_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, por favor vuelve a intentarlo';
+$lang['CUST_LIMIT_REPLACEMENTS'] = 'Has alcanzado el limite de reposiciones.';

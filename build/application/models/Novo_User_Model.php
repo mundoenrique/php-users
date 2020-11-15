@@ -74,7 +74,7 @@ class Novo_User_Model extends NOVO_Model {
 					'logged' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $response->idUsuario,
+					'userId' => $response->idUsuario
 				];
 				$this->session->set_userdata($userData);
 				unset($this->dataRequest->password);
@@ -108,6 +108,10 @@ class Novo_User_Model extends NOVO_Model {
 							str_replace('/', '-', $response->fechaUltimaConexion)
 						)
 					);
+					$statusImgValida = FALSE;
+					if (property_exists($response, "aplicaImgDoc") && strtoupper($response->aplicaImgDoc) == 'S') {
+						$statusImgValida = strtoupper($response->img_valida) == 'FALSE'? TRUE: FALSE;
+					}
 					$userData = [
 						'logged' => TRUE,
 						'encryptKey' => $response->keyUpdate,
@@ -129,7 +133,9 @@ class Novo_User_Model extends NOVO_Model {
 						'terms' => $response->tyc,
 						'mobilePhone' => $response->celular ?? '',
 						'enterpriseCod' => $response->acCodCia ?? '',
-						'clientAgent' => $this->agent->agent_string()
+						'clientAgent' => $this->agent->agent_string(),
+						'missingImages' => $statusImgValida,
+						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? ''
 					];
 					$this->session->set_userdata($userData);
 
@@ -536,9 +542,11 @@ class Novo_User_Model extends NOVO_Model {
 					'userId' => $dataRequest->docmentId,
 					'userName' => $response->logAccesoObject->userName,
 					'docmentId' => $dataRequest->docmentId,
+					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
+					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string()
 				];
 				$this->session->set_userdata($userSess);
@@ -577,7 +585,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = lang('USER_IDENTIFY_EXIST');
+				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -650,7 +658,16 @@ class Novo_User_Model extends NOVO_Model {
 			'notSms' => '1',
 			'email' => $dataRequest->email,
 			'password' => md5($password),
-			'passwordOld4' => md5(mb_strtoupper($password))
+			'passwordOld4' => md5(mb_strtoupper($password)),
+			'aplicaImgDoc' => 'S',
+			'img_valida' => 'FALSE',
+			'imagenes' => [
+				'id_ext_per' => $dataRequest->idNumber,
+				'tipoDocumento' => $dataRequest->countryDocument,
+				'rutaAnverso' => $dataRequest->INE_A,
+				'rutaReverso' => $dataRequest->INE_R,
+				'operacion' => 'insertar'
+			]
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
@@ -671,6 +688,16 @@ class Novo_User_Model extends NOVO_Model {
 
 		$response = $this->sendToService('CallWs_Signup');
 
+		if ($this->isResponseRc !== 0) {
+			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
+			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				strtoupper($this->session->countryUri),
+				strtoupper($dataRequest->nickName ?? $this->session->userName),
+			]);
+
+			$this->tool_file->deleteFiles($configUploadFile);
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -696,7 +723,6 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_Signup');
-
 	}
 	/**
 	 * @info Método para obtener el perfil del usuario
@@ -741,9 +767,12 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->profession = $response->registro->user->profesion ?? 'Abogado';
 		$profileData->idTypeCode = $response->registro->user->tipo_id_ext_per ?? '';
 		$profileData->idTypeText = $response->registro->user->descripcion_tipo_id_ext_per ?? '';
+		$profileData->abbrTypeDocument = $response->registro->user->abrev_tipo_id_ext_per ?? '';
 		$profileData->smsKey = $response->registro->user->disponeClaveSMS ?? '';
 		$profileData->operPass = $response->registro->user->passwordOperaciones ?? '';
 		$profileData->longProfile = $response->registro->user->aplicaPerfil ?? '';
+		$profileData->aplicaImgDoc = $response->registro->user->aplicaImgDoc ?? '';
+		$profileData->img_valida = $response->registro->user->img_valida ?? '';
 		$profileData->addressType = $response->direccion->acTipo ?? '';
 		$profileData->address = $response->direccion->acDir ?? '';
 		$profileData->postalCode = $response->direccion->acZonaPostal ?? '';
@@ -842,7 +871,46 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
 			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
+			$profileData->employed = $response->registro->afiliacion->labora ?? '';
+			$profileData->laborOld = $response->registro->afiliacion->antiguedad_laboral ?? '';
 		}
+
+		$imagesDocument = [];
+		if (property_exists($profileData, "aplicaImgDoc") && strtoupper($profileData->aplicaImgDoc) == 'S') {
+
+			if (strtoupper($profileData->img_valida) == 'TRUE') {
+				$imagesDocumentLoaded = [
+					'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
+					'INE_R' => ['nameFile' => $response->registro->user->imagenes->rutaReverso ?? '']
+				];
+
+				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
+					if ($nameDocument['nameFile'] !== '') {
+						$fullPathToImage = $this->tool_file->buildDirectoryPath([
+							$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+							strtoupper($this->session->countryUri),
+							strtoupper($this->session->userName),
+							$nameDocument['nameFile']
+						]);
+
+						if (is_file($fullPathToImage)) {
+							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+							if ($resultDecrypt) {
+								$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
+								$data = file_get_contents($fullPathToImage);
+
+								$this->tool_file->cryptographyFile($fullPathToImage);
+
+								$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+								$imagesDocument[$typeDocument]['base64'] = $base64;
+								$imagesDocument[$typeDocument]['validate'] = 'ignore';
+							}
+						}
+					}
+				}
+			}
+		}
+		$profileData->imagesLoaded = $imagesDocument;
 
 		$this->response->data->profileData = $profileData;
 		$this->response->data->phonesList = (object) $phonesList;
@@ -880,13 +948,15 @@ class Novo_User_Model extends NOVO_Model {
 				'fechaNacimiento' => $dataRequest->birthDate,
 				'tipo_profesion' => $dataRequest->profession,
 				'profesion' => $dataRequest->profession,
-				'tipo_id_ext_per' => $dataRequest->idTypeCode,
+				'tipo_id_ext_per' => $dataRequest->idType,
 				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
 				'aplicaPerfil' => $this->session->longProfile,
 				'tyc' => '1',
 				'rc' => '0',
 				'passwordOperaciones' => '',
-				'disponeClaveSMS' => ''
+				'disponeClaveSMS' => '',
+				'aplicaImgDoc' => $dataRequest->aplicaImgDoc ?? '',
+				'img_valida' => $dataRequest->img_valida ?? ''
 			],
 			'listaTelefonos' => [
 				[
@@ -959,6 +1029,19 @@ class Novo_User_Model extends NOVO_Model {
 			'registroValido' => FALSE,
 			'corporativa' => FALSE
 		];
+		if (property_exists($dataRequest, "aplicaImgDoc") && strtoupper($dataRequest->aplicaImgDoc) == 'S') {
+			if (strtoupper($dataRequest->img_valida) == 'TRUE') {
+				if ($dataRequest->INE_A !== '' || $dataRequest->INE_R !== '') {
+					$this->dataRequest->registro['user']['imagenes'] = [
+						'id_ext_per' => $dataRequest->idNumber,
+						'tipoDocumento' => $dataRequest->countryDocument ?? '',
+						'rutaAnverso' => $dataRequest->INE_A ?? '',
+						'rutaReverso' => $dataRequest->INE_R ?? '',
+						'operacion' => 'actualizar'
+					];
+				}
+			}
+		}
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->countrySess,

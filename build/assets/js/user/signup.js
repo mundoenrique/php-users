@@ -41,7 +41,6 @@ $(function () {
 	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
 		form = $('#signUpForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -52,6 +51,21 @@ $(function () {
 			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
+
+			if (lang.CONF_LOAD_DOCS == 'ON') {
+				var inputFile = $('input[type="file"]');
+				var filesToUpload = [];
+
+				if (inputFile.length) {
+					inputFile.each(function(i,e){
+						filesToUpload.push(
+							{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
+						);
+					})
+				}
+				data.files = filesToUpload;
+			}
+
 			$(this).html(loader);
 			insertFormInput(true);
 			where = 'SignUpData';

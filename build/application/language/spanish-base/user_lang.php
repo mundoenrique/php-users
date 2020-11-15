@@ -465,6 +465,11 @@ $lang['USER_CIVILSTATUS_LIST'] = [
 	'C' => 'Casado',
 	'V' => 'Viudo'
 ];
+$lang['USER_EMPLOY_SITUATION_LIST'] = [
+	'' => 'Selecciona',
+	'0' => 'Independiente',
+	'1' => 'Dependiente'
+];
 $lang['USER_VERIFIERCODE'] = 'Digito verificador';
 $lang['USER_GENDER_MALE'] = 'Masculino';
 $lang['USER_GENDER_FEMALE'] = 'Femenino';
@@ -528,11 +533,11 @@ $lang['USER_LOAD_DOCS_TITLE'] = 'Requisitos para la carga de imágenes:';
 $lang['USER_LOAD_DOCS_INFO1'] = 'Es posible que se le soliciten documentos adicionales.';
 $lang['USER_LOAD_DOCS_INFO2'] = 'Sólo se permiten archivos en formato PNG o JPEG.';
 $lang['USER_LOAD_DOCS_INFO3'] = 'Las imágenes deben ser en color, claras y legibles.';
-$lang['USER_LOAD_DOCS_INFO4'] = 'El tamaño máximo por archivo debe ser de 6Mb.';
+$lang['USER_LOAD_DOCS_INFO4'] = 'El tamaño del archivo debe ser mayor a 10 kb y menor a 6 mb.';
 $lang['USER_LOAD_DOCS_INFO5'] = 'Su documento de Identidad debe encontrarse en vigencia.';
 $lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';
-$lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de Conexión Personas con los datos ingresados. Verifica tu información e intenta nuevamente.';
+$lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de %s con los datos ingresados. Verifica tu información e intenta nuevamente.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';
 // RECOVER ACCESS
 $lang['USER_RECOVER_DOC_TYPE'] = [

@@ -11,7 +11,6 @@ $(function () {
 		e.preventDefault();
 		form = $('#recoverAccessForm')
 		btnText = $(this).html().trim();
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

@@ -1,11 +1,12 @@
 'use strict'
 function validateForms(form) {
+	formInputTrim(form);
 	var validCountry = country;
 	var onlyNumber = /^[0-9]{3,20}$/;
 	var onlyOneNumber = /^[0-9]{1}$/;
 	var onlyOneLetter = /^[SCV]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-	var validNickName = /^(([a-z]{2,})+([a-z0-9_]){4,16})$/i;
+	var validNickName = /^([a-z]{2}[a-z0-9_]{4,14})$/i;
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
@@ -57,7 +58,7 @@ function validateForms(form) {
 			"cardPIN": {required: true,pattern: numeric},
 			"codeOTP": {required: true, pattern: validCode, maxlength: 8},
 			"acceptTerms": {required: true},
-			"nickName": {required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true},
+			"nickName": { required: true, pattern: validNickName, differs: "#idNumber", dbAvailable: true },
 			"firstName": { required: true, pattern: alphaName},
 			"middleName": {pattern: alphaName},
 			"lastName": { required: true, pattern: alphaName},
@@ -94,6 +95,11 @@ function validateForms(form) {
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 			"typeDocument": { requiredSelect: true, },
 			"otpCode": { required: true, pattern: alphanum },
+			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -184,8 +190,33 @@ function validateForms(form) {
 				required: lang.VALIDATE_CONFIRM_PIN,
 				equalTo: lang.VALIDATE_IQUAL_PIN
 			},
-			"typeDocument": lang.VALIDATE_RECOVER_OPTION,
-			"otpCode": lang.VALIDATE_ID_NUMBER,
+			"typeDocument": { requiredSelect: true, },
+			"otpCode": { required: true, pattern: alphanum },
+			"SEL_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"INE_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"INE_R": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"PASS_A": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
+			"PASS_R": {
+				required: lang.VALIDATE_FILE_TYPE,
+				extension: lang.VALIDATE_FILE_TYPE,
+				filesize: lang.VALIDATE_FILE_SIZE
+			},
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -226,6 +257,11 @@ function validateForms(form) {
 	$.validator.methods.fourConsecutivesDigits = function(value, element, param) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
+
+	$.validator.addMethod('filesize', function (value, element, param) {
+    return element.files[0].size <= 62914560 && element.files[0].size > 10240;
+		}
+	)
 
 	form.validate().resetForm();
 }

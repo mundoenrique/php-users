@@ -14,7 +14,6 @@ $(function () {
 	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
 		form = $('#signInForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -34,7 +33,6 @@ $(function () {
 
 	$('#system-info').on('click', '.send-otp', function () {
 		form = $('#OTPcodeForm');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {

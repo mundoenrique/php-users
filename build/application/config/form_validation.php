@@ -126,7 +126,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
 		],
 		[
-			'field' => 'idTypeCode',
+			'field' => 'idType',
 			'rules' => 'trim|alpha_numeric|required'
 		],
 		[
@@ -359,13 +359,11 @@ $config = [
 		],
 		[
 			'field' => 'currentPin',
-			'label' => 'currentPin',
-			'rules' => 'trim|numeric|regex_match[/^(\d{4})$/]'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
 			'field' => 'newPin',
-			'label' => 'newPin',
-			'rules' => 'trim|required|numeric|regex_match[/^(\d{4})$/]|differs[currentPin]'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|differs[currentPin]|required'
 		],
 	],
 	'userCardsList' => [
@@ -507,6 +505,46 @@ $config = [
 	'generateRequest' => [
 		[
 			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	'uploadFile' => [
+		[
+			'field' => 'INE_A',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'INE_R',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'client',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'user_name',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'type_document',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'nro_document',
+			'rules' => 'trim|required'
+		],
+	],
+	'eraseFiles' => [
+		[
+			'field' => 'client',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'user_name',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'files',
 			'rules' => 'trim|required'
 		],
 	],

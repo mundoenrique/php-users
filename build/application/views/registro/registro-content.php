@@ -670,6 +670,17 @@ switch($skin){
   </div>
 </div>
 <!--Modal protección de datos-->
+<!-- MODAL REDIRECT NEW CORE -->
+<div id="dialog-new-core-registry" style='display:none'>
+		<div class="alert-simple" id="modalTypeNewCore">
+			<span aria-hidden="true" class="icon-warning-sign"></span>
+			<p id="msgNewCore"></p>
+		</div>
+		<div class="form-actions">
+			<button id="redirect-new-core" class="novo-btn-primary">Aceptar</button>
+		</div>
+</div>
+<!-- FIN MODAL REDIRECT NEW CORE -->
 <div id="datos_personales" style='display:none'>
   <div class="cond-serv">
     <p>

@@ -33,7 +33,6 @@ $(function () {
 		} else {
 			where = 'MonthlyMovements';
 			form = $('#movements');
-			formInputTrim(form);
 			validateForms(form);
 
 			if (form.valid()) {
@@ -66,7 +65,7 @@ $(function () {
 		}
 	})
 
-	$('#productdetail').on('click', function (e) {
+	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		sensitiveInformation();
@@ -328,9 +327,7 @@ function startTimer(duration, display) {
 
 	function myTimer() {
 		seconds = parseInt(timer % 61, 10);
-		//console.log(seconds);
 		seconds = seconds < 10 ? "0" + seconds : seconds;
-
 		display.text(+seconds+"s");
 
 		if (--timer < 0) {

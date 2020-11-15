@@ -49,6 +49,10 @@ $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
+$lang['GEN_BTN_YES'] = 'Si';
+$lang['GEN_BTN_NO'] = 'No';
+//TITULOS
+$lang['GEN_TITLE_IMPORTANT'] = 'Importante';
 //ICONS
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -78,7 +82,6 @@ $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_WAIT_BALANCE'] = 'Esperando saldo...';
 $lang['GEN_ACCOUNT_SELECTION'] = 'Selección de cuenta';
-$lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_PASSWORD_CONFIRM'] = 'Confirmar Contraseña';
@@ -200,6 +203,7 @@ $lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seg
 $lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
 $lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
 $lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
 $lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
@@ -218,3 +222,7 @@ $lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu telé
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
+$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
+// PROFILE
+$lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
+

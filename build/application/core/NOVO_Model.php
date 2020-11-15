@@ -90,11 +90,11 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->code = lang('GEN_DEFAULT_CODE');
+		$this->response->icon = lang('GEN_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = '';
 		$this->response->data = new stdClass();
+		$this->response->msg = '';
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
@@ -140,6 +140,10 @@ class NOVO_Model extends CI_Model {
 
 		foreach ($this->response AS $pos => $response) {
 			if (is_array($response) && isset($response['file'])) {
+				continue;
+			}
+
+			if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
 				continue;
 			}
 

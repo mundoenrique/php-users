@@ -3,6 +3,8 @@ $(function () {
 	var ulOptions = $('.nav-item-config');
 	var pinManagement = $('input[type=radio][name="recovery"]');
 	var virtual = $('#operation').find('input[type=hidden][name="virtual"]').val();
+	var thisAction;
+	var action;
 
 	if (virtual) {
 		$('#replaceMotSol').val(lang.CUST_STOLEN_CARD);
@@ -13,7 +15,7 @@ $(function () {
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
 		$(element).val(cypher)
-	})
+	});
 
 	$.each(ulOptions, function (pos, liOption) {
 		$('#' + liOption.id).on('click', function (e) {
@@ -23,7 +25,7 @@ $(function () {
 			$(this).addClass('active');
 			$('#' + liOptionId + 'View').fadeIn(700, 'linear');
 		})
-	})
+	});
 
 	if (ulOptions.length == 1) {
 		$(ulOptions).addClass('active');
@@ -39,23 +41,19 @@ $(function () {
 		$(this).siblings('.section').addClass('current');
 	})
 
-	$('#pinManagementForm').find('input').prop('disabled', true);
-	$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
+	$('#pinManagementForm').find('input').addClass('ignore');
 	pinManagement.first().prop('checked', true);
 	$('#' + pinManagement.first().attr('id') + 'Input').removeClass('hide');
 	$('#pinManagementBtn').attr('action', pinManagement.first().attr('id'));
-	$('#' + pinManagement.first().attr('id') + 'Input').find('input').prop('disabled', false);
-	$('#' + pinManagement.first().attr('id') + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE);
+	$('#' + pinManagement.first().attr('id') + 'Input').find('input').removeClass('ignore');
 
 	pinManagement.on('change', function (e) {
 		var currentActions
 		currentActions = e.currentTarget.id;
 		$('#pinManagementForm').find('.row').addClass('hide');
-		$('#pinManagementForm').find('input').prop('disabled', true);
-		$('#pinManagementForm').find('input').addClass(lang.CONF_VALID_IGNORE);
+		$('#pinManagementForm').find('input').addClass('ignore');
 		$('#' + currentActions + 'Input').removeClass('hide');
-		$('#' + currentActions + 'Input').find('input').prop('disabled', false);
-		$('#' + currentActions + 'Input').find('input').removeClass(lang.CONF_VALID_IGNORE)
+		$('#' + currentActions + 'Input').find('input').removeClass('ignore')
 		$('#pinManagementBtn').attr('action', currentActions);
 	})
 
@@ -93,6 +91,7 @@ $(function () {
 			$.each(services, function(pos, value) {
 				if ((lang.CUS_MANAGE_PIN[element.id]).indexOf(value, 0) != -1) {
 					$(element).parent().show();
+
 					if (!optionCheck) {
 						optionCheck = true;
 						$(element).prop('checked', true);
@@ -133,8 +132,8 @@ $(function () {
 
 	$('.send').on('click', function(e) {
 		e.preventDefault();
-		var thisAction = $(this);
-		var action = thisAction.attr('action');
+		thisAction = $(this);
+		action = thisAction.attr('action');
 		var validForm = true;
 		var dataFormAction = {};
 		$('#action').val(action);
@@ -148,7 +147,7 @@ $(function () {
 			case 'generatePin':
 				form = $('#pinManagementForm');
 				dataFormAction = getDataForm(form);
-				break;
+			break;
 		}
 
 		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
@@ -163,10 +162,18 @@ $(function () {
 
 			if (action == 'changePin') {
 				delete dataFormAction.confirmPin;
+				delete dataFormAction.generateNewPin;
+				delete dataFormAction.generateConfirmPin;
+				dataFormAction.currentPin = cryptoPass(dataFormAction.currentPin);
+				dataFormAction.newPin = cryptoPass(dataFormAction.newPin);
 			}
 
 			if (action == 'generatePin') {
+				delete dataFormAction.newPin;
+				delete dataFormAction.currentPin;
+				delete dataFormAction.confirmPin;
 				delete dataFormAction.generateConfirmPin;
+				dataFormAction.generateNewPin = cryptoPass(dataFormAction.generateNewPin);
 			}
 
 			if (thisAction.hasClass('btn')) {
@@ -180,55 +187,115 @@ $(function () {
 				$('.hide-out').addClass('hide');
 			}
 
-			who = 'CustomerSupport'; where = data.action;
-			callNovoCore(who, where, data, function (response) {
-				if (data.action == 'temporaryLock' && response.success) {
-					var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
-					$('.status-text1').text(statusText);
-					$('.status-text2').text(statusText.toLowerCase());
-					var status = $('#status').val() == '' ? 'PB' : ''
-					$('#status').val(status);
-				}
-
-				if (data.action == 'twirlsCommercial' && response.code == 0) {
-					$.each(response.data.dataTwirls, function(key, value) {
-						$('#'+key).text(value);
-					})
-
-					$.each(response.data.shops, function(key, value) {
-						var markCheck = value == '1' ? true : false;
-						$('#' + key).prop('checked', markCheck);
-					})
-
-					$('.hide-out').removeClass('hide');
-				}
-
-				if (data.action == 'transactionalLimits' && response.code == 0) {
-					$.each(response.data.dataLimits, function(key, value) {
-						$('#'+key).text(value);
-					})
-
-					$.each(response.data.limits, function(key, value) {
-						$('#' + key).val(value);
-					})
-
-					$('.hide-out').removeClass('hide');
-				}
-
-				if ((data.action == 'transactionalLimits' || data.action == 'twirlsCommercial') && response.code != 0) {
-					$('.nav-item-config').removeClass('active');
-				}
-
-				if (thisAction.hasClass('btn')) {
-					thisAction.html(btnText);
-					insertFormInput(false);
-				} else {
-					$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
-				}
-
-				$('.nav-config-box').removeClass('no-events');
-			})
+			requestSupport(thisAction);
 		}
 	});
 
-})
+	$('#system-info').on('click', '.send-otp', function(e) {
+		e.preventDefault();
+		$('#accept').removeClass('send-otp');
+		thisAction = $(this);
+		form = $('#OTPcodeForm');
+		validateForms(form);
+
+		if (form.valid()) {
+			data.otpCode = $('#otpCode').val();
+			insertFormInput(true);
+			btnText = thisAction.text().trim();
+			thisAction.html(loader);
+			$('#accept').removeAttr('action');
+
+			requestSupport(thisAction);
+		}
+	});
+
+	$('#system-info').on('click', '.resend', function(e) {
+		e.preventDefault();
+		$('#accept').removeClass('resend');
+		thisAction = $(this);
+		insertFormInput(true);
+		btnText = thisAction.text().trim()
+		thisAction.html(loader);
+		$('#accept').removeAttr('action');
+
+		requestSupport(thisAction);
+	});
+});
+
+function requestSupport(thisAction) {
+	who = 'CustomerSupport'; where = data.action;
+	callNovoCore(who, where, data, function (response) {
+		if (data.action == 'temporaryLock' && response.success) {
+			var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
+			$('.status-text1').text(statusText);
+			$('.status-text2').text(statusText.toLowerCase());
+			var status = $('#status').val() == '' ? 'PB' : ''
+			$('#status').val(status);
+		}
+
+		if (response.code == 2) {
+			$('#accept').addClass('send-otp');
+			$('#accept').attr('action', data.action);
+
+			inputModal = '<form id="OTPcodeForm" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
+
+			if (response.data.cost) {
+				inputModal += 	'<p class="pt-0 p-0">' + response.data.msg + '</p>';
+			}
+
+			inputModal += 	'<p class="pt-0 p-0">' + response.msg + '</p>';
+			inputModal += 	'<div class="row">';
+			inputModal += 		'<div class="form-group col-8">';
+			inputModal += 			'<label for="otpCode">' + lang.GEN_OTP_LABEL_INPUT + '</label>'
+			inputModal += 			'<input id="otpCode" class="form-control" type="text" name="otpCode" autocomplete="off" maxlength="10">';
+			inputModal += 			'<div class="help-block"></div>'
+			inputModal += 		'</div">';
+			inputModal += 	'</div>';
+			inputModal += '</form>';
+
+			appMessages(response.title, inputModal, response.icon, response.modalBtn);
+		} else if (response.code == 3) {
+			$('#accept').addClass('resend');
+			$('#accept').attr('action', data.action);
+			appMessages(response.title, response.data.msg, response.icon, response.modalBtn);
+		}
+
+		if (data.action == 'twirlsCommercial' && response.code == 0) {
+			$.each(response.data.dataTwirls, function (key, value) {
+				$('#' + key).text(value);
+			})
+
+			$.each(response.data.shops, function (key, value) {
+				var markCheck = value == '1' ? true : false;
+				$('#' + key).prop('checked', markCheck);
+			})
+
+			$('.hide-out').removeClass('hide');
+		}
+
+		if (data.action == 'transactionalLimits' && response.code == 0) {
+			$.each(response.data.dataLimits, function (key, value) {
+				$('#' + key).text(value);
+			})
+
+			$.each(response.data.limits, function (key, value) {
+				$('#' + key).val(value);
+			})
+
+			$('.hide-out').removeClass('hide');
+		}
+
+		if ((data.action == 'transactionalLimits' || data.action == 'twirlsCommercial') && response.code != 0) {
+			$('.nav-item-config').removeClass('active');
+		}
+
+		if (thisAction.hasClass('btn')) {
+			thisAction.html(btnText);
+			insertFormInput(false);
+		} else {
+			$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
+		}
+
+		$('.nav-config-box').removeClass('no-events');
+	});
+}

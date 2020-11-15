@@ -157,4 +157,41 @@ class Novo_Assets_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_ProfessionsList');
 	}
+	/**
+	 * @info Método para solictar token de doble autenticación
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date November 10th, 2020
+	 */
+	public function callWs_GetToken_Assets()
+	{
+		log_message('INFO', 'NOVO Business Model: GetToken_Assets Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Activos';
+		$this->dataAccessLog->function = 'Generar token';
+		$this->dataAccessLog->operation = 'Obtener token de operaciones';
+
+		$this->dataRequest->idOperation = '113';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataRequest->id_ext_per = $this->session->userId;
+		$this->dataRequest->accodUsuario = $this->session->userName;
+
+		$response = $this->sendToService('callWs_GetToken');
+
+		switch($this->isResponseRc) {
+			case 0:
+				$this->response->code = 2;
+				$this->response->icon = lang('GEN_ICON_INFO');
+				$this->response->msg = 'Hemos enviado un código de seguridad a tu correo electrónico, por favor indicalo a continuación:';
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
+			break;
+			case -173:
+				$this->response->msg = 'No fue posible enviar el código de seguridad a tu correo, por favor intenta de nuevo.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_GetToken');
+	}
 }

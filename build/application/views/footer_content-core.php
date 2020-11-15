@@ -87,7 +87,7 @@
         <?php if (isset($cards->services)): ?>
         <input type="hidden" name="services" class="hidden" value="<?= htmlspecialchars(json_encode($cards->services), ENT_QUOTES, 'UTF-8'); ?>">
 				<?php endif; ?>
-				<input type="hidden" id="module" name="module" class="hidden" value="<?= isset($cards->module)?$cards->module:'' ?>">
+				<input type="hidden" name="module" class="hidden" value="<?= isset($cards->module)?$cards->module:'' ?>">
       </form>
     </div>
     <?php endforeach; ?>
