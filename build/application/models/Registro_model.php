@@ -140,7 +140,7 @@ class Registro_model extends CI_Model {
 		$newCore = array (
 			'Usd',
 			'Pe',
-			'Ec-bp'
+			//'Ec-bp',
 			//'Co',
 			//'Ve'
 		);

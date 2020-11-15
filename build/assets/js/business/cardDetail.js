@@ -252,7 +252,7 @@ function sensitiveInformation() {
 	}
 
 	inputModal = '<div class="justify">' + lang.GEN_SENSITIVE_DATA + '</div>';
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
 function validateCardDetail() {
@@ -287,7 +287,7 @@ function validateCardDetail() {
 				inputModalCard += 	'</div>';
 				inputModalCard += '</div>';
 
-				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.GEN_ICON_SUCCESS, response.modalBtn);
+				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.CONF_ICON_SUCCESS, response.modalBtn);
 
 				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.CONF_TIMER_MODAL_VIRTUAL+'s</span>');
 				startTimer(lang.CONF_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));

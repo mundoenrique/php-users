@@ -126,7 +126,7 @@ $(function () {
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.GEN_ICON_DANGER, modalBtn);
+			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.CONF_ICON_DANGER, modalBtn);
 		}
 	});
 

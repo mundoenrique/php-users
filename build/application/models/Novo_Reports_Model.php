@@ -164,7 +164,7 @@ class Novo_Reports_Model extends NOVO_Model {
 					case 'send':
 						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
-						$this->response->icon = lang('GEN_ICON_SUCCESS');
+						$this->response->icon = lang('CONF_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');
 						$this->response->modalBtn['btn1']['action'] = 'destroy';
 					break;
