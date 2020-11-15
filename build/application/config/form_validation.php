@@ -23,7 +23,7 @@ $config = [
 	'userIdentify' => [
 		[
 			'field' => 'numberCard',
-			'rules' => 'trim|numeric|required'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'docmentId',
@@ -36,6 +36,14 @@ $config = [
 		[
 			'field' => 'acceptTerms',
 			'rules' => 'trim|regex_match[/on/]|required'
+		],
+		[
+			'field' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'signup' => [
@@ -118,7 +126,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
 		],
 		[
-			'field' => 'idTypeCode',
+			'field' => 'idType',
 			'rules' => 'trim|alpha_numeric|required'
 		],
 		[
@@ -228,7 +236,7 @@ $config = [
 	],
 	'downloadMoves' => [
 		[
-			'field' => 'cardNumber',
+			'field' => 'cardNumberDownd',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 		[
@@ -312,6 +320,32 @@ $config = [
 			'rules' => 'trim|alpha_numeric'
 		]
 	],
+	'changePin' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'expireDate',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'status',
+			'rules' => 'trim|alpha_numeric'
+		],
+		[
+			'field' => 'currentPin',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPin',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|differs[currentPin]|required'
+		],
+	],
 	'userCardsList' => [
 		[
 			'field' => 'cardList',
@@ -326,6 +360,16 @@ $config = [
 		[
 			'field' => 'userIdNumber',
 			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		]
+	],
+	'getVirtualDetail' => [
+		[
+			'field' => 'cardNumberDownd',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'codeOTP',
+			'rules' => 'trim|regex_match[/^[a-z0-9]+$/i]'
 		]
 	],
 	'getMovements' => [
@@ -396,6 +440,30 @@ $config = [
 			'rules' => 'trim|alpha|required'
 		]
 	],
+	'professionsList' => [
+		[
+			'field' => 'prof',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'statesList' => [
+		[
+			'field' => 'state',
+			'rules' => 'trim|in_list[All]|required'
+		]
+	],
+	'cityList' => [
+		[
+			'field' => 'stateCode',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'regions' => [
+		[
+			'field' => 'groupCode',
+			'rules' => 'trim|numeric|required'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',
@@ -417,6 +485,46 @@ $config = [
 	'generateRequest' => [
 		[
 			'field' => 'password',
+			'rules' => 'trim|required'
+		],
+	],
+	'uploadFile' => [
+		[
+			'field' => 'INE_A',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'INE_R',
+			'rules' => 'required'
+		],
+		[
+			'field' => 'client',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'user_name',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'type_document',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'nro_document',
+			'rules' => 'trim|required'
+		],
+	],
+	'eraseFiles' => [
+		[
+			'field' => 'client',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'user_name',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'files',
 			'rules' => 'trim|required'
 		],
 	],

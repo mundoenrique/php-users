@@ -274,3 +274,19 @@ if (!function_exists('transformDate')) {
 		return preg_replace($pattern, $replace, mb_strtolower(trim($date)));
 	}
 }
+
+if (! function_exists('currencyFormat')) {
+	function currencyFormat($amount){
+		$CI =& get_instance();
+		$client = $CI->session->userdata('countrySess');
+		$decimalPoint = ['Ve', 'Co', 'Bdb'];
+
+		if (in_array($client, $decimalPoint)) {
+			$amount =  number_format($amount, 2, ',', '.');
+		} else {
+			$amount = number_format($amount, 2);
+		}
+
+		return $amount;
+	}
+}

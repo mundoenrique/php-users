@@ -47,6 +47,10 @@ $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
+$lang['GEN_BTN_YES'] = 'Si';
+$lang['GEN_BTN_NO'] = 'No';
+//TITULOS
+$lang['GEN_TITLE_IMPORTANT'] = 'Importante';
 //ICONS
 $lang['GEN_ICON'] = 'ui-icon';
 $lang['GEN_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -69,13 +73,13 @@ $lang['GEN_CURRENCY'] = '$';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
 $lang['GEN_EVENING'] = 'Buenas noches';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Novopayment';
 $lang['GEN_WAIT_BALANCE'] = 'Esperando saldo...';
 $lang['GEN_ACCOUNT_SELECTION'] = 'Selección de cuenta';
-$lang['GEN_CURRENCY'] = '$';
 $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_PASSWORD_CONFIRM'] = 'Confirmar Contraseña';
@@ -121,8 +125,8 @@ $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitu
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_RC_DEFAULT'] = -9999;
 $lang['GEN_DEFAULT_CODE'] = 4;
-$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %S ';
-$lang['GEN_VALIDATION_LOGGED'] = 'serás desconectado.';
+$lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
+$lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 //DATATABLES
 $lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
@@ -186,9 +190,31 @@ $lang['GEN_SELECT_MONTH'] = [
 ];
 $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
-
 $lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
+$lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
+$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
+$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
+$lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
+$lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
+$lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
+$lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
+$lang['GEN_PHYSICAL_CARD'] = 'Física';
+$lang['GEN_VIRTUAL_CARD'] = 'Tarjeta virtual';
+$lang['GEN_VIRTUAL'] = '%s virtual';
+$lang['GEN_VIRTUAL_DISJOIN'] = '~';
+$lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
+$lang['GEN_INVALID_CARD'] = 'Los datos son inválidos o ya estas registrado.';
+$lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
+$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
+$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
+$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
+// PROFILE
+$lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
+

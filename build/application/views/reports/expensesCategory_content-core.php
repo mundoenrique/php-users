@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REPORTS'); ?></h1>
-<div class="flex justify-between row">
+<div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
-    <div class="flex flex-wrap widget-product">
+    <div class="flex flex-wrap">
       <div class="w-100">
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
-            <div class="flex flex-colunm justify-center col-6 py-5">
+            <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
@@ -18,6 +18,9 @@
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
+							<?php if ($cardsTotal == 1 && $isVirtual): ?>
+							<span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
+							<?php endif; ?>
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
@@ -37,15 +40,15 @@
       </div>
     </div>
     <div class="flex optional widget-statistics mt-4">
-			<h3 class="h4 regular py-3 pl-3">Estadísticas</h3>
-			<div class="flex flex-column items-center">
-				<div class="flex flex-wrap items-center h-100 justify-center">
-					<div id="stats" class="group-aside-view w-100 h-100">
-						<div id="movementsStats" class="hide w-100 h-100"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+      <h3 class="h4 regular py-3 pl-3">Estadísticas</h3>
+      <div class="flex flex-column items-center">
+        <div class="flex flex-wrap items-center h-100 justify-center">
+          <div id="stats" class="group-aside-view w-100 h-100">
+            <div id="movementsStats" class="hide w-100 h-100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
@@ -67,7 +70,7 @@
       </form>
 
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
-				<label class="block">Mensual</label>
+        <label class="block">Mensual</label>
         <div class="row pl-2">
           <label class="mt-1 regular" for="initDate">Desde</label>
           <div class="form-group col-4 px-1">
@@ -91,33 +94,33 @@
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
-							<span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
-						</a>
+              <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
+            </a>
           </li>
-					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
-					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
-						</a>
-					</li>
-					<?php endif; ?>
+          <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+          <li class="stack-item px-1 list-inline-item is-disabled">
+            <a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+              <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
+            </a>
+          </li>
+          <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
-							<span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
-						</a>
+              <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
+            </a>
           </li>
-					<?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
-					<li class="stack-item px-1 list-inline-item is-disabled">
-						<a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-							<span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
-						</a>
-					</li>
-					<?php endif; ?>
-					<form id="downd-send">
-						<input type="hidden" id="dType" name="Dtype">
-						<input type="hidden" id="dInitDate" name="DinitDate">
-						<input type="hidden" id="dFinalDate" name="DfinalDate">
-					</form>
+          <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+          <li class="stack-item px-1 list-inline-item is-disabled">
+            <a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+              <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
+            </a>
+          </li>
+          <?php endif; ?>
+          <form id="downd-send">
+            <input type="hidden" id="dType" name="Dtype">
+            <input type="hidden" id="dInitDate" name="DinitDate">
+            <input type="hidden" id="dFinalDate" name="DfinalDate">
+          </form>
         </ul>
       </div>
     </nav>
