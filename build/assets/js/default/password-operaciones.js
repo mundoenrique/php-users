@@ -148,7 +148,7 @@ base_cdn = $('body').attr('data-app-cdn');
 
 					}
 					else{
-    					header("Location: users/error");
+						$(location).attr('href', base_url + '/users/error_gral');
     				}
 
 			});	//POST
