@@ -131,6 +131,15 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
+		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
+		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
+		if (lang('CONF_LOAD_DOCS') == 'ON') {
+			foreach ($this->render->stepTitles as $key => $value) {
+				if ($value == lang('USER_LOAD_DOCS_STEP')) {
+					unset($this->render->stepTitles[$key]);
+				}
+			}
+		}
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
