@@ -134,11 +134,13 @@ class Verify_Access {
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
 				case 'professionsList':
 				case 'statesList':
 				case 'cityList':
 				case 'regions':
-					$auth = $this->CI->session->has_userdata('logged');
+					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
 				break;
 				case 'getBalance':
 				case 'cardDetail':
