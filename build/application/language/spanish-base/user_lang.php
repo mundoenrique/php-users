@@ -83,7 +83,7 @@ $lang["USER_TERMS_CONTENT"] = '
 ';
 $lang['USER_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
 $lang['USER_MSG_ACCESS_ACCOUNT'] = '<p>Si aún no posees usuario para acceder al sistema <strong>%s</strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>';
-$lang["USER_CONT_PROTECTION_TITLE"]='Contrato';
+$lang["USER_CONT_PROTECTION_TITLE"]='Contrato de protección';
 $lang["USER_CONT_PROTECTION_SUBTITLE"]='Protección de datos personales';
 $lang["USER_CONT_PROTECTION_CONTENT"] = '
 <div class="justify pr-3">
@@ -107,7 +107,7 @@ $lang["USER_CONT_PROTECTION_CONTENT"] = '
 	usted deberá presentar su solicitud en la oficina de TEBCA o a través del Centro de Contacto.</p>
 </div>
 ';
-$lang["USER_CONT_BENEFITS_TITLE"]='Contrato';
+$lang["USER_CONT_BENEFITS_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_BENEFITS_SUBTITLE"]='Contrato de cuenta dinero electrónico Plata Beneficios';
 $lang["USER_CONT_BENEFITS_CONTENT"] = '
 <div class="justify pr-3">
@@ -275,7 +275,7 @@ $lang["USER_CONT_BENEFITS_CONTENT"] = '
 	</ol>
 </div>
 ';
-$lang["USER_CONT_GENERAL_TITLE"]='Contrato';
+$lang["USER_CONT_GENERAL_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_GENERAL_SUBTITLE"]='Contrato de cuenta dinero electrónico PN cuenta general';
 $lang["USER_CONT_GENERAL_CONTENT"] = '
 <div class="justify pr-3">

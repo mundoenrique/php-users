@@ -1,6 +1,32 @@
 'use strcit'
 $(function() {
+	$('#averageIncome').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });
+	$('#averageIncome').on('keyup', function () {
+		$(this).val(function (index, value) {
 
+			if (value.indexOf('0') != -1 && value.indexOf('0') == 0) {
+				value = value.replace(0, '');
+			}
+
+			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
+				value = '00' + lang.GEN_DECIMAL + value
+			}
+
+			return value
+		})
+	});
+
+	$('input:radio[name=publicOfficeOld]').on('change', function() {
+		switch (this.value) {
+			case 'yes':
+				$('#publicOffice, #publicInst').removeClass('ignore');
+			break;
+			case 'no':
+				$('#publicOffice, #publicInst').addClass('ignore').val('');
+			break;
+		}
+
+	});
 });
 
 function getProfessions() {

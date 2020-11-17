@@ -745,7 +745,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
 			$profileData->civilStatus = $response->registro->afiliacion->edocivil ?? '';
-			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
+			$profileData->verifierCode = $response->registro->afiliacion->dig_verificador ?? '';
 			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
 			$profileData->employed = $response->registro->afiliacion->labora ?? '';

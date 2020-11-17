@@ -13,9 +13,7 @@ $(function () {
 			$('#city').children().remove();
 			$('#city').prepend('<option value="" selected>Selecciona</option>');
 			$('#district').children().remove();
-			$('#district')
-				.prop('disabled', true)
-				.prepend('<option value="" selected>Selecciona</option>');
+			$('#district').prop('disabled', true).prepend('<option value="" selected>Selecciona</option>');
 
 			getCities(this.value);
 		});
@@ -62,6 +60,11 @@ $(function () {
 
 	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
+
+		if ($('#noPublicOfficeOld').is(':checked')) {
+			$('#publicOffice, #publicInst').val('');
+		}
+
 		form = $('#signUpForm');
 		validateForms(form);
 

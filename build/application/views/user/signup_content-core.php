@@ -196,8 +196,8 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="idWorkplace"><?= lang('USER_WORK_CENTER') ?></label>
-            <input id="idWorkplace" class="form-control" type="text" name="idWorkplace" value="" autocomplete="off">
+            <label for="workplace"><?= lang('USER_WORK_CENTER') ?></label>
+            <input id="workplace" class="form-control" type="text" name="workplace" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
@@ -228,48 +228,48 @@
           </div>
 
           <div class="form-group col-6 col-lg-12 col-xl-6">
-            <label for="charge"><?= lang('USER_CHARGE') ?></label>
-            <input id="chargeText" class="form-control" type="text" name="chargeText" value="" autocomplete="off">
+            <label for="position"><?= lang('USER_CHARGE') ?></label>
+            <input id="position" class="form-control" type="text" name="position" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-6">
-            <label for="averageMonthly"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
-            <input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" value="" autocomplete="off">
+            <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+            <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-12 center">
             <label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesPublicOffice">Si</label>
+              <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes" autocomplete="off">
+              <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noPublicOffice">No</label>
+              <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no" autocomplete="off">
+              <label class="custom-control-label" for="noPublicOfficeOld">No</label>
             </div>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="publicPosition"><?= lang('USER_PUBLIC_POSITION') ?></label>
-            <input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" value="" autocomplete="off">
+            <label for="publicOffice"><?= lang('USER_PUBLIC_POSITION') ?></label>
+            <input id="publicOffice" class="form-control ignore" type="text" name="publicOffice" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="institution"><?= lang('USER_INSTITUTION') ?></label>
-            <input id="institution" class="form-control" disabled type="text" name="institution" value="" autocomplete="off">
+            <label for="publicInst"><?= lang('USER_INSTITUTION') ?></label>
+            <input id="publicInst" class="form-control ignore" type="text" name="publicInst" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 pt-2 center">
             <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesArticleLaw">Si</label>
+              <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes">
+              <label class="custom-control-label" for="yesTaxesObligated">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noArticleLaw">No</label>
+              <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no">
+              <label class="custom-control-label" for="noTaxesObligated">No</label>
             </div>
             <div class="help-block"></div>
           </div>
@@ -347,13 +347,13 @@
       <div class="bg-secondary p-2">
         <div class="row mx-1">
           <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-            <input id="TermsProtectionRegistry" class="custom-control-input" type="checkbox" name="TermsProtectionRegistry">
-            <label class="custom-control-label" for="TermsProtectionRegistry"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
+            <input id="protection" class="custom-control-input" type="checkbox" name="protection">
+            <label class="custom-control-label" for="protection"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
             <div class="help-block"></div>
           </div>
           <div class="form-group custom-control custom-switch col-12 col-lg-8 pt-1 mb-0">
-            <input id="TermsContractRegistry" class="custom-control-input" type="checkbox" name="TermsContractRegistry">
-            <label class="custom-control-label" for="TermsContractRegistry"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
+            <input id="contract" class="custom-control-input" type="checkbox" name="contract">
+            <label class="custom-control-label" for="contract"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
             <div class="help-block"></div>
           </div>
         </div>

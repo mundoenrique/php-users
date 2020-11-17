@@ -18,6 +18,42 @@ $(function () {
 		$(this).off('click');
 	});
 
+	$('#protection').on('click', function() {
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+			maxHeight: 600,
+			width: 800,
+			posMy: 'top',
+			posAt: 'top'
+		}
+		var inputModal = '<h1 class="h0">' + lang.USER_CONT_PROTECTION_SUBTITLE+'</h1>';
+		inputModal += lang.USER_CONT_PROTECTION_CONTENT;
+
+		appMessages(lang.USER_CONT_BENEFITS_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		$(this).off('click');
+	});
+
+	$('#contract').on('click', function() {
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+			maxHeight: 600,
+			width: 800,
+			posMy: 'top',
+			posAt: 'top'
+		}
+		var inputModal = '<h1 class="h0">' + lang.USER_CONT_BENEFITS_SUBTITLE+'</h1>';
+		inputModal += lang.USER_CONT_BENEFITS_CONTENT;
+
+		appMessages(lang.USER_CONT_PROTECTION_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		$(this).off('click');
+	});
+
 	// Funtion drag and drop
 	$('#SEL_A').change(function () {
     $('#imagePreviewContainer').hide();

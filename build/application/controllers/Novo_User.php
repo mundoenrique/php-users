@@ -98,6 +98,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"third_party/jquery.mask-1.14.16",
 			"user/validPass",
 			"user/signup",
 			"user/getRegions",
@@ -216,6 +217,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"third_party/jquery.mask-1.14.16",
 			"user/profileUser",
 			"user/getRegions",
 			"user/manageImageTerm"

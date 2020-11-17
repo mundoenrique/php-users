@@ -76,9 +76,9 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="verifyDigit"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifyDigit" class="form-control <?= $updateUser; ?>" type="text" name="verifyDigit" value="<?= $verifyDigit; ?>" maxlength="1"
-              <?= $verifyDigit != '' ? 'readonly' : ''; ?>>
+            <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
+            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" value="<?= $verifierCode; ?>"
+              maxlength="1" <?= $verifierCode != '' ? 'readonly' : ''; ?>>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
