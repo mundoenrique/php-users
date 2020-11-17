@@ -99,7 +99,11 @@
           <div class="form-group col-3 col-lg-6">
             <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
             <select id="addressType" class="custom-select form-control" name="addressType">
-              <option value=""></option>
+              <?php foreach (lang('USER_ADDRESS_TYPE_LIST') as $key => $value) : ?>
+              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>>
+                <?= $value; ?>
+              </option>
+              <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
@@ -109,24 +113,24 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="department"><?= lang('USER_STATE') ?></label>
-            <select id="department" class="custom-select form-control" name="department">
-              <option value=""></option>
+            <label for="state"><?= lang('USER_STATE') ?></label>
+            <select id="state" class="custom-select form-control" name="state">
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="city"><?= lang('USER_CITY') ?></label>
-            <select id="city" class="custom-select form-control" name="city">
-              <option value=""></option>
+            <select id="city" class="custom-select form-control" name="city" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
 					<?php if($longProfile == 'S'):?>
           <div class="form-group col-3 col-lg-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
-            <select id="district" class="custom-select form-control" name="district">
-              <option value=""></option>
+            <select id="district" class="custom-select form-control" name="district" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
@@ -206,22 +210,19 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="Seniority"><?= lang('USER_SENIORITY') ?></label>
-            <select id="Seniority" class="custom-select form-control" name="Seniority">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
+            <select id="laborOld" class="custom-select form-control" name="laborOld">
+              <option selected disabled>Selecciona</option>
+              <?php for ($index = 0; $index <= 50; $index++): ?>
+              <option value="<?= $index; ?>"><?= $index; ?></option>
+              <?php endfor; ?>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 col-lg-12 col-xl-6">
-            <label for="occupation"><?= lang('USER_OCCUPATION') ?></label>
-            <select id="occupation" class="custom-select form-control" name="occupation">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="profession"><?= lang('USER_PROFESSION') ?></label>
+            <select id="profession" class="custom-select form-control" name="profession" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>

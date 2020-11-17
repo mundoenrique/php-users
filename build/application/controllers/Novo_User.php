@@ -100,6 +100,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/validPass",
 			"user/signup",
+			"user/getRegions",
 			"user/manageImageTerm"
 		);
 
@@ -216,6 +217,7 @@ class Novo_User extends NOVO_Controller {
 			"form_validation",
 			"third_party/additional-methods",
 			"user/profileUser",
+			"user/getRegions",
 			"user/manageImageTerm"
 		);
 
