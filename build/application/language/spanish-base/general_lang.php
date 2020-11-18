@@ -66,6 +66,8 @@ $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
 $lang['GEN_CURRENCY'] = '$';
+$lang['GEN_DECIMAL'] = '.';
+$lang['GEN_THOUSANDS'] = ',';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;

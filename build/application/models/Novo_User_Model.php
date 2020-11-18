@@ -530,24 +530,33 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
+				$userData->generalAccount =  '';
+
+				if ($userData->longProfile == 'S') {
+					$userData->idnumber = $response->afiliacion->idpersona ?? $userData->idnumber;
+					$userData->fiscalId = $response->afiliacion->ruc_cto_laboral ?? '';
+					$userData->generalAccount = $response->afiliacion->acepta_contrato ?? $userData->generalAccount;
+					$userData->CurrentVerifierCode = $response->afiliacion->dig_verificador_aux ?? '';
+				}
 
 				$this->response->data->signUpData = $userData;
-				$this->response->data->affiliation = $response->afiliacion;
 				$this->response->modal = TRUE;
 
 				$userSess = [
 					'userIdentity' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $dataRequest->docmentId,
+					'userId' => $response->user->id_ext_per,
 					'userName' => $response->logAccesoObject->userName,
-					'docmentId' => $dataRequest->docmentId,
+					'docmentId' => $response->user->id_ext_per,
 					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
 					'countryUri' => $this->config->item('country-uri'),
-					'clientAgent' => $this->agent->agent_string()
+					'clientAgent' => $this->agent->agent_string(),
+					'cardNumber' => $dataRequest->numberCard ?? '',
+					'longProfile' => $userData->longProfile
 				];
 				$this->session->set_userdata($userSess);
 			break;
@@ -664,9 +673,9 @@ class Novo_User_Model extends NOVO_Model {
 			'img_valida' => 'FALSE',
 			'imagenes' => [
 				'id_ext_per' => $dataRequest->idNumber,
-				'tipoDocumento' => $dataRequest->countryDocument,
-				'rutaAnverso' => $dataRequest->INE_A,
-				'rutaReverso' => $dataRequest->INE_R,
+				'tipoDocumento' => $dataRequest->countryDocument ?? '',
+				'rutaAnverso' => $dataRequest->INE_A ?? '',
+				'rutaReverso' => $dataRequest->INE_R ?? '',
 				'operacion' => 'insertar'
 			]
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
@@ -686,6 +695,59 @@ class Novo_User_Model extends NOVO_Model {
 				'numero' => $dataRequest->otherPhoneNum
 			]
 		];
+
+		if ($this->session->longProfile == 'S') {
+			$this->dataRequest->afiliacion = [
+				'aplicaPerfil' => $this->session->longProfile,
+				'notarjeta' => $this->session->userName,
+				'idpersona' => $this->session->userId,
+				'nombre1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
+				'nombre2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->middleName)))),
+				'apellido1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->lastName)))),
+				'apellido2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->surName)))),
+				'fechanac' => $dataRequest->birthDate,
+				'sexo' => $dataRequest->gender,
+				'telefono1' => $dataRequest->landLine,
+				'telefono2' => $dataRequest->mobilePhone,
+				'telefono3' => $dataRequest->otherPhoneNum,
+				'correo' => $dataRequest->email,
+				'tipo_direccion' => $dataRequest->addressType ?? '',
+				'departamento' => $dataRequest->state ?? '',
+				'provincia' => $dataRequest->city ?? '',
+				'distrito' => $dataRequest->district ?? '',
+				'cod_postal' => $dataRequest->postalCode ?? '',
+				'direccion' => $dataRequest->address ?? '',
+				'edocivil' => $dataRequest->civilStatus ?? '',
+				'labora' => $dataRequest->employed ?? '',
+				'centrolab' => $dataRequest->workplace ?? '',
+				'antiguedad_laboral' => $dataRequest->laborOld ?? '',
+				'profesion' => $dataRequest->profession ?? '',
+				'cargo' => $dataRequest->position ?? '',
+				'ingreso_promedio_mensual' => $dataRequest->averageIncome ? (float)$dataRequest->averageIncome : '',
+				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
+				'cargo_publico' => $dataRequest->publicOffice ?? '',
+				'institucion_publica' => $dataRequest->publicInst ?? '',
+				'uif' => $dataRequest->taxesObligated ?? '',
+				'lugar_nacimiento' => $dataRequest->birthPlace ?? '',
+				'nacionalidad' => $dataRequest->nationality ?? '',
+				'dig_verificador' => $dataRequest->verifierCode ?? '',
+				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
+				'acepta_contrato' => $dataRequest->contract ? (int)$dataRequest->contract : '',
+				'acepta_proteccion' => $dataRequest->protection ? (int)$dataRequest->protection :  '',
+				'codarea1' => '',
+				'fecha_solicitud' => '',
+				'fecha_reg' => '',
+				'estatus' => '',
+				'notifica' => '',
+				'fecha_proc' => '',
+				'fecha_afil' => '',
+				'tipo_id' => '',
+				'punto_venta' => '',
+				'cod_vendedor' => '',
+				'dni_vendedor' => '',
+				'cod_ubigeo' => ''
+			];
+		}
 
 		$response = $this->sendToService('CallWs_Signup');
 
@@ -869,7 +931,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
 			$profileData->civilStatus = $response->registro->afiliacion->edocivil ?? '';
-			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
+			$profileData->verifierCode = $response->registro->afiliacion->dig_verificador ?? '';
 			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
 			$profileData->employed = $response->registro->afiliacion->labora ?? '';
