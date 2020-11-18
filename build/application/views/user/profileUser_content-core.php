@@ -227,7 +227,7 @@
             <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
             <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOY_SITUATION_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>" <?= $employed == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
+              <option value="<?= $key; ?>" <?= $employed === $key ? 'selected' : ''; ?> <?= $key === '' ? 'selected disabled' : '';  ?>>
                 <?= $value; ?>
               </option>
               <?php endforeach; ?>

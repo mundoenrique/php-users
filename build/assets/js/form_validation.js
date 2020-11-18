@@ -12,7 +12,7 @@ function validateForms(form) {
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
 	var longPhrase = /^[a-z0-9ñáéíóú ().,;-]{5,150}$/i;
 	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
-	var alphaLetter = /^[a-zñáéíóú]{4,50}$/i;
+	var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
 	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
@@ -64,15 +64,15 @@ function validateForms(form) {
 			"lastName": { required: true, pattern: alphaName },
 			"surName": { pattern: alphaName },
 			"birthDate": { required: true, pattern: date.dmy },
-			"nationality": { required: true, lettersonly: true, minlength: 4, minlength: 15 },
-			"birthPlace": { pattern: alphaLetter },
+			"nationality": { required: true, pattern: alphaLetter, minlength: 4, maxlength: 20 },
+			"birthPlace": { pattern: alphaLetter, minlength: 4, maxlength: 20 },
 			"civilStatus": { pattern: onlyOneLetter },
 			"addressType": { required: true, requiredSelect: true },
 			"postalCode": { pattern: onlyNumber },
 			"state": { required: true, requiredSelect: true },
 			"city": { required: true, requiredSelect: true },
 			"address": { required: true, pattern: longPhrase },
-			"verifierCode": { required: true, pattern: onlyOneNumber },
+			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
 			"landLine": { pattern: phone },
@@ -91,6 +91,18 @@ function validateForms(form) {
 			"position": { pattern: namesValid },
 			"averageIncome": { pattern: floatAmount, maxlength: 9 },
 			"publicOfficeOld": { required: true },
+			"publicOffice": {
+				required: {
+					depends: function (element) {
+						return $('#yesPublicOfficeOld').is(':checked');
+					}
+				}, pattern: shortPhrase },
+			"publicInst": {
+				required: {
+					depends: function (element) {
+						return $('#yesPublicOfficeOld').is(':checked');
+					}
+				}, pattern: shortPhrase },
 			"taxesObligated": { required: true },
 			"protection": { required: true },
 			"contract": { required: true },
@@ -173,6 +185,8 @@ function validateForms(form) {
 			"position": lang.VALIDATE_POSITION,
 			"averageIncome": lang.VALIDATE_AVERAGE_INCOME,
 			"publicOfficeOld": lang.VALIDATE_RECOVER_OPTION,
+			"publicOffice": lang.VALIDATE_SHORT_PHRASE,
+			"publicInst": lang.VALIDATE_SHORT_PHRASE,
 			"taxesObligated": lang.VALIDATE_RECOVER_OPTION,
 			"protection": lang.VALIDATE_PROTECTION,
 			"contract": lang.VALIDATE_CONTRACT,
@@ -270,6 +284,10 @@ function validateForms(form) {
 
 	$.validator.methods.fourConsecutivesDigits = function (value, element, param) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
+	}
+
+	$.validator.methods.matchVerifierCode = function (value, element, param) {
+		return value == CurrentVerifierCode;
 	}
 
 	$.validator.addMethod('filesize', function (value, element, param) {

@@ -7,6 +7,8 @@
 </div>
 <form id="signUpForm" class="hide-out hide bg-color p-2">
   <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
+  <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
+  <input id="CurrentVerifierCode" type="hidden" name="CurrentVerifierCode" value="<?= $CurrentVerifierCode; ?>">
   <div class="row">
 
     <div class="col-12 col-lg-6 pb-3">
@@ -56,8 +58,8 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="placeBirth" class="form-control" type="text" name="placeBirth" value="">
+            <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+            <input id="birthPlace" class="form-control" type="text" name="birthPlace" value="">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
@@ -126,7 +128,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-					<?php if($longProfile == 'S'):?>
+					<?php if ($longProfile == 'S'): ?>
           <div class="form-group col-3 col-lg-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
             <select id="district" class="custom-select form-control" name="district" disabled>
@@ -191,8 +193,8 @@
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
         <div class="row mx-1">
           <div class="form-group col-4 col-lg-6">
-            <label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-            <input id="idRUCText" class="form-control" type="text" name="idRUCText" autocomplete="off" readonly>
+            <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+            <input id="fiscalId" class="form-control" type="text" name="fiscalId" value="<?= $fiscalId ?>" autocomplete="off" readonly>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
@@ -201,10 +203,10 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="employmentStatus"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
-            <select id="employmentStatus" class="custom-select form-control" name="employmentStatus">
+            <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
+            <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOYMENT_STATUS_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
+              <option value="<?= $key; ?>" <?= $key === '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
@@ -347,12 +349,12 @@
       <div class="bg-secondary p-2">
         <div class="row mx-1">
           <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-            <input id="protection" class="custom-control-input" type="checkbox" name="protection">
+            <input id="protection" class="custom-control-input" type="checkbox" name="protection" value="1">
             <label class="custom-control-label" for="protection"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
             <div class="help-block"></div>
           </div>
           <div class="form-group custom-control custom-switch col-12 col-lg-8 pt-1 mb-0">
-            <input id="contract" class="custom-control-input" type="checkbox" name="contract">
+            <input id="contract" class="custom-control-input" type="checkbox" name="contract" value="1">
             <label class="custom-control-label" for="contract"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
             <div class="help-block"></div>
           </div>

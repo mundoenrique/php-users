@@ -1,9 +1,11 @@
 'use strict'
 var longProfile;
+var CurrentVerifierCode;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	longProfile = $('#longProfile').val();
+	CurrentVerifierCode = $('#CurrentVerifierCode').val();
 
 	if (longProfile == 'S') {
 		getProfessions();
@@ -76,6 +78,11 @@ $(function () {
 			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
+
+			if (longProfile == 'S') {
+				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+			}
 
 			if (lang.CONF_LOAD_DOCS == 'ON') {
 				var inputFile = $('input[type="file"]');

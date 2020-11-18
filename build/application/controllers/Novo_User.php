@@ -116,10 +116,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		foreach ($dataUser->affiliation AS $index => $render) {
-			$this->render->$index = $render;
-		}
-
 		$this->render->previewINE_A = FALSE;
 		$this->render->previewINE_R = FALSE;
 		$this->render->previewPASS_A = FALSE;

@@ -22,7 +22,9 @@ $(function() {
 				$('#publicOffice, #publicInst').removeClass('ignore');
 			break;
 			case 'no':
-				$('#publicOffice, #publicInst').addClass('ignore').val('');
+				$('#publicOffice, #publicInst')
+					.addClass('ignore').val('').removeAttr('aria-describedby').removeClass('has-error').parent('.form-group').find('.help-block').text('');
+
 			break;
 		}
 
