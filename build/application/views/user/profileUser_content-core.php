@@ -246,7 +246,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
               <option value="<?= $professionType; ?>" selected><?= $profession; ?></option>
@@ -254,7 +254,7 @@
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="charge"><?= lang('USER_CHARGE') ?></label>
             <input id="chargeText" class="form-control" type="text" name="chargeText" autocomplete="off">
             <div class="help-block"></div>

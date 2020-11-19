@@ -221,7 +221,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control" name="profession" disabled>
               <option value="">Selecciona</option>
@@ -229,13 +229,13 @@
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="position"><?= lang('USER_CHARGE') ?></label>
             <input id="position" class="form-control" type="text" name="position" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6 input-height">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
             <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="" autocomplete="off">
             <div class="help-block"></div>
@@ -285,8 +285,8 @@
         <div class="row mx-1">
           <div class="col-12 <?= $dataPass; ?>">
             <div class="row">
-              <div class="form-group col-12 col-lg-12">
-                <div class="col-12 col-xl-6 pl-xl-0 pr-xl-2 pl-0 pr-0">
+              <div class="form-group col-12">
+                <div class="col-12 col-xl-6 pl-xl-0 pr-xl-2 pl-0 pr-0 input-height">
                   <label for="nickName"><?= lang('GEN_USER'); ?></label>
                   <div class="input-group">
                     <input id="nickName" class="form-control pwd-input available" type="text" name="nickName">
@@ -294,7 +294,7 @@
                   <div class="help-block"></div>
                 </div>
               </div>
-              <div class="form-group col-12 col-lg-6">
+              <div class="form-group col-12 col-lg-6 input-height">
                 <label for="newPass"><?= lang('GEN_PASSWORD'); ?></label>
                 <div class="input-group">
                   <input id="newPass" class="form-control pwd-input" type="password" name="newPass">
@@ -306,7 +306,7 @@
                 </div>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-12 col-lg-6">
+              <div class="form-group col-12 col-lg-6 input-height">
                 <label for="confirmPass"><?= lang('GEN_PASSWORD_CONFIRM'); ?></label>
                 <div class="input-group">
                   <input id="confirmPass" class="form-control pwd-input" type="password" name="confirmPass">
