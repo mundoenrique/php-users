@@ -15,54 +15,54 @@
       <div class="bg-secondary p-2 h-100">
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_PERSONAL_DATA')?></h4>
         <div class="row mx-1">
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="idType"><?= lang('USER_ID_TYPE')?></label>
             <input id="idType" class="form-control" type="text" name="idType" value="<?= $idType; ?>" readonly autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="idNumber"><?= lang('USER_ID_NUMBER')?></label>
             <input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idnumber; ?>" readonly autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="firstName"><?= lang('USER_FIRSTNAME')?></label>
             <input id="firstName" class="form-control" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="lastName"><?= lang('USER_LASTNAME')?></label>
             <input id="lastName" class="form-control" type="text" name="lastName" value="<?= $lastName; ?>" <?= $updateName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="middleName"><?= lang('USER_MIDDLENAME')?></label>
             <input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="surName"><?= lang('USER_SURNAME')?></label>
             <input id="surName" class="form-control" type="text" name="surName" value="<?= $surName; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="birthDate"><?= lang('USER_BIRTHDATE')?></label>
             <input id="birthDate" class="form-control date-picker" type="text" name="birthDate" value="<?= $birthDate; ?>" readonly
               autocomplete="off">
             <div class="help-block"></div>
           </div>
           <?php if($longProfile == 'S'):?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
             <input id="nationality" class="form-control" type="text" name="nationality" value="">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
             <input id="birthPlace" class="form-control" type="text" name="birthPlace" value="">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
             <select id="civilStatus" class="custom-select form-control" name="civilStatus">
               <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
@@ -71,13 +71,13 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
             <input id="verifierCode" class="form-control" type="text" name="verifierCode">
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label class="block"><?= lang('USER_GENDER')?></label>
             <div class="custom-control custom-radio custom-control-inline">
               <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off">
@@ -98,7 +98,7 @@
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_CONTACT_DATA')?></h4>
         <div class="row mx-1">
           <?php if($longProfile == 'S'):?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
             <select id="addressType" class="custom-select form-control" name="addressType">
               <?php foreach (lang('USER_ADDRESS_TYPE_LIST') as $key => $value) : ?>
@@ -109,19 +109,19 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
             <input id="postalCode" class="form-control" type="text" name="postalCode" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="state"><?= lang('USER_STATE') ?></label>
             <select id="state" class="custom-select form-control" name="state">
               <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="city"><?= lang('USER_CITY') ?></label>
             <select id="city" class="custom-select form-control" name="city" disabled>
               <option value="">Selecciona</option>
@@ -129,7 +129,7 @@
             <div class="help-block"></div>
           </div>
 					<?php if ($longProfile == 'S'): ?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
             <select id="district" class="custom-select form-control" name="district" disabled>
               <option value="">Selecciona</option>
@@ -137,32 +137,32 @@
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
-          <div class="form-group col-12 col-lg-8 col-xl-12">
+          <div class="form-group col-12 mb-2">
             <label for="address"><?= lang('USER_ADDRESS') ?></label>
-            <textarea id="address" class="form-control" name="address"></textarea>
+            <textarea id="address" class="form-control" name="address" row="2"></textarea>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
         </div>
         <div class="row mx-1">
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="email"><?= lang('USER_EMAIL')?></label>
             <input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
             <input id="confirmEmail" class="form-control" type="email" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
               autocomplete="off" onpaste="return false">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6 <?= $skipLandLine ?>">
+          <div class="form-group col-6 input-height <?= $skipLandLine ?>">
             <label for="landLine"><?= lang('USER_PHONE_LANDLINE')?></label>
             <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE')?></label>
             <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" autocomplete="off">
             <div class="help-block"></div>
@@ -170,7 +170,7 @@
           <div class="form-group col-12 <?= $skipOtherPhone ?>">
             <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER')?></label>
             <div class="form-row">
-              <div class="form-group col-6">
+              <div class="form-group col-6 input-height">
                 <select id="phoneType" class="custom-select form-control" name="phoneType">
                   <?php foreach (lang('USER_OTHER_PHONE_LIST') AS $key => $value): ?>
                   <option value="<?= $key; ?>"><?= $value; ?></option>
@@ -178,7 +178,7 @@
                 </select>
                 <div class="help-block"></div>
               </div>
-              <div class="form-group col-6">
+              <div class="form-group col-6 input-height">
                 <input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="" autocomplete="off">
                 <div class="help-block"></div>
               </div>
@@ -192,17 +192,17 @@
       <div class="bg-secondary p-2 h-100">
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
         <div class="row mx-1">
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
             <input id="fiscalId" class="form-control" type="text" name="fiscalId" value="<?= $fiscalId ?>" autocomplete="off" readonly>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="workplace"><?= lang('USER_WORK_CENTER') ?></label>
             <input id="workplace" class="form-control" type="text" name="workplace" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
             <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOYMENT_STATUS_LIST') as $key => $value) : ?>
@@ -211,7 +211,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
             <select id="laborOld" class="custom-select form-control" name="laborOld">
               <option selected disabled>Selecciona</option>
@@ -221,7 +221,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6 col-lg-12 col-xl-6">
+          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control" name="profession" disabled>
               <option value="">Selecciona</option>
@@ -229,13 +229,13 @@
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6 col-lg-12 col-xl-6">
+          <div class="form-group col-6 input-height col-lg-12 col-xl-6">
             <label for="position"><?= lang('USER_CHARGE') ?></label>
             <input id="position" class="form-control" type="text" name="position" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
             <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="" autocomplete="off">
             <div class="help-block"></div>
@@ -253,17 +253,17 @@
             </div>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="publicOffice"><?= lang('USER_PUBLIC_POSITION') ?></label>
             <input id="publicOffice" class="form-control ignore" type="text" name="publicOffice" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="publicInst"><?= lang('USER_INSTITUTION') ?></label>
             <input id="publicInst" class="form-control ignore" type="text" name="publicInst" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-12 pt-2 center">
+          <div class="form-group col-12 pt-2 center mb-2">
             <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
               <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes">
@@ -286,7 +286,7 @@
           <div class="col-12 <?= $dataPass; ?>">
             <div class="row">
               <div class="form-group col-12 col-lg-12">
-                <div class="col-lg-6 pl-lg-0 pr-lg-2 pl-0 pr-0">
+                <div class="col-12 col-xl-6 pl-xl-0 pr-xl-2 pl-0 pr-0">
                   <label for="nickName"><?= lang('GEN_USER'); ?></label>
                   <div class="input-group">
                     <input id="nickName" class="form-control pwd-input available" type="text" name="nickName">
@@ -348,12 +348,12 @@
     <div class="col-12 pb-3">
       <div class="bg-secondary p-2">
         <div class="row mx-1">
-          <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
+          <div class="form-group custom-control custom-switch col-6 pt-1 mb-0">
             <input id="protection" class="custom-control-input" type="checkbox" name="protection" value="1">
             <label class="custom-control-label" for="protection"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
             <div class="help-block"></div>
           </div>
-          <div class="form-group custom-control custom-switch col-12 col-lg-8 pt-1 mb-0">
+          <div class="form-group custom-control custom-switch col-6 pt-1 mb-0">
             <input id="contract" class="custom-control-input" type="checkbox" name="contract" value="1">
             <label class="custom-control-label" for="contract"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
             <div class="help-block"></div>
