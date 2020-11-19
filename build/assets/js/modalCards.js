@@ -81,5 +81,5 @@ function cardModal() {
 		posMy: 'top+50px',
 		posAt: 'top+50px',
 	}
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.GEN_ICON_SUCCESS, modalBtn);
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }

@@ -7,6 +7,8 @@
 </div>
 <form id="signUpForm" class="hide-out hide bg-color p-2">
   <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
+  <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
+  <input id="CurrentVerifierCode" type="hidden" name="CurrentVerifierCode" value="<?= $CurrentVerifierCode; ?>">
   <div class="row">
 
     <div class="col-12 col-lg-6 pb-3">
@@ -56,8 +58,8 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="placeBirth" class="form-control" type="text" name="placeBirth" value="">
+            <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+            <input id="birthPlace" class="form-control" type="text" name="birthPlace" value="">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
@@ -71,7 +73,7 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifierCode" class="form-control" type="text" name="verifierCode" value="">
+            <input id="verifierCode" class="form-control" type="text" name="verifierCode">
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
@@ -99,7 +101,11 @@
           <div class="form-group col-3 col-lg-6">
             <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
             <select id="addressType" class="custom-select form-control" name="addressType">
-              <option value=""></option>
+              <?php foreach (lang('USER_ADDRESS_TYPE_LIST') as $key => $value) : ?>
+              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>>
+                <?= $value; ?>
+              </option>
+              <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
@@ -109,24 +115,24 @@
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
-            <label for="department"><?= lang('USER_STATE') ?></label>
-            <select id="department" class="custom-select form-control" name="department">
-              <option value=""></option>
+            <label for="state"><?= lang('USER_STATE') ?></label>
+            <select id="state" class="custom-select form-control" name="state">
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="city"><?= lang('USER_CITY') ?></label>
-            <select id="city" class="custom-select form-control" name="city">
-              <option value=""></option>
+            <select id="city" class="custom-select form-control" name="city" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
-					<?php if($longProfile == 'S'):?>
+					<?php if ($longProfile == 'S'): ?>
           <div class="form-group col-3 col-lg-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
-            <select id="district" class="custom-select form-control" name="district">
-              <option value=""></option>
+            <select id="district" class="custom-select form-control" name="district" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
@@ -187,88 +193,85 @@
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
         <div class="row mx-1">
           <div class="form-group col-4 col-lg-6">
-            <label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
-            <input id="idRUCText" class="form-control" type="text" name="idRUCText" autocomplete="off" readonly>
+            <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+            <input id="fiscalId" class="form-control" type="text" name="fiscalId" value="<?= $fiscalId ?>" autocomplete="off" readonly>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="idWorkplace"><?= lang('USER_WORK_CENTER') ?></label>
-            <input id="idWorkplace" class="form-control" type="text" name="idWorkplace" value="" autocomplete="off">
+            <label for="workplace"><?= lang('USER_WORK_CENTER') ?></label>
+            <input id="workplace" class="form-control" type="text" name="workplace" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-4 col-lg-6">
-            <label for="employmentStatus"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
-            <select id="employmentStatus" class="custom-select form-control" name="employmentStatus">
+            <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
+            <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOYMENT_STATUS_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
+              <option value="<?= $key; ?>" <?= $key === '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="Seniority"><?= lang('USER_SENIORITY') ?></label>
-            <select id="Seniority" class="custom-select form-control" name="Seniority">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
+            <select id="laborOld" class="custom-select form-control" name="laborOld">
+              <option selected disabled>Selecciona</option>
+              <?php for ($index = 0; $index <= 50; $index++): ?>
+              <option value="<?= $index; ?>"><?= $index; ?></option>
+              <?php endfor; ?>
             </select>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 col-lg-12 col-xl-6">
-            <label for="occupation"><?= lang('USER_OCCUPATION') ?></label>
-            <select id="occupation" class="custom-select form-control" name="occupation">
-              <option selected disabled>Seleccionar</option>
-              <option>Option 1</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+            <label for="profession"><?= lang('USER_PROFESSION') ?></label>
+            <select id="profession" class="custom-select form-control" name="profession" disabled>
+              <option value="">Selecciona</option>
             </select>
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-6 col-lg-12 col-xl-6">
-            <label for="charge"><?= lang('USER_CHARGE') ?></label>
-            <input id="chargeText" class="form-control" type="text" name="chargeText" value="" autocomplete="off">
+            <label for="position"><?= lang('USER_CHARGE') ?></label>
+            <input id="position" class="form-control" type="text" name="position" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-6">
-            <label for="averageMonthly"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
-            <input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" value="" autocomplete="off">
+            <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+            <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-12 center">
             <label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesPublicOffice">Si</label>
+              <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes" autocomplete="off">
+              <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noPublicOffice">No</label>
+              <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no" autocomplete="off">
+              <label class="custom-control-label" for="noPublicOfficeOld">No</label>
             </div>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="publicPosition"><?= lang('USER_PUBLIC_POSITION') ?></label>
-            <input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" value="" autocomplete="off">
+            <label for="publicOffice"><?= lang('USER_PUBLIC_POSITION') ?></label>
+            <input id="publicOffice" class="form-control ignore" type="text" name="publicOffice" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="institution"><?= lang('USER_INSTITUTION') ?></label>
-            <input id="institution" class="form-control" disabled type="text" name="institution" value="" autocomplete="off">
+            <label for="publicInst"><?= lang('USER_INSTITUTION') ?></label>
+            <input id="publicInst" class="form-control ignore" type="text" name="publicInst" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 pt-2 center">
             <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesArticleLaw">Si</label>
+              <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes">
+              <label class="custom-control-label" for="yesTaxesObligated">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noArticleLaw">No</label>
+              <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no">
+              <label class="custom-control-label" for="noTaxesObligated">No</label>
             </div>
             <div class="help-block"></div>
           </div>
@@ -346,13 +349,13 @@
       <div class="bg-secondary p-2">
         <div class="row mx-1">
           <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-            <input id="TermsProtectionRegistry" class="custom-control-input" type="checkbox" name="TermsProtectionRegistry">
-            <label class="custom-control-label" for="TermsProtectionRegistry"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
+            <input id="protection" class="custom-control-input" type="checkbox" name="protection" value="1">
+            <label class="custom-control-label" for="protection"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
             <div class="help-block"></div>
           </div>
           <div class="form-group custom-control custom-switch col-12 col-lg-8 pt-1 mb-0">
-            <input id="TermsContractRegistry" class="custom-control-input" type="checkbox" name="TermsContractRegistry">
-            <label class="custom-control-label" for="TermsContractRegistry"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
+            <input id="contract" class="custom-control-input" type="checkbox" name="contract" value="1">
+            <label class="custom-control-label" for="contract"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
             <div class="help-block"></div>
           </div>
         </div>

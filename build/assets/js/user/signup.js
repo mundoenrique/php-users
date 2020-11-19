@@ -1,7 +1,29 @@
 'use strict'
+var longProfile;
+var CurrentVerifierCode;
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
+	longProfile = $('#longProfile').val();
+	CurrentVerifierCode = $('#CurrentVerifierCode').val();
+
+	if (longProfile == 'S') {
+		getProfessions();
+		getStates();
+
+		$('#state').on('change', function () {
+			$('#city').children().remove();
+			$('#city').prepend('<option value="" selected>Selecciona</option>');
+			$('#district').children().remove();
+			$('#district').prop('disabled', true).prepend('<option value="" selected>Selecciona</option>');
+
+			getCities(this.value);
+		});
+
+		$('#city').on('change', function () {
+			getdistrict(this.value)
+		});
+	}
 
 	$('#nickName').on('blur', function() {
 		$(this).addClass('available');
@@ -18,12 +40,12 @@ $(function () {
 		} else {
 			$(this).focus();
 		}
-	})
+	});
 
 	$('#newPass').on('keyup focus', function () {
 		var pswd = $(this).val();
 		passStrength(pswd);
-	})
+	});
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
@@ -36,10 +58,15 @@ $(function () {
 				.focus()
 				.blur();
 		}
-	})
+	});
 
 	$('#signUpBtn').on('click', function(e) {
 		e.preventDefault()
+
+		if ($('#noPublicOfficeOld').is(':checked')) {
+			$('#publicOffice, #publicInst').val('');
+		}
+
 		form = $('#signUpForm');
 		validateForms(form);
 
@@ -51,6 +78,11 @@ $(function () {
 			data.gender = $('input[name=gender]:checked').val();
 			data.newPass = cryptoPass(data.newPass);
 			data.confirmPass = cryptoPass(data.confirmPass);
+
+			if (longProfile == 'S') {
+				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+			}
 
 			if (lang.CONF_LOAD_DOCS == 'ON') {
 				var inputFile = $('input[type="file"]');
@@ -73,8 +105,8 @@ $(function () {
 		} else {
 			scrollTopPos($('#signUpForm').offset().top);
 		}
-	})
-})
+	});
+});
 
 function getResponseServ(currentaction) {
 	who = 'User';
@@ -99,8 +131,8 @@ function getResponseServ(currentaction) {
 		}
 
 		if (currentaction == 'SignUpData') {
-			$('#signUpBtn').html(btnText)
-			insertFormInput(false)
+			$('#signUpBtn').html(btnText);
+			insertFormInput(false);
 		}
-	})
+	});
 }

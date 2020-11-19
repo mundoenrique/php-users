@@ -87,7 +87,7 @@ class Verify_Access {
 
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
-		$this->responseDefect->icon = lang('GEN_ICON_DANGER');
+		$this->responseDefect->icon = lang('CONF_ICON_DANGER');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
 		$this->responseDefect->data = base_url('inicio');
@@ -134,11 +134,13 @@ class Verify_Access {
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
 				case 'professionsList':
 				case 'statesList':
 				case 'cityList':
 				case 'regions':
-					$auth = $this->CI->session->has_userdata('logged');
+					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
 				break;
 				case 'getBalance':
 				case 'cardDetail':

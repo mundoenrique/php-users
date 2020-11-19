@@ -98,8 +98,10 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"third_party/jquery.mask-1.14.16",
 			"user/validPass",
 			"user/signup",
+			"user/getRegions",
 			"user/manageImageTerm"
 		);
 
@@ -111,10 +113,6 @@ class Novo_User extends NOVO_Controller {
 		$dataUser = $dataUser->dataUser;
 
 		foreach ($dataUser->signUpData AS $index => $render) {
-			$this->render->$index = $render;
-		}
-
-		foreach ($dataUser->affiliation AS $index => $render) {
 			$this->render->$index = $render;
 		}
 
@@ -215,7 +213,9 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"third_party/jquery.mask-1.14.16",
 			"user/profileUser",
+			"user/getRegions",
 			"user/manageImageTerm"
 		);
 
@@ -229,6 +229,10 @@ class Novo_User extends NOVO_Controller {
 
 		foreach($dataUser->data->phonesList AS $index => $render) {
 			$this->render->$index = $render;
+		}
+
+		if ($this->session->flashdata('cardNumber') != NULL) {
+			$this->session->set_flashdata('cardNumber', $this->session->flashdata('cardNumber'));
 		}
 
 		$this->render->previewINE_A = FALSE;
