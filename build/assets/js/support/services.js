@@ -62,8 +62,8 @@ $(function () {
 		var event = e.currentTarget;
 		var expireDate = $(event).find('input[type=hidden][name="expireDate"]').val();
 		var services = JSON.parse($(event).find('input[type=hidden][name="services"]').val());
-		var statusText = status == '' ? 'Bloquear' : 'Desbloquear';
 		var statusCard = $(event).find('input[type=hidden][name="status"]').val();
+		var statusText = statusCard == '' ? 'Bloquear' : 'Desbloquear';
 
 		if (statusCard != '' && statusCard != 'PB') {
 			return true;
@@ -126,7 +126,7 @@ $(function () {
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.GEN_ICON_DANGER, modalBtn);
+			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.CONF_ICON_DANGER, modalBtn);
 		}
 	});
 
