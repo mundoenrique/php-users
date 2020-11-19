@@ -287,11 +287,16 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.matchVerifierCode = function (value, element, param) {
-		return value == CurrentVerifierCode;
+		var valid = true;
+		if (CurrentVerifierCode != '') {
+			valid = value == CurrentVerifierCode;
+		}
+
+		return valid
 	}
 
 	$.validator.addMethod('filesize', function (value, element, param) {
-		return element.files[0].size <= 62914560 && element.files[0].size > 10240;
+		return element.files[0].size <= 6291456 && element.files[0].size > 10240;
 	}
 	)
 
