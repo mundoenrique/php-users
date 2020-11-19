@@ -6,6 +6,7 @@
 </div>
 <form id="profileUserForm" method="post" class="hide-out hide bg-color p-2">
   <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
+  <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
   <div class="row">
 
     <div class="col-12 col-lg-6 pb-3">
@@ -61,7 +62,7 @@
           </div>
           <div class="form-group col-3 col-lg-6">
             <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" avlue="<?= $birthPlace; ?>">
+            <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" value="<?= $birthPlace; ?>">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-3 col-lg-6">
@@ -85,13 +86,13 @@
           <div class="form-group col-3 col-lg-6">
             <label class="block"><?= lang('USER_GENDER') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off"
-                <?= $gender == 'M' ? 'checked' : ''; ?> <?= $disabled; ?>>
+              <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" <?= $gender == 'M' ? 'checked' : ''; ?>
+                <?= $disabled; ?>>
               <label class="custom-control-label <?= $updateUser; ?>" for="genderMale"><?= lang('USER_GENDER_MALE'); ?></label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" autocomplete="off"
-                <?= $gender == 'F' ? 'checked' : ''; ?> <?= $disabled; ?>>
+              <input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" <?= $gender == 'F' ? 'checked' : ''; ?>
+                <?= $disabled; ?>>
               <label class="custom-control-label <?= $updateUser; ?>" for="genderFemale"><?= lang('USER_GENDER_FEMALE'); ?></label>
             </div>
             <div class="help-block"></div>
@@ -227,7 +228,7 @@
             <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
             <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOY_SITUATION_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>" <?= $employed === $key ? 'selected' : ''; ?> <?= $key === '' ? 'selected disabled' : '';  ?>>
+              <option value="<?= $key; ?>" <?= $employed == $key ? 'selected' : ''; ?> <?= $key === '' ? 'selected disabled' : '';  ?>>
                 <?= $value; ?>
               </option>
               <?php endforeach; ?>
@@ -241,7 +242,7 @@
               <option selected disabled>Selecciona</option>
               <?php endif; ?>
               <?php for ($index = 0; $index <= 50; $index++): ?>
-              <option value="<?= $index; ?>" <?= $index === $laborOld ? 'selected' : ''; ?>><?= $index; ?></option>
+              <option value="<?= $index; ?>" <?= $index == $laborOld ? 'selected' : ''; ?>><?= $index; ?></option>
               <?php endfor; ?>
             </select>
             <div class="help-block"></div>
@@ -271,34 +272,36 @@
             <label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
               <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes"
-                <?= $publicOfficeOld == '1' ? 'checked' : '' ?> autocomplete="off">
+                <?= $publicOfficeOld == '1' ? 'checked' : '' ?>>
               <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
               <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no"
-                <?= $publicOfficeOld == '0' ? 'checked' : '' ?> autocomplete="off">
+                <?= $publicOfficeOld == '0' ? 'checked' : '' ?>>
               <label class="custom-control-label" for="noPublicOfficeOld">No</label>
             </div>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
             <label for="publicOffice"><?= lang('USER_PUBLIC_POSITION') ?></label>
-            <input id="publicOffice" class="form-control" type="text" name="publicOffice" autocomplete="off">
+            <input id="publicOffice" class="form-control" type="text" name="publicOffice" value="<?= $publicOffice; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
             <label for="publicInst"><?= lang('USER_INSTITUTION') ?></label>
-            <input id="publicInst" class="form-control" type="text" name="publicInst" autocomplete="off">
+            <input id="publicInst" class="form-control" type="text" name="publicInst" value="<?= $publicInst; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 pt-2 center">
             <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes" autocomplete="off">
+              <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes"
+                <?= $taxesObligated == '1' ? 'checked' : '' ?>>
               <label class="custom-control-label" for="yesTaxesObligated">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no" autocomplete="off">
+              <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no"
+                <?= $taxesObligated == '0' ? 'checked' : '' ?>>
               <label class="custom-control-label" for="noTaxesObligated">No</label>
             </div>
             <div class="help-block"></div>
