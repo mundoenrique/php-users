@@ -991,6 +991,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->className = 'com.novo.objects.MO.DatosPerfilMO';
+		$this->dataRequest->country = $this->session->countrySess;
 		$this->dataRequest->registro = [
 			'user' => [
 				'userName' => $this->userName,
@@ -1171,6 +1172,9 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 2;
 			break;
 		}
+
+		$this->dataAccessLog = new stdClass();
+		$this->dataRequest = new stdClass();
 
 		return $this->responseToTheView('callWs_ValidateEmail');
 	}
