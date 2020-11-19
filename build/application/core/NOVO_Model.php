@@ -143,9 +143,9 @@ class NOVO_Model extends CI_Model {
 				continue;
 			}
 
-			if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
+			/* if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
 				continue;
-			}
+			} */
 
 			$responsetoView->$pos = $response;
 		}
