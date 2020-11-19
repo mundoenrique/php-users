@@ -1,5 +1,6 @@
 'use strict'
 var longProfile;
+var CurrentVerifierCode = '';
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
