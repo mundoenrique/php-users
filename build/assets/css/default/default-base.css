@@ -1005,7 +1005,8 @@ label {
 	color: var(--danger);
 }
 
-.form-control.has-error {
+.form-control.has-error,
+.has-error-file {
 	border-color: var(--danger) !important;
 }
 

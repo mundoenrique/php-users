@@ -103,6 +103,12 @@ $(function () {
 			where = 'SignUpData';
 			getResponseServ(where);
 		} else {
+			$('.drop-zone-input').each(function (index, element) {
+				if ($(element).hasClass('has-error')) {
+					$(element).parent('.drop-zone').addClass('has-error-file');
+				}
+			});
+
 			scrollTopPos($('#signUpForm').offset().top);
 		}
 	});

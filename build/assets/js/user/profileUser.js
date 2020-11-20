@@ -78,6 +78,12 @@ $(function () {
 			insertFormInput(true);
 			updateProfile();
 		} else {
+			$('.drop-zone-input').each(function (index, element) {
+				if ($(element).hasClass('has-error')) {
+					$(element).parent('.drop-zone').addClass('has-error-file');
+				}
+			});
+
 			scrollTopPos($('#profileUserForm').offset().top);
 		}
 	});
