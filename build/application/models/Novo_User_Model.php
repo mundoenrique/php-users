@@ -407,6 +407,7 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
 				$userData->generalAccount =  '';
+				$userData->CurrentVerifierCode = '';
 
 				if ($userData->longProfile == 'S') {
 					$userData->idnumber = $response->afiliacion->idpersona ?? $userData->idnumber;
