@@ -1,11 +1,14 @@
 'use strict'
 var longProfile;
 var CurrentVerifierCode = '';
+var formFile;
+
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide();
 	longProfile = $('#longProfile').val();
+	formFile = $('#profileUserForm');
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),

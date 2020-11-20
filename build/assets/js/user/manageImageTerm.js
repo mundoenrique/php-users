@@ -79,7 +79,6 @@ $(function () {
 		$(inputElement).on("change", function(e, validIgnore){
 			if (inputElement.files.length) {
 				updateThumbnail(dropZoneElement, inputElement.files[0], inputElement);
-				var formFile = $('#profileUserForm');
 				validateForms(formFile);
 
 				if ($(inputElement).valid()) {

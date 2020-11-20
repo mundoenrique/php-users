@@ -1,11 +1,14 @@
 'use strict'
 var longProfile;
 var CurrentVerifierCode;
+var formFile;
+
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	longProfile = $('#longProfile').val();
 	CurrentVerifierCode = $('#CurrentVerifierCode').val();
+	formFile = $('#signUpForm');
 
 	if (longProfile == 'S') {
 		getProfessions();
