@@ -295,10 +295,9 @@ function validateForms(form) {
 		return valid
 	}
 
-	$.validator.addMethod('filesize', function (value, element, param) {
+	$.validator.methods.filesize = function (value, element, param) {
 		return element.files[0].size <= 6291456 && element.files[0].size > 10240;
 	}
-	)
 
 	form.validate().resetForm();
 }
