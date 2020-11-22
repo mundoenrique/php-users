@@ -79,6 +79,19 @@ $(function () {
 		$(inputElement).on("change", function(e, validIgnore){
 			if (inputElement.files.length) {
 				updateThumbnail(dropZoneElement, inputElement.files[0], inputElement);
+				validateForms(formFile);
+
+				if ($(inputElement).valid()) {
+					$('.drop-zone-input').each(function (index, element) {
+						$(element).parent('.drop-zone').removeClass('has-error-file');
+					});
+				} else {
+					$('.drop-zone-input').each(function (index, element) {
+						if ($(element).hasClass('has-error')) {
+							$(element).parent('.drop-zone').addClass('has-error-file');
+						}
+					});
+				}
 			}
 		});
 

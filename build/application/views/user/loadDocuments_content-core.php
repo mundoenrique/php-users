@@ -2,7 +2,7 @@
 <h4 class="mt-1 pb-2 h4"><?= lang('USER_LOAD_DOCS'); ?></h4>
 <div class="row justify-center">
   <div class="col-12 col-lg-7 my-auto">
-    <div class="row mr-2">
+    <div class="row mr-2 mb-2">
       <?php if(lang('CONF_LOAD_SELFIE') == 'ON'):?>
       <div class="col-4 flex items-center justify-center">
         <div class="form-group px-1 mb-2">
