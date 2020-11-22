@@ -49,7 +49,9 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (isset($dataRequest->OTPcode) && $authToken == '') {
+		if (lang('CONFIG_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = 9997;
+		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
 			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
@@ -203,6 +205,15 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', $response->bean->codigoOtp->authToken);
 			break;
+			case 9997:
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = 'estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
+			break;
 			case 9998:
 				$this->response->code = 4;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
@@ -217,6 +228,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
 				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 		}
 
