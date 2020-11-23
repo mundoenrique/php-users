@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONFIG_MAINTENANCE'] = 'OFF';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
