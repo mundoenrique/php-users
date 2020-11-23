@@ -7,7 +7,7 @@
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-6 py-4">
-              <div class="product-presentation relative">
+              <div class="product-presentation relative w-100">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
                 <?php if ($cardsTotal > 1): ?>
                 <div id="donor" class="product-search btn">
@@ -24,14 +24,14 @@
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2">Selecciona una cuenta</p>
+              <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
             <?php else: ?>
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
               <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
-                <i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+                <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
             <?php endif; ?>
@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="flex optional widget-statistics mt-4">
-      <h3 class="h4 regular py-3 pl-3">Estadísticas</h3>
+      <h3 class="h4 regular py-3 pl-3"><?= lang('REPORTS_STATISTICS'); ?></h3>
       <div class="flex flex-column items-center">
         <div class="flex flex-wrap items-center h-100 justify-center">
           <div id="stats" class="group-aside-view w-100 h-100">
@@ -52,12 +52,12 @@
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
-    <h2 class="h4 regular tertiary">Gastos por categoría</h2>
+    <h2 class="h4 regular tertiary"><?= lang('REPORTS_EXPENSES_CATEGORY'); ?></h2>
     <nav id="filtersStack" class="navbar px-0">
 
       <form id="annualMovesForm" method="post" class="col-12">
         <div class="form-group">
-          <label class="block">Anual</label>
+          <label class="block"><?= lang('REPORTS_YEARLY'); ?></label>
           <?php for ($years; $years <= $maxYear; $years++): ?>
           <div class="custom-control custom-radio custom-control-inline">
             <input id="<?= $years; ?>" class="custom-control-input" type="radio" name="year" value="<?= $years; ?>" autocomplete="off"
@@ -70,14 +70,14 @@
       </form>
 
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
-        <label class="block">Mensual</label>
+        <label class="block"><?= lang('REPORTS_MONTHLY'); ?></label>
         <div class="row pl-2">
-          <label class="mt-1 regular" for="initDate">Desde</label>
+          <label class="mt-1 regular" for="initDate"><?= lang('REPORTS_FROM'); ?></label>
           <div class="form-group col-4 px-1">
             <input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
             <div class="help-block"></div>
           </div>
-          <label class="mt-1 regular" for="finalDate">Hasta</label>
+          <label class="mt-1 regular" for="finalDate"><?= lang('REPORTS_TO'); ?></label>
           <div class="form-group col-4 px-1">
             <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAA" autocomplete="off" disabled>
             <div class="help-block "></div>
@@ -138,8 +138,8 @@
       </table>
       <div id="no-result" class="hide">
         <div class="flex flex-column items-center justify-center pt-5">
-          <h2 class="h3 regular mb-1">No se encontraron registros.</h2>
-          <span class="h6 regular mb-0">Seleccione un rango de fecha a consultar.</span>
+          <h2 class="h3 regular mb-1"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h2>
+          <span class="h6 regular mb-0"><?= lang('REPORTS_DATE_RANGE'); ?></span>
         </div>
       </div>
     </div>
