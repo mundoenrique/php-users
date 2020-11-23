@@ -331,6 +331,10 @@ textarea.form-control {
 	height: auto;
 }
 
+.input-height{
+ height: 85px;
+}
+
 .form-group {
 	margin-bottom: .5rem;
 }
@@ -1002,7 +1006,8 @@ label {
 	color: var(--danger);
 }
 
-.form-control.has-error {
+.form-control.has-error,
+.has-error-file {
 	border-color: var(--danger) !important;
 }
 

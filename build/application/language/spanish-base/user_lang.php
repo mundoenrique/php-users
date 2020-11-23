@@ -18,7 +18,7 @@ $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguri
 $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_ACCEPT_TERMS'] = 'Acepto las condiciones de uso de este sistema.';
 $lang['USER_ACCEPT_PROTECTION'] = 'Aceptar protección de datos personales.';
-$lang['USER_ACCEPT_CONTRACT'] = 'Acepto el contrato de cuenta dinero electrónico plata beneficios.';
+$lang['USER_ACCEPT_CONTRACT'] = 'Acepto el contrato de cuenta dinero electrónico.';
 $lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraseña en "<strong>%s</strong>", por favor completa los siguientes datos.';
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
@@ -84,7 +84,7 @@ $lang["USER_TERMS_CONTENT"] = '
 ';
 $lang['USER_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
 $lang['USER_MSG_ACCESS_ACCOUNT'] = '<p>Si aún no posees usuario para acceder al sistema <strong>%s</strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>';
-$lang["USER_CONT_PROTECTION_TITLE"]='Contrato';
+$lang["USER_CONT_PROTECTION_TITLE"]='Contrato de protección';
 $lang["USER_CONT_PROTECTION_SUBTITLE"]='Protección de datos personales';
 $lang["USER_CONT_PROTECTION_CONTENT"] = '
 <div class="justify pr-3">
@@ -108,7 +108,7 @@ $lang["USER_CONT_PROTECTION_CONTENT"] = '
 	usted deberá presentar su solicitud en la oficina de TEBCA o a través del Centro de Contacto.</p>
 </div>
 ';
-$lang["USER_CONT_BENEFITS_TITLE"]='Contrato';
+$lang["USER_CONT_BENEFITS_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_BENEFITS_SUBTITLE"]='Contrato de cuenta dinero electrónico Plata Beneficios';
 $lang["USER_CONT_BENEFITS_CONTENT"] = '
 <div class="justify pr-3">
@@ -276,7 +276,7 @@ $lang["USER_CONT_BENEFITS_CONTENT"] = '
 	</ol>
 </div>
 ';
-$lang["USER_CONT_GENERAL_TITLE"]='Contrato';
+$lang["USER_CONT_GENERAL_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_GENERAL_SUBTITLE"]='Contrato de cuenta dinero electrónico PN cuenta general';
 $lang["USER_CONT_GENERAL_CONTENT"] = '
 <div class="justify pr-3">
@@ -513,8 +513,8 @@ $lang['USER_WORK_CENTER'] = 'Centro laboral';
 $lang['USER_EMPLOYMENT_STATUS'] = 'Situación laboral';
 $lang['USER_EMPLOYMENT_STATUS_LIST'] = [
 	'' => 'Selecciona',
-	'1' => 'Dependiente',
-	'0' => 'Independiente'
+	'0' => 'Independiente',
+	'1' => 'Dependiente'
 ];;
 $lang['USER_SENIORITY'] = 'Antigüedad laboral';
 $lang['USER_OCCUPATION'] = 'Ocupación, oficio o profesión';

@@ -49,7 +49,9 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (isset($dataRequest->OTPcode) && $authToken == '') {
+		if (lang('CONFIG_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = 9997;
+		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
 			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
@@ -203,6 +205,15 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', $response->bean->codigoOtp->authToken);
 			break;
+			case 9997:
+				$this->response->code = 4;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->msg = 'estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
+			break;
 			case 9998:
 				$this->response->code = 4;
 				$this->response->title = lang('GEN_SYSTEM_NAME');
@@ -217,6 +228,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_DANGER');
 				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
 				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 		}
 
@@ -406,24 +418,34 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->landLine = $response->user->telefono ?? '';
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
+				$userData->generalAccount =  '';
+				$userData->CurrentVerifierCode = '';
+
+				if ($userData->longProfile == 'S') {
+					$userData->idnumber = $response->afiliacion->idpersona ?? $userData->idnumber;
+					$userData->fiscalId = $response->afiliacion->ruc_cto_laboral ?? '';
+					$userData->generalAccount = $response->afiliacion->acepta_contrato ?? $userData->generalAccount;
+					$userData->CurrentVerifierCode = $response->afiliacion->dig_verificador_aux ?? '';
+				}
 
 				$this->response->data->signUpData = $userData;
-				$this->response->data->affiliation = $response->afiliacion;
 				$this->response->modal = TRUE;
 
 				$userSess = [
 					'userIdentity' => TRUE,
 					'encryptKey' => $response->keyUpdate,
 					'sessionId' => $response->logAccesoObject->sessionId,
-					'userId' => $dataRequest->docmentId,
+					'userId' => $response->user->id_ext_per,
 					'userName' => $response->logAccesoObject->userName,
-					'docmentId' => $dataRequest->docmentId,
+					'docmentId' => $response->user->id_ext_per,
 					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
 					'countryUri' => $this->config->item('country-uri'),
-					'clientAgent' => $this->agent->agent_string()
+					'clientAgent' => $this->agent->agent_string(),
+					'longProfile' => $userData->longProfile,
+					'cardNumber' => $dataRequest->numberCard ?? ''
 				];
 				$this->session->set_userdata($userSess);
 			break;
@@ -431,13 +453,13 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 2;
 				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->msg = novoLang(lang('GEN_OTP_MSG'),$maskMail);
+				$this->response->msg = novoLang(lang('GEN_OTP_MSG'), $maskMail);
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['link']  = 'identificar-usuario';
 				$this->response->modalBtn['btn2']['action'] = 'redirect';
 
-				$this->session->set_flashdata('authToken',$response->bean->otp->authToken);
+				$this->session->set_flashdata('authToken', $response->bean->otp->authToken);
 			break;
 			case -21:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
@@ -540,9 +562,9 @@ class Novo_User_Model extends NOVO_Model {
 			'img_valida' => 'FALSE',
 			'imagenes' => [
 				'id_ext_per' => $dataRequest->idNumber,
-				'tipoDocumento' => $dataRequest->countryDocument,
-				'rutaAnverso' => $dataRequest->INE_A,
-				'rutaReverso' => $dataRequest->INE_R,
+				'tipoDocumento' => $dataRequest->countryDocument ?? '',
+				'rutaAnverso' => $dataRequest->INE_A ?? '',
+				'rutaReverso' => $dataRequest->INE_R ?? '',
 				'operacion' => 'insertar'
 			]
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
@@ -563,6 +585,59 @@ class Novo_User_Model extends NOVO_Model {
 			]
 		];
 
+		if ($this->session->longProfile == 'S') {
+			$this->dataRequest->afiliacion = [
+				'aplicaPerfil' => $this->session->longProfile,
+				'notarjeta' => $this->session->cardNumber,
+				'idpersona' => $this->session->userId,
+				'nombre1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
+				'nombre2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->middleName)))),
+				'apellido1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->lastName)))),
+				'apellido2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->surName)))),
+				'fechanac' => $dataRequest->birthDate,
+				'sexo' => $dataRequest->gender,
+				'telefono1' => $dataRequest->landLine,
+				'telefono2' => $dataRequest->mobilePhone,
+				'telefono3' => $dataRequest->otherPhoneNum,
+				'correo' => $dataRequest->email,
+				'tipo_direccion' => $dataRequest->addressType ?? '',
+				'departamento' => $dataRequest->state ?? '',
+				'provincia' => $dataRequest->city ?? '',
+				'distrito' => $dataRequest->district ?? '',
+				'cod_postal' => $dataRequest->postalCode ?? '',
+				'direccion' => $dataRequest->address ?? '',
+				'edocivil' => $dataRequest->civilStatus ?? '',
+				'labora' => $dataRequest->employed ?? '',
+				'centrolab' => $dataRequest->workplace ?? '',
+				'antiguedad_laboral' => $dataRequest->laborOld ?? '',
+				'profesion' => $dataRequest->profession ?? '',
+				'cargo' => $dataRequest->position ?? '',
+				'ingreso_promedio_mensual' => $dataRequest->averageIncome ? (float)$dataRequest->averageIncome : '',
+				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
+				'cargo_publico' => $dataRequest->publicOffice ?? '',
+				'institucion_publica' => $dataRequest->publicInst ?? '',
+				'uif' => $dataRequest->taxesObligated ?? '',
+				'lugar_nacimiento' => $dataRequest->birthPlace ?? '',
+				'nacionalidad' => $dataRequest->nationality ?? '',
+				'dig_verificador' => $dataRequest->verifierCode ?? '',
+				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
+				'acepta_contrato' => $dataRequest->contract ? (int)$dataRequest->contract : '',
+				'acepta_proteccion' => $dataRequest->protection ? (int)$dataRequest->protection :  '',
+				'codarea1' => '',
+				'fecha_solicitud' => '',
+				'fecha_reg' => '',
+				'estatus' => '',
+				'notifica' => '',
+				'fecha_proc' => '',
+				'fecha_afil' => '',
+				'tipo_id' => '',
+				'punto_venta' => '',
+				'cod_vendedor' => '',
+				'dni_vendedor' => '',
+				'cod_ubigeo' => ''
+			];
+		}
+
 		$response = $this->sendToService('CallWs_Signup');
 
 		if ($this->isResponseRc !== 0) {
@@ -580,19 +655,87 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->msg = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña';
+				$this->response->msg = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->session->sess_destroy();
+			break;
+			case -206:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->session->sess_destroy();
+			break;
+			case -271:
+			case -335:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->session->sess_destroy();
+			break;
+			case -317:
+			case -314:
+			case -313:
+			case -311:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El registro fue realizado; aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>.<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 				$this->session->sess_destroy();
 			break;
 			case -181:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro';
+				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro.';
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -284:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro';
+				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -397:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'Verifica tus datos e intenta de nuevo. <br>Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -102:
+			case -104:
+			case -118:
+			case 5002:
+			case 5003:
+			case 5004:
+			case 5008:
+			case 5009:
+			case 5010:
+			case 5011:
+			case 5020:
+			case 5021:
+			case 5030:
+			case 5100:
+			case 5104:
+			case 6000:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'No fue posible validar tus datos, por favor verifícalos e intenta nuevamente.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case 5101:
+			case 5102:
+			case 5103:
+			case 5104:
+			case 5105:
+			case 5111:
+			case 5112:
+			case 5113:
+			case 5032:
+			case 5033:
+			case 5034:
+			case 5036:
+			case 5037:
+			case 5114:
+				$this->response->title = lang('GEN_MENU_SIGNUP');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
@@ -624,6 +767,25 @@ class Novo_User_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$modal = FALSE;
+
+				if ($this->session->terms == '0') {
+					$this->response->code = 4;
+					$this->response->icon = lang('CONF_ICON_INFO');
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
+					$this->response->modalBtn['action'] = 'destroy';
+					$modal = TRUE;
+				}
+
+				if ($this->session->longProfile == 'S' && $this->session->affiliate == '0') {
+					$this->response->code = 4;
+					$this->response->icon = lang('CONF_ICON_INFO');
+					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+					$modal = TRUE;
+				}
 			break;
 		}
 
@@ -640,8 +802,8 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->gender = $response->registro->user->sexo ?? '';
 		$profileData->idNumber = $response->registro->user->id_ext_per ?? '';
 		$profileData->birthday = $response->registro->user->fechaNacimiento ?? '';
-		$profileData->professionType = $response->registro->user->tipo_profesion ?? '1';
-		$profileData->profession = $response->registro->user->profesion ?? 'Abogado';
+		$profileData->professionType = $response->registro->user->tipo_profesion ?? '';
+		$profileData->profession = $response->registro->user->profesion ?? '';
 		$profileData->idTypeCode = $response->registro->user->tipo_id_ext_per ?? '';
 		$profileData->idTypeText = $response->registro->user->descripcion_tipo_id_ext_per ?? '';
 		$profileData->abbrTypeDocument = $response->registro->user->abrev_tipo_id_ext_per ?? '';
@@ -690,24 +852,38 @@ class Novo_User_Model extends NOVO_Model {
 			}
 		}
 
+		$profileData->generalAccount =  '';
+
 		if ($profileData->longProfile == 'S') {
-			$profileData->firstName = isset($response->registro->afiliacion->nombre1) &&  $response->registro->afiliacion->nombre1 != ''
+			$cardNumber = $response->registro->afiliacion->cardNumber ?? '';
+			$this->session->set_flashdata('cardNumber', $cardNumber);
+
+			$profileData->firstName = isset($response->registro->afiliacion->nombre1) && $response->registro->afiliacion->nombre1 != ''
 				? $response->registro->afiliacion->nombre1 : $profileData->firstName;
 
-			$profileData->middleName = isset($response->registro->afiliacion->nombre2) &&  $response->registro->afiliacion->nombre2 != ''
+			$profileData->middleName = isset($response->registro->afiliacion->nombre2) && $response->registro->afiliacion->nombre2 != ''
 				? $response->registro->afiliacion->nombre2 : $profileData->middleName;
 
-			$profileData->lastName = isset($response->registro->afiliacion->apellido1) &&  $response->registro->afiliacion->apellido1 != ''
+			$profileData->lastName = isset($response->registro->afiliacion->apellido1) && $response->registro->afiliacion->apellido1 != ''
 				? $response->registro->afiliacion->apellido1 : $profileData->lastName;
 
-			$profileData->surName = isset($response->registro->afiliacion->apellido2) &&  $response->registro->afiliacion->apellido2 != ''
+			$profileData->surName = isset($response->registro->afiliacion->apellido2) && $response->registro->afiliacion->apellido2 != ''
 				? $response->registro->afiliacion->apellido2 : $profileData->surName;
 
-			$profileData->gender = isset($response->registro->afiliacion->sexo) &&  $response->registro->afiliacion->sexo != ''
+			$profileData->gender = isset($response->registro->afiliacion->sexo) && $response->registro->afiliacion->sexo != ''
 				? $response->registro->afiliacion->sexo : $profileData->gender;
 
-			$profileData->professionType = isset($response->registro->afiliacion->profesion) &&  $response->registro->afiliacion->profesion != ''
-				? $response->registro->afiliacion->profesion : $profileData->professionType;
+			$phonesList['landLine'] = isset($response->registro->afiliacion->telefono1) &&  $response->registro->afiliacion->telefono1 != ''
+				? $response->registro->afiliacion->telefono1 : $phonesList['landLine'];
+
+			$phonesList['mobilePhone'] = isset($response->registro->afiliacion->telefono2) &&  $response->registro->afiliacion->telefono2 != ''
+				? $response->registro->afiliacion->telefono2 : $phonesList['mobilePhone'];
+
+			$phonesList['otherPhoneNum'] = isset($response->registro->afiliacion->telefono3) &&  $response->registro->afiliacion->telefono3 != ''
+				? $response->registro->afiliacion->telefono3 : $phonesList['otherPhoneNum'];
+
+			$profileData->email = isset($response->registro->afiliacion->correo) &&  $response->registro->afiliacion->correo != ''
+				? $response->registro->afiliacion->correo : $profileData->email;
 
 			$profileData->addressType = isset($response->registro->afiliacion->tipo_direccion) &&  $response->registro->afiliacion->tipo_direccion != ''
 				? $response->registro->afiliacion->tipo_direccion : $profileData->addressType;
@@ -722,39 +898,45 @@ class Novo_User_Model extends NOVO_Model {
 
 			$profileData->district = 'Selecciona';
 
-			$profileData->email = isset($response->registro->afiliacion->correo) &&  $response->registro->afiliacion->correo != ''
-				? $response->registro->afiliacion->correo : $profileData->email;
+			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
+				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;
 
 			$profileData->address = isset($response->registro->afiliacion->direccion) &&  $response->registro->afiliacion->direccion != ''
 				? $response->registro->afiliacion->direccion : $profileData->address;
 
-			$phonesList['landLine'] = isset($response->registro->afiliacion->telefono1) &&  $response->registro->afiliacion->telefono1 != ''
-				? $response->registro->afiliacion->telefono1 : $phonesList['landLine'];
-
-			$phonesList['mobilePhone'] = isset($response->registro->afiliacion->telefono2) &&  $response->registro->afiliacion->telefono2 != ''
-				? $response->registro->afiliacion->telefono2 : $phonesList['mobilePhone'];
-
-			$phonesList['otherPhoneNum'] = isset($response->registro->afiliacion->telefono3) &&  $response->registro->afiliacion->telefono3 != ''
-				? $response->registro->afiliacion->telefono3 : $phonesList['otherPhoneNum'];
-
-			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
-				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;
-
-			$profileData->nationality = isset($response->registro->afiliacion->nacionalidad) &&  $response->registro->afiliacion->nacionalidad != ''
-				? $response->registro->afiliacion->nacionalidad : $profileData->nationality;
-
-			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
 			$profileData->civilStatus = $response->registro->afiliacion->edocivil ?? '';
-			$profileData->verifyDigit = $response->registro->afiliacion->dig_verificador ?? '';
-			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
 			$profileData->workplace = $response->registro->afiliacion->centrolab ?? '';
 			$profileData->employed = $response->registro->afiliacion->labora ?? '';
 			$profileData->laborOld = $response->registro->afiliacion->antiguedad_laboral ?? '';
+			$profileData->professionType = $response->registro->afiliacion->profesion ?? '';
+			$profileData->position = $response->registro->afiliacion->cargo ?? '';
+
+			$profileData->averageIncome = isset($response->registro->afiliacion->ingreso_promedio_mensual) &&$response->registro->afiliacion->ingreso_promedio_mensual != ''
+				? currencyFormat($response->registro->afiliacion->ingreso_promedio_mensual) : '';
+
+			$profileData->publicOfficeOld = $response->registro->afiliacion->cargo_publico_last2 ?? '';
+			$profileData->publicOffice = $response->registro->afiliacion->cargo_publico ?? '';
+			$profileData->publicInst = $response->registro->afiliacion->institucion_publica ?? '';
+			$profileData->taxesObligated = '';
+
+			if (isset($response->registro->afiliacion->uif)) {
+				$profileData->taxesObligated = $response->registro->afiliacion->uif == '' ? '0' : $response->registro->afiliacion->uif;
+			}
+
+			$profileData->birthPlace = $response->registro->afiliacion->lugar_nacimiento ?? '';
+			$profileData->nationality = $response->registro->afiliacion->nacionalidad ?? '';
+
+			$profileData->verifierCode = isset($response->registro->afiliacion->dig_verificador) && !$modal ?
+				$response->registro->afiliacion->dig_verificador : '';
+
+			$profileData->fiscalId = $response->registro->afiliacion->ruc_cto_laboral ?? '';
+			$profileData->contract = $response->registro->afiliacion->acepta_contrato ?? '';
+			$profileData->generalAccount = $response->registro->afiliacion->acepta_contrato ?? $profileData->generalAccount;
+			$profileData->protection = $response->registro->afiliacion->acepta_proteccion ?? '';
 		}
 
 		$imagesDocument = [];
 		if (property_exists($profileData, "aplicaImgDoc") && strtoupper($profileData->aplicaImgDoc) == 'S') {
-
 			if (strtoupper($profileData->img_valida) == 'TRUE') {
 				$imagesDocumentLoaded = [
 					'INE_A' => ['nameFile' => $response->registro->user->imagenes->rutaAnverso ?? ''],
@@ -772,6 +954,7 @@ class Novo_User_Model extends NOVO_Model {
 
 						if (is_file($fullPathToImage)) {
 							$resultDecrypt = $this->tool_file->cryptographyFile($fullPathToImage, FALSE);
+
 							if ($resultDecrypt) {
 								$type = pathinfo($fullPathToImage, PATHINFO_EXTENSION);
 								$data = file_get_contents($fullPathToImage);
@@ -803,12 +986,25 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: UpdateProfile Method Initialized');
 
+		$mailAvailable = TRUE;
+
+		if ($dataRequest->email != $dataRequest->oldEmail) {
+			$this->callws_ValidateEmail_User($dataRequest);
+			$mailAvailable = FALSE;
+			if ($this->response->code == 2) {
+				$mailAvailable = TRUE;
+			} else {
+				$this->isResponseRc = -9997;
+			}
+		}
+
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Perfil';
 		$this->dataAccessLog->operation = 'Actualizar usuario';
 
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->className = 'com.novo.objects.MO.DatosPerfilMO';
+		$this->dataRequest->country = $this->session->countrySess;
 		$this->dataRequest->registro = [
 			'user' => [
 				'userName' => $this->userName,
@@ -828,12 +1024,12 @@ class Novo_User_Model extends NOVO_Model {
 				'tipo_id_ext_per' => $dataRequest->idType,
 				'descripcion_tipo_id_ext_per' => $dataRequest->idTypeText,
 				'aplicaPerfil' => $this->session->longProfile,
+				'aplicaImgDoc' => $dataRequest->aplicaImgDoc ?? '',
+				'img_valida' => $dataRequest->img_valida ?? '',
 				'tyc' => '1',
 				'rc' => '0',
 				'passwordOperaciones' => '',
-				'disponeClaveSMS' => '',
-				'aplicaImgDoc' => $dataRequest->aplicaImgDoc ?? '',
-				'img_valida' => $dataRequest->img_valida ?? ''
+				'disponeClaveSMS' => ''
 			],
 			'listaTelefonos' => [
 				[
@@ -855,20 +1051,20 @@ class Novo_User_Model extends NOVO_Model {
 			],
 			'afiliacion' => [
 				'aplicaPerfil' => $this->session->longProfile,
+				'notarjeta' => $this->session->flashdata('cardNumber'),
 				'idpersona' => $this->session->userId,
-				'nombre1' => $dataRequest->firstName,
-				'nombre2' => $dataRequest->middleName,
-				'apellido1' => $dataRequest->lastName,
-				'apellido2' => $dataRequest->surName,
+				'nombre1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
+				'nombre2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->middleName)))),
+				'apellido1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->lastName)))),
+				'apellido2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->surName)))),
 				'fechanac' => $dataRequest->birthDate,
 				'sexo' => $dataRequest->gender,
 				'telefono1' => $dataRequest->landLine,
 				'telefono2' => $dataRequest->mobilePhone,
 				'telefono3' => $dataRequest->otherPhoneNum,
 				'correo' => $dataRequest->email,
-				'notarjeta' => $dataRequest->cardNum ?? '',
 				'tipo_direccion' => $dataRequest->addressType ?? '',
-				'departamento' => $dataRequest->department ?? '',
+				'departamento' => $dataRequest->state ?? '',
 				'provincia' => $dataRequest->city ?? '',
 				'distrito' => $dataRequest->district ?? '',
 				'cod_postal' => $dataRequest->postalCode ?? '',
@@ -888,8 +1084,8 @@ class Novo_User_Model extends NOVO_Model {
 				'nacionalidad' => $dataRequest->nationality ?? '',
 				'dig_verificador' => $dataRequest->verifierCode ?? '',
 				'ruc_cto_laboral' => $dataRequest->fiscalId ?? '',
-				'acepta_contrato' => $dataRequest->contract ?? '',
-				'acepta_proteccion' => $dataRequest->protection ?? '',
+				'acepta_contrato' => '1',
+				'acepta_proteccion' => '1',
 				'codarea1' => '',
 				'fecha_solicitud' => '',
 				'fecha_reg' => '',
@@ -901,11 +1097,12 @@ class Novo_User_Model extends NOVO_Model {
 				'punto_venta' => '',
 				'cod_vendedor' => '',
 				'dni_vendedor' => '',
-				'cod_ubigeo' => '',
+				'cod_ubigeo' => ''
 			],
 			'registroValido' => FALSE,
 			'corporativa' => FALSE
 		];
+
 		if (property_exists($dataRequest, "aplicaImgDoc") && strtoupper($dataRequest->aplicaImgDoc) == 'S') {
 			if (strtoupper($dataRequest->img_valida) == 'TRUE') {
 				if ($dataRequest->INE_A !== '' || $dataRequest->INE_R !== '') {
@@ -930,12 +1127,18 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->isParticular = TRUE;
 		$this->dataRequest->rc = 0;
 
-		$response = $this->sendToService('CallWs_UpdateProfile');
+		if ($mailAvailable) {
+			$response = $this->sendToService('CallWs_UpdateProfile');
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
 				if ($this->session->terms == '0') {
 					$this->session->set_userdata('terms', '1');
+				}
+
+				if ($this->session->affiliate == '0') {
+					$this->session->set_userdata('affiliate', '1');
 				}
 
 				$this->response->title = lang('USER_PROFILE_TITLE');
@@ -951,6 +1154,42 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		return $this->responseToTheView('CallWs_UpdateProfile');
+	}
+	/**
+	 * @info Método para validar la existencia de un correo
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date November 19th, 2020
+	 */
+	public function callws_ValidateEmail_User($dataRequest)
+	{
+		log_message('INFO', 'NOVO User Model: ValidateEmail Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Usuario';
+		$this->dataAccessLog->function = 'Actualizar email';
+		$this->dataAccessLog->operation = 'Validar email';
+
+		$this->dataRequest->idOperation = 'verificarEmailCPO';
+		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
+		$this->dataRequest->email = $dataRequest->email;
+
+		$response = $this->sendToService('callWs_ValidateEmail');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('USER_PROFILE_TITLE');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro.';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -238:
+				$this->response->code = 2;
+			break;
+		}
+
+		$this->dataAccessLog = new stdClass();
+		$this->dataRequest = new stdClass();
+
+		return $this->responseToTheView('callWs_ValidateEmail');
 	}
 	/**
 	 * @info Método para el cierre de sesión
