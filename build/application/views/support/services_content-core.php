@@ -24,14 +24,14 @@
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2">Selecciona una cuenta</p>
+              <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
             <?php else: ?>
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
               <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
-                <i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+                <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
             <?php endif; ?>
@@ -47,10 +47,10 @@
           <li id="cardLock" class="list-inline-item nav-item-config mr-1">
             <a href="javascript:">
               <span class="icon-config icon-lock h1 icon-color"></span>
-              <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h5>
+              <h5 class="center"><span class="status-text1"><?= $statustext ?></span></h5>
               <div class="box up left regular">
                 <span class="icon-lock h1 icon-color"></span>
-                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h4>
+                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span></h4>
               </div>
             </a>
           </li>
@@ -71,10 +71,10 @@
           <li id="pinManagement" class="list-inline-item nav-item-config mr-1">
             <a href="javascript:">
               <span class="icon-config icon-key h1 icon-color"></span>
-              <h5 class="center">Gestión<br>de PIN</h5>
+              <h5 class="center"><?= lang('CUST_PIN_MANAGEMENT'); ?></h5>
               <div class="box up left regular">
                 <span class="icon-key h1 icon-color"></span>
-                <h4 class="h5 center">Gestión<br>de PIN</h4>
+                <h4 class="h5 center"><?= lang('CUST_PIN_MANAGEMENT'); ?></h4>
               </div>
             </a>
           </li>
@@ -83,10 +83,10 @@
           <li id="twirlsCommercial" class="list-inline-item nav-item-config send" action="twirlsCommercial">
             <a href="javascript:">
               <span class="icon-config icon icon icon-credit-card h1 icon-color"></span>
-              <h5 class="center">Giros<br>comerciales</h5>
+              <h5 class="center"><?= lang('CUST_TWIRLS_COMMERCIAL'); ?></h5>
               <div class="box up left regular">
                 <span class="icon icon icon-credit-card h1 icon-color"></span>
-                <h4 class="h5 center">Giros<br>comerciales</h4>
+                <h4 class="h5 center"><?= lang('CUST_TWIRLS_COMMERCIAL'); ?></h4>
               </div>
             </a>
           </li>
@@ -95,10 +95,10 @@
           <li id="transactionalLimits" class="list-inline-item nav-item-config send" action="transactionalLimits">
             <a href="javascript:">
               <span class="icon-config icon icon-transactions h1 icon-color"></span>
-              <h5 class="center">Limites<br>transaccionales</h5>
+              <h5 class="center"><?= lang('CUST_TRANS_LIMITS'); ?></h5>
               <div class="box up left regular">
                 <span class="icon icon-transactions h1 icon-color"></span>
-                <h4 class="h5 center">Limites<br>transaccionales</h4>
+                <h4 class="h5 center"><?= lang('CUST_TRANS_LIMITS'); ?></h4>
               </div>
             </a>
           </li>
@@ -112,15 +112,15 @@
     <div id="cardLockView" class="option-service" <?= $uniqueEvent && in_array('110', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary">
-          <span class="status-text1"><?= $statustext ?></span> tarjeta
+          <span class="status-text1"><?= $statustext ?></span>
         </h4>
         <p>
-          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar.
+				<?= novoLang(lang('CUST_ACTION_TAKE'), mb_strtolower($statustextCard)); ?>
         </p>
         <hr class="separador-one w-100">
         <div class="flex items-center justify-end pt-3">
-          <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
-          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
+          <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
         </div>
       </div>
     </div>
@@ -130,9 +130,9 @@
         <form id="replacementForm">
           <div id="selectReplacementCard" class="row">
             <div class="form-group col-lg-4">
-              <label for="replaceMotSol">Motivo de la solicitud</label>
+              <label for="replaceMotSol"><?= lang('CUST_REASON_REQUEST') ?></label>
               <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-                <option value="" selected disabled>Selecciona</option>
+                <option value="" selected disabled><?= lang('CUST_SELECTION') ?></option>
                 <?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
                 <option value="<?= $key ?>"><?= $value ?></option>
                 <?php endforeach; ?>
@@ -145,8 +145,8 @@
 					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
-            <a class="btn btn-small btn-link" href="">Cancelar</a>
-            <button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
+            <a class="btn btn-small btn-link" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+            <button class="btn btn-small btn-loading btn-primary send" action="replacement"><?= lang('GEN_BTN_CONTINUE') ?></button>
           </div>
         </form>
       </div>
@@ -154,19 +154,19 @@
     <div id="pinManagementView" class="option-service"
       <?= $uniqueEvent && count(array_diff(['112', '117', '120'], $serviceList)) < 3 ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
-        <h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
+        <h4 class="line-text mb-2 semibold primary"><?= lang('CUST_PIN_MANAGEMENT') ?></h4>
         <div class="w-100">
           <div class="services-both max-width-1 fit-lg mx-auto fade-in">
             <?php if ($uniqueEvent && count(array_diff(['112', '117', '120'], $serviceList)) < 2): ?>
-            <p>Seleccione los la operación que desea realizar:</p>
+            <p><?= lang('CUST_SELECTION_OPERATION') ?></p>
             <?php endif; ?>
             <form id="actionPinForm" name="actionPinForm">
               <div class="form-group">
-                <label class="mr-2">Operación:</label>
+                <label class="mr-2"><?= lang('CUST_OPERATIONS') ?></label>
                 <?php if (in_array('112', $serviceList)): ?>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input id="changePin" class="custom-control-input" type="radio" name="recovery" value="change" autocomplete="off">
-                  <label class="custom-control-label" for="changePin">Cambiar PIN</label>
+                  <label class="custom-control-label" for="changePin"><?= lang('CUST_PIN_CHANGE') ?></label>
                 </div>
                 <?php endif; ?>
                 <?php if (in_array('120', $serviceList)): ?>
@@ -224,8 +224,8 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link big-modal" href="">Cancelar</a>
-                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
+								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('GEN_BTN_CONTINUE') ?></button>
               </div>
             </form>
           </div>

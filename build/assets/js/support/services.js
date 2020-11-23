@@ -63,7 +63,7 @@ $(function () {
 		var expireDate = $(event).find('input[type=hidden][name="expireDate"]').val();
 		var services = JSON.parse($(event).find('input[type=hidden][name="services"]').val());
 		var statusCard = $(event).find('input[type=hidden][name="status"]').val();
-		var statusText = statusCard == '' ? 'Bloquear' : 'Desbloquear';
+		var statusText = statusCard == '' ? lang.CUST_TEMPORARY_LOCK : lang.CUST_UNLOCK_CARD;
 
 		if (statusCard != '' && statusCard != 'PB') {
 			return true;
@@ -226,7 +226,7 @@ function requestSupport(thisAction) {
 	who = 'CustomerSupport'; where = data.action;
 	callNovoCore(who, where, data, function (response) {
 		if (data.action == 'temporaryLock' && response.success) {
-			var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
+			var statusText = $('#status').val() == '' ? lang.CUST_UNLOCK_CARD : lang.CUST_TEMPORARY_LOCK
 			$('.status-text1').text(statusText);
 			$('.status-text2').text(statusText.toLowerCase());
 			var status = $('#status').val() == '' ? 'PB' : ''

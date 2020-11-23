@@ -99,3 +99,16 @@ $lang['CUST_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de la tarjeta %s,
 $lang['CUST_INVALID_EXPIRATION_DATE'] = 'No fue posible obtener la fecha de vencimiento de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, por favor vuelve a intentarlo';
 $lang['CUST_LIMIT_REPLACEMENTS'] = 'Has alcanzado el limite de reposiciones.';
+$lang['CUST_PIN_MANAGEMENT'] = 'Gestión de PIN';
+$lang['CUST_REASON_REQUEST'] = 'Motivo de la solicitud';
+$lang['CUST_SELECTION'] = 'Selecciona';
+$lang['CUST_SELECTION_OPERATION'] = 'Seleccione los la operación que desea realizar:';
+$lang['CUST_PIN_CHANGE'] = 'Cambiar PIN';
+$lang['CUST_OPERATIONS'] = 'Operación:';
+$lang['CUST_ACTION_TAKE'] = 'Si realmente deseas <span class="status-text2">%s</span> tu tarjeta, presiona continuar.';
+$lang['CUST_TEMPORARY_LOCK'] = 'Bloqueo temporal';
+$lang['CUST_UNLOCK_CARD'] = 'Desbloquear tarjeta';
+$lang['CUST_UNLOCK'] = 'Desbloquear';
+$lang['CUST_TEMPORARILY_LOCK'] = 'Bloquear temporalmente';
+$lang['CUST_RETRIEVE_PIN'] = 'Recuperar PIN';
+

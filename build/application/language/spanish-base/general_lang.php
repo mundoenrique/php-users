@@ -116,6 +116,8 @@ $lang['GEN_CONTACTS'] = [
 	'Tarjeta LATODO' => '6193500',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+$lang['GEN_SELECT_ACCOUNT'] = 'Selecciona una cuenta';
+$lang['GEN_OTHER_PRODUCTS'] = 'Otro producto';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
