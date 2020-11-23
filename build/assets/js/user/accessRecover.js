@@ -84,6 +84,6 @@ function showModalOTP(response) {
 		inputModal += 	'</div>';
 		inputModal += '</form>';
 
-		appMessages(response.title, inputModal, response.icon, response.data)
+		appMessages(response.title, inputModal, response.icon, response.modalBtn)
 	}
 }

@@ -308,7 +308,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Generar código OTP';
 		$this->dataAccessLog->userName = $username;
 
-		$this->dataRequest->idOperation = '130';
+		$this->dataRequest->idOperation = '275';
 		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
 		$this->dataRequest->tipoDocumento = $dataRequest->typeDocument;
 		$this->dataRequest->cedula = $dataRequest->idNumber;
@@ -326,12 +326,12 @@ class Novo_User_Model extends NOVO_Model {
 		$response = $this->sendToService('callWs_AccessRecoverOTP');
 
 		switch($this->isResponseRc) {
-			case 0:
-				$this->session->set_flashdata('authToken', '12345');
+			case 200:
+				$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP_SENT');
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['action'] = 'none';
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			case -100:
 			case -101:
@@ -344,8 +344,8 @@ class Novo_User_Model extends NOVO_Model {
 
 		if($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
-			$this->response->icon = lang('GEN_ICON_INFO');
-			$this->response->data['btn1']['action'] = 'destroy';
+			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
 		return $this->responseToTheView('callWs_AccessRecoverOTP');
