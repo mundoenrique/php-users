@@ -314,7 +314,7 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO User Model: AccessRecoverOTP Method Initialized');
 
-		$username = 'default';
+		$username = $this->session->flashdata('userName') ?? 'default';
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar acceso';
 		$this->dataAccessLog->operation = 'Generar código OTP';
@@ -340,6 +340,7 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 200:
 				$this->session->set_flashdata('authToken', $response->bean->TokenTO->authToken);
+				$this->session->set_flashdata('username', $response->logAccesoObject->userName);
 				$this->response->code = 0;
 				$this->response->msg = lang('GEN_OTP_SENT');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
@@ -369,25 +370,24 @@ class Novo_User_Model extends NOVO_Model {
 	 */
 	public function callWs_ValidateOTP_User($dataRequest)
 	{
-		log_message('INFO', 'NOVO User Model: ValidateOtp Method Initialized');
+		log_message('INFO', 'NOVO User Model: ValidateOTP Method Initialized');
 
-		$username = $this->session->has_userdata('userName') ?? 'default';
+		$username = $this->session->flashdata('username');
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar Acceso';
 		$this->dataAccessLog->operation = 'Validar código OTP';
 		$this->dataAccessLog->userName = $username;
 
-		$this->dataRequest->idOperation = 'genericBusiness';
+		$this->dataRequest->idOperation = '275';
 		$this->dataRequest->className = 'com.novo.objects.MO.GenericBusinessObject';
-		$this->dataRequest->usuario = $username;
-		$this->dataRequest->opcion = 'validarOTP';
+		$this->dataRequest->opcion = 'validarOTPCpo';
 		$this->dataRequest->TokenTO = [
 			'access_token' => $this->session->flashdata('authToken'),
       'token' => $dataRequest->otpCode,
 		];
 		$this->dataRequest->subOpciones = [
 			[
-				'subOpcion' => 'envioEmailProdubancoRecuperacion',
+				'subOpcion' => 'envioEmailProdubancoRecuperacionCpo',
       	'orden' => '1'
 			]
 		];
@@ -395,7 +395,7 @@ class Novo_User_Model extends NOVO_Model {
 		$msgGeneral = 0;
 
 		if ($this->session->flashdata('authToken') != NULL) {
-			$response = $this->sendToService('callWs_ValidateOtp');
+			$response = $this->sendToService('callWs_ValidateOTP');
 		} else {
 			$this->isResponseRc = 998;
 		}
@@ -403,8 +403,8 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				$this->response->msg = novoLang(lang('GEN_SENT_ACCESS'), [$maskMail]);
-				$this->response->icon = lang('GEN_ICON_SUCCESS');
-				$this->response->data['btn1']['link'] = 'inicio';
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
 			break;
 			case -286:
 				$msgGeneral = 1;
@@ -417,17 +417,19 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 998:
 				$msgGeneral = 1;
+				$this->response->code = 4;
 				$this->response->msg = lang('USER_TIME_EXPIRE');
+				$this->response->modalBtn['btn1']['text'] = 'Aceptar';
 			break;
 		}
 
 		if($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
-			$this->response->icon = lang('GEN_ICON_INFO');
-			$this->response->data['btn1']['action'] = 'destroy';
+			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
-		return $this->responseToTheView('callWs_ValidateOtp');
+		return $this->responseToTheView('callWs_ValidateOTP');
 	}
 	/**
 	 * @info Método para el cambio de Contraseña

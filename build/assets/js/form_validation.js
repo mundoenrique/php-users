@@ -115,7 +115,6 @@ function validateForms(form) {
 			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 			"typeDocument": { requiredSelect: true, },
-			"otpCode": { required: true, pattern: alphanum },
 			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
@@ -129,6 +128,7 @@ function validateForms(form) {
 				verifyPattern: lang.VALIDATE_USERPASS_PATT,
 			},
 			"otpCode": lang.VALIDATE_OTP_CODE,
+			"typeDocument": lang.VALIDATE_TYPE_DOCUMENT,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
@@ -222,8 +222,6 @@ function validateForms(form) {
 				required: lang.VALIDATE_CONFIRM_PIN,
 				equalTo: lang.VALIDATE_IQUAL_PIN
 			},
-			"typeDocument": { requiredSelect: true, },
-			"otpCode": { required: true, pattern: alphanum },
 			"SEL_A": {
 				required: lang.VALIDATE_FILE_TYPE,
 				extension: lang.VALIDATE_FILE_TYPE,
