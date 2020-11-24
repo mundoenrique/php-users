@@ -12,7 +12,7 @@
 						</div>
 						<?php if ($isVirtual): ?>
 						<a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('GEN_NO_LINK'); ?>">
-							<i aria-hidden="true" class="icon-view"></i> &nbsp;Ver detalles
+							<i aria-hidden="true" class="icon-view"></i> &nbsp;<?= lang('BUSINESS_SEE_DETAILS'); ?>
 						</a>
 						<?php endif; ?>
 					</div>
@@ -34,13 +34,13 @@
       </div>
       <div class="flex col-12 mt-2">
         <ul class="flex flex-auto justify-between px-2">
-          <li class="list-inline-item">Actual
+          <li class="list-inline-item"><?= lang('BUSINESS_CURRENT_BALANCE'); ?>
             <span id="currentBalance" class="product-balance block"><?= $balance->currentBalance; ?></span>
           </li>
-          <li class="list-inline-item">En tránsito
+          <li class="list-inline-item"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?>
             <span id="inTransitBalance" class="product-balance block"><?= $balance->inTransitBalance; ?></span>
           </li>
-          <li class="list-inline-item">Disponible
+          <li class="list-inline-item"><?= lang('BUSINESS_AVAILABLE_BALANCE'); ?>
             <span id="availableBalance" class="product-balance block"><?= $balance->availableBalance; ?></span>
           </li>
         </ul>
@@ -60,7 +60,7 @@
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
-    <h4 class="h4 regular tertiary">Mis movimientos</h4>
+    <h4 class="h4 regular tertiary"><?= lang('BUSINESS_MY_MOVEMENTS'); ?></h4>
     <nav id="filtersStack" class="navbar px-0 pb-0">
       <div id="period-form" class="stack-form mr-auto flex items-center col-8">
 
@@ -70,7 +70,7 @@
             <input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
             <input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
             <div class="form-group">
-              <label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
+              <label class="my-1 mr-1 text" for="filterMonth"><?= lang('BUSINESS_TO_SHOW'); ?></label>
               <select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
                 <option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
                 <?php foreach (lang('GEN_SELECT_MONTH') as $key => $month) : ?>
@@ -98,9 +98,9 @@
       <?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
       <div class="mb-3">
         <button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
-          data-name="reset">Movimientos</button>
+          data-name="reset"><?= lang('GEN_MOVEMENTS'); ?></button>
         <button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset"
-          data-group="group-filter-pagination" data-name="reset">En tránsito</button>
+          data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?></button>
       </div>
       <?php endif; ?>
       <div class="hide-downloads">
