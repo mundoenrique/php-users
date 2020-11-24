@@ -38,7 +38,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->password = md5($password);//BORRAR CUANDO ESTEN OK LOS SERVICIOS
-		//$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
+		$this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		if (IP_VERIFY == 'ON' && lang('CONF_VALIDATE_IP') == 'ON') {
 			$this->dataRequest->codigoOtp = [
@@ -407,12 +407,13 @@ class Novo_User_Model extends NOVO_Model {
 				$userData->mobilePhone = $response->user->celular ?? '';
 				$userData->longProfile = $response->user->aplicaPerfil ?? '';
 				$userData->generalAccount =  '';
+				$userData->CurrentVerifierCode = '';
 
 				if ($userData->longProfile == 'S') {
 					$userData->idnumber = $response->afiliacion->idpersona ?? $userData->idnumber;
 					$userData->fiscalId = $response->afiliacion->ruc_cto_laboral ?? '';
 					$userData->generalAccount = $response->afiliacion->acepta_contrato ?? $userData->generalAccount;
-					$userData->CurrentVerifierCode = $response->afiliacion->dig_verificador_aux ?? '';
+					$userData->CurrentVerifierCode = $response->afiliacion->dig_verificador_aux;
 				}
 
 				$this->response->data->signUpData = $userData;

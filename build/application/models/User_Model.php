@@ -45,12 +45,12 @@ class User_Model extends BDB_Model
 
 		// TODO
 		// Descomentar para hacer pruebas de integración
-		// $this->dataRequest->password = $argon2->hexArgon2;
+		$this->dataRequest->password = $argon2->hexArgon2;
 		// $this->dataRequest->hashMD5 = md5($password);
 
 		// TODO
 		// Descomentar la linea siguiente para peticiones reales al servicio
-		$this->dataRequest->password = md5($password);
+		// $this->dataRequest->password = md5($password);
 
 		$this->dataRequest->ctipo = $dataRequest->active;
 
@@ -362,13 +362,13 @@ class User_Model extends BDB_Model
 			// lineas originales
 			// "password"			=> md5($dataRequest->userpwd),
 			// "passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
-			"password"			=> md5($password),
-			"passwordOld4"		=> md5(strtoupper($password)),
+			//	"password"			=> md5($password),
+			//"passwordOld4"		=> md5(strtoupper($password)),
 
 			// TODO
 			// Para las pruebas de integración con sevicios
-			// "password"			=> $argon2->hexArgon2,
-			// "passwordOld4"		=> $argon2->hexArgon2,
+			"password"			=> $argon2->hexArgon2,
+			"passwordOld4"		=> $argon2->hexArgon2,
 
 			"tyc" => $dataRequest->acceptTerms,
 			"acCodCia" => $dataRequest->acCodCia,
