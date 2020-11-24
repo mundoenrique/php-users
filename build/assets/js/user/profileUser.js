@@ -1,11 +1,14 @@
 'use strict'
 var longProfile;
 var CurrentVerifierCode = '';
+var formFile;
+
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide();
 	longProfile = $('#longProfile').val();
+	formFile = $('#profileUserForm');
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
@@ -32,17 +35,33 @@ $(function () {
 
 	$('#profileUserBtn').on('click', function(e) {
 		e.preventDefault();
+
+		if ($('#noPublicOfficeOld').is(':checked')) {
+			$('#publicOffice, #publicInst').val('');
+		}
+
 		form = $('#profileUserForm');
 		validateForms(form);
 
 		if (form.valid()) {
 			btnText = $(this).text().trim();
 			data = getDataForm(form);
-			delete data.genderMale;
-			delete data.genderFemale;
 			data.gender = $('input[name=gender]:checked').val();
 			data.notEmail = $('#notEmail').is(':checked') ? '1' : '0';
 			data.notSms = $('#notSms').is(':checked') ? '1' : '0';
+			delete data.genderMale;
+			delete data.genderFemale;
+
+			if (longProfile == 'S') {
+				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.protection = $('#protection').is(':checked') ? '1' : '0';
+				data.contract = $('#contract').is(':checked') ? '1' : '0';
+				delete data.yesTaxesObligated;
+				delete data.noTaxesObligated;
+				delete data.acceptTerms;
+			}
+
 			$(this).html(loader);
 
 			if (lang.CONF_LOAD_DOCS == 'ON') {
@@ -62,6 +81,12 @@ $(function () {
 			insertFormInput(true);
 			updateProfile();
 		} else {
+			$('.drop-zone-input').each(function (index, element) {
+				if ($(element).hasClass('has-error')) {
+					$(element).parent('.drop-zone').addClass('has-error-file');
+				}
+			});
+
 			scrollTopPos($('#profileUserForm').offset().top);
 		}
 	});

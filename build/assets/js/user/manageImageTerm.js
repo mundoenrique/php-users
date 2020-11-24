@@ -50,12 +50,11 @@ $(function () {
 		var inputModal = '<h1 class="h0">' + lang.USER_CONT_BENEFITS_SUBTITLE+'</h1>';
 
 		switch ($('#generalAccount').val()) {
-			case 'N':
-				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
-				break;
 			case 'S':
 				inputModal += lang.USER_CONT_GENERAL_CONTENT;
-				break;
+			break;
+			default:
+				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
 		}
 
 		appMessages(lang.USER_CONT_PROTECTION_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
@@ -80,6 +79,19 @@ $(function () {
 		$(inputElement).on("change", function(e, validIgnore){
 			if (inputElement.files.length) {
 				updateThumbnail(dropZoneElement, inputElement.files[0], inputElement);
+				validateForms(formFile);
+
+				if ($(inputElement).valid()) {
+					$('.drop-zone-input').each(function (index, element) {
+						$(element).parent('.drop-zone').removeClass('has-error-file');
+					});
+				} else {
+					$('.drop-zone-input').each(function (index, element) {
+						if ($(element).hasClass('has-error')) {
+							$(element).parent('.drop-zone').addClass('has-error-file');
+						}
+					});
+				}
 			}
 		});
 
