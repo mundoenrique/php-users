@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="flex optional widget-statistics mt-4">
-      <h3 class="h4 regular py-3 pl-3"><?= lang('REPORTS_STATISTICS'); ?></h3>
+      <h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
       <div class="flex flex-column items-center">
         <div class="flex flex-wrap items-center h-100 justify-center">
           <div id="stats" class="group-aside-view w-100 h-100">
