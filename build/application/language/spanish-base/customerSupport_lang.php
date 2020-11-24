@@ -115,9 +115,7 @@ $lang['CUST_REQUEST_PIN'] = 'Solicitud de PIN';
 $lang['CUST_CURRENT_PIN'] = 'PIN actual';
 $lang['CUST_NEW_PIN'] = 'Nuevo PIN';
 $lang['CUST_CONFIRM_PIN'] = 'Confirmar PIN';
-$lang['CUST_REQUEST_PIN_INFO'] = '<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p>
-<p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en
-un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>';
+$lang['CUST_REQUEST_PIN_INFO'] = '<p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en Conexión Empresas Online, para poder emitir el nuevo PIN.</p><p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en un máximo de 5 días hábiles en un sobre de seguridad a la dirección de tu empresa.</p>';
 $lang['CUST_TRAVEL_AGENCY'] = 'Agencia de viajes';
 $lang['CUST_INSURERS'] = 'Aseguradoras';
 $lang['CUST_CHARITY'] = 'Beneficencia';
