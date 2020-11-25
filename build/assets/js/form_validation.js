@@ -108,7 +108,7 @@ function validateForms(form) {
 			"contract": { required: true },
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
-			"replaceMotSol": { requiredSelect: true, minlength: 4, maxlength: 25 },
+			"replaceMotSol": { requiredSelect: true},
 			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
 			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
