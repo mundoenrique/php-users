@@ -40,6 +40,7 @@ class Novo_Assets_Model extends NOVO_Model {
 					$list->regId = trim($state->codEstado);
 					$list->regDesc = trim($state->estados);
 					$statesList[] = $list;
+					$this->response->modal = TRUE;
 				}
 			break;
 		}
@@ -77,6 +78,7 @@ class Novo_Assets_Model extends NOVO_Model {
 					$list->regId = trim($city->codCiudad);
 					$list->regDesc = trim($city->ciudad);
 					$citiesList[] = $list;
+					$this->response->modal = TRUE;
 				}
 			break;
 		}
@@ -114,6 +116,7 @@ class Novo_Assets_Model extends NOVO_Model {
 					$list->regId = trim($region->codregion);
 					$list->regDesc = trim($region->region);
 					$regionsList[] = $list;
+					$this->response->modal = TRUE;
 				}
 			break;
 		}
@@ -149,6 +152,7 @@ class Novo_Assets_Model extends NOVO_Model {
 					$list->profId = $professions->idProfesion;
 					$list->profDesc = $professions->tipoProfesion;
 					$profList[] = $list;
+					$this->response->modal = TRUE;
 				}
 			break;
 		}

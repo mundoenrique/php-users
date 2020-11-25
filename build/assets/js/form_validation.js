@@ -108,17 +108,18 @@ function validateForms(form) {
 			"contract": { required: true },
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
-			"replaceMotSol": { requiredSelect: true, minlength: 4, maxlength: 25 },
+			"replaceMotSol": { requiredSelect: true},
 			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
 			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
 			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
-			"SEL_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
-			"INE_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
-			"INE_R": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
-			"PASS_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
-			"PASS_R": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"typeDocument": { requiredSelect: true, },
+			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -127,6 +128,7 @@ function validateForms(form) {
 				verifyPattern: lang.VALIDATE_USERPASS_PATT,
 			},
 			"otpCode": lang.VALIDATE_OTP_CODE,
+			"typeDocument": lang.VALIDATE_TYPE_DOCUMENT,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": lang.VALIDATE_ID_NUMBER,
@@ -295,10 +297,9 @@ function validateForms(form) {
 		return valid
 	}
 
-	$.validator.addMethod('filesize', function (value, element, param) {
-		return element.files[0].size <= 62914560 && element.files[0].size > 10240;
+	$.validator.methods.filesize = function (value, element, param) {
+		return element.files[0].size <= 6291456 && element.files[0].size > 10240;
 	}
-	)
 
 	form.validate().resetForm();
 }

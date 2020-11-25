@@ -1,11 +1,14 @@
 'use strict'
 var longProfile;
 var CurrentVerifierCode;
+var formFile;
+
 $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	longProfile = $('#longProfile').val();
 	CurrentVerifierCode = $('#CurrentVerifierCode').val();
+	formFile = $('#signUpForm');
 
 	if (longProfile == 'S') {
 		getProfessions();
@@ -103,6 +106,12 @@ $(function () {
 			where = 'SignUpData';
 			getResponseServ(where);
 		} else {
+			$('.drop-zone-input').each(function (index, element) {
+				if ($(element).hasClass('has-error')) {
+					$(element).parent('.drop-zone').addClass('has-error-file');
+				}
+			});
+
 			scrollTopPos($('#signUpForm').offset().top);
 		}
 	});
