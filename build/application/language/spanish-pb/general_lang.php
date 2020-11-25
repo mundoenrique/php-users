@@ -13,3 +13,5 @@ $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_CONTACTS'] = [
 	'XXXXX' => 'XXXXXXX',
 ];
+//LINKS
+$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecoverOTP';
