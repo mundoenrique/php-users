@@ -332,7 +332,7 @@ class Novo_User_Model extends NOVO_Model {
       	'orden' => '1'
 			]
 		];
-		$this->dataRequest->pais = 'Ec-pb';
+		$this->dataRequest->pais = $this->config->item('country');
 		$msgGeneral = 0;
 
 		$response = $this->sendToService('callWs_AccessRecoverOTP');

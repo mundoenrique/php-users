@@ -39,7 +39,6 @@ $(function () {
 	$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
 		form = $('#otpModal');
-		formInputTrim(form);
 		validateForms(form);
 
 		if (form.valid()) {
