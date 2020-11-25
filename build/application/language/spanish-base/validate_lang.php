@@ -61,3 +61,4 @@ $lang['VALIDATE_POSTAL_CODE'] = 'Indica un código postal válido, mín 3 máx 2
 $lang['VALIDATE_PROTECTION'] = 'Debes leer y aceptar la protección de datos personales.';
 $lang['VALIDATE_CONTRACT'] = 'Debes leer y aceptar el contrato de cuenta dinero electrónico.';
 $lang['VALIDATE_SHORT_PHRASE'] = 'mín 4 máx 25 (letras, números, espacio ().).';
+$lang['VALIDATE_TYPE_DOCUMENT'] = 'Selecciona un tipo de documento válido.';
