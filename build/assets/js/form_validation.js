@@ -108,7 +108,7 @@ function validateForms(form) {
 			"contract": { required: true },
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
-			"replaceMotSol": { requiredSelect: true, minlength: 4, maxlength: 25 },
+			"replaceMotSol": { requiredSelect: true},
 			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
 			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
@@ -295,10 +295,9 @@ function validateForms(form) {
 		return valid
 	}
 
-	$.validator.addMethod('filesize', function (value, element, param) {
-		return element.files[0].size <= 62914560 && element.files[0].size > 10240;
+	$.validator.methods.filesize = function (value, element, param) {
+		return element.files[0].size <= 6291456 && element.files[0].size > 10240;
 	}
-	)
 
 	form.validate().resetForm();
 }
