@@ -4479,7 +4479,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .multi-step-form .progress.seen {
   transition: all 0ms ease 300ms;
-  background-color: var(--not-processed);
+  background-color: var(--color-eighth);
 }
 
 .multi-step-form .progress .progress-bar {

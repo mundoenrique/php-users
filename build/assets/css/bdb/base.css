@@ -4110,7 +4110,8 @@ table.feed-table tfoot td.feed-category-10x {
 
 .multi-step-form .progress.seen {
   transition: all 0ms ease 300ms;
-  background-color: var(--not-processed);
+	background-color: var(--color-primary);
+	opacity: .5;
 }
 
 .multi-step-form .progress .progress-bar {

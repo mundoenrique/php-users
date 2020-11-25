@@ -8,7 +8,7 @@
 
 <div class="row mx-auto hide-out hide">
 	<div class="multi-step-form col-10 mt-2 mx-auto bg-white px-0">
-		<div class="progress-container row <?= $dataStep; ?> mt-5 mb-3 mx-auto pb-5 px-5 center ">
+		<div class="progress-container row <?= $dataStep; ?> mt-5 mb-3 mx-auto pb-5 px-5 center">
 			<?php foreach ($stepTitles as $key => $value) : ?>
 				<?php if ($key + 1 < count($stepTitles)) : ?>
 					<div class="progress col p-0">
@@ -30,57 +30,59 @@
 			<form id="signUpForm" class="hide-out hide p-2">
 				<input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile ?>">
 				<div class="row">
-					<fieldset data-index=1 class="form-group ms-step-1 active seen border-none">
+					<!-- Datos personales -->
+					<?php $index = array_search(lang('USER_PERSONAL_DATA'), $stepTitles) + 1; ?>
+					<fieldset class="form-group ms-step-<?= $index ?> active seen border-none" data-index=<?= $index ?>>
 						<div class="col-12 pb-3">
 							<div class="bg-secondary h-100">
 								<div class="row mx-1">
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-xl-3">
 										<label for="idType"><?= lang('USER_ID_TYPE') ?></label>
 										<input id="idType" class="form-control" type="text" name="idType" value="<?= $idType; ?>" readonly autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-xl-3">
 										<label for="idNumber"><?= lang('USER_ID_NUMBER') ?></label>
 										<input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idnumber; ?>" readonly autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label for="firstName"><?= lang('USER_FIRSTNAME') ?></label>
 										<input id="firstName" class="form-control" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?> autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label for="lastName"><?= lang('USER_LASTNAME') ?></label>
 										<input id="lastName" class="form-control" type="text" name="lastName" value="<?= $lastName; ?>" <?= $updateName; ?> autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label for="middleName"><?= lang('USER_MIDDLENAME') ?></label>
 										<input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label for="surName"><?= lang('USER_SURNAME') ?></label>
 										<input id="surName" class="form-control" type="text" name="surName" value="<?= $surName; ?>" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label for="birthDate"><?= lang('USER_BIRTHDATE') ?></label>
 										<input id="birthDate" class="form-control date-picker" type="text" name="birthDate" value="<?= $birthDate; ?>" readonly autocomplete="off">
 										<div class="help-block"></div>
 									</div>
 									<?php if ($longProfile == 'S') : ?>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
 											<input id="nationality" class="form-control" type="text" name="nationality" value="">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="placeBirth"><?= lang('USER_PLACEBIRTH') ?></label>
 											<input id="placeBirth" class="form-control" type="text" name="placeBirth" value="">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
 											<select id="civilStatus" class="custom-select form-control" name="civilStatus">
 												<?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
@@ -89,15 +91,15 @@
 											</select>
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
-											<input id="verifierCode" class="form-control" type="text" name="verifierCode" value="">
+											<!-- <input id="verifierCode" class="form-control" type="text" name="verifierCode" value=""> -->
 											<div class="help-block"></div>
 										</div>
 									<?php endif; ?>
-									<div class="form-group col-3 col-lg-3">
+									<div class="form-group col-6 col-lg-3">
 										<label class="block"><?= lang('USER_GENDER') ?></label>
-										<div class="row">
+										<div class="flex">
 											<div class="custom-control custom-radio custom-control-inline">
 												<input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off">
 												<label class="custom-control-label" for="genderMale"><?= lang('USER_GENDER_MALE'); ?></label>
@@ -117,38 +119,40 @@
 							<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 						</div>
 					</fieldset>
-					<fieldset data-index=2 class="form-group ms-step-2 border-none col-12">
+					<!-- Datos de contacto -->
+					<?php $index = array_search(lang('USER_CONTACT_DATA'), $stepTitles) + 1; ?>
+					<fieldset class="form-group ms-step-<?= $index ?> border-none col-12" data-index=<?= $index ?>>
 						<div class="col-12 pb-3">
 							<div class="bg-secondary h-100">
 								<div class="row mx-1">
 									<?php if ($longProfile == 'S') : ?>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
-											<select id="addressType" class="custom-select form-control" name="addressType">
+											<!-- <select id="addressType" class="custom-select form-control" name="addressType">
 												<option value=""></option>
-											</select>
+											</select> -->
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
 											<input id="postalCode" class="form-control" type="text" name="postalCode" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="department"><?= lang('USER_STATE') ?></label>
 											<select id="department" class="custom-select form-control" name="department">
 												<option value=""></option>
 											</select>
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3 col-lg-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="city"><?= lang('USER_CITY') ?></label>
-											<select id="city" class="custom-select form-control" name="city">
+											<!-- <select id="city" class="custom-select form-control" name="city">
 												<option value=""></option>
-											</select>
+											</select> -->
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-12 col-lg-8 col-xl-12">
+										<div class="form-group col-12">
 											<label for="address"><?= lang('USER_ADDRESS') ?></label>
 											<textarea id="address" class="form-control" name="address"></textarea>
 											<div class="help-block"></div>
@@ -156,30 +160,30 @@
 									<?php endif; ?>
 								</div>
 								<div class="row mx-1">
-									<div class="form-group col-3 col-lg-4">
+									<div class="form-group col-6 col-lg-4">
 										<label for="email"><?= lang('USER_EMAIL') ?></label>
 										<input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-4">
+									<div class="form-group col-6 col-lg-4">
 										<label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
 										<input id="confirmEmail" class="form-control" type="email" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off" onpaste="return false">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-4 <?= $skipLandLine ?>">
+									<div class="form-group col-6 col-lg-4 <?= $skipLandLine ?>">
 										<label for="landLine"><?= lang('USER_PHONE_LANDLINE') ?></label>
 										<input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-3 col-lg-4">
+									<div class="form-group col-6 col-lg-4">
 										<label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
 										<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
-									<div class="form-group col-12 <?= $skipOtherPhone ?>">
+									<div class="form-group col-12 col-lg-8 <?= $skipOtherPhone ?>">
 										<label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?></label>
 										<div class="form-row">
-											<div class="form-group col-6">
+											<div class="form-group col-6 col-lg-6">
 												<select id="phoneType" class="custom-select form-control" name="phoneType">
 													<?php foreach (lang('USER_OTHER_PHONE_LIST') as $key => $value) : ?>
 														<option value="<?= $key; ?>"><?= $value; ?></option>
@@ -187,7 +191,7 @@
 												</select>
 												<div class="help-block"></div>
 											</div>
-											<div class="form-group col-6">
+											<div class="form-group col-6 col-lg-6">
 												<input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="" autocomplete="off">
 												<div class="help-block"></div>
 											</div>
@@ -202,21 +206,23 @@
 						</div>
 					</fieldset>
 					<?php if ($longProfile == 'S') : ?>
-						<fieldset data-index=3 class="form-group ms-step-3 border-none">
+						<!-- Datos laborales -->
+						<?php $index = array_search(lang('USER_LABOR_DATA'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<div class="col-12">
 								<div class="bg-secondary h-100">
 									<div class="row mx-1">
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="idRUC"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
 											<input id="idRUCText" class="form-control" type="text" name="idRUCText" value="20000002" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="idWorkplace"><?= lang('USER_WORK_CENTER') ?></label>
 											<input id="idWorkplace" class="form-control" type="text" name="idWorkplace" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="employmentStatus"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
 											<select id="employmentStatus" class="custom-select form-control" name="employmentStatus">
 												<option selected disabled>Seleccionar</option>
@@ -226,7 +232,7 @@
 											</select>
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="Seniority"><?= lang('USER_SENIORITY') ?></label>
 											<select id="Seniority" class="custom-select form-control" name="Seniority">
 												<option selected disabled>Seleccionar</option>
@@ -247,19 +253,19 @@
 											<div class="help-block"></div>
 										</div>
 
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="charge"><?= lang('USER_CHARGE') ?></label>
 											<input id="chargeText" class="form-control" type="text" name="chargeText" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
 
-										<div class="form-group col-3">
+										<div class="form-group col-6 col-lg-3">
 											<label for="averageMonthly"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
 											<input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
 
-										<div class="form-group col-6 center">
+										<div class="form-group col-12 center">
 											<label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
 											<div class="custom-control custom-radio custom-control-inline">
 												<input id="yesPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="Si" autocomplete="off">
@@ -271,17 +277,17 @@
 											</div>
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6">
 											<label for="publicPosition"><?= lang('USER_PUBLIC_POSITION') ?></label>
 											<input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-3">
+										<div class="form-group col-6">
 											<label for="institution"><?= lang('USER_INSTITUTION') ?></label>
 											<input id="institution" class="form-control" disabled type="text" name="institution" value="" autocomplete="off">
 											<div class="help-block"></div>
 										</div>
-										<div class="form-group col-6 pt-2 center">
+										<div class="form-group col-12 pt-2 center">
 											<label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
 											<div class="custom-control custom-radio custom-control-inline">
 												<input id="yesArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="Si" autocomplete="off">
@@ -301,7 +307,9 @@
 								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 							</div>
 						</fieldset>
-						<fieldset data-index=4 class="form-group ms-step-4 border-none">
+						<!-- Datos de usuario -->
+						<?php $index = array_search(lang('USER_DATA_USER'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<div class="dataUser col-12 pb-3">
 								<div class="bg-secondary h-100">
 									<div class="row mx-1">
@@ -363,7 +371,10 @@
 								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 							</div>
 						</fieldset>
-						<fieldset data-index=5 class="form-group ms-step-5 border-none">
+						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+						<!-- Carga de documentos -->
+						<?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<?php if (lang('CONF_LOAD_DOCS') == 'OFF') : ?>
 								<div class="col-12 pb-3">
 									<div class="bg-secondary">
@@ -376,7 +387,10 @@
 								</div>
 							<?php endif; ?>
 						</fieldset>
-						<fieldset data-index=6 class="form-group ms-step-6 border-none">
+						<?php endif; ?>
+						<!-- Legales -->
+						<?php $index = array_search(lang('USER_LEGAL_STEP'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none w-100" data-index=<?= $index ?>>
 							<div class="col-12 pb-3">
 								<div class="bg-secondary p-2">
 									<div class="row mx-1">
@@ -399,7 +413,9 @@
 							</div>
 						</fieldset>
 					<?php else : ?>
-						<fieldset data-index=3 class="form-group ms-step-3 border-none">
+						<!-- Datos de usuario -->
+						<?php $index = array_search(lang('USER_DATA_USER'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<div class="dataUser col-12 pb-3">
 								<div class="bg-secondary h-100">
 									<div class="row mx-1">
@@ -461,7 +477,10 @@
 								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 							</div>
 						</fieldset>
-						<fieldset data-index=4 class="form-group ms-step-4 border-none">
+						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+						<!-- Carga de documentos -->
+						<?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
+						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<?php if (lang('CONF_LOAD_DOCS') == 'OFF') : ?>
 								<div class="col-12 pb-3">
 									<div class="bg-secondary">
@@ -474,6 +493,7 @@
 								</div>
 							<?php endif; ?>
 						</fieldset>
+						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 			</form>
