@@ -4408,3 +4408,98 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	-webkit-transform: translateX(3.2rem);
 	transform: translateX(3.2rem);
 }
+
+.progress {
+	display: flex;
+	overflow: hidden;
+	height: 5px;
+	font-size: .75rem;
+	background-color: var(--color-tertiary);
+	border-radius: .25rem;
+}
+
+.progress-container {
+	width: calc(90%);
+
+}
+
+.progress-container .progress .progress-bar .progress-icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-eighth);
+  color: var(--color-secondary);
+  padding-top: 10px;
+  margin-left: -25px;
+  border-radius: 50%;
+	cursor: pointer;
+  transition: all .25s ease;
+}
+
+.progress-container div.progress:last-child .progress-bar div.progress-icon:last-child {
+	left: 94%;
+}
+
+.progress-icon.active {
+  transition: all .25s ease;
+  background-color: var(--color-primary) !important;
+  color: var(--color-secondary);
+}
+
+.progress-icon:hover {
+  transition: all .25s ease;
+  background-color: var(--color-primary) !important;
+	color: var(--color-secondary);
+}
+
+.progress-container .progress .progress-bar .progress-text {
+  cursor: pointer;
+	margin: 12px 0px 9px;
+	display: block;
+	min-width: 10rem;
+}
+
+.progress-bar {
+	background: var(--color-primary);
+	display: flex;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-ms-flex-pack: center;
+	justify-content: center;
+	overflow: hidden;
+	transition: width .6s ease;
+}
+
+.multi-step-form .progress {
+  overflow: visible;
+}
+
+.multi-step-form .progress.seen {
+  transition: all 0ms ease 300ms;
+  background-color: var(--color-eighth);
+}
+
+.multi-step-form .progress .progress-bar {
+  overflow: visible;
+}
+
+.multi-step-form .form-container {
+  transform: scale(1);
+}
+
+.multi-step-form > .form-container fieldset:not(:first-child) {
+  display: none;
+}
+
+.form-container {
+	margin: auto;
+}
+
+@media (min-width: 1200px) {
+	div.progress-bar {
+ white-space: nowrap;
+	}
+}
