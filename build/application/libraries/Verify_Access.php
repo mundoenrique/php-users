@@ -120,7 +120,7 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?: $this->user;
-		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions'];
+		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP', 'validateOTP'];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {
@@ -134,11 +134,13 @@ class Verify_Access {
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
+					$auth = $this->CI->session->has_userdata('logged');
+				break;
 				case 'professionsList':
 				case 'statesList':
 				case 'cityList':
 				case 'regions':
-					$auth = $this->CI->session->has_userdata('logged');
+					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
 				break;
 				case 'getBalance':
 				case 'cardDetail':

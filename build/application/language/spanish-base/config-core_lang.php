@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONFIG_MAINTENANCE'] = 'OFF';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -58,6 +59,7 @@ $lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
 $lang['CONF_TIMER_MODAL_VIRTUAL'] = 60;
 //RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
+$lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';

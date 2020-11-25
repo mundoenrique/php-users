@@ -6,65 +6,66 @@
 </div>
 <form id="profileUserForm" method="post" class="hide-out hide bg-color p-2">
   <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
+  <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
   <div class="row">
 
     <div class="col-12 col-lg-6 pb-3">
       <div class="bg-secondary p-2 h-100">
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_PERSONAL_DATA') ?></h4>
         <div class="row mx-1">
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="idType"><?= lang('USER_ID_TYPE') ?></label>
             <input id="idTypeText" class="form-control" type="text" name="idTypeText" value="<?= $idTypeText; ?>" readonly autocomplete="off">
             <input id="idType" type="hidden" name="idType" value="<?= $idTypeCode; ?>">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="idNumber"><?= lang('USER_ID_NUMBER') ?></label>
             <input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idNumber ?>" readonly autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="firstName"><?= lang('USER_FIRSTNAME') ?></label>
             <input id="firstName" class="form-control <?= $updateUser; ?>" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?>
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="lastName"><?= lang('USER_LASTNAME') ?></label>
             <input id="lastName" class="form-control <?= $updateUser; ?>" type="text" name="lastName" value="<?= $lastName; ?>" <?= $updateName; ?>
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="middleName"><?= lang('USER_MIDDLENAME') ?></label>
             <input id="middleName" class="form-control <?= $updateUser; ?>" type="text" name="middleName" value="<?= $middleName; ?>"
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="surName"><?= lang('USER_SURNAME') ?></label>
             <input id="surName" class="form-control <?= $updateUser; ?>" type="text" name="surName" value="<?= $surName; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="birthDate"><?= lang('USER_BIRTHDATE') ?></label>
             <input id="birthDate" class="form-control <?= $updateUser; ?>" type="text" name="birthDate" value="<?= $birthday; ?>" readonly
               autocomplete="off">
             <div class="help-block"></div>
           </div>
           <?php if($longProfile == 'S'):?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="nationality"><?= lang('USER_NATIONALITY') ?></label>
             <input id="nationality" class="form-control <?= $updateUser; ?>" type="text" name="nationality" value="<?= $nationality; ?>"
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
-            <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" avlue="<?= $birthPlace; ?>">
+            <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" value="<?= $birthPlace; ?>">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
             <select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
               <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
@@ -75,29 +76,29 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
-            <label for="verifyDigit"><?= lang('USER_VERIFIERCODE') ?></label>
-            <input id="verifyDigit" class="form-control <?= $updateUser; ?>" type="text" name="verifyDigit" value="<?= $verifyDigit; ?>" maxlength="1"
-              <?= $verifyDigit != '' ? 'readonly' : ''; ?>>
+          <div class="form-group col-6 input-height">
+            <label for="verifierCode"><?= lang('USER_VERIFIERCODE') ?></label>
+            <input id="verifierCode" class="form-control <?= $updateUser; ?>" type="text" name="verifierCode" value="<?= $verifierCode; ?>"
+              maxlength="1" <?= $verifierCode != '' ? 'readonly' : ''; ?>>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label class="block"><?= lang('USER_GENDER') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" autocomplete="off"
-                <?= $gender == 'M' ? 'checked' : ''; ?> <?= $disabled; ?>>
+              <input id="genderMale" class="custom-control-input" type="radio" name="gender" value="M" <?= $gender == 'M' ? 'checked' : ''; ?>
+                <?= $disabled; ?>>
               <label class="custom-control-label <?= $updateUser; ?>" for="genderMale"><?= lang('USER_GENDER_MALE'); ?></label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" autocomplete="off"
-                <?= $gender == 'F' ? 'checked' : ''; ?> <?= $disabled; ?>>
+              <input id="genderFemale" class="custom-control-input" type="radio" name="gender" value="F" <?= $gender == 'F' ? 'checked' : ''; ?>
+                <?= $disabled; ?>>
               <label class="custom-control-label <?= $updateUser; ?>" for="genderFemale"><?= lang('USER_GENDER_FEMALE'); ?></label>
             </div>
             <div class="help-block"></div>
           </div>
           <?php if ($longProfile == 'N'): ?>
-          <div class="form-group col-3 col-lg-6 <?= $skipProfession; ?>">
+          <div class="form-group col-6 input-height <?= $skipProfession; ?>">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
               <option value="<?= $professionType; ?>" selected><?= $profession; ?></option>
@@ -113,7 +114,7 @@
       <div class="bg-secondary p-2 h-100">
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_CONTACT_DATA') ?></h4>
         <div class="row mx-1 <?= $skipContacData; ?>">
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
             <select id="addressType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="addressType">
               <?php foreach (lang('USER_ADDRESS_TYPE_LIST') as $key => $value) : ?>
@@ -124,20 +125,20 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
             <input id="postalCode" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" type="text" name="postalCode"
               value="<?= $postalCode; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label for="state"><?= lang('USER_STATE') ?></label>
             <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
               <option value="<?= $stateCode; ?>"><?= $state; ?></option>
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label for="city"><?= lang('USER_CITY') ?></label>
             <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
               <option value="<?= $cityCod; ?>"><?= $city; ?></option>
@@ -145,7 +146,7 @@
             <div class="help-block"></div>
           </div>
           <?php if($longProfile == 'S'): ?>
-          <div class="form-group col-3 col-lg-6">
+          <div class="form-group col-6">
             <label for="district"><?= lang('USER_DISTRICT') ?></label>
             <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
               <option value="<?= $districtCod ?>"><?= $district ?></option>
@@ -153,14 +154,14 @@
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
-          <div class="form-group col-12 col-lg-8 col-xl-12">
+          <div class="form-group col-12 mb-2">
             <label for="address"><?= lang('USER_ADDRESS') ?></label>
-            <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address"><?= $address; ?></textarea>
+            <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address" row="2"><?= $address; ?></textarea>
             <div class="help-block"></div>
           </div>
         </div>
         <div class="row mx-1">
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="email"><?= lang('USER_EMAIL') ?></label>
             <input id="email" class="form-control <?= $updateUser; ?>" type="text" name="email" value="<?= $email; ?>"
               placeholder="usuario@ejemplo.com" autocomplete="off">
@@ -168,26 +169,26 @@
             <div class="help-block"></div>
           </div>
           <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="email"><?= lang('USER_CONFIRM_EMAIL') ?></label>
             <input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
               autocomplete="off" onpaste="return false">
             <div class="help-block"></div>
           </div>
           <?php endif; ?>
-          <div class="form-group col-6 <?= $skipLandLine; ?>">
+          <div class="form-group col-6 input-height <?= $skipLandLine; ?>">
             <label for="landLine"><?= lang('USER_PHONE_LANDLINE') ?></label>
             <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine" value="<?= $landLine; ?>"
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
             <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
               autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="col-6 <?= $skipOtherPhone; ?>">
+          <div class="col-6 input-height <?= $skipOtherPhone; ?>">
             <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?></label>
             <div class="form-row">
               <div class="form-group col-6">
@@ -213,31 +214,31 @@
       <div class="bg-secondary p-2 h-100">
         <h4 class="mt-1 pb-2 h4"><?= lang('USER_LABOR_DATA') ?></h4>
         <div class="row mx-1">
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
             <input id="fiscalId" class="form-control" type="text" name="fiscalId" autocomplete="off" value="<?= $fiscalId ?>" readonly>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="workplace"><?= lang('USER_WORK_CENTER') ?></label>
             <input id="workplace" class="form-control" type="text" name="workplace" autocomplete="off" value="<?= $workplace; ?>">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-4 col-lg-6">
+          <div class="form-group col-6 input-height">
             <label for="employed"><?= lang('USER_EMPLOYMENT_STATUS') ?></label>
             <select id="employed" class="custom-select form-control" name="employed">
               <?php foreach (lang('USER_EMPLOY_SITUATION_LIST') as $key => $value) : ?>
-              <option value="<?= $key; ?>" <?= $employed == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
+              <option value="<?= $key; ?>" <?= $employed == $key ? 'selected' : ''; ?> <?= $key === '' ? 'selected disabled' : '';  ?>>
                 <?= $value; ?>
               </option>
               <?php endforeach; ?>
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6">
+          <div class="form-group col-6 input-height">
             <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
             <select id="laborOld" class="custom-select form-control" name="laborOld">
-              <?php if ($laborOld == ''): ?>
+              <?php if ($laborOld === ''): ?>
               <option selected disabled>Selecciona</option>
               <?php endif; ?>
               <?php for ($index = 0; $index <= 50; $index++): ?>
@@ -246,7 +247,7 @@
             </select>
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6 col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="profession"><?= lang('USER_PROFESSION') ?></label>
             <select id="profession" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreProfession; ?>" name="profession">
               <option value="<?= $professionType; ?>" selected><?= $profession; ?></option>
@@ -254,49 +255,54 @@
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6 col-lg-12 col-xl-6">
+          <div class="form-group col-6 col-lg-12 col-xl-6 input-height">
             <label for="charge"><?= lang('USER_CHARGE') ?></label>
-            <input id="chargeText" class="form-control" type="text" name="chargeText" autocomplete="off">
+            <input id="position" class="form-control" type="text" name="position" value="<?= $position ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
 
-          <div class="form-group col-6">
-            <label for="averageMonthly"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
-            <input id="averageMonthlyText" class="form-control" type="text" name="averageMonthlyText" autocomplete="off">
+          <div class="form-group col-6 input-height">
+            <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+            <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="<?= $averageIncome ?>"
+              autocomplete="off">
             <div class="help-block"></div>
           </div>
 
           <div class="form-group col-12 center">
             <label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesPublicOffice">Si</label>
+              <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes"
+                <?= $publicOfficeOld == '1' ? 'checked' : '' ?>>
+              <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noPublicOffice" class="custom-control-input" type="radio" name="PublicOffice" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noPublicOffice">No</label>
+              <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no"
+                <?= $publicOfficeOld == '0' ? 'checked' : '' ?>>
+              <label class="custom-control-label" for="noPublicOfficeOld">No</label>
             </div>
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="publicPosition"><?= lang('USER_PUBLIC_POSITION') ?></label>
-            <input id="publicPosition" class="form-control" disabled type="text" name="publicPosition" autocomplete="off">
+            <label for="publicOffice"><?= lang('USER_PUBLIC_POSITION') ?></label>
+            <input id="publicOffice" class="form-control" type="text" name="publicOffice" value="<?= $publicOffice; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6">
-            <label for="institution"><?= lang('USER_INSTITUTION') ?></label>
-            <input id="institution" class="form-control" disabled type="text" name="institution" autocomplete="off">
+            <label for="publicInst"><?= lang('USER_INSTITUTION') ?></label>
+            <input id="publicInst" class="form-control" type="text" name="publicInst" value="<?= $publicInst; ?>" autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 pt-2 center">
             <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="yesArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="Si" autocomplete="off">
-              <label class="custom-control-label" for="yesArticleLaw">Si</label>
+              <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes"
+                <?= $taxesObligated == '1' ? 'checked' : '' ?>>
+              <label class="custom-control-label" for="yesTaxesObligated">Si</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-              <input id="noArticleLaw" class="custom-control-input" type="radio" name="ArticleLaw" value="No" checked autocomplete="off">
-              <label class="custom-control-label" for="noArticleLaw">No</label>
+              <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no"
+                <?= $taxesObligated == '0' ? 'checked' : '' ?>>
+              <label class="custom-control-label" for="noTaxesObligated">No</label>
             </div>
             <div class="help-block"></div>
           </div>
@@ -368,15 +374,13 @@
           </div>
           <?php if($longProfile == 'S'): ?>
           <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-            <input id="acceptTermsProtection" class="custom-control-input" type="checkbox" name="acceptTerms"
-              <?= $terms == '1' ? 'checked disabled' : '' ?>>
-            <label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
+            <input id="protection" class="custom-control-input" type="checkbox" name="protection" <?= $contract == '1' ? 'checked disabled' : '' ?>>
+            <label class="custom-control-label" for="protection"><?= lang('USER_ACCEPT_PROTECTION'); ?></label>
             <div class="help-block"></div>
           </div>
           <div class="form-group custom-control custom-switch col-12 col-lg-4 pt-1 mb-0">
-            <input id="acceptTermsContract" class="custom-control-input" type="checkbox" name="acceptTerms"
-              <?= $terms == '1' ? 'checked disabled' : '' ?>>
-            <label class="custom-control-label" for="acceptTerms"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
+            <input id="contract" class="custom-control-input" type="checkbox" name="contract" <?= $protection == '1' ? 'checked disabled' : '' ?>>
+            <label class="custom-control-label" for="contract"><?= lang('USER_ACCEPT_CONTRACT'); ?></label>
             <div class="help-block"></div>
           </div>
           <?php endif; ?>

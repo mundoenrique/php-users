@@ -30,7 +30,7 @@ $(function () {
 			insertFormInput(true)
 			validateIdentity();
 		}
-	})
+	});
 
 	$(radioType).change(function(){
 		if($(this).attr('value')=='virtual'){
@@ -39,15 +39,15 @@ $(function () {
 				$(numberCard).text(lang.USER_EMAIL);
 				$('#numberCard').attr('id','email');
 				$('#email').attr('name','email').attr('maxlength','32');
-				resetInput();
 		} else {
 				$('#physicalCardPIN').show();
 				$('#cardPIN').removeClass('ignore')
 				$(numberCard).text(lang.GEN_NUMBER_CARD);
 				$('#email').attr('id','numberCard');
 				$('#numberCard').attr('name','numberCard').attr('maxlength','16');
-				resetInput();
 		}
+
+		resetInput();
 	});
 
 	$('#system-info').on('click', '.send-otp', function (e) {

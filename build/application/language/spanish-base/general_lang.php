@@ -38,6 +38,8 @@ $lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
+//LINKS
+$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -64,6 +66,8 @@ $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
 $lang['GEN_CURRENCY'] = '$';
+$lang['GEN_DECIMAL'] = '.';
+$lang['GEN_THOUSANDS'] = ',';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
@@ -114,6 +118,12 @@ $lang['GEN_CONTACTS'] = [
 	'Tarjeta LATODO' => '6193500',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+$lang['GEN_TYPE_DOCUMENT'] = 'Tipo de documento';
+//OTP MESSAGES
+$lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
+$lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
+$lang['GEN_OTP_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo.';
+$lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";

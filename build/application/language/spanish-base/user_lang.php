@@ -12,13 +12,13 @@ $lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
 $lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
-$lang['USER_SIGNIN_PASS_EXPIRED'] = 'tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas';
+$lang['USER_SIGNIN_PASS_EXPIRED'] = 'Tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas.';
 //GENERAL LANGUAGE
 $lang['USER_PASS_TEMPORAL'] = 'Tu contraseña es temporal. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de seguridad es necesario que la cambies antes de continuar en nuestro sistema "<strong>%s</strong>".';
 $lang['USER_ACCEPT_TERMS'] = 'Acepto las condiciones de uso de este sistema.';
 $lang['USER_ACCEPT_PROTECTION'] = 'Aceptar protección de datos personales.';
-$lang['USER_ACCEPT_CONTRACT'] = 'Acepto el contrato de cuenta dinero electrónico plata beneficios.';
+$lang['USER_ACCEPT_CONTRACT'] = 'Acepto el contrato de cuenta dinero electrónico.';
 $lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraseña en "<strong>%s</strong>", por favor completa los siguientes datos.';
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
@@ -83,7 +83,7 @@ $lang["USER_TERMS_CONTENT"] = '
 ';
 $lang['USER_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
 $lang['USER_MSG_ACCESS_ACCOUNT'] = '<p>Si aún no posees usuario para acceder al sistema <strong>%s</strong>, a continuación debes proporcionar los siguientes datos relacionados con tu cuenta:</p>';
-$lang["USER_CONT_PROTECTION_TITLE"]='Contrato';
+$lang["USER_CONT_PROTECTION_TITLE"]='Contrato de protección';
 $lang["USER_CONT_PROTECTION_SUBTITLE"]='Protección de datos personales';
 $lang["USER_CONT_PROTECTION_CONTENT"] = '
 <div class="justify pr-3">
@@ -107,7 +107,7 @@ $lang["USER_CONT_PROTECTION_CONTENT"] = '
 	usted deberá presentar su solicitud en la oficina de TEBCA o a través del Centro de Contacto.</p>
 </div>
 ';
-$lang["USER_CONT_BENEFITS_TITLE"]='Contrato';
+$lang["USER_CONT_BENEFITS_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_BENEFITS_SUBTITLE"]='Contrato de cuenta dinero electrónico Plata Beneficios';
 $lang["USER_CONT_BENEFITS_CONTENT"] = '
 <div class="justify pr-3">
@@ -275,7 +275,7 @@ $lang["USER_CONT_BENEFITS_CONTENT"] = '
 	</ol>
 </div>
 ';
-$lang["USER_CONT_GENERAL_TITLE"]='Contrato';
+$lang["USER_CONT_GENERAL_TITLE"]='Contrato de dinero electrónico';
 $lang["USER_CONT_GENERAL_SUBTITLE"]='Contrato de cuenta dinero electrónico PN cuenta general';
 $lang["USER_CONT_GENERAL_CONTENT"] = '
 <div class="justify pr-3">
@@ -512,8 +512,8 @@ $lang['USER_WORK_CENTER'] = 'Centro laboral';
 $lang['USER_EMPLOYMENT_STATUS'] = 'Situación laboral';
 $lang['USER_EMPLOYMENT_STATUS_LIST'] = [
 	'' => 'Selecciona',
-	'1' => 'Dependiente',
-	'0' => 'Independiente'
+	'0' => 'Independiente',
+	'1' => 'Dependiente'
 ];;
 $lang['USER_SENIORITY'] = 'Antigüedad laboral';
 $lang['USER_OCCUPATION'] = 'Ocupación, oficio o profesión';
@@ -539,3 +539,11 @@ $lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';
 $lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de %s con los datos ingresados. Verifica tu información e intenta nuevamente.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';
+// RECOVER ACCESS
+$lang['USER_RECOVER_DOC_TYPE'] = [
+	'' => 'Selecciona',
+	'CC' => 'Cédula de ciudadania',
+	'PP' => 'Pasaporte',
+];
+//SESSION EXPIRE
+$lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
