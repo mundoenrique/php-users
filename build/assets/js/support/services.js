@@ -64,13 +64,14 @@ $(function () {
 		var services = JSON.parse($(event).find('input[type=hidden][name="services"]').val());
 		var statusCard = $(event).find('input[type=hidden][name="status"]').val();
 		var statusText = statusCard == '' ? lang.CUST_TEMPORARY_LOCK : lang.CUST_UNLOCK_CARD;
+		var statustextCard = statusCard == '' ? lang.CUST_TEMPORARILY_LOCK : lang.CUST_UNLOCK;
 
 		if (statusCard != '' && statusCard != 'PB') {
 			return true;
 		}
 
 		$('.status-text1').text(statusText);
-		$('.status-text2').text(statusText.toLowerCase());
+		$('.status-text2').text(statustextCard.toLowerCase());
 		$('.nav-config-box').removeClass('no-events');
 		$('.nav-config-box > li').removeClass('active');
 		$('#expireDate').val(expireDate);
@@ -228,7 +229,7 @@ function requestSupport(thisAction) {
 		if (data.action == 'temporaryLock' && response.success) {
 			var statusText = $('#status').val() == '' ? lang.CUST_UNLOCK_CARD : lang.CUST_TEMPORARY_LOCK
 			$('.status-text1').text(statusText);
-			$('.status-text2').text(statusText.toLowerCase());
+			$('.status-text2').text(statustextCard.toLowerCase());
 			var status = $('#status').val() == '' ? 'PB' : ''
 			$('#status').val(status);
 		}
