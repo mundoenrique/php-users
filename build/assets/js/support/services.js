@@ -228,6 +228,7 @@ function requestSupport(thisAction) {
 	callNovoCore(who, where, data, function (response) {
 		if (data.action == 'temporaryLock' && response.success) {
 			var statusText = $('#status').val() == '' ? lang.CUST_UNLOCK_CARD : lang.CUST_TEMPORARY_LOCK
+			var statustextCard = $('#status').val() == '' ? lang.CUST_TEMPORARILY_LOCK : lang.CUST_UNLOCK
 			$('.status-text1').text(statusText);
 			$('.status-text2').text(statustextCard.toLowerCase());
 			var status = $('#status').val() == '' ? 'PB' : ''
