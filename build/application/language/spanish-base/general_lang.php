@@ -118,6 +118,9 @@ $lang['GEN_CONTACTS'] = [
 	'Tarjeta LATODO' => '6193500',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
+$lang['GEN_SELECT_ACCOUNT'] = 'Selecciona una cuenta';
+$lang['GEN_OTHER_PRODUCTS'] = 'Otro producto';
+$lang['GEN_MOVEMENTS'] = 'Movimientos';
 $lang['GEN_TYPE_DOCUMENT'] = 'Tipo de documento';
 //OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';

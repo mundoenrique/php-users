@@ -72,8 +72,9 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->status = '';
 		$this->render->isVirtual = '';
 		$this->render->tittleVirtual = '';
-		$this->render->statustext = 'Bloquear';
-		$this->render->RecoverPinText = 'Recuperar PIN';
+		$this->render->statustext = lang('CUST_TEMPORARY_LOCK');
+		$this->render->statustextCard =  lang('CUST_TEMPORARILY_LOCK');
+		$this->render->RecoverPinText = lang('CUST_RETRIEVE_PIN');
 		$this->render->activeEvents = 'no-events';
 		$this->render->uniqueEvent = $uniqueEvent;
 		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
@@ -90,7 +91,8 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->render->status = $cardsList[0]->status;
 			$this->render->isVirtual = $cardsList[0]->isVirtual;
 			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
-			$this->render->statustext = $cardsList[0]->status == '' ? 'Bloquear' : 'Desbloquear';
+			$this->render->statustext = $cardsList[0]->status == '' ? lang('CUST_TEMPORARY_LOCK') : lang('CUST_UNLOCK_CARD');
+			$this->render->statustextCard = $cardsList[0]->status == '' ? lang('CUST_TEMPORARILY_LOCK') : lang('CUST_UNLOCK');
 			$this->render->activeEvents = '';
 
 			if (!in_array($this->render->status, ['PB', ''])) {
