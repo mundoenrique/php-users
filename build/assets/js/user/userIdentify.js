@@ -34,17 +34,17 @@ $(function () {
 
 	$(radioType).change(function(){
 		if($(this).attr('value')=='virtual'){
-				$('#physicalCardPIN').hide();
-				$('#cardPIN').addClass('ignore')
-				$(numberCard).text(lang.USER_EMAIL);
-				$('#numberCard').attr('id','email');
-				$('#email').attr('name','email').attr('maxlength','32');
+			$('#physicalCardPIN').hide();
+			$('#cardPIN').addClass('ignore')
+			$(numberCard).text(lang.USER_EMAIL);
+			$('#numberCard').attr('maxlength', '100').attr('id','email');
+			$('#email').attr('name','email');
 		} else {
-				$('#physicalCardPIN').show();
-				$('#cardPIN').removeClass('ignore')
-				$(numberCard).text(lang.GEN_NUMBER_CARD);
-				$('#email').attr('id','numberCard');
-				$('#numberCard').attr('name','numberCard').attr('maxlength','16');
+			$('#physicalCardPIN').show();
+			$('#cardPIN').removeClass('ignore')
+			$(numberCard).text(lang.GEN_NUMBER_CARD);
+			$('#email').attr('id','numberCard');
+			$('#numberCard').attr('name','numberCard').attr('maxlength','16');
 		}
 
 		resetInput();
