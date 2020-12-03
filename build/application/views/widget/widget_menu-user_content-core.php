@@ -18,6 +18,9 @@
 				</li>
 				<?php endif; ?>
 				<li>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('GEN_MENU_CHANGE_PASS') ?></a>
+				</li>
+				<li>
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url('cerrar-sesion/inicio') ?>"><?= lang('GEN_MENU_SIGNOUT'); ?></a>
 				</li>
 			</ul>
