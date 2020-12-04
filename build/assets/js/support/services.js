@@ -155,8 +155,10 @@ $(function () {
 			break;
 		}
 
-		validateForms(form);
-		validForm = form.valid();
+		if (action != 'requestPin') {
+			validateForms(form);
+			validForm = form.valid();
+		}
 
 		if (validForm) {
 			form = $('#operation');
@@ -189,8 +191,8 @@ $(function () {
 				$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
 				$('.hide-out').addClass('hide');
 			}
-
-			requestSupport(thisAction);
+			console.log(data);
+			// requestSupport(thisAction);
 		}
 	});
 
