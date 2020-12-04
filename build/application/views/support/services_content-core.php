@@ -113,15 +113,27 @@
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary">
           <span class="status-text1"><?= $statustext ?></span>
-        </h4>
-        <p>
-				<?= novoLang(lang('CUST_ACTION_TAKE'), mb_strtolower($statustextCard)); ?>
-        </p>
-        <hr class="separador-one w-100">
-        <div class="flex items-center justify-end pt-3">
-          <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
-          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
-        </div>
+				</h4>
+				<form id="temporaryLockForm" data-status="<?= $status ?>">
+					<div id="selectTempLockReason" class="row none form-group col-lg-4">
+						<label for="temporaryLockReason">Motivo de la solicitud</label>
+						<select id="temporaryLockReason" class="custom-select form-control" name="temporaryLockReason">
+						<option value="" selected disabled>Selecciona</option>
+						<?php foreach (lang('CUST_TEMPORARY_LOCK_REASON') AS  $value): ?>
+						<option value="<?= $value ?>"><?= $value ?></option>
+						<?php endforeach; ?>
+						</select>
+						<div class="help-block"></div>
+					</div>
+					<div id="msgTemporaryLock" class="row mx-0">
+						<p><?= novoLang(lang('CUST_ACTION_TAKE'), $statustext) ?></p>
+					</div>
+					<hr class="separador-one w-100">
+					<div class="flex items-center justify-end pt-3">
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
+						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
+					</div>
+				</form>
       </div>
     </div>
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
@@ -141,7 +153,7 @@
             </div>
           </div>
 					<div id="msgReplacementCard" class="row none mx-0">
-					<p><?= lang ('CUST_REPLACE_CARD') ?></p>
+						<p><?= lang ('CUST_REPLACE_CARD') ?></p>
 					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
