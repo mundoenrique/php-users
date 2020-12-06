@@ -116,3 +116,9 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Co' => '4',
 	'Mx-Bn' => '16',
 ];
+
+$lang['CONF_MODULE_RECAPTCHA'] = [
+	'signin',
+	'accessRecover',
+	'userIdentify'
+];

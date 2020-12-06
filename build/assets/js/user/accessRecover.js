@@ -22,17 +22,11 @@ $(function () {
 
 			$(this).html(loader);
 			insertFormInput(true);
-			who = 'User'; where = lang.GEN_LINK_SERVICE_RECOVER_ACCESS;
 
-			callNovoCore(who, where, data, function (response) {
-
-				if (lang.GEN_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
-					showModalOTP(response);
-				}
-
-				insertFormInput(false);
-				recoverAccessBtn.html(btnText)
-			})
+			getRecaptchaToken('AccessRecover', function (recaptchaToken) {
+			  data.token = recaptchaToken;
+				getAccessRecover();
+			});
 		}
 	});
 
@@ -49,11 +43,11 @@ $(function () {
 				.html(loader)
 				.prop('disabled', true);
 			insertFormInput(true);
-			who = 'User'; where = 'ValidateOTP';
 
-			callNovoCore(who, where, data, function(response) {
-				insertFormInput(false)
-			})
+			getRecaptchaToken('ValidateOTP', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				getValidateOTP();
+			});
 		}
 	});
 });
@@ -85,4 +79,24 @@ function showModalOTP(response) {
 
 		appMessages(response.title, inputModal, response.icon, response.modalBtn)
 	}
+}
+
+function getAccessRecover(){
+	who = 'User'; where = lang.GEN_LINK_SERVICE_RECOVER_ACCESS;
+
+	callNovoCore(who, where, data, function (response) {
+		if (lang.GEN_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
+			showModalOTP(response);
+		}
+	insertFormInput(false);
+	recoverAccessBtn.html(btnText)
+	})
+}
+
+function getValidateOTP(){
+	who = 'User'; where = 'ValidateOTP';
+
+	callNovoCore(who, where, data, function(response) {
+		insertFormInput(false)
+	})
 }

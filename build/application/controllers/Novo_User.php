@@ -69,12 +69,19 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
 
 		$view = 'userIdentify';
+
+		if (ACTIVE_RECAPTCHA) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		}
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
 			"user/userIdentify",
+			"googleRecaptcha",
 			"user/manageImageTerm"
 		);
 		$this->render->activeHeader = TRUE;
@@ -142,11 +149,18 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
 
 		$view = 'accessRecover';
+
+		if (ACTIVE_RECAPTCHA) {
+			$this->load->library('recaptcha');
+			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+		}
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"googleRecaptcha",
 			"user/accessRecover"
 		);
 		$this->render->activeHeader = TRUE;

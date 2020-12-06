@@ -28,7 +28,11 @@ $(function () {
 		if (form.valid()) {
 			$(this).html(loader)
 			insertFormInput(true)
-			validateIdentity();
+
+			getRecaptchaToken('UserIdentify', function (recaptchaToken) {
+			  data.token = recaptchaToken;
+				validateIdentity();
+			});
 		}
 	});
 
@@ -62,7 +66,11 @@ $(function () {
 			.html(loader)
 			.removeClass('send-otp');
 			data.codeOtp = $('#codeOTP').val();
-			validateIdentity();
+
+			getRecaptchaToken('UserIdentifyOTP', function (recaptchaToken) {
+				data.token = recaptchaToken;
+				validateIdentity();
+			});
 		}
 	});
 
