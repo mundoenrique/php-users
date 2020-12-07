@@ -282,9 +282,9 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
-			if ($this->isResponseRc === 0) {
-				$response = $this->sendToService('callWs_AccessRecover');
-			}
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_AccessRecover');
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -1415,7 +1415,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
-		$userName = $dataRequest->userName ?? '';
+		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? $dataRequest->docmentId);
 
 		$result = $this->recaptcha->verifyResponse($dataRequest->token);
 		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
