@@ -1,11 +1,12 @@
 'use strict'
 var reportsResults;
 var inputModal;
+var recoverAccessBtn;
 $(function () {
 	insertFormInput(false);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	var recoverAccessBtn = $('#recoverAccessBtn');
+	recoverAccessBtn = $('#recoverAccessBtn');
 
 	$('#recoverAccessBtn').on('click', function(e) {
 		e.preventDefault();
