@@ -71,7 +71,6 @@ $(function () {
 		}
 
 		form = $('#signUpForm');
-		console.log('confirmar click');
 		ignoreFields(false, form);
 		validateForms(form);
 
@@ -143,11 +142,18 @@ $('.multi-step-form > .progress-container > .progress > .progress-bar').each(fun
 });
 
 $('.multi-step-form > .progress-container .progress-icon').click(function (event) {
-	// if (!valid($(thisFs)`fieldset.active`)) {
-	//   return false;
-	// }
+	let lastActive = $('.multi-step-form > .progress-container .progress-icon.active').last().data('index');
+	let thisFs = $('.multi-step-form .form-container fieldset.active');
 	let lastSeen = +$(this).closest('.multi-step-form').find(`fieldset.seen`).last().data('index');
-	console.log($(this).closest('.multi-step-form').find(`fieldset.seen`));
+
+	if ($(this).data('index') > lastActive) {
+		console.log('hola');
+		if (!valid(thisFs)) {
+			removeViewedFieldsets(lastActive);
+			return false;
+		}
+	}
+
 	if (+$(this).data('index') <= lastSeen) {
 		moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
 	}
@@ -160,7 +166,6 @@ $('.multi-step-form .form-container fieldset > .multi-step-button button.next').
 	let msContainer = thisFs.closest('.multi-step-form');
 
 	if ($(this).attr('id') == 'signUpBtn') {
-		console.log('sal');
 		return false;
 	}
 
@@ -173,8 +178,6 @@ $('.multi-step-form .form-container fieldset > .multi-step-button button.next').
 			.addClass('seen');
 	}
 	moveTo(msContainer, index + 1);
-	// msContainer.find(`fieldset[data-index=${index + 1}]`)
-	//   .addClass('seen');
 	return false;
 });
 
@@ -183,8 +186,6 @@ $('.multi-step-form .form-container fieldset > .multi-step-button button.back').
 	let index = +thisFs.data('index');
 	let msContainer = thisFs.closest('.multi-step-form');
 	moveTo(msContainer, index - 1);
-	// msContainer.find(`fieldset[data-index=${index + 1}]`)
-	//   .addClass('seen');
 	return false;
 });
 
@@ -197,6 +198,10 @@ function valid(button) {
 	validateForms(form);
 	if (!form.valid()) {
 		fieldset.removeClass('valid');
+
+		var currentIndex = Number(fieldset.attr("data-index"));
+		removeViewedFieldsets(currentIndex);
+
 		valid = false;
 	} else {
 		fieldset.addClass('valid');
@@ -293,7 +298,7 @@ function moveTo(msContainer, index) {
 					thisProgress.css({
 						'width': '100%'
 					});
-					//thisProgress.find('.progress-icon').removeClass('active');
+					thisProgress.find('.progress-icon').addClass('active');
 					animating--;
 				}, (i - currIndex) * stagger);
 			} else if (i === index) {
@@ -357,5 +362,13 @@ function ignoreFields(action, form) {
 		form.find('input, select, textarea').addClass('ignore');
 	} else {
 		form.find('input, select, textarea').removeClass('ignore');
+	}
+}
+
+function removeViewedFieldsets(index) {
+	var total = $('fieldset').length;
+
+	for (let i = index + 1; i < total + 1; i++) {
+		$('fieldset[data-index=' + i + ']').removeClass('seen');
 	}
 }
