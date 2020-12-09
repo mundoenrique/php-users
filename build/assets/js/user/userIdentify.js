@@ -2,7 +2,7 @@
 var radioType = 'input:radio[name=cardType]';
 var numberCard = 'label[for=numberCard]';
 var input = 'input[type="text"]';
-var loginIpMsg,btnTex,formcodeOTP,btnTextOtp;
+var loginIpMsg, formcodeOTP;
 
 $(function () {
 	insertFormInput(false);
@@ -16,19 +16,20 @@ $(function () {
 		e.preventDefault();
 		validateForms(form);
 		btnText = $(this).html();
-		data = getDataForm(form);
-		if (lang.CONF_CHANGE_VIRTUAL == 'ON'){
-			if($('input:radio[name=cardType]:checked').val()=='virtual'){
+
+		if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
+			if ($('input:radio[name=cardType]:checked').val()=='virtual') {
 				delete data.cardPIN;
 				delete data.physicalCard;
-			}else{
+			} else {
 				delete data.virtualCard;
 			}
 		}
-		if (form.valid()) {
-			$(this).html(loader)
-			insertFormInput(true)
 
+		if (form.valid()) {
+			data = getDataForm(form);
+			$(this).html(loader);
+			insertFormInput(true);
 			getRecaptchaToken('UserIdentify', function (recaptchaToken) {
 			  data.token = recaptchaToken;
 				validateIdentity();
@@ -36,8 +37,8 @@ $(function () {
 		}
 	});
 
-	$(radioType).change(function(){
-		if($(this).attr('value')=='virtual'){
+	$(radioType).change(function() {
+		if($(this).attr('value') == 'virtual'){
 			$('#physicalCardPIN').hide();
 			$('#cardPIN').addClass('ignore')
 			$(numberCard).text(lang.USER_EMAIL);
@@ -59,12 +60,13 @@ $(function () {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		validateForms(formcodeOTP);
-		if(formcodeOTP.valid()){
+
+		if (formcodeOTP.valid()) {
 			$('#formVerificationOTP input').attr('disabled', true);
 			$(this)
-			.off('click')
-			.html(loader)
-			.removeClass('send-otp');
+				.off('click')
+				.html(loader)
+				.removeClass('send-otp');
 			data.codeOtp = $('#codeOTP').val();
 
 			getRecaptchaToken('UserIdentifyOTP', function (recaptchaToken) {
@@ -73,7 +75,6 @@ $(function () {
 			});
 		}
 	});
-
 });
 
 function validateIdentity() {
@@ -82,11 +83,11 @@ function validateIdentity() {
 		switch (response.code) {
 			case 0:
 				var dataUser = response.data;
-				dataUser = JSON.stringify({dataUser})
+				dataUser = JSON.stringify({dataUser});
 				dataUser = cryptoPass(dataUser);
 				$('#signupForm')
-				.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
-				.submit()
+					.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
+					.submit();
 			break;
 			case 2:
 				$('#identityBtn').html(btnText);
