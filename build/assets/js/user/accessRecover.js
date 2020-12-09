@@ -1,12 +1,8 @@
 'use strict'
-var reportsResults;
-var inputModal;
-var recoverAccessBtn;
 $(function () {
 	insertFormInput(false);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	recoverAccessBtn = $('#recoverAccessBtn');
 
 	$('#recoverAccessBtn').on('click', function(e) {
 		e.preventDefault();
@@ -56,17 +52,17 @@ $(function () {
 function validateRecoveryOptions() {
 
 	if ($('#recoveryUser').is(':checked')) {
-		delete data.recoveryPwd
+		delete data.recoveryPwd;
 	}
 
 	if ($('#recoveryPwd').is(':checked')) {
-		delete data.recoveryUser
+		delete data.recoveryUser;
 	}
 }
 
 function showModalOTP(response) {
 
-	if ( response.code == 0 ) {
+	if (response.code == 0) {
 		$('#accept').addClass('send-otp');
 		inputModal = response.msg;
 		inputModal +=	'<form id="otpModal" name="otpModal" onsubmit="return false" class="pt-2">';
@@ -89,15 +85,16 @@ function getAccessRecover(){
 		if (lang.GEN_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
 			showModalOTP(response);
 		}
-	insertFormInput(false);
-	recoverAccessBtn.html(btnText)
-	})
+
+		insertFormInput(false);
+		$('#recoverAccessBtn').html(btnText);
+	});
 }
 
 function getValidateOTP(){
 	who = 'User'; where = 'ValidateOTP';
 
 	callNovoCore(who, where, data, function(response) {
-		insertFormInput(false)
-	})
+		insertFormInput(false);
+	});
 }

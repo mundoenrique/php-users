@@ -10,15 +10,15 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('#cardPIN').removeClass('ignore');
-	form = $('#identityForm');
 
 	$('#identityBtn').on('click', function(e) {
 		e.preventDefault();
+		form = $('#identityForm');
+		btnText = $(this).html().trim();
 		validateForms(form);
-		btnText = $(this).html();
 
 		if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
-			if ($('input:radio[name=cardType]:checked').val()=='virtual') {
+			if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
 				delete data.cardPIN;
 				delete data.physicalCard;
 			} else {
