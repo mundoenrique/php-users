@@ -29,7 +29,6 @@ $config['asset_path'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
-$config['access_url'] = explode(',', ACCESS_URL);
 $config['client'] = 'novo';
 $config['channel'] = 'personasWeb';
 $config['keyAES256'] = KEY_AES256;
