@@ -5,16 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  */
 class Cryptography {
-	private $CI;
-	private $CypherBase;
-	private $keyPhrase;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
-
-		$this->CI = &get_instance();
-		$this->CypherBase = $this->CI->config->item('cypher_base');
 	}
 
 	public function encrypt($object)
@@ -24,11 +18,13 @@ class Cryptography {
 		$keyStr = $this->generateKey();
 		$salt = openssl_random_pseudo_bytes(8);
     $salted = '';
-    $dx = '';
+		$dx = '';
+
     while (strlen($salted) < 48) {
-        $dx = md5($dx.$keyStr.$salt, true);
-        $salted .= $dx;
-    }
+			$dx = md5($dx.$keyStr.$salt, true);
+			$salted .= $dx;
+		}
+
     $key = substr($salted, 0, 32);
     $iv  = substr($salted, 32,16);
     $encrypted_data = openssl_encrypt(json_encode($object, JSON_UNESCAPED_UNICODE), 'aes-256-cbc', $key, true, $iv);
@@ -48,20 +44,28 @@ class Cryptography {
 
 	public function decrypt($passphrase, $jsonString)
 	{
+		log_message('INFO', 'NOVO Cryptography: Decrypt Method Initialized');
+
 		$jsondata = json_decode(base64_decode(urldecode($jsonString)), true);
+
 		try {
-        $salt = hex2bin($jsondata["str"]);
-        $iv  = hex2bin($jsondata["env"]);
-    } catch(Exception $e) { return null; }
+			$salt = hex2bin($jsondata["str"]);
+			$iv  = hex2bin($jsondata["env"]);
+		} catch(Exception $e) {
+			return null;
+		}
+
     $ct = base64_decode($jsondata["req"]);
     $concatedPassphrase = $passphrase.$salt;
     $md5 = array();
     $md5[0] = md5($concatedPassphrase, true);
-    $result = $md5[0];
+		$result = $md5[0];
+
     for ($i = 1; $i < 3; $i++) {
-        $md5[$i] = md5($md5[$i - 1].$concatedPassphrase, true);
-        $result .= $md5[$i];
-    }
+			$md5[$i] = md5($md5[$i - 1].$concatedPassphrase, true);
+			$result .= $md5[$i];
+		}
+
     $key = substr($result, 0, 32);
 		$data = openssl_decrypt($ct, 'aes-256-cbc', $key, true, $iv);
 
@@ -71,16 +75,15 @@ class Cryptography {
 	private function generateKey()
 	{
 		$length = 32;
-    $CypherBaseLength = strlen($this->CypherBase);
+    $CypherBaseLength = strlen(CYPHER_BASE);
 		$randomString = '';
 
     for ($i = 0; $i < $length; $i++) {
-			$randomString .= $this->CypherBase[rand(0, $CypherBaseLength - 1)];
+			$randomString .= CYPHER_BASE[rand(0, $CypherBaseLength - 1)];
 		}
 
     return $randomString;
 	}
-
 	/**
 	 * @info Método encargado de preparar un dato para su desencriptado
 	 * @author Pedro Torres
@@ -89,6 +92,7 @@ class Cryptography {
 	 */
 	public function decryptOnlyOneData ($data) {
 		$data = json_decode(base64_decode($data));
+
 		return $this->decrypt(
 			base64_decode($data->plot),
 			utf8_encode($data->password)

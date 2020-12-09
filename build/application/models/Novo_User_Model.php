@@ -26,6 +26,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Iniciar sesion';
 
 		$userName = mb_strtoupper($dataRequest->userName);
+		$dataRequest->userName = $userName;
 
 		$this->dataAccessLog->userName = $userName;
 
@@ -1417,7 +1418,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? $dataRequest->docmentId);
 
-		$result = $this->recaptcha->verifyResponse($dataRequest->token);
+		$result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
 		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
