@@ -37,7 +37,7 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = $this->input->post('userName') ? mb_strtoupper($this->input->post('userName')) : $this->appUserName;
+		$this->appUserName = $this->input->post('userName') != NULL ? mb_strtoupper($this->input->post('userName')) : $this->appUserName;
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
