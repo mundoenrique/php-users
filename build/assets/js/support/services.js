@@ -140,6 +140,10 @@ $(function () {
 		$('#action').val(action);
 
 		switch (action) {
+			case 'temporaryLock':
+				form = $('#temporaryLockForm');
+					dataFormAction.reasonText = $('#temporaryLockReason').val();
+				break;
 			case 'replacement':
 				form = $('#replacementForm');
 				dataFormAction.status = $('#replaceMotSol').val();
@@ -151,7 +155,7 @@ $(function () {
 			break;
 		}
 
-		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
+		if (action != 'requestPin') {
 			validateForms(form);
 			validForm = form.valid();
 		}

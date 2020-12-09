@@ -35,6 +35,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->prefix = $dataRequest->prefix;
 		$this->dataRequest->fechaExp = $expireDate;
 		$this->dataRequest->codBloqueo = $dataRequest->status == '' ? 'PB' : '00';
+		$this->dataRequest->TextoBloqueo = isset($dataRequest->reasonText) ? $dataRequest->reasonText : '';
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otpCode) ? $dataRequest->otpCode : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 

@@ -82,6 +82,10 @@ $lang['CUST_REPLACE_REASON'] = [
 	'TD' => 'Tarjeta deteriorada',
 	'TR' => 'Reemplazar tarjeta',
 ];
+$lang['CUST_TEMPORARY_LOCK_REASON'] = [
+	'Tarjeta perdida',
+	'Bloqueo preventivo',
+];
 $lang['CUST_REPLACE_MSG'] = 'Se ha generado una nueva tarjeta, la puede ver en la lista consolidada.';
 $lang['CUST_STOLEN_CARD'] = '43';
 $lang['CUST_REPLACE_CARD'] = ' Si realmente deseas reponer tu tarjeta, presiona continuar para asignar una nueva.';
