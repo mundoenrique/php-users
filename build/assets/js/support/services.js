@@ -191,8 +191,8 @@ $(function () {
 				$('#pre-loader-twins, #pre-loader-limit').removeClass('hide');
 				$('.hide-out').addClass('hide');
 			}
-			console.log(data);
-			// requestSupport(thisAction);
+
+			requestSupport(thisAction);
 		}
 	});
 
