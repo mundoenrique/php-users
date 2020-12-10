@@ -348,7 +348,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pais = $this->config->item('country');
 		$msgGeneral = 0;
 
-		$response = $this->sendToService('callWs_AccessRecoverOTP');
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_AccessRecoverOTP');
+		}
 
 		switch($this->isResponseRc) {
 			case 200:
@@ -365,6 +369,14 @@ class Novo_User_Model extends NOVO_Model {
 			case -103:
 				$msgGeneral = 1;
 				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
+				break;
+			case 9999:
+				$this->response->code = 4;
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
+				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 		}
 
