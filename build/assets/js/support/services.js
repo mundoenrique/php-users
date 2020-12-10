@@ -12,6 +12,16 @@ $(function () {
 		$('#msgReplacementCard').removeClass('none');
 	}
 
+	if ($('#operation').find('input[type=hidden][name="status"]').val() == '' && lang.CONF_TEMPORARY_LOCK_REASON == 'ON') {
+		$('#temporaryLockReason').removeClass('ignore');
+		$('#selectTempLockReason').removeClass('none');
+		$('#msgTemporaryLock').addClass('none');
+	} else {
+		$('#temporaryLockReason').addClass('ignore');
+		$('#selectTempLockReason').addClass('none');
+		$('#msgTemporaryLock').removeClass('none');
+	}
+
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
 		$(element).val(cypher)
