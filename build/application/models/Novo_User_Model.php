@@ -223,14 +223,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
-			break;
 		}
 
 		return $this->responseToTheView('callWs_Signin');
@@ -300,14 +292,6 @@ class Novo_User_Model extends NOVO_Model {
 				$msgGeneral = '1';
 				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
 				break;
-			case 9999:
-					$this->response->code = 4;
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->icon = lang('CONF_ICON_DANGER');
-					$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-					$this->response->modalBtn['btn1']['link'] = 'inicio';
-					$this->response->modalBtn['btn1']['action'] = 'redirect';
-				break;
 		}
 
 		if($this->isResponseRc != 0 && $msgGeneral == '1') {
@@ -369,14 +353,6 @@ class Novo_User_Model extends NOVO_Model {
 			case -103:
 				$msgGeneral = 1;
 				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
-				break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
 				break;
 		}
 
@@ -447,14 +423,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->msg = lang('USER_TIME_EXPIRE');
 				$this->response->modalBtn['btn1']['text'] = 'Aceptar';
-			break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 		}
 
@@ -651,14 +619,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
 			break;
 		}
 
@@ -1436,6 +1396,17 @@ class Novo_User_Model extends NOVO_Model {
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+
+		if($resultRecaptcha == 9999){
+			$this->response->code = 4;
+			$this->response->title = lang('GEN_SYSTEM_NAME');
+			$this->response->icon = lang('CONF_ICON_DANGER');
+			$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
+			$this->response->modalBtn['btn1']['link'] = 'inicio';
+			$this->response->modalBtn['btn1']['action'] = 'redirect';
+		}
+
+		return $resultRecaptcha;
 	}
 }
