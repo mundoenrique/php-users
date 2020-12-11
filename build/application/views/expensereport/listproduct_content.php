@@ -25,7 +25,6 @@
 									case ($row['bloque'] !== '' && $row['bloque'] == 'S'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
 										break;
-
 									default:
 										$infoCard = '<p class="mb-0 h6 light text">' . strtoupper($row['nomEmp']) . '</p>';
 								}
