@@ -165,7 +165,7 @@ $(function () {
 			break;
 		}
 
-		if (action != 'requestPin') {
+		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
 			validateForms(form);
 			validForm = form.valid();
 		}
