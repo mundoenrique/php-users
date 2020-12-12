@@ -126,7 +126,7 @@
 						<div class="help-block"></div>
 					</div>
 					<div id="msgTemporaryLock" class="row mx-0">
-						<p><?= novoLang(lang('CUST_ACTION_TAKE'), $statustext) ?></p>
+						<p><?= novoLang(lang('CUST_ACTION_TAKE'), $statustextCard) ?></p>
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">

@@ -109,7 +109,7 @@ $lang['CUST_SELECTION'] = 'Selecciona';
 $lang['CUST_SELECTION_OPERATION'] = 'Seleccione los la operación que desea realizar:';
 $lang['CUST_PIN_CHANGE'] = 'Cambiar PIN';
 $lang['CUST_OPERATIONS'] = 'Operación:';
-$lang['CUST_ACTION_TAKE'] = 'Si realmente deseas <span class="status-text2">%s</span> tu tarjeta, presiona continuar.';
+$lang['CUST_ACTION_TAKE'] = 'Si realmente deseas <span class="status-text2 lowercase">%s</span> tu tarjeta, presiona continuar.';
 $lang['CUST_TEMPORARY_LOCK'] = 'Bloqueo temporal';
 $lang['CUST_UNLOCK_CARD'] = 'Desbloquear tarjeta';
 $lang['CUST_UNLOCK'] = 'Desbloquear';
