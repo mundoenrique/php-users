@@ -1,5 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SCORE RECAPTCHA
+$lang['CONF_SCORE_CAPTCHA'] = [
+	'development' => 0,
+	'testing' => 0,
+	'production' => 0
+];
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //VALIDATE IP
@@ -23,7 +29,7 @@ $lang['CONF_PROFESSION'] = 'OFF';
 $lang['CONF_CONTAC_DATA'] = 'OFF';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
 $lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
-$lang['CONF_LOAD_DOCS'] = 'ON';
+$lang['CONF_LOAD_DOCS'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_ID'] = 'ON';
 $lang['CONF_LOAD_DOC_B_ID'] = 'ON';
 // UPLOAD FILES
