@@ -691,7 +691,7 @@ class Novo_User_Model extends NOVO_Model {
 			'email' => $dataRequest->email,
 			'password' => md5($password),
 			'passwordOld4' => md5(mb_strtoupper($password)),
-			'aplicaImgDoc' => 'S',
+			'aplicaImgDoc' => lang('CONF_LOAD_DOCS') == 'ON' ? 'S' : 'N',
 			'img_valida' => 'FALSE',
 			'imagenes' => [
 				'id_ext_per' => $dataRequest->idNumber,

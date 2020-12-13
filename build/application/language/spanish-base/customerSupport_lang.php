@@ -82,6 +82,10 @@ $lang['CUST_REPLACE_REASON'] = [
 	'TD' => 'Tarjeta deteriorada',
 	'TR' => 'Reemplazar tarjeta',
 ];
+$lang['CUST_TEMPORARY_LOCK_REASON'] = [
+	'Tarjeta perdida',
+	'Bloqueo preventivo',
+];
 $lang['CUST_REPLACE_MSG'] = 'Se ha generado una nueva tarjeta, la puede ver en la lista consolidada.';
 $lang['CUST_STOLEN_CARD'] = '43';
 $lang['CUST_REPLACE_CARD'] = ' Si realmente deseas reponer tu tarjeta, presiona continuar para asignar una nueva.';
@@ -105,7 +109,7 @@ $lang['CUST_SELECTION'] = 'Selecciona';
 $lang['CUST_SELECTION_OPERATION'] = 'Seleccione los la operación que desea realizar:';
 $lang['CUST_PIN_CHANGE'] = 'Cambiar PIN';
 $lang['CUST_OPERATIONS'] = 'Operación:';
-$lang['CUST_ACTION_TAKE'] = 'Si realmente deseas <span class="status-text2">%s</span> tu tarjeta, presiona continuar.';
+$lang['CUST_ACTION_TAKE'] = 'Si realmente deseas <span class="status-text2 lowercase">%s</span> tu tarjeta, presiona continuar.';
 $lang['CUST_TEMPORARY_LOCK'] = 'Bloqueo temporal';
 $lang['CUST_UNLOCK_CARD'] = 'Desbloquear tarjeta';
 $lang['CUST_UNLOCK'] = 'Desbloquear';

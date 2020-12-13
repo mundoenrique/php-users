@@ -109,6 +109,7 @@ function validateForms(form) {
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true},
+			"temporaryLockReason": { requiredSelect: true},
 			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
 			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
@@ -195,6 +196,7 @@ function validateForms(form) {
 			"initDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
+			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
 			"currentPin": {
 				required: lang.VALIDATE_CURRENT_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
