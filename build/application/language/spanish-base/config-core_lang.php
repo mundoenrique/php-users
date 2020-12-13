@@ -53,12 +53,13 @@ $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_WIDGET_CONTACT_INFO'] = 'OFF';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['CONF_LONG_TEXT'] = '';
-//SIGNUO
+//SIGNUP
 $lang['CONF_SECRET_KEY'] = 'ON';
 $lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
 $lang['CONF_TIMER_MODAL_VIRTUAL'] = 60;
 //RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
+$lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
@@ -93,7 +94,6 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
-
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
@@ -103,8 +103,7 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];
-
-//REGITRY
+//REGISTRY
 $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Pe' => '1',
 	'Usd' => '1',
@@ -115,3 +114,5 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Co' => '4',
 	'Mx-Bn' => '16',
 ];
+// CUSTOMER SUPPORT
+$lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';

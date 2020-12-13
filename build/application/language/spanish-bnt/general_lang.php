@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// MENU
+$lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Operaciones';
 // General lang app
 $lang['GEN_FAVICON'] = 'favicon-bnt';
 $lang['GEN_FAVICON_EXT'] = 'ico';
