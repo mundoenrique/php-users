@@ -29,7 +29,7 @@ $lang['CONF_PROFESSION'] = 'OFF';
 $lang['CONF_CONTAC_DATA'] = 'OFF';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
 $lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
-$lang['CONF_LOAD_DOCS'] = 'OFF';
+$lang['CONF_LOAD_DOCS'] = 'ON';
 $lang['CONF_LOAD_DOC_F_ID'] = 'ON';
 $lang['CONF_LOAD_DOC_B_ID'] = 'ON';
 // UPLOAD FILES
