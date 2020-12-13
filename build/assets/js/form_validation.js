@@ -13,7 +13,7 @@ function validateForms(form) {
 	var longPhrase = /^[a-z0-9ñáéíóú ().,;-]{5,150}$/i;
 	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
 	var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
-	var emailValid = /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var emailValid = /^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	var alphanumunder = /^([\w.\-+&ñÑ ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
@@ -109,6 +109,7 @@ function validateForms(form) {
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true},
+			"temporaryLockReason": { requiredSelect: true},
 			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
 			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
@@ -195,6 +196,7 @@ function validateForms(form) {
 			"initDate": lang.VALIDATE_DATE_DMY,
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
+			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
 			"currentPin": {
 				required: lang.VALIDATE_CURRENT_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,

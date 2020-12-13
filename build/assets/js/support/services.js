@@ -12,6 +12,16 @@ $(function () {
 		$('#msgReplacementCard').removeClass('none');
 	}
 
+	if ($('#operation').find('input[type=hidden][name="status"]').val() == '' && lang.CONF_TEMPORARY_LOCK_REASON == 'ON') {
+		$('#temporaryLockReason').removeClass('ignore');
+		$('#selectTempLockReason').removeClass('none');
+		$('#msgTemporaryLock').addClass('none');
+	} else {
+		$('#temporaryLockReason').addClass('ignore');
+		$('#selectTempLockReason').addClass('none');
+		$('#msgTemporaryLock').removeClass('none');
+	}
+
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
 		var cypher = cryptoPass($(element).val());
 		$(element).val(cypher)
@@ -63,14 +73,15 @@ $(function () {
 		var expireDate = $(event).find('input[type=hidden][name="expireDate"]').val();
 		var services = JSON.parse($(event).find('input[type=hidden][name="services"]').val());
 		var statusCard = $(event).find('input[type=hidden][name="status"]').val();
-		var statusText = statusCard == '' ? 'Bloquear' : 'Desbloquear';
+		var statusText = statusCard == '' ? lang.CUST_TEMPORARY_LOCK : lang.CUST_UNLOCK_CARD;
+		var statustextCard = statusCard == '' ? lang.CUST_TEMPORARILY_LOCK : lang.CUST_UNLOCK;
 
 		if (statusCard != '' && statusCard != 'PB') {
 			return true;
 		}
 
 		$('.status-text1').text(statusText);
-		$('.status-text2').text(statusText.toLowerCase());
+		$('.status-text2').text(statustextCard.toLowerCase());
 		$('.nav-config-box').removeClass('no-events');
 		$('.nav-config-box > li').removeClass('active');
 		$('#expireDate').val(expireDate);
@@ -139,6 +150,10 @@ $(function () {
 		$('#action').val(action);
 
 		switch (action) {
+			case 'temporaryLock':
+				form = $('#temporaryLockForm');
+				dataFormAction.reasonText = $('#temporaryLockReason').val();
+				break;
 			case 'replacement':
 				form = $('#replacementForm');
 				dataFormAction.status = $('#replaceMotSol').val();
@@ -150,7 +165,7 @@ $(function () {
 			break;
 		}
 
-		if (action == 'replacement' || action == 'changePin' || action == 'generatePin') {
+		if (action == 'replacement' || action == 'changePin' || action == 'generatePin' || action == 'temporaryLock') {
 			validateForms(form);
 			validForm = form.valid();
 		}
@@ -226,9 +241,10 @@ function requestSupport(thisAction) {
 	who = 'CustomerSupport'; where = data.action;
 	callNovoCore(who, where, data, function (response) {
 		if (data.action == 'temporaryLock' && response.success) {
-			var statusText = $('#status').val() == '' ? 'Desbloquear' : 'Bloquear'
+			var statusText = $('#status').val() == '' ? lang.CUST_UNLOCK_CARD : lang.CUST_TEMPORARY_LOCK
+			var statustextCard = $('#status').val() == '' ? lang.CUST_TEMPORARILY_LOCK : lang.CUST_UNLOCK
 			$('.status-text1').text(statusText);
-			$('.status-text2').text(statusText.toLowerCase());
+			$('.status-text2').text(statustextCard.toLowerCase());
 			var status = $('#status').val() == '' ? 'PB' : ''
 			$('#status').val(status);
 		}
