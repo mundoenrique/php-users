@@ -52,6 +52,18 @@ $(function () {
 			$('#msgReplacementCard').addClass('none');
 		}
 
+		$('#temporaryLockReason').val('');
+
+		if (status == '' && lang.CONF_TEMPORARY_LOCK_REASON == 'ON') {
+			$('#temporaryLockReason').removeClass('ignore');
+			$('#selectTempLockReason').removeClass('none');
+			$('#msgTemporaryLock').addClass('none');
+		} else {
+			$('#temporaryLockReason').addClass('ignore');
+			$('#selectTempLockReason').addClass('none');
+			$('#msgTemporaryLock').removeClass('none');
+		}
+
 		$('#virtual').val(isVirtual);
 		$('#donor, #accountSelect').remove();
 		$('#productdetail').html(cardDetail);

@@ -82,7 +82,15 @@ class Encrypt_Connect
 		}
 
 		if (isset($response->bean)) {
-			$response->bean = gettype(json_decode($response->bean)) == 'object' ? json_decode($response->bean) : $response->bean;
+
+			if (gettype($response->bean) == 'object' || gettype($response->bean) == 'array') {
+				$response->bean = $response->bean;
+			} elseif (gettype(json_decode($response->bean)) == 'object' || gettype(json_decode($response->bean)) == 'array') {
+				$response->bean = json_decode($response->bean);
+			} else {
+				$response->bean = $response->bean;
+			}
+
 			$this->logMessage->inBean = 'IN BEAN';
 		}
 

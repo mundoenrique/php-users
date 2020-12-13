@@ -24,14 +24,14 @@
             </div>
             <?php if ($cardsTotal > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2">Selecciona una cuenta</p>
+              <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
             <?php else: ?>
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
               <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
-                <i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto
+                <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
             <?php endif; ?>
@@ -40,17 +40,17 @@
       </div>
     </div>
     <?php if (!$uniqueEvent): ?>
-    <div class="flex col-12 optional mt-4 px-0">
+    <div class="flex optional mt-4 px-0">
       <nav class="nav-config w-100">
         <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
           <?php if (in_array('110', $serviceList)): ?>
           <li id="cardLock" class="list-inline-item nav-item-config mr-1">
             <a href="javascript:">
               <span class="icon-config icon-lock h1 icon-color"></span>
-              <h5 class="center"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h5>
+              <h5 class="center"><span class="status-text1"><?= $statustext ?></span></h5>
               <div class="box up left regular">
                 <span class="icon-lock h1 icon-color"></span>
-                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span><br> tarjeta</h4>
+                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span></h4>
               </div>
             </a>
           </li>
@@ -71,10 +71,10 @@
           <li id="pinManagement" class="list-inline-item nav-item-config mr-1">
             <a href="javascript:">
               <span class="icon-config icon-key h1 icon-color"></span>
-              <h5 class="center">Gestión<br>de PIN</h5>
+              <h5 class="center"><?= lang('CUST_PIN_MANAGEMENT'); ?></h5>
               <div class="box up left regular">
                 <span class="icon-key h1 icon-color"></span>
-                <h4 class="h5 center">Gestión<br>de PIN</h4>
+                <h4 class="h5 center"><?= lang('CUST_PIN_MANAGEMENT'); ?></h4>
               </div>
             </a>
           </li>
@@ -83,10 +83,10 @@
           <li id="twirlsCommercial" class="list-inline-item nav-item-config send" action="twirlsCommercial">
             <a href="javascript:">
               <span class="icon-config icon icon icon-credit-card h1 icon-color"></span>
-              <h5 class="center">Giros<br>comerciales</h5>
+              <h5 class="center"><?= lang('CUST_TWIRLS_COMMERCIAL'); ?></h5>
               <div class="box up left regular">
                 <span class="icon icon icon-credit-card h1 icon-color"></span>
-                <h4 class="h5 center">Giros<br>comerciales</h4>
+                <h4 class="h5 center"><?= lang('CUST_TWIRLS_COMMERCIAL'); ?></h4>
               </div>
             </a>
           </li>
@@ -95,10 +95,10 @@
           <li id="transactionalLimits" class="list-inline-item nav-item-config send" action="transactionalLimits">
             <a href="javascript:">
               <span class="icon-config icon icon-transactions h1 icon-color"></span>
-              <h5 class="center">Limites<br>transaccionales</h5>
+              <h5 class="center"><?= lang('CUST_TRANS_LIMITS'); ?></h5>
               <div class="box up left regular">
                 <span class="icon icon-transactions h1 icon-color"></span>
-                <h4 class="h5 center">Limites<br>transaccionales</h4>
+                <h4 class="h5 center"><?= lang('CUST_TRANS_LIMITS'); ?></h4>
               </div>
             </a>
           </li>
@@ -112,16 +112,28 @@
     <div id="cardLockView" class="option-service" <?= $uniqueEvent && in_array('110', $serviceList) ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
         <h4 class="line-text mb-2 semibold primary">
-          <span class="status-text1"><?= $statustext ?></span> tarjeta
-        </h4>
-        <p>
-          Si realmente deseas <span class="status-text2"><?= mb_strtolower($statustext) ?></span> tu tarjeta, presiona continuar.
-        </p>
-        <hr class="separador-one w-100">
-        <div class="flex items-center justify-end pt-3">
-          <a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
-          <button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
-        </div>
+          <span class="status-text1"><?= $statustext ?></span>
+				</h4>
+				<form id="temporaryLockForm" data-status="<?= $status ?>">
+					<div id="selectTempLockReason" class="row none form-group col-lg-4">
+						<label for="temporaryLockReason">Motivo de la solicitud</label>
+						<select id="temporaryLockReason" class="custom-select form-control" name="temporaryLockReason">
+						<option value="" selected disabled>Selecciona</option>
+						<?php foreach (lang('CUST_TEMPORARY_LOCK_REASON') AS  $value): ?>
+						<option value="<?= $value ?>"><?= $value ?></option>
+						<?php endforeach; ?>
+						</select>
+						<div class="help-block"></div>
+					</div>
+					<div id="msgTemporaryLock" class="row mx-0">
+						<p><?= novoLang(lang('CUST_ACTION_TAKE'), $statustextCard) ?></p>
+					</div>
+					<hr class="separador-one w-100">
+					<div class="flex items-center justify-end pt-3">
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
+						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
+					</div>
+				</form>
       </div>
     </div>
     <div id="replacementRequestView" class="option-service" <?= $uniqueEvent && in_array('111', $serviceList) ? '' : 'style="display:none"'; ?>>
@@ -130,9 +142,9 @@
         <form id="replacementForm">
           <div id="selectReplacementCard" class="row">
             <div class="form-group col-lg-4">
-              <label for="replaceMotSol">Motivo de la solicitud</label>
+              <label for="replaceMotSol"><?= lang('CUST_REASON_REQUEST') ?></label>
               <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-                <option value="" selected disabled>Selecciona</option>
+                <option value="" selected disabled><?= lang('CUST_SELECTION') ?></option>
                 <?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
                 <option value="<?= $key ?>"><?= $value ?></option>
                 <?php endforeach; ?>
@@ -141,12 +153,12 @@
             </div>
           </div>
 					<div id="msgReplacementCard" class="row none mx-0">
-					<p><?= lang ('CUST_REPLACE_CARD') ?></p>
+						<p><?= lang ('CUST_REPLACE_CARD') ?></p>
 					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
-            <a class="btn btn-small btn-link" href="">Cancelar</a>
-            <button class="btn btn-small btn-loading btn-primary send" action="replacement">Continuar</button>
+            <a class="btn btn-small btn-link" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+            <button class="btn btn-small btn-loading btn-primary send" action="replacement"><?= lang('GEN_BTN_CONTINUE') ?></button>
           </div>
         </form>
       </div>
@@ -154,19 +166,19 @@
     <div id="pinManagementView" class="option-service"
       <?= $uniqueEvent && count(array_diff(['112', '117', '120'], $serviceList)) < 3 ? '' : 'style="display:none"'; ?>>
       <div class="flex mb-1 mx-4 flex-column">
-        <h4 class="line-text mb-2 semibold primary">Gestión de PIN</h4>
+        <h4 class="line-text mb-2 semibold primary"><?= lang('CUST_PIN_MANAGEMENT') ?></h4>
         <div class="w-100">
           <div class="services-both max-width-1 fit-lg mx-auto fade-in">
             <?php if ($uniqueEvent && count(array_diff(['112', '117', '120'], $serviceList)) < 2): ?>
-            <p>Seleccione los la operación que desea realizar:</p>
+            <p><?= lang('CUST_SELECTION_OPERATION') ?></p>
             <?php endif; ?>
             <form id="actionPinForm" name="actionPinForm">
               <div class="form-group">
-                <label class="mr-2">Operación:</label>
+                <label class="mr-2"><?= lang('CUST_OPERATIONS') ?></label>
                 <?php if (in_array('112', $serviceList)): ?>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input id="changePin" class="custom-control-input" type="radio" name="recovery" value="change" autocomplete="off">
-                  <label class="custom-control-label" for="changePin">Cambiar PIN</label>
+                  <label class="custom-control-label" for="changePin"><?= lang('CUST_PIN_CHANGE') ?></label>
                 </div>
                 <?php endif; ?>
                 <?php if (in_array('120', $serviceList)): ?>
@@ -178,7 +190,7 @@
                 <?php if (in_array('117', $serviceList)): ?>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input id="requestPin" class="custom-control-input" type="radio" name="recovery" value="request" autocomplete="off">
-                  <label class="custom-control-label" for="requestPin">Solicitud de PIN</label>
+                  <label class="custom-control-label" for="requestPin"><?= lang('CUST_REQUEST_PIN') ?></label>
                 </div>
                 <?php endif; ?>
                 <div class="help-block"></div>
@@ -187,45 +199,40 @@
             <form id="pinManagementForm" name="pinManagementForm">
               <div id="changePinInput" class="row hide">
                 <div class="form-group col-lg-4">
-                  <label for="currentPin">PIN actual</label>
+                  <label for="currentPin"><?= lang('CUST_CURRENT_PIN') ?></label>
                   <input id="currentPin" class="form-control" type="password" name="currentPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
-                  <label for="newPin">Nuevo PIN</label>
+                  <label for="newPin"><?= lang('CUST_NEW_PIN') ?></label>
                   <input id="newPin" class="form-control" type="password" name="newPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
-                  <label for="confirmPin">Confirmar PIN</label>
+                  <label for="confirmPin"><?= lang('CUST_CONFIRM_PIN') ?></label>
                   <input id="confirmPin" class="form-control" type="password" name="confirmPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
               </div>
               <div id="generatePinInput" class="row hide">
                 <div class="form-group col-lg-4">
-                  <label for="generateNewPin">Nuevo PIN</label>
+                  <label for="generateNewPin"><?= lang('CUST_NEW_PIN') ?></label>
                   <input id="generateNewPin" class="form-control" type="password" name="generateNewPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
-                  <label for="generateConfirmPin">Confirmar PIN</label>
+                  <label for="generateConfirmPin"><?= lang('CUST_CONFIRM_PIN') ?></label>
                   <input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
               </div>
               <div id="requestPinInput" class="row hide ml-auto">
-                <p>Esta solicitud genera un Lote de reposición que es indispensable que tu empresa autorice en
-                  Conexión Empresas Online, para poder
-                  emitir el nuevo PIN.</p>
-                <p>Si realmente deseas solicitar la reposición de tu PIN, presiona continuar. El PIN será enviado en
-                  un máximo de 5 días hábiles en
-                  un sobre de seguridad a la dirección de tu empresa.</p>
+								<?= lang('CUST_REQUEST_PIN_INFO') ?>
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link big-modal" href="">Cancelar</a>
-                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send">Continuar</button>
+								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+                <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('GEN_BTN_CONTINUE') ?></button>
               </div>
             </form>
           </div>
@@ -268,140 +275,140 @@
                 </div>
                 <div class="form-group col-12 center flex justify-center items-end">
                   <span class="h6 bold mb-0 mt-2">
-                    Nota:
-                    <span class="light text">Si el check se encuentra en color</span>
+                    <?= lang('CUST_NOTE'); ?>:
+                    <span class="light text"><?= lang('CUST_CHECK_COLOR'); ?></span>
                   </span>
                   <div class="custom-control custom-switch custom-control-inline p-0 pl-4 ml-1 mr-0">
                     <input class="custom-control-input" type="checkbox" disabled checked>
                     <label class="custom-control-label"></label>
                   </div>
-                  <span class="h6 light text">las compras en este tipo de comercio están restringidas.</span>
+                  <span class="h6 light text"><?= lang('CUST_PURCHASES_RESTRICTED'); ?></span>
                 </div>
               </div>
             </div>
             <form id="twirlsCommercialForm" name="twirlsCommercialForm">
               <div class="row mx-xl-3">
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Agencia de viajes</label>
+                  <label class="block"><?= lang('CUST_TRAVEL_AGENCY'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency" disabled>
                     <label class="custom-control-label" for="travelAgency"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Aseguradoras</label>
+                  <label class="block"><?= lang('CUST_INSURERS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="insurers" class="custom-control-input" type="checkbox" name="insurers" disabled>
                     <label class="custom-control-label" for="insurers"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Beneficencia</label>
+                  <label class="block"><?= lang('CUST_CHARITY'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="charity" class="custom-control-input" type="checkbox" name="charity" disabled>
                     <label class="custom-control-label" for="charity"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Entretenimiento</label>
+                  <label class="block"><?= lang('CUST_ENTERTAINMENT'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="entertainment" class="custom-control-input" type="checkbox" name="entertainment" disabled>
                     <label class="custom-control-label" for="entertainment"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Estacionamientos</label>
+                  <label class="block"><?= lang('CUST_PARKING'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="parking" class="custom-control-input" type="checkbox" name="parking" disabled>
                     <label class="custom-control-label" for="parking"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Gasolineras</label>
+                  <label class="block"><?= lang('CUST_GASTATIONS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="gaStations" class="custom-control-input" type="checkbox" name="gaStations" disabled>
                     <label class="custom-control-label" for="gaStations"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Gobiernos</label>
+                  <label class="block"><?= lang('CUST_GOVERNMENTS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="governments" class="custom-control-input" type="checkbox" name="governments" disabled>
                     <label class="custom-control-label" for="governments"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Hospitales</label>
+                  <label class="block"><?= lang('CUST_HOSPITALS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="hospitals" class="custom-control-input" type="checkbox" name="hospitals" disabled>
                     <label class="custom-control-label" for="hospitals"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Hoteles</label>
+                  <label class="block"><?= lang('CUST_HOTELS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="hotels" class="custom-control-input" type="checkbox" name="hotels" disabled>
                     <label class="custom-control-label" for="hotels"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Peaje</label>
+                  <label class="block"><?= lang('CUST_DEBIT'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="debit" class="custom-control-input" type="checkbox" name="debit" disabled>
                     <label class="custom-control-label" for="debit"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Renta de autos</label>
+                  <label class="block"><?= lang('CUST_TOLL'); ?>s</label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="toll" class="custom-control-input" type="checkbox" name="toll" disabled>
                     <label class="custom-control-label" for="toll"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Restaurantes</label>
+                  <label class="block"><?= lang('CUST_RESTAURANTS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="restaurants" class="custom-control-input" type="checkbox" name="restaurants" disabled>
                     <label class="custom-control-label" for="restaurants"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Supermercados</label>
+                  <label class="block"><?= lang('CUST_SUPERMARKETS'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="supermarkets" class="custom-control-input" type="checkbox" name="supermarkets" disabled>
                     <label class="custom-control-label" for="supermarkets"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Telecomunicaciones</label>
+                  <label class="block"><?= lang('CUST_TELECOMMUNICATION'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="telecommunication" class="custom-control-input" type="checkbox" name="telecommunication" disabled>
                     <label class="custom-control-label" for="telecommunication"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Transporte aéreo</label>
+                  <label class="block"><?= lang('CUST_AIR_TRANSPORT'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="airTransport" class="custom-control-input" type="checkbox" name="airTransport" disabled>
                     <label class="custom-control-label" for="airTransport"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Colegios y universidades</label>
+                  <label class="block"><?= lang('CUST_COLLEGES_UNIVERSITIES'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="collegesUniversities" class="custom-control-input" type="checkbox" name="collegesUniversities" disabled>
                     <label class="custom-control-label" for="collegesUniversities"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Ventas al detalle (retail)</label>
+                  <label class="block"><?= lang('CUST_RETAIL_SALES'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="retailSales" class="custom-control-input" type="checkbox" name="retailSales" disabled>
                     <label class="custom-control-label" for="retailSales"></label>
                   </div>
                 </div>
                 <div id="checked-form" class="form-group col-4 col-lg-4 col-xl-3 pb-3">
-                  <label class="block">Transporte terrestre de pasajeros</label>
+                  <label class="block"><?= lang('CUST_PASSENGER_TRANSPORTATION'); ?></label>
                   <div class="custom-control custom-switch custom-control-inline">
                     <input id="passengerTransportation" class="custom-control-input" type="checkbox" name="passengerTransportation" disabled>
                     <label class="custom-control-label" for="passengerTransportation"></label>
@@ -448,14 +455,15 @@
                   </p>
                 </div>
                 <div class="form-group col-12 center">
-                  <p class="h6 bold mb-0 mt-2">Nota: <span class="light text">Si el campo es igual a 0, se tomara
-                      como limite el valor configurado para el producto.</span></p>
+									<p class="h6 bold mb-0 mt-2"><?= lang('CUST_NOTE'); ?>:
+										<span class="light text"><?= lang('CUST_CONFIG_PRODUCT_LIMIT'); ?></span>
+									</p>
                 </div>
               </div>
             </div>
             <form id="transactionalLimitsForm" name="transactionalLimitsForm">
               <div class="flex mb-5 flex-column">
-                <span class="line-text slide-slow flex mb-2 h4 semibold primary">Con tarjeta presente
+                <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('CUST_WITH_CARD_PRESENT'); ?>
                   <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
                 </span>
                 <div class="section my-2 px-2">
@@ -464,7 +472,7 @@
                       <div class="col-12 block mx-auto">
                         <div class="row">
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="numberDayPurchasesCtp">Número de compras diarias</label>
+                            <label class="pr-3" for="numberDayPurchasesCtp"><?= lang('CUST_NUM_DAY_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberDayPurchasesCtp" class="money form-control pwd-input text-left" value="" type="text" autocomplete="off"
                                 name="" readonly>
@@ -472,7 +480,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="numberWeeklyPurchasesCtp">Número de compras semanales</label>
+                            <label for="numberWeeklyPurchasesCtp"><?= lang('CUST_NUM_WKLY_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberWeeklyPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -480,7 +488,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="numberMonthlyPurchasesCtp">Número de compras mensuales</label>
+                            <label for="numberMonthlyPurchasesCtp"><?= lang('CUST_NUM_MON_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberMonthlyPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -488,7 +496,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="dailyPurchaseamountCtp">Monto diario de compras</label>
+                            <label class="pr-3" for="dailyPurchaseamountCtp"><?= lang('CUST_DAY_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="dailyPurchaseamountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -496,7 +504,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="weeklyAmountPurchasesCtp">Monto semanal de compras</label>
+                            <label for="weeklyAmountPurchasesCtp"><?= lang('CUST_WKLY_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="weeklyAmountPurchasesCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -504,7 +512,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="monthlyPurchasesAmountCtp">Monto mensual de compras</label>
+                            <label for="monthlyPurchasesAmountCtp"><?= lang('CUST_MON_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="monthlyPurchasesAmountCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -512,7 +520,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="purchaseTransactionCtp">Monto por transacción de compras</label>
+                            <label for="purchaseTransactionCtp"><?= lang('CUST_SHOPPING_TXN_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="purchaseTransactionCtp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -526,7 +534,7 @@
                 </div>
               </div>
               <div class="flex mb-5 flex-column">
-                <span class="line-text slide-slow flex mb-2 h4 semibold primary">Sin tarjeta presente
+                <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('CUST_NO_CARD_PRESENT'); ?>
                   <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
                 </span>
                 <div class="section my-2 px-2">
@@ -535,7 +543,7 @@
                       <div class="col-12 mx-auto">
                         <div class="row">
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="numberDayPurchasesStp">Número de compras diarias</label>
+                            <label class="pr-3" for="numberDayPurchasesStp"><?= lang('CUST_NUM_DAY_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberDayPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -543,7 +551,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="numberWeeklyPurchasesStp">Número de compras semanales</label>
+                            <label for="numberWeeklyPurchasesStp"><?= lang('CUST_NUM_WKLY_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberWeeklyPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -551,7 +559,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="numberMonthlyPurchasesStp">Número de compras mensuales</label>
+                            <label for="numberMonthlyPurchasesStp"><?= lang('CUST_NUM_MON_PURCHASES'); ?></label>
                             <div class="input-group">
                               <input id="numberMonthlyPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -559,7 +567,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="dailyPurchaseamountStp">Monto diario de compras</label>
+                            <label class="pr-3" for="dailyPurchaseamountStp"><?= lang('CUST_DAY_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="dailyPurchaseamountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -567,7 +575,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="weeklyAmountPurchasesStp">Monto semanal de compras</label>
+                            <label for="weeklyAmountPurchasesStp"><?= lang('CUST_WKLY_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="weeklyAmountPurchasesStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -575,7 +583,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="monthlyPurchasesAmountStp">Monto mensual de compras</label>
+                            <label for="monthlyPurchasesAmountStp"><?= lang('CUST_MON_PURCHASE_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="monthlyPurchasesAmountStp" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                 name="" readonly>
@@ -583,7 +591,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="purchaseTransactionStp">Monto por transacción de compras</label>
+                            <label for="purchaseTransactionStp"><?= lang('CUST_SHOPPING_TXN_AMOUNT'); ?></label>
                             <div class="input-group">
                               <input id="purchaseTransactionStp" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -597,7 +605,7 @@
                 </div>
               </div>
               <div class="flex mb-5 flex-column ">
-                <span class="line-text slide-slow flex mb-2 h4 semibold primary">Retiros
+                <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('CUST_WITHDRAWAL'); ?>
                   <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
                 </span>
                 <div class="section my-2 px-2">
@@ -607,7 +615,7 @@
                         <div class="col-12 mx-auto">
                           <div class="row">
                             <div class="form-group col-12 col-lg-4">
-                              <label class="pr-3" for="dailyNumberWithdraw">Número diario de retiros</label>
+                              <label class="pr-3" for="dailyNumberWithdraw"><?= lang('CUST_DAY_NUM_WITHDRAWAL'); ?></label>
                               <div class="input-group">
                                 <input id="dailyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
@@ -615,7 +623,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label for="weeklyNumberWithdraw">Número semanal de retiros</label>
+                              <label for="weeklyNumberWithdraw"><?= lang('CUST_WKLY_NUM_WITHDRAWAL'); ?></label>
                               <div class="input-group">
                                 <input id="weeklyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
@@ -623,7 +631,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label for="monthlyNumberWithdraw">Número mensual de retiros</label>
+                              <label for="monthlyNumberWithdraw"><?= lang('CUST_MON_NUM_WITHDRAWAL'); ?></label>
                               <div class="input-group">
                                 <input id="monthlyNumberWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
@@ -631,7 +639,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label class="pr-3" for="dailyAmountWithdraw">Monto diario de retiros</label>
+                              <label class="pr-3" for="dailyAmountWithdraw"><?= lang('CUST_DAY_AMOUNT_WITHDRAWAL'); ?></label>
                               <div class="input-group">
                                 <input id="dailyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
@@ -639,7 +647,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label for="weeklyAmountWithdraw">Monto semanal de retiros</label>
+                              <label for="weeklyAmountWithdraw"><?= lang('CUST_WKLY_AMOUNT_WITHDRAWAL'); ?></label>
                               <div clxs="input-group">
                                 <input id="weeklyAmountWithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
@@ -647,7 +655,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label for="monthlyAmountwithdraw">Monto mensual de retiros</label>
+                              <label for="monthlyAmountwithdraw"><?= lang('CUST_MON_AMOUNT_WITHDRAWAL'); ?></label>
                               <div class="input-group">
                                 <input id="monthlyAmountwithdraw" class="money form-control pwd-input text-left" type="text" autocomplete="off"
                                   name="" readonly>
@@ -655,7 +663,7 @@
                               <div class="help-block"></div>
                             </div>
                             <div class="form-group col-12 col-lg-4">
-                              <label for="WithdrawTransaction">Monto por transacción de retiros</label>
+                              <label for="WithdrawTransaction"><?= lang('CUST_AMOUNT_WITHDRAWAL_TXN'); ?></label>
                               <div class="input-group">
                                 <input id="WithdrawTransaction" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                   readonly>
@@ -670,7 +678,7 @@
                 </div>
               </div>
               <div class="flex mb-5 flex-column ">
-                <span class="line-text slide-slow flex mb-2 h4 semibold primary">Abonos
+                <span class="line-text slide-slow flex mb-2 h4 semibold primary"><?= lang('CUST_CREDIT'); ?>
                   <i class="flex mr-1 pl-2 icon icon-chevron-down flex-auto" aria-hidden="true"></i>
                 </span>
                 <div class="section my-2 px-2">
@@ -679,7 +687,7 @@
                       <div class="col-12 mx-auto">
                         <div class="row">
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="dailyNumberCredit">Número diario de abonos</label>
+                            <label class="pr-3" for="dailyNumberCredit"><?= lang('CUST_DAY_NUM_CREDIT'); ?></label>
                             <div class="input-group">
                               <input id="dailyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -687,7 +695,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="weeklyNumberCredit">Número semanal de abonos</label>
+                            <label for="weeklyNumberCredit"><?= lang('CUST_WKLY_NUM_CREDIT'); ?></label>
                             <div class="input-group">
                               <input id="weeklyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -695,7 +703,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="monthlyNumberCredit">Número mensual de abonos</label>
+                            <label for="monthlyNumberCredit"><?= lang('CUST_MON_NUM_CREDIT'); ?></label>
                             <div class="input-group">
                               <input id="monthlyNumberCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -703,7 +711,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label class="pr-3" for="dailyAmountCredit">Monto diario de abonos</label>
+                            <label class="pr-3" for="dailyAmountCredit"><?= lang('CUST_DAY_AMOUNT_CREDIT'); ?></label>
                             <div class="input-group">
                               <input id="dailyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -711,7 +719,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="weeklyAmountCredit">Monto semanal de abonos</label>
+                            <label for="weeklyAmountCredit"><?= lang('CUST_WKLY_AMOUNT_CREDIT'); ?></label>
                             <div clxs="input-group">
                               <input id="weeklyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -719,7 +727,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="monthlyAmountCredit">Monto mensual de abonos</label>
+                            <label for="monthlyAmountCredit"><?= lang('CUST_MON_AMOUNT_CREDIT'); ?></label>
                             <div class="input-group">
                               <input id="monthlyAmountCredit" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>
@@ -727,7 +735,7 @@
                             <div class="help-block"></div>
                           </div>
                           <div class="form-group col-12 col-lg-4">
-                            <label for="CreditTransaction">Monto por transacción de abonos</label>
+                            <label for="CreditTransaction"><?= lang('CUST_AMOUNT_CREDIT_TXN'); ?></label>
                             <div class="input-group">
                               <input id="CreditTransaction" class="money form-control pwd-input text-left" type="text" autocomplete="off" name=""
                                 readonly>

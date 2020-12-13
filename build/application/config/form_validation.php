@@ -198,7 +198,27 @@ $config = [
 		[
 			'field' => 'idNumber',
 			'rules' => 'trim|alpha_numeric|required'
+		],
+	],
+	'accessRecoverOTP' => [
+		[
+			'field' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'typeDocument',
+			'rules' => 'trim|required'
+		],
+		[
+			'field' => 'idNumber',
+			'rules' => 'trim|alpha_numeric|required'
 		]
+	],
+	'validateOTP' => [
+		[
+			'field' => 'otpCode',
+			'rules' => 'trim|alpha_numeric|required'
+		],
 	],
 	'changePassword' => [
 		[
