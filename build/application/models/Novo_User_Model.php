@@ -294,7 +294,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == '1') {
+		if ($this->isResponseRc != 0 && $msgGeneral == '1') {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -356,7 +356,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == 1) {
+		if ($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -426,7 +426,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == 1) {
+		if ($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -466,7 +466,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				if($this->session->has_userdata('userId')) {
+				if ($this->session->has_userdata('userId')) {
 					$this->callWs_FinishSession_User();
 				}
 
@@ -1398,7 +1398,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 
-		if($resultRecaptcha == 9999){
+		if ($resultRecaptcha == 9999) {
 			$this->response->code = 4;
 			$this->response->title = lang('GEN_SYSTEM_NAME');
 			$this->response->icon = lang('CONF_ICON_DANGER');
