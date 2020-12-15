@@ -39,6 +39,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 
 		foreach($dataRequest as $property => $bodyBase64) {
 			$resultEcryptFile = FALSE;
+			$statusCodeResponse = 400;
 			if (strpos($bodyBase64, 'base64') > 0) {
 
 				$realFileName = $this->tool_file->setNameToFile([
@@ -48,22 +49,20 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				]);
 				$shortFileName = hash('ripemd160', $realFileName);
 
-				$uploadedFileName = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName);
-				if ($uploadedFileName) {
+				$convertedFile = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName);
+				if ($convertedFile->result) {
 					$statusCodeResponse = 200;
 
 					$fullPathName = $this->tool_file->buildDirectoryPath([
 						$directoryToUpload,
-						$uploadedFileName,
+						$convertedFile->resultProcess,
 					]);
 
 					$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
-
-					$resultData = $uploadedFileName;
 				};
 				$dataResponse[$property] = [
 					'status' => $statusCodeResponse,
-					'data' => $resultData
+					'data' => $convertedFile->resultProcess
 				];
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
