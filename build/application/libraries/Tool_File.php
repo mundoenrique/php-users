@@ -140,42 +140,48 @@ class Tool_File {
 		log_message('INFO', 'Novo Tool_File: convertBase64ToImage Method Initialized');
 
 		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$convertImage = new stdClass();
+		$convertImage->result = FALSE;
 		log_message('DEBUG', "Novo Tool_Api: CONFIG for uploadFiles " . json_encode($configToUploadFile));
 
-		$result = FALSE;
 		if (strpos($imageData, 'base64') > 0) {
 			if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
 				$data = substr($imageData, strpos($imageData, ',') + 1);
 				$type = strtolower($type[1]);
 
-				if (strpos($configToUploadFile['allowed_types'], $type) >= 0) {
+				if (strpos($configToUploadFile['allowed_types'], $type)) {
 					$data = str_replace( ' ', '+', $data );
 					$data = base64_decode($data);
+					$sizeImage = strlen($data);
 
-					if (strlen($data) <= $configToUploadFile['max_size']) {
+					if ($sizeImage >= $configToUploadFile['min_size'] && $sizeImage <= $configToUploadFile['max_size']) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName
 						]);
 
-						if (file_put_contents("$fullPathFile.{$type}", $data) > 0 ) {
-							$result = "$fileName.{$type}";
+						$totalBytesProcess = file_put_contents("$fullPathFile.{$type}", $data);
+						if ($totalBytesProcess == $sizeImage ) {
+							$convertImage->result = TRUE;
+							$convertImage->resultProcess = "$fileName.{$type}";
+						}else{
+							$convertImage->resultProcess = lang('GEN_WRITE_NOT_COMPLETED');
 						}
+					}else{
+						$convertImage->resultProcess = lang('GEN_SIZE_NOT_ALLOWED');
 					}
+				}else{
+					$convertImage->resultProcess = lang('GEN_FILE_TYPE_NOT_ALLOWED');
 				}
-				$sizeImage = strlen($data);
-				$limitImage = $configToUploadFile['max_size'];
-				$resultSize = "++ Cargando: $sizeImage bytes del permtido de $limitImage bytes.";
-				log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resultSize);
-
-				$typesValids = $configToUploadFile['allowed_types'];
-				$resulType = "++ Tipo de archivo procesado: $type de los permitdos: $typesValids.";
-				log_message('DEBUG', "Novo Tool_Api: uploadFiles " . $resulType);
+			}else{
+				$convertImage->resultProcess = lang('GEN_FORMAT_NOT_VALID');
 			}
+		}else{
+			$convertImage->resultProcess = lang('GEN_FILE_EMPTY');
 		}
-		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($result));
+		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($convertImage));
 
-		return $result;
+		return $convertImage;
 	}
 
 	/**
@@ -264,8 +270,8 @@ class Tool_File {
 			'key' => 'b4556ab03a8a120d1e77abfc55f515e3',
 			'user_name' => $userName,
 			'client' => 'bnt',
-			'type_document' => '15',
-			'nro_document' => '1232352435',
+			'type_document' => 'CU',
+			'nro_document' => 'aecj940429hchrrs01',
 			'INE_A' => $imagesDocument['INE_A']['base64'],
 			'INE_R' => $imagesDocument['INE_R']['base64'],
 		);
