@@ -22,6 +22,7 @@ $lang['CONF_FOOTER_LOGO'] = 'OFF';
 //USER IDENTITY
 $lang['CONF_SECRET_KEY'] = 'OFF';
 //SIGNUP-PROFILE
+$lang['CONF_UPDATE_USER'] = 'OFF';
 $lang['CONF_UPDATE_NAME'] = 'OFF';
 $lang['CONF_LANDLINE'] = 'OFF';
 $lang['CONF_OTHER_PHONE'] = 'OFF';
