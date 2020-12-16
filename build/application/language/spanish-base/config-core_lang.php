@@ -78,6 +78,7 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Mx-Bn' => 15,
 ];
 //SIGNUP-PROFILE
+$lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
@@ -87,7 +88,6 @@ $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
 $lang['CONF_OPER_KEY'] = 'OFF';
 $lang['CONF_SMS_KEY'] = 'OFF';
-$lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_LOAD_DOCS'] = 'OFF';
 $lang['CONF_LOAD_SELFIE'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
