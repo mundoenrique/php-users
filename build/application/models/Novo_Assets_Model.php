@@ -162,6 +162,36 @@ class Novo_Assets_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_ProfessionsList');
 	}
 	/**
+	 * @info Método para obtener la lista de Tipos de documento
+	 * @author Jhonnatan Vega
+	 * @date December 1th, 2020
+	 */
+	public function callWs_TypeDocumentList_User()
+	{
+		log_message('INFO', 'NOVO User Model: TypeDocumentList method Initialized');
+
+		$this->dataAccessLog->modulo = 'Activos';
+		$this->dataAccessLog->function = 'Lista tipo de documento';
+		$this->dataAccessLog->operation = 'Consultar';
+		$this->dataAccessLog->userName = '';
+
+		$this->dataRequest->idOperation = '119';
+		$this->dataRequest->className = 'String.class';
+		$this->dataRequest->pais = 'Global';
+		$this->dataRequest->bean = $this->config->item('country');
+
+		$response = $this->sendToService('callWs_TypeDocumentList');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $response->tipoDocumento;
+				break;
+		}
+
+		return $this->responseToTheView('callWs_TypeDocumentList');
+	}
+	/**
 	 * @info Método para solictar token de doble autenticación
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date November 10th, 2020
