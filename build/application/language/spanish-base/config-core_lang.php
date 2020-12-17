@@ -80,6 +80,9 @@ $lang['CONF_COUNTRY_CODE'] = [
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_UPDATE_SECOND_NAME'] = 'ON';
+$lang['CONF_UPDATE_PHONE_MOBILE'] = 'ON';
+$lang['CONF_UPDATE_EMAIL'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
