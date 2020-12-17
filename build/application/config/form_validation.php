@@ -26,8 +26,12 @@ $config = [
 			'rules' => 'trim|numeric'
 		],
 		[
-			'field' => 'docmentId',
+			'field' => 'documentId',
 			'rules' => 'trim|alpha_numeric|required'
+		],
+		[
+			'field' => 'typeDocument',
+			'rules' => 'trim'
 		],
 		[
 			'field' => 'cardPIN',

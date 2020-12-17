@@ -27,18 +27,29 @@
 						</div>
 						<?php endif; ?>
 						<div class="form-group col-lg-4" id="divNumberCard">
-							<label for="numberCard" class="regular"><?= lang('GEN_NUMBER_CARD'); ?></label>
+							<label for="numberCard"><?= lang('GEN_NUMBER_CARD'); ?></label>
 							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
+						<?php if(lang('CONF_RECOVER_ID_TYPE') == 'ON'): ?>
 						<div class="form-group col-lg-4">
-							<label for="docmentId" class="regular"><?= lang('GEN_DNI'); ?></label>
-							<input id="docmentId" class="form-control" type="text" name="docmentId" maxlength="25" autocomplete="off" disabled>
+							<label for="typeDocument"><?= lang('GEN_TYPE_DOCUMENT') ?></label>
+							<select id="typeDocument" name="typeDocument" class="form-control select-box custom-select flex h6 w-100" disabled autocomplete="off">
+								<?php foreach (lang('USER_RECOVER_DOC_TYPE') AS $key => $value): ?>
+									<option value="<?= $key ?>" <?= $key == '' ? 'selected disabled' : '' ?>><?= $value ?></option>
+								<?php endforeach; ?>
+							</select>
+							<div class="help-block"></div>
+						</div>
+						<?php endif; ?>
+						<div class="form-group col-lg-4">
+							<label for="documentId"><?= lang('GEN_DNI'); ?></label>
+							<input id="documentId" class="form-control" type="text" name="documentId" maxlength="25" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
 						<?php if (lang('CONF_SECRET_KEY') == 'ON') : ?>
 							<div class="form-group col-lg-4" id="physicalCardPIN">
-								<label for="cardPIN" class="regular"><?= lang('GEN_SECRET_PASS_PIN'); ?></label>
+								<label for="cardPIN"><?= lang('GEN_SECRET_PASS_PIN'); ?></label>
 								<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="4" autocomplete="off" disabled>
 								<div class="help-block"></div>
 							</div>
