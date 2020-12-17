@@ -78,6 +78,7 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Mx-Bn' => 15,
 ];
 //SIGNUP-PROFILE
+$lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
@@ -87,7 +88,6 @@ $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
 $lang['CONF_OPER_KEY'] = 'OFF';
 $lang['CONF_SMS_KEY'] = 'OFF';
-$lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_LOAD_DOCS'] = 'OFF';
 $lang['CONF_LOAD_SELFIE'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
@@ -99,7 +99,8 @@ $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
 	'detect_mime' => true,
-	'max_size' => 6291456, //6291456 bytes son 6mb
+	'min_size' => 10, // 10KB
+	'max_size' => 6291456, //6291456 Kbytes son 6mb (6291456Kb/1048576=6MB)
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];
