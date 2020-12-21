@@ -849,11 +849,11 @@ class User_Model extends BDB_Model
 		$this->dataAccessLog->function = 'password';
 		$this->dataAccessLog->operation = 'actualizar';
 		$this->dataAccessLog->userName = $this->session->userdata('userName');
-		
+
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->password = $argon2New->hexArgon2;
-		$this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
+		$this->dataRequest->passwordOld = $argon2Current->hexArgon2;
 		$this->dataRequest->token = $this->session->userdata('token');
 		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
