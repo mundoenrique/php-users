@@ -54,7 +54,7 @@ function validateForms(form) {
 			"filterMonth": { required: true, pattern: numeric },
 			"filterYear": { required: true, pattern: numeric },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
-			"docmentId": { required: true, pattern: alphanum },
+			"documentId": { required: true, pattern: alphanum },
 			"cardPIN": { required: true, pattern: numeric },
 			"codeOTP": { required: true, pattern: validCode, maxlength: 8 },
 			"acceptTerms": { required: true },
@@ -145,7 +145,7 @@ function validateForms(form) {
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
-			"docmentId": lang.VALIDATE_DOCUMENT_ID,
+			"documentId": lang.VALIDATE_DOCUMENT_ID,
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
 				required: lang.VALIDATE_CODE_RECEIVED,
