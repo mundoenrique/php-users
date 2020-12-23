@@ -99,8 +99,8 @@ $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
 	'detect_mime' => true,
-	'min_size' => 10, // 10KB
-	'max_size' => 6291456, //6291456 Kbytes son 6mb (6291456Kb/1048576=6MB)
+	'min_size' => 10,
+	'max_size' => 6144,
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
 ];

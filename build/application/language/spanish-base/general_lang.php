@@ -230,4 +230,9 @@ $lang['GEN_SIZE_NOT_ALLOWED'] = 'El tamaño del archivo no cumple con lo requeri
 $lang['GEN_FILE_EMPTY'] = 'Archivo sin contenido';
 $lang['GEN_FORMAT_NOT_VALID'] = 'Formato base64 no válido';
 $lang['GEN_WRITE_NOT_COMPLETED'] = 'Escritura incompleta en el archivo destino';
+// UPLOAD FILE
+$lang['GEN_UPLOAD_SUCCESSFULL'] = 'upload successfull!!!';
+$lang['GEN_UPLOAD_ERROR_GENERAL'] = 'Error general al cargar archivo.';
+$lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Creado';
+$lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'No creado';
 
