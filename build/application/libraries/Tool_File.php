@@ -12,6 +12,8 @@ class Tool_File {
 		log_message('INFO', 'NOVO Tool_File Library Class Initialized');
 
 		$this->CI = &get_instance();
+
+		$this->user = $_POST['nickName'] ?? $this->CI->session->userName;
 	}
 
 	/**
@@ -25,9 +27,15 @@ class Tool_File {
 
 		$resultUploadFiles = [];
 		$messageResult = [];
+		$resultUpload = FALSE;
 
 		if (!is_dir($configToUploadFile['upload_path'])) {
-			mkdir($configToUploadFile['upload_path'], 0755, TRUE);
+			$resultCreateDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
+			if (mkdir($configToUploadFile['upload_path'], 0755, TRUE)) {
+				$resultCreateDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+			};
+
+			log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles directory '.$configToUploadFile['upload_path'].' ' .$resultCreateDirectory);
 		}
 
 		foreach ($_FILES as $key => $value) {
@@ -38,18 +46,24 @@ class Tool_File {
 				$this->CI->load->library('upload', $configToUploadFile);
 				$this->CI->upload->initialize($configToUploadFile);
 
-				if (!$this->CI->upload->do_upload($key)) {
+				log_message('DEBUG', 'Novo ['.$this->user.'] to upload '.$key.': '.number_format($_FILES[$key]['size']/1024,0,",",".").'MB');
+
+				$resultUpload = $this->CI->upload->do_upload($key);
+
+				if ($resultUpload != TRUE) {
 					$statusCodeResponse = 400;
 
-					$messageResult[$key] = $this->CI->upload->display_errors('', '');
-					$_FILES[$key]['resultUpload'] = $this->CI->upload->display_errors('', '');
+					$messageError = $this->CI->upload->display_errors('', '') ?? lang('GEN_UPLOAD_ERROR_GENERAL');
+
+					$messageResult[$key] = $messageError;
+					$_POST[$key] = $messageError;
 					$_FILES[$key]['error'] = 1;
 				} else {
 					$statusCodeResponse = 200;
 
 					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['file_name'];
 					$_POST[$key] = $this->CI->upload->data()['file_name'];
-					$messageResult[$key] = 'upload successfull!!!';
+					$messageResult[$key] = lang('GEN_UPLOAD_SUCCESSFULL');
 
 					$matchedFiles = glob($this->buildDirectoryPath([
 						$configToUploadFile['upload_path'],
@@ -68,7 +82,7 @@ class Tool_File {
 			}
 		}
 
-		log_message('DEBUG', "Novo Tool_File: uploadFiles " . json_encode($messageResult));
+		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles ' . json_encode($messageResult));
 
 		return !in_array(400, $resultUploadFiles);
 	}
@@ -109,7 +123,7 @@ class Tool_File {
 				$resultDeletingFiles[] = $statusCodeResponse;
 			}
 		}
-		log_message('DEBUG', "Novo Tool_Api: deleteFiles " . json_encode($_FILES));
+		log_message('DEBUG', 'Novo ['.$this->user.'] deleteFiles ' . json_encode($_FILES));
 
 		return !in_array(400, $resultDeletingFiles);
 	}
@@ -125,7 +139,7 @@ class Tool_File {
 
 		$setName = strtolower(join('_', $partOfTheName));
 
-		log_message('DEBUG', "Novo Tool_Api: setNameToFile " . $setName);
+		log_message('DEBUG', 'Novo ['.$this->user.'] setNameToFile ' . $setName);
 
 		return $setName;
 	}
@@ -142,7 +156,7 @@ class Tool_File {
 		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 		$convertImage = new stdClass();
 		$convertImage->result = FALSE;
-		log_message('DEBUG', "Novo Tool_Api: CONFIG for uploadFiles " . json_encode($configToUploadFile));
+		log_message('DEBUG', 'Novo ['.$this->user.'] CONFIG for uploadFiles ' . json_encode($configToUploadFile));
 
 		if (strpos($imageData, 'base64') > 0) {
 			if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
@@ -179,7 +193,7 @@ class Tool_File {
 		}else{
 			$convertImage->resultProcess = lang('GEN_FILE_EMPTY');
 		}
-		log_message('DEBUG', "Novo Tool_Api: uploadFiles " . json_encode($convertImage));
+		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles ' . json_encode($convertImage));
 
 		return $convertImage;
 	}
@@ -193,11 +207,7 @@ class Tool_File {
 	{
 		log_message('INFO', 'Novo Tool_File: buildDirectoryPath Method Initialized');
 
-		$structure = join(DIRECTORY_SEPARATOR, $structureDirectory);
-
-		log_message('DEBUG', "Novo Tool_Api: buildDirectoryPath " . $structure);
-
-		return $structure;
+		return join(DIRECTORY_SEPARATOR, $structureDirectory);
 	}
 
 	/**
@@ -223,8 +233,9 @@ class Tool_File {
 				}
 			}
 		}
+		$textResult = $result ? lang('GEN_UPLOAD_SUCCESSFULL'):lang('GEN_UPLOAD_ERROR_GENERAL');
 
-		log_message('DEBUG', "Novo Tool_Api: buildDirectoryPath " . strval($result));
+		log_message('DEBUG', 'Novo ['.$this->user.'] cryptographyFile ' . $textResult);
 		return $result;
 	}
 
