@@ -143,11 +143,12 @@ class NOVO_Model extends CI_Model {
 				continue;
 			}
 
-			/* if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
+			if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
 				continue;
-			} */
+			}
 
 			$responsetoView->$pos = $response;
+
 		}
 
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));

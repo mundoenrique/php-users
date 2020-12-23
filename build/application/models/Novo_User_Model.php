@@ -1072,8 +1072,8 @@ class Novo_User_Model extends NOVO_Model {
 
 				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
 					if ($nameDocument['nameFile'] !== '') {
-						$fullPathToImage = $this->tool_file->buildDirectoryPath([
-							$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+						$fullPathToImage = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+							'upload',
 							strtoupper($this->session->countryUri),
 							strtoupper($this->session->userName),
 							$nameDocument['nameFile']
