@@ -224,4 +224,15 @@ $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
 // PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
+// API
+$lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'Tipo de archivo no permitido';
+$lang['GEN_SIZE_NOT_ALLOWED'] = 'El tamaño del archivo no cumple con lo requerido';
+$lang['GEN_FILE_EMPTY'] = 'Archivo sin contenido';
+$lang['GEN_FORMAT_NOT_VALID'] = 'Formato base64 no válido';
+$lang['GEN_WRITE_NOT_COMPLETED'] = 'Escritura incompleta en el archivo destino';
+// UPLOAD FILE
+$lang['GEN_UPLOAD_SUCCESSFULL'] = 'upload successfull!!!';
+$lang['GEN_UPLOAD_ERROR_GENERAL'] = 'Error general al cargar archivo.';
+$lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Creado';
+$lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'No creado';
 

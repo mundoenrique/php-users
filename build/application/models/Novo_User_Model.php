@@ -478,7 +478,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
 				$this->response->modalBtn['btn1']['link'] = $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio';
 			break;
-			case -4:
+			case -465:
 				$code = 1;
 				$this->response->msg = lang('USER_PASS_USED');
 			break;
@@ -510,12 +510,13 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Identificar usuario';
 		$this->dataAccessLog->operation = 'validar datos de registro';
-		$this->dataAccessLog->userName = $dataRequest->docmentId.date('dmy');
+		$this->dataAccessLog->userName = $dataRequest->documentId.date('dmy');
 
 		$this->dataRequest->idOperation = '18';
 		$this->dataRequest->className = 'com.novo.objects.TOs.CuentaTO';
 		$this->dataRequest->cuenta = $dataRequest->numberCard ?? '';
-		$this->dataRequest->id_ext_per = $dataRequest->docmentId;
+		$this->dataRequest->tipoDocumento = $dataRequest->typeDocument ?? '';
+		$this->dataRequest->id_ext_per = $dataRequest->documentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
 		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
@@ -573,7 +574,7 @@ class Novo_User_Model extends NOVO_Model {
 					'docmentId' => $response->user->id_ext_per,
 					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
-					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->docmentId, 'REMOTE_ADDR'),
+					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->documentId, 'REMOTE_ADDR'),
 					'countrySess' => $dataRequest->client ?? $this->country,
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string(),
@@ -1078,8 +1079,8 @@ class Novo_User_Model extends NOVO_Model {
 
 				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
 					if ($nameDocument['nameFile'] !== '') {
-						$fullPathToImage = $this->tool_file->buildDirectoryPath([
-							$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+						$fullPathToImage = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+							'upload',
 							strtoupper($this->session->countryUri),
 							strtoupper($this->session->userName),
 							$nameDocument['nameFile']
