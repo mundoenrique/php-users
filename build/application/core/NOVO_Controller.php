@@ -48,7 +48,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-			$this->session->productInf->productName.' / '.$this->session->productInf->brand;
+		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
 		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
@@ -178,7 +178,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
-		if($auth) {
+		if ($auth) {
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
 			$this->render->countryConf = $this->config->item('country');
@@ -186,6 +186,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->folder = $this->countryUri;
+			$validateRecaptcha = in_array($this->router->fetch_method(),lang('CONF_MODULE_RECAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
 				"$this->countryUri/root-$this->skin",
@@ -193,7 +194,7 @@ class NOVO_Controller extends CI_Controller {
 				"$this->folder/"."$this->skin-base"
 			];
 
-			if(gettype($this->ValidateBrowser) !== 'boolean') {
+			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
 					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
@@ -206,14 +207,18 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.12.1",
 				"third_party/aes",
 				"aes-json-format",
+				"googleRecaptcha",
 				"helper"
 			];
 
-			if($this->render->logged) {
+			if ($this->render->logged) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"sessionControl"
 				);
+			} else if ($validateRecaptcha && ACTIVE_RECAPTCHA) {
+				$this->load->library('recaptcha');
+				$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 			}
 
 		} else {
