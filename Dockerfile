@@ -6,7 +6,7 @@ COPY build ./
 COPY src/httpd/default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN apt-get update -y \
-	&& apt-get install -y curl libmcrypt-dev nano zlib1g-dev \
+	&& apt-get install -y curl libmcrypt-dev nano zlib1g-dev libpng-dev \
 	&& docker-php-ext-install mysqli \
 	&& docker-php-ext-install mbstring \
 	&& docker-php-ext-install zip \
