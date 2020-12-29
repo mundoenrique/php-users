@@ -3,96 +3,96 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @info Libreria para gestionar los procesos con API
  * @author Pedro Torres
- * @date Septiembre 18th, 2020
+ * @date September 18th, 2020
+ * @modified J. Enrique Peñaloza Piñero
+ * @date December 28th, 2020
  */
 class Tool_File {
+	private $CI;
+	private $user;
 
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Tool_File Library Class Initialized');
 
 		$this->CI = &get_instance();
-
 		$this->user = $_POST['nickName'] ?? $this->CI->session->userName;
 	}
-
 	/**
 	 * @info Procesa carga de archivos
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
+	 * @modified J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2020
 	 */
-	public function uploadFiles ($configToUploadFile)
+	public function uploadFiles()
 	{
 		log_message('INFO', 'Novo Tool_File: uploadFiles Method Initialized');
 
-		$resultUploadFiles = [];
-		$messageResult = [];
-		$resultUpload = FALSE;
+		$this->CI->load->library('upload');
+		$this->CI->load->library('image_lib');
+		$valid = FALSE;
+		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');$configUploadFile['upload_path'] = BASE_CDN_PATH . $this->buildDirectoryPath([
+			'upload',
+			strtoupper($this->CI->session->countryUri),
+			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
+		]);
+		$createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
 
-		if (!is_dir($configToUploadFile['upload_path'])) {
-			$resultCreateDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');
-			if (mkdir($configToUploadFile['upload_path'], 0755, TRUE)) {
-				$resultCreateDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+		if (!is_dir($configUploadFile['upload_path'])) {
+			if (mkdir($configUploadFile['upload_path'], 0755, TRUE)) {
+				$createDirectory = lang('GEN_UPLOAD_CREATE_DIRECTORY');
 			};
-
-			log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles directory '.$configToUploadFile['upload_path'].' ' .$resultCreateDirectory);
 		}
 
-		foreach ($_FILES as $key => $value) {
-			if (is_array($value)) {
-				$fileName = $value['nameForUpload'];
-				$configToUploadFile['file_name'] = hash('ripemd160', $fileName);
+		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles directory '.$configUploadFile['upload_path'].' ' .$createDirectory);
 
-				$this->CI->load->library('upload', $configToUploadFile);
-				$this->CI->upload->initialize($configToUploadFile);
+		foreach ($_FILES AS $key => $value) {
+			log_message('INFO', 'Novo ['.$this->user.'] UPLOAD FILE MIMETYPE: '.$value['type']);
 
-				log_message('DEBUG', 'Novo ['.$this->user.'] to upload '.$key.': '.number_format($_FILES[$key]['size']/1024,0,",",".").'MB');
+			$fileName = $this->setNameToFile([
+				$key,
+				$this->CI->session->abbrTypeDocument,
+				$this->CI->session->userId
+			]);
 
-				$resultUpload = $this->CI->upload->do_upload($key);
+			$configUploadFile['file_name'] = hash('ripemd160', $fileName);
 
-				if ($resultUpload != TRUE) {
-					$statusCodeResponse = 400;
+			$this->CI->upload->initialize($configUploadFile);
 
-					$messageError = $this->CI->upload->display_errors('', '') ?? lang('GEN_UPLOAD_ERROR_GENERAL');
+			$valid = $this->CI->upload->do_upload($key);
 
-					$messageResult[$key] = $messageError;
-					$_POST[$key] = $messageError;
-					$_FILES[$key]['error'] = 1;
-				} else {
-					$statusCodeResponse = 200;
+			if ($valid) {
+				$uploadData = (object)$this->CI->upload->data();
+				$_POST[$key] = $uploadData->file_name;
 
-					$_FILES[$key]['resultUpload'] = $this->CI->upload->data()['file_name'];
-					$_POST[$key] = $this->CI->upload->data()['file_name'];
-					$messageResult[$key] = lang('GEN_UPLOAD_SUCCESSFULL');
+				log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$uploadData->file_size.' MB');
 
-					$matchedFiles = glob($this->buildDirectoryPath([
-						$configToUploadFile['upload_path'],
-						$configToUploadFile['file_name'].'.*'
-					]));
+				$this->compressImage($uploadData);
+				$matchedFiles = glob($uploadData->file_path.$uploadData->raw_name.'.*');
 
-					if ($matchedFiles && count($matchedFiles) > 0) {
-						foreach ($matchedFiles as $fullPathFile) {
-							if (!strpos($fullPathFile, $_POST[$key])) {
-								unlink($fullPathFile);
-							}
+				if ($matchedFiles && count($matchedFiles) > 0) {
+					foreach ($matchedFiles as $fullPathFile) {
+						if ($fullPathFile != $uploadData->full_path) {
+							unlink($fullPathFile);
 						}
 					}
 				}
-				$resultUploadFiles[] = $statusCodeResponse;
+
+				$valid = $this->cryptographyFile($uploadData->full_path);
+			} else {
+				log_message('ERROR', 'Novo ['.$this->user.'] uploadFiles ERRORS '.json_encode($this->upload->display_errors(), JSON_UNESCAPED_UNICODE));
 			}
 		}
 
-		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles ' . json_encode($messageResult));
-
-		return !in_array(400, $resultUploadFiles);
+		return $valid;
 	}
-
 	/**
 	 * @info Elimina archivos indicados
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function deleteFiles ($configUploadFile)
+	public function deleteFiles($configUploadFile)
 	{
 		log_message('INFO', 'Novo Tool_File: deleteFiles Method Initialized');
 
@@ -127,13 +127,12 @@ class Tool_File {
 
 		return !in_array(400, $resultDeletingFiles);
 	}
-
 	/**
 	 * @info Crea array con nombre de archivos a procesar, dependiendo del tipo de documento
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function setNameToFile ($partOfTheName = [])
+	public function setNameToFile($partOfTheName = [])
 	{
 		log_message('INFO', 'Novo Tool_File: setNameToFile Method Initialized');
 
@@ -143,7 +142,6 @@ class Tool_File {
 
 		return $setName;
 	}
-
 	/**
 	 * @info Crea array con nombre de archivos a procesar, dependiendo del tipo de documento
 	 * @author Pedro Torres
@@ -156,6 +154,7 @@ class Tool_File {
 		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 		$convertImage = new stdClass();
 		$convertImage->result = FALSE;
+
 		log_message('DEBUG', 'Novo ['.$this->user.'] CONFIG for uploadFiles ' . json_encode($configToUploadFile));
 
 		if (strpos($imageData, 'base64') > 0) {
@@ -178,54 +177,79 @@ class Tool_File {
 						if ($totalBytesProcess == $sizeImage ) {
 							$convertImage->result = TRUE;
 							$convertImage->resultProcess = "$fileName.{$type}";
-						}else{
+						} else {
 							$convertImage->resultProcess = lang('GEN_WRITE_NOT_COMPLETED');
 						}
-					}else{
+					} else {
 						$convertImage->resultProcess = lang('GEN_SIZE_NOT_ALLOWED');
 					}
-				}else{
+				} else {
 					$convertImage->resultProcess = lang('GEN_FILE_TYPE_NOT_ALLOWED');
 				}
-			}else{
+			} else {
 				$convertImage->resultProcess = lang('GEN_FORMAT_NOT_VALID');
 			}
-		}else{
+		} else {
 			$convertImage->resultProcess = lang('GEN_FILE_EMPTY');
 		}
+
 		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles ' . json_encode($convertImage));
 
 		return $convertImage;
 	}
-
 	/**
 	 * @info Crea una cadena con la estructura de directorio indicada, según el S.O.
 	 * @author Pedro Torres
 	 * @date Nov 06th, 2020
 	 */
-	public function buildDirectoryPath ($structureDirectory = [])
+	public function buildDirectoryPath($structureDirectory = [])
 	{
 		log_message('INFO', 'Novo Tool_File: buildDirectoryPath Method Initialized');
 
 		return join(DIRECTORY_SEPARATOR, $structureDirectory);
 	}
+	/**
+	 * @info comprime un archivo
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date December 28th, 2020
+	 */
+	public function compressImage($filePath)
+	{
+		log_message('INFO', 'Novo Tool_File: compressImage Method Initialized');
 
+		log_message('DEBUG', 'Novo ['.$this->user.'] compressImage '.$filePath->full_path);
+
+		$config['image_library'] = 'GD2';
+		$config['quality'] = '20%';
+		$config['source_image'] = $filePath->full_path;
+
+		$this->CI->image_lib->initialize($config);
+		$result = $this->CI->image_lib->resize();
+
+		if (!$result) {
+			log_message('ERROR', 'Novo ['.$this->user.'] compressImage ERRORS'.$this->CI->image_lib->display_errors());
+		}
+
+		return $result;
+	}
 	/**
 	 * @info cifra el contenido de un archivo indicado
 	 * @author Pedro Torres
 	 * @date Nov 07th, 2020
 	 */
-	public function cryptographyFile ($fileName = '', $encrypt = TRUE)
+	public function cryptographyFile($fileName = '', $encrypt = TRUE)
 	{
 		log_message('INFO', 'Novo Tool_File: cryptographyFile Method Initialized');
 
 		$result = FALSE;
+
 		if (is_file($fileName)) {
 			$fileContent = file_get_contents($fileName);
+
 			if (is_string($fileContent)) {
 				$contentEncryt = $this->CI->encrypt_connect->cryptography($fileContent, $encrypt);
-
 				$file = fopen($fileName, "wb");
+
 				if ($file) {
 					fwrite($file, $contentEncryt);
 					fclose($file);
@@ -233,9 +257,11 @@ class Tool_File {
 				}
 			}
 		}
+
 		$textResult = $result ? lang('GEN_UPLOAD_SUCCESSFULL'):lang('GEN_UPLOAD_ERROR_GENERAL');
 
 		log_message('DEBUG', 'Novo ['.$this->user.'] cryptographyFile ' . $textResult);
+
 		return $result;
 	}
 

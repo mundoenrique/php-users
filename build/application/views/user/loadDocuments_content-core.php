@@ -99,7 +99,11 @@
             <li class="pwd-rules-item"><?= lang('USER_LOAD_DOCS_INFO3'); ?></li>
           </div>
           <div class="col-6 col-lg-12">
-            <li class="pwd-rules-item"><?= lang('USER_LOAD_DOCS_INFO4'); ?></li>
+            <li class="pwd-rules-item">
+							<?=
+								novoLang(lang('USER_LOAD_DOCS_INFO4'), [lang('CONF_CONFIG_UPLOAD_FILE')['min_size'], lang('CONF_CONFIG_UPLOAD_FILE')['max_size']]);
+							?>
+						</li>
             <li class="pwd-rules-item"><?= lang('USER_LOAD_DOCS_INFO5'); ?></li>
           </div>
         </div>
