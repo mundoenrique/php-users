@@ -68,7 +68,7 @@ class Tool_File {
 
 				log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$uploadData->file_size.' MB');
 
-				$this->compressImage($uploadData);
+				//$this->compressImage($uploadData);
 				$matchedFiles = glob($uploadData->file_path.$uploadData->raw_name.'.*');
 
 				if ($matchedFiles && count($matchedFiles) > 0) {
