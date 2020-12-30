@@ -25,7 +25,7 @@ class Novo_CallModels extends Novo_Controller {
 	/**
 	 * @info Método que valida y maneja las peticiones asincornas de la aplicación
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 18th, 2019
+	 * @date May 18th, 2020
 	 */
 	public function index()
 	{
@@ -45,37 +45,7 @@ class Novo_CallModels extends Novo_Controller {
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
-			$valid = FALSE;
-
-			foreach ($_FILES as $key => $value) {
-				if (is_array($value)) {
-					$_FILES[$key]['nameForUpload'] = $this->tool_file->setNameToFile([
-						$key,
-						$this->session->abbrTypeDocument,
-						$this->session->userId
-					]);
-				}
-			}
-
-			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-			$configUploadFile['upload_path'] = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
-				'upload',
-				strtoupper($this->session->countryUri),
-				strtoupper($_POST['nickName'] ?? $this->session->userName),
-			]);
-
-			if ($valid = $this->tool_file->uploadFiles($configUploadFile)) {
-				foreach ($_FILES as $clave => $valor) {
-					if ($valor['error'] == 0) {
-						$fullPathName = $this->tool_file->buildDirectoryPath([
-							$configUploadFile['upload_path'],
-							$valor['resultUpload'],
-						]);
-
-						$valid = $this->tool_file->cryptographyFile($fullPathName);
-					}
-				}
-			}
+			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
