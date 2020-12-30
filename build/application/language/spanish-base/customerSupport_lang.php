@@ -165,5 +165,5 @@ $lang['CUST_MON_AMOUNT_CREDIT'] = 'Monto mensual de abonos';
 $lang['CUST_AMOUNT_CREDIT_TXN'] = 'Monto por transacción de abonos';
 $lang['CUST_NOTE'] = 'Nota';
 $lang['CUST_CHECK_COLOR'] = 'Si el check se encuentra en color';
-$lang['CUST_PURCHASES_RESTRICTED.'] = 'las compras en este tipo de comercio están restringidas.';
+$lang['CUST_PURCHASES_RESTRICTED'] = 'las compras en este tipo de comercio están restringidas.';
 $lang['CUST_CONFIG_PRODUCT_LIMIT'] = 'Si el campo es igual a 0, se tomara como limite el valor configurado para el producto.';
