@@ -27,7 +27,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$dataResponse = [];
 		$resultData = '';
-		$directoryToUpload = BASE_CDN_PATH . $this->buildDirectoryPath([
+		$directoryToUpload = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
 			'upload',
 			strtoupper($this->CI->session->countryUri),
 			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
