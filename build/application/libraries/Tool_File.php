@@ -168,9 +168,9 @@ class Tool_File {
 					$data = base64_decode($data);
 					$sizeImage = strlen($data);
 
-					log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$sizeImage.' KB');
+					log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$sizeImage.' B');
 
-					if ($sizeImage >= $configToUploadFile['min_size'] && $sizeImage <= $configToUploadFile['max_size']) {
+					if ($sizeImage >= ($configToUploadFile['min_size'] * 1204) && $sizeImage <= ($configToUploadFile['max_size'] * 1024)) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName
