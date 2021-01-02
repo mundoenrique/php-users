@@ -170,7 +170,7 @@ class Tool_File {
 
 					log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$sizeImage.' B');
 
-					if ($sizeImage >= ($configToUploadFile['min_size'] * 1024) && $sizeImage <= ($configToUploadFile['max_size'] * 1024)) {
+					if ($sizeImage >= ($configToUploadFile['min_size'] * 1024) && $sizeImage <= (($configToUploadFile['max_size'] + 512) * 1024)) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName
