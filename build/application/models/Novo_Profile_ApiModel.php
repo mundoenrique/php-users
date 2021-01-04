@@ -27,8 +27,8 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$dataResponse = [];
 		$resultData = '';
-		$directoryToUpload = $this->tool_file->buildDirectoryPath([
-			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+		$directoryToUpload = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+			'upload',
 			strtoupper($dataRequest->client),
 			strtoupper($dataRequest->user_name),
 		]);
@@ -67,6 +67,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
 		}
+
 		count(array_unique($resultUploadFiles)) > 1 && $statusCodeResponse = 206;
 		$this->response->code = $statusCodeResponse;
 		$this->response->data = $dataResponse;
