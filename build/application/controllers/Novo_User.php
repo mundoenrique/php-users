@@ -255,10 +255,15 @@ class Novo_User extends NOVO_Controller {
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateSecondName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhoneMobile = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
 		$this->render->skipProfession = lang('CONF_PROFESSION') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreProfession = lang('CONF_PROFESSION') == 'OFF' ? 'ignore' : '';
 		$this->render->skipContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'ignore' : '';
+		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'ignore' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'ignore' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
