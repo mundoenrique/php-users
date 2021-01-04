@@ -26,25 +26,22 @@
           </div>
           <div class="form-group col-6 input-height">
             <label for="firstName"><?= lang('USER_FIRSTNAME') ?></label>
-            <input id="firstName" class="form-control <?= $updateUser; ?>" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?>
-              autocomplete="off">
+            <input id="firstName" class="form-control <?= $updateUser; ?>" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
             <label for="lastName"><?= lang('USER_LASTNAME') ?></label>
-            <input id="lastName" class="form-control <?= $updateUser; ?>" type="text" name="lastName" value="<?= $lastName; ?>" <?= $updateName; ?>
-              autocomplete="off">
+            <input id="lastName" class="form-control <?= $updateUser; ?>" type="text" name="lastName" value="<?= $lastName; ?>" <?= $updateName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
             <label for="middleName"><?= lang('USER_MIDDLENAME') ?></label>
-            <input id="middleName" class="form-control <?= $updateUser; ?>" type="text" name="middleName" value="<?= $middleName; ?>"
-              autocomplete="off">
+            <input id="middleName" class="form-control <?= $updateUser; ?>" type="text" name="middleName" value="<?= $middleName; ?>" <?= $updateSecondName; ?>  autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
             <label for="surName"><?= lang('USER_SURNAME') ?></label>
-            <input id="surName" class="form-control <?= $updateUser; ?>" type="text" name="surName" value="<?= $surName; ?>" autocomplete="off">
+            <input id="surName" class="form-control <?= $updateUser; ?>" type="text" name="surName" value="<?= $surName; ?>" <?= $updateSecondName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
@@ -164,13 +161,13 @@
           <div class="form-group col-6 input-height">
             <label for="email"><?= lang('USER_EMAIL') ?></label>
             <input id="email" class="form-control <?= $updateUser; ?>" type="text" name="email" value="<?= $email; ?>"
-              placeholder="usuario@ejemplo.com" autocomplete="off">
+							<?= $updateEmail; ?> placeholder="usuario@ejemplo.com" autocomplete="off">
             <input id="oldEmail" type="hidden" name="oldEmail" value="<?= $email; ?>">
             <div class="help-block"></div>
           </div>
           <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
-          <div class="form-group col-6 input-height">
-            <label for="email"><?= lang('USER_CONFIRM_EMAIL') ?></label>
+          <div class="form-group col-6 input-height <?= $skipConfirmEmail; ?>">
+            <label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
             <input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
               autocomplete="off" onpaste="return false">
             <div class="help-block"></div>
@@ -184,8 +181,7 @@
           </div>
           <div class="form-group col-6 input-height">
             <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
-            <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
-              autocomplete="off">
+            <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>" <?= $updatePhoneMobile; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="col-6 input-height <?= $skipOtherPhone; ?>">
