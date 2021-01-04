@@ -91,7 +91,7 @@ class Encrypt_Connect
 				$response->bean = $response->bean;
 			}
 
-			$this->logMessage->inBean = 'IN BEAN';
+			$this->logMessage->inBean = ' IN BEAN';
 		}
 
 		foreach ($response AS $pos => $responseAttr) {
@@ -191,6 +191,7 @@ class Encrypt_Connect
 			$response = $failResponse;
 			$fail = TRUE;
 		}
+
 		if ($fail) {
 			$this->logMessage = $failResponse;
 			$this->logMessage->userName = $userName;
@@ -214,7 +215,9 @@ class Encrypt_Connect
 		$uploadBulk = $this->CI->config->item('upload_bulk');
 		$respUpload = new stdClass;
 		$respUpload->rc = 0;
+
 		log_message('INFO', 'NOVO UPLOAD FILE BY: ' . $urlBulkService . ' AND: ' . $userpassBulk);
+
 		$ch = curl_init();
 		$Fclose = $fOpen = fopen($uploadBulk . $file, 'r');
 		curl_setopt($ch, CURLOPT_URL, $urlBulkService . $file);
@@ -225,13 +228,17 @@ class Encrypt_Connect
 		curl_setopt($ch, CURLOPT_INFILESIZE, filesize($uploadBulk . $file));
 		curl_exec($ch);
 		$result = curl_errno($ch);
+
 		log_message('DEBUG', 'NOVO [' . $userName . '] UPLOAD FILE BULK SFTP ' . $model . ': ' . $result . ' ' . lang('RESP_UPLOAD_SFTP(' . $result . ')'));
+
 		if ($result != 0) {
 			$respUpload->rc = -105;
 		}
+
 		curl_close($ch);
 		fclose($Fclose);
 		unlink($uploadBulk . $file);
+
 		return $respUpload;
 	}
 	/**
