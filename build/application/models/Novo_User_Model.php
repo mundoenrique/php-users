@@ -894,22 +894,20 @@ class Novo_User_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$modal = FALSE;
 
 				if ($this->session->terms == '0') {
 					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_INFO');
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
-					$this->response->modalBtn['action'] = 'destroy';
+					$this->response->msg = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
 					$modal = TRUE;
 				}
 
 				if ($this->session->longProfile == 'S' && $this->session->affiliate == '0') {
 					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_INFO');
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
+					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 					$modal = TRUE;
 				}
@@ -1097,6 +1095,7 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			}
 		}
+
 		$profileData->imagesLoaded = $imagesDocument;
 
 		$this->response->data->profileData = $profileData;
@@ -1118,6 +1117,7 @@ class Novo_User_Model extends NOVO_Model {
 		if ($dataRequest->email != $dataRequest->oldEmail) {
 			$this->callws_ValidateEmail_User($dataRequest);
 			$mailAvailable = FALSE;
+
 			if ($this->response->code == 2) {
 				$mailAvailable = TRUE;
 			} else {
