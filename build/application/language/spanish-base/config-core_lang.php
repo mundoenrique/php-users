@@ -98,11 +98,12 @@ $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
-	'detect_mime' => true,
+	'detect_mime' => TRUE,
 	'min_size' => 10,
-	'max_size' => 6144,
+	'max_size' => 1024,
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
+	'file_ext_tolower'=> TRUE,
 ];
 //REGISTRY
 $lang['CONF_COUNTRY_DOCUMENT'] = [

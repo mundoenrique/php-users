@@ -300,7 +300,10 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.filesize = function (value, element, param) {
-		return element.files[0].size <= 6291456 && element.files[0].size > 10240;
+		var maxSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.max_size) * 1024
+		var minSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.min_size) * 1024
+
+		return element.files[0].size <= maxSize && element.files[0].size >= minSize;
 	}
 
 	form.validate().resetForm();
