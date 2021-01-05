@@ -17,6 +17,25 @@ class Tool_Api {
 	}
 
 	/**
+	 * @info Lee la cabecera de la petición
+	 * @author Pedro Torres
+	 * @date Oct 5th, 2021
+	 */
+	public function readHeader($nameApi)
+	{
+		log_message('INFO', 'Novo Tool_Api: readHeader Method Initialized');
+
+		$objRequest = new stdClass();
+		$typeHeader = $this->CI->input->get_request_header('Content-Type', TRUE);
+		$typeResource = preg_split('/;/i', $typeHeader)[0];
+
+		$objRequest = json_decode($this->CI->input->raw_input_stream);
+
+		log_message('DEBUG', 'readHeader type resource: ' . json_encode($typeResource));
+		return $this->getContentAPI($objRequest, $nameApi);
+	}
+
+	/**
 	 * @info Extrae el contenido del API
 	 * @author Pedro Torres
 	 * @date Oct 1th, 2020
@@ -24,6 +43,8 @@ class Tool_Api {
 	public function getContentAPI($objRequest = [], $nameApi = '')
 	{
 		log_message('INFO', 'Novo Tool_Api: getContentAPI Method Initialized');
+
+		log_message('DEBUG', 'getContentAPI object received: ' . json_encode($objRequest));
 
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 
@@ -44,6 +65,8 @@ class Tool_Api {
 			$this->structureValidRequest = $functionGetContract();
 			$this->namePropRequest = array_keys($this->structureValidRequest)[0];
 		}
+
+		log_message('DEBUG', 'setContract for ['.$functionGetContract.'] structure valid: ' . json_encode($this->structureValidRequest));
 	}
 
 	/**
@@ -63,7 +86,7 @@ class Tool_Api {
 
 			// TODO
 			// Solo para generar datos en prueba
-		  // $objRequest->request = $this->CI->tool_file->fakeDataUpload('mrojas');
+		  $objRequest->request = $this->CI->tool_file->fakeDataUpload('mbueno');
 			// $objRequest->request = $this->CI->tool_file->fakeDataErase('mrojas');
 
 			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
@@ -76,6 +99,11 @@ class Tool_Api {
 				}
 			}
 		}
+
+		foreach ((array)$decrypParams['request'] as $property => $value) {
+			$infoDecryptParams[$property] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
+		}
+		log_message('DEBUG', 'getPropertiesRequest object decrypt: ' . json_encode($infoDecryptParams));
 
 		return $decrypParams;
 	}
@@ -94,10 +122,20 @@ class Tool_Api {
 		if (!is_null($decrypParams)) {
 			$paramsValidsBodyRequest = $this->structureValidRequest[$this->namePropRequest];
 
-			foreach ($paramsValidsBodyRequest as $valor) {
-				$contentRequest[$valor] = property_exists($decrypParams[$this->namePropRequest], $valor) ?
-				 $this->clearProperty($decrypParams[$this->namePropRequest]->{$valor}) :
-				 NULL;
+			foreach ($paramsValidsBodyRequest as $property) {
+				$contentRequest[$property] = NULL;
+
+				if (property_exists($decrypParams[$this->namePropRequest], $property)) {
+					$value = $decrypParams[$this->namePropRequest]->{$property} ?? FALSE;
+
+					if ($value) {
+						$value = strlen($value) < 150 ? $value : substr($value,0,147).'...';
+						$contentRequest[$property] = $this->clearProperty($decrypParams[$this->namePropRequest]->{$propertyy});
+					}
+				}
+				$value = $contentRequest[$property] == NULL ? 'Error: not valid...' : $value;
+
+				log_message('DEBUG', 'getContentRequest get content for '.$property.': ' . $value);
 			}
 		}
 		return $contentRequest;

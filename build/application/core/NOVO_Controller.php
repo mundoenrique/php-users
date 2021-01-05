@@ -76,21 +76,7 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->countryUri === "api") {
 
-			$objRequest = new stdClass();
-			$typeHeader = $this->input->get_request_header('Content-Type', TRUE);
-			$typeResource = preg_split('/;/i', $typeHeader)[0];
-
-			$typeContentValid = [
-				'application/json' => json_decode($this->input->raw_input_stream),
-				'multipart/form-data' => count($_FILES) == 0 ?
-				 (object) ["request" => (object) $_POST] :
-				 (object) ["request" => (object) array_merge($_POST, $_FILES)],
-				'application/x-www-form-urlencoded' => (object) ["request" => (object) $_POST]
-			];
-
-			$objRequest = $typeContentValid[$typeResource];
-			log_message('DEBUG', 'NOVO Controller: typeResource: ' . json_encode($typeResource));
-			$this->dataRequest = $this->tool_api->getContentAPI($objRequest, $this->nameApi);
+			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
 
 			if ($this->session->has_userdata('userName')) {
