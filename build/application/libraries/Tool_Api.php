@@ -130,7 +130,7 @@ class Tool_Api {
 
 					if ($value) {
 						$value = strlen($value) < 150 ? $value : substr($value,0,147).'...';
-						$contentRequest[$property] = $this->clearProperty($decrypParams[$this->namePropRequest]->{$propertyy});
+						$contentRequest[$property] = $this->clearProperty($decrypParams[$this->namePropRequest]->{$property});
 					}
 				}
 				$value = $contentRequest[$property] == NULL ? 'Error: not valid...' : $value;
