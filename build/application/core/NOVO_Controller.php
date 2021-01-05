@@ -207,7 +207,6 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.12.1",
 				"third_party/aes",
 				"aes-json-format",
-				"googleRecaptcha",
 				"helper"
 			];
 
@@ -216,9 +215,15 @@ class NOVO_Controller extends CI_Controller {
 					$this->includeAssets->jsFiles,
 					"sessionControl"
 				);
-			} else if ($validateRecaptcha && ACTIVE_RECAPTCHA) {
-				$this->load->library('recaptcha');
-				$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+			} else if ($validateRecaptcha) {
+				array_push(
+					$this->includeAssets->jsFiles,
+					"googleRecaptcha"
+				);
+				if(ACTIVE_RECAPTCHA){
+					$this->load->library('recaptcha');
+					$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
+				}
 			}
 
 		} else {
