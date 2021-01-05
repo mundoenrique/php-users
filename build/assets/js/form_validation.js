@@ -14,7 +14,7 @@ function validateForms(form) {
 	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
 	var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
 	var emailValid = /^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^([\w.\-+&ñÑ\@ ]+)+$/i;
+	var alphanumunder = /^([\w.\-+&ñÑ\@\* ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
