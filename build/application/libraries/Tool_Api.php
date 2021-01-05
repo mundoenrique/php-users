@@ -43,8 +43,11 @@ class Tool_Api {
 	public function getContentAPI($objRequest = [], $nameApi = '')
 	{
 		log_message('INFO', 'Novo Tool_Api: getContentAPI Method Initialized');
-
-		log_message('DEBUG', 'getContentAPI object received: ' . json_encode($objRequest));
+		$infoDecryptParams = [];
+		foreach ($objRequest as $property => $value) {
+			$infoDecryptParams[$property] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
+		}
+		log_message('DEBUG', 'getContentAPI object received: ' . json_encode($infoDecryptParams));
 
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 
@@ -100,6 +103,7 @@ class Tool_Api {
 			}
 		}
 
+		$infoDecryptParams = [];
 		foreach ((array)$decrypParams['request'] as $property => $value) {
 			$infoDecryptParams[$property] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
 		}
@@ -119,7 +123,7 @@ class Tool_Api {
 
 		$contentRequest = [];
 
-		if (!is_null($decrypParams)) {
+		if (!is_null($decrypParams[$this->namePropRequest])) {
 			$paramsValidsBodyRequest = $this->structureValidRequest[$this->namePropRequest];
 
 			foreach ($paramsValidsBodyRequest as $property) {
@@ -137,6 +141,8 @@ class Tool_Api {
 
 				log_message('DEBUG', 'getContentRequest get content for '.$property.': ' . $value);
 			}
+		}else{
+			log_message('DEBUG', 'ERROR: getContentRequest not content file recieved.');
 		}
 		return $contentRequest;
 	}
