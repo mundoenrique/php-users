@@ -115,9 +115,16 @@
 								</div>
 							</div>
 						</div>
-						<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-							<a class="btn btn-small btn-link big-modal" href="<?= base_url('inicio') ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-							<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+						<div class="flex justify-between mx-5">
+							<div>
+								<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+									<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+									<?= lang('GEN_BTN_EXIT'); ?>
+								</a>
+							</div>
+							<div class="multi-step-button mb-5">
+								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							</div>
 						</div>
 					</fieldset>
 					<!-- Datos de contacto -->
@@ -214,9 +221,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-							<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-							<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+						<div class="flex justify-between mx-5">
+							<div>
+								<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+									<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+									<?= lang('GEN_BTN_EXIT'); ?>
+								</a>
+							</div>
+							<div class="multi-step-button mb-5">
+								<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							</div>
 						</div>
 					</fieldset>
 					<?php if ($longProfile == 'S') : ?>
@@ -313,9 +328,17 @@
 									</div>
 								</div>
 							</div>
-							<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-								<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							<div class="flex justify-between mx-5">
+								<div>
+									<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+										<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+										<?= lang('GEN_BTN_EXIT'); ?>
+									</a>
+								</div>
+								<div class="multi-step-button mb-5">
+									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+									<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+								</div>
 							</div>
 						</fieldset>
 						<!-- Datos de usuario -->
@@ -377,9 +400,17 @@
 									</div>
 								</div>
 							</div>
-							<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-								<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							<div class="flex justify-between mx-5">
+								<div>
+									<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+										<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+										<?= lang('GEN_BTN_EXIT'); ?>
+									</a>
+								</div>
+								<div class="multi-step-button mb-5">
+									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+									<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+								</div>
 							</div>
 						</fieldset>
 						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
@@ -392,9 +423,17 @@
 										<?php $this->load->view('user/loadDocuments_content-core') ?>
 									</div>
 								</div>
-								<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-									<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-									<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+								<div class="flex justify-between mx-5">
+									<div>
+										<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+											<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+											<?= lang('GEN_BTN_EXIT'); ?>
+										</a>
+									</div>
+									<div class="multi-step-button mb-5">
+										<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+										<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+									</div>
 								</div>
 							<?php endif; ?>
 						</fieldset>
@@ -418,9 +457,17 @@
 									</div>
 								</div>
 							</div>
-							<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-								<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-								<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit">Confirmar</button>
+							<div class="flex justify-between mx-5">
+								<div>
+									<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+										<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+										<?= lang('GEN_BTN_EXIT'); ?>
+									</a>
+								</div>
+								<div class="multi-step-button mb-5">
+									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+									<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+								</div>
 							</div>
 						</fieldset>
 					<?php else : ?>
@@ -483,9 +530,17 @@
 									</div>
 								</div>
 							</div>
-							<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-								<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-								<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+							<div class="flex justify-between mx-5">
+								<div>
+									<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+										<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+										<?= lang('GEN_BTN_EXIT'); ?>
+									</a>
+								</div>
+								<div class="multi-step-button mb-5">
+									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+									<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+								</div>
 							</div>
 						</fieldset>
 						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
@@ -498,9 +553,17 @@
 										<?php $this->load->view('user/loadDocuments_content-core') ?>
 									</div>
 								</div>
-								<div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-									<button class="btn btn-small btn-link back" type="submit">Regresar</button>
-									<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit">Confirmar</button>
+								<div class="flex justify-between mx-5">
+									<div>
+										<a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
+											<small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
+											<?= lang('GEN_BTN_EXIT'); ?>
+										</a>
+									</div>
+									<div class="multi-step-button mb-5">
+										<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+										<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+									</div>
 								</div>
 							<?php endif; ?>
 						</fieldset>

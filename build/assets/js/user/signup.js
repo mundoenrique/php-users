@@ -117,76 +117,76 @@ $(function () {
 			scrollTopPos($('#signUpForm').offset().top);
 		}
 	});
-});
 
-$('form.needs-validation').each((idx, form) => {
-	$(form).find('button').each((idx, button) => {
-		$(button).click(function () {
-			// if (!valid($(button))) {
-			//   event.preventDefault();
-			//   event.stopPropagation();
-			// }
+	$('form.needs-validation').each((idx, form) => {
+		$(form).find('button').each((idx, button) => {
+			$(button).click(function () {
+				// if (!valid($(button))) {
+				//   event.preventDefault();
+				//   event.stopPropagation();
+				// }
+			});
 		});
 	});
-});
 
-$('.multi-step-form  .form-container fieldset:not(:first-child)').css({
-	'display': 'none',
-});
-
-// Reset all bars to ensure that all the progress is removed
-$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
-	$(this).css({
-		'width': '0%',
+	$('.multi-step-form  .form-container fieldset:not(:first-child)').css({
+		'display': 'none',
 	});
-});
 
-$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
-	let lastActive = $('.multi-step-form > .progress-container .progress-icon.active').last().data('index');
-	let thisFs = $('.multi-step-form .form-container fieldset.active');
-	let lastSeen = +$(this).closest('.multi-step-form').find(`fieldset.seen`).last().data('index');
+	// Reset all bars to ensure that all the progress is removed
+	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
+		$(this).css({
+			'width': '0%',
+		});
+	});
 
-	if ($(this).data('index') > lastActive) {
-		console.log('hola');
-		if (!valid(thisFs)) {
-			removeViewedFieldsets(lastActive);
+	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
+		let lastActive = $('.multi-step-form > .progress-container .progress-icon.active').last().data('index');
+		let thisFs = $('.multi-step-form .form-container fieldset.active');
+		let lastSeen = +$(this).closest('.multi-step-form').find(`fieldset.seen`).last().data('index');
+
+		if ($(this).data('index') > lastActive) {
+			if (!valid(thisFs)) {
+				removeViewedFieldsets(lastActive);
+				return false;
+			}
+		}
+
+		if (+$(this).data('index') <= lastSeen) {
+			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
+		}
+		return false;
+	});
+
+	$('.multi-step-form .form-container fieldset .multi-step-button button.next').click(function (event) {
+		let thisFs = $(this).closest('fieldset');
+		let index = +thisFs.data('index');
+		let msContainer = thisFs.closest('.multi-step-form');
+
+		if ($(this).attr('id') == 'signUpBtn') {
 			return false;
 		}
-	}
 
-	if (+$(this).data('index') <= lastSeen) {
-		moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
-	}
-	return false;
-});
-
-$('.multi-step-form .form-container fieldset > .multi-step-button button.next').click(function (event) {
-	let thisFs = $(this).closest('fieldset');
-	let index = +thisFs.data('index');
-	let msContainer = thisFs.closest('.multi-step-form');
-
-	if ($(this).attr('id') == 'signUpBtn') {
+		if (!valid($(thisFs))) {
+			return false;
+		} else {
+			msContainer.find(`fieldset[data-index=${index + 1}]`)
+				.addClass('seen');
+			msContainer.find(`div.progress-container > div.progress > div.progress-bar[data-index=${index}]`).parent()
+				.addClass('seen');
+		}
+		moveTo(msContainer, index + 1);
 		return false;
-	}
+	});
 
-	if (!valid($(thisFs))) {
+	$('.multi-step-form .form-container fieldset .multi-step-button button.back').click(function (event) {
+		let thisFs = $(this).closest('fieldset');
+		let index = +thisFs.data('index');
+		let msContainer = thisFs.closest('.multi-step-form');
+		moveTo(msContainer, index - 1);
 		return false;
-	} else {
-		msContainer.find(`fieldset[data-index=${index + 1}]`)
-			.addClass('seen');
-		msContainer.find(`div.progress-container > div.progress > div.progress-bar[data-index=${index}]`).parent()
-			.addClass('seen');
-	}
-	moveTo(msContainer, index + 1);
-	return false;
-});
+	});
 
-$('.multi-step-form .form-container fieldset > .multi-step-button button.back').click(function (event) {
-	let thisFs = $(this).closest('fieldset');
-	let index = +thisFs.data('index');
-	let msContainer = thisFs.closest('.multi-step-form');
-	moveTo(msContainer, index - 1);
-	return false;
 });
 
 function valid(button) {
@@ -198,10 +198,8 @@ function valid(button) {
 	validateForms(form);
 	if (!form.valid()) {
 		fieldset.removeClass('valid');
-
 		var currentIndex = Number(fieldset.attr("data-index"));
 		removeViewedFieldsets(currentIndex);
-
 		valid = false;
 	} else {
 		fieldset.addClass('valid');
