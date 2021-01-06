@@ -1117,6 +1117,7 @@ class Novo_User_Model extends NOVO_Model {
 		if ($dataRequest->email != $dataRequest->oldEmail) {
 			$this->callws_ValidateEmail_User($dataRequest);
 			$mailAvailable = FALSE;
+
 			if ($this->response->code == 2) {
 				$mailAvailable = TRUE;
 			} else {

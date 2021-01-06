@@ -32,7 +32,8 @@ class Tool_File {
 		$this->CI->load->library('upload');
 		$this->CI->load->library('image_lib');
 		$valid = FALSE;
-		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');$configUploadFile['upload_path'] = BASE_CDN_PATH . $this->buildDirectoryPath([
+		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$configUploadFile['upload_path'] = BASE_CDN_PATH . $this->buildDirectoryPath([
 			'upload',
 			strtoupper($this->CI->session->countryUri),
 			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
@@ -66,7 +67,7 @@ class Tool_File {
 				$uploadData = (object)$this->CI->upload->data();
 				$_POST[$key] = $uploadData->file_name;
 
-				log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$uploadData->file_size.' MB');
+				log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$uploadData->file_size.' KB');
 
 				//$this->compressImage($uploadData);
 				$matchedFiles = glob($uploadData->file_path.$uploadData->raw_name.'.*');
@@ -81,7 +82,7 @@ class Tool_File {
 
 				$valid = $this->cryptographyFile($uploadData->full_path);
 			} else {
-				log_message('ERROR', 'Novo ['.$this->user.'] uploadFiles ERRORS '.json_encode($this->upload->display_errors(), JSON_UNESCAPED_UNICODE));
+				log_message('ERROR', 'Novo ['.$this->user.'] uploadFiles ERRORS '.json_encode($this->CI->upload->display_errors(), JSON_UNESCAPED_UNICODE));
 			}
 		}
 
@@ -167,7 +168,9 @@ class Tool_File {
 					$data = base64_decode($data);
 					$sizeImage = strlen($data);
 
-					if ($sizeImage >= $configToUploadFile['min_size'] && $sizeImage <= $configToUploadFile['max_size']) {
+					log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$sizeImage.' B');
+
+					if ($sizeImage >= ($configToUploadFile['min_size'] * 1024) && $sizeImage <= (($configToUploadFile['max_size'] + 512) * 1024)) {
 						$fullPathFile = $this->buildDirectoryPath([
 							$directoryToUpload,
 							$fileName

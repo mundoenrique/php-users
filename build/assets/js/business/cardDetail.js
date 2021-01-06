@@ -247,7 +247,7 @@ function sensitiveInformation() {
 		},
 		maxHeight : 600,
 		width : 430,
-		posMy: 'top+50px',
+		posMy: 'top+150px',
 		posAt: 'top+50px'
 	}
 
