@@ -250,7 +250,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$result = $this->db->get()->result_array();
 
-		if (count($result) > 0) {
+		if (lang('CONFIG_DUPLICATE_SESSION') == 'ON' && count($result) > 0) {
 			$this->db->where('id', $result[0]['id'])
 			->delete('cpo_sessions');
 			$logged = TRUE;
