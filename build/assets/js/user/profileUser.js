@@ -2,6 +2,8 @@
 var longProfile;
 var CurrentVerifierCode = '';
 var formFile;
+var animating = 0;
+var skipFields;
 
 $(function () {
 	$('#pre-loader').remove();
@@ -9,6 +11,7 @@ $(function () {
 	$('.cover-spin').hide();
 	longProfile = $('#longProfile').val();
 	formFile = $('#profileUserForm');
+	skipFields = getIgnoredFields(formFile);
 
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
@@ -40,8 +43,8 @@ $(function () {
 			$('#publicOffice, #publicInst').val('');
 		}
 
-		form = $('#profileUserForm');
-		ignoreFields(false, form);
+		form = formFile;
+		ignoreFields(false, form, skipFields);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -88,7 +91,7 @@ $(function () {
 				}
 			});
 
-			scrollTopPos($('#profileUserForm').offset().top);
+			scrollTopPos(formFile.offset().top);
 		}
 	});
 
@@ -168,9 +171,9 @@ function updateProfile() {
 
 function valid(button) {
 	let fieldset = button.closest('fieldset');
-	let form = $('#profileUserForm');
-	ignoreFields(true, form);
-	ignoreFields(false, fieldset);
+	let form = formFile;
+	ignoreFields(true, form, skipFields);
+	ignoreFields(false, fieldset, skipFields);
 	let valid = true;
 	validateForms(form);
 	if (!form.valid()) {
@@ -179,7 +182,6 @@ function valid(button) {
 	}
 	return valid;
 }
-let animating = 0;
 
 function moveTo(msContainer, index) {
 	if (animating > 0) {
@@ -327,10 +329,25 @@ function getResponseServ(currentaction) {
 	});
 }
 
-function ignoreFields(action, form) {
-	if (action) {
-		form.find('input, select, textarea').addClass('ignore');
-	} else {
-		form.find('input, select, textarea').removeClass('ignore');
-	}
+function ignoreFields(action, form, skip) {
+	form.find('input, select, textarea').each(function() {
+		if (!skip.includes($(this).attr('id'))) {
+			if (action) {
+				$(this).addClass('ignore');
+			} else {
+				$(this).removeClass('ignore');
+			}
+		}
+	});
+}
+
+function getIgnoredFields(form) {
+	var ignoredFields = [];
+	form.find('input, select, textarea').each(function () {
+		if ($(this).hasClass('ignore')) {
+			ignoredFields.push($(this).attr('id'));
+		}
+	})
+
+	return ignoredFields
 }
