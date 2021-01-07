@@ -134,7 +134,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			if ($this->input->is_ajax_request()) {
-					$this->dataRequest = json_decode(
+					$this->dataRequest = lang('CONFIG_CYPHER_DATA') == 'ON' ? json_decode(
 						$this->security->xss_clean(
 							strip_tags(
 								$this->cryptography->decrypt(
@@ -143,7 +143,7 @@ class NOVO_Controller extends CI_Controller {
 								)
 							)
 						)
-					);
+					) : json_decode(utf8_encode($this->input->get_post('request')));
 			} else {
 				$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
 				$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
