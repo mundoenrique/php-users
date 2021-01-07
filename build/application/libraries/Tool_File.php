@@ -148,15 +148,16 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Oct 27th, 2020
 	 */
-	public function convertBase64ToImage($imageData, $directoryToUpload, $fileName)
+	public function convertBase64ToImage($imageData, $directoryToUpload, $fileName, $userName = NULL)
 	{
 		log_message('INFO', 'Novo Tool_File: convertBase64ToImage Method Initialized');
 
 		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 		$convertImage = new stdClass();
 		$convertImage->result = FALSE;
+		$this->user = $this->user ?? $userName;
 
-		log_message('DEBUG', 'Novo ['.$this->user.'] CONFIG for uploadFiles ' . json_encode($configToUploadFile));
+		log_message('DEBUG', '['.$this->user.'] CONFIG for uploadFiles ' . json_encode($configToUploadFile));
 
 		if (strpos($imageData, 'base64') > 0) {
 			if (preg_match('/^data:image\/(\w+);base64,/', $imageData, $type)) {
@@ -168,7 +169,7 @@ class Tool_File {
 					$data = base64_decode($data);
 					$sizeImage = strlen($data);
 
-					log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles size '.$sizeImage.' B');
+					log_message('DEBUG', '['.$this->user.'] uploadFiles size '.$sizeImage.' B');
 
 					if ($sizeImage >= ($configToUploadFile['min_size'] * 1024) && $sizeImage <= (($configToUploadFile['max_size'] + 512) * 1024)) {
 						$fullPathFile = $this->buildDirectoryPath([
@@ -196,7 +197,7 @@ class Tool_File {
 			$convertImage->resultProcess = lang('GEN_FILE_EMPTY');
 		}
 
-		log_message('DEBUG', 'Novo ['.$this->user.'] uploadFiles ' . json_encode($convertImage));
+		log_message('DEBUG', '['.$this->user.'] uploadFiles ' . json_encode($convertImage));
 
 		return $convertImage;
 	}
@@ -240,12 +241,12 @@ class Tool_File {
 	 * @author Pedro Torres
 	 * @date Nov 07th, 2020
 	 */
-	public function cryptographyFile($fileName = '', $encrypt = TRUE)
+	public function cryptographyFile($fileName = '', $encrypt = TRUE, $userName = NULL)
 	{
 		log_message('INFO', 'Novo Tool_File: cryptographyFile Method Initialized');
 
 		$result = FALSE;
-
+		$this->user = $this->user ?? $userName;
 		if (is_file($fileName)) {
 			$fileContent = file_get_contents($fileName);
 
@@ -260,10 +261,8 @@ class Tool_File {
 				}
 			}
 		}
-
-		$textResult = $result ? lang('GEN_UPLOAD_SUCCESSFULL'):lang('GEN_UPLOAD_ERROR_GENERAL');
-
-		log_message('DEBUG', 'Novo ['.$this->user.'] cryptographyFile ' . $textResult);
+		$textResult = $result ? lang('GEN_UPLOAD_SUCCESSFULL') : lang('GEN_UPLOAD_ERROR_GENERAL');
+		log_message('DEBUG', '['.$this->user.'] cryptographyFile '.$fileName.' '. $textResult);
 
 		return $result;
 	}
