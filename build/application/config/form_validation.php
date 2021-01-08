@@ -9,7 +9,7 @@ $config = [
 		],
 		[
 			'field' => 'userPass',
-			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,_#]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w!@\*\-\?¡¿+\/.,_#=]+)+$/i]|required'
 		],
 		[
 			'field' => 'currentTime',
