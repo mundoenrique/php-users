@@ -131,7 +131,6 @@ class Novo_User extends NOVO_Controller {
 		$this->render->updatePhone = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
 		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
 		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'ignore' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';

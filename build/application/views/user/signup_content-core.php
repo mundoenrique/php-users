@@ -153,7 +153,7 @@
           </div>
           <div class="form-group col-6 input-height  <?= $skipConfirmEmail; ?>">
             <label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
-            <input id="confirmEmail" class="form-control  <?= $ignoreConfirmEmail; ?>" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
+            <input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
               <?= $updateEmail; ?> autocomplete="off" onpaste="return false">
             <div class="help-block"></div>
           </div>
