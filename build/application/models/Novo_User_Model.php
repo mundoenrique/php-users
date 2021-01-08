@@ -244,16 +244,18 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
 		$logged = FALSE;
 
-		$this->db->select(['id', 'username'])
-		->where('username',  $userName)
-		->get_compiled_select('cpo_sessions', FALSE);
+		if (lang('CONFIG_DUPLICATE_SESSION') == 'ON') {
+			$this->db->select(['id', 'username'])
+			->where('username',  $userName)
+			->get_compiled_select('cpo_sessions', FALSE);
 
-		$result = $this->db->get()->result_array();
+			$result = $this->db->get()->result_array();
 
-		if (count($result) > 0) {
-			$this->db->where('id', $result[0]['id'])
-			->delete('cpo_sessions');
-			$logged = TRUE;
+			if (count($result) > 0) {
+				$this->db->where('id', $result[0]['id'])
+				->delete('cpo_sessions');
+				$logged = TRUE;
+			}
 		}
 
 		return $logged;

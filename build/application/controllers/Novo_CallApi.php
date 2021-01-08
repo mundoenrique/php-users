@@ -14,6 +14,7 @@ class Novo_CallApi extends Novo_Controller {
 
 		$this->method = $this->nameApi;
 		$this->model = "Novo_".ucfirst($this->uri->segment(3))."_ApiModel";
+		$this->username = $this->dataRequest['user_name'] ?? 'NO_NAME';
 	}
 	/**
 	 * @info Método que valida y maneja las peticiones de API
@@ -27,27 +28,23 @@ class Novo_CallApi extends Novo_Controller {
 		$isValid = FALSE;
 
 		if (is_array($this->dataRequest) && count($this->dataRequest) > 0) {
+			$_POST = $this->dataRequest;
 
-			if ($this->nameApi !== 'keyForm') {
-				$_POST = $this->dataRequest;
+			if (array_key_exists('key', $_POST) && $_POST['key'] === KEY_API) {
+				$isValid = $this->form_validation->run($this->nameApi);
+				$resultValidation = $isValid ? 'TRUE' : "FALSE";
+				log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION PARAMS API: '.$resultValidation);
 
-				if (array_key_exists('key', $_POST) && $_POST['key'] === KEY_API) {
-					$isValid = $this->form_validation->run($this->nameApi);
-					log_message('DEBUG', 'NOVO VALIDATION PARAMS API: '.$this->nameApi.': '.json_encode($isValid));
-
-					if ($isValid) {
-						$_POST = [];
-					} else {
-						log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
-					}
+				if ($isValid) {
+					$_POST = [];
 				} else {
-					$decryptFieldKey = json_decode($this->encrypt_connect->cryptography($_POST['key'], FALSE));
-					$key_api = !is_null($decryptFieldKey) && property_exists($decryptFieldKey, 'key') ? $decryptFieldKey->key: '';
-
-					$key_api === KEY_API && $isValid = TRUE;
+					log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 				}
 			} else {
-				$isValid = TRUE;
+				$decryptFieldKey = json_decode($this->encrypt_connect->cryptography($_POST['key'], FALSE));
+				$key_api = !is_null($decryptFieldKey) && property_exists($decryptFieldKey, 'key') ? $decryptFieldKey->key: '';
+
+				$key_api === KEY_API && $isValid = TRUE;
 			}
 		}
 
@@ -57,7 +54,7 @@ class Novo_CallApi extends Novo_Controller {
 			$this->response = $this->tool_api->setResponseNotValid();
 		}
 
-		log_message('DEBUG', 'Novo_CallApi: '.json_encode($this->response));
+		log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] Novo_CallApi: '.json_encode($this->response));
 
 		return $this->output
 		->set_content_type('application/json')
