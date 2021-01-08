@@ -125,6 +125,10 @@ class Novo_User extends NOVO_Controller {
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateLastName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhone = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
+		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';

@@ -11,6 +11,7 @@ $lang['VALIDATE_ID_NUMBER'] = 'Se admiten números y letras';
 $lang['VALIDATE_CURRENT_PASS'] = 'Indica tu contraseña actual';
 $lang['VALIDATE_NEW_PASS'] = 'Indica tu nueva contraseña';
 $lang['VALIDATE_DIFFERS_PASS'] = 'La nueva contraseña debe ser diferente a la actual';
+$lang['VALIDATE_DIFFERS_MOBILE_PHONE'] = 'El número de teléfono debe ser diferente al número móvil';
 $lang['VALIDATE_REQUIREMENTS_PASS'] = 'La contraseña debe cumplir los requisitos';
 $lang['VALIDATE_CONFIRM_PASS'] = 'Confirma tu contraseña';
 $lang['VALIDATE_IQUAL_PASS'] = 'Debe ser igual a la nueva contraseña';

@@ -37,12 +37,12 @@
           </div>
           <div class="form-group col-6 input-height">
             <label for="middleName"><?= lang('USER_MIDDLENAME')?></label>
-            <input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" autocomplete="off">
+            <input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" <?= $updateLastName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
             <label for="surName"><?= lang('USER_SURNAME')?></label>
-            <input id="surName" class="form-control" type="text" name="surName" value="<?= $surName; ?>" autocomplete="off">
+            <input id="surName" class="form-control" type="text" name="surName" value="<?= $surName; ?>" <?= $updateLastName; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height">
@@ -148,13 +148,13 @@
           <div class="form-group col-6 input-height">
             <label for="email"><?= lang('USER_EMAIL')?></label>
             <input id="email" class="form-control" type="text" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
-              autocomplete="off">
+              <?= $updateEmail; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
-          <div class="form-group col-6 input-height">
+          <div class="form-group col-6 input-height  <?= $skipConfirmEmail; ?>">
             <label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
             <input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>" placeholder="usuario@ejemplo.com"
-              autocomplete="off" onpaste="return false">
+              <?= $updateEmail; ?> autocomplete="off" onpaste="return false">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-6 input-height <?= $skipLandLine ?>">
@@ -164,7 +164,7 @@
           </div>
           <div class="form-group col-6 input-height">
             <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE')?></label>
-            <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" autocomplete="off">
+            <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" <?= $updatePhone; ?> autocomplete="off">
             <div class="help-block"></div>
           </div>
           <div class="form-group col-12 <?= $skipOtherPhone ?>">

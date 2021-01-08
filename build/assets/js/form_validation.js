@@ -75,7 +75,7 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: phone },
+			"landLine": { pattern: phone, differs: "#mobilePhone" },
 			"mobilePhone": { required: true, pattern: phone },
 			"otherPhoneNum": {
 				required: {
@@ -179,7 +179,10 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_EMAIL,
 				equalTo: lang.VALIDATE_CONFIRM_EMAIL,
 			},
-			"landLine": lang.VALIDATE_PHONE,
+			"landLine": {
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_MOBILE_PHONE,
+			},
 			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
 			"otherPhoneNum": lang.VALIDATE_PHONE,
 			"workplace": lang.VALIDATE_WORKPLACE,
