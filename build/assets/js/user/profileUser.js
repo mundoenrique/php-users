@@ -139,9 +139,7 @@ $(function () {
 		$('select').find('option').prop('disabled', false);
 	}
 
-	$('.multi-step-form  .form-container fieldset:not(:first-child)').css({
-		'display': 'none',
-	});
+	toPositionFieldsetError(formFile);
 
 	// Reset all bars to ensure that all the progress is removed
 	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
@@ -350,4 +348,27 @@ function getIgnoredFields(form) {
 	})
 
 	return ignoredFields
+}
+
+function toPositionFieldsetError(form) {
+	var errorElements, firstIndex;
+	var fieldsetsIndex = [];
+	var fieldsets = 	$('.multi-step-form .form-container fieldset');
+	fieldsets.css({'display': 'none'});
+	validateForms(formFile);
+	if (formFile.valid()) {
+		$(fieldsets[0]).addClass('active');
+		$(fieldsets[0]).css({'display': 'block'});
+	} else {
+		errorElements = form.find('.has-error');
+		errorElements.each(function () {
+			if (!fieldsetsIndex.includes($(this).closest('fieldset').data('index'))) {
+				fieldsetsIndex.push($(this).closest('fieldset').data('index'));
+			}
+		})
+		firstIndex = fieldsetsIndex[0];
+		$(fieldsets[firstIndex-1]).addClass('active');
+		$(fieldsets[firstIndex-1]).css({'display': 'block'});
+		moveTo($(fieldsets[firstIndex-1]).closest('.multi-step-form'), firstIndex);
+	}
 }
