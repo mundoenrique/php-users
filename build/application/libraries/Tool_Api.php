@@ -33,8 +33,9 @@ class Tool_Api {
 		log_message('DEBUG', '['.$this->nameApi.'] readHeader type resource: ' . json_encode($typeResource));
 
 		$objRequest = json_decode($this->CI->input->raw_input_stream);
+		$sizeObject = strval(round(strlen($objRequest->request)/1000,2));
 		$infoDecryptParams = [];
-		log_message('DEBUG', '['.$this->nameApi.'] getContentAPI object received: ' . json_encode($this->shortValues($objRequest)));
+		log_message('DEBUG', '['.$this->nameApi.'] getContentAPI object received ('.$sizeObject.'KB): ' . json_encode($this->shortValues($objRequest)));
 
 		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 

@@ -169,7 +169,7 @@ class Tool_File {
 					$data = base64_decode($data);
 					$sizeImage = strlen($data);
 
-					log_message('DEBUG', '['.$this->user.'] uploadFiles size '.$sizeImage.' B');
+					log_message('DEBUG', '['.$this->user.'] uploadFiles size '.strval(round($sizeImage/1000, 2)).'KB');
 
 					if ($sizeImage >= ($configToUploadFile['min_size'] * 1024) && $sizeImage <= (($configToUploadFile['max_size'] + 512) * 1024)) {
 						$fullPathFile = $this->buildDirectoryPath([
@@ -197,7 +197,7 @@ class Tool_File {
 			$convertImage->resultProcess = lang('GEN_FILE_EMPTY');
 		}
 
-		log_message('DEBUG', '['.$this->user.'] uploadFiles ' . json_encode($convertImage));
+		log_message('DEBUG', '['.$this->user.'] result upload file ' . json_encode($convertImage));
 
 		return $convertImage;
 	}
