@@ -88,10 +88,14 @@ class Cryptography {
 	 * @param $data -> string dato a descifrar
 	 */
 	public function decryptOnlyOneData ($data) {
-		$data = json_decode(base64_decode($data));
-		return $this->decrypt(
-			base64_decode($data->plot),
-			utf8_encode($data->password)
-		);
+		if (lang('CONFIG_CYPHER_DATA') == 'ON') {
+			$data = json_decode(base64_decode($data));
+			$data = $this->decrypt(
+				base64_decode($data->plot),
+				utf8_encode($data->password)
+			);
+		}
+
+		return $data;
 	}
 }
