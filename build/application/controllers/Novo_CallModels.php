@@ -17,7 +17,6 @@ class Novo_CallModels extends Novo_Controller {
 			$this->rule = lcfirst($this->dataRequest->where);
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
-
 		} else {
 			show_404();
 		}
@@ -25,7 +24,7 @@ class Novo_CallModels extends Novo_Controller {
 	/**
 	 * @info Método que valida y maneja las peticiones asincornas de la aplicación
 	 * @author J. Enrique Peñaloza Piñero
-	 * @date May 18th, 2019
+	 * @date May 18th, 2020
 	 */
 	public function index()
 	{
@@ -45,37 +44,7 @@ class Novo_CallModels extends Novo_Controller {
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
-
-			foreach ($_FILES as $key => $value) {
-				if (is_array($value)) {
-					$_FILES[$key]['nameForUpload'] = $this->tool_file->setNameToFile([
-						$key,
-						$this->session->abbrTypeDocument,
-						$this->session->userId
-					]);
-				}
-			}
-
-			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
-				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
-				strtoupper($this->session->countryUri),
-				strtoupper($_POST['nickName'] ?? $this->session->userName),
-			]);
-
-			$this->tool_file->uploadFiles($configUploadFile);
-			foreach ($_FILES as $clave => $valor) {
-				if ($valor['error'] == 0) {
-					$fullPathName = $this->tool_file->buildDirectoryPath([
-						$configUploadFile['upload_path'],
-						$valor['resultUpload'],
-					]);
-
-					$resultEcryptFile = $this->tool_file->cryptographyFile($fullPathName);
-				} else {
-					$_POST[$clave] = '';
-				}
-			}
+			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
@@ -89,7 +58,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
 
-		$dataResponse = $this->cryptography->encrypt($this->dataResponse);
+		$dataResponse = lang('CONFIG_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
 	/**

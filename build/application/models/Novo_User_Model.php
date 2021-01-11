@@ -244,16 +244,18 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
 		$logged = FALSE;
 
-		$this->db->select(['id', 'username'])
-		->where('username',  $userName)
-		->get_compiled_select('cpo_sessions', FALSE);
+		if (lang('CONFIG_DUPLICATE_SESSION') == 'ON') {
+			$this->db->select(['id', 'username'])
+			->where('username',  $userName)
+			->get_compiled_select('cpo_sessions', FALSE);
 
-		$result = $this->db->get()->result_array();
+			$result = $this->db->get()->result_array();
 
-		if (count($result) > 0) {
-			$this->db->where('id', $result[0]['id'])
-			->delete('cpo_sessions');
-			$logged = TRUE;
+			if (count($result) > 0) {
+				$this->db->where('id', $result[0]['id'])
+				->delete('cpo_sessions');
+				$logged = TRUE;
+			}
 		}
 
 		return $logged;
@@ -894,22 +896,20 @@ class Novo_User_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$modal = FALSE;
 
 				if ($this->session->terms == '0') {
 					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_INFO');
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
-					$this->response->modalBtn['action'] = 'destroy';
+					$this->response->msg = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
 					$modal = TRUE;
 				}
 
 				if ($this->session->longProfile == 'S' && $this->session->affiliate == '0') {
 					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_INFO');
-					$this->response->title = lang('GEN_SYSTEM_NAME');
-					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico)';
+					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 					$modal = TRUE;
 				}
@@ -1072,8 +1072,8 @@ class Novo_User_Model extends NOVO_Model {
 
 				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
 					if ($nameDocument['nameFile'] !== '') {
-						$fullPathToImage = $this->tool_file->buildDirectoryPath([
-							$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+						$fullPathToImage = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+							'upload',
 							strtoupper($this->session->countryUri),
 							strtoupper($this->session->userName),
 							$nameDocument['nameFile']
@@ -1097,6 +1097,7 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			}
 		}
+
 		$profileData->imagesLoaded = $imagesDocument;
 
 		$this->response->data->profileData = $profileData;
@@ -1118,6 +1119,7 @@ class Novo_User_Model extends NOVO_Model {
 		if ($dataRequest->email != $dataRequest->oldEmail) {
 			$this->callws_ValidateEmail_User($dataRequest);
 			$mailAvailable = FALSE;
+
 			if ($this->response->code == 2) {
 				$mailAvailable = TRUE;
 			} else {

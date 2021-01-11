@@ -328,6 +328,12 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->data->dataLimits = $datalimits;
 
 			break;
+			case -454:
+				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
+				$this->response->msg = lang('CUST_CARD_TEMPORARY_LOCK');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case -447:
 				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
 				$this->response->msg = lang('CUST_NON_RESULTS');

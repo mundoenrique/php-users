@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
+$lang['CONFIG_CYPHER_DATA'] = 'ON';
+$lang['CONFIG_DUPLICATE_SESSION'] = 'ON';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -98,11 +100,12 @@ $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
-	'detect_mime' => true,
-	'min_size' => 10, // 10KB
-	'max_size' => 6291456, //6291456 Kbytes son 6mb (6291456Kb/1048576=6MB)
+	'detect_mime' => TRUE,
+	'min_size' => 10,
+	'max_size' => 1024,
 	'encrypt_name' => FALSE,
 	'overwrite'=> TRUE,
+	'file_ext_tolower'=> TRUE,
 ];
 //REGISTRY
 $lang['CONF_COUNTRY_DOCUMENT'] = [

@@ -27,29 +27,35 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$dataResponse = [];
 		$resultData = '';
-		$directoryToUpload = $this->tool_file->buildDirectoryPath([
-			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+		$directoryToUpload = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+			'upload',
 			strtoupper($dataRequest->client),
 			strtoupper($dataRequest->user_name),
 		]);
 
+		$showResult = lang('GEN_UPLOAD_EXISTING_DIRECTORY');
 		if (!is_dir($directoryToUpload)) {
-			mkdir($directoryToUpload, 0755, TRUE);
+			$showResult = lang('GEN_UPLOAD_DIRECTORY_NOT_FOUND');
+			if (mkdir($directoryToUpload, 0755, TRUE)) {
+				$showResult = lang('GEN_UPLOAD_CREATE_DIRECTORY');
+			}
 		}
+		log_message('DEBUG', '['.$dataRequest->user_name.'] Result create directory: '.$directoryToUpload.' '.$showResult);
 
 		foreach($dataRequest as $property => $bodyBase64) {
 			$resultEcryptFile = FALSE;
 			$statusCodeResponse = 400;
 			if (strpos($bodyBase64, 'base64') > 0) {
 
-				$realFileName = $this->tool_file->setNameToFile([
+				$realFileName  = strtolower(join('_', [
 					$property,
 					$dataRequest->type_document,
 					$dataRequest->nro_document
-				]);
+				]));
 				$shortFileName = hash('ripemd160', $realFileName);
+				log_message('DEBUG', '['.$dataRequest->user_name.'] name for image: '.$realFileName.' encrypted name: '.$shortFileName);
 
-				$convertedFile = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName);
+				$convertedFile = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName, $dataRequest->user_name);
 				if ($convertedFile->result) {
 					$statusCodeResponse = 200;
 
@@ -67,11 +73,12 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				$resultUploadFiles[] = $statusCodeResponse;
 			}
 		}
+
 		count(array_unique($resultUploadFiles)) > 1 && $statusCodeResponse = 206;
 		$this->response->code = $statusCodeResponse;
 		$this->response->data = $dataResponse;
 
-		log_message('DEBUG', 'API uploadFile: ' . json_encode($this->response));
+		log_message('DEBUG', '['.$dataRequest->user_name.'] API uploadFile: ' . json_encode($this->response));
 		return $this->response;
 	}
 
