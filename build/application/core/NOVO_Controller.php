@@ -192,6 +192,7 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.12.1",
 				"third_party/aes",
 				"aes-json-format",
+				"third_party/kendo.dataviz",
 				"helper"
 			];
 
