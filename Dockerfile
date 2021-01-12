@@ -13,5 +13,4 @@ RUN apt-get update -y \
 	&& a2enmod headers rewrite \
 	&& a2ensite 000-default.conf \
 	&& chown -R www-data:www-data ../
-
-RUN echo "memory_limit=512M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+RUN echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
