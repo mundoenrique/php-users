@@ -4,7 +4,6 @@ WORKDIR /var/www/html
 
 COPY build ./
 COPY src/httpd/default.conf /etc/apache2/sites-available/000-default.conf
-COPY src/httpd/deflate.conf /etc/apache2/conf.d/deflate.conf
 
 RUN echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 RUN apt-get update -y \
