@@ -238,4 +238,6 @@ $lang['GEN_UPLOAD_SUCCESSFULL'] = 'upload successfull!!!';
 $lang['GEN_UPLOAD_ERROR_GENERAL'] = 'Error general al cargar archivo.';
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
+$lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Directorio existente.';
+$lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directorio no creado!!!.';
 
