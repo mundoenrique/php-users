@@ -4,6 +4,7 @@ var CurrentVerifierCode = '';
 var formFile;
 var animating = 0;
 var skipFields;
+var ErrorIndexes;
 
 $(function () {
 	$('#pre-loader').remove();
@@ -37,6 +38,7 @@ $(function () {
 	});
 
 	$('#profileUserBtn').on('click', function (e) {
+		var valid;
 		e.preventDefault();
 
 		if ($('#noPublicOfficeOld').is(':checked')) {
@@ -46,8 +48,11 @@ $(function () {
 		form = formFile;
 		ignoreFields(false, form, skipFields);
 		validateForms(form);
+		valid = form.valid();
+		ErrorIndexes = getErrorIndexes();
+		setTextClass(ErrorIndexes);
 
-		if (form.valid()) {
+		if (valid) {
 			btnText = $(this).text().trim();
 			data = getDataForm(form);
 			data.gender = $('input[name=gender]:checked').val();
@@ -74,9 +79,10 @@ $(function () {
 
 				if (inputFile.length) {
 					inputFile.each(function (i, e) {
-						filesToUpload.push(
-							{ 'name': e.id, 'file': $(`#${e.id}`).prop('files')[0] },
-						);
+						filesToUpload.push({
+							'name': e.id,
+							'file': $(`#${e.id}`).prop('files')[0]
+						}, );
 					})
 				}
 				data.files = filesToUpload;
@@ -139,7 +145,11 @@ $(function () {
 		$('select').find('option').prop('disabled', false);
 	}
 
-	toPositionFieldsetError(formFile);
+	validateForms(formFile);
+	formFile.valid();
+	ErrorIndexes = getErrorIndexes();
+	setTextClass(ErrorIndexes);
+	toPositionFieldsetError(ErrorIndexes);
 
 	// Reset all bars to ensure that all the progress is removed
 	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
@@ -160,7 +170,8 @@ $(function () {
 });
 
 function updateProfile() {
-	who = 'User'; where = 'updateProfile';
+	who = 'User';
+	where = 'updateProfile';
 	callNovoCore(who, where, data, function (response) {
 		$('#profileUserBtn').text(btnText);
 		insertFormInput(false);
@@ -170,13 +181,15 @@ function updateProfile() {
 function valid(button) {
 	let fieldset = button.closest('fieldset');
 	let form = formFile;
+	let valid = true;
 	ignoreFields(true, form, skipFields);
 	ignoreFields(false, fieldset, skipFields);
-	let valid = true;
 	validateForms(form);
-	if (!form.valid()) {
+	valid = form.valid();
+	ErrorIndexes = getErrorIndexes();
+	setTextClass(ErrorIndexes);
+	if (!(valid)) {
 		valid = false;
-	} else {
 	}
 	return valid;
 }
@@ -328,7 +341,7 @@ function getResponseServ(currentaction) {
 }
 
 function ignoreFields(action, form, skip) {
-	form.find('input, select, textarea').each(function() {
+	form.find('input, select, textarea').each(function () {
 		if (!skip.includes($(this).attr('id'))) {
 			if (action) {
 				$(this).addClass('ignore');
@@ -350,25 +363,46 @@ function getIgnoredFields(form) {
 	return ignoredFields
 }
 
-function toPositionFieldsetError(form) {
-	var errorElements, firstIndex;
-	var fieldsetsIndex = [];
-	var fieldsets = 	$('.multi-step-form .form-container fieldset');
-	fieldsets.css({'display': 'none'});
-	validateForms(formFile);
+function getErrorIndexes() {
+	var errorElements;
+	var indexes = [];
+	errorElements = formFile.find('.has-error');
+	errorElements.each(function () {
+		if (!indexes.includes($(this).closest('fieldset').data('index'))) {
+			indexes.push($(this).closest('fieldset').data('index'));
+		}
+	})
+
+	return indexes;
+}
+
+function toPositionFieldsetError(indexes) {
+	var firstIndex = indexes[0];
+	var fieldsets = $('.multi-step-form .form-container fieldset');
+	fieldsets.css({
+		'display': 'none'
+	});
 	if (formFile.valid()) {
 		$(fieldsets[0]).addClass('active');
-		$(fieldsets[0]).css({'display': 'block'});
+		$(fieldsets[0]).css({
+			'display': 'block'
+		});
 	} else {
-		errorElements = form.find('.has-error');
-		errorElements.each(function () {
-			if (!fieldsetsIndex.includes($(this).closest('fieldset').data('index'))) {
-				fieldsetsIndex.push($(this).closest('fieldset').data('index'));
-			}
-		})
-		firstIndex = fieldsetsIndex[0];
-		$(fieldsets[firstIndex-1]).addClass('active');
-		$(fieldsets[firstIndex-1]).css({'display': 'block'});
-		moveTo($(fieldsets[firstIndex-1]).closest('.multi-step-form'), firstIndex);
+		$(fieldsets[firstIndex - 1]).addClass('active');
+		$(fieldsets[firstIndex - 1]).css({
+			'display': 'block'
+		});
+		moveTo($(fieldsets[firstIndex - 1]).closest('.multi-step-form'), firstIndex);
 	}
+}
+
+function setTextClass(indexes) {
+	var progressIcons = $('div.progress-icon');
+	progressIcons.each(function () {
+		if (indexes.includes($(this).data('index'))) {
+			$(this).find('.progress-text').addClass('danger');
+		} else {
+			$(this).find('.progress-text').removeClass('danger');
+		}
+	})
 }
