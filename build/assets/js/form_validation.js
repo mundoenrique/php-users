@@ -75,15 +75,17 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: phone, differs: "#mobilePhone" },
-			"mobilePhone": { required: true, pattern: phone },
+			"landLine": { pattern: phone, differs: "#mobilePhone", differs: "#otherPhoneNum" },
+			"mobilePhone": { required: true, pattern: phone, differs: "#landLine", differs: "#otherPhoneNum" },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
 						return $('#phoneType').val() != ''
 					}
 				},
-				pattern: phone
+				pattern: phone,
+				differs: "#mobilePhone",
+				differs: "#landLine"
 			},
 			"workplace": { required: true, pattern: alphaName },
 			"profession": { required: true, requiredSelect: true },
@@ -181,10 +183,16 @@ function validateForms(form) {
 			},
 			"landLine": {
 				pattern: lang.VALIDATE_PHONE,
-				differs: lang.VALIDATE_DIFFERS_MOBILE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
-			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
-			"otherPhoneNum": lang.VALIDATE_PHONE,
+			"mobilePhone": {
+				pattern: lang.VALIDATE_MOBIL_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
+			"otherPhoneNum": {
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
 			"workplace": lang.VALIDATE_WORKPLACE,
 			"profession": lang.VALIDATE_RECOVER_OPTION,
 			"laborOld": lang.VALIDATE_RECOVER_OPTION,
