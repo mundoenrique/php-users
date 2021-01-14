@@ -145,10 +145,14 @@ $(function () {
 		let thisFs = $('.multi-step-form .form-container fieldset.active');
 		let lastSeen = +$(this).closest('.multi-step-form').find(`fieldset.seen`).last().data('index');
 
-		if ($(this).data('index') > lastActive) {
+		if (+$(this).data('index') > lastActive) {
 			if (!valid(thisFs)) {
 				removeViewedFieldsets(lastActive);
 				return false;
+			}
+			if (+$(this).data('index') - 1 == +thisFs.data('index')) {
+				$(`.multi-step-form fieldset[data-index=${$(this).data('index')}]`).addClass('seen');
+				moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
 			}
 		}
 
@@ -192,10 +196,24 @@ $(function () {
 function valid(button) {
 	let fieldset = button.closest('fieldset');
 	let form = $('#signUpForm');
+	let valid = true;
+
+	var seenFieldsets = $('.multi-step-form fieldset:not(.seen)');
+	var ErrorIndexes;
+	ignoreFields(false, formFile);
+	seenFieldsets.each(function (index, element) {
+		ignoreFields(true, $(element));
+	})
+	validateForms(formFile);
+	formFile.valid();
+	ErrorIndexes = getErrorIndexes();
+	setTextClass(ErrorIndexes);
+
+
 	ignoreFields(true, form);
 	ignoreFields(false, fieldset);
-	let valid = true;
 	validateForms(form);
+
 	if (!form.valid()) {
 		fieldset.removeClass('valid');
 		var currentIndex = Number(fieldset.attr("data-index"));
@@ -369,4 +387,28 @@ function removeViewedFieldsets(index) {
 	for (let i = index + 1; i < total + 1; i++) {
 		$('fieldset[data-index=' + i + ']').removeClass('seen');
 	}
+}
+
+function getErrorIndexes() {
+	var errorElements;
+	var indexes = [];
+	errorElements = formFile.find('.has-error');
+	errorElements.each(function () {
+		if (!indexes.includes($(this).closest('fieldset').data('index'))) {
+			indexes.push($(this).closest('fieldset').data('index'));
+		}
+	})
+
+	return indexes;
+}
+
+function setTextClass(indexes) {
+	var progressIcons = $('div.progress-icon');
+	progressIcons.each(function () {
+		if (indexes.includes($(this).data('index'))) {
+			$(this).find('.progress-text').addClass('danger');
+		} else {
+			$(this).find('.progress-text').removeClass('danger');
+		}
+	})
 }
