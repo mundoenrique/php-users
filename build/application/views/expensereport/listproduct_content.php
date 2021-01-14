@@ -22,19 +22,9 @@
 								$infoCard = '';
 								$title = '';
 								switch ($row) {
-									case ($row['bloque'] !== '' && $row['bloque'] == 'PB'):
+									case ($row['bloque'] !== '' && $row['bloque'] == 'S'):
 										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_BLOCK_PRODUCT') . '</span>';
 										break;
-
-									case (count($row['availableServices']) === 0):
-										$title = lang('GEN_NOT_SERVICES_AVAILABLE');
-										$infoCard = '<span class="semibold danger">' . lang('GEN_TEXT_PENDING_REPLACEMENT') . '</span>';
-										break;
-
-									case (in_array("120", $row['availableServices'])):
-										$infoCard = '<button id="generate" class="btn btn-small btn-link" name="generate">Generar PIN </button>';
-										break;
-
 									default:
 										$infoCard = '<p class="mb-0 h6 light text">' . strtoupper($row['nomEmp']) . '</p>';
 								}
@@ -60,7 +50,6 @@
 										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
 										<input type='hidden' id='id_ext_emp' name='id_ext_emp' value='<?= $row['id_ext_emp']; ?>'>
 										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
-										<input type='hidden' id='availableServices' name='availableServices' value='<?= htmlspecialchars(json_encode($row['availableServices']), ENT_QUOTES, 'UTF-8'); ?>'>
 									</form>
 								</div>
 							<?php

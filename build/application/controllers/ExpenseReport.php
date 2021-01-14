@@ -78,16 +78,12 @@ class ExpenseReport extends BDB_Controller
 		}
 
 		$this->session->set_userdata("totalProducts", count($listProducts->data));
-		$servicesAvailableCards = $this->session->userdata("servicesAvailableCards");
 
 		$dataRequeried = [];
 		foreach ($listProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
-
-			$indexServices = array_search($row->nroTarjeta, array_column($servicesAvailableCards, 'noTarjeta'));
-			$services = json_decode($servicesAvailableCards[$indexServices]['availableService']);
 
 			array_push($dataRequeried, [
 				"nroTarjeta" => $row->nroTarjeta,
@@ -100,7 +96,6 @@ class ExpenseReport extends BDB_Controller
 				"nomEmp" => $row->nomEmp,
 				"tipoTarjeta" => $row->tipoTarjeta,
 				"id_ext_per" => $row->id_ext_per,
-				"availableServices" => $services,
 				"prefix" => $row->prefix,
 				"id_ext_emp" => $row->id_ext_emp,
 				"bloque" => $row->bloque
@@ -153,12 +148,7 @@ class ExpenseReport extends BDB_Controller
 				redirect('/reporte');
 			}
 
-			$dataProduct['availableServices'] = json_decode($dataProduct['availableServices']);
 			$this->session->set_userdata('setProductExpense', $dataProduct);
-		}
-		if (is_array($dataProduct) && in_array("120", $dataProduct['availableServices'])) {
-
-			redirect('/atencioncliente');
 		}
 
 		$this->load->model('ExpenseReport_Model', 'modelExpense');
@@ -224,8 +214,6 @@ class ExpenseReport extends BDB_Controller
 		$this->views = ['expensereport/' . $view];
 
 		$this->render->totalProducts = $this->session->userdata("totalProducts");
-		$this->session->unset_userdata("totalProducts");
-
 		$this->render->data = $dataProduct;
 		$this->render->expenses = $expenses->data;
 		$this->render->titlePage = lang('GEN_REPORT') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
