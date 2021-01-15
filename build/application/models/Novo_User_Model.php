@@ -26,6 +26,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Iniciar sesion';
 
 		$userName = mb_strtoupper($dataRequest->userName);
+		$dataRequest->userName = $userName;
 
 		$this->dataAccessLog->userName = $userName;
 
@@ -222,14 +223,6 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case 9999:
-				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
-			break;
 		}
 
 		return $this->responseToTheView('callWs_Signin');
@@ -282,7 +275,11 @@ class Novo_User_Model extends NOVO_Model {
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$msgGeneral = '0';
 
-		$response = $this->sendToService('callWs_AccessRecover');
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_AccessRecover');
+		}
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -299,7 +296,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == '1') {
+		if ($this->isResponseRc != 0 && $msgGeneral == '1') {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -337,7 +334,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->pais = $this->config->item('country');
 		$msgGeneral = 0;
 
-		$response = $this->sendToService('callWs_AccessRecoverOTP');
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('callWs_AccessRecoverOTP');
+		}
 
 		switch($this->isResponseRc) {
 			case 200:
@@ -357,7 +358,7 @@ class Novo_User_Model extends NOVO_Model {
 				break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == 1) {
+		if ($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -396,7 +397,9 @@ class Novo_User_Model extends NOVO_Model {
 		$maskMail = maskString($dataRequest->email, 4, $end = 6, '@');
 		$msgGeneral = 0;
 
-		if ($this->session->flashdata('authToken') != NULL) {
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->session->flashdata('authToken') != NULL && $this->isResponseRc === 0) {
 			$response = $this->sendToService('callWs_ValidateOTP');
 		} else {
 			$this->isResponseRc = 998;
@@ -425,7 +428,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 		}
 
-		if($this->isResponseRc != 0 && $msgGeneral == 1) {
+		if ($this->isResponseRc != 0 && $msgGeneral == 1) {
 			$this->response->title = lang('GEN_MENU_ACCESS_RECOVER');
 			$this->response->icon = lang('CONF_ICON_INFO');
 			$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -465,7 +468,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch($this->isResponseRc) {
 			case 0:
-				if($this->session->has_userdata('userId')) {
+				if ($this->session->has_userdata('userId')) {
 					$this->callWs_FinishSession_User();
 				}
 
@@ -528,7 +531,11 @@ class Novo_User_Model extends NOVO_Model {
 			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
 		];
 
-		$response = $this->sendToService('CallWs_UserIdentify');
+		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
+
+		if ($this->isResponseRc === 0) {
+			$response = $this->sendToService('CallWs_UserIdentify');
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1384,12 +1391,25 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
-		$result = $this->recaptcha->verifyResponse($dataRequest->token);
-		$logMessage = 'NOVO ['.$dataRequest->userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? $dataRequest->docmentId);
+
+		$result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
+		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
 
-		return $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+		$resultRecaptcha = $result["score"] <= lang('CONF_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+
+		if ($resultRecaptcha == 9999) {
+			$this->response->code = 4;
+			$this->response->title = lang('GEN_SYSTEM_NAME');
+			$this->response->icon = lang('CONF_ICON_DANGER');
+			$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
+			$this->response->modalBtn['btn1']['link'] = 'inicio';
+			$this->response->modalBtn['btn1']['action'] = 'redirect';
+		}
+
+		return $resultRecaptcha;
 	}
 }
