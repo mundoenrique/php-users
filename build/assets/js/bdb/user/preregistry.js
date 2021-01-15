@@ -13,7 +13,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	btnTrigger.addEventListener('click', function (e) {
 		e.preventDefault();
-		var md5CodeOTP = '';
+		var codeOTP = '';
 
 		var typeDocumentUser = $$.getElementById('typeDocumentUser');
 		var typeDocumentBussines = $$.getElementById('typeDocumentBussines');
@@ -37,7 +37,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 			disableInputsForm(true, msgLoadingWhite);
 
 			if (inpCodeOTP.value) {
-				md5CodeOTP = CryptoJS.MD5(inpCodeOTP.value).toString()
+				codeOTP = inpCodeOTP.value
 			}
 
 			data = {
@@ -50,7 +50,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 				nitBussines: $$.getElementById('nitBussines').value,
 				telephone_number: $$.getElementById('telephoneNumber').value,
 				acceptTerms: $$.getElementById('acceptTerms').checked,
-				codeOTP: md5CodeOTP
+				codeOTP: codeOTP
 			};
 
 			proccessPetition(data);

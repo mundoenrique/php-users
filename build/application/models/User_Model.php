@@ -42,16 +42,8 @@ class User_Model extends BDB_Model
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->guardaIp = "false";
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->user);
-
-		// TODO
-		// Descomentar para hacer pruebas de integración
-		// $this->dataRequest->password = $argon2->hexArgon2;
-		// $this->dataRequest->hashMD5 = md5($password);
-
-		// TODO
-		// Descomentar la linea siguiente para peticiones reales al servicio
-		$this->dataRequest->password = md5($password);
-
+		$this->dataRequest->password = $argon2->hexArgon2;
+		$this->dataRequest->passwordAux = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
 		if (IP_VERIFY == 'ON') {
@@ -357,19 +349,8 @@ class User_Model extends BDB_Model
 			"notEmail" => "1",
 			"notSms" => "1",
 			"email"	=> $dataRequest->email,
-
-			// TODO
-			// lineas originales
-			// "password"			=> md5($dataRequest->userpwd),
-			// "passwordOld4"		=> md5(strtoupper($dataRequest->userpwd)),
-			"password"			=> md5($password),
+			"password"			=> $argon2->hexArgon2,
 			"passwordOld4"		=> md5(strtoupper($password)),
-
-			// TODO
-			// Para las pruebas de integración con sevicios
-			// "password"			=> $argon2->hexArgon2,
-			// "passwordOld4"		=> $argon2->hexArgon2,
-
 			"tyc" => $dataRequest->acceptTerms,
 			"acCodCia" => $dataRequest->acCodCia,
 		);
@@ -860,7 +841,8 @@ class User_Model extends BDB_Model
 		$currentPassword = $this->decryptData($dataRequest->currentPassword);
 		$newPassword = $this->decryptData($dataRequest->newPassword);
 
-		$argon2 = $this->encrypt_connect->generateArgon2($newPassword);
+		$argon2Current = $this->encrypt_connect->generateArgon2($currentPassword);
+		$argon2New = $this->encrypt_connect->generateArgon2($newPassword);
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'password';
@@ -870,21 +852,8 @@ class User_Model extends BDB_Model
 
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->idOperation = '25';
-
-		// TODO
-		// Envío original
-		$this->dataRequest->passwordOld = md5($currentPassword);
-		$this->dataRequest->password = md5($newPassword);
-		$this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
-
-		// TODO
-		// Petición para probar envío de peticion al servicio
-		// para integrar con Argon2
-
-		// $this->dataRequest->passwordOld = md5($currentPassword);
-		// $this->dataRequest->password = $argon2->hexArgon2;
-		// $this->dataRequest->passwordOld4 = md5(strtoupper($newPassword));
-
+		$this->dataRequest->password = $argon2New->hexArgon2;
+		$this->dataRequest->passwordOld = $argon2Current->hexArgon2;
 		$this->dataRequest->token = $this->session->userdata('token');
 		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
 
