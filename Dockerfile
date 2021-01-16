@@ -13,8 +13,8 @@ RUN apt-get update -y \
 	&& apt-get install -y curl libmcrypt-dev nano \
 	&& docker-php-ext-install mysqli \
 	&& pecl install mcrypt-1.0.3 \
-	&& docker-php-ext-enable mcrypt expires\
-	&& a2enmod headers rewrite \
+	&& docker-php-ext-enable mcrypt \
+	&& a2enmod headers rewrite expires \
 	&& a2ensite 000-default.conf \
 	&& chown -R www-data:www-data ../ \
 	&& service apache2 restart
