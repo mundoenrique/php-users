@@ -18,7 +18,8 @@ function validateForms(form) {
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
-	var phone = lang.CONF_ACCEPT_MASKED_PHONES == 'OFF' ? new RegExp(lang.VALIDATE_MOBIL, 'i') : new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
+	var phone = new RegExp(lang.VALIDATE_MOBIL, 'i');
+	var phoneMasked = new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var floatAmount = new RegExp(lang.VALIDATE_FLOAT_AMOUNT, 'i');
@@ -75,8 +76,8 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: phone, differs: "#mobilePhone", differs: "#otherPhoneNum" },
-			"mobilePhone": { required: true, pattern: phone, differs: "#landLine", differs: "#otherPhoneNum" },
+			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: "#mobilePhone", differs: "#otherPhoneNum" },
+			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: "#landLine", differs: "#otherPhoneNum" },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
