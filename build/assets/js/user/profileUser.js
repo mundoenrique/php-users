@@ -33,6 +33,14 @@ $(function () {
 		$('#otherPhoneNum').prop('disabled', disableInput);
 	});
 
+	$('#landLine').on('change', function () {
+		console.log('cambio');
+		if (lang.CONF_ACCEPT_MASKED_LANDLINE == 'ON') {
+			console.log('apagar');
+			lang.CONF_ACCEPT_MASKED_LANDLINE = 'OFF';
+		}
+	});
+
 	$('#profileUserBtn').on('click', function(e) {
 		e.preventDefault();
 
