@@ -99,8 +99,7 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
-$lang['CONF_ACCEPT_MASKED_MOBILE'] = 'OFF';
-$lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_PHONES'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [

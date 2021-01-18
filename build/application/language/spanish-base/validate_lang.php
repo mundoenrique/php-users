@@ -37,6 +37,7 @@ $lang['VALIDATE_POSITION'] = 'Indica tu cargo, mín 4 máx 25 (letras y espacio)
 $lang['VALIDATE_AMOUNT_REGEX'] = '^[0-9]+(\.[0-9]{2})?$';
 $lang['VALIDATE_AVERAGE_INCOME'] = 'Indica un monto válido máx 9 (0.00)';
 $lang['VALIDATE_MOBIL'] = '^[0-9]{7,15}$';
+$lang['VALIDATE_MOBIL_MASKED'] = '^[0-9*]{7,15}$';
 $lang['VALIDATE_MOBIL_PHONE'] = 'Indica un móvil válido, mín 7 máx 15 (solo números)';
 $lang['VALIDATE_REGEX_NICKNAME'] = '^[a-z0-9_]{6,16}$';
 $lang['VALIDATE_NICK_REQ'] = 'Indica tu nombre de usuario, mín 6 máx 16';

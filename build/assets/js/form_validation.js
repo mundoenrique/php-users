@@ -18,7 +18,7 @@ function validateForms(form) {
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
-	var phone = new RegExp(lang.VALIDATE_MOBIL, 'i');
+	var phone = lang.CONF_ACCEPT_MASKED_PHONES == 'OFF' ? new RegExp(lang.VALIDATE_MOBIL, 'i') : new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var floatAmount = new RegExp(lang.VALIDATE_FLOAT_AMOUNT, 'i');
