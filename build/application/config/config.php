@@ -29,7 +29,6 @@ $config['asset_path'] = BASE_CDN_PATH;
 $config['urlWS'] = WS_URL;
 $config['keyNovo'] = WS_KEY;
 $config['active_recaptcha'] = ACTIVE_RECAPTCHA;
-$config['access_url'] = explode(',', ACCESS_URL);
 $config['client'] = 'novo';
 $config['channel'] = 'personasWeb';
 $config['keyAES256'] = KEY_AES256;
@@ -42,7 +41,6 @@ $config['clientId'] = CLIENT_ID;
 $config['clientSecret'] = CLIENT_SECRET;
 $config['format_date'] = 'j/m/Y';
 $config['format_time'] = 'g:i A';
-$config['cypher_base'] = CYPHER_BASE;
 $config['oauth_url'] = OAUTH_URL;
 $config['scores_recapcha'] = [
 	'development' => [
@@ -413,7 +411,7 @@ $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 50 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = SESS_MATCH_IP;
-$config['sess_time_to_update'] = 10;
+$config['sess_time_to_update'] = 30;
 $config['sess_regenerate_destroy'] = TRUE;
 /*
 | Configura control de tiempo de sesión

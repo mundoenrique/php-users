@@ -32,18 +32,12 @@ class Novo_User extends NOVO_Controller {
 			clearSessionsVars();
 		}
 
-		if (ACTIVE_RECAPTCHA) {
-			$this->load->library('recaptcha');
-			$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
-		}
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.balloon",
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"googleRecaptcha",
 			"user/signin"
 		);
 
@@ -69,6 +63,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
 
 		$view = 'userIdentify';
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
@@ -152,6 +147,7 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
 
 		$view = 'accessRecover';
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
