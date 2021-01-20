@@ -124,6 +124,16 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
+		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
+		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
+		if (lang('CONF_LOAD_DOCS') == 'OFF') {
+      foreach ($this->render->stepTitles as $key => $value) {
+        if ($value == lang('USER_LOAD_DOCS_STEP')) {
+          unset($this->render->stepTitles[$key]);
+        }
+      }
+      $this->render->stepTitles = array_values($this->render->stepTitles);
+    }
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -262,10 +272,20 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
-		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
-		$this->render->dataUserOptions = $this->session->longProfile == 'S' ? 'col-6' : 'col-4';
 		$this->render->terms = $this->session->terms;
 		$this->render->imagesLoaded = $this->render->imagesLoaded ?? [];
+		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
+		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
+
+		if (lang('CONF_LOAD_DOCS') == 'OFF') {
+      foreach ($this->render->stepTitles as $key => $value) {
+        if ($value == lang('USER_LOAD_DOCS_STEP')) {
+          unset($this->render->stepTitles[$key]);
+        }
+      }
+      $this->render->stepTitles = array_values($this->render->stepTitles);
+		}
+
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
