@@ -123,5 +123,10 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Co' => '4',
 	'Mx-Bn' => '16',
 ];
+$lang['CONF_MODULE_RECAPTCHA'] = [
+	'signin',
+	'accessRecover',
+	'userIdentify'
+];
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';

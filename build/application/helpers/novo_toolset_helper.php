@@ -24,7 +24,7 @@ if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
 		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
-		$accessUrl = $CI->config->item('access_url');
+		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 

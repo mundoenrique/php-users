@@ -4,7 +4,10 @@ WORKDIR /var/www/html
 
 COPY build ./
 COPY src/httpd/default.conf /etc/apache2/sites-available/000-default.conf
+COPY src/httpd/deflate.conf /etc/apache2/mods-available/deflate.conf
+COPY src/httpd/mpm_prefork.conf /etc/apache2/mods-available/mpm_prefork.conf
 
+RUN echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 RUN apt-get update -y \
 	&& apt-get install -y curl libmcrypt-dev nano \
 	&& docker-php-ext-install mysqli \

@@ -351,7 +351,7 @@ if(!function_exists('mask_account')) {
 if(!function_exists('validateUrl')) {
 	function validateUrl($client) {
 		$CI = &get_instance();
-		$accessUrl = $CI->config->item('access_url');
+		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 

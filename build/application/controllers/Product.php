@@ -22,7 +22,6 @@ class Product extends BDB_Controller
 			exit();
 		}
 		$this->session->unset_userdata('setProductDetail');
-		$this->session->unset_userdata('servicesAvailableCards');
 
 		$dataProduct = $this->loadDataProduct();
 		if (is_array($dataProduct->data) && count($dataProduct->data) == 1) {
@@ -72,7 +71,6 @@ class Product extends BDB_Controller
 		}
 
 		$dataRequeried = [];
-		$servicesExport = [];
 		foreach ($loadProducts->data as $row) {
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
@@ -97,14 +95,8 @@ class Product extends BDB_Controller
 				"totalProducts" => $totalProducts,
 				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
 			]);
-
-			array_push($servicesExport, [
-				"noTarjeta" => $row->noTarjeta,
-				"availableService" => json_encode($row->services)
-			]);
 		}
 		$loadProducts->data = $dataRequeried;
-		$this->session->set_userdata("servicesAvailableCards", $servicesExport);
 		return $loadProducts;
 	}
 
