@@ -416,7 +416,7 @@
 						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
 						<!-- Carga de documentos -->
 						<?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
-						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
+						<fieldset class="form-group col-12 ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
 								<div class="col-12 pb-3">
 									<div class="bg-secondary">
@@ -546,7 +546,7 @@
 						<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
 						<!-- Carga de documentos -->
 						<?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
-						<fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
+						<fieldset class="form-group col-12 ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
 							<?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
 								<div class="col-12 pb-3">
 									<div class="bg-secondary">
