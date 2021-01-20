@@ -76,8 +76,8 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: "#mobilePhone", differs: "#otherPhoneNum" },
-			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: "#landLine", differs: "#otherPhoneNum" },
+			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: ["#mobilePhone", "#otherPhoneNum"] },
+			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: ["#landLine", "#otherPhoneNum"] },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
@@ -85,8 +85,7 @@ function validateForms(form) {
 					}
 				},
 				pattern: phone,
-				differs: "#mobilePhone",
-				differs: "#landLine"
+				differs: ["#mobilePhone", "#landLine"]
 			},
 			"workplace": { required: true, pattern: alphaName },
 			"profession": { required: true, requiredSelect: true },
@@ -276,8 +275,16 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.differs = function (value, element, param) {
-		var target = $(param);
-		return value !== target.val();
+		var valid = true;
+		if (Array.isArray(param)) {
+			valid = !param.some(function(el) {
+				return value === $(el).val();
+			});
+		} else {
+			valid = value !== $(param).val();
+		}
+
+		return valid
 	}
 
 	$.validator.methods.validatePass = function (value, element, param) {
