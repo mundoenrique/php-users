@@ -70,6 +70,7 @@ $(function () {
 			$('#publicOffice, #publicInst').val('');
 		}
 
+		lang.CONF_ACCEPT_MASKED_LANDLINE = 'OFF'
 		form = $('#signUpForm');
 		validateForms(form);
 
