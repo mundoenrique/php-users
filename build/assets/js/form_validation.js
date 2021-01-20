@@ -186,10 +186,12 @@ function validateForms(form) {
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			"mobilePhone": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_MOBIL_PHONE,
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			"otherPhoneNum": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_PHONE,
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
@@ -276,12 +278,15 @@ function validateForms(form) {
 
 	$.validator.methods.differs = function (value, element, param) {
 		var valid = true;
-		if (Array.isArray(param)) {
-			valid = !param.some(function(el) {
-				return value === $(el).val();
-			});
-		} else {
-			valid = value !== $(param).val();
+
+		if (value != '') {
+			if (Array.isArray(param)) {
+				valid = !param.some(function(el) {
+					return value === $(el).val();
+				});
+			} else {
+				valid = value !== $(param).val();
+			}
 		}
 
 		return valid

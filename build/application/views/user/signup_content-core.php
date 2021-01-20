@@ -183,7 +183,7 @@
 								<div class="row mx-1">
 									<div class="form-group col-6 col-lg-4 input-height">
 										<label for="email"><?= lang('USER_EMAIL') ?></label>
-										<input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" placeholder="usuario@ejemplo.com" autocomplete="off">
+										<input id="email" class="form-control" type="email" name="email" value="<?= $email; ?>" <?= $updateEmail; ?>  placeholder="usuario@ejemplo.com" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group col-6 col-lg-4 input-height  <?= $skipConfirmEmail; ?>">

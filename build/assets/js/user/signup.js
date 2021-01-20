@@ -32,6 +32,7 @@ $(function () {
 		$(this).addClass('available');
 		form = $('#signUpForm');
 		validateForms(form);
+		$(this).removeClass('ignore');
 
 		if ($(this).valid()) {
 			where = 'ValidNickName'
@@ -43,6 +44,9 @@ $(function () {
 		} else {
 			$(this).focus();
 		}
+
+		$(this).addClass('ignore');
+
 	});
 
 	$('#newPass').on('keyup focus', function () {
