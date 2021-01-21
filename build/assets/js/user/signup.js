@@ -67,6 +67,12 @@ $(function () {
 		}
 	});
 
+	$('#landLine').on('change', function () {
+		$(this).rules('add', {
+			pattern: new RegExp(lang.VALIDATE_MOBIL, 'i')
+		});
+	})
+
 	$('#signUpBtn').on('click', function (e) {
 		e.preventDefault()
 
@@ -74,7 +80,6 @@ $(function () {
 			$('#publicOffice, #publicInst').val('');
 		}
 
-		lang.CONF_ACCEPT_MASKED_LANDLINE = 'OFF'
 		form = $('#signUpForm');
 		ignoreFields(false, form);
 		validateForms(form);

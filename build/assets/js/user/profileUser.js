@@ -38,10 +38,10 @@ $(function () {
 	});
 
 	$('#landLine').on('change', function () {
-		if (lang.CONF_ACCEPT_MASKED_LANDLINE == 'ON') {
-			lang.CONF_ACCEPT_MASKED_LANDLINE = 'OFF';
-		}
-	});
+		$(this).rules('add', {
+			pattern: new RegExp(lang.VALIDATE_MOBIL, 'i')
+		});
+	})
 
 	$('#profileUserBtn').on('click', function(e) {
 		var valid;
