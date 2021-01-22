@@ -19,6 +19,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var phone = new RegExp(lang.VALIDATE_MOBIL, 'i');
+	var phoneMasked = new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var floatAmount = new RegExp(lang.VALIDATE_FLOAT_AMOUNT, 'i');
@@ -75,15 +76,16 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: phone },
-			"mobilePhone": { required: true, pattern: phone },
+			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: ["#mobilePhone", "#otherPhoneNum"] },
+			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: ["#landLine", "#otherPhoneNum"] },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
 						return $('#phoneType').val() != ''
 					}
 				},
-				pattern: phone
+				pattern: phone,
+				differs: ["#mobilePhone", "#landLine"]
 			},
 			"workplace": { required: true, pattern: alphaName },
 			"profession": { required: true, requiredSelect: true },
@@ -179,9 +181,20 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_EMAIL,
 				equalTo: lang.VALIDATE_CONFIRM_EMAIL,
 			},
-			"landLine": lang.VALIDATE_PHONE,
-			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
-			"otherPhoneNum": lang.VALIDATE_PHONE,
+			"landLine": {
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
+			"mobilePhone": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
+				pattern: lang.VALIDATE_MOBIL_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
+			"otherPhoneNum": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
 			"workplace": lang.VALIDATE_WORKPLACE,
 			"profession": lang.VALIDATE_RECOVER_OPTION,
 			"laborOld": lang.VALIDATE_RECOVER_OPTION,
@@ -264,8 +277,19 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.differs = function (value, element, param) {
-		var target = $(param);
-		return value !== target.val();
+		var valid = true;
+
+		if (value != '') {
+			if (Array.isArray(param)) {
+				valid = !param.some(function(el) {
+					return value === $(el).val();
+				});
+			} else {
+				valid = value !== $(param).val();
+			}
+		}
+
+		return valid
 	}
 
 	$.validator.methods.validatePass = function (value, element, param) {

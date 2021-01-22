@@ -81,6 +81,8 @@ class Novo_User extends NOVO_Controller {
 	 * @info Método para el registro del usuario
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 21th, 2020
+	 * @modified Jhonnatan Vega
+	 * @date January 08th, 2021
 	 */
 	public function signup()
 	{
@@ -120,6 +122,10 @@ class Novo_User extends NOVO_Controller {
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateLastName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhone = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
+		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
@@ -261,10 +267,15 @@ class Novo_User extends NOVO_Controller {
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateSecondName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhoneMobile = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
 		$this->render->skipProfession = lang('CONF_PROFESSION') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreProfession = lang('CONF_PROFESSION') == 'OFF' ? 'ignore' : '';
 		$this->render->skipContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'ignore' : '';
+		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'ignore' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->ignoreLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'ignore' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
