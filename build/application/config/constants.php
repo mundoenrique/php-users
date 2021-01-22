@@ -98,6 +98,7 @@ define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
 define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
 define('WS_URL', $_SERVER['WS_URL']);
 define('WS_KEY', $_SERVER['WS_KEY']);
+define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] ?? 'ON');
 
 define('KEY_AES256', $_SERVER['KEY_AES256']);
 define('IV_AES256', $_SERVER['IV_AES256']);
