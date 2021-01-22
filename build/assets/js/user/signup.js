@@ -177,10 +177,6 @@ $(function () {
 		let index = +thisFs.data('index');
 		let msContainer = thisFs.closest('.multi-step-form');
 
-		if ($(this).attr('id') == 'signUpBtn') {
-			return false;
-		}
-
 		if (!valid($(thisFs))) {
 			return false;
 		} else {

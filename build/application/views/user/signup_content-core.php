@@ -467,7 +467,7 @@
 								</div>
 								<div class="multi-step-button mb-5">
 									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
-									<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+									<button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
 								</div>
 							</div>
 						</fieldset>
@@ -540,7 +540,11 @@
 								</div>
 								<div class="multi-step-button mb-5">
 									<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
+									<?php if ($index == count($stepTitles)) : ?>
+									<button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+									<?php else : ?>
 									<button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
+									<?php endif; ?>
 								</div>
 							</div>
 						</fieldset>
@@ -563,7 +567,7 @@
 									</div>
 									<div class="multi-step-button mb-5">
 										<button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
-										<button id="signUpBtn" class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
+										<button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
 									</div>
 								</div>
 							<?php endif; ?>
