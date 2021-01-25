@@ -1391,8 +1391,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
-		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? $dataRequest->docmentId);
-
+	  $userName = $dataRequest->userName ?? '';
 		$result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
 		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
