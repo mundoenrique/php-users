@@ -150,7 +150,7 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
+                    <label class="truncate" for="postalCode"><?= lang('USER_POSTAL_CODE') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="postalCode" class="form-control" type="text" name="postalCode" value="" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -198,7 +198,7 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine ?>">
-                    <label for="landLine"><?= lang('USER_PHONE_LANDLINE') ?></label>
+                    <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE')?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>

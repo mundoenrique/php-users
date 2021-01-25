@@ -95,6 +95,7 @@ $lang['GEN_EXPIRED_SESSION'] = 'Tu sesión en %s ha caducado.';
 $lang['GEN_FINISHED_SESSION'] = 'Tu sesión en %s ha sido cerrada exitosamente.';
 $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['GEN_LAST_ACCESS'] = 'Último acceso';
+$lang['GEN_OPTIONAL_FIELD'] = '(Opcional)';
 $lang['GEN_FOTTER_NETWORKS_IMG'] = [
 	'facebook' => 'facebook.png',
 	'twitter' => 'twitter.png',
