@@ -122,10 +122,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
@@ -231,10 +230,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -338,10 +336,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -410,10 +407,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -433,10 +429,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -467,10 +462,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -540,10 +534,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -567,10 +560,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>

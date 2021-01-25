@@ -351,16 +351,6 @@ textarea.form-control {
 	padding-left: 5px;
 }
 
-.hyper-link {
-	text-align: center;
-	color: var(--color-sixth) !important;
-	text-decoration: underline;
-}
-
-.hyper-link:hover {
-	color: var(--color-primary) !important;
-}
-
 .form-control[type="text"], .form-control[type="password"], .form-control::placeholder {
 	color: var(--color-sixth) !important;
 }
@@ -1147,6 +1137,17 @@ label {
 	opacity: .4;
 	pointer-events: none;
   cursor: default;
+}
+
+.hyper-link {
+	text-align: center;
+	color: var(--color-sixth) !important;
+	text-decoration: underline;
+	align-items: baseline;
+}
+
+.hyper-link:hover {
+	color: var(--color-primary) !important;
 }
 
 /* Btn-Loading */
