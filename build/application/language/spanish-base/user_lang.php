@@ -549,5 +549,6 @@ $lang['USER_RECOVER_DOC_TYPE'] = [
 	'CC' => 'Cédula de ciudadania',
 	'PP' => 'Pasaporte',
 ];
+$lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';

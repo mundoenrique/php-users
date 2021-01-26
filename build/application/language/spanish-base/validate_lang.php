@@ -60,6 +60,7 @@ $lang['VALIDATE_FILE_TYPE'] = 'Elige un archivo permitido (png, jpg, jpeg)';
 $lang['VALIDATE_FILE_SIZE'] = 'El archivo no cumple con el peso requerido.';
 $lang['VALIDATE_CODE_RECEIVED'] = 'Coloca el código recibido.';
 $lang['VALIDATE_INVALID_FORMAT'] = 'El formato de código es inválido.';
+$lang['VALIDATE_INVALID_FORMAT_DOCUMENT_ID'] = 'El formato del documento de identidad es inválido.';
 $lang['VALIDATE_ADDRESS'] = 'Indica una dirección válida, mín 5 máx 150 (letras, números, espacio -().;).';
 $lang['VALIDATE_POSTAL_CODE'] = 'Indica un código postal válido, mín 3 máx 20 (solo números).';
 $lang['VALIDATE_PROTECTION'] = 'Debes leer y aceptar la protección de datos personales.';
