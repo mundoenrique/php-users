@@ -185,7 +185,7 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = base_url('perfil-usuario');
+			$cancelBtn = lang("CONF_REDIRECT_CANCEL_BUTTON") == 'ON' ? base_url('lista-de-tarjetas') : base_url('perfil-usuario');
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
