@@ -11,6 +11,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO User Controller Class Initialized');
+
 	}
 	/**
 	 * @info Método para el inicio de sesión
@@ -185,7 +186,8 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = lang("CONF_REDIRECT_CANCEL_BUTTON") == 'ON' ? base_url('lista-de-tarjetas') : base_url('perfil-usuario');
+			$CI = &get_instance();
+			$cancelBtn = $CI->agent->referrer();
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
