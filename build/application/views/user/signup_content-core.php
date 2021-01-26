@@ -122,10 +122,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
@@ -151,7 +150,7 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="postalCode"><?= lang('USER_POSTAL_CODE') ?></label>
+                    <label class="truncate" for="postalCode"><?= lang('USER_POSTAL_CODE') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="postalCode" class="form-control" type="text" name="postalCode" value="" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -199,7 +198,7 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine ?>">
-                    <label for="landLine"><?= lang('USER_PHONE_LANDLINE') ?></label>
+                    <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE')?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -231,10 +230,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -338,10 +336,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -410,10 +407,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -433,10 +429,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -467,10 +462,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -540,10 +534,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
@@ -567,10 +560,9 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-                <a class="btn btn-small btn-link big-modal pl-0" href="<?= base_url('inicio') ?>">
-                  <small><i class="icon icon-cancel primary" aria-hidden="true"> &nbsp;</i></small>
-                  <?= lang('GEN_BTN_EXIT'); ?>
-                </a>
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
+								</a>
               </div>
               <div class="multi-step-button mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>

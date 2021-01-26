@@ -55,7 +55,7 @@ function validateForms(form) {
 			"filterMonth": { required: true, pattern: numeric },
 			"filterYear": { required: true, pattern: numeric },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
-			"documentId": { required: true, pattern: alphanum },
+			"documentId": { required: true, validateDocumentId: true },
 			"cardPIN": { required: true, pattern: numeric },
 			"codeOTP": { required: true, pattern: validCode, maxlength: 8 },
 			"acceptTerms": { required: true },
@@ -147,7 +147,10 @@ function validateForms(form) {
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
-			"documentId": lang.VALIDATE_DOCUMENT_ID,
+			"documentId": {
+				required: lang.VALIDATE_DOCUMENT_ID,
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+			},
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
 				required: lang.VALIDATE_CODE_RECEIVED,
@@ -328,6 +331,16 @@ function validateForms(form) {
 		var minSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.min_size) * 1024
 
 		return element.files[0].size <= maxSize && element.files[0].size >= minSize;
+	}
+
+	$.validator.methods.validateDocumentId = function (value, element, param) {
+		var pattern = alphanum;
+		if (lang.CONF_RECOVER_ID_TYPE == 'ON') {
+			var select = $("#typeDocument option:selected").val();
+			if (select == lang.USER_VALUE_DOCUMENT_ID)
+	    pattern = numeric;
+		}
+		return pattern.test(value)
 	}
 
 	form.validate().resetForm();
