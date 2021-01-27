@@ -186,7 +186,7 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = $this->agent->referrer();
+			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url('lista-de-tarjetas') ;
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
