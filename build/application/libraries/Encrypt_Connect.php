@@ -141,11 +141,15 @@ class Encrypt_Connect
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 		$fail = FALSE;
 		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+
 		if (isset($_SERVER['WS_URL' . $subFix])) {
 			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL' . $subFix]);
 		}
-		$urlWS = $this->CI->config->item('urlWS') . 'movilsInterfaceResource';
+
+		$urlWS = $this->CI->config->item('urlWS');
+
 		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $urlWS);
+
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $urlWS);

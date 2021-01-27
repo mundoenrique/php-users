@@ -34,7 +34,7 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,0,'lista_paises');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> 'CPONLINE'));
 
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response	= np_Hoplite_GetWS($data);
 	  $data		= json_decode($response);
 	  $desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'lista_paises'));
 
@@ -72,7 +72,7 @@ class Registro_model extends CI_Model {
 
 		$dataEncry	= np_Hoplite_Encryption($data,0,'lista_departamentos');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId' => 'CPONLINE'));
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response	= np_Hoplite_GetWS($data);
 		$data		= json_decode($response);
 		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'lista_departamentos'));
 
@@ -105,7 +105,7 @@ class Registro_model extends CI_Model {
 		log_message("info", "Request lista_profesiones: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,0,'lista_profesiones');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => "Global", 'keyId'=> "CPONLINE"));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,0,'lista_profesiones'));
 
@@ -153,7 +153,7 @@ class Registro_model extends CI_Model {
 		$dataEncry	= np_Hoplite_Encryption($data,0,'validar_cuenta');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> 'CPONLINE'));
 		if(!$validateNewCore){
-			$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response	= np_Hoplite_GetWS($data);
 			$data		= json_decode($response);
 			$desdata	= json_decode(np_Hoplite_Decrypt($data->data,0,'validar_cuenta'));
 			$salida		= json_encode($desdata);
@@ -248,7 +248,7 @@ class Registro_model extends CI_Model {
 		log_message("info", "Request validar_usuario: ".$data);
 		$dataEncry	= np_Hoplite_Encryption($data,1,'validar_usuario');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response	= np_Hoplite_GetWS($data);
   	$data		= json_decode($response);
   	$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1,'validar_usuario'));
 		log_message("info", "Response validar_usuario: ".json_encode($desdata));
@@ -449,7 +449,7 @@ class Registro_model extends CI_Model {
 
 		$dataEncry	= np_Hoplite_Encryption($data,1,'registrar_usuario');
 		$data		= json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId' => $this->session->userdata("userName")));
-		$response	= np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response	= np_Hoplite_GetWS($data);
   	$data		= json_decode($response);
 		$desdata	= json_decode(np_Hoplite_Decrypt($data->data,1,'registrar_usuario'));
 
@@ -613,7 +613,7 @@ class Registro_model extends CI_Model {
 		log_message("info", "Request lista_telefonos: ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1,'registrar_usuario');
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
   	$data = json_decode($response);
   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'registrar_usuario'));
 		log_message("info", "Response lista_telefonos : ".json_encode($desdata));
@@ -642,7 +642,7 @@ class Registro_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1,'lista_identificadores');
 		$data = json_encode(array('data' => $dataEncry, 'pais' =>  $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada lista_identificadores : ".$data);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
   	$data = json_decode($response);
   	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'lista_identificadores'));
 		log_message("info", "Response lista_telefonos: ".json_encode($desdata));

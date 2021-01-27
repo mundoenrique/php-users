@@ -26,7 +26,7 @@ class Dashboard_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data, 1,'dashboard_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1,'dashboard_load'));
 		$username = $this->session->userdata('userName');
@@ -54,7 +54,7 @@ class Dashboard_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'saldo_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		if (isset($data->data)) {
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'detail_load'));
