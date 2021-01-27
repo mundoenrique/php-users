@@ -48,7 +48,7 @@ function validateForms(form) {
 			"otpCode": { required: true, pattern: alphanum },
 			"recoveryAccess": { required: true },
 			"email": { required: true, pattern: emailValid },
-			"idNumber": { required: true, pattern: alphanum },
+			"idNumber": { required: true, validateDocumentId: true },
 			"currentPass": { required: true },
 			"newPass": { required: true, differs: "#currentPass", validatePass: true },
 			"confirmPass": { required: true, equalTo: "#newPass" },
@@ -134,7 +134,10 @@ function validateForms(form) {
 			"typeDocument": lang.VALIDATE_TYPE_DOCUMENT,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
-			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"idNumber": {
+				required: lang.VALIDATE_DOCUMENT_ID,
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+			},
 			"currentPass": lang.VALIDATE_CURRENT_PASS,
 			"newPass": {
 				required: lang.VALIDATE_NEW_PASS,
