@@ -186,8 +186,7 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$CI = &get_instance();
-			$cancelBtn = $CI->agent->referrer();
+			$cancelBtn = $this->agent->referrer();
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
