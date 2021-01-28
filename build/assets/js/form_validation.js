@@ -19,6 +19,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
 	var phone = new RegExp(lang.VALIDATE_MOBIL, 'i');
+	var phoneMasked = new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
 	var alphabetical = /^[a-z]+$/i;
 	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
 	var floatAmount = new RegExp(lang.VALIDATE_FLOAT_AMOUNT, 'i');
@@ -47,14 +48,14 @@ function validateForms(form) {
 			"otpCode": { required: true, pattern: alphanum },
 			"recoveryAccess": { required: true },
 			"email": { required: true, pattern: emailValid },
-			"idNumber": { required: true, pattern: alphanum },
+			"idNumber": { required: true, validateDocumentId: true },
 			"currentPass": { required: true },
 			"newPass": { required: true, differs: "#currentPass", validatePass: true },
 			"confirmPass": { required: true, equalTo: "#newPass" },
 			"filterMonth": { required: true, pattern: numeric },
 			"filterYear": { required: true, pattern: numeric },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
-			"documentId": { required: true, pattern: alphanum },
+			"documentId": { required: true, validateDocumentId: true },
 			"cardPIN": { required: true, pattern: numeric },
 			"codeOTP": { required: true, pattern: validCode, maxlength: 8 },
 			"acceptTerms": { required: true },
@@ -75,15 +76,16 @@ function validateForms(form) {
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: phone },
-			"mobilePhone": { required: true, pattern: phone },
+			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: ["#mobilePhone", "#otherPhoneNum"] },
+			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: ["#landLine", "#otherPhoneNum"] },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
 						return $('#phoneType').val() != ''
 					}
 				},
-				pattern: phone
+				pattern: phone,
+				differs: ["#mobilePhone", "#landLine"]
 			},
 			"workplace": { required: true, pattern: alphaName },
 			"profession": { required: true, requiredSelect: true },
@@ -132,7 +134,10 @@ function validateForms(form) {
 			"typeDocument": lang.VALIDATE_TYPE_DOCUMENT,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
 			"email": lang.VALIDATE_EMAIL,
-			"idNumber": lang.VALIDATE_ID_NUMBER,
+			"idNumber": {
+				required: lang.VALIDATE_DOCUMENT_ID,
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+			},
 			"currentPass": lang.VALIDATE_CURRENT_PASS,
 			"newPass": {
 				required: lang.VALIDATE_NEW_PASS,
@@ -145,7 +150,10 @@ function validateForms(form) {
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
-			"documentId": lang.VALIDATE_DOCUMENT_ID,
+			"documentId": {
+				required: lang.VALIDATE_DOCUMENT_ID,
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+			},
 			"cardPIN": lang.VALIDATE_CARD_PIN,
 			"codeOTP": {
 				required: lang.VALIDATE_CODE_RECEIVED,
@@ -179,9 +187,20 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_EMAIL,
 				equalTo: lang.VALIDATE_CONFIRM_EMAIL,
 			},
-			"landLine": lang.VALIDATE_PHONE,
-			"mobilePhone": lang.VALIDATE_MOBIL_PHONE,
-			"otherPhoneNum": lang.VALIDATE_PHONE,
+			"landLine": {
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
+			"mobilePhone": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
+				pattern: lang.VALIDATE_MOBIL_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
+			"otherPhoneNum": {
+				required: lang.VALIDATE_REQUIRED_PHONE,
+				pattern: lang.VALIDATE_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE,
+			},
 			"workplace": lang.VALIDATE_WORKPLACE,
 			"profession": lang.VALIDATE_RECOVER_OPTION,
 			"laborOld": lang.VALIDATE_RECOVER_OPTION,
@@ -207,7 +226,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_FORMAT_PIN,
 				maxlength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
-				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
 			"confirmPin": {
 				required: lang.VALIDATE_CONFIRM_PIN,
@@ -218,7 +237,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_FORMAT_PIN,
 				maxlength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
-				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
 			"generateConfirmPin": {
 				required: lang.VALIDATE_CONFIRM_PIN,
@@ -264,8 +283,19 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.differs = function (value, element, param) {
-		var target = $(param);
-		return value !== target.val();
+		var valid = true;
+
+		if (value != '') {
+			if (Array.isArray(param)) {
+				valid = !param.some(function(el) {
+					return value === $(el).val();
+				});
+			} else {
+				valid = value !== $(param).val();
+			}
+		}
+
+		return valid
 	}
 
 	$.validator.methods.validatePass = function (value, element, param) {
@@ -304,6 +334,16 @@ function validateForms(form) {
 		var minSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.min_size) * 1024
 
 		return element.files[0].size <= maxSize && element.files[0].size >= minSize;
+	}
+
+	$.validator.methods.validateDocumentId = function (value, element, param) {
+		var pattern = alphanum;
+		if (lang.CONF_RECOVER_ID_TYPE == 'ON') {
+			var select = $("#typeDocument option:selected").val();
+			if (select == lang.USER_VALUE_DOCUMENT_ID)
+	    pattern = numeric;
+		}
+		return pattern.test(value)
 	}
 
 	form.validate().resetForm();

@@ -3,7 +3,7 @@ var screenSize;
 var inputModal;
 var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
 var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,_#]+$/;
+var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 var dataTableLang;
 var validator;
 var currentDate;
@@ -316,9 +316,7 @@ function cryptoPass(jsonObject, req) {
 function getDataForm(form) {
 	var dataForm = {};
 	form.find('input, select, textarea').each(function (index, element) {
-		if (!$(element).hasClass(lang.CONF_VALID_IGNORE)) {
-			dataForm[$(element).attr('id')] = $(element).val();
-		}
+		dataForm[$(element).attr('id')] = $(element).val();
 	})
 
 	return dataForm

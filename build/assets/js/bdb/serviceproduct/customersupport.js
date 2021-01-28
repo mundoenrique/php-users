@@ -115,7 +115,7 @@ function operationFactory(optionMenu, response = null) {
 		var dataForm = {
 			newPin: $$.getElementById('generateNewPin').value,
 			confirmPin: $$.getElementById('generateConfirmPin').value,
-			codeOTP: $$.getElementById('generateCodeOTP').value,			
+			codeOTP: $$.getElementById('generateCodeOTP').value,
 		}
 		return {
 			data: dataForm,
@@ -124,7 +124,7 @@ function operationFactory(optionMenu, response = null) {
 	}
 
 	function fnChange() {
-		
+
 		var dataForm = {
 			codeOTP: $$.getElementById('changeCodeOTP').value,
 			pinCurrent: $$.getElementById('changeCurrentPin').value,
@@ -171,7 +171,10 @@ function disableInputsForm(optionMenu, status, txtButton) {
 			break;
 
 		case 'change':
-			elementsForm = ['change-pin', 'generate-pin', 'changeCurrentPin', 'changeNewPin', 'changeConfirmPin'];
+			elementsForm = ['change-pin', 'generate-pin', 'changeNewPin', 'changeConfirmPin'];
+			if ($('input[name="recovery"][type="radio"]:checked').attr('id') == 'change-pin') {
+				elementsForm.push('changeCurrentPin');
+			}
 			break;
 
 		case 'lock':
@@ -306,8 +309,6 @@ function showView(option, options) {
 			disableInputsForm(idName, true, msgLoadingWhite);
 			coreOperation = new operationFactory(`fn${idNameCapitalize}`);
 			proccessPetition(coreOperation, idName);
-		} else {
-			disableInputsForm(idName, false, txtBtnTrigger);
 		}
 	});
 }

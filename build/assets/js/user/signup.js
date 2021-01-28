@@ -28,10 +28,11 @@ $(function () {
 		});
 	}
 
-	$('#nickName').on('blur', function() {
+	$('#nickName').on('blur', function () {
 		$(this).addClass('available');
 		form = $('#signUpForm');
 		validateForms(form);
+		$(this).removeClass('ignore');
 
 		if ($(this).valid()) {
 			where = 'ValidNickName'
@@ -43,6 +44,9 @@ $(function () {
 		} else {
 			$(this).focus();
 		}
+
+		$(this).addClass('ignore');
+
 	});
 
 	$('#newPass').on('keyup focus', function () {
@@ -63,7 +67,13 @@ $(function () {
 		}
 	});
 
-	$('#signUpBtn').on('click', function(e) {
+	$('#landLine').on('change', function () {
+		$(this).rules('add', {
+			pattern: new RegExp(lang.VALIDATE_MOBIL, 'i')
+		});
+	})
+
+	$('#signUpBtn').on('click', function (e) {
 		e.preventDefault()
 
 		if ($('#noPublicOfficeOld').is(':checked')) {
@@ -71,6 +81,7 @@ $(function () {
 		}
 
 		form = $('#signUpForm');
+		ignoreFields(false, form);
 		validateForms(form);
 
 		if (form.valid()) {
@@ -92,10 +103,11 @@ $(function () {
 				var filesToUpload = [];
 
 				if (inputFile.length) {
-					inputFile.each(function(i,e){
-						filesToUpload.push(
-							{'name': e.id, 'file': $(`#${e.id}`).prop('files')[0]},
-						);
+					inputFile.each(function (i, e) {
+						filesToUpload.push({
+							'name': e.id,
+							'file': $(`#${e.id}`).prop('files')[0]
+						}, );
 					})
 				}
 				data.files = filesToUpload;
@@ -115,27 +127,120 @@ $(function () {
 			scrollTopPos($('#signUpForm').offset().top);
 		}
 	});
+
+	$('.multi-step-form  .form-container fieldset:not(:first-child)').css({
+		'display': 'none',
+	});
+
+	// Reset all bars to ensure that all the progress is removed
+	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
+		$(this).css({
+			'width': '0%',
+		});
+	});
+
+	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
+		let lastActive = $('.multi-step-form > .progress-container .progress-icon.active').last().data('index');
+		let thisFs = $('.multi-step-form .form-container fieldset.active');
+		let lastSeen = +$(this).closest('.multi-step-form').find(`fieldset.seen`).last().data('index');
+
+		if (+$(this).data('index') > lastActive) {
+			if (!valid(thisFs)) {
+				removeViewedFieldsets(lastActive);
+				return false;
+			}
+			if (+$(this).data('index') - 1 == +thisFs.data('index')) {
+				$(`.multi-step-form fieldset[data-index=${$(this).data('index')}]`).addClass('seen');
+				moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
+			}
+		}
+
+		if (+$(this).data('index') <= lastSeen) {
+			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
+		}
+		return false;
+	});
+
+	$('.multi-step-form .form-container fieldset .multi-step-button button.next').click(function (event) {
+		let thisFs = $(this).closest('fieldset');
+		let index = +thisFs.data('index');
+		let msContainer = thisFs.closest('.multi-step-form');
+
+		if (!valid($(thisFs))) {
+			return false;
+		} else {
+			msContainer.find(`fieldset[data-index=${index + 1}]`)
+				.addClass('seen');
+			msContainer.find(`div.progress-container > div.progress > div.progress-bar[data-index=${index}]`).parent()
+				.addClass('seen');
+		}
+		moveTo(msContainer, index + 1);
+		return false;
+	});
+
+	$('.multi-step-form .form-container fieldset .multi-step-button button.back').click(function (event) {
+		let thisFs = $(this).closest('fieldset');
+		let index = +thisFs.data('index');
+		let msContainer = thisFs.closest('.multi-step-form');
+		moveTo(msContainer, index - 1);
+		return false;
+	});
+
 });
+
+function valid(button) {
+	let fieldset = button.closest('fieldset');
+	let form = $('#signUpForm');
+	let valid = true;
+
+	var seenFieldsets = $('.multi-step-form fieldset:not(.seen)');
+	var ErrorIndexes;
+	ignoreFields(false, formFile);
+	seenFieldsets.each(function (index, element) {
+		ignoreFields(true, $(element));
+	})
+	validateForms(formFile);
+	formFile.valid();
+	ErrorIndexes = getErrorIndexes();
+	setTextClass(ErrorIndexes);
+
+
+	ignoreFields(true, form);
+	ignoreFields(false, fieldset);
+	validateForms(form);
+
+	if (!form.valid()) {
+		fieldset.removeClass('valid');
+		var currentIndex = Number(fieldset.attr("data-index"));
+		removeViewedFieldsets(currentIndex);
+		valid = false;
+	} else {
+		fieldset.addClass('valid');
+	}
+	fieldset.addClass('was-validated');
+	return valid;
+}
+let animating = 0;
 
 function getResponseServ(currentaction) {
 	who = 'User';
 
-	callNovoCore(who, where, data, function(response) {
+	callNovoCore(who, where, data, function (response) {
 		if (currentaction == 'ValidNickName') {
 			$('#nickName').prop('disabled', false)
 			switch (response.code) {
 				case 0:
 					$('#nickName')
-					.removeClass('has-error')
-					.addClass('has-success available')
-					.parent('.input-group').siblings('.help-block').text('');
-				break;
+						.removeClass('has-error')
+						.addClass('has-success available')
+						.parent('.input-group').siblings('.help-block').text('');
+					break;
 				case 1:
 					$('#nickName')
-					.addClass('has-error')
-					.removeClass('has-success available')
-					.parent('.input-group').siblings('.help-block').text(response.msg);
-				break;
+						.addClass('has-error')
+						.removeClass('has-success available')
+						.parent('.input-group').siblings('.help-block').text(response.msg);
+					break;
 			}
 		}
 
@@ -144,4 +249,20 @@ function getResponseServ(currentaction) {
 			insertFormInput(false);
 		}
 	});
+}
+
+function ignoreFields(action, form) {
+	if (action) {
+		form.find('input, select, textarea').addClass('ignore');
+	} else {
+		form.find('input, select, textarea').removeClass('ignore');
+	}
+}
+
+function removeViewedFieldsets(index) {
+	var total = $('fieldset').length;
+
+	for (let i = index + 1; i < total + 1; i++) {
+		$('fieldset[data-index=' + i + ']').removeClass('seen');
+	}
 }

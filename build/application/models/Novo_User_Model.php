@@ -623,6 +623,16 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -125://MENSAJE TARJETA VENCIDA
+					$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+					$this->response->msg = lang('GEN_EXPIRED_PRODUCT');
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -343://MENSAJE TARJETA BLOQUEADA
+				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
+				$this->response->msg = lang('GEN_LOCK_PRODUCT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->responseToTheView('CallWs_UserIdentify');
@@ -1391,8 +1401,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->load->library('recaptcha');
 
-		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? $dataRequest->docmentId);
-
+		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? ($dataRequest->documentId ?? ''));
 		$result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
 		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';

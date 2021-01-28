@@ -82,6 +82,9 @@ $lang['CONF_COUNTRY_CODE'] = [
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_UPDATE_SECOND_NAME'] = 'ON';
+$lang['CONF_UPDATE_PHONE_MOBILE'] = 'ON';
+$lang['CONF_UPDATE_EMAIL'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
@@ -96,6 +99,8 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_MOBILE'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
