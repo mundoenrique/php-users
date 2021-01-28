@@ -227,6 +227,7 @@ $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
+$lang['GEN_EXPIRED_PRODUCT'] = 'Tarjeta vencida';
 // PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
 // API
