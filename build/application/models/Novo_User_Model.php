@@ -623,7 +623,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
-			case -304://MENSAJE TARJETA VENCIDA
+			case -125://MENSAJE TARJETA VENCIDA
 					$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 					$this->response->msg = lang('GEN_EXPIRED_PRODUCT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
