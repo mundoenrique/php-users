@@ -226,7 +226,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_FORMAT_PIN,
 				maxlength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
-				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
 			"confirmPin": {
 				required: lang.VALIDATE_CONFIRM_PIN,
@@ -237,7 +237,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_FORMAT_PIN,
 				maxlength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
-				fourConsecutivesDigits: lang.VALIDATE_CONSECUTIVE_NUMS
+				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
 			"generateConfirmPin": {
 				required: lang.VALIDATE_CONFIRM_PIN,
