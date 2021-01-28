@@ -112,10 +112,10 @@ function validateForms(form) {
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true},
 			"temporaryLockReason": { requiredSelect: true},
-			"currentPin": { required: true, pattern: numeric, maxlength: 4 },
-			"newPin": { required: true, pattern: numeric, maxlength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
+			"currentPin": { required: true, pattern: numeric, exactLength: 4 },
+			"newPin": { required: true, pattern: numeric, exactLength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
-			"generateNewPin": { required: true, pattern: numeric, maxlength: 4, fourConsecutivesDigits: true },
+			"generateNewPin": { required: true, pattern: numeric, exactLength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 			"typeDocument": { requiredSelect: true, },
 			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
@@ -219,12 +219,12 @@ function validateForms(form) {
 			"currentPin": {
 				required: lang.VALIDATE_CURRENT_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
-				maxlength: lang.VALIDATE_FORMAT_PIN,
+				exactLength: lang.VALIDATE_FORMAT_PIN,
 			},
 			"newPin": {
 				required: lang.VALIDATE_NEW_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
-				maxlength: lang.VALIDATE_FORMAT_PIN,
+				exactLength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
 				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
@@ -235,7 +235,7 @@ function validateForms(form) {
 			"generateNewPin": {
 				required: lang.VALIDATE_NEW_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
-				maxlength: lang.VALIDATE_FORMAT_PIN,
+				exactLength: lang.VALIDATE_FORMAT_PIN,
 				differs: lang.VALIDATE_DIFFERS_PIN,
 				fourConsecutivesDigits: lang.VALIDATE_FORMAT_PIN
 			},
@@ -319,6 +319,10 @@ function validateForms(form) {
 	$.validator.methods.fourConsecutivesDigits = function (value, element, param) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
+
+	$.validator.methods.exactLength = function(value, element, param) {
+		return value.length == param;
+	};
 
 	$.validator.methods.matchVerifierCode = function (value, element, param) {
 		var valid = true;
