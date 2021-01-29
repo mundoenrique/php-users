@@ -14,6 +14,12 @@ $(function () {
 	formFile = $('#profileUserForm');
 	skipFields = getIgnoredFields(formFile);
 
+	validateForms(formFile);
+	formFile.valid();
+	ErrorIndexes = getErrorIndexes();
+	setTextClass(ErrorIndexes);
+	toPositionFieldsetError(ErrorIndexes);
+
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
 		minDate: '-90y',
@@ -150,12 +156,6 @@ $(function () {
 	} else {
 		$('select').find('option').prop('disabled', false);
 	}
-
-	validateForms(formFile);
-	formFile.valid();
-	ErrorIndexes = getErrorIndexes();
-	setTextClass(ErrorIndexes);
-	toPositionFieldsetError(ErrorIndexes);
 
 	// Reset all bars to ensure that all the progress is removed
 	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
