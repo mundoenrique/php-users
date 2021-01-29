@@ -28,20 +28,23 @@ class Tool_Api {
 
 		$objRequest = new stdClass();
 		$this->nameApi = $nameApi;
+		$decrypParams = [];
 		$typeHeader = $this->CI->input->get_request_header('Content-Type', TRUE);
 		$typeResource = preg_split('/;/i', $typeHeader)[0];
 		log_message('DEBUG', '['.$this->nameApi.'] readHeader type resource: ' . json_encode($typeResource));
 
 		$objRequest = json_decode($this->CI->input->raw_input_stream);
-		if (is_string($objRequest->request)) {
-			$sizeObject = strval(round(strlen($objRequest->request)/1000,2));
-			log_message('DEBUG', '['.$this->nameApi.'] size object received ('.$sizeObject.'KB)');
+		if (property_exists($objRequest, 'request')) {
+			if (is_string($objRequest->request)) {
+				$sizeObject = strval(round(strlen($objRequest->request)/1000,2));
+				log_message('DEBUG', '['.$this->nameApi.'] size object received ('.$sizeObject.'KB)');
+			}
+			log_message('DEBUG', '['.$this->nameApi.'] detail object received: ' . json_encode($this->shortValues($objRequest)));
+
+			$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
 		}
-		log_message('DEBUG', '['.$this->nameApi.'] detail object received: ' . json_encode($this->shortValues($objRequest)));
 
-		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
-
-		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];
+		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams) : [];
 	}
 
 	/**
