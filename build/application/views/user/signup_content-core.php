@@ -37,19 +37,15 @@
             <div class="col-12 pb-3">
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
-                  <div class="form-group col-6 col-xl-3 input-height">
-                    <label for="idType"><?= lang('USER_ID_TYPE')?></label>
-                    <input id="idType" class="form-control" type="text" name="idType" value="<?= $idType; ?>" readonly autocomplete="off">
-                    <div class="help-block"></div>
-                  </div>
-                  <div class="form-group col-6 col-xl-3 input-height">
-                    <label for="idNumber"><?= lang('USER_ID_NUMBER')?></label>
-                    <input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idnumber; ?>" readonly autocomplete="off">
-                    <div class="help-block"></div>
-                  </div>
-                  <div class="form-group col-6 col-lg-3 input-height">
+									<div class="form-group col-6 col-lg-3 input-height">
                     <label for="firstName"><?= lang('USER_FIRSTNAME')?></label>
                     <input id="firstName" class="form-control" type="text" name="firstName" value="<?= $firstName; ?>" <?= $updateName; ?>
+                      autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+									<div class="form-group col-6 col-lg-3 input-height">
+                    <label for="middleName"><?= lang('USER_MIDDLENAME')?></label>
+                    <input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" <?= $updateLastName; ?>
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -60,15 +56,19 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="middleName"><?= lang('USER_MIDDLENAME')?></label>
-                    <input id="middleName" class="form-control" type="text" name="middleName" value="<?= $middleName; ?>" <?= $updateLastName; ?>
-                      autocomplete="off">
-                    <div class="help-block"></div>
-                  </div>
-                  <div class="form-group col-6 col-lg-3 input-height">
                     <label for="surName"><?= lang('USER_SURNAME')?></label>
                     <input id="surName" class="form-control" type="text" name="surName" value="<?= $surName; ?>" <?= $updateLastName; ?>
                       autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+                  <div class="form-group col-6 col-xl-3 input-height">
+                    <label for="idType"><?= lang('USER_ID_TYPE')?></label>
+                    <input id="idType" class="form-control" type="text" name="idType" value="<?= $idType; ?>" readonly autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+                  <div class="form-group col-6 col-xl-3 input-height">
+                    <label for="idNumber"><?= lang('USER_ID_NUMBER')?></label>
+                    <input id="idNumber" class="form-control" type="text" name="idNumber" value="<?= $idnumber; ?>" readonly autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">

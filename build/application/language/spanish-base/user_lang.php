@@ -445,7 +445,7 @@ $lang["USER_CONT_GENERAL_CONTENT"] = '
 ';
 //SIGNUP-PROFILE
 $lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
-$lang['USER_SIGNUP_MSG'] = 'Para obtener tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
+$lang['USER_SIGNUP_MSG'] = 'Para crear tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
 $lang['USER_PERSONAL_DATA'] = 'Datos personales';
 $lang['USER_CONTACT_DATA'] = 'Datos de contacto';
 $lang['USER_DATA_USER'] = 'Datos de usuario';
