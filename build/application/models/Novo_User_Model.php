@@ -348,11 +348,14 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->msg = lang('GEN_OTP_SENT');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->modalBtn['btn1']['action'] = 'none';
+				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				break;
 			case -100:
 			case -101:
 			case -102:
 			case -103:
+			case -110:
 				$msgGeneral = 1;
 				$this->response->msg = LANG('USER_RECOVER_DATA_INVALID');
 				break;
