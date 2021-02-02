@@ -103,7 +103,7 @@ class BDB_Connect_Encrypt
 		$fail = FALSE;
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 
-		$urlWS = $this->CI->config->item('urlWS');
+		$urlWS = $_SERVER['WS_URL'];
 
 		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $urlWS);
 
