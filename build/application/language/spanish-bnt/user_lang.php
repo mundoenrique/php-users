@@ -113,3 +113,7 @@ $lang["USER_TERMS_CONTENT"] = '
 ';
 $lang['USER_ADD_F_DOC'] = 'Agregar anverso del INE';
 $lang['USER_ADD_B_DOC'] = 'Agregar reverso del INE';
+$lang['USER_PASS_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifícala.';
+$lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido. Por favor verifica tus datos.';
+$lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario.';
+$lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos.';
