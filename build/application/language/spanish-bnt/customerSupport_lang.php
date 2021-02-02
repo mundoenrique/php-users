@@ -8,3 +8,4 @@ $lang['CUST_REPLACE_REASON'] = [
 	'41' => 'Tarjeta perdida',
 	'43' => 'Tarjeta robada',
 ];
+$lang['CUST_NON_RESULTS'] = 'No fue posible encontrar los registros de tu tarjeta; si continuas viendo este mensaje comunícate con el representante de tu empresa.';
