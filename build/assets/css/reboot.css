@@ -37,6 +37,7 @@ html {
   font-family: "novoglyphs";
   font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 	src: url('../fonts/novoglyphs-webicons.eot?#iefix');
   src: url('../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
        url('../fonts/novoglyphs-webicons.woff') format('woff'),
