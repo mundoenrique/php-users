@@ -81,6 +81,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response = $this->getToken->callWs_GetToken_Assets();
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 			break;
+			case 29:
 			case -300:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'temporal');
@@ -183,6 +184,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('GEN_CURRENCY'), $cost]);
 				}
 			break;
+			case 29:
 			case -300:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'permanente');
