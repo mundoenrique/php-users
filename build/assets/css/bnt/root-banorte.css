@@ -1,28 +1,32 @@
 @font-face {
   font-family: 'Gotham Book';
   font-style: normal;
-  font-weight: 300;
+	font-weight: 300;
+	font-display: swap;
   src: url('../../fonts/bnt/Gotham-Book.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Gotham Book';
   font-style: normal;
-  font-weight: 700;
+	font-weight: 700;
+	font-display: swap;
   src: url('../../fonts/bnt/Gotham-Bold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 300;
+	font-weight: 300;
+	font-display: swap;
   src: url('../../fonts/bnt/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
-  font-weight: 700;
+	font-weight: 700;
+	font-display: swap;
   src: url('../../fonts/bnt/Roboto-Bold.ttf') format('truetype');
 }
 
