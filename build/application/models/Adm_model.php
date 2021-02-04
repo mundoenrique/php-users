@@ -37,7 +37,7 @@ class Adm_model extends CI_Model {
 		log_message("info", "modificar : ".$data);
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'adm_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'adm_load'));
 
@@ -69,7 +69,7 @@ class Adm_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'delete_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'delete_load'));
 
@@ -96,7 +96,7 @@ class Adm_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'consultarBancos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'consultarBancos_load'));
 
@@ -122,7 +122,7 @@ class Adm_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'ctasOrigen_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasOrigen_load'));
 		$salida = json_encode($desdata);
@@ -152,7 +152,7 @@ class Adm_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1,'ctasDestino_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada Cta Destino : ".$data);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasDestino_load'));
 

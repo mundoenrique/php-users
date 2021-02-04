@@ -63,7 +63,7 @@ class Service_model extends CI_Model {
 
         $dataEncry = np_Hoplite_Encryption($data,1,'callWsLockAccount');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
-        $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+        $response = np_Hoplite_GetWS($data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsLockAccount'));
 
@@ -273,7 +273,7 @@ class Service_model extends CI_Model {
 
         $dataEncry = np_Hoplite_Encryption($data,1,'callWschangePin');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
-        $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+        $response = np_Hoplite_GetWS($data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWschangePin'));
 
@@ -415,7 +415,7 @@ class Service_model extends CI_Model {
 
         $dataEncry = np_Hoplite_Encryption($data,1,'callWsGetToken');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
-        $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+        $response = np_Hoplite_GetWS($data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsGetToken'));
 
@@ -525,7 +525,7 @@ class Service_model extends CI_Model {
 
         $dataEncry = np_Hoplite_Encryption($data,1,'callWsrecoverKey');
         $data = json_encode(array('data' => $dataEncry, 'pais' => $pais, 'keyId'=> $user));
-        $response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+        $response = np_Hoplite_GetWS($data);
         $data = json_decode($response);
         $desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'callWsrecoverKey'));
 

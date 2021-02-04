@@ -11,13 +11,13 @@ if ( ! function_exists('np_Hoplite_GetWS'))
 	 * @param  [type] $cryptDataBase64
 	 * @return [type]
 	 */
-	function np_Hoplite_GetWS($nameWS,$cryptDataBase64)
+	function np_Hoplite_GetWS($cryptDataBase64)
 	{
 		$CI =& get_instance();
 		$dataReq = json_decode($cryptDataBase64);
 		$pais = $dataReq->pais;
 		$keyID = $dataReq->keyId;
-		$urlcurlWS = $CI->config->item('urlWS').$nameWS;
+		$urlcurlWS = $_SERVER['WS_URL'];
 		log_message('DEBUG', 'BY COUNTRY: '.$pais.', AND WEBSERVICE URL: '.$urlcurlWS);
 		$ch = curl_init();
 		$dataPost = $cryptDataBase64;

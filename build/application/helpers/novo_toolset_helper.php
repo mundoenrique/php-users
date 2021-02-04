@@ -56,6 +56,23 @@ if (!function_exists('arrayTrim')) {
 	}
 }
 
+if(!function_exists('dbSearch')) {
+	function dbSearch($uri) {
+		$clients = explode(',', ACCESS_URL);
+		array_walk($clients, 'arrayTrim');
+
+		if (($pos = array_search('default', $clients)) !== FALSE) {
+			unset($clients[$pos]);
+		}
+
+		if (($pos = array_search('pichincha', $clients)) !== FALSE) {
+			unset($clients[$pos]);
+		}
+
+		return in_array($uri, $clients) ? 'cpo_' . $uri : 'ci';
+	}
+}
+
 if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
 		$CI = &get_instance();
