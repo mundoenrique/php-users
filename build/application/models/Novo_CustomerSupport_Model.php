@@ -62,24 +62,29 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case -286:
 			case -301:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_OTP_USED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -288:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
 				$this->load->model('Novo_Assets_Model', 'getToken');
 				$this->response = $this->getToken->callWs_GetToken_Assets();
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+			break;
+			case -300:
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'temporal');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
@@ -144,17 +149,17 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case -286:
 			case -301:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = lang('GEN_OTP_USED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -288:
-				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
@@ -177,6 +182,11 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 					$this->response->data->cost = TRUE;
 					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('GEN_CURRENCY'), $cost]);
 				}
+			break;
+			case -300:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'permanente');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
 
