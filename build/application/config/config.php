@@ -236,7 +236,7 @@ $config['log_threshold'] = THRESHOLD;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = LOG_PATH;
 
 /*
 |--------------------------------------------------------------------------
@@ -383,7 +383,7 @@ $config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 50 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
-$config['sess_match_ip'] = SESS_MATCH_IP;
+$config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = ACTIVE_SAFETY == 'ON' ? 30 : 0;
 $config['sess_regenerate_destroy'] = TRUE;
 
@@ -404,8 +404,8 @@ $config['sess_regenerate_destroy'] = TRUE;
 */
 $config['cookie_prefix']	= COOKIE_PREFIX;
 $config['cookie_domain']	= COOKIE_DOMAIN;
-$config['cookie_path']		= COOKIE_PATH;
-$config['cookie_secure']	= COOKIE_SECURE;
+$config['cookie_path']		= '/';
+$config['cookie_secure']	= COOKIE_SECURE == 'ON' ? TRUE : FALSE;
 $config['cookie_httponly'] 	= FALSE;
 
 /*
@@ -532,4 +532,4 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = IP_PROXI;
+$config['proxy_ips'] = PROXY_IPS;

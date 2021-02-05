@@ -18,11 +18,10 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
 		$this->CI = &get_instance();
-		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
-		$this->keyAES256 = base64_decode($this->CI->config->item('keyAES256'));
-		$this->ivAES256 = base64_decode($this->CI->config->item('ivAES256'));
+		$this->keyAES256 = base64_decode(KEY_AES256);
+		$this->ivAES256 = base64_decode(IV_AES256);
 
 		if (ENVIRONMENT == 'development') {
 			error_reporting(E_ALL & ~E_DEPRECATED);
@@ -43,7 +42,7 @@ class Encrypt_Connect
 		while ((strlen($dataB) % 8) != 0) {
 			$dataB .= " ";
 		}
-		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : WS_KEY;
 		$cryptData = mcrypt_encrypt(
 			MCRYPT_DES,
 			$this->keyNovo,
@@ -61,7 +60,7 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
-		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : WS_KEY;
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES,
 			$this->keyNovo,

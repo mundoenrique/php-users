@@ -86,7 +86,7 @@ class Recaptcha {
 			'render' => $this->_siteKey
 		);
 		$result = array_merge($default, $parameters);
-		$scripts = sprintf('<script defer type="text/javascript" src="%s?%s"></script>',
+		$scripts = sprintf('<script async type="text/javascript" src="%s?%s"></script>',
 			self::api_url, http_build_query($result));
 
 		return $scripts;

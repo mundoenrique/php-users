@@ -16,10 +16,9 @@ class BDB_Connect_Encrypt
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
 		$this->CI = &get_instance();
-		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
-		$this->keyAES256 = base64_decode($this->CI->config->item('keyAES256'));
-		$this->ivAES256 = base64_decode($this->CI->config->item('ivAES256'));
+		$this->keyAES256 = base64_decode(KEY_AES256);
+		$this->ivAES256 = base64_decode(IV_AES256);
 
 	}
 	/**
@@ -30,7 +29,7 @@ class BDB_Connect_Encrypt
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
 
-		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? $this->keyNovo : base64_decode($this->CI->session->userdata('keyId'));
+		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
 
 		if ($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_SLASHES);
@@ -61,7 +60,7 @@ class BDB_Connect_Encrypt
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
 
-		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? $this->keyNovo : base64_decode($this->CI->session->userdata('keyId'));
+		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
 
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES,

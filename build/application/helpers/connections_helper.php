@@ -61,7 +61,7 @@ if(!function_exists('getTokenOauth'))
 	function getTokenOauth($clientId, $ClientSecret)
 	{
 		$CI = &get_instance();
-		$url = $CI->config->item('oauth_url');
+		$url = OAUTH_URL;
 		log_message('INFO', '<===Iniciando llamado al API OAUTH===>' . $url);
 		log_message('DEBUG', 'ClientId: ==>' . $clientId . ', ClientSecret: ==>' . $ClientSecret);
 		$header = [
@@ -117,14 +117,12 @@ if(!function_exists('connectionAPI'))
 		log_message('INFO', 'ConnectionAPI:==>> ' . json_encode($objectAPI));
 		log_message('DEBUG', 'Iniciando el llamado al API por el metodo:==>> ' . $method);
 		$CI = &get_instance();
-		$clientId = $CI->config->item('clientId');
-		$ClientSecret = $CI->config->item('clientSecret');
-		$responseOauth = getTokenOauth($clientId, $ClientSecret);
+		$responseOauth = getTokenOauth(CLIENT_ID, CLIENT_SECRET);
 		$httpCode = $responseOauth->httpCode;
-		$responseAPI = json_decode ($responseOauth->respOauth);
+		$responseAPI = json_decode($responseOauth->respOauth);
 		if($httpCode === 200) {
 			$token = trim($responseAPI->access_token);
-			$url = $CI->config->item('urlAPI') . $urlAPI;
+			$url = URL_API . $urlAPI;
 			log_message('DEBUG', 'URL API: ' . $url);
 			//Encabezado de la petición al API
 			$header = [

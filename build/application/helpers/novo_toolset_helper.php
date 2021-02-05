@@ -69,7 +69,9 @@ if(!function_exists('dbSearch')) {
 			unset($clients[$pos]);
 		}
 
-		return in_array($uri, $clients) ? 'cpo_' . $uri : 'ci';
+		$dbName = in_array($uri, $clients) ? $uri : 'alpha';
+
+		return 'cpo_' . $dbName;
 	}
 }
 

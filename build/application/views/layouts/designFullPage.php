@@ -84,7 +84,7 @@
 		var urlBase = '<?= base_url(); ?>';
 		var urlAsset = '<?= assetUrl(); ?>';
 		var uriRedirecTarget = '<?= base_url('inicio'); ?>';
-		var activatedCaptcha = '<?= $this->config->item('active_recaptcha'); ?>';
+		var activatedCaptcha = '<?= ACTIVE_RECAPTCHA; ?>';
 		var idleSession = '<?= $this->config->item('timeIdleSession'); ?>';
 		var coinSimbol = '<?= lang("GEN_COIN"); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';

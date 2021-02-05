@@ -48,7 +48,7 @@ class BDB_Controller extends CI_Controller {
 		$this->render->rootHome = $this->render->logged? 'vistaconsolidada': 'inicio';
 
 		$this->countryConf = $this->config->item('country');
-		$this->render->activeRecaptcha = $this->config->item('active_recaptcha');
+		$this->render->activeRecaptcha = ACTIVE_RECAPTCHA;
 
 		$this->lang->load(['general', 'error', 'response'], 'core-base');
 		$this->rule = strtolower($this->router->fetch_method());

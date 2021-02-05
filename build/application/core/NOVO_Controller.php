@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 /**
- * Clase contralador de Conexión Personas Online (CEO)
+ * Clase contralador de Conexión Personas Online (CPO)
  *
  * Esta clase es la súper clase de la que heredarán todos los controladores
  * de la aplicación.
