@@ -38,9 +38,8 @@ html {
   font-weight: normal;
 	font-style: normal;
 	font-display: swap;
-	src: url('../fonts/novoglyphs-webicons.eot?#iefix');
-  src: url('../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
-       url('../fonts/novoglyphs-webicons.woff') format('woff'),
+	src: url('../fonts/novoglyphs-webicons.woff') format('woff'),
+	     url('../fonts/novoglyphs-webicons.eot?#iefix') format('eot'),
        url('../fonts/novoglyphs-webicons.ttf') format('truetype'),
        url('../fonts/novoglyphs-webicons.svg') format('svg');
 }

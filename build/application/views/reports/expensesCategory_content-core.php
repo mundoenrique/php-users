@@ -39,18 +39,13 @@
         </div>
       </div>
     </div>
-    <div class="flex optional widget-statistics mt-4">
-      <h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
-      <div class="flex flex-column items-center">
-        <div class="flex flex-wrap items-center h-100 justify-center">
-          <div id="stats" class="group-aside-view w-100 h-100">
-            <div id="movementsStats" class="hide w-100 h-100"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  	<div class="flex optional widget-statistics mt-4">
+    	<h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
+			<div class="chart-container" >
+    		<canvas id="movementsStats" ></canvas>
+			</div>
+  	</div>
   </div>
-
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
     <h2 class="h4 regular tertiary"><?= lang('REPORTS_EXPENSES_CATEGORY'); ?></h2>
     <nav id="filtersStack" class="navbar px-0">
