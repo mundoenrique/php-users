@@ -152,6 +152,8 @@ function getMovements() {
 }
 
 function displaymoves() {
+	var valueGraph = [parseFloat($('#debit').val()).toFixed(2),  parseFloat($('#credit').val()).toFixed(2)];
+	var namesGraph = ['Cargos', 'Abonos']
 	$('#pre-loader')
 		.removeClass('mt-5 mx-auto flex justify-center')
 		.addClass('hide');
@@ -161,32 +163,39 @@ function displaymoves() {
 		$('#movementsList').removeClass('hide');
 		$('#movementsStats').removeClass('hide');
 
-		var myChart = new Chart($('#chart'), {
+		var chart = new Chart($('#chart'), {
     	type: 'doughnut',
     	data: {
-      	labels: ['Cargos', 'Abonos',],
+      	labels: namesGraph,
       	datasets: [{
 					label: '',
-					data: [parseFloat($('#debit').val()).toFixed(2),  parseFloat($('#credit').val()).toFixed(2)],
+					data: valueGraph,
 					backgroundColor: ['#E74C3C', '#2ECC71'],
         	borderColor: ['#E74C3C','#2ECC71'],
         	borderWidth: 1
       	}]
     	},
     	options: {
+				tooltips: {
+					callbacks: {
+						label: function(tooltipItem) {
+							return namesGraph[tooltipItem.index] + ": $" +valueGraph[tooltipItem.index]
+						}
+					}
+				},
 				responsive: true,
 				aspectRatio: 2,
 				legend: {
 					display: false
 				},
-      	scales: {
+				scales: {
 					yAxes: [{
 						gridLines: {
 							display:false
-						},
-          	ticks: {
-              display: false
-            }
+					},
+						ticks: {
+								display: false
+						}
 					}],
 					xAxes: [{
 						gridLines: {
@@ -196,7 +205,7 @@ function displaymoves() {
 							display: false
 						}
 					}]
-      	}
+				}
     	}
 		});
 	} else {

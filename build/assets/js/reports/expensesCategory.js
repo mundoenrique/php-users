@@ -145,6 +145,7 @@ function getMovements(typeInquiry) {
 			var graphicLabel = [];
 			var graphicValue = [];
 			var graphicColour = [];
+			var setValues, setCategory;
 
 			$.each(response.data.grafic, function(key, val){
 				graphicLabel.push(response.data.grafic[key].category);
@@ -160,11 +161,20 @@ function getMovements(typeInquiry) {
 						label: '',
 						data: graphicValue,
 						backgroundColor: graphicColour,
-						borderColor:graphicColour,
+						borderColor: graphicColour,
 						borderWidth: 1
 					}]
 				},
 				options: {
+					tooltips: {
+						callbacks: {
+							label: function(tooltipItem) {
+								setValues = response.data.labels[tooltipItem.index];
+								setCategory =  response.data.grafic[tooltipItem.index].category;
+								return setCategory+ ":  $" + setValues;
+							}
+						}
+					},
 					responsive: true,
 					manteinaspectRatio: 2,
 					legend: {
