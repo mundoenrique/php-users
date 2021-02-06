@@ -152,8 +152,8 @@ function getMovements() {
 }
 
 function displaymoves() {
-	var valueGraph = [parseFloat($('#debit').val()).toFixed(2),  parseFloat($('#credit').val()).toFixed(2)];
-	var namesGraph = ['Cargos', 'Abonos']
+	var graphicValue = [parseFloat($('#debit').val()).toFixed(2),  parseFloat($('#credit').val()).toFixed(2)];
+	var graphicLabel = ['Cargos', 'Abonos'];
 	$('#pre-loader')
 		.removeClass('mt-5 mx-auto flex justify-center')
 		.addClass('hide');
@@ -166,10 +166,10 @@ function displaymoves() {
 		var chart = new Chart($('#chart'), {
     	type: 'doughnut',
     	data: {
-      	labels: namesGraph,
+      	labels: graphicLabel,
       	datasets: [{
 					label: '',
-					data: valueGraph,
+					data: graphicValue,
 					backgroundColor: ['#E74C3C', '#2ECC71'],
         	borderColor: ['#E74C3C','#2ECC71'],
         	borderWidth: 1
@@ -179,7 +179,7 @@ function displaymoves() {
 				tooltips: {
 					callbacks: {
 						label: function(tooltipItem) {
-							return namesGraph[tooltipItem.index] + ": $" +valueGraph[tooltipItem.index]
+							return graphicLabel[tooltipItem.index] + ": $" + graphicValue[tooltipItem.index]
 						}
 					}
 				},
