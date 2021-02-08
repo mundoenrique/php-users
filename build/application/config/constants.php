@@ -111,7 +111,6 @@ defined('SESS_DRIVER')			OR define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'fi
 defined('SESS_COOKIE_NAME')	OR define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
 defined('SESS_EXPIRATION')	OR define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
 defined('SESS_SAVE_PATH')		OR define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
-defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
@@ -122,6 +121,7 @@ defined('PROXY_IPS')				OR define('PROXY_IPS', $proxy_ips == 'private' ? $_SERVE
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
+defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')		OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
