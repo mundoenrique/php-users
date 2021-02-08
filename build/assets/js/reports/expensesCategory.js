@@ -171,7 +171,7 @@ function getMovements(typeInquiry) {
 							label: function(tooltipItem) {
 								setValues = response.data.labels[tooltipItem.index];
 								setCategory =  response.data.grafic[tooltipItem.index].category;
-								return setCategory+ ":  $" + setValues;
+								return setCategory+ ": " + lang.GEN_CURRENCY + " " + setValues;
 							}
 						}
 					},

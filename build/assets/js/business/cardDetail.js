@@ -179,7 +179,7 @@ function displaymoves() {
 				tooltips: {
 					callbacks: {
 						label: function(tooltipItem) {
-							return graphicLabel[tooltipItem.index] + ": $" + graphicValue[tooltipItem.index]
+							return graphicLabel[tooltipItem.index] + ": " + lang.GEN_CURRENCY+ " " + graphicValue[tooltipItem.index]
 						}
 					}
 				},
