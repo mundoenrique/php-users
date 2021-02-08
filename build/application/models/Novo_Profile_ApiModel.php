@@ -27,7 +27,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$resultUploadFiles = [];
 		$dataResponse = [];
 		$resultData = '';
-		$directoryToUpload = BASE_CDN_PATH . $this->tool_file->buildDirectoryPath([
+		$directoryToUpload = ASSET_PATH . $this->tool_file->buildDirectoryPath([
 			'upload',
 			strtoupper($dataRequest->client),
 			strtoupper($dataRequest->user_name),
@@ -101,7 +101,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 			$fileName = trim($fileName);
 
 			$fullPath = $this->tool_file->buildDirectoryPath([
-				$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+				$this->tool_file->buildDirectoryPath([ASSET_PATH,'upload']),
 				strtoupper($dataRequest->client),
 				strtoupper($dataRequest->user_name),
 				$fileName
@@ -123,7 +123,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 			$resultUploadFiles[] = $statusCodeResponse;
 		}
 		$directory = $this->tool_file->buildDirectoryPath([
-			$this->tool_file->buildDirectoryPath([BASE_CDN_PATH,'upload']),
+			$this->tool_file->buildDirectoryPath([ASSET_PATH,'upload']),
 			strtoupper($dataRequest->client),
 			strtoupper($dataRequest->user_name)
 		]);

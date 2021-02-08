@@ -101,8 +101,8 @@ $proxy_ips = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG
 |--------------------------------------------------------------------------
 */
 defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
-defined('BASE_CDN_URL')			OR define('BASE_CDN_URL', $_SERVER['BASE_CDN_URL']);
-defined('BASE_CDN_PATH')		OR define('BASE_CDN_PATH', $_SERVER['BASE_CDN_PATH']);
+defined('ASSET_URL')			OR define('ASSET_URL', $_SERVER['ASSET_URL']);
+defined('ASSET_PATH')		OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
 defined('SUBCLASS_PREFIX')	OR define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
@@ -128,6 +128,7 @@ defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAP
 defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
 defined('IP_VERIFY')			OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('COUNTRY_VERIFY')	OR define('COUNTRY_VERIFY', $_SERVER['COUNTRY_VERIFY'] ?? 'ON');
+defined('DB_VERIFY')	OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
 
 /*
 |--------------------------------------------------------------------------

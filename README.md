@@ -17,8 +17,8 @@ Este proyecto depende de la definición de distintas variables de entorno para s
 | ------------------ | -------------------------------------------- | -------------------------- |
 | `CI_ENV`           | Identificación de entorno.                   | `development`              |
 | `BASE_URL`         | URL base de aplicación.                      | `http://localhost`         |
-| `BASE_CDN_URL`     | URL de assets de aplicación.                 | `http://localhost/assets`  |
-| `BASE_CDN_PATH`    | Directorio de los assets.                    | `/var/www/html/assets/`    |
+| `ASSET_URL`     | URL de assets de aplicación.                 | `http://localhost/assets`  |
+| `ASSET_PATH`    | Directorio de los assets.                    | `/var/www/html/assets/`    |
 | `WS_URL`           | URL de servicios web (WS).                   | `http://192.168.0.1:8080/` |
 | `WS_KEY`           | Llave de cifrado para los WS.                | `P455w0rd`                 |
 | `ENCRYPTION_KEY`   | Llave de cifrado para sesión.                | `n0v0p4ym3nt`              |
@@ -45,8 +45,8 @@ $ docker run \
     --restart unless-stopped \
     -e 'CI_ENV=development' \
     -e 'BASE_URL=http://localhost' \
-    -e 'BASE_CDN_URL=http://localhost/assets/' \
-    -e 'BASE_CDN_PATH=/var/www/html/assets/' \
+    -e 'ASSET_URL=http://localhost/assets/' \
+    -e 'ASSET_PATH=/var/www/html/assets/' \
     -e 'WS_URL=http://192.168.0.1:8080/' \
     -e 'WS_KEY=P455w0rd' \
     -e 'ENCRYPTION_KEY=n0v0p4ym3nt-D3V' \
@@ -64,7 +64,7 @@ Para emplear Apache HTTPD como mecanismo de montaje, es necesario seguir estos p
   ```apache
   SetEnv CI_ENV development
   SetEnv BASE_URL http://localhost
-  SetEnv BASE_CDN_URL http://localhost/assets/
+  SetEnv ASSET_URL http://localhost/assets/
   ```
 
 Recuerda agregar todas las variables de entorno que necesites para hacer que tu instalación local funcione correctamente.

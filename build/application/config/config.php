@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = BASE_URL;
-$config['asset_url'] = BASE_CDN_URL;
-$config['asset_path'] = BASE_CDN_PATH;
+$config['asset_url'] = ASSET_URL;
+$config['asset_path'] = ASSET_PATH;
 
 /*
 |--------------------------------------------------------------------------
