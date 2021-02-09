@@ -129,6 +129,7 @@ defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' 
 defined('IP_VERIFY')			OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('COUNTRY_VERIFY')	OR define('COUNTRY_VERIFY', $_SERVER['COUNTRY_VERIFY'] ?? 'ON');
 defined('DB_VERIFY')	OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
+defined('UPLOAD_PATH')	OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 
 /*
 |--------------------------------------------------------------------------

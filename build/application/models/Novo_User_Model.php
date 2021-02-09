@@ -792,7 +792,7 @@ class Novo_User_Model extends NOVO_Model {
 		if ($this->isResponseRc !== 0) {
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
-			$this->tool_file->buildDirectoryPath([ASSET_PATH,'upload']),
+			$this->tool_file->buildDirectoryPath([UPLOAD_PATH]),
 				strtoupper($this->session->countryUri),
 				strtoupper($dataRequest->nickName ?? $this->session->userName),
 			]);
@@ -1092,8 +1092,7 @@ class Novo_User_Model extends NOVO_Model {
 
 				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
 					if ($nameDocument['nameFile'] !== '') {
-						$fullPathToImage = ASSET_PATH . $this->tool_file->buildDirectoryPath([
-							'upload',
+						$fullPathToImage = UPLOAD_PATH . $this->tool_file->buildDirectoryPath([
 							strtoupper($this->session->countryUri),
 							strtoupper($this->session->userName),
 							$nameDocument['nameFile']

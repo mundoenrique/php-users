@@ -33,8 +33,7 @@ class Tool_File {
 		$this->CI->load->library('image_lib');
 		$valid = FALSE;
 		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
-		$configUploadFile['upload_path'] = ASSET_PATH . $this->buildDirectoryPath([
-			'upload',
+		$configUploadFile['upload_path'] = UPLOAD_PATH . $this->buildDirectoryPath([
 			strtoupper($this->CI->session->countryUri),
 			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
 		]);
@@ -322,7 +321,7 @@ class Tool_File {
 	public function fakeDataErase($userName)
 	{
 		$dirLoadImages  = $this->buildDirectoryPath([
-			$this->buildDirectoryPath([ASSET_PATH,'upload']),
+			$this->buildDirectoryPath([UPLOAD_PATH]),
 			'BNT',
 			strtoupper($userName)
 		]);
