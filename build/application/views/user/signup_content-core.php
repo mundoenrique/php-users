@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<h1 class="h3 pl-2"><?= lang('GEN_MENU_SIGNUP'); ?></h1>
+<h1 class="h3 semibold pl-2"><?= lang('GEN_MENU_SIGNUP'); ?></h1>
 <hr class="separador-one mb-2">
 <p><?= novoLang(lang('USER_SIGNUP_MSG'), lang('GEN_SYSTEM_NAME')) ?></p>
 <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
