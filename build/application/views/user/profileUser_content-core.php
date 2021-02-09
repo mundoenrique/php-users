@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<h1 class="h3 pl-2"><?= lang('USER_PROFILE_TITLE'); ?></h1>
+<h1 class="h3 semibold pl-2"><?= lang('USER_PROFILE_TITLE'); ?></h1>
 <hr class="separador-one">
 <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
   <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>

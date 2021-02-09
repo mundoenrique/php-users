@@ -89,7 +89,7 @@
   </div>
   <div class="col-12 flex justify-start">
     <div class="field-meter">
-      <h4><?= lang('USER_LOAD_DOCS_TITLE') ?></h4>
+      <h4 class="semibold"><?= lang('USER_LOAD_DOCS_TITLE') ?></h4>
       <ul class="pwd-rules">
         <div class="row">
           <div class="col-6 col-lg-12">
