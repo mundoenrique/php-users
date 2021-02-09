@@ -70,8 +70,8 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"user/userIdentify",
-			"user/manageImageTerm"
+			"user/manageImageTerm",
+			"user/userIdentify"
 		);
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
@@ -98,9 +98,9 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"third_party/jquery.mask-1.14.16",
 			"user/validPass",
-			"user/signup",
 			"user/getRegions",
-			"user/manageImageTerm"
+			"user/manageImageTerm",
+			"user/signup"
 		);
 
 		$dataUser = json_decode(base64_decode($this->request->dataUser));
@@ -227,9 +227,9 @@ class Novo_User extends NOVO_Controller {
 			"form_validation",
 			"third_party/additional-methods",
 			"third_party/jquery.mask-1.14.16",
-			"user/profileUser",
 			"user/getRegions",
-			"user/manageImageTerm"
+			"user/manageImageTerm",
+			"user/profileUser"
 		);
 
 		$dataUser = $this->loadModel();
