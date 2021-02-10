@@ -65,7 +65,7 @@
       </form>
 
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
-        <label class="block"><?= lang('REPORTS_MONTHLY'); ?></label>
+        <label class="block"><?= lang('GEN_MONTHLY'); ?></label>
         <div class="row pl-2">
           <label class="mt-1 regular" for="initDate"><?= lang('REPORTS_FROM'); ?></label>
           <div class="form-group col-4 px-1">

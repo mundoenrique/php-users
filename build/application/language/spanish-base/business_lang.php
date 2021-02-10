@@ -11,3 +11,6 @@ $lang['BUSINESS_TRANSIT_BALANCE'] = 'En tránsito';
 $lang['BUSINESS_AVAILABLE_BALANCE'] = 'Disponible';
 $lang['BUSINESS_MY_MOVEMENTS'] = 'Mis movimientos';
 $lang['BUSINESS_TO_SHOW'] = 'Mostrar:';
+$lang['BUSINESS_RECENT'] = 'Recientes';
+$lang['BUSINESS_LAST_MOVEMENTS'] = 'Últimos 20';
+$lang['BUSINESS_SELECT'] = 'Seleccionar';

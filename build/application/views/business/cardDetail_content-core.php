@@ -4,33 +4,33 @@
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="widget-product">
       <div class="line-text w-100">
-				<div class="flex inline-flex col-12 px-xl-2">
-					<div id="productdetail" class="flex flex-column justify-center col-6 py-4">
-						<div class="product-presentation relative w-100">
-							<div class="item-network <?= $brand ?>"></div>
-							<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
-						</div>
-						<?php if ($isVirtual): ?>
-						<a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('GEN_NO_LINK'); ?>">
-							<i aria-hidden="true" class="icon-view"></i> &nbsp;<?= lang('BUSINESS_SEE_DETAILS'); ?>
-						</a>
-						<?php endif; ?>
-					</div>
-					<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
-						<p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
-						<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-						<?php if ($cardsTotal > 1): ?>
-						<a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
-							<i aria-hidden="true" class="icon-find"></i>
-							&nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
-						</a>
-						<?php endif; ?>
-					</div>
-					<input type="hidden" name="brand" class="hidden" id="brand" value="<?= $brand; ?>">
-					<input type="hidden" name="cardNumberMask" class="hidden" id="cardNumberMask" value="<?= $cardNumberMask; ?>">
-					<input type="hidden" name="fullName" class="hidden" id="fullName" value="<?= $fullName; ?>">
-					<input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, $productUrl); ?>">
-				</div>
+        <div class="flex inline-flex col-12 px-xl-2">
+          <div id="productdetail" class="flex flex-column justify-center col-6 py-4">
+            <div class="product-presentation relative w-100">
+              <div class="item-network <?= $brand ?>"></div>
+              <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+            </div>
+            <?php if ($isVirtual): ?>
+            <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('GEN_NO_LINK'); ?>">
+              <i aria-hidden="true" class="icon-view"></i> &nbsp;<?= lang('BUSINESS_SEE_DETAILS'); ?>
+            </a>
+            <?php endif; ?>
+          </div>
+          <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+            <p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
+            <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
+            <?php if ($cardsTotal > 1): ?>
+            <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
+              <i aria-hidden="true" class="icon-find"></i>
+              &nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
+            </a>
+            <?php endif; ?>
+          </div>
+          <input type="hidden" name="brand" class="hidden" id="brand" value="<?= $brand; ?>">
+          <input type="hidden" name="cardNumberMask" class="hidden" id="cardNumberMask" value="<?= $cardNumberMask; ?>">
+          <input type="hidden" name="fullName" class="hidden" id="fullName" value="<?= $fullName; ?>">
+          <input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, $productUrl); ?>">
+        </div>
       </div>
       <div class="flex col-12 mt-2">
         <ul class="flex flex-auto justify-between px-2">
@@ -47,59 +47,53 @@
       </div>
     </div>
     <div class="flex optional widget-statistics mt-4">
-    	<h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
-			<div class="flex flex-auto chart-container left">
-    		<canvas class="block m-auto inline-block w-100" id="chart"></canvas>
-			</div>
-  	</div>
+      <h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
+      <div class="flex flex-auto chart-container left">
+        <canvas class="block m-auto inline-block w-100" id="chart"></canvas>
+      </div>
+    </div>
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
-    <h4 class="h4 regular tertiary"><?= lang('BUSINESS_MY_MOVEMENTS'); ?></h4>
-    <nav id="filtersStack" class="navbar px-0 pb-0">
-      <div id="period-form" class="stack-form mr-auto flex items-center col-8">
-
-        <form class="w-100" id="movements">
-          <div class="row items-center pl-2">
-            <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
-            <input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
-            <input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
-            <div class="form-group">
-              <label class="my-1 mr-1 text" for="filterMonth"><?= lang('BUSINESS_TO_SHOW'); ?></label>
-              <select id="filterMonth" class=" custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-                <option value="0"><?= lang('BUSINESS_MOST_RECENT'); ?></option>
-                <?php foreach (lang('GEN_SELECT_MONTH') as $key => $month) : ?>
-                <option value="<?= $key ?>"><?= $month ?></option>
-                <?php endforeach; ?>
-              </select>
-              <div class="help-block"></div>
-            </div>
-            <div class="form-group col-3 px-0">
-              <select id="filterYear" class="custom-select form-control col-10 my-1 mr-1" name="filterYear" disabled>
-                <option value="default">--</option>
-                <?php for ($i = $currentYear; $i > $currentYear - 5; $i--) : ?>
-                <option value="<?= $i ?>"><?= $i ?></option>
-                <?php endfor; ?>
-              </select>
-              <div class="help-block mx-0"></div>
-            </div>
-            <button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3 left ml-2" disabled>
+    <h2 class="h4 regular tertiary"><?= lang('BUSINESS_MY_MOVEMENTS'); ?></h2>
+    <nav id="filtersStack" class="navbar px-0">
+      <form id="movements" method="post" class="col-12 col-lg-9">
+        <div class="form-group">
+          <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
+          <input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
+          <input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
+          <label class="block"><?= lang('BUSINESS_RECENT'); ?></label>
+          <div class="custom-control custom-radio custom-control-inline align-top">
+            <input id="recentFilter" type="radio" name="" class="custom-control-input" value="">
+            <label class="custom-control-label mr-1" for="recentFilter"><?= lang('BUSINESS_LAST_MOVEMENTS'); ?></label>
+          </div>
+          <div class="help-block"></div>
+        </div>
+        <label class="block"><?= lang('GEN_MONTHLY'); ?></label>
+        <div class="row pl-2">
+          <label class="mt-1 regular" for="initDateFilter"><?= lang('BUSINESS_SELECT'); ?></label>
+          <div class="form-group col-4 px-1">
+						<input id="monthYear" name="monthYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+						<input id="endDate" name="endDate" class="form-control date-picker" type="hidden">
+            <div class="help-block"></div>
+          </div>
+          <div class="flex items-center">
+            <button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3">
               <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
             </button>
           </div>
-        </form>
-
-      </div>
+        </div>
+      </form>
       <?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
-      <div class="mb-3">
+      <div class="flex self-end mb-3">
         <button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
           data-name="reset"><?= lang('GEN_MOVEMENTS'); ?></button>
         <button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset"
           data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?></button>
       </div>
       <?php endif; ?>
-      <div class="hide-downloads">
-        <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center pb-2">
+      <div class="flex self-end mb-4 hide-downloads pl-1">
+        <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
               <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
