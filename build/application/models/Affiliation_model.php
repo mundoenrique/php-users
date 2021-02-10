@@ -38,7 +38,7 @@ class Affiliation_model extends CI_Model {
 		log_message("info", "REQUEST afiliacion P2P : ".$data);
 		$dataEncry = np_Hoplite_Encryption($data,1,'affiliation_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'affiliation_load'));
 		log_message("info", "RESPONSE afiliacion P2P : ".json_encode($desdata));
@@ -82,7 +82,7 @@ class Affiliation_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info","JSON afiliacion P2T-C   todo".$data);
 		log_message("info","JSON afiliacion P2T-C encriptado ".$dataEncry);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		log_message("info","RESPONSE ENCRIPTADO afiliacion P2T-C ----->>>>".json_encode($data));
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'affiliationP2T_load'));
@@ -113,7 +113,7 @@ class Affiliation_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info","JSON tarjeta P2T-C   todo".$data);
 		log_message("info","JSON tarjeta P2T-C encriptado ".$dataEncry);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'affiliationP2T_cuenta'));
 		log_message("info","JSON tarjeta P2T-C response ".$response);
@@ -143,7 +143,7 @@ class Affiliation_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'consultarBancos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'consultarBancos_load'));
 		$response = $this->cryptography->encrypt($desdata);
@@ -169,7 +169,7 @@ class Affiliation_model extends CI_Model {
 
 		$dataEncry = np_Hoplite_Encryption($data,1,'ctasOrigen_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasOrigen_load'));
 

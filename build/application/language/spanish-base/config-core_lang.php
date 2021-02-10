@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
-$lang['CONFIG_CYPHER_DATA'] = 'ON';
-$lang['CONFIG_DUPLICATE_SESSION'] = 'ON';
+$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONFIG_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -82,6 +82,9 @@ $lang['CONF_COUNTRY_CODE'] = [
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_UPDATE_SECOND_NAME'] = 'ON';
+$lang['CONF_UPDATE_PHONE_MOBILE'] = 'ON';
+$lang['CONF_UPDATE_EMAIL'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
@@ -96,6 +99,8 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_MOBILE'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
@@ -117,6 +122,11 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Ec-bg' => '3',
 	'Co' => '4',
 	'Mx-Bn' => '16',
+];
+$lang['CONF_MODULE_RECAPTCHA'] = [
+	'signin',
+	'accessRecover',
+	'userIdentify'
 ];
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';

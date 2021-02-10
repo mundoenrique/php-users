@@ -47,16 +47,11 @@
       </div>
     </div>
     <div class="flex optional widget-statistics mt-4">
-      <h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
-      <div class="flex flex-column items-center">
-        <div class="flex flex-wrap items-center h-100 justify-center">
-          <div id="stats" class="group-aside-view w-100 h-100">
-            <div id="movementsStats" class="hide w-100 h-100"></div>
-            <div id="transitStats" class="hide"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    	<h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
+			<div class="flex flex-auto chart-container left">
+    		<canvas class="block m-auto inline-block w-100" id="chart"></canvas>
+			</div>
+  	</div>
   </div>
 
   <div class="flex flex-column pt-3 col-lg-12 col-xl-8">

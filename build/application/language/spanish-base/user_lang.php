@@ -41,6 +41,7 @@ $lang['USER_RECOVER_SUCCESS'] = 'Enviamos un correo a %s, %s';
 $lang['USER_RECOVER_PASS_TEMP'] = 'con una contraseña temporal.';
 $lang['USER_RECOVER_USERNAME'] = 'con tu usuario.';
 $lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido. Por favor verifica tus datos, e intenta nuevamente.';
+$lang["USER_LEGAL_STEP"]='Legales';
 $lang["USER_TERMS_TITLE"]='Términos y condiciones.';
 $lang["USER_TERMS_SUBTITLE"]='Tarjetahabiente.';
 $lang["USER_TERMS_CONTENT"] = '
@@ -444,7 +445,7 @@ $lang["USER_CONT_GENERAL_CONTENT"] = '
 ';
 //SIGNUP-PROFILE
 $lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
-$lang['USER_SIGNUP_MSG'] = 'Para obtener tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
+$lang['USER_SIGNUP_MSG'] = 'Para crear tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
 $lang['USER_PERSONAL_DATA'] = 'Datos personales';
 $lang['USER_CONTACT_DATA'] = 'Datos de contacto';
 $lang['USER_DATA_USER'] = 'Datos de usuario';
@@ -524,6 +525,7 @@ $lang['USER_PUBLIC_POSITION'] = 'Cargo público';
 $lang['USER_INSTITUTION'] = 'Institución';
 $lang['USER_ARTICLE_LAW'] = '¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la ley N°29038?';
 $lang['USER_LOAD_DOCS'] = 'Carga de documentos de identidad';
+$lang['USER_LOAD_DOCS_STEP'] = 'Carga de documentos';
 $lang['USER_ADD_PHOTO'] = 'Agregar foto';
 $lang['USER_ADD_F_DOC'] = 'Agregar anverso del documento de identidad';
 $lang['USER_ADD_B_DOC'] = 'Agregar reverso del documento de identidad';
@@ -539,11 +541,14 @@ $lang['USER_UPDATE_SUCCESS'] = 'Los datos fueron actualizados exitosamente.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario, por favor intentalo de nuevo';
 $lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de %s con los datos ingresados. Verifica tu información e intenta nuevamente.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';
+$lang['USER_STEP_TITLE_REGISTRY'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP']];
+$lang['USER_STEP_TITLE_REGISTRY_LONG'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_LABOR_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP'], $lang['USER_LEGAL_STEP']];
 // RECOVER ACCESS
 $lang['USER_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
 	'CC' => 'Cédula de ciudadania',
 	'PP' => 'Pasaporte',
 ];
+$lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';

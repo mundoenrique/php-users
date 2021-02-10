@@ -18,11 +18,11 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
 		$this->CI = &get_instance();
-		$this->keyNovo = $this->CI->config->item('keyNovo');
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->logMessage = new stdClass();
-		$this->keyAES256 = base64_decode($this->CI->config->item('keyAES256'));
-		$this->ivAES256 = base64_decode($this->CI->config->item('ivAES256'));
+		$this->keyAES256 = base64_decode(KEY_AES256);
+		$this->ivAES256 = base64_decode(IV_AES256);
+
 		if (ENVIRONMENT == 'development') {
 			error_reporting(E_ALL & ~E_DEPRECATED);
 		}
@@ -42,7 +42,7 @@ class Encrypt_Connect
 		while ((strlen($dataB) % 8) != 0) {
 			$dataB .= " ";
 		}
-		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : WS_KEY;
 		$cryptData = mcrypt_encrypt(
 			MCRYPT_DES,
 			$this->keyNovo,
@@ -60,7 +60,7 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
 		$data = base64_decode($cryptData);
-		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : $this->keyNovo;
+		$this->keyNovo = $this->CI->session->has_userdata('userId') ?  base64_decode($this->CI->session->encryptKey) : WS_KEY;
 		$descryptData = mcrypt_decrypt(
 			MCRYPT_DES,
 			$this->keyNovo,
@@ -141,14 +141,19 @@ class Encrypt_Connect
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 		$fail = FALSE;
 		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$wsUrl = $_SERVER['WS_URL'];
+
 		if (isset($_SERVER['WS_URL' . $subFix])) {
-			$this->CI->config->set_item('urlWS', $_SERVER['WS_URL' . $subFix]);
+			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
-		$urlWS = $this->CI->config->item('urlWS') . 'movilsInterfaceResource';
-		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $urlWS);
+
+		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $wsUrl);
+
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
+		$start = microtime(true);
+
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $urlWS);
+		curl_setopt($ch, CURLOPT_URL, $wsUrl);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
@@ -161,9 +166,12 @@ class Encrypt_Connect
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$CurlError = curl_error($ch);
 		$CurlErrorNo = curl_errno($ch);
-		curl_close($ch);
 
-		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE CURL HTTP CODE: ' . $httpCode);
+		curl_close($ch);
+		$final = microtime(true);
+		$executionTime = round($final - $start, 2, PHP_ROUND_HALF_UP) ;
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $httpCode);
 
 		if($httpCode != 200 || !$response) {
 			$CurlError = novoLang('ERROR CURL NUMBER: %s, MESSAGE: %s ', [$CurlErrorNo, json_encode($CurlError, JSON_UNESCAPED_UNICODE)]);

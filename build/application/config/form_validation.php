@@ -171,11 +171,11 @@ $config = [
 		],
 		[
 			'field' => 'landLine',
-			'rules' => 'trim|numeric'
+			'rules' => 'trim|regex_match[/^[0-9*]+$/]'
 		],
 		[
 			'field' => 'mobilePhone',
-			'rules' => 'trim|numeric|required'
+			'rules' => 'trim|regex_match[/^[0-9*]+$/]|required'
 		],
 		[
 			'field' => 'phoneType',

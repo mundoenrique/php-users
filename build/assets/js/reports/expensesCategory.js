@@ -141,34 +141,63 @@ function getMovements(typeInquiry) {
 				body += '</tr>';
 			});
 
-			$("#movementsStats").kendoChart({
-				chartArea: {
-					width: 300,
-					height: 200
+			var chart;
+			var graphicLabel = [];
+			var graphicValue = [];
+			var graphicColour = [];
+			var setValues, setCategory;
+
+			$.each(response.data.grafic, function(key, val){
+				graphicLabel.push(response.data.grafic[key].category);
+				graphicValue.push(response.data.grafic[key].value);
+				graphicColour.push(response.data.grafic[key].color);
+			})
+
+			chart = new Chart($('#movementsStats'), {
+				type: 'doughnut',
+				data: {
+					labels: graphicLabel,
+					datasets: [{
+						label: '',
+						data: graphicValue,
+						backgroundColor: graphicColour,
+						borderColor: graphicColour,
+						borderWidth: 1
+					}]
 				},
-				legend: {
-					position: "left",
-					visible: false
-				},
-				seriesDefaults: {
-					labels: {
-						template: "#= category #  #= kendo.format('{0:P}')#",
-						position: "outsideEnd",
-						visible: false,
-						background: "transparent",
-						format: lang.GEN_CURRENCY + " {0}"
-					}
-				},
-				series: [{
-					type: "pie",
-					overlay: {
-						gradient: "none"
+				options: {
+					tooltips: {
+						callbacks: {
+							label: function(tooltipItem) {
+								setValues = response.data.labels[tooltipItem.index];
+								setCategory =  response.data.grafic[tooltipItem.index].category;
+								return setCategory+ ": " + lang.GEN_CURRENCY + " " + setValues;
+							}
+						}
 					},
-					data: response.data.grafic
-				}],
-				tooltip: {
-					visible: true,
-					template: "${category} - " + lang.GEN_CURRENCY + " ${value}"
+					responsive: true,
+					manteinaspectRatio: 2,
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+							gridLines: {
+								display:false
+						},
+							ticks: {
+									display: false
+							}
+						}],
+						xAxes: [{
+							gridLines: {
+								display:false
+							},
+							ticks: {
+								display: false
+							}
+						}]
+					}
 				}
 			});
 

@@ -30,7 +30,7 @@ class ServiceProduct_Model extends BDB_Model
 
 		$this->dataRequest->userName = $this->session->userdata('userName');
 		$this->dataRequest->token = $this->session->userdata('token');
-		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
+		$this->dataRequest->codigoOtp = $dataRequest->codeOTP ??  '';
 		$this->dataRequest->telephoneNumber = $this->session->userdata('celular');
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->acCodCia = $this->session->userdata('codCompania');
@@ -247,7 +247,7 @@ class ServiceProduct_Model extends BDB_Model
 
 		$this->dataRequest->idOperation = '122';
 
-		$this->dataRequest->codigoOtp = !empty($dataRequest->codeOTP)? md5($dataRequest->codeOTP): '';
+		$this->dataRequest->codigoOtp = $dataRequest->codeOTP ?? '';
 		$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 		$this->dataRequest->id_ext_per = $this->session->userdata('idUsuario');
 		$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
@@ -481,7 +481,7 @@ class ServiceProduct_Model extends BDB_Model
 		if (!empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '110';
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
-			$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
+			$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 			$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
 			$this->dataRequest->prefix = $dataProduct['prefix'];
@@ -696,7 +696,7 @@ class ServiceProduct_Model extends BDB_Model
 		if (!empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '111';
 			$this->className = 'com.novo.objects.TOs.TarjetaTO';
-			$this->dataRequest->codigoOtp = md5($dataRequest->codeOTP);
+			$this->dataRequest->codigoOtp = $dataRequest->codeOTP;
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 			$this->dataRequest->noTarjeta= $dataProduct['noTarjeta'];
 			$this->dataRequest->prefix = $dataProduct['prefix'];

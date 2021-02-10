@@ -152,6 +152,8 @@ function getMovements() {
 }
 
 function displaymoves() {
+	var graphicValue = [parseFloat($('#debit').val()).toFixed(2),  parseFloat($('#credit').val()).toFixed(2)];
+	var graphicLabel = ['Cargos', 'Abonos'];
 	$('#pre-loader')
 		.removeClass('mt-5 mx-auto flex justify-center')
 		.addClass('hide');
@@ -160,42 +162,51 @@ function displaymoves() {
 		$('.hide-downloads').removeClass('hide');
 		$('#movementsList').removeClass('hide');
 		$('#movementsStats').removeClass('hide');
-		$("#movementsStats").kendoChart({
-			chartArea: {
-				width: 300,
-				height:200
-			},
-			legend: {
-				position: "top",
-				visible: false
-			},
-			seriesDefaults: {
-				labels: {
-					template: "#= category # #= kendo.format('{0:P}', percentage)#",
-					position: "outsideEnd",
-					visible: false,
-					background: "transparent",
-				}
-			},
-			series: [{
-				type: "donut",
-				overlay: {
-					gradient: "none"
+
+		var chart = new Chart($('#chart'), {
+    	type: 'doughnut',
+    	data: {
+      	labels: graphicLabel,
+      	datasets: [{
+					label: '',
+					data: graphicValue,
+					backgroundColor: ['#E74C3C', '#2ECC71'],
+        	borderColor: ['#E74C3C','#2ECC71'],
+        	borderWidth: 1
+      	}]
+    	},
+    	options: {
+				tooltips: {
+					callbacks: {
+						label: function(tooltipItem) {
+							return graphicLabel[tooltipItem.index] + ": " + lang.GEN_CURRENCY+ " " + graphicValue[tooltipItem.index]
+						}
+					}
 				},
-				data: [{
-					category: "Cargos",
-					value: parseFloat($('#debit').val()).toFixed(2),
-					color: "#E74C3C"
-				}, {
-					category: "Abonos",
-					value: parseFloat($('#credit').val()).toFixed(2),
-					color: "#2ECC71"
-				}]
-			}],
-			tooltip: {
-				visible: true,
-				template: "#= category # #= kendo.format('{0:P}', percentage) #"
-			}
+				responsive: true,
+				aspectRatio: 2,
+				legend: {
+					display: false
+				},
+				scales: {
+					yAxes: [{
+						gridLines: {
+							display:false
+					},
+						ticks: {
+								display: false
+						}
+					}],
+					xAxes: [{
+						gridLines: {
+							display:false
+						},
+						ticks: {
+							display: false
+						}
+					}]
+				}
+    	}
 		});
 	} else {
 		$('#no-moves').removeClass('hide');

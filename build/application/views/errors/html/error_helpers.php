@@ -4,8 +4,8 @@ function NOVO_insert_js_cdn($filename = '') {
 		$filename = str_replace('.js', '.min.js', $filename);
 	}
 
-	$fileurl = BASE_CDN_URL . 'js/' . $filename;
-	$filepath = BASE_CDN_PATH . 'js/' . $filename;
+	$fileurl = ASSET_URL . 'js/' . $filename;
+	$filepath = ASSET_PATH . 'js/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
 		$version = '?v=' . date('Ymd-B', filemtime($filepath));
@@ -22,8 +22,8 @@ function NOVO_insert_css_cdn($filename = '', $media = 'screen') {
 		$filename = str_replace('.css', '.min.css', $filename);
 	}
 
-	$fileurl = BASE_CDN_URL . 'css/' . $skin_folder .  $filename;
-	$filepath = BASE_CDN_PATH . 'css/' . $filename;
+	$fileurl = ASSET_URL . 'css/' . $skin_folder .  $filename;
+	$filepath = ASSET_PATH . 'css/' . $filename;
 	$version = '';
 	if (file_exists($filepath)) {
 		$version = '?v=' . date('Ymd-B', filemtime($filepath));
