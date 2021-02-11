@@ -1125,8 +1125,7 @@ $(function(){
 				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/;
 			}
 			return value != nro_doc && regUserName.test(value) ? true : false;
-		}, "Indique un usuario válido."
-	);
+		}, "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres");
 
 		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
 		$.validator.addMethod("esBisiesto", function(value, element, regex){
