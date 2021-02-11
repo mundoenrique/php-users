@@ -632,7 +632,7 @@ $(function(){
 				usuario     = $("#username").val();
 				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
 					var titleCI = 'Nombre de usuario',
-					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
+					msgCI = 'El nombre de usuario no puede contener su número de identificación',
 					modalTypeCI = 'alert-warning';
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
@@ -1119,6 +1119,15 @@ $(function(){
 			}
 		);
 
+		jQuery.validator.addMethod("valdiateUsername",function(value, element, regex){
+			var regUserName =/^[a-z0-9_-]{6,16}$/i;
+			if (country == 'Ec-bp') {
+				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/;
+			}
+			return value != nro_doc && regUserName.test(value) ? true : false;
+		}, "Indique un usuario válido."
+	);
+
 		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
 		$.validator.addMethod("esBisiesto", function(value, element, regex){
 
@@ -1227,7 +1236,7 @@ $(function(){
 				"cargo_publico" : {"required":true, "expresionRegular":true},												//35
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
-				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
+				"username":{"required":true, "nowhitespace":true, "valdiateUsername": true},						//38
 				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
