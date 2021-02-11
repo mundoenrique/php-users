@@ -33,6 +33,7 @@ $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
 //CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'white';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
+$lang['CONF_BUSINESS_NAME'] = 'ON';
 //MENU
 $lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
