@@ -101,8 +101,8 @@ $proxy_ips = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG
 |--------------------------------------------------------------------------
 */
 defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
-defined('ASSET_URL')			OR define('ASSET_URL', $_SERVER['ASSET_URL']);
-defined('ASSET_PATH')		OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('ASSET_URL')				OR define('ASSET_URL', $_SERVER['ASSET_URL']);
+defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
 defined('SUBCLASS_PREFIX')	OR define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
