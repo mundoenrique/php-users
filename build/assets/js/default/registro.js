@@ -636,7 +636,7 @@ $(function(){
 
 				regUserName = /^[a-z0-9_-]{6,16}$/i;
 				if (country == 'Ec-bp') {
-					regUserName = /^([a-z]{2}[a-z0-9_]{4,14})$/;
+					regUserName = /^([a-z]{2}[a-z0-9_]{4,14})$/i;
 				}
 
 				if(usuario.indexOf(nroHolderId) > -1 && country == 'Ec-bp') {
@@ -1133,7 +1133,7 @@ $(function(){
 			var regUserName =/^[a-z0-9_-]{6,16}$/i;
 
 			if (country == 'Ec-bp') {
-				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/;
+				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/i;
 				isNotEqualToNroDocument = value.indexOf(nro_doc) < 0 ? true: false;
 			}
 
