@@ -630,7 +630,9 @@ $(function(){
 
     $("#username").blur(function(){
 				usuario     = $("#username").val();
-				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
+				nroHolderId = $('#holder-id').val();
+
+				if(usuario.indexOf(nroHolderId) > -1 && country == 'Ec-bp') {
 					var titleCI = 'Nombre de usuario',
 					msgCI = 'El nombre de usuario no puede contener su número de identificación',
 					modalTypeCI = 'alert-warning';
@@ -1120,12 +1122,14 @@ $(function(){
 		);
 
 		jQuery.validator.addMethod("valdiateUsername",function(value, element, regex){
+			var isNotEqualToNroDocument = true;
 			var regUserName =/^[a-z0-9_-]{6,16}$/i;
 			if (country == 'Ec-bp') {
 				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/;
+				isNotEqualToNroDocument = value.indexOf(nro_doc) < 0 ? true: false;
 			}
-			return value != nro_doc && regUserName.test(value) ? true : false;
-		}, "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres");
+			return isNotEqualToNroDocument && regUserName.test(value) ? true : false;
+		}, "El campo Usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres");
 
 		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
 		$.validator.addMethod("esBisiesto", function(value, element, regex){
@@ -1293,7 +1297,6 @@ $(function(){
 				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"username" : {																													//38
 					"required" : "El campo Usuario no puede estar vacío.",
-					"username": "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
 				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
