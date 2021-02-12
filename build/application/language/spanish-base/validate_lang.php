@@ -46,6 +46,7 @@ $lang['VALIDATE_NICK_PATT'] = 'Se admiten números, letras y "_", mín 6 máx 16
 $lang['VALIDATE_NICK_DIFFER'] = '';
 $lang['VALIDATE_NICK_DIFFER_TEXT'] = 'Indica tu nombre de usuario, mín 6 máx 16';
 $lang['VALIDATE_DATE_DMY'] = 'Indica una fecha válida dd/mm/aaaa';
+$lang['VALIDATE_DATE_MY'] = 'Indica una fecha válida mm/aaaa';
 $lang['VALIDATE_REPLACE_REASON'] = 'Indica un motivo';
 $lang['VALIDATE_TEMPORARY_LOCK_REASON'] = 'Indica un motivo';
 $lang['VALIDATE_CURRENT_PIN'] = 'Indica tu PIN actual';

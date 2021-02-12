@@ -14,3 +14,5 @@ $lang['BUSINESS_TO_SHOW'] = 'Mostrar:';
 $lang['BUSINESS_RECENT'] = 'Recientes';
 $lang['BUSINESS_LAST_MOVEMENTS'] = 'Últimos 20';
 $lang['BUSINESS_SELECT'] = 'Seleccionar';
+//DATEPICKER
+$lang['BUSINESS_PICKER_MINDATE'] = '-48m';

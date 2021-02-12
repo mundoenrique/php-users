@@ -62,10 +62,12 @@
           <input type="hidden" id="cardNumber" name="cardNumber" value="<?= $cardNumber ?>">
           <input type="hidden" id="credit" name="credit" value="<?= $totalMoves->credit ?>">
           <input type="hidden" id="debit" name="debit" value="<?= $totalMoves->debit ?>">
+					<input type="hidden" id="filterMonth" name="filterMonth" value="0">
+					<input type="hidden" id="filterYear" name="filterYear" value="0">
           <label class="block"><?= lang('BUSINESS_RECENT'); ?></label>
           <div class="custom-control custom-radio custom-control-inline align-top">
-            <input id="recentFilter" type="radio" name="" class="custom-control-input" value="">
-            <label class="custom-control-label mr-1" for="recentFilter"><?= lang('BUSINESS_LAST_MOVEMENTS'); ?></label>
+            <input id="filterInputMonth" type="radio" name="filterInputMonth" class="custom-control-input" value="0">
+            <label class="custom-control-label mr-1" for="filterInputMonth"><?= lang('BUSINESS_LAST_MOVEMENTS'); ?></label>
           </div>
           <div class="help-block"></div>
         </div>
@@ -73,9 +75,8 @@
         <div class="row pl-2">
           <label class="mt-1 regular" for="initDateFilter"><?= lang('BUSINESS_SELECT'); ?></label>
           <div class="form-group col-4 px-1">
-						<input id="monthYear" name="monthYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
-						<input id="endDate" name="endDate" class="form-control date-picker" type="hidden">
-            <div class="help-block"></div>
+						<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+            <div id='error' class="help-block"></div>
           </div>
           <div class="flex items-center">
             <button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3">
@@ -92,7 +93,7 @@
           data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?></button>
       </div>
       <?php endif; ?>
-      <div class="flex self-end mb-4 hide-downloads pl-1">
+			<div class="hide-downloads self-end mb-4 pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">

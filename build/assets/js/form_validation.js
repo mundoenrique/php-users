@@ -54,6 +54,7 @@ function validateForms(form) {
 			"confirmPass": { required: true, equalTo: "#newPass" },
 			"filterMonth": { required: true, pattern: numeric },
 			"filterYear": { required: true, pattern: numeric },
+			"filterInputYear": { required: true, pattern: date.my },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
 			"documentId": { required: true, validateDocumentId: true },
 			"cardPIN": { required: true, pattern: numeric },
@@ -149,6 +150,7 @@ function validateForms(form) {
 				equalTo: lang.VALIDATE_IQUAL_PASS
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
+			"filterInputYear": lang.VALIDATE_DATE_MY,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
 			"documentId": {
 				required: lang.VALIDATE_DOCUMENT_ID,
