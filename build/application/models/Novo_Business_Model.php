@@ -42,6 +42,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
 						$cardRecord->expireDate = $cardsRecords->fechaExp;
+						$cardRecord->nomEmp = $cardsRecords->nomEmp;
 						$cardRecord->prefix = $cardsRecords->prefix;
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;

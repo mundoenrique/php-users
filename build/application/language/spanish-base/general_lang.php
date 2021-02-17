@@ -126,6 +126,7 @@ $lang['GEN_SELECT_ACCOUNT'] = 'Selecciona una cuenta';
 $lang['GEN_OTHER_PRODUCTS'] = 'Otro producto';
 $lang['GEN_MOVEMENTS'] = 'Movimientos';
 $lang['GEN_TYPE_DOCUMENT'] = 'Tipo de documento';
+$lang['GEN_MONTHLY'] = 'Mensual';
 //OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
 $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
@@ -175,6 +176,7 @@ $lang['GEN_PICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 
 $lang['GEN_PICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
 $lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
 $lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
+$lang['GEN_PICKER_DATEMEDIUM']= 'MM/AAAA';
 $lang['GEN_PICKER_FIRSTDATE'] = 1;
 $lang['GEN_PICKER_ISRLT'] = FALSE;
 $lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;

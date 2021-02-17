@@ -24,6 +24,9 @@
       <div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
         <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
         <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
+					<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
+					<small class="sb-disabled uppercase light truncate"><?= $cards->nomEmp?></small><br>
+					<?php endif; ?>
           <p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?>
             <span class="warning semibold h6 capitalize absolute ml-2 l-0"><br><?= $cards->virtualCard?></span>
           </p>

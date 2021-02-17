@@ -41,8 +41,8 @@
     </div>
 		<div class="flex optional widget-statistics mt-4">
     	<h3 class="h4 regular py-3 pl-3"><?= lang('GEN_MOVEMENTS'); ?></h3>
-			<div class="flex flex-auto chart-container left">
-    		<canvas class="block m-auto inline-block w-100" id="movementsStats"></canvas>
+			<div class="flex chart-container m-auto">
+    		<canvas class="block m-auto inline-block" id="movementsStats"></canvas>
 			</div>
   	</div>
   </div>
@@ -65,7 +65,7 @@
       </form>
 
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
-        <label class="block"><?= lang('REPORTS_MONTHLY'); ?></label>
+        <label class="block"><?= lang('GEN_MONTHLY'); ?></label>
         <div class="row pl-2">
           <label class="mt-1 regular" for="initDate"><?= lang('REPORTS_FROM'); ?></label>
           <div class="form-group col-4 px-1">

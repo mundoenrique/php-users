@@ -7,40 +7,56 @@ $(function () {
 	displaymoves()
 	who = 'Business';
 
-	$('#filterMonth').on('change', function() {
-		$('#search').prop('disabled',false);
-		if ($(this).val() != '0') {
-			$('#filterYear')
-				.prop('disabled', false);
-		} else {
-			$('#filterYear')
-				.prop('selectedIndex', 0)
-				.prop('disabled', true);
+	$("#filterInputYear").datepicker({
+		dateFormat: 'mm/yy',
+		changeMonth: true,
+		changeYear: true,
+		showButtonPanel: true,
+		minDate: lang.BUSINESS_PICKER_MINDATE,
+		closeText: 'Aceptar',
+
+		onClose: function (dateText, inst) {
+			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+			$(this)
+			.focus()
+			.blur();
+			var monthYear = $('#filterInputYear').val().split('/');
+			$('#filterMonth').val(monthYear[0]);
+			$('#filterYear').val(monthYear[1]);
+			$('#filterInputMonth').prop('checked', false);
+		},
+
+		beforeShow: function (input, inst) {
+			inst.dpDiv.addClass("ui-datepicker-month-year");
 		}
+	});
+
+	$('#filterInputMonth').on('click', function(e) {
+		where = 'CardDetail';
+		data = {
+			cardNumber: $('#cardNumber').val()
+		}
+		$('#filterInputYear').val('');
+		$('#filterInputYear').removeClass('has-error');
+		$('#error').text('');
+		$('#filterYear').val('0');
+		$('#filterMonth').val('0');
+		$('#month').val('0');
+		$('#year').val('0');
+		getMovements();
 	});
 
 	$('#search').on('click', function(e) {
 		e.preventDefault();
+		where = 'MonthlyMovements';
+		form = $('#movements');
+		validateForms(form);
 
-		if ($('#filterMonth').val() == '0') {
-			where = 'CardDetail';
-			data = {
-				cardNumber: $('#cardNumber').val()
-			}
-			$('#month').val('0');
-			$('#year').val('0');
+		if (form.valid()) {
+			data = getDataForm(form);
+			$('#month').val(data.filterMonth);
+			$('#year').val(data.filterYear);
 			getMovements();
-		} else {
-			where = 'MonthlyMovements';
-			form = $('#movements');
-			validateForms(form);
-
-			if (form.valid()) {
-				data = getDataForm(form);
-				$('#month').val(data.filterMonth);
-				$('#year').val(data.filterYear);
-				getMovements();
-			}
 		}
 	});
 
