@@ -10,10 +10,12 @@ var skin = decodeURIComponent(
 $(function(){
 	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 
+	var msgErrorUserName = 'El campo Usuario admite números, letras y "_", mín 6 máx 16';
 	var tlfLength = "11";
 	if (skin == 'pichincha'){
 		$('#telefonoFijo').attr('maxlength','9');
 		tlfLength = "9";
+		msgErrorUserName = 'El campo Usuario debe iniciar con dos letras, puede contener números y "_", mín 6 máx 16 ';
 
 		$('#condiciones').removeClass('label-disabled');
 		$("#accept-terms").prop('disabled', false);
@@ -630,14 +632,21 @@ $(function(){
 
     $("#username").blur(function(){
 				usuario     = $("#username").val();
-				if(usuario == $('#holder-id').val() && country == 'Ec-bp') {
+				nroHolderId = $('#holder-id').val();
+
+				regUserName = /^[a-z0-9_-]{6,16}$/i;
+				if (country == 'Ec-bp') {
+					regUserName = /^([a-z]{2}[a-z0-9_]{4,14})$/i;
+				}
+
+				if(usuario.indexOf(nroHolderId) > -1 && country == 'Ec-bp') {
 					var titleCI = 'Nombre de usuario',
-					msgCI = 'EL nombre de usurio no puede ser igual a su número de identificación',
+					msgCI = 'El nombre de Usuario no puede contener su número de identificación',
 					modalTypeCI = 'alert-warning';
 					msgService(titleCI, msgCI, modalTypeCI, 0);
 					$("#username").removeClass('field-success').addClass('field-error');
 					return;
-				}else if(usuario == "" || !/^[a-z0-9_-]{6,16}$/i.test(usuario)){
+				}else if(usuario == "" || !regUserName.test(usuario)){
 					var titleCI = 'Nombre de usuario',
 					msgCI = 'El campo Usuario no puede estar vacío y debe tener un formato válido.',
 					modalTypeCI = 'alert-warning';
@@ -1119,6 +1128,23 @@ $(function(){
 			}
 		);
 
+		jQuery.validator.addMethod("valdiateUsername",function(value, element){
+			var isNotEqualToNroDocument = true;
+			var regUserName =/^[a-z0-9_-]{6,16}$/i;
+
+			if (country == 'Ec-bp') {
+				regUserName =/^([a-z]{2}[a-z0-9_]{4,14})$/i;
+				isNotEqualToNroDocument = value.indexOf(nro_doc) < 0 ? true: false;
+			}
+
+			var isValidRules = regUserName.test(value);
+			if (!isValidRules) {
+				$("#username").removeClass('field-success').addClass('field-error');
+			}
+
+			return isNotEqualToNroDocument && isValidRules;
+		}, msgErrorUserName);
+
 		// Metodo que valida si la fecha de nacimiento es una fecha valida y bisiesta
 		$.validator.addMethod("esBisiesto", function(value, element, regex){
 
@@ -1227,7 +1253,7 @@ $(function(){
 				"cargo_publico" : {"required":true, "expresionRegular":true},												//35
 				"institucion" : {"required":true, "expresionRegular2":true},												//36
 				"uif" : {"required":true},																					//37
-				"username":{"required":true, "nowhitespace":true, "username": /^[a-z0-9_-]{6,16}$/i},						//38
+				"username":{"required":true, "nowhitespace":true, "valdiateUsername": true},						//38
 				"userpwd": {"required":true, "minlength":8, "maxlength": 15,"validatePassword":true},												//39
 				"confirm_userpwd": {"required":true, "minlength":8, "maxlength": 15, "equalTo":"#userpwd"},					//40
 				"contrato": {"required": true},
@@ -1285,7 +1311,6 @@ $(function(){
 				"uif" : "El campo ¿Es sujeto obligado a informar UIF-Perú, conforme al artículo 3° de la Ley N° 29038? no puede estar vacío.",	//37
 				"username" : {																													//38
 					"required" : "El campo Usuario no puede estar vacío.",
-					"username": "El campo usuario no tiene un formato válido. Permitido alfanumérico y underscore (barra_piso),  min 6, max 16 caracteres",
 					"nowhitespace" : "El campo Usuario no permite espacios en blanco."
 				},
 				"userpwd" : "El campo Contraseña debe cumplir con los requerimientos",
