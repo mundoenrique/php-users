@@ -104,6 +104,7 @@ $lang['CUST_NOT_LOCKED'] = 'No fue posible realizar el bloqueo %s';
 $lang['CUST_INVALID_EXPIRATION_DATE'] = 'No fue posible obtener la fecha de vencimiento de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, por favor vuelve a intentarlo';
 $lang['CUST_LIMIT_REPLACEMENTS'] = 'Has alcanzado el limite de reposiciones.';
+$lang['CUST_INSUFFICIENT_FUNDS'] = 'Cliente no tiene fondos.';
 $lang['CUST_PIN_MANAGEMENT'] = 'Gestión de PIN';
 $lang['CUST_REASON_REQUEST'] = 'Motivo de la solicitud';
 $lang['CUST_SELECTION'] = 'Selecciona';
