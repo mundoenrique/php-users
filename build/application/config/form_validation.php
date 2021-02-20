@@ -256,6 +256,10 @@ $config = [
 		[
 			'field' => 'filterYear',
 			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'filterInputYear',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
 	],
 	'downloadMoves' => [
