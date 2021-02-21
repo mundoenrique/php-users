@@ -93,6 +93,7 @@ class Users_model extends CI_Model
 			if ($desdata->codPais != 'Ec-bp' && $cookie == 'default') {
 				$putSession = TRUE;
 			}
+
 			if ($desdata->codPais == 'Ec-bp' && $cookie == 'pichincha') {
 				$putSession = TRUE;
 			}
@@ -102,6 +103,22 @@ class Users_model extends CI_Model
 			$desdata = [
 				'rc' => -1,
 				'msg' => 'Usuario o Contraseña inválido'
+			];
+		}
+
+		$maintenance = array (
+			//'Usd',
+			//'Pe'
+			//'Ec-bp',
+			//'Co',
+			'Ve'
+		);
+
+		if (!empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
+			$putSession = FALSE;
+			$desdata = [
+				'rc' => 9997,
+				'msg' => 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor.'
 			];
 		}
 
