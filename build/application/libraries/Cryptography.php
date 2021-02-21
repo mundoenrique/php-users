@@ -90,7 +90,8 @@ class Cryptography {
 	 * @date Septiembre 25th, 2020
 	 * @param $data -> string dato a descifrar
 	 */
-	public function decryptOnlyOneData ($data) {
+	public function decryptOnlyOneData ($data)
+	{
 		if (lang('CONFIG_CYPHER_DATA') == 'ON') {
 			$data = json_decode(base64_decode($data));
 			$data = $this->decrypt(

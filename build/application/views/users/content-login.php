@@ -139,7 +139,7 @@ echo $insertRecaptcha;
 	<div class="dialog-small" id="dialog">
 		<div class="alert-simple alert-warning" id="message">
 			<span aria-hidden="true" class="icon-warning-sign"></span>
-			<p>No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong></p>
+			<p id="msg-error"></p>
 		</div>
 		<div class="form-actions">
 			<?php
