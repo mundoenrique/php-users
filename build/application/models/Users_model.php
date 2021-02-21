@@ -111,7 +111,7 @@ class Users_model extends CI_Model
 			//'Pe'
 			//'Ec-bp',
 			//'Co',
-			'Ve'
+			//'Ve'
 		);
 
 		if (!empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
