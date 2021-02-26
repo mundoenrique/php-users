@@ -78,6 +78,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
+						$produtImgRev = normalizeName($cardsRecords->nombre_producto).'_rev.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
@@ -86,10 +87,12 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = 'default.svg';
+							$produtImgRev = 'default_rev.svg';
 							$productUrl = 'images/programs';
 						}
 
 						$cardRecord->productImg = $produtImg;
+						$cardRecord->productImgRev = $cardsRecords->tvirtual ? $produtImgRev : '';
 						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
@@ -374,6 +377,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
+						$produtImgRev = normalizeName($cardsRecords->producto).'_rev.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
 						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
@@ -385,10 +389,12 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = 'default.svg';
+							$produtImgRev = 'default_rev.svg';
 							$productUrl = 'images/programs';
 						}
 
 						$cardRecord->productImg = $produtImg;
+						$cardRecord->productImgRev = $cardRecord->isVirtual ? $produtImgRev : '';
 						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);

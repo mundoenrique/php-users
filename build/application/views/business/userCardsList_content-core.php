@@ -46,6 +46,7 @@
           <input type="hidden" id="productName" name="productName" class="hidden" value="<?= $cards->productName ?>">
           <input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">
           <input type="hidden" id="productImg" name="productImg" class="hidden" value="<?= $cards->productImg ?>">
+					<input type="hidden" id="productImgRev" name="productImgRev" class="hidden" value="<?= $cards->productImgRev ?>">
           <input type="hidden" id="productUrl" name="productUrl" class="hidden" value="<?= $cards->productUrl ?>">
           <input type="hidden" id="status" name="status" class="hidden" value="<?= $cards->status ?>">
           <input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
