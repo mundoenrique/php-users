@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONFIG_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONF_VALIDATE_CAPTCHA'] = [
+	'signin',
+	'accessRecover',
+	'userIdentify'
+];
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -123,11 +128,6 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Ec-bg' => '3',
 	'Co' => '4',
 	'Mx-Bn' => '16',
-];
-$lang['CONF_MODULE_RECAPTCHA'] = [
-	'signin',
-	'accessRecover',
-	'userIdentify'
 ];
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';
