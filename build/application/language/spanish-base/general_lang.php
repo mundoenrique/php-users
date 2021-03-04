@@ -91,6 +91,7 @@ $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_FINISH_TITLE'] = 'Cierre de sesión';
 $lang['GEN_FINISH_TEXT'] = 'No se ha detectado actividad en la página, tu sesión está próxima a expirar.';
+$lang['GEN_CLOSE_SESSION'] = '¿Deseas cerrar tu sesión?';
 $lang['GEN_EXPIRED_SESSION'] = 'Tu sesión en %s ha caducado.';
 $lang['GEN_FINISHED_SESSION'] = 'Tu sesión en %s ha sido cerrada exitosamente.';
 $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
