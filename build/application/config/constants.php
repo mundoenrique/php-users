@@ -93,8 +93,22 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | as part of global configuration settings.
 |
 */
-$uriSegments  =  explode( "/", parse_url($_SERVER[ 'REQUEST_URI'], PHP_URL_PATH ));
-$proxy_ips = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
+$uriSegments  =  explode( "/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$proxyIps = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) ? 'public' : 'private';
+$timeZone = [
+	'bdb' => 				'America/Bogota',
+	'bg' => 				'America/Guayaquil',
+	'bnt' => 				'America/Mexico_City',
+	'bp' => 				'America/Guayaquil',
+	'co' => 				'America/Bogota',
+	'pb' => 				'America/Guayaquil',
+	'pe' => 				'America/Lima',
+	'pichincha' => 	'America/Guayaquil',
+	'us' => 				'America/Lima',
+	've' => 				'America/Caracas',
+];
+$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'UTC';
+date_default_timezone_set($timeZone);
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -114,7 +128,7 @@ defined('SESS_SAVE_PATH')		OR define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'
 defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
 defined('COOKIE_SECURE')		OR define('COOKIE_SECURE', $_SERVER['COOKIE_SECURE']);
-defined('PROXY_IPS')				OR define('PROXY_IPS', $proxy_ips == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
+defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER['REMOTE_ADDR'] : '');
 
 /*
 |--------------------------------------------------------------------------
@@ -176,5 +190,5 @@ defined('ARGON2_SALT')					OR define('ARGON2_SALT', $_SERVER['ARGON2_SALT']);
 */
 defined('KEY_API')	OR define('KEY_API', $_SERVER['KEY_API']);
 
-unset($uriSegments, $proxy_ips);
+unset($uriSegments, $proxyIps, $timeZone);
 
