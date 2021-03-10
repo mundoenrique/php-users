@@ -30,7 +30,7 @@
           <input type="hidden" name="cardNumberMask" class="hidden" id="cardNumberMask" value="<?= $cardNumberMask; ?>">
           <input type="hidden" name="fullName" class="hidden" id="fullName" value="<?= $fullName; ?>">
           <input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, $productUrl); ?>">
-					<input type="hidden" name="cardImageRev" class="hidden" id="cardImageRev" value="<?= $this->asset->insertFile($productImgRev, $productUrl); ?>">
+					<input type="hidden" name="cardImageRev" class="hidden" id="cardImageRev" value="<?= $this->asset->insertFile($productImgRev, $productUrlRev); ?>">
         </div>
       </div>
       <div class="flex col-12 mt-2">

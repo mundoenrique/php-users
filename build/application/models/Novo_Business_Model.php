@@ -80,20 +80,30 @@ class Novo_Business_Model extends NOVO_Model {
 						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
 						$produtImgRev = normalizeName($cardsRecords->nombre_producto).'_rev.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$productUrlRev = 'images/programs/'.$this->countryUri;
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = $this->countryUri.'_default.svg';
 						}
 
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
+							$produtImgRev = $this->countryUri.'_default.svg';
+						}
+
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = 'default.svg';
-							$produtImgRev = 'default_rev.svg';
 							$productUrl = 'images/programs';
+						}
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
+							$produtImgRev = 'default_rev.svg';
+							$productUrlRev = 'images/programs';
 						}
 
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productImgRev = $cardsRecords->tvirtual ? $produtImgRev : '';
 						$cardRecord->productUrl = $productUrl;
+						$cardRecord->productUrlRev = $productUrlRev;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
@@ -379,6 +389,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$produtImg = normalizeName($cardsRecords->producto).'.svg';
 						$produtImgRev = normalizeName($cardsRecords->producto).'_rev.svg';
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$productUrlRev = 'images/programs/'.$this->countryUri;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
 						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
 						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
@@ -387,14 +398,23 @@ class Novo_Business_Model extends NOVO_Model {
 							$produtImg = $this->countryUri.'_default.svg';
 						}
 
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
+							$produtImgRev = $this->countryUri.'_default.svg';
+						}
+
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
 							$produtImg = 'default.svg';
-							$produtImgRev = 'default_rev.svg';
 							$productUrl = 'images/programs';
+						}
+
+						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
+							$produtImgRev = 'default_rev.svg';
+							$productUrlRev = 'images/programs';
 						}
 
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productImgRev = $cardRecord->isVirtual ? $produtImgRev : '';
+						$cardRecord->productUrlRev = $productUrlRev;
 						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
