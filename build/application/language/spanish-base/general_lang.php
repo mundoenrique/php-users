@@ -44,6 +44,7 @@ $lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
+$lang['GEN_BTN_CLOSE'] = 'Cerrar';
 $lang['GEN_BTN_TO_RETURN'] = 'Regresar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_CONFIRM'] = 'Confirmar';

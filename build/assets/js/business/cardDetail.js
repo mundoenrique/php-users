@@ -1,6 +1,7 @@
 'use strict'
 var interval,inputModal,inputModalCard,inputModalCardOtp;
 var img = $('#cardImage').val();
+var imgRev = $('#cardImageRev').val();
 var brand = $('#brand').val();
 
 $(function () {
@@ -278,7 +279,7 @@ function sensitiveInformation() {
 		posAt: 'top+50px'
 	}
 
-	inputModal = '<div class="justify">' + lang.GEN_SENSITIVE_DATA + '</div>';
+	inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
@@ -289,34 +290,51 @@ function validateCardDetail() {
 			case 0:
 				$('#accept').addClass('virtualDetail-btn').removeClass('sensitive-btn');
 
-				response.modalBtn.maxHeight = 600;
-				response.modalBtn.width = 530;
-				response.modalBtn.posMy = 'top+50px';
-				response.modalBtn.posAt = 'top+50px';
-
 				inputModalCard = '<h4 class="h5">' + lang.GEN_MENU_CARD_DETAIL + '</h4>';
 				inputModalCard += '<div class="flex mt-3 mx-auto flex-wrap justify-center">';
-				inputModalCard += 	'<div class="card-details row justify-center ml-4 mr-5">';
-				inputModalCard += 		'<div class="card-detail p-1 mx-1">';
-				inputModalCard += 			'<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
-				inputModalCard += 			'<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
-				inputModalCard += 				'<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
-				inputModalCard += 				'<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
-				inputModalCard += 				'<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';
+				inputModalCard += 	'<div class="card-details row justify-center mx-5">';
+				inputModalCard += 		'<div class="card3d-contain">';
+				inputModalCard += 		  '<div class="card3d-automatic">';
+				inputModalCard += 		    '<div class="card-detail card3d-front">';
+				inputModalCard += 			    '<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
+				inputModalCard += 			    '<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+				inputModalCard += 				    '<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
+				inputModalCard += 			  	  '<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
+				inputModalCard += 				    '<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';
+				inputModalCard += 			    '</div>';
+				inputModalCard += 	    	'</div>';
+				inputModalCard += 		    '<div class="card-detail card3d-back">';
+				inputModalCard += 			    '<img class="item-img" src="' + imgRev + '" alt="' + response.dataDetailCard.cardholderName + '">';
+				inputModalCard += 			    '<div class="item-info p-2 white center">';
+				inputModalCard += 				    '<p class="item-cardnumber h4 black bold">' + response.dataDetailCard.securityCode + ' CVV2</p>';
+				inputModalCard += 			    '</div>';
+				inputModalCard += 	    	'</div>';
 				inputModalCard += 			'</div>';
 				inputModalCard += 		'</div>';
-				inputModalCard += 		'<div id="checked-form" class="form-group col-12 py-1">';
-				inputModalCard += 			'<div class="custom-control custom-switch custom-control-inline flex justify-center">';
-				inputModalCard += 				'<input id="travelAgency" class="custom-control-input" type="checkbox" name="travelAgency" >';
-				inputModalCard += 				'<label class="custom-control-label custom-switch-text" for="travelAgency" title="'+response.dataDetailCard.securityCode+'"></label>';
+				inputModalCard += 		'<div class="form-group col-12 pt-3">';
+				inputModalCard += 			'<div class="control-switch bold">';
+				inputModalCard += 				'<input type="checkbox" id="control-switch" name="check"/>';
+				inputModalCard += 				'<label for="control-switch" class="center trasnform"><i aria-hidden="true" class="icon-rotary h2 white"></i></label>';
 				inputModalCard += 			'</div>';
 				inputModalCard += 		'</div>';
 				inputModalCard += 	'</div>';
 				inputModalCard += '</div>';
 
+				response.modalBtn = {
+					btn1: {
+						text: lang.GEN_BTN_CLOSE,
+						action: 'destroy'
+					},
+					maxHeight : 600,
+					width : 530,
+					posMy: 'top+50px',
+					posAt: 'top+50px'
+				}
+
 				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.CONF_ICON_SUCCESS, response.modalBtn);
 
 				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.CONF_TIMER_MODAL_VIRTUAL+'s</span>');
+				clickCard3d();
 				startTimer(lang.CONF_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));
 			break;
 			case 2:
@@ -344,6 +362,31 @@ function validateCardDetail() {
 			break;
 		}
 	})
+}
+
+function clickCard3d() {
+	var card3d = $('.card3d-automatic');
+	var controlSwitch = $('#control-switch');
+
+	$('.control-switch').on('click', function() {
+		if (controlSwitch.prop('checked') == false) {
+			card3d.addClass('hover');
+			controlSwitch.prop('checked', true);
+		} else {
+			card3d.removeClass('hover');
+			controlSwitch.prop('checked', false);
+		}
+	})
+
+	card3d.on('click', function () {
+		if (card3d.hasClass('hover')) {
+			card3d.removeClass('hover');
+			controlSwitch.prop('checked', false);
+		} else {
+			card3d.addClass('hover');
+			controlSwitch.prop('checked', true);
+		}
+	});
 }
 
 function startTimer(duration, display) {
