@@ -87,7 +87,7 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = $this->countryUri.'_default.svg';
+							$produtImgRev = $this->countryUri.'_default_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
@@ -399,7 +399,7 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = $this->countryUri.'_default.svg';
+							$produtImgRev = $this->countryUri.'_default_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
