@@ -172,10 +172,11 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$this->folder = $this->countryUri;
-			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_MODULE_RECAPTCHA'));
+			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
 				"$this->countryUri/root-$this->skin",
+				"root-general",
 				"reboot",
 				"$this->folder/"."$this->skin-base"
 			];

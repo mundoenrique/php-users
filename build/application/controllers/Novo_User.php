@@ -70,7 +70,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"user/manageImageTerm",
+			"user/sharedFunctions",
 			"user/userIdentify"
 		);
 		$this->render->activeHeader = TRUE;
@@ -99,7 +99,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.mask-1.14.16",
 			"user/validPass",
 			"user/getRegions",
-			"user/manageImageTerm",
+			"user/sharedFunctions",
 			"user/signup"
 		);
 
@@ -228,7 +228,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"third_party/jquery.mask-1.14.16",
 			"user/getRegions",
-			"user/manageImageTerm",
+			"user/sharedFunctions",
 			"user/profileUser"
 		);
 

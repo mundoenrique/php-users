@@ -6,6 +6,11 @@ $(function() {
 	clearTimeout(resetTimesession);
 	clearTimeout(setTimesession);
 	sessionExpire();
+
+	$('#logout-session').on('click', function (e) {
+		e.preventDefault();
+		logoutInformation();
+	});
 });
 
 function sessionExpire() {
@@ -52,4 +57,20 @@ function finishSession() {
 			.removeClass('btn-large-xl');
 		})
 	})
+}
+
+function logoutInformation() {
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'redirect',
+			link: 'cerrar-sesion/inicio'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			action: 'destroy'
+		},
+	}
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
+
 }
