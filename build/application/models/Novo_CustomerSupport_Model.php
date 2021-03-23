@@ -81,10 +81,16 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response = $this->getToken->callWs_GetToken_Assets();
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 			break;
+			case -21:
+				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->msg = lang('CUST_UNLOCK_MESSAGE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 			case 29:
+			case -33:
 			case -300:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
-				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'temporal');
+				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), lang('CUST_TEMPORARY'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -185,9 +191,10 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				}
 			break;
 			case 29:
+			case -33:
 			case -300:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
-				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'permanente');
+				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), lang('CUST_TEMPORARY'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
