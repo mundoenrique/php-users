@@ -44,6 +44,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$headers = [];
 		$body = [];
 		$grafic = [];
+		$labels = [];
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -100,12 +101,14 @@ class Novo_Reports_Model extends NOVO_Model {
 
 					foreach ($items->series[0]->valores AS $pos => $value) {
 						$grafic[$pos]->value = $value;
+						$labels[$pos] = currencyFormat($value);
 					}
 				}
 
 				$this->response->data->headers = $headers;
 				$this->response->data->body = $body;
 				$this->response->data->grafic = $grafic;
+				$this->response->data->labels = $labels;
 			break;
 			case -150:
 				$this->response->code = 1;

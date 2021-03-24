@@ -24,7 +24,7 @@ if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
 		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
-		$accessUrl = $CI->config->item('access_url');
+		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
 
@@ -53,6 +53,25 @@ if (!function_exists('arrayTrim')) {
 		$value = trim($value);
 
 		return $value;
+	}
+}
+
+if(!function_exists('dbSearch')) {
+	function dbSearch($uri) {
+		$clients = explode(',', ACCESS_URL);
+		array_walk($clients, 'arrayTrim');
+
+		if (($pos = array_search('default', $clients)) !== FALSE) {
+			unset($clients[$pos]);
+		}
+
+		if (($pos = array_search('pichincha', $clients)) !== FALSE) {
+			unset($clients[$pos]);
+		}
+
+		$dbName = in_array($uri, $clients) ? $uri : 'alpha';
+
+		return 'cpo_' . $dbName;
 	}
 }
 

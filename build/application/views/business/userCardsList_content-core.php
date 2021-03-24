@@ -24,6 +24,9 @@
       <div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
         <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
         <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
+					<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
+					<small class="sb-disabled uppercase light truncate"><?= $cards->nomEmp?></small><br>
+					<?php endif; ?>
           <p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?>
             <span class="warning semibold h6 capitalize absolute ml-2 l-0"><br><?= $cards->virtualCard?></span>
           </p>
@@ -43,7 +46,9 @@
           <input type="hidden" id="productName" name="productName" class="hidden" value="<?= $cards->productName ?>">
           <input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">
           <input type="hidden" id="productImg" name="productImg" class="hidden" value="<?= $cards->productImg ?>">
+					<input type="hidden" id="productImgRev" name="productImgRev" class="hidden" value="<?= $cards->productImgRev ?>">
           <input type="hidden" id="productUrl" name="productUrl" class="hidden" value="<?= $cards->productUrl ?>">
+					<input type="hidden" id="productUrlRev" name="productUrlRev" class="hidden" value="<?= $cards->productUrlRev ?>">
           <input type="hidden" id="status" name="status" class="hidden" value="<?= $cards->status ?>">
           <input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
           <input type="hidden" id="cardsTotal" name="cardsTotal" class="hidden" value="<?= $cardsTotal ?>">

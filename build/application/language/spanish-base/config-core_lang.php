@@ -1,8 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
-$lang['CONFIG_CYPHER_DATA'] = 'ON';
-$lang['CONFIG_DUPLICATE_SESSION'] = 'ON';
+$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONFIG_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONF_VALIDATE_CAPTCHA'] = [
+	'signin',
+	'accessRecover',
+	'userIdentify'
+];
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -33,6 +38,7 @@ $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
 //CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'white';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
+$lang['CONF_BUSINESS_NAME'] = 'ON';
 //MENU
 $lang['CONIFG_SIGIN'] = 'ON';
 $lang['CONF_CARDS_LIST'] = 'ON';
@@ -82,6 +88,9 @@ $lang['CONF_COUNTRY_CODE'] = [
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
+$lang['CONF_UPDATE_SECOND_NAME'] = 'ON';
+$lang['CONF_UPDATE_PHONE_MOBILE'] = 'ON';
+$lang['CONF_UPDATE_EMAIL'] = 'ON';
 $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
@@ -96,6 +105,8 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_ID'] = 'OFF';
 $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_MOBILE'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [

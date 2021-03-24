@@ -200,29 +200,29 @@
               <div id="changePinInput" class="row hide">
                 <div class="form-group col-lg-4">
                   <label for="currentPin"><?= lang('CUST_CURRENT_PIN') ?></label>
-                  <input id="currentPin" class="form-control" type="password" name="currentPin" autocomplete="off">
+                  <input id="currentPin" class="form-control" type="password" name="currentPin" maxlength="4" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
                   <label for="newPin"><?= lang('CUST_NEW_PIN') ?></label>
-                  <input id="newPin" class="form-control" type="password" name="newPin" autocomplete="off">
+                  <input id="newPin" class="form-control" type="password" name="newPin" maxlength="4" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
                   <label for="confirmPin"><?= lang('CUST_CONFIRM_PIN') ?></label>
-                  <input id="confirmPin" class="form-control" type="password" name="confirmPin" autocomplete="off">
+                  <input id="confirmPin" class="form-control" type="password" name="confirmPin" maxlength="4" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
               </div>
               <div id="generatePinInput" class="row hide">
                 <div class="form-group col-lg-4">
                   <label for="generateNewPin"><?= lang('CUST_NEW_PIN') ?></label>
-                  <input id="generateNewPin" class="form-control" type="password" name="generateNewPin" autocomplete="off">
+                  <input id="generateNewPin" class="form-control" type="password" name="generateNewPin" maxlength="4" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-lg-4">
                   <label for="generateConfirmPin"><?= lang('CUST_CONFIRM_PIN') ?></label>
-                  <input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin" autocomplete="off">
+                  <input id="generateConfirmPin" class="form-control" type="password" name="generateConfirmPin" maxlength="4" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
               </div>

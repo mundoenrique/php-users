@@ -1,8 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h4 class="mt-1 pb-2 h4"><?= lang('USER_LOAD_DOCS'); ?></h4>
 <div class="row justify-center">
-  <div class="col-12 col-lg-7 my-auto">
-    <div class="row mr-2 mb-2">
+  <div class="col-12 my-auto">
+    <div class="row mr-2">
       <?php if(lang('CONF_LOAD_SELFIE') == 'ON'):?>
       <div class="col-4 flex items-center justify-center">
         <div class="form-group px-1 mb-2">
@@ -88,9 +87,9 @@
 			</div>
     </div>
   </div>
-  <div class="col-12 col-lg-4 flex justify-start">
+  <div class="col-12 flex justify-start">
     <div class="field-meter">
-      <h4><?= lang('USER_LOAD_DOCS_TITLE') ?></h4>
+      <h4 class="semibold"><?= lang('USER_LOAD_DOCS_TITLE') ?></h4>
       <ul class="pwd-rules">
         <div class="row">
           <div class="col-6 col-lg-12">

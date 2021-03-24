@@ -61,7 +61,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'login_user');
 		$data = ['data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'];
 		$data = json_encode($data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = new stdClass();
 		if ($data->data) {
@@ -224,7 +224,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'obtener_login');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'));
 		log_message('info', 'Salida encriptada obtener_login: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'obtener_login'));
 
@@ -256,7 +256,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 0, 'reset_password');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => 'Global', 'keyId' => 'CPONLINE'));
 		log_message('info', 'Salida encriptada reset_password: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 0, 'reset_password'));
 
@@ -319,7 +319,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'actualizar_password');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada actualizar_password: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'actualizar_password'));
 
@@ -358,7 +358,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'password_operaciones');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada password_operaciones: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_operaciones'));
 
@@ -404,7 +404,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'password_sms_crear');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada password_operaciones: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_crear'));
 
@@ -450,7 +450,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'password_sms_actualizar');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada password_operaciones: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_actualizar'));
 
@@ -481,7 +481,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'password_sms_eliminar');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada password_operaciones: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'password_sms_eliminar'));
 
@@ -534,7 +534,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'actualizar_password_operaciones');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada actualizar_password_operaciones: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'actualizar_password_operaciones'));
 		$salida = json_encode($desdata);
@@ -565,7 +565,7 @@ class Users_model extends CI_Model
 		$dataEncry = np_Hoplite_Encryption($data, 1, 'logout');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata('pais'), 'keyId' => $this->session->userdata('userName')));
 		log_message('info', 'Salida encriptada logout: ' . $data);
-		$response = np_Hoplite_GetWS('movilsInterfaceResource', $data);
+		$response = np_Hoplite_GetWS( $data);
 		$data = json_decode($response);
 		log_message('info', 'Before Logout:----------->>>>>>>>> ' . $response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data, 1, 'logout'));

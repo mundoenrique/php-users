@@ -11,6 +11,8 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="icon" type="image/<?= $ext ?>" href="<?= $this->asset->insertFile($favicon.'.'.$ext, 'images/favicon') ?>">
 	<?= $this->asset->insertCss(); ?>
+	<?= (in_array($module, lang('CONF_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
+	<?= $this->asset->insertJs(); ?>
 	<title><?= $titlePage; ?> - CPO</title>
 </head>
 
@@ -29,9 +31,6 @@
 	</main>
 	<a id="download-file" href="javascript:" download></a>
 	<?php $this->load->view('footer_content-core') ?>
-	<?= ($module == 'signin' && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
-	<?= $this->asset->insertJs(); ?>
 	<?php $this->load->view('insert_variables') ?>
 </body>
-
 </html>

@@ -29,7 +29,7 @@ class Detail_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1,'detail_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada DETALLE : ".$data);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		if (isset($data->data)) {
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'detail_load'));
@@ -69,7 +69,7 @@ class Detail_model extends CI_Model {
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada exportar : ".$data);
 
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 		$data = json_decode($response);
 		$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'exportar'));
 
@@ -102,7 +102,7 @@ class Detail_model extends CI_Model {
 		$dataEncry = np_Hoplite_Encryption($data,1,'movimientos_load');
 		$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 		log_message("info", "Salida encriptada movimientos_load : ".$data);
-		$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+		$response = np_Hoplite_GetWS($data);
 	  	$data = json_decode($response);
 	  	$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'movimientos_load'));
 

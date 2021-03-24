@@ -28,18 +28,23 @@ class Tool_Api {
 
 		$objRequest = new stdClass();
 		$this->nameApi = $nameApi;
+		$decrypParams = [];
 		$typeHeader = $this->CI->input->get_request_header('Content-Type', TRUE);
 		$typeResource = preg_split('/;/i', $typeHeader)[0];
 		log_message('DEBUG', '['.$this->nameApi.'] readHeader type resource: ' . json_encode($typeResource));
 
 		$objRequest = json_decode($this->CI->input->raw_input_stream);
-		$sizeObject = strval(round(strlen($objRequest->request)/1000,2));
-		$infoDecryptParams = [];
-		log_message('DEBUG', '['.$this->nameApi.'] getContentAPI object received ('.$sizeObject.'KB): ' . json_encode($this->shortValues($objRequest)));
+		if (property_exists($objRequest, 'request')) {
+			if (is_string($objRequest->request)) {
+				$sizeObject = strval(round(strlen($objRequest->request)/1000,2));
+				log_message('DEBUG', '['.$this->nameApi.'] size object received ('.$sizeObject.'KB)');
+			}
+			log_message('DEBUG', '['.$this->nameApi.'] detail object received: ' . json_encode($this->shortValues($objRequest)));
 
-		$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
+			$decrypParams = $this->getPropertiesRequest($objRequest, $nameApi);
+		}
 
-		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams): [];
+		return count($decrypParams) > 0 ? $this->getContentRequest($decrypParams) : [];
 	}
 
 	/**
@@ -73,6 +78,7 @@ class Tool_Api {
 		if (!is_null($objRequest) || !is_null($nameApi)) {
 			$this->setContract($nameApi);
 
+			$decrypParams[$this->namePropRequest] = $objRequest->{$this->namePropRequest};
 			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
 				if (is_string($objRequest->{$this->namePropRequest})) {
 					$decrypParams[$this->namePropRequest] = json_decode(
@@ -93,16 +99,21 @@ class Tool_Api {
 	 */
 	private function shortValues ($objectProcess, $property = NULL)
 	{
+		log_message('INFO', 'Novo Tool_Api: shortValues Method Initialized');
+
 		$infoDecryptParams = [];
 		$arrayToProcess = (array) $objectProcess;
-		if (!is_null($property)) {
-			$arrayToProcess = (array) $objectProcess[$property];
+		foreach ($arrayToProcess as $param => $value) {
+			if (is_string($value)) {
+				$value = $this->prepareForDisplay($param, $value);
+				$infoDecryptParams[$param] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
+			}else{
+				foreach ($value as $property => $value) {
+					$value = $this->prepareForDisplay($property, $value);
+					$infoDecryptParams[$property] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
+				}
+			}
 		}
-
-		foreach ($arrayToProcess as $property => $value) {
-			$infoDecryptParams[$property] = strlen($value) < 150 ? $value : substr($value,0,147).'...';
-		}
-
 		return $infoDecryptParams;
 	}
 	/**
@@ -182,5 +193,16 @@ class Tool_Api {
 		return is_string($property) && !strpos($property, 'base64') ?
 			$this->CI->security->xss_clean(strip_tags($property)) :
 			$property;
+	}
+
+	/**
+	 * @info Coloca una máscara a las llaves de arreglo marcadas como segura,
+	 *  desde el archivo de configuración correspondiente.
+	 * @author Pedro Torres
+	 * @date Octubre 1, 2020
+	 */
+	private function prepareForDisplay($property = NULL,$value = '')
+	{
+		return in_array($property, lang('CONF_FILTER_ATTRIBUTES_LOG')) ? "[Protected => ******** ]" : $value;
 	}
 }

@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			log_message("info", "SALIDA ENCRIPTADA ORIGEN : ".$data);
 
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasOrigen_load'));
 
@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1,'ctasDestino_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada Cta Destino : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'ctasDestino_load'));
 			if(isset($desdata->cuentaDestinoPlata)) {
@@ -122,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1,'validarClave_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada Validar Clave : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'validarClave_load'));
 
@@ -154,7 +154,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1,'claveAutenticacion_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada claveAutenticacion_load : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'claveAutenticacion_load'));
 
@@ -192,7 +192,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1,'validarClaveAutenticacion_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 			log_message("info", "Salida encriptada validarClaveAutenticacion_load : ".$data);
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'validarClaveAutenticacion_load'));
 
@@ -230,7 +230,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$dataEncry = np_Hoplite_Encryption($data,1,'procesarTransferencia_load');
 			$data = json_encode(array('data' => $dataEncry, 'pais' => $this->session->userdata("pais"), 'keyId'=> $this->session->userdata("userName")));
 
-			$response = np_Hoplite_GetWS("movilsInterfaceResource",$data);
+			$response = np_Hoplite_GetWS($data);
 			$data = json_decode($response);
 			log_message("info", "Response encriptado procesarTransferencia_load------>>>>>>".$response);
 			$desdata = json_decode(np_Hoplite_Decrypt($data->data,1,'procesarTransferencia_load'));
