@@ -113,7 +113,9 @@ $lang["USER_TERMS_CONTENT"] = '
 ';
 $lang['USER_ADD_F_DOC'] = 'Agregar anverso del INE';
 $lang['USER_ADD_B_DOC'] = 'Agregar reverso del INE';
-$lang['USER_PASS_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifícala.';
-$lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido. Por favor verifica tus datos.';
+$lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad (CURP) inválido, verifica tus datos e intenta de nuevo.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos.';
+$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido, verifica e intenta de nuevo.";
+$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento incorrecto, tu usuario será bloqueado.";
+$lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos incorrectos de acceso, recupéralo <a class="primary hyper-link" href="%s">aquí</a>';
