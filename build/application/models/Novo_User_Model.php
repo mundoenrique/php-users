@@ -641,7 +641,7 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('CallWs_UserIdentify');
 	}
 	/**
-	 * @info Método validar la existencia delnombre de usuario
+	 * @info Método validar la existencia del nombre de usuario
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date jun 10th, 2020
 	 */
@@ -804,20 +804,20 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->msg = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->response->msg = lang('USER_SATISFACTORY_REG');
 				$this->session->sess_destroy();
 			break;
 			case -206:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->response->msg = lang('USER_REG_NOT_CONFIRMED');
 				$this->session->sess_destroy();
 			break;
 			case -271:
 			case -335:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->response->msg = lang('USER_REG_SOME_DATA');
 				$this->session->sess_destroy();
 			break;
 			case -317:
@@ -826,25 +826,25 @@ class Novo_User_Model extends NOVO_Model {
 			case -311:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El registro fue realizado; aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>.<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+				$this->response->msg = lang('USER_REG_INACTIVE_CARD');
 				$this->session->sess_destroy();
 			break;
 			case -181:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro.';
+				$this->response->msg = lang('USER_REGISTERED_MAIL');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -284:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El telefóno movil que indicas ya se encuentra registrado, por favor intenta con otro.';
+				$this->response->msg = lang('USER_REGISTERED_PHONE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -397:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'Verifica tus datos e intenta de nuevo. <br>Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
+				$this->response->msg = lang('USER_CHECK_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -102:
@@ -865,7 +865,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 6000:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'No fue posible validar tus datos, por favor verifícalos e intenta nuevamente.';
+				$this->response->msg = lang('USER_NOT_VALIDATE_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case 5101:
@@ -884,7 +884,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 5114:
 				$this->response->title = lang('GEN_MENU_SIGNUP');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
+				$this->response->msg = lang('USER_VERIFY_DNI');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			default:
@@ -923,13 +923,13 @@ class Novo_User_Model extends NOVO_Model {
 
 				if ($this->session->terms == '0') {
 					$this->response->code = 4;
-					$this->response->msg = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
+					$this->response->msg = lang('USER_ACCEPT_TERMS');
 					$modal = TRUE;
 				}
 
 				if ($this->session->longProfile == 'S' && $this->session->affiliate == '0') {
 					$this->response->code = 4;
-					$this->response->msg = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';
+					$this->response->msg = lang('USER_ELECTRONIC_MONEY');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 					$modal = TRUE;
 				}
@@ -1326,7 +1326,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'El correo eléctronico que indicas ya se encuentra registrado, por favor intenta con otro.';
+				$this->response->msg = lang('USER_REGISTERED_MAIL');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -238:
