@@ -190,6 +190,15 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'permanente');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
+			case -578:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = lang('CUST_REPLACEMENT_NOT_PROCCESS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case -579:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = lang('CUST_INSUFFICIENT_FUNDS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
 		}
 
 		return $this->responseToTheView('callWs_Replacement');

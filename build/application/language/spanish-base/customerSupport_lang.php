@@ -101,6 +101,7 @@ $lang['CUST_DATA_INVALIDATED'] = 'Los campos introducidos son inválidos, verifi
 $lang['CUST_FAILED_ATTEMPTS'] = 'Has superado la cantidad de intentos fallidos por el día de hoy, por favor intenta mañana.';
 $lang['CUST_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_NOT_LOCKED'] = 'No fue posible realizar el bloqueo %s';
+$lang['CUST_REPLACEMENT_NOT_PROCCESS'] = 'No fue posible realizar el cobro de la reposición';
 $lang['CUST_INVALID_EXPIRATION_DATE'] = 'No fue posible obtener la fecha de vencimiento de la tarjeta %s, por favor vuelve a intentarlo';
 $lang['CUST_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, por favor vuelve a intentarlo';
 $lang['CUST_LIMIT_REPLACEMENTS'] = 'Has alcanzado el limite de reposiciones.';
