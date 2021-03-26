@@ -216,7 +216,7 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-12 col-lg-8  input-height <?= $skipOtherPhone; ?>">
-                    <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?></label>
+                    <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <div class="form-row">
                       <div class="form-group col-6 input-height">
                         <select id="phoneType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreOtherPhone; ?>" name="phoneType">
