@@ -2,7 +2,7 @@
 function validateForms(form) {
 	formInputTrim(form);
 	var validCountry = country;
-	var onlyNumber = /^[0-9]{3,20}$/;
+	var onlyNumber = /^[0-9]{2,20}$/;
 	var onlyOneNumber = /^[0-9]{1}$/;
 	var onlyOneLetter = /^[SCV]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
