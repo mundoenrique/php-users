@@ -611,6 +611,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -184:
+			case -304:
 			case -308:
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_INVALID_DATA');

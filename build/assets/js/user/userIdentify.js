@@ -17,15 +17,6 @@ $(function () {
 		btnText = $(this).html().trim();
 		validateForms(form);
 
-		if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
-			if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
-				delete data.cardPIN;
-				delete data.physicalCard;
-			} else {
-				delete data.virtualCard;
-			}
-		}
-
 		if (form.valid()) {
 			data = getDataForm(form);
 			$(this).html(loader);
@@ -34,6 +25,15 @@ $(function () {
 			  data.token = recaptchaToken;
 				validateIdentity();
 			});
+		}
+
+		if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
+			if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
+				delete data.cardPIN;
+				delete data.physicalCard;
+			} else {
+				delete data.virtualCard;
+			}
 		}
 	});
 
@@ -115,7 +115,7 @@ function validateIdentity() {
 }
 
 function resetInput(){
-	form.find('input:text').val('').removeAttr('aria-describedby');
-	form.find('.help-block').text('');
-	form.find('.has-error').removeClass('has-error');
+	$('#identityForm').find('input:text, input:password').val('').removeAttr('aria-describedby');
+	$('#identityForm').find('.help-block').text('');
+	$('#identityForm').find('.has-error').removeClass('has-error');
 }
