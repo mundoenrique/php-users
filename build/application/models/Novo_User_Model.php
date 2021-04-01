@@ -584,7 +584,8 @@ class Novo_User_Model extends NOVO_Model {
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'longProfile' => $userData->longProfile,
-					'cardNumber' => $dataRequest->numberCard ?? ''
+					'cardNumber' => isset($dataRequest->numberCard) ? $dataRequest->numberCard : isset($response->afiliacion->notarjeta) && $response->afiliacion->notarjeta != '' ? $response->afiliacion->notarjeta : isset($response->user->numeroCuentaRecarga) && $response->user->numeroCuentaRecarga != '' ? $response->user->numeroCuentaRecarga : ''
+
 				];
 				$this->session->set_userdata($userSess);
 			break;
