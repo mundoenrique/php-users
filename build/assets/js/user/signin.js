@@ -13,6 +13,7 @@ $(function () {
 
 	$('#signInBtn').on('click', function (e) {
 		e.preventDefault();
+		$('#userPass').attr('type', 'password');
 		form = $('#signInForm');
 		validateForms(form);
 

@@ -569,6 +569,15 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->response->data->signUpData = $userData;
 				$this->response->modal = TRUE;
+				$cardNumber = '';
+
+				if (isset($dataRequest->numberCard)) {
+					$cardNumber = $dataRequest->numberCard;
+				} elseif (isset($response->afiliacion->notarjeta)) {
+					$cardNumber = $response->afiliacion->notarjeta;
+				} elseif ($response->user->numeroCuentaRecarga) {
+					$cardNumber = $response->user->numeroCuentaRecarga;
+				}
 
 				$userSess = [
 					'userIdentity' => TRUE,
@@ -584,7 +593,7 @@ class Novo_User_Model extends NOVO_Model {
 					'countryUri' => $this->config->item('country-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'longProfile' => $userData->longProfile,
-					'cardNumber' => isset($dataRequest->numberCard) ? $dataRequest->numberCard : isset($response->afiliacion->notarjeta) && $response->afiliacion->notarjeta != '' ? $response->afiliacion->notarjeta : isset($response->user->numeroCuentaRecarga) && $response->user->numeroCuentaRecarga != '' ? $response->user->numeroCuentaRecarga : ''
+					'cardNumber' => $cardNumber
 
 				];
 				$this->session->set_userdata($userSess);
