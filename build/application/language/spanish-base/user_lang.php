@@ -33,7 +33,7 @@ $lang['USER_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> igua
 $lang['USER_PASS_CHANGED'] = 'La contraseña fue cambiada exitosamente. %s';
 $lang['USER_PASS_LOGIN'] = '<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['USER_PASS_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
-$lang['USER_PASS_INCORRECT'] = 'La contraseña actual es incorrecta.<br>Por favor verifícala e intenta de nuevo.';
+$lang['USER_PASS_INCORRECT'] = 'La contraseña actual es incorrecta, verifícala e intenta de nuevo.';
 $lang['USER_RECOVER_VERIFY_DATA'] = 'Verificación de datos';
 $lang['USER_RECOVER_PASS'] = 'Para recuperar tu usuario o restablecer tu contraseña de acceso a <span class="bold">%s</span>, debes seleccionar la opción correspondiente e ingresar los datos requeridos.';
 $lang['USER_RECOVER_NEED'] = 'Necesito recuperar mi';
@@ -552,3 +552,15 @@ $lang['USER_RECOVER_DOC_TYPE'] = [
 $lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+//USER REGISTER
+$lang['USER_SATISFACTORY_REG'] = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+$lang['USER_REG_NOT_CONFIRMED'] = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+$lang['USER_REG_SOME_DATA'] = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+$lang['USER_REG_INACTIVE_CARD'] = 'El registro fue realizado; aunque tu tarjeta no fue activada. Comunícate con el <strong>Centro de Contacto</strong>.<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
+$lang['USER_REGISTERED_MAIL'] = 'El correo eléctronico que indicas ya se encuentra registrado, intenta con otro.';
+$lang['USER_REGISTERED_PHONE'] = 'El telefóno movil que indicas ya se encuentra registrado, intenta con otro.';
+$lang['USER_CHECK_DATA'] = 'Verifica tus datos e intenta de nuevo. <br>Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
+$lang['USER_NOT_VALIDATE_DATA'] = 'No fue posible validar tus datos, por favor verifícalos e intenta nuevamente.';
+$lang['USER_VERIFY_DNI'] = 'Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
+$lang['USER_ACCEPT_TERMS'] = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
+$lang['USER_ELECTRONIC_MONEY'] = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';

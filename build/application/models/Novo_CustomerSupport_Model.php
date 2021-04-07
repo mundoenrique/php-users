@@ -82,9 +82,19 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
 			break;
 			case 29:
+			case -21:
+			case -33:
 			case -300:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
-				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'temporal');
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
+
+				if ($this->dataRequest->codBloqueo = $dataRequest->status == 'PB') {
+					$this->response->msg = lang('CUST_UNLOCK_MESSAGE');
+				}
+
+				if ($this->dataRequest->codBloqueo = $dataRequest->status == '') {
+					$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), lang('CUST_TEMPORARY'));
+				}
+
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
@@ -185,9 +195,19 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				}
 			break;
 			case 29:
+			case -33:
 			case -300:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
-				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), 'permanente');
+				$this->response->msg = novoLang(lang('CUST_NOT_LOCKED'), lang('CUST_PERMANENT'));
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+			case -578:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = lang('CUST_REPLACEMENT_NOT_PROCCESS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case -579:
+				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
+				$this->response->msg = lang('CUST_INSUFFICIENT_FUNDS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}
