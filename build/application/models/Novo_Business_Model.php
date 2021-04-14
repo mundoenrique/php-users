@@ -77,26 +77,25 @@ class Novo_Business_Model extends NOVO_Model {
 
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
-						$produtImg = normalizeName($cardsRecords->nombre_producto).'.svg';
-						$produtImgRev = normalizeName($cardsRecords->nombre_producto).'_rev.svg';
+						$produtImgName = normalizeName($cardsRecords->nombre_producto);
+						$produtImg =  lang('GEN_PROGRAM_IMG_DEFAULT');
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$produtImgRev = lang('GEN_PROGRAM_IMG_DEFAULT_REV');
 						$productUrlRev = 'images/programs/'.$this->countryUri;
 
-						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
-							$produtImg = $this->countryUri.'_default.svg';
+						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
+							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
 						}
 
-						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = $this->countryUri.'_default_rev.svg';
+						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
+							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
-							$produtImg = 'default.svg';
 							$productUrl = 'images/programs';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = 'default_rev.svg';
 							$productUrlRev = 'images/programs';
 						}
 
@@ -386,29 +385,28 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
-						$produtImg = normalizeName($cardsRecords->producto).'.svg';
-						$produtImgRev = normalizeName($cardsRecords->producto).'_rev.svg';
+						$produtImgName = normalizeName($cardsRecords->producto);
+						$produtImg =  lang('GEN_PROGRAM_IMG_DEFAULT');
 						$productUrl = 'images/programs/'.$this->countryUri;
+						$produtImgRev = lang('GEN_PROGRAM_IMG_DEFAULT_REV');
 						$productUrlRev = 'images/programs/'.$this->countryUri;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
 						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
 						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 
-						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
-							$produtImg = $this->countryUri.'_default.svg';
+						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
+							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
 						}
 
-						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = $this->countryUri.'_default_rev.svg';
+						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
+							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImg))) {
-							$produtImg = 'default.svg';
 							$productUrl = 'images/programs';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->countryUri.'/'.$produtImgRev))) {
-							$produtImgRev = 'default_rev.svg';
 							$productUrlRev = 'images/programs';
 						}
 
