@@ -15,3 +15,5 @@ $lang['GEN_CONTACTS'] = [
 ];
 //LINKS
 $lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecoverOTP';
+// PROGRAM IMAGES
+$lang['GEN_PROGRAM_IMG_DEFAULT'] =	'pb_default.svg';
