@@ -19,21 +19,22 @@ $(function () {
 
 		if (form.valid()) {
 			data = getDataForm(form);
+
+			if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
+				if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
+					delete data.cardPIN;
+					delete data.physicalCard;
+				} else {
+					delete data.virtualCard;
+				}
+			}
+
 			$(this).html(loader);
 			insertFormInput(true);
 			getRecaptchaToken('UserIdentify', function (recaptchaToken) {
 			  data.token = recaptchaToken;
 				validateIdentity();
 			});
-		}
-
-		if (lang.CONF_CHANGE_VIRTUAL == 'ON') {
-			if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
-				delete data.cardPIN;
-				delete data.physicalCard;
-			} else {
-				delete data.virtualCard;
-			}
 		}
 	});
 
