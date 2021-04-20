@@ -348,14 +348,14 @@
           </fieldset>
           <!-- Datos de usuario -->
           <?php $index = array_search(lang('USER_DATA_USER'), $stepTitles) + 1; ?>
-          <fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
+          <fieldset class="col-12 form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
             <div class="dataUser col-12 pb-3">
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="col-6">
                     <div class="row">
                       <div class="form-group col-12">
-                        <div class="col-lg-6 pl-lg-0 pr-lg-2 pl-0 pr-0 input-height">
+                        <div class="col-lg-6 pl-lg-0 pl-0 pr-0 input-height">
                           <label for="nickName"><?= lang('GEN_USER'); ?></label>
                           <div class="input-group">
                             <input id="nickName" class="form-control pwd-input available" type="text" name="nickName">
@@ -475,14 +475,14 @@
           <?php else : ?>
           <!-- Datos de usuario -->
           <?php $index = array_search(lang('USER_DATA_USER'), $stepTitles) + 1; ?>
-          <fieldset class="form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
+          <fieldset class="col-12 form-group ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
             <div class="dataUser col-12 pb-3">
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="col-6">
                     <div class="row">
                       <div class="form-group col-12">
-                        <div class="col-lg-12 pl-lg-0 pr-lg-2 pl-0 pr-0 input-height">
+                        <div class="col-lg-12 pl-lg-0 pl-0 pr-0 input-height">
                           <label for="nickName"><?= lang('GEN_USER'); ?></label>
                           <div class="input-group">
                             <input id="nickName" class="form-control pwd-input available" type="text" name="nickName">
@@ -538,7 +538,7 @@
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
-              <div class="multi-step-button mb-5">
+              <div class="multi-step-button flex items-center justify-end mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
                 <?php if ($index == count($stepTitles)) : ?>
                 <button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
@@ -564,7 +564,7 @@
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
-              <div class="multi-step-button mb-5">
+              <div class="multi-step-button flex items-center justify-end mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
                 <button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
               </div>

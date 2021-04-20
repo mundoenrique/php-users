@@ -43,9 +43,9 @@ class NOVO_Controller extends CI_Controller {
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
 		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
 		$this->render->logged = $this->session->logged;
+		$this->render->userId = $this->session->userId;
 		$this->appUserName = $this->session->userName;
 		$this->products = $this->session->has_userdata('products');
-		$this->render->userId = $this->session->userId;
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
 		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
@@ -196,7 +196,7 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			if ($this->render->logged) {
+			if ($this->render->logged || $this->render->userId) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"sessionControl"

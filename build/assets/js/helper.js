@@ -120,7 +120,7 @@ function callNovoCore(who, where, request, _response_) {
 		formData.append('plot', btoa(cpo_cook));
 	}
 
-	if (logged) {
+	if (logged || userId) {
 		clearTimeout(resetTimesession);
 		clearTimeout(setTimesession);
 		sessionExpire();

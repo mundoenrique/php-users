@@ -13,6 +13,7 @@
 	var data = <?= $data ?? 0; ?> ;
 	var modalBtn = <?= $modalBtn ?? 0; ?> ;
 	var logged = <?= json_encode($this->session->has_userdata('logged')); ?> ;
+	var userId = <?= json_encode($this->session->has_userdata('userId')); ?> ;
 	var sessionTime = <?= $sessionTime; ?> ;
 	var callModal = <?= $callModal; ?> ;
 	var callServer = <?= $callServer; ?> ;
