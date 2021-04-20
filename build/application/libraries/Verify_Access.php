@@ -130,12 +130,12 @@ class Verify_Access {
 			}
 
 			switch($module) {
-				case 'keepSession':
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
+				case 'keepSession':
 				case 'professionsList':
 				case 'statesList':
 				case 'cityList':
