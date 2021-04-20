@@ -1364,6 +1364,10 @@ class Novo_User_Model extends NOVO_Model {
 		$this->makeAnswer($response);
 		$this->response->code = 0;
 
+		foreach ($this->session->flashdata() as $key => $value) {
+			$this->session->set_flashdata($key, $value);
+		}
+
 		return $this->responseToTheView('KeepSession');
 	}
 	/**
