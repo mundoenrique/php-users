@@ -10,7 +10,7 @@ $config['scores_recapcha'] = [
 		'score' => 0
 	],
 	'testing' => [
-		'score' => 0.3
+		'score' => 0
 	],
 	'production' => [
 		'score' => 0.4
