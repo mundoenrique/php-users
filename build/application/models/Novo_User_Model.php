@@ -772,7 +772,7 @@ class Novo_User_Model extends NOVO_Model {
 				'antiguedad_laboral' => $dataRequest->laborOld ?? '',
 				'profesion' => $dataRequest->profession ?? '',
 				'cargo' => $dataRequest->position ?? '',
-				'ingreso_promedio_mensual' => $dataRequest->averageIncome ? (float)$dataRequest->averageIncome : '',
+				'ingreso_promedio_mensual' => $dataRequest->averageIncome ? floatFormat($dataRequest->averageIncome) : '',
 				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
 				'cargo_publico' => $dataRequest->publicOffice ?? '',
 				'institucion_publica' => $dataRequest->publicInst ?? '',
@@ -948,7 +948,7 @@ class Novo_User_Model extends NOVO_Model {
 		}
 
 		$profileData = new stdClass();
-		$profileData->nickName = $response->registro->user->userName ?? '';
+		$profileData->nickNameProfile = $response->registro->user->userName ?? '';
 		$profileData->firstName = $response->registro->user->primerNombre ?? '';
 		$profileData->middleName = $response->registro->user->segundoNombre ?? '';
 		$profileData->lastName = $response->registro->user->primerApellido ?? '';
@@ -1234,7 +1234,7 @@ class Novo_User_Model extends NOVO_Model {
 				'antiguedad_laboral' => $dataRequest->laborOld ?? '',
 				'profesion' => $dataRequest->profession ?? '',
 				'cargo' => $dataRequest->position ?? '',
-				'ingreso_promedio_mensual' => $dataRequest->averageIncome ?? '',
+				'ingreso_promedio_mensual' => $dataRequest->averageIncome ? floatFormat($dataRequest->averageIncome) : '',
 				'cargo_publico_last2' => $dataRequest->publicOfficeOld ?? '',
 				'cargo_publico' => $dataRequest->publicOffice ?? '',
 				'institucion_publica' => $dataRequest->publicInst ?? '',

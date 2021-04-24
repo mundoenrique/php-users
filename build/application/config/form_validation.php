@@ -5,7 +5,7 @@ $config = [
 	'signin' => [
 		[
 			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ.\-+&\@\*]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\wñÑ .,+-_&\@\*]+)+$/i]|required'
 		],
 		[
 			'field' => 'userPass',
@@ -126,8 +126,8 @@ $config = [
 	],
 	'updateProfile' => [
 		[
-			'field' => 'nickName',
-			'rules' => 'trim|regex_match[/^([a-z0-9_])+$/i]|required'
+			'field' => 'nickNameProfile',
+			'rules' => 'trim|regex_match[/^([\wñÑ .,+-_&\@\*]+)+$/i]|required'
 		],
 		[
 			'field' => 'idType',

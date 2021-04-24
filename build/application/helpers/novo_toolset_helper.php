@@ -309,3 +309,15 @@ if (! function_exists('currencyFormat')) {
 		return $amount;
 	}
 }
+
+if (! function_exists('floatFormat')) {
+	function floatFormat($num) {
+
+		$arrayNum = explode(lang('GEN_DECIMAL'), $num);
+    $arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
+		$floatNum = $arrayNum[0].'.'.$arrayNum[1];
+
+		return $floatNum;
+
+	}
+}
