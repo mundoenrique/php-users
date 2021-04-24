@@ -7,6 +7,7 @@ function validateForms(form) {
 	var onlyOneLetter = /^[SCV]{1}$/;
 	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
 	var validNickName = new RegExp(lang.VALIDATE_REGEX_NICKNAME, 'i');
+	var validNickNameProfile = new RegExp(lang.VALIDATE_REGEX_NICKNAME_PROFILE, 'i');
 	var regNumberValid = /^['a-z0-9']{6,45}$/i;
 	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
 	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
@@ -14,7 +15,7 @@ function validateForms(form) {
 	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
 	var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
 	var emailValid = /^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^([\w.\-+&ñÑ\@\* ]+)+$/i;
+	var alphanumunder = /^([\w.\-+&ñÑ .,_\@\* ]+)+$/i;
 	var alphanum = /^[a-z0-9]+$/i;
 	var userPassword = validatePass;
 	var numeric = /^[0-9]+$/;
@@ -61,6 +62,7 @@ function validateForms(form) {
 			"codeOTP": { required: true, pattern: validCode, maxlength: 8 },
 			"acceptTerms": { required: true },
 			"nickName": { required: true, pattern: validNickName, differs: lang.VALIDATE_NICK_DIFFER, dbAvailable: true },
+			"nickNameProfile": { required: true, pattern: validNickNameProfile, differs: lang.VALIDATE_NICK_DIFFER, dbAvailable: true },
 			"firstName": { required: true, pattern: alphaName },
 			"middleName": { pattern: alphaName },
 			"lastName": { required: true, pattern: alphaName },
@@ -164,6 +166,12 @@ function validateForms(form) {
 			},
 			"acceptTerms": lang.VALIDATE_ACCEPT_TERMS,
 			"nickName": {
+				required: lang.VALIDATE_NICK_REQ,
+				pattern: lang.VALIDATE_NICK_PATT,
+				differs: lang.VALIDATE_NICK_DIFFER_TEXT,
+				dbAvailable: lang.VALIDATE_AVAILABLE_NICKNAME,
+			},
+			"nickNameProfile": {
 				required: lang.VALIDATE_NICK_REQ,
 				pattern: lang.VALIDATE_NICK_PATT,
 				differs: lang.VALIDATE_NICK_DIFFER_TEXT,

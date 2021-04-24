@@ -205,16 +205,16 @@ function getResponseServ(currentaction) {
 
 	callNovoCore(who, where, data, function (response) {
 		if (currentaction == 'ValidNickName') {
-			$('#nickName').prop('disabled', false)
+			$('#nickNameProfile').prop('disabled', false)
 			switch (response.code) {
 				case 0:
-					$('#nickName')
+					$('#nickNameProfile')
 						.removeClass('has-error')
 						.addClass('has-success available')
 						.parent('.input-group').siblings('.help-block').text('');
 					break;
 				case 1:
-					$('#nickName')
+					$('#nickNameProfile')
 						.addClass('has-error')
 						.removeClass('has-success available')
 						.parent('.input-group').siblings('.help-block').text(response.msg);

@@ -348,8 +348,8 @@
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="form-group col-4">
-                    <label for="nickName"><?= lang('USER_NICK_NAME') ?></label>
-                    <input id="nickName" class="form-control available" type="text" name="nickName" value="<?= $nickName; ?>" readonly
+                    <label for="nickNameProfile"><?= lang('USER_NICK_NAME') ?></label>
+                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -445,8 +445,8 @@
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="form-group col-4">
-                    <label for="nickName"><?= lang('USER_NICK_NAME') ?></label>
-                    <input id="nickName" class="form-control available" type="text" name="nickName" value="<?= $nickName; ?>" readonly
+                    <label for="nickNameProfile"><?= lang('USER_NICK_NAME') ?></label>
+                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>

@@ -41,6 +41,7 @@ $lang['VALIDATE_MOBIL'] = '^[0-9]{7,15}$';
 $lang['VALIDATE_MOBIL_MASKED'] = '^[0-9*]{7,15}$';
 $lang['VALIDATE_MOBIL_PHONE'] = 'Indica un móvil válido, mín 7 máx 15 (solo números)';
 $lang['VALIDATE_REGEX_NICKNAME'] = '^[a-z0-9_]{6,16}$';
+$lang['VALIDATE_REGEX_NICKNAME_PROFILE'] = '^[a-z0-9 .,+-_@*]{6,16}$';
 $lang['VALIDATE_NICK_REQ'] = 'Indica tu nombre de usuario, mín 6 máx 16';
 $lang['VALIDATE_NICK_PATT'] = 'Se admiten números, letras y "_", mín 6 máx 16';
 $lang['VALIDATE_NICK_DIFFER'] = '';
