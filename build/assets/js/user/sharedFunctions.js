@@ -32,7 +32,7 @@ $(function () {
 		var inputModal = '<h1 class="h0">' + lang.USER_CONT_PROTECTION_SUBTITLE+'</h1>';
 		inputModal += lang.USER_CONT_PROTECTION_CONTENT;
 
-		appMessages(lang.USER_CONT_BENEFITS_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.USER_CONT_PROTECTION_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$(this).off('click');
 	});
 
@@ -57,7 +57,7 @@ $(function () {
 				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
 		}
 
-		appMessages(lang.USER_CONT_PROTECTION_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.USER_CONT_BENEFITS_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$(this).off('click');
 	});
 
