@@ -122,6 +122,11 @@ $config = [
 		[
 			'field' => 'newPass',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'address',
+			'label' => 'address',
+			'rules' => 'required|trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]'
 		]
 	],
 	'updateProfile' => [
@@ -184,6 +189,11 @@ $config = [
 		[
 			'field' => 'otherPhoneNum',
 			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'address',
+			'label' => 'address',
+			'rules' => 'required|trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]'
 		]
 	],
 	'accessRecover' => [

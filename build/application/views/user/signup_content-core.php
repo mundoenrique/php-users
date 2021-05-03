@@ -122,7 +122,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -179,7 +179,7 @@
                   <?php endif; ?>
                   <div class="form-group col-12">
                     <label for="address"><?= lang('USER_ADDRESS') ?></label>
-                    <textarea id="address" class="form-control" name="address" row="2"></textarea>
+                    <textarea id="address" class="form-control" name="address" row="2" onpaste="return false"></textarea>
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
@@ -230,7 +230,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -336,7 +336,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -407,7 +407,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -429,7 +429,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/fin') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -462,11 +462,11 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
-              <div class="multi-step-button mb-5">
+              <div class="multi-step-button flex items-center justify-end mb-5">
                 <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
                 <button id="signUpBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONFIRM'); ?></button>
               </div>
@@ -534,7 +534,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -560,7 +560,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
