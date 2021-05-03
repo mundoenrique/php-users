@@ -196,12 +196,14 @@ class NOVO_Controller extends CI_Controller {
 				"helper"
 			];
 
-			if ($this->render->logged || $this->render->userId) {
+			if ($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"sessionControl"
 				);
-			} else if ($validateRecaptcha) {
+			}
+
+			if ($validateRecaptcha) {
 				array_push(
 					$this->includeAssets->jsFiles,
 					"googleRecaptcha"

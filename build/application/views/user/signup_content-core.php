@@ -122,7 +122,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -230,7 +230,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -336,7 +336,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -407,7 +407,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -429,7 +429,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/fin') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -462,7 +462,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -534,7 +534,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -560,7 +560,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
