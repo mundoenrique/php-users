@@ -75,7 +75,6 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
 		if ($this->countryUri === "api") {
-
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
 
