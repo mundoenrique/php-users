@@ -183,7 +183,7 @@
                   <div class="form-group col-12">
                     <label for="address"><?= lang('USER_ADDRESS') ?></label>
                     <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address"
-                      row="2"><?= $address; ?></textarea>
+                      row="2" onpaste="return false"><?= $address; ?></textarea>
                     <div class="help-block"></div>
                   </div>
                 </div>
