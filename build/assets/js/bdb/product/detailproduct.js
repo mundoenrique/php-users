@@ -295,12 +295,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	//functions
 	$$.getElementById('filterMonth').addEventListener('change', function () {
-		var todayDate = new Date();
-		todayDate.setMonth(todayDate.getMonth() -17);
-		var mounths = todayDate.getMonth();
-		var year = todayDate.getFullYear();
-
-		var mounthsNow = new Date().getMonth() +1;
 
 		if (this.value == 0) {
 			stackItems[2].classList.add('is-disabled');
@@ -309,7 +303,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 		} else {
 			stackItems[2].classList.remove('is-disabled');
 			$$.getElementById('filterYear').options[0].disabled = true;
-			if (parseInt(this.value) > mounthsNow) {
+			if (parseInt(this.value) > new Date().getMonth() + 1) {
 				$$.getElementById('filterYear').options[1].disabled = true;
 				$$.getElementById('filterYear').selectedIndex = 2;
 			} else {
