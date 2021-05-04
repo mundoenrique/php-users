@@ -20,7 +20,8 @@ $("#filterInputYear").datepicker({
 	changeMonth: true,
 	changeYear: true,
 	showButtonPanel: true,
-	minDate: '-48m',
+	minDate: '-18m',
+	maxDate: 0,
 	closeText: 'Aceptar',
 
 	onClose: function (dateText, inst) {
@@ -34,6 +35,7 @@ $("#filterInputYear").datepicker({
 		inst.dpDiv.addClass("ui-datepicker-month-year");
 	}
 });
+
 
 $$.addEventListener('DOMContentLoaded', function () {
 	//vars
@@ -67,14 +69,15 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	//core
 	arrDialogContent = [{
-			id: 'notice',
-			body:
+		id: 'notice',
+		body:
 			`<div class="justify">
 				Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.
 			</div>`
-		},
-		{ id: 'otpRequest',
-			body:
+	},
+	{
+		id: 'otpRequest',
+		body:
 			`<form id="formGetDetail" class="mr-2" method="post">
 				<div id="verificationOTP">
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
@@ -88,10 +91,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 					<p id="verificationMsg" class="mb-1 h5"></p>
 				</div>
 			</form>`
-		},
-		{
-			id: 'cardDetails',
-			body:
+	},
+	{
+		id: 'cardDetails',
+		body:
 			`<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
@@ -133,7 +136,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 				</div>
 			</div>
 			<p class="mb-1 h5">Tiempo restante:<span id="timeLiveModal" class="ml-1 danger"></span></p>`
-		}
+	}
 	];
 
 	// Gráficas de estadísticas total abonos y cargos
@@ -315,26 +318,26 @@ $$.addEventListener('DOMContentLoaded', function () {
 	});
 
 	//functions
-	$$.getElementById('filterMonth').addEventListener('change', function () {
+	// $$.getElementById('filterMonth').addEventListener('change', function () {
 
-		if (this.value == 0) {
-			stackItems[2].classList.add('is-disabled');
-			$$.getElementById('filterYear').disabled = true;
-			$$.getElementById('filterYear').selectedIndex = 0;
-		} else {
-			stackItems[2].classList.remove('is-disabled');
-			$$.getElementById('filterYear').options[0].disabled = true;
-			if (parseInt(this.value) > new Date().getMonth() + 1) {
-				$$.getElementById('filterYear').options[1].disabled = true;
-				$$.getElementById('filterYear').selectedIndex = 2;
-			} else {
-				$$.getElementById('filterYear').options[1].disabled = false;
-				$$.getElementById('filterYear').selectedIndex = 1;
-			}
-			$$.getElementById('buscar').disabled = false;
-			$$.getElementById('filterYear').disabled = false;
-		}
-	});
+	// 	if (this.value == 0) {
+	// 		stackItems[2].classList.add('is-disabled');
+	// 		$$.getElementById('filterYear').disabled = true;
+	// 		$$.getElementById('filterYear').selectedIndex = 0;
+	// 	} else {
+	// 		stackItems[2].classList.remove('is-disabled');
+	// 		$$.getElementById('filterYear').options[0].disabled = true;
+	// 		if (parseInt(this.value) > new Date().getMonth() + 1) {
+	// 			$$.getElementById('filterYear').options[1].disabled = true;
+	// 			$$.getElementById('filterYear').selectedIndex = 2;
+	// 		} else {
+	// 			$$.getElementById('filterYear').options[1].disabled = false;
+	// 			$$.getElementById('filterYear').selectedIndex = 1;
+	// 		}
+	// 		$$.getElementById('buscar').disabled = false;
+	// 		$$.getElementById('filterYear').disabled = false;
+	// 	}
+	// });
 
 	btnExportPDF.addEventListener('click', function (e) {
 
