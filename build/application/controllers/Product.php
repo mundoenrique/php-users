@@ -184,14 +184,16 @@ class Product extends BDB_Controller
 			}
 		}
 
-		$year = intval(date("Y"));
+		$actual = strtotime(date('Y-m-j'));
+		$year = date("Y", strtotime("-18 month", $actual));
+
+		$yearActual = intval(date("Y"));
 		$years = [];
-		for ($i = $year; $i > $year - 4; $i--) {
+		for ($i = $yearActual; $i > $year ; $i--) {
 			array_push($years, $i);
 		}
 
 		$this->views = ['product/' . $view];
-
 		$this->render->data = $dataProduct;
 		$this->render->months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 		$this->render->years = $years;
