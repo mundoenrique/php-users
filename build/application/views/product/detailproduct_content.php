@@ -113,6 +113,8 @@
 					</div> -->
 
           <div id="month-period-form" class="stack-form mr-auto flex items-center">
+		   <input type="hidden" id="filterMonth" name="filterMonth" value="0">
+		   <input type="hidden" id="filterYear" name="filterYear" value="0">
             <div class="form-group">
               <label class="block">Recientes</label>
               <div class="custom-control custom-radio custom-control-inline align-top">
@@ -128,7 +130,7 @@
                   <div class="form-inline">
                     <label class="nowrap mb-0 text regular" for="filterInputYear">Seleccionar</label>
                     <input id="filterInputYear" class="form-control" type="text" name="filterInputYear" placeholder="MM/AAAA">
-                    <button id="buscar" class="btn btn-small btn-primary">
+                    <button id="search" class="btn btn-small btn-primary">
                       <span aria-hidden="true" class="icon-arrow-right mr-0"></span>
                     </button>
                   </div>
