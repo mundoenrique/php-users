@@ -14,6 +14,27 @@ moment.updateLocale('en', {
 	]
 });
 
+
+$("#filterInputYear").datepicker({
+	dateFormat: 'mm/yy',
+	changeMonth: true,
+	changeYear: true,
+	showButtonPanel: true,
+	minDate: '-48m',
+	closeText: 'Aceptar',
+
+	onClose: function (dateText, inst) {
+		$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+		$(this)
+		.focus()
+		.blur();
+	},
+
+	beforeShow: function (input, inst) {
+		inst.dpDiv.addClass("ui-datepicker-month-year");
+	}
+});
+
 $$.addEventListener('DOMContentLoaded', function () {
 	//vars
 	var transactions = $$.getElementById('transactions'),
