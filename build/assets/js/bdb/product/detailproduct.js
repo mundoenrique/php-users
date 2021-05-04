@@ -6,6 +6,8 @@ var arrDialogContent = [];
 var systemMSg = $$.getElementById('system-msg');
 var verificationMsg;
 var timeLiveModal;
+$('#filterInputMonth').prop('checked', true);
+$("#search").prop('disabled', true);
 
 moment.updateLocale('en', {
 	monthsShort: [
@@ -34,6 +36,7 @@ $("#filterInputYear").datepicker({
 		$('#filterMonth').val(monthYear[0]);
 		$('#filterYear').val(monthYear[1]);
 		$('#filterInputMonth').prop('checked', false);
+		$("#search").prop('disabled', false);
 	},
 
 	beforeShow: function (input, inst) {
@@ -205,15 +208,11 @@ $$.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
-		function movements() {
-
-		var monthSelected = $('#filterMonth').val();
-		var yearSelected = $('#filterYear').val();
-
+	function movements() {
 		var dataRequest = {
 			noTarjeta: data.noTarjeta,
-			month: monthSelected,
-			year: yearSelected,
+			month: $('#filterMonth').val(),
+			year: $('#filterYear').val(),
 		};
 
 		while (movementsList.firstChild) {
@@ -442,11 +441,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function processForm() {
-
 		var monthRequest = $('#filterMonth').val();
 		var	yearRequest = $('#filterYear').val();
-			//objDate = new Date(),
-			//fullYear = objDate.getFullYear();
 
 		$$.getElementsByName("frmNoTarjeta")[0].value = data.noTarjeta;
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
@@ -612,10 +608,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 					$("#system-info").dialog("destroy");
 					$("#system-info").addClass("none");
 				}
-
-
-
-
 			}
 		}
 	}
@@ -655,6 +647,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	}
 	
 	$('#filterInputMonth').on('click', function(e) {
+		$("#search").prop('disabled', true);
 		$('#filterInputYear').val('');
 		$('#filterMonth').val('0');
 		$('#filterYear').val('0');
@@ -662,6 +655,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	});
 
 	$('#search').on('click', function(e) {
+		$("#search").prop('disabled', false);
 		movements();
 	});
 

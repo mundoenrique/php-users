@@ -85,33 +85,6 @@
 
         <h2 class="h4 regular tertiary">Mis movimientos</h2>
         <nav id="filtersStack" class="navbar detail-filters-nav p-1 px-lg-5 bg-widget">
-
-          <!-- <div id="period-form" class="stack-form mr-auto flex items-center">
-						<label class="my-1 mr-1 text" for="filterMonth">Mostrar:</label>
-						<select id="filterMonth" class="custom-select form-control w-auto my-1 mr-1" name="filterMonth">
-							<option value="0">Más recientes</option>
-							<?php
-							foreach ($months as $nroMonths => $txtMonths) {
-								$monthValue = str_pad($nroMonths + 1, 2, '0', STR_PAD_LEFT);
-							?>
-								<option <?= @$monthSelected === $monthValue ? 'selected' : ''; ?> value="<?= $monthValue; ?>"><?= $txtMonths; ?></option>
-							<?php
-							}
-							?>
-						</select>
-						<select id="filterYear" class="custom-select form-control w-auto my-1 mr-1" name="filterYear" <?= isset($yearSelected) ? '' : 'disabled'; ?>>
-							<option value="<?= $years[0]; ?>">-</option>
-							<?php
-							foreach ($years as $year) {
-							?>
-								<option <?= @$yearSelected == $year ? 'selected' : ''; ?> value="<?= $year; ?>"><?= $year; ?></option>
-							<?php
-							}
-							?>
-						</select>
-						<button id="buscar" class="btn btn-small btn-primary"><span class="icon-arrow-right mr-0" aria-hidden="true"></span></button>
-					</div> -->
-
           <div id="month-period-form" class="stack-form mr-auto flex items-center">
 		   <input type="hidden" id="filterMonth" name="filterMonth" value="0">
 		   <input type="hidden" id="filterYear" name="filterYear" value="0">
@@ -122,8 +95,7 @@
                 <label class="custom-control-label mr-1" for="filterInputMonth">Últimos 20</label>
               </div>
             </div>
-
-						<div class="form-group ml-5">
+			<div class="form-group ml-5">
               <label class="block">Mensual</label>
               <div class="row pl-2">
                 <div id="period-form" class="stack-form mr-auto flex items-center">
