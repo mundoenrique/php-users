@@ -126,7 +126,7 @@ $config = [
 		[
 			'field' => 'address',
 			'label' => 'address',
-			'rules' => 'required|trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]'
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]'
 		]
 	],
 	'updateProfile' => [
