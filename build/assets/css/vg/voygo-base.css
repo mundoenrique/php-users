@@ -123,7 +123,7 @@ footer.main-footer {
 /* Input Group */
 
 .pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
-	color: var(--color-sixth);
+	color: var(--color-primary);
 }
 
 /* Validator */
@@ -157,8 +157,8 @@ footer.main-footer {
 ========================================================================== */
 
 .logo-banco {
-	width: 230px;
-	padding: 2rem 0 1rem 0;
+	width: 160px;
+	padding: 2rem 0 0rem 0;
 }
 
 /* Otros
