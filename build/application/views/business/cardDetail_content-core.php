@@ -22,7 +22,7 @@
             <?php if ($cardsTotal > 1): ?>
             <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
               <i aria-hidden="true" class="icon-find"></i>
-              &nbsp;<?= lang('BUSINESS_OTHER_PRODUCT'); ?>
+              &nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
             </a>
             <?php endif; ?>
           </div>
