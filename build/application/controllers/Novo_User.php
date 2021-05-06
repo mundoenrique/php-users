@@ -264,7 +264,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
-		$this->render->titlePage = lang('GEN_MENU_PORFILE');
+		$this->render->titlePage = lang('GEN_MENU_PROFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';

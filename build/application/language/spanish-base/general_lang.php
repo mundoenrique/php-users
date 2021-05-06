@@ -34,7 +34,7 @@ $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
 $lang['GEN_LINK_CUSTOMER_SUPPORT'] = 'atencion-al-cliente';
 $lang['GEN_LINK_USER_IDENTITY'] = 'identificar-usuario';
 $lang['GEN_LINK_USER_SIGNUP'] = 'registro';
-$lang['GEN_MENU_PORFILE'] = 'Perfil de usuario';
+$lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
@@ -143,7 +143,6 @@ $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petici
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 //DATATABLES
-$lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros';
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
 $lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
 $lang['GEN_TABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
@@ -229,7 +228,7 @@ $lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu telé
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
-$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar existe.';
+$lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar no existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'La tarjeta se encuentra vencida.';
 // PROFILE
