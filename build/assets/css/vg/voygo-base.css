@@ -149,8 +149,10 @@ footer.main-footer {
 .bg-option-not-active { background-color: var(--option-not-active) !important }
 
 .bg-content {
-  background: var(--color-secondary);
-  background-repeat: repeat-x;
+  background: url("../../images/vg/bg-content.png");
+  background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left;
 }
 
 /* Icons, Logos
@@ -250,8 +252,10 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 	width: 100%;
 	height: 100%;
 	z-index: 0;
-	background-color: var(--color-secondary);
-	background-repeat: repeat-x;
+	background-image: url("../../images/vg/bg-content.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left;
 }
 
 .login-content .z1{
