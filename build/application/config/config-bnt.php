@@ -6,4 +6,4 @@ $config['country-uri'] = 'bnt';
 $config['base_url']	= BASE_URL.'/'.$config['country-uri'].'/';
 $config['client'] = 'banorte';
 $config['favicon'] = 'favicon-bnt';
-$config['language']	= 'spanish-bnt';
+$config['language']	= BASE_LANGUAGE.'-bnt';

@@ -82,6 +82,7 @@ $route['(:any)/async-call'] = "Novo_CallModels";
 //User
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 $route['(:any)/inicio'] = "Novo_User/signin";
+$route['(:any)/inicio/(:any)'] = "Novo_User/signin";
 $route['(:any)/registro'] = "Novo_User/signup";
 $route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
 $route['(:any)/cambiar-clave'] = "Novo_User/changePassword";

@@ -109,6 +109,18 @@ $timeZone = [
 ];
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
+
+switch(end($uriSegments)) {
+	case 'inicio':
+	case 'es':
+		$baseLanguage = 'spanish';
+	break;
+	case 'en':
+		$baseLanguage = 'english';
+	break;
+	default:
+		$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+}
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -117,6 +129,7 @@ date_default_timezone_set($timeZone);
 defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')				OR define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('BASE_LANGUAGE')		OR define('BASE_LANGUAGE', $baseLanguage);
 defined('SUBCLASS_PREFIX')	OR define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
@@ -190,5 +203,5 @@ defined('ARGON2_SALT')					OR define('ARGON2_SALT', $_SERVER['ARGON2_SALT']);
 */
 defined('KEY_API')	OR define('KEY_API', $_SERVER['KEY_API']);
 
-unset($uriSegments, $proxyIps, $timeZone);
+unset($uriSegments, $proxyIps, $timeZone, $baseLanguage);
 

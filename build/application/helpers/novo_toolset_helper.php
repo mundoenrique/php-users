@@ -122,26 +122,43 @@ if (!function_exists('languageLoad')) {
 		$CI = &get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$configLanguage = $CI->config->item('language');
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
+		$countryUri = $call == 'specific' ? $CI->config->item('country-uri') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
+		$CI->config->set_item('language', 'global');
+
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
 
-		if ($call == 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
-				array_push($languagesFile, 'general');
-				$loadLanguages = TRUE;
-			}
+		switch ($call) {
+			case 'generic':
+				$CI->lang->load('config-core');
+			break;
+			case 'specific':
+				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR.'config-core-';
 
-			if (file_exists($pathLang.'validate_lang.php')) {
-				array_push($languagesFile, 'validate');
-				$loadLanguages = TRUE;
-			}
-
-			if (file_exists($pathLang.'config-core_lang.php')) {
-				array_push($languagesFile, 'config-core');
-				$loadLanguages = TRUE;
-			}
+				if(file_exists($globalLan.$CI->config->item('country-uri').'_lang.php')) {
+					$CI->lang->load('config-core-'.$CI->config->item('country-uri'));
+				}
+			break;
 		}
+
+		$CI->config->set_item('language', $configLanguage);
+
+		if (file_exists($pathLang.'general_lang.php')) {
+			array_push($languagesFile, 'general');
+			$loadLanguages = TRUE;
+		}
+
+		if (file_exists($pathLang.'validate_lang.php')) {
+			array_push($languagesFile, 'validate');
+			$loadLanguages = TRUE;
+		}
+
+		/* if (file_exists($pathLang.'config-core_lang.php')) {
+			array_push($languagesFile, 'config-core');
+			$loadLanguages = TRUE;
+		} */
 
 		if (file_exists($pathLang.$class.'_lang.php')) {
 			array_push($languagesFile, $class);

@@ -49,6 +49,15 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
+		$baseLanguage = [
+			'name' => 'baseLanguage',
+			'value' => LANGUAGE == 'en' ? 'english' : 'spanish',
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$this->input->set_cookie($baseLanguage);
+
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = ['user/'.$view];
