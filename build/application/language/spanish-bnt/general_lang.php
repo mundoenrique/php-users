@@ -33,5 +33,3 @@ $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Bloqueo permanente';
 //GENERAL ERROR RESPONSE
 $lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
 $lang['GEN_SYSTEM_MESSAGE'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
-// PROGRAM IMAGES
-$lang['GEN_PROGRAM_IMG_DEFAULT'] =	'bnt_default.svg';

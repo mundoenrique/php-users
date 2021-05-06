@@ -245,7 +245,3 @@ $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directory created.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directory exists.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Existing directory.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directory not created';
-// PROGRAM IMAGES
-$lang['GEN_PROGRAM_IMG_DEFAULT'] =	'default.svg';
-$lang['GEN_PROGRAM_IMG_DEFAULT_REV'] =	'default_rev.svg';
-$lang['GEN_PROGRAM_IMAGES'] = [];

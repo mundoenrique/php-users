@@ -32,6 +32,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$response = $this->sendToService('callWs_UserCardsList');
 
+		loadImages();
 		$cardsList = [];
 		$serviceList = [];
 
@@ -85,9 +86,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
 							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
-						}
-
-						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
 							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
@@ -371,6 +369,8 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardListOperations');
+
+		loadImages();
 		$cardsList = [];
 
 		switch ($this->isResponseRc) {
@@ -396,9 +396,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
 							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
-						}
-
-						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
 							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 

@@ -201,7 +201,6 @@ if (!function_exists('setCurrentPage')) {
 	}
 }
 
-
 if (!function_exists('exportFile')) {
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
 		switch ($typeFile) {
@@ -336,5 +335,22 @@ if (! function_exists('floatFormat')) {
 
 		return $floatNum;
 
+	}
+}
+
+if (! function_exists('loadimages')) {
+	function loadImages() {
+		$CI = &get_instance();
+		$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR.'cards_image_';
+		$countryUri = $CI->config->item('country-uri');
+		$configLanguage = $CI->config->item('language');
+		$CI->config->set_item('language', 'global');
+		$CI->lang->load('cards_image');
+
+		if (file_exists($globalLan.$countryUri.'_lang.php')) {
+			$CI->lang->load('cards_image_'.$countryUri);
+		}
+
+		$CI->config->set_item('language', $configLanguage);
 	}
 }
