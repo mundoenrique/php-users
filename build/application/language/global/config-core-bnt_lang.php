@@ -14,7 +14,6 @@ $lang['CONF_VALIDATE_IP'] = 'OFF';
 $lang['CONF_CARD_COLOR'] = 'text';
 //SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
-$lang['CONF_WIDGET_CONTACT_INFO'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'ON';
