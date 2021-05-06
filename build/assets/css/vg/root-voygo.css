@@ -18,15 +18,15 @@
 
 	/* Brand colors */
 	--color-primary: #583F99;
-	--color-secondary: #ffffff;
-	--color-tertiary: #e3e3e3;
+	--color-secondary: #FFFFFF;
+	--color-tertiary: #E3E3E3;
 	--color-fifth: #707070;
 	--color-sixth: #555555;
-	--color-seventh:#7b73a9;
+	--color-seventh:#7B73A9;
 	--color-eighth: #999999;
 
 	/* Others */
-	--option-not-active: #ffffff;
+	--option-not-active: #FFFFFF;
 	--option-active: #583F99;
 	--black: #111111;
 
