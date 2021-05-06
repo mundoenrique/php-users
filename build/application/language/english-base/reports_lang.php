@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['REPORTS_CATEGORY_GROUP'] = [
-	'1' => 'Hoteles',
-	'2' => 'Alquiler de vehículos',
-	'3' => 'Comida, Despensa y restaurantes',
-	'4' => 'Líneas Aéreas y Transporte',
-	'5' => 'Farmacias',
-	'6' => 'Diversión y entretenimiento',
-	'7' => 'Servicios médicos',
-	'9' => 'Cajeros Automáticos',
-	'W' => 'Comercios y Tiendas por Departamento',
-	'8' => 'Otros'
+	'1' => 'Hotels',
+	'2' => 'Car renting',
+	'3' => 'Food, pantry and restaurants',
+	'4' => 'Airlines and transportation',
+	'5' => 'Pharmacy',
+	'6' => 'Fun and entertainment',
+	'7' => 'Medical services',
+	'9' => 'ATMs',
+	'W' => 'Shops and department stores ',
+	'8' => 'Others'
 ];
 $lang['REPORTS_CATEGORY_ICON'] = [
 	'1' => 'icon-suitcase',
@@ -36,9 +36,9 @@ $lang['REPORTS_CATEGORY_COLOR'] = [
 	'#27ae60',
 	'#2980b9'
 ];
-$lang['REPORTS_EXPENSES_CATEGORY'] = 'Gastos por categoría';
-$lang['REPORTS_YEARLY'] = 'Anual';
-$lang['REPORTS_MONTHLY'] = 'Mensual';
-$lang['REPORTS_FROM'] = 'Desde';
-$lang['REPORTS_TO'] = 'Hasta';
-$lang['REPORTS_DATE_RANGE'] = 'Seleccione un rango de fecha a consultar.';
+$lang['REPORTS_EXPENSES_CATEGORY'] = 'Expenses by category';
+$lang['REPORTS_YEARLY'] = 'Annual';
+$lang['REPORTS_MONTHLY'] = 'Monthly';
+$lang['REPORTS_FROM'] = 'From';
+$lang['REPORTS_TO'] = 'To';
+$lang['REPORTS_DATE_RANGE'] = 'Select a date range to consult.';
