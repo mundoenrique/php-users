@@ -6,6 +6,8 @@ var arrDialogContent = [];
 var systemMSg = $$.getElementById('system-msg');
 var verificationMsg;
 var timeLiveModal;
+$('#filterInputMonth').prop('checked', true);
+$("#search").prop('disabled', true);
 
 moment.updateLocale('en', {
 	monthsShort: [
@@ -13,6 +15,35 @@ moment.updateLocale('en', {
 		"Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
 	]
 });
+
+
+$("#filterInputYear").datepicker({
+	dateFormat: 'mm/yy',
+	changeMonth: true,
+	changeYear: true,
+	showButtonPanel: true,
+	minDate: '-18m',
+	maxDate: 0,
+	closeText: 'Aceptar',
+
+	onClose: function (dateText, inst) {
+		$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+		$(this)
+		.focus()
+		.blur();
+
+		var monthYear = $('#filterInputYear').val().split('/');
+		$('#filterMonth').val(monthYear[0]);
+		$('#filterYear').val(monthYear[1]);
+		$('#filterInputMonth').prop('checked', false);
+		$("#search").prop('disabled', false);
+	},
+
+	beforeShow: function (input, inst) {
+		inst.dpDiv.addClass("ui-datepicker-month-year");
+	}
+});
+
 
 $$.addEventListener('DOMContentLoaded', function () {
 	//vars
@@ -46,14 +77,15 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	//core
 	arrDialogContent = [{
-			id: 'notice',
-			body:
+		id: 'notice',
+		body:
 			`<div class="justify">
 				Los datos que serán mostrados a continuación requieren de tu cuidado y protección, se agradece no exponerlos a lugares y redes públicas, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles; nosotros hemos tomado precauciones a nivel de seguridad por ejemplo hemos desactivado la función copiar y pegar.
 			</div>`
-		},
-		{ id: 'otpRequest',
-			body:
+	},
+	{
+		id: 'otpRequest',
+		body:
 			`<form id="formGetDetail" class="mr-2" method="post">
 				<div id="verificationOTP">
 					<p>Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:</p>
@@ -67,10 +99,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 					<p id="verificationMsg" class="mb-1 h5"></p>
 				</div>
 			</form>`
-		},
-		{
-			id: 'cardDetails',
-			body:
+	},
+	{
+		id: 'cardDetails',
+		body:
 			`<div class="row">
 				<div class="form-group col-6">
 					<label class="nowrap" for="cardNumber">Número de la tarjeta</label>
@@ -112,7 +144,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 				</div>
 			</div>
 			<p class="mb-1 h5">Tiempo restante:<span id="timeLiveModal" class="ml-1 danger"></span></p>`
-		}
+	}
 	];
 
 	// Gráficas de estadísticas total abonos y cargos
@@ -176,17 +208,11 @@ $$.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
-	$$.getElementById('buscar').addEventListener('click', function () {
-		var filterMonth = $$.getElementById('filterMonth');
-		var filterYear = $$.getElementById('filterYear');
-
-		var monthSelected = filterMonth.options[filterMonth.selectedIndex];
-		var yearSelected = filterYear.options[filterYear.selectedIndex];
-
+	function movements() {
 		var dataRequest = {
 			noTarjeta: data.noTarjeta,
-			month: monthSelected.value,
-			year: yearSelected.value,
+			month: $('#filterMonth').val(),
+			year: $('#filterYear').val(),
 		};
 
 		while (movementsList.firstChild) {
@@ -291,29 +317,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 			transactions.removeChild(transactions.lastChild);
 			movementsList.classList.add('fade-in');
 		});
-	});
-
-	//functions
-	$$.getElementById('filterMonth').addEventListener('change', function () {
-
-		if (this.value == 0) {
-			stackItems[2].classList.add('is-disabled');
-			$$.getElementById('filterYear').disabled = true;
-			$$.getElementById('filterYear').selectedIndex = 0;
-		} else {
-			stackItems[2].classList.remove('is-disabled');
-			$$.getElementById('filterYear').options[0].disabled = true;
-			if (parseInt(this.value) > new Date().getMonth() + 1) {
-				$$.getElementById('filterYear').options[1].disabled = true;
-				$$.getElementById('filterYear').selectedIndex = 2;
-			} else {
-				$$.getElementById('filterYear').options[1].disabled = false;
-				$$.getElementById('filterYear').selectedIndex = 1;
-			}
-			$$.getElementById('buscar').disabled = false;
-			$$.getElementById('filterYear').disabled = false;
-		}
-	});
+	};
 
 	btnExportPDF.addEventListener('click', function (e) {
 
@@ -437,11 +441,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function processForm() {
-
-		var monthRequest = $$.getElementById('filterMonth').options[$$.getElementById('filterMonth').selectedIndex].value,
-			yearRequest = $$.getElementById('filterYear').options[$$.getElementById('filterYear').selectedIndex].value,
-			objDate = new Date(),
-			fullYear = objDate.getFullYear();
+		var monthRequest = $('#filterMonth').val();
+		var	yearRequest = $('#filterYear').val();
 
 		$$.getElementsByName("frmNoTarjeta")[0].value = data.noTarjeta;
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
@@ -607,10 +608,6 @@ $$.addEventListener('DOMContentLoaded', function () {
 					$("#system-info").dialog("destroy");
 					$("#system-info").addClass("none");
 				}
-
-
-
-
 			}
 		}
 	}
@@ -648,5 +645,18 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 		// verificationMsg.innerHTML = msgLoading;
 	}
+	
+	$('#filterInputMonth').on('click', function(e) {
+		$("#search").prop('disabled', true);
+		$('#filterInputYear').val('');
+		$('#filterMonth').val('0');
+		$('#filterYear').val('0');
+		movements();
+	});
+
+	$('#search').on('click', function(e) {
+		$("#search").prop('disabled', false);
+		movements();
+	});
 
 });
