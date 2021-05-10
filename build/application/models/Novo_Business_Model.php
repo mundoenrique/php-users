@@ -31,8 +31,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idUsuario = $this->session->userId;
 
 		$response = $this->sendToService('callWs_UserCardsList');
-
-		loadImages();
 		$cardsList = [];
 		$serviceList = [];
 
@@ -257,7 +255,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataAccessLog->operation = 'Movimientos mensuales';
 
 		$this->dataRequest->idOperation = '13';
-		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+		$this->dataRequest->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
 		$this->dataRequest->mes = $dataRequest->filterMonth;
 		$this->dataRequest->anio = $dataRequest->filterYear;
 		$this->dataRequest->tarjeta = [
@@ -369,8 +367,6 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardListOperations');
-
-		loadImages();
 		$cardsList = [];
 
 		switch ($this->isResponseRc) {

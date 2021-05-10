@@ -130,3 +130,26 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 ];
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';
+//EXTERNAL LINKS
+$lang['GEN_NO_LINK'] = 'javascript:';
+$lang['GEN_LINK_CHANGE_PASS'] = 'cambiar-clave';
+$lang['GEN_LINK_CARDS_LIST'] = 'lista-de-tarjetas';
+$lang['GEN_LINK_CARD_DETAIL'] = 'detalle-de-tarjeta';
+$lang['GEN_LINK_PAYS_TRANSFER'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_BETWEEN_CARDS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_BANKS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_CREDIT_CARDS'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_SERVICES'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_TELEPHONY'] = $lang['GEN_NO_LINK'];
+$lang['GEN_LINK_REPORTS'] = 'reportes';
+$lang['GEN_LINK_CUSTOMER_SUPPORT'] = 'atencion-al-cliente';
+$lang['GEN_LINK_USER_IDENTITY'] = 'identificar-usuario';
+$lang['GEN_LINK_USER_SIGNUP'] = 'registro';
+$lang['GEN_FOTTER_NETWORKS_LINK'] = [
+	'facebook' => $lang['GEN_NO_LINK'],
+	'twitter' => $lang['GEN_NO_LINK'],
+	'youtube' => $lang['GEN_NO_LINK'],
+	'instagram' => $lang['GEN_NO_LINK'],
+];
+//INTERNAL LINKS
+$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';

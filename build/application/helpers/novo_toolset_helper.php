@@ -132,13 +132,17 @@ if (!function_exists('languageLoad')) {
 
 		switch ($call) {
 			case 'generic':
-				$CI->lang->load('config-core');
+				$CI->lang->load(['config-core', 'images']);
 			break;
 			case 'specific':
-				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR.'config-core-';
+				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
 
-				if(file_exists($globalLan.$CI->config->item('country-uri').'_lang.php')) {
-					$CI->lang->load('config-core-'.$CI->config->item('country-uri'));
+				if(file_exists($globalLan.'config-core-'.$countryUri.'_lang.php')) {
+					$CI->lang->load('config-core-'.$countryUri,);
+				}
+
+				if(file_exists($globalLan.'images_'.$countryUri.'_lang.php')) {
+					$CI->lang->load('images_'.$countryUri);
 				}
 			break;
 		}
@@ -335,22 +339,5 @@ if (! function_exists('floatFormat')) {
 
 		return $floatNum;
 
-	}
-}
-
-if (! function_exists('loadimages')) {
-	function loadImages() {
-		$CI = &get_instance();
-		$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR.'cards_image_';
-		$countryUri = $CI->config->item('country-uri');
-		$configLanguage = $CI->config->item('language');
-		$CI->config->set_item('language', 'global');
-		$CI->lang->load('cards_image');
-
-		if (file_exists($globalLan.$countryUri.'_lang.php')) {
-			$CI->lang->load('cards_image_'.$countryUri);
-		}
-
-		$CI->config->set_item('language', $configLanguage);
 	}
 }

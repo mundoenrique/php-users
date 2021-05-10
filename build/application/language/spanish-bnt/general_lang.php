@@ -3,9 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // MENU
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Operaciones';
 // General lang app
-$lang['GEN_FAVICON'] = 'favicon-bnt';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
 //DATEPICKER
 $lang['GEN_PICKER_MINDATE'] = 2018;

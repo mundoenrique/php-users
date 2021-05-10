@@ -2,12 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['GEN_SYSTEM_NAME']= 'Online People Connection';
-$lang['GEN_FAVICON'] = 'favicon-novo';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
-$lang['GEN_DEFAULT_LOGO'] = 'img-default_white.svg';
 //MENU
-$lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recover access';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'User identify';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Change password';
@@ -25,21 +20,6 @@ $lang['GEN_MENU_PROFILE'] = 'User profile';
 $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
 $lang['GEN_MENU_SIGNOUT'] = 'Signout';
-//LINKS
-$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
-$lang['GEN_LINK_CHANGE_PASS'] = 'cambiar-clave';
-$lang['GEN_LINK_CARDS_LIST'] = 'lista-de-tarjetas';
-$lang['GEN_LINK_CARD_DETAIL'] = 'detalle-de-tarjeta';
-$lang['GEN_LINK_PAYS_TRANSFER'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_BETWEEN_CARDS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_BANKS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_CREDIT_CARDS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_SERVICES'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_TELEPHONY'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_REPORTS'] = 'reportes';
-$lang['GEN_LINK_CUSTOMER_SUPPORT'] = 'atencion-al-cliente';
-$lang['GEN_LINK_USER_IDENTITY'] = 'identificar-usuario';
-$lang['GEN_LINK_USER_SIGNUP'] = 'registro';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Signin';
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
@@ -98,20 +78,6 @@ $lang['GEN_FINISHED_SESSION'] = 'Your session in %s has been closed successfully
 $lang['GEN_FINISH_MESSAGE'] = 'Thank you for using our services';
 $lang['GEN_LAST_ACCESS'] = 'Last access';
 $lang['GEN_OPTIONAL_FIELD'] = '(Optional)';
-$lang['GEN_FOTTER_NETWORKS_IMG'] = [
-	'facebook' => 'facebook.png',
-	'twitter' => 'twitter.png',
-	'youtube' => 'youtube.png',
-	'instagram' => 'instagram.png',
-];
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['GEN_NO_LINK'],
-	'twitter' => $lang['GEN_NO_LINK'],
-	'youtube' => $lang['GEN_NO_LINK'],
-	'instagram' => $lang['GEN_NO_LINK'],
-];
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
-$lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Need help?';
 $lang['GEN_CONTACTS_TITLE'] = 'Contact our 24-hour contact center at:';

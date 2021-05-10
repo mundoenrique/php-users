@@ -2,44 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
-$lang['GEN_FAVICON'] = 'favicon-novo';
-$lang['GEN_FAVICON_EXT'] = 'ico';
-$lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
-$lang['GEN_DEFAULT_LOGO'] = 'img-default_white.svg';
 //MENU
-$lang['GEN_NO_LINK'] = 'javascript:';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
-$lang['GEN_LINK_CHANGE_PASS'] = 'cambiar-clave';
 $lang['GEN_MENU_CARDS_LIST'] = 'Lista de tarjetas';
-$lang['GEN_LINK_CARDS_LIST'] = 'lista-de-tarjetas';
 $lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';
-$lang['GEN_LINK_CARD_DETAIL'] = 'detalle-de-tarjeta';
 $lang['GEN_MENU_PAYS_TRANSFER'] = 'Pagos y transferencias';
-$lang['GEN_LINK_PAYS_TRANSFER'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_BETWEEN_CARDS'] = 'Entre tarjetas';
-$lang['GEN_LINK_BETWEEN_CARDS'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_BANKS'] = 'Bancos';
-$lang['GEN_LINK_BANKS'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_CREDIT_CARDS'] = 'Tarjetas de crédito';
-$lang['GEN_LINK_CREDIT_CARDS'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_SERVICES'] = 'Servicios';
-$lang['GEN_LINK_SERVICES'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_TELEPHONY'] = 'Recarga digitel';
-$lang['GEN_LINK_TELEPHONY'] = $lang['GEN_NO_LINK'];
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
-$lang['GEN_LINK_REPORTS'] = 'reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
-$lang['GEN_LINK_CUSTOMER_SUPPORT'] = 'atencion-al-cliente';
-$lang['GEN_LINK_USER_IDENTITY'] = 'identificar-usuario';
-$lang['GEN_LINK_USER_SIGNUP'] = 'registro';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
-//LINKS
-$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 //BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
@@ -98,20 +78,6 @@ $lang['GEN_FINISHED_SESSION'] = 'Tu sesión en %s ha sido cerrada exitosamente.'
 $lang['GEN_FINISH_MESSAGE'] = 'Gracias por usar nuestros servicios';
 $lang['GEN_LAST_ACCESS'] = 'Último acceso';
 $lang['GEN_OPTIONAL_FIELD'] = '(Opcional)';
-$lang['GEN_FOTTER_NETWORKS_IMG'] = [
-	'facebook' => 'facebook.png',
-	'twitter' => 'twitter.png',
-	'youtube' => 'youtube.png',
-	'instagram' => 'instagram.png',
-];
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['GEN_NO_LINK'],
-	'twitter' => $lang['GEN_NO_LINK'],
-	'youtube' => $lang['GEN_NO_LINK'],
-	'instagram' => $lang['GEN_NO_LINK'],
-];
-$lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
-$lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Necesitas ayuda?';
 $lang['GEN_CONTACTS_TITLE'] = 'Comunícate con nuestro centro de contacto 24 horas en:';

@@ -30,9 +30,11 @@ $(function () {
 		cardDetail += '<div class="item-network ' + brand + '"></div>';
 		cardDetail += '<img class="card-image" src="' + img + '">';
 		cardDetail += '</div>';
+
 		if (isVirtual) {
 			cardDetail += '<span class="warning semibold h6 mx-auto">'+ lang.GEN_VIRTUAL_CARD +'</span>';
 		}
+
 		cardDetail += '</div>';
 		cardDetail += '<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">';
 		cardDetail += '<p class="semibold mb-0 h5 truncate">' + productName + '</p>';
@@ -93,5 +95,6 @@ function cardModal() {
 		posMy: 'top+50px',
 		posAt: 'top+50px',
 	}
+
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
