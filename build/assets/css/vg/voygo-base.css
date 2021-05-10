@@ -324,6 +324,10 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 	background-size: 2.3rem;
 }
 
+.feed .feed-item {
+	background-color: #f9f9f9;
+}
+
 .feed .feed-item:nth-child(2n) {
 	background-color: var(--color-secondary);
 }
