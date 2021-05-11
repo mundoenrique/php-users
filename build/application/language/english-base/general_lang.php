@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['GEN_SYSTEM_NAME']= 'Online People Connection';
+$lang['GEN_SYSTEM_NAME']= 'Customers Online';
 //MENU
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recover access';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'User identify';
