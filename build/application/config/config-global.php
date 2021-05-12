@@ -13,6 +13,6 @@ $config['scores_recapcha'] = [
 		'score' => 0
 	],
 	'production' => [
-		'score' => 0.4
+		'score' => 0
 	],
 ];
