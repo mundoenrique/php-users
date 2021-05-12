@@ -49,12 +49,8 @@ $lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
 $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
-$lang['GEN_CURRENCY'] = '$';
-$lang['GEN_DECIMAL'] = '.';
-$lang['GEN_THOUSANDS'] = ',';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
-$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['GEN_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';

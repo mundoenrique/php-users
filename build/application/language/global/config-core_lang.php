@@ -3,6 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONFIG_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
+$lang['GEN_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['GEN_CURRENCY'] = '$';
+$lang['GEN_DECIMAL'] = '.';
+$lang['GEN_THOUSANDS'] = ',';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signin',
 	'accessRecover',
