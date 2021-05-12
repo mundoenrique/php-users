@@ -4,8 +4,6 @@ $lang['USER_SIGNIN_TITLE'] = '';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recover access';
 $lang['USER_SIGNIN_NO_USER'] = 'Dont you have a user?';
 $lang['USER_SIGNIN_SINGN_UP'] = 'Sign up';
-$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo-signin.png';
-$lang['USER_SIGNIN_IMAGE'] = 'logo.svg';
 $lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Your last session was closed incorrectly. Keep in mind that to exit the application you must select <strong> "Close Session" </strong>.</h5></div>';
 $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'The system has detected unauthorized activity, please try again';
 $lang['USER_SIGNIN_INVALID_USER']= "Invalid username or password";

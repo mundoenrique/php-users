@@ -7,6 +7,8 @@ $lang['GEN_LOGO_HEADER'] = 'img-logo.svg';
 $lang['GEN_DEFAULT_LOGO'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['GEN_FOTTER_PCI'] = 'img-pci_compliance.svg';
+$lang['USER_SIGNIN_LOGO_WIDGET'] = 'logo-signin.png';
+$lang['USER_SIGNIN_IMAGE'] = 'logo.svg';
 //NETWORK IMAGES
 $lang['GEN_FOTTER_NETWORKS_IMG'] = [
 	'facebook' => 'facebook.png',
