@@ -7,7 +7,7 @@ Conexión Personas Online es un portal web orientado a proporcionar servicios pa
 ### Dependencias
 
 - **Apache HTTPD 2.4** o superior
-- **PHP 7.0** solamente
+- **PHP 7.xx**
 
 ### Variables de entorno
 
@@ -79,4 +79,4 @@ Si deseas contribuir en el desarrollo y mejora de este producto, por favor consi
 
 ## Licencia
 
-© 2018 NovoPayment Inc. All rights reserved.
+© 2021 NovoPayment Inc. All rights reserved.
