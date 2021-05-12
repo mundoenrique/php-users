@@ -109,6 +109,7 @@ $timeZone = [
 ];
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
+$baseLanguage = 'spanish';
 
 switch(end($uriSegments)) {
 	case 'inicio':
@@ -119,7 +120,9 @@ switch(end($uriSegments)) {
 		$baseLanguage = 'english';
 	break;
 	default:
-		$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+		if (isset($_COOKIE['cpo_baseLanguage'])) {
+			$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+		}
 }
 /*
 |--------------------------------------------------------------------------
