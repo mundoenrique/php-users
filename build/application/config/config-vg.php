@@ -4,5 +4,4 @@ $config['customer'] = 'Pe';
 $config['customer-uri'] = 'vg';
 $config['base_url']	= BASE_URL.'/'.$config['customer-uri'].'/';
 $config['language']	= BASE_LANGUAGE.'-'.$config['customer-uri'];
-$config['client'] = 'voygo';
 $config['channel'] = 'voygoPersonal';

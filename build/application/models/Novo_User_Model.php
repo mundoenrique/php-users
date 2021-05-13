@@ -126,7 +126,6 @@ class Novo_User_Model extends NOVO_Model {
 						'fullName' => ucwords(mb_strtolower($fullName)),
 						'lastSession' => $lastSession,
 						'token' => $response->token,
-						'client' => $this->config->item('client'),
 						'time' => $time,
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'customerSess' => $response->codPais,

@@ -279,7 +279,7 @@ class Encrypt_Connect
 		$customer = &$logMessage->pais;
 		unset($logMessage->userName, $logMessage->model, $logMessage->pais);
 
-		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$model, $logMessage->rc, $logMessage->msg, $customer]);
+		$writeLog = novoLang('%s = rc: %s, msg: %s, customer: %s', [$model, $logMessage->rc, $logMessage->msg, $customer]);
 		$inBean = $logMessage->inBean ?? '';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$writeLog);

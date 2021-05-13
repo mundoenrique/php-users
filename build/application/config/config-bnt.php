@@ -4,4 +4,3 @@ $config['customer']='Mx-Bn';
 $config['customer-uri'] = 'bnt';
 $config['base_url']	= BASE_URL.'/'.$config['customer-uri'].'/';
 $config['language']	= BASE_LANGUAGE.'-'.$config['customer-uri'];
-$config['client'] = 'banorte';

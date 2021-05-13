@@ -18,7 +18,7 @@ class Tool_Browser {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date January 24th, 2020
 	 */
-	public function validBrowser($client)
+	public function validBrowser($customer)
 	{
 		log_message('INFO', 'NOVO Tool_Browser: validBrowser Method Initialized');
 
