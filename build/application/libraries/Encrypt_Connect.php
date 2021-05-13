@@ -8,7 +8,6 @@ class Encrypt_Connect
 {
 	private $CI;
 	private $userName;
-	private $countryConf;
 	private $iv;
 	private $keyNovo;
 	private $logMessage;
@@ -78,7 +77,7 @@ class Encrypt_Connect
 		}
 		if (!isset($response->pais)) {
 			log_message('INFO', 'NOVO [' . $userName . '] INSERTING COUNTRY TO THE RESPONSE');
-			$response->pais = $this->CI->config->item('country');
+			$response->pais = $this->CI->config->item('customer');
 		}
 
 		if (isset($response->bean)) {
@@ -140,7 +139,7 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 		$fail = FALSE;
-		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('customer-uri'));
 		$wsUrl = $_SERVER['WS_URL'];
 
 		if (isset($_SERVER['WS_URL' . $subFix])) {
@@ -277,10 +276,10 @@ class Encrypt_Connect
 	{
 		$model = &$logMessage->model;
 		$userName = &$logMessage->userName;
-		$country = &$logMessage->pais;
+		$customer = &$logMessage->pais;
 		unset($logMessage->userName, $logMessage->model, $logMessage->pais);
 
-		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$model, $logMessage->rc, $logMessage->msg, $country]);
+		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$model, $logMessage->rc, $logMessage->msg, $customer]);
 		$inBean = $logMessage->inBean ?? '';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$writeLog);

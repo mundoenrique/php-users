@@ -124,7 +124,7 @@ if (!function_exists('languageLoad')) {
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');
 		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$countryUri = $call == 'specific' ? $CI->config->item('country-uri') : '';
+		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
 		$CI->config->set_item('language', 'global');
 
@@ -137,12 +137,12 @@ if (!function_exists('languageLoad')) {
 			case 'specific':
 				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
 
-				if(file_exists($globalLan.'config-core-'.$countryUri.'_lang.php')) {
-					$CI->lang->load('config-core-'.$countryUri,);
+				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
+					$CI->lang->load('config-core-'.$customerUri,);
 				}
 
-				if(file_exists($globalLan.'images_'.$countryUri.'_lang.php')) {
-					$CI->lang->load('images_'.$countryUri);
+				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
+					$CI->lang->load('images_'.$customerUri);
 				}
 			break;
 		}
@@ -317,7 +317,7 @@ if (!function_exists('transformDate')) {
 if (! function_exists('currencyFormat')) {
 	function currencyFormat($amount){
 		$CI =& get_instance();
-		$client = $CI->session->userdata('countrySess');
+		$client = $CI->session->userdata('customerSess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
 
 		if (in_array($client, $decimalPoint)) {

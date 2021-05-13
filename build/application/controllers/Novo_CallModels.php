@@ -41,14 +41,14 @@ class Novo_CallModels extends Novo_Controller {
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
+		$valid = $this->verify_access->accessAuthorization($this->rule, $this->customerUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
+			$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName, $this->class);
 		}
 
 		if ($valid) {
@@ -80,7 +80,7 @@ class Novo_CallModels extends Novo_Controller {
 		$replace[0] = '';
 		$replace[1] = '_';
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
-		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
+		$filenameT = time().'_'.date('s').$this->customerUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = $this->config->item('upload_bulk');
@@ -97,7 +97,7 @@ class Novo_CallModels extends Novo_Controller {
 			$uploadData = (object) $this->upload->data();
 			$_POST['fileName'] = $uploadData->file_name;
 			$_POST['filePath'] = $uploadData->file_path;
-			$_POST['rawName'] = $this->countryUri.$filename;
+			$_POST['rawName'] = $this->customerUri.$filename;
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeBulkText'], $_POST['file']);
 

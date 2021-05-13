@@ -27,7 +27,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function validateForm($rule, $countryUri, $user, $class = FALSE)
+	public function validateForm($rule, $customerUri, $user, $class = FALSE)
 	{
 
 		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
@@ -43,7 +43,7 @@ class Verify_Access {
 		if ($class) {
 			$this->CI->config->set_item('language', BASE_LANGUAGE.'-base');
 			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$countryUri);
+			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$customerUri);
 			languageLoad('specific', $class);
 		}
 
@@ -115,7 +115,7 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 19th, 2020
 	 */
-	public function accessAuthorization($module, $countryUri, $user = FALSE)
+	public function accessAuthorization($module, $customerUri, $user = FALSE)
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 

@@ -42,10 +42,10 @@ class Asset {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				$countryUri = $this->CI->config->item('country-uri').'/';
+				$customerUri = $this->CI->config->item('customer-uri').'/';
 				$rootCss = '-'.$this->CI->config->item('client');
 				$baseCss = $this->CI->config->item('client').'-';
-				$search = [$countryUri, $rootCss, $baseCss];
+				$search = [$customerUri, $rootCss, $baseCss];
 				$replace = ['default/', '-default', 'default-'];
 				$file = str_replace($search, $replace, $file);
 				$fileName = str_replace($search, $replace, $fileName);
@@ -78,21 +78,21 @@ class Asset {
 	 * @info Método para insertar imagenes, json, etc
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function insertFile($fileName, $folder = 'images', $country = FALSE)
+	public function insertFile($fileName, $folder = 'images', $customerUri = FALSE)
 	{
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
-		$country = $country ? $country.'/' : '';
-		$file = assetPath($folder.'/'.$country.$fileName);
+		$customerUri = $customerUri ? $customerUri.'/' : '';
+		$file = assetPath($folder.'/'.$customerUri.$fileName);
 
 		if (!file_exists($file)) {
 			$file = assetPath($folder.'/default'.'/'.$fileName);
-			$country = 'default/';
+			$customerUri = 'default/';
 		}
 
 		$version = '?V'.date('Ymd-U', filemtime($file));
 
-		return assetUrl($folder.'/'.$country.$fileName.$version);
+		return assetUrl($folder.'/'.$customerUri.$fileName.$version);
 	}
 	/**
 	 * @info Método para versionar archivos

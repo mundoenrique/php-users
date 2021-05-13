@@ -128,7 +128,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->previewPASS_A = FALSE;
 		$this->render->previewPASS_R = FALSE;
 
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
@@ -272,7 +272,7 @@ class Novo_User extends NOVO_Controller {
 			}
 		}
 
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->titlePage = lang('GEN_MENU_PROFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
@@ -361,7 +361,7 @@ class Novo_User extends NOVO_Controller {
 
 		$views = ['staticpages/content-browser'];
 		$this->includeAssets->cssFiles = [
-			"$this->folder/"."$this->skin-browser"
+			"$this->customerUri/"."$this->skin-browser"
 		];
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;

@@ -14,7 +14,7 @@ class NOVO_Controller extends CI_Controller {
 	protected $skin;
 	protected $rule;
 	protected $includeAssets;
-	protected $countryUri;
+	protected $customerUri;
 	protected $views;
 	protected $render;
 	protected $dataRequest;
@@ -25,7 +25,6 @@ class NOVO_Controller extends CI_Controller {
 	protected $appUserName;
 	protected $greeting;
 	protected $products;
-	protected $folder;
 	protected $nameApi;
 	private $ValidateBrowser;
 
@@ -41,10 +40,10 @@ class NOVO_Controller extends CI_Controller {
 		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
 		$this->model = ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
-		$this->render->logged = $this->session->logged;
-		$this->render->userId = $this->session->userId;
-		$this->appUserName = $this->session->userName;
+		$this->customerUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
+		$this->render->logged = $this->session->has_userdata('logged');
+		$this->render->userId = $this->session->has_userdata('userId') ? $this->session->userId : FALSE;;
+		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
 		$this->products = $this->session->has_userdata('products');
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
@@ -56,7 +55,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->ValidateBrowser = FALSE;
 		$this->nameApi = '';
 
-		if ($this->countryUri === "api") {
+		if ($this->customerUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
 			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
 		}
@@ -74,7 +73,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		if ($this->countryUri === "api") {
+		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
 
@@ -85,7 +84,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			languageLoad('generic', $this->router->fetch_class());
-			clientUrlValidate($this->countryUri);
+			clientUrlValidate($this->customerUri);
 			languageLoad('specific', $this->router->fetch_class());
 			$this->skin = $this->config->item('client');
 			$this->form_validation->set_error_delimiters('', '---');
@@ -137,13 +136,13 @@ class NOVO_Controller extends CI_Controller {
 					redirect(base_url('perfil-usuario'), 'location', 301);
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
+				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
 				$valid = TRUE;
 
 				if ($_POST && $access) {
 					log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
-					$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
 
 					if ($valid) {
 						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
@@ -166,24 +165,22 @@ class NOVO_Controller extends CI_Controller {
 		if ($auth) {
 			$this->render->favicon = lang('GEN_FAVICON');
 			$this->render->ext = lang('GEN_FAVICON_EXT');
-			$this->render->countryConf = $this->config->item('country');
-			$this->render->countryUri = $this->countryUri;
+			$this->render->customerUri = $this->customerUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$this->folder = $this->countryUri;
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
-				"$this->countryUri/root-$this->skin",
+				"$this->customerUri/root-$this->skin",
 				"root-general",
 				"reboot",
-				"$this->folder/"."$this->skin-base"
+				"$this->customerUri/"."$this->skin-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
-					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
+					"$this->customerUri/$this->skin-$this->ValidateBrowser-base"
 				);
 			}
 

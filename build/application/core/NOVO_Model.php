@@ -14,8 +14,8 @@ class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
 	public $accessLog;
 	public $token;
-	public $country;
-	public $countryUri;
+	public $customer;
+	public $customerUri;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -30,8 +30,8 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->countrySess ?? $this->config->item('country');
-		$this->countryUri = $this->session->countryUri;
+		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
+		$this->customerUri = $this->session->customerUri;
 		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
@@ -52,7 +52,7 @@ class NOVO_Model extends CI_Model {
 			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
 		}
 
-		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
+		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);

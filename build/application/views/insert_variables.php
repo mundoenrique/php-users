@@ -3,7 +3,7 @@
 	var lang = <?php print_r(json_encode($this->lang->language)); ?> ;
 	var baseURL = '<?= base_url(); ?>';
 	var assetUrl = '<?= assetUrl(); ?>';
-	var country = '<?= $countryUri; ?>';
+	var customerUri = '<?= $customerUri; ?>';
 	var client = '<?= $this->config->item('client'); ?>';
 	var newViews = '<?= $this->config->item('new-views'); ?>';
 	var code = <?= $code ?? 0; ?> ;

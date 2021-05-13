@@ -27,7 +27,7 @@ class Novo_Assets_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '34';
 		$this->dataRequest->className = 'com.novo.objects.TOs.PaisTO';
-		$this->dataRequest->codPais = $this->country;
+		$this->dataRequest->codPais = $this->customer;
 
 		$response = $this->sendToService('callWs_StatesList');
 		$statesList = [];
@@ -65,7 +65,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '35';
 		$this->dataRequest->className = 'com.novo.objects.TOs.EstadoTO';
 		$this->dataRequest->codEstado = $dataRequest->stateCode;
-		$this->dataRequest->codPais = $this->country;
+		$this->dataRequest->codPais = $this->customer;
 
 		$response = $this->sendToService('callWs_CityList');
 		$citiesList = [];
@@ -178,7 +178,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '119';
 		$this->dataRequest->className = 'String.class';
 		$this->dataRequest->pais = 'Global';
-		$this->dataRequest->bean = $this->config->item('country');
+		$this->dataRequest->bean = $this->config->item('customer');
 
 		$response = $this->sendToService('callWs_TypeDocumentList');
 

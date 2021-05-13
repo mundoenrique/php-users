@@ -71,7 +71,7 @@ class Novo_User_Model extends NOVO_Model {
 		$clientCod = $response->codPais ?? '';
 		$clientCod = $response->bean->codPais ?? $clientCod;
 
-		if ($validateClient && $clientCod != $this->config->item('country') && COUNTRY_VERIFY == 'ON') {
+		if ($validateClient && $clientCod != $this->config->item('customer') && COUNTRY_VERIFY == 'ON') {
 			if ($this->isResponseRc == 0) {
 				$userData = [
 					'logged' => TRUE,
@@ -112,9 +112,11 @@ class Novo_User_Model extends NOVO_Model {
 						)
 					);
 					$statusImgValida = FALSE;
+
 					if (property_exists($response, "aplicaImgDoc") && strtoupper($response->aplicaImgDoc) == 'S') {
-						$statusImgValida = strtoupper($response->img_valida) == 'FALSE'? TRUE: FALSE;
+						$statusImgValida = strtoupper($response->img_valida) == 'FALSE' ? TRUE : FALSE;
 					}
+
 					$userData = [
 						'logged' => TRUE,
 						'encryptKey' => $response->keyUpdate,
@@ -127,8 +129,8 @@ class Novo_User_Model extends NOVO_Model {
 						'client' => $this->config->item('client'),
 						'time' => $time,
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
-						'countrySess' => $response->codPais,
-						'countryUri' => $this->config->item('country-uri'),
+						'customerSess' => $response->codPais,
+						'customerUri' => $this->config->item('customer-uri'),
 						'canTransfer' => $response->aplicaTransferencia,
 						'operKey' => $response->passwordOperaciones,
 						'affiliate' => $response->afiliado,
@@ -331,7 +333,7 @@ class Novo_User_Model extends NOVO_Model {
       	'orden' => '1'
 			]
 		];
-		$this->dataRequest->pais = $this->config->item('country');
+		$this->dataRequest->pais = $this->config->item('customer');
 		$msgGeneral = 0;
 
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
@@ -524,11 +526,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $dataRequest->documentId;
 		$this->dataRequest->pin = $dataRequest->cardPIN ?? '1234';
 		$this->dataRequest->claveWeb = isset($dataRequest->cardPIN) ? md5($dataRequest->cardPIN) : md5('1234');
-		$this->dataRequest->pais = $dataRequest->client ?? $this->country;
+		$this->dataRequest->pais = $dataRequest->client ?? $this->customer;
 		$this->dataRequest->email = $dataRequest->email ?? '';
 		$this->dataRequest->tipoTarjeta = isset($dataRequest->virtualCard) ? 'virtual' : (isset ($dataRequest->physicalCard) ? 'fisica' : '');
-		$authToken = $this->session->flashdata('authToken') ??  '';
-		$maskMail = $this->dataRequest->email !='' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
+		$authToken = $this->session->flashdata('authToken') ?? '';
+		$maskMail = $this->dataRequest->email != '' ? maskString($this->dataRequest->email, 4, $end = 6, '@') : '';
 		$this->dataRequest->otp =[
 			'authToken' => $authToken,
 			'tokenCliente' => (isset($dataRequest->codeOtp) && $dataRequest->codeOtp != '') ? $dataRequest->codeOtp : '',
@@ -589,8 +591,8 @@ class Novo_User_Model extends NOVO_Model {
 					'abbrTypeDocument' => $response->user->abrev_tipo_id_ext_per ?? '',
 					'token' => $response->token,
 					'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $dataRequest->documentId, 'REMOTE_ADDR'),
-					'countrySess' => $dataRequest->client ?? $this->country,
-					'countryUri' => $this->config->item('country-uri'),
+					'customerSess' => $dataRequest->client ?? $this->customer,
+					'customerUri' => $this->config->item('customer-uri'),
 					'clientAgent' => $this->agent->agent_string(),
 					'longProfile' => $userData->longProfile,
 					'cardNumber' => $cardNumber
@@ -710,8 +712,8 @@ class Novo_User_Model extends NOVO_Model {
 			'segundoApellido' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->surName)))),
 			'fechaNacimiento' => $dataRequest->birthDate,
 			'id_ext_per' => $dataRequest->idNumber,
-			'tipo_id_ext_per' => lang('CONF_COUNTRY_CODE')[$this->country],
-			'codPais' => $dataRequest->client ?? $this->country,
+			'tipo_id_ext_per' => lang('CONF_COUNTRY_CODE')[$this->customer],
+			'codPais' => $dataRequest->client ?? $this->customer,
 			'sexo' => $dataRequest->gender,
 			'notEmail' => '1',
 			'notSms' => '1',
@@ -804,7 +806,7 @@ class Novo_User_Model extends NOVO_Model {
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 			$configUploadFile['upload_path'] = $this->tool_file->buildDirectoryPath([
 			$this->tool_file->buildDirectoryPath([UPLOAD_PATH]),
-				strtoupper($this->session->countryUri),
+				strtoupper($this->session->customerUri),
 				strtoupper($dataRequest->nickName ?? $this->session->userName),
 			]);
 
@@ -1104,7 +1106,7 @@ class Novo_User_Model extends NOVO_Model {
 				foreach ($imagesDocumentLoaded as $typeDocument => $nameDocument) {
 					if ($nameDocument['nameFile'] !== '') {
 						$fullPathToImage = UPLOAD_PATH . $this->tool_file->buildDirectoryPath([
-							strtoupper($this->session->countryUri),
+							strtoupper($this->session->customerUri),
 							strtoupper($this->session->userName),
 							$nameDocument['nameFile']
 						]);
@@ -1163,7 +1165,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->className = 'com.novo.objects.MO.DatosPerfilMO';
-		$this->dataRequest->country = $this->session->countrySess;
+		$this->dataRequest->country = $this->session->customerSess;
 		$this->dataRequest->registro = [
 			'user' => [
 				'userName' => $this->userName,
@@ -1277,7 +1279,7 @@ class Novo_User_Model extends NOVO_Model {
 		}
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
-			'acCodPais' => $this->session->countrySess,
+			'acCodPais' => $this->session->customerSess,
 			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
 			'acZonaPostal' => $dataRequest->postalCode,
@@ -1420,7 +1422,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? ($dataRequest->documentId ?? ''));
 		$result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
-		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('country');
+		$logMessage = 'NOVO ['.$userName.'] RESPONSE: recaptcha País: "' .$this->config->item('customer');
 		$logMessage.= '", Score: "' . $result["score"] .'", Hostname: "'. $result["hostname"].'"';
 
 		log_message('DEBUG', $logMessage);
