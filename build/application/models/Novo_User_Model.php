@@ -267,7 +267,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Recuperar acceso';
 		$this->dataAccessLog->operation = 'Obtener usuario o clave temporal';
-		$this->dataAccessLog->userName = $dataRequest->email;
+		$this->dataAccessLog->userName = $dataRequest->idNumber;
 
 		$this->dataRequest->idOperation = isset($dataRequest->recoveryPwd) ? '23' : '24';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
@@ -456,7 +456,6 @@ class Novo_User_Model extends NOVO_Model {
 
 		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
 		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
-
 		$argon2 = $this->encrypt_connect->generateArgon2($new);
 
 		$this->dataRequest->idOperation = '25';

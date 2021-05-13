@@ -305,9 +305,11 @@ class Encrypt_Connect
 			ARGON2_MEMORY_LIMIT,
 			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
 		);
+
 		$result = new stdClass();
 		$result->hashArgon2 =  unpack("C*", $hash);
 		$result->hexArgon2 =  bin2hex($hash);
+
 		return $result;
 	}
 	/**

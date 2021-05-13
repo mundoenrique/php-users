@@ -120,7 +120,7 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
 		$auth = FALSE;
-		$user = $user ?: $this->user;
+		$user = $user ?? $this->user;
 		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP', 'validateOTP'];
 		$auth = in_array($module, $freeAccess);
 

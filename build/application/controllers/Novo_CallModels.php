@@ -36,7 +36,15 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = $this->input->post('userName') != NULL ? mb_strtoupper($this->input->post('userName')) : $this->appUserName;
+		if (!$this->appUserName) {
+			if ($this->input->post('userName') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('userName'));
+			} elseif ($this->input->post('idNumber') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('idNumber'));
+			} elseif ($this->input->post('documentId') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('documentId'));
+			}
+		}
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 

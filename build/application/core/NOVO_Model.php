@@ -140,16 +140,15 @@ class NOVO_Model extends CI_Model {
 		$responsetoView = new stdClass();
 
 		foreach ($this->response AS $pos => $response) {
-			if (is_array($response) && isset($response['file'])) {
-				continue;
-			}
-
-			if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
+			if (isset($response->file)) {
 				continue;
 			}
 
 			$responsetoView->$pos = $response;
 
+			if (!empty($response->profileData->imagesLoaded)) {
+				$responsetoView->data->profileData->imagesLoaded = 'cypher image';
+			}
 		}
 
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
