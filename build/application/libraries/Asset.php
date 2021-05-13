@@ -43,8 +43,8 @@ class Asset {
 
 			if(!file_exists($file)) {
 				$customerUri = $this->CI->config->item('customer-uri').'/';
-				$rootCss = '-'.$this->CI->config->item('client');
-				$baseCss = $this->CI->config->item('client').'-';
+				$rootCss = '-'.$this->CI->config->item('customer-uri');
+				$baseCss = $this->CI->config->item('customer-uri').'-';
 				$search = [$customerUri, $rootCss, $baseCss];
 				$replace = ['default/', '-default', 'default-'];
 				$file = str_replace($search, $replace, $file);

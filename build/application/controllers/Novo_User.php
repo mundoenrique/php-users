@@ -42,7 +42,7 @@ class Novo_User extends NOVO_Controller {
 			"user/signin"
 		);
 
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -361,7 +361,7 @@ class Novo_User extends NOVO_Controller {
 
 		$views = ['staticpages/content-browser'];
 		$this->includeAssets->cssFiles = [
-			"$this->customerUri/"."$this->skin-browser"
+			"$this->customerUri/"."$this->customerUri-browser"
 		];
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;

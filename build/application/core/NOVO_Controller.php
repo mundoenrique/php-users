@@ -11,7 +11,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date May 16th, 2020
  */
 class NOVO_Controller extends CI_Controller {
-	protected $skin;
 	protected $rule;
 	protected $includeAssets;
 	protected $customerUri;
@@ -86,7 +85,7 @@ class NOVO_Controller extends CI_Controller {
 			languageLoad('generic', $this->router->fetch_class());
 			clientUrlValidate($this->customerUri);
 			languageLoad('specific', $this->router->fetch_class());
-			$this->skin = $this->config->item('client');
+			$this->customerUri = $this->config->item('customer-uri');
 			$this->form_validation->set_error_delimiters('', '---');
 			$this->config->set_item('language', 'global');
 
@@ -173,16 +172,16 @@ class NOVO_Controller extends CI_Controller {
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
-				"$this->customerUri/root-$this->skin",
+				"$this->customerUri/root-$this->customerUri",
 				"root-general",
 				"reboot",
-				"$this->customerUri/"."$this->skin-base"
+				"$this->customerUri/"."$this->customerUri-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
-					"$this->customerUri/$this->skin-$this->ValidateBrowser-base"
+					"$this->customerUri/$this->customerUri-$this->ValidateBrowser-base"
 				);
 			}
 
@@ -265,7 +264,7 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
-		$valid = $this->tool_browser->validBrowser($this->skin);
+		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if(!$valid) {
 			redirect(base_url('sugerencia'),'location', 301);
@@ -297,7 +296,7 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu->mainMenu = $mainMenu;
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
-		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
+		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword') != NULL)
 			? 'cerrar-sesion/inicio' : 'inicio';
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
