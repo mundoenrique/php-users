@@ -295,6 +295,7 @@ if (!function_exists('normalizeName')) {
 			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
 			'n', 'N', 'c', 'C'
 		];
+
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
 }
