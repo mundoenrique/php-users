@@ -34,7 +34,7 @@
     <div class="btn-lang-img">
 			<a href="">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
-				<span class=""><?= lang('GEN_BTN_LANG'); ?></span>
+				<span class="text"><?= lang('GEN_BTN_LANG'); ?></span>
 			</a>
     </div>
   </div>

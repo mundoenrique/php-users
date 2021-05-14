@@ -686,7 +686,7 @@ template { display: none; }
 .form-control {
 	display: block;
 	width: 100%;
-	height: calc(1.386em + .75rem + 2px);
+	height: calc(1.386em + .75rem + 4px);
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
