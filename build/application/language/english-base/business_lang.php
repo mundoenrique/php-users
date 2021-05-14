@@ -13,5 +13,4 @@ $lang['BUSINESS_TO_SHOW'] = 'Show:';
 $lang['BUSINESS_RECENT'] = 'Recent';
 $lang['BUSINESS_LAST_MOVEMENTS'] = 'Last 20';
 $lang['BUSINESS_SELECT'] = 'Select';
-//DATEPICKER
-$lang['BUSINESS_PICKER_MINDATE'] = '-48m';
+$lang['BUSINESS_WITH_OUT_CARDS'] = 'No tienes tarjetas disponibles para usar la aplicación, %s';

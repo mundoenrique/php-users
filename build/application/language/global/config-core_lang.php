@@ -77,6 +77,7 @@ $lang['CONF_FOOTER_LOGO'] = 'ON';
 //CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
+$lang['BUSINESS_PICKER_MINDATE'] = '-48m';
 //SIGNUP
 $lang['CONF_COUNTRY_CODE'] = [
 	'Pe' => 1,

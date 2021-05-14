@@ -37,6 +37,21 @@ class Novo_Business_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				if (isset($response->lista) && count($response->lista) > 0) {
+					$this->response->code = 0;
+
+					if($this->session->missingImages) {
+						$this->response->code = 3;
+						$this->response->title = lang('GEN_TITLE_IMPORTANT');
+						$this->response->icon = lang('CONF_ICON_INFO');
+						$this->response->msg = lang('GEN_MISSING_IMAGES');
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
+						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
+						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
+						$this->response->modalBtn['btn2']['action'] = 'destroy';
+
+						$this->session->set_userdata('missingImages', FALSE);
+					}
+
 					foreach ($response->lista AS $pos => $cardsRecords) {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
@@ -103,33 +118,20 @@ class Novo_Business_Model extends NOVO_Model {
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
 						$cardsList[] = $cardRecord;
+						$this->session->set_userdata('products', TRUE);
 					}
-				}
-
-				$this->session->set_userdata('products', TRUE);
-				if (isset($response->lista) && count($response->lista) > 0) {
-					$this->response->code = 0;
-
-					if($this->session->missingImages) {
-						$this->response->code = 3;
-						$this->response->title = lang('GEN_TITLE_IMPORTANT');
-						$this->response->icon = lang('CONF_ICON_INFO');
-						$this->response->msg = lang('GEN_MISSING_IMAGES');
-						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
-						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
-						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
-						$this->response->modalBtn['btn2']['action'] = 'destroy';
-
-						$this->session->set_userdata('missingImages', FALSE);
-					}
-				} else{
-					$this->response->code = 1;
+				} else {
+					$this->response->code = 4;
+					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->msg = novoLang(lang('BUSINESS_WITH_OUT_CARDS'), mb_strtolower(lang('GEN_VALIDATION_LOGGED')));
+					$this->response->modalBtn['btn1']['link'] = 'cerrar-sesion/inicio';
 				}
 			break;
 			default:
 				if ($this->isResponseRc != -61) {
 					$this->session->sess_destroy();
 				}
+
 				$this->response->modalBtn['btn1']['link'] = 'inicio';
 		}
 
