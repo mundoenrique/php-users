@@ -24,6 +24,21 @@
       <?= lang('GEN_FOTTER_RIGHTS'); ?><?= ' - '.date("Y") ?>
     </span>
   </div>
+
+	<?php if (lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
+  <?php $this->load->view('widget/widget_contacts_content-core') ?>
+  <?php endif; ?>
+
+	<?php if (lang('CONF_BTN_LANG') == 'ON') : ?>
+  <div class="btn-lang">
+    <div class="btn-lang-img">
+			<a href="">
+				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
+				<span class=""><?= lang('GEN_BTN_LANG'); ?></span>
+			</a>
+    </div>
+  </div>
+	<?php endif; ?>
 </footer>
 
 <div id="loader" class="none">

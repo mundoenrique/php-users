@@ -3,7 +3,7 @@
   <div class="widget-header">
     <h2 class="mb-2 h3 regular center"><?= lang('GEN_CONTACTS_TITLE_HELP'); ?></h2>
   </div>
-  <div class="widget-section">
+  <div class="widget-section text">
     <p class="mb-1"><?= lang('GEN_CONTACTS_TITLE'); ?></p>
     <table class="w-100">
       <thead>
@@ -30,7 +30,7 @@
       </tbody>
     </table>
   </div>
-  <div class="widget-support-btn phone" aria-hidden="true">
-    <span class="icon-phone h00 px-2"></span>
+  <div class="flex rounded-left widget-support-btn phone" aria-hidden="true">
+    <span class="items-center m-auto icon-phone h2"></span>
   </div>
 </div>

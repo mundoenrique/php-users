@@ -49,7 +49,4 @@
     </div>
     <?php endif; ?>
   </div>
-  <?php if (lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
-  <?php $this->load->view('widget/widget_contacts_content-core') ?>
-  <?php endif; ?>
 </div>

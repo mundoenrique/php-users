@@ -208,3 +208,6 @@ $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Directorio existente.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directorio no creado!!!.';
+
+$lang['GEN_LANG_IMG'] = 'en.png';
+$lang['GEN_BTN_LANG'] = 'en';
