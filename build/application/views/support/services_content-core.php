@@ -9,7 +9,7 @@
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
                 <div class="item-network <?= $brand, $networkBrand ?>"></div>
-                <?php if ($cardsTotal > 1): ?>
+                <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
@@ -18,11 +18,11 @@
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
-							<?php if ($cardsTotal == 1 && $isVirtual): ?>
+							<?php if ($totalCards == 1 && $isVirtual): ?>
               <span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
 							<?php endif; ?>
             </div>
-            <?php if ($cardsTotal > 1): ?>
+            <?php if ($totalCards > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
               <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>

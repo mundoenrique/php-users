@@ -285,12 +285,24 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu = new stdClass();
 		$mainMenu = mainMenu();
 
+		if ($this->session->has_userdata('totalCards') && $this->session->totalCards == 1) {
+			unset($mainMenu['CARDS_LIST']);
+			$cardDetail = [
+				'CARD_DETAIL' => []
+			];
+			$mainMenu = $cardDetail + $mainMenu;
+		}
+
 		if ($this->session->has_userdata('noService')) {
 			unset($mainMenu['CUSTOMER_SUPPORT']);
 		}
 
 		if ($this->session->has_userdata('canTransfer') && $this->session->canTransfer == 'N') {
 			unset($mainMenu['PAYS_TRANSFER']);
+		}
+
+		if ($this->session->has_userdata('totalCards')) {
+			$this->render->totalCards = $this->session->totalCards;
 		}
 
 		$userMenu->mainMenu = $mainMenu;

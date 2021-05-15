@@ -178,6 +178,10 @@ if (!function_exists('setCurrentPage')) {
 				if($menu == lang('GEN_MENU_CARDS_LIST')) {
 					$cssClass = 'page-current';
 				}
+
+				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
+					$cssClass = 'page-current';
+				}
 				break;
 			case 'Novo_Payments':
 				if($menu == lang('GEN_MENU_PAYS_TRANSFER')) {

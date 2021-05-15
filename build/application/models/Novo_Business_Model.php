@@ -118,7 +118,6 @@ class Novo_Business_Model extends NOVO_Model {
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
 						$cardsList[] = $cardRecord;
-						$this->session->set_userdata('products', TRUE);
 					}
 				} else {
 					$this->response->code = 4;
@@ -136,9 +135,37 @@ class Novo_Business_Model extends NOVO_Model {
 		}
 
 		$serviceList = array_unique($serviceList);
+		$totalCards = count($cardsList);
 
 		if (count($serviceList) == 0) {
 			$this->session->set_userdata('noService', TRUE);
+		}
+
+		if ($totalCards > 0) {
+			$this->session->set_userdata('products', TRUE);
+			$this->session->set_userdata('totalCards', $totalCards);
+		}
+
+		if ($totalCards == 1) {
+			$oneCard = new stdClass();
+			$oneCard->userIdNumber = $cardsList[0]->userIdNumber;
+			$oneCard->cardNumber = $cardsList[0]->cardNumber;
+			$oneCard->cardNumberMask = $cardsList[0]->cardNumberMask;
+			$oneCard->productName = $cardsList[0]->productName;
+			$oneCard->brand = $cardsList[0]->brand;
+			$oneCard->productImg = $cardsList[0]->productImg;
+			$oneCard->productImgRev = $cardsList[0]->productImgRev;
+			$oneCard->productUrl = $cardsList[0]->productUrl;
+			$oneCard->productUrlRev = $cardsList[0]->productUrlRev;
+			$oneCard->status = $cardsList[0]->status;
+			$oneCard->isVirtual = (string)$cardsList[0]->isVirtual;
+			$oneCard->cardsTotal = $totalCards;
+		}
+
+		if ($totalCards == 1 && !isset($dataRequest->module)) {
+			$this->session->set_userdata('oneCard', $oneCard);
+			redirect(base_url('detalle-de-tarjeta'), 'location', 301);
+			exit();
 		}
 
 		$this->response->data->cardsList = $cardsList;

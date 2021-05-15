@@ -70,6 +70,14 @@ class Novo_Business extends NOVO_Controller {
 			"business/cardDetail"
 		);
 
+		if ($this->session->has_userdata('oneCard')) {
+			$this->request = $this->session->oneCard;
+		}
+
+		if (empty((array)$this->request)) {
+			redirect(base_url('lista-de-tarjetas'), 'location', 301);
+		}
+
 		$detailCard = $this->loadModel($this->request);
 		$this->responseAttr($detailCard);
 
@@ -77,9 +85,7 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->currentYear = date('Y');
 
 		foreach ($detailCard->data AS $index => $render) {
-			if($index !== 'resp') {
-				$this->render->$index = $render;
-			}
+			$this->render->$index = $render;
 		}
 
 		foreach ($this->request AS $index => $render) {
