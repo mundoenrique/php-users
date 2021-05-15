@@ -64,7 +64,7 @@ $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['CONF_LONG_TEXT'] = '';
-$lang['CONF_BTN_LANG'] = 'ON';
+$lang['CONF_BTN_LANG'] = 'OFF';
 //SIGNUP
 $lang['CONF_SECRET_KEY'] = 'ON';
 $lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
