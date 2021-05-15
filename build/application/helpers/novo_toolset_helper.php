@@ -159,11 +159,6 @@ if (!function_exists('languageLoad')) {
 			$loadLanguages = TRUE;
 		}
 
-		/* if (file_exists($pathLang.'config-core_lang.php')) {
-			array_push($languagesFile, 'config-core');
-			$loadLanguages = TRUE;
-		} */
-
 		if (file_exists($pathLang.$class.'_lang.php')) {
 			array_push($languagesFile, $class);
 			$loadLanguages = TRUE;
