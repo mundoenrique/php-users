@@ -98,7 +98,7 @@ class NOVO_Model extends CI_Model {
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio',
+				'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARD_LIST') : lang('CONF_LINK_SIGNIN'),
 				'action'=> 'redirect'
 			]
 		];

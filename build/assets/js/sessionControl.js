@@ -42,7 +42,7 @@ function finishSession() {
 		btnKeepSession
 		.html(loader)
 		.prop('disabled', true);
-		$(location).attr('href', baseURL+'cerrar-sesion/fin');
+		$(location).attr('href', baseURL + lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_END);
 	}, callServer);
 
 	btnKeepSession.on('click', function() {
@@ -64,7 +64,7 @@ function logoutInformation() {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
 			action: 'redirect',
-			link: 'cerrar-sesion/inicio'
+			link: lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_START
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,

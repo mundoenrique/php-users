@@ -91,11 +91,11 @@ class Verify_Access {
 		$this->responseDefect->icon = lang('CONF_ICON_DANGER');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
-		$this->responseDefect->data = base_url('inicio');
+		$this->responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
 		$this->responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> 'inicio',
+				'link'=> lang('CONF_LINK_SIGNIN'),
 				'action'=> 'redirect'
 			]
 		];
@@ -162,7 +162,7 @@ class Verify_Access {
 					$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
 				break;
 				case 'signup':
-					$auth = $this->CI->agent->referrer() == base_url(lang('GEN_LINK_USER_IDENTITY')) && $this->CI->session->has_userdata('userIdentity');
+					$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
 				break;
 				case 'signUpData':
 					$auth = $this->CI->session->has_userdata('userNameValid');

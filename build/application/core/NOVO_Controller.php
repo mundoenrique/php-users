@@ -133,7 +133,7 @@ class NOVO_Controller extends CI_Controller {
 					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
-						redirect(base_url('perfil-usuario'), 'location', 301);
+						redirect(base_url(lang('GEN_LINK_USER_PROFILE')), 'location', 301);
 					}
 				}
 
@@ -212,7 +212,7 @@ class NOVO_Controller extends CI_Controller {
 				}
 			}
 		} else {
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
 		}
 
 	}
@@ -286,7 +286,7 @@ class NOVO_Controller extends CI_Controller {
 		$mainMenu = mainMenu();
 
 		if ($this->session->has_userdata('totalCards') && $this->session->totalCards == 1) {
-			unset($mainMenu['CARDS_LIST']);
+			unset($mainMenu['CARD_LIST']);
 			$cardDetail = [
 				'CARD_DETAIL' => []
 			];
@@ -309,7 +309,7 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword') != NULL)
-			? 'cerrar-sesion/inicio' : 'inicio';
+			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

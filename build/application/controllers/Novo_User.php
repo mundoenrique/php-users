@@ -25,7 +25,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('GEN_LINK_CARDS_LIST')), 'location', 301);
+			redirect(base_url(lang('GEN_LINK_CARD_LIST')), 'location', 301);
 			exit();
 		}
 
@@ -51,7 +51,7 @@ class Novo_User extends NOVO_Controller {
 
 		$baseLanguage = [
 			'name' => 'baseLanguage',
-			'value' => LANGUAGE == 'en' ? 'english' : 'spanish',
+			'value' => BASE_LANGUAGE ?? 'spanish',
 			'expire' => 0,
 			'httponly' => TRUE
 		];
@@ -142,6 +142,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
 		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
+
 		if (lang('CONF_LOAD_DOCS') == 'OFF') {
       foreach ($this->render->stepTitles as $key => $value) {
         if ($value == lang('USER_LOAD_DOCS_STEP')) {
@@ -150,6 +151,7 @@ class Novo_User extends NOVO_Controller {
       }
       $this->render->stepTitles = array_values($this->render->stepTitles);
     }
+
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -195,12 +197,12 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url('lista-de-tarjetas') ;
+			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('GEN_LINK_CARD_LIST')) ;
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
 		if ($this->session->flashdata('changePassword') != NULL) {
-			$cancelBtn = base_url('cerrar-sesion/inicio');
+			$cancelBtn = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START'));
 
 			switch($this->session->flashdata('changePassword')) {
 				case 'TemporalPass':
@@ -326,9 +328,9 @@ class Novo_User extends NOVO_Controller {
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin') {
+		if($redirect == lang('CONF_LINK_SIGNOUT_END')) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url('inicio');
+			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -339,7 +341,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
 		}
 
 	}
@@ -355,7 +357,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('inicio'), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
 			exit();
 		}
 

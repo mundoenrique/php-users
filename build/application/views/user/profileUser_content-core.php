@@ -525,7 +525,7 @@
 
         <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
         <div class="flex items-center justify-center my-3">
-          <a class="btn btn-small btn-link big-modal" href="<?= base_url('perfil-usuario') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+          <a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('GEN_LINK_USER_PROFILE')) ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
           <button id="profileUserBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_SAVE') ?></button>
         </div>
         <?php endif; ?>

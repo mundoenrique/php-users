@@ -130,7 +130,7 @@
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARD_LIST') ?>">Cancelar</a>
 						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
 					</div>
 				</form>

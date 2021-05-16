@@ -28,11 +28,11 @@
               <?= lang('GEN_BTN_SIGNIN') ?>
             </button>
             <?php if (lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON') : ?>
-            <a class="block mb-1 h5 primary hyper-link" href="<?= base_url('recuperar-acceso'); ?>"><?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?></a>
+            <a class="block mb-1 h5 primary hyper-link" href="<?= base_url(LANG('CONF_LINK_RECOVER_ACCESS')); ?>"><?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?></a>
             <?php endif; ?>
             <?php if (lang('CONIFG_SIGIN') == 'ON') : ?>
             <p class="mb-0 h5 center"><?= lang('USER_SIGNIN_NO_USER') ?>
-              <a class="hyper-link" href="<?= base_url(lang('GEN_LINK_USER_IDENTITY')) ?>"><?= lang('USER_SIGNIN_SINGN_UP') ?></a>
+              <a class="hyper-link" href="<?= base_url(lang('CONF_LINK_USER_IDENTIFY')) ?>"><?= lang('USER_SIGNIN_SINGN_UP') ?></a>
             </p>
             <?php endif; ?>
           </form>

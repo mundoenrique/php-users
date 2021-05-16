@@ -62,7 +62,7 @@
 					</div>
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= base_url('inicio'); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_SIGNIN')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 						<button id="identityBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 					</div>
 				</form>
@@ -70,4 +70,4 @@
 		</div>
 	</div>
 </div>
-<form id="signupForm" action="<?= base_url(lang('GEN_LINK_USER_SIGNUP')); ?>" method="POST"></form>
+<form id="signupForm" action="<?= base_url(lang('GEN_LINK_SIGNUP')); ?>" method="POST"></form>

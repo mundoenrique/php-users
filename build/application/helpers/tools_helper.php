@@ -366,7 +366,7 @@ if(!function_exists('validateUrl')) {
 					redirect(base_url('pichincha/home'), 'location', 301);
 					break;
 				default;
-					redirect(base_url($client.'/inicio'), 'location', 301);
+					redirect(base_url($client.'/sign-in'), 'location', 301);
 			}
 		}
 	}

@@ -128,7 +128,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	$.ajax({
 		method: 'POST',
-		url: baseURL + 'async-call',
+		url: baseURL + 'novo-async-call',
 		data: formData,
 		context: document.body,
 		cache: false,
@@ -165,7 +165,7 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			modalBtn: {
 				btn1: {
-					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
+					link: logged ? lang.GEN_LINK_CARD_LIST : lang.CONF_LINK_SIGNIN,
 					action: 'redirect'
 				}
 			}

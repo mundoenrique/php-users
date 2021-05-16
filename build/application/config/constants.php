@@ -112,7 +112,6 @@ date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';
 
 switch(end($uriSegments)) {
-	case 'inicio':
 	case 'es':
 		$baseLanguage = 'spanish';
 	break;
@@ -155,7 +154,7 @@ defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
-defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
+defined('LANGUAGE')					OR define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
 defined('COUNTRY_VERIFY')		OR define('COUNTRY_VERIFY', $_SERVER['COUNTRY_VERIFY'] ?? 'ON');
 defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');

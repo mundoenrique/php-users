@@ -15,7 +15,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 14th, 2019
+	 * @date Sep 10th, 2020
 	 */
 	public function callWs_GetMovements_Reports($dataRequest)
 	{
@@ -159,7 +159,7 @@ class Novo_Reports_Model extends NOVO_Model {
 						$this->response->code = 0;
 						$file = $response->bean->archivo ?? $response->archivo;
 						$name = $response->bean->nombre ?? $response->nombre;
-						$ext = $fitype = $dataRequest->id == 'downloadPDF' ? 'pdf' : 'xls';
+						$ext = $dataRequest->id == 'downloadPDF' ? 'pdf' : 'xls';
 						$this->response->data->file = $file;
 						$this->response->data->name = $name.'.'.$ext;
 						$this->response->data->ext = $ext;

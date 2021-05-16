@@ -4,7 +4,7 @@
   <div class="flex mt-3 light items-center">
     <div class="flex col-3">
       <h2 class="h4 regular tertiary mb-0"><?= lang('BUSINESS_MY_PRODUCTS') ?></h2>
-      <form id="cardListForm" action="<?= base_url(lang('GEN_LINK_CARDS_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
+      <form id="cardListForm" action="<?= base_url(lang('GEN_LINK_CARD_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
         <input type="hidden" name="cardList" value="getCardList">
       </form>
     </div>
@@ -62,7 +62,7 @@
   </div>
   <div id="no-products" class="hide">
     <div class="flex flex-column items-center justify-center pt-5">
-      <h3 class="h4 regular mb-0"><?= lang('BUSINESS_NO_CARDS_LIST'); ?></h3>
+      <h3 class="h4 regular mb-0"><?= lang('BUSINESS_NO_CARD_LIST'); ?></h3>
     </div>
   </div>
 </div>

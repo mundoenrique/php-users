@@ -45,7 +45,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$this->response->icon = lang('CONF_ICON_INFO');
 						$this->response->msg = lang('GEN_MISSING_IMAGES');
 						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
-						$this->response->modalBtn['btn1']['link'] = 'perfil-usuario';
+						$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_USER_PROFILE');
 						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
 						$this->response->modalBtn['btn2']['action'] = 'destroy';
 
@@ -123,7 +123,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->response->code = 4;
 					$this->response->icon = lang('CONF_ICON_WARNING');
 					$this->response->msg = novoLang(lang('BUSINESS_WITH_OUT_CARDS'), mb_strtolower(lang('GEN_VALIDATION_LOGGED')));
-					$this->response->modalBtn['btn1']['link'] = 'cerrar-sesion/inicio';
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START');
 				}
 			break;
 			default:
@@ -131,7 +131,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$this->session->sess_destroy();
 				}
 
-				$this->response->modalBtn['btn1']['link'] = 'inicio';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 		}
 
 		$serviceList = array_unique($serviceList);
@@ -164,7 +164,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		if ($totalCards == 1 && !isset($dataRequest->module)) {
 			$this->session->set_userdata('oneCard', $oneCard);
-			redirect(base_url('detalle-de-tarjeta'), 'location', 301);
+			redirect(base_url(lang('GEN_LINK_CARD_DETAIL')), 'location', 301);
 			exit();
 		}
 

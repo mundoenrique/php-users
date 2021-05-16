@@ -22,7 +22,6 @@ if (!function_exists('assetUrl')) {
 
 if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
-		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
@@ -30,7 +29,7 @@ if (!function_exists('clientUrlValidate')) {
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.'/inicio'), 'location', 301);
+			redirect(base_url($client.'/sign-in'), 'location', 301);
 		}
 
 		if (in_array($client, $accessUrl)) {
@@ -175,7 +174,7 @@ if (!function_exists('setCurrentPage')) {
 		$cssClass = '';
 		switch ($currentClass) {
 			case 'Novo_Business':
-				if($menu == lang('GEN_MENU_CARDS_LIST')) {
+				if($menu == lang('GEN_MENU_CARD_LIST')) {
 					$cssClass = 'page-current';
 				}
 
@@ -259,7 +258,7 @@ if (!function_exists('mainMenu'))
 {
 	function mainMenu() {
 		return [
-			'CARDS_LIST' => [],
+			'CARD_LIST' => [],
 			'PAYS_TRANSFER' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],

@@ -133,7 +133,7 @@ $(function () {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: 'lista-de-tarjetas',
+					link: lang.GEN_LINK_CARD_LIST,
 					action: 'redirect'
 				}
 			}

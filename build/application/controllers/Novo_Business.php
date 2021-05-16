@@ -42,7 +42,7 @@ class Novo_Business extends NOVO_Controller {
 			$cardsTotal = count($cardsList);
 		}
 
-		$this->render->titlePage = lang('GEN_MENU_CARDS_LIST');
+		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');
 		$this->render->lastSession = $this->session->lastSession;
 		$this->render->getList = $getList;
 		$this->render->cardsTotal = $cardsTotal;
@@ -75,7 +75,7 @@ class Novo_Business extends NOVO_Controller {
 		}
 
 		if (empty((array)$this->request)) {
-			redirect(base_url('lista-de-tarjetas'), 'location', 301);
+			redirect(base_url(lang('GEN_LINK_CARD_LIST')), 'location', 301);
 		}
 
 		$detailCard = $this->loadModel($this->request);

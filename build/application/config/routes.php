@@ -52,7 +52,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-//BDB ROUTES
+/*
+|--------------------------------------------------------------------------
+| CURRENT ROUTES
+|--------------------------------------------------------------------------
+*/
+// API
+$route['api/v1/(:any)/(:any)']['POST'] = "Novo_CallApi";
+//Asynchronous
+$route['(:any)/novo-async-call'] = "Novo_CallModels";
+//Suggestion
+$route['(:any)/sugerencia'] = "Novo_User/suggestion";
+//User
+$route['(:any)/inicio'] = function ($custumer) {
+	header('Location: '.BASE_URL.'/'.$custumer.'/sign-in', 'GET');
+};
+$route['(:any)/recuperar-acceso'] = function ($custumer) {
+	header('Location: '.BASE_URL.'/'.$custumer.'/recover-access', 'GET');
+};
+$route['(:any)/identificar-usuario'] = function ($custumer) {
+	header('Location: '.BASE_URL.'/'.$custumer.'/user-identify', 'GET');
+};
+$route['(:any)/terminos-condiciones'] = function ($custumer) {
+	header('Location: '.BASE_URL.'/'.$custumer.'/terms-conditions', 'GET');
+};
+$route['(:any)/sign-in'] = "Novo_User/signin";
+$route['(:any)/sign-in/(:any)'] = "Novo_User/signin";
+$route['(:any)/sign-up'] = "Novo_User/signup";
+$route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";
+$route['(:any)/recover-access'] = "Novo_User/accessRecover";
+$route['(:any)/recover-access/(:any)'] = "Novo_User/accessRecover";
+$route['(:any)/user-identify'] = "Novo_User/userIdentify";
+$route['(:any)/user-identify/(:any)'] = "Novo_User/userIdentify";
+$route['(:any)/change-password'] = "Novo_User/changePassword";
+$route['(:any)/user-profile'] = "Novo_User/profileUser";
+$route['(:any)/terms-conditions'] = "Novo_User/termsConditions";
+//Business
+$route['(:any)/card-list'] = "Novo_Business/userCardsList";
+$route['(:any)/card-detail'] = "Novo_Business/cardDetail";
+//Resports
+$route['(:any)/reports'] = "Novo_Reports/expensesCategory";
+//Custumer suppor
+$route['(:any)/customer-support'] = "Novo_CustomerSupport/services";
+$route['(:any)/notifications'] = "Novo_CustomerSupport/notifications";
+/*
+|--------------------------------------------------------------------------
+| BOGOTÁ ROUTES
+|--------------------------------------------------------------------------
+*/
 $route['bdb/'] = "user/login";
 $route['bdb/inicio'] = "user/login";
 $route['bdb/preregistro'] = "user/preRegistry";
@@ -73,33 +120,11 @@ $route['bdb/atencioncliente'] = "serviceProduct/customerSupport";
 $route['bdb/reporte'] = "expenseReport/listProduct";
 $route['bdb/detallereporte'] = "expenseReport/detailReport";
 $route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
-
-// API
-$route['api/v1/(:any)/(:any)']['POST'] = "Novo_CallApi";
-
-//Asynchronous
-$route['(:any)/async-call'] = "Novo_CallModels";
-//User
-$route['(:any)/sugerencia'] = "Novo_User/suggestion";
-$route['(:any)/inicio'] = "Novo_User/signin";
-$route['(:any)/inicio/(:any)'] = "Novo_User/signin";
-$route['(:any)/registro'] = "Novo_User/signup";
-$route['(:any)/cerrar-sesion/(:any)'] = "Novo_User/finishSession/$2";
-$route['(:any)/cambiar-clave'] = "Novo_User/changePassword";
-$route['(:any)/recuperar-acceso'] = "Novo_User/accessRecover";
-$route['(:any)/identificar-usuario'] = "Novo_User/userIdentify";
-$route['(:any)/perfil-usuario'] = "Novo_User/profileUser";
-$route['(:any)/terminos-condiciones'] = "Novo_User/termsConditions";
-//Business
-$route['(:any)/lista-de-tarjetas'] = "Novo_Business/userCardsList";
-$route['(:any)/detalle-de-tarjeta'] = "Novo_Business/cardDetail";
-//Resports
-$route['(:any)/reportes'] = "Novo_Reports/expensesCategory";
-//Custumer suppor
-$route['(:any)/atencion-al-cliente'] = "Novo_CustomerSupport/services";
-$route['(:any)/notificaciones'] = "Novo_CustomerSupport/notifications";
-
-//Actual Structure
+/*
+|--------------------------------------------------------------------------
+| OLD ROUTES
+|--------------------------------------------------------------------------
+*/
 $route['(:any)/home'] = 'users/index'; // Perú LATODO | Ecuador pichincha
 $route['users'] = 'users/index'; // Otros paises
 $route['users/recoveryPassword_pe'] = 'users/recoveryPassword'; // Perú LATODO

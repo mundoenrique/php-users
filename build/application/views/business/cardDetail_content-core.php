@@ -20,7 +20,7 @@
             <p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
             <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
             <?php if ($cardsTotal > 1): ?>
-            <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARDS_LIST'); ?>">
+            <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('GEN_LINK_CARD_LIST'); ?>">
               <i aria-hidden="true" class="icon-find"></i>
               &nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
             </a>
