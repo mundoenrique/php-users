@@ -22,6 +22,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: signin Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
@@ -49,15 +50,6 @@ class Novo_User extends NOVO_Controller {
 			);
 		}
 
-		$baseLanguage = [
-			'name' => 'baseLanguage',
-			'value' => BASE_LANGUAGE ?? 'spanish',
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		$this->input->set_cookie($baseLanguage);
-
 		$this->render->skipProductInf = TRUE;
 		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
 		$this->views = ['user/'.$view];
@@ -72,6 +64,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'userIdentify';
 
 		array_push(
@@ -164,6 +157,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'accessRecover';
 
 		array_push(

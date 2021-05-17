@@ -32,9 +32,9 @@
 	<?php if (lang('CONF_BTN_LANG') == 'ON') : ?>
   <div class="btn-lang">
     <div class="btn-lang-img">
-			<a href="">
+			<a id="change-lang" href="<?= lang('GEN_NO_LINK') ?>">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
-				<span class="text"><?= lang('GEN_BTN_LANG'); ?></span>
+				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
     </div>
   </div>

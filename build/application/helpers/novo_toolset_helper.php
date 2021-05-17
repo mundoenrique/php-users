@@ -342,3 +342,19 @@ if (! function_exists('floatFormat')) {
 
 	}
 }
+
+if (! function_exists('languageCookie')) {
+	function languageCookie($language) {
+
+		$CI =& get_instance();
+		$baseLanguage = [
+			'name' => 'baseLanguage',
+			'value' => $language,
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$CI->input->set_cookie($baseLanguage);
+
+	}
+}

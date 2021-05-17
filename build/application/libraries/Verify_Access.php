@@ -121,7 +121,10 @@ class Verify_Access {
 
 		$auth = FALSE;
 		$user = $user ?? $this->user;
-		$freeAccess = ['signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP', 'validateOTP'];
+		$freeAccess = [
+			'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP',
+			'validateOTP', 'changeLanguage'
+		];
 		$auth = in_array($module, $freeAccess);
 
 		if(!$auth) {

@@ -507,6 +507,12 @@ $config = [
 			'rules' => 'trim|alpha|required'
 		]
 	],
+	'changeLanguage' => [
+		[
+			'field' => 'lang',
+			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
+		]
+	],
 	'finishSession' => [
 		[
 			'field' => 'userName',

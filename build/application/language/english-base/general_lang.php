@@ -209,4 +209,6 @@ $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Existing directory.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directory not created';
 
 $lang['GEN_LANG_IMG'] = 'es.png';
-$lang['GEN_BTN_LANG'] = 'es';
+$lang['GEN_AFTER_COD_LANG'] = 'es';
+$lang['GEN_BEFORE_COD_LANG'] = 'en';
+$lang['GEN_AFTER_LANG'] = 'spanish';
