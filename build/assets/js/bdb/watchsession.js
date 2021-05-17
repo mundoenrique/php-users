@@ -4,7 +4,7 @@ var $$ = document;
 $$.addEventListener('DOMContentLoaded', function() {
 
 	var actualPage = window.location.pathname.split("/").pop();
-	var pageNoTObserved = ['inicio','signin','preregistro','recuperaracceso','registro']
+	var pageNoTObserved = ['inicio','sign-in','preregistro','recuperaracceso','registro']
 
 	if (!pageNoTObserved.includes(actualPage)) {
 
