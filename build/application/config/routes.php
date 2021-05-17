@@ -65,7 +65,11 @@ $route['(:any)/novo-async-call'] = "Novo_CallModels";
 $route['(:any)/sugerencia'] = "Novo_User/suggestion";
 //User
 $route['(:any)/inicio'] = function ($custumer) {
-	header('Location: '.BASE_URL.'/'.$custumer.'/sign-in', 'GET');
+	if ($custumer == 'bdb') {
+		return "user/login";
+	} else {
+		header('Location: '.BASE_URL.'/'.$custumer.'/sign-in', 'GET');
+	}
 };
 $route['(:any)/recuperar-acceso'] = function ($custumer) {
 	header('Location: '.BASE_URL.'/'.$custumer.'/recover-access', 'GET');
@@ -76,7 +80,9 @@ $route['(:any)/identificar-usuario'] = function ($custumer) {
 $route['(:any)/terminos-condiciones'] = function ($custumer) {
 	header('Location: '.BASE_URL.'/'.$custumer.'/terms-conditions', 'GET');
 };
-$route['(:any)/sign-in'] = "Novo_User/signin";
+$route['(:any)/sign-in'] = function ($customer) {
+	return $customer == "bdb" ? "user/login" : "Novo_User/signin";
+};
 $route['(:any)/sign-in/(:any)'] = "Novo_User/signin";
 $route['(:any)/sign-up'] = "Novo_User/signup";
 $route['(:any)/sign-out/(:any)'] = "Novo_User/finishSession/$2";

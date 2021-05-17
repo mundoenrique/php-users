@@ -26,10 +26,12 @@ if (!function_exists('clientUrlValidate')) {
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
+		$uriCore = '/sign-in';
+		$uriCore = $client == 'bdb' ? '/inicio' : $uriCore;
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.'/sign-in'), 'location', 301);
+			redirect(base_url($client.$uriCore), 'location', 301);
 		}
 
 		if (in_array($client, $accessUrl)) {

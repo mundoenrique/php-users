@@ -456,15 +456,16 @@ $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
-	'detalles',
 	'api/v1/[\w\-]+/[\w\-]+',
-	'[\w\-]+/registro',
+	'[\w\-]+/sign-up',
 	'[\w\-]+/card-list',
 	'[\w\-]+/card-detail',
+	'[\w\-]+/registro',
 	'[\w\-]+/detalle',
 	'[\w\-]+/detalle/download',
 	'[\w\-]+/atencioncliente',
-	'[\w\-]+/detallereporte'
+	'[\w\-]+/detallereporte',
+	'detalles'
 );
 
 /*
