@@ -57,6 +57,8 @@ class NOVO_Controller extends CI_Controller {
 		if ($this->customerUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
 			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+			$this->config->set_item('language', 'global');
+			$this->lang->load('config-core');
 		}
 
 		$this->optionsCheck();
