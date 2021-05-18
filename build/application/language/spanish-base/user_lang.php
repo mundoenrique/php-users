@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//SIGN IN
 $lang['USER_SIGNIN_TITLE'] = '';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
@@ -441,9 +442,7 @@ $lang['USER_RECOVER_DOC_TYPE'] = [
 	'PP' => 'Pasaporte',
 ];
 $lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
-//SESSION EXPIRE
-$lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
-//USER REGISTER
+//USER SIGN UP
 $lang['USER_SATISFACTORY_REG'] = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_SOME_DATA'] = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
@@ -455,3 +454,5 @@ $lang['USER_NOT_VALIDATE_DATA'] = 'No fue posible validar tus datos, por favor v
 $lang['USER_VERIFY_DNI'] = 'Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
 $lang['USER_ACCEPT_TERMS'] = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
 $lang['USER_ELECTRONIC_MONEY'] = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';
+//SESSION EXPIRE
+$lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
