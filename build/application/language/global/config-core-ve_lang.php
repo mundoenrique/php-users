@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_CURRENCY'] = 'Bs.';
-$lang['GEN_DECIMAL'] = ',';
-$lang['GEN_THOUSANDS'] = '.';
+$lang['CONF_CURRENCY'] = 'Bs.';
+$lang['CONF_DECIMAL'] = ',';
+$lang['CONF_THOUSANDS'] = '.';
 $lang['CONF_LONG_TEXT'] = 'h6';

@@ -9,16 +9,16 @@
 			<ul class="dropdown regular tertiary bg-secondary">
 				<?php if(lang('CONF_NOTIFICATIONS') == 'ON'): ?>
 				<li>
-					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('GEN_LINK_NOTIFICATIONS')) ?>"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></a>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_NOTIFICATIONS')) ?>"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></a>
 				</li>
 				<?php endif; ?>
 				<?php if(lang('CONF_PROFILE') == 'ON'): ?>
 				<li>
-					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('GEN_LINK_USER_PROFILE')) ?>"><?= lang('GEN_MENU_PROFILE'); ?></a>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_USER_PROFILE')) ?>"><?= lang('GEN_MENU_PROFILE'); ?></a>
 				</li>
 				<?php endif; ?>
 				<li>
-					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('GEN_MENU_CHANGE_PASS') ?></a>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('GEN_MENU_CHANGE_PASS') ?></a>
 				</li>
 				<li>
 					<a id="logout-session" class="pl-2 pr-1 h6" href="<?= lang('GEN_NO_LINK'); ?>"><?= lang('GEN_MENU_SIGNOUT'); ?></a>

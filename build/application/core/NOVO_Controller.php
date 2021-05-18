@@ -119,7 +119,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			if ($this->input->is_ajax_request()) {
-				$this->dataRequest = lang('CONFIG_CYPHER_DATA') == 'ON' ? json_decode(
+				$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
 					$this->security->xss_clean(
 						strip_tags(
 							$this->cryptography->decrypt(
@@ -135,7 +135,7 @@ class NOVO_Controller extends CI_Controller {
 					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
-						redirect(base_url(lang('GEN_LINK_USER_PROFILE')), 'location', 301);
+						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'location', 301);
 					}
 				}
 

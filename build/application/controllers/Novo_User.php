@@ -26,7 +26,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('GEN_LINK_CARD_LIST')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
 			exit();
 		}
 
@@ -191,7 +191,7 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('GEN_LINK_CARD_LIST')) ;
+			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('CONF_LINK_CARD_LIST')) ;
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 

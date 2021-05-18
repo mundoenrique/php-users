@@ -45,7 +45,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$this->response->icon = lang('CONF_ICON_INFO');
 						$this->response->msg = lang('GEN_MISSING_IMAGES');
 						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
-						$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_USER_PROFILE');
+						$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
 						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
 						$this->response->modalBtn['btn2']['action'] = 'destroy';
 
@@ -164,7 +164,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		if ($totalCards == 1 && !isset($dataRequest->module)) {
 			$this->session->set_userdata('oneCard', $oneCard);
-			redirect(base_url(lang('GEN_LINK_CARD_DETAIL')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
 			exit();
 		}
 
@@ -195,7 +195,7 @@ class Novo_Business_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('GEN_CURRENCY').' '.$response->disponible;
+				$this->response->msg = lang('CONF_CURRENCY').' '.$response->disponible;
 				$this->response->modal = TRUE;
 			break;
 			default:
@@ -240,9 +240,9 @@ class Novo_Business_Model extends NOVO_Model {
 				$this->response->code = 0;
 
 				if (isset($response->saldos)) {
-					$balance->currentBalance = lang('GEN_CURRENCY').' '.$response->saldos->actual;
-					$balance->inTransitBalance = lang('GEN_CURRENCY').' '.$response->saldos->bloqueo;
-					$balance->availableBalance = lang('GEN_CURRENCY').' '.$response->saldos->disponible;
+					$balance->currentBalance = lang('CONF_CURRENCY').' '.$response->saldos->actual;
+					$balance->inTransitBalance = lang('CONF_CURRENCY').' '.$response->saldos->bloqueo;
+					$balance->availableBalance = lang('CONF_CURRENCY').' '.$response->saldos->disponible;
 				}
 
 				if (count($response->movimientos) > 0) {
@@ -252,7 +252,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
-						$move->amount = lang('GEN_CURRENCY').' '.$moves->monto;
+						$move->amount = lang('CONF_CURRENCY').' '.$moves->monto;
 						$movesList[] = $move;
 					}
 				}
@@ -310,7 +310,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
-						$move->amount = lang('GEN_CURRENCY').' '.$moves->monto;
+						$move->amount = lang('CONF_CURRENCY').' '.$moves->monto;
 						$movesList[] = $move;
 					}
 				}

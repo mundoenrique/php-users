@@ -376,7 +376,7 @@
                 <div class="row mx-1">
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
+                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
                   </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
@@ -473,7 +473,7 @@
                 <div class="row mx-1">
                   <div class="form-group col-6 col-lg-4 mb-4">
                     <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('GEN_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
+                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
                   </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
@@ -525,7 +525,7 @@
 
         <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
         <div class="flex items-center justify-center my-3">
-          <a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('GEN_LINK_USER_PROFILE')) ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+          <a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_USER_PROFILE')) ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
           <button id="profileUserBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_SAVE') ?></button>
         </div>
         <?php endif; ?>

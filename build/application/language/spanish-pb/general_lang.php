@@ -9,4 +9,4 @@ $lang['GEN_CONTACTS'] = [
 	'XXXXX' => 'XXXXXXX',
 ];
 //LINKS
-$lang['GEN_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecoverOTP';
+$lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecoverOTP';

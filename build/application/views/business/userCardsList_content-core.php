@@ -4,7 +4,7 @@
   <div class="flex mt-3 light items-center">
     <div class="flex col-3">
       <h2 class="h4 regular tertiary mb-0"><?= lang('BUSINESS_MY_PRODUCTS') ?></h2>
-      <form id="cardListForm" action="<?= base_url(lang('GEN_LINK_CARD_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
+      <form id="cardListForm" action="<?= base_url(lang('CONF_LINK_CARD_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
         <input type="hidden" name="cardList" value="getCardList">
       </form>
     </div>
@@ -39,7 +39,7 @@
             <?php endif; ?>
           </p>
         </div>
-        <form action="<?= base_url(lang('GEN_LINK_CARD_DETAIL')); ?>" method="POST">
+        <form action="<?= base_url(lang('CONF_LINK_CARD_DETAIL')); ?>" method="POST">
           <input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
           <input type="hidden" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
           <input type="hidden" id="cardNumberMask" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask ?>">
