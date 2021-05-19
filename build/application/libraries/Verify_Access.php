@@ -137,6 +137,7 @@ class Verify_Access {
 				case 'userCardsList':
 				case 'profileUser':
 				case 'updateProfile':
+				case 'notifications':
 					$auth = $this->CI->session->has_userdata('logged');
 				break;
 				case 'keepSession':

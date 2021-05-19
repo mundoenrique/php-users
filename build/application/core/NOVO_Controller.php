@@ -172,6 +172,11 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
+			$this->render->totalCards = 0;
+
+			if ($this->session->has_userdata('totalCards')) {
+				$this->render->totalCards = $this->session->totalCards;
+			}
 
 			$this->includeAssets->cssFiles = [
 				"$this->customerUri/root-$this->customerUri",
@@ -214,7 +219,17 @@ class NOVO_Controller extends CI_Controller {
 				}
 			}
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			$redirectLink = lang('CONF_LINK_SIGNIN');
+
+			if ($this->session->has_userdata('logged')) {
+				$redirectLink = lang('CONF_LINK_CARD_LIST');
+			}
+
+			if ($this->render->totalCards == 1) {
+				$redirectLink = lang('CONF_LINK_CARD_LIST');
+			}
+
+			redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
 		}
 
 	}
@@ -301,10 +316,6 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->session->has_userdata('canTransfer') && $this->session->canTransfer == 'N') {
 			unset($mainMenu['PAYS_TRANSFER']);
-		}
-
-		if ($this->session->has_userdata('totalCards')) {
-			$this->render->totalCards = $this->session->totalCards;
 		}
 
 		$userMenu->mainMenu = $mainMenu;

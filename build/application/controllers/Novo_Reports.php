@@ -37,7 +37,7 @@ class Novo_Reports extends NOVO_Controller {
 		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
-		$cardsTotal = count($cardsList);
+		$totalCards = count($cardsList);
 		$yearTenant = (int) lang('GEN_PICKER_MINDATE');
 		$years = date('Y') - 2;
 		$maxYear = date('Y');
@@ -50,7 +50,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->maxYear = $maxYear;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->render->operations = TRUE;
-		$this->render->cardsTotal = $cardsTotal;
+		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
 		$this->render->brand = '';
 		$this->render->productImg = '';
@@ -63,9 +63,9 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->isVirtual = '';
 		$this->render->tittleVirtual = '';
 		$this->render->callMoves = '0';
-		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
+		$this->render->networkBrand = $totalCards > 1 ? 'hide' : '';
 
-		if ($cardsTotal == 1) {
+		if ($totalCards == 1) {
 			$this->render->brand = $cardsList[0]->brand;
 			$this->render->productImg = $cardsList[0]->productImg;
 			$this->render->productUrl = $cardsList[0]->productUrl;

@@ -309,7 +309,7 @@ class Novo_User extends NOVO_Controller {
 	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 20th, 2020
+	 * @date May 18th, 2020
 	 */
 	public function finishSession($redirect)
 	{
@@ -317,12 +317,14 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'finishSession';
 
-		if($this->render->userId || $this->render->logged) {
+		$callFinishSession = $this->session->has_userdata('userId') || $this->session->has_userdata('logged');
+
+		if($callFinishSession) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == lang('CONF_LINK_SIGNOUT_END')) {
+		if($redirect == lang('CONF_LINK_SIGNOUT_END') && $callFinishSession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;

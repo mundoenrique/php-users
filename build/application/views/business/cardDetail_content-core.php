@@ -19,7 +19,7 @@
           <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
             <p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
             <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-            <?php if ($cardsTotal > 1): ?>
+            <?php if ($totalCards > 1): ?>
             <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('CONF_LINK_CARD_LIST'); ?>">
               <i aria-hidden="true" class="icon-find"></i>
               &nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>

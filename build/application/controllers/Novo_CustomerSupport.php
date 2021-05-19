@@ -36,7 +36,6 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$serviceList = $userCardList->data->serviceList;
-		$cardsTotal = count($cardsList);
 		$serviceTotal = 0;
 		$pinManagement = FALSE;
 
@@ -54,12 +53,11 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		}
 
 		$serviceTotal = $pinManagement ? $serviceTotal + 1 : $serviceTotal;
-		$uniqueEvent = $cardsTotal == 1 && $serviceTotal == 1;
+		$uniqueEvent = $this->render->totalCards == 1 && $serviceTotal == 1;
 		$this->render->titlePage = lang('GEN_MENU_CUSTOMER_SUPPORT');
 		$this->render->operations = TRUE;
 		$this->render->serviceList = $serviceList;
 		$this->render->serviceTotal = $serviceTotal;
-		$this->render->cardsTotal = $cardsTotal;
 		$this->render->cardsList = $cardsList;
 		$this->render->brand = '';
 		$this->render->productImg = '';
@@ -77,9 +75,9 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->RecoverPinText = lang('CUST_RETRIEVE_PIN');
 		$this->render->activeEvents = 'no-events';
 		$this->render->uniqueEvent = $uniqueEvent;
-		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
+		$this->render->networkBrand = $this->render->totalCards > 1 ? 'hide' : '';
 
-		if ($cardsTotal == 1) {
+		if ($this->render->totalCards == 1) {
 			$this->render->brand = $cardsList[0]->brand;
 			$this->render->productImg = $cardsList[0]->productImg;
 			$this->render->productUrl = $cardsList[0]->productUrl;

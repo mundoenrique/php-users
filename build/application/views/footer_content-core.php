@@ -72,7 +72,7 @@
 	<input type="hidden" id="virtual" name="virtual" value="<?= $isVirtual; ?>">
   <input type="hidden" id="action" name="action" value="">
 </form>
-<?php if ($cardsTotal > 1): ?>
+<?php if ($totalCards > 1): ?>
 <section id="cardList" class="hide">
   <h4 class="h4"><?= lang('GEN_ACCOUNT_SELECTION') ?></h4>
   <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">

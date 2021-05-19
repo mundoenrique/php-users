@@ -159,13 +159,23 @@ class Novo_Business_Model extends NOVO_Model {
 			$oneCard->productUrlRev = $cardsList[0]->productUrlRev;
 			$oneCard->status = $cardsList[0]->status;
 			$oneCard->isVirtual = (string)$cardsList[0]->isVirtual;
-			$oneCard->cardsTotal = $totalCards;
+
+			if (isset($dataRequest->module)) {
+				$oneCard->expireDate = $cardsList[0]->expireDate;
+				$oneCard->prefix = $cardsList[0]->prefix;
+				$oneCard->tittleVirtual = $cardsList[0]->tittleVirtual;
+				$oneCard->statustext = $cardsList[0]->status == '' ? lang('CUST_TEMPORARY_LOCK') : lang('CUST_UNLOCK_CARD');
+				$oneCard->statustextCard = $cardsList[0]->status == '' ? lang('CUST_TEMPORARILY_LOCK') : lang('CUST_UNLOCK');
+			}
+
 		}
 
 		if ($totalCards == 1 && !isset($dataRequest->module)) {
 			$this->session->set_userdata('oneCard', $oneCard);
 			redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
 			exit();
+		} elseif ($totalCards == 1) {
+
 		}
 
 		$this->response->data->cardsList = $cardsList;

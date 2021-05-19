@@ -51,7 +51,6 @@
 					<input type="hidden" id="productUrlRev" name="productUrlRev" class="hidden" value="<?= $cards->productUrlRev ?>">
           <input type="hidden" id="status" name="status" class="hidden" value="<?= $cards->status ?>">
           <input type="hidden" id="isVirtual" name="isVirtual" class="hidden" value="<?= $cards->isVirtual ?>">
-          <input type="hidden" id="cardsTotal" name="cardsTotal" class="hidden" value="<?= $cardsTotal ?>">
         </form>
       </div>
       <?php endforeach; ?>
