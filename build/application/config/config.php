@@ -381,7 +381,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 70 : SESS_EXPIRATION;
+$config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 60 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = ACTIVE_SAFETY == 'ON' ? 60 : 0;
