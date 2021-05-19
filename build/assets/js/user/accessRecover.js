@@ -79,10 +79,10 @@ function showModalOTP(response) {
 }
 
 function getAccessRecover(){
-	who = 'User'; where = lang.GEN_LINK_SERVICE_RECOVER_ACCESS;
+	who = 'User'; where = lang.CONF_LINK_SERVICE_RECOVER_ACCESS;
 
 	callNovoCore(who, where, data, function (response) {
-		if (lang.GEN_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
+		if (lang.CONF_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
 			showModalOTP(response);
 		}
 

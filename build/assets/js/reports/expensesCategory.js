@@ -125,7 +125,7 @@ function getMovements(typeInquiry) {
 				header += '<th><span aria-hidden="true" class="' + pos + ' h3" title="' + value + '" data-toggle="tooltip"></span></th>';
 			});
 
-			header += '<th class="bold">Total (' + lang.GEN_CURRENCY + ')</th>'
+			header += '<th class="bold">Total (' + lang.CONF_CURRENCY + ')</th>'
 			header += '</tr>';
 			$('#movements thead').append(header);
 
@@ -171,7 +171,7 @@ function getMovements(typeInquiry) {
 							label: function(tooltipItem) {
 								setValues = response.data.labels[tooltipItem.index];
 								setCategory =  response.data.grafic[tooltipItem.index].category;
-								return setCategory+ ": " + lang.GEN_CURRENCY + " " + setValues;
+								return setCategory+ ": " + lang.CONF_CURRENCY + " " + setValues;
 							}
 						}
 					},

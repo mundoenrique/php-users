@@ -75,7 +75,7 @@ class Novo_Business extends NOVO_Controller {
 		}
 
 		if (empty((array)$this->request)) {
-			redirect(base_url(lang('GEN_LINK_CARD_LIST')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
 		}
 
 		$detailCard = $this->loadModel($this->request);

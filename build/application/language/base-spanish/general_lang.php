@@ -77,7 +77,7 @@ $lang['CMBVHI'] = 'Vehículos';
 $lang['CMBCTA'] = 'Cuentas';
 $lang['CMBVJE'] = 'Viajes';
 //SETTINGS
-$lang['CONFIG_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
 $lang['CONFIGURACION'] = 'Configuración';

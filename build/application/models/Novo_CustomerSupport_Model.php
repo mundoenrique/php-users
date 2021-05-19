@@ -48,7 +48,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, $responseAction]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
@@ -136,7 +136,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, 'bloqueada de forma permanente']);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? lang('GEN_LINK_CARD_LIST') : lang('GEN_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
@@ -191,7 +191,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				if (isset($reponse->bean->cost_repos_plas) && $reponse->bean->cost_repos_plas != '') {
 					$cost = currencyFormat($reponse->bean->cost_repos_plas);
 					$this->response->data->cost = TRUE;
-					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('GEN_CURRENCY'), $cost]);
+					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('CONF_CURRENCY'), $cost]);
 				}
 			break;
 			case 29:
@@ -419,7 +419,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_CHANGE_PIN'), [$dataRequest->cardNumberMask]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case -308:
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');

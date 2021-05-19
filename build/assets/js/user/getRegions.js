@@ -1,6 +1,6 @@
 'use strcit'
 $(function() {
-	$('#averageIncome').mask('#' + lang.GEN_THOUSANDS + '##0' + lang.GEN_DECIMAL + '00', { reverse: true });
+	$('#averageIncome').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
 	$('#averageIncome').on('keyup', function () {
 		$(this).val(function (index, value) {
 
@@ -9,7 +9,7 @@ $(function() {
 			}
 
 			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-				value = '00' + lang.GEN_DECIMAL + value
+				value = '00' + lang.CONF_DECIMAL + value
 			}
 
 			return value

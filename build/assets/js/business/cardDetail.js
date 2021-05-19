@@ -13,7 +13,7 @@ $(function () {
 		changeMonth: true,
 		changeYear: true,
 		showButtonPanel: true,
-		minDate: lang.BUSINESS_PICKER_MINDATE,
+		minDate: lang.CONF_PICKER_MINDATE,
 		closeText: 'Aceptar',
 
 		onClose: function (dateText, inst) {
@@ -196,7 +196,7 @@ function displaymoves() {
 				tooltips: {
 					callbacks: {
 						label: function(tooltipItem) {
-							return graphicLabel[tooltipItem.index] + ": " + lang.GEN_CURRENCY+ " " + graphicValue[tooltipItem.index]
+							return graphicLabel[tooltipItem.index] + ": " + lang.CONF_CURRENCY+ " " + graphicValue[tooltipItem.index]
 						}
 					}
 				},

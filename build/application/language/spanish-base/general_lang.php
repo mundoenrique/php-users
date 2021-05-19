@@ -91,11 +91,48 @@ $lang['GEN_OTHER_PRODUCTS'] = 'Otro producto';
 $lang['GEN_MOVEMENTS'] = 'Movimientos';
 $lang['GEN_TYPE_DOCUMENT'] = 'Tipo de documento';
 $lang['GEN_MONTHLY'] = 'Mensual';
+$lang['GEN_SELECT_MONTH'] = [
+	'01' => 'Enero',
+	'02' => 'Febrero',
+	'03' => 'Marzo',
+	'04' => 'Abril',
+	'05' => 'Mayo',
+	'06' => 'Junio',
+	'07' => 'Julio',
+	'08' => 'Agosto',
+	'09' => 'Septiembre',
+	'10' => 'Octubre',
+	'11' => 'Noviembre',
+	'12' => 'Diciembre',
+];
+$lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
+$lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
+$lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
+$lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
+$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
+$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
+$lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
+$lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
+$lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
+$lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
+$lang['GEN_PHYSICAL_CARD'] = 'Física';
+$lang['GEN_VIRTUAL_CARD'] = 'Tarjeta digital';
+$lang['GEN_VIRTUAL'] = '%s digital';
+$lang['GEN_VIRTUAL_DISJOIN'] = '~';
+$lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
+$lang['GEN_INVALID_CARD'] = 'Los datos son inválidos o ya estas registrado.';
+$lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
+$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
+$lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
 //OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
 $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
 $lang['GEN_OTP_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo.';
 $lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
+$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
@@ -149,43 +186,6 @@ $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_MINDATE'] = 2001;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
-//GENERAL
-$lang['GEN_SELECT_MONTH'] = [
-	'01' => 'Enero',
-	'02' => 'Febrero',
-	'03' => 'Marzo',
-	'04' => 'Abril',
-	'05' => 'Mayo',
-	'06' => 'Junio',
-	'07' => 'Julio',
-	'08' => 'Agosto',
-	'09' => 'Septiembre',
-	'10' => 'Octubre',
-	'11' => 'Noviembre',
-	'12' => 'Diciembre',
-];
-$lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
-$lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
-$lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
-$lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
-$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
-$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
-$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
-$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
-$lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
-$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
-$lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
-$lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
-$lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
-$lang['GEN_PHYSICAL_CARD'] = 'Física';
-$lang['GEN_VIRTUAL_CARD'] = 'Tarjeta digital';
-$lang['GEN_VIRTUAL'] = '%s digital';
-$lang['GEN_VIRTUAL_DISJOIN'] = '~';
-$lang['GEN_INVALID_DATA'] = 'Alguno de los datos indicado no es válido.';
-$lang['GEN_INVALID_CARD'] = 'Los datos son inválidos o ya estas registrado.';
-$lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
-$lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
-$lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 //PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';

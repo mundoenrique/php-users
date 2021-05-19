@@ -5,7 +5,7 @@
     <?php foreach ($mainMenu AS $firstLevel => $menuLevel1): ?>
     <?php if(lang('CONF_'.$firstLevel) == 'ON'): ?>
     <?php $menuText1 = lang('GEN_MENU_'.$firstLevel); ?>
-    <?php $menuLink1 = lang('GEN_LINK_'.$firstLevel); ?>
+    <?php $menuLink1 = lang('CONF_LINK_'.$firstLevel); ?>
     <?php $menuLink1 = $menuLink1 != lang('GEN_NO_LINK') ? base_url($menuLink1) : lang('GEN_NO_LINK'); ?>
     <li class="nav-item mr-1 inline <?= $menuLink1 != lang('GEN_NO_LINK') ? 'big-modal' : '' ?> <?= setCurrentPage($currentClass, $menuText1); ?>">
       <a class="nav-link px-2 semibold primary" href="<?= $menuLink1 ?>"><?= $menuText1; ?></a>

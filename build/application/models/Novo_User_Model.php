@@ -50,7 +50,7 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (lang('CONFIG_MAINTENANCE') == 'ON') {
+		if (lang('CONF_MAINTENANCE') == 'ON') {
 			$this->isResponseRc = 9997;
 		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
@@ -100,7 +100,7 @@ class Novo_User_Model extends NOVO_Model {
 				} else {
 					$this->response->code = 0;
 					$this->response->modal = TRUE;
-					$this->response->data = base_url(lang('GEN_LINK_CARD_LIST'));
+					$this->response->data = base_url(lang('CONF_LINK_CARD_LIST'));
 					$fullSignin = TRUE;
 					$fullName = mb_strtolower($response->primerNombre).' ';
 					$fullName.= mb_strtolower($response->primerApellido);
@@ -159,7 +159,7 @@ class Novo_User_Model extends NOVO_Model {
 
 					if (!$fullSignin) {
 						$this->session->unset_userdata('logged');
-						$this->response->data = base_url(lang('GEN_LINK_CHANGE_PASS'));
+						$this->response->data = base_url(lang('CONF_LINK_CHANGE_PASS'));
 					}
 				}
 			break;
@@ -211,7 +211,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('GEN_SYSTEM_NAME');
-				$this->response->msg = 'estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
@@ -229,7 +229,7 @@ class Novo_User_Model extends NOVO_Model {
 		return $this->responseToTheView('callWs_Signin');
 	}
 	/**
-	 * @info Método para validar si el usuariio esta logueado
+	 * @info Método para validar si el usuario esta logueado
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date April 29th, 2020
 	 */
@@ -238,7 +238,7 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
 		$logged = FALSE;
 
-		if (lang('CONFIG_DUPLICATE_SESSION') == 'ON') {
+		if (lang('CONF_DUPLICATE_SESSION') == 'ON') {
 			$this->db->select(['id', 'username'])
 			->where('username',  $userName)
 			->get_compiled_select('cpo_sessions', FALSE);
@@ -481,7 +481,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link'] = $this->session->has_userdata('logged') ? lang('GEN_LINK_CARD_LIST') : lang('CONF_LINK_SIGNIN');
+				$this->response->modalBtn['btn1']['link'] = $this->session->has_userdata('logged') ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_SIGNIN');
 			break;
 			case -465:
 				$code = 1;
@@ -1303,12 +1303,12 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->msg = lang('USER_UPDATE_SUCCESS');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_USER_PROFILE');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
 			break;
 			case -200:
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->msg = lang('USER_UPDATE_FAIL');
-				$this->response->modalBtn['btn1']['link'] = lang('GEN_LINK_USER_PROFILE');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
 			break;
 		}
 
