@@ -165,3 +165,24 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
+//REGEX
+$lang['CONF_REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
+$lang['CONF_REGEX_ONLY_ONE_NUMBER'] = '^[0-9]{1}$';
+$lang['CONF_REGEX_ONLY_ONE_LETTER'] = '^[SCV]{1}$';
+$lang['CONF_REGEX_NAMES_VALID'] = '^([a-zñáéíóú.]+[\s]*)+$';
+$lang['CONF_REGEX_NICKNAME'] = '^[a-z0-9_]{6,16}$';
+$lang['CONF_REGEX_NICKNAME_PROFILE'] = '^[a-z0-9 .,+-_@*]{6,16}$';
+$lang['CONF_REGEX_SHORT_PHRASE'] = '^[a-z0-9ñáéíóú ().]{4,25}$';
+$lang['CONF_REGEX_LONG_PHRASE'] = '^[a-z0-9ñáéíóú ().,:;-]{5,150}$';
+$lang['CONF_REGEX_ALPHA_NAME'] = '^[a-zñáéíóú ]{1,50}$';
+$lang['CONF_REGEX_ALPHA_LETTER'] = '^[a-zñáéíóú]{4,20}$';
+$lang['CONF_REGEX_EMAIL_VALID'] = '^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$';
+$lang['CONF_REGEX_ALPHANUM_UNDER'] = '^([\w.\-+&ñÑ .,_\@\* ]+)+$';
+$lang['CONF_REGEX_ALPHANUM'] = '^[a-z0-9]+$';
+$lang['CONF_REGEX_NUMERIC'] = '^[0-9]+$';
+$lang['CONF_REGEX_PHONE'] = '^[0-9]{7,15}$';
+$lang['CONF_REGEX_PHONE_MASKED'] = '^[0-9*]{7,15}$';
+$lang['CONF_REGEX_FLOAT_AMOUNT'] = '^[0-9]+(\.[0-9]{2})?$';
+$lang['CONF_REGEX_DATE_DMY'] = '^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$';
+$lang['CONF_REGEX_DATE_MY'] = '^(0?[1-9]|1[012])\/[0-9]{4}$';
+$lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';

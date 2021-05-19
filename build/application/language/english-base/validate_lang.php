@@ -63,9 +63,3 @@ $lang['VALIDATE_PROTECTION'] = 'You must read and accept the protection of perso
 $lang['VALIDATE_CONTRACT'] = 'You must read and accept the electronic money account agreement.';
 $lang['VALIDATE_SHORT_PHRASE'] = 'Min 4 max 25 (letters, numbers, space ().).';
 $lang['VALIDATE_TYPE_DOCUMENT'] = 'Please select a valid document type.';
-//REGEX
-$lang['VALIDATE_AMOUNT_REGEX'] = '^[0-9]+(\.[0-9]{2})?$';
-$lang['VALIDATE_MOBIL'] = '^[0-9]{7,15}$';
-$lang['VALIDATE_MOBIL_MASKED'] = '^[0-9*]{7,15}$';
-$lang['VALIDATE_REGEX_NICKNAME'] = '^[a-z0-9_]{6,16}$';
-$lang['VALIDATE_REGEX_NICKNAME_PROFILE'] = '^[a-z0-9 .,+-_@*]{6,16}$';

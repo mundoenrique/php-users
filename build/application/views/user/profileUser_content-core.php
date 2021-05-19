@@ -245,7 +245,7 @@
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+                    <label for="fiscalId"><?= lang('USER_FISCAL_REGISTRY') ?></label>
                     <input id="fiscalId" class="form-control" type="text" name="fiscalId" autocomplete="off" value="<?= $fiscalId ?>" readonly>
                     <div class="help-block"></div>
                   </div>

@@ -90,7 +90,7 @@ $(function () {
 			$(element).hide();
 			$('#'+element.id+'View').hide();
 			$.each(services, function(pos, value) {
-				if ((lang.CUS_SERVICES[element.id]).indexOf(value, 0) != -1) {
+				if ((lang.CUST_SERVICES[element.id]).indexOf(value, 0) != -1) {
 					$(element).show();
 				}
 			})
@@ -121,7 +121,7 @@ $(function () {
 				$(element).hide();
 				$.each(services, function (pos, value) {
 					var currentServ = (element.id).slice(0, -4)
-					if ((lang.CUS_SERVICES[currentServ]).indexOf(value, 0) != -1) {
+					if ((lang.CUST_SERVICES[currentServ]).indexOf(value, 0) != -1) {
 						$('#' + currentServ).addClass('active')
 						$(element).show();
 					}

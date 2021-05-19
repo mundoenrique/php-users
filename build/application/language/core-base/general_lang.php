@@ -18,7 +18,6 @@ $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
-$lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_NOT_SERVICES_AVAILABLE'] = 'Existe una solicitud de reposición pendiente,
 no es posible realizar otras operaciones.';

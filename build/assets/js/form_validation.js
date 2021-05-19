@@ -2,33 +2,45 @@
 function validateForms(form) {
 	formInputTrim(form);
 
-	var onlyNumber = /^[0-9]{2,20}$/;
-	var onlyOneNumber = /^[0-9]{1}$/;
-	var onlyOneLetter = /^[SCV]{1}$/;
-	var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
-	var validNickName = new RegExp(lang.VALIDATE_REGEX_NICKNAME, 'i');
-	var validNickNameProfile = new RegExp(lang.VALIDATE_REGEX_NICKNAME_PROFILE, 'i');
-	var regNumberValid = /^['a-z0-9']{6,45}$/i;
-	var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
-	var middlePhrase = /^['a-z0-9ñáéíóú ().']{5,45}$/i;
-	var longPhrase = /^[a-z0-9ñáéíóú ().,:;-]{5,150}$/i;
-	var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
-	var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
-	var emailValid = /^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	var alphanumunder = /^([\w.\-+&ñÑ .,_\@\* ]+)+$/i;
-	var alphanum = /^[a-z0-9]+$/i;
+	//var onlyNumber = /^[0-9]{2,20}$/;
+	var onlyNumber = new RegExp(lang.CONF_REGEX_ONLY_NUMBER);
+	//var onlyOneNumber = /^[0-9]{1}$/;
+	var onlyOneNumber = new RegExp(lang.CONF_REGEX_ONLY_ONE_NUMBER);
+	//var onlyOneLetter = /^[SCV]{1}$/;
+	var onlyOneLetter = new RegExp(lang.CONF_REGEX_ONLY_ONE_LETTER);
+	//var namesValid = /^([a-zñáéíóú.]+[\s]*)+$/i;
+	var namesValid = new RegExp(lang.CONF_REGEX_NAMES_VALID, 'i');
+	var validNickName = new RegExp(lang.CONF_REGEX_NICKNAME, 'i');
+	var validNickNameProfile = new RegExp(lang.CONF_REGEX_NICKNAME_PROFILE, 'i');
+	//var shortPhrase = /^['a-z0-9ñáéíóú ().']{4,25}$/i;
+	var shortPhrase = new RegExp(lang.CONF_REGEX_SHORT_PHRASE, 'i');
+	//var longPhrase = /^[a-z0-9ñáéíóú ().,:;-]{5,150}$/i;
+	var longPhrase = new RegExp(lang.CONF_REGEX_LONG_PHRASE, 'i');
+	//var alphaName = /^[a-zñáéíóú ]{1,50}$/i;
+	var alphaName = new RegExp(lang.CONF_REGEX_ALPHA_NAME, 'i');
+	//var alphaLetter = /^[a-zñáéíóú]{4,20}$/i;
+	var alphaLetter = new RegExp(lang.CONF_REGEX_ALPHA_LETTER, 'i');
+	//var emailValid = /^([\.0-9a-zA-Z_\-])+\@(([\.0-9a-zA-Z\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var emailValid = new RegExp(lang.CONF_REGEX_EMAIL_VALID);
+	//var alphanumunder = /^([\w.\-+&ñÑ .,_\@\* ]+)+$/i;
+	var alphanumunder = new RegExp(lang.CONF_REGEX_ALPHANUM_UNDER, 'i');
+	//var alphanum = /^[a-z0-9]+$/i;
+	var alphanum = new RegExp(lang.CONF_REGEX_ALPHANUM, 'i');
 	var userPassword = validatePass;
-	var numeric = /^[0-9]+$/;
-	var phone = new RegExp(lang.VALIDATE_MOBIL, 'i');
-	var phoneMasked = new RegExp(lang.VALIDATE_MOBIL_MASKED, 'i');
-	var alphabetical = /^[a-z]+$/i;
-	var text = /^['a-z0-9ñáéíóú ,.:()']+$/i;
-	var floatAmount = new RegExp(lang.VALIDATE_FLOAT_AMOUNT, 'i');
-	var validCode = /^[a-z0-9]+$/i;
-	var date = {
+	//var numeric = /^[0-9]+$/;
+	var numeric =  new RegExp(lang.CONF_REGEX_NUMERIC);
+	var phone = new RegExp(lang.CONF_REGEX_PHONE, 'i');
+	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
+	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
+	/*var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
 		y: /^[0-9]{4}$/,
+	};*/
+	var date = {
+		dmy: new RegExp(lang.CONF_REGEX_DATE_DMY),
+		my: new RegExp(lang.CONF_REGEX_DATE_MY),
+		y: new RegExp(lang.CONF_REGEX_DATE_Y),
 	};
 	var defaults = {
 		debug: true,
@@ -59,7 +71,7 @@ function validateForms(form) {
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
 			"documentId": { required: true, validateDocumentId: true },
 			"cardPIN": { required: true, pattern: numeric },
-			"codeOTP": { required: true, pattern: validCode, maxlength: 8 },
+			"codeOTP": { required: true, pattern: alphanum, maxlength: 8 },
 			"acceptTerms": { required: true },
 			"nickName": { required: true, pattern: validNickName, differs: lang.VALIDATE_NICK_DIFFER, dbAvailable: true },
 			"nickNameProfile": { required: true, pattern: validNickNameProfile, differs: lang.VALIDATE_NICK_DIFFER, dbAvailable: true },

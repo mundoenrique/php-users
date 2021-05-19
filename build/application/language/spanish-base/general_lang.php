@@ -109,12 +109,7 @@ $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
 $lang['GEN_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['GEN_IP_VERIFY'] = 'Estás ingresando desde un equipo no habitual, por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, por favor indícalo a continuación.';
-$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
-$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
-$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
-$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
 $lang['GEN_EXPIRE_TIME'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';
-$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_NUMBER_CARD'] = 'Número de tarjeta';
 $lang['GEN_SECRET_PASS_PIN'] = 'Clave secreta (PIN)';
 $lang['GEN_CARD_TYPE'] = 'Tipo de tarjeta';
@@ -133,6 +128,11 @@ $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo
 $lang['GEN_OTP_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo.';
 $lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
 $lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
+$lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
+$lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";

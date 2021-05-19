@@ -45,7 +45,7 @@ $(function () {
 
 	$('#landLine').on('change', function () {
 		$(this).rules('add', {
-			pattern: new RegExp(lang.VALIDATE_MOBIL, 'i')
+			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
 		});
 	})
 
