@@ -47,6 +47,7 @@ $lang['RESP_EXPIRED_CODEOTP'] = 'Tiempo expirado.';
 $lang['RESP_INVALID_EXPIRATION_DATE'] = 'La fecha de expiración introducida es inválida, verifica e intenta de nuevo.';
 $lang['RESP_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, intente más tarde.';
 $lang['RESP_EXPIRED_CARD'] = 'No es posible realizar esta acción, la tarjeta está vencida.';
+$lang['RESP_LOCKED_CARD'] = 'No es posible realizar esta acción, la tarjeta está bloqueada.';
 $lang['RESP_USER_SUSPENDED'] = 'El usuario se encuentra suspendido.';
 $lang['RESP_SESSION_EXPIRED'] = 'Su sesión ha expirado.';
 $lang['RESP_RESEEND_OTP'] = 'Solicitar nuevo código.';
