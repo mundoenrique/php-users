@@ -215,13 +215,13 @@ class Novo_Assets_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 2;
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = 'Hemos enviado un código de seguridad a tu correo electrónico, por favor indicalo a continuación:';
+				$this->response->msg = lang('GEN_OTP_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 			break;
 			case -173:
-				$this->response->msg = 'No fue posible enviar el código de seguridad a tu correo, por favor intenta de nuevo.';
+				$this->response->msg = lang('GEN_OTP_NOT_SENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 		}

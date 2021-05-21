@@ -104,7 +104,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		}
 
 		if (count($serviceList) == 1 && $serviceList[0] == '120') {
-			$this->render->RecoverPinText = 'Generar PIN';
+			$this->render->RecoverPinText = lang('CUST_GENERATE_PIN');
 		}
 
 		$this->views = ['support/'.$view];

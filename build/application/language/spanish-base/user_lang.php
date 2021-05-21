@@ -435,6 +435,7 @@ $lang['USER_IDENTIFY_EXIST'] = 'Ya existe un usuario de %s con los datos ingresa
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve a intentarlo.';
 $lang['USER_STEP_TITLE_REGISTRY'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP']];
 $lang['USER_STEP_TITLE_REGISTRY_LONG'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_LABOR_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP'], $lang['USER_LEGAL_STEP']];
+$lang['USER_SAVE_BTN_MSG'] = '* Al presionar el boton guardar, se guardaran los pasos del 1 al ';
 // RECOVER ACCESS
 $lang['USER_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
@@ -454,5 +455,7 @@ $lang['USER_NOT_VALIDATE_DATA'] = 'No fue posible validar tus datos, por favor v
 $lang['USER_VERIFY_DNI'] = 'Verifica tu DNI en RENIEC e intenta de nuevo. <br> Si continuas viendo este mensaje comunícate con la empresa emisora de tu tarjeta.';
 $lang['USER_ACCEPT_TERMS'] = 'Debes aceptar los terminos y condiciones para continuar disfrutando del servicio.';
 $lang['USER_ELECTRONIC_MONEY'] = 'Completa el formulario para activar tu tarjeta (Dinero electrónico).';
+//CARD LIST
+$lang['USER_CHECK_BALANCE'] = 'Click para consultar tu saldo';
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'El tiempo permitido para realizar la operación expiró, intenta nuevamente.';

@@ -32,7 +32,7 @@ $(function () {
 			}
 		})
 	} else {
-		$('.get-detail').find('.item-balance').text('clic para consultar tu saldo')
+		$('.get-detail').find('.item-balance').text(lang.USER_CHECK_BALANCE)
 	}
 
 	$('.get-detail').on('click', function(e) {

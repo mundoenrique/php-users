@@ -269,7 +269,7 @@
                     <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
                     <select id="laborOld" class="custom-select form-control" name="laborOld">
                       <?php if ($laborOld === ''): ?>
-                      <option selected disabled>Selecciona</option>
+                      <option selected disabled><?= lang('GEN_SELECTION') ?></option>
                       <?php endif; ?>
                       <?php for ($index = 0; $index <= 50; $index++): ?>
                       <option value="<?= $index; ?>" <?= $index == $laborOld ? 'selected' : ''; ?>><?= $index; ?></option>
@@ -304,12 +304,12 @@
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes"
                         <?= $publicOfficeOld == '1' ? 'checked' : '' ?>>
-                      <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
+                      <label class="custom-control-label" for="yesPublicOfficeOld"><?= lang('GEN_BTN_YES') ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no"
                         <?= $publicOfficeOld == '0' ? 'checked' : '' ?>>
-                      <label class="custom-control-label" for="noPublicOfficeOld">No</label>
+                      <label class="custom-control-label" for="noPublicOfficeOld"><?= lang('GEN_BTN_NO') ?></label>
                     </div>
                     <div class="help-block"></div>
                   </div>
@@ -328,12 +328,12 @@
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes"
                         <?= $taxesObligated == '1' ? 'checked' : '' ?>>
-                      <label class="custom-control-label" for="yesTaxesObligated">Si</label>
+                      <label class="custom-control-label" for="yesTaxesObligated"><?= lang('GEN_BTN_YES') ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no"
                         <?= $taxesObligated == '0' ? 'checked' : '' ?>>
-                      <label class="custom-control-label" for="noTaxesObligated">No</label>
+                      <label class="custom-control-label" for="noTaxesObligated"><?= lang('GEN_BTN_NO') ?></label>
                     </div>
                     <div class="help-block"></div>
                   </div>
@@ -403,7 +403,7 @@
               </div>
             </div>
             <div class="multi-step-button flex items-center justify-center mb-5 mr-5">
-              <button class="btn btn-small btn-link back" type="submit">Regresar</button>
+              <button class="btn btn-small btn-link back" type="submit"><?= lang('GEN_BTN_TO_RETURN'); ?></button>
               <button class="btn btn-small btn-loading btn-primary next" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
             </div>
             <?php endif; ?>
@@ -521,7 +521,7 @@
 
         </div>
         <div class="line-text mx-3"></div>
-        <small class="mx-3 text">* Al presionar el boton guardar, se guardaran los pasos del 1 al <?= count($stepTitles) ?></small>
+        <small class="mx-3 text"><?= lang('USER_SAVE_BTN_MSG'); ?> <?= count($stepTitles) ?></small>
 
         <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
         <div class="flex items-center justify-center my-3">

@@ -191,7 +191,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				if (isset($reponse->bean->cost_repos_plas) && $reponse->bean->cost_repos_plas != '') {
 					$cost = currencyFormat($reponse->bean->cost_repos_plas);
 					$this->response->data->cost = TRUE;
-					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('CONF_CURRENCY'), $cost]);
+					$this->response->data->msg = novoLang(lang('CUST_REPLACEMENT_COST'), [lang('CONF_CURRENCY'), $cost]);
 				}
 			break;
 			case 29:

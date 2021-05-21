@@ -31,7 +31,7 @@ function finishSession() {
 	btnKeepSession.addClass('btn-large-xl signout');
 	modalBtn = {
 		btn1: {
-			text: 'Mantener sesión',
+			text: lang.GEN_BTN_KEEP_SESSION,
 			action: 'destroy'
 		}
 	}

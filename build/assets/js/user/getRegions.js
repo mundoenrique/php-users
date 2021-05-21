@@ -35,7 +35,7 @@ function getProfessions() {
 	var currentProf = $('#profession').val();
 
 	$('#profession').find('option').get(0).remove();
-	$('#profession').append('<option value="" selected disabled>Esperando Profesiones</option>');
+	$('#profession').append('<option value="" selected disabled>' + lang.GEN_WAITING_PROFESSIONS + '</option>');
 
 	who = 'Assets'; where = 'ProfessionsList';
 	data = {
@@ -52,7 +52,7 @@ function getProfessions() {
 			$('#profession').find('option').get(0).remove();
 
 			if (currentProf == '') {
-				$('#profession').prepend('<option value="" selected disabled>Selecciona</option>');
+				$('#profession').prepend('<option value="" selected disabled>' + lang.GEN_SELECTION + '</option>');
 			}
 		}
 
@@ -68,7 +68,7 @@ function getStates() {
 		$('#state').find('option').get(0).remove();
 	}
 
-	$('#state').prepend('<option value="" selected disabled>Esperando Estados</option>');
+	$('#state').prepend('<option value="" selected disabled>' + lang.GEN_WAITING_STATES + '</option>');
 
 	who = 'Assets'; where = 'StatesList';
 	data = {
@@ -113,7 +113,7 @@ function getCities(currentState) {
 
 	$('#city')
 		.prop('disabled', true)
-		.prepend('<option value="" selected disabled>Esperando Ciudades</option>');
+		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_CITIES + '</option>');
 
 	who = 'Assets'; where = 'CityList';
 	data = {
@@ -158,7 +158,7 @@ function getdistrict(currentCity) {
 
 	$('#district')
 		.prop('disabled', true)
-		.prepend('<option value="" selected disabled>Esperando Distritos</option>');
+		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_DISTRICTS + '</option>');
 
 	where = 'Regions';
 	data = {

@@ -976,9 +976,9 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
-		$profileData->state = $response->direccion->acEstado ?? 'Selecciona';
+		$profileData->state = $response->direccion->acEstado ?? lang('GEN_SELECTION');
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
-		$profileData->city = $response->direccion->acCiudad ?? 'Selecciona';
+		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -1054,7 +1054,7 @@ class Novo_User_Model extends NOVO_Model {
 
 			$profileData->districtCod = $response->registro->afiliacion->distrito ?? '';
 
-			$profileData->district = 'Selecciona';
+			$profileData->district = lang('GEN_SELECTION');
 
 			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
 				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;

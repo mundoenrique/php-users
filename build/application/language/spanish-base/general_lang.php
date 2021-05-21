@@ -35,6 +35,7 @@ $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
 $lang['GEN_BTN_YES'] = 'Si';
 $lang['GEN_BTN_NO'] = 'No';
+$lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
 //TITULOS
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
 //BROWSERS
@@ -122,17 +123,25 @@ $lang['GEN_INVALID_CARD'] = 'Los datos son inválidos o ya estas registrado.';
 $lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
 $lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
 $lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+$lang['GEN_SELECTION'] = 'Selecciona';
+$lang['GEN_MONTHS'] = 'Meses';
+$lang['GEN_DAYS'] = 'Días';
+$lang['GEN_WAITING_PROFESSIONS'] = 'Esperando profesiones';
+$lang['GEN_WAITING_STATES'] = 'Esperando estados';
+$lang['GEN_WAITING_CITIES'] = 'Esperando ciudades';
+$lang['GEN_WAITING_DISTRICTS'] = 'Esperando distritos';
 //OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
 $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
-$lang['GEN_OTP_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo.';
-$lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
+$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 $lang['GEN_MESSAGE_OTP'] = 'Hemos enviado un código de verificación a tu teléfono móvil, por favor indícalo a continuación:';
 $lang['GEN_OTP_LABEL_INPUT'] = 'Código recibido';
+$lang['GEN_OTP_NOT_SENT'] = 'No fue posible enviar el código de seguridad a tu correo, por favor intenta de nuevo.';
+$lang['GEN_OTP_INCORRECT'] = 'El código de verificación es incorrecto, verifícalo e intenta de nuevo.';
+$lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
 $lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
-$lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
@@ -213,3 +222,8 @@ $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
+//DOWNLOADS
+$lang['GEN_DOWNLOAD_PDF'] = 'Descargar PDF';
+$lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
+$lang['GEN_SEND_PDF'] = 'Enviar PDF';
+$lang['GEN_SEND_XLS'] = 'Enviar Excel';

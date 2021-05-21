@@ -98,25 +98,25 @@
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
-              <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
+              <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_PDF'); ?>"></span>
             </a>
           </li>
           <?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
             <a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-              <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
+              <span class="icon-email h5 mr-0" aria-hidden="true" title="<?= lang('GEN_SEND_PDF'); ?>"></span>
             </a>
           </li>
           <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
             <a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
-              <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
+              <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_XLS'); ?>"></span>
             </a>
           </li>
           <?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
             <a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
-              <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
+              <span class="icon-email h5 mr-0" aria-hidden="true" title="<?= lang('GEN_SEND_XLS'); ?>"></span>
             </a>
           </li>
           <?php endif; ?>

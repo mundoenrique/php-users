@@ -116,9 +116,9 @@
 				</h4>
 				<form id="temporaryLockForm" data-status="<?= $status ?>">
 					<div id="selectTempLockReason" class="row none form-group col-lg-4">
-						<label for="temporaryLockReason">Motivo de la solicitud</label>
+						<label for="temporaryLockReason"><?= lang('CUST_REASON_REQUEST') ?></label>
 						<select id="temporaryLockReason" class="custom-select form-control" name="temporaryLockReason">
-						<option value="" selected disabled>Selecciona</option>
+						<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
 						<?php foreach (lang('CUST_TEMPORARY_LOCK_REASON') AS  $value): ?>
 						<option value="<?= $value ?>"><?= $value ?></option>
 						<?php endforeach; ?>
@@ -130,8 +130,8 @@
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= lang('CONF_LINK_CARD_LIST') ?>">Cancelar</a>
-						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('CONF_LINK_CARD_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
 					</div>
 				</form>
       </div>
@@ -144,7 +144,7 @@
             <div class="form-group col-lg-4">
               <label for="replaceMotSol"><?= lang('CUST_REASON_REQUEST') ?></label>
               <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-                <option value="" selected disabled><?= lang('CUST_SELECTION') ?></option>
+                <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
                 <?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
                 <option value="<?= $key ?>"><?= $value ?></option>
                 <?php endforeach; ?>

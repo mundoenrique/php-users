@@ -116,7 +116,7 @@ function getMovements(typeInquiry) {
 		if (response.code == 0) {
 			var header = '';
 			var body = '';
-			var date = action == '0' ? 'Meses' : 'Días';
+			var date = action == '0' ? lang.GEN_MONTHS : lang.GEN_DAYS;
 
 			header += '<tr>';
 			header += '<th class="bold">' + date + '</th>';
