@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_MAINTENANCE'] = 'OFF';
+$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
-$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['CONF_ARGON2_ACTIVE'] = 'OFF';
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
