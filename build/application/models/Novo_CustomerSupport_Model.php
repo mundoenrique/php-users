@@ -51,35 +51,35 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = novoLang(lang('CUST_EXPIRED_CARD'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286:
 			case -301:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_OTP_USED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -288:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
 				$this->load->model('Novo_Assets_Model', 'getToken');
 				$this->response = $this->getToken->callWs_GetToken_Assets();
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
 			break;
 			case 29:
 			case -21:
