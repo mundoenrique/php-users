@@ -71,7 +71,7 @@ class Novo_User_Model extends NOVO_Model {
 		$clientCod = $response->codPais ?? '';
 		$clientCod = $response->bean->codPais ?? $clientCod;
 
-		if ($validateClient && $clientCod != $this->config->item('customer') && COUNTRY_VERIFY == 'ON') {
+		if ($validateClient && $clientCod != $this->config->item('customer') && CUSTOMER_VERIFY == 'ON') {
 			if ($this->isResponseRc == 0) {
 				$userData = [
 					'logged' => TRUE,
