@@ -25,7 +25,7 @@
         <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
         <div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
 					<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
-					<small class="sb-disabled uppercase light truncate"><?= $cards->nomEmp?></small><br>
+					<small class="sb-disabled uppercase light truncate"><?= $cards->enterprise?></small><br>
 					<?php endif; ?>
           <p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?>
             <span class="warning semibold h6 capitalize absolute ml-2 l-0"><br><?= $cards->virtualCard?></span>
@@ -43,8 +43,10 @@
           <input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
           <input type="hidden" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
           <input type="hidden" id="cardNumberMask" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask ?>">
+          <input type="hidden" id="enterprise" name="enterprise" class="hidden" value="<?= $cards->enterprise ?>">
           <input type="hidden" id="productName" name="productName" class="hidden" value="<?= $cards->productName ?>">
           <input type="hidden" id="brand" name="brand" class="hidden" value="<?= $cards->brand ?>">
+          <input type="hidden" id="statusMessage" name="statusMessage" class="hidden" value="<?= $cards->statusMessage ?>">
           <input type="hidden" id="productImg" name="productImg" class="hidden" value="<?= $cards->productImg ?>">
 					<input type="hidden" id="productImgRev" name="productImgRev" class="hidden" value="<?= $cards->productImgRev ?>">
           <input type="hidden" id="productUrl" name="productUrl" class="hidden" value="<?= $cards->productUrl ?>">

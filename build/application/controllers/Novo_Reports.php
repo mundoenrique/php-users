@@ -52,30 +52,13 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
-		$this->render->brand = '';
-		$this->render->productImg = '';
-		$this->render->productUrl = '';
-		$this->render->productName = '';
-		$this->render->cardNumberMask = '';
-		$this->render->cardNumber = '';
-		$this->render->prefix = '';
-		$this->render->status = '';
-		$this->render->isVirtual = '';
-		$this->render->tittleVirtual = '';
 		$this->render->callMoves = '0';
-		$this->render->networkBrand = $totalCards > 1 ? 'hide' : '';
 
 		if ($totalCards == 1) {
-			$this->render->brand = $cardsList[0]->brand;
-			$this->render->productImg = $cardsList[0]->productImg;
-			$this->render->productUrl = $cardsList[0]->productUrl;
-			$this->render->productName = $cardsList[0]->productName;
-			$this->render->cardNumberMask = $cardsList[0]->cardNumberMask;
-			$this->render->cardNumber = $cardsList[0]->cardNumber;
-			$this->render->prefix = $cardsList[0]->prefix;
-			$this->render->status = $cardsList[0]->status;
-			$this->render->isVirtual = $cardsList[0]->isVirtual;
-			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
+			foreach ($userCardList->data->cardsList[0] as $index => $render) {
+				$this->render->$index = $render;
+			}
+
 			$this->render->callMoves = '1';
 		}
 

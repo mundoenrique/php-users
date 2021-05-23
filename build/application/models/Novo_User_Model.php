@@ -37,10 +37,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '1';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $userName;
+		$this->dataRequest->password = md5($password);
+
+		if (lang('CONF_ARGON2_ACTIVE') == 'ON') {
+			$this->dataRequest->password = $argon2->hexArgon2;
+			$this->dataRequest->passwordAux = md5($password);
+		}
+
 		$this->dataRequest->pais = 'Global';
-		$this->dataRequest->password = md5($password);//BORRAR CUANDO ESTEN OK LOS SERVICIOS
-		// $this->dataRequest->password = $argon2->hexArgon2;//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
-		//$this->dataRequest->hashMD5 = md5($password);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 		if (IP_VERIFY == 'ON' && lang('CONF_VALIDATE_IP') == 'ON') {
 			$this->dataRequest->codigoOtp = [
 				'tokenCliente' => $dataRequest->OTPcode ?? '',

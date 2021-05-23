@@ -17,7 +17,11 @@
             <?php endif; ?>
           </div>
           <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+						<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
+						<small class="sb-disabled uppercase light truncate"><?= $enterprise?></small>
+						<?php endif; ?>
             <p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
+						<span class="semibold danger"><?= $statusMessage ?></span>
             <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
             <?php if ($totalCards > 1): ?>
             <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('CONF_LINK_CARD_LIST'); ?>">

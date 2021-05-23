@@ -20,6 +20,10 @@ $(function () {
 	setTextClass(ErrorIndexes);
 	toPositionFieldsetError(ErrorIndexes);
 
+	$('#profileUserForm').on('change', function() {
+		$('#btn-cancel').attr('href', baseURL + lang.CONF_LINK_USER_PROFILE)
+	});
+
 	$('#birthDate').datepicker({
 		yearRange: '-90:' + currentDate.getFullYear(),
 		minDate: '-90y',

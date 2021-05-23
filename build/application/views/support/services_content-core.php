@@ -8,7 +8,7 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $brand, $networkBrand ?>"></div>
+                <div class="item-network <?= $totalCards == 1 ? $brand: '', $totalCards == 1 ? 'hide': ''; ?>"></div>
                 <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
@@ -114,7 +114,7 @@
         <h4 class="line-text mb-2 semibold primary">
           <span class="status-text1"><?= $statustext ?></span>
 				</h4>
-				<form id="temporaryLockForm" data-status="<?= $status ?>">
+				<form id="temporaryLockForm" data-status="<?= $status ?? '' ?>">
 					<div id="selectTempLockReason" class="row none form-group col-lg-4">
 						<label for="temporaryLockReason"><?= lang('CUST_REASON_REQUEST') ?></label>
 						<select id="temporaryLockReason" class="custom-select form-control" name="temporaryLockReason">

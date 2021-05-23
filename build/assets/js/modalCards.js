@@ -12,7 +12,7 @@ $(function () {
 		var cardDetail;
 		var event = e.currentTarget;
 		var img = $(event).find('img').attr('src');
-		var productName = $(event).find('.item-category').text();
+		var productName = $(event).find('input[type=hidden][name="productName"]').val();
 		var cardNumber = $(event).find('input[type=hidden][name="cardNumber"]').val();
 		var cardNumberMask = $(event).find('input[type=hidden][name="cardNumberMask"]').val();
 		var prefix = $(event).find('input[type=hidden][name="prefix"]').val();
@@ -82,7 +82,7 @@ $(function () {
 });
 
 function cardModal() {
-	var inputModal = $('#cardList').html();
+	var inputModal = $('#cardListModal').html();
 	$('.nav-config-box').removeClass('no-events');
 	$('#cancel').addClass('close-card-modal');
 	modalBtn = {

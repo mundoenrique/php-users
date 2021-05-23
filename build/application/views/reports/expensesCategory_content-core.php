@@ -8,7 +8,7 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $brand, $networkBrand ?>"></div>
+                <div class="item-network <?= $totalCards == 1 ? $brand: '', $totalCards == 1 ? 'hide': ''; ?>"></div>
                 <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>

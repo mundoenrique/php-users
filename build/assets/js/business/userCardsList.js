@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	form = $('#cardListForm')
+	form = $('#cardListForm');
 
 	if (form.attr('card-list') == 'obtain') {
 		insertFormInput(true, form);
@@ -37,9 +37,9 @@ $(function () {
 
 	$('.get-detail').on('click', function(e) {
 		e.preventDefault();
-		form = $(this).find('form')
-		formInputTrim(form)
-		insertFormInput(true, form)
+		form = $(this).find('form');
+		formInputTrim(form);
+		insertFormInput(true, form);
 
 		form.submit()
 	})

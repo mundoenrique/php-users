@@ -86,6 +86,10 @@ class Novo_Business extends NOVO_Controller {
 		}
 
 		foreach ($this->request AS $index => $render) {
+			if ($index == 'statusMessage' && $this->request->status == '') {
+				$render = '';
+			}
+
 			$this->render->$index = $render;
 		}
 

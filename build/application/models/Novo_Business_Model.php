@@ -56,7 +56,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord = new stdClass();
 						$cardRecord->cardNumber = $cardsRecords->noTarjeta;
 						$cardRecord->expireDate = $cardsRecords->fechaExp;
-						$cardRecord->nomEmp = $cardsRecords->nomEmp;
+						$cardRecord->enterprise = $cardsRecords->nomEmp;
 						$cardRecord->prefix = $cardsRecords->prefix;
 						$cardRecord->status = $cardsRecords->bloque;
 						$cardRecord->cardNumberMask = $cardsRecords->noTarjetaConMascara;
@@ -146,36 +146,18 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->set_userdata('totalCards', $totalCards);
 		}
 
-		if ($totalCards == 1) {
-			$oneCard = new stdClass();
-			$oneCard->userIdNumber = $cardsList[0]->userIdNumber;
-			$oneCard->cardNumber = $cardsList[0]->cardNumber;
-			$oneCard->cardNumberMask = $cardsList[0]->cardNumberMask;
-			$oneCard->productName = $cardsList[0]->productName;
-			$oneCard->brand = $cardsList[0]->brand;
-			$oneCard->productImg = $cardsList[0]->productImg;
-			$oneCard->productImgRev = $cardsList[0]->productImgRev;
-			$oneCard->productUrl = $cardsList[0]->productUrl;
-			$oneCard->productUrlRev = $cardsList[0]->productUrlRev;
-			$oneCard->status = $cardsList[0]->status;
-			$oneCard->isVirtual = (string)$cardsList[0]->isVirtual;
-
-			if (isset($dataRequest->module)) {
-				$oneCard->expireDate = $cardsList[0]->expireDate;
-				$oneCard->prefix = $cardsList[0]->prefix;
-				$oneCard->tittleVirtual = $cardsList[0]->tittleVirtual;
-				$oneCard->statustext = $cardsList[0]->status == '' ? lang('CUST_TEMPORARY_LOCK') : lang('CUST_UNLOCK_CARD');
-				$oneCard->statustextCard = $cardsList[0]->status == '' ? lang('CUST_TEMPORARILY_LOCK') : lang('CUST_UNLOCK');
-			}
-
+		if (isset($dataRequest->module) && $totalCards == 1) {
+			$cardsList[0]->statustext = $cardsList[0]->status == '' ? lang('CUST_TEMPORARY_LOCK') : lang('CUST_UNLOCK_CARD');
+			$cardsList[0]->statustextCard = $cardsList[0]->status == '' ? lang('CUST_TEMPORARILY_LOCK') : lang('CUST_UNLOCK');
 		}
 
 		if ($totalCards == 1 && !isset($dataRequest->module)) {
-			$this->session->set_userdata('oneCard', $oneCard);
-			redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
-			exit();
-		} elseif ($totalCards == 1) {
+			$this->session->set_userdata('oneCard', $cardsList[0]);
 
+			if ($this->response->code == 0) {
+				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
+				exit();
+			}
 		}
 
 		$this->response->data->cardsList = $cardsList;
@@ -255,7 +237,7 @@ class Novo_Business_Model extends NOVO_Model {
 					$balance->availableBalance = lang('CONF_CURRENCY').' '.$response->saldos->disponible;
 				}
 
-				if (count($response->movimientos) > 0) {
+				if (isset($response->movimientos) && count($response->movimientos) > 0) {
 					foreach($response->movimientos AS $pos => $moves) {
 						$move = new stdClass();
 						$move->date = transformDate($moves->fecha);
@@ -271,7 +253,9 @@ class Novo_Business_Model extends NOVO_Model {
 				$totalMoves->debit = isset($response->totalCargos) ? $response->totalCargos : $totalMoves->debit;
 			break;
 			default:
-
+				if ($this->session->totalCards == 1) {
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				}
 		}
 
 		$this->response->data->movesList = $movesList;
