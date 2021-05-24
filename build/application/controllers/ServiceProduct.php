@@ -144,22 +144,22 @@ class ServiceProduct extends BDB_Controller
 		$menuOptionsProduct = [
 			'120' => [
 				'id' => 'generate',
-				'text' => "<i class='icon-key block'></i>Generar<br>PIN",
+				'text' => "<i class='icon-key block'></i>" . lang('CUST_TITLE_GENERATE_PIN'),
 				'isVisible' => FALSE
 			],
 			'112' => [
 				'id' => 'change',
-				'text' => "<i class='icon-key block'></i>Gestión<br>de PIN",
+				'text' => "<i class='icon-key block'></i>" . lang('CUST_TITLE_MANAGEMENT_PIN'),
 				'isVisible' => TRUE
 			],
 			'110' => [
 				'id' => 'lock',
-				'text' => "<i class='icon-lock block'></i>Bloqueo<br>de tarjeta",
+				'text' => "<i class='icon-lock block'></i>" . lang('CUST_TITLE_TEMPORARY_BLOCKAGE'),
 				'isVisible' => TRUE
 			],
 			'111' => [
 				'id' => 'replace',
-				'text' => "<i class='icon-spinner block'></i>Solicitud<br>de reposición",
+				'text' => "<i class='icon-spinner block'></i>" . lang('CUST_TITLE_REQUEST_REPLENISHMENT'),
 				'isVisible' => TRUE
 			]
 		];
@@ -174,7 +174,7 @@ class ServiceProduct extends BDB_Controller
 		}
 
 		if (!empty($dataProduct['bloqueo'])) {
-			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>Desbloqueo <br>de tarjeta";
+			$menuOptionsProduct['110']['text'] =  "<i class='icon-lock block'></i>" . lang('CUST_TITLE_UNBLOCK');
 		}
 
 		foreach ($menuOptionsProduct as $key => $value) {
