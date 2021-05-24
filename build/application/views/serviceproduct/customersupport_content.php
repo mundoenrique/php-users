@@ -150,11 +150,11 @@
 							<?php
 							if (in_array('111', $data['availableServices'])) {
 
-								$title = 'Bloqueo de tarjeta';
-								$textDescription = 'bloquear';
+								$title = 'Bloqueo temporal';
+								$textDescription = 'bloquear temporalmente';
 							} else {
 
-								$title = 'Desbloqueo de tarjeta';
+								$title = 'Desbloqueo';
 								$textDescription = 'desbloquear';
 							}
 							?>
