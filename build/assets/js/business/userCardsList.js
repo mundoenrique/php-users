@@ -32,7 +32,7 @@ $(function () {
 			}
 		})
 	} else {
-		$('.get-detail').find('.item-balance').text(lang.USER_CHECK_BALANCE)
+		$('.get-detail').find('.item-balance').text(lang.BUSINESS_CHECK_BALANCE)
 	}
 
 	$('.get-detail').on('click', function(e) {

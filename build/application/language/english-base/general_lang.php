@@ -35,7 +35,7 @@ $lang['GEN_BTN_SEE'] = 'See';
 $lang['GEN_BTN_SEARCH'] = 'Search';
 $lang['GEN_BTN_YES'] = 'Yes';
 $lang['GEN_BTN_NO'] = 'No';
-$lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
+$lang['GEN_BTN_KEEP_SESSION'] = 'Keep session';
 //TITULOS
 $lang['GEN_TITLE_IMPORTANT'] = 'Important';
 //BROWSERS

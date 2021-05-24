@@ -455,7 +455,5 @@ $lang['USER_NOT_VALIDATE_DATA'] = 'It was not possible to validate your data, pl
 $lang['USER_VERIFY_DNI'] = 'Verify your ID in RENIEC and try again. <br> If you continue to see this message, contact the company that issued your card.';
 $lang['USER_ACCEPT_TERMS'] = 'You must accept the terms and conditions to continue enjoying the service.';
 $lang['USER_ELECTRONIC_MONEY'] = 'Complete the form to activate your card (Electronic money).';
-//CARD LIST
-$lang['USER_CHECK_BALANCE'] = 'Click to check your balance';
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'The time allowed to perform the operation has expired, please try again.';

@@ -14,3 +14,5 @@ $lang['BUSINESS_RECENT'] = 'Recent';
 $lang['BUSINESS_LAST_MOVEMENTS'] = 'Last 20';
 $lang['BUSINESS_SELECT'] = 'Select';
 $lang['BUSINESS_WITH_OUT_CARDS'] = 'No cards available to use the application, %s';
+//CARD LIST
+$lang['BUSINESS_CHECK_BALANCE'] = 'Click to check your balance';
