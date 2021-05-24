@@ -188,13 +188,13 @@
 					<!-- Solicitud de reposición de tarjeta -->
 					<div id="replaceView" class="services-both max-width-1 fit-lg mx-auto">
 						<div id="msgReplace" class="msg-prevent my-2">
-							<h2 class="h4 regular tertiary">Solicitud de reposición</h2>
+							<h2 class="h4 regular tertiary">Bloqueo definitivo</h2>
 							<span>Los campos con <span class="danger">*</span> son requeridos.</span>
 						</div>
 						<form id="formReplace" class="profile-1" accept-charset="utf-8" method="post">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="replaceMotSol">Motivo de la solicitud <span class="danger">*</span></label>
+									<label for="replaceMotSol">Motivo del bloqueo <span class="danger">*</span></label>
 									<select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
 										<option value="">Selecciona</option>
 										<?php
