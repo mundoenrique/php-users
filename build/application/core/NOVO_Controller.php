@@ -39,7 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
 		$this->model = ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->customerUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
+		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
 		$this->render->logged = $this->session->has_userdata('logged');
 		$this->render->userId = $this->session->has_userdata('userId') ? $this->session->userId : FALSE;;
 		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
