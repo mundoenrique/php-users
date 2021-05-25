@@ -132,6 +132,6 @@ $lang['CALLMODELS_INDEX_MSG'] = 'Combinación de caracteres no válida, por favo
 //LIST REASON BLOCK
 $lang['GENE_BLOCKING_REASONS_LOST'] = 'Tarjeta perdida';
 $lang['GENE_BLOCKING_REASONS_DETERIORATED'] = 'Tarjeta deteriorada';
-$lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada';
+$lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada / perdida';
 $lang['GENE_BLOCKING_REASONS_FRAUD'] = 'Sospecha de fraude';
 $lang['GENE_BLOCKING_REASONS_CANCELLED'] = 'Tarjeta cancelada';
