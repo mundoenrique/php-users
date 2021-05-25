@@ -52,7 +52,6 @@ $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
 //GENERAL LANGUAGE
 $lang["GEN_TERMS_TITLE"]='Terms and Conditions';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Process executed successfully.';
-$lang['GEN_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['GEN_MORNING'] = 'Good morning';
 $lang['GEN_AFTERNOON'] = 'Good afternoon';
 $lang['GEN_EVENING'] = 'Good evening';

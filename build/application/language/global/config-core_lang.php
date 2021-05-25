@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_MAINTENANCE'] = 'OFF';
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_ARGON2_ACTIVE'] = 'OFF';
