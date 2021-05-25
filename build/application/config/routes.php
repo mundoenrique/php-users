@@ -64,21 +64,25 @@ $route['(:any)/novo-async-call'] = "Novo_CallModels";
 //Suggestion
 $route['(:any)/suggestion'] = "Novo_User/suggestion";
 //User
-$route['(:any)/inicio'] = function ($custumer) {
-	if ($custumer == 'bdb') {
+$route['(:any)/inicio'] = function ($customer) {
+	if ($customer == 'bdb') {
 		return "user/login";
 	} else {
-		header('Location: '.BASE_URL.'/'.$custumer.'/sign-in', 'GET');
+		header('Location: '.BASE_URL.'/'.$customer.'/sign-in', 'GET');
+		exit;
 	}
 };
-$route['(:any)/recuperar-acceso'] = function ($custumer) {
-	header('Location: '.BASE_URL.'/'.$custumer.'/recover-access', 'GET');
+$route['(:any)/recuperar-acceso'] = function ($customer) {
+	header('Location: '.BASE_URL.'/'.$customer.'/recover-access', 'GET');
+		exit;
 };
-$route['(:any)/identificar-usuario'] = function ($custumer) {
-	header('Location: '.BASE_URL.'/'.$custumer.'/user-identify', 'GET');
+$route['(:any)/identificar-usuario'] = function ($customer) {
+	header('Location: '.BASE_URL.'/'.$customer.'/user-identify', 'GET');
+		exit;
 };
-$route['(:any)/terminos-condiciones'] = function ($custumer) {
-	header('Location: '.BASE_URL.'/'.$custumer.'/terms-conditions', 'GET');
+$route['(:any)/terminos-condiciones'] = function ($customer) {
+	header('Location: '.BASE_URL.'/'.$customer.'/terms-conditions', 'GET');
+		exit;
 };
 $route['(:any)/sign-in'] = function ($customer) {
 	return $customer == "bdb" ? "user/login" : "Novo_User/signin";
