@@ -284,7 +284,7 @@ class NOVO_Controller extends CI_Controller {
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if(!$valid) {
-			redirect(base_url('sugerencia'),'location', 301);
+			redirect(base_url('suggestion'),'location', 'GET');
 			exit();
 		}
 

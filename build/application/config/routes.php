@@ -62,7 +62,7 @@ $route['api/v1/(:any)/(:any)']['POST'] = "Novo_CallApi";
 //Asynchronous
 $route['(:any)/novo-async-call'] = "Novo_CallModels";
 //Suggestion
-$route['(:any)/sugerencia'] = "Novo_User/suggestion";
+$route['(:any)/suggestion'] = "Novo_User/suggestion";
 //User
 $route['(:any)/inicio'] = function ($custumer) {
 	if ($custumer == 'bdb') {
