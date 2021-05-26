@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= $titlePage; ?></h1>
+<h1 class="primary h3 semibold inline"><?= $titlePage; ?></h1>
 <div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="widget-product">
