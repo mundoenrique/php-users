@@ -124,6 +124,13 @@
             </a>
           </li>
           <?php endif; ?>
+					<?php if (lang('CONF_DOWNLOAD_STATEMENT') == 'ON') :  ?>
+          <li class="stack-item px-1 list-inline-item is-disabled">
+            <a id="downloadExtract" href="#" rel="subsection">
+              <span class="icon-down-statement h5 bold mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_STATEMENT'); ?>"></span>
+            </a>
+          </li>
+          <?php endif; ?>
           <form id="downd-send">
             <input type="hidden" id="cardNumberDownd" name="cardNumberDownd" value="<?= $cardNumber ?>">
             <input type="hidden" id="month" name="filterMonth" value="0">

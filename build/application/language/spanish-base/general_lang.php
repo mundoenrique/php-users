@@ -224,5 +224,6 @@ $lang['GEN_AFTER_LANG'] = 'english';
 //DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Descargar PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
+$lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';
 $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
