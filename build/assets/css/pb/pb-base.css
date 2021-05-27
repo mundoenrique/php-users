@@ -36,6 +36,10 @@ footer.main-footer {
 /* Forms
 ========================================================================== */
 
+.form-control {
+	border-radius: none;
+}
+
 /* Select */
 
 .custom-select {
@@ -141,6 +145,25 @@ footer.main-footer {
 .bg-widget  { background-color: var(--color-secondary) !important }
 
 .bg-color  { background-color: var(--color-room) !important }
+
+/* Typography and Text Utilities
+========================================================================== */
+
+/* Font weight */
+.light      {font-weight: var(--light-font-weight) !important }
+.regular    { font-weight: var(--light-font-weight); color: var(--color-sixth) !important; }
+.semibold   { font-weight: var(--bold-font-weight) !important; color: var(--color-sixth) !important; }
+.bold       { font-weight: var(--bold-font-weight) !important }
+
+/* Colors */
+
+.black  { color: var(--black) !important }
+.white  { color: rgba(255,255,255,1) !important }
+
+.primary   { color: var(--color-primary) }
+.secondary { color: var(--color-secondary) !important }
+.tertiary  { color: var(--color-tertiary) }
+.text      { color: var(--color-sixth) !important }
 
 /* Icons, Logos
 ========================================================================== */

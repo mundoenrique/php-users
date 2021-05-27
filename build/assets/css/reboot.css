@@ -1523,7 +1523,8 @@ label {
 .btn-rounded-right  { border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0 }
 
 .btn-rounded-left   {
-	border: .85px solid var(--color-eighth);
+	color: var(--color-primary);
+	border: .85px solid var(--color-primary);
 	border-radius: var(--btn-border-radius) 0 0 var(--btn-border-radius);
 	background-color: var(--color-secondary);
 	height: 33.4px;
@@ -2302,22 +2303,7 @@ label {
 .uppercase    { text-transform: uppercase !important }
 .capitalize { text-transform: capitalize !important }
 
-/* Font weight */
-.light      {font-weight: var(--light-font-weight) !important }
-.regular    { font-weight: var(--light-font-weight); color: var(--color-sixth) !important; }
-.semibold   { font-weight: var(--bold-font-weight) !important; color: var(--color-sixth) !important; }
-.bold       { font-weight: var(--bold-font-weight) !important }
-
 /* Colors */
-
-.black  { color: var(--black) !important }
-.white  { color: rgba(255,255,255,1) !important }
-
-.primary   { color: var(--color-primary) }
-.secondary { color: var(--color-secondary) !important }
-.tertiary  { color: var(--color-tertiary) }
-.text      { color: var(--color-sixth) !important }
-
 .success { color: var(--success) !important }
 .info    { color: var(--info) !important }
 .warning { color: var(--warning) !important }
@@ -2410,6 +2396,7 @@ i[class*=" icon-"]:before {
 .icon-chart-pie:before  	   { content: "\e0ff"; }
 .icon-user-building:before   { content: "\e0a0"; }
 .icon-user-edit:before       { content: "\e031"; }
+.icon-down-statement:before  { content: "\e00d"; }
 .icon-arrow-left:before      { content: "\e0f0"; }
 .icon-card-fee:before			   { content: "\e091"; }
 .icon-arrow-right:before     { content: "\e0f1"; }

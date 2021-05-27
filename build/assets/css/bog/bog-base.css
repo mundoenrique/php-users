@@ -16,29 +16,34 @@ header.main-head {
 	height: 3.75rem;
 	background-color: var(--color-primary);
 	font-weight: var(--light-font-weight);
-	border-bottom: 3px solid var(--color-seventh);
+	border-bottom: 3px solid var(--color-fourteenth)
 }
 
 /* Content */
 main.content {
 	min-height: calc(100vh - 3.75rem - 2.75rem - 30px);
-	background-color: var(--color-secondary);
+	background-color: var(--color-nineth);
 }
 
 /* Footer */
 footer.main-footer {
 	display: flex;
-	padding: 1rem 1rem;
+	padding: 2rem 2.5rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
-	border-top: 3px solid var(--color-seventh);
+	border-top: 3px solid var(--color-fourteenth)
 }
 
 /* Forms
 ========================================================================== */
 
 .form-control {
-	border-radius: 0;
+	border-radius: .25rem;
+}
+
+.form-control:disabled {
+	background-color: var(--color-thirteenth);
+	opacity: 1;
 }
 
 /* Select */
@@ -88,6 +93,12 @@ footer.main-footer {
 	transition: all .1s ease-in-out;
 }
 
+/* Checkboxes and radios */
+
+label {
+	color: var(--color-primary);
+}
+
 /* Switch */
 
 .custom-switch {
@@ -127,7 +138,25 @@ footer.main-footer {
 /* Input Group */
 
 .pwd-action .icon-view, .icon-book, .icon-notification, .icon-color {
-	color: var(--color-primary);
+	color: var(--color-sixth);
+}
+
+.input-group-text {
+	border-radius: .25rem;
+}
+
+/* Buttons
+========================================================================== */
+
+/* primary */
+
+.btn-primary {
+	border-radius: var(--btn-border-radius);
+}
+
+/* Btn-Loading */
+.btn-loading-lg {
+	height: 38px;
 }
 
 /* Validator */
@@ -141,25 +170,27 @@ footer.main-footer {
 /* Backgrounds Colors
 ========================================================================== */
 
-/* .bg-primary   { background-color: var(--color-primary) !important } */
+.bg-primary   { background-color: var(--color-primary) !important }
 .bg-secondary { background-color: var(--color-secondary) !important }
 .bg-tertiary  { background-color: var(--color-tertiary) !important }
 
 .bg-widget  { background-color: var(--color-secondary) !important }
 
-.bg-color  { background-image: linear-gradient(var(--color-tertiary), transparent) !important }
+.bg-color  { background-image: linear-gradient(var(--color-nineth), transparent) !important }
 
 .bg-option-active { background-color: var(--option-active) !important }
 .bg-option-not-active { background-color: var(--option-not-active) !important }
 
+.bg-items      { color: var(--color-fourteenth) !important }
+
 .bg-content {
 	background: linear-gradient(
-      rgba(255, 255, 255, .95),
-      rgba(255, 255, 255, .95)
+      rgba(246,243,241,.6),
+      rgba(246,243,241,.6)
     ),
-    url("../../images/vg/bg-content.png");
-		background-position: left;
-		background-size: cover;
+    url("../../images/bdb/bg-content.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 /* Typography and Text Utilities
@@ -167,12 +198,11 @@ footer.main-footer {
 
 /* Font weight */
 .light      {font-weight: var(--light-font-weight) !important }
-.regular    { font-weight: var(--light-font-weight); color: var(--color-sixth) !important; }
-.semibold   { font-weight: var(--bold-font-weight) !important; color: var(--color-sixth) !important; }
+.regular    { font-weight: var(--regular-font-weight); color: var(--color-sixth) !important}
+.semibold   { font-weight: var(--semibold-font-weight) !important; color: var(--color-sixth) }
 .bold       { font-weight: var(--bold-font-weight) !important }
 
 /* Colors */
-
 .black  { color: var(--black) !important }
 .white  { color: rgba(255,255,255,1) !important }
 
@@ -185,8 +215,7 @@ footer.main-footer {
 ========================================================================== */
 
 .logo-banco {
-	width: 160px;
-	padding: 2rem 0 0rem 0;
+	width: 260px;
 }
 
 /* Otros
@@ -207,6 +236,11 @@ footer.main-footer {
 	position: sticky;
 	top: 3.75rem;
 	z-index: 998;
+}
+
+/* Main-nav-user  */
+.main-nav-user > .nav-item > .nav-link{
+	color: var(--color-room) !important;
 }
 
 /* Paginador y main-nav */
@@ -256,6 +290,15 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 	background-color: #f9f9f9 !important;
 }
 
+
+/* Widgets */
+
+#widget-signin.widget {
+	padding: 28px;
+	background-color: var(--color-thirteenth);
+	width: 300px !important;
+}
+
 /* Fin Estilos Base
 ========================================================================== */
 
@@ -271,18 +314,50 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 	min-height: calc(100vh - 2.75rem);
 }
 
-.login-content:before {
+.login-content::before {
 	content: ' ';
 	display: block;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	z-index: 0;
-	background: linear-gradient(rgba(255, 255, 255, .9),
-			rgba(255, 255, 255, .9)),
-		url("../../images/vg/bg-content.png");
-	background-size: cover;
-	background-position: left;
+	opacity: .4;
+	background-image: url("../../images/bdb/bg-content.png");
+	background-repeat: no-repeat;
+	background-size: 35%;
+}
+
+.invalid-user {
+	background: rgba(253, 247, 246,1);
+	border-radius: 5px;
+	border: 1px solid var(--danger);
+	box-shadow: 2px 2px 3px 0px var(--danger);
+	color: var(--color-room);
+	display: flex;
+	font-size: 12px;
+	font-weight: var(--semibold-font-weight);
+	height: 22px;
+	letter-spacing: .016em;
+	padding: 0px 8px;
+	width: auto;
+	z-index: 1;
+}
+
+.inactive-user {
+	align-items: center;
+	background:rgba(255, 247, 230, 1);
+	border-radius: 5px;
+	border: 1px solid var(--warning);
+	box-shadow: 2px 2px 3px 0px var(--warning);
+	color: var(--color-room) !important;
+	display: flex;
+	font-size: 12px;
+	font-weight: var(--semibold-font-weight);
+	height: 22px;
+	letter-spacing: .016em;
+	padding: 0px 8px;
+	width: auto;
+	z-index: 1;
 }
 
 .login-content .z1{
@@ -300,6 +375,9 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 
 .widget-support {
 	border: 1px solid var(--color-primary);
+	-webkit-box-shadow: .5px .5px 3px 0px var(--color-eighth);
+	-moz-box-shadow: .5px .5px 3px 0px var(--color-eighth);
+	box-shadow: .5px .5px 3px 0px var(--color-eighth);
 }
 
 .widget-support-btn{
@@ -320,6 +398,9 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 	background-color: #f9f9f9;
 }
 
+.dashboard-item:not(.inactive):hover .item-info {
+	border-bottom: 2px solid var(--color-fourteenth);
+}
 .feed .feed-item:nth-child(2n) {
 	background-color: var(--color-secondary);
 }
