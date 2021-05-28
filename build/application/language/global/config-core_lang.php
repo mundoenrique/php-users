@@ -118,6 +118,7 @@ $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
 //CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
+$lang['CONF_TYPE_TRANSACTION'] = 'OFF';
 $lang['CONF_PICKER_MINDATE'] = '-48m';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
@@ -188,3 +189,4 @@ $lang['CONF_REGEX_FLOAT_AMOUNT'] = '^[0-9]+(\.[0-9]{2})?$';
 $lang['CONF_REGEX_DATE_DMY'] = '^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$';
 $lang['CONF_REGEX_DATE_MY'] = '^(0?[1-9]|1[012])\/[0-9]{4}$';
 $lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';
+$lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';

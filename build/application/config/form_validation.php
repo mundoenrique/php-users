@@ -251,6 +251,10 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'transType',
+			'rules' => 'trim|regex_match[/^(-|+)/]'
 		]
 	],
 	'monthlyMovements' => [

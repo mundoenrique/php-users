@@ -83,6 +83,19 @@
 						<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
             <div id='error' class="help-block"></div>
           </div>
+					<?php if (lang('CONF_TYPE_TRANSACTION') == 'ON') :  ?>
+					<label class="mt-1 regular" for="transType"><?= lang('BUSINESS_TRANSACTIONS'); ?></label>
+					<div class="form-group col-2 px-1">
+						<select id="transType" class="custom-select form-control" name="transType">
+							<?php foreach (lang('BUSINESS_TRANSACTIONS_LIST') as $key => $value) : ?>
+							<option value="<?= $key; ?>">
+								<?= $value; ?>
+							</option>
+							<?php endforeach; ?>
+						</select>
+						<div class="help-block"></div>
+					</div>
+					<?php endif; ?>
           <div class="flex items-center">
             <button id="search" class="btn btn-small btn-rounded-right btn-primary mb-3">
               <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
@@ -90,14 +103,6 @@
           </div>
         </div>
       </form>
-      <?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
-      <div class="flex self-end mb-3">
-        <button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
-          data-name="reset"><?= lang('GEN_MOVEMENTS'); ?></button>
-        <button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset"
-          data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?></button>
-      </div>
-      <?php endif; ?>
 			<div class="hide-downloads self-end mb-4 pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
@@ -138,6 +143,14 @@
           </form>
         </ul>
       </div>
+			<?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
+      <div class="flex self-end mb-3">
+        <button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
+          data-name="reset"><?= lang('GEN_MOVEMENTS'); ?></button>
+        <button class="btn btn-outline btn-small btn-rounded-right nowrap is-disabled" data-jplist-control="reset"
+          data-group="group-filter-pagination" data-name="reset"><?= lang('BUSINESS_TRANSIT_BALANCE'); ?></button>
+      </div>
+      <?php endif; ?>
     </nav>
     <div class="line mb-1"></div>
     <div id="results" class="mt-1 justify-center">

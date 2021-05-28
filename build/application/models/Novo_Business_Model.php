@@ -213,7 +213,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '3';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
-		$this->dataRequest->signo = $dataRequest->TransType ?? '';
+		$this->dataRequest->signo = '';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardDetail');
@@ -281,6 +281,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.MovimientosTarjetaSaldoMO';
 		$this->dataRequest->mes = $dataRequest->filterMonth;
 		$this->dataRequest->anio = $dataRequest->filterYear;
+		$this->dataRequest->signo = $dataRequest->transType ?? '';
 		$this->dataRequest->tarjeta = [
 			'noTarjeta' => $dataRequest->cardNumber,
 			'id_ext_per' => $this->session->userId,

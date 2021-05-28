@@ -32,6 +32,7 @@ function validateForms(form) {
 	var phone = new RegExp(lang.CONF_REGEX_PHONE, 'i');
 	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
+	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
 	/*var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -138,6 +139,7 @@ function validateForms(form) {
 			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
+			"transType":	{ pattern: transType },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,

@@ -12,7 +12,12 @@ $lang['BUSINESS_MY_MOVEMENTS'] = 'Mis movimientos';
 $lang['BUSINESS_TO_SHOW'] = 'Mostrar:';
 $lang['BUSINESS_RECENT'] = 'Recientes';
 $lang['BUSINESS_LAST_MOVEMENTS'] = 'Últimos 20';
-$lang['BUSINESS_SELECT'] = 'Seleccionar';
+$lang['BUSINESS_SELECT'] = 'Seleccionar:';
+$lang['BUSINESS_TRANSACTIONS'] = 'Transacciones:';
+$lang['BUSINESS_TRANSACTIONS_LIST'] = [
+	'' => 'Todas',
+	'-' => 'Consumo',
+	'+' => 'Recarga'
+];
 $lang['BUSINESS_WITH_OUT_CARDS'] = 'No tienes tarjetas disponibles para usar la aplicación, %s';
-//CARD LIST
 $lang['BUSINESS_CHECK_BALANCE'] = 'Click para consultar tu saldo';
