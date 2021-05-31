@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['USER_SIGNIN_TITLE'] = 'Personas';
 $lang["USER_TERMS_CONTENT"] = '
 <h2><b>Condiciones Generales, Términos de Uso y Confidencialidad.</b></h2>
 <p>Servitebca Perú, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A., sociedad domiciliada en la ciudad de Lima e inscrita en la partida electrónica 12072298, en fecha 19 de octubre de 2007, quien en lo adelante se denominará “La Empresa”; a continuación se describen los términos y condiciones que rigen el uso y la confidencialidad de la plataforma electrónica de La Empresa; en lo adelante “La Plataforma”.</p>

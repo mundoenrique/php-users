@@ -8,6 +8,10 @@
 			<?php endif; ?>
 			<a class="navbar-brand">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LOGO_HEADER'), 'images', $customerUri); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+				<?php if(lang('CONF_HEADER_BORDER') == 'ON'):?>
+				<span class="vertical-line mx-1"></span>
+				<span class="h3 white"><?= lang('USER_TITLE_TEXT') ?></span>
+				<?php endif; ?>
 			</a>
 			<?php if($this->session->logged): ?>
 			<div class="flex flex-auto justify-end">

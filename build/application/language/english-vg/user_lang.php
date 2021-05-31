@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['USER_SIGNIN_TITLE'] = 'Users';
 $lang["USER_TERMS_CONTENT"] = '
 <h2><b>Condiciones Generales, Términos de Uso y Confidencialidad.</b></h2>
 

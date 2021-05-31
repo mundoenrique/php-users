@@ -3363,6 +3363,10 @@ ul.steps li.step-item i {
   padding-bottom: 4px;
 }
 
+.vertical-line {
+	border-left: var(--border-width) solid rgba(255,255,255,1);
+}
+
 /* Cursors */
 .cursor-pointer {
 	cursor: pointer !important;
