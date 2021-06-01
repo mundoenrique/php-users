@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <footer class="main-footer">
-  <?php if ($customerUri == 'bdb'): ?>
+  <?php if(lang('CONF_FOOTER_MARK') == 'ON'): ?>
   <div class="flex pr-2 pr-lg-0">
     <img src="<?= $this->asset->insertFile(lang('GEN_FOTTER_MARK'), 'images', $customerUri); ?> " alt="Superintendencia de Bancos">
   </div>

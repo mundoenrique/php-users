@@ -26,7 +26,7 @@ $lang['GEN_TABLE_FOR_DEBIT'] = 'Valor transacción';
 $lang['GEN_TABLE_DNI'] = 'Documento de identidad';
 $lang['GEN_TABLE_ACCOUNT_NUMBER'] = 'Número de tarjeta';
 //FOOTER
-$lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá - ';
+$lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Banco de Bogotá';
 $lang['GEN_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['GEN_FOTTER_IMAGE_R'] = 'img-pci_compliance.svg';
 $lang['GEN_FOTTER_MARK'] = 'img-mark.svg';

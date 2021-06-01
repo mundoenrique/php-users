@@ -125,6 +125,7 @@ $lang['CONF_PICKER_MINDATE'] = '-48m';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
+$lang['CONF_FOOTER_MARK'] = 'OFF';
 // API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
