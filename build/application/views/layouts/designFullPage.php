@@ -9,6 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title><?= $titlePage;?></title>
 	<?= $this->asset->insertCss(); ?>
+	<?= ($module == 'login' && $activeRecaptcha) ?  $scriptCaptcha : ''; ?>
+	<?= $this->asset->insertJs(); ?>
 </head>
 
 <body>
@@ -100,14 +102,6 @@
 
 		var txtCloseIdleSession = "<?= lang('RESP_EXPIRED_SESSION'); ?>"
 	</script>
-
-	<?php
-		if($module == 'login' && $activeRecaptcha) {
-			echo 	$scriptCaptcha;
-		}
-
-		echo $this->asset->insertJs($countryUri);
-	?>
 </body>
 
 </html>
