@@ -45,9 +45,9 @@ class ServiceProduct_Model extends BDB_Model
 			$this->dataRequest->fechaExp = $dataProduct['fechaExp'];
 			$this->dataRequest->noTarjeta = $dataProduct['noTarjeta'];
 		}
-
 		log_message("info", "Request ServiceProduct:" . json_encode($this->dataRequest));
 		$response = $this->sendToService('ServiceProduct');
+
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
@@ -106,6 +106,18 @@ class ServiceProduct_Model extends BDB_Model
 				case -401:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_PIN_NOT_CHANGED');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -266:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_LOCKED_CARD');
 					$this->response->classIconName = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1' => [
@@ -311,6 +323,18 @@ class ServiceProduct_Model extends BDB_Model
 				case -241:
 					$this->response->code = 2;
 					$this->response->msg = lang('RESP_DATA_INVALIDATED');
+					$this->response->classIconName = 'ui-icon-alert';
+					$this->response->data = [
+						'btn1' => [
+							'text' => lang('BUTTON_CONTINUE'),
+							'link' => base_url('listaproducto'),
+							'action' => 'redirect'
+						]
+					];
+					break;
+				case -266:
+					$this->response->code = 2;
+					$this->response->msg = lang('RESP_LOCKED_CARD');
 					$this->response->classIconName = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1' => [
