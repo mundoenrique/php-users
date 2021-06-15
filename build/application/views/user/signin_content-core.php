@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div class="login-content flex items-center justify-center bg-primary">
-  <div class="row">
+  <div class="row justify-center">
     <div class="col-auto px-0">
       <div class="flex flex-column items-center z1 h-100">
         <img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('USER_SIGNIN_LOGO_WIDGET'), 'images', $customerUri); ?>"
@@ -47,6 +47,11 @@
         </div>
       </div>
     </div>
+    <?php endif; ?>
+		<?php if (lang('CONF_SIGNIN_WELCOME_MSG') == 'ON') : ?>
+			<div class="col-12 mt-2 center h6">
+				<p><?= lang('USER_WELCOME_MSG') ?></p>
+			</div>
     <?php endif; ?>
   </div>
 </div>
