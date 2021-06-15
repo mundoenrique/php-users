@@ -184,8 +184,6 @@ footer.main-footer {
 .semibold   { font-weight: var(--bold-font-weight) !important; color: var(--color-sixth) !important; }
 .bold       { font-weight: var(--bold-font-weight) !important }
 
-.h6, h6 { font-size: .8rem !important; }
-
 /* Colors */
 
 .black  { color: var(--black) !important }

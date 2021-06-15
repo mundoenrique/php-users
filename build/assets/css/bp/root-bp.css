@@ -76,6 +76,7 @@
 	--font-family-base: 'sourcesanspro-regular', sans-serif;
   --font-family-monospace: monospace, "Courier New";
   --font-family-novoglyphs: 'novoglyphs';
+	--h6: .8rem !important;
 
   /* Border radius */
   --border-radius: 5px;
