@@ -244,10 +244,6 @@ class Novo_User extends NOVO_Controller {
 			$this->render->$index = $render;
 		}
 
-		if ($this->session->flashdata('cardNumber') != NULL) {
-			$this->session->set_flashdata('cardNumber', $this->session->flashdata('cardNumber'));
-		}
-
 		$this->render->previewINE_A = FALSE;
 		$this->render->previewINE_R = FALSE;
 		$this->render->previewPASS_A = FALSE;
