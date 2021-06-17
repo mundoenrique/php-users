@@ -126,6 +126,7 @@ class BDB_Controller extends CI_Controller {
 				"third_party/aes",
 				"default/aes-json-format",
 				"$this->countryUri/watchsession",
+				"$this->countryUri/sessionControl",
 				"default/helper"
 			];
 		}
@@ -165,6 +166,12 @@ class BDB_Controller extends CI_Controller {
 		if($auth) {
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
+			$this->render->sessionTime = $this->config->item('session_time');
+			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
+			$this->render->callServer = $this->render->callModal;
+			$this->render->logged = $this->session->logged;
+			$this->render->userId = $this->session->userId;
+
 			$this->asset->initialize($this->includeAssets);
 			$this->load->view('layouts/'.$this->render->layoutView, $this->render);
 		} else {
