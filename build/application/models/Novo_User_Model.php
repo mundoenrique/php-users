@@ -1013,8 +1013,8 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->generalAccount =  '';
 
 		if ($profileData->longProfile == 'S') {
-			$cardNumber = $response->registro->afiliacion->cardNumber ?? '';
-			$this->session->set_flashdata('cardNumber', $cardNumber);
+			$cardNumber = $response->registro->afiliacion->notarjeta ?? '';
+			$this->session->set_userdata('cardNumber', $cardNumber);
 
 			$profileData->firstName = isset($response->registro->afiliacion->nombre1) && $response->registro->afiliacion->nombre1 != ''
 				? $response->registro->afiliacion->nombre1 : $profileData->firstName;
@@ -1210,7 +1210,7 @@ class Novo_User_Model extends NOVO_Model {
 			],
 			'afiliacion' => [
 				'aplicaPerfil' => $this->session->longProfile,
-				'notarjeta' => $this->session->flashdata('cardNumber'),
+				'notarjeta' => $this->session->cardNumber,
 				'idpersona' => $this->session->userId,
 				'nombre1' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
 				'nombre2' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->middleName)))),
