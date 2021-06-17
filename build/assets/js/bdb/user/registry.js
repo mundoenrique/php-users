@@ -110,17 +110,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	inputConfirmEmail.oncut = inputConfirmEmail.oncopy = inputConfirmEmail.onpaste = function(e) {
-		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
     return false;
 	};
 
 	inputConfirmUserpwd.oncut = inputConfirmUserpwd.oncopy = inputConfirmUserpwd.onpaste = function(e) {
-		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
-    return false;
-	};
-
-	userpwd.oncut = userpwd.oncopy = userpwd.onpaste = function(e) {
-		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
     return false;
 	};
 });
