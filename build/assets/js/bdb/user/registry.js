@@ -110,12 +110,10 @@ $$.addEventListener('DOMContentLoaded', function(){
 	});
 
 	inputConfirmEmail.oncut = inputConfirmEmail.oncopy = inputConfirmEmail.onpaste = function(e) {
-		this.nextSibling.nextSibling.innerText = 'Operación no válida.'
     return false;
 	};
 
 	inputConfirmUserpwd.oncut = inputConfirmUserpwd.oncopy = inputConfirmUserpwd.onpaste = function(e) {
-		this.nextSibling.nextSibling.innerText = 'Operación no válida.'
     return false;
 	};
 });

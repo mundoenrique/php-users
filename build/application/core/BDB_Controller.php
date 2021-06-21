@@ -42,8 +42,8 @@ class BDB_Controller extends CI_Controller {
 
 		$this->idProductos = $this->session->userdata('idProductos');
 		$this->render->logged = $this->session->userdata('logged_in');
+		$this->render->userId = $this->session->userdata('idUsuario');
 		$this->render->fullName = $this->session->userdata('fullName');
-
 		$this->countryUri = $this->uri->segment(1, 0) ?: 'default';
 		$this->render->rootHome = $this->render->logged? 'vistaconsolidada': 'inicio';
 
@@ -165,6 +165,9 @@ class BDB_Controller extends CI_Controller {
 		if($auth) {
 			$this->render->module = $module;
 			$this->render->viewPage = $this->views;
+			$this->render->sessionTime = $this->config->item('session_time');
+			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
+			$this->render->callServer = $this->render->callModal;
 			$this->asset->initialize($this->includeAssets);
 			$this->load->view('layouts/'.$this->render->layoutView, $this->render);
 		} else {

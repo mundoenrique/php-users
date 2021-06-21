@@ -34,6 +34,8 @@ $lang['GEN_BTN_CLOSE'] = 'Cerrar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
+$lang['GEN_BTN_STAY'] = 'Mantener';
+$lang['GEN_BTN_YES'] = 'Si';
 
 $lang['GEN_TEXT_BLOCK_PRODUCT'] = 'Tarjeta bloqueada';
 $lang['GEN_TEXT_BLOCK_TEMP_PRODUCT'] = 'Bloqueada temporal';

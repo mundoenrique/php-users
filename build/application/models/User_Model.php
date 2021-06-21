@@ -256,6 +256,7 @@ class User_Model extends BDB_Model
 						$this->response->data = base_url('registro');
 
 						$newdata	= array(
+							'logged_in' => TRUE,
 							'userName'	=> $response->logAccesoObject->userName,
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
@@ -1054,5 +1055,25 @@ class User_Model extends BDB_Model
 			}
 		}
 		return $this->response;
+	}
+		/**
+	 * @info Método para el cierre de sesión
+	 * @author J. Enrique Peñaloza Piñero
+	 * @date May 1st, 2019
+	 */
+	public function callWs_KeepSession_User($dataRequest = FALSE)
+	{
+		log_message('INFO', 'NOVO User Model: KeepSession Method Initialized');
+
+		$response = new stdClass();
+		$response->rc =  0;
+		$this->makeAnswer($response);
+		$this->response->code = 0;
+
+		foreach ($this->session->flashdata() as $key => $value) {
+			$this->session->set_flashdata($key, $value);
+		}
+
+		return $this->responseToTheView('KeepSession');
 	}
 }
