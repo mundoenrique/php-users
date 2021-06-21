@@ -94,6 +94,8 @@
 		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>";
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>";
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>";
+		var txtBtnStayNotiSystem = "<?= lang('GEN_BTN_STAY'); ?>";
+		var txtBtnYesNotiSystem = "<?= lang('GEN_BTN_YES'); ?>";
 		var txtCloseSession = "<?= lang('GEN_CLOSE_SESSION'); ?>";
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>";
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>";
@@ -103,7 +105,7 @@
 		var callModal = "<?= $callModal; ?>";
 		var callServer = "<?= $callServer; ?>";
 		var logged = "<?= $logged; ?>";
-		var userId = "<?= $userId; ?>";
+		var userId = "<?= $userId?'1':''; ?>";
 
 		var msgResendOTP = "<a name='resendCode' class='primary regular' href='#'>"+"<?= lang('RESP_RESEEND_OTP') ?>"+"</a>"
 
