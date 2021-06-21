@@ -3,8 +3,7 @@ var setTimesession;
 var resetTimesession;
 
 $(function() {
-	//if (logged || userId) {
-	if (false) {
+	if (logged || userId) {
 		clearTimeout(resetTimesession);
 		clearTimeout(setTimesession);
 
@@ -13,6 +12,8 @@ $(function() {
 		$('#cancel').on('click', function (e) {
 			e.preventDefault();
 
+			$('#accept')
+			.prop('disabled', true);
 			$('#cancel')
 			.html(msgLoading)
 			.prop('disabled', true);
@@ -51,11 +52,12 @@ function finishSession() {
 	});
 
 	resetTimesession = setTimeout(function() {
-		btnKeepSession
+		$('#accept')
+		.prop('disabled', true);
+		$('#cancel')
 		.html(msgLoading)
 		.prop('disabled', true);
 
-		// TODO descativar ambos botones
 		$(location).attr('href', urlBase+'cerrarsesion');
 	}, callServer);
 

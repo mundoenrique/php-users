@@ -126,6 +126,7 @@ class BDB_Controller extends CI_Controller {
 				"third_party/aes",
 				"default/aes-json-format",
 				"$this->countryUri/watchsession",
+				"$this->countryUri/sessionControl",
 				"default/helper"
 			];
 		}
