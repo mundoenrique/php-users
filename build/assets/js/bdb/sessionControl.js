@@ -12,11 +12,8 @@ $(function() {
 		$('#cancel').on('click', function (e) {
 			e.preventDefault();
 
-			$('#accept')
-			.prop('disabled', true);
-			$('#cancel')
-			.html(msgLoading)
-			.prop('disabled', true);
+			$('#accept').prop('disabled', true);
+			$('#cancel').html(msgLoading).prop('disabled', true);
 
 			$(location).attr('href', urlBase+'cerrarsesion');
 		});
@@ -52,13 +49,10 @@ function finishSession() {
 	});
 
 	resetTimesession = setTimeout(function() {
-		$('#accept')
-		.prop('disabled', true);
-		$('#cancel')
-		.html(msgLoading)
-		.prop('disabled', true);
-
+		$('#accept').prop('disabled', true);
+		$('#cancel').html(msgLoading).prop('disabled', true);
 		$(location).attr('href', urlBase+'cerrarsesion');
+
 	}, callServer);
 
 	btnKeepSession.on('click', function() {
