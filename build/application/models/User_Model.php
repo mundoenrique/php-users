@@ -256,7 +256,7 @@ class User_Model extends BDB_Model
 						$this->response->data = base_url('registro');
 
 						$newdata	= array(
-							'logged_in' => TRUE,
+							'idUsuario' => TRUE,
 							'userName'	=> $response->logAccesoObject->userName,
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
@@ -1067,13 +1067,21 @@ class User_Model extends BDB_Model
 
 		$response = new stdClass();
 		$response->rc =  0;
-		$this->makeAnswer($response);
 		$this->response->code = 0;
+		$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+		$this->response->classIconName = 'ui-icon-info';
+		$this->response->data = [
+			'btn1' => [
+				'text' => lang('BUTTON_ACCEPT'),
+				'link' => base_url('inicio'),
+				'action' => 'redirect'
+			]
+		];
 
 		foreach ($this->session->flashdata() as $key => $value) {
 			$this->session->set_flashdata($key, $value);
 		}
 
-		return $this->responseToTheView('KeepSession');
+		return true;
 	}
 }
