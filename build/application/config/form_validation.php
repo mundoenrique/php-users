@@ -1211,5 +1211,11 @@ $config = [
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
-	]
+		],
+		'keepsession' => [
+			[
+				'field' => 'signout',
+				'rules' => 'trim|alpha|required'
+			]
+		],
 ];
