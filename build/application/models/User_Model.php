@@ -256,7 +256,7 @@ class User_Model extends BDB_Model
 						$this->response->data = base_url('registro');
 
 						$newdata	= array(
-							'logged_in' => TRUE,
+							'idUsuario' => TRUE,
 							'userName'	=> $response->logAccesoObject->userName,
 							'pais'		=> $response->pais,
 							'id_ext_per'	=> $response->user->id_ext_per,
