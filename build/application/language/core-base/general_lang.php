@@ -20,8 +20,7 @@ $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
-$lang['GEN_NOT_SERVICES_AVAILABLE'] = 'Existe una solicitud de reposición pendiente,
-no es posible realizar otras operaciones.';
+$lang['GEN_NOT_SERVICES_AVAILABLE'] = 'La tarjeta presenta un bloqueo definitivo, no es posible realizar otras operaciones.';
 $lang['GEN_SERVICES_AVAILABLE'] = 'Selecciona la operación que deseas realizar';
 //TITLES PAGES
 $lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar acceso';
