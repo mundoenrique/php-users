@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['USER_SIGNIN_TITLE'] = 'Users';
 $lang["USER_TERMS_CONTENT"] = '
-<h2><b>Condiciones Generales, Términos de Uso y Confidencialidad.</b></h2>
+<h2><b>General Conditions, Terms of Use and Confidentiality.</b></h2>
 
 <p>Servitebca Perú, Electronic Transfer of Benefits and Payments Service S.A., a company domiciled in the city of Lima and registered in electronic entry 12072298, on October 19, 2007, who will hereinafter be called “The Company”; The terms and conditions governing the use and confidentiality of the Companys electronic platform are described below; hereinafter "The Platform".</p>
 
@@ -32,7 +32,7 @@ $lang["USER_TERMS_CONTENT"] = '
 
 <p>Thus, in the event of any violation of the security and privacy conditions, of the systems that use information technology, of the privacy of people and communications and of the intellectual property that are linked to The Platform, the provisions will apply in the Criminal Code on Computer Crimes and other current and applicable regulations of the Peruvian legal system.</p>
 
-<h2><b>General Conditions, Terms of Use and Confidentiality.</b></h2>
+<h2><b>Processing of personal data</b></h2>
 
 <p>It is reported that the personal data provided to Servitebca Perú, Electronic Transfer of Benefits and Payments Service S.A. ("SERVITEBCA") are incorporated into SERVITEBCAs customer base. SERVITEBCA will use said information for the purpose of providing the requested and / or contracted services (including data processing, formalization of contracts, sending correspondence, among others), which may be carried out through third parties.</p>
 
