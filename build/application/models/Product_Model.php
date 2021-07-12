@@ -80,7 +80,11 @@ class Product_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response->disponible;
+					$this->response->data = [
+						'available' => $response->disponible,
+						'actual' => $response->actual,
+						'blocked' => $response->bloqueo
+					];
 					$this->response->msg = lang('RESP_RC_0');
 					break;
 
