@@ -54,7 +54,7 @@ $favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 		</footer>
 		<?php endif; ?>
 		<?php
-		echo novo_insert_js_cdn('jquery-3.4.0.min.js');
+		echo novo_insert_js_cdn('jquery-3.6.0.min.js');
 		?>
 		<script>
 			$('#history-back').on('click', function(event) {
