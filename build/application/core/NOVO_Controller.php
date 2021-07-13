@@ -220,17 +220,8 @@ class NOVO_Controller extends CI_Controller {
 				}
 			}
 		} else {
-			$redirectLink = lang('CONF_LINK_SIGNIN');
-
-			if ($this->session->has_userdata('logged')) {
-				$redirectLink = lang('CONF_LINK_CARD_LIST');
-
-				if ($this->render->totalCards == 1) {
-					$redirectLink = lang('CONF_LINK_CARD_LIST');
-				}
-			}
-
-			redirect(base_url($redirectLink), 'location', 'GET');
+			$linkredirect = uriRedirect();
+			redirect(base_url($linkredirect), 'location', 'GET');
 		}
 	}
 	/**

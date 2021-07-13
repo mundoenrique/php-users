@@ -358,3 +358,20 @@ if (! function_exists('languageCookie')) {
 
 	}
 }
+
+if (!function_exists('uriRedirect')) {
+	function uriRedirect() {
+		$CI = &get_instance();
+		$redirectLink = lang('CONF_LINK_SIGNIN');
+
+		if ($CI->session->has_userdata('logged')) {
+			$redirectLink = lang('CONF_LINK_CARD_LIST');
+
+			if ($CI->session->has_userdata('totalCards') && $CI->session->totalCards == 1) {
+				$redirectLink = lang('CONF_LINK_CARD_DETAIL');
+			}
+		}
+
+		return $redirectLink;
+	}
+}

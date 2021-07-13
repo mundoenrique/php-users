@@ -95,10 +95,11 @@ class NOVO_Model extends CI_Model {
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->data = new stdClass();
 		$this->response->msg = '';
+		$linkredirect = uriRedirect();
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> $this->session->has_userdata('logged') ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_SIGNIN'),
+				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]
 		];
@@ -156,5 +157,27 @@ class NOVO_Model extends CI_Model {
 		unset($responsetoView);
 
 		return $this->response;
+	}
+	/**
+	 * @info Método para validar la carga de imagenes del usurio
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date July 13th, 2021
+	 */
+	public function checkImageUpload()
+	{
+		log_message('INFO', 'NOVO Model: checkImageUpload Method Initialized');
+
+		if($this->session->missingImages) {
+			$this->response->code = 3;
+			$this->response->title = lang('GEN_TITLE_IMPORTANT');
+			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->msg = lang('GEN_MISSING_IMAGES');
+			$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
+			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+			$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
+			$this->response->modalBtn['btn2']['action'] = 'destroy';
+
+			$this->session->set_userdata('missingImages', FALSE);
+		}
 	}
 }

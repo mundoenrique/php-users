@@ -38,19 +38,7 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				if (isset($response->lista) && count($response->lista) > 0) {
 					$this->response->code = 0;
-
-					if($this->session->missingImages) {
-						$this->response->code = 3;
-						$this->response->title = lang('GEN_TITLE_IMPORTANT');
-						$this->response->icon = lang('CONF_ICON_INFO');
-						$this->response->msg = lang('GEN_MISSING_IMAGES');
-						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
-						$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
-						$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
-						$this->response->modalBtn['btn2']['action'] = 'destroy';
-
-						$this->session->set_userdata('missingImages', FALSE);
-					}
+					$this->checkImageUpload();
 
 					foreach ($response->lista AS $pos => $cardsRecords) {
 						$cardRecord = new stdClass();

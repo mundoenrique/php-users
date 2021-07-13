@@ -126,7 +126,6 @@ class Verify_Access {
 			case 'userCardsList':
 			case 'profileUser':
 			case 'updateProfile':
-			case 'notifications':
 				$auth = $this->CI->session->has_userdata('logged');
 			break;
 			case 'keepSession':
@@ -153,6 +152,9 @@ class Verify_Access {
 			case 'getMovements':
 			case 'downloadInquiry':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
+			break;
+			case 'notifications':
+				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') == 'ON';
 			break;
 			case 'signup':
 				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');

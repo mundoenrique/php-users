@@ -186,7 +186,7 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			modalBtn: {
 				btn1: {
-					link: logged ? lang.CONF_LINK_CARD_LIST : lang.CONF_LINK_SIGNIN,
+					link: uriRedirect(),
 					action: 'redirect'
 				}
 			}
@@ -365,4 +365,18 @@ function scrollTopPos(formValidate) {
 			scrollTop: firstElement - formValidate
 		}, 400);
 	}
+}
+
+function uriRedirect() {
+	var redirectLink = lang.CONF_LINK_SIGNIN;
+
+	if (logged) {
+		redirectLink = lang.CONF_LINK_CARD_LIST;
+
+		if (totalCards == 1) {
+			redirectLink = lang.CONF_LINK_CARD_DETAIL;
+		}
+	}
+
+	return redirectLink;
 }
