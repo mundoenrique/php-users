@@ -29,8 +29,8 @@ $("#filterInputYear").datepicker({
 	onClose: function (dateText, inst) {
 		$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
 		$(this)
-		.focus()
-		.blur();
+			.focus()
+			.blur();
 
 		var monthYear = $('#filterInputYear').val().split('/');
 		$('#filterMonth').val(monthYear[0]);
@@ -334,10 +334,21 @@ $$.addEventListener('DOMContentLoaded', function () {
 	});
 
 	btnExportExtract.addEventListener('click', function (e) {
-
 		e.preventDefault();
-		$$.getElementsByName("frmTypeFile")[0].value = 'ext';
-		processForm();
+
+		if ($('#filterInputYear').val() == '') {
+
+			notiSystem(titleNotiSystem, txtSelectMonth, iconDanger, {
+				btn1: {
+					link: false,
+					action: 'destroy',
+					text: txtBtnAcceptNotiSystem
+				}
+			});
+		} else {
+			$$.getElementsByName("frmTypeFile")[0].value = 'ext';
+			processForm();
+		}
 	});
 
 	if (openCardDetails != null) {
@@ -442,7 +453,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 	function processForm() {
 		var monthRequest = $('#filterMonth').val();
-		var	yearRequest = $('#filterYear').val();
+		var yearRequest = $('#filterYear').val();
 
 		$$.getElementsByName("frmNoTarjeta")[0].value = data.noTarjeta;
 		$$.getElementsByName("frmMonth")[0].value = monthRequest == '0' ? '' : monthRequest;
@@ -645,8 +656,8 @@ $$.addEventListener('DOMContentLoaded', function () {
 
 		// verificationMsg.innerHTML = msgLoading;
 	}
-	
-	$('#filterInputMonth').on('click', function(e) {
+
+	$('#filterInputMonth').on('click', function (e) {
 		$("#search").prop('disabled', true);
 		$('#filterInputYear').val('');
 		$('#filterMonth').val('0');
@@ -654,7 +665,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 		movements();
 	});
 
-	$('#search').on('click', function(e) {
+	$('#search').on('click', function (e) {
 		$("#search").prop('disabled', false);
 		movements();
 	});

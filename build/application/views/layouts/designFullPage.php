@@ -97,6 +97,7 @@
 		var txtBtnStayNotiSystem = "<?= lang('GEN_BTN_STAY'); ?>";
 		var txtBtnYesNotiSystem = "<?= lang('GEN_BTN_YES'); ?>";
 		var txtCloseSession = "<?= lang('GEN_CLOSE_SESSION'); ?>";
+		var txtSelectMonth = "<?= lang('RES_SELECT_MONTH'); ?>";
 		var isLoadNotiSystem = "<?= $loadAlert?: FALSE; ?>";
 		var txtMessageNotiSystem = "<?= $msgAlert?:''; ?>";
 		var redirectNotiSystem = "<?= $redirectAlert?:''; ?>";

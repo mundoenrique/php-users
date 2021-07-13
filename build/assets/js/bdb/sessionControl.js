@@ -9,11 +9,11 @@ $(function() {
 
 		sessionExpire();
 
-		$('#cancel').on('click', function (e) {
+		$('#cancel.ctrlSession').on('click', function (e) {
 			e.preventDefault();
 
-			$('#accept').prop('disabled', true);
-			$('#cancel').html(msgLoading).prop('disabled', true);
+			$('#accept.ctrlSession').prop('disabled', true);
+			$('#cancel.ctrlSession').html(msgLoading).prop('disabled', true);
 
 			$(location).attr('href', urlBase+'cerrarsesion');
 		});
@@ -31,10 +31,14 @@ function sessionExpire() {
 
 function finishSession() {
 	var btnKeepSession = $('#accept');
+	var btnCloseSession = $('#cancel');
 
 	if ($('#system-info').parents('.ui-dialog').length) {
 		$('#system-info').dialog('destroy');
 	}
+
+	btnKeepSession.addClass('ctrlSession');
+	btnCloseSession.addClass('ctrlSession');
 
 	notiSystem(titleNotiSystem, txtCloseSession, iconDanger, {
 		btn1: {
@@ -49,10 +53,9 @@ function finishSession() {
 	});
 
 	resetTimesession = setTimeout(function() {
-		$('#accept').prop('disabled', true);
-		$('#cancel').html(msgLoading).prop('disabled', true);
+		$('#accept.ctrlSession').prop('disabled', true);
+		$('#cancel.ctrlSession').html(msgLoading).prop('disabled', true);
 		$(location).attr('href', urlBase+'cerrarsesion');
-
 	}, callServer);
 
 	btnKeepSession.on('click', function() {
