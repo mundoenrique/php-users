@@ -119,68 +119,60 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
-		$auth = FALSE;
+		$auth = TRUE;
 		$user = $user ?? $this->user;
-		$freeAccess = [
-			'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP',
-			'validateOTP', 'changeLanguage'
-		];
-		$auth = in_array($module, $freeAccess);
 
-		if(!$auth) {
-			if ($this->CI->session->has_userdata('userId') && $this->CI->session->clientAgent != $this->CI->agent->agent_string()) {
-				clearSessionsVars();
-				$module = 'noModule';
-			}
-
-			switch($module) {
-				case 'userCardsList':
-				case 'profileUser':
-				case 'updateProfile':
-				case 'notifications':
-					$auth = $this->CI->session->has_userdata('logged');
-				break;
-				case 'keepSession':
-				case 'professionsList':
-				case 'statesList':
-				case 'cityList':
-				case 'regions':
-					$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
-				break;
-				case 'getBalance':
-				case 'cardDetail':
-				case 'monthlyMovements':
-				case 'downloadMoves':
-				case 'services':
-				case 'temporaryLock':
-				case 'twirlsCommercial':
-				case 'transactionalLimits':
-				case 'replacement':
-				case 'changePin':
-				case 'getVirtualDetail':
-					$auth = $this->CI->session->has_userdata('products');
-				break;
-				case 'expensesCategory':
-				case 'getMovements':
-				case 'downloadInquiry':
-					$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
-				break;
-				case 'signup':
-					$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
-				break;
-				case 'signUpData':
-					$auth = $this->CI->session->has_userdata('userNameValid');
-				break;
-				case 'validNickName':
-					$auth = $this->CI->session->has_userdata('userName');
-				break;
-				case 'changePassword':
-					$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
-				break;
-			}
+		switch($module) {
+			case 'userCardsList':
+			case 'profileUser':
+			case 'updateProfile':
+			case 'notifications':
+				$auth = $this->CI->session->has_userdata('logged');
+			break;
+			case 'keepSession':
+			case 'professionsList':
+			case 'statesList':
+			case 'cityList':
+			case 'regions':
+				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
+			break;
+			case 'getBalance':
+			case 'cardDetail':
+			case 'monthlyMovements':
+			case 'downloadMoves':
+			case 'services':
+			case 'temporaryLock':
+			case 'twirlsCommercial':
+			case 'transactionalLimits':
+			case 'replacement':
+			case 'changePin':
+			case 'getVirtualDetail':
+				$auth = $this->CI->session->has_userdata('products');
+			break;
+			case 'expensesCategory':
+			case 'getMovements':
+			case 'downloadInquiry':
+				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
+			break;
+			case 'signup':
+				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
+			break;
+			case 'signUpData':
+				$auth = $this->CI->session->has_userdata('userNameValid');
+			break;
+			case 'validNickName':
+				$auth = $this->CI->session->has_userdata('userName');
+			break;
+			case 'changePassword':
+				$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
+			break;
 		}
 
-		log_message('INFO', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		if ($this->CI->session->has_userdata('userId') && ($this->CI->session->clientAgent != $this->CI->agent->agent_string())) {
+			clearSessionsVars();
+		}
+
+		log_message('DEBUG', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		return $auth;
 	}

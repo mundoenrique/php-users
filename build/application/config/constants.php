@@ -103,10 +103,10 @@ $timeZone = [
 	'co' => 				'America/Bogota',
 	'pb' => 				'America/Guayaquil',
 	'pe' => 				'America/Lima',
-	'pichincha' => 	'America/Guayaquil',
 	'us' => 				'America/Lima',
 	've' => 				'America/Caracas',
 ];
+$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_erros/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';
@@ -150,6 +150,7 @@ defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
+defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
