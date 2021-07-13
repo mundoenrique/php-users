@@ -66,8 +66,8 @@ $lang['CONF_PROFILE'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
-$lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
+$lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_LONG_TEXT'] = '';
 //SIGNUP
 $lang['CONF_SECRET_KEY'] = 'ON';

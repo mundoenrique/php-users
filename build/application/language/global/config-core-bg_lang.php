@@ -1,4 +1,4 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SIGNIN
-$lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
+$lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'OFF';

@@ -82,9 +82,7 @@ $lang['GEN_CONTACTS_CITY'] = '';
 $lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
 $lang['GEN_CONTACTS'] = [
-	'Provis Alimentación' => '6198930',
-	'Plata Servitebca' => '6198931',
-	'Tarjeta LATODO' => '6193500',
+	'XXXXX' => 'XXXXXXX',
 ];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_SELECT_ACCOUNT'] = 'Selecciona una cuenta';
