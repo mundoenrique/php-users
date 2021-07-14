@@ -31,7 +31,7 @@ $lang["USER_TERMS_CONTENT"] = '
 
 <p>Así pues, en caso de cualquier violación a las condiciones de seguridad y privacidad, a los sistemas que utilizan tecnología de la información, a la privacidad de las personas y comunicaciones y a la propiedad intelectual que estén vinculados a La Plataforma, se le aplicará lo dispuesto en el Código Penal sobre Delitos Informáticos y demás normas vigentes y aplicables del ordenamiento jurídico del Perú.</p>
 
-<h2><b>Condiciones Generales, Términos de Uso y Confidencialidad.</b></h2>
+<h2><b>Tratamiento de datos personales.</b></h2>
 
 <p>Se informa que los datos personales proporcionados a Servitebca Perú, Servicio de Transferencia Electrónica de Beneficios y Pagos S.A. (“SERVITEBCA”) quedan incorporados a la base de clientes de SERVITEBCA. SERVITEBCA utilizará dicha información para efectos de brindarle los servicios solicitados y/o contratados (incluyendo procesamiento de datos, formalización de contratos, remisión de correspondencia, entre otros), la misma que podrá ser realizada a través de terceros.</p>
 
