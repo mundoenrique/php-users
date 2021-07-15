@@ -70,7 +70,7 @@
 						<div class="form-group custom-control custom-switch my-3">
 							<input id="acceptTerms" class="custom-control-input" type="checkbox" name="acceptTerms">
 							<label class="custom-control-label" for="acceptTerms">
-								Acepto las <a id="termsConditions" class="primary" href="#" rel="section">condiciones de uso</a> de este sistema. <span class="danger">*</span>
+								Acepto las <a id="termsConditions" class="primary" href="javascript:void(0)" rel="section">condiciones de uso</a> de este sistema. <span class="danger">*</span>
 							</label>
 							<div class="help-block"></div>
 						</div>
@@ -98,6 +98,7 @@
 
 	<div id="dialogConditions" class="none">
 		<div class="dialog-content p-3">
+		<a href="javascript:void(0)" class="header-modal-ui"></a>
 			<header class="">
 				<h2 class="h2 primary">Condiciones generales, términos de uso y confidencialidad</h2>
 			</header>
