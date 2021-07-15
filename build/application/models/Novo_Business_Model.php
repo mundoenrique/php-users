@@ -80,14 +80,14 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->nombre_producto);
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImgName = normalizeName($cardsRecords->nombre_producto);
-						$produtImg =  lang('GEN_PROGRAM_IMG_DEFAULT');
+						$produtImg =  lang('IMG_PROGRAM_IMG_DEFAULT');
 						$productUrl = 'images/programs/'.$this->customerUri;
-						$produtImgRev = lang('GEN_PROGRAM_IMG_DEFAULT_REV');
+						$produtImgRev = lang('IMG_PROGRAM_IMG_DEFAULT_REV');
 						$productUrlRev = 'images/programs/'.$this->customerUri;
 
-						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
-							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
-							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
+						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
+							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
+							$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->customerUri.'/'.$produtImg))) {
@@ -394,17 +394,17 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImgName = normalizeName($cardsRecords->producto);
-						$produtImg =  lang('GEN_PROGRAM_IMG_DEFAULT');
+						$produtImg =  lang('IMG_PROGRAM_IMG_DEFAULT');
 						$productUrl = 'images/programs/'.$this->customerUri;
-						$produtImgRev = lang('GEN_PROGRAM_IMG_DEFAULT_REV');
+						$produtImgRev = lang('IMG_PROGRAM_IMG_DEFAULT_REV');
 						$productUrlRev = 'images/programs/'.$this->customerUri;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
 						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
 						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
 
-						if (array_key_exists($produtImgName, lang('GEN_PROGRAM_IMAGES'))) {
-							$produtImg = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'.svg';
-							$produtImgRev = lang('GEN_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
+						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
+							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
+							$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
 						if (!file_exists(assetPath('images/programs/'.$this->customerUri.'/'.$produtImg))) {

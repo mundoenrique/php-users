@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 // PROGRAM IMAGES
-$lang['GEN_PROGRAM_IMAGES'] = [
+$lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_volvo' => 'plata_volvo',
 	'latodo_teoma' => 'latodo_teoma',
 	'latodo_pide_1taxi' => 'latodo_pide_taxi',

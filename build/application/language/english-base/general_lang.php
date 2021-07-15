@@ -81,9 +81,6 @@ $lang['GEN_CONTACTS_TITLE'] = 'Contact our 24-hour contact center at:';
 $lang['GEN_CONTACTS_CITY'] = '';
 $lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'REST OF THE COUNTRY';
-$lang['GEN_CONTACTS'] = [
-	'XXXXX' => 'XXXXXXX',
-];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_SELECT_ACCOUNT'] = 'Select an account';
 $lang['GEN_OTHER_PRODUCTS'] = 'Other product';
@@ -143,8 +140,6 @@ $lang['GEN_OTP_USED'] = 'The security code entered has already been used, please
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'At this time it is not possible to meet your request, please try again later';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
-$lang['GEN_RC_DEFAULT'] = -9999;
-$lang['GEN_DEFAULT_CODE'] = 4;
 $lang['GEN_VALIDATION_INPUT'] = 'Unauthorized content was detected in the request. %s';
 $lang['GEN_VALIDATION_LOGGED'] = 'You will be disconnected.';
 $lang['GEN_DUPLICATED_SESSION'] = 'It was not possible to validate your access credentials, please log in again, if you continue to see this message, contact the administrator.';

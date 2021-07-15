@@ -81,9 +81,6 @@ $lang['GEN_CONTACTS_TITLE'] = 'Comunícate con nuestro centro de contacto 24 hor
 $lang['GEN_CONTACTS_CITY'] = '';
 $lang['GEN_CONTACTS_CONTACT'] = '';
 $lang['GEN_CONTACTS_REST_COUNTRY'] = 'RESTO DEL PAÍS';
-$lang['GEN_CONTACTS'] = [
-	'XXXXX' => 'XXXXXXX',
-];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = 'XXX (XXXXXX)';
 $lang['GEN_SELECT_ACCOUNT'] = 'Selecciona una cuenta';
 $lang['GEN_OTHER_PRODUCTS'] = 'Otro producto';
@@ -143,8 +140,6 @@ $lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por f
 //GENERAL ERROR RESPONSE
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
-$lang['GEN_RC_DEFAULT'] = -9999;
-$lang['GEN_DEFAULT_CODE'] = 4;
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
@@ -215,12 +210,12 @@ $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Directorio existente.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directorio no creado!!!.';
-
+// HANDLE LANGUAGE
 $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
-//DOWNLOADS
+// DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Descargar PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';

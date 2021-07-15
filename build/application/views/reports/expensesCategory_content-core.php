@@ -30,7 +30,7 @@
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
                 <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
@@ -88,25 +88,25 @@
       <div id="downloads" class="hide-downloads hide pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+            <a id="downloadPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
               <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
             </a>
           </li>
           <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+            <a id="sendPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
             </a>
           </li>
           <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+            <a id="downloadXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
               <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
             </a>
           </li>
           <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+            <a id="sendXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
             </a>
           </li>

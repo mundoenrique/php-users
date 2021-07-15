@@ -3,7 +3,7 @@
   <div class="row justify-center">
     <div class="col-auto px-0">
       <div class="flex flex-column items-center z1 h-100">
-        <img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('USER_SIGNIN_LOGO_WIDGET'), 'images', $customerUri); ?>"
+        <img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('IMG_SIGNIN_LOGO_WIDGET'), 'images', $customerUri); ?>"
           alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
         <span class="mb-2 secondary center h3"><?= lang('USER_SIGNIN_TITLE') ?></span>
         <div id="widget-signin" class="widget rounded h-100">
@@ -27,10 +27,10 @@
               <span class="icon-lock mr-1 h3 bg-items" aria-hidden="true"></span>
               <?= lang('GEN_BTN_SIGNIN') ?>
             </button>
-            <?php if (lang('CONIFG_SIGIN_RECOVER_PASS') == 'ON') : ?>
+            <?php if (lang('CONF_SIGIN_RECOVER_PASS') == 'ON') : ?>
             <a class="block mb-1 h5 primary hyper-link" href="<?= base_url(LANG('CONF_LINK_RECOVER_ACCESS')); ?>"><?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?></a>
             <?php endif; ?>
-            <?php if (lang('CONIFG_SIGIN') == 'ON') : ?>
+            <?php if (lang('CONF_SIGIN') == 'ON') : ?>
             <p class="mb-0 h5 center"><?= lang('USER_SIGNIN_NO_USER') ?>
               <a class="hyper-link" href="<?= base_url(lang('CONF_LINK_USER_IDENTIFY')) ?>"><?= lang('USER_SIGNIN_SINGN_UP') ?></a>
             </p>
@@ -43,7 +43,7 @@
     <div class="col-auto px-0">
       <div class="h-100">
         <div class="flex pr-2 pr-lg-0 img-log h-100">
-          <img src="<?= $this->asset->insertFile(lang('USER_SIGNIN_IMAGE'), 'images', $customerUri); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+          <img src="<?= $this->asset->insertFile(lang('IMG_SIGNIN_IMAGE'), 'images', $customerUri); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
         </div>
       </div>
     </div>

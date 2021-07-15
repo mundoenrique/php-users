@@ -20,6 +20,11 @@ $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';
 //USER IDENTITY
 $lang['CONF_SECRET_KEY'] = 'OFF';
+$lang['CONF_CONTACTS'] = [
+	'CDMX' => '(55) 5140 5640',
+	'MTY' => '(81) 8156 9640',
+	'GDL' => '(33) 3669 9040',
+];
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'OFF';

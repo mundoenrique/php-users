@@ -87,7 +87,7 @@ class Verify_Access {
 		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
 
 		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('GEN_DEFAULT_CODE');
+		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->icon = lang('CONF_ICON_DANGER');
 		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');

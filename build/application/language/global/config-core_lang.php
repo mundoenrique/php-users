@@ -14,6 +14,8 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'accessRecover',
 	'userIdentify'
 ];
+$lang['CONF_RC_DEFAULT'] = -9999;
+$lang['CONF_DEFAULT_CODE'] = 4;
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -48,7 +50,7 @@ $lang['CONF_BUSINESS_NAME'] = 'ON';
 //NAVBAR STYLES
 $lang['CONF_HEADER_BORDER'] = 'OFF';
 //MENU
-$lang['CONIFG_SIGIN'] = 'ON';
+$lang['CONF_SIGIN'] = 'ON';
 $lang['CONF_CARD_LIST'] = 'ON';
 $lang['CONF_CARD_DETAIL'] = 'ON';
 $lang['CONF_PAYS_TRANSFER'] = 'OFF';
@@ -62,14 +64,13 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
-//SIGNIN
+
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'OFF';
-$lang['CONIFG_SIGIN_RECOVER_PASS'] = 'ON';
+$lang['CONF_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['CONF_LONG_TEXT'] = '';
-//SIGNUP
 $lang['CONF_SECRET_KEY'] = 'ON';
 $lang['CONF_CHANGE_VIRTUAL'] = 'OFF';
 $lang['CONF_TIMER_MODAL_VIRTUAL'] = 60;
@@ -94,6 +95,10 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Co' => '4',
 	'Bdb' => '4',
 	'Mx-Bn' => '16',
+];
+// CONTACTS
+$lang['CONF_CONTACTS'] = [
+	'XXXXX' => 'XXXXXXX',
 ];
 //SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
@@ -144,7 +149,7 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';
 //EXTERNAL LINKS
-$lang['GEN_NO_LINK'] = 'javascript:';
+$lang['CONF_NO_LINK'] = 'javascript:';
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
 $lang['CONF_LINK_SIGNUP'] = 'sign-up';
 $lang['CONF_LINK_SIGNOUT'] = 'sign-out/';
@@ -156,20 +161,20 @@ $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';
-$lang['GEN_LINK_PAYS_TRANSFER'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_BETWEEN_CARDS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_BANKS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_CREDIT_CARDS'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_SERVICES'] = $lang['GEN_NO_LINK'];
-$lang['GEN_LINK_TELEPHONY'] = $lang['GEN_NO_LINK'];
+$lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];
+$lang['CONF_LINK_BETWEEN_CARDS'] = $lang['CONF_NO_LINK'];
+$lang['CONF_LINK_BANKS'] = $lang['CONF_NO_LINK'];
+$lang['CONF_LINK_CREDIT_CARDS'] = $lang['CONF_NO_LINK'];
+$lang['CONF_LINK_SERVICES'] = $lang['CONF_NO_LINK'];
+$lang['CONF_LINK_TELEPHONY'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_REPORTS'] = 'reports';
 $lang['CONF_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['CONF_LINK_NOTIFICATIONS'] = 'notifications';
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['GEN_NO_LINK'],
-	'twitter' => $lang['GEN_NO_LINK'],
-	'youtube' => $lang['GEN_NO_LINK'],
-	'instagram' => $lang['GEN_NO_LINK'],
+	'facebook' => $lang['CONF_NO_LINK'],
+	'twitter' => $lang['CONF_NO_LINK'],
+	'youtube' => $lang['CONF_NO_LINK'],
+	'instagram' => $lang['CONF_NO_LINK'],
 ];
 //INTERNAL LINKS
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';

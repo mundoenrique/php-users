@@ -13,7 +13,7 @@
         </tr>
 			</thead>
       <tbody class="<?= lang('CONF_LONG_TEXT') ?>">
-        <?php foreach(lang('GEN_CONTACTS') AS $city => $number): ?>
+        <?php foreach(lang('CONF_CONTACTS') AS $city => $number): ?>
         <tr>
           <td><?= $city ?></td>
           <td class="text-right"><?= $number ?></td>

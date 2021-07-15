@@ -39,7 +39,7 @@ $(function () {
 		cardDetail += '<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">';
 		cardDetail += '<p class="semibold mb-0 h5 truncate">' + productName + '</p>';
 		cardDetail += '<p id="card" class="mb-2">' + cardNumberMask + '</p>';
-		cardDetail += '<a id="other-product" class="btn hyper-link btn-small p-0" href="' + lang.GEN_NO_LINK + '">';
+		cardDetail += '<a id="other-product" class="btn hyper-link btn-small p-0" href="' + lang.CONF_NO_LINK + '">';
 		cardDetail += '<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto';
 		cardDetail += '</a>';
 		cardDetail += '</div>';

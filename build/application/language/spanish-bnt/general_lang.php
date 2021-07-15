@@ -19,11 +19,6 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero
 $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
-$lang['GEN_CONTACTS'] = [
-	'CDMX' => '(55) 5140 5640',
-	'MTY' => '(81) 8156 9640',
-	'GDL' => '(33) 3669 9040',
-];
 $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
 //PRODUCT STATUS
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Bloqueo permanente';

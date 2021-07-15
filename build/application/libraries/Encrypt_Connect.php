@@ -72,7 +72,7 @@ class Encrypt_Connect
 		if (!$response) {
 			log_message('ERROR', 'NOVO [' . $userName . '] NO SERVICE RESPONSE');
 			$response = new stdClass();
-			$response->rc = lang('GEN_RC_DEFAULT');
+			$response->rc = lang('CONF_RC_DEFAULT');
 			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 		if (!isset($response->pais)) {
@@ -186,7 +186,7 @@ class Encrypt_Connect
 					$failResponse->msg = lang('GEN_TIMEOUT');
 				break;
 				default:
-					$failResponse->rc = lang('GEN_RC_DEFAULT');
+					$failResponse->rc = lang('CONF_RC_DEFAULT');
 			}
 
 			switch ($httpCode) {
