@@ -77,7 +77,7 @@ function validateForms(form, options) {
 	});
 
 	jQuery.validator.addMethod("emailValid",function(value, element) {
-		return /^([a-zA-Z]+[0-9_.+-]*)+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
+		return /^([a-zA-Z]+[0-9_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
 	});
 
 	jQuery.validator.addMethod("username",function(value, element) {
