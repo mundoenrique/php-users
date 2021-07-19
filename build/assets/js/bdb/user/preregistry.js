@@ -105,6 +105,10 @@ $$.addEventListener('DOMContentLoaded', function () {
 		dialogConditions.dialog("open");
 	});
 
+	$( "#dialogConditions" ).on('open', function(){
+		$('.header-modal-ui').focus();
+	});
+
 	function formatDate_ddmmy(dateToFormat) {
 		var month = dateToFormat.getMonth();
 		var day = dateToFormat.getDate().toString();
