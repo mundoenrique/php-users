@@ -16,7 +16,7 @@
 				<div class="flex max-width-4 flex-wrap items-center mb-2">
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
-							<div class="item-network <?= strtolower($data['marca']); ?>"></div>
+						<div class="item-network <?php lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg','img',$countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php if ($totalProducts > 1) : ?>
