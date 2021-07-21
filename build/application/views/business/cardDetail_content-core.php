@@ -7,7 +7,7 @@
         <div class="flex inline-flex col-12 px-xl-2">
           <div id="productdetail" class="flex flex-column justify-center col-6 py-4">
             <div class="product-presentation relative w-100">
-              <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : ''?>"></div>
+              <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
               <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
             </div>
             <?php if ($isVirtual): ?>

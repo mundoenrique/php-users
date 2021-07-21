@@ -297,7 +297,7 @@ function validateCardDetail() {
 				inputModalCard += 		  '<div class="card3d-automatic">';
 				inputModalCard += 		    '<div class="card-detail card3d-front">';
 				inputModalCard += 			    '<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
-				inputModalCard += 			    '<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+				inputModalCard += 			    '<div class="item-info ' + (lang.CONF_FRANCHISE_LOGO === 'ON' ? brand : '') + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
 				inputModalCard += 				    '<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
 				inputModalCard += 			  	  '<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
 				inputModalCard += 				    '<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';

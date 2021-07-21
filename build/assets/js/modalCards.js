@@ -27,7 +27,7 @@ $(function () {
 
 		cardDetail = '<div class="flex flex-column justify-center col-6 py-4">';
 		cardDetail += '<div class="product-presentation relative w-100">';
-		cardDetail += '<div class="item-network ' + brand + '"></div>';
+		cardDetail += '<div class="item-network ' + (lang.CONF_FRANCHISE_LOGO === 'ON' ? brand : '') + ' "></div>';
 		cardDetail += '<img class="card-image" src="' + img + '">';
 		cardDetail += '</div>';
 
