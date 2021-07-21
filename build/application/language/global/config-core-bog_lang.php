@@ -14,3 +14,5 @@ $lang['CONF_CONTACTS'] = [
 	'Cali' => '898 00 77',
 	'Medellín' => '576 43 30',
 ];
+//FRANCHISE LOGO
+$lang['CONF_FRANCHISE_LOGO'] = 'OFF';
