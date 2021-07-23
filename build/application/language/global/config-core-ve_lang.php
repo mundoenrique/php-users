@@ -9,3 +9,5 @@ $lang['CONF_CONTACTS'] = [
 	'0501-PLATA-00' => '(0501-75282-00)',
 	'0501-SAMBIL-1' => '(0501-726245-1)',
 ];
+//LANGUAGE
+$lang['CONF_BTN_LANG'] = 'ON';
