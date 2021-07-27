@@ -46,7 +46,7 @@
 					?>
 								<div class="dashboard-item big-modal p-1 mx-1 mb-1 <?= $state; ?>" id="<?= $row['noTarjeta']; ?>" title="<?= $title; ?>">
 									<img class=" item-img" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
-									<div class="item-info <?= $row['marca']; ?> p-2 h5 tertiary bg-white">
+									<div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($row['marca']) : '' ?> p-2 h5 tertiary bg-white">
 										<p class="item-category semibold primary"><?= $row['nombre_producto']; ?></p>
 										<p class="item-cardnumber mb-0"><?= $row['noTarjetaConMascara']; ?></p>
 										<?= $infoCard ?>
