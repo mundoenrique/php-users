@@ -49,11 +49,11 @@ function validateForms(form, options) {
 
 
 	jQuery.validator.addMethod("spanishAlphabetical", function(value, element) {
-		return this.optional( element ) || /^[a-záéíóúüñ ]+$/i.test( value );
+		return this.optional( element ) || /^[a-záéíóúüñÑ ]+$/i.test( value );
 	});
 
 	jQuery.validator.addMethod("spanishAlphanum", function(value, element) {
-		return this.optional( element ) || /^[a-z0-9áéíóúüñ ]+$/i.test( value );
+		return this.optional( element ) || /^[a-z0-9áéíóúüñÑ ]+$/i.test( value );
 	});
 
 	jQuery.validator.addMethod("alphanum", function(value, element) {
@@ -192,10 +192,10 @@ function validateForms(form, options) {
 			acceptTerms: { required: true },
 			idType: { required: true },
 			digVer: { required: true, digits: true, maxlength: 1, "digValido": true },
-			firstName: { required: true, "spanishAlphabetical": true},
-			middleName: { "spanishAlphabetical": true },
-			lastName: { required: true, "spanishAlphabetical": true },
-			secondSurname: { "spanishAlphabetical": true },
+			firstName: { required: true, "spanishAlphanum": true},
+			middleName: { "spanishAlphanum": true },
+			lastName: { required: true, "spanishAlphanum": true },
+			secondSurname: { "spanishAlphanum": true },
 			birthPlace: { "spanishAlphabetical": true },
 			birthDate: { required: true, "fechaInvalida": true, "mayorEdad": true },
 			nationality: { required: true, "spanishAlphabetical": true },
