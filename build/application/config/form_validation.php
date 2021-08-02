@@ -898,22 +898,22 @@ $config = [
 		[
 			'field' => 'firstName',
 			'label' => 'firstName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]|required'
 		],
 		[
 			'field' => 'middleName',
 			'label' => 'middleName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]'
 		],
 		[
 			'field' => 'lastName',
 			'label' => 'lastName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]|required'
 		],
 		[
 			'field' => 'secondSurname',
 			'label' => 'secondSurname',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]'
 		],
 		[
 			'field' => 'birthDate',
