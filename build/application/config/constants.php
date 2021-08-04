@@ -103,12 +103,26 @@ $timeZone = [
 	'co' => 				'America/Bogota',
 	'pb' => 				'America/Guayaquil',
 	'pe' => 				'America/Lima',
-	'pichincha' => 	'America/Guayaquil',
 	'us' => 				'America/Lima',
 	've' => 				'America/Caracas',
 ];
+$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_erros/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
+$baseLanguage = 'spanish';
+
+switch(end($uriSegments)) {
+	case 'es':
+		$baseLanguage = 'spanish';
+	break;
+	case 'en':
+		$baseLanguage = 'english';
+	break;
+	default:
+		if (isset($_COOKIE['cpo_baseLanguage'])) {
+			$baseLanguage = $_COOKIE['cpo_baseLanguage'];
+		}
+}
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -117,6 +131,7 @@ date_default_timezone_set($timeZone);
 defined('BASE_URL')					OR define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')				OR define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')				OR define('ASSET_PATH', $_SERVER['ASSET_PATH']);
+defined('BASE_LANGUAGE')		OR define('BASE_LANGUAGE', $baseLanguage);
 defined('SUBCLASS_PREFIX')	OR define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')				OR define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
@@ -135,13 +150,14 @@ defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
+defined('ERROR_CONTROLLER')		OR define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
-defined('LANGUAGE')					OR define('LANGUAGE', end($uriSegments) === 'en' ? 'en' : 'es');
+defined('LANGUAGE')					OR define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-defined('COUNTRY_VERIFY')		OR define('COUNTRY_VERIFY', $_SERVER['COUNTRY_VERIFY'] ?? 'ON');
+defined('CUSTOMER_VERIFY')	OR define('CUSTOMER_VERIFY', $_SERVER['CUSTOMER_VERIFY'] ?? 'ON');
 defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
 defined('UPLOAD_PATH')			OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 
@@ -190,5 +206,5 @@ defined('ARGON2_SALT')					OR define('ARGON2_SALT', $_SERVER['ARGON2_SALT']);
 */
 defined('KEY_API')	OR define('KEY_API', $_SERVER['KEY_API']);
 
-unset($uriSegments, $proxyIps, $timeZone);
+unset($uriSegments, $proxyIps, $timeZone, $baseLanguage, $errorController);
 

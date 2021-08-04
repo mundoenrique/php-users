@@ -32,20 +32,17 @@ class Novo_Business extends NOVO_Controller {
 
 		$getList = 'obtain';
 		$cardsList = [];
-		$cardsTotal = 0;
 
 		if (!empty($request)) {
 			$userCardList = $this->loadModel();
 			$getList = 'obtained';
 			$this->responseAttr($userCardList);
 			$cardsList = $userCardList->data->cardsList;
-			$cardsTotal = count($cardsList);
 		}
 
-		$this->render->titlePage = lang('GEN_MENU_CARDS_LIST');
+		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');
 		$this->render->lastSession = $this->session->lastSession;
 		$this->render->getList = $getList;
-		$this->render->cardsTotal = $cardsTotal;
 		$this->render->cardsList = $cardsList;
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
@@ -70,6 +67,14 @@ class Novo_Business extends NOVO_Controller {
 			"business/cardDetail"
 		);
 
+		if ($this->session->has_userdata('oneCard')) {
+			$this->request = $this->session->oneCard;
+		}
+
+		if (empty((array)$this->request)) {
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
+		}
+
 		$detailCard = $this->loadModel($this->request);
 		$this->responseAttr($detailCard);
 
@@ -77,12 +82,14 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->currentYear = date('Y');
 
 		foreach ($detailCard->data AS $index => $render) {
-			if($index !== 'resp') {
-				$this->render->$index = $render;
-			}
+			$this->render->$index = $render;
 		}
 
 		foreach ($this->request AS $index => $render) {
+			if ($index == 'statusMessage' && $this->request->status == '') {
+				$render = '';
+			}
+
 			$this->render->$index = $render;
 		}
 

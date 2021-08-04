@@ -686,7 +686,7 @@ template { display: none; }
 .form-control {
 	display: block;
 	width: 100%;
-	height: calc(1.386em + .75rem + 2px);
+	height: calc(1.386em + .75rem + 4px);
 	padding: .375rem .75rem;
 	font-size: .875rem;
 	font-weight: var(--font-weight-base);
@@ -1523,7 +1523,8 @@ label {
 .btn-rounded-right  { border-radius: 0 var(--btn-border-radius) var(--btn-border-radius) 0 }
 
 .btn-rounded-left   {
-	border: .85px solid var(--color-eighth);
+	color: var(--color-primary);
+	border: .85px solid var(--color-primary);
 	border-radius: var(--btn-border-radius) 0 0 var(--btn-border-radius);
 	background-color: var(--color-secondary);
 	height: 33.4px;
@@ -2302,22 +2303,7 @@ label {
 .uppercase    { text-transform: uppercase !important }
 .capitalize { text-transform: capitalize !important }
 
-/* Font weight */
-.light      {font-weight: var(--light-font-weight) !important }
-.regular    { font-weight: var(--light-font-weight); color: var(--color-sixth) !important; }
-.semibold   { font-weight: var(--bold-font-weight) !important; color: var(--color-sixth) !important; }
-.bold       { font-weight: var(--bold-font-weight) !important }
-
 /* Colors */
-
-.black  { color: var(--black) !important }
-.white  { color: rgba(255,255,255,1) !important }
-
-.primary   { color: var(--color-primary) }
-.secondary { color: var(--color-secondary) !important }
-.tertiary  { color: var(--color-tertiary) }
-.text      { color: var(--color-sixth) !important }
-
 .success { color: var(--success) !important }
 .info    { color: var(--info) !important }
 .warning { color: var(--warning) !important }
@@ -2363,7 +2349,7 @@ i[class*=" icon-"]:before {
 .icon-build-config:before	 	 { content: "\e001"; }
 .icon-downl-config:before	   { content: "\e002"; }
 .icon-user-config:before	   { content: "\e003"; }
-.icon-phone:before           { content: "\e11f"; }
+.icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
 .icon-ok:before              { content: "\e0b6"; }
@@ -2410,6 +2396,7 @@ i[class*=" icon-"]:before {
 .icon-chart-pie:before  	   { content: "\e0ff"; }
 .icon-user-building:before   { content: "\e0a0"; }
 .icon-user-edit:before       { content: "\e031"; }
+.icon-down-statement:before  { content: "\e00d"; }
 .icon-arrow-left:before      { content: "\e0f0"; }
 .icon-card-fee:before			   { content: "\e091"; }
 .icon-arrow-right:before     { content: "\e0f1"; }
@@ -3374,6 +3361,10 @@ ul.steps li.step-item i {
 	box-shadow: 0 1px 0 0 rgba(78,64,68,.15),
 	inset 0 -2px 1px -1px rgba(78,64,68,.1);
   padding-bottom: 4px;
+}
+
+.vertical-line {
+	border-left: var(--border-width) solid rgba(255,255,255,1);
 }
 
 /* Cursors */
@@ -4755,4 +4746,81 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
           justify-content: center;
   -webkit-box-align: center;
           align-items: center;
+}
+
+/* widget support login */
+
+.widget-support {
+	position: fixed;
+	bottom: 90px;
+	right: -255px;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	overflow: visible;
+	transition: all .3s ease 0s;
+	background-color: rgb(249, 249, 249);
+	z-index: 9;
+}
+
+.widget-support:hover {
+	right: 2px;
+}
+
+.login-content .widget-support{
+	width: 255px !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.widget-support-btn{
+	width: 35px;
+	height: 64px;
+	background-color: rgb(249, 249, 249);
+	border-right: 0px;
+	border-radius: 3px 0 0 3px;
+	transform: translate(-59px, -42.5px);
+	position: fixed;
+}
+
+.widget-support:hover .widget-support-btn{
+	opacity: 0;
+}
+
+/* Language switch button */
+
+.btn-lang {
+	background-color: rgb(249, 249, 249);
+	bottom: 90px;
+	border-radius: 50%;
+	cursor: pointer;
+	left: 5px;
+	position: fixed;
+	z-index: 9;
+}
+
+.btn-lang-img img{
+	height: 45px;
+	padding: 5px;
+	position: relative;
+	width: 45px;
+}
+
+.btn-lang-img span{
+	font-size: var(--h2);
+	border-radius: 50%;
+	height: 45px;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	text-align: center;
+	width: 45px;
+}
+
+.btn-lang-img span:hover{
+	background: rgb(255, 255, 255, .6);
+	font-size: var(--h1);
+	opacity: 1;
+	transition-property: all;
+	transition-duration: .2s;
 }

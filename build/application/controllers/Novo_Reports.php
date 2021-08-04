@@ -37,7 +37,7 @@ class Novo_Reports extends NOVO_Controller {
 		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
-		$cardsTotal = count($cardsList);
+		$totalCards = count($cardsList);
 		$yearTenant = (int) lang('GEN_PICKER_MINDATE');
 		$years = date('Y') - 2;
 		$maxYear = date('Y');
@@ -50,32 +50,15 @@ class Novo_Reports extends NOVO_Controller {
 		$this->render->maxYear = $maxYear;
 		$this->render->titlePage = lang('GEN_MENU_REPORTS');
 		$this->render->operations = TRUE;
-		$this->render->cardsTotal = $cardsTotal;
+		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
-		$this->render->brand = '';
-		$this->render->productImg = '';
-		$this->render->productUrl = '';
-		$this->render->productName = '';
-		$this->render->cardNumberMask = '';
-		$this->render->cardNumber = '';
-		$this->render->prefix = '';
-		$this->render->status = '';
-		$this->render->isVirtual = '';
-		$this->render->tittleVirtual = '';
 		$this->render->callMoves = '0';
-		$this->render->networkBrand = $cardsTotal > 1 ? 'hide' : '';
 
-		if ($cardsTotal == 1) {
-			$this->render->brand = $cardsList[0]->brand;
-			$this->render->productImg = $cardsList[0]->productImg;
-			$this->render->productUrl = $cardsList[0]->productUrl;
-			$this->render->productName = $cardsList[0]->productName;
-			$this->render->cardNumberMask = $cardsList[0]->cardNumberMask;
-			$this->render->cardNumber = $cardsList[0]->cardNumber;
-			$this->render->prefix = $cardsList[0]->prefix;
-			$this->render->status = $cardsList[0]->status;
-			$this->render->isVirtual = $cardsList[0]->isVirtual;
-			$this->render->tittleVirtual = $cardsList[0]->tittleVirtual;
+		if ($totalCards == 1) {
+			foreach ($userCardList->data->cardsList[0] as $index => $render) {
+				$this->render->$index = $render;
+			}
+
 			$this->render->callMoves = '1';
 		}
 

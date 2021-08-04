@@ -43,49 +43,49 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$responseAction = $dataRequest->status == '' ? 'Bloqueada' : 'Desbloqueada';
+				$responseAction = $dataRequest->status == '' ? lang('CUST_LOCKED') : lang('CUST_UNLOCKED');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, $responseAction]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = novoLang(lang('CUST_EXPIRED_CARD'), $dataRequest->cardNumberMask);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286:
 			case -301:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -287:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = lang('GEN_OTP_USED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -288:
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
 				$this->load->model('Novo_Assets_Model', 'getToken');
 				$this->response = $this->getToken->callWs_GetToken_Assets();
-				$this->response->title = $dataRequest->action == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 			break;
 			case 29:
 			case -21:
 			case -33:
 			case -300:
-				$this->response->title = $dataRequest->status == '' ? 'Bloqueo' : 'Desbloqueo';
+				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 
 				if ($this->dataRequest->codBloqueo = $dataRequest->status == 'PB') {
 					$this->response->msg = lang('CUST_UNLOCK_MESSAGE');
@@ -133,10 +133,10 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
-				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, 'bloqueada de forma permanente']);
+				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, lang('CUST_LOCK_PERMANENT')]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? 'lista-de-tarjetas' : 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
@@ -191,7 +191,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				if (isset($reponse->bean->cost_repos_plas) && $reponse->bean->cost_repos_plas != '') {
 					$cost = currencyFormat($reponse->bean->cost_repos_plas);
 					$this->response->data->cost = TRUE;
-					$this->response->data->msg = novoLang('La reposición tendra un costo de %s %s', [lang('GEN_CURRENCY'), $cost]);
+					$this->response->data->msg = novoLang(lang('CUST_REPLACEMENT_COST'), [lang('CONF_CURRENCY'), $cost]);
 				}
 			break;
 			case 29:
@@ -419,7 +419,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_CHANGE_PIN'), [$dataRequest->cardNumberMask]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = 'atencion-al-cliente';
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case -308:
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');

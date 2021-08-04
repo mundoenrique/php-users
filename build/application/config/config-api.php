@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
-//País
-$config['country'] = 'api';
-$config['base_url']	= BASE_URL . '/' . 'api/';
+$config['customer'] = 'api';
+$config['customer-uri'] = 'api';
+$config['base_url']	= BASE_URL.'/'.$config['customer-uri'].'/';
 

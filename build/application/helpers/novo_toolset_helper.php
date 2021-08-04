@@ -22,15 +22,16 @@ if (!function_exists('assetUrl')) {
 
 if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
-		$allClients = ['default', 'pichincha'];
 		$CI = &get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
+		$uriCore = '/sign-in';
+		$uriCore = $client == 'bdb' ? '/inicio' : $uriCore;
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.'/inicio'), 'location', 301);
+			redirect(base_url($client.$uriCore), 'location', 301);
 		}
 
 		if (in_array($client, $accessUrl)) {
@@ -122,25 +123,41 @@ if (!function_exists('languageLoad')) {
 		$CI = &get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$CI->config->item('language').DIRECTORY_SEPARATOR;
+		$configLanguage = $CI->config->item('language');
+		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
+		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
 		$class = lcfirst(str_replace('Novo_', '', $class));
+		$CI->config->set_item('language', 'global');
+
 		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
 
-		if ($call == 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
-				array_push($languagesFile, 'general');
-				$loadLanguages = TRUE;
-			}
+		switch ($call) {
+			case 'generic':
+				$CI->lang->load(['config-core', 'images']);
+			break;
+			case 'specific':
+				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
 
-			if (file_exists($pathLang.'validate_lang.php')) {
-				array_push($languagesFile, 'validate');
-				$loadLanguages = TRUE;
-			}
+				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
+					$CI->lang->load('config-core-'.$customerUri,);
+				}
 
-			if (file_exists($pathLang.'config-core_lang.php')) {
-				array_push($languagesFile, 'config-core');
-				$loadLanguages = TRUE;
-			}
+				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
+					$CI->lang->load('images_'.$customerUri);
+				}
+			break;
+		}
+
+		$CI->config->set_item('language', $configLanguage);
+
+		if (file_exists($pathLang.'general_lang.php')) {
+			array_push($languagesFile, 'general');
+			$loadLanguages = TRUE;
+		}
+
+		if (file_exists($pathLang.'validate_lang.php')) {
+			array_push($languagesFile, 'validate');
+			$loadLanguages = TRUE;
 		}
 
 		if (file_exists($pathLang.$class.'_lang.php')) {
@@ -159,7 +176,11 @@ if (!function_exists('setCurrentPage')) {
 		$cssClass = '';
 		switch ($currentClass) {
 			case 'Novo_Business':
-				if($menu == lang('GEN_MENU_CARDS_LIST')) {
+				if($menu == lang('GEN_MENU_CARD_LIST')) {
+					$cssClass = 'page-current';
+				}
+
+				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
 					$cssClass = 'page-current';
 				}
 				break;
@@ -183,7 +204,6 @@ if (!function_exists('setCurrentPage')) {
 		return $cssClass;
 	}
 }
-
 
 if (!function_exists('exportFile')) {
 	function exportFile($file, $typeFile, $filename, $bytes = TRUE) {
@@ -240,7 +260,7 @@ if (!function_exists('mainMenu'))
 {
 	function mainMenu() {
 		return [
-			'CARDS_LIST' => [],
+			'CARD_LIST' => [],
 			'PAYS_TRANSFER' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
@@ -275,6 +295,7 @@ if (!function_exists('normalizeName')) {
 			'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u',
 			'n', 'N', 'c', 'C'
 		];
+
 		return preg_replace($pattern, $replace, mb_strtolower(trim($name)));
 	}
 }
@@ -297,7 +318,7 @@ if (!function_exists('transformDate')) {
 if (! function_exists('currencyFormat')) {
 	function currencyFormat($amount){
 		$CI =& get_instance();
-		$client = $CI->session->userdata('countrySess');
+		$client = $CI->session->userdata('customerSess');
 		$decimalPoint = ['Ve', 'Co', 'Bdb'];
 
 		if (in_array($client, $decimalPoint)) {
@@ -313,11 +334,44 @@ if (! function_exists('currencyFormat')) {
 if (! function_exists('floatFormat')) {
 	function floatFormat($num) {
 
-		$arrayNum = explode(lang('GEN_DECIMAL'), $num);
+		$arrayNum = explode(lang('CONF_DECIMAL'), $num);
     $arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
 		$floatNum = $arrayNum[0].'.'.$arrayNum[1];
 
 		return $floatNum;
 
+	}
+}
+
+if (! function_exists('languageCookie')) {
+	function languageCookie($language) {
+
+		$CI =& get_instance();
+		$baseLanguage = [
+			'name' => 'baseLanguage',
+			'value' => $language,
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		$CI->input->set_cookie($baseLanguage);
+
+	}
+}
+
+if (!function_exists('uriRedirect')) {
+	function uriRedirect() {
+		$CI = &get_instance();
+		$redirectLink = lang('CONF_LINK_SIGNIN');
+
+		if ($CI->session->has_userdata('logged')) {
+			$redirectLink = lang('CONF_LINK_CARD_LIST');
+
+			if ($CI->session->has_userdata('totalCards') && $CI->session->totalCards == 1) {
+				$redirectLink = lang('CONF_LINK_CARD_DETAIL');
+			}
+		}
+
+		return $redirectLink;
 	}
 }

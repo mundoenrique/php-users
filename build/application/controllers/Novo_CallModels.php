@@ -18,7 +18,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
 			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 		} else {
-			show_404();
+			redirect('page-no-found', 'location', 'GET');
 		}
 	}
 	/**
@@ -36,19 +36,27 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		$this->appUserName = $this->input->post('userName') != NULL ? mb_strtoupper($this->input->post('userName')) : $this->appUserName;
+		if (!$this->appUserName) {
+			if ($this->input->post('userName') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('userName'));
+			} elseif ($this->input->post('idNumber') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('idNumber'));
+			} elseif ($this->input->post('documentId') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('documentId'));
+			}
+		}
 
 		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule, $this->countryUri, $this->appUserName);;
+		$valid = $this->verify_access->accessAuthorization($this->rule, $this->customerUri, $this->appUserName);;
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
-			$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName, $this->class);
+			$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName, $this->class);
 		}
 
 		if ($valid) {
@@ -58,7 +66,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
 
-		$dataResponse = lang('CONFIG_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
+		$dataResponse = lang('CONF_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
 		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
 	}
 	/**
@@ -80,7 +88,7 @@ class Novo_CallModels extends Novo_Controller {
 		$replace[0] = '';
 		$replace[1] = '_';
 		$filename = '_'.substr(preg_replace($pattern, $replace, $_POST['typeBulkText']), 0, 17);
-		$filenameT = time().'_'.date('s').$this->countryUri.$filename;
+		$filenameT = time().'_'.date('s').$this->customerUri.$filename;
 		$filenameT = mb_strtolower($filenameT.'.'.$ext);
 		$config['file_name'] = $filenameT;
 		$config['upload_path'] = $this->config->item('upload_bulk');
@@ -97,7 +105,7 @@ class Novo_CallModels extends Novo_Controller {
 			$uploadData = (object) $this->upload->data();
 			$_POST['fileName'] = $uploadData->file_name;
 			$_POST['filePath'] = $uploadData->file_path;
-			$_POST['rawName'] = $this->countryUri.$filename;
+			$_POST['rawName'] = $this->customerUri.$filename;
 			$_POST['fileExt'] = substr($uploadData->file_ext, 1);
 			unset($_POST['typeBulkText'], $_POST['file']);
 

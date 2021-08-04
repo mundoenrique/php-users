@@ -16,9 +16,9 @@ $(function () {
 
 		$('#state').on('change', function () {
 			$('#city').children().remove();
-			$('#city').prepend('<option value="" selected>Selecciona</option>');
+			$('#city').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
 			$('#district').children().remove();
-			$('#district').prop('disabled', true).prepend('<option value="" selected>Selecciona</option>');
+			$('#district').prop('disabled', true).prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
 
 			getCities(this.value);
 		});
@@ -69,7 +69,7 @@ $(function () {
 
 	$('#landLine').on('change', function () {
 		$(this).rules('add', {
-			pattern: new RegExp(lang.VALIDATE_MOBIL, 'i')
+			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
 		});
 	})
 

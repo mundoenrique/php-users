@@ -11,10 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date May 16th, 2020
  */
 class NOVO_Controller extends CI_Controller {
-	protected $skin;
 	protected $rule;
 	protected $includeAssets;
-	protected $countryUri;
+	protected $customerUri;
 	protected $views;
 	protected $render;
 	protected $dataRequest;
@@ -25,7 +24,6 @@ class NOVO_Controller extends CI_Controller {
 	protected $appUserName;
 	protected $greeting;
 	protected $products;
-	protected $folder;
 	protected $nameApi;
 	private $ValidateBrowser;
 
@@ -41,10 +39,10 @@ class NOVO_Controller extends CI_Controller {
 		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
 		$this->model = ucfirst($this->router->fetch_class()).'_Model';
 		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->countryUri = $this->uri->segment(1, 0) ? $this->uri->segment(1, 0) : 'null';
-		$this->render->logged = $this->session->logged;
-		$this->render->userId = $this->session->userId;
-		$this->appUserName = $this->session->userName;
+		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
+		$this->render->logged = $this->session->has_userdata('logged');
+		$this->render->userId = $this->session->has_userdata('userId') ? $this->session->userId : FALSE;;
+		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
 		$this->products = $this->session->has_userdata('products');
 		$this->render->fullName = $this->session->fullName;
 		$this->render->productName = !$this->session->has_userdata('productInf') ?:
@@ -56,9 +54,11 @@ class NOVO_Controller extends CI_Controller {
 		$this->ValidateBrowser = FALSE;
 		$this->nameApi = '';
 
-		if ($this->countryUri === "api") {
+		if ($this->customerUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
 			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
+			$this->config->set_item('language', 'global');
+			$this->lang->load('config-core');
 		}
 
 		$this->optionsCheck();
@@ -74,8 +74,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
 
-		if ($this->countryUri === "api") {
-
+		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
 
@@ -86,11 +85,11 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			languageLoad('generic', $this->router->fetch_class());
-			clientUrlValidate($this->countryUri);
+			clientUrlValidate($this->customerUri);
 			languageLoad('specific', $this->router->fetch_class());
-			$this->skin = $this->config->item('client');
+			$this->customerUri = $this->config->item('customer-uri');
 			$this->form_validation->set_error_delimiters('', '---');
-			$this->config->set_item('language', 'spanish-base');
+			$this->config->set_item('language', 'global');
 
 			if ($this->rule !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();
@@ -120,7 +119,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			if ($this->input->is_ajax_request()) {
-				$this->dataRequest = lang('CONFIG_CYPHER_DATA') == 'ON' ? json_decode(
+				$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
 					$this->security->xss_clean(
 						strip_tags(
 							$this->cryptography->decrypt(
@@ -131,20 +130,22 @@ class NOVO_Controller extends CI_Controller {
 					)
 				) : json_decode(utf8_encode($this->input->get_post('request')));
 			} else {
-				$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
-				$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+				if ($this->session->has_userdata('logged')) {
+					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
-				if ($this->session->has_userdata('logged') && $accept && $module) {
-					redirect(base_url('perfil-usuario'), 'location', 301);
+					if ($accept && $module) {
+						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'location', 301);
+					}
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->countryUri, $this->appUserName);
+				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
 				$valid = TRUE;
 
 				if ($_POST && $access) {
 					log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
-					$valid = $this->verify_access->validateForm($this->rule, $this->countryUri, $this->appUserName);
+					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
 
 					if ($valid) {
 						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
@@ -164,27 +165,31 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
 
+		$this->render->totalCards = 0;
+
+		if ($this->session->has_userdata('totalCards')) {
+			$this->render->totalCards = $this->session->totalCards;
+		}
+
 		if ($auth) {
-			$this->render->favicon = lang('GEN_FAVICON');
-			$this->render->ext = lang('GEN_FAVICON_EXT');
-			$this->render->countryConf = $this->config->item('country');
-			$this->render->countryUri = $this->countryUri;
+			$this->render->favicon = lang('IMG_FAVICON');
+			$this->render->ext = lang('IMG_FAVICON_EXT');
+			$this->render->customerUri = $this->customerUri;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
-			$this->folder = $this->countryUri;
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
-				"$this->countryUri/root-$this->skin",
+				"$this->customerUri/root-$this->customerUri",
 				"root-general",
 				"reboot",
-				"$this->folder/"."$this->skin-base"
+				"$this->customerUri/"."$this->customerUri-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
 				array_push(
 					$this->includeAssets->cssFiles,
-					"$this->countryUri/$this->skin-$this->ValidateBrowser-base"
+					"$this->customerUri/$this->customerUri-$this->ValidateBrowser-base"
 				);
 			}
 
@@ -215,9 +220,9 @@ class NOVO_Controller extends CI_Controller {
 				}
 			}
 		} else {
-			redirect(base_url('inicio'), 'location');
+			$linkredirect = uriRedirect();
+			redirect(base_url($linkredirect), 'location', 'GET');
 		}
-
 	}
 	/**
 	 * Método para cargar un modelo especifico
@@ -267,10 +272,10 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
-		$valid = $this->tool_browser->validBrowser($this->skin);
+		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if(!$valid) {
-			redirect(base_url('sugerencia'),'location', 301);
+			redirect(base_url('suggestion'),'location', 'GET');
 			exit();
 		}
 
@@ -288,6 +293,14 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu = new stdClass();
 		$mainMenu = mainMenu();
 
+		if ($this->session->has_userdata('totalCards') && $this->session->totalCards == 1) {
+			unset($mainMenu['CARD_LIST']);
+			$cardDetail = [
+				'CARD_DETAIL' => []
+			];
+			$mainMenu = $cardDetail + $mainMenu;
+		}
+
 		if ($this->session->has_userdata('noService')) {
 			unset($mainMenu['CUSTOMER_SUPPORT']);
 		}
@@ -299,8 +312,8 @@ class NOVO_Controller extends CI_Controller {
 		$userMenu->mainMenu = $mainMenu;
 		$userMenu->currentClass = $this->router->fetch_class();
 		$this->render->settingsMenu = $userMenu;
-		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword'))
-			? 'cerrar-sesion/inicio' : 'inicio';
+		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword') != NULL)
+			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);

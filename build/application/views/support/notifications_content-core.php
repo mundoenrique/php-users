@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_USER_IDENTIFY'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_USER_IDENTIFY'); ?></h1>
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5 bg-content-config">
 		<div class="flex mt-3 bg-color justify-between">

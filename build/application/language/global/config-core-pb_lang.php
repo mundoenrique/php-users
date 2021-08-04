@@ -1,0 +1,19 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+//RECOVER ACCESS
+$lang['CONF_RECOVER_ID_TYPE'] = 'ON';
+$lang['CONF_RECOVER_SHOW_OPTIONS'] = 'OFF';
+//FOOTER
+$lang['CONF_FOOTER_LOGO'] = 'ON';
+//SIGNUP-PROFILE
+$lang['CONF_UPDATE_NAME'] = 'OFF';
+$lang['CONF_UPDATE_SECOND_NAME'] = 'OFF';
+$lang['CONF_UPDATE_PHONE_MOBILE'] = 'OFF';
+$lang['CONF_UPDATE_EMAIL'] = 'OFF';
+$lang['CONF_OTHER_PHONE'] = 'OFF';
+$lang['CONF_ACCEPT_MASKED_MOBILE'] = 'ON';
+$lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'ON';
+// CUSTOMER SUPPORT
+$lang['CONF_TEMPORARY_LOCK_REASON'] = 'ON';
+//CARDS DETAIL
+$lang['CONF_PICKER_MINDATE'] = '-5m';

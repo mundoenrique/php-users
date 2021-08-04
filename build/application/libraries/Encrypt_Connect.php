@@ -8,7 +8,6 @@ class Encrypt_Connect
 {
 	private $CI;
 	private $userName;
-	private $countryConf;
 	private $iv;
 	private $keyNovo;
 	private $logMessage;
@@ -73,12 +72,12 @@ class Encrypt_Connect
 		if (!$response) {
 			log_message('ERROR', 'NOVO [' . $userName . '] NO SERVICE RESPONSE');
 			$response = new stdClass();
-			$response->rc = lang('GEN_RC_DEFAULT');
+			$response->rc = lang('CONF_RC_DEFAULT');
 			$response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 		if (!isset($response->pais)) {
 			log_message('INFO', 'NOVO [' . $userName . '] INSERTING COUNTRY TO THE RESPONSE');
-			$response->pais = $this->CI->config->item('country');
+			$response->pais = $this->CI->config->item('customer');
 		}
 
 		if (isset($response->bean)) {
@@ -140,7 +139,7 @@ class Encrypt_Connect
 	{
 		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
 		$fail = FALSE;
-		$subFix = '_' . strtoupper($this->CI->config->item('country-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('customer-uri'));
 		$wsUrl = $_SERVER['WS_URL'];
 
 		if (isset($_SERVER['WS_URL' . $subFix])) {
@@ -187,7 +186,7 @@ class Encrypt_Connect
 					$failResponse->msg = lang('GEN_TIMEOUT');
 				break;
 				default:
-					$failResponse->rc = lang('GEN_RC_DEFAULT');
+					$failResponse->rc = lang('CONF_RC_DEFAULT');
 			}
 
 			switch ($httpCode) {
@@ -277,10 +276,10 @@ class Encrypt_Connect
 	{
 		$model = &$logMessage->model;
 		$userName = &$logMessage->userName;
-		$country = &$logMessage->pais;
+		$customer = &$logMessage->pais;
 		unset($logMessage->userName, $logMessage->model, $logMessage->pais);
 
-		$writeLog = novoLang('%s = rc: %s, msg: %s, client: %s', [$model, $logMessage->rc, $logMessage->msg, $country]);
+		$writeLog = novoLang('%s = rc: %s, msg: %s, customer: %s', [$model, $logMessage->rc, $logMessage->msg, $customer]);
 		$inBean = $logMessage->inBean ?? '';
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$writeLog);
@@ -306,9 +305,11 @@ class Encrypt_Connect
 			ARGON2_MEMORY_LIMIT,
 			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
 		);
+
 		$result = new stdClass();
 		$result->hashArgon2 =  unpack("C*", $hash);
 		$result->hexArgon2 =  bin2hex($hash);
+
 		return $result;
 	}
 	/**

@@ -1,11 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define(ENVIRONMENT, $_SERVER['CI_ENV']);
-define(BASE_URL, $_SERVER['BASE_URL']);
-define(ASSET_URL, $_SERVER['ASSET_URL']);
-define(ASSET_PATH, $_SERVER['ASSET_PATH']);
-define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : '');
+define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : 'tebca');
 
 require_once('error_helpers.php');
 
@@ -41,7 +37,7 @@ $favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>
-		<?php if(SKIN == 'pichincha'): ?>
+		<?php if(SKIN != 'pichincha'): ?>
 		<footer id="foot">
 			<div id="foot-wrapper">
 				<div class="foot-wrapper-top">

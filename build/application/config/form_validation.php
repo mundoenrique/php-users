@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-
 	'signin' => [
 		[
 			'field' => 'userName',
@@ -252,6 +251,10 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'transType',
+			'rules' => 'trim|regex_match[/^(-|+)/]'
 		]
 	],
 	'monthlyMovements' => [
@@ -506,6 +509,12 @@ $config = [
 		[
 			'field' => 'signout',
 			'rules' => 'trim|alpha|required'
+		]
+	],
+	'changeLanguage' => [
+		[
+			'field' => 'lang',
+			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
 		]
 	],
 	'finishSession' => [

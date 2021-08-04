@@ -13,7 +13,7 @@ $(function () {
 		changeMonth: true,
 		changeYear: true,
 		showButtonPanel: true,
-		minDate: lang.BUSINESS_PICKER_MINDATE,
+		minDate: lang.CONF_PICKER_MINDATE,
 		closeText: 'Aceptar',
 
 		onClose: function (dateText, inst) {
@@ -196,7 +196,7 @@ function displaymoves() {
 				tooltips: {
 					callbacks: {
 						label: function(tooltipItem) {
-							return graphicLabel[tooltipItem.index] + ": " + lang.GEN_CURRENCY+ " " + graphicValue[tooltipItem.index]
+							return graphicLabel[tooltipItem.index] + ": " + lang.CONF_CURRENCY+ " " + graphicValue[tooltipItem.index]
 						}
 					}
 				},
@@ -297,7 +297,7 @@ function validateCardDetail() {
 				inputModalCard += 		  '<div class="card3d-automatic">';
 				inputModalCard += 		    '<div class="card-detail card3d-front">';
 				inputModalCard += 			    '<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
-				inputModalCard += 			    '<div class="item-info ' + brand + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+				inputModalCard += 			    '<div class="item-info ' + (lang.CONF_FRANCHISE_LOGO === 'ON' ? brand : '') + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
 				inputModalCard += 				    '<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
 				inputModalCard += 			  	  '<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
 				inputModalCard += 				    '<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';

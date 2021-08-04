@@ -25,6 +25,27 @@ $(function () {
 		}
 	});
 
+	$('#change-lang').on('click', function() {
+		who = 'User'; where = 'changeLanguage';
+		data = {
+			lang: $(this).find('span.text').text()
+		};
+
+		callNovoCore(who, where, data, function(response) {
+			if (response.code === 0) {
+				var url = $(location).attr('href').split("/");
+				var currentCodLan = url[url.length-1];
+
+				if (currentCodLan == lang.GEN_BEFORE_COD_LANG) {
+					var module = url[url.length - 2];
+					$(location).attr('href', baseURL + module + '/' + lang.GEN_AFTER_COD_LANG);
+				} else {
+					location.reload();
+				}
+			}
+		});
+	});
+
 	if (code > 2) {
 		appMessages(title, msg, icon, modalBtn)
 	}
@@ -101,7 +122,7 @@ function callNovoCore(who, where, request, _response_) {
 		where: where,
 		data: request
 	});
-	var codeResp = parseInt(lang.GEN_DEFAULT_CODE);
+	var codeResp = parseInt(lang.CONF_DEFAULT_CODE);
 	var formData = new FormData();
 
 	dataRequest = cryptoPass(dataRequest, true);
@@ -115,7 +136,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	formData.append('request', dataRequest);
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		formData.append('cpo_name', cpo_cook);
 		formData.append('plot', btoa(cpo_cook));
 	}
@@ -128,7 +149,7 @@ function callNovoCore(who, where, request, _response_) {
 
 	$.ajax({
 		method: 'POST',
-		url: baseURL + 'async-call',
+		url: baseURL + 'novo-async-call',
 		data: formData,
 		context: document.body,
 		cache: false,
@@ -137,7 +158,7 @@ function callNovoCore(who, where, request, _response_) {
 		dataType: 'json'
 	}).done(function (response, status, jqXHR) {
 
-		if (lang.CONFIG_CYPHER_DATA == 'ON') {
+		if (lang.CONF_CYPHER_DATA == 'ON') {
 			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
 		}
 
@@ -165,7 +186,7 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			modalBtn: {
 				btn1: {
-					link: logged ? lang.GEN_LINK_CARDS_LIST : 'inicio',
+					link: uriRedirect(),
 					action: 'redirect'
 				}
 			}
@@ -298,7 +319,7 @@ function cryptoPass(jsonObject, req) {
 	cpo_cook = getCookieValue();
 	var cipherObject = jsonObject;
 
-	if (lang.CONFIG_CYPHER_DATA == 'ON') {
+	if (lang.CONF_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
 
 		if(!req) {
@@ -330,7 +351,7 @@ function downLoadfiles (data) {
 	$('#download-file').attr('download', data.name);
 	document.getElementById('download-file').click();
 	window.URL.revokeObjectURL(url);
-	$('#download-file').attr('href', lang.GEN_NO_LINK);
+	$('#download-file').attr('href', lang.CONF_NO_LINK);
 	$('#download-file').attr('download', '');
 	$('.cover-spin').hide();
 }
@@ -344,4 +365,18 @@ function scrollTopPos(formValidate) {
 			scrollTop: firstElement - formValidate
 		}, 400);
 	}
+}
+
+function uriRedirect() {
+	var redirectLink = lang.CONF_LINK_SIGNIN;
+
+	if (logged) {
+		redirectLink = lang.CONF_LINK_CARD_LIST;
+
+		if (totalCards == 1) {
+			redirectLink = lang.CONF_LINK_CARD_DETAIL;
+		}
+	}
+
+	return redirectLink;
 }

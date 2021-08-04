@@ -1,8 +1,5 @@
 <?php
 function NOVO_insert_js_cdn($filename = '') {
-	if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.js') === false) {
-		$filename = str_replace('.js', '.min.js', $filename);
-	}
 
 	$fileurl = ASSET_URL . 'js/' . $filename;
 	$filepath = ASSET_PATH . 'js/' . $filename;
@@ -18,9 +15,6 @@ function NOVO_insert_js_cdn($filename = '') {
 function NOVO_insert_css_cdn($filename = '', $media = 'screen') {
 	$skin_folder = '';
 	if (SKIN !== '') $skin_folder = SKIN . '/';
-	if (preg_match('/(testing|production)$/i', ENVIRONMENT) === 1 && strpos($filename, '.min.css') === false) {
-		$filename = str_replace('.css', '.min.css', $filename);
-	}
 
 	$fileurl = ASSET_URL . 'css/' . $skin_folder .  $filename;
 	$filepath = ASSET_PATH . 'css/' . $filename;
