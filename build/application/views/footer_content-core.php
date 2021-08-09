@@ -78,7 +78,8 @@
   <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">
     <?php foreach ($cardsList AS $cards): ?>
     <div class="dashboard-item p-1 mx-1 mb-1 <?= $cards->statusClasses ?? '' ?>">
-      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>">
+      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>"
+				alt="<?= $cards->productName ?>">
       <div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $cards->brand: ''?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?>
 					<span class="warning semibold h6 capitalize"><br><?= $cards->virtualCard?></span>
