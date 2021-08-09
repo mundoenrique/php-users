@@ -35,6 +35,12 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
+					foreach ($response->lista as $key => $row) {
+						$imageNameOfProduct = $this->asset->setNameImageOfProduct($row->nombre_producto, 'img', $this->countryUri);
+						$response->lista[$key]->nameImageOfProduct = $imageNameOfProduct;
+					}
+
 					$this->response->code = 0;
 					$this->response->data = $response->lista;
 					$this->response->msg = count($response->lista) > 0 ?lang('RESP_RC_0'):lang('RESP_EMPTY_LIST_PRODUCTS');
@@ -275,6 +281,12 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
+					foreach ($response->cuentaOrigen as $key => $row) {
+						$imageNameOfProduct = $this->asset->setNameImageOfProduct($row->producto, 'img', $this->countryUri);
+						$response->cuentaOrigen[$key]->nameImageOfProduct = $imageNameOfProduct;
+					}
+
 					$this->response->code = 0;
 					$this->response->data = $response->cuentaOrigen;
 					$this->response->msg = count($response->cuentaOrigen) > 0 ?lang('RESP_RC_0'):lang('GEN_SYSTEM_MESSAGE');

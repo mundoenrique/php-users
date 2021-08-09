@@ -113,4 +113,28 @@ class Asset {
 
 		return $fileName.$ext.$version;
 	}
+	/**
+	 * @info Método para valida existencia de imagen
+	 * @author Pedro Torres.
+	 */
+	public function setNameImageOfProduct($fileName, $folder, $customerUri = FALSE)
+	{
+		log_message('INFO', 'NOVO Asset: setNameImageOfProduct method initialized');
+
+		$keyNameImage = strtolower(str_replace(' ', '', $fileName));
+		$imageOfProduct = $this->CI->config->item('nameImageOfProduct');
+
+		$nameImageOfProduct = array_key_exists($keyNameImage, $imageOfProduct)
+			? $imageOfProduct[$keyNameImage]
+			: $imageOfProduct['default'];
+
+		$customerUri = $customerUri ? $customerUri.'/' : '';
+		$isFileExists = file_exists(assetPath($folder.'/'.$customerUri.$nameImageOfProduct));
+
+		if (!$isFileExists) {
+			$nameImageOfProduct = $imageOfProduct['default'];
+		}
+
+		return $nameImageOfProduct;
+	}
 }

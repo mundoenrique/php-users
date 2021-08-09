@@ -13,7 +13,7 @@
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
 							<div class="item-network <?php lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
-							<img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+							<img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'], 'img', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php
 						if ($data['totalProducts'] > 1) {

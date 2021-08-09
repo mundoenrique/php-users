@@ -72,7 +72,6 @@ class ExpenseReport extends BDB_Controller
 		$this->load->model('Product_Model', 'loadData');
 		$listProducts = $this->loadData->callWs_dataReport_Product($dataRequest);
 
-
 		if (is_array($listProducts->data) && count($listProducts->data) < 1) {
 			return $listProducts;
 		}
@@ -98,7 +97,8 @@ class ExpenseReport extends BDB_Controller
 				"id_ext_per" => $row->id_ext_per,
 				"prefix" => $row->prefix,
 				"id_ext_emp" => $row->id_ext_emp,
-				"bloque" => $row->bloque
+				"bloque" => $row->bloque,
+				"nameImage" => $row->nameImageOfProduct
 			]);
 		}
 		$listProducts->data = $dataRequeried;
