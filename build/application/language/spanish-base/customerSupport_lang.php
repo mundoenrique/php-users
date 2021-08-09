@@ -179,3 +179,26 @@ $lang['CUST_UNLOCKED'] = 'Desbloqueada';
 $lang['CUST_LOCK'] = 'Bloqueo';
 $lang['CUST_UNLOCK'] = 'Desbloqueo';
 $lang['CUST_LOCK_PERMANENT'] = 'bloqueada de forma permanente.';
+$lang['CUST_AFILIATE'] = 'Afiliar';
+$lang['CUST_MANAGE_AFFILIATIONS'] = 'Administrar afiliaciones';
+$lang['CUST_TO_TRANSFER'] = 'Transferir';
+$lang['CUST_HISTORY'] = 'Historial';
+$lang['CUST_PAYMENTS'] = 'Pagos';
+$lang['CUST_ACCOUNT_REG'] = 'Registro de cuenta';
+$lang['CUST_ACCOUNT_REG_CREDIT_CARD_MSG'] = 'Ingrese los datos requeridos a continuación para afiliar una tarjeta de crédito a la cual desea transferir fondos desde sus cuentas en determinado momento.';
+$lang['CUST_BANK'] = 'Banco';
+$lang['CUST_CREDIT_CARD_NUMBER'] = 'N° de Tarjeta de Crédito';
+$lang['CUST_BENEFICIARY'] = 'Beneficiario';
+$lang['CUST_ID_DOCUMENT'] = 'Documento de identidad';
+$lang['CUST_EXP_DATE_CTA'] = 'Fecha de vcto. cta. origen';
+$lang['CUST_ACCOUNT_REG_ACCOUNT_MSG'] = 'Ingrese los datos requeridos a continuación para afiliar una cuenta a la cual desea transferir fondos en determinado momento. ';
+$lang['CUST_DEST_ACCOUNT_NUMBER'] = 'N° de cuenta destino';
+$lang['CUST_INDICATIONS_TRANS_MSG'] = 'Espacio reservado para indicaciones sobre completado de datos necesarios para llevar a cabo la transferencia entre tarjetas por demanda del usuario.';
+$lang['CUST_ADD_DEST_ACCOUNT'] = 'Agregar cuenta destino';
+$lang['CUST_CONCEPT'] = 'Concepto';
+$lang['CUST_AMOUNT'] = 'Importe Bs.';
+$lang['CUST_MAX_SIMUL'] = 'Máx. 3 simultáneas';
+$lang['CUST_EXP_DATE'] = 'Por seguridad por favor ingresar la fecha de vencimiento de tu cuenta origen terminada de %s:';
+$lang['CUST_SHOW'] = 'Mostrar';
+
+

@@ -179,3 +179,26 @@ $lang['CUST_UNLOCKED'] = 'Unlocked';
 $lang['CUST_LOCK'] = 'Lock';
 $lang['CUST_UNLOCK'] = 'Unlock';
 $lang['CUST_LOCK_PERMANENT'] = 'locked permanently.';
+$lang['CUST_AFILIATE'] = 'Afiliate';
+$lang['CUST_MANAGE_AFFILIATIONS'] = 'Manage affiliations';
+$lang['CUST_TO_TRANSFER'] = 'To transfer';
+$lang['CUST_HISTORY'] = 'History';
+$lang['CUST_PAYMENTS'] = 'Payments';
+$lang['CUST_ACCOUNT_REG'] = 'Account registration';
+$lang['CUST_ACCOUNT_REG_CREDIT_CARD_MSG'] = 'Enter the required data below to affiliate a credit card to which you want to transfer funds from your accounts at a certain time.';
+$lang['CUST_BANK'] = 'Bank';
+$lang['CUST_CREDIT_CARD_NUMBER'] = 'Credit Card Number';
+$lang['CUST_BENEFICIARY'] = 'Beneficiary';
+$lang['CUST_ID_DOCUMENT'] = 'Identification document';
+$lang['CUST_EXP_DATE_CTA'] = 'Expiration date. cta. source';
+$lang['CUST_ACCOUNT_REG_ACCOUNT_MSG'] = 'Enter the required data below to affiliate an account to which you want to transfer funds at a certain time.';
+$lang['CUST_DEST_ACCOUNT_NUMBER'] = 'Destination account number';
+$lang['CUST_INDICATIONS_TRANS_MSG'] = 'Space reserved for indications on the completion of the data necessary to carry out the transfer between cards at the users request.';
+$lang['CUST_ADD_DEST_ACCOUNT'] = 'Add destination account';
+$lang['CUST_CONCEPT'] = 'Concept';
+$lang['CUST_AMOUNT'] = 'Amount Bs.';
+$lang['CUST_MAX_SIMUL'] = 'Max. 3 simultaneous';
+$lang['CUST_EXP_DATE'] = 'For security, please enter the expiration date of your origin account terminated of %s:';
+$lang['CUST_SHOW'] = 'Show';
+
+

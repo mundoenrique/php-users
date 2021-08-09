@@ -16,6 +16,7 @@ $lang['GEN_MENU_SERVICES'] = 'Servicios';
 $lang['GEN_MENU_TELEPHONY'] = 'Recarga digitel';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
+$lang['GEN_MENU_TRANSFERS'] = 'Transferencias';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
