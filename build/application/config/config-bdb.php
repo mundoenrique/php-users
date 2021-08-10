@@ -15,6 +15,6 @@ $config['listReasonReposition'] = [
 	['value'=>'43','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE']
 ];
 $config['nameImageOfProduct'] = [
-	'efectiva' => 'img-efectiva.svg',
-	'default' => 'img-card_blue.svg'
+	'efectivaa' => 'efectiva',
+	'default' => 'bdb_default'
 ];

@@ -86,3 +86,4 @@ $lang['RESP_CODE_INVALID'] = 'El código de seguridad recibido es inválido, por
 $lang['RESP_IP_TOKEN_AUTH'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 
 $lang['RESP_REGISTERED_CELLPHONE'] = 'El teléfono móvil ya se encuentra registrado.';
+$lang['RES_SELECT_MONTH'] = 'Debes seleccionar el mes que deseas procesar.';
