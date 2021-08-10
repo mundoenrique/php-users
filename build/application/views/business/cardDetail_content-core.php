@@ -8,7 +8,7 @@
           <div id="productdetail" class="flex flex-column justify-center col-6 py-4">
             <div class="product-presentation relative w-100">
               <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
-              <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+              <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
             </div>
             <?php if ($isVirtual): ?>
             <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('CONF_NO_LINK'); ?>">
@@ -33,8 +33,8 @@
           <input type="hidden" name="brand" class="hidden" id="brand" value="<?= $brand; ?>">
           <input type="hidden" name="cardNumberMask" class="hidden" id="cardNumberMask" value="<?= $cardNumberMask; ?>">
           <input type="hidden" name="fullName" class="hidden" id="fullName" value="<?= $fullName; ?>">
-          <input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, $productUrl); ?>">
-					<input type="hidden" name="cardImageRev" class="hidden" id="cardImageRev" value="<?= $this->asset->insertFile($productImgRev, $productUrlRev); ?>">
+          <input type="hidden" name="cardImage" class="hidden" id="cardImage" value="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>">
+					<input type="hidden" name="cardImageRev" class="hidden" id="cardImageRev" value="<?= $this->asset->insertFile($productImgRev, 'images/programs', $customerUri); ?>">
         </div>
       </div>
       <div class="flex col-12 mt-2">

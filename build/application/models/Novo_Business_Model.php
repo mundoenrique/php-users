@@ -81,9 +81,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->userIdNumber = $cardsRecords->id_ext_per;
 						$produtImgName = normalizeName($cardsRecords->nombre_producto);
 						$produtImg =  lang('IMG_PROGRAM_IMG_DEFAULT');
-						$productUrl = 'images/programs/'.$this->customerUri;
 						$produtImgRev = lang('IMG_PROGRAM_IMG_DEFAULT_REV');
-						$productUrlRev = 'images/programs/'.$this->customerUri;
 
 						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
 							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
@@ -92,8 +90,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productImgRev = $cardsRecords->tvirtual ? $produtImgRev : '';
-						$cardRecord->productUrl = $productUrl;
-						$cardRecord->productUrlRev = $productUrlRev;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
@@ -387,9 +383,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImgName = normalizeName($cardsRecords->producto);
 						$produtImg =  lang('IMG_PROGRAM_IMG_DEFAULT');
-						$productUrl = 'images/programs/'.$this->customerUri;
 						$produtImgRev = lang('IMG_PROGRAM_IMG_DEFAULT_REV');
-						$productUrlRev = 'images/programs/'.$this->customerUri;
 						$cardRecord->isVirtual = $cardsRecords->tvirtual ?? '';
 						$cardRecord->tittleVirtual = $cardRecord->isVirtual ? lang('GEN_VIRTUAL_CARD') : '';
 						$cardRecord->virtualCard = $cardRecord->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_VIRTUAL_DISJOIN')) : '';
@@ -401,8 +395,6 @@ class Novo_Business_Model extends NOVO_Model {
 
 						$cardRecord->productImg = $produtImg;
 						$cardRecord->productImgRev = $cardRecord->isVirtual ? $produtImgRev : '';
-						$cardRecord->productUrlRev = $productUrlRev;
-						$cardRecord->productUrl = $productUrl;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;

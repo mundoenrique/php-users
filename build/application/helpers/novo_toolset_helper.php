@@ -381,10 +381,11 @@ if (!function_exists('uriRedirect')) {
 //eliminar despues de la certificación
 if (! function_exists('checkTemporalTenant')) {
 	function checkTemporalTenant($customer) {
+		log_message('info', "---- Custumer in $customer");
 		$pattern = ['/bog/'];
 		$replace = ['bdb'];
 		$customer = preg_replace($pattern, $replace, $customer);
-
+		log_message('info', "---- Custumer out $customer");
 		return $customer;
 	}
 }
