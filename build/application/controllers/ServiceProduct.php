@@ -89,6 +89,7 @@ class ServiceProduct extends BDB_Controller
 				"availableServices" => $row->services,
 				"totalProducts" => $totalProducts,
 				"bloqueo" => $row->bloque,
+				"nameImage" => $row->nameImageOfProduct
 			]);
 		}
 		$listProducts->data = $dataRequeried;

@@ -14,3 +14,7 @@ $config['timeIdleSession'] = 6*60000;
 $config['listReasonReposition'] = [
 	['value'=>'43','tagTranslation'=>'GENE_BLOCKING_REASONS_STOLE']
 ];
+$config['nameImageOfProduct'] = [
+	'efectiva' => 'efectiva',
+	'default' => 'bdb_default'
+];
