@@ -17,7 +17,7 @@
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
 						<div class="item-network <?php lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
-							<img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'],'images',$countryUri); ?>" alt="Tarjeta gris">
+							<img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'],'images/programs',$countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php if ($totalProducts > 1) : ?>
 							<a id="other-product" class="flex items-baseline btn btn-link btn-small" href="<?= base_url('reporte') ?>">
