@@ -31,7 +31,7 @@ function finishSession() {
 	btnKeepSession.addClass('btn-large-xl signout');
 	modalBtn = {
 		btn1: {
-			text: 'Mantener sesión',
+			text: lang.GEN_BTN_KEEP_SESSION,
 			action: 'destroy'
 		}
 	}
@@ -42,7 +42,7 @@ function finishSession() {
 		btnKeepSession
 		.html(loader)
 		.prop('disabled', true);
-		$(location).attr('href', baseURL+'cerrar-sesion/fin');
+		$(location).attr('href', baseURL + lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_END);
 	}, callServer);
 
 	btnKeepSession.on('click', function() {
@@ -64,13 +64,13 @@ function logoutInformation() {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
 			action: 'redirect',
-			link: 'cerrar-sesion/inicio'
+			link: lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_START
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
 			action: 'destroy'
 		},
 	}
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
 
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
 }

@@ -21,8 +21,8 @@
         <div class="flex max-width-4 flex-wrap items-start justify-between mb-2">
           <div class="product-presentation flex flex-column items-end mr-4">
             <div class="relative">
-              <div class="item-network <?= $data['marca']; ?>"></div>
-              <img class="card-image" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+							<div class="item-network <?php lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
+              <img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'], 'images/programs', $countryUri); ?>" alt="Tarjeta gris">
             </div>
             <div class="flex">
               <?php if ($data['totalProducts'] > 1) : ?>

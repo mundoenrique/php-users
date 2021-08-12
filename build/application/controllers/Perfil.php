@@ -38,7 +38,7 @@ class Perfil extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeaderMainActive' => false, 'menuHeader' => $menuHeader, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
         //INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js');
+        $FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js','cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'perfil.js' , 'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.validate.min.js', 'kendo.dataviz.min.js', 'additional-methods.min.js');
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'menuFooter' => $menuFooter, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DE CUERPO
@@ -76,7 +76,7 @@ class Perfil extends CI_Controller {
         //INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
         $header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
         //INSTANACIA DEL CONTENIDO PARA EL FOOTER
-        $FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+        $FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js',  'jquery-md5.js', 'jquery.balloon.min.js');
         //INSTANCIA DEL FOOTER
         $footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
         //INSTANCIA DE PARTE DE CUERPO

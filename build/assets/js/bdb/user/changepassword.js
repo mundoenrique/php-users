@@ -29,7 +29,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	// Deshabilita copiar, cortar y pegar en inputs
 	inputNewPassword.oncut = inputNewPassword.oncopy = inputNewPassword.onpaste =
 	inputConfirmPassword.oncut = inputConfirmPassword.oncopy = inputConfirmPassword.onpaste = function(e) {
-		this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
+		// this.closest('.form-group').querySelector('.help-block').innerText = 'Operación no válida.';
 		return false;
 	};
 

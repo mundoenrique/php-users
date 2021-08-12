@@ -14,8 +14,8 @@ class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
 	public $accessLog;
 	public $token;
-	public $country;
-	public $countryUri;
+	public $customer;
+	public $customerUri;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -30,8 +30,8 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
 		$this->response = new stdClass();
-		$this->country = $this->session->countrySess ?? $this->config->item('country');
-		$this->countryUri = $this->session->countryUri;
+		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
+		$this->customerUri = $this->session->customerUri;
 		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
@@ -52,7 +52,7 @@ class NOVO_Model extends CI_Model {
 			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
 		}
 
-		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->country;
+		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
 		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
@@ -90,15 +90,16 @@ class NOVO_Model extends CI_Model {
 		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
-		$this->response->code = lang('GEN_DEFAULT_CODE');
+		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->data = new stdClass();
 		$this->response->msg = '';
+		$linkredirect = uriRedirect();
 		$arrayResponse = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> $this->session->has_userdata('logged') ? lang('GEN_LINK_CARDS_LIST') : 'inicio',
+				'link'=> $linkredirect,
 				'action'=> 'redirect'
 			]
 		];
@@ -140,16 +141,15 @@ class NOVO_Model extends CI_Model {
 		$responsetoView = new stdClass();
 
 		foreach ($this->response AS $pos => $response) {
-			if (is_array($response) && isset($response['file'])) {
-				continue;
-			}
-
-			if ($pos == 'data' && isset($response->profileData->imagesLoaded)) {
+			if (isset($response->file)) {
 				continue;
 			}
 
 			$responsetoView->$pos = $response;
 
+			if (!empty($response->profileData->imagesLoaded)) {
+				$responsetoView->data->profileData->imagesLoaded = 'cypher image';
+			}
 		}
 
 		log_message('DEBUG', 'NOVO ['.$this->userName.'] RESULT '.$model.' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
@@ -157,5 +157,27 @@ class NOVO_Model extends CI_Model {
 		unset($responsetoView);
 
 		return $this->response;
+	}
+	/**
+	 * @info Método para validar la carga de imagenes del usurio
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date July 13th, 2021
+	 */
+	public function checkImageUpload()
+	{
+		log_message('INFO', 'NOVO Model: checkImageUpload Method Initialized');
+
+		if($this->session->missingImages) {
+			$this->response->code = 3;
+			$this->response->title = lang('GEN_TITLE_IMPORTANT');
+			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->msg = lang('GEN_MISSING_IMAGES');
+			$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
+			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+			$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
+			$this->response->modalBtn['btn2']['action'] = 'destroy';
+
+			$this->session->set_userdata('missingImages', FALSE);
+		}
 	}
 }

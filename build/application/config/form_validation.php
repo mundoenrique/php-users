@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 $config = [
-
 	'signin' => [
 		[
 			'field' => 'userName',
@@ -252,6 +251,10 @@ $config = [
 		[
 			'field' => 'cardNumber',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'transType',
+			'rules' => 'trim|regex_match[/^(-|+)/]'
 		]
 	],
 	'monthlyMovements' => [
@@ -506,6 +509,12 @@ $config = [
 		[
 			'field' => 'signout',
 			'rules' => 'trim|alpha|required'
+		]
+	],
+	'changeLanguage' => [
+		[
+			'field' => 'lang',
+			'rules' => 'trim|alpha|regex_match[/es|en/]|required'
 		]
 	],
 	'finishSession' => [
@@ -898,22 +907,22 @@ $config = [
 		[
 			'field' => 'firstName',
 			'label' => 'firstName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]|required'
 		],
 		[
 			'field' => 'middleName',
 			'label' => 'middleName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]'
 		],
 		[
 			'field' => 'lastName',
 			'label' => 'lastName',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]|required'
 		],
 		[
 			'field' => 'secondSurname',
 			'label' => 'secondSurname',
-			'rules' => 'trim|regex_match[/^([\w\-]+)+$/i]'
+			'rules' => 'trim|regex_match[/^[a-z0-9áéíóúüñÑ ]+$/i]'
 		],
 		[
 			'field' => 'birthDate',
@@ -1211,5 +1220,11 @@ $config = [
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
-	]
+		],
+		'keepsession' => [
+			[
+				'field' => 'signout',
+				'rules' => 'trim|alpha|required'
+			]
+		],
 ];

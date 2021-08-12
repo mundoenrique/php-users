@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_CUSTOMER_SUPPORT'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_CUSTOMER_SUPPORT'); ?></h1>
 <div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
@@ -8,21 +8,21 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $brand, $networkBrand ?>"></div>
-                <?php if ($cardsTotal > 1): ?>
+                <div class="item-network <?= $totalCards == 1 ? lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' : '', $totalCards == 1 ? 'hide': ''; ?>"></div>
+                <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else: ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
-							<?php if ($cardsTotal == 1 && $isVirtual): ?>
+							<?php if ($totalCards == 1 && $isVirtual): ?>
               <span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
 							<?php endif; ?>
             </div>
-            <?php if ($cardsTotal > 1): ?>
+            <?php if ($totalCards > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
               <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
@@ -30,7 +30,7 @@
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
                 <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
@@ -45,12 +45,12 @@
         <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
           <?php if (in_array('110', $serviceList)): ?>
           <li id="cardLock" class="list-inline-item nav-item-config mr-1">
-            <a href="javascript:">
+            <a class="px-1" href="javascript:">
               <span class="icon-config icon-lock h1 icon-color"></span>
               <h5 class="center"><span class="status-text1"><?= $statustext ?></span></h5>
-              <div class="box up left regular">
+              <div class="px-1 box up left regular">
                 <span class="icon-lock h1 icon-color"></span>
-                <h4 class="h5 center tatus-text1"><span class="status-text1"><?= $statustext ?></span></h4>
+                <h4 class="h5 center status-text1"><span class="status-text1"><?= $statustext ?></span></h4>
               </div>
             </a>
           </li>
@@ -114,11 +114,11 @@
         <h4 class="line-text mb-2 semibold primary">
           <span class="status-text1"><?= $statustext ?></span>
 				</h4>
-				<form id="temporaryLockForm" data-status="<?= $status ?>">
+				<form id="temporaryLockForm" data-status="<?= $status ?? '' ?>">
 					<div id="selectTempLockReason" class="row none form-group col-lg-4">
-						<label for="temporaryLockReason">Motivo de la solicitud</label>
+						<label for="temporaryLockReason"><?= lang('CUST_REASON_REQUEST') ?></label>
 						<select id="temporaryLockReason" class="custom-select form-control" name="temporaryLockReason">
-						<option value="" selected disabled>Selecciona</option>
+						<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
 						<?php foreach (lang('CUST_TEMPORARY_LOCK_REASON') AS  $value): ?>
 						<option value="<?= $value ?>"><?= $value ?></option>
 						<?php endforeach; ?>
@@ -130,8 +130,8 @@
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= lang('GEN_LINK_CARDS_LIST') ?>">Cancelar</a>
-						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock">Continuar</button>
+						<a class="btn btn-small btn-link big-modal" href="<?= lang('CONF_LINK_CARD_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
 					</div>
 				</form>
       </div>
@@ -144,7 +144,7 @@
             <div class="form-group col-lg-4">
               <label for="replaceMotSol"><?= lang('CUST_REASON_REQUEST') ?></label>
               <select id="replaceMotSol" class="custom-select form-control" name="replaceMotSol">
-                <option value="" selected disabled><?= lang('CUST_SELECTION') ?></option>
+                <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
                 <?php foreach (lang('CUST_REPLACE_REASON') AS $key => $value): ?>
                 <option value="<?= $key ?>"><?= $value ?></option>
                 <?php endforeach; ?>

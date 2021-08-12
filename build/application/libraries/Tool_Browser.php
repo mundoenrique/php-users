@@ -18,7 +18,7 @@ class Tool_Browser {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date January 24th, 2020
 	 */
-	public function validBrowser($client)
+	public function validBrowser($customer)
 	{
 		log_message('INFO', 'NOVO Tool_Browser: validBrowser Method Initialized');
 
@@ -28,7 +28,7 @@ class Tool_Browser {
 		$browsersIn = FALSE;
 
 		if($this->CI->agent->is_browser()) {
-			$platform = 'desktop';
+			$platform = 'browser';
 			$validBrowser = [
 				'Chrome' => 47,
 				'Firefox' => 29,
@@ -70,7 +70,7 @@ class Tool_Browser {
 
 		if(!$valid) {
 			switch ($platform) {
-				case 'desktop':
+				case 'browser':
 					$title = 'Algunos componentes de esta página podrían no funcionar correctamente.';
 					$msg1 = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
 

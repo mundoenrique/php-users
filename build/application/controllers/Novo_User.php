@@ -22,10 +22,11 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: signin Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('GEN_LINK_CARDS_LIST')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
 			exit();
 		}
 
@@ -42,7 +43,7 @@ class Novo_User extends NOVO_Controller {
 			"user/signin"
 		);
 
-		if($this->skin === 'pichincha' && ENVIRONMENT === 'production') {
+		if($this->customerUri === 'bp' && ENVIRONMENT === 'production') {
 			array_push(
 				$this->includeAssets->jsFiles,
 				"third_party/borders"
@@ -63,6 +64,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'userIdentify';
 
 		array_push(
@@ -119,7 +121,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->previewPASS_A = FALSE;
 		$this->render->previewPASS_R = FALSE;
 
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
@@ -133,6 +135,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
 		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
+
 		if (lang('CONF_LOAD_DOCS') == 'OFF') {
       foreach ($this->render->stepTitles as $key => $value) {
         if ($value == lang('USER_LOAD_DOCS_STEP')) {
@@ -141,6 +144,7 @@ class Novo_User extends NOVO_Controller {
       }
       $this->render->stepTitles = array_values($this->render->stepTitles);
     }
+
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -153,6 +157,7 @@ class Novo_User extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
 
+		languageCookie(BASE_LANGUAGE);
 		$view = 'accessRecover';
 
 		array_push(
@@ -186,12 +191,12 @@ class Novo_User extends NOVO_Controller {
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url('lista-de-tarjetas') ;
+			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('CONF_LINK_CARD_LIST')) ;
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
 		if ($this->session->flashdata('changePassword') != NULL) {
-			$cancelBtn = base_url('cerrar-sesion/inicio');
+			$cancelBtn = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START'));
 
 			switch($this->session->flashdata('changePassword')) {
 				case 'TemporalPass':
@@ -259,8 +264,8 @@ class Novo_User extends NOVO_Controller {
 			}
 		}
 
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->countrySess];
-		$this->render->titlePage = lang('GEN_MENU_PORFILE');
+		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
+		$this->render->titlePage = lang('GEN_MENU_PROFILE');
 		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
 		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
 		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
@@ -300,7 +305,7 @@ class Novo_User extends NOVO_Controller {
 	/**
 	 * @info Método para el cierre de sesión
 	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 20th, 2020
+	 * @date May 18th, 2020
 	 */
 	public function finishSession($redirect)
 	{
@@ -308,14 +313,16 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'finishSession';
 
-		if($this->render->userId || $this->render->logged) {
+		$callFinishSession = $this->session->has_userdata('userId') || $this->session->has_userdata('logged');
+
+		if($callFinishSession) {
 			$this->load->model('Novo_User_Model', 'finishSession');
 			$this->finishSession->callWs_FinishSession_User();
 		}
 
-		if($redirect == 'fin') {
+		if($redirect == lang('CONF_LINK_SIGNOUT_END') && $callFinishSession) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url('inicio');
+			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -326,7 +333,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url('inicio'), 'location');
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
 		}
 
 	}
@@ -342,13 +349,14 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url('inicio'), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
 			exit();
 		}
 
 		$views = ['staticpages/content-browser'];
 		$this->includeAssets->cssFiles = [
-			"$this->folder/"."$this->skin-browser"
+			"$this->customerUri/"."$this->customerUri-browser",
+			"reboot"
 		];
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;

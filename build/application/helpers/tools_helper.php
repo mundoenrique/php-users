@@ -354,6 +354,8 @@ if(!function_exists('validateUrl')) {
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
+		$uriCore = '/sign-in';
+		$uriCore = $client == 'bdb' ? '/inicio' : $uriCore;
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
@@ -366,7 +368,7 @@ if(!function_exists('validateUrl')) {
 					redirect(base_url('pichincha/home'), 'location', 301);
 					break;
 				default;
-					redirect(base_url($client.'/inicio'), 'location', 301);
+					redirect(base_url($client.$uriCore), 'location', 301);
 			}
 		}
 	}

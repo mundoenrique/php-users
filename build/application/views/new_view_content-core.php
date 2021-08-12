@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline">Nueva vista</h1>
+<h1 class="primary h3 semibold inline">Nueva vista</h1>
 <span class="ml-2 regular tertiary"><?= $productName ?></span>
 <div class="mb-2 flex items-center">
 	<div class="flex tertiary">

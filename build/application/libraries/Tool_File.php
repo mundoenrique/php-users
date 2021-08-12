@@ -34,7 +34,7 @@ class Tool_File {
 		$valid = FALSE;
 		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
 		$configUploadFile['upload_path'] = UPLOAD_PATH . $this->buildDirectoryPath([
-			strtoupper($this->CI->session->countryUri),
+			strtoupper($this->CI->session->customerUri),
 			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
 		]);
 		$createDirectory = lang('GEN_UPLOAD_NOT_CREATE_DIRECTORY');

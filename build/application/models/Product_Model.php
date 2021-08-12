@@ -35,6 +35,12 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
+					foreach ($response->lista as $key => $row) {
+						$imageNameOfProduct = $this->setNameImageOfProduct($row->nombre_producto, 'images/programs', $this->countryUri);
+						$response->lista[$key]->nameImageOfProduct = $imageNameOfProduct;
+					}
+
 					$this->response->code = 0;
 					$this->response->data = $response->lista;
 					$this->response->msg = count($response->lista) > 0 ?lang('RESP_RC_0'):lang('RESP_EMPTY_LIST_PRODUCTS');
@@ -80,7 +86,11 @@ class Product_Model extends BDB_Model
 			switch ($this->isResponseRc) {
 				case 0:
 					$this->response->code = 0;
-					$this->response->data = $response->disponible;
+					$this->response->data = [
+						'available' => $response->disponible,
+						'actual' => $response->actual,
+						'blocked' => $response->bloqueo
+					];
 					$this->response->msg = lang('RESP_RC_0');
 					break;
 
@@ -271,6 +281,12 @@ class Product_Model extends BDB_Model
 		if ($this->isResponseRc !== FALSE) {
 			switch ($this->isResponseRc) {
 				case 0:
+
+					foreach ($response->cuentaOrigen as $key => $row) {
+						$imageNameOfProduct = $this->setNameImageOfProduct($row->producto, 'images/programs', $this->countryUri);
+						$response->cuentaOrigen[$key]->nameImageOfProduct = $imageNameOfProduct;
+					}
+
 					$this->response->code = 0;
 					$this->response->data = $response->cuentaOrigen;
 					$this->response->msg = count($response->cuentaOrigen) > 0 ?lang('RESP_RC_0'):lang('GEN_SYSTEM_MESSAGE');
@@ -465,5 +481,26 @@ class Product_Model extends BDB_Model
 			}
 		}
 		return $this->response;
+	}
+
+	private function setNameImageOfProduct($fileName, $folder, $customerUri = FALSE)
+	{
+		log_message('INFO', 'NOVO Product Model: setNameImageOfProduct method initialized');
+
+		$keyNameImage = strtolower(str_replace(' ', '', $fileName));
+		$imageOfProduct = $this->config->item('nameImageOfProduct');
+
+		$nameImageOfProduct = array_key_exists($keyNameImage, $imageOfProduct)
+			? $imageOfProduct[$keyNameImage].'.svg'
+			: $imageOfProduct['default'].'.svg';
+
+		$customerUri = $customerUri ? $customerUri.'/' : '';
+		$isFileExists = file_exists(assetPath($folder.'/'.$customerUri.$nameImageOfProduct));
+
+		if (!$isFileExists) {
+			$nameImageOfProduct = $imageOfProduct['default'];
+		}
+
+		return $nameImageOfProduct;
 	}
 }

@@ -103,7 +103,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets, 'scoreRecapcha' => $this->scoreRecapcha), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'novo_helper.js', 'login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'novo_helper.js', 'login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js');
 		//INSTANCIA DEL FOOTER
 		$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
 		if(ENVIRONMENT == 'production' && $cookie == 'pichincha') {
@@ -150,7 +150,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS=['jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js',  'jquery-md5.js', 'jquery.balloon.min.js'];
+		$FooterCustomInsertJS=['jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js',  'jquery-md5.js', 'jquery.balloon.min.js'];
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -182,7 +182,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive'=>false, 'menuHeader'=>$menuHeader, 'menuHeaderMainActive'=>false, 'titlePage'=>$titlePage, 'styleSheets'=>$styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'recovery-password.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'recovery-password.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive'=>true, 'FooterCustomInsertJSActive'=>true, 'FooterCustomInsertJS'=>$FooterCustomInsertJS, 'FooterCustomJSActive'=>false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -210,7 +210,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'cambiar-password.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'cambiar-password.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -239,7 +239,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER , INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js','cypher/aes-json-format.min.js', 'obtener-login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js','cypher/aes-json-format.min.js', 'obtener-login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -268,7 +268,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER, INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'password-operaciones.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'password-operaciones.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO
@@ -307,7 +307,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => true, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', "password-sms.js" , 'jquery-md5.js', 'jquery.balloon.min.js',  'jquery.validate.min.js',  'kendo.dataviz.min.js',  'additional-methods.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.isotope.min.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', "password-sms.js" , 'jquery-md5.js', 'jquery.balloon.min.js',  'jquery.validate.min.js',  'kendo.dataviz.min.js',  'additional-methods.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DEL CUERPO PLATA-PLATA
@@ -339,7 +339,7 @@ class Users extends CI_Controller {
 		//INSTANCIA DEL CONTENIDO PARA EL HEADER ,  INCLUYE MENU
 		$header = $this->parser->parse('layouts/layout-header', array('menuHeaderActive' => false, 'menuHeader' => $menuHeader, 'menuHeaderMainActive' => false, 'titlePage' => $titlePage, 'styleSheets' => $styleSheets), true);
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
-		$FooterCustomInsertJS = array('jquery-3.4.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'actualizar-password-operaciones.js', 'jquery.validate.min.js', 'jquery-md5.js', 'jquery.balloon.min.js');
+		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js', 'cypher/aes.min.js', 'cypher/aes-json-format.min.js', 'novo_helper.js', 'actualizar-password-operaciones.js', 'jquery.validate.min.js', 'jquery-md5.js', 'jquery.balloon.min.js');
 		//INSTANCIA DEL FOOTER
 		$footer = $this->parser->parse('layouts/layout-footer', array('menuFooterActive' => true, 'FooterCustomInsertJSActive' => true, 'FooterCustomInsertJS' => $FooterCustomInsertJS, 'FooterCustomJSActive' => false), true);
 		//INSTANCIA DE PARTE DE CUERPO

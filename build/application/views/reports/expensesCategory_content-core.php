@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 regular inline"><?= lang('GEN_MENU_REPORTS'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_REPORTS'); ?></h1>
 <div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
@@ -8,21 +8,21 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $brand, $networkBrand ?>"></div>
-                <?php if ($cardsTotal > 1): ?>
+                <div class="item-network <?= $totalCards == 1 ? lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' : '', $totalCards == 1 ? 'hide': ''; ?>"></div>
+                <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else: ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
-							<?php if ($cardsTotal == 1 && $isVirtual): ?>
+							<?php if ($totalCards == 1 && $isVirtual): ?>
 							<span class="warning semibold h6 mx-auto"><?= lang('GEN_VIRTUAL_CARD'); ?></span>
 							<?php endif; ?>
             </div>
-            <?php if ($cardsTotal > 1): ?>
+            <?php if ($totalCards > 1): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
               <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
@@ -30,7 +30,7 @@
             <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
                 <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
@@ -88,25 +88,25 @@
       <div id="downloads" class="hide-downloads hide pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+            <a id="downloadPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
               <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
             </a>
           </li>
           <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendPDF" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+            <a id="sendPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
             </a>
           </li>
           <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="download">
+            <a id="downloadXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
               <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
             </a>
           </li>
           <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendXLS" href="<?= lang('GEN_NO_LINK'); ?>" action="send">
+            <a id="sendXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
             </a>
           </li>

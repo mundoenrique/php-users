@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	form = $('#cardListForm')
+	form = $('#cardListForm');
 
 	if (form.attr('card-list') == 'obtain') {
 		insertFormInput(true, form);
@@ -32,14 +32,14 @@ $(function () {
 			}
 		})
 	} else {
-		$('.get-detail').find('.item-balance').text('clic para consultar tu saldo')
+		$('.get-detail').find('.item-balance').text(lang.BUSINESS_CHECK_BALANCE)
 	}
 
 	$('.get-detail').on('click', function(e) {
 		e.preventDefault();
-		form = $(this).find('form')
-		formInputTrim(form)
-		insertFormInput(true, form)
+		form = $(this).find('form');
+		formInputTrim(form);
+		insertFormInput(true, form);
 
 		form.submit()
 	})

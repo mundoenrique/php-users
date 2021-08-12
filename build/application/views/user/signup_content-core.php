@@ -122,7 +122,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -157,14 +157,14 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control" name="state">
-                      <option value="">Selecciona</option>
+                      <option value=""><?= lang('GEN_SELECTION') ?></option>
                     </select>
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="city"><?= lang('USER_CITY') ?></label>
                     <select id="city" class="custom-select form-control" name="city" disabled>
-                      <option value="">Selecciona</option>
+                      <option value=""><?= lang('GEN_SELECTION') ?></option>
                     </select>
                     <div class="help-block"></div>
                   </div>
@@ -172,7 +172,7 @@
                   <div class="form-group col-6 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
                     <select id="district" class="custom-select form-control" name="district" disabled>
-                      <option value="">Selecciona</option>
+                      <option value=""><?= lang('GEN_SELECTION') ?></option>
                     </select>
                     <div class="help-block"></div>
                   </div>
@@ -230,7 +230,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -248,7 +248,7 @@
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="fiscalId"><?= lang('GEN_FISCAL_REGISTRY') ?></label>
+                    <label for="fiscalId"><?= lang('USER_FISCAL_REGISTRY') ?></label>
                     <input id="fiscalId" class="form-control" type="text" name="fiscalId" value="<?= $fiscalId ?>" autocomplete="off" readonly>
                     <div class="help-block"></div>
                   </div>
@@ -269,7 +269,7 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="laborOld"><?= lang('USER_SENIORITY') ?></label>
                     <select id="laborOld" class="custom-select form-control" name="laborOld">
-                      <option selected disabled>Selecciona</option>
+                      <option selected disabled><?= lang('GEN_SELECTION') ?></option>
                       <?php for ($index = 0; $index <= 50; $index++): ?>
                       <option value="<?= $index; ?>"><?= $index; ?></option>
                       <?php endfor; ?>
@@ -280,7 +280,7 @@
                   <div class="form-group col-6 input-height">
                     <label for="profession"><?= lang('USER_PROFESSION') ?></label>
                     <select id="profession" class="custom-select form-control" name="profession" disabled>
-                      <option value="">Selecciona</option>
+                      <option value=""><?= lang('GEN_SELECTION') ?></option>
                     </select>
                     <div class="help-block"></div>
                   </div>
@@ -301,11 +301,11 @@
                     <label class="block"><?= lang('USER_PUBLIC_OFFICE') ?></label>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="yesPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="yes" autocomplete="off">
-                      <label class="custom-control-label" for="yesPublicOfficeOld">Si</label>
+                      <label class="custom-control-label" for="yesPublicOfficeOld"><?= lang('GEN_BTN_YES') ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="noPublicOfficeOld" class="custom-control-input" type="radio" name="publicOfficeOld" value="no" autocomplete="off">
-                      <label class="custom-control-label" for="noPublicOfficeOld">No</label>
+                      <label class="custom-control-label" for="noPublicOfficeOld"><?= lang('GEN_BTN_NO') ?></label>
                     </div>
                     <div class="help-block"></div>
                   </div>
@@ -323,11 +323,11 @@
                     <label class="block"><?= lang('USER_ARTICLE_LAW') ?></label>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="yesTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="yes">
-                      <label class="custom-control-label" for="yesTaxesObligated">Si</label>
+                      <label class="custom-control-label" for="yesTaxesObligated"><?= lang('GEN_BTN_YES') ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input id="noTaxesObligated" class="custom-control-input" type="radio" name="taxesObligated" value="no">
-                      <label class="custom-control-label" for="noTaxesObligated">No</label>
+                      <label class="custom-control-label" for="noTaxesObligated"><?= lang('GEN_BTN_NO') ?></label>
                     </div>
                     <div class="help-block"></div>
                   </div>
@@ -336,7 +336,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -407,7 +407,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -429,7 +429,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/fin') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -462,7 +462,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -534,7 +534,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -560,7 +560,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url('cerrar-sesion/inicio') ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>

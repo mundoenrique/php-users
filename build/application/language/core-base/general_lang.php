@@ -18,10 +18,8 @@ $lang['GEN_USER'] = 'Usuario';
 $lang['GEN_PASSWORD'] = 'Contraseña';
 $lang['GEN_EMAIL'] = 'Correo electrónico';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
-$lang['GEN_FISCAL_REGISTRY'] = 'RUC.';
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
-$lang['GEN_NOT_SERVICES_AVAILABLE'] = 'Existe una solicitud de reposición pendiente,
-no es posible realizar otras operaciones.';
+$lang['GEN_NOT_SERVICES_AVAILABLE'] = 'La tarjeta presenta un bloqueo definitivo, no es posible realizar otras operaciones.';
 $lang['GEN_SERVICES_AVAILABLE'] = 'Selecciona la operación que deseas realizar';
 //TITLES PAGES
 $lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar acceso';
@@ -34,6 +32,8 @@ $lang['GEN_BTN_CLOSE'] = 'Cerrar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
+$lang['GEN_BTN_STAY'] = 'Mantener';
+$lang['GEN_BTN_YES'] = 'Si';
 
 $lang['GEN_TEXT_BLOCK_PRODUCT'] = 'Tarjeta bloqueada';
 $lang['GEN_TEXT_BLOCK_TEMP_PRODUCT'] = 'Bloqueada temporal';
@@ -136,3 +136,5 @@ $lang['GENE_BLOCKING_REASONS_DETERIORATED'] = 'Tarjeta deteriorada';
 $lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada / perdida';
 $lang['GENE_BLOCKING_REASONS_FRAUD'] = 'Sospecha de fraude';
 $lang['GENE_BLOCKING_REASONS_CANCELLED'] = 'Tarjeta cancelada';
+//FRANCHISE LOGO
+$lang['CONF_FRANCHISE_LOGO'] = 'ON';

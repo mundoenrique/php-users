@@ -75,8 +75,12 @@ class Product extends BDB_Controller
 			if (!empty($card) && $card !== $row->noTarjeta) {
 				continue;
 			}
+
 			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
-			$productBalance = $this->transforNumber($productBalance->data);
+			$mountActual = $this->transforNumber($productBalance->data['actual']);
+			$mountBlocked = $this->transforNumber($productBalance->data['blocked']);
+			$mountAvailable = $this->transforNumber($productBalance->data['available']);
+
 			array_push($dataRequeried, [
 				"noTarjeta" => $row->noTarjeta,
 				"noTarjetaConMascara" => $row->noTarjetaConMascara,
@@ -84,16 +88,17 @@ class Product extends BDB_Controller
 				"prefix" => $row->prefix,
 				"marca" => strtolower($row->marca),
 				"nomEmp" => ucwords(strtolower($row->nomEmp)),
-				"actualBalance" => $productBalance,
+				"actualBalance" => $mountActual,
 				"ledgerBalance" => "--",
-				"availableBalance" => $productBalance,
+				"availableBalance" => $mountAvailable,
 				"id_ext_per" => $row->id_ext_per,
 				"fechaExp" => $row->fechaExp,
 				"nom_plastico" => ucwords(strtolower($row->nom_plastico)),
 				"availableServices" => $row->services,
 				"bloqueo" => $row->bloque,
 				"totalProducts" => $totalProducts,
-				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE
+				"vc" => isset($row->tvirtual) ? $row->tvirtual : FALSE,
+				"nameImage" => $row->nameImageOfProduct
 			]);
 		}
 		$loadProducts->data = $dataRequeried;
