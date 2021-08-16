@@ -159,6 +159,8 @@ footer.main-footer {
 
 .black  { color: var(--black) !important }
 .white  { color: rgba(255,255,255,1) !important }
+.warning { color: var(--warning) !important }
+.danger  { color: var(--danger) !important }
 
 .primary   { color: var(--color-primary) }
 .secondary { color: var(--color-secondary) !important }

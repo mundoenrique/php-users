@@ -6,7 +6,7 @@ $lang['GEN_COIN'] = '$';
 
 $lang['loadBalanceInTransit'] = 'FALSE';
 
-$lang['CUST_TITLE_GENERATE_PIN'] = ">Generar<br>PIN";
+$lang['CUST_TITLE_GENERATE_PIN'] = "Generar<br>PIN";
 $lang['CUST_TITLE_MANAGEMENT_PIN'] = "Gestión<br>de PIN";
 $lang['CUST_TITLE_TEMPORARY_BLOCKAGE'] = "Bloqueo<br>temporal";
 $lang['CUST_TITLE_REQUEST_REPLENISHMENT'] = "Bloqueo<br>definitivo";

@@ -1,4 +1,3 @@
-
 <div id="dashboard" class="dashboard-content h-100 bg-content">
 	<div class="py-4 px-5">
 		<header class="">
@@ -30,7 +29,7 @@
 								}
 					?>
 								<div class="dashboard-item big-modal p-1 mx-1 mb-1 <?= $state; ?>" id="<?= $row['nroTarjeta']; ?>" title="<?= $title; ?>">
-									<img class=" item-img" src="<?= $this->asset->insertFile('img-card_gray.svg', 'img', $countryUri); ?>" alt="Tarjeta gris">
+									<img class=" item-img" src="<?= $this->asset->insertFile($row['nameImage'], 'images/programs', $countryUri); ?>" alt="Tarjeta gris">
 									<div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($row['marca']) : '' ?> p-2 h5 tertiary bg-white">
 										<p class="item-category semibold primary"><?= $row['nombre_producto']; ?></p>
 										<p class="item-cardnumber mb-0"><?= $row['nroTarjetaMascara']; ?></p>
@@ -49,6 +48,7 @@
 										<input type='hidden' id='tarjetaHabiente' name='tarjetaHabiente' value='<?= $row['tarjetaHabiente']; ?>'>
 										<input type='hidden' id='id_ext_per' name='id_ext_per' value='<?= $row['id_ext_per']; ?>'>
 										<input type='hidden' id='id_ext_emp' name='id_ext_emp' value='<?= $row['id_ext_emp']; ?>'>
+										<input type='hidden' id='nameImage' name='nameImage' value='<?= $row['nameImage']; ?>'>
 										<input type='hidden' id='totalProducts' name='totalProducts' value='<?= $totalProducts; ?>'>
 									</form>
 								</div>
