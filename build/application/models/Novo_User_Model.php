@@ -1296,22 +1296,39 @@ class Novo_User_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				if ($this->session->terms == '0') {
-					$this->session->set_userdata('terms', '1');
-				}
-
-				if ($this->session->affiliate == '0') {
-					$this->session->set_userdata('affiliate', '1');
-				}
-
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->msg = lang('USER_UPDATE_SUCCESS');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+
+				if ($this->session->terms == '0') {
+					$this->session->set_userdata('terms', '1');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_LIST');
+				}
+
+				if ($this->session->affiliate == '0') {
+					$this->session->set_userdata('affiliate', '1');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_LIST');
+				}
 			break;
 			case -200:
+			case -271:
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->msg = lang('USER_UPDATE_FAIL');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+			break;
+			case -335:
+				$this->response->title = lang('USER_PROFILE_TITLE');
+				$this->response->msg = lang('USER_INVALID_DIGIT');
+				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+			break;
+			case -21:
+			case -311:
+			case -313:
+			case -314:
+			case -317:
+				$this->response->title = lang('USER_PROFILE_TITLE');
+				$this->response->msg = lang('USER_ACTIVATION_FAIL');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
 			break;
 		}

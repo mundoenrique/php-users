@@ -185,16 +185,15 @@ footer.main-footer {
 .bold       { font-weight: var(--bold-font-weight) !important }
 
 /* Colors */
+.primary   { color: var(--color-primary) }
+.secondary { color: var(--color-primary) !important }
+.tertiary  { color: var(--color-tertiary) }
+.text      { color: var(--color-sixth) !important }
 
 .black  { color: var(--black) !important }
 .white  { color: rgba(255,255,255,1) }
 .warning { color: var(--warning) !important }
 .danger  { color: var(--danger) !important }
-
-.primary   { color: var(--color-primary) }
-.secondary { color: var(--color-primary) !important }
-.tertiary  { color: var(--color-tertiary) }
-.text      { color: var(--color-sixth) !important }
 
 /* Icons, Logos
 ========================================================================== */
