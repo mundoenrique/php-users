@@ -266,8 +266,8 @@ if (!function_exists('mainMenu'))
 			'PAYS_TRANSFER' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
-				'CREDIT_CARDS' => [],
 				'SERVICES' => [
+					'CREDIT_CARDS' => [],
 					'TELEPHONY' => []
 				]
 			],
