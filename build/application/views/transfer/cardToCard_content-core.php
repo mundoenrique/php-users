@@ -48,10 +48,10 @@
 							<li id="affiliate" class="list-inline-item nav-item-config mr-1">
 								<a class="px-1" href="javascript:">
 									<span class="icon-config icon-user-plus h0 icon-color"></span>
-									<h5 class="center"><span class="status-text1"><?= lang('CUST_AFILIATE'); ?></span></h5>
+									<h5 class="center"><span class="status-text1"><?= lang('TRANSF_AFILIATE'); ?></span></h5>
 									<div class="px-1 box up left regular">
 										<span class="icon-user-plus h1 icon-color"></span>
-										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('CUST_AFILIATE'); ?></span></h4>
+										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_AFILIATE'); ?></span></h4>
 									</div>
 								</a>
 							</li>
@@ -60,10 +60,10 @@
 							<li id="manageAffiliations" class="list-inline-item nav-item-config">
 								<a class="px-1" href="javascript:">
 									<span class="icon-config icon-user-config h1 icon-color"></span>
-									<h5 class="center"><span class="status-text1"><?= lang('CUST_MANAGE_AFFILIATIONS'); ?></span></h5>
+									<h5 class="center"><span class="status-text1"><?= lang('TRANSF_MANAGE_AFFILIATIONS'); ?></span></h5>
 									<div class="px-1 box up left regular">
 										<span class="icon-user-config h1 icon-color"></span>
-										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('CUST_MANAGE_AFFILIATIONS'); ?></span></h4>
+										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_MANAGE_AFFILIATIONS'); ?></span></h4>
 									</div>
 								</a>
 							</li>
@@ -72,10 +72,10 @@
 							<li id="moneyPayments" class="list-inline-item nav-item-config mr-1">
 								<a class="px-1" href="javascript:">
 									<span class="icon-config icon-money-payments h0 icon-color"></span>
-									<h5 class="center"><span class="status-text1"><?= lang('CUST_PAYMENTS'); ?></span></h5>
+									<h5 class="center"><span class="status-text1"><?= lang('TRANSF_PAYMENTS'); ?></span></h5>
 									<div class="px-1 box up left regular">
 										<span class="icon-money-payments h1 icon-color"></span>
-										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('CUST_PAYMENTS'); ?></span></h4>
+										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_PAYMENTS'); ?></span></h4>
 									</div>
 								</a>
 							</li>
@@ -84,10 +84,10 @@
 							<li id="toTransfer" class="list-inline-item nav-item-config mr-1">
 								<a class="px-1" href="javascript:">
 									<span class="icon-config icon-user-transfer h0 icon-color"></span>
-									<h5 class="center"><span class="status-text1"><?= lang('CUST_TO_TRANSFER'); ?></span></h5>
+									<h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>
 									<div class="px-1 box up left regular">
 										<span class="icon-user-transfer h1 icon-color"></span>
-										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('CUST_TO_TRANSFER'); ?></span></h4>
+										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h4>
 									</div>
 								</a>
 							</li>
@@ -96,10 +96,10 @@
 							<li id="history" class="list-inline-item nav-item-config mr-1">
 								<a class="px-1" href="javascript:">
 									<span class="icon-config icon-history h0 icon-color"></span>
-									<h5 class="center"><span class="status-text1"><?= lang('CUST_HISTORY'); ?></span></h5>
+									<h5 class="center"><span class="status-text1"><?= lang('TRANSF_HISTORY'); ?></span></h5>
 									<div class="px-1 box up left regular">
 										<span class="icon-history h1 icon-color"></span>
-										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('CUST_HISTORY'); ?></span></h4>
+										<h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_HISTORY'); ?></span></h4>
 									</div>
 								</a>
 							</li>
@@ -113,15 +113,15 @@
 		<!-- Afiliattions -->
 		<div id="affiliateCardView" class="option-service" style="display:none">
 			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text mb-2 semibold primary"><?= lang('CUST_ACCOUNT_REG') ?></h4>
+				<h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_ACCOUNT_REG') ?></h4>
 				<div class="w-100">
 					<div class="services-both max-width-1 fit-lg mx-auto fade-in">
-						<span><?= lang('CUST_ACCOUNT_REG_CREDIT_CARD_MSG') ?> </span>
+						<span><?= lang('TRANSF_ACCOUNT_REG_CREDIT_CARD_MSG') ?> </span>
 						<div class="line-text my-2"></div>
 						<form id="affiliateCardForm" name="affiliateCardForm">
 							<div class="row">
 								<div class="form-group col-lg-4">
-									<label for="bank"><?= lang('CUST_BANK') ?></label>
+									<label for="bank"><?= lang('TRANSF_BANK') ?></label>
 									<select id="bank" class="custom-select form-control" name="bank">
 										<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
 										<option value="Bank">Bank</option>
@@ -129,17 +129,17 @@
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="CreditCardNumber"><?= lang('CUST_CREDIT_CARD_NUMBER') ?></label>
+									<label for="CreditCardNumber"><?= lang('TRANSF_CREDIT_CARD_NUMBER') ?></label>
 									<input id="CreditCardNumber" class="form-control" type="password" name="CreditCardNumber" maxlength="4" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="beneficiary"><?= lang('CUST_BENEFICIARY') ?></label>
+									<label for="beneficiary"><?= lang('TRANSF_BENEFICIARY') ?></label>
 									<input id="beneficiary" class="form-control" type="password" name="beneficiary" maxlength="4" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="idDocument"><?= lang('CUST_ID_DOCUMENT') ?></label>
+									<label for="idDocument"><?= lang('TRANSF_ID_DOCUMENT') ?></label>
 									<div class="form-row">
 										<div class="form-group col-6 input-height">
 											<select id="phoneType" class="custom-select form-control" name="phoneType">
@@ -160,7 +160,7 @@
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="expDateCta"><?= lang('CUST_EXP_DATE_CTA') ?></label>
+									<label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
 									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
 									<div class="help-block"></div>
 								</div>
@@ -168,7 +168,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
-								<button id="toTransferBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('CUST_AFILIATE') ?></button>
+								<button id="toTransferBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('TRANSF_AFILIATE') ?></button>
 							</div>
 						</form>
 					</div>
@@ -178,20 +178,20 @@
 
 		<div id="affiliateAccountView" class="option-service" style="display:none">
 			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text mb-2 semibold primary"><?= lang('CUST_ACCOUNT_REG') ?></h4>
+				<h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_ACCOUNT_REG') ?></h4>
 				<div class="w-100">
 					<div class="services-both max-width-1 fit-lg mx-auto fade-in">
-						<span><?= lang('CUST_ACCOUNT_REG_ACCOUNT_MSG') ?> </span>
+						<span><?= lang('TRANSF_ACCOUNT_REG_ACCOUNT_MSG') ?> </span>
 						<div class="line-text my-2"></div>
 						<form id="affiliateAccountForm" name="affiliateAccountForm">
 							<div class="row">
 								<div class="form-group col-lg-4 none">
-									<label for="beneficiary"><?= lang('CUST_BENEFICIARY') ?></label>
+									<label for="beneficiary"><?= lang('TRANSF_BENEFICIARY') ?></label>
 									<input id="beneficiary" class="form-control" type="password" name="beneficiary" maxlength="4" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4 none">
-									<label for="idDocument"><?= lang('CUST_ID_DOCUMENT') ?></label>
+									<label for="idDocument"><?= lang('TRANSF_ID_DOCUMENT') ?></label>
 									<div class="form-row">
 										<div class="form-group col-6 input-height">
 											<select id="phoneType" class="custom-select form-control" name="phoneType">
@@ -207,7 +207,7 @@
 									</div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="destAccountNumber"><?= lang('CUST_DEST_ACCOUNT_NUMBER') ?></label>
+									<label for="destAccountNumber"><?= lang('TRANSF_DEST_ACCOUNT_NUMBER') ?></label>
 									<input id="destAccountNumber" class="form-control" type="text" name="destAccountNumber" maxlength="20" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
@@ -217,7 +217,7 @@
 									<div class="help-block"></div>
 								</div>
 								<div class="form-group col-lg-4">
-									<label for="expDateCta"><?= lang('CUST_EXP_DATE_CTA') ?></label>
+									<label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
 									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
 									<div class="help-block"></div>
 								</div>
@@ -225,7 +225,7 @@
 							<hr class="separador-one">
 							<div class="flex items-center justify-end pt-3">
 								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
-								<button id="toTransferBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('CUST_AFILIATE') ?></button>
+								<button id="toTransferBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('TRANSF_AFILIATE') ?></button>
 							</div>
 						</form>
 					</div>
@@ -236,7 +236,7 @@
 		<!-- Adm Afiliattions -->
 		<div id="manageAffiliationsView" class="option-service" style="display:none">
 			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text mb-2 semibold primary"><?= lang('CUST_MANAGE_AFFILIATIONS') ?></h4>
+				<h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_MANAGE_AFFILIATIONS') ?></h4>
 				<div class="w-100">
 					<div class="services-both max-width-1 fit-lg mx-auto fade-in">
 						<form id="manageAffiForm" name="manageAffiForm">
@@ -276,10 +276,10 @@
 		<!-- Transfer -->
 		<div id="transferView" class="option-service" style="display:none">
 			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text mb-2 semibold primary"><?= lang('CUST_TO_TRANSFER') ?></h4>
+				<h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_TO_TRANSFER') ?></h4>
 				<div class="w-100">
 					<div class="services-both max-width-1 fit-lg mx-auto fade-in">
-						<span><?= lang('CUST_INDICATIONS_TRANS_MSG') ?> </span>
+						<span><?= lang('TRANSF_INDICATIONS_TRANS_MSG') ?> </span>
 						<div class="line-text my-2"></div>
 						<div class="flex justify-center mb-5">
 							<div class="dashboard-item p-1 mx-5 mb-1 get-detail big-modal">
@@ -300,12 +300,12 @@
 							<div class="col-5 self-center">
 								<form id="signInForm">
 									<div class="form-group">
-										<label for="concept"><?= lang('CUST_CONCEPT') ?></label>
+										<label for="concept"><?= lang('TRANSF_CONCEPT') ?></label>
 										<input id="concept" name="concept" class="form-control" type="text" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
 									<div class="form-group">
-										<label for="amount"><?= lang('CUST_AMOUNT') ?></label>
+										<label for="amount"><?= lang('TRANSF_AMOUNT') ?></label>
 										<input id="amount" name="amount" class="form-control" type="text" autocomplete="off">
 										<div class="help-block"></div>
 									</div>
@@ -314,13 +314,13 @@
 						</div>
 						<div class="center">
 							<button class="btn btn-small btn-link back pb-0" type="submit">
-								<i class="icon-plus h6"></i> <?= lang('CUST_ADD_DEST_ACCOUNT'); ?>
+								<i class="icon-plus h6"></i> <?= lang('TRANSF_ADD_DEST_ACCOUNT'); ?>
 							</button>
 							<br>
-							<small class="text">(<?= lang('CUST_MAX_SIMUL'); ?>)</small>
+							<small class="text">(<?= lang('TRANSF_MAX_SIMUL'); ?>)</small>
 						</div>
 						<div class="mt-3">
-							<span class="text">(<?= lang('CUST_EXP_DATE'); ?>)</span>
+							<span class="text">(<?= lang('TRANSF_EXP_DATE'); ?>)</span>
 							<div class="form-group col-lg-4 mt-3 pl-0">
 								<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
 								<div class="help-block"></div>
@@ -334,11 +334,11 @@
 		<!-- History -->
 		<div id="historyView" class="option-service" style="display:none">
 			<div class="flex mb-1 mx-4 flex-column">
-				<h4 class="line-text semibold primary"><?= lang('CUST_HISTORY') ?></h4>
+				<h4 class="line-text semibold primary"><?= lang('TRANSF_HISTORY') ?></h4>
 				<div class="w-100">
 					<div class="services-both max-width-1 fit-lg mx-auto fade-in">
 						<div class="row pl-2 mt-3">
-							<label class="mt-1 regular" for="initDateFilter"><?= lang('CUST_SHOW'); ?></label>
+							<label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
 							<div class="form-group col-4 px-1">
 								<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
 								<div id='error' class="help-block"></div>
