@@ -268,7 +268,7 @@ if (!function_exists('mainMenu'))
 				'BANKS' => [],
 				'SERVICES' => [
 					'CREDIT_CARDS' => [],
-					'TELEPHONY' => []
+					'DIGITEL' => []
 				]
 			],
 			'CUSTOMER_SUPPORT' => [],
