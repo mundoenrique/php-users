@@ -166,6 +166,9 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_TABLE_PAGE'] = 'Página';
+$lang['GEN_TABLE_PAGE_FIRST'] = 'Primera página';
+$lang['GEN_TABLE_PAGE_LAST'] = 'Última página';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
 $lang['GEN_PICKER_PREVTEXT'] = '<Ant';
