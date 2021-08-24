@@ -82,7 +82,7 @@ $(function () {
 
 		$('.status-text1').text(statusText);
 		$('.status-text2').text(statustextCard.toLowerCase());
-		$('.nav-config-box').removeClass('no-events');
+		$('.nav-config-box').removeClass('no-pointer');
 		$('.nav-config-box > li').removeClass('active');
 		$('#expireDate').val(expireDate);
 
@@ -114,7 +114,7 @@ $(function () {
 
 		if (services.length == 1) {
 			if (('130, 217').indexOf(services, 0) == -1) {
-				$('.nav-config-box').addClass('no-events');
+				$('.nav-config-box').addClass('no-pointer');
 			}
 
 			$('#activeServices > div').each(function(pos, element) {
@@ -173,7 +173,7 @@ $(function () {
 		if (validForm) {
 			form = $('#operation');
 			data = getDataForm(form);
-			$('.nav-config-box').addClass('no-events');
+			$('.nav-config-box').addClass('no-pointer');
 
 			if (action == 'changePin') {
 				delete dataFormAction.confirmPin;
@@ -312,6 +312,6 @@ function requestSupport(thisAction) {
 			$('#pre-loader-twins, #pre-loader-limit').addClass('hide');
 		}
 
-		$('.nav-config-box').removeClass('no-events');
+		$('.nav-config-box').removeClass('no-pointer');
 	});
 }

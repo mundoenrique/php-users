@@ -1216,7 +1216,7 @@ label {
 	pointer-events: none;
 }
 
-.no-events {
+.no-pointer {
 	pointer-events: none;
 }
 

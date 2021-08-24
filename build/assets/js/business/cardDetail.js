@@ -80,7 +80,7 @@ $(function () {
 				}
 			})
 		}
-	})
+	});
 
 	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
@@ -120,7 +120,7 @@ $(function () {
 		clearInterval(interval);
 	});
 
-})
+});
 
 function getMovements() {
 	$('#pre-loader')

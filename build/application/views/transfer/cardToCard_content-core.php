@@ -8,7 +8,7 @@
 					<div id="productdetail" class="flex inline-flex col-12 px-xl-2">
 						<div class="flex flex-column justify-center col-6 py-4">
 							<div class="product-presentation relative w-100">
-								<div class="item-network <?= $totalCards == 1 ? $brand : '', $totalCards == 1 ? 'hide' : ''; ?>"></div>
+								<div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
 								<?php if ($totalCards > 1) : ?>
 									<div id="donor" class="product-search btn">
 										<a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
@@ -16,7 +16,7 @@
 									</div>
 								<?php else : ?>
 									<small class="h6 icon-color">Cuenta origen</small>
-									<img class="card-image" src="<?= $this->asset->insertFile($productImg, $productUrl); ?>" alt="<?= $productName; ?>">
+									<img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
 								<?php endif; ?>
 							</div>
 							<?php if ($totalCards == 1 && $isVirtual) : ?>
@@ -43,7 +43,7 @@
 		<?php if (true) : ?>
 			<div class="flex optional mt-4 px-0">
 				<nav class="nav-config w-100">
-					<ul class="flex flex-wrap justify-center nav-config-box">
+					<ul class="flex flex-wrap justify-center nav-config-box  <?= $activeEvents ?>">
 						<?php if (true) : ?>
 							<li id="affiliate" class="list-inline-item nav-item-config mr-1">
 								<a class="px-1" href="javascript:">
@@ -243,7 +243,7 @@
 							<div id="cardList" class="dashboard-items flex max-width-xl-6 mx-auto flex-wrap">
 								<?php foreach ($cardsList as $cards) : ?>
 									<div class="dashboard-item mx-1 mb-1 mr-2 get-detail big-modal">
-										<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, $cards->productUrl); ?>" alt="<?= $cards->productName ?>" />
+										<img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>" alt="<?= $cards->productName ?>" />
 										<div class="item-info <?= $cards->brand; ?> p-2 h5 bg-white">
 											<a href="#" target="_blank" rel="noopener noreferrer">
 												<span class="card-icon icon-edit icon-color h4 bg-white"></span>
