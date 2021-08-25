@@ -21,5 +21,6 @@ $lang['TRANSF_AMOUNT'] = 'Amount Bs.';
 $lang['TRANSF_MAX_SIMUL'] = 'Max. 3 simultaneous';
 $lang['TRANSF_EXP_DATE'] = 'For security, please enter the expiration date of your origin account terminated of %s:';
 $lang['TRANSF_SHOW'] = 'Show';
-
+$lang['TRANSF_AVAILABLE_BALANCE'] = 'Available';
+$lang['TRANSF_TO_DEBIT_BALANCE'] = 'To debit';
 

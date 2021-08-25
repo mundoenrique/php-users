@@ -21,5 +21,7 @@ $lang['TRANSF_AMOUNT'] = 'Importe Bs.';
 $lang['TRANSF_MAX_SIMUL'] = 'Máx. 3 simultáneas';
 $lang['TRANSF_EXP_DATE'] = 'Por seguridad por favor ingresar la fecha de vencimiento de tu cuenta origen terminada de %s:';
 $lang['TRANSF_SHOW'] = 'Mostrar';
+$lang['TRANSF_AVAILABLE_BALANCE'] = 'Disponible';
+$lang['TRANSF_TO_DEBIT_BALANCE'] = 'A debitar';
 
 
