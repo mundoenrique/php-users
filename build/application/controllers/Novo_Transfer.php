@@ -40,7 +40,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$totalCards = count($cardsList);
 		$this->render->cardsList = $cardsList;
 		$this->render->totalCards = $totalCards;
-		$this->render->activeEvents = 'no-pointer';
+		$this->render->activePointer = 'no-pointer';
 		$this->render->operations = TRUE;
 
 		if ($totalCards == 1) {
@@ -48,7 +48,7 @@ class Novo_Transfer extends NOVO_Controller {
 				$this->render->$index = $render;
 			}
 
-			$this->render->activeEvents = '';
+			$this->render->activePointer = '';
 		}
 
 		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');

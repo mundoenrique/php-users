@@ -42,7 +42,7 @@
     <?php if (!$uniqueEvent): ?>
     <div class="flex optional mt-4 px-0">
       <nav class="nav-config w-100">
-        <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
+        <ul class="flex flex-wrap justify-center nav-config-box <?= $activePointer ?>">
           <?php if (in_array('110', $serviceList)): ?>
           <li id="cardLock" class="list-inline-item nav-item-config mr-1">
             <a class="px-1" href="javascript:">
