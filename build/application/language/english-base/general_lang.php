@@ -167,6 +167,9 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activate to sort the column in descendin
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Selected records';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Selected record';
+$lang['GEN_TABLE_PAGE'] = 'Page';
+$lang['GEN_TABLE_PAGE_FIRST'] = 'First page';
+$lang['GEN_TABLE_PAGE_LAST'] = 'Last page';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Close';
 $lang['GEN_PICKER_PREVTEXT'] = '<Prev';

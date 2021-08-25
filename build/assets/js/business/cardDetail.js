@@ -233,22 +233,22 @@ function displaymoves() {
 	if ($('#movementsList > li').length > 10) {
 		$('#movementsList').easyPaginate({
 			paginateElement: 'li',
-			hashPage: 'Página',
+			hashPage: lang.GEN_TABLE_PAGE,
 			elementsPerPage: 10,
 			effect: 'default',
 			slideOffset: 200,
 			firstButton: true,
-			firstButtonText: 'Primera',
-			firstHashText: 'Primera página',
+			firstButtonText: lang.GEN_TABLE_SFIRST,
+			firstHashText: lang.GEN_TABLE_PAGE_FIRST,
 			lastButton: true,
-			lastButtonText: 'Última',
-			lastHashText: 'Última página',
+			lastButtonText: lang.GEN_TABLE_SLAST,
+			lastHashText: lang.GEN_TABLE_PAGE_LAST,
 			prevButton: true,
 			prevButtonText: '<',
-			prevHashText: 'Anterior',
+			prevHashText: lang.GEN_PICKER_PREVTEXT,
 			nextButton: true,
 			nextButtonText: '>',
-			nextHashText: 'Siguiente'
+			nextHashText: lang.GEN_PICKER_NEXTTEXT
 		})
 	}
 }
