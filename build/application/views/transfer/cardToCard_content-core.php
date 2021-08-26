@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="flex col-12 mt-2 center">
-						<ul class="flex flex-auto justify-between px-2">
+						<ul class="flex flex-auto justify-between px-4 px-xl-5">
 							<li class="list-inline-item"><?= lang('TRANSF_AVAILABLE_BALANCE'); ?>
 								<span id="currentBalance" class="product-balance block">Bs.0</span>
 							</li>
