@@ -35,7 +35,7 @@
 <?php if (lang('CONF_BTN_LANG') == 'ON') : ?>
   <div class="btn-lang">
     <div class="btn-lang-img">
-			<a id="change-lang" href="<?= lang('CONF_NO_LINK') ?>">
+			<a id="change-lang" class="big-modal" href="<?= lang('CONF_NO_LINK') ?>">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>

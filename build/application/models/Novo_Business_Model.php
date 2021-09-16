@@ -405,6 +405,10 @@ class Novo_Business_Model extends NOVO_Model {
 					}
 				}
 			break;
+			case -150:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_CARDS_NO_ENABLED');
+			break;
 		}
 
 		$this->response->data->cardsList = $cardsList;
