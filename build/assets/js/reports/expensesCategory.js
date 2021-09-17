@@ -46,6 +46,7 @@ $(function () {
 	})
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
+		$('#annualMovesForm').find('input[type=radio]').last().prop('checked', true)
 		typeInquiry = '0';
 		getMovements(typeInquiry);
 	});

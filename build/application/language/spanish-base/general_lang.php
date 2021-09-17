@@ -143,6 +143,7 @@ $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, po
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
+$lang['GEN_CARDS_NO_ENABLED'] = 'No tienes tarjetas habilitadas para esta operación.';
 //DATATABLES
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
 $lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
@@ -166,6 +167,9 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de maner
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_TABLE_PAGE'] = 'Página';
+$lang['GEN_TABLE_PAGE_FIRST'] = 'Primera página';
+$lang['GEN_TABLE_PAGE_LAST'] = 'Última página';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
 $lang['GEN_PICKER_PREVTEXT'] = '<Ant';

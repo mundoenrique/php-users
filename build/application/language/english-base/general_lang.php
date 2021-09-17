@@ -143,6 +143,7 @@ $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try 
 $lang['GEN_VALIDATION_INPUT'] = 'Unauthorized content was detected in the request. %s';
 $lang['GEN_VALIDATION_LOGGED'] = 'You will be disconnected.';
 $lang['GEN_DUPLICATED_SESSION'] = 'It was not possible to validate your access credentials, please log in again, if you continue to see this message, contact the administrator.';
+$lang['GEN_CARDS_NO_ENABLED'] = 'You do not have cards enabled for this operation.';
 //DATATABLES
 $lang['GEN_TABLE_SZERORECORDS'] = 'No results found';
 $lang['GEN_TABLE_SEMPTYTABLE'] = 'No records were found for your query';
@@ -166,6 +167,9 @@ $lang['GEN_TABLE_SSORTDESCENDING'] = ': Activate to sort the column in descendin
 $lang['GEN_TABLE_ROWS_SELECTED'] = '%d Selected records';
 $lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
 $lang['GEN_TABLE_ROW_SELECTED'] = '1 Selected record';
+$lang['GEN_TABLE_PAGE'] = 'Page';
+$lang['GEN_TABLE_PAGE_FIRST'] = 'First page';
+$lang['GEN_TABLE_PAGE_LAST'] = 'Last page';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Close';
 $lang['GEN_PICKER_PREVTEXT'] = '<Prev';
