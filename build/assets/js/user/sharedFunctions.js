@@ -18,6 +18,25 @@ $(function () {
 		$(this).off('click');
 	});
 
+	$('#phoneType').change(function () {
+		var selectedOption = $(this).children('option:selected').val();
+		var disableInput = false;
+
+		if (selectedOption == '') {
+			$('#otherPhoneNum').val('');
+			disableInput = true;
+		}
+
+		validateForms(formFile);
+
+		if ($(this).valid()) {
+			$('#otherPhoneNum').siblings('.help-block').text('');
+		}
+
+
+		$('#otherPhoneNum').prop('disabled', disableInput);
+	});
+
 	$('#protection').on('click', function() {
 		modalBtn = {
 			btn1: {

@@ -85,7 +85,10 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
 							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
-							$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
+
+							if (file_exists(assetPath('images/programs/'.$this->customerUri.'/'.lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg'))) {
+								$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
+							}
 						}
 
 						$cardRecord->productImg = $produtImg;
@@ -403,6 +406,10 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardsList[] = $cardRecord;
 					}
 				}
+			break;
+			case -150:
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('GEN_CARDS_NO_ENABLED');
 			break;
 		}
 

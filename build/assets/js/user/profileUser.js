@@ -35,18 +35,6 @@ $(function () {
 		}
 	});
 
-	$('#phoneType').change(function () {
-		var selectedOption = $(this).children('option:selected').val();
-		var disableInput = false;
-
-		if (selectedOption == '') {
-			$('#otherPhoneNum').val('');
-			disableInput = true;
-		}
-
-		$('#otherPhoneNum').prop('disabled', disableInput);
-	});
-
 	$('#landLine').on('change', function () {
 		$(this).rules('add', {
 			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')

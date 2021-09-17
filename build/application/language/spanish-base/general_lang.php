@@ -144,6 +144,7 @@ $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, po
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
+$lang['GEN_CARDS_NO_ENABLED'] = 'No tienes tarjetas habilitadas para esta operación.';
 //DATATABLES
 $lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
 $lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
