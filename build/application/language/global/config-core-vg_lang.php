@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_SEND_MOVEMENTS'] = 'ON';
 $lang['CONF_HEADER_BORDER'] = 'ON';
+//MENU
+$lang['CONF_NOTIFICATIONS'] = 'ON';
 //CARDS DETAIL
 $lang['CONF_TYPE_TRANSACTION'] = 'ON';
 //LANGUAGE

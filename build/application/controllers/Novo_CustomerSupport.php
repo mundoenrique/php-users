@@ -104,6 +104,14 @@ class Novo_CustomerSupport extends NOVO_Controller {
 			$this->includeAssets->jsFiles,
 			"support/notifications"
 		);
+
+		$notifications = $this->loadModel();
+		$this->responseAttr($notifications);
+
+		foreach($notifications->data AS $index => $render) {
+			$this->render->$index = $render;
+		}
+
 		$this->render->titlePage = lang('GEN_MENU_NOTIFICATIONS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);

@@ -1,23 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_USER_IDENTIFY'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></h1>
 <div class="bg-color">
 	<div class="pt-3 pb-5 px-5 bg-content-config">
 		<div class="flex mt-3 bg-color justify-between">
 			<div class="flex mx-2">
 				<nav class="nav-config">
 					<ul class="nav-config-box">
-						<li id="notifications" class="nav-item-config active">
-							<a href="javascript:">
+						<li id="notifications" class="nav-item-config center active">
+							<a href="<?= lang('CONF_NO_LINK'); ?>">
 								<span class="icon-config icon-notification h1"></span>
 								<h5>Notificaciones</h5>
 								<div class="box up left regular">
 									<span class="icon-notification h1"></span>
-									<h4 class="h5">Notificaciones</h4>
+									<h4 class="h5">Configurar notificaciones</h4>
 								</div>
 							</a>
 						</li>
 						<li id="notificationHistory" class="nav-item-config center">
-							<a href="javascript:">
+							<a href="<?= lang('CONF_NO_LINK'); ?>">
 								<span class="icon-config icon-book h1"></span>
 								<h5>Historial de notificaciones</h5>
 								<div class="box up left regular">
@@ -30,42 +30,42 @@
 				</nav>
 			</div>
 			<div class="flex flex-auto flex-column">
-				<div id="notificationsView">
+				<div id="notificationsView"  option-service="on">
 					<div class="flex mb-1 mx-4 flex-column">
 						<h4 class="line-text mb-2 semibold primary">Configuración de notificaciones</h4>
 						<div class="px-5">
 							<p>Seleccione las notificaciones que desea recibir por correo electrónico</p>
-							<div id="pre-loader" class="mt-5 mx-auto flex justify-center">
+							<!-- <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
 								<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-							</div>
+							</div> -->
 							<div class="hide-out hide">
 								<form id="">
 									<div class="form-group flex flex-wrap max-width-2">
 										<div class="flex flex-column col-6">
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyLogin" class="custom-control-input" type="checkbox">
+												<input id="notifyLogin" class="custom-control-input" type="checkbox" <?= $login['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyLogin">Iniciar sesión</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyChangePin" class="custom-control-input" type="checkbox">
+												<input id="notifyChangePin" class="custom-control-input" type="checkbox" <?= $pinChange['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyChangePin">Cambio de PIN</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyTempLock" class="custom-control-input" type="checkbox">
+												<input id="notifyTempLock" class="custom-control-input" type="checkbox" <?= $temporaryLock['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyTempLock">Bloqueo temporal</label>
 											</div>
 										</div>
 										<div class="flex flex-column col-6">
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyChangePass" class="custom-control-input" type="checkbox">
+												<input id="notifyChangePass" class="custom-control-input" type="checkbox" <?= $passwordChange['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyChangePass">Cambio de contraseña</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyReplaceCard" class="custom-control-input" type="checkbox">
+												<input id="notifyReplaceCard" class="custom-control-input" type="checkbox" <?= $cardReplace['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyReplaceCard">Reposición de tarjetas</label>
 											</div>
 											<div class="custom-control custom-radio custom-control-inline mt-2">
-												<input id="notifyBlockCard" class="custom-control-input" type="checkbox">
+												<input id="notifyBlockCard" class="custom-control-input" type="checkbox" <?= $temporaryUnLock['active'] == '1' ? 'checked' : '' ?>>
 												<label class="custom-control-label" for="notifyBlockCard">Desbloqueo de tarjeta</label>
 											</div>
 										</div>
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 
-				<div id="notificationHistoryView">
+				<div id="notificationHistoryView" option-service="on" style="display:none">
 					<div class="flex mb-1 mx-4 flex-column">
 						<h4 class="line-text semibold primary">Historial de notificaciones</h4>
 							<div class="form-group flex flex-wrap line-text">

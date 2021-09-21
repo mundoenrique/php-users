@@ -479,4 +479,152 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_ChangePin');
 	}
+		/**
+	 * @info Método para obtener selección de notificaciones
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date September 20th, 2021
+	 */
+	public function callWs_Notifications_CustomerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO CustomerSupport Model: Notifications Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Notificaciones';
+		$this->dataAccessLog->function = 'Lista de notificaciones';
+		$this->dataAccessLog->operation = 'Consulta de notificaciones';
+
+		$this->dataRequest->idOperation = '49';
+		$this->dataRequest->className = 'com.novo.objects.MO.NotificacionMO';
+		$this->dataRequest->accodusuario = $this->session->userName;
+
+		$response = $this->sendToService('callWs_Notifications');
+		$notification = [
+			'userSignUp' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'membership' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'doubleAuth' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'transferCard' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'transferBank' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'crediCardPay' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'userRecovery' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'resetPassword' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'login' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'passwordChange' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'pinChange' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'cardReplace' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'temporaryLock' => [
+				'active' => '0',
+				'description' => ''
+			],
+			'temporaryUnLock' => [
+				'active' => '0',
+				'description' => ''
+			]
+		];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				foreach($response->bean->notificaciones AS $notifications) {
+					switch ($notifications->codTexto) {
+						case '01':
+							$notification['userSignUp']['active'] = $notifications->notificacionAct;
+							$notification['userSignUp']['description'] = $notifications->descripcion;
+						break;
+						case '04':
+							$notification['membership']['active'] = $notifications->notificacionAct;
+							$notification['membership']['description'] = $notifications->descripcion;
+						break;
+						case '05':
+							$notification['doubleAuth']['active'] = $notifications->notificacionAct;
+							$notification['doubleAuth']['description'] = $notifications->descripcion;
+						break;
+						case '06':
+							$notification['transferCard']['active'] = $notifications->notificacionAct;
+							$notification['transferCard']['description'] = $notifications->descripcion;
+						break;
+						case '07':
+							$notification['transferBank']['active'] = $notifications->notificacionAct;
+							$notification['transferBank']['description'] = $notifications->descripcion;
+						break;
+						case '08':
+							$notification['crediCardPay']['active'] = $notifications->notificacionAct;
+							$notification['crediCardPay']['description'] = $notifications->descripcion;
+						break;
+						case '09':
+							$notification['userRecovery']['active'] = $notifications->notificacionAct;
+							$notification['userRecovery']['description'] = $notifications->descripcion;
+						break;
+						case '10':
+							$notification['resetPassword']['active'] = $notifications->notificacionAct;
+							$notification['resetPassword']['description'] = $notifications->descripcion;
+						break;
+						case '11':
+							$notification['login']['active'] = $notifications->notificacionAct;
+							$notification['login']['description'] = $notifications->descripcion;
+						break;
+						case '12':
+							$notification['passwordChange']['active'] = $notifications->notificacionAct;
+							$notification['passwordChange']['description'] = $notifications->descripcion;
+						break;
+						case '13':
+							$notification['pinChange']['active'] = $notifications->notificacionAct;
+							$notification['pinChange']['description'] = $notifications->descripcion;
+						break;
+						case '14':
+							$notification['cardReplace']['active'] = $notifications->notificacionAct;
+							$notification['cardReplace']['description'] = $notifications->descripcion;
+						break;
+						case '15':
+							$notification['temporaryLock']['active'] = $notifications->notificacionAct;
+							$notification['temporaryLock']['description'] = $notifications->descripcion;
+						break;
+						case '16':
+							$notification['temporaryUnLock']['active'] = $notifications->notificacionAct;
+							$notification['temporaryUnLock']['description'] = $notifications->descripcion;
+						break;
+					}
+				}
+			break;
+		}
+
+		$this->response->data = $notification;
+
+		return $this->responseToTheView('callWs_Notifications');
+	}
 }
