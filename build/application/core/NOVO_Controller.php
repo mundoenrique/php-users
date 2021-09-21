@@ -310,7 +310,7 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		$userMenu->mainMenu = $mainMenu;
-		$userMenu->currentClass = $this->router->fetch_class();
+		$userMenu->currentMethod = $this->router->fetch_method();
 		$this->render->settingsMenu = $userMenu;
 		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword') != NULL)
 			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
