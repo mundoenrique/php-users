@@ -505,6 +505,12 @@ $config = [
 			'rules' => 'trim|numeric|required'
 		]
 	],
+	'notifications' => [
+		[
+			'field' => 'screenSize',
+			'rules' => 'trim|numeric'
+		]
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',

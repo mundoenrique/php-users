@@ -179,3 +179,17 @@ $lang['CUST_UNLOCKED'] = 'Desbloqueada';
 $lang['CUST_LOCK'] = 'Bloqueo';
 $lang['CUST_UNLOCK'] = 'Desbloqueo';
 $lang['CUST_LOCK_PERMANENT'] = 'bloqueada de forma permanente.';
+$lang['CUST_LOGIN'] = 'Inicio de sesión';
+$lang['CUST_PASS_CHANGE'] = 'Cambio de contraseña';
+$lang['CUST_PIN_CHANGE'] = 'Cambio de PIN';
+$lang['CUST_CARD_REPLACE'] = 'Reposición de tarjeta';
+$lang['CUST_TEMP_LOCK'] = 'Bloqueo temporal';
+$lang['CUST_TEMP_UNLOCK'] = 'Desbloqueo de tarjeta';
+$lang['CUST_NOTIFY_OPTIONS'] = [
+	'11' => $lang['CUST_LOGIN'],
+	'12' => $lang['CUST_PASS_CHANGE'],
+	'13' => $lang['CUST_PIN_CHANGE'],
+	'14' => $lang['CUST_CARD_REPLACE'],
+	'15' => $lang['CUST_TEMP_LOCK'],
+	'16' => $lang['CUST_TEMP_UNLOCK'],
+];

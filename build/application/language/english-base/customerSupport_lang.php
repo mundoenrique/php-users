@@ -179,3 +179,17 @@ $lang['CUST_UNLOCKED'] = 'Unlocked';
 $lang['CUST_LOCK'] = 'Lock';
 $lang['CUST_UNLOCK'] = 'Unlock';
 $lang['CUST_LOCK_PERMANENT'] = 'locked permanently.';
+$lang['CUST_LOGIN'] = 'Login';
+$lang['CUST_PASS_CHANGE'] = 'Password change';
+$lang['CUST_PIN_CHANGE'] = 'PIN change';
+$lang['CUST_CARD_REPLACE'] = 'Card replacement';
+$lang['CUST_TEMP_LOCK'] = 'Temporary lock';
+$lang['CUST_TEMP_UNLOCK'] = 'Card unlocking';
+$lang['CUST_NOTIFY_OPTIONS'] = [
+	'11' => $lang['CUST_LOGIN'],
+	'12' => $lang['CUST_PASS_CHANGE'],
+	'13' => $lang['CUST_PIN_CHANGE'],
+	'14' => $lang['CUST_CARD_REPLACE'],
+	'15' => $lang['CUST_TEMP_LOCK'],
+	'16' => $lang['CUST_TEMP_UNLOCK'],
+];
