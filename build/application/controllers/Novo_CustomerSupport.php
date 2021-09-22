@@ -102,6 +102,9 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$view = 'notifications';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"support/notifications"
 		);
 

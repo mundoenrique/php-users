@@ -479,7 +479,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_ChangePin');
 	}
-		/**
+	/**
 	 * @info Método para obtener selección de notificaciones
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date September 20th, 2021
@@ -626,5 +626,67 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->response->data = $notification;
 
 		return $this->responseToTheView('callWs_Notifications');
+	}
+	/**
+	 * @info Método para actualizar selección de notificaciones
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date September 22th, 2021
+	 */
+	public function callWs_NotificationsUpdate_customerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO CustomerSupport Model: NotificationsUpdate Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Notificaciones';
+		$this->dataAccessLog->function = 'Lista de notificaciones';
+		$this->dataAccessLog->operation = 'Actualización de notificaciones';
+
+		$this->dataRequest->idOperation = '50';
+		$this->dataRequest->className = 'com.novo.objects.MO.NotificacionMO';
+		$this->dataRequest->accodusuario = $this->session->userName;
+		$this->dataRequest->notificaciones = [
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 11,
+				'notificacionAct' => $dataRequest->login
+			],
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 12,
+				'notificacionAct' => $dataRequest->passwordChange
+			],
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 13,
+				'notificacionAct' => $dataRequest->pinChange
+			],
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 14,
+				'notificacionAct' => $dataRequest->cardReplace
+			],
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 15,
+				'notificacionAct' => $dataRequest->temporaryLock
+			],
+			[
+				'tipoMensaje' => 4,
+				'codTexto' => 16,
+				'notificacionAct' => $dataRequest->temporaryUnLock
+			]
+		];
+
+		$response = $this->sendToService('callWs_NotificationsUpdate');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->title = lang('GEN_MENU_NOTIFICATIONS');
+				$this->response->msg = lang('CUST_UPT_NOTIFICATIONS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			break;
+		}
+
+		return $this->responseToTheView('callWs_NotificationsUpdate');
 	}
 }

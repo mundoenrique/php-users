@@ -26,6 +26,31 @@ $(function () {
 			$(this).attr('render', 'off');
 		}
 	});
+
+	$('#btn-notifications').on('click', function(event) {
+		event.preventDefault();
+
+		$('input[type="checkbox"]').each(function(index, element) {
+			$(element).is(':checked') ? $(this).val('1') : $(this).val('0');
+		});
+
+		form = $('#form-notifications');
+		btnText = $(this).text().trim();
+		validateForms(form);
+
+		if (form.valid()) {
+			$(this).html(loader);
+			who = 'customerSupport';
+			where = 'notificationsUpdate';
+			data = getDataForm(form);
+			insertFormInput(true);
+
+			callNovoCore(who, where, data, function(response) {
+				$('#btn-notifications').html(btnText);
+				insertFormInput(false);
+			});
+		}
+	});
 });
 
 function notifications() {
@@ -36,7 +61,6 @@ function notifications() {
 	data = {};
 
 	callNovoCore(who, where, data, function (response) {
-
 		switch (response.code) {
 			case 0:
 				$('input[type="checkbox"]').prop('checked', false);

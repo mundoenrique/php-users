@@ -202,6 +202,7 @@ $lang['CONF_REGEX_DATE_DMY'] = '^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0
 $lang['CONF_REGEX_DATE_MY'] = '^(0?[1-9]|1[012])\/[0-9]{4}$';
 $lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';
 $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
+$lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
 //FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
 

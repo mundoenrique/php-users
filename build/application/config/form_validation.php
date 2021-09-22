@@ -511,6 +511,32 @@ $config = [
 			'rules' => 'trim|numeric'
 		]
 	],
+	'notificationsUpdate' => [
+		[
+			'field' => 'login',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'pinChange',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'temporaryLock',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'passwordChange',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'cardReplace',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'temporaryUnLock',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',

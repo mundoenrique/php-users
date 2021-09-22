@@ -33,6 +33,7 @@ function validateForms(form) {
 	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
 	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
+	var checkedOption = new RegExp(lang.CONF_REGEX_CHECKED);
 	/*var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -140,6 +141,7 @@ function validateForms(form) {
 			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
 			"transType":	{ pattern: transType },
+			"notify": { pattern: checkedOption },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -292,6 +294,7 @@ function validateForms(form) {
 				extension: lang.VALIDATE_FILE_TYPE,
 				filesize: lang.VALIDATE_FILE_SIZE
 			},
+			"notify": lang.VALIDATE_NOTIFICATIONS,
 		},
 		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());

@@ -63,3 +63,4 @@ $lang['VALIDATE_PROTECTION'] = 'You must read and accept the protection of perso
 $lang['VALIDATE_CONTRACT'] = 'You must read and accept the electronic money account agreement.';
 $lang['VALIDATE_SHORT_PHRASE'] = 'Min 4 max 25 (letters, numbers, space ().).';
 $lang['VALIDATE_TYPE_DOCUMENT'] = 'Please select a valid document type.';
+$lang['VALIDATE_NOTIFICATIONS'] = 'Html manipulation detected.';

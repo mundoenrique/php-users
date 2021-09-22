@@ -193,3 +193,4 @@ $lang['CUST_NOTIFY_OPTIONS'] = [
 	'15' => $lang['CUST_TEMP_LOCK'],
 	'16' => $lang['CUST_TEMP_UNLOCK'],
 ];
+$lang['CUST_UPT_NOTIFICATIONS'] = 'Notificaciones actualizadas de forma exitosa.';

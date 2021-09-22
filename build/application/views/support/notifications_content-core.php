@@ -40,42 +40,43 @@
             </div>
             <div class="px-5 hide-out hide">
               <p>Seleccione las notificaciones que desea recibir por correo electrónico</p>
-              <form id="">
+              <form id="form-notifications">
                 <div class="form-group flex flex-wrap max-width-2">
                   <div class="flex flex-column col-6">
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="login" class="custom-control-input" type="checkbox" <?= $login['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="login" name="notify" class="custom-control-input" type="checkbox" <?= $login['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="login"><?= lang('CUST_LOGIN'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="pinChange" class="custom-control-input" type="checkbox" <?= $pinChange['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="pinChange" name="notify" class="custom-control-input" type="checkbox" <?= $pinChange['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="pinChange"><?= lang('CUST_PIN_CHANGE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="temporaryLock" class="custom-control-input" type="checkbox" <?= $temporaryLock['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="temporaryLock" name="notify" class="custom-control-input" type="checkbox" <?= $temporaryLock['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="temporaryLock"><?= lang('CUST_TEMP_LOCK'); ?></label>
                     </div>
                   </div>
                   <div class="flex flex-column col-6">
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="passwordChange" class="custom-control-input" type="checkbox"
+                      <input id="passwordChange" name="notify" class="custom-control-input" type="checkbox"
                         <?= $passwordChange['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="passwordChange"><?= lang('CUST_PASS_CHANGE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="cardReplace" class="custom-control-input" type="checkbox" <?= $cardReplace['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="cardReplace" name="notify" class="custom-control-input" type="checkbox" <?= $cardReplace['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="cardReplace"><?= lang('CUST_CARD_REPLACE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="temporaryUnLock" class="custom-control-input" type="checkbox"
+                      <input id="temporaryUnLock" name="notify" class="custom-control-input" type="checkbox"
                         <?= $temporaryUnLock['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="temporaryUnLock"><?= lang('CUST_TEMP_UNLOCK'); ?></label>
                     </div>
                   </div>
+									<div class="help-block"></div>
                 </div>
                 <div class="flex items-center justify-end pt-3">
                   <a class="btn btn-link btn-small big-modal" href="">Cancelar</a>
-                  <button id="btn-upt-notifications" class="btn btn-small btn-primary btn-loading">Continuar</button>
+                  <button id="btn-notifications" class="btn btn-small btn-primary btn-loading">Continuar</button>
                 </div>
               </form>
             </div>
