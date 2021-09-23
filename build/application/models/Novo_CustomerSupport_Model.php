@@ -689,4 +689,101 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		return $this->responseToTheView('callWs_NotificationsUpdate');
 	}
+	/**
+	 * @info Método para obtener el historial de notoficaciones
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date September 22th, 2021
+	 */
+	public function callWs_NotificationHistory_customerSupport($dataRequest)
+	{
+		log_message('INFO', 'NOVO CustomerSupport Model: NotificationHistory Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Notificaciones';
+		$this->dataAccessLog->function = 'Historial de notificaciones';
+		$this->dataAccessLog->operation = 'Obtener historial';
+
+		$this->dataRequest->idOperation = '51';
+		$this->dataRequest->className = 'com.novo.objects.TOs.NotificacionTO';
+		$this->dataRequest->accodusuario = $this->session->userName;
+		$this->dataRequest->filtroFechaInicio = $dataRequest->initialDate . ' 12:00:00 AM';
+		$this->dataRequest->filtroFechaFin = $dataRequest->finalDate. ' 11:59:59 PM';
+		$this->dataRequest->codTexto = $dataRequest->notificationType;
+
+		$response = $this->sendToService('callWs_NotificationHistory');
+		$notification = [];
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+
+				foreach($response->bean->notificaciones AS $item => $notifications) {
+					$date = new DateTime($notifications->fechaNotificacion);
+					$date = $date->format('d/m/Y g:i:s a');
+
+					switch ($notifications->codTexto) {
+						case '01':
+							$notification[$item]['description'] = lang('CUST_USER_SIGNUP');
+							$notification[$item]['date'] = $date;
+						break;
+						case '04':
+							$notification[$item]['description'] = lang('CUST_USER_MEMBERSHIP');
+							$notification[$item]['date'] = $date;
+						break;
+						case '05':
+							$notification[$item]['description'] = lang('CUST_DOUBLE_AUTH');
+							$notification[$item]['date'] = $date;
+						break;
+						case '06':
+							$notification[$item]['description'] = lang('CUST_TRANSFER_CARD');
+							$notification[$item]['date'] = $date;
+						break;
+						case '07':
+							$notification[$item]['description'] = lang('CUST_TRANSFER_BANK');
+							$notification[$item]['date'] = $date;
+						break;
+						case '08':
+							$notification[$item]['description'] = lang('CUST_CARD_PAY');
+							$notification[$item]['date'] = $date;
+						break;
+						case '09':
+							$notification[$item]['description'] = lang('CUST_USER_RECOVERY');
+							$notification[$item]['date'] = $date;
+						break;
+						case '10':
+							$notification[$item]['description'] = lang('CUST_PASS_RECOVERY');
+							$notification[$item]['date'] = $date;
+						break;
+						case '11':
+							$notification[$item]['description'] = lang('CUST_LOGIN');
+							$notification[$item]['date'] = $date;
+						break;
+						case '12':
+							$notification[$item]['description'] = lang('CUST_PASS_CHANGE');
+							$notification[$item]['date'] = $date;
+						break;
+						case '13':
+							$notification[$item]['description'] = lang('CUST_PIN_CHANGE');
+							$notification[$item]['date'] = $date;
+						break;
+						case '14':
+							$notification[$item]['description'] = lang('CUST_CARD_REPLACE');
+							$notification[$item]['date'] = $date;
+						break;
+						case '15':
+							$notification[$item]['description'] = lang('CUST_TEMP_LOCK');
+							$notification[$item]['date'] = $date;
+						break;
+						case '16':
+							$notification[$item]['description'] = lang('CUST_TEMP_UNLOCK');
+							$notification[$item]['date'] = $date;
+						break;
+					}
+				}
+			break;
+		}
+
+		$this->response->data = $notification;
+
+		return $this->responseToTheView('callWs_NotificationHistory');
+	}
 }

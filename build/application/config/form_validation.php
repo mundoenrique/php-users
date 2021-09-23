@@ -537,6 +537,20 @@ $config = [
 			'rules' => 'trim|regex_match[/^(0|1)/]|required'
 		],
 	],
+	'notificationHistory' => [
+		[
+			'field' => 'initialDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'notificationType',
+			'rules' => 'trim|numeric|required'
+		],
+	],
 	'keepSession' => [
 		[
 			'field' => 'signout',

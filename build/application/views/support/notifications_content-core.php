@@ -9,26 +9,26 @@
 						<li id="notifications" class="nav-item-config center active" render='off'>
 							<a href="<?= lang('CONF_NO_LINK'); ?>" class="not-pointer">
 								<span class="icon-config icon-notification h1"></span>
-                <h5>Configurar notificaciones</h5>
-                <div class="box up left regular">
-                  <span class="icon-notification h1"></span>
-                  <h4 class="h5">Configurar notificaciones</h4>
-                </div>
-              </a>
-            </li>
-            <li id="notificationHistory" class="nav-item-config center" render='on'>
-              <a href="<?= lang('CONF_NO_LINK'); ?>">
-                <span class="icon-config icon-book h1"></span>
-                <h5>Historial de notificaciones</h5>
-                <div class="box up left regular">
-                  <span class="icon-book h1"></span>
-                  <h4 class="h5">Historial de notificaciones</h4>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+								<h5>Configurar notificaciones</h5>
+								<div class="box up left regular">
+									<span class="icon-notification h1"></span>
+									<h4 class="h5">Configurar notificaciones</h4>
+								</div>
+							</a>
+						</li>
+						<li id="notificationHistory" class="nav-item-config center" render='on'>
+							<a href="<?= lang('CONF_NO_LINK'); ?>">
+								<span class="icon-config icon-book h1"></span>
+								<h5>Historial de notificaciones</h5>
+								<div class="box up left regular">
+									<span class="icon-book h1"></span>
+									<h4 class="h5">Historial de notificaciones</h4>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
       <div class="flex flex-auto flex-column">
         <div id="notificationsView" option-service="on">
           <div class="flex mb-1 mx-4 flex-column">
@@ -48,11 +48,13 @@
                       <label class="custom-control-label" for="login"><?= lang('CUST_LOGIN'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="pinChange" name="notify" class="custom-control-input" type="checkbox" <?= $pinChange['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="pinChange" name="notify" class="custom-control-input" type="checkbox"
+                        <?= $pinChange['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="pinChange"><?= lang('CUST_PIN_CHANGE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="temporaryLock" name="notify" class="custom-control-input" type="checkbox" <?= $temporaryLock['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="temporaryLock" name="notify" class="custom-control-input" type="checkbox"
+                        <?= $temporaryLock['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="temporaryLock"><?= lang('CUST_TEMP_LOCK'); ?></label>
                     </div>
                   </div>
@@ -63,7 +65,8 @@
                       <label class="custom-control-label" for="passwordChange"><?= lang('CUST_PASS_CHANGE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
-                      <input id="cardReplace" name="notify" class="custom-control-input" type="checkbox" <?= $cardReplace['active'] == '1' ? 'checked' : '' ?>>
+                      <input id="cardReplace" name="notify" class="custom-control-input" type="checkbox"
+                        <?= $cardReplace['active'] == '1' ? 'checked' : '' ?>>
                       <label class="custom-control-label" for="cardReplace"><?= lang('CUST_CARD_REPLACE'); ?></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline mt-2">
@@ -72,7 +75,7 @@
                       <label class="custom-control-label" for="temporaryUnLock"><?= lang('CUST_TEMP_UNLOCK'); ?></label>
                     </div>
                   </div>
-									<div class="help-block"></div>
+                  <div class="help-block"></div>
                 </div>
                 <div class="flex items-center justify-end pt-3">
                   <a class="btn btn-link btn-small big-modal" href="">Cancelar</a>
@@ -97,14 +100,14 @@
                   <nav class="navbar px-0">
                     <div id="period-form" class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
                       <label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
-                      <input id="datepicker_start" name="datepicker_start" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA"
-                        readonly="" autocomplete="off">
+                      <input id="datepicker_start" name="datepicker_start" class="form-control datepicker" type="text"
+                        placeholder="DD/MM/AAA" readonly autocomplete="off">
                       <div class="help-block"></div>
                     </div>
                     <div id="period-form" class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
                       <label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
-                      <input id="datepicker_end" name="datepicker_end" class="form-control hasDatepicker" type="text" placeholder="DD/MM/AAA"
-                        readonly="" autocomplete="off">
+                      <input id="datepicker_end" name="datepicker_end" class="form-control datepicker" type="text"
+                        placeholder="DD/MM/AAA" readonly autocomplete="off">
                       <div class="help-block "></div>
                     </div>
                     <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
@@ -126,53 +129,13 @@
               <div>
                 <p>Notificaciones: Todo de: <span>01/05/2020 12:00 AM</span> Hasta: <span>11/05/2020 11:59:59 PM</span></p>
                 <div class="mt-3">
-                  <ul class="feed fade-in mt-3 pl-0">
+                  <ul id="notifications-history" class="feed fade-in mt-3 pl-0">
                     <li class="feed-item flex py-2 items-center thead">
                       <div class="flex px-2 flex-column col-6 center">
                         <span class="h5 semibold secondary">Descripción</span>
                       </div>
                       <div class="flex px-2 flex-column col-6 center">
                         <span class="h5 semibold secondary">Fecha</span>
-                      </div>
-                    </li>
-                    <li class="feed-item flex items-center">
-                      <div class="flex px-2 py-2 flex-column col-6 feed-date">
-                        <span class="h5">Login</span>
-                      </div>
-                      <div class="flex px-2 py-2 flex-column col-6">
-                        <span class="h5">11/05/2020 <span>9:08:36 pm</span></span>
-                      </div>
-                    </li>
-                    <li class="feed-item flex items-center">
-                      <div class="flex px-2 py-2 flex-column col-6 feed-date">
-                        <span class="h5">Login</span>
-                      </div>
-                      <div class="flex px-2 py-2 flex-column col-6">
-                        <span class="h5">11/05/2020 <span>9:08:36 pm</span></span>
-                      </div>
-                    </li>
-                    <li class="feed-item flex items-center">
-                      <div class="flex px-2 py-2 flex-column col-6 feed-date">
-                        <span class="h5">Login</span>
-                      </div>
-                      <div class="flex px-2 py-2 flex-column col-6">
-                        <span class="h5">11/05/2020 <span>9:08:36 pm</span></span>
-                      </div>
-                    </li>
-                    <li class="feed-item flex items-center">
-                      <div class="flex px-2 py-2 flex-column col-6 feed-date">
-                        <span class="h5">Login</span>
-                      </div>
-                      <div class="flex px-2 py-2 flex-column col-6">
-                        <span class="h5">11/05/2020 <span>9:08:36 pm</span></span>
-                      </div>
-                    </li>
-                    <li class="feed-item flex items-center">
-                      <div class="flex px-2 py-2 flex-column col-6 feed-date">
-                        <span class="h5">Login</span>
-                      </div>
-                      <div class="flex px-2 py-2 flex-column col-6">
-                        <span class="h5">11/05/2020 <span>9:08:36 pm</span></span>
                       </div>
                     </li>
                   </ul>

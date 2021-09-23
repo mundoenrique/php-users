@@ -19,7 +19,7 @@ $(function () {
 					notifications();
 				break;
 				case 'notificationHistory':
-					notificationHistory();
+					notificationHistory(false);
 				break;
 			}
 
@@ -51,6 +51,10 @@ $(function () {
 			});
 		}
 	});
+
+	$('.datepicker').datepicker({
+
+	});
 });
 
 function notifications() {
@@ -78,16 +82,45 @@ function notifications() {
 	});
 }
 
-function notificationHistory() {
+function notificationHistory(dataHistory) {
 	$('#loader-history').removeClass('hide');
 	$('.history-out').addClass('hide');
+	$('#notifications-history li').not('.thead').remove();
+	if (!dataHistory) {
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+		var dataHistory = {
+			initialDate: '01/' + (month < 10 ? '0' : '') + month + '/' + year,
+			finalDate: (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year,
+			notificationType: '00'
+		}
+	}
 	who = 'customerSupport';
-	where = 'notifications';
-	data = {};
+	where = 'notificationHistory';
+	data = dataHistory;
 
-	/* callNovoCore(who, where, data, function (response) {
+	callNovoCore(who, where, data, function (response) {
+		switch (response.code) {
+			case 0:
+				console.log(response.data);
+				var notification;
+				$.each(response.data, function(index, notifications) {
+					notification = '<li class="feed-item flex items-center">';
+					notification+= 		'<div class="flex px-2 py-2 flex-column col-6 feed-date">';
+					notification+= 			'<span class="h5">' + notifications.description + '</span>';
+					notification+=	 	'</div>';
+					notification+=	 	'<div class="flex px-2 py-2 flex-column col-6">';
+					notification+=		 	'<span class="h5">' + notifications.date + '</span></span>';
+					notification+=	 	'</div>';
+					notification+= '</li>';
+					$('#notifications-history').append(notification)
+				});
+			break;
+		}
 
 		$('#loader-history').addClass('hide');
 		$('.history-out').removeClass('hide');
-	}); */
+	});
 }
