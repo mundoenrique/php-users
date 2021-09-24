@@ -38,8 +38,8 @@ class Novo_Reports extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
-		$yearTenant = (int) lang('GEN_PICKER_MINDATE');
-		$years = date('Y') - 2;
+		$yearTenant = (int) lang('CONF_TENANT_PUBLICATION');
+		$years = date('Y') - 4;
 		$maxYear = date('Y');
 
 		if (($yearTenant - $years) >= 0) {

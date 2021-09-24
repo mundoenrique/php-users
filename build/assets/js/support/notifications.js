@@ -33,7 +33,26 @@ $(function () {
 	});
 
 	$('.datepicker').datepicker({
+		onSelect: function (selectedDate) {
+			$(this)
+				.focus()
+				.blur();
+			var dateSelected = selectedDate.split('/');
+			dateSelected = dateSelected[1] + '/' + dateSelected[0] + '/' + dateSelected[2];
+			dateSelected = new Date(dateSelected);
+			var inputDate = $(this).attr('id');
 
+			if (inputDate == 'initDate') {
+				$('#finalDate').datepicker('option', 'minDate', dateSelected);
+				var maxTime = new Date(dateSelected.getFullYear(), dateSelected.getMonth() + 3, dateSelected.getDate() - 1);
+
+				if (currentDate > maxTime) {
+					$('#finalDate').datepicker('option', 'maxDate', maxTime);
+				} else {
+					$('#finalDate').datepicker('option', 'maxDate', currentDate);
+				}
+			}
+		}
 	});
 
 	$('#btn-notifications').on('click', function(e) {

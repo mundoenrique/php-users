@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONF_TENANT_PUBLICATION'] = 2010;
 $lang['CONF_MAINTENANCE'] = 'OFF';
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
@@ -16,6 +17,8 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 ];
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
+//DATEPICKER
+$lang['CONF_PICKER_MINDATE'] = '-4Y';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -129,7 +132,6 @@ $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
 $lang['CONF_TYPE_TRANSACTION'] = 'OFF';
-$lang['CONF_PICKER_MINDATE'] = '-48m';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
