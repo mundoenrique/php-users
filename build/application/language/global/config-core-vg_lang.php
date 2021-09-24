@@ -13,3 +13,6 @@ $lang['CONF_CONTACTS'] = [
 	'USA' => '+1 305 372 3585',
 	'Colombia' => '+57 1 419 3358',
 ];
+//SIGNUP-PROFILE
+$lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
+$lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
