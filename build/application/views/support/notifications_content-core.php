@@ -88,61 +88,59 @@
         <div id="notificationHistoryView" option-service="on" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
             <h4 class="line-text semibold primary">Historial de notificaciones</h4>
+            <div class="form-group flex flex-wrap line-text">
+              <form id="form-noti-history">
+                <nav class="navbar px-0">
+                  <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
+                    <label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
+                    <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
+                      autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+                  <div class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
+                    <label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
+                    <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
+                      autocomplete="off">
+                    <div class="help-block "></div>
+                  </div>
+                  <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
+                    <label class="regular">Tipo de notificación</label>
+                    <select id="notificationType" name="notificationType" class=" custom-select flex form-control ml-1">
+                      <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
+                      <?php foreach(lang('CUST_NOTIFY_OPTIONS') AS $key => $value): ?>
+                      <option value="<?= $key ?>"><?= $value ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                    <div class="help-block"></div>
+                    <button id="btn-noti-history" class="btn btn-small btn-rounded-right btn-primary">
+                      <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
+                    </button>
+                  </div>
+                </nav>
+              </form>
+            </div>
             <div id="loader-history" class="hide">
               <div class="mt-5 mx-auto flex justify-center">
                 <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
               </div>
             </div>
             <div class="history-out hide">
-              <div class="form-group flex flex-wrap line-text">
-                <form id="">
-                  <nav class="navbar px-0">
-                    <div id="period-form" class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                      <label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
-                      <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA"
-                        readonly autocomplete="off">
-                      <div class="help-block"></div>
+              <p>
+                Notificaciones (<span id="noti-type"><?= lang('CUST_SELECT_ALL') ?></span>):
+                desde <span id="noti-from"></span> hasta <span id="noti-to"></span>
+              </p>
+              <div class="mt-3">
+                <ul id="notifications-history" class="feed fade-in mt-3 pl-0">
+                  <li class="feed-item flex py-2 items-center thead">
+                    <div class="flex px-2 flex-column col-6 center">
+                      <span class="h5 semibold secondary">Descripción</span>
                     </div>
-                    <div id="period-form" class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                      <label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
-                      <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
-                        autocomplete="off">
-                      <div class="help-block "></div>
+                    <div class="flex px-2 flex-column col-6 center">
+                      <span class="h5 semibold secondary">Fecha</span>
                     </div>
-                    <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
-                      <label class="regular">Tipo de notificación</label>
-                      <select id="notification-types" name="notification-types" class=" custom-select flex form-control ml-1">
-                        <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                        <?php foreach(lang('CUST_NOTIFY_OPTIONS') AS $key => $value): ?>
-                        <option value="<?= $key ?>"><?= $value ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                      <div class="help-block"></div>
-                      <button id="buscar" class="btn btn-small btn-rounded-right btn-primary">
-                        <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
-                      </button>
-                    </div>
-                  </nav>
-                </form>
-              </div>
-              <div>
-                <p>
-									Notificaciones (<span id="noti-type"><?= lang('CUST_SELECT_ALL') ?></span>):
-										desde <span id="noti-from"></span> hasta <span id="noti-to"></span>
-								</p>
-                <div class="mt-3">
-                  <ul id="notifications-history" class="feed fade-in mt-3 pl-0">
-                    <li class="feed-item flex py-2 items-center thead">
-                      <div class="flex px-2 flex-column col-6 center">
-                        <span class="h5 semibold secondary">Descripción</span>
-                      </div>
-                      <div class="flex px-2 flex-column col-6 center">
-                        <span class="h5 semibold secondary">Fecha</span>
-                      </div>
-                    </li>
-                    <span id="item-history"></span>
-                  </ul>
-                </div>
+                  </li>
+                  <span id="item-history"></span>
+                </ul>
               </div>
             </div>
             <div id="no-notifications" class="hide">

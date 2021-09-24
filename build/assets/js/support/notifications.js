@@ -32,8 +32,12 @@ $(function () {
 		}
 	});
 
-	$('#btn-notifications').on('click', function(event) {
-		event.preventDefault();
+	$('.datepicker').datepicker({
+
+	});
+
+	$('#btn-notifications').on('click', function(e) {
+		e.preventDefault();
 
 		$('input[type="checkbox"]').each(function(index, element) {
 			$(element).is(':checked') ? $(this).val('1') : $(this).val('0');
@@ -57,8 +61,19 @@ $(function () {
 		}
 	});
 
-	$('.datepicker').datepicker({
+	$('#btn-noti-history').on('click', function(e) {
+		e.preventDefault();
+		form = $('#form-noti-history');
+		btnText = $(this).html();
+		validateForms(form);
 
+		if (form.valid()) {
+			$(this).html(loader);
+			var dataHistory = getDataForm(form);
+			dataHistory.notificationText = $('#notificationType option:selected').text()
+			insertFormInput(true);
+			notificationHistory(dataHistory);
+		}
 	});
 });
 
@@ -91,9 +106,10 @@ function notifications() {
 }
 
 function notificationHistory(dataHistory) {
+	$('.easyPaginateNav').remove();
 	$('#loader-history').removeClass('hide');
 	$('.history-out').addClass('hide');
-	$('.no-notifications').addClass('hide');
+	$('#no-notifications').addClass('hide');
 	$('#notifications-history li').not('.thead').remove();
 
 	if (!dataHistory) {
@@ -156,6 +172,9 @@ function notificationHistory(dataHistory) {
 			break;
 		}
 
+		insertFormInput(false);
+		$('#form-noti-history')[0].reset();
+		$('#btn-noti-history').html(btnText)
 		$('#loader-history').addClass('hide');
 		response.data.length == 0 ? $('#no-notifications').removeClass('hide') : $('.history-out').removeClass('hide');
 	});
