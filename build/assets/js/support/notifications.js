@@ -172,11 +172,12 @@ function notificationHistory(dataHistory) {
 			break;
 		}
 
-		insertFormInput(false);
-		$('#form-noti-history')[0].reset();
 		if (dataHistory) {
 			$('#btn-noti-history').html(btnText);
 		}
+
+		$('#form-noti-history')[0].reset();
+		insertFormInput(false);
 		$('#loader-history').addClass('hide');
 		response.data.length == 0 ? $('#no-notifications').removeClass('hide') : $('.history-out').removeClass('hide');
 	});
