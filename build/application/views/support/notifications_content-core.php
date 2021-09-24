@@ -138,6 +138,7 @@
                         <span class="h5 semibold secondary">Fecha</span>
                       </div>
                     </li>
+										<span id="item-history"></span>
                   </ul>
 
                   <div id="" class="visible">

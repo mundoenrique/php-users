@@ -86,6 +86,7 @@ function notificationHistory(dataHistory) {
 	$('#loader-history').removeClass('hide');
 	$('.history-out').addClass('hide');
 	$('#notifications-history li').not('.thead').remove();
+
 	if (!dataHistory) {
 		var date = new Date();
 		var day = date.getDate();
@@ -97,6 +98,7 @@ function notificationHistory(dataHistory) {
 			notificationType: '00'
 		}
 	}
+
 	who = 'customerSupport';
 	where = 'notificationHistory';
 	data = dataHistory;
@@ -104,7 +106,6 @@ function notificationHistory(dataHistory) {
 	callNovoCore(who, where, data, function (response) {
 		switch (response.code) {
 			case 0:
-				console.log(response.data);
 				var notification;
 				$.each(response.data, function(index, notifications) {
 					notification = '<li class="feed-item flex items-center">';
@@ -115,8 +116,30 @@ function notificationHistory(dataHistory) {
 					notification+=		 	'<span class="h5">' + notifications.date + '</span></span>';
 					notification+=	 	'</div>';
 					notification+= '</li>';
-					$('#notifications-history').append(notification)
+					$('#item-history').append(notification)
 				});
+
+				if ($('#item-history > li').length > 5) {
+					$('#item-history').easyPaginate({
+						paginateElement: 'li',
+						hashPage: lang.GEN_TABLE_PAGE,
+						elementsPerPage: 5,
+						effect: 'default',
+						slideOffset: 200,
+						firstButton: true,
+						firstButtonText: lang.GEN_TABLE_SFIRST,
+						firstHashText: lang.GEN_TABLE_PAGE_FIRST,
+						lastButton: true,
+						lastButtonText: lang.GEN_TABLE_SLAST,
+						lastHashText: lang.GEN_TABLE_PAGE_LAST,
+						prevButton: true,
+						prevButtonText: '<',
+						prevHashText: lang.GEN_PICKER_PREVTEXT,
+						nextButton: true,
+						nextButtonText: '>',
+						nextHashText: lang.GEN_PICKER_NEXTTEXT
+					})
+				}
 			break;
 		}
 
