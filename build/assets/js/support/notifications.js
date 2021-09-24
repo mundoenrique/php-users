@@ -85,6 +85,7 @@ function notifications() {
 function notificationHistory(dataHistory) {
 	$('#loader-history').removeClass('hide');
 	$('.history-out').addClass('hide');
+	$('.no-notifications').addClass('hide');
 	$('#notifications-history li').not('.thead').remove();
 
 	if (!dataHistory) {
@@ -93,9 +94,10 @@ function notificationHistory(dataHistory) {
 		var month = date.getMonth() + 1;
 		var year = date.getFullYear();
 		var dataHistory = {
-			initialDate: '01/' + (month < 10 ? '0' : '') + month + '/' + year,
+			initDate: '01/' + (month < 10 ? '0' : '') + month + '/' + year,
 			finalDate: (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year,
-			notificationType: '00'
+			notificationType: '00',
+			notificationText: lang.CUST_SELECT_ALL
 		}
 	}
 
@@ -106,6 +108,9 @@ function notificationHistory(dataHistory) {
 	callNovoCore(who, where, data, function (response) {
 		switch (response.code) {
 			case 0:
+				$('#noti-type').text(dataHistory.notificationText);
+				$('#noti-from').text(dataHistory.initDate);
+				$('#noti-to').text(dataHistory.finalDate);
 				var notification;
 				$.each(response.data, function(index, notifications) {
 					notification = '<li class="feed-item flex items-center">';
@@ -144,6 +149,6 @@ function notificationHistory(dataHistory) {
 		}
 
 		$('#loader-history').addClass('hide');
-		$('.history-out').removeClass('hide');
+		response.data.length == 0 ? $('#no-notifications').removeClass('hide') : $('.history-out').removeClass('hide');
 	});
 }

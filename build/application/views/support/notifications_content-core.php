@@ -1,34 +1,34 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <h1 class="primary h3 semibold inline"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></h1>
 <div class="bg-color">
-	<div class="pt-3 pb-5 px-5 bg-content-config">
-		<div class="flex mt-3 bg-color justify-between">
-			<div class="flex mx-2">
-				<nav class="nav-config">
-					<ul class="nav-config-box">
-						<li id="notifications" class="nav-item-config center active" render='off'>
-							<a href="<?= lang('CONF_NO_LINK'); ?>" class="not-pointer">
-								<span class="icon-config icon-notification h1"></span>
-								<h5>Configurar notificaciones</h5>
-								<div class="box up left regular">
-									<span class="icon-notification h1"></span>
-									<h4 class="h5">Configurar notificaciones</h4>
-								</div>
-							</a>
-						</li>
-						<li id="notificationHistory" class="nav-item-config center" render='on'>
-							<a href="<?= lang('CONF_NO_LINK'); ?>">
-								<span class="icon-config icon-book h1"></span>
-								<h5>Historial de notificaciones</h5>
-								<div class="box up left regular">
-									<span class="icon-book h1"></span>
-									<h4 class="h5">Historial de notificaciones</h4>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
+  <div class="pt-3 pb-5 px-5 bg-content-config">
+    <div class="flex mt-3 bg-color justify-between">
+      <div class="flex mx-2">
+        <nav class="nav-config">
+          <ul class="nav-config-box">
+            <li id="notifications" class="nav-item-config center active" render='off'>
+              <a href="<?= lang('CONF_NO_LINK'); ?>" class="not-pointer">
+                <span class="icon-config icon-notification h1"></span>
+                <h5>Configurar notificaciones</h5>
+                <div class="box up left regular">
+                  <span class="icon-notification h1"></span>
+                  <h4 class="h5">Configurar notificaciones</h4>
+                </div>
+              </a>
+            </li>
+            <li id="notificationHistory" class="nav-item-config center" render='on'>
+              <a href="<?= lang('CONF_NO_LINK'); ?>">
+                <span class="icon-config icon-book h1"></span>
+                <h5>Historial de notificaciones</h5>
+                <div class="box up left regular">
+                  <span class="icon-book h1"></span>
+                  <h4 class="h5">Historial de notificaciones</h4>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <div class="flex flex-auto flex-column">
         <div id="notificationsView" option-service="on">
           <div class="flex mb-1 mx-4 flex-column">
@@ -85,7 +85,6 @@
             </div>
           </div>
         </div>
-
         <div id="notificationHistoryView" option-service="on" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
             <h4 class="line-text semibold primary">Historial de notificaciones</h4>
@@ -100,19 +99,19 @@
                   <nav class="navbar px-0">
                     <div id="period-form" class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
                       <label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
-                      <input id="datepicker_start" name="datepicker_start" class="form-control datepicker" type="text"
-                        placeholder="DD/MM/AAA" readonly autocomplete="off">
+                      <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA"
+                        readonly autocomplete="off">
                       <div class="help-block"></div>
                     </div>
                     <div id="period-form" class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
                       <label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
-                      <input id="datepicker_end" name="datepicker_end" class="form-control datepicker" type="text"
-                        placeholder="DD/MM/AAA" readonly autocomplete="off">
+                      <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
+                        autocomplete="off">
                       <div class="help-block "></div>
                     </div>
                     <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
                       <label class="regular">Tipo de notificación</label>
-                      <select id="status-order" name="status-order" class=" custom-select flex form-control ml-1">
+                      <select id="notification-types" name="notification-types" class=" custom-select flex form-control ml-1">
                         <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
                         <?php foreach(lang('CUST_NOTIFY_OPTIONS') AS $key => $value): ?>
                         <option value="<?= $key ?>"><?= $value ?></option>
@@ -127,7 +126,10 @@
                 </form>
               </div>
               <div>
-                <p>Notificaciones: Todo de: <span>01/05/2020 12:00 AM</span> Hasta: <span>11/05/2020 11:59:59 PM</span></p>
+                <p>
+									Notificaciones (<span id="noti-type"><?= lang('CUST_SELECT_ALL') ?></span>):
+										desde <span id="noti-from"></span> hasta <span id="noti-to"></span>
+								</p>
                 <div class="mt-3">
                   <ul id="notifications-history" class="feed fade-in mt-3 pl-0">
                     <li class="feed-item flex py-2 items-center thead">
@@ -138,32 +140,14 @@
                         <span class="h5 semibold secondary">Fecha</span>
                       </div>
                     </li>
-										<span id="item-history"></span>
+                    <span id="item-history"></span>
                   </ul>
-
-                  <div id="" class="visible">
-                    <div class="pagination page-number flex mb-5 py-2 flex-auto justify-center">
-                      <nav class="h4">
-                        <a href="javascript:" position="first">Primera</a>
-                        <a href="javascript:" position="prev">«</a>
-                      </nav>
-                      <div id="show-page" class="h4 flex justify-center ">
-                        <span class="mx-1 page-current">
-                          <a href="javascript:" position="page" filter-page="page_">1</a>
-                        </span>
-                      </div>
-                      <nav class="h4">
-                        <a href="javascript:" position="next">»</a>
-                        <a href="javascript:" position="last">Última</a>
-                      </nav>
-                    </div>
-                  </div>
-                  <div class="hide">
-                    <div class="flex flex-column items-center justify-center pt-5">
-                      <h3 class="h4 regular mb-0">No se encontraron resultados</h3>
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
+            <div id="no-notifications" class="hide">
+              <div class="flex flex-column items-center justify-center pt-5">
+                <h3 class="h4 regular mb-0"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h3>
               </div>
             </div>
           </div>

@@ -539,7 +539,7 @@ $config = [
 	],
 	'notificationHistory' => [
 		[
-			'field' => 'initialDate',
+			'field' => 'initDate',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 		[
