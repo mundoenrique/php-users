@@ -89,6 +89,7 @@ function validateForms(form) {
 			"postalCode": { pattern: onlyNumber },
 			"state": { required: true, requiredSelect: true },
 			"city": { required: true, requiredSelect: true },
+			"notificationType": { required: true, requiredSelect: true },
 			"address": { required: true, pattern: longPhrase },
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },

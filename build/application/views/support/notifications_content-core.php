@@ -92,13 +92,13 @@
               <form id="form-noti-history">
                 <nav class="navbar px-0">
                   <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                    <label class="my-1 mr-1 regular" for="filterMonth">Desde</label>
+                    <label class="my-1 mr-1 regular" for="initDate">Desde</label>
                     <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                    <label class="my-1 mr-1 regular" for="filterMonth">Hasta</label>
+                    <label class="my-1 mr-1 regular" for="finalDate">Hasta</label>
                     <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
                       autocomplete="off">
                     <div class="help-block "></div>
