@@ -621,6 +621,17 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 					}
 				}
 			break;
+			default:
+				if ($this->isResponseRc != -29 && $this->isResponseRc != -35 &&  $this->isResponseRc != -61) {
+					$this->response->code = 3;
+					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->title = lang('GEN_MENU_NOTIFICATIONS');
+					$this->response->msg = lang('CUST_NO_NOTIFI_SETTINGS');
+					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_NOTIFICATIONS');
+					$this->response->modalBtn['btn1']['action'] = 'redirect';
+					$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
+					$this->response->modalBtn['btn2']['action'] = 'destroy';
+				}
 		}
 
 		$this->response->data = $notification;
@@ -705,7 +716,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '51';
 		$this->dataRequest->className = 'com.novo.objects.TOs.NotificacionTO';
 		$this->dataRequest->accodusuario = $this->session->userName;
-		$this->dataRequest->filtroFechaInicio = $dataRequest->initialDate . ' 12:00:00 AM';
+		$this->dataRequest->filtroFechaInicio = $dataRequest->initDate . ' 12:00:00 AM';
 		$this->dataRequest->filtroFechaFin = $dataRequest->finalDate. ' 11:59:59 PM';
 		$this->dataRequest->codTexto = $dataRequest->notificationType;
 

@@ -106,6 +106,7 @@ class NOVO_Model extends CI_Model {
 
 		switch($this->isResponseRc) {
 			case -29:
+			case -35:
 			case -61:
 				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
 

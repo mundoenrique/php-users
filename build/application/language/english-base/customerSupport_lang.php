@@ -204,3 +204,4 @@ $lang['CUST_NOTIFY_OPTIONS'] = [
 	'16' => $lang['CUST_TEMP_UNLOCK'],
 ];
 $lang['CUST_UPT_NOTIFICATIONS'] = 'Notifications updated successfully.';
+$lang['CUST_NO_NOTIFI_SETTINGS'] = 'Unable to get notification settings, try again.';

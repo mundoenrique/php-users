@@ -3,6 +3,11 @@ $(function () {
 	$('#pre-loader').addClass('hide');
 	$('.hide-out').removeClass('hide');
 
+	if (code == 3) {
+		$('#btn-notifications').prop('disabled', true);
+		$('input[type="checkbox"]').prop('disabled', true);
+	}
+
 	$('.nav-item-config').on('click', function(event) {
 		if ($(this).attr('render') == 'on') {
 			$('.nav-item-config').attr('render', 'on');
@@ -74,6 +79,9 @@ function notifications() {
 						$('#' + key).prop('checked', true);
 					}
 				});
+			break;
+			case 3:
+				appMessages(response.title, response.msg, response.icon, response.modalBtn);
 			break;
 		}
 
