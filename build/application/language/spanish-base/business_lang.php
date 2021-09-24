@@ -20,4 +20,4 @@ $lang['BUSINESS_TRANSACTIONS_LIST'] = [
 	'+' => 'Recarga'
 ];
 $lang['BUSINESS_WITH_OUT_CARDS'] = 'No tienes tarjetas disponibles para usar la aplicación, %s';
-$lang['BUSINESS_CHECK_BALANCE'] = 'Click para consultar tu saldo';
+$lang['BUSINESS_CHECK_BALANCE'] = 'Clic para consultar tu saldo';
