@@ -174,7 +174,9 @@ function notificationHistory(dataHistory) {
 
 		insertFormInput(false);
 		$('#form-noti-history')[0].reset();
-		$('#btn-noti-history').html(btnText)
+		if (dataHistory) {
+			$('#btn-noti-history').html(btnText);
+		}
 		$('#loader-history').addClass('hide');
 		response.data.length == 0 ? $('#no-notifications').removeClass('hide') : $('.history-out').removeClass('hide');
 	});
