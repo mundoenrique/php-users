@@ -89,34 +89,36 @@
           <div class="flex mb-1 mx-4 flex-column">
             <h4 class="line-text semibold primary">Historial de notificaciones</h4>
             <div class="form-group flex flex-wrap line-text">
-              <form id="form-noti-history">
-                <nav class="navbar px-0">
-                  <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                    <label class="my-1 mr-1 regular" for="initDate">Desde</label>
-                    <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
+              <form class="w-100" id="form-noti-history">
+                <div class="row px-1">
+                  <div class="form-group col-xl-2 col-lg-3 col-6 px-1">
+                    <label class="mt-1 regular" for="initDate">Desde</label>
+                    <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAAA" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
-                  <div class="stack-form mx-1 flex items-center col-auto col-lg-auto col-xl-auto px-0 px-lg-1">
-                    <label class="my-1 mr-1 regular" for="finalDate">Hasta</label>
-                    <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAA" readonly
+                  <div class="form-group col-xl-2 col-lg-3 col-6 px-1">
+                    <label class="mt-1 regular" for="finalDate">Hasta</label>
+                    <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAAA" readonly
                       autocomplete="off">
-                    <div class="help-block "></div>
+                    <div class="help-block"></div>
                   </div>
-                  <div class="stack-form flex items-center col-auto col-lg-auto col-xl-auto px-0 pl-lg-1">
-                    <label class="regular">Tipo de notificación</label>
-                    <select id="notificationType" name="notificationType" class=" custom-select flex form-control ml-1">
+                  <div class="form-group col-xl-3 col-lg-4 col-6 px-1">
+                    <label class="mt-1 regular" for="notificationType">Tipo de notificación</label>
+                    <select id="notificationType" name="notificationType" class="custom-select flex form-control">
                       <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
                       <?php foreach(lang('CUST_NOTIFY_OPTIONS') AS $key => $value): ?>
                       <option value="<?= $key ?>"><?= $value ?></option>
                       <?php endforeach; ?>
                     </select>
                     <div class="help-block"></div>
+                  </div>
+                  <div class="flex items-center col-2 pl-0 mt-1">
                     <button id="btn-noti-history" class="btn btn-small btn-rounded-right btn-primary">
                       <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
                     </button>
                   </div>
-                </nav>
+                </div>
               </form>
             </div>
             <div id="loader-history" class="hide">

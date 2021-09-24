@@ -374,10 +374,6 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <div class="form-group col-6 col-lg-4">
-                    <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
-                  </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
@@ -471,10 +467,6 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <div class="form-group col-6 col-lg-4 mb-4">
-                    <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
-                  </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>

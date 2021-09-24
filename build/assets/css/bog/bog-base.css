@@ -254,6 +254,7 @@ label {
 	text-align: center;
 	padding-top: 2rem;
 	color: var(--color-sixth);
+	width: 100% !important;
 }
 
 .easyPaginateNav a {

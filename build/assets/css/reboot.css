@@ -3207,6 +3207,7 @@ table.dataTable thead th, table.dataTable thead td {
 table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
 	border-top: 1px solid #ddd;
 	border-right: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 	text-align: center;
 }
 
@@ -3221,10 +3222,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
 table.dataTable tbody tr {
 	background-color: #ffffff;
-}
-
-table.dataTable tr:last-child td{
-	border-right: none;
 }
 
 /* Widgets */
@@ -4394,7 +4391,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .feed .feed-item {
 	border-top: 1px solid var(--color-eighth);
-	border-left: 2px solid var(--color-eighth);
+	border-left: 1px solid var(--color-eighth);
+	border-right: 1px solid var(--color-eighth);
 	background-color: var(--color-tertiary);
 	-webkit-transition: all .25s;
 	-moz-transition: all .25s;
