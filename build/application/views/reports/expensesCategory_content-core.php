@@ -67,12 +67,12 @@
       <form id="monthtlyMovesForm" method="post" class="col-12 col-lg-9">
         <label class="block"><?= lang('GEN_MONTHLY'); ?></label>
         <div class="row pl-2">
-          <label class="mt-1 regular" for="initDate"><?= lang('REPORTS_FROM'); ?></label>
+          <label class="mt-1 regular" for="initDate"><?= lang('GEN_FROM'); ?></label>
           <div class="form-group col-4 px-1">
             <input id="initDate" name="initDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAAA" autocomplete="off" disabled>
             <div class="help-block"></div>
           </div>
-          <label class="mt-1 regular" for="finalDate"><?= lang('REPORTS_TO'); ?></label>
+          <label class="mt-1 regular" for="finalDate"><?= lang('GEN_TO'); ?></label>
           <div class="form-group col-4 px-1">
             <input id="finalDate" name="finalDate" class="form-control date-picker" type="text" placeholder="DD/MM/AAAA" autocomplete="off" disabled>
             <div class="help-block "></div>

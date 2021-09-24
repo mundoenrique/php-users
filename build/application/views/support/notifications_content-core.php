@@ -9,20 +9,20 @@
             <li id="notifications" class="nav-item-config center active" render='off'>
               <a href="<?= lang('CONF_NO_LINK'); ?>" class="not-pointer">
                 <span class="icon-config icon-notification h1"></span>
-                <h5>Configurar notificaciones</h5>
+                <h5><?= lang('CUST_NOT_SETT') ?></h5>
                 <div class="box up left regular">
                   <span class="icon-notification h1"></span>
-                  <h4 class="h5">Configurar notificaciones</h4>
+                  <h4 class="h5"><?= lang('CUST_NOT_SETT') ?></h4>
                 </div>
               </a>
             </li>
             <li id="notificationHistory" class="nav-item-config center" render='on'>
               <a href="<?= lang('CONF_NO_LINK'); ?>">
                 <span class="icon-config icon-book h1"></span>
-                <h5>Historial de notificaciones</h5>
+                <h5><?= lang('CUST_NOT_HIST') ?></h5>
                 <div class="box up left regular">
                   <span class="icon-book h1"></span>
-                  <h4 class="h5">Historial de notificaciones</h4>
+                  <h4 class="h5"><?= lang('CUST_NOT_HIST') ?></h4>
                 </div>
               </a>
             </li>
@@ -32,14 +32,14 @@
       <div class="flex flex-auto flex-column">
         <div id="notificationsView" option-service="on">
           <div class="flex mb-1 mx-4 flex-column">
-            <h4 class="line-text mb-2 semibold primary">Configuración de notificaciones</h4>
+            <h4 class="line-text mb-2 semibold primary"><?= lang('CUST_NOT_SETT') ?></h4>
             <div id="pre-loader">
               <div class="mt-5 mx-auto flex justify-center">
                 <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
               </div>
             </div>
             <div class="px-5 hide-out hide">
-              <p>Seleccione las notificaciones que desea recibir por correo electrónico</p>
+              <p><?= lang('CUST_NOT_MAIL') ?></p>
               <form id="form-notifications">
                 <div class="form-group flex flex-wrap max-width-2">
                   <div class="flex flex-column col-6">
@@ -87,18 +87,18 @@
         </div>
         <div id="notificationHistoryView" option-service="on" style="display:none">
           <div class="flex mb-1 mx-4 flex-column">
-            <h4 class="line-text semibold primary">Historial de notificaciones</h4>
+            <h4 class="line-text semibold primary"><?= lang('CUST_NOT_HIST') ?></h4>
             <div class="form-group flex flex-wrap line-text">
               <form class="w-100" id="form-noti-history">
                 <div class="row px-1">
                   <div class="form-group col-xl-2 col-lg-3 col-6 px-1">
-                    <label class="mt-1 regular" for="initDate">Desde</label>
+                    <label class="mt-1 regular" for="initDate"><?= lang('GEN_FROM') ?></label>
                     <input id="initDate" name="initDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAAA" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-xl-2 col-lg-3 col-6 px-1">
-                    <label class="mt-1 regular" for="finalDate">Hasta</label>
+                    <label class="mt-1 regular" for="finalDate"><?= lang('GEN_TO') ?></label>
                     <input id="finalDate" name="finalDate" class="form-control datepicker" type="text" placeholder="DD/MM/AAAA" readonly
                       autocomplete="off">
                     <div class="help-block"></div>
@@ -128,8 +128,8 @@
             </div>
             <div class="history-out hide">
               <p>
-                Notificaciones (<span id="noti-type"><?= lang('CUST_SELECT_ALL') ?></span>):
-                desde <span id="noti-from"></span> hasta <span id="noti-to"></span>
+                <?= lang('GEN_MENU_NOTIFICATIONS'); ?> (<span id="noti-type"><?= lang('CUST_SELECT_ALL') ?></span>)
+                <?= lang('GEN_FROM'); ?>: <span id="noti-from"></span> <?= lang('GEN_TO'); ?>: <span id="noti-to"></span>
               </p>
               <div class="mt-3">
                 <ul id="notifications-history" class="feed fade-in mt-3 pl-0">
