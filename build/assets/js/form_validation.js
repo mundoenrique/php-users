@@ -206,6 +206,7 @@ function validateForms(form) {
 			"postalCode": lang.VALIDATE_POSTAL_CODE,
 			"state": lang.VALIDATE_RECOVER_OPTION,
 			"city": lang.VALIDATE_RECOVER_OPTION,
+			"notificationType": lang.VALIDATE_RECOVER_OPTION,
 			"address": lang.VALIDATE_ADDRESS,
 			"verifierCode": lang.VALIDATE_VERIFIER_CODE,
 			"gender": lang.VALIDATE_GENDER,
