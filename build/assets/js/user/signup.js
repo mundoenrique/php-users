@@ -95,7 +95,7 @@ $(function () {
 
 			if (longProfile == 'S') {
 				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
-				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=taxesObligated]:checked').val() == 'yes' ? '1' : '0';
 			}
 
 			if (lang.CONF_LOAD_DOCS == 'ON') {

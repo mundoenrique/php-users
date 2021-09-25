@@ -705,7 +705,7 @@ class Novo_User_Model extends NOVO_Model {
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataRequest->idOperation = '20';
-		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataRequest->className = 'com.novo.objects.MO.RegistroUsuarioMO';
 		$this->dataRequest->user = [
 			'userName' => mb_strtoupper($dataRequest->nickName),
 			'primerNombre' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
