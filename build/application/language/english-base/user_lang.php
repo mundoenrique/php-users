@@ -377,6 +377,7 @@ $lang['USER_ADDRESS_TYPE_LIST'] = [
 	'3' => 'Commercial'
 ];
 $lang['USER_POSTAL_CODE'] = 'Postal Code';
+$lang['USER_COUNTRY'] = 'Country';
 $lang['USER_STATE'] = 'Department';
 $lang['USER_CITY'] = 'Province';
 $lang['USER_DISTRICT'] = 'District';

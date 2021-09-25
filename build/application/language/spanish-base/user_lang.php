@@ -384,6 +384,7 @@ $lang['USER_ADDRESS_TYPE_LIST'] = [
 	'3' => 'Comercial'
 ];
 $lang['USER_POSTAL_CODE'] = 'Código postal';
+$lang['USER_COUNTRY'] = 'País';
 $lang['USER_STATE'] = 'Departamento';
 $lang['USER_CITY'] = 'Provincia';
 $lang['USER_DISTRICT'] = 'Distrito';

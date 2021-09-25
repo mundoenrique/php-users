@@ -4820,3 +4820,172 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	transition-property: all;
 	transition-duration: .2s;
 }
+
+.select-flags {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  height: calc(1.386em + .75rem + 4px);
+	width: 100%;
+  position: relative;
+	padding: .375rem .75rem;
+	color: var(--color-sixth);
+	border: 1px solid var(--color-eighth);
+	border-right: none;
+}
+
+.codeOptions {
+	background: #fff;
+	border: 1px solid var(--color-eighth);
+  display: none;
+  margin: 0;
+  padding: 0 10px;
+	position: fixed;
+	max-height: 280px;
+	overflow-y: scroll;
+	width: 234px;
+}
+
+.codeOptions.open {
+  display: inline-block;
+	z-index: 9;
+}
+
+.codeOptions li [class*="country-"] {
+	background: #fff url('../images/country-flags-sprite.svg') no-repeat scroll 9px -1px;
+	color: var(--color-sixth);
+	cursor: pointer;
+	font-size: .875rem;
+	font-weight: var(--font-weight-base);
+	line-height: 35px;
+	padding: 6px 0px 6px 44px;
+	font-style: initial;
+}
+
+.country-none {
+	background-position: 9px 36px !important;
+}
+
+.country-ar {
+	background-position: 9px -1px !important;
+}
+
+.country-bl {
+	background-position: 9px -36px !important;
+}
+
+.country-bo {
+	background-position: 9px -71px !important;
+}
+
+.country-br {
+	background-position: 9px -106px !important;
+}
+
+.country-bz{
+	background-position: 9px -141px !important;
+}
+
+.country-ca {
+	background-position: 9px -176px !important;
+}
+
+.country-cl {
+	background-position: 9px -211px !important;
+}
+
+.country-co {
+	background-position: 9px -246px !important;
+}
+
+.country-cr {
+	background-position: 9px -281px !important;
+}
+
+.country-cu {
+	background-position: 9px -316px !important;
+}
+
+.country-do {
+	background-position: 9px -351px !important;
+}
+
+.country-ec {
+	background-position: 9px -386px !important;
+}
+
+.country-gf {
+	background-position: 9px -421px !important;
+}
+
+.country-gp {
+	background-position: 9px -456px !important;
+}
+
+.country-gt {
+	background-position: 9px -491px !important;
+}
+
+.country-gy {
+	background-position: 9px -526px !important;
+}
+
+.country-hn{
+	background-position: 9px -561px !important;
+}
+
+.country-ht {
+	background-position: 9px -596px !important;
+}
+
+.country-mq {
+	background-position: 9px -631px !important;
+}
+
+.country-mx {
+	background-position: 9px -666px !important;
+}
+
+.country-ni {
+	background-position: 9px -701px !important;
+}
+
+.country-pa {
+	background-position: 9px -736px !important;
+}
+
+.country-pe {
+	background-position: 9px -771px !important;
+}
+
+.country-pr {
+	background-position: 9px -806px !important;
+}
+
+.country-py {
+	background-position: 9px -841px !important;
+}
+
+.country-sr {
+	background-position: 9px -876px !important;
+}
+
+.country-sv {
+	background-position: 9px -911px !important;
+}
+
+.country-sx {
+	background-position: 9px -946px !important;
+}
+
+.country-us {
+	background-position: 9px -981px !important;
+}
+
+.country-uy {
+	background-position: 9px -1016px !important;
+}
+
+.country-ve {
+	background-position: 9px -1051px !important;
+}
