@@ -338,8 +338,6 @@ function setTextClass(indexes) {
 }
 
 function internationalCode(information) {
-	$('#country').find('option:selected').removeAttr('selected');
-	$('#country').find('option:selected').prop('selected', false);
 	$('#internationalCode').removeClass('country-' + $('#internationalCode').attr('iso'));
 	$('#internationalCode').val(information.code);
 	$('#internationalCode').addClass('country-' + information.currentIso);
