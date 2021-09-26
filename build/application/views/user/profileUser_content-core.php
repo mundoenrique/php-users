@@ -242,7 +242,8 @@
                           <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
                           <?php if ($countries['status'] === '1'): ?>
                           <li iso="<?= $countries['iso']; ?>">
-                            <i class="country-<?= $countries['iso']; ?>"><?= $countries['name']; ?></i>
+                            <i class="country-<?= $countries['iso']; ?>"></i>
+														<?= $countries['name']; ?>
                             <span class="code-country text"> <?= $countries['code']; ?></span>
                           </li>
                           <?php endif; ?>

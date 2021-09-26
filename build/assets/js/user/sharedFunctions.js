@@ -71,7 +71,7 @@ $(function () {
 		switch ($('#generalAccount').val()) {
 			case 'S':
 				inputModal += lang.USER_CONT_GENERAL_CONTENT;
-			break;
+				break;
 			default:
 				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
 		}
@@ -136,8 +136,13 @@ $(function () {
 		});
 	});
 
-	//cambio de iso y bandera para campo código de teléfono
-	$('#internationalCode').on('click', function () {
+	//CAMBIO DE ISO Y BANDERA PARA CAMPO CÓDIGO DE TELÉFONO
+	$('body').on('click', function () {
+		$('.codeOptions').removeClass('open');
+	});
+
+	$('#internationalCode, .container-flags').on('click', function (e) {
+		e.stopPropagation();
 		$('.codeOptions').toggleClass('open');
 	});
 
@@ -344,8 +349,8 @@ function internationalCode(information) {
 	$('#internationalCode').attr('iso', information.currentIso);
 
 	if (information.action == 'optionsInf') {
-		$('#country').val(information.currentIso)
-		$('.codeOptions').removeClass('open');
+		$('#country').val(information.currentIso);
+		// $('.codeOptions').removeClass('open');
 	}
 
 	if (information.currentIso == 'pe') {
