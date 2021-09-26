@@ -350,7 +350,6 @@ function internationalCode(information) {
 
 	if (information.action == 'optionsInf') {
 		$('#country').val(information.currentIso);
-		// $('.codeOptions').removeClass('open');
 	}
 
 	if (information.currentIso == 'pe') {
