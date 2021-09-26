@@ -71,7 +71,7 @@ $(function () {
 		switch ($('#generalAccount').val()) {
 			case 'S':
 				inputModal += lang.USER_CONT_GENERAL_CONTENT;
-				break;
+			break;
 			default:
 				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
 		}
@@ -134,6 +134,32 @@ $(function () {
 			}
 			$(this).removeClass('drop-zone-over');
 		});
+	});
+
+	//cambio de iso y bandera para campo código de teléfono
+	$('#internationalCode').on('click', function () {
+		$('.codeOptions').toggleClass('open');
+	});
+
+	$('#country').on('change', function () {
+		var countryInf = {
+			code: $(this).find('option:selected').attr('code'),
+			currentIso: $(this).find('option:selected').val(),
+			action: 'selectCountry'
+		}
+
+		internationalCode(countryInf);
+	});
+
+	$('.codeOptions').on('click', 'li', function (e) {
+
+		var optionsInf = {
+			code: $(e.currentTarget).find('span').text().trim(),
+			currentIso: $(this).attr('iso'),
+			action: 'optionsInf'
+		}
+
+		internationalCode(optionsInf);
 	});
 });
 
@@ -312,76 +338,14 @@ function setTextClass(indexes) {
 	})
 }
 
-// Colección de países
-var countries = [
-	{ code: '+1', iso: 'us', name: lang.GEN_COUNTRY_US },
-	{ code: '+51', iso: 'pe', name: lang.GEN_COUNTRY_PE },
-	{ code: '+52', iso: 'mx', name: lang.GEN_COUNTRY_MX },
-	{ code: '+53', iso: 'cu', name: lang.GEN_COUNTRY_CU },
-	{ code: '+54', iso: 'ar', name: lang.GEN_COUNTRY_AR },
-	{ code: '+55', iso: 'br', name: lang.GEN_COUNTRY_BR },
-	{ code: '+56', iso: 'cl', name: lang.GEN_COUNTRY_CL },
-	{ code: '+57', iso: 'co', name: lang.GEN_COUNTRY_CO },
-	{ code: '+58', iso: 've', name: lang.GEN_COUNTRY_VE },
-	{ code: '+501', iso: 'bz', name: lang.GEN_COUNTRY_BZ },
-	{ code: '+502', iso: 'gt', name: lang.GEN_COUNTRY_GT },
-	{ code: '+503', iso: 'sv', name: lang.GEN_COUNTRY_SV },
-	{ code: '+504', iso: 'hn', name: lang.GEN_COUNTRY_HN },
-	{ code: '+505', iso: 'ni', name: lang.GEN_COUNTRY_NI },
-	{ code: '+506', iso: 'cr', name: lang.GEN_COUNTRY_CR },
-	{ code: '+507', iso: 'pa', name: lang.GEN_COUNTRY_PA },
-	{ code: '+509', iso: 'ht', name: lang.GEN_COUNTRY_HT },
-	{ code: '+590', iso: 'sx', name: lang.GEN_COUNTRY_SX },
-	{ code: '+591', iso: 'bo', name: lang.GEN_COUNTRY_BO },
-	{ code: '+592', iso: 'gy', name: lang.GEN_COUNTRY_GY },
-	{ code: '+593', iso: 'ec', name: lang.GEN_COUNTRY_EC },
-	{ code: '+594', iso: 'gf', name: lang.GEN_COUNTRY_GF },
-	{ code: '+595', iso: 'py', name: lang.GEN_COUNTRY_PY },
-	{ code: '+596', iso: 'mq', name: lang.GEN_COUNTRY_MQ },
-	{ code: '+597', iso: 'sr', name: lang.GEN_COUNTRY_SR },
-	{ code: '+598', iso: 'uy', name: lang.GEN_COUNTRY_UY }
-];
+function internationalCode(information) {
+	$('#internationalCode').removeClass('country-' + $('#internationalCode').attr('iso'));
+	$('#internationalCode').val(information.code);
+	$('#internationalCode').addClass('country-' + information.currentIso);
+	$('#internationalCode').attr('iso', information.currentIso);
 
-var countrySel = $('#country');
-var codeInternational = $("#codeInternational");
-
-$("body").on("click", '#codeInternational', function () {
-	$(this).next(".codeOptions").toggleClass("open");
-});
-
-$.each(countries, function (index, country) {
-	var countryItem = $('<li></li>');
-	countryItem.html('<i class="country-' + country.iso + '">' + country.name + '</i><span class="code-country text"> ' + country.code + '</span>');
-	$(".codeOptions").append(countryItem);
-	countryItem.on("click", function () {
-		var value = $(this).find(".code-country").html();
-		console.log(value);
-		codeInternational
-			.attr('value', country.iso)
-			.val(value);
-		console.log(value);
-		$(".codeOptions").toggleClass("open");
-	});
-});
-
-$.each(countries, function (index, country) {
-	var countryOption = $('<option></option>');
-	countryOption.attr('value', country.iso);
-	countrySel.on('change', function () {
-		$('#countryData').val($(this).val());
-	});
-
-	countryOption.text(country.name);
-	countrySel.append(countryOption);
-});
-
-countrySel.on('change', function () {
-	var country = $.grep(countries, function (item) {
-		return item.iso === countrySel.val();
-	})[0];
-
-	codeInternational
-		.attr('value', country.iso)
-		.val(country.code);
-	$('#mobilePhone').val('');
-});
+	if (information.action == 'optionsInf') {
+		$('#country').val(information.currentIso);
+		$('.codeOptions').removeClass('open');
+	}
+}

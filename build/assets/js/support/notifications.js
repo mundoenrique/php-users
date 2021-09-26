@@ -8,7 +8,7 @@ $(function () {
 		$('input[type="checkbox"]').prop('disabled', true);
 	}
 
-	$('.nav-item-config').on('click', function(event) {
+	$('.nav-item-config').on('click', function(e) {
 		if ($(this).attr('render') == 'on') {
 			$('.nav-item-config').attr('render', 'on');
 			$('.nav-item-config').removeClass('active');
@@ -16,7 +16,7 @@ $(function () {
 			$('div[option-service]').hide();
 			$(this).addClass('active');
 			$(this).find('a').addClass('not-pointer');
-			var liOptionId = event.currentTarget.id;
+			var liOptionId = e.currentTarget.id;
 			$('#' + liOptionId + 'View').fadeIn(700, 'linear');
 
 			switch (liOptionId) {

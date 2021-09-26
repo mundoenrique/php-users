@@ -67,7 +67,7 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
-
+//OTHERS
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
@@ -113,6 +113,7 @@ $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
 $lang['CONF_CONTAC_DATA'] = 'ON';
+$lang['CONF_UPDATE_COUNTRY'] = 'OFF';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
 $lang['CONF_OPER_KEY'] = 'OFF';
@@ -207,4 +208,3 @@ $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
 //FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
-

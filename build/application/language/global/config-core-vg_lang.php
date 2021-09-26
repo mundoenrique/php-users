@@ -16,5 +16,6 @@ $lang['CONF_CONTACTS'] = [
 //SIGNUP-PROFILE
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
 $lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
+$lang['CONF_UPDATE_COUNTRY'] = 'ON';
 $lang['CONF_LANDLINE'] = 'OFF';
 $lang['CONF_OTHER_PHONE'] = 'OFF';

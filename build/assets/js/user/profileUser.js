@@ -132,7 +132,7 @@ $(function () {
 				$(this).find('option').get(0).remove()
 			}
 
-			if (longProfile == 'S') {
+			if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
 				$('#district').children().remove();
 				$('#district').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
 

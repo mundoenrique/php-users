@@ -4851,7 +4851,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	z-index: 9;
 }
 
-.codeOptions li [class*="country-"] {
+.codeOptions li [class*="country-"],
+.container-flags [class*="country-"] {
 	background: #fff url('../images/country-flags-sprite.svg') no-repeat scroll 9px -1px;
 	color: var(--color-sixth);
 	cursor: pointer;

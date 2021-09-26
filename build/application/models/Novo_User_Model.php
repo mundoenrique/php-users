@@ -983,6 +983,8 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->state = $response->direccion->acEstado ?? lang('GEN_SELECTION');
 		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
+		$profileData->districtCod = $response->direccion->acCodDistrito ?? '';
+		$profileData->district = $response->direccion->acDistrito ?? lang('GEN_SELECTION');
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
@@ -1008,7 +1010,26 @@ class Novo_User_Model extends NOVO_Model {
 						$phonesList['landLine'] = $phonesType->numero;
 					break;
 					case 'CEL':
-						$phonesList['mobilePhone'] = $phonesType->numero;
+						$countryCode = '';
+						$countryIso = '';
+						$mobilePhone = $phonesType->numero;
+						if (preg_match('/^[\+][0-9]{2,3}[\s]{1}/', $mobilePhone, $matches)) {
+							$countryCode = trim($matches[0]);
+
+							foreach (lang('USER_COUNTRIES') AS $countries) {
+								if ($countries['code'] === $countryCode) {
+									$countryIso = $countries['iso'];
+								}
+							}
+						}
+
+						if (preg_match('/[0-9]{7,16}$/', $mobilePhone, $matches)) {
+							$mobilePhone = trim($matches[0]);
+						}
+
+						$phonesList['countryCode'] = $countryCode;
+						$phonesList['countryIso'] = $countryIso;
+						$phonesList['mobilePhone'] = $mobilePhone;
 					break;
 				}
 			}

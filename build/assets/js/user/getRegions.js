@@ -75,7 +75,7 @@ function getStates() {
 		state: 'All'
 	};
 
-	if (longProfile == 'S') {
+	if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: 1
@@ -120,7 +120,7 @@ function getCities(currentState) {
 		stateCode: currentState
 	};
 
-	if (longProfile == 'S') {
+	if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: currentState
@@ -141,7 +141,7 @@ function getCities(currentState) {
 			}
 		}
 
-		if (longProfile == 'S' && currentCity != '') {
+		if ((longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') && currentCity != '') {
 			getdistrict(currentCity)
 		}
 

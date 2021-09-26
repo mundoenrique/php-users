@@ -460,3 +460,193 @@ $lang['USER_ACCEPT_TERMS'] = 'You must accept the terms and conditions to contin
 $lang['USER_ELECTRONIC_MONEY'] = 'Complete the form to activate your card (Electronic money).';
 //SESSION EXPIRE
 $lang['USER_TIME_EXPIRE'] = 'The time allowed to perform the operation has expired, please try again.';
+//COUNTRIES FLAGS
+$lang['GEN_COUNTRY_CODE'] = 'Código';
+$lang['USER_COUNTRIES'] = [
+	[
+		'iso' => 'ar',
+		'status' => '1',
+		'code' => '+54',
+		'name' => 'Argentina'
+	],
+	[
+		'iso' => 'bl',
+		'status' => '0',
+		'code' => '+590',
+		'name' => 'San Bartolomé'
+	],
+	[
+		'iso' => 'bo',
+		'status' => '1',
+		'code' => '+591',
+		'name' => 'Bolivia'
+	],
+	[
+		'iso' => 'br',
+		'status' => '1',
+		'code' => '+55',
+		'name' => 'Brazil'
+	],
+	[
+		'iso' => 'bz',
+		'status' => '1',
+		'code' => '+501',
+		'name' => 'Belize'
+	],
+	[
+		'iso' => 'ca',
+		'status' => '0',
+		'code' => '+1',
+		'name' => 'Canada'
+	],
+	[
+		'iso' => 'cl',
+		'status' => '1',
+		'code' => '+56',
+		'name' => 'Chile'
+	],
+	[
+		'iso' => 'co',
+		'status' => '1',
+		'code' => '+57',
+		'name' => 'Colombia'
+	],
+	[
+		'iso' => 'cr',
+		'status' => '1',
+		'code' => '+506',
+		'name' => 'Costa Rica'
+	],
+	[
+		'iso' => 'cu',
+		'status' => '1',
+		'code' => '+53',
+		'name' => 'Cuba'
+	],
+	[
+		'iso' => 'do',
+		'status' => '0',
+		'code' => '+1',
+		'name' => 'Dominican Republic'
+	],
+	[
+		'iso' => 'ec',
+		'status' => '1',
+		'code' => '+593',
+		'name' => 'Ecuador'
+	],
+	[
+		'iso' => 'gf',
+		'status' => '1',
+		'code' => '+594',
+		'name' => 'Guyana Francesa'
+	],
+	[
+		'iso' => 'gp',
+		'status' => '0',
+		'code' => '+590',
+		'name' => 'Guadalupe'
+	],
+	[
+		'iso' => 'gt',
+		'status' => '1',
+		'code' => '+502',
+		'name' => 'Guatemala'
+	],
+	[
+		'iso' => 'gy',
+		'status' => '1',
+		'code' => '+592',
+		'name' => 'Guyana'
+	],
+	[
+		'iso' => 'hn',
+		'status' => '1',
+		'code' => '+504',
+		'name' => 'Honduras'
+	],
+	[
+		'iso' => 'ht',
+		'status' => '1',
+		'code' => '+509',
+		'name' => 'Haiti'
+	],
+	[
+		'iso' => 'mq',
+		'status' => '1',
+		'code' => '+596',
+		'name' => 'Martinique'
+	],
+	[
+		'iso' => 'mx',
+		'status' => '1',
+		'code' => '+52',
+		'name' => 'Mexico'
+	],
+	[
+		'iso' => 'ni',
+		'status' => '1',
+		'code' => '+505',
+		'name' => 'Nicaragua'
+	],
+	[
+		'iso' => 'pa',
+		'status' => '1',
+		'code' => '+507',
+		'name' => 'Panama'
+	],
+	[
+		'iso' => 'pe',
+		'status' => '1',
+		'code' => '+51',
+		'name' => 'Peru'
+	],
+	[
+		'iso' => 'pr',
+		'status' => '0',
+		'code' => '+1',
+		'name' => 'Puerto Rico'
+	],
+	[
+		'iso' => 'py',
+		'status' => '1',
+		'code' => '+595',
+		'name' => 'Paraguay'
+	],
+	[
+		'iso' => 'sr',
+		'status' => '1',
+		'code' => '+597',
+		'name' => 'Suriname'
+	],
+	[
+		'iso' => 'sv',
+		'status' => '1',
+		'code' => '+503',
+		'name' => 'El Salvador'
+	],
+	[
+		'iso' => 'sx',
+		'status' => '1',
+		'code' => '+590',
+		'name' => 'San Martin'
+	],
+	[
+		'iso' => 'us',
+		'status' => '1',
+		'code' => '+1',
+		'name' => 'United States'
+	],
+	[
+		'iso' => 'uy',
+		'status' => '1',
+		'code' => '+598',
+		'name' => 'Uruguay'
+	],
+	[
+		'iso' => 've',
+		'status' => '1',
+		'code' => '+58',
+		'name' => 'Venezuela'
+	],
+];

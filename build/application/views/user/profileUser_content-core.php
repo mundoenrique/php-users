@@ -88,7 +88,10 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
+                    <label for="civilStatus">
+											<?= lang('USER_CIVILSTATUS') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
                       <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
                       <option value="<?= $key; ?>" <?= $civilStatus == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
@@ -140,14 +143,22 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1 <?= $skipContacData; ?>">
+                  <?php if (lang('CONF_UPDATE_COUNTRY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="country"><?= lang('USER_COUNTRY') ?></label>
-										<input id="countryData" type="hidden" name="countryDate">
                     <select id="country" class="custom-select form-control" name="country">
-											<option value=""><?= lang('GEN_SELECTION') ?></option>
+                      <option value="" disabled selected><?= lang('GEN_SELECTION') ?></option>
+                      <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                      <?php if ($countries['status'] === '1'): ?>
+                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>">
+                        <?= $countries['name']; ?>
+                      </option>
+                      <?php endif; ?>
+                      <?php endforeach; ?>
                     </select>
                     <div class="help-block"></div>
                   </div>
+                  <?php endif; ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
                     <select id="addressType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="addressType">
@@ -160,8 +171,10 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label class="truncate" for="postalCode"><?= lang('USER_POSTAL_CODE') ?> <span
-                        class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label class="truncate" for="postalCode">
+											<?= lang('USER_POSTAL_CODE') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="postalCode" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" type="text" name="postalCode"
                       value="<?= $postalCode; ?>" autocomplete="off">
                     <div class="help-block"></div>
@@ -180,7 +193,7 @@
                     </select>
                     <div class="help-block"></div>
                   </div>
-                  <?php if($longProfile == 'S'): ?>
+                  <?php if($longProfile == 'S' || lang('CONF_UPDATE_COUNTRY') == 'ON'): ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
                     <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
@@ -212,24 +225,36 @@
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
+									<div class="form-group col-6 col-lg-4 input-height">
+                    <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
+                    <div class="flex w-100">
+                      <?php if (lang('CONF_UPDATE_COUNTRY') == 'ON') : ?>
+                      <div class="container-flags truncate col-4 px-0">
+                        <input id="internationalCode" class="select-flags country-<?= $countryIso; ?>" type="text" name="internationalCode"
+                          placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>" value="<?= $countryCode; ?>" readonly>
+                        <ul class="codeOptions">
+                          <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                          <?php if ($countries['status'] === '1'): ?>
+                          <li iso="<?= $countries['iso']; ?>">
+														<i class="country-<?= $countries['iso']; ?>"><?= $countries['name']; ?></i>
+														<span class="code-country text"> <?= $countries['code']; ?></span>
+                          </li>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
+                        </ul>
+                      </div>
+                      <?php endif; ?>
+                      <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
+                        <?= $updatePhoneMobile; ?> autocomplete="off">
+                    </div>
+                    <div class="help-block"></div>
+                  </div>
+
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine; ?>">
                     <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE') ?> <span
                         class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine"
                       value="<?= $landLine; ?>" autocomplete="off">
-                    <div class="help-block"></div>
-                  </div>
-
-                  <div class="form-group col-6 col-lg-4 input-height">
-                    <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
-										<div class="flex w-100">
-										<div class="container-flags truncate col-4 px-0">
-											<input id="codeInternational" class="select-flags" type="text" name="codeInternational" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" readonly>
-											<ul class="codeOptions"></ul>
-										</div>
-											<input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
-												<?= $updatePhoneMobile; ?> autocomplete="off">
-										</div>
                     <div class="help-block"></div>
                   </div>
 
