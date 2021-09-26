@@ -553,7 +553,6 @@
             </div>
           </div>
           <?php endif; ?>
-
         </div>
         <div class="line-text mx-3"></div>
         <small class="mx-3 text"><?= lang('USER_SAVE_BTN_MSG'); ?> <?= count($stepTitles) ?></small>

@@ -331,13 +331,15 @@ if (! function_exists('currencyFormat')) {
 
 if (! function_exists('floatFormat')) {
 	function floatFormat($num) {
+		$floatNum = $num;
 
-		$arrayNum = explode(lang('CONF_DECIMAL'), $num);
-    $arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
-		$floatNum = $arrayNum[0].'.'.$arrayNum[1];
+		if ($floatNum != '') {
+			$arrayNum = explode(lang('CONF_DECIMAL'), $num);
+			$arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
+			$floatNum = $arrayNum[0].'.'.$arrayNum[1];
+		}
 
 		return $floatNum;
-
 	}
 }
 
