@@ -985,10 +985,34 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
 		$profileData->districtCod = $response->direccion->acCodDistrito ?? '';
 		$profileData->district = $response->direccion->acDistrito ?? lang('GEN_SELECTION');
+		$profileData->addresInput = FALSE;
+		$countryCode = '';
+		$countryIso = 'off';
+
+		if (lang('CONF_UPDATE_COUNTRY') == 'ON') {
+			$profileData->addresInput = TRUE;
+			if (get_object_vars($response->direccion)) {
+				$addressArray = explode('|', $profileData->address);
+				$profileData->addresInput = count($addressArray) == 0 || count($addressArray) > 1;
+				$countryIso = 'pe';
+
+				if (count($addressArray) > 1) {
+					foreach (lang('USER_COUNTRIES') AS $countries) {
+						if ($countries['iso'] === $addressArray[1]) {
+							$countryCode = $countries['code'];
+							$countryIso  = $countries['iso'];
+							break;
+						}
+					}
+				}
+			}
+		}
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
 		$phonesList['mobilePhone'] = '';
+		$phonesList['countryCode'] = '';
+		$phonesList['countryIso'] = '';
 		$phonesList['otherType'] = '';
 
 		if (isset($response->registro->listaTelefonos)) {
@@ -1010,17 +1034,9 @@ class Novo_User_Model extends NOVO_Model {
 						$phonesList['landLine'] = $phonesType->numero;
 					break;
 					case 'CEL':
-						$countryCode = '';
-						$countryIso = '';
 						$mobilePhone = $phonesType->numero;
 						if (preg_match('/^[\+][0-9]{2,3}[\s]{1}/', $mobilePhone, $matches)) {
 							$countryCode = trim($matches[0]);
-
-							foreach (lang('USER_COUNTRIES') AS $countries) {
-								if ($countries['code'] === $countryCode) {
-									$countryIso = $countries['iso'];
-								}
-							}
 						}
 
 						if (preg_match('/[0-9]{7,16}$/', $mobilePhone, $matches)) {
@@ -1305,6 +1321,7 @@ class Novo_User_Model extends NOVO_Model {
 			'acCodPais' => $this->session->customerSess,
 			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
+			'acCodDistrito' => $dataRequest->city,
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address
 		];

@@ -152,7 +152,6 @@ $(function () {
 	});
 
 	$('.codeOptions').on('click', 'li', function (e) {
-
 		var optionsInf = {
 			code: $(e.currentTarget).find('span').text().trim(),
 			currentIso: $(this).attr('iso'),
@@ -339,13 +338,31 @@ function setTextClass(indexes) {
 }
 
 function internationalCode(information) {
+	$('#country').find('option:selected').removeAttr('selected');
+	$('#country').find('option:selected').prop('selected', false);
 	$('#internationalCode').removeClass('country-' + $('#internationalCode').attr('iso'));
 	$('#internationalCode').val(information.code);
 	$('#internationalCode').addClass('country-' + information.currentIso);
 	$('#internationalCode').attr('iso', information.currentIso);
 
 	if (information.action == 'optionsInf') {
-		$('#country').val(information.currentIso);
+		$('#country').val(information.currentIso)
 		$('.codeOptions').removeClass('open');
+	}
+
+	if (information.currentIso == 'pe') {
+		$('#stateInput').attr('type', 'hidden');
+		$('#cityInput').attr('type', 'hidden');
+		$('#districtInput').attr('type', 'hidden');
+		$('#state').show();
+		$('#city').show();
+		$('#district').show();
+	} else {
+		$('#state').hide();
+		$('#city').hide();
+		$('#district').hide();
+		$('#stateInput').attr('type', 'text');
+		$('#cityInput').attr('type', 'text');
+		$('#districtInput').attr('type', 'text');
 	}
 }

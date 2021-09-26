@@ -27,6 +27,7 @@
       <form id="profileUserForm" method="post" class="hide-out hide p-2">
         <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
         <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
+        <input id="addresInput" type="hidden" name="addresInput" value="<?= $addresInput; ?>">
         <div class="row">
           <!-- Datos personales -->
           <?php $index = array_search(lang('USER_PERSONAL_DATA'), $stepTitles) + 1; ?>
@@ -89,9 +90,9 @@
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="civilStatus">
-											<?= lang('USER_CIVILSTATUS') ?>
-											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
-										</label>
+                      <?= lang('USER_CIVILSTATUS') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
                       <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
                       <option value="<?= $key; ?>" <?= $civilStatus == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
@@ -150,7 +151,7 @@
                       <option value="" disabled selected><?= lang('GEN_SELECTION') ?></option>
                       <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
                       <?php if ($countries['status'] === '1'): ?>
-                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>">
+                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>" <?= $countryIso == $countries['iso'] ? 'selected' : ''; ?>>
                         <?= $countries['name']; ?>
                       </option>
                       <?php endif; ?>
@@ -172,9 +173,9 @@
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label class="truncate" for="postalCode">
-											<?= lang('USER_POSTAL_CODE') ?>
-											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
-										</label>
+                      <?= lang('USER_POSTAL_CODE') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <input id="postalCode" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" type="text" name="postalCode"
                       value="<?= $postalCode; ?>" autocomplete="off">
                     <div class="help-block"></div>
@@ -183,6 +184,7 @@
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
                       <option value="<?= $stateCode; ?>"><?= $state; ?></option>
+                      <input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>">
                     </select>
                     <div class="help-block"></div>
                   </div>
@@ -191,6 +193,7 @@
                     <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
                       <option value="<?= $cityCod; ?>"><?= $city; ?></option>
                     </select>
+                    <input type="hidden" id="cityInput" name="cityInput" class="form-control" value="<?= $city ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php if($longProfile == 'S' || lang('CONF_UPDATE_COUNTRY') == 'ON'): ?>
@@ -199,6 +202,7 @@
                     <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
                       <option value="<?= $districtCod ?>"><?= $district ?></option>
                     </select>
+                    <input type="hidden" id="districtInput" name="districtInput" class="form-control" value="<?= $district ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
@@ -225,19 +229,21 @@
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
-									<div class="form-group col-6 col-lg-4 input-height">
+
+                  <div class="form-group col-6 col-lg-4 input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <div class="flex w-100">
                       <?php if (lang('CONF_UPDATE_COUNTRY') == 'ON') : ?>
                       <div class="container-flags truncate col-4 px-0">
-                        <input id="internationalCode" class="select-flags country-<?= $countryIso; ?>" type="text" name="internationalCode"
-                          placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>" value="<?= $countryCode; ?>" readonly>
+                        <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>" type="text"
+                          name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>"
+                          value="<?= $countryCode; ?>" readonly>
                         <ul class="codeOptions">
                           <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
                           <?php if ($countries['status'] === '1'): ?>
                           <li iso="<?= $countries['iso']; ?>">
-														<i class="country-<?= $countries['iso']; ?>"><?= $countries['name']; ?></i>
-														<span class="code-country text"> <?= $countries['code']; ?></span>
+                            <i class="country-<?= $countries['iso']; ?>"><?= $countries['name']; ?></i>
+                            <span class="code-country text"> <?= $countries['code']; ?></span>
                           </li>
                           <?php endif; ?>
                           <?php endforeach; ?>
