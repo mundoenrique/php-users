@@ -352,19 +352,27 @@ function internationalCode(information) {
 		$('#country').val(information.currentIso);
 	}
 
-	if (information.currentIso == 'pe') {
-		$('#stateInput').attr('type', 'hidden');
-		$('#cityInput').attr('type', 'hidden');
-		$('#districtInput').attr('type', 'hidden');
-		$('#state').show();
-		$('#city').show();
-		$('#district').show();
+	changeInputselect(information.currentIso);
+}
+
+function changeInputselect(currentIso) {
+	if (currentIso == 'pe') {
+		getStates();
+		$('#stateInput, #cityInput, #districtInput')
+			.attr('type', 'hidden')
+			.addClass('ignore');
+		$('#state, #city, #district')
+			.show()
+			.removeClass('ignore');
 	} else {
-		$('#state').hide();
-		$('#city').hide();
-		$('#district').hide();
-		$('#stateInput').attr('type', 'text');
-		$('#cityInput').attr('type', 'text');
-		$('#districtInput').attr('type', 'text');
+		$('#state, #city, #district')
+			.hide()
+			.addClass('ignore');
+		$('#stateInput, #cityInput, #districtInput')
+			.attr('type', 'text')
+			.removeClass('ignore');
 	}
+
+	validateForms($('#profileUserForm'));
+	$('#profileUserForm').valid();
 }

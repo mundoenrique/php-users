@@ -981,19 +981,20 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
 		$profileData->state = $response->direccion->acEstado ?? lang('GEN_SELECTION');
-		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
+		$profileData->cityCode = $response->direccion->acCodCiudad ?? '';
 		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
-		$profileData->districtCod = $response->direccion->acCodDistrito ?? '';
+		$profileData->districtCode = $response->direccion->acCodDistrito ?? '';
 		$profileData->district = $response->direccion->acDistrito ?? lang('GEN_SELECTION');
-		$profileData->addresInput = FALSE;
+		$profileData->addresInput = '0';
 		$countryCode = '';
 		$countryIso = 'off';
 
-		if (lang('CONF_UPDATE_COUNTRY') == 'ON') {
-			$profileData->addresInput = TRUE;
+		if (lang('CONF_INTERNATIONALADDRESS') == 'ON') {
+			$profileData->addresInput = '1';
+
 			if (get_object_vars($response->direccion)) {
 				$addressArray = explode('|', $profileData->address);
-				$profileData->addresInput = count($addressArray) == 0 || count($addressArray) > 1;
+				$profileData->addresInput = count($addressArray) == 0 || count($addressArray) > 1 ? '1' : '0';
 				$countryIso = 'pe';
 
 				if (count($addressArray) > 1) {
@@ -1004,6 +1005,14 @@ class Novo_User_Model extends NOVO_Model {
 							break;
 						}
 					}
+
+					$profileData->address = $addressArray[0];
+					$profileData->stateCode = '';
+					$profileData->state = $addressArray[2];
+					$profileData->cityCode = '';
+					$profileData->city = $addressArray[3];
+					$profileData->districtCode = '';
+					$profileData->district = $addressArray[4];
 				}
 			}
 		}
@@ -1090,10 +1099,10 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->stateCode = isset($response->registro->afiliacion->departamento) &&  $response->registro->afiliacion->departamento != ''
 				? $response->registro->afiliacion->departamento : $profileData->stateCode;
 
-			$profileData->cityCod = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
-				? $response->registro->afiliacion->provincia : $profileData->cityCod;
+			$profileData->cityCode = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
+				? $response->registro->afiliacion->provincia : $profileData->cityCode;
 
-			$profileData->districtCod = $response->registro->afiliacion->distrito ?? '';
+			$profileData->districtCode = $response->registro->afiliacion->distrito ?? '';
 
 			$profileData->district = lang('GEN_SELECTION');
 

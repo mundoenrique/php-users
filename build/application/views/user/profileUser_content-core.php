@@ -144,14 +144,15 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1 <?= $skipContacData; ?>">
-                  <?php if (lang('CONF_UPDATE_COUNTRY') == 'ON') : ?>
+                  <?php if (lang('CONF_INTERNATIONALADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="country"><?= lang('USER_COUNTRY') ?></label>
                     <select id="country" class="custom-select form-control" name="country">
                       <option value="" disabled selected><?= lang('GEN_SELECTION') ?></option>
                       <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
                       <?php if ($countries['status'] === '1'): ?>
-                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>" <?= $countryIso == $countries['iso'] ? 'selected' : ''; ?>>
+                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>"
+                        <?= $countryIso == $countries['iso'] ? 'selected' : ''; ?>>
                         <?= $countries['name']; ?>
                       </option>
                       <?php endif; ?>
@@ -184,25 +185,28 @@
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
                       <option value="<?= $stateCode; ?>"><?= $state; ?></option>
-                      <input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>">
+                      <input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>" autocomplete="off"
+                        state-code="<?= $stateCode; ?>">
                     </select>
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="city"><?= lang('USER_CITY') ?></label>
                     <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
-                      <option value="<?= $cityCod; ?>"><?= $city; ?></option>
+                      <option value="<?= $cityCode; ?>"><?= $city; ?></option>
                     </select>
-                    <input type="hidden" id="cityInput" name="cityInput" class="form-control" value="<?= $city ?>">
+                    <input type="hidden" id="cityInput" name="cityInput" class="form-control" value="<?= $city ?>" autocomplete="off"
+                      city-code="<?= $cityCode; ?>">
                     <div class="help-block"></div>
                   </div>
-                  <?php if($longProfile == 'S' || lang('CONF_UPDATE_COUNTRY') == 'ON'): ?>
+                  <?php if($longProfile == 'S' || lang('CONF_INTERNATIONALADDRESS') == 'ON'): ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
                     <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
-                      <option value="<?= $districtCod ?>"><?= $district ?></option>
+                      <option value="<?= $districtCode ?>"><?= $district ?></option>
                     </select>
-                    <input type="hidden" id="districtInput" name="districtInput" class="form-control" value="<?= $district ?>">
+                    <input type="hidden" id="districtInput" name="districtInput" class="form-control" value="<?= $district ?>" autocomplete="off"
+                      district-code="<?= $districtCode ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
@@ -233,17 +237,17 @@
                   <div class="form-group col-6 col-lg-4 input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <div class="flex w-100">
-                      <?php if (lang('CONF_UPDATE_COUNTRY') == 'ON') : ?>
-                      <div class="container-flags truncate col-4 px-0">
-                        <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>" type="text"
-                          name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>"
+                      <?php if (lang('CONF_INTERNATIONALADDRESS') == 'ON') : ?>
+                      <div class="container-flags form-control truncate col-4 px-0">
+                        <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>"
+                          type="text" name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>"
                           value="<?= $countryCode; ?>" readonly>
                         <ul class="codeOptions">
                           <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
                           <?php if ($countries['status'] === '1'): ?>
                           <li iso="<?= $countries['iso']; ?>">
                             <i class="country-<?= $countries['iso']; ?>"></i>
-														<?= $countries['name']; ?>
+                            <?= $countries['name']; ?>
                             <span class="code-country text"> <?= $countries['code']; ?></span>
                           </li>
                           <?php endif; ?>

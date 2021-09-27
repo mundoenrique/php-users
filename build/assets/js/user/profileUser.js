@@ -7,6 +7,22 @@ var skipFields;
 var ErrorIndexes;
 
 $(function () {
+	if (lang.CONF_INTERNATIONALADDRESS == 'ON' && $('#addresInput').val() === '1') {
+		changeInputselect($('#internationalCode').attr('iso'));
+
+		if ($('#stateInput').val() === lang.GEN_SELECTION) {
+			$('#stateInput').val('')
+		}
+
+		if ($('#cityInput').val() === lang.GEN_SELECTION) {
+			$('#cityInput').val('')
+		}
+
+		if ($('#districtInput').val() === lang.GEN_SELECTION) {
+			$('#districtInput').val('')
+		}
+	}
+
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide();
@@ -30,7 +46,7 @@ $(function () {
 		maxDate: '-18y',
 		changeMonth: true,
 		changeYear: true,
-		onSelect: function (selectedDate) {
+		onSelect: function () {
 			$(this).focus().blur();
 		}
 	});
@@ -113,10 +129,6 @@ $(function () {
 		getStates();
 
 		$('#state').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-
 			$('#city').children().remove();
 			$('#city').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
 			$('#district').children().remove();
@@ -128,11 +140,7 @@ $(function () {
 		});
 
 		$('#city').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-
-			if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
+			if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
 				$('#district').children().remove();
 				$('#district').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
 

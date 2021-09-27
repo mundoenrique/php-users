@@ -61,11 +61,10 @@ function getProfessions() {
 }
 
 function getStates() {
-	var currentState = $('#state').val();
 	$('#state').prop('disabled', true);
 
-	if (currentState != '') {
-		$('#state').find('option').get(0).remove();
+	if ($('#state option:selected').text() != lang.GEN_SELECTION) {
+		$('#state option:selected').text(lang.GEN_SELECTION)
 	}
 
 	$('#state').prepend('<option value="" selected disabled>' + lang.GEN_WAITING_STATES + '</option>');
@@ -75,7 +74,7 @@ function getStates() {
 		state: 'All'
 	};
 
-	if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
+	if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: 1
@@ -85,18 +84,18 @@ function getStates() {
 	callNovoCore(who, where, data, function (response) {
 		if (response.code == 0) {
 			$.each(response.data, function (pos, state) {
-				var selected = currentState == state.regId ? 'selected' : ''
+				var selected = $('#stateInput').attr('state-code') == state.regId ? 'selected' : ''
 				$('#state').append('<option value="' + state.regId + '" ' + selected + '>' + state.regDesc + '</option>');
 			});
 
 			$('#state').find('option').get(0).remove();
 
-			if (currentState == '') {
+			if (!$('#stateInput').attr('state-code')) {
 				$('#state')
 					.find('option:selected')
 					.prop('disabled', true);
 			} else {
-				getCities(currentState);
+				getCities($('#stateInput').attr('state-code'));
 			}
 		}
 
@@ -105,10 +104,8 @@ function getStates() {
 }
 
 function getCities(currentState) {
-	var currentCity = $('#city').val();
-
-	if (currentCity != '') {
-		$('#city').find('option').get(0).remove()
+	if ($('#city option:selected').text() != lang.GEN_SELECTION) {
+		$('#city option:selected').text(lang.GEN_SELECTION)
 	}
 
 	$('#city')
@@ -120,7 +117,7 @@ function getCities(currentState) {
 		stateCode: currentState
 	};
 
-	if (longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') {
+	if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: currentState
@@ -130,19 +127,19 @@ function getCities(currentState) {
 	callNovoCore(who, where, data, function (response) {
 		if (response.code == 0) {
 			$.each(response.data, function (pos, city) {
-				var selected = currentCity == city.regId ? 'selected' : ''
+				var selected = $('#cityInput').attr('city-code') == city.regId ? 'selected' : ''
 				$('#city').append('<option value="' + city.regId + '" ' + selected + '>' + city.regDesc + '</option>');
 			});
 
 			$('#city').find('option').get(0).remove();
 
-			if (currentCity == '') {
+			if (!$('#cityInput').attr('city-code')) {
 				$('#city').find('option:selected').prop('disabled', true);
 			}
 		}
 
-		if ((longProfile == 'S' || lang.CONF_UPDATE_COUNTRY == 'ON') && currentCity != '') {
-			getdistrict(currentCity)
+		if ((longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') && $('#cityInput').attr('city-code')) {
+			getdistrict($('#cityInput').attr('city-code'))
 		}
 
 		$('#city').prop('disabled', false);
@@ -152,8 +149,8 @@ function getCities(currentState) {
 function getdistrict(currentCity) {
 	var currentDistrict = $('#district').val();
 
-	if (currentDistrict != '') {
-		$('#district').find('option').get(0).remove();
+	if ($('#district option:selected').text() != lang.GEN_SELECTION) {
+		$('#district option:selected').text(lang.GEN_SELECTION)
 	}
 
 	$('#district')
@@ -168,13 +165,13 @@ function getdistrict(currentCity) {
 	callNovoCore(who, where, data, function (response) {
 		if (response.code == 0) {
 			$.each(response.data, function (pos, district) {
-				var selected = currentDistrict == district.regId ? 'selected' : ''
+				var selected = $('#districtInput').attr('district-code') == district.regId ? 'selected' : ''
 				$('#district').append('<option value="' + district.regId + '" ' + selected + '>' + district.regDesc + '</option>');
 			});
 
 			$('#district').find('option').get(0).remove();
 
-			if (currentDistrict == '') {
+			if (!$('#districtInput').attr('district-code')) {
 				$('#district')
 					.find('option:selected')
 					.prop('disabled', true);
