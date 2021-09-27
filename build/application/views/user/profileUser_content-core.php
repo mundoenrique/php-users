@@ -238,7 +238,7 @@
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <div class="flex w-100">
                       <?php if (lang('CONF_INTERNATIONALADDRESS') == 'ON') : ?>
-                      <div class="container-flags form-control truncate col-4 px-0">
+                      <div class="container-flags form-control truncate col-4 p-0">
                         <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>"
                           type="text" name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>"
                           value="<?= $countryCode; ?>" readonly>

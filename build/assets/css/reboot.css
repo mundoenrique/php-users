@@ -4858,7 +4858,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
   display: none;
   margin: 0;
 	max-height: 280px;
-	margin-top: -2px;
+	margin-top: -1px;
 	margin-left: -1px;
 	overflow-y: scroll;
   padding: 0 10px;
