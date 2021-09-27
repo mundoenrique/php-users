@@ -225,3 +225,5 @@ $lang['GEN_DOWNLOAD_XLS'] = 'Download Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Download Statement';
 $lang['GEN_SEND_PDF'] = 'Send PDF';
 $lang['GEN_SEND_XLS'] = 'Send Excel';
+$lang["GEN_MSG_IMPORTANT"] = 'Important announcement';
+$lang["GEN_MSG_RECONVERSION"] = '<p>Dear customers and users:</p><p  class="justify"><b>Tebca y Servitebca</b> They are adapting their platform to the new schemes proposed for the <b> Monetary Reconversion</b>. For this reason, <b> from 11:00 pm on Thursday 30-09-2021 and until 8:00 am on Friday 01-10-2021 </b>, the consultation and transaction services available for the <b> Servitebca Food and Silver Bonus Cards </b>. </p> <p> We appreciate your full understanding. </p>';

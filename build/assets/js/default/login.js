@@ -69,8 +69,8 @@ $(function () {
 			mostrarProcesando(skin, $(this));
 			grecaptcha.ready(function () {
 				grecaptcha.execute('6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-', {
-						action: 'login'
-					})
+					action: 'login'
+				})
 					.then(function (token) {
 						validateCaptcha(token, user, pass)
 					}, function (token) {
@@ -195,10 +195,10 @@ function validateCaptcha(token, user, pass) {
 	dataRequest = novo_cryptoPass(dataRequest, true);
 
 	$.post(base_url + "/users/validateRecaptcha", {
-			request: dataRequest,
-			cpo_name: cpo_cook,
-			plot: btoa(cpo_cook)
-		})
+		request: dataRequest,
+		cpo_name: cpo_cook,
+		plot: btoa(cpo_cook)
+	})
 		.done(function (response) {
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
 				format: CryptoJSAesJson
@@ -234,16 +234,16 @@ function login(user = null, pass = null, dataOPT = {}) {
 		user_name: user === null ? '--' : user,
 		user_pass: pass === null ? '--' : novo_cryptoPass(pass),
 		codeOTP: dataOPT.valueOPT === undefined ? '000' : dataOPT.valueOPT,
-		saveIP: (dataOPT.saveIP === undefined || dataOPT.saveIP === false) ? false: true
+		saveIP: (dataOPT.saveIP === undefined || dataOPT.saveIP === false) ? false : true
 	});
 
 	dataRequest = novo_cryptoPass(dataRequest, true);
 
 	$.post(base_url + "/users/login", {
-			request: dataRequest,
-			cpo_name: cpo_cook,
-			plot: btoa(cpo_cook)
-		})
+		request: dataRequest,
+		cpo_name: cpo_cook,
+		plot: btoa(cpo_cook)
+	})
 		.done(function (response) {
 
 			data = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, {
@@ -260,26 +260,26 @@ function login(user = null, pass = null, dataOPT = {}) {
 				$("#novo-control-ip").dialog("close");
 			}
 
-			  if (data.validateRedirect) {
-					link = base_url + '/' + data.codPaisUrl + '/inicio';
-					$("#dialog-new-core").dialog({
-						modal: "true",
-						width: "440px",
-						open: function (event, ui) {
-							$(".ui-dialog-titlebar-close", ui.dialog).hide();
-						},
-					});
+			if (data.validateRedirect) {
+				link = base_url + '/' + data.codPaisUrl + '/inicio';
+				$("#dialog-new-core").dialog({
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) {
+						$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					},
+				});
 
-					$('#link-href').attr('href', link);
-					$('#link-href').text(link);
-					$("#login").html('Ingresar');
+				$('#link-href').attr('href', link);
+				$('#link-href').text(link);
+				$("#login").html('Ingresar');
 
-					$("#redirect-new-core").click(function () {
-						$("#dialog-new-core").dialog("close");
-						$(location).attr('href', link);
-					});
+				$("#redirect-new-core").click(function () {
+					$("#dialog-new-core").dialog("close");
+					$(location).attr('href', link);
+				});
 			}
-			  else if (data == 1) {
+			else if (data == 1) {
 				$("#dialog-login-ve").dialog({
 					modal: "true",
 					width: "440px",
@@ -405,7 +405,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 					habilitar();
 				});
 
-				$(document).on('keypress','#novo-control-ip', function(e) {
+				$(document).on('keypress', '#novo-control-ip', function (e) {
 					var keyCode = e.keyCode || e.which;
 					if (keyCode === 13) {
 						e.preventDefault();
@@ -435,16 +435,16 @@ function login(user = null, pass = null, dataOPT = {}) {
 						$(this).html('Aceptar');
 						$(this).attr("disabled", false);
 
-						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' :'El código no tiene un formato válido.';
+						var validMsg = (otp.val() == '') ? 'Debe introducir el código recibido.' : 'El código no tiene un formato válido.';
 						var labelMsg = `<label for="codeOTPLogin" class="field-error">${validMsg}</label>`
 						otp.removeAttr('disabled').addClass("field-error");
 						$("#msg").html(labelMsg);
 						$("#msg").fadeIn();
 
-						setTimeout(function(){
+						setTimeout(function () {
 							otp.removeClass("field-error");
 							$("#msg").fadeOut();
-						},5000);
+						}, 5000);
 					}
 				});
 
@@ -480,6 +480,33 @@ function login(user = null, pass = null, dataOPT = {}) {
 					habilitar();
 				});
 
+			} else if (data.rc == 9996) {
+				ocultarProcesando();
+				$("#dialog-monetary-reconversion").dialog({
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) {
+						$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					}
+				});
+				$("#dialog-monetary").click(function () {
+					$("#dialog-monetary-reconversion").dialog("close");
+					habilitar();
+				});
+			} else if (data.rc == 9997) {
+				ocultarProcesando();
+				$("#dialog-maintenance-general").dialog({
+					title: "Conexión Personas",
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) {
+						$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					}
+				});
+				$("#dialog-maintenance").click(function () {
+					$("#dialog-maintenance-general").dialog("close");
+					habilitar();
+				});
 			} else {
 				ocultarProcesando();
 				var msgError = 'No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong>';
