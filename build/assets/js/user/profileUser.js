@@ -7,20 +7,8 @@ var skipFields;
 var ErrorIndexes;
 
 $(function () {
-	if (lang.CONF_INTERNATIONALADDRESS == 'ON' && $('#addresInput').val() === '1') {
-		changeInputselect($('#internationalCode').attr('iso'));
-
-		if ($('#stateInput').val() === lang.GEN_SELECTION) {
-			$('#stateInput').val('')
-		}
-
-		if ($('#cityInput').val() === lang.GEN_SELECTION) {
-			$('#cityInput').val('')
-		}
-
-		if ($('#districtInput').val() === lang.GEN_SELECTION) {
-			$('#districtInput').val('')
-		}
+	if ((lang.CONF_INTERNATIONAL_ADDRESS == 'ON' && $('#addresInput').val() === '1') || lang.CONF_CONTAC_DATA == 'ON') {
+		changeInputselect($('#internationalCode').attr('iso') || 'all');
 	}
 
 	$('#pre-loader').remove();
@@ -55,7 +43,47 @@ $(function () {
 		$(this).rules('add', {
 			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
 		});
-	})
+	});
+
+
+	if (lang.CONF_PROFESSION == 'ON') {
+		getProfessions();
+	}
+
+	if (lang.CONF_CONTAC_DATA == 'ON') {
+		getStates();
+
+		$('#state').on('change', function () {
+			$('#stateInput').attr('state-code', '').val('')
+			$('#cityInput').attr('city-code', '').val('')
+			$('#districtInput').attr('district-code', '').val('')
+			getCities(this.value);
+		});
+
+		$('#city').on('change', function () {
+			if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+				getdistrict(this.value)
+			}
+		});
+	} else {
+		$('select').find('option').prop('disabled', false);
+	}
+
+	// Reset all bars to ensure that all the progress is removed
+	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
+		$(this).css({
+			'width': '0%',
+		});
+	});
+
+	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
+		var thisFs = $('.multi-step-form .form-container fieldset.active');
+
+		if (valid(thisFs)) {
+			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
+		}
+		return false;
+	});
 
 	$('#profileUserBtn').on('click', function (e) {
 		var valid;
@@ -102,7 +130,7 @@ $(function () {
 						filesToUpload.push({
 							'name': e.id,
 							'file': $(`#${e.id}`).prop('files')[0]
-						}, );
+						});
 					})
 				}
 				data.files = filesToUpload;
@@ -119,58 +147,6 @@ $(function () {
 
 			scrollTopPos(formFile.offset().top);
 		}
-	});
-
-	if (lang.CONF_PROFESSION == 'ON') {
-		getProfessions();
-	}
-
-	if (lang.CONF_CONTAC_DATA == 'ON') {
-		getStates();
-
-		$('#state').on('change', function () {
-			$('#city').children().remove();
-			$('#city').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-			$('#district').children().remove();
-			$('#district')
-				.prop('disabled', true)
-				.prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-
-			getCities(this.value);
-		});
-
-		$('#city').on('change', function () {
-			if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
-				$('#district').children().remove();
-				$('#district').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-
-				getdistrict(this.value)
-			}
-		});
-
-		$('#district').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-		});
-	} else {
-		$('select').find('option').prop('disabled', false);
-	}
-
-	// Reset all bars to ensure that all the progress is removed
-	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
-		$(this).css({
-			'width': '0%',
-		});
-	});
-
-	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
-		let thisFs = $('.multi-step-form .form-container fieldset.active');
-
-		if (valid(thisFs)) {
-			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
-		}
-		return false;
 	});
 
 });

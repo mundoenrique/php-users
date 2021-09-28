@@ -61,20 +61,21 @@ function getProfessions() {
 }
 
 function getStates() {
-	$('#state').prop('disabled', true);
+	$('#state').children().not(':first').remove();
+	$('#state option:first').prop('disabled', false);
+	$('#state')
+		.prop('disabled', true)
+		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_STATES + '</option>');
+	$('#city').prop('disabled', true);
+	$('#district').prop('disabled', true);
 
-	if ($('#state option:selected').text() != lang.GEN_SELECTION) {
-		$('#state option:selected').text(lang.GEN_SELECTION)
-	}
-
-	$('#state').prepend('<option value="" selected disabled>' + lang.GEN_WAITING_STATES + '</option>');
-
-	who = 'Assets'; where = 'StatesList';
+	who = 'Assets';
+	where = 'StatesList';
 	data = {
 		state: 'All'
 	};
 
-	if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
+	if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: 1
@@ -90,34 +91,30 @@ function getStates() {
 
 			$('#state').find('option').get(0).remove();
 
-			if (!$('#stateInput').attr('state-code')) {
-				$('#state')
-					.find('option:selected')
-					.prop('disabled', true);
-			} else {
+			if ($('#stateInput').attr('state-code')) {
 				getCities($('#stateInput').attr('state-code'));
 			}
 		}
 
+		$('#state option:first').prop('disabled', true);
 		$('#state').prop('disabled', false);
 	});
 }
 
 function getCities(currentState) {
-	if ($('#city option:selected').text() != lang.GEN_SELECTION) {
-		$('#city option:selected').text(lang.GEN_SELECTION)
-	}
-
+	$('#city').children().not(':first').remove();
+	$('#city option:first').prop('disabled', false);
 	$('#city')
 		.prop('disabled', true)
 		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_CITIES + '</option>');
 
-	who = 'Assets'; where = 'CityList';
+	who = 'Assets';
+	where = 'CityList';
 	data = {
 		stateCode: currentState
 	};
 
-	if (longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') {
+	if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: currentState
@@ -132,27 +129,20 @@ function getCities(currentState) {
 			});
 
 			$('#city').find('option').get(0).remove();
-
-			if (!$('#cityInput').attr('city-code')) {
-				$('#city').find('option:selected').prop('disabled', true);
-			}
 		}
 
-		if ((longProfile == 'S' || lang.CONF_INTERNATIONALADDRESS == 'ON') && $('#cityInput').attr('city-code')) {
+		if ((longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') && $('#cityInput').attr('city-code')) {
 			getdistrict($('#cityInput').attr('city-code'))
 		}
 
+		$('#city option:first').prop('disabled', true);
 		$('#city').prop('disabled', false);
 	});
 }
 
 function getdistrict(currentCity) {
-	var currentDistrict = $('#district').val();
-
-	if ($('#district option:selected').text() != lang.GEN_SELECTION) {
-		$('#district option:selected').text(lang.GEN_SELECTION)
-	}
-
+	$('#district').children().not(':first').remove();
+	$('#district option:first').prop('disabled', false);
 	$('#district')
 		.prop('disabled', true)
 		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_DISTRICTS + '</option>');
@@ -170,14 +160,9 @@ function getdistrict(currentCity) {
 			});
 
 			$('#district').find('option').get(0).remove();
-
-			if (!$('#districtInput').attr('district-code')) {
-				$('#district')
-					.find('option:selected')
-					.prop('disabled', true);
-			}
 		}
 
+		$('#district option:first').prop('disabled', true);
 		$('#district').prop('disabled', false);
 	});
 }

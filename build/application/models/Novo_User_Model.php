@@ -980,16 +980,16 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
-		$profileData->state = $response->direccion->acEstado ?? lang('GEN_SELECTION');
+		$profileData->state = $response->direccion->acEstado ?? '';
 		$profileData->cityCode = $response->direccion->acCodCiudad ?? '';
-		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
+		$profileData->city = $response->direccion->acCiudad ?? '';
 		$profileData->districtCode = $response->direccion->acCodDistrito ?? '';
-		$profileData->district = $response->direccion->acDistrito ?? lang('GEN_SELECTION');
+		$profileData->district = $response->direccion->acDistrito ?? '';
 		$profileData->addresInput = '0';
 		$countryCode = '';
 		$countryIso = 'off';
 
-		if (lang('CONF_INTERNATIONALADDRESS') == 'ON') {
+		if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') {
 			$profileData->addresInput = '1';
 
 			if (get_object_vars($response->direccion)) {
@@ -1102,9 +1102,8 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->cityCode = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
 				? $response->registro->afiliacion->provincia : $profileData->cityCode;
 
-			$profileData->districtCode = $response->registro->afiliacion->distrito ?? '';
-
-			$profileData->district = lang('GEN_SELECTION');
+				$profileData->districtCode = $response->registro->afiliacion->distrito ?? '';
+				$profileData->district = '';
 
 			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
 				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;

@@ -356,23 +356,22 @@ function internationalCode(information) {
 }
 
 function changeInputselect(currentIso) {
-	if (currentIso == 'pe') {
-		getStates();
-		$('#stateInput, #cityInput, #districtInput')
-			.attr('type', 'hidden')
-			.addClass('ignore');
-		$('#state, #city, #district')
-			.show()
-			.removeClass('ignore');
-	} else {
-		$('#state, #city, #district')
-			.hide()
-			.addClass('ignore');
-		$('#stateInput, #cityInput, #districtInput')
-			.attr('type', 'text')
-			.removeClass('ignore');
+	switch (currentIso) {
+		case 'all':
+		case 'pe':
+			$('#stateInput, #cityInput, #districtInput')
+				.attr('type', 'hidden')
+				.addClass('ignore');
+			$('#state, #city, #district')
+				.removeClass('ignore')
+				.show();
+		break;
+		default:
+			$('#state, #city, #district')
+				.hide()
+				.addClass('ignore');
+			$('#stateInput, #cityInput, #districtInput')
+				.attr('type', 'text')
+				.removeClass('ignore');
 	}
-
-	validateForms($('#profileUserForm'));
-	$('#profileUserForm').valid();
 }

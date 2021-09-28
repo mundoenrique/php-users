@@ -144,7 +144,7 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1 <?= $skipContacData; ?>">
-                  <?php if (lang('CONF_INTERNATIONALADDRESS') == 'ON') : ?>
+                  <?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="country"><?= lang('USER_COUNTRY') ?></label>
                     <select id="country" class="custom-select form-control" name="country">
@@ -184,7 +184,7 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
-                      <option value="<?= $stateCode; ?>"><?= $state; ?></option>
+                      <option value="<?= $stateCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                       <input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>" autocomplete="off"
                         state-code="<?= $stateCode; ?>">
                     </select>
@@ -192,18 +192,18 @@
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="city"><?= lang('USER_CITY') ?></label>
-                    <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
-                      <option value="<?= $cityCode; ?>"><?= $city; ?></option>
+                    <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city">
+                      <option value="<?= $cityCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                     </select>
                     <input type="hidden" id="cityInput" name="cityInput" class="form-control" value="<?= $city ?>" autocomplete="off"
                       city-code="<?= $cityCode; ?>">
                     <div class="help-block"></div>
                   </div>
-                  <?php if($longProfile == 'S' || lang('CONF_INTERNATIONALADDRESS') == 'ON'): ?>
+                  <?php if($longProfile == 'S' || lang('CONF_INTERNATIONAL_ADDRESS') == 'ON'): ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
-                    <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
-                      <option value="<?= $districtCode ?>"><?= $district ?></option>
+                    <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district">
+                      <option value="<?= $districtCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                     </select>
                     <input type="hidden" id="districtInput" name="districtInput" class="form-control" value="<?= $district ?>" autocomplete="off"
                       district-code="<?= $districtCode ?>">
@@ -237,7 +237,7 @@
                   <div class="form-group col-6 col-lg-4 input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <div class="flex w-100">
-                      <?php if (lang('CONF_INTERNATIONALADDRESS') == 'ON') : ?>
+                      <?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                       <div class="container-flags form-control truncate col-4 p-0">
                         <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>"
                           type="text" name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>"
