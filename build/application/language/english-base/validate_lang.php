@@ -64,3 +64,6 @@ $lang['VALIDATE_CONTRACT'] = 'You must read and accept the electronic money acco
 $lang['VALIDATE_SHORT_PHRASE'] = 'Min 4 max 25 (letters, numbers, space ().).';
 $lang['VALIDATE_TYPE_DOCUMENT'] = 'Please select a valid document type.';
 $lang['VALIDATE_NOTIFICATIONS'] = 'Html manipulation detected.';
+$lang['VALIDATE_STATE'] = 'Indicates a State.';
+$lang['VALIDATE_CITY'] = 'Indicates a City.';
+$lang['VALIDATE_SECTOR'] = 'Indicates a Sector.';

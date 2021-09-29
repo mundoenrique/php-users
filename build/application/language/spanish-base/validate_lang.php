@@ -64,3 +64,6 @@ $lang['VALIDATE_CONTRACT'] = 'Debes leer y aceptar el contrato de cuenta dinero 
 $lang['VALIDATE_SHORT_PHRASE'] = 'mín 4 máx 25 (letras, números, espacio ().).';
 $lang['VALIDATE_TYPE_DOCUMENT'] = 'Selecciona un tipo de documento válido.';
 $lang['VALIDATE_NOTIFICATIONS'] = 'Se detectó manipulación del html.';
+$lang['VALIDATE_STATE'] = 'Indica un Estado.';
+$lang['VALIDATE_CITY'] = 'Indica una Ciudad.';
+$lang['VALIDATE_SECTOR'] = 'Indica una sector.';
