@@ -84,7 +84,10 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+                    <label for="birthPlace">
+											<?= lang('USER_PLACEBIRTH') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" value="<?= $birthPlace; ?>">
                     <div class="help-block"></div>
                   </div>
@@ -262,15 +265,20 @@
                   </div>
 
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine; ?>">
-                    <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE') ?> <span
-                        class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label class="truncate" for="landLine">
+											<?= lang('USER_PHONE_LANDLINE') ?>
+										 	<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine"
                       value="<?= $landLine; ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
 
                   <div class="form-group col-12 col-lg-8  input-height <?= $skipOtherPhone; ?>">
-                    <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label for="otherPhoneNum">
+											<?= lang('USER_PHONE_OTHER') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <div class="form-row">
                       <div class="form-group col-6 input-height">
                         <select id="phoneType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreOtherPhone; ?>" name="phoneType">
@@ -341,13 +349,19 @@
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="charge"><?= lang('USER_CHARGE') ?></label>
+                    <label for="position">
+											<?= lang('USER_CHARGE') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="position" class="form-control" type="text" name="position" value="<?= $position ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+                    <label for="averageIncome">
+											<?= lang('USER_AVERAGE_MONTHLY') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="<?= $averageIncome ?>"
                       autocomplete="off">
                     <div class="help-block"></div>
