@@ -61,13 +61,9 @@ function getProfessions() {
 }
 
 function getStates() {
-	$('#state').children().not(':first').remove();
-	$('#state option:first').prop('disabled', false);
 	$('#state')
 		.prop('disabled', true)
 		.prepend('<option value="" selected disabled>' + lang.GEN_WAITING_STATES + '</option>');
-	$('#city').prop('disabled', true);
-	$('#district').prop('disabled', true);
 
 	who = 'Assets';
 	where = 'StatesList';
@@ -102,7 +98,6 @@ function getStates() {
 }
 
 function getCities(currentState) {
-	$('#city').children().not(':first').remove();
 	$('#city option:first').prop('disabled', false);
 	$('#city')
 		.prop('disabled', true)
@@ -141,7 +136,6 @@ function getCities(currentState) {
 }
 
 function getdistrict(currentCity) {
-	$('#district').children().not(':first').remove();
 	$('#district option:first').prop('disabled', false);
 	$('#district')
 		.prop('disabled', true)

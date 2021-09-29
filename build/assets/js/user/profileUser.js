@@ -17,9 +17,6 @@ $(function () {
 	longProfile = $('#longProfile').val();
 	formFile = $('#profileUserForm');
 	skipFields = getIgnoredFields(formFile);
-
-	validateForms(formFile);
-	formFile.valid();
 	ErrorIndexes = getErrorIndexes();
 	setTextClass(ErrorIndexes);
 	toPositionFieldsetError(ErrorIndexes);
@@ -54,14 +51,22 @@ $(function () {
 		getStates();
 
 		$('#state').on('change', function () {
-			$('#stateInput').attr('state-code', '').val('')
-			$('#cityInput').attr('city-code', '').val('')
-			$('#districtInput').attr('district-code', '').val('')
+			$('#stateInput').attr('state-code', '').val('');
+			$('#cityInput').attr('city-code', '').val('');
+			$('#districtInput').attr('district-code', '').val('');
+			$('#city option:first').prop('disabled', false);
+			$('#city').children().not(':first').remove();
+			$('#city option:first').prop('disabled', true);
+			$('#district option:first').prop('disabled', false);
+			$('#district').children().not(':first').remove();
+			$('#district option:first').prop('disabled', true);
+
 			getCities(this.value);
 		});
 
 		$('#city').on('change', function () {
 			if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+				$('#district').children().not(':first').remove();
 				getdistrict(this.value)
 			}
 		});
@@ -211,7 +216,7 @@ function ignoreFields(action, form, skip) {
 			if (action) {
 				$(this).addClass('ignore');
 			} else {
-				$(this).removeClass('ignore');
+				$(this).not('.skip').removeClass('ignore');
 			}
 		}
 	});

@@ -153,6 +153,19 @@ $(function () {
 			action: 'selectCountry'
 		}
 
+		$('#state').prop('selectedIndex', 0);
+		$('#mobilePhone').val('');
+
+		$('#stateInput').attr('state-code', '').val('');
+		$('#cityInput').attr('city-code', '').val('');
+		$('#districtInput').attr('district-code', '').val('');
+		$('#city option:first').prop('disabled', false);
+		$('#city').children().not(':first').remove();
+		$('#city option:first').prop('disabled', true);
+		$('#district option:first').prop('disabled', false);
+		$('#district').children().not(':first').remove();
+		$('#district option:first').prop('disabled', true);
+
 		internationalCode(countryInf);
 	});
 
@@ -348,11 +361,7 @@ function internationalCode(information) {
 	$('#internationalCode').addClass('country-' + information.currentIso);
 	$('#internationalCode').attr('iso', information.currentIso);
 
-	if (information.action == 'optionsInf') {
-		$('#country').val(information.currentIso);
-	}
-
-	changeInputselect(information.currentIso);
+	information.action == 'selectCountry' ? changeInputselect(information.currentIso) : '';
 }
 
 function changeInputselect(currentIso) {
@@ -361,17 +370,20 @@ function changeInputselect(currentIso) {
 		case 'pe':
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'hidden')
-				.addClass('ignore');
+				.addClass('ignore skip');
 			$('#state, #city, #district')
-				.removeClass('ignore')
+				.removeClass('ignore skip')
 				.show();
 		break;
 		default:
 			$('#state, #city, #district')
 				.hide()
-				.addClass('ignore');
+				.addClass('ignore skip');
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'text')
-				.removeClass('ignore');
+				.removeClass('ignore skip');
 	}
+
+	validateForms($('#profileUserForm'))
+	$('#profileUserForm').valid();
 }
