@@ -340,7 +340,7 @@ echo $insertRecaptcha;
 		<div class="alert-simple alert-warning" id="message">
 			<div>
 				<p style="margin: 8px 4px;">Estimados clientes y usuarios:</p>
-				<p  style="margin: 8px 4px;"><b>Tebca y Servitebca</b> están adecuando su plataforma a los nuevos esquemas planteados con motivo de <b>Reconversión  Monetaria</b>. Por  esta razón, <b>desde las 11:00pm del día jueves 30-09-2021 y hasta las 8:00am del día viernes 01-10-2021</b>, estarán suspendidos los servicios de consultas y transacciones disponibles para las tarjetas <b>Bonus Alimentación y Plata Servitebca</b>.</p>
+				<p  style="margin: 8px 4px;"><b>Tebca y Servitebca</b> están adecuando su plataforma a los nuevos esquemas planteados con motivo de <b>Re-expresión  Monetaria</b>. Por  esta razón, <b>desde las 8:00pm del día jueves 30-09-2021 y hasta las 6:00am del día viernes 01-10-2021</b>, estarán suspendidos los servicios de consultas y transacciones disponibles para las tarjetas <b>Bonus Alimentación y Plata Servitebca</b>.</p>
 				<p style="margin: 8px 4px;">Agradecemos su máxima comprensión.</p>
 			</div>
 		</div>
