@@ -67,3 +67,5 @@ $lang['VALIDATE_NOTIFICATIONS'] = 'Html manipulation detected.';
 $lang['VALIDATE_STATE'] = 'Indicates a State.';
 $lang['VALIDATE_CITY'] = 'Indicates a City.';
 $lang['VALIDATE_SECTOR'] = 'Indicates a Sector.';
+$lang['VALIDATE_SECTOR'] = 'Indicates a Sector.';
+$lang['VALIDATE_INT_CODE'] = 'Indicate the international code.';

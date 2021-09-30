@@ -177,6 +177,7 @@ $(function () {
 		}
 
 		internationalCode(optionsInf);
+		$('#internationalCode').focus().blur();
 	});
 });
 

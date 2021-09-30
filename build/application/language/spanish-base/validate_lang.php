@@ -66,4 +66,5 @@ $lang['VALIDATE_TYPE_DOCUMENT'] = 'Selecciona un tipo de documento válido.';
 $lang['VALIDATE_NOTIFICATIONS'] = 'Se detectó manipulación del html.';
 $lang['VALIDATE_STATE'] = 'Indica un Estado.';
 $lang['VALIDATE_CITY'] = 'Indica una Ciudad.';
-$lang['VALIDATE_SECTOR'] = 'Indica una sector.';
+$lang['VALIDATE_SECTOR'] = 'Indica una Sector.';
+$lang['VALIDATE_INT_CODE'] = 'Indica el código internacional.';

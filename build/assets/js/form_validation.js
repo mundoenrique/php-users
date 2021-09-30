@@ -44,6 +44,7 @@ function validateForms(form) {
 		my: new RegExp(lang.CONF_REGEX_DATE_MY),
 		y: new RegExp(lang.CONF_REGEX_DATE_Y),
 	};
+	var intCode = new RegExp(lang.CONF_REGEX_INT_CODE);
 	var defaults = {
 		debug: true,
 		errorClass: lang.CONF_VALID_ERROR,
@@ -100,12 +101,16 @@ function validateForms(form) {
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
 			"landLine": {
-				pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: ["#mobilePhone", "#otherPhoneNum"]
+				pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked),
+				differs: ["#mobilePhone", "#otherPhoneNum"]
 			},
 			"mobilePhone": {
-				required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: ["#landLine", "#otherPhoneNum"]
+				required: true,
+				pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked),
+				differs: ["#landLine", "#otherPhoneNum"],
+				checkIntCode: '#internationalCode'
 			},
-			"internationalCode" : { required: true },
+			"internationalCode": { required: true, pattern: intCode },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
@@ -240,8 +245,9 @@ function validateForms(form) {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_MOBIL_PHONE,
 				differs: lang.VALIDATE_DIFFERS_PHONE,
+				checkIntCode: lang.VALIDATE_INT_CODE
 			},
-			"internationalCode" : 'Indica el código de tu país',
+			"internationalCode": '',
 			"otherPhoneNum": {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_PHONE,
@@ -351,6 +357,16 @@ function validateForms(form) {
 
 	$.validator.methods.dbAvailable = function (value, element, param) {
 		return $(element).hasClass('available');
+	}
+
+	$.validator.methods.checkIntCode = function (value, element, param) {
+		var valid = true;
+
+		if (lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+			valid = $(param).val() != '' && intCode.test($(param).val());
+		}
+
+		return valid
 	}
 
 	$.validator.methods.requiredSelect = function (value, element, param) {
