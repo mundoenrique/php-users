@@ -241,7 +241,7 @@
 									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-2 input-height">
                     <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
-                    <div class="container-flags form-control truncate col-4 p-0">
+                    <div class="container-flags truncate col-4 p-0">
                       <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>" type="text"
                         name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>" value="<?= $countryCode; ?>"
                         readonly>

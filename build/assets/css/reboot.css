@@ -4827,7 +4827,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
 	border: 1px solid var(--color-eighth);
 	cursor: pointer;
-	display: inline-block;
+	display: block;
 	height: calc(1.386em + .75rem + 4px);
 	padding-right: 1.75rem !important;
   -webkit-appearance: none;
