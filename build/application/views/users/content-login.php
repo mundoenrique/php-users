@@ -330,3 +330,39 @@ echo $insertRecaptcha;
 		</div>
 	</div>
 </div>
+
+<!-- MODAL MONETARY RECONVERSION -->
+<div id="dialog-monetary-reconversion" style='display:none'>
+	<header>
+		<h2>Aviso importante</h2>
+	</header>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple alert-warning" id="message">
+			<div>
+				<p style="margin: 8px 4px;">Estimados clientes y usuarios:</p>
+				<p  style="margin: 8px 4px;"><b>Tebca y Servitebca</b> están adecuando su plataforma a los nuevos esquemas planteados con motivo de <b>Re-expresión  Monetaria</b>. Por  esta razón, <b>desde las 8:00pm del día jueves 30-09-2021 y hasta las 6:00am del día viernes 01-10-2021</b>, estarán suspendidos los servicios de consultas y transacciones disponibles para las tarjetas <b>Bonus Alimentación y Plata Servitebca</b>.</p>
+				<p style="margin: 8px 4px;">Agradecemos su máxima comprensión.</p>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button id="dialog-monetary" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>
+
+<div id="dialog-maintenance-general" style='display:none'>
+	<header>
+		<h2>Conexión Personas</h2>
+	</header>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple alert-warning" id="message">
+			<span aria-hidden="true" class="icon-warning-sign"></span>
+			<p>
+				Estamos haciendo mantenimiento a la plataforma para atenderte mejor.
+			</p>
+		</div>
+		<div class="form-actions">
+			<button id="dialog-maintenance" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>

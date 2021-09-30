@@ -54,8 +54,8 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (lang('CONF_MAINTENANCE') == 'ON') {
-			$this->isResponseRc = 9997;
+		if (lang('CONFIG_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = lang('CONFIG_MAINTENANCE_RC');
 		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
@@ -210,6 +210,14 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 				$this->response->modalBtn['btn2']['action'] = 'destroy';
 				$this->session->set_flashdata('authToken', $response->bean->codigoOtp->authToken);
+			break;
+			case 9996:
+				$this->response->code = 3;
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->title = lang('GEN_MSG_IMPORTANT');
+				$this->response->msg = lang('GEN_MSG_RECONVERSION');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 			break;
 			case 9997:
 				$this->response->code = 4;
