@@ -433,6 +433,7 @@ $lang['USER_LOAD_DOCS_INFO5'] = 'Your identity document must be valid.';
 $lang['USER_UPDATE_SUCCESS'] = 'The data was successfully updated.';
 $lang['USER_UPDATE_FAIL'] = 'It was not possible to update the user data, please try again';
 $lang['USER_INVALID_DIGIT'] = 'Invalid check digit.';
+$lang['USER_CODE_INTERNATIONAL'] = 'International Code';
 $lang['USER_ACTIVATION_FAIL'] = 'The profile was updated successfully, but it was not possible to activate your card, please get in touch with the <strong>Contact Center</strong>.';
 $lang['USER_IDENTIFY_EXIST'] = 'There is already a %s user with the data entered. Please verify your information and try again.';
 $lang['USER_INVALID_DATE'] = 'It was not possible to validate your data, please try again.';

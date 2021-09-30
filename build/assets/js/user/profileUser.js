@@ -21,7 +21,7 @@ $(function () {
 	setTextClass(ErrorIndexes);
 	toPositionFieldsetError(ErrorIndexes);
 
-	$('#profileUserForm').on('change', function() {
+	$('#profileUserForm').on('change', function () {
 		$('#btn-cancel').attr('href', baseURL + lang.CONF_LINK_USER_PROFILE)
 	});
 
