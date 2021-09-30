@@ -115,7 +115,7 @@ class Users_model extends CI_Model
 		);
 		$reconversionVe = true;
 
-		if ($desdata->rc == 0 && !empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
+		if (isset($desdata->codPais) && !empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
 			$putSession = FALSE;
 			switch ($desdata->codPais) {
 				/* case 'Ve':
