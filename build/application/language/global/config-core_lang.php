@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONFIG_MAINTENANCE'] = 'ON';
+$lang['CONFIG_MAINTENANCE'] = 'OFF';
 $lang['CONFIG_MAINTENANCE_RC'] = 9997;
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
