@@ -330,3 +330,34 @@ echo $insertRecaptcha;
 		</div>
 	</div>
 </div>
+
+<!-- MODAL MONETARY RECONVERSION -->
+<div id="dialog-monetary-reconversion" style='display:none'>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple" id="message">
+			<div>
+				<img src="<?= base_url('assets/images/nueva-expresion-monetaria.png') ?>" alt="Notificación" style="height: 410px; width: 405px;">
+			</div>
+		</div>
+		<div class="form-actions">
+			<button id="dialog-monetary" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>
+
+<div id="dialog-maintenance-general" style='display:none'>
+	<header>
+		<h2>Conexión Personas</h2>
+	</header>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple alert-warning" id="message">
+			<span aria-hidden="true" class="icon-warning-sign"></span>
+			<p>
+				Estamos haciendo mantenimiento a la plataforma para atenderte mejor.
+			</p>
+		</div>
+		<div class="form-actions">
+			<button id="dialog-maintenance" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>

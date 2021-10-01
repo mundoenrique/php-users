@@ -93,6 +93,15 @@ function getSignIn() {
 
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 			break;
+			case 3:
+				response.modalBtn.minWidth = 480;
+				response.modalBtn.maxHeight = 'none';
+				response.modalBtn.posAt = 'center top';
+				response.modalBtn.posMy = 'center top+160';
+				inputModal = response.msg
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
+
 		}
 
 		if (response.code != 0) {
