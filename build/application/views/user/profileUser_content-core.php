@@ -237,7 +237,6 @@
                   </div>
                   <?php endif; ?>
 
-
 									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-2 input-height">
                     <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>

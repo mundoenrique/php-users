@@ -107,8 +107,7 @@ function validateForms(form) {
 			"mobilePhone": {
 				required: true,
 				pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked),
-				differs: ["#landLine", "#otherPhoneNum"],
-				checkIntCode: '#internationalCode'
+				differs: ["#landLine", "#otherPhoneNum"]
 			},
 			"internationalCode": { required: true, pattern: intCode },
 			"otherPhoneNum": {
@@ -244,10 +243,9 @@ function validateForms(form) {
 			"mobilePhone": {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_MOBIL_PHONE,
-				differs: lang.VALIDATE_DIFFERS_PHONE,
-				checkIntCode: lang.VALIDATE_INT_CODE
+				differs: lang.VALIDATE_DIFFERS_PHONE
 			},
-			"internationalCode": '',
+			"internationalCode": lang.VALIDATE_INT_CODE,
 			"otherPhoneNum": {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_PHONE,
@@ -359,17 +357,7 @@ function validateForms(form) {
 		return $(element).hasClass('available');
 	}
 
-	$.validator.methods.checkIntCode = function (value, element, param) {
-		var valid = true;
-
-		if (lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
-			valid = $(param).val() != '' && intCode.test($(param).val());
-		}
-
-		return valid
-	}
-
-	$.validator.methods.requiredSelect = function (value, element, param) {
+		$.validator.methods.requiredSelect = function (value, element, param) {
 		var valid = true;
 
 		if ($(element).find('option').length > 0) {

@@ -178,6 +178,12 @@ $(function () {
 
 		internationalCode(optionsInf);
 		$('#internationalCode').focus().blur();
+
+		if ($('#internationalCode').hasClass('has-error')) {
+			$('.container-flags').addClass('has-error-file');
+		} else {
+			$('.container-flags').removeClass('has-error-file');
+		}
 	});
 });
 
@@ -371,7 +377,8 @@ function changeInputselect(currentIso) {
 		case 'pe':
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'hidden')
-				.addClass('ignore skip');
+				.addClass('ignore skip')
+				.removeClass('has-error');
 			$('#state, #city, #district')
 				.removeClass('ignore skip')
 				.show();
@@ -379,7 +386,8 @@ function changeInputselect(currentIso) {
 		default:
 			$('#state, #city, #district')
 				.hide()
-				.addClass('ignore skip');
+				.addClass('ignore skip')
+				.removeClass('has-error');
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'text')
 				.removeClass('ignore skip');
@@ -387,4 +395,10 @@ function changeInputselect(currentIso) {
 
 	validateForms($('#profileUserForm'))
 	$('#profileUserForm').valid();
+
+	if ($('#internationalCode').hasClass('has-error')) {
+		$('.container-flags').addClass('has-error-file');
+	} else {
+		$('.container-flags').removeClass('has-error-file');
+	}
 }

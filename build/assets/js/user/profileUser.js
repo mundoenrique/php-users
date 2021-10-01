@@ -181,35 +181,6 @@ function valid(button) {
 	return valid;
 }
 
-function getResponseServ(currentaction) {
-	who = 'User';
-
-	callNovoCore(who, where, data, function (response) {
-		if (currentaction == 'ValidNickName') {
-			$('#nickNameProfile').prop('disabled', false)
-			switch (response.code) {
-				case 0:
-					$('#nickNameProfile')
-						.removeClass('has-error')
-						.addClass('has-success available')
-						.parent('.input-group').siblings('.help-block').text('');
-					break;
-				case 1:
-					$('#nickNameProfile')
-						.addClass('has-error')
-						.removeClass('has-success available')
-						.parent('.input-group').siblings('.help-block').text(response.msg);
-					break;
-			}
-		}
-
-		if (currentaction == 'SignUpData') {
-			$('#signUpBtn').html(btnText);
-			insertFormInput(false);
-		}
-	});
-}
-
 function ignoreFields(action, form, skip) {
 	form.find('input, select, textarea').each(function () {
 		if (!skip.includes($(this).attr('id'))) {
