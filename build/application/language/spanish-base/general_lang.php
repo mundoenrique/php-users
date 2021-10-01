@@ -226,3 +226,5 @@ $lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';
 $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
+$lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
+$lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';

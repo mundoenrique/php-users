@@ -108,17 +108,25 @@ class Users_model extends CI_Model
 
 		$maintenance = array (
 			//'Usd',
-			//'Pe'
-			//'Ec-bp',
-			//'Co',
-			//'Ve'
+			// 'Pe',
+			// 'Ec-bp',
+			// 'Co',
+			// 'Ve'
 		);
+		$reconversionVe = true;
 
-		if (!empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
+		if (isset($desdata->codPais) && !empty($maintenance) && in_array($desdata->codPais, $maintenance)) {
 			$putSession = FALSE;
+			switch ($desdata->codPais) {
+				/* case 'Ve':
+					$rc = $reconversionVe ? 9996 : 9997;
+				break; */
+				default:
+					$rc = 9997;
+				break;
+			}
 			$desdata = [
-				'rc' => 9997,
-				'msg' => 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor.'
+				'rc' => $rc,
 			];
 		}
 
