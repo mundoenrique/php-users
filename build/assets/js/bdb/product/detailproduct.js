@@ -148,7 +148,7 @@ $$.addEventListener('DOMContentLoaded', function () {
 	];
 
 	// Gráficas de estadísticas total abonos y cargos
-	if (movementsList != null) {
+	if (movementsList.querySelector(".feed-item")) {
 		if (movementsList.querySelectorAll(".feed-item").length >= 10) {
 			$('#movementsList').easyPaginate({});
 			movementsPaginate = movementsList.nextElementSibling;
