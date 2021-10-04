@@ -104,7 +104,7 @@ $config = [
 		],
 		[
 			'field' => 'landLine',
-			'rules' => 'trim|numeric'
+			'rules' => 'trim|regex_match[/^[0-9*\+]+$/]'
 		],
 		[
 			'field' => 'mobilePhone',
@@ -175,7 +175,7 @@ $config = [
 		],
 		[
 			'field' => 'landLine',
-			'rules' => 'trim|regex_match[/^[0-9*]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9*\+]+$/]'
 		],
 		[
 			'field' => 'mobilePhone',

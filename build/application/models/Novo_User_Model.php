@@ -1221,6 +1221,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->className = 'com.novo.objects.MO.DatosPerfilMO';
 		$this->dataRequest->country = $this->session->customerSess;
+
+		if (isset($dataRequest->internationalCode)) {
+			$dataRequest->mobilePhone = $dataRequest->internationalCode . ' ' . $dataRequest->mobilePhone;
+		}
+
 		$this->dataRequest->registro = [
 			'user' => [
 				'userName' => $this->userName,
@@ -1332,12 +1337,20 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			}
 		}
+		if (isset($dataRequest->country) && $dataRequest->country != 'pe') {
+			$dataRequest->address = $dataRequest->address . '|' . $dataRequest->country . '|' . $dataRequest->stateInput . '|' . $dataRequest->cityInput;
+			$dataRequest->address .=  '|' . $dataRequest->districtInput;
+			$dataRequest->state = '15000';
+			$dataRequest->city = '15008';
+			$dataRequest->district = '8315';
+		}
+
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->customerSess,
 			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
-			'acCodDistrito' => $dataRequest->city,
+			'acCodDistrito' => $dataRequest->district ?? '',
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address
 		];
@@ -1381,6 +1394,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -313:
 			case -314:
 			case -317:
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->msg = lang('USER_ACTIVATION_FAIL');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
