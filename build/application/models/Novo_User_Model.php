@@ -612,8 +612,8 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 200://MODAL OTP
 				$this->response->code = 2;
-				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->msg = novoLang(lang('GEN_OTP_MSG'), $maskMail);
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
@@ -623,11 +623,13 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('authToken', $response->bean->otp->authToken);
 			break;
 			case -21:
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('USER_INVALID_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -183:
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_INVALID_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -640,21 +642,24 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286://OTP INVALIDO
-				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125://MENSAJE TARJETA VENCIDA
+				$this->response->icon = lang('CONF_ICON_INFO');
 					$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 					$this->response->msg = lang('GEN_EXPIRED_PRODUCT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -343://MENSAJE TARJETA BLOQUEADA
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_LOCK_PRODUCT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -1006,21 +1011,16 @@ class Novo_User_Model extends NOVO_Model {
 				$countryIso = 'pe';
 
 				if (count($addressArray) > 1) {
-					foreach (lang('USER_COUNTRIES') AS $countries) {
-						if ($countries['iso'] === $addressArray[1]) {
-							$countryCode = $countries['code'];
-							$countryIso  = $countries['iso'];
-							break;
-						}
-					}
-
+					$key = array_search($addressArray[1], array_column(lang('USER_COUNTRIES'), 'iso'));
+					$countryCode = lang('USER_COUNTRIES')[$key]['code'];
+					$countryIso = lang('USER_COUNTRIES')[$key]['iso'];
 					$profileData->address = $addressArray[0];
 					$profileData->stateCode = '';
-					$profileData->state = $addressArray[2];
+					$profileData->state = $addressArray[2] ?? '';
 					$profileData->cityCode = '';
-					$profileData->city = $addressArray[3];
+					$profileData->city = $addressArray[3] ?? '';
 					$profileData->districtCode = '';
-					$profileData->district = $addressArray[4];
+					$profileData->district = $addressArray[4] ?? '';
 				}
 			}
 		}
@@ -1058,6 +1058,11 @@ class Novo_User_Model extends NOVO_Model {
 
 						if (preg_match('/[0-9]{7,16}$/', $mobilePhone, $matches)) {
 							$mobilePhone = trim($matches[0]);
+						}
+
+						if ($countryIso == 'off' && $countryCode != '') {
+							$key = array_search($countryCode, array_column(lang('USER_COUNTRIES'), 'code'));
+							$countryIso = lang('USER_COUNTRIES')[$key]['iso'];
 						}
 
 						$phonesList['countryCode'] = $countryCode;
