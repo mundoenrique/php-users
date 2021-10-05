@@ -747,6 +747,11 @@ class Novo_User_Model extends NOVO_Model {
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
+
+		if (isset($dataRequest->internationalCode)) {
+			$dataRequest->mobilePhone = $dataRequest->internationalCode . ' ' . $dataRequest->mobilePhone;
+		}
+
 		$this->dataRequest->listaTelefonos = [
 			[
 				'tipo' => 'HAB',

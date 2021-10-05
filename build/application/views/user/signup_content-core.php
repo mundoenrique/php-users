@@ -213,7 +213,30 @@
                     <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
-                  <div class="form-group col-6 col-lg-4 input-height">
+
+									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+                  <div class="form-group col-6 col-lg-2 input-height">
+                    <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
+                    <div class="container-flags truncate col-4 p-0">
+                      <input id="internationalCode" class="select-flags" type="text"
+                        name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" readonly>
+                      <ul class="codeOptions">
+                        <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                        <?php if ($countries['status'] === '1'): ?>
+                        <li iso="<?= $countries['iso']; ?>">
+                          <i class="country-<?= $countries['iso']; ?>"></i>
+                          <?= $countries['name']; ?>
+                          <span class="code-country text"> <?= $countries['code']; ?></span>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                      </ul>
+                    </div>
+                    <div class="help-block"></div>
+                  </div>
+									<?php endif; ?>
+
+                  <div class="form-group col-6 <?= $longMobile; ?> input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" <?= $updatePhone; ?>
                       autocomplete="off">

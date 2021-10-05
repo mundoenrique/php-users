@@ -46,7 +46,6 @@ $(function () {
 		}
 
 		$(this).addClass('ignore');
-
 	});
 
 	$('#newPass').on('keyup focus', function () {
