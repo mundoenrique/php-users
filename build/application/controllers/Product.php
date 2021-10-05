@@ -77,7 +77,6 @@ class Product extends BDB_Controller
 			}
 
 			$productBalance = $this->modelLoad->callWs_getBalance_Product($row->noTarjeta);
-			log_message("info", "response productBalance:" . json_encode($productBalance));
 			$mountActual =  isset($productBalance->data['actual']) ? $this->transforNumber($productBalance->data['actual']) : '--';
 			$mountAvailable =  isset($productBalance->data['available']) ? $this->transforNumber($productBalance->data['available']) : '--';
 
