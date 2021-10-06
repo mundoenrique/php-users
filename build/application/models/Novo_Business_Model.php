@@ -134,7 +134,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->set_userdata('oneCard', $cardsList[0]);
 
 			if ($this->response->code == 0) {
-				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
+				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'Location', 'GET');
 				exit();
 			}
 		}

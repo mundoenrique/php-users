@@ -26,7 +26,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 'GET');
 			exit();
 		}
 
@@ -335,7 +335,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 'GET');
 		}
 
 	}
@@ -351,7 +351,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 'GET');
 			exit();
 		}
 

@@ -31,16 +31,16 @@ if (!function_exists('clientUrlValidate')) {
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.$uriCore), 'location', 301);
+			redirect(base_url($client.$uriCore), 'Location', 'GET');
 		}
 
 		if (in_array($client, $accessUrl)) {
 			switch ($client) {
 				case 'default':
-					redirect(base_url(), 'location', 301);
+					redirect(base_url(), 'Location', 'GET');
 				break;
 				case 'pichincha':
-					redirect(base_url('pichincha/home'), 'location', 301);
+					redirect(base_url('pichincha/home'), 'Location', 'GET');
 				break;
 			}
 		}
