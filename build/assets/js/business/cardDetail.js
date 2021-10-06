@@ -19,8 +19,8 @@ $(function () {
 		onClose: function (dateText, inst) {
 			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
 			$(this)
-			.focus()
-			.blur();
+				.focus()
+				.blur();
 			var monthYear = $('#filterInputYear').val().split('/');
 			$('#filterMonth').val(monthYear[0]);
 			$('#filterYear').val(monthYear[1]);

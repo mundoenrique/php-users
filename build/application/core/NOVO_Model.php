@@ -93,8 +93,8 @@ class NOVO_Model extends CI_Model {
 		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->data = new stdClass();
 		$this->response->msg = '';
+		$this->response->data = new stdClass();
 		$linkredirect = uriRedirect();
 		$arrayResponse = [
 			'btn1'=> [
@@ -106,6 +106,7 @@ class NOVO_Model extends CI_Model {
 
 		switch($this->isResponseRc) {
 			case -29:
+			case -35:
 			case -61:
 				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
 
@@ -121,8 +122,8 @@ class NOVO_Model extends CI_Model {
 				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
 			default:
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
 		$this->response->modalBtn = $arrayResponse;

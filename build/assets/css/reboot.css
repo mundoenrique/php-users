@@ -3213,6 +3213,7 @@ table.dataTable thead th, table.dataTable thead td {
 table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
 	border-top: 1px solid #ddd;
 	border-right: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 	text-align: center;
 }
 
@@ -3227,10 +3228,6 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 
 table.dataTable tbody tr {
 	background-color: #ffffff;
-}
-
-table.dataTable tr:last-child td{
-	border-right: none;
 }
 
 /* Widgets */
@@ -4400,7 +4397,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .feed .feed-item {
 	border-top: 1px solid var(--color-eighth);
-	border-left: 2px solid var(--color-eighth);
+	border-left: 1px solid var(--color-eighth);
+	border-right: 1px solid var(--color-eighth);
 	background-color: var(--color-tertiary);
 	-webkit-transition: all .25s;
 	-moz-transition: all .25s;
@@ -4827,4 +4825,197 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	opacity: 1;
 	transition-property: all;
 	transition-duration: .2s;
+}
+
+/* Select flags  */
+.container-flags{
+	appearance: none;
+	background: rgba(255,255,255,1) url("../images/icons/icon-chevron_down_gray.svg") right .75rem center / 14px 14px no-repeat;
+	border: 1px solid var(--color-eighth);
+	cursor: pointer;
+	display: block;
+	height: calc(1.386em + .75rem + 4px);
+	padding-right: 1.75rem !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+	transition: all .1s ease-in-out;
+}
+
+.container-flags:hover {
+	background: rgba(255,255,255,1) url(../images/icons/icon-chevron_down_black.svg) right .75rem center / 14px 14px no-repeat;
+}
+
+.select-flags {
+  align-items: center;
+	border: 0px;
+	color: var(--color-sixth);
+  display: flex;
+  cursor: pointer;
+  height: calc(1.386em + .75rem + 4px);
+  position: relative;
+	padding: .375rem .75rem;
+	width: 100%;
+}
+
+.codeOptions {
+	background: #fff;
+	border: 1px solid var(--color-eighth);
+  display: none;
+  margin: 0;
+	max-height: 280px;
+	margin-top: -1px;
+	margin-left: -1px;
+	overflow-y: scroll;
+  padding: 0 10px;
+	position: fixed;
+	width: 220px;
+}
+
+.codeOptions.open {
+  display: inline-block;
+	z-index: 9;
+}
+
+.codeOptions li [class*="country-"],
+.container-flags [class*="country-"] {
+	background: #fff url('../images/country-flags-sprite.svg') no-repeat scroll 9px -1px;
+	color: var(--color-sixth);
+	cursor: pointer;
+	font-size: .875rem;
+	font-style: initial;
+	font-weight: var(--font-weight-base);
+	line-height: 35px;
+	padding: 6px 0px 6px 38px;
+}
+
+.codeOptions li:hover {
+	font-weight: var(--semibold-font-weight);
+}
+
+.country-none {
+	background-position: 9px 36px !important;
+}
+
+.country-ar {
+	background-position: 9px -1px !important;
+}
+
+.country-bl {
+	background-position: 9px -36px !important;
+}
+
+.country-bo {
+	background-position: 9px -71px !important;
+}
+
+.country-br {
+	background-position: 9px -106px !important;
+}
+
+.country-bz{
+	background-position: 9px -141px !important;
+}
+
+.country-ca {
+	background-position: 9px -176px !important;
+}
+
+.country-cl {
+	background-position: 9px -211px !important;
+}
+
+.country-co {
+	background-position: 9px -246px !important;
+}
+
+.country-cr {
+	background-position: 9px -281px !important;
+}
+
+.country-cu {
+	background-position: 9px -316px !important;
+}
+
+.country-do {
+	background-position: 9px -351px !important;
+}
+
+.country-ec {
+	background-position: 9px -386px !important;
+}
+
+.country-gf {
+	background-position: 9px -421px !important;
+}
+
+.country-gp {
+	background-position: 9px -456px !important;
+}
+
+.country-gt {
+	background-position: 9px -491px !important;
+}
+
+.country-gy {
+	background-position: 9px -526px !important;
+}
+
+.country-hn{
+	background-position: 9px -561px !important;
+}
+
+.country-ht {
+	background-position: 9px -596px !important;
+}
+
+.country-mq {
+	background-position: 9px -631px !important;
+}
+
+.country-mx {
+	background-position: 9px -666px !important;
+}
+
+.country-ni {
+	background-position: 9px -701px !important;
+}
+
+.country-pa {
+	background-position: 9px -736px !important;
+}
+
+.country-pe {
+	background-position: 9px -771px !important;
+}
+
+.country-pr {
+	background-position: 9px -806px !important;
+}
+
+.country-py {
+	background-position: 9px -841px !important;
+}
+
+.country-sr {
+	background-position: 9px -876px !important;
+}
+
+.country-sv {
+	background-position: 9px -911px !important;
+}
+
+.country-sx {
+	background-position: 9px -946px !important;
+}
+
+.country-us {
+	background-position: 9px -981px !important;
+}
+
+.country-uy {
+	background-position: 9px -1016px !important;
+}
+
+.country-ve {
+	background-position: 9px -1051px !important;
 }

@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONF_TENANT_PUBLICATION'] = 2021;
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
 $lang['CONF_IN_TRANSIT'] = 'ON';

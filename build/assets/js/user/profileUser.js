@@ -7,20 +7,21 @@ var skipFields;
 var ErrorIndexes;
 
 $(function () {
+	if ((lang.CONF_INTERNATIONAL_ADDRESS == 'ON' && $('#addresInput').val() === '1') || lang.CONF_CONTAC_DATA == 'ON') {
+		changeInputselect($('#internationalCode').attr('iso') || 'all');
+	}
+
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 	$('.cover-spin').hide();
 	longProfile = $('#longProfile').val();
 	formFile = $('#profileUserForm');
 	skipFields = getIgnoredFields(formFile);
-
-	validateForms(formFile);
-	formFile.valid();
 	ErrorIndexes = getErrorIndexes();
 	setTextClass(ErrorIndexes);
 	toPositionFieldsetError(ErrorIndexes);
 
-	$('#profileUserForm').on('change', function() {
+	$('#profileUserForm').on('change', function () {
 		$('#btn-cancel').attr('href', baseURL + lang.CONF_LINK_USER_PROFILE)
 	});
 
@@ -30,7 +31,7 @@ $(function () {
 		maxDate: '-18y',
 		changeMonth: true,
 		changeYear: true,
-		onSelect: function (selectedDate) {
+		onSelect: function () {
 			$(this).focus().blur();
 		}
 	});
@@ -39,7 +40,55 @@ $(function () {
 		$(this).rules('add', {
 			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
 		});
-	})
+	});
+
+
+	if (lang.CONF_PROFESSION == 'ON') {
+		getProfessions();
+	}
+
+	if (lang.CONF_CONTAC_DATA == 'ON') {
+		getStates();
+
+		$('#state').on('change', function () {
+			$('#stateInput').attr('state-code', '').val('');
+			$('#cityInput').attr('city-code', '').val('');
+			$('#districtInput').attr('district-code', '').val('');
+			$('#city option:first').prop('disabled', false);
+			$('#city').children().not(':first').remove();
+			$('#city option:first').prop('disabled', true);
+			$('#district option:first').prop('disabled', false);
+			$('#district').children().not(':first').remove();
+			$('#district option:first').prop('disabled', true);
+
+			getCities(this.value);
+		});
+
+		$('#city').on('change', function () {
+			if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+				$('#district').children().not(':first').remove();
+				getdistrict(this.value)
+			}
+		});
+	} else {
+		$('select').find('option').prop('disabled', false);
+	}
+
+	// Reset all bars to ensure that all the progress is removed
+	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
+		$(this).css({
+			'width': '0%',
+		});
+	});
+
+	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
+		var thisFs = $('.multi-step-form .form-container fieldset.active');
+
+		if (valid(thisFs)) {
+			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
+		}
+		return false;
+	});
 
 	$('#profileUserBtn').on('click', function (e) {
 		var valid;
@@ -67,7 +116,7 @@ $(function () {
 
 			if (longProfile == 'S') {
 				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
-				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=taxesObligated]:checked').val() == 'yes' ? '1' : '0';
 				data.protection = $('#protection').is(':checked') ? '1' : '0';
 				data.contract = $('#contract').is(':checked') ? '1' : '0';
 				delete data.yesTaxesObligated;
@@ -86,7 +135,7 @@ $(function () {
 						filesToUpload.push({
 							'name': e.id,
 							'file': $(`#${e.id}`).prop('files')[0]
-						}, );
+						});
 					})
 				}
 				data.files = filesToUpload;
@@ -103,66 +152,6 @@ $(function () {
 
 			scrollTopPos(formFile.offset().top);
 		}
-	});
-
-	if (lang.CONF_PROFESSION == 'ON') {
-		getProfessions();
-	}
-
-	if (lang.CONF_CONTAC_DATA == 'ON') {
-		getStates();
-
-		$('#state').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-
-			$('#city').children().remove();
-			$('#city').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-			$('#district').children().remove();
-			$('#district')
-				.prop('disabled', true)
-				.prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-
-			getCities(this.value);
-		});
-
-		$('#city').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-
-			if (longProfile == 'S') {
-				$('#district').children().remove();
-				$('#district').prepend('<option value="" selected>' + lang.GEN_SELECTION + '</option>');
-
-				getdistrict(this.value)
-			}
-		});
-
-		$('#district').on('change', function () {
-			if ($(this).find('option:first').val() == '') {
-				$(this).find('option').get(0).remove()
-			}
-		});
-	} else {
-		$('select').find('option').prop('disabled', false);
-	}
-
-	// Reset all bars to ensure that all the progress is removed
-	$('.multi-step-form > .progress-container > .progress > .progress-bar').each(function (elem) {
-		$(this).css({
-			'width': '0%',
-		});
-	});
-
-	$('.multi-step-form > .progress-container .progress-icon').click(function (event) {
-		let thisFs = $('.multi-step-form .form-container fieldset.active');
-
-		if (valid(thisFs)) {
-			moveTo($(this).closest('.multi-step-form'), +$(this).data('index'));
-		}
-		return false;
 	});
 
 });
@@ -192,42 +181,13 @@ function valid(button) {
 	return valid;
 }
 
-function getResponseServ(currentaction) {
-	who = 'User';
-
-	callNovoCore(who, where, data, function (response) {
-		if (currentaction == 'ValidNickName') {
-			$('#nickNameProfile').prop('disabled', false)
-			switch (response.code) {
-				case 0:
-					$('#nickNameProfile')
-						.removeClass('has-error')
-						.addClass('has-success available')
-						.parent('.input-group').siblings('.help-block').text('');
-					break;
-				case 1:
-					$('#nickNameProfile')
-						.addClass('has-error')
-						.removeClass('has-success available')
-						.parent('.input-group').siblings('.help-block').text(response.msg);
-					break;
-			}
-		}
-
-		if (currentaction == 'SignUpData') {
-			$('#signUpBtn').html(btnText);
-			insertFormInput(false);
-		}
-	});
-}
-
 function ignoreFields(action, form, skip) {
 	form.find('input, select, textarea').each(function () {
 		if (!skip.includes($(this).attr('id'))) {
 			if (action) {
 				$(this).addClass('ignore');
 			} else {
-				$(this).removeClass('ignore');
+				$(this).not('.skip').removeClass('ignore');
 			}
 		}
 	});

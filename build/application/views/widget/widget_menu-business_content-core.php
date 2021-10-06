@@ -7,7 +7,7 @@
     <?php $menuText1 = lang('GEN_MENU_'.$firstLevel); ?>
     <?php $menuLink1 = lang('CONF_LINK_'.$firstLevel); ?>
     <?php $menuLink1 = $menuLink1 != lang('CONF_NO_LINK') ? base_url($menuLink1) : lang('CONF_NO_LINK'); ?>
-    <li class="nav-item mr-1 inline <?= $menuLink1 != lang('CONF_NO_LINK') ? 'big-modal' : '' ?> <?= setCurrentPage($currentClass, $menuText1); ?>">
+    <li class="nav-item mr-1 inline <?= $menuLink1 != lang('CONF_NO_LINK') ? 'big-modal' : '' ?> <?= setCurrentPage($currentMethod, $menuText1); ?>">
       <a class="nav-link px-2 semibold primary" href="<?= $menuLink1 ?>"><?= $menuText1; ?></a>
       <ul class="dropdown-user pl-0 regular tertiary bg-secondary list-style-none list-inline">
         <?php foreach ($menuLevel1 AS $secondLevel => $menuLevel2): ?>

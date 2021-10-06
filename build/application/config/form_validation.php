@@ -104,7 +104,7 @@ $config = [
 		],
 		[
 			'field' => 'landLine',
-			'rules' => 'trim|numeric'
+			'rules' => 'trim|regex_match[/^[0-9*\+]+$/]'
 		],
 		[
 			'field' => 'mobilePhone',
@@ -175,7 +175,7 @@ $config = [
 		],
 		[
 			'field' => 'landLine',
-			'rules' => 'trim|regex_match[/^[0-9*]+$/]'
+			'rules' => 'trim|regex_match[/^[0-9*\+]+$/]'
 		],
 		[
 			'field' => 'mobilePhone',
@@ -504,6 +504,52 @@ $config = [
 			'field' => 'groupCode',
 			'rules' => 'trim|numeric|required'
 		]
+	],
+	'notifications' => [
+		[
+			'field' => 'screenSize',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'notificationsUpdate' => [
+		[
+			'field' => 'login',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'pinChange',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'temporaryLock',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'passwordChange',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'cardReplace',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+		[
+			'field' => 'temporaryUnLock',
+			'rules' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+	],
+	'notificationHistory' => [
+		[
+			'field' => 'initDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'finalDate',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+		[
+			'field' => 'notificationType',
+			'rules' => 'trim|numeric|required'
+		],
 	],
 	'keepSession' => [
 		[

@@ -84,12 +84,18 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+                    <label for="birthPlace">
+											<?= lang('USER_PLACEBIRTH') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="birthPlace" class="form-control" type="text" name="birthPlace" value="">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
+                    <label for="civilStatus">
+											<?= lang('USER_CIVILSTATUS') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <select id="civilStatus" class="custom-select form-control" name="civilStatus">
                       <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
                       <option value="<?= $key; ?>" <?= $key == '' ? 'selected disabled' : '';  ?>><?= $value; ?></option>
@@ -150,7 +156,9 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label class="truncate" for="postalCode"><?= lang('USER_POSTAL_CODE') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label class="truncate" for="postalCode">
+											<?= lang('USER_POSTAL_CODE') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
                     <input id="postalCode" class="form-control" type="text" name="postalCode" value="" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
@@ -198,18 +206,47 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine ?>">
-                    <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE')?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label class="truncate" for="landLine">
+											<?= lang('USER_PHONE_LANDLINE')?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="landLine" class="form-control" type="text" name="landLine" value="<?= $landLine ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
-                  <div class="form-group col-6 col-lg-4 input-height">
+
+									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+                  <div class="form-group col-6 col-lg-2 input-height">
+                    <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
+                    <div class="container-flags truncate col-4 p-0">
+                      <input id="internationalCode" class="select-flags" type="text"
+                        name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" readonly>
+                      <ul class="codeOptions">
+                        <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                        <?php if ($countries['status'] === '1'): ?>
+                        <li iso="<?= $countries['iso']; ?>">
+                          <i class="country-<?= $countries['iso']; ?>"></i>
+                          <?= $countries['name']; ?>
+                          <span class="code-country text"> <?= $countries['code']; ?></span>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                      </ul>
+                    </div>
+                    <div class="help-block"></div>
+                  </div>
+									<?php endif; ?>
+
+                  <div class="form-group col-6 <?= $longMobile; ?> input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" <?= $updatePhone; ?>
                       autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-12 col-lg-8 <?= $skipOtherPhone ?>">
-                    <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label for="otherPhoneNum">
+											<?= lang('USER_PHONE_OTHER') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <div class="form-row">
                       <div class="form-group col-6 input-height">
                         <select id="phoneType" class="custom-select form-control" name="phoneType">
@@ -286,13 +323,19 @@
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="position"><?= lang('USER_CHARGE') ?></label>
+                    <label for="position">
+											<?= lang('USER_CHARGE') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="position" class="form-control" type="text" name="position" value="" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+                    <label for="averageIncome">
+											<?= lang('USER_AVERAGE_MONTHLY') ?>
+											<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+										</label>
                     <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="" autocomplete="off">
                     <div class="help-block"></div>
                   </div>

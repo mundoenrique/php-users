@@ -85,7 +85,7 @@
           </div>
 					<?php if (lang('CONF_TYPE_TRANSACTION') == 'ON') :  ?>
 					<label class="mt-1 regular" for="transType"><?= lang('BUSINESS_TRANSACTIONS'); ?></label>
-					<div class="form-group col-2 px-1">
+					<div class="form-group col-3 px-1">
 						<select id="transType" class="custom-select form-control" name="transType">
 							<?php foreach (lang('BUSINESS_TRANSACTIONS_LIST') as $key => $value) : ?>
 							<option value="<?= $key; ?>">

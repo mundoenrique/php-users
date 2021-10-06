@@ -174,33 +174,29 @@ if (!function_exists('languageLoad')) {
 }
 
 if (!function_exists('setCurrentPage')) {
-	function setCurrentPage($currentClass, $menu) {
+	function setCurrentPage($currentMethod, $menu) {
 		$cssClass = '';
-		switch ($currentClass) {
-			case 'Novo_Business':
+		switch ($currentMethod) {
+			case 'userCardsList':
 				if($menu == lang('GEN_MENU_CARD_LIST')) {
 					$cssClass = 'page-current';
 				}
-
+			break;
+			case 'cardDetail':
 				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
 					$cssClass = 'page-current';
 				}
-				break;
-			case 'Novo_Payments':
-				if($menu == lang('GEN_MENU_PAYS_TRANSFER')) {
-					$cssClass = 'page-current';
-				}
-				break;
-			case 'Novo_Reports':
-				if($menu == lang('GEN_MENU_REPORTS')) {
-					$cssClass = 'page-current';
-				}
-				break;
-			case 'Novo_CustomerSupport':
+			break;
+			case 'services':
 				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
 				}
-				break;
+			break;
+			case 'expensesCategory':
+				if($menu == lang('GEN_MENU_REPORTS')) {
+					$cssClass = 'page-current';
+				}
+			break;
 		}
 
 		return $cssClass;
@@ -335,13 +331,15 @@ if (! function_exists('currencyFormat')) {
 
 if (! function_exists('floatFormat')) {
 	function floatFormat($num) {
+		$floatNum = $num;
 
-		$arrayNum = explode(lang('CONF_DECIMAL'), $num);
-    $arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
-		$floatNum = $arrayNum[0].'.'.$arrayNum[1];
+		if ($floatNum != '') {
+			$arrayNum = explode(lang('CONF_DECIMAL'), $num);
+			$arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
+			$floatNum = $arrayNum[0].'.'.$arrayNum[1];
+		}
 
 		return $floatNum;
-
 	}
 }
 
