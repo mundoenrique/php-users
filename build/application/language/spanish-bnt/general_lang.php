@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Operaciones';
 // General lang app
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
-//DATEPICKER
-$lang['GEN_PICKER_MINDATE'] = 2018;
 //GENERAL LANGUAGE
 $lang['GEN_DNI'] = 'CURP';
 $lang['GEN_FOTTER_NETWORKS_LINK'] = [

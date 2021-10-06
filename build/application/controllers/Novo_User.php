@@ -131,6 +131,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
 		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
 		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->longMobile = lang('CONF_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
@@ -284,6 +285,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->ignoreOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'ignore' : '';
 		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->longMobile = lang('CONF_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
 		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->terms = $this->session->terms;
 		$this->render->imagesLoaded = $this->render->imagesLoaded ?? [];

@@ -102,8 +102,20 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$view = 'notifications';
 		array_push(
 			$this->includeAssets->jsFiles,
+			"third_party/jquery.easyPaginate-1.2",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
 			"support/notifications"
 		);
+
+		$notifications = $this->loadModel();
+		$this->responseAttr($notifications);
+
+		foreach($notifications->data AS $index => $render) {
+			$this->render->$index = $render;
+		}
+
 		$this->render->titlePage = lang('GEN_MENU_NOTIFICATIONS');
 		$this->views = ['support/'.$view];
 		$this->loadView($view);

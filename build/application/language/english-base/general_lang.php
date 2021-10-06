@@ -87,6 +87,8 @@ $lang['GEN_OTHER_PRODUCTS'] = 'Other product';
 $lang['GEN_MOVEMENTS'] = 'Movements';
 $lang['GEN_TYPE_DOCUMENT'] = 'Type of document';
 $lang['GEN_MONTHLY'] = 'Monthly';
+$lang['GEN_FROM'] = 'From';
+$lang['GEN_TO'] = 'To';
 $lang['GEN_SELECT_MONTH'] = [
 	'01' => 'January',
 	'02' => 'February',
@@ -189,7 +191,6 @@ $lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
 $lang['GEN_PICKER_YEARRANGE'] = '-20:';
 $lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
 $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
-$lang['GEN_PICKER_MINDATE'] = 2001;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
 //PRODUCT STATUS
