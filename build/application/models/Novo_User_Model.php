@@ -54,8 +54,8 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (lang('CONFIG_MAINTENANCE') == 'ON') {
-			$this->isResponseRc = lang('CONFIG_MAINTENANCE_RC');
+		if (lang('CONF_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = lang('CONF_MAINTENANCE_RC');
 		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
