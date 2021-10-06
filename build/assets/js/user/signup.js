@@ -166,8 +166,16 @@ $(function () {
 		let msContainer = thisFs.closest('.multi-step-form');
 
 		if (!valid($(thisFs))) {
+			if ($('#internationalCode').hasClass('has-error')) {
+				$('.container-flags').addClass('has-error-file');
+			}
+
 			return false;
 		} else {
+			if ($('#internationalCode').hasClass('has-success')) {
+				$('.container-flags').addClass('has-error-file');
+			}
+
 			msContainer.find(`fieldset[data-index=${index + 1}]`)
 				.addClass('seen');
 			msContainer.find(`div.progress-container > div.progress > div.progress-bar[data-index=${index}]`).parent()

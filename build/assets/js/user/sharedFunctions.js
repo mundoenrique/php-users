@@ -375,19 +375,27 @@ function changeInputselect(currentIso) {
 	switch (currentIso) {
 		case 'all':
 		case 'pe':
+			$('#stateInput').siblings('label').text(lang.USER_STATE);
+			$('#cityInput').siblings('label').text(lang.USER_CITY);
+			$('#districtInput').siblings('label').text(lang.USER_DISTRICT);
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'hidden')
 				.addClass('ignore skip')
 				.removeClass('has-error');
-			$('#state, #city, #district')
+
+				$('#state, #city, #district')
 				.removeClass('ignore skip')
 				.show();
 		break;
 		default:
+			$('#state').siblings('label').text(lang.USER_STATE_INPUT);
+			$('#city').siblings('label').text(lang.USER_CITY_INPUT);
+			$('#district').siblings('label').text(lang.USER_DISTRICT_INPUT);
 			$('#state, #city, #district')
 				.hide()
 				.addClass('ignore skip')
 				.removeClass('has-error');
+
 			$('#stateInput, #cityInput, #districtInput')
 				.attr('type', 'text')
 				.removeClass('ignore skip');

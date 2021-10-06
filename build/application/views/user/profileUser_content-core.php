@@ -188,9 +188,9 @@
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
                       <option value="<?= $stateCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
-                      <input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>" autocomplete="off"
-                        state-code="<?= $stateCode; ?>">
                     </select>
+										<input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>" autocomplete="off"
+											state-code="<?= $stateCode; ?>">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
