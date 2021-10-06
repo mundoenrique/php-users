@@ -173,7 +173,7 @@ $(function () {
 			return false;
 		} else {
 			if ($('#internationalCode').hasClass('has-success')) {
-				$('.container-flags').addClass('has-error-file');
+				$('.container-flags').removeClass('has-error-file');
 			}
 
 			msContainer.find(`fieldset[data-index=${index + 1}]`)
