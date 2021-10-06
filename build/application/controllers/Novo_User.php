@@ -188,6 +188,7 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"user/validPass",
 			"user/changePassword"
 		);
 
