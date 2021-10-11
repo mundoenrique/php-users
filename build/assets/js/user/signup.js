@@ -46,7 +46,6 @@ $(function () {
 		}
 
 		$(this).addClass('ignore');
-
 	});
 
 	$('#newPass').on('keyup focus', function () {
@@ -95,7 +94,7 @@ $(function () {
 
 			if (longProfile == 'S') {
 				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
-				data.taxesObligated = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
+				data.taxesObligated = $('input[name=taxesObligated]:checked').val() == 'yes' ? '1' : '0';
 			}
 
 			if (lang.CONF_LOAD_DOCS == 'ON') {
@@ -167,8 +166,16 @@ $(function () {
 		let msContainer = thisFs.closest('.multi-step-form');
 
 		if (!valid($(thisFs))) {
+			if ($('#internationalCode').hasClass('has-error')) {
+				$('.container-flags').addClass('has-error-file');
+			}
+
 			return false;
 		} else {
+			if ($('#internationalCode').hasClass('has-success')) {
+				$('.container-flags').removeClass('has-error-file');
+			}
+
 			msContainer.find(`fieldset[data-index=${index + 1}]`)
 				.addClass('seen');
 			msContainer.find(`div.progress-container > div.progress > div.progress-bar[data-index=${index}]`).parent()

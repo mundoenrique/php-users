@@ -34,7 +34,7 @@ $(function () {
 			$('.option-service').hide();
 			$(this).addClass('active');
 			$('#' + liOptionId + 'View').fadeIn(700, 'linear');
-		})
+		});
 	});
 
 	if (ulOptions.length == 1) {

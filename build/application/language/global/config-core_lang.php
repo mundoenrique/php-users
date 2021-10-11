@@ -1,12 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONFIG_MAINTENANCE'] = 'OFF';
-$lang['CONFIG_MAINTENANCE_RC'] = 9997;
+$lang['CONF_TENANT_PUBLICATION'] = 2010;
+$lang['CONF_MAINTENANCE'] = 'OFF';
+$lang['CONF_MAINTENANCE_RC'] = 9997;
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_ARGON2_ACTIVE'] = 'OFF';
+$lang['CONF_DOWNLOAD_STATEMENT'] = 'OFF';
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
@@ -17,6 +19,8 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 ];
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
+//DATEPICKER
+$lang['CONF_PICKER_MINDATE'] = '-4Y';
 //SUPPORT IE 11
 $lang['CONF_SUPPORT_IE'] = 'OFF';
 //SCORE RECAPTCHA
@@ -65,7 +69,7 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
-
+//OTHERS
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
@@ -111,6 +115,7 @@ $lang['CONF_LANDLINE'] = 'ON';
 $lang['CONF_OTHER_PHONE'] = 'ON';
 $lang['CONF_PROFESSION'] = 'ON';
 $lang['CONF_CONTAC_DATA'] = 'ON';
+$lang['CONF_INTERNATIONAL_ADDRESS'] = 'OFF';
 $lang['CONF_CHECK_NOTI_EMAIL'] = 'ON';
 $lang['CONF_CHECK_NOTI_SMS'] = 'ON';
 $lang['CONF_OPER_KEY'] = 'OFF';
@@ -130,7 +135,6 @@ $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
 $lang['CONF_TYPE_TRANSACTION'] = 'OFF';
-$lang['CONF_PICKER_MINDATE'] = '-48m';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
@@ -203,6 +207,7 @@ $lang['CONF_REGEX_DATE_DMY'] = '^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0
 $lang['CONF_REGEX_DATE_MY'] = '^(0?[1-9]|1[012])\/[0-9]{4}$';
 $lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';
 $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
+$lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
+$lang['CONF_REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
 //FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
-

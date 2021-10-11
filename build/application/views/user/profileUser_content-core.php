@@ -27,6 +27,7 @@
       <form id="profileUserForm" method="post" class="hide-out hide p-2">
         <input id="longProfile" type="hidden" name="longProfile" value="<?= $longProfile; ?>">
         <input id="generalAccount" type="hidden" name="generalAccount" value="<?= $generalAccount; ?>">
+        <input id="addresInput" type="hidden" name="addresInput" value="<?= $addresInput; ?>">
         <div class="row">
           <!-- Datos personales -->
           <?php $index = array_search(lang('USER_PERSONAL_DATA'), $stepTitles) + 1; ?>
@@ -34,24 +35,24 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1">
-									<div class="form-group col-6 col-lg-3 input-height">
-										<label for="firstName"><?= lang('USER_FIRSTNAME') ?></label>
-										<input id="firstName" class="form-control <?= $updateUser; ?>" type="text" name="firstName" value="<?= $firstName; ?>"
-											<?= $updateName; ?> autocomplete="off">
-										<div class="help-block"></div>
-									</div>
-									<div class="form-group col-6 col-lg-3 input-height">
+                  <div class="form-group col-6 col-lg-3 input-height">
+                    <label for="firstName"><?= lang('USER_FIRSTNAME') ?></label>
+                    <input id="firstName" class="form-control <?= $updateUser; ?>" type="text" name="firstName" value="<?= $firstName; ?>"
+                      <?= $updateName; ?> autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+                  <div class="form-group col-6 col-lg-3 input-height">
                     <label for="middleName"><?= lang('USER_MIDDLENAME') ?></label>
                     <input id="middleName" class="form-control <?= $updateUser; ?>" type="text" name="middleName" value="<?= $middleName; ?>"
                       <?= $updateSecondName; ?> autocomplete="off">
                     <div class="help-block"></div>
                   </div>
-									<div class="form-group col-6 col-lg-3 input-height">
-										<label for="lastName"><?= lang('USER_LASTNAME') ?></label>
-										<input id="lastName" class="form-control <?= $updateUser; ?>" type="text" name="lastName" value="<?= $lastName; ?>"
-											<?= $updateName; ?> autocomplete="off">
-										<div class="help-block"></div>
-									</div>
+                  <div class="form-group col-6 col-lg-3 input-height">
+                    <label for="lastName"><?= lang('USER_LASTNAME') ?></label>
+                    <input id="lastName" class="form-control <?= $updateUser; ?>" type="text" name="lastName" value="<?= $lastName; ?>"
+                      <?= $updateName; ?> autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="surName"><?= lang('USER_SURNAME') ?></label>
                     <input id="surName" class="form-control <?= $updateUser; ?>" type="text" name="surName" value="<?= $surName; ?>"
@@ -83,12 +84,18 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="birthPlace"><?= lang('USER_PLACEBIRTH') ?></label>
+                    <label for="birthPlace">
+                      <?= lang('USER_PLACEBIRTH') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <input id="birthPlace" class="form-control <?= $updateUser; ?>" type="text" name="birthPlace" value="<?= $birthPlace; ?>">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="civilStatus"><?= lang('USER_CIVILSTATUS') ?></label>
+                    <label for="civilStatus">
+                      <?= lang('USER_CIVILSTATUS') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <select id="civilStatus" class="custom-select form-control <?= $updateUser; ?>" name="civilStatus">
                       <?php foreach (lang('USER_CIVILSTATUS_LIST') as $key => $value) : ?>
                       <option value="<?= $key; ?>" <?= $civilStatus == $key ? 'selected' : ''; ?> <?= $key == '' ? 'selected disabled' : '';  ?>>
@@ -140,6 +147,23 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1 <?= $skipContacData; ?>">
+                  <?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+                  <div class="form-group col-6 col-lg-3 input-height">
+                    <label for="country"><?= lang('USER_COUNTRY') ?></label>
+                    <select id="country" class="custom-select form-control" name="country">
+                      <option value="" disabled selected><?= lang('GEN_SELECTION') ?></option>
+                      <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                      <?php if ($countries['status'] === '1'): ?>
+                      <option value="<?= $countries['iso']; ?>" code="<?= $countries['code']; ?>"
+                        <?= $countryIso == $countries['iso'] ? 'selected' : ''; ?>>
+                        <?= $countries['name']; ?>
+                      </option>
+                      <?php endif; ?>
+                      <?php endforeach; ?>
+                    </select>
+                    <div class="help-block"></div>
+                  </div>
+                  <?php endif; ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="addressType"><?= lang('USER_ADDRESS_TYPE') ?></label>
                     <select id="addressType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="addressType">
@@ -152,7 +176,10 @@
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label class="truncate" for="postalCode"><?= lang('USER_POSTAL_CODE') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label class="truncate" for="postalCode">
+                      <?= lang('USER_POSTAL_CODE') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <input id="postalCode" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" type="text" name="postalCode"
                       value="<?= $postalCode; ?>" autocomplete="off">
                     <div class="help-block"></div>
@@ -160,30 +187,36 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="state"><?= lang('USER_STATE') ?></label>
                     <select id="state" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="state">
-                      <option value="<?= $stateCode; ?>"><?= $state; ?></option>
+                      <option value="<?= $stateCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                     </select>
+										<input type="hidden" id="stateInput" name="stateInput" class="form-control" value="<?= $state ?>" autocomplete="off"
+											state-code="<?= $stateCode; ?>">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="city"><?= lang('USER_CITY') ?></label>
-                    <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city" disabled>
-                      <option value="<?= $cityCod; ?>"><?= $city; ?></option>
+                    <select id="city" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="city">
+                      <option value="<?= $cityCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                     </select>
+                    <input type="hidden" id="cityInput" name="cityInput" class="form-control" value="<?= $city ?>" autocomplete="off"
+                      city-code="<?= $cityCode; ?>">
                     <div class="help-block"></div>
                   </div>
-                  <?php if($longProfile == 'S'): ?>
-                  <div class="form-group col-6 input-height">
+                  <?php if($longProfile == 'S' || lang('CONF_INTERNATIONAL_ADDRESS') == 'ON'): ?>
+                  <div class="form-group col-6 col-lg-3 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
-                    <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district" disabled>
-                      <option value="<?= $districtCod ?>"><?= $district ?></option>
+                    <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district">
+                      <option value="<?= $districtCode ? '00000' : ''; ?>" selected><?= lang('GEN_SELECTION'); ?></option>
                     </select>
+                    <input type="hidden" id="districtInput" name="districtInput" class="form-control" value="<?= $district ?>" autocomplete="off"
+                      district-code="<?= $districtCode ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
                   <div class="form-group col-12">
                     <label for="address"><?= lang('USER_ADDRESS') ?></label>
-                    <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address"
-                      row="2" onpaste="return false"><?= $address; ?></textarea>
+                    <textarea id="address" class="form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="address" row="2"
+                      onpaste="return false"><?= $address; ?></textarea>
                     <div class="help-block"></div>
                   </div>
                 </div>
@@ -203,20 +236,52 @@
                     <div class="help-block"></div>
                   </div>
                   <?php endif; ?>
-                  <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine; ?>">
-                    <label class="truncate" for="landLine"><?= lang('USER_PHONE_LANDLINE') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
-                    <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine"
-                      value="<?= $landLine; ?>" autocomplete="off">
+
+									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+                  <div class="form-group col-6 col-lg-2 input-height">
+                    <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
+                    <div class="container-flags truncate col-4 p-0">
+                      <input id="internationalCode" class="select-flags <?= $countryIso != 'off' ? 'country-' . $countryIso : ''; ?>" type="text"
+                        name="internationalCode" placeholder="<?= lang('GEN_COUNTRY_CODE') ?>" iso="<?= $countryIso; ?>" value="<?= $countryCode; ?>"
+                        readonly>
+                      <ul class="codeOptions">
+                        <?php foreach (lang('USER_COUNTRIES') AS $countries): ?>
+                        <?php if ($countries['status'] === '1'): ?>
+                        <li iso="<?= $countries['iso']; ?>">
+                          <i class="country-<?= $countries['iso']; ?>"></i>
+                          <?= $countries['name']; ?>
+                          <span class="code-country text"> <?= $countries['code']; ?></span>
+                        </li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                      </ul>
+                    </div>
                     <div class="help-block"></div>
                   </div>
-                  <div class="form-group col-6 col-lg-4 input-height">
+									<?php endif; ?>
+
+                  <div class="form-group col-6 <?= $longMobile; ?> input-height">
                     <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
                     <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
                       <?= $updatePhoneMobile; ?> autocomplete="off">
                     <div class="help-block"></div>
                   </div>
+
+                  <div class="form-group col-6 col-lg-4 input-height <?= $skipLandLine; ?>">
+                    <label class="truncate" for="landLine">
+                      <?= lang('USER_PHONE_LANDLINE') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
+                    <input id="landLine" class="form-control <?= $updateUser; ?> <?= $ignoreLandLine ?>" type="text" name="landLine"
+                      value="<?= $landLine; ?>" autocomplete="off">
+                    <div class="help-block"></div>
+                  </div>
+
                   <div class="form-group col-12 col-lg-8  input-height <?= $skipOtherPhone; ?>">
-                    <label for="otherPhoneNum"><?= lang('USER_PHONE_OTHER') ?> <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span></label>
+                    <label for="otherPhoneNum">
+                      <?= lang('USER_PHONE_OTHER') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <div class="form-row">
                       <div class="form-group col-6 input-height">
                         <select id="phoneType" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreOtherPhone; ?>" name="phoneType">
@@ -287,13 +352,19 @@
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="charge"><?= lang('USER_CHARGE') ?></label>
+                    <label for="position">
+                      <?= lang('USER_CHARGE') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <input id="position" class="form-control" type="text" name="position" value="<?= $position ?>" autocomplete="off">
                     <div class="help-block"></div>
                   </div>
 
                   <div class="form-group col-6 col-lg-3 input-height">
-                    <label for="averageIncome"><?= lang('USER_AVERAGE_MONTHLY') ?></label>
+                    <label for="averageIncome">
+                      <?= lang('USER_AVERAGE_MONTHLY') ?>
+                      <span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+                    </label>
                     <input id="averageIncome" class="form-control text-right" type="text" name="averageIncome" value="<?= $averageIncome ?>"
                       autocomplete="off">
                     <div class="help-block"></div>
@@ -349,8 +420,8 @@
                 <div class="row mx-1">
                   <div class="form-group col-4">
                     <label for="nickNameProfile"><?= lang('USER_NICK_NAME') ?></label>
-                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>" readonly
-                      autocomplete="off">
+                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>"
+                      readonly autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-4">
@@ -374,10 +445,6 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <div class="form-group col-6 col-lg-4">
-                    <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
-                  </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
@@ -446,8 +513,8 @@
                 <div class="row mx-1">
                   <div class="form-group col-4">
                     <label for="nickNameProfile"><?= lang('USER_NICK_NAME') ?></label>
-                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>" readonly
-                      autocomplete="off">
+                    <input id="nickNameProfile" class="form-control available" type="text" name="nickNameProfile" value="<?= $nickNameProfile; ?>"
+                      readonly autocomplete="off">
                     <div class="help-block"></div>
                   </div>
                   <div class="form-group col-4">
@@ -471,10 +538,6 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <div class="form-group col-6 col-lg-4 mb-4">
-                    <a class="btn btn-small btn-link px-0 hyper-link big-modal"
-                      href="<?= base_url(lang('CONF_LINK_CHANGE_PASS')); ?>"><?= lang('USER_PASSWORD_CHANGE') ?></a>
-                  </div>
                   <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
@@ -518,7 +581,6 @@
             </div>
           </div>
           <?php endif; ?>
-
         </div>
         <div class="line-text mx-3"></div>
         <small class="mx-3 text"><?= lang('USER_SAVE_BTN_MSG'); ?> <?= count($stepTitles) ?></small>

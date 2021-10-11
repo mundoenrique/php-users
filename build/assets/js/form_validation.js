@@ -28,11 +28,12 @@ function validateForms(form) {
 	var alphanum = new RegExp(lang.CONF_REGEX_ALPHANUM, 'i');
 	var userPassword = validatePass;
 	//var numeric = /^[0-9]+$/;
-	var numeric =  new RegExp(lang.CONF_REGEX_NUMERIC);
+	var numeric = new RegExp(lang.CONF_REGEX_NUMERIC);
 	var phone = new RegExp(lang.CONF_REGEX_PHONE, 'i');
 	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
 	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
+	var checkedOption = new RegExp(lang.CONF_REGEX_CHECKED);
 	/*var date = {
 		dmy: /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$/,
 		my: /^(0?[1-9]|1[012])\/[0-9]{4}$/,
@@ -43,6 +44,7 @@ function validateForms(form) {
 		my: new RegExp(lang.CONF_REGEX_DATE_MY),
 		y: new RegExp(lang.CONF_REGEX_DATE_Y),
 	};
+	var intCode = new RegExp(lang.CONF_REGEX_INT_CODE);
 	var defaults = {
 		debug: true,
 		errorClass: lang.CONF_VALID_ERROR,
@@ -84,16 +86,30 @@ function validateForms(form) {
 			"nationality": { required: true, pattern: alphaLetter, minlength: 4, maxlength: 20 },
 			"birthPlace": { pattern: alphaLetter, minlength: 4, maxlength: 20 },
 			"civilStatus": { pattern: onlyOneLetter },
+			"country": { required: true, requiredSelect: true },
 			"addressType": { required: true, requiredSelect: true },
 			"postalCode": { pattern: onlyNumber },
 			"state": { required: true, requiredSelect: true },
+			"stateInput": { required: true, pattern: alphanumunder },
 			"city": { required: true, requiredSelect: true },
+			"cityInput": { required: true, pattern: alphanumunder },
+			"district": { required: true, requiredSelect: true },
+			"districtInput": { required: true, pattern: alphanumunder },
+			"notificationType": { required: true, requiredSelect: true },
 			"address": { required: true, pattern: longPhrase },
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
-			"landLine": { pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked), differs: ["#mobilePhone", "#otherPhoneNum"] },
-			"mobilePhone": { required: true, pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked), differs: ["#landLine", "#otherPhoneNum"] },
+			"landLine": {
+				pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked),
+				differs: ["#mobilePhone", "#otherPhoneNum"]
+			},
+			"mobilePhone": {
+				required: true,
+				pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked),
+				differs: ["#landLine", "#otherPhoneNum"]
+			},
+			"internationalCode": { required: true, pattern: intCode },
 			"otherPhoneNum": {
 				required: {
 					depends: function (element) {
@@ -114,32 +130,35 @@ function validateForms(form) {
 					depends: function (element) {
 						return $('#yesPublicOfficeOld').is(':checked');
 					}
-				}, pattern: shortPhrase },
+				}, pattern: shortPhrase
+			},
 			"publicInst": {
 				required: {
 					depends: function (element) {
 						return $('#yesPublicOfficeOld').is(':checked');
 					}
-				}, pattern: shortPhrase },
+				}, pattern: shortPhrase
+			},
 			"taxesObligated": { required: true },
 			"protection": { required: true },
 			"contract": { required: true },
 			"initDate": { required: true, pattern: date.dmy },
 			"finalDate": { required: true, pattern: date.dmy },
-			"replaceMotSol": { requiredSelect: true},
-			"temporaryLockReason": { requiredSelect: true},
+			"replaceMotSol": { requiredSelect: true },
+			"temporaryLockReason": { requiredSelect: true },
 			"currentPin": { required: true, pattern: numeric, exactLength: 4 },
 			"newPin": { required: true, pattern: numeric, exactLength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
 			"generateNewPin": { required: true, pattern: numeric, exactLength: 4, fourConsecutivesDigits: true },
 			"generateConfirmPin": { required: true, equalTo: "#generateNewPin" },
 			"typeDocument": { requiredSelect: true, },
-			"SEL_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
-			"INE_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
-			"INE_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
-			"PASS_A":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
-			"PASS_R":	{required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true},
-			"transType":	{ pattern: transType },
+			"SEL_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"INE_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"INE_R": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"PASS_A": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"PASS_R": { required: true, extension: lang.VALIDATE_FILES_EXT, filesize: true },
+			"transType": { pattern: transType },
+			"notify": { pattern: checkedOption },
 		},
 		messages: {
 			"userName": lang.VALIDATE_USERLOGIN,
@@ -200,9 +219,15 @@ function validateForms(form) {
 			"birthPlace": lang.VALIDATE_BIRTHPLACE,
 			"civilStatus": lang.VALIDATE_RECOVER_OPTION,
 			"addressType": lang.VALIDATE_RECOVER_OPTION,
+			"country": lang.VALIDATE_RECOVER_OPTION,
 			"postalCode": lang.VALIDATE_POSTAL_CODE,
 			"state": lang.VALIDATE_RECOVER_OPTION,
+			"stateInput": lang.VALIDATE_STATE,
 			"city": lang.VALIDATE_RECOVER_OPTION,
+			"cityInput": lang.VALIDATE_CITY,
+			"district": lang.VALIDATE_RECOVER_OPTION,
+			"districtInput": lang.VALIDATE_SECTOR,
+			"notificationType": lang.VALIDATE_RECOVER_OPTION,
 			"address": lang.VALIDATE_ADDRESS,
 			"verifierCode": lang.VALIDATE_VERIFIER_CODE,
 			"gender": lang.VALIDATE_GENDER,
@@ -218,8 +243,9 @@ function validateForms(form) {
 			"mobilePhone": {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_MOBIL_PHONE,
-				differs: lang.VALIDATE_DIFFERS_PHONE,
+				differs: lang.VALIDATE_DIFFERS_PHONE
 			},
+			"internationalCode": lang.VALIDATE_INT_CODE,
 			"otherPhoneNum": {
 				required: lang.VALIDATE_REQUIRED_PHONE,
 				pattern: lang.VALIDATE_PHONE,
@@ -292,6 +318,7 @@ function validateForms(form) {
 				extension: lang.VALIDATE_FILE_TYPE,
 				filesize: lang.VALIDATE_FILE_SIZE
 			},
+			"notify": lang.VALIDATE_NOTIFICATIONS,
 		},
 		errorPlacement: function (error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
@@ -311,7 +338,7 @@ function validateForms(form) {
 
 		if (value != '') {
 			if (Array.isArray(param)) {
-				valid = !param.some(function(el) {
+				valid = !param.some(function (el) {
 					return value === $(el).val();
 				});
 			} else {
@@ -330,7 +357,7 @@ function validateForms(form) {
 		return $(element).hasClass('available');
 	}
 
-	$.validator.methods.requiredSelect = function (value, element, param) {
+		$.validator.methods.requiredSelect = function (value, element, param) {
 		var valid = true;
 
 		if ($(element).find('option').length > 0) {
@@ -344,7 +371,7 @@ function validateForms(form) {
 		return !value.match(/(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210)/);
 	}
 
-	$.validator.methods.exactLength = function(value, element, param) {
+	$.validator.methods.exactLength = function (value, element, param) {
 		return value.length == param;
 	};
 
@@ -369,7 +396,7 @@ function validateForms(form) {
 		if (lang.CONF_RECOVER_ID_TYPE == 'ON') {
 			var select = $("#typeDocument option:selected").val();
 			if (select == lang.USER_VALUE_DOCUMENT_ID)
-	    pattern = numeric;
+				pattern = numeric;
 		}
 		return pattern.test(value)
 	}

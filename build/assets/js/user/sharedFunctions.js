@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	$('#acceptTerms').on('click', function() {
+	$('#acceptTerms').on('click', function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
@@ -11,8 +11,8 @@ $(function () {
 			posMy: 'top',
 			posAt: 'top'
 		}
-		var inputModal = '<h1 class="h0">'+lang.USER_TERMS_SUBTITLE+'</h1>';
-		inputModal+= lang.USER_TERMS_CONTENT;
+		var inputModal = '<h1 class="h0">' + lang.USER_TERMS_SUBTITLE + '</h1>';
+		inputModal += lang.USER_TERMS_CONTENT;
 
 		appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$(this).off('click');
@@ -37,7 +37,7 @@ $(function () {
 		$('#otherPhoneNum').prop('disabled', disableInput);
 	});
 
-	$('#protection').on('click', function() {
+	$('#protection').on('click', function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
@@ -48,14 +48,14 @@ $(function () {
 			posMy: 'top',
 			posAt: 'top'
 		}
-		var inputModal = '<h1 class="h0">' + lang.USER_CONT_PROTECTION_SUBTITLE+'</h1>';
+		var inputModal = '<h1 class="h0">' + lang.USER_CONT_PROTECTION_SUBTITLE + '</h1>';
 		inputModal += lang.USER_CONT_PROTECTION_CONTENT;
 
 		appMessages(lang.USER_CONT_PROTECTION_TITLE, inputModal, lang.CONF_ICON_INFO, modalBtn);
 		$(this).off('click');
 	});
 
-	$('#contract').on('click', function() {
+	$('#contract').on('click', function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
@@ -66,12 +66,12 @@ $(function () {
 			posMy: 'top',
 			posAt: 'top'
 		}
-		var inputModal = '<h1 class="h0">' + lang.USER_CONT_BENEFITS_SUBTITLE+'</h1>';
+		var inputModal = '<h1 class="h0">' + lang.USER_CONT_BENEFITS_SUBTITLE + '</h1>';
 
 		switch ($('#generalAccount').val()) {
 			case 'S':
 				inputModal += lang.USER_CONT_GENERAL_CONTENT;
-			break;
+				break;
 			default:
 				inputModal += lang.USER_CONT_BENEFITS_CONTENT;
 		}
@@ -82,20 +82,20 @@ $(function () {
 
 	// Funtion drag and drop
 	$('#SEL_A').change(function () {
-    $('#imagePreviewContainer').hide();
-    $('#imagePreviewContainer').css("height", "0")
-    $('#imagePreviewContainer').fadeIn(650);
-  });
+		$('#imagePreviewContainer').hide();
+		$('#imagePreviewContainer').css("height", "0")
+		$('#imagePreviewContainer').fadeIn(650);
+	});
 
 	var zoneInput = $(".drop-zone-input");
-	$.each (zoneInput, function(i, inputElement){
+	$.each(zoneInput, function (i, inputElement) {
 		var dropZoneElement = inputElement.closest(".drop-zone");
 
-		$(dropZoneElement).on("click", function(e){
+		$(dropZoneElement).on("click", function (e) {
 			inputElement.click();
 		});
 
-		$(inputElement).on("change", function(e, validIgnore){
+		$(inputElement).on("change", function (e, validIgnore) {
 			if (inputElement.files.length) {
 				updateThumbnail(dropZoneElement, inputElement.files[0], inputElement);
 				validateForms(formFile);
@@ -114,19 +114,19 @@ $(function () {
 			}
 		});
 
-		$('.drop-zone').on('dragover', function(e) {
+		$('.drop-zone').on('dragover', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 			$(this).addClass('drop-zone-over');
 		});
 
-		$('.dropzone-wrapper').on('dragleave', function(e) {
+		$('.dropzone-wrapper').on('dragleave', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 			$(this).removeClass('drop-zone-over');
 		});
 
-		$(dropZoneElement).on("drop", function(e){
+		$(dropZoneElement).on("drop", function (e) {
 			e.preventDefault();
 			if (e.originalEvent.dataTransfer.files.length) {
 				inputElement.files = e.originalEvent.dataTransfer.files;
@@ -134,6 +134,56 @@ $(function () {
 			}
 			$(this).removeClass('drop-zone-over');
 		});
+	});
+
+	//CAMBIO DE ISO Y BANDERA PARA CAMPO CÓDIGO DE TELÉFONO
+	$('body').on('click', function () {
+		$('.codeOptions').removeClass('open');
+	});
+
+	$('#internationalCode, .container-flags').on('click', function (e) {
+		e.stopPropagation();
+		$('.codeOptions').toggleClass('open');
+	});
+
+	$('#country').on('change', function () {
+		var countryInf = {
+			code: $(this).find('option:selected').attr('code'),
+			currentIso: $(this).find('option:selected').val(),
+			action: 'selectCountry'
+		}
+
+		$('#state').prop('selectedIndex', 0);
+		$('#mobilePhone').val('');
+
+		$('#stateInput').attr('state-code', '').val('');
+		$('#cityInput').attr('city-code', '').val('');
+		$('#districtInput').attr('district-code', '').val('');
+		$('#city option:first').prop('disabled', false);
+		$('#city').children().not(':first').remove();
+		$('#city option:first').prop('disabled', true);
+		$('#district option:first').prop('disabled', false);
+		$('#district').children().not(':first').remove();
+		$('#district option:first').prop('disabled', true);
+
+		internationalCode(countryInf);
+	});
+
+	$('.codeOptions').on('click', 'li', function (e) {
+		var optionsInf = {
+			code: $(e.currentTarget).find('span').text().trim(),
+			currentIso: $(this).attr('iso'),
+			action: 'optionsInf'
+		}
+
+		internationalCode(optionsInf);
+		$('#internationalCode').focus().blur();
+
+		if ($('#internationalCode').hasClass('has-error')) {
+			$('.container-flags').addClass('has-error-file');
+		} else {
+			$('.container-flags').removeClass('has-error-file');
+		}
 	});
 });
 
@@ -310,4 +360,53 @@ function setTextClass(indexes) {
 			$(this).find('.progress-text').removeClass('danger');
 		}
 	})
+}
+
+function internationalCode(information) {
+	$('#internationalCode').removeClass('country-' + $('#internationalCode').attr('iso'));
+	$('#internationalCode').val(information.code);
+	$('#internationalCode').addClass('country-' + information.currentIso);
+	$('#internationalCode').attr('iso', information.currentIso);
+
+	information.action == 'selectCountry' ? changeInputselect(information.currentIso) : '';
+}
+
+function changeInputselect(currentIso) {
+	switch (currentIso) {
+		case 'all':
+		case 'pe':
+			$('#stateInput').siblings('label').text(lang.USER_STATE);
+			$('#cityInput').siblings('label').text(lang.USER_CITY);
+			$('#districtInput').siblings('label').text(lang.USER_DISTRICT);
+			$('#stateInput, #cityInput, #districtInput')
+				.attr('type', 'hidden')
+				.addClass('ignore skip')
+				.removeClass('has-error');
+
+				$('#state, #city, #district')
+				.removeClass('ignore skip')
+				.show();
+		break;
+		default:
+			$('#state').siblings('label').text(lang.USER_STATE_INPUT);
+			$('#city').siblings('label').text(lang.USER_CITY_INPUT);
+			$('#district').siblings('label').text(lang.USER_DISTRICT_INPUT);
+			$('#state, #city, #district')
+				.hide()
+				.addClass('ignore skip')
+				.removeClass('has-error');
+
+			$('#stateInput, #cityInput, #districtInput')
+				.attr('type', 'text')
+				.removeClass('ignore skip');
+	}
+
+	validateForms($('#profileUserForm'))
+	$('#profileUserForm').valid();
+
+	if ($('#internationalCode').hasClass('has-error')) {
+		$('.container-flags').addClass('has-error-file');
+	} else {
+		$('.container-flags').removeClass('has-error-file');
+	}
 }

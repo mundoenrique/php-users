@@ -1,11 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//SCORE RECAPTCHA
-$lang['CONF_SCORE_CAPTCHA'] = [
-	'development' => 0,
-	'testing' => 0,
-	'production' => 0
-];
+$lang['CONF_TENANT_PUBLICATION'] = 2019;
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //VALIDATE IP

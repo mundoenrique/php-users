@@ -39,6 +39,4 @@ $lang['REPORTS_CATEGORY_COLOR'] = [
 $lang['REPORTS_EXPENSES_CATEGORY'] = 'Gastos por categoría';
 $lang['REPORTS_YEARLY'] = 'Anual';
 $lang['REPORTS_MONTHLY'] = 'Mensual';
-$lang['REPORTS_FROM'] = 'Desde';
-$lang['REPORTS_TO'] = 'Hasta';
 $lang['REPORTS_DATE_RANGE'] = 'Seleccione un rango de fecha a consultar.';

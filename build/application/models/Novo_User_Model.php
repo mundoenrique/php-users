@@ -54,8 +54,8 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (lang('CONFIG_MAINTENANCE') == 'ON') {
-			$this->isResponseRc = lang('CONFIG_MAINTENANCE_RC');
+		if (lang('CONF_MAINTENANCE') == 'ON') {
+			$this->isResponseRc = lang('CONF_MAINTENANCE_RC');
 		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
 			$this->isResponseRc = 9998;
 		} else {
@@ -612,8 +612,8 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 200://MODAL OTP
 				$this->response->code = 2;
-				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->labelInput = lang('GEN_OTP_LABEL_INPUT');
 				$this->response->msg = novoLang(lang('GEN_OTP_MSG'), $maskMail);
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
@@ -623,11 +623,13 @@ class Novo_User_Model extends NOVO_Model {
 				$this->session->set_flashdata('authToken', $response->bean->otp->authToken);
 			break;
 			case -21:
+				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('USER_INVALID_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -183:
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_INVALID_CARD');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -640,21 +642,24 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -286://OTP INVALIDO
-				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->msg = lang('GEN_OTP_INVALID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125://MENSAJE TARJETA VENCIDA
+				$this->response->icon = lang('CONF_ICON_INFO');
 					$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 					$this->response->msg = lang('GEN_EXPIRED_PRODUCT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -343://MENSAJE TARJETA BLOQUEADA
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
 				$this->response->msg = lang('GEN_LOCK_PRODUCT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -713,7 +718,7 @@ class Novo_User_Model extends NOVO_Model {
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataRequest->idOperation = '20';
-		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataRequest->className = 'com.novo.objects.MO.RegistroUsuarioMO';
 		$this->dataRequest->user = [
 			'userName' => mb_strtoupper($dataRequest->nickName),
 			'primerNombre' => implode(' ',array_filter(explode(' ',mb_strtoupper($dataRequest->firstName)))),
@@ -742,6 +747,11 @@ class Novo_User_Model extends NOVO_Model {
 			// 'password' => $argon2->hexArgon2, // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 			// 'hashMD5' => md5($password), // DESCOMENTAR Y PROBAR CUANDO SERVICIO ESTE OK
 		];
+
+		if (isset($dataRequest->internationalCode)) {
+			$dataRequest->mobilePhone = $dataRequest->internationalCode . ' ' . $dataRequest->mobilePhone;
+		}
+
 		$this->dataRequest->listaTelefonos = [
 			[
 				'tipo' => 'HAB',
@@ -988,13 +998,43 @@ class Novo_User_Model extends NOVO_Model {
 		$profileData->countryCod = $response->direccion->acCodPais ?? '';
 		$profileData->country = $response->direccion->acPais ?? '';
 		$profileData->stateCode = $response->direccion->acCodEstado ?? '';
-		$profileData->state = $response->direccion->acEstado ?? lang('GEN_SELECTION');
-		$profileData->cityCod = $response->direccion->acCodCiudad ?? '';
-		$profileData->city = $response->direccion->acCiudad ?? lang('GEN_SELECTION');
+		$profileData->state = $response->direccion->acEstado ?? '';
+		$profileData->cityCode = $response->direccion->acCodCiudad ?? '';
+		$profileData->city = $response->direccion->acCiudad ?? '';
+		$profileData->districtCode = $response->direccion->acCodDistrito ?? '';
+		$profileData->district = $response->direccion->acDistrito ?? '';
+		$profileData->addresInput = '0';
+		$countryCode = '';
+		$countryIso = 'off';
+
+		if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') {
+			$profileData->addresInput = '1';
+
+			if (get_object_vars($response->direccion)) {
+				$addressArray = explode('|', $profileData->address);
+				$profileData->addresInput = count($addressArray) == 0 || count($addressArray) > 1 ? '1' : '0';
+				$countryIso = 'pe';
+
+				if (count($addressArray) > 1) {
+					$key = array_search($addressArray[1], array_column(lang('USER_COUNTRIES'), 'iso'));
+					$countryCode = lang('USER_COUNTRIES')[$key]['code'];
+					$countryIso = lang('USER_COUNTRIES')[$key]['iso'];
+					$profileData->address = $addressArray[0];
+					$profileData->stateCode = '';
+					$profileData->state = $addressArray[2] ?? '';
+					$profileData->cityCode = '';
+					$profileData->city = $addressArray[3] ?? '';
+					$profileData->districtCode = '';
+					$profileData->district = $addressArray[4] ?? '';
+				}
+			}
+		}
 
 		$phonesList['otherPhoneNum'] = '';
 		$phonesList['landLine'] = '';
 		$phonesList['mobilePhone'] = '';
+		$phonesList['countryCode'] = '';
+		$phonesList['countryIso'] = '';
 		$phonesList['otherType'] = '';
 
 		if (isset($response->registro->listaTelefonos)) {
@@ -1016,7 +1056,23 @@ class Novo_User_Model extends NOVO_Model {
 						$phonesList['landLine'] = $phonesType->numero;
 					break;
 					case 'CEL':
-						$phonesList['mobilePhone'] = $phonesType->numero;
+						$mobilePhone = $phonesType->numero;
+						if (preg_match('/^[\+][0-9]{2,3}[\s]{1}/', $mobilePhone, $matches)) {
+							$countryCode = trim($matches[0]);
+						}
+
+						if (preg_match('/[0-9]{7,16}$/', $mobilePhone, $matches)) {
+							$mobilePhone = trim($matches[0]);
+						}
+
+						if ($countryIso == 'off' && $countryCode != '') {
+							$key = array_search($countryCode, array_column(lang('USER_COUNTRIES'), 'code'));
+							$countryIso = lang('USER_COUNTRIES')[$key]['iso'];
+						}
+
+						$phonesList['countryCode'] = $countryCode;
+						$phonesList['countryIso'] = $countryIso;
+						$phonesList['mobilePhone'] = $mobilePhone;
 					break;
 				}
 			}
@@ -1061,12 +1117,11 @@ class Novo_User_Model extends NOVO_Model {
 			$profileData->stateCode = isset($response->registro->afiliacion->departamento) &&  $response->registro->afiliacion->departamento != ''
 				? $response->registro->afiliacion->departamento : $profileData->stateCode;
 
-			$profileData->cityCod = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
-				? $response->registro->afiliacion->provincia : $profileData->cityCod;
+			$profileData->cityCode = isset($response->registro->afiliacion->provincia) &&  $response->registro->afiliacion->provincia != ''
+				? $response->registro->afiliacion->provincia : $profileData->cityCode;
 
-			$profileData->districtCod = $response->registro->afiliacion->distrito ?? '';
-
-			$profileData->district = lang('GEN_SELECTION');
+				$profileData->districtCode = $response->registro->afiliacion->distrito ?? '';
+				$profileData->district = '';
 
 			$profileData->postalCode = isset($response->registro->afiliacion->cod_postal) &&  $response->registro->afiliacion->cod_postal != ''
 				? $response->registro->afiliacion->cod_postal : $profileData->postalCode;
@@ -1176,6 +1231,11 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '39';
 		$this->dataRequest->className = 'com.novo.objects.MO.DatosPerfilMO';
 		$this->dataRequest->country = $this->session->customerSess;
+
+		if (isset($dataRequest->internationalCode)) {
+			$dataRequest->mobilePhone = $dataRequest->internationalCode . ' ' . $dataRequest->mobilePhone;
+		}
+
 		$this->dataRequest->registro = [
 			'user' => [
 				'userName' => $this->userName,
@@ -1287,11 +1347,20 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			}
 		}
+		if (isset($dataRequest->country) && $dataRequest->country != 'pe') {
+			$dataRequest->address = $dataRequest->address . '|' . $dataRequest->country . '|' . $dataRequest->stateInput . '|' . $dataRequest->cityInput;
+			$dataRequest->address .=  '|' . $dataRequest->districtInput;
+			$dataRequest->state = '15000';
+			$dataRequest->city = '15008';
+			$dataRequest->district = '8315';
+		}
+
 		$this->dataRequest->direccion = [
 			'acTipo' => $dataRequest->addressType,
 			'acCodPais' => $this->session->customerSess,
 			'acCodEstado' => $dataRequest->state,
 			'acCodCiudad' => $dataRequest->city,
+			'acCodDistrito' => $dataRequest->district ?? '',
 			'acZonaPostal' => $dataRequest->postalCode,
 			'acDir' => $dataRequest->address
 		];
@@ -1335,6 +1404,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -313:
 			case -314:
 			case -317:
+				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('USER_PROFILE_TITLE');
 				$this->response->msg = lang('USER_ACTIVATION_FAIL');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');

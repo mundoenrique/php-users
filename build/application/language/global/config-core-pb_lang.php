@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONF_TENANT_PUBLICATION'] = 2021;
+//DATEPICKER
+$lang['CONF_PICKER_MINDATE'] = '-5m';
 //RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'ON';
 $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'OFF';
@@ -15,5 +18,3 @@ $lang['CONF_ACCEPT_MASKED_MOBILE'] = 'ON';
 $lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'ON';
 // CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'ON';
-//CARDS DETAIL
-$lang['CONF_PICKER_MINDATE'] = '-5m';
