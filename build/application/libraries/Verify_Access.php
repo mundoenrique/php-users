@@ -119,8 +119,11 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
 
-		$auth = TRUE;
 		$user = $user ?? $this->user;
+
+		if ($this->CI->session->has_userdata('userId') && ($this->CI->session->clientAgent != $this->CI->agent->agent_string())) {
+			clearSessionsVars();
+		}
 
 		switch($module) {
 			case 'userCardsList':
@@ -168,13 +171,19 @@ class Verify_Access {
 			case 'changePassword':
 				$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
 			break;
-		}
-
-		if ($this->CI->session->has_userdata('userId') && ($this->CI->session->clientAgent != $this->CI->agent->agent_string())) {
-			clearSessionsVars();
+			default:
+				$freeAccess = [
+					'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP',
+					'validateOTP', 'changeLanguage'
+				];
+				$auth = in_array($module, $freeAccess);
 		}
 
 		log_message('DEBUG', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+
+		if (!$auth) {
+			$auth = !(preg_match('/Novo_/', $this->CI->router->fetch_class()) === 1);
+		}
 
 		return $auth;
 	}
