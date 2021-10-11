@@ -52,7 +52,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case 7:
 				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
-				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), $dataRequest->cardNumberMask);
+				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), [$this->response->title, $dataRequest->cardNumberMask]);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125:
@@ -140,7 +140,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			break;
 			case 7:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
-				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), $dataRequest->cardNumberMask);
+				$this->response->msg = novoLang(lang('CUST_LOCK_CARD'), [lang('CUST_LOCK'), $dataRequest->cardNumberMask]);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -395:
