@@ -22,4 +22,4 @@ $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Bloqueo permanente';
 //GENERAL ERROR RESPONSE
 $lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
-$lang['GEN_SYSTEM_MESSAGE'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
+$lang['GEN_MESSAGE_SYSTEM'] = 'El servicio no se encuentra disponible, intenta de nuevo.';

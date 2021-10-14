@@ -141,7 +141,7 @@ $lang['GEN_OTP_ERROR'] = 'It was not possible to validate the security code, ple
 $lang['GEN_OTP_INVALID'] = 'The received security code is invalid, please try again.';
 $lang['GEN_OTP_USED'] = 'The security code entered has already been used, please try again.';
 //GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'At this time it is not possible to meet your request, please try again later';
+$lang['GEN_MESSAGE_SYSTEM'] = 'At this time it is not possible to meet your request, please try again later';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['GEN_VALIDATION_INPUT'] = 'Unauthorized content was detected in the request. %s';
 $lang['GEN_VALIDATION_LOGGED'] = 'You will be disconnected.';

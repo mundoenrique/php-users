@@ -115,7 +115,7 @@ class NOVO_Model extends CI_Model {
 				}
 			break;
 			case 502:
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
 				$this->session->sess_destroy();
 			break;
 			case 504:
@@ -123,7 +123,7 @@ class NOVO_Model extends CI_Model {
 			break;
 			default:
 				$this->response->icon = lang('CONF_ICON_DANGER');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				$this->response->msg = lang('GEN_MESSAGE_SYSTEM');
 		}
 
 		$this->response->modalBtn = $arrayResponse;

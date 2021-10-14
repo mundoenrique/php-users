@@ -22,4 +22,4 @@ $lang['GEN_CONTACTS_REST_COUNTRY_NUMBER'] = '800 DIRECTA (3473282)';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Permanent lock';
 //GENERAL ERROR RESPONSE
 $lang['GEN_TIMEOUT'] = "The server is not available, please try again.";
-$lang['GEN_SYSTEM_MESSAGE'] = 'The service is not available, please try again.';
+$lang['GEN_MESSAGE_SYSTEM'] = 'The service is not available, please try again.';

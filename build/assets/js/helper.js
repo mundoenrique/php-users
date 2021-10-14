@@ -191,7 +191,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_MESSAGE_SYSTEM, lang.CONF_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
