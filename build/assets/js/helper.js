@@ -191,7 +191,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_MESSAGE_SYSTEM, lang.CONF_ICON_DANGER, response.modalBtn);
+		appMessages(lang.GEN_NAME_SYSTEM, lang.GEN_MESSAGE_SYSTEM, lang.CONF_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -208,7 +208,7 @@ function appMessages(title, message, icon, modalBtn) {
 	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
-		title: title || lang.GEN_SYSTEM_NAME,
+		title: title || lang.GEN_NAME_SYSTEM,
 		closeText: '',
 		modal: 'true',
 		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },

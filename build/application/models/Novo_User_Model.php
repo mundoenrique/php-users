@@ -97,7 +97,7 @@ class Novo_User_Model extends NOVO_Model {
 		switch($this->isResponseRc) {
 			case 0:
 				if ($this->validateUserLogged($userName)) {
-					$this->response->title = lang('GEN_SYSTEM_NAME');
+					$this->response->title = lang('GEN_NAME_SYSTEM');
 					$this->response->icon = lang('CONF_ICON_WARNING');
 					$this->response->msg = lang('USER_SIGNIN_INCORRECTLY_CLOSED');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -181,7 +181,7 @@ class Novo_User_Model extends NOVO_Model {
 				}
 			break;
 			case -194:
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = novoLang(lang('USER_SIGNIN_PASS_EXPIRED'), base_url(LANG('CONF_LINK_RECOVER_ACCESS')));
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
@@ -189,7 +189,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case -8:
 			case -35:
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = novoLang(lang('USER_SIGNIN_SUSPENDED_USER'), base_url(LANG('CONF_LINK_RECOVER_ACCESS')));
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
@@ -214,7 +214,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 9996:
 				$this->response->code = 3;
 				$this->response->icon = '';
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->msg = novolang(lang('GEN_MSG_RECONVERSION'), assetUrl('images/nueva-expresion-monetaria.png'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
@@ -222,7 +222,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 9997:
 				$this->response->code = 4;
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->msg = lang('GEN_MAINTENANCE_MSG');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
@@ -230,7 +230,7 @@ class Novo_User_Model extends NOVO_Model {
 			break;
 			case 9998:
 				$this->response->code = 4;
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->msg = lang('GEN_EXPIRE_TIME');
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
@@ -649,7 +649,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -300://MENSAJE TARJETA VIRTUAL EXISTENTE
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_SYSTEM_NAME'));
+				$this->response->msg = novoLang(lang('USER_IDENTIFY_EXIST'), lang('GEN_NAME_SYSTEM'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -125://MENSAJE TARJETA VENCIDA
@@ -950,7 +950,7 @@ class Novo_User_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->title = lang('GEN_SYSTEM_NAME');
+				$this->response->title = lang('GEN_NAME_SYSTEM');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$modal = FALSE;
 
@@ -1546,7 +1546,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		if ($resultRecaptcha == 9999) {
 			$this->response->code = 4;
-			$this->response->title = lang('GEN_SYSTEM_NAME');
+			$this->response->title = lang('GEN_NAME_SYSTEM');
 			$this->response->icon = lang('CONF_ICON_DANGER');
 			$this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
 			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');

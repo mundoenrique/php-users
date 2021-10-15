@@ -92,7 +92,7 @@ class NOVO_Model extends CI_Model {
 		$this->isResponseRc = (int) $responseModel->rc;
 		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->title = lang('GEN_NAME_SYSTEM');
 		$this->response->msg = '';
 		$this->response->data = new stdClass();
 		$linkredirect = uriRedirect();

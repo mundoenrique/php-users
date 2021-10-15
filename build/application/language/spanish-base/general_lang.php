@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
+$lang['GEN_NAME_SYSTEM']= 'Conexión Personas Online';
 //GENERAL ERROR RESPONSE
 $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";

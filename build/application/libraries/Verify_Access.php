@@ -89,7 +89,7 @@ class Verify_Access {
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
 		$this->responseDefect->icon = lang('CONF_ICON_DANGER');
-		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
+		$this->responseDefect->title = lang('GEN_NAME_SYSTEM');
 		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
 		$this->responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
 		$this->responseDefect->modalBtn = [
