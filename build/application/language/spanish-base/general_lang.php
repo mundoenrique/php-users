@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
+//GENERAL ERROR RESPONSE
+$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 //MENU
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
@@ -140,9 +142,6 @@ $lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
 $lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
-//GENERAL ERROR RESPONSE
-$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
-$lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
