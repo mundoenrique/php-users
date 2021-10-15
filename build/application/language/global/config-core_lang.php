@@ -1,8 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONF_TENANT_PUBLICATION'] = 2010;
+$lang['CONF_SUPPORT_IE'] = 'OFF';
 $lang['CONF_MAINTENANCE'] = 'OFF';
 $lang['CONF_MAINTENANCE_RC'] = 9997;
+$lang['CONF_TENANT_PUBLICATION'] = 2010;
 $lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
@@ -19,17 +20,12 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 ];
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
-//DATEPICKER
 $lang['CONF_PICKER_MINDATE'] = '-4Y';
-//SUPPORT IE 11
-$lang['CONF_SUPPORT_IE'] = 'OFF';
-//SCORE RECAPTCHA
 $lang['CONF_SCORE_CAPTCHA'] = [
 	'development' => 0,
 	'testing' => 0.2,
 	'production' => 0.5
 ];
-//VALIDATE FORMS
 $lang['CONF_VALID_ERROR'] = 'has-error';
 $lang['CONF_VALID_VALID'] = 'has-success';
 $lang['CONF_VALID_SUCCESS'] = ' ';
@@ -38,23 +34,17 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
-//VALIDATE IP
 $lang['CONF_VALIDATE_IP'] = 'ON';
-//MODAL STYLES
 $lang['CONF_MODAL_WIDTH'] = 370;
-//ICONS MODALS
 $lang['CONF_ICON'] = 'mt-0 ui-icon';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
 $lang['CONF_ICON_WARNING'] = 'ui-icon-alert';
 $lang['CONF_ICON_DANGER'] = 'ui-icon-closethick';
-//CARD STYLES
 $lang['CONF_CARD_COLOR'] = 'white';
 $lang['CONF_RESTAR_USERNAME'] = 'OFF';
 $lang['CONF_BUSINESS_NAME'] = 'ON';
-//NAVBAR STYLES
 $lang['CONF_HEADER_BORDER'] = 'OFF';
-//MENU
 $lang['CONF_SIGIN'] = 'ON';
 $lang['CONF_CARD_LIST'] = 'ON';
 $lang['CONF_CARD_DETAIL'] = 'ON';
@@ -69,7 +59,6 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
-//OTHERS
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
@@ -101,11 +90,9 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Bdb' => '4',
 	'Mx-Bn' => '16',
 ];
-// CONTACTS
 $lang['CONF_CONTACTS'] = [
 	'XXXXX' => 'XXXXXXX',
 ];
-//SIGNUP-PROFILE
 $lang['CONF_UPDATE_USER'] = 'ON';
 $lang['CONF_UPDATE_NAME'] = 'ON';
 $lang['CONF_UPDATE_SECOND_NAME'] = 'ON';
@@ -128,19 +115,15 @@ $lang['CONF_LOAD_DOC_F_PASS'] = 'OFF';
 $lang['CONF_LOAD_DOC_B_PASS'] = 'OFF';
 $lang['CONF_ACCEPT_MASKED_MOBILE'] = 'OFF';
 $lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'OFF';
-//RECOVER ACCESS
 $lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
 $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'ON';
-//CARDS DETAIL
 $lang['CONF_IN_TRANSIT'] = 'OFF';
 $lang['CONF_SEND_MOVEMENTS'] = 'OFF';
 $lang['CONF_TYPE_TRANSACTION'] = 'OFF';
-//FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
 $lang['CONF_FOOTER_MARK'] = 'OFF';
 $lang['CONF_FOOTER_INFO'] = 'ON';
-// API
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
@@ -151,9 +134,7 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'overwrite'=> TRUE,
 	'file_ext_tolower'=> TRUE,
 ];
-// CUSTOMER SUPPORT
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';
-//EXTERNAL LINKS
 $lang['CONF_NO_LINK'] = 'javascript:';
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';
 $lang['CONF_LINK_SIGNUP'] = 'sign-up';
@@ -181,11 +162,8 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
 ];
-//INTERNAL LINKS
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
-//LANGUAGE
 $lang['CONF_BTN_LANG'] = 'OFF';
-//REGEX
 $lang['CONF_REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
 $lang['CONF_REGEX_ONLY_ONE_NUMBER'] = '^[0-9]{1}$';
 $lang['CONF_REGEX_ONLY_ONE_LETTER'] = '^[SCV]{1}$';
@@ -209,5 +187,4 @@ $lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';
 $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
 $lang['CONF_REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
-//FRANCHISE LOGO
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
