@@ -90,27 +90,27 @@ $(function () {
 	//datepicker
 	currentDate = new Date();
   $.datepicker.regional['es'] = {
-    closeText: lang.GEN_PICKER_CLOSETEXT,
-    prevText: lang.GEN_PICKER_PREVTEXT,
-    nextText: lang.GEN_PICKER_NEXTTEXT,
-    currentText: lang.GEN_PICKER_CURRENTTEXT,
-    monthNames: lang.GEN_PICKER_MONTHNAMES,
-    monthNamesShort: lang.GEN_PICKER_MONTHNAMESSHORT,
-    dayNames: lang.GEN_PICKER_DAYNAMES,
-    dayNamesShort: lang.GEN_PICKER_DAYNAMESSHORT,
-    dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
-    weekHeader: lang.GEN_PICKER_WEEKHEADER,
-    dateFormat: lang.GEN_PICKER_DATEFORMAT,
-    firstDay: lang.GEN_PICKER_FIRSTDATE,
-    isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: lang.CONF_PICKER_MINDATE,
+    closeText: lang.GEN_DATEPICKER_CLOSETEXT,
+    prevText: lang.GEN_DATEPICKER_PREVTEXT,
+    nextText: lang.GEN_DATEPICKER_NEXTTEXT,
+    currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
+    monthNames: lang.GEN_DATEPICKER_MONTHNAMES,
+    monthNamesShort: lang.GEN_DATEPICKER_MONTHNAMESSHORT,
+    dayNames: lang.GEN_DATEPICKER_DAYNAMES,
+    dayNamesShort: lang.GEN_DATEPICKER_DAYNAMESSHORT,
+    dayNamesMin: lang.GEN_DATEPICKER_DAYNAMESMIN,
+		weekHeader: lang.CONF_DATEPICKER_WEEKHEADER,
+    dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
+    firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
+    isRTL: lang.CONF_DATEPICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_DATEPICKER_MINDATE,
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-    changeYear: lang.GEN_PICKER_CHANGEYEAR,
-    showAnim: lang.SHOWANIM,
-    yearSuffix: lang.GEN_PICKER_YEARSUFFIX
+		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
+    changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
+		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
+    yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });

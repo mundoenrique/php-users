@@ -10,11 +10,8 @@ $(function () {
 
 	$("#filterInputYear").datepicker({
 		dateFormat: 'mm/yy',
-		changeMonth: true,
-		changeYear: true,
 		showButtonPanel: true,
-		minDate: lang.CONF_PICKER_MINDATE,
-		closeText: 'Aceptar',
+		closeText: lang.GEN_BTN_ACCEPT,
 
 		onClose: function (dateText, inst) {
 			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
@@ -244,11 +241,11 @@ function displaymoves() {
 			lastButtonText: lang.GEN_DATATABLE_SLAST,
 			lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
 			prevButton: true,
-			prevButtonText: '<',
-			prevHashText: lang.GEN_PICKER_PREVTEXT,
+			prevButtonText: lang.CONF_DATATABLE_SPREVIOUS,
+			prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
 			nextButton: true,
-			nextButtonText: '>',
-			nextHashText: lang.GEN_PICKER_NEXTTEXT
+			nextButtonText: lang.CONF_DATATABLE_SNEXT,
+			nextHashText: lang.GEN_DATEPICKER_NEXTTEXT
 		})
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_TENANT_PUBLICATION'] = 2021;
-$lang['CONF_PICKER_MINDATE'] = '-5m';
+$lang['CONF_DATEPICKER_MINDATE'] = '-5m';
 $lang['CONF_RECOVER_ID_TYPE'] = 'ON';
 $lang['CONF_RECOVER_SHOW_OPTIONS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';

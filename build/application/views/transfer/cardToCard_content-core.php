@@ -174,7 +174,7 @@
 								</div>
 								<div class="form-group col-lg-4">
 									<label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
-									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
 									<div class="help-block"></div>
 								</div>
 							</div>
@@ -231,7 +231,7 @@
 								</div>
 								<div class="form-group col-lg-4">
 									<label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
-									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+									<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
 									<div class="help-block"></div>
 								</div>
 							</div>
@@ -335,7 +335,7 @@
 						<div class="mt-3">
 							<span class="text">(<?= lang('TRANSF_EXP_DATE'); ?>)</span>
 							<div class="form-group col-lg-4 mt-3 pl-0">
-								<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+								<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
 								<div class="help-block"></div>
 							</div>
 						</div>
@@ -353,7 +353,7 @@
 						<div class="row pl-2 mt-3">
 							<label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
 							<div class="form-group col-4 px-1">
-								<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+								<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
 								<div id='error' class="help-block"></div>
 							</div>
 							<div class="flex items-center">
