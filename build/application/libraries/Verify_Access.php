@@ -157,6 +157,7 @@ class Verify_Access {
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
 			break;
 			case 'notifications':
+			case 'notificationHistory':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') == 'ON';
 			break;
 			case 'signup':
