@@ -55,35 +55,35 @@ $(function () {
 	});
 	//dataTale lang
 	dataTableLang = {
-		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
-		"sEmptyTable": lang.GEN_TABLE_SEMPTYTABLE,
-		"sInfo": lang.GEN_TABLE_SINFO,
-		"sInfoEmpty": lang.GEN_TABLE_SINFOEMPTY,
-		"sInfoFiltered": lang.GEN_TABLE_SINFOFILTERED,
-		"sInfoPostFix": lang.GEN_TABLE_SINFOPOSTFIX,
-		"slengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sSearch": lang.GEN_TABLE_SSEARCH,
-		"sSearchPlaceholder": lang.GEN_TABLE_SSEARCHPLACEHOLDER,
-		"sUrl": lang.GEN_TABLE_SSEARCH,
-		"sInfoThousands": lang.GEN_TABLE_SINFOTHOUSANDS,
-		"sProcessing": lang.GEN_TABLE_SPROCESSING,
-		"sloadingrecords": lang.SLOADINGRECORDS,
+		"sLengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sZeroRecords": lang.GEN_DATATABLE_SZERORECORDS,
+		"sEmptyTable": lang.GEN_DATATABLE_SEMPTYTABLE,
+		"sInfo": lang.GEN_DATATABLE_SINFO,
+		"sInfoEmpty": lang.GEN_DATATABLE_SINFOEMPTY,
+		"sInfoFiltered": lang.GEN_DATATABLE_SINFOFILTERED,
+		"sInfoPostFix": lang.CONF_DATATABLE_SINFOPOSTFIX,
+		"slengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sSearch": lang.CONF_DATATABLE_SSEARCH,
+		"sSearchPlaceholder": lang.GEN_DATATABLE_SSEARCHPLACEHOLDER,
+		"sUrl": lang.CONF_DATATABLE_SSEARCH,
+		"sInfoThousands": lang.CONF_DATATABLE_SINFOTHOUSANDS,
+		"sProcessing": lang.GEN_DATATABLE_SPROCESSING,
+		"sloadingrecords": lang.GEN_DATATABLE_SLOADINGRECORDS,
 		"oPaginate": {
-			"sFirst": lang.GEN_TABLE_SFIRST,
-			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sFirst": lang.GEN_DATATABLE_SFIRST,
+			"sLast": lang.GEN_DATATABLE_SLAST,
+			"sNext": lang.CONF_DATATABLE_SNEXT,
+			"sPrevious": lang.CONF_DATATABLE_SPREVIOUS
 		},
 		"oAria": {
-			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
-			"sSortDescending": lang.GEN_TABLE_SSORTDESCENDING
+			"sSortAscending": lang.GEN_DATATABLE_SSORTASCENDING,
+			"sSortDescending": lang.GEN_DATATABLE_SSORTDESCENDING
 		},
 		"select": {
 			"rows": {
-				_: lang.GEN_TABLE_ROWS_SELECTED,
-				0: lang.GEN_TABLE_ROWS_NO_SELECTED,
-				1: lang.GEN_TABLE_ROW_SELECTED
+				_: lang.GEN_DATATABLE_ROWS_SELECTED,
+				0: lang.CONF_DATATABLE_ROWS_NO_SELECTED,
+				1: lang.GEN_DATATABLE_ROW_SELECTED
 			}
 		}
 	}

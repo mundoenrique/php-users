@@ -133,7 +133,7 @@
       </table>
       <div id="no-result" class="hide">
         <div class="flex flex-column items-center justify-center pt-5">
-          <h2 class="h3 regular mb-1"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h2>
+          <h2 class="h3 regular mb-1"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h2>
           <span class="h6 regular mb-0"><?= lang('REPORTS_DATE_RANGE'); ?></span>
         </div>
       </div>

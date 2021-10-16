@@ -1,10 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_NAME_SYSTEM']= 'Conexión Personas Online';
-//GENERAL ERROR RESPONSE
 $lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
-//MENU
+$lang['GEN_DATATABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros por página';
+$lang['GEN_DATATABLE_SZERORECORDS'] = 'No se encontraron resultados';
+$lang['GEN_DATATABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
+$lang['GEN_DATATABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
+$lang['GEN_DATATABLE_SINFOEMPTY'] = 'Sin registros que mostrar';
+$lang['GEN_DATATABLE_SINFOFILTERED'] = '(filtrado de un total de _MAX_ registro(s))';
+$lang['GEN_DATATABLE_SSEARCHPLACEHOLDER'] = 'Buscar...';
+$lang['GEN_DATATABLE_SPROCESSING'] = 'Procesando...';
+$lang['GEN_DATATABLE_SLOADINGRECORDS'] = 'Cargando...';
+$lang['GEN_DATATABLE_SFIRST'] = 'Primera';
+$lang['GEN_DATATABLE_SLAST'] = 'Última';
+$lang['GEN_DATATABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
+$lang['GEN_DATATABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
+$lang['GEN_DATATABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
+$lang['GEN_DATATABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_DATATABLE_PAGE'] = 'Página';
+$lang['GEN_DATATABLE_PAGE_FIRST'] = 'Primera página';
+$lang['GEN_DATATABLE_PAGE_LAST'] = 'Última página';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
@@ -146,32 +162,6 @@ $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petici
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 $lang['GEN_CARDS_NO_ENABLED'] = 'No tienes tarjetas habilitadas para esta operación.';
-//DATATABLES
-$lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
-$lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
-$lang['GEN_TABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
-$lang['GEN_TABLE_SINFOEMPTY'] = 'Sin registros que mostrar';
-$lang['GEN_TABLE_SINFOFILTERED'] = '(filtrado de un total de _MAX_ registro(s))';
-$lang['GEN_TABLE_SINFOPOSTFIX'] = '';
-$lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros por página';
-$lang['GEN_TABLE_SSEARCH'] = '';
-$lang['GEN_TABLE_SSEARCHPLACEHOLDER'] = 'Buscar...';
-$lang['GEN_TABLE_SURL'] = '';
-$lang['GEN_TABLE_SINFOTHOUSANDS'] = ',';
-$lang['GEN_TABLE_SPROCESSING'] = 'Procesando...';
-$lang['GEN_TABLE_SLOADINGRECORDS'] = 'Cargando...';
-$lang['GEN_TABLE_SFIRST'] = 'Primera';
-$lang['GEN_TABLE_SLAST'] = 'Última';
-$lang['GEN_TABLE_SNEXT'] = '»';
-$lang['GEN_TABLE_SPREVIOUS'] = '«';
-$lang['GEN_TABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
-$lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
-$lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
-$lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
-$lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
-$lang['GEN_TABLE_PAGE'] = 'Página';
-$lang['GEN_TABLE_PAGE_FIRST'] = 'Primera página';
-$lang['GEN_TABLE_PAGE_LAST'] = 'Última página';
 //DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
 $lang['GEN_PICKER_PREVTEXT'] = '<Ant';

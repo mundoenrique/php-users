@@ -147,7 +147,7 @@
             </div>
             <div id="no-notifications" class="hide">
               <div class="flex flex-column items-center justify-center pt-5">
-                <h3 class="h4 regular mb-0"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h3>
+                <h3 class="h4 regular mb-0"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h3>
               </div>
             </div>
           </div>
