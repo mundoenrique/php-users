@@ -39,7 +39,6 @@ $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
-//BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -55,9 +54,7 @@ $lang['GEN_BTN_SEARCH'] = 'Buscar';
 $lang['GEN_BTN_YES'] = 'Si';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
-//TITULOS
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
-//BROWSERS
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
 $lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
 $lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
@@ -68,7 +65,6 @@ $lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
 $lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
 $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
-//GENERAL LANGUAGE
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_MORNING'] = 'Buenos días';
@@ -146,7 +142,6 @@ $lang['GEN_WAITING_PROFESSIONS'] = 'Esperando profesiones';
 $lang['GEN_WAITING_STATES'] = 'Esperando estados';
 $lang['GEN_WAITING_CITIES'] = 'Esperando ciudades';
 $lang['GEN_WAITING_DISTRICTS'] = 'Esperando distritos';
-//OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
 $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
 $lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
@@ -162,7 +157,6 @@ $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petici
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 $lang['GEN_CARDS_NO_ENABLED'] = 'No tienes tarjetas habilitadas para esta operación.';
-//DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
 $lang['GEN_PICKER_PREVTEXT'] = '<Ant';
 $lang['GEN_PICKER_NEXTTEXT'] = 'Sig>';
@@ -183,34 +177,28 @@ $lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
 $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
-//PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar no existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'La tarjeta se encuentra vencida.';
-// PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
-// API
 $lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'Tipo de archivo no permitido';
 $lang['GEN_SIZE_NOT_ALLOWED'] = 'El tamaño del archivo no cumple con lo requerido';
 $lang['GEN_FILE_EMPTY'] = 'Archivo sin contenido';
 $lang['GEN_FORMAT_NOT_VALID'] = 'Formato base64 no válido';
 $lang['GEN_WRITE_NOT_COMPLETED'] = 'Escritura incompleta en el archivo destino';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_SUCCESSFULL'] = 'upload successfull!!!';
 $lang['GEN_UPLOAD_ERROR_GENERAL'] = 'Error general al cargar archivo.';
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Directorio existente.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directorio no creado!!!.';
-// HANDLE LANGUAGE
 $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
-// DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Descargar PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';

@@ -40,7 +40,6 @@ $lang['GEN_MENU_PROFILE'] = 'User profile';
 $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
 $lang['GEN_MENU_SIGNOUT'] = 'Signout';
-//BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Signin';
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
 $lang['GEN_BTN_CANCEL'] = 'Cancel';
@@ -56,9 +55,7 @@ $lang['GEN_BTN_SEARCH'] = 'Search';
 $lang['GEN_BTN_YES'] = 'Yes';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Keep session';
-//TITULOS
 $lang['GEN_TITLE_IMPORTANT'] = 'Important';
-//BROWSERS
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
 $lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
 $lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
@@ -69,7 +66,6 @@ $lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
 $lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
 $lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
 $lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
-//GENERAL LANGUAGE
 $lang["GEN_TERMS_TITLE"]='Terms and Conditions';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Process executed successfully.';
 $lang['GEN_MORNING'] = 'Good morning';
@@ -147,7 +143,6 @@ $lang['GEN_WAITING_PROFESSIONS'] = 'Waiting professions';
 $lang['GEN_WAITING_STATES'] = 'Waiting states';
 $lang['GEN_WAITING_CITIES'] = 'Waiting cities';
 $lang['GEN_WAITING_DISTRICTS'] = 'Waiting districts';
-//OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'We send an email to %s, with your access data.';
 $lang['GEN_OTP_SENT'] = 'Enter the verification code sent to your email.';
 $lang['GEN_OTP_MSG'] = 'For security reasons we will send a verification code to the email address <span class="semibold">%s</span>, indicate it below.';
@@ -163,7 +158,6 @@ $lang['GEN_VALIDATION_INPUT'] = 'Unauthorized content was detected in the reques
 $lang['GEN_VALIDATION_LOGGED'] = 'You will be disconnected.';
 $lang['GEN_DUPLICATED_SESSION'] = 'It was not possible to validate your access credentials, please log in again, if you continue to see this message, contact the administrator.';
 $lang['GEN_CARDS_NO_ENABLED'] = 'You do not have cards enabled for this operation.';
-//DATEPICKER
 $lang['GEN_PICKER_CLOSETEXT'] = 'Close';
 $lang['GEN_PICKER_PREVTEXT'] = '<Prev';
 $lang['GEN_PICKER_NEXTTEXT'] = 'Next>';
@@ -184,34 +178,28 @@ $lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
 $lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
 $lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
 $lang['GEN_PICKER_YEARSUFFIX'] = '';
-//PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Inactive card';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Temporary lock';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Replenishment pending';
 $lang['GEN_FILE_NOT_FOUND'] = 'The file to be processed does not exist.';
 $lang['GEN_LOCK_PRODUCT'] = 'The card is blocked.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'The card is expired.';
-// PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'To complete your registration, you must upload your INE. Do you want to take this action at this time?';
-// API
 $lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'File type not allowed';
 $lang['GEN_SIZE_NOT_ALLOWED'] = 'The file size does not meet what is required';
 $lang['GEN_FILE_EMPTY'] = 'File without content';
 $lang['GEN_FORMAT_NOT_VALID'] = 'Invalid base64 format';
 $lang['GEN_WRITE_NOT_COMPLETED'] = 'Incomplete write to destination file';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_SUCCESSFULL'] = 'Successful upload';
 $lang['GEN_UPLOAD_ERROR_GENERAL'] = 'General error loading file.';
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directory created.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directory exists.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Existing directory.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directory not created';
-
 $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
-//DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Download PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Download Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Download Statement';
