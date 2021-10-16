@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['GEN_NAME_SYSTEM']= 'Customers Online';
-//GENERAL ERROR RESPONSE
 $lang['GEN_MESSAGE_SYSTEM'] = 'At this time it is not possible to meet your request, please try again later';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
@@ -78,6 +77,7 @@ $lang['GEN_BTN_SEARCH'] = 'Search';
 $lang['GEN_BTN_YES'] = 'Yes';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Keep session';
+
 $lang['GEN_TITLE_IMPORTANT'] = 'Important';
 $lang["GEN_TERMS_TITLE"]='Terms and Conditions';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Process executed successfully.';

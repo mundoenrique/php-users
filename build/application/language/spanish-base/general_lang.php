@@ -77,6 +77,7 @@ $lang['GEN_BTN_SEARCH'] = 'Buscar';
 $lang['GEN_BTN_YES'] = 'Si';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
+
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
