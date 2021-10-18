@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_NAME_SYSTEM']= 'Conexión Personas Online';
-$lang['GEN_MESSAGE_SYSTEM'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
 $lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Versión 48+';
