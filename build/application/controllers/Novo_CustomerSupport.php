@@ -62,7 +62,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 		$this->render->statustext = lang('CUST_TEMPORARY_LOCK');
 		$this->render->statustextCard =  lang('CUST_TEMPORARILY_LOCK');
 		$this->render->RecoverPinText = lang('CUST_RETRIEVE_PIN');
-		$this->render->activeEvents = 'no-events';
+		$this->render->activePointer = 'no-pointer';
 		$this->render->uniqueEvent = $this->render->totalCards == 1 && $serviceTotal == 1;
 
 		if ($this->render->totalCards == 1) {
@@ -70,7 +70,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 				$this->render->$index = $render;
 			}
 
-			$this->render->activeEvents = '';
+			$this->render->activePointer = '';
 
 			if (!in_array($this->render->status, ['PB', ''])) {
 				$this->render->serviceList = [];

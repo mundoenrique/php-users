@@ -55,62 +55,62 @@ $(function () {
 	});
 	//dataTale lang
 	dataTableLang = {
-		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
-		"sEmptyTable": lang.GEN_TABLE_SEMPTYTABLE,
-		"sInfo": lang.GEN_TABLE_SINFO,
-		"sInfoEmpty": lang.GEN_TABLE_SINFOEMPTY,
-		"sInfoFiltered": lang.GEN_TABLE_SINFOFILTERED,
-		"sInfoPostFix": lang.GEN_TABLE_SINFOPOSTFIX,
-		"slengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sSearch": lang.GEN_TABLE_SSEARCH,
-		"sSearchPlaceholder": lang.GEN_TABLE_SSEARCHPLACEHOLDER,
-		"sUrl": lang.GEN_TABLE_SSEARCH,
-		"sInfoThousands": lang.GEN_TABLE_SINFOTHOUSANDS,
-		"sProcessing": lang.GEN_TABLE_SPROCESSING,
-		"sloadingrecords": lang.SLOADINGRECORDS,
+		"sLengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sZeroRecords": lang.GEN_DATATABLE_SZERORECORDS,
+		"sEmptyTable": lang.GEN_DATATABLE_SEMPTYTABLE,
+		"sInfo": lang.GEN_DATATABLE_SINFO,
+		"sInfoEmpty": lang.GEN_DATATABLE_SINFOEMPTY,
+		"sInfoFiltered": lang.GEN_DATATABLE_SINFOFILTERED,
+		"sInfoPostFix": lang.CONF_DATATABLE_SINFOPOSTFIX,
+		"slengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sSearch": lang.CONF_DATATABLE_SSEARCH,
+		"sSearchPlaceholder": lang.GEN_DATATABLE_SSEARCHPLACEHOLDER,
+		"sUrl": lang.CONF_DATATABLE_SSEARCH,
+		"sInfoThousands": lang.CONF_DATATABLE_SINFOTHOUSANDS,
+		"sProcessing": lang.GEN_DATATABLE_SPROCESSING,
+		"sloadingrecords": lang.GEN_DATATABLE_SLOADINGRECORDS,
 		"oPaginate": {
-			"sFirst": lang.GEN_TABLE_SFIRST,
-			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sFirst": lang.GEN_DATATABLE_SFIRST,
+			"sLast": lang.GEN_DATATABLE_SLAST,
+			"sNext": lang.CONF_DATATABLE_SNEXT,
+			"sPrevious": lang.CONF_DATATABLE_SPREVIOUS
 		},
 		"oAria": {
-			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
-			"sSortDescending": lang.GEN_TABLE_SSORTDESCENDING
+			"sSortAscending": lang.GEN_DATATABLE_SSORTASCENDING,
+			"sSortDescending": lang.GEN_DATATABLE_SSORTDESCENDING
 		},
 		"select": {
 			"rows": {
-				_: lang.GEN_TABLE_ROWS_SELECTED,
-				0: lang.GEN_TABLE_ROWS_NO_SELECTED,
-				1: lang.GEN_TABLE_ROW_SELECTED
+				_: lang.GEN_DATATABLE_ROWS_SELECTED,
+				0: lang.CONF_DATATABLE_ROWS_NO_SELECTED,
+				1: lang.GEN_DATATABLE_ROW_SELECTED
 			}
 		}
 	}
 	//datepicker
 	currentDate = new Date();
   $.datepicker.regional['es'] = {
-    closeText: lang.GEN_PICKER_CLOSETEXT,
-    prevText: lang.GEN_PICKER_PREVTEXT,
-    nextText: lang.GEN_PICKER_NEXTTEXT,
-    currentText: lang.GEN_PICKER_CURRENTTEXT,
-    monthNames: lang.GEN_PICKER_MONTHNAMES,
-    monthNamesShort: lang.GEN_PICKER_MONTHNAMESSHORT,
-    dayNames: lang.GEN_PICKER_DAYNAMES,
-    dayNamesShort: lang.GEN_PICKER_DAYNAMESSHORT,
-    dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
-    weekHeader: lang.GEN_PICKER_WEEKHEADER,
-    dateFormat: lang.GEN_PICKER_DATEFORMAT,
-    firstDay: lang.GEN_PICKER_FIRSTDATE,
-    isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: lang.CONF_PICKER_MINDATE,
+    closeText: lang.GEN_DATEPICKER_CLOSETEXT,
+    prevText: lang.GEN_DATEPICKER_PREVTEXT,
+    nextText: lang.GEN_DATEPICKER_NEXTTEXT,
+    currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
+    monthNames: lang.GEN_DATEPICKER_MONTHNAMES,
+    monthNamesShort: lang.GEN_DATEPICKER_MONTHNAMESSHORT,
+    dayNames: lang.GEN_DATEPICKER_DAYNAMES,
+    dayNamesShort: lang.GEN_DATEPICKER_DAYNAMESSHORT,
+    dayNamesMin: lang.GEN_DATEPICKER_DAYNAMESMIN,
+		weekHeader: lang.CONF_DATEPICKER_WEEKHEADER,
+    dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
+    firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
+    isRTL: lang.CONF_DATEPICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_DATEPICKER_MINDATE,
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-    changeYear: lang.GEN_PICKER_CHANGEYEAR,
-    showAnim: lang.SHOWANIM,
-    yearSuffix: lang.GEN_PICKER_YEARSUFFIX
+		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
+    changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
+		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
+    yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
@@ -191,7 +191,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
+		appMessages(lang.GEN_NAME_SYSTEM, lang.GEN_MESSAGE_SYSTEM, lang.CONF_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
 }
@@ -208,7 +208,7 @@ function appMessages(title, message, icon, modalBtn) {
 	var maxHeight = modalBtn.maxHeight || 350;
 
 	$('#system-info').dialog({
-		title: title || lang.GEN_SYSTEM_NAME,
+		title: title || lang.GEN_NAME_SYSTEM,
 		closeText: '',
 		modal: 'true',
 		position: { my: modalBtn.posMy || 'center', at: modalBtn.posAt || 'center' },

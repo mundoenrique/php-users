@@ -73,7 +73,7 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="birthDate"><?= lang('USER_BIRTHDATE') ?></label>
                     <input id="birthDate" class="form-control <?= $updateUser; ?>" type="text" name="birthDate" value="<?= $birthday; ?>" readonly
-                      autocomplete="off">
+                      autocomplete="off" placeholder="<?= lang('GEN_DATEPICKER_DATELARGE'); ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php if ($longProfile == 'S') : ?>

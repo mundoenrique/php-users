@@ -11,3 +11,10 @@ $lang['CONF_CONTACTS'] = [
 ];
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'ON';
+//MENU
+$lang['CONF_PAYS_TRANSFER'] = 'ON';
+$lang['CONF_BETWEEN_CARDS'] = 'ON';
+$lang['CONF_BANKS'] = 'ON';
+$lang['CONF_CREDIT_CARDS'] = 'ON';
+$lang['CONF_SERVICES'] = 'ON';
+$lang['CONF_DIGITEL'] = 'OFF';

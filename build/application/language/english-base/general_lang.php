@@ -1,26 +1,67 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['GEN_SYSTEM_NAME']= 'Customers Online';
-//MENU
+$lang['GEN_NAME_SYSTEM']= 'Customers Online';
+$lang['GEN_MESSAGE_SYSTEM'] = 'At this time it is not possible to meet your request, please try again later';
+$lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
+$lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
+$lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX_VERSION'] = 'Version 30+';
+$lang['GEN_BROWSER_APPLE_SAFARI'] = 'Apple Safari';
+$lang['GEN_BROWSER_APPLE_SAFARI_VERSION'] = 'Version 10+';
+$lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
+$lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
+$lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
+$lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
+$lang['GEN_DATATABLE_SLENGTHMENU'] = 'Show _MENU_ records per page';
+$lang['GEN_DATATABLE_SZERORECORDS'] = 'No results found';
+$lang['GEN_DATATABLE_SEMPTYTABLE'] = 'No records were found for your query';
+$lang['GEN_DATATABLE_SINFO'] = 'Showing record(s) from _START_ to _END_ of a total of _TOTAL_ record(s)';
+$lang['GEN_DATATABLE_SINFOEMPTY'] = 'No records to show';
+$lang['GEN_DATATABLE_SINFOFILTERED'] = '(filtering a total of _MAX_ record (s))';
+$lang['GEN_DATATABLE_SSEARCHPLACEHOLDER'] = 'Search...';
+$lang['GEN_DATATABLE_SPROCESSING'] = 'Processing...';
+$lang['GEN_DATATABLE_SLOADINGRECORDS'] = 'Loading...';
+$lang['GEN_DATATABLE_SFIRST'] = 'First';
+$lang['GEN_DATATABLE_SLAST'] = 'Last';
+$lang['GEN_DATATABLE_SSORTASCENDING'] = ': Activate to sort the column in ascending order';
+$lang['GEN_DATATABLE_SSORTDESCENDING'] = ': Activate to sort the column in descending order';
+$lang['GEN_DATATABLE_ROWS_SELECTED'] = '%d Selected records';
+$lang['GEN_DATATABLE_ROW_SELECTED'] = '1 Selected record';
+$lang['GEN_DATATABLE_PAGE'] = 'Page';
+$lang['GEN_DATATABLE_PAGE_FIRST'] = 'First page';
+$lang['GEN_DATATABLE_PAGE_LAST'] = 'Last page';
+$lang['GEN_DATEPICKER_CLOSETEXT'] = 'Close';
+$lang['GEN_DATEPICKER_PREVTEXT'] = 'Prev';
+$lang['GEN_DATEPICKER_NEXTTEXT'] = 'Next';
+$lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Today';
+$lang['GEN_DATEPICKER_MONTHNAMES'] = [
+	'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+];
+$lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$lang['GEN_DATEPICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+$lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+$lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+$lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/YYYY';
+$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/YYYY';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recover access';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'User identify';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Change password';
 $lang['GEN_MENU_CARD_LIST'] = 'Card list';
 $lang['GEN_MENU_CARD_DETAIL'] = 'Card detail';
-$lang['GEN_MENU_PAYS_TRANSFER'] = 'Payments and transfers';
+$lang['GEN_MENU_PAYS_TRANSFER'] = 'Transfers and payments';
 $lang['GEN_MENU_BETWEEN_CARDS'] = 'Between cards';
 $lang['GEN_MENU_BANKS'] = 'Banks';
 $lang['GEN_MENU_CREDIT_CARDS'] = 'Credit cards';
 $lang['GEN_MENU_SERVICES'] = 'Services';
-$lang['GEN_MENU_TELEPHONY'] = 'Digitel recharge ';
+$lang['GEN_MENU_DIGITEL'] = 'Digitel recharge ';
 $lang['GEN_MENU_REPORTS'] = 'Reports';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Customer support';
+$lang['GEN_MENU_TRANSFERS'] = 'Transfers';
 $lang['GEN_MENU_PROFILE'] = 'User profile';
 $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
 $lang['GEN_MENU_SIGNOUT'] = 'Signout';
-//BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Signin';
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
 $lang['GEN_BTN_CANCEL'] = 'Cancel';
@@ -36,20 +77,8 @@ $lang['GEN_BTN_SEARCH'] = 'Search';
 $lang['GEN_BTN_YES'] = 'Yes';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Keep session';
-//TITULOS
+
 $lang['GEN_TITLE_IMPORTANT'] = 'Important';
-//BROWSERS
-$lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
-$lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
-$lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
-$lang['GEN_BROWSER_MOZILLA_FIREFOX_VERSION'] = 'Version 30+';
-$lang['GEN_BROWSER_APPLE_SAFARI'] = 'Apple Safari';
-$lang['GEN_BROWSER_APPLE_SAFARI_VERSION'] = 'Version 10+';
-$lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
-$lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
-$lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
-$lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
-//GENERAL LANGUAGE
 $lang["GEN_TERMS_TITLE"]='Terms and Conditions';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Process executed successfully.';
 $lang['GEN_MORNING'] = 'Good morning';
@@ -127,7 +156,6 @@ $lang['GEN_WAITING_PROFESSIONS'] = 'Waiting professions';
 $lang['GEN_WAITING_STATES'] = 'Waiting states';
 $lang['GEN_WAITING_CITIES'] = 'Waiting cities';
 $lang['GEN_WAITING_DISTRICTS'] = 'Waiting districts';
-//OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'We send an email to %s, with your access data.';
 $lang['GEN_OTP_SENT'] = 'Enter the verification code sent to your email.';
 $lang['GEN_OTP_MSG'] = 'For security reasons we will send a verification code to the email address <span class="semibold">%s</span>, indicate it below.';
@@ -139,88 +167,32 @@ $lang['GEN_OTP_EXPIRED'] = 'Verification code expired or was used.';
 $lang['GEN_OTP_ERROR'] = 'It was not possible to validate the security code, please try again.';
 $lang['GEN_OTP_INVALID'] = 'The received security code is invalid, please try again.';
 $lang['GEN_OTP_USED'] = 'The security code entered has already been used, please try again.';
-//GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'At this time it is not possible to meet your request, please try again later';
-$lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['GEN_VALIDATION_INPUT'] = 'Unauthorized content was detected in the request. %s';
 $lang['GEN_VALIDATION_LOGGED'] = 'You will be disconnected.';
 $lang['GEN_DUPLICATED_SESSION'] = 'It was not possible to validate your access credentials, please log in again, if you continue to see this message, contact the administrator.';
 $lang['GEN_CARDS_NO_ENABLED'] = 'You do not have cards enabled for this operation.';
-//DATATABLES
-$lang['GEN_TABLE_SZERORECORDS'] = 'No results found';
-$lang['GEN_TABLE_SEMPTYTABLE'] = 'No records were found for your query';
-$lang['GEN_TABLE_SINFO'] = 'Showing record(s) from _START_ to _END_ of a total of _TOTAL_ record(s)';
-$lang['GEN_TABLE_SINFOEMPTY'] = 'No records to show';
-$lang['GEN_TABLE_SINFOFILTERED'] = '(filtering a total of _MAX_ record (s))';
-$lang['GEN_TABLE_SINFOPOSTFIX'] = '';
-$lang['GEN_TABLE_SLENGTHMENU'] = 'Show _MENU_ records per page';
-$lang['GEN_TABLE_SSEARCH'] = '';
-$lang['GEN_TABLE_SSEARCHPLACEHOLDER'] = 'Search...';
-$lang['GEN_TABLE_SURL'] = '';
-$lang['GEN_TABLE_SINFOTHOUSANDS'] = ',';
-$lang['GEN_TABLE_SPROCESSING'] = 'Processing...';
-$lang['GEN_TABLE_SLOADINGRECORDS'] = 'Loading...';
-$lang['GEN_TABLE_SFIRST'] = 'First';
-$lang['GEN_TABLE_SLAST'] = 'Last';
-$lang['GEN_TABLE_SNEXT'] = '»';
-$lang['GEN_TABLE_SPREVIOUS'] = '«';
-$lang['GEN_TABLE_SSORTASCENDING'] = ': Activate to sort the column in ascending order';
-$lang['GEN_TABLE_SSORTDESCENDING'] = ': Activate to sort the column in descending order';
-$lang['GEN_TABLE_ROWS_SELECTED'] = '%d Selected records';
-$lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
-$lang['GEN_TABLE_ROW_SELECTED'] = '1 Selected record';
-$lang['GEN_TABLE_PAGE'] = 'Page';
-$lang['GEN_TABLE_PAGE_FIRST'] = 'First page';
-$lang['GEN_TABLE_PAGE_LAST'] = 'Last page';
-//DATEPICKER
-$lang['GEN_PICKER_CLOSETEXT'] = 'Close';
-$lang['GEN_PICKER_PREVTEXT'] = '<Prev';
-$lang['GEN_PICKER_NEXTTEXT'] = 'Next>';
-$lang['GEN_PICKER_CURRENTTEXT'] = 'Today';
-$lang['GEN_PICKER_MONTHNAMES'] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-$lang['GEN_PICKER_DAYNAMES'] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-$lang['GEN_PICKER_DAYNAMESMIN'] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
-$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
-$lang['GEN_PICKER_DATEMEDIUM']= 'MM/YYYY';
-$lang['GEN_PICKER_FIRSTDATE'] = 1;
-$lang['GEN_PICKER_ISRLT'] = FALSE;
-$lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
-$lang['GEN_PICKER_YEARRANGE'] = '-20:';
-$lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
-$lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
-$lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
-$lang['GEN_PICKER_YEARSUFFIX'] = '';
-//PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Inactive card';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Temporary lock';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Replenishment pending';
 $lang['GEN_FILE_NOT_FOUND'] = 'The file to be processed does not exist.';
 $lang['GEN_LOCK_PRODUCT'] = 'The card is blocked.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'The card is expired.';
-// PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'To complete your registration, you must upload your INE. Do you want to take this action at this time?';
-// API
 $lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'File type not allowed';
 $lang['GEN_SIZE_NOT_ALLOWED'] = 'The file size does not meet what is required';
 $lang['GEN_FILE_EMPTY'] = 'File without content';
 $lang['GEN_FORMAT_NOT_VALID'] = 'Invalid base64 format';
 $lang['GEN_WRITE_NOT_COMPLETED'] = 'Incomplete write to destination file';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_SUCCESSFULL'] = 'Successful upload';
 $lang['GEN_UPLOAD_ERROR_GENERAL'] = 'General error loading file.';
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directory created.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directory exists.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Existing directory.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directory not created';
-
 $lang['GEN_LANG_IMG'] = 'es.png';
 $lang['GEN_AFTER_COD_LANG'] = 'es';
 $lang['GEN_BEFORE_COD_LANG'] = 'en';
 $lang['GEN_AFTER_LANG'] = 'spanish';
-//DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Download PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Download Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Download Statement';

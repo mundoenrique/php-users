@@ -26,7 +26,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 'GET');
 			exit();
 		}
 
@@ -51,7 +51,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		$this->render->skipProductInf = TRUE;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_NAME_SYSTEM');
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -188,12 +188,13 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"user/validPass",
 			"user/changePassword"
 		);
 
 		if ($this->session->logged) {
 			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('CONF_LINK_CARD_LIST')) ;
-			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
+			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_NAME_SYSTEM'));
 		}
 
 		if ($this->session->flashdata('changePassword') != NULL) {
@@ -201,10 +202,10 @@ class Novo_User extends NOVO_Controller {
 
 			switch($this->session->flashdata('changePassword')) {
 				case 'TemporalPass':
-					$this->render->message = novoLang(lang("USER_PASS_TEMPORAL"), lang('GEN_SYSTEM_NAME'));
+					$this->render->message = novoLang(lang("USER_PASS_TEMPORAL"), lang('GEN_NAME_SYSTEM'));
 				break;
 				case 'expiredPass':
-					$this->render->message = novoLang(lang("USER_PASS_EXPIRED"), lang('GEN_SYSTEM_NAME'));
+					$this->render->message = novoLang(lang("USER_PASS_EXPIRED"), lang('GEN_NAME_SYSTEM'));
 				break;
 			}
 
@@ -326,7 +327,7 @@ class Novo_User extends NOVO_Controller {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;
-			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
+			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_NAME_SYSTEM'));
 
 			unset($this->includeAssets->jsFiles[$pos]);
 			$this->render->activeHeader = TRUE;
@@ -335,7 +336,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 'GET');
 		}
 
 	}
@@ -351,7 +352,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 'GET');
 			exit();
 		}
 
@@ -366,7 +367,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->title = $messageBrowser->title;
 		$this->render->msg1 = $messageBrowser->msg1;
 		$this->render->msg2 = $messageBrowser->msg2;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_NAME_SYSTEM');
 		$this->views = $views;
 		$this->loadView($view);
 	}

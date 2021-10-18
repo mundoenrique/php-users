@@ -135,7 +135,7 @@ class NOVO_Controller extends CI_Controller {
 					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
-						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'location', 301);
+						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'Location', 'GET');
 					}
 				}
 
@@ -221,7 +221,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		} else {
 			$linkredirect = uriRedirect();
-			redirect(base_url($linkredirect), 'location', 'GET');
+			redirect(base_url($linkredirect), 'Location', 'GET');
 		}
 	}
 	/**

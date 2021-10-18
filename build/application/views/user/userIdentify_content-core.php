@@ -8,7 +8,7 @@
 		<div class="line-text mt-2"></div>
 		<div class="pt-3 regular">
 			<h4 class="text"><?= lang ('USER_ACCOUNT_VERIFICATION') ?></h4>
-			<?= novoLang(lang('USER_MSG_ACCESS_ACCOUNT'),lang('GEN_SYSTEM_NAME')) ?>
+			<?= novoLang(lang('USER_MSG_ACCESS_ACCOUNT'),lang('GEN_NAME_SYSTEM')) ?>
 			<div class="max-width-1 fit-lg mx-auto pt-1">
 				<form id="identityForm">
 					<div class="row">
