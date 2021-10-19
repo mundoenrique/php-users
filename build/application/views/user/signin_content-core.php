@@ -5,7 +5,7 @@
       <div class="flex flex-column items-center z1 h-100">
         <img class="logo-banco mb-2" src="<?= $this->asset->insertFile(lang('IMG_SIGNIN_LOGO_WIDGET'), 'images', $customerUri); ?>"
           alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
-        <span class="mb-2 secondary center h3"><?= lang('USER_SIGNIN_TITLE') ?></span>
+        <span class="mb-2 secondary center h3"><?= novoLang(lang('USER_SIGNIN_TITLE'), lang('GEN_SYSTEM_NAME')) ?></span>
         <div id="widget-signin" class="widget rounded h-100">
           <form id="signInForm">
             <div class="form-group">
@@ -28,7 +28,9 @@
               <?= lang('GEN_BTN_SIGNIN') ?>
             </button>
             <?php if (lang('CONF_SIGIN_RECOVER_PASS') == 'ON') : ?>
-            <a class="block mb-1 h5 primary hyper-link" href="<?= base_url(LANG('CONF_LINK_RECOVER_ACCESS')); ?>"><?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?></a>
+            <a class="block mb-1 h5 primary hyper-link" href="<?= base_url(LANG('CONF_LINK_RECOVER_ACCESS')); ?>">
+							<?= lang('USER_SIGNIN_ACCESS_RECOVER'); ?>
+						</a>
             <?php endif; ?>
             <?php if (lang('CONF_SIGIN') == 'ON') : ?>
             <p class="mb-0 h5 center"><?= lang('USER_SIGNIN_NO_USER') ?>

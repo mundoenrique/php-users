@@ -69,7 +69,7 @@
 	<div id="system-info" class="none" name="system-info" oncopy="return false">
 		<p>
 			<span class="dialog-icon"><i id="system-icon" class="ui-icon mt-0"></i></span>
-			<span id="system-msg" class="system-msg"><?= lang('GEN_SYSTEM_MESSAGE'); ?></span>
+			<span id="system-msg" class="system-msg"><?= lang('GEN_CORE_MESSAGE'); ?></span>
 		</p>
 		<div id="footerSistemInfo" class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
 			<div class="ui-dialog-buttonset novo-dialog-buttonset flex modal-buttonset">
@@ -90,7 +90,7 @@
 		var idleSession = '<?= $this->config->item('timeIdleSession'); ?>';
 		var coinSimbol = '<?= lang("GEN_COIN"); ?>';
 		var codeResp = '<?= lang('RESP_DEFAULT_CODE'); ?>';
-		var titleNotiSystem = '<?= lang('GEN_SYSTEM_NAME'); ?>';
+		var titleNotiSystem = '<?= lang('GEN_CORE_NAME'); ?>';
 		var txtBtnCloseNotiSystem = "<?= lang('GEN_BTN_CLOSE'); ?>";
 		var txtBtnCancelNotiSystem = "<?= lang('GEN_BTN_CANCEL'); ?>";
 		var txtBtnAcceptNotiSystem = "<?= lang('GEN_BTN_ACCEPT'); ?>";

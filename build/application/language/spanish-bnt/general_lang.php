@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL ERROR RESPONSE
-$lang['GEN_MESSAGE_SYSTEM'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
+$lang['GEN_SYSTEM_MESSAGE'] = 'El servicio no se encuentra disponible, intenta de nuevo.';
 $lang['GEN_TIMEOUT'] = "El servidor no se encuentra disponible, intenta de nuevo.";
 // MENU
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Operaciones';

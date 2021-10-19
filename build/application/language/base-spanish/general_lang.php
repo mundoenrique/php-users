@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
+$lang['GEN_CORE_NAME']= 'Conexión Personas Online';
 $lang['LAST_SESSION']='Última sesión';
 $lang['FOOTER'] ='Todos los derechos reservados.';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';

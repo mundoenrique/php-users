@@ -7,7 +7,7 @@ Para una mejor experiencia descarga nuestra app.';
 $lang['GEN_NOT_RENDER_BROWSER'] = 'Algunos componentes de esta página podrían no funcionar correctamente.';
 $lang['GEN_NOT_RENDER_BROWSER_MSG'] = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
 
-$lang['GEN_SYSTEM_NAME'] = 'Conexión Personas Online';
+$lang['GEN_CORE_NAME'] = 'Conexión Personas Online';
 $lang['GEN_CONTRACTED_SYSTEM_NAME'] = 'CPO';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
 $lang['GEN_ENTERPRISE_LIST'] = 'dashboard';
