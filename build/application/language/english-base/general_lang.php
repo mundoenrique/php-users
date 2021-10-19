@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_SYSTEM_NAME']= 'Customers Online';
+$lang['GEN_SYSTEM_NAME']= 'Users Conection Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'At this time it is not possible to meet your request, please try again later';
 $lang['GEN_TIMEOUT'] = "The server is taking a long time to respond, please try again.";
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
