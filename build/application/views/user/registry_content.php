@@ -7,7 +7,7 @@
 			<hr class="separador-one">
 			<div class="pt-3">
 				<h2 class="tertiary h3">Afiliación de datos</h2>
-				<p>Para obtener tu usuario de <strong><?= lang('GEN_SYSTEM_NAME'); ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
+				<p>Para obtener tu usuario de <strong><?= lang('GEN_CORE_NAME'); ?></strong>, es necesario que ingreses los datos requeridos a continuación:</p>
 				<hr class="separador-one">
 				<div class="pt-3">
 					<span>Los campos con  <span class="danger">*</span> son requeridos.</span>

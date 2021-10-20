@@ -107,7 +107,7 @@ class Tool_File {
 				if (!file_exists($fullPathFile)) {
 					$statusCodeResponse = 400;
 
-					$_FILES[$key]['resultDelete'] = lang('GEN_MESSAGE_SYSTEM');
+					$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');
 				} else {
 					if (unlink($fullPathFile)) {
 						$statusCodeResponse = 200;
@@ -116,7 +116,7 @@ class Tool_File {
 					} else {
 						$statusCodeResponse = 400;
 
-						$_FILES[$key]['resultDelete'] = lang('GEN_MESSAGE_SYSTEM');
+						$_FILES[$key]['resultDelete'] = lang('GEN_SYSTEM_MESSAGE');
 					}
 				}
 

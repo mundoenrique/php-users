@@ -78,7 +78,7 @@ class BDB_Connect_Encrypt
 			log_message('ERROR', 'NOVO decode [' . $userName . '] Sin respuesta del servicio');
 			$response = new stdClass();
 			$response->rc = lang('RESP_RC_DEFAULT');
-			$response->msg = lang('GEN_SYSTEM_MESSAGE');
+			$response->msg = lang('GEN_CORE_MESSAGE');
 		}
 
 		if (!isset($response->pais)) {
@@ -133,7 +133,7 @@ class BDB_Connect_Encrypt
 			log_message('ERROR', 'NOVO [' . $userName . '] ERROR CURL: ' . json_encode($curlError) ?: 'none');
 			$failResponse = new stdClass();
 			$failResponse->rc = lang('RESP_DEFAULT_CODE');
-			$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
+			$failResponse->msg = lang('GEN_CORE_MESSAGE');
 			$response = json_encode($failResponse);
 			$fail = TRUE;
 		}

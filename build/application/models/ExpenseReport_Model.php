@@ -52,7 +52,7 @@ class ExpenseReport_Model extends BDB_Model
 
 				default:
 					$this->response->code = 2;
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 			}
 		}
@@ -106,7 +106,7 @@ class ExpenseReport_Model extends BDB_Model
 
 				default:
 					$this->response->code = 2;
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					$this->response->classIconName = "ui-icon-alert";
 					$this->response->data = [
 						'btn1' => [

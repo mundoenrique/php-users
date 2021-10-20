@@ -8,7 +8,7 @@
 		<div class="line mt-2 mb-3"></div>
 		<div class="pt-3 regular">
 			<h2 class="text h3 mb-2"><?= lang('USER_RECOVER_VERIFY_DATA'); ?></h2>
-			<p><?= novoLang(lang('USER_RECOVER_PASS'), lang('GEN_NAME_SYSTEM')); ?></p>
+			<p><?= novoLang(lang('USER_RECOVER_PASS'), lang('GEN_SYSTEM_NAME')); ?></p>
 			<div class="line my-4"></div>
 			<div class="max-width-1 fit-lg mx-auto pt-4">
 				<form id="recoverAccessForm" class="mt-2" method="POST">

@@ -55,7 +55,7 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 
 				default:
@@ -97,7 +97,7 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = '--';
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 
 				default:
@@ -135,7 +135,7 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 
 				case -150:
@@ -244,7 +244,7 @@ class Product_Model extends BDB_Model
 				case -33:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 
 				case -150:
@@ -289,14 +289,14 @@ class Product_Model extends BDB_Model
 
 					$this->response->code = 0;
 					$this->response->data = $response->cuentaOrigen;
-					$this->response->msg = count($response->cuentaOrigen) > 0 ?lang('RESP_RC_0'):lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = count($response->cuentaOrigen) > 0 ?lang('RESP_RC_0'):lang('GEN_CORE_MESSAGE');
 					break;
 
 				case -33:
 				case -3:
 					$this->response->code = 1;
 					$this->response->data = [];
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 					break;
 
 				case -150:
@@ -370,7 +370,7 @@ class Product_Model extends BDB_Model
 
 				default:
 					$this->response->code = 150;
-					$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+					$this->response->msg = lang('GEN_CORE_MESSAGE');
 			}
 		}
 		return $this->response;

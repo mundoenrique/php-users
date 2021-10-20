@@ -35,7 +35,7 @@ function finishSession() {
 			action: 'destroy'
 		}
 	}
-	appMessages(lang.GEN_NAME_SYSTEM, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
 	btnKeepSession = $('.signout');
 
 	resetTimesession = setTimeout(function() {
@@ -72,5 +72,5 @@ function logoutInformation() {
 		},
 	}
 
-	appMessages(lang.GEN_NAME_SYSTEM, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
 }

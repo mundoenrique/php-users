@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SIGN IN
 $lang['USER_SIGNIN_TITLE'] = '';
+$lang['USER_WELCOME_MSG'] = 'Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24.';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
 $lang['USER_SIGNIN_SINGN_UP'] = 'Regístrate';
 $lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
-$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
+$lang['USER_SIGNIN_INVALID_USER'] = "Usuario o contraseña inválido";
+$lang['USER_SIGNIN_WILL_BLOKED'] = "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
 $lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'Tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas.';
