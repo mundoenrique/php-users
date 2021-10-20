@@ -107,7 +107,7 @@ $timeZone = [
 	've'	=>	'America/Caracas',
 	'vg'	=>	'America/Lima',
 ];
-$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_erros/pageNoFound' : '';
+$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
 $timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
 date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';

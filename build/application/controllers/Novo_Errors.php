@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date July 13th, 2021
 */
-class Novo_erros extends NOVO_Controller {
+class Novo_Errors extends NOVO_Controller {
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO error404 Controller Class Initialized');
+		log_message('INFO', 'NOVO Novo_Errors Controller Class Initialized');
 	}
 	/**
 	 * @info Método para la pagina no encontrda
