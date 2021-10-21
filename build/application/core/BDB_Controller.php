@@ -61,6 +61,12 @@ class BDB_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO optionsCheck Method Initialized');
 
+		if ($this->session->has_userdata('userName')) {
+			$data = ['username' => $this->session->userName];
+			$this->db->where('id', $this->session->session_id)
+			->update('cpo_sessions', $data);
+		}
+
 		loadLanguage();
 		countryCheck($this->countryUri);
 		loadLanguage($this->countryUri);
