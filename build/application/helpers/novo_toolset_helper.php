@@ -31,21 +31,21 @@ if (!function_exists('clientUrlValidate')) {
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.$uriCore), 'Location', 'GET');
+			redirect(base_url($client.$uriCore), 'Location', 301);
 		}
 
 		if (in_array($client, $accessUrl)) {
 			switch ($client) {
 				case 'default':
-					redirect(base_url(), 'Location', 'GET');
+					redirect(base_url(), 'Location', 301);
 				break;
 				case 'pichincha':
-					redirect(base_url('pichincha/home'), 'Location', 'GET');
+					redirect(base_url('pichincha/home'), 'Location', 301);
 				break;
 			}
 		}
 
-		$CI->config->load('config-'.$client);
+		$CI->config->load('config-' . $client);
 	}
 }
 

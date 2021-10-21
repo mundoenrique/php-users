@@ -135,7 +135,7 @@ class NOVO_Controller extends CI_Controller {
 					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
-						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'Location', 'GET');
+						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'Location', 301);
 					}
 				}
 
@@ -143,7 +143,7 @@ class NOVO_Controller extends CI_Controller {
 				$valid = TRUE;
 
 				if ($_POST && $access) {
-					log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+					log_message('DEBUG', 'NOVO [' . $this->appUserName . '] REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
 
 					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
 
@@ -221,7 +221,7 @@ class NOVO_Controller extends CI_Controller {
 			}
 		} else {
 			$linkredirect = uriRedirect();
-			redirect(base_url($linkredirect), 'Location', 'GET');
+			redirect(base_url($linkredirect), 'Location', 301);
 		}
 	}
 	/**
