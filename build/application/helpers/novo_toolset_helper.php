@@ -152,14 +152,16 @@ if (!function_exists('languageLoad')) {
 
 		$CI->config->set_item('language', $configLanguage);
 
-		if (file_exists($pathLang.'general_lang.php')) {
-			array_push($languagesFile, 'general');
-			$loadLanguages = TRUE;
-		}
+		if ($call == 'specific') {
+			if (file_exists($pathLang.'general_lang.php')) {
+				array_push($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
 
-		if (file_exists($pathLang.'validate_lang.php')) {
-			array_push($languagesFile, 'validate');
-			$loadLanguages = TRUE;
+			if (file_exists($pathLang.'validate_lang.php')) {
+				array_push($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
 		}
 
 		if (file_exists($pathLang.$class.'_lang.php')) {
