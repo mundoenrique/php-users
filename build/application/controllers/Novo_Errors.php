@@ -11,6 +11,16 @@ class Novo_Errors extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Novo_Errors Controller Class Initialized');
+
+		$this->config->set_item('language', BASE_LANGUAGE . '-base');
+		$this->lang->load('errors');
+		$customerLang = BASE_LANGUAGE . '-' . $this->config->item('customer-uri');
+		$this->config->set_item('language', $customerLang);
+		$pathLang = APPPATH . 'language' . DIRECTORY_SEPARATOR . $customerLang . DIRECTORY_SEPARATOR;
+
+		if(file_exists($pathLang . 'errors_lang.php')) {
+			$this->lang->load('errors');
+		}
 	}
 	/**
 	 * @info Método para la pagina no encontrda
@@ -23,7 +33,7 @@ class Novo_Errors extends NOVO_Controller {
 
 		$view = 'html/error_404';
 		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = lang('GEN_MENU_NOTIFICATIONS');
+		$this->render->titlePage = lang('ERROR_PAGE_404');
 		$this->views = ['errors/'.$view];
 		$this->loadView($view);
 	}
