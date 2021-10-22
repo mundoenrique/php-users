@@ -130,7 +130,7 @@
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= lang('CONF_LINK_CARD_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+						<a class="btn btn-small btn-link big-modal" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
 						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
 					</div>
 				</form>
@@ -157,7 +157,7 @@
 					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
-            <a class="btn btn-small btn-link" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+            <a class="btn btn-small btn-link" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
             <button class="btn btn-small btn-loading btn-primary send" action="replacement"><?= lang('GEN_BTN_CONTINUE') ?></button>
           </div>
         </form>
@@ -231,7 +231,7 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+								<a class="btn btn-small btn-link big-modal" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
                 <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('GEN_BTN_CONTINUE') ?></button>
               </div>
             </form>

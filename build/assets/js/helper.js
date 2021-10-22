@@ -25,18 +25,18 @@ $(function () {
 		}
 	});
 
-	$('#change-lang').on('click', function() {
+	$('#change-lang').on('click', function () {
 		who = 'User'; where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(who, where, data, function(response) {
+		callNovoCore(who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
-				var currentCodLan = url[url.length-1];
+				var currentCodLang = url[url.length - 1];
 
-				if (currentCodLan == lang.GEN_BEFORE_COD_LANG) {
+				if (currentCodLang == lang.GEN_BEFORE_COD_LANG) {
 					var module = url[url.length - 2];
 					$(location).attr('href', baseURL + module + '/' + lang.GEN_AFTER_COD_LANG);
 				} else {
@@ -128,7 +128,7 @@ function callNovoCore(who, where, request, _response_) {
 	dataRequest = cryptoPass(dataRequest, true);
 
 	if (request.files) {
-		data.files.forEach(function(element){
+		data.files.forEach(function (element) {
 			formData.append(element.name, element.file);
 		});
 		delete request.files;
@@ -186,7 +186,7 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			modalBtn: {
 				btn1: {
-					link: uriRedirect(),
+					link: redirectLink,
 					action: 'redirect'
 				}
 			}
@@ -267,10 +267,10 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-			break;
+				break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-			break;
+				break;
 		}
 
 		$(this).off('click');
@@ -306,7 +306,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null || $(this).attr('type') === 'file' ) {
+		if (thisValInput == null || $(this).attr('type') === 'file') {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -322,7 +322,7 @@ function cryptoPass(jsonObject, req) {
 	if (lang.CONF_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
 
-		if(!req) {
+		if (!req) {
 			cipherObject = btoa(JSON.stringify({
 				password: cipherObject,
 				plot: btoa(cpo_cook)
@@ -343,9 +343,9 @@ function getDataForm(form) {
 	return dataForm
 }
 
-function downLoadfiles (data) {
+function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
-	var blob = new Blob([File], {type: "application/"+data.ext});
+	var blob = new Blob([File], { type: "application/" + data.ext });
 	var url = window.URL.createObjectURL(blob);
 	$('#download-file').attr('href', url);
 	$('#download-file').attr('download', data.name);
@@ -365,18 +365,4 @@ function scrollTopPos(formValidate) {
 			scrollTop: firstElement - formValidate
 		}, 400);
 	}
-}
-
-function uriRedirect() {
-	var redirectLink = lang.CONF_LINK_SIGNIN;
-
-	if (logged) {
-		redirectLink = lang.CONF_LINK_CARD_LIST;
-
-		if (totalCards == 1) {
-			redirectLink = lang.CONF_LINK_CARD_DETAIL;
-		}
-	}
-
-	return redirectLink;
 }

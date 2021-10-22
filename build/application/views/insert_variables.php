@@ -16,4 +16,5 @@
 	var sessionTime = <?= $sessionTime; ?>;
 	var callModal = <?= $callModal; ?>;
 	var callServer = <?= $callServer; ?>;
+	var redirectLink = '<?= uriRedirect(); ?>';
 </script>

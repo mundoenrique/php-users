@@ -133,7 +133,7 @@ $(function () {
 			modalBtn = {
 				btn1: {
 					text: lang.GEN_BTN_ACCEPT,
-					link: uriRedirect(),
+					link: redirectLink,
 					action: 'redirect'
 				}
 			}

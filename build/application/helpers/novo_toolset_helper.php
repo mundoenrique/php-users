@@ -363,7 +363,7 @@ if (! function_exists('languageCookie')) {
 
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
-		$CI = &get_instance();
+		$CI = get_instance();
 		$redirectLink = lang('CONF_LINK_SIGNIN');
 
 		if ($CI->session->has_userdata('logged')) {
