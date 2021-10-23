@@ -183,22 +183,22 @@ if (!function_exists('setCurrentPage')) {
 				if($menu == lang('GEN_MENU_CARD_LIST')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'cardDetail':
 				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'services':
 				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'expensesCategory':
 				if($menu == lang('GEN_MENU_REPORTS')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 		}
 
 		return $cssClass;

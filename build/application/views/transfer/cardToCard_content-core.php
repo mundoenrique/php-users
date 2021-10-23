@@ -32,7 +32,7 @@
 								<div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
 									<p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
 									<p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-									<a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('GEN_NO_LINK'); ?>">
+									<a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
 										<i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
 									</a>
 								</div>

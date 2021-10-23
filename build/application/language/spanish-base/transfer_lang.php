@@ -23,5 +23,17 @@ $lang['TRANSF_EXP_DATE'] = 'Por seguridad por favor ingresar la fecha de vencimi
 $lang['TRANSF_SHOW'] = 'Mostrar';
 $lang['TRANSF_AVAILABLE_BALANCE'] = 'Disponible';
 $lang['TRANSF_TO_DEBIT_BALANCE'] = 'A debitar';
-
-
+$lang['TRANSF_KEY_OPER'] = 'Clave de operaciones';
+$lang['TRANSF_AUTH_REQUIRED'] = 'Autenticación Requerida';
+$lang['TRANSF_SET_OPER_KEY'] = 'Para realizar transacciones con tus cuentas desde "<strong>%s</strong>" es necesario proporcionar tu clave de operaciones. Esta clave te será solicitada solamente una vez durante tu sesión actual.';
+$lang['TRANSF_FORGOT_OPER_KEY'] = '
+<strong>¿Olvidaste tu clave de operaciones especiales?</strong> Escríbenos a
+<strong> <a class="btn-link" href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com </a></strong>
+incluyendo los siguientes datos: <br>
+<strong>nombre completo, número cédula, empresa en la que trabajas, 4 últimos dígitos de tu tarjeta </strong>
+y con gusto te ayudaremos.
+';
+$lang['TRANSF_SET_OPER_KEY'] = 'Creación de clave de operaciones';
+$lang['TRANSF_CREATE_OPER_KEY'] = 'Para realizar transacciones con tus cuentas desde "<strong>%s</strong>" es necesario crear una clave de operaciones. Por favor, completa los campos a continuación para generar esta clave.';
+$lang['TRANSF_KEY_CURRENT'] = 'Clave actual';
+$lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirmar clave';

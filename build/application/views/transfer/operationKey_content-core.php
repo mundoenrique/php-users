@@ -7,14 +7,14 @@
 	<section>
 		<hr class="separador-one">
 		<div class="pt-3">
-		<h4><?= lang('USER_CREATION_OPER_KEY');?></h4>
-			<p><?= lang('USER_OPER_PASS_MSG');?></p>
+		<h4><?= lang('TRANSF_SET_OPER_KEY');?></h4>
+			<p><?= lang('TRANSF_CREATE_OPER_KEY');?></p>
 			<form id="change-pass-form" class="mt-4" method="post">
 				<div class="row">
 					<div class="col-6 col-lg-8 col-xl-6">
 						<div class="row">
 							<div class="form-group col-12 col-lg-6">
-								<label for="currentKey"><?= lang('USER_KEY_CURRENT');?></label>
+								<label for="currentKey"><?= lang('TRANSF_KEY_CURRENT');?></label>
 								<div class="input-group">
 									<input id="currentKey" class="form-control pwd-input" type="password" name="currentKey">
 									<div class="input-group-append">
@@ -26,7 +26,7 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-12 col-lg-6">
-								<label for="currentOperKey"><?= lang('USER_KEY_OPER');?></label>
+								<label for="currentOperKey"><?= lang('TRANSF_KEY_OPER');?></label>
 								<div class="input-group">
 									<input id="currentOperKey" class="form-control pwd-input" type="password" name="currentOperKey">
 									<div class="input-group-append">
@@ -38,7 +38,7 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-12 col-lg-6">
-								<label for="confirmKey"><?= lang('USER_CONFIRM_KEY_OPER'); ?></label>
+								<label for="confirmKey"><?= lang('TRANSF_CONFIRM_KEY_OPER'); ?></label>
 								<div class="input-group">
 									<input id="confirmKey" class="form-control pwd-input" type="password" name="confirmKey">
 									<div class="input-group-append">
@@ -51,17 +51,7 @@
 					</div>
 
 					<div class="col-6 col-lg-4 col-xl-6">
-						<div class="field-meter" id="password-strength-meter">
-							<h4><?= lang('USER_INFO_TITLE'); ?></h4>
-							<ul class="pwd-rules">
-								<li id="length" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_1'); ?></li>
-								<li id="letter" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_2'); ?></li>
-								<li id="capital" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_3'); ?></li>
-								<li id="number" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_4'); ?></li>
-								<li id="special" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_5'); ?></li>
-								<li id="consecutive" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_6'); ?></li>
-							</ul>
-						</div>
+						<?php $this->load->view('user/passwordInfo_content-core') ?>
 					</div>
 				</div>
 

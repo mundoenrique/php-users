@@ -134,7 +134,7 @@ class Novo_User_Model extends NOVO_Model {
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'customerSess' => $response->codPais,
 						'customerUri' => $this->config->item('customer-uri'),
-						'canTransfer' => $response->aplicaTransferencia,
+						'canTransfer' => strtoupper($response->aplicaTransferencia),
 						'operKey' => $response->passwordOperaciones,
 						'affiliate' => $response->afiliado,
 						'longProfile' => $response->aplicaPerfil,

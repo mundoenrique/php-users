@@ -23,4 +23,17 @@ $lang['TRANSF_EXP_DATE'] = 'For security, please enter the expiration date of yo
 $lang['TRANSF_SHOW'] = 'Show';
 $lang['TRANSF_AVAILABLE_BALANCE'] = 'Available';
 $lang['TRANSF_TO_DEBIT_BALANCE'] = 'To debit';
-
+$lang['TRANSF_KEY_OPER'] = 'Operations key';
+$lang['TRANSF_AUTH_REQUIRED'] = 'Authentication Required';
+$lang['TRANSF_SET_OPER_KEY'] = 'To carry out transactions with your accounts from "<strong>%s</strong>" it is necessary to provide your operations key. This password will be requested only once during your current session.';
+$lang['TRANSF_FORGOT_OPER_KEY'] = '
+<strong>Forgot your special ops password?</strong> Write to us at
+<strong> <a class="btn-link" href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com </a></strong>
+including the following information: <br>
+<strong>Full name, ID number, company where you work, last 4 digits of your card </strong>
+and we will gladly help you.
+';
+$lang['TRANSF_SET_OPER_KEY'] = 'Creation of operations key';
+$lang['TRANSF_CREATE_OPER_KEY'] = 'To carry out transactions with your accounts from "<strong>%s</strong>" it is necessary to create an operations key. Please complete the fields below to generate this key.';
+$lang['TRANSF_KEY_CURRENT'] = 'Current key';
+$lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirm key';

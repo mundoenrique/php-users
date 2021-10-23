@@ -7,13 +7,13 @@
 	<section>
 		<hr class="separador-one">
 		<div class="pt-3">
-		<h4><?= lang('USER_AUTH_REQUIRED');?></h4>
-			<p><?= lang('USER_OPER_PASS_MSG');?></p>
-			<form id="change-pass-form" class="mt-4" method="post">
+		<h4><?= lang('TRANSF_AUTH_REQUIRED');?></h4>
+			<p><?= novoLang(lang('TRANSF_SET_OPER_KEY'), lang('GEN_SYSTEM_NAME'));?></p>
+			<form id="change-pass-form" class="mt-4">
 				<div class="row">
 					<div class="col-8">
 						<div class="form-group col-12 col-lg-6">
-							<label for="currentOperKey"><?= lang('USER_KEY_OPER');?></label>
+							<label for="currentOperKey"><?= lang('TRANSF_KEY_OPER');?></label>
 							<div class="input-group">
 								<input id="currentOperKey" class="form-control pwd-input" type="password" name="currentOperKey">
 								<div class="input-group-append">
@@ -25,15 +25,7 @@
 					</div>
 
 					<div class="col-12">
-						<div class="field-meter" id="password-strength-meter">
-							<p class="text-warning"><strong class="forget-password">¿Olvidaste tu clave de operaciones especiales?.</strong> Escríbenos a <strong><a href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com</a></strong> y con gusto te ayudaremos.<br>Envía tu nombre, cédula, empresa en la que trabajas y los 4 últimos dígitos de tu tarjeta.</b></p>
-							<ul class="pwd-rules">
-								<li class="pwd-rules-item"><?= lang('USER_OPER_KEY_1'); ?></li>
-								<li class="pwd-rules-item"><?= lang('USER_OPER_KEY_2'); ?></li>
-								<li class="pwd-rules-item"><?= lang('USER_OPER_KEY_3'); ?></li>
-								<li class="pwd-rules-item"><?= lang('USER_OPER_KEY_4'); ?></li>
-							</ul>
-						</div>
+							<p><?= lang('TRANSF_FORGOT_OPER_KEY'); ?></p>
 					</div>
 				</div>
 

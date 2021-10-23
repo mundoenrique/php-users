@@ -136,7 +136,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, lang('CUST_LOCK_PERMANENT')]);
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? uriRedirect() : lang('CONF_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
