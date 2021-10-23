@@ -11,6 +11,35 @@ class Novo_Transfer extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Transfer Controller Class Initialized');
+
+		if (!$this->session->has_userdata('operkeyEntered') && $this->router->fetch_method() !== 'getOperationKey') {
+			$this->session->set_flashdata('transfer', $this->router->fetch_method());
+			redirect(base_url('operations-key'), 'Location', 301);
+		}
+	}
+	/**
+	 * @info Método para validar clave de operaciones especiales
+	 * @author J. Enrique Peñaloza Piñero.
+	 * @date October 21th, 2021
+	 */
+	public function getOperationKey()
+	{
+		log_message('INFO', 'NOVO Transfer: getOperationKey Method Initialized');
+
+		$this->session->keep_flashdata('transfer');
+		$view = 'getOperationKey';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"transfer/getOperationKey"
+		);
+
+		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');
+		$this->render->cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(uriRedirect());
+		$this->views = ['transfer/'.$view];
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método para obtener la lista para transferencias entre tarjetas
