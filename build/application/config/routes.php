@@ -101,10 +101,11 @@ $route['(:any)/terms-conditions'] = "Novo_User/termsConditions";
 $route['(:any)/card-list'] = "Novo_Business/userCardsList";
 $route['(:any)/card-detail'] = "Novo_Business/cardDetail";
 //transfers
+$route['(:any)/operations-key'] = "Novo_Transfer/getOperationKey";
 $route['(:any)/transfer-cards'] = "Novo_Transfer/cardToCard";
 $route['(:any)/transfer-banks'] = "Novo_Transfer/cardToBank";
 $route['(:any)/pay-credit-cards'] = "Novo_Transfer/cardToCreditCard";
-$route['(:any)/pay-digitel-recharge'] = "Novo_Transfer/cardToRecharge";
+$route['(:any)/pay-digitel-recharge'] = "Novo_Transfer/cardToDigitel";
 //Resports
 $route['(:any)/reports'] = "Novo_Reports/expensesCategory";
 //Custumer suppor
