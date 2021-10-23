@@ -130,14 +130,14 @@ class Verify_Access {
 			case 'profileUser':
 			case 'updateProfile':
 				$auth = $this->CI->session->has_userdata('logged');
-			break;
+				break;
 			case 'keepSession':
 			case 'professionsList':
 			case 'statesList':
 			case 'cityList':
 			case 'regions':
 				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
-			break;
+				break;
 			case 'getBalance':
 			case 'cardDetail':
 			case 'monthlyMovements':
@@ -150,28 +150,35 @@ class Verify_Access {
 			case 'changePin':
 			case 'getVirtualDetail':
 				$auth = $this->CI->session->has_userdata('products');
-			break;
+				break;
 			case 'expensesCategory':
 			case 'getMovements':
 			case 'downloadInquiry':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
-			break;
+				break;
 			case 'notifications':
 			case 'notificationHistory':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') == 'ON';
-			break;
+				break;
+			case 'getOperationKey':
+			case 'cardToCard':
+			case 'cardToBank':
+			case 'cardToCreditCard':
+			case 'cardToDigitel':
+				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer == 'S' && lang('CONF_PAYS_TRANSFER') == 'ON';
+				break;
 			case 'signup':
 				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
-			break;
+				break;
 			case 'signUpData':
 				$auth = $this->CI->session->has_userdata('userNameValid');
-			break;
+				break;
 			case 'validNickName':
 				$auth = $this->CI->session->has_userdata('userName');
-			break;
+				break;
 			case 'changePassword':
 				$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
-			break;
+				break;
 			default:
 				$freeAccess = [
 					'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP',
