@@ -2533,10 +2533,6 @@ i[class*=" icon-"]:before {
 	text-decoration: none;
 }
 
-.navbar-brand img {
-	height: 2rem;
-}
-
 .navbar-nav {
 	display: flex;
 	flex-direction: column;

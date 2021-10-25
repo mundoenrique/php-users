@@ -135,12 +135,16 @@ footer.main-footer {
 }
 
 .custom-control-input:hover ~ .custom-control-label::before {
-	background: var(--color-tertiary);
+	background: var(--color-seventh);
 }
 
 .custom-control-label::before {
 	background: var(--color-tenth);
 	border: 1px solid var(--color-eighth);
+}
+
+.custom-option-input:hover ~ .custom-option-label::before {
+	background: var(--color-seventh) !important;
 }
 
 /* Input Group */
@@ -221,6 +225,10 @@ footer.main-footer {
 	position: sticky;
 	top: 3.75rem;
 	z-index: 998;
+}
+
+.navbar-brand img {
+	height: 2rem;
 }
 
 /* Paginador y main-nav */
