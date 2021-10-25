@@ -8,5 +8,3 @@ $lang['CONF_CONTACTS'] = [
 ];
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'ON';
-//NAVBAR STYLES
-$lang['CONF_PADDING_LOGO'] = 'ON';

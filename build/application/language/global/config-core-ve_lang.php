@@ -18,5 +18,3 @@ $lang['CONF_BANKS'] = 'ON';
 $lang['CONF_CREDIT_CARDS'] = 'ON';
 $lang['CONF_SERVICES'] = 'ON';
 $lang['CONF_DIGITEL'] = 'OFF';
-//NAVBAR STYLES
-$lang['CONF_PADDING_LOGO'] = 'ON';
