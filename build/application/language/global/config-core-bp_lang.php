@@ -8,6 +8,6 @@ $lang['CONF_FOOTER_INFO'] = 'OFF';
 $lang['CONF_UPDATE_USER'] = 'OFF';
 $lang['CONF_CONTAC_DATA'] = 'OFF';
 $lang['CONF_OTHER_PHONE'] = 'OFF';
-$lang['CONF_RECOVER_ID_TYPE'] = 'ON';
+$lang['CONF_RECOVER_ID_TYPE'] = 'OFF';
 $lang['CONF_ACCEPT_MASKED_MOBILE'] = 'ON';
 $lang['CONF_ACCEPT_MASKED_LANDLINE'] = 'ON';
