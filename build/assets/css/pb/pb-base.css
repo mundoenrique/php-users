@@ -194,6 +194,10 @@ footer.main-footer {
 	z-index: 998;
 }
 
+.navbar-brand img {
+	height: 2rem;
+}
+
 /* Paginador y main-nav */
 
 .easyPaginateNav {
