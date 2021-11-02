@@ -178,7 +178,7 @@ class Encrypt_Connect
 			log_message('ERROR','NOVO ['.$userName.'] '.$CurlError);
 
 			$failResponse = new stdClass();
-			$failResponse->msg = lang('GEN_MESSAGE_SYSTEM');
+			$failResponse->msg = lang('GEN_SYSTEM_MESSAGE');
 
 			switch ($CurlErrorNo) {
 				case 28:

@@ -134,7 +134,7 @@ class Novo_User_Model extends NOVO_Model {
 						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'customerSess' => $response->codPais,
 						'customerUri' => $this->config->item('customer-uri'),
-						'canTransfer' => $response->aplicaTransferencia,
+						'canTransfer' => strtoupper($response->aplicaTransferencia),
 						'operKey' => $response->passwordOperaciones,
 						'affiliate' => $response->afiliado,
 						'longProfile' => $response->aplicaPerfil,
@@ -493,7 +493,7 @@ class Novo_User_Model extends NOVO_Model {
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('USER_PASS_CHANGED'), $goLogin);
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CONTINUE');
-				$this->response->modalBtn['btn1']['link'] = $this->session->has_userdata('logged') ? lang('CONF_LINK_CARD_LIST') : lang('CONF_LINK_SIGNIN');
+				$this->response->modalBtn['btn1']['link'] = uriRedirect();
 			break;
 			case -465:
 				$code = 1;
@@ -1380,12 +1380,12 @@ class Novo_User_Model extends NOVO_Model {
 
 				if ($this->session->terms == '0') {
 					$this->session->set_userdata('terms', '1');
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_LIST');
+					$this->response->modalBtn['btn1']['link'] = uriRedirect();
 				}
 
 				if ($this->session->affiliate == '0') {
 					$this->session->set_userdata('affiliate', '1');
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_LIST');
+					$this->response->modalBtn['btn1']['link'] = uriRedirect();
 				}
 			break;
 			case -200:

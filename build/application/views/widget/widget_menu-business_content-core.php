@@ -13,7 +13,7 @@
         <?php foreach ($menuLevel1 AS $secondLevel => $menuLevel2): ?>
         <?php if(lang('CONF_'.$secondLevel) == 'ON'): ?>
         <?php $menuText2 = lang('GEN_MENU_'.$secondLevel); ?>
-        <?php $menuLink2 = lang('GEN_LINK_'.$secondLevel); ?>
+        <?php $menuLink2 = lang('CONF_LINK_'.$secondLevel); ?>
         <?php $menuLink2 = $menuLink2 != lang('CONF_NO_LINK') ? base_url($menuLink2) : lang('CONF_NO_LINK'); ?>
         <li <?= $menuLink2 != lang('CONF_NO_LINK') ? 'class="big-modal"' : '' ?>>
           <a href="<?= $menuLink2; ?>"><?= $menuText2; ?></a>
@@ -21,7 +21,7 @@
             <?php foreach ($menuLevel2 AS $thirdLevel => $menuLevel3): ?>
             <?php if(lang('CONF_'.$thirdLevel) == 'ON'): ?>
             <?php $menuText3 = lang('GEN_MENU_'.$thirdLevel); ?>
-            <?php $menuLink3 = lang('GEN_LINK_'.$thirdLevel); ?>
+            <?php $menuLink3 = lang('CONF_LINK_'.$thirdLevel); ?>
             <?php $menuLink3 = $menuLink3 != lang('CONF_NO_LINK') ? base_url($menuLink3) : lang('CONF_NO_LINK'); ?>
             <li <?= $menuLink2 != lang('CONF_NO_LINK') ? 'class="big-modal"' : '' ?>>
               <a href="<?= $menuLink3; ?>"><?= $menuText3; ?></a>

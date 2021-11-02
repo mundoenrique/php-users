@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SIGN IN
 $lang['USER_SIGNIN_TITLE'] = '';
+$lang['USER_WELCOME_MSG'] = 'Direct access to your account / card for inquiries and operations, 7x24.';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recover access';
 $lang['USER_SIGNIN_NO_USER'] = 'Dont you have a user?';
 $lang['USER_SIGNIN_SINGN_UP'] = 'Sign up';
 $lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Your last session was closed incorrectly. Keep in mind that to exit the application you must select <strong> "Close Session" </strong>.</h5></div>';
 $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'The system has detected unauthorized activity, please try again';
-$lang['USER_SIGNIN_INVALID_USER']= "Invalid username or password";
-$lang['USER_SIGNIN_WILL_BLOKED']= "The next unsuccessful attempt your user will be blocked";
+$lang['USER_SIGNIN_INVALID_USER'] = "Invalid username or password";
+$lang['USER_SIGNIN_WILL_BLOKED'] = "The next unsuccessful attempt your user will be blocked";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Your username has been blocked due to failed connection attempts, get it back <a class="primary hyper-link" href="%s"> here </a>';
 $lang['USER_IP_ASSERT'] = 'I confirm that I am logging in from a frequently used computer.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'Your temporary password has expired, request a new <a class="primary hyper-link" href="%s">here</a>. Remember to change it in less than 24 hours.';

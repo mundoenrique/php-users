@@ -26,7 +26,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'signin';
 
 		if ($this->session->has_userdata('logged')) {
-			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'location', 301);
+			redirect(base_url(uriRedirect()), 'Location', 301);
 			exit();
 		}
 
@@ -188,11 +188,12 @@ class Novo_User extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
+			"user/validPass",
 			"user/changePassword"
 		);
 
 		if ($this->session->logged) {
-			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(lang('CONF_LINK_CARD_LIST')) ;
+			$cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(uriRedirect());
 			$this->render->message = novoLang(lang('USER_PASS_CHANGE'), lang('GEN_SYSTEM_NAME'));
 		}
 
@@ -335,7 +336,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 301);
 		}
 
 	}
@@ -350,8 +351,8 @@ class Novo_User extends NOVO_Controller {
 
 		$view = 'suggestion';
 
-		if(!$this->session->flashdata('messageBrowser')) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'location', 301);
+		if($this->session->flashdata('messageBrowser') === NULL) {
+			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 301);
 			exit();
 		}
 

@@ -170,22 +170,22 @@ function notificationHistory(dataHistory) {
 				if ($('#item-history > li').length > 5) {
 					$('#item-history').easyPaginate({
 						paginateElement: 'li',
-						hashPage: lang.GEN_TABLE_PAGE,
+						hashPage: lang.GEN_DATATABLE_PAGE,
 						elementsPerPage: 5,
 						effect: 'default',
 						slideOffset: 200,
 						firstButton: true,
-						firstButtonText: lang.GEN_TABLE_SFIRST,
-						firstHashText: lang.GEN_TABLE_PAGE_FIRST,
+						firstButtonText: lang.GEN_DATATABLE_SFIRST,
+						firstHashText: lang.GEN_DATATABLE_PAGE_FIRST,
 						lastButton: true,
-						lastButtonText: lang.GEN_TABLE_SLAST,
-						lastHashText: lang.GEN_TABLE_PAGE_LAST,
+						lastButtonText: lang.GEN_DATATABLE_SLAST,
+						lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
 						prevButton: true,
-						prevButtonText: '<',
-						prevHashText: lang.GEN_PICKER_PREVTEXT,
+						prevButtonText: lang.CONF_DATATABLE_SPREVIOUS,
+						prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
 						nextButton: true,
-						nextButtonText: '>',
-						nextHashText: lang.GEN_PICKER_NEXTTEXT
+						nextButtonText: lang.CONF_DATATABLE_SNEXT,
+						nextHashText: lang.GEN_DATEPICKER_NEXTTEXT
 					})
 				}
 			break;

@@ -74,7 +74,7 @@
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="birthDate"><?= lang('USER_BIRTHDATE')?></label>
                     <input id="birthDate" class="form-control date-picker" type="text" name="birthDate" value="<?= $birthDate; ?>" readonly
-                      autocomplete="off">
+                      autocomplete="off" placeholder="<?= lang('GEN_DATEPICKER_DATELARGE'); ?>">
                     <div class="help-block"></div>
                   </div>
                   <?php if ($longProfile == 'S') : ?>
@@ -433,17 +433,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <div class="field-meter" id="password-strength-meter">
-                      <h4><?= lang('USER_INFO_TITLE'); ?></h4>
-                      <ul class="pwd-rules">
-                        <li id="length" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_1'); ?></li>
-                        <li id="letter" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_2'); ?></li>
-                        <li id="capital" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_3'); ?></li>
-                        <li id="number" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_4'); ?></li>
-                        <li id="special" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_5'); ?></li>
-                        <li id="consecutive" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_6'); ?></li>
-                      </ul>
-                    </div>
+                    <?php $this->load->view('user/passwordInfo_content-core') ?>
                   </div>
                 </div>
               </div>
@@ -560,17 +550,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <div class="field-meter" id="password-strength-meter">
-                      <h4><?= lang('USER_INFO_TITLE'); ?></h4>
-                      <ul class="pwd-rules">
-                        <li id="length" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_1'); ?></li>
-                        <li id="letter" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_2'); ?></li>
-                        <li id="capital" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_3'); ?></li>
-                        <li id="number" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_4'); ?></li>
-                        <li id="special" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_5'); ?></li>
-                        <li id="consecutive" class="pwd-rules-item rule-invalid"><?= lang('USER_INFO_6'); ?></li>
-                      </ul>
-                    </div>
+                    <?php $this->load->view('user/passwordInfo_content-core') ?>
                   </div>
                 </div>
               </div>

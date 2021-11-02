@@ -1,11 +1,11 @@
 'use strict'
 $(function () {
 	$('#donor').on('click', function () {
-		cardModal()
+		cardModal();
 	});
 
 	$('#productdetail').on('click', '#other-product', function () {
-		cardModal()
+		cardModal();
 	});
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
@@ -77,13 +77,14 @@ $(function () {
 	});
 
 	$('#system-info').on('click', '.close-card-modal', function (e) {
+		$('#cancel').removeClass('close-card-modal');
 		$('#system-info').dialog('destroy');
 	});
 });
 
 function cardModal() {
 	var inputModal = $('#cardListModal').html();
-	$('.nav-config-box').removeClass('no-events');
+	$('.nav-config-box').removeClass('no-pointer');
 	$('#cancel').addClass('close-card-modal');
 	modalBtn = {
 		btn2: {

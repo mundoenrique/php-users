@@ -205,6 +205,10 @@ footer.main-footer {
 	z-index: 998;
 }
 
+.navbar-brand img {
+	height: 2.7rem;
+}
+
 /* Paginador y main-nav */
 
 .easyPaginateNav {
@@ -322,4 +326,16 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 
 .btn-lang-img span:hover{
 	color: var(--color-sixth);
+}
+
+.card-icon {
+	position: absolute;
+	left: 237px;
+	border: 1px solid;
+	padding: 2px 9px;
+	border-radius: 4px;
+}
+
+.card-icon.icon-remove {
+	top: 50px;
 }

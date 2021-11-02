@@ -25,18 +25,18 @@ $(function () {
 		}
 	});
 
-	$('#change-lang').on('click', function() {
+	$('#change-lang').on('click', function () {
 		who = 'User'; where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
 
-		callNovoCore(who, where, data, function(response) {
+		callNovoCore(who, where, data, function (response) {
 			if (response.code === 0) {
 				var url = $(location).attr('href').split("/");
-				var currentCodLan = url[url.length-1];
+				var currentCodLang = url[url.length - 1];
 
-				if (currentCodLan == lang.GEN_BEFORE_COD_LANG) {
+				if (currentCodLang == lang.GEN_BEFORE_COD_LANG) {
 					var module = url[url.length - 2];
 					$(location).attr('href', baseURL + module + '/' + lang.GEN_AFTER_COD_LANG);
 				} else {
@@ -55,62 +55,62 @@ $(function () {
 	});
 	//dataTale lang
 	dataTableLang = {
-		"sLengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sZeroRecords": lang.GEN_TABLE_SZERORECORDS,
-		"sEmptyTable": lang.GEN_TABLE_SEMPTYTABLE,
-		"sInfo": lang.GEN_TABLE_SINFO,
-		"sInfoEmpty": lang.GEN_TABLE_SINFOEMPTY,
-		"sInfoFiltered": lang.GEN_TABLE_SINFOFILTERED,
-		"sInfoPostFix": lang.GEN_TABLE_SINFOPOSTFIX,
-		"slengthMenu": lang.GEN_TABLE_SLENGTHMENU,
-		"sSearch": lang.GEN_TABLE_SSEARCH,
-		"sSearchPlaceholder": lang.GEN_TABLE_SSEARCHPLACEHOLDER,
-		"sUrl": lang.GEN_TABLE_SSEARCH,
-		"sInfoThousands": lang.GEN_TABLE_SINFOTHOUSANDS,
-		"sProcessing": lang.GEN_TABLE_SPROCESSING,
-		"sloadingrecords": lang.SLOADINGRECORDS,
+		"sLengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sZeroRecords": lang.GEN_DATATABLE_SZERORECORDS,
+		"sEmptyTable": lang.GEN_DATATABLE_SEMPTYTABLE,
+		"sInfo": lang.GEN_DATATABLE_SINFO,
+		"sInfoEmpty": lang.GEN_DATATABLE_SINFOEMPTY,
+		"sInfoFiltered": lang.GEN_DATATABLE_SINFOFILTERED,
+		"sInfoPostFix": lang.CONF_DATATABLE_SINFOPOSTFIX,
+		"slengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
+		"sSearch": lang.CONF_DATATABLE_SSEARCH,
+		"sSearchPlaceholder": lang.GEN_DATATABLE_SSEARCHPLACEHOLDER,
+		"sUrl": lang.CONF_DATATABLE_SSEARCH,
+		"sInfoThousands": lang.CONF_DATATABLE_SINFOTHOUSANDS,
+		"sProcessing": lang.GEN_DATATABLE_SPROCESSING,
+		"sloadingrecords": lang.GEN_DATATABLE_SLOADINGRECORDS,
 		"oPaginate": {
-			"sFirst": lang.GEN_TABLE_SFIRST,
-			"sLast": lang.GEN_TABLE_SLAST,
-			"sNext": lang.GEN_TABLE_SNEXT,
-			"sPrevious": lang.GEN_TABLE_SPREVIOUS
+			"sFirst": lang.GEN_DATATABLE_SFIRST,
+			"sLast": lang.GEN_DATATABLE_SLAST,
+			"sNext": lang.CONF_DATATABLE_SNEXT,
+			"sPrevious": lang.CONF_DATATABLE_SPREVIOUS
 		},
 		"oAria": {
-			"sSortAscending": lang.GEN_TABLE_SSORTASCENDING,
-			"sSortDescending": lang.GEN_TABLE_SSORTDESCENDING
+			"sSortAscending": lang.GEN_DATATABLE_SSORTASCENDING,
+			"sSortDescending": lang.GEN_DATATABLE_SSORTDESCENDING
 		},
 		"select": {
 			"rows": {
-				_: lang.GEN_TABLE_ROWS_SELECTED,
-				0: lang.GEN_TABLE_ROWS_NO_SELECTED,
-				1: lang.GEN_TABLE_ROW_SELECTED
+				_: lang.GEN_DATATABLE_ROWS_SELECTED,
+				0: lang.CONF_DATATABLE_ROWS_NO_SELECTED,
+				1: lang.GEN_DATATABLE_ROW_SELECTED
 			}
 		}
 	}
 	//datepicker
 	currentDate = new Date();
   $.datepicker.regional['es'] = {
-    closeText: lang.GEN_PICKER_CLOSETEXT,
-    prevText: lang.GEN_PICKER_PREVTEXT,
-    nextText: lang.GEN_PICKER_NEXTTEXT,
-    currentText: lang.GEN_PICKER_CURRENTTEXT,
-    monthNames: lang.GEN_PICKER_MONTHNAMES,
-    monthNamesShort: lang.GEN_PICKER_MONTHNAMESSHORT,
-    dayNames: lang.GEN_PICKER_DAYNAMES,
-    dayNamesShort: lang.GEN_PICKER_DAYNAMESSHORT,
-    dayNamesMin: lang.GEN_PICKER_DAYNAMESMIN,
-    weekHeader: lang.GEN_PICKER_WEEKHEADER,
-    dateFormat: lang.GEN_PICKER_DATEFORMAT,
-    firstDay: lang.GEN_PICKER_FIRSTDATE,
-    isRTL: lang.GEN_PICKER_ISRLT,
-		showMonthAfterYear: lang.GEN_PICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.GEN_PICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: lang.CONF_PICKER_MINDATE,
+    closeText: lang.GEN_DATEPICKER_CLOSETEXT,
+    prevText: lang.GEN_DATEPICKER_PREVTEXT,
+    nextText: lang.GEN_DATEPICKER_NEXTTEXT,
+    currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
+    monthNames: lang.GEN_DATEPICKER_MONTHNAMES,
+    monthNamesShort: lang.GEN_DATEPICKER_MONTHNAMESSHORT,
+    dayNames: lang.GEN_DATEPICKER_DAYNAMES,
+    dayNamesShort: lang.GEN_DATEPICKER_DAYNAMESSHORT,
+    dayNamesMin: lang.GEN_DATEPICKER_DAYNAMESMIN,
+		weekHeader: lang.CONF_DATEPICKER_WEEKHEADER,
+    dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
+    firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
+    isRTL: lang.CONF_DATEPICKER_ISRLT,
+		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
+		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
+		minDate: lang.CONF_DATEPICKER_MINDATE,
 		maxDate: currentDate,
-		changeMonth: lang.GEN_PICKER_CHANGEMONTH,
-    changeYear: lang.GEN_PICKER_CHANGEYEAR,
-    showAnim: lang.SHOWANIM,
-    yearSuffix: lang.GEN_PICKER_YEARSUFFIX
+		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
+    changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
+		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
+    yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
@@ -128,7 +128,7 @@ function callNovoCore(who, where, request, _response_) {
 	dataRequest = cryptoPass(dataRequest, true);
 
 	if (request.files) {
-		data.files.forEach(function(element){
+		data.files.forEach(function (element) {
 			formData.append(element.name, element.file);
 		});
 		delete request.files;
@@ -186,7 +186,7 @@ function callNovoCore(who, where, request, _response_) {
 			code: codeResp,
 			modalBtn: {
 				btn1: {
-					link: uriRedirect(),
+					link: redirectLink,
 					action: 'redirect'
 				}
 			}
@@ -267,10 +267,10 @@ function createButton(elementButton, valuesButton) {
 						.addClass('primary');
 				}
 				$(location).attr('href', baseURL + valuesButton.link);
-			break;
+				break;
 			case 'destroy':
 				$('#system-info').dialog('destroy');
-			break;
+				break;
 		}
 
 		$(this).off('click');
@@ -306,7 +306,7 @@ function getPropertyOfElement(property, element) {
 function formInputTrim(form) {
 	form.find('input, select, textarea').each(function () {
 		var thisValInput = $(this).val();
-		if(thisValInput == null || $(this).attr('type') === 'file' ) {
+		if (thisValInput == null || $(this).attr('type') === 'file') {
 			return;
 		}
 		var trimVal = thisValInput.trim()
@@ -322,7 +322,7 @@ function cryptoPass(jsonObject, req) {
 	if (lang.CONF_CYPHER_DATA == 'ON') {
 		cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
 
-		if(!req) {
+		if (!req) {
 			cipherObject = btoa(JSON.stringify({
 				password: cipherObject,
 				plot: btoa(cpo_cook)
@@ -343,9 +343,9 @@ function getDataForm(form) {
 	return dataForm
 }
 
-function downLoadfiles (data) {
+function downLoadfiles(data) {
 	var File = new Int8Array(data.file);
-	var blob = new Blob([File], {type: "application/"+data.ext});
+	var blob = new Blob([File], { type: "application/" + data.ext });
 	var url = window.URL.createObjectURL(blob);
 	$('#download-file').attr('href', url);
 	$('#download-file').attr('download', data.name);
@@ -365,18 +365,4 @@ function scrollTopPos(formValidate) {
 			scrollTop: firstElement - formValidate
 		}, 400);
 	}
-}
-
-function uriRedirect() {
-	var redirectLink = lang.CONF_LINK_SIGNIN;
-
-	if (logged) {
-		redirectLink = lang.CONF_LINK_CARD_LIST;
-
-		if (totalCards == 1) {
-			redirectLink = lang.CONF_LINK_CARD_DETAIL;
-		}
-	}
-
-	return redirectLink;
 }

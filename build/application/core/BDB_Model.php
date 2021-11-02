@@ -23,8 +23,8 @@ class BDB_Model extends CI_Model {
 
 		$this->response = new stdClass();
 		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+		$this->response->title = lang('GEN_CORE_NAME');
+		$this->response->msg = lang('GEN_CORE_MESSAGE');
 		$this->response->classIconName = 'ui-icon-closethick';
 		$this->response->data = [
 			'btn1'=> [
@@ -77,7 +77,7 @@ class BDB_Model extends CI_Model {
 				break;
 
 			case -3:
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				$this->response->msg = lang('GEN_CORE_MESSAGE');
 				break;
 
 			case -9999:

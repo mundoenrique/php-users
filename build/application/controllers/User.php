@@ -91,7 +91,7 @@ class User extends BDB_Controller
 		}
 
 		$this->views = $views;
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_CORE_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 
 		$this->loadView($view);
 	}
@@ -188,7 +188,7 @@ class User extends BDB_Controller
 
 		$this->views = ['user/' . $view];
 		$this->render->titlePage = lang('GEN_REGISTRY_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
-		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
+		$this->render->nameAplication = lang('GEN_CORE_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;
 		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0 ? 'disabled' : '';
 		$this->loadView($view);
@@ -309,7 +309,7 @@ class User extends BDB_Controller
 
 		$this->views = ['user/' . $view];
 		$this->render->titlePage = lang('GEN_RECOVER_ACCESS_TITLE') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
-		$this->render->nameAplication = lang('GEN_SYSTEM_NAME');
+		$this->render->nameAplication = lang('GEN_CORE_NAME');
 		$this->render->typeDocument = $listTypeDocument->data;
 		$this->render->statusListTypeDocument = $listTypeDocument->code !== 0 ? 'disabled' : '';
 		$this->loadView($view);
@@ -340,7 +340,7 @@ class User extends BDB_Controller
 			"$this->countryUri/notrender"
 		];
 		$this->render->viewPage = [$view];
-		$this->render->titlePage = lang('GEN_SYSTEM_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
+		$this->render->titlePage = lang('GEN_CORE_NAME') . ' - ' . lang('GEN_CONTRACTED_SYSTEM_NAME');
 		$this->render->reason = $reason;
 		$this->render->reasonTitle = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE') : lang('GEN_NOT_RENDER_BROWSER');
 		$this->render->reasonMessage = $reason !== 'b' ? lang('GEN_NOT_RENDER_MOBILE_MSG') : lang('GEN_NOT_RENDER_BROWSER_MSG');

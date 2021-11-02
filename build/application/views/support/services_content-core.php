@@ -8,7 +8,7 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $totalCards == 1 ? lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' : '', $totalCards == 1 ? 'hide': ''; ?>"></div>
+                <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
@@ -42,7 +42,7 @@
     <?php if (!$uniqueEvent): ?>
     <div class="flex optional mt-4 px-0">
       <nav class="nav-config w-100">
-        <ul class="flex flex-wrap justify-center nav-config-box <?= $activeEvents ?>">
+        <ul class="flex flex-wrap justify-center nav-config-box <?= $activePointer ?>">
           <?php if (in_array('110', $serviceList)): ?>
           <li id="cardLock" class="list-inline-item nav-item-config mr-1">
             <a class="px-1" href="javascript:">
@@ -130,7 +130,7 @@
 					</div>
 					<hr class="separador-one w-100">
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= lang('CONF_LINK_CARD_LIST') ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
+						<a class="btn btn-small btn-link big-modal" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
 						<button class="btn btn-small btn-loading btn-primary send" action="temporaryLock"><?= lang('GEN_BTN_CONTINUE') ?></button>
 					</div>
 				</form>
@@ -157,7 +157,7 @@
 					</div>
           <hr class="separador-one w-100">
           <div class="flex items-center justify-end pt-3">
-            <a class="btn btn-small btn-link" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+            <a class="btn btn-small btn-link" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
             <button class="btn btn-small btn-loading btn-primary send" action="replacement"><?= lang('GEN_BTN_CONTINUE') ?></button>
           </div>
         </form>
@@ -231,7 +231,7 @@
               </div>
               <hr class="separador-one">
               <div class="flex items-center justify-end pt-3">
-								<a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+								<a class="btn btn-small btn-link big-modal" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
                 <button id="pinManagementBtn" class="btn btn-small btn-loading btn-primary send"><?= lang('GEN_BTN_CONTINUE') ?></button>
               </div>
             </form>

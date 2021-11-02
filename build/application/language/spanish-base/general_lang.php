@@ -1,26 +1,67 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 $lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
-//MENU
+$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
+$lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
+$lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
+$lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Versión 48+';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
+$lang['GEN_BROWSER_MOZILLA_FIREFOX_VERSION'] = 'Versión 30+';
+$lang['GEN_BROWSER_APPLE_SAFARI'] = 'Apple Safari';
+$lang['GEN_BROWSER_APPLE_SAFARI_VERSION'] = 'Versión 10+';
+$lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
+$lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Versión 14+';
+$lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
+$lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Versión 11+';
+$lang['GEN_DATATABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros por página';
+$lang['GEN_DATATABLE_SZERORECORDS'] = 'No se encontraron resultados';
+$lang['GEN_DATATABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
+$lang['GEN_DATATABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
+$lang['GEN_DATATABLE_SINFOEMPTY'] = 'Sin registros que mostrar';
+$lang['GEN_DATATABLE_SINFOFILTERED'] = '(filtrado de un total de _MAX_ registro(s))';
+$lang['GEN_DATATABLE_SSEARCHPLACEHOLDER'] = 'Buscar...';
+$lang['GEN_DATATABLE_SPROCESSING'] = 'Procesando...';
+$lang['GEN_DATATABLE_SLOADINGRECORDS'] = 'Cargando...';
+$lang['GEN_DATATABLE_SFIRST'] = 'Primera';
+$lang['GEN_DATATABLE_SLAST'] = 'Última';
+$lang['GEN_DATATABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
+$lang['GEN_DATATABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
+$lang['GEN_DATATABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
+$lang['GEN_DATATABLE_ROW_SELECTED'] = '1 Registro seleccionado';
+$lang['GEN_DATATABLE_PAGE'] = 'Página';
+$lang['GEN_DATATABLE_PAGE_FIRST'] = 'Primera página';
+$lang['GEN_DATATABLE_PAGE_LAST'] = 'Última página';
+$lang['GEN_DATEPICKER_CLOSETEXT'] = 'Cerrar';
+$lang['GEN_DATEPICKER_PREVTEXT'] = 'Ant';
+$lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
+$lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
+$lang['GEN_DATEPICKER_MONTHNAMES'] = [
+	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+$lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+$lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+$lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
+$lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
+$lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/AAAA';
+$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/AAAA';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
 $lang['GEN_MENU_CARD_LIST'] = 'Lista de tarjetas';
 $lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';
-$lang['GEN_MENU_PAYS_TRANSFER'] = 'Pagos y transferencias';
+$lang['GEN_MENU_PAYS_TRANSFER'] = 'Transferencias y pagos';
 $lang['GEN_MENU_BETWEEN_CARDS'] = 'Entre tarjetas';
 $lang['GEN_MENU_BANKS'] = 'Bancos';
 $lang['GEN_MENU_CREDIT_CARDS'] = 'Tarjetas de crédito';
 $lang['GEN_MENU_SERVICES'] = 'Servicios';
-$lang['GEN_MENU_TELEPHONY'] = 'Recarga digitel';
+$lang['GEN_MENU_DIGITEL'] = 'Recarga digitel';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
+$lang['GEN_MENU_TRANSFERS'] = 'Transferencias';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
-//BUTTONS
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -36,20 +77,8 @@ $lang['GEN_BTN_SEARCH'] = 'Buscar';
 $lang['GEN_BTN_YES'] = 'Si';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
-//TITULOS
+
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
-//BROWSERS
-$lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
-$lang['GEN_BROWSER_GOOGLE_CHROME_VERSION'] = 'Version 48+';
-$lang['GEN_BROWSER_MOZILLA_FIREFOX'] = 'Mozilla Firefox';
-$lang['GEN_BROWSER_MOZILLA_FIREFOX_VERSION'] = 'Version 30+';
-$lang['GEN_BROWSER_APPLE_SAFARI'] = 'Apple Safari';
-$lang['GEN_BROWSER_APPLE_SAFARI_VERSION'] = 'Version 10+';
-$lang['GEN_BROWSER_MICROSOFT_EDGE'] = 'Microsoft Edge';
-$lang['GEN_BROWSER_MICROSOFT_EDGE_VERSION'] = 'Version 14+';
-$lang['GEN_BROWSER_INTERNET_EXPLORER'] = 'Internet Explorer';
-$lang['GEN_BROWSER_INTERNET_EXPLORER_VERSION'] = 'Version 11+';
-//GENERAL LANGUAGE
 $lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_MORNING'] = 'Buenos días';
@@ -127,7 +156,6 @@ $lang['GEN_WAITING_PROFESSIONS'] = 'Esperando profesiones';
 $lang['GEN_WAITING_STATES'] = 'Esperando estados';
 $lang['GEN_WAITING_CITIES'] = 'Esperando ciudades';
 $lang['GEN_WAITING_DISTRICTS'] = 'Esperando distritos';
-//OTP MESSAGES
 $lang['GEN_SENT_ACCESS'] = 'Enviamos un correo a %s, con tus datos de acceso.';
 $lang['GEN_OTP_SENT'] = 'Ingresa el código de verificación enviado a tu correo.';
 $lang['GEN_OTP_MSG'] = 'Por seguridad enviaremos un código de verificación a la dirección de correo <span class="semibold">%s</span>, indícalo a continuación.';
@@ -139,88 +167,32 @@ $lang['GEN_OTP_EXPIRED'] = 'El código de verificación expiró o fue usado.';
 $lang['GEN_OTP_ERROR'] = 'No fue posible validar el código de seguridad, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad recibido es inválido, por favor vuelve a intentarlo.';
 $lang['GEN_OTP_USED'] = 'El código de seguridad introducido ya fue usado, por favor vuelve a intentarlo.';
-//GENERAL ERROR RESPONSE
-$lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
-$lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_VALIDATION_INPUT'] = 'Se detecto contenido no autorizado en la petición. %s ';
 $lang['GEN_VALIDATION_LOGGED'] = 'Serás desconectado.';
 $lang['GEN_DUPLICATED_SESSION'] = 'No fue posible validar tus credenciales de acceso, por favor vuelve a iniciar sesión, si continúas viendo este mensaje comunícate con el administrador.';
 $lang['GEN_CARDS_NO_ENABLED'] = 'No tienes tarjetas habilitadas para esta operación.';
-//DATATABLES
-$lang['GEN_TABLE_SZERORECORDS'] = 'No se encontraron resultados';
-$lang['GEN_TABLE_SEMPTYTABLE'] = 'No se encontraron registros para tu consulta';
-$lang['GEN_TABLE_SINFO'] = 'Mostrando registro(s) del _START_ al _END_ de un total de _TOTAL_ registro(s)';
-$lang['GEN_TABLE_SINFOEMPTY'] = 'Sin registros que mostrar';
-$lang['GEN_TABLE_SINFOFILTERED'] = '(filtrado de un total de _MAX_ registro(s))';
-$lang['GEN_TABLE_SINFOPOSTFIX'] = '';
-$lang['GEN_TABLE_SLENGTHMENU'] = 'Mostrar _MENU_ registros por página';
-$lang['GEN_TABLE_SSEARCH'] = '';
-$lang['GEN_TABLE_SSEARCHPLACEHOLDER'] = 'Buscar...';
-$lang['GEN_TABLE_SURL'] = '';
-$lang['GEN_TABLE_SINFOTHOUSANDS'] = ',';
-$lang['GEN_TABLE_SPROCESSING'] = 'Procesando...';
-$lang['GEN_TABLE_SLOADINGRECORDS'] = 'Cargando...';
-$lang['GEN_TABLE_SFIRST'] = 'Primera';
-$lang['GEN_TABLE_SLAST'] = 'Última';
-$lang['GEN_TABLE_SNEXT'] = '»';
-$lang['GEN_TABLE_SPREVIOUS'] = '«';
-$lang['GEN_TABLE_SSORTASCENDING'] = ': Activar para ordenar la columna de manera ascendente';
-$lang['GEN_TABLE_SSORTDESCENDING'] = ': Activar para ordenar la columna de manera descendente';
-$lang['GEN_TABLE_ROWS_SELECTED'] = '%d Registros seleccionados';
-$lang['GEN_TABLE_ROWS_NO_SELECTED'] = '';
-$lang['GEN_TABLE_ROW_SELECTED'] = '1 Registro seleccionado';
-$lang['GEN_TABLE_PAGE'] = 'Página';
-$lang['GEN_TABLE_PAGE_FIRST'] = 'Primera página';
-$lang['GEN_TABLE_PAGE_LAST'] = 'Última página';
-//DATEPICKER
-$lang['GEN_PICKER_CLOSETEXT'] = 'Cerrar';
-$lang['GEN_PICKER_PREVTEXT'] = '<Ant';
-$lang['GEN_PICKER_NEXTTEXT'] = 'Sig>';
-$lang['GEN_PICKER_CURRENTTEXT'] = 'Hoy';
-$lang['GEN_PICKER_MONTHNAMES'] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-$lang['GEN_PICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-$lang['GEN_PICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-$lang['GEN_PICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
-$lang['GEN_PICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
-$lang['GEN_PICKER_WEEKHEADER'] = 'Sm';
-$lang['GEN_PICKER_DATEFORMAT'] = 'dd/mm/yy';
-$lang['GEN_PICKER_DATEMEDIUM']= 'MM/AAAA';
-$lang['GEN_PICKER_FIRSTDATE'] = 1;
-$lang['GEN_PICKER_ISRLT'] = FALSE;
-$lang['GEN_PICKER_SHOWMONTHAFTERYEAR'] = FALSE;
-$lang['GEN_PICKER_YEARRANGE'] = '-20:';
-$lang['GEN_PICKER_CHANGEMONTH'] = TRUE;
-$lang['GEN_PICKER_CHANGEYEAR'] = TRUE;
-$lang['GEN_PICKER_SHOWANIM'] = 'slideDown';
-$lang['GEN_PICKER_YEARSUFFIX'] = '';
-//PRODUCT STATUS
 $lang['GEN_INACTIVE_PRODUCT'] = 'Tarjeta inactiva';
 $lang['GEN_TEMPORARY_LOCK_PRODUCT'] = 'Bloqueo temporal';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar no existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'La tarjeta se encuentra vencida.';
-// PROFILE
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
-// API
 $lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'Tipo de archivo no permitido';
 $lang['GEN_SIZE_NOT_ALLOWED'] = 'El tamaño del archivo no cumple con lo requerido';
 $lang['GEN_FILE_EMPTY'] = 'Archivo sin contenido';
 $lang['GEN_FORMAT_NOT_VALID'] = 'Formato base64 no válido';
 $lang['GEN_WRITE_NOT_COMPLETED'] = 'Escritura incompleta en el archivo destino';
-// UPLOAD FILE
 $lang['GEN_UPLOAD_SUCCESSFULL'] = 'upload successfull!!!';
 $lang['GEN_UPLOAD_ERROR_GENERAL'] = 'Error general al cargar archivo.';
 $lang['GEN_UPLOAD_CREATE_DIRECTORY'] = 'Directorio creado.';
 $lang['GEN_UPLOAD_NOT_CREATE_DIRECTORY'] = 'Directorio existe.';
 $lang['GEN_UPLOAD_EXISTING_DIRECTORY'] = 'Directorio existente.';
 $lang['GEN_UPLOAD_DIRECTORY_NOT_FOUND'] = 'Directorio no creado!!!.';
-// HANDLE LANGUAGE
 $lang['GEN_LANG_IMG'] = 'en.png';
 $lang['GEN_AFTER_COD_LANG'] = 'en';
 $lang['GEN_BEFORE_COD_LANG'] = 'es';
 $lang['GEN_AFTER_LANG'] = 'english';
-// DOWNLOADS
 $lang['GEN_DOWNLOAD_PDF'] = 'Descargar PDF';
 $lang['GEN_DOWNLOAD_XLS'] = 'Descargar Excel';
 $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';

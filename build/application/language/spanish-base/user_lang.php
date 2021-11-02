@@ -2,13 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //SIGN IN
 $lang['USER_SIGNIN_TITLE'] = '';
+$lang['USER_WELCOME_MSG'] = 'Acceso directo a tu cuenta/tarjeta para consultas y operaciones, 7x24.';
 $lang['USER_SIGNIN_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['USER_SIGNIN_NO_USER'] = '¿No posees usuario?';
 $lang['USER_SIGNIN_SINGN_UP'] = 'Regístrate';
 $lang['USER_SIGNIN_INCORRECTLY_CLOSED'] = '<div><h5 class="regular">Tu última sesión se cerró de manera incorrecta. Ten en cuenta que para salir de la aplicación debes seleccionar <strong>"Cerrar Sesión"</strong>.</h5></div>';
 $lang['USER_SIGNIN_RECAPTCHA_VALIDATE'] = 'El sistema ha detectado una actividad no autorizada, por favor intenta nuevamente';
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido";
-$lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento fallido tu usuario será bloqueado";
+$lang['USER_SIGNIN_INVALID_USER'] = "Usuario o contraseña inválido";
+$lang['USER_SIGNIN_WILL_BLOKED'] = "Al siguiente intento fallido tu usuario será bloqueado";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos fallidos de conexión, recuperalo  <a class="primary hyper-link" href="%s">aquí</a>';
 $lang['USER_IP_ASSERT'] = 'Confirmo que estoy ingresando desde un equipo de uso frecuente.';
 $lang['USER_SIGNIN_PASS_EXPIRED'] = 'Tu contraseña temporal ha vencido, solicita una nueva <a class="primary hyper-link" href="%s">aquí</a>. Recuerda cambiarla en un plazo menor a 24 horas.';
@@ -18,11 +19,8 @@ $lang['USER_PASS_EXPIRED'] = 'Tu contraseña está vencida. Por motivos de segur
 $lang['USER_ACCEPT_TERMS'] = 'Acepto las condiciones de uso de este sistema.';
 $lang['USER_ACCEPT_PROTECTION'] = 'Aceptar protección de datos personales.';
 $lang['USER_ACCEPT_CONTRACT'] = 'Acepto el contrato de cuenta dinero electrónico.';
-$lang['USER_OPER_PASS_MSG'] = 'Para realizar transacciones con tus cuentas desde "<strong>%s</strong>" es necesario proporcionar una clave de operaciones. Por favor, complete los campos a continuación para generar esta clave:';
-$lang['USER_OPER_PASS_MSG'] = 'Para realizar transacciones con tus cuentas desde "<strong>%s</strong>" es necesario proporcionar tu clave de operaciones. Esta clave te será solicitada solamente una vez durante tu sesión actual:';
 $lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraseña en "<strong>%s</strong>", por favor completa los siguientes datos.';
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
-$lang['USER_KEY_CURRENT'] = 'Clave actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
 $lang['USER_PASS_CONFIRM'] = 'Confirma la contraseña';
 $lang['USER_INFO_TITLE'] = 'Requisitos para crear la contraseña:';
@@ -31,10 +29,6 @@ $lang['USER_INFO_2'] = 'Al menos una <strong>letra minúscula</strong>.';
 $lang['USER_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>.';
 $lang['USER_INFO_4'] = 'De 1 a 3 <strong>números</strong>.';
 $lang['USER_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #).';
-$lang['USER_OPER_KEY_1'] = 'Nombre completo.';
-$lang['USER_OPER_KEY_2'] = 'Cédula.';
-$lang['USER_OPER_KEY_3'] = 'Empresa en la que trabajas..';
-$lang['USER_OPER_KEY_4'] = 'Los últimos dígitos de tu tarjeta.';
 $lang['USER_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.';
 $lang['USER_PASS_CHANGED'] = 'La contraseña fue cambiada exitosamente. %s';
 $lang['USER_PASS_LOGIN'] = '<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
@@ -342,7 +336,6 @@ $lang["USER_CONT_GENERAL_CONTENT"] = '
 	</ol>
 </div>
 ';
-//SIGNUP-PROFILE
 $lang['USER_PROFILE_TITLE'] = 'Perfil de usuario';
 $lang['USER_SIGNUP_MSG'] = 'Para crear tu usuario de <span class="semibold">%s,</span> es necesario que ingreses los datos requeridos a continuación';
 $lang['USER_PERSONAL_DATA'] = 'Datos personales';
@@ -410,10 +403,6 @@ $lang['USER_NOT_SMS'] = 'SMS';
 $lang['USER_PASSWORD_CHANGE'] = 'Cambiar contraseña';
 $lang['USER_OPER_PASS_CHANGE'] = 'Cambiar clave de operaciones';
 $lang['USER_SMS_PASSS_CHANGE'] = 'Cambiar clave de SMS';
-$lang['USER_CREATION_OPER_KEY'] = 'Creación de clave de operaciones';
-$lang['USER_KEY_OPER'] = 'Clave de operaciones';
-$lang['USER_CONFIRM_KEY_OPER'] = 'Confirmar clave';
-$lang['USER_AUTH_REQUIRED'] = 'Autenticación Requerida';
 $lang['USER_LABOR_DATA'] = 'Datos laborales';
 $lang['USER_FISCAL_REGISTRY'] = 'RUC.';
 $lang['USER_WORK_CENTER'] = 'Centro laboral';
@@ -454,14 +443,12 @@ $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve
 $lang['USER_STEP_TITLE_REGISTRY'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP']];
 $lang['USER_STEP_TITLE_REGISTRY_LONG'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_LABOR_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP'], $lang['USER_LEGAL_STEP']];
 $lang['USER_SAVE_BTN_MSG'] = '* Al presionar el boton guardar, se guardaran los pasos del 1 al ';
-// RECOVER ACCESS
 $lang['USER_RECOVER_DOC_TYPE'] = [
 	'' => 'Selecciona',
 	'CC' => 'Cédula de ciudadania',
 	'PP' => 'Pasaporte',
 ];
 $lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
-//USER SIGN UP
 $lang['USER_SATISFACTORY_REG'] = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_SOME_DATA'] = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';

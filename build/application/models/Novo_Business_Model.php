@@ -134,7 +134,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->set_userdata('oneCard', $cardsList[0]);
 
 			if ($this->response->code == 0) {
-				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'location', 301);
+				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'Location', 301);
 				exit();
 			}
 		}
@@ -382,6 +382,8 @@ class Novo_Business_Model extends NOVO_Model {
 						$cardRecord->cardNumber = $cardsRecords->nroTarjeta;
 						$cardRecord->prefix = $cardsRecords->prefix;
 						$cardRecord->status = $cardsRecords->bloque;
+						$cardRecord->statusMessage = $cardsRecords->bloque;
+						$cardRecord->enterprise = $cardsRecords->nomEmp;
 						$cardRecord->cardNumberMask = $cardsRecords->nroTarjetaMascara;
 						$cardRecord->productName = mb_strtoupper($cardsRecords->producto);
 						$produtImgName = normalizeName($cardsRecords->producto);

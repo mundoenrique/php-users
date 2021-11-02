@@ -80,7 +80,7 @@
         <div class="row pl-2">
           <label class="mt-1 regular" for="initDateFilter"><?= lang('BUSINESS_SELECT'); ?></label>
           <div class="form-group col-4 px-1">
-						<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_PICKER_DATEMEDIUM'); ?>">
+						<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" readonly autocomplete="off">
             <div id='error' class="help-block"></div>
           </div>
 					<?php if (lang('CONF_TYPE_TRANSACTION') == 'ON') :  ?>
@@ -174,7 +174,7 @@
       </ul>
       <div id="no-moves" class="hide">
         <div class="flex flex-column items-center justify-center pt-5">
-          <h3 class="h4 regular mb-0"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h3>
+          <h3 class="h4 regular mb-0"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h3>
         </div>
       </div>
     </div>

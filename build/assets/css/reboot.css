@@ -1216,7 +1216,7 @@ label {
 	pointer-events: none;
 }
 
-.no-events {
+.no-pointer {
 	pointer-events: none;
 }
 
@@ -2350,18 +2350,22 @@ i[class*=" icon-"]:before {
 .icon-phone:before           { content: "\e12d"; }
 .icon-view:before            { content: "\e0b3"; }
 .icon-remove:before          { content: "\e0b5"; }
+.icon-edit:before          { content: "\e0b4"; }
 .icon-ok:before              { content: "\e0b6"; }
 .icon-cancel:before          { content: "\e0b7"; }
 .icon-find:before            { content: "\e0b8"; }
 .icon-download:before        { content: "\e0bb"; }
 .icon-upload:before          { content: "\e0bc"; }
 .icon-deliver-card:before    { content: "\e015"; }
+.icon-user-transfer:before   { content: "\e01b"; }
 .icon-user:before            { content: "\e0c8"; }
 .icon-envelope-open:before   { content: "\e026"; }
 .icon-lock:before 			     { content: "\e0ce"; }
 .icon-notification:before    { content: "\e0d8"; }
 .icon-card:before            { content: "\e0dc"; }
 .icon-credit-card:before	   { content: "\e035"; }
+.icon-user-plus:before	   	 { content: "\e08e"; }
+.icon-plus:before	   	 { content: "\e08d"; }
 .icon-thumbs-up:before       { content: "\e0e5"; }
 .icon-chevron-down:before    { content: "\e0f3"; }
 .icon-chevron-left:before    { content: "\e0f4"; }
@@ -2383,6 +2387,7 @@ i[class*=" icon-"]:before {
 .icon-spinner:before 			   { content: "\e113"; }
 .icon-building:before 	     { content: "\e066"; }
 .icon-balance:before 		  	 { content: "\e076"; }
+.icon-money-payments:before  { content: "\e07d"; }
 .icon-key:before 				   	 { content: "\e0cd"; }
 .icon-file-word:before       { content: "\e10d"; }
 .icon-lock:before 			  	 { content: "\e0ce"; }
@@ -2396,6 +2401,7 @@ i[class*=" icon-"]:before {
 .icon-user-edit:before       { content: "\e031"; }
 .icon-down-statement:before  { content: "\e00d"; }
 .icon-arrow-left:before      { content: "\e0f0"; }
+.icon-history:before			   { content: "\e090"; }
 .icon-card-fee:before			   { content: "\e091"; }
 .icon-arrow-right:before     { content: "\e0f1"; }
 .icon-car:before					   { content: "\e101"; }
@@ -2525,10 +2531,6 @@ i[class*=" icon-"]:before {
 
 .navbar-brand:hover, .navbar-brand:focus {
 	text-decoration: none;
-}
-
-.navbar-brand img {
-	height: 2rem;
 }
 
 .navbar-nav {

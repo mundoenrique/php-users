@@ -241,6 +241,10 @@ label {
 	z-index: 998;
 }
 
+.navbar-brand img {
+	height: 2rem;
+}
+
 /* Main-nav-user  */
 .main-nav-user > .nav-item > .nav-link{
 	color: var(--color-room) !important;

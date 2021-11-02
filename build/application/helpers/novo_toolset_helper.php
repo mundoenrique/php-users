@@ -31,21 +31,21 @@ if (!function_exists('clientUrlValidate')) {
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
-			redirect(base_url($client.$uriCore), 'location', 301);
+			redirect(base_url($client.$uriCore), 'Location', 301);
 		}
 
 		if (in_array($client, $accessUrl)) {
 			switch ($client) {
 				case 'default':
-					redirect(base_url(), 'location', 301);
+					redirect(base_url(), 'Location', 301);
 				break;
 				case 'pichincha':
-					redirect(base_url('pichincha/home'), 'location', 301);
+					redirect(base_url('pichincha/home'), 'Location', 301);
 				break;
 			}
 		}
 
-		$CI->config->load('config-'.$client);
+		$CI->config->load('config-' . $client);
 	}
 }
 
@@ -152,14 +152,16 @@ if (!function_exists('languageLoad')) {
 
 		$CI->config->set_item('language', $configLanguage);
 
-		if (file_exists($pathLang.'general_lang.php')) {
-			array_push($languagesFile, 'general');
-			$loadLanguages = TRUE;
-		}
+		if ($call == 'specific') {
+			if (file_exists($pathLang.'general_lang.php')) {
+				array_push($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
 
-		if (file_exists($pathLang.'validate_lang.php')) {
-			array_push($languagesFile, 'validate');
-			$loadLanguages = TRUE;
+			if (file_exists($pathLang.'validate_lang.php')) {
+				array_push($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
 		}
 
 		if (file_exists($pathLang.$class.'_lang.php')) {
@@ -181,22 +183,22 @@ if (!function_exists('setCurrentPage')) {
 				if($menu == lang('GEN_MENU_CARD_LIST')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'cardDetail':
 				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'services':
 				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 			case 'expensesCategory':
 				if($menu == lang('GEN_MENU_REPORTS')) {
 					$cssClass = 'page-current';
 				}
-			break;
+				break;
 		}
 
 		return $cssClass;
@@ -262,9 +264,9 @@ if (!function_exists('mainMenu'))
 			'PAYS_TRANSFER' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
-				'CREDIT_CARDS' => [],
 				'SERVICES' => [
-					'TELEPHONY' => []
+					'CREDIT_CARDS' => [],
+					'DIGITEL' => []
 				]
 			],
 			'CUSTOMER_SUPPORT' => [],
@@ -361,7 +363,7 @@ if (! function_exists('languageCookie')) {
 
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
-		$CI = &get_instance();
+		$CI = get_instance();
 		$redirectLink = lang('CONF_LINK_SIGNIN');
 
 		if ($CI->session->has_userdata('logged')) {

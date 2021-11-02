@@ -8,7 +8,7 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-6 py-4">
               <div class="product-presentation relative w-100">
-                <div class="item-network <?= $totalCards == 1 ? lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' : '', $totalCards == 1 ? 'hide': ''; ?>"></div>
+                <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
@@ -133,7 +133,7 @@
       </table>
       <div id="no-result" class="hide">
         <div class="flex flex-column items-center justify-center pt-5">
-          <h2 class="h3 regular mb-1"><?= lang('GEN_TABLE_SEMPTYTABLE'); ?></h2>
+          <h2 class="h3 regular mb-1"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h2>
           <span class="h6 regular mb-0"><?= lang('REPORTS_DATE_RANGE'); ?></span>
         </div>
       </div>
