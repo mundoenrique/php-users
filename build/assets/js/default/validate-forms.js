@@ -116,7 +116,7 @@ function validateForms(form, options) {
 	}, "Usted no es mayor de edad.");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
-		return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
+		return passStrength(value);
 	 });
 
 	jQuery.validator.addMethod("digValido",function(value, element, regex){
