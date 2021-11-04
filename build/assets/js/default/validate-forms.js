@@ -232,9 +232,15 @@ function validateForms(form, options) {
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
 			recovery: { required: true }
+
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
+		},
+		messages: {
+			confirmPassword: { required: "Este campo es obligatorio.", equalTo: "Debe ser igual a la nueva contraseña." },
+			confirmUserpwd: { equalTo: "Debe ser igual a la nueva contraseña." },
+			confirmEmail: { equalTo: "Debe ser igual al correo indicado." }
 		}
 	});
 
