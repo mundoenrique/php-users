@@ -45,6 +45,7 @@ $lang['RESP_PIN_NOT_CHANGED'] = 'No fue posible cambiar el PIN de tu tarjeta, in
 $lang['RESP_CODEOTP_USED'] = 'El código de seguridad introducido ya fue usado.';
 $lang['RESP_EXPIRED_CODEOTP'] = 'Tiempo expirado.';
 $lang['RESP_INVALID_EXPIRATION_DATE'] = 'La fecha de expiración introducida es inválida, verifica e intenta de nuevo.';
+$lang['RESP_THIRD_PARTY_SERVICE_ERROR'] = 'En este momento la consulta de costos no está disponible, por favor intenta más tarde.';
 $lang['RESP_NOT_PROCCESS'] = 'Tu solicitud no pudo ser procesada, intente más tarde.';
 $lang['RESP_EXPIRED_CARD'] = 'No es posible realizar esta acción, la tarjeta está vencida.';
 $lang['RESP_LOCKED_CARD'] = 'No es posible realizar esta acción, la tarjeta está bloqueada.';

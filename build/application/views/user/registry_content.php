@@ -151,8 +151,8 @@
 										<li id="capital" class="pwd-rules-item rule-invalid">Al menos una <strong>letra mayúscula.</strong>
 										</li>
 										<li id="number" class="pwd-rules-item rule-invalid">De 1 a 3 <strong>números.</strong></li>
-										<li id="especial" class="pwd-rules-item rule-invalid">Al menos un <strong>carácter especial </strong>(ej: ! @ ? + - . , #).</li>
-										<li id="consecutivo" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.</li>
+										<li id="special" class="pwd-rules-item rule-invalid">Al menos un <strong>carácter especial </strong>(ej: ! @ ? + - . , #).</li>
+										<li id="consecutive" class="pwd-rules-item rule-invalid">No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.</li>
 									</ul>
 								</div>
 							</div>
