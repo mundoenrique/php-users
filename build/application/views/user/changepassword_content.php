@@ -56,8 +56,8 @@
 									<li id="letter" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_2'); ?></li>
 									<li id="capital" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_3'); ?></li>
 									<li id="number" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_4'); ?></li>
-									<li id="especial" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_5'); ?></li>
-									<li id="consecutivo" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_6'); ?></li>
+									<li id="special" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_5'); ?></li>
+									<li id="consecutive" class="pwd-rules-item rule-invalid"><?= lang('PASSWORD_INFO_6'); ?></li>
 								</ul>
 							</div>
 						</div>

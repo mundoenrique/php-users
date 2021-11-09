@@ -743,7 +743,7 @@ class ServiceProduct_Model extends BDB_Model
 							'action' => 'redirect'
 						]
 					];
-				break;
+					break;
 				case 10:
 					$this->response->code = 1;
 					$this->response->msg = lang('RESP_CODEOTP');
@@ -899,7 +899,19 @@ class ServiceProduct_Model extends BDB_Model
 					];
 					$this->session->sess_destroy();
 					break;
-				default:
+				case -437:
+						$this->response->code = 2;
+						$this->response->msg = lang('RESP_THIRD_PARTY_SERVICE_ERROR');
+						$this->response->classIconName = 'ui-icon-alert';
+						$this->response->data = [
+							'btn1' => [
+								'text' => lang('BUTTON_ACCEPT'),
+								'link' => base_url('listaproducto'),
+								'action' => 'redirect'
+							]
+						];
+						break;
+					default:
 					$this->response->classIconName = 'ui-icon-alert';
 					$this->response->data = [
 						'btn1' => [

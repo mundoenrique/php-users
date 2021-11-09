@@ -116,7 +116,7 @@ function validateForms(form, options) {
 	}, "Usted no es mayor de edad.");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {
-		return value.match(/((\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#$%])*\d(\w|[!@#\$%])*\d(\w|[!@#$%])*(\d)*)/) && value.match(/\d{1}/gi)? false : true;
+		return passStrength(value);
 	 });
 
 	jQuery.validator.addMethod("digValido",function(value, element, regex){
@@ -232,9 +232,15 @@ function validateForms(form, options) {
 			loginUsername: { required: true },
 			loginUserpwd: { required: true },
 			recovery: { required: true }
+
 		},
 		errorPlacement: function(error, element) {
 			$(element).closest('.form-group').find('.help-block').html(error.html());
+		},
+		messages: {
+			confirmPassword: { required: "Este campo es obligatorio.", equalTo: "Debe ser igual a la nueva contraseña." },
+			confirmUserpwd: { equalTo: "Debe ser igual a la nueva contraseña." },
+			confirmEmail: { equalTo: "Debe ser igual al correo indicado." }
 		}
 	});
 

@@ -113,7 +113,8 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/core-base/messages_base"
+			"localization/core-base/messages_base",
+			"user/validPass",
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
@@ -147,7 +148,8 @@ class User extends BDB_Controller
 			"third_party/jquery.validate",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/core-base/messages_base"
+			"localization/core-base/messages_base",
+			"user/validPass",
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
@@ -213,7 +215,8 @@ class User extends BDB_Controller
 			"third_party/moment",
 			"default/validate-forms",
 			"third_party/additional-methods",
-			"localization/core-base/messages_base"
+			"localization/core-base/messages_base",
+			"user/validPass",
 		);
 		if ($this->config->item('language_form_validate')) {
 			array_push(
