@@ -12,6 +12,7 @@ $lang['RESP_RECAPTCHA_VALIDATION_FAILED'] = 'El sistema ha detectado una activid
 $lang['RESP_INVALID_USER']= "Usuario o contraseña inválido.";
 $lang['RESP_SUSPENDED_USER'] = 'Usuario no disponible, se encuentra inactivo.';
 $lang['RESP_OLD_USER'] = 'Usuario aplicación anterior.';
+$lang['RESP_EXISTING_USER'] = 'Nombre de usuario no disponible.';
 $lang['RESP_UNREGISTERED_USER'] = 'Usuario no registrado en el sistema.';
 $lang['RESP_SUPPORT'] = '';
 $lang['RESP_SUPPORT_MAIL'] = '';

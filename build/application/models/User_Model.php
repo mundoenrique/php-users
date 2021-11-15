@@ -409,7 +409,7 @@ class User_Model extends BDB_Model
 					break;
 
 				case -1:
-					$this->response->msg = lang('RESP_LOGIN_INVALID');
+					$this->response->msg = lang('RESP_EXISTING_USER');
 					$this->response->code = 3;
 					$this->response->classIconName = "ui-icon-alert";
 					break;
