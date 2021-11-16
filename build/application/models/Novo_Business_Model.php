@@ -21,6 +21,7 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
 
+
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
 		$this->dataAccessLog->operation = 'Obtener la lista de tarjetas';
@@ -196,6 +197,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
 		$response = $this->sendToService('callWs_CardDetail');
+
 		$movesList = [];
 		$balance = new stdClass();
 		$balance->currentBalance = '---';
@@ -204,11 +206,29 @@ class Novo_Business_Model extends NOVO_Model {
 		$totalMoves = new stdClass();
 		$totalMoves->credit = '0';
 		$totalMoves->debit = '0';
+		$cardRecord = new stdClass();
+		$cardRecord->status = $response->tarjeta->bloque ?? '';
+		$cardRecord->statusMessage = '';
 
 		switch ($this->isResponseRc) {
 			case 0:
 			case -150:
 				$this->response->code = 0;
+
+				switch ($cardRecord->status) {
+					case '':
+						$cardRecord->statusMessage = '';
+					break;
+					case 'PB':
+						$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
+					break;
+					case 'NE':
+						$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
+					break;
+					default:
+						$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
+					break;
+				}
 
 				if (isset($response->saldos)) {
 					$balance->currentBalance = lang('CONF_CURRENCY').' '.$response->saldos->actual;
@@ -240,6 +260,8 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->response->data->movesList = $movesList;
 		$this->response->data->balance = $balance;
 		$this->response->data->totalMoves = $totalMoves;
+		$this->response->data->status = $cardRecord->status;
+		$this->response->data->statusMessage = $cardRecord->statusMessage;
 
 		return $this->responseToTheView('callWs_CardDetail');
 	}

@@ -81,17 +81,14 @@ class Novo_Business extends NOVO_Controller {
 		$this->render->titlePage = $this->request->isVirtual ? novoLang(lang('GEN_VIRTUAL'), lang('GEN_MENU_CARD_DETAIL')) : lang('GEN_MENU_CARD_DETAIL');
 		$this->render->currentYear = date('Y');
 
+		foreach ($this->request AS $index => $render) {
+			$this->render->$index = $render;
+		}
+
 		foreach ($detailCard->data AS $index => $render) {
 			$this->render->$index = $render;
 		}
 
-		foreach ($this->request AS $index => $render) {
-			if ($index == 'statusMessage' && $this->request->status == '') {
-				$render = '';
-			}
-
-			$this->render->$index = $render;
-		}
 
 		$this->views = ['business/'.$view];
 		$this->loadView($view);
