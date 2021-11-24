@@ -88,19 +88,19 @@ function validateForms(form, options) {
 		if(element.value.length>0 && (element.value == $("#landLine").val() || element.value == $("#mobilePhone").val()))
 			return false;
 		else return true;
-	}, "Teléfono Otro está repetido.");
+	}, "Número de teléfono repetido.");
 
 	jQuery.validator.addMethod("numberEqual2", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#mobilePhone").val() || element.value == $("#otherPhoneNum").val()))
 			return false;
 		else return true;
-	}, "Teléfono Fijo está repetido.");
+	}, "Número de teléfono repetido.");
 
 	jQuery.validator.addMethod("numberEqual3", function(value, element) {
 		if(element.value.length>0 && (element.value == $("#otherPhoneNum").val() || element.value == $("#otherPhoneNum").val()))
 				return false;
 		else return true;
-	}, "Teléfono Móvil está repetido.");
+	}, "Número de teléfono repetido.");
 
 	jQuery.validator.addMethod("fechaInvalida", function(value, element) {
 		var fecha = moment(value, "DD/MM/YYYY");
@@ -165,6 +165,12 @@ function validateForms(form, options) {
 		return ($('#phoneType').val() == '' || element.value != '');
 	}, "Introduce el número.");
 
+	jQuery.validator.addMethod("postalCode", function(value, element) {
+		if (/^[0-9]+$/i.test(value) && value.length == 6)
+		return true;
+		else return false;
+	}, "El formato es inválido.");
+
 	validator = form.validate({
 		rules: {
 			generateNewPin: { required: true, number: true, exactNumbers: 4, "fourConsecutivesDigits": true },
@@ -200,7 +206,7 @@ function validateForms(form, options) {
 			birthDate: { required: true, "fechaInvalida": true, "mayorEdad": true },
 			nationality: { required: true, "spanishAlphabetical": true },
 			addressType: { required: true, "selectRequired": true },
-			postalCode: { digits: true },
+			postalCode: { "postalCode": true },
 			country: { required: true },
 			department: { required: true, "selectRequired": true },
 			province: { required: true, "selectRequired": true },
