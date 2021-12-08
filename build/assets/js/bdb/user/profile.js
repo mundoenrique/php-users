@@ -12,7 +12,7 @@ $$.addEventListener('DOMContentLoaded', function(){
 	var selectOption = createElement('option', {value: ''});
 
 	//core
-	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 18);
+	maxBirthdayDate.setFullYear( maxBirthdayDate.getFullYear() - 1);
 	loadingOption.textContent = 'Cargando...';
 	selectOption.textContent = 'Selecciona';
 
