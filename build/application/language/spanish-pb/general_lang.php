@@ -6,3 +6,5 @@ $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Produbanco.';
 $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
 $lang['GEN_OTP_INCORRECT'] = 'Los datos ingresados son incorrectos.';
 $lang['GEN_OTP_INVALID'] = 'El código de seguridad ingresado es inválido, por favor vuelve a intentarlo.';
+$lang['GEN_INVALID_DATA'] = 'Los datos ingresados son incorrectos.';
+$lang['GEN_INACTIVE_PRODUCT'] = 'Tu tarjeta se encuentra inactiva, contáctate con tu empresa.';
