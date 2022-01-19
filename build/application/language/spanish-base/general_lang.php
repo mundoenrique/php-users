@@ -177,6 +177,7 @@ $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar no existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
 $lang['GEN_EXPIRED_PRODUCT'] = 'La tarjeta se encuentra vencida.';
+$lang['GEN_INACTIVE_PRODUCT'] = 'La tarjeta se encuentra inactiva.';
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
 $lang['GEN_FILE_TYPE_NOT_ALLOWED']  = 'Tipo de archivo no permitido';
 $lang['GEN_SIZE_NOT_ALLOWED'] = 'El tamaño del archivo no cumple con lo requerido';
