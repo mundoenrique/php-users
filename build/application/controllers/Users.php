@@ -62,7 +62,8 @@ class Users extends CI_Controller {
 				'domain' => $this->config->item('cookie_domain'),
 				'path' => $this->config->item('cookie_path'),
 				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
+				'secure' => $this->config->item('cookie_secure'),
+				'httponly' => TRUE
 			);
 			$this->input->set_cookie($cookie);
 			redirect(current_url());
