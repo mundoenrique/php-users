@@ -1,5 +1,5 @@
 <?php
-$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+$skin = get_cookie('skin', TRUE);
 if(isset($header)){
 ?>
 {header}

@@ -18,7 +18,7 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
   <link rel="profile" href="http://gmpg.org/xfn/11" />
   <link rel="icon" type="image/png" href="<?php echo $pageCdn;?>img/favicon<?php echo $extension;?>" />
   <?php
-			$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+			$cookie = get_cookie('skin', TRUE);
 			$sendBaseCss = true;
 			switch($this->router->class) {
 				case 'registro':

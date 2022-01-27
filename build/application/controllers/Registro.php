@@ -20,6 +20,7 @@ class Registro extends CI_Controller {
 
 	private function initCookie() {
 		$requestMethod=$this->router->method;
+		log_message('info', '-----------ffffffffffffffff----'.$requestMethod);
 
 		if($requestMethod == 'index' || $requestMethod == 'index_pe' || $requestMethod == 'index_pi') {
 
@@ -29,7 +30,7 @@ class Registro extends CI_Controller {
 				default: $code='default';
 			}
 
-			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') == false) {
+			if (get_cookie('skin', TRUE) == FALSE) {
 				$this->load->helper('url');
 
 				$cookie = array(
@@ -49,7 +50,7 @@ class Registro extends CI_Controller {
 
 	public function index_pi()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -84,7 +85,7 @@ class Registro extends CI_Controller {
 
 	public function index_pe()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -121,7 +122,7 @@ class Registro extends CI_Controller {
 
 	public function index()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model','registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -409,7 +410,7 @@ class Registro extends CI_Controller {
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
+		if (get_cookie('skin', TRUE) === false) {
 			$this->load->helper('url');
 
 			$cookie = array(

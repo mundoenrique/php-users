@@ -1,7 +1,7 @@
 <?php
 $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
-$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+$skin = get_cookie('skin', TRUE);
 switch($skin){
 	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
 	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;

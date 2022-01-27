@@ -1,5 +1,5 @@
 		<!-- TERMINOS Y CONDICIONES -->
-		<?php $skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin'); ?>
+		<?php $skin = get_cookie('skin', TRUE); ?>
 		<div id="dialog-rg-Co" style='display:none'>
 		  <div class="dialog-content">
 		    <header>

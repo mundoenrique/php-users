@@ -1,6 +1,6 @@
 <?php
 	$country = $this->session->userdata('pais');
-	$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+	$cookie = get_cookie('skin', TRUE);
 ?>
 <div id="content">
   <article>

@@ -1,6 +1,6 @@
 <?php
 	$country = $this->session->userdata('pais');
-	$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+	$cookie = get_cookie('skin', TRUE);
 	$cpo_name = $this->security->get_csrf_token_name();
 	$cpo_cook = $this->security->get_csrf_hash();
 	$datos = null;

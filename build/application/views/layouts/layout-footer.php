@@ -1,6 +1,6 @@
 <?php
 	$closeLink = $this->config->item('base_url') . '/users/closeSess';
-	$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+	$skin = get_cookie('skin', TRUE);
 	$pais= $this->session->userdata('pais');
 ?>
 <?php if($skin != 'pichincha'): ?>
