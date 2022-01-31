@@ -112,7 +112,8 @@ function validateForms(form, options) {
 		hoy = moment();
 		fechanacimiento = moment(value, "DD/MM/YYYY");
 		years = hoy.diff(fechanacimiento, 'years');
-		return years >= 14;
+
+		return idTypeCode === "T" || idTypeCode === 9 ? years >= 14 : years >= 18;
 	}, "Usted no posee la edad requerida.");
 
 	jQuery.validator.addMethod("validatePassword", function(value,element) {

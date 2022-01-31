@@ -180,4 +180,5 @@
 ?>
 <script>
 	var dataRegistryFrm = <?= $data ?>;
+	var idTypeCode = dataRegistryFrm.code_tipo_id_ext_per;
 </script>

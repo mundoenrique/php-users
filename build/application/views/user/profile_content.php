@@ -123,7 +123,7 @@
 													<select id="department" class="custom-select form-control" name="department">
 														<option value="">Selecciona</option>
 											<?php
-														foreach ($dataStates as $row) {			
+														foreach ($dataStates as $row) {
 											?>
 															<option value="<?= $row->codEstado;?>" <?= property_exists($data->direccion, 'acCodEstado') && $data->direccion->acCodEstado === $row->codEstado? 'selected': '';?>><?= mb_convert_case($row->estados, MB_CASE_TITLE, "UTF-8");?></option>
 											<?php
@@ -295,4 +295,5 @@
 	</div>
 </div>
 <script>
+		var idTypeCode = <?= $data->registro->user->tipo_id_ext_per ?>;
 </script>
