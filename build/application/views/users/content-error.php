@@ -1,5 +1,5 @@
 <?php
-	$closeLink = $this->config->item('base_url') . '/users/closeSess';
+	$closeLink = $this->config->item('base_url') . '/cerrar-sesion';
 ?>
 <div id="content">
       <article>

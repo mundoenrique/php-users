@@ -20,7 +20,6 @@ class Registro extends CI_Controller {
 
 	private function initCookie() {
 		$requestMethod=$this->router->method;
-		log_message('info', '-----------ffffffffffffffff----'.$requestMethod);
 
 		if($requestMethod == 'index' || $requestMethod == 'index_pe' || $requestMethod == 'index_pi') {
 
@@ -33,15 +32,13 @@ class Registro extends CI_Controller {
 			if (get_cookie('skin', TRUE) == FALSE) {
 				$this->load->helper('url');
 
-				$cookie = array(
+				$cookie = [
 					'name' => 'skin',
 					'value' => $code,
 					'expire' => 0,
-					'domain' => $this->config->item('cookie_domain'),
-					'path' => $this->config->item('cookie_path'),
-					'prefix' => $this->config->item('cookie_prefix'),
-					'secure' => $this->config->item('cookie_secure')
-				);
+					'httponly' => TRUE
+				];
+
 				$this->input->set_cookie($cookie);
 				redirect(current_url());
 			}
@@ -413,15 +410,13 @@ class Registro extends CI_Controller {
 		if (get_cookie('skin', TRUE) === false) {
 			$this->load->helper('url');
 
-			$cookie = array(
-				'name'		=> 'skin',
-				'value' 	=> 'default',
-				'expire'	=> 0,
-				'domain'	=> $this->config->item('cookie_domain'),
-				'path'		=> $this->config->item('cookie_path'),
-				'prefix'	=> $this->config->item('cookie_prefix'),
-				'secure'	=> $this->config->item('cookie_secure')
-			);
+			$cookie = [
+				'name' => 'skin',
+				'value' => 'default',
+				'expire' => 0,
+				'httponly' => TRUE
+			];
+
 			$this->input->set_cookie($cookie);
 			redirect(current_url());
 		}

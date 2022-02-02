@@ -23,9 +23,11 @@ class Users extends CI_Controller {
 			$requestMod=$this->uri->segment(1); //Modo al cual el usuario desea ingresar (latodo, pichincha, default)
 
 			switch($requestMod){
-				case 'latodo': 	$code='latodo'; break;
+				case 'latodo':
+					$code = 'latodo';
+					break;
 				case 'pichincha':
-					$code='pichincha';
+					$code = 'pichincha';
 					np_hoplite_countryCheck('ec-bp');
 					$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
 					break;
@@ -55,16 +57,13 @@ class Users extends CI_Controller {
 		if( $cookie !== $code || $cookie === false) {
 			$this->load->helper('url');
 
-			$cookie = array(
+			$cookie = [
 				'name' => 'skin',
 				'value' => $code,
 				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure'),
 				'httponly' => TRUE
-			);
+			];
+
 			$this->input->set_cookie($cookie);
 			redirect(current_url());
 		}
@@ -673,13 +672,19 @@ class Users extends CI_Controller {
 		$valorCookie = get_cookie('skin', TRUE);
 		$this->load->model('users_model','logout');
 		$this->output->set_content_type('application/json')->set_output($this->logout->logout());
-
 		$this->session->unset_userdata($this->session->all_userdata());
 		$this->session->sess_destroy();
+
 		switch($valorCookie){
-			case 'pichincha': redirect($this->config->item('base_url') . '/pichincha/home/'); break;
-			case 'latodo': redirect($this->config->item('base_url') . '/latodo/home/'); break;
-		  default: redirect($this->config->item('base_url')); break;
+			case 'pichincha':
+				redirect($this->config->item('base_url') . '/pichincha/home/');
+				break;
+			case 'latodo':
+				redirect($this->config->item('base_url') . '/latodo/home/');
+				break;
+		  default:
+				redirect($this->config->item('base_url'));
+				break;
 		}
 
 	}

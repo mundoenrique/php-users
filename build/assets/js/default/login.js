@@ -331,7 +331,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 
 				$("#activa").click(function () {
 					$("#sesion-activa").dialog("close");
-					$(location).attr('href', base_url + '/users/closeSess');
+					$(location).attr('href', base_url + '/cerrar-sesion');
 					habilitar();
 				});
 

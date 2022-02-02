@@ -1,6 +1,6 @@
 <?php
 
-  $ruta1 = $this->config->item('base_url') . '/users/closeSess';
+  $ruta1 = $this->config->item('base_url') . '/cerrar-sesion';
 
 ?>
 <div id="content">

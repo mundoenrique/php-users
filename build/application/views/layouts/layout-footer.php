@@ -1,5 +1,5 @@
 <?php
-	$closeLink = $this->config->item('base_url') . '/users/closeSess';
+	$closeLink = $this->config->item('base_url') . '/cerrar-sesion';
 	$skin = get_cookie('skin', TRUE);
 	$pais= $this->session->userdata('pais');
 ?>
