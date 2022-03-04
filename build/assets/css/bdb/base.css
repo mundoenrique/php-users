@@ -3694,10 +3694,18 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	min-width: 160px;
 }
 
+.product-cardholder {
+	max-width: 400px;
+}
+@media (min-width: 992px) {
+	.product-cardholder {
+		max-width: 600px;
+	}
+}
+
 .service-content .product-cardholder {
 	max-width: 190px;
 }
-
 @media (min-width: 1200px) {
 	.service-content .product-cardholder {
 		max-width: 270px;
@@ -3800,8 +3808,13 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .services-content {
-	width: 448px;
+	width: 350px;
 	margin-bottom: 0;
+}
+@media (min-width: 1200px) {
+	.services-content {
+		width: 448px;
+	}
 }
 
 .service-group {
