@@ -46,7 +46,8 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] REQUEST FROM THE VIEW '.json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO ['.$this->appUserName.'] IP ' . $this->input->ip_address() . ' REQUEST FROM THE VIEW '.
+			json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE));
 
 		unset($this->dataRequest);
 		$valid = $this->verify_access->accessAuthorization($this->rule, $this->customerUri, $this->appUserName);;
