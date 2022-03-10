@@ -73,7 +73,8 @@ class Verify_Access {
 		}
 
 		unset($_POST);
-		log_message('INFO', 'NOVO ['.$user.'] '.$rule.' REQUEST CREATED '.json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ' . $rule .' REQUEST CREATED '.
+			json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
@@ -106,7 +107,8 @@ class Verify_Access {
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		log_message('DEBUG', 'NOVO  ['.$user.'] ResponseByDefect: '.json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
+			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
 	}
