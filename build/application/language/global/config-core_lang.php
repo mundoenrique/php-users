@@ -142,6 +142,7 @@ $lang['CONF_FOOTER_NETWORKS'] = 'OFF';
 $lang['CONF_FOOTER_LOGO'] = 'ON';
 $lang['CONF_FOOTER_MARK'] = 'OFF';
 $lang['CONF_FOOTER_INFO'] = 'ON';
+$lang['CONF_FOTTER_PRIVACY_NOTICE'] = 'OFF';
 $lang['CONF_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'allowed_types' => 'jpeg|png|jpg',
@@ -180,6 +181,7 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
 ];
+$lang['GEN_PRIVACY_NOTICE_LINK'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';

@@ -23,6 +23,12 @@
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images'); ?>" alt="Logo PCI">
 			<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6">
 				<?= lang('GEN_FOTTER_RIGHTS'); ?><?= ' - '.date("Y") ?>
+				<?php if (lang('CONF_FOTTER_PRIVACY_NOTICE') == 'ON') : ?>
+					<br>
+					<a class="block mb-1 h5 tertiary underline" href="<?= lang('GEN_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
+						<?= lang('GEN_PRIVACY_NOTICE'); ?>
+					</a>
+				<?php endif; ?>
 			</span>
 		</div>
 	</footer>

@@ -16,6 +16,7 @@ $lang['GEN_FOTTER_NETWORKS_LINK'] = [
 	'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
 $lang['GEN_FOTTER_RIGHTS'] = '© All rights reserved. Banorte Financial Group.';
+$lang['GEN_URL_PRIVACY_NOTICE'] = 'https://www.banorte.com/wps/portal/gfb?uri=nm:oid:banorte-te-informa.aviso-de-privacidad';
 //CONTACT
 $lang['GEN_CONTACTS_TITLE'] = 'National hotlines';
 $lang['GEN_CONTACTS_CITY'] = 'CITY';
