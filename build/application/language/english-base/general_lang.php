@@ -105,6 +105,7 @@ $lang['GEN_FINISH_MESSAGE'] = 'Thank you for using our services';
 $lang['GEN_LAST_ACCESS'] = 'Last access';
 $lang['GEN_OPTIONAL_FIELD'] = '(Optional)';
 $lang['GEN_FOTTER_RIGHTS'] = '© NovoPayment Inc. All rights reserved.';
+$lang['GEN_PRIVACY_NOTICE'] = 'Privacy notice';
 $lang['GEN_CONTACTS_TITLE_HELP'] = '¿Need help?';
 $lang['GEN_CONTACTS_TITLE'] = 'Contact our 24-hour contact center at:';
 $lang['GEN_CONTACTS_CITY'] = '';
