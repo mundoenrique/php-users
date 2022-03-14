@@ -9,14 +9,7 @@ $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Operaciones';
 $lang['GEN_ALTERNATIVE_TEXT'] = 'Grupo Financiero Banorte';
 //GENERAL LANGUAGE
 $lang['GEN_DNI'] = 'CURP';
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => 'https://www.facebook.com/banorte',
-	'twitter' => 'https://www.twitter.com/Banorte_mx',
-	'youtube' => 'https://www.youtube.com/user/banortemovil',
-	'instagram' => 'https://www.instagram.com/banorte_mx',
-];
 $lang['GEN_FOTTER_RIGHTS'] = '© Todos los derechos reservados. Grupo Financiero Banorte.';
-$lang['GEN_PRIVACY_NOTICE_LINK'] = 'https://www.banorte.com/wps/portal/gfb?uri=nm:oid:banorte-te-informa.aviso-de-privacidad';
 //CONTACT
 $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';

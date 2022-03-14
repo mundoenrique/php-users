@@ -10,7 +10,7 @@
 			<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
 			<div class="order-first networks">
 				<?php foreach(lang('IMG_FOTTER_NETWORKS_IMG') AS $key => $value): ?>
-				<a href="<?= lang('GEN_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
+				<a href="<?= lang('CONF_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
 					<img src="<?= $this->asset->insertFile($value, 'images/networks'); ?>" alt="<?= $key; ?>">
 				</a>
 				<?php endforeach; ?>
@@ -25,7 +25,7 @@
 				<?= lang('GEN_FOTTER_RIGHTS'); ?><?= ' - '.date("Y") ?>
 				<?php if (lang('CONF_FOTTER_PRIVACY_NOTICE') == 'ON') : ?>
 					<br>
-					<a class="block mb-1 h5 tertiary underline" href="<?= lang('GEN_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
+					<a class="block mb-1 h5 tertiary underline" href="<?= lang('CONF_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
 						<?= lang('GEN_PRIVACY_NOTICE'); ?>
 					</a>
 				<?php endif; ?>

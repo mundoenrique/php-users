@@ -14,6 +14,13 @@ $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
 $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';
 $lang['CONF_FOTTER_PRIVACY_NOTICE'] = 'ON';
+$lang['CONF_FOTTER_NETWORKS_LINK'] = [
+	'facebook' => 'https://www.facebook.com/banorte',
+	'twitter' => 'https://www.twitter.com/Banorte_mx',
+	'youtube' => 'https://www.youtube.com/user/banortemovil',
+	'instagram' => 'https://www.instagram.com/banorte_mx',
+];
+$lang['CONF_PRIVACY_NOTICE_LINK'] = 'https://www.banorte.com/wps/portal/gfb?uri=nm:oid:banorte-te-informa.aviso-de-privacidad';
 //USER IDENTITY
 $lang['CONF_SECRET_KEY'] = 'OFF';
 $lang['CONF_CONTACTS'] = [

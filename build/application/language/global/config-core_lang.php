@@ -175,13 +175,13 @@ $lang['CONF_LINK_DIGITEL'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_REPORTS'] = 'reports';
 $lang['CONF_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['CONF_LINK_NOTIFICATIONS'] = 'notifications';
-$lang['GEN_FOTTER_NETWORKS_LINK'] = [
+$lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => $lang['CONF_NO_LINK'],
 	'twitter' => $lang['CONF_NO_LINK'],
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
 ];
-$lang['GEN_PRIVACY_NOTICE_LINK'] = $lang['CONF_NO_LINK'];
+$lang['CONF_PRIVACY_NOTICE_LINK'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
 $lang['CONF_BTN_LANG'] = 'OFF';
 $lang['CONF_REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
