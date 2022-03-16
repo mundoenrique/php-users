@@ -36,7 +36,7 @@
 
 					</div>
 					<div class="product-scheme">
-						<p class="field-tip"><?= $availableServices !== 0 ? lang('GEN_SERVICES_AVAILABLE') : lang('GEN_NOT_SERVICES_AVAILABLE'); ?></p>
+						<p class="field-tip"><?= lang('GEN_SERVICES_AVAILABLE') ?></p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
 							<?php
 							foreach ($menuOptionsProduct as $row) {

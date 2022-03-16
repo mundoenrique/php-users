@@ -3725,6 +3725,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	}
 }
 
+.product-scheme .field-tip {
+	width: 350px;
+	margin-bottom: 0;
+}
+@media (min-width: 1200px) {
+	.product-scheme .field-tip {
+		width: 448px;
+	}
+}
 .card-image {
   width: 234px;
 }
