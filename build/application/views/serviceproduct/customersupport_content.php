@@ -26,7 +26,7 @@
 						?>
 					</div>
 					<div class="product-info mr-5">
-						<p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
+						<p class="product-cardholder mb-1 semibold h4 primary truncate"><?= $data['nom_plastico']; ?></p>
 						<?php if ($data['bloqueo'] !== '' && $data['bloqueo'] !== 'NE') : ?>
 							<p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
 						<?php endif; ?>
@@ -36,7 +36,7 @@
 
 					</div>
 					<div class="product-scheme">
-						<p class="field-tip"><?= $availableServices !== 0 ? lang('GEN_SERVICES_AVAILABLE') : lang('GEN_NOT_SERVICES_AVAILABLE'); ?></p>
+						<p class="field-tip"><?= lang('GEN_SERVICES_AVAILABLE') ?></p>
 						<ul class='services-content list-inline flex mx-auto justify-between'>
 							<?php
 							foreach ($menuOptionsProduct as $row) {
