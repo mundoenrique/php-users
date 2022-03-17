@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="product-info-full mr-5">
-            <p class="product-cardholder mb-1 semibold h4 primary"><?= $data['nom_plastico']; ?></p>
+            <p class="product-cardholder mb-1 semibold h4 primary truncate"><?= $data['nom_plastico']; ?></p>
             <?php if ($data['bloqueo'] !== '') : ?>
             <p class="mb-1 semibold danger"><?= lang('GEN_TEXT_BLOCK_PRODUCT'); ?></p>
             <?php endif; ?>
