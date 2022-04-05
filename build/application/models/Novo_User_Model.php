@@ -667,7 +667,7 @@ class Novo_User_Model extends NOVO_Model {
 			case -345://MENSAJE TARJETA BLOQUEADA POR PIN ERRONEOS
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_USER_IDENTIFY');
-				$this->response->msg = novoLang(lang('GEN_INCORRECT_DATA'),lang('GEN_LOCK_PRODUCT_WRONG_PIN'));
+				$this->response->msg = novoLang(lang('GEN_LOCK_PRODUCT_WRONG_PIN'),lang('GEN_INVALID_DATA'));
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -446://MENSAJE TARJETA INACTIVA
