@@ -178,6 +178,7 @@ $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Reposición pendiente';
 $lang['GEN_FILE_NOT_FOUND'] = 'El archivo a procesar no existe.';
 $lang['GEN_LOCK_PRODUCT'] = ' La tarjeta se encuentra bloqueada.';
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s Por seguridad la tarjeta ha sido bloqueada, por favor intenta mañana.';
+$lang['GEN_LOCK_CARD_WRONG_PIN'] = 'Bloqueo por pin errado';
 $lang['GEN_EXPIRED_PRODUCT'] = 'La tarjeta se encuentra vencida.';
 $lang['GEN_INACTIVE_PRODUCT'] = 'La tarjeta se encuentra inactiva.';
 $lang['GEN_MISSING_IMAGES'] = 'Para completar tu registro, debes cargar tu INE. ¿Deseas realizar esta acción en este momento?';
