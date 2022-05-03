@@ -207,3 +207,4 @@ $lang['CUST_NOTIFY_OPTIONS'] = [
 ];
 $lang['CUST_UPT_NOTIFICATIONS'] = 'Notificaciones actualizadas de forma exitosa.';
 $lang['CUST_NO_NOTIFI_SETTINGS'] = 'No fue posible obtener la configuración de notificaciones, vuelve a intentarlo.';
+$lang['CUST_LOCK_CARD_WRONG_PIN_EXCESS'] = 'La tarjeta se encuentra bloqueada por exceso de pin errado.';

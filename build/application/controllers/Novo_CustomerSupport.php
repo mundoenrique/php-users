@@ -77,7 +77,22 @@ class Novo_CustomerSupport extends NOVO_Controller {
 				unset($userCardList->data->cardsList, $userCardList->data->serviceList);
 				$userCardList->code = 3;
 				$userCardList->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-				$userCardList->msg = $this->render->status == 'NE' ? lang('CUST_INACTIVE_PRODUCT') : lang('CUST_PERMANENT_LOCK');
+
+				switch ($this->render->status) {
+					case '':
+						$userCardList->msg = '';
+					break;
+					case 'NE':
+						$userCardList->msg = lang('CUST_INACTIVE_PRODUCT');
+					break;
+					case '75':
+						$userCardList->msg = lang('CUST_LOCK_CARD_WRONG_PIN_EXCESS');
+					break;
+					default:
+						$userCardList->msg = lang('CUST_PERMANENT_LOCK');
+					break;
+				}
+
 				$userCardList->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_DETAIL');
 				$this->responseAttr($userCardList);
 			}
