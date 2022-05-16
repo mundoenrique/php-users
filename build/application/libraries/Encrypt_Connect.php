@@ -36,7 +36,8 @@ class Encrypt_Connect
 		if ($model !== 'REMOTE_ADDR') {
 			$data = json_encode($data, JSON_UNESCAPED_UNICODE);
 		}
-		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST ' . $model . ': ' . $data);
+		log_message('DEBUG', 'NOVO [' . $userName . '] IP ' . $this->CI->input->ip_address() . ' REQUEST ' . $model . ': ' .
+			$data);
 		$dataB = base64_encode($data);
 		while ((strlen($dataB) % 8) != 0) {
 			$dataB .= " ";
@@ -146,7 +147,8 @@ class Encrypt_Connect
 			$wsUrl = $_SERVER['WS_URL' . $subFix];
 		}
 
-		log_message('DEBUG', 'NOVO [' . $userName . '] REQUEST BY COUNTRY: ' . $request['pais'] . ', AND WEBSERVICE URL: ' . $wsUrl);
+		log_message('DEBUG', 'NOVO [' . $userName . '] IP ' . $this->CI->input->ip_address() . ' REQUEST BY COUNTRY: ' .
+			$request['pais'] . ', AND WEBSERVICE URL: ' . $wsUrl);
 
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$start = microtime(true);
@@ -282,11 +284,11 @@ class Encrypt_Connect
 		$writeLog = novoLang('%s = rc: %s, msg: %s, customer: %s', [$model, $logMessage->rc, $logMessage->msg, $customer]);
 		$inBean = $logMessage->inBean ?? '';
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] RESPONSE '.$writeLog);
+		log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' RESPONSE ' . $writeLog);
 
 		$writeLog = novoLang('%s %s: %s', [$inBean, $model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
 
-		log_message('DEBUG', 'NOVO ['.$userName.'] COMPLETE RESPONSE'.$writeLog);
+		log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' COMPLETE RESPONSE' .$writeLog);
 
 		unset($logMessage, $writeLog);
 	}
