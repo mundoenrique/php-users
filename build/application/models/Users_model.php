@@ -70,7 +70,7 @@ class Users_model extends CI_Model
 		} else {
 			$desdata->rc = -9999;
 		}
-		$cookie = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+		$cookie = get_cookie('skin', TRUE);
 		$putSession = FALSE;
 		$desdata->validateRedirect = FALSE;
 		if ($desdata->rc === -424) {

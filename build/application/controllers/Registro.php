@@ -29,18 +29,16 @@ class Registro extends CI_Controller {
 				default: $code='default';
 			}
 
-			if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') == false) {
+			if (get_cookie('skin', TRUE) == FALSE) {
 				$this->load->helper('url');
 
-				$cookie = array(
+				$cookie = [
 					'name' => 'skin',
 					'value' => $code,
 					'expire' => 0,
-					'domain' => $this->config->item('cookie_domain'),
-					'path' => $this->config->item('cookie_path'),
-					'prefix' => $this->config->item('cookie_prefix'),
-					'secure' => $this->config->item('cookie_secure')
-				);
+					'httponly' => TRUE
+				];
+
 				$this->input->set_cookie($cookie);
 				redirect(current_url());
 			}
@@ -49,7 +47,7 @@ class Registro extends CI_Controller {
 
 	public function index_pi()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -84,7 +82,7 @@ class Registro extends CI_Controller {
 
 	public function index_pe()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model', 'registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -121,7 +119,7 @@ class Registro extends CI_Controller {
 
 	public function index()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->load->model('registro_model','registro');
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -409,18 +407,16 @@ class Registro extends CI_Controller {
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
 		//INSTANCIA PARA INSERTAR HOJAS DE ESTILOS
-		if ($this->input->cookie($this->config->item('cookie_prefix') . 'skin') === false) {
+		if (get_cookie('skin', TRUE) === false) {
 			$this->load->helper('url');
 
-			$cookie = array(
-				'name'		=> 'skin',
-				'value' 	=> 'default',
-				'expire'	=> 0,
-				'domain'	=> $this->config->item('cookie_domain'),
-				'path'		=> $this->config->item('cookie_path'),
-				'prefix'	=> $this->config->item('cookie_prefix'),
-				'secure'	=> $this->config->item('cookie_secure')
-			);
+			$cookie = [
+				'name' => 'skin',
+				'value' => 'default',
+				'expire' => 0,
+				'httponly' => TRUE
+			];
+
 			$this->input->set_cookie($cookie);
 			redirect(current_url());
 		}

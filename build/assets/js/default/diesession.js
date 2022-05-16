@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');
 	idleTime = 0;
 	//Increment the idle time counter every second.
-	var idleInterval = setInterval(timerIncrement, 180000);
+	setInterval(timerIncrement, 180000);
 	function timerIncrement()
 	{
 		idleTime++;
@@ -38,7 +38,7 @@ $(document).ready(function(){
 		);
 		$.ajax({
 			method: 'POST',
-			url: base_url+'/users/closeSess',
+			url: base_url+'/cerrar-sesion',
 			data: {cpo_name: cpo_cook}
 		});
 	}

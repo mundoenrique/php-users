@@ -3,9 +3,7 @@ var fecha = new Date();
 var base_url, base_cdn;
 base_url = $('body').attr('data-app-url');
 base_cdn = $('body').attr('data-app-cdn');
-var skin = decodeURIComponent(
-	document.cookie.replace(/(?:(?:^|.*;\s*)cpo_skin\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-);
+var skin = $('body').attr('data-app-skin');
 
 $(function(){
 	$('input[type=text], input[type=password], input[type=textarea]').attr('autocomplete','off');

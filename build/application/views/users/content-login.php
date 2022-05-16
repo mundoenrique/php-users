@@ -1,5 +1,5 @@
 <?php
-$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+$skin = get_cookie('skin', TRUE);
 if ($skin == 'latodo') {
 	$recoverUserLink = $this->config->item('base_url') . '/users/obtenerLogin_pe';
 	$recoverPwdLink = $this->config->item('base_url') . '/users/recoveryPassword_pe';

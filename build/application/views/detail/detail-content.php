@@ -2,7 +2,7 @@
 $country = $this->session->userdata('pais');
 $CI =& get_instance();
 $cdnPath = $CI->config->item('asset_path');
-$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+$cookie = get_cookie('skin', TRUE);
 $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
 ?>

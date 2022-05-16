@@ -175,7 +175,7 @@ function np_hoplite_verificLogin()
 
 	if(!($CI->session->userdata('logged_in'))){
 		$append = '';
-		$skin = $CI->input->cookie($CI->config->item('cookie_prefix') . 'skin');
+		$skin = get_cookie('skin', TRUE);
 		if ($skin !== false && $skin !== 'default'){
 			$append = '/' . $skin . '/home';
 		}

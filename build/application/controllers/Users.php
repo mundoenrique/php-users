@@ -10,6 +10,10 @@ class Users extends CI_Controller {
 		$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
 		$this->initCookie();
 		$this->config->set_item('language', 'core-base');
+
+		if (get_cookie('baseCdn', TRUE)) {
+			delete_cookie('baseCdn', $_SERVER['SERVER_NAME'], '/', 'cpo_');
+		}
 	}
 
 	private function initCookie() {
@@ -19,9 +23,11 @@ class Users extends CI_Controller {
 			$requestMod=$this->uri->segment(1); //Modo al cual el usuario desea ingresar (latodo, pichincha, default)
 
 			switch($requestMod){
-				case 'latodo': 	$code='latodo'; break;
+				case 'latodo':
+					$code = 'latodo';
+					break;
 				case 'pichincha':
-					$code='pichincha';
+					$code = 'pichincha';
 					np_hoplite_countryCheck('ec-bp');
 					$this->scoreRecapcha = $this->config->item('scores_recapcha')[ENVIRONMENT]['score'];
 					break;
@@ -46,20 +52,18 @@ class Users extends CI_Controller {
 	}
 
 	private function setCookie($code) {
-		$cookie=$this->input->cookie( $this->config->item('cookie_prefix') . 'skin'); //Valor actual de la cookie
+		$cookie = get_cookie('skin', TRUE); //Valor actual de la cookie
 
 		if( $cookie !== $code || $cookie === false) {
 			$this->load->helper('url');
 
-			$cookie = array(
+			$cookie = [
 				'name' => 'skin',
 				'value' => $code,
 				'expire' => 0,
-				'domain' => $this->config->item('cookie_domain'),
-				'path' => $this->config->item('cookie_path'),
-				'prefix' => $this->config->item('cookie_prefix'),
-				'secure' => $this->config->item('cookie_secure')
-			);
+				'httponly' => TRUE
+			];
+
 			$this->input->set_cookie($cookie);
 			redirect(current_url());
 		}
@@ -69,7 +73,7 @@ class Users extends CI_Controller {
 	{
 		//VALIDA SI EXISTE SESION
 		np_hoplite_verificSession();
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		$this->lang->load('login', $skin);
 		//INSTANCIA PARA TITULO DE PAGINA
@@ -82,19 +86,6 @@ class Users extends CI_Controller {
 			array('url' => 'base-768.css', 'media' => 'screen and (min-width: 768px) and (max-width: 1023px)')
 		);
 
-		$baseCdnCookie = [
-			'name' => 'baseCdn',
-			'value' => $this->config->item('asset_url'),
-			'expire' => 0,
-			'domain' => $this->config->item('cookie_domain'),
-			'path' => $this->config->item('cookie_path'),
-			'prefix' => $this->config->item('cookie_prefix'),
-			'secure' => $this->config->item('cookie_secure')
-		];
-
-
-		$this->input->set_cookie($baseCdnCookie);
-
 		$this->load->library('recaptcha');
 		log_message('DEBUG', 'NOVO RESPONSE: recaptcha: ' . $this->recaptcha->getScriptTag());
 
@@ -105,7 +96,7 @@ class Users extends CI_Controller {
 		//INSTANACIA DEL CONTENIDO PARA EL FOOTER.
 		$FooterCustomInsertJS = array('jquery-3.6.0.min.js', 'jquery-ui-1.12.1.min.js', 'jquery.ui.sliderbutton.js','cypher/aes.min.js','cypher/aes-json-format.min.js', 'novo_helper.js', 'login.js',  'jquery.validate.min.js',  'jquery-md5.js', 'jquery.balloon.min.js', 'jquery.isotope.min.js');
 		//INSTANCIA DEL FOOTER
-		$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+		$cookie = get_cookie('skin', TRUE);
 		if(ENVIRONMENT == 'production' && $cookie == 'pichincha') {
 			array_push(
 				$FooterCustomInsertJS,
@@ -167,7 +158,7 @@ class Users extends CI_Controller {
 
 	public function recoveryPassword()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -224,7 +215,7 @@ class Users extends CI_Controller {
 
 	public function obtenerLogin()
 	{
-		$skin = $this->input->cookie('cpo_skin');
+		$skin = get_cookie('skin', TRUE);
 		validateUrl($skin);
 		//INSTANCIA PARA TITULO DE PAGINA
 		$titlePage = 'Conexión Personas Online';
@@ -372,7 +363,7 @@ class Users extends CI_Controller {
 		);
 		$token = $dataRequest->token;
 		$user = $dataRequest->user;
-		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
+		$cookie = get_cookie('skin', TRUE);
 		$result = TRUE;
 
 		$_POST['token'] = $token;
@@ -434,7 +425,7 @@ class Users extends CI_Controller {
 			$pass = $firstDataRequest->password;
         }
 
-		$cookie = $this->input->cookie( $this->config->item('cookie_prefix') . 'skin');
+		$cookie = get_cookie('skin', TRUE);
 		$result = TRUE;
 
 		$_POST['user'] = $user;
@@ -678,20 +669,23 @@ class Users extends CI_Controller {
 
 	public function closeSess(){
 
-		$valorCookie=$this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+		$valorCookie = get_cookie('skin', TRUE);
 		$this->load->model('users_model','logout');
 		$this->output->set_content_type('application/json')->set_output($this->logout->logout());
-
 		$this->session->unset_userdata($this->session->all_userdata());
 		$this->session->sess_destroy();
+
 		switch($valorCookie){
-			case 'pichincha': redirect($this->config->item('base_url') . '/pichincha/home/'); break;
-			case 'latodo': redirect($this->config->item('base_url') . '/latodo/home/'); break;
-		  default: redirect($this->config->item('base_url')); break;
+			case 'pichincha':
+				redirect($this->config->item('base_url') . '/pichincha/home/');
+				break;
+			case 'latodo':
+				redirect($this->config->item('base_url') . '/latodo/home/');
+				break;
+		  default:
+				redirect($this->config->item('base_url'));
+				break;
 		}
 
 	}
-
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-}		//FIN GENERAL
+}

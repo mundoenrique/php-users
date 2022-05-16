@@ -56,7 +56,7 @@ if ( ! function_exists('insert_css_cdn'))
 
         $url_cdn = $CI->config->item('asset_url');
         $path_cdn = $CI->config->item('asset_path');
-				$skin = $CI->input->cookie('cpo_skin');
+				$skin = get_cookie('skin', TRUE);
 
 				switch ($skin) {
 					case 'default':

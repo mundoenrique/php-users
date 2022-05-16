@@ -1,12 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : 'tebca');
-
 require_once('error_helpers.php');
 
-$favicon_ext = (SKIN !== '') ? 'ico' : 'png';
-$favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 ?>
 <!DOCTYPE html>
 <html>

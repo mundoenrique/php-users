@@ -204,7 +204,7 @@ if (!function_exists('propiedades_menu'))
 				],
 				[
 				'titulo2'=>'Cerrar Sesion',
-				'link2'=>$CI->config->item('base_url').'/users/closeSess'
+				'link2'=>$CI->config->item('base_url').'/cerrar-sesion'
 				]
 			]
 			]

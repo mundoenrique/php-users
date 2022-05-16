@@ -1,12 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('SKIN', isset($_COOKIE['cpo_skin']) && $_COOKIE['cpo_skin'] !== 'default' ? $_COOKIE['cpo_skin'] : 'tebca');
-
 require_once('error_helpers.php');
-
-$favicon_ext = (SKIN !== '') ? 'ico' : 'png';
-$favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +21,7 @@ $favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 	<body>
 		<header id="head">
 			<div id="head-wrapper">
-				<a id="<?= (SKIN !== '') ? 'brand-id' : 'brand-app' ?>" rel="start">
+				<a id="<?= (SKIN === 'pichincha') ? 'brand-id' : 'brand-app' ?>" rel="start">
 				</a>
 			</div>
 		</header>
@@ -37,7 +32,7 @@ $favicon = ASSET_URL . 'img/favicon.' . $favicon_ext;
 				<a class="button" href="#" id="history-back">Regresar</a>
 			</div>
 		</div>
-		<?php if(SKIN != 'pichincha'): ?>
+		<?php if(SKIN !== 'pichincha'): ?>
 		<footer id="foot">
 			<div id="foot-wrapper">
 				<div class="foot-wrapper-top">

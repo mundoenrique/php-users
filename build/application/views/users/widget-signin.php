@@ -1,5 +1,5 @@
 <?php
-	$skin = $this->input->cookie($this->config->item('cookie_prefix') . 'skin');
+	$skin = get_cookie('skin', TRUE);
 	$cpo_name = $this->security->get_csrf_token_name();
 	$cpo_cook = $this->security->get_csrf_hash();
 	if ($skin == 'latodo') {

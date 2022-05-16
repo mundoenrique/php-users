@@ -218,7 +218,7 @@ if($datos->rc==0){
         $datos = null;
         $datos = unserialize($data);
 				$base_cdn = $this->config->item('asset_url');
-				$cookie = $this->input->cookie($this->config->item('cookie_prefix').'skin');
+				$cookie = get_cookie('skin', TRUE);
 
         foreach ($datos->lista as $value) {
 						//Verifica permisos operaciones de Servicios

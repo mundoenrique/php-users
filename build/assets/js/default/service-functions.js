@@ -282,7 +282,7 @@ function notiSystem (title, message, type, action, param) {
                 $(location).attr('href',base_url+'/servicios');
                 break;
             case 'close':
-                $(location).attr('href',base_url+'/users/closeSess');
+                $(location).attr('href',base_url+'/cerrar-sesion');
                 break;
         }
         $('#carry').remove();
