@@ -9,7 +9,7 @@ $lang['IMG_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['IMG_FOTTER_MARK'] = 'img-mark.svg';
 $lang['IMG_PCI'] = 'img-pci_compliance.svg';
 $lang['IMG_SIGNIN_LOGO_WIDGET'] = 'logo-signin.png';
-$lang['IMG_SIGNIN_IMAGE'] = 'logo.svg';
+$lang['IMG_SIGNIN_IMAGE'] = 'img-tebca-signin.jpg';
 //NETWORK IMAGES
 $lang['IMG_FOTTER_NETWORKS_IMG'] = [
 	'facebook' => 'facebook.png',
