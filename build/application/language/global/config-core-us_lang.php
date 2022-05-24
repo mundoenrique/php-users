@@ -6,4 +6,5 @@ $lang['CONF_CONTACTS'] = [
 ];
 //LANGUAGE
 $lang['CONF_BTN_LANG'] = 'ON';
+//IMAGEN SIGNIN
 $lang['CONF_SIGNIN_IMG'] = 'ON';
