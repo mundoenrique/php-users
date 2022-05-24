@@ -21,3 +21,5 @@ $lang['CONF_LANDLINE'] = 'OFF';
 $lang['CONF_OTHER_PHONE'] = 'OFF';
 //NAVBAR STYLES
 $lang['CONF_PADDING_LOGO'] = 'OFF';
+//IMAGEN SIGNIN
+$lang['CONF_SIGNIN_IMG'] = 'ON';
