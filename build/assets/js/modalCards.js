@@ -1,10 +1,10 @@
 'use strict'
 $(function () {
-	$('#donor').on('click', function () {
+	$('#donor').on('click', function (e) {
 		cardModal();
 	});
 
-	$('#productdetail').on('click', '#other-product', function () {
+	$('#productdetail').on('click', '#other-product', function (e) {
 		cardModal();
 	});
 

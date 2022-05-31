@@ -128,7 +128,7 @@ class BDB_Controller extends CI_Controller {
 			$this->includeAssets->jsFiles = [
 				"third_party/html5",
 				"third_party/jquery-3.6.0",
-				"third_party/jquery-ui-1.12.1",
+				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
 				"default/aes-json-format",
 				"$this->countryUri/watchsession",
