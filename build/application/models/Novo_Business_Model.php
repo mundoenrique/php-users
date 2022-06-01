@@ -64,6 +64,12 @@ class Novo_Business_Model extends NOVO_Model {
 							case 'NE':
 								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
 							break;
+							case '41':
+								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_LOSS');
+							break;
+							case '43':
+								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_THEFT');
+							break;
 							case '75':
 								$cardRecord->statusMessage = lang('GEN_LOCK_CARD_WRONG_PIN');
 							break;
@@ -227,6 +233,12 @@ class Novo_Business_Model extends NOVO_Model {
 					break;
 					case 'NE':
 						$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
+					break;
+					case '41':
+						$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_LOSS');
+					break;
+					case '43':
+						$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_THEFT');
 					break;
 					case '75':
 						$cardRecord->statusMessage = lang('GEN_LOCK_CARD_WRONG_PIN');
