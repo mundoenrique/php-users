@@ -130,6 +130,8 @@ class Verify_Access {
 		switch($module) {
 			case 'userCardsList':
 			case 'profileUser':
+			case 'twoFactorEnablement':
+			case 'twoFactorCode':
 			case 'updateProfile':
 				$auth = $this->CI->session->has_userdata('logged');
 				break;

@@ -386,4 +386,52 @@ class Novo_User extends NOVO_Controller {
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
+		/**
+	 * @info Método que renderiza la vista para habilitar autenticación de dos factores
+	 * @author Jennifer C Cadiz G.
+	 * @date Jun 14th, 2022
+	 */
+	public function twoFactorEnablement()
+	{
+		log_message('INFO', 'NOVO User: twoFactorEnablement Method Initialized');
+
+		$view = 'twoFactorEnablement';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"user/validPass",
+			"user/twoFactorEnablement"
+		);
+
+		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
+		/**
+	 * @info Método que renderiza la vista para ingresar código autenticación de dos factores
+	 * @author Jennifer C Cadiz G.
+	 * @date Jun 14th, 2022
+	 */
+	public function twoFactorCode()
+	{
+		log_message('INFO', 'NOVO User: twoFactorCode Method Initialized');
+
+		$view = 'twoFactorCode';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"user/validPass",
+			"user/twoFactorCode"
+		);
+
+		$this->render->activeHeader = TRUE;
+		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+		$this->views = ['user/'.$view];
+		$this->loadView($view);
+	}
 }

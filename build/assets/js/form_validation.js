@@ -29,6 +29,7 @@ function validateForms(form) {
 	var userPassword = validatePass;
 	//var numeric = /^[0-9]+$/;
 	var numeric = new RegExp(lang.CONF_REGEX_NUMERIC);
+	var twoFactor = new RegExp(lang.CONF_REGEX_TWO_FACTOR);
 	var phone = new RegExp(lang.CONF_REGEX_PHONE, 'i');
 	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
@@ -63,6 +64,8 @@ function validateForms(form) {
 			"userPass": { verifyRequired: '#userName', verifyPattern: '#userName' },
 			"otpCode": { required: true, pattern: alphanum },
 			"recoveryAccess": { required: true },
+			"twoFactorEnablement": { required: true },
+			"authenticationCode": { required: true, pattern: twoFactor },
 			"email": { required: true, pattern: emailValid },
 			"idNumber": { required: true, validateDocumentId: true },
 			"currentPass": { required: true },
@@ -169,6 +172,11 @@ function validateForms(form) {
 			"otpCode": lang.VALIDATE_OTP_CODE,
 			"typeDocument": lang.VALIDATE_TYPE_DOCUMENT,
 			"recoveryAccess": lang.VALIDATE_RECOVER_OPTION,
+			"twoFactorEnablement": lang.VALIDATE_RECOVER_OPTION,
+			"authenticationCode": {
+				required: lang.VALIDATE_REQUIRED_TWO_FACTOR,
+				pattern: lang.VALIDATE_TWO_FACTOR_PATT,
+			},
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": {
 				required: lang.VALIDATE_DOCUMENT_ID,
