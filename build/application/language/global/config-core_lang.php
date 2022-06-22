@@ -165,6 +165,7 @@ $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_IDENTIFY'] = 'user-identify';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
+$lang['CONF_LINK_TWO_FACTOR'] = 'two-factor-enablement';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';
 $lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];

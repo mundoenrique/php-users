@@ -14,7 +14,7 @@
 				<?php endif; ?>
 				<?php if(lang('CONF_TWO_FACTOR') == 'ON'): ?>
 				<li>
-					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_USER_PROFILE')) ?>"><?= lang('GEN_MENU_TWO_FACTOR_ENABLEMENT'); ?></a>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_TWO_FACTOR')) ?>"><?= lang('GEN_MENU_TWO_FACTOR_ENABLEMENT'); ?></a>
 				</li>
 				<?php endif; ?>
 				<li>

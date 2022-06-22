@@ -26,7 +26,8 @@
 				</div>
 			</div>
 			<p><?= lang('USER_TWO_FACTOR_SCAN') ?></p>
-			<!-- <p class="pt-2 pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p> -->
+		 	<!-- <p class=" pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p>
+			<p><?= lang('USER_TWO_FACTOR_SEND_CODE') ?> <a class="btn btn-small btn-link big-modal p-0" href="javascript:history.back()"><?= lang('GEN_BTN_SEND_CODE'); ?></a></p> -->
 			<div class="max-width-1 fit-lg mx-auto">
 				<form id="twoFactorEnablementForm" class="mt-2" method="POST">
 					<div class="form-group col-lg-4 pl-0">

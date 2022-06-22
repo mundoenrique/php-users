@@ -396,6 +396,8 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: twoFactorEnablement Method Initialized');
 
 		$view = 'twoFactorEnablement';
+		$this->session->unset_userdata('products');//Llevar al modelo
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
@@ -420,6 +422,11 @@ class Novo_User extends NOVO_Controller {
 		log_message('INFO', 'NOVO User: twoFactorCode Method Initialized');
 
 		$view = 'twoFactorCode';
+		$this->session->unset_userdata('products');//Llevar al modelo
+
+		// if (empty((array)$this->request)) {
+		// redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
+		// }
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
