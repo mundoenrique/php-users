@@ -89,25 +89,14 @@ $(function () {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
-
-		form= $('#downd-send');
-
-		validateForms(form);
-		if (form.valid()) {
-			$(this)
-			.removeClass('sensitive-btn')
-			.html(loader)
-			.prop('disabled',true)
-			.off('click');
-
-			$('#cancel')
-			.prop('disabled',true);
-
-			data = getDataForm(form);
-			data.codeOTP = '';
-			delete data.month;
-			delete data.year;
-			validateCardDetail();
+		if (lang.CONF_TWO_FACTOR == 'ON') {
+			var formTwoFactor = $('#twoFactorCodeForm');
+			validateForms(formTwoFactor);
+			if (formTwoFactor.valid()) {
+				validateFormCard()
+			}
+		} else {
+			validateFormCard()
 		}
 	});
 
@@ -276,7 +265,38 @@ function sensitiveInformation() {
 		posAt: 'top+50px'
 	}
 
-	inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
+	if (lang.CONF_TWO_FACTOR == 'ON') {
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'none'
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: 'destroy'
+			},
+			maxHeight : 600,
+			width : 530,
+			posMy: 'top+60px',
+			posAt: 'top+50px'
+		}
+
+		inputModal = '<form id="twoFactorCodeForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
+			inputModal += 	'<div class="justify pr-1">';
+			inputModal += 		'<div class="justify pr-1">';
+			inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
+			inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", lang.GEN_EMAIL)+ '</p>';
+			inputModal += 		'</div>';
+			inputModal += 		'<div class="form-group col-8 p-0">';
+			inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
+			inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
+			inputModal += 			'<div class="help-block"></div>'
+			inputModal += 		'</div">';
+			inputModal += 	'</div>';
+			inputModal += '</form>';
+	} else {
+		inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
+	}
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
@@ -407,4 +427,26 @@ function stopInterval() {
 	clearInterval(interval);
 	$('#accept').off('click');
 	$("#system-info").dialog("destroy");
+}
+
+function validateFormCard() {
+	form= $('#downd-send');
+
+	validateForms(form);
+	if (form.valid()) {
+		$(this)
+		.removeClass('sensitive-btn')
+		.html(loader)
+		.prop('disabled',true)
+		.off('click');
+
+		$('#cancel')
+		.prop('disabled',true);
+
+		data = getDataForm(form);
+		data.codeOTP = '';
+		delete data.month;
+		delete data.year;
+		validateCardDetail();
+	}
 }

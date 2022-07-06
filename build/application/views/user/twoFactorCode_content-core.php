@@ -29,7 +29,7 @@
 		 	<!-- <p class=" pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p>
 			<p><?= lang('USER_TWO_FACTOR_SEND_CODE') ?> <a class="btn btn-small btn-link big-modal p-0" href="javascript:history.back()"><?= lang('GEN_BTN_SEND_CODE'); ?></a></p> -->
 			<div class="max-width-1 fit-lg mx-auto">
-				<form id="twoFactorEnablementForm" class="mt-2" method="POST">
+				<form id="twoFactorCodeForm" class="mt-2" method="POST">
 					<div class="form-group col-lg-4 pl-0">
 						<label for="authenticationCode"><?= lang('GEN_AUTHENTICATION_CODE'); ?></label>
 						<input id="authenticationCode" name="authenticationCode" class="form-control" type="text" placeholder="<?= lang('GEN_PLACE_HOLDER_AUTH_CODE') ?>" disabled>
@@ -38,7 +38,7 @@
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
 						<a class="btn btn-small btn-link big-modal" href="javascript:history.back()"><?= lang('GEN_BTN_CANCEL'); ?></a>
-						<button id="twoFactorEnablementBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_VERIFY'); ?></button>
+						<button id="twoFactorCodeBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_VERIFY'); ?></button>
 					</div>
 				</form>
 			</div>
