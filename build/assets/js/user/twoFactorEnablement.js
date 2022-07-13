@@ -14,9 +14,14 @@ $(function () {
 
 		if (form.valid()) {
 			data = getDataForm(form);
-
+			data.activationType = $('input:radio[name=twoFactorEnablement]:checked').val();
 			$(this).html(loader);
 			insertFormInput(true);
+
+			who = 'Mfa'; where = 'AutenticationEnable';
+			callNovoCore(who, where, data, function(response) {
+
+			});
 		}
 	});
 

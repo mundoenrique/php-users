@@ -67,6 +67,39 @@ class NOVO_Model extends CI_Model {
 
 		return $this->makeAnswer($responseDecrypt);
 	}
+
+	/**
+	 * @info Método para comunicación con el microservicio
+	 * @author Luis Molina.
+	 * @date MJun 16th, 2022
+	 */
+	public function sendToCoreServices($model)
+	{
+		log_message('INFO', 'NOVO Model: sendToCoreServices Method Initialized');
+
+		$this->accessLog = accessLog($this->dataAccessLog);
+		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
+
+		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod != '') {
+			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
+		}
+
+		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
+		$this->dataRequest->token = $this->token;
+		$this->dataRequest->logAccesoObject = $this->accessLog;
+
+		$encryptData = $this->encrypt_connect->encryptDecryptAES($this->dataRequest,'encrypt', $this->userName, $model);
+		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
+		$response = $this->encrypt_connect->connectCoreServices($request, $this->userName, $model);
+
+		if(isset($response->rc)) {
+			$responseDecrypt = $response;
+		} else {
+			$responseDecrypt = $this->encrypt_connect->encryptDecryptAES($response->data,'decrypt', $this->userName, $model);
+		}
+		return $this->makeAnswer($responseDecrypt);
+	}
+
 	/**
 	 * @info Método para comunicación con el servicio
 	 * @author J. Enrique Peñaloza Piñero.

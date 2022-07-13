@@ -221,13 +221,18 @@ $config = [
 		[
 			'field' => 'twoFactorEmail',
 			'rules' => 'trim|regex_match[/email/]'
-		],
-
+		]
 	],
 	'twoFactorCode' => [
 		[
 			'field' => 'authenticationCode',
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
+		],
+	],
+	'autenticationEnable' => [
+		[
+			'field' => 'activationType',
+			'rules' => 'trim'
 		],
 	],
 	'accessRecoverOTP' => [

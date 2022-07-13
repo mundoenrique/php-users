@@ -250,6 +250,64 @@ class Encrypt_Connect
 
 		return $respUpload;
 	}
+
+	/**
+	 * @info método para realizar conexión a los microservicios
+	 * @author Luis Molina
+	 * @date Jun 14th, 2022
+	 */
+	public function connectCoreServices($request, $userName, $model)
+	{
+		log_message('INFO', 'NOVO Encrypt_Connect: connectCoreServices Method Initialized');
+
+		$responseData = new stdClass;
+		$responseData->rc = 0;
+		$fail = FALSE;
+
+		log_message('DEBUG', 'NOVO [' . $userName . '] IP ' . $this->CI->input->ip_address() . ' REQUEST BY COUNTRY: ' .
+			$request['pais'] . ', AND CORE SERVICES URL: ' . $request->url);
+
+		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
+		$start = microtime(true);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $request->url);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 58);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestSerV);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: text/plain',
+			'Content-Length: ' . strlen($requestSerV)
+		));
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$CurlError = curl_error($ch);
+		$CurlErrorNo = curl_errno($ch);
+
+		curl_close($ch);
+		$final = microtime(true);
+		$executionTime = round($final - $start, 2, PHP_ROUND_HALF_UP) ;
+
+		log_message('DEBUG','NOVO ['.$userName.'] RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $httpCode.'  CURL ERROR No: ' . $CurlErrorNo);
+
+		if ($CurlErrorNo != 0) {
+			$fail = TRUE;
+			$responseData->rc = -105;
+		}
+
+		if ($fail) {
+			$this->logMessage = $responseData;
+			$this->logMessage->userName = $userName;
+			$this->logMessage->model = $model;
+			$this->logMessage->pais = $request['pais'];
+			$this->logMessage->url = $request->url;
+			$this->writeLog($this->logMessage);
+		}
+
+		return $responseData;
+	}
+
 	/**
 	 * @info encripta/desencripta en base AES-256
 	 * @author Pedro Torres
@@ -269,10 +327,46 @@ class Encrypt_Connect
 
 		return $output;
 	}
+
+	/**
+	 * @info encripta/desencripta en base AES-256 petición a microservicios
+	 * @author Luis Molina
+	 * @date Jun, 13th 2022
+	 */
+	public function encryptDecryptAES($data, $encrip, $userName, $model)
+	{
+		log_message('INFO', 'NOVO Encrypt_Connect: encryptDecryptAES Method Initialized');
+
+			$result = FALSE;
+			$encrypt_method = "AES-256-CBC";
+			$secret_key = 'WS-SERVICE-KEY';
+			$secret_iv = 'WS-SERVICE-VALUE';
+			$dataDebut = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+		log_message('DEBUG', 'NOVO [' . $userName . '] IP ' . $this->CI->input->ip_address() . ' REQUEST ' . $model . ': ' .
+			$dataDebut);
+
+			$key = base64_decode($secret_key);
+			$iv = base64_decode($secret_iv);
+
+			switch ($encrip) {
+				case 'encrypt':
+					$result = openssl_encrypt($data, $encrypt_method, $key, 0, $iv);
+				break;
+				case 'decrypt':
+					$result = openssl_decrypt($data, $encrypt_method, $key, 0, $iv);
+				break;
+			}
+
+			return $result;
+	}
+
 	/**
 	 * @info Método para escribir el log de la respuesta del servicio
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date October 25th, 2019
+	 * @Modified Luis Molina.
+	 * @date Jun 15th, 2022
 	 */
 	private function writeLog($logMessage)
 	{
@@ -289,6 +383,10 @@ class Encrypt_Connect
 		$writeLog = novoLang('%s %s: %s', [$inBean, $model, json_encode($logMessage, JSON_UNESCAPED_UNICODE)]);
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' COMPLETE RESPONSE' .$writeLog);
+
+		if (isset($logMessage->url)) {
+			log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' URL MICROSERVICES RESPONSE ' .$logMessage->url);
+		}
 
 		unset($logMessage, $writeLog);
 	}
