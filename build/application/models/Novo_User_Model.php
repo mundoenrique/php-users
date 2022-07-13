@@ -143,7 +143,9 @@ class Novo_User_Model extends NOVO_Model {
 						'enterpriseCod' => $response->acCodCia ?? '',
 						'clientAgent' => $this->agent->agent_string(),
 						'missingImages' => $statusImgValida,
-						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? ''
+						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
+						'optActive' => true, //True || false
+						// 'otpChannel' => 'email || thirdApp'
 					];
 					$this->session->set_userdata($userData);
 

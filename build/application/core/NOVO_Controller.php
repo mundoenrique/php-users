@@ -131,11 +131,12 @@ class NOVO_Controller extends CI_Controller {
 				) : json_decode(utf8_encode($this->input->get_post('request')));
 			} else {
 				if ($this->session->has_userdata('logged')) {
-					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
+					$urlTwoFactor = $this->session->optActive == true ? 'two-factor-enablement' : lang('CONF_LINK_USER_PROFILE');
+					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0' || $this->session->optActive == true;
 					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
-						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'Location', 301);
+						redirect(base_url($urlTwoFactor), 'Location', 301);
 					}
 				}
 
