@@ -7,27 +7,35 @@
 		<h1 class="h3 text regular inline"><?= lang('GEN_MENU_TWO_FACTOR_ENABLEMENT'); ?></h1>
 		<div class="line mt-2 mb-3"></div>
 		<div class="pt-3 regular">
-			<p><?= lang('USER_TWO_FACTOR_CODE_APP'); ?>
-				<?php foreach (lang('CONF_TWO_FACTOR_LINK') as $key => $value) : ?>
-					<a href="<?= lang('CONF_TWO_FACTOR_LINK')[$key]; ?>" class="btn-link " target="_blank">
-						<?= $key; ?>,
-					</a>
-				<?php endforeach; ?>
-				etc.
-			</p>
-			<p><?= lang('USER_TWO_FACTOR_IMG') ?></p>
-			<div class="row pb-2">
-				<div class="col-auto">
-					<img src="http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=prueba&qzone=1&margin=0&size=400x400&ecc=L" alt="code-qr" width="200" height="200">
+			<?php if($activationType): ?>
+				<div>
+					<p><?= lang('USER_TWO_FACTOR_CODE_APP'); ?>
+					<?php foreach (lang('CONF_TWO_FACTOR_LINK') as $key => $value) : ?>
+						<a href="<?= lang('CONF_TWO_FACTOR_LINK')[$key]; ?>" class="btn-link " target="_blank">
+							<?= $key; ?>,
+						</a>
+					<?php endforeach; ?>
+					etc.
+					</p>
+					<p><?= lang('USER_TWO_FACTOR_IMG') ?></p>
+					<div class="row pb-2">
+						<div class="col-auto">
+							<img src="http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=prueba&qzone=1&margin=0&size=400x400&ecc=L" alt="code-qr" width="200" height="200">
+						</div>
+						<div class="col-auto flex justify-center flex-column">
+							<p><?= lang('USER_TWO_FACTOR_QR_TEXT') ?></p>
+							<p class="bold">4C7S 7L21 K9PH ERCSZ C3BL OGKA SPER SKY7</p>
+						</div>
+					</div>
+					<p><?= lang('USER_TWO_FACTOR_SCAN') ?></p>
 				</div>
-				<div class="col-auto flex justify-center flex-column">
-					<p><?= lang('USER_TWO_FACTOR_QR_TEXT') ?></p>
-					<p class="bold">4C7S 7L21 K9PH ERCSZ C3BL OGKA SPER SKY7</p>
+				<?php else: ?>
+				<div>
+					<p class=" pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p>
+					<p><?= lang('USER_TWO_FACTOR_SEND_CODE') ?> <a class="btn btn-small btn-link big-modal p-0" href="javascript:history.back()"><?= lang('GEN_BTN_SEND_CODE'); ?></a></p>
 				</div>
-			</div>
-			<p><?= lang('USER_TWO_FACTOR_SCAN') ?></p>
-		 	<!-- <p class=" pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p>
-			<p><?= lang('USER_TWO_FACTOR_SEND_CODE') ?> <a class="btn btn-small btn-link big-modal p-0" href="javascript:history.back()"><?= lang('GEN_BTN_SEND_CODE'); ?></a></p> -->
+			<?php endif; ?>
+
 			<div class="max-width-1 fit-lg mx-auto">
 				<form id="twoFactorCodeForm" class="mt-2" method="POST">
 					<div class="form-group col-lg-4 pl-0">

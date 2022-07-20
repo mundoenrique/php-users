@@ -22,9 +22,10 @@ $(function () {
 
 			who = 'Mfa'; where = 'GenerateSecretToken';
 			callNovoCore(who, where, data, function(response) {
-				/*if (response.code == 0) {
-					$(location).attr('href', response.data);
-				}*/
+				if (response.code == 0) {
+					var url = "two-factor-code/"+response.data.activationType;
+					$(location).attr('href', url);
+				}
 			});
 		}
 	});

@@ -235,6 +235,12 @@ $config = [
 			'rules' => 'trim'
 		],
 	],
+	'validateOTPMfa' => [
+		[
+			'field' => 'authenticationCode',
+			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
+		],
+	],
 	'accessRecoverOTP' => [
 		[
 			'field' => 'email',

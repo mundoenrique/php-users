@@ -96,40 +96,35 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date Jul 07th, 2022
 	 */
-	public function callWs_ValidateOTP_Mfa($dataRequest)
+	public function callWs_ValidateOTPMfa_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP Method Initialized');
-
-		$this->dataAccessLog->modulo = 'modulo';
-		$this->dataAccessLog->function = 'function';
-		$this->dataAccessLog->operation = 'operation';
-
-		$this->dataRequest->idOperation = 'idOperation';
-		$this->dataRequest->className = 'className';
-		$this->dataRequest->userName = 'userName';
+		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTPMfa Method Initialized');
 
 		$requestBody = [
 				'username' => 'string',
-				'otpValue' => 'string',
+				'otpValue' => $dataRequest->authenticationCode,
 				'operationType' => 'ActivateSecretToken'
 		];
 
-		$this->dataRequest->requestBody = json_encode($requestBody);
+		$this->dataRequest->requestBody = $requestBody;
+		log_message('INFO', '****NOVO Mfa Model REQUEST*****'.json_encode($this->dataRequest->requestBody));
 
-		log_message('INFO', '****NOVO Mfa Model dataRequest*****'.$this->dataRequest);
+		$response = json_decode('{ "code": "string", "message": "string", "datetime": "string","data": {"validationResult": true }}');
 
-		//$response = $this->sendToCoreServices('callWs_ValidateOTP');
+		$this->isResponseRc = 0;
+    log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
+    switch ($this->isResponseRc) {
+      case 0:
+        $this->response->code = 0;
+				$this->response->title = 'Prueba';
+        $this->response->icon = lang('CONF_ICON_INFO');
+        $this->response->msg = 'Validación exitosa';
+        $this->response->modalBtn['btn1']['link'] = 'card-list';
+      break;
+    }
 
-		$response = '{
-			"code": "string",
-			"message": "string",
-			"datetime": "string",
-			"data": {
-				"validationResult": true
-			}
-		}';
+    $this->response->data = $response->data;
 
-		//return $this->responseToTheView('callWs_ValidateOTP');
-		return $response;
+		return $this->responseToTheView('callWs_ValidateOTP');
 	}
 }

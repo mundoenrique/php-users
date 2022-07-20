@@ -417,7 +417,7 @@ class Novo_User extends NOVO_Controller {
 	 * @author Jennifer C Cadiz G.
 	 * @date Jun 14th, 2022
 	 */
-	public function twoFactorCode()
+	public function twoFactorCode($value)
 	{
 		log_message('INFO', 'NOVO User: twoFactorCode Method Initialized');
 
@@ -436,6 +436,11 @@ class Novo_User extends NOVO_Controller {
 			"user/twoFactorCode"
 		);
 
+		if ($value=='App') {
+			$this->render->activationType = TRUE;
+		} else {
+			$this->render->activationType = FALSE;
+		}
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 		$this->views = ['user/'.$view];

@@ -12,25 +12,39 @@ $(function () {
 
 		if (form.valid()) {
 			data = getDataForm(form);
-
 			$(this).html(loader);
 			insertFormInput(true);
+
+			who = 'Mfa'; where = 'ValidateOTPMfa';
+			callNovoCore(who, where, data, function(response) {
+				switch (response.code) {
+					case 0:
+						response.modalBtn.minWidth = 480;
+						response.modalBtn.maxHeight = 'none';
+						response.modalBtn.posAt = 'center top';
+						response.modalBtn.posMy = 'center top+160';
+						inputModal = response.msg
+						appMessages(response.title, inputModal, response.icon, response.modalBtn);
+					break;
+
+				}
+			});
 		}
 	});
 
-	$('#system-info').on('click', '.send-otp', function(e) {
-		e.preventDefault();
-		form = $('#otpModal');
-		validateForms(form);
+	// $('#twoFactorCodeBtn').on('click', function(e) {
+	// 	e.preventDefault();
+	// 	form = $('#otpModal');
+	// 	validateForms(form);
 
-		if (form.valid()) {
-			$('#accept').removeClass('send-otp');
-			data = getDataForm(form);
-			data.email = $('#email').val();
-			$('#accept')
-				.html(loader)
-				.prop('disabled', true);
-			insertFormInput(true);
-		}
-	});
+	// 	if (form.valid()) {
+	// 		data = getDataForm(form);
+	// 		$(this).html(loader);
+	// 		insertFormInput(true);
+
+	// 		who = 'Mfa'; where = 'ValidateOTPMfa';
+	// 		callNovoCore(who, where, data, function(response) {
+	// 		});
+	// 	}
+	// });
 });
