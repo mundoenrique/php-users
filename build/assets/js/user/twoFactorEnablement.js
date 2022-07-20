@@ -15,12 +15,16 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.activationType = $('input:radio[name=twoFactorEnablement]:checked').val();
+			delete data.twoFactorApp;
+			delete data.twoFactorEmail;
 			$(this).html(loader);
 			insertFormInput(true);
 
-			who = 'Mfa'; where = 'AutenticationEnable';
+			who = 'Mfa'; where = 'GenerateSecretToken';
 			callNovoCore(who, where, data, function(response) {
-
+				/*if (response.code == 0) {
+					$(location).attr('href', response.data);
+				}*/
 			});
 		}
 	});

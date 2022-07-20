@@ -133,7 +133,7 @@ class Verify_Access {
 			case 'twoFactorEnablement':
 			case 'twoFactorCode':
 			case 'updateProfile':
-			case 'autenticationEnable':
+			case 'generateSecretToken':
 				$auth = $this->CI->session->has_userdata('logged');
 				break;
 			case 'keepSession':

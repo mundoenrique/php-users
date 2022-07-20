@@ -14,11 +14,11 @@
 					<div class="form-group">
 						<label class="mr-2"><?= lang('USER_ACTIVATION_TYPE') ?></label>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input id="twoFactorApp" name="twoFactorEnablement" class="custom-control-input" type="radio" value="app" disabled>
+							<input id="twoFactorApp" name="twoFactorEnablement" class="custom-control-input" type="radio" value="App" disabled>
 							<label class="custom-control-label" for="twoFactorApp"><?= lang('USER_USING_AN_APP'); ?></label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input id="twoFactorEmail" name="twoFactorEnablement" class="custom-control-input" type="radio" value="email" disabled>
+							<input id="twoFactorEmail" name="twoFactorEnablement" class="custom-control-input" type="radio" value="Email" disabled>
 							<label class="custom-control-label" for="twoFactorEmail"><?= lang('USER_VIA_EMAIL'); ?></label>
 						</div>
 						<div class="help-block"></div>

@@ -229,7 +229,7 @@ $config = [
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
 		],
 	],
-	'autenticationEnable' => [
+	'generateSecretToken' => [
 		[
 			'field' => 'activationType',
 			'rules' => 'trim'
