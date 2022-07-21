@@ -116,10 +116,11 @@ class Novo_Mfa_Model extends NOVO_Model {
     switch ($this->isResponseRc) {
       case 0:
         $this->response->code = 0;
-				$this->response->title = 'Prueba';
+				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
         $this->response->icon = lang('CONF_ICON_INFO');
         $this->response->msg = 'Validación exitosa';
         $this->response->modalBtn['btn1']['link'] = 'card-list';
+				$this->response->modalBtn['btn1']['action'] = 'redirect';
       break;
     }
 

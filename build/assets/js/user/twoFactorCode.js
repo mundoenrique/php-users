@@ -19,10 +19,6 @@ $(function () {
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
-						response.modalBtn.minWidth = 480;
-						response.modalBtn.maxHeight = 'none';
-						response.modalBtn.posAt = 'center top';
-						response.modalBtn.posMy = 'center top+160';
 						inputModal = response.msg
 						appMessages(response.title, inputModal, response.icon, response.modalBtn);
 					break;
