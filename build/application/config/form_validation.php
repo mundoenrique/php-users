@@ -235,7 +235,7 @@ $config = [
 			'rules' => 'trim'
 		],
 	],
-	'validateOTPMfa' => [
+	'validateOTP2fa' => [
 		[
 			'field' => 'authenticationCode',
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'

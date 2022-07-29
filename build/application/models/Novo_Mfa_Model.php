@@ -18,21 +18,15 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_GenerateSecretToken_Mfa($dataRequest)
+	public function callWs_GenerateSecretToken_Mfa($activationType)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		/*$this->dataAccessLog->modulo = 'modulo';
-		$this->dataAccessLog->function = 'function';
-		$this->dataAccessLog->operation = 'operation';
-
-		$this->dataRequest->idOperation = 'idOperation';
-		$this->dataRequest->className = 'className';
-		$this->dataRequest->userName = 'userName';*/
+		$authenticationChannel = $activationType == 'app' ? 'thirdPartyApp' : 'Email';
 
 		$requestBody = [
-			'authenticationChannel' => $dataRequest->activationType,
-			'username' => 'string'
+			'authenticationChannel' => $authenticationChannel,
+			'username' => $this->session->userName
 		];
 
 		$this->dataRequest->requestBody = $requestBody;
@@ -41,10 +35,9 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		//$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
 
-		$response = json_decode('{"code": "string","message": "string","datetime": "string","data": {"qrCode": "string","secretToken": "string"}}');
-		$this->isResponseRc = 0;
+		$response = json_decode('{"code":"OK","message":"Secret token generated successfully","datetime":"2012-10-01T09:45:00.000+02:00","data":{"qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB9ElEQVR4Xu2WUWrEMAxEDb6WQFc3+FqCdJ6cLG1h/yRoYU1IvHoBW6ORs+N6N8bvwGt8yJ8na4y5r73mmuF7jUmggWyumFzLfGtkrJ6syfKu7GLovgl0EQ8zV6rDhneSYTaGkau1kbwuSuiaZLiDpEO+j5/eKSMM3DGygEbxGOWEBHfuYxkw/FG0lqidLpxBR6lqNgVPprXk2nH8foWxdEjfW4NSgt2HI+gObpo93qklWjJUMLLVMJek3kIcGtKTLqOZn5OvlJAeZ97Rk5/k2kAmDlF+gUFcG9JrDUSDKbqeT4bp0UAWStJREpXYxpENhGY6N9bXZSRaT2QKk//01Ft4cjKrJxRMMRnej6BCR9FaIgVdZaN/+QqqufKoKCdScObxoM2wCdVwnB0UkxNMd8gtFO7lxFqSEp6NzNv8HUQryu5yoCeQsGypnrAw1cMpajE9YjYQOUMySk9S3nli+NlBMTk/0hhH2WyBcsJ6Gz0v9qHyyY9nB7VEmdJNt6romdYsJ0KYkPItT/vH3Vm1JPijwPpDLyy+6s9JUUsYG3cIaWlFVb8GcgddoUi3K2lvIBtN8V7gj0z86axasrKXsp/0vaB4t6L1hNOIP3Xkuci5i0xunp5XX/WQC1ds3K4cNc9uricETlB3bWIiawN5Mz7kv5Ivy8YtbNFioaEAAAAASUVORK5CYII=","secretToken":"ZSWAEMX5P3TO47ZT"}}');
 
-		log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
+		$this->isResponseRc = 0;
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -53,7 +46,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 		}
 
 		$this->response->data = $response->data;
-		$this->response->data->activationType = $dataRequest->activationType;
+		$this->response->data->activationType = $authenticationChannel;
 
 		return $this->responseToTheView('callWs_GenerateSecretToken');
 	}
@@ -67,16 +60,8 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
 
-		$this->dataAccessLog->modulo = 'modulo';
-		$this->dataAccessLog->function = 'function';
-		$this->dataAccessLog->operation = 'operation';
-
-		$this->dataRequest->idOperation = 'idOperation';
-		$this->dataRequest->className = 'className';
-		$this->dataRequest->userName = 'userName';
-
 		$requestBody = [
-			'username' => 'string'
+			'username' => $this->session->userName
 		];
 
 		$this->dataRequest->requestBody = json_encode($requestBody);
@@ -96,12 +81,12 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date Jul 07th, 2022
 	 */
-	public function callWs_ValidateOTPMfa_Mfa($dataRequest)
+	public function callWs_ValidateOTP2fa_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTPMfa Method Initialized');
+		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
 
 		$requestBody = [
-				'username' => 'string',
+				'username' => $this->session->userName,
 				'otpValue' => $dataRequest->authenticationCode,
 				'operationType' => 'ActivateSecretToken'
 		];

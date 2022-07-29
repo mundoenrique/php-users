@@ -427,6 +427,7 @@ class Novo_User extends NOVO_Controller {
 		// if (empty((array)$this->request)) {
 		// redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
 		// }
+
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
@@ -436,11 +437,18 @@ class Novo_User extends NOVO_Controller {
 			"user/twoFactorCode"
 		);
 
-		if ($value=='App') {
+		$this->load->model('Novo_Mfa_Model', 'mfa');
+		$result = $this->mfa->callWs_GenerateSecretToken_Mfa($value);
+		$this->responseAttr($result);
+		$this->render->qrCode = $result->data->qrCode;
+		$this->render->secretToken = $result->data->secretToken;
+
+		if ($value=='app') {
 			$this->render->activationType = TRUE;
 		} else {
 			$this->render->activationType = FALSE;
 		}
+
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 		$this->views = ['user/'.$view];

@@ -144,8 +144,8 @@ class Novo_User_Model extends NOVO_Model {
 						'clientAgent' => $this->agent->agent_string(),
 						'missingImages' => $statusImgValida,
 						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
-						'optActive' => false, //True || false
-						// 'otpChannel' => 'email || thirdApp'
+						'optActive' => false,
+						//'otpChannel' => 'email || thirdApp'
 					];
 					$this->session->set_userdata($userData);
 

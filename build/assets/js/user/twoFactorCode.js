@@ -15,7 +15,7 @@ $(function () {
 			$(this).html(loader);
 			insertFormInput(true);
 
-			who = 'Mfa'; where = 'ValidateOTPMfa';
+			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
@@ -27,20 +27,4 @@ $(function () {
 			});
 		}
 	});
-
-	// $('#twoFactorCodeBtn').on('click', function(e) {
-	// 	e.preventDefault();
-	// 	form = $('#otpModal');
-	// 	validateForms(form);
-
-	// 	if (form.valid()) {
-	// 		data = getDataForm(form);
-	// 		$(this).html(loader);
-	// 		insertFormInput(true);
-
-	// 		who = 'Mfa'; where = 'ValidateOTPMfa';
-	// 		callNovoCore(who, where, data, function(response) {
-	// 		});
-	// 	}
-	// });
 });

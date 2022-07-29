@@ -19,14 +19,8 @@ $(function () {
 			delete data.twoFactorEmail;
 			$(this).html(loader);
 			insertFormInput(true);
-
-			who = 'Mfa'; where = 'GenerateSecretToken';
-			callNovoCore(who, where, data, function(response) {
-				if (response.code == 0) {
-					var url = "two-factor-code/"+response.data.activationType;
-					$(location).attr('href', url);
-				}
-			});
+			var url = "two-factor-code/" + data.activationType;
+			$(location).attr('href', url);
 		}
 	});
 
