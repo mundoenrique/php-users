@@ -436,18 +436,7 @@ class Novo_User extends NOVO_Controller {
 			"user/validPass",
 			"user/twoFactorCode"
 		);
-
-		$this->load->model('Novo_Mfa_Model', 'mfa');
-		$result = $this->mfa->callWs_GenerateSecretToken_Mfa($value);
-		$this->responseAttr($result);
-		$this->render->qrCode = $result->data->qrCode;
-		$this->render->secretToken = $result->data->secretToken;
-
-		if ($value=='app') {
-			$this->render->activationType = TRUE;
-		} else {
-			$this->render->activationType = FALSE;
-		}
+		$this->render->channel = $value;
 
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');

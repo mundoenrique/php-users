@@ -213,3 +213,6 @@ $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s para ver tu código de autenticación y verificar tu identidad.';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Aplicación de autenticación de dos factores en tu dispositivo';
+$lang['GEN_EMAIL'] = 'email';
+$lang['GEN_APP'] = 'app';
+

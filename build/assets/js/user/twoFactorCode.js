@@ -1,5 +1,6 @@
 'use strict'
 $(function () {
+	getSecretToken();
 	insertFormInput(false);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -27,4 +28,19 @@ $(function () {
 			});
 		}
 	});
+
+	$('#resendCode').on('click', function(e) {
+		getSecretToken()
+	});
 });
+
+function getSecretToken() {
+	var data = new Object();
+	data.channel = $('#channel').val()
+	who = 'Mfa'; where = 'GenerateSecretToken';
+	callNovoCore(who, where, data, function(response) {
+		var imgCode=$(`<img src="data:image/png;base64,${response.data.qrCode}" >`);
+		$('#secretToken').append(response.data.secretToken);
+		$('#qrCodeImg').html(imgCode);
+	});
+}

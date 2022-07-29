@@ -212,3 +212,5 @@ $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s For security the card has been blocked, please try tomorrow.';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication code and verify your identity.';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Two-factor authentication app on your device';
+$lang['GEN_EMAIL'] = 'email';
+$lang['GEN_APP'] = 'app';
