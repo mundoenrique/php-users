@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	getSecretToken();
+	getSecretToken('send');
 	insertFormInput(false);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -23,24 +23,32 @@ $(function () {
 						inputModal = response.msg
 						appMessages(response.title, inputModal, response.icon, response.modalBtn);
 					break;
-
 				}
 			});
 		}
 	});
 
 	$('#resendCode').on('click', function(e) {
-		getSecretToken()
+		getSecretToken('resend')
 	});
 });
 
-function getSecretToken() {
+function getSecretToken(method) {
 	var data = new Object();
+	data.method = method;
 	data.channel = $('#channel').val()
 	who = 'Mfa'; where = 'GenerateSecretToken';
 	callNovoCore(who, where, data, function(response) {
-		var imgCode=$(`<img src="data:image/png;base64,${response.data.qrCode}" >`);
-		$('#secretToken').append(response.data.secretToken);
-		$('#qrCodeImg').html(imgCode);
+		switch (response.code) {
+			case 0:
+				var imgCode=$(`<img src="data:image/png;base64,${response.data.qrCode}" >`);
+				$('#secretToken').append(response.data.secretToken);
+				$('#qrCodeImg').html(imgCode);
+				break;
+			case 2:
+				inputModal = response.msg
+				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+			break;
+		}
 	});
 }

@@ -23,6 +23,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
 		$authenticationChannel = $dataRequest->channel == LANG('GEN_APP') ? 'thirdPartyApp' : 'Email';
+		$method = $dataRequest->method;
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -37,10 +38,10 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		switch ($dataRequest->channel) {
 			case 'app':
-				$response = json_decode('{"code":"OK","message":"Secret token generated successfully","datetime":"2012-10-01T09:45:00.000+02:00","data":{"qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB9ElEQVR4Xu2WUWrEMAxEDb6WQFc3+FqCdJ6cLG1h/yRoYU1IvHoBW6ORs+N6N8bvwGt8yJ8na4y5r73mmuF7jUmggWyumFzLfGtkrJ6syfKu7GLovgl0EQ8zV6rDhneSYTaGkau1kbwuSuiaZLiDpEO+j5/eKSMM3DGygEbxGOWEBHfuYxkw/FG0lqidLpxBR6lqNgVPprXk2nH8foWxdEjfW4NSgt2HI+gObpo93qklWjJUMLLVMJek3kIcGtKTLqOZn5OvlJAeZ97Rk5/k2kAmDlF+gUFcG9JrDUSDKbqeT4bp0UAWStJREpXYxpENhGY6N9bXZSRaT2QKk//01Ft4cjKrJxRMMRnej6BCR9FaIgVdZaN/+QqqufKoKCdScObxoM2wCdVwnB0UkxNMd8gtFO7lxFqSEp6NzNv8HUQryu5yoCeQsGypnrAw1cMpajE9YjYQOUMySk9S3nli+NlBMTk/0hhH2WyBcsJ6Gz0v9qHyyY9nB7VEmdJNt6romdYsJ0KYkPItT/vH3Vm1JPijwPpDLyy+6s9JUUsYG3cIaWlFVb8GcgddoUi3K2lvIBtN8V7gj0z86axasrKXsp/0vaB4t6L1hNOIP3Xkuci5i0xunp5XX/WQC1ds3K4cNc9uricETlB3bWIiawN5Mz7kv5Ivy8YtbNFioaEAAAAASUVORK5CYII=","secretToken":"ZSWAEMX5P3TO47ZT"}}');
+				$response = json_decode('{"code":"0","message":"Secret token generated successfully","datetime":"2012-10-01T09:45:00.000+02:00","data":{"qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB9ElEQVR4Xu2WUWrEMAxEDb6WQFc3+FqCdJ6cLG1h/yRoYU1IvHoBW6ORs+N6N8bvwGt8yJ8na4y5r73mmuF7jUmggWyumFzLfGtkrJ6syfKu7GLovgl0EQ8zV6rDhneSYTaGkau1kbwuSuiaZLiDpEO+j5/eKSMM3DGygEbxGOWEBHfuYxkw/FG0lqidLpxBR6lqNgVPprXk2nH8foWxdEjfW4NSgt2HI+gObpo93qklWjJUMLLVMJek3kIcGtKTLqOZn5OvlJAeZ97Rk5/k2kAmDlF+gUFcG9JrDUSDKbqeT4bp0UAWStJREpXYxpENhGY6N9bXZSRaT2QKk//01Ft4cjKrJxRMMRnej6BCR9FaIgVdZaN/+QqqufKoKCdScObxoM2wCdVwnB0UkxNMd8gtFO7lxFqSEp6NzNv8HUQryu5yoCeQsGypnrAw1cMpajE9YjYQOUMySk9S3nli+NlBMTk/0hhH2WyBcsJ6Gz0v9qHyyY9nB7VEmdJNt6romdYsJ0KYkPItT/vH3Vm1JPijwPpDLyy+6s9JUUsYG3cIaWlFVb8GcgddoUi3K2lvIBtN8V7gj0z86axasrKXsp/0vaB4t6L1hNOIP3Xkuci5i0xunp5XX/WQC1ds3K4cNc9uricETlB3bWIiawN5Mz7kv5Ivy8YtbNFioaEAAAAASUVORK5CYII=","secretToken":"ZSWAEMX5P3TO47ZT"}}');
 			break;
 			default:
-				$response = json_decode('{"code":"OK","message":"-----------Email-------------","datetime":"2012-10-01T09:45:00.000+02:00","data":""}');
+				$response = json_decode('{"code":"0","message":"-----------Email-------------","datetime":"2012-10-01T09:45:00.000+02:00","data":""}');
 			break;
 		}
 
@@ -48,7 +49,16 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->code = 0;
+				if ($method == 'send') {
+					$this->response->code = 0;
+				} else {
+					$this->response->code = 2;
+					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->msg = 'Se ha reenviado el código OTP';
+					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				}
 			break;
 		}
 
