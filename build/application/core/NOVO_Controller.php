@@ -206,7 +206,8 @@ class NOVO_Controller extends CI_Controller {
 			if ($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 				array_push(
 					$this->includeAssets->jsFiles,
-					"sessionControl"
+					"sessionControl",
+					"twoFactorControl"
 				);
 			}
 

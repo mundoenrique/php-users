@@ -63,6 +63,7 @@ $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
 $lang['GEN_MENU_SIGNOUT'] = 'Cerrar sesión';
 $lang['GEN_MENU_TWO_FACTOR_ENABLEMENT'] = 'Autenticación de dos factores';
+$lang['GEN_MENU_TWO_FACTOR_DISABLE'] = 'Deshabilitar dos factores';
 $lang['GEN_BTN_SIGNIN'] = 'Ingresar';
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -215,4 +216,7 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s para ver tu código de autenti
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Aplicación de autenticación de dos factores en tu dispositivo';
 $lang['GEN_EMAIL'] = 'email';
 $lang['GEN_APP'] = 'app';
+$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha reenviado el código de autenticación a tu correo electronico';
+$lang["GEN_TWO_FACTOR_DISABLED"] = 'La autenticación de dos factores esta deshabilitada.';
+
 

@@ -38,7 +38,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		switch ($dataRequest->channel) {
 			case 'app':
-				$response = json_decode('{"code":"0","message":"Secret token generated successfully","datetime":"2012-10-01T09:45:00.000+02:00","data":{"qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB9ElEQVR4Xu2WUWrEMAxEDb6WQFc3+FqCdJ6cLG1h/yRoYU1IvHoBW6ORs+N6N8bvwGt8yJ8na4y5r73mmuF7jUmggWyumFzLfGtkrJ6syfKu7GLovgl0EQ8zV6rDhneSYTaGkau1kbwuSuiaZLiDpEO+j5/eKSMM3DGygEbxGOWEBHfuYxkw/FG0lqidLpxBR6lqNgVPprXk2nH8foWxdEjfW4NSgt2HI+gObpo93qklWjJUMLLVMJek3kIcGtKTLqOZn5OvlJAeZ97Rk5/k2kAmDlF+gUFcG9JrDUSDKbqeT4bp0UAWStJREpXYxpENhGY6N9bXZSRaT2QKk//01Ft4cjKrJxRMMRnej6BCR9FaIgVdZaN/+QqqufKoKCdScObxoM2wCdVwnB0UkxNMd8gtFO7lxFqSEp6NzNv8HUQryu5yoCeQsGypnrAw1cMpajE9YjYQOUMySk9S3nli+NlBMTk/0hhH2WyBcsJ6Gz0v9qHyyY9nB7VEmdJNt6romdYsJ0KYkPItT/vH3Vm1JPijwPpDLyy+6s9JUUsYG3cIaWlFVb8GcgddoUi3K2lvIBtN8V7gj0z86axasrKXsp/0vaB4t6L1hNOIP3Xkuci5i0xunp5XX/WQC1ds3K4cNc9uricETlB3bWIiawN5Mz7kv5Ivy8YtbNFioaEAAAAASUVORK5CYII=","secretToken":"ZSWAEMX5P3TO47ZT"}}');
+				$response = json_decode('{"code":"200.00.000","datetime":"2022-08-02T15:33:07.154Z[UTC]","message":"Process Ok","data":{"appName":"Conexion personas","qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB8ElEQVR4Xu2XUWoDMQxEDb6WQVc36FoL7rzZbWgK/ZOghZolIX4Gj6SxvBnnpzG+T7zGP/n1ZI8xzxXX3POK3GN6op6knj3PjrOZDE90kD3zVrCGdXiih2jvtUKhDtFGcs2Tye5K8LuCQqJHoQ7Dxecro6UEQ+TX8eadOuKhGKVCE/fH7fhacntc9Vp4ZHlEA8kdl9wRhHzziYpy4sIdpvSl0rHyVlBL1B4UbsgeUqDZKT3ZQZRR5TQ4VRorvLSePNZAgSpGu9iPglrCkV2yhoQEaU3W9hD2Vu/DIJGX+F25WnJpb7UIErmd0ZeCWpIunvy+cL4ojmwgYhwr7YyGIL3RQhTmcsU24VK+HuIWIap7yQklxQ1EzYFM2vHqTMONvYGoiWNGKVCQMqMEPZHWEjySPk/Xff0Z1xPNUjJXT62JlM4WcvFGd+h+EzmJMTuIDhZneGBDJVMlbCGEOdGxWUCYXQTnJfeSvK68urE3EOrE47LpxhifN3otSX5oa+0cyEj6YAuJJ6tooS99nqxiokGTWCzwKR6gcsLYinEK24i8rjQQDMh/iBFw3GgrlhP7I/HjZokVnA7iX8fbct2ad5HkbE1ftRjyibSeqCu5s/JFxB0EyNaUMN1h16OglNgh4W1xvo7yqyOVkh/GP/mr5AMhn0ZEpGg3rwAAAABJRU5ErkJggg==","qrCodeUrl":"otpauth://totp/Conexion%20personas:Novopayment?secret=EFN4FB227APRY5YW&issuer=Conexion+personas&algorithm=SHA1&digits=6&period=30","secretToken":"EFN4FB227APRY5YW"}}');
 			break;
 			default:
 				$response = json_decode('{"code":"0","message":"-----------Email-------------","datetime":"2012-10-01T09:45:00.000+02:00","data":""}');
@@ -55,7 +55,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = 'Se ha reenviado el código OTP';
+					$this->response->msg = lang('GEN_TWO_FACTOR_RESEND_CODE');
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
@@ -72,25 +72,31 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_DesactivateSecretToken_Mfa($dataRequest)
-	{
-		log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
+	public function callWs_DesactivateSecretToken_Mfa()
+  {
+    log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
+    $requestBody = [
+      'username' => $this->session->userName
+    ];
+    log_message('INFO', '****NOVO Mfa Model dataRequest*****'.json_encode($requestBody));
 
-		$requestBody = [
-			'username' => $this->session->userName
-		];
+    //$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
+    //$response = '200';
 
-		$this->dataRequest->requestBody = json_encode($requestBody);
-
-		log_message('INFO', '****NOVO Mfa Model dataRequest*****'.$this->dataRequest);
-
-		//$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
-
-		$response = '200';
-
-		//return $this->responseToTheView('callWs_DesactivateSecretToken');
-		return $response;
-	}
+    $response = json_decode('{"code":"0"}');
+    $this->isResponseRc = 0;
+    switch ($this->isResponseRc) {
+      case 0:
+          $this->response->code = 0;
+          $this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+          $this->response->icon = lang('CONF_ICON_INFO');
+          $this->response->msg = lang('GEN_TWO_FACTOR_DISABLED');
+          $this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+          $this->response->modalBtn['btn1']['action'] = 'destroy';
+      break;
+    }
+    return $this->responseToTheView('callWs_DesactivateSecretToken');
+  }
 
 	/**
 	 * @info Método para validar codigo OTP de multifactor autenticación

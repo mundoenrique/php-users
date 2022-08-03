@@ -25,6 +25,11 @@
 					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_NOTIFICATIONS')) ?>"><?= lang('GEN_MENU_NOTIFICATIONS'); ?></a>
 				</li>
 				<?php endif; ?>
+				<?php if(lang('CONF_TWO_FACTOR') == 'ON'): ?>
+				<li>
+					<a id="disableTwoFactor" class="pl-2 pr-1 h6" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_TWO_FACTOR_DISABLE'); ?></a>
+				</li>
+				<?php endif; ?>
 				<li>
 					<a id="logout-session" class="pl-2 pr-1 h6" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_SIGNOUT'); ?></a>
 				</li>

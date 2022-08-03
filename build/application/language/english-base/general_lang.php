@@ -63,6 +63,7 @@ $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
 $lang['GEN_MENU_SIGNOUT'] = 'Signout';
 $lang['GEN_MENU_TWO_FACTOR_ENABLEMENT'] = 'Two Factor Authentication';
+$lang['GEN_MENU_TWO_FACTOR_DISABLE'] = 'Disable two factors';
 $lang['GEN_BTN_SIGNIN'] = 'Signin';
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
 $lang['GEN_BTN_CANCEL'] = 'Cancel';
@@ -214,3 +215,6 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication c
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Two-factor authentication app on your device';
 $lang['GEN_EMAIL'] = 'email';
 $lang['GEN_APP'] = 'app';
+$lang["USER_TWO_FACTOR_RESEND_CODE"] = 'The authentication code has been resent to your email';
+$lang["USER_TWO_FACTOR_DISABLED"] = 'Two-factor authentication is disabled.';
+

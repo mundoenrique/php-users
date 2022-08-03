@@ -55,6 +55,7 @@ $lang["USER_TWO_FACTOR_QR_TEXT"] = "If you can't use the QR code, use this code 
 $lang["USER_TWO_FACTOR_EMAIL_TEXT"] = 'We have sent an authentication code to your email. Enter the same next.';
 $lang["USER_LEGAL_STEP"]='Legal';
 $lang["USER_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
+$lang["USER_SURE_DISABLE_TWO_FACTOR"] = 'Are you sure you want to disable two-factor authentication?';
 $lang["USER_LEGAL_STEP"]='Legal';
 $lang["USER_TERMS_TITLE"]='Terms and Conditions.';
 $lang["USER_TERMS_SUBTITLE"]='Cardholder.';

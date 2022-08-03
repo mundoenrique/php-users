@@ -235,6 +235,12 @@ $config = [
 			'rules' => 'trim'
 		],
 	],
+	'desactivateSecretToken' => [
+		[
+			'field' => 'value',
+			'rules' => 'trim'
+		],
+	],
 	'validateOTP2fa' => [
 		[
 			'field' => 'authenticationCode',
