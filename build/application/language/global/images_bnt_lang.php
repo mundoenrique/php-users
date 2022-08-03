@@ -7,3 +7,10 @@ $lang['IMG_SIGNIN_IMAGE'] = 'banorte-login.jpg';
 // PROGRAM IMAGES
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'bnt_default.svg';
 $lang['IMG_PROGRAM_IMG_DEFAULT_REV'] =	'bnt_default_rev.svg';
+// NETWORKS
+$lang['IMG_FOTTER_NETWORKS_IMG'] = [
+	'facebook' => 'facebook.png',
+	'twitter' => 'twitter.png',
+	'youtube' => 'instagram.png',
+	'instagram' => 'linkedin.png',
+];
