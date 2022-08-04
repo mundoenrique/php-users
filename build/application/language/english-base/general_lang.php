@@ -215,6 +215,8 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication c
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Two-factor authentication app on your device';
 $lang['GEN_EMAIL'] = 'email';
 $lang['GEN_APP'] = 'app';
-$lang["USER_TWO_FACTOR_RESEND_CODE"] = 'The authentication code has been resent to your email';
-$lang["USER_TWO_FACTOR_DISABLED"] = 'Two-factor authentication is disabled.';
-
+$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'The authentication code has been resent to your email';
+$lang["GEN_TWO_FACTOR_DISABLED"] = 'Two-factor authentication is disabled.';
+$lang["GEN_SURE_DISABLE_TWO_FACTOR"] = 'Are you sure you want to disable two-factor authentication?';
+$lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'We have sent an authentication code to your email. Enter the same next.';
+$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';

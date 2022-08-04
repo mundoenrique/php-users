@@ -88,11 +88,6 @@ class Novo_Mfa_Model extends NOVO_Model {
     switch ($this->isResponseRc) {
       case 0:
           $this->response->code = 0;
-          $this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-          $this->response->icon = lang('CONF_ICON_INFO');
-          $this->response->msg = lang('GEN_TWO_FACTOR_DISABLED');
-          $this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-          $this->response->modalBtn['btn1']['action'] = 'destroy';
       break;
     }
     return $this->responseToTheView('callWs_DesactivateSecretToken');
@@ -128,6 +123,8 @@ class Novo_Mfa_Model extends NOVO_Model {
         $this->response->msg = 'Validación exitosa';
         $this->response->modalBtn['btn1']['link'] = 'card-list';
 				$this->response->modalBtn['btn1']['action'] = 'redirect';
+
+				$this->session->set_userdata('optActive', false);
       break;
     }
 

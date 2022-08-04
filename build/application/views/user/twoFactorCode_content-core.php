@@ -30,8 +30,8 @@
 				</div>
 				<?php else: ?>
 				<div>
-					<p class=" pb-1"><?= lang('USER_TWO_FACTOR_EMAIL_TEXT') ?></p>
-					<p><?= lang('USER_TWO_FACTOR_SEND_CODE') ?>
+					<p class=" pb-1"><?= lang('GEN_TWO_FACTOR_EMAIL_TEXT') ?></p>
+					<p><?= lang('GEN_TWO_FACTOR_SEND_CODE') ?>
 					<button id="resendCode" class="btn btn-small btn-link p-0" ><?= lang('GEN_BTN_SEND_CODE'); ?></button>
 				</p>
 				</div>
