@@ -32,7 +32,7 @@
 				<div>
 					<p class=" pb-1"><?= lang('GEN_TWO_FACTOR_EMAIL_TEXT') ?></p>
 					<p><?= lang('GEN_TWO_FACTOR_SEND_CODE') ?>
-					<button id="resendCode" class="btn btn-small btn-link p-0" ><?= lang('GEN_BTN_SEND_CODE'); ?></button>
+					<button id="resendCode" class="btn btn-small btn-link p-0" ><?= lang('GEN_BTN_RESEND_CODE'); ?></button>
 				</p>
 				</div>
 			<?php endif; ?>

@@ -80,7 +80,7 @@ $lang['GEN_BTN_YES'] = 'Yes';
 $lang['GEN_BTN_NO'] = 'No';
 $lang['GEN_BTN_KEEP_SESSION'] = 'Keep session';
 $lang['GEN_BTN_VERIFY'] = 'Verify';
-$lang['GEN_BTN_SEND_CODE'] = 'Send code';
+$lang['GEN_BTN_RESEND_CODE'] = 'Resend code';
 
 $lang['GEN_TITLE_IMPORTANT'] = 'Important';
 $lang["GEN_TERMS_TITLE"]='Terms and Conditions';

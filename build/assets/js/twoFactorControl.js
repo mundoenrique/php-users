@@ -1,46 +1,15 @@
 'use strict'
 $(function() {
 	$('#disableTwoFactor').on('click', function (e) {
-		$('#accept').addClass('disable-two-factor');
 		e.preventDefault();
+		$('#accept').addClass('disable-two-factor');
 		var data = new Object();
 		data.value = '';
 		who = 'Mfa'; where = 'DesactivateSecretToken';
 		callNovoCore(who, where, data, function(response) {
 			switch (response.code) {
 				case 0:
-					modalBtn = {
-						btn1: {
-							text: lang.GEN_BTN_ACCEPT,
-							action: 'none'
-						},
-						btn2: {
-							text: lang.GEN_BTN_CANCEL,
-							action: 'destroy'
-						},
-						maxHeight : 600,
-						width : 530,
-						posMy: 'top+60px',
-						posAt: 'top+50px'
-					}
-
-					inputModal = '<form id="twoFactorDisableForm" name="formTwoFactorDisable" class="mr-2" method="post" onsubmit="return false;">';
-					inputModal += 	'<div class="justify pr-1">';
-					inputModal += 		'<div class="justify pr-1">';
-					inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores</p>';
-					inputModal += 			'<p class=" pb-1">' + lang.GEN_TWO_FACTOR_EMAIL_TEXT +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
-					inputModal += 				'<button id="resendCode" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_SEND_CODE+'</button>';
-					inputModal += 			'</p>';
-					inputModal += 		'</div>';
-					inputModal += 		'<div class="form-group col-8 p-0">';
-					inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
-					inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
-					inputModal += 			'<div class="help-block"></div>'
-					inputModal += 		'</div">';
-					inputModal += 	'</div>';
-					inputModal += '</form>';
-
-				appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, inputModal, lang.CONF_ICON_INFO, modalBtn);
+					modalSecretToken()
 				break;
 				}
 		});
@@ -67,9 +36,23 @@ $(function() {
 	});
 
 	$('#system-info').on('click', '#resendCode', function (e) {
+		$('#accept').removeClass('disable-two-factor');
+		$('#accept').addClass('resend-code');
 		getSecretToken('resend')
 	});
+
+	$('#system-info').on('click', '.resend-code', function (e) {
+		$('#accept').removeClass('resend-code');
+		$('#accept').addClass('disable-two-factor');
+		modalSecretToken()
+	});
+
+	$('#system-info').on('click', '#cancel', function (e) {
+		$('#system-info').dialog('destroy');
+	});
+
 });
+
 
 function getSecretToken(method) {
 	var data = new Object();
@@ -89,5 +72,40 @@ function getSecretToken(method) {
 			break;
 		}
 	});
+}
+
+function modalSecretToken() {
+	modalBtn = {
+		btn1: {
+			text: lang.GEN_BTN_ACCEPT,
+			action: 'none'
+		},
+		btn2: {
+			text: lang.GEN_BTN_CANCEL,
+			// action: 'destroy'
+		},
+		maxHeight : 600,
+		width : 530,
+		posMy: 'top+60px',
+		posAt: 'top+50px'
+	}
+
+	inputModal = '<form id="twoFactorDisableForm" name="formTwoFactorDisable" class="mr-2" method="post" onsubmit="return false;">';
+	inputModal += 	'<div class="justify pr-1">';
+	inputModal += 		'<div class="justify pr-1">';
+	inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores</p>';
+	inputModal += 			'<p class=" pb-1">' + lang.GEN_TWO_FACTOR_EMAIL_TEXT +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
+	inputModal += 				'<button id="resendCode" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</button>';
+	inputModal += 			'</p>';
+	inputModal += 		'</div>';
+	inputModal += 		'<div class="form-group col-8 p-0">';
+	inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
+	inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
+	inputModal += 			'<div class="help-block"></div>'
+	inputModal += 		'</div">';
+	inputModal += 	'</div>';
+	inputModal += '</form>';
+
+	appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }
 
