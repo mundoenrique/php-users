@@ -2,6 +2,23 @@
 $(function() {
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
+		$('#accept').addClass('sure-disable-two-factor');
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'none'
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: 'destroy'
+			},
+		}
+		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_SURE_DISABLE_TWO_FACTOR, lang.CONF_ICON_INFO, modalBtn);
+	});
+
+	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
+		e.preventDefault();
+		$('#accept').removeClass('sure-disable-two-factor');
 		$('#accept').addClass('disable-two-factor');
 		var data = new Object();
 		data.value = '';
@@ -22,13 +39,13 @@ $(function() {
 
 		if (form.valid()) {
 			data = getDataForm(form);
+			data.action = 'disabled';
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
-					case 0:
-						var url = baseURL + "two-factor-enablement";
-						$(location).attr('href', url);
+					case 2:
+						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					break;
 				}
 			});
@@ -93,7 +110,7 @@ function modalSecretToken() {
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores</p>';
 	inputModal += 			'<p class=" pb-1">' + lang.GEN_TWO_FACTOR_EMAIL_TEXT +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
-	inputModal += 				'<button id="resendCode" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</button>';
+	inputModal += 				'<a id="resendCode" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	inputModal += 			'</p>';
 	inputModal += 		'</div>';
 	inputModal += 		'<div class="form-group col-8 p-0">';
