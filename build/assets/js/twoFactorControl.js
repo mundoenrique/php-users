@@ -18,16 +18,16 @@ $(function() {
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
 		e.preventDefault();
 		var formTwoFactor = $('#twoFactorDisableForm');
-		var url = "two-factor-enablement";
 		validateForms(formTwoFactor);
+
 		if (formTwoFactor.valid()) {
 			data = getDataForm(formTwoFactor);
 			insertFormInput(true);
-
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
+						var url = baseURL + "two-factor-enablement";
 						$(location).attr('href', url);
 					break;
 				}
@@ -45,10 +45,6 @@ $(function() {
 		$('#accept').removeClass('resend-code');
 		$('#accept').addClass('disable-two-factor');
 		modalSecretToken()
-	});
-
-	$('#system-info').on('click', '#cancel', function (e) {
-		$('#system-info').dialog('destroy');
 	});
 
 });
@@ -75,6 +71,8 @@ function getSecretToken(method) {
 }
 
 function modalSecretToken() {
+	$('#cancel').prop('disabled',false);
+
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -82,7 +80,7 @@ function modalSecretToken() {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			// action: 'destroy'
+			action: 'destroy'
 		},
 		maxHeight : 600,
 		width : 530,

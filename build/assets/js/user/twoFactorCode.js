@@ -20,8 +20,8 @@ $(function () {
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
-						inputModal = response.msg
-						appMessages(response.title, inputModal, response.icon, response.modalBtn);
+						var url = baseURL + "card-list";
+						$(location).attr('href', url);
 					break;
 				}
 			});

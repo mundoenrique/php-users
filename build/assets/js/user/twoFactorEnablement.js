@@ -19,7 +19,7 @@ $(function () {
 			delete data.twoFactorEmail;
 			$(this).html(loader);
 			insertFormInput(true);
-			var url = "two-factor-code/" + data.activationType;
+			var url = baseURL + "two-factor-code/" + data.activationType;
 			$(location).attr('href', url);
 		}
 	});
@@ -32,7 +32,7 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.send-otp', function(e) {
+	/*$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
 		form = $('#otpModal');
 		validateForms(form);
@@ -41,10 +41,8 @@ $(function () {
 			$('#accept').removeClass('send-otp');
 			data = getDataForm(form);
 			data.email = $('#email').val();
-			$('#accept')
-				.html(loader)
-				.prop('disabled', true);
+			//$('#accept').html(loader).prop('disabled', true);
 			insertFormInput(true);
 		}
-	});
+	});*/
 });
