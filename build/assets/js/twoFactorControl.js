@@ -17,11 +17,11 @@ $(function() {
 
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
 		e.preventDefault();
-		var formTwoFactor = $('#twoFactorDisableForm');
-		validateForms(formTwoFactor);
+		form = $('#twoFactorDisableForm');
+		validateForms(form);
 
-		if (formTwoFactor.valid()) {
-			data = getDataForm(formTwoFactor);
+		if (form.valid()) {
+			data = getDataForm(form);
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {

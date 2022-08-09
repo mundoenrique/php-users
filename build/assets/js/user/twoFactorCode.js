@@ -15,13 +15,11 @@ $(function () {
 			data = getDataForm(form);
 			$(this).html(loader);
 			insertFormInput(true);
-
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
-						var url = baseURL + "card-list";
-						$(location).attr('href', url);
+						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					break;
 				}
 			});
