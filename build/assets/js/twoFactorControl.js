@@ -108,7 +108,7 @@ function modalSecretToken() {
 	inputModal = '<form id="twoFactorDisableForm" name="formTwoFactorDisable" class="mr-2" method="post" onsubmit="return false;">';
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
-	inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores</p>';
+	inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores.</p>';
 	inputModal += 			'<p class=" pb-1">' + lang.GEN_TWO_FACTOR_EMAIL_TEXT +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
 	inputModal += 				'<a id="resendCode" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	inputModal += 			'</p>';
