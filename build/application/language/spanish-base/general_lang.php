@@ -216,10 +216,10 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s para ver tu código de autenti
 $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Aplicación de autenticación de dos factores en tu dispositivo';
 $lang['GEN_EMAIL'] = 'email';
 $lang['GEN_APP'] = 'app';
-$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha reenviado el código de autenticación a tu correo electrónico.';
+$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenticación a tu correo electrónico.';
 $lang["GEN_TWO_FACTOR_DISABLED"] = 'La autenticación de dos factores esta deshabilitada.';
 $lang["GEN_SURE_DISABLE_TWO_FACTOR"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
 $lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo electrónico. Ingresa el mismo a continuación.';
-$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado  tu correo electrónico, por favor hacer clic en el link.';
+$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado a tu correo electrónico, por favor hacer clic en el link.';
 
 

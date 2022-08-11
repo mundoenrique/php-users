@@ -22,7 +22,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		$authenticationChannel = $dataRequest->channel == LANG('GEN_APP') ? 'thirdPartyApp' : 'Email';
+		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel== LANG('GEN_APP')) ? 'thirdPartyApp' : ($this->session->otpChannel != '' ? $this->session->otpChannel : 'Email');
 		$method = $dataRequest->method;
 
 		$requestBody = [
@@ -36,8 +36,8 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		//$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
 
-		switch ($dataRequest->channel) {
-			case 'app':
+		switch ($authenticationChannel) {
+			case 'thirdPartyApp':
 				$response = json_decode('{"code":"200.00.000","datetime":"2022-08-02T15:33:07.154Z[UTC]","message":"Process Ok","data":{"appName":"Conexion personas","qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB8ElEQVR4Xu2XUWoDMQxEDb6WQVc36FoL7rzZbWgK/ZOghZolIX4Gj6SxvBnnpzG+T7zGP/n1ZI8xzxXX3POK3GN6op6knj3PjrOZDE90kD3zVrCGdXiih2jvtUKhDtFGcs2Tye5K8LuCQqJHoQ7Dxecro6UEQ+TX8eadOuKhGKVCE/fH7fhacntc9Vp4ZHlEA8kdl9wRhHzziYpy4sIdpvSl0rHyVlBL1B4UbsgeUqDZKT3ZQZRR5TQ4VRorvLSePNZAgSpGu9iPglrCkV2yhoQEaU3W9hD2Vu/DIJGX+F25WnJpb7UIErmd0ZeCWpIunvy+cL4ojmwgYhwr7YyGIL3RQhTmcsU24VK+HuIWIap7yQklxQ1EzYFM2vHqTMONvYGoiWNGKVCQMqMEPZHWEjySPk/Xff0Z1xPNUjJXT62JlM4WcvFGd+h+EzmJMTuIDhZneGBDJVMlbCGEOdGxWUCYXQTnJfeSvK68urE3EOrE47LpxhifN3otSX5oa+0cyEj6YAuJJ6tooS99nqxiokGTWCzwKR6gcsLYinEK24i8rjQQDMh/iBFw3GgrlhP7I/HjZokVnA7iX8fbct2ad5HkbE1ftRjyibSeqCu5s/JFxB0EyNaUMN1h16OglNgh4W1xvo7yqyOVkh/GP/mr5AMhn0ZEpGg3rwAAAABJRU5ErkJggg==","qrCodeUrl":"otpauth://totp/Conexion%20personas:Novopayment?secret=EFN4FB227APRY5YW&issuer=Conexion+personas&algorithm=SHA1&digits=6&period=30","secretToken":"EFN4FB227APRY5YW"}}');
 			break;
 			default:
@@ -51,6 +51,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			case 0:
 				if ($method == 'send') {
 					$this->response->code = 0;
+					$this->response->otpChannel =  $this->session->otpChannel;
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
