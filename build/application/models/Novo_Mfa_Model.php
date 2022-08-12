@@ -50,7 +50,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 			case 0:
 				if ($dataRequest->sendResendToken == true) {
 					$this->response->code = 0;
-					$this->response->otpChannel =  $this->session->otpChannel;
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
@@ -59,6 +58,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
+				$this->response->otpChannel =  $this->session->otpChannel;
 			break;
 		}
 
@@ -121,12 +121,12 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->code = 0;
 					$this->response->msg = 'La autenticación de dos factores está habilitada';
 					$this->response->modalBtn['btn1']['link'] = 'card-list';
-					$this->session->set_userdata('optActive', true);
+					$this->session->set_userdata('otpActive', true);
 				} else {
 					$this->response->code = 2;
 					$this->response->msg = 'La autenticación de dos factores está inhabilitada. Seras redirigido para la habilitación del mismo.';
 					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
-					$this->session->set_userdata('optActive', false);
+					$this->session->set_userdata('otpActive', false);
 				}
 				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
