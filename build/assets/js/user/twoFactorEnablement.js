@@ -31,18 +31,4 @@ $(function () {
 			$('#verifyMsg').addClass('visible');
 		}
 	});
-
-	/*$('#system-info').on('click', '.send-otp', function(e) {
-		e.preventDefault();
-		form = $('#otpModal');
-		validateForms(form);
-
-		if (form.valid()) {
-			$('#accept').removeClass('send-otp');
-			data = getDataForm(form);
-			data.email = $('#email').val();
-			//$('#accept').html(loader).prop('disabled', true);
-			insertFormInput(true);
-		}
-	});*/
 });

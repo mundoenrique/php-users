@@ -35,11 +35,11 @@ $(function() {
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
 		e.preventDefault();
 		form = $('#twoFactorDisableForm');
-		validateForms(form);
 
+		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.action = 'disabled';
+			data.enabled = false;
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
@@ -55,7 +55,7 @@ $(function() {
 	$('#system-info').on('click', '#resendCode', function (e) {
 		$('#accept').removeClass('disable-two-factor');
 		$('#accept').addClass('resend-code');
-		getSecretToken('resend')
+		getSecretToken(false)
 	});
 
 	$('#system-info').on('click', '.resend-code', function (e) {
@@ -67,9 +67,9 @@ $(function() {
 });
 
 
-function getSecretToken(method) {
+function getSecretToken(action) {
 	var data = new Object();
-	data.method = method;
+	data.sendResendToken = action;
 	data.channel = $('#channel').val() ?  $('#channel').val() : 'email';
 	who = 'Mfa'; where = 'GenerateSecretToken';
 	callNovoCore(who, where, data, function(response) {

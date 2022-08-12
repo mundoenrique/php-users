@@ -1,6 +1,6 @@
 'use strict'
 $(function () {
-	getSecretToken('send');
+	getSecretToken(true);
 	insertFormInput(false);
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
@@ -9,17 +9,18 @@ $(function () {
 		e.preventDefault();
 		form = $('#twoFactorCodeForm')
 		btnText = $(this).html().trim();
-		validateForms(form);
 
+		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.action = 'enabled';
+			data.enabled = true;
 			$(this).html(loader);
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
+						$('#twoFactorCodeBtn').html(btnText);
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					break;
 				}
@@ -28,13 +29,13 @@ $(function () {
 	});
 
 	$('#resendCode').on('click', function(e) {
-		getSecretToken('resend')
+		getSecretToken(false);
 	});
 });
 
-function getSecretToken(method) {
+function getSecretToken(action) {
 	var data = new Object();
-	data.method = method;
+	data.sendResendToken = action;
 	data.channel = $('#channel').val()
 	who = 'Mfa'; where = 'GenerateSecretToken';
 	callNovoCore(who, where, data, function(response) {
@@ -45,8 +46,7 @@ function getSecretToken(method) {
 				$('#qrCodeImg').html(imgCode);
 				break;
 			case 2:
-				inputModal = response.msg
-				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+				appMessages(response.title, response.msg, response.icon, response.modalBtn);
 			break;
 		}
 	});

@@ -23,7 +23,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
 		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel== LANG('GEN_APP')) ? 'thirdPartyApp' : ($this->session->otpChannel != '' ? $this->session->otpChannel : 'Email');
-		$method = $dataRequest->method;
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -49,7 +48,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				if ($method == 'send') {
+				if ($dataRequest->sendResendToken == true) {
 					$this->response->code = 0;
 					$this->response->otpChannel =  $this->session->otpChannel;
 				} else {
@@ -118,7 +117,7 @@ class Novo_Mfa_Model extends NOVO_Model {
     log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
     switch ($this->isResponseRc) {
       case 0:
-				if ($dataRequest->action == 'enabled') {
+				if ($dataRequest->enabled == true) {
 					$this->response->code = 0;
 					$this->response->msg = 'La autenticación de dos factores está habilitada';
 					$this->response->modalBtn['btn1']['link'] = 'card-list';
