@@ -82,6 +82,7 @@ $(function () {
 	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
+		$('#accept').removeClass('disable-two-factor');
 		if (lang.CONF_TWO_FACTOR == 'ON') {
 			cardDetailsTwoFactor(true);
 		} else {
@@ -94,7 +95,7 @@ $(function () {
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
 		if (lang.CONF_TWO_FACTOR == 'ON') {
-			var formTwoFactor = $('#twoFactorCodeForm');
+			var formTwoFactor = $('#twoFactorCodeCardForm');
 			validateForms(formTwoFactor);
 			if (formTwoFactor.valid()) {
 				validateFormCard()
@@ -112,26 +113,8 @@ $(function () {
 
 	$('#system-info').on('click', '#resendCodeCardDetails', function (e) {
 		$('#accept').removeClass('sensitive-btn');
-		$('#accept').removeClass('sensitive-two-factor');
 		$('#accept').addClass('resend-code-sensitive');
 		cardDetailsTwoFactor(false)
-	});
-	$('#system-info').on('click', '#disableTwoFactorCardDetails', function (e) {
-		e.preventDefault();
-		// $('#accept').removeClass('sensitive-btn');
-		// $('#accept').removeClass('sensitive-two-factor');
-		// $('#accept').addClass('disable-two-factor');
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'none'
-			},
-			btn2: {
-				text: lang.GEN_BTN_CANCEL,
-				action: 'destroy'
-			},
-		}
-		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, 'hola', lang.CONF_ICON_INFO, modalBtn);
 	});
 });
 
@@ -308,7 +291,7 @@ function sensitiveInformation() {
 			posAt: 'top+50px'
 		}
 
-		inputModal = '<form id="twoFactorCodeForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
+		inputModal = '<form id="twoFactorCodeCardForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
 			inputModal += 	'<div class="justify pr-1">';
 			inputModal += 		'<div class="justify pr-1">';
 			inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
@@ -335,7 +318,6 @@ function cardDetailsTwoFactor(action) {
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
 			case 0:
-				$('#accept').addClass('sensitive-two-factor');
 				$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
 				modalTokenCardDetails(response)
 			break;
@@ -344,7 +326,6 @@ function cardDetailsTwoFactor(action) {
 				$('#system-info').on('click', '.resend-code-sensitive', function (e) {
 					$('#accept').removeClass('resend-code-sensitive');
 					$('#accept').addClass('sensitive-btn');
-					$('#accept').addClass('sensitive-two-factor');
 					modalTokenCardDetails(response)
 				});
 			break;
@@ -504,7 +485,7 @@ function validateFormCard() {
 }
 
 function modalTokenCardDetails(response) {
-	var message = response.otpChannel == 'Email' ? lang.GEN_EMAIL : (response.otpChannel == 'thirdPartyApp' ? lang.GEN_APP : '') ;
+	var message = response.otpChannel == 'Email' ? lang.GEN_EMAIL : (response.otpChannel == 'thirdPartyApp' ? lang.GEN_APLICATION : '') ;
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -512,7 +493,7 @@ function modalTokenCardDetails(response) {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'destroy'
+			action: 'none'
 		},
 		maxHeight : 600,
 		width : 530,
@@ -520,7 +501,7 @@ function modalTokenCardDetails(response) {
 		posAt: 'top+50px'
 	}
 
-	inputModal = '<form id="twoFactorCodeForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
+	inputModal = '<form id="twoFactorCodeCardForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
@@ -529,11 +510,6 @@ function modalTokenCardDetails(response) {
 		inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
 		inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	}
-	inputModal += 			'</p>';
-	inputModal += 		'</div>';
-	inputModal += 		'<div class="justify pr-1">';
-	inputModal += 			'<p> Si no puedes ubicar. deshabilitar en el link. '
-	inputModal += 				'<a id="disableTwoFactorCardDetails" href="'+lang.CONF_NO_LINK+'" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	inputModal += 			'</p>';
 	inputModal += 		'</div>';
 	inputModal += 		'<div class="form-group col-8 p-0">';

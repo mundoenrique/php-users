@@ -3,6 +3,7 @@ $(function() {
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
 		$('#accept').addClass('sure-disable-two-factor');
+		$('#accept').removeClass('sensitive-btn disable-two-factor');
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
@@ -10,7 +11,7 @@ $(function() {
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				action: 'destroy'
+				action: 'none'
 			},
 		}
 		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_SURE_DISABLE_TWO_FACTOR, lang.CONF_ICON_INFO, modalBtn);
@@ -34,8 +35,8 @@ $(function() {
 
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
 		e.preventDefault();
+		e.stopImmediatePropagation();
 		form = $('#twoFactorDisableForm');
-
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
@@ -62,6 +63,10 @@ $(function() {
 		$('#accept').removeClass('resend-code');
 		$('#accept').addClass('disable-two-factor');
 		modalSecretToken()
+	});
+
+	$('#system-info').on('click', '#cancel', function (e) {
+		$('#system-info').dialog('destroy');
 	});
 
 });
@@ -97,7 +102,7 @@ function modalSecretToken() {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'destroy'
+			action: 'none'
 		},
 		maxHeight : 600,
 		width : 530,

@@ -145,7 +145,7 @@ class Novo_User_Model extends NOVO_Model {
 						'missingImages' => $statusImgValida,
 						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
 						'otpActive' => true,
-						'otpChannel' => 'thirdPartyApp'
+						'otpChannel' => 'Email'
 					];
 					$this->session->set_userdata($userData);
 

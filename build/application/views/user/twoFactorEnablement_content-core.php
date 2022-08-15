@@ -18,7 +18,7 @@
 							<label class="custom-control-label" for="twoFactorApp"><?= lang('USER_USING_AN_APP'); ?></label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input id="twoFactorEmail" name="twoFactorEnablement" class="custom-control-input" type="radio" value="<?= lang('GEN_EMAIL') ?>" disabled>
+							<input id="twoFactorEmail" name="twoFactorEnablement" class="custom-control-input" type="radio" value="<?= lang('GEN_TWO_FACTOR_EMAIL') ?>" disabled>
 							<label class="custom-control-label" for="twoFactorEmail"><?= lang('USER_VIA_EMAIL'); ?></label>
 						</div>
 						<div class="help-block"></div>
