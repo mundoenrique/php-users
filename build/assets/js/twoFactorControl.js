@@ -27,7 +27,7 @@ $(function() {
 		callNovoCore(who, where, data, function(response) {
 			switch (response.code) {
 				case 0:
-					modalSecretToken()
+					modalSecretToken(response)
 				break;
 				}
 		});
@@ -59,12 +59,6 @@ $(function() {
 		getSecretToken(false)
 	});
 
-	$('#system-info').on('click', '.resend-code', function (e) {
-		$('#accept').removeClass('resend-code');
-		$('#accept').addClass('disable-two-factor');
-		modalSecretToken()
-	});
-
 	$('#system-info').on('click', '#cancel', function (e) {
 		$('#system-info').dialog('destroy');
 	});
@@ -85,14 +79,18 @@ function getSecretToken(action) {
 				$('#qrCodeImg').html(imgCode);
 				break;
 			case 2:
-				inputModal = response.msg
-				appMessages(response.title, inputModal, response.icon, response.modalBtn);
+				appMessages(response.title, response.msg, response.icon, response.modalBtn);
+				$('#system-info').on('click', '.resend-code', function (e) {
+					$('#accept').removeClass('resend-code');
+					$('#accept').addClass('disable-two-factor');
+					modalSecretToken(response)
+				});
 			break;
 		}
 	});
 }
 
-function modalSecretToken() {
+function modalSecretToken(response) {
 	$('#cancel').prop('disabled',false);
 
 	modalBtn = {
@@ -113,8 +111,8 @@ function modalSecretToken() {
 	inputModal = '<form id="twoFactorDisableForm" name="formTwoFactorDisable" class="mr-2" method="post" onsubmit="return false;">';
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
-	inputModal += 			'<p>Recuerda que para usar algunas operaciones debes tener activo la autenticación de dos factores.</p>';
-	inputModal += 			'<p class=" pb-1">' + lang.GEN_TWO_FACTOR_EMAIL_TEXT +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
+	inputModal += 			'<p>'+lang.GEN_TWO_FACTOR_REMEMBER+'</p>';
+	inputModal += 			'<p class=" pb-1">' + response.msg +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
 	inputModal += 				'<a id="resendCode" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	inputModal += 			'</p>';
 	inputModal += 		'</div>';

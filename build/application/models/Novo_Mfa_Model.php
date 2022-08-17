@@ -54,11 +54,13 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = lang('GEN_TWO_FACTOR_RESEND_CODE');
+					$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_RESEND_CODE'));
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 				$this->response->otpChannel =  $this->session->otpChannel;
+				$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT'));
+
 			break;
 		}
 
@@ -88,6 +90,7 @@ class Novo_Mfa_Model extends NOVO_Model {
     switch ($this->isResponseRc) {
       case 0:
           $this->response->code = 0;
+          $this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT'));
       break;
     }
     return $this->responseToTheView('callWs_DesactivateSecretToken');
@@ -119,12 +122,12 @@ class Novo_Mfa_Model extends NOVO_Model {
       case 0:
 				if ($dataRequest->enabled == true) {
 					$this->response->code = 0;
-					$this->response->msg = 'La autenticación de dos factores está habilitada';
+					$this->response->msg = lang('GEN_TWO_FACTOR_ENABLED');
 					$this->response->modalBtn['btn1']['link'] = 'card-list';
 					$this->session->set_userdata('otpActive', true);
 				} else {
 					$this->response->code = 2;
-					$this->response->msg = 'La autenticación de dos factores está inhabilitada. Seras redirigido para la habilitación del mismo.';
+					$this->response->msg = lang('GEN_TWO_FACTOR_DISABLED_REDIRECT');
 					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
 					$this->session->set_userdata('otpActive', false);
 				}

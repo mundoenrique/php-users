@@ -217,10 +217,13 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Aplicación de autenticación de dos 
 $lang['GEN_TWO_FACTOR_EMAIL'] = 'email';
 $lang['GEN_APP'] = 'app';
 $lang['GEN_APLICATION'] = 'aplicación';
-$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenticación a tu correo electrónico.';
-$lang["GEN_TWO_FACTOR_DISABLED"] = 'La autenticación de dos factores esta deshabilitada.';
+$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenticación a tu correo {$maskMail$}.';
+$lang["GEN_TWO_FACTOR_ENABLED"] = 'La autenticación de dos factores está habilitada.';
+$lang["GEN_TWO_FACTOR_DISABLED"] = 'La autenticación de dos factores esta inhabilitada.';
+$lang["GEN_TWO_FACTOR_DISABLED_REDIRECT"] = 'La autenticación de dos factores está inhabilitada. Seras redirigido para la habilitación del mismo.';
 $lang["GEN_SURE_DISABLE_TWO_FACTOR"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
-$lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo electrónico. Ingresa el mismo a continuación.';
+$lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo {$maskMail$}. Ingresa el mismo a continuación.';
 $lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado a tu correo electrónico, por favor hacer clic en el link.';
+$lang["GEN_TWO_FACTOR_REMEMBER"] = 'Recuerda que para usar algunas operaciones debes tener activado la autenticación de dos factores.';
 
 

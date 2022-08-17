@@ -30,7 +30,7 @@
 				</div>
 				<?php else: ?>
 				<div>
-					<p class=" pb-1"><?= lang('GEN_TWO_FACTOR_EMAIL_TEXT') ?></p>
+					<p class=" pb-1"><?= str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT')) ?></p>
 					<p><?= lang('GEN_TWO_FACTOR_SEND_CODE') ?>
 					<a id="resendCode" href="#" class="btn btn-small btn-link p-0" ><?= lang('GEN_BTN_RESEND_CODE'); ?></a>
 				</p>

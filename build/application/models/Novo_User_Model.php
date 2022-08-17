@@ -144,6 +144,7 @@ class Novo_User_Model extends NOVO_Model {
 						'clientAgent' => $this->agent->agent_string(),
 						'missingImages' => $statusImgValida,
 						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
+						'maskMail' => maskString($response->email, 4, $end = 6, '@'),
 						'otpActive' => true,
 						'otpChannel' => 'Email'
 					];
