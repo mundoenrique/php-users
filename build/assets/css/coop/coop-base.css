@@ -342,7 +342,7 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 }
 
 .feed .feed-item:nth-child(2n) {
-	background-color: var(--color-tertiary);
+	background-color: var(--color-secondary);
 }
 
 /* Language switch button */
