@@ -59,8 +59,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 				$this->response->otpChannel =  $this->session->otpChannel;
-				$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT'));
-
 			break;
 		}
 
@@ -74,7 +72,7 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_DesactivateSecretToken_Mfa()
+	public function callWs_DesactivateSecretToken_Mfa($dataRequest)
   {
     log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
     $requestBody = [
@@ -89,8 +87,17 @@ class Novo_Mfa_Model extends NOVO_Model {
     $this->isResponseRc = 0;
     switch ($this->isResponseRc) {
       case 0:
+				if ($dataRequest->resendDisableSecretToken) {
           $this->response->code = 0;
           $this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT'));
+				} else {
+					$this->response->code = 2;
+					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_RESEND_CODE'));
+					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				}
       break;
     }
     return $this->responseToTheView('callWs_DesactivateSecretToken');

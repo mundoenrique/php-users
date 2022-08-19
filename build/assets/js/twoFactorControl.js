@@ -21,16 +21,7 @@ $(function() {
 		e.preventDefault();
 		$('#accept').removeClass('sure-disable-two-factor');
 		$('#accept').addClass('disable-two-factor');
-		var data = new Object();
-		data.value = '';
-		who = 'Mfa'; where = 'DesactivateSecretToken';
-		callNovoCore(who, where, data, function(response) {
-			switch (response.code) {
-				case 0:
-					modalSecretToken(response)
-				break;
-				}
-		});
+		disableSecretToken(true);
 	});
 
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
@@ -56,7 +47,8 @@ $(function() {
 	$('#system-info').on('click', '#resendCode', function (e) {
 		$('#accept').removeClass('disable-two-factor');
 		$('#accept').addClass('resend-code');
-		getSecretToken(false)
+		//getSecretToken(false)
+		disableSecretToken(false);
 	});
 
 	$('#system-info').on('click', '#cancel', function (e) {
@@ -66,27 +58,20 @@ $(function() {
 });
 
 
-function getSecretToken(action) {
+function disableSecretToken (action){
 	var data = new Object();
-	data.sendResendToken = action;
-	data.channel = $('#channel').val() ?  $('#channel').val() : 'email';
-	who = 'Mfa'; where = 'GenerateSecretToken';
+	data.value = '';
+	data.resendDisableSecretToken = action;
+	who = 'Mfa'; where = 'DesactivateSecretToken';
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
 			case 0:
-				var imgCode=$(`<img src="data:image/png;base64,${response.data.qrCode}" >`);
-				$('#secretToken').append(response.data.secretToken);
-				$('#qrCodeImg').html(imgCode);
-				break;
-			case 2:
-				appMessages(response.title, response.msg, response.icon, response.modalBtn);
-				$('#system-info').on('click', '.resend-code', function (e) {
-					$('#accept').removeClass('resend-code');
-					$('#accept').addClass('disable-two-factor');
-					modalSecretToken(response)
-				});
+				modalSecretToken(response)
 			break;
-		}
+			case 2:
+				appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, response.msg, response.icon, response.modalBtn);
+			break;
+			}
 	});
 }
 
