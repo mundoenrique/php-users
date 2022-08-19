@@ -102,6 +102,7 @@ function validateForms(form) {
 			"address": { required: true, pattern: longPhrase },
 			"verifierCode": { required: true, pattern: onlyOneNumber, matchVerifierCode: true },
 			"gender": { required: true },
+			"channel": { required: true, pattern: alphanumunder},
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
 			"landLine": {
 				pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked),

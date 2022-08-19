@@ -7,7 +7,9 @@
 		<h1 class="h3 text regular inline"><?= lang('GEN_MENU_TWO_FACTOR_ENABLEMENT'); ?></h1>
 		<div class="line mt-2 mb-3"></div>
 		<div class="pt-3 regular">
+		<form id="channelForm">
 			<input type="hidden" id="channel" name="channel" class="hidden" value="<?= $channel ?>">
+		</form>
 			<?php if($channel == 'app'): ?>
 				<div>
 					<p><?= lang('USER_TWO_FACTOR_CODE_APP'); ?>
