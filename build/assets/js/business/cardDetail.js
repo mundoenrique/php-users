@@ -312,25 +312,29 @@ function sensitiveInformation() {
 
 function cardDetailsTwoFactor(action) {
 	$('#cancel').prop('disabled',false);
-	var data = new Object();
-	data.sendResendToken = action;
-	who = 'Mfa'; where = 'GenerateSecretToken';
-	callNovoCore(who, where, data, function(response) {
-		switch (response.code) {
-			case 0:
-				$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
-				modalTokenCardDetails(response)
-			break;
-			case 2:
-				appMessages(response.title, response.msg, response.icon, response.modalBtn);
-				$('#system-info').on('click', '.resend-code-sensitive', function (e) {
-					$('#accept').removeClass('resend-code-sensitive');
-					$('#accept').addClass('sensitive-btn');
+	form = $('#channelFormCardDetail');
+	validateForms(form);
+	if (form.valid()) {
+		data = getDataForm(form);
+		data.sendResendToken = action;
+		who = 'Mfa'; where = 'GenerateSecretToken';
+		callNovoCore(who, where, data, function(response) {
+			switch (response.code) {
+				case 0:
+					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
 					modalTokenCardDetails(response)
-				});
-			break;
-		}
-	});
+				break;
+				case 2:
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
+						$('#accept').removeClass('resend-code-sensitive');
+						$('#accept').addClass('sensitive-btn');
+						modalTokenCardDetails(response)
+					});
+				break;
+			}
+		});
+	}
 }
 
 function validateCardDetail() {

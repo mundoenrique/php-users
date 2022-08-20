@@ -21,7 +21,7 @@ $(function () {
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.enabled = true;
+			data.enableOTP2fa = true;
 			$(this).html(loader);
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';

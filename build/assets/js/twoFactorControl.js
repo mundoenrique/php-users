@@ -31,7 +31,7 @@ $(function() {
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.enabled = false;
+			data.enableOTP2fa = false;
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
@@ -47,7 +47,6 @@ $(function() {
 	$('#system-info').on('click', '#resendCode', function (e) {
 		$('#accept').removeClass('disable-two-factor');
 		$('#accept').addClass('resend-code');
-		//getSecretToken(false)
 		disableSecretToken(false);
 	});
 
@@ -60,7 +59,6 @@ $(function() {
 
 function disableSecretToken (action){
 	var data = new Object();
-	data.value = '';
 	data.resendDisableSecretToken = action;
 	who = 'Mfa'; where = 'DesactivateSecretToken';
 	callNovoCore(who, where, data, function(response) {
@@ -70,6 +68,11 @@ function disableSecretToken (action){
 			break;
 			case 2:
 				appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, response.msg, response.icon, response.modalBtn);
+				$('#system-info').on('click', '.resend-code', function (e) {
+					$('#accept').removeClass('resend-code');
+					$('#accept').addClass('disable-two-factor');
+					modalSecretToken(response)
+				});
 			break;
 			}
 	});

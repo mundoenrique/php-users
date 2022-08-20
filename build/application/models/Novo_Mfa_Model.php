@@ -22,7 +22,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel== LANG('GEN_APP')) ? 'thirdPartyApp' : ($this->session->otpChannel != '' ? $this->session->otpChannel : 'Email');
+		$authenticationChannel = $dataRequest->channel== LANG('GEN_APP') ? 'thirdPartyApp' : 'email';
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -127,7 +127,7 @@ class Novo_Mfa_Model extends NOVO_Model {
     log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
     switch ($this->isResponseRc) {
       case 0:
-				if ($dataRequest->enabled == true) {
+				if ($dataRequest->enableOTP2fa) {
 					$this->response->code = 0;
 					$this->response->msg = lang('GEN_TWO_FACTOR_ENABLED');
 					$this->response->modalBtn['btn1']['link'] = 'card-list';

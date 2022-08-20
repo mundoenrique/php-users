@@ -231,8 +231,8 @@ $config = [
 	],
 	'generateSecretToken' => [
 		[
-			'field' => 'activationType',
-			'rules' => 'trim'
+			'field' => 'channel',
+			'rules' => 'trim|alpha_numeric|required'
 		],
 	],
 	'desactivateSecretToken' => [
