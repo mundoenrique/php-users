@@ -424,10 +424,6 @@ class Novo_User extends NOVO_Controller {
 		$view = 'twoFactorCode';
 		$this->session->unset_userdata('products');//Llevar al modelo
 
-		// if (empty((array)$this->request)) {
-		// redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
-		// }
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",

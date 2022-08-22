@@ -95,9 +95,10 @@ $(function () {
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
 		if (lang.CONF_TWO_FACTOR == 'ON') {
-			var formTwoFactor = $('#twoFactorCodeCardForm');
-			validateForms(formTwoFactor);
-			if (formTwoFactor.valid()) {
+			var form = $('#twoFactorCodeCardForm');
+			validateForms(form);
+			if (form.valid()) {
+				$(this).html(loader);
 				validateFormCard()
 			}
 		} else {
@@ -489,7 +490,7 @@ function validateFormCard() {
 }
 
 function modalTokenCardDetails(response) {
-	var message = response.otpChannel == 'Email' ? lang.GEN_EMAIL : (response.otpChannel == 'thirdPartyApp' ? lang.GEN_APLICATION : '') ;
+	var message = response.otpChannel == 'Email' ? lang.GEN_EMAIL : (response.otpChannel == 'app' ? lang.GEN_APLICATION : '') ;
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,

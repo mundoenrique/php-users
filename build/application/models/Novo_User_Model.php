@@ -145,8 +145,8 @@ class Novo_User_Model extends NOVO_Model {
 						'missingImages' => $statusImgValida,
 						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
 						'maskMail' => maskString($response->email, 4, $end = 6, '@'),
-						'otpActive' => $response->otpActive ?? false,
-						'otpChannel' => (isset($response->otpChannel) && $response->otpChannel == 'thirdPartyApp') ? 'app' : 'email'
+						'otpActive' => $response->otpActive ?? true,
+						'otpChannel' => (isset($response->otpChannel) && $response->otpChannel == 'thirdPartyApp') ? 'app' : ''
 					];
 					$this->session->set_userdata($userData);
 

@@ -232,7 +232,7 @@ $config = [
 	'generateSecretToken' => [
 		[
 			'field' => 'channel',
-			'rules' => 'trim|alpha_numeric|required'
+			'rules' => 'trim|alpha_numeric'
 		],
 	],
 	'desactivateSecretToken' => [
