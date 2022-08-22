@@ -490,7 +490,7 @@ function validateFormCard() {
 }
 
 function modalTokenCardDetails(response) {
-	var message = response.otpChannel == 'Email' ? lang.GEN_EMAIL : (response.otpChannel == 'app' ? lang.GEN_APLICATION : '') ;
+	var message = response.otpChannel == 'email' ? lang.GEN_EMAIL : (response.otpChannel == 'app' ? lang.GEN_APLICATION : '') ;
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,

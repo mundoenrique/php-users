@@ -154,6 +154,8 @@ $lang['CONF_CONFIG_UPLOAD_FILE'] = [
 	'overwrite'=> TRUE,
 	'file_ext_tolower'=> TRUE,
 ];
+$lang['CONF_CHANNEL_APP'] = 'thirdPartyApp';
+$lang['CONF_CHANNEL_EMAIL'] = 'Email';
 $lang['CONF_TEMPORARY_LOCK_REASON'] = 'OFF';
 $lang['CONF_NO_LINK'] = 'javascript:';
 $lang['CONF_LINK_SIGNIN'] = 'sign-in';

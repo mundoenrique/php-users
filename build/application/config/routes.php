@@ -96,8 +96,8 @@ $route['(:any)/user-identify'] = "Novo_User/userIdentify";
 $route['(:any)/user-identify/(:any)'] = "Novo_User/userIdentify";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
 $route['(:any)/user-profile'] = "Novo_User/profileUser";
-$route['(:any)/two-factor-enablement'] = "Novo_User/twoFactorEnablement";
-$route['(:any)/two-factor-code/(:any)'] = "Novo_User/twoFactorCode/$2";
+$route['(:any)/two-factor-enablement'] = "Novo_Mfa/twoFactorEnablement";
+$route['(:any)/two-factor-code/(:any)'] = "Novo_Mfa/twoFactorCode/$2";
 $route['(:any)/terms-conditions'] = "Novo_User/termsConditions";
 //Business
 $route['(:any)/card-list'] = "Novo_Business/userCardsList";

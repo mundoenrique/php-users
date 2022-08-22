@@ -41,17 +41,6 @@ $lang['USER_RECOVER_SUCCESS'] = 'We send an email to %s, %s';
 $lang['USER_RECOVER_PASS_TEMP'] = 'with a temporary password.';
 $lang['USER_RECOVER_USERNAME'] = 'with your username.';
 $lang['USER_RECOVER_DATA_INVALID'] = 'Invalid email or identity document. Please verify your details, and try again.';
-$lang['USER_ACTIVATION_TYPE'] = 'Activation type';
-$lang['USER_USING_AN_APP'] = 'Using an app';
-$lang['USER_VIA_EMAIL'] = 'Via email';
-$lang['USER_VERIFY_MSG_EMAIL'] = 'Please verify that you can receive messages in the email registered in the application.';
-$lang["USER_TWO_FACTOR_ENABLEMENT_CONTENT"] = '
-<p>Two-factor authentication is not yet enabled.</p>
-<p>To increase security when performing transactional operations with your product, we need you to activate the security mechanism (Double authentication factor).</p>';
-$lang["USER_TWO_FACTOR_CODE_APP"] = 'Use an app on your phone to get two-factor authentication codes when prompted. We recommend using apps like: ';
-$lang["USER_TWO_FACTOR_IMG"] = 'Scan the image below with the two-factor authentication app on your phone.';
-$lang["USER_TWO_FACTOR_SCAN"] = 'After scanning the QR code image, the app will display a code that you can enter next.';
-$lang["USER_TWO_FACTOR_QR_TEXT"] = "If you can't use the QR code, use this code in your authenticator app instead";
 $lang["USER_LEGAL_STEP"]='Legal';
 $lang["USER_LEGAL_STEP"]='Legal';
 $lang["USER_TERMS_TITLE"]='Terms and Conditions.';
