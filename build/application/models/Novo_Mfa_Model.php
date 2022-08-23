@@ -54,7 +54,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_RESEND_CODE'));
+					$this->response->msg =  novoLang(lang('GEN_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
@@ -89,12 +89,12 @@ class Novo_Mfa_Model extends NOVO_Model {
       case 0:
 				if ($dataRequest->resendDisableSecretToken) {
           $this->response->code = 0;
-          $this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_EMAIL_TEXT'));
+					$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail);
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = str_replace('{$maskMail$}', $this->session->maskMail, lang('GEN_TWO_FACTOR_RESEND_CODE'));
+					$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
