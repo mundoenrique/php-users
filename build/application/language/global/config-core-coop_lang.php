@@ -20,22 +20,10 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'linkedin' => 'https://www.linkedin.com/company/banco-cooperativo-coopcentral',
 ];
 //USER IDENTITY
-$lang['CONF_SECRET_KEY'] = 'OFF';
+$lang['CONF_SECRET_KEY'] = 'ON';
 $lang['CONF_CONTACTS'] = [
 	'XXX' => '(XX) XXXX XXXX',
 ];
-//SIGNUP-PROFILE
-$lang['CONF_UPDATE_USER'] = 'ON';
-$lang['CONF_UPDATE_NAME'] = 'OFF';
-$lang['CONF_LANDLINE'] = 'OFF';
-$lang['CONF_OTHER_PHONE'] = 'OFF';
-$lang['CONF_PROFESSION'] = 'OFF';
-$lang['CONF_CONTAC_DATA'] = 'OFF';
-$lang['CONF_CHECK_NOTI_EMAIL'] = 'OFF';
-$lang['CONF_CHECK_NOTI_SMS'] = 'OFF';
-$lang['CONF_LOAD_DOCS'] = 'ON';
-$lang['CONF_LOAD_DOC_F_ID'] = 'ON';
-$lang['CONF_LOAD_DOC_B_ID'] = 'ON';
 //REGEX
 $lang['CONF_REGEX_NICKNAME'] = '^([a-z]{2}[a-z0-9_]{4,14})$';
 $lang['CONF_REGEX_NICKNAME_PROFILE'] = '^([a-z]{2}[a-z0-9 .,+-_@*]{4,14})$';
