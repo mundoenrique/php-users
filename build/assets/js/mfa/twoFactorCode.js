@@ -15,13 +15,14 @@ $(function () {
 
 	$('#twoFactorCodeBtn').on('click', function(e) {
 		e.preventDefault();
-		form = $('#twoFactorCodeForm')
+		var form = $('#twoFactorCodeForm');
 		btnText = $(this).html().trim();
 
 		validateForms(form);
 		if (form.valid()) {
-			data = getDataForm(form);
+			var data = getDataForm(form);
 			data.enableOTP2fa = true;
+			data.operationType = lang.CONF_MFA_ACTIVATE_SECRET_TOKEN;
 			$(this).html(loader);
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';

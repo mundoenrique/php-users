@@ -490,7 +490,6 @@ function validateFormCard() {
 }
 
 function modalTokenCardDetails(response) {
-	var message = response.otpChannel == 'email' ? lang.GEN_EMAIL : (response.otpChannel == 'app' ? lang.GEN_APLICATION : '') ;
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -510,7 +509,7 @@ function modalTokenCardDetails(response) {
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
-	inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", message);
+	inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", response.message);
 	if (response.otpChannel == 'Email') {
 		inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
 		inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';

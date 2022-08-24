@@ -10,9 +10,9 @@
 		<form id="channelForm">
 			<input type="hidden" id="channel" name="channel" class="hidden" value="<?= $channel ?>">
 		</form>
-			<?php if($channel == 'app'): ?>
+			<?php if($channel == lang('MFA_TWO_FACTOR_APP')): ?>
 				<div>
-					<p><?= lang('GEN_TWO_FACTOR_CODE_APP'); ?>
+					<p><?= lang('MFA_TWO_FACTOR_CODE_APP'); ?>
 					<?php foreach (lang('CONF_TWO_FACTOR_LINK') as $key => $value) : ?>
 						<a href="<?= lang('CONF_TWO_FACTOR_LINK')[$key]; ?>" class="btn-link " target="_blank">
 							<?= $key; ?>,
@@ -20,19 +20,19 @@
 					<?php endforeach; ?>
 					etc.
 					</p>
-					<p><?= lang('GEN_TWO_FACTOR_IMG') ?></p>
+					<p><?= lang('MFA_TWO_FACTOR_IMG') ?></p>
 					<div class="row pb-2">
 						<div class="col-auto" id="qrCodeImg"></div>
 						<div class="col-auto flex justify-center flex-column">
-							<p><?= lang('GEN_TWO_FACTOR_QR_TEXT') ?></p>
+							<p><?= lang('MFA_TWO_FACTOR_QR_TEXT') ?></p>
 							<p class="bold" id="secretToken"></p>
 						</div>
 					</div>
-					<p><?= lang('GEN_TWO_FACTOR_SCAN') ?></p>
+					<p><?= lang('MFA_TWO_FACTOR_SCAN') ?></p>
 				</div>
 				<?php else: ?>
 				<div>
-					<p class=" pb-1"><?= novoLang(lang('GEN_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail); ?></p>
+					<p class=" pb-1"><?= novoLang(lang('MFA_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail); ?></p>
 					<p><?= lang('GEN_TWO_FACTOR_SEND_CODE') ?>
 					<a id="resendCode" href="#" class="btn btn-small btn-link p-0" ><?= lang('GEN_BTN_RESEND_CODE'); ?></a>
 				</p>

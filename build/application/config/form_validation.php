@@ -213,16 +213,6 @@ $config = [
 			'rules' => 'trim|alpha_numeric|required'
 		],
 	],
-	'twoFactorEnablement' => [
-		[
-			'field' => 'twoFactorApp',
-			'rules' => 'trim|regex_match[/app/]'
-		],
-		[
-			'field' => 'twoFactorEmail',
-			'rules' => 'trim|regex_match[/email/]'
-		]
-	],
 	'twoFactorCode' => [
 		[
 			'field' => 'authenticationCode',

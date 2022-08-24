@@ -22,7 +22,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		$authenticationChannel = $dataRequest->channel== LANG('GEN_APP') ? 'thirdPartyApp' : 'email';
+		$authenticationChannel = $dataRequest->channel == lang('MFA_TWO_FACTOR_APP') ? lang('CONF_MFA_CHANNEL_APP') : lang('CONF_MFA_CHANNEL_EMAIL');
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -36,7 +36,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 		//$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
 
 		switch ($authenticationChannel) {
-			case 'thirdPartyApp':
+			case lang('CONF_MFA_CHANNEL_APP'):
 				$response = json_decode('{"code":"200.00.000","datetime":"2022-08-02T15:33:07.154Z[UTC]","message":"Process Ok","data":{"appName":"Conexion personas","qrCode":"iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAB8ElEQVR4Xu2XUWoDMQxEDb6WQVc36FoL7rzZbWgK/ZOghZolIX4Gj6SxvBnnpzG+T7zGP/n1ZI8xzxXX3POK3GN6op6knj3PjrOZDE90kD3zVrCGdXiih2jvtUKhDtFGcs2Tye5K8LuCQqJHoQ7Dxecro6UEQ+TX8eadOuKhGKVCE/fH7fhacntc9Vp4ZHlEA8kdl9wRhHzziYpy4sIdpvSl0rHyVlBL1B4UbsgeUqDZKT3ZQZRR5TQ4VRorvLSePNZAgSpGu9iPglrCkV2yhoQEaU3W9hD2Vu/DIJGX+F25WnJpb7UIErmd0ZeCWpIunvy+cL4ojmwgYhwr7YyGIL3RQhTmcsU24VK+HuIWIap7yQklxQ1EzYFM2vHqTMONvYGoiWNGKVCQMqMEPZHWEjySPk/Xff0Z1xPNUjJXT62JlM4WcvFGd+h+EzmJMTuIDhZneGBDJVMlbCGEOdGxWUCYXQTnJfeSvK68urE3EOrE47LpxhifN3otSX5oa+0cyEj6YAuJJ6tooS99nqxiokGTWCzwKR6gcsLYinEK24i8rjQQDMh/iBFw3GgrlhP7I/HjZokVnA7iX8fbct2ad5HkbE1ftRjyibSeqCu5s/JFxB0EyNaUMN1h16OglNgh4W1xvo7yqyOVkh/GP/mr5AMhn0ZEpGg3rwAAAABJRU5ErkJggg==","qrCodeUrl":"otpauth://totp/Conexion%20personas:Novopayment?secret=EFN4FB227APRY5YW&issuer=Conexion+personas&algorithm=SHA1&digits=6&period=30","secretToken":"EFN4FB227APRY5YW"}}');
 			break;
 			default:
@@ -50,11 +50,12 @@ class Novo_Mfa_Model extends NOVO_Model {
 			case 0:
 				if ($dataRequest->sendResendToken == true) {
 					$this->response->code = 0;
+					$this->response->message =  $authenticationChannel == lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_TWO_FACTOR_APLICATION') : lang('MFA_VIA_EMAIL') ;
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg =  novoLang(lang('GEN_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
+					$this->response->msg =  novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
@@ -89,12 +90,12 @@ class Novo_Mfa_Model extends NOVO_Model {
       case 0:
 				if ($dataRequest->resendDisableSecretToken) {
           $this->response->code = 0;
-					$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail);
+					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail);
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
+					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
@@ -115,7 +116,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 		$requestBody = [
 				'username' => $this->session->userName,
 				'otpValue' => $dataRequest->authenticationCode,
-				'operationType' => 'ActivateSecretToken'
+				'operationType' => $dataRequest->operationType
 		];
 
 		$this->dataRequest->requestBody = $requestBody;
@@ -129,12 +130,12 @@ class Novo_Mfa_Model extends NOVO_Model {
       case 0:
 				if ($dataRequest->enableOTP2fa) {
 					$this->response->code = 0;
-					$this->response->msg = lang('GEN_TWO_FACTOR_ENABLED');
+					$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
 					$this->response->modalBtn['btn1']['link'] = 'card-list';
 					$this->session->set_userdata('otpActive', true);
 				} else {
 					$this->response->code = 2;
-					$this->response->msg = lang('GEN_TWO_FACTOR_DISABLED_REDIRECT');
+					$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
 					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
 					$this->session->set_userdata('otpActive', false);
 				}

@@ -212,29 +212,7 @@ $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
-//MULTIFACTOR DE AUTENTICACIÓN
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s para ver tu código de autenticación y verificar tu identidad.';
-$lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Aplicación de autenticación de dos factores en tu dispositivo';
-$lang['GEN_TWO_FACTOR_EMAIL'] = 'email';
-$lang['GEN_APP'] = 'app';
-$lang['GEN_APLICATION'] = 'aplicación';
-$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenticación a tu correo %s.';
-$lang["GEN_TWO_FACTOR_ENABLED"] = 'La autenticación de dos factores está habilitada.';
-$lang["GEN_TWO_FACTOR_DISABLED"] = 'La autenticación de dos factores esta inhabilitada.';
-$lang["GEN_TWO_FACTOR_DISABLED_REDIRECT"] = 'La autenticación de dos factores está inhabilitada. Seras redirigido para la habilitación del mismo.';
-$lang["GEN_SURE_DISABLE_TWO_FACTOR"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
-$lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo %s. Ingresa el mismo a continuación.';
-$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado a tu correo electrónico, por favor hacer clic en el link.';
+$lang["GEN_TWO_FACTOR_SURE_DISABLE"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
 $lang["GEN_TWO_FACTOR_REMEMBER"] = 'Recuerda que para usar algunas operaciones debes tener activado la autenticación de dos factores.';
-$lang["GEN_TWO_FACTOR_ENABLEMENT_CONTENT"] = '
-<p>La autenticación de dos factores aún no está habilitada.</p>
-<p>Para incrementar la seguridad al momento de realizar operaciones transaccionales con tu producto, necesitamos que actives el mecanismo de seguridad (Doble factor de autenticación). </p>';
-$lang["GEN_TWO_FACTOR_CODE_APP"] = 'Usa una aplicación en tu teléfono para obtener códigos de autenticación de dos factores cuando se te solicite. Recomendamos usar aplicaciones como: ';
-$lang["GEN_TWO_FACTOR_IMG"] = 'Escanea la imagen a continuación con la aplicación de autenticación de dos factores en tu teléfono.';
-$lang["GEN_TWO_FACTOR_SCAN"] = 'Después de escanear la imagen del código QR, la aplicación mostrará un código que debes ingresar a continuación.';
-$lang["GEN_TWO_FACTOR_QR_TEXT"] = 'Si no puedes usar el código QR, en su lugar utiliza este código en tu aplicación de autenticación';
-$lang['GEN_ACCOUNT_VERIFICATION'] = 'Verificación de cuenta';
-$lang['GEN_VERIFY_MSG_EMAIL'] = 'Por favor verifica que puedas recibir mensajes en el correo electrónico registrado en la aplicación.';
-$lang['GEN_ACTIVATION_TYPE'] = 'Tipo de activación';
-$lang['GEN_USING_AN_APP'] = 'Aplicación de Autenticación';
-$lang['GEN_VIA_EMAIL'] = 'Correo Electrónico';
+$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado a tu correo electrónico, por favor hacer clic en el link.';

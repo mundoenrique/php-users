@@ -212,29 +212,7 @@ $lang["GEN_MSG_IMPORTANT"] = 'Important announcement';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s For security the card has been blocked, please try tomorrow.';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication code and verify your identity.';
-$lang["GEN_TWO_FACTOR_CODE_VERIFY_APP"] = 'Two-factor authentication app on your device';
-$lang['GEN_TWO_FACTOR_EMAIL'] = 'email';
-$lang['GEN_APP'] = 'app';
-$lang['GEN_APLICATION'] = 'aplication';
-$lang["GEN_TWO_FACTOR_RESEND_CODE"] = 'The authentication code has been resent to your email %s';
-$lang["GEN_TWO_FACTOR_ENABLED"] = 'Two-factor authentication is enabled.';
-$lang["GEN_TWO_FACTOR_DISABLED"] = 'Two-factor authentication is disabled.';
-$lang["GEN_TWO_FACTOR_DISABLED_REDIRECT"] = 'Two-factor authentication is disabled. You will be redirected to enable it.';
-$lang["GEN_SURE_DISABLE_TWO_FACTOR"] = 'Are you sure you want to disable two-factor authentication?';
-$lang["GEN_TWO_FACTOR_EMAIL_TEXT"] = 'We have sent an authentication code to your email {$maskMail$}. Enter the same next.';
-$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
+$lang["GEN_TWO_FACTOR_SURE_DISABLE"] = 'Are you sure you want to disable two-factor authentication?';
 $lang["GEN_TWO_FACTOR_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
+$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
 
-//MULTIFACTOR AUTENTICATION
-$lang["GEN_TWO_FACTOR_ENABLEMENT_CONTENT"] = '
-<p>Two-factor authentication is not yet enabled.</p>
-<p>To increase security when performing transactional operations with your product, we need you to activate the security mechanism (Double authentication factor).</p>';
-$lang["GEN_TWO_FACTOR_CODE_APP"] = 'Use an app on your phone to get two-factor authentication codes when prompted. We recommend using apps like: ';
-$lang["GEN_TWO_FACTOR_IMG"] = 'Scan the image below with the two-factor authentication app on your phone.';
-$lang["GEN_TWO_FACTOR_SCAN"] = 'After scanning the QR code image, the app will display a code that you can enter next.';
-$lang["GEN_TWO_FACTOR_QR_TEXT"] = "If you can't use the QR code, use this code in your authenticator app instead";
-$lang['GEN_ACCOUNT_VERIFICATION'] = 'Account Verification';
-$lang['GEN_VERIFY_MSG_EMAIL'] = 'Please verify that you can receive messages in the email registered in the application.';
-$lang['GEN_ACTIVATION_TYPE'] = 'Activation type';
-$lang['GEN_USING_AN_APP'] = 'Authentication app';
-$lang['GEN_VIA_EMAIL'] = 'Email';

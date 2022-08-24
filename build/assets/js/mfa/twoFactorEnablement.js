@@ -15,8 +15,6 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.activationType = $('input:radio[name=twoFactorEnablement]:checked').val();
-			delete data.twoFactorApp;
-			delete data.twoFactorEmail;
 			$(this).html(loader);
 			insertFormInput(true);
 			var url = baseURL + "two-factor-code/" + data.activationType;
@@ -25,7 +23,7 @@ $(function () {
 	});
 
 	$(radioType).change(function() {
-		if($(this).attr('value') == 'email'){
+		if($(this).attr('value') == lang.MFA_TWO_FACTOR_EMAIL){
 			$('#verifyMsg').removeClass('visible');
 		} else {
 			$('#verifyMsg').addClass('visible');

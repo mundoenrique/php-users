@@ -14,7 +14,7 @@ $(function() {
 				action: 'none'
 			},
 		}
-		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_SURE_DISABLE_TWO_FACTOR, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.CONF_ICON_INFO, modalBtn);
 	});
 
 	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
@@ -32,6 +32,7 @@ $(function() {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.enableOTP2fa = false;
+			data.operationType = lang.CONF_MFA_DESACTIVATE_SECRET_TOKEN;
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
