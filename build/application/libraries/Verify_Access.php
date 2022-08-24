@@ -130,13 +130,15 @@ class Verify_Access {
 		switch($module) {
 			case 'userCardsList':
 			case 'profileUser':
+			case 'updateProfile':
+				$auth = $this->CI->session->has_userdata('logged');
+				break;
 			case 'twoFactorEnablement':
 			case 'twoFactorCode':
-			case 'updateProfile':
 			case 'generateSecretToken':
 			case 'desactivateSecretToken':
 			case 'validateOTP2fa':
-				$auth = $this->CI->session->has_userdata('logged');
+				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_TWO_FACTOR') == 'ON';
 				break;
 			case 'keepSession':
 			case 'professionsList':

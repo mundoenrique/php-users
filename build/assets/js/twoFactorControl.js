@@ -21,6 +21,7 @@ $(function() {
 		e.preventDefault();
 		$('#accept').removeClass('sure-disable-two-factor');
 		$('#accept').addClass('disable-two-factor');
+		$(this).html(loader);
 		disableSecretToken(true);
 	});
 
@@ -28,6 +29,7 @@ $(function() {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		form = $('#twoFactorDisableForm');
+		$(this).html(loader);
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);

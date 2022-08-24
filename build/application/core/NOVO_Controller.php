@@ -131,8 +131,9 @@ class NOVO_Controller extends CI_Controller {
 				) : json_decode(utf8_encode($this->input->get_post('request')));
 			} else {
 				if ($this->session->has_userdata('logged')) {
-					$urlTwoFactor = $this->session->otpActive == FALSE ? lang('CONF_LINK_TWO_FACTOR') : lang('CONF_LINK_USER_PROFILE');
-					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0' || $this->session->otpActive == FALSE;
+					$flagTwoFactor = lang('CONF_TWO_FACTOR') == 'ON' && $this->session->otpActive == FALSE;
+					$urlTwoFactor = $flagTwoFactor ? lang('CONF_LINK_TWO_FACTOR') : lang('CONF_LINK_USER_PROFILE');
+					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0' || $flagTwoFactor;
 					$module = $this->rule != 'profileUser' && $this->rule != 'twoFactorEnablement' && $this->rule != 'twoFactorCode' && $this->rule != 'finishSession';
 
 					if ($accept && $module) {
