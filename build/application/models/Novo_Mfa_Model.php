@@ -22,7 +22,8 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		$authenticationChannel = $dataRequest->channel == lang('MFA_TWO_FACTOR_APP') ? lang('CONF_MFA_CHANNEL_APP') : lang('CONF_MFA_CHANNEL_EMAIL');
+		$authenticationChannel = (isset($dataRequest->channel) &&
+		$dataRequest->channel == lang('MFA_TWO_FACTOR_APP') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -48,7 +49,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				if ($dataRequest->sendResendToken == true) {
+				if ($dataRequest->sendResendToken) {
 					$this->response->code = 0;
 					$this->response->message =  $authenticationChannel == lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_TWO_FACTOR_APLICATION') : lang('MFA_VIA_EMAIL') ;
 				} else {
@@ -59,7 +60,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
-				$this->response->otpChannel =  $this->session->otpChannel;
+				$this->response->otpChannel =  $authenticationChannel;
 			break;
 		}
 
@@ -113,6 +114,9 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
 
+		$authenticationChannel = (isset($dataRequest->channel) &&
+		$dataRequest->channel == lang('MFA_TWO_FACTOR_APP') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
+
 		$requestBody = [
 				'username' => $this->session->userName,
 				'otpValue' => $dataRequest->authenticationCode,
@@ -128,21 +132,33 @@ class Novo_Mfa_Model extends NOVO_Model {
     log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
     switch ($this->isResponseRc) {
       case 0:
-				if ($dataRequest->enableOTP2fa) {
-					$this->response->code = 0;
-					$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
-					$this->response->modalBtn['btn1']['link'] = 'card-list';
-					$this->session->set_userdata('otpActive', true);
-				} else {
-					$this->response->code = 2;
-					$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
-					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
-					$this->session->set_userdata('otpActive', false);
+				switch ($dataRequest->operationType) {
+					case lang('CONF_MFA_ACTIVATE_SECRET_TOKEN'):
+						$this->response->code = 0;
+						$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
+						$this->response->modalBtn['btn1']['link'] = 'card-list';
+						$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+						$this->response->icon = lang('CONF_ICON_SUCCESS');
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+						$this->response->modalBtn['btn1']['action'] = 'redirect';
+						$this->session->set_userdata('otpActive', TRUE);
+						$this->session->set_userdata('otpChannel', $authenticationChannel);
+					break;
+					case lang('CONF_MFA_DESACTIVATE_SECRET_TOKEN'):
+						$this->response->code = 2;
+						$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
+						$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
+						$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+						$this->response->icon = lang('CONF_ICON_SUCCESS');
+						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+						$this->response->modalBtn['btn1']['action'] = 'redirect';
+						$this->session->set_userdata('otpActive', FALSE);
+						$this->session->set_userdata('otpChannel', '');
+					break;
+					case lang('CONF_MFA_VALIDATE_OTP'):
+						$this->response->code = 0;
+					break;
 				}
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-				$this->response->modalBtn['btn1']['action'] = 'redirect';
       break;
     }
 

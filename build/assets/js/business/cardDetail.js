@@ -93,16 +93,24 @@ $(function () {
 	$('#system-info').on('click', '.sensitive-btn', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		btnText = $(this).html();
 		if (lang.CONF_TWO_FACTOR == 'ON') {
 			var form = $('#twoFactorCodeCardForm');
 			validateForms(form);
 			if (form.valid()) {
-				$(this).html(loader);
-				validateFormCard()
+				data = getDataForm(form);
+				data.operationType = lang.CONF_MFA_VALIDATE_OTP;
+				insertFormInput(true);
+				who = 'Mfa'; where = 'ValidateOTP2fa';
+				callNovoCore(who, where, data, function(response) {
+					switch (response.code) {
+						case 0:
+							validateFormCard();
+						break;
+					}
+				});
 			}
 		} else {
-			validateFormCard()
+			validateFormCard();
 		}
 	});
 
@@ -312,6 +320,7 @@ function sensitiveInformation() {
 }
 
 function cardDetailsTwoFactor(action) {
+	sessionStorage.clear();
 	$('#cancel').prop('disabled',false);
 	form = $('#channelFormCardDetail');
 	validateForms(form);
@@ -323,14 +332,14 @@ function cardDetailsTwoFactor(action) {
 			switch (response.code) {
 				case 0:
 					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
-					modalTokenCardDetails(response)
+					modalTokenCardDetails(response);
 				break;
 				case 2:
 					appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
 						$('#accept').removeClass('resend-code-sensitive');
 						$('#accept').addClass('sensitive-btn');
-						modalTokenCardDetails(response)
+						modalTokenCardDetails(response);
 					});
 				break;
 			}
@@ -510,7 +519,7 @@ function modalTokenCardDetails(response) {
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
 	inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", response.message);
-	if (response.otpChannel == 'Email') {
+	if (response.otpChannel == lang.CONF_MFA_CHANNEL_EMAIL) {
 		inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
 		inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
 	}

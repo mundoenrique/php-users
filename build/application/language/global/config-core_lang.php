@@ -222,3 +222,4 @@ $lang['CONF_MFA_CHANNEL_APP'] = 'thirdPartyApp';
 $lang['CONF_MFA_CHANNEL_EMAIL'] = 'Email';
 $lang['CONF_MFA_ACTIVATE_SECRET_TOKEN'] = 'ActivateSecretToken';
 $lang['CONF_MFA_DESACTIVATE_SECRET_TOKEN'] = 'ProcessDeactivateSecretToken';
+$lang['CONF_MFA_VALIDATE_OTP'] = 'ValidateOtp';

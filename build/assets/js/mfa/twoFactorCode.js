@@ -1,13 +1,8 @@
 'use strict'
 
 $(function () {
-	if (!(performance.getEntriesByType("navigation")[0].type == 'reload')) {
-		sessionStorage.clear();
-		getSecretToken(true);
-	}else{
-		$('#secretToken').append(sessionStorage.secretToken);
-		$('#qrCodeImg').html($(`<img src="data:image/png;base64,${sessionStorage.imgCode}" >`));
-	}
+	sessionStorage.clear();
+	getSecretToken(true);
 
 	insertFormInput(false);
 	$('#pre-loader').remove();
@@ -21,8 +16,8 @@ $(function () {
 		validateForms(form);
 		if (form.valid()) {
 			var data = getDataForm(form);
-			data.enableOTP2fa = true;
 			data.operationType = lang.CONF_MFA_ACTIVATE_SECRET_TOKEN;
+			data.channel = sessionStorage.channel;
 			$(this).html(loader);
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
@@ -52,13 +47,13 @@ function getSecretToken(action) {
 		callNovoCore(who, where, data, function(response) {
 			switch (response.code) {
 				case 0:
-					sessionStorage.secretToken = response.data.secretToken ? response.data.secretToken : '';
-					sessionStorage.imgCode = response.data.qrCode ? response.data.qrCode : '';
-					$('#secretToken').append(sessionStorage.secretToken);
-					$('#qrCodeImg').html($(`<img src="data:image/png;base64,${sessionStorage.imgCode}" >`));
+					$('#secretToken').append(response.data.secretToken);
+					$('#qrCodeImg').html($(`<img src="data:image/png;base64,${response.data.qrCode}" >`));
+					sessionStorage.channel = data.channel;
 					break;
 				case 2:
 					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					sessionStorage.channel = data.channel;
 				break;
 			}
 		});

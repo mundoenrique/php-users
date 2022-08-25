@@ -33,7 +33,6 @@ $(function() {
 		validateForms(form);
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.enableOTP2fa = false;
 			data.operationType = lang.CONF_MFA_DESACTIVATE_SECRET_TOKEN;
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
