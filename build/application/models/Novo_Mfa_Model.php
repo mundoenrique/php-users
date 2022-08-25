@@ -52,6 +52,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				if ($dataRequest->sendResendToken) {
 					$this->response->code = 0;
 					$this->response->message =  $authenticationChannel == lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_TWO_FACTOR_APLICATION') : lang('MFA_VIA_EMAIL') ;
+					// $this->session->set_flashdata('sendSecretToken', TRUE);
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
@@ -157,6 +158,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					break;
 					case lang('CONF_MFA_VALIDATE_OTP'):
 						$this->response->code = 0;
+						$this->response->modal = TRUE;
 					break;
 				}
       break;

@@ -22,10 +22,10 @@
 					</p>
 					<p><?= lang('MFA_TWO_FACTOR_IMG') ?></p>
 					<div class="row pb-2">
-						<div class="col-auto" id="qrCodeImg"></div>
+						<div class="col-auto qr-code-img" id="qrCodeImg"></div>
 						<div class="col-auto flex justify-center flex-column">
 							<p><?= lang('MFA_TWO_FACTOR_QR_TEXT') ?></p>
-							<p class="bold" id="secretToken"></p>
+							<p class="bold secret-token" id="secretToken"></p>
 						</div>
 					</div>
 					<p><?= lang('MFA_TWO_FACTOR_SCAN') ?></p>

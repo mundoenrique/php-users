@@ -93,6 +93,7 @@ $(function () {
 	$('#system-info').on('click', '.sensitive-btn', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
+		btnText = $(this).html();
 		if (lang.CONF_TWO_FACTOR == 'ON') {
 			var form = $('#twoFactorCodeCardForm');
 			validateForms(form);
@@ -284,38 +285,7 @@ function sensitiveInformation() {
 		posAt: 'top+50px'
 	}
 
-	if (lang.CONF_TWO_FACTOR == 'ON') {
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: 'none'
-			},
-			btn2: {
-				text: lang.GEN_BTN_CANCEL,
-				action: 'destroy'
-			},
-			maxHeight : 600,
-			width : 530,
-			posMy: 'top+60px',
-			posAt: 'top+50px'
-		}
-
-		inputModal = '<form id="twoFactorCodeCardForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
-			inputModal += 	'<div class="justify pr-1">';
-			inputModal += 		'<div class="justify pr-1">';
-			inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
-			inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", lang.GEN_EMAIL)+ '</p>';
-			inputModal += 		'</div>';
-			inputModal += 		'<div class="form-group col-8 p-0">';
-			inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
-			inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
-			inputModal += 			'<div class="help-block"></div>'
-			inputModal += 		'</div">';
-			inputModal += 	'</div>';
-			inputModal += '</form>';
-	} else {
-		inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
-	}
+	inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
@@ -350,6 +320,7 @@ function cardDetailsTwoFactor(action) {
 function validateCardDetail() {
 	who = 'Business'; where = 'getVirtualDetail'
 	callNovoCore(who, where, data, function(response) {
+		insertFormInput(false);
 		switch (response.code) {
 			case 0:
 				$('#accept').addClass('virtualDetail-btn').removeClass('sensitive-btn');
@@ -481,7 +452,7 @@ function validateFormCard() {
 
 	validateForms(form);
 	if (form.valid()) {
-		$(this)
+		$('#accept')
 		.removeClass('sensitive-btn')
 		.html(loader)
 		.prop('disabled',true)

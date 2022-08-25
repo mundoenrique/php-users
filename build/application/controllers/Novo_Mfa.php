@@ -34,6 +34,10 @@ class Novo_Mfa extends NOVO_Controller {
 			"mfa/twoFactorEnablement"
 		);
 
+		if ($this->session->otpActive == TRUE) {
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
+		}
+
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 		$this->views = ['mfa/'.$view];
@@ -59,6 +63,15 @@ class Novo_Mfa extends NOVO_Controller {
 			"third_party/additional-methods",
 			"mfa/twoFactorCode"
 		);
+
+		if (empty((array)$this->request) && $this->session->otpActive == TRUE) {
+			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
+		}
+
+		// if (empty((array)$this->request) && $this->session->otpActive == FALSE) {
+		// 	redirect(base_url(lang('CONF_LINK_TWO_FACTOR')), 'Location', 301);
+		// }
+
 		$this->render->channel = $value;
 
 		$this->render->activeHeader = TRUE;
