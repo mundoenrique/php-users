@@ -147,7 +147,7 @@ class Novo_User_Model extends NOVO_Model {
 						'maskMail' => maskString($response->email, 4, $end = 6, '@'),
 						'otpActive' => $response->otpActive ?? FALSE,
 						'otpChannel' => $response->otpChannel ?? '',
-						'otpMfaCode' => FALSE
+						'otpMfaAuthorization' => FALSE
 					];
 
 					$this->session->set_userdata($userData);

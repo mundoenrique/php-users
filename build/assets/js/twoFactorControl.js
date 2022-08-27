@@ -1,5 +1,6 @@
 'use strict'
 $(function() {
+
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
 		$('#accept').addClass('sure-disable-two-factor');
@@ -42,6 +43,10 @@ $(function() {
 					case 2:
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					break;
+					case 3:
+						appMessages(response.title, response.msg, response.icon, response.modalBtn);
+						$('#accept').removeClass('disable-two-factor');
+					break;
 				}
 			});
 		}
@@ -76,6 +81,10 @@ function disableSecretToken (action){
 					$('#accept').addClass('disable-two-factor');
 					modalSecretToken(response)
 				});
+			break;
+			case 3:
+				appMessages(response.title, response.msg, response.icon, response.modalBtn);
+				$('#accept').removeClass('disable-two-factor');
 			break;
 			}
 	});

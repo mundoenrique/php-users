@@ -4,7 +4,7 @@ var img = $('#cardImage').val();
 var imgRev = $('#cardImageRev').val();
 var brand = $('#brand').val();
 var channelCardDetail = $('#channel').val();
-var otpMfa = $('#otpMfaCode').val();
+var otpMfaAuthorization = $('#otpMfaAuth').val();
 
 $(function () {
 	displaymoves()
@@ -97,7 +97,7 @@ $(function () {
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
 
-		if (lang.CONF_TWO_FACTOR == 'ON' && otpMfa == false) {
+		if (lang.CONF_TWO_FACTOR == 'ON' && !otpMfaAuthorization) {
 			var form = $('#twoFactorCodeCardForm');
 			validateForms(form);
 			if (form.valid()) {
@@ -108,7 +108,13 @@ $(function () {
 				callNovoCore(who, where, data, function(response) {
 					switch (response.code) {
 						case 0:
+							otpMfaAuthorization = true;
 							validateFormCard();
+						break;
+						case 3:
+							insertFormInput(false);
+							appMessages(response.title, response.msg, response.icon, response.modalBtn);
+							$('#accept').removeClass('sensitive-btn');
 						break;
 					}
 				});
@@ -447,12 +453,11 @@ function validateFormCard() {
 }
 
 function cardDetailsTwoFactor(action) {
-  console.log('canal---'+channelCardDetail);
-  console.log('bandera---'+otpMfa);
 
 	if(channelCardDetail == lang.CONF_MFA_CHANNEL_APP){
 		modalTokenCardDetails();
 		$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn','resend-code-sensitive');
+		$('#accept').removeClass('disable-two-factor');
 		$('#cancel').removeAttr('disabled');
 	}else{
 		var data = new Object();
@@ -462,17 +467,21 @@ function cardDetailsTwoFactor(action) {
 			switch (response.code) {
 				case 0:
 					modalTokenCardDetails();
-					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
+					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn','disable-two-factor');
+					$('#accept').removeClass('disable-two-factor');
 					$('#cancel').removeAttr('disabled');
 				break;
 				case 2:
 					appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
 						modalTokenCardDetails();
-						$('#accept').removeClass('resend-code-sensitive');
-						$('#accept').addClass('sensitive-btn');
+						$('#accept').addClass('sensitive-btn').removeClass('resend-code-sensitive');
+						$('#accept').removeClass('disable-two-factor');
 						$('#cancel').removeAttr('disabled');
 					});
+				break;
+				case 3:
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
 				break;
 			}
 		});
@@ -501,7 +510,7 @@ function modalTokenCardDetails() {
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
-	if(otpMfa==false){
+	if(!otpMfaAuthorization){
 		inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", message);
 		if (channelCardDetail == lang.CONF_MFA_CHANNEL_EMAIL) {
 			inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
@@ -515,7 +524,6 @@ function modalTokenCardDetails() {
 		inputModal += 			'<div class="help-block"></div>'
 		inputModal += 		'</div">';
 	}
-
 	inputModal += 	'</div>';
 	inputModal += '</form>';
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);

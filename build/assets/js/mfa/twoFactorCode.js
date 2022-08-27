@@ -27,6 +27,12 @@ $(function () {
 						$('#twoFactorCodeBtn').html(btnText);
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					break;
+					case 3:
+						appMessages(response.title, response.msg, response.icon, response.modalBtn);
+						insertFormInput(false);
+						$('#twoFactorCodeBtn').html(btnText);
+						$('#authenticationCode').val('');
+					break;
 				}
 			});
 		}
@@ -54,6 +60,10 @@ function getSecretToken(action) {
 				case 2:
 					appMessages(response.title, response.msg, response.icon, response.modalBtn);
 					sessionStorage.channel = data.channel;
+					$('#authenticationCode').val('');
+				break;
+				case 3:
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
 				break;
 			}
 		});
