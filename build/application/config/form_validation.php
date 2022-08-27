@@ -222,13 +222,19 @@ $config = [
 	'generateSecretToken' => [
 		[
 			'field' => 'channel',
-			'rules' => 'trim|alpha_numeric'
+			'rules' => 'trim|regex_match[/^[a-zA-Z_]+$/i]'
+		],
+	],
+	'generateOtp2fa' => [
+		[
+			'field' => 'sendResendOtp2fa',
+			'rules' =>'trim|alpha_numeric'
 		],
 	],
 	'desactivateSecretToken' => [
 		[
-			'field' => 'value',
-			'rules' => 'trim'
+			'field' => 'resendDisableSecretToken',
+			'rules' =>'trim|alpha_numeric'
 		],
 	],
 	'validateOTP2fa' => [

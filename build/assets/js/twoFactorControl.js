@@ -3,6 +3,7 @@ $(function() {
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
 		$('#accept').addClass('sure-disable-two-factor');
+		$('#cancel').removeAttr('disabled');
 		$('#accept').removeClass('sensitive-btn disable-two-factor');
 		modalBtn = {
 			btn1: {
@@ -29,9 +30,9 @@ $(function() {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		form = $('#twoFactorDisableForm');
-		$(this).html(loader);
 		validateForms(form);
 		if (form.valid()) {
+			$(this).html(loader);
 			data = getDataForm(form);
 			data.operationType = lang.CONF_MFA_DESACTIVATE_SECRET_TOKEN;
 			insertFormInput(true);

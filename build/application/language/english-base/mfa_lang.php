@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //MULTIFACTOR AUTENTICATION
 $lang['MFA_TWO_FACTOR_EMAIL'] = 'email';
 $lang['MFA_TWO_FACTOR_APP'] = 'app';
-$lang['MFA_TWO_FACTOR_APLICATION'] = 'aplication';
 $lang["MFA_TWO_FACTOR_RESEND_CODE"] = 'The authentication code has been resent to your email %s';
 $lang["MFA_TWO_FACTOR_ENABLED"] = 'Two-factor authentication is enabled.';
 $lang["MFA_TWO_FACTOR_DISABLED_REDIRECT"] = 'Two-factor authentication is disabled. You will be redirected to enable it.';
@@ -19,4 +18,3 @@ $lang['MFA_ACCOUNT_VERIFICATION'] = 'Account Verification';
 $lang['MFA_VERIFY_MSG_EMAIL'] = 'Please verify that you can receive messages in the email registered in the application.';
 $lang['MFA_ACTIVATION_TYPE'] = 'Activation type';
 $lang['MFA_USING_AN_APP'] = 'Authentication app';
-$lang['MFA_VIA_EMAIL'] = 'Email';

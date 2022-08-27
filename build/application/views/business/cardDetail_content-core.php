@@ -12,6 +12,7 @@
             </div>
 						<form id="channelFormCardDetail">
 							<input type="hidden" id="channel" name="channel" class="hidden" value="<?= $this->session->otpChannel ?>">
+							<input type="hidden" id="otpMfaCode" name="otpMfaCode" class="hidden" value="<?= $this->session->otpMfaCode ?>">
 						</form>
             <?php if ($isVirtual): ?>
             <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('CONF_NO_LINK'); ?>">

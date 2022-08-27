@@ -19,7 +19,7 @@
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input id="twoFactorEmail" name="twoFactorEnablement" class="custom-control-input" type="radio" value="<?= lang('MFA_TWO_FACTOR_EMAIL') ?>" disabled>
-							<label class="custom-control-label" for="twoFactorEmail"><?= lang('MFA_VIA_EMAIL'); ?></label>
+							<label class="custom-control-label" for="twoFactorEmail"><?= lang('GEN_VIA_EMAIL'); ?></label>
 						</div>
 						<div class="help-block"></div>
 						<p class="visible" id="verifyMsg" ><?= lang('MFA_VERIFY_MSG_EMAIL'); ?></p>

@@ -137,6 +137,7 @@ class Verify_Access {
 			case 'twoFactorCode':
 			case 'generateSecretToken':
 			case 'desactivateSecretToken':
+			case 'generateOtp2fa':
 			case 'validateOTP2fa':
 				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_TWO_FACTOR') == 'ON';
 				break;

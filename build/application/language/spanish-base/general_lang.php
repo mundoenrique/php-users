@@ -216,3 +216,5 @@ $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s para ver tu código de autenti
 $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
 $lang["GEN_TWO_FACTOR_REMEMBER"] = 'Recuerda que para usar algunas operaciones debes tener activado la autenticación de dos factores.';
 $lang["GEN_TWO_FACTOR_SEND_CODE"] = 'Si el código no ha llegado a tu correo electrónico, por favor hacer clic en el link.';
+$lang['GEN_TWO_FACTOR_APLICATION'] = 'aplicación';
+$lang['GEN_VIA_EMAIL'] = 'Correo Electrónico';

@@ -22,8 +22,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
 
-		$authenticationChannel = (isset($dataRequest->channel) &&
-		$dataRequest->channel == lang('MFA_TWO_FACTOR_APP') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
+		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -33,7 +32,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 		$this->dataRequest->requestBody = $requestBody;
 
 		log_message('INFO', '****NOVO Mfa Model REQUEST*****'.json_encode($this->dataRequest->requestBody));
-
 		//$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
 
 		switch ($authenticationChannel) {
@@ -46,13 +44,10 @@ class Novo_Mfa_Model extends NOVO_Model {
 		}
 
 		$this->isResponseRc = 0;
-
 		switch ($this->isResponseRc) {
 			case 0:
 				if ($dataRequest->sendResendToken) {
 					$this->response->code = 0;
-					$this->response->message =  $authenticationChannel == lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_TWO_FACTOR_APLICATION') : lang('MFA_VIA_EMAIL') ;
-					// $this->session->set_flashdata('sendSecretToken', TRUE);
 				} else {
 					$this->response->code = 2;
 					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
@@ -61,14 +56,49 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
-				$this->response->otpChannel =  $authenticationChannel;
 			break;
 		}
 
 		$this->response->data = $response->data;
-
 		return $this->responseToTheView('callWs_GenerateSecretToken');
 	}
+
+	/**
+	 * @info Método para Generar Otp de multifactor de autenticación
+   * @author Luis Molina.
+   * @date August 26th, 2022
+	 */
+	public function callWs_GenerateOtp2fa_Mfa($dataRequest)
+  {
+    log_message('INFO', 'NOVO Mfa Model: Mfa GenerateOtp2fa Method Initialized');
+
+    $requestBody = [
+      'username' => $this->session->userName
+    ];
+
+    log_message('INFO', '****NOVO Mfa Model dataRequest*****'.json_encode($requestBody));
+
+    //$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
+
+    $response = json_decode('{"code":"200"}');
+
+		$this->isResponseRc = 0;
+		switch ($this->isResponseRc) {
+			case 0:
+				if ($dataRequest->sendResendOtp2fa) {
+					$this->response->code = 0;
+				} else {
+					$this->response->code = 2;
+					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->msg =  novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
+					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				}
+			break;
+		}
+    return $this->responseToTheView('callWs_GenerateOtp2fa');
+  }
 
 	/**
 	 * @info Método para desactivar Secret Token de multifactor de autenticación
@@ -78,9 +108,11 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_DesactivateSecretToken_Mfa($dataRequest)
   {
     log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
+
     $requestBody = [
       'username' => $this->session->userName
     ];
+
     log_message('INFO', '****NOVO Mfa Model dataRequest*****'.json_encode($requestBody));
 
     //$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
@@ -115,22 +147,25 @@ class Novo_Mfa_Model extends NOVO_Model {
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
 
-		$authenticationChannel = (isset($dataRequest->channel) &&
-		$dataRequest->channel == lang('MFA_TWO_FACTOR_APP') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') || isset($dataRequest->channel) && $dataRequest->channel == lang('CONF_MFA_CHANNEL_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
+		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
 
 		$requestBody = [
 				'username' => $this->session->userName,
 				'otpValue' => $dataRequest->authenticationCode,
-				'operationType' => $dataRequest->operationType
+				'operationType' => $dataRequest->operationType,
+				'authenticationChannel' => $authenticationChannel
 		];
 
 		$this->dataRequest->requestBody = $requestBody;
+
 		log_message('INFO', '****NOVO Mfa Model REQUEST*****'.json_encode($this->dataRequest->requestBody));
+		//$response = $this->sendToCoreServices('callWs_ValidateOTP2fa');
 
 		$response = json_decode('{ "code": "string", "message": "string", "datetime": "string","data": {"validationResult": true }}');
 
+		log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
+
 		$this->isResponseRc = 0;
-    log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
     switch ($this->isResponseRc) {
       case 0:
 				switch ($dataRequest->operationType) {
@@ -155,15 +190,16 @@ class Novo_Mfa_Model extends NOVO_Model {
 						$this->response->modalBtn['btn1']['action'] = 'redirect';
 						$this->session->set_userdata('otpActive', FALSE);
 						$this->session->set_userdata('otpChannel', '');
+						$this->session->set_userdata('otpMfaCode', FALSE);
 					break;
 					case lang('CONF_MFA_VALIDATE_OTP'):
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
+						$this->session->set_userdata('otpMfaCode', TRUE);
 					break;
 				}
       break;
     }
-
 		return $this->responseToTheView('callWs_ValidateOTP');
 	}
 }

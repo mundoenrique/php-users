@@ -3,6 +3,8 @@ var interval,inputModal,inputModalCard,inputModalCardOtp;
 var img = $('#cardImage').val();
 var imgRev = $('#cardImageRev').val();
 var brand = $('#brand').val();
+var channelCardDetail = $('#channel').val();
+var otpMfa = $('#otpMfaCode').val();
 
 $(function () {
 	displaymoves()
@@ -82,7 +84,7 @@ $(function () {
 	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		$('#accept').removeClass('disable-two-factor');
+		$('#accept').removeClass('disable-two-factor, sure-disable-two-factor');
 		if (lang.CONF_TWO_FACTOR == 'ON') {
 			cardDetailsTwoFactor(true);
 		} else {
@@ -94,7 +96,8 @@ $(function () {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
-		if (lang.CONF_TWO_FACTOR == 'ON') {
+
+		if (lang.CONF_TWO_FACTOR == 'ON' && otpMfa == false) {
 			var form = $('#twoFactorCodeCardForm');
 			validateForms(form);
 			if (form.valid()) {
@@ -289,33 +292,7 @@ function sensitiveInformation() {
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
-function cardDetailsTwoFactor(action) {
-	sessionStorage.clear();
-	$('#cancel').prop('disabled',false);
-	form = $('#channelFormCardDetail');
-	validateForms(form);
-	if (form.valid()) {
-		data = getDataForm(form);
-		data.sendResendToken = action;
-		who = 'Mfa'; where = 'GenerateSecretToken';
-		callNovoCore(who, where, data, function(response) {
-			switch (response.code) {
-				case 0:
-					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
-					modalTokenCardDetails(response);
-				break;
-				case 2:
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
-					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
-						$('#accept').removeClass('resend-code-sensitive');
-						$('#accept').addClass('sensitive-btn');
-						modalTokenCardDetails(response);
-					});
-				break;
-			}
-		});
-	}
-}
+
 
 function validateCardDetail() {
 	who = 'Business'; where = 'getVirtualDetail'
@@ -469,7 +446,42 @@ function validateFormCard() {
 	}
 }
 
-function modalTokenCardDetails(response) {
+function cardDetailsTwoFactor(action) {
+  console.log('canal---'+channelCardDetail);
+  console.log('bandera---'+otpMfa);
+
+	if(channelCardDetail == lang.CONF_MFA_CHANNEL_APP){
+		modalTokenCardDetails();
+		$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn','resend-code-sensitive');
+		$('#cancel').removeAttr('disabled');
+	}else{
+		var data = new Object();
+		data.sendResendOtp2fa = action;
+		who = 'Mfa'; where = 'GenerateOtp2fa';
+		callNovoCore(who, where, data, function(response) {
+			switch (response.code) {
+				case 0:
+					modalTokenCardDetails();
+					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
+					$('#cancel').removeAttr('disabled');
+				break;
+				case 2:
+					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
+						modalTokenCardDetails();
+						$('#accept').removeClass('resend-code-sensitive');
+						$('#accept').addClass('sensitive-btn');
+						$('#cancel').removeAttr('disabled');
+					});
+				break;
+			}
+		});
+	}
+}
+
+function modalTokenCardDetails() {
+	var message = channelCardDetail == lang.CONF_MFA_CHANNEL_APP ? lang.GEN_TWO_FACTOR_APLICATION : lang.GEN_VIA_EMAIL;
+
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -489,18 +501,21 @@ function modalTokenCardDetails(response) {
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
 	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
-	inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", response.message);
-	if (response.otpChannel == lang.CONF_MFA_CHANNEL_EMAIL) {
-		inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
-		inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
+	if(otpMfa==false){
+		inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", message);
+		if (channelCardDetail == lang.CONF_MFA_CHANNEL_EMAIL) {
+			inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
+			inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
+		}
+		inputModal += 			'</p>';
+		inputModal += 		'</div>';
+		inputModal += 		'<div class="form-group col-8 p-0">';
+		inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
+		inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
+		inputModal += 			'<div class="help-block"></div>'
+		inputModal += 		'</div">';
 	}
-	inputModal += 			'</p>';
-	inputModal += 		'</div>';
-	inputModal += 		'<div class="form-group col-8 p-0">';
-	inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
-	inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
-	inputModal += 			'<div class="help-block"></div>'
-	inputModal += 		'</div">';
+
 	inputModal += 	'</div>';
 	inputModal += '</form>';
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
