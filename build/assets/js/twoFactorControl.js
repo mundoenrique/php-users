@@ -1,4 +1,5 @@
 'use strict'
+var message;
 $(function() {
 
 	$('#disableTwoFactor').on('click', function (e) {
@@ -39,17 +40,26 @@ $(function() {
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOTP2fa';
 			callNovoCore(who, where, data, function(response) {
+				insertFormInput(false);
 				switch (response.code) {
 					case 2:
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
+						message = null;
 					break;
 					case 3:
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
 						$('#accept').removeClass('disable-two-factor');
+						$('#accept').addClass('invalid-code');
 					break;
 				}
 			});
 		}
+	});
+
+	$('#system-info').on('click', '.invalid-code', function (e) {
+		$('#accept').removeClass('invalid-code');
+		$('#accept').addClass('disable-two-factor');
+		modalSecretToken(message)
 	});
 
 	$('#system-info').on('click', '#resendCode', function (e) {
@@ -73,6 +83,7 @@ function disableSecretToken (action){
 		switch (response.code) {
 			case 0:
 				modalSecretToken(response)
+				message = response;
 			break;
 			case 2:
 				appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, response.msg, response.icon, response.modalBtn);
@@ -84,7 +95,6 @@ function disableSecretToken (action){
 			break;
 			case 3:
 				appMessages(response.title, response.msg, response.icon, response.modalBtn);
-				$('#accept').removeClass('disable-two-factor');
 			break;
 			}
 	});

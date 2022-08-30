@@ -115,6 +115,7 @@ $(function () {
 							insertFormInput(false);
 							appMessages(response.title, response.msg, response.icon, response.modalBtn);
 							$('#accept').removeClass('sensitive-btn');
+							$('#accept').addClass('invalid-code-card');
 						break;
 					}
 				});
@@ -134,6 +135,12 @@ $(function () {
 		$('#accept').removeClass('sensitive-btn');
 		$('#accept').addClass('resend-code-sensitive');
 		cardDetailsTwoFactor(false)
+	});
+
+	$('#system-info').on('click', '.invalid-code-card', function (e) {
+		modalTokenCardDetails();
+		$('#accept').addClass('sensitive-btn').removeClass('invalid-code-card disable-two-factor');
+		$('#cancel').removeAttr('disabled');
 	});
 });
 
