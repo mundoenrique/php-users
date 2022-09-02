@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL IMAGES
 $lang['IMG_FAVICON'] = 'favicon-coop';
-$lang['IMG_SIGNIN_LOGO_WIDGET'] = 'img-logo.svg';
+$lang['IMG_SIGNIN_LOGO_WIDGET'] = 'img-logo.png';
+$lang['IMG_LOGO_HEADER'] = 'img-logo.png';
+$lang['IMG_PROGRAM_IMG_DEFAULT'] =	'coop_default.svg';
+$lang['IMG_PROGRAM_IMG_DEFAULT_REV'] =	'coop_default_rev.svg';
 // NETWORKS
 $lang['IMG_FOTTER_NETWORKS_IMG'] = [
 	'facebook' => 'facebook.png',

@@ -11,7 +11,6 @@ $lang['CONF_WIDGET_REST_COUNTRY'] = 'ON';
 //FOOTER
 $lang['CONF_FOOTER_NETWORKS'] = 'ON';
 $lang['CONF_FOOTER_LOGO'] = 'OFF';
-$lang['CONF_FOOTER_MARK'] = 'ON';
 //EXTERNAL LINKS
 $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => 'https://www.facebook.com/BCCoopcentral',
