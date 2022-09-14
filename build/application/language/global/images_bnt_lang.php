@@ -11,6 +11,6 @@ $lang['IMG_PROGRAM_IMG_DEFAULT_REV'] =	'bnt_default_rev.svg';
 $lang['IMG_FOTTER_NETWORKS_IMG'] = [
 	'facebook' => 'facebook.png',
 	'twitter' => 'twitter.png',
-	'youtube' => 'instagram.png',
-	'instagram' => 'linkedin.png',
+	'youtube' => 'youtube.png',
+	'instagram' => 'instagram.png',
 ];
