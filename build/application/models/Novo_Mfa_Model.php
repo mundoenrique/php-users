@@ -21,8 +21,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_GenerateSecretToken_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
-
-		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
+		$authenticationChannel = isset($dataRequest->channel) && $dataRequest->channel;
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -168,8 +167,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_ValidateOTP2fa_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
-
-		$authenticationChannel = (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_APP')) ? lang('CONF_MFA_CHANNEL_APP') : (isset($dataRequest->channel) && $dataRequest->channel == lang('MFA_TWO_FACTOR_EMAIL') ? lang('CONF_MFA_CHANNEL_EMAIL') : '');
+		$authenticationChannel = isset($dataRequest->channel) && $dataRequest->channel;
 
 		$requestBody = [
 				'username' => $this->session->userName,

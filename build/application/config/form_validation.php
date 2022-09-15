@@ -222,7 +222,7 @@ $config = [
 	'generateSecretToken' => [
 		[
 			'field' => 'channel',
-			'rules' => 'trim|regex_match[/^[a-zA-Z_]+$/i]'
+			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]'
 		],
 	],
 	'generateOtp2fa' => [

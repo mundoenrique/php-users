@@ -23,7 +23,7 @@ $(function () {
 	});
 
 	$(radioType).change(function() {
-		if($(this).attr('value') == lang.MFA_TWO_FACTOR_EMAIL){
+		if($(this).attr('value') == lang.CONF_MFA_CHANNEL_EMAIL){
 			$('#verifyMsg').removeClass('visible');
 		} else {
 			$('#verifyMsg').addClass('visible');

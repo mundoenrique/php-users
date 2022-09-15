@@ -10,7 +10,7 @@
 		<form id="channelForm">
 			<input type="hidden" id="channel" name="channel" class="hidden" value="<?= $channel ?>">
 		</form>
-			<?php if($channel == lang('MFA_TWO_FACTOR_APP')): ?>
+			<?php if($channel == lang('CONF_MFA_CHANNEL_APP')): ?>
 				<div>
 					<p><?= lang('MFA_TWO_FACTOR_CODE_APP'); ?>
 					<?php foreach (lang('CONF_TWO_FACTOR_LINK') as $key => $value) : ?>
