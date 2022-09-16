@@ -72,8 +72,16 @@ class Novo_Mfa extends NOVO_Controller {
 		// 	redirect(base_url(lang('CONF_LINK_TWO_FACTOR')), 'Location', 301);
 		// }
 
-		$this->render->channel = $value;
+		switch ($value) {
+			case lang('MFA_TWO_FACTOR_APP'):
+				$value = lang('CONF_MFA_CHANNEL_APP');
+				break;
+			case lang('MFA_TWO_FACTOR_EMAIL'):
+				$value = lang('CONF_MFA_CHANNEL_EMAIL');
+				break;
+		}
 
+		$this->render->channel = $value;
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
 		$this->views = ['mfa/'.$view];

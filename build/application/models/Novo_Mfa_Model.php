@@ -21,7 +21,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_GenerateSecretToken_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
-		$authenticationChannel = isset($dataRequest->channel) && $dataRequest->channel;
+		$authenticationChannel = $dataRequest->channel;
 
 		$requestBody = [
 			'authenticationChannel' => $authenticationChannel,
@@ -167,7 +167,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_ValidateOTP2fa_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
-		$authenticationChannel = isset($dataRequest->channel) && $dataRequest->channel;
 
 		$requestBody = [
 				'username' => $this->session->userName,
@@ -196,7 +195,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 						$this->response->modalBtn['btn1']['action'] = 'redirect';
 						$this->session->set_userdata('otpActive', TRUE);
-						$this->session->set_userdata('otpChannel', $authenticationChannel);
+						$this->session->set_userdata('otpChannel', $dataRequest->channel);
 					break;
 					case lang('CONF_MFA_DESACTIVATE_SECRET_TOKEN'):
 						$this->response->code = 2;

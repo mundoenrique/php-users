@@ -242,6 +242,10 @@ $config = [
 			'field' => 'authenticationCode',
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
 		],
+		[
+			'field' => 'channel',
+			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]'
+		],
 	],
 	'accessRecoverOTP' => [
 		[

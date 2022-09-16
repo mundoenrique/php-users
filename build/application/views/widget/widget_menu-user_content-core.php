@@ -3,7 +3,7 @@
 	<ul class="flex my-0 items-center list-style-none list-inline">
 		<li>
 			<a class="mt-1 mx-1 regular text-decoration-none white flex" href="<?= lang('CONF_NO_LINK') ?>">
-				<span class="tool-ellipsis"><?= $fullName ?></span>
+				<span class="tool-ellipsis mr-2"><?= $fullName ?></span>
         <i class="ml-5 icon icon-chevron-down" aria-hidden="true"></i>
       </a>
 			<ul class="dropdown regular tertiary bg-secondary">
@@ -22,7 +22,7 @@
 				<?php endif; ?>
 				<?php if(lang('CONF_TWO_FACTOR') == 'ON' && $this->session->otpActive == TRUE): ?>
 				<li>
-					<a id="disableTwoFactor" class="pl-2 pr-1 h6" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_TWO_FACTOR_DISABLE'); ?></a>
+					<a id="disableTwoFactor" class="pl-2 pr-1 h6 truncate" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_TWO_FACTOR_DISABLE'); ?></a>
 				</li>
 				<?php endif; ?>
 				<li>
