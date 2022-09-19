@@ -184,10 +184,13 @@ defined('WS_KEY')			 		OR define('WS_KEY', $_SERVER['WS_KEY']);
 defined('OAUTH_URL')			OR define('OAUTH_URL', $_SERVER['OAUTH_URL']);
 defined('URL_API')				OR define('URL_API', $_SERVER['URL_API']);
 defined('URL_API_SERV')		OR define('URL_API_SERV', $_SERVER['URL_API_SERV']);
+defined('URL_APIGEE_OAUTH')		OR define('URL_APIGEE_OAUTH', $_SERVER['URL_APIGEE_OAUTH']);
 defined('CLIENT_ID')			OR define('CLIENT_ID', $_SERVER['CLIENT_ID']);
 defined('CLIENT_SECRET')	OR define('CLIENT_SECRET', $_SERVER['CLIENT_SECRET']);
 defined('KEY_AES256')			OR define('KEY_AES256', $_SERVER['KEY_AES256']);
 defined('IV_AES256')			OR define('IV_AES256', $_SERVER['IV_AES256']);
+defined('CLIENT_ID_APIGEE')			OR define('CLIENT_ID_APIGEE', $_SERVER['CLIENT_ID_APIGEE']);
+defined('CLIENT_SECRET_APIGEE')			OR define('CLIENT_SECRET_APIGEE', $_SERVER['CLIENT_SECRET_APIGEE']);
 
 /*
 |--------------------------------------------------------------------------
