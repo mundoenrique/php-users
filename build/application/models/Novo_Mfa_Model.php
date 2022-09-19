@@ -21,18 +21,14 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function callWs_GenerateSecretToken_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
-		$authenticationChannel = $dataRequest->channel;
 
-		$requestBody = [
-			'authenticationChannel' => $authenticationChannel,
-			'username' => $this->session->userName
+		$this->dataRequest->uri = 'mfa/secrettoken/generate';
+		$this->dataRequest->requestBody = [
+			'username' => $this->session->userName,
+			'authenticationChannel' => 'THIRD_PARTY_APP'
 		];
 
-		$this->dataRequest->requestBody = $requestBody;
-
-		//$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
-
-		log_message('INFO', '****NOVO Mfa Model REQUEST*****'.json_encode($this->dataRequest->requestBody));
+		$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
 
 		switch ($authenticationChannel) {
 			case lang('CONF_MFA_CHANNEL_APP'):

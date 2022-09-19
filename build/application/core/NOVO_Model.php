@@ -77,27 +77,11 @@ class NOVO_Model extends CI_Model {
 	{
 		log_message('INFO', 'NOVO Model: sendToCoreServices Method Initialized');
 
-		$this->accessLog = accessLog($this->dataAccessLog);
-		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
+		$request = $this->encrypt_decrypt->encryptCoreServices($this->dataRequest, $model);
+		$response = $this->connect_services_apis->connectCoreServices($request, $model);
+		$decryptResponse = $this->encrypt_decrypt->decryptCoreServices($response, $model);
 
-		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod != '') {
-			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
-		}
-
-		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
-		$this->dataRequest->token = $this->token;
-		$this->dataRequest->logAccesoObject = $this->accessLog;
-
-		$encryptData = $this->encrypt_connect->encryptDecryptAES($this->dataRequest,'encrypt', $this->userName, $model);
-		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
-		$response = $this->encrypt_connect->connectCoreServices($request, $this->userName, $model);
-
-		if(isset($response->rc)) {
-			$responseDecrypt = $response;
-		} else {
-			$responseDecrypt = $this->encrypt_connect->encryptDecryptAES($response->data,'decrypt', $this->userName, $model);
-		}
-		return $this->makeAnswer($responseDecrypt);
+		return $this->makeAnswer($decryptResponse);
 	}
 
 	/**
