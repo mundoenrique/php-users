@@ -30,7 +30,7 @@ class NOVO_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Controller Class Initialized');
+		writeLog('INFO', 'Controller Class Initialized');
 
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();

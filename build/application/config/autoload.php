@@ -113,7 +113,8 @@ $autoload['helper'] = array(
 	'cookie',
 	'menu',
 	'novo_language',
-	'novo_toolset'
+	'novo_toolset',
+	'novo_log'
 );
 
 /*
