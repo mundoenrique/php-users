@@ -1,8 +1,9 @@
-.env
-.vscode
-.DS_Store
-Thumbs.db
+# vscod
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/index.html
 
+# codeigniter 3
 **/cache/*
 !**/cache/index.html
 !**/cache/.htaccess
@@ -14,10 +15,15 @@ Thumbs.db
 **/vendor/
 **/sessions/
 
+**/composer.lock
+tests/mocks/database/ci_test.sqlite
+
 # IDE Files
 #-------------------------
 /nbproject/
 .idea/*
+.DS_Store
+Thumbs.db
 
 ## Sublime Text cache files
 *.tmlanguage.cache

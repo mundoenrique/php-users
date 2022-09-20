@@ -211,4 +211,3 @@ defined('ARGON2_SALT')					OR define('ARGON2_SALT', $_SERVER['ARGON2_SALT']);
 defined('KEY_API')	OR define('KEY_API', $_SERVER['KEY_API']);
 
 unset($uriSegments, $proxyIps, $timeZone, $baseLanguage, $errorController);
-
