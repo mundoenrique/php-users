@@ -20,15 +20,26 @@ class Encrypt_Decrypt
 	public function encryptCoreServices($request, $model)
 	{
 		writeLog('INFO', 'Encrypt_Decrypt: encryptCoreServices method Initialized');
+		$request->requestBody = json_encode($request->requestBody, JSON_UNESCAPED_UNICODE);
 
-		writeLog('DEBUG', 'REQUEST ' . $model . ': ' . json_encode($request, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'REQUEST ' . $model . ': ' . $request->requestBody);
+
+		if (API_GEE_WAY === 'ON') {
+		}
 
 		return $request;
 	}
 
 	public function decryptCoreServices($response)
 	{
-		log_message('INFO', 'NOVO Encrypt_Decrypt: decryptCoreServices method Initialized');
+		writeLog('INFO', 'Encrypt_Decrypt: decryptCoreServices method Initialized');
+
+		$data = isset($response->info->data) ? json_encode($response->info->data, CURLINFO_HTTP_CODE) : 'NO DATA';
+
+		if (API_GEE_WAY === 'ON' && $data !== 'NO DATA') {
+		}
+
+		writeLog('DEBUG', 'RC: ' . $response->rc . ' RESPONSE DATA: ' . $data );
 
 		return $response;
 	}
