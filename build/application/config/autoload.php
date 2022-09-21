@@ -114,7 +114,7 @@ $autoload['helper'] = array(
 	'menu',
 	'novo_language',
 	'novo_toolset',
-	'novo_log'
+	'novo_server'
 );
 
 /*
