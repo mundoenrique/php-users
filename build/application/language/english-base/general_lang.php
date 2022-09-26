@@ -216,5 +216,4 @@ $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = 'Are you sure you want to disable two-fac
 $lang["GEN_TWO_FACTOR_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
 $lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
 $lang['GEN_TWO_FACTOR_APLICATION'] = 'aplication';
-$lang['GEN_VIA_EMAIL'] = 'Email';
 

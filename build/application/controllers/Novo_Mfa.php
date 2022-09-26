@@ -67,10 +67,10 @@ class Novo_Mfa extends NOVO_Controller {
 		}
 
 		switch ($value) {
-			case lang('MFA_TWO_FACTOR_APP'):
+			case lang('CONF_MFA_APP'):
 				$value = lang('CONF_MFA_CHANNEL_APP');
 				break;
-			case lang('MFA_TWO_FACTOR_EMAIL'):
+			case lang('CONF_MFA_EMAIL'):
 				$value = lang('CONF_MFA_CHANNEL_EMAIL');
 				break;
 		}

@@ -1,11 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//MULTIFACTOR DE AUTENTICACIÓN
-$lang['MFA_TWO_FACTOR_EMAIL'] = 'email';
-$lang['MFA_TWO_FACTOR_APP'] = 'app';
 $lang["MFA_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenticación a tu correo %s.';
-$lang["MFA_TWO_FACTOR_ENABLED"] = 'La autenticación de dos factores está habilitada.';
-$lang["MFA_TWO_FACTOR_DISABLED_REDIRECT"] = 'La autenticación de dos factores está inhabilitada. Seras redirigido para la habilitación del mismo.';
+$lang["MFA_TWO_FACTOR_ENABLED"] = 'La autenticación de dos factores fue habilitada.';
+$lang["MFA_TWO_FACTOR_DISABLED_REDIRECT"] = 'La autenticación de dos factores fue deshabilitada. Seras dirigido para la habilitación del mismo.';
 $lang["MFA_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo %s. Ingresa el mismo a continuación.';
 $lang["MFA_TWO_FACTOR_ENABLEMENT_CONTENT"] = '
 <p>La autenticación de dos factores aún no está habilitada.</p>
