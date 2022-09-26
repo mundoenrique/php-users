@@ -219,13 +219,13 @@ $config = [
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
 		],
 	],
-	'generateSecretToken' => [
+	'activateSecretToken' => [
 		[
 			'field' => 'channel',
 			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]'
 		],
 	],
-	'generateOtp2fa' => [
+	'generateOtp' => [
 		[
 			'field' => 'sendResendOtp2fa',
 			'rules' =>'trim|alpha_numeric'
@@ -237,7 +237,7 @@ $config = [
 			'rules' =>'trim|alpha_numeric'
 		],
 	],
-	'validateOTP2fa' => [
+	'validateOtp' => [
 		[
 			'field' => 'authenticationCode',
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'

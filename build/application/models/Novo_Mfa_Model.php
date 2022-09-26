@@ -18,7 +18,7 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_GenerateSecretToken_Mfa($dataRequest)
+	public function callWs_ActivateSecretToken_Mfa($dataRequest)
 	{
 		writeLog('INFO', 'Mfa Model: ActivateSecretToken Method Initialized');
 
@@ -88,7 +88,7 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_DesactivateSecretToken_Mfa($dataRequest)
+	public function callWs_GenerateOtp_Mfa($dataRequest)
   {
     writeLog('INFO', 'Mfa Model: GenerateOtp Method Initialized');
 
@@ -132,7 +132,7 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date Jul 07th, 2022
 	 */
-	public function callWs_ValidateOTP2fa_Mfa($dataRequest)
+	public function callWs_ValidateOtp_Mfa($dataRequest)
 	{
 		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
 

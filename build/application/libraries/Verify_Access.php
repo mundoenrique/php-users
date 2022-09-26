@@ -135,10 +135,10 @@ class Verify_Access {
 				break;
 			case 'twoFactorEnablement':
 			case 'twoFactorCode':
-			case 'generateSecretToken':
+			case 'activateSecretToken':
 			case 'desactivateSecretToken':
-			case 'generateOtp2fa':
-			case 'validateOTP2fa':
+			case 'generateOtp':
+			case 'validateOtp':
 				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_TWO_FACTOR') == 'ON';
 				break;
 			case 'keepSession':
@@ -158,24 +158,26 @@ class Verify_Access {
 			case 'transactionalLimits':
 			case 'replacement':
 			case 'changePin':
-			case 'getVirtualDetail':
 				$auth = $this->CI->session->has_userdata('products');
+				break;
+			case 'getVirtualDetail':
+				$auth = $this->CI->session->has_userdata('products')/*  && $this->CI->session->otpMfaAuth */;
 				break;
 			case 'expensesCategory':
 			case 'getMovements':
 			case 'downloadInquiry':
-				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') == 'ON';
+				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') === 'ON';
 				break;
 			case 'notifications':
 			case 'notificationHistory':
-				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') == 'ON';
+				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') === 'ON';
 				break;
 			case 'getOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
-				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer == 'S' && lang('CONF_PAYS_TRANSFER') == 'ON';
+				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S' && lang('CONF_PAYS_TRANSFER') === 'ON';
 				break;
 			case 'signup':
 				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
