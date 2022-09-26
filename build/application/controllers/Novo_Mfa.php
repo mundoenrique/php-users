@@ -24,7 +24,6 @@ class Novo_Mfa extends NOVO_Controller {
 		writeLog('INFO', 'Mfa: twoFactorEnablement Method Initialized');
 
 		$view = 'twoFactorEnablement';
-		$this->session->unset_userdata('products');//Llevar al modelo
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -54,7 +53,6 @@ class Novo_Mfa extends NOVO_Controller {
 		writeLog('INFO', 'Mfa: twoFactorCode Method Initialized');
 
 		$view = 'twoFactorCode';
-		$this->session->unset_userdata('products');//Llevar al modelo
 
 		array_push(
 			$this->includeAssets->jsFiles,
@@ -67,10 +65,6 @@ class Novo_Mfa extends NOVO_Controller {
 		if (empty((array)$this->request) && $this->session->otpActive == TRUE) {
 			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
 		}
-
-		// if (empty((array)$this->request) && $this->session->otpActive == FALSE) {
-		// 	redirect(base_url(lang('CONF_LINK_TWO_FACTOR')), 'Location', 301);
-		// }
 
 		switch ($value) {
 			case lang('MFA_TWO_FACTOR_APP'):
