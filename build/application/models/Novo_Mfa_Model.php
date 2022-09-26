@@ -28,60 +28,34 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'authenticationChannel' => $dataRequest->channel
 		];
 
-		$response = $this->sendToCoreServices('callWs_GenerateSecretToken');
+		$response = $this->sendToCoreServices('callWs_ActivateSecretToken');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
+
+				if ($dataRequest->resendToken) {
+					$this->response->code = 4;
+					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
+					$this->response->modalBtn['btn1']['action'] = 'destroy';
+				}
+
 				$this->response->data = $response->info->data;
+				break;
+
+			case 462:
+				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
+				$this->session->set_userdata('otpActive', TRUE);
+				$this->session->set_userdata('otpChannel', $dataRequest->channel);
 				break;
 		}
 
-		return $this->responseToTheView('callWs_GenerateSecretToken');
+		return $this->responseToTheView('callWs_ActivateSecretToken');
 	}
-
-	/**
-	 * @info Método para Generar Otp de multifactor de autenticación
-   * @author Luis Molina.
-   * @date August 26th, 2022
-	 */
-	public function callWs_GenerateOtp2fa_Mfa($dataRequest)
-  {
-    log_message('INFO', 'NOVO Mfa Model: Mfa GenerateOtp2fa Method Initialized');
-
-    $requestBody = [
-      'username' => $this->session->userName
-    ];
-
-    log_message('INFO', '****NOVO Mfa Model dataRequest*****'.json_encode($requestBody));
-
-    //$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
-    $response = json_decode('{"code":"200"}');
-
-		switch ($response->code) {
-			case 200:
-				if ($dataRequest->sendResendOtp2fa) {
-					$this->response->code = 0;
-				} else {
-					$this->response->code = 2;
-					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg =  novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
-					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-					$this->response->modalBtn['btn1']['action'] = 'destroy';
-				}
-			break;
-			default:
-				$this->response->code = 3;
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-		}
-    return $this->responseToTheView('callWs_GenerateOtp2fa');
-  }
 
 	/**
 	 * @info Método para desactivar Secret Token de multifactor de autenticación
@@ -92,39 +66,35 @@ class Novo_Mfa_Model extends NOVO_Model {
   {
     writeLog('INFO', 'Mfa Model: GenerateOtp Method Initialized');
 
-    $requestBody = [
-      'username' => $this->session->userName
-    ];
+		$uriValidateTopt = [
+			lang('CONF_MFA_GENERATE_OTP') => 'otp/generate',
+			lang('CONF_MFA_DEACTIVATE') => 'secret-token/deactivate',
+		];
 
-    log_message('INFO', '****NOVO Mfa Model dataRequest*****'.json_encode($requestBody));
+		$this->dataRequest->uri = $uriValidateTopt[$dataRequest->operationType];
+		$this->dataRequest->requestBody = [
+			'username' => $this->session->userName
+		];
 
-    //$response = $this->sendToCoreServices('callWs_DesactivateSecretToken');
-    $response = json_decode('{"code":"200"}');
+    $response = $this->sendToCoreServices('callWs_GenerateOtp');
 
-    switch ($response->code) {
-      case 200:
-				if ($dataRequest->resendDisableSecretToken) {
-          $this->response->code = 0;
-					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_EMAIL_TEXT'), $this->session->maskMail);
-				} else {
-					$this->response->code = 2;
-					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-					$this->response->icon = lang('CONF_ICON_SUCCESS');
-					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
-					$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-					$this->response->modalBtn['btn1']['action'] = 'destroy';
-				}
-      break;
-			default:
-				$this->response->code = 3;
+		switch ($this->isResponseRc) {
+			case 0:
+				$msgArray = [lang('GEN_EMAIL'), '(' . $this->session->maskMail . ')'];
+
+				$this->response->code = 0;
 				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_CODE_VERIFY'), $msgArray);
+				$this->response->msg.=  ' ' . lang('GEN_TWO_FACTOR_SEND_CODE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
+				break;
+
+			default:
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
-    }
-    return $this->responseToTheView('callWs_DesactivateSecretToken');
+		}
+
+		return $this->responseToTheView('callWs_GenerateOtp');
   }
 
 	/**
@@ -134,73 +104,72 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_ValidateOtp_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: Mfa ValidateOTP2fa Method Initialized');
+		writeLog('INFO', 'Mfa Model: ValidateOtp Method Initialized');
 
-		$requestBody = [
-				'username' => $this->session->userName,
-				'otpValue' => $dataRequest->authenticationCode,
-				'operationType' => $dataRequest->operationType
+		$uriValidateTopt = [
+			lang('CONF_MFA_ACTIVATE') => 'secret-token/generate/confirm',
+			lang('CONF_MFA_DEACTIVATE') => 'secret-token/deactivate/confirm',
+			lang('CONF_MFA_VALIDATE_OTP') => 'otp/validate',
+		];
+		$otpChannel = isset($dataRequest->channel) ? $dataRequest->channel : $this->session->otpChannel;
+
+		$this->dataRequest->uri = $uriValidateTopt[$dataRequest->operationType];
+		$this->dataRequest->requestBody = [
+			'username' => $this->session->userName,
+			'otpValue' => $dataRequest->authenticationCode,
 		];
 
-		$this->dataRequest->requestBody = $requestBody;
+		$response = $this->sendToCoreServices('callWs_ValidateOtp');
 
-		log_message('INFO', '****NOVO Mfa Model REQUEST*****'.json_encode($this->dataRequest->requestBody));
+    switch ($this->isResponseRc) {
+			case 0:
+				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
 
-		//$response = $this->sendToCoreServices('callWs_ValidateOTP2fa');
-		$response = json_decode('{ "code": "200", "message": "string", "datetime": "string","data": {"validationResult": true }}');
+				if ($dataRequest->operationType === lang('CONF_MFA_ACTIVATE')) {
+					$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
+					$this->session->set_userdata('otpActive', TRUE);
+					$this->session->set_userdata('otpChannel', $otpChannel);
+				}
 
-		log_message('INFO', '****NOVO Mfa Model RESPONSE*****'.json_encode($response));
+				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
+					$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
+					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
+					$this->session->unset_userdata('otpActive');
+					$this->session->unset_userdata('otpChannel');
+					$this->session->unset_userdata('products');
+				}
 
-    switch ($response->code) {
-      case 200:
-				switch ($dataRequest->operationType) {
-					case lang('CONF_MFA_ACTIVATE_SECRET_TOKEN'):
-						$this->response->code = 0;
-						$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
-						$this->response->modalBtn['btn1']['link'] = 'card-list';
-						$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-						$this->response->icon = lang('CONF_ICON_SUCCESS');
-						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-						$this->response->modalBtn['btn1']['action'] = 'redirect';
-						$this->session->set_userdata('otpActive', TRUE);
-						$this->session->set_userdata('otpChannel', $dataRequest->channel);
-					break;
-					case lang('CONF_MFA_DESACTIVATE_SECRET_TOKEN'):
-						$this->response->code = 2;
-						$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
-						$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
-						$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-						$this->response->icon = lang('CONF_ICON_SUCCESS');
-						$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
-						$this->response->modalBtn['btn1']['action'] = 'redirect';
-						$this->session->set_userdata('otpActive', FALSE);
-						$this->session->set_userdata('otpChannel', '');
-						$this->session->set_userdata('otpMfaAuthorization', FALSE);
-					break;
-					case lang('CONF_MFA_VALIDATE_OTP'):
+				if ($dataRequest->operationType === lang('CONF_MFA_VALIDATE_OTP')) {
+					if ($response->info->data->validationResult) {
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
-						$this->session->set_userdata('otpMfaAuthorization', TRUE);
-					break;
+					} else {
+						$this->response->code = 1;
+						$this->response->icon = lang('CONF_ICON_WARNING');
+						$this->response->msg = $otpChannel === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
+						$this->response->modalBtn['btn1']['action'] = 'destroy';
+					}
 				}
-      break;
-      case 405:
-				$this->response->code = 3;
+				break;
+
+			case 464:
 				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = lang('GEN_OTP_INVALID');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
+				$this->response->icon = lang('CONF_ICON_WARNING');
+
+				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel) === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+
+				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
+					$this->response->code = 1;
+				}
+				break;
+
 			default:
-				$this->response->code = 3;
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
-				$this->response->icon = lang('CONF_ICON_INFO');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_ACCEPT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
-			break;
+
     }
-		return $this->responseToTheView('callWs_ValidateOTP');
+
+		return $this->responseToTheView('callWs_ValidateOtp');
 	}
 }

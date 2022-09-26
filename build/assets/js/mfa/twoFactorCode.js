@@ -1,12 +1,9 @@
 'use strict'
 
 $(function () {
-	sessionStorage.clear();
-	getSecretToken(true);
-
+	coverSpin(true);
 	insertFormInput(false);
-	$('#pre-loader').remove();
-	$('.hide-out').removeClass('hide');
+	getSecretToken(false, channel);
 
 	$('#twoFactorCodeBtn').on('click', function(e) {
 		e.preventDefault();
@@ -16,56 +13,40 @@ $(function () {
 		validateForms(form);
 		if (form.valid()) {
 			var data = getDataForm(form);
-			data.operationType = lang.CONF_MFA_ACTIVATE_SECRET_TOKEN;
-			data.channel = sessionStorage.channel;
+			data.operationType = lang.CONF_MFA_ACTIVATE;
+			data.channel = $('#channel').val();
 			$(this).html(loader);
 			insertFormInput(true);
-			who = 'Mfa'; where = 'ValidateOTP2fa';
-			callNovoCore(who, where, data, function(response) {
-				switch (response.code) {
-					case 0:
-						$('#twoFactorCodeBtn').html(btnText);
-						appMessages(response.title, response.msg, response.icon, response.modalBtn);
-					break;
-					case 3:
-						appMessages(response.title, response.msg, response.icon, response.modalBtn);
-						insertFormInput(false);
-						$('#twoFactorCodeBtn').html(btnText);
-						$('#authenticationCode').val('');
-					break;
-				}
+			who = 'Mfa'; where = 'ValidateOtp';
+			callNovoCore(who, where, data, function() {
+				$('#twoFactorCodeBtn').html(btnText);
+				$('#authenticationCode').val('');
+				insertFormInput(false);
 			});
 		}
 	});
 
 	$('#resendCode').on('click', function(e) {
-		getSecretToken(false);
+		getSecretToken(true);
 	});
 });
 
-function getSecretToken(action) {
-	form = $('#channelForm');
-	validateForms(form);
-	if (form.valid()) {
-		data = getDataForm(form);
-		data.sendResendToken = action;
-		who = 'Mfa'; where = 'GenerateSecretToken';
-		callNovoCore(who, where, data, function(response) {
-			switch (response.code) {
-				case 0:
-					$('#secretToken').append(response.data.secretToken);
-					$('#qrCodeImg').html($(`<img src="data:image/png;base64,${response.data.qrCode}" >`));
-					sessionStorage.channel = data.channel;
-					break;
-				case 2:
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
-					sessionStorage.channel = data.channel;
-					$('#authenticationCode').val('');
-				break;
-				case 3:
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
-				break;
-			}
-		});
+function getSecretToken(reSend) {
+	data = {
+		channel: $('#channel').val(),
+		resendToken: reSend
 	}
+	who = 'Mfa';
+	where = 'ActivateSecretToken';
+	callNovoCore(who, where, data, function(response) {
+
+		if (data.channel === lang.CONF_MFA_CHANNEL_APP && response.data.qrCode) {
+			$('#secretToken').append(response.data.secretToken);
+			$('#qrCodeImg').html($(`<img src="data:image/png;base64,${response.data.qrCode}" >`));
+		}
+
+		$('#authenticationCode').val('');
+		coverSpin(false);
+	});
+
 }

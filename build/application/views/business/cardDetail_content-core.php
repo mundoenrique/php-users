@@ -10,10 +10,6 @@
               <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
               <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
             </div>
-						<form id="channelFormCardDetail">
-							<input type="hidden" id="channel" name="channel" class="hidden" value="<?= $this->session->otpChannel ?>">
-							<input type="hidden" id="otpMfaAuth" name="otpMfaAuth" class="hidden" value="<?= $this->session->otpMfaAuthorization ?>">
-						</form>
             <?php if ($isVirtual): ?>
             <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('CONF_NO_LINK'); ?>">
               <i aria-hidden="true" class="icon-view"></i> &nbsp;<?= lang('BUSINESS_SEE_DETAILS'); ?>

@@ -1,12 +1,14 @@
 'use strict'
-var message;
+var otpProps = new Object();;
+otpProps.reSend = false;
 $(function() {
 
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
 		$('#accept').addClass('sure-disable-two-factor');
-		$('#cancel').removeAttr('disabled');
-		$('#accept').removeClass('sensitive-btn disable-two-factor');
+		otpProps.msgInfo = lang.GEN_TWO_FACTOR_REMEMBER
+		otpProps.action = lang.CONF_MFA_DEACTIVATE;
+
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
@@ -14,44 +16,60 @@ $(function() {
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
-				action: 'none'
+				action: 'destroy'
 			},
 		}
+
 		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.CONF_ICON_INFO, modalBtn);
 	});
 
 	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
 		e.preventDefault();
-		$('#accept').removeClass('sure-disable-two-factor');
-		$('#accept').addClass('disable-two-factor');
+		btnText = $(this).html();
 		$(this).html(loader);
-		disableSecretToken(true);
+		$(this).prop('disabled', true);
+		$(this).removeClass('sure-disable-two-factor');
+
+		generateOtp();
 	});
 
 	$('#system-info').on('click', '.disable-two-factor', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
+		btnText = $(this).html();
 		form = $('#twoFactorDisableForm');
 		validateForms(form);
+
 		if (form.valid()) {
-			$(this).html(loader);
 			data = getDataForm(form);
-			data.operationType = lang.CONF_MFA_DESACTIVATE_SECRET_TOKEN;
+			data.operationType = otpProps.action === lang.CONF_MFA_DEACTIVATE ? otpProps.action : lang.CONF_MFA_VALIDATE_OTP;
+			$(this).removeClass('disable-two-factor');
+			$(this).html(loader);
+			$(this).prop('disabled', true);
 			insertFormInput(true);
-			who = 'Mfa'; where = 'ValidateOTP2fa';
+			who = 'Mfa';
+			where = 'ValidateOtp';
 			callNovoCore(who, where, data, function(response) {
-				insertFormInput(false);
+
 				switch (response.code) {
-					case 2:
+					case 0:
+						if (otpProps.action === lang.CONF_MFA_VALIDATE_OTP) {
+							validateCardDetail();
+						}
+						break;
+					case 1:
 						appMessages(response.title, response.msg, response.icon, response.modalBtn);
-						message = null;
-					break;
-					case 3:
-						appMessages(response.title, response.msg, response.icon, response.modalBtn);
-						$('#accept').removeClass('disable-two-factor');
 						$('#accept').addClass('invalid-code');
-					break;
+						break;
 				}
+
+				insertFormInput(false);
+				$('#accept')
+					.prop('disabled', false)
+					.html(btnText);
+
+
+
 			});
 		}
 	});
@@ -59,50 +77,47 @@ $(function() {
 	$('#system-info').on('click', '.invalid-code', function (e) {
 		$('#accept').removeClass('invalid-code');
 		$('#accept').addClass('disable-two-factor');
-		modalSecretToken(message)
+		modalSecretToken()
 	});
 
 	$('#system-info').on('click', '#resendCode', function (e) {
-		$('#accept').removeClass('disable-two-factor');
-		$('#accept').addClass('resend-code');
-		disableSecretToken(false);
-	});
-
-	$('#system-info').on('click', '#cancel', function (e) {
 		$('#system-info').dialog('destroy');
+		coverSpin(true);
+		otpProps.reSend = true;
+		generateOtp();
 	});
 
+	$('#cancel').on('click', function(e) {
+		$('#accept').removeClass('sure-disable-two-factor disable-two-factor invalid-code');
+	});
 });
 
 
-function disableSecretToken (action){
-	var data = new Object();
-	data.resendDisableSecretToken = action;
-	who = 'Mfa'; where = 'DesactivateSecretToken';
+function generateOtp () {
+	data = {
+		operationType: otpProps.action,
+		resendToken: otpProps.reSend,
+	}
+	who = 'Mfa';
+	where = 'GenerateOtp';
+
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
 			case 0:
-				modalSecretToken(response)
-				message = response;
+				otpProps.msgContent = response.msg;
+				modalSecretToken();
+				$('#accept').addClass('disable-two-factor');
 			break;
-			case 2:
-				appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, response.msg, response.icon, response.modalBtn);
-				$('#system-info').on('click', '.resend-code', function (e) {
-					$('#accept').removeClass('resend-code');
-					$('#accept').addClass('disable-two-factor');
-					modalSecretToken(response)
-				});
-			break;
-			case 3:
-				appMessages(response.title, response.msg, response.icon, response.modalBtn);
-			break;
-			}
+		}
+
+		coverSpin(false)
+		$('#accept')
+			.prop('disabled', false)
+			.html(btnText);
 	});
 }
 
-function modalSecretToken(response) {
-	$('#cancel').prop('disabled',false);
-
+function modalSecretToken() {
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -110,7 +125,7 @@ function modalSecretToken(response) {
 		},
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'none'
+			action: 'destroy'
 		},
 		maxHeight : 600,
 		width : 530,
@@ -121,9 +136,13 @@ function modalSecretToken(response) {
 	inputModal = '<form id="twoFactorDisableForm" name="formTwoFactorDisable" class="mr-2" method="post" onsubmit="return false;">';
 	inputModal += 	'<div class="justify pr-1">';
 	inputModal += 		'<div class="justify pr-1">';
-	inputModal += 			'<p>'+lang.GEN_TWO_FACTOR_REMEMBER+'</p>';
-	inputModal += 			'<p class=" pb-1">' + response.msg +' '+lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
-	inputModal += 				'<a id="resendCode" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
+	inputModal += 			'<p>' + otpProps.msgInfo + '</p>';
+	inputModal += 			'<p class=" pb-1">' + otpProps.msgContent + ' ';
+
+	if (otpChannel === lang.CONF_MFA_CHANNEL_EMAIL || otpProps.action === lang.CONF_MFA_DEACTIVATE) {
+		inputModal += 				'<a id="resendCode" href="' + lang.CONF_NO_LINK + '" class="btn btn-small btn-link p-0" >'; inputModal +=						lang.GEN_BTN_RESEND_CODE+'</a>';
+	}
+
 	inputModal += 			'</p>';
 	inputModal += 		'</div>';
 	inputModal += 		'<div class="form-group col-8 p-0">';
