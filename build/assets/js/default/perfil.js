@@ -1108,7 +1108,6 @@ $(function(){
 				$('#msg-correo').hide();
 				response_email = JSON.parse(data);
 
-				//console.log(response_email);
 				if(response_email.rc == -238) {
 					$("#loading").hide();
 					$('#msg-correo').css('display', 'none');

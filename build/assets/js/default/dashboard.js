@@ -181,7 +181,7 @@ function getVarsUrl(){
         var x= arrUrl[i].split("=%20");
         urlObj[x[0]]=x[1]
     }
-    //console.log(urlObj);
+
     return urlObj;
 }
 

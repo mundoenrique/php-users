@@ -630,7 +630,7 @@ function getCtasDestino(nroTarjeta, prefijo, operacion)
 					porcentajeComision = parseFloat(data.parametrosTransferencias[0].porcentajeComision);
 					totalComision = 0;
 					dobleAutenticacion = data.parametrosTransferencias[0].dobleAutenticacion;
-					console.log(montoBase+"  probando");
+
 					$("#dashboard-beneficiary").empty();
 
 					$.each(data.cuentaDestinoTercero,function(pos,item){
