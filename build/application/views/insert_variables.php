@@ -12,6 +12,9 @@
 	var modalBtn = <?= $modalBtn ?? 0; ?>;
 	var logged = <?= json_encode($this->session->has_userdata('logged')); ?>;
 	var userId = <?= json_encode($this->session->has_userdata('userId')); ?>;
+	var otpActive = <?= json_encode($this->session->otpActive); ?>;
+	var otpChannel = <?= json_encode($this->session->otpChannel); ?>;
+	var otpMfaAuth = <?= json_encode($this->session->otpMfaAuth); ?>;
 	var totalCards = <?= $totalCards; ?>;
 	var sessionTime = <?= $sessionTime; ?>;
 	var callModal = <?= $callModal; ?>;
