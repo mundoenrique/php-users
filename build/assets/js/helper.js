@@ -261,15 +261,19 @@ function createButton(elementButton, valuesButton) {
 					.html(loader)
 					.prop('disabled', true);
 				$(this).children('span').addClass('spinner-border-sm');
+
 				if ($(this).attr('id') == 'cancel') {
 					$(this).children('span')
 						.removeClass('secondary')
 						.addClass('primary');
 				}
+
 				$(location).attr('href', baseURL + valuesButton.link);
 				break;
 			case 'destroy':
-				$('#system-info').dialog('destroy');
+				if ($('#system-info').parents('.ui-dialog').length) {
+					$('#system-info').dialog('destroy');
+				}
 				break;
 		}
 
