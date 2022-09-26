@@ -10,7 +10,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Mfa Model Class Initialized');
+		writeLog('INFO', 'Mfa Model Class Initialized');
 	}
 
 	/**
@@ -20,7 +20,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_GenerateSecretToken_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: Mfa GenerateSecretToken Method Initialized');
+		writeLog('INFO', 'Mfa Model: ActivateSecretToken Method Initialized');
 
 		$this->dataRequest->uri = 'secret-token/generate';
 		$this->dataRequest->requestBody = [
@@ -90,7 +90,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_DesactivateSecretToken_Mfa($dataRequest)
   {
-    log_message('INFO', 'NOVO Mfa Model: Mfa DesactivateSecretToken Method Initialized');
+    writeLog('INFO', 'Mfa Model: GenerateOtp Method Initialized');
 
     $requestBody = [
       'username' => $this->session->userName

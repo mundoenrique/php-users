@@ -12,7 +12,7 @@ class Asset {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Assets Library Class Initialized');
+		writeLog('INFO', 'Assets Library Class Initialized');
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
@@ -25,7 +25,7 @@ class Asset {
 	 */
 	public function initialize($params = [])
 	{
-		log_message('INFO', 'NOVO Asset: initialize method initialized');
+		writeLog('INFO', 'Asset: initialize method initialized');
 		foreach($params as $arrayFiles => $file) {
 			isset($this->$arrayFiles) ? $this->$arrayFiles = $file : '';
 		}
@@ -36,7 +36,7 @@ class Asset {
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Asset: insertCss method initialized');
+		writeLog('INFO', 'Asset: insertCss method initialized');
 		$file_url = NULL;
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
@@ -63,7 +63,7 @@ class Asset {
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Asset: insertJs method initialized');
+		writeLog('INFO', 'Asset: insertJs method initialized');
 		$file_url = NULL;
 
 		foreach($this->jsFiles as $fileName) {
@@ -80,7 +80,7 @@ class Asset {
 	 */
 	public function insertFile($fileName, $folder = 'images', $customerUri = FALSE)
 	{
-		log_message('INFO', 'NOVO Asset: insertFile method initialized');
+		writeLog('INFO', 'Asset: insertFile method initialized');
 
 		$customerUri = $customerUri ? $customerUri.'/' : '';
 		//eliminar despues de la certificación

@@ -10,7 +10,7 @@ class Novo_Mfa extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Mfa Controller Class Initialized');
+		writeLog('INFO', 'Mfa Controller Class Initialized');
 
 	}
 
@@ -21,7 +21,7 @@ class Novo_Mfa extends NOVO_Controller {
 	 */
 	public function twoFactorEnablement()
 	{
-		log_message('INFO', 'NOVO User: twoFactorEnablement Method Initialized');
+		writeLog('INFO', 'Mfa: twoFactorEnablement Method Initialized');
 
 		$view = 'twoFactorEnablement';
 		$this->session->unset_userdata('products');//Llevar al modelo
@@ -51,7 +51,7 @@ class Novo_Mfa extends NOVO_Controller {
 	 */
 	public function twoFactorCode($value)
 	{
-		log_message('INFO', 'NOVO User: twoFactorCode Method Initialized');
+		writeLog('INFO', 'Mfa: twoFactorCode Method Initialized');
 
 		$view = 'twoFactorCode';
 		$this->session->unset_userdata('products');//Llevar al modelo
