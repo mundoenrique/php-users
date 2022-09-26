@@ -51,7 +51,7 @@ $(function () {
 	}
 
 	$('.big-modal').on('click', function () {
-		$('.cover-spin').show(0)
+		coverSpin(true);
 	});
 	//dataTale lang
 	dataTableLang = {
@@ -353,7 +353,7 @@ function downLoadfiles(data) {
 	window.URL.revokeObjectURL(url);
 	$('#download-file').attr('href', lang.CONF_NO_LINK);
 	$('#download-file').attr('download', '');
-	$('.cover-spin').hide();
+	coverSpin(false);
 }
 
 function scrollTopPos(formValidate) {
@@ -365,4 +365,8 @@ function scrollTopPos(formValidate) {
 			scrollTop: firstElement - formValidate
 		}, 400);
 	}
+}
+
+function coverSpin(show) {
+	show ? $('.cover-spin').show(0) : $('.cover-spin').hide();
 }

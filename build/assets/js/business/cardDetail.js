@@ -70,12 +70,12 @@ $(function () {
 			data.action = event.attr('action');
 			data.id = event.attr('id');
 			where = 'DownloadMoves';
-			$('.cover-spin').show(0);
+			coverSpin(true);
 			callNovoCore(who, where, data, function(response) {
 				if (data.action == 'download') {
 					filesAction(data.action, response);
 				} else {
-					$('.cover-spin').hide();
+					coverSpin(false);
 				}
 			})
 		}

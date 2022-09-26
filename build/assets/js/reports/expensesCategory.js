@@ -72,14 +72,14 @@ $(function () {
 		data.initDate = $('#dInitDate').val();
 		data.finalDate = $('#dFinalDate').val();
 		who = "Reports"; where = "DownloadInquiry";
-		$('.cover-spin').show(0);
+		coverSpin(true);
 
 		callNovoCore(who, where, data, function (response) {
 			if (data.action == 'download' && response.code == 0) {
 				delete (response.data.btn1);
 				downLoadfiles(response.data);
 			} else {
-				$('.cover-spin').hide();
+				coverSpin(false);
 			}
 		});
 	});
