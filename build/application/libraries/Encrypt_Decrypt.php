@@ -34,12 +34,12 @@ class Encrypt_Decrypt
 	{
 		writeLog('INFO', 'Encrypt_Decrypt: decryptCoreServices method Initialized');
 
-		$data = isset($response->info->data) ? json_encode($response->info->data, CURLINFO_HTTP_CODE) : 'NO DATA';
+		$response->info->data = $response->info->data ?? 'NO DATA';
 
 		if (API_GEE_WAY === 'ON' && $data !== 'NO DATA') {
 		}
 
-		writeLog('DEBUG', 'RC: ' . $response->rc . ' RESPONSE DATA: ' . $data );
+		writeLog('DEBUG', 'RC: ' . $response->rc . ' RESPONSE ' . json_encode($response, CURLINFO_HTTP_CODE));
 
 		return $response;
 	}
