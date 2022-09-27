@@ -10,8 +10,8 @@
 			<?php if($channel === lang('CONF_MFA_CHANNEL_APP')): ?>
 				<div>
 					<p><?= lang('MFA_TWO_FACTOR_CODE_APP'); ?>
-					<?php foreach (lang('CONF_TWO_FACTOR_LINK') as $key => $value) : ?>
-						<a href="<?= lang('CONF_TWO_FACTOR_LINK')[$key]; ?>" class="btn-link " target="_blank">
+					<?php foreach (lang('CONF_LINK_MFA_APPS') as $key => $value) : ?>
+						<a href="<?= lang('CONF_LINK_MFA_APPS')[$key]; ?>" class="btn-link " target="_blank">
 							<?= $key; ?>,
 						</a>
 					<?php endforeach; ?>
@@ -37,7 +37,7 @@
 			<?php endif; ?>
 
 			<div class="max-width-1 fit-lg mx-auto">
-				<form id="twoFactorCodeForm" class="mt-2" method="POST">
+				<form id="mfaConfirmForm" class="mt-2" method="POST">
 					<div class="form-group col-lg-4 pl-0">
 						<label for="authenticationCode"><?= lang('GEN_AUTHENTICATION_CODE'); ?></label>
 						<input id="authenticationCode" name="authenticationCode" class="form-control" type="text" placeholder="<?= lang('GEN_PLACE_HOLDER_AUTH_CODE') ?>" disabled>
@@ -46,7 +46,7 @@
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
 						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_MFA_ENABLE')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-						<button id="twoFactorCodeBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_VERIFY'); ?></button>
+						<button id="mfaConfirmBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_VERIFY'); ?></button>
 					</div>
 				</form>
 			</div>

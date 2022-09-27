@@ -16,7 +16,7 @@ $(function () {
 			data.activationType = $('input:radio[name=twoFactorEnablement]:checked').val();
 			$(this).html(loader);
 			insertFormInput(true);
-			var url = baseURL + "two-factor-code/" + data.activationType;
+			var url = baseURL + lang.CONF_LINK_MFA_CONFIRM + '/' + data.activationType;
 			$(location).attr('href', url);
 		}
 	});

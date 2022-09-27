@@ -121,8 +121,14 @@ class Connect_Services_Apis
 			CURLOPT_POSTFIELDS => $request->requestBody
 		]);
 
+		$curlResp = json_decode(curl_exec($curl));
+
 		$response = new stdClass();
-		$response->info = json_decode(curl_exec($curl));
+		$response->code = isset($curlResp->code) ? $curlResp->code : lang('CONF_RC_DEFAULT');
+		$response->message = isset($curlResp->message) ? $curlResp->message : '';
+		$response->datetime = isset($curlResp->datetime) ? $curlResp->datetime : '';
+		$response->data = isset($curlResp->data) ? $curlResp->data : 'No data';
+
 		$response->HttpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		$response->error = curl_error($curl);
 		$response->errorNo = (int) curl_errno($curl);
@@ -130,11 +136,9 @@ class Connect_Services_Apis
 		curl_close($curl);
 		$finalReq = microtime(true);
 		$executionTime = round($finalReq - $startReq, 2, PHP_ROUND_HALF_UP);
-		$message = isset($response->info->message) ? ', MESSAGE: ' . $response->info->message : '';
-		$serviceCode = isset($response->info->code) ? $response->info->code : lang('CONF_RC_DEFAULT');
 
 		writeLog('DEBUG', 'RESPONSE IN '. $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode .
-			', SERVICE CODE: ' . $serviceCode . $message);
+			', SERVICE CODE: ' . $response->code . ' ' .$response->message);
 
 		if ($response->errorNo !== 0) {
 			writeLog('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);

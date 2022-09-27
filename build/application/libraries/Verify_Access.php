@@ -137,7 +137,10 @@ class Verify_Access {
 				$auth = lang('CONF_MFA_ACTIVE') === 'ON' && $this->CI->session->has_userdata('logged');
 				$auth = $auth && !$this->CI->session->otpActive;
 				break;
-			case 'twoFactorCode':
+			case 'mfaConfirm':
+				$referrerUrl = base_url(lang('CONF_LINK_MFA_ENABLE'));
+				$auth = $this->CI->session->has_userdata('logged') && $this->CI->agent->referrer() === $referrerUrl;
+				break;
 			case 'activateSecretToken':
 			case 'desactivateSecretToken':
 			case 'generateOtp':

@@ -42,7 +42,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 
-				$this->response->data = $response->info->data;
+				$this->response->data = $response->data;
 				break;
 
 			case 462:
@@ -141,7 +141,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				}
 
 				if ($dataRequest->operationType === lang('CONF_MFA_VALIDATE_OTP')) {
-					if ($response->info->data->validationResult) {
+					if ($response->data->validationResult) {
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
 					} else {

@@ -39,7 +39,7 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 $lang['CONF_REDIRECT_RULE'] = [
 	'profileUser',
 	'mfaEnable',
-	'twoFactorCode',
+	'mfaConfirm',
 	'finishSession',
 ];
 $lang['CONF_RC_DEFAULT'] = -9999;
@@ -172,6 +172,7 @@ $lang['CONF_LINK_USER_IDENTIFY'] = 'user-identify';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
 $lang['CONF_LINK_MFA_ENABLE'] = 'mfa-enable';
+$lang['CONF_LINK_MFA_CONFIRM'] = 'mfa-confirm';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';
 $lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];
@@ -183,7 +184,7 @@ $lang['CONF_LINK_DIGITEL'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_REPORTS'] = 'reports';
 $lang['CONF_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['CONF_LINK_NOTIFICATIONS'] = 'notifications';
-$lang['CONF_TWO_FACTOR_LINK'] = [
+$lang['CONF_LINK_MFA_APPS'] = [
 	'Google Authenticator'	  => 'https://support.google.com/accounts/answer/1066447?hl=es&co=GENIE.Platform%3DAndroid',
 	'Microsoft Authenticator' => 'https://www.microsoft.com/es-es/security/mobile-authenticator-app',
 	'Authy' 									=> 'https://authy.com/',

@@ -42,35 +42,35 @@ class Novo_Mfa extends NOVO_Controller {
 	 * @author Jennifer C Cadiz G.
 	 * @date Jun 14th, 2022
 	 */
-	public function twoFactorCode($value)
+	public function mfaConfirm($otpChannel)
 	{
-		writeLog('INFO', 'Mfa: twoFactorCode Method Initialized');
+		writeLog('INFO', 'Mfa: mfaConfirm Method Initialized');
 
-		$view = 'twoFactorCode';
+		$view = 'mfaConfirm';
 
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"mfa/twoFactorCode"
+			"mfa/mfaConfirm"
 		);
 
-		if (empty((array)$this->request) && $this->session->otpActive == TRUE) {
-			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
-		}
-
-		switch ($value) {
+		switch ($otpChannel) {
 			case lang('CONF_MFA_APP'):
-				$value = lang('CONF_MFA_CHANNEL_APP');
+				$otpChannel = lang('CONF_MFA_CHANNEL_APP');
 				break;
 			case lang('CONF_MFA_EMAIL'):
-				$value = lang('CONF_MFA_CHANNEL_EMAIL');
+				$otpChannel = lang('CONF_MFA_CHANNEL_EMAIL');
 				break;
 		}
 
-		$this->render->channel = $value;
-		$this->render->activeHeader = TRUE;
+		$this->request->channel = $otpChannel;
+		$this->method = 'callWs_ActivateSecretToken_Mfa';
+		$responseMfa = $this->loadModel($this->request);
+		$this->responseAttr($responseMfa);
+
+		$this->render->channel = $otpChannel;
 		$this->render->titlePage = LANG('GEN_MENU_MFA');
 		$this->views = ['mfa/'.$view];
 		$this->loadView($view);

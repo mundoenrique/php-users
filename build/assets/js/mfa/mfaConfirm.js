@@ -3,11 +3,11 @@
 $(function () {
 	coverSpin(true);
 	insertFormInput(false);
-	getSecretToken(false, channel);
+	// getSecretToken(false, channel);
 
-	$('#twoFactorCodeBtn').on('click', function(e) {
+	$('#mfaConfirmBtn').on('click', function(e) {
 		e.preventDefault();
-		var form = $('#twoFactorCodeForm');
+		var form = $('#mfaConfirmForm');
 		btnText = $(this).html().trim();
 
 		validateForms(form);
@@ -19,7 +19,7 @@ $(function () {
 			insertFormInput(true);
 			who = 'Mfa'; where = 'ValidateOtp';
 			callNovoCore(who, where, data, function() {
-				$('#twoFactorCodeBtn').html(btnText);
+				$('#mfaConfirmBtn').html(btnText);
 				$('#authenticationCode').val('');
 				insertFormInput(false);
 			});

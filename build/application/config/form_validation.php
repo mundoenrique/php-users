@@ -213,7 +213,7 @@ $config = [
 			'rules' => 'trim|alpha_numeric|required'
 		],
 	],
-	'twoFactorCode' => [
+	'mfaConfirm' => [
 		[
 			'field' => 'authenticationCode',
 			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
