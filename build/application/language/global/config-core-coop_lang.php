@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['CONF_TENANT_PUBLICATION'] = 2022;
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //VALIDATE IP
@@ -18,8 +19,6 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'instagram' => 'https://www.instagram.com/bccoopcentral/?hl=es-la',
 	'linkedin' => 'https://www.linkedin.com/company/banco-cooperativo-coopcentral',
 ];
-//USER IDENTITY
-$lang['CONF_SECRET_KEY'] = 'ON';
 $lang['CONF_CONTACTS'] = [
 	'XXX' => '(XX) XXXX XXXX',
 ];
