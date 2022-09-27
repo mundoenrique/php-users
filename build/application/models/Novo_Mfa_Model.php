@@ -36,7 +36,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 				if ($dataRequest->resendToken) {
 					$this->response->code = 4;
-					$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+					$this->response->title = lang('GEN_MENU_MFA');
 					$this->response->icon = lang('CONF_ICON_SUCCESS');
 					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -46,7 +46,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				break;
 
 			case 462:
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_INFO');
 				$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
 				$this->session->set_userdata('otpActive', TRUE);
@@ -83,7 +83,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				$msgArray = [lang('GEN_EMAIL'), '(' . $this->session->maskMail . ')'];
 
 				$this->response->code = 0;
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_CODE_VERIFY'), $msgArray);
 				$this->response->msg.=  ' ' . lang('GEN_TWO_FACTOR_SEND_CODE');
@@ -123,7 +123,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
     switch ($this->isResponseRc) {
 			case 0:
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 
 				if ($dataRequest->operationType === lang('CONF_MFA_ACTIVATE')) {
@@ -154,7 +154,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				break;
 
 			case 464:
-				$this->response->title = lang('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_WARNING');
 
 				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel) === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';

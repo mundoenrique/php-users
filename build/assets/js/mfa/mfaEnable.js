@@ -5,9 +5,9 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	$('#twoFactorEnablementBtn').on('click', function(e) {
+	$('#mfaEnableBtn').on('click', function(e) {
 		e.preventDefault();
-		form = $('#twoFactorEnablementForm')
+		form = $('#mfaEnableForm')
 		btnText = $(this).html().trim();
 		validateForms(form);
 

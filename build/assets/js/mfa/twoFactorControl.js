@@ -6,8 +6,6 @@ $(function() {
 	$('#disableTwoFactor').on('click', function (e) {
 		e.preventDefault();
 		$('#accept').addClass('sure-disable-two-factor');
-		otpProps.msgInfo = lang.GEN_TWO_FACTOR_REMEMBER
-		otpProps.action = lang.CONF_MFA_DEACTIVATE;
 
 		modalBtn = {
 			btn1: {
@@ -20,7 +18,7 @@ $(function() {
 			},
 		}
 
-		appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.GEN_MENU_MFA, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.CONF_ICON_INFO, modalBtn);
 	});
 
 	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
@@ -29,11 +27,14 @@ $(function() {
 		$(this).html(loader);
 		$(this).prop('disabled', true);
 		$(this).removeClass('sure-disable-two-factor');
+		otpProps.msgInfo = lang.GEN_MFA_REMEMBER;
+		otpProps.generateAction = lang.CONF_MFA_DEACTIVATE;
+		otpProps.validateAction = lang.CONF_MFA_DEACTIVATE;
 
 		generateOtp();
 	});
 
-	$('#system-info').on('click', '.disable-two-factor', function (e) {
+	$('#system-info').on('click', '.otp-validate', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
@@ -42,8 +43,8 @@ $(function() {
 
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.operationType = otpProps.action === lang.CONF_MFA_DEACTIVATE ? otpProps.action : lang.CONF_MFA_VALIDATE_OTP;
-			$(this).removeClass('disable-two-factor');
+			data.operationType = otpProps.validateAction;
+			$(this).removeClass('otp-validate');
 			$(this).html(loader);
 			$(this).prop('disabled', true);
 			insertFormInput(true);
@@ -53,7 +54,7 @@ $(function() {
 
 				switch (response.code) {
 					case 0:
-						if (otpProps.action === lang.CONF_MFA_VALIDATE_OTP) {
+						if (otpProps.validateAction === lang.CONF_MFA_VALIDATE_OTP) {
 							validateCardDetail();
 						}
 						break;
@@ -63,21 +64,21 @@ $(function() {
 						break;
 				}
 
-				insertFormInput(false);
-				$('#accept')
-					.prop('disabled', false)
-					.html(btnText);
 
-
-
+				if (otpProps.validateAction !== lang.CONF_MFA_VALIDATE_OTP) {
+					insertFormInput(false);
+					$('#accept')
+						.prop('disabled', false)
+						.html(btnText);
+				}
 			});
 		}
 	});
 
 	$('#system-info').on('click', '.invalid-code', function (e) {
 		$('#accept').removeClass('invalid-code');
-		$('#accept').addClass('disable-two-factor');
-		modalSecretToken()
+		$('#accept').addClass('otp-validate');
+		modalOtpValidate()
 	});
 
 	$('#system-info').on('click', '#resendCode', function (e) {
@@ -88,15 +89,14 @@ $(function() {
 	});
 
 	$('#cancel').on('click', function(e) {
-		$('#accept').removeClass('sure-disable-two-factor disable-two-factor invalid-code');
+		$('#accept').removeClass('sure-disable-two-factor otp-validate invalid-code');
 	});
 });
 
 
-function generateOtp () {
+function generateOtp() {
 	data = {
-		operationType: otpProps.action,
-		resendToken: otpProps.reSend,
+		operationType: otpProps.generateAction,
 	}
 	who = 'Mfa';
 	where = 'GenerateOtp';
@@ -105,8 +105,8 @@ function generateOtp () {
 		switch (response.code) {
 			case 0:
 				otpProps.msgContent = response.msg;
-				modalSecretToken();
-				$('#accept').addClass('disable-two-factor');
+				modalOtpValidate();
+				$('#accept').addClass('otp-validate');
 			break;
 		}
 
@@ -117,7 +117,7 @@ function generateOtp () {
 	});
 }
 
-function modalSecretToken() {
+function modalOtpValidate() {
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
@@ -139,7 +139,7 @@ function modalSecretToken() {
 	inputModal += 			'<p>' + otpProps.msgInfo + '</p>';
 	inputModal += 			'<p class=" pb-1">' + otpProps.msgContent + ' ';
 
-	if (otpChannel === lang.CONF_MFA_CHANNEL_EMAIL || otpProps.action === lang.CONF_MFA_DEACTIVATE) {
+	if (otpChannel === lang.CONF_MFA_CHANNEL_EMAIL || otpProps.generateAction === lang.CONF_MFA_DEACTIVATE) {
 		inputModal += 				'<a id="resendCode" href="' + lang.CONF_NO_LINK + '" class="btn btn-small btn-link p-0" >'; inputModal +=						lang.GEN_BTN_RESEND_CODE+'</a>';
 	}
 
@@ -153,6 +153,6 @@ function modalSecretToken() {
 	inputModal += 	'</div>';
 	inputModal += '</form>';
 
-	appMessages(lang.GEN_MENU_TWO_FACTOR_ENABLEMENT, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_MENU_MFA, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }
 

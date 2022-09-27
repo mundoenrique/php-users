@@ -11,7 +11,6 @@ class Novo_Mfa extends NOVO_Controller {
 	{
 		parent:: __construct();
 		writeLog('INFO', 'Mfa Controller Class Initialized');
-
 	}
 
 	/**
@@ -19,26 +18,21 @@ class Novo_Mfa extends NOVO_Controller {
 	 * @author Jennifer C Cadiz G.
 	 * @date Jun 14th, 2022
 	 */
-	public function twoFactorEnablement()
+	public function mfaEnable()
 	{
-		writeLog('INFO', 'Mfa: twoFactorEnablement Method Initialized');
+		writeLog('INFO', 'Mfa: mfaEnable Method Initialized');
 
-		$view = 'twoFactorEnablement';
+		$view = 'mfaEnable';
 
 		array_push(
 			$this->includeAssets->jsFiles,
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"mfa/twoFactorEnablement"
+			"mfa/mfaEnable"
 		);
 
-		if ($this->session->otpActive == TRUE) {
-			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
-		}
-
-		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+		$this->render->titlePage = LANG('GEN_MENU_MFA');
 		$this->views = ['mfa/'.$view];
 		$this->loadView($view);
 	}
@@ -77,7 +71,7 @@ class Novo_Mfa extends NOVO_Controller {
 
 		$this->render->channel = $value;
 		$this->render->activeHeader = TRUE;
-		$this->render->titlePage = LANG('GEN_MENU_TWO_FACTOR_ENABLEMENT');
+		$this->render->titlePage = LANG('GEN_MENU_MFA');
 		$this->views = ['mfa/'.$view];
 		$this->loadView($view);
 	}

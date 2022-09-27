@@ -62,7 +62,7 @@ $lang['GEN_MENU_PROFILE'] = 'User profile';
 $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
 $lang['GEN_MENU_SIGNOUT'] = 'Signout';
-$lang['GEN_MENU_TWO_FACTOR_ENABLEMENT'] = 'Two Factor Authentication';
+$lang['GEN_MENU_MFA'] = 'Two Factor Authentication';
 $lang['GEN_MENU_TWO_FACTOR_DISABLE'] = 'Disable two factors';
 $lang['GEN_BTN_SIGNIN'] = 'Signin';
 $lang['GEN_BTN_ACCEPT'] = 'Accept';
@@ -213,7 +213,7 @@ $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s For security the card has been blocked, please try tomorrow.';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication code and verify your identity.';
 $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = 'Are you sure you want to disable two-factor authentication?';
-$lang["GEN_TWO_FACTOR_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
+$lang["GEN_MFA_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
 $lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
 $lang['GEN_TWO_FACTOR_APLICATION'] = 'aplication';
 

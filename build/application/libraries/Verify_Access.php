@@ -133,13 +133,16 @@ class Verify_Access {
 			case 'updateProfile':
 				$auth = $this->CI->session->has_userdata('logged');
 				break;
-			case 'twoFactorEnablement':
+			case 'mfaEnable':
+				$auth = lang('CONF_MFA_ACTIVE') === 'ON' && $this->CI->session->has_userdata('logged');
+				$auth = $auth && !$this->CI->session->otpActive;
+				break;
 			case 'twoFactorCode':
 			case 'activateSecretToken':
 			case 'desactivateSecretToken':
 			case 'generateOtp':
 			case 'validateOtp':
-				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_TWO_FACTOR') == 'ON';
+				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_MFA_ACTIVE') === 'ON';
 				break;
 			case 'keepSession':
 			case 'professionsList':
@@ -193,8 +196,8 @@ class Verify_Access {
 				break;
 			default:
 				$freeAccess = [
-					'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify', 'termsConditions', 'accessRecoverOTP',
-					'validateOTP', 'changeLanguage'
+					'signin', 'suggestion', 'accessRecover', 'finishSession', 'userIdentify',
+					'termsConditions', 'accessRecoverOTP', 'validateOTP', 'changeLanguage'
 				];
 				$auth = in_array($module, $freeAccess);
 		}

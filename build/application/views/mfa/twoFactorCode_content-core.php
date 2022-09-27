@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div id="recovery" class="recovery-content h-content hide-out">
 	<div class="max-width-4 mx-auto p-responsive py-4">
-		<h1 class="h3 text regular inline"><?= lang('GEN_MENU_TWO_FACTOR_ENABLEMENT'); ?></h1>
+		<h1 class="h3 text regular inline"><?= lang('GEN_MENU_MFA'); ?></h1>
 		<div class="line mt-2 mb-3"></div>
 		<div class="pt-3 regular">
 		<form id="channelForm">
@@ -45,7 +45,7 @@
 					</div>
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_TWO_FACTOR')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_MFA_ENABLE')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 						<button id="twoFactorCodeBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_VERIFY'); ?></button>
 					</div>
 				</form>

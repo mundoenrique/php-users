@@ -36,6 +36,12 @@ $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'accessRecover',
 	'userIdentify'
 ];
+$lang['CONF_REDIRECT_RULE'] = [
+	'profileUser',
+	'mfaEnable',
+	'twoFactorCode',
+	'finishSession',
+];
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
 $lang['CONF_SCORE_CAPTCHA'] = [
@@ -77,7 +83,7 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
-$lang['CONF_TWO_FACTOR'] = 'OFF';
+$lang['CONF_MFA_ACTIVE'] = 'OFF';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
@@ -165,7 +171,7 @@ $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_IDENTIFY'] = 'user-identify';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
-$lang['CONF_LINK_TWO_FACTOR'] = 'two-factor-enablement';
+$lang['CONF_LINK_MFA_ENABLE'] = 'mfa-enable';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';
 $lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];

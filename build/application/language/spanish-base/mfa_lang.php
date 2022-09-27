@@ -4,7 +4,7 @@ $lang["MFA_TWO_FACTOR_RESEND_CODE"] = 'Se ha enviado un nuevo código de autenti
 $lang["MFA_TWO_FACTOR_ENABLED"] = 'La autenticación de dos factores fue habilitada.';
 $lang["MFA_TWO_FACTOR_DISABLED_REDIRECT"] = 'La autenticación de dos factores fue deshabilitada. Seras dirigido para la habilitación del mismo.';
 $lang["MFA_TWO_FACTOR_EMAIL_TEXT"] = 'Hemos enviado un código de autenticación a tu correo %s. Ingresa el mismo a continuación.';
-$lang["MFA_TWO_FACTOR_ENABLEMENT_CONTENT"] = '
+$lang["MFA_ENABLE_CONTENT"] = '
 <p>La autenticación de dos factores aún no está habilitada.</p>
 <p>Para incrementar la seguridad al momento de realizar operaciones transaccionales con tu producto, necesitamos que actives el mecanismo de seguridad (Doble factor de autenticación). </p>';
 $lang["MFA_TWO_FACTOR_CODE_APP"] = 'Usa una aplicación en tu teléfono para obtener códigos de autenticación de dos factores cuando se te solicite. Recomendamos usar aplicaciones como: ';

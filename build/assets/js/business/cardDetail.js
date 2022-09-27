@@ -1,10 +1,8 @@
 'use strict'
-var interval,inputModal,inputModalCard,inputModalCardOtp;
+var interval, inputModal, inputModalCard, inputModalCardOtp;
 var img = $('#cardImage').val();
 var imgRev = $('#cardImageRev').val();
 var brand = $('#brand').val();
-var channelCardDetail = $('#channel').val();
-var otpMfaAuthorization = $('#otpMfaAuth').val();
 
 $(function () {
 	displaymoves()
@@ -84,11 +82,21 @@ $(function () {
 	$('#virtual-details').on('click', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		$('#accept').removeClass('disable-two-factor, sure-disable-two-factor');
-		if (lang.CONF_TWO_FACTOR == 'ON') {
-			cardDetailsTwoFactor(true);
-		} else {
+		otpProps.msgInfo = lang.GEN_SENSITIVE_DATA
+
+		if ((lang.CONF_MFA_ACTIVE === 'OFF' && !otpActive) || otpMfaAuth) {
 			sensitiveInformation();
+		} else if (otpChannel === lang.CONF_MFA_CHANNEL_APP) {
+			otpProps.validateAction = lang.CONF_MFA_VALIDATE_OTP;
+			otpProps.msgContent =  lang.GEN_TWO_FACTOR_CODE_VERIFY.replace('%s', lang.GEN_TWO_FACTOR_APLICATION);
+			otpProps.msgContent =  otpProps.msgContent.replace('%s ', '');
+			$('#accept').addClass('otp-validate');
+			modalOtpValidate();
+		} else {
+			otpProps.generateAction = lang.CONF_MFA_GENERATE_OTP;
+			otpProps.validateAction = lang.CONF_MFA_VALIDATE_OTP;
+			coverSpin(true);
+			generateOtp();
 		}
 	});
 
@@ -96,33 +104,13 @@ $(function () {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 		btnText = $(this).html();
+		$(this)
+			.removeClass('sensitive-btn')
+			.html(loader)
+			.prop('disabled',true)
+			.off('click');
 
-		if (lang.CONF_TWO_FACTOR == 'ON' && !otpMfaAuthorization) {
-			var form = $('#twoFactorCodeCardForm');
-			validateForms(form);
-			if (form.valid()) {
-				data = getDataForm(form);
-				data.operationType = lang.CONF_MFA_VALIDATE_OTP;
-				insertFormInput(true);
-				who = 'Mfa'; where = 'ValidateOTP2fa';
-				callNovoCore(who, where, data, function(response) {
-					switch (response.code) {
-						case 0:
-							otpMfaAuthorization = true;
-							validateFormCard();
-						break;
-						case 3:
-							insertFormInput(false);
-							appMessages(response.title, response.msg, response.icon, response.modalBtn);
-							$('#accept').removeClass('sensitive-btn');
-							$('#accept').addClass('invalid-code-card');
-						break;
-					}
-				});
-			}
-		} else {
-			validateFormCard();
-		}
+		validateCardDetail();
 	});
 
 	$('#system-info').on('click', '.virtualDetail-btn', function (e) {
@@ -131,17 +119,6 @@ $(function () {
 		clearInterval(interval);
 	});
 
-	$('#system-info').on('click', '#resendCodeCardDetails', function (e) {
-		$('#accept').removeClass('sensitive-btn');
-		$('#accept').addClass('resend-code-sensitive');
-		cardDetailsTwoFactor(false)
-	});
-
-	$('#system-info').on('click', '.invalid-code-card', function (e) {
-		modalTokenCardDetails();
-		$('#accept').addClass('sensitive-btn').removeClass('invalid-code-card disable-two-factor');
-		$('#cancel').removeAttr('disabled');
-	});
 });
 
 function getMovements() {
@@ -305,12 +282,14 @@ function sensitiveInformation() {
 	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
 }
 
-
-
 function validateCardDetail() {
+	form= $('#downd-send');
+	data = getDataForm(form);
+	data.codeOTP = '';
+	delete data.month;
+	delete data.year;
 	who = 'Business'; where = 'getVirtualDetail'
 	callNovoCore(who, where, data, function(response) {
-		insertFormInput(false);
 		switch (response.code) {
 			case 0:
 				$('#accept').addClass('virtualDetail-btn').removeClass('sensitive-btn');
@@ -434,104 +413,5 @@ function startTimer(duration, display) {
 function stopInterval() {
 	clearInterval(interval);
 	$('#accept').off('click');
-	$("#system-info").dialog("destroy");
-}
-
-function validateFormCard() {
-	form= $('#downd-send');
-
-	validateForms(form);
-	if (form.valid()) {
-		$('#accept')
-		.removeClass('sensitive-btn')
-		.html(loader)
-		.prop('disabled',true)
-		.off('click');
-
-		$('#cancel')
-		.prop('disabled',true);
-
-		data = getDataForm(form);
-		data.codeOTP = '';
-		delete data.month;
-		delete data.year;
-		validateCardDetail();
-	}
-}
-
-function cardDetailsTwoFactor(action) {
-
-	if(channelCardDetail == lang.CONF_MFA_CHANNEL_APP){
-		modalTokenCardDetails();
-		$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn','resend-code-sensitive');
-		$('#accept').removeClass('disable-two-factor');
-		$('#cancel').removeAttr('disabled');
-	}else{
-		var data = new Object();
-		data.sendResendOtp2fa = action;
-		who = 'Mfa'; where = 'GenerateOtp2fa';
-		callNovoCore(who, where, data, function(response) {
-			switch (response.code) {
-				case 0:
-					modalTokenCardDetails();
-					$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn','disable-two-factor');
-					$('#accept').removeClass('disable-two-factor');
-					$('#cancel').removeAttr('disabled');
-				break;
-				case 2:
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
-					$('#system-info').on('click', '.resend-code-sensitive', function (e) {
-						modalTokenCardDetails();
-						$('#accept').addClass('sensitive-btn').removeClass('resend-code-sensitive');
-						$('#accept').removeClass('disable-two-factor');
-						$('#cancel').removeAttr('disabled');
-					});
-				break;
-				case 3:
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
-				break;
-			}
-		});
-	}
-}
-
-function modalTokenCardDetails() {
-	var message = channelCardDetail == lang.CONF_MFA_CHANNEL_APP ? lang.GEN_TWO_FACTOR_APLICATION : lang.GEN_VIA_EMAIL;
-
-	modalBtn = {
-		btn1: {
-			text: lang.GEN_BTN_ACCEPT,
-			action: 'none'
-		},
-		btn2: {
-			text: lang.GEN_BTN_CANCEL,
-			action: 'none'
-		},
-		maxHeight : 600,
-		width : 530,
-		posMy: 'top+60px',
-		posAt: 'top+50px'
-	}
-
-	inputModal = '<form id="twoFactorCodeCardForm" name="formTwoFactorCode" class="mr-2" method="post" onsubmit="return false;">';
-	inputModal += 	'<div class="justify pr-1">';
-	inputModal += 		'<div class="justify pr-1">';
-	inputModal += 			'<p>' + lang.GEN_SENSITIVE_DATA + '</p>';
-	if(!otpMfaAuthorization){
-		inputModal += 			'<p>' + lang.GEN_TWO_FACTOR_CODE_VERIFY.replace("%s", message);
-		if (channelCardDetail == lang.CONF_MFA_CHANNEL_EMAIL) {
-			inputModal += 			' ' + lang.GEN_TWO_FACTOR_SEND_CODE+ ' ';
-			inputModal += 				'<a id="resendCodeCardDetails" href="#" class="btn btn-small btn-link p-0" >'+lang.GEN_BTN_RESEND_CODE+'</a>';
-		}
-		inputModal += 			'</p>';
-		inputModal += 		'</div>';
-		inputModal += 		'<div class="form-group col-8 p-0">';
-		inputModal += 			'<label for="authenticationCode">' + lang.GEN_AUTHENTICATION_CODE + '</label>'
-		inputModal += 			'<input id="authenticationCode" class="form-control" type="text" name="authenticationCode" autocomplete="off" maxlength="6" placeholder="'+lang.GEN_PLACE_HOLDER_AUTH_CODE+'">';
-		inputModal += 			'<div class="help-block"></div>'
-		inputModal += 		'</div">';
-	}
-	inputModal += 	'</div>';
-	inputModal += '</form>';
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
+	$('#system-info').dialog('destroy');
 }
