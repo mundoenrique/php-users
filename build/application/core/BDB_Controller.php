@@ -182,7 +182,7 @@ class BDB_Controller extends CI_Controller {
 		}
 	}
 
-	protected function loadLanguajes($views = [], $folder = 'base-spanish')
+	protected function loadLanguajes($views = [], $folder = 'base-bdb')
 	{
 		$this->lang->load($views, $folder);
 

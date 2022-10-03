@@ -76,8 +76,7 @@ $lang['CMBCON'] = 'Conductores';
 $lang['CMBVHI'] = 'Vehículos';
 $lang['CMBCTA'] = 'Cuentas';
 $lang['CMBVJE'] = 'Viajes';
-//SETTINGS
-$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
+$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY;
 //CONFIGURACION
 $lang['CARGANDO'] = 'Cargando...';
 $lang['CONFIGURACION'] = 'Configuración';
@@ -92,8 +91,6 @@ $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
-
-
 //BOTONES
 $lang['BUTTON_ACCEPT']= 'Aceptar';
 $lang['BUTTON_CONTINUE']= 'Continuar';
