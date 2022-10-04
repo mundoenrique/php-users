@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="recovery" class="recovery-content h-content hide-out">
+<div id="pre-loader" class="mt-2 mx-auto flex justify-center">
+	<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+</div>
+<div id="recovery" class="recovery-content h-content hide-out hide">
 	<div class="max-width-4 mx-auto p-responsive py-4">
 		<h1 class="h3 text regular inline"><?= lang('GEN_MENU_MFA'); ?></h1>
 		<div class="line mt-2 mb-3"></div>

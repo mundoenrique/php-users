@@ -222,29 +222,27 @@ $config = [
 	'activateSecretToken' => [
 		[
 			'field' => 'channel',
-			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]'
+			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]|required'
+		],
+		[
+			'field' => 'resendToken',
+			'resendToken' => 'trim|regex_match[/^(0|1)/]|required'
 		],
 	],
 	'generateOtp' => [
 		[
-			'field' => 'sendResendOtp2fa',
-			'rules' =>'trim|alpha_numeric'
-		],
-	],
-	'desactivateSecretToken' => [
-		[
-			'field' => 'resendDisableSecretToken',
-			'rules' =>'trim|alpha_numeric'
+			'field' => 'operationType',
+			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
 		],
 	],
 	'validateOtp' => [
 		[
-			'field' => 'authenticationCode',
-			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(activate|deactivate|validate)/]|required'
 		],
 		[
-			'field' => 'channel',
-			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]'
+			'field' => 'authenticationCode',
+			'rules' => 'trim|integer|exact_length[6]|required'
 		],
 	],
 	'accessRecoverOTP' => [
@@ -541,8 +539,8 @@ $config = [
 	],
 	'notifications' => [
 		[
-			'field' => 'screenSize',
-			'rules' => 'trim|numeric'
+			'field' => 'somthing',
+			'rules' => 'trim'
 		]
 	],
 	'notificationsUpdate' => [
@@ -587,8 +585,8 @@ $config = [
 	],
 	'keepSession' => [
 		[
-			'field' => 'signout',
-			'rules' => 'trim|alpha|required'
+			'field' => 'keep',
+			'rules' => 'trim|regex_match[/^(session)/]|required'
 		]
 	],
 	'changeLanguage' => [

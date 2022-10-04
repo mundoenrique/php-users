@@ -137,6 +137,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
 					$this->session->unset_userdata('otpActive');
 					$this->session->unset_userdata('otpChannel');
+					$this->session->unset_userdata('otpMfaAuth');
 					$this->session->unset_userdata('products');
 				}
 
@@ -144,11 +145,12 @@ class Novo_Mfa_Model extends NOVO_Model {
 					if ($response->data->validationResult) {
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
+						$this->session->set_userdata('otpMfaAuth', TRUE);
 					} else {
 						$this->response->code = 1;
 						$this->response->icon = lang('CONF_ICON_WARNING');
 						$this->response->msg = $otpChannel === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
-						$this->response->modalBtn['btn1']['action'] = 'destroy';
+						$this->response->modalBtn['btn1']['action'] = 'none';
 					}
 				}
 				break;
@@ -156,12 +158,14 @@ class Novo_Mfa_Model extends NOVO_Model {
 			case 464:
 				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-
-				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel) === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
+				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel === lang('CONF_MFA_CHANNEL_APP'))
+				 	? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo'
+					: 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
 					$this->response->code = 1;
+					$this->response->modalBtn['btn1']['action'] = 'none';
 				}
 				break;
 

@@ -16,7 +16,7 @@ class Verify_Access {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
+		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
 		$this->CI = &get_instance();
 		$this->requestServ = new stdClass();
@@ -30,14 +30,14 @@ class Verify_Access {
 	public function validateForm($rule, $customerUri, $user, $class = FALSE)
 	{
 
-		log_message('INFO', 'NOVO Verify_Access: validateForm method initialized');
+		log_message('INFO', 'Verify_Access: validateForm method initialized');
 
 		$result = $this->CI->form_validation->run($rule);
 
-		log_message('DEBUG', 'NOVO ['.$user.'] VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			log_message('DEBUG', 'NOVO  ['.$user.'] VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			writeLog('DEBUG', 'VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		if ($class) {
@@ -56,7 +56,7 @@ class Verify_Access {
 	 */
 	public function createRequest($rule, $user)
 	{
-		log_message('INFO', 'NOVO Verify_Access: createRequest method initialized');
+		writeLog('INFO', 'Verify_Access: createRequest method initialized');
 
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
@@ -64,17 +64,14 @@ class Verify_Access {
 				case 'plot':
 				case 'cpo_name':
 				break;
-				case 'screenSize':
-					$this->CI->session->set_userdata('screenSize', $value);
-				break;
 				default:
 				$this->requestServ->$key = $value;
 			}
 		}
 
 		unset($_POST);
-		log_message('DEBUG', 'NOVO [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ' . $rule .' REQUEST CREATED '.
-			json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
+
+		writeLog('DEBUG', $rule .' REQUEST CREATED '. json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $this->requestServ;
 	}
@@ -85,7 +82,7 @@ class Verify_Access {
 	 */
 	public function ResponseByDefect($user)
 	{
-		log_message('INFO', 'NOVO Verify_Access: ResponseByDefect method initialized');
+		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
 		$this->responseDefect = new stdClass();
 		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
@@ -107,8 +104,7 @@ class Verify_Access {
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
-			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', ' ResponseByDefect: ' .	json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $this->responseDefect;
 	}
@@ -119,11 +115,15 @@ class Verify_Access {
 	 */
 	public function accessAuthorization($module, $customerUri, $user = FALSE)
 	{
-		log_message('INFO', 'NOVO Verify_Access: accessAuthorization method initialized');
+		writeLog('INFO', 'Verify_Access: accessAuthorization method initialized');
 
 		$user = $user ?? $this->user;
+		$isLogged = $this->CI->session->has_userdata('logged');
+		$isUserId = $this->CI->session->has_userdata('userId');
+		$referrer = $this->CI->agent->referrer();
+		$mfaActive = lang('CONF_MFA_ACTIVE') === 'ON';
 
-		if ($this->CI->session->has_userdata('userId') && ($this->CI->session->clientAgent != $this->CI->agent->agent_string())) {
+		if ($isUserId && ($this->CI->session->clientAgent !== $this->CI->agent->agent_string())) {
 			clearSessionsVars();
 		}
 
@@ -131,28 +131,35 @@ class Verify_Access {
 			case 'userCardsList':
 			case 'profileUser':
 			case 'updateProfile':
-				$auth = $this->CI->session->has_userdata('logged');
+				$auth = $isLogged;
 				break;
 			case 'mfaEnable':
-				$auth = lang('CONF_MFA_ACTIVE') === 'ON' && $this->CI->session->has_userdata('logged');
-				$auth = $auth && !$this->CI->session->otpActive;
+				$auth = $mfaActive && !$this->CI->session->otpActive && $isLogged;
 				break;
 			case 'mfaConfirm':
-				$referrerUrl = base_url(lang('CONF_LINK_MFA_ENABLE'));
-				$auth = $this->CI->session->has_userdata('logged') && $this->CI->agent->referrer() === $referrerUrl;
+				$referrerUrl = $referrer === base_url(lang('CONF_LINK_MFA_ENABLE'));
+				$auth = $isLogged && $referrerUrl;
 				break;
 			case 'activateSecretToken':
+				$referrerUrl = $referrer === base_url(lang('CONF_LINK_MFA_CONFIRM') . '/' . lang('CONF_MFA_EMAIL'));
+				$auth = $isLogged && !$this->CI->session->otpActive && $referrerUrl;
+				break;
+			case 'validateOtp':
+				$auth = $isLogged && $mfaActive;
+				break;
 			case 'desactivateSecretToken':
 			case 'generateOtp':
-			case 'validateOtp':
-				$auth = $this->CI->session->has_userdata('logged') && lang('CONF_MFA_ACTIVE') === 'ON';
+				$auth = $isLogged && $this->CI->session->otpActive;
+				break;
+			case 'getVirtualDetail':
+				$auth = $this->CI->session->has_userdata('products') && $this->CI->session->otpMfaAuth;
 				break;
 			case 'keepSession':
 			case 'professionsList':
 			case 'statesList':
 			case 'cityList':
 			case 'regions':
-				$auth = $this->CI->session->has_userdata('logged') || $this->CI->session->has_userdata('userId');
+				$auth = $isLogged || $isUserId;
 				break;
 			case 'getBalance':
 			case 'cardDetail':
@@ -165,9 +172,6 @@ class Verify_Access {
 			case 'replacement':
 			case 'changePin':
 				$auth = $this->CI->session->has_userdata('products');
-				break;
-			case 'getVirtualDetail':
-				$auth = $this->CI->session->has_userdata('products')/*  && $this->CI->session->otpMfaAuth */;
 				break;
 			case 'expensesCategory':
 			case 'getMovements':
@@ -186,7 +190,8 @@ class Verify_Access {
 				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S' && lang('CONF_PAYS_TRANSFER') === 'ON';
 				break;
 			case 'signup':
-				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
+				$referrerUrl = $referrer === base_url(lang('CONF_LINK_USER_IDENTIFY'));
+				$auth = $referrerUrl && $this->CI->session->has_userdata('userIdentity');
 				break;
 			case 'signUpData':
 				$auth = $this->CI->session->has_userdata('userNameValid');
@@ -195,7 +200,7 @@ class Verify_Access {
 				$auth = $this->CI->session->has_userdata('userName');
 				break;
 			case 'changePassword':
-				$auth = ($this->CI->session->flashdata('changePassword') != NULL || $this->CI->session->has_userdata('logged'));
+				$auth = ($this->CI->session->flashdata('changePassword') !== NULL || $isLogged);
 				break;
 			default:
 				$freeAccess = [
@@ -205,7 +210,7 @@ class Verify_Access {
 				$auth = in_array($module, $freeAccess);
 		}
 
-		log_message('DEBUG', 'NOVO ['.$user.'] accessAuthorization '. $module.': '.json_encode($auth, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'accessAuthorization ' . $module . ': ' . json_encode($auth, JSON_UNESCAPED_UNICODE));
 
 		if (!$auth) {
 			$auth = !(preg_match('/Novo_/', $this->CI->router->fetch_class()) === 1);

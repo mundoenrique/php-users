@@ -63,12 +63,11 @@ $(function () {
 		validateForms(formcodeOTP);
 
 		if (formcodeOTP.valid()) {
-			$('#formVerificationOTP input').attr('disabled', true);
 			$(this)
-				.off('click')
 				.html(loader)
-				.removeClass('send-otp');
+				.prop('disabled', true);
 			data.codeOtp = $('#codeOTP').val();
+			insertFormInput(true);
 
 			getRecaptchaToken('UserIdentifyOTP', function (recaptchaToken) {
 				data.token = recaptchaToken;
@@ -79,21 +78,19 @@ $(function () {
 });
 
 function validateIdentity() {
-	who = 'user'; where = 'UserIdentify'
+	who = 'user';
+	where = 'UserIdentify';
+
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
 			case 0:
 				var dataUser = response.data;
-				dataUser = JSON.stringify({dataUser});
-				dataUser = cryptoPass(dataUser);
+				dataUser = cryptography.encrypt(dataUser);
 				$('#signupForm')
-					.append('<input type="hidden" name="dataUser" value="'+dataUser+'">')
+					.append('<input type="hidden" name="dataUser" value="' + dataUser + '">')
 					.submit();
 			break;
 			case 2:
-				$('#identityBtn').html(btnText);
-				$('#accept').addClass('send-otp');
-
 				loginIpMsg ='<form id="formVerificationOTP" name="formVerificationOTP" class="mr-2" method="post" onsubmit="return false;">';
 				loginIpMsg+='<p class="pt-0 p-0">'+response.msg+'</p>';
 				loginIpMsg+='<div class="row">';
@@ -105,12 +102,14 @@ function validateIdentity() {
 				loginIpMsg+='</div>';
 				loginIpMsg+='</form>';
 
+				$('#accept').addClass('send-otp');
 				appMessages(response.title, loginIpMsg, response.icon, response.modalBtn);
 			break;
-			default:
-				insertFormInput(false);
-				$('#identityBtn').html(btnText);
-			break;
+		}
+
+		if(response.code !== 0) {
+			insertFormInput(false);
+			$('#identityBtn').html(btnText);
 		}
 	})
 }

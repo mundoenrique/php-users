@@ -67,8 +67,9 @@ class Novo_CallModels extends Novo_Controller {
 			$this->dataResponse = $this->verify_access->ResponseByDefect($this->appUserName);
 		}
 
-		$dataResponse = lang('CONF_CYPHER_DATA') == 'ON' ?  $this->cryptography->encrypt($this->dataResponse) : $this->dataResponse;
-		$this->output->set_content_type('application/json')->set_output(json_encode($dataResponse, JSON_UNESCAPED_UNICODE));
+		$customerData = encryptData($this->dataResponse);
+
+		$this->output->set_content_type('application/json')->set_output($customerData);
 	}
 	/**
 	 * @info Método que maneja los archivos enviados al servidor

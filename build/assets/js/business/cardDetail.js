@@ -1,5 +1,5 @@
 'use strict'
-var interval, inputModal, inputModalCard, inputModalCardOtp;
+var interval, inputModalCard, inputModalCardOtp;
 var img = $('#cardImage').val();
 var imgRev = $('#cardImageRev').val();
 var brand = $('#brand').val();
@@ -100,23 +100,18 @@ $(function () {
 		}
 	});
 
-	$('#system-info').on('click', '.sensitive-btn', function (e) {
+	$('#system-info').on('click', '.sensitive-data', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		btnText = $(this).html();
 		$(this)
-			.removeClass('sensitive-btn')
 			.html(loader)
-			.prop('disabled',true)
-			.off('click');
+			.prop('disabled', true);
 
 		validateCardDetail();
 	});
 
-	$('#system-info').on('click', '.virtualDetail-btn', function (e) {
-		$(this)
-		.removeClass('virtualDetail-btn');
-		clearInterval(interval);
+	$('#system-info').on('click', '.close-card-detail', function (e) {
+		stopInterval();
 	});
 
 });
@@ -179,7 +174,7 @@ function displaymoves() {
 		$('#movementsList').removeClass('hide');
 		$('#movementsStats').removeClass('hide');
 
-		var chart = new Chart($('#chart'), {
+		new Chart($('#chart'), {
     	type: 'doughnut',
     	data: {
       	labels: graphicLabel,
@@ -260,8 +255,7 @@ function filesAction(action, response) {
 }
 
 function sensitiveInformation() {
-	$('#accept').addClass('sensitive-btn').removeClass('virtualDetail-btn');
-	$('#cancel').prop('disabled',false);
+	$('#accept').addClass('sensitive-data');
 
 	modalBtn = {
 		btn1: {
@@ -279,21 +273,22 @@ function sensitiveInformation() {
 	}
 
 	inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
+
+	appMessages(lang.GEN_SYSTEM_NAME, inputModal, lang.CONF_ICON_INFO, modalBtn);
 }
 
 function validateCardDetail() {
-	form= $('#downd-send');
-	data = getDataForm(form);
-	data.codeOTP = '';
-	delete data.month;
-	delete data.year;
-	who = 'Business'; where = 'getVirtualDetail'
+	who = 'Business';
+	where = 'GetVirtualDetail';
+	data = {
+		cardNumberDownd: $('#cardNumberDownd').val(),
+		codeOTP: ''
+	};
+	insertFormInput(true);
+
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
 			case 0:
-				$('#accept').addClass('virtualDetail-btn').removeClass('sensitive-btn');
-
 				inputModalCard = '<h4 class="h5">' + lang.GEN_MENU_CARD_DETAIL + '</h4>';
 				inputModalCard += '<div class="flex mt-3 mx-auto flex-wrap justify-center">';
 				inputModalCard += 	'<div class="card-details row justify-center mx-5">';
@@ -324,27 +319,18 @@ function validateCardDetail() {
 				inputModalCard += 	'</div>';
 				inputModalCard += '</div>';
 
-				response.modalBtn = {
-					btn1: {
-						text: lang.GEN_BTN_CLOSE,
-						action: 'destroy'
-					},
-					maxHeight : 600,
-					width : 530,
-					posMy: 'top+50px',
-					posAt: 'top+50px'
-				}
+				response.modalBtn.maxHeight = 600;
+				response.modalBtn.width = 530;
+				response.modalBtn.posMy = 'top+50px';
+				response.modalBtn.posAt = 'top+50px';
 
+				$('#accept').addClass('close-card-detail');
 				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.CONF_ICON_SUCCESS, response.modalBtn);
-
 				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.CONF_TIMER_MODAL_VIRTUAL+'s</span>');
 				clickCard3d();
 				startTimer(lang.CONF_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));
-			break;
+				break;
 			case 2:
-				$('#accept').addClass('virtualOtp-btn');
-				$('#cancel').prop('disabled',false);
-
 				response.modalBtn.posMy = 'top+50px';
 				response.modalBtn.posAt = 'top+50px';
 
@@ -359,12 +345,12 @@ function validateCardDetail() {
 				inputModalCardOtp+= 		'</div>';
 				inputModalCardOtp+= '</form>';
 
+				$('#accept').addClass('virtualOtp-btn');
 				appMessages(response.title, inputModalCardOtp, response.icon, response.modalBtn);
-			break;
-			default:
-				$('#accept').html(btnText);
-			break;
+				break;
 		}
+
+		insertFormInput(false);
 	})
 }
 
@@ -412,6 +398,5 @@ function startTimer(duration, display) {
 
 function stopInterval() {
 	clearInterval(interval);
-	$('#accept').off('click');
-	$('#system-info').dialog('destroy');
+	modalDestroy(true)
 }

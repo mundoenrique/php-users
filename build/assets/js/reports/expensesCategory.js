@@ -4,7 +4,7 @@ $(function () {
 	var typeInquiry;
 
 	$('input[type=hidden][name="cardNumber"]').each(function (pos, element) {
-		var cypher = cryptoPass($(element).val());
+		var cypher = cryptography.encrypt($(element).val());
 		$(element).val(cypher);
 	});
 
@@ -86,7 +86,6 @@ $(function () {
 });
 
 function getMovements(typeInquiry) {
-	who = "Reports"; where = "GetMovements";
 	$('#downd-send input').val('');
 	$('#no-result').addClass('hide');
 	$('#movements').addClass('hide');
@@ -105,6 +104,8 @@ function getMovements(typeInquiry) {
 		data.finalDate = $('#finalDate').val();
 	}
 
+	who = "Reports";
+	where = "GetMovements";
 	insertFormInput(true);
 
 	callNovoCore(who, where, data, function (response) {
@@ -141,7 +142,6 @@ function getMovements(typeInquiry) {
 				body += '</tr>';
 			});
 
-			var chart;
 			var graphicLabel = [];
 			var graphicValue = [];
 			var graphicColour = [];
@@ -153,7 +153,7 @@ function getMovements(typeInquiry) {
 				graphicColour.push(response.data.grafic[key].color);
 			})
 
-			chart = new Chart($('#movementsStats'), {
+			new Chart($('#movementsStats'), {
 				type: 'doughnut',
 				data: {
 					labels: graphicLabel,

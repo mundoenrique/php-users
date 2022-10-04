@@ -1,23 +1,23 @@
 'use strict'
-
 $(function () {
-	coverSpin(true);
-	insertFormInput(false);
-	// getSecretToken(false, channel);
+	var mfaChannel = $('#channel').val();
+	activeteMfa(response, mfaChannel);
 
 	$('#mfaConfirmBtn').on('click', function(e) {
 		e.preventDefault();
-		var form = $('#mfaConfirmForm');
 		btnText = $(this).html().trim();
-
+		form = $('#mfaConfirmForm');
 		validateForms(form);
+
 		if (form.valid()) {
-			var data = getDataForm(form);
-			data.operationType = lang.CONF_MFA_ACTIVATE;
-			data.channel = $('#channel').val();
 			$(this).html(loader);
+			who = 'Mfa';
+			where = 'ValidateOtp';
+			data = getDataForm(form);
+			data.operationType = lang.CONF_MFA_ACTIVATE;
+			data.channel = mfaChannel;
 			insertFormInput(true);
-			who = 'Mfa'; where = 'ValidateOtp';
+
 			callNovoCore(who, where, data, function() {
 				$('#mfaConfirmBtn').html(btnText);
 				$('#authenticationCode').val('');
@@ -27,26 +27,28 @@ $(function () {
 	});
 
 	$('#resendCode').on('click', function(e) {
-		getSecretToken(true);
+		who = 'Mfa';
+		where = 'ActivateSecretToken';
+		data = {
+			channel: mfaChannel,
+			resendToken: true
+		}
+		insertFormInput(true);
+
+		callNovoCore(who, where, data, function(response) {
+			activeteMfa(response, mfaChannel);
+		});
 	});
 });
 
-function getSecretToken(reSend) {
-	data = {
-		channel: $('#channel').val(),
-		resendToken: reSend
+function activeteMfa(responseData, channel) {
+	if (channel === lang.CONF_MFA_CHANNEL_APP && responseData.data.qrCode) {
+		$('#secretToken').append(responseData.data.secretToken);
+		$('#qrCodeImg').html($(`<img src="data:image/png;base64,${responseData.data.qrCode}" >`));
 	}
-	who = 'Mfa';
-	where = 'ActivateSecretToken';
-	callNovoCore(who, where, data, function(response) {
 
-		if (data.channel === lang.CONF_MFA_CHANNEL_APP && response.data.qrCode) {
-			$('#secretToken').append(response.data.secretToken);
-			$('#qrCodeImg').html($(`<img src="data:image/png;base64,${response.data.qrCode}" >`));
-		}
-
-		$('#authenticationCode').val('');
-		coverSpin(false);
-	});
-
+	$('#authenticationCode').val('');
+	$('.hide-out').removeClass('hide');
+	$('#pre-loader').remove();
+	insertFormInput(false);
 }

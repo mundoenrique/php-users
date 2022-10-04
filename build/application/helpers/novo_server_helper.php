@@ -62,11 +62,7 @@ if (! function_exists('uuIdV4Generate')) {
 // Maneja respuesta del servicio
 if (! function_exists('responseServer')) {
 	function responseServer($responseServer) {
-		$code = isset($responseServer->info->code) ? explode('.', $responseServer->info->code) : lang('CONF_RC_DEFAULT');
-
-		if ($responseServer->errorNo === 28) {
-			$responseServer->rc = 504;
-		}
+		$code = explode('.', $responseServer->code);
 
 		switch ($responseServer->HttpCode) {
 			case 200:
@@ -82,7 +78,11 @@ if (! function_exists('responseServer')) {
 				break;
 
 			default:
-				$responseServer->rc = is_array($code) ? $code[2] : $code;
+				$responseServer->rc = $code[2] ?? $code[0];
+		}
+
+		if ($responseServer->errorNo === 28) {
+			$responseServer->rc = 504;
 		}
 
 		return $responseServer;

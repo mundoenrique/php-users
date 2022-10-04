@@ -83,10 +83,6 @@ class Connect_Services_Apis
 			$curlResponse->rc = 0;
 			$this->CI->session->set_tempdata('jwtOauth', $curlResponse->access_token, 1860);
 		}
-		// Validación para llamar a esta método
-		if (!$this->CI->session->tempdata('jwtOauth')) {
-			$this->getJwtOauth()						;
-		}
 
 		return $curlResponse;
 	}
@@ -94,6 +90,10 @@ class Connect_Services_Apis
 	public function connectMfaServices($request)
 	{
 		writeLog('INFO', 'Connect_Services_Apis: connectMfaServices Method Initialized');
+
+		if (API_GEE_WAY && !$this->CI->session->tempdata('jwtOauth')) {
+			$this->getJwtOauth()						;
+		}
 
 		$urlMfaServ = URL_MFA_SERV . $request->uri;
 		$uuIdV4 = uuIdV4Generate();

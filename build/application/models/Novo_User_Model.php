@@ -29,8 +29,7 @@ class Novo_User_Model extends NOVO_Model {
 		$dataRequest->userName = $userName;
 
 		$this->dataAccessLog->userName = $userName;
-
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->userPass);
+		$password = decryptData($dataRequest->userPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 		$authToken = $this->session->flashdata('authToken') ?? '';
 
@@ -39,13 +38,14 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 		$this->dataRequest->password = md5($password);
 
-		if (lang('CONF_ARGON2_ACTIVE') == 'ON') {
+		if (lang('CONF_ARGON2_ACTIVE') === 'ON') {
 			$this->dataRequest->password = $argon2->hexArgon2;
 			$this->dataRequest->passwordAux = md5($password);
 		}
 
 		$this->dataRequest->pais = 'Global';
-		if (IP_VERIFY == 'ON' && lang('CONF_VALIDATE_IP') == 'ON') {
+
+		if (lang('CONF_IP_VERIFY') === 'ON') {
 			$this->dataRequest->codigoOtp = [
 				'tokenCliente' => $dataRequest->OTPcode ?? '',
 				'authToken' => $authToken
@@ -71,11 +71,11 @@ class Novo_User_Model extends NOVO_Model {
 			'serverTime' => (int) date("H")
 		];
 
-		$validateClient = $this->isResponseRc == 0 || $this->isResponseRc == -8 || $this->isResponseRc == -205;
+		$validatRc = $this->isResponseRc == 0 || $this->isResponseRc == -8 || $this->isResponseRc == -205;
 		$clientCod = $response->codPais ?? '';
 		$clientCod = $response->bean->codPais ?? $clientCod;
 
-		if ($validateClient && $clientCod != $this->config->item('customer') && CUSTOMER_VERIFY == 'ON') {
+		if ($validatRc && $clientCod !== $this->config->item('customer')) {
 			if ($this->isResponseRc == 0) {
 				$userData = [
 					'logged' => TRUE,
@@ -146,7 +146,7 @@ class Novo_User_Model extends NOVO_Model {
 						'abbrTypeDocument' => $response->abrev_tipo_id_ext_per ?? '',
 						'maskMail' => maskString($response->email, 4, $end = 6, '@'),
 						'otpActive' => $response->otpActive ?? FALSE,
-						'otpChannel' => $response->otpChannel ?? '',
+						'otpChannel' =>  $response->otpChannel ?? FALSE,
 						'otpMfaAuth' => lang('CONF_MFA_ACTIVE') === 'OFF'
 					];
 
@@ -255,7 +255,7 @@ class Novo_User_Model extends NOVO_Model {
 		log_message('INFO', 'NOVO User Model: validateUserLogged Method Initialized');
 		$logged = FALSE;
 
-		if (lang('CONF_DUPLICATE_SESSION') == 'ON') {
+		if (ACTIVE_SAFETY) {
 			$this->db->select(['id', 'username'])
 			->where('username',  $userName)
 			->get_compiled_select('cpo_sessions', FALSE);
@@ -420,7 +420,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
-		if ($this->session->flashdata('authToken') != NULL && $this->isResponseRc === 0) {
+		if ($this->session->flashdata('authToken') !== NULL && $this->isResponseRc === 0) {
 			$response = $this->sendToService('callWs_ValidateOTP');
 		} else {
 			$this->isResponseRc = 998;
@@ -470,8 +470,8 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Clave';
 		$this->dataAccessLog->operation = 'Cambiar Clave';
 
-		$current = $this->cryptography->decryptOnlyOneData($dataRequest->currentPass);
-		$new = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
+		$current = decryptData($dataRequest->currentPass);
+		$new = decryptData($dataRequest->newPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($new);
 
 		$this->dataRequest->idOperation = '25';
@@ -731,7 +731,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Registro';
 		$this->dataAccessLog->operation = 'Registrar usuario';
 
-		$password = $this->cryptography->decryptOnlyOneData($dataRequest->newPass);
+		$password = decryptData($dataRequest->newPass);
 		$argon2 = $this->encrypt_connect->generateArgon2($password);
 
 		$this->dataRequest->idOperation = '20';

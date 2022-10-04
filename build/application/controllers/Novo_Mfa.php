@@ -66,6 +66,7 @@ class Novo_Mfa extends NOVO_Controller {
 		}
 
 		$this->request->channel = $otpChannel;
+		$this->request->resendToken = FALSE;
 		$this->method = 'callWs_ActivateSecretToken_Mfa';
 		$responseMfa = $this->loadModel($this->request);
 		$this->responseAttr($responseMfa);

@@ -23,10 +23,10 @@ $(function() {
 
 	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
 		e.preventDefault();
-		btnText = $(this).html();
-		$(this).html(loader);
-		$(this).prop('disabled', true);
-		$(this).removeClass('sure-disable-two-factor');
+		e.stopImmediatePropagation();
+		$(this)
+			.html(loader)
+			.prop('disabled', true);
 		otpProps.msgInfo = lang.GEN_MFA_REMEMBER;
 		otpProps.generateAction = lang.CONF_MFA_DEACTIVATE;
 		otpProps.validateAction = lang.CONF_MFA_DEACTIVATE;
@@ -37,24 +37,26 @@ $(function() {
 	$('#system-info').on('click', '.otp-validate', function (e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		btnText = $(this).html();
+
 		form = $('#twoFactorDisableForm');
 		validateForms(form);
 
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.operationType = otpProps.validateAction;
-			$(this).removeClass('otp-validate');
 			$(this).html(loader);
 			$(this).prop('disabled', true);
-			insertFormInput(true);
 			who = 'Mfa';
 			where = 'ValidateOtp';
-			callNovoCore(who, where, data, function(response) {
+			data = getDataForm(form);
+			data.operationType = otpProps.validateAction;
+			insertFormInput(true);
 
+			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
 						if (otpProps.validateAction === lang.CONF_MFA_VALIDATE_OTP) {
+							otpMfaAuth = true;
 							validateCardDetail();
 						}
 						break;
@@ -64,32 +66,24 @@ $(function() {
 						break;
 				}
 
-
-				if (otpProps.validateAction !== lang.CONF_MFA_VALIDATE_OTP) {
+				if (response.code !== 0) {
 					insertFormInput(false);
-					$('#accept')
-						.prop('disabled', false)
-						.html(btnText);
 				}
 			});
 		}
 	});
 
 	$('#system-info').on('click', '.invalid-code', function (e) {
-		$('#accept').removeClass('invalid-code');
+		modalDestroy(true);
 		$('#accept').addClass('otp-validate');
-		modalOtpValidate()
+		modalOtpValidate();
 	});
 
 	$('#system-info').on('click', '#resendCode', function (e) {
-		$('#system-info').dialog('destroy');
-		coverSpin(true);
 		otpProps.reSend = true;
+		modalDestroy(true);
+		coverSpin(true);
 		generateOtp();
-	});
-
-	$('#cancel').on('click', function(e) {
-		$('#accept').removeClass('sure-disable-two-factor otp-validate invalid-code');
 	});
 });
 
@@ -100,6 +94,7 @@ function generateOtp() {
 	}
 	who = 'Mfa';
 	where = 'GenerateOtp';
+	insertFormInput(true);
 
 	callNovoCore(who, where, data, function(response) {
 		switch (response.code) {
@@ -107,13 +102,11 @@ function generateOtp() {
 				otpProps.msgContent = response.msg;
 				modalOtpValidate();
 				$('#accept').addClass('otp-validate');
+				insertFormInput(false);
 			break;
 		}
 
-		coverSpin(false)
-		$('#accept')
-			.prop('disabled', false)
-			.html(btnText);
+		coverSpin(false);
 	});
 }
 

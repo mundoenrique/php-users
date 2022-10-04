@@ -49,8 +49,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
 		$this->render->prefix = '';
 		$this->render->sessionTime = $this->config->item('session_time');
-		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
-		$this->render->callServer = $this->render->callModal;
+		$this->render->callServer = $this->config->item('session_call_server');
 		$this->ValidateBrowser = FALSE;
 		$this->nameApi = '';
 
@@ -77,7 +76,6 @@ class NOVO_Controller extends CI_Controller {
 		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
-
 			if ($this->session->has_userdata('userName')) {
 				$data = ['username' => $this->session->userName];
 				$this->db->where('id', $this->session->session_id)
@@ -118,17 +116,10 @@ class NOVO_Controller extends CI_Controller {
 					break;
 			}
 
+			$this->load->helper('novo_cryptography');
 			if ($this->input->is_ajax_request()) {
-				$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
-						)
-					)
-				) : json_decode(utf8_encode($this->input->get_post('request')));
+				$request = decryptData($this->input->get_post('request'));
+				$this->dataRequest = json_decode($request);
 			} else {
 				if ($this->session->has_userdata('logged')) {
 					$redirectMfa = lang('CONF_MFA_ACTIVE') === 'ON' && $this->session->otpActive == FALSE;
@@ -203,6 +194,7 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
 				"aes-json-format",
+				"encrypt_decrypt",
 				"helper"
 			];
 
@@ -220,7 +212,7 @@ class NOVO_Controller extends CI_Controller {
 					"googleRecaptcha"
 				);
 
-				if(ACTIVE_RECAPTCHA){
+				if (ACTIVE_RECAPTCHA) {
 					$this->load->library('recaptcha');
 					$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 				}
@@ -252,7 +244,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView = 0)
 	{
-		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
+		writeLog('INFO', 'Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
 
@@ -264,8 +256,10 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->modalBtn = json_encode($responseView->modalBtn);
+			$this->render->modalBtn = json_encode($responseView->modalBtn, JSON_UNESCAPED_UNICODE);
 		}
+
+		$this->render->response = $responseView;
 	}
 
 	/**

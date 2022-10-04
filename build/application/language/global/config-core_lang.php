@@ -4,10 +4,6 @@ $lang['CONF_SUPPORT_IE'] = 'OFF';
 $lang['CONF_MAINTENANCE'] = 'OFF';
 $lang['CONF_MAINTENANCE_RC'] = 9997;
 $lang['CONF_TENANT_PUBLICATION'] = 2010;
-$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
-$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
-$lang['CONF_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_ARGON2_ACTIVE'] = 'OFF';
 $lang['CONF_DATATABLE_SINFOPOSTFIX'] = '';
 $lang['CONF_DATATABLE_SSEARCH'] = '';
@@ -31,6 +27,8 @@ $lang['CONF_DOWNLOAD_STATEMENT'] = 'OFF';
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
+$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signin',
 	'accessRecover',
@@ -57,8 +55,12 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
-$lang['CONF_VALIDATE_IP'] = 'ON';
+$lang['CONF_IP_VERIFY'] = IP_VERIFY;
 $lang['CONF_MODAL_WIDTH'] = 370;
+$lang['CONF_MODAL_BTN_CLASS'] = [
+	'cancel' => 'btn-modal btn btn-small btn-link',
+	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+];
 $lang['CONF_ICON'] = 'mt-0 ui-icon';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';

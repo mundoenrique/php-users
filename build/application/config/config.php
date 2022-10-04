@@ -391,7 +391,7 @@ $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 60 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = TRUE;
-$config['sess_time_to_update'] = ACTIVE_SAFETY == 'ON' ? 60 : 0;
+$config['sess_time_to_update'] = ACTIVE_SAFETY ? 60 : 0;
 $config['sess_regenerate_destroy'] = TRUE;
 
 /*
@@ -459,7 +459,7 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = ACTIVE_SAFETY == 'ON' ? TRUE : FALSE;
+$config['csrf_protection'] = ACTIVE_SAFETY;
 $config['csrf_token_name'] = 'cpo_name';
 $config['csrf_cookie_name'] = 'cook';
 $config['csrf_expire'] = 7200;

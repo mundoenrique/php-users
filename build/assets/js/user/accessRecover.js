@@ -14,7 +14,13 @@ $(function () {
 			data = getDataForm(form);
 
 			if (lang.CONF_RECOVER_SHOW_OPTIONS == 'ON') {
-				validateRecoveryOptions();
+				if ($('#recoveryUser').is(':checked')) {
+					delete data.recoveryPwd;
+				}
+
+				if ($('#recoveryPwd').is(':checked')) {
+					delete data.recoveryUser;
+				}
 			}
 
 			$(this).html(loader);
@@ -33,10 +39,9 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			$('#accept').removeClass('send-otp');
 			data = getDataForm(form);
 			data.email = $('#email').val();
-			$('#accept')
+			$(this)
 				.html(loader)
 				.prop('disabled', true);
 			insertFormInput(true);
@@ -49,21 +54,8 @@ $(function () {
 	});
 });
 
-function validateRecoveryOptions() {
-
-	if ($('#recoveryUser').is(':checked')) {
-		delete data.recoveryPwd;
-	}
-
-	if ($('#recoveryPwd').is(':checked')) {
-		delete data.recoveryUser;
-	}
-}
-
 function showModalOTP(response) {
-
 	if (response.code == 0) {
-		$('#accept').addClass('send-otp');
 		inputModal = response.msg;
 		inputModal +=	'<form id="otpModal" name="otpModal" onsubmit="return false" class="pt-2">';
 		inputModal +=		'<div class="form-group col-auto">';
@@ -74,12 +66,14 @@ function showModalOTP(response) {
 		inputModal += 	'</div>';
 		inputModal += '</form>';
 
+		$('#accept').addClass('send-otp');
 		appMessages(response.title, inputModal, response.icon, response.modalBtn)
 	}
 }
 
-function getAccessRecover(){
-	who = 'User'; where = lang.CONF_LINK_SERVICE_RECOVER_ACCESS;
+function getAccessRecover() {
+	who = 'User';
+	where = lang.CONF_LINK_SERVICE_RECOVER_ACCESS;
 
 	callNovoCore(who, where, data, function (response) {
 		if (lang.CONF_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
@@ -92,7 +86,9 @@ function getAccessRecover(){
 }
 
 function getValidateOTP(){
-	who = 'User'; where = 'ValidateOTP';
+	who = 'User';
+	where = 'ValidateOTP';
+	insertFormInput(true);
 
 	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);

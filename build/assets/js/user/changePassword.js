@@ -18,9 +18,9 @@ $(function () {
 
 		if (form.valid()) {
 			data = getDataForm(form);
-			data.currentPass = cryptoPass(data.currentPass);
-			data.newPass = cryptoPass(data.newPass);
-			data.confirmPass = cryptoPass(data.confirmPass);
+			data.currentPass = cryptography.encrypt(data.currentPass);
+			data.newPass = cryptography.encrypt(data.newPass);
+			data.confirmPass = cryptography.encrypt(data.confirmPass);
 			insertFormInput(true);
 			changeBtn.html(loader);
 			changePassword(data, btnText);
@@ -29,10 +29,15 @@ $(function () {
 });
 
 function changePassword(passData, textBtn) {
-	who = 'User'; where = 'ChangePassword'; data = passData;
+	who = 'User';
+	where = 'ChangePassword';
+	data = passData;
 
 	callNovoCore(who, where, data, function (response) {
-		$('.pwd-rules').find('li').removeClass('rule-valid').addClass('rule-invalid')
+		$('.pwd-rules')
+			.find('li')
+			.removeClass('rule-valid')
+			.addClass('rule-invalid')
 		form[0].reset();
 		insertFormInput(false);
 		changeBtn.html(textBtn);

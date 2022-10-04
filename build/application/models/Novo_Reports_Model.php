@@ -25,11 +25,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataAccessLog->function = 'Gastos por categoría';
 		$this->dataAccessLog->operation = 'Movimientos';
 
-		$cardNumber = json_decode(base64_decode($dataRequest->cardNumber));
-		$cardNumber = $this->cryptography->decrypt(
-			base64_decode($cardNumber->plot),
-			utf8_encode($cardNumber->password)
-		);
+		$cardNumber = decryptData($dataRequest->cardNumber);
 
 		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
 		$this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';

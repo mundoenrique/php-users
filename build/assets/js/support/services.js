@@ -23,7 +23,7 @@ $(function () {
 	}
 
 	$('input[type=hidden][name="expireDate"]').each(function(pos, element) {
-		var cypher = cryptoPass($(element).val());
+		var cypher = cryptography.encrypt($(element).val());
 		$(element).val(cypher)
 	});
 
@@ -154,15 +154,17 @@ $(function () {
 				form = $('#temporaryLockForm');
 				dataFormAction.reasonText = $('#temporaryLockReason').val();
 				break;
+
 			case 'replacement':
 				form = $('#replacementForm');
 				dataFormAction.status = $('#replaceMotSol').val();
 				break;
+
 			case 'changePin':
 			case 'generatePin':
 				form = $('#pinManagementForm');
 				dataFormAction = getDataForm(form);
-			break;
+				break;
 		}
 
 		if (action == 'replacement' || action == 'changePin' || action == 'generatePin' || action == 'temporaryLock') {
@@ -179,8 +181,8 @@ $(function () {
 				delete dataFormAction.confirmPin;
 				delete dataFormAction.generateNewPin;
 				delete dataFormAction.generateConfirmPin;
-				dataFormAction.currentPin = cryptoPass(dataFormAction.currentPin);
-				dataFormAction.newPin = cryptoPass(dataFormAction.newPin);
+				dataFormAction.currentPin = cryptography.encrypt(dataFormAction.currentPin);
+				dataFormAction.newPin = cryptography.encrypt(dataFormAction.newPin);
 			}
 
 			if (action == 'generatePin') {
@@ -188,7 +190,7 @@ $(function () {
 				delete dataFormAction.currentPin;
 				delete dataFormAction.confirmPin;
 				delete dataFormAction.generateConfirmPin;
-				dataFormAction.generateNewPin = cryptoPass(dataFormAction.generateNewPin);
+				dataFormAction.generateNewPin = cryptography.encrypt(dataFormAction.generateNewPin);
 			}
 
 			if (thisAction.hasClass('btn')) {
@@ -208,7 +210,6 @@ $(function () {
 
 	$('#system-info').on('click', '.send-otp', function(e) {
 		e.preventDefault();
-		$('#accept').removeClass('send-otp');
 		thisAction = $(this);
 		form = $('#OTPcodeForm');
 		validateForms(form);
@@ -216,8 +217,9 @@ $(function () {
 		if (form.valid()) {
 			data.otpCode = $('#otpCode').val();
 			insertFormInput(true);
-			btnText = thisAction.text().trim();
-			thisAction.html(loader);
+			thisAction
+				.html(loader)
+				.prop('disabled', true);
 			$('#accept').removeAttr('action');
 
 			requestSupport(thisAction);
@@ -226,11 +228,11 @@ $(function () {
 
 	$('#system-info').on('click', '.resend', function(e) {
 		e.preventDefault();
-		$('#accept').removeClass('resend');
 		thisAction = $(this);
 		insertFormInput(true);
-		btnText = thisAction.text().trim()
-		thisAction.html(loader);
+		thisAction
+			.html(loader)
+			.prop('disabled', true);
 		$('#accept').removeAttr('action');
 
 		requestSupport(thisAction);
@@ -238,7 +240,9 @@ $(function () {
 });
 
 function requestSupport(thisAction) {
-	who = 'CustomerSupport'; where = data.action;
+	who = 'CustomerSupport';
+	where = data.action;
+
 	callNovoCore(who, where, data, function (response) {
 		if (data.action == 'temporaryLock' && response.success) {
 			var statusText = $('#status').val() == '' ? lang.CUST_UNLOCK_CARD : lang.CUST_TEMPORARY_LOCK

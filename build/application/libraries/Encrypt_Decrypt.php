@@ -24,7 +24,7 @@ class Encrypt_Decrypt
 
 		writeLog('DEBUG', 'REQUEST ' . $model . ': ' . $request->requestBody);
 
-		if (API_GEE_WAY === 'ON') {
+		if (API_GEE_WAY) {
 		}
 
 		return $request;
@@ -34,7 +34,7 @@ class Encrypt_Decrypt
 	{
 		writeLog('INFO', 'Encrypt_Decrypt: decryptCoreServices method Initialized');
 
-		if (API_GEE_WAY === 'ON' && $response->data !== 'No data') {
+		if (API_GEE_WAY && $response->data !== 'No data') {
 		}
 
 		writeLog('DEBUG', 'RC: ' . $response->rc . ' RESPONSE ' . json_encode($response, CURLINFO_HTTP_CODE));
