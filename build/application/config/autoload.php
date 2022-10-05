@@ -106,15 +106,16 @@ $autoload['helper'] = array(
 	'url',
 	'language',
 	'cdn',
+	'novo_server',
+	'novo_cryptography',
+	'novo_language',
+	'novo_toolset',
 	'encryption',
 	'connections',
 	'tools',
 	'form',
 	'cookie',
 	'menu',
-	'novo_language',
-	'novo_toolset',
-	'novo_server'
 );
 
 /*
