@@ -70,4 +70,3 @@
 		</div>
 	</div>
 </div>
-<form id="signupForm" action="<?= base_url(lang('CONF_LINK_SIGNUP')); ?>" method="POST"></form>

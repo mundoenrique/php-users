@@ -128,6 +128,7 @@ function getMovements() {
 	$('#movementsStats').addClass('hide');
 	$('#no-moves').addClass('hide');
 	insertFormInput(true);
+
 	callNovoCore(who, where, data, function(response) {
 		insertFormInput(false);
 		$('#credit').val(response.data.totalMoves.credit);
@@ -158,6 +159,7 @@ function getMovements() {
 				$('#movementsList').append(appendLi);
 			})
 		}
+
 		displaymoves();
 	})
 }

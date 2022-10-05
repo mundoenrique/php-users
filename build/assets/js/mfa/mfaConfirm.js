@@ -37,6 +37,7 @@ $(function () {
 
 		callNovoCore(who, where, data, function(response) {
 			activeteMfa(response, mfaChannel);
+			coverSpin(false);
 		});
 	});
 });

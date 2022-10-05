@@ -52,7 +52,7 @@ $config = [
 	'signup' => [
 		[
 			'field' => 'dataUser',
-			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]'
 		]
 	],
 	'validNickName' => [

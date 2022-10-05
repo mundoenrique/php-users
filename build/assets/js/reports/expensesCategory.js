@@ -71,7 +71,8 @@ $(function () {
 		data.typeInquiry = $('#dType').val();
 		data.initDate = $('#dInitDate').val();
 		data.finalDate = $('#dFinalDate').val();
-		who = "Reports"; where = "DownloadInquiry";
+		who = "Reports";
+		where = "DownloadInquiry";
 		coverSpin(true);
 
 		callNovoCore(who, where, data, function (response) {

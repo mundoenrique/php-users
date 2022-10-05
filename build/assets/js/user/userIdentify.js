@@ -85,9 +85,21 @@ function validateIdentity() {
 		switch (response.code) {
 			case 0:
 				var dataUser = response.data;
+				form = $('#requestForm');
 				dataUser = cryptography.encrypt(dataUser);
-				$('#signupForm')
-					.append('<input type="hidden" name="dataUser" value="' + dataUser + '">')
+				if (traslate) {
+					form.append('<input type="hidden" name="request" value="' + dataUser + '">');
+				} else {
+					dataUser = JSON.parse(dataUser);
+					$.each(dataUser, function(item, value) {
+						form.append('<input type="hidden" name="' + item + '" value="' + value + '">');
+					});
+				}
+
+
+				insertFormInput(true, form);
+				form
+					.attr('action', baseURL + lang.CONF_LINK_SIGNUP)
 					.submit();
 			break;
 			case 2:
