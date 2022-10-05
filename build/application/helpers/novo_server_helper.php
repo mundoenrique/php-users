@@ -8,13 +8,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author			J. Enrique Peñaloza P
  * @date				September 19th, 2022
  */
-// Write in the log
+
 if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
 		$CI = get_instance();
 		$appUserName = '';
 		$customer = '';
 		$ip = $CI->input->ip_address();
+		$level = mb_strtoupper($level);
 
 		if ($CI->session->has_userdata('userName')) {
 			$appUserName = $CI->session->userName;
@@ -32,7 +33,9 @@ if (!function_exists('writeLog')) {
 			$customer = $CI->config->item('customer');
 		}
 
-		if ($customer === '') {
+		if ($level === 'INFO') {
+			$message = novoLang('NOVO %s', $message);
+		} elseif ($customer === '') {
 			$message = novoLang('NOVO [' . $appUserName . '] IP: %s, %s', [$ip, $message]);
 		} else {
 			$message = novoLang('NOVO [' . $appUserName . '] IP: %s, CUSTOMER: %s, %s', [$ip, $customer, $message]);

@@ -11,6 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date May 16th, 2020
  */
 class NOVO_Controller extends CI_Controller {
+	protected $fileLanguage;
+	protected $class;
 	protected $rule;
 	protected $includeAssets;
 	protected $customerUri;
@@ -31,6 +33,11 @@ class NOVO_Controller extends CI_Controller {
 	{
 		parent:: __construct();
 		writeLog('INFO', 'Controller Class Initialized');
+
+		$class = $this->router->fetch_class();
+		$method = $this->router->fetch_method();
+
+		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
@@ -82,12 +89,10 @@ class NOVO_Controller extends CI_Controller {
 				->update('cpo_sessions', $data);
 			}
 
-			languageLoad('generic', $this->router->fetch_class());
+			languageLoad('generic', $this->fileLanguage);
 			clientUrlValidate($this->customerUri);
-			languageLoad('specific', $this->router->fetch_class());
 			$this->customerUri = $this->config->item('customer-uri');
-			$this->form_validation->set_error_delimiters('', '---');
-			$this->config->set_item('language', 'global');
+			languageLoad('specific', $this->fileLanguage, $this->customerUri);
 
 			if ($this->rule !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();
@@ -116,13 +121,12 @@ class NOVO_Controller extends CI_Controller {
 					break;
 			}
 
-			$this->load->helper('novo_cryptography');
 			if ($this->input->is_ajax_request()) {
 				$request = decryptData($this->input->get_post('request'));
 				$this->dataRequest = json_decode($request);
 			} else {
 				if ($this->session->has_userdata('logged')) {
-					$redirectMfa = lang('CONF_MFA_ACTIVE') === 'ON' && $this->session->otpActive == FALSE;
+					$redirectMfa = lang('CONF_MFA_ACTIVE') === 'ON' && !$this->session->otpActive;
 					$redirectProfile = $this->session->longProfile === 'S' && $this->session->affiliate === '0';
 					$redirectTerms = $this->session->terms === '0';
 					$redirectRule = in_array($this->rule, lang('CONF_REDIRECT_RULE'));
@@ -131,20 +135,27 @@ class NOVO_Controller extends CI_Controller {
 					if ($redirect) {
 						$redirectUrl = $redirectMfa ? lang('CONF_LINK_MFA_ENABLE') : lang('CONF_LINK_USER_PROFILE');
 						redirect(base_url($redirectUrl), 'Location', 301);
+						exit();
 					}
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
+				$access = $this->verify_access->accessAuthorization($this->router->fetch_method());
 				$valid = TRUE;
 
 				if ($_POST && $access) {
-					log_message('DEBUG', 'NOVO [' . $this->appUserName . '] IP ' . $this->input->ip_address() .
-						' REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+					if ($this->input->post('traslate')) {
+						$request = decryptData($this->input->post('request'));
+						$this->dataRequest = json_decode($request);
 
-					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
+						foreach ($this->dataRequest AS $item => $value) {
+							$_POST[$item] = $value;
+						}
+					}
+
+					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri);
 
 					if ($valid) {
-						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+						$this->request = $this->verify_access->createRequest($this->class, $this->rule);
 					}
 				}
 

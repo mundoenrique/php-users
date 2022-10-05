@@ -7,44 +7,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Verify_Access {
 	private $CI;
-	private $class;
-	private $method;
-	private $operation;
-	private $requestServ;
-	private $responseDefect;
-	private $user;
 
 	public function __construct()
 	{
 		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
-		$this->CI = &get_instance();
-		$this->requestServ = new stdClass();
-		$this->user = $this->CI->session->userName;
+		$this->CI = get_instance();
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function validateForm($rule, $customerUri, $user, $class = FALSE)
+	public function validateForm($rule)
 	{
 
-		log_message('INFO', 'Verify_Access: validateForm method initialized');
+		writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
+		$this->CI->form_validation->set_error_delimiters('', '---');
+		$this->CI->config->set_item('language', 'global');
 		$result = $this->CI->form_validation->run($rule);
 
-		writeLog('DEBUG', 'VALIDATION FORM '.$rule.': '.json_encode($result, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'VALIDATION FORM ' . $rule . ': '. json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			writeLog('DEBUG', 'VALIDATION '.$rule.' ERRORS: '.json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
-		}
-
-		if ($class) {
-			$this->CI->config->set_item('language', BASE_LANGUAGE.'-base');
-			languageLoad('generic', $class);
-			$this->CI->config->set_item('language', BASE_LANGUAGE.'-'.$customerUri);
-			languageLoad('specific', $class);
+			writeLog('ERROR', 'VALIDATION ' . $rule .' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		return $result;
@@ -54,9 +41,11 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function createRequest($rule, $user)
+	public function createRequest($class, $method)
 	{
 		writeLog('INFO', 'Verify_Access: createRequest method initialized');
+
+		$requestServ = new stdClass();
 
 		foreach ($_POST AS $key => $value) {
 			switch($key) {
@@ -65,32 +54,33 @@ class Verify_Access {
 				case 'cpo_name':
 				break;
 				default:
-				$this->requestServ->$key = $value;
+				$requestServ->$key = $value;
 			}
 		}
 
+		writeLog('DEBUG', 'Class: ' . $class . ' Method: ' . $method .' REQUEST CREATED ' .
+			json_encode($requestServ, JSON_UNESCAPED_UNICODE));
+
 		unset($_POST);
 
-		writeLog('DEBUG', $rule .' REQUEST CREATED '. json_encode($this->requestServ, JSON_UNESCAPED_UNICODE));
-
-		return $this->requestServ;
+		return $requestServ;
 	}
 	/**
 	 * @info método para crear el request al modelo
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function ResponseByDefect($user)
+	public function responseByDefect()
 	{
 		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
-		$this->responseDefect = new stdClass();
-		$this->responseDefect->code = lang('CONF_DEFAULT_CODE');
-		$this->responseDefect->icon = lang('CONF_ICON_DANGER');
-		$this->responseDefect->title = lang('GEN_SYSTEM_NAME');
-		$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
-		$this->responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
-		$this->responseDefect->modalBtn = [
+		$responseDefect = new stdClass();
+		$responseDefect->code = lang('CONF_DEFAULT_CODE');
+		$responseDefect->icon = lang('CONF_ICON_DANGER');
+		$responseDefect->title = lang('GEN_SYSTEM_NAME');
+		$responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
+		$responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
+		$responseDefect->modalBtn = [
 			'btn1'=> [
 				'text'=> lang('GEN_BTN_ACCEPT'),
 				'link'=> lang('CONF_LINK_SIGNIN'),
@@ -99,25 +89,24 @@ class Verify_Access {
 		];
 
 		if ($this->CI->session->has_userdata('logged')) {
-			$this->responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), lang('GEN_VALIDATION_LOGGED'));
+			$responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), lang('GEN_VALIDATION_LOGGED'));
 			$this->CI->load->model('Novo_User_Model', 'finishSession');
 			$this->CI->finishSession->callWs_FinishSession_User();
 		}
 
-		writeLog('DEBUG', ' ResponseByDefect: ' .	json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', ' ResponseByDefect: ' .	json_encode($responseDefect, JSON_UNESCAPED_UNICODE));
 
-		return $this->responseDefect;
+		return $responseDefect;
 	}
 	/**
 	 * @info método que valida la autorización de acceso del usuario a los módulos
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 19th, 2020
 	 */
-	public function accessAuthorization($module, $customerUri, $user = FALSE)
+	public function accessAuthorization($module)
 	{
 		writeLog('INFO', 'Verify_Access: accessAuthorization method initialized');
 
-		$user = $user ?? $this->user;
 		$isLogged = $this->CI->session->has_userdata('logged');
 		$isUserId = $this->CI->session->has_userdata('userId');
 		$referrer = $this->CI->agent->referrer();
