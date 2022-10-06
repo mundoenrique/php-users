@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<h1 class="primary h3 semibold inline"><?= lang('TRANSF_CARD'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('TRANSF_MOVIL_PAYMENT'); ?></h1>
 <div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
@@ -39,6 +39,7 @@
             <?php endif; ?>
           </div>
         </div>
+
         <div class="flex col-12 mt-2 center">
           <ul class="flex flex-auto justify-between px-4 px-xl-5">
             <li class="list-inline-item"><?= lang('TRANSF_AVAILABLE_BALANCE'); ?>
@@ -51,22 +52,25 @@
       </div>
     </div>
   </div>
+
   <?php if (TRUE) : ?>
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box">
+
         <?php if (TRUE) : ?>
         <li id="toTransfer" class="list-inline-item nav-item-config mr-1">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
-            <h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>
+            <h5 class="center"><span class="status-text1"><?= lang('TRANSF_MAKE_PAYMENT'); ?></span></h5>
             <div class="px-1 box up left regular">
               <span class="icon-user-transfer h00 icon-color mx-n5"></span>
-              <h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h4>
+              <h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_MAKE_PAYMENT'); ?></span></h4>
             </div>
           </a>
         </li>
         <?php endif; ?>
+
         <?php if (TRUE) : ?>
         <li id="manageAffiliations" class="list-inline-item nav-item-config">
           <a class="px-1" href="javascript:">
@@ -79,6 +83,7 @@
           </a>
         </li>
         <?php endif; ?>
+
         <?php if (TRUE) : ?>
         <li id="history" class="list-inline-item nav-item-config mr-1">
           <a class="px-1" href="javascript:">
@@ -91,6 +96,7 @@
           </a>
         </li>
         <?php endif; ?>
+
       </ul>
     </nav>
   </div>
@@ -98,7 +104,8 @@
 </div>
 
 <div id="activeServices" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-  <?php if (TRUE) : ?>
+
+  <?php if (true) : ?>
   <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
   <?php endif; ?>
 
@@ -113,5 +120,6 @@
   <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
   <?php endif; ?>
+
 </div>
 </div>

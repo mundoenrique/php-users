@@ -3,9 +3,14 @@ $(function () {
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
 
-	$('#getOperationKeyBtn').on('click', function (e) {
+	$('#newPass').on('keyup focus', function () {
+		var pswd = $(this).val();
+		passStrength(pswd);
+	});
+
+	$('#setOperationKeyBtn').on('click', function (e) {
 		e.preventDefault();
-		form = $('#getOperationKeyForm');
+		form = $('#setOperationKeyForm');
 		validateForms(form);
 
 		if (form.valid()) {
@@ -16,3 +21,5 @@ $(function () {
 		}
 	});
 });
+
+

@@ -2924,7 +2924,7 @@ i[class*=" icon-"]:before {
 /* Table */
 
 td > button > i{
-	color: var(--color-fifth);
+	color: var(--color-sixth);
   transition: .5s;
 }
 
@@ -3253,6 +3253,8 @@ table.dataTable tbody tr {
 	-webkit-box-shadow: 3px 3px 10px 0px var(--color-eighth);
 	-moz-box-shadow: 3px 3px 10px 0px var(--color-eighth);
 	box-shadow: 3px 3px 10px 0px var(--color-eighth);
+	max-height: 255px;
+	min-width: 384px;
 }
 
 .widget-statistics{
@@ -3969,8 +3971,15 @@ a.ui-button:active,
 }
 
 .product-presentation {
+	height: 105px;
 	width: 170px;
 }
+
+.product-presentation .card-image {
+	height: 105px;
+	width: 170px;
+}
+
 .item-network {
 	position: absolute;
 	z-index: 2;
@@ -3985,10 +3994,6 @@ a.ui-button:active,
 	width: 47px;
 }
 
-.product-presentation .item-network {
-	right: 20px;
-	bottom: 20px;
-}
 .item-network.maestro {
 	background: transparent url("../images/brands/maestro.svg") no-repeat center / cover;
 }
@@ -4051,6 +4056,10 @@ a.ui-button:active,
 .nav-config .nav-config-box .nav-item-config .icon-config,
 .nav-config .nav-config-box .nav-item-config  h5{
   filter: opacity(.6);
+}
+
+.nav-item-config .icon-user-transfer {
+	margin-bottom: -7px;
 }
 
 .nav-config .nav-config-box .box {
@@ -4299,8 +4308,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .product-presentation .item-network {
 	position: absolute;
-	right: 15px;
-	bottom: 10px;
+	right: 10px;
+	bottom: 15px;
 	z-index: 2;
 	width: 35px;
 	height: 20px;
@@ -4483,7 +4492,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .product-search {
-	height: 110px;
+	height: 105px;
 	border: 1.5px solid var(--color-eighth);
 	border-radius: 10px;
 	display: flex;
@@ -5014,4 +5023,56 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .country-ve {
 	background-position: 9px -1051px !important;
+}
+
+.select-by-search {
+  position: relative;
+
+  vertical-align: bottom;
+}
+
+.select-by-search > * {
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: none;
+	width: 100%;
+	z-index: 3;
+}
+
+.select-search-input{
+	height: calc(1.386em + 0.75rem + 2px);
+}
+
+.select-search-input + .select-search {
+	display: none;
+  z-index: 2;
+  margin-top: 35px;
+  width: 100%;
+  max-height: 30vh;
+	overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.select-search-input + .select-search > * {
+	overflow: hidden;
+	padding: 0.7em;
+	background-color: white;
+	cursor: pointer;
+}
+
+.select-search-input + .select-search > *.no-results {
+	color: var(--color-sixth);
+	font-style: italic;
+}
+
+.close-selector {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 1;
 }

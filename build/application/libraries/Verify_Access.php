@@ -162,9 +162,11 @@ class Verify_Access {
 			case 'notificationHistory':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') == 'ON';
 				break;
+			case 'setOperationKey':
 			case 'getOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
+			case 'mobilePayment':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
 				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer == 'S' && lang('CONF_PAYS_TRANSFER') == 'ON';

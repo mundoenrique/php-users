@@ -11,11 +11,30 @@ class Novo_Transfer extends NOVO_Controller {
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Transfer Controller Class Initialized');
+	}
+	/**
+	 * @info Método para crear clave de operaciones especiales
+	 * @author Hector D. Corredor Gutierrez.
+	 * @date October 04th, 2022
+	 */
+	public function setOperationKey()
+	{
+		log_message('INFO', 'NOVO Transfer: setOperationKey Method Initialized');
 
-		if (!$this->session->has_userdata('operkeyEntered') && $this->router->fetch_method() !== 'getOperationKey') {
-			$this->session->set_flashdata('transfer', $this->router->fetch_method());
-			redirect(base_url('operations-key'), 'Location', 301);
-		}
+		$this->session->keep_flashdata('transfer');
+		$view = 'setOperationKey';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"user/validPass",
+			"transfer/setOperationKey"
+		);
+
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->views = ['transfer/'.$view];
+		$this->loadView($view);
 	}
 	/**
 	 * @info Método para validar clave de operaciones especiales
@@ -36,8 +55,7 @@ class Novo_Transfer extends NOVO_Controller {
 			"transfer/getOperationKey"
 		);
 
-		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');
-		$this->render->cancelBtn = $this->agent->referrer() != '' ? $this->agent->referrer() : base_url(uriRedirect());
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}
@@ -50,37 +68,69 @@ class Novo_Transfer extends NOVO_Controller {
 	{
 		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
 
+		$this->session->keep_flashdata('transfer');
 		$view = 'cardToCard';
-
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
+			"helper",
 			"third_party/jquery.validate",
 			"form_validation",
-			"third_party/additional-methods"
+			"third_party/additional-methods",
+			"transfer/cardToCard"
 		);
 
-		$this->load->model('Novo_Business_Model', 'business');
-		$this->request->operation = 'Transferencia P2P';
-		$this->request->operType = 'P2P';
-		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
-		$this->responseAttr($userCardList);
-		$cardsList = $userCardList->data->cardsList;
-		$totalCards = count($cardsList);
-		$this->render->cardsList = $cardsList;
-		$this->render->totalCards = $totalCards;
-		$this->render->activePointer = 'no-pointer';
-		$this->render->operations = TRUE;
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->views = ['transfer/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para crear clave de operaciones especiales
+	 * @author Hector D. Corredor Gutierrez.
+	 * @date October 04th, 2022
+	 */
+	public function cardToBank()
+	{
+		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
 
-		if ($totalCards == 1) {
-			foreach ($userCardList->data->cardsList[0] as $index => $render) {
-				$this->render->$index = $render;
-			}
+		$this->session->keep_flashdata('transfer');
+		$view = 'cardToBank';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"modalCards",
+			"helper",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"transfer/cardToBank"
+		);
 
-			$this->render->activePointer = '';
-		}
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->views = ['transfer/'.$view];
+		$this->loadView($view);
+	}
+	/**
+	 * @info Método para crear clave de operaciones especiales
+	 * @author Hector D. Corredor Gutierrez.
+	 * @date October 04th, 2022
+	 */
+	public function mobilePayment()
+	{
+		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
 
-		$this->render->titlePage = lang('GEN_MENU_CARD_LIST');
+		$this->session->keep_flashdata('transfer');
+		$view = 'mobilePayment';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"modalCards",
+			"helper",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"transfer/mobilePayment"
+		);
+
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}

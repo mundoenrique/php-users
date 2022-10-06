@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<h1 class="primary h3 semibold inline"><?= lang('TRANSF_CARD'); ?></h1>
+<h1 class="primary h3 semibold inline"><?= lang('TRANSF_ACCOUNT_BANK'); ?></h1>
 <div class="row">
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
@@ -51,6 +51,7 @@
       </div>
     </div>
   </div>
+
   <?php if (TRUE) : ?>
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">

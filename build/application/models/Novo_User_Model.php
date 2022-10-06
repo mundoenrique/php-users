@@ -135,7 +135,7 @@ class Novo_User_Model extends NOVO_Model {
 						'customerSess' => $response->codPais,
 						'customerUri' => $this->config->item('customer-uri'),
 						'canTransfer' => strtoupper($response->aplicaTransferencia),
-						'operKey' => $response->passwordOperaciones,
+						'operKey' => $response->passwordOperaciones === '' ? FALSE : $response->passwordOperaciones,
 						'affiliate' => $response->afiliado,
 						'longProfile' => $response->aplicaPerfil,
 						'terms' => $response->tyc,

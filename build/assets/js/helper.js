@@ -113,6 +113,50 @@ $(function () {
     yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
+
+	$("body").on("focus", ".select-search-input", function () {
+		$(this).val("");
+		var selector = $(this).next(".select-search");
+		selector.css("display", "block");
+		$(this)
+			.closest(".select-by-search")
+			.find(".close-selector")
+			.css("display", "block");
+	});
+
+	$("body").on("input", ".select-search-input", function () {
+		var selector = $(this).next(".select-search");
+		var search_for = $(this).val().trim();
+		var search_text = search_for;
+		selector.find("option").addClass("hidden");
+		var matches = selector.find('option:contains("' + search_text + '")');
+		selector.find(".no-results").remove();
+		if (matches.length == 0) {
+			selector.append(
+				'<option class="unselectable no-results">' + lang.GEN_NO_RESULTS + '</option>'
+			);
+		}
+		matches.removeClass("hidden");
+	});
+
+	$("body").on("click", ".select-search>*:not(.unselectable)", function () {
+		var value = $(this).attr("value"),
+		text = $(this).text().trim(),
+		container = $(this).closest(".select-by-search");
+		container.find("input.select-search-input").val(text);
+		container.find("option").removeClass("active");
+		$(this)
+			.addClass("active")
+			.prependTo(container.find(".select-search"));
+		container.find(".select-search").css("display", "none");
+		$(".close-selector").css("display", "none");
+		container.find(".selected").val(value);
+	});
+
+	$("body").on("click", ".close-selector", function () {
+		$(".select-search").css("display", "none");
+		$(this).css("display", "none");
+	});
 });
 
 function callNovoCore(who, where, request, _response_) {
