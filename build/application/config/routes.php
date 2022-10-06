@@ -103,6 +103,7 @@ $route['(:any)/card-detail'] = "Novo_Business/cardDetail";
 //transfers
 $route['(:any)/set-operations-key'] = "Novo_Transfer/setOperationKey";
 $route['(:any)/get-operations-key'] = "Novo_Transfer/getOperationKey";
+$route['(:any)/change-operations-key'] = "Novo_Transfer/changeOperationKey";
 $route['(:any)/transfer-cards'] = "Novo_Transfer/cardToCard";
 $route['(:any)/transfer-banks'] = "Novo_Transfer/cardToBank";
 $route['(:any)/payment-mobile'] = "Novo_Transfer/mobilePayment";

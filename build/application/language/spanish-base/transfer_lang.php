@@ -48,3 +48,5 @@ $lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirmar clave';
 $lang['TRANSF_DESTINATION_CARD'] = 'N° de tarjeta destino';
 $lang['TRANSF_ERASE'] = 'Borrar';
 $lang['TRANSF_AVAILABLE_BALANCE'] = 'Disponible';
+$lang['TRANSF_CHANGE_OPERKEY'] = 'Si deseas cambiar tu clave de operaciones, por favor completa los siguientes datos.';
+$lang['TRANSF_NEW_KEY_OPER'] = 'Nueva clave de operaciones';

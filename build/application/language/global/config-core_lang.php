@@ -163,6 +163,7 @@ $lang['CONF_LINK_SIGNOUT_END'] = 'end';
 $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_IDENTIFY'] = 'user-identify';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
+$lang['CONF_LINK_CHANGE_OPERKEY'] = 'change-operations-key';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';

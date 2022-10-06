@@ -47,4 +47,6 @@ $lang['TRANSF_CREATE_OPER_KEY'] = 'Creation of operations key';
 $lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirm key';
 $lang['TRANSF_DESTINATION_CARD'] = 'Destination card number';
 $lang['TRANSF_ERASE'] = 'Erase';
-$lang['TRANSF_AVAILABLE_BALANCE'] = 'AVAILABLE';
+$lang['TRANSF_AVAILABLE_BALANCE'] = 'Available';
+$lang['TRANSF_CHANGE_OPERKEY'] = 'If you wish to change your password, please complete the following information.';
+$lang['TRANSF_NEW_KEY_OPER'] = 'New operations key';

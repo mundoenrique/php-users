@@ -47,6 +47,7 @@ $lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/AAAA';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
+$lang['GEN_MENU_CHANGE_OPERKEY'] = 'Clave de operaciones';
 $lang['GEN_MENU_CARD_LIST'] = 'Lista de tarjetas';
 $lang['GEN_MENU_CARD_DETAIL'] = 'Detalle de tarjeta';
 $lang['GEN_MENU_PAYS_TRANSFER'] = 'Transferencias y pagos';

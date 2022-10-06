@@ -164,6 +164,7 @@ class Verify_Access {
 				break;
 			case 'setOperationKey':
 			case 'getOperationKey':
+			case 'changeOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
 			case 'mobilePayment':

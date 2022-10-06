@@ -59,6 +59,30 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}
+		/**
+	 * @info Método para cambiar la clave de operaciones especiales
+	 * @author Hector D. Corredor Gutierrez.
+	 * @date October 04th, 2022
+	 */
+	public function changeOperationKey()
+	{
+		log_message('INFO', 'NOVO Transfer: changeOperationKey Method Initialized');
+
+		$this->session->keep_flashdata('transfer');
+		$view = 'changeOperationKey';
+		array_push(
+			$this->includeAssets->jsFiles,
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods",
+			"user/validPass",
+			"transfer/changeOperationKey"
+		);
+
+		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->views = ['transfer/'.$view];
+		$this->loadView($view);
+	}
 	/**
 	 * @info Método para obtener la lista para transferencias entre tarjetas
 	 * @author J. Enrique Peñaloza Piñero.
@@ -84,7 +108,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método para crear clave de operaciones especiales
+	 * @info Método para obtener la lista para transferencias entre cuentas bancarias
 	 * @author Hector D. Corredor Gutierrez.
 	 * @date October 04th, 2022
 	 */
@@ -108,7 +132,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método para crear clave de operaciones especiales
+	 * @info Método para obtener la lista para pago móvil
 	 * @author Hector D. Corredor Gutierrez.
 	 * @date October 04th, 2022
 	 */
