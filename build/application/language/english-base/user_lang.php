@@ -42,7 +42,6 @@ $lang['USER_RECOVER_PASS_TEMP'] = 'with a temporary password.';
 $lang['USER_RECOVER_USERNAME'] = 'with your username.';
 $lang['USER_RECOVER_DATA_INVALID'] = 'Invalid email or identity document. Please verify your details, and try again.';
 $lang["USER_LEGAL_STEP"]='Legal';
-$lang["USER_LEGAL_STEP"]='Legal';
 $lang["USER_TERMS_TITLE"]='Terms and Conditions.';
 $lang["USER_TERMS_SUBTITLE"]='Cardholder.';
 $lang["USER_TERMS_CONTENT"] = '
