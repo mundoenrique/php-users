@@ -14,9 +14,9 @@ class Novo_CallModels extends Novo_Controller {
 
 		if($this->input->is_ajax_request()) {
 			$this->fileLanguage = lcfirst($this->dataRequest->who);
-			$this->rule = lcfirst($this->dataRequest->where);
-			$this->model = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
-			$this->method = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
+			$this->validationMethod = lcfirst($this->dataRequest->where);
+			$this->modelClass = 'Novo_'.ucfirst($this->dataRequest->who).'_Model';
+			$this->modelMethod = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 		} else {
 			redirect('page-no-found', 'Location', 301);
 		}
@@ -37,14 +37,14 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->rule);
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod);
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
-			$valid = $this->verify_access->validateForm($this->rule);
+			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
@@ -53,7 +53,7 @@ class Novo_CallModels extends Novo_Controller {
 		languageLoad('specific', $this->fileLanguage, $this->customerUri);
 
 		if ($valid) {
-			$this->request = $this->verify_access->createRequest($this->model, $this->method);
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
 			$this->dataResponse = $this->verify_access->responseByDefect();

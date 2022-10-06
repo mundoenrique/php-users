@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!function_exists('novoLang'))
 {
 	function novoLang($line, $args = []) {
-		log_message('INFO', 'Novo Helper loaded: novoLang_helper');
+		log_message('INFO', 'NOVO Helper loaded: novoLang_helper');
 
 		$line = vsprintf($line, (array) $args);
 

@@ -19,19 +19,20 @@ class Verify_Access {
 	 * @author J. Enrique Peñaloza Piñero
 	 * @date May 17th, 2020
 	 */
-	public function validateForm($rule)
+	public function validateForm($validationMethod)
 	{
 
 		writeLog('INFO', 'Verify_Access: validateForm method initialized');
 
 		$this->CI->form_validation->set_error_delimiters('', '---');
 		$this->CI->config->set_item('language', 'global');
-		$result = $this->CI->form_validation->run($rule);
+		$result = $this->CI->form_validation->run($validationMethod);
 
-		writeLog('DEBUG', 'VALIDATION FORM ' . $rule . ': '. json_encode($result, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'VALIDATION FORM ' . $validationMethod . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if(!$result) {
-			writeLog('ERROR', 'VALIDATION ' . $rule .' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' .
+				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		return $result;

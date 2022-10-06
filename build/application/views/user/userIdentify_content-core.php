@@ -12,7 +12,7 @@
 			<div class="max-width-1 fit-lg mx-auto pt-1">
 				<form id="identityForm">
 					<div class="row">
-						<?php if (lang('CONF_CHANGE_VIRTUAL') == 'ON'): ?>
+						<?php if (lang('CONF_CHANGE_VIRTUAL') === 'ON'): ?>
 						<div class="form-group col-12">
 							<label class="mr-2 regular"><?= lang('GEN_CARD_TYPE'); ?></label>
 							<div class="custom-control custom-radio custom-control-inline">

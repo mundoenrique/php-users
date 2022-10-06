@@ -402,7 +402,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
-		$this->dataAccessLog->operation = 'Lista de tarjetas para '.$dataRequest->operation;
+		$this->dataAccessLog->operation = 'Lista de tarjetas para ' . $dataRequest->operation;
 
 		$this->dataRequest->idOperation = '6';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';

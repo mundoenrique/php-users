@@ -12,8 +12,8 @@ class Novo_CallApi extends Novo_Controller {
 		parent:: __construct();
 		log_message('INFO', 'NOVO CallApi Controller Class Initialized');
 
-		$this->method = $this->nameApi;
-		$this->model = "Novo_".ucfirst($this->uri->segment(3))."_ApiModel";
+		$this->modelMethod = $this->nameApi;
+		$this->modelClass = "Novo_".ucfirst($this->uri->segment(3))."_ApiModel";
 		$this->username = $this->dataRequest['user_name'] ?? 'NO_NAME';
 	}
 	/**
