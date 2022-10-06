@@ -115,4 +115,3 @@
   <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
   <?php endif; ?>
 </div>
-</div>

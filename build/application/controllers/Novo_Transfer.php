@@ -73,7 +73,6 @@ class Novo_Transfer extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
-			"helper",
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
@@ -98,7 +97,6 @@ class Novo_Transfer extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
-			"helper",
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
@@ -123,7 +121,6 @@ class Novo_Transfer extends NOVO_Controller {
 		array_push(
 			$this->includeAssets->jsFiles,
 			"modalCards",
-			"helper",
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
