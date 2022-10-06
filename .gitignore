@@ -1,20 +1,3 @@
-# vscod
-**/.vscode/*
-!**/.vscode/settings.json
-!**/.vscode/index.html
-
-# codeigniter 3
-**/cache/*
-!**/cache/index.html
-!**/cache/.htaccess
-
-**/logs/*
-!**/logs/index.html
-!**/logs/.htaccess
-
-**/vendor/
-**/sessions/
-
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -22,6 +5,18 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+# codeigniter 3
+!**/application/cache/index.html
+**/application/cache/*
+!**/application/cache/.htaccess
+
+**/application/logs/*
+!**/application/logs/index.html
+!**/application/logs/.htaccess
+
+**/application/vendor/
+**/application/sessions/
 
 ### IDE Files ###
 /nbproject/
