@@ -16,6 +16,7 @@ $lang['IMG_FOTTER_NETWORKS_IMG'] = [
 	'twitter' => 'twitter.png',
 	'youtube' => 'youtube.png',
 	'instagram' => 'instagram.png',
+	'linkedin' => 'linkedin.png',
 ];
 // PROGRAM IMAGES
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'default.svg';
