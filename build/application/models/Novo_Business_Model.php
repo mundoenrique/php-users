@@ -479,6 +479,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if (empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '214';
 			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->emailCliente = $this->session->userEmail;
 			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 
