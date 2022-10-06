@@ -104,7 +104,6 @@
 </div>
 
 <div id="activeServices" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-
   <?php if (true) : ?>
   <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
   <?php endif; ?>
@@ -120,6 +119,5 @@
   <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
   <?php endif; ?>
+</div>
 
-</div>
-</div>
