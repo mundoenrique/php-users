@@ -15,21 +15,21 @@
           <div class="row">
             <div class="form-group col-6 col-lg-4">
               <label for="directory"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
+
               <div class="form-control select-by-search p-0">
-                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>'>
-                <div class="select-search">
-                  <option value="1">James Cameron</option>
-                  <option value="2">Steven Spielberg</option>
-                  <option value="3">Stanley Kubrick</option>
-                  <option value="4">Ridley Scott</option>
-                  <option value="5">Darren Aronofsky</option>
-                  <option value="6">John Waters</option>
-                  <option value="7">Danny Boyle</option>
-                  <option value="8">Woody Allen</option>
-                  <option value="9">David Lynch</option>
-                  <option value="10">Wes Anderson</option>
-                </div>
-                <input type="hidden" name="id" value="">
+                <input id="directory" class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory" autocomplete="off">
+                <ul class="select-search pl-0">
+                  <li value="1">James Cameron</li>
+                  <li value="2">Steven Spielberg</li>
+                  <li value="3">Stanley Kubrick</li>
+                  <li value="4">Ridley Scott</li>
+                  <li value="5">Darren Aronofsky</li>
+                  <li value="6">John Waters</li>
+                  <li value="7">Danny Boyle</li>
+                  <li value="8">Woody Allen</li>
+                  <li value="9">David Lynch</li>
+                  <li value="10">Wes Anderson</li>
+                </ul>
                 <div class="close-selector"></div>
               </div>
               <div class="help-block"></div>

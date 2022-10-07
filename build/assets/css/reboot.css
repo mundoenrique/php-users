@@ -5027,39 +5027,43 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .select-by-search {
   position: relative;
-
   vertical-align: bottom;
 }
 
+.select-search-input {
+	color: var(--color-sixth) !important;
+	height: calc(1.386em + 0.75rem + 2px);
+}
+
+.select-search {
+	border: 1px solid var(--color-eighth);
+}
+
 .select-by-search > * {
+	border: none;
 	box-sizing: border-box;
-	position: absolute;
 	top: 0;
 	left: 0;
-	border: none;
+	position: absolute;
 	width: 100%;
 	z-index: 3;
 }
 
-.select-search-input{
-	height: calc(1.386em + 0.75rem + 2px);
-}
-
 .select-search-input + .select-search {
 	display: none;
-  z-index: 2;
-  margin-top: 35px;
-  width: 100%;
+  margin-top: 34px;
   max-height: 30vh;
 	overflow-x: hidden;
   overflow-y: visible;
+  width: 100%;
+	z-index: 2;
 }
 
 .select-search-input + .select-search > * {
+	cursor: pointer;
+	background-color: white;
 	overflow: hidden;
 	padding: 0.7em;
-	background-color: white;
-	cursor: pointer;
 }
 
 .select-search-input + .select-search > *.no-results {
@@ -5068,11 +5072,11 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 }
 
 .close-selector {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: none;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
   z-index: 1;
 }

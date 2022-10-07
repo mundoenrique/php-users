@@ -114,8 +114,9 @@ $(function () {
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
-	$("body").on("focus", ".select-search-input", function () {
-		$(this).val("");
+	$("body").on("focus", "#directory", function () {
+		var search_for = $(this).val().trim();
+		$(this).val(search_for || "");
 		var selector = $(this).next(".select-search");
 		selector.css("display", "block");
 		$(this)
@@ -124,33 +125,35 @@ $(function () {
 			.css("display", "block");
 	});
 
-	$("body").on("input", ".select-search-input", function () {
+	$("body").on("input", "#directory", function () {
 		var selector = $(this).next(".select-search");
 		var search_for = $(this).val().trim();
-		var search_text = search_for;
-		selector.find("option").addClass("hidden");
-		var matches = selector.find('option:contains("' + search_text + '")');
+		selector.find("li").addClass("hidden");
+		var matches = selector.find('li:contains("' + search_for + '")');
 		selector.find(".no-results").remove();
 		if (matches.length == 0) {
 			selector.append(
-				'<option class="unselectable no-results">' + lang.GEN_NO_RESULTS + '</option>'
+				'<li class="no-results">' + lang.GEN_NO_RESULTS + '</li>'
 			);
 		}
 		matches.removeClass("hidden");
 	});
 
-	$("body").on("click", ".select-search>*:not(.unselectable)", function () {
+	$("body").on("click", ".select-search>*:not(.no-results)", function () {
 		var value = $(this).attr("value"),
 		text = $(this).text().trim(),
 		container = $(this).closest(".select-by-search");
-		container.find("input.select-search-input").val(text);
-		container.find("option").removeClass("active");
+		container.find("input#directory").val(text);
+		container.find("li").removeClass("active");
+		console.log('bandera 1', value);
+		console.log('bandera 2' , container.find("input#directory").val(text));
 		$(this)
 			.addClass("active")
 			.prependTo(container.find(".select-search"));
 		container.find(".select-search").css("display", "none");
 		$(".close-selector").css("display", "none");
 		container.find(".selected").val(value);
+		console.log('bandera 3', container.find(".selected").val(value) );
 	});
 
 	$("body").on("click", ".close-selector", function () {
