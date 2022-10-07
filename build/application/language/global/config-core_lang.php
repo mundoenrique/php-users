@@ -171,6 +171,7 @@ $lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_GET_OPER_KEY'] = 'get-operations-key';
 $lang['CONF_LINK_SET_OPER_KEY'] = 'set-operations-key';
 $lang['CONF_LINK_BETWEEN_CARDS'] = 'transfer-cards';
+$lang['CONF_LINK_MOBILE_PAYMENT'] = 'mobile-payment';
 $lang['CONF_LINK_BANKS'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_CREDIT_CARDS'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_SERVICES'] = $lang['CONF_NO_LINK'];
