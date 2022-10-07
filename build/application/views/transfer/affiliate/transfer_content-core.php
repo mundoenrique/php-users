@@ -40,8 +40,8 @@
         <form id="transferForm">
           <div class="row">
             <div class="form-group col-6 col-lg-4">
-              <label for="typeBank"><?= lang('TRANSF_BANK') ?></label>
-              <select id="typeBank" class="custom-select form-control" name="typeBank">
+              <label for="bank"><?= lang('TRANSF_BANK') ?></label>
+              <select id="bank" class="custom-select form-control" name="bank">
                 <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
                 <option value="Cedula">Bancaribe</option>
               </select>
@@ -53,7 +53,7 @@
               <div class="help-block"></div>
             </div>
             <div class="form-group col-6 col-lg-4">
-              <label for="idDocument"><?= lang('GEN_DNI') ?></label>
+              <label for="idNumber"><?= lang('GEN_DNI') ?></label>
               <div class="form-row">
                 <div class="form-group col-6 mb-0">
                   <select id="typeDocument" class="custom-select form-control" name="typeDocument">
@@ -63,7 +63,7 @@
                   <div class="help-block"></div>
                 </div>
                 <div class="form-group col-6 mb-0">
-                  <input id="idDocument" class="form-control" type="text" name="idDocument" value="" autocomplete="off">
+                  <input id="idNumber" class="form-control" type="text" name="idNumber" value="" autocomplete="off">
                   <div class="help-block"></div>
                 </div>
               </div>
@@ -73,21 +73,10 @@
               <input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
               <div class="help-block"></div>
             </div>
-            <div class="form-group col-6 col-lg-4">
-              <label for="phone"><?= lang('TRANSF_NUMBER_PHONE') ?></label>
-              <div class="form-row">
-                <div class="form-group col-6 mb-0">
-                  <select id="codePhone" class="custom-select form-control" name="codePhone">
-                    <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                    <option value="Cedula">0424</option>
-                  </select>
-                  <div class="help-block"></div>
-                </div>
-                <div class="form-group col-6 mb-0">
-                  <input id="phone" class="form-control" type="text" name="phone" value="" autocomplete="off">
-                  <div class="help-block"></div>
-                </div>
-              </div>
+						<div class="form-group col-6 col-lg-4">
+              <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
+              <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
+              <div class="help-block"></div>
             </div>
             <div class="form-group col-6 col-lg-4">
               <label for="email"><?= lang('GEN_EMAIL') ?></label>

@@ -95,6 +95,7 @@ $lang['GEN_PASSWORD_CONFIRM'] = 'Confirm password';
 $lang['GEN_SHOW_PASS'] = 'Show password';
 $lang['GEN_HIDE_PASS'] = 'Hide password';
 $lang['GEN_DNI'] = 'ID document';
+$lang['GEN_PHONE_MOBILE'] = 'Mobile phone';
 $lang['GEN_EMAIL'] = 'Email';
 $lang['GEN_PLACE_HOLDER_EMAIL'] = "user@example.com";
 $lang['GEN_FINISH_TITLE'] = 'Log out';

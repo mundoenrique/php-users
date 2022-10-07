@@ -380,7 +380,6 @@ $lang['USER_CITY_INPUT'] = 'City';
 $lang['USER_DISTRICT'] = 'District';
 $lang['USER_DISTRICT_INPUT'] = 'Sector';
 $lang['USER_PHONE_LANDLINE'] = 'Landline';
-$lang['USER_PHONE_MOBILE'] = 'Mobile phone';
 $lang['USER_PHONE_OTHER'] = 'Another phone';
 $lang['USER_OTHER_PHONE_LIST'] = [
 	'' => 'Select',

@@ -379,7 +379,6 @@ $lang['USER_CITY_INPUT'] = 'Ciudad';
 $lang['USER_DISTRICT'] = 'Distrito';
 $lang['USER_DISTRICT_INPUT'] = 'Sector';
 $lang['USER_PHONE_LANDLINE'] = 'Teléfono fijo';
-$lang['USER_PHONE_MOBILE'] = 'Teléfono móvil';
 $lang['USER_PHONE_OTHER'] = 'Otro teléfono';
 $lang['USER_OTHER_PHONE_LIST'] = [
 	'' => 'Selecciona',
