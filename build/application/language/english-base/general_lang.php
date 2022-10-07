@@ -60,6 +60,7 @@ $lang['GEN_MENU_REPORTS'] = 'Reports';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Customer support';
 $lang['GEN_MENU_TRANSFERS'] = 'Transfers';
 $lang['GEN_MENU_PAYMENTS'] = 'Payments';
+$lang['GEN_MENU_MOBILE_PAYMENT'] = 'Mobile payment';
 $lang['GEN_MENU_PROFILE'] = 'User profile';
 $lang['GEN_MENU_SIGNUP'] = 'Signup';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notifications';
