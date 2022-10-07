@@ -17,7 +17,8 @@
               <label for="directory"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
 
               <div class="form-control select-by-search p-0">
-                <input id="directory" class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory" autocomplete="off">
+								<input id="directory" type="hidden" name="directory" value="">
+                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory" autocomplete="off" value="">
                 <ul class="select-search pl-0">
                   <li value="1">James Cameron</li>
                   <li value="2">Steven Spielberg</li>

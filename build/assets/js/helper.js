@@ -114,7 +114,7 @@ $(function () {
   };
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
-	$("body").on("focus", "#directory", function () {
+	$("body").on("focus", ".select-search-input", function () {
 		var search_for = $(this).val().trim();
 		$(this).val(search_for || "");
 		var selector = $(this).next(".select-search");
@@ -125,7 +125,7 @@ $(function () {
 			.css("display", "block");
 	});
 
-	$("body").on("input", "#directory", function () {
+	$("body").on("input", ".select-search-input", function () {
 		var selector = $(this).next(".select-search");
 		var search_for = $(this).val().trim();
 		selector.find("li").addClass("hidden");
@@ -143,17 +143,14 @@ $(function () {
 		var value = $(this).attr("value"),
 		text = $(this).text().trim(),
 		container = $(this).closest(".select-by-search");
-		container.find("input#directory").val(text);
+		container.find("input.select-search-input").val(text);
 		container.find("li").removeClass("active");
-		console.log('bandera 1', value);
-		console.log('bandera 2' , container.find("input#directory").val(text));
 		$(this)
 			.addClass("active")
 			.prependTo(container.find(".select-search"));
 		container.find(".select-search").css("display", "none");
 		$(".close-selector").css("display", "none");
-		container.find(".selected").val(value);
-		console.log('bandera 3', container.find(".selected").val(value) );
+		container.find("#directory").val(value);
 	});
 
 	$("body").on("click", ".close-selector", function () {

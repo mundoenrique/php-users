@@ -5035,10 +5035,6 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	height: calc(1.386em + 0.75rem + 2px);
 }
 
-.select-search {
-	border: 1px solid var(--color-eighth);
-}
-
 .select-by-search > * {
 	border: none;
 	box-sizing: border-box;
@@ -5047,6 +5043,10 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	position: absolute;
 	width: 100%;
 	z-index: 3;
+}
+
+.select-search {
+	border: 1px solid var(--color-eighth);
 }
 
 .select-search-input + .select-search {
