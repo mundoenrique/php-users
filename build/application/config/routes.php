@@ -106,7 +106,7 @@ $route['(:any)/get-operations-key'] = "Novo_Transfer/getOperationKey";
 $route['(:any)/change-operations-key'] = "Novo_Transfer/changeOperationKey";
 $route['(:any)/transfer-cards'] = "Novo_Transfer/cardToCard";
 $route['(:any)/transfer-banks'] = "Novo_Transfer/cardToBank";
-$route['(:any)/payment-mobile'] = "Novo_Transfer/mobilePayment";
+$route['(:any)/mobile-payment'] = "Novo_Transfer/mobilePayment";
 $route['(:any)/pay-credit-cards'] = "Novo_Transfer/cardToCreditCard";
 $route['(:any)/pay-digitel-recharge'] = "Novo_Transfer/cardToDigitel";
 //Resports
