@@ -387,7 +387,7 @@ $config['encryption_key'] = ENCRYPTION_KEY;
 */
 $config['sess_driver'] = SESS_DRIVER;
 $config['sess_cookie_name'] = SESS_COOKIE_NAME;
-$config['sess_samesite'] = 'Lax';
+$config['sess_samesite'] = 'Strict';
 $config['sess_expiration'] = SESS_EXPIRATION > 0 ? SESS_EXPIRATION + 60 : SESS_EXPIRATION;
 $config['sess_save_path'] = SESS_SAVE_PATH;
 $config['sess_match_ip'] = TRUE;
@@ -415,7 +415,7 @@ $config['cookie_domain']	= COOKIE_DOMAIN;
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= COOKIE_SECURE === 'ON' ? TRUE : FALSE;
 $config['cookie_httponly'] 	= FALSE;
-$config['cookie_samesite'] 	= 'Lax';
+$config['cookie_samesite'] 	= 'Strict';
 
 /*
 |--------------------------------------------------------------------------
