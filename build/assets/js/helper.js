@@ -115,8 +115,8 @@ $(function () {
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 
 	$("body").on("focus", ".select-search-input", function () {
-		var search_for = $(this).val().trim();
-		$(this).val(search_for || "");
+		var search = $(this).val().trim();
+		$(this).val(search || "");
 		var selector = $(this).next(".select-search");
 		selector.css("display", "block");
 		$(this)
@@ -127,9 +127,9 @@ $(function () {
 
 	$("body").on("input", ".select-search-input", function () {
 		var selector = $(this).next(".select-search");
-		var search_for = $(this).val().trim();
+		var search = $(this).val().trim();
 		selector.find("li").addClass("hidden");
-		var matches = selector.find('li:contains("' + search_for + '")');
+		var matches = selector.find('li:contains("' + search + '")');
 		selector.find(".no-results").remove();
 		if (matches.length == 0) {
 			selector.append(

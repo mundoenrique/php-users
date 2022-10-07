@@ -5033,6 +5033,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .select-search-input {
 	color: var(--color-sixth) !important;
 	height: calc(1.386em + 0.75rem + 2px);
+	text-transform: capitalize;
 }
 
 .select-by-search > * {
@@ -5064,6 +5065,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 	background-color: white;
 	overflow: hidden;
 	padding: 0.7em;
+	text-transform: capitalize;
 }
 
 .select-search-input + .select-search > *.no-results {
