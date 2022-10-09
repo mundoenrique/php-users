@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date				September 19th, 2022
  */
 
-if (!function_exists('writeLog')) {
+/* if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
 		$CI = get_instance();
 		$appUserName = '';
@@ -43,7 +43,7 @@ if (!function_exists('writeLog')) {
 
 		log_message($level, $message);
 	}
-}
+} */
 
 // generar uuIdV4
 if (!function_exists('uuIdV4Generate')) {
