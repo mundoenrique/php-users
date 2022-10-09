@@ -185,7 +185,7 @@ country = $('body').data('country');
 			return urlObj;
 	}
 
-	var notice = sessionStorage.getItem('notice');
+	/* var notice = sessionStorage.getItem('notice');
 
 	if ($("body").attr("data-country") === 'Ve' && notice === null) {
 		$("#dialog-monetary-reconversion").dialog({
@@ -199,7 +199,7 @@ country = $('body').data('country');
 			sessionStorage.setItem('notice', true);
 			$("#dialog-monetary-reconversion").dialog("destroy");
 		});
-	}
+	} */
 }); // FIN
 
 function mensaje_temporal(){
