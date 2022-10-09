@@ -8,12 +8,12 @@ class Cryptography {
 
 	public function __construct()
 	{
-		writeLog('INFO', 'Cryptography Library Class Initialized');
+		log_message('INFO', 'NOVO Cryptography Library Class Initialized');
 	}
 
 	public function encrypt($object)
 	{
-		writeLog('INFO', 'Cryptography: Encrypt Method Initialized');
+		log_message('INFO', 'NOVO Cryptography: Encrypt Method Initialized');
 
 		$keyStr = $this->generateKey();
 		$salt = openssl_random_pseudo_bytes(8);
@@ -44,7 +44,7 @@ class Cryptography {
 
 	public function decrypt($passphrase, $jsonString)
 	{
-		writeLog('INFO', 'Cryptography: Decrypt Method Initialized');
+		log_message('INFO', 'NOVO Cryptography: Decrypt Method Initialized');
 
 		$jsondata = json_decode(base64_decode(urldecode($jsonString)), true);
 

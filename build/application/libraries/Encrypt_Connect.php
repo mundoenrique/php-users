@@ -384,10 +384,6 @@ class Encrypt_Connect
 
 		log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' COMPLETE RESPONSE' .$writeLog);
 
-		if (isset($logMessage->url)) {
-			log_message('DEBUG', 'NOVO ['.$userName.'] IP ' . $this->CI->input->ip_address() . ' URL MICROSERVICES RESPONSE ' .$logMessage->url);
-		}
-
 		unset($logMessage, $writeLog);
 	}
 	/**

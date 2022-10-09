@@ -27,11 +27,12 @@ class NOVO_Controller extends CI_Controller {
 	protected $dataRequest;
 	protected $greeting;
 	protected $views;
+	protected $appUserName;
 
 	public function __construct()
 	{
 		parent:: __construct();
-		writeLog('INFO', 'Controller Class Initialized');
+		log_message('INFO', 'NOVO Controller Class Initialized');
 
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
@@ -43,12 +44,13 @@ class NOVO_Controller extends CI_Controller {
 		$this->controllerMethod = $method;
 		$this->modelClass = $class.'_Model';
 		$this->modelMethod = 'callWs_'.ucfirst($method).'_'.str_replace('Novo_', '', $class);
-		$this->validationMethod = $this->controllerMethod;
+		$this->validationMethod = $method;
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
 		$this->nameApi = '';
+		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
 
 		if ($this->customerUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
@@ -117,7 +119,7 @@ class NOVO_Controller extends CI_Controller {
 					}
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->validationMethod);
+				$access = $this->verify_access->accessAuthorization($this->validationMethod, $this->appUserName);
 				$valid = TRUE;
 
 				if ($_POST && $access) {
@@ -130,10 +132,12 @@ class NOVO_Controller extends CI_Controller {
 						}
 					}
 
-					$valid = $this->verify_access->validateForm($this->validationMethod);
+					$valid = $this->verify_access->validateForm($this->validationMethod, $this->appUserName);
 
 					if ($valid) {
-						$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
+						$this->request = $this->verify_access->createRequest(
+							$this->controllerClass, $this->controllerMethod, $this->appUserName
+						);
 					}
 				}
 
@@ -236,7 +240,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: '. $this->modelClass);
+		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
 
 		$this->load->model($this->modelClass,'modelLoaded');
 		$method = $this->modelMethod;
@@ -251,7 +255,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView = 0)
 	{
-		writeLog('INFO', 'Controller: responseAttr Method Initialized');
+		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
 
@@ -276,7 +280,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function checkBrowser()
 	{
-		writeLog('INFO', 'Controller: checkBrowser Method Initialized');
+		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
 		$valid = $this->tool_browser->validBrowser($this->customerUri);

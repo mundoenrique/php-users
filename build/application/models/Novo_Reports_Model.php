@@ -10,7 +10,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		writeLog('INFO', 'Reports Model Class Initialized');
+		log_message('INFO', 'NOVO Reports Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,7 +19,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_GetMovements_Reports($dataRequest)
 	{
-		writeLog('INFO', 'Reports Model: GetMovements Method Initialized');
+		log_message('INFO', 'NOVO Reports Model: GetMovements Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';
@@ -121,7 +121,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_DownloadInquiry_Reports($dataRequest)
 	{
-		writeLog('INFO', 'Reports Model: DownloadInquiry Method Initialized');
+		log_message('INFO', 'NOVO Reports Model: DownloadInquiry Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';

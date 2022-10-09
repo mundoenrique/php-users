@@ -46,7 +46,7 @@ if (!function_exists('writeLog')) {
 }
 
 // generar uuIdV4
-if (! function_exists('uuIdV4Generate')) {
+if (!function_exists('uuIdV4Generate')) {
 	function uuIdV4Generate() {
     // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
     $data = random_bytes(16);
@@ -63,7 +63,7 @@ if (! function_exists('uuIdV4Generate')) {
 }
 
 // Maneja respuesta del servicio
-if (! function_exists('responseServer')) {
+if (!function_exists('responseServer')) {
 	function responseServer($responseServer) {
 		$code = explode('.', $responseServer->code);
 

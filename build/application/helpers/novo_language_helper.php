@@ -8,8 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date			24/10/2019
  */
 
-if (!function_exists('novoLang'))
-{
+if (!function_exists('novoLang')) {
 	function novoLang($line, $args = []) {
 		log_message('INFO', 'NOVO Helper loaded: novoLang_helper');
 
@@ -29,7 +28,7 @@ if (!function_exists('languageLoad')) {
 
 		$CI->config->set_item('language', 'global');
 
-		writeLog('INFO', 'Helper loaded: languageLoad_helper for ' . $call . ' files');
+		log_message('INFO', 'NOVO Helper loaded: languageLoad_helper for ' . $call . ' files');
 
 		switch ($call) {
 			case 'generic':
@@ -77,7 +76,7 @@ if (!function_exists('languageLoad')) {
 
 if (!function_exists('languageCookie')) {
 	function languageCookie($language) {
-		writeLog('INFO', 'Helper loaded: languageCookie_helper');
+		log_message('INFO', 'Novo Helper loaded: languageCookie_helper');
 
 		$baseLanguage = [
 			'name' => 'baseLanguage',

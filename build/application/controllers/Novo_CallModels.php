@@ -10,7 +10,7 @@ class Novo_CallModels extends Novo_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		writeLog('INFO', 'CallModels Controller Class Initialized');
+		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
 			$this->fileLanguage = lcfirst($this->dataRequest->who);
@@ -28,7 +28,7 @@ class Novo_CallModels extends Novo_Controller {
 	 */
 	public function index()
 	{
-		writeLog('INFO', 'CallModels: index Method Initialized');
+		log_message('INFO', 'NOVO CallModels: index Method Initialized');
 
 		if (!empty($this->dataRequest->data)) {
 			foreach ($this->dataRequest->data AS $item => $value) {
@@ -36,15 +36,25 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
+		if (!$this->appUserName) {
+			if ($this->input->post('userName') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('userName'));
+			} elseif ($this->input->post('idNumber') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('idNumber'));
+			} elseif ($this->input->post('documentId') != NULL)	{
+				$this->appUserName = mb_strtoupper($this->input->post('documentId'));
+			}
+		}
+
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->validationMethod);
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod, $this->appUserName);
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
-			$valid = $this->verify_access->validateForm($this->validationMethod);
+			$valid = $this->verify_access->validateForm($this->validationMethod, $this->appUserName);
 		}
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
@@ -53,10 +63,10 @@ class Novo_CallModels extends Novo_Controller {
 		LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 		if ($valid) {
-			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod, $this->appUserName);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
-			$this->dataResponse = $this->verify_access->responseByDefect();
+			$this->dataResponse = $this->verify_access->responseByDefect($this->appUserName);
 		}
 
 		$customerData = encryptData($this->dataResponse);
