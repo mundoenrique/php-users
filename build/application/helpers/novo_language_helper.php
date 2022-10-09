@@ -20,7 +20,7 @@ if (!function_exists('novoLang')) {
 
 if (!function_exists('languageLoad')) {
 	function LoadLangFile($call, $fileLanguage, $customerUri = FALSE) {
-		$CI = get_instance();
+		$CI =& get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');

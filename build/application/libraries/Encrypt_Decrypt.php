@@ -13,7 +13,7 @@ class Encrypt_Decrypt
 	{
 		log_message('INFO', 'NOVO Encrypt_Decrypt Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$this->logMessage = new stdClass();
 	}
 

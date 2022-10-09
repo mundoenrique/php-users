@@ -13,7 +13,7 @@ class Connect_Services_Apis
 	{
 		log_message('INFO', 'NOVO Connect_Services_Apis Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$this->logMessage = new stdClass();
 
 	}

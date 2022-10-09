@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 if (!function_exists('decryptData')) {
 	function decryptData($requestData) {
-		$CI = get_instance();
+		$CI =& get_instance();
 
 		if (ACTIVE_SAFETY) {
 			$req = json_decode(base64_decode($requestData));
@@ -25,7 +25,7 @@ if (!function_exists('decryptData')) {
 
 if (!function_exists('encryptData')) {
 	function encryptData($responseData) {
-		$CI = get_instance();
+		$CI =& get_instance();
 
 		$responseData = [
 			'response' => $responseData,

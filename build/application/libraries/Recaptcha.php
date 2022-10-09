@@ -27,7 +27,7 @@ class Recaptcha {
 	 */
 	public function __construct()
 	{
-		$this->_ci = & get_instance();
+		$this->_ci =& get_instance();
 		$this->_ci->load->config('recaptcha');
 		$this->_siteKey = $this->_ci->config->item('recaptcha_site_key');
 		$this->_secretKey = $this->_ci->config->item('recaptcha_secret_key');

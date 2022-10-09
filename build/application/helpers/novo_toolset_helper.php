@@ -11,19 +11,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!function_exists('assetPath')) {
 	function assetPath($route = '') {
-		return get_instance()->config->item('asset_path').$route;
+		$CI =& get_instance();
+		return $CI->config->item('asset_path').$route;
 	}
 }
 
 if (!function_exists('assetUrl')) {
 	function assetUrl($route = '') {
-		return get_instance()->config->item('asset_url').$route;
+		$CI =& get_instance();
+		return $CI->config->item('asset_url').$route;
 	}
 }
 
 if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
-		$CI = get_instance();
+		$CI =& get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
@@ -80,7 +82,7 @@ if(!function_exists('dbSearch')) {
 
 if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
-		$CI = get_instance();
+		$CI =& get_instance();
 
 		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
 			if ($pos == '__ci_last_regenerate') {
@@ -94,7 +96,7 @@ if (!function_exists('clearSessionVars')) {
 
 if (!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
-		$CI = get_instance();
+		$CI =& get_instance();
 
 		return $accessLog = [
 			"sessionId"=> $CI->session->sessionId ?? '',
@@ -292,7 +294,7 @@ if (! function_exists('floatFormat')) {
 
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
-		$CI = get_instance();
+		$CI =& get_instance();
 		$redirectLink = lang('CONF_LINK_SIGNIN');
 
 		if ($CI->session->has_userdata('logged')) {

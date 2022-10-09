@@ -16,7 +16,7 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 	}
 	/**

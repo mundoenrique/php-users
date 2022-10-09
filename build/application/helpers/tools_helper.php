@@ -198,7 +198,7 @@ function np_hoplite_verificSession()
 
 if(!function_exists('getFaviconLoader')) {
 	function getFaviconLoader() {
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$favicon = $CI->config->item('favicon');
 		$loader = 'loading-';
 		switch($CI->config->item('country')) {
@@ -246,7 +246,7 @@ if ( ! function_exists('np_hoplite_decimals'))
 
 if(!function_exists('clientCheck')) {
 	function clientCheck($client) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 
 		switch ($client) {
 			case 'bdb':
@@ -260,7 +260,7 @@ if(!function_exists('clientCheck')) {
 
 if(!function_exists('logAccess')) {
 	function logAccess($dataAccessLog) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 
 		return [
 			"sessionId"=> $CI->session->userdata('sessionId') ?: '',
@@ -279,7 +279,7 @@ if(!function_exists('logAccess')) {
 
 if(!function_exists('loadLanguage')) {
 	function loadLanguage($client = 'default_lang', $langFiles = FALSE) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$langFiles = $langFiles ?: $CI->router->fetch_method();
 		$languages = [];
 		$lanGeneral = ['bp', 'co', 've', 'bdb'];
@@ -336,7 +336,7 @@ if(!function_exists('loadLanguage')) {
 
 if(!function_exists('countryCheck')) {
 	function countryCheck($country) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$CI->config->load('config-'.$country);
 	}
 }
@@ -350,7 +350,7 @@ if(!function_exists('mask_account')) {
 
 if(!function_exists('validateUrl')) {
 	function validateUrl($client) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);

@@ -12,7 +12,7 @@ class Verify_Access {
 	{
 		log_message('INFO', 'NOVO Verify_Access Library Class Initialized');
 
-		$this->CI = get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados

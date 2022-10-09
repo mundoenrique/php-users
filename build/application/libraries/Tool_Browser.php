@@ -11,7 +11,7 @@ class Tool_Browser {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
-		$this->CI = get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info Método para determinar que el navegador es compatible con la aplicación
