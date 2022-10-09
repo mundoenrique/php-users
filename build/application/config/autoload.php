@@ -107,6 +107,8 @@ $autoload['helper'] = array(
 	'url',
 	'language',
 	'cdn',
+	'form',
+	'cookie',
 	'novo_server',
 	'novo_cryptography',
 	'novo_language',
@@ -114,8 +116,6 @@ $autoload['helper'] = array(
 	'encryption',
 	'connections',
 	'tools',
-	'form',
-	'cookie',
 	'menu',
 );
 
