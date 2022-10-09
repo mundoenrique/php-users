@@ -79,10 +79,10 @@ class NOVO_Controller extends CI_Controller {
 				->update('cpo_sessions', $data);
 			}
 
-			languageLoad('generic', $this->fileLanguage);
+			LoadLangFile('generic', $this->fileLanguage);
 			clientUrlValidate($this->customerUri);
 			$this->customerUri = $this->config->item('customer-uri');
-			languageLoad('specific', $this->fileLanguage, $this->customerUri);
+			LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 			if ($this->controllerMethod !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();

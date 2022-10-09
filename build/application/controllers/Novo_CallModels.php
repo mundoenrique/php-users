@@ -48,9 +48,9 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
-		languageLoad('generic', $this->fileLanguage);
+		LoadLangFile('generic', $this->fileLanguage);
 		$this->config->set_item('language', BASE_LANGUAGE . '-' . $this->customerUri);
-		languageLoad('specific', $this->fileLanguage, $this->customerUri);
+		LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 		if ($valid) {
 			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
