@@ -6,17 +6,19 @@
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# codeigniter 3
+### codeigniter 3 ###
+!**/application/*/.htaccess
+
 **/application/cache/*
 !**/application/cache/index.html
-!**/application/cache/.htaccess
 
 **/application/logs/*
 !**/application/logs/index.html
-!**/application/logs/.htaccess
 
-**/application/vendor/
-**/application/sessions/
+**/vendor/
+**/sessions/
+
+**/composer.lock
 
 ### IDE Files ###
 /nbproject/
