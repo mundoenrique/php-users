@@ -277,6 +277,43 @@ $config = [
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
 	],
+	'affiliate' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+	],
 	'cardToCard' => [
 		[
 			'field' => 'beneficiary',

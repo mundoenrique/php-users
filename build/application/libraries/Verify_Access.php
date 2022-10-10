@@ -164,14 +164,15 @@ class Verify_Access {
 				break;
 			case 'setOperationKey':
 			case 'getOperationKey':
+			case 'affiliate':
 			case 'changeOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
 			case 'mobilePayment':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
-				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer == 'S' && lang('CONF_PAYS_TRANSFER') == 'ON';
-				break;
+				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer == 'S' && (lang('CONF_PAYS_TRANSFER') == 'ON' || lang('CONF_PAYMENTS') == 'ON' || lang('CONF_TRANSFERS') == 'ON');
+			break;
 			case 'signup':
 				$auth = $this->CI->agent->referrer() == base_url(lang('CONF_LINK_USER_IDENTIFY')) && $this->CI->session->has_userdata('userIdentity');
 				break;
