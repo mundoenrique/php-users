@@ -13,7 +13,7 @@ class Request_Data {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Request Library Class Initialized');
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info Método para obtener la lista de empresas asociadas al usuario

@@ -105,14 +105,7 @@ class Novo_User extends NOVO_Controller {
 			"user/signup"
 		);
 
-		$dataUser = json_decode(base64_decode($this->request->dataUser));
-		$dataUser = json_decode($this->cryptography->decrypt(
-			base64_decode($dataUser->plot),
-			utf8_encode($dataUser->password)
-		));
-		$dataUser = $dataUser->dataUser;
-
-		foreach ($dataUser->signUpData AS $index => $render) {
+		foreach ($this->request AS $index => $render) {
 			$this->render->$index = $render;
 		}
 

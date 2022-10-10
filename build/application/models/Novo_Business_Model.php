@@ -177,13 +177,13 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('CONF_CURRENCY').' '.$response->disponible;
-				$this->response->modal = TRUE;
-			break;
-			default:
+				break;
+				default:
 				$this->response->code = 1;
 				$this->response->msg = '---';
-		}
+			}
 
+		$this->response->modal = TRUE;
 		return $this->responseToTheView('callWs_GetBalance');
 	}
 	/**
@@ -402,7 +402,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
-		$this->dataAccessLog->operation = 'Lista de tarjetas para '.$dataRequest->operation;
+		$this->dataAccessLog->operation = 'Lista de tarjetas para ' . $dataRequest->operation;
 
 		$this->dataRequest->idOperation = '6';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -479,6 +479,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if (empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '214';
 			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->emailCliente = $this->session->userEmail;
 			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 
@@ -498,13 +499,14 @@ class Novo_Business_Model extends NOVO_Model {
 					'expirationDate' => $expirationDate,
 					'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
 				];
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CLOSE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -424://MODAL OTP
 				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
-				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->response->modalBtn['btn2']['action'] = 'none';
 			break;
 		}
 

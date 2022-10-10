@@ -20,7 +20,7 @@ $(function () {
 		if (form.valid()) {
 			btnText = $(this).html();
 			data = getDataForm(form);
-			data.userPass = cryptoPass(data.userPass);
+			data.userPass = cryptography.encrypt(data.userPass);
 			data.currentTime = new Date().getHours();
 			$(this).html(loader);
 			insertFormInput(true);
@@ -40,7 +40,6 @@ $(function () {
 			$(this)
 				.html(loader)
 				.prop('disabled', true)
-				.removeClass('send-otp');
 			insertFormInput(true);
 
 			getRecaptchaToken('verifyIP', function (recaptchaToken) {
@@ -54,7 +53,8 @@ $(function () {
 });
 
 function getSignIn() {
-	who = 'User'; where = 'signin';
+	who = 'User';
+	where = 'signin';
 
 	callNovoCore(who, where, data, function (response) {
 		switch (response.code) {
@@ -70,7 +70,6 @@ function getSignIn() {
 				});
 			break;
 			case 2:
-				$('#accept').addClass('send-otp');
 				response.modalBtn.minWidth = 480;
 				response.modalBtn.maxHeight = 'none';
 				response.modalBtn.posAt = 'center top';
@@ -91,6 +90,7 @@ function getSignIn() {
 				inputModal += 	'</div">'
 				inputModal += '</form>';
 
+				$('#accept').addClass('send-otp');
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 			break;
 			case 3:
@@ -99,6 +99,7 @@ function getSignIn() {
 				response.modalBtn.posAt = 'center top';
 				response.modalBtn.posMy = 'center top+160';
 				inputModal = response.msg
+
 				appMessages(response.title, inputModal, response.icon, response.modalBtn);
 			break;
 

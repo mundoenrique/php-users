@@ -510,7 +510,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 			} else {
 				ocultarProcesando();
 				var msgError = 'No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong>';
-				console.log(data)
+
 				if (data.msg) {
 					msgError = data.msg
 				}

@@ -19,13 +19,13 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TemporaryLock_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+		log_message('INFO', 'NOVO CustomerSupport: TemporaryLock Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de bloqueo o desbloqueo';
 
-		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
+		$expireDate = decryptData($dataRequest->expireDate);
 
 		$this->dataRequest->idOperation = '110';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -79,7 +79,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case -306:
 				$this->load->model('Novo_Assets_Model', 'getToken');
 				$this->response = $this->getToken->callWs_GetToken_Assets();
-				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
+				$this->response->title = $dataRequest->status === '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 			break;
 			case 29:
 			case -21:
@@ -108,13 +108,13 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_Replacement_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+		log_message('INFO', 'NOVO CustomerSupport Model: Replacement Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solicitud de bloqueo permanente';
 
-		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
+		$expireDate = decryptData($dataRequest->expireDate);
 
 		$this->dataRequest->idOperation = '111';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -221,7 +221,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TwirlsCommercial_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+		log_message('INFO', 'NOVO CustomerSupport Model: TwirlsCommercial Method Initialized');
 
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Giros comerciales';
@@ -313,7 +313,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TransactionalLimits_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+		log_message('INFO', 'NOVO CustomerSupport Model: TransactionalLimits Method Initialized');
 
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Limites transaccionales';
@@ -389,15 +389,15 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_ChangePin_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CustomerSupport Method Initialized');
+		log_message('INFO', 'NOVO CustomerSupport Model: ChangePin Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
 		$this->dataAccessLog->operation = 'Solictud de Cambio de Pin';
 
-		$expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
-		$currentPin = $this->cryptography->decryptOnlyOneData($dataRequest->currentPin);
-		$newPin = $this->cryptography->decryptOnlyOneData($dataRequest->newPin);
+		$expireDate = decryptData($dataRequest->expireDate);
+		$currentPin = decryptData($dataRequest->currentPin);
+		$newPin = decryptData($dataRequest->newPin);
 
 		$this->dataRequest->idOperation = '112';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';

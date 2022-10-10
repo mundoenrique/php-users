@@ -52,7 +52,7 @@ $config = [
 	'signup' => [
 		[
 			'field' => 'dataUser',
-			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]'
 		]
 	],
 	'validNickName' => [
@@ -211,6 +211,38 @@ $config = [
 		[
 			'field' => 'idNumber',
 			'rules' => 'trim|alpha_numeric|required'
+		],
+	],
+	'mfaConfirm' => [
+		[
+			'field' => 'authenticationCode',
+			'rules' => 'trim|numeric|regex_match[/^[0-9]{6}$/]|required'
+		],
+	],
+	'activateSecretToken' => [
+		[
+			'field' => 'channel',
+			'rules' => 'trim|regex_match[/^(THIRD_PARTY_APP|EMAIL)/]|required'
+		],
+		[
+			'field' => 'resendToken',
+			'resendToken' => 'trim|regex_match[/^(0|1)/]|required'
+		],
+	],
+	'generateTotp' => [
+		[
+			'field' => 'operationType',
+			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
+		],
+	],
+	'validateTotp' => [
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(activate|deactivate|validate)/]|required'
+		],
+		[
+			'field' => 'authenticationCode',
+			'rules' => 'trim|integer|exact_length[6]|required'
 		],
 	],
 	'accessRecoverOTP' => [
@@ -507,8 +539,8 @@ $config = [
 	],
 	'notifications' => [
 		[
-			'field' => 'screenSize',
-			'rules' => 'trim|numeric'
+			'field' => 'somthing',
+			'rules' => 'trim'
 		]
 	],
 	'notificationsUpdate' => [
@@ -553,8 +585,8 @@ $config = [
 	],
 	'keepSession' => [
 		[
-			'field' => 'signout',
-			'rules' => 'trim|alpha|required'
+			'field' => 'keep',
+			'rules' => 'trim|regex_match[/^(session)/]|required'
 		]
 	],
 	'changeLanguage' => [

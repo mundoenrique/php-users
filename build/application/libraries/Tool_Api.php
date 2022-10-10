@@ -11,7 +11,7 @@ class Tool_Api {
 	{
 		log_message('INFO', 'NOVO Tool_Api Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$this->namePropRequest = "";
 		$this->structureValidRequest = "";
 		$this->nameApi = "";

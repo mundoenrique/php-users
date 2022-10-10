@@ -23,7 +23,7 @@
 		<div id="product-info" class="pt-3 px-5 pb-5" prefix-prod="<?= $prefix ?>">
 		<?php endif; ?>
 			<?php foreach($viewPage as $views): ?>
-			<?php $this->load->view($views.'_content-core'); ?>
+			<?php $this->load->view($views . '_content-core'); ?>
 			<?php endforeach; ?>
 		<?php if(!isset($skipProductInf)): ?>
 		</div>
