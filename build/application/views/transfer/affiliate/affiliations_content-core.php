@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="affiliateView">
+<div id="manageAffiliationsView" class="transfer-operation" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_MANAGE_AFFILIATIONS') ?></h4>
     <div class="w-100">
@@ -63,3 +63,5 @@
     </div>
   </div>
 </div>
+
+<?php $this->load->view('/transfer/affiliate/managementAffiliate_content-core.php') ?>

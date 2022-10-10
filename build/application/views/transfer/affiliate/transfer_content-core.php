@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="transferView">
+<div id="toTransferView" class="transfer-operation" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4>
     <div class="w-100">
