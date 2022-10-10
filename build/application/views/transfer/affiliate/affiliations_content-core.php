@@ -46,10 +46,10 @@
                     <td>Banco Provincial</td>
                     <td>04242345678</td>
                     <td class="py-0 px-1 flex justify-center items-center">
-                      <button class="btn mx-1 px-0 big-modal" title="<?= lang('TRANSF_EDIT') ?>" data-toggle="tooltip">
+                      <button id="editAffiliate" class="btn mx-1 px-0 title="<?= lang('TRANSF_EDIT') ?>" data-toggle="tooltip">
                         <i class="icon icon-edit" aria-hidden="true"></i>
                       </button>
-                      <button class="btn mx-1 px-0 big-modal" title="<?= lang('TRANSF_DELETE') ?>" data-toggle="tooltip">
+                      <button id="deletAffiliate" class="btn mx-1 px-0 big-modal" title="<?= lang('TRANSF_DELETE') ?>" data-toggle="tooltip">
                         <i class="icon icon-remove" aria-hidden="true"></i>
                       </button>
                     </td>

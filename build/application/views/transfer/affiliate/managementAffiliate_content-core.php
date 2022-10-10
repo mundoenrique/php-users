@@ -32,7 +32,8 @@
                 <div class="form-group col-6 mb-0">
                   <select id="typeDocument" class="custom-select form-control" name="typeDocument">
                     <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                    <option value="Cedula">V</option>
+                    <option value="V">V</option>
+                    <option value="E">E</option>
                   </select>
                   <div class="help-block"></div>
                 </div>
@@ -60,7 +61,7 @@
           </div>
           <div class="line my-2"></div>
           <div class="flex items-center justify-end pt-3">
-            <a class="btn btn-small btn-link big-modal" href=""><?= lang('GEN_BTN_CANCEL') ?></a>
+						<button id="affiliateCancelBtn" class="btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL') ?></button>
             <button id="manageAffiliateBtn"
               class="btn btn-small btn-loading btn-primary send"><?= (TRUE) ? lang('TRANSF_AN_AFFILIATE') : lang('GEN_BTN_SAVE') ?></button>
           </div>
