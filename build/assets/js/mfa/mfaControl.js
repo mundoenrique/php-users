@@ -31,7 +31,7 @@ $(function() {
 		otpProps.generateAction = lang.CONF_MFA_DEACTIVATE;
 		otpProps.validateAction = lang.CONF_MFA_DEACTIVATE;
 
-		generateOtp();
+		sendTopt();
 	});
 
 	$('#system-info').on('click', '.otp-validate', function (e) {
@@ -47,7 +47,7 @@ $(function() {
 			$(this).html(loader);
 			$(this).prop('disabled', true);
 			who = 'Mfa';
-			where = 'ValidateOtp';
+			where = 'ValidateTotp';
 			data = getDataForm(form);
 			data.operationType = otpProps.validateAction;
 			insertFormInput(true);
@@ -83,17 +83,17 @@ $(function() {
 		otpProps.reSend = true;
 		modalDestroy(true);
 		coverSpin(true);
-		generateOtp();
+		sendTopt();
 	});
 });
 
 
-function generateOtp() {
+function sendTopt() {
 	data = {
 		operationType: otpProps.generateAction,
 	}
 	who = 'Mfa';
-	where = 'GenerateOtp';
+	where = 'GenerateTotp';
 	insertFormInput(true);
 
 	callNovoCore(who, where, data, function(response) {

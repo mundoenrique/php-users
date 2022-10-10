@@ -136,11 +136,11 @@ class Verify_Access {
 				$referrerUrl = $referrer === base_url(lang('CONF_LINK_MFA_CONFIRM') . '/' . lang('CONF_MFA_EMAIL'));
 				$auth = $isLogged && !$this->CI->session->otpActive && $referrerUrl;
 				break;
-			case 'validateOtp':
+			case 'validateTotp':
 				$auth = $isLogged && $mfaActive;
 				break;
 			case 'desactivateSecretToken':
-			case 'generateOtp':
+			case 'generateTotp':
 				$auth = $isLogged && $this->CI->session->otpActive;
 				break;
 			case 'getVirtualDetail':

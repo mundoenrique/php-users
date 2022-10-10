@@ -96,7 +96,7 @@ $(function () {
 			otpProps.generateAction = lang.CONF_MFA_GENERATE_OTP;
 			otpProps.validateAction = lang.CONF_MFA_VALIDATE_OTP;
 			coverSpin(true);
-			generateOtp();
+			sendTopt();
 		}
 	});
 

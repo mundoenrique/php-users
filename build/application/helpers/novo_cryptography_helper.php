@@ -28,8 +28,7 @@ if (!function_exists('encryptData')) {
 		$CI =& get_instance();
 
 		$responseData = [
-			'response' => $responseData,
-			'traslate' => ACTIVE_SAFETY,
+			'response' => $responseData
 		];
 
 		if (ACTIVE_SAFETY) {

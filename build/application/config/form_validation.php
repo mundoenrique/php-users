@@ -229,13 +229,13 @@ $config = [
 			'resendToken' => 'trim|regex_match[/^(0|1)/]|required'
 		],
 	],
-	'generateOtp' => [
+	'generateTotp' => [
 		[
 			'field' => 'operationType',
 			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
 		],
 	],
-	'validateOtp' => [
+	'validateTotp' => [
 		[
 			'field' => 'operationType',
 			'rules' => 'trim|regex_match[/^(activate|deactivate|validate)/]|required'

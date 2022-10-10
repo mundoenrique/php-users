@@ -62,9 +62,9 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date June 29th, 2022
 	 */
-	public function callWs_GenerateOtp_Mfa($dataRequest)
+	public function callWs_GenerateTotp_Mfa($dataRequest)
   {
-    log_message('INFO', 'NOVO Mfa Model: GenerateOtp Method Initialized');
+    log_message('INFO', 'NOVO Mfa Model: GenerateTotp Method Initialized');
 
 		$uriValidateTopt = [
 			lang('CONF_MFA_GENERATE_OTP') => 'otp/generate',
@@ -76,7 +76,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'username' => $this->session->userName
 		];
 
-    $response = $this->sendToCoreServices('callWs_GenerateOtp');
+    $response = $this->sendToCoreServices('callWs_GenerateTotp');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -94,7 +94,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
-		return $this->responseToTheView('callWs_GenerateOtp');
+		return $this->responseToTheView('callWs_GenerateTotp');
   }
 
 	/**
@@ -102,9 +102,9 @@ class Novo_Mfa_Model extends NOVO_Model {
    * @author Luis Molina.
    * @date Jul 07th, 2022
 	 */
-	public function callWs_ValidateOtp_Mfa($dataRequest)
+	public function callWs_ValidateTotp_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: ValidateOtp Method Initialized');
+		log_message('INFO', 'NOVO Mfa Model: ValidateTotp Method Initialized');
 
 		$uriValidateTopt = [
 			lang('CONF_MFA_ACTIVATE') => 'secret-token/generate/confirm',
@@ -119,7 +119,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'otpValue' => $dataRequest->authenticationCode,
 		];
 
-		$response = $this->sendToCoreServices('callWs_ValidateOtp');
+		$response = $this->sendToCoreServices('callWs_ValidateTotp');
 
     switch ($this->isResponseRc) {
 			case 0:
@@ -174,6 +174,6 @@ class Novo_Mfa_Model extends NOVO_Model {
 
     }
 
-		return $this->responseToTheView('callWs_ValidateOtp');
+		return $this->responseToTheView('callWs_ValidateTotp');
 	}
 }

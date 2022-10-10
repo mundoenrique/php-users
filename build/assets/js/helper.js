@@ -1,6 +1,7 @@
 'use strict';
+var traslate
 $(function () {
-	window['traslate'] = assetsClient.traslate
+	traslate = $('#traslate').val() === '1' ? true : false;
 	assetsClient = cryptography.decrypt(assetsClient.response);
 
 	$.each(assetsClient, function(item, value) {
@@ -10,6 +11,7 @@ $(function () {
 	loader = $('#loader').html();
 	validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 	defaultCode = parseInt(lang.CONF_DEFAULT_CODE);
+
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
 	$('body').on('click', '.pwd-action', function () {

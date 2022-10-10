@@ -121,5 +121,5 @@
 <?php endif; ?>
 <?php endif; ?>
 <form id="requestForm" method="post">
-	<input type="hidden" name="traslate" value="<?= ACTIVE_SAFETY ?>">
+	<input type="hidden" id="traslate" name="traslate" value="<?= ACTIVE_SAFETY ?>">
 </form>

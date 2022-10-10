@@ -12,7 +12,7 @@ $(function () {
 		if (form.valid()) {
 			$(this).html(loader);
 			who = 'Mfa';
-			where = 'ValidateOtp';
+			where = 'ValidateTotp';
 			data = getDataForm(form);
 			data.operationType = lang.CONF_MFA_ACTIVATE;
 			data.channel = mfaChannel;
