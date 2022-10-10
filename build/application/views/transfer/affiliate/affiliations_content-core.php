@@ -26,11 +26,13 @@
               </div>
             </form>
           </div>
-          <div class="col-12">
+					<div id="pre-loader" class="w-100 hide">
+						<div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
+							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+						</div>
+					</div>
+          <div class="col-12 hide-out hide">
             <div id="transferRecord" class="mt-1 justify-center">
-              <div id="pre-loader" class="mt-5 mx-auto flex justify-center">
-                <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
-              </div>
               <table id="movements" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
                 <thead class="bg-primary secondary regular">
                   <tr>
@@ -56,6 +58,11 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div id="no-moves" class="hide">
+              <div class="flex flex-column items-center justify-center pt-5">
+                <h3 class="h4 regular mb-0"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h3>
+              </div>
             </div>
           </div>
         </div>

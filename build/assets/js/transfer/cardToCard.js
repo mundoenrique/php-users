@@ -1,7 +1,7 @@
 "use strict";
 $(function () {
 	var liOptions = $(".nav-item-config");
-	var operationType = 'P2T';
+	var operationType = "P2T";
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -46,9 +46,27 @@ $(function () {
 				insertFormInput(false);
 				console.log(response);
 				if (response.code == 0) {
-					appMessages(response.title, response.msg, response.icon, response.modalBtn);
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
 				}
 			});
+		}
+	});
+
+	$("#transferBtn").on("click", function (e) {
+		e.preventDefault();
+		form = $("#transferForm");
+		validateForms(form);
+
+		if (form.valid()) {
+			data = getDataForm(form);
+			data.currentOperKey = cryptoPass(data.currentOperKey);
+			$(this).html(loader);
+			insertFormInput(true);
 		}
 	});
 });
