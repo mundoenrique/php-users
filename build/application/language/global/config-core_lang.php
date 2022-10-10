@@ -180,6 +180,7 @@ $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'twitter' => $lang['CONF_NO_LINK'],
 	'youtube' => $lang['CONF_NO_LINK'],
 	'instagram' => $lang['CONF_NO_LINK'],
+	'linkedin' => $lang['CONF_NO_LINK'],
 ];
 $lang['CONF_PRIVACY_NOTICE_LINK'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';

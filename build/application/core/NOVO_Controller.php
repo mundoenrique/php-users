@@ -173,18 +173,20 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($auth) {
+			$this->clientStyle = $this->config->item('client_style');
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
+			$this->render->clientStyle = $this->clientStyle;
 			$this->render->novoName = $this->security->get_csrf_token_name();
 			$this->render->novoCook = $this->security->get_csrf_hash();
 			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
 
 			$this->includeAssets->cssFiles = [
-				"$this->customerUri/root-$this->customerUri",
+				"$this->clientStyle/root-$this->clientStyle",
 				"root-general",
 				"reboot",
-				"$this->customerUri/"."$this->customerUri-base"
+				"$this->clientStyle/"."$this->clientStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {

@@ -3,7 +3,7 @@
 	<footer class="main-footer">
 		<?php if(lang('CONF_FOOTER_MARK') == 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
-			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $customerUri); ?> " alt="Superintendencia de Bancos">
+			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $clientStyle); ?> " alt="Superintendencia de Bancos">
 		</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
@@ -17,7 +17,7 @@
 			</div>
 			<?php endif; ?>
 			<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
-			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $customerUri); ?>"
+			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $clientStyle); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images'); ?>" alt="Logo PCI">
