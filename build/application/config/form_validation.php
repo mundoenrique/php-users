@@ -591,10 +591,10 @@ $config = [
 			'field' => 'cardNumber',
 			'rules' => 'trim|required'
 		],
-		[
-			'field' => 'userIdNumber',
-			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
-		]
+		// [
+		// 	'field' => 'userIdNumber',
+		// 	'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		// ]
 	],
 	'getVirtualDetail' => [
 		[

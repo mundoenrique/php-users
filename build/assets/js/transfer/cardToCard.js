@@ -17,7 +17,26 @@ $(function () {
 		});
 	});
 
-	$("#editAffiliate, #toTransferBtn").on("click", function (e) {
+	$("#system-info").on("click", ".dashboard-item", function (e) {
+		e.preventDefault();
+		form = $("#operation");
+		data = getDataForm(form);
+		who = "Business";
+		where = "GetBalance";
+		$(".cover-spin").show(0);
+
+		console.log("card selected: ", data);
+		callNovoCore(who, where, data, function (response) {
+			$(".cover-spin").hide();
+			if (response.code == 0) {
+				$("#currentBalance").text(response.msg);
+			} else {
+				$("#currentBalance").text("---");
+			}
+		});
+	});
+
+	$("#editAffiliate, #newAffiliate").on("click", function (e) {
 		$("#manageAffiliationsView").hide();
 		$("#manageAffiliateView").fadeIn(700, "linear");
 	});

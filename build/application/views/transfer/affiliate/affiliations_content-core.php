@@ -8,7 +8,7 @@
         <div class="line-text my-2"></div>
         <div class="row">
           <div class="col-6">
-            <button id="toTransferBtn" class="btn btn-small btn-loading btn-primary w-auto"><?= lang('TRANSF_NEW_AFFILIATE') ?></button>
+            <button id="newAffiliate" class="btn btn-small btn-loading btn-primary w-auto"><?= lang('TRANSF_NEW_AFFILIATE') ?></button>
           </div>
           <div class="col-6">
             <form id="searchAffiliate" method="post">
