@@ -37,10 +37,11 @@ class NOVO_Controller extends CI_Controller {
 
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
+		$customerUri = $this->uri->segment(1, 0) ?? 'null';
 
 		$this->ValidateBrowser = FALSE;
-		$this->clientStyle = $this->config->item('client_style');
-		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
+		$this->clientStyle = $customerUri;
+		$this->customerUri = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
@@ -86,6 +87,7 @@ class NOVO_Controller extends CI_Controller {
 			LoadLangFile('generic', $this->fileLanguage);
 			clientUrlValidate($this->customerUri);
 			$this->customerUri = $this->config->item('customer-uri');
+			$this->clientStyle = $this->config->item('client_style');
 			LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 			if ($this->controllerMethod !== 'suggestion') {
