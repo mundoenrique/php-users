@@ -5,6 +5,7 @@ var skin = $('body').attr('data-app-skin');
 var dataRequest;
 
 $(function () {
+	sessionStorage.clear();
 	var user, pass;
 	var hasCookie = navigator.cookieEnabled;
 
