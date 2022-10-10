@@ -84,9 +84,9 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->loadView($view);
 	}
 	/**
-	 * @info Método para obtener la lista para transferencias entre tarjetas
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date August 20th, 2021
+	 * @info Método para obtener las opciones de transferencias entre tarjetas
+	 * @author Jhonatan Llerena.
+	 * @date October 10th, 2022
 	 */
 	public function cardToCard()
 	{
@@ -103,7 +103,25 @@ class Novo_Transfer extends NOVO_Controller {
 			"transfer/cardToCard"
 		);
 
+		$this->load->model('Novo_Business_Model', 'business');
+		$this->request->operation = 'Transferencias';
+		$this->request->operType = 'P2P';
+		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
+		$this->responseAttr($userCardList);
+		$cardsList = $userCardList->data->cardsList;
+		$totalCards = count($cardsList);
+
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->render->operations = TRUE;
+		$this->render->totalCards = $totalCards;
+		$this->render->cardsList = $cardsList;
+
+		if ($totalCards == 1) {
+			foreach ($userCardList->data->cardsList[0] as $index => $render) {
+				$this->render->$index = $render;
+			}
+		}
+
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}
