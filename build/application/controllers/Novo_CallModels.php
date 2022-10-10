@@ -6,7 +6,6 @@
 */
 class Novo_CallModels extends Novo_Controller {
 
-
 	public function __construct()
 	{
 		parent:: __construct();

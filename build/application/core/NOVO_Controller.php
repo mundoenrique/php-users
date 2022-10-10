@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
+	private $clientStyle;
 	protected $customerUri;
 	protected $fileLanguage;
 	protected $controllerClass;
@@ -38,6 +39,7 @@ class NOVO_Controller extends CI_Controller {
 		$method = $this->router->fetch_method();
 
 		$this->ValidateBrowser = FALSE;
+		$this->clientStyle = $this->config->item('client_style');
 		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
@@ -164,12 +166,17 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
+			$this->render->clientStyle = $this->clientStyle;
 			$this->render->logged = $this->session->has_userdata('logged');
 			$this->render->userId = $this->session->has_userdata('userId');
 			$this->render->fullName = $this->session->fullName;
 			$this->render->sessionTime = $this->config->item('session_time');
 			$this->render->callServer = $this->config->item('session_call_server');
 			$this->render->prefix = '';
+			//Eliminar despues de finalizar desde aquí
+			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
+			$this->render->callServer = $this->render->callModal;
+			//Eliminar despues de finalizar hasta aquí
 
 			switch ($this->greeting) {
 				case $this->greeting >= 19 && $this->greeting <= 23:
@@ -183,13 +190,11 @@ class NOVO_Controller extends CI_Controller {
 					break;
 			}
 
-			$validateRecaptcha = in_array($this->controllerMethod, lang('CONF_VALIDATE_CAPTCHA'));
-
 			$this->includeAssets->cssFiles = [
-				"$this->customerUri/root-$this->customerUri",
+				"$this->clientStyle/root-$this->clientStyle",
 				"root-general",
 				"reboot",
-				"$this->customerUri/"."$this->customerUri-base"
+				"$this->clientStyle/"."$this->clientStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
@@ -215,6 +220,8 @@ class NOVO_Controller extends CI_Controller {
 					"mfa/mfaControl"
 				);
 			}
+
+			$validateRecaptcha = in_array($this->controllerMethod, lang('CONF_VALIDATE_CAPTCHA'));
 
 			if ($validateRecaptcha) {
 				array_push(
@@ -242,7 +249,7 @@ class NOVO_Controller extends CI_Controller {
 	{
 		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
 
-		$this->load->model($this->modelClass,'modelLoaded');
+		$this->load->model($this->modelClass, 'modelLoaded');
 		$method = $this->modelMethod;
 
 		return $this->modelLoaded->$method($request);
@@ -338,14 +345,15 @@ class NOVO_Controller extends CI_Controller {
 		log_message('INFO', 'NOVO Controller: loadApiModel Method Initialized');
 
 		$responseModel = $this->tool_api->setResponseNotValid();
-		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: '.$this->modelClass.'/'.$this->modelMethod;
+		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: ' . $this->modelClass . '/' . $this->modelMethod;
 
 		if (file_exists(APPPATH."models/{$this->modelClass}.php")) {
-			$this->load->model($this->modelClass,'modelLoaded');
+			$this->load->model($this->modelClass, 'modelLoaded');
 
 			$method = $this->modelMethod;
 			$responseModel = $this->modelLoaded->$method($request);
-			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: '.$this->modelClass.'/'.$this->modelMethod;
+			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
+				$this->modelMethod;
 		}
 		log_message('DEBUG', $showMsgLog);
 

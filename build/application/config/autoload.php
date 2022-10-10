@@ -59,12 +59,12 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 $autoload['libraries'] = array(
+	'Asset',
 	'session',
 	'encrypt',
 	'parser',
 	'form_validation',
 	'user_agent',
-	'Asset',
 	'Encrypt_Connect',
 	'Connect_Services_Apis',
 	'Encrypt_Decrypt',
@@ -109,14 +109,14 @@ $autoload['helper'] = array(
 	'cdn',
 	'form',
 	'cookie',
-	'novo_server',
-	'novo_cryptography',
-	'novo_language',
-	'novo_toolset',
 	'encryption',
 	'connections',
 	'tools',
 	'menu',
+	'novo_server',
+	'novo_cryptography',
+	'novo_language',
+	'novo_toolset',
 );
 
 /*
