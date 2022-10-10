@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="transferView">
+<div id="toTransferView" class="option-service" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4>
     <div class="w-100">
@@ -11,13 +11,19 @@
         <!-- mobilePayment -->
         <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?> </span>
         <div class="line-text my-2"></div>
-        <form id="affiliations">
+        <div id="pre-loader" class="w-100 hide">
+          <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
+            <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+          </div>
+        </div>
+        <form id="affiliations" class="hide-out hide">
           <div class="row">
             <div class="form-group col-6 col-lg-4">
               <label for="directory"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
               <div class="form-control select-by-search p-0">
-								<input id="directory" type="hidden" name="directory" value="">
-                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory" autocomplete="off" value="">
+                <input id="directory" type="hidden" name="directory" value="">
+                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory"
+                  autocomplete="off">
                 <ul class="select-search pl-0">
                   <li value="1">james cameron</li>
                   <li value="2">steven spielberg</li>
@@ -73,7 +79,7 @@
               <input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
               <div class="help-block"></div>
             </div>
-						<div class="form-group col-6 col-lg-4">
+            <div class="form-group col-6 col-lg-4">
               <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
               <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
               <div class="help-block"></div>

@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="historyView">
+<div id="historyView" class="option-service" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text semibold primary"><?= lang('TRANSF_HISTORY') ?></h4>
     <div class="w-100">
@@ -18,10 +18,12 @@
           </div>
         </div>
         <div class="line-text my-2"></div>
-        <div id="results" class="mt-1 justify-center">
-          <div id="pre-loader" class="hide">
+        <div id="pre-loader" class="w-100 hide">
+          <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
             <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
           </div>
+        </div>
+        <div id="results" class="mt-1 justify-center hide-out hide">
           <ul id="movementsList" class="feed fade-in mt-3 pl-0 easyPaginateList">
             <li class="feed-item feed-expense flex py-2 items-center">
               <div class="flex px-2 flex-column items-center feed-date">
@@ -64,6 +66,11 @@
               <span class="px-2 feed-amount items-center">- $ 23.670.000,00</span>
             </li>
           </ul>
+        </div>
+        <div id="no-moves" class="hide">
+          <div class="flex flex-column items-center justify-center pt-5">
+            <h3 class="h4 regular mb-0"><?= lang('GEN_DATATABLE_SEMPTYTABLE'); ?></h3>
+          </div>
         </div>
       </div>
     </div>

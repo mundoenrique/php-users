@@ -97,7 +97,7 @@
   <?php endif; ?>
 </div>
 
-<div id="activeServices" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
+<div id="activeCardToCard" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
   <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
   <?php endif; ?>
