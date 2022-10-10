@@ -77,8 +77,7 @@ class Asset {
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
 		$customerUri = $customerUri ? $customerUri.'/' : '';
-		//eliminar despues de la certificación
-		$customerUri = checkTemporalTenant($customerUri);
+		$customerUri = tenantSameSettings($customerUri);
 		$file = assetPath($folder.'/'.$customerUri.$fileName);
 
 		if (!file_exists($file)) {

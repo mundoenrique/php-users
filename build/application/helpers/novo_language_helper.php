@@ -36,8 +36,7 @@ if (!function_exists('languageLoad')) {
 				break;
 			case 'specific':
 				$globalLan = APPPATH . 'language' . DIRECTORY_SEPARATOR . 'global' . DIRECTORY_SEPARATOR;
-				//eliminar despues de la certificación
-				$customerUri = checkTemporalTenant($customerUri);
+				$customerUri = tenantSameSettings($customerUri);
 
 				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
 					$CI->lang->load('config-core-'.$customerUri,);

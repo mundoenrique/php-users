@@ -310,8 +310,8 @@ if (!function_exists('uriRedirect')) {
 }
 
 //eliminar despues de la certificación
-if (! function_exists('checkTemporalTenant')) {
-	function checkTemporalTenant($customer) {
+if (! function_exists('tenantSameSettings')) {
+	function tenantSameSettings($customer) {
 		$pattern = ['/bog/'];
 		$replace = ['bdb'];
 		$customer = preg_replace($pattern, $replace, $customer);
