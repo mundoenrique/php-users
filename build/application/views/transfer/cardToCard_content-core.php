@@ -98,19 +98,7 @@
 </div>
 
 <div id="activeCardToCard" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/affiliate/affiliations_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
-  <?php $this->load->view('/transfer/affiliate/managementAffiliate_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
-  <?php endif; ?>
 </div>

@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="historyView" class="option-service" style="display:none">
+<div id="historyView" class="transfer-operation" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text semibold primary"><?= lang('TRANSF_HISTORY') ?></h4>
     <div class="w-100">

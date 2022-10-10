@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="manageAffiliationsView" class="option-service" style="display:none">
+<div id="manageAffiliationsView" class="transfer-operation" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_MANAGE_AFFILIATIONS') ?></h4>
     <div class="w-100">
@@ -26,7 +26,7 @@
               </div>
             </form>
           </div>
-					<div id="pre-loader" class="w-100">
+					<div id="pre-loader" class="w-100 hide">
 						<div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
 							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
 						</div>
@@ -70,3 +70,5 @@
     </div>
   </div>
 </div>
+
+<?php $this->load->view('/transfer/affiliate/managementAffiliate_content-core.php') ?>
