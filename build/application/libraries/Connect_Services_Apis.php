@@ -116,7 +116,7 @@ class Connect_Services_Apis
 				'Content-Type: application/json; charset=utf-8',
 				'accept: application/json; charset=utf-8',
 				'X-Request-Id: ' . $uuIdV4,
-				'X-Tenant-Id: ST-PE',
+				'X-Tenant-Id: pe-servitebca',
 			],
 			CURLOPT_POSTFIELDS => $request->requestBody
 		]);
