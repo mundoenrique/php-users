@@ -24,8 +24,8 @@ $(function () {
 		who = "Business";
 		where = "GetBalance";
 		$(".cover-spin").show(0);
+		$(".nav-config-box").removeClass("no-pointer");
 
-		console.log("card selected: ", data);
 		callNovoCore(who, where, data, function (response) {
 			$(".cover-spin").hide();
 			if (response.code == 0) {
@@ -54,16 +54,20 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			$(this).html(loader);
 			who = "transfer";
 			where = "affiliate";
 			data = getDataForm(form);
 			data.operationType = operationType;
+
 			insertFormInput(true);
+			$(this).html(loader);
+			$(".nav-config-box").addClass("no-pointer");
+
 			callNovoCore(who, where, data, function (response) {
-				$(e.target).html(btnText);
 				insertFormInput(false);
-				console.log(response);
+				$(e.target).html(btnText);
+				$(".nav-config-box").removeClass("no-pointer");
+
 				if (response.code == 0) {
 					appMessages(
 						response.title,
@@ -79,13 +83,34 @@ $(function () {
 	$("#transferBtn").on("click", function (e) {
 		e.preventDefault();
 		form = $("#transferForm");
+		btnText = $(this).text().trim();
 		validateForms(form);
 
 		if (form.valid()) {
+			who = "transfer";
+			where = "transfer";
 			data = getDataForm(form);
+			data.operationType = operationType;
 			data.currentOperKey = cryptoPass(data.currentOperKey);
-			$(this).html(loader);
+
 			insertFormInput(true);
+			$(this).html(loader);
+			$(".nav-config-box").addClass("no-pointer");
+
+			callNovoCore(who, where, data, function (response) {
+				insertFormInput(false);
+				$(e.target).html(btnText);
+				$(".nav-config-box").removeClass("no-pointer");
+
+				if (response.code == 0) {
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+				}
+			});
 		}
 	});
 });

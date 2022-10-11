@@ -115,8 +115,10 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
+		$this->render->activePointer = 'no-pointer';
 
 		if ($totalCards == 1) {
+			$this->render->activePointer = '';
 			foreach ($userCardList->data->cardsList[0] as $index => $render) {
 				$this->render->$index = $render;
 			}
