@@ -44,12 +44,11 @@ $(function() {
 		if (form.valid()) {
 			data = getDataForm(form);
 			data.operationType = otpProps.validateAction;
-			$(this).html(loader);
-			$(this).prop('disabled', true);
+			$(this)
+				.html(loader)
+				.prop('disabled', true);
 			who = 'Mfa';
 			where = 'ValidateTotp';
-			data = getDataForm(form);
-			data.operationType = otpProps.validateAction;
 			insertFormInput(true);
 
 			callNovoCore(who, where, data, function(response) {
@@ -102,10 +101,10 @@ function sendTopt() {
 				otpProps.msgContent = response.msg;
 				modalOtpValidate();
 				$('#accept').addClass('otp-validate');
-				insertFormInput(false);
-			break;
+				break;
 		}
 
+		insertFormInput(false);
 		coverSpin(false);
 	});
 }
