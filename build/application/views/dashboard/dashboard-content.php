@@ -107,3 +107,16 @@
 		return $texto;
 	}
 ?>
+
+<div id="dialog-monetary-reconversion" style='display:none'>
+	<div class="dialog-small" id="dialog">
+		<div class="alert-simple" id="message">
+			<div>
+				<img src="<?= base_url('assets/images/migracion-sgc.png') ?>" alt="Notificación" style="height: 410px; width: 430px;">
+			</div>
+		</div>
+		<div class="form-actions">
+			<button id="dialog-monetary" class="novo-btn-primary">Aceptar</button>
+		</div>
+	</div>
+</div>

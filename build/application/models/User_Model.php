@@ -46,7 +46,7 @@ class User_Model extends BDB_Model
 		$this->dataRequest->passwordAux = md5($password);
 		$this->dataRequest->ctipo = $dataRequest->active;
 
-		if (IP_VERIFY == 'ON') {
+		if (IP_VERIFY === 'ON') {
 			$this->dataRequest->codigoOtp = $infoOTP ;
 
 			if (isset($dataRequest->saveIP)){

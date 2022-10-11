@@ -8,26 +8,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author			J. Enrique Peñaloza P
  * @date				Novembre 23th, 2019
  */
+
 if (!function_exists('assetPath')) {
 	function assetPath($route = '') {
-		return get_instance()->config->item('asset_path').$route;
+		$CI =& get_instance();
+		return $CI->config->item('asset_path').$route;
 	}
 }
 
 if (!function_exists('assetUrl')) {
 	function assetUrl($route = '') {
-		return get_instance()->config->item('asset_url').$route;
+		$CI =& get_instance();
+		return $CI->config->item('asset_url').$route;
 	}
 }
 
 if (!function_exists('clientUrlValidate')) {
 	function clientUrlValidate($client) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$accessUrl = explode(',', ACCESS_URL);
 		array_walk($accessUrl, 'arrayTrim');
 		reset($accessUrl);
-		$uriCore = '/sign-in';
-		$uriCore = $client == 'bdb' ? '/inicio' : $uriCore;
+		$uriCore = $client === 'bdb' ? '/inicio' : '/sign-in';
 
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
@@ -38,9 +40,11 @@ if (!function_exists('clientUrlValidate')) {
 			switch ($client) {
 				case 'default':
 					redirect(base_url(), 'Location', 301);
+					exit();
 				break;
 				case 'pichincha':
 					redirect(base_url('pichincha/home'), 'Location', 301);
+					exit();
 				break;
 			}
 		}
@@ -78,7 +82,7 @@ if(!function_exists('dbSearch')) {
 
 if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
-		$CI = &get_instance();
+		$CI =& get_instance();
 
 		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
 			if ($pos == '__ci_last_regenerate') {
@@ -92,7 +96,7 @@ if (!function_exists('clearSessionVars')) {
 
 if (!function_exists('accessLog')) {
 	function accessLog($dataAccessLog) {
-		$CI = &get_instance();
+		$CI =& get_instance();
 
 		return $accessLog = [
 			"sessionId"=> $CI->session->sessionId ?? '',
@@ -115,63 +119,6 @@ if (!function_exists('maskString')) {
 		$length = strlen($string);
 
 		return substr($string, 0, $start).str_repeat('*', 3).$type.str_repeat('*', 3).substr($string, $length - $end, $end);
-	}
-}
-
-if (!function_exists('languageLoad')) {
-	function languageLoad($call, $class) {
-		$CI = &get_instance();
-		$languagesFile = [];
-		$loadLanguages = FALSE;
-		$configLanguage = $CI->config->item('language');
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
-		$customerUri = $call == 'specific' ? $CI->config->item('customer-uri') : '';
-		$class = lcfirst(str_replace('Novo_', '', $class));
-		$CI->config->set_item('language', 'global');
-
-		log_message('INFO', 'NOVO Language '.$call.', HELPER: Language Load Initialized for class: '.$class);
-
-		switch ($call) {
-			case 'generic':
-				$CI->lang->load(['config-core', 'images']);
-			break;
-			case 'specific':
-				$globalLan = APPPATH.'language'.DIRECTORY_SEPARATOR.'global'.DIRECTORY_SEPARATOR;
-				//eliminar despues de la certificación
-				$customerUri = checkTemporalTenant($customerUri);
-
-				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
-					$CI->lang->load('config-core-'.$customerUri,);
-				}
-
-				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
-					$CI->lang->load('images_'.$customerUri);
-				}
-			break;
-		}
-
-		$CI->config->set_item('language', $configLanguage);
-
-		if ($call == 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
-				array_push($languagesFile, 'general');
-				$loadLanguages = TRUE;
-			}
-
-			if (file_exists($pathLang.'validate_lang.php')) {
-				array_push($languagesFile, 'validate');
-				$loadLanguages = TRUE;
-			}
-		}
-
-		if (file_exists($pathLang.$class.'_lang.php')) {
-			array_push($languagesFile, $class);
-			$loadLanguages = TRUE;
-		}
-
-		if ($loadLanguages) {
-			$CI->lang->load($languagesFile);
-		}
 	}
 }
 
@@ -345,23 +292,9 @@ if (! function_exists('floatFormat')) {
 	}
 }
 
-if (! function_exists('languageCookie')) {
-	function languageCookie($language) {
-
-		$baseLanguage = [
-			'name' => 'baseLanguage',
-			'value' => $language,
-			'expire' => 0,
-			'httponly' => TRUE
-		];
-
-		set_cookie($baseLanguage);
-	}
-}
-
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
-		$CI = get_instance();
+		$CI =& get_instance();
 		$redirectLink = lang('CONF_LINK_SIGNIN');
 
 		if ($CI->session->has_userdata('logged')) {
@@ -377,8 +310,8 @@ if (!function_exists('uriRedirect')) {
 }
 
 //eliminar despues de la certificación
-if (! function_exists('checkTemporalTenant')) {
-	function checkTemporalTenant($customer) {
+if (! function_exists('tenantSameSettings')) {
+	function tenantSameSettings($customer) {
 		$pattern = ['/bog/'];
 		$replace = ['bdb'];
 		$customer = preg_replace($pattern, $replace, $customer);

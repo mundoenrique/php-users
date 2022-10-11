@@ -139,7 +139,8 @@ defined('LOG_PATH')					OR define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
 defined('ENCRYPTION_KEY')		OR define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
 defined('SESS_DRIVER')			OR define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'files');
 defined('SESS_COOKIE_NAME')	OR define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
-defined('SESS_EXPIRATION')	OR define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
+defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
+defined('SESS_EXPIRATION')	OR define('SESS_EXPIRATION', ACTIVE_SAFETY ? intval($_SERVER['SESS_EXPIRATION']) : 0);
 defined('SESS_SAVE_PATH')		OR define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
 defined('COOKIE_PREFIX')		OR define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')		OR define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
@@ -152,15 +153,14 @@ defined('PROXY_IPS')				OR define('PROXY_IPS', $proxyIps == 'private' ? $_SERVER
 |--------------------------------------------------------------------------
 */
 defined('ERROR_CONTROLLER')	OR define('ERROR_CONTROLLER', $errorController);
-defined('ACTIVE_SAFETY')		OR define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY']);
 defined('CYPHER_BASE')			OR define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')				OR define('ACCESS_URL', $_SERVER['ACCESS_URL']);
-defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] == 'ON' ? TRUE : FALSE);
+defined('ACTIVE_RECAPTCHA')	OR define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('LANGUAGE')					OR define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
-defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY'] ?? 'ON');
-defined('CUSTOMER_VERIFY')	OR define('CUSTOMER_VERIFY', $_SERVER['CUSTOMER_VERIFY'] ?? 'ON');
-defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] ?? 'ON');
+defined('IP_VERIFY')				OR define('IP_VERIFY', $_SERVER['IP_VERIFY']);
+defined('DB_VERIFY')				OR define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 defined('UPLOAD_PATH')			OR define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
+defined('API_GEE_WAY')			OR define('API_GEE_WAY', $_SERVER['API_GEE_WAY'] === 'ON' ? TRUE : FALSE);
 
 /*
 |--------------------------------------------------------------------------
@@ -180,14 +180,18 @@ defined('DB_COLLATION')	OR define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'u
 | SERVICE ENVIROMENT VARIABLES
 |--------------------------------------------------------------------------
 */
-defined('WS_KEY')			 		OR define('WS_KEY', $_SERVER['WS_KEY']);
-defined('OAUTH_URL')			OR define('OAUTH_URL', $_SERVER['OAUTH_URL']);
-defined('URL_API')				OR define('URL_API', $_SERVER['URL_API']);
-defined('URL_API_SERV')		OR define('URL_API_SERV', $_SERVER['URL_API_SERV']);
-defined('CLIENT_ID')			OR define('CLIENT_ID', $_SERVER['CLIENT_ID']);
-defined('CLIENT_SECRET')	OR define('CLIENT_SECRET', $_SERVER['CLIENT_SECRET']);
-defined('KEY_AES256')			OR define('KEY_AES256', $_SERVER['KEY_AES256']);
-defined('IV_AES256')			OR define('IV_AES256', $_SERVER['IV_AES256']);
+defined('WS_KEY')			 					OR define('WS_KEY', $_SERVER['WS_KEY']);
+defined('URL_MFA_SERV')					OR define('URL_MFA_SERV', $_SERVER['URL_MFA_SERV']);
+defined('OAUTH_URL')						OR define('OAUTH_URL', $_SERVER['OAUTH_URL']);
+defined('URL_API')							OR define('URL_API', $_SERVER['URL_API']);
+defined('URL_API_SERV')					OR define('URL_API_SERV', $_SERVER['URL_API_SERV']);
+defined('URL_APIGEE_OAUTH')			OR define('URL_APIGEE_OAUTH', $_SERVER['URL_APIGEE_OAUTH']);
+defined('CLIENT_ID')						OR define('CLIENT_ID', $_SERVER['CLIENT_ID']);
+defined('CLIENT_SECRET')				OR define('CLIENT_SECRET', $_SERVER['CLIENT_SECRET']);
+defined('KEY_AES256')						OR define('KEY_AES256', $_SERVER['KEY_AES256']);
+defined('IV_AES256')						OR define('IV_AES256', $_SERVER['IV_AES256']);
+defined('CLIENT_ID_APIGEE')			OR define('CLIENT_ID_APIGEE', $_SERVER['CLIENT_ID_APIGEE']);
+defined('CLIENT_SECRET_APIGEE')	OR define('CLIENT_SECRET_APIGEE', $_SERVER['CLIENT_SECRET_APIGEE']);
 
 /*
 |--------------------------------------------------------------------------
@@ -208,4 +212,3 @@ defined('ARGON2_SALT')					OR define('ARGON2_SALT', $_SERVER['ARGON2_SALT']);
 defined('KEY_API')	OR define('KEY_API', $_SERVER['KEY_API']);
 
 unset($uriSegments, $proxyIps, $timeZone, $baseLanguage, $errorController);
-

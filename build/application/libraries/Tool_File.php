@@ -15,7 +15,7 @@ class Tool_File {
 	{
 		log_message('INFO', 'NOVO Tool_File Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$this->user = $_POST['nickName'] ?? $this->CI->session->userName;
 	}
 	/**

@@ -13,7 +13,7 @@ $(function () {
 
 	$('#pre-loader').remove();
 	$('.hide-out').removeClass('hide');
-	$('.cover-spin').hide();
+	coverSpin(false);
 	longProfile = $('#longProfile').val();
 	formFile = $('#profileUserForm');
 	skipFields = getIgnoredFields(formFile);

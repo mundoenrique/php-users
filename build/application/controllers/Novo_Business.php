@@ -25,7 +25,10 @@ class Novo_Business extends NOVO_Controller {
 
 		array_push(
 			$this->includeAssets->jsFiles,
-			"business/userCardsList"
+			"business/userCardsList",
+			"third_party/jquery.validate",
+			"form_validation",
+			"third_party/additional-methods"
 		);
 
 		$request = (array) $this->request;

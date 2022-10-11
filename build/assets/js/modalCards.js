@@ -73,23 +73,18 @@ $(function () {
 		$('#cardNumberMask').val(cardNumberMask);
 		$('#prefix').val(prefix);
 		$('#status').val(status);
-		$('#system-info').dialog('destroy');
-	});
-
-	$('#system-info').on('click', '.close-card-modal', function (e) {
-		$('#cancel').removeClass('close-card-modal');
-		$('#system-info').dialog('destroy');
+		modalDestroy(true);
 	});
 });
 
 function cardModal() {
 	var inputModal = $('#cardListModal').html();
 	$('.nav-config-box').removeClass('no-pointer');
-	$('#cancel').addClass('close-card-modal');
+
 	modalBtn = {
 		btn2: {
 			text: lang.GEN_BTN_CANCEL,
-			action: 'none'
+			action: 'destroy'
 		},
 		maxHeight: 600,
 		width: 655,

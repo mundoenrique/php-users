@@ -16,7 +16,7 @@ class Asset {
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 		$_SERVER['REMOTE_ADDR'] = $this->CI->input->ip_address();
 	}
 	/**
@@ -42,13 +42,7 @@ class Asset {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				$customerUri = $this->CI->config->item('customer-uri').'/';
-				$rootCss = 't-'.$this->CI->config->item('customer-uri');
-				$baseCss = $this->CI->config->item('customer-uri').'-';
-				$search = [$customerUri, $rootCss, $baseCss];
-				$replace = ['default/', 't-default', 'default-'];
-				$file = str_replace($search, $replace, $file);
-				$fileName = str_replace($search, $replace, $fileName);
+				log_message('ERROR', 'Archivo requerido '.$fileName.'.css');
 			}
 
 			$file = $this->versionFiles($file, $fileName, '.css');
@@ -83,8 +77,7 @@ class Asset {
 		log_message('INFO', 'NOVO Asset: insertFile method initialized');
 
 		$customerUri = $customerUri ? $customerUri.'/' : '';
-		//eliminar despues de la certificación
-		$customerUri = checkTemporalTenant($customerUri);
+		$customerUri = tenantSameSettings($customerUri);
 		$file = assetPath($folder.'/'.$customerUri.$fileName);
 
 		if (!file_exists($file)) {

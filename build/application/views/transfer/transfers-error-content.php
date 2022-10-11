@@ -5,10 +5,9 @@
     </header>
     <section>
       <div id="content-clave">
-        <h2>Estimado usuario</h2>
+        <h2>Operación no permitida</h2>
         <p>
-          Estamos trabajando para restablecer el servicio de transferencias. Pedimos disculpas por los inconvenientes
-          que podamos ocasionarles
+          No tienes cuentas asociadas con funcionalidad para este tipo de operaciones.
         </p>
         <div class="empty-state-actions">
           <a class="button" href="<? echo $this->config->item(" base_url"); ?>/dashboard" rel="section">Regresar</a>

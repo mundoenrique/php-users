@@ -3,7 +3,7 @@
 	<footer class="main-footer">
 		<?php if(lang('CONF_FOOTER_MARK') == 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
-			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $customerUri); ?> " alt="Superintendencia de Bancos">
+			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $clientStyle); ?> " alt="Superintendencia de Bancos">
 		</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
@@ -17,7 +17,7 @@
 			</div>
 			<?php endif; ?>
 			<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
-			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $customerUri); ?>"
+			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $clientStyle); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images'); ?>" alt="Logo PCI">
@@ -62,8 +62,12 @@
   </p>
   <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
     <div class="ui-dialog-buttonset novo-dialog-buttonset flex">
-      <button type="button" id="cancel" class="btn-modal btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL'); ?></button>
-      <button type="button" id="accept" class="btn-modal btn btn-small btn-loading btn-primary"><?= lang('GEN_BTN_ACCEPT'); ?></button>
+      <button type="button" id="cancel" class="<?= lang('CONF_MODAL_BTN_CLASS')['cancel']; ?>">
+				<?= lang('GEN_BTN_CANCEL'); ?>
+			</button>
+      <button type="button" id="accept" class="<?= lang('CONF_MODAL_BTN_CLASS')['accept']; ?>">
+				<?= lang('GEN_BTN_ACCEPT'); ?>
+		</button>
     </div>
   </div>
 </div>
@@ -116,3 +120,6 @@
 </section>
 <?php endif; ?>
 <?php endif; ?>
+<form id="requestForm" method="post">
+	<input type="hidden" id="traslate" name="traslate" value="<?= ACTIVE_SAFETY ?>">
+</form>
