@@ -50,3 +50,7 @@ $lang['TRANSF_ERASE'] = 'Erase';
 $lang['TRANSF_AVAILABLE_BALANCE'] = 'Available';
 $lang['TRANSF_CHANGE_OPERKEY'] = 'If you wish to change your password, please complete the following information.';
 $lang['TRANSF_NEW_KEY_OPER'] = 'New operations key';
+$lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Affiliate successfully saved.';
+$lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'Failed to save new affiliate.';
+$lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Affiliate updated successfully.';
+$lang['TRANSF_FAILED_AFFILIATE_UPDATE'] = 'Failed to upgrade affiliate.';
