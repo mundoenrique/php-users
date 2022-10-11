@@ -67,6 +67,23 @@ class NOVO_Model extends CI_Model {
 
 		return $this->makeAnswer($responseDecrypt);
 	}
+
+	/**
+	 * @info Método para comunicación con el microservicio
+	 * @author Luis Molina.
+	 * @date MJun 16th, 2022
+	 */
+	public function sendToCoreServices($model)
+	{
+		log_message('INFO', 'NOVO Model: sendToCoreServices Method Initialized');
+
+		$request = $this->encrypt_decrypt->encryptCoreServices($this->dataRequest, $model);
+		$response = $this->connect_services_apis->connectMfaServices($request, $model);
+		$decryptResponse = $this->encrypt_decrypt->decryptCoreServices($response, $model);
+
+		return $this->makeAnswer($decryptResponse);
+	}
+
 	/**
 	 * @info Método para comunicación con el servicio
 	 * @author J. Enrique Peñaloza Piñero.
@@ -127,7 +144,7 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->response->modalBtn = $arrayResponse;
-		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
 
 		return $responseModel;
 	}

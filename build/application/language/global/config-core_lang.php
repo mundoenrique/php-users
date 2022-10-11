@@ -4,10 +4,6 @@ $lang['CONF_SUPPORT_IE'] = 'OFF';
 $lang['CONF_MAINTENANCE'] = 'OFF';
 $lang['CONF_MAINTENANCE_RC'] = 9997;
 $lang['CONF_TENANT_PUBLICATION'] = 2010;
-$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
-$lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
-$lang['CONF_CYPHER_DATA'] = ACTIVE_SAFETY ?? 'ON';
-$lang['CONF_DUPLICATE_SESSION'] = ACTIVE_SAFETY ?? 'ON';
 $lang['CONF_ARGON2_ACTIVE'] = 'OFF';
 $lang['CONF_DATATABLE_SINFOPOSTFIX'] = '';
 $lang['CONF_DATATABLE_SSEARCH'] = '';
@@ -31,10 +27,18 @@ $lang['CONF_DOWNLOAD_STATEMENT'] = 'OFF';
 $lang['CONF_CURRENCY'] = '$';
 $lang['CONF_DECIMAL'] = '.';
 $lang['CONF_THOUSANDS'] = ',';
+$lang['CONF_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
+$lang['CONF_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['CONF_VALIDATE_CAPTCHA'] = [
 	'signin',
 	'accessRecover',
 	'userIdentify'
+];
+$lang['CONF_REDIRECT_RULE'] = [
+	'profileUser',
+	'mfaEnable',
+	'mfaConfirm',
+	'finishSession',
 ];
 $lang['CONF_RC_DEFAULT'] = -9999;
 $lang['CONF_DEFAULT_CODE'] = 4;
@@ -51,8 +55,12 @@ $lang['CONF_VALID_ELEMENT'] = 'div';
 $lang['CONF_VALID_INVALID_USER'] = 'invalid-user';
 $lang['CONF_VALID_INACTIVE_USER'] = 'inactive-user';
 $lang['CONF_VALID_POSITION'] = 'left';
-$lang['CONF_VALIDATE_IP'] = 'ON';
+$lang['CONF_IP_VERIFY'] = IP_VERIFY;
 $lang['CONF_MODAL_WIDTH'] = 370;
+$lang['CONF_MODAL_BTN_CLASS'] = [
+	'cancel' => 'btn-modal btn btn-small btn-link',
+	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+];
 $lang['CONF_ICON'] = 'mt-0 ui-icon';
 $lang['CONF_ICON_SUCCESS'] = 'ui-icon-circle-check';
 $lang['CONF_ICON_INFO'] = 'ui-icon-info';
@@ -77,6 +85,7 @@ $lang['CONF_REPORTS'] = 'ON';
 $lang['CONF_PORFILE'] = 'ON';
 $lang['CONF_NOTIFICATIONS'] = 'OFF';
 $lang['CONF_PROFILE'] = 'ON';
+$lang['CONF_MFA_ACTIVE'] = 'OFF';
 $lang['CONF_SIGNIN_IMG'] = 'OFF';
 $lang['CONF_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['CONF_SIGNIN_WIDGET_CONTACT'] = 'ON';
@@ -164,6 +173,8 @@ $lang['CONF_LINK_RECOVER_ACCESS'] = 'recover-access';
 $lang['CONF_LINK_USER_IDENTIFY'] = 'user-identify';
 $lang['CONF_LINK_CHANGE_PASS'] = 'change-password';
 $lang['CONF_LINK_USER_PROFILE'] = 'user-profile';
+$lang['CONF_LINK_MFA_ENABLE'] = 'mfa-enable';
+$lang['CONF_LINK_MFA_CONFIRM'] = 'mfa-confirm';
 $lang['CONF_LINK_CARD_LIST'] = 'card-list';
 $lang['CONF_LINK_CARD_DETAIL'] = 'card-detail';
 $lang['CONF_LINK_PAYS_TRANSFER'] = $lang['CONF_NO_LINK'];
@@ -175,6 +186,13 @@ $lang['CONF_LINK_DIGITEL'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_REPORTS'] = 'reports';
 $lang['CONF_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['CONF_LINK_NOTIFICATIONS'] = 'notifications';
+$lang['CONF_LINK_MFA_APPS'] = [
+	'Google Authenticator'	  => 'https://support.google.com/accounts/answer/1066447?hl=es&co=GENIE.Platform%3DAndroid',
+	'Microsoft Authenticator' => 'https://www.microsoft.com/es-es/security/mobile-authenticator-app',
+	'Authy' 									=> 'https://authy.com/',
+	'LastPass Authenticator' 	=> 'https://www.lastpass.com/solutions/authentication',
+	'1password' 						  => 'https://1password.com/',
+];
 $lang['CONF_FOTTER_NETWORKS_LINK'] = [
 	'facebook' => $lang['CONF_NO_LINK'],
 	'twitter' => $lang['CONF_NO_LINK'],
@@ -200,6 +218,7 @@ $lang['CONF_REGEX_ALPHANUM_UNDER'] = '^([\w.\-+&ñÑ .,_\@\* ]+)+$';
 $lang['CONF_REGEX_ALPHANUM'] = '^[a-z0-9]+$';
 $lang['CONF_REGEX_NUMERIC'] = '^[0-9]+$';
 $lang['CONF_REGEX_PHONE'] = '^[0-9]{7,15}$';
+$lang['CONF_REGEX_TWO_FACTOR'] = '^[0-9]{6}$';
 $lang['CONF_REGEX_PHONE_MASKED'] = '^[0-9*]{7,20}$';
 $lang['CONF_REGEX_FLOAT_AMOUNT'] = '^[0-9\.,]+(\.,[0-9]{2})?$';
 $lang['CONF_REGEX_DATE_DMY'] = '^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/[0-9]{4}$';
@@ -209,3 +228,11 @@ $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
 $lang['CONF_REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
+$lang['CONF_MFA_EMAIL'] = 'email';
+$lang['CONF_MFA_APP'] = 'app';
+$lang['CONF_MFA_CHANNEL_APP'] = 'THIRD_PARTY_APP';
+$lang['CONF_MFA_CHANNEL_EMAIL'] = 'EMAIL';
+$lang['CONF_MFA_ACTIVATE'] = 'activate';
+$lang['CONF_MFA_DEACTIVATE'] = 'deactivate';
+$lang['CONF_MFA_GENERATE_OTP'] = 'generate';
+$lang['CONF_MFA_VALIDATE_OTP'] = 'validate';

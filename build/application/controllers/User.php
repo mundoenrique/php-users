@@ -9,8 +9,7 @@ class User extends BDB_Controller
 		parent::__construct();
 		log_message('INFO', 'NOVO User Controller class Initialized');
 
-		$this->CI = &get_instance();
-    $this->key_api = $this->CI->config->item('key_api');
+    $this->key_api = $this->config->item('key_api');
 	}
 
 	public function login()

@@ -51,7 +51,7 @@ class Users_model extends CI_Model
 			//'Ve'
 		);
 
-		if (IP_VERIFY == 'ON') {
+		if (IP_VERIFY === 'ON') {
 			$data['codigoOtp'] = $infoOTP;
 			$data['guardaIp'] = $saveIP;
 		}

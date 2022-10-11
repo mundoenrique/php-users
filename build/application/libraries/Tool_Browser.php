@@ -11,7 +11,7 @@ class Tool_Browser {
 	public function __construct()
 	{
 		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info Método para determinar que el navegador es compatible con la aplicación
@@ -22,7 +22,6 @@ class Tool_Browser {
 	{
 		log_message('INFO', 'NOVO Tool_Browser: validBrowser Method Initialized');
 
-		$this->CI->load->library('user_agent');
 		$valid = FALSE;
 		$platform = 'Unidentified';
 		$browsersIn = FALSE;
@@ -42,25 +41,18 @@ class Tool_Browser {
 			$version = floatval($this->CI->agent->version());
 
 			if(array_key_exists($browser, $validBrowser)) {
-				if(lang('CONF_SUPPORT_IE') == 'ON') {
-					$validBrowser['Internet Explorer'] = 10;
-				}
 
 				log_message('DEBUG', 'NOVO validBrowser: browser access '.$browser.' version '.$version);
 
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
-
-				if($valid && $browser === 'Internet Explorer') {
-					$valid = 'ie11';
-				}
 			}
 		}
 
 		if($this->CI->agent->is_mobile()) {
 			$platform = 'mobile';
 			if (!$valid) {
-				$valid = $this->CI->router->fetch_method() == 'termsConditions';
+				$valid = $this->CI->router->fetch_method() === 'termsConditions';
 			}
 		}
 
@@ -101,7 +93,7 @@ class Tool_Browser {
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
 
-		log_message('DEBUG', 'NOVO validBrowser: platform access '.$platform);
+		log_message('DEBUG', 'NOVO validBrowser: platform access ' . $platform);
 
 		return $valid;
 	}

@@ -92,7 +92,7 @@ class Cryptography {
 	 */
 	public function decryptOnlyOneData ($data)
 	{
-		if (lang('CONF_CYPHER_DATA') == 'ON') {
+		if (ACTIVE_SAFETY) {
 			$data = json_decode(base64_decode($data));
 			$data = $this->decrypt(
 				base64_decode($data->plot),

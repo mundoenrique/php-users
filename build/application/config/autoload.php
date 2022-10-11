@@ -60,11 +60,14 @@ $autoload['packages'] = array();
 */
 $autoload['libraries'] = array(
 	'Asset',
-	'encrypt',
 	'session',
+	'encrypt',
 	'parser',
 	'form_validation',
+	'user_agent',
 	'Encrypt_Connect',
+	'Connect_Services_Apis',
+	'Encrypt_Decrypt',
 	'Tool_Api',
 	'Tool_File',
 	'Cryptography',
@@ -104,14 +107,16 @@ $autoload['helper'] = array(
 	'url',
 	'language',
 	'cdn',
+	'form',
+	'cookie',
 	'encryption',
 	'connections',
 	'tools',
-	'form',
-	'cookie',
 	'menu',
+	'novo_server',
+	'novo_cryptography',
 	'novo_language',
-	'novo_toolset'
+	'novo_toolset',
 );
 
 /*

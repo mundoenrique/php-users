@@ -39,7 +39,7 @@ class BDB_Model extends CI_Model {
 		$this->isResponseRc = 'No web service';
 		$this->token = $this->session->userdata('token') ?: '';
 		$this->userName = mb_strtoupper($this->session->userdata('userName'));
-		$this->lang->load(['error','general', 'response'], 'base-spanish' );
+		$this->lang->load(['error','general', 'response'], 'base-bdb' );
 		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
 	}
 

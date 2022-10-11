@@ -60,7 +60,7 @@ if(!function_exists('getTokenOauth'))
 	*/
 	function getTokenOauth($clientId, $ClientSecret)
 	{
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$url = OAUTH_URL;
 		log_message('INFO', '<===Iniciando llamado al API OAUTH===>' . $url);
 		log_message('DEBUG', 'ClientId: ==>' . $clientId . ', ClientSecret: ==>' . $ClientSecret);
@@ -116,7 +116,7 @@ if(!function_exists('connectionAPI'))
 		$method = $objectAPI->method;
 		log_message('INFO', 'ConnectionAPI:==>> ' . json_encode($objectAPI));
 		log_message('DEBUG', 'Iniciando el llamado al API por el metodo:==>> ' . $method);
-		$CI = &get_instance();
+		$CI =& get_instance();
 		$responseOauth = getTokenOauth(CLIENT_ID, CLIENT_SECRET);
 		$httpCode = $responseOauth->httpCode;
 		$responseAPI = json_decode($responseOauth->respOauth);

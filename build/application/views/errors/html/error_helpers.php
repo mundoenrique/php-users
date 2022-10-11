@@ -2,7 +2,7 @@
 
 $skins = ['default', 'pichincha'];
 $currentSkin = 'tebca';
-$CI = get_instance();
+$CI =& get_instance();
 
 if (isset($_COOKIE['cpo_skin']) && in_array($_COOKIE['cpo_skin'], $skins)) {
 	$currentSkin = $_COOKIE['cpo_skin'] !== 'default'
