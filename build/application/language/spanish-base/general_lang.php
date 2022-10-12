@@ -217,3 +217,4 @@ $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_NO_RESULTS"] = 'Sin resultados';
