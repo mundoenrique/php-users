@@ -21,6 +21,8 @@ $(function () {
 		var isVirtual = $(event).find('input[type=hidden][name="isVirtual"]').val();
 		var module = $(event).find('input[type=hidden][name="module"]').val();
 
+		$('.nav-config-box').removeClass('no-pointer');
+
 		if (module == 'services' && status != '' && status != 'PB') {
 			return true;
 		}
@@ -79,7 +81,6 @@ $(function () {
 
 function cardModal() {
 	var inputModal = $('#cardListModal').html();
-	$('.nav-config-box').removeClass('no-pointer');
 
 	modalBtn = {
 		btn2: {
