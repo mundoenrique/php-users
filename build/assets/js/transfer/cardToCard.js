@@ -37,8 +37,45 @@ $(function () {
 	});
 
 	$("#editAffiliate, #newAffiliate").on("click", function (e) {
+		var bankField = $("#manageAffiliateView #bank");
+		var currentBank = bankField.val()
+			? bankField.val()
+			: "";
 		$("#manageAffiliationsView").hide();
 		$("#manageAffiliateView").fadeIn(700, "linear");
+
+		bankField.prop("disabled", true);
+		bankField.find("option").get(0).remove();
+		bankField.append(
+			`<option value="" selected disabled>${lang.TRANSF_WAITING_BANKS}</option>`
+		);
+
+		who = "transfer";
+		where = "getBanks";
+
+		callNovoCore(who, where, {}, function (response) {
+			if (response.code == 0) {
+				var selected;
+				$.each(response.data, function (pos, bank) {
+					selected = currentBank == bank.codBcv;
+					bankField.append(
+						`<option value="${bank.codBcv}"${selected ? " selected" : ""}>${
+							bank.nomBanco
+						}</option>`
+					);
+				});
+
+				bankField.find("option").get(0).remove();
+
+				if (currentBank == "") {
+					bankField.prepend(
+						`<option value="" selected disabled>${lang.GEN_SELECTION}</option>`
+					);
+				}
+			}
+
+			bankField.prop("disabled", false);
+		});
 	});
 
 	$("#affiliateCancelBtn").on("click", function (e) {

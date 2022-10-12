@@ -232,7 +232,7 @@ $config = [
 	'generateTotp' => [
 		[
 			'field' => 'operationType',
-			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
+			'rules' => 'trim|regex_match[/^(generate|deactivate)/]|required'
 		],
 	],
 	'validateTotp' => [
@@ -308,6 +308,12 @@ $config = [
 			'field' => 'currentPass',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		],
+	],
+	'getBanks' => [
+		[
+			'field' => 'something',
+			'rules' => 'trim'
+		]
 	],
 	'affiliate' => [
 		[
@@ -1491,11 +1497,11 @@ $config = [
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
-		],
-		'keepsession' => [
-			[
-				'field' => 'signout',
-				'rules' => 'trim|alpha|required'
-			]
-		],
+	],
+	'keepsession' => [
+		[
+			'field' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
 ];

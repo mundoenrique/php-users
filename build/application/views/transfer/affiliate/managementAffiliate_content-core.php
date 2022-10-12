@@ -17,7 +17,6 @@
               <label for="bank"><?= lang('TRANSF_BANK') ?></label>
               <select id="bank" class="custom-select form-control" name="bank">
                 <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                <option value="Cedula">Bancaribe</option>
               </select>
               <div class="help-block"></div>
             </div>

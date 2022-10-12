@@ -50,6 +50,7 @@ $lang['TRANSF_ERASE'] = 'Borrar';
 $lang['TRANSF_AVAILABLE_BALANCE'] = 'Disponible';
 $lang['TRANSF_CHANGE_OPERKEY'] = 'Si deseas cambiar tu clave de operaciones, por favor completa los siguientes datos.';
 $lang['TRANSF_NEW_KEY_OPER'] = 'Nueva clave de operaciones';
+$lang['TRANSF_WAITING_BANKS'] = 'Esperando bancos';
 $lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Afiliado guardado de forma exitosa.';
 $lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'No fue posible guardar nuevo afiliado.';
 $lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Afiliado actualizado de forma exitosa.';
