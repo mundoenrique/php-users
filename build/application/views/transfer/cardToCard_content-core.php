@@ -56,7 +56,7 @@
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box <?= $activePointer ?>">
-        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards >= 1 ? 'active' : '' ?>">
+        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards === 1 ? 'active' : '' ?>">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
             <h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>

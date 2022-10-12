@@ -6,6 +6,11 @@ $(function () {
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
 
+	$('#system-info').on('click', '.dashboard-item', function (e) {
+		$('#toTransferView').show();
+		$('#toTransfer').addClass('active');
+	});
+
 	$.each(liOptions, function (pos, liOption) {
 		$("#" + liOption.id).on("click", function (e) {
 			var liOptionId = e.currentTarget.id;
