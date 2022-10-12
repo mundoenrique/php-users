@@ -21,7 +21,7 @@ $(function () {
 		var isVirtual = $(event).find('input[type=hidden][name="isVirtual"]').val();
 		var module = $(event).find('input[type=hidden][name="module"]').val();
 
-		$('.nav-config-box').removeClass('no-pointer');
+		$('.nav-config-box li').removeClass('no-pointer');
 
 		if (module == 'services' && status != '' && status != 'PB') {
 			return true;

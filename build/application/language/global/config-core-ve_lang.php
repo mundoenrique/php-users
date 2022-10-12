@@ -16,6 +16,4 @@ $lang['CONF_PAYMENTS'] = 'ON';
 $lang['CONF_MOBILE_PAYMENT'] = 'ON';
 $lang['CONF_BETWEEN_CARDS'] = 'ON';
 $lang['CONF_BANKS'] = 'ON';
-$lang['CONF_CREDIT_CARDS'] = 'ON';
-$lang['CONF_SERVICES'] = 'ON';
-$lang['CONF_DIGITEL'] = 'ON';
+$lang['CONF_SERVICES'] = 'OFF';

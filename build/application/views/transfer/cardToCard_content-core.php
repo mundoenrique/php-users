@@ -8,7 +8,7 @@
           <div class="line-text w-100">
             <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
               <div class="flex flex-column justify-center col-auto pb-4 pt-4 pr-0"">
-								<div class="product-presentation relative">
+								<div class=" product-presentation relative">
                 <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0) : ?>
                 <div id="donor" class="product-search btn">
@@ -16,7 +16,8 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>"
+                  alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
               <?php if ($totalCards == 1 && $isVirtual) : ?>
@@ -55,8 +56,8 @@
 
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
-      <ul class="flex flex-wrap justify-center nav-config-box <?= $activePointer ?>">
-        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards === 1 ? 'active' : '' ?>">
+      <ul class="flex flex-wrap justify-center nav-config-box">
+        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards === 1 ? 'active' : '' ?> <?= $activePointer ?>">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
             <h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>
@@ -76,7 +77,7 @@
             </div>
           </a>
         </li>
-        <li id="history" class="list-inline-item nav-item-config mr-1">
+        <li id="history" class="list-inline-item nav-item-config mr-1 <?= $activePointer ?>">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-history h0 icon-color"></span>
             <h5 class="center"><span class="status-text1"><?= lang('TRANSF_HISTORY'); ?></span></h5>

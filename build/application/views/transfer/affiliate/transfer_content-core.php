@@ -108,7 +108,7 @@
           </div>
           <div class="line my-2"></div>
           <div class="flex items-center justify-end pt-3">
-            <button id="deleteBtn" class="btn btn-small btn-loading btn-primary mx-2" type="submit"><?= lang('TRANSF_ERASE') ?></button>
+            <button id="deleteBtn" class="btn btn-small btn-loading btn-primary mx-2" type="reset"><?= lang('TRANSF_ERASE') ?></button>
             <button id="transferBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
           </div>
         </form>

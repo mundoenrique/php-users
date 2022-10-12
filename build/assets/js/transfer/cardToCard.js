@@ -7,6 +7,8 @@ $(function () {
 	$(".hide-out").removeClass("hide");
 
 	$('#system-info').on('click', '.dashboard-item', function (e) {
+		$('#manageAffiliations').removeClass('active');
+		$('#manageAffiliationsView').css('display', 'none');
 		$('#toTransferView').show();
 		$('#toTransfer').addClass('active');
 	});
