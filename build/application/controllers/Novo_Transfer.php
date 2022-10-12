@@ -103,10 +103,11 @@ class Novo_Transfer extends NOVO_Controller {
 			"transfer/cardToCard"
 		);
 
-		$this->load->model('Novo_Business_Model', 'business');
+		$this->modelClass = 'Novo_Business_Model';
+		$this->modelMethod = 'callWs_CardListOperations_Business';
 		$this->request->operation = 'Transferencias';
 		$this->request->operType = 'P2P';
-		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
+		$userCardList = $this->loadModel($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
