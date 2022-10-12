@@ -32,6 +32,8 @@ $(function () {
 		where = "GetBalance";
 		$(".cover-spin").show(0);
 		$(".nav-config-box").removeClass("no-pointer");
+		$("#currentBalance").text(lang.GEN_WAIT_BALANCE);
+		$("#avaibleBalance").text(lang.TRANSF_AVAILABLE_BALANCE);
 
 		callNovoCore(who, where, data, function (response) {
 			$(".cover-spin").hide();

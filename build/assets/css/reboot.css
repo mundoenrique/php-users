@@ -3980,6 +3980,10 @@ a.ui-button:active,
 	width: 170px;
 }
 
+.infoContained {
+	height: 37px;
+}
+
 .item-network {
 	position: absolute;
 	z-index: 2;

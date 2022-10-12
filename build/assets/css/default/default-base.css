@@ -64,7 +64,7 @@ footer.main-footer {
 }
 
 .custom-select:disabled {
-  background-color: var(--color-tertiary) !;
+  background-color: var(--color-tertiary);
 	opacity: 1;
 }
 

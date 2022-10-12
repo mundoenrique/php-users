@@ -132,7 +132,7 @@ $(function () {
 
 	$("body").on("input", ".select-search-input", function () {
 		var selector = $(this).next(".select-search");
-		var search = $(this).val().trim();
+		var search = $(this).val().trim().toLowerCase();
 		selector.find("li").addClass("hidden");
 		var matches = selector.find('li:contains("' + search + '")');
 		selector.find(".no-results").remove();
