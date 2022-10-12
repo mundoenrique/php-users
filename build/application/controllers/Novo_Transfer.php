@@ -111,7 +111,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
 
-		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
@@ -147,7 +147,7 @@ class Novo_Transfer extends NOVO_Controller {
 			"transfer/cardToBank"
 		);
 
-		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}
@@ -171,7 +171,7 @@ class Novo_Transfer extends NOVO_Controller {
 			"transfer/mobilePayment"
 		);
 
-		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
+		$this->render->titlePage = lang('GEN_MENU_PAYMENTS');
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}

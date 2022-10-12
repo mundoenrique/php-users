@@ -183,7 +183,7 @@ class Verify_Access {
 			case 'mobilePayment':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
-				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S' && lang('CONF_PAYS_TRANSFER') === 'ON';
+				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S';
 				break;
 			case 'signup':
 				$referrerUrl = $referrer === base_url(lang('CONF_LINK_USER_IDENTIFY'));

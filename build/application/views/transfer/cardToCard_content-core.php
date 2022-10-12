@@ -8,7 +8,7 @@
           <div class="line-text w-100">
             <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
               <div class="flex flex-column justify-center col-auto pb-4 pt-4 pr-0"">
-								<div class=" product-presentation relative">
+								<div class="product-presentation relative">
                 <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0) : ?>
                 <div id="donor" class="product-search btn">
@@ -16,7 +16,6 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <small class="h6 icon-color"><?= lang('GEN_ORIGIN_ACCOUNT');?></small>
                 <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
@@ -43,20 +42,21 @@
           <ul class="flex flex-auto justify-between px-4 px-xl-5">
             <li class="list-inline-item"><?= lang('TRANSF_AVAILABLE_BALANCE'); ?>
             </li>
+            <?php if (TRUE) : ?>
             <li class="list-inline-item">
               <span id="currentBalance" class="product-balance block">---</span>
             </li>
+            <?php endif; ?>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <?php if (TRUE) : ?>
+
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box <?= $activePointer ?>">
-        <?php if (TRUE) : ?>
-        <li id="toTransfer" class="list-inline-item nav-item-config mr-1">
+        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards >= 1 ? 'active' : '' ?>">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
             <h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>
@@ -66,8 +66,6 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
-        <?php if (TRUE) : ?>
         <li id="manageAffiliations" class="list-inline-item nav-item-config">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-config h3 icon-color"></span>
@@ -78,8 +76,6 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
-        <?php if (TRUE) : ?>
         <li id="history" class="list-inline-item nav-item-config mr-1">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-history h0 icon-color"></span>
@@ -90,11 +86,9 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
       </ul>
     </nav>
   </div>
-  <?php endif; ?>
 </div>
 
 <div id="activeCardToCard" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">

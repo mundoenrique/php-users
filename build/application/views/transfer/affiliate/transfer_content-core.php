@@ -1,15 +1,15 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="toTransferView" class="transfer-operation" style="display:none">
+<div id="toTransferView" class="transfer-operation" <?= $totalCards == 1 ? '' : 'style="display:none"' ?> >
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4>
     <div class="w-100">
       <div class="mx-auto">
         <!-- cardToCard -->
-        <span><?= lang('TRANSF_BETWEEN_CARDS_MSG') ?> </span>
+        <span><?= lang('TRANSF_BETWEEN_CARDS_MSG') ?></span>
         <!-- cardToBank -->
-        <span><?= lang('TRANSF_BANK_ACCOUNTS_MSG') ?> </span>
+        <span><?= lang('TRANSF_BANK_ACCOUNTS_MSG') ?></span>
         <!-- mobilePayment -->
-        <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?> </span>
+        <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?></span>
         <div class="line-text my-2"></div>
         <div id="pre-loader" class="w-100 hide">
           <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">

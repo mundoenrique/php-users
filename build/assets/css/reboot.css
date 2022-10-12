@@ -4308,8 +4308,8 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .product-presentation .item-network {
 	position: absolute;
-	right: 10px;
-	bottom: 15px;
+	right: 15px;
+	bottom: 10px;
 	z-index: 2;
 	width: 35px;
 	height: 20px;

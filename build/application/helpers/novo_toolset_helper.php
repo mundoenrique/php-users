@@ -208,13 +208,16 @@ if (!function_exists('mainMenu'))
 	function mainMenu() {
 		return [
 			'CARD_LIST' => [],
-			'PAYS_TRANSFER' => [
+			'TRANSFERS' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
 				'SERVICES' => [
 					'CREDIT_CARDS' => [],
 					'DIGITEL' => []
 				]
+			],
+			'PAYMENTS' => [
+				'MOBILE_PAYMENT' => [],
 			],
 			'CUSTOMER_SUPPORT' => [],
 			'REPORTS' => []

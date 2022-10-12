@@ -16,7 +16,6 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <small class="h6 icon-color"><?= lang('GEN_ORIGIN_ACCOUNT');?></small>
                 <img class="card-image" src="" alt="">
                 <?php endif; ?>
               </div>
@@ -52,11 +51,9 @@
     </div>
   </div>
 
-  <?php if (TRUE) : ?>
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box">
-        <?php if (TRUE) : ?>
         <li id="toTransfer" class="list-inline-item nav-item-config mr-1">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
@@ -67,8 +64,6 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
-        <?php if (TRUE) : ?>
         <li id="manageAffiliations" class="list-inline-item nav-item-config">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-user-config h3 icon-color"></span>
@@ -79,8 +74,6 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
-        <?php if (TRUE) : ?>
         <li id="history" class="list-inline-item nav-item-config mr-1">
           <a class="px-1" href="javascript:">
             <span class="icon-config icon-history h0 icon-color"></span>
@@ -91,27 +84,13 @@
             </div>
           </a>
         </li>
-        <?php endif; ?>
       </ul>
     </nav>
   </div>
-  <?php endif; ?>
 </div>
 
 <div id="activeCardToBank" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/affiliate/affiliations_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
-  <?php $this->load->view('/transfer/affiliate/managementAffiliate_content-core.php') ?>
-  <?php endif; ?>
-
-  <?php if (TRUE) : ?>
   <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
-  <?php endif; ?>
 </div>
