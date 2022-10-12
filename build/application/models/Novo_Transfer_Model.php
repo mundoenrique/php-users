@@ -82,5 +82,52 @@ class Novo_Transfer_Model extends NOVO_Model
 
 		return $this->responseToTheView('CallWs_GetBanks');
 	}
+	/**
+	 * @info Método para afiliar cuentas de transferencias/pagos
+	 * @date October 11th, 2022
+	 */
+	public function CallWs_Affiliate_Transfer($dataRequest)
+	{
+		log_message('INFO', 'NOVO Transfer Model: Affiliate Method Initialized');
 
+		$this->dataAccessLog->modulo = 'Transferencia';
+		$this->dataAccessLog->function = 'Afiliar';
+		$this->dataAccessLog->operation = 'Procesar afiliacion';
+
+		// $expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
+
+		$this->dataRequest->idOperation = '16';
+		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
+		$this->dataRequest->id_ext_per = $dataRequest->typeDocument . $dataRequest->idNumber;
+		$this->dataRequest->nroPlasticoOrigen = $dataRequest->cardNumber;
+		$this->dataRequest->prefix = $dataRequest->prefix;
+		// $this->dataRequest->validacionFechaExp = $dataRequest->expireDate;
+		$this->dataRequest->validacionFechaExp = "0318";
+		$this->dataRequest->banco = $dataRequest->bank;
+		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->nroCuentaDestino = isset($dataRequest->destinationCard) ? $dataRequest->destinationCard : '';
+		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
+		$this->dataRequest->email = isset($dataRequest->email) ? $dataRequest->email : '';
+		$this->dataRequest->nro_movil = isset($dataRequest->mobilePhone) ? $dataRequest->mobilePhone : '';
+
+		$this->sendToService('callWs_Affiliate');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->title = lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+			default:
+				$this->response->code = 1;
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->title = lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = lang('TRANSF_FAILED_AFFILIATE_CREATION');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+		}
+
+		return $this->responseToTheView('callWs_Affiliate');
+	}
 }
