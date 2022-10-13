@@ -31,7 +31,7 @@
               </div>
               <div class="flex px-2 flex-column mr-auto">
                 <span class="h5 semibold feed-product">Yhoan alfonso sulbaran ccs noroeste ve</span>
-                <span class="h6 feed-metadata">119112055118</span>
+                <span id="historyModalDetails" class="h6 feed-metadata">119112055118</span>
               </div>
               <span class="px-2 feed-amount items-center">- $ 32.000.000,00</span>
             </li>

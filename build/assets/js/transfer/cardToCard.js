@@ -11,11 +11,33 @@ $(function () {
 		getBalance();
 	}
 
+	$("#filterInputYear").datepicker({
+		dateFormat: 'mm/yy',
+		showButtonPanel: true,
+		closeText: lang.GEN_BTN_ACCEPT,
+
+		onClose: function (dateText, inst) {
+			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+			$(this)
+				.focus()
+				.blur();
+			var monthYear = $('#filterInputYear').val().split('/');
+			$('#filterMonth').val(monthYear[0]);
+			$('#filterYear').val(monthYear[1]);
+		},
+
+		beforeShow: function (input, inst) {
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+		}
+	});
+
 	$('#system-info').on('click', '.dashboard-item', function (e) {
-		$('#manageAffiliations').removeClass('active');
-		$('#manageAffiliationsView').css('display', 'none');
+		e.preventDefault();
+		$(liOptions).removeClass("active");
+		$('#affiliationsView').css('display', 'none');
 		$('#toTransferView').show();
 		$('#toTransfer').addClass('active');
+		getBalance();
 	});
 
 	$.each(liOptions, function (pos, liOption) {
@@ -27,11 +49,6 @@ $(function () {
 			$("#manageAffiliateView").hide();
 			$("#" + liOptionId + "View").fadeIn(700, "linear");
 		});
-	});
-
-	$("#system-info").on("click", ".dashboard-item", function (e) {
-		e.preventDefault();
-		getBalance();
 	});
 
 	$("#editAffiliate, #newAffiliate").on("click", function (e) {

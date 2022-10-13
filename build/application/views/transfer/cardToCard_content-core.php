@@ -47,47 +47,19 @@
       </div>
     </div>
   </div>
-
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box">
-        <li id="toTransfer" class="list-inline-item nav-item-config mr-1 <?= $totalCards === 1 ? 'active' : '' ?> <?= $activePointer ?>">
-          <a class="px-1" href="javascript:">
-            <span class="icon-config icon-user-transfer h00 icon-color mx-n5"></span>
-            <h5 class="center"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h5>
-            <div class="px-1 box up left regular">
-              <span class="icon-user-transfer h00 icon-color mx-n5"></span>
-              <h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_TO_TRANSFER'); ?></span></h4>
-            </div>
-          </a>
-        </li>
-        <li id="manageAffiliations" class="list-inline-item nav-item-config">
-          <a class="px-1" href="javascript:">
-            <span class="icon-config icon-user-config h3 icon-color"></span>
-            <h5 class="center"><span class="status-text1"><?= lang('TRANSF_MANAGE_AFFILIATIONS'); ?></span></h5>
-            <div class="px-1 box up left regular">
-              <span class="icon-user-config h3 icon-color"></span>
-              <h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_MANAGE_AFFILIATIONS'); ?></span></h4>
-            </div>
-          </a>
-        </li>
-        <li id="history" class="list-inline-item nav-item-config mr-1 <?= $activePointer ?>">
-          <a class="px-1" href="javascript:">
-            <span class="icon-config icon-history h0 icon-color"></span>
-            <h5 class="center"><span class="status-text1"><?= lang('TRANSF_HISTORY'); ?></span></h5>
-            <div class="px-1 box up left regular">
-              <span class="icon-history h0 icon-color"></span>
-              <h4 class="h5 center status-text1"><span class="status-text1"><?= lang('TRANSF_HISTORY'); ?></span></h4>
-            </div>
-          </a>
-        </li>
+				<?php foreach($navItemsConfig as $key => $value) : ?>
+					<?php $this->load->view('/transfer/navItemsTransfer_content-core', $value); ?>
+				<?php endforeach; ?>
       </ul>
     </nav>
   </div>
 </div>
 
 <div id="activeCardToCard" class="col-12 col-sm-12 col-lg-12 col-xl-8 pt-3">
-  <?php $this->load->view('/transfer/affiliate/transfer_content-core.php') ?>
-  <?php $this->load->view('/transfer/affiliate/affiliations_content-core.php') ?>
-  <?php $this->load->view('/transfer/historyTransfer_content-core.php') ?>
+  <?php $this->load->view('/transfer/transfer_content-core') ?>
+  <?php $this->load->view('/transfer/affiliate/affiliations_content-core') ?>
+  <?php $this->load->view('/transfer/historyTransfer_content-core') ?>
 </div>

@@ -128,6 +128,33 @@ class Novo_Transfer extends NOVO_Controller {
 			$this->render->callBalance = '1';
 		}
 
+		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
+		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
+		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
+		$this->render->navItemsConfig = [
+			'transfer' => [
+				'id' => 'toTransfer',
+				'icon' => 'icon-user-transfer h00',
+				'title' => lang('TRANSF_TO_TRANSFER'),
+				'activeSection' => $totalCards === 1 ? 'active' : '',
+				'activePointer' => 'no-pointer',
+			],
+			'affiliate' => [
+				'id' => 'affiliations',
+				'icon' => 'icon-user-config h3',
+				'title' => lang('TRANSF_MANAGE_AFFILIATIONS'),
+				'activeSection' => '',
+				'activePointer' => '',
+			],
+			'history' => [
+				'id' => 'history',
+				'icon' => 'icon-history h0',
+				'title' => lang('TRANSF_HISTORY'),
+				'activeSection' => '',
+				'activePointer' => 'no-pointer',
+			],
+		];
+
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}

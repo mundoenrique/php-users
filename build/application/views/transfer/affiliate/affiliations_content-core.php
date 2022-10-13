@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="manageAffiliationsView" class="transfer-operation" style="display:none">
+<div id="affiliationsView" class="transfer-operation" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= lang('TRANSF_MANAGE_AFFILIATIONS') ?></h4>
     <div class="w-100">
@@ -38,7 +38,8 @@
                   <tr>
                     <th><?= lang('TRANSF_AFFILIATE') ?></th>
                     <th><?= lang('TRANSF_BANK') ?></th>
-                    <th><?= lang('TRANSF_ACCOUNT_PHONE') ?> / <?= lang('TRANSF_DESTINATION_CARD') ?> / <?= lang('TRANSF_NUMBER_PHONE') ?></th>
+                    <th> <?= $titleTable ?></th>
+										 <!-- <?= lang('TRANSF_DESTINATION_CARD') ?> / <?= lang('TRANSF_NUMBER_PHONE') ?> -->
                     <th><?= lang('TRANSF_OPTIONS') ?></th>
                   </tr>
                 </thead>

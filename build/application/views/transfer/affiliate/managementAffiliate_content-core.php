@@ -7,9 +7,9 @@
         <!-- cardToCard -->
         <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_CARD_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span>
         <!-- cardToBank -->
-        <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_BANK_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span>
+        <!-- <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_BANK_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span> -->
         <!-- mobilePayment -->
-        <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_PAY_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span>
+        <!-- <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_PAY_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span> -->
         <div class="line-text my-2"></div>
         <form id="manageAffiliate">
           <div class="row">
@@ -61,8 +61,7 @@
           <div class="line my-2"></div>
           <div class="flex items-center justify-end pt-3">
 						<button id="affiliateCancelBtn" class="btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL') ?></button>
-            <button id="manageAffiliateBtn"
-              class="btn btn-small btn-loading btn-primary send"><?= (TRUE) ? lang('TRANSF_AN_AFFILIATE') : lang('GEN_BTN_SAVE') ?></button>
+            <button id="manageAffiliateBtn" class="btn btn-small btn-loading btn-primary send"><?= (TRUE) ? lang('TRANSF_AN_AFFILIATE') : lang('GEN_BTN_SAVE') ?></button>
           </div>
         </form>
       </div>

@@ -1,15 +1,16 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<div id="toTransferView" class="transfer-operation" <?= $totalCards === 1 ? '' : 'style="display:none"' ?> >
+<div id="toTransferView" class="transfer-operation" <?= $totalCards === 1 ? '' : 'style="display:none"' ?>>
   <div class="flex mb-1 mx-4 flex-column">
-    <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4>
+    <h4 class="line-text mb-2 semibold primary"><?= $titleTransfer ?></h4>
+    <!-- <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4> -->
     <div class="w-100">
       <div class="mx-auto">
-        <!-- cardToCard -->
-        <span><?= lang('TRANSF_BETWEEN_CARDS_MSG') ?></span>
+        <span><?= $msgTransfer ?></span>
         <!-- cardToBank -->
-        <span><?= lang('TRANSF_BANK_ACCOUNTS_MSG') ?></span>
+        <!-- <span><?= lang('TRANSF_BANK_ACCOUNTS_MSG') ?></span> -->
         <!-- mobilePayment -->
-        <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?></span>
+        <!-- <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?></span> -->
+
         <div class="line-text my-2"></div>
         <div id="pre-loader" class="w-100 hide">
           <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
@@ -22,7 +23,8 @@
               <label for="directory"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
               <div class="form-control select-by-search p-0">
                 <input id="directory" type="hidden" name="directory" value="">
-                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory" autocomplete="off" >
+                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory"
+                  autocomplete="off">
                 <ul class="select-search pl-0">
                   <li value="1">james cameron</li>
                   <li value="2">steven spielberg</li>
@@ -43,6 +45,8 @@
         </form>
         <div class="line-text mb-2"></div>
         <form id="transferForm">
+          <input type="hidden" id="filterMonth" name="filterMonth" value="0">
+          <input type="hidden" id="filterYear" name="filterYear" value="0">
           <div class="row">
             <div class="form-group col-6 col-lg-4">
               <label for="bank"><?= lang('TRANSF_BANK') ?></label>
@@ -100,8 +104,8 @@
             </div>
             <div class="form-group col-6 col-lg-4">
               <label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
-              <input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text"
-                placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
+              <input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text"
+                placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" autocomplete="off">
               <div class="help-block"></div>
             </div>
           </div>
