@@ -1,7 +1,8 @@
 "use strict";
 $(function () {
 	var liOptions = $(".nav-item-config");
-	var operationType = "P2T";
+	var operationType = "P2P";
+	var cardData;
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -27,7 +28,7 @@ $(function () {
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
 		form = $("#operation");
-		data = getDataForm(form);
+		data = cardData = getDataForm(form);
 		who = "Business";
 		where = "GetBalance";
 		$(".cover-spin").show(0);
@@ -104,6 +105,7 @@ $(function () {
 			where = "affiliate";
 			data = getDataForm(form);
 			data.operationType = operationType;
+			Object.assign(data, cardData);
 
 			insertFormInput(true);
 			$(this).html(loader);
@@ -114,14 +116,12 @@ $(function () {
 				$(e.target).html(btnText);
 				$(".nav-config-box").removeClass("no-pointer");
 
-				if (response.code == 0) {
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-				}
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
 			});
 		}
 	});
