@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['CONF_TENANT_PUBLICATION'] = 2022;
+$lang['CONF_RECOVER_ID_TYPE'] = 'ON';
 //VALIDATE FORMS
 $lang['CONF_VALID_POSITION'] = 'right';
 //VALIDATE IP

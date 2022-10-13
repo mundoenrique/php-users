@@ -101,6 +101,7 @@ $timeZone = [
 	'bnt'	=>	'America/Mexico_City',
 	'bp'	=>	'America/Guayaquil',
 	'co'	=>	'America/Bogota',
+	'coop'	=>	'America/Bogota',
 	'pb'	=>	'America/Guayaquil',
 	'pe'	=>	'America/Lima',
 	'us'	=>	'America/Lima',

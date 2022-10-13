@@ -103,6 +103,7 @@ $lang['CONF_COUNTRY_CODE'] = [
 	'Ec-pb' => 3,
 	'Ec-bg' => 3,
 	'Co' => 4,
+	'coop' => 4,
 	'Bdb' => 4,
 	'Mx-Bn' => 15,
 ];
@@ -114,6 +115,7 @@ $lang['CONF_COUNTRY_DOCUMENT'] = [
 	'Ec-pb' => '3',
 	'Ec-bg' => '3',
 	'Co' => '4',
+	'coop' => '4',
 	'Bdb' => '4',
 	'Mx-Bn' => '16',
 ];
