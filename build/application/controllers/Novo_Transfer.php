@@ -85,7 +85,7 @@ class Novo_Transfer extends NOVO_Controller {
 	}
 	/**
 	 * @info Método para obtener las opciones de transferencias entre tarjetas
-	 * @author Jhonatan Llerena.
+	 * @author Hector D. Corredor Gutierrez, Jhonatan Llerena.
 	 * @date October 10th, 2022
 	 */
 	public function cardToCard()
@@ -130,7 +130,7 @@ class Novo_Transfer extends NOVO_Controller {
 	}
 	/**
 	 * @info Método para obtener la lista para transferencias entre cuentas bancarias
-	 * @author Hector D. Corredor Gutierrez.
+	 * @author Hector D. Corredor Gutierrez, Jhonatan Llerena.
 	 * @date October 04th, 2022
 	 */
 	public function cardToBank()
@@ -147,14 +147,34 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/additional-methods",
 			"transfer/cardToBank"
 		);
+		$this->modelClass = 'Novo_Business_Model';
+		$this->modelMethod = 'callWs_CardListOperations_Business';
+		$this->request->operation = 'Transferencias';
+		$this->request->operType = 'P2T';
+		$userCardList = $this->loadModel($this->request);
+		$this->responseAttr($userCardList);
+		$cardsList = $userCardList->data->cardsList;
+		$totalCards = count($cardsList);
 
 		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
+		$this->render->operations = TRUE;
+		$this->render->totalCards = $totalCards;
+		$this->render->cardsList = $cardsList;
+		$this->render->activePointer = 'no-pointer';
+
+		if ($totalCards == 1) {
+			$this->render->activePointer = '';
+			foreach ($userCardList->data->cardsList[0] as $index => $render) {
+				$this->render->$index = $render;
+			}
+		}
+
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}
 	/**
 	 * @info Método para obtener la lista para pago móvil
-	 * @author Hector D. Corredor Gutierrez.
+	 * @author Hector D. Corredor Gutierrez, Jhonatan Llerena.
 	 * @date October 04th, 2022
 	 */
 	public function mobilePayment()
