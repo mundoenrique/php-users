@@ -176,6 +176,7 @@ class Verify_Access {
 				break;
 			case 'setOperationKey':
 			case 'getOperationKey':
+			case 'getBanks':
 			case 'affiliate':
 			case 'changeOperationKey':
 			case 'cardToCard':
