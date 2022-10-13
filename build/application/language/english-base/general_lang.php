@@ -153,7 +153,6 @@ $lang['GEN_SECRET_PASS_PIN'] = 'Secret key (PIN)';
 $lang['GEN_CARD_TYPE'] = 'Card type';
 $lang['GEN_PHYSICAL_CARD'] = 'Physical';
 $lang['GEN_VIRTUAL_CARD'] = 'Digital card';
-$lang['GEN_ORIGIN_ACCOUNT'] = 'Root account';
 $lang['GEN_VIRTUAL'] = '%s Digital';
 $lang['GEN_VIRTUAL_DISJOIN'] = '~';
 $lang['GEN_INVALID_DATA'] = 'Some of the data indicated is not valid.';
@@ -217,3 +216,9 @@ $lang["GEN_MSG_IMPORTANT"] = 'Important announcement';
 $lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s For security the card has been blocked, please try tomorrow.';
 $lang["GEN_NO_RESULTS"] = 'No results';
+$lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication code and verify your identity.';
+$lang["GEN_TWO_FACTOR_SURE_DISABLE"] = 'Are you sure you want to disable two-factor authentication?';
+$lang["GEN_MFA_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
+$lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
+$lang['GEN_TWO_FACTOR_APLICATION'] = 'aplication';
+
