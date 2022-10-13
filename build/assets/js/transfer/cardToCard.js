@@ -7,6 +7,10 @@ $(function () {
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
 
+	if ($('#productdetail').attr('call-balance') == '1') {
+		getBalance();
+	}
+
 	$('#system-info').on('click', '.dashboard-item', function (e) {
 		$('#manageAffiliations').removeClass('active');
 		$('#manageAffiliationsView').css('display', 'none');
@@ -27,23 +31,7 @@ $(function () {
 
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
-		form = $("#operation");
-		data = cardData = getDataForm(form);
-		who = "Business";
-		where = "GetBalance";
-		$(".cover-spin").show(0);
-		$(".nav-config-box").removeClass("no-pointer");
-		$("#currentBalance").text(lang.GEN_WAIT_BALANCE);
-		$("#avaibleBalance").text(lang.TRANSF_AVAILABLE_BALANCE);
-
-		callNovoCore(who, where, data, function (response) {
-			$(".cover-spin").hide();
-			if (response.code == 0) {
-				$("#currentBalance").text(response.msg);
-			} else {
-				$("#currentBalance").text("---");
-			}
-		});
+		getBalance();
 	});
 
 	$("#editAffiliate, #newAffiliate").on("click", function (e) {
@@ -159,4 +147,18 @@ $(function () {
 			});
 		}
 	});
+
+	function getBalance() {
+		form = $("#operation");
+		data = cardData = getDataForm(form);
+		who = "Business";
+		where = "GetBalance";
+		$(".nav-config-box").removeClass("no-pointer");
+		$("#currentBalance").text(lang.GEN_WAIT_BALANCE);
+		$("#avaibleBalance").text(lang.TRANSF_AVAILABLE_BALANCE);
+
+		callNovoCore(who, where, data, function (response) {
+			$("#currentBalance").text(response.msg);
+		});
+	}
 });

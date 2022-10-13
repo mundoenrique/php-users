@@ -117,12 +117,15 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
 		$this->render->activePointer = 'no-pointer';
+		$this->render->callBalance = '0';
 
 		if ($totalCards == 1) {
 			$this->render->activePointer = '';
 			foreach ($userCardList->data->cardsList[0] as $index => $render) {
 				$this->render->$index = $render;
 			}
+
+			$this->render->callBalance = '1';
 		}
 
 		$this->views = ['transfer/'.$view];
@@ -147,6 +150,7 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/additional-methods",
 			"transfer/cardToBank"
 		);
+
 		$this->modelClass = 'Novo_Business_Model';
 		$this->modelMethod = 'callWs_CardListOperations_Business';
 		$this->request->operation = 'Transferencias';
@@ -161,12 +165,15 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
 		$this->render->activePointer = 'no-pointer';
+		$this->render->callBalance = '0';
 
 		if ($totalCards == 1) {
 			$this->render->activePointer = '';
 			foreach ($userCardList->data->cardsList[0] as $index => $render) {
 				$this->render->$index = $render;
 			}
+
+			$this->render->callBalance = '1';
 		}
 
 		$this->views = ['transfer/'.$view];
