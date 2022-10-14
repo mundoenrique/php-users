@@ -7,10 +7,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Novo_Transfer extends NOVO_Controller {
 
+	private $navItemsConfig;
+	private $attrNoPointer;
+
+
 	public function __construct()
 	{
 		parent:: __construct();
 		log_message('INFO', 'NOVO Transfer Controller Class Initialized');
+
+		$this->attrNoPointer = 'no-pointer';
+		$this->navItemsConfig = [
+			'transfer' => [
+				'id' => 'toTransfer',
+				'icon' => 'icon-user-transfer h00',
+				'title' => lang('TRANSF_TO_TRANSFER'),
+				'activeSection' => '',
+				'activePointer' => $this->attrNoPointer,
+			],
+			'affiliate' => [
+				'id' => 'affiliations',
+				'icon' => 'icon-user-config h3',
+				'title' => lang('TRANSF_MANAGE_AFFILIATIONS'),
+				'activeSection' => '',
+				'activePointer' => '',
+			],
+			'history' => [
+				'id' => 'history',
+				'icon' => 'icon-history h0',
+				'title' => lang('TRANSF_HISTORY'),
+				'activeSection' => '',
+				'activePointer' => $this->attrNoPointer,
+			],
+		];
+
 	}
 	/**
 	 * @info Método para crear clave de operaciones especiales
@@ -112,50 +142,29 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
-		$attrNoPointer = 'no-pointer';
 
 		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
-		$this->render->activePointer = $attrNoPointer;
 		$this->render->callBalance = '0';
 
 		if ($totalCards == 1) {
-			$this->render->activePointer = '';
 			foreach ($userCardList->data->cardsList[0] as $index => $render) {
 				$this->render->$index = $render;
 			}
 
 			$this->render->callBalance = '1';
+			$this->navItemsConfig['transfer']['activeSection'] = 'active';
+			$this->navItemsConfig['transfer']['activePointer'] = '';
+			$this->navItemsConfig['history']['activePointer'] = '';
 		}
 
+
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
-		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
+		$this->render->msgTransfer = lang('TRANSF_BETWEEN_CARDS_MSG');
 		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
-		$this->render->navItemsConfig = [
-			'transfer' => [
-				'id' => 'toTransfer',
-				'icon' => 'icon-user-transfer h00',
-				'title' => lang('TRANSF_TO_TRANSFER'),
-				'activeSection' => $totalCards === 1 ? 'active' : '',
-				'activePointer' => $attrNoPointer,
-			],
-			'affiliate' => [
-				'id' => 'affiliations',
-				'icon' => 'icon-user-config h3',
-				'title' => lang('TRANSF_MANAGE_AFFILIATIONS'),
-				'activeSection' => '',
-				'activePointer' => '',
-			],
-			'history' => [
-				'id' => 'history',
-				'icon' => 'icon-history h0',
-				'title' => lang('TRANSF_HISTORY'),
-				'activeSection' => '',
-				'activePointer' => $attrNoPointer,
-			],
-		];
+		$this->render->navItemsConfig = $this->navItemsConfig;
 
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
@@ -177,7 +186,8 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/cardToBank"
+			"transfer/cardToBank",
+			"transfer/transferHelpers"
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -193,17 +203,24 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
-		$this->render->activePointer = 'no-pointer';
 		$this->render->callBalance = '0';
 
 		if ($totalCards == 1) {
-			$this->render->activePointer = '';
 			foreach ($userCardList->data->cardsList[0] as $index => $render) {
 				$this->render->$index = $render;
 			}
 
 			$this->render->callBalance = '1';
+			$this->navItemsConfig['transfer']['activeSection'] = 'active';
+			$this->navItemsConfig['transfer']['activePointer'] = '';
+			$this->navItemsConfig['history']['activePointer'] = '';
 		}
+
+
+		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
+		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
+		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
+		$this->render->navItemsConfig = $this->navItemsConfig;
 
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
