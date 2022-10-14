@@ -23,7 +23,6 @@ $lang['USER_PASS_CHANGE'] = 'Si deseas cambiar tu contraseña en "<strong>%s</st
 $lang['USER_PASS_CURRENT'] = 'Contraseña actual';
 $lang['USER_PASS_NEW'] = 'Contraseña nueva';
 $lang['USER_PASS_CONFIRM'] = 'Confirma la contraseña';
-$lang['USER_INFO_TITLE'] = 'Requisitos para crear la contraseña:';
 $lang['USER_PASS_CHANGED'] = 'La contraseña fue cambiada exitosamente. %s';
 $lang['USER_PASS_LOGIN'] = '<br>Por motivos de seguridad es necesario que inicies sesión nuevamente.';
 $lang['USER_PASS_USED'] = 'La nueva contraseña no debe coincidir <strong>con las últimas cinco usadas</strong>.';
