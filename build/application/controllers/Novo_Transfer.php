@@ -100,7 +100,8 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/cardToCard"
+			"transfer/cardToCard",
+			"transfer/transferHelpers"
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -111,12 +112,13 @@ class Novo_Transfer extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
+		$attrNoPointer = 'no-pointer';
 
 		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
-		$this->render->activePointer = 'no-pointer';
+		$this->render->activePointer = $attrNoPointer;
 		$this->render->callBalance = '0';
 
 		if ($totalCards == 1) {
@@ -137,7 +139,7 @@ class Novo_Transfer extends NOVO_Controller {
 				'icon' => 'icon-user-transfer h00',
 				'title' => lang('TRANSF_TO_TRANSFER'),
 				'activeSection' => $totalCards === 1 ? 'active' : '',
-				'activePointer' => 'no-pointer',
+				'activePointer' => $attrNoPointer,
 			],
 			'affiliate' => [
 				'id' => 'affiliations',
@@ -151,7 +153,7 @@ class Novo_Transfer extends NOVO_Controller {
 				'icon' => 'icon-history h0',
 				'title' => lang('TRANSF_HISTORY'),
 				'activeSection' => '',
-				'activePointer' => 'no-pointer',
+				'activePointer' => $attrNoPointer,
 			],
 		];
 
