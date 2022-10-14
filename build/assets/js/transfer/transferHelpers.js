@@ -169,4 +169,18 @@ $(function () {
 			});
 		}
 	});
+
+	function getBalance() {
+		form = $("#operation");
+		data = cardData = getDataForm(form);
+		who = "Business";
+		where = "GetBalance";
+		$(".nav-config-box").removeClass("no-pointer");
+		$("#currentBalance").text(lang.GEN_WAIT_BALANCE);
+		$("#avaibleBalance").text(lang.TRANSF_AVAILABLE_BALANCE);
+
+		callNovoCore(who, where, data, function (response) {
+			$("#currentBalance").text(response.msg);
+		});
+	}
 });
