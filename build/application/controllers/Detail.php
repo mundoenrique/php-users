@@ -185,7 +185,7 @@ class Detail extends CI_Controller {
 		if(!$result){
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			redirect(base_url('dashboard'), 'location');
-			exi();
+			exit();
 		}
 
 		$response = $this->detail->exportar($tarjeta, $mes, $anio, $idOperation);
