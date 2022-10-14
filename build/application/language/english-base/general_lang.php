@@ -221,4 +221,10 @@ $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = 'Are you sure you want to disable two-fac
 $lang["GEN_MFA_REMEMBER"] = 'Remember that to use some operations you must have two-factor authentication activated.';
 $lang["GEN_TWO_FACTOR_SEND_CODE"] = 'If the code has not arrived in your email, please click on the link.';
 $lang['GEN_TWO_FACTOR_APLICATION'] = 'aplication';
-
+$lang['GEN_INFO_TITLE'] = 'Requirements to create the password:';
+$lang['GEN_INFO_1'] = '8 to 15 <strong>characters</strong>.';
+$lang['GEN_INFO_2'] = 'At least one <strong>lowercase letter</strong>.';
+$lang['GEN_INFO_3'] = 'At least one <strong>uppercase letter</strong>.';
+$lang['GEN_INFO_4'] = 'From 1 to 3 <strong>numbers</strong>.';
+$lang['GEN_INFO_5'] = 'At least one <strong>special character</strong> (ex:! @ * - ? ¡ ¿ + / . , _ #).';
+$lang['GEN_INFO_6'] = 'It must not have more than 2 <strong>consecutive characters</strong> equal.';

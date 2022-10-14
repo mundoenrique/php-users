@@ -97,7 +97,7 @@ class Verify_Access {
 		}
 
 		log_message('DEBUG', 'NOVO  [' . $user . '] IP ' . $this->CI->input->ip_address() . ' ResponseByDefect: ' .
-			json_encode($this->responseDefect, JSON_UNESCAPED_UNICODE));
+			json_encode($responseDefect, JSON_UNESCAPED_UNICODE));
 
 		return $responseDefect;
 	}

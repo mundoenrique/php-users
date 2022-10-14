@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <div class="field-meter">
-	<h4><?= lang('USER_INFO_TITLE'); ?></h4>
+	<h4><?= lang('GEN_INFO_TITLE'); ?></h4>
 	<ul class="pwd-rules">
 		<li id="length" class="pwd-rules-item rule-invalid"><?= lang('GEN_INFO_1'); ?></li>
 		<li id="letter" class="pwd-rules-item rule-invalid"><?= lang('GEN_INFO_2'); ?></li>

@@ -23,7 +23,6 @@ $lang['USER_PASS_CHANGE'] = 'If you want to change your password in "<strong>%s<
 $lang['USER_PASS_CURRENT'] = 'Current password';
 $lang['USER_PASS_NEW'] = 'New password';
 $lang['USER_PASS_CONFIRM'] = 'Confirm password';
-$lang['USER_INFO_TITLE'] = 'Requirements to create the password:';
 $lang['USER_PASS_CHANGED'] = 'The password was changed successfully. %s';
 $lang['USER_PASS_LOGIN'] = '<br> For security reasons you need to log in again.';
 $lang['USER_PASS_USED'] = 'The new password must not match <strong> the last five used </strong>.';
