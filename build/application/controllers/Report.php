@@ -182,7 +182,7 @@ class Report extends CI_Controller {
 		if(!$result){
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			redirect(base_url('dashboard'), 'location');
-			exi();
+			exit();
 		}
 
 		$response = $this->detail->exp_xls($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
@@ -221,7 +221,7 @@ class Report extends CI_Controller {
 		if(!$result){
 			log_message('DEBUG', 'NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 			redirect(base_url('dashboard'), 'location');
-			exi();
+			exit();
 		}
 
 		$response = $this->detail->exp_pdf($idpersona, $tarjeta, $producto, $tipoConsulta, $idExtEmp, $fechaIni, $fechaFin);
