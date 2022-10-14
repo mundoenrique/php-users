@@ -100,8 +100,6 @@ class Dashboard extends CI_Controller {
 		$this->load->model('dashboard_model', 'dashboard');
 
 		$this->output->set_content_type('application/json')->set_output($this->dashboard->dashboard_load());
-		log_message($this->dashboard->dashboard_load());
-
 	}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
