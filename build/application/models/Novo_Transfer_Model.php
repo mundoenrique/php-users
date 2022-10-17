@@ -92,21 +92,24 @@ class Novo_Transfer_Model extends NOVO_Model
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Afiliar';
-		$this->dataAccessLog->operation = 'Procesar afiliacion';
+		$this->dataAccessLog->operation = $dataRequest->operationType === 'PMV' ? 'Procesar afiliación pago móvil' : 'Procesar afiliacion';
 
-		// $expireDate = $this->cryptography->decryptOnlyOneData($dataRequest->expireDate);
+		$nroCuentaDestino = "";
+		if ($dataRequest->operationType !== 'PMV') {
+			$nroCuentaDestino = $dataRequest->operationType === 'P2P' ? $dataRequest->destinationCard : $dataRequest->destinationAccount;
+		}
 
 		$this->dataRequest->idOperation = '16';
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->id_ext_per = $dataRequest->typeDocument . $dataRequest->idNumber;
-		$this->dataRequest->nroPlasticoOrigen ="5267491400303119";
+		$this->dataRequest->nroPlasticoOrigen = "5267491400303119";
 		// $this->dataRequest->nroPlasticoOrigen = $dataRequest->cardNumber;
 		// $this->dataRequest->prefix = "$dataRequest->prefix";
 		// $this->dataRequest->validacionFechaExp = $dataRequest->expireDate;
 		$this->dataRequest->validacionFechaExp = "0318";
 		$this->dataRequest->banco = $dataRequest->bank;
 		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->nroCuentaDestino = $dataRequest->operationType === 'P2P' ? $dataRequest->destinationCard : $dataRequest->destinationAccount;
+		$this->dataRequest->nroCuentaDestino = $nroCuentaDestino;
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->email = isset($dataRequest->email) ? $dataRequest->email : '';
 		$this->dataRequest->nro_movil = isset($dataRequest->mobilePhone) ? $dataRequest->mobilePhone : '';

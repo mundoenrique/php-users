@@ -218,7 +218,6 @@ class Novo_Transfer extends NOVO_Controller {
 			$this->navItemsConfig['history']['activePointer'] = '';
 		}
 
-
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
 		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
@@ -244,10 +243,44 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/mobilePayment"
+			"transfer/mobilePayment",
+			"transfer/transferHelpers"
 		);
 
+		$this->modelClass = 'Novo_Business_Model';
+		$this->modelMethod = 'callWs_CardListOperations_Business';
+		$this->request->operation = 'Transferencias';
+		$this->request->operType = 'P2T';
+		$userCardList = $this->loadModel($this->request);
+		$this->responseAttr($userCardList);
+		$cardsList = $userCardList->data->cardsList;
+		$totalCards = count($cardsList);
+		$this->navItemsConfig['transfer']['title'] = lang('TRANSF_MAKE_PAYMENT');
+
+		$this->render->view = $view;
 		$this->render->titlePage = lang('GEN_MENU_PAYMENTS');
+		$this->render->operations = TRUE;
+		$this->render->totalCards = $totalCards;
+		$this->render->cardsList = $cardsList;
+		$this->render->callBalance = '0';
+
+		if ($totalCards == 1) {
+			foreach ($userCardList->data->cardsList[0] as $index => $render) {
+				$this->render->$index = $render;
+			}
+
+			$this->render->callBalance = '1';
+			$this->navItemsConfig['transfer']['activeSection'] = 'active';
+			$this->navItemsConfig['transfer']['activePointer'] = '';
+			$this->navItemsConfig['history']['activePointer'] = '';
+		}
+
+
+		$this->render->titleTransfer = lang('TRANSF_MAKE_PAYMENT');
+		$this->render->msgTransfer = lang('TRANSF_PAY_MOVIL_MSG');
+		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
+		$this->render->navItemsConfig = $this->navItemsConfig;
+
 		$this->views = ['transfer/'.$view];
 		$this->loadView($view);
 	}

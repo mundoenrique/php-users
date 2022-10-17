@@ -2,7 +2,6 @@
 <div id="toTransferView" class="transfer-operation" <?= $totalCards === 1 ? '' : 'style="display:none"' ?>>
   <div class="flex mb-1 mx-4 flex-column">
     <h4 class="line-text mb-2 semibold primary"><?= $titleTransfer ?></h4>
-    <!-- <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_TO_TRANSFER') : lang('TRANSF_MAKE_PAYMENT') ?></h4> -->
     <div class="w-100">
       <div class="mx-auto">
         <span><?= $msgTransfer ?></span>

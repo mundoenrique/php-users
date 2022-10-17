@@ -38,6 +38,7 @@
                 </div>
               </div>
             </div>
+						<?php if ($view != 'mobilePayment') : ?>
             <div class="form-group col-6 col-lg-4">
 						<?php if ($view == 'cardToCard') : ?>
 							<label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
@@ -49,6 +50,7 @@
               <div class="help-block"></div>
 						<?php endif; ?>
             </div>
+						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
               <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
               <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
