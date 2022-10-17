@@ -339,7 +339,12 @@ $config = [
 		[
 			'field' => 'destinationCard',
 			'label' => 'destinationCard',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'destinationAccount',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',

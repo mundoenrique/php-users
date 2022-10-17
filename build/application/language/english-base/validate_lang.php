@@ -73,5 +73,6 @@ $lang['VALIDATE_SECTOR'] = 'Indicates a Sector.';
 $lang['VALIDATE_INT_CODE'] = 'Indicate the international code.';
 $lang['VALIDATE_BANK'] = 'Select a bank.';
 $lang['VALIDATE_BENEFIT'] = 'Indicates the name of the beneficiary.';
-$lang['VALIDATE_FATE_CARD'] = 'Enter the destination card number.';
+$lang['VALIDATE_DESTINATION_CARD'] = 'Enter the destination card number.';
+$lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Enter the destination account number.';
 $lang['VALIDATE_AMOUNT'] = 'Enter the amount to transfer.';

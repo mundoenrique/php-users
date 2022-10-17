@@ -138,6 +138,7 @@ function validateForms(form) {
 			"bank": { required: true, requiredSelect: true },
 			"beneficiary": { required: true, pattern: alphaName },
 			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
+			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
 			"amount": { required: true, pattern: numeric, maxlength: 9 },
 			"concept": { pattern: alphaName },
 			"expDateCta": { required: true, pattern: date.my },
@@ -268,7 +269,8 @@ function validateForms(form) {
 			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
 			"bank": lang.VALIDATE_BANK,
 			"beneficiary": lang.VALIDATE_BENEFIT,
-			"destinationCard": lang.VALIDATE_FATE_CARD,
+			"destinationCard": lang.VALIDATE_DESTINATION_CARD,
+			"destinationAccount": lang.VALIDATE_DESTINATION_ACCOUNT,
 			"amount": lang.VALIDATE_AMOUNT,
 			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {
