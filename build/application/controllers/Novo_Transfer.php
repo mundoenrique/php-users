@@ -143,6 +143,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
 
+		$this->render->view = $view;
 		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
@@ -199,6 +200,7 @@ class Novo_Transfer extends NOVO_Controller {
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
 
+		$this->render->view = $view;
 		$this->render->titlePage = lang('GEN_MENU_TRANSFERS');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;

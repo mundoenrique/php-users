@@ -12,32 +12,33 @@ $(function () {
 	}
 
 	$("#filterInputYear").datepicker({
-		dateFormat: 'mm/yy',
+		dateFormat: "mm/yy",
 		showButtonPanel: true,
 		closeText: lang.GEN_BTN_ACCEPT,
 
 		onClose: function (dateText, inst) {
-			$(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-			$(this)
-				.focus()
-				.blur();
-			var monthYear = $('#filterInputYear').val().split('/');
-			$('#filterMonth').val(monthYear[0]);
-			$('#filterYear').val(monthYear[1]);
+			$(this).datepicker(
+				"setDate",
+				new Date(inst.selectedYear, inst.selectedMonth, 1)
+			);
+			$(this).focus().blur();
+			var monthYear = $("#filterInputYear").val().split("/");
+			$("#filterMonth").val(monthYear[0]);
+			$("#filterYear").val(monthYear[1]);
 		},
 
 		beforeShow: function (input, inst) {
 			inst.dpDiv.addClass("ui-datepicker-month-year");
-		}
+		},
 	});
 
 	// Al seleccionar una tarjeta
-	$('#system-info').on('click', '.dashboard-item', function (e) {
+	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
 		$(liOptions).removeClass("active");
-		$('#affiliationsView').css('display', 'none');
-		$('#toTransferView').show();
-		$('#toTransfer').addClass('active');
+		$("#affiliationsView").css("display", "none");
+		$("#toTransferView").show();
+		$("#toTransfer").addClass("active");
 		getBalance();
 	});
 
@@ -54,13 +55,39 @@ $(function () {
 	});
 
 	// Al hacer click en Nueva afiliación|Editar afiliación
-	$("#editAffiliate, #newAffiliate").on("click", function (e) {
+	$("#newAffiliate, #editAffiliate").on("click", function (e) {
+		var action = $(this).attr("id") == "newAffiliate" ? "new" : "edit";
 		var bankField = $("#manageAffiliateView #bank");
-		var currentBank = bankField.val()
-			? bankField.val()
-			: "";
+		var currentBank = bankField.val() ? bankField.val() : "";
 		$("#affiliationsView").hide();
 		$("#manageAffiliateView").fadeIn(700, "linear");
+		$("#affiliateTitle").text(
+			action == "new" ? lang.TRANSF_NEW_AFFILIATE : lang.TRANSF_EDIT_AFFILIATE
+		);
+
+		switch (operationType) {
+			case "P2P":
+				$("#affiliateMessage").text(
+					action == "new"
+						? lang.TRANSF_NEW_AFFILIATE_CARD_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
+				);
+				break;
+			case "P2T":
+				$("#affiliateMessage").text(
+					action == "new"
+						? lang.TRANSF_NEW_AFFILIATE_BANK_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
+				);
+				break;
+			case "PMV":
+				$("#affiliateMessage").text(
+					action == "new"
+						? lang.TRANSF_NEW_AFFILIATE_PAY_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
+				);
+				break;
+		}
 
 		bankField.prop("disabled", true);
 		bankField.find("option").get(0).remove();

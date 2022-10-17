@@ -1,15 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <div id="manageAffiliateView" style="display:none">
   <div class="flex mb-1 mx-4 flex-column">
-    <h4 class="line-text mb-2 semibold primary"><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_EDIT_AFFILIATE') ?></h4>
+    <h4 id="affiliateTitle" class="line-text mb-2 semibold primary"></h4>
     <div class="w-100">
       <div class="mx-auto">
         <!-- cardToCard -->
-        <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_CARD_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span>
-        <!-- cardToBank -->
-        <!-- <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_BANK_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span> -->
-        <!-- mobilePayment -->
-        <!-- <span><?= (TRUE) ? lang('TRANSF_NEW_AFFILIATE_PAY_MSG') : lang('TRANSF_EDIT_AFFILIATE_MSG') ?></span> -->
+        <span id="affiliateMessage"></span>
         <div class="line-text my-2"></div>
         <form id="manageAffiliate">
           <div class="row">
@@ -43,9 +39,15 @@
               </div>
             </div>
             <div class="form-group col-6 col-lg-4">
-              <label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
+						<?php if ($view == 'cardToCard') : ?>
+							<label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
               <input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
               <div class="help-block"></div>
+						<?php else : ?>
+							<label for="destinationAccount"><?= LANG('TRANSF_DEST_ACCOUNT_NUMBER') ?></label>
+              <input id="destinationAccount" class="form-control" type="text" name="destinationAccount" autocomplete="off">
+              <div class="help-block"></div>
+						<?php endif; ?>
             </div>
             <div class="form-group col-6 col-lg-4">
               <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
