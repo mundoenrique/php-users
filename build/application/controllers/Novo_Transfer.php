@@ -164,8 +164,8 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->msgTransfer = lang('TRANSF_BETWEEN_CARDS_MSG');
 		$this->render->tHeaders = [
 			lang('TRANSF_AFFILIATE'),
-			lang('TRANSF_BANK'),
 			lang('GEN_DNI'),
+			lang('TRANSF_NUMBER_PHONE'),
 			lang('TRANSF_OPTIONS')
 		];
 
