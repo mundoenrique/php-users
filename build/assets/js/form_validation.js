@@ -269,8 +269,16 @@ function validateForms(form) {
 			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
 			"bank": lang.VALIDATE_BANK,
 			"beneficiary": lang.VALIDATE_BENEFIT,
-			"destinationCard": lang.VALIDATE_DESTINATION_CARD,
-			"destinationAccount": lang.VALIDATE_DESTINATION_ACCOUNT,
+			"destinationCard": {
+				required: lang.VALIDATE_DESTINATION_CARD,
+				pattern: lang.VALIDATE_CARD_NUMBER,
+				maxlength: lang.VALIDATE_CARD_NUMBER
+			},
+			"destinationAccount": {
+				required: lang.VALIDATE_DESTINATION_ACCOUNT,
+				pattern: lang.VALIDATE_ACCOUNT_NUMBER,
+				exactLength: lang.VALIDATE_ACCOUNT_NUMBER_FORMAT
+			},
 			"amount": lang.VALIDATE_AMOUNT,
 			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {
