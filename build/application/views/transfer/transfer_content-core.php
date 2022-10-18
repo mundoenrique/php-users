@@ -5,11 +5,6 @@
     <div class="w-100">
       <div class="mx-auto">
         <span><?= $msgTransfer ?></span>
-        <!-- cardToBank -->
-        <!-- <span><?= lang('TRANSF_BANK_ACCOUNTS_MSG') ?></span> -->
-        <!-- mobilePayment -->
-        <!-- <span><?= lang('TRANSF_PAY_MOVIL_MSG') ?></span> -->
-
         <div class="line-text my-2"></div>
         <div id="pre-loader" class="w-100 hide">
           <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
@@ -47,14 +42,15 @@
           <input type="hidden" id="filterMonth" name="filterMonth" value="0">
           <input type="hidden" id="filterYear" name="filterYear" value="0">
           <div class="row">
+					<?php if($view != 'cardToCard') : ?>
             <div class="form-group col-6 col-lg-4">
               <label for="bank"><?= lang('TRANSF_BANK') ?></label>
               <select id="bank" class="custom-select form-control" name="bank">
                 <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                <option value="Cedula">Bancaribe</option>
               </select>
               <div class="help-block"></div>
             </div>
+						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
               <label for="beneficiary"><?= lang('TRANSF_BENEFICIARY') ?></label>
               <input id="beneficiary" class="form-control" type="text" name="beneficiary" autocomplete="off">
@@ -76,16 +72,26 @@
                 </div>
               </div>
             </div>
+            <?php if ($view != 'mobilePayment') : ?>
             <div class="form-group col-6 col-lg-4">
-              <label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
+						<?php if ($view == 'cardToCard') : ?>
+							<label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
               <input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
               <div class="help-block"></div>
+						<?php else : ?>
+							<label for="destinationAccount"><?= LANG('TRANSF_DEST_ACCOUNT_NUMBER') ?></label>
+              <input id="destinationAccount" class="form-control" type="text" name="destinationAccount" autocomplete="off">
+              <div class="help-block"></div>
+						<?php endif; ?>
             </div>
+						<?php endif; ?>
+						<?php if ($view != 'cardToCard') : ?>
             <div class="form-group col-6 col-lg-4">
               <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
               <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
               <div class="help-block"></div>
             </div>
+						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
               <label for="email"><?= lang('GEN_EMAIL') ?></label>
               <input id="email" class="form-control" type="text" name="email" autocomplete="off">

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <h1 class="primary h3 semibold inline"><?= lang('TRANSF_CARD'); ?></h1>
-<div class="row">
+<div id='transferView' class="row" operation-type='P2P'>
   <div class="flex flex-column pt-3 col-xl-4 px-xl-2 mx-auto">
     <div class="flex flex-wrap">
       <div class="w-100">
@@ -38,7 +38,7 @@
             <?php endif; ?>
           </div>
         </div>
-        <div class="flex col-12 mt-2 center infoContained">
+        <div class="flex col-12 mt-2 center info-contained">
           <ul class="flex flex-auto justify-between px-4 px-xl-5">
 						<li id="avaibleBalance" class="list-inline-item"><? $totalCards === 1 ? lang('TRANSF_AVAILABLE_BALANCE') : '' ?></li>
             <li id="currentBalance" class="list-inline-item"><? $totalCards === 1 ? lang('GEN_WAIT_BALANCE') : '' ?></li>

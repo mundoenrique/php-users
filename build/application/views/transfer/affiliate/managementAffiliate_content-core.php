@@ -4,11 +4,11 @@
     <h4 id="affiliateTitle" class="line-text mb-2 semibold primary"></h4>
     <div class="w-100">
       <div class="mx-auto">
-        <!-- cardToCard -->
         <span id="affiliateMessage"></span>
         <div class="line-text my-2"></div>
         <form id="manageAffiliate">
           <div class="row">
+						<?php if($view != 'cardToCard') : ?>
             <div class="form-group col-6 col-lg-4">
               <label for="bank"><?= lang('TRANSF_BANK') ?></label>
               <select id="bank" class="custom-select form-control" name="bank">
@@ -16,6 +16,7 @@
               </select>
               <div class="help-block"></div>
             </div>
+						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
               <label for="beneficiary"><?= lang('TRANSF_BENEFICIARY') ?></label>
               <input id="beneficiary" class="form-control" type="text" name="beneficiary" autocomplete="off">
@@ -51,11 +52,13 @@
 						<?php endif; ?>
             </div>
 						<?php endif; ?>
+						<?php if ($view != 'cardToCard') : ?>
             <div class="form-group col-6 col-lg-4">
               <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
               <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
               <div class="help-block"></div>
             </div>
+						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
               <label for="email"><?= lang('GEN_EMAIL') ?></label>
               <input id="email" class="form-control" type="text" name="email" autocomplete="off">

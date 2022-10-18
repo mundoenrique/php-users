@@ -1,5 +1,6 @@
 "use strict";
 $(function () {
+	var operationType = $('#transferView').attr('operation-type');
 	var liOptions = $(".nav-item-config");
 	var cardData;
 
@@ -210,4 +211,49 @@ $(function () {
 			$("#currentBalance").text(response.msg);
 		});
 	}
+
+	// Funcionalidad del selector/buscador
+	$("body").on("focus", ".select-search-input", function () {
+		var search = $(this).val().trim();
+		$(this).val(search || "");
+		var selector = $(this).next(".select-search");
+		selector.css("display", "block");
+		$(this)
+			.closest(".select-by-search")
+			.find(".close-selector")
+			.css("display", "block");
+	});
+
+	$("body").on("input", ".select-search-input", function () {
+		var selector = $(this).next(".select-search");
+		var search = $(this).val().trim().toLowerCase();
+		selector.find("li").addClass("hidden");
+		var matches = selector.find('li:contains("' + search + '")');
+		selector.find(".no-results").remove();
+		if (matches.length == 0) {
+			selector.append(
+				'<li class="no-results">' + lang.GEN_NO_RESULTS + '</li>'
+			);
+		}
+		matches.removeClass("hidden");
+	});
+
+	$("body").on("click", ".select-search>*:not(.no-results)", function () {
+		var value = $(this).attr("value"),
+		text = $(this).text().trim(),
+		container = $(this).closest(".select-by-search");
+		container.find("input.select-search-input").val(text);
+		container.find("li").removeClass("active");
+		$(this)
+			.addClass("active")
+			.prependTo(container.find(".select-search"));
+		container.find(".select-search").css("display", "none");
+		$(".close-selector").css("display", "none");
+		container.find("#directory").val(value);
+	});
+
+	$("body").on("click", ".close-selector", function () {
+		$(".select-search").css("display", "none");
+		$(this).css("display", "none");
+	});
 });

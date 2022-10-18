@@ -10,7 +10,6 @@ class Novo_Transfer extends NOVO_Controller {
 	private $navItemsConfig;
 	private $attrNoPointer;
 
-
 	public function __construct()
 	{
 		parent:: __construct();
@@ -130,7 +129,6 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/cardToCard",
 			"transfer/transferHelpers"
 		);
 
@@ -161,10 +159,9 @@ class Novo_Transfer extends NOVO_Controller {
 			$this->navItemsConfig['history']['activePointer'] = '';
 		}
 
-
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BETWEEN_CARDS_MSG');
-		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
+		$this->render->titleTable = lang('TRANSF_DESTINATION_CARD');
 		$this->render->navItemsConfig = $this->navItemsConfig;
 
 		$this->views = ['transfer/'.$view];
@@ -187,7 +184,6 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/cardToBank",
 			"transfer/transferHelpers"
 		);
 
@@ -243,7 +239,6 @@ class Novo_Transfer extends NOVO_Controller {
 			"third_party/jquery.validate",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/mobilePayment",
 			"transfer/transferHelpers"
 		);
 
@@ -275,10 +270,9 @@ class Novo_Transfer extends NOVO_Controller {
 			$this->navItemsConfig['history']['activePointer'] = '';
 		}
 
-
 		$this->render->titleTransfer = lang('TRANSF_MAKE_PAYMENT');
 		$this->render->msgTransfer = lang('TRANSF_PAY_MOVIL_MSG');
-		$this->render->titleTable = lang('TRANSF_ACCOUNT_PHONE');
+		$this->render->titleTable = lang('TRANSF_NUMBER_PHONE');
 		$this->render->navItemsConfig = $this->navItemsConfig;
 
 		$this->views = ['transfer/'.$view];

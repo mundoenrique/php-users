@@ -31,39 +31,9 @@
               </div>
               <div class="flex px-2 flex-column mr-auto">
                 <span class="h5 semibold feed-product">Yhoan alfonso sulbaran ccs noroeste ve</span>
-                <span id="historyModalDetails" class="h6 feed-metadata">119112055118</span>
+                <span class="btn-link h6 feed-metadata">119112055118</span>
               </div>
               <span class="px-2 feed-amount items-center">- $ 32.000.000,00</span>
-            </li>
-            <li class="feed-item feed-income flex py-2 items-center">
-              <div class="flex px-2 flex-column items-center feed-date">
-                <span class="h5">09 Jul 2021</span>
-              </div>
-              <div class="flex px-2 flex-column mr-auto">
-                <span class="h5 semibold feed-product">Beneficio de alimentacion</span>
-                <span class="h6 feed-metadata">510181</span>
-              </div>
-              <span class="px-2 feed-amount items-center">+ $ 29.500.000,00</span>
-            </li>
-            <li class="feed-item feed-expense flex py-2 items-center">
-              <div class="flex px-2 flex-column items-center feed-date">
-                <span class="h5">19 Jun 2021</span>
-              </div>
-              <div class="flex px-2 flex-column mr-auto">
-                <span class="h5 semibold feed-product">Inversiones zacamar c. ccs noroeste ve</span>
-                <span class="h6 feed-metadata">117015007660</span>
-              </div>
-              <span class="px-2 feed-amount items-center">- $ 2.700.000,00</span>
-            </li>
-            <li class="feed-item feed-expense flex py-2 items-center">
-              <div class="flex px-2 flex-column items-center feed-date">
-                <span class="h5">19 Jun 2021</span>
-              </div>
-              <div class="flex px-2 flex-column mr-auto">
-                <span class="h5 semibold feed-product">Yhoan alfonso sulbaran ccs noroeste ve</span>
-                <span class="h6 feed-metadata">117012054741</span>
-              </div>
-              <span class="px-2 feed-amount items-center">- $ 23.670.000,00</span>
             </li>
           </ul>
         </div>

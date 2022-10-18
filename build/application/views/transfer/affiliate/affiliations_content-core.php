@@ -39,7 +39,6 @@
                     <th><?= lang('TRANSF_AFFILIATE') ?></th>
                     <th><?= lang('TRANSF_BANK') ?></th>
                     <th> <?= $titleTable ?></th>
-										 <!-- <?= lang('TRANSF_DESTINATION_CARD') ?> / <?= lang('TRANSF_NUMBER_PHONE') ?> -->
                     <th><?= lang('TRANSF_OPTIONS') ?></th>
                   </tr>
                 </thead>
