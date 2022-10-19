@@ -315,6 +315,12 @@ $config = [
 			'rules' => 'trim'
 		]
 	],
+	'getAffiliations' => [
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		]
+	],
 	'affiliate' => [
 		[
 			'field' => 'bank',
@@ -356,6 +362,10 @@ $config = [
 			'label' => 'email',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		]
 	],
 	'cardToCard' => [
 		[
