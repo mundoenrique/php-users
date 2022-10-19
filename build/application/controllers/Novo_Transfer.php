@@ -165,7 +165,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->tHeaders = [
 			lang('TRANSF_AFFILIATE'),
 			lang('GEN_DNI'),
-			lang('TRANSF_NUMBER_PHONE'),
+			lang('TRANSF_DESTINATION_CARD'),
 			lang('TRANSF_OPTIONS')
 		];
 

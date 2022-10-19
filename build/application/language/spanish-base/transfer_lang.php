@@ -54,3 +54,4 @@ $lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Afiliado guardado de forma exitosa
 $lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'No fue posible guardar nuevo afiliado.';
 $lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Afiliado actualizado de forma exitosa.';
 $lang['TRANSF_FAILED_AFFILIATE_UPDATE'] = 'No fue posible actualizar al afiliado';
+$lang['TRANSF_EMPTY_AFFILIATE_ACCOUNTS'] = 'No tienes cuentas afiliadas.';

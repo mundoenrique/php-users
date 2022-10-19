@@ -5,7 +5,6 @@ $(function () {
 	var cardData;
 	var affiliationsList = [];
 
-
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
 
@@ -57,6 +56,7 @@ $(function () {
 		$("#" + liOptionId + "View").fadeIn(700, "linear");
 	});
 
+	// Carga tabla lista de afiliados
 	$("#affiliations").on("click", function (e) {
 		e.preventDefault();
 		who = "Transfer";
@@ -64,14 +64,13 @@ $(function () {
 		data = { operationType: operationType };
 
 		callNovoCore(who, where, data, function (response) {
-			// if (response.code == 0) {
-
-			// } else {
-
-			// }
-			console.log(response);
+			if (response.code == 0) {
+				affiliationsList = response.data;
+				setAffiliateDataTable();
+			} else {
+				//modal no fue posible obtener afiliados
+			}
 		});
-		// getAffiliations();
 	});
 
 	// Al hacer click en Nueva afiliación
@@ -201,16 +200,6 @@ $(function () {
 		$(this).css("display", "none");
 	});
 
-	function getAffiliations() {
-		who = "Transfer";
-		where = "GetAffiliations";
-		data = { operationType: operationType };
-
-		callNovoCore(who, where, data, function (response) {
-			console.log(response);
-		});
-	}
-
 	function getBalance() {
 		form = $("#operation");
 		data = cardData = getDataForm(form);
@@ -222,6 +211,38 @@ $(function () {
 
 		callNovoCore(who, where, data, function (response) {
 			$("#currentBalance").text(response.msg);
+		});
+	}
+
+	function setAffiliateDataTable() {
+		var columns, row, tdOptions;
+		switch (operationType) {
+			case "P2P":
+				columns = ["NombreCliente", "id_ext_per", "noTarjetaConMascara"];
+				break;
+			case "P2T":
+				columns = ["beneficiario", "banco", "noCuenta"];
+				break;
+			case "PMV":
+				columns = ["beneficiario", "banco", "telefono"];
+				break;
+		}
+
+		affiliationsList.forEach((value, index) => {
+			row = $("<tr></tr>");
+			columns.forEach((element) => {
+				row.append(`<td>${value[element]}</td>`);
+			});
+			tdOptions = `<td class="py-0 px-1 flex justify-center items-center">
+				<button class="btn mx-1 px-0" title="${lang.TRANSF_EDIT}" data-index="${index}" data-action="edit" data-toggle="tooltip">
+					<i class="icon icon-edit" aria-hidden="true"></i>
+				</button>
+				<button class="btn mx-1 px-0 big-modal" title="${lang.TRANSF_DELETE}" data-index="1" data-action="delete" data-toggle="tooltip">
+					<i class="icon icon-remove" aria-hidden="true"></i>
+				</button>
+			</td>`;
+			row.append(tdOptions);
+			$("#affiliationTable tbody").append(row);
 		});
 	}
 

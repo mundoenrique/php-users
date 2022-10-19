@@ -42,32 +42,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>David Gutierrez</td>
-                    <td>Banco Provincial</td>
-                    <td>04242345678</td>
-                    <td class="py-0 px-1 flex justify-center items-center">
-                      <button class="btn mx-1 px-0" title="<?= lang('TRANSF_EDIT') ?>" data-action="edit" data-toggle="tooltip">
-                        <i class="icon icon-edit" aria-hidden="true"></i>
-                      </button>
-                      <button class="btn mx-1 px-0 big-modal" title="<?= lang('TRANSF_DELETE') ?>" data-action="delete" data-toggle="tooltip">
-                        <i class="icon icon-remove" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>David Gutierrez</td>
-                    <td>Banco Provincial</td>
-                    <td>04242345678</td>
-                    <td class="py-0 px-1 flex justify-center items-center">
-                      <button class="btn mx-1 px-0" title="<?= lang('TRANSF_EDIT') ?> "data-action="edit" data-toggle="tooltip">
-                        <i class="icon icon-edit" aria-hidden="true"></i>
-                      </button>
-                      <button class="btn mx-1 px-0 big-modal" title="<?= lang('TRANSF_DELETE') ?> "data-action="delete" data-toggle="tooltip">
-                        <i class="icon icon-remove" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>

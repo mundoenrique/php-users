@@ -54,3 +54,4 @@ $lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Affiliate successfully saved.';
 $lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'Failed to save new affiliate.';
 $lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Affiliate updated successfully.';
 $lang['TRANSF_FAILED_AFFILIATE_UPDATE'] = 'Failed to upgrade affiliate.';
+$lang['TRANSF_EMPTY_AFFILIATE_ACCOUNTS'] = 'You have no affiliated accounts.';
