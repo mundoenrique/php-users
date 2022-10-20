@@ -149,7 +149,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					} else {
 						$this->response->code = 1;
 						$this->response->icon = lang('CONF_ICON_WARNING');
-						$this->response->msg = $otpChannel === lang('CONF_MFA_CHANNEL_APP') ? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo' : 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
+						$this->response->msg = $otpChannel === lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_CODE_INCORRECT') : lang('MFA_CODE_INCORRECT_AGAIN');
 						$this->response->modalBtn['btn1']['action'] = 'none';
 					}
 				}
@@ -158,9 +158,9 @@ class Novo_Mfa_Model extends NOVO_Model {
 			case 464:
 				$this->response->title = lang('GEN_MENU_MFA');
 				$this->response->icon = lang('CONF_ICON_WARNING');
-				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel === lang('CONF_MFA_CHANNEL_APP'))
-				 	? 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo'
-					: 'El código de autenticación es incorrecto, verifícalo e intenta de nuevo o solicita otro';
+				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel === lang('MFA_CODE_INCORRECT'))
+				 	? lang('CONF_MFA_CHANNEL_APP')
+					: lang('MFA_CODE_INCORRECT_AGAIN');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
 				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {

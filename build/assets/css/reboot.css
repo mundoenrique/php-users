@@ -2298,6 +2298,10 @@ label {
 	vertical-align: bottom;
 }
 
+.trun-mfa {
+	overflow: clip !important;
+}
+
 /* Transform */
 .lowercase  { text-transform: lowercase !important }
 .uppercase    { text-transform: uppercase !important }
