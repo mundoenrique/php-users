@@ -7,26 +7,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Connect_Services_Apis
 {
 	private $CI;
-	private $logMessage;
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Connect_Services_Apis Library Class Initialized');
+		writeLog('INFO', 'Connect_Services_Apis Library Class Initialized');
 
 		$this->CI =& get_instance();
-		$this->logMessage = new stdClass();
-
 	}
 
 	public function getJwtOauth()
 	{
-		log_message('INFO', 'NOVO Connect_Services_Apis: getJwtOauth Method Initialized');
+		writeLog('INFO', 'Connect_Services_Apis: getJwtOauth Method Initialized');
 
 		$urlApiGeeHost = URL_APIGEE_OAUTH;
 		$clientIdApiGee = CLIENT_ID_APIGEE;
 		$ClientSecretApigee = CLIENT_SECRET_APIGEE;
 
-		log_message('DEBUG', 'NOVO CORE_SERVICE URL: ' . $urlApiGeeHost);
+		writeLog('DEBUG', 'CORE_SERVICE URL: ' . $urlApiGeeHost);
 
 		$startReq = microtime(true);
 		$curl = curl_init();
@@ -60,7 +57,7 @@ class Connect_Services_Apis
 		$finalReq = microtime(true);
 		$executionTime = round($finalReq - $startReq, 2, PHP_ROUND_HALF_UP);
 
-		log_message('DEBUG', 'NOVO RESPONSE IN '. $executionTime .' sec CURL HTTP CODE: ' . $curlHttpCode);
+		writeLog('DEBUG', 'RESPONSE IN ' . $executionTime . ' sec CURL HTTP CODE: ' . $curlHttpCode);
 
 		$curlResponse = json_decode($curlResponse);
 
@@ -89,7 +86,7 @@ class Connect_Services_Apis
 
 	public function connectMfaServices($request)
 	{
-		log_message('INFO', 'NOVO Connect_Services_Apis: connectMfaServices Method Initialized');
+		writeLog('INFO', 'Connect_Services_Apis: connectMfaServices Method Initialized');
 
 		if (API_GEE_WAY && !$this->CI->session->tempdata('jwtOauth')) {
 			$this->getJwtOauth()						;
@@ -99,7 +96,7 @@ class Connect_Services_Apis
 		$uuIdV4 = uuIdV4Generate();
 		$startReq = microtime(true);
 
-		log_message('DEBUG', 'URL: ' . $urlMfaServ. ', UUID: '. $uuIdV4);
+		writeLog('DEBUG', 'URL: ' . $urlMfaServ. ', UUID: '. $uuIdV4);
 
 		$curl = curl_init();
 
@@ -137,11 +134,11 @@ class Connect_Services_Apis
 		$finalReq = microtime(true);
 		$executionTime = round($finalReq - $startReq, 2, PHP_ROUND_HALF_UP);
 
-		log_message('DEBUG', 'RESPONSE IN '. $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode .
+		writeLog('DEBUG', 'RESPONSE IN '. $executionTime . ' SEC, CURL HTTPCODE: ' . $response->HttpCode .
 			', SERVICE CODE: ' . $response->code . ' ' .$response->message);
 
 		if ($response->errorNo !== 0) {
-			log_message('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
+			writeLog('ERROR', 'CURL ERROR NUMBER: ' . $response->errorNo . ', ERROR MESSAGE: ' . $response->error);
 		}
 
 		return responseServer($response);

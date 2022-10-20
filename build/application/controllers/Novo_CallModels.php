@@ -9,7 +9,7 @@ class Novo_CallModels extends Novo_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CallModels Controller Class Initialized');
+		writelog('INFO', 'CallModels Controller Class Initialized');
 
 		if($this->input->is_ajax_request()) {
 			$this->fileLanguage = lcfirst($this->dataRequest->who);
@@ -18,6 +18,7 @@ class Novo_CallModels extends Novo_Controller {
 			$this->modelMethod = 'callWs_'.ucfirst($this->dataRequest->where).'_'.$this->dataRequest->who;
 		} else {
 			redirect('page-no-found', 'Location', 301);
+			exit();
 		}
 	}
 	/**
@@ -27,7 +28,7 @@ class Novo_CallModels extends Novo_Controller {
 	 */
 	public function index()
 	{
-		log_message('INFO', 'NOVO CallModels: index Method Initialized');
+		writelog('INFO', 'CallModels: index Method Initialized');
 
 		if (!empty($this->dataRequest->data)) {
 			foreach ($this->dataRequest->data AS $item => $value) {
@@ -35,25 +36,15 @@ class Novo_CallModels extends Novo_Controller {
 			}
 		}
 
-		if (!$this->appUserName) {
-			if ($this->input->post('userName') != NULL)	{
-				$this->appUserName = mb_strtoupper($this->input->post('userName'));
-			} elseif ($this->input->post('idNumber') != NULL)	{
-				$this->appUserName = mb_strtoupper($this->input->post('idNumber'));
-			} elseif ($this->input->post('documentId') != NULL)	{
-				$this->appUserName = mb_strtoupper($this->input->post('documentId'));
-			}
-		}
-
 		unset($this->dataRequest);
-		$valid = $this->verify_access->accessAuthorization($this->validationMethod, $this->appUserName);
+		$valid = $this->verify_access->accessAuthorization($this->validationMethod);
 
 		if (!empty($_FILES) && $valid) {
 			$valid = $this->tool_file->uploadFiles();
 		}
 
 		if ($valid) {
-			$valid = $this->verify_access->validateForm($this->validationMethod, $this->appUserName);
+			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
 
 		$this->config->set_item('language', BASE_LANGUAGE . '-base');
@@ -62,10 +53,10 @@ class Novo_CallModels extends Novo_Controller {
 		LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 		if ($valid) {
-			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod, $this->appUserName);
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
-			$this->dataResponse = $this->verify_access->responseByDefect($this->appUserName);
+			$this->dataResponse = $this->verify_access->responseByDefect();
 		}
 
 		$customerData = encryptData($this->dataResponse);

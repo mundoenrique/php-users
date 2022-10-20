@@ -28,12 +28,11 @@ class NOVO_Controller extends CI_Controller {
 	protected $dataRequest;
 	protected $greeting;
 	protected $views;
-	protected $appUserName;
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Controller Class Initialized');
+		writeLog('INFO', 'Controller Class Initialized');
 
 		$class = $this->router->fetch_class();
 		$method = $this->router->fetch_method();
@@ -53,7 +52,6 @@ class NOVO_Controller extends CI_Controller {
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
 		$this->nameApi = '';
-		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
 
 		if ($this->customerUri === "api") {
 			$transforNameApi = explode("-", $this->uri->segment(4));
@@ -73,7 +71,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	private function optionsCheck()
 	{
-		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
+		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
 
 		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
@@ -123,7 +121,7 @@ class NOVO_Controller extends CI_Controller {
 					}
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->validationMethod, $this->appUserName);
+				$access = $this->verify_access->accessAuthorization($this->validationMethod);
 				$valid = TRUE;
 
 				if ($_POST && $access) {
@@ -136,12 +134,10 @@ class NOVO_Controller extends CI_Controller {
 						}
 					}
 
-					$valid = $this->verify_access->validateForm($this->validationMethod, $this->appUserName);
+					$valid = $this->verify_access->validateForm($this->validationMethod);
 
 					if ($valid) {
-						$this->request = $this->verify_access->createRequest(
-							$this->controllerClass, $this->controllerMethod, $this->appUserName
-						);
+						$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
 					}
 				}
 
@@ -156,7 +152,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function preloadView($auth)
 	{
-		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
+		writeLog('INFO', 'Controller: preloadView Method Initialized');
 
 		$this->render->totalCards = 0;
 
@@ -175,10 +171,6 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->sessionTime = $this->config->item('session_time');
 			$this->render->callServer = $this->config->item('session_call_server');
 			$this->render->prefix = '';
-			//Eliminar despues de finalizar desde aquí
-			$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
-			$this->render->callServer = $this->render->callModal;
-			//Eliminar despues de finalizar hasta aquí
 
 			switch ($this->greeting) {
 				case $this->greeting >= 19 && $this->greeting <= 23:
@@ -249,7 +241,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
+		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
 
 		$this->load->model($this->modelClass, 'modelLoaded');
 		$method = $this->modelMethod;
@@ -264,7 +256,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView = 0)
 	{
-		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
+		writeLog('INFO', 'Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
 
@@ -289,7 +281,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function checkBrowser()
 	{
-		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
+		writeLog('INFO', 'Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
@@ -308,7 +300,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: ' . $module);
+		writeLog('INFO', 'Controller: loadView Method Initialized. Module loaded: ' . $module);
 
 		$userMenu = new stdClass();
 		$mainMenu = mainMenu();
@@ -345,20 +337,20 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadApiModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO Controller: loadApiModel Method Initialized');
+		writeLog('INFO', 'Controller: loadApiModel Method Initialized');
 
 		$responseModel = $this->tool_api->setResponseNotValid();
-		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: ' . $this->modelClass . '/' . $this->modelMethod;
+		$showMsgLog = 'Controller: loadApiModel Model NOT loaded: ' . $this->modelClass . '/' . $this->modelMethod;
 
 		if (file_exists(APPPATH."models/{$this->modelClass}.php")) {
 			$this->load->model($this->modelClass, 'modelLoaded');
 
 			$method = $this->modelMethod;
 			$responseModel = $this->modelLoaded->$method($request);
-			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
+			$showMsgLog = 'Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
 				$this->modelMethod;
 		}
-		log_message('DEBUG', $showMsgLog);
+		writeLog('DEBUG', $showMsgLog);
 
 		return $responseModel;
 	}

@@ -151,7 +151,7 @@ $(function(){
 			anioActual		= anio.getFullYear();
 			mesActual		= anio.getMonth() + 1;
 			diaActual		= anio.getDate();
-			anioMayorEdad	= parseInt(anioActual - 18);
+			anioMayorEdad	= parseInt(anioActual - pais === 'Ve' ? 14 : 18);
 
 			cuenta		= Base64.encode(cuenta);
 			id_ext_per	= Base64.encode(id_ext_per);

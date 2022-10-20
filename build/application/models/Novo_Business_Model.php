@@ -10,7 +10,7 @@ class Novo_Business_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Model Class Initialized');
+		writeLog('INFO', 'Business Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,7 +19,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_UserCardsList_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
+		writeLog('INFO', 'Business Model: UserCardsList Method Initialized');
 
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
@@ -161,7 +161,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetBalance_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: GetBalance Method Initialized');
+		writeLog('INFO', 'Business Model: GetBalance Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
@@ -193,7 +193,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_CardDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CardDetail Method Initialized');
+		writeLog('INFO', 'Business Model: CardDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -290,7 +290,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_MonthlyMovements_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: MonthlyMovements Method Initialized');
+		writeLog('INFO', 'Business Model: MonthlyMovements Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -347,7 +347,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_DownloadMoves_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: DownloadMoves Method Initialized');
+		writeLog('INFO', 'Business Model: DownloadMoves Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -398,7 +398,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_CardListOperations_Business ($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CardListOperations Method Initialized');
+		writeLog('INFO', 'Business Model: CardListOperations Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -463,7 +463,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 	public function callWs_getVirtualDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getVirtualDetail method Initialized');
+		writeLog('INFO', 'Business Model: getVirtualDetail method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';

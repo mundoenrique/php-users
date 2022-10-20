@@ -34,6 +34,7 @@ if (!function_exists('clientUrlValidate')) {
 		if(!in_array($client, $accessUrl)) {
 			$client = current($accessUrl);
 			redirect(base_url($client.$uriCore), 'Location', 301);
+			exit();
 		}
 
 		if (in_array($client, $accessUrl)) {
