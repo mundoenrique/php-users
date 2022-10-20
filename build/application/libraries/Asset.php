@@ -12,7 +12,7 @@ class Asset {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Assets Library Class Initialized');
+		writeLog('INFO', 'Assets Library Class Initialized');
 
 		$this->cssFiles = [];
 		$this->jsFiles = [];
@@ -25,7 +25,8 @@ class Asset {
 	 */
 	public function initialize($params = [])
 	{
-		log_message('INFO', 'NOVO Asset: initialize method initialized');
+		writeLog('INFO', 'Asset: initialize method initialized');
+
 		foreach($params as $arrayFiles => $file) {
 			isset($this->$arrayFiles) ? $this->$arrayFiles = $file : '';
 		}
@@ -36,17 +37,18 @@ class Asset {
 	 */
 	public function insertCss()
 	{
-		log_message('INFO', 'NOVO Asset: insertCss method initialized');
+		writeLog('INFO', 'Asset: insertCss method initialized');
 		$file_url = NULL;
+
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/'.$fileName.'.css');
 
 			if(!file_exists($file)) {
-				log_message('ERROR', 'Archivo requerido '.$fileName.'.css');
+				writeLog('ERROR', 'Archivo requerido ' . $fileName . '.css');
 			}
 
 			$file = $this->versionFiles($file, $fileName, '.css');
-			$file_url .= '<link rel="stylesheet" href="'.assetUrl('css/'.$file).'" media="all">'.PHP_EOL;
+			$file_url .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
 		}
 
 		return $file_url;
@@ -57,13 +59,13 @@ class Asset {
 	 */
 	public function insertJs()
 	{
-		log_message('INFO', 'NOVO Asset: insertJs method initialized');
+		writeLog('INFO', 'Asset: insertJs method initialized');
 		$file_url = NULL;
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/'.$fileName.'.js');
+			$file = assetPath('js/' . $fileName . '.js');
 			$file = $this->versionFiles($file, $fileName, '.js');
-			$file_url .= '<script defer src="'.assetUrl('js/'.$file).'"></script>'.PHP_EOL;
+			$file_url .= '<script defer src="' . assetUrl('js/'.$file) . '"></script>' . PHP_EOL;
 		}
 
 		return $file_url;
@@ -74,20 +76,20 @@ class Asset {
 	 */
 	public function insertFile($fileName, $folder = 'images', $customerUri = FALSE)
 	{
-		log_message('INFO', 'NOVO Asset: insertFile method initialized');
+		writeLog('INFO', 'Asset: insertFile method initialized');
 
 		$customerUri = $customerUri ? $customerUri.'/' : '';
 		$customerUri = tenantSameSettings($customerUri);
-		$file = assetPath($folder.'/'.$customerUri.$fileName);
+		$file = assetPath($folder . '/' . $customerUri.$fileName);
 
 		if (!file_exists($file)) {
-			$file = assetPath($folder.'/default'.'/'.$fileName);
+			$file = assetPath($folder . '/default' . '/' . $fileName);
 			$customerUri = 'default/';
 		}
 
 		$version = '?V'.date('Ymd-U', filemtime($file));
 
-		return assetUrl($folder.'/'.$customerUri.$fileName.$version);
+		return assetUrl($folder . '/' . $customerUri . $fileName . $version);
 	}
 	/**
 	 * @info Método para versionar archivos
@@ -99,11 +101,11 @@ class Asset {
 		$thirdParty = strpos($fileName, 'third_party');
 
 		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V'.date('Ymd-U', filemtime($file));
+			$version = '?V' . date('Ymd-U', filemtime($file));
 		} else {
-			$ext = '.min'.$ext;
+			$ext = '.min' . $ext;
 		}
 
-		return $fileName.$ext.$version;
+		return $fileName . $ext . $version;
 	}
 }

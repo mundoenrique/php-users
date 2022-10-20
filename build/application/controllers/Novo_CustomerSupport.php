@@ -10,7 +10,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CustomerSupport Controller Class Initialized');
+		writeLog('INFO', 'CustomerSupport Controller Class Initialized');
 	}
 	/**
 	 * @info Método para obtener las opciones de atención al cliente
@@ -19,7 +19,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 	 */
 	public function services()
 	{
-		log_message('INFO', 'NOVO CustomerSupport: services Method Initialized');
+		writeLog('INFO', 'CustomerSupport: services Method Initialized');
 
 		$view = 'services';
 		array_push(
@@ -112,7 +112,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 	 */
 	public function notifications()
 	{
-		log_message('INFO', 'NOVO CustomerSupport: notifications Method Initialized');
+		writeLog('INFO', 'CustomerSupport: notifications Method Initialized');
 
 		$view = 'notifications';
 		array_push(

@@ -10,7 +10,7 @@ class Novo_Business extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Controller Class Initialized');
+		writeLog('INFO', 'Business Controller Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,7 +19,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function userCardsList()
 	{
-		log_message('INFO', 'NOVO User: userCardsList Method Initialized');
+		writeLog('INFO', 'User: userCardsList Method Initialized');
 
 		$view = 'userCardsList';
 
@@ -57,7 +57,7 @@ class Novo_Business extends NOVO_Controller {
 	 */
 	public function cardDetail()
 	{
-		log_message('INFO', 'NOVO User: cardDetail Method Initialized');
+		writeLog('INFO', 'User: cardDetail Method Initialized');
 
 		$view = 'cardDetail';
 		array_push(
@@ -76,6 +76,7 @@ class Novo_Business extends NOVO_Controller {
 
 		if (empty((array)$this->request)) {
 			redirect(base_url(lang('CONF_LINK_CARD_LIST')), 'Location', 301);
+			exit();
 		}
 
 		$detailCard = $this->loadModel($this->request);

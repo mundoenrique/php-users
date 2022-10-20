@@ -10,8 +10,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!function_exists('novoLang')) {
 	function novoLang($line, $args = []) {
-		log_message('INFO', 'NOVO Helper loaded: novoLang_helper');
-
 		$line = vsprintf($line, (array) $args);
 
 		return $line;
@@ -24,11 +22,11 @@ if (!function_exists('languageLoad')) {
 		$languagesFile = [];
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');
-		$pathLang = APPPATH.'language'.DIRECTORY_SEPARATOR.$configLanguage.DIRECTORY_SEPARATOR;
+		$pathLang = APPPATH . 'language' . DIRECTORY_SEPARATOR . $configLanguage . DIRECTORY_SEPARATOR;
 
 		$CI->config->set_item('language', 'global');
 
-		log_message('INFO', 'NOVO Helper loaded: languageLoad_helper for ' . $call . ' files');
+		writeLog('INFO', 'Helper loaded: languageLoad_helper for ' . $call . ' files');
 
 		switch ($call) {
 			case 'generic':
@@ -38,12 +36,12 @@ if (!function_exists('languageLoad')) {
 				$globalLan = APPPATH . 'language' . DIRECTORY_SEPARATOR . 'global' . DIRECTORY_SEPARATOR;
 				$customerUri = tenantSameSettings($customerUri);
 
-				if(file_exists($globalLan.'config-core-'.$customerUri.'_lang.php')) {
-					$CI->lang->load('config-core-'.$customerUri,);
+				if(file_exists($globalLan . 'config-core-' . $customerUri .'_lang.php')) {
+					$CI->lang->load('config-core-' . $customerUri,);
 				}
 
-				if(file_exists($globalLan.'images_'.$customerUri.'_lang.php')) {
-					$CI->lang->load('images_'.$customerUri);
+				if(file_exists($globalLan . 'images_' . $customerUri . '_lang.php')) {
+					$CI->lang->load('images_' . $customerUri);
 				}
 				break;
 		}
@@ -51,18 +49,18 @@ if (!function_exists('languageLoad')) {
 		$CI->config->set_item('language', $configLanguage);
 
 		if ($call === 'specific') {
-			if (file_exists($pathLang.'general_lang.php')) {
+			if (file_exists($pathLang . 'general_lang.php')) {
 				array_push($languagesFile, 'general');
 				$loadLanguages = TRUE;
 			}
 
-			if (file_exists($pathLang.'validate_lang.php')) {
+			if (file_exists($pathLang . 'validate_lang.php')) {
 				array_push($languagesFile, 'validate');
 				$loadLanguages = TRUE;
 			}
 		}
 
-		if (file_exists($pathLang.$fileLanguage.'_lang.php')) {
+		if (file_exists($pathLang . $fileLanguage . '_lang.php')) {
 			array_push($languagesFile, $fileLanguage);
 			$loadLanguages = TRUE;
 		}
@@ -75,8 +73,6 @@ if (!function_exists('languageLoad')) {
 
 if (!function_exists('languageCookie')) {
 	function languageCookie($language) {
-		log_message('INFO', 'Novo Helper loaded: languageCookie_helper');
-
 		$baseLanguage = [
 			'name' => 'baseLanguage',
 			'value' => $language,

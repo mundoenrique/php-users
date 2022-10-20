@@ -10,7 +10,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO User Model Class Initialized');
+		writeLog('INFO', 'User Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de estados
@@ -19,7 +19,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_StatesList_Assets($dataRequest)
 	{
-		log_message('INFO', 'NOVO Assets Model: StatesList Method Initialized');
+		writeLog('INFO', 'Assets Model: StatesList Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Lista de Estados';
@@ -56,7 +56,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_CityList_Assets($dataRequest)
 	{
-		log_message('INFO', 'NOVO Assets Model: CityList Method Initialized');
+		writeLog('INFO', 'Assets Model: CityList Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Lista de Ciudades';
@@ -94,7 +94,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_Regions_Assets($dataRequest)
 	{
-		log_message('INFO', 'NOVO Assets Model: Regions Method Initialized');
+		writeLog('INFO', 'Assets Model: Regions Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Lista de Distritos';
@@ -132,7 +132,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_ProfessionsList_Assets($dataRequest)
 	{
-		log_message('INFO', 'NOVO Assets Model: Professions Method Initialized');
+		writeLog('INFO', 'Assets Model: Professions Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Lista de profesiones';
@@ -168,7 +168,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_TypeDocumentList_User()
 	{
-		log_message('INFO', 'NOVO User Model: TypeDocumentList method Initialized');
+		writeLog('INFO', 'User Model: TypeDocumentList method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Lista tipo de documento';
@@ -198,7 +198,7 @@ class Novo_Assets_Model extends NOVO_Model {
 	 */
 	public function callWs_GetToken_Assets()
 	{
-		log_message('INFO', 'NOVO Business Model: GetToken_Assets Method Initialized');
+		writeLog('INFO', 'Business Model: GetToken_Assets Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Activos';
 		$this->dataAccessLog->function = 'Generar token';
