@@ -38,9 +38,9 @@ $(function () {
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
 		$(liOptions).removeClass("active");
+		$("#toTransfer").addClass("active no-pointer");
 		$("#affiliationsView").css("display", "none");
 		$("#toTransferView").show();
-		$("#toTransfer").addClass("active");
 		getBalance();
 	});
 
@@ -50,7 +50,8 @@ $(function () {
 		e.preventDefault();
 		var liOptionId = e.currentTarget.id;
 		$(liOptions).removeClass("active");
-		$(this).addClass("active");
+		$(cardData ? liOptions : "#affiliations").removeClass("no-pointer");
+		$(this).addClass("active no-pointer");
 		$(".transfer-operation").hide();
 		$("#manageAffiliateView").hide();
 		$("#" + liOptionId + "View").fadeIn(700, "linear");
@@ -59,7 +60,7 @@ $(function () {
 	// Carga tabla lista de afiliados
 	$("#affiliations").on("click", function (e) {
 		e.preventDefault();
-		who = "Transfer";
+		who = "Affiliations";
 		where = "GetAffiliations";
 		data = { operationType: operationType };
 
