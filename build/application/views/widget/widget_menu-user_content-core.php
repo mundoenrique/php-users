@@ -22,7 +22,7 @@
 				<?php endif; ?>
 				<?php if(lang('CONF_MFA_ACTIVE') === 'ON' && $this->session->otpActive): ?>
 				<li>
-					<a id="disableTwoFactor" class="pl-2 pr-1 h6 truncate" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_TWO_FACTOR_DISABLE'); ?></a>
+					<a id="disableTwoFactor" class="pl-2 pr-1 h6 truncate trun-mfa" href="<?= lang('CONF_NO_LINK'); ?>"><?= lang('GEN_MENU_TWO_FACTOR_DISABLE'); ?></a>
 				</li>
 				<?php endif; ?>
 				<li>
