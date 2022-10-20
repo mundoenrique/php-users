@@ -10,7 +10,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Mfa Model Class Initialized');
+		writeLog('INFO', 'Mfa Model Class Initialized');
 	}
 
 	/**
@@ -20,7 +20,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_ActivateSecretToken_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: ActivateSecretToken Method Initialized');
+		writeLog('INFO', 'Mfa Model: ActivateSecretToken Method Initialized');
 
 		$this->dataRequest->uri = 'secret-token/generate';
 		$this->dataRequest->requestBody = [
@@ -64,7 +64,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_GenerateTotp_Mfa($dataRequest)
   {
-    log_message('INFO', 'NOVO Mfa Model: GenerateTotp Method Initialized');
+    writeLog('INFO', 'Mfa Model: GenerateTotp Method Initialized');
 
 		$uriValidateTopt = [
 			lang('CONF_MFA_GENERATE_OTP') => 'otp/generate',
@@ -104,7 +104,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 	 */
 	public function callWs_ValidateTotp_Mfa($dataRequest)
 	{
-		log_message('INFO', 'NOVO Mfa Model: ValidateTotp Method Initialized');
+		writeLog('INFO', 'Mfa Model: ValidateTotp Method Initialized');
 
 		$uriValidateTopt = [
 			lang('CONF_MFA_ACTIVATE') => 'secret-token/generate/confirm',

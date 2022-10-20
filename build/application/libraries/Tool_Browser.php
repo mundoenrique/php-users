@@ -10,7 +10,7 @@ class Tool_Browser {
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Tool_Browser Library Class Initialized');
+		writeLog('INFO', 'Tool_Browser Library Class Initialized');
 		$this->CI =& get_instance();
 	}
 	/**
@@ -20,7 +20,7 @@ class Tool_Browser {
 	 */
 	public function validBrowser($customer)
 	{
-		log_message('INFO', 'NOVO Tool_Browser: validBrowser Method Initialized');
+		writeLog('INFO', 'Tool_Browser: validBrowser Method Initialized');
 
 		$valid = FALSE;
 		$platform = 'Unidentified';
@@ -42,7 +42,7 @@ class Tool_Browser {
 
 			if(array_key_exists($browser, $validBrowser)) {
 
-				log_message('DEBUG', 'NOVO validBrowser: browser access '.$browser.' version '.$version);
+				writeLog('DEBUG', 'validBrowser: browser access ' . $browser . ' version ' . $version);
 
 				$browsersIn = TRUE;
 				$valid = $version > $validBrowser[$browser];
@@ -93,7 +93,7 @@ class Tool_Browser {
 			$this->CI->session->set_flashdata('messageBrowser', $message);
 		}
 
-		log_message('DEBUG', 'NOVO validBrowser: platform access ' . $platform);
+		writeLog('DEBUG', 'validBrowser: platform access ' . $platform);
 
 		return $valid;
 	}
