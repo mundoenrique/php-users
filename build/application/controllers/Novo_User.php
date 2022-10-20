@@ -10,7 +10,7 @@ class Novo_User extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO User Controller Class Initialized');
+		writeLog('INFO', 'User Controller Class Initialized');
 
 	}
 	/**
@@ -20,7 +20,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function signin()
 	{
-		log_message('INFO', 'NOVO User: signin Method Initialized');
+		writeLog('INFO', 'User: signin Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'signin';
@@ -62,7 +62,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function userIdentify()
 	{
-		log_message('INFO', 'NOVO User: userIdentify Method Initialized');
+		writeLog('INFO', 'User: userIdentify Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'userIdentify';
@@ -89,7 +89,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function signup()
 	{
-		log_message('INFO', 'NOVO User: signup Method Initialized');
+		writeLog('INFO', 'User: signup Method Initialized');
 
 		$view = 'signup';
 
@@ -149,7 +149,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function accessRecover()
 	{
-		log_message('INFO', 'NOVO User: accessRecover Method Initialized');
+		writeLog('INFO', 'User: accessRecover Method Initialized');
 
 		languageCookie(BASE_LANGUAGE);
 		$view = 'accessRecover';
@@ -173,7 +173,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function changePassword()
 	{
-		log_message('INFO', 'NOVO User: changePassword Method Initialized');
+		writeLog('INFO', 'User: changePassword Method Initialized');
 
 		$view = 'changePassword';
 		array_push(
@@ -218,7 +218,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function profileUser()
 	{
-		log_message('INFO', 'NOVO User: profileUser Method Initialized');
+		writeLog('INFO', 'User: profileUser Method Initialized');
 
 		$view = 'profileUser';
 		array_push(
@@ -305,7 +305,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function finishSession($redirect)
 	{
-		log_message('INFO', 'NOVO User: finishSession Method Initialized');
+		writeLog('INFO', 'User: finishSession Method Initialized');
 
 		$view = 'finishSession';
 
@@ -330,6 +330,7 @@ class Novo_User extends NOVO_Controller {
 			$this->loadView($view);
 		} else {
 			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 301);
+			exit();
 		}
 
 	}
@@ -340,7 +341,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function suggestion()
 	{
-		log_message('INFO', 'NOVO User: suggestion Method Initialized');
+		writeLog('INFO', 'User: suggestion Method Initialized');
 
 		$view = 'suggestion';
 
@@ -371,7 +372,7 @@ class Novo_User extends NOVO_Controller {
 	 */
 	public function termsConditions()
 	{
-		log_message('INFO', 'NOVO User: termsConditions Method Initialized');
+		writeLog('INFO', 'User: termsConditions Method Initialized');
 
 		$view = 'termsConditions';
 		$this->render->activeHeader = TRUE;

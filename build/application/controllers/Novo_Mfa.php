@@ -10,7 +10,7 @@ class Novo_Mfa extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Mfa Controller Class Initialized');
+		writeLog('INFO', 'Mfa Controller Class Initialized');
 	}
 
 	/**
@@ -20,7 +20,7 @@ class Novo_Mfa extends NOVO_Controller {
 	 */
 	public function mfaEnable()
 	{
-		log_message('INFO', 'NOVO Mfa: mfaEnable Method Initialized');
+		writeLog('INFO', 'Mfa: mfaEnable Method Initialized');
 
 		$view = 'mfaEnable';
 
@@ -44,7 +44,7 @@ class Novo_Mfa extends NOVO_Controller {
 	 */
 	public function mfaConfirm($otpChannel)
 	{
-		log_message('INFO', 'NOVO Mfa: mfaConfirm Method Initialized');
+		writeLog('INFO', 'Mfa: mfaConfirm Method Initialized');
 
 		$view = 'mfaConfirm';
 
