@@ -10,7 +10,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CustomerSupport Model Class Initialized');
+		writeLog('INFO', 'CustomerSupport Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,7 +19,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TemporaryLock_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport: TemporaryLock Method Initialized');
+		writeLog('INFO', 'CustomerSupport: TemporaryLock Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
@@ -108,7 +108,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_Replacement_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: Replacement Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: Replacement Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
@@ -221,7 +221,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TwirlsCommercial_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: TwirlsCommercial Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: TwirlsCommercial Method Initialized');
 
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Giros comerciales';
@@ -313,7 +313,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_TransactionalLimits_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: TransactionalLimits Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: TransactionalLimits Method Initialized');
 
 		$this->dataAccessLog->modulo = 'atención al cliente';
 		$this->dataAccessLog->function = 'Limites transaccionales';
@@ -389,7 +389,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_ChangePin_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: ChangePin Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: ChangePin Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Atención al cliente';
 		$this->dataAccessLog->function = 'Servicios';
@@ -486,7 +486,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_Notifications_CustomerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: Notifications Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: Notifications Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Notificaciones';
 		$this->dataAccessLog->function = 'Lista de notificaciones';
@@ -645,7 +645,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_NotificationsUpdate_customerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: NotificationsUpdate Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: NotificationsUpdate Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Notificaciones';
 		$this->dataAccessLog->function = 'Lista de notificaciones';
@@ -707,7 +707,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 	 */
 	public function callWs_NotificationHistory_customerSupport($dataRequest)
 	{
-		log_message('INFO', 'NOVO CustomerSupport Model: NotificationHistory Method Initialized');
+		writeLog('INFO', 'CustomerSupport Model: NotificationHistory Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Notificaciones';
 		$this->dataAccessLog->function = 'Historial de notificaciones';

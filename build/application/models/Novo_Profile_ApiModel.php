@@ -10,7 +10,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Api Model Class Initialized');
+		writeLog('INFO', 'Api Model Class Initialized');
 
 	}
 
@@ -21,7 +21,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 	 */
 	public function uploadFile ($dataRequest)
 	{
-		log_message('INFO', 'NOVO API Model: uploadFile Method Initialized');
+		writeLog('INFO', 'API Model: uploadFile Method Initialized');
 
 		$statusCodeResponse = 400;
 		$resultUploadFiles = [];
@@ -39,7 +39,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 				$showResult = lang('GEN_UPLOAD_CREATE_DIRECTORY');
 			}
 		}
-		log_message('DEBUG', '['.$dataRequest->user_name.'] Result create directory: '.$directoryToUpload.' '.$showResult);
+		writeLog('DEBUG', '['.$dataRequest->user_name.'] Result create directory: '.$directoryToUpload.' '.$showResult);
 
 		foreach($dataRequest as $property => $bodyBase64) {
 			$resultEcryptFile = FALSE;
@@ -52,7 +52,8 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 					$dataRequest->nro_document
 				]));
 				$shortFileName = hash('ripemd160', $realFileName);
-				log_message('DEBUG', '['.$dataRequest->user_name.'] name for image: '.$realFileName.' encrypted name: '.$shortFileName);
+
+				writeLog('DEBUG', '['.$dataRequest->user_name.'] name for image: '.$realFileName.' encrypted name: '.$shortFileName);
 
 				$convertedFile = $this->tool_file->convertBase64ToImage($bodyBase64, $directoryToUpload, $shortFileName, $dataRequest->user_name);
 				if ($convertedFile->result) {
@@ -77,7 +78,8 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$this->response->code = $statusCodeResponse;
 		$this->response->data = $dataResponse;
 
-		log_message('DEBUG', '['.$dataRequest->user_name.'] API uploadFile: ' . json_encode($this->response));
+		writeLog('DEBUG', '['.$dataRequest->user_name.'] API uploadFile: ' . json_encode($this->response));
+
 		return $this->response;
 	}
 
@@ -88,7 +90,7 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 	 */
 	public function eraseFiles($dataRequest)
 	{
-		log_message('INFO', 'NOVO API Model: eraseFile Method Initialized');
+		writeLog('INFO', 'API Model: eraseFile Method Initialized');
 
 		$statusCodeResponse = 400;
 		$dataResponse = [];
@@ -132,7 +134,8 @@ class Novo_Profile_ApiModel extends NOVO_Model {
 		$this->response->code = $statusCodeResponse;
 		$this->response->data = $dataResponse;
 
-		log_message('DEBUG', 'API eraseFile: ' . json_encode($this->response));
+		writeLog('DEBUG', 'API eraseFile: ' . json_encode($this->response));
+
 		return $this->response;
 	}
 }
