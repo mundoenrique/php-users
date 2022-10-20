@@ -137,6 +137,21 @@ if (!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'cardToCard':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'cardToBank':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'mobilePayment':
+				if($menu == lang('GEN_MENU_PAYMENTS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 			case 'services':
 				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
