@@ -10,7 +10,7 @@ class Novo_Reports extends NOVO_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Reports Controller Class Initialized');
+		writeLog('INFO', 'Reports Controller Class Initialized');
 	}
 	/**
 	 * @info Método para obtener las opciones de atención al cliente
@@ -19,7 +19,7 @@ class Novo_Reports extends NOVO_Controller {
 	 */
 	public function expensesCategory()
 	{
-		log_message('INFO', 'NOVO Reports: expensesCategory Method Initialized');
+		writeLog('INFO', 'Reports: expensesCategory Method Initialized');
 
 		$view = 'expensesCategory';
 		array_push(

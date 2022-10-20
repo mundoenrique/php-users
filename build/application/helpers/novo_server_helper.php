@@ -9,41 +9,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date				September 19th, 2022
  */
 
-/* if (!function_exists('writeLog')) {
+if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
-		$CI = get_instance();
-		$appUserName = '';
+		$CI =& get_instance();
+		$appUserName = $CI->session->appUserName ?? date('U') . '-';
+		$logUsername = '';
 		$customer = '';
 		$ip = $CI->input->ip_address();
 		$level = mb_strtoupper($level);
 
-		if ($CI->session->has_userdata('userName')) {
-			$appUserName = $CI->session->userName;
-		} elseif ($CI->input->post('userName') !== NULL)	{
-			$appUserName = mb_strtoupper($CI->input->post('userName'));
-		} elseif ($CI->input->post('idNumber') !== NULL)	{
-			$appUserName = mb_strtoupper($CI->input->post('idNumber'));
-		} elseif ($CI->input->post('documentId') !== NULL)	{
-			$appUserName = mb_strtoupper($CI->input->post('documentId'));
-		}
+		if ($level !== 'INFO') {
+			if (!$CI->session->has_userdata('appUserName')) {
+				$CI->session->set_userdata('appUserName', $appUserName);
+			}
 
-		if ($CI->session->has_userdata('customerSess')) {
-			$customer = $CI->session->customerSess;
-		} elseif ($CI->config->item('customer') !== NULL) {
-			$customer = $CI->config->item('customer');
-		}
+			if ($CI->session->has_userdata('customerSess')) {
+				$customer = $CI->session->customerSess;
+			} elseif ($CI->config->item('customer') !== NULL) {
+				$customer = $CI->config->item('customer');
+			}
 
-		if ($level === 'INFO') {
-			$message = novoLang('NOVO %s', $message);
-		} elseif ($customer === '') {
-			$message = novoLang('NOVO [' . $appUserName . '] IP: %s, %s', [$ip, $message]);
+			if ($customer === '') {
+				$message = novoLang('NOVO [%s] IP: %s, %s', [$appUserName, $ip, $message]);
+			} else {
+				$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$appUserName, $ip, $customer, $message]);
+			}
 		} else {
-			$message = novoLang('NOVO [' . $appUserName . '] IP: %s, CUSTOMER: %s, %s', [$ip, $customer, $message]);
+			$message = novoLang('NOVO %s', $message);
 		}
 
 		log_message($level, $message);
 	}
-} */
+}
 
 // generar uuIdV4
 if (!function_exists('uuIdV4Generate')) {
