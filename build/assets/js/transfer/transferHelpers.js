@@ -74,7 +74,7 @@ $(function () {
 	});
 
 	// Al hacer click en Nueva afiliación
-	$("#newAffiliate").on("click", (e) => showManageAffiliateView("new"));
+	$("#newAffiliate").on("click", (e) => showManageAffiliateView("create"));
 
 	// Al hacer click en Editar afiliación
 	$("#affiliationTable tbody tr").on(
@@ -98,7 +98,8 @@ $(function () {
 
 		if (form.valid()) {
 			who = "Transfer";
-			where = "Affiliate";
+			where =
+				$(this).data("action") == "create" ? "Affiliate" : "ModifyAffiliation";
 			data = getDataForm(form);
 			data.operationType = operationType;
 			Object.assign(data, cardData);
@@ -213,6 +214,43 @@ $(function () {
 			$("#currentBalance").text(response.msg);
 		});
 	}
+	function getBanks() {
+		var bankField = $("#manageAffiliateView #bank");
+		var currentBank = bankField.val() ? bankField.val() : "";
+
+		bankField.prop("disabled", true);
+		bankField.find("option").get(0).remove();
+		bankField.append(
+			`<option value="" selected disabled>${lang.TRANSF_WAITING_BANKS}</option>`
+		);
+
+		who = "Transfer";
+		where = "GetBanks";
+
+		callNovoCore(who, where, {}, function (response) {
+			if (response.code == 0) {
+				var selected;
+				$.each(response.data, function (pos, bank) {
+					selected = currentBank == bank.codBcv;
+					bankField.append(
+						`<option value="${bank.codBcv}"${selected ? " selected" : ""}>${
+							bank.nomBanco
+						}</option>`
+					);
+				});
+
+				bankField.find("option").get(0).remove();
+
+				if (currentBank == "") {
+					bankField.prepend(
+						`<option value="" selected disabled>${lang.GEN_SELECTION}</option>`
+					);
+				}
+			}
+
+			bankField.prop("disabled", false);
+		});
+	}
 
 	function setAffiliateDataTable() {
 		var columns, row, tdOptions;
@@ -247,69 +285,40 @@ $(function () {
 	}
 
 	function showManageAffiliateView(action) {
-		var bankField = $("#manageAffiliateView #bank");
-		var currentBank = bankField.val() ? bankField.val() : "";
 		$("#affiliationsView").hide();
 		$("#manageAffiliateView").fadeIn(700, "linear");
+		$("#manageAffiliateBtn").data("action", action);
 		$("#affiliateTitle").text(
-			action == "new" ? lang.TRANSF_NEW_AFFILIATE : lang.TRANSF_EDIT_AFFILIATE
+			action == "create"
+				? lang.TRANSF_NEW_AFFILIATE
+				: lang.TRANSF_EDIT_AFFILIATE
 		);
 
 		switch (operationType) {
 			case "P2P":
 				$("#affiliateMessage").text(
-					action == "new"
+					action == "create"
 						? lang.TRANSF_NEW_AFFILIATE_CARD_MSG
 						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
 			case "P2T":
 				$("#affiliateMessage").text(
-					action == "new"
+					action == "create"
 						? lang.TRANSF_NEW_AFFILIATE_BANK_MSG
 						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
 			case "PMV":
 				$("#affiliateMessage").text(
-					action == "new"
+					action == "create"
 						? lang.TRANSF_NEW_AFFILIATE_PAY_MSG
 						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
 		}
-
-		bankField.prop("disabled", true);
-		bankField.find("option").get(0).remove();
-		bankField.append(
-			`<option value="" selected disabled>${lang.TRANSF_WAITING_BANKS}</option>`
-		);
-
-		who = "Transfer";
-		where = "GetBanks";
-
-		callNovoCore(who, where, {}, function (response) {
-			if (response.code == 0) {
-				var selected;
-				$.each(response.data, function (pos, bank) {
-					selected = currentBank == bank.codBcv;
-					bankField.append(
-						`<option value="${bank.codBcv}"${selected ? " selected" : ""}>${
-							bank.nomBanco
-						}</option>`
-					);
-				});
-
-				bankField.find("option").get(0).remove();
-
-				if (currentBank == "") {
-					bankField.prepend(
-						`<option value="" selected disabled>${lang.GEN_SELECTION}</option>`
-					);
-				}
-			}
-
-			bankField.prop("disabled", false);
-		});
+		if (operationType != "P2P") {
+			getBanks();
+		}
 	}
 });
