@@ -11,7 +11,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	public function __construct()
 	{
 		parent::__construct();
-		log_message('INFO', 'NOVO Transfer Model Class Initialized');
+		writeLog('INFO', 'Transfer Model Class Initialized');
 	}
 	/**
 	 * @info Método para crear clave de operaciones
@@ -20,7 +20,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	 */
 	public function CallWs_SetOperationKey_Transfer($dataRequest)
 	{
-		log_message('INFO', 'NOVO Transfer Model: SetOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer Model: SetOperationKey Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Clave de operaciones';
@@ -41,7 +41,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	 */
 	public function CallWs_GetOperationKey_Transfer($dataRequest)
 	{
-		log_message('INFO', 'NOVO Transfer Model: GetOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer Model: GetOperationKey Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Clave de operaciones';
@@ -62,7 +62,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	 */
 	public function CallWs_GetBanks_Transfer()
 	{
-		log_message('INFO', 'NOVO Transfer Model: GetOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer Model: GetOperationKey Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Afiliar';
@@ -89,7 +89,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	 */
 	public function CallWs_GetAffiliations_Transfer($dataRequest)
 	{
-		log_message('INFO', 'NOVO Transfer Model: GetOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer Model: GetOperationKey Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Listados transferencia';
@@ -139,7 +139,7 @@ class Novo_Transfer_Model extends NOVO_Model
 	 */
 	public function CallWs_Affiliate_Transfer($dataRequest)
 	{
-		log_message('INFO', 'NOVO Transfer Model: Affiliate Method Initialized');
+		writeLog('INFO', 'Transfer Model: Affiliate Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Afiliar';

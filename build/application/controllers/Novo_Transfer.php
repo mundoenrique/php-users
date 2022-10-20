@@ -14,7 +14,7 @@ class Novo_Transfer extends NOVO_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		log_message('INFO', 'NOVO Transfer Controller Class Initialized');
+		writeLog('INFO', 'Transfer Controller Class Initialized');
 
 		$this->attrNoPointer = 'no-pointer';
 		$this->navItemsConfig = [
@@ -48,7 +48,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function setOperationKey()
 	{
-		log_message('INFO', 'NOVO Transfer: setOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer: setOperationKey Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'setOperationKey';
@@ -72,7 +72,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function getOperationKey()
 	{
-		log_message('INFO', 'NOVO Transfer: getOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer: getOperationKey Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'getOperationKey';
@@ -95,7 +95,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function changeOperationKey()
 	{
-		log_message('INFO', 'NOVO Transfer: changeOperationKey Method Initialized');
+		writeLog('INFO', 'Transfer: changeOperationKey Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'changeOperationKey';
@@ -119,7 +119,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function cardToCard()
 	{
-		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
+		writeLog('INFO', 'Transfer: cardToCard Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'cardToCard';
@@ -179,7 +179,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function cardToBank()
 	{
-		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
+		writeLog('INFO', 'Transfer: cardToCard Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'cardToBank';
@@ -239,7 +239,7 @@ class Novo_Transfer extends NOVO_Controller
 	 */
 	public function mobilePayment()
 	{
-		log_message('INFO', 'NOVO Transfer: cardToCard Method Initialized');
+		writeLog('INFO', 'Transfer: cardToCard Method Initialized');
 
 		$this->session->keep_flashdata('transfer');
 		$view = 'mobilePayment';
