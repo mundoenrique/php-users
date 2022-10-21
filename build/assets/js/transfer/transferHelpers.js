@@ -3,7 +3,7 @@ $(function () {
 	var operationType = $("#transferView").attr("operation-type");
 	var liOptions = $(".nav-item-config");
 	var cardData;
-	var affiliationsList = [];
+	var affiliationsList;
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -60,16 +60,30 @@ $(function () {
 	// Carga tabla lista de afiliados
 	$("#affiliations").on("click", function (e) {
 		e.preventDefault();
+		$("#transferRecord").hide();
+		$("#no-moves").hide();
+		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
 		where = "GetAffiliations";
 		data = { operationType: operationType };
 
 		callNovoCore(who, where, data, function (response) {
-			if (response.code == 0) {
-				affiliationsList = response.data;
-				setAffiliateDataTable();
-			} else {
-				//modal no fue posible obtener afiliados
+			$("#pre-loader").hide();
+			switch (response.code) {
+				case 0:
+					setAffiliateDataTable(response.data);
+					break;
+				case 1:
+					$("#no-moves").fadeIn(700, "linear");
+					break;
+				default:
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+					break;
 			}
 		});
 	});
@@ -253,8 +267,10 @@ $(function () {
 		});
 	}
 
-	function setAffiliateDataTable() {
+	function setAffiliateDataTable(data) {
 		var columns, row, tdOptions;
+		$("#affiliationTable tbody").html();
+
 		switch (operationType) {
 			case "P2P":
 				columns = ["NombreCliente", "id_ext_per", "noTarjetaConMascara"];
@@ -267,7 +283,7 @@ $(function () {
 				break;
 		}
 
-		affiliationsList.forEach((value, index) => {
+		data.forEach((value, index) => {
 			row = $("<tr></tr>");
 			columns.forEach((element) => {
 				row.append(`<td>${value[element]}</td>`);
@@ -283,6 +299,8 @@ $(function () {
 			row.append(tdOptions);
 			$("#affiliationTable tbody").append(row);
 		});
+
+		$("#transferRecord").fadeIn(700, "linear");
 	}
 
 	function showManageAffiliateView(action) {
