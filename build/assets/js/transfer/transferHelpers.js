@@ -1,9 +1,9 @@
 "use strict";
+var cardData, affiliationsList, currentAffiliaton;
+
 $(function () {
 	var operationType = $("#transferView").attr("operation-type");
 	var liOptions = $(".nav-item-config");
-	var cardData;
-	var affiliationsList;
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -92,10 +92,39 @@ $(function () {
 	$("#newAffiliate").on("click", (e) => showManageAffiliateView("create"));
 
 	// Al hacer click en Editar afiliación
-	$("#affiliationTable tbody tr").on(
+	$("#affiliationTable tbody").on(
 		"click",
 		"button[data-action='edit']",
-		(e) => showManageAffiliateView("edit")
+		function () {
+			currentAffiliaton = affiliationsList[$(this).data("index")];
+			showManageAffiliateView("edit");
+		}
+	);
+
+	// Al hacer click en Eliminar afiliación
+	$("#affiliationTable tbody").on(
+		"click",
+		"button[data-action='delete']",
+		function () {
+			currentAffiliaton = affiliationsList[$(this).data("index")];
+			who = "Affiliations";
+			where = "DeleteAffiliation";
+			data.idAfiliation = currentAffiliaton.id_afiliacion;
+
+			$(".nav-config-box").addClass("no-pointer");
+			$("#pre-loader").fadeIn(700, "linear");
+
+			callNovoCore(who, where, data, function (response) {
+				$("#pre-loader").hide();
+				$(".nav-config-box").removeClass("no-pointer");
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
+			});
+		}
 	);
 
 	$("#affiliateCancelBtn").on("click", function (e) {
@@ -112,12 +141,13 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			who = "Transfer";
-			where =
-				$(this).data("action") == "create" ? "Affiliate" : "ModifyAffiliation";
+			who = "Affiliations";
+			where = `Affiliation${operationType}`;
 			data = getDataForm(form);
-			data.operationType = operationType;
-			Object.assign(data, cardData);
+
+			if ($(this).data("action") == "edit") {
+				data.idAfiliation = currentAffiliaton.id_afiliacion;
+			}
 
 			insertFormInput(true);
 			$(this).html(loader);
@@ -269,6 +299,7 @@ $(function () {
 
 	function setAffiliateDataTable(data) {
 		var columns, row, tdOptions;
+		affiliationsList = data;
 		$("#affiliationTable tbody").html();
 
 		switch (operationType) {
@@ -336,8 +367,51 @@ $(function () {
 				);
 				break;
 		}
+
+		if ((action = "edit")) {
+			setValues();
+		}
+
 		if (operationType != "P2P") {
 			getBanks();
+		}
+	}
+
+	function setValues() {
+		switch (operationType) {
+			case "P2P":
+				$("#beneficiary").val(currentAffiliaton.beneficiario);
+				$("#typeDocument").val("V");
+				$("#idNumber").val(currentAffiliaton.id_ext_per);
+				$("#destinationCard").val(currentAffiliaton.nroCuentaDestino);
+				$("#beneficiaryEmail").val(currentAffiliaton.email);
+				break;
+			case "P2T":
+				$("#bank").val(currentAffiliaton.codBanco);
+				$("#beneficiary").val(currentAffiliaton.beneficiario);
+				$("#typeDocument").val("V");
+				$("#idNumber").val(currentAffiliaton.id_ext_per);
+				$("#destinationAccount").val(currentAffiliaton.noCuenta);
+				$("#mobilePhone").val(currentAffiliaton.telefono);
+				$("#beneficiaryEmail").val(currentAffiliaton.email);
+				break;
+			case "PMV":
+				$("#bank").attr("value", currentAffiliaton.codBanco);
+				$("#beneficiary").attr("value", currentAffiliaton.beneficiario);
+				$("#typeDocument").attr("value", "V");
+				$("#idNumber").attr("value", currentAffiliaton.id_ext_per);
+				$("#mobilePhone").attr("value", currentAffiliaton.telefono);
+				$("#beneficiaryEmail").attr("value", "dvegas@novopayment.com");
+				$("#beneficiaryEmail").prop("placeholder", "dvegas@novopayment.com");
+				document.getElementById("beneficiaryEmail").value =
+					"dvegas@novopayment.com";
+				// $("#bank").val(currentAffiliaton.codBanco);
+				// $("#beneficiary").val(currentAffiliaton.beneficiario);
+				// $("#typeDocument").val("V");
+				// $("#idNumber").val(currentAffiliaton.id_ext_per);
+				// $("#mobilePhone").val(currentAffiliaton.telefono);
+				// $("#beneficiaryEmail").val(currentAffiliaton.email);
+				break;
 		}
 	}
 });
