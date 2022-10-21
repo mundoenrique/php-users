@@ -194,6 +194,11 @@ class Verify_Access {
 			case 'getBanks':
 			case 'getAffiliations':
 			case 'affiliate':
+			case 'affiliationP2P':
+			case 'affiliationPMV':
+			case 'affiliationP2T':
+			case 'deleteAffiliation':
+			case 'modifyAffiliation':
 			case 'changeOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
