@@ -93,8 +93,8 @@
             </div>
 						<?php endif; ?>
             <div class="form-group col-6 col-lg-4">
-              <label for="email"><?= lang('GEN_EMAIL') ?></label>
-              <input id="email" class="form-control" type="text" name="email" autocomplete="off">
+              <label for="beneficiaryEmail"><?= lang('GEN_EMAIL') ?></label>
+              <input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off">
               <div class="help-block"></div>
             </div>
             <div class="form-group col-6 col-lg-4">

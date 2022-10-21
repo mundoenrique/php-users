@@ -139,6 +139,7 @@ function validateForms(form) {
 			"beneficiary": { required: true, pattern: alphaName },
 			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
 			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
+			"beneficiaryEmail": { pattern: emailValid },
 			"amount": { required: true, pattern: numeric, maxlength: 9 },
 			"concept": { pattern: alphaName },
 			"expDateCta": { required: true, pattern: date.my },
