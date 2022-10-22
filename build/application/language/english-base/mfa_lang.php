@@ -15,3 +15,5 @@ $lang['MFA_ACCOUNT_VERIFICATION'] = 'Account Verification';
 $lang['MFA_VERIFY_MSG_EMAIL'] = 'Please verify that you can receive messages in the email registered in the application.';
 $lang['MFA_ACTIVATION_TYPE'] = 'Activation type';
 $lang['MFA_USING_AN_APP'] = 'Authentication app';
+$lang['MFA_CODE_INCORRECT'] = 'The authentication code is incorrect, please check it and try again';
+$lang['MFA_CODE_INCORRECT_AGAIN'] = 'The authentication code is incorrect, please check it and try again or request another';
