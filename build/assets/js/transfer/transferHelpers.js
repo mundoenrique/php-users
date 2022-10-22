@@ -61,6 +61,7 @@ $(function () {
 	$("#affiliations").on("click", function (e) {
 		e.preventDefault();
 		$("#transferRecord").hide();
+		$("#searchAffiliate").hide();
 		$("#no-moves").hide();
 		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
@@ -261,7 +262,9 @@ $(function () {
 	}
 	function getBanks() {
 		var bankField = $("#manageAffiliateView #bank");
-		var currentBank = bankField.val() ? bankField.val() : "";
+		var currentBank = currentAffiliaton?.codBanco
+			? currentAffiliaton?.codBanco
+			: "";
 
 		bankField.prop("disabled", true);
 		bankField.find("option").get(0).remove();
@@ -332,12 +335,18 @@ $(function () {
 		});
 
 		$("#transferRecord").fadeIn(700, "linear");
+		$("#searchAffiliate").fadeIn(700, "linear");
 	}
 
 	function showManageAffiliateView(action) {
+		if (action == "create") {
+			$("#manageAffiliate")[0].reset();
+		}
 		$("#affiliationsView").hide();
 		$("#manageAffiliateView").fadeIn(700, "linear");
-		$("#manageAffiliateBtn").data("action", action);
+		$("#manageAffiliateBtn")
+			.text(action == "create" ? lang.TRANSF_AN_AFFILIATE : lang.GEN_BTN_SAVE)
+			.data("action", action);
 		$("#affiliateTitle").text(
 			action == "create"
 				? lang.TRANSF_NEW_AFFILIATE
@@ -368,7 +377,7 @@ $(function () {
 				break;
 		}
 
-		if ((action = "edit")) {
+		if (action == "edit") {
 			setValues();
 		}
 
@@ -380,37 +389,42 @@ $(function () {
 	function setValues() {
 		switch (operationType) {
 			case "P2P":
-				$("#beneficiary").val(currentAffiliaton.beneficiario);
-				$("#typeDocument").val("V");
-				$("#idNumber").val(currentAffiliaton.id_ext_per);
-				$("#destinationCard").val(currentAffiliaton.nroCuentaDestino);
-				$("#beneficiaryEmail").val(currentAffiliaton.email);
+				$("#manageAffiliateView #beneficiary").val(
+					currentAffiliaton.beneficiario
+				);
+				$("#manageAffiliateView #typeDocument").val("V");
+				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #destinationCard").val(
+					currentAffiliaton.nroCuentaDestino
+				);
+				$("#manageAffiliateView #beneficiaryEmail").val(
+					currentAffiliaton.email
+				);
 				break;
 			case "P2T":
-				$("#bank").val(currentAffiliaton.codBanco);
-				$("#beneficiary").val(currentAffiliaton.beneficiario);
-				$("#typeDocument").val("V");
-				$("#idNumber").val(currentAffiliaton.id_ext_per);
-				$("#destinationAccount").val(currentAffiliaton.noCuenta);
-				$("#mobilePhone").val(currentAffiliaton.telefono);
-				$("#beneficiaryEmail").val(currentAffiliaton.email);
+				$("#manageAffiliateView #beneficiary").val(
+					currentAffiliaton.beneficiario
+				);
+				$("#manageAffiliateView #typeDocument").val("V");
+				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #destinationAccount").val(
+					currentAffiliaton.noCuenta
+				);
+				$("#manageAffiliateView #mobilePhone").val(currentAffiliaton.telefono);
+				$("#manageAffiliateView #beneficiaryEmail").val(
+					currentAffiliaton.email
+				);
 				break;
 			case "PMV":
-				$("#bank").attr("value", currentAffiliaton.codBanco);
-				$("#beneficiary").attr("value", currentAffiliaton.beneficiario);
-				$("#typeDocument").attr("value", "V");
-				$("#idNumber").attr("value", currentAffiliaton.id_ext_per);
-				$("#mobilePhone").attr("value", currentAffiliaton.telefono);
-				$("#beneficiaryEmail").attr("value", "dvegas@novopayment.com");
-				$("#beneficiaryEmail").prop("placeholder", "dvegas@novopayment.com");
-				document.getElementById("beneficiaryEmail").value =
-					"dvegas@novopayment.com";
-				// $("#bank").val(currentAffiliaton.codBanco);
-				// $("#beneficiary").val(currentAffiliaton.beneficiario);
-				// $("#typeDocument").val("V");
-				// $("#idNumber").val(currentAffiliaton.id_ext_per);
-				// $("#mobilePhone").val(currentAffiliaton.telefono);
-				// $("#beneficiaryEmail").val(currentAffiliaton.email);
+				$("#manageAffiliateView #beneficiary").val(
+					currentAffiliaton.beneficiario
+				);
+				$("#manageAffiliateView #typeDocument").val("V");
+				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #mobilePhone").val(currentAffiliaton.telefono);
+				$("#manageAffiliateView #beneficiaryEmail").val(
+					currentAffiliaton.email
+				);
 				break;
 		}
 	}
