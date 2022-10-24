@@ -232,7 +232,7 @@ $config = [
 	'generateTotp' => [
 		[
 			'field' => 'operationType',
-			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
+			'rules' => 'trim|regex_match[/^(generate|deactivate)/]|required'
 		],
 	],
 	'validateTotp' => [
@@ -278,6 +278,388 @@ $config = [
 			'field' => 'confirmPass',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
 		]
+	],
+	'changeOperationKey' => [
+		[
+			'field' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'setOperationKey' => [
+		[
+			'field' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'getOperationKey' => [
+		[
+			'field' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+	],
+	'getBanks' => [
+		[
+			'field' => 'something',
+			'rules' => 'trim'
+		]
+	],
+	'getAffiliations' => [
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		],
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric'
+		],
+	],
+	'affiliationP2P' => [
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim|required'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim|required'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric|required'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'label' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'affiliationPMV' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'label' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'affiliationP2T' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationAccount',
+			'label' => 'destinationAccount',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'label' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'deleteAffiliation' => [
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'affiliate' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'destinationAccount',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		]
+	],
+	'modifyAffiliation' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'typeDocument',
+			'label' => 'typeDocument',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'destinationAccount',
+			'label' => 'destinationCard',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		]
+	],
+	'cardToCard' => [
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'amount',
+			'label' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'label' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'label' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+	],
+	'cardToBank' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'destinationCard',
+			'label' => 'destinationCard',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'amount',
+			'label' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'label' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'label' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+	],
+	'mobilePayment' => [
+		[
+			'field' => 'bank',
+			'label' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'label' => 'beneficiary',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'idNumber',
+			'label' => 'idNumber',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'label' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'email',
+			'label' => 'email',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'amount',
+			'label' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'label' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'label' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
 	],
 	'cardDetail' => [
 		[
@@ -430,10 +812,10 @@ $config = [
 			'field' => 'cardNumber',
 			'rules' => 'trim|required'
 		],
-		[
-			'field' => 'userIdNumber',
-			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
-		]
+		// [
+		// 	'field' => 'userIdNumber',
+		// 	'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		// ]
 	],
 	'getVirtualDetail' => [
 		[
@@ -1298,11 +1680,11 @@ $config = [
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
-		],
-		'keepsession' => [
-			[
-				'field' => 'signout',
-				'rules' => 'trim|alpha|required'
-			]
-		],
+	],
+	'keepsession' => [
+		[
+			'field' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
 ];

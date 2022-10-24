@@ -189,12 +189,23 @@ class Verify_Access {
 			case 'notificationHistory':
 				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') === 'ON';
 				break;
+			case 'setOperationKey':
 			case 'getOperationKey':
+			case 'getBanks':
+			case 'getAffiliations':
+			case 'affiliate':
+			case 'affiliationP2P':
+			case 'affiliationPMV':
+			case 'affiliationP2T':
+			case 'deleteAffiliation':
+			case 'modifyAffiliation':
+			case 'changeOperationKey':
 			case 'cardToCard':
 			case 'cardToBank':
+			case 'mobilePayment':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
-				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S' && lang('CONF_PAYS_TRANSFER') === 'ON';
+				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S';
 				break;
 			case 'signup':
 				$referrerUrl = $referrer === base_url(lang('CONF_LINK_USER_IDENTIFY'));

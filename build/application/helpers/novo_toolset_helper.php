@@ -137,6 +137,21 @@ if (!function_exists('setCurrentPage')) {
 					$cssClass = 'page-current';
 				}
 				break;
+			case 'cardToCard':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'cardToBank':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'mobilePayment':
+				if($menu == lang('GEN_MENU_PAYMENTS')) {
+					$cssClass = 'page-current';
+				}
+				break;
 			case 'services':
 				if($menu == lang('GEN_MENU_CUSTOMER_SUPPORT')) {
 					$cssClass = 'page-current';
@@ -209,13 +224,16 @@ if (!function_exists('mainMenu'))
 	function mainMenu() {
 		return [
 			'CARD_LIST' => [],
-			'PAYS_TRANSFER' => [
+			'TRANSFERS' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
 				'SERVICES' => [
 					'CREDIT_CARDS' => [],
 					'DIGITEL' => []
 				]
+			],
+			'PAYMENTS' => [
+				'MOBILE_PAYMENT' => [],
 			],
 			'CUSTOMER_SUPPORT' => [],
 			'REPORTS' => []

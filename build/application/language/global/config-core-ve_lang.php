@@ -11,9 +11,9 @@ $lang['CONF_CONTACTS'] = [
 	'0501-SAMBIL-1' => '(0501-726245-1)',
 ];
 $lang['CONF_BTN_LANG'] = 'ON';
-$lang['CONF_PAYS_TRANSFER'] = 'OFF';
+$lang['CONF_TRANSFERS'] = 'ON';
+$lang['CONF_PAYMENTS'] = 'ON';
+$lang['CONF_MOBILE_PAYMENT'] = 'ON';
 $lang['CONF_BETWEEN_CARDS'] = 'ON';
 $lang['CONF_BANKS'] = 'ON';
-$lang['CONF_CREDIT_CARDS'] = 'ON';
-$lang['CONF_SERVICES'] = 'ON';
-$lang['CONF_DIGITEL'] = 'ON';
+$lang['CONF_SERVICES'] = 'OFF';

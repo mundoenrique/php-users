@@ -261,7 +261,7 @@
 									<?php endif; ?>
 
                   <div class="form-group col-6 <?= $longMobile; ?> input-height">
-                    <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
+                    <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
                     <input id="mobilePhone" class="form-control <?= $updateUser; ?>" type="text" name="mobilePhone" value="<?= $mobilePhone; ?>"
                       <?= $updatePhoneMobile; ?> autocomplete="off">
                     <div class="help-block"></div>

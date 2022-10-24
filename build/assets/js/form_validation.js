@@ -135,6 +135,14 @@ function validateForms(form) {
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true },
 			"temporaryLockReason": { requiredSelect: true },
+			"bank": { required: true, requiredSelect: true },
+			"beneficiary": { required: true, pattern: alphaName },
+			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
+			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
+			"beneficiaryEmail": { pattern: emailValid },
+			"amount": { required: true, pattern: numeric, maxlength: 9 },
+			"concept": { pattern: alphaName },
+			"expDateCta": { required: true, pattern: date.my },
 			"currentPin": { required: true, pattern: numeric, exactLength: 4 },
 			"newPin": { required: true, pattern: numeric, exactLength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
@@ -260,6 +268,20 @@ function validateForms(form) {
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
 			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
+			"bank": lang.VALIDATE_BANK,
+			"beneficiary": lang.VALIDATE_BENEFIT,
+			"destinationCard": {
+				required: lang.VALIDATE_DESTINATION_CARD,
+				pattern: lang.VALIDATE_CARD_NUMBER,
+				maxlength: lang.VALIDATE_CARD_NUMBER
+			},
+			"destinationAccount": {
+				required: lang.VALIDATE_DESTINATION_ACCOUNT,
+				pattern: lang.VALIDATE_ACCOUNT_NUMBER,
+				exactLength: lang.VALIDATE_ACCOUNT_NUMBER_FORMAT
+			},
+			"amount": lang.VALIDATE_AMOUNT,
+			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {
 				required: lang.VALIDATE_CURRENT_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
