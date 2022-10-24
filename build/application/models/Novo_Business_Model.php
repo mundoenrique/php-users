@@ -10,7 +10,7 @@ class Novo_Business_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Business Model Class Initialized');
+		writeLog('INFO', 'Business Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,7 +19,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_UserCardsList_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: UserCardsList Method Initialized');
+		writeLog('INFO', 'Business Model: UserCardsList Method Initialized');
 
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
@@ -161,7 +161,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_GetBalance_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: GetBalance Method Initialized');
+		writeLog('INFO', 'Business Model: GetBalance Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
@@ -177,13 +177,13 @@ class Novo_Business_Model extends NOVO_Model {
 			case 0:
 				$this->response->code = 0;
 				$this->response->msg = lang('CONF_CURRENCY').' '.$response->disponible;
-				$this->response->modal = TRUE;
-			break;
-			default:
+				break;
+				default:
 				$this->response->code = 1;
 				$this->response->msg = '---';
-		}
+			}
 
+		$this->response->modal = TRUE;
 		return $this->responseToTheView('callWs_GetBalance');
 	}
 	/**
@@ -193,7 +193,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_CardDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CardDetail Method Initialized');
+		writeLog('INFO', 'Business Model: CardDetail Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -290,7 +290,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_MonthlyMovements_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: MonthlyMovements Method Initialized');
+		writeLog('INFO', 'Business Model: MonthlyMovements Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -347,7 +347,7 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_DownloadMoves_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: DownloadMoves Method Initialized');
+		writeLog('INFO', 'Business Model: DownloadMoves Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -398,11 +398,11 @@ class Novo_Business_Model extends NOVO_Model {
 	 */
 	public function callWs_CardListOperations_Business ($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: CardListOperations Method Initialized');
+		writeLog('INFO', 'Business Model: CardListOperations Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
-		$this->dataAccessLog->operation = 'Lista de tarjetas para '.$dataRequest->operation;
+		$this->dataAccessLog->operation = 'Lista de tarjetas para ' . $dataRequest->operation;
 
 		$this->dataRequest->idOperation = '6';
 		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
@@ -463,7 +463,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 	public function callWs_getVirtualDetail_Business($dataRequest)
 	{
-		log_message('INFO', 'NOVO Business Model: getVirtualDetail method Initialized');
+		writeLog('INFO', 'Business Model: getVirtualDetail method Initialized');
 
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Consulta';
@@ -479,6 +479,7 @@ class Novo_Business_Model extends NOVO_Model {
 		if (empty($dataRequest->codeOTP)) {
 			$this->dataRequest->idOperation = '214';
 			$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
+			$this->dataRequest->emailCliente = $this->session->userEmail;
 			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 
@@ -498,13 +499,14 @@ class Novo_Business_Model extends NOVO_Model {
 					'expirationDate' => $expirationDate,
 					'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
 				];
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CLOSE');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 			break;
 			case -424://MODAL OTP
 				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
-				$this->response->modalBtn['btn2']['action'] = 'destroy';
+				$this->response->modalBtn['btn2']['action'] = 'none';
 			break;
 		}
 

@@ -10,10 +10,10 @@ class Novo_CallApi extends Novo_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO CallApi Controller Class Initialized');
+		writeLog('INFO', 'NOVO CallApi Controller Class Initialized');
 
-		$this->method = $this->nameApi;
-		$this->model = "Novo_".ucfirst($this->uri->segment(3))."_ApiModel";
+		$this->modelMethod = $this->nameApi;
+		$this->modelClass = "Novo_".ucfirst($this->uri->segment(3))."_ApiModel";
 		$this->username = $this->dataRequest['user_name'] ?? 'NO_NAME';
 	}
 	/**
@@ -23,7 +23,7 @@ class Novo_CallApi extends Novo_Controller {
 	 */
 	public function index()
 	{
-		log_message('INFO', 'NOVO CallApi: index Method Initialized');
+		writeLog('INFO', 'NOVO CallApi: index Method Initialized');
 
 		$isValid = FALSE;
 
@@ -33,12 +33,12 @@ class Novo_CallApi extends Novo_Controller {
 			if (array_key_exists('key', $_POST) && $_POST['key'] === KEY_API) {
 				$isValid = $this->form_validation->run($this->nameApi);
 				$resultValidation = $isValid ? 'TRUE' : "FALSE";
-				log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION PARAMS API: '.$resultValidation);
+				writeLog('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION PARAMS API: '.$resultValidation);
 
 				if ($isValid) {
 					$_POST = [];
 				} else {
-					log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
+					writeLog('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 				}
 			} else {
 				$decryptFieldKey = json_decode($this->encrypt_connect->cryptography($_POST['key'], FALSE));
@@ -54,7 +54,7 @@ class Novo_CallApi extends Novo_Controller {
 			$this->response = $this->tool_api->setResponseNotValid();
 		}
 
-		log_message('DEBUG', '['.$this->nameApi.'/'.$this->username.'] Novo_CallApi: '.json_encode($this->response));
+		writeLog('DEBUG', '['.$this->nameApi.'/'.$this->username.'] Novo_CallApi: '.json_encode($this->response));
 
 		return $this->output
 		->set_content_type('application/json')

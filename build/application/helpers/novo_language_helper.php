@@ -6,14 +6,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @category	Helpers
  * @author		Enrique Peñaloza
  * @date			24/10/2019
- * @ingo			Helper para interpolar variables en las varibales de lenguaje
  */
-if ( ! function_exists('novoLang'))
-{
-	function novoLang($line, $args = [])
-	{
+
+if (!function_exists('novoLang')) {
+	function novoLang($line, $args = []) {
 		$line = vsprintf($line, (array) $args);
 
 		return $line;
+	}
+}
+
+if (!function_exists('languageLoad')) {
+	function LoadLangFile($call, $fileLanguage, $customerUri = FALSE) {
+		$CI =& get_instance();
+		$languagesFile = [];
+		$loadLanguages = FALSE;
+		$configLanguage = $CI->config->item('language');
+		$pathLang = APPPATH . 'language' . DIRECTORY_SEPARATOR . $configLanguage . DIRECTORY_SEPARATOR;
+
+		$CI->config->set_item('language', 'global');
+
+		writeLog('INFO', 'Helper loaded: languageLoad_helper for ' . $call . ' files');
+
+		switch ($call) {
+			case 'generic':
+				$CI->lang->load(['config-core', 'images']);
+				break;
+			case 'specific':
+				$globalLan = APPPATH . 'language' . DIRECTORY_SEPARATOR . 'global' . DIRECTORY_SEPARATOR;
+				$customerUri = tenantSameSettings($customerUri);
+
+				if(file_exists($globalLan . 'config-core-' . $customerUri .'_lang.php')) {
+					$CI->lang->load('config-core-' . $customerUri,);
+				}
+
+				if(file_exists($globalLan . 'images_' . $customerUri . '_lang.php')) {
+					$CI->lang->load('images_' . $customerUri);
+				}
+				break;
+		}
+
+		$CI->config->set_item('language', $configLanguage);
+
+		if ($call === 'specific') {
+			if (file_exists($pathLang . 'general_lang.php')) {
+				array_push($languagesFile, 'general');
+				$loadLanguages = TRUE;
+			}
+
+			if (file_exists($pathLang . 'validate_lang.php')) {
+				array_push($languagesFile, 'validate');
+				$loadLanguages = TRUE;
+			}
+		}
+
+		if (file_exists($pathLang . $fileLanguage . '_lang.php')) {
+			array_push($languagesFile, $fileLanguage);
+			$loadLanguages = TRUE;
+		}
+
+		if ($loadLanguages) {
+			$CI->lang->load($languagesFile);
+		}
+	}
+}
+
+if (!function_exists('languageCookie')) {
+	function languageCookie($language) {
+		$baseLanguage = [
+			'name' => 'baseLanguage',
+			'value' => $language,
+			'expire' => 0,
+			'httponly' => TRUE
+		];
+
+		set_cookie($baseLanguage);
 	}
 }

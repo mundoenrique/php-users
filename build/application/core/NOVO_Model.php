@@ -25,7 +25,7 @@ class NOVO_Model extends CI_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Model Class Initialized');
+		writeLog('INFO', 'Model Class Initialized');
 
 		$this->dataAccessLog = new stdClass();
 		$this->dataRequest = new stdClass();
@@ -43,7 +43,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function sendToService($model)
 	{
-		log_message('INFO', 'NOVO Model: sendToService Method Initialized');
+		writeLog('INFO', 'Model: sendToService Method Initialized');
 
 		$this->accessLog = accessLog($this->dataAccessLog);
 		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
@@ -67,19 +67,23 @@ class NOVO_Model extends CI_Model {
 
 		return $this->makeAnswer($responseDecrypt);
 	}
+
 	/**
-	 * @info Método para comunicación con el servicio
-	 * @author J. Enrique Peñaloza Piñero.
-	 * @date May 16th, 2020
+	 * @info Método para comunicación con el microservicio
+	 * @author Luis Molina.
+	 * @date MJun 16th, 2022
 	 */
-	public function sendFile($file, $model)
+	public function sendToCoreServices($model)
 	{
-		log_message('INFO', 'NOVO Model: sendFile Method Initialized');
+		writeLog('INFO', 'Model: sendToCoreServices Method Initialized');
 
-		$responseUpload = $this->encrypt_connect->moveFile($file, $this->userName, $model);
+		$request = $this->encrypt_decrypt->encryptCoreServices($this->dataRequest, $model);
+		$response = $this->connect_services_apis->connectMfaServices($request, $model);
+		$decryptResponse = $this->encrypt_decrypt->decryptCoreServices($response, $model);
 
-		return $this->makeAnswer($responseUpload);
+		return $this->makeAnswer($decryptResponse);
 	}
+
 	/**
 	 * @info Método armar la respuesta a los modelos
 	 * @author J. Enrique Peñaloza Piñero
@@ -87,7 +91,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	protected function makeAnswer($responseModel)
 	{
-		log_message('INFO', 'NOVO Model: makeAnswer Method Initialized');
+		writeLog('INFO', 'Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->rc;
 		$this->response->code = lang('CONF_DEFAULT_CODE');
@@ -127,7 +131,7 @@ class NOVO_Model extends CI_Model {
 		}
 
 		$this->response->modalBtn = $arrayResponse;
-		$this->response->msg = $this->isResponseRc == 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
+		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
 
 		return $responseModel;
 	}
@@ -138,7 +142,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function responseToTheView($model)
 	{
-		log_message('INFO', 'NOVO Model: responseToView Method Initialized');
+		writeLog('INFO', 'Model: responseToView Method Initialized');
 		$responsetoView = new stdClass();
 
 		foreach ($this->response AS $pos => $response) {
@@ -153,8 +157,7 @@ class NOVO_Model extends CI_Model {
 			}
 		}
 
-		log_message('DEBUG', 'NOVO ['.$this->userName.'] IP ' . $this->input->ip_address() . ' RESULT ' . $model .
-			' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'RESULT ' . $model . ' SENT TO THE VIEW '.json_encode($responsetoView, JSON_UNESCAPED_UNICODE));
 
 		unset($responsetoView);
 
@@ -167,7 +170,7 @@ class NOVO_Model extends CI_Model {
 	 */
 	public function checkImageUpload()
 	{
-		log_message('INFO', 'NOVO Model: checkImageUpload Method Initialized');
+		writeLog('INFO', 'Model: checkImageUpload Method Initialized');
 
 		if($this->session->missingImages) {
 			$this->response->code = 3;

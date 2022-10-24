@@ -10,7 +10,7 @@ class Novo_Reports_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Reports Model Class Initialized');
+		writeLog('INFO', 'Reports Model Class Initialized');
 	}
 	/**
 	 * @info Método para obtener la lista de tarjetas de un usuario
@@ -19,17 +19,13 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_GetMovements_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: GetMovements Method Initialized');
+		writeLog('INFO', 'Reports Model: GetMovements Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';
 		$this->dataAccessLog->operation = 'Movimientos';
 
-		$cardNumber = json_decode(base64_decode($dataRequest->cardNumber));
-		$cardNumber = $this->cryptography->decrypt(
-			base64_decode($cardNumber->plot),
-			utf8_encode($cardNumber->password)
-		);
+		$cardNumber = decryptData($dataRequest->cardNumber);
 
 		$this->dataRequest->idOperation = 'buscarListadoGastosRepresentacion';
 		$this->dataRequest->className = 'com.novo.objects.MO.GastosRepresentacionMO';
@@ -125,17 +121,13 @@ class Novo_Reports_Model extends NOVO_Model {
 	 */
 	public function callWs_DownloadInquiry_Reports($dataRequest)
 	{
-		log_message('INFO', 'NOVO Reports Model: DownloadInquiry Method Initialized');
+		writeLog('INFO', 'Reports Model: DownloadInquiry Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Reportes';
 		$this->dataAccessLog->function = 'Gastos por categoría';
 		$this->dataAccessLog->operation = 'Movimientos';
 
-		$cardNumber = json_decode(base64_decode($dataRequest->cardNumber));
-		$cardNumber = $this->cryptography->decrypt(
-			base64_decode($cardNumber->plot),
-			utf8_encode($cardNumber->password)
-		);
+		$cardNumber = decryptData($dataRequest->cardNumber);
 
 		$OperId = $dataRequest->id == 'downloadPDF' ||  $dataRequest->id == 'sendPDF' ? 'generarArchivoPDFGastosRepresentacion'
 			: 'generarArchivoXlsGastosRepresentacion';

@@ -11,47 +11,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @date May 16th, 2020
  */
 class NOVO_Controller extends CI_Controller {
-	protected $rule;
-	protected $includeAssets;
+	private $ValidateBrowser;
+	private $clientStyle;
 	protected $customerUri;
-	protected $views;
-	protected $render;
-	protected $dataRequest;
-	protected $model;
-	protected $method;
+	protected $fileLanguage;
+	protected $controllerClass;
+	protected $controllerMethod;
+	protected $modelClass;
+	protected $modelMethod;
+	protected $validationMethod;
+	protected $includeAssets;
 	protected $request;
 	protected $dataResponse;
-	protected $appUserName;
-	protected $greeting;
-	protected $products;
+	protected $render;
 	protected $nameApi;
-	private $ValidateBrowser;
+	protected $dataRequest;
+	protected $greeting;
+	protected $views;
 
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Controller Class Initialized');
+		writeLog('INFO', 'Controller Class Initialized');
 
+		$class = $this->router->fetch_class();
+		$method = $this->router->fetch_method();
+		$customerUri = $this->uri->segment(1, 0) ?? 'null';
+
+		$this->ValidateBrowser = FALSE;
+		$this->clientStyle = $customerUri;
+		$this->customerUri = $customerUri;
+		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
+		$this->controllerClass = $class;
+		$this->controllerMethod = $method;
+		$this->modelClass = $class.'_Model';
+		$this->modelMethod = 'callWs_'.ucfirst($method).'_'.str_replace('Novo_', '', $class);
+		$this->validationMethod = $method;
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
 		$this->dataResponse = new stdClass();
 		$this->render = new stdClass();
-		$this->rule = lcfirst(str_replace('Novo_', '', $this->router->fetch_method()));
-		$this->model = ucfirst($this->router->fetch_class()).'_Model';
-		$this->method = 'callWs_'.ucfirst($this->router->fetch_method()).'_'.str_replace('Novo_', '', $this->router->fetch_class());
-		$this->customerUri = $this->uri->segment(1, 0) ?? 'null';
-		$this->render->logged = $this->session->has_userdata('logged');
-		$this->render->userId = $this->session->has_userdata('userId') ? $this->session->userId : FALSE;;
-		$this->appUserName = $this->session->has_userdata('userName') ? $this->session->userName : FALSE;
-		$this->products = $this->session->has_userdata('products');
-		$this->render->fullName = $this->session->fullName;
-		$this->render->productName = !$this->session->has_userdata('productInf') ?:
-		$this->session->productInf->productName.' / '.$this->session->productInf->brand;
-		$this->render->prefix = '';
-		$this->render->sessionTime = $this->config->item('session_time');
-		$this->render->callModal = $this->render->sessionTime < 180000 ? ceil($this->render->sessionTime * 50 / 100) : 15000;
-		$this->render->callServer = $this->render->callModal;
-		$this->ValidateBrowser = FALSE;
 		$this->nameApi = '';
 
 		if ($this->customerUri === "api") {
@@ -72,26 +71,24 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	private function optionsCheck()
 	{
-		log_message('INFO', 'NOVO Controller: optionsCheck Method Initialized');
+		writeLog('INFO', 'Controller: optionsCheck Method Initialized');
 
 		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
-
 			if ($this->session->has_userdata('userName')) {
 				$data = ['username' => $this->session->userName];
 				$this->db->where('id', $this->session->session_id)
 				->update('cpo_sessions', $data);
 			}
 
-			languageLoad('generic', $this->router->fetch_class());
+			LoadLangFile('generic', $this->fileLanguage);
 			clientUrlValidate($this->customerUri);
-			languageLoad('specific', $this->router->fetch_class());
 			$this->customerUri = $this->config->item('customer-uri');
-			$this->form_validation->set_error_delimiters('', '---');
-			$this->config->set_item('language', 'global');
+			$this->clientStyle = $this->config->item('client_style');
+			LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
-			if ($this->rule !== 'suggestion') {
+			if ($this->controllerMethod !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();
 			}
 
@@ -106,50 +103,41 @@ class NOVO_Controller extends CI_Controller {
 				$this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
 			}
 
-			switch ($this->greeting) {
-				case $this->greeting >= 19 && $this->greeting <= 23:
-					$this->render->greeting = lang('GEN_EVENING');
-					break;
-				case $this->greeting >= 12 && $this->greeting < 19:
-					$this->render->greeting = lang('GEN_AFTERNOON');
-					break;
-				case $this->greeting >= 0 && $this->greeting < 12:
-					$this->render->greeting = lang('GEN_MORNING');
-					break;
-			}
-
 			if ($this->input->is_ajax_request()) {
-				$this->dataRequest = lang('CONF_CYPHER_DATA') == 'ON' ? json_decode(
-					$this->security->xss_clean(
-						strip_tags(
-							$this->cryptography->decrypt(
-								base64_decode($this->input->get_post('plot')),
-								utf8_encode($this->input->get_post('request'))
-							)
-						)
-					)
-				) : json_decode(utf8_encode($this->input->get_post('request')));
+				$request = decryptData($this->input->get_post('request'));
+				$this->dataRequest = json_decode($request);
 			} else {
 				if ($this->session->has_userdata('logged')) {
-					$accept = ($this->session->longProfile == 'S' && $this->session->affiliate == '0') || $this->session->terms == '0';
-					$module = $this->rule != 'profileUser' && $this->rule != 'finishSession';
+					$redirectMfa = lang('CONF_MFA_ACTIVE') === 'ON' && !$this->session->otpActive;
+					$redirectProfile = $this->session->longProfile === 'S' && $this->session->affiliate === '0';
+					$redirectTerms = $this->session->terms === '0';
+					$redirectRule = in_array($this->controllerMethod, lang('CONF_REDIRECT_RULE'));
+					$redirect = ($redirectMfa || $redirectProfile || $redirectTerms) && !$redirectRule;
 
-					if ($accept && $module) {
-						redirect(base_url(lang('CONF_LINK_USER_PROFILE')), 'Location', 301);
+					if ($redirect) {
+						$redirectUrl = $redirectMfa ? lang('CONF_LINK_MFA_ENABLE') : lang('CONF_LINK_USER_PROFILE');
+						redirect(base_url($redirectUrl), 'Location', 301);
+						exit();
 					}
 				}
 
-				$access = $this->verify_access->accessAuthorization($this->router->fetch_method(), $this->customerUri, $this->appUserName);
+				$access = $this->verify_access->accessAuthorization($this->validationMethod);
 				$valid = TRUE;
 
 				if ($_POST && $access) {
-					log_message('DEBUG', 'NOVO [' . $this->appUserName . '] IP ' . $this->input->ip_address() .
-						' REQUEST FROM THE VIEW '.json_encode($this->input->post(), JSON_UNESCAPED_UNICODE));
+					if ($this->input->post('traslate')) {
+						$request = decryptData($this->input->post('request'));
+						$this->dataRequest = json_decode($request);
 
-					$valid = $this->verify_access->validateForm($this->rule, $this->customerUri, $this->appUserName);
+						foreach ($this->dataRequest AS $item => $value) {
+							$_POST[$item] = $value;
+						}
+					}
+
+					$valid = $this->verify_access->validateForm($this->validationMethod);
 
 					if ($valid) {
-						$this->request = $this->verify_access->createRequest($this->rule, $this->appUserName);
+						$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
 					}
 				}
 
@@ -164,7 +152,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function preloadView($auth)
 	{
-		log_message('INFO', 'NOVO Controller: preloadView Method Initialized');
+		writeLog('INFO', 'Controller: preloadView Method Initialized');
 
 		$this->render->totalCards = 0;
 
@@ -176,15 +164,31 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->novoName = $this->security->get_csrf_token_name();
-			$this->render->novoCook = $this->security->get_csrf_hash();
-			$validateRecaptcha = in_array($this->router->fetch_method(), lang('CONF_VALIDATE_CAPTCHA'));
+			$this->render->clientStyle = $this->clientStyle;
+			$this->render->logged = $this->session->has_userdata('logged');
+			$this->render->userId = $this->session->has_userdata('userId');
+			$this->render->fullName = $this->session->fullName;
+			$this->render->sessionTime = $this->config->item('session_time');
+			$this->render->callServer = $this->config->item('session_call_server');
+			$this->render->prefix = '';
+
+			switch ($this->greeting) {
+				case $this->greeting >= 19 && $this->greeting <= 23:
+					$this->render->greeting = lang('GEN_EVENING');
+					break;
+				case $this->greeting >= 12 && $this->greeting < 19:
+					$this->render->greeting = lang('GEN_AFTERNOON');
+					break;
+				case $this->greeting >= 0 && $this->greeting < 12:
+					$this->render->greeting = lang('GEN_MORNING');
+					break;
+			}
 
 			$this->includeAssets->cssFiles = [
-				"$this->customerUri/root-$this->customerUri",
+				"$this->clientStyle/root-$this->clientStyle",
 				"root-general",
 				"reboot",
-				"$this->customerUri/"."$this->customerUri-base"
+				"$this->clientStyle/"."$this->clientStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
@@ -199,15 +203,19 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/jquery-ui-1.13.1",
 				"third_party/aes",
 				"aes-json-format",
+				"encrypt_decrypt",
 				"helper"
 			];
 
 			if ($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
 				array_push(
 					$this->includeAssets->jsFiles,
-					"sessionControl"
+					"sessionControl",
+					"mfa/mfaControl"
 				);
 			}
+
+			$validateRecaptcha = in_array($this->controllerMethod, lang('CONF_VALIDATE_CAPTCHA'));
 
 			if ($validateRecaptcha) {
 				array_push(
@@ -215,7 +223,7 @@ class NOVO_Controller extends CI_Controller {
 					"googleRecaptcha"
 				);
 
-				if(ACTIVE_RECAPTCHA){
+				if (ACTIVE_RECAPTCHA) {
 					$this->load->library('recaptcha');
 					$this->render->scriptCaptcha = $this->recaptcha->getScriptTag();
 				}
@@ -223,6 +231,7 @@ class NOVO_Controller extends CI_Controller {
 		} else {
 			$linkredirect = uriRedirect();
 			redirect(base_url($linkredirect), 'Location', 301);
+			exit();
 		}
 	}
 	/**
@@ -232,10 +241,10 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO Controller: loadModel Method Initialized. Model loaded: '.$this->model);
+		writeLog('INFO', 'Controller: loadModel Method Initialized. Model loaded: ' . $this->modelClass);
 
-		$this->load->model($this->model,'modelLoaded');
-		$method = $this->method;
+		$this->load->model($this->modelClass, 'modelLoaded');
+		$method = $this->modelMethod;
 
 		return $this->modelLoaded->$method($request);
 	}
@@ -247,7 +256,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function responseAttr($responseView = 0)
 	{
-		log_message('INFO', 'NOVO Controller: responseAttr Method Initialized');
+		writeLog('INFO', 'Controller: responseAttr Method Initialized');
 
 		$this->render->code = $responseView;
 
@@ -259,8 +268,10 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->title = $responseView->title;
 			$this->render->msg = $responseView->msg;
 			$this->render->icon = $responseView->icon;
-			$this->render->modalBtn = json_encode($responseView->modalBtn);
+			$this->render->modalBtn = $responseView->modalBtn;
 		}
+
+		$this->render->response = $responseView;
 	}
 
 	/**
@@ -270,13 +281,13 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function checkBrowser()
 	{
-		log_message('INFO', 'NOVO Controller: checkBrowser Method Initialized');
+		writeLog('INFO', 'Controller: checkBrowser Method Initialized');
 		$this->load->library('Tool_Browser');
 
 		$valid = $this->tool_browser->validBrowser($this->customerUri);
 
 		if(!$valid) {
-			redirect(base_url('suggestion'),'location', 'GET');
+			redirect(base_url('suggestion'), 'location', 301);
 			exit();
 		}
 
@@ -289,7 +300,7 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadView($module)
 	{
-		log_message('INFO', 'NOVO Controller: loadView Method Initialized. Module loaded: '.$module);
+		writeLog('INFO', 'Controller: loadView Method Initialized. Module loaded: ' . $module);
 
 		$userMenu = new stdClass();
 		$mainMenu = mainMenu();
@@ -311,10 +322,8 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		$userMenu->mainMenu = $mainMenu;
-		$userMenu->currentMethod = $this->router->fetch_method();
+		$userMenu->currentMethod = $this->controllerMethod;
 		$this->render->settingsMenu = $userMenu;
-		$this->render->goOut = ($this->render->logged || $this->session->flashdata('changePassword') != NULL)
-			? lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START') : lang('CONF_LINK_SIGNIN');
 		$this->render->module = $module;
 		$this->render->viewPage = $this->views;
 		$this->asset->initialize($this->includeAssets);
@@ -327,19 +336,20 @@ class NOVO_Controller extends CI_Controller {
 	 */
 	protected function loadApiModel($request = FALSE)
 	{
-		log_message('INFO', 'NOVO Controller: loadApiModel Method Initialized');
+		writeLog('INFO', 'Controller: loadApiModel Method Initialized');
 
 		$responseModel = $this->tool_api->setResponseNotValid();
-		$showMsgLog = 'NOVO Controller: loadApiModel Model NOT loaded: '.$this->model.'/'.$this->method;
+		$showMsgLog = 'Controller: loadApiModel Model NOT loaded: ' . $this->modelClass . '/' . $this->modelMethod;
 
-		if (file_exists(APPPATH."models/{$this->model}.php")) {
-			$this->load->model($this->model,'modelLoaded');
+		if (file_exists(APPPATH."models/{$this->modelClass}.php")) {
+			$this->load->model($this->modelClass, 'modelLoaded');
 
-			$method = $this->method;
+			$method = $this->modelMethod;
 			$responseModel = $this->modelLoaded->$method($request);
-			$showMsgLog = 'NOVO Controller: loadApiModel Successfully loaded model: '.$this->model.'/'.$this->method;
+			$showMsgLog = 'Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
+				$this->modelMethod;
 		}
-		log_message('DEBUG', $showMsgLog);
+		writeLog('DEBUG', $showMsgLog);
 
 		return $responseModel;
 	}

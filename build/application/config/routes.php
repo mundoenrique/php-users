@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	https://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/userguide3/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -96,6 +96,8 @@ $route['(:any)/user-identify'] = "Novo_User/userIdentify";
 $route['(:any)/user-identify/(:any)'] = "Novo_User/userIdentify";
 $route['(:any)/change-password'] = "Novo_User/changePassword";
 $route['(:any)/user-profile'] = "Novo_User/profileUser";
+$route['(:any)/mfa-enable'] = "Novo_Mfa/mfaEnable";
+$route['(:any)/mfa-confirm/(email|app)'] = "Novo_Mfa/mfaConfirm/$2";
 $route['(:any)/terms-conditions'] = "Novo_User/termsConditions";
 //Business
 $route['(:any)/card-list'] = "Novo_Business/userCardsList";

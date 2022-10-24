@@ -2298,6 +2298,10 @@ label {
 	vertical-align: bottom;
 }
 
+.trun-mfa {
+	overflow: clip !important;
+}
+
 /* Transform */
 .lowercase  { text-transform: lowercase !important }
 .uppercase    { text-transform: uppercase !important }
@@ -4886,6 +4890,15 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 
 .codeOptions li:hover {
 	font-weight: var(--semibold-font-weight);
+}
+
+.qr-code-img {
+	height: 200px;
+	width: 230px;
+}
+
+.secret-token {
+	height: 21px;
 }
 
 .country-none {

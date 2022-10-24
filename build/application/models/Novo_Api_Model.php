@@ -10,7 +10,7 @@ class Novo_Api_Model extends NOVO_Model {
 	public function __construct()
 	{
 		parent:: __construct();
-		log_message('INFO', 'NOVO Api Model Class Initialized');
+		writeLog('INFO', 'Api Model Class Initialized');
 	}
 	/**
 	 * @info Método para generar hash
@@ -19,7 +19,7 @@ class Novo_Api_Model extends NOVO_Model {
 	 */
 	public function callWs_GenerateHash_Api($dataRequest)
 	{
-		log_message('INFO', 'NOVO API Model: GenerateHash Method Initialized');
+		writeLog('INFO', 'API Model: GenerateHash Method Initialized');
 
 		$argon2 = $this->encrypt_connect->generateArgon2($dataRequest->password);
 
@@ -32,7 +32,7 @@ class Novo_Api_Model extends NOVO_Model {
 
 		$this->responseApi->code = 200;
 		$this->responseApi->data = $this->encrypt_connect->cryptography($dataResponse, TRUE);
-		log_message('INFO', 'API bodyResponse: ' . json_encode($this->responseApi));
+		writeLog('INFO', 'API bodyResponse: ' . json_encode($this->responseApi));
 
 		return $this->responseApi;
 	}
@@ -43,7 +43,7 @@ class Novo_Api_Model extends NOVO_Model {
 	 */
 	public function callWs_GenerateRequest_Api($dataRequest)
 	{
-		log_message('INFO', 'NOVO API Model: GenerateRequest Method Initialized');
+		writeLog('INFO', 'API Model: GenerateRequest Method Initialized');
 
 		$bodyRequest = [
 			'key' => $dataRequest->key,
@@ -53,7 +53,7 @@ class Novo_Api_Model extends NOVO_Model {
 		$dataResponse = json_encode($bodyRequest);
 		$this->response->code = 200;
 		$this->response->data= $this->encrypt_connect->cryptography($dataResponse, TRUE);
-		log_message('INFO', 'API bodyResponse: ' . json_encode($this->response));
+		writeLog('INFO', 'API bodyResponse: ' . json_encode($this->response));
 
 		return $this->response;
 	}

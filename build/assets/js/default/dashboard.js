@@ -173,17 +173,17 @@ country = $('body').data('country');
     }
 
 
-	function getVarsUrl(){
-			var url= location.search.replace("?", "");
-			var arrUrl = url.split("&");
-			var urlObj={};
-			for(var i=0; i<arrUrl.length; i++){
-					var x= arrUrl[i].split("=%20");
-					urlObj[x[0]]=x[1]
-			}
-			//console.log(urlObj);
-			return urlObj;
-	}
+function getVarsUrl(){
+    var url= location.search.replace("?", "");
+    var arrUrl = url.split("&");
+    var urlObj={};
+    for(var i=0; i<arrUrl.length; i++){
+        var x= arrUrl[i].split("=%20");
+        urlObj[x[0]]=x[1]
+    }
+
+    return urlObj;
+}
 
 	/* var notice = sessionStorage.getItem('notice');
 

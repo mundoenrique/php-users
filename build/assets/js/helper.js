@@ -1,20 +1,24 @@
-'use strict'
-var screenSize;
-var inputModal;
-var who, where, dataResponse, cpo_cook, btnText, form, cypherPass;
-var loader = $('#loader').html();
-var validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
-var dataTableLang;
-var validator;
-var currentDate;
+'use strict';
+var traslate
 $(function () {
+	traslate = $('#traslate').val() === '1' ? true : false;
+	assetsClient = cryptography.decrypt(assetsClient.response);
+
+	$.each(assetsClient, function(item, value) {
+		window[item] = value
+	});
+
+	loader = $('#loader').html();
+	validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
+	defaultCode = parseInt(lang.CONF_DEFAULT_CODE);
+
 	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input')
 		var inputType = pwdInput.attr('type');
 
-		if (pwdInput.val() != '') {
+		if (pwdInput.val() !== '') {
 			if (inputType === 'password') {
 				pwdInput.attr('type', 'text');
 				$(this).attr('title', lang.GEN_HIDE_PASS);
@@ -26,7 +30,8 @@ $(function () {
 	});
 
 	$('#change-lang').on('click', function () {
-		who = 'User'; where = 'changeLanguage';
+		who = 'User';
+		where = 'changeLanguage';
 		data = {
 			lang: $(this).find('span.text').text()
 		};
@@ -51,9 +56,9 @@ $(function () {
 	}
 
 	$('.big-modal').on('click', function () {
-		$('.cover-spin').show(0)
+		coverSpin(true);
 	});
-	//dataTale lang
+
 	dataTableLang = {
 		"sLengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
 		"sZeroRecords": lang.GEN_DATATABLE_SZERORECORDS,
@@ -87,7 +92,7 @@ $(function () {
 			}
 		}
 	}
-	//datepicker
+
 	currentDate = new Date();
   $.datepicker.regional['es'] = {
     closeText: lang.GEN_DATEPICKER_CLOSETEXT,
@@ -116,35 +121,27 @@ $(function () {
 });
 
 function callNovoCore(who, where, request, _response_) {
-	request.screenSize = screen.width;
-	var dataRequest = JSON.stringify({
+	var formData = new FormData();
+	var dataRequest = {
 		who: who,
 		where: where,
 		data: request
-	});
-	var codeResp = parseInt(lang.CONF_DEFAULT_CODE);
-	var formData = new FormData();
+	};
 
-	dataRequest = cryptoPass(dataRequest, true);
+	dataRequest = cryptography.encrypt(dataRequest);
+	formData.append('request', dataRequest);
+	formData.append('cpo_name', cpo_cook);
 
 	if (request.files) {
-		data.files.forEach(function (element) {
+		request.files.forEach(function (element) {
 			formData.append(element.name, element.file);
 		});
+
 		delete request.files;
 	}
 
-	formData.append('request', dataRequest);
-
-	if (lang.CONF_CYPHER_DATA == 'ON') {
-		formData.append('cpo_name', cpo_cook);
-		formData.append('plot', btoa(cpo_cook));
-	}
-
 	if (logged || userId) {
-		clearTimeout(resetTimesession);
-		clearTimeout(setTimesession);
-		sessionExpire();
+		sessionControl();
 	}
 
 	$.ajax({
@@ -156,34 +153,25 @@ function callNovoCore(who, where, request, _response_) {
 		contentType: false,
 		processData: false,
 		dataType: 'json'
-	}).done(function (response, status, jqXHR) {
-
-		if (lang.CONF_CYPHER_DATA == 'ON') {
-			response = JSON.parse(CryptoJS.AES.decrypt(response.code, response.plot, { format: CryptoJSAesJson }).toString(CryptoJS.enc.Utf8))
-		}
+	}).done(function (data, status, jqXHR) {
+		response = cryptography.decrypt(data.response);
 
 		var modalClose = response.modal ? false : true;
+		modalDestroy(modalClose);
 
-		if ($('#system-info').parents('.ui-dialog').length && modalClose) {
-			$('#accept').prop('disabled', false)
-			$('#system-info').dialog('destroy');
-		}
-
-		if (response.code === codeResp) {
+		if (response.code === defaultCode) {
 			appMessages(response.title, response.msg, response.icon, response.modalBtn);
 		}
 
-		_response_(response);
-
-	}).fail(function (jqXHR, textStatus, errorThrown) {
-
-		if ($('#system-info').parents('.ui-dialog').length) {
-			$('#accept').prop('disabled', false)
-			$('#system-info').dialog('destroy');
+		if (_response_) {
+			_response_(response);
 		}
 
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		modalDestroy(true);
+
 		var response = {
-			code: codeResp,
+			code: defaultCode,
 			modalBtn: {
 				btn1: {
 					link: redirectLink,
@@ -191,6 +179,7 @@ function callNovoCore(who, where, request, _response_) {
 				}
 			}
 		};
+
 		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
 		_response_(response);
 	});
@@ -237,13 +226,13 @@ function appMessages(title, message, icon, modalBtn) {
 			$('#system-msg').html(message);
 
 			if (!btn1) {
-				$('#accept').hide();
+				$('#accept').addClass('hide');
 			} else {
 				createButton($('#accept'), btn1);
 			}
 
 			if (!btn2) {
-				$('#cancel').hide();
+				$('#cancel').addClass('hide');
 			} else {
 				createButton($('#cancel'), btn2);
 			}
@@ -261,15 +250,18 @@ function createButton(elementButton, valuesButton) {
 					.html(loader)
 					.prop('disabled', true);
 				$(this).children('span').addClass('spinner-border-sm');
+
 				if ($(this).attr('id') == 'cancel') {
 					$(this).children('span')
 						.removeClass('secondary')
 						.addClass('primary');
 				}
+
 				$(location).attr('href', baseURL + valuesButton.link);
 				break;
+
 			case 'destroy':
-				$('#system-info').dialog('destroy');
+				modalDestroy(true);
 				break;
 		}
 
@@ -292,9 +284,7 @@ function insertFormInput(disabled, form) {
 
 	if (form) {
 		cpo_cook = getCookieValue();
-		screenSize = screen.width;
 		form.append('<input type="hidden" name="cpo_name" value="' + cpo_cook + '"></input>');
-		form.append('<input type="hidden" name="screenSize" value="' + screenSize + '"></input>');
 	}
 }
 
@@ -312,26 +302,6 @@ function formInputTrim(form) {
 		var trimVal = thisValInput.trim()
 		$(this).val(trimVal)
 	});
-}
-
-function cryptoPass(jsonObject, req) {
-	req = req == undefined ? false : req;
-	cpo_cook = getCookieValue();
-	var cipherObject = jsonObject;
-
-	if (lang.CONF_CYPHER_DATA == 'ON') {
-		cipherObject = CryptoJS.AES.encrypt(jsonObject, cpo_cook, { format: CryptoJSAesJson }).toString();
-
-		if (!req) {
-			cipherObject = btoa(JSON.stringify({
-				password: cipherObject,
-				plot: btoa(cpo_cook)
-			}));
-		}
-	}
-
-
-	return cipherObject;
 }
 
 function getDataForm(form) {
@@ -353,7 +323,7 @@ function downLoadfiles(data) {
 	window.URL.revokeObjectURL(url);
 	$('#download-file').attr('href', lang.CONF_NO_LINK);
 	$('#download-file').attr('download', '');
-	$('.cover-spin').hide();
+	coverSpin(false);
 }
 
 function scrollTopPos(formValidate) {
@@ -364,5 +334,27 @@ function scrollTopPos(formValidate) {
 		$("html, body").animate({
 			scrollTop: firstElement - formValidate
 		}, 400);
+	}
+}
+
+function coverSpin(show) {
+	show ? $('.cover-spin').show(0) : $('.cover-spin').hide();
+}
+
+function modalDestroy(close) {
+	if ($('#system-info').parents('.ui-dialog').length && close) {
+		$('#system-info').dialog('destroy');
+		$('#accept')
+			.prop('disabled', false)
+			.html(lang.GEN_BTN_ACCEPT)
+			.removeClass()
+			.addClass(lang.CONF_MODAL_BTN_CLASS['accept'])
+			.off('click');
+		$('#cancel')
+			.prop('disabled', false)
+			.removeClass()
+			.addClass(lang.CONF_MODAL_BTN_CLASS['cancel'])
+			.html(lang.GEN_BTN_CANCEL)
+			.off('click');
 	}
 }

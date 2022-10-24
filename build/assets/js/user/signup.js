@@ -89,8 +89,8 @@ $(function () {
 			delete data.genderMale;
 			delete data.genderFemale;
 			data.gender = $('input[name=gender]:checked').val();
-			data.newPass = cryptoPass(data.newPass);
-			data.confirmPass = cryptoPass(data.confirmPass);
+			data.newPass = cryptography.encrypt(data.newPass);
+			data.confirmPass = cryptography.encrypt(data.confirmPass);
 
 			if (longProfile == 'S') {
 				data.publicOfficeOld = $('input[name=publicOfficeOld]:checked').val() == 'yes' ? '1' : '0';
