@@ -193,6 +193,11 @@ $lang['CONF_LINK_DIGITEL'] = $lang['CONF_NO_LINK'];
 $lang['CONF_LINK_REPORTS'] = 'reports';
 $lang['CONF_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['CONF_LINK_NOTIFICATIONS'] = 'notifications';
+$lang['CONF_REDIRECT_OPER_KEY'] = [
+	'cardToCard' => $lang['CONF_LINK_BETWEEN_CARDS'] ,
+	'cardToBank' => $lang['CONF_LINK_BANKS'] ,
+	'mobilePayment' => $lang['CONF_LINK_MOBILE_PAYMENT'],
+];
 $lang['CONF_LINK_MFA_APPS'] = [
 	'Google Authenticator'	  => 'https://support.google.com/accounts/answer/1066447?hl=es&co=GENIE.Platform%3DAndroid',
 	'Microsoft Authenticator' => 'https://www.microsoft.com/es-es/security/mobile-authenticator-app',

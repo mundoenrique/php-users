@@ -8,7 +8,7 @@
           <div class="line-text w-100">
             <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-balance="<?= $callBalance; ?>">
               <div class="flex flex-column justify-center col-auto pb-4 pt-4 pr-0"">
-								<div class="product-presentation relative">
+								<div class=" product-presentation relative">
                 <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0) : ?>
                 <div id="donor" class="product-search btn">
@@ -16,7 +16,8 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>"
+                  alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
               <?php if ($totalCards == 1 && $isVirtual) : ?>
@@ -40,8 +41,12 @@
         </div>
         <div class="flex col-12 mt-2 center info-contained">
           <ul class="flex flex-auto justify-between px-4 px-xl-5">
-						<li id="avaibleBalance" class="list-inline-item"><? $totalCards === 1 ? lang('TRANSF_AVAILABLE_BALANCE') : '' ?></li>
-            <li id="currentBalance" class="list-inline-item"><? $totalCards === 1 ? lang('GEN_WAIT_BALANCE') : '' ?></li>
+            <li id="avaibleBalance" class="list-inline-item">
+              <? $totalCards === 1 ? lang('TRANSF_AVAILABLE_BALANCE') : '' ?>
+            </li>
+            <li id="currentBalance" class="list-inline-item">
+              <? $totalCards === 1 ? lang('GEN_WAIT_BALANCE') : '' ?>
+            </li>
           </ul>
         </div>
       </div>
@@ -50,9 +55,9 @@
   <div class="flex optional mt-4 px-0">
     <nav class="nav-config w-100">
       <ul class="flex flex-wrap justify-center nav-config-box">
-				<?php foreach($navItemsConfig as $key => $value) : ?>
-					<?php $this->load->view('/transfer/navItemsTransfer_content-core', $value); ?>
-				<?php endforeach; ?>
+        <?php foreach($navItemsConfig as $key => $value) : ?>
+        <?php $this->load->view('/transfer/navItemsTransfer_content-core', $value); ?>
+        <?php endforeach; ?>
       </ul>
     </nav>
   </div>

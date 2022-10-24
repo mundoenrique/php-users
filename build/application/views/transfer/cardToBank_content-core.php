@@ -40,8 +40,12 @@
         </div>
         <div class="flex col-12 mt-2 center info-contained">
           <ul class="flex flex-auto justify-between px-4 px-xl-5">
-						<li id="avaibleBalance" class="list-inline-item"><? $totalCards === 1 ? lang('TRANSF_AVAILABLE_BALANCE') : '' ?></li>
-            <li id="currentBalance" class="list-inline-item"><? $totalCards === 1 ? lang('GEN_WAIT_BALANCE') : '' ?></li>
+						<li id="avaibleBalance" class="list-inline-item">
+							<? $totalCards === 1 ? lang('TRANSF_AVAILABLE_BALANCE') : '' ?>
+						</li>
+            <li id="currentBalance" class="list-inline-item">
+							<? $totalCards === 1 ? lang('GEN_WAIT_BALANCE') : '' ?>
+						</li>
           </ul>
         </div>
       </div>

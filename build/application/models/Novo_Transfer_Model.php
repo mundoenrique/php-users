@@ -26,13 +26,75 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'Clave de operaciones';
 		$this->dataAccessLog->operation = 'Creacion clave de operaciones';
 
-		$this->dataRequest->idOperation = '16';
-		$this->dataRequest->className = 'com.novo.objects.TOs.';
-		$this->dataRequest->accodusuario = $this->session->userName;
+		$newOperKey = decryptData($dataRequest->newPass);
+		$bntLinkTransfer = uriRedirect();
+
+		$this->dataRequest->idOperation = '31';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataRequest->userName = $this->session->userName;
+		$this->dataRequest->passwordOperaciones = md5($newOperKey);
 
 		$response = $this->sendToService('callWs_NotificationsUpdate');
 
+		if ($this->session->flashdata('currentUri') !== NULL) {
+			$bntLinkTransfer = $this->session->flashdata('currentUri');
+			$this->session->keep_flashdata('currentUri');
+		}
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->session->set_userdata('operKey', TRUE);
+				$this->response->code = 0;
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
+				$this->response->msg = 'La clave de operaciones se ha creado con exito.';
+				$this->response->modalBtn['btn1']['link'] = $bntLinkTransfer;
+				break;
+		}
+
 		return $this->responseToTheView('CallWs_SetOperationKey');
+	}
+		/**
+	 * @info Método para actualizar la clave de operaciones
+	 * @author Jhonatan Llerena
+	 * @date October 11th, 2022
+	 */
+	public function CallWs_ChangeOperationKey_Transfer($dataRequest)
+	{
+		writeLog('INFO', 'Transfer Model: ChangeOperationKey Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Transferencia';
+		$this->dataAccessLog->function = 'Clave de operaciones';
+		$this->dataAccessLog->operation = 'Actualizar clave operaciones';
+
+		$currentOperKey = decryptData($dataRequest->currentPass);
+		$newOperKey = decryptData($dataRequest->newPass);
+
+		$this->dataRequest->idOperation = '32';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataRequest->userName = $this->session->userName;
+		$this->dataRequest->passwordOperacionesOld = md5($currentOperKey);
+		$this->dataRequest->passwordOperaciones = md5($newOperKey);
+
+		$response = $this->sendToService('callWs_NotificationsUpdate');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
+				$this->response->msg = 'La clave de operaciones se actualizo con exito.';
+				$this->response->modalBtn['btn1']['link'] = uriRedirect();
+				break;
+			case -22:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
+				$this->response->msg = 'La clave de operaciones actual introducida es incorrecto';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+		}
+
+		return $this->responseToTheView('CallWs_ChangeOperationKey');
 	}
 	/**
 	 * @info Método para validar clave de operaciones
@@ -45,13 +107,36 @@ class Novo_Transfer_Model extends NOVO_Model
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 		$this->dataAccessLog->function = 'Clave de operaciones';
-		$this->dataAccessLog->operation = 'Validar clave de operaciones';
+		$this->dataAccessLog->operation = 'Validar clave operaciones';
 
-		$this->dataRequest->idOperation = '16';
-		$this->dataRequest->className = 'com.novo.objects.TOs.';
-		$this->dataRequest->accodusuario = $this->session->userName;
+		$operKey = decryptData($dataRequest->currentPass);
+		$bntLinkTransfer = uriRedirect();
+
+		$this->dataRequest->idOperation = '10';
+		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
+		$this->dataRequest->userName = $this->session->userName;
+		$this->dataRequest->passwordOperaciones = md5($operKey);
 
 		$response = $this->sendToService('CallWs_GetOperationKey');
+
+		if ($this->session->flashdata('currentUri') !== NULL) {
+			$bntLinkTransfer = $this->session->flashdata('currentUri');
+			$this->session->keep_flashdata('currentUri');
+		}
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->session->set_userdata('transferAuth', TRUE);
+				$this->response->code = 0;
+				$this->response->data = $bntLinkTransfer;
+				break;
+			case -22:
+				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
+				$this->response->msg = 'El password actual introducido es incorrecto';
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+		}
 
 		return $this->responseToTheView('CallWs_GetOperationKey');
 	}

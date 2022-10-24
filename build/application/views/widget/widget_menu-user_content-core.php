@@ -17,7 +17,7 @@
 				</li>
 				<?php if($this->session->canTransfer == 'S') : ?>
 				<li>
-					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url(lang('CONF_LINK_CHANGE_OPERKEY')); ?>"><?= lang('GEN_MENU_CHANGE_OPERKEY') ?></a>
+					<a class="pl-2 pr-1 h6 big-modal" href="<?= base_url($this->session->operKey ? lang('CONF_LINK_CHANGE_OPERKEY') : lang('CONF_LINK_SET_OPER_KEY')) ?>"><?= lang('GEN_MENU_CHANGE_OPERKEY') ?></a>
 				</li>
 				<?php endif; ?>
 				<?php if(lang('CONF_NOTIFICATIONS') == 'ON'): ?>
