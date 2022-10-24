@@ -260,16 +260,19 @@ $(function () {
 			$("#currentBalance").text(response.msg);
 		});
 	}
-	function getBanks() {
+	function getBanks(action) {
 		var bankField = $("#manageAffiliateView #bank");
-		var currentBank = currentAffiliaton?.codBanco
-			? currentAffiliaton?.codBanco
-			: "";
+		var currentBank =
+			action == "edit" && currentAffiliaton?.codBanco
+				? currentAffiliaton?.codBanco
+				: "";
 
 		bankField.prop("disabled", true);
-		bankField.find("option").get(0).remove();
+		bankField.find("option").remove();
 		bankField.append(
-			`<option value="" selected disabled>${lang.TRANSF_WAITING_BANKS}</option>`
+			currentBank == ""
+				? `<option value="" selected disabled>${lang.TRANSF_WAITING_BANKS}</option>`
+				: `<option value="${currentBank}" selected disabled>${currentAffiliaton.banco}</option>`
 		);
 
 		who = "Transfer";
@@ -277,19 +280,16 @@ $(function () {
 
 		callNovoCore(who, where, {}, function (response) {
 			if (response.code == 0) {
-				var selected;
 				$.each(response.data, function (pos, bank) {
-					selected = currentBank == bank.codBcv;
-					bankField.append(
-						`<option value="${bank.codBcv}"${selected ? " selected" : ""}>${
-							bank.nomBanco
-						}</option>`
-					);
+					if (currentBank != bank.codBcv) {
+						bankField.append(
+							`<option value="${bank.codBcv}">${bank.nomBanco}</option>`
+						);
+					}
 				});
 
-				bankField.find("option").get(0).remove();
-
 				if (currentBank == "") {
+					bankField.find("option").get(0).remove();
 					bankField.prepend(
 						`<option value="" selected disabled>${lang.GEN_SELECTION}</option>`
 					);
@@ -382,18 +382,24 @@ $(function () {
 		}
 
 		if (operationType != "P2P") {
-			getBanks();
+			getBanks(action);
 		}
 	}
 
 	function setValues() {
+		var documentType, documentNumber;
+		if (currentAffiliaton.id_ext_per) {
+			documentType = currentAffiliaton.id_ext_per.slice(0, 1);
+			documentNumber = currentAffiliaton.id_ext_per.slice(1);
+		}
+
 		switch (operationType) {
 			case "P2P":
 				$("#manageAffiliateView #beneficiary").val(
 					currentAffiliaton.beneficiario
 				);
-				$("#manageAffiliateView #typeDocument").val("V");
-				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #typeDocument").val(documentType);
+				$("#manageAffiliateView #idNumber").val(documentNumber);
 				$("#manageAffiliateView #destinationCard").val(
 					currentAffiliaton.nroCuentaDestino
 				);
@@ -405,8 +411,8 @@ $(function () {
 				$("#manageAffiliateView #beneficiary").val(
 					currentAffiliaton.beneficiario
 				);
-				$("#manageAffiliateView #typeDocument").val("V");
-				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #typeDocument").val(documentType);
+				$("#manageAffiliateView #idNumber").val(documentNumber);
 				$("#manageAffiliateView #destinationAccount").val(
 					currentAffiliaton.noCuenta
 				);
@@ -419,8 +425,8 @@ $(function () {
 				$("#manageAffiliateView #beneficiary").val(
 					currentAffiliaton.beneficiario
 				);
-				$("#manageAffiliateView #typeDocument").val("V");
-				$("#manageAffiliateView #idNumber").val(currentAffiliaton.id_ext_per);
+				$("#manageAffiliateView #typeDocument").val(documentType);
+				$("#manageAffiliateView #idNumber").val(documentNumber);
 				$("#manageAffiliateView #mobilePhone").val(currentAffiliaton.telefono);
 				$("#manageAffiliateView #beneficiaryEmail").val(
 					currentAffiliaton.email
