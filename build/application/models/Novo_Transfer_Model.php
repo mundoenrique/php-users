@@ -47,7 +47,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
-				$this->response->msg = 'La clave de operaciones se ha creado con exito.';
+				$this->response->msg = lang('TRANSF_SUCCESS_CREATED_OPER_KEY');
 				$this->response->modalBtn['btn1']['link'] = $bntLinkTransfer;
 				break;
 		}
@@ -83,13 +83,13 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
-				$this->response->msg = 'La clave de operaciones se actualizo con exito.';
+				$this->response->msg = lang('TRANSF_UPDATE_OPER_KEY');
 				$this->response->modalBtn['btn1']['link'] = uriRedirect();
 				break;
 			case -22:
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
-				$this->response->msg = 'La clave de operaciones actual introducida es incorrecto';
+				$this->response->msg = lang('TRANSF_INCORRECT_OPER_KEY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 		}
@@ -133,7 +133,7 @@ class Novo_Transfer_Model extends NOVO_Model
 			case -22:
 				$this->response->icon = lang('CONF_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
-				$this->response->msg = 'El password actual introducido es incorrecto';
+				$this->response->msg = lang('TRANSF_INCORRECT_OPER_KEY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 		}
