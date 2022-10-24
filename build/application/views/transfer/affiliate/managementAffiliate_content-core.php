@@ -68,7 +68,7 @@
           <div class="line my-2"></div>
           <div class="flex items-center justify-end pt-3">
 						<button id="affiliateCancelBtn" class="btn btn-small btn-link"><?= lang('GEN_BTN_CANCEL') ?></button>
-            <button id="manageAffiliateBtn" class="btn btn-small btn-loading btn-primary send"><?= (TRUE) ? lang('TRANSF_AN_AFFILIATE') : lang('GEN_BTN_SAVE') ?></button>
+            <button id="manageAffiliateBtn" class="btn btn-small btn-loading btn-primary send"></button>
           </div>
         </form>
       </div>

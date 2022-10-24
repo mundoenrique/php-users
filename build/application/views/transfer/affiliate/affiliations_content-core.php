@@ -11,7 +11,7 @@
             <button id="newAffiliate" class="btn btn-small btn-loading btn-primary w-auto"><?= lang('TRANSF_NEW_AFFILIATE') ?></button>
           </div>
           <div class="col-6">
-            <form id="searchAffiliate" method="post">
+            <form id="searchAffiliate" method="post" class="hide">
               <div class="row pl-2 pr-3 justify-end">
                 <div class="form-group col-auto px-1">
                   <input id="filterSearchAffiliate" name="filterSearchAffiliate" class="form-control" name="filterSearchAffiliate" type="text"
@@ -32,7 +32,7 @@
 						</div>
 					</div>
           <div class="col-12 hide-out hide">
-            <div id="transferRecord" class="mt-1 justify-center">
+            <div id="transferRecord" class="mt-1 justify-center hide">
               <table id="affiliationTable" class="cell-border h6 display responsive w-100 dataTable no-footer dtr-inline">
                 <thead class="bg-primary secondary regular">
                   <tr>

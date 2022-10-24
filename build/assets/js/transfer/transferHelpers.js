@@ -289,10 +289,9 @@ $(function () {
 				});
 
 				if (currentBank == "") {
-					bankField.find("option").get(0).remove();
-					bankField.prepend(
-						`<option value="" selected disabled>${lang.GEN_SELECTION}</option>`
-					);
+					bankField.find("option").first().text(lang.GEN_SELECTION);
+				} else {
+					bankField.find("option").first().prop("disabled", false);
 				}
 			}
 
