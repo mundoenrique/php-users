@@ -53,11 +53,13 @@ class Novo_Transfer extends NOVO_Controller
 		if ($validateOperKey && $validateGetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
 			redirect(base_url(lang('CONF_LINK_GET_OPER_KEY')), 'Location', 301);
+			exit();
 		}
 
 		if (!$validateOperKey && $validateSetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
 			redirect(base_url(lang('CONF_LINK_SET_OPER_KEY')), 'Location', 301);
+			exit();
 		}
 
 		$this->session->keep_flashdata('currentUri');
