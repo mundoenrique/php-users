@@ -1,5 +1,5 @@
 "use strict";
-var cardData, affiliationsList, currentAffiliaton;
+var cardData, affiliationsList, currentAffiliaton, bankList;
 
 $(function () {
 	var operationType = $("#transferView").attr("operation-type");
@@ -260,8 +260,13 @@ $(function () {
 			$("#currentBalance").text(response.msg);
 		});
 	}
-	function getBanks(action) {
-		var bankField = $("#manageAffiliateView #bank");
+
+	function getBanks(operation, action = "") {
+		var bankField =
+			operation == "affiliation"
+				? $("#manageAffiliateView #bank")
+				: $("#transferView #bank");
+
 		var currentBank =
 			action == "edit" && currentAffiliaton?.codBanco
 				? currentAffiliaton?.codBanco
@@ -377,60 +382,105 @@ $(function () {
 		}
 
 		if (action == "edit") {
-			setValues();
+			setFieldNames("affiliation");
 		}
 
 		if (operationType != "P2P") {
-			getBanks(action);
+			getBanks("affiliation", action);
 		}
 	}
 
-	function setValues() {
-		var documentType, documentNumber;
-		if (currentAffiliaton.id_ext_per) {
-			documentType = currentAffiliaton.id_ext_per.slice(0, 1);
-			documentNumber = currentAffiliaton.id_ext_per.slice(1);
+	function showTransferView() {
+		if (action == "create") {
+			$("#manageAffiliate")[0].reset();
 		}
+		$("#affiliationsView").hide();
+		$("#manageAffiliateView").fadeIn(700, "linear");
+		$("#manageAffiliateBtn")
+			.text(action == "create" ? lang.TRANSF_AN_AFFILIATE : lang.GEN_BTN_SAVE)
+			.data("action", action);
+		$("#affiliateTitle").text(
+			action == "create"
+				? lang.TRANSF_NEW_AFFILIATE
+				: lang.TRANSF_EDIT_AFFILIATE
+		);
 
 		switch (operationType) {
 			case "P2P":
-				$("#manageAffiliateView #beneficiary").val(
-					currentAffiliaton.beneficiario
-				);
-				$("#manageAffiliateView #typeDocument").val(documentType);
-				$("#manageAffiliateView #idNumber").val(documentNumber);
-				$("#manageAffiliateView #destinationCard").val(
-					currentAffiliaton.nroCuentaDestino
-				);
-				$("#manageAffiliateView #beneficiaryEmail").val(
-					currentAffiliaton.email
+				$("#affiliateMessage").text(
+					action == "create"
+						? lang.TRANSF_NEW_AFFILIATE_CARD_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
 			case "P2T":
-				$("#manageAffiliateView #beneficiary").val(
-					currentAffiliaton.beneficiario
-				);
-				$("#manageAffiliateView #typeDocument").val(documentType);
-				$("#manageAffiliateView #idNumber").val(documentNumber);
-				$("#manageAffiliateView #destinationAccount").val(
-					currentAffiliaton.noCuenta
-				);
-				$("#manageAffiliateView #mobilePhone").val(currentAffiliaton.telefono);
-				$("#manageAffiliateView #beneficiaryEmail").val(
-					currentAffiliaton.email
+				$("#affiliateMessage").text(
+					action == "create"
+						? lang.TRANSF_NEW_AFFILIATE_BANK_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
 			case "PMV":
-				$("#manageAffiliateView #beneficiary").val(
-					currentAffiliaton.beneficiario
-				);
-				$("#manageAffiliateView #typeDocument").val(documentType);
-				$("#manageAffiliateView #idNumber").val(documentNumber);
-				$("#manageAffiliateView #mobilePhone").val(currentAffiliaton.telefono);
-				$("#manageAffiliateView #beneficiaryEmail").val(
-					currentAffiliaton.email
+				$("#affiliateMessage").text(
+					action == "create"
+						? lang.TRANSF_NEW_AFFILIATE_PAY_MSG
+						: lang.TRANSF_EDIT_AFFILIATE_MSG
 				);
 				break;
+		}
+
+		if (action == "edit") {
+			setValues("transfer");
+		}
+
+		if (operationType != "P2P") {
+			getBanks("transfer");
+		}
+	}
+
+	function setValues(formID, objectValues) {
+		Object.entries(objectValues).forEach(([fieldId, value]) => {
+			$(`${formID} #${fieldId}`).val(value);
+		});
+	}
+
+	function setFieldNames(operation) {
+		var documentType, documentNumber, objectValues;
+
+		if (operation == "affiliation") {
+			if (currentAffiliaton.id_ext_per) {
+				documentType = currentAffiliaton.id_ext_per.slice(0, 1);
+				documentNumber = currentAffiliaton.id_ext_per.slice(1);
+			}
+
+			var setObjectValues = {
+				P2P: {
+					beneficiary: currentAffiliaton.beneficiario,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					destinationCard: currentAffiliaton.nroCuentaDestino,
+					beneficiaryEmail: currentAffiliaton.email,
+				},
+				P2T: {
+					beneficiary: currentAffiliaton.beneficiario,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					destinationAccount: currentAffiliaton.noCuenta,
+					mobilePhone: currentAffiliaton.telefono,
+					beneficiaryEmail: currentAffiliaton.email,
+				},
+				PMV: {
+					beneficiary: currentAffiliaton.beneficiario,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					mobilePhone: currentAffiliaton.telefono,
+					beneficiaryEmail: currentAffiliaton.email,
+				},
+			};
+
+			objectValues = setObjectValues[operationType];
+
+			setValues("#manageAffiliateView", objectValues);
 		}
 	}
 });
