@@ -29,7 +29,7 @@
       <hr class="separador-one mt-2 mb-4">
       <div class="flex items-center justify-end">
         <a class="btn btn-link btn-small big-modal" href="<?= base_url(uriRedirect()); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
-        <button id="getOperationKeyBtn" class="btn btn-small btn-loading btn-primary big-modal" type="submit">
+        <button id="getOperationKeyBtn" class="btn btn-small btn-loading btn-primary" type="submit">
           <?= lang('GEN_BTN_ACCEPT'); ?>
         </button>
       </div>
