@@ -68,7 +68,11 @@ $(function () {
 			$("#pre-loader").hide();
 			switch (response.code) {
 				case 0:
-					setAffiliateDataTable(response.data);
+					if (response.data.length > 0) {
+						setAffiliateDataTable(response.data);
+					} else {
+						$("#no-moves").fadeIn(700, "linear");
+					}
 					break;
 				case 1:
 					$("#no-moves").fadeIn(700, "linear");
@@ -107,7 +111,7 @@ $(function () {
 			who = "Affiliations";
 			where = "DeleteAffiliation";
 			data.idAfiliation = currentAffiliaton.id_afiliacion;
-			data.operationType  = operationType;
+			data.operationType = operationType;
 
 			$(".nav-config-box").addClass("no-pointer");
 			$("#pre-loader").fadeIn(700, "linear");
