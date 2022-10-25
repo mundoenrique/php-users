@@ -180,10 +180,12 @@ $(function () {
 
 		if (form.valid()) {
 			who = "Transfer";
-			where = "Transfer";
-			data = getDataForm(form);
-			data.operationType = operationType;
-			data.currentOperKey = cryptoPass(data.currentOperKey);
+			where = operationType == "PMV" ? "MobilePayment" : "Transfer";
+			data = {
+				operationType: operationType,
+				...getDataForm(form),
+				...cardData,
+			};
 
 			insertFormInput(true);
 			$(this).html(loader);
@@ -194,14 +196,12 @@ $(function () {
 				$(e.target).html(btnText);
 				$(".nav-config-box").removeClass("no-pointer");
 
-				if (response.code == 0) {
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-				}
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
 			});
 		}
 	});
