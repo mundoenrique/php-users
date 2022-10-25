@@ -60,3 +60,7 @@ $lang['TRANSF_INCORRECT_OPER_KEY'] = 'The operations key is incorrect.';
 $lang['TRANSF_INCORRECT_CURRENT_OPER_KEY'] = 'The current operations key is incorrect.';
 $lang['TRANSF_UPDATE_OPER_KEY'] = 'The operations key was updated successfully.';
 $lang['TRANSF_SUCCESS_CREATED_OPER_KEY'] = 'The operations key has been created successfully.';
+$lang['TRANSF_TRANSFER_RESULTS'] = 'Transfer results';
+$lang['TRANSF_REFERENCE'] = 'Reference';
+$lang['TRANSF_ACCOUNT_NUMBER'] = 'Account number';
+$lang['TRANSF_AMOUNT_DETAILS'] = 'Amount';

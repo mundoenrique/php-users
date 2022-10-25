@@ -27,13 +27,15 @@
           <ul id="movementsList" class="feed fade-in mt-3 pl-0 easyPaginateList">
             <li class="feed-item feed-expense flex py-2 items-center">
               <div class="flex px-2 flex-column items-center feed-date">
-                <span class="h5">10 Jul 2021</span>
+                <span class="h5">25 Oct 2022</span>
               </div>
               <div class="flex px-2 flex-column mr-auto">
-                <span class="h5 semibold feed-product">Yhoan alfonso sulbaran ccs noroeste ve</span>
-                <span class="btn-link h6 feed-metadata">119112055118</span>
+                <span class="h5 semibold feed-product">Luis Vargas</span>
+                <span id="modalMovementsRef" class="btn btn-small btn-link p-0 h6">
+									119112055118
+								</span>
               </div>
-              <span class="px-2 feed-amount items-center">- $ 32.000.000,00</span>
+              <span class="px-2 feed-amount items-center">- $ 700,00</span>
             </li>
           </ul>
         </div>

@@ -20,11 +20,8 @@ $(function () {
 
 			callNovoCore(who, where, data, function (response) {
 				if (response.code === 0) {
-					$('.cover-spin').show();
 					$(location).attr('href', response.data);
-				}
-
-				if (response.code != 0 || response.code != -22) {
+				} else {
 					changeBtn.html(btnText);
 					insertFormInput(false);
 				}
