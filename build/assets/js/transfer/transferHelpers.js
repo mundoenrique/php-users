@@ -107,6 +107,7 @@ $(function () {
 			who = "Affiliations";
 			where = "DeleteAffiliation";
 			data.idAfiliation = currentAffiliaton.id_afiliacion;
+			data.operationType  = operationType;
 
 			$(".nav-config-box").addClass("no-pointer");
 			$("#pre-loader").fadeIn(700, "linear");
@@ -332,7 +333,7 @@ $(function () {
 				<button class="btn mx-1 px-0" title="${lang.TRANSF_EDIT}" data-index="${index}" data-action="edit" data-toggle="tooltip">
 					<i class="icon icon-edit" aria-hidden="true"></i>
 				</button>
-				<button class="btn mx-1 px-0 big-modal" title="${lang.TRANSF_DELETE}" data-index="1" data-action="delete" data-toggle="tooltip">
+				<button class="btn mx-1 px-0 big-modal" title="${lang.TRANSF_DELETE}" data-index="${index}" data-action="delete" data-toggle="tooltip">
 					<i class="icon icon-remove" aria-hidden="true"></i>
 				</button>
 			</td>`;
