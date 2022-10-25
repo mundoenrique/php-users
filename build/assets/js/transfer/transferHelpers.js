@@ -37,11 +37,7 @@ $(function () {
 	// Al seleccionar una tarjeta
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
-		$(liOptions).removeClass("active");
-		$("#toTransfer").addClass("active no-pointer");
-		$("#affiliationsView").css("display", "none");
-		$("#toTransferView").show();
-		getBalance();
+		showTransferView();
 	});
 
 	// Mostrar vista correspondiente al seleccionar una operación
@@ -169,6 +165,12 @@ $(function () {
 		}
 	});
 
+	// Al seleccionar un afiliado del directorio
+	$("#affiliationList").on("click", "li", function () {
+		currentAffiliaton = affiliationsList[$(this).val()];
+		console.log(currentAffiliaton);
+	});
+
 	// Submit en formulario de Transferencia
 	$("#transferBtn").on("click", function (e) {
 		e.preventDefault();
@@ -178,10 +180,12 @@ $(function () {
 
 		if (form.valid()) {
 			who = "Transfer";
-			where = "Transfer";
-			data = getDataForm(form);
-			data.operationType = operationType;
-			data.currentOperKey = cryptoPass(data.currentOperKey);
+			where = operationType == "PMV" ? "MobilePayment" : "Transfer";
+			data = {
+				operationType: operationType,
+				...getDataForm(form),
+				...cardData,
+			};
 
 			insertFormInput(true);
 			$(this).html(loader);
@@ -192,14 +196,12 @@ $(function () {
 				$(e.target).html(btnText);
 				$(".nav-config-box").removeClass("no-pointer");
 
-				if (response.code == 0) {
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-				}
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
 			});
 		}
 	});
@@ -239,7 +241,7 @@ $(function () {
 		$(this).addClass("active").prependTo(container.find(".select-search"));
 		container.find(".select-search").css("display", "none");
 		$(".close-selector").css("display", "none");
-		container.find("#directory").val(value);
+		container.find("#directoryValue").val(value);
 	});
 
 	$("body").on("click", ".close-selector", function () {
@@ -307,7 +309,7 @@ $(function () {
 	function setAffiliateDataTable(data) {
 		var columns, row, tdOptions;
 		affiliationsList = data;
-		$("#affiliationTable tbody").html();
+		$("#affiliationTable tbody").html("");
 
 		switch (operationType) {
 			case "P2P":
@@ -340,6 +342,20 @@ $(function () {
 
 		$("#transferRecord").fadeIn(700, "linear");
 		$("#searchAffiliate").fadeIn(700, "linear");
+	}
+
+	function setAffiliateSelectSearch(data) {
+		var li;
+		affiliationsList = data;
+
+		data.forEach((value, index) => {
+			li = $("<li></li>").val(index).text(value.beneficiario.toLowerCase());
+			$("#affiliationList").append(li);
+		});
+
+		$("#directory")
+			.prop("placeholder", lang.GEN_BTN_SEARCH)
+			.prop("disabled", false);
 	}
 
 	function showManageAffiliateView(action) {
@@ -391,47 +407,42 @@ $(function () {
 	}
 
 	function showTransferView() {
-		if (action == "create") {
-			$("#manageAffiliate")[0].reset();
-		}
-		$("#affiliationsView").hide();
-		$("#manageAffiliateView").fadeIn(700, "linear");
-		$("#manageAffiliateBtn")
-			.text(action == "create" ? lang.TRANSF_AN_AFFILIATE : lang.GEN_BTN_SAVE)
-			.data("action", action);
-		$("#affiliateTitle").text(
-			action == "create"
-				? lang.TRANSF_NEW_AFFILIATE
-				: lang.TRANSF_EDIT_AFFILIATE
-		);
+		$(liOptions).removeClass("active");
+		$("#toTransfer").addClass("active no-pointer");
+		$("#affiliationsView").css("display", "none");
+		$("#toTransferView").show();
+		getBalance();
 
-		switch (operationType) {
-			case "P2P":
-				$("#affiliateMessage").text(
-					action == "create"
-						? lang.TRANSF_NEW_AFFILIATE_CARD_MSG
-						: lang.TRANSF_EDIT_AFFILIATE_MSG
-				);
-				break;
-			case "P2T":
-				$("#affiliateMessage").text(
-					action == "create"
-						? lang.TRANSF_NEW_AFFILIATE_BANK_MSG
-						: lang.TRANSF_EDIT_AFFILIATE_MSG
-				);
-				break;
-			case "PMV":
-				$("#affiliateMessage").text(
-					action == "create"
-						? lang.TRANSF_NEW_AFFILIATE_PAY_MSG
-						: lang.TRANSF_EDIT_AFFILIATE_MSG
-				);
-				break;
-		}
+		who = "Affiliations";
+		where = "GetAffiliations";
+		data = { operationType: operationType, ...cardData };
 
-		if (action == "edit") {
-			setValues("transfer");
-		}
+		$("#directory")
+			.prop("placeholder", lang.TRANSF_WAITING_AFFILIATES)
+			.prop("disabled", true);
+		$("#affiliationList").html("");
+
+		callNovoCore(who, where, data, function (response) {
+			$("#pre-loader").hide();
+			switch (response.code) {
+				case 0:
+					setAffiliateSelectSearch(response.data);
+					break;
+				case 1:
+					$("#directory")
+						.prop("placeholder", lang.GEN_DATATABLE_SEMPTYTABLE)
+						.prop("disabled", true);
+					break;
+				default:
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+					break;
+			}
+		});
 
 		if (operationType != "P2P") {
 			getBanks("transfer");

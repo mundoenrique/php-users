@@ -50,6 +50,7 @@ $lang['TRANSF_AVAILABLE_BALANCE'] = 'Available balance';
 $lang['TRANSF_CHANGE_OPERKEY'] = 'If you wish to change your password, please complete the following information.';
 $lang['TRANSF_NEW_KEY_OPER'] = 'New operations key';
 $lang['TRANSF_WAITING_BANKS'] = 'Waiting banks';
+$lang['TRANSF_WAITING_AFFILIATES'] = 'Waiting for affiliates';
 $lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Affiliate successfully saved.';
 $lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'Failed to save new affiliate.';
 $lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Affiliate updated successfully.';

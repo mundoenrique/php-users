@@ -6,7 +6,7 @@
       <div class="w-100">
         <div class="widget-product m-auto">
           <div class="line-text w-100">
-            <div id="productdetail" class="flex inline-flex col-12 px-xl-2">
+            <div id="productdetail" class="flex inline-flex col-12 px-xl-2"  call-balance="<?= $callBalance; ?>">
               <div class="flex flex-column justify-center col-auto pb-4 pt-4 pr-0"">
 								<div class=" product-presentation relative">
                 <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
@@ -16,7 +16,7 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <img class="card-image" src="" alt="">
+                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>
               <?php if ($totalCards == 1 && $isVirtual) : ?>

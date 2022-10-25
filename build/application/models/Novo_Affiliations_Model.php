@@ -31,6 +31,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
+		$this->dataRequest->validacionFechaExp = isset($dataRequest->prefix) ? "0318" : '';
 
 		$response = $this->sendToService('CallWs_GetAffiliations');
 		$affiliateAccounts = [];
@@ -69,6 +70,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar una tarjeta beneficiaria
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationP2P_Affiliations($dataRequest)
@@ -116,6 +118,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar/modificar un benficiario pago movil
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationPMV_Affiliations($dataRequest)
@@ -166,6 +169,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar/modificar una cuenta bancaria beneficiaria
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationP2T_Affiliations($dataRequest)
@@ -215,6 +219,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para eliminar una afiliación
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_DeleteAffiliation_Affiliations($dataRequest)
