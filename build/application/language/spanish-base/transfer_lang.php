@@ -59,3 +59,7 @@ $lang['TRANSF_INCORRECT_OPER_KEY'] = 'La clave de operaciones es incorrecta.';
 $lang['TRANSF_INCORRECT_CURRENT_OPER_KEY'] = 'La clave de operaciones actual es incorrecta.';
 $lang['TRANSF_UPDATE_OPER_KEY'] = 'La clave de operaciones se actualizo con exito.';
 $lang['TRANSF_SUCCESS_CREATED_OPER_KEY'] = 'La clave de operaciones se ha creado con exito.';
+$lang['TRANSF_RESULTS'] = 'Resultados de la transferencia.';
+$lang['TRANSF_REFERENCE'] = 'Referencia';
+$lang['TRANSF_ACCOUNT_NUMBER'] = 'Número de cuenta';
+$lang['TRANSF_AMOUNT_DETAILS'] = 'Monto';

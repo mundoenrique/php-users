@@ -483,4 +483,24 @@ $(function () {
 			setValues("#manageAffiliateView", objectValues);
 		}
 	}
+
+	$('#modalMovementsRef').on('click', function (e) {
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: 'destroy'
+			},
+		}
+
+		inputModal = 	'<div class="flex flex-column">'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_REFERENCE +': 119112055118</span>'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_BANK +': Banco de Venezuela</span>'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_BENEFICIARY +': Luis Vargas</span>'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_ACCOUNT_NUMBER +':  12335******6451</span>'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_AMOUNT_DETAILS +': Bs 700,00</span>'
+		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_CONCEPT +': Pago Alquiler</span>'
+		inputModal += '</div>'
+
+		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	})
 });
