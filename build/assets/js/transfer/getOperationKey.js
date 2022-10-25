@@ -20,6 +20,7 @@ $(function () {
 
 			callNovoCore(who, where, data, function (response) {
 				if (response.code === 0) {
+					$('.cover-spin').show();
 					$(location).attr('href', response.data);
 				}
 
