@@ -228,3 +228,9 @@ $lang['GEN_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>.';
 $lang['GEN_INFO_4'] = 'De 1 a 3 <strong>números</strong>.';
 $lang['GEN_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #).';
 $lang['GEN_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.';
+$lang['GEN_TRANSFER_DOCUMENT_TYPE'] = [
+	'V' => 'V',
+	'E' => 'E',
+	'J' => 'J',
+	'G' => 'G'
+];

@@ -228,3 +228,9 @@ $lang['GEN_INFO_3'] = 'At least one <strong>uppercase letter</strong>.';
 $lang['GEN_INFO_4'] = 'From 1 to 3 <strong>numbers</strong>.';
 $lang['GEN_INFO_5'] = 'At least one <strong>special character</strong> (ex:! @ * - ? ¡ ¿ + / . , _ #).';
 $lang['GEN_INFO_6'] = 'It must not have more than 2 <strong>consecutive characters</strong> equal.';
+$lang['GEN_TRANSFER_DOCUMENT_TYPE'] = [
+	'V' => 'V',
+	'E' => 'E',
+	'J' => 'J',
+	'G' => 'G'
+];
