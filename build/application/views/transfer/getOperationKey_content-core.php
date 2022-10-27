@@ -14,10 +14,10 @@
           <div class="form-group col-12 col-lg-6 pl-0">
             <label for="currentPass"><?= lang('TRANSF_KEY_OPER');?></label>
             <div class="input-group">
-              <input id="currentPass" class="form-control pwd-input" type="password" name="currentPass">
-              <div class="input-group-append">
-                <span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
-              </div>
+              <input id="currentPass" class="form-control pwd-input" type="password" autocomplete="off" name="currentPass">
+							<div class="input-group-append">
+								<span class="input-group-text pwd-action" title="<?= lang('GEN_SHOW_PASS') ?>"><i class="icon-view mr-0"></i></span>
+							</div>
             </div>
             <div class="help-block"></div>
           </div>

@@ -30,7 +30,6 @@ $(function () {
 					.find('li')
 					.removeClass('rule-valid')
 					.addClass('rule-invalid')
-				form[0].reset();
 				insertFormInput(false);
 				changeBtn.html(btnText);
 

@@ -11,32 +11,20 @@
             <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
           </div>
         </div>
-        <form id="affiliations" class="hide-out hide">
-          <div class="row">
-            <div class="form-group col-6 col-lg-4">
-              <label for="directory"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
-              <div class="form-control select-by-search p-0">
-                <input id="directory" type="hidden" name="directory" value="">
-                <input class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directory"
-                  autocomplete="off">
-                <ul class="select-search pl-0">
-                  <li value="1">james cameron</li>
-                  <li value="2">steven spielberg</li>
-                  <li value="3">stanley kubrick</li>
-                  <li value="4">ridley scott</li>
-                  <li value="5">darren aronofsky</li>
-                  <li value="6">john waters</li>
-                  <li value="7">danny boyle</li>
-                  <li value="8">woody allen</li>
-                  <li value="9">david lynch</li>
-                  <li value="10">wes anderson</li>
-                </ul>
-                <div class="close-selector"></div>
-              </div>
-              <div class="help-block"></div>
-            </div>
-          </div>
-        </form>
+				<div class="row">
+					<div class="form-group col-6 col-lg-4">
+						<label for="directoryValue"><?= lang('TRANSF_AFFILIATE_DIRECTORY'); ?></label>
+						<div class="form-control select-by-search p-0">
+							<input id="directoryValue" type="hidden" name="directoryValue" value="">
+							<input id="directory" class="custom-select select-search-input pl-1" placeholder='<?= lang('GEN_BTN_SEARCH') ?>' type="text" name="directoryValue"
+								autocomplete="off">
+							<ul id="affiliationList" class="select-search pl-0">
+							</ul>
+							<div class="close-selector"></div>
+						</div>
+						<div class="help-block"></div>
+					</div>
+				</div>
         <div class="line-text mb-2"></div>
         <form id="transferForm">
           <input type="hidden" id="filterMonth" name="filterMonth" value="0">
@@ -62,7 +50,8 @@
                 <div class="form-group col-6 mb-0">
                   <select id="typeDocument" class="custom-select form-control" name="typeDocument">
                     <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                    <option value="Cedula">V</option>
+                    <option value="V">V</option>
+                    <option value="E">E</option>
                   </select>
                   <div class="help-block"></div>
                 </div>
@@ -108,7 +97,7 @@
               <div class="help-block"></div>
             </div>
             <div class="form-group col-6 col-lg-4">
-              <label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
+              <label for="filterInputYear"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
               <input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text"
                 placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" autocomplete="off">
               <div class="help-block"></div>

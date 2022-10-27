@@ -31,6 +31,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
+		$this->dataRequest->validacionFechaExp = isset($dataRequest->prefix) ? "0318" : '';
 
 		$response = $this->sendToService('CallWs_GetAffiliations');
 		$affiliateAccounts = [];
@@ -69,6 +70,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar una tarjeta beneficiaria
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationP2P_Affiliations($dataRequest)
@@ -77,14 +79,15 @@ class Novo_Affiliations_Model extends NOVO_Model
 
 		$this->dataAccessLog->modulo = 'Afiliaciones';
 
-		if ($dataRequest->action == 'create') {
-			$this->dataAccessLog->function = 'Afiliar';
-			$this->dataAccessLog->operation = 'Procesar afiliación P2P';
-			$this->dataRequest->idOperation = '16';
-		} else {
+		if (isset($dataRequest->idAfiliation)) {
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación P2P';
-			$this->dataRequest->idOperation = '41';
+			$this->dataRequest->idOperation = '041';
+			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+		} else {
+			$this->dataAccessLog->function = 'Afiliar';
+			$this->dataAccessLog->operation = 'Procesar afiliación P2P';
+			$this->dataRequest->idOperation = '016';
 		}
 
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
@@ -100,15 +103,14 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = $dataRequest->action == 'create' ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_EDIT_AFFILIATE');
-				$this->response->msg = $dataRequest->action == 'create' ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_SUCCESS_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = $dataRequest->action == 'create' ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
-				$this->response->msg = $dataRequest->action == 'create' ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_FAILED_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -116,6 +118,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar/modificar un benficiario pago movil
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationPMV_Affiliations($dataRequest)
@@ -150,15 +153,14 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_EDIT_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_SUCCESS_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_CREATION') : lang('TRANSF_FAILED_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -166,6 +168,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para afiliar/modificar una cuenta bancaria beneficiaria
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_AffiliationP2T_Affiliations($dataRequest)
@@ -174,14 +177,15 @@ class Novo_Affiliations_Model extends NOVO_Model
 
 		$this->dataAccessLog->modulo = 'Afiliaciones';
 
-		if ($dataRequest->action == 'create') {
-			$this->dataAccessLog->function = 'Afiliar';
-			$this->dataAccessLog->operation = 'Procesar afiliación P2T';
-			$this->dataRequest->idOperation = '016';
-		} else {
+		if (isset($dataRequest->idAfiliation)) {
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación P2T';
 			$this->dataRequest->idOperation = '041';
+			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+		} else {
+			$this->dataAccessLog->function = 'Afiliar';
+			$this->dataAccessLog->operation = 'Procesar afiliación P2T';
+			$this->dataRequest->idOperation = '016';
 		}
 
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
@@ -199,15 +203,14 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = $dataRequest->action == 'create' ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_EDIT_AFFILIATE');
-				$this->response->msg = $dataRequest->action == 'create' ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_SUCCESS_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = $dataRequest->action == 'create' ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
-				$this->response->msg = $dataRequest->action == 'create' ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_FAILED_AFFILIATE_UPDATE');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -215,6 +218,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 	}
 	/**
 	 * @info Método para eliminar una afiliación
+	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
 	public function CallWs_DeleteAffiliation_Affiliations($dataRequest)
@@ -242,7 +246,6 @@ class Novo_Affiliations_Model extends NOVO_Model
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->title = lang('TRANSF_DELETE_AFFILIATE');
 				$this->response->msg = lang('TRANSF_FAILED_AFFILIATE_DELETION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';

@@ -643,7 +643,7 @@ $config = [
 		[
 			'field' => 'email',
 			'label' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'amount',
@@ -656,8 +656,8 @@ $config = [
 			'rules' => 'trim'
 		],
 		[
-			'field' => 'expDateCta',
-			'label' => 'expDateCta',
+			'field' => 'filterInputYear',
+			'label' => 'filterInputYear',
 			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
 		],
 	],
