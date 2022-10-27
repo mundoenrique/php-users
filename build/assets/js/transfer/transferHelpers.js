@@ -111,26 +111,64 @@ $(function () {
 		"button[data-action='delete']",
 		function () {
 			currentAffiliaton = affiliationsList[$(this).data("index")];
-			who = "Affiliations";
-			where = "DeleteAffiliation";
-			data.idAfiliation = currentAffiliaton.id_afiliacion;
-			data.operationType = operationType;
+			$("#accept").addClass("sure-delete-affiliate");
 
-			$(".nav-config-box").addClass("no-pointer");
-			$("#pre-loader").fadeIn(700, "linear");
+			modalBtn = {
+				btn1: {
+					text: lang.GEN_BTN_ACCEPT,
+					action: "none",
+				},
+				btn2: {
+					text: lang.GEN_BTN_CANCEL,
+					action: "destroy",
+				},
+			};
 
-			callNovoCore(who, where, data, function (response) {
-				$("#pre-loader").hide();
-				$(".nav-config-box").removeClass("no-pointer");
+			appMessages(
+				lang.TRANSF_DELETE_AFFILIATE,
+				lang.TRANSF_SURE_DELETE_AFFILIATE,
+				lang.CONF_ICON_INFO,
+				modalBtn
+			);
+		}
+	);
+
+	// Modal para confirmar la eliminación de un afiliado
+	$("#system-info").on("click", ".sure-delete-affiliate", function (e) {
+		e.preventDefault();
+		// e.stopImmediatePropagation();
+		$(this).html(loader).prop("disabled", true);
+		$("#cancel").prop("disabled", true);
+
+		who = "Affiliations";
+		where = "DeleteAffiliation";
+		data.idAfiliation = currentAffiliaton.id_afiliacion;
+		data.operationType = operationType;
+
+		$(".nav-config-box").addClass("no-pointer");
+
+		callNovoCore(who, where, data, function (response) {
+			$(".nav-config-box").removeClass("no-pointer");
+			modalDestroy(true);
+
+			if (response.code == 0) {
+				$("#accept").addClass("to-affiliations");
 				appMessages(
 					response.title,
 					response.msg,
 					response.icon,
 					response.modalBtn
 				);
-			});
-		}
-	);
+			} else {
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
+			}
+		});
+	});
 
 	$("#affiliateCancelBtn").on("click", function (e) {
 		e.preventDefault();
@@ -162,13 +200,24 @@ $(function () {
 				insertFormInput(false);
 				$(e.target).html(btnText);
 				$(".nav-config-box").removeClass("no-pointer");
+				modalDestroy(true);
 
-				appMessages(
-					response.title,
-					response.msg,
-					response.icon,
-					response.modalBtn
-				);
+				if (response.code == 0) {
+					$("#accept").addClass("to-affiliations");
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+				} else {
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+				}
 			});
 		}
 	});
@@ -212,6 +261,13 @@ $(function () {
 				);
 			});
 		}
+	});
+
+	// Vuelve a cargar la lista de afiliados
+	$("#system-info").on("click", ".to-affiliations", function (e) {
+		e.preventDefault();
+		modalDestroy(true);
+		$("#affiliations").click();
 	});
 
 	// Funcionalidad del selector/buscador
@@ -503,23 +559,41 @@ $(function () {
 		}
 	}
 
-	$('#modalMovementsRef').on('click', function (e) {
+	$("#modalMovementsRef").on("click", function (e) {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: 'destroy'
+				action: "destroy",
 			},
-		}
+		};
 
-		inputModal = 	'<div class="flex flex-column">'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_REFERENCE +': 119112055118</span>'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_BANK +': Banco de Venezuela</span>'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_BENEFICIARY +': Luis Vargas</span>'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_ACCOUNT_NUMBER +':  12335******6451</span>'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_AMOUNT_DETAILS +': Bs 700,00</span>'
-		inputModal += 	'<span class="list-inline-item">'+ lang.TRANSF_CONCEPT +': Pago Alquiler</span>'
-		inputModal += '</div>'
+		inputModal = '<div class="flex flex-column">';
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_REFERENCE +
+			": 119112055118</span>";
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_BANK +
+			": Banco de Venezuela</span>";
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_BENEFICIARY +
+			": Luis Vargas</span>";
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_ACCOUNT_NUMBER +
+			":  12335******6451</span>";
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_AMOUNT_DETAILS +
+			": Bs 700,00</span>";
+		inputModal +=
+			'<span class="list-inline-item">' +
+			lang.TRANSF_CONCEPT +
+			": Pago Alquiler</span>";
+		inputModal += "</div>";
 
 		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
-	})
+	});
 });
