@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['TRANSF_TO_TRANSFER'] = 'To transfer';
 $lang['TRANSF_MAKE_PAYMENT'] = 'Make payment';
 $lang['TRANSF_MANAGE_AFFILIATIONS'] = 'Manage affiliations';
@@ -51,11 +51,6 @@ $lang['TRANSF_CHANGE_OPERKEY'] = 'If you wish to change your password, please co
 $lang['TRANSF_NEW_KEY_OPER'] = 'New operations key';
 $lang['TRANSF_WAITING_BANKS'] = 'Waiting banks';
 $lang['TRANSF_WAITING_AFFILIATES'] = 'Waiting for affiliates';
-$lang['TRANSF_SUCCESS_AFFILIATE_CREATION'] = 'Affiliate successfully saved.';
-$lang['TRANSF_FAILED_AFFILIATE_CREATION'] = 'Failed to save new affiliate.';
-$lang['TRANSF_SUCCESS_AFFILIATE_UPDATE'] = 'Affiliate updated successfully.';
-$lang['TRANSF_FAILED_AFFILIATE_UPDATE'] = 'Failed to upgrade affiliate.';
-$lang['TRANSF_EMPTY_AFFILIATE_ACCOUNTS'] = 'You have no affiliated accounts.';
 $lang['TRANSF_INCORRECT_OPER_KEY'] = 'The operations key is incorrect.';
 $lang['TRANSF_INCORRECT_CURRENT_OPER_KEY'] = 'The current operations key is incorrect.';
 $lang['TRANSF_UPDATE_OPER_KEY'] = 'The operations key was updated successfully.';
@@ -64,3 +59,5 @@ $lang['TRANSF_TRANSFER_RESULTS'] = 'Transfer results';
 $lang['TRANSF_REFERENCE'] = 'Reference';
 $lang['TRANSF_ACCOUNT_NUMBER'] = 'Account number';
 $lang['TRANSF_AMOUNT_DETAILS'] = 'Amount';
+$lang['TRANSF_DELETE_AFFILIATE'] = 'Delete Affiliate';
+$lang['TRANSF_SURE_DELETE_AFFILIATE'] = 'Are you sure you want to delete the affiliate?';
