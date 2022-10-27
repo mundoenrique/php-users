@@ -22,7 +22,7 @@ $(function () {
 			data.confirmPass = cryptography.encrypt(data.confirmPass);
 			changeBtn.html(loader);
 			insertFormInput(true);
-			who = 'Transfer';
+			who = 'PasswordOperation';
 			where = 'ChangeOperationKey';
 
 			callNovoCore(who, where, data, function (response) {
