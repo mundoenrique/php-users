@@ -14,6 +14,9 @@ $(function () {
 	}
 
 	$("#filterInputYear").datepicker({
+		yearRange: '-5:+10',
+		minDate: '-5y',
+		maxDate: '+10y',
 		dateFormat: "mm/yy",
 		showButtonPanel: true,
 		closeText: lang.GEN_BTN_ACCEPT,
