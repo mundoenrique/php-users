@@ -43,6 +43,22 @@ $(function () {
 		showTransferView();
 	});
 
+	// Filtro para buscar afiliado
+	// Eliminar al validar la utilizacion de dataTable
+	$('#search').on('keyup', function(){
+		var valueSearch = $(this).val().toLowerCase();
+		var tableTr = $("#affiliationTable tbody tr");
+
+		tableTr.filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(valueSearch) > -1)
+			if ($("#affiliationTable tbody tr:hidden").length == tableTr.length) {
+				$("#no-moves").fadeIn(700, "linear");
+			} else {
+				$("#no-moves").hide();
+			}
+		});
+	});
+
 	// Mostrar vista correspondiente al seleccionar una operación
 	// (Transferir|Adm. Afiliaciones|Historial)
 	$(liOptions).on("click", function (e) {

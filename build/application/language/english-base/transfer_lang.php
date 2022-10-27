@@ -61,3 +61,4 @@ $lang['TRANSF_ACCOUNT_NUMBER'] = 'Account number';
 $lang['TRANSF_AMOUNT_DETAILS'] = 'Amount';
 $lang['TRANSF_DELETE_AFFILIATE'] = 'Delete Affiliate';
 $lang['TRANSF_SURE_DELETE_AFFILIATE'] = 'Are you sure you want to delete the affiliate?';
+$lang['TRANSF_DATATABLE_SEMPTYTABLE'] = 'No results found.';

@@ -61,3 +61,4 @@ $lang['TRANSF_ACCOUNT_NUMBER'] = 'Número de cuenta';
 $lang['TRANSF_AMOUNT_DETAILS'] = 'Monto';
 $lang['TRANSF_DELETE_AFFILIATE'] = 'Eliminar afiliado';
 $lang['TRANSF_SURE_DELETE_AFFILIATE'] = '¿Estás seguro que deseas eliminar el afiliado?';
+$lang['TRANSF_DATATABLE_SEMPTYTABLE'] = ' No se encontraron resultados.';
