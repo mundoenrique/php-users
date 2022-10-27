@@ -11,12 +11,13 @@ $(function () {
 	// Si existe una sola tarjeta
 	if ($("#productdetail").attr("call-balance") == "1") {
 		getBalance();
+		showTransferView();
 	}
 
 	$("#filterInputYear").datepicker({
-		yearRange: '-5:+10',
-		minDate: '-5y',
-		maxDate: '+10y',
+		yearRange: "-5:+10",
+		minDate: "-5y",
+		maxDate: "+10y",
 		dateFormat: "mm/yy",
 		showButtonPanel: true,
 		closeText: lang.GEN_BTN_ACCEPT,
@@ -40,6 +41,7 @@ $(function () {
 	// Al seleccionar una tarjeta
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
+		getBalance();
 		showTransferView();
 	});
 
@@ -54,6 +56,12 @@ $(function () {
 		$(".transfer-operation").hide();
 		$("#manageAffiliateView").hide();
 		$("#" + liOptionId + "View").fadeIn(700, "linear");
+	});
+
+	// Mostrar vista de Rransferir/Realizar pago
+	$("#toTransfer").on("click", function (e) {
+		e.preventDefault();
+		showTransferView();
 	});
 
 	// Carga tabla lista de afiliados
@@ -475,7 +483,6 @@ $(function () {
 		$("#toTransfer").addClass("active no-pointer");
 		$("#affiliationsView").css("display", "none");
 		$("#toTransferView").show();
-		getBalance();
 
 		who = "Affiliations";
 		where = "GetAffiliations";
