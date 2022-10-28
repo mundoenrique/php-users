@@ -247,7 +247,8 @@ $(function () {
 	});
 
 	// Al seleccionar un afiliado del directorio
-	$("#affiliationList").on("click", "li:not(.no-results)", function () {
+	$("#affiliationList").on("click", "li:not(.no-results)", function (e) {
+		e.preventDefault();
 		var value, text, container;
 		value = $(this).val();
 		text = $(this).text().trim();
@@ -615,6 +616,13 @@ $(function () {
 					beneficiaryEmail: currentAffiliaton.email,
 				},
 			};
+
+			if (operationType != "P2P") {
+				$("#transferView #bank option").each(function () {
+					var val = $(this).val();
+					$(this).prop("selected", currentAffiliaton.banco == val);
+				});
+			}
 
 			objectValues = setObjectValues[operationType];
 			setValues("#transferForm", objectValues);
