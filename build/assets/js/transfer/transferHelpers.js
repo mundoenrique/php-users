@@ -620,7 +620,7 @@ $(function () {
 			if (operationType != "P2P") {
 				$("#transferView #bank option").each(function () {
 					var val = $(this).val();
-					$(this).prop("selected", currentAffiliaton.banco == val);
+					$(this).prop("selected", currentAffiliaton.codBanco == val);
 				});
 			}
 
