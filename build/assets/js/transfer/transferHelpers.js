@@ -553,11 +553,11 @@ $(function () {
 
 			var setObjectValues = {
 				P2P: {
-					beneficiary: currentAffiliaton.beneficiario,
+					beneficiary: currentAffiliaton.nom_plastico,
 					typeDocument: documentType,
 					idNumber: documentNumber,
-					destinationCard: currentAffiliaton.nroCuentaDestino,
-					beneficiaryEmail: currentAffiliaton.email,
+					destinationCard: currentAffiliaton.noTarjeta,
+					beneficiaryEmail: currentAffiliaton.emailCliente,
 				},
 				P2T: {
 					beneficiary: currentAffiliaton.beneficiario,
