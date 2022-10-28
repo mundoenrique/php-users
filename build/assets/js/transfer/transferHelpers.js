@@ -514,10 +514,15 @@ $(function () {
 			switch (response.code) {
 				case 0:
 					setAffiliateSelectSearch(response.data);
+					} else {
+						$("#directory")
+						.prop("placeholder", "Sin afiliados")
+						.prop("disabled", true);
+					}
 					break;
 				case 1:
 					$("#directory")
-						.prop("placeholder", lang.GEN_DATATABLE_SEMPTYTABLE)
+						.prop("placeholder", "Sin afiliados")
 						.prop("disabled", true);
 					break;
 				default:
