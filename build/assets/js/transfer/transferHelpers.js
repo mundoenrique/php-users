@@ -596,17 +596,21 @@ $(function () {
 			lang.TRANSF_REFERENCE +
 			": 119112055118</span>";
 		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_BANK +
-			": Banco de Venezuela</span>";
+		'<span class="list-inline-item">' +
+		lang.TRANSF_BENEFICIARY +
+		": Luis Vargas</span>";
+		inputModal +=
+		'<span class="list-inline-item">' +
+		lang.TRANSF_BANK +
+		": Banco Mercantil</span>";
+		inputModal +=
+		'<span class="list-inline-item">' +
+		lang.GEN_DNI +
+		": V10653987</span>";
 		inputModal +=
 			'<span class="list-inline-item">' +
-			lang.TRANSF_BENEFICIARY +
-			": Luis Vargas</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_ACCOUNT_NUMBER +
-			":  12335******6451</span>";
+			lang.TRANSF_NUMBER_PHONE +
+			":  04241234567</span>";
 		inputModal +=
 			'<span class="list-inline-item">' +
 			lang.TRANSF_AMOUNT_DETAILS +

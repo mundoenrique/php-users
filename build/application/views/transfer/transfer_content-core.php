@@ -75,15 +75,17 @@
 							</div>
 						<?php endif; ?>
 						<?php if ($view != 'cardToCard') : ?>
-							<div class="form-group col-6 col-lg-4">
-								<label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
+							<div class="form-group col-6 col-lg-4"><label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
 								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
 								<div class="help-block"></div>
 							</div>
 						<?php endif; ?>
 						<div class="form-group col-6 col-lg-4">
-							<label for="beneficiaryEmail"><?= lang('GEN_EMAIL') ?></label>
-							<input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off">
+							<label for="beneficiaryEmail">
+							<?= lang('GEN_EMAIL') ?>
+							<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+						</label>
+							<input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off" >
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-6 col-lg-4">
@@ -92,7 +94,10 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-6 col-lg-4">
-							<label for="concept"><?= lang('TRANSF_CONCEPT') ?></label>
+							<label for="concept">
+							<?= lang('TRANSF_CONCEPT') ?>
+							<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+						</label>
 							<input id="concept" name="concept" class="form-control" type="text" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
