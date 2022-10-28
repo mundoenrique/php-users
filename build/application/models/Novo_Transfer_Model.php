@@ -60,14 +60,15 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = 'PMV';
 		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
 		$this->dataRequest->bancoDestino = $dataRequest->bank;
-		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
 		$this->dataRequest->idExtPer = $dataRequest->typeDocument . $dataRequest->idNumber;
 		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
-		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
 		$this->dataRequest->monto = $dataRequest->amount;
+		$this->dataRequest->monto = "1.11";
 		$this->dataRequest->concepto = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
-		$this->dataRequest->validacionFechaExp = "0318";
+		$this->dataRequest->validacionFechaExp = "1027";
+		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
 		$this->sendToService('callWs_MobilePayment');
 
