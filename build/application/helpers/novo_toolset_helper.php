@@ -148,7 +148,7 @@ if (!function_exists('setCurrentPage')) {
 				}
 				break;
 			case 'mobilePayment':
-				if($menu == lang('GEN_MENU_PAYMENTS')) {
+				if($menu == lang('GEN_MENU_MOBILE_PAYMENT')) {
 					$cssClass = 'page-current';
 				}
 				break;
@@ -232,9 +232,7 @@ if (!function_exists('mainMenu'))
 					'DIGITEL' => []
 				]
 			],
-			'PAYMENTS' => [
-				'MOBILE_PAYMENT' => [],
-			],
+			'MOBILE_PAYMENT' => [],
 			'CUSTOMER_SUPPORT' => [],
 			'REPORTS' => []
 		];

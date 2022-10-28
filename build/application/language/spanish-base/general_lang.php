@@ -59,7 +59,6 @@ $lang['GEN_MENU_DIGITEL'] = 'Recarga digitel';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
 $lang['GEN_MENU_TRANSFERS'] = 'Transferencias';
-$lang['GEN_MENU_PAYMENTS'] = 'Pagos';
 $lang['GEN_MENU_MOBILE_PAYMENT'] = 'Pago móvil';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';

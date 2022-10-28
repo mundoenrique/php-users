@@ -287,7 +287,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->navItemsConfig['transfer']['title'] = lang('TRANSF_MAKE_PAYMENT');
 
 		$this->render->view = $view;
-		$this->render->titlePage = lang('GEN_MENU_PAYMENTS');
+		$this->render->titlePage = lang('GEN_MENU_MOBILE_PAYMENT');
 		$this->render->operations = TRUE;
 		$this->render->totalCards = $totalCards;
 		$this->render->cardsList = $cardsList;
