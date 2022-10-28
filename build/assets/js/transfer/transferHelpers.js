@@ -47,12 +47,12 @@ $(function () {
 
 	// Filtro para buscar afiliado
 	// Eliminar al validar la utilizacion de dataTable
-	$('#search').on('keyup', function(){
+	$("#search").on("keyup", function () {
 		var valueSearch = $(this).val().toLowerCase();
 		var tableTr = $("#affiliationTable tbody tr");
 
-		tableTr.filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(valueSearch) > -1)
+		tableTr.filter(function () {
+			$(this).toggle($(this).text().toLowerCase().indexOf(valueSearch) > -1);
 			if ($("#affiliationTable tbody tr:hidden").length == tableTr.length) {
 				$("#no-moves").fadeIn(700, "linear");
 			} else {
@@ -247,9 +247,21 @@ $(function () {
 	});
 
 	// Al seleccionar un afiliado del directorio
-	$("#affiliationList").on("click", "li", function () {
-		currentAffiliaton = affiliationsList[$(this).val()];
-		console.log(currentAffiliaton);
+	$("#affiliationList").on("click", "li:not(.no-results)", function () {
+		var value, text, container;
+		value = $(this).val();
+		text = $(this).text().trim();
+		container = $(this).closest(".select-by-search");
+
+		container.find("input.select-search-input").val(text);
+		container.find("li").removeClass("active");
+		$(this).addClass("active").prependTo(container.find(".select-search"));
+		container.find(".select-search").css("display", "none");
+		$(".close-selector").css("display", "none");
+		container.find("#directoryValue").val(value);
+
+		currentAffiliaton = affiliationsList[value];
+		setFieldNames("transfer");
 	});
 
 	// Submit en formulario de Transferencia
@@ -318,18 +330,6 @@ $(function () {
 			);
 		}
 		matches.removeClass("hidden");
-	});
-
-	$("body").on("click", ".select-search>*:not(.no-results)", function () {
-		var value = $(this).attr("value"),
-			text = $(this).text().trim(),
-			container = $(this).closest(".select-by-search");
-		container.find("input.select-search-input").val(text);
-		container.find("li").removeClass("active");
-		$(this).addClass("active").prependTo(container.find(".select-search"));
-		container.find(".select-search").css("display", "none");
-		$(".close-selector").css("display", "none");
-		container.find("#directoryValue").val(value);
 	});
 
 	$("body").on("click", ".close-selector", function () {
@@ -437,7 +437,13 @@ $(function () {
 		affiliationsList = data;
 
 		data.forEach((value, index) => {
-			li = $("<li></li>").val(index).text(value.beneficiario.toLowerCase());
+			li = $("<li></li>")
+				.val(index)
+				.text(
+					operationType == "P2P"
+						? value.NombreCliente.toLowerCase()
+						: value.beneficiario.toLowerCase()
+				);
 			$("#affiliationList").append(li);
 		});
 
@@ -513,11 +519,12 @@ $(function () {
 			$("#pre-loader").hide();
 			switch (response.code) {
 				case 0:
-					setAffiliateSelectSearch(response.data);
+					if (response.data.length > 0) {
+						setAffiliateSelectSearch(response.data);
 					} else {
 						$("#directory")
-						.prop("placeholder", "Sin afiliados")
-						.prop("disabled", true);
+							.prop("placeholder", "Sin afiliados")
+							.prop("disabled", true);
 					}
 					break;
 				case 1:
@@ -550,15 +557,15 @@ $(function () {
 	function setFieldNames(operation) {
 		var documentType, documentNumber, objectValues;
 
-		if (operation == "affiliation") {
-			if (currentAffiliaton.id_ext_per) {
-				documentType = currentAffiliaton.id_ext_per.slice(0, 1);
-				documentNumber = currentAffiliaton.id_ext_per.slice(1);
-			}
+		if (currentAffiliaton.id_ext_per) {
+			documentType = currentAffiliaton.id_ext_per.slice(0, 1);
+			documentNumber = currentAffiliaton.id_ext_per.slice(1);
+		}
 
+		if (operation == "affiliation") {
 			var setObjectValues = {
 				P2P: {
-					beneficiary: currentAffiliaton.nom_plastico,
+					beneficiary: currentAffiliaton.NombreCliente,
 					typeDocument: documentType,
 					idNumber: documentNumber,
 					destinationCard: currentAffiliaton.noTarjeta,
@@ -582,8 +589,35 @@ $(function () {
 			};
 
 			objectValues = setObjectValues[operationType];
-
 			setValues("#manageAffiliateView", objectValues);
+		} else {
+			var setObjectValues = {
+				P2P: {
+					beneficiary: currentAffiliaton.NombreCliente,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					destinationCard: currentAffiliaton.noTarjeta,
+					beneficiaryEmail: currentAffiliaton.emailCliente,
+				},
+				P2T: {
+					beneficiary: currentAffiliaton.beneficiario,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					destinationAccount: currentAffiliaton.noCuenta,
+					mobilePhone: currentAffiliaton.telefono,
+					beneficiaryEmail: currentAffiliaton.email,
+				},
+				PMV: {
+					beneficiary: currentAffiliaton.beneficiario,
+					typeDocument: documentType,
+					idNumber: documentNumber,
+					mobilePhone: currentAffiliaton.telefono,
+					beneficiaryEmail: currentAffiliaton.email,
+				},
+			};
+
+			objectValues = setObjectValues[operationType];
+			setValues("#transferForm", objectValues);
 		}
 	}
 
@@ -601,17 +635,15 @@ $(function () {
 			lang.TRANSF_REFERENCE +
 			": 119112055118</span>";
 		inputModal +=
-		'<span class="list-inline-item">' +
-		lang.TRANSF_BENEFICIARY +
-		": Luis Vargas</span>";
+			'<span class="list-inline-item">' +
+			lang.TRANSF_BENEFICIARY +
+			": Luis Vargas</span>";
 		inputModal +=
-		'<span class="list-inline-item">' +
-		lang.TRANSF_BANK +
-		": Banco Mercantil</span>";
+			'<span class="list-inline-item">' +
+			lang.TRANSF_BANK +
+			": Banco Mercantil</span>";
 		inputModal +=
-		'<span class="list-inline-item">' +
-		lang.GEN_DNI +
-		": V10653987</span>";
+			'<span class="list-inline-item">' + lang.GEN_DNI + ": V10653987</span>";
 		inputModal +=
 			'<span class="list-inline-item">' +
 			lang.TRANSF_NUMBER_PHONE +
@@ -628,4 +660,57 @@ $(function () {
 
 		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	});
+
+	function changeDecimals(amount) {
+		var amountDec;
+		amountDec = amount.toFixed(2);
+
+		if (pais == "Ve" || pais == "Co") {
+			amountDec = amountDec.replace(".", ",");
+		}
+
+		return amountDec;
+	}
+
+	function buildTransferSummaryModal(data) {
+		var destinationAccountText = {
+			P2P: lang.TRANSF_DESTINATION_CARD,
+			P2T: lang.TRANSF_DEST_ACCOUNT_NUMBER,
+			PMV: lang.GEN_PHONE_MOBILE,
+		};
+		var destinationAccount = {
+			P2P: data.tarjetaDestino,
+			P2T: data.cuentaDestino,
+			PMV: data.telefonoDestino,
+		};
+		var bank = `<span class="list-inline-item">${lang.TRANSF_BANK}: ${data.bancoDestino}</span>`;
+
+		inputModal = `<div class="flex flex-column">
+			<span class="list-inline-item">
+				${lang.TRANSF_BENEFICIARY}: ${data.nombreBeneficiario}
+			</span>
+			${operationType != "P2P" ? bank : ""}
+			<span class="list-inline-item">${lang.GEN_DNI}: ${data.idExtPer}</span>
+			<span class="list-inline-item">
+				${destinationAccountText[operationType]}: ${destinationAccount[operationType]}
+			</span>
+			<span class="list-inline-item">
+				${lang.TRANSF_AMOUNT_DETAILS}: ${data.monto}
+			</span>
+			<span class="list-inline-item">
+				${lang.TRANSF_CONCEPT}: ${data.dataTransaccion}
+			</span>
+		</div>`;
+	}
+
+	function buildTransferResultModal(data) {
+		inputModal = `<div class="flex flex-column">
+			<span class="list-inline-item">${lang.TRANSF_REFERENCE}: ${data.dataTransaccion.codConfirmacion}</span>
+			<span class="list-inline-item">${lang.TRANSF_BANK}: ${data.bancoDestino}</span>
+			<span class="list-inline-item">${lang.TRANSF_BENEFICIARY}: ${data.nombreBeneficiario}</span>
+			<span class="list-inline-item">${lang.TRANSF_ACCOUNT_NUMBER}: ${data.dataTransaccion}</span>
+			<span class="list-inline-item">${lang.TRANSF_AMOUNT_DETAILS}: ${data.dataTransaccion}</span>
+			<span class="list-inline-item">${lang.TRANSF_CONCEPT}: ${data.dataTransaccion}</span>
+		</div>`;
+	}
 });
