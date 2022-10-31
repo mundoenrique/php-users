@@ -33,27 +33,14 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
 
 		$response = $this->sendToWebServices('CallWs_GetAffiliations');
-		$affiliateAccounts = [];
 		switch ($this->isResponseRc) {
 			case 0:
-				switch ($dataRequest->operationType) {
-					case 'P2P':
-						$affiliateAccounts = $response->bean->cuentaDestinoPlata;
-						break;
-					case 'PMV':
-						$affiliateAccounts = $response->bean->pagoMovil;
-						break;
-					case 'P2T':
-						$affiliateAccounts = $response->bean->creditoInmediato;
-						break;
-				}
 				$this->response->code = 0;
-				$this->response->data = $affiliateAccounts;
+				$this->response->data = $response->bean;
 				break;
 
 			case -150:
 				$this->response->code = 1;
-				$this->response->data = [];
 				$this->response->msg = lang('AFFIL_EMPTY_AFFILIATE_ACCOUNTS');
 				break;
 
@@ -228,7 +215,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'Eliminar';
 		$this->dataAccessLog->operation = 'Procesar eliminación de afiliación ' . $dataRequest->operationType;
 
-		$this->dataRequest->idOperation = $dataRequest->operationType === 'P2P' ? '40' : '040';
+		$this->dataRequest->idOperation = '040';
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;

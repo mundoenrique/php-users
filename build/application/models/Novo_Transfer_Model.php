@@ -64,27 +64,25 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->idExtPer = $dataRequest->typeDocument . $dataRequest->idNumber;
 		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
 		$this->dataRequest->monto = $dataRequest->amount;
-		$this->dataRequest->monto = "1.11";
 		$this->dataRequest->concepto = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
-		$this->dataRequest->validacionFechaExp = "1027";
+		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
 		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
-		$this->sendToWebServices('callWs_MobilePayment');
+		$response = $this->sendToWebServices('callWs_MobilePayment');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_EDIT_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_CREATION') : lang('TRANSF_SUCCESS_AFFILIATE_UPDATE');
+				$this->response->title = lang('TRANSF_RESULTS');
+				$this->response->data = $response;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_NEW_AFFILIATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_CREATION') : lang('TRANSF_FAILED_AFFILIATE_UPDATE');
+				$this->response->title = lang('TRANSF_RESULTS');
+				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 

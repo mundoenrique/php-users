@@ -151,6 +151,7 @@ class Novo_Transfer extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"modalCards",
 			"third_party/jquery.validate",
+			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers"
@@ -211,6 +212,7 @@ class Novo_Transfer extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"modalCards",
 			"third_party/jquery.validate",
+			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers"
@@ -271,6 +273,7 @@ class Novo_Transfer extends NOVO_Controller
 			$this->includeAssets->jsFiles,
 			"modalCards",
 			"third_party/jquery.validate",
+			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers"

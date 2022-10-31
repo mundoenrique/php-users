@@ -77,4 +77,4 @@ $lang['VALIDATE_CARD_NUMBER'] = 'Indicates a valid card number.';
 $lang['VALIDATE_ACCOUNT_NUMBER'] = 'Please provide a valid account number.';
 $lang['VALIDATE_ACCOUNT_NUMBER_FORMAT'] = 'It must be 20 numbers.';
 $lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Enter the destination account number.';
-$lang['VALIDATE_AMOUNT'] = 'Enter the amount to transfer.';
+$lang['VALIDATE_AMOUNT'] = 'Indicate a valid amount.';
