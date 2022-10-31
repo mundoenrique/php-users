@@ -1,11 +1,12 @@
 "use strict";
 var cardData, affiliationsList, transferParameters, currentAffiliaton, bankList;
-var transferData, montoMaxOperaciones, montoMinOperaciones, montoMaxDiario;
-var montoMaxSemanal, montoMaxMensual, cantidadOperacionesDiarias, montoComision;
+var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
+var montoMaxMensual, cantidadOperacionesDiarias,montoBase, montoComision;
 var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
 var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
 var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
-var montoBase, porcentajeComision, dobleAutenticacion, totalComision, monto;
+var porcentajeComision, dobleAutenticacion, totalComision, monto;
+var transferData, transferResult;
 
 $(function () {
 	var operationType = $("#transferView").attr("operation-type");
@@ -319,7 +320,8 @@ $(function () {
 			$(".nav-config-box").removeClass("no-pointer");
 
 			if (response.code == 0) {
-				buildTransferResultModal(response.data);
+				transferResult = response.data;
+				buildTransferResultModal();
 			} else {
 				appMessages(
 					response.title,
@@ -332,9 +334,10 @@ $(function () {
 	});
 
 	// Modal para agregar afiliado al realizar transferencia
-	$("#system-info").on("click", ".want-add-affiliate", function (e) {
+	$("#system-info").on("click", ".want-save-beneficiary", function (e) {
 		e.preventDefault();
-		$("#accept").addClass("add-affiliate");
+		modalDestroy(true);
+		$("#accept").addClass("save-beneficiary");
 
 		modalBtn = {
 			btn1: {
@@ -348,19 +351,19 @@ $(function () {
 		};
 
 		appMessages(
-			"Agregar afiliado",
-			"Desea agregar afiliado?",
+			lang.TRANSF_AFFILIATE_BENEFICIARY,
+			lang.TRANSF_WANT_SAVE_BENEFICIARY,
 			lang.CONF_ICON_INFO,
 			modalBtn
 		);
 	});
 
 	// Enviar petición agregar afiliado luego de transferencia
-	$("#system-info").on("click", ".add-affiliate", function (e) {
-		console.log(currentAffiliaton);
-		// e.preventDefault();
-		// $(this).html(loader).prop("disabled", true);
-		// $("#cancel").prop("disabled", true);
+	$("#system-info").on("click", ".save-beneficiary", function (e) {
+		e.preventDefault();
+		$(this).html(loader).prop("disabled", true);
+		$("#cancel").prop("disabled", true);
+		console.log(transferResult);
 
 		// who = "Affiliations";
 		// where = "DeleteAffiliation";
@@ -899,14 +902,14 @@ $(function () {
 		appMessages(lang.TRANSF_SUMMARY, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 
-	function buildTransferResultModal(data) {
+	function buildTransferResultModal() {
 		var setObjectResult, objectResult, resultValueObject;
 		var span, resultValue, inputModal;
 
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: "destroy",
+				action: "none",
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
@@ -914,8 +917,8 @@ $(function () {
 			},
 		};
 
-		if (data.dataTransaccion.terceroAfiliado) {
-			$("#accept").addClass("add-affiliate");
+		if (!transferResult.dataTransaccion.terceroAfiliado) {
+			$("#accept").addClass("want-save-beneficiary");
 		}
 
 		// dataValue: label
@@ -952,11 +955,11 @@ $(function () {
 		};
 
 		resultValueObject = {
-			reference: data.dataTransaccion.codConfirmacion,
+			reference: transferResult.dataTransaccion.codConfirmacion,
 			bank: $("#bank option:selected").text(),
-			dni: data.idExtPer,
+			dni: transferResult.idExtPer,
 			amount: lang.CONF_CURRENCY + " " + transferData.amount,
-			date: data.logAccesoObject.dttimesstamp,
+			date: transferResult.logAccesoObject.dttimesstamp,
 		};
 
 		objectResult = setObjectResult[operationType];

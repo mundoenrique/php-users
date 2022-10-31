@@ -58,6 +58,7 @@ class Novo_Transfer_Model extends NOVO_Model
 
 		$this->dataRequest->className = 'com.novo.objects.TOs.TransferenciaPagoMovilTO';
 		$this->dataRequest->tipoOperacion = 'PMV';
+		$this->dataRequest->idUsuario = $this->session->userName;
 		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
 		$this->dataRequest->bancoDestino = $dataRequest->bank;
 		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;

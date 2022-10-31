@@ -65,4 +65,6 @@ $lang['TRANSF_COMMISSION'] = 'Comisión';
 $lang['TRANSF_TOTAL'] = 'Total';
 $lang['TRANSF_DELETE_AFFILIATE'] = 'Eliminar afiliado';
 $lang['TRANSF_SURE_DELETE_AFFILIATE'] = '¿Estás seguro que deseas eliminar el afiliado?';
+$lang['TRANSF_AFFILIATE_BENEFICIARY'] = 'Afiliar beneficiario';
+$lang['TRANSF_WANT_SAVE_BENEFICIARY'] = '¿Desea guardar este beneficiario para futuras transferencias?';
 $lang['TRANSF_DATATABLE_SEMPTYTABLE'] = ' No se encontraron resultados.';

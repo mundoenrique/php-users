@@ -65,4 +65,6 @@ $lang['TRANSF_COMMISSION'] = 'Commission';
 $lang['TRANSF_TOTAL'] = 'Total';
 $lang['TRANSF_DELETE_AFFILIATE'] = 'Delete Affiliate';
 $lang['TRANSF_SURE_DELETE_AFFILIATE'] = 'Are you sure you want to delete the affiliate?';
+$lang['TRANSF_AFFILIATE_BENEFICIARY'] = 'Affiliate the beneficiary';
+$lang['TRANSF_WANT_SAVE_BENEFICIARY'] = 'Do you want to save this payee for future transfers?';
 $lang['TRANSF_DATATABLE_SEMPTYTABLE'] = 'No results found.';
