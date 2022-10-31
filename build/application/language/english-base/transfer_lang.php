@@ -19,6 +19,7 @@ $lang['TRANSF_NUMBER_PHONE'] = 'Phone number';
 $lang['TRANSF_AMOUNT'] = 'Amount Bs.';
 $lang['TRANSF_CONCEPT'] = 'Concept';
 $lang['TRANSF_EXP_DATE_CTA'] = 'Expiration date. cta. source';
+$lang['TRANSF_DATE'] = 'Date';
 $lang['TRANSF_NEW_AFFILIATE'] = 'New affiliation';
 $lang['TRANSF_AFFILIATE'] = 'Affiliate';
 $lang['TRANSF_ACCOUNT_PHONE'] = 'N° de cuenta destino o teléfono';

@@ -299,26 +299,97 @@ $(function () {
 		data = {
 			operationType: operationType,
 			...transferData,
+			amount: monto,
 			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
 			...cardData,
 		};
 
+		if (currentAffiliaton) {
+			data.idAfiliation = currentAffiliaton.id_afiliacion;
+		}
+
 		insertFormInput(true);
-		$(this).html(loader);
+		$(this).html(loader).prop("disabled", true);
+		$("#cancel").prop("disabled", true);
 		$(".nav-config-box").addClass("no-pointer");
 
 		callNovoCore(who, where, data, function (response) {
 			insertFormInput(false);
-			$(e.target).html(btnText);
+			modalDestroy(true);
 			$(".nav-config-box").removeClass("no-pointer");
 
-			appMessages(
-				response.title,
-				response.msg,
-				response.icon,
-				response.modalBtn
-			);
+			if (response.code == 0) {
+				buildTransferResultModal(response.data);
+			} else {
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
+			}
 		});
+	});
+
+	// Modal para agregar afiliado al realizar transferencia
+	$("#system-info").on("click", ".want-add-affiliate", function (e) {
+		e.preventDefault();
+		$("#accept").addClass("add-affiliate");
+
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: "none",
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: "destroy",
+			},
+		};
+
+		appMessages(
+			"Agregar afiliado",
+			"Desea agregar afiliado?",
+			lang.CONF_ICON_INFO,
+			modalBtn
+		);
+	});
+
+	// Enviar petición agregar afiliado luego de transferencia
+	$("#system-info").on("click", ".add-affiliate", function (e) {
+		console.log(currentAffiliaton);
+		// e.preventDefault();
+		// $(this).html(loader).prop("disabled", true);
+		// $("#cancel").prop("disabled", true);
+
+		// who = "Affiliations";
+		// where = "DeleteAffiliation";
+		// data.idAfiliation = currentAffiliaton.id_afiliacion;
+		// data.operationType = operationType;
+
+		// $(".nav-config-box").addClass("no-pointer");
+
+		// callNovoCore(who, where, data, function (response) {
+		// 	$(".nav-config-box").removeClass("no-pointer");
+		// 	modalDestroy(true);
+
+		// 	if (response.code == 0) {
+		// 		$("#accept").addClass("to-affiliations");
+		// 		appMessages(
+		// 			response.title,
+		// 			response.msg,
+		// 			response.icon,
+		// 			response.modalBtn
+		// 		);
+		// 	} else {
+		// 		appMessages(
+		// 			response.title,
+		// 			response.msg,
+		// 			response.icon,
+		// 			response.modalBtn
+		// 		);
+		// 	}
+		// });
 	});
 
 	// Vuelve a cargar la lista de afiliados
@@ -829,25 +900,77 @@ $(function () {
 	}
 
 	function buildTransferResultModal(data) {
-		var destinationAccountText = {
-			P2P: lang.TRANSF_DESTINATION_CARD,
-			P2T: lang.TRANSF_DEST_ACCOUNT_NUMBER,
-			PMV: lang.GEN_PHONE_MOBILE,
-		};
-		var destinationAccount = {
-			P2P: data.tarjetaDestino,
-			P2T: data.cuentaDestino,
-			PMV: data.telefonoDestino,
+		var setObjectResult, objectResult, resultValueObject;
+		var span, resultValue, inputModal;
+
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: "destroy",
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: "destroy",
+			},
 		};
 
-		inputModal = `<div class="flex flex-column">
-			<span class="list-inline-item">${lang.TRANSF_REFERENCE}: ${data.dataTransaccion.codConfirmacion}</span>
-			<span class="list-inline-item">${lang.TRANSF_BANK}: ${data.bancoDestino}</span>
-			<span class="list-inline-item">${lang.TRANSF_BENEFICIARY}: ${data.nombreBeneficiario}</span>
-			<span class="list-inline-item">${lang.TRANSF_ACCOUNT_NUMBER}: ${data.dataTransaccion}</span>
-			<span class="list-inline-item">${lang.TRANSF_AMOUNT_DETAILS}: ${data.dataTransaccion}</span>
-			<span class="list-inline-item">${lang.TRANSF_CONCEPT}: ${data.dataTransaccion}</span>
-		</div>`;
+		if (data.dataTransaccion.terceroAfiliado) {
+			$("#accept").addClass("add-affiliate");
+		}
+
+		// dataValue: label
+		setObjectResult = {
+			P2P: {
+				reference: lang.TRANSF_REFERENCE,
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				dni: lang.GEN_DNI,
+				destinationCard: lang.TRANSF_DESTINATION_CARD,
+				amount: lang.TRANSF_AMOUNT,
+				concept: lang.TRANSF_CONCEPT,
+				date: lang.TRANSF_DATE,
+			},
+			P2T: {
+				reference: lang.TRANSF_REFERENCE,
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				bank: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+				amount: lang.TRANSF_AMOUNT,
+				concept: lang.TRANSF_CONCEPT,
+				date: lang.TRANSF_DATE,
+			},
+			PMV: {
+				reference: lang.TRANSF_REFERENCE,
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				bank: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				mobilePhone: lang.GEN_PHONE_MOBILE,
+				amount: lang.TRANSF_AMOUNT_DETAILS,
+				concept: lang.TRANSF_CONCEPT,
+				date: lang.TRANSF_DATE,
+			},
+		};
+
+		resultValueObject = {
+			reference: data.dataTransaccion.codConfirmacion,
+			bank: $("#bank option:selected").text(),
+			dni: data.idExtPer,
+			amount: lang.CONF_CURRENCY + " " + transferData.amount,
+			date: data.logAccesoObject.dttimesstamp,
+		};
+
+		objectResult = setObjectResult[operationType];
+		inputModal = $("<div></div>").addClass("flex flex-column");
+
+		Object.entries(objectResult).forEach(([name, text]) => {
+			resultValue = resultValueObject[name] ?? transferData[name];
+			span = $("<span></span>")
+				.addClass("list-inline-item")
+				.text(text + ": " + resultValue);
+			inputModal.append(span);
+		});
+
+		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 
 	function numberToCurrency(number) {

@@ -19,6 +19,7 @@ $lang['TRANSF_NUMBER_PHONE'] = 'Número de teléfono';
 $lang['TRANSF_AMOUNT'] = 'Importe Bs.';
 $lang['TRANSF_CONCEPT'] = 'Concepto';
 $lang['TRANSF_EXP_DATE_CTA'] = 'Fecha de vcto. cta. origen';
+$lang['TRANSF_DATE'] = 'Fecha';
 $lang['TRANSF_NEW_AFFILIATE'] = 'Nueva afiliación';
 $lang['TRANSF_AFFILIATE'] = 'Afiliado';
 $lang['TRANSF_ACCOUNT_PHONE'] = 'N° de cuenta destino o teléfono';
