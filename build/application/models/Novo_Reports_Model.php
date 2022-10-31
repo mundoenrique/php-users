@@ -36,7 +36,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->producto = $dataRequest->prefix;
 		$this->dataRequest->tipoConsulta = $dataRequest->typeInquiry;
 
-		$response = $this->sendToService('callWs_GetMovements');
+		$response = $this->sendToWebServices('callWs_GetMovements');
 		$headers = [];
 		$body = [];
 		$grafic = [];
@@ -141,8 +141,7 @@ class Novo_Reports_Model extends NOVO_Model {
 		$this->dataRequest->tipoConsulta = $dataRequest->typeInquiry;
 		$this->dataRequest->mail = $dataRequest->action == 'send' ? TRUE : FALSE;
 
-		$response = $this->sendToService('callWs_DownloadInquiry');
-
+		$response = $this->sendToWebServices('callWs_DownloadInquiry');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -153,11 +152,11 @@ class Novo_Reports_Model extends NOVO_Model {
 						$name = $response->bean->nombre ?? $response->nombre;
 						$ext = $dataRequest->id == 'downloadPDF' ? 'pdf' : 'xls';
 						$this->response->data->file = $file;
-						$this->response->data->name = $name.'.'.$ext;
+						$this->response->data->name = $name . '.' . $ext;
 						$this->response->data->ext = $ext;
 					break;
 					case 'send':
-						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
+						$fitype = $dataRequest->id == 'sendPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
 						$this->response->icon = lang('CONF_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');

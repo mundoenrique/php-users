@@ -34,7 +34,7 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->passwordOperaciones = md5($newOperKey);
 
-		$response = $this->sendToService('callWs_SetOperationKey');
+		$response = $this->sendToWebServices('callWs_SetOperationKey');
 
 		if ($this->session->flashdata('currentUri') !== NULL) {
 			$bntLinkTransfer = $this->session->flashdata('currentUri');
@@ -76,7 +76,7 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 		$this->dataRequest->passwordOperacionesOld = md5($currentOperKey);
 		$this->dataRequest->passwordOperaciones = md5($newOperKey);
 
-		$response = $this->sendToService('callWs_ChangeOperationKey');
+		$response = $this->sendToWebServices('callWs_ChangeOperationKey');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -118,7 +118,7 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->passwordOperaciones = md5($operKey);
 
-		$response = $this->sendToService('CallWs_GetOperationKey');
+		$response = $this->sendToWebServices('CallWs_GetOperationKey');
 
 		if ($this->session->flashdata('currentUri') !== NULL) {
 			$bntLinkTransfer = $this->session->flashdata('currentUri');

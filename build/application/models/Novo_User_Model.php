@@ -54,15 +54,15 @@ class Novo_User_Model extends NOVO_Model {
 			$this->dataRequest->guardaIp = $dataRequest->saveIP ?? FALSE;
 		}
 
-		if (lang('CONF_MAINTENANCE') == 'ON') {
+		if (lang('CONF_MAINTENANCE') === 'ON') {
 			$this->isResponseRc = lang('CONF_MAINTENANCE_RC');
-		} elseif (isset($dataRequest->OTPcode) && $authToken == '') {
+		} elseif (isset($dataRequest->OTPcode) && $authToken === '') {
 			$this->isResponseRc = 9998;
 		} else {
 			$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 			if ($this->isResponseRc === 0) {
-				$response = $this->sendToService('callWs_Signin');
+				$response = $this->sendToWebServices('callWs_Signin');
 			}
 		}
 
@@ -131,7 +131,6 @@ class Novo_User_Model extends NOVO_Model {
 						'lastSession' => $lastSession,
 						'token' => $response->token,
 						'time' => $time,
-						'cl_addr' => $this->encrypt_connect->encode($this->input->ip_address(), $userName, 'REMOTE_ADDR'),
 						'customerSess' => $response->codPais,
 						'customerUri' => $this->config->item('customer-uri'),
 						'canTransfer' => strtoupper($response->aplicaTransferencia),
@@ -299,7 +298,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_AccessRecover');
+			$response = $this->sendToWebServices('callWs_AccessRecover');
 		}
 
 		switch($this->isResponseRc) {
@@ -358,7 +357,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_AccessRecoverOTP');
+			$response = $this->sendToWebServices('callWs_AccessRecoverOTP');
 		}
 
 		switch($this->isResponseRc) {
@@ -424,7 +423,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->session->flashdata('authToken') !== NULL && $this->isResponseRc === 0) {
-			$response = $this->sendToService('callWs_ValidateOTP');
+			$response = $this->sendToWebServices('callWs_ValidateOTP');
 		} else {
 			$this->isResponseRc = 998;
 		}
@@ -479,7 +478,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->idOperation = '25';
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
-		$this->dataRequest->userName = $this->userName;
+		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->passwordOld = md5($current);
 		$this->dataRequest->password = md5($new);
 		$this->dataRequest->passwordOld4 = md5(strtoupper($new));
@@ -487,7 +486,7 @@ class Novo_User_Model extends NOVO_Model {
 		//$this->dataRequest->hashMD5 = md5($new);//DESCOMENTAR Y PROBAR CUANDO ESTEN OK LOS SERVICIOS
 
 		$changePassType = $this->session->flashdata('changePassword');
-		$this->sendToService('CallWs_ChangePassword');
+		$this->sendToWebServices('CallWs_ChangePassword');
 
 		switch($this->isResponseRc) {
 			case 0:
@@ -557,7 +556,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->isResponseRc = ACTIVE_RECAPTCHA ? $this->callWs_ValidateCaptcha_User($dataRequest) : 0;
 
 		if ($this->isResponseRc === 0) {
-			$response = $this->sendToService('CallWs_UserIdentify');
+			$response = $this->sendToWebServices('CallWs_UserIdentify');
 		}
 
 		switch ($this->isResponseRc) {
@@ -705,7 +704,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = mb_strtoupper($dataRequest->nickName);
 
-		$response = $this->sendToService('CallWs_ValidNickName');
+		$response = $this->sendToWebServices('CallWs_ValidNickName');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -840,7 +839,7 @@ class Novo_User_Model extends NOVO_Model {
 			];
 		}
 
-		$response = $this->sendToService('CallWs_Signup');
+		$response = $this->sendToWebServices('CallWs_Signup');
 
 		if ($this->isResponseRc !== 0) {
 			$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
@@ -963,7 +962,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $this->session->userName;
 
-		$response = $this->sendToService('callWs_ProfileUser');
+		$response = $this->sendToWebServices('callWs_ProfileUser');
 		$phonesList = [];
 
 		switch ($this->isResponseRc) {
@@ -1258,7 +1257,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$this->dataRequest->registro = [
 			'user' => [
-				'userName' => $this->userName,
+				'userName' => $this->session->userName,
 				'primerNombre' => $dataRequest->firstName,
 				'segundoNombre' => $dataRequest->middleName,
 				'primerApellido' => $dataRequest->lastName,
@@ -1388,7 +1387,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->rc = 0;
 
 		if ($mailAvailable) {
-			$response = $this->sendToService('CallWs_UpdateProfile');
+			$response = $this->sendToWebServices('CallWs_UpdateProfile');
 		}
 
 		switch ($this->isResponseRc) {
@@ -1450,7 +1449,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TO.UsuarioTO';
 		$this->dataRequest->email = $dataRequest->email;
 
-		$response = $this->sendToService('callWs_ValidateEmail');
+		$response = $this->sendToWebServices('callWs_ValidateEmail');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -1479,7 +1478,8 @@ class Novo_User_Model extends NOVO_Model {
 		writeLog('INFO', 'User Model: KeepSession Method Initialized');
 
 		$response = new stdClass();
-		$response->rc =  0;
+		$response->responseCode =  0;
+		$response->data =  NULL;
 		$this->makeAnswer($response);
 		$this->response->code = 0;
 
@@ -1499,7 +1499,8 @@ class Novo_User_Model extends NOVO_Model {
 		writeLog('INFO', 'User Model: ChangeLanguage Method Initialized');
 
 		$response = new stdClass();
-		$response->rc =  0;
+		$response->responseCode =  0;
+		$response->data = NULL;
 		$this->makeAnswer($response);
 		$this->response->code = 0;
 
@@ -1516,7 +1517,7 @@ class Novo_User_Model extends NOVO_Model {
 	{
 		writeLog('INFO', 'User Model: FinishSession Method Initialized');
 
-		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->userName;
+		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->session->userName;
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Salir del sistema';
@@ -1527,7 +1528,7 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->userName = $userName;
 
 		if ($this->session->logged) {
-			$response = $this->sendToService('callWs_FinishSession');
+			$response = $this->sendToWebServices('callWs_FinishSession');
 		}
 
 		$this->response->code = 0;

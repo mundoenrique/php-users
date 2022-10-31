@@ -41,31 +41,44 @@ class NOVO_Model extends CI_Model {
 	 * @author J. Enrique Peñaloza Piñero.
 	 * @date May 16th, 2020
 	 */
-	public function sendToService($model)
+	public function sendToWebServices($model)
 	{
-		writeLog('INFO', 'Model: sendToService Method Initialized');
+		writeLog('INFO', 'Model: sendToWebServices Method Initialized');
 
+		$logResponse = new stdClass();
 		$this->accessLog = accessLog($this->dataAccessLog);
-		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod != '') {
+		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod !== '') {
 			$this->dataRequest->acCodCia = $this->session->enterpriseCod;
 		}
 
 		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
-		$encryptData = $this->encrypt_connect->encode($this->dataRequest, $this->userName, $model);
-		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
-		$response = $this->encrypt_connect->connectWs($request, $this->userName, $model);
+		$dataRequest = json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE);
 
-		if(isset($response->rc)) {
-			$responseDecrypt = $response;
-		} else {
-			$responseDecrypt = $this->encrypt_connect->decode($response->data, $this->userName, $model);
+		writeLog('DEBUG', 'WEB SERVICES REQUEST ' . $model . ': ' . $dataRequest);
+
+		$encryptRequest = $this->encrypt_decrypt->encryptWebServices($dataRequest);
+		$request = ['data'=> $encryptRequest, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
+		$encryptResponse = $this->connect_services_apis->connectWebServices($request, $model);
+		$response = $this->encrypt_decrypt->decryptWebServices($encryptResponse);
+		$response = handleResponseServer($response);
+
+		foreach ($response as $key => $value) {
+			if (isset($value->archivo) || isset($value->bean->archivo)) {
+				continue;
+			}
+
+			$logResponse->$key = $value;
 		}
 
-		return $this->makeAnswer($responseDecrypt);
+		writeLog('DEBUG', 'WEB SERVICES RESPONSE COMPLETE ' . $model . ': '
+			.json_encode($logResponse, JSON_UNESCAPED_UNICODE));
+
+		unset($logResponse);
+
+		return $this->makeAnswer($response);
 	}
 
 	/**
@@ -73,15 +86,29 @@ class NOVO_Model extends CI_Model {
 	 * @author Luis Molina.
 	 * @date MJun 16th, 2022
 	 */
-	public function sendToCoreServices($model)
+	public function sendToMfaServices($model)
 	{
-		writeLog('INFO', 'Model: sendToCoreServices Method Initialized');
+		writeLog('INFO', 'Model: sendToMfaServices Method Initialized');
 
-		$request = $this->encrypt_decrypt->encryptCoreServices($this->dataRequest, $model);
-		$response = $this->connect_services_apis->connectMfaServices($request, $model);
-		$decryptResponse = $this->encrypt_decrypt->decryptCoreServices($response, $model);
+		$response = NULL;
+		$this->dataRequest->requestBody = json_encode($this->dataRequest->requestBody, JSON_UNESCAPED_UNICODE);
 
-		return $this->makeAnswer($decryptResponse);
+		writeLog('DEBUG', 'MFA SERVICES REQUEST ' . $model . ': ' . $this->dataRequest->requestBody);
+
+		if (API_GEE_WAY) {
+			$this->dataRequest->requestBody = $this->encrypt_decrypt->encryptCoreServices($this->dataRequest->requestBody);
+		}
+
+		$response = $this->connect_services_apis->connectMfaServices($this->dataRequest);
+
+		if (API_GEE_WAY && $response->data) {
+			$response = $this->encrypt_decrypt->decryptCoreServices($response->data);
+		}
+
+		writeLog('DEBUG', 'MFA SERVICES RESPONSE COMPLETE ' . $model . ': '
+			. json_encode($response, JSON_UNESCAPED_UNICODE));
+
+		return $this->makeAnswer($response);
 	}
 
 	/**
@@ -93,7 +120,7 @@ class NOVO_Model extends CI_Model {
 	{
 		writeLog('INFO', 'Model: makeAnswer Method Initialized');
 
-		$this->isResponseRc = (int) $responseModel->rc;
+		$this->isResponseRc = (int) $responseModel->responseCode;
 		$this->response->code = lang('CONF_DEFAULT_CODE');
 		$this->response->icon = lang('CONF_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
@@ -133,7 +160,7 @@ class NOVO_Model extends CI_Model {
 		$this->response->modalBtn = $arrayResponse;
 		$this->response->msg = $this->isResponseRc === 0 ? lang('GEN_SUCCESS_RESPONSE') : $this->response->msg;
 
-		return $responseModel;
+		return $responseModel->data;
 	}
 	/**
 	 * @info Método enviar el resultado de la consulta a la vista

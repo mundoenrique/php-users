@@ -31,7 +31,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->idUsuario = $this->session->userId;
 
-		$response = $this->sendToService('callWs_UserCardsList');
+		$response = $this->sendToWebServices('callWs_UserCardsList');
 		$cardsList = [];
 		$serviceList = [];
 
@@ -172,7 +172,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
-		$response = $this->sendToService('callWs_GetBalance');
+		$response = $this->sendToWebServices('callWs_GetBalance');
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -205,7 +205,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->signo = '';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
-		$response = $this->sendToService('callWs_CardDetail');
+		$response = $this->sendToWebServices('callWs_CardDetail');
 
 		$movesList = [];
 		$balance = new stdClass();
@@ -306,7 +306,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'id_ext_per' => $this->session->userId,
 		];
 
-		$response = $this->sendToService('callWs_MonthlyMovements');
+		$response = $this->sendToWebServices('callWs_MonthlyMovements');
 		$movesList = [];
 		$totalMoves = new stdClass();
 		$totalMoves->credit = '0';
@@ -364,7 +364,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'id_ext_per' => $this->session->userId,
 		];
 
-		$response = $this->sendToService('callWs_DownloadMoves');
+		$response = $this->sendToWebServices('callWs_DownloadMoves');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -409,7 +409,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tipoOperacion = $dataRequest->operType;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
-		$response = $this->sendToService('callWs_CardListOperations');
+		$response = $this->sendToWebServices('callWs_CardListOperations');
 		$cardsList = [];
 
 		switch ($this->isResponseRc) {
@@ -483,7 +483,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 
-		$response = $this->sendToService('callWs_getVirtualDetail');
+		$response = $this->sendToWebServices('callWs_getVirtualDetail');
 
 		switch ($this->isResponseRc) {
 			case 0:
