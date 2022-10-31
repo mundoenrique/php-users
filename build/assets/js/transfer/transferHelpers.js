@@ -25,7 +25,7 @@ $(function () {
 		showTransferView();
 	}
 
-	$("#filterInputYear").datepicker({
+	$("#expDateCta").datepicker({
 		yearRange: "-5:+10",
 		minDate: "-5y",
 		maxDate: "+10y",
@@ -39,7 +39,7 @@ $(function () {
 				new Date(inst.selectedYear, inst.selectedMonth, 1)
 			);
 			$(this).focus().blur();
-			var monthYear = $("#filterInputYear").val().split("/");
+			var monthYear = $("#expDateCta").val().split("/");
 			$("#filterMonth").val(monthYear[0]);
 			$("#filterYear").val(monthYear[1]);
 		},
@@ -299,6 +299,7 @@ $(function () {
 		data = {
 			operationType: operationType,
 			...transferData,
+			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
 			...cardData,
 		};
 

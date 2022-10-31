@@ -102,8 +102,8 @@
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-6 col-lg-4">
-							<label for="filterInputYear"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
-							<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" autocomplete="off">
+							<label for="expDateCta"><?= lang('TRANSF_EXP_DATE_CTA') ?></label>
+							<input id="expDateCta" name="expDateCta" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 					</div>
