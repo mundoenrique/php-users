@@ -1,9 +1,20 @@
 "use strict";
-var cardData, affiliationsList, currentAffiliaton, bankList;
+var cardData, affiliationsList, transferParameters, currentAffiliaton, bankList;
+var transferData, montoMaxOperaciones, montoMinOperaciones, montoMaxDiario;
+var montoMaxSemanal, montoMaxMensual, cantidadOperacionesDiarias, montoComision;
+var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
+var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
+var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
+var montoBase, porcentajeComision, dobleAutenticacion, totalComision, monto;
 
 $(function () {
 	var operationType = $("#transferView").attr("operation-type");
 	var liOptions = $(".nav-item-config");
+	var OperationTypeAffiliations = {
+		P2P: "cuentaDestinoPlata",
+		PMV: "pagoMovil",
+		P2T: "creditoInmediato",
+	};
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -74,7 +85,7 @@ $(function () {
 		$("#" + liOptionId + "View").fadeIn(700, "linear");
 	});
 
-	// Mostrar vista de Rransferir/Realizar pago
+	// Mostrar vista de Transferir/Realizar pago
 	$("#toTransfer").on("click", function (e) {
 		e.preventDefault();
 		showTransferView();
@@ -89,14 +100,17 @@ $(function () {
 		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
 		where = "GetAffiliations";
+		data = { operationType: operationType, ...cardData };
 		data = { operationType: operationType };
 
 		callNovoCore(who, where, data, function (response) {
 			$("#pre-loader").hide();
 			switch (response.code) {
 				case 0:
-					if (response.data.length > 0) {
-						setAffiliateDataTable(response.data);
+					let affiliations =
+						response.data[OperationTypeAffiliations[operationType]];
+					if (affiliations.length > 0) {
+						setAffiliateDataTable(affiliations);
 					} else {
 						$("#no-moves").fadeIn(700, "linear");
 					}
@@ -160,7 +174,6 @@ $(function () {
 	// Modal para confirmar la eliminación de un afiliado
 	$("#system-info").on("click", ".sure-delete-affiliate", function (e) {
 		e.preventDefault();
-		// e.stopImmediatePropagation();
 		$(this).html(loader).prop("disabled", true);
 		$("#cancel").prop("disabled", true);
 
@@ -265,7 +278,7 @@ $(function () {
 		setFieldNames("transfer");
 	});
 
-	// Submit en formulario de Transferencia
+	// Submit en formulario de Transferencia y mostrar el resumen
 	$("#transferBtn").on("click", function (e) {
 		e.preventDefault();
 		form = $("#transferForm");
@@ -273,31 +286,38 @@ $(function () {
 		validateForms(form);
 
 		if (form.valid()) {
-			who = "Transfer";
-			where = operationType == "PMV" ? "MobilePayment" : "Transfer";
-			data = {
-				operationType: operationType,
-				...getDataForm(form),
-				...cardData,
-			};
-
-			insertFormInput(true);
-			$(this).html(loader);
-			$(".nav-config-box").addClass("no-pointer");
-
-			callNovoCore(who, where, data, function (response) {
-				insertFormInput(false);
-				$(e.target).html(btnText);
-				$(".nav-config-box").removeClass("no-pointer");
-
-				appMessages(
-					response.title,
-					response.msg,
-					response.icon,
-					response.modalBtn
-				);
-			});
+			transferData = getDataForm(form);
+			buildTransferSummaryModal();
 		}
+	});
+
+	// Confirmar transferencia/pago
+	$("#system-info").on("click", ".confirm-transfer", function (e) {
+		e.preventDefault();
+		who = "Transfer";
+		where = operationType == "PMV" ? "MobilePayment" : "Transfer";
+		data = {
+			operationType: operationType,
+			...transferData,
+			...cardData,
+		};
+
+		insertFormInput(true);
+		$(this).html(loader);
+		$(".nav-config-box").addClass("no-pointer");
+
+		callNovoCore(who, where, data, function (response) {
+			insertFormInput(false);
+			$(e.target).html(btnText);
+			$(".nav-config-box").removeClass("no-pointer");
+
+			appMessages(
+				response.title,
+				response.msg,
+				response.icon,
+				response.modalBtn
+			);
+		});
 	});
 
 	// Vuelve a cargar la lista de afiliados
@@ -336,6 +356,25 @@ $(function () {
 	$("body").on("click", ".close-selector", function () {
 		$(".select-search").css("display", "none");
 		$(this).css("display", "none");
+	});
+
+	// Formatea monto de transferencia/pago
+	$("#amount").mask(
+		"#" + lang.CONF_THOUSANDS + "##0" + lang.CONF_DECIMAL + "00",
+		{ reverse: true }
+	);
+	$("#amount").on("keyup", function () {
+		$(this).val(function (index, value) {
+			if (value.indexOf("0") != -1 && value.indexOf("0") == 0) {
+				value = value.replace(0, "");
+			}
+
+			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
+				value = "00" + lang.CONF_DECIMAL + value;
+			}
+
+			return value;
+		});
 	});
 
 	function getBalance() {
@@ -520,8 +559,15 @@ $(function () {
 			$("#pre-loader").hide();
 			switch (response.code) {
 				case 0:
-					if (response.data.length > 0) {
-						setAffiliateSelectSearch(response.data);
+					let affiliations =
+						response.data[OperationTypeAffiliations[operationType]];
+					let transferParameters = response.data.parametrosTransferencias;
+
+					if (transferParameters) {
+						setTransferParameters(transferParameters[0]);
+					}
+					if (affiliations.length > 0) {
+						setAffiliateSelectSearch(affiliations);
 					} else {
 						$("#directory")
 							.prop("placeholder", "Sin afiliados")
@@ -669,24 +715,119 @@ $(function () {
 		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	});
 
-	// Formatea monto de transferencia/pago
-	$('#amount').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
-	$('#amount').on('keyup', function () {
-		$(this).val(function (index, value) {
+	function setTransferParameters(parameters) {
+		montoMaxOperaciones = parseFloat(parameters.montoMaxOperaciones);
+		montoMinOperaciones = parseFloat(parameters.montoMinOperaciones);
+		montoMaxDiario = parseFloat(parameters.montoMaxDiario);
+		montoMaxSemanal = parseFloat(parameters.montoMaxSemanal);
+		montoMaxMensual = parseFloat(parameters.montoMaxMensual);
+		cantidadOperacionesDiarias = parseInt(
+			parameters.cantidadOperacionesDiarias
+		);
+		cantidadOperacionesSemanales = parseInt(
+			parameters.cantidadOperacionesSemanales
+		);
+		cantidadOperacionesMensual = parseInt(
+			parameters.cantidadOperacionesMensual
+		);
+		montoAcumDiario = parseFloat(parameters.montoAcumDiario);
+		montoAcumSemanal = parseFloat(parameters.montoAcumSemanal);
+		montoAcumMensual = parseFloat(parameters.montoAcumMensual);
+		acumCantidadOperacionesDiarias = parseInt(
+			parameters.acumCantidadOperacionesDiarias
+		);
+		acumCantidadOperacionesSemanales = parseInt(
+			parameters.acumCantidadOperacionesSemanales
+		);
+		acumCantidadOperacionesMensual = parseInt(
+			parameters.acumCantidadOperacionesMensual
+		);
+		montoBase = parameters.montoBaseTransferencia
+			? parseFloat(parameters.montoBaseTransferencia)
+			: 0;
+		montoComision = parseFloat(parameters.montoComision);
+		porcentajeComision = parseFloat(parameters.porcentajeComision);
+		totalComision = 0;
+		dobleAutenticacion = parameters.dobleAutenticacion;
+	}
 
-			if (value.indexOf('0') != -1 && value.indexOf('0') == 0) {
-				value = value.replace(0, '');
-			}
+	function buildTransferSummaryModal() {
+		var setObjectSummary, objectSummary, summaryValueObject;
+		var commission, span, summaryValue, inputModal;
+		monto = currencyToNumber(transferData.amount);
+		commission =
+			monto <= montoBase ? montoComision : (monto * porcentajeComision) / 100;
+		totalComision = monto + commission;
 
-			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-				value = '00' + lang.CONF_DECIMAL + value
-			}
+		$("#accept").addClass("confirm-transfer");
 
-			return value
-		})
-	});
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: "none",
+			},
+			btn2: {
+				text: lang.GEN_BTN_CANCEL,
+				action: "destroy",
+			},
+		};
 
-	function buildTransferSummaryModal(data) {
+		// dataValue: label
+		setObjectSummary = {
+			P2P: {
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				dni: lang.GEN_DNI,
+				destinationCard: lang.TRANSF_DESTINATION_CARD,
+				amount: lang.TRANSF_AMOUNT,
+				commission: lang.TRANSF_COMMISSION,
+				total: lang.TRANSF_TOTAL,
+				concept: lang.TRANSF_CONCEPT,
+			},
+			P2T: {
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				bank: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+				amount: lang.TRANSF_AMOUNT,
+				commission: lang.TRANSF_COMMISSION,
+				total: lang.TRANSF_TOTAL,
+				concept: lang.TRANSF_CONCEPT,
+			},
+			PMV: {
+				beneficiary: lang.TRANSF_BENEFICIARY,
+				bank: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				mobilePhone: lang.GEN_PHONE_MOBILE,
+				amount: lang.TRANSF_AMOUNT_DETAILS,
+				commission: lang.TRANSF_COMMISSION,
+				total: lang.TRANSF_TOTAL,
+				concept: lang.TRANSF_CONCEPT,
+			},
+		};
+
+		summaryValueObject = {
+			bank: $("#bank option:selected").text(),
+			dni: transferData.typeDocument + " " + transferData.idNumber,
+			amount: lang.CONF_CURRENCY + " " + transferData.amount,
+			commission: lang.CONF_CURRENCY + " " + numberToCurrency(commission),
+			total: lang.CONF_CURRENCY + " " + numberToCurrency(totalComision),
+		};
+
+		objectSummary = setObjectSummary[operationType];
+		inputModal = $("<div></div>").addClass("flex flex-column");
+
+		Object.entries(objectSummary).forEach(([name, text]) => {
+			summaryValue = summaryValueObject[name] ?? transferData[name];
+			span = $("<span></span>")
+				.addClass("list-inline-item")
+				.text(text + ": " + summaryValue);
+			inputModal.append(span);
+		});
+
+		appMessages(lang.TRANSF_SUMMARY, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	}
+
+	function buildTransferResultModal(data) {
 		var destinationAccountText = {
 			P2P: lang.TRANSF_DESTINATION_CARD,
 			P2T: lang.TRANSF_DEST_ACCOUNT_NUMBER,
@@ -697,27 +838,7 @@ $(function () {
 			P2T: data.cuentaDestino,
 			PMV: data.telefonoDestino,
 		};
-		var bank = `<span class="list-inline-item">${lang.TRANSF_BANK}: ${data.bancoDestino}</span>`;
 
-		inputModal = `<div class="flex flex-column">
-			<span class="list-inline-item">
-				${lang.TRANSF_BENEFICIARY}: ${data.nombreBeneficiario}
-			</span>
-			${operationType != "P2P" ? bank : ""}
-			<span class="list-inline-item">${lang.GEN_DNI}: ${data.idExtPer}</span>
-			<span class="list-inline-item">
-				${destinationAccountText[operationType]}: ${destinationAccount[operationType]}
-			</span>
-			<span class="list-inline-item">
-				${lang.TRANSF_AMOUNT_DETAILS}: ${data.monto}
-			</span>
-			<span class="list-inline-item">
-				${lang.TRANSF_CONCEPT}: ${data.dataTransaccion}
-			</span>
-		</div>`;
-	}
-
-	function buildTransferResultModal(data) {
 		inputModal = `<div class="flex flex-column">
 			<span class="list-inline-item">${lang.TRANSF_REFERENCE}: ${data.dataTransaccion.codConfirmacion}</span>
 			<span class="list-inline-item">${lang.TRANSF_BANK}: ${data.bancoDestino}</span>
