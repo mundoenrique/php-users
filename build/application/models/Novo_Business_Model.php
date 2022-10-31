@@ -111,7 +111,9 @@ class Novo_Business_Model extends NOVO_Model {
 				} else {
 					$this->response->code = 4;
 					$this->response->icon = lang('CONF_ICON_WARNING');
-					$this->response->msg = novoLang(lang('BUSINESS_WITH_OUT_CARDS'), mb_strtolower(lang('GEN_VALIDATION_LOGGED')));
+					$this->response->msg = novoLang(
+						lang('BUSINESS_WITH_OUT_CARDS'), mb_strtolower(lang('GEN_VALIDATION_LOGGED'))
+					);
 					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START');
 				}
 			break;

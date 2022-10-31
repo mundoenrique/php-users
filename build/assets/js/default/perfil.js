@@ -206,7 +206,7 @@ $(function(){
 	anioActual		= anio.getFullYear();
 	mesActual		= anio.getMonth() + 1;
 	diaActual		= anio.getDate();
-	anioMayorEdad	= parseInt(anioActual - 18);
+	anioMayorEdad	= parseInt(anioActual - (country === 'Ve' ? 14 : 18));
 
 	function fechaNacimiento() {
 
