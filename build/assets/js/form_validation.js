@@ -140,7 +140,7 @@ function validateForms(form) {
 			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
 			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
 			"beneficiaryEmail": { pattern: emailValid },
-			"amount": { required: true, pattern: numeric, maxlength: 9 },
+			"amount": { required: true, pattern: floatAmount, maxlength: 9 },
 			"concept": { pattern: alphaName },
 			"expDateCta": { required: true, pattern: date.my },
 			"currentPin": { required: true, pattern: numeric, exactLength: 4 },

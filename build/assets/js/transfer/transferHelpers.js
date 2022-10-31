@@ -669,16 +669,22 @@ $(function () {
 		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	});
 
-	function changeDecimals(amount) {
-		var amountDec;
-		amountDec = amount.toFixed(2);
+	// Formatea monto de transferencia/pago
+	$('#amount').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
+	$('#amount').on('keyup', function () {
+		$(this).val(function (index, value) {
 
-		if (pais == "Ve" || pais == "Co") {
-			amountDec = amountDec.replace(".", ",");
-		}
+			if (value.indexOf('0') != -1 && value.indexOf('0') == 0) {
+				value = value.replace(0, '');
+			}
 
-		return amountDec;
-	}
+			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
+				value = '00' + lang.CONF_DECIMAL + value
+			}
+
+			return value
+		})
+	});
 
 	function buildTransferSummaryModal(data) {
 		var destinationAccountText = {
