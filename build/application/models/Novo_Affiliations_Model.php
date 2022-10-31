@@ -33,7 +33,6 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
 
 		$response = $this->sendToWebServices('CallWs_GetAffiliations');
-
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
