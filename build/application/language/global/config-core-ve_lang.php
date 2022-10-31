@@ -8,12 +8,10 @@ $lang['CONF_LONG_TEXT'] = 'h6';
 $lang['CONF_CONTACTS'] = [
 	'0500-BONUS-00' => '(0500-26687-00)',
 	'0501-PLATA-00' => '(0501-75282-00)',
-	'0501-SAMBIL-1' => '(0501-726245-1)',
 ];
 $lang['CONF_BTN_LANG'] = 'ON';
 $lang['CONF_TRANSFERS'] = 'ON';
-$lang['CONF_PAYMENTS'] = 'ON';
 $lang['CONF_MOBILE_PAYMENT'] = 'ON';
 $lang['CONF_BETWEEN_CARDS'] = 'ON';
-$lang['CONF_BANKS'] = 'ON';
 $lang['CONF_SERVICES'] = 'OFF';
+$lang['CONF_CUSTOMER_SUPPORT'] = 'OFF';

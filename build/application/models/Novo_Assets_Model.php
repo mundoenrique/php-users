@@ -29,7 +29,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.PaisTO';
 		$this->dataRequest->codPais = $this->customer;
 
-		$response = $this->sendToService('callWs_StatesList');
+		$response = $this->sendToWebServices('callWs_StatesList');
 		$statesList = [];
 		$this->response->code = 0;
 
@@ -67,7 +67,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->codEstado = $dataRequest->stateCode;
 		$this->dataRequest->codPais = $this->customer;
 
-		$response = $this->sendToService('callWs_CityList');
+		$response = $this->sendToWebServices('callWs_CityList');
 		$citiesList = [];
 		$this->response->code = 0;
 
@@ -105,7 +105,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->userName = 'REGISTROCPO';
 		$this->dataRequest->codigoGrupo = $dataRequest->groupCode;
 
-		$response = $this->sendToService('callWs_Regions');
+		$response = $this->sendToWebServices('callWs_Regions');
 		$regionsList = [];
 		$this->response->code = 0;
 
@@ -141,7 +141,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->idOperation = '37';
 		$this->dataRequest->className = 'com.novo.objects.MO.ListaTipoProfesionesMO';
 
-		$response = $this->sendToService('callWs_ProfessionsList');
+		$response = $this->sendToWebServices('callWs_ProfessionsList');
 		$profList = [];
 		$this->response->code = 0;
 
@@ -180,7 +180,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->bean = $this->config->item('customer');
 
-		$response = $this->sendToService('callWs_TypeDocumentList');
+		$response = $this->sendToWebServices('callWs_TypeDocumentList');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -209,7 +209,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->accodUsuario = $this->session->userName;
 
-		$response = $this->sendToService('callWs_GetToken');
+		$response = $this->sendToWebServices('callWs_GetToken');
 
 		switch($this->isResponseRc) {
 			case 0:

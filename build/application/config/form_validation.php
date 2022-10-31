@@ -569,7 +569,7 @@ $config = [
 		[
 			'field' => 'expDateCta',
 			'label' => 'expDateCta',
-			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
 	'cardToBank' => [
@@ -616,49 +616,41 @@ $config = [
 		[
 			'field' => 'expDateCta',
 			'label' => 'expDateCta',
-			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
 	'mobilePayment' => [
 		[
 			'field' => 'bank',
-			'label' => 'bank',
 			'rules' => 'required|trim'
 		],
 		[
 			'field' => 'beneficiary',
-			'label' => 'beneficiary',
 			'rules' => 'required|trim'
 		],
 		[
 			'field' => 'idNumber',
-			'label' => 'idNumber',
 			'rules' => 'required|trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',
-			'label' => 'mobilePhone',
 			'rules' => 'required|trim|numeric'
 		],
 		[
 			'field' => 'email',
-			'label' => 'email',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'amount',
-			'label' => 'amount',
 			'rules' => 'required|trim|numeric'
 		],
 		[
 			'field' => 'concept',
-			'label' => 'concept',
 			'rules' => 'trim'
 		],
 		[
-			'field' => 'filterInputYear',
-			'label' => 'filterInputYear',
-			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+			'field' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
 	'cardDetail' => [

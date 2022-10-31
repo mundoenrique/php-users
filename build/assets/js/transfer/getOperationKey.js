@@ -15,7 +15,7 @@ $(function () {
 			data.currentPass = cryptography.encrypt(data.currentPass);
 			changeBtn.html(loader);
 			insertFormInput(true);
-			who = 'Transfer';
+			who = 'PasswordOperation';
 			where = 'GetOperationKey';
 
 			callNovoCore(who, where, data, function (response) {

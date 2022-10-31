@@ -59,7 +59,6 @@ $lang['GEN_MENU_DIGITEL'] = 'Recarga digitel';
 $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
 $lang['GEN_MENU_TRANSFERS'] = 'Transferencias';
-$lang['GEN_MENU_PAYMENTS'] = 'Pagos';
 $lang['GEN_MENU_MOBILE_PAYMENT'] = 'Pago móvil';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
@@ -228,3 +227,9 @@ $lang['GEN_INFO_3'] = 'Al menos una <strong>letra mayúscula</strong>.';
 $lang['GEN_INFO_4'] = 'De 1 a 3 <strong>números</strong>.';
 $lang['GEN_INFO_5'] = 'Al menos un <strong>caracter especial</strong> (ej: ! @ * - ? ¡ ¿ + / . , _ #).';
 $lang['GEN_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.';
+$lang['GEN_TRANSFER_DOCUMENT_TYPE'] = [
+	'V' => 'V',
+	'E' => 'E',
+	'J' => 'J',
+	'G' => 'G'
+];

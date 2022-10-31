@@ -31,36 +31,22 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
-		$this->dataRequest->validacionFechaExp = isset($dataRequest->prefix) ? "0318" : '';
 
-		$response = $this->sendToService('CallWs_GetAffiliations');
-		$affiliateAccounts = [];
+		$response = $this->sendToWebServices('CallWs_GetAffiliations');
 		switch ($this->isResponseRc) {
 			case 0:
-				switch ($dataRequest->operationType) {
-					case 'P2P':
-						$affiliateAccounts = $response->bean->cuentaDestinoPlata;
-						break;
-					case 'PMV':
-						$affiliateAccounts = $response->bean->pagoMovil;
-						break;
-					case 'P2T':
-						$affiliateAccounts = $response->bean->creditoInmediato;
-						break;
-				}
 				$this->response->code = 0;
-				$this->response->data = $affiliateAccounts;
+				$this->response->data = $response->bean;
 				break;
 
 			case -150:
 				$this->response->code = 1;
-				$this->response->data = [];
-				$this->response->msg = lang('TRANSF_EMPTY_AFFILIATE_ACCOUNTS');
+				$this->response->msg = lang('AFFIL_EMPTY_AFFILIATE_ACCOUNTS');
 				break;
 
 			default:
 				$this->response->code = 2;
-				$this->response->title = lang('TRANSF_MANAGE_AFFILIATIONS');
+				$this->response->title = lang('AFFIL_MANAGE_AFFILIATIONS');
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
@@ -97,20 +83,20 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationP2P');
+		$this->sendToWebServices('callWs_AffiliationP2P');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -147,20 +133,20 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationPMV');
+		$this->sendToWebServices('callWs_AffiliationPMV');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -197,20 +183,20 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationP2T');
+		$this->sendToWebServices('callWs_AffiliationP2T');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_SUCCESS_AFFILIATE_UPDATE') : lang('TRANSF_SUCCESS_AFFILIATE_CREATION');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('TRANSF_EDIT_AFFILIATE') : lang('TRANSF_NEW_AFFILIATE');
-				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('TRANSF_FAILED_AFFILIATE_UPDATE') : lang('TRANSF_FAILED_AFFILIATE_CREATION');
+				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -229,25 +215,25 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataAccessLog->function = 'Eliminar';
 		$this->dataAccessLog->operation = 'Procesar eliminación de afiliación ' . $dataRequest->operationType;
 
-		$this->dataRequest->idOperation = $dataRequest->operationType === 'P2P' ? '40' : '040';
+		$this->dataRequest->idOperation = '040';
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
 
-		$this->sendToService('callWs_DeleteAffiliation');
+		$this->sendToWebServices('callWs_DeleteAffiliation');
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = lang('TRANSF_DELETE_AFFILIATE');
-				$this->response->msg = lang('TRANSF_SUCCESS_AFFILIATE_DELETION');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->title = lang('AFFIL_DELETE_AFFILIATE');
+				$this->response->msg = lang('AFFIL_SUCCESS_AFFILIATE_DELETION');
+				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = lang('TRANSF_DELETE_AFFILIATE');
-				$this->response->msg = lang('TRANSF_FAILED_AFFILIATE_DELETION');
+				$this->response->title = lang('AFFIL_DELETE_AFFILIATE');
+				$this->response->msg = lang('AFFIL_FAILED_AFFILIATE_DELETION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 

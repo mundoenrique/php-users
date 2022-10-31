@@ -319,7 +319,7 @@ class NOVO_Controller extends CI_Controller {
 
 		if ($this->session->has_userdata('canTransfer') && $this->session->canTransfer == 'N') {
 			unset($mainMenu['TRANSFERS']);
-			unset($mainMenu['PAYMENTS']);
+			unset($mainMenu['MOBILE_PAYMENT']);
 		}
 
 		$userMenu->mainMenu = $mainMenu;
