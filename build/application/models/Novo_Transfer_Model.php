@@ -29,7 +29,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '17';
 		$this->dataRequest->className = 'java.lang.String';
 
-		$response = $this->sendToService('CallWs_GetBanks');
+		$response = $this->sendToWebServices('CallWs_GetBanks');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -69,7 +69,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
 		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
-		$response = $this->sendToService('callWs_MobilePayment');
+		$response = $this->sendToWebServices('callWs_MobilePayment');
 
 		switch ($this->isResponseRc) {
 			case 0:

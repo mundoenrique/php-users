@@ -32,7 +32,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
 
-		$response = $this->sendToService('CallWs_GetAffiliations');
+		$response = $this->sendToWebServices('CallWs_GetAffiliations');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -84,7 +84,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationP2P');
+		$this->sendToWebServices('callWs_AffiliationP2P');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -134,7 +134,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationPMV');
+		$this->sendToWebServices('callWs_AffiliationPMV');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -184,7 +184,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToService('callWs_AffiliationP2T');
+		$this->sendToWebServices('callWs_AffiliationP2T');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -221,7 +221,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
 
-		$this->sendToService('callWs_DeleteAffiliation');
+		$this->sendToWebServices('callWs_DeleteAffiliation');
 
 		switch ($this->isResponseRc) {
 			case 0:
