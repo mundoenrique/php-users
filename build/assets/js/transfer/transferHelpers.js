@@ -727,4 +727,12 @@ $(function () {
 			<span class="list-inline-item">${lang.TRANSF_CONCEPT}: ${data.dataTransaccion}</span>
 		</div>`;
 	}
+
+	function numberToCurrency(number) {
+		return number.toFixed(2).replace(".", ",");
+	}
+
+	function currencyToNumber(currency) {
+		return Number(currency.replace(".", "").replace(",", "."));
+	}
 });
