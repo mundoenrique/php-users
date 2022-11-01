@@ -23,6 +23,7 @@ function validateForms(form) {
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
 	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
 	var checkedOption = new RegExp(lang.CONF_REGEX_CHECKED);
+	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
 		dmy: new RegExp(lang.CONF_REGEX_DATE_DMY),
 		my: new RegExp(lang.CONF_REGEX_DATE_MY),
@@ -37,6 +38,13 @@ function validateForms(form) {
 		ignore: lang.CONF_VALID_IGNORE,
 		errorElement: lang.CONF_VALID_ELEMENT
 	};
+
+	$.each(lang.CONF_TITLE_PASS_FORM, function (key, val) {
+		if ($(form).attr('id') === key) {
+			titleCredencial = val.toLowerCase();
+		}
+		return titleCredencial;
+	});
 
 	jQuery.validator.setDefaults(defaults);
 
@@ -176,15 +184,15 @@ function validateForms(form) {
 				required: lang.VALIDATE_DOCUMENT_ID,
 				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
 			},
-			"currentPass": lang.VALIDATE_CURRENT_PASS,
+			"currentPass": lang.VALIDATE_CURRENT_PASS.replace('%s', titleCredencial),
 			"newPass": {
-				required: lang.VALIDATE_NEW_PASS,
-				differs: lang.VALIDATE_DIFFERS_PASS,
-				validatePass: lang.VALIDATE_REQUIREMENTS_PASS
+				required: lang.VALIDATE_NEW_PASS.replace('%s', titleCredencial),
+				differs: lang.VALIDATE_DIFFERS_PASS.replace('%s', titleCredencial),
+				validatePass: lang.VALIDATE_REQUIREMENTS_PASS.replace('%s', titleCredencial),
 			},
 			"confirmPass": {
-				required: lang.VALIDATE_CONFIRM_PASS,
-				equalTo: lang.VALIDATE_IQUAL_PASS
+				required: lang.VALIDATE_CONFIRM_PASS.replace('%s', titleCredencial),
+				equalTo: lang.VALIDATE_IQUAL_PASS.replace('%s', titleCredencial),
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
 			"filterInputYear": lang.VALIDATE_DATE_MY,

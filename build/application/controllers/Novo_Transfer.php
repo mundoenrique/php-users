@@ -16,6 +16,28 @@ class Novo_Transfer extends NOVO_Controller
 		parent::__construct();
 		writeLog('INFO', 'Transfer Controller Class Initialized');
 
+		$currentMethod = $this->controllerMethod;
+		$validateOperKey = $this->session->operKey;
+		$validaTransferAuth = !$this->session->transferAuth;
+		$validateChangeOperKey = $currentMethod !== 'changeOperationKey';
+		$validateSetOperKey = $currentMethod !== 'setOperationKey';
+		$validateGetOperKey = $currentMethod !== 'getOperationKey';
+		$validateUriOperKey = lang('CONF_REDIRECT_OPER_KEY');
+		$validateRedirect = ($validateChangeOperKey && $validaTransferAuth);
+
+		if ($validateOperKey && $validateGetOperKey && $validateRedirect) {
+			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
+			redirect(base_url(lang('CONF_LINK_GET_OPER_KEY')), 'Location', 301);
+			exit();
+		}
+
+		if (!$validateOperKey && $validateSetOperKey && $validateRedirect) {
+			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
+			redirect(base_url(lang('CONF_LINK_SET_OPER_KEY')), 'Location', 301);
+			exit();
+		}
+
+		$this->session->keep_flashdata('currentUri');
 		$this->attrNoPointer = 'no-pointer';
 		$this->navItemsConfig = [
 			'transfer' => [
@@ -40,29 +62,6 @@ class Novo_Transfer extends NOVO_Controller
 				'activePointer' => $this->attrNoPointer,
 			],
 		];
-
-		$currentMethod = $this->controllerMethod;
-		$validateOperKey = $this->session->operKey;
-		$validaTransferAuth = !$this->session->transferAuth;
-		$validateChangeOperKey = $currentMethod !== 'changeOperationKey';
-		$validateSetOperKey = $currentMethod !== 'setOperationKey';
-		$validateGetOperKey = $currentMethod !== 'getOperationKey';
-		$validateUriOperKey = lang('CONF_REDIRECT_OPER_KEY');
-		$validateRedirect = ($validateChangeOperKey && $validaTransferAuth);
-
-		if ($validateOperKey && $validateGetOperKey && $validateRedirect) {
-			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_GET_OPER_KEY')), 'Location', 301);
-			exit();
-		}
-
-		if (!$validateOperKey && $validateSetOperKey && $validateRedirect) {
-			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_SET_OPER_KEY')), 'Location', 301);
-			exit();
-		}
-
-		$this->session->keep_flashdata('currentUri');
 	}
 
 	/**
@@ -85,6 +84,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/setOperationKey"
 		);
 
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);
@@ -132,6 +132,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/changeOperationKey"
 		);
 
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);

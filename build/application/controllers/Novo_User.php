@@ -114,6 +114,7 @@ class Novo_User extends NOVO_Controller {
 		$this->render->previewPASS_A = FALSE;
 		$this->render->previewPASS_R = FALSE;
 
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_PASSWORD'))];
 		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
@@ -205,6 +206,7 @@ class Novo_User extends NOVO_Controller {
 			$this->session->set_flashdata('changePassword', $this->session->flashdata('changePassword'));
 		}
 
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_PASSWORD'))];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = LANG('GEN_MENU_CHANGE_PASS');
 		$this->render->cancelBtn = $cancelBtn;
