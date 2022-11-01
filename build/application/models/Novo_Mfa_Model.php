@@ -130,6 +130,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
 					$this->session->set_userdata('otpActive', TRUE);
 					$this->session->set_userdata('otpChannel', $otpChannel);
+					$this->response->modalBtn['btn1']['link'] = 'card-list';
 				}
 
 				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
