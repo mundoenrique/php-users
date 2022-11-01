@@ -62,7 +62,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
 		$this->dataRequest->bancoDestino = $dataRequest->bank;
 		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->idExtPer = $dataRequest->typeDocument . $dataRequest->idNumber;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
 		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
 		$this->dataRequest->monto = $dataRequest->amount;
 		$this->dataRequest->concepto = $dataRequest->concept;

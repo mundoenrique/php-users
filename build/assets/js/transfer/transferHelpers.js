@@ -225,6 +225,7 @@ $(function () {
 			who = "Affiliations";
 			where = `Affiliation${operationType}`;
 			data = getDataForm(form);
+			data.idDocument = data.typeDocument + data.idNumber;
 
 			if ($(this).data("action") == "edit") {
 				data.idAfiliation = currentAffiliaton.id_afiliacion;
@@ -302,6 +303,7 @@ $(function () {
 			...transferData,
 			amount: monto,
 			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
+			idDocument: transferData.typeDocument + transferData.idNumber,
 			...cardData,
 		};
 
