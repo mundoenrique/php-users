@@ -1,18 +1,19 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @info Librería para validar el acceso del usuario a las funciones
  * @author J. Enrique Peñaloza Piñero
  * @date May 17th, 2020
  */
-class Verify_Access {
+class Verify_Access
+{
 	private $CI;
 
 	public function __construct()
 	{
 		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
-		$this->CI =& get_instance();
+		$this->CI = &get_instance();
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
@@ -29,7 +30,7 @@ class Verify_Access {
 
 		writeLog('DEBUG', 'VALIDATION FORM ' . $validationMethod . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
-		if(!$result) {
+		if (!$result) {
 			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' .
 				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
@@ -50,14 +51,14 @@ class Verify_Access {
 		$appUserName = $arrAppUserName[1];
 		$logUsername = '';
 
-		foreach ($_POST AS $key => $value) {
-			switch($key) {
+		foreach ($_POST as $key => $value) {
+			switch ($key) {
 				case 'request':
 				case 'plot':
 				case 'cpo_name':
-				break;
+					break;
 				default:
-				$requestServ->$key = $value;
+					$requestServ->$key = $value;
 			}
 		}
 
@@ -65,9 +66,9 @@ class Verify_Access {
 
 		if ($this->CI->session->has_userdata('userName')) {
 			$logUsername = $this->CI->session->userName;
-		} elseif (isset($requestServ->userName))	{
+		} elseif (isset($requestServ->userName)) {
 			$logUsername = mb_strtoupper($requestServ->userName);
-		} elseif (isset($requestServ->idNumber))	{
+		} elseif (isset($requestServ->idNumber)) {
 			$logUsername = mb_strtoupper($requestServ->idNumber);
 		} elseif (isset($requestServ->documentId)) {
 			$logUsername = mb_strtoupper($requestServ->documentId);
@@ -99,10 +100,10 @@ class Verify_Access {
 		$responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
 		$responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
 		$responseDefect->modalBtn = [
-			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> lang('CONF_LINK_SIGNIN'),
-				'action'=> 'redirect'
+			'btn1' => [
+				'text' => lang('GEN_BTN_ACCEPT'),
+				'link' => lang('CONF_LINK_SIGNIN'),
+				'action' => 'redirect'
 			]
 		];
 
@@ -134,7 +135,7 @@ class Verify_Access {
 			clearSessionsVars();
 		}
 
-		switch($module) {
+		switch ($module) {
 			case 'userCardsList':
 			case 'profileUser':
 			case 'updateProfile':
@@ -191,18 +192,18 @@ class Verify_Access {
 				break;
 			case 'setOperationKey':
 			case 'getOperationKey':
+			case 'cardToCard':
+			case 'cardToBank':
+			case 'mobilePayment':
 			case 'getBanks':
 			case 'getAffiliations':
-			case 'affiliate':
 			case 'affiliationP2P':
 			case 'affiliationPMV':
 			case 'affiliationP2T':
 			case 'deleteAffiliation':
-			case 'modifyAffiliation':
 			case 'changeOperationKey':
-			case 'cardToCard':
-			case 'cardToBank':
-			case 'mobilePayment':
+			case 'transferP2P':
+			case 'transferP2T':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
 				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S';

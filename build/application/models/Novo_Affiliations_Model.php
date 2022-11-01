@@ -79,7 +79,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->tipoOperacion = 'P2P';
 		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->typeDocument . $dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
 		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
@@ -129,7 +129,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = 'PMV';
 		$this->dataRequest->banco = $dataRequest->bank;
 		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->typeDocument . $dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
@@ -178,7 +178,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = 'P2T';
 		$this->dataRequest->banco = $dataRequest->bank;
 		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->typeDocument . $dataRequest->idNumber;
+		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
 		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationAccount;
 		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
