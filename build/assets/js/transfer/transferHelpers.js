@@ -1,7 +1,7 @@
 "use strict";
 var cardData, affiliationsList, transferParameters, currentAffiliaton, bankList;
 var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
-var montoMaxMensual, cantidadOperacionesDiarias,montoBase, montoComision;
+var montoMaxMensual, cantidadOperacionesDiarias, montoBase, montoComision;
 var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
 var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
 var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
@@ -367,34 +367,60 @@ $(function () {
 		$("#cancel").prop("disabled", true);
 		console.log(transferResult);
 
-		// who = "Affiliations";
-		// where = "DeleteAffiliation";
-		// data.idAfiliation = currentAffiliaton.id_afiliacion;
-		// data.operationType = operationType;
+		var dataRequest = {
+			P2P: {
+				beneficiary: transferResult.nombreBeneficiario,
+				idDocument: transferResult.idExtPer,
+				destinationCard: transferResult.nroCuentaDestino,
+				beneficiaryEmail: transferResult.email,
+			},
+			PMV: {
+				beneficiary: transferResult.nombreBeneficiario,
+				bank: transferResult.bancoDestino,
+				idDocument: transferResult.idExtPer,
+				mobilePhone: transferResult.telefonoDestino,
+				beneficiaryEmail: transferResult.email,
+			},
+			P2T: {
+				beneficiary: transferResult.nombreBeneficiario,
+				bank: transferResult.bancoDestino,
+				idDocument: transferResult.idExtPer,
+				destinationAccount: transferResult.nroCuentaDestino,
+				beneficiaryEmail: transferResult.email,
+			},
+		};
 
-		// $(".nav-config-box").addClass("no-pointer");
+		who = "Affiliations";
+		where = `Affiliation${operationType}`;
+		data = dataRequest[operationType];
 
-		// callNovoCore(who, where, data, function (response) {
-		// 	$(".nav-config-box").removeClass("no-pointer");
-		// 	modalDestroy(true);
+		insertFormInput(true);
+		$(this).html(loader);
+		$(".nav-config-box").addClass("no-pointer");
 
-		// 	if (response.code == 0) {
-		// 		$("#accept").addClass("to-affiliations");
-		// 		appMessages(
-		// 			response.title,
-		// 			response.msg,
-		// 			response.icon,
-		// 			response.modalBtn
-		// 		);
-		// 	} else {
-		// 		appMessages(
-		// 			response.title,
-		// 			response.msg,
-		// 			response.icon,
-		// 			response.modalBtn
-		// 		);
-		// 	}
-		// });
+		callNovoCore(who, where, data, function (response) {
+			insertFormInput(false);
+			$(e.target).html(btnText);
+			$(".nav-config-box").removeClass("no-pointer");
+			modalDestroy(true);
+
+			if (response.code == 0) {
+				$("#accept").addClass("to-affiliations");
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
+			} else {
+				appMessages(
+					response.title,
+					response.msg,
+					response.icon,
+					response.modalBtn
+				);
+			}
+		});
 	});
 
 	// Vuelve a cargar la lista de afiliados
