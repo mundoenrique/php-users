@@ -21,8 +21,13 @@ class Encrypt_Decrypt
 		$this->ivAES256 = base64_decode(IV_AES256);
 	}
 
-	public function encryptWebServices($request) {
-		writeLog('INFO', 'Encrypt_Decrypt: encode Method Initialized');
+	public function encryptWebServices($request)
+	{
+		writeLog('INFO', 'Encrypt_Decrypt: encryptWebServices Method Initialized');
+
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 
 		$dataB = base64_encode($request);
 
@@ -45,8 +50,13 @@ class Encrypt_Decrypt
 		return base64_encode($cryptData);
 	}
 
-	public function decryptWebServices($response) {
-		writeLog('INFO', 'Encrypt_Connect: decryptWebServices Method Initialized');
+	public function decryptWebServices($response)
+	{
+		writeLog('INFO', 'Encrypt_Decrypt: decryptWebServices Method Initialized');
+
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 
 		if ($response->data !== NULL) {
 			$data = base64_decode($response->data);
@@ -67,6 +77,41 @@ class Encrypt_Decrypt
 		}
 
 		return $response;
+	}
+
+	function aesCryptography($data, $encrip = TRUE)
+	{
+		writeLog('INFO', 'Encrypt_Decrypt: aesCryptography Method Initialized');
+
+		$encrypt_method = "AES-256-CBC";
+		$output = NULL;
+
+		if ($encrip) {
+			$output = openssl_encrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
+		} else {
+			$output = openssl_decrypt($data, $encrypt_method, $this->keyAES256, 0, $this->ivAES256);
+		}
+
+		return $output;
+	}
+
+	function generateArgon2Hash($payload)
+	{
+		writeLog('INFO', 'Encrypt_Decrypt: generateArgon2Hash Method Initialized');
+
+		$hash = sodium_crypto_pwhash(
+			ARGON2_LENGTH,
+			$payload,
+			hex2bin(ARGON2_SALT),
+			ARGON2_OPS_LIMIT,
+			ARGON2_MEMORY_LIMIT,
+			SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13
+		);
+		$output = new stdClass();
+		$output->hashArgon2 =  unpack("C*", $hash);
+		$output->hexArgon2 =  bin2hex($hash);
+
+		return $output;
 	}
 
 	public function encryptCoreServices($request)

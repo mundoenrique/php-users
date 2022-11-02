@@ -281,8 +281,8 @@ class Registro_model extends CI_Model {
 
 		$passwordMobile	= strtoupper($password); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
 
-		$argon2 = $this->encrypt_connect->generateArgon2($password);
-		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
+		$argon2 = $this->encrypt_decrypt->generateArgon2Hash($password);
+		$argon2Mobile = $this->encrypt_decrypt->generateArgon2Hash($passwordMobile);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));

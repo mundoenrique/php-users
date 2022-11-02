@@ -82,7 +82,7 @@ class Tool_Api {
 			if (!is_null($objRequest) && property_exists($objRequest, $this->namePropRequest) ) {
 				if (is_string($objRequest->{$this->namePropRequest})) {
 					$decrypParams[$this->namePropRequest] = json_decode(
-						$this->CI->encrypt_connect->cryptography($objRequest->{$this->namePropRequest}, FALSE)
+						$this->CI->encrypt_decrypt->aesCryptography($objRequest->{$this->namePropRequest}, FALSE)
 					);
 				}
 			}
