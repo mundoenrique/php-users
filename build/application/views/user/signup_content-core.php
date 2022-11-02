@@ -433,7 +433,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <?php $this->load->view('user/passwordInfo_content-core') ?>
+                    <?php $this->load->view('user/passwordInfo_content-core', $titleCredential) ?>
                   </div>
                 </div>
               </div>
@@ -550,7 +550,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <?php $this->load->view('user/passwordInfo_content-core') ?>
+                    <?php $this->load->view('user/passwordInfo_content-core', $titleCredential) ?>
                   </div>
                 </div>
               </div>

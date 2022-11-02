@@ -248,3 +248,9 @@ $lang['CONF_MFA_ACTIVATE'] = 'activate';
 $lang['CONF_MFA_DEACTIVATE'] = 'deactivate';
 $lang['CONF_MFA_GENERATE_OTP'] = 'generate';
 $lang['CONF_MFA_VALIDATE_OTP'] = 'validate';
+$lang['CONF_TRANSFER_DOCUMENT_TYPE'] = [
+	'V' => 'V',
+	'E' => 'E',
+	'J' => 'J',
+	'G' => 'G'
+];

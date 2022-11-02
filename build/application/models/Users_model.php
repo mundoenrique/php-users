@@ -26,7 +26,7 @@ class Users_model extends CI_Model
 			utf8_encode($password->password)
 		);
 
-		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		// $argon2 = $this->encrypt_decrypt->generateArgon2Hash($password);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA PASSWORD en plano: ' . json_encode($password));
 		// log_message('info', 'PRUEBA PASSWORD en Argon2: ' . json_encode($argon2->hexArgon2));
@@ -293,9 +293,9 @@ class Users_model extends CI_Model
 
 		$passwordMobile = strtoupper($passwordNew); // To allow cardholders to sign in through mobile app 'Acceso Móvil'
 
-		$argon2Old = $this->encrypt_connect->generateArgon2($passwordOld);
-		$argon2New = $this->encrypt_connect->generateArgon2($passwordNew);
-		$argon2Mobile = $this->encrypt_connect->generateArgon2($passwordMobile);
+		// $argon2Old = $this->encrypt_decrypt->generateArgon2Hash($passwordOld);
+		// $argon2New = $this->encrypt_decrypt->generateArgon2Hash($passwordNew);
+		// $argon2Mobile = $this->encrypt_decrypt->generateArgon2Hash($passwordMobile);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA PASSWORD_OLD en plano: ' . json_encode($passwordOld));
 		// log_message('info', 'PRUEBA PASSWORD_OLD en Argon2: ' . json_encode($argon2Old->hexArgon2));
@@ -350,7 +350,7 @@ class Users_model extends CI_Model
 			utf8_encode($passwordOperaciones->password)
 		);
 
-		$argon2passwordOperaciones= $this->encrypt_connect->generateArgon2($passwordOperaciones);
+		$argon2passwordOperaciones= $this->encrypt_decrypt->generateArgon2Hash($passwordOperaciones);
 
 		$data = json_encode(array(
 			'idOperation' => '31',
@@ -386,7 +386,7 @@ class Users_model extends CI_Model
 			utf8_encode($claveSMS->password)
 		);
 
-		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		$argon2 = $this->encrypt_decrypt->generateArgon2Hash($claveSMS);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
 		// log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
@@ -432,7 +432,7 @@ class Users_model extends CI_Model
 			utf8_encode($claveSMS->password)
 		);
 
-		$argon2 = $this->encrypt_connect->generateArgon2($claveSMS);
+		// $argon2 = $this->encrypt_decrypt->generateArgon2Hash($claveSMS);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA claveSMS en plano: ' . json_encode($claveSMS));
 		// log_message('info', 'PRUEBA claveSMS en Argon2: ' . json_encode($argon2->hexArgon2));
@@ -514,8 +514,8 @@ class Users_model extends CI_Model
 			utf8_encode($passwordOperaciones->password)
 		);
 
-		$argon2Old = $this->encrypt_connect->generateArgon2($passwordOperacionesOld);
-		$argon2New = $this->encrypt_connect->generateArgon2($passwordOperaciones);
+		// $argon2Old = $this->encrypt_decrypt->generateArgon2Hash($passwordOperacionesOld);
+		// $argon2New = $this->encrypt_decrypt->generateArgon2Hash($passwordOperaciones);
 		// TODO: quitar logs
 		// log_message('info', 'PRUEBA PASSWORD_OLD en plano: ' . json_encode($passwordOperacionesOld));
 		// log_message('info', 'PRUEBA PASSWORD_OLD en Argon2: ' . json_encode($argon2Old->hexArgon2));

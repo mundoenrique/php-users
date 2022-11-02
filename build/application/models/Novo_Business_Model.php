@@ -489,17 +489,17 @@ class Novo_Business_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$fechaExp = $this->encrypt_connect->cryptography($response->fechaExp, FALSE);
-				$left = substr($fechaExp,0,2);
-				$right = substr($fechaExp,2,2);
+				$fechaExp = $this->encrypt_decrypt->aesCryptography($response->fechaExp, FALSE);
+				$left = substr($fechaExp, 0, 2);
+				$right = substr($fechaExp, 2, 2);
 				$expirationDate = $left.'/'.$right;
 
 				$this->response->code = 0;
 				$this->response->dataDetailCard =  [
-					'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
-					'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
+					'cardNumber' => $this->encrypt_decrypt->aesCryptography($response->noTarjeta, FALSE),
+					'cardholderName' => $this->encrypt_decrypt->aesCryptography($response->NombreCliente, FALSE),
 					'expirationDate' => $expirationDate,
-					'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+					'securityCode' => $this->encrypt_decrypt->aesCryptography($response->secureToken, FALSE),
 				];
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CLOSE');
 				$this->response->modalBtn['btn1']['action'] = 'none';

@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="col-6 col-lg-4 col-xl-6">
-						<?php $this->load->view('user/passwordInfo_content-core') ?>
+						<?php $this->load->view('user/passwordInfo_content-core', $titleCredential) ?>
 					</div>
 				</div>
 
