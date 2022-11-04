@@ -5,10 +5,12 @@
     <div class="w-100">
       <div class="mx-auto">
 				<form id="historyForm">
+					<input type="hidden" id="filterMonthHistory" name="filterMonthHistory" value="0">
+					<input type="hidden" id="filterYearHistory" name="filterYearHistory" value="0">
         	<div class="row pl-2 mt-3">
 						<label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
 						<div class="form-group col-3 px-1">
-							<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text"
+							<input id="filterHistoryDate" name="filterHistoryDate" class="form-control" name="datepicker" type="text"
 								placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
 							<div id='error' class="help-block"></div>
 						</div>

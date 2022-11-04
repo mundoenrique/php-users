@@ -50,6 +50,30 @@ $(function () {
 		},
 	});
 
+	$("#filterHistoryDate").datepicker({
+		yearRange: '-90:' + currentDate.getFullYear(),
+		minDate: '-90y',
+		maxDate: currentDate.getFullYear(),
+		dateFormat: "mm/yy",
+		showButtonPanel: true,
+		closeText: lang.GEN_BTN_ACCEPT,
+
+		onClose: function (dateText, inst) {
+			$(this).datepicker(
+				"setDate",
+				new Date(inst.selectedYear, inst.selectedMonth, 1)
+			);
+			$(this).focus().blur();
+			var monthYear = $("#filterHistoryDate").val().split("/");
+			$("#filterMonthHistory").val(monthYear[0]);
+			$("#filterYearHistory").val(monthYear[1]);
+		},
+
+		beforeShow: function (input, inst) {
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+		},
+	});
+
 	// Al seleccionar una tarjeta
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
