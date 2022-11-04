@@ -423,8 +423,12 @@ $config = [
 			'rules' => 'required|alpha_numeric|required'
 		],
 		[
-			'field' => 'email',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'field' => 'destinationCard',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'amount',
@@ -453,7 +457,7 @@ $config = [
 			'rules' => 'required|alpha_numeric|required'
 		],
 		[
-			'field' => 'destinationCard',
+			'field' => 'destinationAccount',
 			'rules' => 'required|trim|numeric'
 		],
 		[
@@ -461,7 +465,7 @@ $config = [
 			'rules' => 'required|trim|numeric'
 		],
 		[
-			'field' => 'email',
+			'field' => 'beneficiaryEmail',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
 		],
 		[
@@ -495,7 +499,7 @@ $config = [
 			'rules' => 'required|trim|numeric'
 		],
 		[
-			'field' => 'email',
+			'field' => 'beneficiaryEmail',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
@@ -510,6 +514,20 @@ $config = [
 			'field' => 'expDateCta',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
+	],
+	'history' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'filterMonth',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'filterYear',
+			'rules' => 'trim|numeric|required'
+		]
 	],
 	'cardDetail' => [
 		[
