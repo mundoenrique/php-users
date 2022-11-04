@@ -727,7 +727,7 @@ $(function () {
 				<span class="h5 semibold feed-product">${value.beneficiario}${
 				value.concepto != "" ? "		|		" + value.concepto : ""
 			}</span>
-				<span class="btn btn-small btn-link p-0 h6" data-index="${index}" data-action="showVoucher">
+				<span class="btn btn-small btn-link block p-0 h6" data-index="${index}" data-action="showVoucher">
 					${value.referencia}
 				</span>
 			</div>

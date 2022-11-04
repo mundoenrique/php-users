@@ -161,7 +161,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response->data->listaTransferenciasRealizadas;
+				$this->response->data = $response->listaTransferenciasRealizadas;
 				break;
 
 			case -150:
