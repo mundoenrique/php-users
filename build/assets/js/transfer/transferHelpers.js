@@ -939,10 +939,6 @@ $(function () {
 				text: lang.GEN_BTN_ACCEPT,
 				action: "none",
 			},
-			btn2: {
-				text: lang.GEN_BTN_CANCEL,
-				action: "destroy",
-			},
 		};
 
 		if (!transferResult.dataTransaccion.terceroAfiliado) {
