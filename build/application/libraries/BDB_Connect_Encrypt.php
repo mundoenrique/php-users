@@ -29,6 +29,10 @@ class BDB_Connect_Encrypt
 	{
 		log_message('INFO', 'NOVO BDB_Connect_Encrypt: encode Method Initialized');
 
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
+
 		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
 
 		if ($model !== 'REMOTE_ADDR') {
@@ -58,6 +62,11 @@ class BDB_Connect_Encrypt
 	public function decode($cryptData, $userName, $model)
 	{
 		log_message('INFO', 'NOVO BDB_Connect_Encrypt: decode Method Initialized');
+
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
+
 		$data = base64_decode($cryptData);
 
 		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
