@@ -6,7 +6,7 @@ var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
 var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
 var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
 var porcentajeComision, dobleAutenticacion, totalComision, monto;
-var transferData, transferResult;
+var transferData, transferResult, historyData, currentVaucherData;
 
 $(function () {
 	var operationType = $("#transferView").attr("operation-type");
@@ -97,12 +97,11 @@ $(function () {
 		e.preventDefault();
 		$("#transferRecord").hide();
 		$("#searchAffiliate").hide();
-		$("#no-moves").hide();
+		$("#results no-moves").hide();
 		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
 		where = "GetAffiliations";
 		data = { operationType: operationType, ...cardData };
-		data = { operationType: operationType };
 
 		callNovoCore(who, where, data, function (response) {
 			$("#pre-loader").hide();
@@ -129,6 +128,98 @@ $(function () {
 					break;
 			}
 		});
+	});
+
+	// Carga tabla historial
+	$("#history").on("click", function (e) {
+		e.preventDefault();
+		var today = new Date();
+		var mm = today.getMonth() + 1;
+		var yyyy = today.getFullYear();
+		$("#historyView #results").hide();
+		$("#historyView #no-moves").hide();
+		$("#pre-loader").fadeIn(700, "linear");
+
+		if (mm < 10) {
+			mm = "0" + mm;
+		}
+
+		who = "Transfer";
+		where = "History";
+		data = {
+			operationType: operationType,
+			filterMonth: mm,
+			filterYear: yyyy,
+			...cardData,
+		};
+
+		callNovoCore(who, where, data, function (response) {
+			switch (response.code) {
+				case 0:
+					if (response.data.length > 0) {
+						setHistoryDataTable(response.data);
+					} else {
+						$("#historyView #no-moves").fadeIn(700, "linear");
+					}
+					break;
+				case 1:
+					$("#historyView #no-moves").fadeIn(700, "linear");
+					break;
+				default:
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+					break;
+			}
+			$("#pre-loader").hide();
+		});
+	});
+
+	$("#historySearch").on("click", function (e) {
+		e.preventDefault();
+		$("#historyView #results").hide();
+		$("#historyView #no-moves").hide();
+
+		form = $("#historyForm");
+		validateForms(form);
+
+		if (form.valid()) {
+			$("#pre-loader").fadeIn(700, "linear");
+			who = "Transfer";
+			where = "History";
+			data = {
+				operationType: operationType,
+				...getDataForm(form),
+				...cardData,
+			};
+
+			callNovoCore(who, where, data, function (response) {
+				switch (response.code) {
+					case 0:
+						if (response.data.length > 0) {
+							setHistoryDataTable(response.data);
+						} else {
+							$("#historyView #no-moves").fadeIn(700, "linear");
+						}
+						break;
+					case 1:
+						$("#historyView #no-moves").fadeIn(700, "linear");
+						break;
+					default:
+						appMessages(
+							response.title,
+							response.msg,
+							response.icon,
+							response.modalBtn
+						);
+						break;
+				}
+				$("#pre-loader").hide();
+			});
+		}
 	});
 
 	// Al hacer click en Nueva afiliación
@@ -297,7 +388,8 @@ $(function () {
 	$("#system-info").on("click", ".confirm-transfer", function (e) {
 		e.preventDefault();
 		who = "Transfer";
-		where = operationType == "PMV" ? "MobilePayment" : "Transfer";
+		where =
+			operationType == "PMV" ? "MobilePayment" : "Transfer" + operationType;
 		data = {
 			operationType: operationType,
 			...transferData,
@@ -365,7 +457,6 @@ $(function () {
 		e.preventDefault();
 		$(this).html(loader).prop("disabled", true);
 		$("#cancel").prop("disabled", true);
-		console.log(transferResult);
 
 		var dataRequest = {
 			P2P: {
@@ -595,6 +686,38 @@ $(function () {
 			.prop("disabled", false);
 	}
 
+	function setHistoryDataTable(data) {
+		var li, row;
+		historyData = data;
+		$("#movementsList").html("");
+
+		data.forEach((value, index) => {
+			li = $("<li></li>").addClass(
+				"feed-item feed-expense flex py-2 items-center"
+			);
+
+			row = `<div class="flex px-2 flex-column items-center feed-date">
+				<span class="h5">${value.fechaTransferencia}</span>
+			</div>
+			<div class="flex px-2 flex-column mr-auto">
+				<span class="h5 semibold feed-product">${value.beneficiario}${
+				value.concepto != "" ? "		|		" + value.concepto : ""
+			}</span>
+				<span class="btn btn-small btn-link p-0 h6" data-index="${index}" data-action="showVoucher">
+					${value.referencia}
+				</span>
+			</div>
+			<span class="px-2 feed-amount items-center">${
+				lang.CONF_CURRENCY + " " + numberToCurrency(value.montoTransferencia)
+			}</span>`;
+
+			li.html(row);
+			$("#movementsList").append(li);
+		});
+
+		$("#historyView #results").fadeIn(700, "linear");
+	}
+
 	function showManageAffiliateView(action) {
 		if (action == "create") {
 			$("#manageAffiliate")[0].reset();
@@ -778,45 +901,14 @@ $(function () {
 		}
 	}
 
-	$("#modalMovementsRef").on("click", function (e) {
-		modalBtn = {
-			btn1: {
-				text: lang.GEN_BTN_ACCEPT,
-				action: "destroy",
-			},
-		};
-
-		inputModal = '<div class="flex flex-column">';
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_REFERENCE +
-			": 119112055118</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_BENEFICIARY +
-			": Luis Vargas</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_BANK +
-			": Banco Mercantil</span>";
-		inputModal +=
-			'<span class="list-inline-item">' + lang.GEN_DNI + ": V10653987</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_NUMBER_PHONE +
-			":  04241234567</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_AMOUNT_DETAILS +
-			": Bs 700,00</span>";
-		inputModal +=
-			'<span class="list-inline-item">' +
-			lang.TRANSF_CONCEPT +
-			": Pago Alquiler</span>";
-		inputModal += "</div>";
-
-		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
-	});
+	$("#movementsList").on(
+		"click",
+		"span[data-action='showVoucher']",
+		function () {
+			currentVaucherData = historyData[$(this).data("index")];
+			buildVaucherModal();
+		}
+	);
 
 	function setTransferParameters(parameters) {
 		montoMaxOperaciones = parseFloat(parameters.montoMaxOperaciones);
@@ -937,12 +1029,13 @@ $(function () {
 		modalBtn = {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
-				action: "none",
+				action: "destroy",
 			},
 		};
 
 		if (!transferResult.dataTransaccion.terceroAfiliado) {
 			$("#accept").addClass("want-save-beneficiary");
+			modalBtn.btn1.action = "none";
 		}
 
 		// dataValue: label
@@ -1000,8 +1093,81 @@ $(function () {
 		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
 	}
 
+	function buildVaucherModal() {
+		var setObjectResult, objectResult, resultValueObject;
+		var span, resultValue, inputModal;
+
+		modalBtn = {
+			btn1: {
+				text: lang.GEN_BTN_ACCEPT,
+				action: "destroy",
+			},
+		};
+
+		// dataValue: label
+		setObjectResult = {
+			P2P: {
+				referencia: lang.TRANSF_REFERENCE,
+				beneficiario: lang.TRANSF_BENEFICIARY,
+				banco: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				tarjetaDestino: lang.TRANSF_DESTINATION_CARD,
+				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
+				concepto: lang.TRANSF_CONCEPT,
+				fechaTransferencia: lang.TRANSF_DATE,
+			},
+			P2T: {
+				referencia: lang.TRANSF_REFERENCE,
+				beneficiario: lang.TRANSF_BENEFICIARY,
+				banco: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				cuentaDestino: lang.TRANSF_ACCOUNT_NUMBER,
+				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
+				concepto: lang.TRANSF_CONCEPT,
+				fechaTransferencia: lang.TRANSF_DATE,
+			},
+			PMV: {
+				referencia: lang.TRANSF_REFERENCE,
+				beneficiario: lang.TRANSF_BENEFICIARY,
+				banco: lang.TRANSF_BANK,
+				dni: lang.GEN_DNI,
+				telefonoDestino: lang.GEN_PHONE_MOBILE,
+				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
+				concepto: lang.TRANSF_CONCEPT,
+				fechaTransferencia: lang.TRANSF_DATE,
+			},
+		};
+
+		resultValueObject = {
+			dni: "",
+			montoTransferencia:
+				lang.CONF_CURRENCY +
+				" " +
+				numberToCurrency(currentVaucherData.montoTransferencia),
+		};
+
+		objectResult = setObjectResult[operationType];
+		inputModal = $("<div></div>").addClass("flex flex-column");
+
+		Object.entries(objectResult).forEach(([name, text]) => {
+			resultValue = resultValueObject[name] ?? currentVaucherData[name];
+			span = $("<span></span>")
+				.addClass("list-inline-item")
+				.text(text + ": " + resultValue);
+			inputModal.append(span);
+		});
+
+		appMessages(
+			lang.TRANSF_PAYMENT_VOUCHER,
+			inputModal,
+			lang.CONF_ICON_INFO,
+			modalBtn
+		);
+	}
+
 	function numberToCurrency(number) {
-		return number.toFixed(2).replace(".", ",");
+		var num = typeof number == "string" ? Number(number) : number;
+		return num.toFixed(2).replace(".", ",");
 	}
 
 	function currencyToNumber(currency) {

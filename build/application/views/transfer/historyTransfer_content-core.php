@@ -4,19 +4,21 @@
     <h4 class="line-text semibold primary"><?= lang('TRANSF_HISTORY') ?></h4>
     <div class="w-100">
       <div class="mx-auto">
-        <div class="row pl-2 mt-3">
-          <label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
-          <div class="form-group col-3 px-1">
-            <input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text"
-              placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
-            <div id='error' class="help-block"></div>
-          </div>
-          <div class="flex items-center">
-            <button id="historySearch" class="btn btn-small btn-rounded-right btn-primary mb-3">
-              <span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
-            </button>
-          </div>
-        </div>
+				<form id="historyForm">
+        	<div class="row pl-2 mt-3">
+						<label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
+						<div class="form-group col-3 px-1">
+							<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text"
+								placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>">
+							<div id='error' class="help-block"></div>
+						</div>
+						<div class="flex items-center">
+							<button id="historySearch" class="btn btn-small btn-rounded-right btn-primary mb-3">
+								<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
+							</button>
+						</div>
+					</div>
+				</form>
         <div class="line-text my-2"></div>
         <div id="pre-loader" class="w-100 hide">
           <div class="mt-5 mb-4 pt-5 mx-auto flex justify-center">
@@ -25,18 +27,6 @@
         </div>
         <div id="results" class="mt-1 justify-center hide-out hide">
           <ul id="movementsList" class="feed fade-in mt-3 pl-0 easyPaginateList">
-            <li class="feed-item feed-expense flex py-2 items-center">
-              <div class="flex px-2 flex-column items-center feed-date">
-                <span class="h5">25 Oct 2022</span>
-              </div>
-              <div class="flex px-2 flex-column mr-auto">
-                <span class="h5 semibold feed-product">Luis Vargas</span>
-                <span id="modalMovementsRef" class="btn btn-small btn-link p-0 h6">
-									119112055118
-								</span>
-              </div>
-              <span class="px-2 feed-amount items-center">- $ 700,00</span>
-            </li>
           </ul>
         </div>
         <div id="no-moves" class="hide">

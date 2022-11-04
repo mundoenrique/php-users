@@ -58,6 +58,7 @@ $lang['TRANSF_UPDATE_OPER_KEY'] = 'The operations key was updated successfully.'
 $lang['TRANSF_SUCCESS_CREATED_OPER_KEY'] = 'The operations key has been created successfully.';
 $lang['TRANSF_SUMMARY'] = 'Transfer summary';
 $lang['TRANSF_TRANSFER_RESULTS'] = 'Transfer results';
+$lang['TRANSF_PAYMENT_VOUCHER'] = 'Proof of payment';
 $lang['TRANSF_REFERENCE'] = 'Reference';
 $lang['TRANSF_ACCOUNT_NUMBER'] = 'Account number';
 $lang['TRANSF_AMOUNT_DETAILS'] = 'Amount';
