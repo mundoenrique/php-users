@@ -439,7 +439,9 @@ $(function () {
 
 			if (response.code == 0) {
 				transferResult = response.data;
+				getBalance();
 				buildTransferResultModal();
+
 			} else {
 				appMessages(
 					response.title,
