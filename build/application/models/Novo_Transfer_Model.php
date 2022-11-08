@@ -190,6 +190,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->icon = lang('CONF_ICON_SUCCESS');
 				$this->response->title = lang('TRANSF_RESULTS');
 				$this->response->data = $response;
+				$this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
