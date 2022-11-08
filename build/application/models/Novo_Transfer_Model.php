@@ -87,7 +87,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				break;
 			case 51:
 			case 31267:
-			case 202017:
+			case 201017:
 			case 202017:
 			case 251033:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
@@ -136,6 +136,16 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->msg = lang('TRANSF_PHONE_NUMBER_NOT_MATCH');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
+			case 201008:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_BANK_BLOCKED_ACCOUNT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+			case 901100:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_DOC_TYPE_NOT_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			default:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
@@ -163,12 +173,12 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->tipoOpe = 'P2P';
 		$this->dataRequest->idUsuario = $this->session->userName;
 		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
-		// $this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
-		// $this->dataRequest->idExtPer = $dataRequest->idDocument;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
 		$this->dataRequest->ctaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->monto = $dataRequest->amount;
 		$this->dataRequest->descripcion = $dataRequest->concept;
-		// $this->dataRequest->email = $dataRequest->beneficiaryEmail;
+		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
 		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
