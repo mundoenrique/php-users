@@ -1079,7 +1079,7 @@ $(function () {
 				beneficiary: lang.TRANSF_BENEFICIARY,
 				dni: lang.GEN_DNI,
 				destinationCard: lang.TRANSF_DESTINATION_CARD,
-				amount: lang.TRANSF_AMOUNT,
+				amount: lang.TRANSF_AMOUNT_DETAILS,
 				concept: lang.TRANSF_CONCEPT,
 				date: lang.TRANSF_DATE,
 			},
@@ -1089,7 +1089,7 @@ $(function () {
 				bank: lang.TRANSF_BANK,
 				dni: lang.GEN_DNI,
 				destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
-				amount: lang.TRANSF_AMOUNT,
+				amount: lang.TRANSF_AMOUNT_DETAILS,
 				concept: lang.TRANSF_CONCEPT,
 				date: lang.TRANSF_DATE,
 			},
@@ -1113,6 +1113,7 @@ $(function () {
 			dni: transferResult.idExtPer,
 			amount: lang.CONF_CURRENCY + " " + transferData.amount,
 			date: transferResult.logAccesoObject.dttimesstamp,
+			destinationCard: transferResult.ctaDestinoConMascara
 		};
 
 		objectResult = setObjectResult[operationType];
@@ -1145,7 +1146,6 @@ $(function () {
 			P2P: {
 				referencia: lang.TRANSF_REFERENCE,
 				beneficiario: lang.TRANSF_BENEFICIARY,
-				banco: lang.TRANSF_BANK,
 				identificacion: lang.GEN_DNI,
 				tarjetaDestino: lang.TRANSF_DESTINATION_CARD,
 				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
