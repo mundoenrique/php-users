@@ -51,8 +51,8 @@ $(function () {
 	});
 
 	$("#filterHistoryDate").datepicker({
-		yearRange: '-90:' + currentDate.getFullYear(),
-		minDate: '-90y',
+		yearRange: "-90:" + currentDate.getFullYear(),
+		minDate: "-90y",
 		maxDate: currentDate.getFullYear(),
 		dateFormat: "mm/yy",
 		showButtonPanel: true,
@@ -439,7 +439,9 @@ $(function () {
 
 			if (response.code == 0) {
 				transferResult = response.data;
+				getBalance();
 				buildTransferResultModal();
+
 			} else {
 				appMessages(
 					response.title,
@@ -1134,7 +1136,7 @@ $(function () {
 				referencia: lang.TRANSF_REFERENCE,
 				beneficiario: lang.TRANSF_BENEFICIARY,
 				banco: lang.TRANSF_BANK,
-				dni: lang.GEN_DNI,
+				identificacion: lang.GEN_DNI,
 				tarjetaDestino: lang.TRANSF_DESTINATION_CARD,
 				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 				concepto: lang.TRANSF_CONCEPT,
@@ -1144,7 +1146,7 @@ $(function () {
 				referencia: lang.TRANSF_REFERENCE,
 				beneficiario: lang.TRANSF_BENEFICIARY,
 				banco: lang.TRANSF_BANK,
-				dni: lang.GEN_DNI,
+				identificacion: lang.GEN_DNI,
 				cuentaDestino: lang.TRANSF_ACCOUNT_NUMBER,
 				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 				concepto: lang.TRANSF_CONCEPT,
@@ -1154,7 +1156,7 @@ $(function () {
 				referencia: lang.TRANSF_REFERENCE,
 				beneficiario: lang.TRANSF_BENEFICIARY,
 				banco: lang.TRANSF_BANK,
-				dni: lang.GEN_DNI,
+				identificacion: lang.GEN_DNI,
 				telefonoDestino: lang.GEN_PHONE_MOBILE,
 				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 				concepto: lang.TRANSF_CONCEPT,
@@ -1163,7 +1165,6 @@ $(function () {
 		};
 
 		resultValueObject = {
-			dni: "",
 			montoTransferencia:
 				lang.CONF_CURRENCY +
 				" " +
