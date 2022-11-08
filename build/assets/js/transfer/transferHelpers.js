@@ -712,7 +712,7 @@ $(function () {
 	}
 
 	function setHistoryDataTable(data) {
-		var li, row;
+		var li, ref, row;
 		historyData = data;
 		$("#movementsList").html("");
 
@@ -720,17 +720,21 @@ $(function () {
 			li = $("<li></li>").addClass(
 				"feed-item feed-expense flex py-2 items-center"
 			);
+			ref =
+				value.estatusOperacion == "1"
+					? `<span class="block p-0 h6">${lang.TRANSF_FAILED_OPERATION}</span>`
+					: `<span class="btn btn-small btn-link block p-0 h6" data-index="${index}" data-action="showVoucher">
+						${value.referencia}
+					</span>`;
 
 			row = `<div class="flex px-2 flex-column items-center feed-date">
 				<span class="h5">${value.fechaTransferencia}</span>
 			</div>
 			<div class="flex px-2 flex-column mr-auto">
-				<span class="h5 semibold feed-product">${value.beneficiario}${
-				value.concepto != "" ? "		|		" + value.concepto : ""
-			}</span>
-				<span class="btn btn-small btn-link block p-0 h6" data-index="${index}" data-action="showVoucher">
-					${value.referencia}
+				<span class="h5 semibold feed-product">
+					${value.beneficiario}${value.concepto != "" ? "		|		" + value.concepto : ""}
 				</span>
+				${ref}
 			</div>
 			<span class="px-2 feed-amount items-center">${
 				lang.CONF_CURRENCY + " " + numberToCurrency(value.montoTransferencia)
@@ -1049,7 +1053,12 @@ $(function () {
 
 	function buildTransferResultModal() {
 		var setObjectResult, objectResult, resultValueObject;
-		var span, resultValue, inputModal;
+		var span, resultValue, inputModal, thirdPartyAffiliate;
+
+		thirdPartyAffiliate =
+			operationType == "PMV"
+				? transferResult.dataTransaccion.terceroAfiliado
+				: transferResult.id_afil_terceros != "";
 
 		modalBtn = {
 			btn1: {
@@ -1058,7 +1067,7 @@ $(function () {
 			},
 		};
 
-		if (!transferResult.dataTransaccion.terceroAfiliado) {
+		if (!thirdPartyAffiliate) {
 			$("#accept").addClass("want-save-beneficiary");
 			modalBtn.btn1.action = "none";
 		}
@@ -1095,9 +1104,11 @@ $(function () {
 				date: lang.TRANSF_DATE,
 			},
 		};
-
 		resultValueObject = {
-			reference: transferResult.dataTransaccion.codConfirmacion,
+			reference:
+				operationType == "PMV"
+					? transferResult.dataTransaccion.codConfirmacion
+					: transferResult.dataTransaccion.referencia,
 			bank: $("#bank option:selected").text(),
 			dni: transferResult.idExtPer,
 			amount: lang.CONF_CURRENCY + " " + transferData.amount,
