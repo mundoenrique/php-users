@@ -251,6 +251,5 @@ $lang['CONF_MFA_VALIDATE_OTP'] = 'validate';
 $lang['CONF_TRANSFER_DOCUMENT_TYPE'] = [
 	'V' => 'V',
 	'E' => 'E',
-	'J' => 'J',
-	'G' => 'G'
+	'P' => 'P',
 ];

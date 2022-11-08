@@ -15,3 +15,4 @@ $lang['CONF_MOBILE_PAYMENT'] = 'ON';
 $lang['CONF_BETWEEN_CARDS'] = 'ON';
 $lang['CONF_SERVICES'] = 'OFF';
 $lang['CONF_CUSTOMER_SUPPORT'] = 'OFF';
+$lang['CONF_SIGNIN_IMG'] = 'ON';

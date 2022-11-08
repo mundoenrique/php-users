@@ -204,6 +204,7 @@ class Verify_Access
 			case 'changeOperationKey':
 			case 'transferP2P':
 			case 'transferP2T':
+			case 'history':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
 				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S';
