@@ -290,7 +290,9 @@ table.dataTable.display tbody tr:nth-child(2n+0) {
 }
 
 .img-log{
-  margin-left: 10%;
+	margin-left: 10%;
+	width: 636.3px;
+	height: 475.4px;
   z-index: 1;
 }
 
