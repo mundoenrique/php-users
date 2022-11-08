@@ -1147,7 +1147,7 @@ $(function () {
 				referencia: lang.TRANSF_REFERENCE,
 				beneficiario: lang.TRANSF_BENEFICIARY,
 				identificacion: lang.GEN_DNI,
-				tarjetaDestino: lang.TRANSF_DESTINATION_CARD,
+				tarjetaDestinoMascara: lang.TRANSF_DESTINATION_CARD,
 				montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 				concepto: lang.TRANSF_CONCEPT,
 				fechaTransferencia: lang.TRANSF_DATE,
