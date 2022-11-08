@@ -128,7 +128,6 @@ $(function () {
 		data = { operationType: operationType, ...cardData };
 
 		callNovoCore(who, where, data, function (response) {
-			$("#pre-loader").hide();
 			switch (response.code) {
 				case 0:
 					let affiliations =
@@ -151,6 +150,7 @@ $(function () {
 					);
 					break;
 			}
+			$("#pre-loader").hide();
 		});
 	});
 
@@ -162,7 +162,7 @@ $(function () {
 		var yyyy = today.getFullYear();
 		$("#historyView #results").hide();
 		$("#historyView #no-moves").hide();
-		$("#pre-loader").fadeIn(700, "linear");
+		$("#historyView #pre-loader").fadeIn(700, "linear");
 
 		if (mm < 10) {
 			mm = "0" + mm;
@@ -198,7 +198,7 @@ $(function () {
 					);
 					break;
 			}
-			$("#pre-loader").hide();
+			$("#historyView #pre-loader").hide();
 		});
 	});
 
@@ -441,7 +441,6 @@ $(function () {
 				transferResult = response.data;
 				getBalance();
 				buildTransferResultModal();
-
 			} else {
 				appMessages(
 					response.title,
