@@ -80,10 +80,11 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->data = $response;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
-			case -150:
+			case -344:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 51:
 			case 31267:
 			case 202017:
@@ -92,40 +93,49 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_BANK_INSUFFICIENT_FUNDS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 13:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_BANK_INVALID_AMOUNT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 14:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_BENEFICIARY_PHONE_NUMBER');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 80:
 			case 101042:
 			case 701114:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_WRONG_ID');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 101029:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_PHONE_NUMBER_ERROR');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 161632:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_UNAFFILIATED_PHONE_NUMBER');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 103000:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_CLIENT_NOT_EXIST');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 1887809:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_EXCEED_DAILY_LIMIT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case 56:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_PHONE_NUMBER_NOT_MATCH');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			default:
 				$this->response->title = lang('GEN_MENU_TRANSFERS');
 				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
