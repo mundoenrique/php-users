@@ -250,6 +250,4 @@ $lang['CONF_TRANSFER_DOCUMENT_TYPE'] = [
 	'V' => 'V',
 	'E' => 'E',
 	'P' => 'P',
-	'J' => 'J',
-	'G' => 'G',
 ];
