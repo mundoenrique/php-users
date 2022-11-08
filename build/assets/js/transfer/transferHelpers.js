@@ -718,7 +718,7 @@ $(function () {
 
 		data.forEach((value, index) => {
 			li = $("<li></li>").addClass(
-				"feed-item flex py-2 items-center"
+				`feed-item ${value.estatusOperacion == "1" ? "": "feed-expense"} flex py-2 items-center`
 			);
 			ref =
 				value.estatusOperacion == "1"
