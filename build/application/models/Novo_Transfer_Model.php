@@ -41,7 +41,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		return $this->responseToTheView('CallWs_GetBanks');
 	}
 	/**
-	 * @info Método para realizar un pago movil
+	 * @info Método para realizar un pago móvil
 	 * @author Jhonatan Llerena
 	 * @date October 24th, 2022
 	 */
@@ -51,8 +51,8 @@ class Novo_Transfer_Model extends NOVO_Model
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 
-		$this->dataAccessLog->function = 'Pago movil';
-		$this->dataAccessLog->operation = 'Procesar pago movil';
+		$this->dataAccessLog->function = 'Pago móvil';
+		$this->dataAccessLog->operation = 'Procesar pago móvil';
 		$this->dataRequest->idOperation = '250';
 
 
@@ -80,10 +80,55 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->data = $response;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
+			case -150:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 51:
+			case 31267:
+			case 202017:
+			case 202017:
+			case 251033:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_BANK_INSUFFICIENT_FUNDS');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 13:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_BANK_INVALID_AMOUNT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 14:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_BENEFICIARY_PHONE_NUMBER');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 80:
+			case 101042:
+			case 701114:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_WRONG_ID');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 101029:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_PHONE_NUMBER_ERROR');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 161632:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_UNAFFILIATED_PHONE_NUMBER');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 103000:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_CLIENT_NOT_EXIST');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 1887809:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_EXCEED_DAILY_LIMIT');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+			case 56:
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_PHONE_NUMBER_NOT_MATCH');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			default:
-				$this->response->code = 1;
-				$this->response->title = lang('TRANSF_RESULTS');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
