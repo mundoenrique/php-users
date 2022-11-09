@@ -79,5 +79,4 @@ $lang['TRANSF_EXCEED_DAILY_LIMIT'] = 'Excede el limite diario.';
 $lang['TRANSF_PHONE_NUMBER_NOT_MATCH'] = 'El número de teléfono no coincide.';
 $lang['TRANSF_BANK_BLOCKED_ACCOUNT'] = 'Cuenta Bloqueada.';
 $lang['TRANSF_DOC_TYPE_NOT_EXIST'] = 'No existe tipo documento.';
-$lang['TRANSF_DOC_TYPE_NOT_EXIST'] = 'No existe tipo documento.';
 $lang['TRANSF_FAILED_OPERATION'] = 'Fallida';
