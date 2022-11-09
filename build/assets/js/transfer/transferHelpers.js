@@ -65,8 +65,8 @@ $(function () {
 			);
 			$(this).focus().blur();
 			var monthYear = $("#filterHistoryDate").val().split("/");
-			$("#filterMonthHistory").val(monthYear[0]);
-			$("#filterYearHistory").val(monthYear[1]);
+			$("#historyForm #filterMonth").val(monthYear[0]);
+			$("#historyForm #filterYear").val(monthYear[1]);
 		},
 
 		beforeShow: function (input, inst) {
@@ -206,6 +206,7 @@ $(function () {
 		e.preventDefault();
 		$("#historyView #results").hide();
 		$("#historyView #no-moves").hide();
+		$("#historyView #pre-loader").fadeIn(700, "linear");
 
 		form = $("#historyForm");
 		validateForms(form);
@@ -241,7 +242,7 @@ $(function () {
 						);
 						break;
 				}
-				$("#pre-loader").hide();
+				$("#historyView #pre-loader").hide();
 			});
 		}
 	});
@@ -695,6 +696,9 @@ $(function () {
 		var li;
 		affiliationsList = data;
 
+		li = $("<li></li>").val("").text(lang.TRANSF_WAITING_BANKS);
+		$("#affiliationList").append(li);
+
 		data.forEach((value, index) => {
 			li = $("<li></li>")
 				.val(index)
@@ -712,14 +716,15 @@ $(function () {
 	}
 
 	function setHistoryDataTable(data) {
-		var li, ref, row;
+		var li, className, ref, row;
 		historyData = data;
 		$("#movementsList").html("");
 
 		data.forEach((value, index) => {
-			li = $("<li></li>").addClass(
-				`feed-item ${value.estatusOperacion == "1" ? "": "feed-expense"} flex py-2 items-center`
-			);
+			className = `feed-item ${
+				value.estatusOperacion == "1" ? "" : "feed-expense"
+			} flex py-2 items-center`;
+			li = $("<li></li>").addClass(className);
 			ref =
 				value.estatusOperacion == "1"
 					? `<span class="block p-0 h6">${lang.TRANSF_FAILED_OPERATION}</span>`
@@ -1113,7 +1118,7 @@ $(function () {
 			dni: transferResult.idExtPer,
 			amount: lang.CONF_CURRENCY + " " + transferData.amount,
 			date: transferResult.logAccesoObject.dttimesstamp,
-			destinationCard: transferResult.ctaDestinoConMascara
+			destinationCard: transferResult.ctaDestinoConMascara,
 		};
 
 		objectResult = setObjectResult[operationType];

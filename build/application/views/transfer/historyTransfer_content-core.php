@@ -5,8 +5,8 @@
     <div class="w-100">
       <div class="mx-auto">
 				<form id="historyForm">
-					<input type="hidden" id="filterMonthHistory" name="filterMonthHistory" value="0">
-					<input type="hidden" id="filterYearHistory" name="filterYearHistory" value="0">
+					<input type="hidden" id="filterMonth" name="filterMonth">
+					<input type="hidden" id="filterYear" name="filterYear">
         	<div class="row pl-2 mt-3">
 						<label class="mt-1 regular" for="initDateFilter"><?= lang('TRANSF_SHOW'); ?></label>
 						<div class="form-group col-3 px-1">
