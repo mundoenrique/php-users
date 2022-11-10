@@ -79,6 +79,9 @@ $(function () {
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
 		getBalance();
+		resetForms($("#toTransferView form"));
+		resetForms($("#manageAffiliateView form"));
+		resetForms($("#historyView form"));
 		showTransferView();
 	});
 
@@ -103,12 +106,16 @@ $(function () {
 	$(liOptions).on("click", function (e) {
 		e.preventDefault();
 		var liOptionId = e.currentTarget.id;
+		var currentView = $("#" + liOptionId + "View");
 		$(liOptions).removeClass("active");
 		$(cardData ? liOptions : "#affiliations").removeClass("no-pointer");
 		$(this).addClass("active no-pointer");
 		$(".transfer-operation").hide();
 		$("#manageAffiliateView").hide();
-		$("#" + liOptionId + "View").fadeIn(700, "linear");
+		resetForms($("#toTransferView form"));
+		resetForms($("#manageAffiliateView form"));
+		resetForms($("#historyView form"));
+		currentView.fadeIn(700, "linear");
 	});
 
 	// Mostrar vista de Transferir/Realizar pago
@@ -813,6 +820,7 @@ function showManageAffiliateView(action) {
 function showTransferView() {
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
+	$("#manageAffiliateView").hide();
 	$("#affiliationsView").css("display", "none");
 	$("#toTransferView").show();
 
