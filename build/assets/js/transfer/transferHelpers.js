@@ -1053,7 +1053,12 @@ $(function () {
 			inputModal.append(span);
 		});
 
-		appMessages(lang.TRANSF_SUMMARY, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(
+			lang.TRANSF_OPERATION_SUMMARY,
+			inputModal,
+			lang.CONF_ICON_INFO,
+			modalBtn
+		);
 	}
 
 	function buildTransferResultModal() {
@@ -1132,7 +1137,12 @@ $(function () {
 			inputModal.append(span);
 		});
 
-		appMessages(lang.TRANSF_RESULTS, inputModal, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(
+			lang.TRANSF_OPERATION_RESULT,
+			inputModal,
+			lang.CONF_ICON_INFO,
+			modalBtn
+		);
 	}
 
 	function buildVaucherModal() {

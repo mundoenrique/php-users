@@ -75,81 +75,43 @@ class Novo_Transfer_Model extends NOVO_Model
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = lang('TRANSF_RESULTS');
 				$this->response->data = $response;
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case -344:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
 				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
+			case -322:
+			case 13:
 			case 51:
 			case 31267:
 			case 201017:
 			case 202017:
 			case 251033:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_BANK_INSUFFICIENT_FUNDS');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 13:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_BANK_INVALID_AMOUNT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 14:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_BENEFICIARY_PHONE_NUMBER');
+			case 201008:
+			case 1887809:
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case 80:
 			case 101042:
-			case 701114:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_WRONG_ID');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 101029:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_PHONE_NUMBER_ERROR');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 161632:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_UNAFFILIATED_PHONE_NUMBER');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
 			case 103000:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_CLIENT_NOT_EXIST');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 1887809:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_EXCEED_DAILY_LIMIT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 56:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_PHONE_NUMBER_NOT_MATCH');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case 201008:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_BANK_BLOCKED_ACCOUNT');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
+			case 701114:
 			case 901100:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_DOC_TYPE_NOT_EXIST');
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = lang('TRANSF_VERIFY_IDENTITY_DOCUMENT');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
-			default:
-				$this->response->title = lang('GEN_MENU_TRANSFERS');
-				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
+			case 14:
+			case 56:
+			case 101029:
+			case 161632:
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = lang('TRANSF_VERIFY_PHONE_OR_BANK');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 		}
 
 		return $this->responseToTheView('callWs_MobilePayment');
@@ -187,16 +149,17 @@ class Novo_Transfer_Model extends NOVO_Model
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
-				$this->response->title = lang('TRANSF_RESULTS');
 				$this->response->data = $response;
 				$this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
+				break;
+			case -344:
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
-			default:
-				$this->response->code = 1;
-				$this->response->title = lang('TRANSF_RESULTS');
-				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
+			case -322:
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
