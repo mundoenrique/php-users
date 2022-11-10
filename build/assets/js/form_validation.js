@@ -1,4 +1,6 @@
 'use strict'
+var validator;
+
 function validateForms(form) {
 	formInputTrim(form);
 
@@ -48,7 +50,7 @@ function validateForms(form) {
 
 	jQuery.validator.setDefaults(defaults);
 
-	form.validate({
+	validator = form.validate({
 		focusInvalid: false,
 		rules: {
 			"userName": { required: true, pattern: alphanumunder },
