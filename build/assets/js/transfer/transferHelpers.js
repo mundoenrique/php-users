@@ -414,6 +414,11 @@ $(function () {
 		setFieldNames("transfer");
 	});
 
+	// Click en Borrar (form Transferencia|Pago)
+	$("#deleteBtn").on("click", function (e) {
+		cleanDirectory();
+	});
+
 	// Submit en formulario de Transferencia y mostrar el resumen
 	$("#transferBtn").on("click", function (e) {
 		e.preventDefault();
@@ -715,9 +720,6 @@ function setAffiliateSelectSearch(data) {
 	var li;
 	affiliationsList = data;
 
-	li = $("<li></li>").val("").text(lang.TRANSF_WAITING_BANKS);
-	$("#affiliationList").append(li);
-
 	data.forEach((value, index) => {
 		li = $("<li></li>")
 			.val(index)
@@ -818,6 +820,7 @@ function showManageAffiliateView(action) {
 }
 
 function showTransferView() {
+	cleanDirectory();
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
 	$("#manageAffiliateView").hide();
@@ -1218,6 +1221,12 @@ function buildVaucherModal() {
 		lang.CONF_ICON_INFO,
 		modalBtn
 	);
+}
+
+function cleanDirectory() {
+	currentAffiliaton = null;
+	$("#affiliationList li").removeClass("active");
+	$("#directoryValue, #directory").val("");
 }
 
 function numberToCurrency(number) {
