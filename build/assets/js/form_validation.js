@@ -1,4 +1,6 @@
 'use strict'
+var validator;
+
 function validateForms(form) {
 	formInputTrim(form);
 
@@ -48,7 +50,7 @@ function validateForms(form) {
 
 	jQuery.validator.setDefaults(defaults);
 
-	form.validate({
+	validator = form.validate({
 		focusInvalid: false,
 		rules: {
 			"userName": { required: true, pattern: alphanumunder },
@@ -148,7 +150,7 @@ function validateForms(form) {
 			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
 			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
 			"beneficiaryEmail": { pattern: emailValid },
-			"amount": { required: true, pattern: floatAmount, maxlength: 9 },
+			"amount": { required: true, pattern: floatAmount, maxlength: 16 },
 			"concept": { pattern: alphanumunder },
 			"expDateCta": { required: true, pattern: date.my },
 			"currentPin": { required: true, pattern: numeric, exactLength: 4 },
@@ -288,6 +290,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ACCOUNT_NUMBER,
 				exactLength: lang.VALIDATE_ACCOUNT_NUMBER_FORMAT
 			},
+			"beneficiaryEmail": lang.VALIDATE_EMAIL,
 			"amount": lang.VALIDATE_AMOUNT,
 			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {

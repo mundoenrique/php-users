@@ -358,3 +358,17 @@ function modalDestroy(close) {
 			.off('click');
 	}
 }
+
+function resetForms(formData) {
+	if (formData) {
+		if (validator) {
+			formData.find('input, select, textarea').each(function () {
+				validator.successList.push(this); // Libera errores
+				validator.showErrors(); // Elimina los mensajes de error si están presentes
+			});
+			validator.resetForm(); // Elimina la clase de error en los campos y borrar el historial
+			validator.reset(); // Elimina todos los datos de error y éxito
+		}
+		formData[0].reset();
+	}
+}

@@ -90,7 +90,7 @@
 						</div>
 						<div class="form-group col-6 col-lg-4">
 							<label for="amount"><?= lang('TRANSF_AMOUNT') ?></label>
-							<input id="amount" name="amount" class="form-control" type="text" autocomplete="off">
+							<input id="amount" name="amount" class="form-control text-right" type="text" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-6 col-lg-4">
