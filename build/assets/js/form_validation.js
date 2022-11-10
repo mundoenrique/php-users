@@ -288,6 +288,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_ACCOUNT_NUMBER,
 				exactLength: lang.VALIDATE_ACCOUNT_NUMBER_FORMAT
 			},
+			"beneficiaryEmail": lang.VALIDATE_EMAIL,
 			"amount": lang.VALIDATE_AMOUNT,
 			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {
