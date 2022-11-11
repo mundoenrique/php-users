@@ -204,7 +204,8 @@ class NOVO_Controller extends CI_Controller {
 				"third_party/aes",
 				"aes-json-format",
 				"encrypt_decrypt",
-				"helper"
+				"helper",
+				"thirdPartyConfig"
 			];
 
 			if ($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
