@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang["USER_TERMS_TITLE"]='Terms and Conditions.';
 $lang["USER_TERMS_SUBTITLE"]='Cardholder.';
+$lang['USER_STATE'] = 'State';
+$lang['USER_CITY'] = 'City';
 $lang["USER_TERMS_CONTENT"] = '
 <div class="justify pr-3">
 <p><b> Tebca Electronic Benefit Transfer, CA and Servitebca Electronic Benefit Transfer Service, CA, </b> both companies domiciled in the city of Caracas and registered with the First Commercial Registry of the Judicial District of the Capital District and Miranda State , on August 2, 2004 and May 12, 2005 and registered under Nos. 79 and 72, Volume 128-A-Pro. and 60-A-Pro., respectively, who hereinafter, jointly or indistinctly, will be called "The Company"; The following describes the terms and conditions that govern the use and confidentiality of this electronic platform, hereinafter "The Platform":</p>
