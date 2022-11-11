@@ -310,15 +310,9 @@ class Novo_User extends NOVO_Controller {
 		writeLog('INFO', 'User: finishSession Method Initialized');
 
 		$view = 'finishSession';
+		$this->loadModel();
 
-		$callFinishSession = $this->session->has_userdata('userId') || $this->session->has_userdata('logged');
-
-		if($callFinishSession) {
-			$this->load->model('Novo_User_Model', 'finishSession');
-			$this->finishSession->callWs_FinishSession_User();
-		}
-
-		if($redirect == lang('CONF_LINK_SIGNOUT_END') && $callFinishSession) {
+		if($redirect === lang('CONF_LINK_SIGNOUT_END')) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
 			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;

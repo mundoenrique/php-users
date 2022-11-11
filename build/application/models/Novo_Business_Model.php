@@ -21,7 +21,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		writeLog('INFO', 'Business Model: UserCardsList Method Initialized');
 
-
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
 		$this->dataAccessLog->operation = 'Obtener la lista de tarjetas';
@@ -57,25 +56,30 @@ class Novo_Business_Model extends NOVO_Model {
 						switch ($cardRecord->status) {
 							case '':
 								$cardRecord->statusMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
-							break;
+								break;
+
 							case 'PB':
 								$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
-							break;
+								break;
+
 							case 'NE':
 								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
-							break;
+								break;
+
 							case '41':
 								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_LOSS');
-							break;
+								break;
+
 							case '43':
 								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_THEFT');
-							break;
+								break;
+
 							case '75':
 								$cardRecord->statusMessage = lang('GEN_LOCK_CARD_WRONG_PIN');
-							break;
+								break;
+
 							default:
 								$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
-							break;
 						}
 
 						if (isset($dataRequest->module)) {
@@ -116,12 +120,10 @@ class Novo_Business_Model extends NOVO_Model {
 					);
 					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START');
 				}
-			break;
-			default:
-				if ($this->isResponseRc != -61) {
-					$this->session->sess_destroy();
-				}
+				break;
 
+			default:
+				clearSessionsVars();
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 		}
 

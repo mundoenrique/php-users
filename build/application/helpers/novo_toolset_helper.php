@@ -85,12 +85,9 @@ if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
 		$CI =& get_instance();
 
-		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
-			if ($pos == '__ci_last_regenerate') {
-				continue;
-			}
-
-			$CI->session->unset_userdata($pos);
+		if($CI->session->has_userdata('logged') || $CI->session->has_userdata('userId')) {
+			$CI->session->unset_userdata(['logged', 'userId', 'products']);
+			$CI->session->sess_destroy();
 		}
 	}
 }
