@@ -140,14 +140,11 @@ class NOVO_Model extends CI_Model {
 			case -35:
 			case -61:
 				$this->response->msg = lang('GEN_DUPLICATED_SESSION');
-
-				if($this->session->has_userdata('logged') || $this->session->has_userdata('userId')) {
-					$this->session->sess_destroy();
-				}
+				clearSessionsVars();
 			break;
 			case 502:
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
-				$this->session->sess_destroy();
+				clearSessionsVars();
 			break;
 			case 504:
 				$this->response->msg = lang('GEN_TIMEOUT');
