@@ -510,9 +510,11 @@ $(function () {
 		var dataRequest = {
 			P2P: {
 				beneficiary: transferResult.nombreBeneficiario,
-				idDocument: transferResult.idExtPer,
-				destinationCard: transferResult.nroCuentaDestino,
-				beneficiaryEmail: transferResult.email,
+				idDocument:
+					transferResult.idExtPer ||
+					transferData.typeDocument + transferData.idNumber,
+				destinationCard: transferResult.ctaDestino,
+				beneficiaryEmail: transferResult.email || transferData.beneficiaryEmail,
 			},
 			PMV: {
 				beneficiary: transferResult.nombreBeneficiario,
@@ -1044,7 +1046,7 @@ function buildTransferSummaryModal() {
 
 	summaryValueObject = {
 		bank: $("#bank option:selected").text(),
-		dni: transferData.typeDocument + " " + transferData.idNumber,
+		dni: transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
 		commission: lang.CONF_CURRENCY + " " + numberToCurrency(commission),
 		total: lang.CONF_CURRENCY + " " + numberToCurrency(totalComision),
@@ -1128,7 +1130,9 @@ function buildTransferResultModal() {
 				? transferResult.dataTransaccion.codConfirmacion
 				: transferResult.dataTransaccion.referencia,
 		bank: $("#bank option:selected").text(),
-		dni: transferResult.idExtPer,
+		dni:
+			transferResult.idExtPer ||
+			transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
