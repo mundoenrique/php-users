@@ -510,9 +510,11 @@ $(function () {
 		var dataRequest = {
 			P2P: {
 				beneficiary: transferResult.nombreBeneficiario,
-				idDocument: transferResult.idExtPer,
-				destinationCard: transferResult.nroCuentaDestino,
-				beneficiaryEmail: transferResult.email,
+				idDocument:
+					transferResult.idExtPer ||
+					transferData.typeDocument + transferData.idNumber,
+				destinationCard: transferResult.ctaDestino,
+				beneficiaryEmail: transferResult.email || transferData.beneficiaryEmail,
 			},
 			PMV: {
 				beneficiary: transferResult.nombreBeneficiario,
@@ -1015,7 +1017,7 @@ function buildTransferSummaryModal() {
 			beneficiary: lang.TRANSF_BENEFICIARY,
 			dni: lang.GEN_DNI,
 			destinationCard: lang.TRANSF_DESTINATION_CARD,
-			amount: lang.TRANSF_AMOUNT,
+			amount: lang.TRANSF_AMOUNT_DETAILS,
 			commission: lang.TRANSF_COMMISSION,
 			total: lang.TRANSF_TOTAL,
 			concept: lang.TRANSF_CONCEPT,
@@ -1025,7 +1027,7 @@ function buildTransferSummaryModal() {
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
 			destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
-			amount: lang.TRANSF_AMOUNT,
+			amount: lang.TRANSF_AMOUNT_DETAILS,
 			commission: lang.TRANSF_COMMISSION,
 			total: lang.TRANSF_TOTAL,
 			concept: lang.TRANSF_CONCEPT,
@@ -1044,7 +1046,7 @@ function buildTransferSummaryModal() {
 
 	summaryValueObject = {
 		bank: $("#bank option:selected").text(),
-		dni: transferData.typeDocument + " " + transferData.idNumber,
+		dni: transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
 		commission: lang.CONF_CURRENCY + " " + numberToCurrency(commission),
 		total: lang.CONF_CURRENCY + " " + numberToCurrency(totalComision),
@@ -1128,7 +1130,9 @@ function buildTransferResultModal() {
 				? transferResult.dataTransaccion.codConfirmacion
 				: transferResult.dataTransaccion.referencia,
 		bank: $("#bank option:selected").text(),
-		dni: transferResult.idExtPer,
+		dni:
+			transferResult.idExtPer ||
+			transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
@@ -1235,5 +1239,5 @@ function numberToCurrency(number) {
 }
 
 function currencyToNumber(currency) {
-	return Number(currency.replace(".", "").replace(",", "."));
+	return Number(currency.replace(/[^0-9-,]+/g,"").replace(",","."));
 }
