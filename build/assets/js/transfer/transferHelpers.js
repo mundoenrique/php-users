@@ -1239,5 +1239,5 @@ function numberToCurrency(number) {
 }
 
 function currencyToNumber(currency) {
-	return Number(currency.replace(".", "").replace(",", "."));
+	return Number(currency.replace(/[^0-9-,]+/g,"").replace(",","."));
 }
