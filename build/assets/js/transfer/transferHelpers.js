@@ -1,13 +1,13 @@
 "use strict";
-var operationType, liOptions, OperationTypeAffiliations;
-var cardData, affiliationsList, transferParameters, currentAffiliaton, bankList;
+var operationType, liOptions, OperationTypeAffiliations, bankList, cardData;
+var affiliationsList, currentAffiliaton, availableBalance, totalComision;
 var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
 var montoMaxMensual, cantidadOperacionesDiarias, montoBase, montoComision;
 var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
 var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
 var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
-var porcentajeComision, dobleAutenticacion, totalComision, monto;
-var transferData, transferResult, historyData, currentVaucherData;
+var porcentajeComision, dobleAutenticacion, transferResult, currentVaucherData;
+var amount, historyData, transferData, modalTitle, paramsValidationMessage;
 
 $(function () {
 	operationType = $("#transferView").attr("operation-type");
@@ -17,6 +17,12 @@ $(function () {
 		PMV: "pagoMovil",
 		P2T: "creditoInmediato",
 	};
+	var title = {
+		P2P: lang.TRANSF_TRANSFER_TO_CARD,
+		PMV: lang.GEN_MENU_MOBILE_PAYMENT,
+		P2T: lang.TRANSF_BANK_TRANSFER,
+	};
+	modalTitle = title[operationType];
 
 	$("#pre-loader").remove();
 	$(".hide-out").removeClass("hide");
@@ -422,13 +428,32 @@ $(function () {
 	// Submit en formulario de Transferencia y mostrar el resumen
 	$("#transferBtn").on("click", function (e) {
 		e.preventDefault();
+		var valid;
 		form = $("#transferForm");
 		btnText = $(this).text().trim();
 		validateForms(form);
 
 		if (form.valid()) {
 			transferData = getDataForm(form);
-			buildTransferSummaryModal();
+			amount = currencyToNumber(transferData.amount);
+			valid = validateTransferParams();
+			if (valid) {
+				buildTransferSummaryModal();
+			} else {
+				modalBtn = {
+					btn1: {
+						text: lang.GEN_BTN_ACCEPT,
+						action: "destroy",
+					},
+				};
+
+				appMessages(
+					modalTitle,
+					paramsValidationMessage,
+					lang.CONF_ICON_INFO,
+					modalBtn
+				);
+			}
 		}
 	});
 
@@ -441,7 +466,7 @@ $(function () {
 		data = {
 			operationType: operationType,
 			...transferData,
-			amount: monto,
+			amount: amount,
 			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
 			idDocument: transferData.typeDocument + transferData.idNumber,
 			...cardData,
@@ -634,6 +659,7 @@ function getBalance() {
 
 	callNovoCore(who, where, data, function (response) {
 		$("#currentBalance").text(response.msg);
+		availableBalance = currencyToNumber(response.msg);
 	});
 }
 
@@ -764,9 +790,10 @@ function setHistoryDataTable(data) {
 			</span>
 			${ref}
 		</div>
-		<span class="px-2 feed-amount items-center">${
-			lang.CONF_CURRENCY + " " + numberToCurrency(value.montoTransferencia)
-		}</span>`;
+		<span class="px-2 feed-amount items-center">${numberToCurrency(
+			value.montoTransferencia,
+			true
+		)}</span>`;
 
 		li.html(row);
 		$("#movementsList").append(li);
@@ -844,10 +871,10 @@ function showTransferView() {
 			case 0:
 				let affiliations =
 					response.data[OperationTypeAffiliations[operationType]];
-				let transferParameters = response.data.parametrosTransferencias;
+				let transferParams = response.data.parametrosTransferencias;
 
-				if (transferParameters) {
-					setTransferParameters(transferParameters[0]);
+				if (transferParams) {
+					setTransferParams(transferParams[0]);
 				}
 				if (affiliations.length > 0) {
 					setAffiliateSelectSearch(affiliations);
@@ -958,45 +985,42 @@ function setFieldNames(operation) {
 	}
 }
 
-function setTransferParameters(parameters) {
-	montoMaxOperaciones = parseFloat(parameters.montoMaxOperaciones);
-	montoMinOperaciones = parseFloat(parameters.montoMinOperaciones);
-	montoMaxDiario = parseFloat(parameters.montoMaxDiario);
-	montoMaxSemanal = parseFloat(parameters.montoMaxSemanal);
-	montoMaxMensual = parseFloat(parameters.montoMaxMensual);
-	cantidadOperacionesDiarias = parseInt(parameters.cantidadOperacionesDiarias);
-	cantidadOperacionesSemanales = parseInt(
-		parameters.cantidadOperacionesSemanales
-	);
-	cantidadOperacionesMensual = parseInt(parameters.cantidadOperacionesMensual);
-	montoAcumDiario = parseFloat(parameters.montoAcumDiario);
-	montoAcumSemanal = parseFloat(parameters.montoAcumSemanal);
-	montoAcumMensual = parseFloat(parameters.montoAcumMensual);
+function setTransferParams(params) {
+	montoMaxOperaciones = parseFloat(params.montoMaxOperaciones);
+	montoMinOperaciones = parseFloat(params.montoMinOperaciones);
+	montoMaxDiario = parseFloat(params.montoMaxDiario);
+	montoMaxSemanal = parseFloat(params.montoMaxSemanal);
+	montoMaxMensual = parseFloat(params.montoMaxMensual);
+	cantidadOperacionesDiarias = parseInt(params.cantidadOperacionesDiarias);
+	cantidadOperacionesSemanales = parseInt(params.cantidadOperacionesSemanales);
+	cantidadOperacionesMensual = parseInt(params.cantidadOperacionesMensual);
+	montoAcumDiario = parseFloat(params.montoAcumDiario);
+	montoAcumSemanal = parseFloat(params.montoAcumSemanal);
+	montoAcumMensual = parseFloat(params.montoAcumMensual);
 	acumCantidadOperacionesDiarias = parseInt(
-		parameters.acumCantidadOperacionesDiarias
+		params.acumCantidadOperacionesDiarias
 	);
 	acumCantidadOperacionesSemanales = parseInt(
-		parameters.acumCantidadOperacionesSemanales
+		params.acumCantidadOperacionesSemanales
 	);
 	acumCantidadOperacionesMensual = parseInt(
-		parameters.acumCantidadOperacionesMensual
+		params.acumCantidadOperacionesMensual
 	);
-	montoBase = parameters.montoBaseTransferencia
-		? parseFloat(parameters.montoBaseTransferencia)
+	montoBase = params.montoBaseTransferencia
+		? parseFloat(params.montoBaseTransferencia)
 		: 0;
-	montoComision = parseFloat(parameters.montoComision);
-	porcentajeComision = parseFloat(parameters.porcentajeComision);
+	montoComision = parseFloat(params.montoComision);
+	porcentajeComision = parseFloat(params.porcentajeComision);
 	totalComision = 0;
-	dobleAutenticacion = parameters.dobleAutenticacion;
+	dobleAutenticacion = params.dobleAutenticacion;
 }
 
 function buildTransferSummaryModal() {
 	var setObjectSummary, objectSummary, summaryValueObject;
 	var commission, span, summaryValue, inputModal;
-	monto = currencyToNumber(transferData.amount);
 	commission =
-		monto <= montoBase ? montoComision : (monto * porcentajeComision) / 100;
-	totalComision = monto + commission;
+		amount <= montoBase ? montoComision : (amount * porcentajeComision) / 100;
+	totalComision = amount + commission;
 
 	$("#accept").addClass("confirm-transfer");
 
@@ -1048,8 +1072,8 @@ function buildTransferSummaryModal() {
 		bank: $("#bank option:selected").text(),
 		dni: transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
-		commission: lang.CONF_CURRENCY + " " + numberToCurrency(commission),
-		total: lang.CONF_CURRENCY + " " + numberToCurrency(totalComision),
+		commission: numberToCurrency(commission, true),
+		total: numberToCurrency(totalComision, true),
 	};
 
 	objectSummary = setObjectSummary[operationType];
@@ -1202,10 +1226,10 @@ function buildVaucherModal() {
 	};
 
 	resultValueObject = {
-		montoTransferencia:
-			lang.CONF_CURRENCY +
-			" " +
-			numberToCurrency(currentVaucherData.montoTransferencia),
+		montoTransferencia: numberToCurrency(
+			currentVaucherData.montoTransferencia,
+			true
+		),
 	};
 
 	objectResult = setObjectResult[operationType];
@@ -1233,11 +1257,101 @@ function cleanDirectory() {
 	$("#directoryValue, #directory").val("");
 }
 
-function numberToCurrency(number) {
+function numberToCurrency(number, withCurrencySymbol) {
 	var num = typeof number == "string" ? Number(number) : number;
-	return num.toFixed(2).replace(".", ",");
+	var currencyNumber = num.toFixed(2).replace(".", ",");
+
+	return withCurrencySymbol
+		? lang.CONF_CURRENCY + " " + currencyNumber
+		: currencyNumber;
 }
 
 function currencyToNumber(currency) {
-	return Number(currency.replace(/[^0-9-,]+/g,"").replace(",","."));
+	return Number(currency.replace(/[^0-9-,]+/g, "").replace(",", "."));
+}
+
+function validateTransferParams() {
+	var difference, msg;
+
+	// Valida monto de transferencias
+	if (amount < montoMinOperaciones || amount > montoMaxOperaciones) {
+		paramsValidationMessage = `Las transferencias deben ser mínimo ${numberToCurrency(
+			montoMinOperaciones,
+			true
+		)} y máximo  ${numberToCurrency(montoMaxOperaciones, true)}.`;
+		return false;
+	}
+	if (amount > availableBalance) {
+		paramsValidationMessage =
+			"El monto de la transferencia excede su saldo disponible.";
+		return false;
+	}
+	if (montoAcumMensual + amount > montoMaxMensual) {
+		difference = montoMaxMensual - montoAcumMensual;
+		msg =
+			difference === 0
+				? ".<br>No puede realizar otra transferencia este mes."
+				: "";
+
+		paramsValidationMessage = `El monto máximo mensual que puede transferir es ${numberToCurrency(
+			montoMaxMensual,
+			true
+		)}.<br>Este mes ha transferido ${numberToCurrency(
+			montoAcumMensual,
+			true
+		)} ${msg}`;
+
+		return false;
+	}
+	if (montoAcumSemanal + amount > montoMaxSemanal) {
+		difference = montoMaxSemanal - montoAcumSemanal;
+		msg =
+			difference === 0
+				? ".<br>No puede realizar otra transferencia esta semana."
+				: "";
+
+		paramsValidationMessage = `El monto máximo semanal que puede transferir es ${numberToCurrency(
+			montoMaxSemanal,
+			true
+		)}.<br>Esta semana ha transferido  ${numberToCurrency(
+			montoAcumSemanal,
+			true
+		)} ${msg}`;
+
+		return false;
+	}
+	if (montoAcumDiario + amount > montoMaxDiario) {
+		difference = montoMaxDiario - montoAcumDiario;
+		msg =
+			difference === 0 ? ".<br>No puede realizar otra transferencia hoy." : "";
+
+		paramsValidationMessage = `El monto máximo diario que puede transferir es ${numberToCurrency(
+			montoMaxDiario,
+			true
+		)}.<br>Hoy ha transferido  ${numberToCurrency(
+			montoAcumDiario,
+			true
+		)} ${msg}`;
+
+		return false;
+	}
+
+	//Valida cantidad de operaciones
+	if (acumCantidadOperacionesMensual == cantidadOperacionesMensual) {
+		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesMensual} operaciones mensuales.<br>Este mes ha realizado: ${acumCantidadOperacionesMensual}.<br>No puede realizar otra operación este mes.`;
+
+		return false;
+	}
+	if (acumCantidadOperacionesSemanales == cantidadOperacionesSemanales) {
+		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesSemanales} operaciones semanales.<br>Esta semana ha realizado: ${acumCantidadOperacionesSemanales}.<br>No puede realizar otra operación esta semana.`;
+
+		return false;
+	}
+	if (acumCantidadOperacionesDiarias == cantidadOperacionesDiarias) {
+		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesDiarias} operaciones diarias.<br>Hoy ha realizado: ${acumCantidadOperacionesDiarias}.<br>No puede realizar otra operación hoy.`;
+
+		return false;
+	}
+
+	return true;
 }
