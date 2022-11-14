@@ -1416,6 +1416,14 @@ class Novo_User_Model extends NOVO_Model {
 					$this->session->set_userdata('affiliate', '1');
 					$this->response->modalBtn['btn1']['link'] = uriRedirect();
 				}
+
+				$emailUser = [
+					'userEmail' => $dataRequest->email,
+					'maskMail' => maskString($dataRequest->email, 4, $end = 6, '@'),
+				];
+
+				$this->session->set_userdata($emailUser);
+
 			break;
 			case -200:
 			case -271:
