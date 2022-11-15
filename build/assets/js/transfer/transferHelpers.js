@@ -135,7 +135,7 @@ $(function () {
 		e.preventDefault();
 		$("#transferRecord").hide();
 		$("#searchAffiliate").hide();
-		$("#results no-moves").hide();
+		$("#affiliationsView #no-moves").hide();
 		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
 		where = "GetAffiliations";
@@ -1042,8 +1042,6 @@ function buildTransferSummaryModal() {
 			dni: lang.GEN_DNI,
 			destinationCard: lang.TRANSF_DESTINATION_CARD,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
-			commission: lang.TRANSF_COMMISSION,
-			total: lang.TRANSF_TOTAL,
 			concept: lang.TRANSF_CONCEPT,
 		},
 		P2T: {
