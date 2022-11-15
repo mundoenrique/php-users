@@ -218,15 +218,15 @@ $(function () {
 
 	$("#historySearch").on("click", function (e) {
 		e.preventDefault();
-		$("#historyView #results").hide();
-		$("#historyView #no-moves").hide();
-		$("#historyView #pre-loader").fadeIn(700, "linear");
 
 		form = $("#historyForm");
 		validateForms(form);
 
 		if (form.valid()) {
-			$("#pre-loader").fadeIn(700, "linear");
+			$("#historyView #results").hide();
+			$("#historyView #no-moves").hide();
+			$("#historyView #pre-loader").fadeIn(700, "linear");
+
 			who = "Transfer";
 			where = "History";
 			data = {
@@ -674,7 +674,7 @@ function getBanks(operation, action = "") {
 			? currentAffiliaton?.codBanco
 			: "";
 
-	bankField.attr("readonly", true).addClass('bg-tertiary border');
+	bankField.attr("readonly", true).addClass("bg-tertiary border");
 	bankField.find("option").remove();
 	bankField.append(
 		currentBank == ""
@@ -702,7 +702,7 @@ function getBanks(operation, action = "") {
 			}
 		}
 
-		bankField.attr("readonly", false).removeClass('bg-tertiary border');
+		bankField.attr("readonly", false).removeClass("bg-tertiary border");
 	});
 }
 
