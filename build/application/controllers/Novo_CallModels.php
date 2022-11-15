@@ -44,6 +44,7 @@ class Novo_CallModels extends Novo_Controller {
 		}
 
 		if ($valid) {
+			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
 			$valid = $this->verify_access->validateForm($this->validationMethod);
 		}
 
@@ -53,7 +54,6 @@ class Novo_CallModels extends Novo_Controller {
 		LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
 
 		if ($valid) {
-			$this->request = $this->verify_access->createRequest($this->modelClass, $this->modelMethod);
 			$this->dataResponse = $this->loadModel($this->request);
 		} else {
 			$this->dataResponse = $this->verify_access->responseByDefect();
