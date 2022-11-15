@@ -674,7 +674,7 @@ function getBanks(operation, action = "") {
 			? currentAffiliaton?.codBanco
 			: "";
 
-	bankField.prop("disabled", true);
+	bankField.attr("readonly", true).addClass('bg-tertiary border');
 	bankField.find("option").remove();
 	bankField.append(
 		currentBank == ""
@@ -702,7 +702,7 @@ function getBanks(operation, action = "") {
 			}
 		}
 
-		bankField.prop("disabled", false);
+		bankField.attr("readonly", false).removeClass('bg-tertiary border');
 	});
 }
 
