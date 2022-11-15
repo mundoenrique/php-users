@@ -135,7 +135,7 @@ $(function () {
 		e.preventDefault();
 		$("#transferRecord").hide();
 		$("#searchAffiliate").hide();
-		$("#results no-moves").hide();
+		$("#affiliationsView #no-moves").hide();
 		$("#pre-loader").fadeIn(700, "linear");
 		who = "Affiliations";
 		where = "GetAffiliations";
@@ -218,15 +218,15 @@ $(function () {
 
 	$("#historySearch").on("click", function (e) {
 		e.preventDefault();
-		$("#historyView #results").hide();
-		$("#historyView #no-moves").hide();
-		$("#historyView #pre-loader").fadeIn(700, "linear");
 
 		form = $("#historyForm");
 		validateForms(form);
 
 		if (form.valid()) {
-			$("#pre-loader").fadeIn(700, "linear");
+			$("#historyView #results").hide();
+			$("#historyView #no-moves").hide();
+			$("#historyView #pre-loader").fadeIn(700, "linear");
+
 			who = "Transfer";
 			where = "History";
 			data = {
@@ -674,7 +674,7 @@ function getBanks(operation, action = "") {
 			? currentAffiliaton?.codBanco
 			: "";
 
-	bankField.prop("disabled", true);
+	bankField.attr("readonly", true).addClass("bg-tertiary border");
 	bankField.find("option").remove();
 	bankField.append(
 		currentBank == ""
@@ -702,7 +702,7 @@ function getBanks(operation, action = "") {
 			}
 		}
 
-		bankField.prop("disabled", false);
+		bankField.attr("readonly", false).removeClass("bg-tertiary border");
 	});
 }
 
@@ -1042,8 +1042,6 @@ function buildTransferSummaryModal() {
 			dni: lang.GEN_DNI,
 			destinationCard: lang.TRANSF_DESTINATION_CARD,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
-			commission: lang.TRANSF_COMMISSION,
-			total: lang.TRANSF_TOTAL,
 			concept: lang.TRANSF_CONCEPT,
 		},
 		P2T: {

@@ -15,7 +15,7 @@
 							<div id='error' class="help-block"></div>
 						</div>
 						<div class="flex items-center">
-							<button id="historySearch" class="btn btn-small btn-rounded-right btn-primary mb-3">
+							<button id="historySearch" class="btn btn-small btn-rounded-right btn-primary mb-3" type="submit">
 								<span aria-hidden="true" class="icon icon-find mr-0 h3"></span>
 							</button>
 						</div>
