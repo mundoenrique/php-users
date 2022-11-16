@@ -35,6 +35,8 @@ class Verify_Access
 				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
+		unset($_POST);
+
 		return $result;
 	}
 	/**
@@ -61,8 +63,6 @@ class Verify_Access
 					$requestServ->$key = $value;
 			}
 		}
-
-		unset($_POST);
 
 		if ($this->CI->session->has_userdata('userName')) {
 			$logUsername = $this->CI->session->userName;

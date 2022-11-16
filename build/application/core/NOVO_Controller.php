@@ -45,7 +45,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
 		$this->modelClass = $class.'_Model';
-		$this->modelMethod = 'callWs_'.ucfirst($method).'_'.str_replace('Novo_', '', $class);
+		$this->modelMethod = 'callWs_' . ucfirst($method) . '_' . str_replace('Novo_', '', $class);
 		$this->validationMethod = $method;
 		$this->includeAssets = new stdClass();
 		$this->request = new stdClass();
@@ -134,11 +134,8 @@ class NOVO_Controller extends CI_Controller {
 						}
 					}
 
+					$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
 					$valid = $this->verify_access->validateForm($this->validationMethod);
-
-					if ($valid) {
-						$this->request = $this->verify_access->createRequest($this->controllerClass, $this->controllerMethod);
-					}
 				}
 
 				$this->preloadView($access && $valid);
