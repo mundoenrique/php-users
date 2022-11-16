@@ -1097,6 +1097,9 @@ function buildTransferResultModal() {
 	var setObjectResult, objectResult, resultValueObject;
 	var span, resultValue, inputModal, thirdPartyAffiliate;
 
+	resetForms($("#toTransferView form"));
+	cleanDirectory();
+
 	thirdPartyAffiliate =
 		operationType == "PMV"
 			? transferResult.dataTransaccion.terceroAfiliado

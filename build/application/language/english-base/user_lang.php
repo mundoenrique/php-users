@@ -442,7 +442,6 @@ $lang['USER_RECOVER_DOC_TYPE'] = [
 	'CC' => 'Citizenship card',
 	'PP' => 'Passport',
 ];
-$lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
 //USER SIGN UP
 $lang['USER_SATISFACTORY_REG'] = 'The registration has been done successfully, for security reasons it is necessary that you log in with your username and password.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'The registration was done; although it was not possible to send the confirmation email. For security reasons it is necessary that you log in with your username and password.';
