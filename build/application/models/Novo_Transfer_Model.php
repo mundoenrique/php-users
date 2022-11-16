@@ -152,13 +152,18 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->data = $response;
 				$this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
 				break;
+			case -179:
+				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
+				$this->response->msg = lang('GEN_INVALID_DATA');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			case -344:
-				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
 				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case -322:
-				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
 				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
