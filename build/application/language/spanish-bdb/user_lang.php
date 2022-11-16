@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //LOGIN
 $lang['USER_SIGNIN_TITLE'] = 'Personas';
 $lang["USER_TERMS_SUBTITLE"]='Condiciones portal tarjeta prepago.';
+$lang['USER_CITY'] = 'Ciudad';
 $lang["USER_TERMS_CONTENT"] = '
 <div class="justify pr-3">
 	<ol>
