@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //LOGIN
 $lang['USER_SIGNIN_TITLE'] = 'Customers';
 $lang["USER_TERMS_SUBTITLE"]='Prepaid card portal conditions.';
+$lang['USER_CITY'] = 'City';
 $lang["USER_TERMS_CONTENT"] = '
 <div class="justify pr-3">
 	<ol>
