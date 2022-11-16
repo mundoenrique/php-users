@@ -423,11 +423,12 @@ function validateForms(form) {
 
 	$.validator.methods.validateDocumentId = function (value, element, param) {
 		var pattern = alphanum;
-		var typeDocument = $(element).closest("form").find("#typeDocument option:selected");
+		var typeDocument = form.find("#typeDocument option:selected");
 
 		if (lang.CONF_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
-			if (lang.CONF_NUMERIC_DOCUMENT_ID.includes(typeDocument.val()))
+			if (lang.CONF_NUMERIC_DOCUMENT_ID.includes(typeDocument.val())) {
 				pattern = numeric;
+			}
 		}
 		return pattern.test(value);
 	};

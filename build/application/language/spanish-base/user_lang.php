@@ -440,7 +440,6 @@ $lang['USER_RECOVER_DOC_TYPE'] = [
 	'CC' => 'Cédula de ciudadania',
 	'PP' => 'Pasaporte',
 ];
-$lang['USER_VALUE_DOCUMENT_ID'] = ['CC'];
 $lang['USER_SATISFACTORY_REG'] = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_SOME_DATA'] = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
