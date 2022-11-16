@@ -251,3 +251,4 @@ $lang['CONF_TRANSFER_DOCUMENT_TYPE'] = [
 	'E' => 'E',
 	'P' => 'P',
 ];
+$lang['CONF_NUMERIC_DOCUMENT_ID'] = ['CC', 'V', 'E'];

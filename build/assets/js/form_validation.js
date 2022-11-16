@@ -422,13 +422,14 @@ function validateForms(form) {
 
 	$.validator.methods.validateDocumentId = function (value, element, param) {
 		var pattern = alphanum;
-		if (lang.CONF_RECOVER_ID_TYPE == 'ON') {
-			var select = $("#typeDocument option:selected").val();
-			if (select == lang.USER_VALUE_DOCUMENT_ID)
+		var typeDocument = $(element).closest("form").find("#typeDocument option:selected");
+
+		if (lang.CONF_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
+			if (lang.CONF_NUMERIC_DOCUMENT_ID.includes(typeDocument.val()))
 				pattern = numeric;
 		}
-		return pattern.test(value)
-	}
+		return pattern.test(value);
+	};
 
 	form.validate().resetForm();
 }
