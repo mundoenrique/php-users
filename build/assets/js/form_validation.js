@@ -60,7 +60,7 @@ function validateForms(form) {
 			"twoFactorEnablement": { required: true },
 			"authenticationCode": { required: true, pattern: twoFactor },
 			"email": { required: true, pattern: emailValid },
-			"idNumber": { required: true, validateDocumentId: true },
+			"idNumber": { required: true, validateDocumentId: true, maxlength: 14 },
 			"currentPass": { required: true },
 			"newPass": { required: true, differs: "#currentPass", validatePass: true },
 			"confirmPass": { required: true, equalTo: "#newPass" },
@@ -185,7 +185,8 @@ function validateForms(form) {
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": {
 				required: lang.VALIDATE_DOCUMENT_ID,
-				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
+				maxlength: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
 			},
 			"currentPass": lang.VALIDATE_CURRENT_PASS.replace('%s', titleCredencial),
 			"newPass": {
