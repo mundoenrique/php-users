@@ -39,7 +39,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otpCode) ? $dataRequest->otpCode : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 
-		$response = $this->sendToService('callWs_TemporaryLock');
+		$response = $this->sendToWebServices('callWs_TemporaryLock');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -128,7 +128,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 		$this->dataRequest->tipoTarjeta = $dataRequest->virtual ? 'virtual' : 'fisica';
 
-		$response = $this->sendToService('callWs_Replacement');
+		$response = $this->sendToWebServices('callWs_Replacement');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -239,13 +239,13 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			]
 		];
 		$this->dataRequest->usuario = [
-			'userName' => $this->userName,
+			'userName' => $this->session->userName,
 			'envioCorreoLogin' => false,
 			'guardaIp' => false,
 			'rc' => '0'
 		];
 
-		$response = $this->sendToService('callWs_TwirlsCommercial');
+		$response = $this->sendToWebServices('callWs_TwirlsCommercial');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -333,11 +333,11 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			]
 		];
 		$this->dataRequest->usuario = [
-			'userName' => $this->userName,
+			'userName' => $this->session->userName,
 			'idUsuario' => $this->session->userId
 		];
 
-		$response = $this->sendToService('callWs_TransactionalLimits');
+		$response = $this->sendToWebServices('callWs_TransactionalLimits');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -411,7 +411,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->tokenOperaciones = isset($dataRequest->otpCode) ? $dataRequest->otpCode : '';
 		$this->dataRequest->montoComisionTransaccion = isset($dataRequest->amount) ? $dataRequest->amount : '0';
 
-		$response = $this->sendToService('callWs_ChangePin');
+		$response = $this->sendToWebServices('callWs_ChangePin');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -496,7 +496,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.MO.NotificacionMO';
 		$this->dataRequest->accodusuario = $this->session->userName;
 
-		$response = $this->sendToService('callWs_Notifications');
+		$response = $this->sendToWebServices('callWs_Notifications');
 		$notification = [
 			'userSignUp' => [
 				'active' => '0',
@@ -687,7 +687,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			]
 		];
 
-		$response = $this->sendToService('callWs_NotificationsUpdate');
+		$response = $this->sendToWebServices('callWs_NotificationsUpdate');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -720,7 +720,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		$this->dataRequest->filtroFechaFin = $dataRequest->finalDate. ' 11:59:59 PM';
 		$this->dataRequest->codTexto = $dataRequest->notificationType;
 
-		$response = $this->sendToService('callWs_NotificationHistory');
+		$response = $this->sendToWebServices('callWs_NotificationHistory');
 		$notification = [];
 
 		switch ($this->isResponseRc) {

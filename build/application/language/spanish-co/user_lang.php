@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang["USER_TERMS_TITLE"]='Términos y condiciones.';
 $lang["USER_TERMS_SUBTITLE"]='Condiciones Generales, Términos de Uso y Confidencialidad';
+$lang['USER_CITY'] = 'Ciudad';
 $lang["USER_TERMS_CONTENT"] = '
 <div class="justify pr-3">
 <p><b>NovoPayment Colombia S.A.S.</b>, sociedad legalmente constituida y registrada ante la Cámara de Comercio de Bogotá (en adelante “La Empresa”); a continuación establece las Condiciones Generales y Términos de Uso y Confidencialidad que rigen la plataforma electrónica desarrollada por La Empresa y que ha sido habilitada para que los clientes de las instituciones financieras emisoras (en adelante los “Usuarios”), puedan hacer uso de las distintas funcionalidades que ofrece.</p>

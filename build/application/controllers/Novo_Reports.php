@@ -31,10 +31,12 @@ class Novo_Reports extends NOVO_Controller {
 			"third_party/additional-methods",
 			"reports/expensesCategory"
 		);
-		$this->load->model('Novo_Business_Model', 'business');
+
+		$this->modelClass = 'Novo_Business_Model';
+		$this->modelMethod = 'callWs_CardListOperations_Business';
 		$this->request->operation = 'Reportes';
 		$this->request->operType = 'RGR';
-		$userCardList = $this->business->callWs_CardListOperations_Business($this->request);
+		$userCardList = $this->loadModel($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);

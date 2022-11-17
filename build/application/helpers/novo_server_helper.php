@@ -13,7 +13,6 @@ if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
 		$CI =& get_instance();
 		$appUserName = $CI->session->appUserName ?? date('U') . '-';
-		$logUsername = '';
 		$customer = '';
 		$ip = $CI->input->ip_address();
 		$level = mb_strtoupper($level);
@@ -66,25 +65,67 @@ if (!function_exists('responseServer')) {
 
 		switch ($responseServer->HttpCode) {
 			case 200:
-				$responseServer->rc = 0;
+				$responseServer->responseCode = 0;
 				break;
 
 			case 502:
-				$responseServer->rc = 502;
+				$responseServer->responseCode = 502;
 				break;
 
 			case 504:
-				$responseServer->rc = 504;
+				$responseServer->responseCode = 504;
 				break;
 
 			default:
-				$responseServer->rc = $code[2] ?? $code[0];
+				$responseServer->responseCode = $code[2] ?? $code[0];
 		}
 
 		if ($responseServer->errorNo === 28) {
-			$responseServer->rc = 504;
+			$responseServer->responseCode = 504;
 		}
 
 		return $responseServer;
+	}
+}
+
+if (!function_exists('handleResWebService')) {
+	function handleResponseServer($webServiceResp) {
+		if (isset($webServiceResp->data->rc)) {
+			$webServiceResp->responseCode = $webServiceResp->data->rc;
+		}
+
+		if (isset($webServiceResp->data->logAcceso)) {
+			$accessLog = json_decode($webServiceResp->data->logAcceso);
+
+			if (gettype($accessLog) === 'object') {
+				$webServiceResp->data->logAcceso = $accessLog;
+			}
+		}
+
+		if (isset($webServiceResp->data->archivo)) {
+			$webServiceResp->binaryFile = 'success';
+
+			if (!is_array($webServiceResp->data->archivo)  || empty($webServiceResp->data->archivo)) {
+				$webServiceResp->binaryFile = 'No binary array';
+			}
+		}
+
+		if (isset($webServiceResp->data->bean)) {
+			$bean = json_decode($webServiceResp->data->bean);
+
+			if (gettype($bean) === 'object' || gettype($bean) === 'array') {
+				$webServiceResp->data->bean = $bean;
+			}
+
+			if (isset($webServiceResp->data->bean->archivo)) {
+				$webServiceResp->binaryFile = 'success';
+
+				if (!is_array($webServiceResp->data->bean->archivo) || empty($webServiceResp->data->bean->archivo)) {
+					$webServiceResp->binaryFile = 'No binary array';
+				}
+			}
+		}
+
+		return $webServiceResp;
 	}
 }

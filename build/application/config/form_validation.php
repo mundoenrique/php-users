@@ -232,7 +232,7 @@ $config = [
 	'generateTotp' => [
 		[
 			'field' => 'operationType',
-			'rules' =>'trim|regex_match[/^(generate|deactivate)/]|required'
+			'rules' => 'trim|regex_match[/^(generate|deactivate)/]|required'
 		],
 	],
 	'validateTotp' => [
@@ -277,6 +277,256 @@ $config = [
 		[
 			'field' => 'confirmPass',
 			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'changeOperationKey' => [
+		[
+			'field' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'setOperationKey' => [
+		[
+			'field' => 'newPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+		[
+			'field' => 'confirmPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		]
+	],
+	'getOperationKey' => [
+		[
+			'field' => 'currentPass',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9=]+)+$/i]|required'
+		],
+	],
+	'getBanks' => [
+		[
+			'field' => 'something',
+			'rules' => 'trim'
+		]
+	],
+	'getAffiliations' => [
+		[
+			'field' => 'operationType',
+			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+		],
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]'
+		],
+		[
+			'field' => 'prefix',
+			'rules' => 'trim|alpha_numeric'
+		],
+	],
+	'affiliationP2P' => [
+		[
+			'field' => 'beneficiary',
+			'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|required'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'destinationCard',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'affiliationPMV' => [
+		[
+			'field' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'rules' => 'required|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|trim'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'affiliationP2T' => [
+		[
+			'field' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'rules' => 'required|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|trim'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'destinationAccount',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'rules' => 'trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric'
+		]
+	],
+	'deleteAffiliation' => [
+		[
+			'field' => 'idAfiliation',
+			'rules' => 'trim|numeric|required'
+		]
+	],
+	'transferP2P' => [
+		[
+			'field' => 'beneficiary',
+			'rules' => 'required|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|trim'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'destinationCard',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+	],
+	'transferP2T' => [
+		[
+			'field' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'rules' => 'required|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|trim'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'destinationAccount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+		],
+		[
+			'field' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+	],
+	'mobilePayment' => [
+		[
+			'field' => 'bank',
+			'rules' => 'required|trim'
+		],
+		[
+			'field' => 'beneficiary',
+			'rules' => 'required|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ ]+)+$/i]|trim'
+		],
+		[
+			'field' => 'idDocument',
+			'rules' => 'required|alpha_numeric|required'
+		],
+		[
+			'field' => 'mobilePhone',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'beneficiaryEmail',
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
+		],
+		[
+			'field' => 'amount',
+			'rules' => 'required|trim|numeric'
+		],
+		[
+			'field' => 'concept',
+			'rules' => 'trim'
+		],
+		[
+			'field' => 'expDateCta',
+			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
+		],
+	],
+	'history' => [
+		[
+			'field' => 'cardNumber',
+			'rules' => 'trim|regex_match[/^([\w=\/+\-]+)+$/i]|required'
+		],
+		[
+			'field' => 'filterMonth',
+			'rules' => 'trim|numeric|required'
+		],
+		[
+			'field' => 'filterYear',
+			'rules' => 'trim|numeric|required'
 		]
 	],
 	'cardDetail' => [
@@ -430,10 +680,10 @@ $config = [
 			'field' => 'cardNumber',
 			'rules' => 'trim|required'
 		],
-		[
-			'field' => 'userIdNumber',
-			'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
-		]
+		// [
+		// 	'field' => 'userIdNumber',
+		// 	'rules' => 'trim|regex_match[/^([\w])+$/i]|required'
+		// ]
 	],
 	'getVirtualDetail' => [
 		[
@@ -1298,11 +1548,11 @@ $config = [
 			'label' => 'fechaFin',
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		]
-		],
-		'keepsession' => [
-			[
-				'field' => 'signout',
-				'rules' => 'trim|alpha|required'
-			]
-		],
+	],
+	'keepsession' => [
+		[
+			'field' => 'signout',
+			'rules' => 'trim|alpha|required'
+		]
+	],
 ];
