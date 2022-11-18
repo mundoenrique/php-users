@@ -1,4 +1,6 @@
 'use strict'
+var validator;
+
 function validateForms(form) {
 	formInputTrim(form);
 
@@ -23,6 +25,7 @@ function validateForms(form) {
 	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
 	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
 	var checkedOption = new RegExp(lang.CONF_REGEX_CHECKED);
+	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
 		dmy: new RegExp(lang.CONF_REGEX_DATE_DMY),
 		my: new RegExp(lang.CONF_REGEX_DATE_MY),
@@ -38,9 +41,16 @@ function validateForms(form) {
 		errorElement: lang.CONF_VALID_ELEMENT
 	};
 
+	$.each(lang.CONF_TITLE_PASS_FORM, function (key, val) {
+		if ($(form).attr('id') === key) {
+			titleCredencial = val.toLowerCase();
+		}
+		return titleCredencial;
+	});
+
 	jQuery.validator.setDefaults(defaults);
 
-	form.validate({
+	validator = form.validate({
 		focusInvalid: false,
 		rules: {
 			"userName": { required: true, pattern: alphanumunder },
@@ -50,13 +60,14 @@ function validateForms(form) {
 			"twoFactorEnablement": { required: true },
 			"authenticationCode": { required: true, pattern: twoFactor },
 			"email": { required: true, pattern: emailValid },
-			"idNumber": { required: true, validateDocumentId: true },
+			"idNumber": { required: true, validateDocumentId: true, maxlength: 14 },
 			"currentPass": { required: true },
 			"newPass": { required: true, differs: "#currentPass", validatePass: true },
 			"confirmPass": { required: true, equalTo: "#newPass" },
 			"filterMonth": { required: true, pattern: numeric },
 			"filterYear": { required: true, pattern: numeric },
 			"filterInputYear": { required: true, pattern: date.my },
+			"filterHistoryDate": { required: true, pattern: date.my },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
 			"documentId": { required: true, validateDocumentId: true },
 			"cardPIN": { required: true, pattern: numeric },
@@ -135,6 +146,14 @@ function validateForms(form) {
 			"finalDate": { required: true, pattern: date.dmy },
 			"replaceMotSol": { requiredSelect: true },
 			"temporaryLockReason": { requiredSelect: true },
+			"bank": { required: true, requiredSelect: true },
+			"beneficiary": { required: true, pattern: alphaName },
+			"destinationCard": { required: true, pattern: numeric, maxlength: 16 },
+			"destinationAccount": { required: true, pattern: numeric, exactLength: 20 },
+			"beneficiaryEmail": { pattern: emailValid },
+			"amount": { required: true, pattern: floatAmount, maxlength: 16 },
+			"concept": { pattern: alphanumunder },
+			"expDateCta": { required: true, pattern: date.my },
 			"currentPin": { required: true, pattern: numeric, exactLength: 4 },
 			"newPin": { required: true, pattern: numeric, exactLength: 4, differs: "#currentPin", fourConsecutivesDigits: true },
 			"confirmPin": { required: true, equalTo: "#newPin" },
@@ -166,20 +185,22 @@ function validateForms(form) {
 			"email": lang.VALIDATE_EMAIL,
 			"idNumber": {
 				required: lang.VALIDATE_DOCUMENT_ID,
-				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
+				maxlength: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
 			},
-			"currentPass": lang.VALIDATE_CURRENT_PASS,
+			"currentPass": lang.VALIDATE_CURRENT_PASS.replace('%s', titleCredencial),
 			"newPass": {
-				required: lang.VALIDATE_NEW_PASS,
-				differs: lang.VALIDATE_DIFFERS_PASS,
-				validatePass: lang.VALIDATE_REQUIREMENTS_PASS
+				required: lang.VALIDATE_NEW_PASS.replace('%s', titleCredencial),
+				differs: lang.VALIDATE_DIFFERS_PASS.replace('%s', titleCredencial),
+				validatePass: lang.VALIDATE_REQUIREMENTS_PASS.replace('%s', titleCredencial),
 			},
 			"confirmPass": {
-				required: lang.VALIDATE_CONFIRM_PASS,
-				equalTo: lang.VALIDATE_IQUAL_PASS
+				required: lang.VALIDATE_CONFIRM_PASS.replace('%s', titleCredencial),
+				equalTo: lang.VALIDATE_IQUAL_PASS.replace('%s', titleCredencial),
 			},
 			"filterYear": lang.VALIDATE_FILTER_YEAR,
 			"filterInputYear": lang.VALIDATE_DATE_MY,
+			"filterHistoryDate": lang.VALIDATE_DATE_MY,
 			"numberCard": lang.VALIDATE_NUMBER_CARD,
 			"documentId": {
 				required: lang.VALIDATE_DOCUMENT_ID,
@@ -260,6 +281,21 @@ function validateForms(form) {
 			"finalDate": lang.VALIDATE_DATE_DMY,
 			"replaceMotSol": lang.VALIDATE_REPLACE_REASON,
 			"temporaryLockReason": lang.VALIDATE_TEMPORARY_LOCK_REASON,
+			"bank": lang.VALIDATE_BANK,
+			"beneficiary": lang.VALIDATE_BENEFIT,
+			"destinationCard": {
+				required: lang.VALIDATE_DESTINATION_CARD,
+				pattern: lang.VALIDATE_CARD_NUMBER,
+				maxlength: lang.VALIDATE_CARD_NUMBER
+			},
+			"destinationAccount": {
+				required: lang.VALIDATE_DESTINATION_ACCOUNT,
+				pattern: lang.VALIDATE_ACCOUNT_NUMBER,
+				exactLength: lang.VALIDATE_ACCOUNT_NUMBER_FORMAT
+			},
+			"beneficiaryEmail": lang.VALIDATE_EMAIL,
+			"amount": lang.VALIDATE_AMOUNT,
+			"expDateCta": lang.VALIDATE_DATE_MY,
 			"currentPin": {
 				required: lang.VALIDATE_CURRENT_PIN,
 				pattern: lang.VALIDATE_FORMAT_PIN,
@@ -387,13 +423,15 @@ function validateForms(form) {
 
 	$.validator.methods.validateDocumentId = function (value, element, param) {
 		var pattern = alphanum;
-		if (lang.CONF_RECOVER_ID_TYPE == 'ON') {
-			var select = $("#typeDocument option:selected").val();
-			if (select == lang.USER_VALUE_DOCUMENT_ID)
+		var typeDocument = form.find("#typeDocument option:selected");
+
+		if (lang.CONF_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
+			if (lang.CONF_NUMERIC_DOCUMENT_ID.includes(typeDocument.val())) {
 				pattern = numeric;
+			}
 		}
-		return pattern.test(value)
-	}
+		return pattern.test(value);
+	};
 
 	form.validate().resetForm();
 }

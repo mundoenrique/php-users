@@ -409,10 +409,10 @@ class Product_Model extends BDB_Model
 					$this->response->code = 0;
 					$this->response->timeLiveModal = $response->tiempoPantallaVirtual * 10;
 					$this->response->dataDetailCard =  [
-						'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
-						'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
-						'expirationDate' => $this->encrypt_connect->cryptography($response->fechaExp, FALSE),
-						'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+						'cardNumber' => $this->encrypt_decrypt->aesCryptography($response->noTarjeta, FALSE),
+						'cardholderName' => $this->encrypt_decrypt->aesCryptography($response->NombreCliente, FALSE),
+						'expirationDate' => $this->encrypt_decrypt->aesCryptography($response->fechaExp, FALSE),
+						'securityCode' => $this->encrypt_decrypt->aesCryptography($response->secureToken, FALSE),
 					];
 					break;
 

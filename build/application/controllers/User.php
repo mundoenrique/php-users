@@ -360,7 +360,7 @@ class User extends BDB_Controller
     $inputData = $this->input->post();
     if (count($inputData) > 0) {
 
-      $bodyRequest = json_decode($this->encrypt_connect->cryptography($inputData['request'], FALSE));
+      $bodyRequest = json_decode($this->encrypt_decrypt->aesCryptography($inputData['request'], FALSE));
       if (!is_null($bodyRequest)) {
 
         $password = trim($bodyRequest->password) == '' ? NULL : $bodyRequest->password;
@@ -370,7 +370,7 @@ class User extends BDB_Controller
 
     if (!is_null($password) && $key) {
 
-      $argon2 = $this->encrypt_connect->generateArgon2($password);
+      $argon2 = $this->encrypt_decrypt->generateArgon2Hash($password);
       $bodyResponse = [
         'key' => $this->key_api,
         'password' => $argon2->hexArgon2
@@ -378,7 +378,7 @@ class User extends BDB_Controller
       $statusResponse = 200;
 
       $dataResponse = json_encode($bodyResponse);
-      $response = $this->encrypt_connect->cryptography($dataResponse, TRUE);
+      $response = $this->encrypt_decrypt->aesCryptography($dataResponse, TRUE);
     }
 
     return $this->output

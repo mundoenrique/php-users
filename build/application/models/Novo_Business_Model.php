@@ -21,7 +21,6 @@ class Novo_Business_Model extends NOVO_Model {
 	{
 		writeLog('INFO', 'Business Model: UserCardsList Method Initialized');
 
-
 		$this->dataAccessLog->modulo = 'Tarjetas';
 		$this->dataAccessLog->function = 'Lista de tarjetas';
 		$this->dataAccessLog->operation = 'Obtener la lista de tarjetas';
@@ -31,7 +30,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->userName = $this->session->userName;
 		$this->dataRequest->idUsuario = $this->session->userId;
 
-		$response = $this->sendToService('callWs_UserCardsList');
+		$response = $this->sendToWebServices('callWs_UserCardsList');
 		$cardsList = [];
 		$serviceList = [];
 
@@ -57,25 +56,30 @@ class Novo_Business_Model extends NOVO_Model {
 						switch ($cardRecord->status) {
 							case '':
 								$cardRecord->statusMessage = isset($dataRequest->module) ? '' : lang('GEN_WAIT_BALANCE');
-							break;
+								break;
+
 							case 'PB':
 								$cardRecord->statusMessage = lang('GEN_TEMPORARY_LOCK_PRODUCT');
-							break;
+								break;
+
 							case 'NE':
 								$cardRecord->statusMessage = lang('GEN_INACTIVE_PRODUCT');
-							break;
+								break;
+
 							case '41':
 								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_LOSS');
-							break;
+								break;
+
 							case '43':
 								$cardRecord->statusMessage =  lang('GEN_LOCK_CARD_THEFT');
-							break;
+								break;
+
 							case '75':
 								$cardRecord->statusMessage = lang('GEN_LOCK_CARD_WRONG_PIN');
-							break;
+								break;
+
 							default:
 								$cardRecord->statusMessage = lang('GEN_PERMANENT_LOCK_PRODUCT');
-							break;
 						}
 
 						if (isset($dataRequest->module)) {
@@ -116,12 +120,10 @@ class Novo_Business_Model extends NOVO_Model {
 					);
 					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START');
 				}
-			break;
-			default:
-				if ($this->isResponseRc != -61) {
-					$this->session->sess_destroy();
-				}
+				break;
 
+			default:
+				clearSessionsVars();
 				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
 		}
 
@@ -174,7 +176,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->id_ext_per = $this->session->userId;
 		$this->dataRequest->noTarjeta = $dataRequest->cardNumber;
 
-		$response = $this->sendToService('callWs_GetBalance');
+		$response = $this->sendToWebServices('callWs_GetBalance');
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -207,7 +209,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->signo = '';
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
-		$response = $this->sendToService('callWs_CardDetail');
+		$response = $this->sendToWebServices('callWs_CardDetail');
 
 		$movesList = [];
 		$balance = new stdClass();
@@ -308,7 +310,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'id_ext_per' => $this->session->userId,
 		];
 
-		$response = $this->sendToService('callWs_MonthlyMovements');
+		$response = $this->sendToWebServices('callWs_MonthlyMovements');
 		$movesList = [];
 		$totalMoves = new stdClass();
 		$totalMoves->credit = '0';
@@ -366,7 +368,7 @@ class Novo_Business_Model extends NOVO_Model {
 			'id_ext_per' => $this->session->userId,
 		];
 
-		$response = $this->sendToService('callWs_DownloadMoves');
+		$response = $this->sendToWebServices('callWs_DownloadMoves');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -411,7 +413,7 @@ class Novo_Business_Model extends NOVO_Model {
 		$this->dataRequest->tipoOperacion = $dataRequest->operType;
 		$this->dataRequest->id_ext_per = $this->session->userId;
 
-		$response = $this->sendToService('callWs_CardListOperations');
+		$response = $this->sendToWebServices('callWs_CardListOperations');
 		$cardsList = [];
 
 		switch ($this->isResponseRc) {
@@ -485,21 +487,21 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->dataRequest->noTarjeta = $dataRequest->cardNumberDownd;
 		}
 
-		$response = $this->sendToService('callWs_getVirtualDetail');
+		$response = $this->sendToWebServices('callWs_getVirtualDetail');
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$fechaExp = $this->encrypt_connect->cryptography($response->fechaExp, FALSE);
-				$left = substr($fechaExp,0,2);
-				$right = substr($fechaExp,2,2);
+				$fechaExp = $this->encrypt_decrypt->aesCryptography($response->fechaExp, FALSE);
+				$left = substr($fechaExp, 0, 2);
+				$right = substr($fechaExp, 2, 2);
 				$expirationDate = $left.'/'.$right;
 
 				$this->response->code = 0;
 				$this->response->dataDetailCard =  [
-					'cardNumber' => $this->encrypt_connect->cryptography($response->noTarjeta, FALSE),
-					'cardholderName' => $this->encrypt_connect->cryptography($response->NombreCliente, FALSE),
+					'cardNumber' => $this->encrypt_decrypt->aesCryptography($response->noTarjeta, FALSE),
+					'cardholderName' => $this->encrypt_decrypt->aesCryptography($response->NombreCliente, FALSE),
 					'expirationDate' => $expirationDate,
-					'securityCode' => $this->encrypt_connect->cryptography($response->secureToken, FALSE),
+					'securityCode' => $this->encrypt_decrypt->aesCryptography($response->secureToken, FALSE),
 				];
 				$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_CLOSE');
 				$this->response->modalBtn['btn1']['action'] = 'none';

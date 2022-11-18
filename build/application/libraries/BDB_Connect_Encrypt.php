@@ -14,7 +14,7 @@ class BDB_Connect_Encrypt
 
 	public function __construct()
 	{
-		log_message('INFO', 'NOVO Encrypt_Connect Library Class Initialized');
+		log_message('INFO', 'NOVO BDB_Connect_Encrypt Library Class Initialized');
 		$this->CI = &get_instance();
 		$this->iv = "\0\0\0\0\0\0\0\0";
 		$this->keyAES256 = base64_decode(KEY_AES256);
@@ -27,7 +27,11 @@ class BDB_Connect_Encrypt
 	 */
 	public function encode($data, $userName, $model)
 	{
-		log_message('INFO', 'NOVO Encrypt_Connect: encode Method Initialized');
+		log_message('INFO', 'NOVO BDB_Connect_Encrypt: encode Method Initialized');
+
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
 
 		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
 
@@ -57,7 +61,12 @@ class BDB_Connect_Encrypt
 	 */
 	public function decode($cryptData, $userName, $model)
 	{
-		log_message('INFO', 'NOVO Encrypt_Connect: decode Method Initialized');
+		log_message('INFO', 'NOVO BDB_Connect_Encrypt: decode Method Initialized');
+
+		if (ENVIRONMENT === 'development') {
+			error_reporting(E_ALL & ~E_DEPRECATED);
+		}
+
 		$data = base64_decode($cryptData);
 
 		$this->keyNovo = is_null($this->CI->session->userdata('userName')) ? WS_KEY : base64_decode($this->CI->session->userdata('keyId'));
@@ -100,7 +109,7 @@ class BDB_Connect_Encrypt
 	public function connectWs($request, $userName, $model)
 	{
 		$fail = FALSE;
-		log_message('INFO', 'NOVO Encrypt_Connect: connectWs Method Initialized');
+		log_message('INFO', 'NOVO BDB_Connect_Encrypt: connectWs Method Initialized');
 
 		$urlWS = $_SERVER['WS_URL'];
 
@@ -174,7 +183,7 @@ class BDB_Connect_Encrypt
 	 */
 	public function cryptography($data, $encrip = TRUE)
 	{
-		log_message('INFO', 'NOVO Encrypt_Connect: cryptography Method Initialized');
+		log_message('INFO', 'NOVO BDB_Connect_Encrypt: cryptography Method Initialized');
 
 		$encrypt_method = "AES-256-CBC";
 

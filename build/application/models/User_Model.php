@@ -27,7 +27,7 @@ class User_Model extends BDB_Model
 		}
 
 		$password = $this->cryptography->decryptOnlyOneData($dataRequest->pass);
-		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$argon2 = $this->encrypt_decrypt->generateArgon2Hash($password);
 
 		$this->dataAccessLog->modulo = 'login';
 		$this->dataAccessLog->function = 'login';
@@ -334,7 +334,7 @@ class User_Model extends BDB_Model
 		$dataUser = $this->session->userdata;
 
 		$password = $this->decryptData($dataRequest->userpwd);
-		$argon2 = $this->encrypt_connect->generateArgon2($password);
+		$argon2 = $this->encrypt_decrypt->generateArgon2Hash($password);
 
 		$user = array(
 			"userName" => $dataRequest->username,
@@ -842,8 +842,8 @@ class User_Model extends BDB_Model
 		$currentPassword = $this->decryptData($dataRequest->currentPassword);
 		$newPassword = $this->decryptData($dataRequest->newPassword);
 
-		$argon2Current = $this->encrypt_connect->generateArgon2($currentPassword);
-		$argon2New = $this->encrypt_connect->generateArgon2($newPassword);
+		$argon2Current = $this->encrypt_decrypt->generateArgon2Hash($currentPassword);
+		$argon2New = $this->encrypt_decrypt->generateArgon2Hash($newPassword);
 
 		$this->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataAccessLog->modulo = 'password';

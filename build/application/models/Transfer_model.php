@@ -107,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// TODO
 			// Transferencia es usado sólo por Vzla
 			// Acordar con servicios su modificación
-			$argon2 = $this->encrypt_connect->generateArgon2($clave);
+			$argon2 = $this->encrypt_decrypt->generateArgon2Hash($clave);
 
 			$data = json_encode(array(
 				                    "idOperation"=>"10",

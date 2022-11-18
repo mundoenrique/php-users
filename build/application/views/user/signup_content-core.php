@@ -237,7 +237,7 @@
 									<?php endif; ?>
 
                   <div class="form-group col-6 <?= $longMobile; ?> input-height">
-                    <label for="mobilePhone"><?= lang('USER_PHONE_MOBILE') ?></label>
+                    <label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
                     <input id="mobilePhone" class="form-control" type="text" name="mobilePhone" value="<?= $mobilePhone ?>" <?= $updatePhone; ?>
                       autocomplete="off">
                     <div class="help-block"></div>
@@ -433,7 +433,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <?php $this->load->view('user/passwordInfo_content-core') ?>
+                    <?php $this->load->view('user/passwordInfo_content-core', $titleCredential) ?>
                   </div>
                 </div>
               </div>
@@ -550,7 +550,7 @@
                     </div>
                   </div>
                   <div class="col-6 flex justify-center">
-                    <?php $this->load->view('user/passwordInfo_content-core') ?>
+                    <?php $this->load->view('user/passwordInfo_content-core', $titleCredential) ?>
                   </div>
                 </div>
               </div>
