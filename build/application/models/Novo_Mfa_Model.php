@@ -28,7 +28,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'authenticationChannel' => $dataRequest->channel
 		];
 
-		$response = $this->sendToCoreServices('callWs_ActivateSecretToken');
+		$response = $this->sendToMfaServices('callWs_ActivateSecretToken');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -42,7 +42,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 
-				$this->response->data = $response->data;
+				$this->response->data = $response;
 				break;
 
 			case 462:
@@ -76,7 +76,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'username' => $this->session->userName
 		];
 
-    $response = $this->sendToCoreServices('callWs_GenerateTotp');
+    $response = $this->sendToMfaServices('callWs_GenerateTotp');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -119,7 +119,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 			'otpValue' => $dataRequest->authenticationCode,
 		];
 
-		$response = $this->sendToCoreServices('callWs_ValidateTotp');
+		$response = $this->sendToMfaServices('callWs_ValidateTotp');
 
     switch ($this->isResponseRc) {
 			case 0:
@@ -143,7 +143,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				}
 
 				if ($dataRequest->operationType === lang('CONF_MFA_VALIDATE_OTP')) {
-					if ($response->data->validationResult) {
+					if ($response->validationResult) {
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
 						$this->session->set_userdata('otpMfaAuth', TRUE);

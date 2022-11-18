@@ -1,6 +1,7 @@
 'use strict';
 var traslate
 $(function () {
+	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 	traslate = $('#traslate').val() === '1' ? true : false;
 	assetsClient = cryptography.decrypt(assetsClient.response);
 
@@ -11,8 +12,6 @@ $(function () {
 	loader = $('#loader').html();
 	validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
 	defaultCode = parseInt(lang.CONF_DEFAULT_CODE);
-
-	$('input[type=text], input[type=password], input[type=email]').attr('autocomplete', 'off');
 
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input')
@@ -51,73 +50,17 @@ $(function () {
 		});
 	});
 
-	if (code > 2) {
-		appMessages(title, msg, icon, modalBtn)
-	}
-
 	$('.big-modal').on('click', function () {
 		coverSpin(true);
 	});
 
-	dataTableLang = {
-		"sLengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
-		"sZeroRecords": lang.GEN_DATATABLE_SZERORECORDS,
-		"sEmptyTable": lang.GEN_DATATABLE_SEMPTYTABLE,
-		"sInfo": lang.GEN_DATATABLE_SINFO,
-		"sInfoEmpty": lang.GEN_DATATABLE_SINFOEMPTY,
-		"sInfoFiltered": lang.GEN_DATATABLE_SINFOFILTERED,
-		"sInfoPostFix": lang.CONF_DATATABLE_SINFOPOSTFIX,
-		"slengthMenu": lang.GEN_DATATABLE_SLENGTHMENU,
-		"sSearch": lang.CONF_DATATABLE_SSEARCH,
-		"sSearchPlaceholder": lang.GEN_DATATABLE_SSEARCHPLACEHOLDER,
-		"sUrl": lang.CONF_DATATABLE_SSEARCH,
-		"sInfoThousands": lang.CONF_DATATABLE_SINFOTHOUSANDS,
-		"sProcessing": lang.GEN_DATATABLE_SPROCESSING,
-		"sloadingrecords": lang.GEN_DATATABLE_SLOADINGRECORDS,
-		"oPaginate": {
-			"sFirst": lang.GEN_DATATABLE_SFIRST,
-			"sLast": lang.GEN_DATATABLE_SLAST,
-			"sNext": lang.CONF_DATATABLE_SNEXT,
-			"sPrevious": lang.CONF_DATATABLE_SPREVIOUS
-		},
-		"oAria": {
-			"sSortAscending": lang.GEN_DATATABLE_SSORTASCENDING,
-			"sSortDescending": lang.GEN_DATATABLE_SSORTDESCENDING
-		},
-		"select": {
-			"rows": {
-				_: lang.GEN_DATATABLE_ROWS_SELECTED,
-				0: lang.CONF_DATATABLE_ROWS_NO_SELECTED,
-				1: lang.GEN_DATATABLE_ROW_SELECTED
-			}
-		}
+	if (code > 2) {
+		appMessages(title, msg, icon, modalBtn)
 	}
 
-	currentDate = new Date();
-  $.datepicker.regional['es'] = {
-    closeText: lang.GEN_DATEPICKER_CLOSETEXT,
-    prevText: lang.GEN_DATEPICKER_PREVTEXT,
-    nextText: lang.GEN_DATEPICKER_NEXTTEXT,
-    currentText: lang.GEN_DATEPICKER_CURRENTTEXT,
-    monthNames: lang.GEN_DATEPICKER_MONTHNAMES,
-    monthNamesShort: lang.GEN_DATEPICKER_MONTHNAMESSHORT,
-    dayNames: lang.GEN_DATEPICKER_DAYNAMES,
-    dayNamesShort: lang.GEN_DATEPICKER_DAYNAMESSHORT,
-    dayNamesMin: lang.GEN_DATEPICKER_DAYNAMESMIN,
-		weekHeader: lang.CONF_DATEPICKER_WEEKHEADER,
-    dateFormat: lang.CONF_DATEPICKER_DATEFORMAT,
-    firstDay: lang.CONF_DATEPICKER_FIRSTDATE,
-    isRTL: lang.CONF_DATEPICKER_ISRLT,
-		showMonthAfterYear: lang.CONF_DATEPICKER_SHOWMONTHAFTERYEAR,
-		yearRange: lang.CONF_DATEPICKER_YEARRANGE + currentDate.getFullYear(),
-		minDate: lang.CONF_DATEPICKER_MINDATE,
-		maxDate: currentDate,
-		changeMonth: lang.CONF_DATEPICKER_CHANGEMONTH,
-    changeYear: lang.CONF_DATEPICKER_CHANGEYEAR,
-		showAnim: lang.CONF_DATEPICKER_SHOWANIM,
-    yearSuffix: lang.CONF_DATEPICKER_YEARSUFFIX
-  };
-	$.datepicker.setDefaults($.datepicker.regional['es']);
+	if (response && (response.code === defaultCode)) {
+		appMessages(response.title, response.msg, response.icon, response.modalBtn);
+	}
 });
 
 function callNovoCore(who, where, request, _response_) {
@@ -181,7 +124,10 @@ function callNovoCore(who, where, request, _response_) {
 		};
 
 		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
-		_response_(response);
+
+		if (_response_) {
+			_response_(response);
+		}
 	});
 }
 
@@ -356,5 +302,19 @@ function modalDestroy(close) {
 			.addClass(lang.CONF_MODAL_BTN_CLASS['cancel'])
 			.html(lang.GEN_BTN_CANCEL)
 			.off('click');
+	}
+}
+
+function resetForms(formData) {
+	if (formData) {
+		if (validator) {
+			formData.find('input, select, textarea').each(function () {
+				validator.successList.push(this); // Libera errores
+				validator.showErrors(); // Elimina los mensajes de error si están presentes
+			});
+			validator.resetForm(); // Elimina la clase de error en los campos y borrar el historial
+			validator.reset(); // Elimina todos los datos de error y éxito
+		}
+		formData[0].reset();
 	}
 }

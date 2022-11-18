@@ -5,8 +5,8 @@
     <div class="widget-product">
       <div class="line-text w-100">
         <div class="flex inline-flex col-12 px-xl-2">
-          <div id="productdetail" class="flex flex-column justify-center col-6 py-4">
-            <div class="product-presentation relative w-100">
+          <div id="productdetail" class="flex flex-column justify-center col-auto <?= $isVirtual ? 'pb-2': 'pb-4' ?> pt-4 pr-0">
+            <div class="product-presentation relative">
               <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
               <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
             </div>
@@ -16,7 +16,7 @@
             </a>
             <?php endif; ?>
           </div>
-          <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+          <div class="flex flex-column items-start col-6 self-center px-0 ml-1">
 						<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
 						<small class="sb-disabled uppercase light truncate"><?= $enterprise?></small>
 						<?php endif; ?>
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
+  <div class="flex flex-column pt-3 pl-2 col-lg-12 col-xl-8">
     <h2 class="h4 regular tertiary"><?= lang('BUSINESS_MY_MOVEMENTS'); ?></h2>
     <nav id="filtersStack" class="navbar px-0">
       <form id="movements" method="post" class="col-12 col-lg-9">

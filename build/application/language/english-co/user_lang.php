@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //GENERAL LANGUAGE
 $lang["USER_TERMS_TITLE"]='Terms and Conditions.';
 $lang["USER_TERMS_SUBTITLE"]='General Conditions, Terms of Use and Confidentiality';
+$lang['USER_CITY'] = 'City';
 $lang["USER_TERMS_CONTENT"] = '
 <div class="justify pr-3">
 <p><b> NovoPayment Colombia S.A.S. </b>, a company legally constituted and registered with the Bogota Chamber of Commerce (hereinafter "The Company"); then it establishes the General Conditions and Terms of Use and Confidentiality that govern the electronic platform developed by The Company and that has been enabled so that the clients of the issuing financial institutions (hereinafter the "Users"), can make use of the different functionalities it offers.</p>

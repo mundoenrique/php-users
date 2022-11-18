@@ -60,3 +60,4 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_viaticos' => 'plata_clasica',
 	'plata_visa' => 'plata_clasica',
 ];
+$lang['IMG_SIGNIN_IMAGE'] = 'img-servitebca-signin.jpg';

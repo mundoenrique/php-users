@@ -250,7 +250,7 @@ class Tool_File {
 			$fileContent = file_get_contents($fileName);
 
 			if (is_string($fileContent)) {
-				$contentEncryt = $this->CI->encrypt_connect->cryptography($fileContent, $encrypt);
+				$contentEncryt = $this->CI->encrypt_decrypt->aesCryptography($fileContent, $encrypt);
 				$file = fopen($fileName, "wb");
 
 				if ($file) {
@@ -313,7 +313,7 @@ class Tool_File {
 			'INE_A' => $imagesDocument['INE_A']['base64'],
 			'INE_R' => $imagesDocument['INE_R']['base64'],
 		);
-		return $this->CI->encrypt_connect->cryptography(json_encode($r->request));
+		return $this->CI->encrypt_decrypt->aesCryptography(json_encode($r->request));
 	}
 
 	// TODO
@@ -342,6 +342,6 @@ class Tool_File {
 			'client' => 'bnt',
 			'files' => implode ("; ", $imagesDocument),
 		);
-		return $this->CI->encrypt_connect->cryptography(json_encode($r->request));
+		return $this->CI->encrypt_decrypt->aesCryptography(json_encode($r->request));
 	}
 }

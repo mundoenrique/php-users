@@ -6,8 +6,8 @@
       <div class="w-100">
         <div class="widget-product">
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
-            <div class="flex flex-column justify-center col-6 py-4">
-              <div class="product-presentation relative w-100">
+            <div class="flex flex-column justify-center col-auto py-4 pr-0">
+              <div class="product-presentation relative">
                 <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0): ?>
                 <div id="donor" class="product-search btn">
@@ -24,10 +24,10 @@
             </div>
             <?php if ($totalCards > 1 || $totalCards == 0): ?>
             <div id="accountSelect" class="flex flex-column items-start self-center col-6 py-5">
-              <p class="mb-2"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
+              <p class="mb-0"><?= lang('GEN_SELECT_ACCOUNT'); ?></p>
             </div>
             <?php else: ?>
-            <div class="flex flex-column items-start col-6 self-center pr-0 pl-1">
+            <div class="flex flex-column items-start col-6 self-center px-0 ml-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
               <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
@@ -46,7 +46,7 @@
 			</div>
   	</div>
   </div>
-  <div class="flex flex-column pt-3 col-lg-12 col-xl-8">
+  <div class="flex flex-column pt-3 pl-2 col-lg-12 col-xl-8">
     <h2 class="h4 regular tertiary"><?= lang('REPORTS_EXPENSES_CATEGORY'); ?></h2>
     <nav id="filtersStack" class="navbar px-0">
 

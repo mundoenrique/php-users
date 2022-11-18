@@ -41,7 +41,7 @@ class Novo_CallApi extends Novo_Controller {
 					writeLog('DEBUG', '['.$this->nameApi.'/'.$this->username.'] NOVO VALIDATION ERRORS: '.json_encode(validation_errors()));
 				}
 			} else {
-				$decryptFieldKey = json_decode($this->encrypt_connect->cryptography($_POST['key'], FALSE));
+				$decryptFieldKey = json_decode($this->encrypt_decrypt->aesCryptography($_POST['key'], FALSE));
 				$key_api = !is_null($decryptFieldKey) && property_exists($decryptFieldKey, 'key') ? $decryptFieldKey->key: '';
 
 				$key_api === KEY_API && $isValid = TRUE;

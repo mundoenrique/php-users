@@ -85,12 +85,9 @@ if (!function_exists('clearSessionVars')) {
 	function clearSessionsVars() {
 		$CI =& get_instance();
 
-		foreach ($CI->session->all_userdata() AS $pos => $sessionVar) {
-			if ($pos == '__ci_last_regenerate') {
-				continue;
-			}
-
-			$CI->session->unset_userdata($pos);
+		if($CI->session->has_userdata('logged') || $CI->session->has_userdata('userId')) {
+			$CI->session->unset_userdata(['logged', 'userId', 'products']);
+			$CI->session->sess_destroy();
 		}
 	}
 }
@@ -134,6 +131,21 @@ if (!function_exists('setCurrentPage')) {
 				break;
 			case 'cardDetail':
 				if($menu == lang('GEN_MENU_CARD_DETAIL')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'cardToCard':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'cardToBank':
+				if($menu == lang('GEN_MENU_TRANSFERS')) {
+					$cssClass = 'page-current';
+				}
+				break;
+			case 'mobilePayment':
+				if($menu == lang('GEN_MENU_MOBILE_PAYMENT')) {
 					$cssClass = 'page-current';
 				}
 				break;
@@ -209,7 +221,7 @@ if (!function_exists('mainMenu'))
 	function mainMenu() {
 		return [
 			'CARD_LIST' => [],
-			'PAYS_TRANSFER' => [
+			'TRANSFERS' => [
 				'BETWEEN_CARDS' => [],
 				'BANKS' => [],
 				'SERVICES' => [
@@ -217,6 +229,7 @@ if (!function_exists('mainMenu'))
 					'DIGITEL' => []
 				]
 			],
+			'MOBILE_PAYMENT' => [],
 			'CUSTOMER_SUPPORT' => [],
 			'REPORTS' => []
 		];
