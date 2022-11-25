@@ -22,18 +22,18 @@ class Novo_Transfer extends NOVO_Controller
 		$validateChangeOperKey = $currentMethod !== 'changeOperationKey';
 		$validateSetOperKey = $currentMethod !== 'setOperationKey';
 		$validateGetOperKey = $currentMethod !== 'getOperationKey';
-		$validateUriOperKey = lang('CONF_REDIRECT_OPER_KEY');
+		$validateUriOperKey = lang('SETT_REDIRECT_OPER_KEY');
 		$validateRedirect = ($validateChangeOperKey && $validaTransferAuth);
 
 		if ($validateOperKey && $validateGetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_GET_OPER_KEY')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_GET_OPER_KEY')), 'Location', 301);
 			exit();
 		}
 
 		if (!$validateOperKey && $validateSetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_SET_OPER_KEY')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_SET_OPER_KEY')), 'Location', 301);
 			exit();
 		}
 

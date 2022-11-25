@@ -115,23 +115,23 @@ class Novo_User extends NOVO_Controller {
 		$this->render->previewPASS_R = FALSE;
 
 		$this->render->titleCredential = ['title' => strtolower(lang('GEN_PASSWORD'))];
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
+		$this->render->countryDocument = lang('SETT_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_SIGNUP');
-		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
-		$this->render->updateLastName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
-		$this->render->updatePhone = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
-		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
-		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
-		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
-		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
-		$this->render->longMobile = lang('CONF_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
+		$this->render->updateName = lang('SETT_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateLastName = lang('SETT_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhone = lang('SETT_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('SETT_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
+		$this->render->skipConfirmEmail = lang('SETT_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->skipLandLine = lang('SETT_LANDLINE') == 'OFF' ? 'hide' : '';
+		$this->render->skipOtherPhone = lang('SETT_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->longMobile = lang('SETT_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
 		$this->render->dataUser = $this->session->longProfile == 'S' ? 'col-lg-6' : 'col-lg-12';
 		$this->render->dataPass = $this->session->longProfile == 'S' ? '' : 'col-lg-6';
 		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
 		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
 
-		if (lang('CONF_LOAD_DOCS') == 'OFF') {
+		if (lang('SETT_LOAD_DOCS') == 'OFF') {
       foreach ($this->render->stepTitles as $key => $value) {
         if ($value == lang('USER_LOAD_DOCS_STEP')) {
           unset($this->render->stepTitles[$key]);
@@ -192,7 +192,7 @@ class Novo_User extends NOVO_Controller {
 		}
 
 		if ($this->session->flashdata('changePassword') != NULL) {
-			$cancelBtn = base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START'));
+			$cancelBtn = base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START'));
 
 			switch($this->session->flashdata('changePassword')) {
 				case 'TemporalPass':
@@ -261,34 +261,34 @@ class Novo_User extends NOVO_Controller {
 			}
 		}
 
-		$this->render->countryDocument = lang('CONF_COUNTRY_DOCUMENT')[$this->session->customerSess];
+		$this->render->countryDocument = lang('SETT_COUNTRY_DOCUMENT')[$this->session->customerSess];
 		$this->render->titlePage = lang('GEN_MENU_PROFILE');
-		$this->render->updateUser = lang('CONF_UPDATE_USER') == 'OFF' ? 'no-write' : '';
-		$this->render->disabled = lang('CONF_UPDATE_USER') == 'OFF' ? 'disabled' : '';
-		$this->render->updateName = lang('CONF_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
-		$this->render->updateSecondName = lang('CONF_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
-		$this->render->updatePhoneMobile = lang('CONF_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
-		$this->render->updateEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
-		$this->render->skipProfession = lang('CONF_PROFESSION') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreProfession = lang('CONF_PROFESSION') == 'OFF' ? 'ignore' : '';
-		$this->render->skipContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreContacData = lang('CONF_CONTAC_DATA') == 'OFF' ? 'ignore' : '';
-		$this->render->skipConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreConfirmEmail = lang('CONF_UPDATE_EMAIL') == 'OFF' ? 'ignore' : '';
-		$this->render->skipLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreLandLine = lang('CONF_LANDLINE') == 'OFF' ? 'ignore' : '';
-		$this->render->skipOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'hide' : '';
-		$this->render->ignoreOtherPhone = lang('CONF_OTHER_PHONE') == 'OFF' ? 'ignore' : '';
-		$this->render->skipSms = lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
-		$this->render->skipEmail = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
-		$this->render->longMobile = lang('CONF_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
-		$this->render->skipBoth = lang('CONF_CHECK_NOTI_EMAIL') == 'OFF' && lang('CONF_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->updateUser = lang('SETT_UPDATE_USER') == 'OFF' ? 'no-write' : '';
+		$this->render->disabled = lang('SETT_UPDATE_USER') == 'OFF' ? 'disabled' : '';
+		$this->render->updateName = lang('SETT_UPDATE_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updateSecondName = lang('SETT_UPDATE_SECOND_NAME') == 'OFF' ? 'readonly' : '';
+		$this->render->updatePhoneMobile = lang('SETT_UPDATE_PHONE_MOBILE') == 'OFF' ? 'readonly' : '';
+		$this->render->updateEmail = lang('SETT_UPDATE_EMAIL') == 'OFF' ? 'readonly' : '';
+		$this->render->skipProfession = lang('SETT_PROFESSION') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreProfession = lang('SETT_PROFESSION') == 'OFF' ? 'ignore' : '';
+		$this->render->skipContacData = lang('SETT_CONTAC_DATA') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreContacData = lang('SETT_CONTAC_DATA') == 'OFF' ? 'ignore' : '';
+		$this->render->skipConfirmEmail = lang('SETT_UPDATE_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreConfirmEmail = lang('SETT_UPDATE_EMAIL') == 'OFF' ? 'ignore' : '';
+		$this->render->skipLandLine = lang('SETT_LANDLINE') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreLandLine = lang('SETT_LANDLINE') == 'OFF' ? 'ignore' : '';
+		$this->render->skipOtherPhone = lang('SETT_OTHER_PHONE') == 'OFF' ? 'hide' : '';
+		$this->render->ignoreOtherPhone = lang('SETT_OTHER_PHONE') == 'OFF' ? 'ignore' : '';
+		$this->render->skipSms = lang('SETT_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
+		$this->render->skipEmail = lang('SETT_CHECK_NOTI_EMAIL') == 'OFF' ? 'hide' : '';
+		$this->render->longMobile = lang('SETT_INTERNATIONAL_ADDRESS') == 'OFF' ? 'col-lg-4' : 'col-lg-2';
+		$this->render->skipBoth = lang('SETT_CHECK_NOTI_EMAIL') == 'OFF' && lang('SETT_CHECK_NOTI_SMS') == 'OFF' ? 'hide' : '';
 		$this->render->terms = $this->session->terms;
 		$this->render->imagesLoaded = $this->render->imagesLoaded ?? [];
 		$this->render->dataStep = $this->session->longProfile == 'S' ? 'col-lg-12' : 'col-lg-7';
 		$this->render->stepTitles = $this->session->longProfile == 'S' ? lang('USER_STEP_TITLE_REGISTRY_LONG') : lang('USER_STEP_TITLE_REGISTRY');
 
-		if (lang('CONF_LOAD_DOCS') == 'OFF') {
+		if (lang('SETT_LOAD_DOCS') == 'OFF') {
       foreach ($this->render->stepTitles as $key => $value) {
         if ($value == lang('USER_LOAD_DOCS_STEP')) {
           unset($this->render->stepTitles[$key]);
@@ -312,9 +312,9 @@ class Novo_User extends NOVO_Controller {
 		$view = 'finishSession';
 		$this->loadModel();
 
-		if($redirect === lang('CONF_LINK_SIGNOUT_END')) {
+		if($redirect === lang('SETT_LINK_SIGNOUT_END')) {
 			$pos = array_search('sessionControl', $this->includeAssets->jsFiles);
-			$this->render->action = base_url(lang('CONF_LINK_SIGNIN'));
+			$this->render->action = base_url(lang('SETT_LINK_SIGNIN'));
 			$this->render->showBtn = TRUE;
 			$this->render->sessionEnd = novoLang(lang('GEN_EXPIRED_SESSION'), lang('GEN_SYSTEM_NAME'));
 
@@ -325,7 +325,7 @@ class Novo_User extends NOVO_Controller {
 			$this->views = ['user/'.$view];
 			$this->loadView($view);
 		} else {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 301);
 			exit();
 		}
 
@@ -342,7 +342,7 @@ class Novo_User extends NOVO_Controller {
 		$view = 'suggestion';
 
 		if($this->session->flashdata('messageBrowser') === NULL) {
-			redirect(base_url(lang('CONF_LINK_SIGNIN')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_SIGNIN')), 'Location', 301);
 			exit();
 		}
 

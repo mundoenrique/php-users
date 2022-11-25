@@ -98,10 +98,10 @@ class Novo_Business_Model extends NOVO_Model {
 						$produtImgRev = lang('IMG_PROGRAM_IMG_DEFAULT_REV');
 
 						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
-							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
+							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '.svg';
 
-							if (file_exists(assetPath('images/programs/'.$this->customerUri.'/'.lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg'))) {
-								$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
+							if (file_exists(assetPath('images/programs/' . $this->customerUri . '/' . lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '_rev.svg'))) {
+								$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '_rev.svg';
 							}
 						}
 
@@ -114,17 +114,17 @@ class Novo_Business_Model extends NOVO_Model {
 					}
 				} else {
 					$this->response->code = 4;
-					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->icon = lang('SETT_ICON_WARNING');
 					$this->response->msg = novoLang(
 						lang('BUSINESS_WITH_OUT_CARDS'), mb_strtolower(lang('GEN_VALIDATION_LOGGED'))
 					);
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START');
+					$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START');
 				}
 				break;
 
 			default:
 				clearSessionsVars();
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_SIGNIN');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNIN');
 		}
 
 		$serviceList = array_unique($serviceList);
@@ -148,7 +148,7 @@ class Novo_Business_Model extends NOVO_Model {
 			$this->session->set_userdata('oneCard', $cardsList[0]);
 
 			if ($this->response->code == 0) {
-				redirect(base_url(lang('CONF_LINK_CARD_DETAIL')), 'Location', 301);
+				redirect(base_url(lang('SETT_LINK_CARD_DETAIL')), 'Location', 301);
 				exit();
 			}
 		}
@@ -180,7 +180,7 @@ class Novo_Business_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->msg = lang('CONF_CURRENCY').' '.$response->disponible;
+				$this->response->msg = lang('SETT_CURRENCY').' '.$response->disponible;
 				break;
 				default:
 				$this->response->code = 1;
@@ -253,9 +253,9 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 
 				if (isset($response->saldos)) {
-					$balance->currentBalance = lang('CONF_CURRENCY').' '.$response->saldos->actual;
-					$balance->inTransitBalance = lang('CONF_CURRENCY').' '.$response->saldos->bloqueo;
-					$balance->availableBalance = lang('CONF_CURRENCY').' '.$response->saldos->disponible;
+					$balance->currentBalance = lang('SETT_CURRENCY').' '.$response->saldos->actual;
+					$balance->inTransitBalance = lang('SETT_CURRENCY').' '.$response->saldos->bloqueo;
+					$balance->availableBalance = lang('SETT_CURRENCY').' '.$response->saldos->disponible;
 				}
 
 				if (isset($response->movimientos) && count($response->movimientos) > 0) {
@@ -265,7 +265,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
-						$move->amount = lang('CONF_CURRENCY').' '.$moves->monto;
+						$move->amount = lang('SETT_CURRENCY').' '.$moves->monto;
 						$movesList[] = $move;
 					}
 				}
@@ -328,7 +328,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->desc = implode(' ',array_filter(explode(' ',ucfirst(mb_strtolower($moves->concepto)))));
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
-						$move->amount = lang('CONF_CURRENCY').' '.$moves->monto;
+						$move->amount = lang('SETT_CURRENCY').' '.$moves->monto;
 						$movesList[] = $move;
 					}
 				}
@@ -385,7 +385,7 @@ class Novo_Business_Model extends NOVO_Model {
 					case 'send':
 						$fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
 						$this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
-						$this->response->icon = lang('CONF_ICON_SUCCESS');
+						$this->response->icon = lang('SETT_ICON_SUCCESS');
 						$this->response->msg = lang('GEN_MAIL_SUCCESS');
 						$this->response->modalBtn['btn1']['action'] = 'destroy';
 					break;
@@ -455,7 +455,7 @@ class Novo_Business_Model extends NOVO_Model {
 				}
 			break;
 			case -150:
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('GEN_CARDS_NO_ENABLED');
 			break;
 		}

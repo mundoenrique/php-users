@@ -147,7 +147,7 @@
             <div class="col-12">
               <div class="bg-secondary h-100">
                 <div class="row mx-1 <?= $skipContacData; ?>">
-                  <?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+                  <?php if (lang('SETT_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="country"><?= lang('USER_COUNTRY') ?></label>
                     <select id="country" class="custom-select form-control" name="country">
@@ -202,7 +202,7 @@
                       city-code="<?= $cityCode; ?>">
                     <div class="help-block"></div>
                   </div>
-                  <?php if($longProfile == 'S' || lang('CONF_INTERNATIONAL_ADDRESS') == 'ON'): ?>
+                  <?php if($longProfile == 'S' || lang('SETT_INTERNATIONAL_ADDRESS') == 'ON'): ?>
                   <div class="form-group col-6 col-lg-3 input-height">
                     <label for="district"><?= lang('USER_DISTRICT') ?></label>
                     <select id="district" class="custom-select form-control <?= $updateUser; ?> <?= $ignoreContacData; ?>" name="district">
@@ -228,7 +228,7 @@
                     <input id="oldEmail" type="hidden" name="oldEmail" value="<?= $email; ?>">
                     <div class="help-block"></div>
                   </div>
-                  <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
+                  <?php if (lang('SETT_UPDATE_USER') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4 input-height <?= $skipConfirmEmail; ?>">
                     <label for="confirmEmail"><?= lang('USER_CONFIRM_EMAIL') ?></label>
                     <input id="confirmEmail" class="form-control" type="text" name="confirmEmail" value="<?= $email; ?>"
@@ -237,7 +237,7 @@
                   </div>
                   <?php endif; ?>
 
-									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+									<?php if (lang('SETT_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-2 input-height">
                     <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
                     <div class="container-flags truncate col-4 p-0">
@@ -445,12 +445,12 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
+                  <?php if (lang('SETT_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
                   </div>
                   <?php endif; ?>
-                  <?php if (lang('CONF_SMS_KEY') == 'ON') : ?>
+                  <?php if (lang('SETT_SMS_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_SMS_PASSS_CHANGE') ?></a>
                   </div>
@@ -459,11 +459,11 @@
               </div>
             </div>
           </fieldset>
-          <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+          <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
           <!-- Carga de documentos -->
           <?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
           <fieldset class="form-group col-12 ms-step-<?= $index ?> mb-0 border-none" data-index=<?= $index ?>>
-            <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+            <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
             <div class="col-12">
               <div class="bg-secondary">
                 <?php $this->load->view('user/loadDocuments_content-core') ?>
@@ -538,12 +538,12 @@
                   </div>
                 </div>
                 <div class="row mx-1">
-                  <?php if (lang('CONF_OPER_KEY') == 'ON') : ?>
+                  <?php if (lang('SETT_OPER_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_OPER_PASS_CHANGE') ?></a>
                   </div>
                   <?php endif; ?>
-                  <?php if (lang('CONF_SMS_KEY') == 'ON') : ?>
+                  <?php if (lang('SETT_SMS_KEY') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-4">
                     <a class="btn btn-small btn-link px-0 hyper-link" href=""><?= lang('USER_SMS_PASSS_CHANGE') ?></a>
                   </div>
@@ -552,11 +552,11 @@
               </div>
             </div>
           </fieldset>
-          <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+          <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
           <!-- Carga de documentos -->
           <?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
           <fieldset class="form-group col-12 ms-step-<?= $index ?> mb-0 border-none" data-index=<?= $index ?>>
-            <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+            <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
             <div class="col-12">
               <div class="bg-secondary">
                 <?php $this->load->view('user/loadDocuments_content-core') ?>
@@ -585,7 +585,7 @@
         <div class="line-text mx-3"></div>
         <small class="mx-3 text"><?= lang('USER_SAVE_BTN_MSG'); ?> <?= count($stepTitles) ?></small>
 
-        <?php if (lang('CONF_UPDATE_USER') == 'ON') : ?>
+        <?php if (lang('SETT_UPDATE_USER') == 'ON') : ?>
         <div class="flex items-center justify-center my-3">
           <a id="btn-cancel" class="btn btn-small btn-link big-modal" href="<?= $this->agent->referrer(); ?>"><?= lang('GEN_BTN_CANCEL') ?></a>
           <button id="profileUserBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_SAVE') ?></button>

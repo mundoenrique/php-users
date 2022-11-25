@@ -13,7 +13,7 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 
-			if (lang.CONF_RECOVER_SHOW_OPTIONS == 'ON') {
+			if (lang.SETT_RECOVER_SHOW_OPTIONS == 'ON') {
 				if ($('#recoveryUser').is(':checked')) {
 					delete data.recoveryPwd;
 				}
@@ -73,10 +73,10 @@ function showModalOTP(response) {
 
 function getAccessRecover() {
 	who = 'User';
-	where = lang.CONF_LINK_SERVICE_RECOVER_ACCESS;
+	where = lang.SETT_LINK_SERVICE_RECOVER_ACCESS;
 
 	callNovoCore(who, where, data, function (response) {
-		if (lang.CONF_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
+		if (lang.SETT_LINK_SERVICE_RECOVER_ACCESS == 'AccessRecoverOTP') {
 			showModalOTP(response);
 		}
 

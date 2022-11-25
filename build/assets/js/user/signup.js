@@ -68,7 +68,7 @@ $(function () {
 
 	$('#landLine').on('change', function () {
 		$(this).rules('add', {
-			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
+			pattern: new RegExp(lang.REGEX_PHONE, 'i')
 		});
 	})
 
@@ -97,7 +97,7 @@ $(function () {
 				data.taxesObligated = $('input[name=taxesObligated]:checked').val() == 'yes' ? '1' : '0';
 			}
 
-			if (lang.CONF_LOAD_DOCS == 'ON') {
+			if (lang.SETT_LOAD_DOCS == 'ON') {
 				var inputFile = $('input[type="file"]');
 				var filesToUpload = [];
 

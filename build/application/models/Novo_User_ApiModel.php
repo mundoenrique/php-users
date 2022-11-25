@@ -12,7 +12,7 @@ class Novo_User_ApiModel extends NOVO_Model {
 		parent:: __construct();
 		writeLog('INFO', 'Api Model Class Initialized');
 
-		$this->configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$this->configUploadFile = lang('SETT_CONFIG_UPLOAD_FILE');
 	}
 
 	/**

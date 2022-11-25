@@ -12,14 +12,14 @@
           <th class="px-0 text-right"><?= lang('GEN_CONTACTS_CONTACT'); ?></th>
         </tr>
 			</thead>
-      <tbody class="<?= lang('CONF_LONG_TEXT') ?>">
-        <?php foreach(lang('CONF_CONTACTS') AS $city => $number): ?>
+      <tbody class="<?= lang('SETT_LONG_TEXT') ?>">
+        <?php foreach(lang('SETT_CONTACTS') AS $city => $number): ?>
         <tr>
           <td><?= $city ?></td>
           <td class="text-right"><?= $number ?></td>
         </tr>
 				<?php endforeach; ?>
-				<?php if(lang('CONF_WIDGET_REST_COUNTRY') == 'ON'): ?>
+				<?php if(lang('SETT_WIDGET_REST_COUNTRY') == 'ON'): ?>
         <tr class="center bold">
           <td colspan="2"><?= lang('GEN_CONTACTS_REST_COUNTRY'); ?></td>
         </tr>

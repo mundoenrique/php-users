@@ -94,15 +94,15 @@ class Verify_Access
 		writeLog('INFO', 'Verify_Access: ResponseByDefect method initialized');
 
 		$responseDefect = new stdClass();
-		$responseDefect->code = lang('CONF_DEFAULT_CODE');
-		$responseDefect->icon = lang('CONF_ICON_DANGER');
+		$responseDefect->code = lang('SETT_DEFAULT_CODE');
+		$responseDefect->icon = lang('SETT_ICON_DANGER');
 		$responseDefect->title = lang('GEN_SYSTEM_NAME');
 		$responseDefect->msg = novoLang(lang('GEN_VALIDATION_INPUT'), '');
-		$responseDefect->data = base_url(lang('CONF_LINK_SIGNIN'));
+		$responseDefect->data = base_url(lang('SETT_LINK_SIGNIN'));
 		$responseDefect->modalBtn = [
 			'btn1' => [
 				'text' => lang('GEN_BTN_ACCEPT'),
-				'link' => lang('CONF_LINK_SIGNIN'),
+				'link' => lang('SETT_LINK_SIGNIN'),
 				'action' => 'redirect'
 			]
 		];
@@ -129,7 +129,7 @@ class Verify_Access
 		$isLogged = $this->CI->session->has_userdata('logged');
 		$isUserId = $this->CI->session->has_userdata('userId');
 		$referrer = $this->CI->agent->referrer();
-		$mfaActive = lang('CONF_MFA_ACTIVE') === 'ON';
+		$mfaActive = lang('SETT_MFA_ACTIVE') === 'ON';
 
 		if ($isUserId && ($this->CI->session->clientAgent !== $this->CI->agent->agent_string())) {
 			clearSessionsVars();
@@ -145,11 +145,11 @@ class Verify_Access
 				$auth = $mfaActive && !$this->CI->session->otpActive && $isLogged;
 				break;
 			case 'mfaConfirm':
-				$referrerUrl = $referrer === base_url(lang('CONF_LINK_MFA_ENABLE'));
+				$referrerUrl = $referrer === base_url(lang('SETT_LINK_MFA_ENABLE'));
 				$auth = $isLogged && $referrerUrl;
 				break;
 			case 'activateSecretToken':
-				$referrerUrl = $referrer === base_url(lang('CONF_LINK_MFA_CONFIRM') . '/' . lang('CONF_MFA_EMAIL'));
+				$referrerUrl = $referrer === base_url(lang('SETT_LINK_MFA_CONFIRM') . '/' . lang('SETT_MFA_EMAIL'));
 				$auth = $isLogged && !$this->CI->session->otpActive && $referrerUrl;
 				break;
 			case 'validateTotp':
@@ -184,11 +184,11 @@ class Verify_Access
 			case 'expensesCategory':
 			case 'getMovements':
 			case 'downloadInquiry':
-				$auth = $this->CI->session->has_userdata('products') && lang('CONF_REPORTS') === 'ON';
+				$auth = $this->CI->session->has_userdata('products') && lang('SETT_REPORTS') === 'ON';
 				break;
 			case 'notifications':
 			case 'notificationHistory':
-				$auth = $this->CI->session->has_userdata('products') && lang('CONF_NOTIFICATIONS') === 'ON';
+				$auth = $this->CI->session->has_userdata('products') && lang('SETT_NOTIFICATIONS') === 'ON';
 				break;
 			case 'setOperationKey':
 			case 'getOperationKey':
@@ -210,7 +210,7 @@ class Verify_Access
 				$auth = $this->CI->session->has_userdata('canTransfer') && $this->CI->session->canTransfer === 'S';
 				break;
 			case 'signup':
-				$referrerUrl = $referrer === base_url(lang('CONF_LINK_USER_IDENTIFY'));
+				$referrerUrl = $referrer === base_url(lang('SETT_LINK_USER_IDENTIFY'));
 				$auth = $referrerUrl && $this->CI->session->has_userdata('userIdentity');
 				break;
 			case 'signUpData':

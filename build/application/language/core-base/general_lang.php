@@ -6,7 +6,6 @@ $lang['GEN_NOT_RENDER_MOBILE_MSG'] = 'Nuestra aplicación web no es compatible c
 Para una mejor experiencia descarga nuestra app.';
 $lang['GEN_NOT_RENDER_BROWSER'] = 'Algunos componentes de esta página podrían no funcionar correctamente.';
 $lang['GEN_NOT_RENDER_BROWSER_MSG'] = 'Para mejorar la experiencia en nuestro sitio asegúrate que estés usando:';
-
 $lang['GEN_CORE_NAME'] = 'Conexión Personas Online';
 $lang['GEN_CONTRACTED_SYSTEM_NAME'] = 'CPO';
 $lang['GEN_WELCOME_TEXT'] = 'Bienvenido(a)';
@@ -21,12 +20,10 @@ $lang['GEN_PLACE_HOLDER_EMAIL'] = "usuario@ejemplo.com";
 $lang['CHANGEPASSWORD_TITLE'] = 'Recuperar contraseña';
 $lang['GEN_NOT_SERVICES_AVAILABLE'] = 'La tarjeta presenta un bloqueo definitivo, no es posible realizar otras operaciones.';
 $lang['GEN_SERVICES_AVAILABLE'] = 'Selecciona la operación que deseas realizar';
-//TITLES PAGES
 $lang['GEN_RECOVER_ACCESS_TITLE'] = 'Recuperar acceso';
 $lang['GEN_PASSWORD_CHANGE_TITLE'] = 'Cambiar contraseña';
 $lang['GEN_REGISTRY_TITLE'] = 'Registro';
 $lang['GEN_PROFILE_TITLE'] = 'Perfil';
-//BUTTONS
 $lang['GEN_BTN_ACCEPT'] = 'Aceptar';
 $lang['GEN_BTN_CLOSE'] = 'Cerrar';
 $lang['GEN_BTN_CANCEL'] = 'Cancelar';
@@ -34,19 +31,15 @@ $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_BACK'] = 'Volver atrás';
 $lang['GEN_BTN_STAY'] = 'Mantener';
 $lang['GEN_BTN_YES'] = 'Si';
-
 $lang['GEN_TEXT_BLOCK_PRODUCT'] = 'Tarjeta bloqueada';
 $lang['GEN_TEXT_BLOCK_TEMP_PRODUCT'] = 'Bloqueada temporal';
 $lang['GEN_TEXT_PENDING_REPLACEMENT'] = 'Reposición pendiente';
-
 $lang['LAST_SESSION'] = 'Última sesión';
 $lang['FOOTER'] = 'Todos los derechos reservados.';
-//ENTERPRISE WIDGET
 $lang['WIDGET_EMPRESAS_BTNSELECCIONAR'] = 'Seleccionar otra empresa';
 $lang['WIDGET_EMPRESAS_BTNOTROSPROGRAMAS'] = 'Conozca otros programas';
 $lang['WIDGET_EMPRESAS_OPC_SEL_EMPRESAS'] = 'Selecciona una empresa';
 $lang['WIDGET_EMPRESAS_BTNAPLICAR'] = 'Seleccionar';
-//BREADCRUMBS
 $lang['BREADCRUMB_WELCOME'] = 'Bienvenido(a)';
 $lang['BREADCRUMB_INICIO'] = 'Inicio';
 $lang['BREADCRUMB_BENEFICIOS'] = 'Beneficios';
@@ -67,7 +60,6 @@ $lang['BREADCRUMB_TRANSMAESTRA'] = 'Transferencia maestra';
 $lang['BREADCRUMB_OTROS_PROGRAMS'] = 'Otros programas';
 $lang['BREADCRUMB_PH_BUSCAR'] = 'Buscar...';
 $lang['BREADCRUMB_TITL_BUSCAR'] = 'Buscar texto';
-//MENU OPTIONS
 $lang['MENU_INICIO'] = 'Inicio';
 $lang['GESLOT'] = 'Lotes';
 $lang['CONSUL'] = 'Consulta';
@@ -111,7 +103,6 @@ $lang['CMBCON'] = 'Conductores';
 $lang['CMBVHI'] = 'Vehículos';
 $lang['CMBCTA'] = 'Cuentas';
 $lang['CMBVJE'] = 'Viajes';
-//SETTINGS
 $lang['CARGANDO'] = 'Cargando...';
 $lang['CONFIGURACION'] = 'Configuración';
 $lang['SUBMENU_TARIFAS'] = 'Tarifas';
@@ -125,16 +116,13 @@ $lang['CONFIG_EMPR'] = 'Configuración de empresa';
 $lang['CONFIG_SUCU'] = 'Configuración de sucursal';
 $lang['TITLE_MODIFICAR'] = 'Modificar';
 $lang['AYUDA'] = 'Ayuda';
-//MASTER_CONTENT
 $lang['OWNERSHIP'] = 'Powered by NovoPayment, Inc.';
 $lang['CREDITS'] = 'NovoPayment Inc. All rights reserved.';
 $lang['ALT_LOADER'] = 'Verificando...';
 $lang['CALLMODELS_INDEX_MSG'] = 'Combinación de caracteres no válida, por favor verifique e intente de nuevo';
-//LIST REASON BLOCK
 $lang['GENE_BLOCKING_REASONS_LOST'] = 'Tarjeta perdida';
 $lang['GENE_BLOCKING_REASONS_DETERIORATED'] = 'Tarjeta deteriorada';
 $lang['GENE_BLOCKING_REASONS_STOLE'] = 'Tarjeta robada / perdida';
 $lang['GENE_BLOCKING_REASONS_FRAUD'] = 'Sospecha de fraude';
 $lang['GENE_BLOCKING_REASONS_CANCELLED'] = 'Tarjeta cancelada';
-//FRANCHISE LOGO
-$lang['CONF_FRANCHISE_LOGO'] = 'ON';
+$lang['SETT_FRANCHISE_LOGO'] = 'ON';

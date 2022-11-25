@@ -1,31 +1,31 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php if (lang('CONF_FOOTER_INFO') == 'ON') : ?>
+<?php if (lang('SETT_FOOTER_INFO') == 'ON') : ?>
 	<footer class="main-footer">
-		<?php if(lang('CONF_FOOTER_MARK') == 'ON'): ?>
+		<?php if(lang('SETT_FOOTER_MARK') == 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
-			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $clientStyle); ?> " alt="Superintendencia de Bancos">
+			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $customerStyle); ?> " alt="Superintendencia de Bancos">
 		</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
-			<?php if(lang('CONF_FOOTER_NETWORKS') == 'ON'): ?>
+			<?php if(lang('SETT_FOOTER_NETWORKS') == 'ON'): ?>
 			<div class="order-first networks">
 				<?php foreach(lang('IMG_FOTTER_NETWORKS_IMG') AS $key => $value): ?>
-				<a href="<?= lang('CONF_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
+				<a href="<?= lang('SETT_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
 					<img src="<?= $this->asset->insertFile($value, 'images/networks'); ?>" alt="<?= $key; ?>">
 				</a>
 				<?php endforeach; ?>
 			</div>
 			<?php endif; ?>
-			<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
-			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $clientStyle); ?>"
+			<?php if(lang('SETT_FOOTER_LOGO') == 'ON'):?>
+			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $customerStyle); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images'); ?>" alt="Logo PCI">
 			<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6">
 				<?= lang('GEN_FOTTER_RIGHTS'); ?><?= ' - '.date("Y") ?>
-				<?php if (lang('CONF_FOTTER_PRIVACY_NOTICE') == 'ON') : ?>
+				<?php if (lang('SETT_FOTTER_PRIVACY_NOTICE') == 'ON') : ?>
 					<br>
-					<a class="block mb-1 h5 tertiary underline" href="<?= lang('CONF_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
+					<a class="block mb-1 h5 tertiary underline" href="<?= lang('SETT_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
 						<?= lang('GEN_PRIVACY_NOTICE'); ?>
 					</a>
 				<?php endif; ?>
@@ -34,14 +34,14 @@
 	</footer>
 <?php endif; ?>
 
-<?php if (lang('CONF_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
+<?php if (lang('SETT_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
   <?php $this->load->view('widget/widget_contacts_content-core') ?>
 <?php endif; ?>
 
-<?php if (lang('CONF_BTN_LANG') == 'ON') : ?>
+<?php if (lang('SETT_BTN_LANG') == 'ON') : ?>
   <div class="btn-lang">
     <div class="btn-lang-img">
-			<a id="change-lang" class="big-modal" href="<?= lang('CONF_NO_LINK') ?>">
+			<a id="change-lang" class="big-modal" href="<?= lang('SETT_NO_LINK') ?>">
 				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images/lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
@@ -62,10 +62,10 @@
   </p>
   <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix mb-1">
     <div class="ui-dialog-buttonset novo-dialog-buttonset flex">
-      <button type="button" id="cancel" class="<?= lang('CONF_MODAL_BTN_CLASS')['cancel']; ?>">
+      <button type="button" id="cancel" class="<?= lang('SETT_MODAL_BTN_CLASS')['cancel']; ?>">
 				<?= lang('GEN_BTN_CANCEL'); ?>
 			</button>
-      <button type="button" id="accept" class="<?= lang('CONF_MODAL_BTN_CLASS')['accept']; ?>">
+      <button type="button" id="accept" class="<?= lang('SETT_MODAL_BTN_CLASS')['accept']; ?>">
 				<?= lang('GEN_BTN_ACCEPT'); ?>
 		</button>
     </div>
@@ -90,7 +90,7 @@
     <div class="dashboard-item p-1 mx-1 mb-1 <?= $cards->statusClasses ?? '' ?>">
       <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>"
 				alt="<?= $cards->productName ?>">
-      <div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $cards->brand: ''?> p-2 h5 bg-white">
+      <div class="item-info <?= lang('SETT_FRANCHISE_LOGO') === 'ON' ? $cards->brand: ''?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?>
 					<span class="warning semibold h6 capitalize"><br><?= $cards->virtualCard?></span>
 				</p>

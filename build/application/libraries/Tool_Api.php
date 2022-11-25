@@ -158,7 +158,7 @@ class Tool_Api {
 
 		foreach ($arrayToWork as $key => $valor) {
 
-			$arrayForDisplay[$key] = in_array($key, lang('CONF_FILTER_ATTRIBUTES_LOG')) ?
+			$arrayForDisplay[$key] = in_array($key, lang('SETT_FILTER_ATTRIBUTES_LOG')) ?
 			"[Protected => ******** ]":
 			$valor;
 		}
@@ -203,6 +203,6 @@ class Tool_Api {
 	 */
 	private function prepareForDisplay($property = NULL,$value = '')
 	{
-		return in_array($property, lang('CONF_FILTER_ATTRIBUTES_LOG')) ? "[Protected => ******** ]" : $value;
+		return in_array($property, lang('SETT_FILTER_ATTRIBUTES_LOG')) ? "[Protected => ******** ]" : $value;
 	}
 }

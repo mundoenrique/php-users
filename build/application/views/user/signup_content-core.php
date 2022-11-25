@@ -128,7 +128,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -214,7 +214,7 @@
                     <div class="help-block"></div>
                   </div>
 
-									<?php if (lang('CONF_INTERNATIONAL_ADDRESS') == 'ON') : ?>
+									<?php if (lang('SETT_INTERNATIONAL_ADDRESS') == 'ON') : ?>
                   <div class="form-group col-6 col-lg-2 input-height">
                     <label for="internationalCode"><?= lang('USER_CODE_INTERNATIONAL') ?></label>
                     <div class="container-flags truncate col-4 p-0">
@@ -267,7 +267,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -379,7 +379,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -440,7 +440,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -450,11 +450,11 @@
               </div>
             </div>
           </fieldset>
-          <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+          <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
           <!-- Carga de documentos -->
           <?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
           <fieldset class="form-group col-12 ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
-            <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+            <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
             <div class="col-12 pb-3">
               <div class="bg-secondary">
                 <?php $this->load->view('user/loadDocuments_content-core') ?>
@@ -462,7 +462,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -495,7 +495,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -557,7 +557,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>
@@ -571,11 +571,11 @@
               </div>
             </div>
           </fieldset>
-          <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+          <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
           <!-- Carga de documentos -->
           <?php $index = array_search(lang('USER_LOAD_DOCS_STEP'), $stepTitles) + 1; ?>
           <fieldset class="form-group col-12 ms-step-<?= $index ?> border-none" data-index=<?= $index ?>>
-            <?php if (lang('CONF_LOAD_DOCS') == 'ON') : ?>
+            <?php if (lang('SETT_LOAD_DOCS') == 'ON') : ?>
             <div class="col-12 pb-3">
               <div class="bg-secondary">
                 <?php $this->load->view('user/loadDocuments_content-core') ?>
@@ -583,7 +583,7 @@
             </div>
             <div class="flex justify-between mx-5">
               <div>
-								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('CONF_LINK_SIGNOUT').lang('CONF_LINK_SIGNOUT_START')) ?>">
+								<a class="btn btn-small hyper-link p-0" href="<?= base_url(lang('SETT_LINK_SIGNOUT').lang('SETT_LINK_SIGNOUT_START')) ?>">
 									<i class="icon icon-cancel" aria-hidden="true"> &nbsp;</i><?= lang('GEN_BTN_EXIT'); ?>
 								</a>
               </div>

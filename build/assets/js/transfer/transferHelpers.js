@@ -306,7 +306,7 @@ $(function () {
 			appMessages(
 				lang.TRANSF_DELETE_AFFILIATE,
 				lang.TRANSF_SURE_DELETE_AFFILIATE,
-				lang.CONF_ICON_INFO,
+				lang.SETT_ICON_INFO,
 				modalBtn
 			);
 		}
@@ -450,7 +450,7 @@ $(function () {
 				appMessages(
 					modalTitle,
 					paramsValidationMessage,
-					lang.CONF_ICON_INFO,
+					lang.SETT_ICON_INFO,
 					modalBtn
 				);
 			}
@@ -521,7 +521,7 @@ $(function () {
 		appMessages(
 			lang.TRANSF_AFFILIATE_BENEFICIARY,
 			lang.TRANSF_WANT_SAVE_BENEFICIARY,
-			lang.CONF_ICON_INFO,
+			lang.SETT_ICON_INFO,
 			modalBtn
 		);
 	});
@@ -630,7 +630,7 @@ $(function () {
 
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(
-		"#" + lang.CONF_THOUSANDS + "##0" + lang.CONF_DECIMAL + "00",
+		"#" + lang.SETT_THOUSANDS + "##0" + lang.SETT_DECIMAL + "00",
 		{ reverse: true }
 	);
 	$("#amount").on("keyup", function () {
@@ -640,7 +640,7 @@ $(function () {
 			}
 
 			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-				value = "00" + lang.CONF_DECIMAL + value;
+				value = "00" + lang.SETT_DECIMAL + value;
 			}
 
 			return value;
@@ -1069,7 +1069,7 @@ function buildTransferSummaryModal() {
 	summaryValueObject = {
 		bank: $("#bank option:selected").text(),
 		dni: transferData.typeDocument + transferData.idNumber,
-		amount: lang.CONF_CURRENCY + " " + transferData.amount,
+		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		commission: numberToCurrency(commission, true),
 		total: numberToCurrency(totalComision, true),
 	};
@@ -1088,7 +1088,7 @@ function buildTransferSummaryModal() {
 	appMessages(
 		lang.TRANSF_OPERATION_SUMMARY,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 }
@@ -1158,7 +1158,7 @@ function buildTransferResultModal() {
 		dni:
 			transferResult.idExtPer ||
 			transferData.typeDocument + transferData.idNumber,
-		amount: lang.CONF_CURRENCY + " " + transferData.amount,
+		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
 	};
@@ -1177,7 +1177,7 @@ function buildTransferResultModal() {
 	appMessages(
 		lang.TRANSF_OPERATION_RESULT,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 }
@@ -1247,7 +1247,7 @@ function buildVaucherModal() {
 	appMessages(
 		lang.TRANSF_PAYMENT_VOUCHER,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 }
@@ -1263,7 +1263,7 @@ function numberToCurrency(number, withCurrencySymbol) {
 	var currencyNumber = num.toFixed(2).replace(".", ",");
 
 	return withCurrencySymbol
-		? lang.CONF_CURRENCY + " " + currencyNumber
+		? lang.SETT_CURRENCY + " " + currencyNumber
 		: currencyNumber;
 }
 

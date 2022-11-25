@@ -7,24 +7,24 @@
         <div class="flex inline-flex col-12 px-xl-2">
           <div id="productdetail" class="flex flex-column justify-center col-auto <?= $isVirtual ? 'pb-2': 'pb-4' ?> pt-4 pr-0">
             <div class="product-presentation relative">
-              <div class="item-network <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
+              <div class="item-network <?= lang('SETT_FRANCHISE_LOGO') === 'ON' ? $brand : '' ?>"></div>
               <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
             </div>
             <?php if ($isVirtual): ?>
-            <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('CONF_NO_LINK'); ?>">
+            <a id="virtual-details" class="btn hyper-link btn-small p-0" href="<?= lang('SETT_NO_LINK'); ?>">
               <i aria-hidden="true" class="icon-view"></i> &nbsp;<?= lang('BUSINESS_SEE_DETAILS'); ?>
             </a>
             <?php endif; ?>
           </div>
           <div class="flex flex-column items-start col-6 self-center px-0 ml-1">
-						<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
+						<?php if (lang('SETT_BUSINESS_NAME') == 'ON'): ?>
 						<small class="sb-disabled uppercase light truncate"><?= $enterprise?></small>
 						<?php endif; ?>
             <p class="semibold mb-0 h5 truncate" title="<?= $productName; ?>"><?= $productName; ?></p>
 						<span class="semibold danger"><?= $statusMessage ?></span>
             <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
             <?php if ($totalCards > 1): ?>
-            <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('CONF_LINK_CARD_LIST'); ?>">
+            <a class="btn hyper-link btn-small p-0 big-modal" href="<?= lang('SETT_LINK_CARD_LIST'); ?>">
               <i aria-hidden="true" class="icon-find"></i>
               &nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
             </a>
@@ -83,7 +83,7 @@
 						<input id="filterInputYear" name="filterInputYear" class="form-control" name="datepicker" type="text" placeholder="<?= lang('GEN_DATEPICKER_DATEMEDIUM'); ?>" readonly autocomplete="off">
             <div id='error' class="help-block"></div>
           </div>
-					<?php if (lang('CONF_TYPE_TRANSACTION') == 'ON') :  ?>
+					<?php if (lang('SETT_TYPE_TRANSACTION') == 'ON') :  ?>
 					<label class="mt-1 regular" for="transType"><?= lang('BUSINESS_TRANSACTIONS'); ?></label>
 					<div class="form-group col-3 px-1">
 						<select id="transType" class="custom-select form-control" name="transType">
@@ -106,30 +106,30 @@
 			<div class="hide-downloads self-end mb-4 pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
+            <a id="downloadPDF" href="<?= lang('SETT_NO_LINK'); ?>" action="download">
               <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_PDF'); ?>"></span>
             </a>
           </li>
-          <?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
+          <?php if (lang('SETT_SEND_MOVEMENTS') == 'ON') :  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
+            <a id="sendPDF" href="<?= lang('SETT_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="<?= lang('GEN_SEND_PDF'); ?>"></span>
             </a>
           </li>
           <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
+            <a id="downloadXLS" href="<?= lang('SETT_NO_LINK'); ?>" action="download">
               <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_XLS'); ?>"></span>
             </a>
           </li>
-          <?php if (lang('CONF_SEND_MOVEMENTS') == 'ON') :  ?>
+          <?php if (lang('SETT_SEND_MOVEMENTS') == 'ON') :  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
+            <a id="sendXLS" href="<?= lang('SETT_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="<?= lang('GEN_SEND_XLS'); ?>"></span>
             </a>
           </li>
           <?php endif; ?>
-					<?php if (lang('CONF_DOWNLOAD_STATEMENT') == 'ON') :  ?>
+					<?php if (lang('SETT_DOWNLOAD_STATEMENT') == 'ON') :  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
             <a id="downloadExtract" href="#" rel="subsection">
               <span class="icon-down-statement h5 bold mr-0" aria-hidden="true" title="<?= lang('GEN_DOWNLOAD_STATEMENT'); ?>"></span>
@@ -143,7 +143,7 @@
           </form>
         </ul>
       </div>
-			<?php if (lang('CONF_IN_TRANSIT') == 'ON'): ?>
+			<?php if (lang('SETT_IN_TRANSIT') == 'ON'): ?>
       <div class="flex self-end mb-3">
         <button class="btn btn-outline btn-small btn-rounded-left bg-white" data-jplist-control="reset" data-group="group-filter-pagination"
           data-name="reset"><?= lang('GEN_MOVEMENTS'); ?></button>

@@ -28,7 +28,7 @@
                 <div class="form-group col-6 mb-0">
                   <select id="typeDocument" class="custom-select form-control" name="typeDocument">
                     <option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
-                    <?php foreach (lang('CONF_TRANSFER_DOCUMENT_TYPE') as $key => $value) : ?>
+                    <?php foreach (lang('SETT_TRANSFER_DOCUMENT_TYPE') as $key => $value) : ?>
 											<option value="<?= $key ?>"><?= $value ?></option>
 										<?php endforeach; ?>
                   </select>

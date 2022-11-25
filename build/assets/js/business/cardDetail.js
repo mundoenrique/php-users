@@ -84,17 +84,17 @@ $(function () {
 		e.stopImmediatePropagation();
 		otpProps.msgInfo = lang.GEN_SENSITIVE_DATA
 
-		if ((lang.CONF_MFA_ACTIVE === 'OFF' && !otpActive) || otpMfaAuth) {
+		if ((lang.SETT_MFA_ACTIVE === 'OFF' && !otpActive) || otpMfaAuth) {
 			sensitiveInformation();
-		} else if (otpChannel === lang.CONF_MFA_CHANNEL_APP) {
-			otpProps.validateAction = lang.CONF_MFA_VALIDATE_OTP;
+		} else if (otpChannel === lang.SETT_MFA_CHANNEL_APP) {
+			otpProps.validateAction = lang.SETT_MFA_VALIDATE_OTP;
 			otpProps.msgContent =  lang.GEN_TWO_FACTOR_CODE_VERIFY.replace('%s', lang.GEN_TWO_FACTOR_APLICATION);
 			otpProps.msgContent =  otpProps.msgContent.replace('%s ', '');
 			$('#accept').addClass('otp-validate');
 			modalOtpValidate();
 		} else {
-			otpProps.generateAction = lang.CONF_MFA_GENERATE_OTP;
-			otpProps.validateAction = lang.CONF_MFA_VALIDATE_OTP;
+			otpProps.generateAction = lang.SETT_MFA_GENERATE_OTP;
+			otpProps.validateAction = lang.SETT_MFA_VALIDATE_OTP;
 			coverSpin(true);
 			sendTopt();
 		}
@@ -192,7 +192,7 @@ function displaymoves() {
 				tooltips: {
 					callbacks: {
 						label: function(tooltipItem) {
-							return graphicLabel[tooltipItem.index] + ": " + lang.CONF_CURRENCY+ " " + graphicValue[tooltipItem.index]
+							return graphicLabel[tooltipItem.index] + ": " + lang.SETT_CURRENCY+ " " + graphicValue[tooltipItem.index]
 						}
 					}
 				},
@@ -240,10 +240,10 @@ function displaymoves() {
 			lastButtonText: lang.GEN_DATATABLE_SLAST,
 			lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
 			prevButton: true,
-			prevButtonText: lang.CONF_DATATABLE_SPREVIOUS,
+			prevButtonText: lang.SETT_DATATABLE_SPREVIOUS,
 			prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
 			nextButton: true,
-			nextButtonText: lang.CONF_DATATABLE_SNEXT,
+			nextButtonText: lang.SETT_DATATABLE_SNEXT,
 			nextHashText: lang.GEN_DATEPICKER_NEXTTEXT
 		})
 	}
@@ -276,7 +276,7 @@ function sensitiveInformation() {
 
 	inputModal = '<div class="justify pr-1">' + lang.GEN_SENSITIVE_DATA + '</div>';
 
-	appMessages(lang.GEN_SYSTEM_NAME, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_SYSTEM_NAME, inputModal, lang.SETT_ICON_INFO, modalBtn);
 }
 
 function validateCardDetail() {
@@ -298,7 +298,7 @@ function validateCardDetail() {
 				inputModalCard += 		  '<div class="card3d-automatic">';
 				inputModalCard += 		    '<div class="card-detail card3d-front">';
 				inputModalCard += 			    '<img class="item-img" src="' + img + '" alt="' + response.dataDetailCard.cardholderName + '">';
-				inputModalCard += 			    '<div class="item-info ' + (lang.CONF_FRANCHISE_LOGO === 'ON' ? brand : '') + ' p-2 h5 '+ lang.CONF_CARD_COLOR +'">';
+				inputModalCard += 			    '<div class="item-info ' + (lang.SETT_FRANCHISE_LOGO === 'ON' ? brand : '') + ' p-2 h5 '+ lang.SETT_CARD_COLOR +'">';
 				inputModalCard += 				    '<p class="item-cardnumber mb-0 h4">' + response.dataDetailCard.cardNumber + '</p>';
 				inputModalCard += 			  	  '<p class="item-cardnumber mb-0 ml-5 uppercase"><small>Vence '+ response.dataDetailCard.expirationDate +'</small></p>';
 				inputModalCard += 				    '<p class="item-category uppercase">' + response.dataDetailCard.cardholderName + '</p>';
@@ -327,10 +327,10 @@ function validateCardDetail() {
 				response.modalBtn.posAt = 'top+50px';
 
 				$('#accept').addClass('close-card-detail');
-				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.CONF_ICON_SUCCESS, response.modalBtn);
-				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.CONF_TIMER_MODAL_VIRTUAL+'s</span>');
+				appMessages(lang.USER_TERMS_TITLE, inputModalCard, lang.SETT_ICON_SUCCESS, response.modalBtn);
+				$('#accept').append('&nbsp;<span id="countdownTimer">'+lang.SETT_TIMER_MODAL_VIRTUAL+'s</span>');
 				clickCard3d();
-				startTimer(lang.CONF_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));
+				startTimer(lang.SETT_TIMER_MODAL_VIRTUAL, $('#countdownTimer'));
 				break;
 			case 2:
 				response.modalBtn.posMy = 'top+50px';

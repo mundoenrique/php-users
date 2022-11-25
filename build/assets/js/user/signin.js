@@ -110,7 +110,7 @@ function getSignIn() {
 			$('#signInBtn').html(btnText);
 			insertFormInput(false);
 
-			if (lang.CONF_RESTAR_USERNAME == 'ON') {
+			if (lang.SETT_RESTAR_USERNAME == 'ON') {
 				$('#userName').val('');
 			}
 
