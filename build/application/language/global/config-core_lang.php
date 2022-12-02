@@ -237,6 +237,7 @@ $lang['CONF_REGEX_DATE_Y'] = '^[0-9]{4}$';
 $lang['CONF_REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['CONF_REGEX_CHECKED'] = '^([0|1])$';
 $lang['CONF_REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
+$lang['CONF_REGEX_MAXLENGTH_DOC_ID'] = 14;
 $lang['CONF_FRANCHISE_LOGO'] = 'ON';
 $lang['CONF_MFA_EMAIL'] = 'email';
 $lang['CONF_MFA_APP'] = 'app';

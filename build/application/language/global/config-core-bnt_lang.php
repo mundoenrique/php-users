@@ -34,4 +34,5 @@ $lang['CONF_LOAD_DOC_F_ID'] = 'ON';
 $lang['CONF_LOAD_DOC_B_ID'] = 'ON';
 $lang['CONF_REGEX_NICKNAME'] = '^([a-z]{2}[a-z0-9_]{4,14})$';
 $lang['CONF_REGEX_NICKNAME_PROFILE'] = '^([a-z]{2}[a-z0-9 .,+-_@*]{4,14})$';
+$lang['CONF_REGEX_MAXLENGTH_DOC_ID'] = 20;
 $lang['CONF_PADDING_LOGO'] = 'OFF';
