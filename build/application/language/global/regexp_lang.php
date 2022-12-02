@@ -25,3 +25,4 @@ $lang['REGEX_DATE_Y'] = '^[0-9]{4}$';
 $lang['REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['REGEX_CHECKED'] = '^([0|1])$';
 $lang['REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
+$lang['REGEX_MAXLENGTH_DOC_ID'] = 14;

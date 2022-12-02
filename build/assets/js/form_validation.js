@@ -17,6 +17,7 @@ function validateForms(form) {
 	var emailValid = new RegExp(lang.REGEX_EMAIL_VALID);
 	var alphanumunder = new RegExp(lang.REGEX_ALPHANUM_UNDER, 'i');
 	var alphanum = new RegExp(lang.REGEX_ALPHANUM, 'i');
+	var maxlengthDocId = parseInt(lang.REGEX_MAXLENGTH_DOC_ID);
 	var userPassword = validatePass;
 	var numeric = new RegExp(lang.REGEX_NUMERIC);
 	var twoFactor = new RegExp(lang.REGEX_TWO_FACTOR);
@@ -60,7 +61,7 @@ function validateForms(form) {
 			"twoFactorEnablement": { required: true },
 			"authenticationCode": { required: true, pattern: twoFactor },
 			"email": { required: true, pattern: emailValid },
-			"idNumber": { required: true, validateDocumentId: true, maxlength: 14 },
+			"idNumber": { required: true, validateDocumentId: true, maxlength: maxlengthDocId },
 			"currentPass": { required: true },
 			"newPass": { required: true, differs: "#currentPass", validatePass: true },
 			"confirmPass": { required: true, equalTo: "#newPass" },
@@ -69,7 +70,7 @@ function validateForms(form) {
 			"filterInputYear": { required: true, pattern: date.my },
 			"filterHistoryDate": { required: true, pattern: date.my },
 			"numberCard": { required: true, pattern: numeric, maxlength: 16 },
-			"documentId": { required: true, validateDocumentId: true },
+			"documentId": { required: true, validateDocumentId: true, maxlength: maxlengthDocId },
 			"cardPIN": { required: true, pattern: numeric },
 			"codeOTP": { required: true, pattern: alphanum, maxlength: 8 },
 			"acceptTerms": { required: true },
