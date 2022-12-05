@@ -84,7 +84,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/setOperationKey"
 		);
 
-		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))];
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);
@@ -132,7 +132,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/changeOperationKey"
 		);
 
-		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))];
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);
@@ -155,7 +155,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -216,7 +217,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -277,7 +279,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';

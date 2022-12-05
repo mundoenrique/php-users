@@ -1,13 +1,8 @@
 "use strict";
 var operationType, liOptions, OperationTypeAffiliations, bankList, cardData;
-var affiliationsList, currentAffiliaton, availableBalance, totalComision;
-var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
-var montoMaxMensual, cantidadOperacionesDiarias, montoBase, montoComision;
-var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
-var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
-var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
-var porcentajeComision, dobleAutenticacion, transferResult, currentVaucherData;
-var amount, historyData, transferData, modalTitle, paramsValidationMessage;
+var affiliationsList, currentAffiliaton, historyData, transferData;
+var transferResult, modalTitle, paramsValidationMessage, currentVaucherData;
+var availableBalance, amount, commission, totalAmount;
 
 $(function () {
 	operationType = $("#transferView").attr("operation-type");
@@ -985,42 +980,9 @@ function setFieldNames(operation) {
 	}
 }
 
-function setTransferParams(params) {
-	montoMaxOperaciones = parseFloat(params.montoMaxOperaciones);
-	montoMinOperaciones = parseFloat(params.montoMinOperaciones);
-	montoMaxDiario = parseFloat(params.montoMaxDiario);
-	montoMaxSemanal = parseFloat(params.montoMaxSemanal);
-	montoMaxMensual = parseFloat(params.montoMaxMensual);
-	cantidadOperacionesDiarias = parseInt(params.cantidadOperacionesDiarias);
-	cantidadOperacionesSemanales = parseInt(params.cantidadOperacionesSemanales);
-	cantidadOperacionesMensual = parseInt(params.cantidadOperacionesMensual);
-	montoAcumDiario = parseFloat(params.montoAcumDiario);
-	montoAcumSemanal = parseFloat(params.montoAcumSemanal);
-	montoAcumMensual = parseFloat(params.montoAcumMensual);
-	acumCantidadOperacionesDiarias = parseInt(
-		params.acumCantidadOperacionesDiarias
-	);
-	acumCantidadOperacionesSemanales = parseInt(
-		params.acumCantidadOperacionesSemanales
-	);
-	acumCantidadOperacionesMensual = parseInt(
-		params.acumCantidadOperacionesMensual
-	);
-	montoBase = params.montoBaseTransferencia
-		? parseFloat(params.montoBaseTransferencia)
-		: 0;
-	montoComision = parseFloat(params.montoComision);
-	porcentajeComision = parseFloat(params.porcentajeComision);
-	totalComision = 0;
-	dobleAutenticacion = params.dobleAutenticacion;
-}
-
 function buildTransferSummaryModal() {
 	var setObjectSummary, objectSummary, summaryValueObject;
-	var commission, span, summaryValue, inputModal;
-	commission =
-		amount <= montoBase ? montoComision : (amount * porcentajeComision) / 100;
-	totalComision = amount + commission;
+	var span, summaryValue, inputModal;
 
 	$("#accept").addClass("confirm-transfer");
 
@@ -1071,7 +1033,7 @@ function buildTransferSummaryModal() {
 		dni: transferData.typeDocument + transferData.idNumber,
 		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		commission: numberToCurrency(commission, true),
-		total: numberToCurrency(totalComision, true),
+		total: numberToCurrency(totalAmount, true),
 	};
 
 	objectSummary = setObjectSummary[operationType];
@@ -1260,7 +1222,11 @@ function cleanDirectory() {
 
 function numberToCurrency(number, withCurrencySymbol) {
 	var num = typeof number == "string" ? Number(number) : number;
-	var currencyNumber = num.toFixed(2).replace(".", ",");
+	var formatter = new Intl.NumberFormat("es-VE", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
+	var currencyNumber = formatter.format(num);
 
 	return withCurrencySymbol
 		? lang.SETT_CURRENCY + " " + currencyNumber
@@ -1269,90 +1235,4 @@ function numberToCurrency(number, withCurrencySymbol) {
 
 function currencyToNumber(currency) {
 	return Number(currency.replace(/[^0-9-,]+/g, "").replace(",", "."));
-}
-
-function validateTransferParams() {
-	var difference, msg;
-
-	// Valida monto de transferencias
-	if (amount < montoMinOperaciones || amount > montoMaxOperaciones) {
-		paramsValidationMessage = `Las transferencias deben ser mínimo ${numberToCurrency(
-			montoMinOperaciones,
-			true
-		)} y máximo  ${numberToCurrency(montoMaxOperaciones, true)}.`;
-		return false;
-	}
-	if (amount > availableBalance) {
-		paramsValidationMessage =
-			"El monto de la transferencia excede su saldo disponible.";
-		return false;
-	}
-	if (montoAcumMensual + amount > montoMaxMensual) {
-		difference = montoMaxMensual - montoAcumMensual;
-		msg =
-			difference === 0
-				? ".<br>No puede realizar otra transferencia este mes."
-				: "";
-
-		paramsValidationMessage = `El monto máximo mensual que puede transferir es ${numberToCurrency(
-			montoMaxMensual,
-			true
-		)}.<br>Este mes ha transferido ${numberToCurrency(
-			montoAcumMensual,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-	if (montoAcumSemanal + amount > montoMaxSemanal) {
-		difference = montoMaxSemanal - montoAcumSemanal;
-		msg =
-			difference === 0
-				? ".<br>No puede realizar otra transferencia esta semana."
-				: "";
-
-		paramsValidationMessage = `El monto máximo semanal que puede transferir es ${numberToCurrency(
-			montoMaxSemanal,
-			true
-		)}.<br>Esta semana ha transferido  ${numberToCurrency(
-			montoAcumSemanal,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-	if (montoAcumDiario + amount > montoMaxDiario) {
-		difference = montoMaxDiario - montoAcumDiario;
-		msg =
-			difference === 0 ? ".<br>No puede realizar otra transferencia hoy." : "";
-
-		paramsValidationMessage = `El monto máximo diario que puede transferir es ${numberToCurrency(
-			montoMaxDiario,
-			true
-		)}.<br>Hoy ha transferido  ${numberToCurrency(
-			montoAcumDiario,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-
-	//Valida cantidad de operaciones
-	if (acumCantidadOperacionesMensual == cantidadOperacionesMensual) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesMensual} operaciones mensuales.<br>Este mes ha realizado: ${acumCantidadOperacionesMensual}.<br>No puede realizar otra operación este mes.`;
-
-		return false;
-	}
-	if (acumCantidadOperacionesSemanales == cantidadOperacionesSemanales) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesSemanales} operaciones semanales.<br>Esta semana ha realizado: ${acumCantidadOperacionesSemanales}.<br>No puede realizar otra operación esta semana.`;
-
-		return false;
-	}
-	if (acumCantidadOperacionesDiarias == cantidadOperacionesDiarias) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesDiarias} operaciones diarias.<br>Hoy ha realizado: ${acumCantidadOperacionesDiarias}.<br>No puede realizar otra operación hoy.`;
-
-		return false;
-	}
-
-	return true;
 }
