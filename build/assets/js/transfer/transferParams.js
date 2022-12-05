@@ -86,7 +86,7 @@ function validateTransferParams() {
 
 	//Valida cantidad de operaciones
 	if (
-		transferParams.acumCantidadOperacionesMensual ==
+		transferParams.acumCantidadOperacionesMensual >=
 		transferParams.cantidadOperacionesMensual
 	) {
 		paramsValidationMessage = lang.TRANSF_MAXIMUM_MONTHLY_OPERATIONS.replace(
@@ -97,7 +97,7 @@ function validateTransferParams() {
 		return false;
 	}
 	if (
-		transferParams.acumCantidadOperacionesSemanales ==
+		transferParams.acumCantidadOperacionesSemanales >=
 		transferParams.cantidadOperacionesSemanales
 	) {
 		paramsValidationMessage = lang.TRANSF_MAXIMUM_WEEKLY_OPERATIONS.replace(
@@ -108,7 +108,7 @@ function validateTransferParams() {
 		return false;
 	}
 	if (
-		transferParams.acumCantidadOperacionesDiarias ==
+		transferParams.acumCantidadOperacionesDiarias >=
 		transferParams.cantidadOperacionesDiarias
 	) {
 		paramsValidationMessage = lang.TRANSF_MAXIMUM_DAILY_OPERATIONS.replace(
