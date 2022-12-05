@@ -157,6 +157,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/additional-methods",
 			"transfer/transferHelpers",
 			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -190,7 +192,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BETWEEN_CARDS_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('GEN_DNI'),
 			lang('TRANSF_DESTINATION_CARD'),
 			lang('TRANSF_OPTIONS')
@@ -219,6 +221,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/additional-methods",
 			"transfer/transferHelpers",
 			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -252,7 +256,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('TRANSF_BANK'),
 			lang('TRANSF_ACCOUNT_PHONE'),
 			lang('TRANSF_OPTIONS')
@@ -281,6 +285,8 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/additional-methods",
 			"transfer/transferHelpers",
 			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -315,7 +321,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_MAKE_PAYMENT');
 		$this->render->msgTransfer = lang('TRANSF_PAY_MOVIL_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('TRANSF_BANK'),
 			lang('TRANSF_NUMBER_PHONE'),
 			lang('TRANSF_OPTIONS')
