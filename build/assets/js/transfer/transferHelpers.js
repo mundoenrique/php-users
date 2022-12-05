@@ -61,28 +61,10 @@ $(function () {
 		showTransferView();
 	});
 
-	// Al seleccionar un afiliado del directorio
-	$("#affiliationList").on("click", "li:not(.no-results)", function (e) {
-		e.preventDefault();
-		var value, text, container;
-		value = $(this).val();
-		text = $(this).text().trim();
-		container = $(this).closest(".select-by-search");
-
-		container.find("input.select-search-input").val(text);
-		container.find("li").removeClass("active");
-		$(this).addClass("active").prependTo(container.find(".select-search"));
-		container.find(".select-search").css("display", "none");
-		$(".close-selector").css("display", "none");
-		container.find("#directoryValue").val(value);
-
-		currentAffiliaton = affiliationsList[value];
-		setFieldNames("transfer");
-	});
-
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
+		$("#transferForm input, #transferForm select").attr("readonly", false);
 	});
 
 	// Submit en formulario de Transferencia y mostrar el resumen
@@ -306,6 +288,25 @@ $(function () {
 		$(this).css("display", "none");
 	});
 
+	// Al seleccionar un afiliado del directorio
+	$("#affiliationList").on("click", "li:not(.no-results)", function (e) {
+		e.preventDefault();
+		var value, text, container;
+		value = $(this).val();
+		text = $(this).text().trim();
+		container = $(this).closest(".select-by-search");
+
+		container.find("input.select-search-input").val(text);
+		container.find("li").removeClass("active");
+		$(this).addClass("active").prependTo(container.find(".select-search"));
+		container.find(".select-search").css("display", "none");
+		$(".close-selector").css("display", "none");
+		container.find("#directoryValue").val(value);
+
+		currentAffiliaton = affiliationsList[value];
+		setFieldNames("transfer");
+	});
+
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(
 		"#" + lang.SETT_THOUSANDS + "##0" + lang.SETT_DECIMAL + "00",
@@ -467,6 +468,12 @@ function setValues(formID, objectValues) {
 	});
 }
 
+function disableFields(formID, objectValues) {
+	Object.entries(objectValues).forEach(([fieldId, value]) => {
+		$(`${formID} #${fieldId}`).attr("readonly", true);
+	});
+}
+
 function setFieldNames(operation) {
 	var documentType, documentNumber, objectValues;
 
@@ -537,6 +544,11 @@ function setFieldNames(operation) {
 		}
 
 		objectValues = setObjectValues[operationType];
+
+		$("#transferView #bank")
+			.attr("readonly", true)
+			.addClass("no-pointer bg-tertiary border");
+		disableFields("#transferForm", objectValues);
 		setValues("#transferForm", objectValues);
 	}
 }
@@ -777,6 +789,9 @@ function buildVaucherModal() {
 
 function cleanDirectory() {
 	currentAffiliaton = null;
+	$("#transferView #bank")
+		.attr("readonly", false)
+		.removeClass("no-pointer bg-tertiary border");
 	$("#affiliationList li").removeClass("active");
 	$("#directoryValue, #directory").val("");
 }
