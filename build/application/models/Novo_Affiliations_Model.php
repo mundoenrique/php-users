@@ -33,6 +33,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
 
 		$response = $this->sendToWebServices('CallWs_GetAffiliations');
+
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
@@ -89,17 +90,17 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			case -179:
-				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = lang('GEN_INVALID_DATA');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
@@ -143,13 +144,13 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
@@ -193,13 +194,13 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_FAILED_AFFILIATE_UPDATE') : lang('AFFIL_FAILED_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
@@ -230,13 +231,13 @@ class Novo_Affiliations_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->response->icon = lang('SETT_ICON_SUCCESS');
-				$this->response->title = lang('AFFIL_DELETE_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = lang('AFFIL_SUCCESS_AFFILIATE_DELETION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
 			default:
 				$this->response->code = 1;
-				$this->response->title = lang('AFFIL_DELETE_AFFILIATE');
+				$this->response->title = lang('AFFIL_AFFILIATIONS');
 				$this->response->msg = lang('AFFIL_FAILED_AFFILIATE_DELETION');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
