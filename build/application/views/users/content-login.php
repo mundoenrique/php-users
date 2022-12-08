@@ -322,7 +322,7 @@ echo $insertRecaptcha;
 		<div class="alert-simple alert-warning" id="message">
 			<span aria-hidden="true" class="icon-warning-sign"></span>
 			<p>
-				Estimado usuario.<br> Esta página ha sido cambiada, para ingresar a <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder desde <strong><a id="link-href"></a></strong>
+			Estimado usuario.<br> Esta página ha sido actualizada. Para ingresar a  <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder con este enlace: <strong><a id="link-href"></a></strong>
 			</p>
 		</div>
 		<div class="form-actions">
