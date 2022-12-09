@@ -64,7 +64,7 @@ $(function () {
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
-		$("#transferForm input, #transferForm select").attr("readonly", false);
+		disableAffiliationFields("#transferForm", false);
 	});
 
 	// Submit en formulario de Transferencia y mostrar el resumen
@@ -143,11 +143,19 @@ $(function () {
 		});
 	});
 
+	// Modal para recargar vista
+	$("#system-info").on("click", ".reload-view", function (e) {
+		e.preventDefault();
+		modalDestroy(true);
+		showTransferView();
+	});
+
 	// Modal para agregar afiliado al concluir operación exitosa
 	$("#system-info").on("click", ".want-save-beneficiary", function (e) {
 		e.preventDefault();
 		modalDestroy(true);
 		$("#accept").addClass("save-beneficiary");
+		$("#cancel").addClass("reload-view");
 
 		modalBtn = {
 			btn1: {
@@ -407,6 +415,7 @@ function setAffiliateSelectSearch(data) {
 
 function showTransferView() {
 	cleanDirectory();
+	disableAffiliationFields("#transferForm", false);
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
 	$("#manageAffiliateView").hide();
@@ -468,10 +477,15 @@ function setValues(formID, objectValues) {
 	});
 }
 
-function disableFields(formID, objectValues) {
-	Object.entries(objectValues).forEach(([fieldId, value]) => {
-		$(`${formID} #${fieldId}`).attr("readonly", true);
-	});
+function disableAffiliationFields(formID, disabled) {
+	$(`${formID} input, ${formID} select`).not("#amount, #concept, #expDateCta").attr("readonly", disabled);
+	$("#transferView #bank").attr("readonly", disabled);
+
+	if (disabled) {
+		$("#transferView #bank").addClass("no-pointer bg-tertiary border");
+	} else {
+		$("#transferView #bank").removeClass("no-pointer bg-tertiary border");
+	}
 }
 
 function setFieldNames(operation) {
@@ -544,11 +558,7 @@ function setFieldNames(operation) {
 		}
 
 		objectValues = setObjectValues[operationType];
-
-		$("#transferView #bank")
-			.attr("readonly", true)
-			.addClass("no-pointer bg-tertiary border");
-		disableFields("#transferForm", objectValues);
+		disableAffiliationFields("#transferForm", true);
 		setValues("#transferForm", objectValues);
 	}
 }
@@ -643,14 +653,13 @@ function buildTransferResultModal() {
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
-			action: "destroy",
+			action: "none",
 		},
 	};
 
-	if (!thirdPartyAffiliate) {
-		$("#accept").addClass("want-save-beneficiary");
-		modalBtn.btn1.action = "none";
-	}
+	$("#accept").addClass(
+		!thirdPartyAffiliate ? "want-save-beneficiary" : "reload-view"
+	);
 
 	// dataValue: label
 	setObjectResult = {
