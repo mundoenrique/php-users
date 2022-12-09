@@ -1097,9 +1097,6 @@ function buildTransferResultModal() {
 	var setObjectResult, objectResult, resultValueObject;
 	var span, resultValue, inputModal, thirdPartyAffiliate;
 
-	resetForms($("#toTransferView form"));
-	cleanDirectory();
-
 	thirdPartyAffiliate =
 		operationType == "PMV"
 			? transferResult.dataTransaccion.terceroAfiliado
@@ -1180,6 +1177,9 @@ function buildTransferResultModal() {
 		lang.CONF_ICON_INFO,
 		modalBtn
 	);
+
+	resetForms($("#toTransferView form"));
+	cleanDirectory();
 }
 
 function buildVaucherModal() {
