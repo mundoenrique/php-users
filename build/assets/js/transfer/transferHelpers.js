@@ -1,13 +1,14 @@
 "use strict";
 var operationType, liOptions, OperationTypeAffiliations, bankList, cardData;
-var affiliationsList, currentAffiliaton, availableBalance, totalComision;
+var affiliationsList, currentAffiliaton, availableBalance;
 var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
 var montoMaxMensual, cantidadOperacionesDiarias, montoBase, montoComision;
 var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
 var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
 var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
 var porcentajeComision, dobleAutenticacion, transferResult, currentVaucherData;
-var amount, historyData, transferData, modalTitle, paramsValidationMessage;
+var historyData, transferData, modalTitle, paramsValidationMessage;
+var amount, commission, totalAmount;
 
 $(function () {
 	operationType = $("#transferView").attr("operation-type");
@@ -1011,16 +1012,13 @@ function setTransferParams(params) {
 		: 0;
 	montoComision = parseFloat(params.montoComision);
 	porcentajeComision = parseFloat(params.porcentajeComision);
-	totalComision = 0;
+	totalAmount = commission = 0;
 	dobleAutenticacion = params.dobleAutenticacion;
 }
 
 function buildTransferSummaryModal() {
 	var setObjectSummary, objectSummary, summaryValueObject;
-	var commission, span, summaryValue, inputModal;
-	commission =
-		amount <= montoBase ? montoComision : (amount * porcentajeComision) / 100;
-	totalComision = amount + commission;
+	var span, summaryValue, inputModal;
 
 	$("#accept").addClass("confirm-transfer");
 
@@ -1071,7 +1069,7 @@ function buildTransferSummaryModal() {
 		dni: transferData.typeDocument + transferData.idNumber,
 		amount: lang.CONF_CURRENCY + " " + transferData.amount,
 		commission: numberToCurrency(commission, true),
-		total: numberToCurrency(totalComision, true),
+		total: numberToCurrency(totalAmount, true),
 	};
 
 	objectSummary = setObjectSummary[operationType];
@@ -1096,9 +1094,6 @@ function buildTransferSummaryModal() {
 function buildTransferResultModal() {
 	var setObjectResult, objectResult, resultValueObject;
 	var span, resultValue, inputModal, thirdPartyAffiliate;
-
-	resetForms($("#toTransferView form"));
-	cleanDirectory();
 
 	thirdPartyAffiliate =
 		operationType == "PMV"
@@ -1180,6 +1175,9 @@ function buildTransferResultModal() {
 		lang.CONF_ICON_INFO,
 		modalBtn
 	);
+
+	resetForms($("#toTransferView form"));
+	cleanDirectory();
 }
 
 function buildVaucherModal() {
@@ -1274,6 +1272,12 @@ function currencyToNumber(currency) {
 function validateTransferParams() {
 	var difference, msg;
 
+	if (operationType !== "P2P") {
+		commission =
+			amount <= montoBase ? montoComision : (amount * porcentajeComision) / 100;
+	}
+	totalAmount = amount + commission;
+
 	// Valida monto de transferencias
 	if (amount < montoMinOperaciones || amount > montoMaxOperaciones) {
 		paramsValidationMessage = `Las transferencias deben ser mínimo ${numberToCurrency(
@@ -1282,7 +1286,7 @@ function validateTransferParams() {
 		)} y máximo  ${numberToCurrency(montoMaxOperaciones, true)}.`;
 		return false;
 	}
-	if (amount > availableBalance) {
+	if (totalAmount > availableBalance) {
 		paramsValidationMessage =
 			"El monto de la transferencia excede su saldo disponible.";
 		return false;
@@ -1338,17 +1342,17 @@ function validateTransferParams() {
 	}
 
 	//Valida cantidad de operaciones
-	if (acumCantidadOperacionesMensual == cantidadOperacionesMensual) {
+	if (acumCantidadOperacionesMensual >= cantidadOperacionesMensual) {
 		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesMensual} operaciones mensuales.<br>Este mes ha realizado: ${acumCantidadOperacionesMensual}.<br>No puede realizar otra operación este mes.`;
 
 		return false;
 	}
-	if (acumCantidadOperacionesSemanales == cantidadOperacionesSemanales) {
+	if (acumCantidadOperacionesSemanales >= cantidadOperacionesSemanales) {
 		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesSemanales} operaciones semanales.<br>Esta semana ha realizado: ${acumCantidadOperacionesSemanales}.<br>No puede realizar otra operación esta semana.`;
 
 		return false;
 	}
-	if (acumCantidadOperacionesDiarias == cantidadOperacionesDiarias) {
+	if (acumCantidadOperacionesDiarias >= cantidadOperacionesDiarias) {
 		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesDiarias} operaciones diarias.<br>Hoy ha realizado: ${acumCantidadOperacionesDiarias}.<br>No puede realizar otra operación hoy.`;
 
 		return false;
