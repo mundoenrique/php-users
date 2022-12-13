@@ -5,4 +5,5 @@ $lang['CONF_CONTACTS'] = [
 	'Plata Servitebca' => '6198931',
 ];
 $lang['CONF_BTN_LANG'] = 'ON';
+$lang['CONF_INTERNATIONAL_ADDRESS'] = 'ON';
 $lang['CONF_SIGNIN_IMG'] = 'ON';
