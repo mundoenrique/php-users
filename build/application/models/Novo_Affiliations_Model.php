@@ -27,7 +27,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataAccessLog->operation = $dataRequest->operationType === 'PMV' ? 'Lista los afiliados a un pago movil' : 'Lista los afiliados';
 
 		$this->dataRequest->idOperation = '017';
-		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
@@ -93,9 +93,9 @@ class Novo_Affiliations_Model extends NOVO_Model
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
-			case -179:
-				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
-				$this->response->msg = lang('GEN_INVALID_DATA');
+			case -178:
+				$this->response->title = lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = lang('AFFIL_AFFILIATE_ALREADY_STORED');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
@@ -147,6 +147,11 @@ class Novo_Affiliations_Model extends NOVO_Model
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
 				break;
+			case -178:
+				$this->response->title = lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = lang('AFFIL_AFFILIATE_ALREADY_STORED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
 			default:
 				$this->response->code = 1;
 				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
@@ -196,6 +201,11 @@ class Novo_Affiliations_Model extends NOVO_Model
 				$this->response->title = isset($dataRequest->idAfiliation) ? lang('AFFIL_EDIT_AFFILIATE') : lang('AFFIL_NEW_AFFILIATE');
 				$this->response->msg = isset($dataRequest->idAfiliation) ? lang('AFFIL_SUCCESS_AFFILIATE_UPDATE') : lang('AFFIL_SUCCESS_AFFILIATE_CREATION');
 				$this->response->modalBtn['btn1']['action'] = 'none';
+				break;
+			case -178:
+				$this->response->title = lang('AFFIL_NEW_AFFILIATE');
+				$this->response->msg = lang('AFFIL_AFFILIATE_ALREADY_STORED');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			default:
 				$this->response->code = 1;

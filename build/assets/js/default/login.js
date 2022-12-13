@@ -262,7 +262,7 @@ function login(user = null, pass = null, dataOPT = {}) {
 			}
 
 			if (data.validateRedirect) {
-				link = base_url + '/' + data.codPaisUrl + '/inicio';
+				link = base_url + '/' + data.codPaisUrl + '/sign-in';
 				$("#dialog-new-core").dialog({
 					modal: "true",
 					width: "440px",
