@@ -27,7 +27,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataAccessLog->operation = $dataRequest->operationType === 'PMV' ? 'Lista los afiliados a un pago movil' : 'Lista los afiliados';
 
 		$this->dataRequest->idOperation = '017';
-		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TarjetaTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
 		$this->dataRequest->noTarjeta = isset($dataRequest->cardNumber) ? $dataRequest->cardNumber : '';
 		$this->dataRequest->prefix = isset($dataRequest->prefix) ? $dataRequest->prefix : '';
