@@ -1424,7 +1424,7 @@ function msgModalNewCore (title, msg, modalType, codPaisUrl) {
 		},
 	});
 
-	link = base_url + '/' + codPaisUrl + '/inicio';
+	link = base_url + '/' + codPaisUrl + '/sign-in';
 	$('#link-href').attr('href', link);
 	$('#link-href').text(link);
 

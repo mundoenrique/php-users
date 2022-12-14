@@ -45,10 +45,10 @@ class Users_model extends CI_Model
 
 		$newCore = array (
 			'Usd',
-			'Pe'
+			'Pe',
+			'Ve',
 			//'Ec-bp',
 			//'Co',
-			//'Ve'
 		);
 
 		if (IP_VERIFY === 'ON') {

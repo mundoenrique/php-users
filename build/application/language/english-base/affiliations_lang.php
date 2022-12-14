@@ -9,3 +9,4 @@ $lang['AFFIL_FAILED_AFFILIATE_UPDATE'] = 'Failed to upgrade affiliate.';
 $lang['AFFIL_SUCCESS_AFFILIATE_DELETION'] = 'Affiliate deleted successfully.';
 $lang['AFFIL_FAILED_AFFILIATE_DELETION'] = 'It was not possible to delete the affiliate.';
 $lang['AFFIL_EMPTY_AFFILIATE_ACCOUNTS'] = 'You have no affiliated accounts.';
+$lang['AFFIL_AFFILIATE_ALREADY_STORED'] = 'The affiliate is already stored.';

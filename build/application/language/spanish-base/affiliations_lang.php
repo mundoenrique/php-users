@@ -9,3 +9,4 @@ $lang['AFFIL_FAILED_AFFILIATE_UPDATE'] = 'No fue posible actualizar al afiliado.
 $lang['AFFIL_SUCCESS_AFFILIATE_DELETION'] = 'Afiliado eliminado de forma exitosa.';
 $lang['AFFIL_FAILED_AFFILIATE_DELETION'] = 'No fue posible eliminar al afiliado.';
 $lang['AFFIL_EMPTY_AFFILIATE_ACCOUNTS'] = 'No tienes cuentas afiliadas.';
+$lang['AFFIL_AFFILIATE_ALREADY_STORED'] = 'El afiliado ya se encuentra almacenado.';

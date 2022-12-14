@@ -139,10 +139,10 @@ class Registro_model extends CI_Model {
 
 		$newCore = array (
 			'Usd',
-			'Pe'
+			'Pe',
+			'Ve',
 			//'Ec-bp',
 			//'Co',
-			//'Ve'
 		);
 
 		if (!empty($newCore)){
@@ -208,7 +208,7 @@ class Registro_model extends CI_Model {
 			if($validateNewCore){
 				$this->code = 5;
 				$this->title = 'Conexión Personas';
-				$this->msn = 'Estimado usuario.<br> Esta página ha sido cambiada, para ingresar a <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder desde <strong><a id="link-href"></a></strong>';
+				$this->msn = 'Estimado usuario.<br> Esta página ha sido actualizada. Para ingresar a <strong>Conexión Personas Online</strong> presiona el botón "<strong>Aceptar</strong>" o puedes acceder con este enlace: <strong><a id="link-href"></a></strong>';
 				$this->codPaisUrl = changeCoreUrl($pais);
 				$this->modalType = "alert-warning";
 			}else{

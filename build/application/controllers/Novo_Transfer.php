@@ -292,7 +292,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->modelClass = 'Novo_Business_Model';
 		$this->modelMethod = 'callWs_CardListOperations_Business';
 		$this->request->operation = 'Transferencias';
-		$this->request->operType = 'P2T';
+		$this->request->operType = 'PMV';
 		$userCardList = $this->loadModel($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
