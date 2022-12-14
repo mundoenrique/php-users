@@ -151,9 +151,11 @@ class Users_model extends CI_Model
 				];
 				$this->session->set_userdata($newdata);
 
-				$data = ['username' => $username];
-				$this->db->where('id', $this->session->session_id);
-				$this->db->update('cpo_sessions', $data);
+				if(SESS_DRIVER == 'database'){
+					$data = ['username' => $username];
+					$this->db->where('id', $this->session->session_id);
+					$this->db->update('cpo_sessions', $data);
+				}
 
 				if (!empty($newCore)){
 					$validateNewCore = in_array($desdata->codPais,$newCore);
@@ -191,21 +193,24 @@ class Users_model extends CI_Model
 
 	public function validar_session_user($username)
 	{
-		$sql = $this->db->select(array('id', 'username'))
-			->where('username', $username)
-			->get_compiled_select('cpo_sessions', FALSE);
+		$logged = FALSE;
 
-		$result = $this->db->get()->result_array();
+		if(SESS_DRIVER == 'database'){
 
-		if (!isset($result[0]['username'])) {
+			$this->db->select(array('id', 'username'))
+				->where('username', $username)
+				->get_compiled_select('cpo_sessions', FALSE);
 
-			return true;
-		} else {
-			$this->db->where('id', $result[0]['id']);
-			$this->db->delete('cpo_sessions');
+			$result = $this->db->get()->result_array();
 
-			return false;
+			if (count($result) > 0) {
+
+				$this->db->where('id', $result[0]['id']);
+				$this->db->delete('cpo_sessions');
+				$logged = TRUE;
+			}
 		}
+		return $logged;
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------

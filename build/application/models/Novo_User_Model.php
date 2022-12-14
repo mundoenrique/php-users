@@ -149,9 +149,11 @@ class Novo_User_Model extends NOVO_Model {
 
 				$this->session->set_userdata($userData);
 
-				$data = ['username' => $userName];
-				$this->db->where('id', $this->session->session_id)
-				->update('cpo_sessions', $data);
+				if(SESS_DRIVER == 'database'){
+					$data = ['username' => $userName];
+					$this->db->where('id', $this->session->session_id)
+					->update('cpo_sessions', $data);
+				}
 
 				if ($response->passwordTemp == '1') {
 					$fullSignin = FALSE;
@@ -268,7 +270,7 @@ class Novo_User_Model extends NOVO_Model {
 
 		$logged = FALSE;
 
-		if (ACTIVE_SAFETY) {
+		if (ACTIVE_SAFETY && SESS_DRIVER == 'database') {
 			$this->db->select(['id', 'username'])
 				->where('username',  $userName)
 				->get_compiled_select('cpo_sessions', FALSE);

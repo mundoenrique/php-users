@@ -99,9 +99,11 @@ class User_Model extends BDB_Model
 							$reasonOperation =  'NULL';
 							$this->response->msg = '';
 
-							$this->db->select(array('id', 'username'))
-								->where('id', $this->session->session_id)
-								->update('cpo_sessions', ['username' => $dataRequest->user]);
+							if(SESS_DRIVER == 'database'){
+								$this->db->select(array('id', 'username'))
+									->where('id', $this->session->session_id)
+									->update('cpo_sessions', ['username' => $dataRequest->user]);
+							}
 						}
 						is_null($reasonOperation) ? '' : $this->session->set_flashdata('changePassword', $reasonOperation);
 
@@ -700,20 +702,24 @@ class User_Model extends BDB_Model
 
 	public function isUserLoggedIn($username)
 	{
-		$this->db->select(array('id', 'username'))
-			->where('username', $username)
-			->get_compiled_select('cpo_sessions', FALSE);
+		$logged = FALSE;
 
-		$result = $this->db->get()->result_array();
+		if(SESS_DRIVER == 'database'){
 
-		if (count($result) !== 0) {
+			$this->db->select(array('id', 'username'))
+				->where('username', $username)
+				->get_compiled_select('cpo_sessions', FALSE);
 
-			$this->db->where('id', $result[0]['id']);
-			$this->db->delete('cpo_sessions');
-			return TRUE;
-		} else {
-			return FALSE;
+			$result = $this->db->get()->result_array();
+
+			if (count($result) > 0) {
+
+				$this->db->where('id', $result[0]['id']);
+				$this->db->delete('cpo_sessions');
+				$logged = TRUE;
+			}
 		}
+		return $logged;
 	}
 
 	public function pad_key($key)

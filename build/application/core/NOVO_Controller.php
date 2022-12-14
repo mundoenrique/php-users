@@ -76,7 +76,7 @@ class NOVO_Controller extends CI_Controller {
 		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
-			if ($this->session->has_userdata('userName')) {
+			if ($this->session->has_userdata('userName') && SESS_DRIVER == 'database') {
 				$data = ['username' => $this->session->userName];
 				$this->db->where('id', $this->session->session_id)
 				->update('cpo_sessions', $data);
