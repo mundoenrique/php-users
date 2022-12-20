@@ -231,9 +231,7 @@ function setAffiliateDataTable(data) {
 }
 
 function showManageAffiliateView(action) {
-	if (action == "create") {
-		resetForms($("#manageAffiliate"));
-	}
+	resetForms($("#manageAffiliate"));
 	$("#affiliationsView").hide();
 	$("#manageAffiliateView").fadeIn(700, "linear");
 	$("#manageAffiliateBtn")
