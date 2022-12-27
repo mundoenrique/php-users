@@ -110,7 +110,7 @@ class Users_model extends CI_Model
 			//'Usd',
 			// 'Pe',
 			// 'Ec-bp',
-			// 'Co',
+			'Co',
 			// 'Ve'
 		);
 		$reconversionVe = true;
@@ -121,6 +121,9 @@ class Users_model extends CI_Model
 				/* case 'Ve':
 					$rc = $reconversionVe ? 9996 : 9997;
 				break; */
+				case 'Co':
+					$rc = 10001;
+					break;
 				default:
 					$rc = 9997;
 				break;
