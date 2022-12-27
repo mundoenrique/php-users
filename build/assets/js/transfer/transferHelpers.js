@@ -502,9 +502,14 @@ function setValues(formID, objectValues) {
 function disableAffiliationFields(formID, disabled) {
 	$(`${formID} input, ${formID} select`)
 		.not("#amount, #concept, #expDateCta")
-		.attr("readonly", disabled);
-	$("#transferView #bank").attr("readonly", disabled);
+		.each(function () {
+			$(this).attr("readonly", disabled);
+			disabled
+				? $(this).addClass("bg-tertiary border")
+				: $(this).removeClass("bg-tertiary border");
+		});
 
+	$("#transferView #bank").attr("readonly", disabled);
 	disableIdNumber($(`${formID} #typeDocument`));
 
 	if (disabled) {
