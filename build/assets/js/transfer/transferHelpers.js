@@ -64,6 +64,7 @@ $(function () {
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
+		resetForms($("#transferForm"));
 		disableAffiliationFields("#transferForm", false);
 	});
 
@@ -333,7 +334,28 @@ $(function () {
 			return value;
 		});
 	});
+
+	// Deshabilita campos número documento
+	$("input#idNumber").prop("disabled", true);
+
+	// Habilita campo número doc. al seleccionar el tipo doc.
+	$("select#typeDocument").change(function () {
+		disableIdNumber($(this));
+	});
 });
+
+function disableIdNumber(typeDocument) {
+	var selectedOption = typeDocument.children("option:selected").val();
+	var idNumber = typeDocument.closest(".form-row").find("#idNumber");
+	var disableInput = false;
+
+	if (selectedOption == "") {
+		idNumber.val("");
+		disableInput = true;
+	}
+
+	idNumber.prop("disabled", disableInput);
+}
 
 function getBalance() {
 	form = $("#operation");
@@ -478,8 +500,12 @@ function setValues(formID, objectValues) {
 }
 
 function disableAffiliationFields(formID, disabled) {
-	$(`${formID} input, ${formID} select`).not("#amount, #concept, #expDateCta").attr("readonly", disabled);
+	$(`${formID} input, ${formID} select`)
+		.not("#amount, #concept, #expDateCta")
+		.attr("readonly", disabled);
 	$("#transferView #bank").attr("readonly", disabled);
+
+	disableIdNumber($(`${formID} #typeDocument`));
 
 	if (disabled) {
 		$("#transferView #bank").addClass("no-pointer bg-tertiary border");
@@ -558,8 +584,8 @@ function setFieldNames(operation) {
 		}
 
 		objectValues = setObjectValues[operationType];
-		disableAffiliationFields("#transferForm", true);
 		setValues("#transferForm", objectValues);
+		disableAffiliationFields("#transferForm", true);
 	}
 }
 

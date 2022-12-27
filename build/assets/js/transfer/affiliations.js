@@ -269,6 +269,8 @@ function showManageAffiliateView(action) {
 		setFieldNames("affiliation");
 	}
 
+	disableIdNumber($("#manageAffiliate #typeDocument"));
+
 	if (operationType != "P2P") {
 		getBanks("affiliation", action);
 	}
