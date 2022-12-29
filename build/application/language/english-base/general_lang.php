@@ -159,6 +159,7 @@ $lang['GEN_INVALID_CARD'] = 'The data is invalid or you are already registered.'
 $lang['GEN_SENSITIVE_DATA'] = 'The data that will be shown below requires your care and protection, do not expose them in networks or public places, take care of people who are close since they are sensitive.';
 $lang['GEN_VERIFICATION_COD'] = 'Verification code';
 $lang['GEN_MAINTENANCE_MSG'] = 'We are doing maintenance to the platform to better serve you.';
+$lang['GEN_TEMPORAL_DISABLE_MSG'] = 'The service is temporarily unavailable.';
 $lang['GEN_SELECTION'] = 'Select';
 $lang['GEN_MONTHS'] = 'Months';
 $lang['GEN_DAYS'] = 'Days';

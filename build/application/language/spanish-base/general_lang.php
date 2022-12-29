@@ -158,6 +158,7 @@ $lang['GEN_INVALID_CARD'] = 'Los datos son inválidos o ya estas registrado.';
 $lang['GEN_SENSITIVE_DATA'] = 'Los datos que serán mostrados a continuación requieren de tu cuidado y protección, no los expongas en redes o lugares públicos, cuida de las personas que se encuentran cercanas ya que los mismos son sensibles.';
 $lang['GEN_VERIFICATION_COD'] = 'Código de verificación';
 $lang['GEN_MAINTENANCE_MSG'] = 'Estamos haciendo mantenimiento a la plataforma para atenderte mejor';
+$lang['GEN_TEMPORAL_DISABLE_MSG'] = 'El servicio no está disponible temporalmente.';
 $lang['GEN_SELECTION'] = 'Selecciona';
 $lang['GEN_MONTHS'] = 'Meses';
 $lang['GEN_DAYS'] = 'Días';
