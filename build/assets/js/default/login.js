@@ -508,7 +508,21 @@ function login(user = null, pass = null, dataOPT = {}) {
 					$("#dialog-maintenance-general").dialog("close");
 					habilitar();
 				});
-			} else {
+			} else if (data.rc == 10001) {
+				ocultarProcesando();
+				$("#dialog-temporal-disable").dialog({
+					title: "Conexión Personas",
+					modal: "true",
+					width: "440px",
+					open: function (event, ui) {
+						$(".ui-dialog-titlebar-close", ui.dialog).hide();
+					}
+				});
+				$("#dialog-temporal").click(function () {
+					$("#dialog-temporal-disable").dialog("close");
+					habilitar();
+				});
+			}else {
 				ocultarProcesando();
 				var msgError = 'No fue posible procesar tu solicitud, por favor <strong>vuelve a intentar</strong>';
 
