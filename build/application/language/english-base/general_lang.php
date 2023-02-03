@@ -213,7 +213,7 @@ $lang['GEN_DOWNLOAD_STATEMENT'] = 'Download Statement';
 $lang['GEN_SEND_PDF'] = 'Send PDF';
 $lang['GEN_SEND_XLS'] = 'Send Excel';
 $lang["GEN_MSG_IMPORTANT"] = 'Important announcement';
-$lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang['GEN_LOCK_PRODUCT_WRONG_PIN'] = ' %s For security the card has been blocked, please try tomorrow.';
 $lang["GEN_NO_RESULTS"] = 'No results';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Open your %s to see your authentication code and verify your identity.';
