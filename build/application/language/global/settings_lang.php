@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SETT_SUPPORT_IE'] = 'OFF';
 $lang['SETT_MAINTENANCE'] = 'OFF';
+$lang['SETT_MAINT_NOTIF'] = 'OFF';
 $lang['SETT_MAINTENANCE_RC'] = 9997;
 $lang['SETT_TENANT_PUBLICATION'] = 2010;
 $lang['SETT_ARGON2_ACTIVE'] = 'OFF';
