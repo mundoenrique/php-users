@@ -214,7 +214,7 @@ $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';
 $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
-$lang["GEN_MSG_RECONVERSION"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
 $lang["GEN_NO_RESULTS"] = 'Sin resultados';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s %s para ver el código de autenticación y verificar tu identidad.';
 $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
