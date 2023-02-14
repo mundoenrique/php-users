@@ -22,7 +22,7 @@
     <div id="cardList" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
       <?php foreach ($cardsList AS $cards): ?>
       <div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
-        <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>" alt="<?= $cards->productName ?>" />
+        <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerProgram); ?>" alt="<?= $cards->productName ?>" />
         <div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $cards->brand : ''?> p-2 h5 bg-white">
 					<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
 					<small class="sb-disabled uppercase light truncate"><?= $cards->enterprise?></small><br>

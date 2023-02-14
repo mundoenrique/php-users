@@ -12,7 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
-	private $clientStyle;
+	protected $customerStyle;
+	protected $customerLang;
 	protected $customerUri;
 	protected $fileLanguage;
 	protected $controllerClass;
@@ -39,7 +40,6 @@ class NOVO_Controller extends CI_Controller {
 		$customerUri = $this->uri->segment(1, 0) ?? 'null';
 
 		$this->ValidateBrowser = FALSE;
-		$this->clientStyle = $customerUri;
 		$this->customerUri = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
@@ -85,8 +85,10 @@ class NOVO_Controller extends CI_Controller {
 			LoadLangFile('generic', $this->fileLanguage);
 			clientUrlValidate($this->customerUri);
 			$this->customerUri = $this->config->item('customer-uri');
-			$this->clientStyle = $this->config->item('client_style');
-			LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
+			$this->customerStyle = $this->config->item('customer_style');
+			$this->customerLang = $this->config->item('customer_lang');
+			$this->customerProgram = $this->config->item('customer_program');
+			LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
 			if ($this->controllerMethod !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();
@@ -161,7 +163,9 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->clientStyle = $this->clientStyle;
+			$this->render->customerStyle = $this->customerStyle;
+			$this->render->customerLang = $this->customerLang;
+			$this->render->customerProgram = $this->customerProgram;
 			$this->render->logged = $this->session->has_userdata('logged');
 			$this->render->userId = $this->session->has_userdata('userId');
 			$this->render->fullName = $this->session->fullName;
@@ -182,10 +186,10 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			$this->includeAssets->cssFiles = [
-				"$this->clientStyle/root-$this->clientStyle",
+				"$this->customerStyle/root-$this->customerStyle",
 				"root-general",
 				"reboot",
-				"$this->clientStyle/"."$this->clientStyle-base"
+				"$this->customerStyle/"."$this->customerStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {

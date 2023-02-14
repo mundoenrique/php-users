@@ -3,7 +3,7 @@
 	<footer class="main-footer">
 		<?php if(lang('CONF_FOOTER_MARK') == 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
-			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $clientStyle); ?> " alt="Superintendencia de Bancos">
+			<img src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $customerLang); ?> " alt="Superintendencia de Bancos">
 		</div>
 		<?php endif; ?>
 		<div class="flex flex-auto flex-wrap justify-around items-center">
@@ -17,7 +17,7 @@
 			</div>
 			<?php endif; ?>
 			<?php if(lang('CONF_FOOTER_LOGO') == 'ON'):?>
-			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $clientStyle); ?>"
+			<img class="order-first" src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $customerLang); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>">
 			<?php endif; ?>
 			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images'); ?>" alt="Logo PCI">
@@ -88,7 +88,7 @@
   <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">
     <?php foreach ($cardsList AS $cards): ?>
     <div class="dashboard-item p-1 mx-1 mb-1 <?= $cards->statusClasses ?? '' ?>">
-      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>"
+      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerProgram); ?>"
 				alt="<?= $cards->productName ?>">
       <div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $cards->brand: ''?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?>
