@@ -16,4 +16,4 @@ $config['scores_recapcha'] = [
 		'score' => 0
 	],
 ];
-$config['client_style'] = 'default';
+$config['customer_style'] = 'default';
