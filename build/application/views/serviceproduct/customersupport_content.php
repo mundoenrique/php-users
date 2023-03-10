@@ -12,7 +12,7 @@
 				<div class="service-group flex max-width-5 flex-wrap items-start justify-between mb-2">
 					<div class="product-presentation flex flex-column items-end mr-4">
 						<div class="relative">
-							<div class="item-network <?php lang('CONF_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
+							<div class="item-network <?php lang('SETT_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
 							<img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'], 'images/programs', $countryUri); ?>" alt="Tarjeta gris">
 						</div>
 						<?php

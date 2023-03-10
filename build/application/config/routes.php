@@ -99,10 +99,8 @@ $route['(:any)/user-profile'] = "Novo_User/profileUser";
 $route['(:any)/mfa-enable'] = "Novo_Mfa/mfaEnable";
 $route['(:any)/mfa-confirm/(email|app)'] = "Novo_Mfa/mfaConfirm/$2";
 $route['(:any)/terms-conditions'] = "Novo_User/termsConditions";
-//Business
 $route['(:any)/card-list'] = "Novo_Business/userCardsList";
 $route['(:any)/card-detail'] = "Novo_Business/cardDetail";
-//transfers
 $route['(:any)/set-operations-key'] = "Novo_Transfer/setOperationKey";
 $route['(:any)/get-operations-key'] = "Novo_Transfer/getOperationKey";
 $route['(:any)/change-operations-key'] = "Novo_Transfer/changeOperationKey";
@@ -111,9 +109,7 @@ $route['(:any)/transfer-banks'] = "Novo_Transfer/cardToBank";
 $route['(:any)/mobile-payment'] = "Novo_Transfer/mobilePayment";
 $route['(:any)/pay-credit-cards'] = "Novo_Transfer/cardToCreditCard";
 $route['(:any)/pay-digitel-recharge'] = "Novo_Transfer/cardToDigitel";
-//Resports
 $route['(:any)/reports'] = "Novo_Reports/expensesCategory";
-//Custumer suppor
 $route['(:any)/customer-support'] = "Novo_CustomerSupport/services";
 $route['(:any)/notifications'] = "Novo_CustomerSupport/notifications";
 /*

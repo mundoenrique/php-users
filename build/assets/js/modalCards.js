@@ -29,7 +29,7 @@ $(function () {
 
 		cardDetail = '<div class="flex flex-column justify-center col-auto py-4 pr-0">';
 		cardDetail += '<div class="product-presentation relative">';
-		cardDetail += '<div class="item-network ' + (lang.CONF_FRANCHISE_LOGO === 'ON' ? brand : '') + ' "></div>';
+		cardDetail += '<div class="item-network ' + (lang.SETT_FRANCHISE_LOGO === 'ON' ? brand : '') + ' "></div>';
 		cardDetail += '<img class="card-image" src="' + img + '">';
 		cardDetail += '</div>';
 
@@ -41,7 +41,7 @@ $(function () {
 		cardDetail += '<div class="flex flex-column items-start col-6 self-center px-0 ml-1">';
 		cardDetail += '<p class="semibold mb-0 h5 truncate">' + productName + '</p>';
 		cardDetail += '<p id="card" class="mb-2">' + cardNumberMask + '</p>';
-		cardDetail += '<a id="other-product" class="btn hyper-link btn-small p-0" href="' + lang.CONF_NO_LINK + '">';
+		cardDetail += '<a id="other-product" class="btn hyper-link btn-small p-0" href="' + lang.SETT_NO_LINK + '">';
 		cardDetail += '<i aria-hidden="true" class="icon-find"></i>&nbsp;Otro producto';
 		cardDetail += '</a>';
 		cardDetail += '</div>';
@@ -58,7 +58,7 @@ $(function () {
 
 		$('#temporaryLockReason').val('');
 
-		if (status == '' && lang.CONF_TEMPORARY_LOCK_REASON == 'ON') {
+		if (status == '' && lang.SETT_TEMPORARY_LOCK_REASON == 'ON') {
 			$('#temporaryLockReason').removeClass('ignore');
 			$('#selectTempLockReason').removeClass('none');
 			$('#msgTemporaryLock').addClass('none');
@@ -93,5 +93,5 @@ function cardModal() {
 		posAt: 'top+50px',
 	}
 
-	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.CONF_ICON_SUCCESS, modalBtn);
+	appMessages(lang.USER_TERMS_TITLE, inputModal, lang.SETT_ICON_SUCCESS, modalBtn);
 }

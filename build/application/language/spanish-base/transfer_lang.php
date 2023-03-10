@@ -37,7 +37,7 @@ $lang['TRANSF_FORGOT_OPER_KEY'] = '
 <strong>¿Olvidaste tu clave de operaciones especiales?</strong> Escríbenos a
 <strong> <a class="btn-link" href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com </a></strong>
 incluyendo los siguientes datos: <br>
-<strong>nombre completo, número cédula, empresa en la que trabajas, 4 últimos dígitos de tu tarjeta </strong>
+<strong>nombre completo, número de cédula, empresa en la que trabajas, 4 últimos dígitos de tu tarjeta </strong>
 y con gusto te ayudaremos.
 ';
 $lang['TRANSF_AUTH_REQUIRED'] = 'Autenticación Requerida';
@@ -72,3 +72,11 @@ $lang['TRANSF_SYSTEM_MESSAGE'] = 'No fue posible realizar la operación, por fav
 $lang['TRANSF_VERIFY_IDENTITY_DOCUMENT'] = 'No fue posible realizar la operación, por favor verifica el documento de identidad.';
 $lang['TRANSF_VERIFY_PHONE_OR_BANK'] = 'No fue posible realizar la operación, por favor verifica el teléfono móvil o el banco seleccionado.';
 $lang['TRANSF_FAILED_OPERATION'] = 'Fallida';
+$lang['TRANSF_MINIMUM_MAXIMUM_AMOUNT'] = 'El monto mínimo para una operación es de %s y el máximo es de %s';
+$lang['TRANSF_AMOUNT_EXCEEDS_BALANCE'] = 'El monto de la operación excede su saldo disponible.';
+$lang['TRANSF_MONTHLY_MAXIMUM_AMOUNT'] = 'El monto máximo de operaciones mensual es de %s<br>Este mes acumulas %s';
+$lang['TRANSF_WEEKLY_MAXIMUM_AMOUNT'] = 'El monto máximo de operaciones semanal es de %s<br>Esta semana acumulas %s';
+$lang['TRANSF_DAILY_MAXIMUM_AMOUNT'] = 'El monto máximo de operaciones diaria es de %s<br>Hoy acumulas %s';
+$lang['TRANSF_MAXIMUM_MONTHLY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de %s operaciones mensuales.';
+$lang['TRANSF_MAXIMUM_WEEKLY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de %s operaciones semanales.';
+$lang['TRANSF_MAXIMUM_DAILY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de %s operaciones diarias.';

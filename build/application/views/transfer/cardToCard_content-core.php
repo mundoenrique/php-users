@@ -9,7 +9,7 @@
             <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-balance="<?= $callBalance; ?>">
               <div class="flex flex-column justify-center col-auto pb-4 pt-4 pr-0"">
 								<div class=" product-presentation relative">
-                <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
+                <div class="item-network <?= $totalCards == 1 && lang('SETT_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0) : ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
@@ -32,7 +32,7 @@
             <div class="flex flex-column items-start col-6 self-center px-0 ml-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('SETT_NO_LINK'); ?>">
                 <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['CONF_CONTACTS'] = [
+$lang['SETT_CONTACTS'] = [
 	'Provis Alimentación' => '6198930',
 	'Plata Servitebca' => '6198931',
 ];
-$lang['CONF_BTN_LANG'] = 'ON';
-$lang['CONF_INTERNATIONAL_ADDRESS'] = 'ON';
-$lang['CONF_SIGNIN_IMG'] = 'ON';
+$lang['SETT_BTN_LANG'] = 'ON';
+$lang['SETT_SIGNIN_IMG'] = 'ON';
+$lang['SETT_INTERNATIONAL_ADDRESS'] = 'ON';

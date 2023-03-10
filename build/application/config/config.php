@@ -80,7 +80,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= BASE_LANGUAGE.'-base';
+$config['language']	= 'global';
 
 /*
 |--------------------------------------------------------------------------

@@ -7,7 +7,7 @@ var skipFields;
 var ErrorIndexes;
 
 $(function () {
-	if ((lang.CONF_INTERNATIONAL_ADDRESS == 'ON' && $('#addresInput').val() === '1') || lang.CONF_CONTAC_DATA == 'ON') {
+	if ((lang.SETT_INTERNATIONAL_ADDRESS == 'ON' && $('#addresInput').val() === '1') || lang.SETT_CONTAC_DATA == 'ON') {
 		changeInputselect($('#internationalCode').attr('iso') || 'all');
 	}
 
@@ -22,7 +22,7 @@ $(function () {
 	toPositionFieldsetError(ErrorIndexes);
 
 	$('#profileUserForm').on('change', function () {
-		$('#btn-cancel').attr('href', baseURL + lang.CONF_LINK_USER_PROFILE)
+		$('#btn-cancel').attr('href', baseURL + lang.SETT_LINK_USER_PROFILE)
 	});
 
 	$('#birthDate').datepicker({
@@ -38,16 +38,16 @@ $(function () {
 
 	$('#landLine').on('change', function () {
 		$(this).rules('add', {
-			pattern: new RegExp(lang.CONF_REGEX_PHONE, 'i')
+			pattern: new RegExp(lang.REGEX_PHONE, 'i')
 		});
 	});
 
 
-	if (lang.CONF_PROFESSION == 'ON') {
+	if (lang.SETT_PROFESSION == 'ON') {
 		getProfessions();
 	}
 
-	if (lang.CONF_CONTAC_DATA == 'ON') {
+	if (lang.SETT_CONTAC_DATA == 'ON') {
 		getStates();
 
 		$('#state').on('change', function () {
@@ -65,7 +65,7 @@ $(function () {
 		});
 
 		$('#city').on('change', function () {
-			if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+			if (longProfile == 'S' || lang.SETT_INTERNATIONAL_ADDRESS == 'ON') {
 				$('#district').children().not(':first').remove();
 				getdistrict(this.value)
 			}
@@ -126,7 +126,7 @@ $(function () {
 
 			$(this).html(loader);
 
-			if (lang.CONF_LOAD_DOCS == 'ON') {
+			if (lang.SETT_LOAD_DOCS == 'ON') {
 				var inputFile = $('input[type="file"]');
 				var filesToUpload = [];
 
