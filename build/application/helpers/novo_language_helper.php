@@ -17,28 +17,28 @@ if (!function_exists('novoLang')) {
 }
 
 if (!function_exists('languageLoad')) {
-	function LoadLangFile($call, $fileLanguage, $customer) {
+	function LoadLangFile($call, $fileLanguage, $customerLang) {
 		writeLog('INFO', 'Helper loaded: LanguageLoad_helper for ' . $call . ' files');
 
 		$CI =& get_instance();
 		$languagesFile = [];
 		$loadLanguages = FALSE;
 		$configLanguage = $CI->config->item('language');
-		$customer = tenantSameSettings($customer);
+		$customerLang = tenantSameSettings($customerLang);
 		$pathLang = APPPATH . 'language' . DIRECTORY_SEPARATOR . $configLanguage . DIRECTORY_SEPARATOR;
 
 		switch ($call) {
 			case 'generic':
-				if(file_exists($pathLang . 'settings_' . $customer . '_lang.php')) {
-					$CI->lang->load('settings_' . $customer);
+				if(file_exists($pathLang . 'settings_' . $customerLang . '_lang.php')) {
+					$CI->lang->load('settings_' . $customerLang);
 				}
 
-				if(file_exists($pathLang . 'images_' . $customer . '_lang.php')) {
-					$CI->lang->load('images_' . $customer);
+				if(file_exists($pathLang . 'images_' . $customerLang . '_lang.php')) {
+					$CI->lang->load('images_' . $customerLang);
 				}
 
-				if(file_exists($pathLang . 'regexp_' . $customer . '_lang.php')) {
-					$CI->lang->load('regexp_' . $customer);
+				if(file_exists($pathLang . 'regexp_' . $customerLang . '_lang.php')) {
+					$CI->lang->load('regexp_' . $customerLang);
 				}
 
 				$CI->config->set_item('language', BASE_LANGUAGE . '-base');

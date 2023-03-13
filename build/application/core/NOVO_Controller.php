@@ -14,8 +14,9 @@ class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
 	private $customerStyle;
 	protected $customerUri;
-	protected $fileLanguage;
 	protected $customerLang;
+	protected $customerImages;
+	protected $fileLanguage;
 	protected $controllerClass;
 	protected $controllerMethod;
 	protected $modelClass;
@@ -40,8 +41,10 @@ class NOVO_Controller extends CI_Controller {
 		$customerUri = $this->uri->segment(1, 0) ?? 'null';
 
 		$this->ValidateBrowser = FALSE;
-		$this->customerStyle = $customerUri;
 		$this->customerUri = $customerUri;
+		$this->customerLang = $customerUri;
+		$this->customerStyle = $customerUri;
+		$this->customerImages = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
@@ -83,11 +86,12 @@ class NOVO_Controller extends CI_Controller {
 				->update('cpo_sessions', $data);
 			}
 
-			LoadLangFile('generic', $this->fileLanguage, $this->customerUri);
+			LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
 			clientUrlValidate($this->customerUri);
 			$this->customerUri = $this->config->item('customer_uri');
-			$this->customerStyle = $this->config->item('customer_style');
 			$this->customerLang = $this->config->item('customer_lang');
+			$this->customerStyle = $this->config->item('customer_style');
+			$this->customerImages = $this->config->item('customer_images');
 			LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
 			if ($this->controllerMethod !== 'suggestion') {
@@ -184,10 +188,10 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			$this->includeAssets->cssFiles = [
-				"$this->customerStyle/root-$this->customerStyle",
-				"root-general",
+				"$this->customerStyle/$this->customerStyle-root",
+				"general-root",
 				"reboot",
-				"$this->customerStyle/"."$this->customerStyle-base"
+				"$this->customerStyle/$this->customerStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
@@ -350,6 +354,7 @@ class NOVO_Controller extends CI_Controller {
 			$showMsgLog = 'Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
 				$this->modelMethod;
 		}
+
 		writeLog('DEBUG', $showMsgLog);
 
 		return $responseModel;

@@ -38,20 +38,16 @@ class Asset {
 	public function insertCss()
 	{
 		writeLog('INFO', 'Asset: insertCss method initialized');
-		$file_url = NULL;
+		$fileUrl = NULL;
+		$fileExt = '.css';
 
 		foreach($this->cssFiles as $fileName) {
-			$file = assetPath('css/'.$fileName.'.css');
-
-			if(!file_exists($file)) {
-				writeLog('ERROR', 'Archivo requerido ' . $fileName . '.css');
-			}
-
-			$file = $this->versionFiles($file, $fileName, '.css');
-			$file_url .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
+			$file = assetPath('css/' . $fileName . $fileExt);
+			$file = $this->versionFiles($file, $fileName, $fileExt);
+			$fileUrl .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $fileUrl;
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
@@ -60,15 +56,16 @@ class Asset {
 	public function insertJs()
 	{
 		writeLog('INFO', 'Asset: insertJs method initialized');
-		$file_url = NULL;
+		$fileUrl = NULL;
+		$fileExt = '.js';
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/' . $fileName . '.js');
-			$file = $this->versionFiles($file, $fileName, '.js');
-			$file_url .= '<script defer src="' . assetUrl('js/'.$file) . '"></script>' . PHP_EOL;
+			$file = assetPath('js/' . $fileName . $fileExt);
+			$file = $this->versionFiles($file, $fileName, $fileExt);
+			$fileUrl .= '<script defer src="' . assetUrl('js/'. $file) . '"></script>' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $fileUrl;
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
@@ -95,17 +92,23 @@ class Asset {
 	 * @info Método para versionar archivos
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	private function versionFiles($file, $fileName, $ext)
+	private function versionFiles($file, $fileName, $fileExt)
 	{
 		$version = '';
 		$thirdParty = strpos($fileName, 'third_party');
+		$fileExists = TRUE;
 
-		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V' . date('Ymd-U', filemtime($file));
-		} else {
-			$ext = '.min' . $ext;
+		if(!file_exists($file)) {
+			writeLog('ERROR', 'Archivo requerido ' . $fileName . $fileExt);
+			$fileExists = FALSE;
 		}
 
-		return $fileName . $ext . $version;
+		if($thirdParty === FALSE && $fileExists) {
+			$version = '?V' . date('Ymd-U', filemtime($file));
+		} elseif ($fileExists) {
+			$fileExt = '.min' . $fileExt;
+		}
+
+		return $fileName . $fileExt . $version;
 	}
 }

@@ -323,7 +323,6 @@ if (!function_exists('uriRedirect')) {
 	}
 }
 
-//eliminar despues de la certificación
 if (! function_exists('tenantSameSettings')) {
 	function tenantSameSettings($customer) {
 		$pattern = ['/bog/'];
