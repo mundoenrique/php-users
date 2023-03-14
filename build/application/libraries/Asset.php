@@ -42,7 +42,7 @@ class Asset {
 		$fileExt = '.css';
 
 		foreach($this->cssFiles as $fileName) {
-			$file = assetPath('css/' . $fileName . $fileExt);
+			$file = assetPath('css/' . $fileName);
 			$file = $this->versionFiles($file, $fileName, $fileExt);
 			$fileUrl .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
 		}
@@ -60,7 +60,7 @@ class Asset {
 		$fileExt = '.js';
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/' . $fileName . $fileExt);
+			$file = assetPath('js/' . $fileName);
 			$file = $this->versionFiles($file, $fileName, $fileExt);
 			$fileUrl .= '<script defer src="' . assetUrl('js/'. $file) . '"></script>' . PHP_EOL;
 		}
@@ -95,18 +95,17 @@ class Asset {
 	private function versionFiles($file, $fileName, $fileExt)
 	{
 		$version = '';
-		$thirdParty = strpos($fileName, 'third_party');
-		$fileExists = TRUE;
+		$thirdParty = strpos($file, 'third_party');
+		$fileExt = $thirdParty ? $fileExt = '.min' . $fileExt : $fileExt;
+		$file = $file . $fileExt;
+		$fileExists = file_exists($file);
 
-		if(!file_exists($file)) {
-			writeLog('ERROR', 'Archivo requerido ' . $fileName . $fileExt);
-			$fileExists = FALSE;
+		if(!$fileExists) {
+			writeLog('ERROR', 'Required file ' . $file);
 		}
 
-		if($thirdParty === FALSE && $fileExists) {
+		if(!$thirdParty) {
 			$version = '?V' . date('Ymd-U', filemtime($file));
-		} elseif ($fileExists) {
-			$fileExt = '.min' . $fileExt;
 		}
 
 		return $fileName . $fileExt . $version;
