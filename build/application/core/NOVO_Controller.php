@@ -12,10 +12,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
-	private $customerStyle;
 	protected $customerUri;
 	protected $customerLang;
 	protected $customerImages;
+	protected $customerStyle;
 	protected $fileLanguage;
 	protected $controllerClass;
 	protected $controllerMethod;
