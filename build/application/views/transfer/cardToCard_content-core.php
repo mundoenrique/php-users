@@ -16,7 +16,9 @@
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else : ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerProgram); ?>"
+                <img
+									class="card-image"
+									src="<?= $this->asset->insertImage($productImg, $customerImages, 'programs'); ?>"
                   alt="<?= $productName; ?>">
                 <?php endif; ?>
               </div>

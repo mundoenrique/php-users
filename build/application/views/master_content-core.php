@@ -8,7 +8,10 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta http-equiv="cleartype" content="on">
-	<link rel="icon" type="image/<?= $ext ?>" href="<?= $this->asset->insertFile($favicon.'.'.$ext, 'images/favicon') ?>">
+	<link
+		rel="icon" type="image/<?= $ext ?>"
+		href="<?= $this->asset->insertImage($favicon.'.'.$ext, $customerImages, 'favicon') ?>"
+	>
 	<?= $this->asset->insertCss(); ?>
 	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>

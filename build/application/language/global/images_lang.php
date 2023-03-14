@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['IMG_FAVICON'] = 'favicon-novo';
 $lang['IMG_FAVICON_EXT'] = 'ico';
 $lang['IMG_LOGO_HEADER'] = 'img-logo.svg';
-$lang['IMG_DEFAULT_LOGO'] = 'img-default_white.svg';
 $lang['IMG_FOTTER_IMAGE_L'] = 'img-default_white.svg';
 $lang['IMG_FOTTER_MARK'] = 'img-mark.svg';
 $lang['IMG_PCI'] = 'img-pci_compliance.svg';

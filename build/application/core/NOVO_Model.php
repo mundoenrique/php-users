@@ -16,6 +16,7 @@ class NOVO_Model extends CI_Model {
 	public $token;
 	public $customer;
 	public $customerUri;
+	public $customerImages;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -32,6 +33,7 @@ class NOVO_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
 		$this->customerUri = $this->session->customerUri;
+		$this->customerImages = $this->config->item('customer_images');
 		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';

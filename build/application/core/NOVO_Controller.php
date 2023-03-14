@@ -167,7 +167,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->customerStyle = $this->customerStyle;
+			$this->render->customerImages = $this->customerImages;
 			$this->render->logged = $this->session->has_userdata('logged');
 			$this->render->userId = $this->session->has_userdata('userId');
 			$this->render->fullName = $this->session->fullName;

@@ -39,7 +39,7 @@ class Asset {
 	{
 		writeLog('INFO', 'Asset: insertCss method initialized');
 		$fileUrl = NULL;
-		$fileExt = '.css';
+		$fileExt = 'css';
 
 		foreach($this->cssFiles as $fileName) {
 			$file = assetPath('css/' . $fileName);
@@ -57,7 +57,7 @@ class Asset {
 	{
 		writeLog('INFO', 'Asset: insertJs method initialized');
 		$fileUrl = NULL;
-		$fileExt = '.js';
+		$fileExt = 'js';
 
 		foreach($this->jsFiles as $fileName) {
 			$file = assetPath('js/' . $fileName);
@@ -66,6 +66,50 @@ class Asset {
 		}
 
 		return $fileUrl;
+	}
+	/**
+	 * @info Método para insertar imagenes, json, etc
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function insertImage($file, $customerImages, $folder = FALSE)
+	{
+		writeLog('INFO', 'Asset: insertImage method initialized');
+
+		list($fileName, $fileExt) = explode('.', $file);
+		$folder = $folder ? $folder . '/' : '';
+		$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
+		$fileExists = file_exists($file . '.' . $fileExt);
+
+		if(!$fileExists) {
+			$customerImages = 'default';
+			$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
+		}
+
+		$file = $this->versionFiles($file, $fileName, $fileExt);
+
+		return assetUrl('images/' . $customerImages . '/' . $folder . $file);
+	}
+	/**
+	 * @info Método para versionar archivos
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	private function versionFiles($file, $fileName, $fileExt)
+	{
+		$version = '';
+		$thirdParty = strpos($file, 'third_party');
+		$fileExt = $thirdParty ? '.min.' . $fileExt : '.' . $fileExt;
+		$file = $file . $fileExt;
+		$fileExists = file_exists($file);
+
+		if(!$fileExists) {
+			writeLog('ERROR', 'Required file ' . $file);
+		}
+
+		if(!$thirdParty) {
+			$version = '?V' . date('Ymd-U', filemtime($file));
+		}
+
+		return $fileName . $fileExt . $version;
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
@@ -87,27 +131,5 @@ class Asset {
 		$version = '?V'.date('Ymd-U', filemtime($file));
 
 		return assetUrl($folder . '/' . $customerUri . $fileName . $version);
-	}
-	/**
-	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	private function versionFiles($file, $fileName, $fileExt)
-	{
-		$version = '';
-		$thirdParty = strpos($file, 'third_party');
-		$fileExt = $thirdParty ? $fileExt = '.min' . $fileExt : $fileExt;
-		$file = $file . $fileExt;
-		$fileExists = file_exists($file);
-
-		if(!$fileExists) {
-			writeLog('ERROR', 'Required file ' . $file);
-		}
-
-		if(!$thirdParty) {
-			$version = '?V' . date('Ymd-U', filemtime($file));
-		}
-
-		return $fileName . $fileExt . $version;
 	}
 }
