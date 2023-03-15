@@ -10,7 +10,7 @@
 	<meta http-equiv="cleartype" content="on">
 	<link
 		rel="icon" type="image/<?= $ext ?>"
-		href="<?= $this->asset->insertImage($favicon.'.'.$ext, $customerImages, 'favicon') ?>"
+		href="<?= $this->asset->insertImage($favicon.'.'.$ext, $customerImages) ?>"
 	>
 	<?= $this->asset->insertCss(); ?>
 	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
