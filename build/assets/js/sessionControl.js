@@ -11,7 +11,7 @@ $(function() {
 			btn1: {
 				text: lang.GEN_BTN_ACCEPT,
 				action: 'redirect',
-				link: lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_START
+				link: lang.SETT_LINK_SIGNOUT + lang.SETT_LINK_SIGNOUT_START
 			},
 			btn2: {
 				text: lang.GEN_BTN_CANCEL,
@@ -20,7 +20,7 @@ $(function() {
 		}
 
 		$('#cancel').addClass('keep-session');
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_CLOSE_SESSION, lang.SETT_ICON_INFO, modalBtn);
 	});
 
 	$('#system-info').on('click', '.keep-session', function(e) {
@@ -60,13 +60,13 @@ function keepSession() {
 		}
 	}
 
-	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_FINISH_TEXT, lang.SETT_ICON_INFO, modalBtn);
 
 	resetTimesession = setTimeout(function() {
 		$('#accept')
 			.html(loader)
 			.prop('disabled', true);
 
-		$(location).attr('href', baseURL + lang.CONF_LINK_SIGNOUT + lang.CONF_LINK_SIGNOUT_END);
+		$(location).attr('href', baseURL + lang.SETT_LINK_SIGNOUT + lang.SETT_LINK_SIGNOUT_END);
 	}, callServer);
 }

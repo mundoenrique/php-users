@@ -32,7 +32,7 @@ class Tool_File {
 		$this->CI->load->library('upload');
 		$this->CI->load->library('image_lib');
 		$valid = FALSE;
-		$configUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$configUploadFile = lang('SETT_CONFIG_UPLOAD_FILE');
 		$configUploadFile['upload_path'] = UPLOAD_PATH . $this->buildDirectoryPath([
 			strtoupper($this->CI->session->customerUri),
 			strtoupper($_POST['nickName'] ?? $this->CI->session->userName),
@@ -151,7 +151,7 @@ class Tool_File {
 	{
 		log_message('INFO', 'Novo Tool_File: convertBase64ToImage Method Initialized');
 
-		$configToUploadFile = lang('CONF_CONFIG_UPLOAD_FILE');
+		$configToUploadFile = lang('SETT_CONFIG_UPLOAD_FILE');
 		$convertImage = new stdClass();
 		$convertImage->result = FALSE;
 		$this->user = $this->user ?? $userName;

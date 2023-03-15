@@ -46,7 +46,7 @@ class Users_model extends CI_Model
 		$newCore = array (
 			'Usd',
 			'Pe',
-			'Ve'
+			'Ve',
 			//'Ec-bp',
 			//'Co',
 		);
@@ -134,8 +134,9 @@ class Users_model extends CI_Model
 		}
 
 		if ($putSession) {
-			$valida = $this->validar_session_user($username);
-			if ($valida === true) {
+			$userLogged = $this->validar_session_user($username);
+
+			if ($userLogged === FALSE) {
 				$newdata = [
 					'idUsuario' => $desdata->idUsuario,
 					'userName' => $desdata->userName,
@@ -154,9 +155,11 @@ class Users_model extends CI_Model
 				];
 				$this->session->set_userdata($newdata);
 
-				$data = ['username' => $username];
-				$this->db->where('id', $this->session->session_id);
-				$this->db->update('cpo_sessions', $data);
+				if(SESS_DRIVER == 'database'){
+					$data = ['username' => $username];
+					$this->db->where('id', $this->session->session_id);
+					$this->db->update('cpo_sessions', $data);
+				}
 
 				if (!empty($newCore)){
 					$validateNewCore = in_array($desdata->codPais,$newCore);
@@ -194,21 +197,23 @@ class Users_model extends CI_Model
 
 	public function validar_session_user($username)
 	{
-		$sql = $this->db->select(array('id', 'username'))
-			->where('username', $username)
-			->get_compiled_select('cpo_sessions', FALSE);
+		$logged = FALSE;
 
-		$result = $this->db->get()->result_array();
+		if(SESS_DRIVER == 'database') {
+			$this->db->select(array('id', 'username'))
+				->where('username', $username)
+				->get_compiled_select('cpo_sessions', FALSE);
 
-		if (!isset($result[0]['username'])) {
+			$result = $this->db->get()->result_array();
 
-			return true;
-		} else {
-			$this->db->where('id', $result[0]['id']);
-			$this->db->delete('cpo_sessions');
-
-			return false;
+			if (count($result) > 0) {
+				$this->db->where('id', $result[0]['id']);
+				$this->db->delete('cpo_sessions');
+				$logged = TRUE;
+			}
 		}
+
+		return $logged;
 	}
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -37,7 +37,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 				if ($dataRequest->resendToken) {
 					$this->response->code = 4;
 					$this->response->title = lang('GEN_MENU_MFA');
-					$this->response->icon = lang('CONF_ICON_SUCCESS');
+					$this->response->icon = lang('SETT_ICON_SUCCESS');
 					$this->response->msg = novoLang(lang('MFA_TWO_FACTOR_RESEND_CODE'), $this->session->maskMail);
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
@@ -47,7 +47,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 			case 462:
 				$this->response->title = lang('GEN_MENU_MFA');
-				$this->response->icon = lang('CONF_ICON_INFO');
+				$this->response->icon = lang('SETT_ICON_INFO');
 				$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
 				$this->session->set_userdata('otpActive', TRUE);
 				$this->session->set_userdata('otpChannel', $dataRequest->channel);
@@ -67,8 +67,8 @@ class Novo_Mfa_Model extends NOVO_Model {
     writeLog('INFO', 'Mfa Model: GenerateTotp Method Initialized');
 
 		$uriValidateTopt = [
-			lang('CONF_MFA_GENERATE_OTP') => 'otp/generate',
-			lang('CONF_MFA_DEACTIVATE') => 'secret-token/deactivate',
+			lang('SETT_MFA_GENERATE_OTP') => 'otp/generate',
+			lang('SETT_MFA_DEACTIVATE') => 'secret-token/deactivate',
 		];
 
 		$this->dataRequest->uri = $uriValidateTopt[$dataRequest->operationType];
@@ -84,7 +84,7 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 				$this->response->code = 0;
 				$this->response->title = lang('GEN_MENU_MFA');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->msg = novoLang(lang('GEN_TWO_FACTOR_CODE_VERIFY'), $msgArray);
 				$this->response->msg.=  ' ' . lang('GEN_TWO_FACTOR_SEND_CODE');
 				$this->response->modalBtn['btn1']['action'] = 'none';
@@ -107,9 +107,9 @@ class Novo_Mfa_Model extends NOVO_Model {
 		writeLog('INFO', 'Mfa Model: ValidateTotp Method Initialized');
 
 		$uriValidateTopt = [
-			lang('CONF_MFA_ACTIVATE') => 'secret-token/generate/confirm',
-			lang('CONF_MFA_DEACTIVATE') => 'secret-token/deactivate/confirm',
-			lang('CONF_MFA_VALIDATE_OTP') => 'otp/validate',
+			lang('SETT_MFA_ACTIVATE') => 'secret-token/generate/confirm',
+			lang('SETT_MFA_DEACTIVATE') => 'secret-token/deactivate/confirm',
+			lang('SETT_MFA_VALIDATE_OTP') => 'otp/validate',
 		];
 		$otpChannel = isset($dataRequest->channel) ? $dataRequest->channel : $this->session->otpChannel;
 
@@ -124,16 +124,16 @@ class Novo_Mfa_Model extends NOVO_Model {
     switch ($this->isResponseRc) {
 			case 0:
 				$this->response->title = lang('GEN_MENU_MFA');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 
-				if ($dataRequest->operationType === lang('CONF_MFA_ACTIVATE')) {
+				if ($dataRequest->operationType === lang('SETT_MFA_ACTIVATE')) {
 					$this->response->msg = lang('MFA_TWO_FACTOR_ENABLED');
 					$this->session->set_userdata('otpActive', TRUE);
 					$this->session->set_userdata('otpChannel', $otpChannel);
 					$this->response->modalBtn['btn1']['link'] = 'card-list';
 				}
 
-				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
+				if ($dataRequest->operationType === lang('SETT_MFA_DEACTIVATE')) {
 					$this->response->msg = lang('MFA_TWO_FACTOR_DISABLED_REDIRECT');
 					$this->response->modalBtn['btn1']['link'] = 'two-factor-enablement';
 					$this->session->unset_userdata('otpActive');
@@ -142,15 +142,15 @@ class Novo_Mfa_Model extends NOVO_Model {
 					$this->session->unset_userdata('products');
 				}
 
-				if ($dataRequest->operationType === lang('CONF_MFA_VALIDATE_OTP')) {
+				if ($dataRequest->operationType === lang('SETT_MFA_VALIDATE_OTP')) {
 					if ($response->validationResult) {
 						$this->response->code = 0;
 						$this->response->modal = TRUE;
 						$this->session->set_userdata('otpMfaAuth', TRUE);
 					} else {
 						$this->response->code = 1;
-						$this->response->icon = lang('CONF_ICON_WARNING');
-						$this->response->msg = $otpChannel === lang('CONF_MFA_CHANNEL_APP') ? lang('MFA_CODE_INCORRECT') : lang('MFA_CODE_INCORRECT_AGAIN');
+						$this->response->icon = lang('SETT_ICON_WARNING');
+						$this->response->msg = $otpChannel === lang('SETT_MFA_CHANNEL_APP') ? lang('MFA_CODE_INCORRECT') : lang('MFA_CODE_INCORRECT_AGAIN');
 						$this->response->modalBtn['btn1']['action'] = 'none';
 					}
 				}
@@ -158,13 +158,13 @@ class Novo_Mfa_Model extends NOVO_Model {
 
 			case 464:
 				$this->response->title = lang('GEN_MENU_MFA');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->msg = (isset($dataRequest->channel) && $dataRequest->channel === lang('MFA_CODE_INCORRECT'))
-				 	? lang('CONF_MFA_CHANNEL_APP')
+				 	? lang('SETT_MFA_CHANNEL_APP')
 					: lang('MFA_CODE_INCORRECT_AGAIN');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 
-				if ($dataRequest->operationType === lang('CONF_MFA_DEACTIVATE')) {
+				if ($dataRequest->operationType === lang('SETT_MFA_DEACTIVATE')) {
 					$this->response->code = 1;
 					$this->response->modalBtn['btn1']['action'] = 'none';
 				}

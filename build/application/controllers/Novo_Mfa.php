@@ -57,11 +57,11 @@ class Novo_Mfa extends NOVO_Controller {
 		);
 
 		switch ($otpChannel) {
-			case lang('CONF_MFA_APP'):
-				$otpChannel = lang('CONF_MFA_CHANNEL_APP');
+			case lang('SETT_MFA_APP'):
+				$otpChannel = lang('SETT_MFA_CHANNEL_APP');
 				break;
-			case lang('CONF_MFA_EMAIL'):
-				$otpChannel = lang('CONF_MFA_CHANNEL_EMAIL');
+			case lang('SETT_MFA_EMAIL'):
+				$otpChannel = lang('SETT_MFA_CHANNEL_EMAIL');
 				break;
 		}
 

@@ -40,7 +40,7 @@ class Novo_Reports extends NOVO_Controller {
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;
 		$totalCards = count($cardsList);
-		$yearTenant = (int) lang('CONF_TENANT_PUBLICATION');
+		$yearTenant = (int) lang('SETT_TENANT_PUBLICATION');
 		$years = date('Y') - 4;
 		$maxYear = date('Y');
 

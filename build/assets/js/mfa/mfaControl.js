@@ -18,7 +18,7 @@ $(function() {
 			},
 		}
 
-		appMessages(lang.GEN_MENU_MFA, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.CONF_ICON_INFO, modalBtn);
+		appMessages(lang.GEN_MENU_MFA, lang.GEN_TWO_FACTOR_SURE_DISABLE, lang.SETT_ICON_INFO, modalBtn);
 	});
 
 	$('#system-info').on('click', '.sure-disable-two-factor', function (e) {
@@ -28,8 +28,8 @@ $(function() {
 			.html(loader)
 			.prop('disabled', true);
 		otpProps.msgInfo = lang.GEN_MFA_REMEMBER;
-		otpProps.generateAction = lang.CONF_MFA_DEACTIVATE;
-		otpProps.validateAction = lang.CONF_MFA_DEACTIVATE;
+		otpProps.generateAction = lang.SETT_MFA_DEACTIVATE;
+		otpProps.validateAction = lang.SETT_MFA_DEACTIVATE;
 
 		sendTopt();
 	});
@@ -54,7 +54,7 @@ $(function() {
 			callNovoCore(who, where, data, function(response) {
 				switch (response.code) {
 					case 0:
-						if (otpProps.validateAction === lang.CONF_MFA_VALIDATE_OTP) {
+						if (otpProps.validateAction === lang.SETT_MFA_VALIDATE_OTP) {
 							otpMfaAuth = true;
 							validateCardDetail();
 						}
@@ -131,8 +131,8 @@ function modalOtpValidate() {
 	inputModal += 			'<p>' + otpProps.msgInfo + '</p>';
 	inputModal += 			'<p class=" pb-1">' + otpProps.msgContent + ' ';
 
-	if (otpChannel === lang.CONF_MFA_CHANNEL_EMAIL || otpProps.generateAction === lang.CONF_MFA_DEACTIVATE) {
-		inputModal += 				'<a id="resendCode" href="' + lang.CONF_NO_LINK + '" class="btn btn-small btn-link p-0" >'; inputModal +=						lang.GEN_BTN_RESEND_CODE+'</a>';
+	if (otpChannel === lang.SETT_MFA_CHANNEL_EMAIL || otpProps.generateAction === lang.SETT_MFA_DEACTIVATE) {
+		inputModal += 				'<a id="resendCode" href="' + lang.SETT_NO_LINK + '" class="btn btn-small btn-link p-0" >'; inputModal +=						lang.GEN_BTN_RESEND_CODE+'</a>';
 	}
 
 	inputModal += 			'</p>';
@@ -145,6 +145,6 @@ function modalOtpValidate() {
 	inputModal += 	'</div>';
 	inputModal += '</form>';
 
-	appMessages(lang.GEN_MENU_MFA, inputModal, lang.CONF_ICON_INFO, modalBtn);
+	appMessages(lang.GEN_MENU_MFA, inputModal, lang.SETT_ICON_INFO, modalBtn);
 }
 

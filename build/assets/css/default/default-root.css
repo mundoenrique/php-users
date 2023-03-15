@@ -1,0 +1,34 @@
+@font-face {
+	font-family: "sourcesanspro-regular";
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot');
+	src: url('../../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('eot'), url('../../fonts/sourcesanspro-regular-webfont.woff') format('woff'), url('../../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'), url('../../fonts/sourcesanspro-regular-webfont.svg') format('svg');
+}
+
+:root {
+
+	/* Brand colors */
+	--color-primary: #1500a1;
+	--color-secondary: #ffffff;
+	--color-tertiary: #E6E7E8;
+	--color-fifth: #D2D3D4;
+	--color-sixth: #58595B;
+	--color-seventh:#060060;
+	--color-eighth: #BCBEC0;
+
+	/* Others */
+	--option-not-active: #ffffff;
+	--option-active: #1500a1;
+	--black: #111111;
+
+  /* Typography */
+	--font-family-base-first: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-family-base: 'sourcesanspro-regular', sans-serif;
+  --font-family-monospace: monospace, "Courier New";
+  --font-family-novoglyphs: 'novoglyphs';
+
+  /* Border radius */
+  --border-radius: 5px;
+}

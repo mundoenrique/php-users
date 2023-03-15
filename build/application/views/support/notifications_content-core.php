@@ -7,7 +7,7 @@
         <nav class="nav-config">
           <ul class="nav-config-box">
             <li id="notifications" class="nav-item-config center active" render='off'>
-              <a href="<?= lang('CONF_NO_LINK'); ?>" class="not-pointer">
+              <a href="<?= lang('SETT_NO_LINK'); ?>" class="not-pointer">
                 <span class="icon-config icon-notification h1"></span>
                 <h5><?= lang('CUST_NOT_SETT') ?></h5>
                 <div class="box up left regular">
@@ -17,7 +17,7 @@
               </a>
             </li>
             <li id="notificationHistory" class="nav-item-config center" render='on'>
-              <a href="<?= lang('CONF_NO_LINK'); ?>">
+              <a href="<?= lang('SETT_NO_LINK'); ?>">
                 <span class="icon-config icon-book h1"></span>
                 <h5><?= lang('CUST_NOT_HIST') ?></h5>
                 <div class="box up left regular">

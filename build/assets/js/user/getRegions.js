@@ -1,6 +1,6 @@
 'use strcit'
 $(function() {
-	$('#averageIncome').mask('#' + lang.CONF_THOUSANDS + '##0' + lang.CONF_DECIMAL + '00', { reverse: true });
+	$('#averageIncome').mask('#' + lang.SETT_THOUSANDS + '##0' + lang.SETT_DECIMAL + '00', { reverse: true });
 	$('#averageIncome').on('keyup', function () {
 		$(this).val(function (index, value) {
 
@@ -9,7 +9,7 @@ $(function() {
 			}
 
 			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-				value = '00' + lang.CONF_DECIMAL + value
+				value = '00' + lang.SETT_DECIMAL + value
 			}
 
 			return value
@@ -71,7 +71,7 @@ function getStates() {
 		state: 'All'
 	};
 
-	if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+	if (longProfile == 'S' || lang.SETT_INTERNATIONAL_ADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: 1
@@ -109,7 +109,7 @@ function getCities(currentState) {
 		stateCode: currentState
 	};
 
-	if (longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') {
+	if (longProfile == 'S' || lang.SETT_INTERNATIONAL_ADDRESS == 'ON') {
 		where = 'Regions';
 		data = {
 			groupCode: currentState
@@ -126,7 +126,7 @@ function getCities(currentState) {
 			$('#city').find('option').get(0).remove();
 		}
 
-		if ((longProfile == 'S' || lang.CONF_INTERNATIONAL_ADDRESS == 'ON') && $('#cityInput').attr('city-code')) {
+		if ((longProfile == 'S' || lang.SETT_INTERNATIONAL_ADDRESS == 'ON') && $('#cityInput').attr('city-code')) {
 			getdistrict($('#cityInput').attr('city-code'))
 		}
 

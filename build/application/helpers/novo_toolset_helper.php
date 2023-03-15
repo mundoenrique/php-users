@@ -297,7 +297,7 @@ if (! function_exists('floatFormat')) {
 		$floatNum = $num;
 
 		if ($floatNum != '') {
-			$arrayNum = explode(lang('CONF_DECIMAL'), $num);
+			$arrayNum = explode(lang('SETT_DECIMAL'), $num);
 			$arrayNum[0] = preg_replace("/[,.]/", '', $arrayNum[0]);
 			$floatNum = $arrayNum[0].'.'.$arrayNum[1];
 		}
@@ -309,13 +309,13 @@ if (! function_exists('floatFormat')) {
 if (!function_exists('uriRedirect')) {
 	function uriRedirect() {
 		$CI =& get_instance();
-		$redirectLink = lang('CONF_LINK_SIGNIN');
+		$redirectLink = lang('SETT_LINK_SIGNIN');
 
 		if ($CI->session->has_userdata('logged')) {
-			$redirectLink = lang('CONF_LINK_CARD_LIST');
+			$redirectLink = lang('SETT_LINK_CARD_LIST');
 
-			if ($CI->session->has_userdata('totalCards') && $CI->session->totalCards == 1) {
-				$redirectLink = lang('CONF_LINK_CARD_DETAIL');
+			if ($CI->session->has_userdata('totalCards') && $CI->session->totalCards === 1) {
+				$redirectLink = lang('SETT_LINK_CARD_DETAIL');
 			}
 		}
 
@@ -323,7 +323,6 @@ if (!function_exists('uriRedirect')) {
 	}
 }
 
-//eliminar despues de la certificación
 if (! function_exists('tenantSameSettings')) {
 	function tenantSameSettings($customer) {
 		$pattern = ['/bog/'];

@@ -11,7 +11,7 @@ $(function () {
 
 	loader = $('#loader').html();
 	validatePass = /^[\w!@\*\-\?¡¿+\/.,#ñÑ]+$/;
-	defaultCode = parseInt(lang.CONF_DEFAULT_CODE);
+	defaultCode = parseInt(lang.SETT_DEFAULT_CODE);
 
 	$('body').on('click', '.pwd-action', function () {
 		var pwdInput = $(this).closest('div.input-group').find('.pwd-input')
@@ -123,7 +123,7 @@ function callNovoCore(who, where, request, _response_) {
 			}
 		};
 
-		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.CONF_ICON_DANGER, response.modalBtn);
+		appMessages(lang.GEN_SYSTEM_NAME, lang.GEN_SYSTEM_MESSAGE, lang.SETT_ICON_DANGER, response.modalBtn);
 
 		if (_response_) {
 			_response_(response);
@@ -150,8 +150,8 @@ function appMessages(title, message, icon, modalBtn) {
 		draggable: false,
 		resizable: false,
 		closeOnEscape: false,
-		width: modalBtn.width || lang.CONF_MODAL_WIDTH,
-		minWidth: modalBtn.minWidth || lang.CONF_MODAL_WIDTH,
+		width: modalBtn.width || lang.SETT_MODAL_WIDTH,
+		minWidth: modalBtn.minWidth || lang.SETT_MODAL_WIDTH,
 		minHeight: modalBtn.minHeight || 100,
 		maxHeight: maxHeight !== 'none' ? maxHeight : false,
 		dialogClass: "border-none",
@@ -166,7 +166,7 @@ function appMessages(title, message, icon, modalBtn) {
 			$('#system-icon').removeAttr('class');
 
 			if (icon != '') {
-				$('#system-icon').addClass(lang.CONF_ICON + ' ' + icon);
+				$('#system-icon').addClass(lang.SETT_ICON + ' ' + icon);
 			}
 
 			$('#system-msg').html(message);
@@ -267,7 +267,7 @@ function downLoadfiles(data) {
 	$('#download-file').attr('download', data.name);
 	document.getElementById('download-file').click();
 	window.URL.revokeObjectURL(url);
-	$('#download-file').attr('href', lang.CONF_NO_LINK);
+	$('#download-file').attr('href', lang.SETT_NO_LINK);
 	$('#download-file').attr('download', '');
 	coverSpin(false);
 }
@@ -294,12 +294,12 @@ function modalDestroy(close) {
 			.prop('disabled', false)
 			.html(lang.GEN_BTN_ACCEPT)
 			.removeClass()
-			.addClass(lang.CONF_MODAL_BTN_CLASS['accept'])
+			.addClass(lang.SETT_MODAL_BTN_CLASS['accept'])
 			.off('click');
 		$('#cancel')
 			.prop('disabled', false)
 			.removeClass()
-			.addClass(lang.CONF_MODAL_BTN_CLASS['cancel'])
+			.addClass(lang.SETT_MODAL_BTN_CLASS['cancel'])
 			.html(lang.GEN_BTN_CANCEL)
 			.off('click');
 	}

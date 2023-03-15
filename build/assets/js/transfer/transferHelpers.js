@@ -1,14 +1,8 @@
 "use strict";
 var operationType, liOptions, OperationTypeAffiliations, bankList, cardData;
-var affiliationsList, currentAffiliaton, availableBalance;
-var montoMaxOperaciones, montoMinOperaciones, montoMaxDiario, montoMaxSemanal;
-var montoMaxMensual, cantidadOperacionesDiarias, montoBase, montoComision;
-var cantidadOperacionesSemanales, cantidadOperacionesMensual, montoAcumDiario;
-var montoAcumSemanal, montoAcumMensual, acumCantidadOperacionesDiarias;
-var acumCantidadOperacionesSemanales, acumCantidadOperacionesMensual;
-var porcentajeComision, dobleAutenticacion, transferResult, currentVaucherData;
-var historyData, transferData, modalTitle, paramsValidationMessage;
-var amount, commission, totalAmount;
+var affiliationsList, currentAffiliaton, historyData, transferData;
+var transferResult, modalTitle, paramsValidationMessage, currentVaucherData;
+var availableBalance, amount, commission, totalAmount;
 
 $(function () {
 	operationType = $("#transferView").attr("operation-type");
@@ -34,54 +28,6 @@ $(function () {
 		showTransferView();
 	}
 
-	$("#expDateCta").datepicker({
-		yearRange: "-5:+10",
-		minDate: "-5y",
-		maxDate: "+10y",
-		dateFormat: "mm/yy",
-		showButtonPanel: true,
-		closeText: lang.GEN_BTN_ACCEPT,
-
-		onClose: function (dateText, inst) {
-			$(this).datepicker(
-				"setDate",
-				new Date(inst.selectedYear, inst.selectedMonth, 1)
-			);
-			$(this).focus().blur();
-			var monthYear = $("#expDateCta").val().split("/");
-			$("#filterMonth").val(monthYear[0]);
-			$("#filterYear").val(monthYear[1]);
-		},
-
-		beforeShow: function (input, inst) {
-			inst.dpDiv.addClass("ui-datepicker-month-year");
-		},
-	});
-
-	$("#filterHistoryDate").datepicker({
-		yearRange: "-90:" + currentDate.getFullYear(),
-		minDate: "-90y",
-		maxDate: currentDate.getFullYear(),
-		dateFormat: "mm/yy",
-		showButtonPanel: true,
-		closeText: lang.GEN_BTN_ACCEPT,
-
-		onClose: function (dateText, inst) {
-			$(this).datepicker(
-				"setDate",
-				new Date(inst.selectedYear, inst.selectedMonth, 1)
-			);
-			$(this).focus().blur();
-			var monthYear = $("#filterHistoryDate").val().split("/");
-			$("#historyForm #filterMonth").val(monthYear[0]);
-			$("#historyForm #filterYear").val(monthYear[1]);
-		},
-
-		beforeShow: function (input, inst) {
-			inst.dpDiv.addClass("ui-datepicker-month-year");
-		},
-	});
-
 	// Al seleccionar una tarjeta
 	$("#system-info").on("click", ".dashboard-item", function (e) {
 		e.preventDefault();
@@ -90,22 +36,6 @@ $(function () {
 		resetForms($("#manageAffiliateView form"));
 		resetForms($("#historyView form"));
 		showTransferView();
-	});
-
-	// Filtro para buscar afiliado
-	// Eliminar al validar la utilizacion de dataTable
-	$("#search").on("keyup", function () {
-		var valueSearch = $(this).val().toLowerCase();
-		var tableTr = $("#affiliationTable tbody tr");
-
-		tableTr.filter(function () {
-			$(this).toggle($(this).text().toLowerCase().indexOf(valueSearch) > -1);
-			if ($("#affiliationTable tbody tr:hidden").length == tableTr.length) {
-				$("#no-moves").fadeIn(700, "linear");
-			} else {
-				$("#no-moves").hide();
-			}
-		});
 	});
 
 	// Mostrar vista correspondiente al seleccionar una operación
@@ -131,299 +61,11 @@ $(function () {
 		showTransferView();
 	});
 
-	// Carga tabla lista de afiliados
-	$("#affiliations").on("click", function (e) {
-		e.preventDefault();
-		$("#transferRecord").hide();
-		$("#searchAffiliate").hide();
-		$("#affiliationsView #no-moves").hide();
-		$("#pre-loader").fadeIn(700, "linear");
-		who = "Affiliations";
-		where = "GetAffiliations";
-		data = { operationType: operationType, ...cardData };
-
-		callNovoCore(who, where, data, function (response) {
-			switch (response.code) {
-				case 0:
-					let affiliations =
-						response.data[OperationTypeAffiliations[operationType]];
-					if (affiliations.length > 0) {
-						setAffiliateDataTable(affiliations);
-					} else {
-						$("#no-moves").fadeIn(700, "linear");
-					}
-					break;
-				case 1:
-					$("#no-moves").fadeIn(700, "linear");
-					break;
-				default:
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-					break;
-			}
-			$("#pre-loader").hide();
-		});
-	});
-
-	// Carga tabla historial
-	$("#history").on("click", function (e) {
-		e.preventDefault();
-		var today = new Date();
-		var mm = today.getMonth() + 1;
-		var yyyy = today.getFullYear();
-		$("#historyView #results").hide();
-		$("#historyView #no-moves").hide();
-		$("#historyView #pre-loader").fadeIn(700, "linear");
-
-		if (mm < 10) {
-			mm = "0" + mm;
-		}
-
-		who = "Transfer";
-		where = "History";
-		data = {
-			operationType: operationType,
-			filterMonth: mm,
-			filterYear: yyyy,
-			...cardData,
-		};
-
-		callNovoCore(who, where, data, function (response) {
-			switch (response.code) {
-				case 0:
-					if (response.data.length > 0) {
-						setHistoryDataTable(response.data);
-					} else {
-						$("#historyView #no-moves").fadeIn(700, "linear");
-					}
-					break;
-				case 1:
-					$("#historyView #no-moves").fadeIn(700, "linear");
-					break;
-				default:
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-					break;
-			}
-			$("#historyView #pre-loader").hide();
-		});
-	});
-
-	$("#historySearch").on("click", function (e) {
-		e.preventDefault();
-
-		form = $("#historyForm");
-		validateForms(form);
-
-		if (form.valid()) {
-			$("#historyView #results").hide();
-			$("#historyView #no-moves").hide();
-			$("#historyView #pre-loader").fadeIn(700, "linear");
-
-			who = "Transfer";
-			where = "History";
-			data = {
-				operationType: operationType,
-				...getDataForm(form),
-				...cardData,
-			};
-
-			callNovoCore(who, where, data, function (response) {
-				switch (response.code) {
-					case 0:
-						if (response.data.length > 0) {
-							setHistoryDataTable(response.data);
-						} else {
-							$("#historyView #no-moves").fadeIn(700, "linear");
-						}
-						break;
-					case 1:
-						$("#historyView #no-moves").fadeIn(700, "linear");
-						break;
-					default:
-						appMessages(
-							response.title,
-							response.msg,
-							response.icon,
-							response.modalBtn
-						);
-						break;
-				}
-				$("#historyView #pre-loader").hide();
-			});
-		}
-	});
-
-	// al hacer click en ref. de historial, muestra comprobante de pago
-	$("#movementsList").on(
-		"click",
-		"span[data-action='showVoucher']",
-		function () {
-			currentVaucherData = historyData[$(this).data("index")];
-			buildVaucherModal();
-		}
-	);
-
-	// Al hacer click en Nueva afiliación
-	$("#newAffiliate").on("click", (e) => showManageAffiliateView("create"));
-
-	// Al hacer click en Editar afiliación
-	$("#affiliationTable tbody").on(
-		"click",
-		"button[data-action='edit']",
-		function () {
-			currentAffiliaton = affiliationsList[$(this).data("index")];
-			showManageAffiliateView("edit");
-		}
-	);
-
-	// Al hacer click en Eliminar afiliación
-	$("#affiliationTable tbody").on(
-		"click",
-		"button[data-action='delete']",
-		function () {
-			currentAffiliaton = affiliationsList[$(this).data("index")];
-			$("#accept").addClass("sure-delete-affiliate");
-
-			modalBtn = {
-				btn1: {
-					text: lang.GEN_BTN_ACCEPT,
-					action: "none",
-				},
-				btn2: {
-					text: lang.GEN_BTN_CANCEL,
-					action: "destroy",
-				},
-			};
-
-			appMessages(
-				lang.TRANSF_DELETE_AFFILIATE,
-				lang.TRANSF_SURE_DELETE_AFFILIATE,
-				lang.CONF_ICON_INFO,
-				modalBtn
-			);
-		}
-	);
-
-	// Modal para confirmar la eliminación de un afiliado
-	$("#system-info").on("click", ".sure-delete-affiliate", function (e) {
-		e.preventDefault();
-		$(this).html(loader).prop("disabled", true);
-		$("#cancel").prop("disabled", true);
-
-		who = "Affiliations";
-		where = "DeleteAffiliation";
-		data.idAfiliation = currentAffiliaton.id_afiliacion;
-		data.operationType = operationType;
-
-		$(".nav-config-box").addClass("no-pointer");
-
-		callNovoCore(who, where, data, function (response) {
-			$(".nav-config-box").removeClass("no-pointer");
-			modalDestroy(true);
-
-			if (response.code == 0) {
-				$("#accept").addClass("to-affiliations");
-				appMessages(
-					response.title,
-					response.msg,
-					response.icon,
-					response.modalBtn
-				);
-			} else {
-				appMessages(
-					response.title,
-					response.msg,
-					response.icon,
-					response.modalBtn
-				);
-			}
-		});
-	});
-
-	$("#affiliateCancelBtn").on("click", function (e) {
-		e.preventDefault();
-		$("#manageAffiliateView").hide();
-		$("#affiliationsView").fadeIn(700, "linear");
-	});
-
-	// Submit en formulario de Afiliación
-	$("#manageAffiliateBtn").on("click", function (e) {
-		e.preventDefault();
-		form = $("#manageAffiliate");
-		btnText = $(this).text().trim();
-		validateForms(form);
-
-		if (form.valid()) {
-			who = "Affiliations";
-			where = `Affiliation${operationType}`;
-			data = getDataForm(form);
-			data.idDocument = data.typeDocument + data.idNumber;
-
-			if ($(this).data("action") == "edit") {
-				data.idAfiliation = currentAffiliaton.id_afiliacion;
-			}
-
-			insertFormInput(true);
-			$(this).html(loader);
-			$(".nav-config-box").addClass("no-pointer");
-
-			callNovoCore(who, where, data, function (response) {
-				insertFormInput(false);
-				$(e.target).html(btnText);
-				$(".nav-config-box").removeClass("no-pointer");
-				modalDestroy(true);
-
-				if (response.code == 0) {
-					$("#accept").addClass("to-affiliations");
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-				} else {
-					appMessages(
-						response.title,
-						response.msg,
-						response.icon,
-						response.modalBtn
-					);
-				}
-			});
-		}
-	});
-
-	// Al seleccionar un afiliado del directorio
-	$("#affiliationList").on("click", "li:not(.no-results)", function (e) {
-		e.preventDefault();
-		var value, text, container;
-		value = $(this).val();
-		text = $(this).text().trim();
-		container = $(this).closest(".select-by-search");
-
-		container.find("input.select-search-input").val(text);
-		container.find("li").removeClass("active");
-		$(this).addClass("active").prependTo(container.find(".select-search"));
-		container.find(".select-search").css("display", "none");
-		$(".close-selector").css("display", "none");
-		container.find("#directoryValue").val(value);
-
-		currentAffiliaton = affiliationsList[value];
-		setFieldNames("transfer");
-	});
-
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
+		resetForms($("#transferForm"));
+		disableAffiliationFields("#transferForm", false);
 	});
 
 	// Submit en formulario de Transferencia y mostrar el resumen
@@ -451,7 +93,7 @@ $(function () {
 				appMessages(
 					modalTitle,
 					paramsValidationMessage,
-					lang.CONF_ICON_INFO,
+					lang.SETT_ICON_INFO,
 					modalBtn
 				);
 			}
@@ -502,11 +144,19 @@ $(function () {
 		});
 	});
 
-	// Modal para agregar afiliado al realizar transferencia
+	// Modal para recargar vista
+	$("#system-info").on("click", ".reload-view", function (e) {
+		e.preventDefault();
+		modalDestroy(true);
+		showTransferView();
+	});
+
+	// Modal para agregar afiliado al concluir operación exitosa
 	$("#system-info").on("click", ".want-save-beneficiary", function (e) {
 		e.preventDefault();
 		modalDestroy(true);
 		$("#accept").addClass("save-beneficiary");
+		$("#cancel").addClass("reload-view");
 
 		modalBtn = {
 			btn1: {
@@ -522,12 +172,12 @@ $(function () {
 		appMessages(
 			lang.TRANSF_AFFILIATE_BENEFICIARY,
 			lang.TRANSF_WANT_SAVE_BENEFICIARY,
-			lang.CONF_ICON_INFO,
+			lang.SETT_ICON_INFO,
 			modalBtn
 		);
 	});
 
-	// Enviar petición agregar afiliado luego de transferencia
+	// Enviar petición agregar afiliado luego de operación exitosa
 	$("#system-info").on("click", ".save-beneficiary", function (e) {
 		e.preventDefault();
 		$(this).html(loader).prop("disabled", true);
@@ -591,14 +241,32 @@ $(function () {
 		});
 	});
 
-	// Vuelve a cargar la lista de afiliados
-	$("#system-info").on("click", ".to-affiliations", function (e) {
-		e.preventDefault();
-		modalDestroy(true);
-		$("#affiliations").click();
+	// Datepicker fecha de vencimiento
+	$("#expDateCta").datepicker({
+		yearRange: "-5:+10",
+		minDate: "-5y",
+		maxDate: "+10y",
+		dateFormat: "mm/yy",
+		showButtonPanel: true,
+		closeText: lang.GEN_BTN_ACCEPT,
+
+		onClose: function (dateText, inst) {
+			$(this).datepicker(
+				"setDate",
+				new Date(inst.selectedYear, inst.selectedMonth, 1)
+			);
+			$(this).focus().blur();
+			var monthYear = $("#expDateCta").val().split("/");
+			$("#filterMonth").val(monthYear[0]);
+			$("#filterYear").val(monthYear[1]);
+		},
+
+		beforeShow: function (input, inst) {
+			inst.dpDiv.addClass("ui-datepicker-month-year");
+		},
 	});
 
-	// Funcionalidad del selector/buscador
+	// Funcionalidad del selector/buscador directorio
 	$("body").on("focus", ".select-search-input", function () {
 		var search = $(this).val().trim();
 		$(this).val(search || "");
@@ -629,9 +297,28 @@ $(function () {
 		$(this).css("display", "none");
 	});
 
+	// Al seleccionar un afiliado del directorio
+	$("#affiliationList").on("click", "li:not(.no-results)", function (e) {
+		e.preventDefault();
+		var value, text, container;
+		value = $(this).val();
+		text = $(this).text().trim();
+		container = $(this).closest(".select-by-search");
+
+		container.find("input.select-search-input").val(text);
+		container.find("li").removeClass("active");
+		$(this).addClass("active").prependTo(container.find(".select-search"));
+		container.find(".select-search").css("display", "none");
+		$(".close-selector").css("display", "none");
+		container.find("#directoryValue").val(value);
+
+		currentAffiliaton = affiliationsList[value];
+		setFieldNames("transfer");
+	});
+
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(
-		"#" + lang.CONF_THOUSANDS + "##0" + lang.CONF_DECIMAL + "00",
+		"#" + lang.SETT_THOUSANDS + "##0" + lang.SETT_DECIMAL + "00",
 		{ reverse: true }
 	);
 	$("#amount").on("keyup", function () {
@@ -641,13 +328,34 @@ $(function () {
 			}
 
 			if (value.length == 1 && /^[0-9,.]+$/.test(value)) {
-				value = "00" + lang.CONF_DECIMAL + value;
+				value = "00" + lang.SETT_DECIMAL + value;
 			}
 
 			return value;
 		});
 	});
+
+	// Deshabilita campos número documento
+	$("input#idNumber").prop("disabled", true);
+
+	// Habilita campo número doc. al seleccionar el tipo doc.
+	$("select#typeDocument").change(function () {
+		disableIdNumber($(this));
+	});
 });
+
+function disableIdNumber(typeDocument) {
+	var selectedOption = typeDocument.children("option:selected").val();
+	var idNumber = typeDocument.closest(".form-row").find("#idNumber");
+	var disableInput = false;
+
+	if (selectedOption == "") {
+		idNumber.val("");
+		disableInput = true;
+	}
+
+	idNumber.prop("disabled", disableInput);
+}
 
 function getBalance() {
 	form = $("#operation");
@@ -707,44 +415,6 @@ function getBanks(operation, action = "") {
 	});
 }
 
-function setAffiliateDataTable(data) {
-	var columns, row, tdOptions;
-	affiliationsList = data;
-	$("#affiliationTable tbody").html("");
-
-	switch (operationType) {
-		case "P2P":
-			columns = ["NombreCliente", "id_ext_per", "noTarjetaConMascara"];
-			break;
-		case "P2T":
-			columns = ["beneficiario", "banco", "noCuenta"];
-			break;
-		case "PMV":
-			columns = ["beneficiario", "banco", "telefono"];
-			break;
-	}
-
-	data.forEach((value, index) => {
-		row = $("<tr></tr>");
-		columns.forEach((element) => {
-			row.append(`<td>${value[element]}</td>`);
-		});
-		tdOptions = `<td class="py-0 px-1 flex justify-center items-center">
-			<button class="btn mx-1 px-0" title="${lang.TRANSF_EDIT}" data-index="${index}" data-action="edit" data-toggle="tooltip">
-				<i class="icon icon-edit" aria-hidden="true"></i>
-			</button>
-			<button class="btn mx-1 px-0 big-modal" title="${lang.TRANSF_DELETE}" data-index="${index}" data-action="delete" data-toggle="tooltip">
-				<i class="icon icon-remove" aria-hidden="true"></i>
-			</button>
-		</td>`;
-		row.append(tdOptions);
-		$("#affiliationTable tbody").append(row);
-	});
-
-	$("#transferRecord").fadeIn(700, "linear");
-	$("#searchAffiliate").fadeIn(700, "linear");
-}
-
 function setAffiliateSelectSearch(data) {
 	var li;
 	affiliationsList = data;
@@ -765,92 +435,9 @@ function setAffiliateSelectSearch(data) {
 		.prop("disabled", false);
 }
 
-function setHistoryDataTable(data) {
-	var li, className, ref, row;
-	historyData = data;
-	$("#movementsList").html("");
-
-	data.forEach((value, index) => {
-		className = `feed-item ${
-			value.estatusOperacion == "1" ? "" : "feed-expense"
-		} flex py-2 items-center`;
-		li = $("<li></li>").addClass(className);
-		ref =
-			value.estatusOperacion == "1"
-				? `<span class="block p-0 h6">${lang.TRANSF_FAILED_OPERATION}</span>`
-				: `<span class="btn btn-small btn-link block p-0 h6" data-index="${index}" data-action="showVoucher">
-					${value.referencia}
-				</span>`;
-
-		row = `<div class="flex px-2 flex-column items-center feed-date">
-			<span class="h5">${value.fechaTransferencia}</span>
-		</div>
-		<div class="flex px-2 flex-column mr-auto">
-			<span class="h5 semibold feed-product">
-				${value.beneficiario}${value.concepto != "" ? "		|		" + value.concepto : ""}
-			</span>
-			${ref}
-		</div>
-		<span class="px-2 feed-amount items-center">${numberToCurrency(
-			value.montoTransferencia,
-			true
-		)}</span>`;
-
-		li.html(row);
-		$("#movementsList").append(li);
-	});
-
-	$("#historyView #results").fadeIn(700, "linear");
-}
-
-function showManageAffiliateView(action) {
-	if (action == "create") {
-		resetForms($("#manageAffiliate"));
-	}
-	$("#affiliationsView").hide();
-	$("#manageAffiliateView").fadeIn(700, "linear");
-	$("#manageAffiliateBtn")
-		.text(action == "create" ? lang.TRANSF_AN_AFFILIATE : lang.GEN_BTN_SAVE)
-		.data("action", action);
-	$("#affiliateTitle").text(
-		action == "create" ? lang.TRANSF_NEW_AFFILIATE : lang.TRANSF_EDIT_AFFILIATE
-	);
-
-	switch (operationType) {
-		case "P2P":
-			$("#affiliateMessage").text(
-				action == "create"
-					? lang.TRANSF_NEW_AFFILIATE_CARD_MSG
-					: lang.TRANSF_EDIT_AFFILIATE_MSG
-			);
-			break;
-		case "P2T":
-			$("#affiliateMessage").text(
-				action == "create"
-					? lang.TRANSF_NEW_AFFILIATE_BANK_MSG
-					: lang.TRANSF_EDIT_AFFILIATE_MSG
-			);
-			break;
-		case "PMV":
-			$("#affiliateMessage").text(
-				action == "create"
-					? lang.TRANSF_NEW_AFFILIATE_PAY_MSG
-					: lang.TRANSF_EDIT_AFFILIATE_MSG
-			);
-			break;
-	}
-
-	if (action == "edit") {
-		setFieldNames("affiliation");
-	}
-
-	if (operationType != "P2P") {
-		getBanks("affiliation", action);
-	}
-}
-
 function showTransferView() {
 	cleanDirectory();
+	disableAffiliationFields("#transferForm", false);
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
 	$("#manageAffiliateView").hide();
@@ -910,6 +497,26 @@ function setValues(formID, objectValues) {
 	Object.entries(objectValues).forEach(([fieldId, value]) => {
 		$(`${formID} #${fieldId}`).val(value);
 	});
+}
+
+function disableAffiliationFields(formID, disabled) {
+	$(`${formID} input, ${formID} select`)
+		.not("#amount, #concept, #expDateCta")
+		.each(function () {
+			$(this).attr("readonly", disabled);
+			disabled
+				? $(this).addClass("bg-tertiary border")
+				: $(this).removeClass("bg-tertiary border");
+		});
+
+	$("#transferView #bank").attr("readonly", disabled);
+	disableIdNumber($(`${formID} #typeDocument`));
+
+	if (disabled) {
+		$("#transferView #bank").addClass("no-pointer bg-tertiary border");
+	} else {
+		$("#transferView #bank").removeClass("no-pointer bg-tertiary border");
+	}
 }
 
 function setFieldNames(operation) {
@@ -983,37 +590,8 @@ function setFieldNames(operation) {
 
 		objectValues = setObjectValues[operationType];
 		setValues("#transferForm", objectValues);
+		disableAffiliationFields("#transferForm", true);
 	}
-}
-
-function setTransferParams(params) {
-	montoMaxOperaciones = parseFloat(params.montoMaxOperaciones);
-	montoMinOperaciones = parseFloat(params.montoMinOperaciones);
-	montoMaxDiario = parseFloat(params.montoMaxDiario);
-	montoMaxSemanal = parseFloat(params.montoMaxSemanal);
-	montoMaxMensual = parseFloat(params.montoMaxMensual);
-	cantidadOperacionesDiarias = parseInt(params.cantidadOperacionesDiarias);
-	cantidadOperacionesSemanales = parseInt(params.cantidadOperacionesSemanales);
-	cantidadOperacionesMensual = parseInt(params.cantidadOperacionesMensual);
-	montoAcumDiario = parseFloat(params.montoAcumDiario);
-	montoAcumSemanal = parseFloat(params.montoAcumSemanal);
-	montoAcumMensual = parseFloat(params.montoAcumMensual);
-	acumCantidadOperacionesDiarias = parseInt(
-		params.acumCantidadOperacionesDiarias
-	);
-	acumCantidadOperacionesSemanales = parseInt(
-		params.acumCantidadOperacionesSemanales
-	);
-	acumCantidadOperacionesMensual = parseInt(
-		params.acumCantidadOperacionesMensual
-	);
-	montoBase = params.montoBaseTransferencia
-		? parseFloat(params.montoBaseTransferencia)
-		: 0;
-	montoComision = parseFloat(params.montoComision);
-	porcentajeComision = parseFloat(params.porcentajeComision);
-	totalAmount = commission = 0;
-	dobleAutenticacion = params.dobleAutenticacion;
 }
 
 function buildTransferSummaryModal() {
@@ -1067,7 +645,7 @@ function buildTransferSummaryModal() {
 	summaryValueObject = {
 		bank: $("#bank option:selected").text(),
 		dni: transferData.typeDocument + transferData.idNumber,
-		amount: lang.CONF_CURRENCY + " " + transferData.amount,
+		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		commission: numberToCurrency(commission, true),
 		total: numberToCurrency(totalAmount, true),
 	};
@@ -1086,7 +664,7 @@ function buildTransferSummaryModal() {
 	appMessages(
 		lang.TRANSF_OPERATION_SUMMARY,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 }
@@ -1103,14 +681,13 @@ function buildTransferResultModal() {
 	modalBtn = {
 		btn1: {
 			text: lang.GEN_BTN_ACCEPT,
-			action: "destroy",
+			action: "none",
 		},
 	};
 
-	if (!thirdPartyAffiliate) {
-		$("#accept").addClass("want-save-beneficiary");
-		modalBtn.btn1.action = "none";
-	}
+	$("#accept").addClass(
+		!thirdPartyAffiliate ? "want-save-beneficiary" : "reload-view"
+	);
 
 	// dataValue: label
 	setObjectResult = {
@@ -1153,7 +730,7 @@ function buildTransferResultModal() {
 		dni:
 			transferResult.idExtPer ||
 			transferData.typeDocument + transferData.idNumber,
-		amount: lang.CONF_CURRENCY + " " + transferData.amount,
+		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
 	};
@@ -1172,7 +749,7 @@ function buildTransferResultModal() {
 	appMessages(
 		lang.TRANSF_OPERATION_RESULT,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 
@@ -1245,118 +822,33 @@ function buildVaucherModal() {
 	appMessages(
 		lang.TRANSF_PAYMENT_VOUCHER,
 		inputModal,
-		lang.CONF_ICON_INFO,
+		lang.SETT_ICON_INFO,
 		modalBtn
 	);
 }
 
 function cleanDirectory() {
 	currentAffiliaton = null;
+	$("#transferView #bank")
+		.attr("readonly", false)
+		.removeClass("no-pointer bg-tertiary border");
 	$("#affiliationList li").removeClass("active");
 	$("#directoryValue, #directory").val("");
 }
 
 function numberToCurrency(number, withCurrencySymbol) {
 	var num = typeof number == "string" ? Number(number) : number;
-	var currencyNumber = num.toFixed(2).replace(".", ",");
+	var formatter = new Intl.NumberFormat("es-VE", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	});
+	var currencyNumber = formatter.format(num);
 
 	return withCurrencySymbol
-		? lang.CONF_CURRENCY + " " + currencyNumber
+		? lang.SETT_CURRENCY + " " + currencyNumber
 		: currencyNumber;
 }
 
 function currencyToNumber(currency) {
 	return Number(currency.replace(/[^0-9-,]+/g, "").replace(",", "."));
-}
-
-function validateTransferParams() {
-	var difference, msg;
-
-	if (operationType !== "P2P") {
-		commission =
-			amount <= montoBase ? montoComision : (amount * porcentajeComision) / 100;
-	}
-	totalAmount = amount + commission;
-
-	// Valida monto de transferencias
-	if (amount < montoMinOperaciones || amount > montoMaxOperaciones) {
-		paramsValidationMessage = `Las transferencias deben ser mínimo ${numberToCurrency(
-			montoMinOperaciones,
-			true
-		)} y máximo  ${numberToCurrency(montoMaxOperaciones, true)}.`;
-		return false;
-	}
-	if (totalAmount > availableBalance) {
-		paramsValidationMessage =
-			"El monto de la transferencia excede su saldo disponible.";
-		return false;
-	}
-	if (montoAcumMensual + amount > montoMaxMensual) {
-		difference = montoMaxMensual - montoAcumMensual;
-		msg =
-			difference === 0
-				? ".<br>No puede realizar otra transferencia este mes."
-				: "";
-
-		paramsValidationMessage = `El monto máximo mensual que puede transferir es ${numberToCurrency(
-			montoMaxMensual,
-			true
-		)}.<br>Este mes ha transferido ${numberToCurrency(
-			montoAcumMensual,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-	if (montoAcumSemanal + amount > montoMaxSemanal) {
-		difference = montoMaxSemanal - montoAcumSemanal;
-		msg =
-			difference === 0
-				? ".<br>No puede realizar otra transferencia esta semana."
-				: "";
-
-		paramsValidationMessage = `El monto máximo semanal que puede transferir es ${numberToCurrency(
-			montoMaxSemanal,
-			true
-		)}.<br>Esta semana ha transferido  ${numberToCurrency(
-			montoAcumSemanal,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-	if (montoAcumDiario + amount > montoMaxDiario) {
-		difference = montoMaxDiario - montoAcumDiario;
-		msg =
-			difference === 0 ? ".<br>No puede realizar otra transferencia hoy." : "";
-
-		paramsValidationMessage = `El monto máximo diario que puede transferir es ${numberToCurrency(
-			montoMaxDiario,
-			true
-		)}.<br>Hoy ha transferido  ${numberToCurrency(
-			montoAcumDiario,
-			true
-		)} ${msg}`;
-
-		return false;
-	}
-
-	//Valida cantidad de operaciones
-	if (acumCantidadOperacionesMensual >= cantidadOperacionesMensual) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesMensual} operaciones mensuales.<br>Este mes ha realizado: ${acumCantidadOperacionesMensual}.<br>No puede realizar otra operación este mes.`;
-
-		return false;
-	}
-	if (acumCantidadOperacionesSemanales >= cantidadOperacionesSemanales) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesSemanales} operaciones semanales.<br>Esta semana ha realizado: ${acumCantidadOperacionesSemanales}.<br>No puede realizar otra operación esta semana.`;
-
-		return false;
-	}
-	if (acumCantidadOperacionesDiarias >= cantidadOperacionesDiarias) {
-		paramsValidationMessage = `Puede realizar: ${cantidadOperacionesDiarias} operaciones diarias.<br>Hoy ha realizado: ${acumCantidadOperacionesDiarias}.<br>No puede realizar otra operación hoy.`;
-
-		return false;
-	}
-
-	return true;
 }

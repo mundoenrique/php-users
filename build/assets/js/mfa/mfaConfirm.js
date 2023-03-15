@@ -14,7 +14,7 @@ $(function () {
 			who = 'Mfa';
 			where = 'ValidateTotp';
 			data = getDataForm(form);
-			data.operationType = lang.CONF_MFA_ACTIVATE;
+			data.operationType = lang.SETT_MFA_ACTIVATE;
 			data.channel = mfaChannel;
 			insertFormInput(true);
 
@@ -43,7 +43,7 @@ $(function () {
 });
 
 function activeteMfa(responseData, channel) {
-	if (channel === lang.CONF_MFA_CHANNEL_APP && responseData.data.qrCode) {
+	if (channel === lang.SETT_MFA_CHANNEL_APP && responseData.data.qrCode) {
 		$('#secretToken').append(responseData.data.secretToken);
 		$('#qrCodeImg').html($(`<img src="data:image/png;base64,${responseData.data.qrCode}" >`));
 	}

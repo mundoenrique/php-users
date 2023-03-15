@@ -38,20 +38,16 @@ class Asset {
 	public function insertCss()
 	{
 		writeLog('INFO', 'Asset: insertCss method initialized');
-		$file_url = NULL;
+		$fileUrl = NULL;
+		$fileExt = 'css';
 
 		foreach($this->cssFiles as $fileName) {
-			$file = assetPath('css/'.$fileName.'.css');
-
-			if(!file_exists($file)) {
-				writeLog('ERROR', 'Archivo requerido ' . $fileName . '.css');
-			}
-
-			$file = $this->versionFiles($file, $fileName, '.css');
-			$file_url .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
+			$file = assetPath('css/' . $fileName);
+			$file = $this->versionFiles($file, $fileName, $fileExt);
+			$fileUrl .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $fileUrl;
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
@@ -60,15 +56,60 @@ class Asset {
 	public function insertJs()
 	{
 		writeLog('INFO', 'Asset: insertJs method initialized');
-		$file_url = NULL;
+		$fileUrl = NULL;
+		$fileExt = 'js';
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/' . $fileName . '.js');
-			$file = $this->versionFiles($file, $fileName, '.js');
-			$file_url .= '<script defer src="' . assetUrl('js/'.$file) . '"></script>' . PHP_EOL;
+			$file = assetPath('js/' . $fileName);
+			$file = $this->versionFiles($file, $fileName, $fileExt);
+			$fileUrl .= '<script defer src="' . assetUrl('js/'. $file) . '"></script>' . PHP_EOL;
 		}
 
-		return $file_url;
+		return $fileUrl;
+	}
+	/**
+	 * @info Método para insertar imagenes, json, etc
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	public function insertImage($file, $customerImages, $folder = FALSE)
+	{
+		writeLog('INFO', 'Asset: insertImage method initialized');
+
+		list($fileName, $fileExt) = explode('.', $file);
+		$folder = $folder ? $folder . '/' : '';
+		$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
+		$fileExists = file_exists($file . '.' . $fileExt);
+
+		if(!$fileExists) {
+			$customerImages = 'default';
+			$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
+		}
+
+		$file = $this->versionFiles($file, $fileName, $fileExt);
+
+		return assetUrl('images/' . $customerImages . '/' . $folder . $file);
+	}
+	/**
+	 * @info Método para versionar archivos
+	 * @author J. Enrique Peñaloza Piñero.
+	 */
+	private function versionFiles($file, $fileName, $fileExt)
+	{
+		$version = '';
+		$thirdParty = strpos($file, 'third_party');
+		$fileExt = $thirdParty ? '.min.' . $fileExt : '.' . $fileExt;
+		$file = $file . $fileExt;
+		$fileExists = file_exists($file);
+
+		if(!$fileExists) {
+			writeLog('ERROR', 'Required file ' . $file);
+		}
+
+		if(!$thirdParty) {
+			$version = '?V' . date('Ymd-U', filemtime($file));
+		}
+
+		return $fileName . $fileExt . $version;
 	}
 	/**
 	 * @info Método para insertar imagenes, json, etc
@@ -90,22 +131,5 @@ class Asset {
 		$version = '?V'.date('Ymd-U', filemtime($file));
 
 		return assetUrl($folder . '/' . $customerUri . $fileName . $version);
-	}
-	/**
-	 * @info Método para versionar archivos
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	private function versionFiles($file, $fileName, $ext)
-	{
-		$version = '';
-		$thirdParty = strpos($fileName, 'third_party');
-
-		if($thirdParty === FALSE && file_exists($file)) {
-			$version = '?V' . date('Ymd-U', filemtime($file));
-		} else {
-			$ext = '.min' . $ext;
-		}
-
-		return $fileName . $ext . $version;
 	}
 }

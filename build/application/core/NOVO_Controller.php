@@ -12,8 +12,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
-	private $clientStyle;
 	protected $customerUri;
+	protected $customerLang;
+	protected $customerImages;
+	protected $customerStyle;
 	protected $fileLanguage;
 	protected $controllerClass;
 	protected $controllerMethod;
@@ -39,8 +41,10 @@ class NOVO_Controller extends CI_Controller {
 		$customerUri = $this->uri->segment(1, 0) ?? 'null';
 
 		$this->ValidateBrowser = FALSE;
-		$this->clientStyle = $customerUri;
 		$this->customerUri = $customerUri;
+		$this->customerLang = $customerUri;
+		$this->customerStyle = $customerUri;
+		$this->customerImages = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
@@ -57,7 +61,7 @@ class NOVO_Controller extends CI_Controller {
 			$transforNameApi = explode("-", $this->uri->segment(4));
 			$this->nameApi = $transforNameApi[0] . ucfirst($transforNameApi[1]);
 			$this->config->set_item('language', 'global');
-			$this->lang->load('config-core');
+			$this->lang->load('settings');
 		}
 
 		$this->optionsCheck();
@@ -76,17 +80,19 @@ class NOVO_Controller extends CI_Controller {
 		if ($this->customerUri === "api") {
 			$this->dataRequest = $this->tool_api->readHeader($this->nameApi);
 		} else {
-			if ($this->session->has_userdata('userName')) {
+			if ($this->session->has_userdata('userName') && SESS_DRIVER == 'database') {
 				$data = ['username' => $this->session->userName];
 				$this->db->where('id', $this->session->session_id)
 				->update('cpo_sessions', $data);
 			}
 
-			LoadLangFile('generic', $this->fileLanguage);
+			LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
 			clientUrlValidate($this->customerUri);
-			$this->customerUri = $this->config->item('customer-uri');
-			$this->clientStyle = $this->config->item('client_style');
-			LoadLangFile('specific', $this->fileLanguage, $this->customerUri);
+			$this->customerUri = $this->config->item('customer_uri');
+			$this->customerLang = $this->config->item('customer_lang');
+			$this->customerStyle = $this->config->item('customer_style');
+			$this->customerImages = $this->config->item('customer_images');
+			LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
 			if ($this->controllerMethod !== 'suggestion') {
 				$this->ValidateBrowser = $this->checkBrowser();
@@ -108,14 +114,14 @@ class NOVO_Controller extends CI_Controller {
 				$this->dataRequest = json_decode($request);
 			} else {
 				if ($this->session->has_userdata('logged')) {
-					$redirectMfa = lang('CONF_MFA_ACTIVE') === 'ON' && !$this->session->otpActive;
+					$redirectMfa = lang('SETT_MFA_ACTIVE') === 'ON' && !$this->session->otpActive;
 					$redirectProfile = $this->session->longProfile === 'S' && $this->session->affiliate === '0';
 					$redirectTerms = $this->session->terms === '0';
-					$redirectRule = in_array($this->controllerMethod, lang('CONF_REDIRECT_RULE'));
+					$redirectRule = in_array($this->controllerMethod, lang('SETT_REDIRECT_RULE'));
 					$redirect = ($redirectMfa || $redirectProfile || $redirectTerms) && !$redirectRule;
 
 					if ($redirect) {
-						$redirectUrl = $redirectMfa ? lang('CONF_LINK_MFA_ENABLE') : lang('CONF_LINK_USER_PROFILE');
+						$redirectUrl = $redirectMfa ? lang('SETT_LINK_MFA_ENABLE') : lang('SETT_LINK_USER_PROFILE');
 						redirect(base_url($redirectUrl), 'Location', 301);
 						exit();
 					}
@@ -161,7 +167,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->render->favicon = lang('IMG_FAVICON');
 			$this->render->ext = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->clientStyle = $this->clientStyle;
+			$this->render->customerImages = $this->customerImages;
 			$this->render->logged = $this->session->has_userdata('logged');
 			$this->render->userId = $this->session->has_userdata('userId');
 			$this->render->fullName = $this->session->fullName;
@@ -182,10 +188,10 @@ class NOVO_Controller extends CI_Controller {
 			}
 
 			$this->includeAssets->cssFiles = [
-				"$this->clientStyle/root-$this->clientStyle",
-				"root-general",
+				"$this->customerStyle/$this->customerStyle-root",
+				"general-root",
 				"reboot",
-				"$this->clientStyle/"."$this->clientStyle-base"
+				"$this->customerStyle/$this->customerStyle-base"
 			];
 
 			if (gettype($this->ValidateBrowser) !== 'boolean') {
@@ -213,7 +219,7 @@ class NOVO_Controller extends CI_Controller {
 				);
 			}
 
-			$validateRecaptcha = in_array($this->controllerMethod, lang('CONF_VALIDATE_CAPTCHA'));
+			$validateRecaptcha = in_array($this->controllerMethod, lang('SETT_VALIDATE_CAPTCHA'));
 
 			if ($validateRecaptcha) {
 				array_push(
@@ -348,6 +354,7 @@ class NOVO_Controller extends CI_Controller {
 			$showMsgLog = 'Controller: loadApiModel Successfully loaded model: ' . $this->modelClass .'/' .
 				$this->modelMethod;
 		}
+
 		writeLog('DEBUG', $showMsgLog);
 
 		return $responseModel;

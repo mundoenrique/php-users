@@ -22,18 +22,18 @@ class Novo_Transfer extends NOVO_Controller
 		$validateChangeOperKey = $currentMethod !== 'changeOperationKey';
 		$validateSetOperKey = $currentMethod !== 'setOperationKey';
 		$validateGetOperKey = $currentMethod !== 'getOperationKey';
-		$validateUriOperKey = lang('CONF_REDIRECT_OPER_KEY');
+		$validateUriOperKey = lang('SETT_REDIRECT_OPER_KEY');
 		$validateRedirect = ($validateChangeOperKey && $validaTransferAuth);
 
 		if ($validateOperKey && $validateGetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_GET_OPER_KEY')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_GET_OPER_KEY')), 'Location', 301);
 			exit();
 		}
 
 		if (!$validateOperKey && $validateSetOperKey && $validateRedirect) {
 			$this->session->set_flashdata('currentUri', $validateUriOperKey[$currentMethod]);
-			redirect(base_url(lang('CONF_LINK_SET_OPER_KEY')), 'Location', 301);
+			redirect(base_url(lang('SETT_LINK_SET_OPER_KEY')), 'Location', 301);
 			exit();
 		}
 
@@ -84,7 +84,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/setOperationKey"
 		);
 
-		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))];
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);
@@ -132,7 +132,7 @@ class Novo_Transfer extends NOVO_Controller
 			"transfer/changeOperationKey"
 		);
 
-		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))] ;
+		$this->render->titleCredential = ['title' => strtolower(lang('GEN_KEY'))];
 		$this->render->titlePage = lang('GEN_MENU_PAYS_TRANSFER');
 		$this->views = ['transfer/' . $view];
 		$this->loadView($view);
@@ -155,7 +155,10 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -189,7 +192,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BETWEEN_CARDS_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('GEN_DNI'),
 			lang('TRANSF_DESTINATION_CARD'),
 			lang('TRANSF_OPTIONS')
@@ -216,7 +219,10 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -250,7 +256,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_TO_TRANSFER');
 		$this->render->msgTransfer = lang('TRANSF_BANK_ACCOUNTS_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('TRANSF_BANK'),
 			lang('TRANSF_ACCOUNT_PHONE'),
 			lang('TRANSF_OPTIONS')
@@ -277,7 +283,10 @@ class Novo_Transfer extends NOVO_Controller
 			"third_party/jquery.mask-1.14.16",
 			"form_validation",
 			"third_party/additional-methods",
-			"transfer/transferHelpers"
+			"transfer/transferHelpers",
+			"transfer/transferParams",
+			"transfer/affiliations",
+			"transfer/history",
 		);
 
 		$this->modelClass = 'Novo_Business_Model';
@@ -312,7 +321,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->render->titleTransfer = lang('TRANSF_MAKE_PAYMENT');
 		$this->render->msgTransfer = lang('TRANSF_PAY_MOVIL_MSG');
 		$this->render->tHeaders = [
-			lang('TRANSF_AFFILIATE'),
+			lang('TRANSF_BENEFICIARY'),
 			lang('TRANSF_BANK'),
 			lang('TRANSF_NUMBER_PHONE'),
 			lang('TRANSF_OPTIONS')

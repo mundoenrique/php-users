@@ -8,14 +8,18 @@
           <div id="productdetail" class="flex inline-flex col-12 px-xl-2" call-moves="<?= $callMoves; ?>">
             <div class="flex flex-column justify-center col-auto py-4 pr-0">
               <div class="product-presentation relative">
-                <div class="item-network <?= $totalCards == 1 && lang('CONF_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
+                <div class="item-network <?= $totalCards == 1 && lang('SETT_FRANCHISE_LOGO') === 'ON' ? $brand : 'hide'; ?>"></div>
                 <?php if ($totalCards > 1 || $totalCards == 0): ?>
                 <div id="donor" class="product-search btn">
                   <a class="dialog button product-button"><span aria-hidden="true" class="icon-find h1 icon-color"></span></a>
                   <input id="donor-cardnumber" name="donor-cardnumber" type="hidden" value="">
                 </div>
                 <?php else: ?>
-                <img class="card-image" src="<?= $this->asset->insertFile($productImg, 'images/programs', $customerUri); ?>" alt="<?= $productName; ?>">
+                <img
+									class="card-image"
+									src="<?= $this->asset->insertImage($productImg, $customerImages, 'programs'); ?>"
+									alt="<?= $productName; ?>"
+								>
                 <?php endif; ?>
               </div>
 							<?php if ($totalCards == 1 && $isVirtual): ?>
@@ -30,7 +34,7 @@
             <div class="flex flex-column items-start col-6 self-center px-0 ml-1">
               <p class="semibold mb-0 h5 truncate"><?= $productName; ?></p>
               <p id="card" class="mb-2"><?= $cardNumberMask; ?></p>
-              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('CONF_NO_LINK'); ?>">
+              <a id="other-product" class="btn hyper-link btn-small p-0 hide" href="<?= lang('SETT_NO_LINK'); ?>">
                 <i aria-hidden="true" class="icon-find"></i>&nbsp;<?= lang('GEN_OTHER_PRODUCTS'); ?>
               </a>
             </div>
@@ -88,25 +92,25 @@
       <div id="downloads" class="hide-downloads hide pl-1">
         <ul id="downloadFiles" class="stack list-inline mb-0 flex items-center">
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
+            <a id="downloadPDF" href="<?= lang('SETT_NO_LINK'); ?>" action="download">
               <span class="icon-file-pdf h5 mr-0" aria-hidden="true" title="Descargar PDF"></span>
             </a>
           </li>
-          <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+          <?php if(lang('SETT_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendPDF" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
+            <a id="sendPDF" href="<?= lang('SETT_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar PDF"></span>
             </a>
           </li>
           <?php endif; ?>
           <li class="stack-item px-1 list-inline-item">
-            <a id="downloadXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="download">
+            <a id="downloadXLS" href="<?= lang('SETT_NO_LINK'); ?>" action="download">
               <span class="icon-file-excel h5 mr-0" aria-hidden="true" title="Descargar Excel"></span>
             </a>
           </li>
-          <?php if(lang('CONF_SEND_MOVEMENTS') == 'ON'):  ?>
+          <?php if(lang('SETT_SEND_MOVEMENTS') == 'ON'):  ?>
           <li class="stack-item px-1 list-inline-item is-disabled">
-            <a id="sendXLS" href="<?= lang('CONF_NO_LINK'); ?>" action="send">
+            <a id="sendXLS" href="<?= lang('SETT_NO_LINK'); ?>" action="send">
               <span class="icon-email h5 mr-0" aria-hidden="true" title="Enviar Excel"></span>
             </a>
           </li>

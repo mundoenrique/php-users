@@ -23,7 +23,7 @@ class Connect_Services_Apis
 			error_reporting(E_ALL & ~E_DEPRECATED);
 		}
 
-		$subFix = '_' . strtoupper($this->CI->config->item('customer-uri'));
+		$subFix = '_' . strtoupper($this->CI->config->item('customer_uri'));
 		$wsUrl = $_SERVER['WS_URL'];
 
 		if (isset($_SERVER['WS_URL' . $subFix])) {
@@ -62,7 +62,7 @@ class Connect_Services_Apis
 		$response->error = curl_error($curl);
 
 		if ($response->HttpCode !== 200 || !$curlResp) {
-			$response->code = lang('CONF_RC_DEFAULT');
+			$response->code = lang('SETT_RC_DEFAULT');
 		}
 
 		curl_close($curl);
@@ -115,7 +115,7 @@ class Connect_Services_Apis
 
 		$response = new stdClass();
 		$response->HttpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-		$response->code = isset($curlResp->code) ? $curlResp->code : lang('CONF_RC_DEFAULT');
+		$response->code = isset($curlResp->code) ? $curlResp->code : lang('SETT_RC_DEFAULT');
 		$response->datetime = isset($curlResp->datetime) ? $curlResp->datetime : '';
 		$response->message = isset($curlResp->message) ? $curlResp->message : '';
 		$response->data = isset($curlResp->data) ? $curlResp->data : NULL;
@@ -187,7 +187,7 @@ class Connect_Services_Apis
 					$failResponse->rc = 504;
 					break;
 				default:
-					$curlResponse->rc = lang('CONF_RC_DEFAULT');
+					$curlResponse->rc = lang('SETT_RC_DEFAULT');
 			}
 
 			switch ($curlHttpCode) {

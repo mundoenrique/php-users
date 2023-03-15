@@ -4,7 +4,7 @@
   <div class="flex mt-3 light items-center">
     <div class="flex col-3">
       <h2 class="h4 regular tertiary mb-0"><?= lang('BUSINESS_MY_PRODUCTS') ?></h2>
-      <form id="cardListForm" action="<?= base_url(lang('CONF_LINK_CARD_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
+      <form id="cardListForm" action="<?= base_url(lang('SETT_LINK_CARD_LIST')) ?>" method="post" card-list="<?= $getList; ?>">
         <input type="hidden" name="cardList" value="getCardList">
       </form>
     </div>
@@ -22,9 +22,13 @@
     <div id="cardList" class="dashboard-items flex max-width-xl-6 mt-3 mx-auto flex-wrap justify-center">
       <?php foreach ($cardsList AS $cards): ?>
       <div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
-        <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images/programs', $customerUri); ?>" alt="<?= $cards->productName ?>" />
-        <div class="item-info <?= lang('CONF_FRANCHISE_LOGO') === 'ON' ? $cards->brand : ''?> p-2 h5 bg-white">
-					<?php if (lang('CONF_BUSINESS_NAME') == 'ON'): ?>
+        <img
+					class="item-img"
+					src="<?= $this->asset->insertImage($cards->productImg, $customerImages, 'programs'); ?>"
+					alt="<?= $cards->productName ?>"
+				/>
+        <div class="item-info <?= lang('SETT_FRANCHISE_LOGO') === 'ON' ? $cards->brand : ''?> p-2 h5 bg-white">
+					<?php if (lang('SETT_BUSINESS_NAME') == 'ON'): ?>
 					<small class="sb-disabled uppercase light truncate"><?= $cards->enterprise?></small><br>
 					<?php endif; ?>
           <p class="item-category semibold truncate" title="<?= $cards->productName ?>" data-toggle="tooltip"><?= $cards->productName ?>
@@ -39,7 +43,7 @@
             <?php endif; ?>
           </p>
         </div>
-        <form action="<?= base_url(lang('CONF_LINK_CARD_DETAIL')); ?>" method="POST">
+        <form action="<?= base_url(lang('SETT_LINK_CARD_DETAIL')); ?>" method="POST">
           <input type="hidden" id="userIdNumber" name="userIdNumber" class="hidden" value="<?= $cards->userIdNumber ?>">
           <input type="hidden" id="cardNumber" name="cardNumber" class="hidden" value="<?= $cards->cardNumber ?>">
           <input type="hidden" id="cardNumberMask" name="cardNumberMask" class="hidden" value="<?= $cards->cardNumberMask ?>">

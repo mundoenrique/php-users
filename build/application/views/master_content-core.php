@@ -8,10 +8,12 @@
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta http-equiv="cleartype" content="on">
-	<link rel="profile" href="http://gmpg.org/xfn/11">
-	<link rel="icon" type="image/<?= $ext ?>" href="<?= $this->asset->insertFile($favicon.'.'.$ext, 'images/favicon') ?>">
+	<link
+		rel="icon" type="image/<?= $ext ?>"
+		href="<?= $this->asset->insertImage($favicon.'.'.$ext, $customerImages) ?>"
+	>
 	<?= $this->asset->insertCss(); ?>
-	<?= (in_array($module, lang('CONF_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
+	<?= (in_array($module, lang('SETT_VALIDATE_CAPTCHA')) && ACTIVE_RECAPTCHA) ?  $scriptCaptcha : ''; ?>
 	<?= $this->asset->insertJs(); ?>
 	<title><?= $titlePage; ?> - CPO</title>
 </head>
