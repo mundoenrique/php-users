@@ -10,7 +10,7 @@ $lang['SETT_CONTACTS'] = [
 	'0501-PLATA-00' => '(0501-75282-00)',
 ];
 $lang['SETT_BTN_LANG'] = 'ON';
-$lang['SETT_TRANSFERS'] = 'ON';
+$lang['SETT_TRANSFERS'] = 'OFF';
 $lang['SETT_MOBILE_PAYMENT'] = 'ON';
 $lang['SETT_BETWEEN_CARDS'] = 'ON';
 $lang['SETT_BANKS'] = 'ON';
