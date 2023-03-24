@@ -9,6 +9,7 @@ $(function () {
 		$("#historyView #results").hide();
 		$("#historyView #no-moves").hide();
 		$("#historyView #pre-loader").fadeIn(700, "linear");
+		$(".easyPaginateNav").remove();
 
 		if (mm < 10) {
 			mm = "0" + mm;
@@ -84,6 +85,7 @@ $(function () {
 			$("#historyView #results").hide();
 			$("#historyView #no-moves").hide();
 			$("#historyView #pre-loader").fadeIn(700, "linear");
+			$(".easyPaginateNav").remove();
 
 			who = "Transfer";
 			where = "History";
@@ -139,6 +141,7 @@ function setMainTex(data) {
 	}
 	</span>`;
 }
+
 function setSecondaryText(data, index) {
 	var status = {
 		0: `${lang.TRANSF_SUCCESSFUL_OPERATION}		|		`,
@@ -193,4 +196,26 @@ function setHistoryDataTable(data) {
 	});
 
 	$("#historyView #results").fadeIn(700, "linear");
+
+	if ($("#movementsList > li").length > 10) {
+		$("#movementsList").easyPaginate({
+			paginateElement: "li",
+			hashPage: lang.GEN_DATATABLE_PAGE,
+			elementsPerPage: 10,
+			effect: "default",
+			slideOffset: 200,
+			firstButton: true,
+			firstButtonText: lang.GEN_DATATABLE_SFIRST,
+			firstHashText: lang.GEN_DATATABLE_PAGE_FIRST,
+			lastButton: true,
+			lastButtonText: lang.GEN_DATATABLE_SLAST,
+			lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
+			prevButton: true,
+			prevButtonText: lang.SETT_DATATABLE_SPREVIOUS,
+			prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
+			nextButton: true,
+			nextButtonText: lang.SETT_DATATABLE_SNEXT,
+			nextHashText: lang.GEN_DATEPICKER_NEXTTEXT,
+		});
+	}
 }
