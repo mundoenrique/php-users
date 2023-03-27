@@ -88,6 +88,7 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 80041:
 			case 80042:
 			case 80043:
+			case 201008:
 			case 201017:
 			case 202017:
 			case 251033:
@@ -136,7 +137,6 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 141128:
 			case 141133:
 			case 164045:
-			case 201008:
 			case 201025:
 			case 201134:
 			case 201149:
