@@ -88,17 +88,11 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 80041:
 			case 80042:
 			case 80043:
-			case 201008:
 			case 201017:
 			case 202017:
 			case 251033:
 			case 1887809:
 			case 1888010:
-				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = lang('TRANSF_CONTACT_CENTER_SYSTEM');
-				$this->response->modalBtn['btn1']['action'] = 'destroy';
-				break;
-			case -999:
 			case 248:
 			case 80024:
 			case 80025:
@@ -137,6 +131,7 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 141128:
 			case 141133:
 			case 164045:
+			case 201008:
 			case 201025:
 			case 201134:
 			case 201149:
@@ -172,7 +167,6 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case 101042:
-			case 103000:
 			case 169032:
 			case 701114:
 			case 901100:
@@ -182,6 +176,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->data = $response;
 				break;
+			case 103000:
 			case 101029:
 			case 161632:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
@@ -190,6 +185,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case -224:
+			case 999:
 			case -777:
 			case -99:
 			case 1205:
@@ -260,7 +256,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				break;
 			case -322:
 				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
-				$this->response->msg = lang('TRANSF_CONTACT_CENTER_SYSTEM');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
@@ -309,7 +305,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				break;
 			case -322:
 				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
-				$this->response->msg = lang('TRANSF_CONTACT_CENTER_SYSTEM');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
