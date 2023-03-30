@@ -454,6 +454,7 @@ function showTransferView() {
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
 	$("#manageAffiliateView").hide();
+	$("#historyView").hide();
 	$("#affiliationsView").css("display", "none");
 	$("#toTransferView").show();
 
