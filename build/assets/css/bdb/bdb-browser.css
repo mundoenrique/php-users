@@ -248,3 +248,12 @@ footer.main-footer div:nth-child(1) {
     flex: none;
   }
 }
+
+.navbar .navbar-brand {
+padding: 0;
+}
+
+.navbar-brand img {
+width: auto;
+height: 40px;
+}
