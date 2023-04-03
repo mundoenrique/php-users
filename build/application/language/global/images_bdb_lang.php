@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$lang['IMG_FAVICON'] = 'favicon-bdb';
 $lang['IMG_LOGO_HEADER'] = 'img-logo.svg';
 $lang['IMG_FOTTER_IMAGE_L'] = 'img-bogota_white.svg';
 $lang['IMG_PROGRAM_IMG_DEFAULT'] =	'bdb_default.svg';

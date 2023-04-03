@@ -181,10 +181,10 @@ function notificationHistory(dataHistory) {
 						lastButtonText: lang.GEN_DATATABLE_SLAST,
 						lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
 						prevButton: true,
-						prevButtonText: lang.CONF_DATATABLE_SPREVIOUS,
+						prevButtonText: lang.SETT_DATATABLE_SPREVIOUS,
 						prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
 						nextButton: true,
-						nextButtonText: lang.CONF_DATATABLE_SNEXT,
+						nextButtonText: lang.SETT_DATATABLE_SNEXT,
 						nextHashText: lang.GEN_DATEPICKER_NEXTTEXT
 					})
 				}

@@ -16,6 +16,7 @@ class NOVO_Model extends CI_Model {
 	public $token;
 	public $customer;
 	public $customerUri;
+	public $customerImages;
 	public $dataRequest;
 	public $isResponseRc;
 	public $response;
@@ -32,6 +33,7 @@ class NOVO_Model extends CI_Model {
 		$this->response = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
 		$this->customerUri = $this->session->customerUri;
+		$this->customerImages = $this->config->item('customer_images');
 		$this->token = $this->session->token ?? '';
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
@@ -121,8 +123,8 @@ class NOVO_Model extends CI_Model {
 		writeLog('INFO', 'Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->responseCode;
-		$this->response->code = lang('CONF_DEFAULT_CODE');
-		$this->response->icon = lang('CONF_ICON_WARNING');
+		$this->response->code = lang('SETT_DEFAULT_CODE');
+		$this->response->icon = lang('SETT_ICON_WARNING');
 		$this->response->title = lang('GEN_SYSTEM_NAME');
 		$this->response->msg = '';
 		$this->response->data = new stdClass();
@@ -150,7 +152,7 @@ class NOVO_Model extends CI_Model {
 				$this->response->msg = lang('GEN_TIMEOUT');
 			break;
 			default:
-				$this->response->icon = lang('CONF_ICON_DANGER');
+				$this->response->icon = lang('SETT_ICON_DANGER');
 				$this->response->msg = lang('GEN_SYSTEM_MESSAGE');
 		}
 
@@ -199,10 +201,10 @@ class NOVO_Model extends CI_Model {
 		if($this->session->missingImages) {
 			$this->response->code = 3;
 			$this->response->title = lang('GEN_TITLE_IMPORTANT');
-			$this->response->icon = lang('CONF_ICON_INFO');
+			$this->response->icon = lang('SETT_ICON_INFO');
 			$this->response->msg = lang('GEN_MISSING_IMAGES');
 			$this->response->modalBtn['btn1']['text'] = lang('GEN_BTN_YES');
-			$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_USER_PROFILE');
+			$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_USER_PROFILE');
 			$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_NO');
 			$this->response->modalBtn['btn2']['action'] = 'destroy';
 

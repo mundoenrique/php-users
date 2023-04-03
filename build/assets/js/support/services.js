@@ -12,7 +12,7 @@ $(function () {
 		$('#msgReplacementCard').removeClass('none');
 	}
 
-	if ($('#operation').find('input[type=hidden][name="status"]').val() == '' && lang.CONF_TEMPORARY_LOCK_REASON == 'ON') {
+	if ($('#operation').find('input[type=hidden][name="status"]').val() == '' && lang.SETT_TEMPORARY_LOCK_REASON == 'ON') {
 		$('#temporaryLockReason').removeClass('ignore');
 		$('#selectTempLockReason').removeClass('none');
 		$('#msgTemporaryLock').addClass('none');
@@ -137,7 +137,7 @@ $(function () {
 					action: 'redirect'
 				}
 			}
-			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.CONF_ICON_DANGER, modalBtn);
+			appMessages(lang.GEN_MENU_CUSTOMER_SUPPORT, lang.CUST_PERMANENT_LOCK, lang.SETT_ICON_DANGER, modalBtn);
 		}
 	});
 

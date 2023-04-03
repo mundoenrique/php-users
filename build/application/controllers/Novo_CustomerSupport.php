@@ -93,7 +93,7 @@ class Novo_CustomerSupport extends NOVO_Controller {
 					break;
 				}
 
-				$userCardList->modalBtn['btn1']['link'] = lang('CONF_LINK_CARD_DETAIL');
+				$userCardList->modalBtn['btn1']['link'] = lang('SETT_LINK_CARD_DETAIL');
 				$this->responseAttr($userCardList);
 			}
 		}

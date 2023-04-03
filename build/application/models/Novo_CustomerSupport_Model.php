@@ -44,11 +44,11 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 		switch ($this->isResponseRc) {
 			case 0:
 				$responseAction = $dataRequest->status == '' ? lang('CUST_LOCKED') : lang('CUST_UNLOCKED');
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, $responseAction]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = $dataRequest->status == '' ? lang('CUST_LOCK') : lang('CUST_UNLOCK');
@@ -134,9 +134,9 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case 0:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
 				$this->response->msg = $dataRequest->virtual ? lang('CUST_REPLACE_MSG') : novoLang(lang('CUST_SUCCESS_OPERATION_RESPONSE'), [$dataRequest->cardNumberMask, lang('CUST_LOCK_PERMANENT')]);
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? uriRedirect() : lang('CONF_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = $dataRequest->virtual ? uriRedirect() : lang('SETT_LINK_CUSTOMER_SUPPORT');
 			break;
 			case 7:
 				$this->response->title = lang('GEN_PERMANENT_LOCK_PRODUCT');
@@ -191,7 +191,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 				if (isset($reponse->bean->cost_repos_plas) && $reponse->bean->cost_repos_plas != '') {
 					$cost = currencyFormat($reponse->bean->cost_repos_plas);
 					$this->response->data->cost = TRUE;
-					$this->response->data->msg = novoLang(lang('CUST_REPLACEMENT_COST'), [lang('CONF_CURRENCY'), $cost]);
+					$this->response->data->msg = novoLang(lang('CUST_REPLACEMENT_COST'), [lang('SETT_CURRENCY'), $cost]);
 				}
 			break;
 			case 29:
@@ -293,7 +293,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 				if (!$default) {
 					$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
-					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->icon = lang('SETT_ICON_WARNING');
 					$this->response->modalBtn['btn1']['action'] = 'destroy';
 				}
 			break;
@@ -363,13 +363,13 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			case -454:
 				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
 				$this->response->msg = lang('CUST_CARD_TEMPORARY_LOCK');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -447:
 				$this->response->title = lang('GEN_MENU_CUSTOMER_SUPPORT');
 				$this->response->msg = lang('CUST_NON_RESULTS');
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 			break;
 			case -306:
@@ -415,11 +415,11 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
 				$this->response->msg = novoLang(lang('CUST_SUCCESS_CHANGE_PIN'), [$dataRequest->cardNumberMask]);
 				$this->response->success = TRUE;
-				$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_CUSTOMER_SUPPORT');
+				$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_CUSTOMER_SUPPORT');
 			break;
 			case -308:
 				$this->response->title = lang('CUST_CHANGE_PIN_TITLE');
@@ -624,10 +624,10 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 			default:
 				if ($this->isResponseRc != -29 && $this->isResponseRc != -35 &&  $this->isResponseRc != -61) {
 					$this->response->code = 3;
-					$this->response->icon = lang('CONF_ICON_WARNING');
+					$this->response->icon = lang('SETT_ICON_WARNING');
 					$this->response->title = lang('GEN_MENU_NOTIFICATIONS');
 					$this->response->msg = lang('CUST_NO_NOTIFI_SETTINGS');
-					$this->response->modalBtn['btn1']['link'] = lang('CONF_LINK_NOTIFICATIONS');
+					$this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_NOTIFICATIONS');
 					$this->response->modalBtn['btn1']['action'] = 'redirect';
 					$this->response->modalBtn['btn2']['text'] = lang('GEN_BTN_CANCEL');
 					$this->response->modalBtn['btn2']['action'] = 'destroy';
@@ -691,7 +691,7 @@ class Novo_CustomerSupport_Model extends NOVO_Model {
 
 		switch ($this->isResponseRc) {
 			case 0:
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('GEN_MENU_NOTIFICATIONS');
 				$this->response->msg = lang('CUST_UPT_NOTIFICATIONS');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';

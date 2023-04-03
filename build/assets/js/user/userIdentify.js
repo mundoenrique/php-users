@@ -19,7 +19,7 @@ $(function () {
 		if (form.valid()) {
 			data = getDataForm(form);
 
-			if (lang.CONF_CHANGE_VIRTUAL === 'ON') {
+			if (lang.SETT_CHANGE_VIRTUAL === 'ON') {
 				if ($('input:radio[name=cardType]:checked').val() == 'virtual') {
 					delete data.cardPIN;
 					delete data.physicalCard;
@@ -98,7 +98,7 @@ function validateIdentity() {
 
 				insertFormInput(true, form);
 				form
-					.attr('action', baseURL + lang.CONF_LINK_SIGNUP)
+					.attr('action', baseURL + lang.SETT_LINK_SIGNUP)
 					.submit();
 			break;
 			case 2:

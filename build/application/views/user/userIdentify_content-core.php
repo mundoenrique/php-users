@@ -12,7 +12,7 @@
 			<div class="max-width-1 fit-lg mx-auto pt-1">
 				<form id="identityForm">
 					<div class="row">
-						<?php if (lang('CONF_CHANGE_VIRTUAL') === 'ON'): ?>
+						<?php if (lang('SETT_CHANGE_VIRTUAL') === 'ON'): ?>
 						<div class="form-group col-12">
 							<label class="mr-2 regular"><?= lang('GEN_CARD_TYPE'); ?></label>
 							<div class="custom-control custom-radio custom-control-inline">
@@ -31,7 +31,7 @@
 							<input id="numberCard" class="form-control" type="text" name="numberCard" maxlength="16" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
-						<?php if(lang('CONF_RECOVER_ID_TYPE') == 'ON'): ?>
+						<?php if(lang('SETT_RECOVER_ID_TYPE') == 'ON'): ?>
 						<div class="form-group col-lg-4">
 							<label for="typeDocument"><?= lang('GEN_TYPE_DOCUMENT') ?></label>
 							<select id="typeDocument" name="typeDocument" class="form-control select-box custom-select flex h6 w-100" disabled autocomplete="off">
@@ -47,7 +47,7 @@
 							<input id="documentId" class="form-control" type="text" name="documentId" maxlength="25" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
-						<?php if (lang('CONF_SECRET_KEY') == 'ON') : ?>
+						<?php if (lang('SETT_SECRET_KEY') == 'ON') : ?>
 							<div class="form-group col-lg-4" id="physicalCardPIN">
 								<label for="cardPIN"><?= lang('GEN_SECRET_PASS_PIN'); ?></label>
 								<input id="cardPIN" class="form-control" type="password" name="cardPIN" maxlength="4" autocomplete="off" disabled>
@@ -62,7 +62,7 @@
 					</div>
 					<div class="line my-2"></div>
 					<div class="flex items-center justify-end pt-3">
-						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('CONF_LINK_SIGNIN')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
+						<a class="btn btn-small btn-link big-modal" href="<?= base_url(lang('SETT_LINK_SIGNIN')); ?>"><?= lang('GEN_BTN_CANCEL'); ?></a>
 						<button id="identityBtn" class="btn btn-small btn-loading btn-primary" type="submit"><?= lang('GEN_BTN_CONTINUE'); ?></button>
 					</div>
 				</form>

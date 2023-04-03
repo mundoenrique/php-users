@@ -4,45 +4,45 @@ var validator;
 function validateForms(form) {
 	formInputTrim(form);
 
-	var onlyNumber = new RegExp(lang.CONF_REGEX_ONLY_NUMBER);
-	var onlyOneNumber = new RegExp(lang.CONF_REGEX_ONLY_ONE_NUMBER);
-	var onlyOneLetter = new RegExp(lang.CONF_REGEX_ONLY_ONE_LETTER);
-	var namesValid = new RegExp(lang.CONF_REGEX_NAMES_VALID, 'i');
-	var validNickName = new RegExp(lang.CONF_REGEX_NICKNAME, 'i');
-	var validNickNameProfile = new RegExp(lang.CONF_REGEX_NICKNAME_PROFILE, 'i');
-	var shortPhrase = new RegExp(lang.CONF_REGEX_SHORT_PHRASE, 'i');
-	var longPhrase = new RegExp(lang.CONF_REGEX_LONG_PHRASE, 'i');
-	var alphaName = new RegExp(lang.CONF_REGEX_ALPHA_NAME, 'i');
-	var alphaLetter = new RegExp(lang.CONF_REGEX_ALPHA_LETTER, 'i');
-	var emailValid = new RegExp(lang.CONF_REGEX_EMAIL_VALID);
-	var alphanumunder = new RegExp(lang.CONF_REGEX_ALPHANUM_UNDER, 'i');
-	var alphanum = new RegExp(lang.CONF_REGEX_ALPHANUM, 'i');
-	var maxlengthDocId = parseInt(lang.CONF_REGEX_MAXLENGTH_DOC_ID);
+	var onlyNumber = new RegExp(lang.REGEX_ONLY_NUMBER);
+	var onlyOneNumber = new RegExp(lang.REGEX_ONLY_ONE_NUMBER);
+	var onlyOneLetter = new RegExp(lang.REGEX_ONLY_ONE_LETTER);
+	var namesValid = new RegExp(lang.REGEX_NAMES_VALID, 'i');
+	var validNickName = new RegExp(lang.REGEX_NICKNAME, 'i');
+	var validNickNameProfile = new RegExp(lang.REGEX_NICKNAME_PROFILE, 'i');
+	var shortPhrase = new RegExp(lang.REGEX_SHORT_PHRASE, 'i');
+	var longPhrase = new RegExp(lang.REGEX_LONG_PHRASE, 'i');
+	var alphaName = new RegExp(lang.REGEX_ALPHA_NAME, 'i');
+	var alphaLetter = new RegExp(lang.REGEX_ALPHA_LETTER, 'i');
+	var emailValid = new RegExp(lang.REGEX_EMAIL_VALID);
+	var alphanumunder = new RegExp(lang.REGEX_ALPHANUM_UNDER, 'i');
+	var alphanum = new RegExp(lang.REGEX_ALPHANUM, 'i');
+	var maxlengthDocId = parseInt(lang.REGEX_MAXLENGTH_DOC_ID);
 	var userPassword = validatePass;
-	var numeric = new RegExp(lang.CONF_REGEX_NUMERIC);
-	var twoFactor = new RegExp(lang.CONF_REGEX_TWO_FACTOR);
-	var phone = new RegExp(lang.CONF_REGEX_PHONE, 'i');
-	var phoneMasked = new RegExp(lang.CONF_REGEX_PHONE_MASKED, 'i');
-	var floatAmount = new RegExp(lang.CONF_REGEX_FLOAT_AMOUNT, 'i');
-	var transType = new RegExp(lang.CONF_REGEX_TRANS_TYPE);
-	var checkedOption = new RegExp(lang.CONF_REGEX_CHECKED);
+	var numeric = new RegExp(lang.REGEX_NUMERIC);
+	var twoFactor = new RegExp(lang.REGEX_TWO_FACTOR);
+	var phone = new RegExp(lang.REGEX_PHONE, 'i');
+	var phoneMasked = new RegExp(lang.REGEX_PHONE_MASKED, 'i');
+	var floatAmount = new RegExp(lang.REGEX_FLOAT_AMOUNT, 'i');
+	var transType = new RegExp(lang.REGEX_TRANS_TYPE);
+	var checkedOption = new RegExp(lang.REGEX_CHECKED);
 	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
-		dmy: new RegExp(lang.CONF_REGEX_DATE_DMY),
-		my: new RegExp(lang.CONF_REGEX_DATE_MY),
-		y: new RegExp(lang.CONF_REGEX_DATE_Y),
+		dmy: new RegExp(lang.REGEX_DATE_DMY),
+		my: new RegExp(lang.REGEX_DATE_MY),
+		y: new RegExp(lang.REGEX_DATE_Y),
 	};
-	var intCode = new RegExp(lang.CONF_REGEX_INT_CODE);
+	var intCode = new RegExp(lang.REGEX_INT_CODE);
 	var defaults = {
 		debug: true,
-		errorClass: lang.CONF_VALID_ERROR,
-		validClass: lang.CONF_VALID_VALID,
-		success: lang.CONF_VALID_SUCCESS,
-		ignore: lang.CONF_VALID_IGNORE,
-		errorElement: lang.CONF_VALID_ELEMENT
+		errorClass: lang.SETT_VALID_ERROR,
+		validClass: lang.SETT_VALID_VALID,
+		success: lang.SETT_VALID_SUCCESS,
+		ignore: lang.SETT_VALID_IGNORE,
+		errorElement: lang.SETT_VALID_ELEMENT
 	};
 
-	$.each(lang.CONF_TITLE_PASS_FORM, function (key, val) {
+	$.each(lang.GEN_TITLE_PASS_FORM, function (key, val) {
 		if ($(form).attr('id') === key) {
 			titleCredencial = val.toLowerCase();
 		}
@@ -102,12 +102,12 @@ function validateForms(form) {
 			"channel": { pattern: alphanumunder},
 			"confirmEmail": { required: true, pattern: emailValid, equalTo: "#email" },
 			"landLine": {
-				pattern: (lang.CONF_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked),
+				pattern: (lang.SETT_ACCEPT_MASKED_LANDLINE == 'OFF' ? phone : phoneMasked),
 				differs: ["#mobilePhone", "#otherPhoneNum"]
 			},
 			"mobilePhone": {
 				required: true,
-				pattern: (lang.CONF_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked),
+				pattern: (lang.SETT_ACCEPT_MASKED_MOBILE == 'OFF' ? phone : phoneMasked),
 				differs: ["#landLine", "#otherPhoneNum"]
 			},
 			"internationalCode": { required: true, pattern: intCode },
@@ -416,8 +416,8 @@ function validateForms(form) {
 	}
 
 	$.validator.methods.filesize = function (value, element, param) {
-		var maxSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.max_size) * 1024
-		var minSize = parseInt(lang.CONF_CONFIG_UPLOAD_FILE.min_size) * 1024
+		var maxSize = parseInt(lang.SETT_CONFIG_UPLOAD_FILE.max_size) * 1024
+		var minSize = parseInt(lang.SETT_CONFIG_UPLOAD_FILE.min_size) * 1024
 
 		return element.files[0].size <= maxSize && element.files[0].size >= minSize;
 	}
@@ -426,8 +426,8 @@ function validateForms(form) {
 		var pattern = alphanum;
 		var typeDocument = form.find("#typeDocument option:selected");
 
-		if (lang.CONF_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
-			if (lang.CONF_NUMERIC_DOCUMENT_ID.includes(typeDocument.val())) {
+		if (lang.SETT_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
+			if (lang.SETT_NUMERIC_DOCUMENT_ID.includes(typeDocument.val())) {
 				pattern = numeric;
 			}
 		}

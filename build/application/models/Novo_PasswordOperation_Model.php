@@ -45,7 +45,7 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 			case 0:
 				$this->session->set_userdata('operKey', TRUE);
 				$this->response->code = 0;
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
 				$this->response->msg = lang('PASS_SUCCESS_CREATED_OPER_KEY');
 				$this->response->modalBtn['btn1']['link'] = $bntLinkTransfer;
@@ -82,13 +82,13 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 			case 0:
 				$this->response->code = 0;
 				$this->session->set_userdata('transferAuth', FALSE);
-				$this->response->icon = lang('CONF_ICON_SUCCESS');
+				$this->response->icon = lang('SETT_ICON_SUCCESS');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
 				$this->response->msg = lang('PASS_UPDATE_OPER_KEY');
 				$this->response->modalBtn['btn1']['link'] = uriRedirect();
 				break;
 			case -22:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
 				$this->response->msg = lang('PASS_INCORRECT_CURRENT_OPER_KEY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -132,7 +132,7 @@ class Novo_PasswordOperation_Model extends NOVO_Model
 				$this->response->data = $bntLinkTransfer;
 				break;
 			case -22:
-				$this->response->icon = lang('CONF_ICON_WARNING');
+				$this->response->icon = lang('SETT_ICON_WARNING');
 				$this->response->title = lang('GEN_MENU_PAYS_TRANSFER');
 				$this->response->msg = lang('PASS_INCORRECT_OPER_KEY');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
