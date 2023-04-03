@@ -281,6 +281,7 @@ class Novo_Transfer extends NOVO_Controller
 			"modalCards",
 			"third_party/jquery.validate",
 			"third_party/jquery.mask-1.14.16",
+			"third_party/jquery.easyPaginate-1.2",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers",

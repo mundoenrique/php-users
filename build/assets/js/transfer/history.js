@@ -9,6 +9,7 @@ $(function () {
 		$("#historyView #results").hide();
 		$("#historyView #no-moves").hide();
 		$("#historyView #pre-loader").fadeIn(700, "linear");
+		$(".easyPaginateNav").remove();
 
 		if (mm < 10) {
 			mm = "0" + mm;
@@ -84,6 +85,7 @@ $(function () {
 			$("#historyView #results").hide();
 			$("#historyView #no-moves").hide();
 			$("#historyView #pre-loader").fadeIn(700, "linear");
+			$(".easyPaginateNav").remove();
 
 			who = "Transfer";
 			where = "History";
@@ -130,34 +132,62 @@ $(function () {
 	);
 });
 
+function setMainTex(data) {
+	return `<span class="h5 semibold feed-product">
+	${
+		data.estatusOperacion == "2"
+			? data.concepto
+			: `${data.beneficiario}${data.concepto != "" ? "		|		" + data.concepto : ""}`
+	}
+	</span>`;
+}
+
+function setSecondaryText(data, index) {
+	var status = {
+		0: `${lang.TRANSF_SUCCESSFUL_OPERATION}		|		`,
+		1: `${lang.TRANSF_FAILED_OPERATION}		|		`,
+		2: "",
+		3: `${lang.TRANSF_DISPUTE_OPERATION}		|		`,
+	};
+	var spanStatus = `<span class="p-0 h6">${
+		status[data.estatusOperacion]
+	}</span>`;
+	var refNumber =
+		data.estatusOperacion == "0" ? data.referencia : data.billnumber;
+	var spanRef =
+		data.estatusOperacion == "2"
+			? `<span class="p-0 h6">${refNumber}</span>`
+			: `<span class="btn btn-small btn-link p-0 h6" data-index="${index}" data-action="showVoucher">${refNumber}</span>`;
+
+	return `<span class="block p-0 h6">${spanStatus}${spanRef}</span>`;
+}
+
 function setHistoryDataTable(data) {
-	var li, className, ref, row;
+	var li, className, mainText, secondaryText, row;
 	historyData = data;
 	$("#movementsList").html("");
 
 	data.forEach((value, index) => {
 		className = `feed-item ${
-			value.estatusOperacion == "1" ? "" : "feed-expense"
+			value.estatusOperacion == "0" || value.estatusOperacion == "2"
+				? "feed-expense"
+				: ""
 		} flex py-2 items-center`;
 		li = $("<li></li>").addClass(className);
-		ref =
-			value.estatusOperacion == "1"
-				? `<span class="block p-0 h6">${lang.TRANSF_FAILED_OPERATION}</span>`
-				: `<span class="btn btn-small btn-link block p-0 h6" data-index="${index}" data-action="showVoucher">
-					${value.referencia}
-				</span>`;
+		mainText = setMainTex(value);
+		secondaryText = setSecondaryText(value, index);
 
 		row = `<div class="flex px-2 flex-column items-center feed-date">
 			<span class="h5">${value.fechaTransferencia}</span>
 		</div>
 		<div class="flex px-2 flex-column mr-auto">
-			<span class="h5 semibold feed-product">
-				${value.beneficiario}${value.concepto != "" ? "		|		" + value.concepto : ""}
-			</span>
-			${ref}
+			${mainText}
+			${secondaryText}
 		</div>
 		<span class="px-2 feed-amount items-center">${numberToCurrency(
-			value.montoTransferencia,
+			value.estatusOperacion == "2"
+				? value.amountfee
+				: value.montoTransferencia,
 			true
 		)}</span>`;
 
@@ -166,4 +196,26 @@ function setHistoryDataTable(data) {
 	});
 
 	$("#historyView #results").fadeIn(700, "linear");
+
+	if ($("#movementsList > li").length > 10) {
+		$("#movementsList").easyPaginate({
+			paginateElement: "li",
+			hashPage: lang.GEN_DATATABLE_PAGE,
+			elementsPerPage: 10,
+			effect: "default",
+			slideOffset: 200,
+			firstButton: true,
+			firstButtonText: lang.GEN_DATATABLE_SFIRST,
+			firstHashText: lang.GEN_DATATABLE_PAGE_FIRST,
+			lastButton: true,
+			lastButtonText: lang.GEN_DATATABLE_SLAST,
+			lastHashText: lang.GEN_DATATABLE_PAGE_LAST,
+			prevButton: true,
+			prevButtonText: lang.SETT_DATATABLE_SPREVIOUS,
+			prevHashText: lang.GEN_DATEPICKER_PREVTEXT,
+			nextButton: true,
+			nextButtonText: lang.SETT_DATATABLE_SNEXT,
+			nextHashText: lang.GEN_DATEPICKER_NEXTTEXT,
+		});
+	}
 }
