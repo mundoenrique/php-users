@@ -88,7 +88,7 @@ if (!function_exists('responseServer')) {
 	}
 }
 
-if (!function_exists('handleResWebService')) {
+if (!function_exists('handleResponseServer')) {
 	function handleResponseServer($webServiceResp) {
 		if (isset($webServiceResp->data->rc)) {
 			$webServiceResp->responseCode = $webServiceResp->data->rc;
