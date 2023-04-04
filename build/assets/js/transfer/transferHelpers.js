@@ -129,17 +129,30 @@ $(function () {
 			modalDestroy(true);
 			$(".nav-config-box").removeClass("no-pointer");
 
-			if (response.code == 0) {
-				transferResult = response.data;
-				getBalance();
-				buildTransferResultModal();
-			} else {
-				appMessages(
-					response.title,
-					response.msg,
-					response.icon,
-					response.modalBtn
-				);
+			switch (response.code) {
+				case 1:
+				case 4:
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+					break;
+				case 2:
+					getBalance();
+					appMessages(
+						response.title,
+						response.msg,
+						response.icon,
+						response.modalBtn
+					);
+					break;
+				default:
+					transferResult = response.data;
+					getBalance();
+					buildTransferResultModal();
+					break;
 			}
 		});
 	});
@@ -441,6 +454,7 @@ function showTransferView() {
 	$(liOptions).removeClass("active");
 	$("#toTransfer").addClass("active no-pointer");
 	$("#manageAffiliateView").hide();
+	$("#historyView").hide();
 	$("#affiliationsView").css("display", "none");
 	$("#toTransferView").show();
 
@@ -806,6 +820,11 @@ function buildVaucherModal() {
 			currentVaucherData.montoTransferencia,
 			true
 		),
+		referencia:
+			currentVaucherData?.estatusOperacion &&
+			currentVaucherData?.estatusOperacion != "0"
+				? currentVaucherData.billnumber
+				: currentVaucherData.referencia,
 	};
 
 	objectResult = setObjectResult[operationType];

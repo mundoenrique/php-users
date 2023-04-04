@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['TRANSF_TO_TRANSFER'] = 'Transferir';
 $lang['TRANSF_MAKE_PAYMENT'] = 'Realizar pago';
 $lang['TRANSF_MANAGE_AFFILIATIONS'] = 'Administrar afiliaciones';
@@ -67,11 +67,15 @@ $lang['TRANSF_SURE_DELETE_AFFILIATE'] = '¿Estás seguro que deseas eliminar el 
 $lang['TRANSF_AFFILIATE_BENEFICIARY'] = 'Afiliar beneficiario';
 $lang['TRANSF_WANT_SAVE_BENEFICIARY'] = '¿Deseas guardar este beneficiario para futuras operaciones?';
 $lang['TRANSF_DATATABLE_SEMPTYTABLE'] = 'No se encontraron resultados.';
-$lang['TRANSF_INCORRECT_EXPIRATION_DATE'] = 'La fecha de vencimiento de la cuenta origen es incorrecta.';
-$lang['TRANSF_SYSTEM_MESSAGE'] = 'No fue posible realizar la operación, por favor comunícate con el centro contacto.';
-$lang['TRANSF_VERIFY_IDENTITY_DOCUMENT'] = 'No fue posible realizar la operación, por favor verifica el documento de identidad.';
-$lang['TRANSF_VERIFY_PHONE_OR_BANK'] = 'No fue posible realizar la operación, por favor verifica el teléfono móvil o el banco seleccionado.';
+$lang['TRANSF_INCORRECT_EXPIRATION_DATE'] = 'La fecha de vencimiento de la tarjeta origen es incorrecta.';
+$lang['TRANSF_CONTACT_CENTER_SYSTEM'] = 'No fue posible realizar la operación, por favor comunícate con el Centro de Contacto 0501-75282-00.';
+$lang['TRANSF_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde.';
+$lang['TRANSF_ID_NUMBER_INCORRECT'] = 'El número del documento de identidad del beneficiario es incorrecto.<br>Verifica los datos y evita cargos innecesarios.';
+$lang['TRANSF_PHONE_NUMBER_INCORRECT'] = 'El número de teléfono del beneficiario es incorrecto.<br>Verifica los datos y evita cargos innecesarios.';
+$lang['TRANSF_CONFIRM_CREDIT_MEMO'] = 'Por favor, confirma si el abono fue recibido en la cuenta destino, de lo contrario, notifícalo al Centro de Contacto 0501-75282-00 indicando este No. de Referencia %s';
 $lang['TRANSF_FAILED_OPERATION'] = 'Fallida';
+$lang['TRANSF_SUCCESSFUL_OPERATION'] = 'Exitosa';
+$lang['TRANSF_DISPUTE_OPERATION'] = 'Disputa';
 $lang['TRANSF_MINIMUM_MAXIMUM_AMOUNT'] = 'El monto mínimo para una operación es de %s y el máximo es de %s';
 $lang['TRANSF_AMOUNT_EXCEEDS_BALANCE'] = 'El monto de la operación excede su saldo disponible.';
 $lang['TRANSF_MONTHLY_MAXIMUM_AMOUNT'] = 'El monto máximo de operaciones mensual es de %s<br>Este mes acumulas %s';

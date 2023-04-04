@@ -83,33 +83,125 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 			case -322:
-			case 13:
-			case 51:
 			case 31267:
+			case 80031:
+			case 80041:
+			case 80042:
+			case 80043:
 			case 201017:
 			case 202017:
 			case 251033:
-			case 201008:
 			case 1887809:
+			case 1888010:
+			case 248:
+			case 80024:
+			case 80025:
+			case 80026:
+			case 80027:
+			case 80028:
+			case 80029:
+			case 80030:
+			case 80032:
+			case 80033:
+			case 80034:
+			case 80035:
+			case 80036:
+			case 80038:
+			case 80039:
+			case 80040:
+			case 80044:
+			case 80045:
+			case 80046:
+			case 80047:
+			case 80048:
+			case 80049:
+			case 80050:
+			case 101000:
+			case 101001:
+			case 101500:
+			case 101501:
+			case 101503:
+			case 101504:
+			case 101505:
+			case 101506:
+			case 101507:
+			case 101508:
+			case 101509:
+			case 102511:
+			case 141128:
+			case 141133:
+			case 164045:
+			case 201008:
+			case 201025:
+			case 201134:
+			case 201149:
+			case 201284:
+			case 203079:
+			case 700700:
+			case 900800:
+			case 900801:
+			case 900802:
+			case 900803:
+			case 900804:
+			case 900805:
+			case 900806:
+			case 900807:
+			case 900900:
+			case 900901:
+			case 900902:
+			case 900905:
+			case 900906:
+			case 900907:
+			case 900908:
+			case 900909:
+			case 900910:
+			case 1010300:
+			case 1802008:
+			case 1817025:
+			case 1850164:
+			case 1875000:
+			case 5203019:
+			case 5203020:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
 				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
-			case 80:
 			case 101042:
-			case 103000:
+			case 169032:
 			case 701114:
 			case 901100:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = lang('TRANSF_VERIFY_IDENTITY_DOCUMENT');
+				$this->response->msg = novoLang(lang('TRANSF_ID_NUMBER_INCORRECT'), [lang('SETT_CURRENCY'), currencyFormat($response->bean->commissionIncorrectData)]);
+				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				$this->response->data = $response;
 				break;
-			case 14:
-			case 56:
+			case 103000:
 			case 101029:
 			case 161632:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = lang('TRANSF_VERIFY_PHONE_OR_BANK');
+				$this->response->msg = novoLang(lang('TRANSF_PHONE_NUMBER_INCORRECT'), [lang('SETT_CURRENCY'), currencyFormat($response->bean->commissionIncorrectData)]);
+				$this->response->code = 2;
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+			case -224:
+			case 999:
+			case -777:
+			case -99:
+			case 1205:
+			case 30002:
+			case 40002:
+			case 40003:
+			case 40004:
+			case 40009:
+			case 80007:
+			case 80022:
+			case 80023:
+			case 80037:
+			case 1850125:
+				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+				$this->response->msg = novoLang(lang('TRANSF_CONFIRM_CREDIT_MEMO'), $response->bean->billNumber);
+				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
 		}
@@ -169,6 +261,55 @@ class Novo_Transfer_Model extends NOVO_Model
 		}
 
 		return $this->responseToTheView('callWs_TransferP2P');
+	}
+	/**
+	 * @info Método para realizar una transferencia crédito inmediato
+	 * @author Jhonatan Llerena
+	 * @date March 8th, 2022
+	 */
+	public function CallWs_TransferP2T_Transfer($dataRequest)
+	{
+		writeLog('INFO', 'Transfer Model: TransferP2T Method Initialized');
+
+		$this->dataAccessLog->modulo = 'Transferencia';
+
+		$this->dataAccessLog->function = 'Transferencia';
+		$this->dataAccessLog->operation = 'Procesar transferencia P2T';
+		$this->dataRequest->idOperation = '9';
+
+		$this->dataRequest->className = 'com.novo.objects.TOs.TransferenciaTarjetahabienteMO';
+		$this->dataRequest->tipoOpe = 'P2T';
+		$this->dataRequest->idUsuario = $this->session->userName;
+		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
+		$this->dataRequest->ctaDestino = $dataRequest->destinationCard;
+		$this->dataRequest->monto = $dataRequest->amount;
+		$this->dataRequest->descripcion = $dataRequest->concept;
+		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
+		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
+		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
+
+		$response = $this->sendToWebServices('callWs_TransferP2T');
+
+		switch ($this->isResponseRc) {
+			case 0:
+				$this->response->code = 0;
+				$this->response->data = $response;
+				$this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
+				break;
+			case -344:
+				$this->response->title = lang('TRANSF_BANK_TRANSFER');
+				$this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+				break;
+			case -322:
+				$this->response->title = lang('TRANSF_TRANSFER_TO_CARD');
+				$this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
+				$this->response->modalBtn['btn1']['action'] = 'destroy';
+		}
+
+		return $this->responseToTheView('callWs_TransferP2T');
 	}
 	/**
 	 * @info Método para obtener el historial de transferencias/pagos realizados
