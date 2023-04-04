@@ -250,7 +250,7 @@ footer.main-footer div:nth-child(1) {
 }
 
 .navbar .navbar-brand {
-padding: 0;
+padding: 1;
 }
 
 .navbar-brand img {
