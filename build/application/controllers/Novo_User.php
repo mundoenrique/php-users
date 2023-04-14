@@ -349,8 +349,12 @@ class Novo_User extends NOVO_Controller {
 		$views = ['staticpages/content-browser'];
 		$this->includeAssets->cssFiles = [
 			"$this->customerStyle/"."$this->customerStyle-browser",
-			"reboot"
+			"reboot",
+			"$this->customerStyle/$this->customerStyle-root",
+			"general-root",
+			"$this->customerStyle/$this->customerStyle-base"
 		];
+
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;
 		$this->render->platform = $messageBrowser->platform;
