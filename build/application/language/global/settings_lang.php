@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_SUPPORT_IE'] = 'OFF';
 $lang['SETT_MAINTENANCE'] = 'OFF';
 $lang['SETT_MAINT_NOTIF'] = 'OFF';
@@ -164,8 +164,8 @@ $lang['SETT_CONFIG_UPLOAD_FILE'] = [
 	'min_size' => 10,
 	'max_size' => 1024,
 	'encrypt_name' => FALSE,
-	'overwrite'=> TRUE,
-	'file_ext_tolower'=> TRUE,
+	'overwrite' => TRUE,
+	'file_ext_tolower' => TRUE,
 ];
 $lang['SETT_TEMPORARY_LOCK_REASON'] = 'OFF';
 $lang['SETT_NO_LINK'] = 'javascript:';
@@ -196,8 +196,8 @@ $lang['SETT_LINK_REPORTS'] = 'reports';
 $lang['SETT_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['SETT_LINK_NOTIFICATIONS'] = 'notifications';
 $lang['SETT_REDIRECT_OPER_KEY'] = [
-	'cardToCard' => $lang['SETT_LINK_BETWEEN_CARDS'] ,
-	'cardToBank' => $lang['SETT_LINK_BANKS'] ,
+	'cardToCard' => $lang['SETT_LINK_BETWEEN_CARDS'],
+	'cardToBank' => $lang['SETT_LINK_BANKS'],
 	'mobilePayment' => $lang['SETT_LINK_MOBILE_PAYMENT'],
 ];
 $lang['SETT_LINK_MFA_APPS'] = [
@@ -230,5 +230,12 @@ $lang['SETT_TRANSFER_DOCUMENT_TYPE'] = [
 	'V' => 'V',
 	'E' => 'E',
 	'P' => 'P',
+];
+$lang['SETT_TRANSFER_DOCUMENT_TYPE_EXTENDED'] = [
+	'V' => 'V',
+	'E' => 'E',
+	'P' => 'P',
+	'J' => 'J',
+	'G' => 'G',
 ];
 $lang['SETT_NUMERIC_DOCUMENT_ID'] = ['CC', 'V', 'E'];
