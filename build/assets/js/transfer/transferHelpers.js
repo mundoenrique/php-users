@@ -61,6 +61,19 @@ $(function () {
 		showTransferView();
 	});
 
+	// Mostrar campo correspondiente a intrumento seleccionado
+	// (Cuenta | Teléfono)
+	$("input[name=instrumentType]").change(function (e) {
+		e.preventDefault();
+		if ($("input[name=instrumentType]:checked").val() == "account") {
+			$("#mobilePhoneField").hide();
+			$("#destinationAccountField").show();
+		} else {
+			$("#destinationAccountField").hide();
+			$("#mobilePhoneField").show();
+		}
+	});
+
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
