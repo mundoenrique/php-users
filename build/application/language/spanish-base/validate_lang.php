@@ -78,3 +78,4 @@ $lang['VALIDATE_ACCOUNT_NUMBER'] = 'Indica un número de cuenta válido.';
 $lang['VALIDATE_ACCOUNT_NUMBER_FORMAT'] = 'Debe ser de 20 números.';
 $lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Ingresa el número de la cuenta destino.';
 $lang['VALIDATE_AMOUNT'] = 'Indica un monto válido';
+$lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Selecciona el instrumento destino.';

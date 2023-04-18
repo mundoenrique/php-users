@@ -70,14 +70,14 @@
 						<?php endif; ?>
 						<?php if ($view == 'cardToBank') : ?>
 							<div class="form-group col-6 col-lg-4">
-								<label class="block"><?= lang('TRANSF_INSTRUMENT_TYPE') ?></label>
+								<label class="block"><?= lang('TRANSF_DESTINATION_INSTRUMENT') ?></label>
 								<div class="flex">
 									<div class="custom-control custom-radio custom-control-inline">
-										<input id="account" class="custom-control-input" type="radio" name="instrumentType" value="account">
+										<input id="account" class="custom-control-input" type="radio" name="destinationInstrument" value="c">
 										<label class="custom-control-label" for="account"><?= lang('TRANSF_ACCOUNT') ?></label>
 									</div>
 									<div class="custom-control custom-radio custom-control-inline">
-										<input id="phone" class="custom-control-input" type="radio" name="instrumentType" value="phone">
+										<input id="phone" class="custom-control-input" type="radio" name="destinationInstrument" value="t">
 										<label class="custom-control-label" for="phone"><?= lang('TRANSF_PHONE') ?></label>
 									</div>
 								</div>

@@ -25,6 +25,7 @@ function validateForms(form) {
 	var phoneMasked = new RegExp(lang.REGEX_PHONE_MASKED, "i");
 	var floatAmount = new RegExp(lang.REGEX_FLOAT_AMOUNT, "i");
 	var transType = new RegExp(lang.REGEX_TRANS_TYPE);
+	var destInstrument = new RegExp(lang.REGEX_DESTINATION_INSTRUMENT);
 	var checkedOption = new RegExp(lang.REGEX_CHECKED);
 	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
@@ -184,6 +185,7 @@ function validateForms(form) {
 			bank: { required: true, requiredSelect: true },
 			beneficiary: { required: true, pattern: alphaName },
 			destinationCard: { required: true, pattern: numeric, maxlength: 16 },
+			destinationInstrument: { required: true, pattern: destInstrument },
 			destinationAccount: {
 				required: dependsDestinationAccount,
 				destinationAccount: {
@@ -363,6 +365,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_CARD_NUMBER,
 				maxlength: lang.VALIDATE_CARD_NUMBER,
 			},
+			destinationInstrument: lang.VALIDATE_BENEFIT,
 			destinationAccount: {
 				required: lang.VALIDATE_DESTINATION_ACCOUNT,
 				destinationAccount: lang.VALIDATE_ACCOUNT_NUMBER,

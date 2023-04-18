@@ -63,9 +63,9 @@ $(function () {
 
 	// Mostrar campo correspondiente a intrumento seleccionado
 	// (Cuenta | Teléfono)
-	$("input[name=instrumentType]").change(function (e) {
+	$("input[name=destinationInstrument]").change(function (e) {
 		e.preventDefault();
-		if ($("input[name=instrumentType]:checked").val() == "account") {
+		if ($("input[name=destinationInstrument]:checked").val() == "c") {
 			$("#mobilePhoneField").hide();
 			$("#destinationAccountField").show();
 		} else {
