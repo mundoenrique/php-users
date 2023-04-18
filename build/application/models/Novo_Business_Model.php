@@ -106,7 +106,7 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 						$cardRecord->productImg = $produtImg;
-						$cardRecord->productImgRev = $cardsRecords->tvirtual ? $produtImgRev : '';
+						$cardRecord->productImgRev = $produtImgRev;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
@@ -446,7 +446,7 @@ class Novo_Business_Model extends NOVO_Model {
 						}
 
 						$cardRecord->productImg = $produtImg;
-						$cardRecord->productImgRev = $cardRecord->isVirtual ? $produtImgRev : '';
+						$cardRecord->productImgRev = $produtImgRev;
 						$brand = normalizeName($cardsRecords->marca);
 						$brand = str_replace('_', '-', $brand);
 						$cardRecord->brand = $brand;
