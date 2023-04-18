@@ -202,7 +202,7 @@ function setAffiliateDataTable(data) {
 			columns = ["NombreCliente", "id_ext_per", "noTarjetaConMascara"];
 			break;
 		case "P2T":
-			columns = ["beneficiario", "banco", "noCuenta"];
+			columns = ["beneficiario", "banco", "noCuentaConMascara"];
 			break;
 		case "PMV":
 			columns = ["beneficiario", "banco", "telefono"];
@@ -212,7 +212,13 @@ function setAffiliateDataTable(data) {
 	data.forEach((value, index) => {
 		row = $("<tr></tr>");
 		columns.forEach((element) => {
-			row.append(`<td>${value[element]}</td>`);
+			if (element == "noCuentaConMascara") {
+				value["telefono"] != ""
+					? row.append(`<td>${value["telefono"]}</td>`)
+					: row.append(`<td>${value[element]}</td>`);
+			} else {
+				row.append(`<td>${value[element]}</td>`);
+			}
 		});
 		tdOptions = `<td class="py-0 px-1 flex justify-center items-center">
 			<button class="btn mx-1 px-0" title="${lang.TRANSF_EDIT}" data-index="${index}" data-action="edit" data-toggle="tooltip">
