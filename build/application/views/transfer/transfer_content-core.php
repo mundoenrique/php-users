@@ -46,7 +46,7 @@
 						<div class="form-group col-6 col-lg-4">
 							<label for="idNumber"><?= lang('GEN_DNI') ?></label>
 							<div class="form-row">
-								<div class="form-group col-6 mb-0">
+								<div class="form-group col-5 mb-0">
 									<select id="typeDocument" class="custom-select form-control" name="typeDocument">
 										<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
 										<?php foreach (lang('SETT_TRANSFER_DOCUMENT_TYPE') as $key => $value) : ?>
@@ -55,7 +55,7 @@
 									</select>
 									<div class="help-block"></div>
 								</div>
-								<div class="form-group col-6 mb-0">
+								<div class="form-group col-7 mb-0">
 									<input id="idNumber" class="form-control" type="text" name="idNumber" value="" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
