@@ -18,6 +18,7 @@ function validateForms(form) {
 	var alphanumunder = new RegExp(lang.REGEX_ALPHANUM_UNDER, "i");
 	var alphanum = new RegExp(lang.REGEX_ALPHANUM, "i");
 	var maxlengthDocId = parseInt(lang.REGEX_MAXLENGTH_DOC_ID);
+	var minlengthDocId = parseInt(lang.REGEX_MINLENGTH_DOC_ID);
 	var userPassword = validatePass;
 	var numeric = new RegExp(lang.REGEX_NUMERIC);
 	var twoFactor = new RegExp(lang.REGEX_TWO_FACTOR);
@@ -25,6 +26,7 @@ function validateForms(form) {
 	var phoneMasked = new RegExp(lang.REGEX_PHONE_MASKED, "i");
 	var floatAmount = new RegExp(lang.REGEX_FLOAT_AMOUNT, "i");
 	var transType = new RegExp(lang.REGEX_TRANS_TYPE);
+	var docType = new RegExp(lang.REGEX_DOC_TYPE);
 	var destInstrument = new RegExp(lang.REGEX_DESTINATION_INSTRUMENT);
 	var checkedOption = new RegExp(lang.REGEX_CHECKED);
 	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
@@ -64,8 +66,9 @@ function validateForms(form) {
 			email: { required: true, pattern: emailValid },
 			idNumber: {
 				required: true,
-				validateDocumentId: true,
-				maxlength: maxlengthDocId,
+				validateIdNumberVE: {
+					param: { minlength: minlengthDocId, maxlength: maxlengthDocId },
+				},
 			},
 			currentPass: { required: true },
 			newPass: { required: true, differs: "#currentPass", validatePass: true },
@@ -136,12 +139,17 @@ function validateForms(form) {
 				required: dependsMobilePhone,
 				pattern: {
 					param: lang.SETT_ACCEPT_MASKED_MOBILE == "OFF" ? phone : phoneMasked,
-					depends: dependsMobilePhone,
+					depends: function (element) {
+						return $(element).val() != "";
+					},
 				},
-				differs: {
-					param: ["#landLine", "#otherPhoneNum"],
-					depends: dependsMobilePhone,
+				exactLength: {
+					param: 11,
+					depends: function (element) {
+						return $(element).val() != "" && mobilePhoneTransfer;
+					},
 				},
+				differs: ["#landLine", "#otherPhoneNum"],
 			},
 			internationalCode: { required: true, pattern: intCode },
 			otherPhoneNum: {
@@ -182,14 +190,22 @@ function validateForms(form) {
 			finalDate: { required: true, pattern: date.dmy },
 			replaceMotSol: { requiredSelect: true },
 			temporaryLockReason: { requiredSelect: true },
-			bank: { required: true, requiredSelect: true },
-			beneficiary: { required: true, pattern: alphaName },
+			bank: {
+				required: true,
+				requiredSelect: true,
+				digits: true,
+				exactLength: 4,
+			},
+			beneficiary: { required: true, pattern: alphaName, minlength: 3 },
 			destinationCard: { required: true, pattern: numeric, maxlength: 16 },
 			destinationInstrument: { required: true, pattern: destInstrument },
 			destinationAccount: {
 				required: dependsDestinationAccount,
 				destinationAccount: {
 					param: { pattern: numeric, length: 20 },
+					depends: dependsDestinationAccount,
+				},
+				accountMatchBank: {
 					depends: dependsDestinationAccount,
 				},
 			},
@@ -213,7 +229,7 @@ function validateForms(form) {
 				fourConsecutivesDigits: true,
 			},
 			generateConfirmPin: { required: true, equalTo: "#generateNewPin" },
-			typeDocument: { requiredSelect: true },
+			typeDocument: { requiredSelect: true, pattern: docType },
 			SEL_A: {
 				required: true,
 				extension: lang.VALIDATE_FILES_EXT,
@@ -258,9 +274,13 @@ function validateForms(form) {
 			},
 			email: lang.VALIDATE_EMAIL,
 			idNumber: {
-				required: lang.VALIDATE_DOCUMENT_ID,
-				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
-				maxlength: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
+				required: lang.VALIDATE_ID_NUMBER,
+				validateIdNumberVE: function () {
+					var typeDoc = form.find("#typeDocument option:selected").val();
+					return typeDoc == "P"
+						? lang.VALIDATE_PASSPORT_FORMAT
+						: lang.VALIDATE_ID_NUMBER_FORMAT;
+				},
 			},
 			currentPass: lang.VALIDATE_CURRENT_PASS.replace("%s", titleCredencial),
 			newPass: {
@@ -333,8 +353,17 @@ function validateForms(form) {
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			mobilePhone: {
-				required: lang.VALIDATE_REQUIRED_PHONE,
-				pattern: lang.VALIDATE_MOBIL_PHONE,
+				required: function () {
+					return mobilePhoneTransfer
+						? lang.VALIDATE_MOBILE_PHONE_TRANSF
+						: lang.VALIDATE_MOBIL_PHONE;
+				},
+				pattern: function () {
+					return mobilePhoneTransfer
+						? lang.VALIDATE_MOBILE_PHONE_TRANSF
+						: lang.VALIDATE_MOBIL_PHONE;
+				},
+				exactLength: lang.VALIDATE_MOBILE_PHONE_TRANSF,
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			internationalCode: lang.VALIDATE_INT_CODE,
@@ -359,16 +388,21 @@ function validateForms(form) {
 			replaceMotSol: lang.VALIDATE_REPLACE_REASON,
 			temporaryLockReason: lang.VALIDATE_TEMPORARY_LOCK_REASON,
 			bank: lang.VALIDATE_BANK,
-			beneficiary: lang.VALIDATE_BENEFIT,
+			beneficiary: {
+				required: lang.VALIDATE_BENEFIT,
+				pattern: lang.VALIDATE_BENEFIT_FORMAT,
+				minlength: lang.VALIDATE_BENEFIT_FORMAT,
+			},
 			destinationCard: {
 				required: lang.VALIDATE_DESTINATION_CARD,
 				pattern: lang.VALIDATE_CARD_NUMBER,
 				maxlength: lang.VALIDATE_CARD_NUMBER,
 			},
-			destinationInstrument: lang.VALIDATE_BENEFIT,
+			destinationInstrument: lang.VALIDATE_DESTINATION_INSTRUMENT,
 			destinationAccount: {
 				required: lang.VALIDATE_DESTINATION_ACCOUNT,
-				destinationAccount: lang.VALIDATE_ACCOUNT_NUMBER,
+				destinationAccount: lang.VALIDATE_DESTINATION_ACCOUNT,
+				accountMatchBank: lang.VALIDATE_ACCOUNT_MATCH_BANK,
 			},
 			beneficiaryEmail: lang.VALIDATE_EMAIL,
 			amount: lang.VALIDATE_AMOUNT,
@@ -518,15 +552,29 @@ function validateForms(form) {
 		return pattern.test(value);
 	};
 
+	$.validator.methods.validateIdNumberVE = function (value, element, param) {
+		var pattern;
+		var min = value.length >= param.minlength;
+		var max = value.length <= param.maxlength;
+		var typeDocument = form.find("#typeDocument option:selected");
+
+		if (typeDocument.length > 0) {
+			pattern = typeDocument.val() == "P" ? alphanum : numeric;
+			return min && max && pattern.test(value);
+		}
+
+		return true;
+	};
+
 	$.validator.methods.destinationAccount = function (value, element, param) {
+		return value.length == param.length && param.pattern.test(value);
+	};
+
+	$.validator.methods.accountMatchBank = function (value, element, param) {
 		var selectedBank = form.find("#bank option:selected");
 		var firstFourDigits = value.substring(0, 4);
 
-		return (
-			value.length == param.length &&
-			param.pattern.test(value) &&
-			firstFourDigits == selectedBank.val()
-		);
+		return firstFourDigits == selectedBank.val();
 	};
 
 	form.validate().resetForm();
@@ -545,5 +593,12 @@ function dependsDestinationAccount(element) {
 		$(element).val() != "" ||
 		form.find("#mobilePhone").length === 0 ||
 		form.find("#mobilePhone").val() === ""
+	);
+}
+
+function mobilePhoneTransfer() {
+	return (
+		$(form).attr("id") == "manageAffiliate" ||
+		$(form).attr("id") == "transferForm"
 	);
 }
