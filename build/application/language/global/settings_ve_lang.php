@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_IP_VERIFY'] = 'OFF';
 $lang['SETT_CURRENCY'] = 'Bs.';
 $lang['SETT_DECIMAL'] = ',';
@@ -13,7 +13,7 @@ $lang['SETT_BTN_LANG'] = 'ON';
 $lang['SETT_TRANSFERS'] = 'ON';
 $lang['SETT_MOBILE_PAYMENT'] = 'ON';
 $lang['SETT_BETWEEN_CARDS'] = 'ON';
-$lang['SETT_BANKS'] = 'OFF';
+$lang['SETT_BANKS'] = 'ON';
 $lang['SETT_SERVICES'] = 'OFF';
 $lang['SETT_CUSTOMER_SUPPORT'] = 'OFF';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
