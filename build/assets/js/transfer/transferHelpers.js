@@ -129,6 +129,12 @@ $(function () {
 			...cardData,
 		};
 
+		if (transferData.hasOwnProperty("instrumento")) {
+			data.instrumento = $("input[name=destinationInstrument]:checked").val();
+		}
+		if (transferData.hasOwnProperty("destinationAccount")) {
+			data.destinationAccount = data.destinationAccount.replace(/-/g, "");
+		}
 		if (currentAffiliaton) {
 			data.idAfiliation = currentAffiliaton.id_afiliacion;
 		}
@@ -342,6 +348,8 @@ $(function () {
 		currentAffiliaton = affiliationsList[value];
 		setFieldNames("transfer");
 	});
+
+	$("input#destinationAccount").mask("0000-0000-0000-0000-0000");
 
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(

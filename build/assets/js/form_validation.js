@@ -28,6 +28,7 @@ function validateForms(form) {
 	var transType = new RegExp(lang.REGEX_TRANS_TYPE);
 	var docType = new RegExp(lang.REGEX_DOC_TYPE);
 	var destInstrument = new RegExp(lang.REGEX_DESTINATION_INSTRUMENT);
+	var destAccount = new RegExp(lang.REGEX_BANK_ACCOUNT_NUMBER);
 	var checkedOption = new RegExp(lang.REGEX_CHECKED);
 	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
@@ -202,7 +203,7 @@ function validateForms(form) {
 			destinationAccount: {
 				required: dependsDestinationAccount,
 				destinationAccount: {
-					param: { pattern: numeric, length: 20 },
+					param: { pattern: destAccount, length: 24 },
 					depends: dependsDestinationAccount,
 				},
 				accountMatchBank: {

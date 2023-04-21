@@ -29,3 +29,4 @@ $lang['REGEX_MAXLENGTH_DOC_ID'] = 14;
 $lang['REGEX_MINLENGTH_DOC_ID'] = 6;
 $lang['REGEX_DOC_TYPE'] = '^[VEPJG]{1}$';
 $lang['REGEX_DESTINATION_INSTRUMENT'] = '^[ct]{1}$';
+$lang['REGEX_BANK_ACCOUNT_NUMBER'] = '^\d{4}-\d{4}-\d{4}-\d{4}-\d{4}$';
