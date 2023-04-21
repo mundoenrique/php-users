@@ -458,11 +458,11 @@ $config = [
 		],
 		[
 			'field' => 'destinationAccount',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'beneficiaryEmail',

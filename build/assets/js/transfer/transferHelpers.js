@@ -125,6 +125,7 @@ $(function () {
 			amount: amount,
 			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
 			idDocument: transferData.typeDocument + transferData.idNumber,
+			instrumento: $("input[name=destinationInstrument]:checked").val(),
 			...cardData,
 		};
 
