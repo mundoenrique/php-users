@@ -201,7 +201,7 @@ function setAffiliateDataTable(data) {
 		case "P2P":
 			columns = ["NombreCliente", "id_ext_per", "noTarjetaConMascara"];
 			break;
-		case "P2T":
+		case "PCI":
 			columns = ["beneficiario", "banco", "noCuentaConMascara"];
 			break;
 		case "PMV":
@@ -255,7 +255,7 @@ function showManageAffiliateView(action) {
 					: lang.TRANSF_EDIT_AFFILIATE_MSG
 			);
 			break;
-		case "P2T":
+		case "PCI":
 			$("#affiliateMessage").text(
 				action == "create"
 					? lang.TRANSF_NEW_AFFILIATE_BANK_MSG

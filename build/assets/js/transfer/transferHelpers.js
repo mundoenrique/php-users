@@ -10,12 +10,12 @@ $(function () {
 	OperationTypeAffiliations = {
 		P2P: "cuentaDestinoPlata",
 		PMV: "pagoMovil",
-		P2T: "creditoInmediato",
+		PCI: "creditoInmediato",
 	};
 	var title = {
 		P2P: lang.TRANSF_TRANSFER_TO_CARD,
 		PMV: lang.GEN_MENU_MOBILE_PAYMENT,
-		P2T: lang.TRANSF_BANK_TRANSFER,
+		PCI: lang.TRANSF_BANK_TRANSFER,
 	};
 	modalTitle = title[operationType];
 
@@ -225,7 +225,7 @@ $(function () {
 				mobilePhone: transferResult.telefonoDestino,
 				beneficiaryEmail: transferResult.email,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: transferResult.nombreBeneficiario,
 				bank: transferResult.bancoDestino,
 				idDocument: transferResult.idExtPer,
@@ -563,7 +563,7 @@ function setFieldNames(operation) {
 				destinationCard: currentAffiliaton.noTarjeta,
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
@@ -591,7 +591,7 @@ function setFieldNames(operation) {
 				destinationCard: currentAffiliaton.noTarjeta,
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
@@ -647,7 +647,7 @@ function buildTransferSummaryModal() {
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			concept: lang.TRANSF_CONCEPT,
 		},
-		P2T: {
+		PCI: {
 			beneficiary: lang.TRANSF_BENEFICIARY,
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
@@ -727,7 +727,7 @@ function buildTransferResultModal() {
 			concept: lang.TRANSF_CONCEPT,
 			date: lang.TRANSF_DATE,
 		},
-		P2T: {
+		PCI: {
 			reference: lang.TRANSF_REFERENCE,
 			beneficiary: lang.TRANSF_BENEFICIARY,
 			bank: lang.TRANSF_BANK,
@@ -806,7 +806,7 @@ function buildVaucherModal() {
 			concepto: lang.TRANSF_CONCEPT,
 			fechaTransferencia: lang.TRANSF_DATE,
 		},
-		P2T: {
+		PCI: {
 			referencia: lang.TRANSF_REFERENCE,
 			beneficiario: lang.TRANSF_BENEFICIARY,
 			banco: lang.TRANSF_BANK,

@@ -318,7 +318,7 @@ $config = [
 	'getAffiliations' => [
 		[
 			'field' => 'operationType',
-			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+			'rules' => 'trim|regex_match[/^(P2P|PCI|PMV)/]|required'
 		],
 		[
 			'field' => 'cardNumber',
@@ -377,7 +377,7 @@ $config = [
 			'rules' => 'trim|numeric'
 		]
 	],
-	'affiliationP2T' => [
+	'affiliationPCI' => [
 		[
 			'field' => 'bank',
 			'rules' => 'required|trim'
@@ -443,7 +443,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
-	'transferP2T' => [
+	'transferPCI' => [
 		[
 			'field' => 'bank',
 			'rules' => 'required|trim'
