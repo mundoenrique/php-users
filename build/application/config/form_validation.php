@@ -466,7 +466,7 @@ $config = [
 		],
 		[
 			'field' => 'beneficiaryEmail',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'amount',

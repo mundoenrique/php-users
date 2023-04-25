@@ -28,7 +28,6 @@ function validateForms(form) {
 	var transType = new RegExp(lang.REGEX_TRANS_TYPE);
 	var docType = new RegExp(lang.REGEX_DOC_TYPE);
 	var destInstrument = new RegExp(lang.REGEX_DESTINATION_INSTRUMENT);
-	var destAccount = new RegExp(lang.REGEX_BANK_ACCOUNT_NUMBER);
 	var checkedOption = new RegExp(lang.REGEX_CHECKED);
 	var titleCredencial = lang.GEN_PASSWORD.toLowerCase();
 	var date = {
@@ -203,11 +202,15 @@ function validateForms(form) {
 			destinationAccount: {
 				required: dependsDestinationAccount,
 				destinationAccount: {
-					param: { pattern: destAccount, length: 24 },
-					depends: dependsDestinationAccount,
+					param: { pattern: numeric, length: 20 },
+					depends: function (element) {
+						return $(element).val() != "";
+					},
 				},
 				accountMatchBank: {
-					depends: dependsDestinationAccount,
+					depends: function (element) {
+						return $(element).val() != "";
+					},
 				},
 			},
 			beneficiaryEmail: { pattern: emailValid },
@@ -568,7 +571,10 @@ function validateForms(form) {
 	};
 
 	$.validator.methods.destinationAccount = function (value, element, param) {
-		return value.length == param.length && param.pattern.test(value);
+		var accountFormat = value.replace(/-/g, "");
+		return (
+			accountFormat.length == param.length && param.pattern.test(accountFormat)
+		);
 	};
 
 	$.validator.methods.accountMatchBank = function (value, element, param) {
@@ -582,19 +588,31 @@ function validateForms(form) {
 }
 
 function dependsMobilePhone(element) {
-	return (
-		$(element).val() != "" ||
-		form.find("#destinationAccount").length === 0 ||
-		form.find("#destinationAccount").val() === ""
-	);
+	var accountField = form.find("#destinationAccount");
+	var instrumentField = form.find("input[name=destinationInstrument]:checked");
+	if (accountField.length > 0) {
+		if (instrumentField.length > 0) {
+			return instrumentField.val() == "t";
+		} else {
+			return accountField.val() == "";
+		}
+	} else {
+		return true;
+	}
 }
 
 function dependsDestinationAccount(element) {
-	return (
-		$(element).val() != "" ||
-		form.find("#mobilePhone").length === 0 ||
-		form.find("#mobilePhone").val() === ""
-	);
+	var phoneField = form.find("#mobilePhone");
+	var instrumentField = form.find("input[name=destinationInstrument]:checked");
+	if (phoneField.length > 0) {
+		if (instrumentField.length > 0) {
+			return instrumentField.val() == "c";
+		} else {
+			return phoneField.val() == "";
+		}
+	} else {
+		return true;
+	}
 }
 
 function mobilePhoneTransfer() {

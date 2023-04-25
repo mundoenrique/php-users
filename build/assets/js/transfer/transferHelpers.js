@@ -769,6 +769,7 @@ function buildTransferResultModal() {
 		amount: lang.SETT_CURRENCY + " " + transferData.amount,
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
+		destinationAccount: transferResult.ctaDestinoConMascara,
 	};
 
 	objectResult = setObjectResult[operationType];
@@ -820,7 +821,7 @@ function buildVaucherModal() {
 			beneficiario: lang.TRANSF_BENEFICIARY,
 			banco: lang.TRANSF_BANK,
 			identificacion: lang.GEN_DNI,
-			cuentaDestino: lang.TRANSF_ACCOUNT_NUMBER,
+			ctaDestino_Mascara: lang.TRANSF_ACCOUNT_NUMBER,
 			montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 			concepto: lang.TRANSF_CONCEPT,
 			fechaTransferencia: lang.TRANSF_DATE,
