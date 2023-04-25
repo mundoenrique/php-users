@@ -136,7 +136,7 @@ $(function () {
 			data.destinationAccount = data.destinationAccount.replace(/-/g, "");
 		}
 		if (currentAffiliaton) {
-			data.idAfiliation = currentAffiliaton.id_afiliacion;
+			data.idAfiliation = currentAffiliaton.idAfilTerceros;
 		}
 
 		insertFormInput(true);

@@ -70,7 +70,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación P2P';
 			$this->dataRequest->idOperation = '041';
-			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+			$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 		} else {
 			$this->dataAccessLog->function = 'Afiliar';
 			$this->dataAccessLog->operation = 'Procesar afiliación P2P';
@@ -177,7 +177,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación PCI';
 			$this->dataRequest->idOperation = '041';
-			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+			$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 		} else {
 			$this->dataAccessLog->function = 'Afiliar';
 			$this->dataAccessLog->operation = 'Procesar afiliación PCI';
@@ -234,7 +234,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '040';
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
-		$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+		$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 
 		$this->sendToWebServices('callWs_DeleteAffiliation');
 

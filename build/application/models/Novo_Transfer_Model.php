@@ -234,7 +234,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->descripcion = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
-		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
+		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
 		$response = $this->sendToWebServices('callWs_TransferP2P');
 
@@ -286,12 +286,12 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->idExtPer = $dataRequest->idDocument;
 		$this->dataRequest->instrumento = $dataRequest->instrumento;
 		$this->dataRequest->ctaDestino = $dataRequest->destinationAccount;
-		$this->dataRequest->telfDestino = $dataRequest->mobilePhone;
+		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
 		$this->dataRequest->monto = $dataRequest->amount;
 		$this->dataRequest->concepto = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
-		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
+		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
 		$response = $this->sendToWebServices('callWs_TransferPCI');
 
