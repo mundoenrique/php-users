@@ -27,5 +27,5 @@ $lang['REGEX_CHECKED'] = '^([0|1])$';
 $lang['REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
 $lang['REGEX_MAXLENGTH_DOC_ID'] = 14;
 $lang['REGEX_MINLENGTH_DOC_ID'] = 6;
-$lang['REGEX_DOC_TYPE'] = '^[VEPJG]{1}$';
+$lang['REGEX_DOC_TYPE'] = '^(CC|PP)$';
 $lang['REGEX_DESTINATION_INSTRUMENT'] = '^[ct]{1}$';
