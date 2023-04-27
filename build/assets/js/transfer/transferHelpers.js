@@ -79,6 +79,7 @@ $(function () {
 		cleanDirectory();
 		resetForms($("#transferForm"));
 		disableAffiliationFields("#transferForm", false);
+		$("transferForm input#idNumber").prop("disabled", true);
 	});
 
 	// Submit en formulario de Transferencia y mostrar el resumen
@@ -418,7 +419,7 @@ function getBanks(operation, action = "") {
 			? currentAffiliaton?.codBanco
 			: "";
 
-	bankField.attr("readonly", true).addClass("bg-tertiary border");
+	bankField.attr("readonly", true).addClass("bg-tertiary border no-pointer");
 	bankField.find("option").remove();
 	bankField.append(
 		currentBank == ""
@@ -446,7 +447,11 @@ function getBanks(operation, action = "") {
 			}
 		}
 
-		bankField.attr("readonly", false).removeClass("bg-tertiary border");
+		if (action != "edit") {
+			bankField
+				.attr("readonly", false)
+				.removeClass("bg-tertiary border no-pointer");
+		}
 	});
 }
 
@@ -541,18 +546,13 @@ function disableAffiliationFields(formID, disabled) {
 		.each(function () {
 			$(this).attr("readonly", disabled);
 			disabled
-				? $(this).addClass("bg-tertiary border")
-				: $(this).removeClass("bg-tertiary border");
+				? $(this).addClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  )
+				: $(this).removeClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  );
 		});
-
-	$("#transferView #bank").attr("readonly", disabled);
-	disableIdNumber($(`${formID} #typeDocument`));
-
-	if (disabled) {
-		$("#transferView #bank").addClass("no-pointer bg-tertiary border");
-	} else {
-		$("#transferView #bank").removeClass("no-pointer bg-tertiary border");
-	}
 }
 
 function setFieldNames(operation) {

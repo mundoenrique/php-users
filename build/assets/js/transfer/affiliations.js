@@ -103,7 +103,7 @@ $(function () {
 
 		who = "Affiliations";
 		where = "DeleteAffiliation";
-		data.idAfiliation = currentAffiliaton.id_afiliacion;
+		data.idAfiliation = currentAffiliaton.idAfilTerceros;
 		data.operationType = operationType;
 
 		$(".nav-config-box").addClass("no-pointer");
@@ -154,7 +154,7 @@ $(function () {
 				data.destinationAccount = data.destinationAccount.replace(/-/g, "");
 			}
 			if ($(this).data("action") == "edit") {
-				data.idAfiliation = currentAffiliaton.id_afiliacion;
+				data.idAfiliation = currentAffiliaton.idAfilTerceros;
 			}
 
 			insertFormInput(true);
@@ -249,7 +249,7 @@ function showManageAffiliateView(action) {
 	$("#affiliateTitle").text(
 		action == "create" ? lang.TRANSF_NEW_AFFILIATE : lang.TRANSF_EDIT_AFFILIATE
 	);
-
+	disableFields("#manageAffiliate", false);
 	switch (operationType) {
 		case "P2P":
 			$("#affiliateMessage").text(
@@ -274,13 +274,29 @@ function showManageAffiliateView(action) {
 			break;
 	}
 
-	if (action == "edit") {
-		setFieldNames("affiliation");
-	}
-
-	disableIdNumber($("#manageAffiliate #typeDocument"));
-
 	if (operationType != "P2P") {
 		getBanks("affiliation", action);
 	}
+
+	if (action == "edit") {
+		setFieldNames("affiliation");
+		disableFields("#manageAffiliate", true);
+	}
+
+	disableIdNumber($("#manageAffiliate #typeDocument"));
+}
+
+function disableFields(formID, disabled) {
+	$(`${formID} input, ${formID} select`)
+		.not("#beneficiary, #mobilePhone, #beneficiaryEmail")
+		.each(function () {
+			$(this).attr("readonly", disabled);
+			disabled
+				? $(this).addClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  )
+				: $(this).removeClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  );
+		});
 }
