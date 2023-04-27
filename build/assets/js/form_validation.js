@@ -143,12 +143,6 @@ function validateForms(form) {
 						return $(element).val() != "";
 					},
 				},
-				exactLength: {
-					param: 11,
-					depends: function (element) {
-						return $(element).val() != "" && mobilePhoneTransfer;
-					},
-				},
 				differs: ["#landLine", "#otherPhoneNum"],
 			},
 			internationalCode: { required: true, pattern: intCode },
@@ -357,17 +351,8 @@ function validateForms(form) {
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			mobilePhone: {
-				required: function () {
-					return mobilePhoneTransfer
-						? lang.VALIDATE_MOBILE_PHONE_TRANSF
-						: lang.VALIDATE_MOBIL_PHONE;
-				},
-				pattern: function () {
-					return mobilePhoneTransfer
-						? lang.VALIDATE_MOBILE_PHONE_TRANSF
-						: lang.VALIDATE_MOBIL_PHONE;
-				},
-				exactLength: lang.VALIDATE_MOBILE_PHONE_TRANSF,
+				required: lang.VALIDATE_MOBIL_PHONE,
+				pattern: lang.VALIDATE_MOBIL_PHONE,
 				differs: lang.VALIDATE_DIFFERS_PHONE,
 			},
 			internationalCode: lang.VALIDATE_INT_CODE,
@@ -585,39 +570,36 @@ function validateForms(form) {
 	};
 
 	form.validate().resetForm();
-}
 
-function dependsMobilePhone(element) {
-	var accountField = form.find("#destinationAccount");
-	var instrumentField = form.find("input[name=destinationInstrument]:checked");
-	if (accountField.length > 0) {
-		if (instrumentField.length > 0) {
-			return instrumentField.val() == "t";
+	function dependsMobilePhone(element) {
+		var accountField = form.find("#destinationAccount");
+		var instrumentField = form.find(
+			"input[name=destinationInstrument]:checked"
+		);
+		if (accountField.length > 0) {
+			if (instrumentField.length > 0) {
+				return instrumentField.val() == "t";
+			} else {
+				return accountField.val() == "";
+			}
 		} else {
-			return accountField.val() == "";
+			return true;
 		}
-	} else {
-		return true;
 	}
-}
 
-function dependsDestinationAccount(element) {
-	var phoneField = form.find("#mobilePhone");
-	var instrumentField = form.find("input[name=destinationInstrument]:checked");
-	if (phoneField.length > 0) {
-		if (instrumentField.length > 0) {
-			return instrumentField.val() == "c";
+	function dependsDestinationAccount(element) {
+		var phoneField = form.find("#mobilePhone");
+		var instrumentField = form.find(
+			"input[name=destinationInstrument]:checked"
+		);
+		if (phoneField.length > 0) {
+			if (instrumentField.length > 0) {
+				return instrumentField.val() == "c";
+			} else {
+				return phoneField.val() == "";
+			}
 		} else {
-			return phoneField.val() == "";
+			return true;
 		}
-	} else {
-		return true;
 	}
-}
-
-function mobilePhoneTransfer() {
-	return (
-		$(form).attr("id") == "manageAffiliate" ||
-		$(form).attr("id") == "transferForm"
-	);
 }

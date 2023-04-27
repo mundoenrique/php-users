@@ -82,4 +82,3 @@ $lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Indica un número de cuenta válido (20
 $lang['VALIDATE_ACCOUNT_MATCH_BANK'] = 'El número de cuenta no corresponde al banco';
 $lang['VALIDATE_AMOUNT'] = 'Indica un monto válido';
 $lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Selecciona el instrumento destino';
-$lang['VALIDATE_MOBILE_PHONE_TRANSF'] = 'Indica un teléfono móvil válido (11 números)';
