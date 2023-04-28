@@ -351,6 +351,7 @@ $(function () {
 	});
 
 	$("input#destinationAccount").mask("0000-0000-0000-0000-0000");
+	$("input#destinationCard").mask("0000-0000-0000-0000");
 
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(

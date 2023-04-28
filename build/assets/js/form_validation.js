@@ -191,7 +191,10 @@ function validateForms(form) {
 				exactLength: 4,
 			},
 			beneficiary: { required: true, pattern: alphaName, minlength: 3 },
-			destinationCard: { required: true, pattern: numeric, maxlength: 16 },
+			destinationCard: {
+				required: true,
+				destinationCard: { pattern: numeric, length: 16 },
+			},
 			destinationInstrument: { required: true, pattern: destInstrument },
 			destinationAccount: {
 				required: dependsDestinationAccount,
@@ -382,11 +385,7 @@ function validateForms(form) {
 				pattern: lang.VALIDATE_BENEFIT_FORMAT,
 				minlength: lang.VALIDATE_BENEFIT_FORMAT,
 			},
-			destinationCard: {
-				required: lang.VALIDATE_DESTINATION_CARD,
-				pattern: lang.VALIDATE_CARD_NUMBER,
-				maxlength: lang.VALIDATE_CARD_NUMBER,
-			},
+			destinationCard: lang.VALIDATE_DESTINATION_CARD,
 			destinationInstrument: lang.VALIDATE_DESTINATION_INSTRUMENT,
 			destinationAccount: {
 				required: lang.VALIDATE_DESTINATION_ACCOUNT,
@@ -556,6 +555,13 @@ function validateForms(form) {
 	};
 
 	$.validator.methods.destinationAccount = function (value, element, param) {
+		var accountFormat = value.replace(/-/g, "");
+		return (
+			accountFormat.length == param.length && param.pattern.test(accountFormat)
+		);
+	};
+
+	$.validator.methods.destinationCard = function (value, element, param) {
 		var accountFormat = value.replace(/-/g, "");
 		return (
 			accountFormat.length == param.length && param.pattern.test(accountFormat)
