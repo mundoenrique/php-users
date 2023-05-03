@@ -65,7 +65,11 @@ $(function () {
 	// (Cuenta | Teléfono)
 	$("input[name=destinationInstrument]").change(function (e) {
 		e.preventDefault();
-		if ($("input[name=destinationInstrument]:checked").val() == "c") {
+		if (!currentAffiliaton) {
+			$("#mobilePhone").val("");
+			$("#destinationAccount").val("");
+		}
+		if ($("#account").is(":checked")) {
 			$("#mobilePhoneField").hide();
 			$("#destinationAccountField").show();
 		} else {
@@ -78,6 +82,7 @@ $(function () {
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
 		resetForms($("#transferForm"));
+		hideDestinationFields();
 		disableAffiliationFields("#transferForm", false);
 		$("transferForm input#idNumber").prop("disabled", true);
 	});
@@ -351,6 +356,8 @@ $(function () {
 		container.find("#directoryValue").val(value);
 
 		currentAffiliaton = affiliationsList[value];
+		resetForms($("#transferForm"));
+		hideDestinationFields();
 		setFieldNames("transfer");
 	});
 
@@ -666,6 +673,7 @@ function buildTransferSummaryModal() {
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
 			destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+			mobilePhone: lang.GEN_PHONE_MOBILE,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			commission: lang.TRANSF_COMMISSION,
 			total: lang.TRANSF_TOTAL,
@@ -693,8 +701,15 @@ function buildTransferSummaryModal() {
 
 	objectSummary = setObjectSummary[operationType];
 	inputModal = $("<div></div>").addClass("flex flex-column");
+	console.log(transferData);
 
 	Object.entries(objectSummary).forEach(([name, text]) => {
+		if (
+			(name == "destinationAccount" && !$("#account").is(":checked")) ||
+			(name == "mobilePhone" && !$("#phone").is(":checked"))
+		) {
+			return;
+		}
 		summaryValue = summaryValueObject[name] ?? transferData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -881,6 +896,11 @@ function cleanDirectory() {
 		.removeClass("no-pointer bg-tertiary border");
 	$("#affiliationList li").removeClass("active");
 	$("#directoryValue, #directory").val("");
+}
+
+function hideDestinationFields() {
+	$("#destinationAccountField").hide();
+	$("#mobilePhoneField").hide();
 }
 
 function numberToCurrency(number, withCurrencySymbol) {
