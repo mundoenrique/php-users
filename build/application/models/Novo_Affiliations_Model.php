@@ -82,7 +82,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->tipoOperacion = 'P2P';
 		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
 		$this->dataRequest->idExtPer = $dataRequest->idDocument;
-		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationCard;
+		$this->dataRequest->ctaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
 		$this->sendToWebServices('callWs_AffiliationP2P');

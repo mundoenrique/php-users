@@ -153,6 +153,9 @@ $(function () {
 			if (data.hasOwnProperty("destinationAccount")) {
 				data.destinationAccount = data.destinationAccount.replace(/-/g, "");
 			}
+			if (data.hasOwnProperty("destinationCard")) {
+				data.destinationCard = data.destinationCard.replace(/-/g, "");
+			}
 			if ($(this).data("action") == "edit") {
 				data.idAfiliation = currentAffiliaton.idAfilTerceros;
 			}

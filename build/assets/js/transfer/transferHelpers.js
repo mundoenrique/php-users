@@ -136,6 +136,9 @@ $(function () {
 		if (transferData.hasOwnProperty("destinationAccount")) {
 			data.destinationAccount = data.destinationAccount.replace(/-/g, "");
 		}
+		if (transferData.hasOwnProperty("destinationCard")) {
+			data.destinationCard = data.destinationCard.replace(/-/g, "");
+		}
 		if (currentAffiliaton) {
 			data.idAfiliation = currentAffiliaton.idAfilTerceros;
 		}
@@ -237,7 +240,8 @@ $(function () {
 				beneficiary: transferResult.nombreBeneficiario,
 				bank: transferResult.bancoDestino,
 				idDocument: transferResult.idExtPer,
-				destinationAccount: transferResult.nroCuentaDestino,
+				destinationAccount: transferResult.ctaDestino,
+				mobilePhone: transferResult.telefonoDestino,
 				beneficiaryEmail: transferResult.email,
 			},
 		};
@@ -711,9 +715,9 @@ function buildTransferResultModal() {
 	var span, resultValue, inputModal, thirdPartyAffiliate;
 
 	thirdPartyAffiliate =
-		operationType == "PMV"
-			? transferResult.dataTransaccion.terceroAfiliado
-			: transferResult.id_afil_terceros != "";
+		operationType == "P2P"
+			? transferResult.idAfilTerceros != ""
+			: transferResult.dataTransaccion.terceroAfiliado;
 
 	modalBtn = {
 		btn1: {
