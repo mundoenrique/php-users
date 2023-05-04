@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$lang['REGEX_DOC_TYPE'] = '^(CC|PP)$';
 $lang['REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
 $lang['REGEX_ONLY_ONE_NUMBER'] = '^[0-9]{1}$';
 $lang['REGEX_ONLY_ONE_LETTER'] = '^[SCV]{1}$';
