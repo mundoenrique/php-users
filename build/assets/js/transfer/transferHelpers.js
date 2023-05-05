@@ -702,7 +702,6 @@ function buildTransferSummaryModal() {
 
 	objectSummary = setObjectSummary[operationType];
 	inputModal = $("<div></div>").addClass("flex flex-column");
-	console.log(transferData);
 
 	Object.entries(objectSummary).forEach(([name, text]) => {
 		if (
@@ -786,7 +785,7 @@ function buildTransferResultModal() {
 		dni:
 			transferResult.idExtPer ||
 			transferData.typeDocument + transferData.idNumber,
-		amount: lang.SETT_CURRENCY + " " + transferData.amount,
+		amount: numberToCurrency(transferResult.monto, true),
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
 		destinationAccount: transferResult.ctaDestinoConMascara,
