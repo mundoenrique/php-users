@@ -147,6 +147,7 @@ $(function () {
 		if (currentAffiliaton) {
 			data.idAfiliation = currentAffiliaton.idAfilTerceros;
 		}
+		transferData = data;
 
 		insertFormInput(true);
 		$(this).html(loader).prop("disabled", true);
@@ -705,8 +706,9 @@ function buildTransferSummaryModal() {
 
 	Object.entries(objectSummary).forEach(([name, text]) => {
 		if (
-			(name == "destinationAccount" && !$("#account").is(":checked")) ||
-			(name == "mobilePhone" && !$("#phone").is(":checked"))
+			operationType == "PCI" &&
+			((name == "destinationAccount" && !$("#account").is(":checked")) ||
+				(name == "mobilePhone" && !$("#phone").is(":checked")))
 		) {
 			return;
 		}
@@ -762,6 +764,7 @@ function buildTransferResultModal() {
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
 			destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+			mobilePhone: lang.GEN_PHONE_MOBILE,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			concept: lang.TRANSF_CONCEPT,
 			date: lang.TRANSF_DATE,
@@ -778,10 +781,7 @@ function buildTransferResultModal() {
 		},
 	};
 	resultValueObject = {
-		reference:
-			operationType == "PMV"
-				? transferResult.dataTransaccion.codConfirmacion
-				: transferResult.dataTransaccion.referencia,
+		reference: getRefNumber(transferResult.dataTransaccion),
 		bank: $("#bank option:selected").text(),
 		dni:
 			transferResult.idExtPer ||
@@ -796,6 +796,13 @@ function buildTransferResultModal() {
 	inputModal = $("<div></div>").addClass("flex flex-column");
 
 	Object.entries(objectResult).forEach(([name, text]) => {
+		if (
+			operationType == "PCI" &&
+			((name == "destinationAccount" && transferData["instrumento"] != "c") ||
+				(name == "mobilePhone" && transferData["instrumento"] != "t"))
+		) {
+			return;
+		}
 		resultValue = resultValueObject[name] ?? transferData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -842,6 +849,7 @@ function buildVaucherModal() {
 			banco: lang.TRANSF_BANK,
 			identificacion: lang.GEN_DNI,
 			ctaDestino_Mascara: lang.TRANSF_ACCOUNT_NUMBER,
+			telefonoDestino: lang.GEN_PHONE_MOBILE,
 			montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 			concepto: lang.TRANSF_CONCEPT,
 			fechaTransferencia: lang.TRANSF_DATE,
@@ -874,6 +882,14 @@ function buildVaucherModal() {
 	inputModal = $("<div></div>").addClass("flex flex-column");
 
 	Object.entries(objectResult).forEach(([name, text]) => {
+		if (
+			operationType == "PCI" &&
+			((name == "ctaDestino_Mascara" &&
+				currentVaucherData["ctaDestino"] == "") ||
+				(name == "telefonoDestino" && currentVaucherData[name] == ""))
+		) {
+			return;
+		}
 		resultValue = resultValueObject[name] ?? currentVaucherData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -887,6 +903,16 @@ function buildVaucherModal() {
 		lang.SETT_ICON_INFO,
 		modalBtn
 	);
+}
+
+function getRefNumber(data) {
+	if (operationType == "P2P") {
+		return data.referencia;
+	} else {
+		return data?.transferenciaRealizada
+			? data.codConfirmacion
+			: data.billnumber;
+	}
 }
 
 function cleanDirectory() {
