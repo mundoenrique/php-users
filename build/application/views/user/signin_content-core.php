@@ -53,7 +53,7 @@
       </div>
     </div>
     <?php endif; ?>
-		<?php if (lang('SETT_SIGNIN_WELCOME_MSG') == 'ON') : ?>
+		<?php if (lang('SETT_SIGNIN_WELCOME_MSG') === 'ON') : ?>
 			<div class="col-12 mt-2 center h6">
 				<p><?= lang('USER_WELCOME_MSG') ?></p>
 			</div>
