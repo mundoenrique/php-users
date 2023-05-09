@@ -4,7 +4,7 @@ $config = [
 	'signin' => [
 		[
 			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ .,+-_&\@\*]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/' . lang('REGEX_ALPHANUM_UNDER') . '/]|required'
 		],
 		[
 			'field' => 'userPass',
