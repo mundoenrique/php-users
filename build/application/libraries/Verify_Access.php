@@ -199,11 +199,11 @@ class Verify_Access
 			case 'getAffiliations':
 			case 'affiliationP2P':
 			case 'affiliationPMV':
-			case 'affiliationP2T':
+			case 'affiliationPCI':
 			case 'deleteAffiliation':
 			case 'changeOperationKey':
 			case 'transferP2P':
-			case 'transferP2T':
+			case 'transferPCI':
 			case 'history':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':

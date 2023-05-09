@@ -234,7 +234,7 @@ class Novo_Transfer_Model extends NOVO_Model
 		$this->dataRequest->descripcion = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
-		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
+		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
 		$response = $this->sendToWebServices('callWs_TransferP2P');
 
@@ -267,30 +267,33 @@ class Novo_Transfer_Model extends NOVO_Model
 	 * @author Jhonatan Llerena
 	 * @date March 8th, 2022
 	 */
-	public function CallWs_TransferP2T_Transfer($dataRequest)
+	public function CallWs_TransferPCI_Transfer($dataRequest)
 	{
-		writeLog('INFO', 'Transfer Model: TransferP2T Method Initialized');
+		writeLog('INFO', 'Transfer Model: TransferPCI Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Transferencia';
 
 		$this->dataAccessLog->function = 'Transferencia';
-		$this->dataAccessLog->operation = 'Procesar transferencia P2T';
-		$this->dataRequest->idOperation = '9';
+		$this->dataAccessLog->operation = 'Procesar transferencia PCI';
+		$this->dataRequest->idOperation = '09';
 
-		$this->dataRequest->className = 'com.novo.objects.TOs.TransferenciaTarjetahabienteMO';
-		$this->dataRequest->tipoOpe = 'P2T';
+		$this->dataRequest->className = 'com.novo.objects.TOs.TransferenciaCreditoInmediatoTO';
+		$this->dataRequest->tipoOperacion = 'PCI';
 		$this->dataRequest->idUsuario = $this->session->userName;
 		$this->dataRequest->ctaOrigen = $dataRequest->cardNumber;
+		$this->dataRequest->bancoDestino = $dataRequest->bank;
 		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
 		$this->dataRequest->idExtPer = $dataRequest->idDocument;
-		$this->dataRequest->ctaDestino = $dataRequest->destinationCard;
+		$this->dataRequest->instrumento = $dataRequest->instrumento;
+		$this->dataRequest->ctaDestino = $dataRequest->destinationAccount;
+		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
 		$this->dataRequest->monto = $dataRequest->amount;
-		$this->dataRequest->descripcion = $dataRequest->concept;
+		$this->dataRequest->concepto = $dataRequest->concept;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 		$this->dataRequest->validacionFechaExp = $dataRequest->expDateCta;
-		$this->dataRequest->id_afil_terceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
+		$this->dataRequest->idAfilTerceros = isset($dataRequest->idAfiliation) ? $dataRequest->idAfiliation : '';
 
-		$response = $this->sendToWebServices('callWs_TransferP2T');
+		$response = $this->sendToWebServices('callWs_TransferPCI');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -309,7 +312,7 @@ class Novo_Transfer_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
-		return $this->responseToTheView('callWs_TransferP2T');
+		return $this->responseToTheView('callWs_TransferPCI');
 	}
 	/**
 	 * @info Método para obtener el historial de transferencias/pagos realizados

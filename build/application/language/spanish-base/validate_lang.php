@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 //VALIDATE FORMS
 $lang['VALIDATE_USERLOGIN'] = '';
 $lang['VALIDATE_USERPASS_REQ'] = 'Ambos campos son requeridos';
@@ -64,17 +64,20 @@ $lang['VALIDATE_POSTAL_CODE'] = 'Indica un código postal válido, mín 2 máx 2
 $lang['VALIDATE_PROTECTION'] = 'Debes leer y aceptar la protección de datos personales.';
 $lang['VALIDATE_CONTRACT'] = 'Debes leer y aceptar el contrato de cuenta dinero electrónico.';
 $lang['VALIDATE_SHORT_PHRASE'] = 'mín 4 máx 25 (letras, números, espacio ().).';
-$lang['VALIDATE_TYPE_DOCUMENT'] = 'Selecciona un tipo de documento válido.';
+$lang['VALIDATE_TYPE_DOCUMENT'] = 'Selecciona un tipo de documento';
 $lang['VALIDATE_NOTIFICATIONS'] = 'Se detectó manipulación del html.';
 $lang['VALIDATE_STATE'] = 'Indica un Estado.';
 $lang['VALIDATE_CITY'] = 'Indica una Ciudad.';
 $lang['VALIDATE_SECTOR'] = 'Indica una Sector.';
 $lang['VALIDATE_INT_CODE'] = 'Indica el código internacional.';
-$lang['VALIDATE_BANK'] = 'Selecciona un banco.';
-$lang['VALIDATE_BENEFIT'] = 'Indica el nombre del beneficiario.';
-$lang['VALIDATE_DESTINATION_CARD'] = 'Ingresa el número de la tarjeta destino.';
-$lang['VALIDATE_CARD_NUMBER'] = 'Indica un número de tarjeta válido.';
-$lang['VALIDATE_ACCOUNT_NUMBER'] = 'Indica un número de cuenta válido.';
-$lang['VALIDATE_ACCOUNT_NUMBER_FORMAT'] = 'Debe ser de 20 números.';
-$lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Ingresa el número de la cuenta destino.';
+$lang['VALIDATE_BANK'] = 'Selecciona un banco';
+$lang['VALIDATE_BENEFIT'] = 'Indica el nombre del beneficiario';
+$lang['VALIDATE_BENEFIT_FORMAT'] = 'Admite mín 3 máx 50 (letras y espacio)';
+$lang['VALIDATE_ID_NUMBER'] = 'Indica el número de documento de identidad';
+$lang['VALIDATE_ID_NUMBER_FORMAT'] = 'Admite mín 6 máx 14 (números)';
+$lang['VALIDATE_PASSPORT_FORMAT'] = 'Admite mín 6 máx 14 (letras y números)';
+$lang['VALIDATE_DESTINATION_CARD'] = 'Indica un número de tarjeta válido (16 números)';
+$lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Indica un número de cuenta válido (20 números)';
+$lang['VALIDATE_ACCOUNT_MATCH_BANK'] = 'El número de cuenta no corresponde al banco';
 $lang['VALIDATE_AMOUNT'] = 'Indica un monto válido';
+$lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Selecciona el instrumento destino';

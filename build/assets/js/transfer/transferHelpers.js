@@ -10,12 +10,12 @@ $(function () {
 	OperationTypeAffiliations = {
 		P2P: "cuentaDestinoPlata",
 		PMV: "pagoMovil",
-		P2T: "creditoInmediato",
+		PCI: "creditoInmediato",
 	};
 	var title = {
 		P2P: lang.TRANSF_TRANSFER_TO_CARD,
 		PMV: lang.GEN_MENU_MOBILE_PAYMENT,
-		P2T: lang.TRANSF_BANK_TRANSFER,
+		PCI: lang.TRANSF_BANK_TRANSFER,
 	};
 	modalTitle = title[operationType];
 
@@ -61,11 +61,30 @@ $(function () {
 		showTransferView();
 	});
 
+	// Mostrar campo correspondiente a intrumento seleccionado
+	// (Cuenta | Teléfono)
+	$("input[name=destinationInstrument]").change(function (e) {
+		e.preventDefault();
+		if (!currentAffiliaton) {
+			$("#mobilePhone").val("");
+			$("#destinationAccount").val("");
+		}
+		if ($("#account").is(":checked")) {
+			$("#mobilePhoneField").hide();
+			$("#destinationAccountField").show();
+		} else {
+			$("#destinationAccountField").hide();
+			$("#mobilePhoneField").show();
+		}
+	});
+
 	// Click en Borrar (form Transferencia|Pago)
 	$("#deleteBtn").on("click", function (e) {
 		cleanDirectory();
 		resetForms($("#transferForm"));
+		hideDestinationFields();
 		disableAffiliationFields("#transferForm", false);
+		$("transferForm input#idNumber").prop("disabled", true);
 	});
 
 	// Submit en formulario de Transferencia y mostrar el resumen
@@ -112,12 +131,23 @@ $(function () {
 			amount: amount,
 			expDateCta: transferData.filterMonth + transferData.filterYear.slice(-2),
 			idDocument: transferData.typeDocument + transferData.idNumber,
+			instrumento: $("input[name=destinationInstrument]:checked").val(),
 			...cardData,
 		};
 
-		if (currentAffiliaton) {
-			data.idAfiliation = currentAffiliaton.id_afiliacion;
+		if (transferData.hasOwnProperty("instrumento")) {
+			data.instrumento = $("input[name=destinationInstrument]:checked").val();
 		}
+		if (transferData.hasOwnProperty("destinationAccount")) {
+			data.destinationAccount = data.destinationAccount.replace(/-/g, "");
+		}
+		if (transferData.hasOwnProperty("destinationCard")) {
+			data.destinationCard = data.destinationCard.replace(/-/g, "");
+		}
+		if (currentAffiliaton) {
+			data.idAfiliation = currentAffiliaton.idAfilTerceros;
+		}
+		transferData = data;
 
 		insertFormInput(true);
 		$(this).html(loader).prop("disabled", true);
@@ -212,11 +242,12 @@ $(function () {
 				mobilePhone: transferResult.telefonoDestino,
 				beneficiaryEmail: transferResult.email,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: transferResult.nombreBeneficiario,
 				bank: transferResult.bancoDestino,
 				idDocument: transferResult.idExtPer,
-				destinationAccount: transferResult.nroCuentaDestino,
+				destinationAccount: transferResult.ctaDestino,
+				mobilePhone: transferResult.telefonoDestino,
 				beneficiaryEmail: transferResult.email,
 			},
 		};
@@ -326,8 +357,13 @@ $(function () {
 		container.find("#directoryValue").val(value);
 
 		currentAffiliaton = affiliationsList[value];
+		resetForms($("#transferForm"));
+		hideDestinationFields();
 		setFieldNames("transfer");
 	});
+
+	$("input#destinationAccount").mask("0000-0000-0000-0000-0000");
+	$("input#destinationCard").mask("0000-0000-0000-0000");
 
 	// Formatea monto de transferencia/pago
 	$("#amount").mask(
@@ -396,7 +432,7 @@ function getBanks(operation, action = "") {
 			? currentAffiliaton?.codBanco
 			: "";
 
-	bankField.attr("readonly", true).addClass("bg-tertiary border");
+	bankField.attr("readonly", true).addClass("bg-tertiary border no-pointer");
 	bankField.find("option").remove();
 	bankField.append(
 		currentBank == ""
@@ -424,7 +460,11 @@ function getBanks(operation, action = "") {
 			}
 		}
 
-		bankField.attr("readonly", false).removeClass("bg-tertiary border");
+		if (action != "edit") {
+			bankField
+				.attr("readonly", false)
+				.removeClass("bg-tertiary border no-pointer");
+		}
 	});
 }
 
@@ -519,18 +559,13 @@ function disableAffiliationFields(formID, disabled) {
 		.each(function () {
 			$(this).attr("readonly", disabled);
 			disabled
-				? $(this).addClass("bg-tertiary border")
-				: $(this).removeClass("bg-tertiary border");
+				? $(this).addClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  )
+				: $(this).removeClass(
+						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
+				  );
 		});
-
-	$("#transferView #bank").attr("readonly", disabled);
-	disableIdNumber($(`${formID} #typeDocument`));
-
-	if (disabled) {
-		$("#transferView #bank").addClass("no-pointer bg-tertiary border");
-	} else {
-		$("#transferView #bank").removeClass("no-pointer bg-tertiary border");
-	}
 }
 
 function setFieldNames(operation) {
@@ -550,7 +585,7 @@ function setFieldNames(operation) {
 				destinationCard: currentAffiliaton.noTarjeta,
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
@@ -578,7 +613,7 @@ function setFieldNames(operation) {
 				destinationCard: currentAffiliaton.noTarjeta,
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
-			P2T: {
+			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
@@ -634,11 +669,12 @@ function buildTransferSummaryModal() {
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			concept: lang.TRANSF_CONCEPT,
 		},
-		P2T: {
+		PCI: {
 			beneficiary: lang.TRANSF_BENEFICIARY,
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
 			destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+			mobilePhone: lang.GEN_PHONE_MOBILE,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			commission: lang.TRANSF_COMMISSION,
 			total: lang.TRANSF_TOTAL,
@@ -668,6 +704,13 @@ function buildTransferSummaryModal() {
 	inputModal = $("<div></div>").addClass("flex flex-column");
 
 	Object.entries(objectSummary).forEach(([name, text]) => {
+		if (
+			operationType == "PCI" &&
+			((name == "destinationAccount" && !$("#account").is(":checked")) ||
+				(name == "mobilePhone" && !$("#phone").is(":checked")))
+		) {
+			return;
+		}
 		summaryValue = summaryValueObject[name] ?? transferData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -688,9 +731,9 @@ function buildTransferResultModal() {
 	var span, resultValue, inputModal, thirdPartyAffiliate;
 
 	thirdPartyAffiliate =
-		operationType == "PMV"
-			? transferResult.dataTransaccion.terceroAfiliado
-			: transferResult.id_afil_terceros != "";
+		operationType == "P2P"
+			? transferResult.idAfilTerceros != ""
+			: transferResult.dataTransaccion.terceroAfiliado;
 
 	modalBtn = {
 		btn1: {
@@ -714,12 +757,13 @@ function buildTransferResultModal() {
 			concept: lang.TRANSF_CONCEPT,
 			date: lang.TRANSF_DATE,
 		},
-		P2T: {
+		PCI: {
 			reference: lang.TRANSF_REFERENCE,
 			beneficiary: lang.TRANSF_BENEFICIARY,
 			bank: lang.TRANSF_BANK,
 			dni: lang.GEN_DNI,
 			destinationAccount: lang.TRANSF_ACCOUNT_NUMBER,
+			mobilePhone: lang.GEN_PHONE_MOBILE,
 			amount: lang.TRANSF_AMOUNT_DETAILS,
 			concept: lang.TRANSF_CONCEPT,
 			date: lang.TRANSF_DATE,
@@ -736,23 +780,28 @@ function buildTransferResultModal() {
 		},
 	};
 	resultValueObject = {
-		reference:
-			operationType == "PMV"
-				? transferResult.dataTransaccion.codConfirmacion
-				: transferResult.dataTransaccion.referencia,
+		reference: getRefNumber(transferResult.dataTransaccion),
 		bank: $("#bank option:selected").text(),
 		dni:
 			transferResult.idExtPer ||
 			transferData.typeDocument + transferData.idNumber,
-		amount: lang.SETT_CURRENCY + " " + transferData.amount,
+		amount: numberToCurrency(transferResult.monto, true),
 		date: transferResult.logAccesoObject.dttimesstamp,
 		destinationCard: transferResult.ctaDestinoConMascara,
+		destinationAccount: transferResult.ctaDestinoConMascara,
 	};
 
 	objectResult = setObjectResult[operationType];
 	inputModal = $("<div></div>").addClass("flex flex-column");
 
 	Object.entries(objectResult).forEach(([name, text]) => {
+		if (
+			operationType == "PCI" &&
+			((name == "destinationAccount" && transferData["instrumento"] != "c") ||
+				(name == "mobilePhone" && transferData["instrumento"] != "t"))
+		) {
+			return;
+		}
 		resultValue = resultValueObject[name] ?? transferData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -793,12 +842,13 @@ function buildVaucherModal() {
 			concepto: lang.TRANSF_CONCEPT,
 			fechaTransferencia: lang.TRANSF_DATE,
 		},
-		P2T: {
+		PCI: {
 			referencia: lang.TRANSF_REFERENCE,
 			beneficiario: lang.TRANSF_BENEFICIARY,
 			banco: lang.TRANSF_BANK,
 			identificacion: lang.GEN_DNI,
-			cuentaDestino: lang.TRANSF_ACCOUNT_NUMBER,
+			ctaDestino_Mascara: lang.TRANSF_ACCOUNT_NUMBER,
+			telefonoDestino: lang.GEN_PHONE_MOBILE,
 			montoTransferencia: lang.TRANSF_AMOUNT_DETAILS,
 			concepto: lang.TRANSF_CONCEPT,
 			fechaTransferencia: lang.TRANSF_DATE,
@@ -831,6 +881,14 @@ function buildVaucherModal() {
 	inputModal = $("<div></div>").addClass("flex flex-column");
 
 	Object.entries(objectResult).forEach(([name, text]) => {
+		if (
+			operationType == "PCI" &&
+			((name == "ctaDestino_Mascara" &&
+				currentVaucherData["ctaDestino"] == "") ||
+				(name == "telefonoDestino" && currentVaucherData[name] == ""))
+		) {
+			return;
+		}
 		resultValue = resultValueObject[name] ?? currentVaucherData[name];
 		span = $("<span></span>")
 			.addClass("list-inline-item")
@@ -846,6 +904,16 @@ function buildVaucherModal() {
 	);
 }
 
+function getRefNumber(data) {
+	if (operationType == "P2P") {
+		return data.referencia;
+	} else {
+		return data?.transferenciaRealizada
+			? data.codConfirmacion
+			: data.billnumber;
+	}
+}
+
 function cleanDirectory() {
 	currentAffiliaton = null;
 	$("#transferView #bank")
@@ -853,6 +921,11 @@ function cleanDirectory() {
 		.removeClass("no-pointer bg-tertiary border");
 	$("#affiliationList li").removeClass("active");
 	$("#directoryValue, #directory").val("");
+}
+
+function hideDestinationFields() {
+	$("#destinationAccountField").hide();
+	$("#mobilePhoneField").hide();
 }
 
 function numberToCurrency(number, withCurrencySymbol) {

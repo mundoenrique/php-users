@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_IP_VERIFY'] = 'OFF';
 $lang['SETT_CURRENCY'] = 'Bs.';
 $lang['SETT_DECIMAL'] = ',';
