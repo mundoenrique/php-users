@@ -32,12 +32,13 @@
 							<input id="email" name="email" class="form-control" type="email" placeholder="<?= lang('GEN_PLACE_HOLDER_EMAIL') ?>" disabled>
 							<div class="help-block"></div>
 						</div>
-						<?php if(lang('SETT_RECOVER_ID_TYPE') == 'ON'): ?>
+						<?php if(lang('SETT_DOC_TYPE') === 'ON'): ?>
 						<div class="form-group col-lg-4">
 							<label for="typeDocument"><?= lang('GEN_TYPE_DOCUMENT') ?></label>
 							<select id="typeDocument" name="typeDocument" class="form-control select-box custom-select flex h6 w-100" disabled autocomplete="off">
-								<?php foreach (lang('USER_RECOVER_DOC_TYPE') AS $key => $value): ?>
-									<option value="<?= $key ?>" <?= $key == '' ? 'selected disabled' : '' ?>><?= $value ?></option>
+								<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
+								<?php foreach ($documentType AS $key => $value): ?>
+									<option value="<?= $key ?>"><?= $value ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div class="help-block"></div>

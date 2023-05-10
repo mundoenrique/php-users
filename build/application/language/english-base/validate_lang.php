@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 //VALIDATE FORMS
 $lang['VALIDATE_USERLOGIN'] = '';
 $lang['VALIDATE_USERPASS_REQ'] = 'Both fields are required';
@@ -64,17 +64,20 @@ $lang['VALIDATE_POSTAL_CODE'] = 'Please provide a valid zip code, min 2 max 20 (
 $lang['VALIDATE_PROTECTION'] = 'You must read and accept the protection of personal data.';
 $lang['VALIDATE_CONTRACT'] = 'You must read and accept the electronic money account agreement.';
 $lang['VALIDATE_SHORT_PHRASE'] = 'Min 4 max 25 (letters, numbers, space ().).';
-$lang['VALIDATE_TYPE_DOCUMENT'] = 'Please select a valid document type.';
+$lang['VALIDATE_TYPE_DOCUMENT'] = 'Select a document type';
 $lang['VALIDATE_NOTIFICATIONS'] = 'Html manipulation detected.';
 $lang['VALIDATE_STATE'] = 'Indicates a State.';
 $lang['VALIDATE_CITY'] = 'Indicates a City.';
 $lang['VALIDATE_SECTOR'] = 'Indicates a Sector.';
 $lang['VALIDATE_INT_CODE'] = 'Indicate the international code.';
-$lang['VALIDATE_BANK'] = 'Select a bank.';
-$lang['VALIDATE_BENEFIT'] = 'Indicates the name of the beneficiary.';
-$lang['VALIDATE_DESTINATION_CARD'] = 'Enter the destination card number.';
-$lang['VALIDATE_CARD_NUMBER'] = 'Indicates a valid card number.';
-$lang['VALIDATE_ACCOUNT_NUMBER'] = 'Please provide a valid account number.';
-$lang['VALIDATE_ACCOUNT_NUMBER_FORMAT'] = 'It must be 20 numbers.';
-$lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Enter the destination account number.';
-$lang['VALIDATE_AMOUNT'] = 'Indicate a valid amount.';
+$lang['VALIDATE_BANK'] = 'Select a bank';
+$lang['VALIDATE_BENEFIT'] = 'Indicates the name of the beneficiary';
+$lang['VALIDATE_BENEFIT_FORMAT'] = 'Supports min 3 max 50 (letters and space)';
+$lang['VALIDATE_ID_NUMBER'] = 'Indicates the identity document number';
+$lang['VALIDATE_ID_NUMBER_FORMAT'] = 'Supports min 6 max 14 (numbers)';
+$lang['VALIDATE_PASSPORT_FORMAT'] = 'Supports min 6 max 14 (letters and numbers)';
+$lang['VALIDATE_DESTINATION_CARD'] = 'Indicates a valid card number (16 digits)';
+$lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Indicates a valid account number (20 digits)';
+$lang['VALIDATE_ACCOUNT_MATCH_BANK'] = 'Account number does not match the bank';
+$lang['VALIDATE_AMOUNT'] = 'Indicate a valid amount';
+$lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Select the destination instrument';

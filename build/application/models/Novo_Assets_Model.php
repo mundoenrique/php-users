@@ -180,14 +180,27 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->pais = 'Global';
 		$this->dataRequest->bean = $this->config->item('customer');
 
-		$response = $this->sendToWebServices('callWs_TypeDocumentList');
+		$this->isResponseRc = 0;
+		$documentType = lang('SETT_DOC_TYPE') === 'ON' ? lang('USER_DOC_TYPE') : [];
+
+		if (lang('SETT_SERV_DOC_TYPE') === 'ON') {
+			$response = $this->sendToWebServices('callWs_TypeDocumentList');
+			$documentType = [];
+		}
 
 		switch ($this->isResponseRc) {
 			case 0:
 				$this->response->code = 0;
-				$this->response->data = $response->tipoDocumento;
+
+				if (isset($response->tipoDocumento) && array_key_first($response->tipoDocumento) === 0) {
+					foreach ($response->tipoDocumento as $value) {
+						$documentType[$value->abreviatura] = ucfirst(mb_strtolower($value->descripcion));
+					}
+				}
 				break;
 		}
+
+		$this->response->data->documentType = $documentType;
 
 		return $this->responseToTheView('callWs_TypeDocumentList');
 	}

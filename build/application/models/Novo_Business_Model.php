@@ -99,10 +99,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
 							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '.svg';
-
-							if (file_exists(assetPath('images/programs/' . $this->customerUri . '/' . lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '_rev.svg'))) {
-								$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '_rev.svg';
-							}
+							$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName] . '_rev.svg';
 						}
 
 						$cardRecord->productImg = $produtImg;
@@ -439,10 +436,7 @@ class Novo_Business_Model extends NOVO_Model {
 
 						if (array_key_exists($produtImgName, lang('IMG_PROGRAM_IMAGES'))) {
 							$produtImg = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'.svg';
-
-							if (file_exists(assetPath('images/programs/'.$this->customerImages.'/'.lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg'))) {
-								$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
-							}
+							$produtImgRev = lang('IMG_PROGRAM_IMAGES')[$produtImgName].'_rev.svg';
 						}
 
 						$cardRecord->productImg = $produtImg;

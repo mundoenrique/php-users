@@ -17,6 +17,9 @@ $lang['TRANSF_EDIT_AFFILIATE_MSG'] = 'Ingrese los datos requeridos a continuaci�
 $lang['TRANSF_AFFILIATE_DIRECTORY'] = 'Directorio de afiliado';
 $lang['TRANSF_BANK'] = 'Banco';
 $lang['TRANSF_BENEFICIARY'] = 'Beneficiario';
+$lang['TRANSF_DESTINATION_INSTRUMENT'] = 'Instrumento destino';
+$lang['TRANSF_ACCOUNT'] = 'Cuenta';
+$lang['TRANSF_PHONE'] = 'Teléfono';
 $lang['TRANSF_NUMBER_PHONE'] = 'Número de teléfono';
 $lang['TRANSF_AMOUNT'] = 'Importe Bs.';
 $lang['TRANSF_CONCEPT'] = 'Concepto';
@@ -42,8 +45,8 @@ y con gusto te ayudaremos.
 ';
 $lang['TRANSF_AUTH_REQUIRED'] = 'Autenticación Requerida';
 $lang['TRANSF_CREATE_OPER_KEY_INFO'] = 'Para realizar transacciones con tus cuentas desde "<strong>%s</strong>" es necesario crear una clave de operaciones. Por favor, completa los campos a continuación para generar esta clave.';
-$lang['TRANSF_CARD'] = 'Transferencias entre tarjetas';
-$lang['TRANSF_ACCOUNT_BANK'] = 'Transferencias entre cuentas bancarias';
+$lang['TRANSF_CARD'] = 'Transferencia entre tarjetas';
+$lang['TRANSF_ACCOUNT_BANK'] = 'Transferencia a cuenta bancaria';
 $lang['TRANSF_DEST_ACCOUNT_NUMBER'] = 'N° de cuenta destino';
 $lang['TRANSF_CREATE_OPER_KEY'] = 'Creación de clave de operaciones';
 $lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirmar clave';

@@ -29,10 +29,10 @@ function setTransferParams(params) {
 
 function validateTransferParams() {
 	if (transferParams.idOperacion !== "P2P") {
-		commission =
-			amount <= transferParams.montoBaseTransferencia
-				? transferParams.montoComision
-				: (amount * transferParams.porcentajeComision) / 100;
+		commission = Math.max(
+			transferParams.montoComision,
+			amount * (transferParams.porcentajeComision / 100)
+		);
 	}
 	totalAmount = amount + commission;
 

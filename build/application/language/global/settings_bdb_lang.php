@@ -15,3 +15,4 @@ $lang['SETT_CONTACTS'] = [
 	'Medellín' => '576 43 30',
 ];
 $lang['SETT_FRANCHISE_LOGO'] = 'OFF';
+$lang['SETT_SERV_DOC_TYPE'] = 'ON';

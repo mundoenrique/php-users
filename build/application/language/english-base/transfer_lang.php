@@ -17,6 +17,9 @@ $lang['TRANSF_EDIT_AFFILIATE_MSG'] = 'Enter the required information below to ed
 $lang['TRANSF_AFFILIATE_DIRECTORY'] = 'Affiliate directory';
 $lang['TRANSF_BANK'] = 'Bank';
 $lang['TRANSF_BENEFICIARY'] = 'Beneficiary';
+$lang['TRANSF_DESTINATION_INSTRUMENT'] = 'Destination instrument';
+$lang['TRANSF_ACCOUNT'] = 'Account';
+$lang['TRANSF_PHONE'] = 'Phone';
 $lang['TRANSF_NUMBER_PHONE'] = 'Phone number';
 $lang['TRANSF_AMOUNT'] = 'Amount Bs.';
 $lang['TRANSF_CONCEPT'] = 'Concept';
@@ -42,8 +45,8 @@ and we will gladly help you.
 ';
 $lang['TRANSF_AUTH_REQUIRED'] = 'Authentication Required';
 $lang['TRANSF_CREATE_OPER_KEY_INFO'] = 'To carry out transactions with your accounts from "<strong>%s</strong>" it is necessary to create an operations key. Please complete the fields below to generate this key.';
-$lang['TRANSF_CARD'] = 'Transfers between cards';
-$lang['TRANSF_ACCOUNT_BANK'] = 'Transfers between bank accounts';
+$lang['TRANSF_CARD'] = 'Transfer between cards';
+$lang['TRANSF_ACCOUNT_BANK'] = 'Bank account transfer';
 $lang['TRANSF_DEST_ACCOUNT_NUMBER'] = 'Destination account number';
 $lang['TRANSF_CREATE_OPER_KEY'] = 'Creation of operations key';
 $lang['TRANSF_CONFIRM_KEY_OPER'] = 'Confirm key';

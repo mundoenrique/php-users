@@ -37,7 +37,7 @@ class Product_Model extends BDB_Model
 				case 0:
 
 					foreach ($response->lista as $key => $row) {
-						$imageNameOfProduct = $this->setNameImageOfProduct($row->nombre_producto, 'images/programs', $this->countryUri);
+						$imageNameOfProduct = $this->setNameImageOfProduct($row->nombre_producto, 'programs', $this->countryUri);
 						$response->lista[$key]->nameImageOfProduct = $imageNameOfProduct;
 					}
 
@@ -283,7 +283,7 @@ class Product_Model extends BDB_Model
 				case 0:
 
 					foreach ($response->cuentaOrigen as $key => $row) {
-						$imageNameOfProduct = $this->setNameImageOfProduct($row->producto, 'images/programs', $this->countryUri);
+						$imageNameOfProduct = $this->setNameImageOfProduct($row->producto, 'programs', $this->countryUri);
 						$response->cuentaOrigen[$key]->nameImageOfProduct = $imageNameOfProduct;
 					}
 
@@ -495,7 +495,7 @@ class Product_Model extends BDB_Model
 			: $imageOfProduct['default'].'.svg';
 
 		$customerUri = $customerUri ? $customerUri.'/' : '';
-		$isFileExists = file_exists(assetPath($folder.'/'.$customerUri.$nameImageOfProduct));
+		$isFileExists = file_exists(assetPath('images/' . $customerUri . '/' . $folder . '/' . $nameImageOfProduct));
 
 		if (!$isFileExists) {
 			$nameImageOfProduct = $imageOfProduct['default'];
