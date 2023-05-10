@@ -70,7 +70,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación P2P';
 			$this->dataRequest->idOperation = '041';
-			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+			$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 		} else {
 			$this->dataAccessLog->function = 'Afiliar';
 			$this->dataAccessLog->operation = 'Procesar afiliación P2P';
@@ -78,10 +78,11 @@ class Novo_Affiliations_Model extends NOVO_Model
 		}
 
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
+		$this->dataRequest->canal = 'CPO';
 		$this->dataRequest->tipoOperacion = 'P2P';
-		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
-		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationCard;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
+		$this->dataRequest->ctaDestino = $dataRequest->destinationCard;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
 		$this->sendToWebServices('callWs_AffiliationP2P');
@@ -122,7 +123,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 			$this->dataAccessLog->function = 'Modificar';
 			$this->dataAccessLog->operation = 'Procesar modificación PMV';
 			$this->dataRequest->idOperation = '041';
-			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+			$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 		} else {
 			$this->dataAccessLog->function = 'Afiliar';
 			$this->dataAccessLog->operation = 'Procesar afiliación PMV';
@@ -132,10 +133,10 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->canal = 'CPO';
 		$this->dataRequest->tipoOperacion = 'PMV';
-		$this->dataRequest->banco = $dataRequest->bank;
-		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
-		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
+		$this->dataRequest->bancoDestino = $dataRequest->bank;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
+		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
 		$this->sendToWebServices('callWs_AffiliationPMV');
@@ -167,33 +168,34 @@ class Novo_Affiliations_Model extends NOVO_Model
 	 * @author Jhonatan Llerena
 	 * @date October 11th, 2022
 	 */
-	public function CallWs_AffiliationP2T_Affiliations($dataRequest)
+	public function CallWs_AffiliationPCI_Affiliations($dataRequest)
 	{
-		writeLog('INFO', 'Affiliations Model: AffiliationP2T Method Initialized');
+		writeLog('INFO', 'Affiliations Model: AffiliationPCI Method Initialized');
 
 		$this->dataAccessLog->modulo = 'Afiliaciones';
 
 		if (isset($dataRequest->idAfiliation)) {
 			$this->dataAccessLog->function = 'Modificar';
-			$this->dataAccessLog->operation = 'Procesar modificación P2T';
+			$this->dataAccessLog->operation = 'Procesar modificación PCI';
 			$this->dataRequest->idOperation = '041';
-			$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+			$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 		} else {
 			$this->dataAccessLog->function = 'Afiliar';
-			$this->dataAccessLog->operation = 'Procesar afiliación P2T';
+			$this->dataAccessLog->operation = 'Procesar afiliación PCI';
 			$this->dataRequest->idOperation = '016';
 		}
 
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
-		$this->dataRequest->tipoOperacion = 'P2T';
-		$this->dataRequest->banco = $dataRequest->bank;
-		$this->dataRequest->beneficiario = $dataRequest->beneficiary;
-		$this->dataRequest->id_ext_per = $dataRequest->idDocument;
-		$this->dataRequest->nroCuentaDestino = $dataRequest->destinationAccount;
-		$this->dataRequest->nro_movil = $dataRequest->mobilePhone;
+		$this->dataRequest->canal = 'CPO';
+		$this->dataRequest->tipoOperacion = 'PCI';
+		$this->dataRequest->bancoDestino = $dataRequest->bank;
+		$this->dataRequest->nombreBeneficiario = $dataRequest->beneficiary;
+		$this->dataRequest->idExtPer = $dataRequest->idDocument;
+		$this->dataRequest->telefonoDestino = $dataRequest->mobilePhone;
+		$this->dataRequest->ctaDestino = $dataRequest->destinationAccount;
 		$this->dataRequest->email = $dataRequest->beneficiaryEmail;
 
-		$this->sendToWebServices('callWs_AffiliationP2T');
+		$this->sendToWebServices('callWs_AffiliationPCI');
 
 		switch ($this->isResponseRc) {
 			case 0:
@@ -215,7 +217,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 		}
 
-		return $this->responseToTheView('callWs_AffiliationP2T');
+		return $this->responseToTheView('callWs_AffiliationPCI');
 	}
 	/**
 	 * @info Método para eliminar una afiliación
@@ -233,7 +235,7 @@ class Novo_Affiliations_Model extends NOVO_Model
 		$this->dataRequest->idOperation = '040';
 		$this->dataRequest->className = 'com.novo.objects.TOs.AfiliacionTarjetasTO';
 		$this->dataRequest->tipoOperacion = $dataRequest->operationType;
-		$this->dataRequest->id_afiliacion = $dataRequest->idAfiliation;
+		$this->dataRequest->idAfilTerceros = $dataRequest->idAfiliation;
 
 		$this->sendToWebServices('callWs_DeleteAffiliation');
 

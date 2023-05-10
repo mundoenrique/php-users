@@ -75,8 +75,16 @@ class Novo_User extends NOVO_Controller {
 			"user/sharedFunctions",
 			"user/userIdentify"
 		);
+
+		$this->modelClass = 'Novo_Assets_Model';
+		$this->modelMethod = 'callWs_TypeDocumentList_User';
+		$documentTypeData = $this->loadModel();
+
+		$this->responseAttr($documentTypeData);
+
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_USER_IDENTIFY');
+		$this->render->documentType = $documentTypeData->data->documentType;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -162,8 +170,15 @@ class Novo_User extends NOVO_Controller {
 			"third_party/additional-methods",
 			"user/accessRecover"
 		);
+		$this->modelClass = 'Novo_Assets_Model';
+		$this->modelMethod = 'callWs_TypeDocumentList_User';
+		$documentTypeData = $this->loadModel();
+
+		$this->responseAttr($documentTypeData);
+
 		$this->render->activeHeader = TRUE;
 		$this->render->titlePage = lang('GEN_MENU_ACCESS_RECOVER');
+		$this->render->documentType = $documentTypeData->data->documentType;
 		$this->views = ['user/'.$view];
 		$this->loadView($view);
 	}
@@ -349,8 +364,12 @@ class Novo_User extends NOVO_Controller {
 		$views = ['staticpages/content-browser'];
 		$this->includeAssets->cssFiles = [
 			"$this->customerStyle/"."$this->customerStyle-browser",
-			"reboot"
+			"reboot",
+			"$this->customerStyle/$this->customerStyle-root",
+			"general-root",
+			"$this->customerStyle/$this->customerStyle-base"
 		];
+
 		$messageBrowser = $this->session->flashdata('messageBrowser');
 		$this->render->activeHeader = TRUE;
 		$this->render->platform = $messageBrowser->platform;

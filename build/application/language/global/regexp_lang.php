@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $lang['REGEX_ONLY_NUMBER'] = '^[0-9]{2,20}$';
 $lang['REGEX_ONLY_ONE_NUMBER'] = '^[0-9]{1}$';
@@ -12,7 +12,7 @@ $lang['REGEX_LONG_PHRASE'] = '^[a-z0-9ñáéíóú ().,:;-]{5,150}$';
 $lang['REGEX_ALPHA_NAME'] = '^[a-zñáéíóú ]{1,50}$';
 $lang['REGEX_ALPHA_LETTER'] = '^[a-zñáéíóú]{4,20}$';
 $lang['REGEX_EMAIL_VALID'] = '^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$';
-$lang['REGEX_ALPHANUM_UNDER'] = '^([\w.\-+&ñÑ .,_\@\* ]+)+$';
+$lang['REGEX_ALPHANUM_UNDER'] = '^[\wñÑ\,\.\-\+\&\@\*\ ]+$';
 $lang['REGEX_ALPHANUM'] = '^[a-z0-9]+$';
 $lang['REGEX_NUMERIC'] = '^[0-9]+$';
 $lang['REGEX_PHONE'] = '^[0-9]{7,15}$';
@@ -26,3 +26,6 @@ $lang['REGEX_TRANS_TYPE'] = '^([-|+])$';
 $lang['REGEX_CHECKED'] = '^([0|1])$';
 $lang['REGEX_INT_CODE'] = '(^[\+]{1})+([0-9]{1,5})$';
 $lang['REGEX_MAXLENGTH_DOC_ID'] = 14;
+$lang['REGEX_MINLENGTH_DOC_ID'] = 6;
+$lang['REGEX_DOC_TYPE'] = '^(CC|PP)$';
+$lang['REGEX_DESTINATION_INSTRUMENT'] = '^[ct]{1}$';

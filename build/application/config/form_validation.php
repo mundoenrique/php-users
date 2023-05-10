@@ -4,7 +4,7 @@ $config = [
 	'signin' => [
 		[
 			'field' => 'userName',
-			'rules' => 'trim|regex_match[/^([\wñÑ .,+-_&\@\*]+)+$/i]|required'
+			'rules' => 'trim|regex_match[/' . lang('REGEX_ALPHANUM_UNDER') . '/]|required'
 		],
 		[
 			'field' => 'userPass',
@@ -318,7 +318,7 @@ $config = [
 	'getAffiliations' => [
 		[
 			'field' => 'operationType',
-			'rules' => 'trim|regex_match[/^(P2P|P2T|PMV)/]|required'
+			'rules' => 'trim|regex_match[/^(P2P|PCI|PMV)/]|required'
 		],
 		[
 			'field' => 'cardNumber',
@@ -377,7 +377,7 @@ $config = [
 			'rules' => 'trim|numeric'
 		]
 	],
-	'affiliationP2T' => [
+	'affiliationPCI' => [
 		[
 			'field' => 'bank',
 			'rules' => 'required|trim'
@@ -443,7 +443,7 @@ $config = [
 			'rules' => 'trim|regex_match[/^[0-9\/]+$/]|required'
 		],
 	],
-	'transferP2T' => [
+	'transferPCI' => [
 		[
 			'field' => 'bank',
 			'rules' => 'required|trim'
@@ -458,15 +458,15 @@ $config = [
 		],
 		[
 			'field' => 'destinationAccount',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'mobilePhone',
-			'rules' => 'required|trim|numeric'
+			'rules' => 'trim|numeric'
 		],
 		[
 			'field' => 'beneficiaryEmail',
-			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]|required'
+			'rules' => 'trim|regex_match[/^([a-zA-Z0-9]+[_.+\-]*)+\@(([a-zA-Z0-9_\-])+\.)+([a-zA-Z0-9]{2,4})+$/]'
 		],
 		[
 			'field' => 'amount',

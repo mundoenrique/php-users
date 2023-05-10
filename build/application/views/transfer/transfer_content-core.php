@@ -46,7 +46,7 @@
 						<div class="form-group col-6 col-lg-4">
 							<label for="idNumber"><?= lang('GEN_DNI') ?></label>
 							<div class="form-row">
-								<div class="form-group col-6 mb-0">
+								<div class="form-group col-5 mb-0">
 									<select id="typeDocument" class="custom-select form-control" name="typeDocument">
 										<option value="" selected disabled><?= lang('GEN_SELECTION') ?></option>
 										<?php foreach (lang('SETT_TRANSFER_DOCUMENT_TYPE') as $key => $value) : ?>
@@ -55,37 +55,60 @@
 									</select>
 									<div class="help-block"></div>
 								</div>
-								<div class="form-group col-6 mb-0">
+								<div class="form-group col-7 mb-0">
 									<input id="idNumber" class="form-control" type="text" name="idNumber" value="" autocomplete="off">
 									<div class="help-block"></div>
 								</div>
 							</div>
 						</div>
-						<?php if ($view != 'mobilePayment') : ?>
+						<?php if ($view == 'cardToCard') : ?>
 							<div class="form-group col-6 col-lg-4">
-								<?php if ($view == 'cardToCard') : ?>
-									<label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
-									<input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
-									<div class="help-block"></div>
-								<?php else : ?>
-									<label for="destinationAccount"><?= LANG('TRANSF_DEST_ACCOUNT_NUMBER') ?></label>
-									<input id="destinationAccount" class="form-control" type="text" name="destinationAccount" autocomplete="off">
-									<div class="help-block"></div>
-								<?php endif; ?>
+								<label for="destinationCard"><?= LANG('TRANSF_DESTINATION_CARD') ?></label>
+								<input id="destinationCard" class="form-control" type="text" name="destinationCard" autocomplete="off">
+								<div class="help-block"></div>
 							</div>
 						<?php endif; ?>
-						<?php if ($view != 'cardToCard') : ?>
-							<div class="form-group col-6 col-lg-4"><label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
+						<?php if ($view == 'cardToBank') : ?>
+							<div class="form-group col-6 col-lg-4">
+								<label class="block"><?= lang('TRANSF_DESTINATION_INSTRUMENT') ?></label>
+								<div class="flex">
+									<div class="custom-control custom-radio custom-control-inline">
+										<input id="account" class="custom-control-input" type="radio" name="destinationInstrument" value="c">
+										<label class="custom-control-label" for="account"><?= lang('TRANSF_ACCOUNT') ?></label>
+									</div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input id="phone" class="custom-control-input" type="radio" name="destinationInstrument" value="t">
+										<label class="custom-control-label" for="phone"><?= lang('TRANSF_PHONE') ?></label>
+									</div>
+								</div>
+								<div class="help-block"></div>
+							</div>
+							<div class="form-group col-6 col-lg-4">
+								<div id="destinationAccountField" class="form-group" style="display:none">
+									<label for="destinationAccount"><?= lang('TRANSF_DEST_ACCOUNT_NUMBER') ?></label>
+									<input id="destinationAccount" class="form-control" type="text" name="destinationAccount" autocomplete="off">
+									<div class="help-block"></div>
+								</div>
+								<div id="mobilePhoneField" class="form-group" style="display:none">
+									<label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
+									<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
+									<div class="help-block"></div>
+								</div>
+							</div>
+						<?php endif; ?>
+						<?php if ($view == 'mobilePayment') : ?>
+							<div class="form-group col-6 col-lg-4">
+								<label for="mobilePhone"><?= lang('GEN_PHONE_MOBILE') ?></label>
 								<input id="mobilePhone" class="form-control" type="text" name="mobilePhone" autocomplete="off">
 								<div class="help-block"></div>
 							</div>
 						<?php endif; ?>
 						<div class="form-group col-6 col-lg-4">
 							<label for="beneficiaryEmail">
-							<?= lang('GEN_EMAIL') ?>
-							<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
-						</label>
-							<input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off" >
+								<?= lang('GEN_EMAIL') ?>
+								<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+							</label>
+							<input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
 						<div class="form-group col-6 col-lg-4">
@@ -95,9 +118,9 @@
 						</div>
 						<div class="form-group col-6 col-lg-4">
 							<label for="concept">
-							<?= lang('TRANSF_CONCEPT') ?>
-							<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
-						</label>
+								<?= lang('TRANSF_CONCEPT') ?>
+								<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+							</label>
 							<input id="concept" name="concept" class="form-control" type="text" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
