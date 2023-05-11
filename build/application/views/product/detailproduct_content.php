@@ -22,7 +22,7 @@
           <div class="product-presentation flex flex-column items-end mr-4">
             <div class="relative">
 							<div class="item-network <?php lang('SETT_FRANCHISE_LOGO') === 'ON' ? strtolower($data['marca']) : '' ?>"></div>
-              <img class="card-image" src="<?= $this->asset->insertFile($data['nameImage'], 'images/programs', $countryUri); ?>" alt="Tarjeta gris">
+              <img class="card-image" src="<?= $this->asset->insertImage($data['nameImage'], $countryUri, 'programs'); ?>" alt="Tarjeta gris">
             </div>
             <div class="flex">
               <?php if ($data['totalProducts'] > 1) : ?>

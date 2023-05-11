@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['SETT_TENANT_PUBLICATION'] = 2022;
-$lang['SETT_RECOVER_ID_TYPE'] = 'ON';
+$lang['SETT_DOC_TYPE'] = 'ON';
+$lang['SETT_SERV_DOC_TYPE'] = 'ON';
 $lang['SETT_VALID_POSITION'] = 'right';
 $lang['SETT_VALIDATE_IP'] = 'OFF';
 $lang['SETT_CARD_COLOR'] = 'text';

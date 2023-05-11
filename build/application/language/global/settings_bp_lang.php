@@ -8,7 +8,6 @@ $lang['SETT_FOOTER_INFO'] = 'OFF';
 $lang['SETT_UPDATE_USER'] = 'OFF';
 $lang['SETT_CONTAC_DATA'] = 'OFF';
 $lang['SETT_OTHER_PHONE'] = 'OFF';
-$lang['SETT_RECOVER_ID_TYPE'] = 'OFF';
 $lang['SETT_ACCEPT_MASKED_MOBILE'] = 'ON';
 $lang['SETT_ACCEPT_MASKED_LANDLINE'] = 'ON';
 $lang['SETT_SECRET_KEY'] = 'ON';

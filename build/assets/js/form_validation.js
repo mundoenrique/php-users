@@ -535,7 +535,7 @@ function validateForms(form) {
 
 		var typeDocument = form.find("#typeDocument option:selected");
 
-		if (lang.SETT_RECOVER_ID_TYPE == "ON" || typeDocument.length > 0) {
+		if (lang.SETT_DOC_TYPE === "ON" || typeDocument.length > 0) {
 			if (lang.SETT_NUMERIC_DOCUMENT_ID.includes(typeDocument.val())) {
 				pattern = numeric;
 			}
