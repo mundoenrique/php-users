@@ -237,3 +237,7 @@ $lang['GEN_TITLE_PASS_FORM'] = [
 	'getOperationKeyForm' => $lang['GEN_KEY'] ,
 	'changeOperKeyForm' => $lang['GEN_KEY'],
 ];
+$lang['GEN_DOC_TYPE'] = [
+	'CC' => 'Citizenship card',
+	'PP' => 'Passport',
+];

@@ -181,7 +181,7 @@ class Novo_Assets_Model extends NOVO_Model {
 		$this->dataRequest->bean = $this->config->item('customer');
 
 		$this->isResponseRc = 0;
-		$documentType = lang('SETT_DOC_TYPE') === 'ON' ? lang('USER_DOC_TYPE') : [];
+		$documentType = lang('SETT_DOC_TYPE') === 'ON' ? lang('GEN_DOC_TYPE') : [];
 
 		if (lang('SETT_SERV_DOC_TYPE') === 'ON') {
 			$response = $this->sendToWebServices('callWs_TypeDocumentList');
@@ -194,7 +194,9 @@ class Novo_Assets_Model extends NOVO_Model {
 
 				if (isset($response->tipoDocumento) && array_key_first($response->tipoDocumento) === 0) {
 					foreach ($response->tipoDocumento as $value) {
-						$documentType[$value->abreviatura] = ucfirst(mb_strtolower($value->descripcion));
+						// $descripton = isset(lang('GEN_DOC_TYPE')[$value->abreviatura]) ? lang('GEN_DOC_TYPE')[$value->abreviatura] : '-----';
+						$descripton = lang('GEN_DOC_TYPE')[$value->abreviatura] ?? '-----';
+						$documentType[$value->abreviatura] = $descripton;
 					}
 				}
 				break;
