@@ -9,3 +9,12 @@ $lang['GEN_CONTACTS_TITLE'] = 'Líneas de atención a nivel nacional';
 $lang['GEN_CONTACTS_CITY'] = 'CIUDAD';
 $lang['GEN_CONTACTS_CONTACT'] = 'CONTACTO';
 $lang['GEN_PERMANENT_LOCK_PRODUCT'] = 'Bloqueo permanente';
+$lang['GEN_DOC_TYPE'] = [
+	'C' => 'Cédula de ciudadanía',
+	'E' => 'Cédula extranjería',
+	'F' => 'Tarjeta extranjería',
+	'N' => 'Nit',
+	'U' => 'Nuip',
+	'P' => 'Pasaporte',
+	'T' => 'Tarjeta Identidad',
+];
