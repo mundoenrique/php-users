@@ -436,10 +436,6 @@ $lang['USER_INVALID_DATE'] = 'It was not possible to validate your data, please 
 $lang['USER_STEP_TITLE_REGISTRY'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP']];
 $lang['USER_STEP_TITLE_REGISTRY_LONG'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_LABOR_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP'], $lang['USER_LEGAL_STEP']];
 $lang['USER_SAVE_BTN_MSG'] = '* By pressing the save button, you will save the steps from 1 to ';
-$lang['USER_DOC_TYPE'] = [
-	'CC' => 'Citizenship card',
-	'PP' => 'Passport',
-];
 $lang['USER_SATISFACTORY_REG'] = 'The registration has been done successfully, for security reasons it is necessary that you log in with your username and password.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'The registration was done; although it was not possible to send the confirmation email. For security reasons it is necessary that you log in with your username and password.';
 $lang['USER_REG_SOME_DATA'] = 'The registration was done; some data was not loaded in its entirety. </br> Please complete them in the <strong>Profile section.</strong>" <br>. For security reasons it is necessary that you log in with your username and password.';
