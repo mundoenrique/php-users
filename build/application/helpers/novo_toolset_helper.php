@@ -86,7 +86,7 @@ if (!function_exists('clearSessionVars')) {
 		$CI =& get_instance();
 
 		if($CI->session->has_userdata('logged') || $CI->session->has_userdata('userId')) {
-			$CI->session->unset_userdata(['logged', 'userId', 'products']);
+			$CI->session->unset_userdata(['logged', 'userName', 'userId', 'products']);
 			$CI->session->sess_destroy();
 		}
 	}
