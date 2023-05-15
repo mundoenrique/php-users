@@ -16,7 +16,7 @@ $lang['SETT_FOTTER_NETWORKS_LINK'] = [
 	'linkedin' => 'https://www.linkedin.com/company/banco-cooperativo-coopcentral',
 ];
 $lang['SETT_CONTACTS'] = [
-	'XXX' => '(XX) XXXX XXXX',
+	'Bogota' => '(601) 419 3358',
 ];
 $lang['SETT_PADDING_LOGO'] = 'OFF';
 $lang['SETT_FRANCHISE_LOGO'] = 'OFF';
