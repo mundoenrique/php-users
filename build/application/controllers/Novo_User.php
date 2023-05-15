@@ -64,6 +64,8 @@ class Novo_User extends NOVO_Controller {
 	{
 		writeLog('INFO', 'User: userIdentify Method Initialized');
 
+		clearSessionsVars();
+
 		languageCookie(BASE_LANGUAGE);
 		$view = 'userIdentify';
 
