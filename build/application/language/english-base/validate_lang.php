@@ -81,3 +81,4 @@ $lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Indicates a valid account number (20 di
 $lang['VALIDATE_ACCOUNT_MATCH_BANK'] = 'Account number does not match the bank';
 $lang['VALIDATE_AMOUNT'] = 'Indicate a valid amount';
 $lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Select the destination instrument';
+$lang['VALIDATE_MAX_NUMBER'] = 'Please do not enter more than %s characters';
