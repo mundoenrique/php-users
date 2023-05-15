@@ -299,12 +299,19 @@ function validateForms(form) {
 			filterYear: lang.VALIDATE_FILTER_YEAR,
 			filterInputYear: lang.VALIDATE_DATE_MY,
 			filterHistoryDate: lang.VALIDATE_DATE_MY,
-			numberCard: lang.VALIDATE_NUMBER_CARD,
+			numberCard: {
+				required: lang.VALIDATE_NUMBER_CARD,
+				pattern: lang.VALIDATE_INVALID_FORMAT
+			},
 			documentId: {
 				required: lang.VALIDATE_DOCUMENT_ID,
 				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
+				maxlength: lang.VALIDATE_MAX_NUMBER.replace("%s", lang.REGEX_MAXLENGTH_DOC_ID)
 			},
-			cardPIN: lang.VALIDATE_CARD_PIN,
+			cardPIN: {
+				required: lang.VALIDATE_CARD_PIN,
+				pattern: lang.VALIDATE_INVALID_FORMAT
+			},
 			codeOTP: {
 				required: lang.VALIDATE_CODE_RECEIVED,
 				pattern: lang.VALIDATE_INVALID_FORMAT,
