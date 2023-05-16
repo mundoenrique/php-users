@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-$dbName = DB_VERIFY ? dbSearch(explode('/', $_SERVER['REQUEST_URI'])[1]) : 'cpo_alpha';
+$dbName = dbSearch(explode('/', $_SERVER['REQUEST_URI'])[1]);
 
 $db['default'] = array(
 	'dsn'	=> '',
