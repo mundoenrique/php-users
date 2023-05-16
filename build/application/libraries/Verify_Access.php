@@ -13,7 +13,7 @@ class Verify_Access
 	{
 		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
@@ -31,8 +31,7 @@ class Verify_Access
 		writeLog('DEBUG', 'VALIDATION FORM ' . $validationMethod . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if (!$result) {
-			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' .
-				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		unset($_POST);
@@ -79,7 +78,7 @@ class Verify_Access
 			$this->CI->session->set_userdata('appUserName', $appUserName);
 		}
 
-		writeLog('DEBUG', 'REQUEST CREATED for ' . $class . ' and method ' . $method . ': '	.
+		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': '	.
 			json_encode($requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $requestServ;
