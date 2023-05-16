@@ -325,8 +325,8 @@ if (!function_exists('uriRedirect')) {
 
 if (! function_exists('tenantSameSettings')) {
 	function tenantSameSettings($customer) {
-		$pattern = ['/bog/'];
-		$replace = ['bdb'];
+		$pattern = ['/bog/', '/per/', '/usd/'];
+		$replace = ['bdb', 'pe', 'us'];
 		$customer = preg_replace($pattern, $replace, $customer);
 
 		return $customer;
