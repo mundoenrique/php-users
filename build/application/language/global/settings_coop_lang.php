@@ -21,4 +21,5 @@ $lang['SETT_CONTACTS'] = [
 $lang['SETT_PADDING_LOGO'] = 'OFF';
 $lang['SETT_FRANCHISE_LOGO'] = 'OFF';
 $lang['SETT_NUMERIC_DOCUMENT_ID'] = ['E','C','F','N','U','T'];
+$lang['SETT_CHECK_NOTI_SMS'] = 'OFF';
 $lang['SETT_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecoverOTP';
