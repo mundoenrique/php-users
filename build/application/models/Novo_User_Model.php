@@ -426,7 +426,7 @@ class Novo_User_Model extends NOVO_Model {
 		];
 		$this->dataRequest->subOpciones = [
 			[
-				'subOpcion' => 'envioEmailProdubancoRecuperacionCpo',
+				'subOpcion' => 'envioEmailRecuperacionCpo',
       	'orden' => '1'
 			]
 		];
