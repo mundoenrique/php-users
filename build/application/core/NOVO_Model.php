@@ -15,7 +15,7 @@ class NOVO_Model extends CI_Model {
 	public $accessLog;
 	public $customer;
 	public $customerUri;
-	public $customerImages;
+	public $customerFiles;
 	public $dataRequest;
 	public $userName;
 	public $keyId;
@@ -31,7 +31,7 @@ class NOVO_Model extends CI_Model {
 		$this->dataAccessLog = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
 		$this->customerUri = $this->session->customerUri ?? $this->config->item('customer_uri');
-		$this->customerImages = $this->config->item('customer_images');
+		$this->customerFiles = $this->config->item('customer_files');
 		$this->dataRequest = new stdClass();
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
