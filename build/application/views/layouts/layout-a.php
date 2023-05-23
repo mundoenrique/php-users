@@ -12,7 +12,7 @@ if(isset($header)){
   <?php if(isset($sidebarActive) && $sidebarActive){?>
 	<?php if($skin == 'pichincha'): ?>
 		<center class="margin-bottom">
-			<img src="<?= insertFile('logo-pichincha-azul.png'); ?>" alt="Banco PICHINCHA">
+			<img src="<?= insertFile('logo-pichincha-azul.png', 'images', 'bp'); ?>" alt="Banco PICHINCHA">
 		</center>
 		<h1 class="welcome-title-bp"><?= lang('WELCOME_TITLE'); ?></h1>
 	<?php endif; ?>

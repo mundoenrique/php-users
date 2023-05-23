@@ -18,7 +18,7 @@
                 <?php else : ?>
                 <img
 									class="card-image"
-									src="<?= $this->asset->insertImage($productImg, $customerImages, 'programs'); ?>"
+									src="<?= $this->asset->insertFile($productImg, 'images', $customerFiles, 'programs'); ?>"
 									alt="<?= $productName; ?>"
 								>
                 <?php endif; ?>

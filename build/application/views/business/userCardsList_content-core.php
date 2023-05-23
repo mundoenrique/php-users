@@ -24,7 +24,7 @@
       <div class="dashboard-item p-1 mx-1 mb-1 get-detail big-modal">
         <img
 					class="item-img"
-					src="<?= $this->asset->insertImage($cards->productImg, $customerImages, 'programs'); ?>"
+					src="<?= $this->asset->insertFile($cards->productImg, 'images', $customerFiles, 'programs'); ?>"
 					alt="<?= $cards->productName ?>"
 				/>
         <div class="item-info <?= lang('SETT_FRANCHISE_LOGO') === 'ON' ? $cards->brand : ''?> p-2 h5 bg-white">
