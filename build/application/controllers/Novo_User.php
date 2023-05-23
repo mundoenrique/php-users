@@ -30,9 +30,7 @@ class Novo_User extends NOVO_Controller {
 			exit();
 		}
 
-		if ($this->session->has_userdata('userId')) {
-			clearSessionsVars();
-		}
+		clearSessionsVars();
 
 		array_push(
 			$this->includeAssets->jsFiles,

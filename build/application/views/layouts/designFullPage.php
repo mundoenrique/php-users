@@ -16,13 +16,14 @@
 <body>
 
 	<?php
-		if($module !== 'login'){
+		if($module !== 'login') {
 	?>
 
 		<header class="main-head">
 			<nav class="navbar navbar-expand-lg flex-auto bg-primary">
-				<a class="navbar-brand" href="<?= base_url($rootHome);?>"><img src="<?= $this->asset->insertFile('img-logo.svg','img',$countryUri); ?>" alt="Logo Brand"></a>
-
+				<a class="navbar-brand" href="<?= base_url($rootHome);?>">
+					<img src="<?= $this->asset->insertFile('img-logo.svg', 'img', $countryUri); ?>" alt="Logo Brand">
+				</a>
 				<?php
 					if ($logged){
 				?>

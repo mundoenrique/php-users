@@ -14,7 +14,7 @@ class NOVO_Controller extends CI_Controller {
 	private $ValidateBrowser;
 	protected $customerUri;
 	protected $customerLang;
-	protected $customerImages;
+	protected $customerFiles;
 	protected $customerStyle;
 	protected $fileLanguage;
 	protected $controllerClass;
@@ -44,7 +44,7 @@ class NOVO_Controller extends CI_Controller {
 		$this->customerUri = $customerUri;
 		$this->customerLang = $customerUri;
 		$this->customerStyle = $customerUri;
-		$this->customerImages = $customerUri;
+		$this->customerFiles = $customerUri;
 		$this->fileLanguage = lcfirst(str_replace('Novo_', '', $class));
 		$this->controllerClass = $class;
 		$this->controllerMethod = $method;
@@ -91,7 +91,7 @@ class NOVO_Controller extends CI_Controller {
 			$this->customerUri = $this->config->item('customer_uri');
 			$this->customerLang = $this->config->item('customer_lang');
 			$this->customerStyle = $this->config->item('customer_style');
-			$this->customerImages = $this->config->item('customer_images');
+			$this->customerFiles = $this->config->item('customer_files');
 			LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
 			if ($this->controllerMethod !== 'suggestion') {
@@ -164,10 +164,10 @@ class NOVO_Controller extends CI_Controller {
 		}
 
 		if ($auth) {
-			$this->render->favicon = lang('IMG_FAVICON');
-			$this->render->ext = lang('IMG_FAVICON_EXT');
+			$this->render->favicon = lang('IMG_FAVICON') . '.' . lang('IMG_FAVICON_EXT');
+			$this->render->faviconExt = lang('IMG_FAVICON_EXT');
 			$this->render->customerUri = $this->customerUri;
-			$this->render->customerImages = $this->customerImages;
+			$this->render->customerFiles = $this->customerFiles;
 			$this->render->logged = $this->session->has_userdata('logged');
 			$this->render->userId = $this->session->has_userdata('userId');
 			$this->render->fullName = $this->session->fullName;
@@ -193,13 +193,6 @@ class NOVO_Controller extends CI_Controller {
 				"reboot",
 				"$this->customerStyle/$this->customerStyle-base"
 			];
-
-			if (gettype($this->ValidateBrowser) !== 'boolean') {
-				array_push(
-					$this->includeAssets->cssFiles,
-					"$this->customerUri/$this->customerUri-$this->ValidateBrowser-base"
-				);
-			}
 
 			$this->includeAssets->jsFiles = [
 				"third_party/jquery-3.6.0",

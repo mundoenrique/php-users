@@ -18,5 +18,5 @@ $lang['SETT_BANKS'] = 'OFF';
 $lang['SETT_SERVICES'] = 'OFF';
 $lang['SETT_CUSTOMER_SUPPORT'] = 'OFF';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
-$lang['SETT_NUMERIC_DOCUMENT_ID'] = ['CC', 'V', 'E'];
+$lang['SETT_NUMERIC_DOCUMENT_ID'] = ['V', 'E', 'J', 'G'];
 
