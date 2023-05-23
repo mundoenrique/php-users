@@ -84,8 +84,10 @@ if(!function_exists('dbSearch')) {
 if (!function_exists('clearSessionsVars')) {
 	function clearSessionsVars() {
 		$CI =& get_instance();
+		$isLogged = $CI->session->has_userdata('logged');
+		$isUserId = $CI->session->has_userdata('userId');
 
-		if($CI->session->has_userdata('logged') || $CI->session->has_userdata('userId')) {
+		if($isLogged || $isUserId) {
 			$CI->session->unset_userdata(['logged', 'userId', 'products']);
 			$CI->session->sess_destroy();
 		}

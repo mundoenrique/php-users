@@ -47,9 +47,6 @@ class Verify_Access {
 		writeLog('INFO', 'Verify_Access: createRequest method initialized');
 
 		$requestServ = new stdClass();
-		$arrAppUserName = explode("-", $this->CI->session->appUserName);
-		$appUserName = $arrAppUserName[1];
-		$logUsername = '';
 
 		foreach ($_POST as $key => $value) {
 			switch ($key) {
@@ -60,21 +57,6 @@ class Verify_Access {
 				default:
 					$requestServ->$key = $value;
 			}
-		}
-
-		if ($this->CI->session->has_userdata('userName')) {
-			$logUsername = $this->CI->session->userName;
-		} elseif (isset($requestServ->userName)) {
-			$logUsername = mb_strtoupper($requestServ->userName);
-		} elseif (isset($requestServ->idNumber)) {
-			$logUsername = mb_strtoupper($requestServ->idNumber);
-		} elseif (isset($requestServ->documentId)) {
-			$logUsername = mb_strtoupper($requestServ->documentId);
-		}
-
-		if ($appUserName !== $logUsername) {
-			$appUserName = $arrAppUserName[0] . '-' . $logUsername;
-			$this->CI->session->set_userdata('appUserName', $appUserName);
 		}
 
 		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': '	.
