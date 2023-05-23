@@ -194,13 +194,6 @@ class NOVO_Controller extends CI_Controller {
 				"$this->customerStyle/$this->customerStyle-base"
 			];
 
-			if (gettype($this->ValidateBrowser) !== 'boolean') {
-				array_push(
-					$this->includeAssets->cssFiles,
-					"$this->customerUri/$this->customerUri-$this->ValidateBrowser-base"
-				);
-			}
-
 			$this->includeAssets->jsFiles = [
 				"third_party/jquery-3.6.0",
 				"third_party/jquery-ui-1.13.1",

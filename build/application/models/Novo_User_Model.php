@@ -1538,6 +1538,7 @@ class Novo_User_Model extends NOVO_Model {
 		writeLog('INFO', 'User Model: FinishSession Method Initialized');
 
 		$userName = $dataRequest ? mb_strtoupper($dataRequest->userName) : $this->session->userName;
+
 		$this->dataAccessLog->userName = $userName;
 		$this->dataAccessLog->modulo = 'Usuario';
 		$this->dataAccessLog->function = 'Salir del sistema';
@@ -1547,13 +1548,12 @@ class Novo_User_Model extends NOVO_Model {
 		$this->dataRequest->className = 'com.novo.objects.TOs.UsuarioTO';
 		$this->dataRequest->userName = $userName;
 
-		if ($this->session->logged) {
-			$response = $this->sendToWebServices('callWs_FinishSession');
-		}
+		$response = $this->sendToWebServices('callWs_FinishSession');
 
 		$this->response->code = 0;
 		$this->response->msg = lang('GEN_BTN_ACCEPT');
 		$this->response->data = FALSE;
+
 		clearSessionsVars();
 
 		return $this->responseToTheView('callWs_FinishSession');

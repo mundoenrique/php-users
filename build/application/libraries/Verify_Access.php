@@ -5,8 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date May 17th, 2020
  */
-class Verify_Access
-{
+class Verify_Access {
 	private $CI;
 
 	public function __construct()

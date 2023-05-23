@@ -30,7 +30,7 @@ class NOVO_Model extends CI_Model {
 
 		$this->dataAccessLog = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
-		$this->customerUri = $this->session->customerUri;
+		$this->customerUri = $this->session->customerUri ?? $this->config->item('customer_uri');
 		$this->customerImages = $this->config->item('customer_images');
 		$this->dataRequest = new stdClass();
 		$this->userName = $this->session->userName;

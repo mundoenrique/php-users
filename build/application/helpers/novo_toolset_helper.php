@@ -81,7 +81,7 @@ if(!function_exists('dbSearch')) {
 	}
 }
 
-if (!function_exists('clearSessionVars')) {
+if (!function_exists('clearSessionsVars')) {
 	function clearSessionsVars() {
 		$CI =& get_instance();
 
