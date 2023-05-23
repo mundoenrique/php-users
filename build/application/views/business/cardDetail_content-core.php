@@ -169,7 +169,11 @@
           </div>
           <div class="flex px-2 flex-column mr-auto">
             <span class="h5 semibold feed-product"><?= $moves->desc; ?></span>
-            <span class="h6 feed-metadata"><?= $moves->ref; ?></span>
+            <span class="h6 feed-metadata"><?= $moves->ref; ?>
+							<?php if ( $moves->estadoTransaccion !== '') : ?>
+								/ <?= $moves->estadoTransaccion; ?>
+							<?php endif; ?>
+						</span>
           </div>
           <span class="px-2 feed-amount items-center"><?= $moves->sign . ' ' . $moves->amount; ?></span>
         </li>
