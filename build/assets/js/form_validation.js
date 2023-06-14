@@ -66,7 +66,7 @@ function validateForms(form) {
 			email: { required: true, pattern: emailValid },
 			idNumber: {
 				required: true,
-				validateIdNumberVE: {
+				validateDocumentId: {
 					param: { minlength: minlengthDocId, maxlength: maxlengthDocId },
 				},
 			},
@@ -276,11 +276,11 @@ function validateForms(form) {
 			email: lang.VALIDATE_EMAIL,
 			idNumber: {
 				required: lang.VALIDATE_ID_NUMBER,
-				validateIdNumberVE: function () {
+				validateDocumentId: function () {
 					var typeDoc = form.find("#typeDocument option:selected").val();
-					return typeDoc == "P"
-						? lang.VALIDATE_PASSPORT_FORMAT
-						: lang.VALIDATE_ID_NUMBER_FORMAT;
+					return lang.SETT_NUMERIC_DOCUMENT_ID.includes(typeDoc)
+						? lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID
+						: lang.VALIDATE_ID_NUMBER_FORMAT_LETTERS;
 				},
 			},
 			currentPass: lang.VALIDATE_CURRENT_PASS.replace("%s", titleCredencial),
@@ -299,12 +299,19 @@ function validateForms(form) {
 			filterYear: lang.VALIDATE_FILTER_YEAR,
 			filterInputYear: lang.VALIDATE_DATE_MY,
 			filterHistoryDate: lang.VALIDATE_DATE_MY,
-			numberCard: lang.VALIDATE_NUMBER_CARD,
+			numberCard: {
+				required: lang.VALIDATE_NUMBER_CARD,
+				pattern: lang.VALIDATE_INVALID_FORMAT
+			},
 			documentId: {
 				required: lang.VALIDATE_DOCUMENT_ID,
 				validateDocumentId: lang.VALIDATE_INVALID_FORMAT_DOCUMENT_ID,
+				maxlength: lang.VALIDATE_MAX_NUMBER.replace("%s", lang.REGEX_MAXLENGTH_DOC_ID)
 			},
-			cardPIN: lang.VALIDATE_CARD_PIN,
+			cardPIN: {
+				required: lang.VALIDATE_CARD_PIN,
+				pattern: lang.VALIDATE_INVALID_FORMAT
+			},
 			codeOTP: {
 				required: lang.VALIDATE_CODE_RECEIVED,
 				pattern: lang.VALIDATE_INVALID_FORMAT,
@@ -530,6 +537,9 @@ function validateForms(form) {
 
 	$.validator.methods.validateDocumentId = function (value, element, param) {
 		var pattern = alphanum;
+		var min = param.minlength ? value.length >= param.minlength : true;
+		var max = param.minlength ? value.length <= param.maxlength : true;
+
 		var typeDocument = form.find("#typeDocument option:selected");
 
 		if (lang.SETT_DOC_TYPE === "ON" || typeDocument.length > 0) {
@@ -538,7 +548,7 @@ function validateForms(form) {
 			}
 		}
 
-		return pattern.test(value);
+		return min && max && pattern.test(value);
 	};
 
 	$.validator.methods.validateIdNumberVE = function (value, element, param) {

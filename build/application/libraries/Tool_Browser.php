@@ -33,8 +33,7 @@ class Tool_Browser {
 				'Firefox' => 29,
 				'Opera' => 34,
 				'Safari' => 9,
-				'Edge' => 13,
-				'Internet Explorer' => 11
+				'Edge' => 13
 			];
 
 			$browser = $this->CI->agent->browser();

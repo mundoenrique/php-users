@@ -171,7 +171,7 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 701114:
 			case 901100:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = novoLang(lang('TRANSF_ID_NUMBER_INCORRECT'), [lang('SETT_CURRENCY'), currencyFormat($response->bean->commissionIncorrectData)]);
+				$this->response->msg = lang('TRANSF_ID_NUMBER_INCORRECT');
 				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				$this->response->data = $response;
@@ -180,7 +180,7 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 101029:
 			case 161632:
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = novoLang(lang('TRANSF_PHONE_NUMBER_INCORRECT'), [lang('SETT_CURRENCY'), currencyFormat($response->bean->commissionIncorrectData)]);
+				$this->response->msg = lang('TRANSF_PHONE_NUMBER_INCORRECT');
 				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;

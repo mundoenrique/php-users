@@ -44,7 +44,7 @@ $extension = $skin != "pichincha" ? ".png": ".ico";
   <header id="head">
     <div id="head-wrapper">
 			<?php if($skin == 'pichincha'): ?>
-			<img class="img-header" src="<?= insertFile('logo-pichincha-azul.png'); ?>" alt="Banco PICHINCHA">
+			<img class="img-header" src="<?= insertFile('logo-pichincha-azul.png', 'images', 'bp'); ?>" alt="Banco PICHINCHA">
 			<?php endif; ?>
       <a id="<?= ($skin === 'latodo' || $skin === 'pichincha') ? 'brand-id' : 'brand-app' ?>" rel="start">
       </a>

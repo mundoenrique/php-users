@@ -7,8 +7,8 @@
 		<nav class="navbar navbar-expand-lg flex-auto <?= lang('SETT_PADDING_LOGO') === 'ON' ? ' py-0' : '' ?>">
 			<?php endif; ?>
 			<a class="navbar-brand">
-				<img src="<?= $this->asset->insertImage(lang('IMG_LOGO_HEADER'), $customerImages); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
-				<?php if(lang('SETT_HEADER_BORDER') == 'ON'):?>
+				<img src="<?= $this->asset->insertFile(lang('IMG_LOGO_HEADER'), 'images', $customerFiles); ?>" alt=<?= lang('GEN_ALTERNATIVE_TEXT'); ?>>
+				<?php if(lang('SETT_HEADER_BORDER') === 'ON'):?>
 				<span class="vertical-line mx-1"></span>
 				<span class="h3 white"><?= lang('GEN_TITLE_NAVBAR') ?></span>
 				<?php endif; ?>

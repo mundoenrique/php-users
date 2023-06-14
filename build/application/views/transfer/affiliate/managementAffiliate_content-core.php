@@ -61,7 +61,10 @@
 							</div>
 						<?php endif; ?>
 						<div class="form-group col-6 col-lg-4">
-							<label for="beneficiaryEmail"><?= lang('GEN_EMAIL') ?></label>
+							<label for="beneficiaryEmail">
+								<?= lang('GEN_EMAIL') ?>
+								<span class="regular"><?= lang('GEN_OPTIONAL_FIELD') ?></span>
+							</label>
 							<input id="beneficiaryEmail" class="form-control" type="text" name="beneficiaryEmail" autocomplete="off">
 							<div class="help-block"></div>
 						</div>
