@@ -5,7 +5,7 @@
       <div class="flex flex-column items-center z1 h-100">
         <img
 					class="logo-banco mb-2"
-					src="<?= $this->asset->insertImage(lang('IMG_SIGNIN_LOGO_WIDGET'), $customerImages); ?>"
+					src="<?= $this->asset->insertFile(lang('IMG_SIGNIN_LOGO_WIDGET'), 'images', $customerFiles); ?>"
           alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"
 				>
         <span class="mb-2 secondary center h3"><?= novoLang(lang('USER_SIGNIN_TITLE'), lang('GEN_SYSTEM_NAME')) ?></span>
@@ -48,12 +48,12 @@
     <div class="col-auto px-0">
       <div class="h-100">
         <div class="flex pr-2 pr-lg-0 img-log h-100">
-          <img src="<?= $this->asset->insertImage(lang('IMG_SIGNIN_IMAGE'), $customerImages); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
+          <img src="<?= $this->asset->insertFile(lang('IMG_SIGNIN_IMAGE'), 'images', $customerFiles); ?> " alt="<?= lang('GEN_ALTERNATIVE_TEXT') ?>">
         </div>
       </div>
     </div>
     <?php endif; ?>
-		<?php if (lang('SETT_SIGNIN_WELCOME_MSG') == 'ON') : ?>
+		<?php if (lang('SETT_SIGNIN_WELCOME_MSG') === 'ON') : ?>
 			<div class="col-12 mt-2 center h6">
 				<p><?= lang('USER_WELCOME_MSG') ?></p>
 			</div>

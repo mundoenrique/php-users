@@ -16,9 +16,9 @@ if (!function_exists('novoLang')) {
 	}
 }
 
-if (!function_exists('languageLoad')) {
+if (!function_exists('LoadLangFile')) {
 	function LoadLangFile($call, $fileLanguage, $customerLang) {
-		writeLog('INFO', 'Helper loaded: LanguageLoad_helper for ' . $call . ' files');
+		writeLog('INFO', 'Helper language loaded: LoadLangFile_helper for ' . $call . ' files');
 
 		$CI =& get_instance();
 		$languagesFile = [];

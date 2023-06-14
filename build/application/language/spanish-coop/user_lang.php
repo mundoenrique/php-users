@@ -19,6 +19,6 @@ $lang['USER_ADD_B_DOC'] = 'Agregar reverso del documento de identidad';
 $lang['USER_RECOVER_DATA_INVALID'] = 'Correo o documento de identidad inválido, verifica tus datos e intenta de nuevo.';
 $lang['USER_UPDATE_FAIL'] = 'No fue posible actualizar los datos del usuario.';
 $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos.';
-$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido, verifica e intenta de nuevo.";
+$lang['USER_SIGNIN_INVALID_USER']= "Usuario o contraseña inválido, verifica e intenta de nuevo.";
 $lang['USER_SIGNIN_WILL_BLOKED']= "Al siguiente intento incorrecto, tu usuario será bloqueado.";
 $lang['USER_SIGNIN_SUSPENDED_USER'] = 'Tu usuario ha sido bloqueado por intentos incorrectos de acceso, recupéralo <a class="primary hyper-link" href="%s">aquí</a>';

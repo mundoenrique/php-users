@@ -435,11 +435,6 @@ $lang['USER_INVALID_DATE'] = 'No fue posible validar tus datos, por favor vuelve
 $lang['USER_STEP_TITLE_REGISTRY'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP']];
 $lang['USER_STEP_TITLE_REGISTRY_LONG'] = [$lang['USER_PERSONAL_DATA'], $lang['USER_CONTACT_DATA'], $lang['USER_LABOR_DATA'], $lang['USER_DATA_USER'], $lang['USER_LOAD_DOCS_STEP'], $lang['USER_LEGAL_STEP']];
 $lang['USER_SAVE_BTN_MSG'] = '* Al presionar el boton guardar, se guardaran los pasos del 1 al ';
-$lang['USER_RECOVER_DOC_TYPE'] = [
-	'' => 'Selecciona',
-	'CC' => 'Cédula de ciudadania',
-	'PP' => 'Pasaporte',
-];
 $lang['USER_SATISFACTORY_REG'] = 'El registro se ha hecho satisfactoriamente, por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_NOT_CONFIRMED'] = 'El registro fue realizado; aunque no fue posible enviar el correo de confirmación. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';
 $lang['USER_REG_SOME_DATA'] = 'El registro fue realizado; algunos datos no fueron cargados en su totalidad.</br> Por favor complétalos en la sección de <strong>Perfil.</strong>"<br>. Por motivos de seguridad es necesario que inicies sesión con tu usuario y contraseña.';

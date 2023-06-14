@@ -153,6 +153,7 @@ class Novo_Transfer extends NOVO_Controller
 			"modalCards",
 			"third_party/jquery.validate",
 			"third_party/jquery.mask-1.14.16",
+			"third_party/jquery.easyPaginate-1.2",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers",
@@ -217,6 +218,7 @@ class Novo_Transfer extends NOVO_Controller
 			"modalCards",
 			"third_party/jquery.validate",
 			"third_party/jquery.mask-1.14.16",
+			"third_party/jquery.easyPaginate-1.2",
 			"form_validation",
 			"third_party/additional-methods",
 			"transfer/transferHelpers",
@@ -228,7 +230,7 @@ class Novo_Transfer extends NOVO_Controller
 		$this->modelClass = 'Novo_Business_Model';
 		$this->modelMethod = 'callWs_CardListOperations_Business';
 		$this->request->operation = 'Transferencias';
-		$this->request->operType = 'P2T';
+		$this->request->operType = 'PCI';
 		$userCardList = $this->loadModel($this->request);
 		$this->responseAttr($userCardList);
 		$cardsList = $userCardList->data->cardsList;

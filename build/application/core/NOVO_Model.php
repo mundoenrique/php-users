@@ -13,15 +13,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class NOVO_Model extends CI_Model {
 	public $dataAccessLog;
 	public $accessLog;
-	public $token;
 	public $customer;
 	public $customerUri;
-	public $customerImages;
+	public $customerFiles;
 	public $dataRequest;
-	public $isResponseRc;
-	public $response;
 	public $userName;
 	public $keyId;
+	public $token;
+	public $isResponseRc;
+	public $response;
 
 	public function __construct()
 	{
@@ -29,14 +29,19 @@ class NOVO_Model extends CI_Model {
 		writeLog('INFO', 'Model Class Initialized');
 
 		$this->dataAccessLog = new stdClass();
-		$this->dataRequest = new stdClass();
-		$this->response = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
-		$this->customerUri = $this->session->customerUri;
-		$this->customerImages = $this->config->item('customer_images');
-		$this->token = $this->session->token ?? '';
+		$this->customerUri = $this->session->customerUri ?? $this->config->item('customer_uri');
+		$this->customerFiles = $this->config->item('customer_files');
+		$this->dataRequest = new stdClass();
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
+		$this->token = $this->session->token ?? '';
+		$this->response = new stdClass();
+		$this->response->code = lang('SETT_DEFAULT_CODE');
+		$this->response->icon = lang('SETT_ICON_WARNING');
+		$this->response->title = lang('GEN_SYSTEM_NAME');
+		$this->response->msg = '';
+		$this->response->data = new stdClass();
 	}
 	/**
 	 * @info Método para comunicación con el servicio
@@ -123,11 +128,7 @@ class NOVO_Model extends CI_Model {
 		writeLog('INFO', 'Model: makeAnswer Method Initialized');
 
 		$this->isResponseRc = (int) $responseModel->responseCode;
-		$this->response->code = lang('SETT_DEFAULT_CODE');
-		$this->response->icon = lang('SETT_ICON_WARNING');
-		$this->response->title = lang('GEN_SYSTEM_NAME');
-		$this->response->msg = '';
-		$this->response->data = new stdClass();
+
 		$linkredirect = uriRedirect();
 		$arrayResponse = [
 			'btn1'=> [

@@ -4,7 +4,7 @@
 		<?php if(lang('SETT_FOOTER_MARK') === 'ON'): ?>
 		<div class="flex pr-2 pr-lg-0">
 			<img
-				src="<?= $this->asset->insertImage(lang('IMG_FOTTER_MARK'), $customerImages); ?>"
+				src="<?= $this->asset->insertFile(lang('IMG_FOTTER_MARK'), 'images', $customerFiles); ?>"
 				alt="Superintendencia de Bancos"
 			>
 		</div>
@@ -14,7 +14,7 @@
 			<div class="order-first networks">
 				<?php foreach(lang('IMG_FOTTER_NETWORKS_IMG') AS $key => $value): ?>
 				<a href="<?= lang('SETT_FOTTER_NETWORKS_LINK')[$key]; ?>" target="_blank">
-					<img src="<?= $this->asset->insertImage($value, $customerImages, 'networks'); ?>" alt="<?= $key; ?>">
+					<img src="<?= $this->asset->insertFile($value, 'images', $customerFiles, 'networks'); ?>" alt="<?= $key; ?>">
 				</a>
 				<?php endforeach; ?>
 			</div>
@@ -22,14 +22,14 @@
 			<?php if(lang('SETT_FOOTER_LOGO') === 'ON'):?>
 			<img
 				class="order-first"
-				src="<?= $this->asset->insertImage(lang('IMG_FOTTER_IMAGE_L'), $customerImages); ?>"
+				src="<?= $this->asset->insertFile(lang('IMG_FOTTER_IMAGE_L'), 'images', $customerFiles); ?>"
 				alt="<?= lang('GEN_ALTERNATIVE_TEXT'); ?>"
 			>
 			<?php endif; ?>
-			<img class="order-1" src="<?= $this->asset->insertImage(lang('IMG_PCI'), $customerImages); ?>" alt="Logo PCI">
+			<img class="order-1" src="<?= $this->asset->insertFile(lang('IMG_PCI'), 'images', $customerFiles); ?>" alt="Logo PCI">
 			<span class="copyright-footer mt-1 nowrap flex-auto lg-flex-none order-1 order-lg-0 center h6">
 				<?= lang('GEN_FOTTER_RIGHTS'); ?><?= ' - '.date("Y") ?>
-				<?php if (lang('SETT_FOTTER_PRIVACY_NOTICE') == 'ON') : ?>
+				<?php if (lang('SETT_FOTTER_PRIVACY_NOTICE') === 'ON') : ?>
 					<br>
 					<a class="block mb-1 h5 tertiary underline" href="<?= lang('SETT_PRIVACY_NOTICE_LINK'); ?>" target="_blank">
 						<?= lang('GEN_PRIVACY_NOTICE'); ?>
@@ -40,15 +40,15 @@
 	</footer>
 <?php endif; ?>
 
-<?php if (lang('SETT_SIGNIN_WIDGET_CONTACT') == 'ON') : ?>
+<?php if (lang('SETT_SIGNIN_WIDGET_CONTACT') === 'ON') : ?>
   <?php $this->load->view('widget/widget_contacts_content-core') ?>
 <?php endif; ?>
 
-<?php if (lang('SETT_BTN_LANG') == 'ON') : ?>
+<?php if (lang('SETT_BTN_LANG') === 'ON') : ?>
   <div class="btn-lang">
     <div class="btn-lang-img">
 			<a id="change-lang" class="big-modal" href="<?= lang('SETT_NO_LINK') ?>">
-				<img src="<?= $this->asset->insertImage(lang('GEN_LANG_IMG'), $customerImages, 'lang'); ?>">
+				<img src="<?= $this->asset->insertFile(lang('GEN_LANG_IMG'), 'images', $customerFiles, 'lang'); ?>">
 				<span class="text"><?= lang('GEN_AFTER_COD_LANG'); ?></span>
 			</a>
     </div>
@@ -94,7 +94,7 @@
   <div id="cardsDetail" class="dashboard-items flex mt-3 mx-auto flex-wrap">
     <?php foreach ($cardsList AS $cards): ?>
     <div class="dashboard-item p-1 mx-1 mb-1 <?= $cards->statusClasses ?? '' ?>">
-      <img class="item-img" src="<?= $this->asset->insertImage($cards->productImg, $customerImages, 'programs'); ?>"
+      <img class="item-img" src="<?= $this->asset->insertFile($cards->productImg, 'images', $customerFiles, 'programs'); ?>"
 				alt="<?= $cards->productName ?>">
       <div class="item-info <?= lang('SETT_FRANCHISE_LOGO') === 'ON' ? $cards->brand: ''?> p-2 h5 bg-white">
         <p class="item-category semibold"><?= $cards->productName ?>

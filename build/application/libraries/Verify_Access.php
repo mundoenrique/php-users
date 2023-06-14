@@ -5,15 +5,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author J. Enrique Peñaloza Piñero
  * @date May 17th, 2020
  */
-class Verify_Access
-{
+class Verify_Access {
 	private $CI;
 
 	public function __construct()
 	{
 		writeLog('INFO', 'Verify_Access Library Class Initialized');
 
-		$this->CI = &get_instance();
+		$this->CI =& get_instance();
 	}
 	/**
 	 * @info método que valida los datos de los formularios enviados
@@ -31,8 +30,7 @@ class Verify_Access
 		writeLog('DEBUG', 'VALIDATION FORM ' . $validationMethod . ': ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
 		if (!$result) {
-			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' .
-				json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
+			writeLog('ERROR', 'VALIDATION ' . $validationMethod . ' ERRORS: ' . json_encode(validation_errors(), JSON_UNESCAPED_UNICODE));
 		}
 
 		unset($_POST);
@@ -49,9 +47,6 @@ class Verify_Access
 		writeLog('INFO', 'Verify_Access: createRequest method initialized');
 
 		$requestServ = new stdClass();
-		$arrAppUserName = explode("-", $this->CI->session->appUserName);
-		$appUserName = $arrAppUserName[1];
-		$logUsername = '';
 
 		foreach ($_POST as $key => $value) {
 			switch ($key) {
@@ -64,22 +59,7 @@ class Verify_Access
 			}
 		}
 
-		if ($this->CI->session->has_userdata('userName')) {
-			$logUsername = $this->CI->session->userName;
-		} elseif (isset($requestServ->userName)) {
-			$logUsername = mb_strtoupper($requestServ->userName);
-		} elseif (isset($requestServ->idNumber)) {
-			$logUsername = mb_strtoupper($requestServ->idNumber);
-		} elseif (isset($requestServ->documentId)) {
-			$logUsername = mb_strtoupper($requestServ->documentId);
-		}
-
-		if ($appUserName !== $logUsername) {
-			$appUserName = $arrAppUserName[0] . '-' . $logUsername;
-			$this->CI->session->set_userdata('appUserName', $appUserName);
-		}
-
-		writeLog('DEBUG', 'REQUEST CREATED for ' . $class . ' and method ' . $method . ': '	.
+		writeLog('DEBUG', 'REQUEST CREATED FOR CLASS ' . $class . ' AND METHOD ' . $method . ': '	.
 			json_encode($requestServ, JSON_UNESCAPED_UNICODE));
 
 		return $requestServ;
@@ -199,11 +179,11 @@ class Verify_Access
 			case 'getAffiliations':
 			case 'affiliationP2P':
 			case 'affiliationPMV':
-			case 'affiliationP2T':
+			case 'affiliationPCI':
 			case 'deleteAffiliation':
 			case 'changeOperationKey':
 			case 'transferP2P':
-			case 'transferP2T':
+			case 'transferPCI':
 			case 'history':
 			case 'cardToCreditCard':
 			case 'cardToDigitel':
