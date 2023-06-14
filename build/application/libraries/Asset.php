@@ -38,16 +38,17 @@ class Asset {
 	public function insertCss()
 	{
 		writeLog('INFO', 'Asset: insertCss method initialized');
-		$fileUrl = NULL;
-		$fileExt = 'css';
+
+		$link = NULL;
+		$FileExt = 'css';
 
 		foreach($this->cssFiles as $fileName) {
-			$file = assetPath('css/' . $fileName);
-			$file = $this->versionFiles($file, $fileName, $fileExt);
-			$fileUrl .= '<link rel="stylesheet" href="'. assetUrl('css/' . $file) . '" media="all">' . PHP_EOL;
+			$FilePath = assetPath('css/' . $fileName);
+			$fileVersion = $this->versionFiles($FilePath, $fileName, $FileExt);
+			$link.= '<link rel="stylesheet" href="' . assetUrl('css/' . $fileVersion) . '" media="all">' . PHP_EOL;
 		}
 
-		return $fileUrl;
+		return $link;
 	}
 	/**
 	 * @info Método para insertar archivos js en el documento
@@ -56,38 +57,40 @@ class Asset {
 	public function insertJs()
 	{
 		writeLog('INFO', 'Asset: insertJs method initialized');
-		$fileUrl = NULL;
+
+		$script = NULL;
 		$fileExt = 'js';
 
 		foreach($this->jsFiles as $fileName) {
-			$file = assetPath('js/' . $fileName);
-			$file = $this->versionFiles($file, $fileName, $fileExt);
-			$fileUrl .= '<script defer src="' . assetUrl('js/'. $file) . '"></script>' . PHP_EOL;
+			$filePath = assetPath('js/' . $fileName);
+			$fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
+			$script.= '<script type="text/javascript" defer src="' . assetUrl('js/' . $fileVersion) . '"></script>' . PHP_EOL;
 		}
 
-		return $fileUrl;
+		return $script;
 	}
 	/**
-	 * @info Método para insertar imagenes, json, etc
+	 * @info Método para insertar imagenes, json, pdf, videos, etc
 	 * @author J. Enrique Peñaloza Piñero.
 	 */
-	public function insertImage($file, $customerImages, $folder = FALSE)
+	public function insertFile($file, $location, $customerFiles, $folder = '')
 	{
-		writeLog('INFO', 'Asset: insertImage method initialized');
+		writeLog('INFO', 'Asset: insertFile method initialized');
 
+		$location.= '/';
+		$customerFiles.=  '/';
+		$folder = !empty($folder) ? $folder . '/' : $folder;
 		list($fileName, $fileExt) = explode('.', $file);
-		$folder = $folder ? $folder . '/' : '';
-		$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
-		$fileExists = file_exists($file . '.' . $fileExt);
+		$filePath = assetPath($location . $customerFiles . $folder . $fileName);
 
-		if(!$fileExists) {
-			$customerImages = 'default';
-			$file = assetPath('images/' . $customerImages . '/' . $folder . $fileName);
+		if (strpos($location, 'images') !== FALSE && !file_exists($filePath . '.' . $fileExt)) {
+			$customerFiles = 'default/';
+			$filePath = assetPath($location . $customerFiles . $folder . $fileName);
 		}
 
-		$file = $this->versionFiles($file, $fileName, $fileExt);
+		$fileVersion = $this->versionFiles($filePath, $fileName, $fileExt);
 
-		return assetUrl('images/' . $customerImages . '/' . $folder . $file);
+		return assetUrl($location .  $customerFiles . $folder . $fileVersion);
 	}
 	/**
 	 * @info Método para versionar archivos
@@ -110,26 +113,5 @@ class Asset {
 		}
 
 		return $fileName . $fileExt . $version;
-	}
-	/**
-	 * @info Método para insertar imagenes, json, etc
-	 * @author J. Enrique Peñaloza Piñero.
-	 */
-	public function insertFile($fileName, $folder = 'images', $customerUri = FALSE)
-	{
-		writeLog('INFO', 'Asset: insertFile method initialized');
-
-		$customerUri = $customerUri ? $customerUri.'/' : '';
-		$customerUri = tenantSameSettings($customerUri);
-		$file = assetPath($folder . '/' . $customerUri.$fileName);
-
-		if (!file_exists($file)) {
-			$file = assetPath($folder . '/default' . '/' . $fileName);
-			$customerUri = 'default/';
-		}
-
-		$version = '?V'.date('Ymd-U', filemtime($file));
-
-		return assetUrl($folder . '/' . $customerUri . $fileName . $version);
 	}
 }

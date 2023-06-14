@@ -3,12 +3,12 @@
 		<h1><?= $title ?></h1>
 		<h2><?= $msg1 ?></h2>
 		<h2><?= $msg2 ?></h2>
-		<?php if($platform == 'browser'): ?>
+		<?php if($platform === 'browser'): ?>
 		<ul class="list-inline w-list flex justify-between">
 			<li class="list-inline-item">
 				<img
 					class="browser-img"
-					src="<?= $this->asset->insertImage('icon-chrome.svg',  $customerImages, 'browsers'); ?>"
+					src="<?= $this->asset->insertFile('icon-chrome.svg', 'images', $customerFiles, 'browsers'); ?>"
 					alt="chrome"
 				>
 				<span class="browser-name"><?= lang('GEN_BROWSER_GOOGLE_CHROME'); ?></span>
@@ -17,7 +17,7 @@
 			<li class="list-inline-item">
 				<img
 					class="browser-img"
-					src="<?= $this->asset->insertImage('icon-firefox.svg', $customerImages, 'browsers'); ?>"
+					src="<?= $this->asset->insertFile('icon-firefox.svg', 'images', $customerFiles, 'browsers'); ?>"
 					alt="firefox"
 				>
 				<span class="browser-name"><?= lang('GEN_BROWSER_MOZILLA_FIREFOX'); ?></span>
@@ -26,7 +26,7 @@
 			<li class="list-inline-item">
 				<img
 					class="browser-img"
-					src="<?= $this->asset->insertImage('icon-safari.svg', $customerImages, 'browsers'); ?>"
+					src="<?= $this->asset->insertFile('icon-safari.svg', 'images', $customerFiles, 'browsers'); ?>"
 					alt="safari"
 				>
 				<span class="browser-name"><?= lang('GEN_BROWSER_APPLE_SAFARI'); ?></span>
@@ -35,7 +35,7 @@
 			<li class="list-inline-item">
 				<img
 					class="browser-img"
-					src="<?= $this->asset->insertImage('icon-edge.svg', $customerImages, 'browsers'); ?>"
+					src="<?= $this->asset->insertFile('icon-edge.svg', 'images', $customerFiles, 'browsers'); ?>"
 					alt="edge"
 				>
 				<span class="browser-name"><?= lang('GEN_BROWSER_MICROSOFT_EDGE'); ?></span>
@@ -45,7 +45,7 @@
 			<li class="list-inline-item">
 				<img
 					class="browser-img"
-					src="<?= $this->asset->insertImage('icon-explorer.svg', $customerImages, 'browsers'); ?>"
+					src="<?= $this->asset->insertFile('icon-explorer.svg', 'images', $customerFiles, 'browsers'); ?>"
 					alt="explorer"
 				>
 				<span class="browser-name"><?= lang('GEN_BROWSER_INTERNET_EXPLORER'); ?></span>

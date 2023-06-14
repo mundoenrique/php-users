@@ -17,4 +17,4 @@ $config['scores_recapcha'] = [
 	],
 ];
 $config['customer_style'] = 'default';
-$config['customer_images'] = 'default';
+$config['customer_files'] = 'default';
