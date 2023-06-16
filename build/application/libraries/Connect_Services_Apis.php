@@ -32,6 +32,8 @@ class Connect_Services_Apis
 
 		writeLog('DEBUG', 'REQUEST BY WEB SERVICE URL: ' . $wsUrl);
 
+		$method = $request->method ?? 'POST';
+		unset($request->method);
 		$requestSerV = json_encode($request, JSON_UNESCAPED_UNICODE);
 		$curl = curl_init();
 
@@ -87,6 +89,7 @@ class Connect_Services_Apis
 
 		$urlMfaServ = URL_MFA_SERV . $request->uri;
 		$method = $request->method ?? 'POST';
+		unset($request->method);
 		$uuIdV4 = uuIdV4Generate();
 
 		writeLog('DEBUG', 'REQUEST BY MFA SERVICE URL: ' . $urlMfaServ. ', UUID: '. $uuIdV4);
