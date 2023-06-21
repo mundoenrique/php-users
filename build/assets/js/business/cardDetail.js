@@ -141,7 +141,8 @@ function getMovements() {
 		}
 
 		if (response.data.movesList.length > 0) {
-			$.each(response.data.movesList, function(item, moves) {
+			$.each(response.data.movesList, function (item, moves) {
+				var status = moves.estadoTransaccion == '' ? '' : ' / ' + moves.estadoTransaccion
 				var classCss = moves.sign == '-' ? 'feed-expense' : 'feed-income';
 				var appendLi;
 
@@ -151,7 +152,7 @@ function getMovements() {
 				appendLi+=		'</div>';
 				appendLi+=		'<div class="flex px-2 flex-column mr-auto">';
 				appendLi+=			'<span class="h5 semibold feed-product">'+moves.desc+'</span>';
-				appendLi+=			'<span class="h6 feed-metadata">'+moves.ref+'</span>';
+				appendLi+=			'<span class="h6 feed-metadata">'+moves.ref + status +'</span>';
 				appendLi+=		'</div>';
 				appendLi+=		'<span class="px-2 feed-amount items-center">'+moves.sign+' '+moves.amount+'</span>';
 				appendLi+=	'</li>';
