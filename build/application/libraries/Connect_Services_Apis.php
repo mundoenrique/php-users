@@ -45,13 +45,16 @@ class Connect_Services_Apis
 			CURLOPT_TIMEOUT => 58,
 			CURLOPT_FOLLOWLOCATION => TRUE,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => $request->method ?? 'POST',
+			CURLOPT_CUSTOMREQUEST => $method,
 			CURLOPT_HTTPHEADER => [
 				'Content-Type: text/plain',
 				'Content-Length: ' . strlen($requestSerV)
-			],
-			CURLOPT_POSTFIELDS => $requestSerV
+			]
 		]);
+
+		if ($method !== 'GET') {
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $requestSerV);
+		}
 
 		$curlResp = json_decode(curl_exec($curl));
 		$executionTime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
