@@ -18,3 +18,16 @@ $config['scores_recapcha'] = [
 ];
 $config['customer_style'] = 'default';
 $config['customer_files'] = 'default';
+$config['client_db'] = [
+	'bg' => 'bg',
+	'bdb' => 'bdb',
+	'bnt' => 'bnt',
+	'bp' => 'bp',
+	'co' => 'co',
+	'coop' => 'coop',
+	'pb' => 'pb',
+	'pe' => 'pe',
+	'us' => 'us',
+	've' => 've',
+	'vg' => 'vg'
+];
