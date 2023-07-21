@@ -263,7 +263,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
 						$move->amount = lang('SETT_CURRENCY').' '.$moves->monto;
-						$move->estadoTransaccion = isset($moves->estadoTransaccion) ? lang('SETT_STATUS_TRANSACTION')[$moves->estadoTransaccion] : '';
+						$move->estadoTransaccion = isset($moves->estadoTransaccion) ? ucfirst(mb_strtolower($moves->estadoTransaccion)) : '';
 						$movesList[] = $move;
 					}
 				}
@@ -327,7 +327,7 @@ class Novo_Business_Model extends NOVO_Model {
 						$move->ref = $moves->referencia;
 						$move->sign = $moves->signo;
 						$move->amount = lang('SETT_CURRENCY').' '.$moves->monto;
-						$move->estadoTransaccion = isset($moves->estadoTransaccion) ? lang('SETT_STATUS_TRANSACTION')[$moves->estadoTransaccion] : '';
+						$move->estadoTransaccion = isset($moves->estadoTransaccion) ? ucfirst(mb_strtolower($moves->estadoTransaccion)) : '';
 						$movesList[] = $move;
 					}
 				}
