@@ -41,6 +41,7 @@ SetEnv SESS_COOKIE_NAME personas
 SetEnv ACTIVE_SAFETY ON
 SetEnv SESS_EXPIRATION 890
 SetEnv COOKIE_PREFIX 'cpo_'
+SetEnv PROXY_ENABLE OFF
 
 #----------------------#
 # APPLICATION SETTINGS #
