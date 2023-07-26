@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$config['customer'] = 'Pe';
+$config['customer'] = 'Usd';
 $config['customer_uri'] = 'usd';
 $config['customer_lang'] = 'pe';
 $config['customer_images'] = 'us';
