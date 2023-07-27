@@ -12,27 +12,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!function_exists('writeLog')) {
 	function writeLog($level, $message) {
 		$CI =& get_instance();
-		$appUserName = $CI->session->appUserName ?? date('U') . '-';
-		$customer = '';
 		$ip = $CI->input->ip_address();
 		$level = mb_strtoupper($level);
 
 		if ($level !== 'INFO') {
-			if (!$CI->session->has_userdata('appUserName')) {
-				$CI->session->set_userdata('appUserName', $appUserName);
+			$customer = $CI->session->customerSess ?? $CI->config->item('customer');
+			$isLogUser = $CI->session->has_userdata('logUser');
+			$logUser = $CI->session->logUser ?? date('U') . '-';
+			list($date, $user) = explode('-', $logUser);
+			$reqUser = $user;
+
+			if ($CI->session->has_userdata('userName')) {
+				$reqUser = $CI->session->userName;
+			} elseif($CI->input->get_post('userName') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('userName'));
+			} elseif($CI->input->get_post('idNumber') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('idNumber'));
+			} elseif($CI->input->get_post('documentId') !== NULL) {
+				$reqUser = mb_strtoupper($CI->input->get_post('documentId'));
 			}
 
-			if ($CI->session->has_userdata('customerSess')) {
-				$customer = $CI->session->customerSess;
-			} elseif ($CI->config->item('customer') !== NULL) {
-				$customer = $CI->config->item('customer');
+			if ($isLogUser === NULL || $user !== $reqUser) {
+				$logUser = $date . '-' . $reqUser;
+				$CI->session->set_userdata('logUser', $logUser);
 			}
 
-			if ($customer === '') {
-				$message = novoLang('NOVO [%s] IP: %s, %s', [$appUserName, $ip, $message]);
-			} else {
-				$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$appUserName, $ip, $customer, $message]);
-			}
+			$message = novoLang('NOVO [%s] IP: %s, CUSTOMER: %s, %s', [$logUser, $ip, $customer, $message]);
+
 		} else {
 			$message = novoLang('NOVO %s', $message);
 		}
@@ -129,3 +135,44 @@ if (!function_exists('handleResponseServer')) {
 		return $webServiceResp;
 	}
 }
+
+if (!function_exists('handleLogResponse')) {
+	function handleLogResponse($responseToLog) {
+		$logResponse = new stdClass();
+
+		foreach ($responseToLog as $pos => $data) {
+			if ($pos === 'data' && (gettype($data) === 'object'  || gettype($data) === 'array')) {
+				$logResponse->data = new stdClass();
+
+				foreach ($data as $key => $value) {
+					if ($key === 'archivo') {
+						continue;
+					}
+
+					if ($key === 'bean' && (gettype($value) === 'object'  || gettype($value) === 'array')) {
+						$logResponse->data->bean = new stdClass();
+
+						foreach ($value as $index => $content) {
+							if ($index === 'archivo') {
+								continue;
+							}
+
+							$logResponse->data->bean->$index = $content;
+						}
+
+						continue;
+					}
+
+					$logResponse->data->$key = $value;
+				}
+
+				continue;
+			}
+
+			$logResponse->$pos = $data;
+		}
+
+		return $logResponse;
+	}
+}
+

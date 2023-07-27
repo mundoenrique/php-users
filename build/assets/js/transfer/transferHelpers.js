@@ -582,14 +582,14 @@ function setFieldNames(operation) {
 				beneficiary: currentAffiliaton.NombreCliente,
 				typeDocument: documentType,
 				idNumber: documentNumber,
-				destinationCard: currentAffiliaton.noTarjeta,
+				destinationCard: formatAccountNumber(currentAffiliaton.noTarjeta),
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
 			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
-				destinationAccount: currentAffiliaton.noCuenta,
+				destinationAccount: formatAccountNumber(currentAffiliaton.noCuenta),
 				mobilePhone: currentAffiliaton.telefono,
 				beneficiaryEmail: currentAffiliaton.email,
 			},
@@ -610,14 +610,14 @@ function setFieldNames(operation) {
 				beneficiary: currentAffiliaton.NombreCliente,
 				typeDocument: documentType,
 				idNumber: documentNumber,
-				destinationCard: currentAffiliaton.noTarjeta,
+				destinationCard: formatAccountNumber(currentAffiliaton.noTarjeta),
 				beneficiaryEmail: currentAffiliaton.emailCliente,
 			},
 			PCI: {
 				beneficiary: currentAffiliaton.beneficiario,
 				typeDocument: documentType,
 				idNumber: documentNumber,
-				destinationAccount: currentAffiliaton.noCuenta,
+				destinationAccount: formatAccountNumber(currentAffiliaton.noCuenta),
 				mobilePhone: currentAffiliaton.telefono,
 				beneficiaryEmail: currentAffiliaton.email,
 			},
@@ -943,4 +943,10 @@ function numberToCurrency(number, withCurrencySymbol) {
 
 function currencyToNumber(currency) {
 	return Number(currency.replace(/[^0-9-,]+/g, "").replace(",", "."));
+}
+
+function formatAccountNumber(number) {
+	if (number) {
+		return number.replace(/\D/g, '').replace(/(\d{4})/g, '$1-').replace(/-$/, '');
+	}
 }

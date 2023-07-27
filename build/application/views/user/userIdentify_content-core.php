@@ -45,7 +45,7 @@
 						<?php endif; ?>
 						<div class="form-group col-lg-4">
 							<label for="documentId"><?= lang('GEN_DNI'); ?></label>
-							<input id="documentId" class="form-control" type="text" name="documentId" maxlength="25" autocomplete="off" disabled>
+							<input id="documentId" class="form-control" type="text" name="documentId" maxlength="<?= lang('REGEX_MAXLENGTH_DOC_ID')?>" autocomplete="off" disabled>
 							<div class="help-block"></div>
 						</div>
 						<?php if (lang('SETT_SECRET_KEY') == 'ON') : ?>

@@ -15,7 +15,7 @@ class NOVO_Model extends CI_Model {
 	public $accessLog;
 	public $customer;
 	public $customerUri;
-	public $customerImages;
+	public $customerFiles;
 	public $dataRequest;
 	public $userName;
 	public $keyId;
@@ -30,8 +30,8 @@ class NOVO_Model extends CI_Model {
 
 		$this->dataAccessLog = new stdClass();
 		$this->customer = $this->session->customerSess ?? $this->config->item('customer');
-		$this->customerUri = $this->session->customerUri;
-		$this->customerImages = $this->config->item('customer_images');
+		$this->customerUri = $this->session->customerUri ?? $this->config->item('customer_uri');
+		$this->customerFiles = $this->config->item('customer_files');
 		$this->dataRequest = new stdClass();
 		$this->userName = $this->session->userName;
 		$this->keyId = $this->session->userName ?? 'CPONLINE';
@@ -52,7 +52,7 @@ class NOVO_Model extends CI_Model {
 	{
 		writeLog('INFO', 'Model: sendToWebServices Method Initialized');
 
-		$logResponse = new stdClass();
+		$request = [];
 		$this->accessLog = accessLog($this->dataAccessLog);
 
 		if ($this->session->has_userdata('enterpriseCod') && $this->session->enterpriseCod !== '') {
@@ -62,26 +62,21 @@ class NOVO_Model extends CI_Model {
 		$this->dataRequest->pais = $this->dataRequest->pais ?? $this->customer;
 		$this->dataRequest->token = $this->token;
 		$this->dataRequest->logAccesoObject = $this->accessLog;
+		$request['data'] = $this->dataRequest;
+		$request['pais'] = $this->dataRequest->pais;
+		$request['keyId'] = $this->keyId;
 		$dataRequest = json_encode($this->dataRequest, JSON_UNESCAPED_UNICODE);
 
-		writeLog('DEBUG', 'WEB SERVICES REQUEST ' . $model . ': ' . $dataRequest);
+		writeLog('DEBUG', 'WEB SERVICES REQUEST ' . $model . ': ' . json_encode($request, JSON_UNESCAPED_UNICODE));
 
 		$encryptRequest = $this->encrypt_decrypt->encryptWebServices($dataRequest);
-		$request = ['data'=> $encryptRequest, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
-		$encryptResponse = $this->connect_services_apis->connectWebServices($request, $model);
+		$request['data'] = $encryptRequest;
+		$encryptResponse = $this->connect_services_apis->connectWebServices($request);
 		$response = $this->encrypt_decrypt->decryptWebServices($encryptResponse);
 		$response = handleResponseServer($response);
+		$logResponse = handleLogResponse($response);
 
-		foreach ($response as $key => $value) {
-			if (isset($value->archivo) || isset($value->bean->archivo)) {
-				continue;
-			}
-
-			$logResponse->$key = $value;
-		}
-
-		writeLog('DEBUG', 'WEB SERVICES RESPONSE COMPLETE ' . $model . ': '
-			.json_encode($logResponse, JSON_UNESCAPED_UNICODE));
+		writeLog('DEBUG', 'WEB SERVICES RESPONSE ' . $model . ': ' . json_encode($logResponse, JSON_UNESCAPED_UNICODE));
 
 		unset($logResponse);
 

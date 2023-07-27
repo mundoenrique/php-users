@@ -257,7 +257,7 @@
                         <div class="help-block"></div>
                       </div>
                       <div class="form-group col-6 input-height">
-                        <input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" value="" autocomplete="off">
+                        <input id="otherPhoneNum" class="form-control" type="text" name="otherPhoneNum" disabled value="" autocomplete="off">
                         <div class="help-block"></div>
                       </div>
                     </div>
