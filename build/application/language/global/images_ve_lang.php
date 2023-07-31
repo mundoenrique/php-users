@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// PROGRAM IMAGES
+
 $lang['IMG_PROGRAM_IMAGES'] = [
 	'bonus_dorada_be' => 'bonus_dorada',
 	'bonus_dorada' => 'bonus_dorada',
@@ -59,5 +59,11 @@ $lang['IMG_PROGRAM_IMAGES'] = [
 	'plata_viaticos_v' => 'plata_clasica',
 	'plata_viaticos' => 'plata_clasica',
 	'plata_visa' => 'plata_clasica',
+	'bonus_sc' => 'bonus_sin_contacto',
+	'plata_beneficios_sc' => 'plata_sin_contacto',
+	'plata_corporativa_sc' => 'plata_sin_contacto',
+	'plata_incentivo_sc' => 'plata_sin_contacto',
+	'plata_plus_sc' => 'plata_sin_contacto',
+	'plata_pn_sc' => 'plata_sin_contacto',
 ];
 $lang['IMG_SIGNIN_IMAGE'] = 'img-servitebca-signin.jpg';
