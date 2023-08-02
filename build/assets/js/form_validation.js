@@ -212,7 +212,7 @@ function validateForms(form) {
 			},
 			beneficiaryEmail: { pattern: emailValid },
 			amount: { required: true, pattern: floatAmount, maxlength: 16 },
-			concept: { pattern: alphanumunder },
+			concept: { pattern: alphaName, minlength: 3 },
 			expDateCta: { required: true, pattern: date.my },
 			currentPin: { required: true, pattern: numeric, exactLength: 4 },
 			newPin: {
@@ -401,6 +401,7 @@ function validateForms(form) {
 			},
 			beneficiaryEmail: lang.VALIDATE_EMAIL,
 			amount: lang.VALIDATE_AMOUNT,
+			concept: lang.VALIDATE_CONCEPT,
 			expDateCta: lang.VALIDATE_DATE_MY,
 			currentPin: {
 				required: lang.VALIDATE_CURRENT_PIN,

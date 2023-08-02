@@ -78,5 +78,6 @@ $lang['VALIDATE_DESTINATION_CARD'] = 'Indica un número de tarjeta válido (16 n
 $lang['VALIDATE_DESTINATION_ACCOUNT'] = 'Indica un número de cuenta válido (20 números)';
 $lang['VALIDATE_ACCOUNT_MATCH_BANK'] = 'El número de cuenta no corresponde al banco';
 $lang['VALIDATE_AMOUNT'] = 'Indica un monto válido';
+$lang['VALIDATE_CONCEPT'] = 'Admite mín 3 máx 50 (letras y espacio)';
 $lang['VALIDATE_DESTINATION_INSTRUMENT'] = 'Selecciona el instrumento destino';
 $lang['VALIDATE_MAX_NUMBER'] = 'No debes ingresar más de %s caracteres';
