@@ -153,7 +153,7 @@ function setSecondaryText(data, index) {
 		status[data.estatusOperacion]
 	}</span>`;
 	var refNumber =
-		data.estatusOperacion == "0" ? data.referencia : data.billnumber;
+		data.estatusOperacion == "0" || (data.estatusOperacion == "3" && data?.referencia > 0) ? data.referencia : data.billnumber;
 	var spanRef =
 		data.estatusOperacion == "2"
 			? `<span class="p-0 h6">${refNumber}</span>`
