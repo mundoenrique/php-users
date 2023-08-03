@@ -5045,6 +5045,7 @@ ul.pwd-rules li.pwd-rules-item.rule-invalid {
 .select-by-search {
   position: relative;
   vertical-align: bottom;
+	height: calc(1.386em + .75rem + 4px + 1px);
 }
 
 .select-search-input {
