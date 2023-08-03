@@ -872,9 +872,9 @@ function buildVaucherModal() {
 		),
 		referencia:
 			currentVaucherData?.estatusOperacion &&
-			currentVaucherData?.estatusOperacion != "0"
-				? currentVaucherData.billnumber
-				: currentVaucherData.referencia,
+			(currentVaucherData?.estatusOperacion == "0" || currentVaucherData?.estatusOperacion == "3") && currentVaucherData?.referencia > 0
+				? currentVaucherData.referencia
+				: currentVaucherData.billnumber,
 	};
 
 	objectResult = setObjectResult[operationType];
@@ -908,7 +908,7 @@ function getRefNumber(data) {
 	if (operationType == "P2P") {
 		return data.referencia;
 	} else {
-		return data?.transferenciaRealizada
+		return data?.codConfirmacion && data.codConfirmacion > 0
 			? data.codConfirmacion
 			: data.billnumber;
 	}

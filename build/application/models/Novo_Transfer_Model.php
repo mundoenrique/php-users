@@ -199,8 +199,9 @@ class Novo_Transfer_Model extends NOVO_Model
 			case 80023:
 			case 80037:
 			case 1850125:
+				$refNumber = isset($response->bean->codConfirmacion) ? $response->bean->codConfirmacion : '0';
 				$this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-				$this->response->msg = novoLang(lang('TRANSF_CONFIRM_CREDIT_MEMO'), $response->bean->billNumber);
+				$this->response->msg = novoLang(lang('TRANSF_CONFIRM_CREDIT_MEMO'), $refNumber > 0 ? $refNumber : $response->bean->billNumber);
 				$this->response->code = 2;
 				$this->response->modalBtn['btn1']['action'] = 'destroy';
 				break;
