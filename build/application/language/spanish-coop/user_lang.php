@@ -185,6 +185,13 @@ $lang["USER_TERMS_CONTENT"] = '
 		el cliente, dentro del término indicado ya referido, no manifieste su inconformidad con la modificación propuesta,
 		se entenderá su aceptación tácita.
 	</p>
+	<div class="text-right mb-1">
+		<span>CAP-F-77</span>
+		<br />
+		<span>Ver. 1</span>
+		<br />
+		<span>01/09/2023</span>
+	</div>
 </div>
 ';
 $lang['USER_ADD_F_DOC'] = 'Agregar anverso del documento de identidad';
