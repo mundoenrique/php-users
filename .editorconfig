@@ -1,24 +1,20 @@
 # top-most EditorConfig file
 root = true
 
+# Unix-style newlines with a newline ending every file
 # Matches multiple files with brace expansion notation
 [*]
 # Set default charset
 charset = utf-8
-# Tab indentation (no size specified)
+# Tab indentation
 indent_style = tab
-# Unix-style newlines with a newline ending every file
+# tab size
 indent_size = 2
+# End of line format
 end_of_line = lf
+# Trim trailing whitespace
 trim_trailing_whitespace = true
-insert_final_newline = true
-
-[*.md]
-trim_trailing_whitespace = false
-
-[*.yml]
-indent_style = space
-insert_final_newline = false
-
-[{Dockerfile,.editorconfig,.dockerignore,*.env,*.env.*,*.css,*.scss}]
-insert_final_newline = false
+# Type of qoute
+quote_type = single
+# Maximum number of characters
+max_line_length = 120
