@@ -1,7 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_TENANT_PUBLICATION'] = 2021;
 $lang['SETT_DATEPICKER_MINDATE'] = '-5m';
+$lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'OFF';
+$lang['SETT_READ_TERMS'] = 'OFF';
 $lang['SETT_DOC_TYPE'] = 'ON';
 $lang['SETT_REPORTS'] = 'OFF';
 $lang['SETT_RECOVER_SHOW_OPTIONS'] = 'OFF';
