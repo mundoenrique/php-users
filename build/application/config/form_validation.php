@@ -38,7 +38,7 @@ $config = [
 		],
 		[
 			'field' => 'acceptTerms',
-			'rules' => 'trim|regex_match[/on/]|required'
+			'rules' => 'trim|regex_match[/on/]'
 		],
 		[
 			'field' => 'email',
