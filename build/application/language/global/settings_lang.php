@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_SUPPORT_IE'] = 'OFF';
 $lang['SETT_MAINTENANCE'] = 'OFF';
 $lang['SETT_MAINT_NOTIF'] = 'OFF';
@@ -92,6 +93,7 @@ $lang['SETT_MFA_ACTIVE'] = 'OFF';
 $lang['SETT_SIGNIN_IMG'] = 'OFF';
 $lang['SETT_SIGNIN_WELCOME_MSG'] = 'OFF';
 $lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'ON';
+$lang['SETT_READ_TERMS'] = 'ON';
 $lang['SETT_WIDGET_REST_COUNTRY'] = 'OFF';
 $lang['SETT_SIGIN_RECOVER_PASS'] = 'ON';
 $lang['SETT_LONG_TEXT'] = '';
