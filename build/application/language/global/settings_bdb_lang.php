@@ -1,7 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_TENANT_PUBLICATION'] = 2021;
-$lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'ON';
 $lang['SETT_WIDGET_REST_COUNTRY'] = 'ON';
 $lang['SETT_IN_TRANSIT'] = 'ON';
 $lang['SETT_FOOTER_MARK'] = 'ON';
