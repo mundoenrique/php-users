@@ -69,10 +69,7 @@
 		      propiedad intelectual que estén vinculados a la plataforma tecnológica, se estará en incumplimiento de lo
 		      establecido por las distintas normas que regulan la materia.</p>
 		    <p>Al seleccionar la opción “Acepto las Condiciones de Uso de este sistema”, El Usuario también está aceptando el
-		      Reglamento de Uso de las tarjetas prepago publicado en <a href="https://pichincha.miplata.com.co/reglamento"
-		        target="_blank">https://www.pichincha.miplata.com.co/reglamento/</a> y <a
-		        href="https://pichincha.mibonus.com.co/reglamento"
-		        target="_blank">https://www.pichincha.mibonus.com.co/reglamento/.</a></p>
+		      Reglamento de Uso de las tarjetas prepago publicado en <a href="https://pichincha.miplata.com.co/reglamento" target="_blank">https://www.pichincha.miplata.com.co/reglamento/</a> y <a href="https://pichincha.mibonus.com.co/reglamento" target="_blank">https://www.pichincha.mibonus.com.co/reglamento/.</a></p>
 		  </div>
 		  <div class="form-actions">
 		    <button id="aceptar"> Aceptar </button>
@@ -112,8 +109,7 @@
 		        C.A., sujetándose a lo estipulado en este acuerdo y en todos los documentos que rigen cada uno de los
 		        productos o servicios, los cuales podrían incluir —sin limitarse a ellos— el pago de cargos relacionados con
 		        el uso y el mantenimiento de dichos productos o servicios de acuerdo con la normativa vigente, recogidos en el
-		        Tarifario de Servicios Financieros publicado en el portal web de Banco Pichincha (<a
-		          href="https://www.pichincha.com">www.pichincha.com</a>), cuyo contenido declara conocer y acepta el pago de
+		        Tarifario de Servicios Financieros publicado en el portal web de Banco Pichincha (<a href="https://www.pichincha.com">www.pichincha.com</a>), cuyo contenido declara conocer y acepta el pago de
 		        tales cargos con la sola utilización de los servicios o la realización de cualquier transacción a través de
 		        los canales electrónicos.
 		      </p>
@@ -434,8 +430,7 @@
 		        financieros que podrían ser de su interés.
 		      </p>
 		      <p>
-		        Para más información, por favor refiérase a nuestra Política de Privacidad, publicada en <a
-		          href="https://www.pichincha.com">www.pichincha.com</a>.
+		        Para más información, por favor refiérase a nuestra Política de Privacidad, publicada en <a href="https://www.pichincha.com">www.pichincha.com</a>.
 		      </p>
 		      <h3>9. Declaraciones y Garantías</h3>
 		      <br>
@@ -666,9 +661,8 @@
 		    <header>
 		      <h2>Condiciones Generales, Términos de Uso y Confidencialidad</h2>
 		    </header>
-		    <p><strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> y <strong> Servitebca Servicio de
-		        Transferencia Electrónica de Beneficios, C.A,</strong> ambas sociedades domiciliadas en la ciudad de Caracas e
-		      inscritas ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado
+		    <p><strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> domiciliada en la ciudad de Caracas e
+		      inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado
 		      Miranda, en fechas 02 de agosto de 2004 y 12 de mayo de 2005 y registradas bajo los Nos. 79 y 72, Tomos
 		      128-A-Pro. y 60-A-Pro., respectivamente, quienes en lo adelante, conjunta o indistintamente, se denominarán ”La
 		      Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta
@@ -745,46 +739,46 @@
 		</div>
 
 		<!-- MODAL REGISTRO -->
-		<?php if($skin != 'pichincha'): ?>
-		<footer id="foot">
-		  <div id="foot-wrapper">
-		    <div class="foot-wrapper-top">
-		      <a id="app-engine" href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a>
-		    </div>
-		    <div class="foot-wrapper-bottom">
-		      <!-- <ul id="networks">
+		<?php if ($skin != 'pichincha') : ?>
+		  <footer id="foot">
+		    <div id="foot-wrapper">
+		      <div class="foot-wrapper-top">
+		        <a id="app-engine" href="http://www.novopayment.com/" rel="me" target="_blank">NovoPayment, Inc.</a>
+		      </div>
+		      <div class="foot-wrapper-bottom">
+		        <!-- <ul id="networks">
 						<li class="network-item maestro">Maestro</li>
 						<li class="network-item mastercard">MasterCard</li>
 						<li class="network-item visa">Visa</li>
 						<li class="network-item visa-electron">Visa Electron</li>
 					</ul> -->
-		      <ul id="certificates">
-		        <li class="certificate-item norton-secured">Norton Secured</li>
-		        <!-- <li class="certificate-item iso-9001">Fondonorma ISO 9001</li> -->
-		        <li class="certificate-item pci">PCI Security Standards Council</li>
-		      </ul>
-		      <p id="app-copyright"><?php echo date('Y'); ?> Todos los derechos reservados.</p>
+		        <ul id="certificates">
+		          <li class="certificate-item norton-secured">Norton Secured</li>
+		          <!-- <li class="certificate-item iso-9001">Fondonorma ISO 9001</li> -->
+		          <li class="certificate-item pci">PCI Security Standards Council</li>
+		        </ul>
+		        <p id="app-copyright"><?php echo date('Y'); ?> Todos los derechos reservados.</p>
+		      </div>
 		    </div>
-		  </div>
-		</footer>
+		  </footer>
 		<?php endif; ?>
 		<script type="text/javascript">
-var base_url = "<?php echo $this->config->item("base_url"); ?>";
+		  var base_url = "<?php echo $this->config->item("base_url"); ?>";
 		</script>
-		<?php if($FooterCustomInsertJSActive){?>
-		<?php
-			foreach ($FooterCustomInsertJS as $script) {
-				echo insert_js_cdn($script);
-			}
-			 ?>
-		<?php };?>
-		<?php if($FooterCustomJSActive){?>
-		<script>
-{
-  FooterCustomJS
-}
-		</script>
-		<?php };?>
+		<?php if ($FooterCustomInsertJSActive) { ?>
+		  <?php
+      foreach ($FooterCustomInsertJS as $script) {
+        echo insert_js_cdn($script);
+      }
+      ?>
+		<?php }; ?>
+		<?php if ($FooterCustomJSActive) { ?>
+		  <script>
+		    {
+		      FooterCustomJS
+		    }
+		  </script>
+		<?php }; ?>
 		</body>
 
 		</html>
