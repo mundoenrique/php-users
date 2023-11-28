@@ -661,12 +661,7 @@
 		    <header>
 		      <h2>Condiciones Generales, Términos de Uso y Confidencialidad</h2>
 		    </header>
-		    <p><strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> domiciliada en la ciudad de Caracas e
-		      inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado
-		      Miranda, en fechas 02 de agosto de 2004 y 12 de mayo de 2005 y registradas bajo los Nos. 79 y 72, Tomos
-		      128-A-Pro. y 60-A-Pro., respectivamente, quienes en lo adelante, conjunta o indistintamente, se denominarán ”La
-		      Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta
-		      plataforma electrónica, en lo adelante “La Plataforma”:</p>
+		    <p><strong>Tebca Transferencia Electrónica de Beneficios, C.A</strong> sociedad mercantil domiciliada en la ciudad de Caracas e inscrita ante el Registro Mercantil Primero de la Circunscripción Judicial del Distrito Capital y Estado Miranda, en fecha 02 de agosto de 2004, bajo el No. 79 Tomo 128-A-Pro., quien en lo adelante, se denominará ”La Empresa”; a continuación describen los términos y condiciones que rigen el uso y la confidencialidad de esta plataforma electrónica, en lo adelante “La Plataforma”:</p>
 		    <p>Sus Usuarios se obligan a leer las presentes Condiciones y Términos Generales de Uso y Confidencialidad
 		      cuidadosamente antes de continuar su recorrido en este sitio web y, de hacerlo, se entenderá que están de
 		      acuerdo con las mismas y declaran que aceptan cumplir a cabalidad con las instrucciones y obligaciones aquí
