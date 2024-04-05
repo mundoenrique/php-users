@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['TRANSF_TO_TRANSFER'] = 'To transfer';
 $lang['TRANSF_MAKE_PAYMENT'] = 'Make payment';
 $lang['TRANSF_MANAGE_AFFILIATIONS'] = 'Manage affiliations';
@@ -38,7 +39,7 @@ $lang['TRANSF_SET_OPER_KEY'] = 'To carry out transactions with your accounts fro
 $lang['TRANSF_KEY_OPER'] = 'Operations key';
 $lang['TRANSF_FORGOT_OPER_KEY'] = '
 <strong>Forgot your special ops password?</strong> Write to us at
-<strong> <a class="btn-link" href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com </a></strong>
+<strong> <a class="btn-link" href= "mailto:info@tebca.com">info@tebca.com</a></strong>
 including the following information: <br>
 <strong>Full name, ID number, company where you work, last 4 digits of your card </strong>
 and we will gladly help you.

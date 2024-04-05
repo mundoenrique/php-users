@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['TRANSF_TO_TRANSFER'] = 'Transferir';
 $lang['TRANSF_MAKE_PAYMENT'] = 'Realizar pago';
 $lang['TRANSF_MANAGE_AFFILIATIONS'] = 'Administrar afiliaciones';
@@ -38,7 +39,7 @@ $lang['TRANSF_SET_OPER_KEY'] = 'Para realizar transacciones con tus cuentas desd
 $lang['TRANSF_KEY_OPER'] = 'Clave de operaciones';
 $lang['TRANSF_FORGOT_OPER_KEY'] = '
 <strong>¿Olvidaste tu clave de operaciones especiales?</strong> Escríbenos a
-<strong> <a class="btn-link" href= "mailto:soporteempresas@tebca.com">soporteempresas@tebca.com </a></strong>
+<strong> <a class="btn-link" href= "mailto:info@tebca.com">info@tebca.com</a></strong>
 incluyendo los siguientes datos: <br>
 <strong>nombre completo, número de cédula, empresa en la que trabajas, 4 últimos dígitos de tu tarjeta </strong>
 y con gusto te ayudaremos.
