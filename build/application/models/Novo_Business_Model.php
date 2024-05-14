@@ -390,7 +390,7 @@ class Novo_Business_Model extends NOVO_Model
             $this->response->data->ext = $ext;
             break;
           case 'send':
-            $fitype = $dataRequest->id == 'downloadPDF' ? 'PDF' : 'EXCEL';
+            $fitype = $dataRequest->id == 'sendPDF' ? 'PDF' : 'EXCEL';
             $this->response->title = novoLang(lang('GEN_SEND_FILE'), $fitype);
             $this->response->icon = lang('SETT_ICON_SUCCESS');
             $this->response->msg = lang('GEN_MAIL_SUCCESS');
