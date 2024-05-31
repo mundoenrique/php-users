@@ -98,6 +98,7 @@ $timeZone = [
   'bdb' => 'America/Bogota',
   'bg' => 'America/Guayaquil',
   'bnt' => 'America/Mexico_City',
+  'bnte' => 'America/Mexico_City',
   'bog' => 'America/Bogota',
   'bp' => 'America/Guayaquil',
   'co' => 'America/Bogota',
@@ -139,7 +140,7 @@ defined('BASE_URL')         or define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')        or define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')       or define('ASSET_PATH', $_SERVER['ASSET_PATH']);
 defined('BASE_LANGUAGE')    or define('BASE_LANGUAGE', $baseLanguage);
-defined('SUBCLASS_PREFIX')  or define('SUBCLASS_PREFIX', in_array('bdb', $uriSegments) ? 'BDB_' : 'NOVO_');
+defined('SUBCLASS_PREFIX')  or define('SUBCLASS_PREFIX', in_array($uriSegments[1], ['bdb', 'bdbo']) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')        or define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')         or define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
 defined('ENCRYPTION_KEY')   or define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');

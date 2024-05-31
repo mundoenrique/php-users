@@ -192,9 +192,9 @@ class Connect_Services_Apis
     $curlResponse = json_decode($curlResponse);
 
     if ($curlHttpCode !== 200 || !$curlResponse) {
-      switch ($CurlErrorNo) {
+      switch ($curlErrorNo) {
         case 28:
-          $failResponse->rc = 504;
+          $curlResponse->rc = 504;
           break;
         default:
           $curlResponse->rc = lang('SETT_RC_DEFAULT');
@@ -202,7 +202,7 @@ class Connect_Services_Apis
 
       switch ($curlHttpCode) {
         case 502:
-          $failResponse->rc = 502;
+          $curlResponse->rc = 502;
           break;
       }
     } else {

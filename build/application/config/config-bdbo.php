@@ -3,9 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 //País
 $config['country'] = 'bdb';
-$config['country_uri'] = 'bdb';
+$config['country_uri'] = 'bdbo';
 $config['language'] = 'core-bdb';
-$config['base_url']  = BASE_URL . '/' . 'bdb/';
+$config['base_url']  = BASE_URL . '/' . 'bdbo/';
 $config['language_file_specific'] = [];
 $config['language_form_validate'] = FALSE;
 $config['client'] = 'banco-bog';
