@@ -47,7 +47,7 @@ SetEnv PROXY_ENABLE OFF
 # APPLICATION SETTINGS #
 #----------------------#
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'default, pichincha, bdb, bnt, bnte, pb, bg, pe, us, ve, bp, vg, coop, bog'
+SetEnv ACCESS_URL 'default, pichincha, pe, per, co, col, us, usd, ve, ven, vg, vgy, bg, bdb, bog, bnt, bnte, bp, bpi , bpic, pb, coop'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
