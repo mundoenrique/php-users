@@ -1,100 +1,101 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class BDB_Model extends CI_Model {
-	public $dataAccessLog;
-	public $className;
-	public $logAccess;
-	public $token;
-	public $country;
-	public $countryUri;
-	public $dataRequest;
-	public $response;
-	public $isResponseRc;
-	public $userName;
+class BDB_Model extends CI_Model
+{
+  public $dataAccessLog;
+  public $className;
+  public $logAccess;
+  public $token;
+  public $country;
+  public $countryUri;
+  public $dataRequest;
+  public $response;
+  public $isResponseRc;
+  public $userName;
 
-	public function __construct()
-	{
-		parent:: __construct();
-		log_message('INFO', 'BDB_Model  Class Initialized');
+  public function __construct()
+  {
+    parent::__construct();
+    log_message('INFO', 'BDB_Model  Class Initialized');
 
-		$this->dataAccessLog = new stdClass();
-		$this->dataRequest = new stdClass();
+    $this->dataAccessLog = new stdClass();
+    $this->dataRequest = new stdClass();
 
-		$this->response = new stdClass();
-		$this->response->code = lang('RESP_DEFAULT_CODE');
-		$this->response->title = lang('GEN_CORE_NAME');
-		$this->response->msg = lang('GEN_CORE_MESSAGE');
-		$this->response->classIconName = 'ui-icon-closethick';
-		$this->response->data = [
-			'btn1'=> [
-				'text'=> lang('GEN_BTN_ACCEPT'),
-				'link'=> FALSE,
-				'action'=> 'close'
-			]
-		];
+    $this->response = new stdClass();
+    $this->response->code = lang('RESP_DEFAULT_CODE');
+    $this->response->title = lang('GEN_CORE_NAME');
+    $this->response->msg = lang('GEN_CORE_MESSAGE');
+    $this->response->classIconName = 'ui-icon-closethick';
+    $this->response->data = [
+      'btn1' => [
+        'text' => lang('GEN_BTN_ACCEPT'),
+        'link' => FALSE,
+        'action' => 'close'
+      ]
+    ];
 
-		$this->country = $this->session->userdata('pais') ?: $this->config->item('country');
-		$this->countryUri = $this->session->userdata('countryUri');
-		$this->isResponseRc = 'No web service';
-		$this->token = $this->session->userdata('token') ?: '';
-		$this->userName = mb_strtoupper($this->session->userdata('userName'));
-		$this->lang->load(['error','general', 'response'], 'base-bdb' );
-		$this->keyId = $this->session->userdata('userName')?: 'CPONLINE';
-	}
+    $this->country = $this->session->userdata('pais') ?: $this->config->item('country');
+    $this->countryUri = $this->session->userdata('countryUri');
+    $this->isResponseRc = 'No web service';
+    $this->token = $this->session->userdata('token') ?: '';
+    $this->userName = mb_strtoupper($this->session->userdata('userName'));
+    $this->lang->load(['error', 'general', 'response'], 'base-bdb');
+    $this->keyId = $this->session->userdata('userName') ?: 'CPONLINE';
+  }
 
-	public function sendToService($model)
-	{
-		log_message('INFO', 'NOVO sendToService Method Initialized');
+  public function sendToService($model)
+  {
+    log_message('INFO', 'NOVO sendToService Method Initialized');
 
-		$this->logAccess = logAccess($this->dataAccessLog);
-		$this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
+    $this->logAccess = logAccess($this->dataAccessLog);
+    $this->userName = $this->userName ?: mb_strtoupper($this->dataAccessLog->userName);
 
-		$this->dataRequest->className = $this->className;
-		$this->dataRequest->logAccesoObject = $this->logAccess;
-		$this->dataRequest->token = $this->token;
-		$this->dataRequest->pais = empty($this->dataRequest->pais)? ucwords($this->country): $this->dataRequest->pais;
+    $this->dataRequest->className = $this->className;
+    $this->dataRequest->logAccesoObject = $this->logAccess;
+    $this->dataRequest->token = $this->token;
+    $this->dataRequest->pais = empty($this->dataRequest->pais) ? ucwords($this->country) : $this->dataRequest->pais;
 
 
-		$encryptData = $this->bdb_connect_encrypt->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
-		$request = ['data'=> $encryptData, 'pais'=> $this->dataRequest->pais, 'keyId' => $this->keyId];
-		$response = [];
-		$response = $this->bdb_connect_encrypt->connectWs($request, $this->dataAccessLog->userName, $model);
+    $encryptData = $this->bdb_connect_encrypt->encode($this->dataRequest, $this->dataAccessLog->userName, $model);
+    $request = ['data' => $encryptData, 'pais' => $this->dataRequest->pais, 'keyId' => $this->keyId];
+    $response = [];
+    $response = $this->bdb_connect_encrypt->connectWs($request, $this->dataAccessLog->userName, $model);
 
-		if(isset($response->rc)){
-			$responseDecrypt = $response;
-		}else{
-			$responseDecrypt = $this->bdb_connect_encrypt->decode($response->data, $this->userName, $model);
-		}
+    if (isset($response->rc)) {
+      $responseDecrypt = $response;
+    } else {
+      $responseDecrypt = $this->bdb_connect_encrypt->decode($response->data, $this->userName, $model);
+    }
 
-		log_message("info", "Response: " . json_encode($responseDecrypt));
+    log_message("info", "Response: " . json_encode($responseDecrypt));
 
-		$this->isResponseRc = (int) $responseDecrypt->rc;
-		switch($this->isResponseRc) {
-			case -61:
-				$this->response->msg = lang('RESP_DUPLICATED_SESSION');
-				$this->session->sess_destroy();
-				break;
+    $this->isResponseRc = (int) $responseDecrypt->rc;
+    switch ($this->isResponseRc) {
+      case -61:
+        $this->response->msg = lang('RESP_DUPLICATED_SESSION');
+        $this->session->sess_destroy();
+        break;
 
-			case -3:
-				$this->response->msg = lang('GEN_CORE_MESSAGE');
-				break;
+      case -3:
+        $this->response->msg = lang('GEN_CORE_MESSAGE');
+        break;
 
-			case -9999:
-			case 4:
-				$this->response->msg = $responseDecrypt->msg;
-				break;
-		}
-		$this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
+      case -9999:
+      case 4:
+        $this->response->msg = $responseDecrypt->msg;
+        break;
+    }
+    $this->response->msg = $this->isResponseRc == 0 ? lang('RESP_RC_0') : $this->response->msg;
 
-		return $responseDecrypt;
-	}
+    return $responseDecrypt;
+  }
 
-	public function cypherData()
-	{
-		log_message('INFO', 'NOVO cypherData Method Initialized');
-		log_message('DEBUG', 'NOVO RESPONSE TO VIEW: '.json_encode($this->response));
+  public function cypherData()
+  {
+    log_message('INFO', 'NOVO cypherData Method Initialized');
+    log_message('DEBUG', 'NOVO RESPONSE TO VIEW: ' . json_encode($this->response));
 
-		return $this->cryptography->encrypt($this->response);
-	}
+    return $this->cryptography->encrypt($this->response);
+  }
 }

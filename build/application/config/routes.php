@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -65,27 +65,27 @@ $route['(:any)/novo-async-call'] = "Novo_CallModels";
 $route['(:any)/suggestion'] = "Novo_User/suggestion";
 //User
 $route['(:any)/inicio'] = function ($customer) {
-	if ($customer == 'bdb') {
-		return "user/login";
-	} else {
-		header('Location: '.BASE_URL.'/'.$customer.'/sign-in', 'GET');
-		exit;
-	}
+  if (SUBCLASS_PREFIX === 'BDB_') {
+    return "user/login";
+  } else {
+    header('Location: ' . BASE_URL . '/' . $customer . '/sign-in', 'GET');
+    exit;
+  }
 };
 $route['(:any)/recuperar-acceso'] = function ($customer) {
-	header('Location: '.BASE_URL.'/'.$customer.'/recover-access', 'GET');
-		exit;
+  header('Location: ' . BASE_URL . '/' . $customer . '/recover-access', 'GET');
+  exit;
 };
 $route['(:any)/identificar-usuario'] = function ($customer) {
-	header('Location: '.BASE_URL.'/'.$customer.'/user-identify', 'GET');
-		exit;
+  header('Location: ' . BASE_URL . '/' . $customer . '/user-identify', 'GET');
+  exit;
 };
 $route['(:any)/terminos-condiciones'] = function ($customer) {
-	header('Location: '.BASE_URL.'/'.$customer.'/terms-conditions', 'GET');
-		exit;
+  header('Location: ' . BASE_URL . '/' . $customer . '/terms-conditions', 'GET');
+  exit;
 };
 $route['(:any)/sign-in'] = function ($customer) {
-	return $customer == "bdb" ? "user/login" : "Novo_User/signin";
+  return SUBCLASS_PREFIX === 'BDB_' ? "user/login" : "Novo_User/signin";
 };
 $route['(:any)/sign-in/(:any)'] = "Novo_User/signin";
 $route['(:any)/sign-up'] = "Novo_User/signup";
@@ -117,26 +117,26 @@ $route['(:any)/notifications'] = "Novo_CustomerSupport/notifications";
 | BOGOTÁ ROUTES
 |--------------------------------------------------------------------------
 */
-$route['bdb/'] = "user/login";
-$route['bdb/inicio'] = "user/login";
-$route['bdb/preregistro'] = "user/preRegistry";
-$route['bdb/registro'] = "user/registry";
-$route['bdb/perfil'] = "user/profile";
-$route['bdb/recuperaracceso'] = "user/recoveryAccess";
-$route['bdb/cerrarsesion'] = "user/closeSession";
-$route['bdb/cambiarclave'] = "user/changePassword";
-$route['bdb/cambiarclaveprofile'] = "user/changePasswordProfile";
-$route['bdb/sugerencia'] = "user/notRender";
-$route['bdb/app/(:any)'] = "user/notRender/$2";
-$route['bdb/vistaconsolidada'] = "product/listProduct";
-$route['bdb/detalle'] = "product/detailProduct";
-$route['bdb/detalle/download'] = "product/downloadDetail";
-$route['bdb/async-call'] = "callModels";
-$route['bdb/listaproducto'] = "serviceProduct/listProduct";
-$route['bdb/atencioncliente'] = "serviceProduct/customerSupport";
-$route['bdb/reporte'] = "expenseReport/listProduct";
-$route['bdb/detallereporte'] = "expenseReport/detailReport";
-$route['bdb/reporte/getpdf'] = "expenseReport/getPDF";
+$route['(bdb|bdbo)/'] = "user/login";
+$route['(bdb|bdbo)/inicio'] = "user/login";
+$route['(bdb|bdbo)/preregistro'] = "user/preRegistry";
+$route['(bdb|bdbo)/registro'] = "user/registry";
+$route['(bdb|bdbo)/perfil'] = "user/profile";
+$route['(bdb|bdbo)/recuperaracceso'] = "user/recoveryAccess";
+$route['(bdb|bdbo)/cerrarsesion'] = "user/closeSession";
+$route['(bdb|bdbo)/cambiarclave'] = "user/changePassword";
+$route['(bdb|bdbo)/cambiarclaveprofile'] = "user/changePasswordProfile";
+$route['(bdb|bdbo)/sugerencia'] = "user/notRender";
+$route['(bdb|bdbo)/app/(:any)'] = "user/notRender/$2";
+$route['(bdb|bdbo)/vistaconsolidada'] = "product/listProduct";
+$route['(bdb|bdbo)/detalle'] = "product/detailProduct";
+$route['(bdb|bdbo)/detalle/download'] = "product/downloadDetail";
+$route['(bdb|bdbo)/async-call'] = "callModels";
+$route['(bdb|bdbo)/listaproducto'] = "serviceProduct/listProduct";
+$route['(bdb|bdbo)/atencioncliente'] = "serviceProduct/customerSupport";
+$route['(bdb|bdbo)/reporte'] = "expenseReport/listProduct";
+$route['(bdb|bdbo)/detallereporte'] = "expenseReport/detailReport";
+$route['(bdb|bdbo)/reporte/getpdf'] = "expenseReport/getPDF";
 /*
 |--------------------------------------------------------------------------
 | OLD ROUTES
@@ -222,7 +222,7 @@ $route['perfil/listado'] = 'perfil/CallWsLista';
 $route['perfil/listaEstado'] = 'perfil/CallWsListaEstado';
 $route['perfil/listaCiudad'] = 'perfil/CallWsListaCiudad';
 $route['perfil/listadoDepartamento'] = 'perfil/CallWsListaDepartamento';
-$route['perfil/verificarEmail']='perfil/CallWsverificarEmail';
+$route['perfil/verificarEmail'] = 'perfil/CallWsverificarEmail';
 $route['perfil/profesiones'] = 'perfil/CallWsListaProfesiones';
 $route['perfil/telefonos'] = 'perfil/CallWsListaTelefonos';
 $route['perfil/direcciones'] = 'perfil/CallWsListaDirecciones';

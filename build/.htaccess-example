@@ -47,7 +47,7 @@ SetEnv PROXY_ENABLE OFF
 # APPLICATION SETTINGS #
 #----------------------#
 SetEnv CYPHER_BASE 0123456789=abcdefghijklmnopqrstuvwxyz?ABCDEFGHIJKLMNOPQRSTUVWXYZ=
-SetEnv ACCESS_URL 'default, pichincha, bdb, bnt, pb, bg, pe, us, ve, bp, vg, coop, bog'
+SetEnv ACCESS_URL 'default, pichincha, pe, per, co, col, us, usd, ve, ven, vg, vgy, bg, bdb, bog, bnt, bnte, bp, bpi , bpic, pb, coop'
 SetEnv ACTIVE_RECAPTCHA ON
 SetEnv IP_VERIFY OFF
 SetEnv DB_VERIFY ON
@@ -85,17 +85,36 @@ SetEnv WS_KEY 12345678
 SetEnv WS_URL https://d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
 SetEnv URL_MFA_SERV https://d-mfa-cms-legacy-orchestrator.novopayment.net/cms/mfa/orchestrator/v1.0/
 
-	# SOLES
-SetEnv WS_URL_PE https://d-peru-soles.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
-
-	# DÓLARES
-SetEnv WS_URL_US https://d-peru-usd.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
-
-	# BANORTE
+  # BANORTE
 SetEnv WS_URL_BNT https://d-banorte-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+SetEnv WS_URL_BNTE https://d-banorte-server.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
 
-	# Coop central
-# SetEnv WS_URL_COOP https://d-b2bservices-server.novopayment.net/NovoEolWebInterfaceWS/webresources/movilsInterfaceResource
+  # BOGOTA
+SetEnv WS_URL_BDBO https://tomcat-d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # COOPCENTRAL
+SetEnv WS_URL_COOPC https://tomcat-d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # DÓLARES
+SetEnv WS_URL_USD https://d-peru-usd.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # GUAYAQUIL
+SetEnv WS_URL_BGU https://tomcat-d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # PICHINCHA
+SetEnv WS_URL_BPIC https://tomcat-d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # PRODUBANCO
+SetEnv WS_URL_PBA https://tomcat-d-web-service.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # SOLES
+SetEnv WS_URL_PER https://d-peru-soles.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # VENEZUELA
+SetEnv WS_URL_VEN https://d.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
+
+  # VOYGO
+SetEnv WS_URL_VGY https://d-peru-usd.novopayment.net/NovoInterfaceMovilesWS/webresources/movilsInterfaceResource
 
 #-------------------------------------#
 # OTHERS SERVICE ENVIROMENT VARIABLES #
