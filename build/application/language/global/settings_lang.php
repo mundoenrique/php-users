@@ -32,23 +32,23 @@ $lang['SETT_THOUSANDS'] = ',';
 $lang['SETT_ACTIVE_RECAPTCHA'] = ACTIVE_RECAPTCHA;
 $lang['SETT_KEY_RECAPTCHA'] = '6LdRI6QUAAAAAEp5lA831CK33fEazexMFq8ggA4-';
 $lang['SETT_VALIDATE_CAPTCHA'] = [
-	'signin',
-	'accessRecover',
-	'userIdentify',
+  'signin',
+  'accessRecover',
+  'userIdentify',
 ];
 $lang['SETT_REDIRECT_RULE'] = [
-	'profileUser',
-	'mfaEnable',
-	'mfaConfirm',
-	'finishSession',
-	'changePassword'
+  'profileUser',
+  'mfaEnable',
+  'mfaConfirm',
+  'finishSession',
+  'changePassword'
 ];
 $lang['SETT_RC_DEFAULT'] = -9999;
 $lang['SETT_DEFAULT_CODE'] = 4;
 $lang['SETT_SCORE_CAPTCHA'] = [
-	'development' => 0,
-	'testing' => 0.2,
-	'production' => 0.5
+  'development' => 0,
+  'testing' => 0,
+  'production' => 0
 ];
 $lang['SETT_VALID_ERROR'] = 'has-error';
 $lang['SETT_VALID_VALID'] = 'has-success';
@@ -61,8 +61,8 @@ $lang['SETT_VALID_POSITION'] = 'left';
 $lang['SETT_IP_VERIFY'] = IP_VERIFY;
 $lang['SETT_MODAL_WIDTH'] = 370;
 $lang['SETT_MODAL_BTN_CLASS'] = [
-	'cancel' => 'btn-modal btn btn-small btn-link',
-	'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
+  'cancel' => 'btn-modal btn btn-small btn-link',
+  'accept' => 'btn-modal btn btn-small btn-loading btn-primary'
 ];
 $lang['SETT_ICON'] = 'mt-0 ui-icon';
 $lang['SETT_ICON_SUCCESS'] = 'ui-icon-circle-check';
@@ -101,31 +101,31 @@ $lang['SETT_SECRET_KEY'] = 'ON';
 $lang['SETT_CHANGE_VIRTUAL'] = 'OFF';
 $lang['SETT_TIMER_MODAL_VIRTUAL'] = 60;
 $lang['SETT_COUNTRY_CODE'] = [
-	'Pe' => 1,
-	'Usd' => 1,
-	'Ve' => 3,
-	'Ec-bp' => 3,
-	'Ec-pb' => 3,
-	'Ec-bg' => 3,
-	'Co' => 4,
-	'coop' => 4,
-	'Bdb' => 4,
-	'Mx-Bn' => 15,
+  'Pe' => 1,
+  'Usd' => 1,
+  'Ve' => 3,
+  'Ec-bp' => 3,
+  'Ec-pb' => 3,
+  'Ec-bg' => 3,
+  'Co' => 4,
+  'coop' => 4,
+  'Bdb' => 4,
+  'Mx-Bn' => 15,
 ];
 $lang['SETT_COUNTRY_DOCUMENT'] = [
-	'Pe' => '1',
-	'Usd' => '1',
-	'Ve' => '3',
-	'Ec-bp' => '3',
-	'Ec-pb' => '3',
-	'Ec-bg' => '3',
-	'Co' => '4',
-	'coop' => '4',
-	'Bdb' => '4',
-	'Mx-Bn' => '16',
+  'Pe' => '1',
+  'Usd' => '1',
+  'Ve' => '3',
+  'Ec-bp' => '3',
+  'Ec-pb' => '3',
+  'Ec-bg' => '3',
+  'Co' => '4',
+  'coop' => '4',
+  'Bdb' => '4',
+  'Mx-Bn' => '16',
 ];
 $lang['SETT_CONTACTS'] = [
-	'XXXXX' => 'XXXXXXX',
+  'XXXXX' => 'XXXXXXX',
 ];
 $lang['SETT_UPDATE_USER'] = 'ON';
 $lang['SETT_UPDATE_NAME'] = 'ON';
@@ -162,13 +162,13 @@ $lang['SETT_FOOTER_INFO'] = 'ON';
 $lang['SETT_FOTTER_PRIVACY_NOTICE'] = 'OFF';
 $lang['SETT_FILTER_ATTRIBUTES_LOG'] = ['password'];
 $lang['SETT_CONFIG_UPLOAD_FILE'] = [
-	'allowed_types' => 'jpeg|png|jpg',
-	'detect_mime' => TRUE,
-	'min_size' => 10,
-	'max_size' => 1024,
-	'encrypt_name' => FALSE,
-	'overwrite' => TRUE,
-	'file_ext_tolower' => TRUE,
+  'allowed_types' => 'jpeg|png|jpg',
+  'detect_mime' => TRUE,
+  'min_size' => 10,
+  'max_size' => 1024,
+  'encrypt_name' => FALSE,
+  'overwrite' => TRUE,
+  'file_ext_tolower' => TRUE,
 ];
 $lang['SETT_TEMPORARY_LOCK_REASON'] = 'OFF';
 $lang['SETT_NO_LINK'] = 'javascript:';
@@ -199,23 +199,23 @@ $lang['SETT_LINK_REPORTS'] = 'reports';
 $lang['SETT_LINK_CUSTOMER_SUPPORT'] = 'customer-support';
 $lang['SETT_LINK_NOTIFICATIONS'] = 'notifications';
 $lang['SETT_REDIRECT_OPER_KEY'] = [
-	'cardToCard' => $lang['SETT_LINK_BETWEEN_CARDS'],
-	'cardToBank' => $lang['SETT_LINK_BANKS'],
-	'mobilePayment' => $lang['SETT_LINK_MOBILE_PAYMENT'],
+  'cardToCard' => $lang['SETT_LINK_BETWEEN_CARDS'],
+  'cardToBank' => $lang['SETT_LINK_BANKS'],
+  'mobilePayment' => $lang['SETT_LINK_MOBILE_PAYMENT'],
 ];
 $lang['SETT_LINK_MFA_APPS'] = [
-	'Google Authenticator'	  => 'https://support.google.com/accounts/answer/1066447?hl=es&co=GENIE.Platform%3DAndroid',
-	'Microsoft Authenticator' => 'https://www.microsoft.com/es-es/security/mobile-authenticator-app',
-	'Authy' 									=> 'https://authy.com/',
-	'LastPass Authenticator' 	=> 'https://www.lastpass.com/solutions/authentication',
-	'1password' 						  => 'https://1password.com/',
+  'Google Authenticator'    => 'https://support.google.com/accounts/answer/1066447?hl=es&co=GENIE.Platform%3DAndroid',
+  'Microsoft Authenticator' => 'https://www.microsoft.com/es-es/security/mobile-authenticator-app',
+  'Authy'                   => 'https://authy.com/',
+  'LastPass Authenticator'   => 'https://www.lastpass.com/solutions/authentication',
+  '1password'               => 'https://1password.com/',
 ];
 $lang['SETT_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => $lang['SETT_NO_LINK'],
-	'twitter' => $lang['SETT_NO_LINK'],
-	'youtube' => $lang['SETT_NO_LINK'],
-	'instagram' => $lang['SETT_NO_LINK'],
-	'linkedin' => $lang['SETT_NO_LINK'],
+  'facebook' => $lang['SETT_NO_LINK'],
+  'twitter' => $lang['SETT_NO_LINK'],
+  'youtube' => $lang['SETT_NO_LINK'],
+  'instagram' => $lang['SETT_NO_LINK'],
+  'linkedin' => $lang['SETT_NO_LINK'],
 ];
 $lang['SETT_PRIVACY_NOTICE_LINK'] = $lang['SETT_NO_LINK'];
 $lang['SETT_LINK_SERVICE_RECOVER_ACCESS'] = 'AccessRecover';
@@ -230,15 +230,15 @@ $lang['SETT_MFA_DEACTIVATE'] = 'deactivate';
 $lang['SETT_MFA_GENERATE_OTP'] = 'generate';
 $lang['SETT_MFA_VALIDATE_OTP'] = 'validate';
 $lang['SETT_TRANSFER_DOCUMENT_TYPE'] = [
-	'V' => 'V',
-	'E' => 'E',
-	'P' => 'P',
+  'V' => 'V',
+  'E' => 'E',
+  'P' => 'P',
 ];
 $lang['SETT_TRANSFER_DOCUMENT_TYPE_EXTENDED'] = [
-	'V' => 'V',
-	'E' => 'E',
-	'P' => 'P',
-	'J' => 'J',
-	'G' => 'G',
+  'V' => 'V',
+  'E' => 'E',
+  'P' => 'P',
+  'J' => 'J',
+  'G' => 'G',
 ];
 $lang['SETT_NUMERIC_DOCUMENT_ID'] = ['CC'];
