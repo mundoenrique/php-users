@@ -1574,16 +1574,17 @@ class Novo_User_Model extends NOVO_Model
 
     $userName = $dataRequest->userName ?? ($dataRequest->idNumber ?? ($dataRequest->documentId ?? ''));
     $result = $this->recaptcha->verifyResponse($dataRequest->token, $userName);
+    $score = $result->score ?? 0;
 
-    writeLog('DEBUG', 'RESPONSE: recaptcha, Score: ' . $result["score"] . ', Hostname: ' . $result["hostname"]);
+    writeLog('DEBUG', 'RECAPTCH RESPONSE: ' . json_encode($result, JSON_UNESCAPED_UNICODE));
 
-    $resultRecaptcha = $result["score"] <= lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
+    $resultRecaptcha = $score < lang('SETT_SCORE_CAPTCHA')[ENVIRONMENT] ? 9999 : 0;
 
-    if ($resultRecaptcha == 9999) {
+    if ($resultRecaptcha === 9999) {
       $this->response->code = 4;
       $this->response->title = lang('GEN_SYSTEM_NAME');
       $this->response->icon = lang('SETT_ICON_DANGER');
-      $this->response->msg = lang('USER_SIGNIN_RECAPTCHA_VALIDATE');
+      $this->response->msg = lang('GEN_RECAPTCHA_VALIDATION_FAILED');
       $this->response->modalBtn['btn1']['link'] = lang('SETT_LINK_SIGNIN');
       $this->response->modalBtn['btn1']['action'] = 'redirect';
     }
