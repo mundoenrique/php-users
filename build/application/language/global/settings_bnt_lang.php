@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_TENANT_PUBLICATION'] = 2019;
 $lang['SETT_VALID_POSITION'] = 'right';
 $lang['SETT_CARD_COLOR'] = 'text';
@@ -9,17 +10,17 @@ $lang['SETT_FOOTER_NETWORKS'] = 'ON';
 $lang['SETT_FOOTER_LOGO'] = 'OFF';
 $lang['SETT_FOTTER_PRIVACY_NOTICE'] = 'ON';
 $lang['SETT_FOTTER_NETWORKS_LINK'] = [
-	'facebook' => 'https://www.facebook.com/banorte',
-	'twitter' => 'https://www.twitter.com/Banorte_mx',
-	'youtube' => 'https://www.youtube.com/user/banortemovil',
-	'instagram' => 'https://www.instagram.com/banorte_mx',
+  'facebook' => 'https://www.facebook.com/banorte',
+  'twitter' => 'https://www.twitter.com/Banorte_mx',
+  'youtube' => 'https://www.youtube.com/user/banortemovil',
+  'instagram' => 'https://www.instagram.com/banorte_mx',
 ];
 $lang['SETT_PRIVACY_NOTICE_LINK'] = 'https://www.banorte.com/wps/portal/gfb?uri=nm:oid:banorte-te-informa.aviso-de-privacidad';
 $lang['SETT_SECRET_KEY'] = 'OFF';
 $lang['SETT_CONTACTS'] = [
-	'CDMX' => '(55) 5140 5640',
-	'MTY' => '(81) 8156 9640',
-	'GDL' => '(33) 3669 9040',
+  'CDMX' => '(55) 5140 5640',
+  'MTY' => '(81) 8156 9640',
+  'GDL' => '(33) 3669 9040',
 ];
 $lang['SETT_UPDATE_USER'] = 'ON';
 $lang['SETT_UPDATE_NAME'] = 'OFF';

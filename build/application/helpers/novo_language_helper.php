@@ -52,6 +52,20 @@ if (!function_exists('LoadLangFile')) {
           $CI->lang->load('regexp_' . $customerLang);
         }
 
+        if (CUSTOMER_URI !== $customerLang) {
+          if (file_exists($pathLang . 'settings_' . CUSTOMER_URI . '_lang.php')) {
+            $CI->lang->load('settings_' . CUSTOMER_URI);
+          }
+
+          if (file_exists($pathLang . 'images_' . CUSTOMER_URI . '_lang.php')) {
+            $CI->lang->load('images_' . CUSTOMER_URI);
+          }
+
+          if (file_exists($pathLang . 'regexp_' . CUSTOMER_URI . '_lang.php')) {
+            $CI->lang->load('regexp_' . CUSTOMER_URI);
+          }
+        }
+
         $CI->config->set_item('language', BASE_LANGUAGE . '-base');
         array_push($languagesFile, 'general', 'validate');
         $loadLanguages = TRUE;

@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['SETT_TENANT_PUBLICATION'] = 2018;
 $lang['SETT_SIGNIN_WELCOME_MSG'] = 'ON';
 $lang['SETT_SIGNIN_WIDGET_CONTACT'] = 'OFF';

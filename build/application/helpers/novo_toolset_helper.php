@@ -66,17 +66,6 @@ if (!function_exists('arrayTrim')) {
   }
 }
 
-if (!function_exists('dbSearch')) {
-  function dbSearch($uri)
-  {
-    $CI = &get_instance();
-    $defaultBd = 'alpha';
-    $dbName = DB_VERIFY ? $CI->config->item('client_db')[$uri] ?? $defaultBd : $defaultBd;
-
-    return 'cpo_' . $dbName;
-  }
-}
-
 if (!function_exists('clearSessionsVars')) {
   function clearSessionsVars()
   {

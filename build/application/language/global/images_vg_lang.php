@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $lang['IMG_FAVICON'] = 'favicon-vg';
-$lang['IMG_PROGRAM_IMG_DEFAULT'] =	'vg_default.svg';
-$lang['IMG_PROGRAM_IMG_DEFAULT_REV'] =	'vg_default_rev.svg';
+$lang['IMG_PROGRAM_IMG_DEFAULT'] =  'vg_default.svg';
+$lang['IMG_PROGRAM_IMG_DEFAULT_REV'] =  'vg_default_rev.svg';

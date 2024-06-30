@@ -93,7 +93,12 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 | as part of global configuration settings.
 |
 */
-$uriSegments  =  explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$customerUri = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))[1];
+$uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$accessUrl = explode(',', str_replace(' ', '', $_SERVER['ACCESS_URL']));
+$ableDBs = ['bdb', 'bg', 'bnt', 'bp', 'co', 'coop', 'pb', 'pe', 'us', 've', 'vg'];
+$dbName = in_array($customerUri, $ableDBs) ? $customerUri : 'alpha';
+$db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
 $timeZone = [
   'bdb' => 'America/Bogota',
   'bg' => 'America/Guayaquil',
@@ -114,8 +119,8 @@ $timeZone = [
   'vg' => 'America/Lima',
   'vgy' => 'America/Lima',
 ];
-$errorController = array_key_exists($uriSegments[1], $timeZone) ? 'Novo_Errors/pageNoFound' : '';
-$timeZone = array_key_exists($uriSegments[1], $timeZone) ? $timeZone[$uriSegments[1]] : 'America/New_York';
+$errorController = array_key_exists($customerUri, $timeZone) ? 'Novo_Errors/pageNoFound' : '';
+$timeZone = array_key_exists($customerUri, $timeZone) ? $timeZone[$customerUri] : 'America/New_York';
 date_default_timezone_set($timeZone);
 $baseLanguage = 'spanish';
 
@@ -131,6 +136,22 @@ switch (end($uriSegments)) {
       $baseLanguage = $_COOKIE['cpo_baseLanguage'];
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| DATABASE CONNECTION VARIABLES
+|--------------------------------------------------------------------------
+*/
+defined('DB_NAME')        or define('DB_NAME', $dbName);
+defined('DB_HOSTNAME')    or define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME'] ?? NULL);
+defined('DB_PORT')        or define('DB_PORT', $db_port);
+defined('DB_USERNAME')    or define('DB_USERNAME', $_SERVER['DB_USERNAME'] ?? NULL);
+defined('DB_PASSWORD')    or define('DB_PASSWORD', $_SERVER['DB_PASSWORD'] ?? NULL);
+defined('DB_DRIVER')      or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
+defined('DB_CHARSET')     or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
+defined('DB_COLLATION')   or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
+defined('DB_VERIFY')      or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
+
 /*
 |--------------------------------------------------------------------------
 | FRAMEWORK SETTINGS
@@ -140,14 +161,13 @@ defined('BASE_URL')         or define('BASE_URL', $_SERVER['BASE_URL']);
 defined('ASSET_URL')        or define('ASSET_URL', $_SERVER['ASSET_URL']);
 defined('ASSET_PATH')       or define('ASSET_PATH', $_SERVER['ASSET_PATH']);
 defined('BASE_LANGUAGE')    or define('BASE_LANGUAGE', $baseLanguage);
-defined('SUBCLASS_PREFIX')  or define('SUBCLASS_PREFIX', in_array($uriSegments[1], ['bdb', 'bdbo']) ? 'BDB_' : 'NOVO_');
+defined('SUBCLASS_PREFIX')  or define('SUBCLASS_PREFIX', in_array($customerUri, ['bdb', 'bdbo']) ? 'BDB_' : 'NOVO_');
 defined('THRESHOLD')        or define('THRESHOLD', $_SERVER['CI_ENV'] === 'development' ? 4 : 2);
 defined('LOG_PATH')         or define('LOG_PATH', $_SERVER['LOG_PATH'] ?? '');
 defined('ENCRYPTION_KEY')   or define('ENCRYPTION_KEY', $_SERVER['ENCRYPTION_KEY'] ?? '3NCRYPT10N');
 defined('SESS_DRIVER')      or define('SESS_DRIVER', $_SERVER['SESS_DRIVER'] ?? 'files');
 defined('SESS_COOKIE_NAME') or define('SESS_COOKIE_NAME', $_SERVER['SESS_COOKIE_NAME'] ?? 'session');
-defined('ACTIVE_SAFETY')    or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
-defined('SESS_EXPIRATION')  or define('SESS_EXPIRATION', ACTIVE_SAFETY ? intval($_SERVER['SESS_EXPIRATION']) : 0);
+defined('SESS_EXPIRATION')  or define('SESS_EXPIRATION', intval($_SERVER['SESS_EXPIRATION']));
 defined('SESS_SAVE_PATH')   or define('SESS_SAVE_PATH', $_SERVER['SESS_SAVE_PATH'] ?? NULL);
 defined('COOKIE_PREFIX')    or define('COOKIE_PREFIX', $_SERVER['COOKIE_PREFIX']);
 defined('COOKIE_DOMAIN')    or define('COOKIE_DOMAIN', $_SERVER['COOKIE_DOMAIN']);
@@ -159,29 +179,16 @@ defined('PROXY_IPS')        or define('PROXY_IPS', $_SERVER['PROXY_ENABLE'] === 
 | APPLICATION SETTINGS
 |--------------------------------------------------------------------------
 */
+defined('CUSTOMER_URI')     or define('CUSTOMER_URI', $customerUri);
 defined('ERROR_CONTROLLER') or define('ERROR_CONTROLLER', $errorController);
+defined('ACTIVE_SAFETY')    or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')      or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
 defined('ACCESS_URL')       or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
 defined('ACTIVE_RECAPTCHA') or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('LANGUAGE')         or define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')        or define('IP_VERIFY', $_SERVER['IP_VERIFY']);
-defined('DB_VERIFY')        or define('DB_VERIFY', $_SERVER['DB_VERIFY'] === 'ON' ? TRUE : FALSE);
 defined('UPLOAD_PATH')      or define('UPLOAD_PATH', $_SERVER['UPLOAD_PATH']);
 defined('API_GEE_WAY')      or define('API_GEE_WAY', $_SERVER['API_GEE_WAY'] === 'ON' ? TRUE : FALSE);
-
-/*
-|--------------------------------------------------------------------------
-| DATABASE CONNECTION VARIABLES
-|--------------------------------------------------------------------------
-*/
-$db_port = (isset($_SERVER['DB_PORT'])) ? intval($_SERVER['DB_PORT']) : NULL;
-defined('DB_HOSTNAME')    or define('DB_HOSTNAME', $_SERVER['DB_HOSTNAME'] ?? NULL);
-defined('DB_PORT')        or define('DB_PORT', $db_port);
-defined('DB_USERNAME')    or define('DB_USERNAME', $_SERVER['DB_USERNAME'] ?? NULL);
-defined('DB_PASSWORD')    or define('DB_PASSWORD', $_SERVER['DB_PASSWORD'] ?? NULL);
-defined('DB_DRIVER')      or define('DB_DRIVER', $_SERVER['DB_DRIVER'] ?? 'mysqli');
-defined('DB_CHARSET')     or define('DB_CHARSET', $_SERVER['DB_CHARSET'] ?? 'utf8');
-defined('DB_COLLATION')   or define('DB_COLLATION', $_SERVER['DB_COLLATION'] ?? 'utf8_general_ci');
 
 /*
 |--------------------------------------------------------------------------
@@ -219,4 +226,4 @@ defined('ARGON2_SALT')          or define('ARGON2_SALT', $_SERVER['ARGON2_SALT']
 */
 defined('KEY_API')  or define('KEY_API', $_SERVER['KEY_API']);
 
-unset($uriSegments, $timeZone, $baseLanguage, $errorController);
+unset($customerUri, $uriSegments, $accessUrl, $ableDBs, $dbName, $errorController, $db_port, $timeZone);

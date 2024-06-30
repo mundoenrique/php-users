@@ -12,7 +12,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class NOVO_Controller extends CI_Controller
 {
-  private $ValidateBrowser;
   protected $customerUri;
   protected $customerLang;
   protected $customerFiles;
@@ -81,10 +80,33 @@ class NOVO_Controller extends CI_Controller
     if ($this->customerUri === "api") {
       $this->dataRequest = $this->tool_api->readHeader($this->nameApi);
     } else {
-      if ($this->session->has_userdata('userName') && SESS_DRIVER == 'database') {
+      if ($this->session->has_userdata('userName') && SESS_DRIVER === 'database') {
         $data = ['username' => $this->session->userName];
         $this->db->where('id', $this->session->session_id)
           ->update('cpo_sessions', $data);
+      }
+
+      if ($this->controllerMethod !== 'suggestion') {
+        $this->ValidateBrowser = $this->checkBrowser();
+      }
+
+      if ($this->session->has_userdata('time')) {
+        $customerTime = $this->session->time->customerTime;
+        $serverTime = $this->session->time->serverTime;
+        $currentTime = (int) date("H");
+        $serverelapsed = $currentTime - $serverTime;
+        $serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
+        $elapsed = $customerTime + $serverelapsed;
+        $this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
+      }
+
+      if ($this->input->is_ajax_request()) {
+        $request = decryptData($this->input->get_post('request'));
+        $this->dataRequest = json_decode($request);
+        $this->fileLanguage = lcfirst($this->dataRequest->who);
+        $this->validationMethod = lcfirst($this->dataRequest->where);
+        $this->modelClass = 'Novo_' . ucfirst($this->dataRequest->who) . '_Model';
+        $this->modelMethod = 'callWs_' . ucfirst($this->dataRequest->where) . '_' . $this->dataRequest->who;
       }
 
       LoadLangFile('generic', $this->fileLanguage, $this->customerLang);
@@ -95,25 +117,7 @@ class NOVO_Controller extends CI_Controller
       $this->customerFiles = config_item('customer_files');
       LoadLangFile('specific', $this->fileLanguage, $this->customerLang);
 
-      if ($this->controllerMethod !== 'suggestion') {
-        $this->ValidateBrowser = $this->checkBrowser();
-      }
-
-      if ($this->session->has_userdata('time')) {
-        $customerTime = $this->session->time->customerTime;
-        $serverTime = $this->session->time->serverTime;
-        $currentTime = (int) date("H");
-        $currentTime2 = date("Y-d-m H:i:s");
-        $serverelapsed = $currentTime - $serverTime;
-        $serverelapsed = $serverelapsed >= 0 ? $serverelapsed : $serverelapsed + 24;
-        $elapsed = $customerTime + $serverelapsed;
-        $this->greeting = $elapsed < 24 ? $elapsed : $elapsed - 24;
-      }
-
-      if ($this->input->is_ajax_request()) {
-        $request = decryptData($this->input->get_post('request'));
-        $this->dataRequest = json_decode($request);
-      } else {
+      if (!$this->input->is_ajax_request()) {
         if ($this->session->has_userdata('logged')) {
           $redirectMfa = lang('SETT_MFA_ACTIVE') === 'ON' && !$this->session->otpActive;
           $redirectProfile = $this->session->longProfile === 'S' && $this->session->affiliate === '0';
@@ -124,7 +128,7 @@ class NOVO_Controller extends CI_Controller
           if ($redirect) {
             $redirectUrl = $redirectMfa ? lang('SETT_LINK_MFA_ENABLE') : lang('SETT_LINK_USER_PROFILE');
             redirect(base_url($redirectUrl), 'Location', 301);
-            exit();
+            exit;
           }
         }
 
@@ -229,7 +233,7 @@ class NOVO_Controller extends CI_Controller
     } else {
       $linkredirect = uriRedirect();
       redirect(base_url($linkredirect), 'Location', 301);
-      exit();
+      exit;
     }
   }
   /**
