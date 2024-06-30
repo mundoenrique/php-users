@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 $config['customer'] = 'Ec-bg';
-$config['customer_uri'] = 'bg';
-$config['base_url']	= BASE_URL . '/' . $config['customer_uri'] . '/';
+$config['customer_files'] = CUSTOMER_URI;
+$config['language'] = BASE_LANGUAGE . '-' . CUSTOMER_URI;

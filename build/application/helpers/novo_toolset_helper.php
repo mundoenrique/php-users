@@ -47,7 +47,7 @@ if (!function_exists('clientUrlValidate')) {
           exit();
           break;
         case 'pichincha':
-          redirect(base_url('pichincha/home'), 'Location', 301);
+          redirect(base_url('home'), 'Location', 301);
           exit();
           break;
       }
