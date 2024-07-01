@@ -183,7 +183,7 @@ defined('CUSTOMER_URI')     or define('CUSTOMER_URI', $customerUri);
 defined('ERROR_CONTROLLER') or define('ERROR_CONTROLLER', $errorController);
 defined('ACTIVE_SAFETY')    or define('ACTIVE_SAFETY', $_SERVER['ACTIVE_SAFETY'] === 'ON' ? TRUE : FALSE);
 defined('CYPHER_BASE')      or define('CYPHER_BASE', $_SERVER['CYPHER_BASE']);
-defined('ACCESS_URL')       or define('ACCESS_URL', $_SERVER['ACCESS_URL']);
+defined('ACCESS_URL')         or define('ACCESS_URL', $accessUrl);
 defined('ACTIVE_RECAPTCHA') or define('ACTIVE_RECAPTCHA', $_SERVER['ACTIVE_RECAPTCHA'] === 'ON' ? TRUE : FALSE);
 defined('LANGUAGE')         or define('LANGUAGE', BASE_LANGUAGE === 'english' ? 'en' : 'es');
 defined('IP_VERIFY')        or define('IP_VERIFY', $_SERVER['IP_VERIFY']);

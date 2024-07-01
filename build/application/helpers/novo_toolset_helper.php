@@ -26,34 +26,29 @@ if (!function_exists('assetUrl')) {
 }
 
 if (!function_exists('clientUrlValidate')) {
-  function clientUrlValidate($client)
+  function clientUrlValidate($customer)
   {
     $CI = &get_instance();
-    $accessUrl = explode(',', ACCESS_URL);
-    array_walk($accessUrl, 'arrayTrim');
-    reset($accessUrl);
-    $uriCore = SUBCLASS_PREFIX === 'BDB_' ? '/inicio' : '/sign-in';
+    $accessUrl = ACCESS_URL;
+    $uri = SUBCLASS_PREFIX === 'BDB_' ? '/inicio' : '/sign-in';
 
-    if (!in_array($client, $accessUrl)) {
-      $client = current($accessUrl);
-      redirect(base_url($client . $uriCore), 'Location', 301);
-      exit();
-    }
+    if (!in_array($customer, $accessUrl) || $customer === 0) {
+      $baseUrl = str_replace("$customer/", "$accessUrl[0]/", base_url($uri));
 
-    if (in_array($client, $accessUrl)) {
-      switch ($client) {
+      switch ($accessUrl[0]) {
         case 'default':
-          redirect(base_url(), 'Location', 301);
-          exit();
+          $baseUrl = str_replace("$customer/", "", base_url());
           break;
         case 'pichincha':
-          redirect(base_url('home'), 'Location', 301);
-          exit();
+          $baseUrl = str_replace("$customer/", "$accessUrl[0]/home", base_url());
           break;
       }
+
+      redirect($baseUrl, 'Location', 302);
+      exit;
     }
 
-    $CI->config->load('config-' . $client);
+    $CI->config->load('config-' . $customer);
   }
 }
 

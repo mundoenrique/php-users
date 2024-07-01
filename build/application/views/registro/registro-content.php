@@ -5,10 +5,16 @@ $cpo_name = $this->security->get_csrf_token_name();
 $cpo_cook = $this->security->get_csrf_hash();
 
 $skin = get_cookie('skin', TRUE);
-switch($skin){
-	case 'pichincha': $homeLink = $this->config->item('base_url') . '/pichincha/home'; break;
-	case 'latodo': $homeLink = $this->config->item('base_url') . '/latodo/home'; break;
-	default: $homeLink = $this->config->item('base_url'); break;
+switch ($skin) {
+  case 'pichincha':
+    $homeLink = BASE_URL . '/pichincha/home';
+    break;
+  case 'latodo':
+    $homeLink = BASE_URL . '/latodo/home';
+    break;
+  default:
+    $homeLink = BASE_URL;
+    break;
 }
 ?>
 <div id="content">
@@ -33,71 +39,63 @@ switch($skin){
         <form accept-charset="utf-8" method="post" id="form-validar">
           <fieldset>
             <ul class="field-group">
-              <?php if($skin == 'default' || $skin == 'latodo'): ?>
-              <li class="field-group-item">
-                <label for="country">País</label>
-                <select id="iso" name="iso" class="country-list" disabled>
-                  <option id="def-country" selected value="" disabled> Cargando... </option>
-                </select>
-              </li>
+              <?php if ($skin == 'default' || $skin == 'latodo') : ?>
+                <li class="field-group-item">
+                  <label for="country">País</label>
+                  <select id="iso" name="iso" class="country-list" disabled>
+                    <option id="def-country" selected value="" disabled> Cargando... </option>
+                  </select>
+                </li>
               <?php endif; ?>
               <li class="field-group-item">
-                <?php if ($skin == 'pichincha'): ?>
-                <input type="hidden" id="iso" name="iso" value="Ec-bp" />
+                <?php if ($skin == 'pichincha') : ?>
+                  <input type="hidden" id="iso" name="iso" value="Ec-bp" />
                 <?php endif; ?>
                 <label for="card-number">Número de tarjeta</label>
                 <input class="field-medium" maxlength="16" id="card-number" name="card-number" type="text" value="" />
               </li>
               <li class="field-group-item">
-                <label for="card-holder-id">Documento de identidad <abbr
-                    title="Número de identificación del tarjetahabiente"><span aria-hidden="true"
-                      class="icon-question-sign"></span></abbr></label>
-                <input class="field-medium" maxlength="16" id="card-holder-id" name="card-holder-id" type="text"
-                  value="" />
+                <label for="card-holder-id">Documento de identidad <abbr title="Número de identificación del tarjetahabiente"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+                <input class="field-medium" maxlength="16" id="card-holder-id" name="card-holder-id" type="text" value="" />
               </li>
               <li class="field-group-item">
-                <label for="card-holder-pin">Clave secreta (PIN) <abbr
-                    title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true"
-                      class="icon-question-sign"></span></abbr></label>
-                <input class="field-medium" maxlength="15" id="card-holder-pin" name="card-holder-pin" type="password"
-                  value="" />
+                <label for="card-holder-pin">Clave secreta (PIN) <abbr title="Introduce la clave secreta o PIN de tu tarjeta"><span aria-hidden="true" class="icon-question-sign"></span></abbr></label>
+                <input class="field-medium" maxlength="15" id="card-holder-pin" name="card-holder-pin" type="password" value="" />
               </li>
             </ul>
-            <label class="label-inline label-disabled" id="condiciones" for="accept-terms"><input id="accept-terms"
-                name="accept-terms" type="checkbox" value="yes" disabled /> Acepto las <a href="#"
-                rel="section">condiciones de uso</a> de este sistema.</label>
+            <label class="label-inline label-disabled" id="condiciones" for="accept-terms"><input id="accept-terms" name="accept-terms" type="checkbox" value="yes" disabled /> Acepto las <a href="#" rel="section">condiciones de uso</a> de este sistema.</label>
           </fieldset>
         </form>
         <div id="msg"></div>
         <div class="form-actions">
 
-			<?php
-			if($skin=='pichincha'){
-			?>
-        <center>
-        <div class="atc-form-action-child-perfil-content_2">
-        <?php
-			 }
-		  ?>
-      <a href="<? echo $homeLink; ?>">
-		  <button type="reset" class="novo-btn-secondary">Cancelar</button>
-		  </a>
-      <button id="validar" class="novo-btn-primary">Continuar</button>
-      <?php
-			  if($skin=='pichincha'){
-			?>
-			</div>
-        </center>
-        <?php
-		}
-		?>
-        <div id="loading" class="first-request" style="display:none; float:right; width:30px; margin-top:5px;">
-          <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
+          <?php
+          if ($skin == 'pichincha') {
+          ?>
+            <center>
+              <div class="atc-form-action-child-perfil-content_2">
+              <?php
+            }
+              ?>
+              <a href="<? echo $homeLink; ?>">
+                <button type="reset" class="novo-btn-secondary">Cancelar</button>
+              </a>
+              <button id="validar" class="novo-btn-primary">Continuar</button>
+              <?php
+              if ($skin == 'pichincha') {
+              ?>
+              </div>
+            </center>
+          <?php
+              }
+          ?>
+          <div id="loading" class="first-request" style="display:none; float:right; width:30px; margin-top:5px;">
+            <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
+          </div>
         </div>
       </div>
-</div>
-</section>
-</article>
+    </section>
+  </article>
 </div>
 
 <!-- REGISTRO FASE II -->
@@ -119,7 +117,7 @@ switch($skin){
           <li class="step-item"><span aria-hidden="true" class="icon-thumbs-up"></span> Finalización</li>
         </ul>
       </div>
-      <div id="content-holder" pais="<?= $pais;?>">
+      <div id="content-holder" pais="<?= $pais; ?>">
         <h2>Afiliación de Datos</h2>
         <p>Para obtener su usuario de <strong>Conexión Personas</strong>, es necesario ingrese los datos requeridos a
           continuación:</p>
@@ -133,25 +131,21 @@ switch($skin){
             <ul class="inline-list four-segments">
               <li>
                 <label>Tipo de identificación</label>
-                <input id="listaIdentificadores" value="" name="tipo_identificacion" type="text" readonly="readonly"
-                  class="field-disabled" />
+                <input id="listaIdentificadores" value="" name="tipo_identificacion" type="text" readonly="readonly" class="field-disabled" />
               </li>
               <li>
                 <label>Número de identificación</label>
-                <input id="holder-id" value="" name="numero_identificacion" type="text" readonly="readonly"
-                  class="field-disabled" />
+                <input id="holder-id" value="" name="numero_identificacion" type="text" readonly="readonly" class="field-disabled" />
               </li>
               <li class="dig-verificador">
                 <label title="Carácter verificador del DNI">Dígito verificador</label>
-                <input title="Obtenga el carácter verificador de su DNI leyéndolo de su documento de identidad"
-                  id="dig-ver" name="dig-ver" type="text" class="field-disabled" maxlength="1" />
+                <input title="Obtenga el carácter verificador de su DNI leyéndolo de su documento de identidad" id="dig-ver" name="dig-ver" type="text" class="field-disabled" maxlength="1" />
               </li>
             </ul>
             <ul class="inline-list four-segments">
               <li>
                 <label for="first-name">Primer nombre</label>
-                <input id="first-name" maxlength="35" name="primer_nombre" type="text" placeholder="Primer nombre"
-                  value="" class="field-disabled" />
+                <input id="first-name" maxlength="35" name="primer_nombre" type="text" placeholder="Primer nombre" value="" class="field-disabled" />
               </li>
               <li>
                 <label for="last-name">Segundo nombre</label>
@@ -161,8 +155,7 @@ switch($skin){
             <ul class="inline-list four-segments">
               <li>
                 <label for="last-name">Primer apellido</label>
-                <input id="last-name" maxlength="35" name="primer_apellido" type="text" placeholder="Apellido paterno"
-                  value="" class="field-disabled" />
+                <input id="last-name" maxlength="35" name="primer_apellido" type="text" placeholder="Apellido paterno" value="" class="field-disabled" />
               </li>
               <li>
                 <label for="last-name">Segundo apellido</label>
@@ -175,21 +168,18 @@ switch($skin){
                   <label for="lugar-nacimiento">Lugar de Nacimiento</label>
                   <input maxlength="15" id="lugar-nacimiento" name="lugar_nacimiento" type="text" />
                 </li>
-								<label for="filter-range-from">Fecha de Nacimiento</label>
-									<div class="field-prepend">
-									<span aria-hidden="true" class="icon-calendar"></span>
-									<input  id="fecha-de-nacimiento-new" name="fecha-de-nacimiento-new" class="field-small" maxlength="10"
-										placeholder="DD/MM/AAAA" autocomplete="off">
-									</div>
+                <label for="filter-range-from">Fecha de Nacimiento</label>
+                <div class="field-prepend">
+                  <span aria-hidden="true" class="icon-calendar"></span>
+                  <input id="fecha-de-nacimiento-new" name="fecha-de-nacimiento-new" class="field-small" maxlength="10" placeholder="DD/MM/AAAA" autocomplete="off">
+                </div>
               </ul>
             </div>
             <ul class="field-group four-segments radio-sexo">
               <li class="select-group-item">
                 <label>Sexo</label>
-                <label class="label-inline" for="gender-male"><input checked id="gender-male" name="genero" type="radio"
-                    value="M" /> Masculino</label>
-                <label class="label-inline label-sex-fem" for="gender-female"><input id="gender-female" name="genero"
-                    type="radio" value="F" /> Femenino</label>
+                <label class="label-inline" for="gender-male"><input checked id="gender-male" name="genero" type="radio" value="M" /> Masculino</label>
+                <label class="label-inline label-sex-fem" for="gender-female"><input id="gender-female" name="genero" type="radio" value="F" /> Femenino</label>
               </li>
               <li class="select-group-item remove-plata-sueldo">
                 <label for="edocivil">Estado Civil</label>
@@ -229,8 +219,7 @@ switch($skin){
             <ul class="four-segments inline-list four-select remove-plata-sueldo">
               <li class="li-contact-select">
                 <label>País de residencia</label>
-                <input id="paisResidencia" name="pais_Residencia" type="text" readonly="readonly"
-                  class="field-disabled" />
+                <input id="paisResidencia" name="pais_Residencia" type="text" readonly="readonly" class="field-disabled" />
                 <input id="paisResidenciaHidden" name="pais_Residencia_Hidden" type="hidden" class="field-disabled" />
               </li>
               <li class="li-contact-select">
@@ -261,19 +250,18 @@ switch($skin){
             <ul class="inline-list two-segments">
               <li>
                 <label for="email">Correo Electrónico</label>
-                <?php if($skin == 'pichincha'): ?>
-                <input type="text" id="email-bp" name="email-bp" readonly>
-                <input type="hidden" id="email_cypher" name="email_cypher">
-                <?php else: ?>
-                <input id="email" name="correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text">
+                <?php if ($skin == 'pichincha') : ?>
+                  <input type="text" id="email-bp" name="email-bp" readonly>
+                  <input type="hidden" id="email_cypher" name="email_cypher">
+                <?php else : ?>
+                  <input id="email" name="correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text">
                 <?php endif; ?>
               </li>
-              <?php if($skin != 'pichincha'): ?>
-              <li>
-                <label for="confirm-email">Confirmar Correo Electrónico</label>
-                <input id="confirm-email" name="confirm-correo" maxlength="50" placeholder="usuario@ejemplo.com"
-                  type="text" />
-              </li>
+              <?php if ($skin != 'pichincha') : ?>
+                <li>
+                  <label for="confirm-email">Confirmar Correo Electrónico</label>
+                  <input id="confirm-email" name="confirm-correo" maxlength="50" placeholder="usuario@ejemplo.com" type="text" />
+                </li>
               <?php endif; ?>
             </ul>
             <ul class="inline-list two-segments area-telefonos">
@@ -282,11 +270,11 @@ switch($skin){
                   <div class="field-category field-category-wide field-phone-group">
                     <label class="phone-field">Teléfono fijo</label>
                   </div>
-                  <?php if($skin == 'pichincha'): ?>
-                  <input type="text" id="telf-hab" name="telf-hab" readonly>
-                  <input type="hidden" id="hab_cypher" name="hab_cypher">
-                  <?php else: ?>
-                  <input id="telefonoFijo" maxlength="11" name="telefono_fijo" type="text" />
+                  <?php if ($skin == 'pichincha') : ?>
+                    <input type="text" id="telf-hab" name="telf-hab" readonly>
+                    <input type="hidden" id="hab_cypher" name="hab_cypher">
+                  <?php else : ?>
+                    <input id="telefonoFijo" maxlength="11" name="telefono_fijo" type="text" />
                   <?php endif; ?>
                 </div>
               </li>
@@ -295,31 +283,31 @@ switch($skin){
                   <div class="field-category field-category-wide field-phone-group">
                     <label class="phone-field">Teléfono móvil</label>
                   </div>
-                  <?php if($skin == 'pichincha'): ?>
-                  <input type="text" id="telf-cel" name="telf-cel" readonly>
-                  <input type="hidden" id="cel_cypher" name="cel_cypher">
-                  <?php else: ?>
-                  <input id="telefonoMovil" maxlength="11" name="telefono_movil" type="text" />
+                  <?php if ($skin == 'pichincha') : ?>
+                    <input type="text" id="telf-cel" name="telf-cel" readonly>
+                    <input type="hidden" id="cel_cypher" name="cel_cypher">
+                  <?php else : ?>
+                    <input id="telefonoMovil" maxlength="11" name="telefono_movil" type="text" />
                   <?php endif; ?>
                 </div>
               </li>
             </ul>
-            <?php if($skin != 'pichincha'): ?>
-            <ul class="inline-list two-segments">
-              <li>
-                <label class="phone-field phone-field-2">Otro Teléfono (Tipo)</label>
-                <select class="otro-telefono-type" name="otro_tipo_telefono" id="otroTelefonoSelect" style="width:80%;">
-                  <option value="">Seleccione</option>
-                  <option value="OFC">Laboral</option>
-                  <option value="FAX">Fax</option>
-                  <option value="OTRO">Otro</option>
-                </select>
-              </li>
-              <li>
-                <label class="phone-field phone-field-2">Otro Teléfono (Número)</label>
-                <input id="otroTelefonoNum" maxlength="11" name="otro_telefono_num" type="text" />
-              </li>
-            </ul>
+            <?php if ($skin != 'pichincha') : ?>
+              <ul class="inline-list two-segments">
+                <li>
+                  <label class="phone-field phone-field-2">Otro Teléfono (Tipo)</label>
+                  <select class="otro-telefono-type" name="otro_tipo_telefono" id="otroTelefonoSelect" style="width:80%;">
+                    <option value="">Seleccione</option>
+                    <option value="OFC">Laboral</option>
+                    <option value="FAX">Fax</option>
+                    <option value="OTRO">Otro</option>
+                  </select>
+                </li>
+                <li>
+                  <label class="phone-field phone-field-2">Otro Teléfono (Número)</label>
+                  <input id="otroTelefonoNum" maxlength="11" name="otro_telefono_num" type="text" />
+                </li>
+              </ul>
             <?php endif; ?>
           </fieldset>
           <hr class="separador-segments separador-2">
@@ -371,10 +359,8 @@ switch($skin){
             <label>¿Desempeñó cargo público en últimos 2 años?</label>
             <ul class="inline-list four-segments">
               <li class="field-group-item">
-                <label class="label-inline" for="cargo-publico-si"><input id="cargo-publico-si" name="desem_publico"
-                    type="radio" value="1" /> Si</label>
-                <label class="label-inline" for="cargo-publico-no"><input id="cargo-publico-no" name="desem_publico"
-                    type="radio" value="0" /> No</label>
+                <label class="label-inline" for="cargo-publico-si"><input id="cargo-publico-si" name="desem_publico" type="radio" value="1" /> Si</label>
+                <label class="label-inline" for="cargo-publico-no"><input id="cargo-publico-no" name="desem_publico" type="radio" value="0" /> No</label>
               </li>
             </ul>
             <ul class="inline-list two-segments">
@@ -408,8 +394,7 @@ switch($skin){
               <div class="user-pass">
                 <label for="username">Usuario</label>
                 <input maxlength="15" id="username" name="username" type="text" />
-                <div id="loading" class="icono-load"
-                  style="display:none; float:right; width:30px; margin-top:0px; margin-right:155px; margin-bottom:0px;">
+                <div id="loading" class="icono-load" style="display:none; float:right; width:30px; margin-top:0px; margin-right:155px; margin-bottom:0px;">
                   <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
                 </div>
                 <label for="userpwd">Contraseña</label>
@@ -430,7 +415,8 @@ switch($skin){
                   <li id="especial" class="pwd-rules-item rule-invalid">• Al menos un <strong>caracter
                       especial</strong><br />(ej: ! @ ? + - . , #)</li>
                   <li id="consecutivo" class="pwd-rules-item rule-invalid">• No debe tener más de 2
-                    <strong>caracteres</strong> iguales consecutivos</li>
+                    <strong>caracteres</strong> iguales consecutivos
+                  </li>
                 </ul>
               </div>
             </div>
@@ -455,23 +441,23 @@ switch($skin){
           <div id="msg2"></div>
 
           <?php
-						if($skin == 'pichincha'){
-							?>
-          <center>
-            <div class="atc-form-action-child-perfil-content_2">
+          if ($skin == 'pichincha') {
+          ?>
+            <center>
+              <div class="atc-form-action-child-perfil-content_2">
               <?php
-						}
-					?>
+            }
+              ?>
               <a href="<? echo $homeLink; ?>"> <button type="reset" class="novo-btn-secondary">Cancelar</button> </a>
               <button id="registrar" class="novo-btn-primary"> Continuar</button>
               <?php
-						if($skin == 'pichincha'){
-							?>
-            </div>
-            <center>
+              if ($skin == 'pichincha') {
+              ?>
+              </div>
+              <center>
               <?php
-						}
-					?>
+              }
+              ?>
               <div id="load_reg" class="icono-load" style="display:none; float:right; width:30px; margin-top:5px;">
                 <span aria-hidden="true" class="icon-refresh icon-spin" style="font-size: 30px"></span>
               </div>
@@ -507,8 +493,7 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
-              class="novo-btn-primary">Continuar</button>
+          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Continuar</button>
           </a>
         </div>
       </div>
@@ -542,8 +527,7 @@ switch($skin){
           </div>
         </form>
         <div class="form-actions">
-          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit"
-              class="novo-btn-primary">Continuar</button>
+          <a href="<? echo $this->config->item("base_url"); ?>/dashboard"> <button type="submit" class="novo-btn-primary">Continuar</button>
           </a>
         </div>
       </div>
@@ -586,8 +570,8 @@ switch($skin){
   <div id="dialog-confirm">
     <div class="alert-simple alert-error" id="message">
 
-      <?php if ($skin != 'pichincha'): ?>
-      <span aria-hidden="true" class="icon-cancel-sign"></span>
+      <?php if ($skin != 'pichincha') : ?>
+        <span aria-hidden="true" class="icon-cancel-sign"></span>
       <?php endif ?>
       <p>El usuario indicado <strong>NO está disponible</strong> o está siendo usado por otra persona. Por favor
         verifique e intente nuevamente.</p>
@@ -657,28 +641,28 @@ switch($skin){
     </div>
   </div>
   <div class="form-actions">
-    <?php 	if($skin=='pichincha'): 		?>
-    <center>
-      <div class="atc-form-action-child-validar">
+    <?php if ($skin == 'pichincha') :     ?>
+      <center>
+        <div class="atc-form-action-child-validar">
         <?php endif; ?>
         <button id="inva5" class="novo-btn-primary">Aceptar</button>
-        <?php 	if($skin=='pichincha'): 		?>
+        <?php if ($skin == 'pichincha') :     ?>
 
-      </div>
-      <center>
+        </div>
+        <center>
         <?php endif; ?>
   </div>
 </div>
 <!--Modal protección de datos-->
 <!-- MODAL REDIRECT NEW CORE -->
 <div id="dialog-new-core-registry" style='display:none'>
-		<div class="alert-simple" id="modalTypeNewCore">
-			<span aria-hidden="true" class="icon-warning-sign"></span>
-			<p id="msgNewCore"></p>
-		</div>
-		<div class="form-actions">
-			<button id="redirect-new-core" class="novo-btn-primary">Aceptar</button>
-		</div>
+  <div class="alert-simple" id="modalTypeNewCore">
+    <span aria-hidden="true" class="icon-warning-sign"></span>
+    <p id="msgNewCore"></p>
+  </div>
+  <div class="form-actions">
+    <button id="redirect-new-core" class="novo-btn-primary">Aceptar</button>
+  </div>
 </div>
 <!-- FIN MODAL REDIRECT NEW CORE -->
 <div id="datos_personales" style='display:none'>
@@ -700,9 +684,7 @@ switch($skin){
       terceros; para tratamientos que supongan desarrollo de acciones comerciales, incluyendo la remisión (vía medio
       físico, electrónico o telefónico) de publicidad, información u ofertas/promociones (personalizadas o generales) de
       servicios de TEBCA y/o de otras empresas del Grupo Intercorp y sus socios estratégicos, entre las que se
-      encuentran aquellas difundidas en el portal de la Superintendencia del Mercado de Valores (<a
-        href="http://www.smv.gob.pe" target="_blank">www.smv.gob.pe</a>) así como en el portal <a
-        href="http://www.intercorp.com.pe/es" target="_blank">www.intercorp.com.pe/es.</a> El CLIENTE autoriza a TEBCA
+      encuentran aquellas difundidas en el portal de la Superintendencia del Mercado de Valores (<a href="http://www.smv.gob.pe" target="_blank">www.smv.gob.pe</a>) así como en el portal <a href="http://www.intercorp.com.pe/es" target="_blank">www.intercorp.com.pe/es.</a> El CLIENTE autoriza a TEBCA
       la cesión, transferencia o comunicación de sus datos personales, a dichas empresas y entre ellas.
     </p>
     <p>

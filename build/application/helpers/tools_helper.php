@@ -344,25 +344,27 @@ if (!function_exists('validateUrl')) {
   function validateUrl($client)
   {
     $CI = &get_instance();
-    $accessUrl = explode(',', ACCESS_URL);
-    array_walk($accessUrl, 'arrayTrim');
-    reset($accessUrl);
-    $uriCore = '/sign-in';
-    $uriCore = SUBCLASS_PREFIX === 'BDB_' ? '/inicio' : $uriCore;
+    $accessUrl = ACCESS_URL;
+    $uri = SUBCLASS_PREFIX === 'BDB_' ? '/inicio' : '/sign-in';
 
     if (!in_array($client, $accessUrl)) {
-      $client = current($accessUrl);
+      $baseUrl = str_replace("$client/", "$accessUrl[0]/", base_url($uri));
 
-      switch ($client) {
+      switch ($accessUrl[0]) {
         case 'default':
-          redirect(base_url(), 'location', 301);
+          $baseUrl = str_replace("$client/", "", base_url());
           break;
+
         case 'pichincha':
-          redirect(base_url('pichincha/home'), 'location', 301);
+          $baseUrl = base_url($accessUrl[0] . '/home');
           break;
-        default;
-          redirect(base_url($client . $uriCore), 'location', 301);
+
+        default:
+          $baseUrl = base_url($accessUrl[0] . $uri);
       }
+
+      redirect($baseUrl, 'Location', 302);
+      exit;
     }
   }
 }
