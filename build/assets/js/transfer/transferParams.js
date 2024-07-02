@@ -28,13 +28,21 @@ function setTransferParams(params) {
 }
 
 function validateTransferParams() {
+  var balance = $('#currentBalance').text()
+  var validate = validateAmount(balance)
+
 	if (transferParams.idOperacion !== "P2P") {
 		commission = Math.max(
 			transferParams.montoComision,
 			amount * (transferParams.porcentajeComision / 100)
 		);
 	}
-	totalAmount = amount + commission;
+  totalAmount = amount + commission;
+
+  if (!validate) {
+    paramsValidationMessage = lang.TRANSF_BALANCE_NOT_AVAILABLE
+    return false
+  }
 
 	// Valida monto de transferencias
 	if (
@@ -120,4 +128,20 @@ function validateTransferParams() {
 	}
 
 	return true;
+}
+
+function validateAmount(amount) {
+
+  let validate = false
+  const valamount = amount.split(" ")
+
+  if (valamount.length > 1) {
+
+    const numOutput = valamount[1].replace(/\./g, '').replace(/,/g, '.');
+    const numFloat = parseFloat(numOutput);
+
+    validate =  (!isNaN(numFloat)) ? true : false
+  }
+
+  return validate
 }
