@@ -242,3 +242,4 @@ $lang['SETT_TRANSFER_DOCUMENT_TYPE_EXTENDED'] = [
   'G' => 'G',
 ];
 $lang['SETT_NUMERIC_DOCUMENT_ID'] = ['CC'];
+$lang['SETT_MANDATORY_ACCOUNT'] = 'OFF';
