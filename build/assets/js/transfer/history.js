@@ -148,7 +148,7 @@ function setSecondaryText(data, index) {
 		1: `${lang.TRANSF_FAILED_OPERATION}		|		`,
 		2: "",
     3: `${lang.TRANSF_DISPUTE_OPERATION}		|		`,
-    4: `${$lang.TRANSF_IN_PROCESS_OPERATION}		|		`
+    4: `${lang.TRANSF_IN_PROCESS_OPERATION}		|		`
 	};
 	var spanStatus = `<span class="p-0 h6">${
 		status[data.estatusOperacion]
