@@ -175,7 +175,7 @@ class NOVO_Model extends CI_Model
 
       $responsetoView->$pos = $response;
 
-      if (!empty($response->profileData->imagesLoaded)) {
+      if (!empty($this->response->profileData->imagesLoaded)) {
         $responsetoView->data->profileData->imagesLoaded = 'cypher image';
       }
     }
