@@ -1,6 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-$lang['GEN_SYSTEM_NAME']= 'Conexión Personas Online';
+defined('BASEPATH') or exit('No direct script access allowed');
+$lang['GEN_SYSTEM_NAME'] = 'Conexión Personas Online';
 $lang['GEN_SYSTEM_MESSAGE'] = 'En este momento no es posible atender tu solicitud, por favor intenta más tarde';
 $lang['GEN_TIMEOUT'] = "El servidor esta demorando mucho tiempo en responder, por favor intentalo de nuevo.";
 $lang['GEN_BROWSER_GOOGLE_CHROME'] = 'Google Chrome';
@@ -36,14 +36,14 @@ $lang['GEN_DATEPICKER_PREVTEXT'] = 'Ant';
 $lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
 $lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
 $lang['GEN_DATEPICKER_MONTHNAMES'] = [
-	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
 $lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 $lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 $lang['GEN_DATEPICKER_DAYNAMESSHORT'] = ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'];
 $lang['GEN_DATEPICKER_DAYNAMESMIN'] = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'];
 $lang['GEN_DATEPICKER_DATELARGE'] = 'DD/MM/AAAA';
-$lang['GEN_DATEPICKER_DATEMEDIUM']= 'MM/AAAA';
+$lang['GEN_DATEPICKER_DATEMEDIUM'] = 'MM/AAAA';
 $lang['GEN_MENU_ACCESS_RECOVER'] = 'Recuperar acceso';
 $lang['GEN_MENU_USER_IDENTIFY'] = 'Identificación de usuario';
 $lang['GEN_MENU_CHANGE_PASS'] = 'Cambiar contraseña';
@@ -73,8 +73,8 @@ $lang['GEN_BTN_CLOSE'] = 'Cerrar';
 $lang['GEN_BTN_TO_RETURN'] = 'Regresar';
 $lang['GEN_BTN_CONTINUE'] = 'Continuar';
 $lang['GEN_BTN_CONFIRM'] = 'Confirmar';
-$lang['GEN_BTN_SAVE']= 'Guardar';
-$lang['GEN_BTN_EXIT']= 'Salir';
+$lang['GEN_BTN_SAVE'] = 'Guardar';
+$lang['GEN_BTN_EXIT'] = 'Salir';
 $lang['GEN_BTN_SEND'] = 'Enviar';
 $lang['GEN_BTN_SEE'] = 'Ver';
 $lang['GEN_BTN_SEARCH'] = 'Buscar';
@@ -84,7 +84,7 @@ $lang['GEN_BTN_KEEP_SESSION'] = 'Mantener sesión';
 $lang['GEN_BTN_VERIFY'] = 'Verificar';
 $lang['GEN_BTN_RESEND_CODE'] = 'Reenviar código';
 $lang['GEN_TITLE_IMPORTANT'] = 'Importante';
-$lang["GEN_TERMS_TITLE"]='Términos y Condiciones';
+$lang["GEN_TERMS_TITLE"] = 'Términos y Condiciones';
 $lang['GEN_SUCCESS_RESPONSE'] = 'Proceso ejecutado exitosamente.';
 $lang['GEN_MORNING'] = 'Buenos días';
 $lang['GEN_AFTERNOON'] = 'Buenas tardes';
@@ -128,18 +128,18 @@ $lang['GEN_MONTHLY'] = 'Mensual';
 $lang['GEN_FROM'] = 'Desde';
 $lang['GEN_TO'] = 'Hasta';
 $lang['GEN_SELECT_MONTH'] = [
-	'01' => 'Enero',
-	'02' => 'Febrero',
-	'03' => 'Marzo',
-	'04' => 'Abril',
-	'05' => 'Mayo',
-	'06' => 'Junio',
-	'07' => 'Julio',
-	'08' => 'Agosto',
-	'09' => 'Septiembre',
-	'10' => 'Octubre',
-	'11' => 'Noviembre',
-	'12' => 'Diciembre',
+  '01' => 'Enero',
+  '02' => 'Febrero',
+  '03' => 'Marzo',
+  '04' => 'Abril',
+  '05' => 'Mayo',
+  '06' => 'Junio',
+  '07' => 'Julio',
+  '08' => 'Agosto',
+  '09' => 'Septiembre',
+  '10' => 'Octubre',
+  '11' => 'Noviembre',
+  '12' => 'Diciembre',
 ];
 $lang['GEN_SEND_FILE'] = 'Enviar %s por correo';
 $lang['GEN_MAIL_SUCCESS'] = 'El correo fue enviado exitosamente.';
@@ -214,7 +214,7 @@ $lang['GEN_DOWNLOAD_STATEMENT'] = 'Descarga tu extracto';
 $lang['GEN_SEND_PDF'] = 'Enviar PDF';
 $lang['GEN_SEND_XLS'] = 'Enviar Excel';
 $lang["GEN_MSG_IMPORTANT"] = 'Aviso importante';
-$lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 425px;">';
+$lang["GEN_MSG_MAINT_NOTIF"] = '<img src="%s" alt="Notificación" style="height: 440px; width: 450px;">';
 $lang["GEN_NO_RESULTS"] = 'Sin resultados';
 $lang["GEN_TWO_FACTOR_CODE_VERIFY"] = 'Abre tu %s %s para ver el código de autenticación y verificar tu identidad.';
 $lang["GEN_TWO_FACTOR_SURE_DISABLE"] = '¿Estás seguro que deseas deshabilitar el doble factor de autenticación?';
@@ -230,14 +230,14 @@ $lang['GEN_INFO_5'] = 'Al menos un <strong>carácter especial</strong> (ej: ! @ 
 $lang['GEN_INFO_6'] = 'No debe tener más de 2 <strong>caracteres</strong> iguales consecutivos.';
 $lang['GEN_KEY'] = 'Clave';
 $lang['GEN_TITLE_PASS_FORM'] = [
-	'signUpForm' => $lang['GEN_PASSWORD'] ,
-	'signInForm' => $lang['GEN_PASSWORD'] ,
-	'change-pass-form' => $lang['GEN_PASSWORD'],
-	'setOperationKeyForm' => $lang['GEN_KEY'] ,
-	'getOperationKeyForm' => $lang['GEN_KEY'] ,
-	'changeOperKeyForm' => $lang['GEN_KEY'],
+  'signUpForm' => $lang['GEN_PASSWORD'],
+  'signInForm' => $lang['GEN_PASSWORD'],
+  'change-pass-form' => $lang['GEN_PASSWORD'],
+  'setOperationKeyForm' => $lang['GEN_KEY'],
+  'getOperationKeyForm' => $lang['GEN_KEY'],
+  'changeOperKeyForm' => $lang['GEN_KEY'],
 ];
 $lang['GEN_DOC_TYPE'] = [
-	'CC' => 'Cédula de ciudadania',
-	'PP' => 'Pasaporte',
+  'CC' => 'Cédula de ciudadania',
+  'PP' => 'Pasaporte',
 ];
