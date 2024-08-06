@@ -29,3 +29,4 @@ $lang['REGEX_MAXLENGTH_DOC_ID'] = 14;
 $lang['REGEX_MINLENGTH_DOC_ID'] = 1;
 $lang['REGEX_DOC_TYPE'] = '^(CC|PP)$';
 $lang['REGEX_DESTINATION_INSTRUMENT'] = '^[ct]{1}$';
+$lang['REGEX_ADDRESS_REQUIRED'] = '';
