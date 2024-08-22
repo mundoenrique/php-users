@@ -613,8 +613,10 @@ function validateForms(form) {
 		if (phoneField.length > 0) {
 			if (instrumentField.length > 0) {
 				return instrumentField.val() == "c";
-			} else {
-				return phoneField.val() == "";
+      } else {
+        var validate = (lang.SETT_MANDATORY_ACCOUNT === 'ON')? true : false
+        phoneField.val() == ""
+				return validate;
 			}
 		} else {
 			return true;

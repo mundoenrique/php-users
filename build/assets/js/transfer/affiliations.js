@@ -36,6 +36,11 @@ $(function () {
 			}
 			$("#pre-loader").hide();
 		});
+  });
+
+  // Click validar banco sponsor
+	$(".bank-afiliation").change(function() {
+    disablePhone($(this).val())
 	});
 
 	// Filtro para buscar afiliado
@@ -93,7 +98,7 @@ $(function () {
 				modalBtn
 			);
 		}
-	);
+  );
 
 	// Modal para confirmar la eliminación de un afiliado
 	$("#system-info").on("click", ".sure-delete-affiliate", function (e) {
@@ -243,7 +248,8 @@ function setAffiliateDataTable(data) {
 }
 
 function showManageAffiliateView(action) {
-	resetForms($("#manageAffiliate"));
+  resetForms($("#manageAffiliate"));
+
 	$("#affiliationsView").hide();
 	$("#manageAffiliateView").fadeIn(700, "linear");
 	$("#manageAffiliateBtn")
@@ -283,7 +289,12 @@ function showManageAffiliateView(action) {
 
 	if (action == "edit") {
 		setFieldNames("affiliation");
-		disableFields("#manageAffiliate", true);
+    disableFields("#manageAffiliate", true);
+    disablePhone(currentAffiliaton.codBanco, action)
+  }
+
+  if (action == "create") {
+    $('.phone-afiliation').removeAttr('disabled');
 	}
 
 	disableIdNumber($("#manageAffiliate #typeDocument"));
@@ -302,4 +313,15 @@ function disableFields(formID, disabled) {
 						`bg-tertiary border${$(this).is("select") ? " no-pointer" : ""}`
 				  );
 		});
+}
+
+function disablePhone(value, action = 'create') {
+  (action == 'create')? $('.phone-afiliation').val('') : ''
+  if (value == lang.SETT_SPONSOR_BANK) {
+    $('.phone-afiliation').attr('disabled', true);
+    $('.phone-afiliation').removeClass('has-error');
+    $('#mobilePhoneBlock .help-block').empty();
+  } else {
+    $('.phone-afiliation').removeAttr('disabled');
+  }
 }
