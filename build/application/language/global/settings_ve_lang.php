@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 $lang['SETT_IP_VERIFY'] = 'OFF';
-$lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("23-07-2023 14:00:00") ? 'ON' : 'OFF';
+$lang['SETT_MAINT_NOTIF'] = strtotime(date("d-m-Y H:i:00", time())) < strtotime("30-08-2024 23:59:00") ? 'ON' : 'OFF';
 $lang['SETT_CURRENCY'] = 'Bs.';
 $lang['SETT_DECIMAL'] = ',';
 $lang['SETT_THOUSANDS'] = '.';
