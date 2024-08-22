@@ -5,6 +5,11 @@ var transferResult, modalTitle, paramsValidationMessage, currentVaucherData;
 var availableBalance, amount, commission, totalAmount;
 
 $(function () {
+
+  if (lang.SETT_MANDATORY_ACCOUNT === 'ON') {
+    $("#phoneBlock").hide();
+  }
+
 	operationType = $("#transferView").attr("operation-type");
 	liOptions = $(".nav-item-config");
 	OperationTypeAffiliations = {
@@ -76,6 +81,19 @@ $(function () {
 			$("#destinationAccountField").hide();
 			$("#mobilePhoneField").show();
 		}
+  });
+
+  // Click validar banco sponsor
+  $("#bank").change(function () {
+    if ($(this).val() == lang.SETT_SPONSOR_BANK) {
+      $('#phone').prop('disabled', true);
+      $('#phone').prop('checked', false);
+      $('#account').prop('checked', true);
+      $("#mobilePhoneField").hide();
+      $("#destinationAccountField").show();
+    } else {
+      $('#phone').removeAttr('disabled');
+    }
 	});
 
 	// Click en Borrar (form Transferencia|Pago)
@@ -177,7 +195,17 @@ $(function () {
 						response.icon,
 						response.modalBtn
 					);
-					break;
+          break;
+          case 3:
+            getBalance();
+            resetForms($("#toTransferView form"));
+            appMessages(
+              response.title,
+              response.msg,
+              response.icon,
+              response.modalBtn
+            );
+            break;
 				default:
 					transferResult = response.data;
 					getBalance();
@@ -359,7 +387,11 @@ $(function () {
 		currentAffiliaton = affiliationsList[value];
 		resetForms($("#transferForm"));
 		hideDestinationFields();
-		setFieldNames("transfer");
+    setFieldNames("transfer");
+    if (lang.SETT_MANDATORY_ACCOUNT === 'ON') {
+      $('#account').prop('checked', true);
+      $("#destinationAccountField").show();
+    }
 	});
 
 	$("input#destinationAccount").mask("0000-0000-0000-0000-0000");
@@ -872,7 +904,7 @@ function buildVaucherModal() {
 		),
 		referencia:
 			currentVaucherData?.estatusOperacion &&
-			(currentVaucherData?.estatusOperacion == "0" || currentVaucherData?.estatusOperacion == "3") && currentVaucherData?.referencia > 0
+			(currentVaucherData?.estatusOperacion == "0" || currentVaucherData?.estatusOperacion == "4" || currentVaucherData?.estatusOperacion == "3") && currentVaucherData?.referencia > 0
 				? currentVaucherData.referencia
 				: currentVaucherData.billnumber,
 	};
