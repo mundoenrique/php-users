@@ -20,3 +20,4 @@ $lang['SETT_CUSTOMER_SUPPORT'] = 'OFF';
 $lang['SETT_SIGNIN_IMG'] = 'ON';
 $lang['SETT_NUMERIC_DOCUMENT_ID'] = ['V', 'E', 'J', 'G'];
 $lang['SETT_MANDATORY_ACCOUNT'] = 'ON';
+$lang['SETT_SPONSOR_BANK'] = '0114';
