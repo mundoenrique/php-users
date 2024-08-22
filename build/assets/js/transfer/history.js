@@ -154,7 +154,7 @@ function setSecondaryText(data, index) {
 		status[data.estatusOperacion]
 	}</span>`;
 	var refNumber =
-		data.estatusOperacion == "0" || (data.estatusOperacion == "3" && data?.referencia > 0) ? data.referencia : data.billnumber;
+		data.estatusOperacion == "0"|| data.estatusOperacion == "4" || (data.estatusOperacion == "3" && data?.referencia > 0) ? data.referencia : data.billnumber;
 	var spanRef =
 		data.estatusOperacion == "2"
 			? `<span class="p-0 h6">${refNumber}</span>`
@@ -170,7 +170,7 @@ function setHistoryDataTable(data) {
 
 	data.forEach((value, index) => {
 		className = `feed-item ${
-			value.estatusOperacion == "0" || value.estatusOperacion == "2"
+			value.estatusOperacion == "0" || value.estatusOperacion == "2" || value.estatusOperacion == "4"
 				? "feed-expense"
 				: ""
 		} flex py-2 items-center`;
