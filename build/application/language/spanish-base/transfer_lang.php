@@ -90,3 +90,4 @@ $lang['TRANSF_MAXIMUM_MONTHLY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de 
 $lang['TRANSF_MAXIMUM_WEEKLY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de %s operaciones semanales.';
 $lang['TRANSF_MAXIMUM_DAILY_OPERATIONS'] = 'Alcanzaste la cantidad máxima de %s operaciones diarias.';
 $lang['TRANSF_BALANCE_NOT_AVAILABLE'] = 'Saldo no disponible. Favor intentar más tarde.';
+$lang['TRANSF_TRANSFER_EXTERNAL_BANK'] = 'En caso de devoluciones por parte del Banco Central de Venezuela se hará el reintegro de los fondos a su tarjeta.';

@@ -298,19 +298,12 @@ class Novo_Transfer_Model extends NOVO_Model
 
     switch ($this->isResponseRc) {
       case 0:
-        if ($dataRequest->bank == lang('SETT_SPONSOR_BANK')) {
-          $this->response->code = 0;
-          $this->response->data = $response;
-          $this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
-        } else {
-          $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
-          $this->response->code = 3;
-          $this->response->msg = 'Transferencia en proceso';
-          $this->response->modalBtn['btn1']['action'] = 'destroy';
-        }
+        $this->response->code = 0;
+        $this->response->data = $response;
+        $this->response->data->ctaDestinoConMascara = maskString($response->ctaDestino, 4, 6);
         break;
       case -344:
-        $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+        $this->response->title = lang('GEN_MENU_TRANSFER_BANK');
         $this->response->msg = lang('TRANSF_INCORRECT_EXPIRATION_DATE');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
@@ -394,7 +387,7 @@ class Novo_Transfer_Model extends NOVO_Model
       case 1875000:
       case 5203019:
       case 5203020:
-        $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+        $this->response->title = lang('GEN_MENU_TRANSFER_BANK');
         $this->response->msg = lang('TRANSF_SYSTEM_MESSAGE');
         $this->response->modalBtn['btn1']['action'] = 'destroy';
         break;
@@ -402,7 +395,8 @@ class Novo_Transfer_Model extends NOVO_Model
       case 169032:
       case 701114:
       case 901100:
-        $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+      case 2300020:
+        $this->response->title = lang('GEN_MENU_TRANSFER_BANK');
         $this->response->msg = lang('TRANSF_ID_NUMBER_INCORRECT');
         $this->response->code = 2;
         $this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -411,7 +405,7 @@ class Novo_Transfer_Model extends NOVO_Model
       case 103000:
       case 101029:
       case 161632:
-        $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+        $this->response->title = lang('GEN_MENU_TRANSFER_BANK');
         $this->response->msg = lang('TRANSF_PHONE_NUMBER_INCORRECT');
         $this->response->code = 2;
         $this->response->modalBtn['btn1']['action'] = 'destroy';
@@ -432,7 +426,7 @@ class Novo_Transfer_Model extends NOVO_Model
       case 80037:
       case 1850125:
         $refNumber = isset($response->bean->codConfirmacion) ? $response->bean->codConfirmacion : '0';
-        $this->response->title = lang('GEN_MENU_MOBILE_PAYMENT');
+        $this->response->title = lang('GEN_MENU_TRANSFER_BANK');
         $this->response->msg = novoLang(lang('TRANSF_CONFIRM_CREDIT_MEMO'), $refNumber > 0 ? $refNumber : $response->bean->billNumber);
         $this->response->code = 2;
         $this->response->modalBtn['btn1']['action'] = 'destroy';

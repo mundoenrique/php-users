@@ -36,7 +36,18 @@ $lang['GEN_DATEPICKER_PREVTEXT'] = 'Ant';
 $lang['GEN_DATEPICKER_NEXTTEXT'] = 'Sig';
 $lang['GEN_DATEPICKER_CURRENTTEXT'] = 'Hoy';
 $lang['GEN_DATEPICKER_MONTHNAMES'] = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre'
 ];
 $lang['GEN_DATEPICKER_MONTHNAMESSHORT'] = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 $lang['GEN_DATEPICKER_DAYNAMES'] = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -60,6 +71,7 @@ $lang['GEN_MENU_REPORTS'] = 'Reportes';
 $lang['GEN_MENU_CUSTOMER_SUPPORT'] = 'Atención al cliente';
 $lang['GEN_MENU_TRANSFERS'] = 'Transferencias';
 $lang['GEN_MENU_MOBILE_PAYMENT'] = 'Pago móvil';
+$lang['GEN_MENU_TRANSFER_BANK'] = 'Transferencias a Bancos';
 $lang['GEN_MENU_PROFILE'] = 'Perfil de usuario';
 $lang['GEN_MENU_SIGNUP'] = 'Registro';
 $lang['GEN_MENU_NOTIFICATIONS'] = 'Notificaciones';
