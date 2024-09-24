@@ -192,7 +192,7 @@ $config = [
     [
       'field' => 'address',
       'label' => 'address',
-      'rules' => '' . lang('REGEX_ADDRESS_REQUIRED') . '|trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]'
+      'rules' => 'trim|regex_match[/^([\wñÑáéíóúÑÁÉÍÓÚ \-\().,:;]+)+$/i]' . lang('REGEX_ADDRESS_REQUIRED')
     ]
   ],
   'accessRecover' => [
@@ -1049,7 +1049,7 @@ $config = [
     [
       'field' => 'address',
       'label' => 'address',
-      'rules' => '' . lang('REGEX_ADDRESS_REQUIRED') . '|trim'
+      'rules' =>  'trim' . lang('REGEX_ADDRESS_REQUIRED')
     ]
   ],
   'getlistcitys' => [
